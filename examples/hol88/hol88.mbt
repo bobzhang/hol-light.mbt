@@ -49,9 +49,9 @@ pub fn dest_neg_imp(x4 : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 ///|
 /// CONTRAPOS
 fn step_2() -> Unit raise {
-  let a = @parser.parse_term("a:bool")
-  let b = @parser.parse_term("b:bool")
-  let pth = @itab.itaut(@parser.parse_term("(a ==> b) ==> (~b ==> ~a)"))
+  let a = @term_syntax.parse_term("(a : Bool)")
+  let b = @term_syntax.parse_term("(b : Bool)")
+  let pth = @itab.itaut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) → !b → !a"))
   contrapos_c.set(fn(x6 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x6
     try {
@@ -76,7 +76,7 @@ pub fn contrapos(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// NEG_DISCH
 fn step_3() -> Unit raise {
-  let falsity = @parser.parse_term("F")
+  let falsity = @term_syntax.parse_term("false")
   neg_disch_c.set(fn(x7 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let t = x7
     fn(x8 : @kernel.Thm) -> @kernel.Thm raise {
@@ -122,8 +122,8 @@ pub fn select_elim(x9 : @kernel.Thm, x10 : (@kernel.Term, @kernel.Thm)) -> @kern
 ///|
 /// SELECT_INTRO
 fn step_4() -> Unit raise {
-  let p = @parser.parse_term("P:A->bool")
-  let x = @parser.parse_term("x:A")
+  let p = @term_syntax.parse_term("(P : (A) -> Bool)")
+  let x = @term_syntax.parse_term("(x : A)")
   let pth = @bool.specl(@list.List([p, x]), @class.select_ax())
   select_intro_c.set(fn(x11 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x11
@@ -149,10 +149,10 @@ pub fn select_intro(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// EXT
 fn step_5() -> Unit raise {
-  let f = @parser.parse_term("f:A->B")
-  let g = @parser.parse_term("g:A->B")
+  let f = @term_syntax.parse_term("(f : (A) -> B)")
+  let g = @term_syntax.parse_term("(g : (A) -> B)")
   let t12 = @tactics.match_accept_tac(@class.eq_ext())
-  let pth = @tactics.prove(@parser.parse_term("(forall x. (f:A->B) x = g x) ==> (f = g)"), t12)
+  let pth = @tactics.prove(@term_syntax.parse_term("(∀ x : A, (f : (A) -> B)(x) == (g : (A) -> B)(x)) → f == g"), t12)
   ext_c.set(fn(x13 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x13
     try {
@@ -499,7 +499,7 @@ pub fn and_forall_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// PAIRED_BETA_CONV
 fn step_19() -> Unit raise {
-  let t46 = @parser.parse_term("forall P:A->bool. (?) P ==> P((GABS) P)")
+  let t46 = @term_syntax.parse_term("∀ P : (A) -> Bool, exists(P) → P(GABS(P))")
   let t47 = @simp.rewrite_conv(@list.List([@class.exists_thm(), @pair.gabs_def()]))
   let pth = @bool.eqt_elim(t47(t46))
   let pth1 = @equal.gsym(@pair.passoc_def())
@@ -578,7 +578,7 @@ pub fn paired_beta_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// AND1_THM
 fn step_20() -> Unit raise {
-  and1_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 /\\ t2 ==> t1")))
+  and1_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t1 && t2 → t1")))
 }
 
 ///|
@@ -593,7 +593,7 @@ pub fn and1_thm() -> @kernel.Thm {
 ///|
 /// AND2_THM
 fn step_21() -> Unit raise {
-  and2_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 /\\ t2 ==> t2")))
+  and2_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t1 && t2 → t2")))
 }
 
 ///|
@@ -608,7 +608,7 @@ pub fn and2_thm() -> @kernel.Thm {
 ///|
 /// AND_IMP_INTRO
 fn step_22() -> Unit raise {
-  and_imp_intro_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 ==> t2 ==> t3 <=> t1 /\\ t2 ==> t3")))
+  and_imp_intro_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t1 → t2 → t3) == (t1 && t2 → t3)")))
 }
 
 ///|
@@ -623,7 +623,7 @@ pub fn and_imp_intro() -> @kernel.Thm {
 ///|
 /// AND_INTRO_THM
 fn step_23() -> Unit raise {
-  and_intro_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t2 ==> t1 /\\ t2")))
+  and_intro_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t1 → t2 → t1 && t2")))
 }
 
 ///|
@@ -638,7 +638,7 @@ pub fn and_intro_thm() -> @kernel.Thm {
 ///|
 /// BOOL_EQ_DISTINCT
 fn step_24() -> Unit raise {
-  bool_eq_distinct_c.set(@class.taut(@parser.parse_term("~(T <=> F) /\\ ~(F <=> T)")))
+  bool_eq_distinct_c.set(@class.taut(@term_syntax.parse_term("!(true == false) && !(false == true)")))
 }
 
 ///|
@@ -653,7 +653,7 @@ pub fn bool_eq_distinct() -> @kernel.Thm {
 ///|
 /// EQ_EXPAND
 fn step_25() -> Unit raise {
-  eq_expand_c.set(@class.taut(@parser.parse_term("forall t1 t2. (t1 <=> t2) <=> t1 /\\ t2 \\/ ~t1 /\\ ~t2")))
+  eq_expand_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 == t2) == (t1 && t2 || !t1 && !t2)")))
 }
 
 ///|
@@ -668,7 +668,7 @@ pub fn eq_expand() -> @kernel.Thm {
 ///|
 /// EQ_IMP_THM
 fn step_26() -> Unit raise {
-  eq_imp_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. (t1 <=> t2) <=> (t1 ==> t2) /\\ (t2 ==> t1)")))
+  eq_imp_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 == t2) == ((t1 → t2) && (t2 → t1))")))
 }
 
 ///|
@@ -683,7 +683,7 @@ pub fn eq_imp_thm() -> @kernel.Thm {
 ///|
 /// FALSITY
 fn step_27() -> Unit raise {
-  falsity_c.set(@class.taut(@parser.parse_term("forall t. F ==> t")))
+  falsity_c.set(@class.taut(@term_syntax.parse_term("∀ t : Bool, false → t")))
 }
 
 ///|
@@ -698,7 +698,7 @@ pub fn falsity() -> @kernel.Thm {
 ///|
 /// F_IMP
 fn step_28() -> Unit raise {
-  f_imp_c.set(@class.taut(@parser.parse_term("forall t. ~t ==> t ==> F")))
+  f_imp_c.set(@class.taut(@term_syntax.parse_term("∀ t : Bool, !t → t → false")))
 }
 
 ///|
@@ -713,7 +713,7 @@ pub fn f_imp() -> @kernel.Thm {
 ///|
 /// IMP_DISJ_THM
 fn step_29() -> Unit raise {
-  imp_disj_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2")))
+  imp_disj_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 → t2) == (!t1 || t2)")))
 }
 
 ///|
@@ -728,7 +728,7 @@ pub fn imp_disj_thm() -> @kernel.Thm {
 ///|
 /// IMP_F
 fn step_30() -> Unit raise {
-  imp_f_c.set(@class.taut(@parser.parse_term("forall t. (t ==> F) ==> ~t")))
+  imp_f_c.set(@class.taut(@term_syntax.parse_term("∀ t : Bool, (t → false) → !t")))
 }
 
 ///|
@@ -743,7 +743,7 @@ pub fn imp_f() -> @kernel.Thm {
 ///|
 /// IMP_F_EQ_F
 fn step_31() -> Unit raise {
-  imp_f_eq_f_c.set(@class.taut(@parser.parse_term("forall t. t ==> F <=> (t <=> F)")))
+  imp_f_eq_f_c.set(@class.taut(@term_syntax.parse_term("∀ t : Bool, (t → false) == (t == false)")))
 }
 
 ///|
@@ -758,7 +758,7 @@ pub fn imp_f_eq_f() -> @kernel.Thm {
 ///|
 /// LEFT_AND_OVER_OR
 fn step_32() -> Unit raise {
-  left_and_over_or_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 /\\ (t2 \\/ t3) <=> t1 /\\ t2 \\/ t1 /\\ t3")))
+  left_and_over_or_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t1 && (t2 || t3)) == (t1 && t2 || t1 && t3)")))
 }
 
 ///|
@@ -773,7 +773,7 @@ pub fn left_and_over_or() -> @kernel.Thm {
 ///|
 /// LEFT_OR_OVER_AND
 fn step_33() -> Unit raise {
-  left_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)")))
+  left_or_over_and_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t1 || t2 && t3) == ((t1 || t2) && (t1 || t3))")))
 }
 
 ///|
@@ -788,7 +788,7 @@ pub fn left_or_over_and() -> @kernel.Thm {
 ///|
 /// NOT_AND
 fn step_34() -> Unit raise {
-  not_and_c.set(@class.taut(@parser.parse_term("~(t /\\ ~t)")))
+  not_and_c.set(@class.taut(@term_syntax.parse_term("!((t : Bool) && !t)")))
 }
 
 ///|
@@ -803,7 +803,7 @@ pub fn not_and() -> @kernel.Thm {
 ///|
 /// NOT_F
 fn step_35() -> Unit raise {
-  not_f_c.set(@class.taut(@parser.parse_term("forall t. ~t ==> (t <=> F)")))
+  not_f_c.set(@class.taut(@term_syntax.parse_term("∀ t : Bool, !t → t == false")))
 }
 
 ///|
@@ -818,7 +818,7 @@ pub fn not_f() -> @kernel.Thm {
 ///|
 /// OR_ELIM_THM
 fn step_36() -> Unit raise {
-  or_elim_thm_c.set(@class.taut(@parser.parse_term("forall t t1 t2. t1 \\/ t2 ==> (t1 ==> t) ==> (t2 ==> t) ==> t")))
+  or_elim_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t : Bool, ∀ t1 : Bool, ∀ t2 : Bool, t1 || t2 → (t1 → t) → (t2 → t) → t")))
 }
 
 ///|
@@ -833,7 +833,7 @@ pub fn or_elim_thm() -> @kernel.Thm {
 ///|
 /// OR_IMP_THM
 fn step_37() -> Unit raise {
-  or_imp_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. (t1 <=> t2 \\/ t1) <=> t2 ==> t1")))
+  or_imp_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 == (t2 || t1)) == (t2 → t1)")))
 }
 
 ///|
@@ -848,7 +848,7 @@ pub fn or_imp_thm() -> @kernel.Thm {
 ///|
 /// OR_INTRO_THM1
 fn step_38() -> Unit raise {
-  or_intro_thm1_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t1 \\/ t2")))
+  or_intro_thm1_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t1 → t1 || t2")))
 }
 
 ///|
@@ -863,7 +863,7 @@ pub fn or_intro_thm1() -> @kernel.Thm {
 ///|
 /// OR_INTRO_THM2
 fn step_39() -> Unit raise {
-  or_intro_thm2_c.set(@class.taut(@parser.parse_term("forall t1 t2. t2 ==> t1 \\/ t2")))
+  or_intro_thm2_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t2 → t1 || t2")))
 }
 
 ///|
@@ -878,7 +878,7 @@ pub fn or_intro_thm2() -> @kernel.Thm {
 ///|
 /// RIGHT_AND_OVER_OR
 fn step_40() -> Unit raise {
-  right_and_over_or_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. (t2 \\/ t3) /\\ t1 <=> t2 /\\ t1 \\/ t3 /\\ t1")))
+  right_and_over_or_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, ((t2 || t3) && t1) == (t2 && t1 || t3 && t1)")))
 }
 
 ///|
@@ -893,7 +893,7 @@ pub fn right_and_over_or() -> @kernel.Thm {
 ///|
 /// RIGHT_OR_OVER_AND
 fn step_41() -> Unit raise {
-  right_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)")))
+  right_or_over_and_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t2 && t3 || t1) == ((t2 || t1) && (t3 || t1))")))
 }
 
 ///|
@@ -1137,9 +1137,9 @@ pub fn right_conv_rule(x95 : (@kernel.Term) -> @kernel.Thm raise, x96 : @kernel.
 ///|
 /// NOT_EQ_SYM
 fn step_46() -> Unit raise {
-  let t98 = contrapos(@bool.disch_all(@equal.sym(@kernel.assume_rule(@parser.parse_term("a:A = b")))))
-  let t97 = @parser.parse_term("b:A")
-  let pth = @bool.genl(@list.List([@parser.parse_term("a:A"), t97]), t98)
+  let t98 = contrapos(@bool.disch_all(@equal.sym(@kernel.assume_rule(@term_syntax.parse_term("(a : A) == (b : A)")))))
+  let t97 = @term_syntax.parse_term("(b : A)")
+  let pth = @bool.genl(@list.List([@term_syntax.parse_term("(a : A)"), t97]), t98)
   let aty = @parser.parse_type("A")
   not_eq_sym_c.set(fn(x99 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x99
@@ -1386,7 +1386,7 @@ pub fn list_mp(x : @list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm rai
 ///|
 /// DISJ_IMP
 fn step_49() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2"))
+  let pth = @class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t1 || t2 → !t1 → t2"))
   disj_imp_c.set(fn(x141 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x141
     try {
@@ -1411,7 +1411,7 @@ pub fn disj_imp(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// IMP_ELIM
 fn step_50() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2"))
+  let pth = @class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 → t2) → !t1 || t2"))
   imp_elim_c.set(fn(x142 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x142
     try {
@@ -1606,7 +1606,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] remove_l(x174 : TA, x175 : @list.List[T
 ///|
 /// CONJ_DISCH
 fn step_51() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("forall t t1 t2. (t ==> (t1 = t2)) ==> (t /\\ t1 <=> t /\\ t2)"))
+  let pth = @class.taut(@term_syntax.parse_term("∀ t : Bool, ∀ t1 : Bool, ∀ t2 : Bool, (t → t1 == t2) → (t && t1) == (t && t2)"))
   conj_disch_c.set(fn(x177 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let t = x177
     fn(x178 : @kernel.Thm) -> @kernel.Thm raise {
@@ -1689,13 +1689,13 @@ fn step_52() -> Unit raise {
     let tm = x193
     (@kernel.type_of(tm) == boolty)
   }, x194)
-  let t197 = @bool.conjuncts_rule(@bool.spec(@parser.parse_term("b:bool"), @theorems.eq_clauses()))
-  let t195 = @parser.parse_term("b:bool")
+  let t197 = @bool.conjuncts_rule(@bool.spec(@term_syntax.parse_term("(b : Bool)"), @theorems.eq_clauses()))
+  let t195 = @term_syntax.parse_term("(b : Bool)")
   let clist = @lib.map((x196 : @kernel.Thm) => @bool.gen(t195, x196), t197)
   let tb = @lib.hd(clist)
   let bt = @lib.hd(@lib.tl(clist))
-  let t = @parser.parse_term("T")
-  let f = @parser.parse_term("F")
+  let t = @term_syntax.parse_term("true")
+  let f = @term_syntax.parse_term("false")
   bool_eq_conv_c.set(fn(x198 : @kernel.Term) -> @kernel.Thm raise {
     let tm_1 = x198
     try {
@@ -1736,8 +1736,8 @@ pub fn bool_eq_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// COND_CONV
 fn step_53() -> Unit raise {
-  let t = @parser.parse_term("T")
-  let f = @parser.parse_term("F")
+  let t = @term_syntax.parse_term("true")
+  let f = @term_syntax.parse_term("false")
   let vt = @basics.genvar(@parser.parse_type("A"))
   let vf = @basics.genvar(@parser.parse_type("A"))
   let gen : (@kernel.Thm) -> @kernel.Thm raise = (x202 : @kernel.Thm) => @bool.genl(@list.List([vt, vf]), x202)
@@ -2053,7 +2053,7 @@ pub fn cases_thenl(x313 : @list.List[(@kernel.Thm) -> (((@list.List[(String, @ke
 ///|
 /// DISCARD_TAC
 fn step_55() -> Unit raise {
-  let truth = @parser.parse_term("T")
+  let truth = @term_syntax.parse_term("true")
   discard_tac_c.set(fn(x321 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x321
     fn(x322 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -2960,7 +2960,7 @@ pub fn less_lemma1() -> @kernel.Thm {
 /// LESS_SUC_REFL
 fn step_71() -> Unit raise {
   let t529 = @simp.rewrite_tac(@list.List([@arith.lt()]))
-  less_suc_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n < SUC n"), t529))
+  less_suc_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, n < SUC(n)"), t529))
 }
 
 ///|
@@ -2991,7 +2991,7 @@ pub fn fact_less() -> @kernel.Thm {
 /// LESS_EQ_SUC_REFL
 fn step_73() -> Unit raise {
   let t530 = @simp.rewrite_tac(@list.List([@arith.le(), @arith.le_refl()]))
-  less_eq_suc_refl_c.set(@tactics.prove(@parser.parse_term("forall n. n <= SUC n"), t530))
+  less_eq_suc_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, n <= SUC(n)"), t530))
 }
 
 ///|
@@ -3097,7 +3097,7 @@ pub fn less_mono_add() -> @kernel.Thm {
 /// LESS_SUC
 fn step_80() -> Unit raise {
   let t531 = @meson.meson_tac(@list.List([@arith.lt()]))
-  less_suc_c.set(@tactics.prove(@parser.parse_term("forall m n. m < n ==> m < (SUC n)"), t531))
+  less_suc_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < n → m < SUC(n)"), t531))
 }
 
 ///|
@@ -3172,7 +3172,7 @@ pub fn less_add_1() -> @kernel.Thm {
 ///|
 /// SUC_SUB1
 fn step_85() -> Unit raise {
-  suc_sub1_c.set(@int.arith_rule(@parser.parse_term("forall m. SUC m - 1 = m")))
+  suc_sub1_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, SUC(m) - 1 == m")))
 }
 
 ///|
@@ -3202,7 +3202,7 @@ pub fn less_mono_eq() -> @kernel.Thm {
 ///|
 /// LESS_ADD_SUC
 fn step_87() -> Unit raise {
-  less_add_suc_c.set(@int.arith_rule(@parser.parse_term("forall m n. m < m + SUC n")))
+  less_add_suc_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < m + SUC(n)")))
 }
 
 ///|
@@ -3367,7 +3367,7 @@ pub fn sub_mono_eq() -> @kernel.Thm {
 ///|
 /// NOT_SUC_LESS_EQ
 fn step_98() -> Unit raise {
-  not_suc_less_eq_c.set(@int.arith_rule(@parser.parse_term("forall n m. ~(SUC n <= m) <=> m <= n")))
+  not_suc_less_eq_c.set(@int.arith_rule(@term_syntax.parse_term("∀ n : Num, ∀ m : Num, !(SUC(n) <= m) == (m <= n)")))
 }
 
 ///|
@@ -3397,7 +3397,7 @@ pub fn suc_not() -> @kernel.Thm {
 ///|
 /// LESS_LESS_CASES
 fn step_100() -> Unit raise {
-  less_less_cases_c.set(@int.arith_rule(@parser.parse_term("forall m n:num. (m = n) \\/ m < n \\/ n < m")))
+  less_less_cases_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, m == n || m < n || n < m")))
 }
 
 ///|
@@ -3472,7 +3472,7 @@ pub fn less_less_eq_trans() -> @kernel.Thm {
 ///|
 /// SUB_SUB
 fn step_105() -> Unit raise {
-  sub_sub_c.set(@int.arith_rule(@parser.parse_term("forall b c. c <= b ==> (forall a:num. a - (b - c) = (a + c) - b)")))
+  sub_sub_c.set(@int.arith_rule(@term_syntax.parse_term("∀ b : Num, ∀ c : Num, c <= b → (∀ a : Num, a - (b - c) == a + c - b)")))
 }
 
 ///|
@@ -3487,7 +3487,7 @@ pub fn sub_sub() -> @kernel.Thm {
 ///|
 /// LESS_CASES_IMP
 fn step_106() -> Unit raise {
-  less_cases_imp_c.set(@int.arith_rule(@parser.parse_term("forall m n:num. ~(m < n) /\\ ~(m = n) ==> n < m")))
+  less_cases_imp_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, !(m < n) && !(m == n) → n < m")))
 }
 
 ///|
@@ -3502,7 +3502,7 @@ pub fn less_cases_imp() -> @kernel.Thm {
 ///|
 /// SUB_LESS_EQ
 fn step_107() -> Unit raise {
-  sub_less_eq_c.set(@int.arith_rule(@parser.parse_term("forall n m:num. (n - m) <= n")))
+  sub_less_eq_c.set(@int.arith_rule(@term_syntax.parse_term("∀ n : Num, ∀ m : Num, n - m <= n")))
 }
 
 ///|
@@ -3517,7 +3517,7 @@ pub fn sub_less_eq() -> @kernel.Thm {
 ///|
 /// SUB_EQ_EQ_0
 fn step_108() -> Unit raise {
-  sub_eq_eq_0_c.set(@int.arith_rule(@parser.parse_term("forall m n:num. (m - n = m) = (m = 0) \\/ (n = 0)")))
+  sub_eq_eq_0_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, (m - n == m) == (m == 0) || n == 0")))
 }
 
 ///|
@@ -3532,7 +3532,7 @@ pub fn sub_eq_eq_0() -> @kernel.Thm {
 ///|
 /// SUB_LEFT_LESS_EQ
 fn step_109() -> Unit raise {
-  sub_left_less_eq_c.set(@int.arith_rule(@parser.parse_term("forall m n p:num. m <= (n - p) <=> (m + p) <= n \\/ m <= 0")))
+  sub_left_less_eq_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (m <= n - p) == (m + p <= n || m <= 0)")))
 }
 
 ///|
@@ -3547,7 +3547,7 @@ pub fn sub_left_less_eq() -> @kernel.Thm {
 ///|
 /// SUB_LEFT_GREATER_EQ
 fn step_110() -> Unit raise {
-  sub_left_greater_eq_c.set(@int.arith_rule(@parser.parse_term("forall m n p:num. m >= (n - p) <=> (m + p) >= n")))
+  sub_left_greater_eq_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (m >= n - p) == (m + p >= n)")))
 }
 
 ///|
@@ -3577,7 +3577,7 @@ pub fn less_eq_less_trans() -> @kernel.Thm {
 ///|
 /// LESS_0_CASES
 fn step_112() -> Unit raise {
-  less_0_cases_c.set(@int.arith_rule(@parser.parse_term("forall m. (0 = m) \\/ 0 < m")))
+  less_0_cases_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, 0 == m || 0 < m")))
 }
 
 ///|
@@ -3592,7 +3592,7 @@ pub fn less_0_cases() -> @kernel.Thm {
 ///|
 /// LESS_OR
 fn step_113() -> Unit raise {
-  less_or_c.set(@int.arith_rule(@parser.parse_term("forall m n. m < n ==> (SUC m) <= n")))
+  less_or_c.set(@int.arith_rule(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, m < n → SUC(m) <= n")))
 }
 
 ///|
@@ -3607,7 +3607,7 @@ pub fn less_or() -> @kernel.Thm {
 ///|
 /// SUB
 fn step_114() -> Unit raise {
-  sub_c.set(@int.arith_rule(@parser.parse_term("(forall m. 0 - m = 0) /\\\n    (forall m n. (SUC m) - n = (if m < n then 0 else SUC(m - n)))")))
+  sub_c.set(@int.arith_rule(@term_syntax.parse_term("(∀ m : Num, 0 - m == 0) && (∀ m : Num, ∀ n : Num, SUC(m) - n == (if m < n { 0 } else { SUC(m - n) }))")))
 }
 
 ///|
@@ -3623,7 +3623,7 @@ pub fn sub() -> @kernel.Thm {
 /// LESS_MULT_MONO
 fn step_115() -> Unit raise {
   let t532 = @simp.rewrite_tac(@list.List([@arith.lt_mult_lcancel(), @nums.not_suc()]))
-  less_mult_mono_c.set(@tactics.prove(@parser.parse_term("forall m i n. ((SUC n) * m) < ((SUC n) * i) <=> m < i"), t532))
+  less_mult_mono_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ i : Num, ∀ n : Num, (SUC(n) * m < SUC(n) * i) == (m < i)"), t532))
 }
 
 ///|
@@ -3639,7 +3639,7 @@ pub fn less_mult_mono() -> @kernel.Thm {
 /// LESS_MONO_MULT
 fn step_116() -> Unit raise {
   let t533 = @simp.simp_tac(@list.List([@arith.le_mult_rcancel()]))
-  less_mono_mult_c.set(@tactics.prove(@parser.parse_term("forall m n p. m <= n ==> (m * p) <= (n * p)"), t533))
+  less_mono_mult_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, m <= n → m * p <= n * p"), t533))
 }
 
 ///|
@@ -3655,7 +3655,7 @@ pub fn less_mono_mult() -> @kernel.Thm {
 /// LESS_MULT2
 fn step_117() -> Unit raise {
   let t534 = @simp.rewrite_tac(@list.List([@arith.lt_mult()]))
-  less_mult2_c.set(@tactics.prove(@parser.parse_term("forall m n. 0 < m /\\ 0 < n ==> 0 < (m * n)"), t534))
+  less_mult2_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, 0 < m && 0 < n → 0 < m * n"), t534))
 }
 
 ///|
@@ -3671,7 +3671,7 @@ pub fn less_mult2() -> @kernel.Thm {
 /// SUBSET_FINITE
 fn step_118() -> Unit raise {
   let t535 = @meson.meson_tac(@list.List([@sets.finite_subset()]))
-  subset_finite_c.set(@tactics.prove(@parser.parse_term("forall s. FINITE s ==> (forall t. t SUBSET s ==> FINITE t)"), t535))
+  subset_finite_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, FINITE(s) → (∀ t : (_) -> Bool, SUBSET(t, s) → FINITE(t))"), t535))
 }
 
 ///|
@@ -3687,7 +3687,7 @@ pub fn subset_finite() -> @kernel.Thm {
 /// LESS_EQ_SUC
 fn step_119() -> Unit raise {
   let t536 = @simp.rewrite_tac(@list.List([@arith.le()]))
-  less_eq_suc_c.set(@tactics.prove(@parser.parse_term("forall n. m <= SUC n <=> (m = SUC n) \\/ m <= n"), t536))
+  less_eq_suc_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ((m : Num) <= SUC(n)) == (m == SUC(n) || m <= n)"), t536))
 }
 
 ///|
