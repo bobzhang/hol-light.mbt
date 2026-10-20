@@ -1,100 +1,100 @@
 Formal_ineqs/trig/exp_log quotations (96):
   0
-  from (n + 1)
-  \\k. &1 / &(FACT k) * x pow k
-  a <= a + b <=> &0 <= b
-  inv a = &1 / a
-  x:real
-  \\k. &1 / &(FACT k) * x pow k
-  n:num
+  from((n : Num) + 1)
+  (k : Num) => real_of_num(1) / real_of_num(FACT(k)) * pow((x : Real), k)
+  ((a : Real) <= a + (b : Real)) == (real_of_num(0) <= b)
+  inv((a : Real)) == real_of_num(1) / a
+  (x : Real)
+  (k : Num) => real_of_num(1) / real_of_num(FACT(k)) * pow((x : Real), k)
+  (n : Num)
   0
-  forall x n. &0 <= x ==> \n     sum (0..n) (\\k. inv (&(FACT k)) * x pow k) <= exp x
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x \226\134\146 sum(op_dot_dot(0, n), (k : Num) => inv(real_of_num(FACT(k))) * pow(x, k)) <= exp(x)
   0
-  x:real
-  forall x. &0 <= x ==> &1 <= exp x
-  forall x. &0 <= x ==> exp (--x) <= &1
-  --x = -- &1 * x
-  forall k. &1 / &(FACT k) * --x pow k = (-- &1) pow k / &(FACT k) * x pow k
-  --x:real
-  forall x. ((\\k. (-- &1) pow k / &(FACT k) * x pow k) real_sums exp (--x)) (from 0)
-  forall x. real_infsum (from 0) (\\k. (-- &1) pow k / &(FACT k) * x pow k) = exp (--x)
-  a <= b <=> a * 1 <= b
-  forall n. n <= FACT n
-  &1 / a = inv a
-  a <= b <=> a <= b * &1
+  (x : Real)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 real_of_num(1) <= exp(x)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 exp(-x) <= real_of_num(1)
+  -(x : Real) == -real_of_num(1) * x
+  \226\136\128 k : Num, real_of_num(1) / real_of_num(FACT(k)) * pow(-(x : Real), k) == pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k)
+  -(x : Real)
+  \226\136\128 x : Real, real_sums((k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k), exp(-x), from(0))
+  \226\136\128 x : Real, real_infsum(from(0), (k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k)) == exp(-x)
+  ((a : Num) <= (b : Num)) == (a * 1 <= b)
+  \226\136\128 n : Num, n <= FACT(n)
+  real_of_num(1) / (a : Real) == inv(a)
+  ((a : Real) <= (b : Real)) == (a <= b * real_of_num(1))
   1
-  \\k. inv (&k)
-  1 + (k + 1) + k = 2 * (k + 1)
-  (a / b * r) * (c / d * t) <= &0 \n\t\t <=> &0 <= ((-- &1 pow 1 * a * c) * (r * t)) / b / d
-  &1 / a = inv a
-  forall x. &0 <= x /\\ x <= &1\n     ==> (forall k. abs ((-- &1) pow (k + 1) / &(FACT (k + 1)) * x pow (k + 1)) \n \t        <= abs ((-- &1) pow k / &(FACT k) * x pow k) /\\\n              ((-- &1) pow (k + 1) / &(FACT (k + 1)) * x pow (k + 1)) * \n\t         ((-- &1) pow k / &(FACT k) * x pow k) <= &0) /\\\n         ((\\k. (-- &1) pow k / &(FACT k) * x pow k) ---> &0) sequentially
-  &0 <= x ==> abs x = x
-  abs (-- &1 pow (2 * m) / &(FACT (2 * m)) * x pow (2 * m)) = f (2 * m)
-  sum (0..2 * m) f = sum (0..SUC (2 * m - 1)) f
-  SUC (2 * m - 1) = 2 * m
-  ~(n = 0) ==> 0 < n
-  n:num
+  (k : Num) => inv(real_of_num(k))
+  1 + ((k : Num) + 1 + k) == 2 * (k + 1)
+  ((a : Real) / (b : Real) * (r : Real) * ((c : Real) / (d : Real) * (t : Real)) <= real_of_num(0)) == (real_of_num(0) <= pow(-real_of_num(1), 1) * (a * c) * (r * t) / b / d)
+  real_of_num(1) / (a : Real) == inv(a)
+  \226\136\128 x : Real, real_of_num(0) <= x && x <= real_of_num(1) \226\134\146 (\226\136\128 k : Num, abs(pow(-real_of_num(1), k + 1) / real_of_num(FACT(k + 1)) * pow(x, k + 1)) <= abs(pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k)) && pow(-real_of_num(1), k + 1) / real_of_num(FACT(k + 1)) * pow(x, k + 1) * (pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k)) <= real_of_num(0)) && op_minus_minus_minus_gt((k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k), real_of_num(0), sequentially)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  abs(pow(-real_of_num(1), 2 * (m : Num)) / real_of_num(FACT(2 * m)) * pow((x : Real), 2 * m)) == (f : (Num) -> Real)(2 * m)
+  sum(op_dot_dot(0, 2 * (m : Num)), (f : (Num) -> Real)) == sum(op_dot_dot(0, SUC(2 * m - 1)), f)
+  SUC(2 * (m : Num) - 1) == 2 * m
+  !((n : Num) == 0) \226\134\146 0 < n
+  (n : Num)
   0
-  f:num->real
-  &1 / &1 * &1 = &1
-  n = 0
-  f = \\k. (-- &1) pow k / &(FACT k) * x pow k
-  forall x n. &0 <= x /\\ x <= &1 /\\ EVEN n ==>\n     exp (--x) <= sum (0..n) (\\k. (-- &1) pow k / &(FACT k) * x pow k)
-  &0 <= x ==> abs x = x
-  abs (-- &1 pow (SUC (2 * m)) / &(FACT (SUC (2 * m))) * x pow SUC (2 * m)) = \n\t --f (SUC (2 * m))
-  SUC a - 1 = a
-  n:num
+  (f : (Num) -> Real)
+  real_of_num(1) / real_of_num(1) * real_of_num(1) == real_of_num(1)
+  (n : Num) == 0
+  (f : (Num) -> Real) == ((k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow((x : Real), k))
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && x <= real_of_num(1) && EVEN(n) \226\134\146 exp(-x) <= sum(op_dot_dot(0, n), (k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k))
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  abs(pow(-real_of_num(1), SUC(2 * (m : Num))) / real_of_num(FACT(SUC(2 * m))) * pow((x : Real), SUC(2 * m))) == -(f : (Num) -> Real)(SUC(2 * m))
+  SUC((a : Num)) - 1 == a
+  (n : Num)
   0
-  f:num->real
-  f = \\k. (-- &1) pow k / &(FACT k) * x pow k
-  forall x n. &0 <= x /\\ x <= &1 /\\ ODD n ==>\n     sum (0..n) (\\k. (-- &1) pow k / &(FACT k) * x pow k) <= exp (--x)
-  ~(&k = &0)
-  a * b / a = b * (a / a)
-  forall x k. 0 < k ==> exp (x / &k) pow k = exp x
-  forall x k. 0 < k ==> inv (exp (--x / &k) pow k) = exp x
-  &1 / a = inv a
-  a <= b <=> a <= b * &1
+  (f : (Num) -> Real)
+  (f : (Num) -> Real) == ((k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow((x : Real), k))
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && x <= real_of_num(1) && ODD(n) \226\134\146 sum(op_dot_dot(0, n), (k : Num) => pow(-real_of_num(1), k) / real_of_num(FACT(k)) * pow(x, k)) <= exp(-x)
+  !(real_of_num((k : Num)) == real_of_num(0))
+  (a : Real) * ((b : Real) / a) == b * (a / a)
+  \226\136\128 x : Real, \226\136\128 k : Num, 0 < k \226\134\146 pow(exp(x / real_of_num(k)), k) == exp(x)
+  \226\136\128 x : Real, \226\136\128 k : Num, 0 < k \226\134\146 inv(pow(exp(-x / real_of_num(k)), k)) == exp(x)
+  real_of_num(1) / (a : Real) == inv(a)
+  ((a : Real) <= (b : Real)) == (a <= b * real_of_num(1))
   1
-  \\k. inv (&k)
-  1 + (k + 1) + k = 2 * (k + 1)
-  0 <= t + 1
-  0 <= t + 1
-  (a / b * r) * (c / d * t) <= &0 \n\t\t <=> &0 <= ((-- &1 pow 1 * a * c) * (r * t)) / b / d
-  &1 / a = inv a
-  forall x. &0 <= x /\\ x <= &1\n     ==> let f = (\\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)) in\n       (forall k. abs (f (k + 1)) <= abs (f k) /\\ f (k + 1) * f k <= &0) /\\\n       (f ---> &0) sequentially
-  &0 <= x ==> abs x = x
-  abs (f (2 * m)) = f (2 * m)
-  sum (0..2 * m) f = sum (0..SUC (2 * m - 1)) f
-  SUC (2 * m - 1) = 2 * m
-  &0 <= x /\\ x < &1 ==> abs x < &1
-  real_infsum (from 0) f = log (&1 + x)
-  n:num
+  (k : Num) => inv(real_of_num(k))
+  1 + ((k : Num) + 1 + k) == 2 * (k + 1)
+  0 <= (t : Num) + 1
+  0 <= (t : Num) + 1
+  ((a : Real) / (b : Real) * (r : Real) * ((c : Real) / (d : Real) * (t : Real)) <= real_of_num(0)) == (real_of_num(0) <= pow(-real_of_num(1), 1) * (a * c) * (r * t) / b / d)
+  real_of_num(1) / (a : Real) == inv(a)
+  \226\136\128 x : Real, real_of_num(0) <= x && x <= real_of_num(1) \226\134\146 LET((f : (Num) -> Real) => LET_END((\226\136\128 k : Num, abs(f(k + 1)) <= abs(f(k)) && f(k + 1) * f(k) <= real_of_num(0)) && op_minus_minus_minus_gt(f, real_of_num(0), sequentially)), (k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow(x, k + 1))
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  abs((f : (Num) -> Real)(2 * (m : Num))) == f(2 * m)
+  sum(op_dot_dot(0, 2 * (m : Num)), (f : (Num) -> Real)) == sum(op_dot_dot(0, SUC(2 * m - 1)), f)
+  SUC(2 * (m : Num) - 1) == 2 * m
+  real_of_num(0) <= (x : Real) && x < real_of_num(1) \226\134\146 abs(x) < real_of_num(1)
+  real_infsum(from(0), (f : (Num) -> Real)) == log(real_of_num(1) + (x : Real))
+  (n : Num)
   0
-  f:num->real
-  SUC k = k + 1
-  a * b / c * d = b / c * (a * d)
-  x * sum (0..n) (\\k. -- &1 pow k / &(k + 1) * x pow k) \n\t                = sum (0..n) f
-  f = \\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)
-  forall x n. &0 <= x /\\ x < &1 /\\ EVEN n /\\ 0 < n ==>\n     log (&1 + x) <= x * sum (0..n) (\\k. (-- &1) pow k / &(k + 1) * x pow k)
-  --(-- &1 / b * c) = inv b * c
-  &0 <= --x ==> abs x = --x
-  abs (f (SUC (2 * m))) = --f (SUC (2 * m))
-  SUC a - 1 = a
-  &0 <= x /\\ x < &1 ==> abs x < &1
-  real_infsum (from 0) f = log (&1 + x)
-  0 < SUC (2 * m)
-  n:num
+  (f : (Num) -> Real)
+  SUC((k : Num)) == k + 1
+  (a : Real) * ((b : Real) / (c : Real) * (d : Real)) == b / c * (a * d)
+  (x : Real) * sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow(x, k)) == sum(op_dot_dot(0, n), (f : (Num) -> Real))
+  (f : (Num) -> Real) == ((k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow((x : Real), k + 1))
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && x < real_of_num(1) && EVEN(n) && 0 < n \226\134\146 log(real_of_num(1) + x) <= x * sum(op_dot_dot(0, n), (k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow(x, k))
+  -(-real_of_num(1) / (b : Real) * (c : Real)) == inv(b) * c
+  real_of_num(0) <= -(x : Real) \226\134\146 abs(x) == -x
+  abs((f : (Num) -> Real)(SUC(2 * (m : Num)))) == -f(SUC(2 * m))
+  SUC((a : Num)) - 1 == a
+  real_of_num(0) <= (x : Real) && x < real_of_num(1) \226\134\146 abs(x) < real_of_num(1)
+  real_infsum(from(0), (f : (Num) -> Real)) == log(real_of_num(1) + (x : Real))
+  0 < SUC(2 * (m : Num))
+  (n : Num)
   0
-  f:num->real
-  SUC k = k + 1
-  a * b / c * d = b / c * (a * d)
-  x * sum (0..n) (\\k. -- &1 pow k / &(k + 1) * x pow k) \n\t                = sum (0..n) f
-  f = \\k. (-- &1) pow k / &(k + 1) * x pow (k + 1)
-  forall x n. &0 <= x /\\ x < &1 /\\ ODD n ==>\n     x * sum (0..n) (\\k. (-- &1) pow k / &(k + 1) * x pow k) <= log (&1 + x)
-  &0 < &2
-  forall k y. &0 < y ==> log (&2 pow k * y) = &k * log (&2) + log y
-  &0 < &2
-  forall k y. &0 < y ==> log (y / (&2 pow k)) = log y - &k * log (&2)
+  (f : (Num) -> Real)
+  SUC((k : Num)) == k + 1
+  (a : Real) * ((b : Real) / (c : Real) * (d : Real)) == b / c * (a * d)
+  (x : Real) * sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow(x, k)) == sum(op_dot_dot(0, n), (f : (Num) -> Real))
+  (f : (Num) -> Real) == ((k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow((x : Real), k + 1))
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && x < real_of_num(1) && ODD(n) \226\134\146 x * sum(op_dot_dot(0, n), (k : Num) => pow(-real_of_num(1), k) / real_of_num(k + 1) * pow(x, k)) <= log(real_of_num(1) + x)
+  real_of_num(0) < real_of_num(2)
+  \226\136\128 k : Num, \226\136\128 y : Real, real_of_num(0) < y \226\134\146 log(pow(real_of_num(2), k) * y) == real_of_num(k) * log(real_of_num(2)) + log(y)
+  real_of_num(0) < real_of_num(2)
+  \226\136\128 k : Num, \226\136\128 y : Real, real_of_num(0) < y \226\134\146 log(y / pow(real_of_num(2), k)) == log(y) - real_of_num(k) * log(real_of_num(2))
 Exp_log.exp_pos_poly_lower_bound =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\k:num. ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) (#real_of_num:fun(num,real) (#FACT:fun(num,num) k:num)))) ((#real_pow:fun(real,fun(num,real)) x:real) k:num))))) (#exp:fun(real,real) x:real)))))))
 Exp_log.exp_ge1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#exp:fun(real,real) x:real)))))
 Exp_log.neg_exp_le1 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#exp:fun(real,real) (#real_neg:fun(real,real) x:real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
