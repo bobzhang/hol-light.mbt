@@ -87785,7 +87785,7 @@ Generating HOL version of proof
 0..0..3..9..21..49..112..205..360..603..931..solved at 1059
 0..0..3..11..27..58..solved at 68
 100/independence quotations (225):
-  (ddist : ((Cart[Real, N], Cart[Real, N])) -> Real)(((x : Cart[Real, N]), (y : Cart[Real, N]))) == (if norm(x) < real_of_num(1) && norm(y) < real_of_num(1) { pow(real_of_num(1) - dot(x, y), 2) / ((real_of_num(1) - pow(norm(x), 2)) * (real_of_num(1) - pow(norm(y), 2))) - real_of_num(1) } else { dist((x, y)) })
+  (ddist : ((Cart[Real, N], Cart[Real, N])) -> Real)(((x : Cart[Real, N]), (y : Cart[Real, N]))) == (if norm(x) < real_of_num(1) && norm(y) < real_of_num(1) { pow(real_of_num(1) - dot(x, y), 2) / ((real_of_num(1) - pow(norm(x), 2)) * (real_of_num(1) - pow(norm(y), 2))) - real_of_num(1) } else { distance((x, y)) })
   (pow(real_of_num(1) - ((a : Real) + (x : Real) * (b : Real)), 2) * (real_of_num(1) - (a + (real_of_num(2) * b + (c : Real)))) < pow(real_of_num(1) - (a + b), 2) * (real_of_num(1) - (a + (real_of_num(2) * (x * b) + x * (x * c))))) == (real_of_num(0) < (real_of_num(1) - a - b * x) * (((real_of_num(1) - a) * c + pow(b, 2)) * (real_of_num(1) - x)) + (real_of_num(1) - a - b) * (((real_of_num(1) - a) * c + pow(b, 2)) * ((real_of_num(1) - x) * x)))
   dot((a : Cart[Real, N]) + (b : Cart[Real, N]), a + b) == dot(a, a) + (real_of_num(2) * dot(a, b) + dot(b, b))
   ((a : Cart[Real, N]) + (c : Cart[Real, N]) == a) == (c == vec(0))
@@ -87811,7 +87811,7 @@ Generating HOL version of proof
   \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], (ddist((x, y)) == real_of_num(0)) == (x == y)
   \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) && norm(x) < real_of_num(1) \226\134\146 between(x, (a, b)) == (collinear({a, x, b}) && ddist((x, a)) <= ddist((a, b)) && ddist((x, b)) <= ddist((a, b)))
   (x : Real) < real_of_num(1) * real_of_num(1) \226\134\146 !(real_of_num(1) - x == real_of_num(0))
-  dist(((y : Cart[Real, _]), (x : Cart[Real, _]))) < real_of_num(1) - norm(x) \226\134\146 norm(y) < real_of_num(1)
+  distance(((y : Cart[Real, _]), (x : Cart[Real, _]))) < real_of_num(1) - norm(x) \226\134\146 norm(y) < real_of_num(1)
   :real
   :real
   (y : Cart[Real, N])
@@ -87831,7 +87831,7 @@ Generating HOL version of proof
   norm((x : Cart[Real, _])) < real_of_num(1) && norm((y : Cart[Real, _])) < real_of_num(1) \226\134\146 dot(x, y) < real_of_num(1)
   ((x : Real) * ((a : Real) * (b : Real)) - real_of_num(1) == (y : Real) * (a * b) - real_of_num(1)) == (x == y || a == real_of_num(0) || b == real_of_num(0))
   ((a : Bool) && (b : Bool) \226\134\146 (x : Bool) == (y : Bool)) \226\134\146 (a && x && b) == (a && y && b)
-  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) && norm(a') < real_of_num(1) && norm(b') < real_of_num(1) \226\134\146 (ddist((vec(0), a)) == ddist((vec(0), a')) && ddist((a, b)) == ddist((a', b')) && ddist((b, vec(0))) == ddist((b', vec(0)))) == (dist((vec(0), a)) == dist((vec(0), a')) && dist((a, b)) == dist((a', b')) && dist((b, vec(0))) == dist((b', vec(0))))
+  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 a' : Cart[Real, N], \226\136\128 b' : Cart[Real, N], norm(a) < real_of_num(1) && norm(b) < real_of_num(1) && norm(a') < real_of_num(1) && norm(b') < real_of_num(1) \226\134\146 (ddist((vec(0), a)) == ddist((vec(0), a')) && ddist((a, b)) == ddist((a', b')) && ddist((b, vec(0))) == ddist((b', vec(0)))) == (distance((vec(0), a)) == distance((vec(0), a')) && distance((a, b)) == distance((a', b')) && distance((b, vec(0))) == distance((b', vec(0))))
   (kleinify : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(2) / (real_of_num(1) + pow(norm(z), 2))) * z
   (poincarify : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]])) == Cx((real_of_num(1) - sqrt(real_of_num(1) - pow(norm(x), 2))) / pow(norm(x), 2)) * x
   kleinify(Cx(real_of_num(0))) == Cx(real_of_num(0)) && poincarify(Cx(real_of_num(0))) == Cx(real_of_num(0))
@@ -87964,7 +87964,7 @@ Generating HOL version of proof
   \226\136\131 a : Plane, \226\136\131 b : Plane, \226\136\131 c : Plane, !pbetween(b, (a, c)) && !pbetween(c, (b, a)) && !pbetween(a, (c, b))
   (-(x : Cart[Real, N]) == x) == (x == vec(0))
   real_of_num(0) < (x : Real) && real_of_num(0) < (y : Real) \226\134\146 ((a : Real) * (inv(x) * inv(y)) - real_of_num(1) == (b : Real) * (inv(x) * inv(y)) - real_of_num(1)) == (a == b)
-  (norm((a : Cart[Real, N])) == norm((b : Cart[Real, _]))) == (dist((a, vec(0))) == dist((vec(0), b)))
+  (norm((a : Cart[Real, N])) == norm((b : Cart[Real, _]))) == (distance((a, vec(0))) == distance((vec(0), b)))
   :real
   :real
   :real
