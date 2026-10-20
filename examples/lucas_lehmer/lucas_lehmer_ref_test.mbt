@@ -39532,8 +39532,8 @@ test "Examples/lucas_lehmer matches Examples/lucas_lehmer.ml" {
       #|CPU time (user): <t>
       #|CPU time (user): <t>
       #|Examples/lucas_lehmer quotations (131):
-      #|  forall x n. x pow n = ITER n (\\y. x * y) (&1)
-      #|  llseq p 0 = 4 MOD p /\\\n  llseq p (SUC n) = ((llseq p n) EXP 2 + (p - 2)) MOD p
+      #|  \226\136\128 x : Real, \226\136\128 n : Num, pow(x, n) == ITER(n, (y : Real) => x * y, real_of_num(1))
+      #|  (llseq : (Num, Num) -> Num)((p : Num), 0) == MOD(4, p) && llseq(p, SUC((n : Num))) == MOD(EXP(llseq(p, n), 2) + (p - 2), p)
       #|  :P
       #|  :P
       #|  :P
@@ -39544,125 +39544,125 @@ test "Examples/lucas_lehmer matches Examples/lucas_lehmer.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  (&2 + s) * (&2 - s) = &4 - s pow 2
-      #|  (x + y) pow 2 = x pow 2 + y pow 2 + &2 * x * y
-      #|  2 <= x /\\ ~(p = 0) /\\ ~(p = 1) ==> x + p - 2 = (x - 2) + p
-      #|  (x EXP 2 + (p - 2)) MOD p
-      #|  p = 1
-      #|  &0 <= x ==> &1 <= &2 + x
-      #|  x <= y /\\ y pow 1 <= y pow n /\\ &0 <= z pow n\n      ==> x <= y pow n + z pow n
-      #|  2 EXP 2 <= x ==> 2 <= x
-      #|  2 <= x EXP 2
-      #|  x EXP 2 - 2
-      #|  x:num
+      #|  (real_of_num(2) + (s : Real)) * (real_of_num(2) - s) == real_of_num(4) - pow(s, 2)
+      #|  pow((x : Real) + (y : Real), 2) == pow(x, 2) + (pow(y, 2) + real_of_num(2) * (x * y))
+      #|  2 <= (x : Num) && !((p : Num) == 0) && !(p == 1) \226\134\146 x + (p - 2) == x - 2 + p
+      #|  MOD(EXP((x : Num), 2) + ((p : Num) - 2), p)
+      #|  (p : Num) == 1
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(2) + x
+      #|  (x : Real) <= (y : Real) && pow(y, 1) <= pow(y, (n : Num)) && real_of_num(0) <= pow((z : Real), n) \226\134\146 x <= pow(y, n) + pow(z, n)
+      #|  EXP(2, 2) <= (x : Num) \226\134\146 2 <= x
+      #|  2 <= EXP((x : Num), 2)
+      #|  EXP((x : Num), 2) - 2
+      #|  (x : Num)
       #|  4
-      #|  forall p n. ~(p = 0)\n         ==> ?x. llseq p n = x MOD p /\\\n                 &x = (&2 + sqrt(&3)) pow (2 EXP n) +\n                      (&2 - sqrt(&3)) pow (2 EXP n)
-      #|  prime 3
+      #|  \226\136\128 p : Num, \226\136\128 n : Num, !(p == 0) \226\134\146 (\226\136\131 x : Num, llseq(p, n) == MOD(x, p) && real_of_num(x) == pow(real_of_num(2) + sqrt(real_of_num(3)), EXP(2, n)) + pow(real_of_num(2) - sqrt(real_of_num(3)), EXP(2, n)))
+      #|  prime(3)
       #|  rational
-      #|  &2 = (a + b * x) * q\n        ==> ~(b = &0) ==> x = (&2 - a * q) / (b * q)
-      #|  2 <= p
-      #|  ~(n - 1 = 0) ==> n - 1 + 2 = n + 1
-      #|  2 divides (2 EXP p - 1) + 2
+      #|  real_of_num(2) == ((a : Real) + (b : Real) * (x : Real)) * (q : Real) \226\134\146 !(b == real_of_num(0)) \226\134\146 x == (real_of_num(2) - a * q) / (b * q)
+      #|  2 <= (p : Num)
+      #|  !((n : Num) - 1 == 0) \226\134\146 n - 1 + 2 == n + 1
+      #|  divides(2, EXP(2, (p : Num)) - 1 + 2)
       #|  2 <= 1
-      #|  q:num
-      #|  ?q. abs a = &q
+      #|  (q : Num)
+      #|  \226\136\131 q : Num, abs((a : Real)) == real_of_num(q)
       #|  abs
-      #|  b = &0
-      #|  &1 - -- &1 = &2
-      #|  b:real
-      #|  a:real
-      #|  (&1 == -- &1) (equiv)
-      #|  i < p ==> i <= p - 1
-      #|  ((&2 + sqrt (&3)) pow (2 EXP (p - 1)) == &1) (equiv)
-      #|  i:num
-      #|  k <= p - 1 ==> (k = p <=> p = 0)
-      #|  k divides 2 EXP p
-      #|  (a + b * s) - (a' + b' * s):real = (a'' + b'' * s) * q <=>\n      a + b * s = (a'' * q + a') + (b'' * q + b') * s
-      #|  &(b DIV q)
-      #|  &(a DIV q)
-      #|  (a == b) equiv /\\\n      ((a == b) equiv ==> forall x. (x == a) equiv <=> (x == b) equiv)\n      ==> forall x. (x == a) equiv <=> (x == b) equiv
-      #|  a <= q - 1 <=> a = 0 \\/ a < q
-      #|  b MOD q
-      #|  a MOD q
-      #|  b:num
-      #|  n:num
-      #|  a:num
-      #|  n:num
-      #|  (0..q-1) CROSS (0..q-1)
-      #|  \\(a,b) y. (y == &a + &b * sqrt(&3)) equiv
-      #|  forall f:num#num->A t. s SUBSET IMAGE f t /\\ FINITE t /\\ CARD t <= n\n            ==> FINITE s /\\ CARD s <= n
-      #|  \\x y:real. (x == y) equiv
-      #|  ?k. 0 < k /\\ k <= 2 EXP p - 1 /\\\n        forall n. ((&2 + sqrt(&3)) pow n == &1) equiv <=> k divides n
-      #|  &3
-      #|  &2 * a * b * &q - &2 * b
-      #|  &q * (a pow 2 + &3 * b pow 2) - &2 * a
-      #|  2 <= p
-      #|  p = (p - 1) + 1
-      #|  b:real
-      #|  a:real
-      #|  a - -- &1  = b <=> a = b - &1
-      #|  ((&2 + sqrt(&3)) pow (2 EXP p) == &1) equiv
-      #|  &b * &r * &s
-      #|  &a * &r * &s
-      #|  s:num
-      #|  ?a b. (&2 + sqrt(&3)) pow (2 EXP (p - 2)) = &a + &b * sqrt(&3)
-      #|  2 <= p ==> SUC(p - 2) = p - 1
-      #|  (&2 + s) * (&2 - s) = &4 - s pow 2
-      #|  (*) ((&2 + sqrt(&3)) pow (2 EXP (p - 2)))
-      #|  r:num
-      #|  p - 2
-      #|  2 EXP p - 1
-      #|  forall x y:real. (x == y) equiv <=> (y == x) equiv
-      #|  ((&2 + sqrt(&3)) pow (2 EXP (p - 1)) == -- &1) equiv
-      #|  &3
-      #|  &2 * v + u
-      #|  &2 * u + &3 * v
-      #|  &2 * v - u
-      #|  &2 * u - &3 * v
-      #|  v:real
-      #|  u:real
-      #|  x:real
-      #|  x:real
-      #|  x - y:real
-      #|  forall x y:real. (x == y) equiv <=> (x - y == &0) equiv
-      #|  forall x y. ((&2 + sqrt(&3)) * x == (&2 + sqrt(&3)) * y) equiv <=>\n          (x == y) equiv
-      #|  &3
-      #|  2 * b + a
-      #|  2 * a + 3 * b
-      #|  b:num
-      #|  a:num
+      #|  (b : Real) == real_of_num(0)
+      #|  real_of_num(1) - -real_of_num(1) == real_of_num(2)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  op_eq_eq(real_of_num(1), -real_of_num(1), (equiv : (Real, Real) -> Bool))
+      #|  (i : Num) < (p : Num) \226\134\146 i <= p - 1
+      #|  op_eq_eq(pow(real_of_num(2) + sqrt(real_of_num(3)), EXP(2, (p : Num) - 1)), real_of_num(1), (equiv : (Real, Real) -> Bool))
+      #|  (i : Num)
+      #|  (k : Num) <= (p : Num) - 1 \226\134\146 (k == p) == (p == 0)
+      #|  divides((k : Num), EXP(2, (p : Num)))
+      #|  ((a : Real) + (b : Real) * (s : Real) - ((a' : Real) + (b' : Real) * s) == ((a'' : Real) + (b'' : Real) * s) * (q : Real)) == (a + b * s == a'' * q + a' + (b'' * q + b') * s)
+      #|  real_of_num(DIV((b : Num), (q : Num)))
+      #|  real_of_num(DIV((a : Num), (q : Num)))
+      #|  op_eq_eq((a : _), (b : _), (equiv : (_, _) -> Bool)) && (op_eq_eq(a, b, equiv) \226\134\146 (\226\136\128 x : _, op_eq_eq(x, a, equiv) == op_eq_eq(x, b, equiv))) \226\134\146 (\226\136\128 x : _, op_eq_eq(x, a, equiv) == op_eq_eq(x, b, equiv))
+      #|  ((a : Num) <= (q : Num) - 1) == (a == 0 || a < q)
+      #|  MOD((b : Num), (q : Num))
+      #|  MOD((a : Num), (q : Num))
+      #|  (b : Num)
+      #|  (n : Num)
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  CROSS(op_dot_dot(0, (q : Num) - 1), op_dot_dot(0, q - 1))
+      #|  GABS((f : ((Num, Num), Real) -> Bool) => \226\136\128 a : Num, \226\136\128 b : Num, GEQ(f((a, b)), (y : Real) => op_eq_eq(y, real_of_num(a) + real_of_num(b) * sqrt(real_of_num(3)), (equiv : (Real, Real) -> Bool))))
+      #|  \226\136\128 f : ((Num, Num)) -> A, \226\136\128 t : ((Num, Num)) -> Bool, SUBSET((s : (A) -> Bool), IMAGE(f, t)) && FINITE(t) && CARD(t) <= (n : Num) \226\134\146 FINITE(s) && CARD(s) <= n
+      #|  (x : Real) => (y : Real) => op_eq_eq(x, y, (equiv : (Real, Real) -> Bool))
+      #|  \226\136\131 k : Num, 0 < k && k <= EXP(2, (p : Num)) - 1 && (\226\136\128 n : Num, op_eq_eq(pow(real_of_num(2) + sqrt(real_of_num(3)), n), real_of_num(1), (equiv : (Real, Real) -> Bool)) == divides(k, n))
+      #|  real_of_num(3)
+      #|  real_of_num(2) * ((a : Real) * ((b : Real) * real_of_num((q : Num)))) - real_of_num(2) * b
+      #|  real_of_num((q : Num)) * (pow((a : Real), 2) + real_of_num(3) * pow((b : Real), 2)) - real_of_num(2) * a
+      #|  2 <= (p : Num)
+      #|  (p : Num) == p - 1 + 1
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  ((a : Real) - -real_of_num(1) == (b : Real)) == (a == b - real_of_num(1))
+      #|  op_eq_eq(pow(real_of_num(2) + sqrt(real_of_num(3)), EXP(2, (p : Num))), real_of_num(1), (equiv : (Real, Real) -> Bool))
+      #|  real_of_num((b : Num)) * (real_of_num((r : Num)) * real_of_num((s : Num)))
+      #|  real_of_num((a : Num)) * (real_of_num((r : Num)) * real_of_num((s : Num)))
+      #|  (s : Num)
+      #|  \226\136\131 a : Num, \226\136\131 b : Num, pow(real_of_num(2) + sqrt(real_of_num(3)), EXP(2, (p : Num) - 2)) == real_of_num(a) + real_of_num(b) * sqrt(real_of_num(3))
+      #|  2 <= (p : Num) \226\134\146 SUC(p - 2) == p - 1
+      #|  (real_of_num(2) + (s : Real)) * (real_of_num(2) - s) == real_of_num(4) - pow(s, 2)
+      #|  op_star(pow(real_of_num(2) + sqrt(real_of_num(3)), EXP(2, (p : Num) - 2)))
+      #|  (r : Num)
+      #|  (p : Num) - 2
+      #|  EXP(2, (p : Num)) - 1
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, op_eq_eq(x, y, (equiv : (Real, Real) -> Bool)) == op_eq_eq(y, x, equiv)
+      #|  op_eq_eq(pow(real_of_num(2) + sqrt(real_of_num(3)), EXP(2, (p : Num) - 1)), -real_of_num(1), (equiv : (Real, Real) -> Bool))
+      #|  real_of_num(3)
+      #|  real_of_num(2) * (v : Real) + (u : Real)
+      #|  real_of_num(2) * (u : Real) + real_of_num(3) * (v : Real)
+      #|  real_of_num(2) * (v : Real) - (u : Real)
+      #|  real_of_num(2) * (u : Real) - real_of_num(3) * (v : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (x : Real) - (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, op_eq_eq(x, y, (equiv : (Real, Real) -> Bool)) == op_eq_eq(x - y, real_of_num(0), equiv)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, op_eq_eq((real_of_num(2) + sqrt(real_of_num(3))) * x, (real_of_num(2) + sqrt(real_of_num(3))) * y, (equiv : (Real, Real) -> Bool)) == op_eq_eq(x, y, equiv)
+      #|  real_of_num(3)
+      #|  2 * (b : Num) + (a : Num)
+      #|  2 * (a : Num) + 3 * (b : Num)
+      #|  (b : Num)
+      #|  (a : Num)
       #|  0
       #|  1
-      #|  forall k. ?a b. (&2 + sqrt(&3)) pow k = &a + &b * sqrt(&3)
-      #|  x - y = (a + b * s) * q /\\\n       y - z = (a' + b' * s) * q\n       ==> x - z:real = ((a + a') + (b + b') * s) * q
-      #|  forall x y z:real. (x == y) equiv /\\ (y == z) equiv ==> (x == z) equiv
-      #|  x - y:real = (a + b * s) * q ==> y - x = (--a + --b * s) * q
-      #|  (forall x y. P x y ==> P y x) ==> (forall x y. P x y <=> P y x)
-      #|  forall x y:real. (x == y) equiv <=> (y == x) equiv
-      #|  &0
-      #|  forall x:real. (x == x) equiv
-      #|  equiv =\n    \\x y. ?a b. integer a /\\ integer b /\\\n                x - y = (a + b * sqrt(&3)) * &q
-      #|  q:num
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  2 EXP 2 <= x ==> 2 <= x - 1
-      #|  2 <= 2 EXP p - 1
-      #|  forall p. 2 <= p /\\ llseq (2 EXP p - 1) (p - 2) = 0 ==> prime(2 EXP p - 1)
-      #|  llseq (2 EXP p - 1) 0 = 4 MOD (2 EXP p - 1)
-      #|  1 <= n <=> ~(n = 0)
-      #|  x + y - 1 + w = u + v + z + r + 2 /\\ 2 EXP 2 <= y /\\ w * 1 <= v\n      ==> x + y - 1 - 2 = u + (v - w + z) + r
-      #|  q:num
-      #|  forall p:num. (x + p) + y = p + z ==> x + y = z
-      #|  q + 1
-      #|  r < 1 <=> r = 0
-      #|  p = 1
-      #|  p = 0
-      #|  llseq (2 EXP p - 1) n = m\n     ==> m * m + q = 2 EXP p * q + 2 + r /\\ r < 2 EXP p - 1\n         ==> llseq (2 EXP p - 1) (SUC n) = r
-      #|  T /\\ T <=> T
-      #|  p:num
-      #|  n:num
-      #|  m:num
-      #|  q:num
-      #|  r:num
+      #|  \226\136\128 k : Num, \226\136\131 a : Num, \226\136\131 b : Num, pow(real_of_num(2) + sqrt(real_of_num(3)), k) == real_of_num(a) + real_of_num(b) * sqrt(real_of_num(3))
+      #|  (x : Real) - (y : Real) == ((a : Real) + (b : Real) * (s : Real)) * (q : Real) && y - (z : Real) == ((a' : Real) + (b' : Real) * s) * q \226\134\146 x - z == (a + a' + (b + b') * s) * q
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, op_eq_eq(x, y, (equiv : (Real, Real) -> Bool)) && op_eq_eq(y, z, equiv) \226\134\146 op_eq_eq(x, z, equiv)
+      #|  (x : Real) - (y : Real) == ((a : Real) + (b : Real) * (s : Real)) * (q : Real) \226\134\146 y - x == (-a + -b * s) * q
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (P : (_, _) -> Bool)(x, y) \226\134\146 P(y, x)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, P(x, y) == P(y, x))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, op_eq_eq(x, y, (equiv : (Real, Real) -> Bool)) == op_eq_eq(y, x, equiv)
+      #|  real_of_num(0)
+      #|  \226\136\128 x : Real, op_eq_eq(x, x, (equiv : (Real, Real) -> Bool))
+      #|  (equiv : (Real, Real) -> Bool) == ((x : Real) => (y : Real) => \226\136\131 a : Real, \226\136\131 b : Real, integer(a) && integer(b) && x - y == (a + b * sqrt(real_of_num(3))) * real_of_num((q : Num)))
+      #|  (q : Num)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  EXP(2, 2) <= (x : Num) \226\134\146 2 <= x - 1
+      #|  2 <= EXP(2, (p : Num)) - 1
+      #|  \226\136\128 p : Num, 2 <= p && llseq(EXP(2, p) - 1, p - 2) == 0 \226\134\146 prime(EXP(2, p) - 1)
+      #|  llseq(EXP(2, (p : Num)) - 1, 0) == MOD(4, EXP(2, p) - 1)
+      #|  (1 <= (n : Num)) == !(n == 0)
+      #|  (x : Num) + ((y : Num) - 1 + (w : Num)) == (u : Num) + ((v : Num) + ((z : Num) + ((r : Num) + 2))) && EXP(2, 2) <= y && w * 1 <= v \226\134\146 x + (y - 1 - 2) == u + (v - w + z + r)
+      #|  (q : Num)
+      #|  \226\136\128 p : Num, (x : Num) + p + (y : Num) == p + (z : Num) \226\134\146 x + y == z
+      #|  (q : Num) + 1
+      #|  ((r : Num) < 1) == (r == 0)
+      #|  (p : Num) == 1
+      #|  (p : Num) == 0
+      #|  llseq(EXP(2, (p : Num)) - 1, (n : Num)) == (m : Num) \226\134\146 m * m + (q : Num) == EXP(2, p) * q + (2 + (r : Num)) && r < EXP(2, p) - 1 \226\134\146 llseq(EXP(2, p) - 1, SUC(n)) == r
+      #|  (true && true) == true
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (q : Num)
+      #|  (r : Num)
       #|REAL_POW_ITER =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(real,fun(real,bool)) ((#real_pow:fun(real,fun(num,real)) x:real) n:num)) (((#ITER:fun(num,fun(fun(real,real),fun(real,real))) n:num) (\y:real. ((#real_mul:fun(real,fun(real,real)) x:real) y:real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|llseq =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#llseq:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) #_0:num))) ((#MOD:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) p:num))) ((#=:fun(num,fun(num,bool)) ((#llseq:fun(num,fun(num,num)) p:num) (#SUC:fun(num,num) n:num))) ((#MOD:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) ((#EXP:fun(num,fun(num,num)) ((#llseq:fun(num,fun(num,num)) p:num) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#-:fun(num,fun(num,num)) p:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) p:num)))
       #|LLSEQ_CLOSEDFORM =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))) (#?:fun(fun(num,bool),bool) (\x:num. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#llseq:fun(num,fun(num,num)) p:num) n:num)) ((#MOD:fun(num,fun(num,num)) x:num) p:num))) ((#=:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) x:num)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) ((#real_pow:fun(real,fun(num,real)) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#sqrt:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))))))))))))
