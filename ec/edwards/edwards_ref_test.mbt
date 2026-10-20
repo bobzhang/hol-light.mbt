@@ -36487,15 +36487,15 @@ test "EC/edwards matches EC/edwards.ml" {
       #|23 basis elements and 0 critical pairs
       #|Translating certificate to HOL inferences
       #|EC/edwards quotations (264):
-      #|  edwards_point f (x:A,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f
-      #|  edwards_curve(f:A ring,a:A,d:A) (x,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_add f (ring_mul f a (ring_pow f x 2)) (ring_pow f y 2) =\n        ring_add f (ring_1 f)\n          (ring_mul f d (ring_mul f (ring_pow f x 2) (ring_pow f y 2)))
-      #|  edwards_nonsingular (f:A ring,a:A,d:A) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        (d = ring_0 f \\/ ~(?c. c IN ring_carrier f /\\ ring_pow f c 2 = d))
-      #|  edwards_0 (f:A ring,a:A,d:A) = (ring_0 f,ring_1 f)
-      #|  edwards_neg (f:A ring,a:A,d:A) (x,y:A) = (ring_neg f x,y)
-      #|  edwards_add (f:A ring,a:A,d:A) (x1,y1) (x2,y2) =\n   ring_div f (ring_add f (ring_mul f x1 y2) (ring_mul f y1 x2))\n   (ring_add f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2))))),\n   ring_div f\n   (ring_sub f (ring_mul f y1 y2) (ring_mul f a (ring_mul f x1 x2)))\n   (ring_sub f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))))
-      #|  edwards_group (f:A ring,a:A,d:A) =\n        group(edwards_curve(f,a,d),\n              edwards_0(f,a,d),\n              edwards_neg(f,a,d),\n              edwards_add(f,a,d))
-      #|  d:A = ring_0 f
-      #|  forall f a (d:A).\n    field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f\n    ==> (edwards_nonsingular (f,a,d) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        ~(?c. c IN ring_carrier f /\\ ~(c = ring_0 f) /\\ ring_pow f c 2 = d))
+      #|  (edwards_point : (Ring[A], (A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)))
+      #|  (edwards_curve : ((Ring[A], A, A), (A, A)) -> Bool)(((f : Ring[A]), (a : A), (d : A)), ((x : A), (y : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && ring_add(f, ring_mul(f, a, ring_pow(f, x, 2)), ring_pow(f, y, 2)) == ring_add(f, ring_1(f), ring_mul(f, d, ring_mul(f, ring_pow(f, x, 2), ring_pow(f, y, 2)))))
+      #|  (edwards_nonsingular : ((Ring[A], A, A)) -> Bool)(((f : Ring[A]), (a : A), (d : A))) == ((\226\136\131 b : A, IN(b, ring_carrier(f)) && ring_pow(f, b, 2) == a) && (d == ring_0(f) || !(\226\136\131 c : A, IN(c, ring_carrier(f)) && ring_pow(f, c, 2) == d)))
+      #|  (edwards_0 : ((Ring[A], A, A)) -> (A, A))(((f : Ring[A]), (a : A), (d : A))) == (ring_0(f), ring_1(f))
+      #|  (edwards_neg : ((Ring[A], A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (d : A)), ((x : A), (y : A))) == (ring_neg(f, x), y)
+      #|  (edwards_add : ((Ring[A], A, A), (A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (d : A)), ((x1 : A), (y1 : A)), ((x2 : A), (y2 : A))) == (ring_div(f, ring_add(f, ring_mul(f, x1, y2), ring_mul(f, y1, x2)), ring_add(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2)))))), ring_div(f, ring_sub(f, ring_mul(f, y1, y2), ring_mul(f, a, ring_mul(f, x1, x2))), ring_sub(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2)))))))
+      #|  (edwards_group : ((Ring[A], A, A)) -> Group[(A, A)])(((f : Ring[A]), (a : A), (d : A))) == group((edwards_curve((f, a, d)), edwards_0((f, a, d)), edwards_neg((f, a, d)), edwards_add((f, a, d))))
+      #|  (d : A) == ring_0((f : Ring[A]))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) \226\134\146 edwards_nonsingular((f, a, d)) == ((\226\136\131 b : A, IN(b, ring_carrier(f)) && ring_pow(f, b, 2) == a) && !(\226\136\131 c : A, IN(c, ring_carrier(f)) && !(c == ring_0(f)) && ring_pow(f, c, 2) == d))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -36510,73 +36510,14 @@ test "EC/edwards matches EC/edwards.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f}
-      #|  forall f a d:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(edwards_curve(f,a,d))
-      #|  ring_inv f x:A
-      #|  y:A
-      #|  x:A
-      #|  {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f /\\\n             ring_pow f y 2 =\n             ring_div f (ring_sub f (ring_1 f)\n                            (ring_mul f a (ring_pow f x 2)))\n                        (ring_sub f (ring_1 f)\n                            (ring_mul f d (ring_pow f x 2)))}
-      #|  forall s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n
-      #|  forall f a d:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ d IN ring_carrier f /\\\n             edwards_nonsingular(f,a,d)\n             ==> CARD(edwards_curve(f,a,d)) <= 2 * CARD(ring_carrier f)
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  ring_inv f (ring_mul f e (ring_mul f x1 x2)):A
-      #|  ring_inv f (ring_mul f x1 y2):A
-      #|  forall a b. P a \\/ P b ==> ?x. P x
-      #|  e:A
-      #|  ~(p /\\ ~q) <=> p ==> q
-      #|  edwards_nonsingular(f,a:A,d)
-      #|  forall f a (d:A) x1 y1 x2 y2.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2)\n        ==> ~(ring_add f (ring_1 f)\n              (ring_mul f d\n                 (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))) =\n              ring_0 f) /\\\n            ~(ring_sub f (ring_1 f)\n              (ring_mul f d\n                 (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))) =\n              ring_0 f)
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  forall f a d p. edwards_curve(f,a,d) p ==> edwards_point f p
-      #|  forall(f:A ring) a d p.\n        edwards_point f p\n        ==> edwards_point f (edwards_neg (f,a,d) p)
-      #|  forall(f:A ring) a d p q.\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_point f p /\\ edwards_point f q\n        ==> edwards_point f (edwards_add (f,a,d) p q)
-      #|  forall f a d:A.\n        a IN ring_carrier f /\\ d IN ring_carrier f\n        ==> edwards_curve(f,a,d) (edwards_0(f,a,d))
-      #|  forall f a (d:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_curve(f,a,d) (edwards_neg (f,a,d) p)
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall f a (d:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q\n        ==> edwards_curve(f,a,d) (edwards_add (f,a,d) p q)
-      #|  forall f a (d:A) p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_add(f,a,d) (edwards_0 (f,a,d)) p = p
+      #|  {((x : A), (y : A)) | IN(x, ring_carrier((f : Ring[A]))) && IN(y, ring_carrier(f))}
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, field(f) && FINITE(ring_carrier(f)) \226\134\146 FINITE(edwards_curve((f, a, d)))
+      #|  ring_inv((f : Ring[A]), (x : A))
+      #|  (y : A)
+      #|  (x : A)
+      #|  {((x : A), (y : A)) | IN(x, ring_carrier((f : Ring[A]))) && IN(y, ring_carrier(f)) && ring_pow(f, y, 2) == ring_div(f, ring_sub(f, ring_1(f), ring_mul(f, (a : A), ring_pow(f, x, 2))), ring_sub(f, ring_1(f), ring_mul(f, (d : A), ring_pow(f, x, 2))))}
+      #|  \226\136\128 s : (_) -> Bool, SUBSET((t : (_) -> Bool), s) && FINITE(s) && CARD(s) <= (n : Num) \226\134\146 CARD(t) <= n
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, field(f) && FINITE(ring_carrier(f)) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) \226\134\146 CARD(edwards_curve((f, a, d))) <= 2 * CARD(ring_carrier(f))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -36595,17 +36536,76 @@ test "EC/edwards matches EC/edwards.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  (x,y):A#A
-      #|  edwards_neg (f,a,d) (x,y):A#A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y:A
+      #|  ring_inv((f : Ring[A]), ring_mul(f, (e : A), ring_mul(f, (x1 : A), (x2 : A))))
+      #|  ring_inv((f : Ring[A]), ring_mul(f, (x1 : A), (y2 : A)))
+      #|  \226\136\128 a : _, \226\136\128 b : _, (P : (_) -> Bool)(a) || P(b) \226\134\146 (\226\136\131 x : _, P(x))
+      #|  (e : A)
+      #|  !((p : Bool) && !(q : Bool)) == (p \226\134\146 q)
+      #|  edwards_nonsingular(((f : Ring[A]), (a : A), (d : A)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 x2 : A, \226\136\128 y2 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && edwards_curve((f, a, d), (x2, y2)) \226\134\146 !(ring_add(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2))))) == ring_0(f)) && !(ring_sub(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2))))) == ring_0(f))
+      #|  :A
+      #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall f a (d:A) p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_add(f,a,d) (edwards_neg (f,a,d) p) p = edwards_0(f,a,d)
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  \226\136\128 f : Ring[_], \226\136\128 a : _, \226\136\128 d : _, \226\136\128 p : (_, _), edwards_curve((f, a, d), p) \226\134\146 edwards_point(f, p)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), edwards_point(f, p) \226\134\146 edwards_point(f, edwards_neg((f, a, d), p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), \226\136\128 q : (A, A), IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_point(f, p) && edwards_point(f, q) \226\134\146 edwards_point(f, edwards_add((f, a, d), p, q))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) \226\134\146 edwards_curve((f, a, d), edwards_0((f, a, d)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), integral_domain(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_curve((f, a, d), p) \226\134\146 edwards_curve((f, a, d), edwards_neg((f, a, d), p))
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), \226\136\128 q : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) && edwards_curve((f, a, d), q) \226\134\146 edwards_curve((f, a, d), edwards_add((f, a, d), p, q))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_curve((f, a, d), p) \226\134\146 edwards_add((f, a, d), edwards_0((f, a, d)), p) == p
+      #|  :A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  :A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  ((x : A), (y : A))
+      #|  edwards_neg(((f : Ring[A]), (a : A), (d : A)), ((x : A), (y : A)))
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) \226\134\146 edwards_add((f, a, d), edwards_neg((f, a, d), p), p) == edwards_0((f, a, d))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -36633,73 +36633,53 @@ test "EC/edwards matches EC/edwards.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  y1:A
-      #|  x1:A
-      #|  y2:A
-      #|  x2:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall f a (d:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q\n        ==> edwards_add (f,a,d) p q = edwards_add (f,a,d) q p
-      #|  field f /\\\n     x1 IN ring_carrier f /\\ y1 IN ring_carrier f /\\\n     x2 IN ring_carrier f /\\ y2 IN ring_carrier f /\\\n     ~(y1 = ring_0 f \\/ y2 = ring_0 f) /\\\n     ring_mul f x1 y2 = ring_mul f x2 y1\n     ==> ring_div f x1 y1 = ring_div f x2 y2
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), \226\136\128 q : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) && edwards_curve((f, a, d), q) \226\134\146 edwards_add((f, a, d), p, q) == edwards_add((f, a, d), q, p)
+      #|  field((f : Ring[_])) && IN((x1 : _), ring_carrier(f)) && IN((y1 : _), ring_carrier(f)) && IN((x2 : _), ring_carrier(f)) && IN((y2 : _), ring_carrier(f)) && !(y1 == ring_0(f) || y2 == ring_0(f)) && ring_mul(f, x1, y2) == ring_mul(f, x2, y1) \226\134\146 ring_div(f, x1, y1) == ring_div(f, x2, y2)
       #|  :A
-      #|  (x3,y3):A#A
-      #|  (x2,y2):A#A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  (x2,y2):A#A
-      #|  (x1,y1):A#A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y3:A
-      #|  x3:A
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall f a (d:A) p q r.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q /\\\n        edwards_curve(f,a,d) r\n        ==> edwards_add (f,a,d) p (edwards_add (f,a,d) q r) =\n            edwards_add (f,a,d) (edwards_add (f,a,d) p q) r
-      #|  forall f a (d:A).\n      field f /\\\n      a IN ring_carrier f /\\ d IN ring_carrier f /\\\n      edwards_nonsingular(f,a,d)\n      ==> group_carrier(edwards_group(f,a,d)) = edwards_curve(f,a,d) /\\\n          group_id(edwards_group(f,a,d)) = edwards_0(f,a,d) /\\\n          group_inv(edwards_group(f,a,d)) = edwards_neg(f,a,d) /\\\n          group_mul(edwards_group(f,a,d)) = edwards_add(f,a,d)
-      #|  forall f a (d:A).\n      field f /\\\n      a IN ring_carrier f /\\ d IN ring_carrier f /\\\n      edwards_nonsingular(f,a,d)\n      ==> abelian_group(edwards_group(f,a,d))
-      #|  forall f (a:A) d p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        p IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) p = 2 <=>\n             p = (ring_0 f,ring_neg f (ring_1 f)))
-      #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y:A
-      #|  x:A
-      #|  4 = 2 * 2
-      #|  forall f (a:A) d x y.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        (x,y) IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) (x,y) = 4 <=>\n             ring_mul f a (ring_pow f x 2) = ring_1 f /\\ y = ring_0 f)
+      #|  ((x3 : A), (y3 : A))
+      #|  ((x2 : A), (y2 : A))
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  ((x2 : A), (y2 : A))
+      #|  ((x1 : A), (y1 : A))
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y3 : A)
+      #|  (x3 : A)
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), \226\136\128 q : (A, A), \226\136\128 r : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) && edwards_curve((f, a, d), q) && edwards_curve((f, a, d), r) \226\134\146 edwards_add((f, a, d), p, edwards_add((f, a, d), q, r)) == edwards_add((f, a, d), edwards_add((f, a, d), p, q), r)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) \226\134\146 group_carrier(edwards_group((f, a, d))) == edwards_curve((f, a, d)) && group_id(edwards_group((f, a, d))) == edwards_0((f, a, d)) && group_inv(edwards_group((f, a, d))) == edwards_neg((f, a, d)) && group_mul(edwards_group((f, a, d))) == edwards_add((f, a, d))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) \226\134\146 abelian_group(edwards_group((f, a, d)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && IN(p, group_carrier(edwards_group((f, a, d)))) \226\134\146 (group_element_order(edwards_group((f, a, d)), p) == 2) == (p == (ring_0(f), ring_neg(f, ring_1(f))))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -36709,17 +36689,37 @@ test "EC/edwards matches EC/edwards.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  y:A
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
+      #|  4 == 2 * 2
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x : A, \226\136\128 y : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && IN((x, y), group_carrier(edwards_group((f, a, d)))) \226\134\146 (group_element_order(edwards_group((f, a, d)), (x, y)) == 4) == (ring_mul(f, a, ring_pow(f, x, 2)) == ring_1(f) && y == ring_0(f))
+      #|  :A
+      #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  y:A
+      #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y:A
+      #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  4 = 2 * 2
-      #|  forall f (a:A) d a' p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        a' IN ring_carrier f /\\ ring_mul f a (ring_pow f a' 2) = ring_1 f /\\\n        edwards_nonsingular (f,a,d) /\\\n        p IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) p = 4 <=>\n             p = (a',ring_0 f) \\/ p = (ring_neg f a',ring_0 f))
+      #|  (x:A) IN ring_carrier f
+      #|  x:A
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
+      #|  4 == 2 * 2
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 a' : A, \226\136\128 p : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(a', ring_carrier(f)) && ring_mul(f, a, ring_pow(f, a', 2)) == ring_1(f) && edwards_nonsingular((f, a, d)) && IN(p, group_carrier(edwards_group((f, a, d)))) \226\134\146 (group_element_order(edwards_group((f, a, d)), p) == 4) == (p == (a', ring_0(f)) || p == (ring_neg(f, a'), ring_0(f)))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
@@ -36731,17 +36731,17 @@ test "EC/edwards matches EC/edwards.ml" {
       #|  x:A
       #|  (x:A) IN ring_carrier f
       #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  y:A
-      #|  x:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  y:A
-      #|  x:A
-      #|  8 = 2 * 4
-      #|  forall f (a:A) d x y.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        (x,y) IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) (x,y) = 8 <=>\n             ring_mul f a (ring_pow f x 2) = ring_pow f y 2 /\\\n             ring_mul f (ring_of_num f 4)\n                        (ring_mul f (ring_pow f a 2) (ring_pow f x 4)) =\n             ring_pow f (ring_add f (ring_1 f)\n                          (ring_mul f a (ring_mul f d (ring_pow f x 4)))) 2)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (y : A)
+      #|  (x : A)
+      #|  8 == 2 * 4
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x : A, \226\136\128 y : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && IN((x, y), group_carrier(edwards_group((f, a, d)))) \226\134\146 (group_element_order(edwards_group((f, a, d)), (x, y)) == 8) == (ring_mul(f, a, ring_pow(f, x, 2)) == ring_pow(f, y, 2) && ring_mul(f, ring_of_num(f, 4), ring_mul(f, ring_pow(f, a, 2), ring_pow(f, x, 4))) == ring_pow(f, ring_add(f, ring_1(f), ring_mul(f, a, ring_mul(f, d, ring_pow(f, x, 4)))), 2))
       #|  :A
       #|  (x:A) IN ring_carrier f
       #|  x:A
