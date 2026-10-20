@@ -7736,154 +7736,154 @@ test "Logic/canon matches Logic/canon.ml" {
       #|0..0..solved at 2
       #|0..0..1..5..13..solved at 23
       #|Logic/canon quotations (149):
-      #|  (forall x. terms fns (V x)) /\\\n   (forall f l. (f,LENGTH l) IN fns /\\ ALL (terms fns) l\n          ==> terms fns (Fn f l))
-      #|  a SUBSET s /\\ b SUBSET s ==> (a UNION b) SUBSET s
-      #|  a IN s /\\ b SUBSET s ==> (a INSERT b) SUBSET s
-      #|  forall l. ALL (\\x. x SUBSET s) l ==> LIST_UNION l SUBSET s
-      #|  forall t. t IN terms(FST L) ==> functions_term t SUBSET (FST L)
-      #|  (a INSERT s) SUBSET t <=> a IN t /\\ s SUBSET t
-      #|  x IN {formsubst v p | P v /\\ p IN s}
-      #|  s' SUBSET {formsubst v p | P v /\\ p IN t0}
-      #|  q:form
-      #|  @p. ?v. (P v /\\ p IN s) /\\ (x = formsubst v p)
-      #|  v:num->term
-      #|  (@p. ?v. (P v /\\ p IN s) /\\ (x = formsubst v p)) INSERT t0
-      #|  t0:form->bool
-      #|  EMPTY:form->bool
-      #|  forall t'. FINITE(t')\n        ==> t' SUBSET { formsubst v p | P(v) /\\ p IN s}\n            ==> ?t. FINITE(t) /\\ t SUBSET s /\\\n                    t' SUBSET {formsubst v p | P(v) /\\ p IN t}
-      #|  (a INSERT s) SUBSET t <=> a IN t /\\ s SUBSET t
-      #|  {SKOLEM p | p IN x INSERT s} =\n     (SKOLEM x) INSERT {SKOLEM p | p IN s}
-      #|  (@p. p IN s /\\ (x = SKOLEM p)) INSERT t0
-      #|  t0:form->bool
-      #|  EMPTY:form->bool
-      #|  forall s u. FINITE(u)\n        ==> u SUBSET { SKOLEM p | p IN s}\n            ==> ?t. FINITE(t) /\\ t SUBSET s /\\\n                    (u = {SKOLEM p | p IN t})
-      #|  \\x:num. a:A
-      #|  a:A
-      #|  forall M. ~(Dom(M) = EMPTY) ==> ?v:num->A. valuation(M) v
+      #|  (\226\136\128 x : Num, (terms : (((Num, Num)) -> Bool, Term) -> Bool)((fns : ((Num, Num)) -> Bool), V(x))) && (\226\136\128 f : Num, \226\136\128 l : List[Term], IN((f, LENGTH(l)), fns) && ALL(terms(fns), l) \226\134\146 terms(fns, Fn(f, l)))
+      #|  SUBSET((a : (_) -> Bool), (s : (_) -> Bool)) && SUBSET((b : (_) -> Bool), s) \226\134\146 SUBSET(UNION(a, b), s)
+      #|  IN((a : _), (s : (_) -> Bool)) && SUBSET((b : (_) -> Bool), s) \226\134\146 SUBSET(INSERT(a, b), s)
+      #|  \226\136\128 l : List[(_) -> Bool], ALL((x : (_) -> Bool) => SUBSET(x, (s : (_) -> Bool)), l) \226\134\146 SUBSET(LIST_UNION(l), s)
+      #|  \226\136\128 t : Term, IN(t, terms(FST((L : (((Num, Num)) -> Bool, _))))) \226\134\146 SUBSET(functions_term(t), FST(L))
+      #|  SUBSET(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == (IN(a, t) && SUBSET(s, t))
+      #|  IN((x : Form), {formsubst((v : (Num) -> Term), (p : Form)) | (P : ((Num) -> Term) -> Bool)(v) && IN(p, (s : (Form) -> Bool))})
+      #|  SUBSET((s' : (Form) -> Bool), {formsubst((v : (Num) -> Term), (p : Form)) | (P : ((Num) -> Term) -> Bool)(v) && IN(p, (t0 : (Form) -> Bool))})
+      #|  (q : Form)
+      #|  select((p : Form) => \226\136\131 v : (Num) -> Term, ((P : ((Num) -> Term) -> Bool)(v) && IN(p, (s : (Form) -> Bool))) && (x : Form) == formsubst(v, p))
+      #|  (v : (Num) -> Term)
+      #|  INSERT(select((p : Form) => \226\136\131 v : (Num) -> Term, ((P : ((Num) -> Term) -> Bool)(v) && IN(p, (s : (Form) -> Bool))) && (x : Form) == formsubst(v, p)), (t0 : (Form) -> Bool))
+      #|  (t0 : (Form) -> Bool)
+      #|  ({} : (Form) -> Bool)
+      #|  \226\136\128 t' : (Form) -> Bool, FINITE(t') \226\134\146 SUBSET(t', {formsubst((v : (Num) -> Term), (p : Form)) | (P : ((Num) -> Term) -> Bool)(v) && IN(p, (s : (Form) -> Bool))}) \226\134\146 (\226\136\131 t : (Form) -> Bool, FINITE(t) && SUBSET(t, s) && SUBSET(t', {formsubst((v : (Num) -> Term), (p : Form)) | P(v) && IN(p, t)}))
+      #|  SUBSET(INSERT((a : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == (IN(a, t) && SUBSET(s, t))
+      #|  {SKOLEM((p : Form)) | IN(p, INSERT((x : Form), (s : (Form) -> Bool)))} == INSERT(SKOLEM(x), {SKOLEM((p : Form)) | IN(p, s)})
+      #|  INSERT(select((p : Form) => IN(p, (s : (Form) -> Bool)) && (x : Form) == SKOLEM(p)), (t0 : (Form) -> Bool))
+      #|  (t0 : (Form) -> Bool)
+      #|  ({} : (Form) -> Bool)
+      #|  \226\136\128 s : (Form) -> Bool, \226\136\128 u : (Form) -> Bool, FINITE(u) \226\134\146 SUBSET(u, {SKOLEM((p : Form)) | IN(p, s)}) \226\134\146 (\226\136\131 t : (Form) -> Bool, FINITE(t) && SUBSET(t, s) && u == {SKOLEM((p : Form)) | IN(p, t)})
+      #|  (x : Num) => (a : A)
+      #|  (a : A)
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) \226\134\146 (\226\136\131 v : (Num) -> A, valuation(M, v))
       #|  CONS (a:A) as
       #|  as:A list
-      #|  a:A
+      #|  (a : A)
       #|  forall M xs v. holds M v (ITLIST ?? xs p) <=>\n            ?as. (LENGTH as = LENGTH xs) /\\\n                 ALL (Dom M) as /\\\n                 holds M\n                   (ITLIST valmod (REVERSE (MAP2 (\\x a:A. (x,a)) xs as)) v)\n                   p
-      #|  canonical (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = terms (FST L)) /\\\n       (forall f. Fun(M) f = Fn f)
-      #|  prop_of_model M v (Atom p l) <=> holds M v (Atom p l)
-      #|  canon_of_prop (L:((num#num)->bool)#((num#num)->bool)) (d:form->bool) =\n   terms(FST L),Fn,\\p l. d(Atom p l)
-      #|  forall p. qfree(p) ==> (pholds (prop_of_model M v) p <=> holds M v p)
-      #|  t:term
-      #|  h:term
-      #|  l:term list
-      #|  l:term list
-      #|  forall p l. prop_of_model (canon_of_prop L d) V (Atom p l) = d (Atom p l)
-      #|  p:form
-      #|  p:form
-      #|  forall p. qfree p ==> (holds (canon_of_prop L d) V p <=> pholds d p)
-      #|  p:form
-      #|  p:form
-      #|  qfree p ==> (holds (canon_of_prop L d) v p <=> pholds d (formsubst v p))
-      #|  forall d. canonical L (canon_of_prop L d)
-      #|  forall L d. interpretation L (canon_of_prop L d)
-      #|  forall p. qfree(p) /\\ (forall d. pholds d p) ==> forall M v. holds M v p
-      #|  forall p. qfree(p) /\\\n       (forall C (v:num->term). canonical(language {p}) C ==> holds C v p)\n       ==> forall d. pholds d p
-      #|  (forall p. p IN s ==> qfree p) /\\ M satisfies s /\\ valuation(M) v\n   ==> (prop_of_model M v) psatisfies s
-      #|  t:term
-      #|  (v:num->term) x
-      #|  holds (canon_of_prop L d) V (formsubst v p) <=>\n                holds (canon_of_prop L d) (termval (canon_of_prop L d) V o v)\n                      p
-      #|  holds (canon_of_prop L d) V (formsubst v p)
-      #|  p:form
-      #|  v:num->term
-      #|  formsubst v p
-      #|  (forall p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (forall x. v x IN terms(FST L)) /\\ p IN s}\n   ==> (canon_of_prop L d) satisfies s
-      #|  functions t = FST(language t)
-      #|  interpretation (language t)\n                (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  predicates t
-      #|  forall M:(A->bool)#(num->A list->A)#(num->A list->bool) s t.\n        interpretation(language t) M\n        ==> (M satisfies\n             {formsubst i p | p IN s /\\\n                              (forall x. i x IN terms(FST(language t)))} <=>\n             M satisfies s)
-      #|  canon_of_prop (language ss) d
-      #|  d:form->bool
-      #|  prop_of_model M (v:num->A)
-      #|  forall p. p IN t ==> qfree p
-      #|  t:form->bool
-      #|  ss:form->bool
-      #|  t:form->bool
-      #|  {formsubst v p |\n                          (forall x. v x IN terms (FST (language ss))) /\\\n                          p IN t}
-      #|  (a ==> b ==> c) <=> a /\\ b ==> c
-      #|  ?t. FINITE(t) /\\ t SUBSET s /\\\n          u SUBSET {formsubst v p |\n                              (forall x. v x IN terms (FST (language ss))) /\\\n                                    p IN t}
-      #|  u:form->bool
-      #|  psatisfiable {formsubst v p | (forall x. v x IN terms(FST(language ss))) /\\\n                                  p IN s}
-      #|  (forall p. p IN s ==> qfree p) /\\\n   (forall t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language ss) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language ss) C /\\\n           canonical (language ss) C /\\\n           C satisfies s
-      #|  forall M s t. t SUBSET s /\\ interpretation(language s) M\n         ==> interpretation(language t) M
-      #|  v:num->A
-      #|  v:num->A
-      #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-      #|  Dom(M):A->bool,\n              (\\g zs. if (g,LENGTH zs) IN functions t then Fun(M) g zs\n                      else @a. a IN Dom(M)),\n              Pred(M)
-      #|  forall M s t.\n        interpretation (language t) M /\\\n        ~(Dom M :A->bool = EMPTY) /\\\n        M satisfies t\n        ==> ?M'. (Dom M' = Dom M) /\\\n                 (Pred M' = Pred M) /\\\n                 interpretation(language s) M' /\\\n                 M' satisfies t
-      #|  (forall y. p y ==> p' y)\n     ==> (?x. p x) ==> (?x. p' x)
-      #|  a /\\ b /\\ c <=> b /\\ a /\\ c
-      #|  ss:form->bool
-      #|  {SKOLEM p | p IN s}
-      #|  s:form->bool
-      #|  {SKOLEM p | p IN s}
-      #|  M1:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  M1:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  {SKOLEM p | p IN t}
-      #|  {SKOLEM p | p IN s}
-      #|  M0:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  M0:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  s:form->bool
-      #|  M:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  (?M. ~(Dom M:A->bool = EMPTY) /\\\n           interpretation(language t) M /\\\n           M satisfies t)
-      #|  M:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  t:form->bool
-      #|  u:form->bool
-      #|  s:form->bool
-      #|  ?t. (u = {SKOLEM p | p IN t}) /\\\n                      FINITE t /\\ t SUBSET s
-      #|  forall u. FINITE u /\\ u SUBSET {SKOLEM p | p IN s}\n        ==> ?M. interpretation(language {SKOLEM p | p IN s}) M /\\\n                ~(Dom(M):A->bool = EMPTY) /\\\n                M satisfies u
-      #|  (forall t. FINITE t /\\ t SUBSET s ==> ?M. interpretation(language s) M /\\\n                                       ~(Dom(M):A->bool = EMPTY) /\\\n                                       M satisfies t)\n   ==> ?C. interpretation (language s) C /\\\n           ~(Dom(C):term->bool = EMPTY) /\\\n           C satisfies s
-      #|  forall M:(A->bool)#(num->A list->A)#(num->A list->bool) s.\n        interpretation (language s) M /\\\n        ~(Dom(M) = EMPTY) /\\\n        (forall p. p IN s ==> qfree p) /\\ M satisfies s\n        ==> ?C. interpretation (language s) C /\\\n                ~(Dom C :term->bool = EMPTY) /\\\n                C satisfies s
-      #|  term_of_num n = (@t. num_of_term t = n)
-      #|  term_of_num(num_of_term t) = t
-      #|  LOWMOD M = {num_of_term t | t IN Dom(M)},\n              (\\g zs. num_of_term (Fun(M) g (MAP term_of_num zs))),\n              (\\p zs. Pred(M) p (MAP term_of_num zs))
-      #|  (Dom(LOWMOD M) = EMPTY) <=> (Dom(M) = EMPTY)
-      #|  forall v. valuation (LOWMOD M) v\n       ==> forall t. termval (LOWMOD M) v t =\n               num_of_term (termval M (term_of_num o v) t)
-      #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-      #|  forall P. (forall a. a IN {num_of_term t | t IN Dom(M)} ==> P(a)) <=>\n                      (forall a. a IN Dom(M) ==> P(num_of_term a))
-      #|  forall a. a IN {num_of_term t | t IN Dom M}\n                      ==> valuation (LOWMOD M) (valmod (a0:num,a) v)
-      #|  forall p v. valuation (LOWMOD M) v\n         ==> (holds (LOWMOD M) v p <=> holds M (term_of_num o v) p)
-      #|  CONS (term_of_num h) (MAP term_of_num t)
-      #|  [] :term list
-      #|  CONS (num_of_term h) (MAP num_of_term t)
-      #|  [] :num list
-      #|  forall P x. num_of_term x IN {num_of_term y | P y} <=> x IN P
-      #|  forall L M. interpretation L (LOWMOD M) = interpretation L M
-      #|  LOWMOD C
-      #|  forall M:(A->bool)#(num->A list->A)#(num->A list->bool) s.\n        interpretation (language s) M /\\\n        ~(Dom(M) = EMPTY) /\\\n        (forall p. p IN s ==> qfree p) /\\ M satisfies s\n        ==> ?N. interpretation (language s) N /\\\n                ~(Dom N :num->bool = EMPTY) /\\\n                N satisfies s
-      #|  forall q. q IN {(Not p)} ==> qfree q
-      #|  xs:num list
-      #|  xs:num list
+      #|  (canonical : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) -> Bool)((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))) == (Dom(M) == terms(FST(L)) && (\226\136\128 f : Num, Fun(M, f) == Fn(f)))
+      #|  (prop_of_model : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Num) -> _, Form) -> Bool)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), Atom((p : Num), (l : List[Term]))) == holds(M, v, Atom(p, l))
+      #|  (canon_of_prop : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), (Form) -> Bool) -> ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)) == (terms(FST(L)), Fn, (p : Num) => (l : List[Term]) => d(Atom(p, l)))
+      #|  \226\136\128 p : Form, qfree(p) \226\134\146 pholds(prop_of_model((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _)), p) == holds(M, v, p)
+      #|  (t : Term)
+      #|  (h : Term)
+      #|  (l : List[Term])
+      #|  (l : List[Term])
+      #|  \226\136\128 p : Num, \226\136\128 l : List[Term], prop_of_model(canon_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, Atom(p, l)) == d(Atom(p, l))
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  \226\136\128 p : Form, qfree(p) \226\134\146 holds(canon_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, p) == pholds(d, p)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  qfree((p : Form)) \226\134\146 holds(canon_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), (v : (Num) -> Term), p) == pholds(d, formsubst(v, p))
+      #|  \226\136\128 d : (Form) -> Bool, canonical((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), canon_of_prop(L, d))
+      #|  \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), \226\136\128 d : (Form) -> Bool, interpretation(L, canon_of_prop(L, d))
+      #|  \226\136\128 p : Form, qfree(p) && (\226\136\128 d : (Form) -> Bool, pholds(d, p)) \226\134\146 (\226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, holds(M, v, p))
+      #|  \226\136\128 p : Form, qfree(p) && (\226\136\128 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), \226\136\128 v : (Num) -> Term, canonical(language({p}), C) \226\134\146 holds(C, v, p)) \226\134\146 (\226\136\128 d : (Form) -> Bool, pholds(d, p))
+      #|  (\226\136\128 p : Form, IN(p, (s : (Form) -> Bool)) \226\134\146 qfree(p)) && satisfies((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), s) && valuation(M, (v : (Num) -> _)) \226\134\146 psatisfies(prop_of_model(M, v), s)
+      #|  (t : Term)
+      #|  (v : (Num) -> Term)((x : Num))
+      #|  holds(canon_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, formsubst((v : (Num) -> Term), (p : Form))) == holds(canon_of_prop(L, d), o(termval(canon_of_prop(L, d), V), v), p)
+      #|  holds(canon_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, formsubst((v : (Num) -> Term), (p : Form)))
+      #|  (p : Form)
+      #|  (v : (Num) -> Term)
+      #|  formsubst((v : (Num) -> Term), (p : Form))
+      #|  (\226\136\128 p : Form, IN(p, (s : (Form) -> Bool)) \226\134\146 qfree(p)) && psatisfies((d : (Form) -> Bool), {formsubst((v : (Num) -> Term), (p : Form)) | (\226\136\128 x : Num, IN(v(x), terms(FST((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)))))) && IN(p, s)}) \226\134\146 satisfies(canon_of_prop(L, d), s)
+      #|  functions((t : (Form) -> Bool)) == FST(language(t))
+      #|  interpretation(language((t : (Form) -> Bool)), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  predicates((t : (Form) -> Bool))
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 s : (Form) -> Bool, \226\136\128 t : (Form) -> Bool, interpretation(language(t), M) \226\134\146 satisfies(M, {formsubst((i : (Num) -> Term), (p : Form)) | IN(p, s) && (\226\136\128 x : Num, IN(i(x), terms(FST(language(t)))))}) == satisfies(M, s)
+      #|  canon_of_prop(language((ss : (Form) -> Bool)), (d : (Form) -> Bool))
+      #|  (d : (Form) -> Bool)
+      #|  prop_of_model((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A))
+      #|  \226\136\128 p : Form, IN(p, (t : (Form) -> Bool)) \226\134\146 qfree(p)
+      #|  (t : (Form) -> Bool)
+      #|  (ss : (Form) -> Bool)
+      #|  (t : (Form) -> Bool)
+      #|  {formsubst((v : (Num) -> Term), (p : Form)) | (\226\136\128 x : Num, IN(v(x), terms(FST(language((ss : (Form) -> Bool)))))) && IN(p, (t : (Form) -> Bool))}
+      #|  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (a && b \226\134\146 c)
+      #|  \226\136\131 t : (Form) -> Bool, FINITE(t) && SUBSET(t, (s : (Form) -> Bool)) && SUBSET((u : (Form) -> Bool), {formsubst((v : (Num) -> Term), (p : Form)) | (\226\136\128 x : Num, IN(v(x), terms(FST(language((ss : (Form) -> Bool)))))) && IN(p, t)})
+      #|  (u : (Form) -> Bool)
+      #|  psatisfiable({formsubst((v : (Num) -> Term), (p : Form)) | (\226\136\128 x : Num, IN(v(x), terms(FST(language((ss : (Form) -> Bool)))))) && IN(p, (s : (Form) -> Bool))})
+      #|  (\226\136\128 p : Form, IN(p, (s : (Form) -> Bool)) \226\134\146 qfree(p)) && (\226\136\128 t : (Form) -> Bool, FINITE(t) && SUBSET(t, s) \226\134\146 (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language((ss : (Form) -> Bool)), M) && !(Dom(M) == {}) && satisfies(M, t))) \226\134\146 (\226\136\131 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(ss), C) && canonical(language(ss), C) && satisfies(C, s))
+      #|  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 s : (Form) -> Bool, \226\136\128 t : (Form) -> Bool, SUBSET(t, s) && interpretation(language(s), M) \226\134\146 interpretation(language(t), M)
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  (Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (g : Num) => (zs : List[A]) => if IN((g, LENGTH(zs)), functions((t : (Form) -> Bool))) { Fun(M, g, zs) } else { select((a : A) => IN(a, Dom(M))) }, Pred(M))
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 s : (Form) -> Bool, \226\136\128 t : (Form) -> Bool, interpretation(language(t), M) && !(Dom(M) == {}) && satisfies(M, t) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Dom(M') == Dom(M) && Pred(M') == Pred(M) && interpretation(language(s), M') && satisfies(M', t))
+      #|  (\226\136\128 y : _, (p : (_) -> Bool)(y) \226\134\146 (p' : (_) -> Bool)(y)) \226\134\146 (\226\136\131 x : _, p(x)) \226\134\146 (\226\136\131 x : _, p'(x))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
+      #|  (ss : (Form) -> Bool)
+      #|  {SKOLEM((p : Form)) | IN(p, (s : (Form) -> Bool))}
+      #|  (s : (Form) -> Bool)
+      #|  {SKOLEM((p : Form)) | IN(p, (s : (Form) -> Bool))}
+      #|  (M1 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  (M1 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  {SKOLEM((p : Form)) | IN(p, (t : (Form) -> Bool))}
+      #|  {SKOLEM((p : Form)) | IN(p, (s : (Form) -> Bool))}
+      #|  (M0 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  (M0 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  (s : (Form) -> Bool)
+      #|  (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  \226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && interpretation(language((t : (Form) -> Bool)), M) && satisfies(M, t)
+      #|  (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  (t : (Form) -> Bool)
+      #|  (u : (Form) -> Bool)
+      #|  (s : (Form) -> Bool)
+      #|  \226\136\131 t : (Form) -> Bool, (u : (Form) -> Bool) == {SKOLEM((p : Form)) | IN(p, t)} && FINITE(t) && SUBSET(t, (s : (Form) -> Bool))
+      #|  \226\136\128 u : (Form) -> Bool, FINITE(u) && SUBSET(u, {SKOLEM((p : Form)) | IN(p, (s : (Form) -> Bool))}) \226\134\146 (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({SKOLEM((p : Form)) | IN(p, s)}), M) && !(Dom(M) == {}) && satisfies(M, u))
+      #|  (\226\136\128 t : (Form) -> Bool, FINITE(t) && SUBSET(t, (s : (Form) -> Bool)) \226\134\146 (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language(s), M) && !(Dom(M) == {}) && satisfies(M, t))) \226\134\146 (\226\136\131 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(s), C) && !(Dom(C) == {}) && satisfies(C, s))
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 s : (Form) -> Bool, interpretation(language(s), M) && !(Dom(M) == {}) && (\226\136\128 p : Form, IN(p, s) \226\134\146 qfree(p)) && satisfies(M, s) \226\134\146 (\226\136\131 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(s), C) && !(Dom(C) == {}) && satisfies(C, s))
+      #|  (term_of_num : (Num) -> Term)((n : Num)) == select((t : Term) => num_of_term(t) == n)
+      #|  term_of_num(num_of_term((t : Term))) == t
+      #|  (LOWMOD : (((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) -> ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool))((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))) == ({num_of_term((t : Term)) | IN(t, Dom(M))}, (g : Num) => (zs : List[Num]) => num_of_term(Fun(M, g, MAP(term_of_num, zs))), (p : Num) => (zs : List[Num]) => Pred(M, p, MAP(term_of_num, zs)))
+      #|  (Dom(LOWMOD((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)))) == {}) == (Dom(M) == {})
+      #|  \226\136\128 v : (Num) -> Num, valuation(LOWMOD((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))), v) \226\134\146 (\226\136\128 t : Term, termval(LOWMOD(M), v, t) == num_of_term(termval(M, o(term_of_num, v), t)))
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 a : Num, IN(a, {num_of_term((t : Term)) | IN(t, Dom((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))))}) \226\134\146 P(a)) == (\226\136\128 a : Term, IN(a, Dom(M)) \226\134\146 P(num_of_term(a)))
+      #|  \226\136\128 a : Num, IN(a, {num_of_term((t : Term)) | IN(t, Dom((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))))}) \226\134\146 valuation(LOWMOD(M), valmod(((a0 : Num), a), (v : (Num) -> Num)))
+      #|  \226\136\128 p : Form, \226\136\128 v : (Num) -> Num, valuation(LOWMOD((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))), v) \226\134\146 holds(LOWMOD(M), v, p) == holds(M, o(term_of_num, v), p)
+      #|  CONS(term_of_num((h : Num)), MAP(term_of_num, (t : List[Num])))
+      #|  (NIL : List[Term])
+      #|  CONS(num_of_term((h : Term)), MAP(num_of_term, (t : List[Term])))
+      #|  (NIL : List[Num])
+      #|  \226\136\128 P : (Term) -> Bool, \226\136\128 x : Term, IN(num_of_term(x), {num_of_term((y : Term)) | P(y)}) == IN(x, P)
+      #|  \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), \226\136\128 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(L, LOWMOD(M)) == interpretation(L, M)
+      #|  LOWMOD((C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)))
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 s : (Form) -> Bool, interpretation(language(s), M) && !(Dom(M) == {}) && (\226\136\128 p : Form, IN(p, s) \226\134\146 qfree(p)) && satisfies(M, s) \226\134\146 (\226\136\131 N : ((Num) -> Bool, (Num, List[Num]) -> Num, (Num, List[Num]) -> Bool), interpretation(language(s), N) && !(Dom(N) == {}) && satisfies(N, s))
+      #|  \226\136\128 q : Form, IN(q, {Not((p : Form))}) \226\134\146 qfree(q)
+      #|  (xs : List[Num])
+      #|  (xs : List[Num])
       #|  as:term list
       #|  as:term list
       #|  LENGTH (as:term list) = LENGTH (xs:num list)
       #|  ALL (Dom (canon_of_prop (language {p}) d)) as
-      #|  v:num->term
-      #|  v:num->term
-      #|  valuation (canon_of_prop (language {p}) d) (v:num->term)
-      #|  ~(a /\\ b /\\ c) <=> a /\\ b ==> ~c
-      #|  V 0
-      #|  v:num->term
-      #|  ?v:num->term. valuation (canon_of_prop (language {p}) d) v
-      #|  canon_of_prop (language {p}) d
-      #|  ~((canon_of_prop (language {p}) d) satisfies {(Not p)})
-      #|  d:form->bool
-      #|  r:form
-      #|  ps:form list
-      #|  ps:form list
-      #|  ps:form list
-      #|  d:form->bool
-      #|  d:form->bool
-      #|  ps:form list
-      #|  ps:form list
-      #|  ps:form list
-      #|  MAP (\\q. @i. (forall x. i x IN terms (FST (language {p}))) /\\\n                             (q = formsubst i p)) ps
-      #|  ps:form list
-      #|  {formsubst i q | q IN {p} /\\\n                                (forall x. i x IN terms(FST(language {p})))}
+      #|  (v : (Num) -> Term)
+      #|  (v : (Num) -> Term)
+      #|  valuation(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool)), (v : (Num) -> Term))
+      #|  !((a : Bool) && (b : Bool) && (c : Bool)) == (a && b \226\134\146 !c)
+      #|  V(0)
+      #|  (v : (Num) -> Term)
+      #|  \226\136\131 v : (Num) -> Term, valuation(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool)), v)
+      #|  canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool))
+      #|  !satisfies(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool)), {Not(p)})
+      #|  (d : (Form) -> Bool)
+      #|  (r : Form)
+      #|  (ps : List[Form])
+      #|  (ps : List[Form])
+      #|  (ps : List[Form])
+      #|  (d : (Form) -> Bool)
+      #|  (d : (Form) -> Bool)
+      #|  (ps : List[Form])
+      #|  (ps : List[Form])
+      #|  (ps : List[Form])
+      #|  MAP((q : Form) => select((i : (Num) -> Term) => (\226\136\128 x : Num, IN(i(x), terms(FST(language({(p : Form)}))))) && q == formsubst(i, p)), (ps : List[Form]))
+      #|  (ps : List[Form])
+      #|  {formsubst((i : (Num) -> Term), (q : Form)) | IN(q, {(p : Form)}) && (\226\136\128 x : Num, IN(i(x), terms(FST(language({p})))))}
       #|  qfree p /\\ (forall C v. ~(Dom C = EMPTY) /\\\n                     valuation(C) v ==> holds C (v:num->term) (ITLIST ?? xs p))\n   ==> ?is. (forall i x. MEM i is ==> terms(FST(language {p})) (i x)) /\\\n            forall d. pholds(d) (ITLIST (||) (MAP (\\i. formsubst i p) is) False)
       #|terms_RULES =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) (#V:fun(num,term) x:num))))) (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term)))) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))))
       #|terms_INDUCT =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#forall:fun(fun(fun(term,bool),bool),bool) (\terms':fun(term,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. (terms':fun(term,bool) (#V:fun(num,term) x:num))))) (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) terms':fun(term,bool)) l:list(term)))) (terms':fun(term,bool) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))) (#forall:fun(fun(term,bool),bool) (\a:term. ((#==>:fun(bool,fun(bool,bool)) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) (terms':fun(term,bool) a:term)))))))))
