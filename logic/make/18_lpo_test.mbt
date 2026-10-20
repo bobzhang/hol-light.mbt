@@ -10920,302 +10920,302 @@ test "Logic/lpo matches Logic/lpo.ml" {
       #|0..0..0..solved at 3
       #|0..0..1..8..17..33..68..116..189..solved at 216
       #|Logic/lpo quotations (296):
-      #|  forall l. 0 < ITLIST (+) l 1
-      #|  forall f a args. MEM a args /\\ (FVT(Fn f args) = {}) ==> (FVT a = {})
-      #|  NONWF(R) a <=> ?s:num->A. (s 0 = a) /\\ (forall n. R (s(SUC n)) (s n))
-      #|  WF(R) <=> forall a. ~(NONWF(R) a)
-      #|  ~(n = 0) ==> (SUC n - 1 = SUC(n - 1))
-      #|  \\n. if n = 0 then a:A else s(n - 1)
-      #|  s:num->A
-      #|  forall R a:A b. NONWF(R) b /\\ R b a ==> NONWF(R) a
-      #|  s:num->A
+      #|  \226\136\128 l : List[Num], 0 < ITLIST(op_plus, l, 1)
+      #|  \226\136\128 f : Num, \226\136\128 a : Term, \226\136\128 args : List[Term], MEM(a, args) && FVT(Fn(f, args)) == {} \226\134\146 FVT(a) == {}
+      #|  (NONWF : ((A, A) -> Bool, A) -> Bool)((R : (A, A) -> Bool), (a : A)) == (\226\136\131 s : (Num) -> A, s(0) == a && (\226\136\128 n : Num, R(s(SUC(n)), s(n))))
+      #|  WF((R : (_, _) -> Bool)) == (\226\136\128 a : _, !NONWF(R, a))
+      #|  !((n : Num) == 0) \226\134\146 SUC(n) - 1 == SUC(n - 1)
+      #|  (n : Num) => if n == 0 { (a : A) } else { (s : (Num) -> A)(n - 1) }
+      #|  (s : (Num) -> A)
+      #|  \226\136\128 R : (A, A) -> Bool, \226\136\128 a : A, \226\136\128 b : A, NONWF(R, b) && R(b, a) \226\134\146 NONWF(R, a)
+      #|  (s : (Num) -> A)
       #|  0
-      #|  s:num->A
-      #|  WF(\\x:A y. R x y /\\ ~(NONWF(R) y))
-      #|  (forall a. ~(NONWF(R) a) /\\ (forall b. R b a ==> P(b)) ==> P(a))\n   ==> forall x. ~(NONWF(R) x) ==> P(x)
+      #|  (s : (Num) -> A)
+      #|  WF((x : A) => (y : A) => (R : (A, A) -> Bool)(x, y) && !NONWF(R, y))
+      #|  (\226\136\128 a : _, !NONWF((R : (_, _) -> Bool), a) && (\226\136\128 b : _, R(b, a) \226\134\146 (P : (_) -> Bool)(b)) \226\134\146 P(a)) \226\134\146 (\226\136\128 x : _, !NONWF(R, x) \226\134\146 P(x))
       #|  1
-      #|  \\n. s(SUC n):A
-      #|  (s:num->A) 1
-      #|  (m:A->num) (s 1)
-      #|  s:num->A
-      #|  (b ==> c) /\\ a ==> (a <=> b) ==> c
-      #|  \\n. ?c. NONWF(R) c /\\ R c a /\\ ((m:A->num)(c) = n)
-      #|  forall m:A->num a.\n        NONWF(R) a\n        ==> ?b. NONWF(R) b /\\ R b a /\\\n                (forall c. NONWF(R) c /\\ R c a ==> m(b) <= m(c))
-      #|  SUC n
+      #|  (n : Num) => (s : (Num) -> A)(SUC(n))
+      #|  (s : (Num) -> A)(1)
+      #|  (m : (A) -> Num)((s : (Num) -> A)(1))
+      #|  (s : (Num) -> A)
+      #|  ((b : Bool) \226\134\146 (c : Bool)) && (a : Bool) \226\134\146 a == b \226\134\146 c
+      #|  (n : Num) => \226\136\131 c : A, NONWF((R : (A, A) -> Bool), c) && R(c, (a : A)) && (m : (A) -> Num)(c) == n
+      #|  \226\136\128 m : (A) -> Num, \226\136\128 a : A, NONWF((R : (A, A) -> Bool), a) \226\134\146 (\226\136\131 b : A, NONWF(R, b) && R(b, a) && (\226\136\128 c : A, NONWF(R, c) && R(c, a) \226\134\146 m(b) <= m(c)))
+      #|  SUC((n : Num))
       #|  0
-      #|  (forall n. NONWF R (t(SUC n):A))
-      #|  forall d. b /\\ d /\\ a /\\ c ==> a /\\ b /\\ c
-      #|  t:num->A
-      #|  \\b (n:num). @c. NONWF(R) c /\\ R c b /\\\n                            forall d. NONWF(R) d /\\ R d b ==> (m:A->num)(c) <= m(d)
-      #|  a:A
-      #|  forall s. NONWF R s ==> (m:A->num)(a) <= m(s)
-      #|  a:A
-      #|  n_0:num
-      #|  a /\\ (b ==> c) ==> (a <=> b) ==> c
-      #|  \\n. ?s. NONWF(R) s /\\ ((m:A->num)(s) = n)
-      #|  forall m:A->num.\n     WF(R) <=> ~(?t. (forall n. R (t(SUC n)) (t n)) /\\\n                     (forall s. NONWF(R) s ==> m(t 0) <= m(s)) /\\\n                     (forall n s. NONWF(R) s /\\ R s (t n) ==> m(t(SUC n)) <= m(s)))
-      #|  s:num->num
-      #|  \\m:num p:num. st(m):num
-      #|  st(0):num
-      #|  st:num->num
-      #|  forall P (x:num->A).\n        (forall n. ?m. n < m /\\ P(x m)) ==> ?f. subseq f /\\ forall n. P(x(f n))
-      #|  \\x:A. x = a
-      #|  a:A
-      #|  (m + n < p:num ==> m < p /\\ n < p)
-      #|  (~a /\\ c ==> b) ==> (a ==> b) ==> (c ==> b)
-      #|  s:A->bool
-      #|  b:A
-      #|  forall s. FINITE s\n          ==> (?n:num. forall m. n < m ==> (x(m) IN s))\n              ==> ?a:A. forall n. ?m. n < m /\\ (x m = a)
-      #|  ?a:A. forall n. ?m:num. n < m /\\ (x m = a)
-      #|  forall x:num->A s. FINITE(s) /\\ (forall n. x(n) IN s)\n                ==> ?a f. subseq f /\\ (forall n. x(f n) = a)
-      #|  \\(t:term) (ts:term list) (n:num) (ns:num list). CONS n ns
-      #|  []:num list
-      #|  \\(f:num) (args:term list) (ns:num list). ITLIST (+) ns 1
-      #|  \\x:num. 1
-      #|  ?termsize.\n     (forall x. termsize(V x) = 1) /\\\n     (forall f args. termsize(Fn f args) = ITLIST (+) (MAP termsize args) 1)
-      #|  (LEX(<<) [] l <=> F) /\\\n   (LEX(<<) (CONS h t) l <=>\n        if l = [] then F\n        else if h << HD l then LENGTH t = LENGTH(TL l)\n        else (h = HD l) /\\ LEX(<<) t (TL l))
-      #|  (LEX(<<) [] l <=> F) /\\\n   (LEX(<<) (CONS h1 t1) [] <=> F) /\\\n   (LEX(<<) (CONS h1 t1) (CONS h2 t2) <=>\n        if h1 << h2 then LENGTH t1 = LENGTH t2\n        else (h1 = h2) /\\ LEX(<<) t1 t2)
-      #|  forall l1 l2 R. LEX(R) l1 l2 ==> (LENGTH l1 = LENGTH l2)
-      #|  x:A list
-      #|  x:A list
-      #|  y:A list
-      #|  y:A list
-      #|  (forall x:A y:A. R x y ==> S x y) ==> LEX R x y ==> LEX S x y
-      #|  forall l1 l2. LEX (\\x y. R (f x) (f y)) l1 l2 ==> LEX R (MAP f l1) (MAP f l2)
-      #|  forall R l. (forall x. MEM x l ==> ~(R x x)) ==> ~(LEX(R) l l)
-      #|  forall lis R. (forall n. LEX(R) (lis(SUC n)) (lis n))\n           ==> forall n. LENGTH(lis(n)) = LENGTH(lis(0))
-      #|  SUC(p + m)
-      #|  m:num
-      #|  \\n. tl(SUC p + n):A list
-      #|  \\n. hd(SUC p + n):A
-      #|  forall n. n <= p ==> (hd n :A = h)
-      #|  (hd:num->A) (SUC p)
-      #|  p:num
-      #|  ?m. R (hd(SUC m):A) (hd m)
-      #|  hd:num->A
-      #|  h:A
-      #|  h:A
-      #|  h:A
-      #|  hd:num->A
-      #|  hd:num->A
-      #|  ~(NONWF(R) (h:A))
-      #|  h:A = hd 0
-      #|  tl:num->(A)list
-      #|  tl:num->(A)list
-      #|  forall m. LENGTH ((tl:num->(A)list) m) = n
-      #|  forall n:num a:A. MEM a (tl n) ==> ~NONWF R a
-      #|  (if p then T else r) <=> p \\/ ~p /\\ r
-      #|  forall m:num. LENGTH (CONS (hd m :A) (tl m)) = SUC n
-      #|  forall n:num. LEX R (CONS (hd(SUC n):A) (tl(SUC n))) (CONS (hd n) (tl n))
-      #|  (a \\/ b ==> c) <=> (a ==> c) /\\ (b ==> c)
-      #|  forall n:num a:A. MEM a (CONS (hd n) (tl n)) ==> ~NONWF R a
-      #|  l:(A)list
-      #|  (lis:num->(A)list) m
-      #|  m:num
-      #|  forall n:num. ~(lis n :(A)list = [])
-      #|  \\n:num. TL(lis n):A list
-      #|  \\n:num. HD(lis n):A
-      #|  ?hd tl. forall n:num. CONS (hd n :A) (tl n) = lis(n)
-      #|  forall n. LENGTH (lis n :(A)list) = LENGTH (lis 0)
-      #|  forall n lis. (LENGTH(lis 0) = n)\n           ==> ~((forall n a:A. MEM a (lis n) ==> ~(NONWF(R) a)) /\\\n                 (forall n. LEX(R) (lis(SUC n)) (lis n)))
-      #|  hd 0 :A = h
-      #|  forall n:num. ~NONWF R (hd n :A)
-      #|  forall R lis. ~((forall n a:A. MEM a (lis n) ==> ~(NONWF(R) a)) /\\\n             (forall n. LEX(R) (lis(SUC n)) (lis n)))
-      #|  forall P R l1 l2. LEX R l1 l2 /\\\n               (forall a. MEM a l1 ==> P(a)) /\\ (forall a. MEM a l2 ==> P(a))\n               ==> LEX (\\x y. P(x) /\\ P(y) /\\ R x y) l1 l2
-      #|  (forall t. t subterm t) /\\\n   (forall s a f args. s subterm a /\\ MEM a args ==> s subterm (Fn f args))
-      #|  s psubterm t <=> s subterm t /\\ ~(s = t)
-      #|  a < c ==> a < b + c
-      #|  0 < b ==> a < a + b
-      #|  forall f args s. MEM s args ==> termsize s < termsize (Fn f args)
-      #|  forall f args. ~(MEM (Fn f args) args)
-      #|  forall t. t subterm t
-      #|  forall t u. t subterm u ==> forall s. s subterm t ==> s subterm u
-      #|  forall s t u. s subterm t /\\ t subterm u ==> s subterm u
-      #|  forall s t. s subterm t /\\ t subterm s ==> (s = t)
-      #|  forall x t. x IN FVT(t) ==> V(x) subterm t
-      #|  forall s t. ~(s psubterm t /\\ t psubterm s)
-      #|  forall s t u. s subterm t /\\ t psubterm u ==> s psubterm u
-      #|  a:term
-      #|  a:term
-      #|  args:term list
-      #|  f:num
-      #|  forall s t. s psubterm t <=>\n         ?f args u. (t = Fn f args) /\\ MEM u args /\\ s subterm u
-      #|  forall i s t. s subterm t ==> (termsubst i s) subterm (termsubst i t)
-      #|  termsubst i u
-      #|  MAP (termsubst i) args
-      #|  u:term
-      #|  args:term list
-      #|  f:num
-      #|  forall i s t. s psubterm t ==> (termsubst i s) psubterm (termsubst i t)
-      #|  (forall x s. x IN FVT(s) /\\ ~(s = V x) ==> V x << s) /\\\n   (forall fs sargs ft targs si.\n          MEM si sargs /\\ (Fn ft targs << si \\/ (si = Fn ft targs))\n          ==> Fn ft targs << Fn fs sargs) /\\\n   (forall fs ft sargs targs.\n          (fs > ft \\/ (fs = ft) /\\ LENGTH sargs > LENGTH targs) /\\\n          ALL (\\ti. ti << Fn fs sargs) targs\n          ==> Fn ft targs << Fn fs sargs) /\\\n   (forall f sargs targs.\n          ALL (\\ti. ti << Fn f sargs) targs /\\ LEX(<<) targs sargs\n          ==> Fn f targs << Fn f sargs)
-      #|  (a /\\ b) /\\ c <=> ~(a /\\ b ==> ~c)
-      #|  (forall s x. (s << V x) <=> F) /\\\n   (forall x t. V x << t <=> x IN FVT(t) /\\ ~(t = V x)) /\\\n   (forall f fargs g gargs.\n          Fn f fargs << Fn g gargs <=>\n                (?gi. MEM gi gargs /\\\n                      (Fn f fargs << gi \\/ (Fn f fargs = gi))) \\/\n                (forall fi. MEM fi fargs ==> fi << Fn g gargs) /\\\n                ((f < g \\/ (f = g) /\\ (LENGTH fargs < LENGTH gargs)) \\/\n                 (f = g) /\\ LEX(<<) fargs gargs))
-      #|  t:term
-      #|  Fn ft targs
-      #|  forall s t. s << t ==> FVT(s) SUBSET FVT(t)
-      #|  (a1 /\\ a2 ==> a3) /\\ (b1 ==> b2 ==> b3)\n                     ==> a1 /\\ b1 ==> a2 /\\ b2 ==> a3 /\\ b3
-      #|  ts:term list
-      #|  ss:term list
-      #|  rs:term list
-      #|  b:term
-      #|  c:term
-      #|  b:term
-      #|  a:term
-      #|  forall r s t. MEM r rs /\\ MEM s ss /\\ MEM t ts /\\\n            t << s /\\ s << r ==> t << r
-      #|  Fn g ss << Fn f rs
-      #|  Fn h ts << Fn g ss
-      #|  Fn g ss
-      #|  forall ti. MEM ti ts ==> ti << Fn f rs
-      #|  Fn h ts << Fn g ss
-      #|  forall ti. MEM ti ts ==> ti << Fn g ss
-      #|  si:term
-      #|  si:term
-      #|  ?si. MEM si ss /\\ (Fn h ts << si \\/ (Fn h ts = si))
-      #|  Fn g ss << Fn f rs
-      #|  forall si. MEM si ss ==> si << Fn f rs
-      #|  Fn g ss
-      #|  termsize ri + termsize(Fn g ss) + termsize (Fn h ts)
-      #|  ri:term
-      #|  ri:term
-      #|  ?ri. MEM ri rs /\\ (Fn g ss << ri \\/ (Fn g ss = ri))
-      #|  ss:term list
-      #|  g:num
-      #|  s:term
-      #|  rs:term list
-      #|  f:num
-      #|  r:term
-      #|  ts:term list
-      #|  h:num
-      #|  s << r
-      #|  V x << s
-      #|  x:num
-      #|  t:term
-      #|  n:num
-      #|  forall n r s t.\n        (termsize r + termsize s + termsize t = n) /\\ t << s /\\ s << r\n        ==> t << r
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize(Fn f rs) + termsize si + termsize (Fn h ts)
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize (Fn f rs) + termsize (Fn g ss) + termsize ti
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  termsize a + termsize b + termsize c
-      #|  forall s t u. s << t /\\ t << u ==> s << u
-      #|  V x
-      #|  FVT(V x)
-      #|  x:num
-      #|  forall f args a. MEM a args ==> a << Fn f args
-      #|  a:term
-      #|  forall s t. s subterm t ==> (s = t) \\/ s << t
-      #|  forall s t. s psubterm t ==> s << t
-      #|  forall i s t. s << t ==> termsubst i s << termsubst i t
-      #|  largs:term list
-      #|  largs:term list
-      #|  u:term
-      #|  APPEND largs (CONS (t:term) rargs)
-      #|  f:num
-      #|  t:term
-      #|  APPEND largs (CONS (t:term) rargs)
-      #|  f:num
-      #|  t:term
-      #|  u:term = s
-      #|  u:term
-      #|  forall s t. s << t\n         ==> Fn f (APPEND largs (CONS s rargs))\n              << Fn f (APPEND largs (CONS t rargs))
-      #|  forall t. ~(t << t)
-      #|  \\n:num. (args:num->term list)(k n)
-      #|  (\\s t.\n                     functions_term s SUBSET A /\\\n                     functions_term t SUBSET A /\\\n                     s << t)
-      #|  k(SUC n) + m
-      #|  forall n:num. t(SUC n) << t n
-      #|  k(SUC n) + m
-      #|  k(SUC n):num
-      #|  m:num
-      #|  \\r:num. if r = 0 then a:term else t(k(SUC n) + r)
-      #|  ~p ==> ~q /\\ ~r <=> q \\/ r ==> p
-      #|  MEM (a:term) (args((k:num->num) n))
-      #|  (a ==> b) ==> ~a \\/ b
-      #|  forall n a. ~(MEM a (args ((k:num->num) n)) /\\\n            (Fn f (args (k (SUC n))) << a \\/ (Fn f (args (k (SUC n))) = a)))
-      #|  n:num
-      #|  forall n:num. functions_term (t n) SUBSET A
-      #|  forall a n:num. MEM a (args n) ==> functions_term a SUBSET A
-      #|  k(SUC n):num
-      #|  (k:num->num) n
-      #|  n:num
-      #|  forall m n. m < n ==> t(n) << t(m)
-      #|  forall n d. t(n + d) << t(n) \\/ (t(n + d) = t(n))
-      #|  forall m n. m <= n ==> t(n) << t(m) \\/ (t(n) = t(m))
-      #|  k:num->num
-      #|  ar:num
-      #|  f:num
-      #|  n:num
-      #|  forall n:num. functions_term (t n) SUBSET A
-      #|  n:num
-      #|  A:num#num->bool
+      #|  \226\136\128 n : Num, NONWF((R : (A, A) -> Bool), (t : (Num) -> A)(SUC(n)))
+      #|  \226\136\128 d : Bool, (b : Bool) && d && (a : Bool) && (c : Bool) \226\134\146 a && b && c
+      #|  (t : (Num) -> A)
+      #|  (b : A) => (n : Num) => select((c : A) => NONWF((R : (A, A) -> Bool), c) && R(c, b) && (\226\136\128 d : A, NONWF(R, d) && R(d, b) \226\134\146 (m : (A) -> Num)(c) <= m(d)))
+      #|  (a : A)
+      #|  \226\136\128 s : A, NONWF((R : (A, A) -> Bool), s) \226\134\146 (m : (A) -> Num)((a : A)) <= m(s)
+      #|  (a : A)
+      #|  (n_0 : Num)
+      #|  (a : Bool) && ((b : Bool) \226\134\146 (c : Bool)) \226\134\146 a == b \226\134\146 c
+      #|  (n : Num) => \226\136\131 s : A, NONWF((R : (A, A) -> Bool), s) && (m : (A) -> Num)(s) == n
+      #|  \226\136\128 m : (A) -> Num, WF((R : (A, A) -> Bool)) == !(\226\136\131 t : (Num) -> A, (\226\136\128 n : Num, R(t(SUC(n)), t(n))) && (\226\136\128 s : A, NONWF(R, s) \226\134\146 m(t(0)) <= m(s)) && (\226\136\128 n : Num, \226\136\128 s : A, NONWF(R, s) && R(s, t(n)) \226\134\146 m(t(SUC(n))) <= m(s)))
+      #|  (s : (Num) -> Num)
+      #|  (m : Num) => (p : Num) => (st : (Num) -> Num)(m)
+      #|  (st : (Num) -> Num)(0)
+      #|  (st : (Num) -> Num)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 x : (Num) -> A, (\226\136\128 n : Num, \226\136\131 m : Num, n < m && P(x(m))) \226\134\146 (\226\136\131 f : (Num) -> Num, subseq(f) && (\226\136\128 n : Num, P(x(f(n)))))
+      #|  (x : A) => x == (a : A)
+      #|  (a : A)
+      #|  (m : Num) + (n : Num) < (p : Num) \226\134\146 m < p && n < p
+      #|  (!(a : Bool) && (c : Bool) \226\134\146 (b : Bool)) \226\134\146 (a \226\134\146 b) \226\134\146 c \226\134\146 b
+      #|  (s : (A) -> Bool)
+      #|  (b : A)
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 (\226\136\131 n : Num, \226\136\128 m : Num, n < m \226\134\146 IN((x : (Num) -> A)(m), s)) \226\134\146 (\226\136\131 a : A, \226\136\128 n : Num, \226\136\131 m : Num, n < m && x(m) == a)
+      #|  \226\136\131 a : A, \226\136\128 n : Num, \226\136\131 m : Num, n < m && (x : (Num) -> A)(m) == a
+      #|  \226\136\128 x : (Num) -> A, \226\136\128 s : (A) -> Bool, FINITE(s) && (\226\136\128 n : Num, IN(x(n), s)) \226\134\146 (\226\136\131 a : A, \226\136\131 f : (Num) -> Num, subseq(f) && (\226\136\128 n : Num, x(f(n)) == a))
+      #|  (t : Term) => (ts : List[Term]) => (n : Num) => (ns : List[Num]) => CONS(n, ns)
+      #|  (NIL : List[Num])
+      #|  (f : Num) => (args : List[Term]) => (ns : List[Num]) => ITLIST(op_plus, ns, 1)
+      #|  (x : Num) => 1
+      #|  \226\136\131 termsize : (Term) -> Num, (\226\136\128 x : Num, termsize(V(x)) == 1) && (\226\136\128 f : Num, \226\136\128 args : List[Term], termsize(Fn(f, args)) == ITLIST(op_plus, MAP(termsize, args), 1))
+      #|  (LEX : ((_, _) -> Bool, List[_], List[_]) -> Bool)((op_lt_lt : (_, _) -> Bool), NIL, (l : List[_])) == false && LEX(op_lt_lt, CONS((h : _), (t : List[_])), l) == (if l == NIL { false } else { if op_lt_lt(h, HD(l)) { LENGTH(t) == LENGTH(TL(l)) } else { h == HD(l) && LEX(op_lt_lt, t, TL(l)) } })
+      #|  LEX((op_lt_lt : (_, _) -> Bool), NIL, (l : List[_])) == false && LEX(op_lt_lt, CONS((h1 : _), (t1 : List[_])), NIL) == false && LEX(op_lt_lt, CONS(h1, t1), CONS((h2 : _), (t2 : List[_]))) == (if op_lt_lt(h1, h2) { LENGTH(t1) == LENGTH(t2) } else { h1 == h2 && LEX(op_lt_lt, t1, t2) })
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 R : (_, _) -> Bool, LEX(R, l1, l2) \226\134\146 LENGTH(l1) == LENGTH(l2)
+      #|  (x : List[A])
+      #|  (x : List[A])
+      #|  (y : List[A])
+      #|  (y : List[A])
+      #|  (\226\136\128 x : A, \226\136\128 y : A, (R : (A, A) -> Bool)(x, y) \226\134\146 (S : (A, A) -> Bool)(x, y)) \226\134\146 LEX(R, (x : List[A]), (y : List[A])) \226\134\146 LEX(S, x, y)
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], LEX((x : _) => (y : _) => (R : (_, _) -> Bool)((f : (_) -> _)(x), f(y)), l1, l2) \226\134\146 LEX(R, MAP(f, l1), MAP(f, l2))
+      #|  \226\136\128 R : (_, _) -> Bool, \226\136\128 l : List[_], (\226\136\128 x : _, MEM(x, l) \226\134\146 !R(x, x)) \226\134\146 !LEX(R, l, l)
+      #|  \226\136\128 lis : (Num) -> List[_], \226\136\128 R : (_, _) -> Bool, (\226\136\128 n : Num, LEX(R, lis(SUC(n)), lis(n))) \226\134\146 (\226\136\128 n : Num, LENGTH(lis(n)) == LENGTH(lis(0)))
+      #|  SUC((p : Num) + (m : Num))
+      #|  (m : Num)
+      #|  (n : Num) => (tl : (Num) -> List[A])(SUC((p : Num)) + n)
+      #|  (n : Num) => (hd : (Num) -> A)(SUC((p : Num)) + n)
+      #|  \226\136\128 n : Num, n <= (p : Num) \226\134\146 (hd : (Num) -> A)(n) == (h : A)
+      #|  (hd : (Num) -> A)(SUC((p : Num)))
+      #|  (p : Num)
+      #|  \226\136\131 m : Num, (R : (A, A) -> Bool)((hd : (Num) -> A)(SUC(m)), hd(m))
+      #|  (hd : (Num) -> A)
+      #|  (h : A)
+      #|  (h : A)
+      #|  (h : A)
+      #|  (hd : (Num) -> A)
+      #|  (hd : (Num) -> A)
+      #|  !NONWF((R : (A, A) -> Bool), (h : A))
+      #|  (h : A) == (hd : (Num) -> A)(0)
+      #|  (tl : (Num) -> List[A])
+      #|  (tl : (Num) -> List[A])
+      #|  \226\136\128 m : Num, LENGTH((tl : (Num) -> List[A])(m)) == (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 a : A, MEM(a, (tl : (Num) -> List[A])(n)) \226\134\146 !NONWF((R : (A, A) -> Bool), a)
+      #|  (if (p : Bool) { true } else { (r : Bool) }) == (p || !p && r)
+      #|  \226\136\128 m : Num, LENGTH(CONS((hd : (Num) -> A)(m), (tl : (Num) -> List[A])(m))) == SUC((n : Num))
+      #|  \226\136\128 n : Num, LEX((R : (A, A) -> Bool), CONS((hd : (Num) -> A)(SUC(n)), (tl : (Num) -> List[A])(SUC(n))), CONS(hd(n), tl(n)))
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  \226\136\128 n : Num, \226\136\128 a : A, MEM(a, CONS((hd : (Num) -> A)(n), (tl : (Num) -> List[A])(n))) \226\134\146 !NONWF((R : (A, A) -> Bool), a)
+      #|  (l : List[A])
+      #|  (lis : (Num) -> List[A])((m : Num))
+      #|  (m : Num)
+      #|  \226\136\128 n : Num, !((lis : (Num) -> List[A])(n) == NIL)
+      #|  (n : Num) => TL((lis : (Num) -> List[A])(n))
+      #|  (n : Num) => HD((lis : (Num) -> List[A])(n))
+      #|  \226\136\131 hd : (Num) -> A, \226\136\131 tl : (Num) -> List[A], \226\136\128 n : Num, CONS(hd(n), tl(n)) == (lis : (Num) -> List[A])(n)
+      #|  \226\136\128 n : Num, LENGTH((lis : (Num) -> List[A])(n)) == LENGTH(lis(0))
+      #|  \226\136\128 n : Num, \226\136\128 lis : (Num) -> List[A], LENGTH(lis(0)) == n \226\134\146 !((\226\136\128 n : Num, \226\136\128 a : A, MEM(a, lis(n)) \226\134\146 !NONWF((R : (A, A) -> Bool), a)) && (\226\136\128 n : Num, LEX(R, lis(SUC(n)), lis(n))))
+      #|  (hd : (Num) -> A)(0) == (h : A)
+      #|  \226\136\128 n : Num, !NONWF((R : (A, A) -> Bool), (hd : (Num) -> A)(n))
+      #|  \226\136\128 R : (A, A) -> Bool, \226\136\128 lis : (Num) -> List[A], !((\226\136\128 n : Num, \226\136\128 a : A, MEM(a, lis(n)) \226\134\146 !NONWF(R, a)) && (\226\136\128 n : Num, LEX(R, lis(SUC(n)), lis(n))))
+      #|  \226\136\128 P : (_) -> Bool, \226\136\128 R : (_, _) -> Bool, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], LEX(R, l1, l2) && (\226\136\128 a : _, MEM(a, l1) \226\134\146 P(a)) && (\226\136\128 a : _, MEM(a, l2) \226\134\146 P(a)) \226\134\146 LEX((x : _) => (y : _) => P(x) && P(y) && R(x, y), l1, l2)
+      #|  (\226\136\128 t : Term, (subterm : (Term, Term) -> Bool)(t, t)) && (\226\136\128 s : Term, \226\136\128 a : Term, \226\136\128 f : Num, \226\136\128 args : List[Term], subterm(s, a) && MEM(a, args) \226\134\146 subterm(s, Fn(f, args)))
+      #|  (psubterm : (Term, Term) -> Bool)((s : Term), (t : Term)) == (subterm(s, t) && !(s == t))
+      #|  (a : Num) < (c : Num) \226\134\146 a < (b : Num) + c
+      #|  0 < (b : Num) \226\134\146 (a : Num) < a + b
+      #|  \226\136\128 f : Num, \226\136\128 args : List[Term], \226\136\128 s : Term, MEM(s, args) \226\134\146 termsize(s) < termsize(Fn(f, args))
+      #|  \226\136\128 f : Num, \226\136\128 args : List[Term], !MEM(Fn(f, args), args)
+      #|  \226\136\128 t : Term, subterm(t, t)
+      #|  \226\136\128 t : Term, \226\136\128 u : Term, subterm(t, u) \226\134\146 (\226\136\128 s : Term, subterm(s, t) \226\134\146 subterm(s, u))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, subterm(s, t) && subterm(t, u) \226\134\146 subterm(s, u)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, subterm(s, t) && subterm(t, s) \226\134\146 s == t
+      #|  \226\136\128 x : Num, \226\136\128 t : Term, IN(x, FVT(t)) \226\134\146 subterm(V(x), t)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, !(psubterm(s, t) && psubterm(t, s))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, subterm(s, t) && psubterm(t, u) \226\134\146 psubterm(s, u)
+      #|  (a : Term)
+      #|  (a : Term)
+      #|  (args : List[Term])
+      #|  (f : Num)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, psubterm(s, t) == (\226\136\131 f : Num, \226\136\131 args : List[Term], \226\136\131 u : Term, t == Fn(f, args) && MEM(u, args) && subterm(s, u))
+      #|  \226\136\128 i : (Num) -> Term, \226\136\128 s : Term, \226\136\128 t : Term, subterm(s, t) \226\134\146 subterm(termsubst(i, s), termsubst(i, t))
+      #|  termsubst((i : (Num) -> Term), (u : Term))
+      #|  MAP(termsubst((i : (Num) -> Term)), (args : List[Term]))
+      #|  (u : Term)
+      #|  (args : List[Term])
+      #|  (f : Num)
+      #|  \226\136\128 i : (Num) -> Term, \226\136\128 s : Term, \226\136\128 t : Term, psubterm(s, t) \226\134\146 psubterm(termsubst(i, s), termsubst(i, t))
+      #|  (\226\136\128 x : Num, \226\136\128 s : Term, IN(x, FVT(s)) && !(s == V(x)) \226\134\146 (op_lt_lt : (Term, Term) -> Bool)(V(x), s)) && (\226\136\128 fs : Num, \226\136\128 sargs : List[Term], \226\136\128 ft : Num, \226\136\128 targs : List[Term], \226\136\128 si : Term, MEM(si, sargs) && (op_lt_lt(Fn(ft, targs), si) || si == Fn(ft, targs)) \226\134\146 op_lt_lt(Fn(ft, targs), Fn(fs, sargs))) && (\226\136\128 fs : Num, \226\136\128 ft : Num, \226\136\128 sargs : List[Term], \226\136\128 targs : List[Term], (fs > ft || fs == ft && LENGTH(sargs) > LENGTH(targs)) && ALL((ti : Term) => op_lt_lt(ti, Fn(fs, sargs)), targs) \226\134\146 op_lt_lt(Fn(ft, targs), Fn(fs, sargs))) && (\226\136\128 f : Num, \226\136\128 sargs : List[Term], \226\136\128 targs : List[Term], ALL((ti : Term) => op_lt_lt(ti, Fn(f, sargs)), targs) && LEX(op_lt_lt, targs, sargs) \226\134\146 op_lt_lt(Fn(f, targs), Fn(f, sargs)))
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == !(a && b \226\134\146 !c)
+      #|  (\226\136\128 s : Term, \226\136\128 x : Num, op_lt_lt(s, V(x)) == false) && (\226\136\128 x : Num, \226\136\128 t : Term, op_lt_lt(V(x), t) == (IN(x, FVT(t)) && !(t == V(x)))) && (\226\136\128 f : Num, \226\136\128 fargs : List[Term], \226\136\128 g : Num, \226\136\128 gargs : List[Term], op_lt_lt(Fn(f, fargs), Fn(g, gargs)) == ((\226\136\131 gi : Term, MEM(gi, gargs) && (op_lt_lt(Fn(f, fargs), gi) || Fn(f, fargs) == gi)) || (\226\136\128 fi : Term, MEM(fi, fargs) \226\134\146 op_lt_lt(fi, Fn(g, gargs))) && ((f < g || f == g && LENGTH(fargs) < LENGTH(gargs)) || f == g && LEX(op_lt_lt, fargs, gargs))))
+      #|  (t : Term)
+      #|  Fn((ft : Num), (targs : List[Term]))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_lt_lt(s, t) \226\134\146 SUBSET(FVT(s), FVT(t))
+      #|  ((a1 : Bool) && (a2 : Bool) \226\134\146 (a3 : Bool)) && ((b1 : Bool) \226\134\146 (b2 : Bool) \226\134\146 (b3 : Bool)) \226\134\146 a1 && b1 \226\134\146 a2 && b2 \226\134\146 a3 && b3
+      #|  (ts : List[Term])
+      #|  (ss : List[Term])
+      #|  (rs : List[Term])
+      #|  (b : Term)
+      #|  (c : Term)
+      #|  (b : Term)
+      #|  (a : Term)
+      #|  \226\136\128 r : Term, \226\136\128 s : Term, \226\136\128 t : Term, MEM(r, (rs : List[Term])) && MEM(s, (ss : List[Term])) && MEM(t, (ts : List[Term])) && op_lt_lt(t, s) && op_lt_lt(s, r) \226\134\146 op_lt_lt(t, r)
+      #|  op_lt_lt(Fn((g : Num), (ss : List[Term])), Fn((f : Num), (rs : List[Term])))
+      #|  op_lt_lt(Fn((h : Num), (ts : List[Term])), Fn((g : Num), (ss : List[Term])))
+      #|  Fn((g : Num), (ss : List[Term]))
+      #|  \226\136\128 ti : Term, MEM(ti, (ts : List[Term])) \226\134\146 op_lt_lt(ti, Fn((f : Num), (rs : List[Term])))
+      #|  op_lt_lt(Fn((h : Num), (ts : List[Term])), Fn((g : Num), (ss : List[Term])))
+      #|  \226\136\128 ti : Term, MEM(ti, (ts : List[Term])) \226\134\146 op_lt_lt(ti, Fn((g : Num), (ss : List[Term])))
+      #|  (si : Term)
+      #|  (si : Term)
+      #|  \226\136\131 si : Term, MEM(si, (ss : List[Term])) && (op_lt_lt(Fn((h : Num), (ts : List[Term])), si) || Fn(h, ts) == si)
+      #|  op_lt_lt(Fn((g : Num), (ss : List[Term])), Fn((f : Num), (rs : List[Term])))
+      #|  \226\136\128 si : Term, MEM(si, (ss : List[Term])) \226\134\146 op_lt_lt(si, Fn((f : Num), (rs : List[Term])))
+      #|  Fn((g : Num), (ss : List[Term]))
+      #|  termsize((ri : Term)) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  (ri : Term)
+      #|  (ri : Term)
+      #|  \226\136\131 ri : Term, MEM(ri, (rs : List[Term])) && (op_lt_lt(Fn((g : Num), (ss : List[Term])), ri) || Fn(g, ss) == ri)
+      #|  (ss : List[Term])
+      #|  (g : Num)
+      #|  (s : Term)
+      #|  (rs : List[Term])
+      #|  (f : Num)
+      #|  (r : Term)
+      #|  (ts : List[Term])
+      #|  (h : Num)
+      #|  op_lt_lt((s : Term), (r : Term))
+      #|  op_lt_lt(V((x : Num)), (s : Term))
+      #|  (x : Num)
+      #|  (t : Term)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 r : Term, \226\136\128 s : Term, \226\136\128 t : Term, termsize(r) + (termsize(s) + termsize(t)) == n && op_lt_lt(t, s) && op_lt_lt(s, r) \226\134\146 op_lt_lt(t, r)
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize((si : Term)) + termsize(Fn((h : Num), (ts : List[Term]))))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize(Fn((f : Num), (rs : List[Term]))) + (termsize(Fn((g : Num), (ss : List[Term]))) + termsize((ti : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  termsize((a : Term)) + (termsize((b : Term)) + termsize((c : Term)))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_lt_lt(s, t) && op_lt_lt(t, u) \226\134\146 op_lt_lt(s, u)
+      #|  V((x : Num))
+      #|  FVT(V((x : Num)))
+      #|  (x : Num)
+      #|  \226\136\128 f : Num, \226\136\128 args : List[Term], \226\136\128 a : Term, MEM(a, args) \226\134\146 op_lt_lt(a, Fn(f, args))
+      #|  (a : Term)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, subterm(s, t) \226\134\146 s == t || op_lt_lt(s, t)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, psubterm(s, t) \226\134\146 op_lt_lt(s, t)
+      #|  \226\136\128 i : (Num) -> Term, \226\136\128 s : Term, \226\136\128 t : Term, op_lt_lt(s, t) \226\134\146 op_lt_lt(termsubst(i, s), termsubst(i, t))
+      #|  (largs : List[Term])
+      #|  (largs : List[Term])
+      #|  (u : Term)
+      #|  APPEND((largs : List[Term]), CONS((t : Term), (rargs : List[Term])))
+      #|  (f : Num)
+      #|  (t : Term)
+      #|  APPEND((largs : List[Term]), CONS((t : Term), (rargs : List[Term])))
+      #|  (f : Num)
+      #|  (t : Term)
+      #|  (u : Term) == (s : Term)
+      #|  (u : Term)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_lt_lt(s, t) \226\134\146 op_lt_lt(Fn((f : Num), APPEND((largs : List[Term]), CONS(s, (rargs : List[Term])))), Fn(f, APPEND(largs, CONS(t, rargs))))
+      #|  \226\136\128 t : Term, !op_lt_lt(t, t)
+      #|  (n : Num) => (args : (Num) -> List[Term])((k : (Num) -> Num)(n))
+      #|  (s : Term) => (t : Term) => SUBSET(functions_term(s), (A : ((Num, Num)) -> Bool)) && SUBSET(functions_term(t), A) && op_lt_lt(s, t)
+      #|  (k : (Num) -> Num)(SUC((n : Num))) + (m : Num)
+      #|  \226\136\128 n : Num, op_lt_lt((t : (Num) -> Term)(SUC(n)), t(n))
+      #|  (k : (Num) -> Num)(SUC((n : Num))) + (m : Num)
+      #|  (k : (Num) -> Num)(SUC((n : Num)))
+      #|  (m : Num)
+      #|  (r : Num) => if r == 0 { (a : Term) } else { (t : (Num) -> Term)((k : (Num) -> Num)(SUC((n : Num))) + r) }
+      #|  (!(p : Bool) \226\134\146 !(q : Bool) && !(r : Bool)) == (q || r \226\134\146 p)
+      #|  MEM((a : Term), (args : (Num) -> List[Term])((k : (Num) -> Num)((n : Num))))
+      #|  ((a : Bool) \226\134\146 (b : Bool)) \226\134\146 !a || b
+      #|  \226\136\128 n : Num, \226\136\128 a : Term, !(MEM(a, (args : (Num) -> List[Term])((k : (Num) -> Num)(n))) && (op_lt_lt(Fn((f : Num), args(k(SUC(n)))), a) || Fn(f, args(k(SUC(n)))) == a))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, SUBSET(functions_term((t : (Num) -> Term)(n)), (A : ((Num, Num)) -> Bool))
+      #|  \226\136\128 a : Term, \226\136\128 n : Num, MEM(a, (args : (Num) -> List[Term])(n)) \226\134\146 SUBSET(functions_term(a), (A : ((Num, Num)) -> Bool))
+      #|  (k : (Num) -> Num)(SUC((n : Num)))
+      #|  (k : (Num) -> Num)((n : Num))
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 op_lt_lt((t : (Num) -> Term)(n), t(m))
+      #|  \226\136\128 n : Num, \226\136\128 d : Num, op_lt_lt((t : (Num) -> Term)(n + d), t(n)) || t(n + d) == t(n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 op_lt_lt((t : (Num) -> Term)(n), t(m)) || t(n) == t(m)
+      #|  (k : (Num) -> Num)
+      #|  (ar : Num)
+      #|  (f : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, SUBSET(functions_term((t : (Num) -> Term)(n)), (A : ((Num, Num)) -> Bool))
+      #|  (n : Num)
+      #|  (A : ((Num, Num)) -> Bool)
       #|  ?far:num#num s. subseq s /\\\n                    (forall n:num. fn(s n),LENGTH(args(s n):term list) = far)
-      #|  args:num->term list
+      #|  (args : (Num) -> List[Term])
       #|  fn:num->num
-      #|  u:term
-      #|  args:term list
-      #|  f:num
-      #|  (t:num->term)(n)
-      #|  n:num
-      #|  forall n:num. functions_term (t n) SUBSET A
-      #|  ~(n = 0) ==> (SUC(n - 1) = n)
-      #|  u:term
-      #|  n - 1
-      #|  n = 0
-      #|  u:term
-      #|  n = 0
-      #|  u:term
-      #|  args:term list
-      #|  f:num
-      #|  (t:num->term) n
-      #|  forall n:num. ?f args. (t(n) = Fn f args) /\\\n                      ALL (\\t. ~(NONWF(\\s t. functions_term(s) SUBSET A /\\\n                                             functions_term(t) SUBSET A /\\\n                                             s << t) t)) args
-      #|  t:num->term
+      #|  (u : Term)
+      #|  (args : List[Term])
+      #|  (f : Num)
+      #|  (t : (Num) -> Term)((n : Num))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, SUBSET(functions_term((t : (Num) -> Term)(n)), (A : ((Num, Num)) -> Bool))
+      #|  !((n : Num) == 0) \226\134\146 SUC(n - 1) == n
+      #|  (u : Term)
+      #|  (n : Num) - 1
+      #|  (n : Num) == 0
+      #|  (u : Term)
+      #|  (n : Num) == 0
+      #|  (u : Term)
+      #|  (args : List[Term])
+      #|  (f : Num)
+      #|  (t : (Num) -> Term)((n : Num))
+      #|  \226\136\128 n : Num, \226\136\131 f : Num, \226\136\131 args : List[Term], (t : (Num) -> Term)(n) == Fn(f, args) && ALL((t : Term) => !NONWF((s : Term) => (t : Term) => SUBSET(functions_term(s), (A : ((Num, Num)) -> Bool)) && SUBSET(functions_term(t), A) && op_lt_lt(s, t), t), args)
+      #|  (t : (Num) -> Term)
       #|  termsize
-      #|  forall A. FINITE(A)\n       ==> WF(\\s t. functions_term(s) SUBSET A /\\\n                    functions_term(t) SUBSET A /\\\n                    s << t)
-      #|  ~(n = 0) ==> (n = SUC(n - 1))
-      #|  forall t s. s subterm t ==> ~(t << s)
-      #|  ts:term list
-      #|  ts:term list
-      #|  t:term
-      #|  ss:term list
-      #|  s:term
-      #|  forall fargs gargs.\n        (LENGTH fargs = LENGTH gargs) /\\\n        (forall fi gi. MEM fi fargs /\\ MEM gi gargs\n                 ==> fi << gi \\/ gi << fi \\/ (fi = gi))\n        ==> LEX(<<) fargs gargs \\/ LEX(<<) gargs fargs \\/ (fargs = gargs)
-      #|  LENGTH(gargs:term list)
-      #|  LENGTH(fargs:term list)
-      #|  g:num
-      #|  f:num
-      #|  (?a. MEM a fargs /\\ (Fn g gargs << a \\/ (Fn g gargs = a))) \\/\n    ~(?a. MEM a fargs /\\ (Fn g gargs << a \\/ (Fn g gargs = a))) /\\\n    (forall a. MEM a fargs ==> a << Fn g gargs)
-      #|  (?a. MEM a gargs /\\ (Fn f fargs << a \\/ (Fn f fargs = a))) \\/\n    ~(?a. MEM a gargs /\\ (Fn f fargs << a \\/ (Fn f fargs = a))) /\\\n    (forall a. MEM a gargs ==> a << Fn f fargs)
-      #|  a + b < b + c <=> a < c
-      #|  a /\\ b /\\ c /\\ d <=> b /\\ a /\\ c /\\ d
-      #|  termsize (Fn f fargs) + termsize (Fn g gargs) = n
-      #|  (forall fi. MEM fi fargs\n          ==> fi << Fn g gargs \\/ Fn g gargs << fi \\/ (fi = Fn g gargs)) /\\\n    (forall gi. MEM gi gargs\n          ==> gi << Fn f fargs \\/ Fn f fargs << gi \\/ (gi = Fn f fargs)) /\\\n    (forall fi gi. MEM fi fargs /\\ MEM gi gargs\n          ==> fi << gi \\/ gi << fi \\/ (fi = gi))
-      #|  gargs:term list
-      #|  g:num
-      #|  fargs:term list
-      #|  f:num
-      #|  n:num
-      #|  forall n s t. (termsize(s) + termsize(t) = n) /\\ (FVT(s) = {}) /\\ (FVT(t) = {})\n             ==> s << t \\/ t << s \\/ (s = t)
-      #|  forall s t. (FVT(s) = {}) /\\ (FVT(t) = {}) ==> s << t \\/ t << s \\/ (s = t)
+      #|  \226\136\128 A : ((Num, Num)) -> Bool, FINITE(A) \226\134\146 WF((s : Term) => (t : Term) => SUBSET(functions_term(s), A) && SUBSET(functions_term(t), A) && op_lt_lt(s, t))
+      #|  !((n : Num) == 0) \226\134\146 n == SUC(n - 1)
+      #|  \226\136\128 t : Term, \226\136\128 s : Term, subterm(s, t) \226\134\146 !op_lt_lt(t, s)
+      #|  (ts : List[Term])
+      #|  (ts : List[Term])
+      #|  (t : Term)
+      #|  (ss : List[Term])
+      #|  (s : Term)
+      #|  \226\136\128 fargs : List[Term], \226\136\128 gargs : List[Term], LENGTH(fargs) == LENGTH(gargs) && (\226\136\128 fi : Term, \226\136\128 gi : Term, MEM(fi, fargs) && MEM(gi, gargs) \226\134\146 op_lt_lt(fi, gi) || op_lt_lt(gi, fi) || fi == gi) \226\134\146 LEX(op_lt_lt, fargs, gargs) || LEX(op_lt_lt, gargs, fargs) || fargs == gargs
+      #|  LENGTH((gargs : List[Term]))
+      #|  LENGTH((fargs : List[Term]))
+      #|  (g : Num)
+      #|  (f : Num)
+      #|  (\226\136\131 a : Term, MEM(a, (fargs : List[Term])) && (op_lt_lt(Fn((g : Num), (gargs : List[Term])), a) || Fn(g, gargs) == a)) || !(\226\136\131 a : Term, MEM(a, fargs) && (op_lt_lt(Fn(g, gargs), a) || Fn(g, gargs) == a)) && (\226\136\128 a : Term, MEM(a, fargs) \226\134\146 op_lt_lt(a, Fn(g, gargs)))
+      #|  (\226\136\131 a : Term, MEM(a, (gargs : List[Term])) && (op_lt_lt(Fn((f : Num), (fargs : List[Term])), a) || Fn(f, fargs) == a)) || !(\226\136\131 a : Term, MEM(a, gargs) && (op_lt_lt(Fn(f, fargs), a) || Fn(f, fargs) == a)) && (\226\136\128 a : Term, MEM(a, gargs) \226\134\146 op_lt_lt(a, Fn(f, fargs)))
+      #|  ((a : Num) + (b : Num) < b + (c : Num)) == (a < c)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == (b && a && c && d)
+      #|  termsize(Fn((f : Num), (fargs : List[Term]))) + termsize(Fn((g : Num), (gargs : List[Term]))) == (n : Num)
+      #|  (\226\136\128 fi : Term, MEM(fi, (fargs : List[Term])) \226\134\146 op_lt_lt(fi, Fn((g : Num), (gargs : List[Term]))) || op_lt_lt(Fn(g, gargs), fi) || fi == Fn(g, gargs)) && (\226\136\128 gi : Term, MEM(gi, gargs) \226\134\146 op_lt_lt(gi, Fn((f : Num), fargs)) || op_lt_lt(Fn(f, fargs), gi) || gi == Fn(f, fargs)) && (\226\136\128 fi : Term, \226\136\128 gi : Term, MEM(fi, fargs) && MEM(gi, gargs) \226\134\146 op_lt_lt(fi, gi) || op_lt_lt(gi, fi) || fi == gi)
+      #|  (gargs : List[Term])
+      #|  (g : Num)
+      #|  (fargs : List[Term])
+      #|  (f : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 s : Term, \226\136\128 t : Term, termsize(s) + termsize(t) == n && FVT(s) == {} && FVT(t) == {} \226\134\146 op_lt_lt(s, t) || op_lt_lt(t, s) || s == t
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, FVT(s) == {} && FVT(t) == {} \226\134\146 op_lt_lt(s, t) || op_lt_lt(t, s) || s == t
       #|ITLIST_ADD_1_POS =  |- (#forall:fun(fun(list(num),bool),bool) (\l:list(num). ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) (((#ITLIST:fun(fun(num,fun(num,num)),fun(list(num),fun(num,num))) #+:fun(num,fun(num,num))) l:list(num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))
       #|FVT_FUN_EMPTY =  |- (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(term,bool),bool) (\a:term. (#forall:fun(fun(list(term),bool),bool) (\args:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun(term,fun(list(term),bool)) a:term) args:list(term))) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#FVT:fun(term,fun(num,bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) args:list(term)))) #EMPTY:fun(num,bool)))) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#FVT:fun(term,fun(num,bool)) a:term)) #EMPTY:fun(num,bool)))))))))
       #|NONWF =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\R:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) ((#NONWF:fun(fun('A,fun('A,bool)),fun('A,bool)) R:fun('A,fun('A,bool))) a:'A)) (#?:fun(fun(fun(num,'A),bool),bool) (\s:fun(num,'A). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (s:fun(num,'A) (#NUMERAL:fun(num,num) #_0:num))) a:'A)) (#forall:fun(fun(num,bool),bool) (\n:num. ((R:fun('A,fun('A,bool)) (s:fun(num,'A) (#SUC:fun(num,num) n:num))) (s:fun(num,'A) n:num))))))))))))
