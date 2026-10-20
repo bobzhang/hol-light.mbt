@@ -77991,21 +77991,21 @@ test "100/constructible matches 100/constructible.ml" {
       #|0..0..0..solved at 3
       #|0..0..0..3..8..solved at 22
       #|100/constructible quotations (335):
-      #|  --(a + &2 * u)
-      #|  x pow 3 = x * x * x
-      #|  A + B * s = &0 ==> ~(B = &0) ==> s = --A / B
-      #|  ~P(s:real)
-      #|  B = &0
-      #|  (P:real->bool) s
-      #|  A + B * s = &0
-      #|  B = s pow 2 * v pow 3 + &2 * a * u * v + &3 * u pow 2 * v + b * v
-      #|  A = a * s pow 2 * v pow 2 + &3 * s pow 2 * u * v pow 2 +\n         a * u pow 2 + u pow 3 +  b * u + c
-      #|  v * s = &0
-      #|  forall P. (forall n. P(&n)) /\\\n       (forall x. P x ==> P(--x)) /\\\n       (forall x. P x /\\ ~(x = &0) ==> P(inv x)) /\\\n       (forall x y. P x /\\ P y ==> P(x + y)) /\\\n       (forall x y. P x /\\ P y ==> P(x * y))\n       ==> forall a b c z u v s.\n               P a /\\ P b /\\ P c /\\\n               z pow 3 + a * z pow 2 + b * z + c = &0 /\\\n               P u /\\ P v /\\ P(s * s) /\\ z = u + v * s\n               ==> ?w. P w /\\ w pow 3 + a * w pow 2 + b * w + c = &0
-      #|  forall P. (forall n. P(&n)) /\\\n       (forall x. P x ==> P(--x)) /\\\n       (forall x. P x /\\ ~(x = &0) ==> P(inv x)) /\\\n       (forall x y. P x /\\ P y ==> P(x + y)) /\\\n       (forall x y. P x /\\ P y ==> P(x * y))\n       ==> forall a b c z u v s.\n               P a /\\ P b /\\ P c /\\\n               z pow 3 + a * z pow 2 + b * z + c = &0 /\\\n               P u /\\ P v /\\ P(s) /\\ &0 <= s /\\ z = u + v * sqrt(s)\n               ==> ?w. P w /\\ w pow 3 + a * w pow 2 + b * w + c = &0
-      #|  (forall x. rational x ==> radical x) /\\\n  (forall x. radical x ==> radical (--x)) /\\\n  (forall x. radical x /\\ ~(x = &0) ==> radical (inv x)) /\\\n  (forall x y. radical x /\\ radical y ==> radical (x + y)) /\\\n  (forall x y. radical x /\\ radical y ==> radical (x * y)) /\\\n  (forall x. radical x /\\ &0 <= x ==> radical (sqrt x))
-      #|  (forall n. radical(&n)) /\\\n   (forall x. rational x ==> radical x) /\\\n   (forall x. radical x ==> radical (--x)) /\\\n   (forall x. radical x /\\ ~(x = &0) ==> radical (inv x)) /\\\n   (forall x y. radical x /\\ radical y ==> radical (x + y)) /\\\n   (forall x y. radical x /\\ radical y ==> radical (x - y)) /\\\n   (forall x y. radical x /\\ radical y ==> radical (x * y)) /\\\n   (forall x y. radical x /\\ radical y /\\ ~(y = &0) ==> radical (x / y)) /\\\n   (forall x n. radical x ==> radical(x pow n)) /\\\n   (forall x. radical x /\\ &0 <= x ==> radical (sqrt x))
-      #|  (value(Constant x) = x) /\\\n  (value(Negation e) = --(value e)) /\\\n  (value(Inverse e) = inv(value e)) /\\\n  (value(Addition e1 e2) = value e1 + value e2) /\\\n  (value(Multiplication e1 e2) = value e1 * value e2) /\\\n  (value(Sqrt e) = sqrt(value e))
+      #|  -((a : Real) + real_of_num(2) * (u : Real))
+      #|  pow((x : Real), 3) == x * (x * x)
+      #|  (A : Real) + (B : Real) * (s : Real) == real_of_num(0) \226\134\146 !(B == real_of_num(0)) \226\134\146 s == -A / B
+      #|  !(P : (Real) -> Bool)((s : Real))
+      #|  (B : Real) == real_of_num(0)
+      #|  (P : (Real) -> Bool)((s : Real))
+      #|  (A : Real) + (B : Real) * (s : Real) == real_of_num(0)
+      #|  (B : Real) == pow((s : Real), 2) * pow((v : Real), 3) + (real_of_num(2) * ((a : Real) * ((u : Real) * v)) + (real_of_num(3) * (pow(u, 2) * v) + (b : Real) * v))
+      #|  (A : Real) == (a : Real) * (pow((s : Real), 2) * pow((v : Real), 2)) + (real_of_num(3) * (pow(s, 2) * ((u : Real) * pow(v, 2))) + (a * pow(u, 2) + (pow(u, 3) + ((b : Real) * u + (c : Real)))))
+      #|  (v : Real) * (s : Real) == real_of_num(0)
+      #|  \226\136\128 P : (Real) -> Bool, (\226\136\128 n : Num, P(real_of_num(n))) && (\226\136\128 x : Real, P(x) \226\134\146 P(-x)) && (\226\136\128 x : Real, P(x) && !(x == real_of_num(0)) \226\134\146 P(inv(x))) && (\226\136\128 x : Real, \226\136\128 y : Real, P(x) && P(y) \226\134\146 P(x + y)) && (\226\136\128 x : Real, \226\136\128 y : Real, P(x) && P(y) \226\134\146 P(x * y)) \226\134\146 (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 z : Real, \226\136\128 u : Real, \226\136\128 v : Real, \226\136\128 s : Real, P(a) && P(b) && P(c) && pow(z, 3) + (a * pow(z, 2) + (b * z + c)) == real_of_num(0) && P(u) && P(v) && P(s * s) && z == u + v * s \226\134\146 (\226\136\131 w : Real, P(w) && pow(w, 3) + (a * pow(w, 2) + (b * w + c)) == real_of_num(0)))
+      #|  \226\136\128 P : (Real) -> Bool, (\226\136\128 n : Num, P(real_of_num(n))) && (\226\136\128 x : Real, P(x) \226\134\146 P(-x)) && (\226\136\128 x : Real, P(x) && !(x == real_of_num(0)) \226\134\146 P(inv(x))) && (\226\136\128 x : Real, \226\136\128 y : Real, P(x) && P(y) \226\134\146 P(x + y)) && (\226\136\128 x : Real, \226\136\128 y : Real, P(x) && P(y) \226\134\146 P(x * y)) \226\134\146 (\226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 z : Real, \226\136\128 u : Real, \226\136\128 v : Real, \226\136\128 s : Real, P(a) && P(b) && P(c) && pow(z, 3) + (a * pow(z, 2) + (b * z + c)) == real_of_num(0) && P(u) && P(v) && P(s) && real_of_num(0) <= s && z == u + v * sqrt(s) \226\134\146 (\226\136\131 w : Real, P(w) && pow(w, 3) + (a * pow(w, 2) + (b * w + c)) == real_of_num(0)))
+      #|  (\226\136\128 x : Real, rational(x) \226\134\146 (radical : (Real) -> Bool)(x)) && (\226\136\128 x : Real, radical(x) \226\134\146 radical(-x)) && (\226\136\128 x : Real, radical(x) && !(x == real_of_num(0)) \226\134\146 radical(inv(x))) && (\226\136\128 x : Real, \226\136\128 y : Real, radical(x) && radical(y) \226\134\146 radical(x + y)) && (\226\136\128 x : Real, \226\136\128 y : Real, radical(x) && radical(y) \226\134\146 radical(x * y)) && (\226\136\128 x : Real, radical(x) && real_of_num(0) <= x \226\134\146 radical(sqrt(x)))
+      #|  (\226\136\128 n : Num, radical(real_of_num(n))) && (\226\136\128 x : Real, rational(x) \226\134\146 radical(x)) && (\226\136\128 x : Real, radical(x) \226\134\146 radical(-x)) && (\226\136\128 x : Real, radical(x) && !(x == real_of_num(0)) \226\134\146 radical(inv(x))) && (\226\136\128 x : Real, \226\136\128 y : Real, radical(x) && radical(y) \226\134\146 radical(x + y)) && (\226\136\128 x : Real, \226\136\128 y : Real, radical(x) && radical(y) \226\134\146 radical(x - y)) && (\226\136\128 x : Real, \226\136\128 y : Real, radical(x) && radical(y) \226\134\146 radical(x * y)) && (\226\136\128 x : Real, \226\136\128 y : Real, radical(x) && radical(y) && !(y == real_of_num(0)) \226\134\146 radical(x / y)) && (\226\136\128 x : Real, \226\136\128 n : Num, radical(x) \226\134\146 radical(pow(x, n))) && (\226\136\128 x : Real, radical(x) && real_of_num(0) <= x \226\134\146 radical(sqrt(x)))
+      #|  (value : (Expression) -> Real)(Constant((x : Real))) == x && value(Negation((e : Expression))) == -value(e) && value(Inverse(e)) == inv(value(e)) && value(Addition((e1 : Expression), (e2 : Expression))) == value(e1) + value(e2) && value(Multiplication(e1, e2)) == value(e1) * value(e2) && value(Sqrt(e)) == sqrt(value(e))
       #|  :P
       #|  :P
       #|  :P
@@ -78027,7 +78027,7 @@ test "100/constructible matches 100/constructible.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  (wellformed(Constant x) <=> rational x) /\\\n  (wellformed(Negation e) <=> wellformed e) /\\\n  (wellformed(Inverse e) <=> ~(value e = &0) /\\ wellformed e) /\\\n  (wellformed(Addition e1 e2) <=> wellformed e1 /\\ wellformed e2) /\\\n  (wellformed(Multiplication e1 e2) <=> wellformed e1 /\\ wellformed e2) /\\\n  (wellformed(Sqrt e) <=> &0 <= value e /\\ wellformed e)
+      #|  (wellformed : (Expression) -> Bool)(Constant((x : Real))) == rational(x) && wellformed(Negation((e : Expression))) == wellformed(e) && wellformed(Inverse(e)) == (!(value(e) == real_of_num(0)) && wellformed(e)) && wellformed(Addition((e1 : Expression), (e2 : Expression))) == (wellformed(e1) && wellformed(e2)) && wellformed(Multiplication(e1, e2)) == (wellformed(e1) && wellformed(e2)) && wellformed(Sqrt(e)) == (real_of_num(0) <= value(e) && wellformed(e))
       #|  :P
       #|  :P
       #|  :P
@@ -78048,7 +78048,7 @@ test "100/constructible matches 100/constructible.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  (radicals(Constant x) = {}) /\\\n  (radicals(Negation e) = radicals e) /\\\n  (radicals(Inverse e) = radicals e) /\\\n  (radicals(Addition e1 e2) = (radicals e1) UNION (radicals e2)) /\\\n  (radicals(Multiplication e1 e2) = (radicals e1) UNION (radicals e2)) /\\\n  (radicals(Sqrt e) = e INSERT (radicals e))
+      #|  (radicals : (Expression, Expression) -> Bool)(Constant((x : Real))) == {} && radicals(Negation((e : Expression))) == radicals(e) && radicals(Inverse(e)) == radicals(e) && radicals(Addition((e1 : Expression), (e2 : Expression))) == UNION(radicals(e1), radicals(e2)) && radicals(Multiplication(e1, e2)) == UNION(radicals(e1), radicals(e2)) && radicals(Sqrt(e)) == INSERT(e, radicals(e))
       #|  :P
       #|  :P
       #|  :P
@@ -78068,15 +78068,15 @@ test "100/constructible matches 100/constructible.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  forall e. FINITE(radicals e)
-      #|  forall e. wellformed e ==> forall r. r IN radicals(e) ==> &0 <= value r
-      #|  forall e. wellformed e ==> forall r. r IN radicals e ==> wellformed r
-      #|  forall e r. r IN radicals e ==> radicals(r) SUBSET radicals(e)
-      #|  x:real
-      #|  x:real
-      #|  forall x. radical x <=> ?e. wellformed e /\\ x = value e
-      #|  forall a b c. a < MAX b c <=> a < b \\/ a < c
-      #|  (depth(Constant x) = 0) /\\\n  (depth(Negation e) = depth e) /\\\n  (depth(Inverse e) = depth e) /\\\n  (depth(Addition e1 e2) = MAX (depth e1) (depth e2)) /\\\n  (depth(Multiplication e1 e2) = MAX (depth e1) (depth e2)) /\\\n  (depth(Sqrt e) = 1 + depth e)
+      #|  \226\136\128 e : Expression, FINITE(radicals(e))
+      #|  \226\136\128 e : Expression, wellformed(e) \226\134\146 (\226\136\128 r : Expression, IN(r, radicals(e)) \226\134\146 real_of_num(0) <= value(r))
+      #|  \226\136\128 e : Expression, wellformed(e) \226\134\146 (\226\136\128 r : Expression, IN(r, radicals(e)) \226\134\146 wellformed(r))
+      #|  \226\136\128 e : Expression, \226\136\128 r : Expression, IN(r, radicals(e)) \226\134\146 SUBSET(radicals(r), radicals(e))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, radical(x) == (\226\136\131 e : Expression, wellformed(e) && x == value(e))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, (a < MAX(b, c)) == (a < b || a < c)
+      #|  (depth : (Expression) -> Num)(Constant((x : Real))) == 0 && depth(Negation((e : Expression))) == depth(e) && depth(Inverse(e)) == depth(e) && depth(Addition((e1 : Expression), (e2 : Expression))) == MAX(depth(e1), depth(e2)) && depth(Multiplication(e1, e2)) == MAX(depth(e1), depth(e2)) && depth(Sqrt(e)) == 1 + depth(e)
       #|  :P
       #|  :P
       #|  :P
@@ -78096,236 +78096,236 @@ test "100/constructible matches 100/constructible.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  s = a \\/ s < a ==> s < 1 + a
-      #|  forall r s. s IN radicals(r) ==> depth(s) < depth(r)
-      #|  forall r. ~(r IN radicals r)
-      #|  forall e. wellformed e /\\ radicals e = {} ==> rational(value e)
-      #|  s:num->bool = {}
-      #|  forall s. FINITE s ==> ~(s = {}) ==> ?b:num. b IN s /\\ forall a. a IN s ==> a <= b
-      #|  IMAGE depth (radicals e)
-      #|  forall e. ~(radicals e = {})\n       ==> ?r. r IN radicals e /\\\n               forall s. s IN radicals(e) ==> ~(r IN radicals s)
-      #|  r:expression
-      #|  ~(r IN radicals e)
-      #|  Constant(&0)
-      #|  e:expression
-      #|  r IN radicals e
-      #|  forall e r.\n     (r IN radicals e\n            ==> (?a b.\n                   wellformed a /\\\n                   wellformed b /\\\n                   value e = value a + value b * sqrt (value r) /\\\n                   radicals a SUBSET radicals e DELETE r /\\\n                   radicals b SUBSET radicals e DELETE r /\\\n                   radicals r SUBSET radicals e DELETE r))\n     ==> wellformed e\n         ==> ?a b. wellformed a /\\\n                   wellformed b /\\\n                   value e = value a + value b * sqrt (value r) /\\\n                   radicals a SUBSET (radicals e UNION radicals r) DELETE r /\\\n                   radicals b SUBSET (radicals e UNION radicals r) DELETE r /\\\n                   radicals r SUBSET (radicals e UNION radicals r) DELETE r
-      #|  r:expression
-      #|  Constant(&1)
-      #|  Constant(&0)
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  r:expression
-      #|  e2:expression
-      #|  r:expression
-      #|  e1:expression
-      #|  r:expression
-      #|  Addition (Multiplication a1 b2) (Multiplication a2 b1)
-      #|  Addition (Multiplication a1 a2)\n                (Multiplication (Multiplication b1 b2) r)
-      #|  b2:expression
-      #|  a2:expression
-      #|  b1:expression
-      #|  a1:expression
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  r:expression
-      #|  e2:expression
-      #|  r:expression
-      #|  e1:expression
-      #|  r:expression
-      #|  Addition b1 b2
-      #|  Addition a1 a2
-      #|  b2:expression
-      #|  a2:expression
-      #|  b1:expression
-      #|  a1:expression
-      #|  a \\/ b ==> c <=> (a ==> c) /\\ (b ==> c)
-      #|  ~(value e1 = &0)
-      #|  ~(value b * sqrt (value r) = value a)
-      #|  Multiplication (Negation b) (Inverse\n        (Addition (Multiplication a a)\n                  (Multiplication (Multiplication b b) (Negation r))))
-      #|  Multiplication a (Inverse\n        (Addition (Multiplication a a)\n                  (Multiplication (Multiplication b b) (Negation r))))
-      #|  ~(value a + value a = &0)
-      #|  Constant(&0)
-      #|  Inverse(Multiplication (Constant(&2)) a)
-      #|  value b * sqrt(value r) = value a
-      #|  b:expression
-      #|  a:expression
-      #|  Negation b
-      #|  Negation a
-      #|  b:expression
-      #|  a:expression
-      #|  e2:expression
-      #|  e1:expression
-      #|  e:expression
-      #|  e:expression
-      #|  r IN radicals e
-      #|  wellformed e
-      #|  &0 <= value r /\\ wellformed r
-      #|  r:expression
-      #|  forall e. wellformed e /\\ ~(radicals e = {})\n       ==> ?r. r IN radicals(e) /\\\n               ?a b. wellformed(Addition a (Multiplication b (Sqrt r))) /\\\n                     value e = value(Addition a (Multiplication b (Sqrt r))) /\\\n                     (radicals a) SUBSET (radicals(e) DELETE r) /\\\n                     (radicals b) SUBSET (radicals(e) DELETE r) /\\\n                     (radicals r) SUBSET (radicals(e) DELETE r)
-      #|  e':expression
-      #|  Constant c
-      #|  Constant b
-      #|  Constant a
-      #|  value r
-      #|  value ev
-      #|  value eu
-      #|  value e
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  Multiplication ex ey
-      #|  ey:expression
-      #|  ex:expression
-      #|  y:real
-      #|  x:real
-      #|  Addition ex ey
-      #|  ey:expression
-      #|  ex:expression
-      #|  y:real
-      #|  x:real
-      #|  Inverse ex
-      #|  ex:expression
-      #|  x:real
-      #|  Negation ex
-      #|  ex:expression
-      #|  x:real
-      #|  Constant(&n)
-      #|  n:num
-      #|  \\x. ?ex. wellformed ex /\\\n                        radicals ex SUBSET (radicals(e) DELETE r) /\\\n                        value ex = x
-      #|  ev:expression
-      #|  eu:expression
-      #|  r:expression
-      #|  e:expression
-      #|  forall a b c. rational a /\\ rational b /\\ rational c\n           ==> forall e. wellformed e /\\\n                   ~(radicals e = {}) /\\\n                   (value e) pow 3 + a * (value e) pow 2 +\n                                     b * (value e) + c = &0\n                   ==> ?e'. wellformed e' /\\\n                            (radicals e') PSUBSET (radicals e) /\\\n                            (value e') pow 3 + a * (value e') pow 2 +\n                                     b * (value e') + c = &0
-      #|  e':expression
-      #|  CARD(radicals e) = n
-      #|  CARD(radicals e')
-      #|  e':expression
-      #|  e:expression
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  radicals e = {}
-      #|  e:expression
-      #|  n:num
-      #|  forall a b c. rational a /\\ rational b /\\ rational c\n           ==> forall n e. wellformed e /\\ CARD (radicals e) = n /\\\n                     (value e) pow 3 + a * (value e) pow 2 +\n                                b * (value e) + c = &0\n                 ==> ?x. rational x /\\\n                         x pow 3 + a * x pow 2 + b * x + c = &0
-      #|  e:expression
-      #|  CARD(radicals e)
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  forall a b c. rational a /\\ rational b /\\ rational c /\\\n           (?x. radical x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)\n           ==> (?x. rational x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)
-      #|  p':num
-      #|  ~(d = 0) /\\ ~(d = 1) ==> 1 < d
-      #|  a < b <=> 1 * a < b
-      #|  q':num
-      #|  q':num
-      #|  p':num
-      #|  d = 0
-      #|  d:num
-      #|  coprime(p,q)
-      #|  p:num
-      #|  q:num
-      #|  forall p q. ~(q = 0) ==> ?p' q'. ~(q' = 0) /\\ coprime(p',q') /\\ p * q' = p' * q
-      #|  ~(q = 0)
-      #|  q:num
-      #|  p:num
-      #|  forall x. rational x <=> ?p q. ~(q = 0) /\\ coprime(p,q) /\\ abs(x) = &p / &q
-      #|  q = 1
-      #|  q:num
+      #|  (s : Num) == (a : Num) || s < a \226\134\146 s < 1 + a
+      #|  \226\136\128 r : Expression, \226\136\128 s : Expression, IN(s, radicals(r)) \226\134\146 depth(s) < depth(r)
+      #|  \226\136\128 r : Expression, !IN(r, radicals(r))
+      #|  \226\136\128 e : Expression, wellformed(e) && radicals(e) == {} \226\134\146 rational(value(e))
+      #|  (s : (Num) -> Bool) == {}
+      #|  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 !(s == {}) \226\134\146 (\226\136\131 b : Num, IN(b, s) && (\226\136\128 a : Num, IN(a, s) \226\134\146 a <= b))
+      #|  IMAGE(depth, radicals((e : Expression)))
+      #|  \226\136\128 e : Expression, !(radicals(e) == {}) \226\134\146 (\226\136\131 r : Expression, IN(r, radicals(e)) && (\226\136\128 s : Expression, IN(s, radicals(e)) \226\134\146 !IN(r, radicals(s))))
+      #|  (r : Expression)
+      #|  !IN((r : Expression), radicals((e : Expression)))
+      #|  Constant(real_of_num(0))
+      #|  (e : Expression)
+      #|  IN((r : Expression), radicals((e : Expression)))
+      #|  \226\136\128 e : Expression, \226\136\128 r : Expression, (IN(r, radicals(e)) \226\134\146 (\226\136\131 a : Expression, \226\136\131 b : Expression, wellformed(a) && wellformed(b) && value(e) == value(a) + value(b) * sqrt(value(r)) && SUBSET(radicals(a), DELETE(radicals(e), r)) && SUBSET(radicals(b), DELETE(radicals(e), r)) && SUBSET(radicals(r), DELETE(radicals(e), r)))) \226\134\146 wellformed(e) \226\134\146 (\226\136\131 a : Expression, \226\136\131 b : Expression, wellformed(a) && wellformed(b) && value(e) == value(a) + value(b) * sqrt(value(r)) && SUBSET(radicals(a), DELETE(UNION(radicals(e), radicals(r)), r)) && SUBSET(radicals(b), DELETE(UNION(radicals(e), radicals(r)), r)) && SUBSET(radicals(r), DELETE(UNION(radicals(e), radicals(r)), r)))
+      #|  (r : Expression)
+      #|  Constant(real_of_num(1))
+      #|  Constant(real_of_num(0))
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (r : Expression)
+      #|  (e2 : Expression)
+      #|  (r : Expression)
+      #|  (e1 : Expression)
+      #|  (r : Expression)
+      #|  Addition(Multiplication((a1 : Expression), (b2 : Expression)), Multiplication((a2 : Expression), (b1 : Expression)))
+      #|  Addition(Multiplication((a1 : Expression), (a2 : Expression)), Multiplication(Multiplication((b1 : Expression), (b2 : Expression)), (r : Expression)))
+      #|  (b2 : Expression)
+      #|  (a2 : Expression)
+      #|  (b1 : Expression)
+      #|  (a1 : Expression)
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  (r : Expression)
+      #|  (e2 : Expression)
+      #|  (r : Expression)
+      #|  (e1 : Expression)
+      #|  (r : Expression)
+      #|  Addition((b1 : Expression), (b2 : Expression))
+      #|  Addition((a1 : Expression), (a2 : Expression))
+      #|  (b2 : Expression)
+      #|  (a2 : Expression)
+      #|  (b1 : Expression)
+      #|  (a1 : Expression)
+      #|  ((a : Bool) || (b : Bool) \226\134\146 (c : Bool)) == ((a \226\134\146 c) && (b \226\134\146 c))
+      #|  !(value((e1 : Expression)) == real_of_num(0))
+      #|  !(value((b : Expression)) * sqrt(value((r : Expression))) == value((a : Expression)))
+      #|  Multiplication(Negation((b : Expression)), Inverse(Addition(Multiplication((a : Expression), a), Multiplication(Multiplication(b, b), Negation((r : Expression))))))
+      #|  Multiplication((a : Expression), Inverse(Addition(Multiplication(a, a), Multiplication(Multiplication((b : Expression), b), Negation((r : Expression))))))
+      #|  !(value((a : Expression)) + value(a) == real_of_num(0))
+      #|  Constant(real_of_num(0))
+      #|  Inverse(Multiplication(Constant(real_of_num(2)), (a : Expression)))
+      #|  value((b : Expression)) * sqrt(value((r : Expression))) == value((a : Expression))
+      #|  (b : Expression)
+      #|  (a : Expression)
+      #|  Negation((b : Expression))
+      #|  Negation((a : Expression))
+      #|  (b : Expression)
+      #|  (a : Expression)
+      #|  (e2 : Expression)
+      #|  (e1 : Expression)
+      #|  (e : Expression)
+      #|  (e : Expression)
+      #|  IN((r : Expression), radicals((e : Expression)))
+      #|  wellformed((e : Expression))
+      #|  real_of_num(0) <= value((r : Expression)) && wellformed(r)
+      #|  (r : Expression)
+      #|  \226\136\128 e : Expression, wellformed(e) && !(radicals(e) == {}) \226\134\146 (\226\136\131 r : Expression, IN(r, radicals(e)) && (\226\136\131 a : Expression, \226\136\131 b : Expression, wellformed(Addition(a, Multiplication(b, Sqrt(r)))) && value(e) == value(Addition(a, Multiplication(b, Sqrt(r)))) && SUBSET(radicals(a), DELETE(radicals(e), r)) && SUBSET(radicals(b), DELETE(radicals(e), r)) && SUBSET(radicals(r), DELETE(radicals(e), r))))
+      #|  (e' : Expression)
+      #|  Constant((c : Real))
+      #|  Constant((b : Real))
+      #|  Constant((a : Real))
+      #|  value((r : Expression))
+      #|  value((ev : Expression))
+      #|  value((eu : Expression))
+      #|  value((e : Expression))
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  Multiplication((ex : Expression), (ey : Expression))
+      #|  (ey : Expression)
+      #|  (ex : Expression)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  Addition((ex : Expression), (ey : Expression))
+      #|  (ey : Expression)
+      #|  (ex : Expression)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  Inverse((ex : Expression))
+      #|  (ex : Expression)
+      #|  (x : Real)
+      #|  Negation((ex : Expression))
+      #|  (ex : Expression)
+      #|  (x : Real)
+      #|  Constant(real_of_num((n : Num)))
+      #|  (n : Num)
+      #|  (x : Real) => \226\136\131 ex : Expression, wellformed(ex) && SUBSET(radicals(ex), DELETE(radicals((e : Expression)), (r : Expression))) && value(ex) == x
+      #|  (ev : Expression)
+      #|  (eu : Expression)
+      #|  (r : Expression)
+      #|  (e : Expression)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, rational(a) && rational(b) && rational(c) \226\134\146 (\226\136\128 e : Expression, wellformed(e) && !(radicals(e) == {}) && pow(value(e), 3) + (a * pow(value(e), 2) + (b * value(e) + c)) == real_of_num(0) \226\134\146 (\226\136\131 e' : Expression, wellformed(e') && PSUBSET(radicals(e'), radicals(e)) && pow(value(e'), 3) + (a * pow(value(e'), 2) + (b * value(e') + c)) == real_of_num(0)))
+      #|  (e' : Expression)
+      #|  CARD(radicals((e : Expression))) == (n : Num)
+      #|  CARD(radicals((e' : Expression)))
+      #|  (e' : Expression)
+      #|  (e : Expression)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  radicals((e : Expression)) == {}
+      #|  (e : Expression)
+      #|  (n : Num)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, rational(a) && rational(b) && rational(c) \226\134\146 (\226\136\128 n : Num, \226\136\128 e : Expression, wellformed(e) && CARD(radicals(e)) == n && pow(value(e), 3) + (a * pow(value(e), 2) + (b * value(e) + c)) == real_of_num(0) \226\134\146 (\226\136\131 x : Real, rational(x) && pow(x, 3) + (a * pow(x, 2) + (b * x + c)) == real_of_num(0)))
+      #|  (e : Expression)
+      #|  CARD(radicals((e : Expression)))
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, rational(a) && rational(b) && rational(c) && (\226\136\131 x : Real, radical(x) && pow(x, 3) + (a * pow(x, 2) + (b * x + c)) == real_of_num(0)) \226\134\146 (\226\136\131 x : Real, rational(x) && pow(x, 3) + (a * pow(x, 2) + (b * x + c)) == real_of_num(0))
+      #|  (p' : Num)
+      #|  !((d : Num) == 0) && !(d == 1) \226\134\146 1 < d
+      #|  ((a : Num) < (b : Num)) == (1 * a < b)
+      #|  (q' : Num)
+      #|  (q' : Num)
+      #|  (p' : Num)
+      #|  (d : Num) == 0
+      #|  (d : Num)
+      #|  coprime(((p : Num), (q : Num)))
+      #|  (p : Num)
+      #|  (q : Num)
+      #|  \226\136\128 p : Num, \226\136\128 q : Num, !(q == 0) \226\134\146 (\226\136\131 p' : Num, \226\136\131 q' : Num, !(q' == 0) && coprime((p', q')) && p * q' == p' * q)
+      #|  !((q : Num) == 0)
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  \226\136\128 x : Real, rational(x) == (\226\136\131 p : Num, \226\136\131 q : Num, !(q == 0) && coprime((p, q)) && abs(x) == real_of_num(p) / real_of_num(q))
+      #|  (q : Num) == 1
+      #|  (q : Num)
       #|  3
       #|  abs
-      #|  i:num
-      #|  ~(q = &0)\n     ==> ((p / q) pow 3 + a * (p / q) pow 2 + b * (p / q) + c = &0 <=>\n          (p pow 3 = q * --(a * p pow 2 + b * p * q + c * q pow 2))) /\\\n         ((--(p / q)) pow 3 + a * (--(p / q)) pow 2 +\n           b * (--(p / q)) + c = &0 <=>\n          p pow 3 = q * (a * p pow 2 - b * p * q + c * q pow 2))
-      #|  abs x = a ==> x = a \\/ x = --a
-      #|  forall a b c x. integer a /\\ integer b /\\ integer c /\\ rational x /\\\n             x pow 3 + a * x pow 2 + b * x + c = &0\n             ==> integer x
+      #|  (i : Num)
+      #|  !((q : Real) == real_of_num(0)) \226\134\146 (pow((p : Real) / q, 3) + ((a : Real) * pow(p / q, 2) + ((b : Real) * (p / q) + (c : Real))) == real_of_num(0)) == (pow(p, 3) == q * -(a * pow(p, 2) + (b * (p * q) + c * pow(q, 2)))) && (pow(-(p / q), 3) + (a * pow(-(p / q), 2) + (b * -(p / q) + c)) == real_of_num(0)) == (pow(p, 3) == q * (a * pow(p, 2) - b * (p * q) + c * pow(q, 2)))
+      #|  abs((x : Real)) == (a : Real) \226\134\146 x == a || x == -a
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 x : Real, integer(a) && integer(b) && integer(c) && rational(x) && pow(x, 3) + (a * pow(x, 2) + (b * x + c)) == real_of_num(0) \226\134\146 integer(x)
       #|  integer
       #|  integer
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  forall a b c. integer a /\\ integer b /\\ integer c /\\\n           (?x. radical x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)\n           ==> (?x. integer x /\\ x pow 3 + a * x pow 2 + b * x + c = &0)
-      #|  length(a:real^2,b:real^2) = norm(b - a)
-      #|  parallel (a:real^2,b:real^2) (c:real^2,d:real^2) <=>\n        (a$1 - b$1) * (c$2 - d$2) = (a$2 - b$2) * (c$1 - d$1)
-      #|  collinear3 (a:real^2) b c <=> parallel (a,b) (a,c)
-      #|  is_intersection p (a,b) (c,d) <=> collinear3 a p b /\\ collinear3 c p d
-      #|  on_circle x (centre,pt) <=> length(centre,x) = length(centre,pt)
-      #|  --y
-      #|  y:real
-      #|  forall x y. y pow 2 = x ==> &0 <= x /\\ (sqrt(x) = y \\/ sqrt(x) = --y)
-      #|  ~(a = &0) /\\ x = --b / a
-      #|  forall a b x. radical a /\\ radical b /\\ ~(a = &0 /\\ b = &0) /\\ a * x + b = &0\n           ==> radical x
-      #|  ~(a * e - b * d = &0) /\\\n    x = (e * c - b * f) / (a * e - b * d) /\\\n    y = (a * f - d * c) / (a * e - b * d)
-      #|  forall a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(a * e = b * d /\\ a * f = c * d /\\ e * c = b * f) /\\\n        a * x + b * y = c /\\ d * x + e * y = f\n        ==> radical(x) /\\ radical(y)
-      #|  b + sqrt(b pow 2 - &4 * a * c)
-      #|  b - sqrt(b pow 2 - &4 * a * c)
-      #|  a + (b + c) = &0 <=> c = --(a + b)
-      #|  &0 <= b pow 2 - &4 * a * c /\\\n                ((&2 * a) * x + (b - sqrt(b pow 2 - &4 * a * c)) = &0 \\/\n                 (&2 * a) * x + (b + sqrt(b pow 2 - &4 * a * c)) = &0)
-      #|  &2 * a
-      #|  a = &0
-      #|  forall a b c x. radical a /\\ radical b /\\ radical c /\\\n             a * x pow 2 + b * x + c = &0 /\\\n             ~(a = &0 /\\ b = &0 /\\ c = &0)\n             ==> radical x
-      #|  a pow 2 * d pow 2 + b pow 2 * d pow 2 +\n                f pow 2 - c * d pow 2 - &2 * a * d * f
-      #|  &2 * a * d * e - &2 * b * d pow 2 - &2 * f * e
-      #|  b pow 2 * e pow 2 + a pow 2 * e pow 2 +\n                f pow 2 - c * e pow 2 - &2 * b * e * f
-      #|  &2 * b * d * e - &2 * a * e pow 2 - &2 * d * f
-      #|  d pow 2 + e pow 2
-      #|  forall a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(d = &0 /\\ e = &0 /\\ f = &0) /\\\n        (x - a) pow 2 + (y - b) pow 2 = c /\\ d * x + e * y = f\n        ==> radical x /\\ radical y
-      #|  (d pow 2 - a pow 2) + (e pow 2 - b pow 2) + (c - f)
-      #|  &2 * (e - b)
-      #|  &2 * (d - a)
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  forall a b c d e f x.\n        radical a /\\ radical b /\\ radical c /\\\n        radical d /\\ radical e /\\ radical f /\\\n        ~(a = d /\\ b = e /\\ c = f) /\\\n        (x - a) pow 2 + (y - b) pow 2 = c /\\\n        (x - d) pow 2 + (y - e) pow 2 = f\n        ==> radical x /\\ radical y
-      #|  (forall x:real^2. rational(x$1) /\\ rational(x$2) ==> constructible x) /\\\n// Intersection of two non-parallel lines AB and CD\n  (forall a b c d x. constructible a /\\ constructible b /\\\n               constructible c /\\ constructible d /\\\n               ~parallel (a,b) (c,d) /\\ is_intersection x (a,b) (c,d)\n               ==> constructible x) /\\\n// Intersection of a nontrivial line AB and circle with centre C, radius DE\n  (forall a b c d e x. constructible a /\\ constructible b /\\\n                 constructible c /\\ constructible d /\\\n                 constructible e /\\\n                 ~(a = b) /\\ collinear3 a x b /\\ length (c,x) = length(d,e)\n                 ==> constructible x) /\\\n// Intersection of distinct circles with centres A and D, radii BD and EF\n  (forall a b c d e f x. constructible a /\\ constructible b /\\\n                   constructible c /\\ constructible d /\\\n                   constructible e /\\ constructible f /\\\n                   ~(a = d /\\ length (b,c) = length (e,f)) /\\\n                   length (a,x) = length (b,c) /\\ length (d,x) = length (e,f)\n                   ==> constructible x)
-      #|  (c:real^2)$2 * (c$1 - (d:real^2)$1) - (c:real^2)$1 * (c$2 - d$2)
-      #|  (c:real^2)$1 - (d:real^2)$1
-      #|  (d:real^2)$2 - (c:real^2)$2
-      #|  (a:real^2)$2 * (a$1 - (b:real^2)$1) - (a:real^2)$1 * (a$2 - b$2)
-      #|  (a:real^2)$1 - (b:real^2)$1
-      #|  (b:real^2)$2 - (a:real^2)$2
-      #|  forall a b c d x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        ~(parallel (a,b) (c,d)) /\\ is_intersection x (a,b) (c,d)\n        ==> radical(x$1) /\\ radical(x$2)
-      #|  a$2 * ((a:real^2)$1 - (b:real^2)$1) - a$1 * (a$2 - b$2)
-      #|  (a:real^2)$1 - (b:real^2)$1
-      #|  (b:real^2)$2 - (a:real^2)$2
-      #|  ((e:real^2)$1 - (d:real^2)$1) pow 2 + (e$2 - d$2) pow 2
-      #|  (c:real^2)$2
-      #|  (c:real^2)$1
-      #|  forall a b c d e x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        radical(e$1) /\\ radical(e$2) /\\\n        ~(a = b) /\\ collinear3 a x b /\\ length(c,x) = length(d,e)\n        ==> radical(x$1) /\\ radical(x$2)
-      #|  ((f:real^2)$1 - (e:real^2)$1) pow 2 + (f$2 - e$2) pow 2
-      #|  (d:real^2)$2
-      #|  (d:real^2)$1
-      #|  ((c:real^2)$1 - (b:real^2)$1) pow 2 + (c$2 - b$2) pow 2
-      #|  (a:real^2)$2
-      #|  (a:real^2)$1
-      #|  forall a b c d e f x.\n        radical(a$1) /\\ radical(a$2) /\\\n        radical(b$1) /\\ radical(b$2) /\\\n        radical(c$1) /\\ radical(c$2) /\\\n        radical(d$1) /\\ radical(d$2) /\\\n        radical(e$1) /\\ radical(e$2) /\\\n        radical(f$1) /\\ radical(f$2) /\\\n        length(a,x) = length(b,c) /\\\n        length(d,x) = length(e,f) /\\\n        ~(a = d /\\ length(b,c) = length(e,f))\n        ==> radical(x$1) /\\ radical(x$2)
-      #|  forall x. constructible x ==> radical(x$1) /\\ radical(x$2)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, integer(a) && integer(b) && integer(c) && (\226\136\131 x : Real, radical(x) && pow(x, 3) + (a * pow(x, 2) + (b * x + c)) == real_of_num(0)) \226\134\146 (\226\136\131 x : Real, integer(x) && pow(x, 3) + (a * pow(x, 2) + (b * x + c)) == real_of_num(0))
+      #|  (length : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])) -> Real)(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) == norm(b - a)
+      #|  (parallel : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]), (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])) -> Bool)(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])), ((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))) == ((op_dollar(a, 1) - op_dollar(b, 1)) * (op_dollar(c, 2) - op_dollar(d, 2)) == (op_dollar(a, 2) - op_dollar(b, 2)) * (op_dollar(c, 1) - op_dollar(d, 1)))
+      #|  (collinear3 : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Bool)((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])) == parallel((a, b), (a, c))
+      #|  (is_intersection : (Cart[Real, Tybit0[Unit]], (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]), (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])) -> Bool)((p : Cart[Real, Tybit0[Unit]]), ((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])), ((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))) == (collinear3(a, p, b) && collinear3(c, p, d))
+      #|  (on_circle : (Cart[Real, Tybit0[Unit]], (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])) -> Bool)((x : Cart[Real, Tybit0[Unit]]), ((centre : Cart[Real, Tybit0[Unit]]), (pt : Cart[Real, Tybit0[Unit]]))) == (length((centre, x)) == length((centre, pt)))
+      #|  -(y : Real)
+      #|  (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, pow(y, 2) == x \226\134\146 real_of_num(0) <= x && (sqrt(x) == y || sqrt(x) == -y)
+      #|  !((a : Real) == real_of_num(0)) && (x : Real) == -(b : Real) / a
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 x : Real, radical(a) && radical(b) && !(a == real_of_num(0) && b == real_of_num(0)) && a * x + b == real_of_num(0) \226\134\146 radical(x)
+      #|  !((a : Real) * (e : Real) - (b : Real) * (d : Real) == real_of_num(0)) && (x : Real) == (e * (c : Real) - b * (f : Real)) / (a * e - b * d) && (y : Real) == (a * f - d * c) / (a * e - b * d)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 e : Real, \226\136\128 f : Real, \226\136\128 x : Real, radical(a) && radical(b) && radical(c) && radical(d) && radical(e) && radical(f) && !(a * e == b * d && a * f == c * d && e * c == b * f) && a * x + b * (y : Real) == c && d * x + e * y == f \226\134\146 radical(x) && radical(y)
+      #|  (b : Real) + sqrt(pow(b, 2) - real_of_num(4) * ((a : Real) * (c : Real)))
+      #|  (b : Real) - sqrt(pow(b, 2) - real_of_num(4) * ((a : Real) * (c : Real)))
+      #|  ((a : Real) + ((b : Real) + (c : Real)) == real_of_num(0)) == (c == -(a + b))
+      #|  real_of_num(0) <= pow((b : Real), 2) - real_of_num(4) * ((a : Real) * (c : Real)) && (real_of_num(2) * a * (x : Real) + (b - sqrt(pow(b, 2) - real_of_num(4) * (a * c))) == real_of_num(0) || real_of_num(2) * a * x + (b + sqrt(pow(b, 2) - real_of_num(4) * (a * c))) == real_of_num(0))
+      #|  real_of_num(2) * (a : Real)
+      #|  (a : Real) == real_of_num(0)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 x : Real, radical(a) && radical(b) && radical(c) && a * pow(x, 2) + (b * x + c) == real_of_num(0) && !(a == real_of_num(0) && b == real_of_num(0) && c == real_of_num(0)) \226\134\146 radical(x)
+      #|  pow((a : Real), 2) * pow((d : Real), 2) + (pow((b : Real), 2) * pow(d, 2) + (pow((f : Real), 2) - (c : Real) * pow(d, 2) - real_of_num(2) * (a * (d * f))))
+      #|  real_of_num(2) * ((a : Real) * ((d : Real) * (e : Real))) - real_of_num(2) * ((b : Real) * pow(d, 2)) - real_of_num(2) * ((f : Real) * e)
+      #|  pow((b : Real), 2) * pow((e : Real), 2) + (pow((a : Real), 2) * pow(e, 2) + (pow((f : Real), 2) - (c : Real) * pow(e, 2) - real_of_num(2) * (b * (e * f))))
+      #|  real_of_num(2) * ((b : Real) * ((d : Real) * (e : Real))) - real_of_num(2) * ((a : Real) * pow(e, 2)) - real_of_num(2) * (d * (f : Real))
+      #|  pow((d : Real), 2) + pow((e : Real), 2)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 e : Real, \226\136\128 f : Real, \226\136\128 x : Real, radical(a) && radical(b) && radical(c) && radical(d) && radical(e) && radical(f) && !(d == real_of_num(0) && e == real_of_num(0) && f == real_of_num(0)) && pow(x - a, 2) + pow((y : Real) - b, 2) == c && d * x + e * y == f \226\134\146 radical(x) && radical(y)
+      #|  pow((d : Real), 2) - pow((a : Real), 2) + (pow((e : Real), 2) - pow((b : Real), 2) + ((c : Real) - (f : Real)))
+      #|  real_of_num(2) * ((e : Real) - (b : Real))
+      #|  real_of_num(2) * ((d : Real) - (a : Real))
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, \226\136\128 e : Real, \226\136\128 f : Real, \226\136\128 x : Real, radical(a) && radical(b) && radical(c) && radical(d) && radical(e) && radical(f) && !(a == d && b == e && c == f) && pow(x - a, 2) + pow((y : Real) - b, 2) == c && pow(x - d, 2) + pow(y - e, 2) == f \226\134\146 radical(x) && radical(y)
+      #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], rational(op_dollar(x, 1)) && rational(op_dollar(x, 2)) \226\134\146 (constructible : (Cart[Real, Tybit0[Unit]]) -> Bool)(x)) && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], constructible(a) && constructible(b) && constructible(c) && constructible(d) && !parallel((a, b), (c, d)) && is_intersection(x, (a, b), (c, d)) \226\134\146 constructible(x)) && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 e : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], constructible(a) && constructible(b) && constructible(c) && constructible(d) && constructible(e) && !(a == b) && collinear3(a, x, b) && length((c, x)) == length((d, e)) \226\134\146 constructible(x)) && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 e : Cart[Real, Tybit0[Unit]], \226\136\128 f : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], constructible(a) && constructible(b) && constructible(c) && constructible(d) && constructible(e) && constructible(f) && !(a == d && length((b, c)) == length((e, f))) && length((a, x)) == length((b, c)) && length((d, x)) == length((e, f)) \226\134\146 constructible(x))
+      #|  op_dollar((c : Cart[Real, Tybit0[Unit]]), 2) * (op_dollar(c, 1) - op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)) - op_dollar(c, 1) * (op_dollar(c, 2) - op_dollar(d, 2))
+      #|  op_dollar((c : Cart[Real, Tybit0[Unit]]), 1) - op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)
+      #|  op_dollar((d : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((c : Cart[Real, Tybit0[Unit]]), 2)
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) * (op_dollar(a, 1) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)) - op_dollar(a, 1) * (op_dollar(a, 2) - op_dollar(b, 2))
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 1) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)
+      #|  op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((a : Cart[Real, Tybit0[Unit]]), 2)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], radical(op_dollar(a, 1)) && radical(op_dollar(a, 2)) && radical(op_dollar(b, 1)) && radical(op_dollar(b, 2)) && radical(op_dollar(c, 1)) && radical(op_dollar(c, 2)) && radical(op_dollar(d, 1)) && radical(op_dollar(d, 2)) && !parallel((a, b), (c, d)) && is_intersection(x, (a, b), (c, d)) \226\134\146 radical(op_dollar(x, 1)) && radical(op_dollar(x, 2))
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 2) * (op_dollar(a, 1) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)) - op_dollar(a, 1) * (op_dollar(a, 2) - op_dollar(b, 2))
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 1) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)
+      #|  op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) - op_dollar((a : Cart[Real, Tybit0[Unit]]), 2)
+      #|  pow(op_dollar((e : Cart[Real, Tybit0[Unit]]), 1) - op_dollar((d : Cart[Real, Tybit0[Unit]]), 1), 2) + pow(op_dollar(e, 2) - op_dollar(d, 2), 2)
+      #|  op_dollar((c : Cart[Real, Tybit0[Unit]]), 2)
+      #|  op_dollar((c : Cart[Real, Tybit0[Unit]]), 1)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 e : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], radical(op_dollar(a, 1)) && radical(op_dollar(a, 2)) && radical(op_dollar(b, 1)) && radical(op_dollar(b, 2)) && radical(op_dollar(c, 1)) && radical(op_dollar(c, 2)) && radical(op_dollar(d, 1)) && radical(op_dollar(d, 2)) && radical(op_dollar(e, 1)) && radical(op_dollar(e, 2)) && !(a == b) && collinear3(a, x, b) && length((c, x)) == length((d, e)) \226\134\146 radical(op_dollar(x, 1)) && radical(op_dollar(x, 2))
+      #|  pow(op_dollar((f : Cart[Real, Tybit0[Unit]]), 1) - op_dollar((e : Cart[Real, Tybit0[Unit]]), 1), 2) + pow(op_dollar(f, 2) - op_dollar(e, 2), 2)
+      #|  op_dollar((d : Cart[Real, Tybit0[Unit]]), 2)
+      #|  op_dollar((d : Cart[Real, Tybit0[Unit]]), 1)
+      #|  pow(op_dollar((c : Cart[Real, Tybit0[Unit]]), 1) - op_dollar((b : Cart[Real, Tybit0[Unit]]), 1), 2) + pow(op_dollar(c, 2) - op_dollar(b, 2), 2)
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 2)
+      #|  op_dollar((a : Cart[Real, Tybit0[Unit]]), 1)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], \226\136\128 e : Cart[Real, Tybit0[Unit]], \226\136\128 f : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], radical(op_dollar(a, 1)) && radical(op_dollar(a, 2)) && radical(op_dollar(b, 1)) && radical(op_dollar(b, 2)) && radical(op_dollar(c, 1)) && radical(op_dollar(c, 2)) && radical(op_dollar(d, 1)) && radical(op_dollar(d, 2)) && radical(op_dollar(e, 1)) && radical(op_dollar(e, 2)) && radical(op_dollar(f, 1)) && radical(op_dollar(f, 2)) && length((a, x)) == length((b, c)) && length((d, x)) == length((e, f)) && !(a == d && length((b, c)) == length((e, f))) \226\134\146 radical(op_dollar(x, 1)) && radical(op_dollar(x, 2))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], constructible(x) \226\134\146 radical(op_dollar(x, 1)) && radical(op_dollar(x, 2))
       #|  3
-      #|  n EXP 3 <= 1 EXP 3 \\/ 2 EXP 3 <= n EXP 3 ==> ~(n EXP 3 = 2)
+      #|  EXP((n : Num), 3) <= EXP(1, 3) || EXP(2, 3) <= EXP(n, 3) \226\134\146 !(EXP(n, 3) == 2)
       #|  abs
-      #|  -- &2
-      #|  &0
-      #|  &0
-      #|  ~(?x. radical x /\\ x pow 3 = &2)
-      #|  forall x. x pow 3 = &2 ==> ~(constructible(vector[x; &0]))
-      #|  x:real
-      #|  &3 * x = x + x + x
-      #|  forall x. cos(&3 * x) = &4 * cos(x) pow 3 - &3 * cos(x)
-      #|  pi / &3
-      #|  -- &1 = &4 * c pow 3 - &3 * c <=> c = &1 / &2 \\/ c = -- &1
-      #|  pi / &3
-      #|  cos(pi / &3) = &1 / &2
-      #|  (&2 + m) pow 2 - &3 = m pow 2 + &4 * m + &1
-      #|  n = 0 \\/ n = 1 \\/ n = 2 + (n - 2)
+      #|  -real_of_num(2)
+      #|  real_of_num(0)
+      #|  real_of_num(0)
+      #|  !(\226\136\131 x : Real, radical(x) && pow(x, 3) == real_of_num(2))
+      #|  \226\136\128 x : Real, pow(x, 3) == real_of_num(2) \226\134\146 !constructible(vector([x, real_of_num(0)]))
+      #|  (x : Real)
+      #|  real_of_num(3) * (x : Real) == x + (x + x)
+      #|  \226\136\128 x : Real, cos(real_of_num(3) * x) == real_of_num(4) * pow(cos(x), 3) - real_of_num(3) * cos(x)
+      #|  pi / real_of_num(3)
+      #|  (-real_of_num(1) == real_of_num(4) * pow((c : Real), 3) - real_of_num(3) * c) == (c == real_of_num(1) / real_of_num(2) || c == -real_of_num(1))
+      #|  pi / real_of_num(3)
+      #|  cos(pi / real_of_num(3)) == real_of_num(1) / real_of_num(2)
+      #|  pow(real_of_num(2) + (m : Real), 2) - real_of_num(3) == pow(m, 2) + (real_of_num(4) * m + real_of_num(1))
+      #|  (n : Num) == 0 || n == 1 || n == 2 + (n - 2)
       #|  abs
-      #|  x pow 3 - &3 * x - &1 = &0 <=> x * (x pow 2 - &3) = &1
-      #|  -- &1
-      #|  -- &3
-      #|  &0
-      #|  ~(?x. radical x /\\ x pow 3 - &3 * x - &1 = &0)
-      #|  &1 / &2 = &4 * c pow 3 - &3 * c <=>\n    (&2 * c) pow 3 - &3 * (&2 * c) - &1 = &0
-      #|  &3 * x / &9 = x / &3
-      #|  pi / &9
-      #|  forall y. ~(constructible(vector[cos(pi / &9); y]))
+      #|  (pow((x : Real), 3) - real_of_num(3) * x - real_of_num(1) == real_of_num(0)) == (x * (pow(x, 2) - real_of_num(3)) == real_of_num(1))
+      #|  -real_of_num(1)
+      #|  -real_of_num(3)
+      #|  real_of_num(0)
+      #|  !(\226\136\131 x : Real, radical(x) && pow(x, 3) - real_of_num(3) * x - real_of_num(1) == real_of_num(0))
+      #|  (real_of_num(1) / real_of_num(2) == real_of_num(4) * pow((c : Real), 3) - real_of_num(3) * c) == (pow(real_of_num(2) * c, 3) - real_of_num(3) * (real_of_num(2) * c) - real_of_num(1) == real_of_num(0))
+      #|  real_of_num(3) * ((x : Real) / real_of_num(9)) == x / real_of_num(3)
+      #|  pi / real_of_num(9)
+      #|  \226\136\128 y : Real, !constructible(vector([cos(pi / real_of_num(9)), y]))
       #|STEP_LEMMA =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\P:fun(real,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. (P:fun(real,bool) (#real_of_num:fun(num,real) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (P:fun(real,bool) (#real_neg:fun(real,real) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) (P:fun(real,bool) (#real_inv:fun(real,real) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (P:fun(real,bool) y:real))) (P:fun(real,bool) ((#real_add:fun(real,fun(real,real)) x:real) y:real)))))))) (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (P:fun(real,bool) y:real))) (P:fun(real,bool) ((#real_mul:fun(real,fun(real,real)) x:real) y:real)))))))))))) (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. (#forall:fun(fun(real,bool),bool) (\c:real. (#forall:fun(fun(real,bool),bool) (\z:real. (#forall:fun(fun(real,bool),bool) (\u:real. (#forall:fun(fun(real,bool),bool) (\v:real. (#forall:fun(fun(real,bool),bool) (\s:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) a:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) b:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) c:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) z:real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) a:real) ((#real_pow:fun(real,fun(num,real)) z:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) z:real)) c:real)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) u:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) v:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) ((#real_mul:fun(real,fun(real,real)) s:real) s:real))) ((#=:fun(real,fun(real,bool)) z:real) ((#real_add:fun(real,fun(real,real)) u:real) ((#real_mul:fun(real,fun(real,real)) v:real) s:real))))))))))) (#?:fun(fun(real,bool),bool) (\w:real. ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) w:real)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) w:real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) a:real) ((#real_pow:fun(real,fun(num,real)) w:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) w:real)) c:real)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))))))))))
       #|STEP_LEMMA_SQRT =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\P:fun(real,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. (P:fun(real,bool) (#real_of_num:fun(num,real) n:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (P:fun(real,bool) (#real_neg:fun(real,real) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) (P:fun(real,bool) (#real_inv:fun(real,real) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (P:fun(real,bool) y:real))) (P:fun(real,bool) ((#real_add:fun(real,fun(real,real)) x:real) y:real)))))))) (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (P:fun(real,bool) y:real))) (P:fun(real,bool) ((#real_mul:fun(real,fun(real,real)) x:real) y:real)))))))))))) (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. (#forall:fun(fun(real,bool),bool) (\c:real. (#forall:fun(fun(real,bool),bool) (\z:real. (#forall:fun(fun(real,bool),bool) (\u:real. (#forall:fun(fun(real,bool),bool) (\v:real. (#forall:fun(fun(real,bool),bool) (\s:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) a:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) b:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) c:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) z:real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) a:real) ((#real_pow:fun(real,fun(num,real)) z:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) z:real)) c:real)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) u:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) v:real)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) s:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) s:real)) ((#=:fun(real,fun(real,bool)) z:real) ((#real_add:fun(real,fun(real,real)) u:real) ((#real_mul:fun(real,fun(real,real)) v:real) (#sqrt:fun(real,real) s:real))))))))))))) (#?:fun(fun(real,bool),bool) (\w:real. ((#/\:fun(bool,fun(bool,bool)) (P:fun(real,bool) w:real)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) w:real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) a:real) ((#real_pow:fun(real,fun(num,real)) w:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) w:real)) c:real)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))))))))))))))
       #|radical_RULES =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#rational:fun(real,bool) x:real)) (#radical:fun(real,bool) x:real))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#radical:fun(real,bool) x:real)) (#radical:fun(real,bool) (#real_neg:fun(real,real) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#radical:fun(real,bool) x:real)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) (#radical:fun(real,bool) (#real_inv:fun(real,real) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#radical:fun(real,bool) x:real)) (#radical:fun(real,bool) y:real))) (#radical:fun(real,bool) ((#real_add:fun(real,fun(real,real)) x:real) y:real)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#radical:fun(real,bool) x:real)) (#radical:fun(real,bool) y:real))) (#radical:fun(real,bool) ((#real_mul:fun(real,fun(real,real)) x:real) y:real)))))))) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#radical:fun(real,bool) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real))) (#radical:fun(real,bool) (#sqrt:fun(real,real) x:real))))))))))
