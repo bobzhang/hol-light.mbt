@@ -79201,360 +79201,360 @@ test "100/descartes matches 100/descartes.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|100/descartes quotations (354):
-      #|  a * b < &0 <=> &0 < a * --b
-      #|  forall a b:real. a * b < &0 <=> &0 < a /\\ b < &0 \\/ a < &0 /\\ &0 < b
-      #|  {p,q | p IN s /\\ q IN t /\\ R p q} =\n    {p,q | p IN s /\\ q IN {q | q IN t /\\ R p q}}
-      #|  FINITE s ==> FINITE {p,q | p IN s /\\ q IN s /\\ P p q}
-      #|  variation s (a:num->real) =\n     CARD {(p,q) | p IN s /\\ q IN s /\\ p < q /\\\n                   a(p) * a(q) < &0 /\\\n                   forall i. i IN s /\\ p < i /\\ i < q ==> a(i) = &0 }
-      #|  forall a b s. (forall i. i IN s ==> a i = b i) ==> variation s a = variation s b
-      #|  forall a s t. t SUBSET s /\\ (forall i. i IN (s DIFF t) ==> a i = &0)\n           ==> variation s a = variation t a
-      #|  ~(a /\\ b) <=> ~b \\/ ~a
-      #|  forall a s n.\n        FINITE s /\\ n IN s /\\ ~(a n = &0)\n        ==> variation s a = variation {i | i IN s /\\ i <= n} a +\n                            variation {i | i IN s /\\ n <= i} a
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  n:num
-      #|  a /\\ b /\\ c ==> d <=> b /\\ c ==> a ==> d
-      #|  forall a m n p. n IN m..p /\\ ~(a n = &0)\n             ==> variation(m..p) a = variation(m..n) a + variation(n..p) a
-      #|  s = {} ==> CARD s = 0
-      #|  p:num = n /\\ q = n /\\ p < q /\\ X <=> F
-      #|  forall a n. variation {n} a = 0
-      #|  s = {} ==> CARD s = 0
-      #|  {p,q | p = a /\\ q = b} = {(a,b)}
-      #|  a m * a(n:num) < &0
-      #|  (i:num = m \\/ i = n) /\\ m < i /\\ i < n <=> F
-      #|  (p = m /\\ q = n) /\\ X p q <=>\n                         (p = m /\\ q = n) /\\ X m n
-      #|  m:num < n\n      ==> ((p = m \\/ p = n) /\\ (q = m \\/ q = n) /\\ p < q <=>\n           p = m /\\ q = n)
-      #|  a /\\ b /\\ c /\\ d /\\ e <=> (a /\\ b /\\ c) /\\ d /\\ e
-      #|  forall a m n. variation {m,n} a = if a(m) * a(n) < &0 then 1 else 0
-      #|  n:num
-      #|  {m:num,n,p}
-      #|  a:num->real
-      #|  forall a m n p.\n        m < n /\\ n < p\n        ==> variation {m,n,p} a = if a(n) = &0 then variation{m,p} a\n                                  else variation {m,n} a + variation{n,p} a
-      #|  i - p:num
-      #|  y < &0 ==> x = y ==> x < &0
-      #|  \\(i:num,j). i + p,j + p
-      #|  \\(i:num,j). i - p,j - p
-      #|  forall p m n a. variation(m+p..n+p) a = variation(m..n) (\\i. a(i + p))
-      #|  x:int = y + --z <=> x + z = y
-      #|  1 < p ==> ~(p = 1)
+      #|  ((a : Real) * (b : Real) < real_of_num(0)) == (real_of_num(0) < a * -b)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, (a * b < real_of_num(0)) == (real_of_num(0) < a && b < real_of_num(0) || a < real_of_num(0) && real_of_num(0) < b)
+      #|  {((p : _), (q : _)) | IN(p, (s : (_) -> Bool)) && IN(q, (t : (_) -> Bool)) && (R : (_, _) -> Bool)(p, q)} == {((p : _), (q : _)) | IN(p, s) && IN(q, {(q : _) | IN(q, t) && R(p, q)})}
+      #|  FINITE((s : (_) -> Bool)) \226\134\146 FINITE({((p : _), (q : _)) | IN(p, s) && IN(q, s) && (P : (_, _) -> Bool)(p, q)})
+      #|  (variation : ((Num) -> Bool, (Num) -> Real) -> Num)((s : (Num) -> Bool), (a : (Num) -> Real)) == CARD({((p : Num), (q : Num)) | IN(p, s) && IN(q, s) && p < q && a(p) * a(q) < real_of_num(0) && (\226\136\128 i : Num, IN(i, s) && p < i && i < q \226\134\146 a(i) == real_of_num(0))})
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, \226\136\128 s : (Num) -> Bool, (\226\136\128 i : Num, IN(i, s) \226\134\146 a(i) == b(i)) \226\134\146 variation(s, a) == variation(s, b)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, SUBSET(t, s) && (\226\136\128 i : Num, IN(i, DIFF(s, t)) \226\134\146 a(i) == real_of_num(0)) \226\134\146 variation(s, a) == variation(t, a)
+      #|  !((a : Bool) && (b : Bool)) == (!b || !a)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 n : Num, FINITE(s) && IN(n, s) && !(a(n) == real_of_num(0)) \226\134\146 variation(s, a) == variation({(i : Num) | IN(i, s) && i <= n}, a) + variation({(i : Num) | IN(i, s) && n <= i}, a)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (b && c \226\134\146 a \226\134\146 d)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, IN(n, op_dot_dot(m, p)) && !(a(n) == real_of_num(0)) \226\134\146 variation(op_dot_dot(m, p), a) == variation(op_dot_dot(m, n), a) + variation(op_dot_dot(n, p), a)
+      #|  (s : (_) -> Bool) == {} \226\134\146 CARD(s) == 0
+      #|  ((p : Num) == (n : Num) && (q : Num) == n && p < q && (X : Bool)) == false
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, variation({n}, a) == 0
+      #|  (s : (_) -> Bool) == {} \226\134\146 CARD(s) == 0
+      #|  {((p : _), (q : _)) | p == (a : _) && q == (b : _)} == {(a, b)}
+      #|  (a : (Num) -> Real)((m : Num)) * a((n : Num)) < real_of_num(0)
+      #|  (((i : Num) == (m : Num) || i == (n : Num)) && m < i && i < n) == false
+      #|  (((p : _) == (m : _) && (q : _) == (n : _)) && (X : (_, _) -> Bool)(p, q)) == ((p == m && q == n) && X(m, n))
+      #|  (m : Num) < (n : Num) \226\134\146 (((p : Num) == m || p == n) && ((q : Num) == m || q == n) && p < q) == (p == m && q == n)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool)) == ((a && b && c) && d && e)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, variation({m, n}, a) == (if a(m) * a(n) < real_of_num(0) { 1 } else { 0 })
+      #|  (n : Num)
+      #|  {(m : Num), (n : Num), (p : Num)}
+      #|  (a : (Num) -> Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m < n && n < p \226\134\146 variation({m, n, p}, a) == (if a(n) == real_of_num(0) { variation({m, p}, a) } else { variation({m, n}, a) + variation({n, p}, a) })
+      #|  (i : Num) - (p : Num)
+      #|  (y : Real) < real_of_num(0) \226\134\146 (x : Real) == y \226\134\146 x < real_of_num(0)
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), (i + (p : Num), j + p)))
+      #|  GABS((f : ((Num, Num)) -> (Num, Num)) => \226\136\128 i : Num, \226\136\128 j : Num, GEQ(f((i, j)), (i - (p : Num), j - p)))
+      #|  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, variation(op_dot_dot(m + p, n + p), a) == variation(op_dot_dot(m, n), (i : Num) => a(i + p))
+      #|  ((x : Int) == (y : Int) + -(z : Int)) == (x + z == y)
+      #|  1 < (p : Num) \226\134\146 !(p == 1)
       #|  0
       #|  1
-      #|  (b:num->real) 1 = a 0 + a 1
+      #|  (b : (Num) -> Real)(1) == (a : (Num) -> Real)(0) + a(1)
       #|  1
       #|  1
-      #|  variation(0..1) b + variation(1..n) b
-      #|  variation(0..n) b = variation {0,1} b + variation(1..n) b
-      #|  ~(ap = &0) ==> s = &0 ==> ~(s + ap = &0)
-      #|  1 < p ==> 0 < p /\\ 0 <= p
-      #|  1 < p
-      #|  p:num
-      #|  variation(0..p) b + variation(p..n) b
-      #|  variation(0..n) b = variation {0,p} b + variation(1..n) b
-      #|  1 < p ==> 0 < p /\\ 0 <= p
-      #|  1 < p
-      #|  (b:num->real) p = a p
-      #|  0 < i ==> 0 + 1 <= i
-      #|  i:num
-      #|  forall i. 0 < i /\\ i < p ==> b i = &0
-      #|  a 0 + a 1 = &0
-      #|  a + b:int = c + d <=> d = (a + b) - c
-      #|  a + b:int = c + d ==> c = (a + b) - d
-      #|  d:num
-      #|  variation(0..p) a + variation(p..n) a
-      #|  variation(1..p) a' + variation(p..n) a'
-      #|  variation (1..n) a' = variation {1,p} a' + variation (p..n) a /\\\n    variation (0..n) a = variation {0,1,p} a + variation (p..n) a
-      #|  2 <= n ==> n - 1 + 1 = n /\\ n - 1 - 1 + 1 = n - 1
-      #|  a':num->real = \\m. if m = 1 then a 0 + a 1 else a m
-      #|  2 = 1 + 1
-      #|  0 + 1 <= n + 1
-      #|  sum(0..m+1) a
-      #|  m:num
+      #|  variation(op_dot_dot(0, 1), (b : (Num) -> Real)) + variation(op_dot_dot(1, (n : Num)), b)
+      #|  variation(op_dot_dot(0, (n : Num)), (b : (Num) -> Real)) == variation({0, 1}, b) + variation(op_dot_dot(1, n), b)
+      #|  !((ap : Real) == real_of_num(0)) \226\134\146 (s : Real) == real_of_num(0) \226\134\146 !(s + ap == real_of_num(0))
+      #|  1 < (p : Num) \226\134\146 0 < p && 0 <= p
+      #|  1 < (p : Num)
+      #|  (p : Num)
+      #|  variation(op_dot_dot(0, (p : Num)), (b : (Num) -> Real)) + variation(op_dot_dot(p, (n : Num)), b)
+      #|  variation(op_dot_dot(0, (n : Num)), (b : (Num) -> Real)) == variation({0, (p : Num)}, b) + variation(op_dot_dot(1, n), b)
+      #|  1 < (p : Num) \226\134\146 0 < p && 0 <= p
+      #|  1 < (p : Num)
+      #|  (b : (Num) -> Real)((p : Num)) == (a : (Num) -> Real)(p)
+      #|  0 < (i : Num) \226\134\146 0 + 1 <= i
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, 0 < i && i < (p : Num) \226\134\146 (b : (Num) -> Real)(i) == real_of_num(0)
+      #|  (a : (Num) -> Real)(0) + a(1) == real_of_num(0)
+      #|  ((a : Int) + (b : Int) == (c : Int) + (d : Int)) == (d == a + b - c)
+      #|  (a : Int) + (b : Int) == (c : Int) + (d : Int) \226\134\146 c == a + b - d
+      #|  (d : Num)
+      #|  variation(op_dot_dot(0, (p : Num)), (a : (Num) -> Real)) + variation(op_dot_dot(p, (n : Num)), a)
+      #|  variation(op_dot_dot(1, (p : Num)), (a' : (Num) -> Real)) + variation(op_dot_dot(p, (n : Num)), a')
+      #|  variation(op_dot_dot(1, (n : Num)), (a' : (Num) -> Real)) == variation({1, (p : Num)}, a') + variation(op_dot_dot(p, n), (a : (Num) -> Real)) && variation(op_dot_dot(0, n), a) == variation({0, 1, p}, a) + variation(op_dot_dot(p, n), a)
+      #|  2 <= (n : Num) \226\134\146 n - 1 + 1 == n && n - 1 - 1 + 1 == n - 1
+      #|  (a' : (Num) -> Real) == ((m : Num) => if m == 1 { (a : (Num) -> Real)(0) + a(1) } else { a(m) })
+      #|  2 == 1 + 1
+      #|  0 + 1 <= (n : Num) + 1
+      #|  sum(op_dot_dot(0, (m : Num) + 1), (a : (Num) -> Real))
+      #|  (m : Num)
       #|  1
-      #|  2 <= n ==> ~(n = 1) /\\ n - 1 + 1 = n
-      #|  (\\i. b(i + 1)):num->real
-      #|  (\\i. if i + 1 = 1 then a 0 + a 1 else a(i + 1)):num->real
-      #|  n - 1
-      #|  a ==> ~(b /\\ c /\\ ~d) <=> a /\\ b /\\ c ==> d
-      #|  2 <= n ==> 1 < n
-      #|  ?p. 1 < p /\\ p <= n /\\ ~(a p = &0)
+      #|  2 <= (n : Num) \226\134\146 !(n == 1) && n - 1 + 1 == n
+      #|  (i : Num) => (b : (Num) -> Real)(i + 1)
+      #|  (i : Num) => if i + 1 == 1 { (a : (Num) -> Real)(0) + a(1) } else { a(i + 1) }
+      #|  (n : Num) - 1
+      #|  ((a : Bool) \226\134\146 !((b : Bool) && (c : Bool) && !(d : Bool))) == (a && b && c \226\134\146 d)
+      #|  2 <= (n : Num) \226\134\146 1 < n
+      #|  \226\136\131 p : Num, 1 < p && p <= (n : Num) && !((a : (Num) -> Real)(p) == real_of_num(0))
       #|  1
       #|  1
-      #|  ~(n = 0) ==> n = 1 \\/ 2 <= n
+      #|  !((n : Num) == 0) \226\134\146 n == 1 || 2 <= n
       #|  0
-      #|  n = 0
-      #|  n:num
-      #|  forall n a b.\n        ~(a n = &0) /\\ (b n = &0) /\\ (forall m. sum(0..m) a = b m)\n        ==> ?d. ODD d /\\ variation (0..n) a = variation (0..n) b + d
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, !(a(n) == real_of_num(0)) && b(n) == real_of_num(0) && (\226\136\128 m : Num, sum(op_dot_dot(0, m), a) == b(m)) \226\134\146 (\226\136\131 d : Num, ODD(d) && variation(op_dot_dot(0, n), a) == variation(op_dot_dot(0, n), b) + d)
       #|  1
       #|  1
       #|  0
-      #|  ODD(variation(m..p) a + variation(p..n) a)
-      #|  p:num
-      #|  ODD(variation {m,n} a)
-      #|  forall i:num. m < i /\\ i < n ==> a i = &0
-      #|  n - m:num
-      #|  forall a m n.\n    m <= n /\\ ~(a m = &0) /\\ ~(a n = &0)\n    ==> (ODD(variation(m..n) a) <=> a m * a n < &0)
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  p:num
-      #|  p:num
-      #|  n:num
-      #|  abs(x) < abs(y) ==> real_sgn(x + y) = real_sgn y
-      #|  (x:real) pow n = x * x pow (n - 1)
-      #|  i:num
-      #|  sum(0..n-1) (\\i. abs(a i)) * abs x pow (n - 1)
-      #|  x:real
-      #|  &1 + B
-      #|  &0 <= B
-      #|  B = sum (0..n-1) (\\i. abs(a i)) / abs(a n)
-      #|  &1
-      #|  n = 0
-      #|  forall a n. ~(a n = &0)\n         ==> ?B. &0 < B /\\\n                 forall x. B <= abs x\n                     ==> real_sgn(sum(0..n) (\\i. a i * x pow i)) =\n                         real_sgn(a n * x pow n)
-      #|  y:real = &0
-      #|  y:real
-      #|  &0
-      #|  x:real
-      #|  &0
-      #|  \\x. sum(0..n) (\\i. a i * x pow i)
-      #|  real_sgn(a n * x pow n) = &1
-      #|  x:real
-      #|  x:real
-      #|  n:num
-      #|  a:num->real
-      #|  ?x. &0 < x /\\ &0 <= sum(0..n) (\\i. a i * x pow i)
-      #|  forall a n. a 0 < &0 /\\ &0 < a n\n         ==> ?x. &0 < x /\\ sum(0..n) (\\i. a i * x pow i) = &0
-      #|  p:num
-      #|  (a:num->real) q = &0
-      #|  (aq * xp) * api / aq * xi:real = (aq / aq) * api * (xp * xi)
-      #|  (a:num->real) q * x pow p
-      #|  forall a. y = a * x ==> x = &0 ==> y = &0
-      #|  x:real
-      #|  x < &0 <=> &0 < --x
-      #|  p:num <= q ==> p + q - p = q
-      #|  q - p:num
-      #|  \\i. (a:num->real)(p + i) / a q
-      #|  ODD p ==> p = q ==> ODD q
-      #|  (a:num->real) p * a q < &0
-      #|  p:num <= q
-      #|  q:num
-      #|  p /\\ ~q ==> r <=> p /\\ ~r ==> q
-      #|  p:num
-      #|  p ==> ~(q /\\ r) <=> p /\\ q ==> ~r
-      #|  a ==> b ==> c <=> a ==> a /\\ b ==> c
-      #|  variation (0..n) a = variation {0} a
-      #|  ((forall i. P i ==> Q i) ==> F) ==> ?i. P i /\\ ~Q i
-      #|  ?i. i IN 0..n /\\ ~(a i = &0)
-      #|  n:num
-      #|  ?M. forall i. i IN 0..n /\\ ~(a i = &0) ==> i <= M
-      #|  forall a n. ODD(variation(0..n) a)\n         ==> ?x. &0 < x /\\ sum(0..n) (\\i. a i * x pow i) = &0
-      #|  multiplicity f r =\n        @k. ?a n. ~(sum(0..n) (\\i. a i * r pow i) = &0) /\\\n                  forall x. f(x) = (x - r) pow k * sum(0..n) (\\i. a i * x pow i)
-      #|  &0 = &0 * (g:real->real) r
-      #|  i:num < j ==> i + j - i = j
-      #|  (x - r:real) pow i
-      #|  forall a. a * x = a * y /\\ ~(a = &0) ==> x = y
-      #|  x:real
-      #|  &0 < abs(x - r) <=> ~(x = r)
-      #|  &1
-      #|  \\x:real. (x - r) pow (j - i) * g x
-      #|  &0
-      #|  (f:real->real) r
-      #|  f:real->real
-      #|  atreal r
-      #|  F ==> p
-      #|  j:num
-      #|  i:num
-      #|  forall i j f g. f real_continuous_on (:real) /\\ g real_continuous_on (:real) /\\\n               ~(f r = &0) /\\ ~(g r = &0)\n               ==> (forall x. (x - r) pow i * f(x) = (x - r) pow j * g(x))\n                   ==> j = i
-      #|  m:num
-      #|  b:num->real
-      #|  j:num
-      #|  forall f a r b m k.\n        (forall x. f(x) = (x - r) pow k * sum(0..m) (\\j. b j * x pow j)) /\\\n        ~(sum(0..m) (\\j. b j * r pow j) = &0)\n        ==> k = multiplicity f r
-      #|  n:num
-      #|  a:num->real
+      #|  ODD(variation(op_dot_dot((m : Num), (p : Num)), (a : (Num) -> Real)) + variation(op_dot_dot(p, (n : Num)), a))
+      #|  (p : Num)
+      #|  ODD(variation({(m : Num), (n : Num)}, (a : (Num) -> Real)))
+      #|  \226\136\128 i : Num, (m : Num) < i && i < (n : Num) \226\134\146 (a : (Num) -> Real)(i) == real_of_num(0)
+      #|  (n : Num) - (m : Num)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && !(a(m) == real_of_num(0)) && !(a(n) == real_of_num(0)) \226\134\146 ODD(variation(op_dot_dot(m, n), a)) == (a(m) * a(n) < real_of_num(0))
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  abs((x : Real)) < abs((y : Real)) \226\134\146 real_sgn(x + y) == real_sgn(y)
+      #|  pow((x : Real), (n : Num)) == x * pow(x, n - 1)
+      #|  (i : Num)
+      #|  sum(op_dot_dot(0, (n : Num) - 1), (i : Num) => abs((a : (Num) -> Real)(i))) * pow(abs((x : Real)), n - 1)
+      #|  (x : Real)
+      #|  real_of_num(1) + (B : Real)
+      #|  real_of_num(0) <= (B : Real)
+      #|  (B : Real) == sum(op_dot_dot(0, (n : Num) - 1), (i : Num) => abs((a : (Num) -> Real)(i))) / abs(a(n))
+      #|  real_of_num(1)
+      #|  (n : Num) == 0
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, !(a(n) == real_of_num(0)) \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 x : Real, B <= abs(x) \226\134\146 real_sgn(sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i))) == real_sgn(a(n) * pow(x, n))))
+      #|  (y : Real) == real_of_num(0)
+      #|  (y : Real)
+      #|  real_of_num(0)
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  (x : Real) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow(x, i))
+      #|  real_sgn((a : (Num) -> Real)((n : Num)) * pow((x : Real), n)) == real_of_num(1)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (a : (Num) -> Real)
+      #|  \226\136\131 x : Real, real_of_num(0) < x && real_of_num(0) <= sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow(x, i))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, a(0) < real_of_num(0) && real_of_num(0) < a(n) \226\134\146 (\226\136\131 x : Real, real_of_num(0) < x && sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == real_of_num(0))
+      #|  (p : Num)
+      #|  (a : (Num) -> Real)((q : Num)) == real_of_num(0)
+      #|  (aq : Real) * (xp : Real) * ((api : Real) / aq * (xi : Real)) == aq / aq * (api * (xp * xi))
+      #|  (a : (Num) -> Real)((q : Num)) * pow((x : Real), (p : Num))
+      #|  \226\136\128 a : Real, (y : Real) == a * (x : Real) \226\134\146 x == real_of_num(0) \226\134\146 y == real_of_num(0)
+      #|  (x : Real)
+      #|  ((x : Real) < real_of_num(0)) == (real_of_num(0) < -x)
+      #|  (p : Num) <= (q : Num) \226\134\146 p + (q - p) == q
+      #|  (q : Num) - (p : Num)
+      #|  (i : Num) => (a : (Num) -> Real)((p : Num) + i) / a((q : Num))
+      #|  ODD((p : Num)) \226\134\146 p == (q : Num) \226\134\146 ODD(q)
+      #|  (a : (Num) -> Real)((p : Num)) * a((q : Num)) < real_of_num(0)
+      #|  (p : Num) <= (q : Num)
+      #|  (q : Num)
+      #|  ((p : Bool) && !(q : Bool) \226\134\146 (r : Bool)) == (p && !r \226\134\146 q)
+      #|  (p : Num)
+      #|  ((p : Bool) \226\134\146 !((q : Bool) && (r : Bool))) == (p && q \226\134\146 !r)
+      #|  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (a \226\134\146 a && b \226\134\146 c)
+      #|  variation(op_dot_dot(0, (n : Num)), (a : (Num) -> Real)) == variation({0}, a)
+      #|  ((\226\136\128 i : _, (P : (_) -> Bool)(i) \226\134\146 (Q : (_) -> Bool)(i)) \226\134\146 false) \226\134\146 (\226\136\131 i : _, P(i) && !Q(i))
+      #|  \226\136\131 i : Num, IN(i, op_dot_dot(0, (n : Num))) && !((a : (Num) -> Real)(i) == real_of_num(0))
+      #|  (n : Num)
+      #|  \226\136\131 M : Num, \226\136\128 i : Num, IN(i, op_dot_dot(0, (n : Num))) && !((a : (Num) -> Real)(i) == real_of_num(0)) \226\134\146 i <= M
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, ODD(variation(op_dot_dot(0, n), a)) \226\134\146 (\226\136\131 x : Real, real_of_num(0) < x && sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == real_of_num(0))
+      #|  (multiplicity : ((Real) -> Real, Real) -> Num)((f : (Real) -> Real), (r : Real)) == select((k : Num) => \226\136\131 a : (Num) -> Real, \226\136\131 n : Num, !(sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(r, i)) == real_of_num(0)) && (\226\136\128 x : Real, f(x) == pow(x - r, k) * sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i))))
+      #|  real_of_num(0) == real_of_num(0) * (g : (Real) -> Real)((r : Real))
+      #|  (i : Num) < (j : Num) \226\134\146 i + (j - i) == j
+      #|  pow((x : Real) - (r : Real), (i : Num))
+      #|  \226\136\128 a : Real, a * (x : Real) == a * (y : Real) && !(a == real_of_num(0)) \226\134\146 x == y
+      #|  (x : Real)
+      #|  (real_of_num(0) < abs((x : Real) - (r : Real))) == !(x == r)
+      #|  real_of_num(1)
+      #|  (x : Real) => pow(x - (r : Real), (j : Num) - (i : Num)) * (g : (Real) -> Real)(x)
+      #|  real_of_num(0)
+      #|  (f : (Real) -> Real)((r : Real))
+      #|  (f : (Real) -> Real)
+      #|  atreal((r : Real))
+      #|  false \226\134\146 (p : Bool)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, \226\136\128 j : Num, \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, real_continuous_on(f, UNIV) && real_continuous_on(g, UNIV) && !(f((r : Real)) == real_of_num(0)) && !(g(r) == real_of_num(0)) \226\134\146 (\226\136\128 x : Real, pow(x - r, i) * f(x) == pow(x - r, j) * g(x)) \226\134\146 j == i
+      #|  (m : Num)
+      #|  (b : (Num) -> Real)
+      #|  (j : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : _, \226\136\128 r : Real, \226\136\128 b : (Num) -> Real, \226\136\128 m : Num, \226\136\128 k : Num, (\226\136\128 x : Real, f(x) == pow(x - r, k) * sum(op_dot_dot(0, m), (j : Num) => b(j) * pow(x, j))) && !(sum(op_dot_dot(0, m), (j : Num) => b(j) * pow(r, j)) == real_of_num(0)) \226\134\146 k == multiplicity(f, r)
+      #|  (n : Num)
+      #|  (a : (Num) -> Real)
       #|  0
-      #|  k:num
-      #|  n - (n - 1) - 1 = 0
-      #|  n - 1
-      #|  b:num->real
-      #|  n - 1
-      #|  b j = sum (j + 1..n) (\\i. a i * r pow (i - j - 1))
-      #|  n:num
-      #|  r:real
-      #|  x:real
-      #|  a:num->real
-      #|  x:real
-      #|  sum (0..n) (\\i. a i * r pow i) = &0
-      #|  n = 0
-      #|  sum(0..n) (\\i. a i * r pow i) = &0
-      #|  i:num = n
-      #|  i:num
-      #|  i:num
-      #|  a:num->real
-      #|  n - 1
-      #|  n = 0
-      #|  (a:num->real) n = &0
-      #|  a:num->real
-      #|  n:num
-      #|  forall r n a.\n    (?i. i IN 0..n /\\ ~(a i = &0))\n    ==> ?b m.\n        ~(sum(0..m) (\\i. b i * r pow i) = &0) /\\\n        forall x. sum(0..n) (\\i. a i * x pow i) =\n            (x - r) pow multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r *\n            sum(0..m) (\\i. b i * x pow i)
-      #|  SUC k
-      #|  ~(n + 1 <= n)
-      #|  0 < n + 1
-      #|  0 < i + 1
-      #|  0 <= n + 1
-      #|  x:real
-      #|  n + 1
-      #|  \\i. (if 0 < i then a(i - 1) else &0) -\n                  (if i <= n then r * a i else &0)
-      #|  n:num
-      #|  a:num->real
-      #|  c:num->real
-      #|  p:num
-      #|  p:num
-      #|  c:num->real
-      #|  m:num
-      #|  p:num
-      #|  c:num->real
-      #|  r * x = s * r * y <=> r = &0 \\/ s * y = x
-      #|  ?b q. forall x. sum(0..q) (\\j. b j * x pow j) =\n              (x - r) pow m * sum (0..p) (\\i. c i * x pow i)
-      #|  p:num
-      #|  c:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  s:real
-      #|  forall a n r s.\n    ~(r = s) /\\ (?i. i IN 0..n /\\ ~(a i = &0))\n     ==> multiplicity (\\x. (x - r) pow m * sum(0..n) (\\i. a i * x pow i)) s =\n         multiplicity (\\x.  sum(0..n) (\\i. a i * x pow i)) s
-      #|  x * y < &0 <=> &0 < x * --y
-      #|  --x * --y:real = x * y
-      #|  (a * x) * (b * x'):real = (x * x') * a * b
-      #|  i:num = n
-      #|  i:num
-      #|  variation(0..n-1) (\\i. --b i * r pow (i + 1))
-      #|  variation(0..n) (\\i. --b i * r pow (i + 1))
-      #|  variation(0..n) (\\i. a i * r pow i)
-      #|  x':num = x /\\ y' = y ==> x' = y' + d ==> x = y + d
-      #|  d:num
-      #|  ~(j <= n) ==> ((0 <= i /\\ i <= j) /\\ i <= n <=> 0 <= i /\\ i <= n)
-      #|  j + 1 <= k ==> k - j - 1 + j + 1 = k
-      #|  a:real = --b * c <=> a + b * c = &0
-      #|  forall i:num. i <= j ==> i <= n
-      #|  j:num <= n
-      #|  j:num
-      #|  \\i. if i <= n then --b i * (r:real) pow (i + 1) else &0
-      #|  \\i. if i <= n then a i * (r:real) pow i else &0
-      #|  n:num
-      #|  (b:num->real) n = &0
-      #|  n:num
-      #|  r:real
-      #|  x:real
-      #|  a:num->real
-      #|  x:real
-      #|  n - (n - 1) - 1 = 0
-      #|  b:num->real
-      #|  b = \\j. sum (j + 1..n) (\\i. a i * r pow (i - j - 1))
-      #|  n = 0
-      #|  forall a n r.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b. ~(b(n - 1) = &0) /\\\n            (forall x. sum(0..n) (\\i. a i * x pow i) =\n                 (x - r) * sum(0..n-1) (\\i. b i * x pow i)) /\\\n            ?d. ODD d /\\ variation(0..n) a = variation(0..n-1) b + d
-      #|  p:num
-      #|  ODD d
-      #|  d - 1
-      #|  n - 1
+      #|  (k : Num)
+      #|  (n : Num) - (n - 1) - 1 == 0
+      #|  (n : Num) - 1
+      #|  (b : (Num) -> Real)
+      #|  (n : Num) - 1
+      #|  (b : (Num) -> Real)((j : Num)) == sum(op_dot_dot(j + 1, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow((r : Real), i - j - 1))
+      #|  (n : Num)
+      #|  (r : Real)
+      #|  (x : Real)
+      #|  (a : (Num) -> Real)
+      #|  (x : Real)
+      #|  sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow((r : Real), i)) == real_of_num(0)
+      #|  (n : Num) == 0
+      #|  sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow((r : Real), i)) == real_of_num(0)
+      #|  (i : Num) == (n : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num) - 1
+      #|  (n : Num) == 0
+      #|  (a : (Num) -> Real)((n : Num)) == real_of_num(0)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  \226\136\128 r : Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, (\226\136\131 i : Num, IN(i, op_dot_dot(0, n)) && !(a(i) == real_of_num(0))) \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\131 m : Num, !(sum(op_dot_dot(0, m), (i : Num) => b(i) * pow(r, i)) == real_of_num(0)) && (\226\136\128 x : Real, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == pow(x - r, multiplicity((x : Real) => sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)), r)) * sum(op_dot_dot(0, m), (i : Num) => b(i) * pow(x, i))))
+      #|  SUC((k : Num))
+      #|  !((n : Num) + 1 <= n)
+      #|  0 < (n : Num) + 1
+      #|  0 < (i : Num) + 1
+      #|  0 <= (n : Num) + 1
+      #|  (x : Real)
+      #|  (n : Num) + 1
+      #|  (i : Num) => (if 0 < i { (a : (Num) -> Real)(i - 1) } else { real_of_num(0) }) - (if i <= (n : Num) { (r : Real) * a(i) } else { real_of_num(0) })
+      #|  (n : Num)
+      #|  (a : (Num) -> Real)
+      #|  (c : (Num) -> Real)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (c : (Num) -> Real)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (c : (Num) -> Real)
+      #|  ((r : Real) * (x : Real) == (s : Real) * (r * (y : Real))) == (r == real_of_num(0) || s * y == x)
+      #|  \226\136\131 b : (Num) -> Real, \226\136\131 q : Num, \226\136\128 x : Real, sum(op_dot_dot(0, q), (j : Num) => b(j) * pow(x, j)) == pow(x - (r : Real), (m : Num)) * sum(op_dot_dot(0, (p : Num)), (i : Num) => (c : (Num) -> Real)(i) * pow(x, i))
+      #|  (p : Num)
+      #|  (c : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  (s : Real)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, \226\136\128 r : Real, \226\136\128 s : Real, !(r == s) && (\226\136\131 i : Num, IN(i, op_dot_dot(0, n)) && !(a(i) == real_of_num(0))) \226\134\146 multiplicity((x : Real) => pow(x - r, (m : Num)) * sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)), s) == multiplicity((x : Real) => sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)), s)
+      #|  ((x : Real) * (y : Real) < real_of_num(0)) == (real_of_num(0) < x * -y)
+      #|  -(x : Real) * -(y : Real) == x * y
+      #|  (a : Real) * (x : Real) * ((b : Real) * (x' : Real)) == x * x' * (a * b)
+      #|  (i : Num) == (n : Num)
+      #|  (i : Num)
+      #|  variation(op_dot_dot(0, (n : Num) - 1), (i : Num) => -(b : (Num) -> Real)(i) * pow((r : Real), i + 1))
+      #|  variation(op_dot_dot(0, (n : Num)), (i : Num) => -(b : (Num) -> Real)(i) * pow((r : Real), i + 1))
+      #|  variation(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow((r : Real), i))
+      #|  (x' : Num) == (x : Num) && (y' : Num) == (y : Num) \226\134\146 x' == y' + (d : Num) \226\134\146 x == y + d
+      #|  (d : Num)
+      #|  !((j : Num) <= (n : Num)) \226\134\146 ((0 <= (i : Num) && i <= j) && i <= n) == (0 <= i && i <= n)
+      #|  (j : Num) + 1 <= (k : Num) \226\134\146 k - j - 1 + (j + 1) == k
+      #|  ((a : Real) == -(b : Real) * (c : Real)) == (a + b * c == real_of_num(0))
+      #|  \226\136\128 i : Num, i <= (j : Num) \226\134\146 i <= (n : Num)
+      #|  (j : Num) <= (n : Num)
+      #|  (j : Num)
+      #|  (i : Num) => if i <= (n : Num) { -(b : (Num) -> Real)(i) * pow((r : Real), i + 1) } else { real_of_num(0) }
+      #|  (i : Num) => if i <= (n : Num) { (a : (Num) -> Real)(i) * pow((r : Real), i) } else { real_of_num(0) }
+      #|  (n : Num)
+      #|  (b : (Num) -> Real)((n : Num)) == real_of_num(0)
+      #|  (n : Num)
+      #|  (r : Real)
+      #|  (x : Real)
+      #|  (a : (Num) -> Real)
+      #|  (x : Real)
+      #|  (n : Num) - (n - 1) - 1 == 0
+      #|  (b : (Num) -> Real)
+      #|  (b : (Num) -> Real) == ((j : Num) => sum(op_dot_dot(j + 1, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow((r : Real), i - j - 1)))
+      #|  (n : Num) == 0
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, \226\136\128 r : Real, !(a(n) == real_of_num(0)) && real_of_num(0) < r && sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(r, i)) == real_of_num(0) \226\134\146 (\226\136\131 b : (Num) -> Real, !(b(n - 1) == real_of_num(0)) && (\226\136\128 x : Real, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == (x - r) * sum(op_dot_dot(0, n - 1), (i : Num) => b(i) * pow(x, i))) && (\226\136\131 d : Num, ODD(d) && variation(op_dot_dot(0, n), a) == variation(op_dot_dot(0, n - 1), b) + d))
+      #|  (p : Num)
+      #|  ODD((d : Num))
+      #|  (d : Num) - 1
+      #|  (n : Num) - 1
       #|  1
-      #|  c:num->real
-      #|  d - 1 + e
-      #|  SUC k
-      #|  e:num
-      #|  k:num
-      #|  m:num
-      #|  b:num->real
-      #|  c:num->real
-      #|  n - 1
-      #|  sum(0..n-1) (\\i. c i * r pow i) = &0
-      #|  d:num
-      #|  c:num->real
-      #|  r:real
-      #|  n:num
-      #|  a:num->real
-      #|  n = 0
-      #|  a:num->real
-      #|  n:num
-      #|  forall r n a.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b k m. 0 < k /\\ m < n /\\ ~(b m = &0) /\\\n                (forall x. sum(0..n) (\\i. a i * x pow i) =\n                     (x - r) pow k * sum(0..m) (\\i. b i * x pow i)) /\\\n                ~(sum(0..m) (\\j. b j * r pow j) = &0) /\\\n                ?d. EVEN d /\\ variation(0..n) a = variation(0..m) b + k + d
-      #|  m:num
-      #|  b:num->real
-      #|  multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r = k
-      #|  m:num
-      #|  k:num
-      #|  b:num->real
-      #|  forall r n a.\n    ~(a n = &0) /\\ &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0\n    ==> ?b m. m < n /\\ ~(b m = &0) /\\\n              (forall x. sum(0..n) (\\i. a i * x pow i) =\n                   (x - r) pow\n                   (multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r) *\n                   sum(0..m) (\\i. b i * x pow i)) /\\\n              ~(sum(0..m) (\\j. b j * r pow j) = &0) /\\\n              ?d. EVEN d /\\\n                  variation(0..n) a = variation(0..m) b +\n                     multiplicity (\\x. sum(0..n) (\\i. a i * x pow i)) r + d
-      #|  ~(sum (0..m) (\\j. b j * r pow j) = &0)
-      #|  (?i. P i /\\ Q i) <=> ~(forall i. P i ==> ~Q i)
-      #|  s:real
-      #|  s1:num = s2 ==> s1 + m = m + s2
-      #|  m:num
-      #|  {r | sum(0..m) (\\i. b i * r pow i) = &0}
-      #|  FINITE {r | &0 < r /\\ sum(0..m) (\\i. b i * r pow i) = &0}
-      #|  s:real = r
-      #|  s:real
-      #|  x IN s /\\ s DELETE x = t ==> s = x INSERT t
-      #|  {r | &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0} =\n    r INSERT {r | &0 < r /\\ sum(0..m) (\\i. b i * r pow i) = &0}
-      #|  x + y = z ==> (x + d1) + (y + d2):num = z + d1 + d2
-      #|  d1 + d2:num
-      #|  d2:num
-      #|  d1:num
-      #|  m:num
-      #|  b:num->real
-      #|  m:num
-      #|  m:num
-      #|  b:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  r:real
-      #|  r:real
-      #|  {r | &0 < r /\\ sum(0..n) (\\i. a i * r pow i) = &0} = {}
-      #|  i:num = n
-      #|  i:num
-      #|  d:num
-      #|  i <= n ==> i <= n - 1 \\/ i = n
-      #|  a:num->real
-      #|  n - 1
-      #|  n = 0
-      #|  (a:num->real) n = &0
-      #|  a:num->real
-      #|  n:num
-      #|  n:num
-      #|  a:num->real
-      #|  forall f a n. f = (\\x. sum(0..n) (\\i. a i * x pow i)) /\\\n           (?i. i IN 0..n /\\ ~(a i = &0))\n           ==> ?d. EVEN d /\\\n                   variation(0..n) a =\n                   nsum {r | &0 < r /\\ f(r) = &0} (\\r. multiplicity f r) + d
+      #|  (c : (Num) -> Real)
+      #|  (d : Num) - 1 + (e : Num)
+      #|  SUC((k : Num))
+      #|  (e : Num)
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  (b : (Num) -> Real)
+      #|  (c : (Num) -> Real)
+      #|  (n : Num) - 1
+      #|  sum(op_dot_dot(0, (n : Num) - 1), (i : Num) => (c : (Num) -> Real)(i) * pow((r : Real), i)) == real_of_num(0)
+      #|  (d : Num)
+      #|  (c : (Num) -> Real)
+      #|  (r : Real)
+      #|  (n : Num)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num) == 0
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  \226\136\128 r : Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, !(a(n) == real_of_num(0)) && real_of_num(0) < r && sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(r, i)) == real_of_num(0) \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\131 k : Num, \226\136\131 m : Num, 0 < k && m < n && !(b(m) == real_of_num(0)) && (\226\136\128 x : Real, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == pow(x - r, k) * sum(op_dot_dot(0, m), (i : Num) => b(i) * pow(x, i))) && !(sum(op_dot_dot(0, m), (j : Num) => b(j) * pow(r, j)) == real_of_num(0)) && (\226\136\131 d : Num, EVEN(d) && variation(op_dot_dot(0, n), a) == variation(op_dot_dot(0, m), b) + (k + d)))
+      #|  (m : Num)
+      #|  (b : (Num) -> Real)
+      #|  multiplicity((x : Real) => sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow(x, i)), (r : Real)) == (k : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  (b : (Num) -> Real)
+      #|  \226\136\128 r : Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, !(a(n) == real_of_num(0)) && real_of_num(0) < r && sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(r, i)) == real_of_num(0) \226\134\146 (\226\136\131 b : (Num) -> Real, \226\136\131 m : Num, m < n && !(b(m) == real_of_num(0)) && (\226\136\128 x : Real, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == pow(x - r, multiplicity((x : Real) => sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)), r)) * sum(op_dot_dot(0, m), (i : Num) => b(i) * pow(x, i))) && !(sum(op_dot_dot(0, m), (j : Num) => b(j) * pow(r, j)) == real_of_num(0)) && (\226\136\131 d : Num, EVEN(d) && variation(op_dot_dot(0, n), a) == variation(op_dot_dot(0, m), b) + (multiplicity((x : Real) => sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)), r) + d)))
+      #|  !(sum(op_dot_dot(0, (m : Num)), (j : Num) => (b : (Num) -> Real)(j) * pow((r : Real), j)) == real_of_num(0))
+      #|  (\226\136\131 i : _, (P : (_) -> Bool)(i) && (Q : (_) -> Bool)(i)) == !(\226\136\128 i : _, P(i) \226\134\146 !Q(i))
+      #|  (s : Real)
+      #|  (s1 : Num) == (s2 : Num) \226\134\146 s1 + (m : Num) == m + s2
+      #|  (m : Num)
+      #|  {(r : Real) | sum(op_dot_dot(0, (m : Num)), (i : Num) => (b : (Num) -> Real)(i) * pow(r, i)) == real_of_num(0)}
+      #|  FINITE({(r : Real) | real_of_num(0) < r && sum(op_dot_dot(0, (m : Num)), (i : Num) => (b : (Num) -> Real)(i) * pow(r, i)) == real_of_num(0)})
+      #|  (s : Real) == (r : Real)
+      #|  (s : Real)
+      #|  IN((x : _), (s : (_) -> Bool)) && DELETE(s, x) == (t : (_) -> Bool) \226\134\146 s == INSERT(x, t)
+      #|  {(r : Real) | real_of_num(0) < r && sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow(r, i)) == real_of_num(0)} == INSERT((r : Real), {(r : Real) | real_of_num(0) < r && sum(op_dot_dot(0, (m : Num)), (i : Num) => (b : (Num) -> Real)(i) * pow(r, i)) == real_of_num(0)})
+      #|  (x : Num) + (y : Num) == (z : Num) \226\134\146 x + (d1 : Num) + (y + (d2 : Num)) == z + (d1 + d2)
+      #|  (d1 : Num) + (d2 : Num)
+      #|  (d2 : Num)
+      #|  (d1 : Num)
+      #|  (m : Num)
+      #|  (b : (Num) -> Real)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  (r : Real)
+      #|  (r : Real)
+      #|  {(r : Real) | real_of_num(0) < r && sum(op_dot_dot(0, (n : Num)), (i : Num) => (a : (Num) -> Real)(i) * pow(r, i)) == real_of_num(0)} == {}
+      #|  (i : Num) == (n : Num)
+      #|  (i : Num)
+      #|  (d : Num)
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= n - 1 || i == n
+      #|  (a : (Num) -> Real)
+      #|  (n : Num) - 1
+      #|  (n : Num) == 0
+      #|  (a : (Num) -> Real)((n : Num)) == real_of_num(0)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (a : (Num) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : (Num) -> Real, \226\136\128 n : Num, f == ((x : Real) => sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i))) && (\226\136\131 i : Num, IN(i, op_dot_dot(0, n)) && !(a(i) == real_of_num(0))) \226\134\146 (\226\136\131 d : Num, EVEN(d) && variation(op_dot_dot(0, n), a) == nsum({(r : Real) | real_of_num(0) < r && f(r) == real_of_num(0)}, (r : Real) => multiplicity(f, r)) + d)
       #|OPPOSITE_SIGNS =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) a:real) b:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) ((#real_lt:fun(real,fun(real,bool)) b:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) b:real))))))))
       #|VARIATION_SET_FINITE =  |- ((#==>:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1,bool),bool) s:fun('?1,bool))) (#FINITE:fun(fun(prod('?1,'?1),bool),bool) (#GSPEC:fun(fun(prod('?1,'?1),bool),fun(prod('?1,'?1),bool)) (\GEN%PVAR%1:prod('?1,'?1). (#?:fun(fun('?1,bool),bool) (\p:'?1. (#?:fun(fun('?1,bool),bool) (\q:'?1. (((#SETSPEC:fun(prod('?1,'?1),fun(bool,fun(prod('?1,'?1),bool))) GEN%PVAR%1:prod('?1,'?1)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) p:'?1) s:fun('?1,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) q:'?1) s:fun('?1,bool))) ((P:fun('?1,fun('?1,bool)) p:'?1) q:'?1)))) ((#,:fun('?1,fun('?1,prod('?1,'?1))) p:'?1) q:'?1))))))))))
       #|variation =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). (#forall:fun(fun(fun(num,real),bool),bool) (\a:fun(num,real). ((#=:fun(num,fun(num,bool)) ((#variation:fun(fun(num,bool),fun(fun(num,real),num)) s:fun(num,bool)) a:fun(num,real))) (#CARD:fun(fun(prod(num,num),bool),num) (#GSPEC:fun(fun(prod(num,num),bool),fun(prod(num,num),bool)) (\GEN%PVAR%2:prod(num,num). (#?:fun(fun(num,bool),bool) (\p:num. (#?:fun(fun(num,bool),bool) (\q:num. (((#SETSPEC:fun(prod(num,num),fun(bool,fun(prod(num,num),bool))) GEN%PVAR%2:prod(num,num)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) p:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) q:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) q:num)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) (a:fun(num,real) p:num)) (a:fun(num,real) q:num))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) s:fun(num,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) i:num)) ((#<:fun(num,fun(num,bool)) i:num) q:num)))) ((#=:fun(real,fun(real,bool)) (a:fun(num,real) i:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))) ((#,:fun(num,fun(num,prod(num,num))) p:num) q:num))))))))))))))
