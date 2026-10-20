@@ -61484,7 +61484,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  (b : Cart[Real, N])
       #|  IN((d : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool)) && IN((c : Cart[Real, N]), t)
       #|  (b : Cart[Real, N]) + op_pct((u : Real), b - (c : Cart[Real, N])) == op_pct(real_of_num(1) - -u, b) + op_pct(-u, c)
-      #|  dist(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
+      #|  distance(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
       #|  :real
       #|  :real
       #|  (d : Cart[Real, N])
@@ -61988,7 +61988,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  dot((b : Cart[Real, N]), b)
       #|  (b : Cart[Real, N])
       #|  (a : Cart[Real, N])
-      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((a, x)) <= dist((a, b))) \226\134\146 exposed_face_of({b}, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((a, x)) <= distance((a, b))) \226\134\146 exposed_face_of({b}, s)
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  collinear({(a : Cart[Real, N]), (b : Cart[Real, N]), (c : Cart[Real, N])})
       #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)) && IN((b : Cart[Real, N]), s) && IN((c : Cart[Real, N]), s)
@@ -62079,7 +62079,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  (r : Real) == real_of_num(0)
       #|  (a : Cart[Real, N])
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, \226\136\128 x : Cart[Real, N], extreme_point_of(x, cball((a, r))) == IN(x, sphere((a, r)))
-      #|  norm((x : Cart[Real, N])) == dist((vec(0), x))
+      #|  norm((x : Cart[Real, N])) == distance((vec(0), x))
       #|  :real
       #|  :real
       #|  op_pct((a : Real), (x : Cart[Real, N]))
@@ -62132,7 +62132,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y)
       #|  dot((a : Cart[Real, N]), (y : Cart[Real, N])) / (b : Real)
       #|  (y : Cart[Real, N]) == vec(0)
-      #|  dist((op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y), (x : Cart[Real, N]))) < norm(x)
+      #|  distance((op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y), (x : Cart[Real, N]))) < norm(x)
       #|  (d : Real)
       #|  real_of_num(0) < (b : Real) && real_of_num(0) < (c : Real) \226\134\146 b / (c * b) * c == real_of_num(1)
       #|  min((e : Real), norm((x : Cart[Real, N])))
@@ -62309,7 +62309,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, UNION(s, t))) \226\134\146 INTER(hull(conic, s), hull(conic, t)) == (if s == {} || t == {} { {} } else { if INTER(s, t) == {} { {vec(0)} } else { hull(conic, INTER(s, t)) } })
       #|  (a : Real) == (b : Real) + real_of_num(1) \226\134\146 a * (y : Real) == b * y + y
       #|  op_pct((a : Real), (y : Cart[Real, N])) - -y == op_pct(a + real_of_num(1), y)
-      #|  dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) == dist((-a, -b))
+      #|  distance(((a : Cart[Real, N]), (b : Cart[Real, N]))) == distance((-a, -b))
       #|  :real
       #|  :real
       #|  (y : Cart[Real, N])
@@ -62613,14 +62613,14 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  (ay : Real) - ((ax : Real) + (d : Real) * -(a : Real)) <= (b : Real) \226\134\146 ax <= ay \226\134\146 d * a <= b
       #|  (y : Cart[Real, N]) - ((x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N])))
       #|  (a : Cart[Real, N])
-      #|  dist(((x : Cart[Real, N]), x + (a : Cart[Real, N]))) == norm(a)
+      #|  distance(((x : Cart[Real, N]), x + (a : Cart[Real, N]))) == norm(a)
       #|  :real
       #|  :real
       #|  (y : Cart[Real, N])
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  setdist(({(x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N]))}, {(y : Cart[Real, N]) | dot(a, x) <= dot(a, y)}))
-      #|  dist(((x : Cart[Real, N]), x + op_pct((d : Real), -(a : Cart[Real, N]))))
+      #|  distance(((x : Cart[Real, N]), x + op_pct((d : Real), -(a : Cart[Real, N]))))
       #|  IN((x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N])), frontier((t : (Cart[Real, N]) -> Bool)))
       #|  (x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N]))
       #|  (d : Real)
@@ -62700,7 +62700,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && convex(s) && convex(t) && !(t == {}) && hausdist((s, t)) < setdist(({x}, frontier(s))) \226\134\146 !IN(x, frontier(s)) && !IN(x, frontier(t)) && IN(x, t) == IN(x, s)
       #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && convex(s) && convex(t) && !(t == {}) && hausdist((s, t)) < setdist(({x}, frontier(s))) \226\134\146 IN(x, t) == IN(x, s)
       #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((a : Real)))
-      #|  norm((x : Cart[Real, N])) == dist((vec(0), x))
+      #|  norm((x : Cart[Real, N])) == distance((vec(0), x))
       #|  :real
       #|  :real
       #|  norm((y : Cart[Real, N]))
@@ -62828,7 +62828,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  INSERT((z : _), (i : (_) -> Bool)) == UNION({z}, i)
       #|  (c : (Cart[Real, N]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], polytope(s) && !IN(a, hull(affine, s)) \226\134\146 face_of(f, hull(convex, INSERT(a, s))) == (face_of(f, s) || (\226\136\131 f' : (Cart[Real, N]) -> Bool, face_of(f', s) && f == hull(convex, INSERT(a, f'))))
-      #|  dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  distance(((x : Cart[Real, N]), (y : Cart[Real, N])))
       #|  (y : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  SUBSET(closure((s : (Cart[Real, N]) -> Bool)), UNIONS(IMAGE((x : Cart[Real, N]) => ball((x, (e : Real) / real_of_num(2))), (k : (Cart[Real, N]) -> Bool))))
@@ -62849,7 +62849,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  (x : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  (x : Cart[Real, N])
-      #|  dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  distance(((x : Cart[Real, N]), (y : Cart[Real, N])))
       #|  (y : Cart[Real, N])
       #|  ((x : Cart[Real, N]) == (z : Cart[Real, N]) + (y : Cart[Real, N])) == (x - z == y)
       #|  (x : Cart[Real, N])
@@ -63533,7 +63533,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  real_of_num(0) < abs(norm((y : Cart[Real, N])) + real_of_num(1))
       #|  :real
       #|  real_of_num(0) < (e : Real) && e * ((z : Real) / (y : Real)) < e * real_of_num(1) \226\134\146 abs(e) / y * z < e
-      #|  dist(((x : Cart[Real, N]) + (e : Cart[Real, N]), x)) == norm(e)
+      #|  distance(((x : Cart[Real, N]) + (e : Cart[Real, N]), x)) == norm(e)
       #|  :real
       #|  :real
       #|  real_of_num(0) <= (y : Real) && real_of_num(0) < (e : Real) \226\134\146 e / (y + real_of_num(1)) * ((y + real_of_num(1)) / e) == real_of_num(1)
