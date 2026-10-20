@@ -10355,122 +10355,122 @@ Warning: inventing type variables
 0..0..solved at 3
 0..0..solved at 2
 Logic/trs quotations (116):
-  (forall i l r.\n         (l,r) IN rws ==> TRS rws (termsubst i l) (termsubst i r)) /\\\n   (forall s t f largs rargs.\n         TRS rws s t ==> TRS rws (Fn f (APPEND largs (CONS s rargs)))\n                                 (Fn f (APPEND largs (CONS t rargs))))
-  z:A = y
-  z:A
-  v:A
-  y:A
-  x:A
-  v:A
-  x:A
-  v:A
-  u:A
-  x:A
-  forall x:A y:A. R x y ==> (?y':A. S x y')
-  u:A
-  x:A
-  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> forall y:A. NORMAL(R) y ==> forall x. RTC R x y ==> RTC S x y
-  S:A->A->bool
-  R:A->A->bool
-  z:A
-  z0:A
-  SN(R:A->A->bool)
-  z0:A
-  y2:A
-  y1:A
-  x:A
-  y2:A
-  y1:A
-  x:A
-  INV(TC(R:A->A->bool))
-  a /\\ (a ==> b) ==> a /\\ b
-  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x:A y. S x y ==> TC R x y) /\\\n         (forall x:A y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S)
-  w:A
-  S:A->A->bool
-  R:A->A->bool
-  w:A
-  z:A
-  forall x:A y. TC S x y ==> TC R x y
-  forall x:A y. RTC S x y ==> RTC R x y
-  z:A
-  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> (forall x:A y. JOINABLE S x y = JOINABLE R x y)
-  S:A->A->bool
-  R:A->A->bool
-  S:A->A->bool
-  R:A->A->bool
-  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> (forall x:A y. RSTC S x y = RSTC R x y)
-  R:A->A->bool
-  forall R S. SN R /\\\n         CR(RTC R) /\\\n         (forall x y. S x y ==> TC R x y) /\\\n         (forall x y. R x y ==> ?y'. S x y')\n         ==> SN(S) /\\ CR(RTC S) /\\ (forall x:A y. RSTC S x y = RSTC R x y)
-  u:A
-  u:A
-  (S':A->A->bool) x y
-  y:A
-  x:A
-  forall R S S'.\n        SN(\\x y. R x y \\/ S x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (forall s:A t. S s t ==> ?t'. S' s t') /\\\n        (forall s t. S' s t ==> ?u. S s u /\\ RTC (\\x y. R x y \\/ S x y) u t)\n        ==> SN(\\x y. R x y \\/ S' x y) /\\\n            CR(RTC(\\x y. R x y \\/ S' x y)) /\\\n            (forall x y. RSTC(\\x y. R x y \\/ S' x y) x y =\n                   RSTC(\\x y. R x y \\/ S x y) x y)
-  y:A
-  x:A
-  forall R S. SN(\\x y. R x y \\/ S x y) /\\\n         CR(RTC(\\x y. R x y \\/ S x y)) /\\\n         (forall x:A y. S x y ==> ?z. R x z)\n         ==> SN(R) /\\ CR(RTC R) /\\\n             (forall x y. RSTC(R) x y = RSTC(\\x y. R x y \\/ S x y) x y)
-  s:A
-  s':A
-  RTC R (s:A) s'
-  s':A
-  z:A = t
-  RTC (\\x y. R x y \\/ S x y) t (z:A)
-  z:A = t
-  z:A
-  u:A
-  s:A
-  s':A
-  RTC R (s:A) s'
-  t:A
-  s':A
-  s:A
-  s:A
-  s':A
-  RTC R (s:A) s'
-  s':A
-  u:A
-  u':A
-  RTC R (u:A) u'
-  s':A = s
-  u':A
-  u:A
-  a ==> ~a ==> b
-  s:A
-  s':A = s
-  s:A
-  s':A
-  RTC R (s:A) s'
-  s':A
-  u':A
-  z:A = t
-  RTC (\\x y. R x y \\/ S x y) t (z:A)
-  z:A = t
-  z:A
-  u:A
-  u:A
-  u':A
-  RTC R (u:A) u'
-  u:A
-  t:A
-  u':A
-  s:A
-  u:A
-  u':A
-  RTC R (u:A) u'
-  u:A
-  u':A
-  u':A
-  s':A
-  u:A
-  s:A
-  u:A
-  u:A
-  s:A
-  forall R S S' t.\n        SN(\\x y. R x y \\/ S x y \\/ S' x y) /\\\n        CR(RTC(\\x y. R x y \\/ S x y)) /\\\n        (forall s t. S s t\n               ==> ?s' t'. RTC R s s' /\\ RTC R t t' /\\\n                           (S' s' t' \\/ S' t' s')) /\\\n        NORMAL(\\x y. R x y \\/ S x y) t\n        ==> forall s:A. RTC (\\x y. R x y \\/ S x y) s t\n                  ==> RTC (\\x y. R x y \\/ S' x y) s t
-  u:A
-  u:A
-  u:A
+  (\226\136\128 i : (Num) -> Term, \226\136\128 l : Term, \226\136\128 r : Term, IN((l, r), (rws : ((Term, Term)) -> Bool)) \226\134\146 (TRS : (((Term, Term)) -> Bool, Term, Term) -> Bool)(rws, termsubst(i, l), termsubst(i, r))) && (\226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 f : Num, \226\136\128 largs : List[Term], \226\136\128 rargs : List[Term], TRS(rws, s, t) \226\134\146 TRS(rws, Fn(f, APPEND(largs, CONS(s, rargs))), Fn(f, APPEND(largs, CONS(t, rargs)))))
+  (z : A) == (y : A)
+  (z : A)
+  (v : A)
+  (y : A)
+  (x : A)
+  (v : A)
+  (x : A)
+  (v : A)
+  (u : A)
+  (x : A)
+  \226\136\128 x : A, \226\136\128 y : A, (R : (A, A) -> Bool)(x, y) \226\134\146 (\226\136\131 y' : A, (S : (A, A) -> Bool)(x, y'))
+  (u : A)
+  (x : A)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, SN(R) && CR(RTC(R)) && (\226\136\128 x : A, \226\136\128 y : A, S(x, y) \226\134\146 TC(R, x, y)) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 (\226\136\131 y' : A, S(x, y'))) \226\134\146 (\226\136\128 y : A, NORMAL(R, y) \226\134\146 (\226\136\128 x : A, RTC(R, x, y) \226\134\146 RTC(S, x, y)))
+  (S : (A, A) -> Bool)
+  (R : (A, A) -> Bool)
+  (z : A)
+  (z0 : A)
+  SN((R : (A, A) -> Bool))
+  (z0 : A)
+  (y2 : A)
+  (y1 : A)
+  (x : A)
+  (y2 : A)
+  (y1 : A)
+  (x : A)
+  INV(TC((R : (A, A) -> Bool)))
+  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, SN(R) && CR(RTC(R)) && (\226\136\128 x : A, \226\136\128 y : A, S(x, y) \226\134\146 TC(R, x, y)) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 (\226\136\131 y' : A, S(x, y'))) \226\134\146 SN(S) && CR(RTC(S))
+  (w : A)
+  (S : (A, A) -> Bool)
+  (R : (A, A) -> Bool)
+  (w : A)
+  (z : A)
+  \226\136\128 x : A, \226\136\128 y : A, TC((S : (A, A) -> Bool), x, y) \226\134\146 TC((R : (A, A) -> Bool), x, y)
+  \226\136\128 x : A, \226\136\128 y : A, RTC((S : (A, A) -> Bool), x, y) \226\134\146 RTC((R : (A, A) -> Bool), x, y)
+  (z : A)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, SN(R) && CR(RTC(R)) && (\226\136\128 x : A, \226\136\128 y : A, S(x, y) \226\134\146 TC(R, x, y)) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 (\226\136\131 y' : A, S(x, y'))) \226\134\146 (\226\136\128 x : A, \226\136\128 y : A, JOINABLE(S, x, y) == JOINABLE(R, x, y))
+  (S : (A, A) -> Bool)
+  (R : (A, A) -> Bool)
+  (S : (A, A) -> Bool)
+  (R : (A, A) -> Bool)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, SN(R) && CR(RTC(R)) && (\226\136\128 x : A, \226\136\128 y : A, S(x, y) \226\134\146 TC(R, x, y)) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 (\226\136\131 y' : A, S(x, y'))) \226\134\146 (\226\136\128 x : A, \226\136\128 y : A, RSTC(S, x, y) == RSTC(R, x, y))
+  (R : (A, A) -> Bool)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, SN(R) && CR(RTC(R)) && (\226\136\128 x : A, \226\136\128 y : A, S(x, y) \226\134\146 TC(R, x, y)) && (\226\136\128 x : A, \226\136\128 y : A, R(x, y) \226\134\146 (\226\136\131 y' : A, S(x, y'))) \226\134\146 SN(S) && CR(RTC(S)) && (\226\136\128 x : A, \226\136\128 y : A, RSTC(S, x, y) == RSTC(R, x, y))
+  (u : A)
+  (u : A)
+  (S' : (A, A) -> Bool)((x : A), (y : A))
+  (y : A)
+  (x : A)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, \226\136\128 S' : (A, A) -> Bool, SN((x : A) => (y : A) => R(x, y) || S(x, y)) && CR(RTC((x : A) => (y : A) => R(x, y) || S(x, y))) && (\226\136\128 s : A, \226\136\128 t : A, S(s, t) \226\134\146 (\226\136\131 t' : A, S'(s, t'))) && (\226\136\128 s : A, \226\136\128 t : A, S'(s, t) \226\134\146 (\226\136\131 u : A, S(s, u) && RTC((x : A) => (y : A) => R(x, y) || S(x, y), u, t))) \226\134\146 SN((x : A) => (y : A) => R(x, y) || S'(x, y)) && CR(RTC((x : A) => (y : A) => R(x, y) || S'(x, y))) && (\226\136\128 x : A, \226\136\128 y : A, RSTC((x : A) => (y : A) => R(x, y) || S'(x, y), x, y) == RSTC((x : A) => (y : A) => R(x, y) || S(x, y), x, y))
+  (y : A)
+  (x : A)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, SN((x : A) => (y : A) => R(x, y) || S(x, y)) && CR(RTC((x : A) => (y : A) => R(x, y) || S(x, y))) && (\226\136\128 x : A, \226\136\128 y : A, S(x, y) \226\134\146 (\226\136\131 z : A, R(x, z))) \226\134\146 SN(R) && CR(RTC(R)) && (\226\136\128 x : A, \226\136\128 y : A, RSTC(R, x, y) == RSTC((x : A) => (y : A) => R(x, y) || S(x, y), x, y))
+  (s : A)
+  (s' : A)
+  RTC((R : (A, A) -> Bool), (s : A), (s' : A))
+  (s' : A)
+  (z : A) == (t : A)
+  RTC((x : A) => (y : A) => (R : (A, A) -> Bool)(x, y) || (S : (A, A) -> Bool)(x, y), (t : A), (z : A))
+  (z : A) == (t : A)
+  (z : A)
+  (u : A)
+  (s : A)
+  (s' : A)
+  RTC((R : (A, A) -> Bool), (s : A), (s' : A))
+  (t : A)
+  (s' : A)
+  (s : A)
+  (s : A)
+  (s' : A)
+  RTC((R : (A, A) -> Bool), (s : A), (s' : A))
+  (s' : A)
+  (u : A)
+  (u' : A)
+  RTC((R : (A, A) -> Bool), (u : A), (u' : A))
+  (s' : A) == (s : A)
+  (u' : A)
+  (u : A)
+  (a : Bool) \226\134\146 !a \226\134\146 (b : Bool)
+  (s : A)
+  (s' : A) == (s : A)
+  (s : A)
+  (s' : A)
+  RTC((R : (A, A) -> Bool), (s : A), (s' : A))
+  (s' : A)
+  (u' : A)
+  (z : A) == (t : A)
+  RTC((x : A) => (y : A) => (R : (A, A) -> Bool)(x, y) || (S : (A, A) -> Bool)(x, y), (t : A), (z : A))
+  (z : A) == (t : A)
+  (z : A)
+  (u : A)
+  (u : A)
+  (u' : A)
+  RTC((R : (A, A) -> Bool), (u : A), (u' : A))
+  (u : A)
+  (t : A)
+  (u' : A)
+  (s : A)
+  (u : A)
+  (u' : A)
+  RTC((R : (A, A) -> Bool), (u : A), (u' : A))
+  (u : A)
+  (u' : A)
+  (u' : A)
+  (s' : A)
+  (u : A)
+  (s : A)
+  (u : A)
+  (u : A)
+  (s : A)
+  \226\136\128 R : (A, A) -> Bool, \226\136\128 S : (A, A) -> Bool, \226\136\128 S' : (A, A) -> Bool, \226\136\128 t : A, SN((x : A) => (y : A) => R(x, y) || S(x, y) || S'(x, y)) && CR(RTC((x : A) => (y : A) => R(x, y) || S(x, y))) && (\226\136\128 s : A, \226\136\128 t : A, S(s, t) \226\134\146 (\226\136\131 s' : A, \226\136\131 t' : A, RTC(R, s, s') && RTC(R, t, t') && (S'(s', t') || S'(t', s')))) && NORMAL((x : A) => (y : A) => R(x, y) || S(x, y), t) \226\134\146 (\226\136\128 s : A, RTC((x : A) => (y : A) => R(x, y) || S(x, y), s, t) \226\134\146 RTC((x : A) => (y : A) => R(x, y) || S'(x, y), s, t))
+  (u : A)
+  (u : A)
+  (u : A)
 TRS_RULES =  |- (#forall:fun(fun(fun(prod(term,term),bool),bool),bool) (\rws:fun(prod(term,term),bool). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun(num,term),bool),bool) (\i:fun(num,term). (#forall:fun(fun(term,bool),bool) (\l:term. (#forall:fun(fun(term,bool),bool) (\r:term. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(prod(term,term),fun(fun(prod(term,term),bool),bool)) ((#,:fun(term,fun(term,prod(term,term))) l:term) r:term)) rws:fun(prod(term,term),bool))) (((#TRS:fun(fun(prod(term,term),bool),fun(term,fun(term,bool))) rws:fun(prod(term,term),bool)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) l:term)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) r:term)))))))))) (#forall:fun(fun(term,bool),bool) (\s:term. (#forall:fun(fun(term,bool),bool) (\t:term. (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\largs:list(term). (#forall:fun(fun(list(term),bool),bool) (\rargs:list(term). ((#==>:fun(bool,fun(bool,bool)) (((#TRS:fun(fun(prod(term,term),bool),fun(term,fun(term,bool))) rws:fun(prod(term,term),bool)) s:term) t:term)) (((#TRS:fun(fun(prod(term,term),bool),fun(term,fun(term,bool))) rws:fun(prod(term,term),bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#APPEND:fun(list(term),fun(list(term),list(term))) largs:list(term)) ((#CONS:fun(term,fun(list(term),list(term))) s:term) rargs:list(term))))) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#APPEND:fun(list(term),fun(list(term),list(term))) largs:list(term)) ((#CONS:fun(term,fun(list(term),list(term))) t:term) rargs:list(term)))))))))))))))))))
 TRS_INDUCT =  |- (#forall:fun(fun(fun(prod(term,term),bool),bool),bool) (\rws:fun(prod(term,term),bool). (#forall:fun(fun(fun(term,fun(term,bool)),bool),bool) (\TRS':fun(term,fun(term,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun(num,term),bool),bool) (\i:fun(num,term). (#forall:fun(fun(term,bool),bool) (\l:term. (#forall:fun(fun(term,bool),bool) (\r:term. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(prod(term,term),fun(fun(prod(term,term),bool),bool)) ((#,:fun(term,fun(term,prod(term,term))) l:term) r:term)) rws:fun(prod(term,term),bool))) ((TRS':fun(term,fun(term,bool)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) l:term)) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) r:term)))))))))) (#forall:fun(fun(term,bool),bool) (\s:term. (#forall:fun(fun(term,bool),bool) (\t:term. (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\largs:list(term). (#forall:fun(fun(list(term),bool),bool) (\rargs:list(term). ((#==>:fun(bool,fun(bool,bool)) ((TRS':fun(term,fun(term,bool)) s:term) t:term)) ((TRS':fun(term,fun(term,bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#APPEND:fun(list(term),fun(list(term),list(term))) largs:list(term)) ((#CONS:fun(term,fun(list(term),list(term))) s:term) rargs:list(term))))) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#APPEND:fun(list(term),fun(list(term),list(term))) largs:list(term)) ((#CONS:fun(term,fun(list(term),list(term))) t:term) rargs:list(term)))))))))))))))))) (#forall:fun(fun(term,bool),bool) (\a0:term. (#forall:fun(fun(term,bool),bool) (\a1:term. ((#==>:fun(bool,fun(bool,bool)) (((#TRS:fun(fun(prod(term,term),bool),fun(term,fun(term,bool))) rws:fun(prod(term,term),bool)) a0:term) a1:term)) ((TRS':fun(term,fun(term,bool)) a0:term) a1:term)))))))))))
 TRS_CASES =  |- (#forall:fun(fun(fun(prod(term,term),bool),bool),bool) (\rws:fun(prod(term,term),bool). (#forall:fun(fun(term,bool),bool) (\a0:term. (#forall:fun(fun(term,bool),bool) (\a1:term. ((#=:fun(bool,fun(bool,bool)) (((#TRS:fun(fun(prod(term,term),bool),fun(term,fun(term,bool))) rws:fun(prod(term,term),bool)) a0:term) a1:term)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(fun(num,term),bool),bool) (\i:fun(num,term). (#?:fun(fun(term,bool),bool) (\l:term. (#?:fun(fun(term,bool),bool) (\r:term. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a0:term) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) l:term))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a1:term) ((#termsubst:fun(fun(num,term),fun(term,term)) i:fun(num,term)) r:term))) ((#IN:fun(prod(term,term),fun(fun(prod(term,term),bool),bool)) ((#,:fun(term,fun(term,prod(term,term))) l:term) r:term)) rws:fun(prod(term,term),bool))))))))))) (#?:fun(fun(term,bool),bool) (\s:term. (#?:fun(fun(term,bool),bool) (\t:term. (#?:fun(fun(num,bool),bool) (\f:num. (#?:fun(fun(list(term),bool),bool) (\largs:list(term). (#?:fun(fun(list(term),bool),bool) (\rargs:list(term). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a0:term) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#APPEND:fun(list(term),fun(list(term),list(term))) largs:list(term)) ((#CONS:fun(term,fun(list(term),list(term))) s:term) rargs:list(term)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a1:term) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#APPEND:fun(list(term),fun(list(term),list(term))) largs:list(term)) ((#CONS:fun(term,fun(list(term),list(term))) t:term) rargs:list(term)))))) (((#TRS:fun(fun(prod(term,term),bool),fun(term,fun(term,bool))) rws:fun(prod(term,term),bool)) s:term) t:term)))))))))))))))))))))
