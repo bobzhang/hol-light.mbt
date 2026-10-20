@@ -57419,34 +57419,34 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (edwards_of_montgomery : (Ring[A], A, Option[(A, A)]) -> (A, A))((f : Ring[A]), (c : A), NONE) == (ring_0(f), ring_1(f)) && edwards_of_montgomery(f, c, SOME(((x : A), (y : A)))) == (if (x, y) == (ring_0(f), ring_0(f)) { (ring_0(f), ring_neg(f, ring_1(f))) } else { (ring_mul(f, c, ring_div(f, x, y)), ring_div(f, ring_sub(f, x, ring_of_num(f, 1)), ring_add(f, x, ring_of_num(f, 1)))) })
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(c == ring_0(f)) && !(a == d) \226\134\146 ecurve_of_mcurve(mcurve_of_ecurve((f, a, d), c), c) == (f, a, d)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  \226\136\128 f : Ring[A], \226\136\128 A : A, \226\136\128 B : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(A, ring_carrier(f)) && IN(B, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(c == ring_0(f)) && !(B == ring_0(f)) \226\134\146 mcurve_of_ecurve(ecurve_of_mcurve((f, A, B), c), c) == (f, A, B)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  ring_mul((f : Ring[A]), (z : A), ring_div(f, ring_of_num(f, 4), ring_sub(f, (a : A), (d : A))))
       #|  ring_mul((f : Ring[A]), (z : A), ring_div(f, ring_sub(f, (a : A), (d : A)), ring_of_num(f, 4)))
       #|  (z : A)
@@ -57454,51 +57454,51 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  \226\136\128 p' : Bool, p' == (p : Bool) && (p' \226\134\146 (r : Bool)) && (!p' \226\134\146 (q : Bool) == r) \226\134\146 (!p && !q) == !r
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(c == ring_0(f)) \226\134\146 montgomery_strongly_nonsingular(mcurve_of_ecurve((f, a, d), c)) == !(\226\136\131 z : A, IN(z, ring_carrier(f)) && ring_pow(f, z, 2) == ring_mul(f, a, d))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(c == ring_0(f)) \226\134\146 montgomery_nonsingular(mcurve_of_ecurve((f, a, d), c)) == (!(a == d) && !(a == ring_0(f)) && !(d == ring_0(f)))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  ring_div((f : Ring[A]), (z : A), (b : A))
       #|  (z : A)
       #|  (b : A)
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(c == ring_0(f)) && !(a == ring_0(f)) && !(d == ring_0(f)) && edwards_nonsingular((f, a, d)) \226\134\146 montgomery_strongly_nonsingular(mcurve_of_ecurve((f, a, d), c))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(c == ring_0(f)) && !(a == ring_0(f)) && !(d == ring_0(f)) && edwards_nonsingular((f, a, d)) \226\134\146 montgomery_nonsingular(mcurve_of_ecurve((f, a, d), c))
       #|  (x : A) == ring_0((f : Ring[A]))
       #|  (y : A)
@@ -57509,38 +57509,38 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (f : Ring[A])
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, \226\136\128 p : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(a == d) && !(c == ring_0(f)) && edwards_curve((f, a, d), p) \226\134\146 montgomery_curve(mcurve_of_ecurve((f, a, d), c), montgomery_of_edwards(f, c, p))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
       #|  (x : A) == ring_0((f : Ring[A]))
       #|  (y : A)
@@ -57551,49 +57551,49 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (f : Ring[A])
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, \226\136\128 p : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(a == d) && !(c == ring_0(f)) && edwards_curve((f, a, d), p) \226\134\146 edwards_of_montgomery(f, c, montgomery_of_edwards(f, c, p)) == p
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  ring_div((f : Ring[A]), (y : A), (c : A))
       #|  false \226\134\146 (p : Bool)
       #|  (x : A) == ring_neg((f : Ring[A]), ring_1(f))
@@ -57611,52 +57611,52 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (f : Ring[A])
       #|  \226\136\128 f : Ring[A], \226\136\128 A : A, \226\136\128 B : A, \226\136\128 c : A, \226\136\128 p : Option[(A, A)], field(f) && !(ring_char(f) == 2) && IN(A, ring_carrier(f)) && IN(B, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(B == ring_0(f)) && !(c == ring_0(f)) && montgomery_strongly_nonsingular((f, A, B)) && edwards_nonsingular(ecurve_of_mcurve((f, A, B), c)) && montgomery_curve((f, A, B), p) \226\134\146 edwards_curve(ecurve_of_mcurve((f, A, B), c), edwards_of_montgomery(f, c, p))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  ring_div((f : Ring[A]), (y : A), (c : A))
       #|  false \226\134\146 (p : Bool)
       #|  (x : A) == ring_neg((f : Ring[A]), ring_1(f))
@@ -57674,111 +57674,111 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (f : Ring[A])
       #|  \226\136\128 f : Ring[A], \226\136\128 A : A, \226\136\128 B : A, \226\136\128 c : A, \226\136\128 p : Option[(A, A)], field(f) && !(ring_char(f) == 2) && IN(A, ring_carrier(f)) && IN(B, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(B == ring_0(f)) && !(c == ring_0(f)) && montgomery_strongly_nonsingular((f, A, B)) && edwards_nonsingular(ecurve_of_mcurve((f, A, B), c)) && montgomery_curve((f, A, B), p) \226\134\146 montgomery_of_edwards(f, c, edwards_of_montgomery(f, c, p)) == p
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  (x : A) == ring_0((f : Ring[A]))
       #|  (y : A)
       #|  (x : A)
@@ -57788,38 +57788,38 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (f : Ring[A])
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, \226\136\128 p : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && edwards_curve((f, a, d), p) \226\134\146 montgomery_of_edwards(f, c, edwards_neg((f, a, d), p)) == montgomery_neg(mcurve_of_ecurve((f, a, d), c), montgomery_of_edwards(f, c, p))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  (f : (A) -> B)(group_mul((G : Group[A]), group_mul(G, (z : A), (x : A)), x)) == group_mul((H : Group[B]), f(group_mul(G, z, x)), f(x))
       #|  (x : A) == (z : A)
       #|  (x : A) == (y : A)
@@ -57914,166 +57914,166 @@ test "EC/edmont matches EC/edmont.ml" {
       #|  (ring_0((f : Ring[A])), ring_neg(f, ring_1(f)))
       #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 c : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(c, ring_carrier(f)) && !(a == d) && !(a == ring_0(f)) && !(d == ring_0(f)) && !(c == ring_0(f)) && edwards_nonsingular((f, a, d)) \226\134\146 group_isomorphisms((edwards_group((f, a, d)), montgomery_group(mcurve_of_ecurve((f, a, d), c))), (montgomery_of_edwards(f, c), edwards_of_montgomery(f, c)))
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  :A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
-      #|  (x:A) IN ring_carrier f
-      #|  x:A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
       #|  ((x3 : A), (y3 : A))
       #|  ((x2 : A), (y2 : A))
       #|  ((x1 : A), (y1 : A))
