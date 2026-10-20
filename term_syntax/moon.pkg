@@ -2,7 +2,6 @@ import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/num",
   "bobzhang/hol_light/basics",
-  "bobzhang/hol_light/nums",
   "bobzhang/hol_light/preterm",
   "bobzhang/hol_light/parser",
   "bobzhang/hol_light/printer",
