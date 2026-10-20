@@ -15840,75 +15840,75 @@ Searching with depth limit 1
 Searching with depth limit 2
 Translating proof certificate to HOL
 Examples/solovay quotations (10566):
-  (--x = --(&1) % x) /\\\n   (x - y = x + --(&1) % y)
-  forall P t. P (norm t) = forall x. &0 <= x /\\ (x pow 2 = (t:real^N) dot t) ==> P x
-  component (b:real^N) x = (b dot x) / (b dot b)
-  b = vec 0 :real^N
-  forall b:real^N x. orthogonal b (x - (component b x) % b)
-  forall cs vs.\n       ALL (orthogonal x) vs /\\ orthogonal x z /\\ (LENGTH cs = LENGTH vs)\n        ==> orthogonal x (ITLIST2 (\\a v s. a % v + s) cs vs z)
+  -(x : Cart[Real, _]) == op_pct(-real_of_num(1), x) && x - (y : Cart[Real, _]) == x + op_pct(-real_of_num(1), y)
+  \226\136\128 P : (Real) -> Bool, \226\136\128 t : Cart[Real, N], P(norm(t)) == (\226\136\128 x : Real, real_of_num(0) <= x && pow(x, 2) == dot(t, t) \226\134\146 P(x))
+  (component : (Cart[Real, N], Cart[Real, N]) -> Real)((b : Cart[Real, N]), (x : Cart[Real, N])) == dot(b, x) / dot(b, b)
+  (b : Cart[Real, N]) == vec(0)
+  \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], orthogonal(b, x - op_pct(component(b, x), b))
+  \226\136\128 cs : List[Real], \226\136\128 vs : List[Cart[Real, _]], ALL(orthogonal((x : Cart[Real, _])), vs) && orthogonal(x, (z : Cart[Real, _])) && LENGTH(cs) == LENGTH(vs) \226\134\146 orthogonal(x, ITLIST2((a : Real) => (v : Cart[Real, _]) => (s : Cart[Real, _]) => op_pct(a, v) + s, cs, vs, z))
   as:real list
-  cs:real list
-  vs:(real^N)list
+  (cs : List[Real])
+  (vs : List[Cart[Real, N]])
   LENGTH(vs:(real^N)list) = LENGTH(as:real list)
-  LENGTH(vs:(real^N)list) = LENGTH(cs:real list)
-  (a = b + c:real^N) = (c = a - b)
-  ALL (orthogonal(u:real^N)) vs
-  ALL (orthogonal(z:real^N)) vs
-  ALL (orthogonal(x:real^N)) vs
+  LENGTH((vs : List[Cart[Real, N]])) == LENGTH((cs : List[Real]))
+  ((a : Cart[Real, N]) == (b : Cart[Real, N]) + (c : Cart[Real, N])) == (c == a - b)
+  ALL(orthogonal((u : Cart[Real, N])), (vs : List[Cart[Real, N]]))
+  ALL(orthogonal((z : Cart[Real, N])), (vs : List[Cart[Real, N]]))
+  ALL(orthogonal((x : Cart[Real, N])), (vs : List[Cart[Real, N]]))
   CONS k (MAP2 (\\a c. a - k * c) as cs)
-  x:real^N
-  x = u - k % z :real^N
-  k = component z (u:real^N)
-  u:real^N
-  z:real^N
+  (x : Cart[Real, N])
+  (x : Cart[Real, N]) == (u : Cart[Real, N]) - op_pct((k : Real), (z : Cart[Real, N]))
+  (k : Real) == component((z : Cart[Real, N]), (u : Cart[Real, N]))
+  (u : Cart[Real, N])
+  (z : Cart[Real, N])
   as:real list
-  u:real^N
-  cs:real list
-  z:real^N
-  w:real^N
-  vs:(real^N)list
-  v:real^N
-  []:real list
-  w:real^N
-  w:real^N
+  (u : Cart[Real, N])
+  (cs : List[Real])
+  (z : Cart[Real, N])
+  (w : Cart[Real, N])
+  (vs : List[Cart[Real, N]])
+  (v : Cart[Real, N])
+  (NIL : List[Real])
+  (w : Cart[Real, N])
+  (w : Cart[Real, N])
   forall w:real^N vs. ?u as.\n        ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs) /\\\n        (w = ITLIST2 (\\a v s. a % v + s) as vs u)
-  v:real^N
-  w:real^N
-  vs:(real^N)list
-  w:real^N
-  w:real^N
+  (v : Cart[Real, N])
+  (w : Cart[Real, N])
+  (vs : List[Cart[Real, N]])
+  (w : Cart[Real, N])
+  (w : Cart[Real, N])
   forall P vs. (forall w:real^N. P w vs) =\n          (forall as u. ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs)\n                  ==> P (ITLIST2 (\\a v s. a % v + s) as vs u) vs)
-  ((forall l. (LENGTH l = 0) ==> P l) = P []) /\\\n   ((forall l. (LENGTH l = SUC n) ==> P l) =\n         (forall h t. (LENGTH t = n) ==> P (CONS h t)))
-  orthogonal u x\n   ==> (u dot x = &0) /\\ (x dot u = &0) /\\\n       (u dot (a % x) = &0) /\\ ((a % x) dot u = &0) /\\\n       (u dot (a % x + y) = u dot y) /\\ ((a % x + y) dot u = y dot u) /\\\n       (u dot (y + a % x) = u dot y) /\\ ((y + a % x) dot u = y dot u)
+  (\226\136\128 l : List[_], LENGTH(l) == 0 \226\134\146 (P : (List[_]) -> Bool)(l)) == P(NIL) && (\226\136\128 l : List[_], LENGTH(l) == SUC((n : Num)) \226\134\146 P(l)) == (\226\136\128 h : _, \226\136\128 t : List[_], LENGTH(t) == n \226\134\146 P(CONS(h, t)))
+  orthogonal((u : Cart[Real, _]), (x : Cart[Real, _])) \226\134\146 dot(u, x) == real_of_num(0) && dot(x, u) == real_of_num(0) && dot(u, op_pct((a : Real), x)) == real_of_num(0) && dot(op_pct(a, x), u) == real_of_num(0) && dot(u, op_pct(a, x) + (y : Cart[Real, _])) == dot(u, y) && dot(op_pct(a, x) + y, u) == dot(y, u) && dot(u, y + op_pct(a, x)) == dot(u, y) && dot(y + op_pct(a, x), u) == dot(y, u)
   forall u as vs. ITLIST2 (\\a v s. a % v + s) as vs u =\n             ITLIST2 (\\a v s. a % v + s) as vs (vec 0) + u
-  orthogonal (u:real^N)
-  (a + b = a) <=> (b = &0)
+  orthogonal((u : Cart[Real, N]))
+  ((a : Real) + (b : Real) == a) == (b == real_of_num(0))
   as:(real)list
   as:(real)list
-  vs:(real^N)list
-  vs:(real^N)list
-  (a + &2 * b + c = a + c) <=> (b = &0)
-  (a + u) dot (a + u) = a dot a + &2 * (u dot a) + u dot u
-  (a ==> (b = c)) ==> (a ==> b <=> a ==> c)
+  (vs : List[Cart[Real, N]])
+  (vs : List[Cart[Real, N]])
+  ((a : Real) + (real_of_num(2) * (b : Real) + (c : Real)) == a + c) == (b == real_of_num(0))
+  dot((a : Cart[Real, _]) + (u : Cart[Real, _]), a + u) == dot(a, a) + (real_of_num(2) * dot(u, a) + dot(u, u))
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
   as:(real)list
-  u:real^N
-  \\w:real^N vs.  P (MAP ((dot) w) (CONS w vs)) vs :bool
+  (u : Cart[Real, N])
+  (w : Cart[Real, N]) => (vs : List[Cart[Real, N]]) => (P : (List[Real], List[Cart[Real, N]]) -> Bool)(MAP(dot(w), CONS(w, vs)), vs)
   (forall w:real^N. P (MAP ((dot) w) (CONS w vs)) vs) =\n   (forall u. ALL (orthogonal u) vs\n        ==> forall as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS\n                          ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                           (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) +\n                           u dot u)\n                          (MAP ((dot)\n                                (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                               vs))\n                 vs)
   forall P vs.\n   (forall c. &0 <= c\n        ==> forall as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                              (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) + c)\n                             (MAP ((dot)\n                                   (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                                  vs))\n                    vs)\n   ==> forall w:real^N. P (MAP ((dot) w) (CONS w vs)) vs
-  v:(real^N)list
-  d:real list
-  EL:num->(real^N)list->real^N
-  EL:num->(real)list->real
+  (v : List[Cart[Real, N]])
+  (d : List[Real])
+  (EL : (Num, List[Cart[Real, N]]) -> Cart[Real, N])
+  (EL : (Num, List[Real]) -> Real)
   :real^N
-  forall A B C:real^N.\n        orthogonal (A - B) (C - B)\n        ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2
-  forall x y:real^N. x dot y <= norm x * norm y
-  forall x y:real^N. a % (x + y) = a % x + a % y
-  forall x y z. x dot (y + z) = (x dot y) + (x dot z)
-  forall x y. (x dot x = &0) ==> (x dot y = &0)
-  forall a d:real^N.\n    ~(d = vec 0) ==> norm (a + d) > norm a \\/ norm (a - d) > norm a
-  forall b a d:real^N.\n    ~(d = vec 0) ==> dist(a,b + d) > dist(a,b) \\/ dist(a,b - d) > dist(a,b)
-  forall x. abs(norm x) = norm x
-  forall x:real^N y. x dot y > &0 ==> ?u. &0 < u /\\ norm(u % y - x) < norm x
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], orthogonal(A - B, C - B) \226\134\146 pow(norm(C - A), 2) == pow(norm(B - A), 2) + pow(norm(C - B), 2)
+  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], dot(x, y) <= norm(x) * norm(y)
+  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], op_pct((a : Real), x + y) == op_pct(a, x) + op_pct(a, y)
+  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], \226\136\128 z : Cart[Real, _], dot(x, y + z) == dot(x, y) + dot(x, z)
+  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], dot(x, x) == real_of_num(0) \226\134\146 dot(x, y) == real_of_num(0)
+  \226\136\128 a : Cart[Real, N], \226\136\128 d : Cart[Real, N], !(d == vec(0)) \226\134\146 norm(a + d) > norm(a) || norm(a - d) > norm(a)
+  \226\136\128 b : Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 d : Cart[Real, N], !(d == vec(0)) \226\134\146 dist((a, b + d)) > dist((a, b)) || dist((a, b - d)) > dist((a, b))
+  \226\136\128 x : Cart[Real, _], abs(norm(x)) == norm(x)
+  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], dot(x, y) > real_of_num(0) \226\134\146 (\226\136\131 u : Real, real_of_num(0) < u && norm(op_pct(u, y) - x) < norm(x))
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -16741,7 +16741,7 @@ Examples/solovay quotations (10566):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  forall x:real^N y.\n        x dot y > &0\n        ==> ?u. &0 < u /\\\n                forall v. &0 < v /\\ v <= u ==> norm(v % y - x) < norm x
+  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], dot(x, y) > real_of_num(0) \226\134\146 (\226\136\131 u : Real, real_of_num(0) < u && (\226\136\128 v : Real, real_of_num(0) < v && v <= u \226\134\146 norm(op_pct(v, y) - x) < norm(x)))
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
