@@ -79253,502 +79253,502 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|0..0..1..2..4..6..8..solved at 16
       #|0..0..1..2..solved at 6
       #|Multivariate/lpspaces quotations (496):
-      #|  lspace s p =\n   {f:real^M->real^N | f measurable_on s /\\\n                       (\\x. lift(norm(f x) rpow p)) integrable_on s}
-      #|  lspace s p =\n   {f | (f:real^M->real^N) measurable_on s /\\\n        (\\x. lift(norm(f x) rpow p)) absolutely_integrable_on s}
-      #|  measurable(s:real^M->bool)
-      #|  forall s. lspace s (&0) =\n          if measurable s then {f:real^M->real^N | f measurable_on s} else {}
-      #|  forall s p c. measurable s ==> (\\x. c) IN lspace s p
-      #|  forall s p. ~(p = &0) ==> (\\x. vec 0) IN lspace s p
-      #|  forall s p c f:real^M->real^N.\n        f IN lspace s p ==> (\\x. c % f x) IN lspace s p
-      #|  --x:real^N = --(&1) % x
-      #|  forall s p f:real^M->real^N. f IN lspace s p ==> (\\x. --(f x)) IN lspace s p
-      #|  (&2 * z) rpow p
-      #|  w:real
-      #|  norm((f:real^M->real^N) x)
-      #|  z:real
-      #|  norm((g:real^M->real^N) x)
-      #|  (&0 <= norm(f + g:real^N) rpow p /\\ &0 <= norm f /\\ &0 <= norm g /\\\n       norm(f + g) rpow p <= (norm f + norm g) rpow p) /\\\n      (&0 <= norm f /\\ &0 <= norm g ==> (norm f + norm g) rpow p <= e)\n      ==> abs(norm(f + g) rpow p) <= e
-      #|  x:real^M
-      #|  (\\x:real^M. lift(norm(f x + g x:real^N) rpow p)) =\n      (lift o (\\y. y rpow p) o drop) o (\\x. lift(norm(f x + g x)))
-      #|  \\x. lift(&2 rpow p * (norm((f:real^M->real^N) x) rpow p +\n                                    norm((g:real^M->real^N) x) rpow p))
-      #|  measurable(s:real^M->bool)
-      #|  p = &0
-      #|  forall s p f g:real^M->real^N.\n      &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p\n      ==> (\\x. f(x) + g(x)) IN lspace s p
-      #|  forall s p f g:real^M->real^N.\n      &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p\n      ==> (\\x. f(x) - g(x)) IN lspace s p
-      #|  forall s p f. f IN lspace s p ==> (\\x. lift(norm(f x) rpow p)) integrable_on s
-      #|  forall s p f. f IN lspace s p ==> (\\x. lift(norm(f x))) IN lspace s p
-      #|  forall s p f:A->real^M->real^N t.\n        &0 < p /\\ FINITE t /\\ (forall i. i IN t ==> (f i) IN lspace s p)\n        ==> (\\x. vsum t (\\i. f i x)) IN lspace s p
-      #|  abs(x) <= y /\\ abs(x') <= y' ==> abs(max x x') <= max y y'
-      #|  x:real^M
-      #|  \\x. lift(&(dimindex(:N)) rpow p *\n             max (norm((f:real^M->real^N) x) rpow p)\n                 (norm((g:real^M->real^N) x) rpow p))
-      #|  forall s p k f:real^M->real^N g:real^M->real^N.\n      f IN lspace s p /\\ g IN lspace s p /\\ &0 < p\n      ==> ((\\x. lambda i. max (f x$i) (g x$i)):real^M->real^N) IN lspace s p
-      #|  abs(x) <= y /\\ abs(x') <= y' ==> abs(min x x') <= max y y'
-      #|  x:real^M
-      #|  \\x. lift(&(dimindex(:N)) rpow p *\n             max (norm((f:real^M->real^N) x) rpow p)\n                 (norm((g:real^M->real^N) x) rpow p))
-      #|  forall s p k f:real^M->real^N g:real^M->real^N.\n      f IN lspace s p /\\ g IN lspace s p /\\ &0 < p\n      ==> ((\\x. lambda i. min (f x$i) (g x$i)):real^M->real^N) IN lspace s p
-      #|  \\x. lift(norm((g:real^M->real^P) x) rpow p)
-      #|  forall s p f:real^M->real^N g:real^M->real^P.\n        &0 < p /\\ f measurable_on s /\\ g IN lspace s p /\\\n        (forall x. x IN s ==> norm(f x) <= norm(g x))\n        ==> f IN lspace s p
-      #|  (?x. P(\\a. lift x)) ==> (?x. P x)
+      #|  (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)((s : (Cart[Real, M]) -> Bool), (p : Real)) == {(f : (Cart[Real, M]) -> Cart[Real, N]) | measurable_on(f, s) && integrable_on((x : Cart[Real, M]) => lift(rpow(norm(f(x)), p)), s)}
+      #|  lspace((s : (Cart[Real, M]) -> Bool), (p : Real)) == {(f : (Cart[Real, M]) -> Cart[Real, N]) | measurable_on(f, s) && absolutely_integrable_on((x : Cart[Real, M]) => lift(rpow(norm(f(x)), p)), s)}
+      #|  measurable((s : (Cart[Real, M]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, lspace(s, real_of_num(0)) == (if measurable(s) { {(f : (Cart[Real, M]) -> Cart[Real, N]) | measurable_on(f, s)} } else { {} })
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 c : Cart[Real, _], measurable(s) \226\134\146 IN((x : Cart[Real, _]) => c, lspace(s, p))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, !(p == real_of_num(0)) \226\134\146 (IN : ((Cart[Real, _]) -> Cart[Real, _], ((Cart[Real, _]) -> Cart[Real, _]) -> Bool) -> Bool)((x : Cart[Real, _]) => (vec : (Num) -> Cart[Real, _])(0), (lspace : ((Cart[Real, _]) -> Bool, Real, (Cart[Real, _]) -> Cart[Real, _]) -> Bool)(s, p))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 c : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], IN(f, lspace(s, p)) \226\134\146 IN((x : Cart[Real, M]) => op_pct(c, f(x)), lspace(s, p))
+      #|  -(x : Cart[Real, N]) == op_pct(-real_of_num(1), x)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], IN(f, lspace(s, p)) \226\134\146 IN((x : Cart[Real, M]) => -f(x), lspace(s, p))
+      #|  rpow(real_of_num(2) * (z : Real), (p : Real))
+      #|  (w : Real)
+      #|  norm((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  (z : Real)
+      #|  norm((g : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  (real_of_num(0) <= rpow(norm((f : Cart[Real, N]) + (g : Cart[Real, N])), (p : Real)) && real_of_num(0) <= norm(f) && real_of_num(0) <= norm(g) && rpow(norm(f + g), p) <= rpow(norm(f) + norm(g), p)) && (real_of_num(0) <= norm(f) && real_of_num(0) <= norm(g) \226\134\146 rpow(norm(f) + norm(g), p) <= (e : Real)) \226\134\146 abs(rpow(norm(f + g), p)) <= e
+      #|  (x : Cart[Real, M])
+      #|  ((x : Cart[Real, M]) => lift(rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real)))) == o(o(lift, o((y : Real) => rpow(y, p), drop)), (x : Cart[Real, M]) => lift(norm(f(x) + g(x))))
+      #|  (x : Cart[Real, M]) => lift(rpow(real_of_num(2), (p : Real)) * (rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)), p) + rpow(norm((g : (Cart[Real, M]) -> Cart[Real, N])(x)), p)))
+      #|  measurable((s : (Cart[Real, M]) -> Bool))
+      #|  (p : Real) == real_of_num(0)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], real_of_num(0) <= p && IN(f, lspace(s, p)) && IN(g, lspace(s, p)) \226\134\146 IN((x : Cart[Real, M]) => f(x) + g(x), lspace(s, p))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], real_of_num(0) <= p && IN(f, lspace(s, p)) && IN(g, lspace(s, p)) \226\134\146 IN((x : Cart[Real, M]) => f(x) - g(x), lspace(s, p))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], IN(f, lspace(s, p)) \226\134\146 integrable_on((x : Cart[Real, _]) => lift(rpow(norm(f(x)), p)), s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], IN(f, lspace(s, p)) \226\134\146 IN((x : Cart[Real, _]) => lift(norm(f(x))), lspace(s, p))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (A, Cart[Real, M]) -> Cart[Real, N], \226\136\128 t : (A) -> Bool, real_of_num(0) < p && FINITE(t) && (\226\136\128 i : A, IN(i, t) \226\134\146 IN(f(i), lspace(s, p))) \226\134\146 IN((x : Cart[Real, M]) => vsum(t, (i : A) => f(i, x)), lspace(s, p))
+      #|  abs((x : Real)) <= (y : Real) && abs((x' : Real)) <= (y' : Real) \226\134\146 abs(max(x, x')) <= max(y, y')
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => lift(rpow(real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (p : Real)) * max(rpow((norm : (Cart[Real, N]) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x)), p), rpow((norm : (Cart[Real, N]) -> Real)((g : (Cart[Real, M]) -> Cart[Real, N])(x)), p)))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 k : _, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], (IN : ((Cart[Real, M]) -> Cart[Real, N], ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)(f, (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p)) && (IN : ((Cart[Real, M]) -> Cart[Real, N], ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)(g, (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p)) && real_of_num(0) < p \226\134\146 (IN : ((Cart[Real, M]) -> Cart[Real, N], ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)((x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => max((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i), (op_dollar : (Cart[Real, N], Num) -> Real)(g(x), i))), (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p))
+      #|  abs((x : Real)) <= (y : Real) && abs((x' : Real)) <= (y' : Real) \226\134\146 abs(min(x, x')) <= max(y, y')
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => lift(rpow(real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (p : Real)) * max(rpow((norm : (Cart[Real, N]) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x)), p), rpow((norm : (Cart[Real, N]) -> Real)((g : (Cart[Real, M]) -> Cart[Real, N])(x)), p)))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 k : _, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], (IN : ((Cart[Real, M]) -> Cart[Real, N], ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)(f, (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p)) && (IN : ((Cart[Real, M]) -> Cart[Real, N], ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)(g, (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p)) && real_of_num(0) < p \226\134\146 (IN : ((Cart[Real, M]) -> Cart[Real, N], ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)((x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => min((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i), (op_dollar : (Cart[Real, N], Num) -> Real)(g(x), i))), (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p))
+      #|  (x : Cart[Real, M]) => lift(rpow(norm((g : (Cart[Real, M]) -> Cart[Real, P])(x)), (p : Real)))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], real_of_num(0) < p && measurable_on(f, s) && IN(g, lspace(s, p)) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 norm(f(x)) <= norm(g(x))) \226\134\146 IN(f, lspace(s, p))
+      #|  (\226\136\131 x : Real, (P : ((_) -> Cart[Real, Unit]) -> Bool)((a : _) => lift(x))) \226\134\146 (\226\136\131 x : (_) -> Cart[Real, Unit], P(x))
       #|  :P
       #|  :1
-      #|  forall s p f:real^M->real^N.\n        &0 < p /\\ f measurable_on s /\\ measurable s /\\ bounded(IMAGE f s)\n        ==> f IN lspace s p
-      #|  \\x. lift(norm((f:real^M->real^N) x) rpow p / p) +\n                  lift(norm((g:real^M->real^N) x) rpow q / q)
-      #|  forall s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> (\\x. lift(norm(f x) * norm(g x))) integrable_on s
-      #|  forall f:real^M->real^N s. f IN lspace s (&1) <=> f absolutely_integrable_on s
-      #|  x <= y ==> x <= max y z
-      #|  x <= y ==> x <= max z y
-      #|  norm((f:real^M->real^N) x)
-      #|  &1
-      #|  x:real^M
-      #|  \\x. lift(max (&1) (norm((f:real^M->real^N) x) rpow q))
-      #|  forall f:real^M->real^N s p q.\n        f IN lspace s q /\\ measurable s /\\ &0 < p /\\ p <= q\n        ==> f IN lspace s p
-      #|  q:real
-      #|  forall s p q. measurable s /\\ &0 < p /\\ p <= q\n           ==> (lspace s q :(real^M->real^N)->bool) SUBSET (lspace s p)
-      #|  forall(f:real^M->real^N) s t p.\n        f IN lspace t p /\\ lebesgue_measurable s /\\ s SUBSET t\n        ==> f IN lspace s p
-      #|  lnorm s p f = drop(integral s (\\x. lift(norm(f x) rpow p))) rpow (inv p)
-      #|  forall s p. ~(p = &0) ==> lnorm s p (\\x. vec 0) = &0
-      #|  forall s p c:real^N.\n      measurable s /\\ &0 < p\n      ==> lnorm s p (\\x:real^M. c) = measure s rpow (inv p) * norm c
-      #|  t:real^M->bool
-      #|  forall f:real^M->real^N g:real^M->real^P s t p.\n        &0 <= p /\\ f IN lspace s p /\\ g IN lspace s p /\\\n        negligible t /\\ (forall x. x IN s DIFF t ==> norm(f x) <= norm(g x))\n        ==> lnorm s p f <= lnorm s p g
-      #|  forall s p f:real^M->real^N. lnorm s p (\\x. --(f x)) = lnorm s p f
-      #|  forall s p f c. f IN lspace s p /\\ ~(p = &0)\n             ==> lnorm s p (\\x. c % f x) = abs(c) * lnorm s p f
-      #|  forall s p f. ~(p = &0) /\\ f IN lspace s p\n           ==> (lnorm s p f = &0 <=>\n                negligible {x | x IN s /\\ ~(f x = vec 0)})
-      #|  forall s p f. f IN lspace s p ==> &0 <= lnorm s p f
-      #|  forall s p f. lnorm s p (\\x. lift(norm(f x))) = lnorm s p f
-      #|  forall s p f:real^M->real^N.\n        f IN lspace s p /\\ ~(p = &0)\n        ==> (lnorm s p f) rpow p =\n            drop(integral s (\\x. lift(norm(f x) rpow p)))
-      #|  forall s p f:real^M->real^N.\n        f IN lspace s p /\\ ~(p = &0)\n        ==> integral s (\\x. lift(norm(f x) rpow p)) =\n            lift((lnorm s p f) rpow p)
-      #|  &0 < x ==> abs x = x
-      #|  (a * b) * (c * d:real) = (a * c) * (b * d)
-      #|  drop(integral s\n   (\\x. lift(norm(inv(lnorm s p f) % (f:real^M->real^N) x) rpow p / p +\n             norm(inv(lnorm s q g) % (g:real^M->real^N) x) rpow q / q)))
-      #|  &0 <= y /\\ x = &0 ==> x <= y
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  &0 <= lnorm s p (f:real^M->real^N) /\\\n                &0 <= lnorm s q (g:real^M->real^N)
-      #|  forall s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> drop(integral s (\\x. lift(norm(f x) * norm(g x))))\n              <= lnorm s p f * lnorm s q g
-      #|  forall s p q f:real^M->real^N g:real^M->real^N.\n        &0 < p /\\ &0 < q /\\ inv(p) + inv(q) = &1 /\\\n        f IN lspace s p /\\ g IN lspace s q\n        ==> (\\x. lift(norm(f x) * norm(g x))) integrable_on s /\\\n            drop(integral s (\\x. lift(norm(f x) * norm(g x))))\n              <= lnorm s p f * lnorm s q g
-      #|  &1 < p ==> &0 <= p
-      #|  ((\\x. f x + g x):real^M->real^N) IN lspace s p
-      #|  i2 <= i1 ==> i1 <= f * y + g * y ==> i2 <= y * (f + g)
-      #|  &1 < p ==> &0 <= p
-      #|  &1 < p ==> (p - &1) * p / (p - &1) = p
-      #|  lnorm s (p / (p - &1)) (\\x. lift(norm (f x + g x) rpow (p - &1))) =\n    lnorm s p (\\x. (f:real^M->real^N) x + g x) rpow (p - &1)
-      #|  (p1 /\\ p2 ==> b1 /\\ b2 ==> c) ==> p1 /\\ b1 ==> p2 /\\ b2 ==> c
-      #|  &1 < p ==> &0 <= p
-      #|  ((\\x. f x + g x):real^M->real^N) IN lspace s p
-      #|  &1 < p ==> &0 <= p
-      #|  &1 < p ==> (p - &1) * p / (p - &1) = p
-      #|  p /\\ (q ==> r ==> s) ==> (p ==> q) ==> (p ==> r) ==> s
-      #|  &1 < p ==> inv(p) + inv(p / (p - &1)) = &1
-      #|  &1 < p ==> &0 < p
-      #|  \\x. lift(norm((f:real^M->real^N)(x) + g(x)) rpow (p - &1))
-      #|  \\x. lift(norm((f:real^M->real^N) x))
-      #|  p / (p - &1)
-      #|  p:real
-      #|  s:real^M->bool
-      #|  \\x. lift(norm((f:real^M->real^N)(x) + g(x)) rpow (p - &1))
-      #|  \\x. lift(norm((g:real^M->real^N) x))
-      #|  p / (p - &1)
-      #|  p:real
-      #|  s:real^M->bool
-      #|  &1 <= p ==> &1 + p - &1 = &0 ==> p - &1 = &0
-      #|  p = &1 + (p - &1)
-      #|  &1 <= p ==> &0 <= p /\\ ~(p = &0)
-      #|  p - &1 + &1 = p
-      #|  lnorm s p (\\x. (f:real^M->real^N) x + g x) rpow (p - &1)
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  &1 <= p ==> &0 <= p
-      #|  &0 <= lnorm s p (\\x. (f:real^M->real^N) x + g x)
-      #|  &1 < p
-      #|  x rpow (inv(&1)) = x
-      #|  p = &1
-      #|  forall s p f:real^M->real^N g:real^M->real^N.\n        f IN lspace s p /\\ g IN lspace s p /\\ &1 <= p\n        ==> lnorm s p (\\x. f x + g x) <= lnorm s p f + lnorm s p g
-      #|  &1 <= p ==> &0 < p
-      #|  a <= x + y ==> y <= z ==> a <= x + z
-      #|  u:A->bool
-      #|  i:A
-      #|  &1 <= p ==> ~(p = &0)
-      #|  forall s p f:A->real^M->real^N t.\n        &1 <= p /\\ FINITE t /\\ (forall i. i IN t ==> (f i) IN lspace s p)\n        ==> lnorm s p (\\x. vsum t (\\i. f i x)) <= sum t (\\i. lnorm s p (f i))
-      #|  &1 < p ==> &0 <= p
-      #|  a':real <= a /\\ b <= b' ==> a <= b ==> a' <= b'
-      #|  &1 < p ==> inv(p / (p - &1)) * p = p - &1
-      #|  &1 < p ==> &0 <= p /\\ ~(p = &0)
-      #|  p /\\ q /\\ r ==> s <=> q ==> p /\\ r ==> s
-      #|  p:real
-      #|  &1 < p
-      #|  &1 < p ==> &0 < p
-      #|  f:real^M->real^N
-      #|  (\\x. basis 1):real^M->real^N
-      #|  p:real
-      #|  p / (p - &1)
-      #|  s:real^M->bool
-      #|  p:real
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  x <= a ==> x <= abs a
-      #|  p = &1
-      #|  &1 <= p <=> p = &1 \\/ &1 < p
-      #|  forall(f:real^M->real^N) s p.\n        &1 <= p /\\ measurable s /\\ f IN lspace s p\n        ==> f absolutely_integrable_on s /\\\n            norm(integral s f) rpow p\n            <= measure s rpow (p - &1) *\n               norm(integral s (\\x. lift(norm(f x) rpow p)))
-      #|  lproduct (s:real^N->bool) (f:real^N->complex) (g:real^N->complex) =\n    integral s (\\x. f x * cnj(g x))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], real_of_num(0) < p && measurable_on(f, s) && measurable(s) && bounded(IMAGE(f, s)) \226\134\146 IN(f, lspace(s, p))
+      #|  (x : Cart[Real, M]) => lift(rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real)) / p) + lift(rpow(norm((g : (Cart[Real, M]) -> Cart[Real, N])(x)), (q : Real)) / q)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 q : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], real_of_num(0) < p && real_of_num(0) < q && inv(p) + inv(q) == real_of_num(1) && IN(f, lspace(s, p)) && IN(g, lspace(s, q)) \226\134\146 integrable_on((x : Cart[Real, M]) => lift(norm(f(x)) * norm(g(x))), s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, IN(f, lspace(s, real_of_num(1))) == absolutely_integrable_on(f, s)
+      #|  (x : Real) <= (y : Real) \226\134\146 x <= max(y, (z : Real))
+      #|  (x : Real) <= (y : Real) \226\134\146 x <= max((z : Real), y)
+      #|  norm((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])))
+      #|  real_of_num(1)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M]) => lift(max(real_of_num(1), rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)), (q : Real))))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 q : Real, IN(f, lspace(s, q)) && measurable(s) && real_of_num(0) < p && p <= q \226\134\146 IN(f, lspace(s, p))
+      #|  (q : Real)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 q : Real, measurable(s) && real_of_num(0) < p && p <= q \226\134\146 (SUBSET : (((Cart[Real, M]) -> Cart[Real, N]) -> Bool, ((Cart[Real, M]) -> Cart[Real, N]) -> Bool) -> Bool)((lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, q), (lspace : ((Cart[Real, M]) -> Bool, Real, (Cart[Real, M]) -> Cart[Real, N]) -> Bool)(s, p))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, IN(f, lspace(t, p)) && lebesgue_measurable(s) && SUBSET(s, t) \226\134\146 IN(f, lspace(s, p))
+      #|  (lnorm : ((Cart[Real, _]) -> Bool, Real, (Cart[Real, _]) -> Cart[Real, _]) -> Real)((s : (Cart[Real, _]) -> Bool), (p : Real), (f : (Cart[Real, _]) -> Cart[Real, _])) == rpow(drop(integral(s, (x : Cart[Real, _]) => lift(rpow(norm(f(x)), p)))), inv(p))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, !(p == real_of_num(0)) \226\134\146 (lnorm : ((Cart[Real, _]) -> Bool, Real, (Cart[Real, _]) -> Cart[Real, _]) -> Real)(s, p, (x : Cart[Real, _]) => (vec : (Num) -> Cart[Real, _])(0)) == real_of_num(0)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 c : Cart[Real, N], measurable(s) && real_of_num(0) < p \226\134\146 lnorm(s, p, (x : Cart[Real, M]) => c) == rpow(measure(s), inv(p)) * norm(c)
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, real_of_num(0) <= p && IN(f, lspace(s, p)) && IN(g, lspace(s, p)) && negligible(t) && (\226\136\128 x : Cart[Real, M], IN(x, DIFF(s, t)) \226\134\146 norm(f(x)) <= norm(g(x))) \226\134\146 lnorm(s, p, f) <= lnorm(s, p, g)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], lnorm(s, p, (x : Cart[Real, M]) => -f(x)) == lnorm(s, p, f)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 c : Real, IN(f, lspace(s, p)) && !(p == real_of_num(0)) \226\134\146 lnorm(s, p, (x : Cart[Real, _]) => op_pct(c, f(x))) == abs(c) * lnorm(s, p, f)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], !(p == real_of_num(0)) && IN(f, lspace(s, p)) \226\134\146 (lnorm(s, p, f) == real_of_num(0)) == negligible({(x : Cart[Real, _]) | IN(x, s) && !(f(x) == vec(0))})
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], IN(f, lspace(s, p)) \226\134\146 real_of_num(0) <= lnorm(s, p, f)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], lnorm(s, p, (x : Cart[Real, _]) => lift(norm(f(x)))) == lnorm(s, p, f)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], IN(f, lspace(s, p)) && !(p == real_of_num(0)) \226\134\146 rpow(lnorm(s, p, f), p) == drop(integral(s, (x : Cart[Real, M]) => lift(rpow(norm(f(x)), p))))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], IN(f, lspace(s, p)) && !(p == real_of_num(0)) \226\134\146 integral(s, (x : Cart[Real, M]) => lift(rpow(norm(f(x)), p))) == lift(rpow(lnorm(s, p, f), p))
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  (a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * c * (b * d)
+      #|  drop(integral((s : (Cart[Real, M]) -> Bool), (x : Cart[Real, M]) => lift(rpow(norm(op_pct(inv(lnorm(s, (p : Real), (f : (Cart[Real, M]) -> Cart[Real, N]))), f(x))), p) / p + rpow(norm(op_pct(inv(lnorm(s, (q : Real), (g : (Cart[Real, M]) -> Cart[Real, N]))), g(x))), q) / q)))
+      #|  real_of_num(0) <= (y : Real) && (x : Real) == real_of_num(0) \226\134\146 x <= y
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  real_of_num(0) <= lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (f : (Cart[Real, M]) -> Cart[Real, N])) && real_of_num(0) <= lnorm(s, (q : Real), (g : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 q : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], real_of_num(0) < p && real_of_num(0) < q && inv(p) + inv(q) == real_of_num(1) && IN(f, lspace(s, p)) && IN(g, lspace(s, q)) \226\134\146 drop(integral(s, (x : Cart[Real, M]) => lift(norm(f(x)) * norm(g(x))))) <= lnorm(s, p, f) * lnorm(s, q, g)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 q : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], real_of_num(0) < p && real_of_num(0) < q && inv(p) + inv(q) == real_of_num(1) && IN(f, lspace(s, p)) && IN(g, lspace(s, q)) \226\134\146 integrable_on((x : Cart[Real, M]) => lift(norm(f(x)) * norm(g(x))), s) && drop(integral(s, (x : Cart[Real, M]) => lift(norm(f(x)) * norm(g(x))))) <= lnorm(s, p, f) * lnorm(s, q, g)
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  IN((x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  (i2 : Real) <= (i1 : Real) \226\134\146 i1 <= (f : Real) * (y : Real) + (g : Real) * y \226\134\146 i2 <= y * (f + g)
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  real_of_num(1) < (p : Real) \226\134\146 (p - real_of_num(1)) * (p / (p - real_of_num(1))) == p
+      #|  lnorm((s : (Cart[Real, M]) -> Bool), (p : Real) / (p - real_of_num(1)), (x : Cart[Real, M]) => lift(rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x)), p - real_of_num(1)))) == rpow(lnorm(s, p, (x : Cart[Real, M]) => f(x) + g(x)), p - real_of_num(1))
+      #|  ((p1 : Bool) && (p2 : Bool) \226\134\146 (b1 : Bool) && (b2 : Bool) \226\134\146 (c : Bool)) \226\134\146 p1 && b1 \226\134\146 p2 && b2 \226\134\146 c
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  IN((x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  real_of_num(1) < (p : Real) \226\134\146 (p - real_of_num(1)) * (p / (p - real_of_num(1))) == p
+      #|  (p : Bool) && ((q : Bool) \226\134\146 (r : Bool) \226\134\146 (s : Bool)) \226\134\146 (p \226\134\146 q) \226\134\146 (p \226\134\146 r) \226\134\146 s
+      #|  real_of_num(1) < (p : Real) \226\134\146 inv(p) + inv(p / (p - real_of_num(1))) == real_of_num(1)
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) < p
+      #|  (x : Cart[Real, M]) => lift(rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real) - real_of_num(1)))
+      #|  (x : Cart[Real, M]) => lift(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)))
+      #|  (p : Real) / (p - real_of_num(1))
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => lift(rpow(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real) - real_of_num(1)))
+      #|  (x : Cart[Real, M]) => lift(norm((g : (Cart[Real, M]) -> Cart[Real, N])(x)))
+      #|  (p : Real) / (p - real_of_num(1))
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(1) + (p - real_of_num(1)) == real_of_num(0) \226\134\146 p - real_of_num(1) == real_of_num(0)
+      #|  (p : Real) == real_of_num(1) + (p - real_of_num(1))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p && !(p == real_of_num(0))
+      #|  (p : Real) - real_of_num(1) + real_of_num(1) == p
+      #|  rpow(lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x)), p - real_of_num(1))
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  real_of_num(0) <= lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) + (g : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  real_of_num(1) < (p : Real)
+      #|  rpow((x : Real), inv(real_of_num(1))) == x
+      #|  (p : Real) == real_of_num(1)
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], IN(f, lspace(s, p)) && IN(g, lspace(s, p)) && real_of_num(1) <= p \226\134\146 lnorm(s, p, (x : Cart[Real, M]) => f(x) + g(x)) <= lnorm(s, p, f) + lnorm(s, p, g)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) < p
+      #|  (a : Real) <= (x : Real) + (y : Real) \226\134\146 y <= (z : Real) \226\134\146 a <= x + z
+      #|  (u : (A) -> Bool)
+      #|  (i : A)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 f : (A, Cart[Real, M]) -> Cart[Real, N], \226\136\128 t : (A) -> Bool, real_of_num(1) <= p && FINITE(t) && (\226\136\128 i : A, IN(i, t) \226\134\146 IN(f(i), lspace(s, p))) \226\134\146 lnorm(s, p, (x : Cart[Real, M]) => vsum(t, (i : A) => f(i, x))) <= sum(t, (i : A) => lnorm(s, p, f(i)))
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  (a' : Real) <= (a : Real) && (b : Real) <= (b' : Real) \226\134\146 a <= b \226\134\146 a' <= b'
+      #|  real_of_num(1) < (p : Real) \226\134\146 inv(p / (p - real_of_num(1))) * p == p - real_of_num(1)
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) <= p && !(p == real_of_num(0))
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
+      #|  (p : Real)
+      #|  real_of_num(1) < (p : Real)
+      #|  real_of_num(1) < (p : Real) \226\134\146 real_of_num(0) < p
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (x : Cart[Real, M]) => (basis : (Num) -> Cart[Real, N])(1)
+      #|  (p : Real)
+      #|  (p : Real) / (p - real_of_num(1))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (p : Real)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (x : Real) <= (a : Real) \226\134\146 x <= abs(a)
+      #|  (p : Real) == real_of_num(1)
+      #|  (real_of_num(1) <= (p : Real)) == (p == real_of_num(1) || real_of_num(1) < p)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, real_of_num(1) <= p && measurable(s) && IN(f, lspace(s, p)) \226\134\146 absolutely_integrable_on(f, s) && rpow(norm(integral(s, f)), p) <= rpow(measure(s), p - real_of_num(1)) * norm(integral(s, (x : Cart[Real, M]) => lift(rpow(norm(f(x)), p))))
+      #|  (lproduct : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((s : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]), (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) == integral(s, (x : Cart[Real, N]) => f(x) * cnj(g(x)))
       #|  cnj
-      #|  s:real^N->bool
-      #|  \\x. (f:real^N->complex) x * cnj(g x)
-      #|  (\\x. (g:real^N->complex) x * cnj(f x)) = (\\x. cnj(f x * cnj(g x)))
-      #|  forall s (f:real^N->complex) g.\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> lproduct s f g = cnj(lproduct s g f)
-      #|  linear (\\y:real^1. Cx(drop y))
-      #|  \\y:real^1. Cx(drop y)
-      #|  s:real^N->bool
-      #|  gg:real^N->real^1
-      #|  forall s (gg:real^N->real^1). gg integrable_on s\n     ==> integral s (\\x. Cx(drop(gg x))) = Cx(drop(integral s gg))
-      #|  (\\x. (f:real^N->complex) x * cnj(f x)) =\n                (\\x. Cx(drop(lift(norm(f x) pow 2))))
-      #|  forall s (f:real^N->complex).\n     (\\x. lift(norm(f x) pow 2)) integrable_on s\n     ==> lproduct s f f = Cx(drop(integral s (\\x. lift(norm(f x) pow 2))))
-      #|  ~(&2 = &0)
-      #|  f:real^N->complex
-      #|  &2
-      #|  s:real^N->bool
-      #|  (\\x. lift(norm((f:real^N->complex) x) pow 2)) integrable_on s
-      #|  forall s (f:real^N->complex). f IN lspace s (&2)\n     ==> lproduct s f f = Cx((lnorm s (&2) f) pow 2)
-      #|  g:real^N->complex
-      #|  f:real^N->complex
-      #|  &2
-      #|  &2
-      #|  s:real^N->bool
-      #|  g:real^N->complex
-      #|  f:real^N->complex
-      #|  &2
-      #|  &2
-      #|  s:real^N->bool
-      #|  drop(integral s\n      (\\x. lift(norm((f:real^N->complex) x) * norm((g:real^N->complex) x))))
-      #|  forall s (f:real^N->complex) g.\n     f IN lspace s (&2) /\\ g IN lspace s (&2) /\\\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> norm(lproduct s f g) <= lnorm s (&2) f * lnorm s (&2) g
-      #|  (\\x. (f:real^N->complex) x * cnj(c * h x)) =\n                (\\x. cnj c * (f x * cnj(h x)))
-      #|  forall s (f:real^N->complex) (h:real^N->complex) c.\n     (\\x. f x * cnj(h x)) integrable_on s\n     ==> lproduct s f (\\x. c * h x) = cnj c * lproduct s f h
-      #|  k:A->bool
-      #|  s:real^N->bool
-      #|  \\(i:A) (x:real^N). (f:real^N->complex) x * cnj(g i x)
-      #|  x:real^N
-      #|  (\\x. (f:real^N->complex) x * cnj(vsum k (\\i. (g:A->real^N->complex) i x))) =\n    (\\x. vsum k (\\i. f x * cnj(g i x)))
-      #|  forall s (f:real^N->complex) (g:A->real^N->complex) k.\n     FINITE k /\\ (forall i. i IN k ==> (\\x. f x * cnj(g i x)) integrable_on s)\n     ==> lproduct s f (\\x. vsum k (\\i. g i x)) =\n         vsum k (\\i. lproduct s f (g i))
-      #|  (\\x. (c * (f:real^N->complex) x) * cnj(g x)) =\n                (\\x. c * (f x * cnj(g x)))
-      #|  forall s (f:real^N->complex) (g:real^N->complex) c.\n     (\\x. f x * cnj(g x)) integrable_on s\n     ==> lproduct s (\\x. c * f x) g = c * lproduct s f g
-      #|  k:A->bool
-      #|  s:real^N->bool
-      #|  \\(i:A) (x:real^N). (g:A->real^N->complex) i x * cnj(h x)
-      #|  x:real^N
-      #|  (\\x. vsum k (\\i. (g:A->real^N->complex) i x) * cnj(h x)) =\n    (\\x. vsum k (\\i. g i x * cnj(h x)))
-      #|  forall s (g:A->real^N->complex) (h:real^N->complex) k.\n     FINITE k /\\ (forall i. i IN k ==> (\\x. g i x * cnj(h x)) integrable_on s)\n     ==> lproduct s (\\x. vsum k (\\i. g i x)) h =\n         vsum k (\\i. lproduct s (g i) h)
-      #|  (\\x. lift(norm((c:complex) * h x) rpow p)) =\n    (\\x. (norm c rpow p) % lift(norm((h:real^N->complex) x) rpow p))
-      #|  forall(h:real^N->complex) (c:complex) p.\n     h IN lspace (:real^N) p ==> (\\x. c * h x) IN lspace (:real^N) p
-      #|  (\\x. if x IN s then cnj((g:real^N->complex) x) else vec 0) =\n    cnj o (\\x. if x IN s then g x else vec 0)
-      #|  forall(g:real^N->complex) s. g measurable_on s\n     ==> (\\x. cnj(g x)) measurable_on s
-      #|  inv(&2)+inv(&2)= &1
-      #|  &0 < &2
-      #|  g:real^N->complex
-      #|  f:real^N->complex
-      #|  &2
-      #|  &2
-      #|  s:real^N->bool
-      #|  \\x:real^N. lift(norm((f:real^N->complex) x) * norm((g:real^N->complex) x))
-      #|  forall s (f:real^N->complex) (g:real^N->complex).\n     f IN lspace s (&2) /\\ g IN lspace s (&2)\n     ==> (\\x. f x * cnj(g x)) integrable_on s
-      #|  forall(f:real^N->complex) s. f IN lspace s (&2)\n     ==> (\\x. cnj(f x)) IN lspace s (&2)
-      #|  x:real^N
-      #|  c:real^N->complex
-      #|  b:real^N->complex
-      #|  s:real^N->bool
-      #|  c:real^N->complex
-      #|  a:real^N->complex
-      #|  s:real^N->bool
-      #|  forall(a:real^N->complex) b c (s:real^N->bool).\n     a IN lspace s (&2) /\\ b IN lspace s (&2) /\\ c IN lspace s (&2)\n     ==> lproduct s a c - lproduct s b c =\n         lproduct s (\\x. a x - b x) c
-      #|  e = (e / (lnorm s (&2) (h:real^N->complex) + &1)) *\n                        (lnorm s (&2) h + &1)
-      #|  lnorm s (&2) (\\x. (gn:num->real^N->complex) n x - g x) *\n                (lnorm s (&2) (h:real^N->complex) + &1)
-      #|  lnorm s (&2) (\\x. (gn:num->real^N->complex) n x - g x) *\n              lnorm s (&2) (h:real^N->complex)
-      #|  lproduct s (gn n) h - lproduct s g h =\n    lproduct s (\\x. (gn:num->real^N->complex) n x - g x) h
-      #|  n:num
-      #|  M:num
-      #|  M:num
-      #|  e / (lnorm s (&2) (h:real^N->complex) + &1)
-      #|  &0 < lnorm s (&2) (h:real^N->complex) + &1
-      #|  &0 <= lnorm s (&2) (h:real^N->complex)
-      #|  e:real
-      #|  forall(gn:num->real^N->complex) (g:real^N->complex) (h:real^N->complex)\n     (s:real^N->bool).\n     (forall n. gn n IN lspace s (&2)) /\\ g IN lspace s (&2) /\\\n     h IN lspace s (&2) /\\\n     (forall e. &0 < e ==> ?M. forall n. n >= M\n          ==> lnorm s (&2) (\\x. gn n x - g x) < e)\n     ==> ((\\n. lproduct s (gn n) h) --> lproduct s g h)\n         sequentially
-      #|  lproduct s d m = cnj(lproduct s (m:real^N->complex) d)
-      #|  k:num
-      #|  (\\n. lproduct s d (mn n)) =\n    (\\n. cnj(lproduct s ((mn:num->real^N->complex) n) d))
-      #|  forall(mn:num->real^N->complex) (m:real^N->complex) (d:real^N->complex)\n     (s:real^N->bool).\n     (forall n. mn n IN lspace s (&2)) /\\ m IN lspace s (&2) /\\\n     d IN lspace s (&2) /\\\n     (forall e. &0 < e ==> ?M. forall n. n >= M\n          ==> lnorm s (&2) (\\x. mn n x - m x) < e)\n     ==> ((\\n. lproduct s d (mn n)) --> lproduct s d m)\n         sequentially
-      #|  abs(x) < e ==> x < e
-      #|  forall f:real^M->real^1. integral (s DIFF k) f = integral s f
-      #|  inv p:real
-      #|  x:real^M
-      #|  norm(x:real^N) <= a /\\ norm(y) <= a ==> norm(x - y) <= &2 * a
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  ((x : Cart[Real, N]) => (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))) == ((x : Cart[Real, N]) => cnj(f(x) * cnj(g(x))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], integrable_on((x : Cart[Real, N]) => f(x) * cnj(g(x)), s) \226\134\146 lproduct(s, f, g) == cnj(lproduct(s, g, f))
+      #|  linear((y : Cart[Real, Unit]) => Cx(drop(y)))
+      #|  (y : Cart[Real, Unit]) => Cx(drop(y))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (gg : (Cart[Real, N]) -> Cart[Real, Unit])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 gg : (Cart[Real, N]) -> Cart[Real, Unit], integrable_on(gg, s) \226\134\146 integral(s, (x : Cart[Real, N]) => Cx(drop(gg(x)))) == Cx(drop(integral(s, gg)))
+      #|  ((x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj(f(x))) == ((x : Cart[Real, N]) => Cx(drop(lift(pow(norm(f(x)), 2)))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], integrable_on((x : Cart[Real, N]) => lift(pow(norm(f(x)), 2)), s) \226\134\146 lproduct(s, f, f) == Cx(drop(integral(s, (x : Cart[Real, N]) => lift(pow(norm(f(x)), 2)))))
+      #|  !(real_of_num(2) == real_of_num(0))
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  integrable_on((x : Cart[Real, N]) => lift(pow(norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)), 2)), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(s, real_of_num(2))) \226\134\146 lproduct(s, f, f) == Cx(pow(lnorm(s, real_of_num(2), f), 2))
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2)
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2)
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  drop(integral((s : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]) => lift(norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)) * norm((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(s, real_of_num(2))) && IN(g, lspace(s, real_of_num(2))) && integrable_on((x : Cart[Real, N]) => f(x) * cnj(g(x)), s) \226\134\146 norm(lproduct(s, f, g)) <= lnorm(s, real_of_num(2), f) * lnorm(s, real_of_num(2), g)
+      #|  ((x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj((c : Cart[Real, Tybit0[Unit]]) * (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))) == ((x : Cart[Real, N]) => cnj(c) * (f(x) * cnj(h(x))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], integrable_on((x : Cart[Real, N]) => f(x) * cnj(h(x)), s) \226\134\146 lproduct(s, f, (x : Cart[Real, N]) => c * h(x)) == cnj(c) * lproduct(s, f, h)
+      #|  (k : (A) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (i : A) => (x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj((g : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(i, x))
+      #|  (x : Cart[Real, N])
+      #|  ((x : Cart[Real, N]) => (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj(vsum((k : (A) -> Bool), (i : A) => (g : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(i, x)))) == ((x : Cart[Real, N]) => vsum(k, (i : A) => f(x) * cnj(g(i, x))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (A) -> Bool, FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 integrable_on((x : Cart[Real, N]) => f(x) * cnj(g(i, x)), s)) \226\134\146 lproduct(s, f, (x : Cart[Real, N]) => vsum(k, (i : A) => g(i, x))) == vsum(k, (i : A) => lproduct(s, f, g(i)))
+      #|  ((x : Cart[Real, N]) => (c : Cart[Real, Tybit0[Unit]]) * (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x) * cnj((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))) == ((x : Cart[Real, N]) => c * (f(x) * cnj(g(x))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], integrable_on((x : Cart[Real, N]) => f(x) * cnj(g(x)), s) \226\134\146 lproduct(s, (x : Cart[Real, N]) => c * f(x), g) == c * lproduct(s, f, g)
+      #|  (k : (A) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (i : A) => (x : Cart[Real, N]) => (g : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(i, x) * cnj((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))
+      #|  (x : Cart[Real, N])
+      #|  ((x : Cart[Real, N]) => vsum((k : (A) -> Bool), (i : A) => (g : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(i, x)) * cnj((h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x))) == ((x : Cart[Real, N]) => vsum(k, (i : A) => g(i, x) * cnj(h(x))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 g : (A, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (A) -> Bool, FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 integrable_on((x : Cart[Real, N]) => g(i, x) * cnj(h(x)), s)) \226\134\146 lproduct(s, (x : Cart[Real, N]) => vsum(k, (i : A) => g(i, x)), h) == vsum(k, (i : A) => lproduct(s, g(i), h))
+      #|  ((x : Cart[Real, N]) => lift(rpow(norm((c : Cart[Real, Tybit0[Unit]]) * (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)), (p : Real)))) == ((x : Cart[Real, N]) => op_pct(rpow(norm(c), p), lift(rpow(norm(h(x)), p))))
+      #|  \226\136\128 h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 p : Real, IN(h, lspace(UNIV, p)) \226\134\146 IN((x : Cart[Real, N]) => c * h(x), lspace(UNIV, p))
+      #|  ((x : Cart[Real, N]) => if IN(x, (s : (Cart[Real, N]) -> Bool)) { cnj((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)) } else { vec(0) }) == o(cnj, (x : Cart[Real, N]) => if IN(x, s) { g(x) } else { vec(0) })
+      #|  \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, measurable_on(g, s) \226\134\146 measurable_on((x : Cart[Real, N]) => cnj(g(x)), s)
+      #|  inv(real_of_num(2)) + inv(real_of_num(2)) == real_of_num(1)
+      #|  real_of_num(0) < real_of_num(2)
+      #|  (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  real_of_num(2)
+      #|  real_of_num(2)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) => lift(norm((f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)) * norm((g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(s, real_of_num(2))) && IN(g, lspace(s, real_of_num(2))) \226\134\146 integrable_on((x : Cart[Real, N]) => f(x) * cnj(g(x)), s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, IN(f, lspace(s, real_of_num(2))) \226\134\146 IN((x : Cart[Real, N]) => cnj(f(x)), lspace(s, real_of_num(2)))
+      #|  (x : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (b : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (a : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 a : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, IN(a, lspace(s, real_of_num(2))) && IN(b, lspace(s, real_of_num(2))) && IN(c, lspace(s, real_of_num(2))) \226\134\146 lproduct(s, a, c) - lproduct(s, b, c) == lproduct(s, (x : Cart[Real, N]) => a(x) - b(x), c)
+      #|  (e : Real) == e / (lnorm((s : (Cart[Real, N]) -> Bool), real_of_num(2), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) + real_of_num(1)) * (lnorm(s, real_of_num(2), h) + real_of_num(1))
+      #|  lnorm((s : (Cart[Real, N]) -> Bool), real_of_num(2), (x : Cart[Real, N]) => (gn : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])((n : Num), x) - (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)) * (lnorm(s, real_of_num(2), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) + real_of_num(1))
+      #|  lnorm((s : (Cart[Real, N]) -> Bool), real_of_num(2), (x : Cart[Real, N]) => (gn : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])((n : Num), x) - (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(x)) * lnorm(s, real_of_num(2), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]))
+      #|  lproduct((s : (Cart[Real, N]) -> Bool), (gn : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])((n : Num)), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) - lproduct(s, (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]), h) == lproduct(s, (x : Cart[Real, N]) => gn(n, x) - g(x), h)
+      #|  (n : Num)
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  (e : Real) / (lnorm((s : (Cart[Real, N]) -> Bool), real_of_num(2), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) + real_of_num(1))
+      #|  real_of_num(0) < lnorm((s : (Cart[Real, N]) -> Bool), real_of_num(2), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) + real_of_num(1)
+      #|  real_of_num(0) <= lnorm((s : (Cart[Real, N]) -> Bool), real_of_num(2), (h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (e : Real)
+      #|  \226\136\128 gn : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 h : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, (\226\136\128 n : Num, IN(gn(n), lspace(s, real_of_num(2)))) && IN(g, lspace(s, real_of_num(2))) && IN(h, lspace(s, real_of_num(2))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Num, \226\136\128 n : Num, n >= M \226\134\146 lnorm(s, real_of_num(2), (x : Cart[Real, N]) => gn(n, x) - g(x)) < e)) \226\134\146 op_minus_minus_gt((n : Num) => lproduct(s, gn(n), h), lproduct(s, g, h), sequentially)
+      #|  lproduct((s : (Cart[Real, N]) -> Bool), (d : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]), (m : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])) == cnj(lproduct(s, m, d))
+      #|  (k : Num)
+      #|  ((n : Num) => lproduct((s : (Cart[Real, N]) -> Bool), (d : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]]), (mn : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])(n))) == ((n : Num) => cnj(lproduct(s, mn(n), d)))
+      #|  \226\136\128 mn : (Num, Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, (\226\136\128 n : Num, IN(mn(n), lspace(s, real_of_num(2)))) && IN(m, lspace(s, real_of_num(2))) && IN(d, lspace(s, real_of_num(2))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 M : Num, \226\136\128 n : Num, n >= M \226\134\146 lnorm(s, real_of_num(2), (x : Cart[Real, N]) => mn(n, x) - m(x)) < e)) \226\134\146 op_minus_minus_gt((n : Num) => lproduct(s, d, mn(n)), lproduct(s, d, m), sequentially)
+      #|  abs((x : Real)) < (e : Real) \226\134\146 x < e
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, Unit], integral(DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool)), f) == integral(s, f)
+      #|  inv((p : Real))
+      #|  (x : Cart[Real, M])
+      #|  norm((x : Cart[Real, N])) <= (a : Real) && norm((y : Cart[Real, N])) <= a \226\134\146 norm(x - y) <= real_of_num(2) * a
       #|  :real
       #|  :real
-      #|  (hp:real^M->real^1) integrable_on s
-      #|  &1 <= p ==> ~(p = &0)
-      #|  {}:real^M->bool
-      #|  hp:real^M->real^1
-      #|  s:real^M->bool
-      #|  n:num
-      #|  s DIFF k:real^M->bool
-      #|  \\x:real^M. &2 rpow p % lift(drop(h x) rpow p)
-      #|  (\\x. vec 0):real^M->real^1
-      #|  \\n x. lift(norm(vsum (0..n) (\\i. (f:num->real^M->real^N) i x) - l x)\n                    rpow p)
-      #|  \\k. lift(drop((g:num->real^M->real^1) k x) rpow p)
+      #|  integrable_on((hp : (Cart[Real, M]) -> Cart[Real, Unit]), (s : (Cart[Real, M]) -> Bool))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  ({} : (Cart[Real, M]) -> Bool)
+      #|  (hp : (Cart[Real, M]) -> Cart[Real, Unit])
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (n : Num)
+      #|  DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M]) => op_pct(rpow(real_of_num(2), (p : Real)), lift(rpow(drop((h : (Cart[Real, M]) -> Cart[Real, Unit])(x)), p)))
+      #|  (x : Cart[Real, M]) => (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (n : Num) => (x : Cart[Real, M]) => lift(rpow(norm(vsum(op_dot_dot(0, n), (i : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, x)) - (l : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real)))
+      #|  (k : Num) => lift(rpow(drop((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(k, (x : Cart[Real, M]))), (p : Real)))
       #|  sequentially
-      #|  forall x:real^M. x IN s DIFF k ==> &0 <= drop(hp x)
-      #|  forall x:real^M. x IN s DIFF k ==> &0 <= drop(h x)
-      #|  &1 <= p ==> ~(p = &0)
-      #|  \\k. lift(drop((g:num->real^M->real^1) k x) rpow p)
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 real_of_num(0) <= drop((hp : (Cart[Real, M]) -> Cart[Real, Unit])(x))
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 real_of_num(0) <= drop((h : (Cart[Real, M]) -> Cart[Real, Unit])(x))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  (k : Num) => lift(rpow(drop((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(k, (x : Cart[Real, M]))), (p : Real)))
       #|  sequentially
-      #|  drop(hp(x:real^M)) rpow (inv p * p)
-      #|  x = y pow 1 ==> x <= y
-      #|  drop(h(x:real^M)) rpow p
-      #|  k:real^M->bool
-      #|  (hp:real^M->real^1) integrable_on s
-      #|  &1 <= p ==> &0 < p
-      #|  \\x. if x IN k then lift(norm(l x:real^N) rpow p)\n          else (hp:real^M->real^1) x
-      #|  0..n = UNIV INTER (0..n)
-      #|  k:real^M->bool
-      #|  \\n x. vsum (0..n) (\\i. (f:num->real^M->real^N) i x)
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  \\n. vsum ((:num) INTER (0..n))\n                         (\\i. (f:num->real^M->real^N) i x)
+      #|  rpow(drop((hp : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M]))), inv((p : Real)) * p)
+      #|  (x : Real) == pow((y : Real), 1) \226\134\146 x <= y
+      #|  rpow(drop((h : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M]))), (p : Real))
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  integrable_on((hp : (Cart[Real, M]) -> Cart[Real, Unit]), (s : (Cart[Real, M]) -> Bool))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) < p
+      #|  (x : Cart[Real, M]) => if IN(x, (k : (Cart[Real, M]) -> Bool)) { lift(rpow(norm((l : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real))) } else { (hp : (Cart[Real, M]) -> Cart[Real, Unit])(x) }
+      #|  op_dot_dot(0, (n : Num)) == INTER(UNIV, op_dot_dot(0, n))
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  (n : Num) => (x : Cart[Real, M]) => vsum(op_dot_dot(0, n), (i : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, x))
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (n : Num) => vsum(INTER(UNIV, op_dot_dot(0, n)), (i : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, (x : Cart[Real, M])))
       #|  sequentially
-      #|  forall x. x IN s DIFF k ==> norm((l:real^M->real^N) x) <= drop(h x)
-      #|  n:num <= m
-      #|  m:num
-      #|  n:num
-      #|  \\n. vsum (0..n)\n                   (\\i. lift(norm((f:num->real^M->real^N) i x)))
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 norm((l : (Cart[Real, M]) -> Cart[Real, N])(x)) <= drop((h : (Cart[Real, M]) -> Cart[Real, Unit])(x))
+      #|  (n : Num) <= (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num) => vsum(op_dot_dot(0, n), (i : Num) => lift(norm((f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, (x : Cart[Real, M])))))
       #|  sequentially
-      #|  forall n x. x IN s DIFF k\n          ==> norm(vsum (0..n) (\\i. (f:num->real^M->real^N) i x)) <= drop(h x)
-      #|  l:real^M->real^N
-      #|  (h:real^M->real^1) x
-      #|  forall x. x IN s DIFF k ==> summable (:num) (\\i. (f:num->real^M->real^N) i x)
-      #|  &1 <= p ==> ~(p = &0)
-      #|  (hp:real^M->real^1) x
-      #|  \\i. lift(drop((g:num->real^M->real^1) i x) rpow p)
+      #|  \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 norm(vsum(op_dot_dot(0, n), (i : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, x))) <= drop((h : (Cart[Real, M]) -> Cart[Real, Unit])(x))
+      #|  (l : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (h : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M]))
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 summable(UNIV, (i : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, x))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  (hp : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M]))
+      #|  (i : Num) => lift(rpow(drop((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(i, (x : Cart[Real, M]))), (p : Real)))
       #|  sequentially
-      #|  lift o (\\x. x rpow (inv p)) o drop
-      #|  x:real^M
-      #|  forall x. x IN s DIFF k ==> ((\\i. g i x) --> ((h:real^M->real^1) x)) sequentially
-      #|  h:real^M->real^1 = \\x. lift(drop(hp x) rpow (inv p))
-      #|  k:real^M->bool
-      #|  hp:real^M->real^1
-      #|  &0 <= x /\\ x <= a ==> &0 <= abs x /\\ abs x <= a
-      #|  &1 <= p ==> &0 <= p
-      #|  &1 <= p ==> ~(p = &0)
-      #|  n:num
-      #|  M rpow p
-      #|  forall k x. drop((g:num->real^M->real^1) k x) = norm(g k x)
-      #|  b /\\ a /\\ c ==> a /\\ b /\\ c
-      #|  s:real^M->bool
-      #|  \\i:num x:real^M. lift(drop(g i x) rpow p)
-      #|  forall n:num x:real^M. &0 <= drop(g n x)
-      #|  forall n:num. (g n:real^M->real^1) IN lspace s p
-      #|  s = UNIV INTER s
-      #|  forall n:num. lnorm s p (g n:real^M->real^1) <= M
-      #|  g = \\n x:real^M. vsum(0..n) (\\i. lift(norm(f i x:real^N)))
-      #|  M = real_infsum (:num) (\\i. lnorm s p (f i:real^M->real^N))
-      #|  forall f:num->real^M->real^N p s.\n        &1 <= p /\\\n        (forall i. f i IN lspace s p) /\\\n        real_summable (:num) (\\i. lnorm s p (f i))\n        ==> ?g. g IN lspace s p /\\\n                forall e. &0 < e  ==> eventually\n                                  (\\n. lnorm s p (\\x. vsum (0..n) (\\i. f i x) -\n                                                      g(x)) < e)\n                                  sequentially
-      #|  s INTER t = {x | x IN t /\\ x IN s}
-      #|  x:real^M
-      #|  &1 <= p ==> ~(p = &0)
-      #|  (i:num) IN t
-      #|  i:num
-      #|  &1 <= p ==> &0 < p
-      #|  &1 <= p ==> &0 <= p
-      #|  &0 <= x /\\ x = y ==> x < e ==> abs y < e
-      #|  n:num
-      #|  (g:real^M->real^N) IN lspace s p
-      #|  g:real^M->real^N
-      #|  &1 <= p ==> ~(p = &0)
-      #|  &1 <= p ==> ~(p = &0)
-      #|  (i:num) IN t
-      #|  i:num
-      #|  s:real^M->bool
-      #|  p:real
-      #|  (\\n:num x. if n IN t then f n x else vec 0):num->real^M->real^N
-      #|  forall f:num->real^M->real^N p s t.\n        &1 <= p /\\\n        (forall i. i IN t ==> f i IN lspace s p) /\\\n        real_summable t (\\i. lnorm s p (f i))\n        ==> ?g. g IN lspace s p /\\\n                ((\\n. lnorm s p (\\x. vsum (t INTER (0..n)) (\\i. f i x) - g x))\n                 ---> &0) sequentially
-      #|  &1 <= p ==> &0 <= p
-      #|  x < e / &2 /\\ y < e / &2 ==> z <= x + y ==> z < e
-      #|  &1 <= p ==> &0 <= p
-      #|  f n x - (g x + f (k 0) x):real^N =\n        (f (k (n + 1)) x - f (k 0) x - g x) +\n        --(f (k (n + 1)) x - f n x)
-      #|  m <= k m /\\ k m < k(SUC m) ==> SUC m <= k(SUC m)
-      #|  m:num
-      #|  n + 1
-      #|  n + 1
-      #|  n:num
-      #|  k(n + 1):num
-      #|  n:num
-      #|  MAX N1 N2 <= n <=> N1 <= n /\\ N2 <= n
-      #|  n:num
-      #|  MAX N1 N2
-      #|  N2:num
-      #|  e / &2
-      #|  N1:num
-      #|  e / &2
-      #|  e:real
-      #|  &1 <= p ==> &0 <= p
-      #|  \\x. (g:real^M->real^N) x + f (k 0:num) x
-      #|  g:real^M->real^N
-      #|  &1 <= p ==> &0 <= p
-      #|  &0 <= x /\\ x < y ==> abs x <= y
-      #|  n:num
+      #|  o(lift, o((x : Real) => rpow(x, inv((p : Real))), drop))
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 op_minus_minus_gt((i : Num) => (g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(i, x), (h : (Cart[Real, M]) -> Cart[Real, Unit])(x), sequentially)
+      #|  (h : (Cart[Real, M]) -> Cart[Real, Unit]) == ((x : Cart[Real, M]) => lift(rpow(drop((hp : (Cart[Real, M]) -> Cart[Real, Unit])(x)), inv((p : Real)))))
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  (hp : (Cart[Real, M]) -> Cart[Real, Unit])
+      #|  real_of_num(0) <= (x : Real) && x <= (a : Real) \226\134\146 real_of_num(0) <= abs(x) && abs(x) <= a
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  (n : Num)
+      #|  rpow((M : Real), (p : Real))
+      #|  \226\136\128 k : Num, \226\136\128 x : Cart[Real, M], drop((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(k, x)) == norm(g(k, x))
+      #|  (b : Bool) && (a : Bool) && (c : Bool) \226\134\146 a && b && c
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (i : Num) => (x : Cart[Real, M]) => lift(rpow(drop((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(i, x)), (p : Real)))
+      #|  \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], real_of_num(0) <= drop((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(n, x))
+      #|  \226\136\128 n : Num, IN((g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(n), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  (s : (_) -> Bool) == INTER(UNIV, s)
+      #|  \226\136\128 n : Num, lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (g : (Num, Cart[Real, M]) -> Cart[Real, Unit])(n)) <= (M : Real)
+      #|  (g : (Num, Cart[Real, M]) -> Cart[Real, Unit]) == ((n : Num) => (x : Cart[Real, M]) => vsum(op_dot_dot(0, n), (i : Num) => lift(norm((f : (Num, Cart[Real, M]) -> Cart[Real, N])(i, x)))))
+      #|  (M : Real) == real_infsum(UNIV, (i : Num) => lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(i)))
+      #|  \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : Real, \226\136\128 s : (Cart[Real, M]) -> Bool, real_of_num(1) <= p && (\226\136\128 i : Num, IN(f(i), lspace(s, p))) && real_summable(UNIV, (i : Num) => lnorm(s, p, f(i))) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], IN(g, lspace(s, p)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((n : Num) => lnorm(s, p, (x : Cart[Real, M]) => vsum(op_dot_dot(0, n), (i : Num) => f(i, x)) - g(x)) < e, sequentially)))
+      #|  INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {(x : _) | IN(x, t) && IN(x, s)}
+      #|  (x : Cart[Real, M])
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  IN((i : Num), (t : (Num) -> Bool))
+      #|  (i : Num)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) < p
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  real_of_num(0) <= (x : Real) && x == (y : Real) \226\134\146 x < (e : Real) \226\134\146 abs(y) < e
+      #|  (n : Num)
+      #|  IN((g : (Cart[Real, M]) -> Cart[Real, N]), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 !(p == real_of_num(0))
+      #|  IN((i : Num), (t : (Num) -> Bool))
+      #|  (i : Num)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (p : Real)
+      #|  (n : Num) => (x : Cart[Real, M]) => if IN(n, (t : (Num) -> Bool)) { (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x) } else { vec(0) }
+      #|  \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : Real, \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Num) -> Bool, real_of_num(1) <= p && (\226\136\128 i : Num, IN(i, t) \226\134\146 IN(f(i), lspace(s, p))) && real_summable(t, (i : Num) => lnorm(s, p, f(i))) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], IN(g, lspace(s, p)) && op_minus_minus_minus_gt((n : Num) => lnorm(s, p, (x : Cart[Real, M]) => vsum(INTER(t, op_dot_dot(0, n)), (i : Num) => f(i, x)) - g(x)), real_of_num(0), sequentially))
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  (x : Real) < (e : Real) / real_of_num(2) && (y : Real) < e / real_of_num(2) \226\134\146 (z : Real) <= x + y \226\134\146 z < e
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  (f : (Num, _) -> Cart[Real, N])((n : Num), (x : _)) - ((g : (_) -> Cart[Real, N])(x) + f((k : (Num) -> Num)(0), x)) == f(k(n + 1), x) - f(k(0), x) - g(x) + -(f(k(n + 1), x) - f(n, x))
+      #|  (m : Num) <= (k : (Num) -> Num)(m) && k(m) < k(SUC(m)) \226\134\146 SUC(m) <= k(SUC(m))
+      #|  (m : Num)
+      #|  (n : Num) + 1
+      #|  (n : Num) + 1
+      #|  (n : Num)
+      #|  (k : (Num) -> Num)((n : Num) + 1)
+      #|  (n : Num)
+      #|  (MAX((N1 : Num), (N2 : Num)) <= (n : Num)) == (N1 <= n && N2 <= n)
+      #|  (n : Num)
+      #|  MAX((N1 : Num), (N2 : Num))
+      #|  (N2 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (N1 : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (e : Real)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  (x : Cart[Real, M]) => (g : (Cart[Real, M]) -> Cart[Real, N])(x) + (f : (Num, Cart[Real, M]) -> Cart[Real, N])((k : (Num) -> Num)(0), x)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  real_of_num(0) <= (x : Real) && x < (y : Real) \226\134\146 abs(x) <= y
+      #|  (n : Num)
       #|  0
-      #|  \\n. inv(&2) pow n
-      #|  &1 <= p ==> &0 <= p
-      #|  s:real^M->bool
-      #|  p:real
-      #|  \\n x. f (k(SUC n)) x - (f:num->real^M->real^N) (k n) x
-      #|  n:num
-      #|  n:num
-      #|  n < MAX (n + 1) m
-      #|  k 0 = N 0 /\\\n      forall n. k(SUC n) = MAX (k n + 1) (MAX (N n) (N(SUC n)))
-      #|  N:num->num
-      #|  inv(&2 pow n)
-      #|  n:num
-      #|  ?k:num->num.\n        (forall n. k n < k (SUC n)) /\\\n        (forall n. lnorm s p ((\\x. f (k(SUC n)) x - f (k n) x):real^M->real^N)\n             < inv(&2 pow n))
-      #|  forall f:num->real^M->real^N p s.\n        &1 <= p /\\ (forall n. (f n) IN lspace s p) /\\\n        (forall e. &0 < e\n             ==> ?N. forall m n. m >= N /\\ n >= N\n                           ==> lnorm s p (\\x. f m x - f n x) < e)\n        ==> ?g. g IN lspace s p /\\\n                forall e. &0 < e\n                    ==> ?N. forall n. n >= N\n                                ==> lnorm s p (\\x. f n x - g x) < e
-      #|  k:num
-      #|  lift o (\\x. x rpow inv p) o  drop
-      #|  (lift o (\\x. x rpow p) o  drop) o (lift o (norm:real^N->real))
-      #|  x:real^M
-      #|  forall x. x IN s DIFF k\n            ==> ((\\n. (f:num->real^M->real^N) n x) --> g x) sequentially
-      #|  x:real^M
-      #|  norm(x:real^N) <= norm(z) /\\ norm(y) <= norm z\n         ==> norm(x - y) <= norm(&2 % z:real^N)
+      #|  (n : Num) => pow(inv(real_of_num(2)), n)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (p : Real)
+      #|  (n : Num) => (x : Cart[Real, M]) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])((k : (Num) -> Num)(SUC(n)), x) - f(k(n), x)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num) < MAX(n + 1, (m : Num))
+      #|  (k : (Num) -> Num)(0) == (N : (Num) -> Num)(0) && (\226\136\128 n : Num, k(SUC(n)) == MAX(k(n) + 1, MAX(N(n), N(SUC(n)))))
+      #|  (N : (Num) -> Num)
+      #|  inv(pow(real_of_num(2), (n : Num)))
+      #|  (n : Num)
+      #|  \226\136\131 k : (Num) -> Num, (\226\136\128 n : Num, k(n) < k(SUC(n))) && (\226\136\128 n : Num, lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (x : Cart[Real, M]) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(k(SUC(n)), x) - f(k(n), x)) < inv(pow(real_of_num(2), n)))
+      #|  \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : Real, \226\136\128 s : (Cart[Real, M]) -> Bool, real_of_num(1) <= p && (\226\136\128 n : Num, IN(f(n), lspace(s, p))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 m : Num, \226\136\128 n : Num, m >= N && n >= N \226\134\146 lnorm(s, p, (x : Cart[Real, M]) => f(m, x) - f(n, x)) < e)) \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], IN(g, lspace(s, p)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, n >= N \226\134\146 lnorm(s, p, (x : Cart[Real, M]) => f(n, x) - g(x)) < e)))
+      #|  (k : Num)
+      #|  o(lift, o((x : Real) => rpow(x, inv((p : Real))), drop))
+      #|  (o : ((Cart[Real, Unit]) -> Cart[Real, Unit], (Cart[Real, N]) -> Cart[Real, Unit], Cart[Real, N]) -> Cart[Real, Unit])(o(lift, o((x : Real) => rpow(x, (p : Real)), drop)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (norm : (Cart[Real, N]) -> Real)))
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 op_minus_minus_gt((n : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x), (g : (Cart[Real, M]) -> Cart[Real, N])(x), sequentially)
+      #|  (x : Cart[Real, M])
+      #|  norm((x : Cart[Real, N])) <= norm((z : Cart[Real, N])) && norm((y : Cart[Real, N])) <= norm(z) \226\134\146 norm(x - y) <= norm(op_pct(real_of_num(2), z))
       #|  :real
       #|  :real
       #|  :real
-      #|  x:real^M
-      #|  k:num
-      #|  (h:real^M->real^N) IN lspace s p
-      #|  (\\x. (f:num->real^M->real^N) k x - g x) IN lspace s p
-      #|  k:num
-      #|  s DIFF k:real^M->bool
-      #|  \\x. lift(norm(&2 % (h:real^M->real^N) x) rpow p)
-      #|  (\\x. vec 0):real^M->real^1
-      #|  \\n x. lift(norm((f:num->real^M->real^N) n x - g x) rpow p)
-      #|  \\n. (f:num->real^M->real^N) n x
+      #|  (x : Cart[Real, M])
+      #|  (k : Num)
+      #|  IN((h : (Cart[Real, M]) -> Cart[Real, N]), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  IN((x : Cart[Real, M]) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])((k : Num), x) - (g : (Cart[Real, M]) -> Cart[Real, N])(x), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  (k : Num)
+      #|  DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M]) => lift(rpow(norm(op_pct(real_of_num(2), (h : (Cart[Real, M]) -> Cart[Real, N])(x))), (p : Real)))
+      #|  (x : Cart[Real, M]) => (vec : (Num) -> Cart[Real, Unit])(0)
+      #|  (n : Num) => (x : Cart[Real, M]) => lift(rpow(norm((f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x) - (g : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real)))
+      #|  (n : Num) => (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, (x : Cart[Real, M]))
       #|  sequentially
-      #|  x:real^M
-      #|  forall x. x IN s DIFF k\n        ==> norm((g:real^M->real^N) x) <= norm((h:real^M->real^N) x)
-      #|  a ==> b ==> c <=> b ==> a ==> c
-      #|  k:real^M->bool
-      #|  f:num->real^M->real^N
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  (lift o (\\x. x rpow p) o  drop) o (lift o (norm:real^N->real))
-      #|  x:real^M
-      #|  x:real^M
-      #|  x:real^M
-      #|  k:num
-      #|  k:num
-      #|  k:num
-      #|  s DIFF k:real^M->bool
-      #|  \\x. lift(norm((h:real^M->real^N) x) rpow p)
-      #|  \\x. lift(norm((g:real^M->real^N) x) rpow p)
-      #|  \\n x. lift(norm((f:num->real^M->real^N) n x) rpow p)
-      #|  forall f:num->real^M->real^N g h:real^M->real^N s p k.\n        &0 < p /\\\n        (forall n. (f n) IN lspace s p) /\\ h IN lspace s p /\\\n        (forall n x. x IN s ==> norm(f n x) <= norm(h x)) /\\\n        negligible k /\\\n        (forall x. x IN s DIFF k ==> ((\\n. f n x) --> g(x)) sequentially)\n        ==> g IN lspace s p /\\\n            ((\\n. lnorm s p (\\x. f n x - g x)) ---> &0) sequentially
-      #|  abs(x) < e ==> x < e
-      #|  x:real^M
-      #|  &(dimindex(:N)) * &n
-      #|  (\\x. (lambda i. max (-- &n) (min (&n) ((f:real^M->real^N) x$i))))\n      :real^M->real^N
-      #|  n:num
-      #|  n:num
-      #|  e:real
-      #|  x = y ==> x IN s ==> y IN s
-      #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-      #|  --vec n:real^N
-      #|  p:real
-      #|  s:real^M->bool
-      #|  a /\\ b /\\ c ==> d <=> a /\\ b ==> c ==> d
-      #|  (f:real^M->real^N) IN lspace s p
-      #|  vec n:real^N
-      #|  p:real
-      #|  s:real^M->bool
-      #|  n:num
-      #|  abs(x) <= n ==> max (--n) (min n x) = x
-      #|  i:num
-      #|  n:num
-      #|  N:num
-      #|  sup(IMAGE (\\i. abs((f:real^M->real^N) x$i)) (1..dimindex(:N)))
-      #|  x:real^M
-      #|  b /\\ c /\\ a /\\ (a /\\ d ==> e)\n    ==> (a /\\ b /\\ c ==> d) ==> e
-      #|  {}:real^M->bool
-      #|  p:real
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  f:real^M->real^N
-      #|  (\\n x. (lambda i. max (--(&n)) (min (&n) ((f:real^M->real^N)(x)$i))))\n     :num->real^M->real^N
-      #|  forall f:real^M->real^N s p e.\n        &0 < p /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. g IN lspace s p /\\\n                bounded (IMAGE g s) /\\\n                lnorm s p (\\x. f x - g x) < e
-      #|  abs x < e ==> x < e
-      #|  y < e / &2 /\\ z < e / &2 ==> x <= y + z ==> x < e
-      #|  (\\x. f x - (g:num->real^M->real^N) n x) =\n    (\\x. (f x - h x) + --(g n x - h x))
-      #|  (g:num->real^M->real^N) n
-      #|  n:num
-      #|  n:num
-      #|  e / &2
-      #|  k:real^M->bool
-      #|  p:real
-      #|  s:real^M->bool
-      #|  (\\x. B % vec 1):real^M->real^N
-      #|  h:real^M->real^N
-      #|  g:num->real^M->real^N
-      #|  (\\x. B % vec 1):real^M->real^N
+      #|  (x : Cart[Real, M])
+      #|  \226\136\128 x : Cart[Real, M], IN(x, DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))) \226\134\146 norm((g : (Cart[Real, M]) -> Cart[Real, N])(x)) <= norm((h : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  (f : (Num, Cart[Real, M]) -> Cart[Real, N])
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  (o : ((Cart[Real, Unit]) -> Cart[Real, Unit], (Cart[Real, N]) -> Cart[Real, Unit], Cart[Real, N]) -> Cart[Real, Unit])(o(lift, o((x : Real) => rpow(x, (p : Real)), drop)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (norm : (Cart[Real, N]) -> Real)))
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  DIFF((s : (Cart[Real, M]) -> Bool), (k : (Cart[Real, M]) -> Bool))
+      #|  (x : Cart[Real, M]) => lift(rpow(norm((h : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real)))
+      #|  (x : Cart[Real, M]) => lift(rpow(norm((g : (Cart[Real, M]) -> Cart[Real, N])(x)), (p : Real)))
+      #|  (n : Num) => (x : Cart[Real, M]) => lift(rpow(norm((f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)), (p : Real)))
+      #|  \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 k : (Cart[Real, M]) -> Bool, real_of_num(0) < p && (\226\136\128 n : Num, IN(f(n), lspace(s, p))) && IN(h, lspace(s, p)) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 norm(f(n, x)) <= norm(h(x))) && negligible(k) && (\226\136\128 x : Cart[Real, M], IN(x, DIFF(s, k)) \226\134\146 op_minus_minus_gt((n : Num) => f(n, x), g(x), sequentially)) \226\134\146 IN(g, lspace(s, p)) && op_minus_minus_minus_gt((n : Num) => lnorm(s, p, (x : Cart[Real, M]) => f(n, x) - g(x)), real_of_num(0), sequentially)
+      #|  abs((x : Real)) < (e : Real) \226\134\146 x < e
+      #|  (x : Cart[Real, M])
+      #|  real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) * real_of_num((n : Num))
+      #|  (x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => max(-real_of_num((n : Num)), min(real_of_num(n), (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), i))))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (e : Real)
+      #|  (x : _) == (y : _) \226\134\146 IN(x, (s : (_) -> Bool)) \226\134\146 IN(y, s)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+      #|  -(vec : (Num) -> Cart[Real, N])((n : Num))
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
+      #|  IN((f : (Cart[Real, M]) -> Cart[Real, N]), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  (vec : (Num) -> Cart[Real, N])((n : Num))
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (n : Num)
+      #|  abs((x : Real)) <= (n : Real) \226\134\146 max(-n, min(n, x)) == x
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  sup((IMAGE : ((Num) -> Real, (Num) -> Bool, Real) -> Bool)((i : Num) => abs((op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M])), i)), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))))
+      #|  (x : Cart[Real, M])
+      #|  (b : Bool) && (c : Bool) && (a : Bool) && (a && (d : Bool) \226\134\146 (e : Bool)) \226\134\146 (a && b && c \226\134\146 d) \226\134\146 e
+      #|  ({} : (Cart[Real, M]) -> Bool)
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (n : Num) => (x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => max(-real_of_num(n), min(real_of_num(n), (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), i))))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 e : Real, real_of_num(0) < p && measurable(s) && IN(f, lspace(s, p)) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], IN(g, lspace(s, p)) && bounded(IMAGE(g, s)) && lnorm(s, p, (x : Cart[Real, M]) => f(x) - g(x)) < e)
+      #|  abs((x : Real)) < (e : Real) \226\134\146 x < e
+      #|  (y : Real) < (e : Real) / real_of_num(2) && (z : Real) < e / real_of_num(2) \226\134\146 (x : Real) <= y + z \226\134\146 x < e
+      #|  ((x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (g : (Num, Cart[Real, M]) -> Cart[Real, N])((n : Num), x)) == ((x : Cart[Real, M]) => f(x) - (h : (Cart[Real, M]) -> Cart[Real, N])(x) + -(g(n, x) - h(x)))
+      #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])((n : Num))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (x : Cart[Real, M]) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((B : Real), (vec : (Num) -> Cart[Real, N])(1))
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])
+      #|  (x : Cart[Real, M]) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((B : Real), (vec : (Num) -> Cart[Real, N])(1))
       #|  :P
       #|  :N
-      #|  n:num
-      #|  forall n. ((g:num->real^M->real^N) n) IN lspace s p
-      #|  k:num
-      #|  x:real^M
-      #|  k:num
-      #|  norm(c - a:real^N) <= norm(b - a)\n        ==> dist(b,a) < ee ==> dist(c,a) < ee
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, IN((g : (Num, Cart[Real, M]) -> Cart[Real, N])(n), lspace((s : (Cart[Real, M]) -> Bool), (p : Real)))
+      #|  (k : Num)
+      #|  (x : Cart[Real, M])
+      #|  (k : Num)
+      #|  norm((c : Cart[Real, N]) - (a : Cart[Real, N])) <= norm((b : Cart[Real, N]) - a) \226\134\146 dist((b, a)) < (ee : Real) \226\134\146 dist((c, a)) < ee
       #|  :real
       #|  :real
-      #|  n:num
-      #|  N:num
-      #|  ee:real
-      #|  x:real^M
-      #|  x:real^M
-      #|  (lambda i. --B):real^N
-      #|  (:real^M)
-      #|  (lambda i. B):real^N
-      #|  (:real^M)
-      #|  n:num
-      #|  n:num
-      #|  (\\n x. lambda i. max (--B) (min B (((g n x):real^N)$i))):\n                num->real^M->real^N
-      #|  g:num->real^M->real^N
-      #|  k:real^M->bool
-      #|  (h:real^M->real^N) measurable_on s
-      #|  ?k g. negligible k /\\\n          (forall n. g n continuous_on (:real^M)) /\\\n          (forall n x. x IN s ==> norm(g n x:real^N) <= norm(B % vec 1:real^N)) /\\\n          (forall x. x IN (s DIFF k)  ==> ((\\n. g n x) --> h x) sequentially)
-      #|  B:real
-      #|  h:real^M->real^N
-      #|  e / &2
-      #|  p:real
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  &1 <= p ==> &0 < p
-      #|  forall f:real^M->real^N s p e.\n        &1 <= p /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. g continuous_on (:real^M) /\\\n                g IN lspace s p /\\\n                lnorm s p (\\x. f x - g x) < e
-      #|  m * e / &2 <= e / &2 * n <=> e * m <= e * n
-      #|  &0 <= x ==> &0 < x + &1
-      #|  abs x = if &0 < x then x else --x
-      #|  &0 < e ==> x * abs e / &2 / y = (x * e / &2) / y
-      #|  &1 <= p ==> &0 < p
-      #|  x < y ==> x <= abs y
-      #|  &1 <= p ==> &0 <= p
-      #|  {}:real^M->bool
-      #|  lnorm (s:real^M->bool) p\n          (\\x. lift(e / &2 / (measure s rpow inv p + &1)))
-      #|  x < e / &2 ==> y <= e / &2 ==> x + y < e
-      #|  (f - g) + (g - h):real^N = f - h
-      #|  &1 <= p ==> &0 <= p
-      #|  lnorm s p (\\x. (f:real^M->real^N) x - g x) +\n    lnorm s p (\\x. g x - h x)
-      #|  IMAGE (h:real^M->real^N) (closure s)
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  h:real^M->real^N
-      #|  &0 <= x ==> &0 < x + &1
-      #|  e / &2 / (measure(s:real^M->bool) rpow (inv p) + &1)
-      #|  closure s:real^M->bool
-      #|  g:real^M->real^N
-      #|  g:real^M->real^N
-      #|  e / &2
-      #|  p:real
-      #|  s:real^M->bool
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N s p e.\n        &1 <= p /\\ bounded s /\\ measurable s /\\ f IN lspace s p /\\ &0 < e\n        ==> ?g. vector_polynomial_function g /\\\n                g IN lspace s p /\\\n                lnorm s p (\\x. f x - g x) < e
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (ee : Real)
+      #|  (x : Cart[Real, M])
+      #|  (x : Cart[Real, M])
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => -(B : Real))
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (B : Real))
+      #|  (UNIV : (Cart[Real, M]) -> Bool)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (n : Num) => (x : Cart[Real, M]) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => max(-(B : Real), min(B, (op_dollar : (Cart[Real, N], Num) -> Real)((g : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x), i))))
+      #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])
+      #|  (k : (Cart[Real, M]) -> Bool)
+      #|  measurable_on((h : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))
+      #|  \226\136\131 k : (Cart[Real, M]) -> Bool, \226\136\131 g : (Num, Cart[Real, M]) -> Cart[Real, N], (negligible : ((Cart[Real, M]) -> Bool) -> Bool)(k) && (\226\136\128 n : Num, (continuous_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(g(n), (UNIV : (Cart[Real, M]) -> Bool))) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) \226\134\146 (norm : (Cart[Real, N]) -> Real)(g(n, x)) <= (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((B : Real), (vec : (Num) -> Cart[Real, N])(1)))) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (DIFF : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(s, k)) \226\134\146 (op_minus_minus_gt : ((Num) -> Cart[Real, N], Cart[Real, N], Net[Num]) -> Bool)((n : Num) => g(n, x), (h : (Cart[Real, M]) -> Cart[Real, N])(x), sequentially))
+      #|  (B : Real)
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (e : Real) / real_of_num(2)
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) < p
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 e : Real, real_of_num(1) <= p && measurable(s) && IN(f, lspace(s, p)) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], continuous_on(g, UNIV) && IN(g, lspace(s, p)) && lnorm(s, p, (x : Cart[Real, M]) => f(x) - g(x)) < e)
+      #|  ((m : Real) * ((e : Real) / real_of_num(2)) <= e / real_of_num(2) * (n : Real)) == (e * m <= e * n)
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < x + real_of_num(1)
+      #|  abs((x : Real)) == (if real_of_num(0) < x { x } else { -x })
+      #|  real_of_num(0) < (e : Real) \226\134\146 (x : Real) * (abs(e) / real_of_num(2) / (y : Real)) == x * (e / real_of_num(2)) / y
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) < p
+      #|  (x : Real) < (y : Real) \226\134\146 x <= abs(y)
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  ({} : (Cart[Real, M]) -> Bool)
+      #|  lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (x : Cart[Real, M]) => lift((e : Real) / real_of_num(2) / (rpow(measure(s), inv(p)) + real_of_num(1))))
+      #|  (x : Real) < (e : Real) / real_of_num(2) \226\134\146 (y : Real) <= e / real_of_num(2) \226\134\146 x + y < e
+      #|  (f : Cart[Real, N]) - (g : Cart[Real, N]) + (g - (h : Cart[Real, N])) == f - h
+      #|  real_of_num(1) <= (p : Real) \226\134\146 real_of_num(0) <= p
+      #|  lnorm((s : (Cart[Real, M]) -> Bool), (p : Real), (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (g : (Cart[Real, M]) -> Cart[Real, N])(x)) + lnorm(s, p, (x : Cart[Real, M]) => g(x) - (h : (Cart[Real, M]) -> Cart[Real, N])(x))
+      #|  IMAGE((h : (Cart[Real, M]) -> Cart[Real, N]), closure((s : (Cart[Real, M]) -> Bool)))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (h : (Cart[Real, M]) -> Cart[Real, N])
+      #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < x + real_of_num(1)
+      #|  (e : Real) / real_of_num(2) / (rpow(measure((s : (Cart[Real, M]) -> Bool)), inv((p : Real))) + real_of_num(1))
+      #|  closure((s : (Cart[Real, M]) -> Bool))
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (e : Real) / real_of_num(2)
+      #|  (p : Real)
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : Real, \226\136\128 e : Real, real_of_num(1) <= p && bounded(s) && measurable(s) && IN(f, lspace(s, p)) && real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], vector_polynomial_function(g) && IN(g, lspace(s, p)) && lnorm(s, p, (x : Cart[Real, M]) => f(x) - g(x)) < e)
       #|lspace =  |- (#forall:fun(fun(real,bool),bool) (\p:real. (#forall:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). ((#=:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool)) ((#lspace:fun(fun(cart(real,'M),bool),fun(real,fun(fun(cart(real,'M),cart(real,'N)),bool))) s:fun(cart(real,'M),bool)) p:real)) (#GSPEC:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)) (\GEN%PVAR%1:fun(cart(real,'M),cart(real,'N)). (#?:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (((#SETSPEC:fun(fun(cart(real,'M),cart(real,'N)),fun(bool,fun(fun(cart(real,'M),cart(real,'N)),bool))) GEN%PVAR%1:fun(cart(real,'M),cart(real,'N))) ((#/\:fun(bool,fun(bool,bool)) ((#measurable_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool))) ((#integrable_on:fun(fun(cart(real,'M),cart(real,1)),fun(fun(cart(real,'M),bool),bool)) (\x:cart(real,'M). (#lift:fun(real,cart(real,1)) ((#rpow:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'N),real) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M)))) p:real)))) s:fun(cart(real,'M),bool)))) f:fun(cart(real,'M),cart(real,'N))))))))))))
       #|LSPACE_ALT =  |- ((#=:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool)) ((#lspace:fun(fun(cart(real,'M),bool),fun(real,fun(fun(cart(real,'M),cart(real,'N)),bool))) s:fun(cart(real,'M),bool)) p:real)) (#GSPEC:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)) (\GEN%PVAR%2:fun(cart(real,'M),cart(real,'N)). (#?:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (((#SETSPEC:fun(fun(cart(real,'M),cart(real,'N)),fun(bool,fun(fun(cart(real,'M),cart(real,'N)),bool))) GEN%PVAR%2:fun(cart(real,'M),cart(real,'N))) ((#/\:fun(bool,fun(bool,bool)) ((#measurable_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool))) ((#absolutely_integrable_on:fun(fun(cart(real,'M),cart(real,1)),fun(fun(cart(real,'M),bool),bool)) (\x:cart(real,'M). (#lift:fun(real,cart(real,1)) ((#rpow:fun(real,fun(real,real)) (#vector_norm:fun(cart(real,'N),real) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M)))) p:real)))) s:fun(cart(real,'M),bool)))) f:fun(cart(real,'M),cart(real,'N))))))))
       #|LSPACE_ZERO =  |- (#forall:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). ((#=:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool)) ((#lspace:fun(fun(cart(real,'M),bool),fun(real,fun(fun(cart(real,'M),cart(real,'N)),bool))) s:fun(cart(real,'M),bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (((#COND:fun(bool,fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)))) (#measurable:fun(fun(cart(real,'M),bool),bool) s:fun(cart(real,'M),bool))) (#GSPEC:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),fun(fun(cart(real,'M),cart(real,'N)),bool)) (\GEN%PVAR%3:fun(cart(real,'M),cart(real,'N)). (#?:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (((#SETSPEC:fun(fun(cart(real,'M),cart(real,'N)),fun(bool,fun(fun(cart(real,'M),cart(real,'N)),bool))) GEN%PVAR%3:fun(cart(real,'M),cart(real,'N))) ((#measurable_on:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),bool)) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool))) f:fun(cart(real,'M),cart(real,'N)))))))) #EMPTY:fun(fun(cart(real,'M),cart(real,'N)),bool)))))
