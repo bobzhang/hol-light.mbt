@@ -96369,11 +96369,11 @@ test "Examples/apery matches Examples/apery.ml" {
       #|  \226\136\128 x : Real, \226\136\128 y : Real, !(x == real_of_num(0)) && !(y == real_of_num(0)) \226\134\146 !(x * y == real_of_num(0))
       #|  op_slash
       #|  inv
-      #|  op_star
-      #|  op_plus
-      #|  op_minus
-      #|  pow
-      #|  op_minus_minus
+      #|  real_mul
+      #|  real_add
+      #|  real_sub
+      #|  real_pow
+      #|  real_neg
       #|  1 <= (k : Num) && k + 1 < (n : Num)
       #|  (k : Num)
       #|  (n : Num)
