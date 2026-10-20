@@ -15,7 +15,7 @@ fn step_2() -> Unit raise {
 ///|
 /// csqrt
 fn step_3() -> Unit raise {
-  csqrt_c.set(@pair.new_definition(@term_syntax.parse_term("(csqrt : (Complex) -> Complex)((z : Complex)) == (if Im(z) == real_of_num(0) { if real_of_num(0) <= Re(z) { complex((sqrt(Re(z)), real_of_num(0))) } else { complex((real_of_num(0), sqrt(-Re(z)))) } } else { complex((sqrt((norm(z) + Re(z)) / real_of_num(2)), Im(z) / abs(Im(z)) * sqrt((norm(z) - Re(z)) / real_of_num(2)))) })")))
+  csqrt_c.set(@pair.new_definition(@term_syntax.parse_term("(csqrt : (Complex) -> Complex)((z : Complex)) == (if Im(z) == real_of_num(0) { if real_of_num(0) <= Re(z) { complex((sqrt(Re(z)), real_of_num(0))) } else { complex((real_of_num(0), sqrt(-Re(z)))) } } else { complex((sqrt((complex_norm(z) + Re(z)) / real_of_num(2)), Im(z) / abs(Im(z)) * sqrt((complex_norm(z) - Re(z)) / real_of_num(2)))) })")))
 }
 
 ///|
@@ -34,7 +34,7 @@ fn step_4() -> Unit raise {
   let t2 = @tactics.match_mp_tac(@real.sqrt_mono_le())
   let t1 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_norm()]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@real.pow_2_sqrt_abs())]))), t1), @tactics.conj_tac), t2), t3)
-  complex_norm_ge_re_im_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, abs(Re(z)) <= norm(z) && abs(Im(z)) <= norm(z)"), t4))
+  complex_norm_ge_re_im_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, abs(Re(z)) <= complex_norm(z) && abs(Im(z)) <= complex_norm(z)"), t4))
 }
 
 ///|
@@ -72,7 +72,7 @@ fn step_5() -> Unit raise {
   let t14 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_eq(), @complexnumbers.re(), @complexnumbers.im()]))
   let t13 = @simp.asm_simp_tac(@list.List([@real.real_le_div(), @analysis.real_pos(), @equal.gsym(@real.sqrt_mul()), @real.sqrt_pow_2()]))
   let t12 = @list.List([@tactics.then_tac(@tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(z : Complex)"), complex_norm_ge_re_im())), @calc_rat.real_arith_tac), @tactics.all_tac])
-  let t11 = @tactics.subgoal_then(@term_syntax.parse_term("real_of_num(0) <= norm((z : Complex)) + Re(z) && real_of_num(0) <= norm(z) - Re(z)"), @tactics.strip_assume_tac)
+  let t11 = @tactics.subgoal_then(@term_syntax.parse_term("real_of_num(0) <= complex_norm((z : Complex)) + Re(z) && real_of_num(0) <= complex_norm(z) - Re(z)"), @tactics.strip_assume_tac)
   let t10 = @simp.rewrite_tac(@list.List([@equal.gsym(@realarith.real_pow_2())]))
   let t9 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(s : Real) * s - (i : Real) * (s' : Real) * (i * s') == s * s - i * i * (s' * s') && s * (i * s') + i * s' * s == real_of_num(2) * (i * (s * s'))"))]))
   let t8 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_mul(), @complexnumbers.re(), @complexnumbers.im()]))
@@ -80,7 +80,7 @@ fn step_5() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([@analysis.real_neg_eq(), @equal.gsym(@realarith.real_pow_2())]))
   let t7 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([@complexnumbers.cx_def(), @complexnumbers.complex_mul(), @complexnumbers.re(), @complexnumbers.im(), @analysis.real_mul_rzero(), @analysis.real_mul_lzero(), @analysis.real_sub_lzero(), @analysis.real_sub_rzero(), @realax.real_add_lid(), @complexnumbers.complex_eq()]))), t5), t6), @tactics.all_tac])
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@complexnumbers.complex_pow_2(), csqrt()]))), @class.cond_cases_tac), t7), t8), t9), t10), t11), t12), t13), t14), @tactics.conj_tac), t20), t21), t23), t24), t25), t26), t27), t28), t29), t31), t32), t33), t34)
-  csqrt_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, pow(csqrt(z), 2) == z"), t35))
+  csqrt_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, complex_pow(csqrt(z), 2) == z"), t35))
 }
 
 ///|
@@ -95,7 +95,7 @@ pub fn csqrt_v1() -> @kernel.Thm {
 ///|
 /// cexp
 fn step_6() -> Unit raise {
-  cexp_c.set(@pair.new_definition(@term_syntax.parse_term("(cexp : (Complex) -> Complex)((z : Complex)) == Cx(exp(Re(z))) * complex((cos(Im(z)), sin(Im(z))))")))
+  cexp_c.set(@pair.new_definition(@term_syntax.parse_term("(cexp : (Complex) -> Complex)((z : Complex)) == complex_mul(Cx(exp(Re(z))), complex((cos(Im(z)), sin(Im(z)))))")))
 }
 
 ///|
@@ -147,7 +147,7 @@ fn step_9() -> Unit raise {
   let t41 = @tactics.conv_tac(@calc_rat.real_ring)
   let t40 = @simp.rewrite_tac(@list.List([@transc.real_exp_add(), @transc.sin_add(), @transc.cos_add()]))
   let t42 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@complexnumbers.complex_eq(), cexp(), @complexnumbers.complex_mul(), @complexnumbers.complex_add(), @complexnumbers.re(), @complexnumbers.im(), @complexnumbers.cx_def()])), t40), t41)
-  cexp_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, cexp(w + z) == cexp(w) * cexp(z)"), t42))
+  cexp_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, cexp(complex_add(w, z)) == complex_mul(cexp(w), cexp(z))"), t42))
 }
 
 ///|
@@ -167,7 +167,7 @@ fn step_10() -> Unit raise {
   let t44 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_of_num_suc()), @complexnumbers.complex_add_rdistrib(), @complexnumbers.cx_add()]))
   let t43 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_mul_lzero(), cexp_0()]))
   let t47 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@complexnumbers.complex_pow()]))), t43), t44), t45), t46)
-  cexp_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ z : Complex, cexp(Cx(real_of_num(n)) * z) == pow(cexp(z), n)"), t47))
+  cexp_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ z : Complex, cexp(complex_mul(Cx(real_of_num(n)), z)) == complex_pow(cexp(z), n)"), t47))
 }
 
 ///|
@@ -202,7 +202,7 @@ pub fn cexp_nonzero() -> @kernel.Thm {
 /// CEXP_NEG_LMUL
 fn step_12() -> Unit raise {
   let t52 = @simp.rewrite_tac(@list.List([@equal.gsym(cexp_add()), @complexnumbers.complex_add_linv(), cexp_0()]))
-  cexp_neg_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, cexp(-z) * cexp(z) == Cx(real_of_num(1))"), t52))
+  cexp_neg_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, complex_mul(cexp(complex_neg(z)), cexp(z)) == Cx(real_of_num(1))"), t52))
 }
 
 ///|
@@ -218,7 +218,7 @@ pub fn cexp_neg_lmul() -> @kernel.Thm {
 /// CEXP_NEG_RMUL
 fn step_13() -> Unit raise {
   let t53 = @simp.rewrite_tac(@list.List([@equal.gsym(cexp_add()), @complexnumbers.complex_add_rinv(), cexp_0()]))
-  cexp_neg_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, cexp(z) * cexp(-z) == Cx(real_of_num(1))"), t53))
+  cexp_neg_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, complex_mul(cexp(z), cexp(complex_neg(z))) == Cx(real_of_num(1))"), t53))
 }
 
 ///|
@@ -234,7 +234,7 @@ pub fn cexp_neg_rmul() -> @kernel.Thm {
 /// CEXP_NEG
 fn step_14() -> Unit raise {
   let t54 = @meson.meson_tac(@list.List([cexp_neg_lmul(), @complexnumbers.complex_mul_linv_uniq()]))
-  cexp_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, cexp(-z) == inv(cexp(z))"), t54))
+  cexp_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, cexp(complex_neg(z)) == complex_inv(cexp(z))"), t54))
 }
 
 ///|
@@ -250,7 +250,7 @@ pub fn cexp_neg() -> @kernel.Thm {
 /// CEXP_SUB
 fn step_15() -> Unit raise {
   let t55 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_sub(), @complexnumbers.complex_div(), cexp_neg(), cexp_add()]))
-  cexp_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, cexp(w - z) == cexp(w) / cexp(z)"), t55))
+  cexp_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, cexp(complex_sub(w, z)) == complex_div(cexp(w), cexp(z))"), t55))
 }
 
 ///|
@@ -265,7 +265,7 @@ pub fn cexp_sub() -> @kernel.Thm {
 ///|
 /// ccos
 fn step_16() -> Unit raise {
-  ccos_c.set(@pair.new_definition(@term_syntax.parse_term("(ccos : (Complex) -> Complex)((z : Complex)) == (cexp(ii * z) + cexp(-ii * z)) / Cx(real_of_num(2))")))
+  ccos_c.set(@pair.new_definition(@term_syntax.parse_term("(ccos : (Complex) -> Complex)((z : Complex)) == complex_div(complex_add(cexp(complex_mul(ii, z)), cexp(complex_mul(complex_neg(ii), z))), Cx(real_of_num(2)))")))
 }
 
 ///|
@@ -280,7 +280,7 @@ pub fn ccos() -> @kernel.Thm {
 ///|
 /// csin
 fn step_17() -> Unit raise {
-  csin_c.set(@pair.new_definition(@term_syntax.parse_term("(csin : (Complex) -> Complex)((z : Complex)) == (cexp(ii * z) - cexp(-ii * z)) / (Cx(real_of_num(2)) * ii)")))
+  csin_c.set(@pair.new_definition(@term_syntax.parse_term("(csin : (Complex) -> Complex)((z : Complex)) == complex_div(complex_sub(cexp(complex_mul(ii, z)), cexp(complex_mul(complex_neg(ii), z))), complex_mul(Cx(real_of_num(2)), ii))")))
 }
 
 ///|
@@ -364,9 +364,9 @@ fn step_21() -> Unit raise {
   let t68 = @tactics.conv_tac(@complexnumbers.complex_field)
   let t67 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_mul_lneg()]))
   let t66 = @tactics.mp_tac(@complexnumbers.complex_pow_ii_2())
-  let t65 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("ii * (z : Complex)"), cexp_neg_lmul()))
+  let t65 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("complex_mul(ii, (z : Complex))"), cexp_neg_lmul()))
   let t69 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([csin(), ccos()]))), t65), t66), t67), t68)
-  csin_circle_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, pow(csin(z), 2) + pow(ccos(z), 2) == Cx(real_of_num(1))"), t69))
+  csin_circle_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, complex_add(complex_pow(csin(z), 2), complex_pow(ccos(z), 2)) == Cx(real_of_num(1))"), t69))
 }
 
 ///|
@@ -385,7 +385,7 @@ fn step_22() -> Unit raise {
   let t71 = @tactics.mp_tac(@complexnumbers.complex_pow_ii_2())
   let t70 = @simp.rewrite_tac(@list.List([csin(), ccos(), @complexnumbers.complex_add_ldistrib(), cexp_add()]))
   let t73 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t70), t71), t72)
-  csin_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, csin(w + z) == csin(w) * ccos(z) + ccos(w) * csin(z)"), t73))
+  csin_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, csin(complex_add(w, z)) == complex_add(complex_mul(csin(w), ccos(z)), complex_mul(ccos(w), csin(z)))"), t73))
 }
 
 ///|
@@ -404,7 +404,7 @@ fn step_23() -> Unit raise {
   let t75 = @tactics.mp_tac(@complexnumbers.complex_pow_ii_2())
   let t74 = @simp.rewrite_tac(@list.List([csin(), ccos(), @complexnumbers.complex_add_ldistrib(), cexp_add()]))
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t76)
-  ccos_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, ccos(w + z) == ccos(w) * ccos(z) - csin(w) * csin(z)"), t77))
+  ccos_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, ccos(complex_add(w, z)) == complex_sub(complex_mul(ccos(w), ccos(z)), complex_mul(csin(w), csin(z)))"), t77))
 }
 
 ///|
@@ -422,7 +422,7 @@ fn step_24() -> Unit raise {
   let t79 = @tactics.conv_tac(@complexnumbers.complex_field)
   let t78 = @tactics.mp_tac(@complexnumbers.complex_pow_ii_2())
   let t80 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([csin(), @complexnumbers.complex_mul_lneg(), @complexnumbers.complex_mul_rneg(), @complexnumbers.complex_neg_neg()])), @tactics.gen_tac), t78), t79)
-  csin_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, csin(-z) == -csin(z)"), t80))
+  csin_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, csin(complex_neg(z)) == complex_neg(csin(z))"), t80))
 }
 
 ///|
@@ -440,7 +440,7 @@ fn step_25() -> Unit raise {
   let t82 = @tactics.conv_tac(@complexnumbers.complex_field)
   let t81 = @tactics.mp_tac(@complexnumbers.complex_pow_ii_2())
   let t83 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ccos(), @complexnumbers.complex_mul_lneg(), @complexnumbers.complex_mul_rneg(), @complexnumbers.complex_neg_neg()])), @tactics.gen_tac), t81), t82)
-  ccos_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, ccos(-z) == ccos(z)"), t83))
+  ccos_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, ccos(complex_neg(z)) == ccos(z)"), t83))
 }
 
 ///|
@@ -456,8 +456,8 @@ pub fn ccos_neg() -> @kernel.Thm {
 /// CSIN_DOUBLE
 fn step_26() -> Unit raise {
   let t84 = @tactics.conv_tac(@complexnumbers.complex_ring)
-  let t85 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@complexnumbers.complex_ring(@term_syntax.parse_term("Cx(real_of_num(2)) * (x : Complex) == x + x")), csin_add()])), t84)
-  csin_double_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, csin(Cx(real_of_num(2)) * z) == Cx(real_of_num(2)) * (csin(z) * ccos(z))"), t85))
+  let t85 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@complexnumbers.complex_ring(@term_syntax.parse_term("complex_mul(Cx(real_of_num(2)), (x : Complex)) == complex_add(x, x)")), csin_add()])), t84)
+  csin_double_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, csin(complex_mul(Cx(real_of_num(2)), z)) == complex_mul(Cx(real_of_num(2)), complex_mul(csin(z), ccos(z)))"), t85))
 }
 
 ///|
@@ -473,8 +473,8 @@ pub fn csin_double() -> @kernel.Thm {
 /// CCOS_DOUBLE
 fn step_27() -> Unit raise {
   let t86 = @tactics.conv_tac(@complexnumbers.complex_ring)
-  let t87 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@complexnumbers.complex_ring(@term_syntax.parse_term("Cx(real_of_num(2)) * (x : Complex) == x + x")), ccos_add()])), t86)
-  ccos_double_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, ccos(Cx(real_of_num(2)) * z) == pow(ccos(z), 2) - pow(csin(z), 2)"), t87))
+  let t87 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@complexnumbers.complex_ring(@term_syntax.parse_term("complex_mul(Cx(real_of_num(2)), (x : Complex)) == complex_add(x, x)")), ccos_add()])), t86)
+  ccos_double_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, ccos(complex_mul(Cx(real_of_num(2)), z)) == complex_sub(complex_pow(ccos(z), 2), complex_pow(csin(z), 2))"), t87))
 }
 
 ///|
@@ -492,7 +492,7 @@ fn step_28() -> Unit raise {
   let t89 = @tactics.conv_tac(@complexnumbers.complex_field)
   let t88 = @tactics.mp_tac(@complexnumbers.complex_pow_ii_2())
   let t90 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ccos(), csin()])), t88), t89)
-  cexp_euler_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, cexp(ii * z) == ccos(z) + ii * csin(z)"), t90))
+  cexp_euler_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, cexp(complex_mul(ii, z)) == complex_add(ccos(z), complex_mul(ii, csin(z)))"), t90))
 }
 
 ///|
@@ -510,7 +510,7 @@ fn step_29() -> Unit raise {
   let t92 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_mul_ac()]))
   let t91 = @equal.gsym(cexp_mul())
   let t93 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(cexp_euler()), t91])), t92)
-  demoivre_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, ∀ n : Num, pow(ccos(z) + ii * csin(z), n) == ccos(Cx(real_of_num(n)) * z) + ii * csin(Cx(real_of_num(n)) * z)"), t93))
+  demoivre_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, ∀ n : Num, complex_pow(complex_add(ccos(z), complex_mul(ii, csin(z))), n) == complex_add(ccos(complex_mul(Cx(real_of_num(n)), z)), complex_mul(ii, csin(complex_mul(Cx(real_of_num(n)), z))))"), t93))
 }
 
 ///|
@@ -569,7 +569,7 @@ fn step_31() -> Unit raise {
       })(x102))
     })(((x104 : @kernel.Thm) => @equal.ap_term(t103, x104))(x105))
   })), t106), t107), t108), t113), t114), t115)
-  complex_unimodular_polar_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, norm(z) == real_of_num(1) → (∃ x : Real, z == complex((cos(x), sin(x))))"), t116))
+  complex_unimodular_polar_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Complex, complex_norm(z) == real_of_num(1) → (∃ x : Real, z == complex((cos(x), sin(x))))"), t116))
 }
 
 ///|
@@ -675,15 +675,15 @@ fn step_36() -> Unit raise {
   let t152 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(x : Real)"))(@tactics.strip_assume_tac))
   let t150 = @simp.asm_simp_tac(@list.List([@complexnumbers.complex_abs_norm(), @real.real_div_refl(), @complexnumbers.complex_norm_zero()]))
   let t151 = @list.List([@tactics.then_tac(@simp.asm_simp_tac(@list.List([@complexnumbers.complex_norm_div(), @complexnumbers.complex_norm_cx()])), t150), @tactics.all_tac])
-  let t149 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(z : Complex) / Cx(norm(z))"), complex_unimodular_polar()))
+  let t149 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("complex_div((z : Complex), Cx(complex_norm(z)))"), complex_unimodular_polar()))
   let t148 = @list.List([@meson.asm_meson_tac(@list.List([@transc.real_exp_ln(), @complexnumbers.complex_norm_nz()])), @tactics.all_tac])
-  let t147 = @tactics.subgoal_then(@term_syntax.parse_term("exp(ln(norm((z : Complex)))) == norm(z)"), fn(x144 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t147 = @tactics.subgoal_then(@term_syntax.parse_term("exp(ln(complex_norm((z : Complex)))) == complex_norm(z)"), fn(x144 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s145 = @tactics.subst1_tac(x144)
     fn(x146 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s145(x146)
     }
   })
-  let t143 = @tactics.exists_tac(@term_syntax.parse_term("ln(norm((z : Complex)))"))
+  let t143 = @tactics.exists_tac(@term_syntax.parse_term("ln(complex_norm((z : Complex)))"))
   let t142 = @simp.rewrite_tac(@list.List([cexp(), exists_complex()]))
   let t141 = @tactics.conv_tac(@class.select_conv)
   let t140 = @simp.rewrite_tac(@list.List([clog()]))
@@ -719,7 +719,7 @@ pub fn cexp_clog() -> @kernel.Thm {
 ///|
 /// unwinding
 fn step_38() -> Unit raise {
-  unwinding_c.set(@pair.new_definition(@term_syntax.parse_term("(unwinding : (Complex) -> Complex)((z : Complex)) == (z - clog(cexp(z))) / (Cx(real_of_num(2) * pi) * ii)")))
+  unwinding_c.set(@pair.new_definition(@term_syntax.parse_term("(unwinding : (Complex) -> Complex)((z : Complex)) == complex_div(complex_sub(z, clog(cexp(z))), complex_mul(Cx(real_of_num(2) * pi), ii))")))
 }
 
 ///|
@@ -755,7 +755,7 @@ fn step_40() -> Unit raise {
   let t163 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_entire(), @complexnumbers.cx_inj(), complex_ii_nz()]))
   let t162 = @tactics.match_mp_tac(@complexnumbers.complex_div_lmul())
   let t165 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([unwinding(), @complexnumbers.complex_mul_assoc()])), t162), t163), t164), @calc_rat.real_arith_tac)
-  unwinding_2pi_c.set(@tactics.prove(@term_syntax.parse_term("Cx(real_of_num(2) * pi) * (ii * unwinding((z : Complex))) == z - clog(cexp(z))"), t165))
+  unwinding_2pi_c.set(@tactics.prove(@term_syntax.parse_term("complex_mul(Cx(real_of_num(2) * pi), complex_mul(ii, unwinding((z : Complex)))) == complex_sub(z, clog(cexp(z)))"), t165))
 }
 
 ///|
@@ -771,8 +771,8 @@ pub fn unwinding_2pi() -> @kernel.Thm {
 /// CLOG_MUL
 fn step_41() -> Unit raise {
   let t166 = @simp.asm_simp_tac(@list.List([cexp_add(), cexp_clog()]))
-  let t167 = @tactics.then_tac(@simp.rewrite_tac(@list.List([unwinding_2pi(), @complexnumbers.complex_ring(@term_syntax.parse_term("(w : Complex) + ((z : Complex) - (w + z - (c : Complex))) == c"))])), t166)
-  clog_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, !(w == Cx(real_of_num(0))) && !(z == Cx(real_of_num(0))) → clog(w * z) == clog(w) + (clog(z) - Cx(real_of_num(2) * pi) * (ii * unwinding(clog(w) + clog(z))))"), t167))
+  let t167 = @tactics.then_tac(@simp.rewrite_tac(@list.List([unwinding_2pi(), @complexnumbers.complex_ring(@term_syntax.parse_term("complex_add((w : Complex), complex_sub((z : Complex), complex_sub(complex_add(w, z), (c : Complex)))) == c"))])), t166)
+  clog_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Complex, ∀ z : Complex, !(w == Cx(real_of_num(0))) && !(z == Cx(real_of_num(0))) → clog(complex_mul(w, z)) == complex_add(clog(w), complex_sub(clog(z), complex_mul(Cx(real_of_num(2) * pi), complex_mul(ii, unwinding(complex_add(clog(w), clog(z)))))))"), t167))
 }
 
 ///|
