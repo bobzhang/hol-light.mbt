@@ -7583,259 +7583,259 @@ test "Logic/skolem matches Logic/skolem.ml" {
       #|0..0..0..solved at 3
       #|0..0..0..0..solved at 4
       #|Logic/skolem quotations (253):
-      #|  preds:num#num->bool
-      #|  termval M (v:num->A) t
-      #|  forall p t x M v preds:num#num->bool.\n        interpretation (functions_term t,preds) M /\\\n        valuation(M) (v:num->A) /\\\n        holds M v (formsubst (valmod (x,t) V) p)\n        ==> holds M v (??x p)
-      #|  Skolem1 f x p =\n     formsubst (valmod (x,Fn f (MAP V (list_of_set(FV(??x p))))) V) p
-      #|  forall l. LIST_UNION (MAP (\\x. {x}) l) = set_of_list l
-      #|  forall s. FINITE(s) ==> (LIST_UNION (MAP (\\x. {x}) (list_of_set s)) = s)
-      #|  holds M v p /\\\n     (Dom M = Dom M') /\\\n     (forall P zs. Pred M P zs = Pred M' P zs) /\\\n     (forall f zs.\n          f,LENGTH zs IN functions_form p ==> (Fun M f zs = Fun M' f zs))\n     ==> holds M' v p
-      #|  interpretation\n       (language\n       (formsubst (valmod (x,Fn f (MAP V (list_of_set (FV (?? x p))))) V)\n        p INSERT\n        EMPTY))\n       (N:(A->bool)#((num->((A)list->A))#(num->((A)list->bool))))
-      #|  predicates_form (formsubst\n           (valmod (x,Fn f (MAP V (list_of_set(FV(??x p))))) V) p)
-      #|  Fn f (MAP V (list_of_set (FV (?? x p))))
-      #|  l:num list
-      #|  list_of_set(FV(??x p))
-      #|  z IN FV(??x p)
-      #|  MEM z (list_of_set (FV (??x p)))
-      #|  z:num = x
-      #|  z:num
-      #|  a:A
-      #|  (@a:A. a IN Dom M /\\ holds M (valmod (x,a) v) p) IN Dom(M) /\\\n        holds M (valmod (x,(@a. a IN Dom M /\\ holds M (valmod (x,a) v) p)) v) p
-      #|  forall a. holds M (valmod (x,a)\n                         (ITLIST valmod\n                            (MAP2 (\\x a. x,a) (list_of_set (FV (??x p)))\n                                     (MAP (\\y. v y) (list_of_set(FV(??x p)))))\n                  (\\z. @c. c IN Dom(M)))) p = holds M (valmod (x,a:A) v) p
-      #|  ~(f,CARD (FV (?? x p)) IN functions_form (?? x p))
-      #|  (f',LENGTH (zs:A list)) IN functions_form p
-      #|  LENGTH(list_of_set(FV(??x p))) = CARD(FV (??x p))
-      #|  v:num->A
-      #|  forall p. UNIONS {functions_form q | q = p } =\n                           functions_form p
-      #|  zs:A list
-      #|  zs:A list
-      #|  xs:num list
-      #|  list_of_set(FV(??x p))
-      #|  LENGTH(list_of_set(FV(??x p))) = LENGTH (zs:A list)
-      #|  ALL (\\x:A. x IN Dom M) zs
-      #|  forall v. valuation M v ==> holds M (v:num->A) (??x p)
-      #|  ?a:A. a IN Dom M /\\\n                            holds M (valmod (x,a)\n                             (ITLIST valmod (MAP2 (\\x a. x,a)\n                               (list_of_set (FV (?? x p))) zs)\n                                  (\\z. @c. c IN Dom(M)))) p
-      #|  zs:A list
-      #|  g:num
-      #|  forall l. LIST_UNION (MAP functions_term (MAP V l)) = EMPTY
-      #|  fa:num#num
-      #|  forall p. UNIONS {functions_form q | q = p } =\n                           functions_form p
-      #|  l:num list
-      #|  list_of_set(FV(??x p))
-      #|  FV(??x p) = set_of_list(list_of_set(FV(??x p)))
-      #|  LIST_UNION(MAP FVT (MAP V (list_of_set(FV(??x p))))) =\n                      FV(??x p)
-      #|  p:form
-      #|  Fn f (MAP V (list_of_set(FV(??x p))))
-      #|  x:num
-      #|  functions\n         {(formsubst(valmod (x,Fn f (MAP V (list_of_set(FV(??x p))))) V) p)}\n        = ((f,CARD(FV(??x p))) INSERT functions_form p)
-      #|  Dom(M):A->bool,\n                 (\\g zs. if (g = f) /\\ (LENGTH zs = CARD(FV(??x p)))\n                         then @a. a IN Dom(M) /\\\n                                  holds M\n                                   (valmod (x,a)\n                                      (ITLIST valmod\n                                              (MAP2 (\\x a. (x,a))\n                                                    (list_of_set(FV(??x p)))\n                                                    zs)\n                                              (\\z. @c. c IN Dom(M)))) p\n                         else Fun(M) g zs),\n                Pred(M)
-      #|  LENGTH(list_of_set(FV(??x p))) = CARD(FV(??x p))
-      #|  forall l. LIST_UNION (MAP functions_term (MAP V l)) = EMPTY
-      #|  x IN FV p
-      #|  ??x p
-      #|  x < 3 + x
-      #|  ~(x IN FV(p))
-      #|  holds N (v:num->A) p
-      #|  a:A
-      #|  a:A
-      #|  ~(x IN FV(p))
-      #|  ~(x IN FV(p))
-      #|  Skolem1 f x p = p
-      #|  x IN FV(p)
-      #|  forall f x p.\n     prenex(??x p) /\\\n     ~((f,CARD(FV(??x p))) IN functions_form(??x p))\n     ==> prenex(Skolem1 f x p) /\\\n         (FV(Skolem1 f x p) = FV(??x p)) /\\\n         size(Skolem1 f x p) < size(??x p) /\\\n         (predicates_form (Skolem1 f x p) = predicates_form(??x p)) /\\\n         (functions_form(??x p) SUBSET functions_form (Skolem1 f x p)) /\\\n         (functions_form (Skolem1 f x p) SUBSET ((f,CARD(FV(??x p))) INSERT\n                                  functions_form(??x p))) /\\\n         (forall M. interpretation (language {p}) M /\\\n              ~(Dom(M) = EMPTY) /\\\n              (forall v:num->A. valuation(M) v ==> holds M v (??x p))\n              ==> ?M'. (Dom(M') = Dom(M)) /\\\n                       (Pred(M') = Pred(M)) /\\\n                       (forall g zs. ~(g = f) \\/ ~(LENGTH zs = CARD(FV(??x p)))\n                               ==> (Fun(M') g zs = Fun(M) g zs)) /\\\n                       interpretation (language {(Skolem1 f x p)}) M' /\\\n                       (forall v. valuation(M') v ==> holds M' v (Skolem1 f x p))) /\\\n         (forall N. interpretation (language {(Skolem1 f x p)}) N /\\\n              ~(Dom(N) = EMPTY)\n              ==> forall v:num->A. valuation(N) (v:num->A) /\\\n                             holds N v (Skolem1 f x p) ==> holds N v (??x p))
-      #|  ?x p. r = !!x p
-      #|  k:num
-      #|  forall J. ?Skolems. forall r.\n    Skolems r = \\k. PPAT (\\x q. !!x (Skolems q k))\n                         (\\x q. Skolems (Skolem1 (NUMPAIR J k) x q) (SUC k))\n                         (\\p. p) r
-      #|  ?Skolems. forall J r k.\n        Skolems J r k =\n          PPAT (\\x q. !!x (Skolems J q k))\n               (\\x q. Skolems J (Skolem1 (NUMPAIR J k) x q) (SUC k))\n               (\\p. p) r
-      #|  interpretation (language {s})\n     (N:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  v:num->A
-      #|  v:num->A
-      #|  valuation N (v:num->A)
-      #|  SUC k <= l ==> k <= l
-      #|  ~(Fun M1 g (zs:A list) = Fun M0 g zs) \\/\n                  ~(Fun M0 g zs = Fun M g zs)
-      #|  M1:(A->bool)#(num->A list->A)#(num->A list->bool)
-      #|  M1:(A->bool)#(num->A list->A)#(num->A\n                                  list->bool)
-      #|  interpretation (language {q}) M0 /\\\n      ~(Dom M0 = EMPTY) /\\\n      (forall v:num->A. valuation M0 v ==> holds M0 v q)
-      #|  M0:(A->bool)#(num->A list->A)#(num->A\n                                  list->bool)
-      #|  interpretation (language {r}) M /\\\n      ~(Dom M = EMPTY) /\\\n      forall v:num->A. valuation M v ==> holds M v (?? x r)
-      #|  SUC k <= l ==> k <= l
-      #|  functions_form q SUBSET\n          (NUMPAIR J k,CARD (FV (?? x r))) INSERT functions_form (?? x r)
-      #|  functions_form s SUBSET\n                 {NUMPAIR j l,m | j,l,m | (j = J) /\\ SUC k <= l} UNION\n                 functions_form q
-      #|  s = Skolems J q (SUC k)
-      #|  Skolems J (?? x r) k = Skolems J q (SUC k)
-      #|  q:form
-      #|  SUC k
-      #|  J:num
-      #|  size q
-      #|  q = Skolem1 (NUMPAIR J k) x r
-      #|  r:form
-      #|  x:num
-      #|  NUMPAIR J k
-      #|  holds N (v:num->A) (!!x q)
-      #|  (forall x. p x ==> q x) ==> (?x. p x) ==> ?x. q x
-      #|  (v:num->A) x
-      #|  interpretation (language (r INSERT EMPTY)) M /\\\n        ~(Dom M = EMPTY) /\\\n        (forall v:num->A. valuation M v ==> holds M v r)
-      #|  q = Skolems J r k
-      #|  ?z s. !!x r = !!z s
-      #|  Skolems J (!!x r) k = !!x (Skolems J r k)
-      #|  r:form
-      #|  k:num
-      #|  J:num
-      #|  r < 1 + r
-      #|  size r
-      #|  r:form
-      #|  x:num
-      #|  qfree p
-      #|  ~(?x q. p = !!x q) /\\ ~(?x q. p = ??x q)
-      #|  Skolems J p k = p
-      #|  n:num
-      #|  forall n J k p.\n           (size(p) = n) /\\\n           prenex(p) /\\\n           (forall l m. (NUMPAIR J l,m) IN functions_form p ==> l < k)\n           ==> universal((Skolems J p k)) /\\\n               (FV((Skolems J p k)) = FV(p)) /\\\n               (predicates_form (Skolems J p k) = predicates_form p) /\\\n                functions_form p SUBSET functions_form (Skolems J p k) /\\\n                functions_form (Skolems J p k) SUBSET\n                 {NUMPAIR j l,m | j,l,m | (j = J) /\\ k <= l} UNION\n                 functions_form p /\\\n                (forall M. interpretation (language {p}) M /\\\n                     ~(Dom M = EMPTY) /\\\n                     (forall v:num->A. valuation M v ==> holds M v p)\n                     ==> ?M'. (Dom M' = Dom M) /\\\n                              (Pred M' = Pred M) /\\\n                              (forall g zs. ~(Fun(M') g zs = Fun(M) g zs)\n                                    ==> ?l. k <= l /\\ (g = NUMPAIR J l)) /\\\n                              interpretation (language {(Skolems J p k)}) M' /\\\n                              (forall v. valuation M' v\n                                   ==> holds M' v (Skolems J p k))) /\\\n               (forall N. interpretation (language {(Skolems J p k)}) N /\\\n                ~(Dom(N) = EMPTY)\n                ==> forall v:num->A. valuation(N) v /\\ holds N v (Skolems J p k)\n                               ==> holds N v p)
-      #|  p:form
+      #|  (preds : ((Num, Num)) -> Bool)
+      #|  termval((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), (t : Term))
+      #|  \226\136\128 p : Form, \226\136\128 t : Term, \226\136\128 x : Num, \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 v : (Num) -> A, \226\136\128 preds : ((Num, Num)) -> Bool, interpretation((functions_term(t), preds), M) && valuation(M, v) && holds(M, v, formsubst(valmod((x, t), V), p)) \226\134\146 holds(M, v, op_q_q(x, p))
+      #|  (Skolem1 : (Num, Num, Form) -> Form)((f : Num), (x : Num), (p : Form)) == formsubst(valmod((x, Fn(f, MAP(V, list_of_set(FV(op_q_q(x, p)))))), V), p)
+      #|  \226\136\128 l : List[_], LIST_UNION(MAP((x : _) => {x}, l)) == set_of_list(l)
+      #|  \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 LIST_UNION(MAP((x : _) => {x}, list_of_set(s))) == s
+      #|  holds((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), (p : Form)) && Dom(M) == Dom((M' : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) && (\226\136\128 P : Num, \226\136\128 zs : List[_], Pred(M, P, zs) == Pred(M', P, zs)) && (\226\136\128 f : Num, \226\136\128 zs : List[_], IN((f, LENGTH(zs)), functions_form(p)) \226\134\146 Fun(M, f, zs) == Fun(M', f, zs)) \226\134\146 holds(M', v, p)
+      #|  interpretation(language({formsubst(valmod(((x : Num), Fn((f : Num), MAP(V, list_of_set(FV(op_q_q(x, (p : Form))))))), V), p)}), (N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  predicates_form(formsubst(valmod(((x : Num), Fn((f : Num), MAP(V, list_of_set(FV(op_q_q(x, (p : Form))))))), V), p))
+      #|  Fn((f : Num), MAP(V, list_of_set(FV(op_q_q((x : Num), (p : Form))))))
+      #|  (l : List[Num])
+      #|  list_of_set(FV(op_q_q((x : Num), (p : Form))))
+      #|  IN((z : Num), FV(op_q_q((x : Num), (p : Form))))
+      #|  MEM((z : Num), list_of_set(FV(op_q_q((x : Num), (p : Form)))))
+      #|  (z : Num) == (x : Num)
+      #|  (z : Num)
+      #|  (a : A)
+      #|  IN(select((a : A) => IN(a, Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))) && holds(M, valmod(((x : Num), a), (v : (Num) -> A)), (p : Form))), Dom(M)) && holds(M, valmod((x, select((a : A) => IN(a, Dom(M)) && holds(M, valmod((x, a), v), p))), v), p)
+      #|  \226\136\128 a : A, holds((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), valmod(((x : Num), a), ITLIST(valmod, MAP2((x : Num) => (a : A) => (x, a), list_of_set(FV(op_q_q(x, (p : Form)))), MAP((y : Num) => (v : (Num) -> A)(y), list_of_set(FV(op_q_q(x, p))))), (z : Num) => select((c : A) => IN(c, Dom(M))))), p) == holds(M, valmod((x, a), v), p)
+      #|  !IN(((f : Num), CARD(FV(op_q_q((x : Num), (p : Form))))), functions_form(op_q_q(x, p)))
+      #|  IN(((f' : Num), LENGTH((zs : List[A]))), functions_form((p : Form)))
+      #|  LENGTH(list_of_set(FV(op_q_q((x : Num), (p : Form))))) == CARD(FV(op_q_q(x, p)))
+      #|  (v : (Num) -> A)
+      #|  \226\136\128 p : Form, UNIONS({functions_form((q : Form)) | q == p}) == functions_form(p)
+      #|  (zs : List[A])
+      #|  (zs : List[A])
+      #|  (xs : List[Num])
+      #|  list_of_set(FV(op_q_q((x : Num), (p : Form))))
+      #|  LENGTH(list_of_set(FV(op_q_q((x : Num), (p : Form))))) == LENGTH((zs : List[A]))
+      #|  ALL((x : A) => IN(x, Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))), (zs : List[A]))
+      #|  \226\136\128 v : (Num) -> A, valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v) \226\134\146 holds(M, v, op_q_q((x : Num), (p : Form)))
+      #|  \226\136\131 a : A, IN(a, Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))) && holds(M, valmod(((x : Num), a), ITLIST(valmod, MAP2((x : Num) => (a : A) => (x, a), list_of_set(FV(op_q_q(x, (p : Form)))), (zs : List[A])), (z : Num) => select((c : A) => IN(c, Dom(M))))), p)
+      #|  (zs : List[A])
+      #|  (g : Num)
+      #|  \226\136\128 l : List[Num], LIST_UNION(MAP(functions_term, MAP(V, l))) == {}
+      #|  (fa : (Num, Num))
+      #|  \226\136\128 p : Form, UNIONS({functions_form((q : Form)) | q == p}) == functions_form(p)
+      #|  (l : List[Num])
+      #|  list_of_set(FV(op_q_q((x : Num), (p : Form))))
+      #|  FV(op_q_q((x : Num), (p : Form))) == set_of_list(list_of_set(FV(op_q_q(x, p))))
+      #|  LIST_UNION(MAP(FVT, MAP(V, list_of_set(FV(op_q_q((x : Num), (p : Form))))))) == FV(op_q_q(x, p))
+      #|  (p : Form)
+      #|  Fn((f : Num), MAP(V, list_of_set(FV(op_q_q((x : Num), (p : Form))))))
+      #|  (x : Num)
+      #|  functions({formsubst(valmod(((x : Num), Fn((f : Num), MAP(V, list_of_set(FV(op_q_q(x, (p : Form))))))), V), p)}) == INSERT((f, CARD(FV(op_q_q(x, p)))), functions_form(p))
+      #|  (Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (g : Num) => (zs : List[A]) => if g == (f : Num) && LENGTH(zs) == CARD(FV(op_q_q((x : Num), (p : Form)))) { select((a : A) => IN(a, Dom(M)) && holds(M, valmod((x, a), ITLIST(valmod, MAP2((x : Num) => (a : A) => (x, a), list_of_set(FV(op_q_q(x, p))), zs), (z : Num) => select((c : A) => IN(c, Dom(M))))), p)) } else { Fun(M, g, zs) }, Pred(M))
+      #|  LENGTH(list_of_set(FV(op_q_q((x : Num), (p : Form))))) == CARD(FV(op_q_q(x, p)))
+      #|  \226\136\128 l : List[Num], LIST_UNION(MAP(functions_term, MAP(V, l))) == {}
+      #|  IN((x : Num), FV((p : Form)))
+      #|  op_q_q((x : Num), (p : Form))
+      #|  (x : Num) < 3 + x
+      #|  !IN((x : Num), FV((p : Form)))
+      #|  holds((N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), (p : Form))
+      #|  (a : A)
+      #|  (a : A)
+      #|  !IN((x : Num), FV((p : Form)))
+      #|  !IN((x : Num), FV((p : Form)))
+      #|  Skolem1((f : Num), (x : Num), (p : Form)) == p
+      #|  IN((x : Num), FV((p : Form)))
+      #|  \226\136\128 f : Num, \226\136\128 x : Num, \226\136\128 p : Form, prenex(op_q_q(x, p)) && !IN((f, CARD(FV(op_q_q(x, p)))), functions_form(op_q_q(x, p))) \226\134\146 prenex(Skolem1(f, x, p)) && FV(Skolem1(f, x, p)) == FV(op_q_q(x, p)) && size(Skolem1(f, x, p)) < size(op_q_q(x, p)) && predicates_form(Skolem1(f, x, p)) == predicates_form(op_q_q(x, p)) && SUBSET(functions_form(op_q_q(x, p)), functions_form(Skolem1(f, x, p))) && SUBSET(functions_form(Skolem1(f, x, p)), INSERT((f, CARD(FV(op_q_q(x, p)))), functions_form(op_q_q(x, p)))) && (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({p}), M) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, op_q_q(x, p))) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Dom(M') == Dom(M) && Pred(M') == Pred(M) && (\226\136\128 g : Num, \226\136\128 zs : List[A], !(g == f) || !(LENGTH(zs) == CARD(FV(op_q_q(x, p)))) \226\134\146 Fun(M', g, zs) == Fun(M, g, zs)) && interpretation(language({Skolem1(f, x, p)}), M') && (\226\136\128 v : (Num) -> A, valuation(M', v) \226\134\146 holds(M', v, Skolem1(f, x, p))))) && (\226\136\128 N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({Skolem1(f, x, p)}), N) && !(Dom(N) == {}) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(N, v) && holds(N, v, Skolem1(f, x, p)) \226\134\146 holds(N, v, op_q_q(x, p))))
+      #|  \226\136\131 x : Num, \226\136\131 p : Form, (r : Form) == op_bang_bang(x, p)
+      #|  (k : Num)
+      #|  \226\136\128 J : Num, \226\136\131 Skolems : (Form, Num) -> Form, \226\136\128 r : Form, Skolems(r) == ((k : Num) => PPAT((x : Num) => (q : Form) => op_bang_bang(x, Skolems(q, k)), (x : Num) => (q : Form) => Skolems(Skolem1(NUMPAIR(J, k), x, q), SUC(k)), (p : Form) => p, r))
+      #|  \226\136\131 Skolems : (Num, Form, Num) -> Form, \226\136\128 J : Num, \226\136\128 r : Form, \226\136\128 k : Num, Skolems(J, r, k) == PPAT((x : Num) => (q : Form) => op_bang_bang(x, Skolems(J, q, k)), (x : Num) => (q : Form) => Skolems(J, Skolem1(NUMPAIR(J, k), x, q), SUC(k)), (p : Form) => p, r)
+      #|  interpretation(language({(s : Form)}), (N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  valuation((N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A))
+      #|  SUC((k : Num)) <= (l : Num) \226\134\146 k <= l
+      #|  !(Fun((M1 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (g : Num), (zs : List[A])) == Fun((M0 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), g, zs)) || !(Fun(M0, g, zs) == Fun((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), g, zs))
+      #|  (M1 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  (M1 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  interpretation(language({(q : Form)}), (M0 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M0) == {}) && (\226\136\128 v : (Num) -> A, valuation(M0, v) \226\134\146 holds(M0, v, q))
+      #|  (M0 : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))
+      #|  interpretation(language({(r : Form)}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, op_q_q((x : Num), r)))
+      #|  SUC((k : Num)) <= (l : Num) \226\134\146 k <= l
+      #|  SUBSET(functions_form((q : Form)), INSERT((NUMPAIR((J : Num), (k : Num)), CARD(FV(op_q_q((x : Num), (r : Form))))), functions_form(op_q_q(x, r))))
+      #|  SUBSET(functions_form((s : Form)), UNION({(NUMPAIR(j, l), m) | j : Num, l : Num, m : Num | j == (J : Num) && SUC((k : Num)) <= l}, functions_form((q : Form))))
+      #|  (s : Form) == Skolems((J : Num), (q : Form), SUC((k : Num)))
+      #|  Skolems((J : Num), op_q_q((x : Num), (r : Form)), (k : Num)) == Skolems(J, (q : Form), SUC(k))
+      #|  (q : Form)
+      #|  SUC((k : Num))
+      #|  (J : Num)
+      #|  size((q : Form))
+      #|  (q : Form) == Skolem1(NUMPAIR((J : Num), (k : Num)), (x : Num), (r : Form))
+      #|  (r : Form)
+      #|  (x : Num)
+      #|  NUMPAIR((J : Num), (k : Num))
+      #|  holds((N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A), op_bang_bang((x : Num), (q : Form)))
+      #|  (\226\136\128 x : _, (p : (_) -> Bool)(x) \226\134\146 (q : (_) -> Bool)(x)) \226\134\146 (\226\136\131 x : _, p(x)) \226\134\146 (\226\136\131 x : _, q(x))
+      #|  (v : (Num) -> A)((x : Num))
+      #|  interpretation(language({(r : Form)}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, r))
+      #|  (q : Form) == Skolems((J : Num), (r : Form), (k : Num))
+      #|  \226\136\131 z : Num, \226\136\131 s : Form, op_bang_bang((x : Num), (r : Form)) == op_bang_bang(z, s)
+      #|  Skolems((J : Num), op_bang_bang((x : Num), (r : Form)), (k : Num)) == op_bang_bang(x, Skolems(J, r, k))
+      #|  (r : Form)
+      #|  (k : Num)
+      #|  (J : Num)
+      #|  (r : Num) < 1 + r
+      #|  size((r : Form))
+      #|  (r : Form)
+      #|  (x : Num)
+      #|  qfree((p : Form))
+      #|  !(\226\136\131 x : Num, \226\136\131 q : Form, (p : Form) == op_bang_bang(x, q)) && !(\226\136\131 x : Num, \226\136\131 q : Form, p == op_q_q(x, q))
+      #|  Skolems((J : Num), (p : Form), (k : Num)) == p
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 J : Num, \226\136\128 k : Num, \226\136\128 p : Form, size(p) == n && prenex(p) && (\226\136\128 l : Num, \226\136\128 m : Num, IN((NUMPAIR(J, l), m), functions_form(p)) \226\134\146 l < k) \226\134\146 universal(Skolems(J, p, k)) && FV(Skolems(J, p, k)) == FV(p) && predicates_form(Skolems(J, p, k)) == predicates_form(p) && SUBSET(functions_form(p), functions_form(Skolems(J, p, k))) && SUBSET(functions_form(Skolems(J, p, k)), UNION({(NUMPAIR(j, l), m) | j : Num, l : Num, m : Num | j == J && k <= l}, functions_form(p))) && (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({p}), M) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Dom(M') == Dom(M) && Pred(M') == Pred(M) && (\226\136\128 g : Num, \226\136\128 zs : List[A], !(Fun(M', g, zs) == Fun(M, g, zs)) \226\134\146 (\226\136\131 l : Num, k <= l && g == NUMPAIR(J, l))) && interpretation(language({Skolems(J, p, k)}), M') && (\226\136\128 v : (Num) -> A, valuation(M', v) \226\134\146 holds(M', v, Skolems(J, p, k))))) && (\226\136\128 N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({Skolems(J, p, k)}), N) && !(Dom(N) == {}) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(N, v) && holds(N, v, Skolems(J, p, k)) \226\134\146 holds(N, v, p)))
+      #|  (p : Form)
       #|  0
-      #|  K:num
-      #|  size p
-      #|  forall p.\n    prenex(p)\n    ==> forall K. (forall l m. ~(NUMPAIR K l,m IN functions_form p))\n            ==> universal(Skolems K p 0) /\\\n                (FV(Skolems K p 0) = FV(p)) /\\\n                (predicates_form (Skolems K p 0) = predicates_form p) /\\\n                functions_form p SUBSET functions_form (Skolems K p 0) /\\\n                functions_form (Skolems K p 0) SUBSET\n                 {NUMPAIR k l,m | k,l,m | k = K} UNION functions_form p /\\\n                (forall M. interpretation (language {p}) M /\\\n                     ~(Dom M = EMPTY) /\\\n                     (forall v:num->A. valuation M v ==> holds M v p)\n                     ==> ?M'. (Dom M' = Dom M) /\\\n                              (Pred M' = Pred M) /\\\n                              (forall g zs. ~(Fun M' g zs = Fun M g zs)\n                                      ==> (?l. g =\n                                              NUMPAIR K l)) /\\\n                              interpretation (language {(Skolems K p 0)}) M' /\\\n                              (forall v. valuation M' v\n                                   ==> holds M' v (Skolems K p 0))) /\\\n                (forall N. interpretation (language {(Skolems K p 0)}) N /\\\n                     ~(Dom N = EMPTY)\n                     ==> forall v:num->A. valuation(N) v /\\ holds N v (Skolems K p 0)\n                                    ==> holds N v p)
-      #|  Skopre K p = Skolems K (Prenex p) 0
-      #|  (a ==> (b = c)) ==> (a ==> b <=> a ==> c)
-      #|  (functions_form r = functions_form p) /\\\n                (predicates_form r = predicates_form p)
-      #|  r = Prenex p
-      #|  p:form
-      #|  forall p K.\n      (forall l m. ~(NUMPAIR K l,m IN functions_form p))\n       ==> universal(Skopre K p) /\\\n           (FV(Skopre K p) = FV(p)) /\\\n           (predicates_form (Skopre K p) = predicates_form p) /\\\n           functions_form p SUBSET functions_form (Skopre K p) /\\\n           functions_form (Skopre K p) SUBSET\n            {NUMPAIR k l,m | k,l,m | k = K} UNION functions_form p /\\\n           (forall M. interpretation (language {p}) M /\\\n                ~(Dom M = EMPTY) /\\\n                (forall v:num->A. valuation M v ==> holds M v p)\n                ==> ?M'. (Dom M' = Dom M) /\\\n                         (Pred M' = Pred M) /\\\n                         (forall g zs. ~(Fun M' g zs = Fun M g zs)\n                                 ==> (?l. g =\n                                         NUMPAIR K l)) /\\\n                         interpretation (language {(Skopre K p)}) M' /\\\n                         (forall v. valuation M' v ==> holds M' v (Skopre K p))) /\\\n           (forall N. interpretation (language {(Skopre K p)}) N /\\\n                ~(Dom(N) = EMPTY)\n                ==> forall v:num->A. valuation(N) v /\\ holds N v (Skopre K p)\n                               ==> holds N v p)
-      #|  p:form
-      #|  r:form
-      #|  bumpmod(M) = Dom(M),(\\k zs. Fun(M) (NUMSND k) zs),Pred(M)
-      #|  (bumpterm (V x) = V x) /\\\n   (bumpterm (Fn k l) = Fn (NUMPAIR 0 k) (MAP bumpterm l))
-      #|  (bumpform False = False) /\\\n   (bumpform (Atom p l) = Atom p (MAP bumpterm l)) /\\\n   (bumpform (q --> r) = bumpform q --> bumpform r) /\\\n   (bumpform (!!x r) = !!x (bumpform r))
-      #|  forall M v t. termval M v t = termval (bumpmod M) v (bumpterm t)
-      #|  forall M p v. holds M v p = holds (bumpmod M) v (bumpform p)
-      #|  l:term list
-      #|  l:term list
-      #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-      #|  t:term
-      #|  h:term
-      #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-      #|  forall p f m.\n        f,m IN functions_form(bumpform p)\n        ==> ?k. (f = NUMPAIR 0 k) /\\ k,m IN functions_form p
-      #|  interpretation (language {p}) M\n   ==> interpretation (language {(bumpform p)}) (bumpmod M)
-      #|  (unbumpterm (V x) = V x) /\\\n   (unbumpterm (Fn k l) = Fn (NUMSND k) (MAP unbumpterm l))
-      #|  (unbumpform False = False) /\\\n   (unbumpform (Atom p l) = Atom p (MAP unbumpterm l)) /\\\n   (unbumpform (q --> r) = unbumpform q --> unbumpform r) /\\\n   (unbumpform (!!x r) = !!x (unbumpform r))
-      #|  forall t. unbumpterm(bumpterm t) = t
-      #|  forall p. unbumpform (bumpform p) = p
-      #|  unbumpmod(M) = Dom(M),(\\k zs. Fun(M) (NUMPAIR 0 k) zs),Pred(M)
-      #|  forall M v t. termval M v (bumpterm t) = termval (unbumpmod M) v t
-      #|  forall M p (v:num->A). holds M v (bumpform p) = holds (unbumpmod M) v p
-      #|  (NUMLIST [] = 0) /\\\n   (NUMLIST (CONS h t) = NUMPAIR h (NUMLIST t) + 1)
-      #|  forall l1 l2. (NUMLIST l1 = NUMLIST l2) = (l1 = l2)
-      #|  (forall x. num_of_term (V x) = NUMPAIR 0 x) /\\\n   (forall f l. num_of_term (Fn f l) =\n            NUMPAIR 1 (NUMPAIR f (NUMLIST(MAP num_of_term l))))
-      #|  l:term list
-      #|  l:term list
-      #|  l':term list
-      #|  l':term list
-      #|  ALL (\\s. forall t. (num_of_term s = num_of_term t) = (s = t)) l
-      #|  forall s t. (num_of_term s = num_of_term t) = (s = t)
-      #|  (num_of_form False = NUMPAIR 0 0) /\\\n   (num_of_form (Atom p l) =\n        NUMPAIR 1 (NUMPAIR p (NUMLIST(MAP num_of_term l)))) /\\\n   (num_of_form (q --> r) =\n        NUMPAIR 2 (NUMPAIR (num_of_form q) (num_of_form r))) /\\\n   (num_of_form (!!x q) = NUMPAIR 3 (NUMPAIR x (num_of_form q)))
-      #|  forall l1 l2. (NUMLIST (MAP num_of_term l1) = NUMLIST (MAP num_of_term l2)) =\n           (l1 = l2)
-      #|  forall q r. (num_of_form q = num_of_form r) = (q = r)
-      #|  form_of_num x = @p. num_of_form p = x
-      #|  form_of_num(num_of_form p) = p
-      #|  SKOLEMIZE p = Skopre (num_of_form(bumpform p) + 1) (bumpform p)
-      #|  ~(x + 1 = 0)
-      #|  t:term
-      #|  h:term
-      #|  l:term list
-      #|  a1:term list
-      #|  z:num
-      #|  m:num
-      #|  y:num
-      #|  l:num
-      #|  x:num
-      #|  x:num
-      #|  p:form
-      #|  p:form
-      #|  x:num
-      #|  num_of_form(bumpform p)
-      #|  forall p. universal(SKOLEMIZE p) /\\\n       (FV(SKOLEMIZE p) = FV(bumpform p)) /\\\n       (predicates_form (SKOLEMIZE p) = predicates_form (bumpform p)) /\\\n       functions_form (bumpform p) SUBSET functions_form (SKOLEMIZE p) /\\\n       functions_form (SKOLEMIZE p) SUBSET\n        {NUMPAIR k l,m | k,l,m | k = num_of_form(bumpform p) + 1} UNION\n        functions_form (bumpform p) /\\\n       (forall M. interpretation (language {(bumpform p)}) M /\\\n            ~(Dom M = EMPTY) /\\\n            (forall v:num->A. valuation M v ==> holds M v (bumpform p))\n            ==> ?M'. (Dom M' = Dom M) /\\\n                     (Pred M' = Pred M) /\\\n                     (forall g zs. ~(Fun M' g zs = Fun M g zs)\n                             ==> (?l. g =\n                                     NUMPAIR (num_of_form(bumpform p) + 1)\n                                             l)) /\\\n                     interpretation (language {(SKOLEMIZE p)}) M' /\\\n                     (forall v. valuation M' v ==> holds M' v (SKOLEMIZE p))) /\\\n       (forall N. interpretation (language {(SKOLEMIZE p)}) N /\\\n            ~(Dom(N) = EMPTY)\n            ==> forall v:num->A. valuation(N) v /\\ holds N v (SKOLEMIZE p)\n                           ==> holds N v (bumpform p))
-      #|  l:term list
-      #|  l:term list
-      #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-      #|  t:term
-      #|  h:term
-      #|  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
-      #|  p:form
-      #|  p:form
-      #|  (a ==> a') /\\ (b ==> b') ==> a \\/ b ==> b' \\/ a'
-      #|  forall p f m.\n        f,m IN functions_form(SKOLEMIZE p)\n        ==> (?k. (f = NUMPAIR 0 k) /\\ k,m IN functions_form p) \\/\n            (?l. (f = NUMPAIR (num_of_form (bumpform p) + 1) l))
-      #|  SKOMOD1 p M =\n     if (forall v. valuation M v ==> holds M v p)\n     then @M'. (Dom M' = Dom (bumpmod M)) /\\\n               (Pred M' = Pred (bumpmod M)) /\\\n               (forall g zs.\n                    ~(Fun M' g zs = Fun (bumpmod M) g zs)\n                    ==> (?l. g =\n                             NUMPAIR (num_of_form (bumpform p) + 1) l)) /\\\n               interpretation (language {(SKOLEMIZE p)}) M' /\\\n               (forall v:num->A. valuation M' v\n                           ==> holds M' v (SKOLEMIZE p))\n     else (Dom M,(\\g zs. @a:A. a IN Dom(M)),Pred M)
-      #|  d /\\ p /\\ i /\\ g /\\ v <=>\n                                  d /\\ p /\\ g /\\ i /\\ v
-      #|  forall M p.\n      interpretation (language {p}) M /\\\n      ~(Dom M = EMPTY)\n      ==> (Dom (SKOMOD1 p M) = Dom (bumpmod M)) /\\\n          (Pred (SKOMOD1 p M) = Pred (bumpmod M)) /\\\n          interpretation (language {(SKOLEMIZE p)}) (SKOMOD1 p M) /\\\n          ((forall v:num->A. valuation M v ==> holds M v p)\n           ==> (forall g zs.\n                    ~(Fun (SKOMOD1 p M) g zs = Fun (bumpmod M) g zs)\n                    ==> (?l. g =\n                             NUMPAIR (num_of_form (bumpform p) + 1) l)) /\\\n               (forall v:num->A. valuation (SKOMOD1 p M) v\n                 ==> holds (SKOMOD1 p M) v (SKOLEMIZE p)))
-      #|  SKOMOD M =\n     (Dom M,\n      (\\g zs. if NUMFST g = 0 then Fun M (NUMSND g) zs\n              else Fun (SKOMOD1 (unbumpform(form_of_num (PRE(NUMFST g)))) M)\n                       g zs),\n      Pred M)
-      #|  ~(x + 1 = 0)
-      #|  interpretation (language {p}) M /\\\n   ~(Dom M :A->bool = EMPTY)\n   ==> interpretation (language {(SKOLEMIZE p)}) (SKOMOD M)
-      #|  v:num->A
-      #|  v:num->A
-      #|  valuation (bumpmod M) (v:num->A)
-      #|  valuation (bumpmod M) (v:num->A)
-      #|  holds (SKOMOD M) (v:num->A) (bumpform p)
-      #|  SKOMOD (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  ty:A
-      #|  @x:A. T
-      #|  forall v. valuation (bumpmod M) (v:num->A)\n          ==> holds (bumpmod M) v (bumpform p)
-      #|  ~(x + 1 = 0)
-      #|  ~(0 = x + 1)
-      #|  zs:A list
-      #|  NUMPAIR 0 k
-      #|  v:num->A
-      #|  v:num->A
-      #|  v:num->A
-      #|  v:num->A
-      #|  valuation M (v:num->A)
-      #|  valuation (SKOMOD1 p M) (v:num->A)
-      #|  holds (SKOMOD1 p M) (v:num->A) (SKOLEMIZE p)
-      #|  v:num->A
-      #|  interpretation(language {p}) M /\\\n   ~(Dom M = EMPTY)\n   ==> ((forall v:num->A. valuation(M) v ==> holds M v p) <=>\n        (forall v:num->A. valuation(SKOMOD M) v\n                    ==> holds (SKOMOD M) v (SKOLEMIZE p)))
-      #|  f':form
-      #|  p:form
-      #|  forall p. p IN s ==> interpretation (language {p}) (unbumpmod\n        (M:(A->bool)#(num->A list->A)#(num->A list->bool)))
-      #|  l:term list
-      #|  l:term list
-      #|  t:term
-      #|  h:term
-      #|  f,k IN functions_term h
-      #|  l:term list
-      #|  a1:term list
-      #|  k:num
-      #|  LENGTH(l:A list)
-      #|  f,LENGTH(l:A list) IN LIST_UNION (MAP functions_term a1)
-      #|  P:A->bool
-      #|  \\x:A. x IN Dom M
-      #|  forall p. interpretation (language {(bumpform p)})\n                      (M:(A->bool)#(num->A list->A)#(num->A list->bool))\n                    ==> interpretation (language {p}) (unbumpmod M)
-      #|  ty:A
-      #|  @x:A. T
-      #|  p:form
-      #|  p:form
-      #|  interpretation (language {bumpform p | p IN s})\n     (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  valuation (unbumpmod M) (v:num->A)
-      #|  valuation (unbumpmod M) (v:num->A)
-      #|  interpretation (language ({(SKOLEMIZE p)})) M /\\\n      ~(Dom M :A->bool = EMPTY)
-      #|  unbumpmod (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  p':form IN s
-      #|  interpretation (language s)\n       (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  interpretation (language {p'}) M /\\\n                    ~(Dom M :A->bool = EMPTY)
-      #|  p:form IN s
-      #|  functions {p} SUBSET functions s
-      #|  interpretation (language s)\n         (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  SKOMOD (M:(A->bool)#(num->A list->A)#(num->A list->bool))
-      #|  (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language s) M /\\\n        M satisfies s) <=>\n   (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language {SKOLEMIZE p | p IN s}) M /\\\n        M satisfies {SKOLEMIZE p | p IN s})
-      #|  P:term->bool
-      #|  (specialize False = False) /\\\n   (specialize (Atom p l) = Atom p l) /\\\n   (specialize (q --> r) = q --> r) /\\\n   (specialize (!!x r) = specialize r)
-      #|  forall p. (forall v:num->A. valuation M v ==> holds M v p) <=>\n        (forall v:num->A. valuation M v ==> holds M v (specialize p))
-      #|  forall M s. ~(Dom M:A->bool = EMPTY)\n         ==> (M satisfies s <=> M satisfies {specialize p | p IN s})
-      #|  forall p. universal p ==> qfree(specialize p)
-      #|  (forall p. functions_form(specialize p) = functions_form p) /\\\n    (forall p. predicates_form(specialize p) = predicates_form p)
-      #|  forall s. language {specialize p | p IN s} = language s
-      #|  SKOLEM p = specialize(SKOLEMIZE p)
-      #|  forall p. qfree(SKOLEM p)
-      #|  (a ==> (b = c)) ==> (a /\\ b <=> a /\\ c)
-      #|  (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language s) M /\\\n        M satisfies s) =\n   (?M. ~(Dom M :A->bool = EMPTY) /\\\n        interpretation (language {SKOLEM p | p IN s}) M /\\\n        M satisfies {SKOLEM p | p IN s})
+      #|  (K : Num)
+      #|  size((p : Form))
+      #|  \226\136\128 p : Form, prenex(p) \226\134\146 (\226\136\128 K : Num, (\226\136\128 l : Num, \226\136\128 m : Num, !IN((NUMPAIR(K, l), m), functions_form(p))) \226\134\146 universal(Skolems(K, p, 0)) && FV(Skolems(K, p, 0)) == FV(p) && predicates_form(Skolems(K, p, 0)) == predicates_form(p) && SUBSET(functions_form(p), functions_form(Skolems(K, p, 0))) && SUBSET(functions_form(Skolems(K, p, 0)), UNION({(NUMPAIR(k, l), m) | k : Num, l : Num, m : Num | k == K}, functions_form(p))) && (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({p}), M) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Dom(M') == Dom(M) && Pred(M') == Pred(M) && (\226\136\128 g : Num, \226\136\128 zs : List[A], !(Fun(M', g, zs) == Fun(M, g, zs)) \226\134\146 (\226\136\131 l : Num, g == NUMPAIR(K, l))) && interpretation(language({Skolems(K, p, 0)}), M') && (\226\136\128 v : (Num) -> A, valuation(M', v) \226\134\146 holds(M', v, Skolems(K, p, 0))))) && (\226\136\128 N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({Skolems(K, p, 0)}), N) && !(Dom(N) == {}) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(N, v) && holds(N, v, Skolems(K, p, 0)) \226\134\146 holds(N, v, p))))
+      #|  (Skopre : (Num, Form) -> Form)((K : Num), (p : Form)) == Skolems(K, Prenex(p), 0)
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  functions_form((r : Form)) == functions_form((p : Form)) && predicates_form(r) == predicates_form(p)
+      #|  (r : Form) == Prenex((p : Form))
+      #|  (p : Form)
+      #|  \226\136\128 p : Form, \226\136\128 K : Num, (\226\136\128 l : Num, \226\136\128 m : Num, !IN((NUMPAIR(K, l), m), functions_form(p))) \226\134\146 universal(Skopre(K, p)) && FV(Skopre(K, p)) == FV(p) && predicates_form(Skopre(K, p)) == predicates_form(p) && SUBSET(functions_form(p), functions_form(Skopre(K, p))) && SUBSET(functions_form(Skopre(K, p)), UNION({(NUMPAIR(k, l), m) | k : Num, l : Num, m : Num | k == K}, functions_form(p))) && (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({p}), M) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Dom(M') == Dom(M) && Pred(M') == Pred(M) && (\226\136\128 g : Num, \226\136\128 zs : List[A], !(Fun(M', g, zs) == Fun(M, g, zs)) \226\134\146 (\226\136\131 l : Num, g == NUMPAIR(K, l))) && interpretation(language({Skopre(K, p)}), M') && (\226\136\128 v : (Num) -> A, valuation(M', v) \226\134\146 holds(M', v, Skopre(K, p))))) && (\226\136\128 N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({Skopre(K, p)}), N) && !(Dom(N) == {}) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(N, v) && holds(N, v, Skopre(K, p)) \226\134\146 holds(N, v, p)))
+      #|  (p : Form)
+      #|  (r : Form)
+      #|  (bumpmod : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)) -> ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) == (Dom(M), (k : Num) => (zs : List[_]) => Fun(M, NUMSND(k), zs), Pred(M))
+      #|  (bumpterm : (Term) -> Term)(V((x : Num))) == V(x) && bumpterm(Fn((k : Num), (l : List[Term]))) == Fn(NUMPAIR(0, k), MAP(bumpterm, l))
+      #|  (bumpform : (Form) -> Form)(False) == False && bumpform(Atom((p : Num), (l : List[Term]))) == Atom(p, MAP(bumpterm, l)) && bumpform(op_minus_minus_gt((q : Form), (r : Form))) == op_minus_minus_gt(bumpform(q), bumpform(r)) && bumpform(op_bang_bang((x : Num), r)) == op_bang_bang(x, bumpform(r))
+      #|  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, \226\136\128 t : Term, termval(M, v, t) == termval(bumpmod(M), v, bumpterm(t))
+      #|  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 p : Form, \226\136\128 v : (Num) -> _, holds(M, v, p) == holds(bumpmod(M), v, bumpform(p))
+      #|  (l : List[Term])
+      #|  (l : List[Term])
+      #|  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+      #|  (t : Term)
+      #|  (h : Term)
+      #|  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+      #|  \226\136\128 p : Form, \226\136\128 f : Num, \226\136\128 m : Num, IN((f, m), functions_form(bumpform(p))) \226\134\146 (\226\136\131 k : Num, f == NUMPAIR(0, k) && IN((k, m), functions_form(p)))
+      #|  interpretation(language({(p : Form)}), (M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) \226\134\146 interpretation(language({bumpform(p)}), bumpmod(M))
+      #|  (unbumpterm : (Term) -> Term)(V((x : Num))) == V(x) && unbumpterm(Fn((k : Num), (l : List[Term]))) == Fn(NUMSND(k), MAP(unbumpterm, l))
+      #|  (unbumpform : (Form) -> Form)(False) == False && unbumpform(Atom((p : Num), (l : List[Term]))) == Atom(p, MAP(unbumpterm, l)) && unbumpform(op_minus_minus_gt((q : Form), (r : Form))) == op_minus_minus_gt(unbumpform(q), unbumpform(r)) && unbumpform(op_bang_bang((x : Num), r)) == op_bang_bang(x, unbumpform(r))
+      #|  \226\136\128 t : Term, unbumpterm(bumpterm(t)) == t
+      #|  \226\136\128 p : Form, unbumpform(bumpform(p)) == p
+      #|  (unbumpmod : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)) -> ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) == (Dom(M), (k : Num) => (zs : List[_]) => Fun(M, NUMPAIR(0, k), zs), Pred(M))
+      #|  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 v : (Num) -> _, \226\136\128 t : Term, termval(M, v, bumpterm(t)) == termval(unbumpmod(M), v, t)
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 p : Form, \226\136\128 v : (Num) -> A, holds(M, v, bumpform(p)) == holds(unbumpmod(M), v, p)
+      #|  (NUMLIST : (List[Num]) -> Num)(NIL) == 0 && NUMLIST(CONS((h : Num), (t : List[Num]))) == NUMPAIR(h, NUMLIST(t)) + 1
+      #|  \226\136\128 l1 : List[Num], \226\136\128 l2 : List[Num], (NUMLIST(l1) == NUMLIST(l2)) == (l1 == l2)
+      #|  (\226\136\128 x : Num, (num_of_term : (Term) -> Num)(V(x)) == NUMPAIR(0, x)) && (\226\136\128 f : Num, \226\136\128 l : List[Term], num_of_term(Fn(f, l)) == NUMPAIR(1, NUMPAIR(f, NUMLIST(MAP(num_of_term, l)))))
+      #|  (l : List[Term])
+      #|  (l : List[Term])
+      #|  (l' : List[Term])
+      #|  (l' : List[Term])
+      #|  ALL((s : Term) => \226\136\128 t : Term, (num_of_term(s) == num_of_term(t)) == (s == t), (l : List[Term]))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, (num_of_term(s) == num_of_term(t)) == (s == t)
+      #|  (num_of_form : (Form) -> Num)(False) == NUMPAIR(0, 0) && num_of_form(Atom((p : Num), (l : List[Term]))) == NUMPAIR(1, NUMPAIR(p, NUMLIST(MAP(num_of_term, l)))) && num_of_form(op_minus_minus_gt((q : Form), (r : Form))) == NUMPAIR(2, NUMPAIR(num_of_form(q), num_of_form(r))) && num_of_form(op_bang_bang((x : Num), q)) == NUMPAIR(3, NUMPAIR(x, num_of_form(q)))
+      #|  \226\136\128 l1 : List[Term], \226\136\128 l2 : List[Term], (NUMLIST(MAP(num_of_term, l1)) == NUMLIST(MAP(num_of_term, l2))) == (l1 == l2)
+      #|  \226\136\128 q : Form, \226\136\128 r : Form, (num_of_form(q) == num_of_form(r)) == (q == r)
+      #|  (form_of_num : (Num) -> Form)((x : Num)) == select((p : Form) => num_of_form(p) == x)
+      #|  form_of_num(num_of_form((p : Form))) == p
+      #|  (SKOLEMIZE : (Form) -> Form)((p : Form)) == Skopre(num_of_form(bumpform(p)) + 1, bumpform(p))
+      #|  !((x : Num) + 1 == 0)
+      #|  (t : Term)
+      #|  (h : Term)
+      #|  (l : List[Term])
+      #|  (a1 : List[Term])
+      #|  (z : Num)
+      #|  (m : Num)
+      #|  (y : Num)
+      #|  (l : Num)
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  (x : Num)
+      #|  num_of_form(bumpform((p : Form)))
+      #|  \226\136\128 p : Form, universal(SKOLEMIZE(p)) && FV(SKOLEMIZE(p)) == FV(bumpform(p)) && predicates_form(SKOLEMIZE(p)) == predicates_form(bumpform(p)) && SUBSET(functions_form(bumpform(p)), functions_form(SKOLEMIZE(p))) && SUBSET(functions_form(SKOLEMIZE(p)), UNION({(NUMPAIR(k, l), m) | k : Num, l : Num, m : Num | k == num_of_form(bumpform(p)) + 1}, functions_form(bumpform(p)))) && (\226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({bumpform(p)}), M) && !(Dom(M) == {}) && (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, bumpform(p))) \226\134\146 (\226\136\131 M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), Dom(M') == Dom(M) && Pred(M') == Pred(M) && (\226\136\128 g : Num, \226\136\128 zs : List[A], !(Fun(M', g, zs) == Fun(M, g, zs)) \226\134\146 (\226\136\131 l : Num, g == NUMPAIR(num_of_form(bumpform(p)) + 1, l))) && interpretation(language({SKOLEMIZE(p)}), M') && (\226\136\128 v : (Num) -> A, valuation(M', v) \226\134\146 holds(M', v, SKOLEMIZE(p))))) && (\226\136\128 N : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), interpretation(language({SKOLEMIZE(p)}), N) && !(Dom(N) == {}) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(N, v) && holds(N, v, SKOLEMIZE(p)) \226\134\146 holds(N, v, bumpform(p))))
+      #|  (l : List[Term])
+      #|  (l : List[Term])
+      #|  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+      #|  (t : Term)
+      #|  (h : Term)
+      #|  ((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  ((a : Bool) \226\134\146 (a' : Bool)) && ((b : Bool) \226\134\146 (b' : Bool)) \226\134\146 a || b \226\134\146 b' || a'
+      #|  \226\136\128 p : Form, \226\136\128 f : Num, \226\136\128 m : Num, IN((f, m), functions_form(SKOLEMIZE(p))) \226\134\146 (\226\136\131 k : Num, f == NUMPAIR(0, k) && IN((k, m), functions_form(p))) || (\226\136\131 l : Num, f == NUMPAIR(num_of_form(bumpform(p)) + 1, l))
+      #|  (SKOMOD1 : (Form, ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)) -> ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))((p : Form), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) == (if (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)) { select((M' : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)) => Dom(M') == Dom(bumpmod(M)) && Pred(M') == Pred(bumpmod(M)) && (\226\136\128 g : Num, \226\136\128 zs : List[A], !(Fun(M', g, zs) == Fun(bumpmod(M), g, zs)) \226\134\146 (\226\136\131 l : Num, g == NUMPAIR(num_of_form(bumpform(p)) + 1, l))) && interpretation(language({SKOLEMIZE(p)}), M') && (\226\136\128 v : (Num) -> A, valuation(M', v) \226\134\146 holds(M', v, SKOLEMIZE(p)))) } else { (Dom(M), (g : Num) => (zs : List[A]) => select((a : A) => IN(a, Dom(M))), Pred(M)) })
+      #|  ((d : Bool) && (p : Bool) && (i : Bool) && (g : Bool) && (v : Bool)) == (d && p && g && i && v)
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 p : Form, interpretation(language({p}), M) && !(Dom(M) == {}) \226\134\146 Dom(SKOMOD1(p, M)) == Dom(bumpmod(M)) && Pred(SKOMOD1(p, M)) == Pred(bumpmod(M)) && interpretation(language({SKOLEMIZE(p)}), SKOMOD1(p, M)) && ((\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)) \226\134\146 (\226\136\128 g : Num, \226\136\128 zs : List[A], !(Fun(SKOMOD1(p, M), g, zs) == Fun(bumpmod(M), g, zs)) \226\134\146 (\226\136\131 l : Num, g == NUMPAIR(num_of_form(bumpform(p)) + 1, l))) && (\226\136\128 v : (Num) -> A, valuation(SKOMOD1(p, M), v) \226\134\146 holds(SKOMOD1(p, M), v, SKOLEMIZE(p))))
+      #|  (SKOMOD : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)) -> ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool))) == (Dom(M), (g : Num) => (zs : List[_]) => if NUMFST(g) == 0 { Fun(M, NUMSND(g), zs) } else { Fun(SKOMOD1(unbumpform(form_of_num(PRE(NUMFST(g)))), M), g, zs) }, Pred(M))
+      #|  !((x : Num) + 1 == 0)
+      #|  interpretation(language({(p : Form)}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M) == {}) \226\134\146 interpretation(language({SKOLEMIZE(p)}), SKOMOD(M))
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  valuation(bumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A))
+      #|  valuation(bumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A))
+      #|  holds(SKOMOD((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A), bumpform((p : Form)))
+      #|  SKOMOD((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  (ty : A)
+      #|  select((x : A) => true)
+      #|  \226\136\128 v : (Num) -> A, valuation(bumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), v) \226\134\146 holds(bumpmod(M), v, bumpform((p : Form)))
+      #|  !((x : Num) + 1 == 0)
+      #|  !(0 == (x : Num) + 1)
+      #|  (zs : List[A])
+      #|  NUMPAIR(0, (k : Num))
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  (v : (Num) -> A)
+      #|  valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), (v : (Num) -> A))
+      #|  valuation(SKOMOD1((p : Form), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A))
+      #|  holds(SKOMOD1((p : Form), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A), SKOLEMIZE(p))
+      #|  (v : (Num) -> A)
+      #|  interpretation(language({(p : Form)}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M) == {}) \226\134\146 (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, p)) == (\226\136\128 v : (Num) -> A, valuation(SKOMOD(M), v) \226\134\146 holds(SKOMOD(M), v, SKOLEMIZE(p)))
+      #|  (f' : Form)
+      #|  (p : Form)
+      #|  \226\136\128 p : Form, IN(p, (s : (Form) -> Bool)) \226\134\146 interpretation(language({p}), unbumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))))
+      #|  (l : List[Term])
+      #|  (l : List[Term])
+      #|  (t : Term)
+      #|  (h : Term)
+      #|  IN(((f : Num), (k : Num)), functions_term((h : Term)))
+      #|  (l : List[Term])
+      #|  (a1 : List[Term])
+      #|  (k : Num)
+      #|  LENGTH((l : List[A]))
+      #|  IN(((f : Num), LENGTH((l : List[A]))), LIST_UNION(MAP(functions_term, (a1 : List[Term]))))
+      #|  (P : (A) -> Bool)
+      #|  (x : A) => IN(x, Dom((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))))
+      #|  \226\136\128 p : Form, interpretation(language({bumpform(p)}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) \226\134\146 interpretation(language({p}), unbumpmod(M))
+      #|  (ty : A)
+      #|  select((x : A) => true)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  interpretation(language({bumpform((p : Form)) | IN(p, (s : (Form) -> Bool))}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  valuation(unbumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A))
+      #|  valuation(unbumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))), (v : (Num) -> A))
+      #|  interpretation(language({SKOLEMIZE((p : Form))}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M) == {})
+      #|  unbumpmod((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  IN((p' : Form), (s : (Form) -> Bool))
+      #|  interpretation(language((s : (Form) -> Bool)), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  interpretation(language({(p' : Form)}), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool))) && !(Dom(M) == {})
+      #|  IN((p : Form), (s : (Form) -> Bool))
+      #|  SUBSET(functions({(p : Form)}), functions((s : (Form) -> Bool)))
+      #|  interpretation(language((s : (Form) -> Bool)), (M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  SKOMOD((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)))
+      #|  (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && interpretation(language((s : (Form) -> Bool)), M) && satisfies(M, s)) == (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && interpretation(language({SKOLEMIZE((p : Form)) | IN(p, s)}), M) && satisfies(M, {SKOLEMIZE((p : Form)) | IN(p, s)}))
+      #|  (P : (Term) -> Bool)
+      #|  (specialize : (Form) -> Form)(False) == False && specialize(Atom((p : Num), (l : List[Term]))) == Atom(p, l) && specialize(op_minus_minus_gt((q : Form), (r : Form))) == op_minus_minus_gt(q, r) && specialize(op_bang_bang((x : Num), r)) == specialize(r)
+      #|  \226\136\128 p : Form, (\226\136\128 v : (Num) -> A, valuation((M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool)), v) \226\134\146 holds(M, v, p)) == (\226\136\128 v : (Num) -> A, valuation(M, v) \226\134\146 holds(M, v, specialize(p)))
+      #|  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 s : (Form) -> Bool, !(Dom(M) == {}) \226\134\146 satisfies(M, s) == satisfies(M, {specialize((p : Form)) | IN(p, s)})
+      #|  \226\136\128 p : Form, universal(p) \226\134\146 qfree(specialize(p))
+      #|  (\226\136\128 p : Form, functions_form(specialize(p)) == functions_form(p)) && (\226\136\128 p : Form, predicates_form(specialize(p)) == predicates_form(p))
+      #|  \226\136\128 s : (Form) -> Bool, language({specialize((p : Form)) | IN(p, s)}) == language(s)
+      #|  (SKOLEM : (Form) -> Form)((p : Form)) == specialize(SKOLEMIZE(p))
+      #|  \226\136\128 p : Form, qfree(SKOLEM(p))
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+      #|  (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && interpretation(language((s : (Form) -> Bool)), M) && satisfies(M, s)) == (\226\136\131 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) && interpretation(language({SKOLEM((p : Form)) | IN(p, s)}), M) && satisfies(M, {SKOLEM((p : Form)) | IN(p, s)}))
       #|HOLDS_EXISTS_LEMMA =  |- (#forall:fun(fun(form,bool),bool) (\p:form. (#forall:fun(fun(term,bool),bool) (\t:term. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool),bool) (\M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))). (#forall:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\preds:fun(prod(num,num),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#interpretation:fun(prod(fun(prod(num,num),bool),fun(prod(num,num),bool)),fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool)) ((#,:fun(fun(prod(num,num),bool),fun(fun(prod(num,num),bool),prod(fun(prod(num,num),bool),fun(prod(num,num),bool)))) (#functions_term:fun(term,fun(prod(num,num),bool)) t:term)) preds:fun(prod(num,num),bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),bool)) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) ((#formsubst:fun(fun(num,term),fun(form,form)) ((#valmod:fun(prod(num,term),fun(fun(num,term),fun(num,term))) ((#,:fun(num,fun(term,prod(num,term))) x:num) t:term)) #V:fun(num,term))) p:form))))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) ((#??:fun(num,fun(form,form)) x:num) p:form)))))))))))))))
       #|Skolem1_DEF =  |- (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(form,bool),bool) (\p:form. ((#=:fun(form,fun(form,bool)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form)) ((#formsubst:fun(fun(num,term),fun(form,form)) ((#valmod:fun(prod(num,term),fun(fun(num,term),fun(num,term))) ((#,:fun(num,fun(term,prod(num,term))) x:num) ((#Fn:fun(num,fun(list(term),term)) f:num) ((#MAP:fun(fun(num,term),fun(list(num),list(term))) #V:fun(num,term)) (#list_of_set:fun(fun(num,bool),list(num)) (#FV:fun(form,fun(num,bool)) ((#??:fun(num,fun(form,form)) x:num) p:form))))))) #V:fun(num,term))) p:form))))))))
       #|HOLDS_SKOLEM1 =  |- (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#prenex:fun(form,bool) ((#??:fun(num,fun(form,form)) x:num) p:form))) (#~:fun(bool,bool) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#CARD:fun(fun(num,bool),num) (#FV:fun(form,fun(num,bool)) ((#??:fun(num,fun(form,form)) x:num) p:form))))) (#functions_form:fun(form,fun(prod(num,num),bool)) ((#??:fun(num,fun(form,form)) x:num) p:form)))))) ((#/\:fun(bool,fun(bool,bool)) (#prenex:fun(form,bool) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun(num,bool),fun(fun(num,bool),bool)) (#FV:fun(form,fun(num,bool)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form))) (#FV:fun(form,fun(num,bool)) ((#??:fun(num,fun(form,form)) x:num) p:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#size:fun(form,num) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form))) (#size:fun(form,num) ((#??:fun(num,fun(form,form)) x:num) p:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun(prod(num,num),bool),fun(fun(prod(num,num),bool),bool)) (#predicates_form:fun(form,fun(prod(num,num),bool)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form))) (#predicates_form:fun(form,fun(prod(num,num),bool)) ((#??:fun(num,fun(form,form)) x:num) p:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(prod(num,num),bool),fun(fun(prod(num,num),bool),bool)) (#functions_form:fun(form,fun(prod(num,num),bool)) ((#??:fun(num,fun(form,form)) x:num) p:form))) (#functions_form:fun(form,fun(prod(num,num),bool)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form)))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(prod(num,num),bool),fun(fun(prod(num,num),bool),bool)) (#functions_form:fun(form,fun(prod(num,num),bool)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form))) ((#INSERT:fun(prod(num,num),fun(fun(prod(num,num),bool),fun(prod(num,num),bool))) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#CARD:fun(fun(num,bool),num) (#FV:fun(form,fun(num,bool)) ((#??:fun(num,fun(form,form)) x:num) p:form))))) (#functions_form:fun(form,fun(prod(num,num),bool)) ((#??:fun(num,fun(form,form)) x:num) p:form))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool),bool) (\M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#interpretation:fun(prod(fun(prod(num,num),bool),fun(prod(num,num),bool)),fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool)) (#language:fun(fun(form,bool),prod(fun(prod(num,num),bool),fun(prod(num,num),bool))) ((#INSERT:fun(form,fun(fun(form,bool),fun(form,bool))) p:form) #EMPTY:fun(form,bool)))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#Dom:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun('A,bool)) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) #EMPTY:fun('A,bool)))) (#forall:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). ((#==>:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),bool)) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) ((#??:fun(num,fun(form,form)) x:num) p:form)))))))) (#?:fun(fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool),bool) (\M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#Dom:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun('A,bool)) M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) (#Dom:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun('A,bool)) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun(num,fun(list('A),bool)),fun(fun(num,fun(list('A),bool)),bool)) (#Pred:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(num,fun(list('A),bool))) M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) (#Pred:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(num,fun(list('A),bool))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\g:num. (#forall:fun(fun(list('A),bool),bool) (\zs:list('A). ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) g:num) f:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) zs:list('A))) (#CARD:fun(fun(num,bool),num) (#FV:fun(form,fun(num,bool)) ((#??:fun(num,fun(form,form)) x:num) p:form))))))) ((#=:fun('A,fun('A,bool)) (((#Fun:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(num,fun(list('A),'A))) M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) g:num) zs:list('A))) (((#Fun:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(num,fun(list('A),'A))) M:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) g:num) zs:list('A))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#interpretation:fun(prod(fun(prod(num,num),bool),fun(prod(num,num),bool)),fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool)) (#language:fun(fun(form,bool),prod(fun(prod(num,num),bool),fun(prod(num,num),bool))) ((#INSERT:fun(form,fun(fun(form,bool),fun(form,bool))) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form)) #EMPTY:fun(form,bool)))) M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) (#forall:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). ((#==>:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),bool)) M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) M':prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form))))))))))))))) (#forall:fun(fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool),bool) (\N:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#interpretation:fun(prod(fun(prod(num,num),bool),fun(prod(num,num),bool)),fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),bool)) (#language:fun(fun(form,bool),prod(fun(prod(num,num),bool),fun(prod(num,num),bool))) ((#INSERT:fun(form,fun(fun(form,bool),fun(form,bool))) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form)) #EMPTY:fun(form,bool)))) N:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) (#~:fun(bool,bool) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#Dom:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun('A,bool)) N:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))))) #EMPTY:fun('A,bool))))) (#forall:fun(fun(fun(num,'A),bool),bool) (\v:fun(num,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#valuation:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),bool)) N:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) N:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) (((#Skolem1:fun(num,fun(num,fun(form,form))) f:num) x:num) p:form)))) (((#holds:fun(prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool)))),fun(fun(num,'A),fun(form,bool))) N:prod(fun('A,bool),prod(fun(num,fun(list('A),'A)),fun(num,fun(list('A),bool))))) v:fun(num,'A)) ((#??:fun(num,fun(form,form)) x:num) p:form))))))))))))))))))))))
