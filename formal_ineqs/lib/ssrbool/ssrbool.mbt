@@ -16,13 +16,13 @@ fn step_2() -> Unit raise {
 ///|
 /// Formal_ineqs/lib/ssrbool.hl:11
 fn step_3() -> Unit raise {
-  @sections.add_section_hyp("eqPQ", @parser.parse_term("P <=> Q"))
+  @sections.add_section_hyp("eqPQ", @term_syntax.parse_term("(P : Bool) == (Q : Bool)"))
 }
 
 ///|
 /// iffLR
 fn step_4() -> Unit raise {
-  ifflr_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("P ==> Q"), @list.List([@ssreflect.done_tac])))
+  ifflr_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(P : Bool) → (Q : Bool)"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn ifflr() -> @kernel.Thm {
 ///|
 /// iffRL
 fn step_5() -> Unit raise {
-  iffrl_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("Q ==> P"), @list.List([@ssreflect.done_tac])))
+  iffrl_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(Q : Bool) → (P : Bool)"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn iffrl() -> @kernel.Thm {
 ///|
 /// iffLRn
 fn step_6() -> Unit raise {
-  ifflrn_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("~P ==> ~Q"), @list.List([@ssreflect.done_tac])))
+  ifflrn_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("!(P : Bool) → !(Q : Bool)"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn ifflrn() -> @kernel.Thm {
 ///|
 /// iffRLn
 fn step_7() -> Unit raise {
-  iffrln_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("~Q ==> ~P"), @list.List([@ssreflect.done_tac])))
+  iffrln_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("!(Q : Bool) → !(P : Bool)"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -148,7 +148,7 @@ fn step_12() -> Unit raise {
 ///|
 /// is_true_true
 fn step_13() -> Unit raise {
-  is_true_true_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("T"), @list.List([@ssreflect.done_tac])))
+  is_true_true_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("true"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -163,7 +163,7 @@ pub fn is_true_true() -> @kernel.Thm {
 ///|
 /// not_false_is_true
 fn step_14() -> Unit raise {
-  not_false_is_true_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("~F"), @list.List([@ssreflect.done_tac])))
+  not_false_is_true_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("!false"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -208,7 +208,7 @@ pub fn notf() -> @kernel.Thm {
 ///|
 /// negbT
 fn step_17() -> Unit raise {
-  negbt_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(b = F) ==> ~b"), @list.List([@ssreflect.done_tac])))
+  negbt_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) == false → !b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -223,7 +223,7 @@ pub fn negbt() -> @kernel.Thm {
 ///|
 /// negbTE
 fn step_18() -> Unit raise {
-  negbte_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("~b ==> b = F"), @list.List([@ssreflect.done_tac])))
+  negbte_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("!(b : Bool) → b == false"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -238,7 +238,7 @@ pub fn negbte() -> @kernel.Thm {
 ///|
 /// negbF
 fn step_19() -> Unit raise {
-  negbf_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b ==> ~b = F"), @list.List([@ssreflect.done_tac])))
+  negbf_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) → !b == false"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -253,7 +253,7 @@ pub fn negbf() -> @kernel.Thm {
 ///|
 /// negbFE
 fn step_20() -> Unit raise {
-  negbfe_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("~b = F ==> b"), @list.List([@ssreflect.done_tac])))
+  negbfe_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("!(b : Bool) == false → b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -268,7 +268,7 @@ pub fn negbfe() -> @kernel.Thm {
 ///|
 /// negbK
 fn step_21() -> Unit raise {
-  negbk_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("~ ~b = b"), @list.List([@ssreflect.done_tac])))
+  negbk_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("!!(b : Bool) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -283,7 +283,7 @@ pub fn negbk() -> @kernel.Thm {
 ///|
 /// negbNE
 fn step_22() -> Unit raise {
-  negbne_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("~ ~ b ==> b"), @list.List([@ssreflect.done_tac])))
+  negbne_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("!!(b : Bool) → b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -300,7 +300,7 @@ pub fn negbne() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x4 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b2", @list.List([])), (x3 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x3), x4), @ssreflect.clear_assumption("b2")), @ssreflect.case), @ssreflect.simp_tac)
   let t6 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x2 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b1", @list.List([])), (x1 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x1), x2), @ssreflect.clear_assumption("b1")), @ssreflect.case), t5), @ssreflect.done_tac)])
-  negb_inj_c.set(@sections.section_proof(@list.List(["b1", "b2"]), @parser.parse_term("~b1 = ~b2 ==> b1 = b2"), t6))
+  negb_inj_c.set(@sections.section_proof(@list.List(["b1", "b2"]), @term_syntax.parse_term("!(b1 : Bool) == !(b2 : Bool) → b1 == b2"), t6))
 }
 
 ///|
@@ -330,7 +330,7 @@ fn step_24() -> Unit raise {
       ((x10 : @kernel.Thm, x11 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x10, x11))(x12, x13)
     }
   }))), (x19 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negbK", @list.List([negbk()])), t18, x19)), @ssreflect.done_tac)])
-  negblr_c.set(@sections.section_proof(@list.List(["b", "c"]), @parser.parse_term("b = ~c ==> ~b = c"), t20))
+  negblr_c.set(@sections.section_proof(@list.List(["b", "c"]), @term_syntax.parse_term("(b : Bool) == !(c : Bool) → !b == c"), t20))
 }
 
 ///|
@@ -361,7 +361,7 @@ fn step_25() -> Unit raise {
       s22(x23)
     }
   }, (x29 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t28, x29))), (x35 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negbK", @list.List([negbk()])), t34, x35)), @ssreflect.done_tac)])
-  negbrl_c.set(@sections.section_proof(@list.List(["b", "c"]), @parser.parse_term("~b = c ==> b = ~c"), t36))
+  negbrl_c.set(@sections.section_proof(@list.List(["b", "c"]), @term_syntax.parse_term("!(b : Bool) == (c : Bool) → b == !c"), t36))
 }
 
 ///|
@@ -378,7 +378,7 @@ pub fn negbrl() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x40 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x39 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x39), x40), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t42 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x38 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x37 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x37), x38), @ssreflect.clear_assumption("b")), @ssreflect.case), t41)])
-  contra_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(c ==> b) ==> ~b ==> ~c"), t42))
+  contra_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("((c : Bool) → (b : Bool)) → !b → !c"), t42))
 }
 
 ///|
@@ -424,7 +424,7 @@ fn step_28() -> Unit raise {
     }, x51)
   })((x52 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x52)), @tactics.beta_tac), (x58 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negbK", @list.List([negbk()])), t57, x58)), @ssreflect.done_tac)
   let t60 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["h"]))), t59])
-  contral_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(c ==> ~b) ==> b ==> ~c"), t60))
+  contral_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("((c : Bool) → !(b : Bool)) → b → !c"), t60))
 }
 
 ///|
@@ -455,7 +455,7 @@ fn step_29() -> Unit raise {
     }, x69)
   })((x70 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x70)), @tactics.beta_tac), (x76 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("negbK", @list.List([negbk()])), t75, x76)), @ssreflect.done_tac)
   let t78 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["h"]))), t77])
-  contrar_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(~c ==> b) ==> ~b ==> c"), t78))
+  contrar_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("(!(c : Bool) → (b : Bool)) → !b → c"), t78))
 }
 
 ///|
@@ -487,7 +487,7 @@ fn step_30() -> Unit raise {
     }, x87)
   })((x88 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x88)), @tactics.beta_tac), t95), @ssreflect.done_tac)
   let t97 = @list.List([@tactics.then_tac(@tactics.beta_tac, @ssreflect.move_(@list.List(["h"]))), t96])
-  contralr_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(~c ==> ~b) ==> b ==> c"), t97))
+  contralr_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("(!(c : Bool) → !(b : Bool)) → b → c"), t97))
 }
 
 ///|
@@ -502,7 +502,7 @@ pub fn contralr() -> @kernel.Thm {
 ///|
 /// contraT
 fn step_31() -> Unit raise {
-  contrat_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(~b ==> F) ==> b"), @list.List([@ssreflect.done_tac])))
+  contrat_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(!(b : Bool) → false) → b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -518,7 +518,7 @@ pub fn contrat() -> @kernel.Thm {
 /// wlog_neg
 fn step_32() -> Unit raise {
   let t100 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x99 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x98 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x98), x99), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac)])
-  wlog_neg_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(~b ==> b) ==> b"), t100))
+  wlog_neg_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(!(b : Bool) → b) → b"), t100))
 }
 
 ///|
@@ -535,7 +535,7 @@ pub fn wlog_neg() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   let t105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x104 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x103 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x103), x104), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t106 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x102 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x101 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x101), x102), @ssreflect.clear_assumption("b")), @ssreflect.case), t105)])
-  contraft_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(~c ==> b) ==> b = F ==> c"), t106))
+  contraft_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("(!(c : Bool) → (b : Bool)) → b == false → c"), t106))
 }
 
 ///|
@@ -552,7 +552,7 @@ pub fn contraft() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x110 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x109 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x109), x110), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t112 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x108 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x107 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x107), x108), @ssreflect.clear_assumption("b")), @ssreflect.case), t111)])
-  contrafn_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(c ==> b) ==> b = F ==> ~c"), t112))
+  contrafn_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("((c : Bool) → (b : Bool)) → b == false → !c"), t112))
 }
 
 ///|
@@ -569,7 +569,7 @@ pub fn contrafn() -> @kernel.Thm {
 fn step_35() -> Unit raise {
   let t117 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x116 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x115 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x115), x116), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t118 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x114 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x113 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x113), x114), @ssreflect.clear_assumption("b")), @ssreflect.case), t117)])
-  contratf_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(c ==> ~b) ==> b ==> c = F"), t118))
+  contratf_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("((c : Bool) → !(b : Bool)) → b → c == false"), t118))
 }
 
 ///|
@@ -586,7 +586,7 @@ pub fn contratf() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let t123 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x122 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x121 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x121), x122), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t124 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x120 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x119 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x119), x120), @ssreflect.clear_assumption("b")), @ssreflect.case), t123)])
-  contranf_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(c ==> b) ==> ~b ==> c = F"), t124))
+  contranf_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("((c : Bool) → (b : Bool)) → !b → c == false"), t124))
 }
 
 ///|
@@ -603,7 +603,7 @@ pub fn contranf() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   let t129 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x128 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x127 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x127), x128), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t130 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x126 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x125 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x125), x126), @ssreflect.clear_assumption("b")), @ssreflect.case), t129)])
-  contraff_c.set(@sections.section_proof(@list.List(["c", "b"]), @parser.parse_term("(c ==> b) ==> b = F ==> c = F"), t130))
+  contraff_c.set(@sections.section_proof(@list.List(["c", "b"]), @term_syntax.parse_term("((c : Bool) → (b : Bool)) → b == false → c == false"), t130))
 }
 
 ///|
@@ -618,7 +618,7 @@ pub fn contraff() -> @kernel.Thm {
 ///|
 /// isSome
 fn step_38() -> Unit raise {
-  issome_c.set(@define.define_(@parser.parse_term("isSome NONE = F /\\ (forall x. isSome (SOME x) = T)")))
+  issome_c.set(@define.define_(@term_syntax.parse_term("(isSome : (Option[_]) -> Bool)(NONE) == false && (∀ x : _, isSome(SOME(x)) == true)")))
 }
 
 ///|
@@ -659,7 +659,7 @@ fn step_42() -> Unit raise {
 /// if_same
 fn step_43() -> Unit raise {
   let t133 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x132 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x131 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x131), x132), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  if_same_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("(if b then vT else vT) = vT"), t133))
+  if_same_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(if (b : Bool) { (vT : _) } else { vT }) == vT"), t133))
 }
 
 ///|
@@ -675,7 +675,7 @@ pub fn if_same() -> @kernel.Thm {
 /// if_neg
 fn step_44() -> Unit raise {
   let t136 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x135 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x134 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x134), x135), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  if_neg_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("(if ~b then vT else vF) = if b then vF else vT"), t136))
+  if_neg_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(if !(b : Bool) { (vT : _) } else { (vF : _) }) == (if b { vF } else { vT })"), t136))
 }
 
 ///|
@@ -691,7 +691,7 @@ pub fn if_neg() -> @kernel.Thm {
 /// fun_if
 fn step_45() -> Unit raise {
   let t139 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x138 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x137 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x137), x138), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  fun_if_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("f (if b then vT else vF) = if b then f vT else f vF"), t139))
+  fun_if_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(f : (_) -> _)(if (b : Bool) { (vT : _) } else { (vF : _) }) == (if b { f(vT) } else { f(vF) })"), t139))
 }
 
 ///|
@@ -707,7 +707,7 @@ pub fn fun_if() -> @kernel.Thm {
 /// if_arg
 fn step_46() -> Unit raise {
   let t142 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x141 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x140 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x140), x141), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  if_arg_c.set(@sections.section_proof(@list.List(["fT", "fF", "x"]), @parser.parse_term("(if b then (fT:A->B) else fF) x = if b then fT x else fF x"), t142))
+  if_arg_c.set(@sections.section_proof(@list.List(["fT", "fF", "x"]), @term_syntax.parse_term("COND((b : Bool), (fT : (A) -> B), (fF : (A) -> B), (x : A)) == (if b { fT(x) } else { fF(x) })"), t142))
 }
 
 ///|
@@ -788,7 +788,7 @@ fn step_51() -> Unit raise {
 ///|
 /// andTb
 fn step_52() -> Unit raise {
-  andtb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(T /\\ b) = b"), @list.List([@ssreflect.done_tac])))
+  andtb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(true && (b : Bool)) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -803,7 +803,7 @@ pub fn andtb() -> @kernel.Thm {
 ///|
 /// andFb
 fn step_53() -> Unit raise {
-  andfb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(F /\\ b) = F"), @list.List([@ssreflect.done_tac])))
+  andfb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(false && (b : Bool)) == false"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -818,7 +818,7 @@ pub fn andfb() -> @kernel.Thm {
 ///|
 /// andbT
 fn step_54() -> Unit raise {
-  andbt_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(b /\\ T) = b"), @list.List([@ssreflect.done_tac])))
+  andbt_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) && true) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -833,7 +833,7 @@ pub fn andbt() -> @kernel.Thm {
 ///|
 /// andbF
 fn step_55() -> Unit raise {
-  andbf_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(b /\\ F) = F"), @list.List([@ssreflect.done_tac])))
+  andbf_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) && false) == false"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -848,7 +848,7 @@ pub fn andbf() -> @kernel.Thm {
 ///|
 /// andbb
 fn step_56() -> Unit raise {
-  andbb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(b /\\ b) = b"), @list.List([@ssreflect.done_tac])))
+  andbb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) && b) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -865,7 +865,7 @@ pub fn andbb() -> @kernel.Thm {
 fn step_57() -> Unit raise {
   let t147 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x146 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x145 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x145), x146), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t148 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x144 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x143 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x143), x144), @ssreflect.clear_assumption("b")), @ssreflect.case), t147), @ssreflect.done_tac)])
-  andbc_c.set(@sections.section_proof(@list.List(["b", "c"]), @parser.parse_term("(b /\\ c) = (c /\\ b)"), t148))
+  andbc_c.set(@sections.section_proof(@list.List(["b", "c"]), @term_syntax.parse_term("((b : Bool) && (c : Bool)) == (c && b)"), t148))
 }
 
 ///|
@@ -882,7 +882,7 @@ pub fn andbc() -> @kernel.Thm {
 fn step_58() -> Unit raise {
   let t153 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x152 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x151 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x151), x152), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t154 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x150 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x149 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x149), x150), @ssreflect.clear_assumption("b")), @ssreflect.case), t153), @ssreflect.done_tac)])
-  andba_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("b /\\ (c /\\ p) <=> (b /\\ c) /\\ p"), t154))
+  andba_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) && (c : Bool) && (p : Bool)) == ((b && c) && p)"), t154))
 }
 
 ///|
@@ -899,7 +899,7 @@ pub fn andba() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   let t159 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x158 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x157 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x157), x158), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t160 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x156 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x155 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x155), x156), @ssreflect.clear_assumption("b")), @ssreflect.case), t159), @ssreflect.done_tac)])
-  andbca_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("b /\\ (c /\\ p) <=> c /\\ (b /\\ p)"), t160))
+  andbca_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) && (c : Bool) && (p : Bool)) == (c && b && p)"), t160))
 }
 
 ///|
@@ -916,7 +916,7 @@ pub fn andbca() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   let t165 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x164 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x163 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x163), x164), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t166 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x162 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x161 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x161), x162), @ssreflect.clear_assumption("b")), @ssreflect.case), t165), @ssreflect.done_tac)])
-  andbac_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("(b /\\ c) /\\ p <=> (b /\\ p) /\\ c"), t166))
+  andbac_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("(((b : Bool) && (c : Bool)) && (p : Bool)) == ((b && p) && c)"), t166))
 }
 
 ///|
@@ -931,7 +931,7 @@ pub fn andbac() -> @kernel.Thm {
 ///|
 /// orTb
 fn step_61() -> Unit raise {
-  ortb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("T \\/ b <=> T"), @list.List([@ssreflect.done_tac])))
+  ortb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(true || (b : Bool)) == true"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -946,7 +946,7 @@ pub fn ortb() -> @kernel.Thm {
 ///|
 /// orFb
 fn step_62() -> Unit raise {
-  orfb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("F \\/ b <=> b"), @list.List([@ssreflect.done_tac])))
+  orfb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(false || (b : Bool)) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -961,7 +961,7 @@ pub fn orfb() -> @kernel.Thm {
 ///|
 /// orbT
 fn step_63() -> Unit raise {
-  orbt_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b \\/ T <=> T"), @list.List([@ssreflect.done_tac])))
+  orbt_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) || true) == true"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -976,7 +976,7 @@ pub fn orbt() -> @kernel.Thm {
 ///|
 /// orbF
 fn step_64() -> Unit raise {
-  orbf_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b \\/ F <=> b"), @list.List([@ssreflect.done_tac])))
+  orbf_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) || false) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -991,7 +991,7 @@ pub fn orbf() -> @kernel.Thm {
 ///|
 /// orbb
 fn step_65() -> Unit raise {
-  orbb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b \\/ b <=> b"), @list.List([@ssreflect.done_tac])))
+  orbb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) || b) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -1008,7 +1008,7 @@ pub fn orbb() -> @kernel.Thm {
 fn step_66() -> Unit raise {
   let t171 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x170 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x169 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x169), x170), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t172 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x168 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x167 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x167), x168), @ssreflect.clear_assumption("b")), @ssreflect.case), t171), @ssreflect.done_tac)])
-  orbc_c.set(@sections.section_proof(@list.List(["b", "c"]), @parser.parse_term("b \\/ c <=> c \\/ b"), t172))
+  orbc_c.set(@sections.section_proof(@list.List(["b", "c"]), @term_syntax.parse_term("((b : Bool) || (c : Bool)) == (c || b)"), t172))
 }
 
 ///|
@@ -1025,7 +1025,7 @@ pub fn orbc() -> @kernel.Thm {
 fn step_67() -> Unit raise {
   let t177 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x176 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x175 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x175), x176), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t178 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x174 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x173 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x173), x174), @ssreflect.clear_assumption("b")), @ssreflect.case), t177), @ssreflect.done_tac)])
-  orba_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("b \\/ (c \\/ p) <=> (b \\/ c) \\/ p"), t178))
+  orba_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) || (c : Bool) || (p : Bool)) == ((b || c) || p)"), t178))
 }
 
 ///|
@@ -1042,7 +1042,7 @@ pub fn orba() -> @kernel.Thm {
 fn step_68() -> Unit raise {
   let t183 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x182 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x181 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x181), x182), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t184 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x180 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x179 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x179), x180), @ssreflect.clear_assumption("b")), @ssreflect.case), t183), @ssreflect.done_tac)])
-  orbca_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("b \\/ (c \\/ p) <=> c \\/ (b \\/ p)"), t184))
+  orbca_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) || (c : Bool) || (p : Bool)) == (c || b || p)"), t184))
 }
 
 ///|
@@ -1059,7 +1059,7 @@ pub fn orbca() -> @kernel.Thm {
 fn step_69() -> Unit raise {
   let t189 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x188 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x187 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x187), x188), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t190 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x186 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x185 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x185), x186), @ssreflect.clear_assumption("b")), @ssreflect.case), t189), @ssreflect.done_tac)])
-  orbac_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("(b \\/ c) \\/ p <=> (b \\/ p) \\/ c"), t190))
+  orbac_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("(((b : Bool) || (c : Bool)) || (p : Bool)) == ((b || p) || c)"), t190))
 }
 
 ///|
@@ -1075,7 +1075,7 @@ pub fn orbac() -> @kernel.Thm {
 /// andbN
 fn step_70() -> Unit raise {
   let t193 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x191 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x191), x192), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  andbn_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b /\\ ~b <=> F"), t193))
+  andbn_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) && !b) == false"), t193))
 }
 
 ///|
@@ -1091,7 +1091,7 @@ pub fn andbn() -> @kernel.Thm {
 /// andNb
 fn step_71() -> Unit raise {
   let t196 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x195 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x194 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x194), x195), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  andnb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("~b /\\ b <=> F"), t196))
+  andnb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(!(b : Bool) && b) == false"), t196))
 }
 
 ///|
@@ -1107,7 +1107,7 @@ pub fn andnb() -> @kernel.Thm {
 /// orbN
 fn step_72() -> Unit raise {
   let t199 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x197 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x197), x198), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  orbn_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b \\/ ~b"), t199))
+  orbn_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) || !b"), t199))
 }
 
 ///|
@@ -1123,7 +1123,7 @@ pub fn orbn() -> @kernel.Thm {
 /// orNb
 fn step_73() -> Unit raise {
   let t202 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x201 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x200 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x200), x201), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  ornb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("~b \\/ b"), t202))
+  ornb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("!(b : Bool) || b"), t202))
 }
 
 ///|
@@ -1140,7 +1140,7 @@ pub fn ornb() -> @kernel.Thm {
 fn step_74() -> Unit raise {
   let t207 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x206 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x205 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x205), x206), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t208 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x204 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x203 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x203), x204), @ssreflect.clear_assumption("b")), @ssreflect.case), t207), @ssreflect.done_tac)])
-  andb_orl_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("(b \\/ c) /\\ p <=> (b /\\ p) \\/ (c /\\ p)"), t208))
+  andb_orl_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("(((b : Bool) || (c : Bool)) && (p : Bool)) == (b && p || c && p)"), t208))
 }
 
 ///|
@@ -1157,7 +1157,7 @@ pub fn andb_orl() -> @kernel.Thm {
 fn step_75() -> Unit raise {
   let t213 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x212 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x211 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x211), x212), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t214 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x210 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x209 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x209), x210), @ssreflect.clear_assumption("b")), @ssreflect.case), t213), @ssreflect.done_tac)])
-  andb_orr_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("b /\\ (c \\/ p) <=> (b /\\ c) \\/ (b /\\ p)"), t214))
+  andb_orr_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) && ((c : Bool) || (p : Bool))) == (b && c || b && p)"), t214))
 }
 
 ///|
@@ -1174,7 +1174,7 @@ pub fn andb_orr() -> @kernel.Thm {
 fn step_76() -> Unit raise {
   let t219 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x218 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x217 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x217), x218), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t220 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x216 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x215 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x215), x216), @ssreflect.clear_assumption("b")), @ssreflect.case), t219), @ssreflect.done_tac)])
-  orb_andl_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("(b /\\ c) \\/ p <=> (b \\/ p) /\\ (c \\/ p)"), t220))
+  orb_andl_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) && (c : Bool) || (p : Bool)) == ((b || p) && (c || p))"), t220))
 }
 
 ///|
@@ -1191,7 +1191,7 @@ pub fn orb_andl() -> @kernel.Thm {
 fn step_77() -> Unit raise {
   let t225 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x224 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("c", @list.List([])), (x223 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x223), x224), @ssreflect.clear_assumption("c")), @ssreflect.case), @ssreflect.simp_tac)
   let t226 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x222 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x221 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x221), x222), @ssreflect.clear_assumption("b")), @ssreflect.case), t225), @ssreflect.done_tac)])
-  orb_andr_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @parser.parse_term("b \\/ (c /\\ p) <=> (b \\/ c) /\\ (b \\/ p)"), t226))
+  orb_andr_c.set(@sections.section_proof(@list.List(["b", "c", "p"]), @term_syntax.parse_term("((b : Bool) || (c : Bool) && (p : Bool)) == ((b || c) && (b || p))"), t226))
 }
 
 ///|
@@ -1208,7 +1208,7 @@ pub fn orb_andr() -> @kernel.Thm {
 fn step_78() -> Unit raise {
   let t231 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x230 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x229 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x229), x230), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac)
   let t232 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x228 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x227 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x227), x228), @ssreflect.clear_assumption("a")), @ssreflect.case), t231), @ssreflect.done_tac)])
-  andb_idl_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(b ==> a) ==> (a /\\ b <=> b)"), t232))
+  andb_idl_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((b : Bool) → (a : Bool)) → (a && b) == b"), t232))
 }
 
 ///|
@@ -1225,7 +1225,7 @@ pub fn andb_idl() -> @kernel.Thm {
 fn step_79() -> Unit raise {
   let t237 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x236 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x235 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x235), x236), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac)
   let t238 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x234 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x233 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x233), x234), @ssreflect.clear_assumption("a")), @ssreflect.case), t237), @ssreflect.done_tac)])
-  andb_idr_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(a ==> b) ==> (a /\\ b <=> a)"), t238))
+  andb_idr_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) → (b : Bool)) → (a && b) == a"), t238))
 }
 
 ///|
@@ -1241,7 +1241,7 @@ pub fn andb_idr() -> @kernel.Thm {
 /// andb_id2l
 fn step_80() -> Unit raise {
   let t241 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x240 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x239 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x239), x240), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  andb_id2l_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)"), t241))
+  andb_id2l_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("((a : Bool) → (b : Bool) == (c : Bool)) → (a && b) == (a && c)"), t241))
 }
 
 ///|
@@ -1258,7 +1258,7 @@ pub fn andb_id2l() -> @kernel.Thm {
 fn step_81() -> Unit raise {
   let t246 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x245 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x244 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x244), x245), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac)
   let t247 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x243 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x242 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x242), x243), @ssreflect.clear_assumption("a")), @ssreflect.case), t246), @ssreflect.done_tac)])
-  andb_id2r_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(b ==> (a <=> c)) ==> (a /\\ b <=> c /\\ b)"), t247))
+  andb_id2r_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("((b : Bool) → (a : Bool) == (c : Bool)) → (a && b) == (c && b)"), t247))
 }
 
 ///|
@@ -1274,7 +1274,7 @@ pub fn andb_id2r() -> @kernel.Thm {
 /// orb_idl
 fn step_82() -> Unit raise {
   let t250 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x249 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x248 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x248), x249), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  orb_idl_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(a ==> b) ==> (a \\/ b <=> b)"), t250))
+  orb_idl_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) → (b : Bool)) → (a || b) == b"), t250))
 }
 
 ///|
@@ -1290,7 +1290,7 @@ pub fn orb_idl() -> @kernel.Thm {
 /// orbb_idr
 fn step_83() -> Unit raise {
   let t253 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x252 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x251 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x251), x252), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  orbb_idr_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(b ==> a) ==> (a \\/ b <=> a)"), t253))
+  orbb_idr_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((b : Bool) → (a : Bool)) → (a || b) == a"), t253))
 }
 
 ///|
@@ -1306,7 +1306,7 @@ pub fn orbb_idr() -> @kernel.Thm {
 /// orb_id2l
 fn step_84() -> Unit raise {
   let t256 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x255 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x254 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x254), x255), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  orb_id2l_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(~ a ==> (b <=> c)) ==> (a \\/ b <=> a \\/ c)"), t256))
+  orb_id2l_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("(!(a : Bool) → (b : Bool) == (c : Bool)) → (a || b) == (a || c)"), t256))
 }
 
 ///|
@@ -1323,7 +1323,7 @@ pub fn orb_id2l() -> @kernel.Thm {
 fn step_85() -> Unit raise {
   let t261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x260 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("b", @list.List([])), (x259 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x259), x260), @ssreflect.clear_assumption("b")), @ssreflect.case), @ssreflect.simp_tac)
   let t262 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x258 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x257 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x257), x258), @ssreflect.clear_assumption("a")), @ssreflect.case), t261), @ssreflect.done_tac)])
-  orb_id2r_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(~ b ==> (a <=> c)) ==> (a \\/ b <=> c \\/ b)"), t262))
+  orb_id2r_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("(!(b : Bool) → (a : Bool) == (c : Bool)) → (a || b) == (c || b)"), t262))
 }
 
 ///|
@@ -1339,7 +1339,7 @@ pub fn orb_id2r() -> @kernel.Thm {
 /// negb_and
 fn step_86() -> Unit raise {
   let t265 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x264 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x263 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x263), x264), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  negb_and_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("~ (a /\\ b) <=> ~ a \\/ ~ b"), t265))
+  negb_and_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("!((a : Bool) && (b : Bool)) == (!a || !b)"), t265))
 }
 
 ///|
@@ -1355,7 +1355,7 @@ pub fn negb_and() -> @kernel.Thm {
 /// negb_or
 fn step_87() -> Unit raise {
   let t268 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x267 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x266 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x266), x267), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  negb_or_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("~ (a \\/ b) <=> ~ a /\\ ~ b"), t268))
+  negb_or_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("!((a : Bool) || (b : Bool)) == (!a && !b)"), t268))
 }
 
 ///|
@@ -1371,7 +1371,7 @@ pub fn negb_or() -> @kernel.Thm {
 /// andbK
 fn step_88() -> Unit raise {
   let t271 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x270 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x269 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x269), x270), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  andbk_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("((a /\\ b) \\/ a) = a"), t271))
+  andbk_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) && (b : Bool) || a) == a"), t271))
 }
 
 ///|
@@ -1387,7 +1387,7 @@ pub fn andbk() -> @kernel.Thm {
 /// andKb
 fn step_89() -> Unit raise {
   let t274 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x273 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x272 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x272), x273), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  andkb_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("a \\/ b /\\ a <=> a"), t274))
+  andkb_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) || (b : Bool) && a) == a"), t274))
 }
 
 ///|
@@ -1403,7 +1403,7 @@ pub fn andkb() -> @kernel.Thm {
 /// orbK
 fn step_90() -> Unit raise {
   let t277 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x276 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x275 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x275), x276), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  orbk_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(a \\/ b) /\\ a <=> a"), t277))
+  orbk_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("(((a : Bool) || (b : Bool)) && a) == a"), t277))
 }
 
 ///|
@@ -1419,7 +1419,7 @@ pub fn orbk() -> @kernel.Thm {
 /// orKb
 fn step_91() -> Unit raise {
   let t280 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x279 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x278 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x278), x279), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  orkb_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("a /\\ (b \\/ a) <=> a"), t280))
+  orkb_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) && ((b : Bool) || a)) == a"), t280))
 }
 
 ///|
@@ -1434,7 +1434,7 @@ pub fn orkb() -> @kernel.Thm {
 ///|
 /// implybT
 fn step_92() -> Unit raise {
-  implybt_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b ==> T"), @list.List([@ssreflect.done_tac])))
+  implybt_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) → true"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -1449,7 +1449,7 @@ pub fn implybt() -> @kernel.Thm {
 ///|
 /// implybF
 fn step_93() -> Unit raise {
-  implybf_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(b ==> F) <=> ~ b"), @list.List([@ssreflect.done_tac])))
+  implybf_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("((b : Bool) → false) == !b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -1464,7 +1464,7 @@ pub fn implybf() -> @kernel.Thm {
 ///|
 /// implyFb
 fn step_94() -> Unit raise {
-  implyfb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("F ==> b"), @list.List([@ssreflect.done_tac])))
+  implyfb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("false → (b : Bool)"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -1479,7 +1479,7 @@ pub fn implyfb() -> @kernel.Thm {
 ///|
 /// implyTb
 fn step_95() -> Unit raise {
-  implytb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("(T ==> b) <=> b"), @list.List([@ssreflect.done_tac])))
+  implytb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(true → (b : Bool)) == b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -1494,7 +1494,7 @@ pub fn implytb() -> @kernel.Thm {
 ///|
 /// implybb
 fn step_96() -> Unit raise {
-  implybb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b ==> b"), @list.List([@ssreflect.done_tac])))
+  implybb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) → b"), @list.List([@ssreflect.done_tac])))
 }
 
 ///|
@@ -1510,7 +1510,7 @@ pub fn implybb() -> @kernel.Thm {
 /// negb_imply
 fn step_97() -> Unit raise {
   let t283 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x282 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x281 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x281), x282), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  negb_imply_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("~ (a ==> b) <=> a /\\ ~ b"), t283))
+  negb_imply_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("!((a : Bool) → (b : Bool)) == (a && !b)"), t283))
 }
 
 ///|
@@ -1526,7 +1526,7 @@ pub fn negb_imply() -> @kernel.Thm {
 /// implybE
 fn step_98() -> Unit raise {
   let t286 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x285 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x284 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x284), x285), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implybe_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(a ==> b) <=> ~ a \\/ b"), t286))
+  implybe_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) → (b : Bool)) == (!a || b)"), t286))
 }
 
 ///|
@@ -1542,7 +1542,7 @@ pub fn implybe() -> @kernel.Thm {
 /// implyNb
 fn step_99() -> Unit raise {
   let t289 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x288 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x287 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x287), x288), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implynb_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(~ a ==> b) <=> a \\/ b"), t289))
+  implynb_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("(!(a : Bool) → (b : Bool)) == (a || b)"), t289))
 }
 
 ///|
@@ -1558,7 +1558,7 @@ pub fn implynb() -> @kernel.Thm {
 /// implybN
 fn step_100() -> Unit raise {
   let t292 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x291 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x290 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x290), x291), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implybn_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(a ==> ~ b) <=> (b ==> ~ a)"), t292))
+  implybn_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((a : Bool) → !(b : Bool)) == (b → !a)"), t292))
 }
 
 ///|
@@ -1574,7 +1574,7 @@ pub fn implybn() -> @kernel.Thm {
 /// implybNN
 fn step_101() -> Unit raise {
   let t295 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x294 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x293 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x293), x294), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implybnn_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(~ a ==> ~ b) <=> b ==> a"), t295))
+  implybnn_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("(!(a : Bool) → !(b : Bool)) == (b → a)"), t295))
 }
 
 ///|
@@ -1590,7 +1590,7 @@ pub fn implybnn() -> @kernel.Thm {
 /// implyb_idl
 fn step_102() -> Unit raise {
   let t298 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x297 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x296 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x296), x297), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implyb_idl_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(~ a ==> b) ==> ((a ==> b) <=> b)"), t298))
+  implyb_idl_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("(!(a : Bool) → (b : Bool)) → (a → b) == b"), t298))
 }
 
 ///|
@@ -1606,7 +1606,7 @@ pub fn implyb_idl() -> @kernel.Thm {
 /// implyb_idr
 fn step_103() -> Unit raise {
   let t301 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x300 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x299 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x299), x300), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implyb_idr_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("(b ==> ~ a) ==> ((a ==> b) <=> ~ a)"), t301))
+  implyb_idr_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("((b : Bool) → !(a : Bool)) → (a → b) == !a"), t301))
 }
 
 ///|
@@ -1622,7 +1622,7 @@ pub fn implyb_idr() -> @kernel.Thm {
 /// implyb_id2l
 fn step_104() -> Unit raise {
   let t304 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x303 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("a", @list.List([])), (x302 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x302), x303), @ssreflect.clear_assumption("a")), @ssreflect.case), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  implyb_id2l_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))"), t304))
+  implyb_id2l_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("((a : Bool) → (b : Bool) == (c : Bool)) → (a → b) == (a → c)"), t304))
 }
 
 ///|
@@ -1637,7 +1637,7 @@ pub fn implyb_id2l() -> @kernel.Thm {
 ///|
 /// XOR_DEF
 fn step_105() -> Unit raise {
-  xor_def_c.set(@pair.new_definition(@parser.parse_term("XOR p q = if p then ~q else q")))
+  xor_def_c.set(@pair.new_definition(@term_syntax.parse_term("(XOR : (Bool, Bool) -> Bool)((p : Bool), (q : Bool)) == (if p { !q } else { q })")))
 }
 
 ///|
@@ -1652,7 +1652,7 @@ pub fn xor_def() -> @kernel.Thm {
 ///|
 /// Formal_ineqs/lib/ssrbool.hl:621
 fn step_106() -> Unit raise {
-  @preterm.overload_interface("+", @parser.parse_term("XOR"))
+  @preterm.overload_interface("+", @term_syntax.parse_term("XOR"))
 }
 
 ///|
@@ -1664,7 +1664,7 @@ fn step_107() -> Unit raise {
     }
   })
   let t311 = @list.List([@tactics.then_tac((x310 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t309, x310), @ssreflect.done_tac)])
-  addfb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("F + b <=> b"), t311))
+  addfb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("false + (b : Bool) == b"), t311))
 }
 
 ///|
@@ -1686,7 +1686,7 @@ fn step_108() -> Unit raise {
     }
   })
   let t321 = @list.List([@tactics.then_tac(@tactics.then_tac((x317 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t316, x317), t320), @ssreflect.done_tac)])
-  addbf_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b + F <=> b"), t321))
+  addbf_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) + false == b"), t321))
 }
 
 ///|
@@ -1708,7 +1708,7 @@ fn step_109() -> Unit raise {
     }
   })
   let t331 = @list.List([@tactics.then_tac(@tactics.then_tac((x327 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t326, x327), t330), @ssreflect.done_tac)])
-  addbb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b + b <=> F"), t331))
+  addbb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) + b == false"), t331))
 }
 
 ///|
@@ -1731,7 +1731,7 @@ fn step_110() -> Unit raise {
     }
   })
   let t344 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x337 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t336, x337)), t340), t343), @ssreflect.done_tac)])
-  addbc_c.set(@sections.section_proof(@list.List(["b", "c"]), @parser.parse_term("b + c <=> c + b"), t344))
+  addbc_c.set(@sections.section_proof(@list.List(["b", "c"]), @term_syntax.parse_term("(b : Bool) + (c : Bool) == c + b"), t344))
 }
 
 ///|
@@ -1755,7 +1755,7 @@ fn step_111() -> Unit raise {
     }
   })
   let t360 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x350 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t349, x350)), t353), t356), t359)])
-  addba_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("a + (b + c) <=> (a + b) + c"), t360))
+  addba_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("(a : Bool) + ((b : Bool) + (c : Bool)) == a + b + c"), t360))
 }
 
 ///|
@@ -1779,7 +1779,7 @@ fn step_112() -> Unit raise {
     }
   })
   let t376 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x366 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t365, x366)), t369), t372), t375)])
-  addbca_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(a + b) + c <=> (a + c) + b"), t376))
+  addbca_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("(a : Bool) + (b : Bool) + (c : Bool) == a + c + b"), t376))
 }
 
 ///|
@@ -1803,7 +1803,7 @@ fn step_113() -> Unit raise {
     }
   })
   let t392 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x382 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t381, x382)), t385), t388), t391)])
-  addbac_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("a + (b + c) <=> b + (a + c)"), t392))
+  addbac_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("(a : Bool) + ((b : Bool) + (c : Bool)) == b + (a + c)"), t392))
 }
 
 ///|
@@ -1827,7 +1827,7 @@ fn step_114() -> Unit raise {
     }
   })
   let t408 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x398 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t397, x398)), t401), t404), t407)])
-  andb_addl_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("(a + b) /\\ c <=> (a /\\ c) + (b /\\ c)"), t408))
+  andb_addl_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("((a : Bool) + (b : Bool) && (c : Bool)) == (a && c) + (b && c)"), t408))
 }
 
 ///|
@@ -1851,7 +1851,7 @@ fn step_115() -> Unit raise {
     }
   })
   let t424 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x414 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t413, x414)), t417), t420), t423)])
-  andb_addr_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @parser.parse_term("a /\\ (b + c) <=> (a /\\ b) + (a /\\ c)"), t424))
+  andb_addr_c.set(@sections.section_proof(@list.List(["a", "b", "c"]), @term_syntax.parse_term("((a : Bool) && (b : Bool) + (c : Bool)) == (a && b) + (a && c)"), t424))
 }
 
 ///|
@@ -1874,7 +1874,7 @@ fn step_116() -> Unit raise {
     }
   })
   let t437 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x430 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t429, x430)), t433), t436)])
-  addkb_c.set(@sections.section_proof(@list.List(["x", "y"]), @parser.parse_term("x + (x + y) <=> y"), t437))
+  addkb_c.set(@sections.section_proof(@list.List(["x", "y"]), @term_syntax.parse_term("(x : Bool) + (x + (y : Bool)) == y"), t437))
 }
 
 ///|
@@ -1897,7 +1897,7 @@ fn step_117() -> Unit raise {
     }
   })
   let t450 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x443 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t442, x443)), t446), t449)])
-  addbk_c.set(@sections.section_proof(@list.List(["x", "y"]), @parser.parse_term("(y + x) + x <=> y"), t450))
+  addbk_c.set(@sections.section_proof(@list.List(["x", "y"]), @term_syntax.parse_term("(y : Bool) + (x : Bool) + x == y"), t450))
 }
 
 ///|
@@ -1921,7 +1921,7 @@ fn step_118() -> Unit raise {
     }
   })
   let t466 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x456 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t455, x456)), t459), t462), t465)])
-  addib_c.set(@sections.section_proof(@list.List(["x", "y1", "y2"]), @parser.parse_term("(y1 + x <=> y2 + x) ==> (y1 = y2)"), t466))
+  addib_c.set(@sections.section_proof(@list.List(["x", "y1", "y2"]), @term_syntax.parse_term("(y1 : Bool) + (x : Bool) == (y2 : Bool) + x → y1 == y2"), t466))
 }
 
 ///|
@@ -1945,7 +1945,7 @@ fn step_119() -> Unit raise {
     }
   })
   let t482 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x472 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t471, x472)), t475), t478), t481)])
-  addbi_c.set(@sections.section_proof(@list.List(["x", "y1", "y2"]), @parser.parse_term("(x + y1 <=> x + y2) ==> (y1 = y2)"), t482))
+  addbi_c.set(@sections.section_proof(@list.List(["x", "y1", "y2"]), @term_syntax.parse_term("(x : Bool) + (y1 : Bool) == x + (y2 : Bool) → y1 == y2"), t482))
 }
 
 ///|
@@ -1967,7 +1967,7 @@ fn step_120() -> Unit raise {
     }
   })
   let t490 = @list.List([@tactics.then_tac(@tactics.then_tac((x488 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t487, x488), t489), @ssreflect.done_tac)])
-  addtb_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("T + b <=> ~b"), t490))
+  addtb_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("true + (b : Bool) == !b"), t490))
 }
 
 ///|
@@ -1989,7 +1989,7 @@ fn step_121() -> Unit raise {
     }
   })
   let t500 = @list.List([@tactics.then_tac(@tactics.then_tac((x496 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t495, x496), t499), @ssreflect.done_tac)])
-  addbt_c.set(@sections.section_proof(@list.List(["b"]), @parser.parse_term("b + T <=> ~ b"), t500))
+  addbt_c.set(@sections.section_proof(@list.List(["b"]), @term_syntax.parse_term("(b : Bool) + true == !b"), t500))
 }
 
 ///|
@@ -2012,7 +2012,7 @@ fn step_122() -> Unit raise {
     }
   })
   let t513 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x506 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t505, x506)), t509), t512)])
-  addbn_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("a + ~ b <=> ~ (a + b)"), t513))
+  addbn_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("(a : Bool) + !(b : Bool) == !(a + b)"), t513))
 }
 
 ///|
@@ -2035,7 +2035,7 @@ fn step_123() -> Unit raise {
     }
   })
   let t526 = @list.List([@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x519 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("XOR_DEF", @list.List([xor_def()])), t518, x519)), t522), t525)])
-  addnb_c.set(@sections.section_proof(@list.List(["a", "b"]), @parser.parse_term("~ a + b <=> ~ (a + b)"), t526))
+  addnb_c.set(@sections.section_proof(@list.List(["a", "b"]), @term_syntax.parse_term("!(a : Bool) + (b : Bool) == !(a + b)"), t526))
 }
 
 ///|
@@ -2050,7 +2050,7 @@ pub fn addnb() -> @kernel.Thm {
 ///|
 /// subpred
 fn step_124() -> Unit raise {
-  subpred_c.set(@pair.new_definition(@parser.parse_term("subpred p1 p2 <=> (forall x. p1 x ==> p2 x)")))
+  subpred_c.set(@pair.new_definition(@term_syntax.parse_term("(subpred : ((_) -> Bool, (_) -> Bool) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == (∀ x : _, p1(x) → p2(x))")))
 }
 
 ///|
@@ -2065,7 +2065,7 @@ pub fn subpred() -> @kernel.Thm {
 ///|
 /// subrel
 fn step_125() -> Unit raise {
-  subrel_c.set(@pair.new_definition(@parser.parse_term("subrel r1 r2 <=> (forall x y. r1 x y ==> r2 x y)")))
+  subrel_c.set(@pair.new_definition(@term_syntax.parse_term("(subrel : ((_, _) -> Bool, (_, _) -> Bool) -> Bool)((r1 : (_, _) -> Bool), (r2 : (_, _) -> Bool)) == (∀ x : _, ∀ y : _, r1(x, y) → r2(x, y))")))
 }
 
 ///|
@@ -2080,7 +2080,7 @@ pub fn subrel() -> @kernel.Thm {
 ///|
 /// pred0
 fn step_126() -> Unit raise {
-  pred0_c.set(@pair.new_definition(@parser.parse_term("pred0 = (\\x. F)")))
+  pred0_c.set(@pair.new_definition(@term_syntax.parse_term("(pred0 : (_) -> Bool) == ((x : _) => false)")))
 }
 
 ///|
@@ -2095,7 +2095,7 @@ pub fn pred0() -> @kernel.Thm {
 ///|
 /// predT
 fn step_127() -> Unit raise {
-  predt_c.set(@pair.new_definition(@parser.parse_term("predT = (\\x. T)")))
+  predt_c.set(@pair.new_definition(@term_syntax.parse_term("(predT : (_) -> Bool) == ((x : _) => true)")))
 }
 
 ///|
@@ -2110,7 +2110,7 @@ pub fn predt() -> @kernel.Thm {
 ///|
 /// predI
 fn step_128() -> Unit raise {
-  predi_c.set(@pair.new_definition(@parser.parse_term("predI p1 p2 = (\\x. p1 x /\\ p2 x)")))
+  predi_c.set(@pair.new_definition(@term_syntax.parse_term("(predI : ((_) -> Bool, (_) -> Bool, _) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == ((x : _) => p1(x) && p2(x))")))
 }
 
 ///|
@@ -2125,7 +2125,7 @@ pub fn predi() -> @kernel.Thm {
 ///|
 /// predU
 fn step_129() -> Unit raise {
-  predu_c.set(@pair.new_definition(@parser.parse_term("predU p1 p2 = (\\x. p1 x \\/ p2 x)")))
+  predu_c.set(@pair.new_definition(@term_syntax.parse_term("(predU : ((_) -> Bool, (_) -> Bool, _) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == ((x : _) => p1(x) || p2(x))")))
 }
 
 ///|
@@ -2140,7 +2140,7 @@ pub fn predu() -> @kernel.Thm {
 ///|
 /// predC
 fn step_130() -> Unit raise {
-  predc_c.set(@pair.new_definition(@parser.parse_term("predC p = (\\x. ~p x)")))
+  predc_c.set(@pair.new_definition(@term_syntax.parse_term("(predC : ((_) -> Bool, _) -> Bool)((p : (_) -> Bool)) == ((x : _) => !p(x))")))
 }
 
 ///|
@@ -2155,7 +2155,7 @@ pub fn predc() -> @kernel.Thm {
 ///|
 /// predD
 fn step_131() -> Unit raise {
-  predd_c.set(@pair.new_definition(@parser.parse_term("predD p1 p2 = (\\x. ~p2 x /\\ p1 x)")))
+  predd_c.set(@pair.new_definition(@term_syntax.parse_term("(predD : ((_) -> Bool, (_) -> Bool, _) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == ((x : _) => !p2(x) && p1(x))")))
 }
 
 ///|
@@ -2170,7 +2170,7 @@ pub fn predd() -> @kernel.Thm {
 ///|
 /// preim
 fn step_132() -> Unit raise {
-  preim_c.set(@pair.new_definition(@parser.parse_term("preim f (d:A->bool) = (\\x. d (f x))")))
+  preim_c.set(@pair.new_definition(@term_syntax.parse_term("(preim : ((_) -> A, (A) -> Bool, _) -> Bool)((f : (_) -> A), (d : (A) -> Bool)) == ((x : _) => d(f(x)))")))
 }
 
 ///|
@@ -2185,7 +2185,7 @@ pub fn preim() -> @kernel.Thm {
 ///|
 /// relU
 fn step_133() -> Unit raise {
-  relu_c.set(@pair.new_definition(@parser.parse_term("relU r1 r2 = (\\x y. r1 x y \\/ r2 x y)")))
+  relu_c.set(@pair.new_definition(@term_syntax.parse_term("(relU : ((_, _) -> Bool, (_, _) -> Bool, _, _) -> Bool)((r1 : (_, _) -> Bool), (r2 : (_, _) -> Bool)) == ((x : _) => (y : _) => r1(x, y) || r2(x, y))")))
 }
 
 ///|
@@ -2211,7 +2211,7 @@ fn step_134() -> Unit raise {
     }
   })
   let t539 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x532 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("relU", @list.List([relu()])), t531, x532), (x538 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subrel", @list.List([subrel()])), t537, x538)), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  subrelul_c.set(@sections.section_proof(@list.List(["r1", "r2"]), @parser.parse_term("subrel r1 (relU r1 r2)"), t539))
+  subrelul_c.set(@sections.section_proof(@list.List(["r1", "r2"]), @term_syntax.parse_term("subrel((r1 : (_, _) -> Bool), relU(r1, (r2 : (_, _) -> Bool)))"), t539))
 }
 
 ///|
@@ -2237,7 +2237,7 @@ fn step_135() -> Unit raise {
     }
   })
   let t552 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x545 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("relU", @list.List([relu()])), t544, x545), (x551 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("subrel", @list.List([subrel()])), t550, x551)), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  subrelur_c.set(@sections.section_proof(@list.List(["r1", "r2"]), @parser.parse_term("subrel r2 (relU r1 r2)"), t552))
+  subrelur_c.set(@sections.section_proof(@list.List(["r1", "r2"]), @term_syntax.parse_term("subrel((r2 : (_, _) -> Bool), relU((r1 : (_, _) -> Bool), r2))"), t552))
 }
 
 ///|
