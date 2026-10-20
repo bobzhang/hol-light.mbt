@@ -49742,92 +49742,92 @@ test "Examples/sylvester_gallai matches Examples/sylvester_gallai.ml" {
       #|0..0..7..16..37..93..174..solved at 182
       #|0..0..8..16..36..93..176..310..576..908..solved at 997
       #|Examples/sylvester_gallai quotations (86):
-      #|  &1 - x < &1 <=> &0 < x
-      #|  &0 * &0 + (u * p) * (u * p) < p * p <=> &0 < (&1 - u * u) * p * p
-      #|  b:real / c
-      #|  u * c < (&2 - u) * p <=> u * (p + c) < &2 * p
-      #|  (&0 - u * c) * (&0 - u * c) + ((&1 - u) * p) * ((&1 - u) * p) < p * p <=>\n      u * u * c pow 2 < u * (&2 - u) * p pow 2
-      #|  p pow 2 / (p pow 2 + c pow 2):real
-      #|  b = &0
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  &0 < c pow 2 /\\ &0 < p pow 2
-      #|  (a - b) dot (a - b) = a dot a + b dot b - &2 * a dot b
-      #|  b - (p + u % (c - p)):real^2 = (b - u % c) - (&1 - u) % p
-      #|  &0 = p + u * (&0 - p) <=> p = &0 \\/ u = &1
-      #|  &0
-      #|  (pp:real^2)$2
-      #|  ?p. ~(p = &0) /\\ pp:real^2 = p % basis 2
-      #|  abs c = abs b + abs(b - c)\n    ==> &0 < c ==> &0 <= b /\\ (b < c \\/ b = c)
-      #|  b:real = bc * c
-      #|  bc:real
-      #|  bb:real^2
-      #|  pp:real^2
-      #|  c = &0
-      #|  c:real
-      #|  c:real^2
-      #|  q:real^2
-      #|  forall p q b c:real^2.\n        between b (q,c) /\\ ~(p IN affine hull {q,c}) /\\\n        orthogonal (p - q) (c - q) /\\ ~(c = b) /\\ ~(c = q)\n        ==> ~(b IN affine hull {p,c}) /\\\n            ?x. x IN affine hull {p,c} /\\ dist(b,x) < dist(p,q)
-      #|  abs v = &0
-      #|  v:real^N
-      #|  u:real^N
-      #|  v:real^N
-      #|  u:real^N
-      #|  forall q a b c:real^N.\n        collinear {q,a,b,c} /\\ between b (a,c)\n        ==> between b (q,a) \\/ between b (q,c)
-      #|  a \\/ b \\/ c \\/ d <=> (a \\/ b) \\/ c \\/ d
-      #|  collinear {a:real^N,b,c}
-      #|  forall q a b c:real^N.\n        collinear {q,a,b,c}\n        ==> between a (q,b) \\/ between a (q,c) \\/\n            between b (q,c) \\/ between b (q,a) \\/\n            between c (q,a) \\/ between c (q,b)
-      #|  rb < qp ==> cb <= rb ==> ~(qp <= cb)
-      #|  ~p ==> p ==> q
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  b:real^2
-      #|  affine hull {p:real^2,c}
-      #|  dist(closest_point (affine hull {p,c}) b:real^2,b)
-      #|  r:real^2
-      #|  p:real^2
-      #|  p:real^2
-      #|  ~((p:real^2) IN l)
-      #|  c:real^2
-      #|  b:real^2
-      #|  q:real^2
-      #|  p:real^2
-      #|  ~((p:real^2) IN l)
-      #|  ~(c:real^2 = q)
-      #|  b:real^2
-      #|  a:real^2
-      #|  c:real^2
-      #|  b:real^2
-      #|  a:real^2
-      #|  q:real^2
-      #|  (a:real^2) IN l /\\ (b:real^2) IN l
-      #|  ?c:real^2. c IN s /\\ ~(c = a) /\\ ~(c = b) /\\ collinear {a, b, c}
-      #|  b:real^2
-      #|  a:real^2
-      #|  (l:real^2->bool) IN L
-      #|  ?b c:real^2. b IN s /\\ c IN s /\\ b IN l /\\ c IN l /\\\n                 ~(b = c) /\\ between b (q,c)
-      #|  (q:real^2) IN l
-      #|  q = closest_point l p:real^2
-      #|  (l:real^2->bool) IN L
-      #|  affine(l:real^2->bool) /\\ ~(l = {})
-      #|  p:real^2
-      #|  l:real^2->bool
-      #|  (l:real^2->bool) IN L
-      #|  l:real^2->bool
-      #|  (l:real^2->bool) IN L
-      #|  closed(l:real^2->bool) /\\ ~(l = {})
-      #|  l:real^2->bool
-      #|  l:real^2->bool
-      #|  {x | x IN s /\\ P x} = {} <=> forall x. x IN s ==> ~P x
-      #|  (p ==> r) /\\ (q ==> r) ==> (~p ==> q) ==> r
-      #|  {f x y | x IN s /\\ y IN t x} = {} <=>\n    s = {} \\/ (forall x. x IN s ==> t x = {})
-      #|  { dist(closest_point l p,p) |\n      l IN L /\\ p IN {p:real^2 | p IN s /\\ &0 < dist(closest_point l p,p)}}
-      #|  L:(real^2->bool)->bool = {}
-      #|  L:(real^2->bool)->bool = {}
-      #|  {f x y | x IN s /\\ y IN s /\\ P x y} =\n      {f x y | x IN s /\\ y IN {y | y IN s /\\ P x y}}
-      #|  FINITE(L:(real^2->bool)->bool)
-      #|  L = {affine hull {a,b} | a IN s /\\ b IN s /\\ ~(a:real^2 = b)}
-      #|  ?a:real^2. s = {a}
-      #|  s:real^2->bool = {}
-      #|  forall s:real^2->bool.\n        FINITE s /\\\n        (forall a b. a IN s /\\ b IN s /\\ ~(a = b)\n               ==> ?c. c IN s /\\ ~(c = a) /\\ ~(c = b) /\\ collinear {a,b,c})\n        ==> collinear s
+      #|  (real_of_num(1) - (x : Real) < real_of_num(1)) == (real_of_num(0) < x)
+      #|  (real_of_num(0) * real_of_num(0) + (u : Real) * (p : Real) * (u * p) < p * p) == (real_of_num(0) < (real_of_num(1) - u * u) * (p * p))
+      #|  (b : Real) / (c : Real)
+      #|  ((u : Real) * (c : Real) < (real_of_num(2) - u) * (p : Real)) == (u * (p + c) < real_of_num(2) * p)
+      #|  ((real_of_num(0) - (u : Real) * (c : Real)) * (real_of_num(0) - u * c) + (real_of_num(1) - u) * (p : Real) * ((real_of_num(1) - u) * p) < p * p) == (u * (u * pow(c, 2)) < u * ((real_of_num(2) - u) * pow(p, 2)))
+      #|  pow((p : Real), 2) / (pow(p, 2) + pow((c : Real), 2))
+      #|  (b : Real) == real_of_num(0)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  real_of_num(0) < pow((c : Real), 2) && real_of_num(0) < pow((p : Real), 2)
+      #|  dot((a : Cart[Real, _]) - (b : Cart[Real, _]), a - b) == dot(a, a) + (dot(b, b) - real_of_num(2) * dot(a, b))
+      #|  (b : Cart[Real, Tybit0[Unit]]) - ((p : Cart[Real, Tybit0[Unit]]) + op_pct((u : Real), (c : Cart[Real, Tybit0[Unit]]) - p)) == b - op_pct(u, c) - op_pct(real_of_num(1) - u, p)
+      #|  (real_of_num(0) == (p : Real) + (u : Real) * (real_of_num(0) - p)) == (p == real_of_num(0) || u == real_of_num(1))
+      #|  real_of_num(0)
+      #|  op_dollar((pp : Cart[Real, Tybit0[Unit]]), 2)
+      #|  \226\136\131 p : Real, !(p == real_of_num(0)) && (pp : Cart[Real, Tybit0[Unit]]) == op_pct(p, basis(2))
+      #|  abs((c : Real)) == abs((b : Real)) + abs(b - c) \226\134\146 real_of_num(0) < c \226\134\146 real_of_num(0) <= b && (b < c || b == c)
+      #|  (b : Real) == (bc : Real) * (c : Real)
+      #|  (bc : Real)
+      #|  (bb : Cart[Real, Tybit0[Unit]])
+      #|  (pp : Cart[Real, Tybit0[Unit]])
+      #|  (c : Real) == real_of_num(0)
+      #|  (c : Real)
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (q : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 p : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], between(b, (q, c)) && !IN(p, hull(affine, {q, c})) && orthogonal(p - q, c - q) && !(c == b) && !(c == q) \226\134\146 !IN(b, hull(affine, {p, c})) && (\226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, hull(affine, {p, c})) && dist((b, x)) < dist((p, q)))
+      #|  abs((v : Real)) == real_of_num(0)
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  \226\136\128 q : Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], collinear({q, a, b, c}) && between(b, (a, c)) \226\134\146 between(b, (q, a)) || between(b, (q, c))
+      #|  ((a : Bool) || (b : Bool) || (c : Bool) || (d : Bool)) == ((a || b) || c || d)
+      #|  collinear({(a : Cart[Real, N]), (b : Cart[Real, N]), (c : Cart[Real, N])})
+      #|  \226\136\128 q : Cart[Real, N], \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], collinear({q, a, b, c}) \226\134\146 between(a, (q, b)) || between(a, (q, c)) || between(b, (q, c)) || between(b, (q, a)) || between(c, (q, a)) || between(c, (q, b))
+      #|  (rb : Real) < (qp : Real) \226\134\146 (cb : Real) <= rb \226\134\146 !(qp <= cb)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  hull(affine, {(p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])})
+      #|  dist((closest_point(hull(affine, {(p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}), (b : Cart[Real, Tybit0[Unit]])), b))
+      #|  (r : Cart[Real, Tybit0[Unit]])
+      #|  (p : Cart[Real, Tybit0[Unit]])
+      #|  (p : Cart[Real, Tybit0[Unit]])
+      #|  !IN((p : Cart[Real, Tybit0[Unit]]), (l : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (q : Cart[Real, Tybit0[Unit]])
+      #|  (p : Cart[Real, Tybit0[Unit]])
+      #|  !IN((p : Cart[Real, Tybit0[Unit]]), (l : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  !((c : Cart[Real, Tybit0[Unit]]) == (q : Cart[Real, Tybit0[Unit]]))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (q : Cart[Real, Tybit0[Unit]])
+      #|  IN((a : Cart[Real, Tybit0[Unit]]), (l : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN((b : Cart[Real, Tybit0[Unit]]), l)
+      #|  \226\136\131 c : Cart[Real, Tybit0[Unit]], IN(c, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !(c == (a : Cart[Real, Tybit0[Unit]])) && !(c == (b : Cart[Real, Tybit0[Unit]])) && collinear({a, b, c})
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  IN((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+      #|  \226\136\131 b : Cart[Real, Tybit0[Unit]], \226\136\131 c : Cart[Real, Tybit0[Unit]], IN(b, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(c, s) && IN(b, (l : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(c, l) && !(b == c) && between(b, ((q : Cart[Real, Tybit0[Unit]]), c))
+      #|  IN((q : Cart[Real, Tybit0[Unit]]), (l : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (q : Cart[Real, Tybit0[Unit]]) == closest_point((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (p : Cart[Real, Tybit0[Unit]]))
+      #|  IN((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+      #|  affine((l : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !(l == {})
+      #|  (p : Cart[Real, Tybit0[Unit]])
+      #|  (l : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  IN((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+      #|  (l : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  IN((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+      #|  closed((l : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !(l == {})
+      #|  (l : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  (l : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  ({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !P(x))
+      #|  ((p : Bool) \226\134\146 (r : Bool)) && ((q : Bool) \226\134\146 r) \226\134\146 (!p \226\134\146 q) \226\134\146 r
+      #|  ({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, (t : (_, _) -> Bool)(x))} == {}) == (s == {} || (\226\136\128 x : _, IN(x, s) \226\134\146 t(x) == {}))
+      #|  {dist((closest_point((l : (Cart[Real, Tybit0[Unit]]) -> Bool), (p : Cart[Real, Tybit0[Unit]])), p)) | IN(l, (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && IN(p, {(p : Cart[Real, Tybit0[Unit]]) | IN(p, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && real_of_num(0) < dist((closest_point(l, p), p))})}
+      #|  (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool) == {}
+      #|  (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool) == {}
+      #|  {(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, s) && (P : (_, _) -> Bool)(x, y)} == {f((x : _), (y : _)) | IN(x, s) && IN(y, {(y : _) | IN(y, s) && P(x, y)})}
+      #|  FINITE((L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+      #|  (L : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool) == {hull(affine, {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])}) | IN(a, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(b, s) && !(a == b)}
+      #|  \226\136\131 a : Cart[Real, Tybit0[Unit]], (s : (Cart[Real, Tybit0[Unit]]) -> Bool) == {a}
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(s) && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], IN(a, s) && IN(b, s) && !(a == b) \226\134\146 (\226\136\131 c : Cart[Real, Tybit0[Unit]], IN(c, s) && !(c == a) && !(c == b) && collinear({a, b, c}))) \226\134\146 collinear(s)
       #|SYLVESTER_GALLAI_LEMMA =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\p:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\q:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\b:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\c:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,tybit0(1)),fun(prod(cart(real,tybit0(1)),cart(real,tybit0(1))),bool)) b:cart(real,tybit0(1))) ((#,:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),prod(cart(real,tybit0(1)),cart(real,tybit0(1))))) q:cart(real,tybit0(1))) c:cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),bool)) p:cart(real,tybit0(1))) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #affine:fun(fun(cart(real,tybit0(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) q:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) c:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool))))))) ((#/\:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#vector_sub:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) p:cart(real,tybit0(1))) q:cart(real,tybit0(1)))) ((#vector_sub:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) c:cart(real,tybit0(1))) q:cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) c:cart(real,tybit0(1))) b:cart(real,tybit0(1))))) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) c:cart(real,tybit0(1))) q:cart(real,tybit0(1))))))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#IN:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),bool)) b:cart(real,tybit0(1))) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #affine:fun(fun(cart(real,tybit0(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) p:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) c:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool))))))) (#?:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),bool)) x:cart(real,tybit0(1))) ((#hull:fun(fun(fun(cart(real,tybit0(1)),bool),bool),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) #affine:fun(fun(cart(real,tybit0(1)),bool),bool)) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) p:cart(real,tybit0(1))) ((#INSERT:fun(cart(real,tybit0(1)),fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool))) c:cart(real,tybit0(1))) #EMPTY:fun(cart(real,tybit0(1)),bool)))))) ((#real_lt:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,tybit0(1)),cart(real,tybit0(1))),real) ((#,:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),prod(cart(real,tybit0(1)),cart(real,tybit0(1))))) b:cart(real,tybit0(1))) x:cart(real,tybit0(1))))) (#distance:fun(prod(cart(real,tybit0(1)),cart(real,tybit0(1))),real) ((#,:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),prod(cart(real,tybit0(1)),cart(real,tybit0(1))))) p:cart(real,tybit0(1))) q:cart(real,tybit0(1))))))))))))))))))
       #|cases_quick =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\q:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'N),bool),bool) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) q:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) a:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) b:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) c:cart(real,'N)) #EMPTY:fun(cart(real,'N),bool))))))) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) b:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) c:cart(real,'N))))) ((#\/:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) b:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) a:cart(real,'N)))) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) b:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) c:cart(real,'N)))))))))))))
       #|cases_lemma =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\q:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) (#collinear:fun(fun(cart(real,'N),bool),bool) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) q:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) a:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) b:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) c:cart(real,'N)) #EMPTY:fun(cart(real,'N),bool))))))) ((#\/:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) a:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) b:cart(real,'N)))) ((#\/:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) a:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) c:cart(real,'N)))) ((#\/:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) b:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) c:cart(real,'N)))) ((#\/:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) b:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) a:cart(real,'N)))) ((#\/:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) c:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) a:cart(real,'N)))) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) c:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) q:cart(real,'N)) b:cart(real,'N)))))))))))))))))
