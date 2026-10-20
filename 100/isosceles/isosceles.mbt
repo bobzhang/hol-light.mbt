@@ -6,7 +6,7 @@ fn step_1() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([@vectors.dist_sym(), @geom.angle_sym()]))
   let t1 = @parser.parse_type("M")
   let t3 = @tactics.then_tac(@tactics.mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("N"), t1)]), @geom.congruent_triangles_sss())), t2)
-  isosceles_triangle_theorem_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], dist((A, C)) == dist((B, C)) → angle((C, A, B)) == angle((A, B, C))"), t3))
+  isosceles_triangle_theorem_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], distance((A, C)) == distance((B, C)) → angle((C, A, B)) == angle((A, B, C))"), t3))
 }
 
 ///|
@@ -24,7 +24,7 @@ fn step_2() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([@vectors.dist_sym(), @geom.angle_sym()]))
   let t4 = @parser.parse_type("M")
   let t6 = @tactics.then_tac(@tactics.mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("N"), t4)]), @geom.congruent_triangles_asa_full())), t5)
-  isosceles_triangle_converse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], angle((C, A, B)) == angle((A, B, C)) && !collinear({A, B, C}) → dist((A, C)) == dist((B, C))"), t6))
+  isosceles_triangle_converse_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], angle((C, A, B)) == angle((A, B, C)) && !collinear({A, B, C}) → distance((A, C)) == distance((B, C))"), t6))
 }
 
 ///|
@@ -87,7 +87,7 @@ fn step_4() -> Unit raise {
   let t33 = @term_syntax.parse_term("(D : Cart[Real, N])")
   let t34 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(A : Cart[Real, N])"), t33, t32, t31, t30, t29]), @geom.congruent_triangles_sss_full()))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t34), t35), t36)
-  isosceles_triangle_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], dist((A, C)) == dist((B, C)) && D == midpoint((A, B)) → angle((A, C, D)) == angle((B, C, D))"), t37))
+  isosceles_triangle_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], distance((A, C)) == distance((B, C)) && D == midpoint((A, B)) → angle((A, C, D)) == angle((B, C, D))"), t37))
 }
 
 ///|
@@ -129,7 +129,7 @@ fn step_5() -> Unit raise {
     })(t41(x42))
   })
   let t61 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t43), t49), @tactics.ants_tac), t50), t51), t52), t53), t54), t55), t59), t60), @calc_rat.real_arith_tac)
-  isosceles_triangle_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], between(D, (A, B)) && dist((A, C)) == dist((B, C)) && angle((A, C, D)) == angle((B, C, D)) → orthogonal(A - B, C - D)"), t61))
+  isosceles_triangle_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], between(D, (A, B)) && distance((A, C)) == distance((B, C)) && angle((A, C, D)) == angle((B, C, D)) → orthogonal(A - B, C - D)"), t61))
 }
 
 ///|
@@ -216,7 +216,7 @@ fn step_6() -> Unit raise {
   let t63 = @simp.asm_simp_tac(@list.List([@vectors.between_refl_eq(), @vectors.midpoint_refl()]))
   let t62 = @class.asm_cases_tac(@term_syntax.parse_term("(A : Cart[Real, N]) == (B : Cart[Real, N])"))
   let t124 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t62), t63), t64), t72), t73), t81), t88), t89), @tactics.strip_tac), t95), t101), @tactics.ants_tac), t102), t103), t106), @tactics.ants_tac), t107), t110), @tactics.ants_tac), t111), t112), @tactics.conj_tac), t113), t114), t115), t116), @tactics.binop_tac), t122), t123)
-  isosceles_triangle_3_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], between(D, (A, B)) && dist((A, C)) == dist((B, C)) && orthogonal(A - B, C - D) → D == midpoint((A, B))"), t124))
+  isosceles_triangle_3_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], between(D, (A, B)) && distance((A, C)) == distance((B, C)) && orthogonal(A - B, C - D) → D == midpoint((A, B))"), t124))
 }
 
 ///|
@@ -254,7 +254,7 @@ fn step_7() -> Unit raise {
   })
   let t125 = @simp.asm_simp_tac(@list.List([@theorems.imp_conj(), @vectors.between_midpoint(), lemma()]))
   let t142 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t125), t130), t131), t132), t133), t138), t139), t140), t141)
-  isosceles_triangle_4_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], D == midpoint((A, B)) && orthogonal(A - B, C - D) → dist((A, C)) == dist((B, C))"), t142))
+  isosceles_triangle_4_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], D == midpoint((A, B)) && orthogonal(A - B, C - D) → distance((A, C)) == distance((B, C))"), t142))
 }
 
 ///|
@@ -377,7 +377,7 @@ fn step_8() -> Unit raise {
   let t144 = @list.List([@simp.asm_rewrite_tac(@list.List([@sets.insert_ac(), @vectors.collinear_2()])), @tactics.all_tac])
   let t143 = @class.asm_cases_tac(@term_syntax.parse_term("(C : Cart[Real, N]) == (D : Cart[Real, N])"))
   let t224 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t143), t144), t151), t152), t154), t155), t156), t157), t184), t185), t212), t213), t214), t220), @tactics.ants_tac), t221), t222), t223)
-  isosceles_triangle_5_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], !collinear({D, C, A}) && between(D, (A, B)) && angle((A, C, D)) == angle((B, C, D)) && orthogonal(A - B, C - D) → dist((A, C)) == dist((B, C))"), t224))
+  isosceles_triangle_5_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], !collinear({D, C, A}) && between(D, (A, B)) && angle((A, C, D)) == angle((B, C, D)) && orthogonal(A - B, C - D) → distance((A, C)) == distance((B, C))"), t224))
 }
 
 ///|
@@ -393,7 +393,7 @@ pub fn isosceles_triangle_5() -> @kernel.Thm {
 /// ISOSCELES_TRIANGLE_6
 fn step_9() -> Unit raise {
   let t290 = @meson.meson_tac(@list.List([@vectors.vector_mul_assoc()]))
-  let t289 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("op_pct(inv(real_of_num(2)), (A : Cart[Real, _]) + (B : Cart[Real, _])) - A == op_pct(inv(real_of_num(2)), B - A)"))]))
+  let t289 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("vector_sub(op_pct(real_inv(real_of_num(2)), vector_add((A : Cart[Real, _]), (B : Cart[Real, _]))), A) == op_pct(real_inv(real_of_num(2)), vector_sub(B, A))"))]))
   let t288 = @simp.rewrite_tac(@list.List([@vectors.midpoint()]))
   let t287 = @simp.expand_tac("D")
   let t286 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_sub_eq()]))
@@ -468,7 +468,7 @@ fn step_9() -> Unit raise {
     @tactics.strip_assume_tac(@equal.gsym(x225))
   })
   let t293 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t226), t227), t228), t231), t234), t235), t239), t240), t241), t242), @tactics.strip_tac), t292)
-  isosceles_triangle_6_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], !collinear({D, C, A}) && D == midpoint((A, B)) && angle((A, C, D)) == angle((B, C, D)) → dist((A, C)) == dist((B, C))"), t293))
+  isosceles_triangle_6_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, N], ∀ B : Cart[Real, N], ∀ C : Cart[Real, N], ∀ D : Cart[Real, N], !collinear({D, C, A}) && D == midpoint((A, B)) && angle((A, C, D)) == angle((B, C, D)) → distance((A, C)) == distance((B, C))"), t293))
 }
 
 ///|
