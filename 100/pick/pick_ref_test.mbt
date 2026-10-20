@@ -83189,7 +83189,7 @@ test "100/pick matches 100/pick.ml" {
       #|  (i : Num)
       #|  (M : Cart[Cart[Real, N], N]) == matrix((f : (Cart[Real, N]) -> Cart[Real, N]))
       #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], (linear : ((Cart[Real, N]) -> Cart[Real, N]) -> Bool)(f) \226\134\146 (\226\136\128 x : Cart[Real, N], (integral_vector : (Cart[Real, N]) -> Bool)(x) \226\134\146 (integral_vector : (Cart[Real, N]) -> Bool)(f(x))) == (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])(f), i), j)))
-      #|  abs
+      #|  real_abs
       #|  (det : (Cart[Cart[Real, N], N]) -> Real)((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((f : (Cart[Real, N]) -> Cart[Real, N]))) * (det : (Cart[Cart[Real, N], N]) -> Real)((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((g : (Cart[Real, N]) -> Cart[Real, N]))) == (det : (Cart[Cart[Real, N], N]) -> Real)((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((I : (Cart[Real, N]) -> Cart[Real, N])))
       #|  \226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 integer((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])((matrix : ((Cart[Real, N]) -> Cart[Real, N]) -> Cart[Cart[Real, N], N])((g : (Cart[Real, N]) -> Cart[Real, N])), i), j))
       #|  (k : Num)
@@ -83375,7 +83375,7 @@ test "100/pick matches 100/pick.ml" {
       #|  (i : Real) + (c : Real) == (s : Real) && (ccc : Real) == c + real_of_num(3) \226\134\146 s - ccc / real_of_num(2) + real_of_num(1) / real_of_num(2) == i + (c / real_of_num(2) - real_of_num(1))
       #|  {(x : _) | IN(x, DIFF((s : (_) -> Bool), (t : (_) -> Bool))) && (P : (_) -> Bool)(x)} == DIFF({(x : _) | IN(x, s) && P(x)}, {(x : _) | IN(x, t) && P(x)})
       #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], integral_vector(a) && integral_vector(b) && integral_vector(c) \226\134\146 measure(hull(convex, {a, b, c})) == (if collinear({a, b, c}) { real_of_num(0) } else { real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, interior(hull(convex, {a, b, c}))) && integral_vector(x)})) + (real_of_num(CARD({(x : Cart[Real, Tybit0[Unit]]) | IN(x, frontier(hull(convex, {a, b, c}))) && integral_vector(x)})) / real_of_num(2) - real_of_num(1)) })
-      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], collinear({y, a, b}) && between(x, (a, b)) && dist((y, x)) < dist((x, b)) && dist((y, x)) < dist((x, a)) \226\134\146 IN(y, segment((a, b)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], collinear({y, a, b}) && between(x, (a, b)) && distance((y, x)) < distance((x, b)) && distance((y, x)) < distance((x, a)) \226\134\146 IN(y, segment((a, b)))
       #|  :real
       #|  :real
       #|  :real
@@ -83442,7 +83442,7 @@ test "100/pick matches 100/pick.ml" {
       #|  INTER(segment([((c : Cart[Real, Tybit0[Unit]]), (d : Cart[Real, Tybit0[Unit]]))]), path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))) == {(x : Cart[Real, Tybit0[Unit]])}
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  (c : Cart[Real, Tybit0[Unit]])
-      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], dist((y, (x : Cart[Real, Tybit0[Unit]]))) < (e : Real) && !IN(y, path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))) \226\134\146 connected_component(DIFF(UNIV, path_image(op_plus_plus(p, linepath((a, b))))), (c : Cart[Real, Tybit0[Unit]]), y)
+      #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], distance((y, (x : Cart[Real, Tybit0[Unit]]))) < (e : Real) && !IN(y, path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))))) \226\134\146 connected_component(DIFF(UNIV, path_image(op_plus_plus(p, linepath((a, b))))), (c : Cart[Real, Tybit0[Unit]]), y)
       #|  SUBSET((s : (_) -> Bool), DIFF(UNIV, (t : (_) -> Bool))) == (INTER(s, t) == {})
       #|  outside(path_image(op_plus_plus((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))))))
       #|  (z : Cart[Real, Tybit0[Unit]])
@@ -83520,11 +83520,11 @@ test "100/pick matches 100/pick.ml" {
       #|  (c : Cart[Real, Tybit0[Unit]])
       #|  (b : Cart[Real, Tybit0[Unit]])
       #|  (a : Cart[Real, Tybit0[Unit]])
-      #|  (e : Real) == dist(((x : Cart[Real, Tybit0[Unit]]), (cp : Cart[Real, Tybit0[Unit]])))
+      #|  (e : Real) == distance(((x : Cart[Real, Tybit0[Unit]]), (cp : Cart[Real, Tybit0[Unit]])))
       #|  SUBSET(INTER((p : (_) -> Bool), (s : (_) -> Bool)), (u : (_) -> Bool)) \226\134\146 IN((x : _), DIFF(s, u)) \226\134\146 !IN(x, p)
       #|  (a : (_) -> Bool) == {(x : _)} \226\134\146 IN(x, a)
       #|  !(a : Bool) \226\134\146 a && (b : Bool) \226\134\146 (c : Bool)
-      #|  (cp : Cart[Real, Tybit0[Unit]]) == (x : Cart[Real, Tybit0[Unit]]) || real_of_num(0) < dist((x, cp))
+      #|  (cp : Cart[Real, Tybit0[Unit]]) == (x : Cart[Real, Tybit0[Unit]]) || real_of_num(0) < distance((x, cp))
       #|  :real
       #|  (cp : Cart[Real, Tybit0[Unit]])
       #|  INSERT((a : _), INSERT((b : _), INSERT((c : _), INSERT((d : _), (s : (_) -> Bool))))) == UNION({a, b, c, d}, s)
@@ -84100,7 +84100,7 @@ test "100/pick matches 100/pick.ml" {
       #|  SUBSET(path_image(polygonal_path(CONS((a : Cart[Real, Tybit0[Unit]]), CONS((b : Cart[Real, Tybit0[Unit]]), CONS((c : Cart[Real, Tybit0[Unit]]), (p : List[Cart[Real, Tybit0[Unit]]])))))), {(x : Cart[Real, Tybit0[Unit]]) | op_dollar(x, 2) >= op_dollar(b, 2)})
       #|  real_of_num(0) < (k : Real)
       #|  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((k : Real) / real_of_num(2), (basis : (Num) -> Cart[Real, Tybit0[Unit]])(1))
-      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], dist(((x : Cart[Real, Tybit0[Unit]]) + a, (y : Cart[Real, Tybit0[Unit]]))) < (k : Real) / real_of_num(2) && norm(a) == k / real_of_num(2) \226\134\146 dist((x, y)) < k
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], distance(((x : Cart[Real, Tybit0[Unit]]) + a, (y : Cart[Real, Tybit0[Unit]]))) < (k : Real) / real_of_num(2) && norm(a) == k / real_of_num(2) \226\134\146 distance((x, y)) < k
       #|  :real
       #|  :real
       #|  (y : Cart[Real, Tybit0[Unit]])
@@ -84108,7 +84108,7 @@ test "100/pick matches 100/pick.ml" {
       #|  real_of_num(0) < (k : Real) \226\134\146 !((b : Real) + k / real_of_num(2) == b)
       #|  (x : Cart[Real, Tybit0[Unit]]) + op_pct((k : Real) / real_of_num(2), basis(1))
       #|  real_of_num(0) < (k : Real)
-      #|  dist(((x : Cart[Real, Tybit0[Unit]]), x + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
+      #|  distance(((x : Cart[Real, Tybit0[Unit]]), x + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, Tybit0[Unit]]) + op_pct((k : Real) / real_of_num(2), basis(1))
