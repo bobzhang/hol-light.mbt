@@ -39612,14 +39612,14 @@ Multivariate/determinants quotations (1042):
   (v : Cart[Real, M])
   (v : Cart[Real, M])
   \226\136\128 v : Cart[Real, M], \226\136\128 w : Cart[Real, M], dot((f : (Cart[Real, M]) -> Cart[Real, N])(v), f(w)) == pow((c : Real), 2) * dot(v, w)
-  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : Real, f(vec(0)) == vec(0) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == c * dist((x, y))) \226\134\146 linear(f)
-  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], f(vec(0)) == vec(0) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y))) \226\134\146 linear(f)
-  dist(((x : Cart[Real, N]) - (a : Cart[Real, N]), (y : Cart[Real, N]) - a)) == dist((x, y))
+  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : Real, f(vec(0)) == vec(0) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == c * distance((x, y))) \226\134\146 linear(f)
+  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], f(vec(0)) == vec(0) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y))) \226\134\146 linear(f)
+  distance(((x : Cart[Real, N]) - (a : Cart[Real, N]), (y : Cart[Real, N]) - a)) == distance((x, y))
   :real
   :real
   (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
   (x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - f(vec(0))
-  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y))) \226\134\146 (\226\136\131 h : (Cart[Real, M]) -> Cart[Real, N], linear(h) && (\226\136\128 x : Cart[Real, M], f(x) == f(vec(0)) + h(x)))
+  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y))) \226\134\146 (\226\136\131 h : (Cart[Real, M]) -> Cart[Real, N], linear(h) && (\226\136\128 x : Cart[Real, M], f(x) == f(vec(0)) + h(x)))
   (x : Cart[Real, M])
   (c : Real)
   dot((x : Cart[Real, M]) + (y : Cart[Real, M]), x - y) == dot(x, x) - dot(y, y)
@@ -39641,7 +39641,7 @@ Multivariate/determinants quotations (1042):
   (vec : (Num) -> Cart[Real, N])(0)
   (x : Cart[Real, N])
   (x : Cart[Real, N])
-  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) == (f(vec(0)) == vec(0) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], dist((f(x), f(y))) == dist((x, y))))
+  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(f) == (f(vec(0)) == vec(0) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], distance((f(x), f(y))) == distance((x, y))))
   (b : Real) == norm((y : Cart[Real, N]))
   (a : Real) == norm((x : Cart[Real, N]))
   \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 x' : Cart[Real, N], \226\136\128 y' : Cart[Real, N], \226\136\128 x0 : Cart[Real, N], \226\136\128 y0 : Cart[Real, N], \226\136\128 x0' : Cart[Real, N], \226\136\128 y0' : Cart[Real, N], x == op_pct(norm(x), x0) && y == op_pct(norm(y), y0) && x' == op_pct(norm(x), x0') && y' == op_pct(norm(y), y0') && norm(x0) == real_of_num(1) && norm(x0') == real_of_num(1) && norm(y0) == real_of_num(1) && norm(y0') == real_of_num(1) && norm(x0' - y0') == norm(x0 - y0) \226\134\146 norm(x' - y') == norm(x - y)
@@ -39651,7 +39651,7 @@ Multivariate/determinants quotations (1042):
   op_pct(inv(norm((x : Cart[Real, N]))), x)
   !(real_of_num(1) == real_of_num(0))
   (x : Cart[Real, N]) => if x == vec(0) { vec(0) } else { op_pct(norm(x), (f : (Cart[Real, N]) -> Cart[Real, N])(op_pct(inv(norm(x)), x))) }
-  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, N], norm(x) == real_of_num(1) \226\134\146 norm(f(x)) == real_of_num(1)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], norm(x) == real_of_num(1) && norm(y) == real_of_num(1) \226\134\146 dist((f(x), f(y))) == dist((x, y))) \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(g) && (\226\136\128 x : Cart[Real, N], norm(x) == real_of_num(1) \226\134\146 g(x) == f(x)))
+  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, N], norm(x) == real_of_num(1) \226\134\146 norm(f(x)) == real_of_num(1)) && (\226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], norm(x) == real_of_num(1) && norm(y) == real_of_num(1) \226\134\146 distance((f(x), f(y))) == distance((x, y))) \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, N], orthogonal_transformation(g) && (\226\136\128 x : Cart[Real, N], norm(x) == real_of_num(1) \226\134\146 g(x) == f(x)))
   norm((f : (Cart[Real, N]) -> Cart[Real, N])((g : (Cart[Real, N]) -> Cart[Real, N])((v : Cart[Real, N]))))
   (v : Cart[Real, N])
   (g : (Cart[Real, N]) -> Cart[Real, N])
@@ -39942,7 +39942,7 @@ Multivariate/determinants quotations (1042):
   (a : Cart[Real, N])
   ((y : Real) + (aa : Real) - real_of_num(2) * (a : Real) == y + (bb : Real) - real_of_num(2) * (b : Real)) == (a - b == inv(real_of_num(2)) * (aa - bb))
   dot((y : Cart[Real, N]) - (b : Cart[Real, N]), y - b) == dot(y, y) + dot(b, b) - real_of_num(2) * dot(y, b)
-  \226\136\128 y : Cart[Real, N], dist((y, (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])))) == dist((y, a)) \226\134\146 reflect_along((v : Cart[Real, N]), y) == y
+  \226\136\128 y : Cart[Real, N], distance((y, (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])))) == distance((y, a)) \226\134\146 reflect_along((v : Cart[Real, N]), y) == y
   (a : Num) <= (d : Num) + SUC((n : Num)) \226\134\146 d < (d' : Num) \226\134\146 a <= d' + n
   o(reflect_along((v : Cart[Real, N])), (f : (Cart[Real, N]) -> Cart[Real, N]))
   (v : Cart[Real, N]) == op_pct(inv(real_of_num(2)), (f : (Cart[Real, N]) -> Cart[Real, N])((a : Cart[Real, N])) - a)
