@@ -9891,20 +9891,20 @@ Warning: inventing type variables
 0..0..2..4..8..17..27..solved at 42
 0..0..1..2..5..8..11..solved at 19
 Rqe/work_thms quotations (1221):
-  h':sign
-  forall P Q eqs l.\n    interpsigns eqs (\\x. P x) l /\\\n    interpsigns eqs (\\x. Q x) l ==>\n    interpsigns eqs (\\x. P x \\/ Q x) l
-  \\z. z < x \\/ (z = x) \\/ (x < z /\\ z < y)
-  \\z. z < x \\/ (z = x) \\/ (x < z /\\ z < y)
-  t:real list
-  forall eqs x y l r t.\n    interpmat (CONS x (CONS y t)) eqs (CONS l (CONS l (CONS l r))) ==>\n    interpmat (CONS y t) eqs (CONS l r)
-  forall l. ~(partition_line l = [])
-  forall P l1 l2. ALL2 P l1 l2 ==> (LENGTH l1 = LENGTH l2)
-  forall l:A list. ~(l = []) ==> (LENGTH (TL l) = PRE (LENGTH l))
-  forall l. LENGTH (partition_line l) = 2 * LENGTH l + 1
-  l:real list
-  forall l. LENGTH (TL (partition_line l)) = 2 * LENGTH l
-  LENGTH sgns = LENGTH (APPEND [\\x. x < h; \\x. x = h; \\x. h < x /\\ x < HD t] (TL (partition_line t)))
-  LENGTH [\\x. x < h; \\x. x = h; \\x. h < x] = LENGTH sgns
+  (h' : Sign)
+  \226\136\128 P : (Real) -> Bool, \226\136\128 Q : (Real) -> Bool, \226\136\128 eqs : List[(Real) -> Real], \226\136\128 l : List[Sign], interpsigns(eqs, (x : Real) => P(x), l) && interpsigns(eqs, (x : Real) => Q(x), l) \226\134\146 interpsigns(eqs, (x : Real) => P(x) || Q(x), l)
+  (z : Real) => z < (x : Real) || z == x || x < z && z < (y : Real)
+  (z : Real) => z < (x : Real) || z == x || x < z && z < (y : Real)
+  (t : List[Real])
+  \226\136\128 eqs : List[(Real) -> Real], \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 l : List[Sign], \226\136\128 r : List[List[Sign]], \226\136\128 t : List[Real], interpmat(CONS(x, CONS(y, t)), eqs, CONS(l, CONS(l, CONS(l, r)))) \226\134\146 interpmat(CONS(y, t), eqs, CONS(l, r))
+  \226\136\128 l : List[Real], !(partition_line(l) == NIL)
+  \226\136\128 P : (_, _) -> Bool, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ALL2(P, l1, l2) \226\134\146 LENGTH(l1) == LENGTH(l2)
+  \226\136\128 l : List[A], !(l == NIL) \226\134\146 LENGTH(TL(l)) == PRE(LENGTH(l))
+  \226\136\128 l : List[Real], LENGTH(partition_line(l)) == 2 * LENGTH(l) + 1
+  (l : List[Real])
+  \226\136\128 l : List[Real], LENGTH(TL(partition_line(l))) == 2 * LENGTH(l)
+  LENGTH((sgns : List[_])) == LENGTH(APPEND([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x && x < HD((t : List[Real]))], TL(partition_line(t))))
+  LENGTH([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x]) == LENGTH((sgns : List[_]))
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -9921,8 +9921,8 @@ Rqe/work_thms quotations (1221):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  t:(sign list) list
-  sgns:(sign list) list
+  (t : List[List[Sign]])
+  (sgns : List[List[Sign]])
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -9939,10 +9939,10 @@ Rqe/work_thms quotations (1221):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  pts:real list
-  forall eqs pts sgns. ALL2 (interpsigns eqs) (partition_line pts) sgns ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1)
-  LENGTH sgns = LENGTH (APPEND [\\x. x < h; \\x. x = h; \\x. h < x /\\ x < HD t] (TL (partition_line t)))
-  LENGTH [\\x. x < h; \\x. x = h; \\x. h < x] = LENGTH sgns
+  (pts : List[Real])
+  \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], ALL2(interpsigns(eqs), partition_line(pts), sgns) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1
+  LENGTH((sgns : List[_])) == LENGTH(APPEND([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x && x < HD((t : List[Real]))], TL(partition_line(t))))
+  LENGTH([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x]) == LENGTH((sgns : List[_]))
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -9959,8 +9959,8 @@ Rqe/work_thms quotations (1221):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  t:(sign list) list
-  sgns:(sign list) list
+  (t : List[List[Sign]])
+  (sgns : List[List[Sign]])
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -9977,106 +9977,106 @@ Rqe/work_thms quotations (1221):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  pts:real list
-  forall eqs pts sgns. interpmat pts eqs sgns ==>\n    (LENGTH sgns = 2 * LENGTH pts + 1)
-  (x = y) <=> (y = x)
-  forall b d a c. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P a c
-  (x = y) <=> (y = x)
-  forall b d a c. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P b d
-  forall P a c b d. (LENGTH a = LENGTH c) ==>\n    ALL2 P (APPEND a b) (APPEND c d) ==> ALL2 P a c /\\ ALL2 P b d
-  ~(0 = SUC x)
-  forall a c b d. ALL2 P a c /\\ ALL2 P b d ==>\n      ALL2 P (APPEND a b) (APPEND c d)
-  forall a c b d. (LENGTH a = LENGTH c) ==>\n    (ALL2 P (APPEND a b) (APPEND c d) <=> ALL2 P a c /\\ ALL2 P b d)
-  (BUTLAST [] = []) /\\\n   (BUTLAST [x] = []) /\\\n   (BUTLAST (CONS h1 (CONS h2 t)) = CONS h1 (BUTLAST (CONS h2 t)))
-  forall l. ~(l = []) ==> (forall x. ~(l = [x])) ==> (HD (BUTLAST l) = HD l)
-  (SUBLIST l [] <=> (l = [])) /\\\n   (SUBLIST l (CONS h t) <=> (l = []) \\/\n    SUBLIST l t \\/\n    ((HD l = h) /\\ SUBLIST (TL l) t))
-  forall l. SUBLIST [] l
-  forall l1 l2 h. SUBLIST l1 l2 ==> SUBLIST l1 (CONS h l2)
-  forall l1 l2. SUBLIST l1 l2 ==> ~(l1 = []) ==> SUBLIST (TL l1) l2
-  forall h t l. SUBLIST (CONS h t) l ==> SUBLIST t l
-  forall l. SUBLIST l l
-  forall h t1 t2. SUBLIST (CONS h t1) (CONS h t2) = SUBLIST t1 t2
-  forall h1 h2 t1 t2. SUBLIST (CONS h1 t1) (CONS h2 t2) ==> ~(h1 = h2) ==>\n     SUBLIST (CONS h1 t1) t2
-  SUBLIST t' t''
-  SUBLIST (CONS h' t') t''
-  SUBLIST (CONS h t) t'
-  h = h'
-  SUBLIST (CONS h t) t'
-  h' = h''
-  h' = h''
-  h = h''
-  forall l1 l2 l3. SUBLIST l1 l2 ==> SUBLIST l2 l3 ==> SUBLIST l1 l3
-  real_ordered_list (CONS h t)
-  x = h'
-  forall h t. real_ordered_list (CONS h t) ==> forall x. MEM x t ==> h < x
-  x = h'
-  x = h'
-  h = h'
-  forall x l1 l2. SUBLIST l1 l2 ==> MEM x l1 ==> MEM x l2
-  MEM x (CONS h'' t')
-  forall h t1 t2. real_ordered_list (CONS h t2) ==>\n      SUBLIST (CONS h t1) (CONS h t2) ==> forall x. MEM x t1 ==> h < x
-  SUBLIST (CONS h1 (CONS h2 (CONS h t))) t'
-  h1 = h'
-  SUBLIST [h1; h2] t
-  h1 = h
-  forall h1 h2 t l. SUBLIST (CONS h1 (CONS h2 t)) l ==>\n    SUBLIST (CONS h1 t) l
-  l2
-  CONS h'' l1
-  SUBLIST (CONS h (CONS h' t)) t'
-  t'
-  []:A list
-  h = h''
-  l2
-  CONS h' l1
-  SUBLIST [h] t
-  []
-  h = h'
-  forall h t l. SUBLIST (CONS h t) l ==>\n     ?(l1:A list) l2. (l = APPEND l1 (CONS h l2)) /\\ SUBLIST t l2
-  MEM h' l2'
-  real_ordered_list (CONS h l2')
-  h = h''
-  l2:real list
-  t = []
-  forall l1 l2.  real_ordered_list l2 ==> SUBLIST l1 l2 ==> real_ordered_list l1
-  forall l. SUBLIST (BUTLAST l) l
-  forall l2 l3 l1. SUBLIST (APPEND l1 l2) (APPEND l1 l3) = SUBLIST l2 l3
-  forall h l. ~(SUBLIST (CONS h l) l)
-  t = []
-  forall m l. ~(l = []) ==> ~(SUBLIST (APPEND l m) m)
-  SUBLIST (CONS h (APPEND t l3)) (APPEND t' l3)
-  h = h'
-  forall l3 l1 l2. SUBLIST (APPEND l1 l3) (APPEND l2 l3) = SUBLIST l1 l2
-  forall h l1 l2. APPEND l1 (CONS h l2) = APPEND (APPEND l1 [h]) l2
-  SUBLIST (CONS h t) t'
-  h = h'
-  forall l1 l2 m1 m2. SUBLIST l1 l2 ==> SUBLIST m1 m2 ==>\n    SUBLIST (APPEND l1 m1) (APPEND l2 m2)
-  APPEND l1 l2
-  forall l2 l1. real_ordered_list (APPEND l1 l2) ==>\n           real_ordered_list (APPEND l1 (BUTLAST l2))
-  forall l. ~(l = []) ==> ~(TL (partition_line l) = [])
-  forall l m. ~(l = []) ==> (HD (APPEND l m) = HD l)
-  forall l. LENGTH l > 1 ==> (BUTLAST (TL l) = TL (BUTLAST l))
-  forall m l. ~(l = []) ==> (APPEND (TL l) m = TL (APPEND l m))
-  forall m l. ~(l = []) ==> (HD (APPEND l m) = HD l)
-  forall l. ~(l = []) ==> LENGTH (partition_line l) > 1
-  forall l m. ~(m = []) ==>\n     (BUTLAST (APPEND l m) = APPEND l (BUTLAST m))
-  forall l. LENGTH l > 1 ==> ~(TL l = [])
-  forall l. ~(l = []) ==> ~(BUTLAST (partition_line l) = [])
-  t':real list
-  t':real list
-  t' = []
-  forall h t l. ~(l = []) ==>\n    (partition_line (APPEND l (CONS h t)) =\n      APPEND (BUTLAST (partition_line l))\n        (CONS (\\x. LAST l < x /\\ x < h)\n          (TL (partition_line (CONS h t)))))
-  forall l. ~(l = []) ==> (l = CONS (HD l) (TL l))
-  forall l1 l2. (TL l1 = l2) <=> (CONS (HD l1) (TL l1) = CONS (HD l1) l2)
-  ~(n = 0) ==> (SUC(PRE n) = PRE(SUC n))
-  forall l. ~(l = []) ==> (LENGTH (BUTLAST l) = PRE (LENGTH l))
-  \\z. x < z /\\ z < y \\/ (z = y) \\/ y < z
-  ~(LENGTH t = 0)
-  (ALL2 (interpsigns eqs) (BUTLAST\n        (CONS (\\x. x < h)\n        (CONS (\\x. x = h)\n        (CONS (\\x. h < x /\\ x < HD t) (TL (partition_line t))))))\n        sgns) /\\ (ALL2 (interpsigns eqs) [\\x'. LAST t < x' /\\ x' < x; \\x'. x' = x; \\x'. x < x' /\\\n                                                      x' < y;\n       \\x. x = y; \\x. y < x] [a; b; s; s; s])
-  SUC(LENGTH (partition_line t)) = LENGTH sgns
-  ~(PRE (LENGTH (partition_line t)) = 0)
-  ~(LENGTH (partition_line t) = 0)
-  t:real list
-  ~(partition_line t =  [])
+  (pts : List[Real])
+  \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], interpmat(pts, eqs, sgns) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1
+  ((x : _) == (y : _)) == (y == x)
+  \226\136\128 b : List[_], \226\136\128 d : List[_], \226\136\128 a : List[_], \226\136\128 c : List[_], LENGTH(a) == LENGTH(c) \226\134\146 ALL2((P : (_, _) -> Bool), APPEND(a, b), APPEND(c, d)) \226\134\146 ALL2(P, a, c)
+  ((x : _) == (y : _)) == (y == x)
+  \226\136\128 b : List[_], \226\136\128 d : List[_], \226\136\128 a : List[_], \226\136\128 c : List[_], LENGTH(a) == LENGTH(c) \226\134\146 ALL2((P : (_, _) -> Bool), APPEND(a, b), APPEND(c, d)) \226\134\146 ALL2(P, b, d)
+  \226\136\128 P : (_, _) -> Bool, \226\136\128 a : List[_], \226\136\128 c : List[_], \226\136\128 b : List[_], \226\136\128 d : List[_], LENGTH(a) == LENGTH(c) \226\134\146 ALL2(P, APPEND(a, b), APPEND(c, d)) \226\134\146 ALL2(P, a, c) && ALL2(P, b, d)
+  !(0 == SUC((x : Num)))
+  \226\136\128 a : List[_], \226\136\128 c : List[_], \226\136\128 b : List[_], \226\136\128 d : List[_], ALL2((P : (_, _) -> Bool), a, c) && ALL2(P, b, d) \226\134\146 ALL2(P, APPEND(a, b), APPEND(c, d))
+  \226\136\128 a : List[_], \226\136\128 c : List[_], \226\136\128 b : List[_], \226\136\128 d : List[_], LENGTH(a) == LENGTH(c) \226\134\146 ALL2((P : (_, _) -> Bool), APPEND(a, b), APPEND(c, d)) == (ALL2(P, a, c) && ALL2(P, b, d))
+  (BUTLAST : (List[_]) -> List[_])((NIL : List[_])) == (NIL : List[_]) && BUTLAST([(x : _)]) == NIL && BUTLAST(CONS((h1 : _), CONS((h2 : _), (t : List[_])))) == CONS(h1, BUTLAST(CONS(h2, t)))
+  \226\136\128 l : List[_], !(l == NIL) \226\134\146 (\226\136\128 x : _, !(l == [x])) \226\134\146 HD(BUTLAST(l)) == HD(l)
+  (SUBLIST : (List[_], List[_]) -> Bool)((l : List[_]), NIL) == (l == NIL) && SUBLIST(l, CONS((h : _), (t : List[_]))) == (l == NIL || SUBLIST(l, t) || HD(l) == h && SUBLIST(TL(l), t))
+  \226\136\128 l : List[_], SUBLIST(NIL, l)
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 h : _, SUBLIST(l1, l2) \226\134\146 SUBLIST(l1, CONS(h, l2))
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], SUBLIST(l1, l2) \226\134\146 !(l1 == NIL) \226\134\146 SUBLIST(TL(l1), l2)
+  \226\136\128 h : _, \226\136\128 t : List[_], \226\136\128 l : List[_], SUBLIST(CONS(h, t), l) \226\134\146 SUBLIST(t, l)
+  \226\136\128 l : List[_], SUBLIST(l, l)
+  \226\136\128 h : _, \226\136\128 t1 : List[_], \226\136\128 t2 : List[_], SUBLIST(CONS(h, t1), CONS(h, t2)) == SUBLIST(t1, t2)
+  \226\136\128 h1 : _, \226\136\128 h2 : _, \226\136\128 t1 : List[_], \226\136\128 t2 : List[_], SUBLIST(CONS(h1, t1), CONS(h2, t2)) \226\134\146 !(h1 == h2) \226\134\146 SUBLIST(CONS(h1, t1), t2)
+  SUBLIST((t' : List[_]), (t'' : List[_]))
+  SUBLIST(CONS((h' : _), (t' : List[_])), (t'' : List[_]))
+  SUBLIST(CONS((h : _), (t : List[_])), (t' : List[_]))
+  (h : _) == (h' : _)
+  SUBLIST(CONS((h : _), (t : List[_])), (t' : List[_]))
+  (h' : _) == (h'' : _)
+  (h' : _) == (h'' : _)
+  (h : _) == (h'' : _)
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 l3 : List[_], SUBLIST(l1, l2) \226\134\146 SUBLIST(l2, l3) \226\134\146 SUBLIST(l1, l3)
+  real_ordered_list(CONS((h : Real), (t : List[Real])))
+  (x : _) == (h' : _)
+  \226\136\128 h : Real, \226\136\128 t : List[Real], real_ordered_list(CONS(h, t)) \226\134\146 (\226\136\128 x : Real, MEM(x, t) \226\134\146 h < x)
+  (x : _) == (h' : _)
+  (x : _) == (h' : _)
+  (h : _) == (h' : _)
+  \226\136\128 x : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], SUBLIST(l1, l2) \226\134\146 MEM(x, l1) \226\134\146 MEM(x, l2)
+  MEM((x : _), CONS((h'' : _), (t' : List[_])))
+  \226\136\128 h : Real, \226\136\128 t1 : List[Real], \226\136\128 t2 : List[Real], real_ordered_list(CONS(h, t2)) \226\134\146 SUBLIST(CONS(h, t1), CONS(h, t2)) \226\134\146 (\226\136\128 x : Real, MEM(x, t1) \226\134\146 h < x)
+  SUBLIST(CONS((h1 : _), CONS((h2 : _), CONS((h : _), (t : List[_])))), (t' : List[_]))
+  (h1 : _) == (h' : _)
+  SUBLIST([(h1 : _), (h2 : _)], (t : List[_]))
+  (h1 : _) == (h : _)
+  \226\136\128 h1 : _, \226\136\128 h2 : _, \226\136\128 t : List[_], \226\136\128 l : List[_], SUBLIST(CONS(h1, CONS(h2, t)), l) \226\134\146 SUBLIST(CONS(h1, t), l)
+  (l2 : _)
+  CONS((h'' : _), (l1 : List[_]))
+  SUBLIST(CONS((h : _), CONS((h' : _), (t : List[_]))), (t' : List[_]))
+  (t' : _)
+  (NIL : List[A])
+  (h : _) == (h'' : _)
+  (l2 : _)
+  CONS((h' : _), (l1 : List[_]))
+  SUBLIST([(h : _)], (t : List[_]))
+  (NIL : List[_])
+  (h : _) == (h' : _)
+  \226\136\128 h : A, \226\136\128 t : List[A], \226\136\128 l : List[A], SUBLIST(CONS(h, t), l) \226\134\146 (\226\136\131 l1 : List[A], \226\136\131 l2 : List[A], l == APPEND(l1, CONS(h, l2)) && SUBLIST(t, l2))
+  MEM((h' : _), (l2' : List[_]))
+  real_ordered_list(CONS((h : Real), (l2' : List[Real])))
+  (h : _) == (h'' : _)
+  (l2 : List[Real])
+  (t : List[_]) == NIL
+  \226\136\128 l1 : List[Real], \226\136\128 l2 : List[Real], real_ordered_list(l2) \226\134\146 SUBLIST(l1, l2) \226\134\146 real_ordered_list(l1)
+  \226\136\128 l : List[_], SUBLIST(BUTLAST(l), l)
+  \226\136\128 l2 : List[_], \226\136\128 l3 : List[_], \226\136\128 l1 : List[_], SUBLIST(APPEND(l1, l2), APPEND(l1, l3)) == SUBLIST(l2, l3)
+  \226\136\128 h : _, \226\136\128 l : List[_], !SUBLIST(CONS(h, l), l)
+  (t : List[_]) == NIL
+  \226\136\128 m : List[_], \226\136\128 l : List[_], !(l == NIL) \226\134\146 !SUBLIST(APPEND(l, m), m)
+  SUBLIST(CONS((h : _), APPEND((t : List[_]), (l3 : List[_]))), APPEND((t' : List[_]), l3))
+  (h : _) == (h' : _)
+  \226\136\128 l3 : List[_], \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], SUBLIST(APPEND(l1, l3), APPEND(l2, l3)) == SUBLIST(l1, l2)
+  \226\136\128 h : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], APPEND(l1, CONS(h, l2)) == APPEND(APPEND(l1, [h]), l2)
+  SUBLIST(CONS((h : _), (t : List[_])), (t' : List[_]))
+  (h : _) == (h' : _)
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 m1 : List[_], \226\136\128 m2 : List[_], SUBLIST(l1, l2) \226\134\146 SUBLIST(m1, m2) \226\134\146 SUBLIST(APPEND(l1, m1), APPEND(l2, m2))
+  APPEND((l1 : List[_]), (l2 : List[_]))
+  \226\136\128 l2 : List[Real], \226\136\128 l1 : List[Real], real_ordered_list(APPEND(l1, l2)) \226\134\146 real_ordered_list(APPEND(l1, BUTLAST(l2)))
+  \226\136\128 l : List[Real], !(l == NIL) \226\134\146 !(TL(partition_line(l)) == NIL)
+  \226\136\128 l : List[_], \226\136\128 m : List[_], !(l == NIL) \226\134\146 HD(APPEND(l, m)) == HD(l)
+  \226\136\128 l : List[_], LENGTH(l) > 1 \226\134\146 BUTLAST(TL(l)) == TL(BUTLAST(l))
+  \226\136\128 m : List[_], \226\136\128 l : List[_], !(l == NIL) \226\134\146 APPEND(TL(l), m) == TL(APPEND(l, m))
+  \226\136\128 m : List[_], \226\136\128 l : List[_], !(l == NIL) \226\134\146 HD(APPEND(l, m)) == HD(l)
+  \226\136\128 l : List[Real], !(l == NIL) \226\134\146 LENGTH(partition_line(l)) > 1
+  \226\136\128 l : List[_], \226\136\128 m : List[_], !(m == NIL) \226\134\146 BUTLAST(APPEND(l, m)) == APPEND(l, BUTLAST(m))
+  \226\136\128 l : List[_], LENGTH(l) > 1 \226\134\146 !(TL(l) == NIL)
+  \226\136\128 l : List[Real], !(l == NIL) \226\134\146 !(BUTLAST(partition_line(l)) == NIL)
+  (t' : List[Real])
+  (t' : List[Real])
+  (t' : List[_]) == NIL
+  \226\136\128 h : Real, \226\136\128 t : List[Real], \226\136\128 l : List[Real], !(l == NIL) \226\134\146 partition_line(APPEND(l, CONS(h, t))) == APPEND(BUTLAST(partition_line(l)), CONS((x : Real) => LAST(l) < x && x < h, TL(partition_line(CONS(h, t)))))
+  \226\136\128 l : List[_], !(l == NIL) \226\134\146 l == CONS(HD(l), TL(l))
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], (TL(l1) == l2) == (CONS(HD(l1), TL(l1)) == CONS(HD(l1), l2))
+  !((n : Num) == 0) \226\134\146 SUC(PRE(n)) == PRE(SUC(n))
+  \226\136\128 l : List[_], !(l == NIL) \226\134\146 LENGTH(BUTLAST(l)) == PRE(LENGTH(l))
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
+  !(LENGTH((t : List[_])) == 0)
+  ALL2(interpsigns((eqs : List[(Real) -> Real])), BUTLAST(CONS((x : Real) => x < (h : Real), CONS((x : Real) => x == h, CONS((x : Real) => h < x && x < HD((t : List[Real])), TL(partition_line(t)))))), (sgns : List[List[Sign]])) && ALL2(interpsigns(eqs), [(x' : Real) => LAST(t) < x' && x' < (x : Real), (x' : Real) => x' == x, (x' : Real) => x < x' && x' < (y : Real), (x : Real) => x == y, (x : Real) => y < x], [(a : List[Sign]), (b : List[Sign]), (s : List[Sign]), s, s])
+  SUC(LENGTH(partition_line((t : List[Real])))) == LENGTH((sgns : List[_]))
+  !(PRE(LENGTH(partition_line((t : List[Real])))) == 0)
+  !(LENGTH(partition_line((t : List[Real]))) == 0)
+  (t : List[Real])
+  !(partition_line((t : List[Real])) == NIL)
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -10093,8 +10093,8 @@ Rqe/work_thms quotations (1221):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  \\z. x < z /\\ z < y \\/ (z = y) \\/ y < z
-  LENGTH sgns = 2
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
+  LENGTH((sgns : List[_])) == 2
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -10111,775 +10111,775 @@ Rqe/work_thms quotations (1221):
   FACT(NUMERAL n)
   PRE(NUMERAL n)
   SUC(NUMERAL n)
-  ~(partition_line [x; y] = [])
-  LENGTH (APPEND (BUTLAST (partition_line (CONS (h:real) t))) (CONS (\\x'. LAST (CONS h t) < x' /\\ x' < x) (TL (partition_line [x; y])))) = LENGTH (APPEND sgns [(a:sign list); b; s; s; s])
-  \\z. x < z /\\ z < y \\/ (z = y) \\/ y < z
-  LENGTH [\\x'. x' < x; \\x'. x' = x; \\x'. x < x' /\\ x' < y; \\x. x = y; \\x. y < x] = LENGTH (APPEND sgns [a; b; s; s; s])
-  sgns = []
-  pts:real list
-  forall a b x y s eqs pts sgns.\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts [x; y])) (APPEND sgns [a; b; s; s; s]) ==>\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts [x])) (APPEND sgns [a; b; s])
-  APPEND pts [x; y]
-  forall a b x y s eqs pts sgns.\n     interpmat (APPEND pts [x; y]) eqs\n        (APPEND sgns [a; b; s; s; s]) ==>\n     interpmat (APPEND pts [x]) eqs (APPEND sgns [a; b; s])
-  forall l1 l2. ~(l2 = []) ==> (LAST (APPEND l1 l2) = LAST l2)
-  forall l1 l2 l3. APPEND (APPEND l1 l2) l3 = APPEND l1 (APPEND l2 l3)
-  \\(z:real). x < z /\\ z < y \\/ (z = y) \\/ y < z /\\ z < HD qts
-  \\(z:real). x < z /\\ z < y \\/ (z = y) \\/ y < z
-  pts:real list
-  LENGTH (BUTLAST (partition_line pts)) = LENGTH sgns
-  \\(z:real). x < z /\\ z < y \\/ (z = y) \\/ y < z /\\ z < HD qts
-  \\(z:real). x < z /\\ z < y \\/ (z = y) \\/ y < z
-  2 * 0 = 0
-  sgns = []
-  pts = []
-  LENGTH rgns = 2 * LENGTH qts
-  LENGTH (partition_line\n    (APPEND pts (CONS x (CONS y qts)))) =\n    LENGTH (APPEND sgns (CONS (a:sign list) (CONS b\n      (CONS s (CONS s (CONS s rgns))))))
-  forall a b x y s eqs pts sgns qts rgns.\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts (CONS x (CONS y qts))))\n    (APPEND sgns (CONS a (CONS b\n      (CONS s (CONS s (CONS s rgns)))))) ==>\n   (LENGTH sgns = 2 * LENGTH pts) ==>\n   ALL2 (interpsigns eqs) (partition_line\n    (APPEND pts (CONS x qts)))\n    (APPEND sgns (CONS a (CONS b (CONS s rgns))))
-  (APPEND pts (CONS x (CONS y qts)))
-  forall a b x y s eqs qts rgns pts sgns.\n     interpmat (APPEND pts (CONS x (CONS y qts))) eqs\n        (APPEND sgns (CONS a (CONS b\n          (CONS s (CONS s (CONS s rgns)))))) ==>\n        (LENGTH sgns = 2 * LENGTH pts) ==>\n       interpmat (APPEND pts (CONS x qts)) eqs\n        (APPEND sgns (CONS a (CONS b (CONS s rgns))))
-  \\(z:real). x < z \\/ (z = x) \\/ z < x
-  forall x l.  interpmat [x] eqs [l; l; l] ==> interpmat [] eqs [l]
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Pos r1) (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Pos r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Pos r1) (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Pos r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Neg r1) (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Neg r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Neg r1) (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Neg r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns))))
-  forall P Q l1 l2. ALL2 (interpsign P) l1 l2 ==> Q SUBSET P ==>\n   ALL2 (interpsign Q) l1 l2
-  forall h i l1 l2.\n  HD (APPEND l1 (CONS h l2)) = HD (APPEND l1 (CONS h (CONS i l2)))
-  forall h j l1 l2.\n    real_ordered_list (APPEND l1 (CONS h (CONS i l2))) ==>\n    h < j ==> j < i ==>\n      real_ordered_list (APPEND l1 (CONS h (CONS j (CONS i l2))))
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Pos r1) (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Neg r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n          (CONS (CONS Pos (CONS Pos r2))\n          (CONS (CONS Zero (CONS Pos r2))\n          (CONS (CONS Neg (CONS Pos r2))\n          (CONS (CONS Neg r3) rgns))))))
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Pos r1) (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Neg r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n          (CONS (CONS Pos (CONS Neg r2))\n          (CONS (CONS Zero (CONS Neg r2))\n          (CONS (CONS Neg (CONS Neg r2))\n          (CONS (CONS Neg r3) rgns))))))
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n         LENGTH (APPEND sgns (CONS (CONS Neg r1)\n          (CONS (CONS Unknown (CONS Neg r2))\n          (CONS (CONS Pos r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n          (CONS (CONS Neg (CONS Neg r2))\n          (CONS (CONS Zero (CONS Neg r2))\n          (CONS (CONS Pos (CONS Neg r2))\n          (CONS (CONS Pos r3) rgns))))))
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall rts. APPEND (BUTLAST (partition_line pts))\n       (CONS (\\x. LAST pts < x /\\ x < y) rts) =\n     APPEND (APPEND (BUTLAST (partition_line pts))\n        [\\x. LAST pts < x /\\ x < y]) rts
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  \\x. y < x /\\ x < z
-  X
-  y < x ==> ~(x = y)
-  x < y ==> ~(x = y)
-  p:real list
-  z:real
-  y:real
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n         LENGTH (APPEND sgns (CONS (CONS Neg r1)\n          (CONS (CONS Unknown (CONS Pos r2))\n          (CONS (CONS Pos r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    ?w. interpmat (APPEND pts (CONS y (CONS w (CONS z qts))))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n          (CONS (CONS Neg (CONS Pos r2))\n          (CONS (CONS Zero (CONS Pos r2))\n          (CONS (CONS Pos (CONS Pos r2))\n          (CONS (CONS Pos r3) rgns))))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Zero r1) (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Pos r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Pos r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Zero r1) (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Pos r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Pos r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Pos r1) (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Zero r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) = LENGTH (APPEND sgns (CONS (CONS Pos r1) (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Zero r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Pos r1)\n           (CONS (CONS Pos (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n   LENGTH (APPEND sgns (CONS (CONS Zero r1)\n   (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Neg r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Neg r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n   LENGTH (APPEND sgns (CONS (CONS Zero r1)\n   (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Neg r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Neg r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n   LENGTH (APPEND sgns (CONS (CONS Neg r1)\n   (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Zero r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns))))
-  x < y ==> ~(x = y)
-  x < y ==> ~(x = y)
-  real_ordered_list (CONS y (CONS z qts))
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x < y ==> ~(x = y)
-  real_ordered_list [y; z]
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH sgns
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  x > y ==> ~(x = y)
-  LENGTH sgns = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n   LENGTH (APPEND sgns (CONS (CONS Neg r1)\n   (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Zero r3) rgns))))
-  ~(sgns = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==>\n    interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Neg r1)\n           (CONS (CONS Neg (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns))))
-  x > y ==> ~(x = y)
-  real_ordered_list (CONS y(CONS  z qts))
-  p
-  z
-  y
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH (sgns:(sign list)list)
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x > y ==> ~(x = y)
-  real_ordered_list [y; z]
-  p
-  z
-  y
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH (sgns:(sign list) list)
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  p
-  z
-  y
-  x > y ==> ~(x = y)
-  p
-  z
-  y
-  LENGTH (sgns:(sign list) list) = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n   LENGTH (APPEND sgns (CONS (CONS Zero r1)\n   (CONS (CONS Unknown (CONS Pos r2)) (CONS (CONS Zero r3) rgns))))
-  ~((sgns:(sign list) list) = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Pos r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==> F
-  x > y ==> ~(x = y)
-  real_ordered_list (CONS y(CONS  z qts))
-  p
-  z
-  y
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH (sgns:(sign list)list)
-  forall j. APPEND (BUTLAST (partition_line pts)) (CONS (\\x. LAST pts < x /\\ x < y) j) = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) j
-  x > y ==> ~(x = y)
-  real_ordered_list [y; z]
-  p
-  z
-  y
-  LENGTH (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) = LENGTH (sgns:(sign list) list)
-  APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y; \\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x] = APPEND (APPEND (BUTLAST (partition_line pts)) [\\x. LAST pts < x /\\ x < y]) [\\x. x = y; \\x. y < x /\\ x < z; \\x. x = z; \\x. z < x]
-  x > y ==> ~(x = y)
-  p
-  z
-  y
-  x > y ==> ~(x = y)
-  p
-  z
-  y
-  LENGTH (sgns:(sign list) list) = 1
-  pts = []
-  LENGTH (partition_line (APPEND pts (CONS y (CONS z qts)))) =\n   LENGTH (APPEND sgns (CONS (CONS Zero r1)\n   (CONS (CONS Unknown (CONS Neg r2)) (CONS (CONS Zero r3) rgns))))
-  ~((sgns:(sign list) list) = [])
-  forall y z p pts qts eqs sgns rgns r1 r2 r3.\n     interpmat (APPEND pts (CONS y (CONS z qts)))\n      (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) eqs))\n        (APPEND sgns\n          (CONS (CONS Zero r1)\n           (CONS (CONS Unknown (CONS Neg r2))\n            (CONS (CONS Zero r3) rgns)))) ==>\n     (LENGTH sgns = 2 * LENGTH pts + 1) ==> F
-  forall l. ~(l = []) ==> (APPEND (BUTLAST l) [LAST l] = l)
-  forall l. ~(l = []) ==> (l = APPEND (BUTLAST l) [LAST l])
-  forall l. (BUTLAST l = []) <=> (l = []) \\/ (?x. l = [x])
-  \\x. x < h
-  \\x. x < h
-  \\x. x < h
-  Y
-  h:real
-  poly_diff p
-  p:real list
-  \\x. x < h
-  \\x. x < h
-  \\x. x < h
-  Y
-  h:real
-  poly_diff p
-  p:real list
-  \\x. T
-  \\x. T
-  \\x. T
-  Y
-  &0
-  poly_diff p
-  p:real list
-  pts:real list
-  forall pts p ps r1 sgns.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (CONS (CONS Unknown (CONS Pos r1)) sgns)  ==>\n   nonconstant p ==>\n  ?xminf.\n   interpmat (CONS xminf pts)\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))
-  \\x. LAST pts < x
-  \\x. LAST pts < x
-  \\x. LAST pts < x
-  Y
-  LAST pts:real
-  poly_diff p
-  p:real list
-  pts:real list
-  LENGTH (BUTLAST (partition_line (BUTLAST pts))) = LENGTH sgns
-  \\x. w < x
-  \\x. w < x
-  \\x. w < x
-  Y
-  w:real
-  poly_diff p
-  p:real list
-  sgns = []
-  ?w. pts = [w:real]
-  BUTLAST (pts:real list) = []
-  ALL2\n       (interpsigns\n       (CONS (\\x. poly p x)\n       (CONS (\\x. poly (poly_diff p) x) ps)))\n       (partition_line (APPEND (BUTLAST pts) [LAST pts]))\n       (APPEND sgns [a; b; CONS Unknown (CONS Pos r2)])
-  pts = APPEND (BUTLAST pts) [LAST (pts:real list)]
-  pts = []
-  LENGTH sgns = LENGTH (partition_line pts) - 3
-  LENGTH (partition_line pts) = LENGTH (APPEND sgns [a; b; CONS Unknown (CONS Pos r2)])
-  forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xinf.\n   interpmat (APPEND pts [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])
-  \\x. x < h
-  \\x. x < h
-  \\x. x < h
-  Y
-  h:real
-  poly_diff p
-  p:real list
-  \\x. x < h
-  \\x. x < h
-  \\x. x < h
-  Y
-  h:real
-  poly_diff p
-  p:real list
-  \\x. T
-  \\x. T
-  \\x. T
-  Y
-  &0
-  poly_diff p
-  p:real list
-  pts:real list
-  forall pts p ps r1 sgns.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (CONS (CONS Unknown (CONS Neg r1)) sgns)  ==>\n   nonconstant p ==>\n  ?xminf.\n   interpmat (CONS xminf pts)\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))
-  \\x. LAST pts < x
-  \\x. LAST pts < x
-  \\x. LAST pts < x
-  Y
-  LAST pts:real
-  poly_diff p
-  p:real list
-  pts:real list
-  LENGTH (BUTLAST (partition_line (BUTLAST pts))) = LENGTH sgns
-  \\x. w < x
-  \\x. w < x
-  \\x. w < x
-  Y
-  w:real
-  poly_diff p
-  p:real list
-  sgns = []
-  ?w. pts = [w:real]
-  BUTLAST (pts:real list) = []
-  ALL2\n       (interpsigns\n       (CONS (\\x. poly p x)\n       (CONS (\\x. poly (poly_diff p) x) ps)))\n       (partition_line (APPEND (BUTLAST pts) [LAST pts]))\n       (APPEND sgns [a; b; CONS Unknown (CONS Neg r2)])
-  pts = APPEND (BUTLAST pts) [LAST (pts:real list)]
-  pts = []
-  LENGTH sgns = LENGTH (partition_line pts) - 3
-  LENGTH (partition_line pts) = LENGTH (APPEND sgns [a; b; CONS Unknown (CONS Neg r2)])
-  forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xinf.\n   interpmat (APPEND pts [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND sgns\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])
-  xminf
-  forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Pos r1)) sgns)\n     [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])
-  xminf
-  forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Pos r1)) sgns)\n     [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Neg (CONS Pos r1))\n      (CONS (CONS Unknown (CONS Pos r1)) sgns)))\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])
-  xminf
-  forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Neg r1)) sgns)\n     [a; b; CONS Unknown (CONS Pos r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))\n     [a; b; CONS Unknown (CONS Pos r2);\n      CONS Pos (CONS Pos r2);\n      CONS Pos (CONS Pos r2)])
-  xminf
-  forall pts p ps r1 sgns r2.\n  interpmat pts\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND (CONS (CONS Unknown (CONS Neg r1)) sgns)\n     [a; b; CONS Unknown (CONS Neg r2)]) ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat (APPEND (CONS xminf pts) [xinf])\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    (APPEND\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Pos (CONS Neg r1))\n      (CONS (CONS Unknown (CONS Neg r1)) sgns)))\n     [a; b; CONS Unknown (CONS Neg r2);\n      CONS Neg (CONS Neg r2);\n      CONS Neg (CONS Neg r2)])
-  \\x. T
-  \\x. T
-  \\x. T
-  \\x. T
-  \\x. T
-  Y
-  Y'
-  &0
-  poly_diff p
-  p:real list
-  &0
-  poly_diff p
-  p:real list
-  forall p ps r1.\n  interpmat []\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS Pos (CONS Pos r1);\n       CONS Pos (CONS Pos r1)]
-  \\x. T
-  \\x. T
-  \\x. T
-  \\x. T
-  \\x. T
-  Y
-  Y'
-  &0
-  poly_diff p
-  p:real list
-  &0
-  poly_diff p
-  p:real list
-  forall p ps r1.\n  interpmat []\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS Neg (CONS Neg r1);\n       CONS Neg (CONS Neg r1)]
-  xinf
-  (?y x. P x y) ==> (?x y. P x y)
-  [x; y; z] = APPEND [] [x; y; z]
-  forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1);CONS s2 r2;CONS Unknown (CONS Pos r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Pos r3);\n       CONS Pos (CONS Pos r3);\n       CONS Pos (CONS Pos r3)]
-  xinf
-  (?y x. P x y) ==> (?x y. P x y)
-  [x; y; z] = APPEND [] [x; y; z]
-  forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Pos r1);CONS s2 r2;CONS Unknown (CONS Neg r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Neg (CONS Pos r1);\n       CONS Neg (CONS Pos r1);\n       CONS Unknown (CONS Pos r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Neg r3);\n       CONS Neg (CONS Neg r3);\n       CONS Neg (CONS Neg r3)]
-  xinf
-  (?y x. P x y) ==> (?x y. P x y)
-  [x; y; z] = APPEND [] [x; y; z]
-  forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1);CONS s2 r2;CONS Unknown (CONS Pos r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Pos r3);\n       CONS Pos (CONS Pos r3);\n       CONS Pos (CONS Pos r3)]
-  xinf
-  (?y x. P x y) ==> (?x y. P x y)
-  [x; y; z] = APPEND [] [x; y; z]
-  forall p ps r1 x s2 r2 r3.\n  interpmat [x]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n    [CONS Unknown (CONS Neg r1);CONS s2 r2;CONS Unknown (CONS Neg r3)]  ==>\n   nonconstant p ==>\n  ?xminf xinf.\n   interpmat [xminf; x; xinf]\n    (CONS (\\x. poly p x) (CONS (\\x. poly (poly_diff p) x) ps))\n      [CONS Pos (CONS Neg r1);\n       CONS Pos (CONS Neg r1);\n       CONS Unknown (CONS Neg r1);\n       CONS s2 r2;\n       CONS Unknown (CONS Neg r3);\n       CONS Neg (CONS Neg r3);\n       CONS Neg (CONS Neg r3)]
-  forall i h t. EL (SUC i) (CONS h t) = EL i t
-  forall i h t. ~(i = 0) ==> (EL i (CONS h t) = EL (PRE i) t)
-  n:num
-  ~(l2 = [])
-  ~(l1 = [])
-  forall k P l1 l2 n.\n    (k = LENGTH l1) /\\ ALL2 P l1 l2 /\\ n < k ==>\n       P (EL n l1) (EL n l2)
-  forall P l1 l2 n. ALL2 P l1 l2 /\\ n < LENGTH l1 ==> P (EL n l1) (EL n l2)
-  SUC i
-  SUC i < SUC (LENGTH t)
-  ~(l2 = [])
-  ~(l1 = [])
-  forall k P (l1:A list) (l2:B list).  (k = LENGTH l1) /\\ (k = LENGTH l2) /\\\n    ~(?i. i < LENGTH l1 /\\ ~(P (EL i l1) (EL i l2))) ==> ALL2 P l1 l2
-  forall P (l1:A list) (l2:B list). ALL2 P l1 l2 <=> (LENGTH l1 = LENGTH l2) /\\\n    ~(?i. i < LENGTH l1 /\\ ~(P (EL i l1) (EL i l2)))
-  forall f l n. n < LENGTH l ==> (EL n (MAP f l) = f (EL n l))
-  ~(EL i sgns = [])
-  i < LENGTH sgns
-  i:num
-  forall p ps sgns pts.\n    interpmat pts (CONS p ps) sgns ==> interpmat pts ps (MAP TL sgns)
-  ~(TL (EL i sgns) = [])
-  ~(EL i sgns = [])
-  i < LENGTH sgns
-  i:num
-  forall sgns pts p1 p2 ps.\n   interpmat pts (CONS p1 (CONS p2 ps)) sgns ==>\n   interpmat pts (CONS p1 ps) (MAP (\\x. CONS (HD x) (TL (TL x))) sgns)
-  SUC n < SUC (LENGTH t)
+  !(partition_line([(x : Real), (y : Real)]) == NIL)
+  LENGTH(APPEND(BUTLAST(partition_line(CONS((h : Real), (t : List[Real])))), CONS((x' : Real) => LAST(CONS(h, t)) < x' && x' < (x : Real), TL(partition_line([x, (y : Real)]))))) == LENGTH(APPEND((sgns : List[List[Sign]]), [(a : List[Sign]), (b : List[Sign]), (s : List[Sign]), s, s]))
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
+  LENGTH([(x' : Real) => x' < (x : Real), (x' : Real) => x' == x, (x' : Real) => x < x' && x' < (y : Real), (x : Real) => x == y, (x : Real) => y < x]) == LENGTH(APPEND((sgns : List[_]), [(a : _), (b : _), (s : _), s, s]))
+  (sgns : List[_]) == NIL
+  (pts : List[Real])
+  \226\136\128 a : List[Sign], \226\136\128 b : List[Sign], \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 s : List[Sign], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], ALL2(interpsigns(eqs), partition_line(APPEND(pts, [x, y])), APPEND(sgns, [a, b, s, s, s])) \226\134\146 ALL2(interpsigns(eqs), partition_line(APPEND(pts, [x])), APPEND(sgns, [a, b, s]))
+  APPEND((pts : List[_]), [(x : _), (y : _)])
+  \226\136\128 a : List[Sign], \226\136\128 b : List[Sign], \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 s : List[Sign], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts, [x, y]), eqs, APPEND(sgns, [a, b, s, s, s])) \226\134\146 interpmat(APPEND(pts, [x]), eqs, APPEND(sgns, [a, b, s]))
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], !(l2 == NIL) \226\134\146 LAST(APPEND(l1, l2)) == LAST(l2)
+  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 l3 : List[_], APPEND(APPEND(l1, l2), l3) == APPEND(l1, APPEND(l2, l3))
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z && z < HD((qts : List[Real]))
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
+  (pts : List[Real])
+  LENGTH(BUTLAST(partition_line((pts : List[Real])))) == LENGTH((sgns : List[_]))
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z && z < HD((qts : List[Real]))
+  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
+  2 * 0 == 0
+  (sgns : List[_]) == NIL
+  (pts : List[_]) == NIL
+  LENGTH((rgns : List[_])) == 2 * LENGTH((qts : List[_]))
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((x : Real), CONS((y : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS((a : List[Sign]), CONS((b : List[Sign]), CONS((s : List[Sign]), CONS(s, CONS(s, (rgns : List[List[Sign]]))))))))
+  \226\136\128 a : List[Sign], \226\136\128 b : List[Sign], \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 s : List[Sign], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 qts : List[Real], \226\136\128 rgns : List[List[Sign]], ALL2(interpsigns(eqs), partition_line(APPEND(pts, CONS(x, CONS(y, qts)))), APPEND(sgns, CONS(a, CONS(b, CONS(s, CONS(s, CONS(s, rgns))))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) \226\134\146 ALL2(interpsigns(eqs), partition_line(APPEND(pts, CONS(x, qts))), APPEND(sgns, CONS(a, CONS(b, CONS(s, rgns)))))
+  APPEND((pts : List[_]), CONS((x : _), CONS((y : _), (qts : List[_]))))
+  \226\136\128 a : List[Sign], \226\136\128 b : List[Sign], \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 s : List[Sign], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 qts : List[Real], \226\136\128 rgns : List[List[Sign]], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts, CONS(x, CONS(y, qts))), eqs, APPEND(sgns, CONS(a, CONS(b, CONS(s, CONS(s, CONS(s, rgns))))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) \226\134\146 interpmat(APPEND(pts, CONS(x, qts)), eqs, APPEND(sgns, CONS(a, CONS(b, CONS(s, rgns)))))
+  (z : Real) => (x : Real) < z || z == x || z < x
+  \226\136\128 x : Real, \226\136\128 l : List[Sign], interpmat([x], (eqs : List[(Real) -> Real]), [l, l, l]) \226\134\146 interpmat(NIL, eqs, [l])
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Pos, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Pos, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Pos, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Pos, CONS(Pos, r2)), CONS(CONS(Pos, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Pos, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Pos, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Pos, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Pos, CONS(Neg, r2)), CONS(CONS(Pos, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Neg, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Neg, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Neg, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Neg, CONS(Pos, r2)), CONS(CONS(Neg, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Neg, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Neg, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Neg, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Neg, CONS(Neg, r2)), CONS(CONS(Neg, r3), rgns)))))
+  \226\136\128 P : (Real) -> Bool, \226\136\128 Q : (Real) -> Bool, \226\136\128 l1 : List[(Real) -> Real], \226\136\128 l2 : List[Sign], ALL2(interpsign(P), l1, l2) \226\134\146 SUBSET(Q, P) \226\134\146 ALL2(interpsign(Q), l1, l2)
+  \226\136\128 h : _, \226\136\128 i : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], HD(APPEND(l1, CONS(h, l2))) == HD(APPEND(l1, CONS(h, CONS(i, l2))))
+  \226\136\128 h : Real, \226\136\128 j : Real, \226\136\128 l1 : List[Real], \226\136\128 l2 : List[Real], real_ordered_list(APPEND(l1, CONS(h, CONS((i : Real), l2)))) \226\134\146 h < j \226\134\146 j < i \226\134\146 real_ordered_list(APPEND(l1, CONS(h, CONS(j, CONS(i, l2)))))
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 rts : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), rts)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), rts)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Pos, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Neg, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Neg, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 (\226\136\131 w : Real, interpmat(APPEND(pts, CONS(y, CONS(w, CONS(z, qts)))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Pos, CONS(Pos, r2)), CONS(CONS(Zero, CONS(Pos, r2)), CONS(CONS(Neg, CONS(Pos, r2)), CONS(CONS(Neg, r3), rgns))))))))
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 rts : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), rts)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), rts)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Pos, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Neg, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Neg, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 (\226\136\131 w : Real, interpmat(APPEND(pts, CONS(y, CONS(w, CONS(z, qts)))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Pos, CONS(Neg, r2)), CONS(CONS(Zero, CONS(Neg, r2)), CONS(CONS(Neg, CONS(Neg, r2)), CONS(CONS(Neg, r3), rgns))))))))
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 rts : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), rts)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), rts)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Neg, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Pos, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Pos, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 (\226\136\131 w : Real, interpmat(APPEND(pts, CONS(y, CONS(w, CONS(z, qts)))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Neg, CONS(Neg, r2)), CONS(CONS(Zero, CONS(Neg, r2)), CONS(CONS(Pos, CONS(Neg, r2)), CONS(CONS(Pos, r3), rgns))))))))
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 rts : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), rts)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), rts)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (x : Real) => (y : Real) < x && x < (z : Real)
+  (X : _)
+  (y : Real) < (x : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (p : List[Real])
+  (z : Real)
+  (y : Real)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Neg, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Pos, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Pos, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 (\226\136\131 w : Real, interpmat(APPEND(pts, CONS(y, CONS(w, CONS(z, qts)))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Neg, CONS(Pos, r2)), CONS(CONS(Zero, CONS(Pos, r2)), CONS(CONS(Pos, CONS(Pos, r2)), CONS(CONS(Pos, r3), rgns))))))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Zero, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Pos, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Pos, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Pos, CONS(Pos, r2)), CONS(CONS(Pos, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Zero, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Pos, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Pos, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Pos, CONS(Neg, r2)), CONS(CONS(Pos, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Pos, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Zero, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Zero, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Pos, CONS(Pos, r2)), CONS(CONS(Zero, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Pos, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Zero, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Zero, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Pos, r1), CONS(CONS(Pos, CONS(Neg, r2)), CONS(CONS(Zero, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Zero, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Neg, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Neg, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Neg, CONS(Pos, r2)), CONS(CONS(Neg, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Zero, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Neg, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Neg, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Neg, CONS(Neg, r2)), CONS(CONS(Neg, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Neg, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Zero, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Zero, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Neg, CONS(Neg, r2)), CONS(CONS(Zero, r3), rgns)))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  LENGTH((sgns : List[_])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Neg, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Zero, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[_]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Zero, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Neg, r1), CONS(CONS(Neg, CONS(Pos, r2)), CONS(CONS(Zero, r3), rgns)))))
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  (p : _)
+  (z : _)
+  (y : _)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[List[Sign]]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  (p : _)
+  (z : _)
+  (y : _)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[List[Sign]]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (p : _)
+  (z : _)
+  (y : _)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (p : _)
+  (z : _)
+  (y : _)
+  LENGTH((sgns : List[List[Sign]])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Zero, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Pos, (r2 : List[Sign]))), CONS(CONS(Zero, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[List[Sign]]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Unknown, CONS(Pos, r2)), CONS(CONS(Zero, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 false
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  real_ordered_list(CONS((y : Real), CONS((z : Real), (qts : List[Real]))))
+  (p : _)
+  (z : _)
+  (y : _)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[List[Sign]]))
+  \226\136\128 j : List[(Real) -> Bool], APPEND(BUTLAST(partition_line((pts : List[Real]))), CONS((x : Real) => LAST(pts) < x && x < (y : Real), j)) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), j)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  real_ordered_list([(y : Real), (z : Real)])
+  (p : _)
+  (z : _)
+  (y : _)
+  LENGTH(APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real)])) == LENGTH((sgns : List[List[Sign]]))
+  APPEND(BUTLAST(partition_line((pts : List[Real]))), [(x : Real) => LAST(pts) < x && x < (y : Real), (x : Real) => x == y, (x : Real) => y < x && x < (z : Real), (x : Real) => x == z, (x : Real) => z < x]) == APPEND(APPEND(BUTLAST(partition_line(pts)), [(x : Real) => LAST(pts) < x && x < y]), [(x : Real) => x == y, (x : Real) => y < x && x < z, (x : Real) => x == z, (x : Real) => z < x])
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (p : _)
+  (z : _)
+  (y : _)
+  (x : Real) > (y : Real) \226\134\146 !(x == y)
+  (p : _)
+  (z : _)
+  (y : _)
+  LENGTH((sgns : List[List[Sign]])) == 1
+  (pts : List[_]) == NIL
+  LENGTH(partition_line(APPEND((pts : List[Real]), CONS((y : Real), CONS((z : Real), (qts : List[Real])))))) == LENGTH(APPEND((sgns : List[List[Sign]]), CONS(CONS(Zero, (r1 : List[Sign])), CONS(CONS(Unknown, CONS(Neg, (r2 : List[Sign]))), CONS(CONS(Zero, (r3 : List[Sign])), (rgns : List[List[Sign]]))))))
+  !((sgns : List[List[Sign]]) == NIL)
+  \226\136\128 y : Real, \226\136\128 z : Real, \226\136\128 p : List[Real], \226\136\128 pts : List[Real], \226\136\128 qts : List[Real], \226\136\128 eqs : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 rgns : List[List[Sign]], \226\136\128 r1 : List[Sign], \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat(APPEND(pts, CONS(y, CONS(z, qts))), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), eqs)), APPEND(sgns, CONS(CONS(Zero, r1), CONS(CONS(Unknown, CONS(Neg, r2)), CONS(CONS(Zero, r3), rgns))))) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1 \226\134\146 false
+  \226\136\128 l : List[_], !(l == NIL) \226\134\146 APPEND(BUTLAST(l), [LAST(l)]) == l
+  \226\136\128 l : List[_], !(l == NIL) \226\134\146 l == APPEND(BUTLAST(l), [LAST(l)])
+  \226\136\128 l : List[_], (BUTLAST(l) == NIL) == (l == NIL || (\226\136\131 x : _, l == [x]))
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (Y : _)
+  (h : Real)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (Y : _)
+  (h : Real)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (Y : _)
+  real_of_num(0)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (pts : List[Real])
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 sgns : List[List[Sign]], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), CONS(CONS(Unknown, CONS(Pos, r1)), sgns)) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, interpmat(CONS(xminf, pts), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), CONS(CONS(Neg, CONS(Pos, r1)), CONS(CONS(Neg, CONS(Pos, r1)), CONS(CONS(Unknown, CONS(Pos, r1)), sgns)))))
+  (x : Real) => LAST((pts : List[Real])) < x
+  (x : Real) => LAST((pts : List[Real])) < x
+  (x : Real) => LAST((pts : List[Real])) < x
+  (Y : _)
+  LAST((pts : List[Real]))
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (pts : List[Real])
+  LENGTH(BUTLAST(partition_line(BUTLAST((pts : List[Real]))))) == LENGTH((sgns : List[_]))
+  (x : Real) => (w : Real) < x
+  (x : Real) => (w : Real) < x
+  (x : Real) => (w : Real) < x
+  (Y : _)
+  (w : Real)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (sgns : List[_]) == NIL
+  \226\136\131 w : Real, (pts : List[Real]) == [w]
+  BUTLAST((pts : List[Real])) == NIL
+  ALL2(interpsigns(CONS((x : Real) => poly((p : List[Real]), x), CONS((x : Real) => poly(poly_diff(p), x), (ps : List[(Real) -> Real])))), partition_line(APPEND(BUTLAST((pts : List[Real])), [LAST(pts)])), APPEND((sgns : List[List[Sign]]), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Pos, (r2 : List[Sign])))]))
+  (pts : List[Real]) == APPEND(BUTLAST(pts), [LAST(pts)])
+  (pts : List[_]) == NIL
+  LENGTH((sgns : List[_])) == LENGTH(partition_line((pts : List[Real]))) - 3
+  LENGTH(partition_line((pts : List[Real]))) == LENGTH(APPEND((sgns : List[List[Sign]]), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Pos, (r2 : List[Sign])))]))
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : _, \226\136\128 sgns : List[List[Sign]], \226\136\128 r2 : List[Sign], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(sgns, [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Pos, r2))])) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xinf : Real, interpmat(APPEND(pts, [xinf]), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(sgns, [a, b, CONS(Unknown, CONS(Pos, r2)), CONS(Pos, CONS(Pos, r2)), CONS(Pos, CONS(Pos, r2))])))
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (Y : _)
+  (h : Real)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (x : Real) => x < (h : Real)
+  (Y : _)
+  (h : Real)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (Y : _)
+  real_of_num(0)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (pts : List[Real])
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 sgns : List[List[Sign]], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), CONS(CONS(Unknown, CONS(Neg, r1)), sgns)) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, interpmat(CONS(xminf, pts), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), CONS(CONS(Pos, CONS(Neg, r1)), CONS(CONS(Pos, CONS(Neg, r1)), CONS(CONS(Unknown, CONS(Neg, r1)), sgns)))))
+  (x : Real) => LAST((pts : List[Real])) < x
+  (x : Real) => LAST((pts : List[Real])) < x
+  (x : Real) => LAST((pts : List[Real])) < x
+  (Y : _)
+  LAST((pts : List[Real]))
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (pts : List[Real])
+  LENGTH(BUTLAST(partition_line(BUTLAST((pts : List[Real]))))) == LENGTH((sgns : List[_]))
+  (x : Real) => (w : Real) < x
+  (x : Real) => (w : Real) < x
+  (x : Real) => (w : Real) < x
+  (Y : _)
+  (w : Real)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  (sgns : List[_]) == NIL
+  \226\136\131 w : Real, (pts : List[Real]) == [w]
+  BUTLAST((pts : List[Real])) == NIL
+  ALL2(interpsigns(CONS((x : Real) => poly((p : List[Real]), x), CONS((x : Real) => poly(poly_diff(p), x), (ps : List[(Real) -> Real])))), partition_line(APPEND(BUTLAST((pts : List[Real])), [LAST(pts)])), APPEND((sgns : List[List[Sign]]), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Neg, (r2 : List[Sign])))]))
+  (pts : List[Real]) == APPEND(BUTLAST(pts), [LAST(pts)])
+  (pts : List[_]) == NIL
+  LENGTH((sgns : List[_])) == LENGTH(partition_line((pts : List[Real]))) - 3
+  LENGTH(partition_line((pts : List[Real]))) == LENGTH(APPEND((sgns : List[List[Sign]]), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Neg, (r2 : List[Sign])))]))
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : _, \226\136\128 sgns : List[List[Sign]], \226\136\128 r2 : List[Sign], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(sgns, [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Neg, r2))])) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xinf : Real, interpmat(APPEND(pts, [xinf]), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(sgns, [a, b, CONS(Unknown, CONS(Neg, r2)), CONS(Neg, CONS(Neg, r2)), CONS(Neg, CONS(Neg, r2))])))
+  (xminf : _)
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 sgns : List[List[Sign]], \226\136\128 r2 : List[Sign], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Unknown, CONS(Pos, r1)), sgns), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Pos, r2))])) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat(APPEND(CONS(xminf, pts), [xinf]), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Neg, CONS(Pos, r1)), CONS(CONS(Neg, CONS(Pos, r1)), CONS(CONS(Unknown, CONS(Pos, r1)), sgns))), [a, b, CONS(Unknown, CONS(Pos, r2)), CONS(Pos, CONS(Pos, r2)), CONS(Pos, CONS(Pos, r2))])))
+  (xminf : _)
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 sgns : List[List[Sign]], \226\136\128 r2 : List[Sign], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Unknown, CONS(Pos, r1)), sgns), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Neg, r2))])) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat(APPEND(CONS(xminf, pts), [xinf]), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Neg, CONS(Pos, r1)), CONS(CONS(Neg, CONS(Pos, r1)), CONS(CONS(Unknown, CONS(Pos, r1)), sgns))), [a, b, CONS(Unknown, CONS(Neg, r2)), CONS(Neg, CONS(Neg, r2)), CONS(Neg, CONS(Neg, r2))])))
+  (xminf : _)
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 sgns : List[List[Sign]], \226\136\128 r2 : List[Sign], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Unknown, CONS(Neg, r1)), sgns), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Pos, r2))])) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat(APPEND(CONS(xminf, pts), [xinf]), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Pos, CONS(Neg, r1)), CONS(CONS(Pos, CONS(Neg, r1)), CONS(CONS(Unknown, CONS(Neg, r1)), sgns))), [a, b, CONS(Unknown, CONS(Pos, r2)), CONS(Pos, CONS(Pos, r2)), CONS(Pos, CONS(Pos, r2))])))
+  (xminf : _)
+  \226\136\128 pts : List[Real], \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 sgns : List[List[Sign]], \226\136\128 r2 : List[Sign], interpmat(pts, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Unknown, CONS(Neg, r1)), sgns), [(a : List[Sign]), (b : List[Sign]), CONS(Unknown, CONS(Neg, r2))])) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat(APPEND(CONS(xminf, pts), [xinf]), CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), APPEND(CONS(CONS(Pos, CONS(Neg, r1)), CONS(CONS(Pos, CONS(Neg, r1)), CONS(CONS(Unknown, CONS(Neg, r1)), sgns))), [a, b, CONS(Unknown, CONS(Neg, r2)), CONS(Neg, CONS(Neg, r2)), CONS(Neg, CONS(Neg, r2))])))
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (Y : _)
+  (Y' : _)
+  real_of_num(0)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  real_of_num(0)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], interpmat(NIL, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Unknown, CONS(Pos, r1))]) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat([xminf, xinf], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Neg, CONS(Pos, r1)), CONS(Neg, CONS(Pos, r1)), CONS(Unknown, CONS(Pos, r1)), CONS(Pos, CONS(Pos, r1)), CONS(Pos, CONS(Pos, r1))]))
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (x : _) => true
+  (Y : _)
+  (Y' : _)
+  real_of_num(0)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  real_of_num(0)
+  poly_diff((p : List[Real]))
+  (p : List[Real])
+  \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], interpmat(NIL, CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Unknown, CONS(Neg, r1))]) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat([xminf, xinf], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Pos, CONS(Neg, r1)), CONS(Pos, CONS(Neg, r1)), CONS(Unknown, CONS(Neg, r1)), CONS(Neg, CONS(Neg, r1)), CONS(Neg, CONS(Neg, r1))]))
+  (xinf : _)
+  (\226\136\131 y : _, \226\136\131 x : _, (P : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\131 x : _, \226\136\131 y : _, P(x, y))
+  [(x : _), (y : _), (z : _)] == APPEND(NIL, [x, y, z])
+  \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 x : Real, \226\136\128 s2 : Sign, \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat([x], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Unknown, CONS(Pos, r1)), CONS(s2, r2), CONS(Unknown, CONS(Pos, r3))]) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat([xminf, x, xinf], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Neg, CONS(Pos, r1)), CONS(Neg, CONS(Pos, r1)), CONS(Unknown, CONS(Pos, r1)), CONS(s2, r2), CONS(Unknown, CONS(Pos, r3)), CONS(Pos, CONS(Pos, r3)), CONS(Pos, CONS(Pos, r3))]))
+  (xinf : _)
+  (\226\136\131 y : _, \226\136\131 x : _, (P : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\131 x : _, \226\136\131 y : _, P(x, y))
+  [(x : _), (y : _), (z : _)] == APPEND(NIL, [x, y, z])
+  \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 x : Real, \226\136\128 s2 : Sign, \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat([x], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Unknown, CONS(Pos, r1)), CONS(s2, r2), CONS(Unknown, CONS(Neg, r3))]) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat([xminf, x, xinf], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Neg, CONS(Pos, r1)), CONS(Neg, CONS(Pos, r1)), CONS(Unknown, CONS(Pos, r1)), CONS(s2, r2), CONS(Unknown, CONS(Neg, r3)), CONS(Neg, CONS(Neg, r3)), CONS(Neg, CONS(Neg, r3))]))
+  (xinf : _)
+  (\226\136\131 y : _, \226\136\131 x : _, (P : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\131 x : _, \226\136\131 y : _, P(x, y))
+  [(x : _), (y : _), (z : _)] == APPEND(NIL, [x, y, z])
+  \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 x : Real, \226\136\128 s2 : Sign, \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat([x], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Unknown, CONS(Neg, r1)), CONS(s2, r2), CONS(Unknown, CONS(Pos, r3))]) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat([xminf, x, xinf], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Pos, CONS(Neg, r1)), CONS(Pos, CONS(Neg, r1)), CONS(Unknown, CONS(Neg, r1)), CONS(s2, r2), CONS(Unknown, CONS(Pos, r3)), CONS(Pos, CONS(Pos, r3)), CONS(Pos, CONS(Pos, r3))]))
+  (xinf : _)
+  (\226\136\131 y : _, \226\136\131 x : _, (P : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\131 x : _, \226\136\131 y : _, P(x, y))
+  [(x : _), (y : _), (z : _)] == APPEND(NIL, [x, y, z])
+  \226\136\128 p : List[Real], \226\136\128 ps : List[(Real) -> Real], \226\136\128 r1 : List[Sign], \226\136\128 x : Real, \226\136\128 s2 : Sign, \226\136\128 r2 : List[Sign], \226\136\128 r3 : List[Sign], interpmat([x], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Unknown, CONS(Neg, r1)), CONS(s2, r2), CONS(Unknown, CONS(Neg, r3))]) \226\134\146 nonconstant(p) \226\134\146 (\226\136\131 xminf : Real, \226\136\131 xinf : Real, interpmat([xminf, x, xinf], CONS((x : Real) => poly(p, x), CONS((x : Real) => poly(poly_diff(p), x), ps)), [CONS(Pos, CONS(Neg, r1)), CONS(Pos, CONS(Neg, r1)), CONS(Unknown, CONS(Neg, r1)), CONS(s2, r2), CONS(Unknown, CONS(Neg, r3)), CONS(Neg, CONS(Neg, r3)), CONS(Neg, CONS(Neg, r3))]))
+  \226\136\128 i : Num, \226\136\128 h : _, \226\136\128 t : List[_], EL(SUC(i), CONS(h, t)) == EL(i, t)
+  \226\136\128 i : Num, \226\136\128 h : _, \226\136\128 t : List[_], !(i == 0) \226\134\146 EL(i, CONS(h, t)) == EL(PRE(i), t)
+  (n : Num)
+  !((l2 : List[_]) == NIL)
+  !((l1 : List[_]) == NIL)
+  \226\136\128 k : Num, \226\136\128 P : (_, _) -> Bool, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 n : Num, k == LENGTH(l1) && ALL2(P, l1, l2) && n < k \226\134\146 P(EL(n, l1), EL(n, l2))
+  \226\136\128 P : (_, _) -> Bool, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 n : Num, ALL2(P, l1, l2) && n < LENGTH(l1) \226\134\146 P(EL(n, l1), EL(n, l2))
+  SUC((i : Num))
+  SUC((i : Num)) < SUC(LENGTH((t : List[_])))
+  !((l2 : List[_]) == NIL)
+  !((l1 : List[_]) == NIL)
+  \226\136\128 k : Num, \226\136\128 P : (A, B) -> Bool, \226\136\128 l1 : List[A], \226\136\128 l2 : List[B], k == LENGTH(l1) && k == LENGTH(l2) && !(\226\136\131 i : Num, i < LENGTH(l1) && !P(EL(i, l1), EL(i, l2))) \226\134\146 ALL2(P, l1, l2)
+  \226\136\128 P : (A, B) -> Bool, \226\136\128 l1 : List[A], \226\136\128 l2 : List[B], ALL2(P, l1, l2) == (LENGTH(l1) == LENGTH(l2) && !(\226\136\131 i : Num, i < LENGTH(l1) && !P(EL(i, l1), EL(i, l2))))
+  \226\136\128 f : (_) -> _, \226\136\128 l : List[_], \226\136\128 n : Num, n < LENGTH(l) \226\134\146 EL(n, MAP(f, l)) == f(EL(n, l))
+  !(EL((i : Num), (sgns : List[List[_]])) == NIL)
+  (i : Num) < LENGTH((sgns : List[_]))
+  (i : Num)
+  \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], \226\136\128 pts : List[Real], interpmat(pts, CONS(p, ps), sgns) \226\134\146 interpmat(pts, ps, MAP(TL, sgns))
+  !(TL(EL((i : Num), (sgns : List[List[_]]))) == NIL)
+  !(EL((i : Num), (sgns : List[List[_]])) == NIL)
+  (i : Num) < LENGTH((sgns : List[_]))
+  (i : Num)
+  \226\136\128 sgns : List[List[Sign]], \226\136\128 pts : List[Real], \226\136\128 p1 : (Real) -> Real, \226\136\128 p2 : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], interpmat(pts, CONS(p1, CONS(p2, ps)), sgns) \226\134\146 interpmat(pts, CONS(p1, ps), MAP((x : List[Sign]) => CONS(HD(x), TL(TL(x))), sgns))
+  SUC((n : Num)) < SUC(LENGTH((t : List[_])))
   0
-  PRE n < LENGTH t
-  n = 0
-  forall P l. ALL P l <=> forall n. n < LENGTH l ==> P (EL n l)
-  t'
-  ~(l1 = [])
-  ~(l2 = [])
-  l2 = []
-  forall k pols l1 l2. ALL2 (interpsigns pols) l1 l2 /\\ (k = LENGTH l2) ==>\n    ALL (\\x. LENGTH x = LENGTH pols) l2
-  forall pts pols sgns. interpmat pts pols sgns ==>\n    ALL (\\x. LENGTH x = LENGTH pols) sgns
-  forall P l1 l2. ALL2 P l1 l2 ==> ALL2 P (BUTLAST l1) (BUTLAST l2)
-  i < LENGTH sgns
-  i:num
-  forall pts pols sgns .\n     interpmat pts pols sgns ==>\n     interpmat pts (BUTLAST pols) (MAP BUTLAST sgns)
-  (INSERTAT 0 x l = CONS x l) /\\\n   (INSERTAT (SUC n) x l = CONS (HD l) (INSERTAT n x (TL l)))
-  i:num
-  ~(l2 = [])
-  ~(l1 = [])
-  forall f k l1 l2 i. (LENGTH l1 = LENGTH l2) ==> i < LENGTH l1 ==>\n    (k = LENGTH l1) ==>\n     (EL i (MAP2 f l1 l2) = f (EL i l1) (EL i l2))
-  forall f i l1 l2. (LENGTH l1 = LENGTH l2) ==> i < LENGTH l1 ==>\n     (EL i (MAP2 f l1 l2) = f (EL i l1) (EL i l2))
-  ~(SUC n <= 0)
-  ~(l = [])
-  forall x n l. n <= LENGTH l ==> (LENGTH (INSERTAT n x l) = SUC (LENGTH l))
-  n < LENGTH l \\/ (n = LENGTH l)
-  forall x n l. n < LENGTH l ==> (INSERTAT n x (TL l) = TL (INSERTAT (SUC n) x l))
-  x < y ==> ~(y = 0)
-  n'
-  TL l:A list
-  n':num
-  x:A
-  n' <= LENGTH (TL l)
-  i
-  n' <= LENGTH (TL l)
-  i
-  n <= LENGTH (TL l)
-  ~(SUC n <= 0)
-  ~(l = [])
-  i:num
-  forall n (x:A) i l. n <= LENGTH l ==> i <= LENGTH l ==>\n   ((i < n ==> (EL i (INSERTAT n x l) = EL i l)) /\\\n   ((i = n) ==> (EL i (INSERTAT n x l) = x)) /\\\n   (i > n ==> (EL i (INSERTAT n x l) = EL (PRE i) l)))
-  ~(i' = 0)
-  PRE i':num
-  i:num
-  i' <= LENGTH pols
-  p
-  i' <= LENGTH (EL i sgns)
-  n <= LENGTH (EL i sgns)
-  LENGTH (EL i sgns) = LENGTH pols
-  n <= LENGTH (EL i sgns)
-  LENGTH (EL i sgns) = LENGTH pols
-  x <= y /\\ z < x ==> z < (y:num)
-  i':num
-  i:num
-  i' <= LENGTH pols
-  i' <= LENGTH (EL i sgns)
-  n <= LENGTH (EL i sgns)
-  LENGTH (EL i sgns) = LENGTH pols
-  i' < n \\/ (i' = n) \\/ i' > (n:num)
-  LENGTH (EL i (sgns:(sign list) list)) = LENGTH pols
-  i < LENGTH psgns
-  LENGTH psgns = LENGTH sgns
-  LENGTH (psgns:sign list) = LENGTH sgns
-  forall pts p pols n psgns sgns.\n     interpmat pts pols sgns ==>\n     ALL2 (\\x y. interpsign x p y) (partition_line pts) psgns ==>\n     n <= LENGTH pols ==>\n      interpmat pts (INSERTAT n p pols) (MAP2 (INSERTAT n) psgns sgns)
+  PRE((n : Num)) < LENGTH((t : List[_]))
+  (n : Num) == 0
+  \226\136\128 P : (_) -> Bool, \226\136\128 l : List[_], ALL(P, l) == (\226\136\128 n : Num, n < LENGTH(l) \226\134\146 P(EL(n, l)))
+  (t' : _)
+  !((l1 : List[_]) == NIL)
+  !((l2 : List[_]) == NIL)
+  (l2 : List[_]) == NIL
+  \226\136\128 k : Num, \226\136\128 pols : List[(Real) -> Real], \226\136\128 l1 : List[(Real) -> Bool], \226\136\128 l2 : List[List[Sign]], ALL2(interpsigns(pols), l1, l2) && k == LENGTH(l2) \226\134\146 ALL((x : List[Sign]) => LENGTH(x) == LENGTH(pols), l2)
+  \226\136\128 pts : List[Real], \226\136\128 pols : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], interpmat(pts, pols, sgns) \226\134\146 ALL((x : List[Sign]) => LENGTH(x) == LENGTH(pols), sgns)
+  \226\136\128 P : (_, _) -> Bool, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ALL2(P, l1, l2) \226\134\146 ALL2(P, BUTLAST(l1), BUTLAST(l2))
+  (i : Num) < LENGTH((sgns : List[_]))
+  (i : Num)
+  \226\136\128 pts : List[Real], \226\136\128 pols : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], interpmat(pts, pols, sgns) \226\134\146 interpmat(pts, BUTLAST(pols), MAP(BUTLAST, sgns))
+  (INSERTAT : (Num, _, List[_]) -> List[_])(0, (x : _), (l : List[_])) == CONS(x, l) && INSERTAT(SUC((n : Num)), x, l) == CONS(HD(l), INSERTAT(n, x, TL(l)))
+  (i : Num)
+  !((l2 : List[_]) == NIL)
+  !((l1 : List[_]) == NIL)
+  \226\136\128 f : (_, _) -> _, \226\136\128 k : Num, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 i : Num, LENGTH(l1) == LENGTH(l2) \226\134\146 i < LENGTH(l1) \226\134\146 k == LENGTH(l1) \226\134\146 EL(i, MAP2(f, l1, l2)) == f(EL(i, l1), EL(i, l2))
+  \226\136\128 f : (_, _) -> _, \226\136\128 i : Num, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], LENGTH(l1) == LENGTH(l2) \226\134\146 i < LENGTH(l1) \226\134\146 EL(i, MAP2(f, l1, l2)) == f(EL(i, l1), EL(i, l2))
+  !(SUC((n : Num)) <= 0)
+  !((l : List[_]) == NIL)
+  \226\136\128 x : _, \226\136\128 n : Num, \226\136\128 l : List[_], n <= LENGTH(l) \226\134\146 LENGTH(INSERTAT(n, x, l)) == SUC(LENGTH(l))
+  (n : Num) < LENGTH((l : List[_])) || n == LENGTH(l)
+  \226\136\128 x : _, \226\136\128 n : Num, \226\136\128 l : List[_], n < LENGTH(l) \226\134\146 INSERTAT(n, x, TL(l)) == TL(INSERTAT(SUC(n), x, l))
+  (x : Num) < (y : Num) \226\134\146 !(y == 0)
+  (n' : _)
+  TL((l : List[A]))
+  (n' : Num)
+  (x : A)
+  (n' : Num) <= LENGTH(TL((l : List[_])))
+  (i : _)
+  (n' : Num) <= LENGTH(TL((l : List[_])))
+  (i : _)
+  (n : Num) <= LENGTH(TL((l : List[_])))
+  !(SUC((n : Num)) <= 0)
+  !((l : List[_]) == NIL)
+  (i : Num)
+  \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 i : Num, \226\136\128 l : List[A], n <= LENGTH(l) \226\134\146 i <= LENGTH(l) \226\134\146 (i < n \226\134\146 EL(i, INSERTAT(n, x, l)) == EL(i, l)) && (i == n \226\134\146 EL(i, INSERTAT(n, x, l)) == x) && (i > n \226\134\146 EL(i, INSERTAT(n, x, l)) == EL(PRE(i), l))
+  !((i' : Num) == 0)
+  PRE((i' : Num))
+  (i : Num)
+  (i' : Num) <= LENGTH((pols : List[_]))
+  (p : _)
+  (i' : Num) <= LENGTH(EL((i : Num), (sgns : List[List[_]])))
+  (n : Num) <= LENGTH(EL((i : Num), (sgns : List[List[_]])))
+  LENGTH(EL((i : Num), (sgns : List[List[_]]))) == LENGTH((pols : List[_]))
+  (n : Num) <= LENGTH(EL((i : Num), (sgns : List[List[_]])))
+  LENGTH(EL((i : Num), (sgns : List[List[_]]))) == LENGTH((pols : List[_]))
+  (x : Num) <= (y : Num) && (z : Num) < x \226\134\146 z < y
+  (i' : Num)
+  (i : Num)
+  (i' : Num) <= LENGTH((pols : List[_]))
+  (i' : Num) <= LENGTH(EL((i : Num), (sgns : List[List[_]])))
+  (n : Num) <= LENGTH(EL((i : Num), (sgns : List[List[_]])))
+  LENGTH(EL((i : Num), (sgns : List[List[_]]))) == LENGTH((pols : List[_]))
+  (i' : Num) < (n : Num) || i' == n || i' > n
+  LENGTH(EL((i : Num), (sgns : List[List[Sign]]))) == LENGTH((pols : List[_]))
+  (i : Num) < LENGTH((psgns : List[_]))
+  LENGTH((psgns : List[_])) == LENGTH((sgns : List[_]))
+  LENGTH((psgns : List[Sign])) == LENGTH((sgns : List[_]))
+  \226\136\128 pts : List[Real], \226\136\128 p : (Real) -> Real, \226\136\128 pols : List[(Real) -> Real], \226\136\128 n : Num, \226\136\128 psgns : List[Sign], \226\136\128 sgns : List[List[Sign]], interpmat(pts, pols, sgns) \226\134\146 ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, p, y), partition_line(pts), psgns) \226\134\146 n <= LENGTH(pols) \226\134\146 interpmat(pts, INSERTAT(n, p, pols), MAP2(INSERTAT(n), psgns, sgns))
   forall c l. c > &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Pos)
   forall c l. c < &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Neg)
   forall c l. (c = &0) ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Zero)
-  i
-  forall n x i. i < n ==> (EL i (REPLICATE n x) = x)
-  forall p pts. ALL2 (\\x y. interpsign x p y) (partition_line pts)\n    (REPLICATE (LENGTH (partition_line pts)) Unknown)
-  forall pts p pols n psgns sgns.\n    ALL2 (\\x y. interpsign x p y) (partition_line pts) psgns ==>\n    n <= LENGTH pols ==>\n    interpmat pts pols sgns ==>\n     interpmat pts (INSERTAT n p pols) (MAP2 (INSERTAT n) psgns sgns)
-  INSERTAT 0 = CONS
-  0 <= x
-  sgns
-  REPLICATE (LENGTH (partition_line pts)) Unknown
+  (i : _)
+  \226\136\128 n : Num, \226\136\128 x : _, \226\136\128 i : Num, i < n \226\134\146 EL(i, REPLICATE(n, x)) == x
+  \226\136\128 p : (Real) -> Real, \226\136\128 pts : List[Real], ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, p, y), partition_line(pts), REPLICATE(LENGTH(partition_line(pts)), Unknown))
+  \226\136\128 pts : List[Real], \226\136\128 p : (Real) -> Real, \226\136\128 pols : List[(Real) -> Real], \226\136\128 n : Num, \226\136\128 psgns : List[Sign], \226\136\128 sgns : List[List[Sign]], ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, p, y), partition_line(pts), psgns) \226\134\146 n <= LENGTH(pols) \226\134\146 interpmat(pts, pols, sgns) \226\134\146 interpmat(pts, INSERTAT(n, p, pols), MAP2(INSERTAT(n), psgns, sgns))
+  (INSERTAT : (Num, _, List[_]) -> List[_])(0) == (CONS : (_, List[_]) -> List[_])
+  0 <= (x : Num)
+  (sgns : _)
+  REPLICATE(LENGTH(partition_line((pts : List[Real]))), Unknown)
   0
-  pols
-  p
-  pts
-  forall pts p pols sgns.\n    interpmat pts pols sgns ==>\n     interpmat pts (CONS p pols)\n      (MAP2 CONS\n        (REPLICATE (2 * LENGTH pts + 1) Unknown) sgns)
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  q x = &0
-  ?k. sgns = [k]
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  forall p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. p x = s x * q x + r x) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  q x = &0
-  ?k. sgns = [k]
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  forall p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. p x = s x * q x + r x) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  ?k. sgns = [k]
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  a pow n > &0
-  forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))
-  LENGTH:A list -> num
-  ~((l2:A list) = [])
-  TL (l2:A list)
-  APPEND l1 [HD l2]
-  n < LENGTH l
-  l
-  []:A list
-  forall n (l:A list). n < LENGTH l ==>\n    ?l1 l2. (l = APPEND l1 l2) /\\ (LENGTH l1 = n)
-  x * y = y * x:num
-  x + 0 = x
+  (pols : _)
+  (p : _)
+  (pts : _)
+  \226\136\128 pts : List[Real], \226\136\128 p : (Real) -> Real, \226\136\128 pols : List[(Real) -> Real], \226\136\128 sgns : List[List[Sign]], interpmat(pts, pols, sgns) \226\134\146 interpmat(pts, CONS(p, pols), MAP2(CONS, REPLICATE(2 * LENGTH(pts) + 1, Unknown), sgns))
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, p(x) == s(x) * q(x) + r(x)) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Pos, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest)))
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, p(x) == s(x) * q(x) + r(x)) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Neg, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest)))
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Pos, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest)))
+  (LENGTH : (List[A]) -> Num)
+  !((l2 : List[A]) == NIL)
+  TL((l2 : List[A]))
+  APPEND((l1 : List[_]), [HD((l2 : List[_]))])
+  (n : Num) < LENGTH((l : List[_]))
+  (l : _)
+  (NIL : List[A])
+  \226\136\128 n : Num, \226\136\128 l : List[A], n < LENGTH(l) \226\134\146 (\226\136\131 l1 : List[A], \226\136\131 l2 : List[A], l == APPEND(l1, l2) && LENGTH(l1) == n)
+  (x : Num) * (y : Num) == y * x
+  (x : Num) + 0 == x
   (NUMERAL m) MOD (NUMERAL n)
   (NUMERAL m) DIV (NUMERAL n)
   (NUMERAL m) EXP (NUMERAL n)
@@ -10913,205 +10913,205 @@ Rqe/work_thms quotations (1221):
   PRE(NUMERAL n)
   SUC(NUMERAL n)
   2
-  x
-  forall x. EVEN x ==> (2 * x DIV 2 = x)
-  forall n. (ODD n ==> EVEN (PRE n)) /\\\n       (~(n = 0) ==> (EVEN n ==> ODD (PRE n)))
-  x - 1 = PRE x
-  EVEN (LENGTH sgns - 1)
-  s
-  n
-  a
-  ~(l2 = [])
-  pts
-  (LENGTH sgns - 1) DIV 2
-  LENGTH (APPEND sgns (CONS\n    (APPEND (CONS Unknown s1)\n      (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) =\n        LENGTH (partition_line pts)
-  forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  ?k. sgns = [k]
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  a pow n > &0
-  forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))
-  x - 1 = PRE x
-  EVEN (LENGTH sgns - 1)
-  s
-  n
-  a
-  ~(l2 = [])
-  pts
-  (LENGTH sgns - 1) DIV 2
-  LENGTH (APPEND sgns (CONS\n    (APPEND (CONS Unknown s1)\n      (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) =\n        LENGTH (partition_line pts)
-  forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  ?k. sgns = [k]
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  a pow n > &0
-  forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))
-  x - 1 = PRE x
-  EVEN (LENGTH sgns - 1)
-  s
-  n
-  a
-  ~(l2 = [])
-  pts
-  (LENGTH sgns - 1) DIV 2
-  LENGTH (APPEND sgns (CONS\n    (APPEND (CONS Unknown s1)\n      (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) =\n        LENGTH (partition_line pts)
-  forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a <> &0) ==>\n  EVEN n ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  ?k. sgns = [k]
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x > &0
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  a pow n > &0
-  forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))
-  x - 1 = PRE x
-  EVEN (LENGTH sgns - 1)
-  s
-  n
-  a
-  ~(l2 = [])
-  pts
-  (LENGTH sgns - 1) DIV 2
-  LENGTH (APPEND sgns (CONS\n    (APPEND (CONS Unknown s1)\n      (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) =\n        LENGTH (partition_line pts)
-  forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Pos s1)\n        (APPEND (CONS Zero s2) (CONS Pos s3))) rest))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  ?k. sgns = [k]
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x < &0
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  a pow n > &0
-  forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))
-  x - 1 = PRE x
-  EVEN (LENGTH sgns - 1)
-  s
-  n
-  a
-  ~(l2 = [])
-  pts
-  (LENGTH sgns - 1) DIV 2
-  LENGTH (APPEND sgns (CONS\n    (APPEND (CONS Unknown s1)\n      (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) =\n        LENGTH (partition_line pts)
-  forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Neg s1)\n        (APPEND (CONS Zero s2) (CONS Neg s3))) rest))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  LENGTH (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x]) = LENGTH sgns
-  (APPEND (BUTLAST (partition_line pts1))\n     (CONS (\\x'. LAST pts1 < x' /\\ x' < x)\n     (TL (partition_line (CONS x pts2))))) =\n     (APPEND\n      (APPEND (BUTLAST (partition_line pts1))\n      [\\x'. LAST pts1 < x' /\\ x' < x])\n     (TL (partition_line (CONS x pts2))))
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  ?k. sgns = [k]
-  x < y ==> ~(x = y)
-  ~(x < y /\\ y < x)
-  x:real
-  r x = &0
-  q x = &0
-  ?k. sgns = [k]
-  pts1 = []
-  a pow n > &0
-  forall a n p ps q qs r rs s x pts1 pts2  s1 s2 s3 rest sgns.\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (LENGTH sgns = 2 * LENGTH pts1 + 1) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat (APPEND pts1 (CONS x pts2))\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))
-  x - 1 = PRE x
-  EVEN (LENGTH sgns - 1)
-  s
-  n
-  a
-  ~(l2 = [])
-  pts
-  (LENGTH sgns - 1) DIV 2
-  LENGTH (APPEND sgns (CONS\n    (APPEND (CONS Unknown s1)\n      (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) =\n        LENGTH (partition_line pts)
-  forall a n p ps q qs pts r rs s s1 s2 s3 rest sgns.\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Unknown s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest)) ==>\n  (LENGTH ps = LENGTH s1) ==>\n  (LENGTH qs = LENGTH s2) ==>\n  ODD (LENGTH sgns) ==>\n  (forall x. a pow n * p x = s x * q x + r x) ==>\n  (a > &0) ==>\n  interpmat pts\n    (APPEND (CONS p ps) (APPEND (CONS q qs) (CONS r rs)))\n    (APPEND sgns\n      (CONS (APPEND (CONS Zero s1)\n        (APPEND (CONS Zero s2) (CONS Zero s3))) rest))
+  (x : _)
+  \226\136\128 x : Num, EVEN(x) \226\134\146 2 * DIV(x, 2) == x
+  \226\136\128 n : Num, (ODD(n) \226\134\146 EVEN(PRE(n))) && (!(n == 0) \226\134\146 EVEN(n) \226\134\146 ODD(PRE(n)))
+  (x : Num) - 1 == PRE(x)
+  EVEN(LENGTH((sgns : List[_])) - 1)
+  (s : _)
+  (n : _)
+  (a : _)
+  !((l2 : List[_]) == NIL)
+  (pts : _)
+  DIV(LENGTH((sgns : List[_])) - 1, 2)
+  LENGTH(APPEND((sgns : List[List[Sign]]), CONS(APPEND(CONS(Unknown, (s1 : List[Sign])), APPEND(CONS(Zero, (s2 : List[Sign])), CONS(Pos, (s3 : List[Sign])))), (rest : List[List[Sign]])))) == LENGTH(partition_line((pts : List[Real])))
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Pos, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest)))
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Neg, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest)))
+  (x : Num) - 1 == PRE(x)
+  EVEN(LENGTH((sgns : List[_])) - 1)
+  (s : _)
+  (n : _)
+  (a : _)
+  !((l2 : List[_]) == NIL)
+  (pts : _)
+  DIV(LENGTH((sgns : List[_])) - 1, 2)
+  LENGTH(APPEND((sgns : List[List[Sign]]), CONS(APPEND(CONS(Unknown, (s1 : List[Sign])), APPEND(CONS(Zero, (s2 : List[Sign])), CONS(Neg, (s3 : List[Sign])))), (rest : List[List[Sign]])))) == LENGTH(partition_line((pts : List[Real])))
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Neg, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest)))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Zero, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest)))
+  (x : Num) - 1 == PRE(x)
+  EVEN(LENGTH((sgns : List[_])) - 1)
+  (s : _)
+  (n : _)
+  (a : _)
+  !((l2 : List[_]) == NIL)
+  (pts : _)
+  DIV(LENGTH((sgns : List[_])) - 1, 2)
+  LENGTH(APPEND((sgns : List[List[Sign]]), CONS(APPEND(CONS(Unknown, (s1 : List[Sign])), APPEND(CONS(Zero, (s2 : List[Sign])), CONS(Zero, (s3 : List[Sign])))), (rest : List[List[Sign]])))) == LENGTH(partition_line((pts : List[Real])))
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 op_lt_gt(a, real_of_num(0)) \226\134\146 EVEN(n) \226\134\146 interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Zero, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest)))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) > real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 a > real_of_num(0) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Pos, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest)))
+  (x : Num) - 1 == PRE(x)
+  EVEN(LENGTH((sgns : List[_])) - 1)
+  (s : _)
+  (n : _)
+  (a : _)
+  !((l2 : List[_]) == NIL)
+  (pts : _)
+  DIV(LENGTH((sgns : List[_])) - 1, 2)
+  LENGTH(APPEND((sgns : List[List[Sign]]), CONS(APPEND(CONS(Unknown, (s1 : List[Sign])), APPEND(CONS(Zero, (s2 : List[Sign])), CONS(Pos, (s3 : List[Sign])))), (rest : List[List[Sign]])))) == LENGTH(partition_line((pts : List[Real])))
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 a > real_of_num(0) \226\134\146 interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Pos, s1), APPEND(CONS(Zero, s2), CONS(Pos, s3))), rest)))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) < real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 a > real_of_num(0) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Neg, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest)))
+  (x : Num) - 1 == PRE(x)
+  EVEN(LENGTH((sgns : List[_])) - 1)
+  (s : _)
+  (n : _)
+  (a : _)
+  !((l2 : List[_]) == NIL)
+  (pts : _)
+  DIV(LENGTH((sgns : List[_])) - 1, 2)
+  LENGTH(APPEND((sgns : List[List[Sign]]), CONS(APPEND(CONS(Unknown, (s1 : List[Sign])), APPEND(CONS(Zero, (s2 : List[Sign])), CONS(Neg, (s3 : List[Sign])))), (rest : List[List[Sign]])))) == LENGTH(partition_line((pts : List[Real])))
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 a > real_of_num(0) \226\134\146 interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Neg, s1), APPEND(CONS(Zero, s2), CONS(Neg, s3))), rest)))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  LENGTH(APPEND(BUTLAST(partition_line((pts1 : List[Real]))), [(x' : Real) => LAST(pts1) < x' && x' < (x : Real)])) == LENGTH((sgns : List[_]))
+  APPEND(BUTLAST(partition_line((pts1 : List[Real]))), CONS((x' : Real) => LAST(pts1) < x' && x' < (x : Real), TL(partition_line(CONS(x, (pts2 : List[Real])))))) == APPEND(APPEND(BUTLAST(partition_line(pts1)), [(x' : Real) => LAST(pts1) < x' && x' < x]), TL(partition_line(CONS(x, pts2))))
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (x : Real) < (y : Real) \226\134\146 !(x == y)
+  !((x : Real) < (y : Real) && y < x)
+  (x : Real)
+  (r : (_) -> Real)((x : _)) == real_of_num(0)
+  (q : (_) -> Real)((x : _)) == real_of_num(0)
+  \226\136\131 k : _, (sgns : List[_]) == [k]
+  (pts1 : List[_]) == NIL
+  pow((a : Real), (n : Num)) > real_of_num(0)
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 x : Real, \226\136\128 pts1 : List[Real], \226\136\128 pts2 : List[Real], \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts1) + 1 \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 a > real_of_num(0) \226\134\146 interpmat(APPEND(pts1, CONS(x, pts2)), APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Zero, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest)))
+  (x : Num) - 1 == PRE(x)
+  EVEN(LENGTH((sgns : List[_])) - 1)
+  (s : _)
+  (n : _)
+  (a : _)
+  !((l2 : List[_]) == NIL)
+  (pts : _)
+  DIV(LENGTH((sgns : List[_])) - 1, 2)
+  LENGTH(APPEND((sgns : List[List[Sign]]), CONS(APPEND(CONS(Unknown, (s1 : List[Sign])), APPEND(CONS(Zero, (s2 : List[Sign])), CONS(Zero, (s3 : List[Sign])))), (rest : List[List[Sign]])))) == LENGTH(partition_line((pts : List[Real])))
+  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (Real) -> Real, \226\136\128 ps : List[(Real) -> Real], \226\136\128 q : (Real) -> Real, \226\136\128 qs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 r : (Real) -> Real, \226\136\128 rs : List[(Real) -> Real], \226\136\128 s : (Real) -> Real, \226\136\128 s1 : List[Sign], \226\136\128 s2 : List[Sign], \226\136\128 s3 : List[Sign], \226\136\128 rest : List[List[Sign]], \226\136\128 sgns : List[List[Sign]], interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Unknown, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest))) \226\134\146 LENGTH(ps) == LENGTH(s1) \226\134\146 LENGTH(qs) == LENGTH(s2) \226\134\146 ODD(LENGTH(sgns)) \226\134\146 (\226\136\128 x : Real, pow(a, n) * p(x) == s(x) * q(x) + r(x)) \226\134\146 a > real_of_num(0) \226\134\146 interpmat(pts, APPEND(CONS(p, ps), APPEND(CONS(q, qs), CONS(r, rs))), APPEND(sgns, CONS(APPEND(CONS(Zero, s1), APPEND(CONS(Zero, s2), CONS(Zero, s3))), rest)))
 INTERPSIGNS_CONJ =  |- (#forall:fun(fun(fun(real,bool),bool),bool) (\P:fun(real,bool). (#forall:fun(fun(fun(real,bool),bool),bool) (\Q:fun(real,bool). (#forall:fun(fun(list(fun(real,real)),bool),bool) (\eqs:list(fun(real,real)). (#forall:fun(fun(list(sign),bool),bool) (\l:list(sign). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#interpsigns:fun(list(fun(real,real)),fun(fun(real,bool),fun(list(sign),bool))) eqs:list(fun(real,real))) (\x:real. (P:fun(real,bool) x:real))) l:list(sign))) (((#interpsigns:fun(list(fun(real,real)),fun(fun(real,bool),fun(list(sign),bool))) eqs:list(fun(real,real))) (\x:real. (Q:fun(real,bool) x:real))) l:list(sign)))) (((#interpsigns:fun(list(fun(real,real)),fun(fun(real,bool),fun(list(sign),bool))) eqs:list(fun(real,real))) (\x:real. ((#\/:fun(bool,fun(bool,bool)) (P:fun(real,bool) x:real)) (Q:fun(real,bool) x:real)))) l:list(sign)))))))))))
 INTERPMAT_TRIO =  |- (#forall:fun(fun(list(fun(real,real)),bool),bool) (\eqs:list(fun(real,real)). (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(list(sign),bool),bool) (\l:list(sign). (#forall:fun(fun(list(list(sign)),bool),bool) (\r:list(list(sign)). (#forall:fun(fun(list(real),bool),bool) (\t:list(real). ((#==>:fun(bool,fun(bool,bool)) (((#interpmat:fun(list(real),fun(list(fun(real,real)),fun(list(list(sign)),bool))) ((#CONS:fun(real,fun(list(real),list(real))) x:real) ((#CONS:fun(real,fun(list(real),list(real))) y:real) t:list(real)))) eqs:list(fun(real,real))) ((#CONS:fun(list(sign),fun(list(list(sign)),list(list(sign)))) l:list(sign)) ((#CONS:fun(list(sign),fun(list(list(sign)),list(list(sign)))) l:list(sign)) ((#CONS:fun(list(sign),fun(list(list(sign)),list(list(sign)))) l:list(sign)) r:list(list(sign))))))) (((#interpmat:fun(list(real),fun(list(fun(real,real)),fun(list(list(sign)),bool))) ((#CONS:fun(real,fun(list(real),list(real))) y:real) t:list(real))) eqs:list(fun(real,real))) ((#CONS:fun(list(sign),fun(list(list(sign)),list(list(sign)))) l:list(sign)) r:list(list(sign)))))))))))))))))
 PARTITION_LINE_NOT_NIL =  |- (#forall:fun(fun(list(real),bool),bool) (\l:list(real). (#~:fun(bool,bool) ((#=:fun(list(fun(real,bool)),fun(list(fun(real,bool)),bool)) (#partition_line:fun(list(real),list(fun(real,bool))) l:list(real))) #NIL:list(fun(real,bool))))))
