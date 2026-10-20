@@ -33079,10 +33079,10 @@ Multivariate/metric quotations (14748):
   (U : ((A) -> Bool) -> Bool)
   (top : Topology[A])
   \226\136\128 top : Topology[A], \226\136\128 U : ((A) -> Bool) -> Bool, paracompact_space(top) && hausdorff_space(top) && (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 phi : ((A) -> Bool, A) -> Real, (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 continuous_map((top, euclideanreal), phi(u)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= phi(u, x)) && SUBSET({(x : A) | IN(x, topspace(top)) && !(phi(u, x) == real_of_num(0))}, u)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 (\226\136\131 N : (A) -> Bool, open_in(top, N) && IN(x, N) && FINITE({(u : (A) -> Bool) | IN(u, U) && !(INTER(N, {(y : A) | IN(y, topspace(top)) && !(phi(u, y) == real_of_num(0))}) == {})}))) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 sum(U, (u : (A) -> Bool) => phi(u, x)) == real_of_num(1)))
-  real_interval
-  real_interval
-  real_interval
-  real_interval
+  closed_real_interval
+  closed_real_interval
+  closed_real_interval
+  closed_real_interval
   (psi : ((A) -> Bool, A) -> Real)
   (psi : ((A) -> Bool, A) -> Real)
   (V : ((A) -> Bool) -> Bool)
