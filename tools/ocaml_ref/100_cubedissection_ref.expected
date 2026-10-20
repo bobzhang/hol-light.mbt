@@ -67848,536 +67848,536 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..1..2..solved at 6
 100/cubedissection quotations (530):
-  cube k <=>\n     ?a:real^N d. &0 < d /\\ k = interval[a,a + d % vec 1]
-  forall k:real^N->bool. cube k ==> ~(interior k = {})
-  forall k:real^N->bool. cube k ==> ~(k = {})
-  interval_length (s:real^N->bool) =\n        if s = {} then &0\n        else interval_upperbound s$1 - interval_lowerbound s$1
-  a + d < a <=> d < &0
-  d:real < &0
-  max d (&0) = if d < &0 then &0 else d
-  forall(a:real^N) d. interval_length(interval[a,a + d % vec 1]) = max d (&0)
-  forall(k:real^N->bool) i.\n        cube k\n        ==> interval_upperbound k$i - interval_lowerbound k$i =\n            interval_length k
-  forall(a:real^N) d. &0 < d ==> interval_length(interval[a, a + d % vec 1]) = d
-  forall c:real^3 s. vector[c$2 + s; c$3 + s]:real^2 =\n                vector[c$2; c$3] + s % vec 1
-  cube_dissection (d:(real^N->bool)->bool) <=>\n        d division_of UNIONS d /\\\n        (forall k. k IN d ==> cube k) /\\\n        pairwise (\\k k'. ~(interval_length k = interval_length k')) d
-  i:num
-  j:num
-  j:num
-  (lambda j. if j = i then min ((b:real^N)$i) ((v:real^N)$i + e / &2)\n                 else (x:real^N)$j):real^N
-  (lambda j. if j = i then max ((a:real^N)$i) ((u:real^N)$i - e / &2)\n                 else (x:real^N)$j):real^N
-  e:real
-  (x:real^N) IN interval[u:real^N,v]
-  interval[u:real^N,v] SUBSET interval[a:real^N,b]
-  interval[a:real^N,b] SUBSET UNIONS D
-  interval[a:real^N,b] DIFF interval[u,v] SUBSET\n     UNIONS D DIFF interval[u:real^N,v]
-  UNIONS (D:(real^N->bool)->bool) DIFF s SUBSET UNIONS(D DELETE s) /\\\n    (x:real^N) IN closure(UNIONS D DIFF s)\n    ==> x IN closure(UNIONS(D DELETE s))
-  closed (s:real^N->bool) /\\ (x:real^N) IN closure s ==> x IN s
-  (x:real^N) IN UNIONS(D DELETE interval[u,v])
-  forall D a b u v (x:real^N) i.\n        D division_of UNIONS D /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        interval[a,b] SUBSET UNIONS D /\\\n        interval[u,v] SUBSET interval[a,b] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'
-  i:num
-  b:real^N
-  a:real^N
-  forall D a b u v (x:real^N) i.\n        D division_of interval[a,b] /\\\n        interval[u,v] IN D /\\ x IN interval[u,v] /\\\n        1 <= i /\\ i <= dimindex(:N) /\\\n        a$i < x$i /\\ x$i < b$i /\\ (x$i = u$i \\/ x$i = v$i)\n        ==> ?j'. j' IN D /\\ ~(j' = interval[u,v]) /\\ x IN j'
-  ee:real
-  xx:real^N
-  ee:real
-  xx:real^N
-  cube(j:real^N->bool)
-  j:real^N->bool
-  forall D:(real^N->bool)->bool.\n        cube_dissection D /\\\n        (forall(x:real^N) e. interval[x,x + e % vec 1] IN D /\\\n               P(interval[x,x + e % vec 1])\n               ==> R x e)\n        ==> (?j. j IN D /\\ P j) ==> (?(x:real^N) e. R x e)
-  a + e:real <= a <=> ~(&0 < e)
-  (?i. 1 <= i /\\ i <= 2 /\\ P i) <=>\n      ~(forall i. 1 <= i /\\ i <= 2 ==> ~P i)
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  (u:real^2)$2 + d = (b:real^2)$2
-  (u:real^2)$2 = (a:real^2)$2
-  (u:real^2)$1 + d = (b:real^2)$1
-  (u:real^2)$1 = (a:real^2)$1
-  (?(i:num). 1 <= i /\\ i <= 2 /\\ (P:num->bool) i) <=>\n        ~(forall i. 1 <= i /\\ i <= 2 ==> ~P i)
-  interval[u:real^2,u + d % vec 1]
-  interval[x:real^2,x + e % vec 1]
-  interval[x:real^2,x + e % vec 1]
-  e:real
-  x:real^2
-  D:(real^2->bool)->bool
+  (cube : ((Cart[Real, N]) -> Bool) -> Bool)((k : (Cart[Real, N]) -> Bool)) == (\226\136\131 a : Cart[Real, N], \226\136\131 d : Real, real_of_num(0) < d && k == interval([(a, a + op_pct(d, vec(1)))]))
+  \226\136\128 k : (Cart[Real, N]) -> Bool, cube(k) \226\134\146 !(interior(k) == {})
+  \226\136\128 k : (Cart[Real, N]) -> Bool, cube(k) \226\134\146 !(k == {})
+  (interval_length : ((Cart[Real, N]) -> Bool) -> Real)((s : (Cart[Real, N]) -> Bool)) == (if s == {} { real_of_num(0) } else { op_dollar(interval_upperbound(s), 1) - op_dollar(interval_lowerbound(s), 1) })
+  ((a : Real) + (d : Real) < a) == (d < real_of_num(0))
+  (d : Real) < real_of_num(0)
+  max((d : Real), real_of_num(0)) == (if d < real_of_num(0) { real_of_num(0) } else { d })
+  \226\136\128 a : Cart[Real, N], \226\136\128 d : Real, interval_length(interval([(a, a + op_pct(d, vec(1)))])) == max(d, real_of_num(0))
+  \226\136\128 k : (Cart[Real, N]) -> Bool, \226\136\128 i : Num, cube(k) \226\134\146 op_dollar(interval_upperbound(k), i) - op_dollar(interval_lowerbound(k), i) == interval_length(k)
+  \226\136\128 a : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d \226\134\146 interval_length(interval([(a, a + op_pct(d, vec(1)))])) == d
+  \226\136\128 c : Cart[Real, Tybit1[Unit]], \226\136\128 s : Real, (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(c, 2) + s, (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(c, 3) + s]) == (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(c, 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(c, 3)]) + (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(s, (vec : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+  (cube_dissection : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)((d : ((Cart[Real, N]) -> Bool) -> Bool)) == (division_of(d, UNIONS(d)) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, d) \226\134\146 cube(k)) && pairwise((k : (Cart[Real, N]) -> Bool) => (k' : (Cart[Real, N]) -> Bool) => !(interval_length(k) == interval_length(k')), d))
+  (i : Num)
+  (j : Num)
+  (j : Num)
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => if j == (i : Num) { min((op_dollar : (Cart[Real, N], Num) -> Real)((b : Cart[Real, N]), i), (op_dollar : (Cart[Real, N], Num) -> Real)((v : Cart[Real, N]), i) + (e : Real) / real_of_num(2)) } else { (op_dollar : (Cart[Real, N], Num) -> Real)((x : Cart[Real, N]), j) })
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((j : Num) => if j == (i : Num) { max((op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i), (op_dollar : (Cart[Real, N], Num) -> Real)((u : Cart[Real, N]), i) - (e : Real) / real_of_num(2)) } else { (op_dollar : (Cart[Real, N], Num) -> Real)((x : Cart[Real, N]), j) })
+  (e : Real)
+  IN((x : Cart[Real, N]), interval([((u : Cart[Real, N]), (v : Cart[Real, N]))]))
+  SUBSET(interval([((u : Cart[Real, N]), (v : Cart[Real, N]))]), interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
+  SUBSET(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]), UNIONS((D : ((Cart[Real, N]) -> Bool) -> Bool)))
+  SUBSET(DIFF(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]), interval([((u : Cart[Real, N]), (v : Cart[Real, N]))])), DIFF(UNIONS((D : ((Cart[Real, N]) -> Bool) -> Bool)), interval([(u, v)])))
+  SUBSET(DIFF(UNIONS((D : ((Cart[Real, N]) -> Bool) -> Bool)), (s : (Cart[Real, N]) -> Bool)), UNIONS(DELETE(D, s))) && IN((x : Cart[Real, N]), closure(DIFF(UNIONS(D), s))) \226\134\146 IN(x, closure(UNIONS(DELETE(D, s))))
+  closed((s : (Cart[Real, N]) -> Bool)) && IN((x : Cart[Real, N]), closure(s)) \226\134\146 IN(x, s)
+  IN((x : Cart[Real, N]), UNIONS(DELETE((D : ((Cart[Real, N]) -> Bool) -> Bool), interval([((u : Cart[Real, N]), (v : Cart[Real, N]))]))))
+  \226\136\128 D : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 i : Num, (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(D, (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(D)) && (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)]), D) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)])) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]), (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(D)) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)]), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])) && 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) && ((op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(u, i) || (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(v, i)) \226\134\146 (\226\136\131 j' : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(j', D) && !(j' == (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)])) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, j'))
+  (i : Num)
+  (b : Cart[Real, N])
+  (a : Cart[Real, N])
+  \226\136\128 D : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 i : Num, (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(D, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)])) && (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)]), D) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)])) && 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) && ((op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(u, i) || (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(v, i)) \226\134\146 (\226\136\131 j' : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(j', D) && !(j' == (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(u, v)])) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, j'))
+  (ee : Real)
+  (xx : Cart[Real, N])
+  (ee : Real)
+  (xx : Cart[Real, N])
+  cube((j : (Cart[Real, N]) -> Bool))
+  (j : (Cart[Real, N]) -> Bool)
+  \226\136\128 D : ((Cart[Real, N]) -> Bool) -> Bool, cube_dissection(D) && (\226\136\128 x : Cart[Real, N], \226\136\128 e : Real, IN(interval([(x, x + op_pct(e, vec(1)))]), D) && (P : ((Cart[Real, N]) -> Bool) -> Bool)(interval([(x, x + op_pct(e, vec(1)))])) \226\134\146 (R : (Cart[Real, N], Real) -> Bool)(x, e)) \226\134\146 (\226\136\131 j : (Cart[Real, N]) -> Bool, IN(j, D) && P(j)) \226\134\146 (\226\136\131 x : Cart[Real, N], \226\136\131 e : Real, R(x, e))
+  ((a : Real) + (e : Real) <= a) == !(real_of_num(0) < e)
+  (\226\136\131 i : Num, 1 <= i && i <= 2 && (P : (Num) -> Bool)(i)) == !(\226\136\128 i : Num, 1 <= i && i <= 2 \226\134\146 !P(i))
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  op_dollar((u : Cart[Real, Tybit0[Unit]]), 2) + (d : Real) == op_dollar((b : Cart[Real, Tybit0[Unit]]), 2)
+  op_dollar((u : Cart[Real, Tybit0[Unit]]), 2) == op_dollar((a : Cart[Real, Tybit0[Unit]]), 2)
+  op_dollar((u : Cart[Real, Tybit0[Unit]]), 1) + (d : Real) == op_dollar((b : Cart[Real, Tybit0[Unit]]), 1)
+  op_dollar((u : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((a : Cart[Real, Tybit0[Unit]]), 1)
+  (\226\136\131 i : Num, 1 <= i && i <= 2 && (P : (Num) -> Bool)(i)) == !(\226\136\128 i : Num, 1 <= i && i <= 2 \226\134\146 !P(i))
+  interval([((u : Cart[Real, Tybit0[Unit]]), u + op_pct((d : Real), vec(1)))])
+  interval([((x : Cart[Real, Tybit0[Unit]]), x + op_pct((e : Real), vec(1)))])
+  interval([((x : Cart[Real, Tybit0[Unit]]), x + op_pct((e : Real), vec(1)))])
+  (e : Real)
+  (x : Cart[Real, Tybit0[Unit]])
+  (D : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)
   2
-  vector[(u:real^2)$1 + d / &2; u$2 + d]:real^2
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((u : Cart[Real, Tybit0[Unit]]), 1) + (d : Real) / real_of_num(2), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(u, 2) + d])
   1
-  vector[(u:real^2)$1 + d; u$2 + d / &2]:real^2
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((u : Cart[Real, Tybit0[Unit]]), 1) + (d : Real), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(u, 2) + d / real_of_num(2)])
   2
-  vector[(u:real^2)$1 + d / &2; u$2]:real^2
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((u : Cart[Real, Tybit0[Unit]]), 1) + (d : Real) / real_of_num(2), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(u, 2)])
   1
-  vector[(u:real^2)$1; u$2 + d / &2]:real^2
-  &0 < d ==> (d < e /\\ &0 < e <=> d < e)
-  (~((u:real^2)$1 = (a:real^2)$1)\n     ==> ?x1 e1. d < e1 /\\ &0 < e1 /\\\n                 interval[x1:real^2,x1 + e1 % vec 1] IN D /\\\n                 a$1 <= x1$1 /\\ x1$1 + e1 = u$1 /\\\n                 a$2 <= x1$2 /\\ x1$2 + e1 <= (b:real^2)$2 /\\\n                 vector[u$1; u$2 + d / &2] IN\n                 interval[x1:real^2,x1 + e1 % vec 1]) /\\\n    (~((u:real^2)$2 = (a:real^2)$2)\n     ==> ?x2 e2. d < e2 /\\ &0 < e2 /\\\n                 interval[x2:real^2,x2 + e2 % vec 1] IN D /\\\n                 a$1 <= x2$1 /\\ x2$1 + e2 <= (b:real^2)$1 /\\\n                 a$2 <= x2$2 /\\ x2$2 + e2 = u$2 /\\\n                 vector[u$1 + d / &2; u$2] IN\n                 interval[x2:real^2,x2 + e2 % vec 1]) /\\\n    (~((u + d % vec 1:real^2)$1 = (b:real^2)$1)\n     ==> ?x3 e3. d < e3 /\\ &0 < e3 /\\\n                 interval[x3:real^2,x3 + e3 % vec 1] IN D /\\\n                 x3$1 = (u + d % vec 1)$1 /\\ x3$1 + e3 <= b$1 /\\\n                 (a:real^2)$2 <= x3$2 /\\ x3$2 + e3 <= b$2 /\\\n                 vector[u$1 + d; u$2 + d / &2] IN\n                 interval[x3:real^2,x3 + e3 % vec 1]) /\\\n    (~((u + d % vec 1:real^2)$2 = (b:real^2)$2)\n     ==> ?x4 e4. d < e4 /\\ &0 < e4 /\\\n                 interval[x4:real^2,x4 + e4 % vec 1] IN D /\\\n                 (a:real^2)$1 <= x4$1 /\\ x4$1 + e4 <= b$1 /\\\n                 x4$2 = (u + d % vec 1)$2 /\\ x4$2 + e4 <= b$2 /\\\n                 vector[u$1 + d / &2; u$2 + d] IN\n                 interval[x4:real^2,x4 + e4 % vec 1])
-  u + d % vec 1:real^2
-  u:real^2
-  b:real^2
-  a:real^2
-  D:(real^2->bool)->bool
-  ~(interval[u:real^2,u + d % vec 1] = {})
-  interval[u:real^2,u + d % vec 1] SUBSET interval[a,b]
-  ~(interval[u:real^2,u + d % vec 1] = {}) /\\ ~(interval[a:real^2,b] = {})
-  &0 < d ==> max d (&0) = d
-  d:real
-  u:real^2
-  cube(j:real^2->bool)
-  forall D a b j:real^2->bool.\n        cube_dissection D /\\ UNIONS D = interval[a,b] /\\ j IN D /\\\n        (forall j'. j' IN D /\\ ~(j' = j)\n             ==> interval_length(j) < interval_length j')\n        ==> j = interval[a,b] \\/ j SUBSET interval(a,b)
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x4:real^2,x4 + e4 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x1:real^2,x1 + e1 % vec 1]
-  interval[x3:real^2,x3 + e3 % vec 1]
-  interval[x2:real^2,x2 + e2 % vec 1]
-  y:A
-  x0:A
-  pairwise (\\x y:A. ~((f:A->real) x = f y)) s
-  y:A
-  b <= (f:A->real) y
-  x <= y /\\ ~(x = y) ==> x < y
-  y:A
-  x0:A
-  ?x0:A. x0 IN s /\\ (f:A->real) x0 = b
-  b:real
-  IMAGE (f:A->real) s
-  forall(f:A->real) s.\n    FINITE s /\\ ~(s = {}) /\\ pairwise (\\x y. ~(f x = f y)) s\n    ==> ?x. x IN s /\\ forall y. y IN s /\\ ~(y = x) ==> f x < f y
-  valley (D:(real^3->bool)->bool) (v:real^3->bool) <=>\n    cube v /\\\n    (forall z:real^3. z$1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3\n                ==> ?k. k IN D /\\ z IN k /\\\n                        interval_lowerbound k $ 1 =\n                        interval_upperbound (v:real^3->bool) $ 1) /\\\n    (forall k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_lowerbound (v:real^3->bool) $ 2 <= interval_lowerbound k $ 2 /\\\n             interval_upperbound k $ 2 <= interval_upperbound (v:real^3->bool) $ 2 /\\\n             interval_lowerbound (v:real^3->bool) $ 3 <= interval_lowerbound k $ 3 /\\\n             interval_upperbound k $ 3 <= interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall k. k IN D /\\\n         interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n         (?z:real^3. z IN k /\\\n              interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n              z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n              interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n              z$3 < interval_upperbound (v:real^3->bool) $ 3)\n         ==> interval_length k < interval_length v)
-  interior(j:real^3->bool) INTER interior(interval[a:real^3,b]) = {}
-  interior(j:real^3->bool) SUBSET interior(interval[a:real^3,b])
-  interior(j:real^3->bool) = {}
-  j = interval[a:real^3,b]
-  j:real^3->bool
-  forall D (a:real^3) b.\n    D division_of interval[a,b] /\\\n    (forall k:real^3->bool. k IN D ==> cube k) /\\\n    interval[a,b] IN D\n    ==> D = {interval[a,b]}
-  D = {interval[a:real^3, a + d % vec 1]}
-  k = interval[a:real^3, a + d % vec 1]
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
-  c:real^3 = a
-  e:real = d
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
-  e <= d
-  interval_length(k:real^3->bool) = e
-  ?c:real^3 e. &0 < e /\\ k = interval[c, c + e % vec 1]
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
-  k:real^3->bool
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
-  interval_lowerbound(k:real^3->bool) = (c:real^3) /\\\n       interval_upperbound(k:real^3->bool) = c + e % vec 1:real^3
-  ?c:real^3 e. &0 < e /\\ k = interval[c, c + e % vec 1]
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
-  k:real^3->bool
-  (u:real^3) IN interval[a:real^3, a + d % vec 1]
-  (a:real^3)$1 <= (u:real^3)$1
-  (z:real^3) IN (k:real^3->bool)
-  (u:real^3)$1 <= (z:real^3)$1
-  ~(interval[u:real^3,v] = {})
-  (u:real^3) IN interval[u:real^3, v]
-  (u:real^3) IN interval[a:real^3, a + d % vec 1]
-  interval_lowerbound(k:real^3->bool) = (u:real^3)
-  ~(interval[u:real^3,v] = {})
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1] /\\\n       ~(k = {}) /\\ (?u v:real^3. k = interval[u,v])
-  k:real^3->bool
-  ?k:real^3->bool. k IN D /\\ (z:real^3) IN k
-  (z:real^3) IN interval[a:real^3, a + d % vec 1]
-  z:real^3
-  d:real
-  a - d % basis 1:real^3
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((u : Cart[Real, Tybit0[Unit]]), 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(u, 2) + (d : Real) / real_of_num(2)])
+  real_of_num(0) < (d : Real) \226\134\146 (d < (e : Real) && real_of_num(0) < e) == (d < e)
+  (!(op_dollar((u : Cart[Real, Tybit0[Unit]]), 1) == op_dollar((a : Cart[Real, Tybit0[Unit]]), 1)) \226\134\146 (\226\136\131 x1 : Cart[Real, Tybit0[Unit]], \226\136\131 e1 : Real, (d : Real) < e1 && real_of_num(0) < e1 && IN(interval([(x1, x1 + op_pct(e1, vec(1)))]), (D : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && op_dollar(a, 1) <= op_dollar(x1, 1) && op_dollar(x1, 1) + e1 == op_dollar(u, 1) && op_dollar(a, 2) <= op_dollar(x1, 2) && op_dollar(x1, 2) + e1 <= op_dollar((b : Cart[Real, Tybit0[Unit]]), 2) && IN(vector([op_dollar(u, 1), op_dollar(u, 2) + d / real_of_num(2)]), interval([(x1, x1 + op_pct(e1, vec(1)))])))) && (!(op_dollar(u, 2) == op_dollar(a, 2)) \226\134\146 (\226\136\131 x2 : Cart[Real, Tybit0[Unit]], \226\136\131 e2 : Real, d < e2 && real_of_num(0) < e2 && IN(interval([(x2, x2 + op_pct(e2, vec(1)))]), D) && op_dollar(a, 1) <= op_dollar(x2, 1) && op_dollar(x2, 1) + e2 <= op_dollar(b, 1) && op_dollar(a, 2) <= op_dollar(x2, 2) && op_dollar(x2, 2) + e2 == op_dollar(u, 2) && IN(vector([op_dollar(u, 1) + d / real_of_num(2), op_dollar(u, 2)]), interval([(x2, x2 + op_pct(e2, vec(1)))])))) && (!(op_dollar(u + op_pct(d, vec(1)), 1) == op_dollar(b, 1)) \226\134\146 (\226\136\131 x3 : Cart[Real, Tybit0[Unit]], \226\136\131 e3 : Real, d < e3 && real_of_num(0) < e3 && IN(interval([(x3, x3 + op_pct(e3, vec(1)))]), D) && op_dollar(x3, 1) == op_dollar(u + op_pct(d, vec(1)), 1) && op_dollar(x3, 1) + e3 <= op_dollar(b, 1) && op_dollar(a, 2) <= op_dollar(x3, 2) && op_dollar(x3, 2) + e3 <= op_dollar(b, 2) && IN(vector([op_dollar(u, 1) + d, op_dollar(u, 2) + d / real_of_num(2)]), interval([(x3, x3 + op_pct(e3, vec(1)))])))) && (!(op_dollar(u + op_pct(d, vec(1)), 2) == op_dollar(b, 2)) \226\134\146 (\226\136\131 x4 : Cart[Real, Tybit0[Unit]], \226\136\131 e4 : Real, d < e4 && real_of_num(0) < e4 && IN(interval([(x4, x4 + op_pct(e4, vec(1)))]), D) && op_dollar(a, 1) <= op_dollar(x4, 1) && op_dollar(x4, 1) + e4 <= op_dollar(b, 1) && op_dollar(x4, 2) == op_dollar(u + op_pct(d, vec(1)), 2) && op_dollar(x4, 2) + e4 <= op_dollar(b, 2) && IN(vector([op_dollar(u, 1) + d / real_of_num(2), op_dollar(u, 2) + d]), interval([(x4, x4 + op_pct(e4, vec(1)))]))))
+  (u : Cart[Real, Tybit0[Unit]]) + op_pct((d : Real), vec(1))
+  (u : Cart[Real, Tybit0[Unit]])
+  (b : Cart[Real, Tybit0[Unit]])
+  (a : Cart[Real, Tybit0[Unit]])
+  (D : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)
+  !(interval([((u : Cart[Real, Tybit0[Unit]]), u + op_pct((d : Real), vec(1)))]) == {})
+  SUBSET(interval([((u : Cart[Real, Tybit0[Unit]]), u + op_pct((d : Real), vec(1)))]), interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]))
+  !(interval([((u : Cart[Real, Tybit0[Unit]]), u + op_pct((d : Real), vec(1)))]) == {}) && !(interval([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]) == {})
+  real_of_num(0) < (d : Real) \226\134\146 max(d, real_of_num(0)) == d
+  (d : Real)
+  (u : Cart[Real, Tybit0[Unit]])
+  cube((j : (Cart[Real, Tybit0[Unit]]) -> Bool))
+  \226\136\128 D : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 j : (Cart[Real, Tybit0[Unit]]) -> Bool, cube_dissection(D) && UNIONS(D) == interval([(a, b)]) && IN(j, D) && (\226\136\128 j' : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(j', D) && !(j' == j) \226\134\146 interval_length(j) < interval_length(j')) \226\134\146 j == interval([(a, b)]) || SUBSET(j, interval((a, b)))
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x4 : Cart[Real, Tybit0[Unit]]), x4 + op_pct((e4 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x1 : Cart[Real, Tybit0[Unit]]), x1 + op_pct((e1 : Real), vec(1)))])
+  interval([((x3 : Cart[Real, Tybit0[Unit]]), x3 + op_pct((e3 : Real), vec(1)))])
+  interval([((x2 : Cart[Real, Tybit0[Unit]]), x2 + op_pct((e2 : Real), vec(1)))])
+  (y : A)
+  (x0 : A)
+  pairwise((x : A) => (y : A) => !((f : (A) -> Real)(x) == f(y)), (s : (A) -> Bool))
+  (y : A)
+  (b : Real) <= (f : (A) -> Real)((y : A))
+  (x : Real) <= (y : Real) && !(x == y) \226\134\146 x < y
+  (y : A)
+  (x0 : A)
+  \226\136\131 x0 : A, IN(x0, (s : (A) -> Bool)) && (f : (A) -> Real)(x0) == (b : Real)
+  (b : Real)
+  IMAGE((f : (A) -> Real), (s : (A) -> Bool))
+  \226\136\128 f : (A) -> Real, \226\136\128 s : (A) -> Bool, FINITE(s) && !(s == {}) && pairwise((x : A) => (y : A) => !(f(x) == f(y)), s) \226\134\146 (\226\136\131 x : A, IN(x, s) && (\226\136\128 y : A, IN(y, s) && !(y == x) \226\134\146 f(x) < f(y)))
+  (valley : (((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, (Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), (v : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cube(v) && (\226\136\128 z : Cart[Real, Tybit1[Unit]], op_dollar(z, 1) == op_dollar(interval_upperbound(v), 1) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3) \226\134\146 (\226\136\131 k : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k, D) && IN(z, k) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound(v), 1))) && (\226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k, D) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) \226\134\146 op_dollar(interval_lowerbound(v), 2) <= op_dollar(interval_lowerbound(k), 2) && op_dollar(interval_upperbound(k), 2) <= op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) <= op_dollar(interval_lowerbound(k), 3) && op_dollar(interval_upperbound(k), 3) <= op_dollar(interval_upperbound(v), 3)) && (\226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k, D) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) \226\134\146 interval_length(k) < interval_length(v)))
+  INTER(interior((j : (Cart[Real, Tybit1[Unit]]) -> Bool)), interior(interval([((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]]))]))) == {}
+  SUBSET(interior((j : (Cart[Real, Tybit1[Unit]]) -> Bool)), interior(interval([((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]]))])))
+  interior((j : (Cart[Real, Tybit1[Unit]]) -> Bool)) == {}
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]]))])
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], division_of(D, interval([(a, b)])) && (\226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k, D) \226\134\146 cube(k)) && IN(interval([(a, b)]), D) \226\134\146 D == {interval([(a, b)])}
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool) == {interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))])}
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))])
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  (c : Cart[Real, Tybit1[Unit]]) == (a : Cart[Real, Tybit1[Unit]])
+  (e : Real) == (d : Real)
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  (e : Real) <= (d : Real)
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (e : Real)
+  \226\136\131 c : Cart[Real, Tybit1[Unit]], \226\136\131 e : Real, real_of_num(0) < e && (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(c, c + op_pct(e, vec(1)))])
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (c : Cart[Real, Tybit1[Unit]]) && interval_upperbound(k) == c + op_pct((e : Real), vec(1))
+  \226\136\131 c : Cart[Real, Tybit1[Unit]], \226\136\131 e : Real, real_of_num(0) < e && (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(c, c + op_pct(e, vec(1)))])
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN((u : Cart[Real, Tybit1[Unit]]), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  op_dollar((a : Cart[Real, Tybit1[Unit]]), 1) <= op_dollar((u : Cart[Real, Tybit1[Unit]]), 1)
+  IN((z : Cart[Real, Tybit1[Unit]]), (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  op_dollar((u : Cart[Real, Tybit1[Unit]]), 1) <= op_dollar((z : Cart[Real, Tybit1[Unit]]), 1)
+  !(interval([((u : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))]) == {})
+  IN((u : Cart[Real, Tybit1[Unit]]), interval([(u, (v : Cart[Real, Tybit1[Unit]]))]))
+  IN((u : Cart[Real, Tybit1[Unit]]), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (u : Cart[Real, Tybit1[Unit]])
+  !(interval([((u : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))]) == {})
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))])) && !(k == {}) && (\226\136\131 u : Cart[Real, Tybit1[Unit]], \226\136\131 v : Cart[Real, Tybit1[Unit]], k == interval([(u, v)]))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  \226\136\131 k : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && IN((z : Cart[Real, Tybit1[Unit]]), k)
+  IN((z : Cart[Real, Tybit1[Unit]]), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  (z : Cart[Real, Tybit1[Unit]])
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]]) - op_pct((d : Real), basis(1))
   3 <= 3
   2 <= 3
   1 <= 3
   1 <= 2
   1 <= 1
-  interval_upperbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $1 =\n     (a:real^3)$1 /\\\n     interval_lowerbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $2 =\n     a$2 /\\\n     interval_upperbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $2 =\n     a$2 + d /\\\n     interval_lowerbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $3 =\n     a$3 /\\\n     interval_upperbound(interval[a - d % basis 1:real^3,\n                                   a - d % basis 1 + d % vec 1]) $3 =\n     a$3 + d /\\\n     interval_length(interval[a - d % basis 1:real^3,\n                               a - d % basis 1 + d % vec 1]) = d
-  forall i. 1 <= i /\\ i <= dimindex(:3)\n         ==> (a - d % basis 1:real^3)$i <=\n             (a - d % basis 1 + d % vec 1:real^3)$i
-  D division_of interval[a:real^3, a + d % vec 1]
-  forall D (a:real^3) d.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    ~(D = {interval[a, a + d % vec 1]})\n    ==> valley D (interval[a - d % basis 1, a - d % basis 1 + d % vec 1])
-  (?i. 1 <= i /\\ i <= 3 /\\ P i) <=>\n     ~(forall i. 1 <= i /\\ i <= 3 ==> ~P i)
-  (x:real^3)$3 < interval_upperbound (k:real^3->bool) $ 3
-  interval_lowerbound (k:real^3->bool) $ 3 < (x:real^3)$3
-  (x:real^3)$2 < interval_upperbound (k:real^3->bool) $ 2
-  interval_lowerbound (k:real^3->bool) $ 2 < (x:real^3)$2
-  (x:real^3)$1 = interval_upperbound (k:real^3->bool) $ 1
-  (x:real^3) IN (j:real^3->bool)
-  ~(interior(j:real^3->bool) = {})
-  ~(interior(k:real^3->bool) = {})
-  interior(k:real^3->bool) INTER interior(j:real^3->bool) = {}
-  interval_lowerbound k = (u:real^3) /\\\n     interval_upperbound k = (v:real^3) /\\\n     interval_lowerbound j = (p:real^3) /\\\n     interval_upperbound j = (q:real^3)
-  ?p q:real^3. j = interval[p,q] /\\ ~(interval[p,q] = {})
-  ?u v:real^3. k = interval[u,v] /\\ ~(interval[u,v] = {})
-  forall D (k:real^3->bool) j (x:real^3).\n    D division_of UNIONS D /\\\n    ~(interior k = {}) /\\ ~(interior j = {}) /\\\n    k IN D /\\ j IN D /\\ ~(j = k) /\\\n    x IN k /\\ x IN j /\\\n    x$1 = interval_upperbound k $ 1 /\\\n    interval_lowerbound k $ 2 < x$2 /\\\n    x$2 < interval_upperbound k $ 2 /\\\n    interval_lowerbound k $ 3 < x$3 /\\\n    x$3 < interval_upperbound k $ 3\n    ==> interval_lowerbound j $ 1 = interval_upperbound k $ 1
-  interval_lowerbound m1 = c1:real^3 /\\\n     interval_upperbound m1 = c1 + s1 % vec 1:real^3 /\\\n     interval_lowerbound m2 = c2:real^3 /\\\n     interval_upperbound m2 = c2 + s2 % vec 1:real^3
-  (?c1:real^3 s1. &0 < s1 /\\ m1 = interval[c1, c1 + s1 % vec 1]) /\\\n     (?c2:real^3 s2. &0 < s2 /\\ m2 = interval[c2, c2 + s2 % vec 1])
-  ~(e1:real^2->bool = e2)
-  ~(m1:real^3->bool = m2)
-  m2:real^3->bool
-  (e2:real^2->bool) IN E
-  m1:real^3->bool
-  (e1:real^2->bool) IN E
-  interval[vector[(ck:real^3)$2;ck$3]:real^2,\n                vector[ck$2 + sk;ck$3 + sk]] =\n       interval[vector[(cv:real^3)$2;cv$3]:real^2,\n                vector[cv$2 + sv;cv$3 + sv]]
-  ~(interval[vector[(ck:real^3)$2;ck$3]:real^2,\n                  vector[ck$2 + sk;ck$3 + sk]] = {}) /\\\n       ~(interval[vector[(cv:real^3)$2;cv$3]:real^2,\n                  vector[cv$2 + sv;cv$3 + sv]] = {})
-  proj_k:real^2->bool
-  vector[(cv:real^3)$2 + sv; cv$3 + sv]:real^2
-  vector[(cv:real^3)$2; cv$3]:real^2
-  E:(real^2->bool)->bool
-  interval_lowerbound(m1:real^3->bool) = cm1 /\\\n           interval_upperbound m1 = cm1 + sm1 % vec 1:real^3
-  interval_length(e0:real^2->bool) = sm1
-  interval_length(proj_k:real^2->bool) = sk
-  interval_length(k:real^3->bool) = sk /\\\n                    interval_length(m1:real^3->bool) = sm1
-  interval_length(k:real^3->bool) < interval_length(m1:real^3->bool)
-  ~(e0:real^2->bool = proj_k)
-  ~(m1:real^3->bool = k)
-  ?cm1:real^3 sm1. &0 < sm1 /\\ m1 = interval[cm1, cm1 + sm1 % vec 1]
-  m1:real^3->bool
-  (e0:real^2->bool) IN E
-  e0:real^2->bool
-  forall e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e
-  interval[vector[(cv:real^3)$2;cv$3]:real^2,\n                     vector[cv$2 + sv;cv$3 + sv]] =\n           closure(interval(vector[(cv:real^3)$2;cv$3]:real^2,\n                             vector[cv$2 + sv;cv$3 + sv]))
-  &0 < sv
-  ~(interval(vector[(cv:real^3)$2;cv$3]:real^2,\n                       vector[cv$2 + sv;cv$3 + sv]) = {})
-  vector[(cv:real^3)$1+sv;(y:real^2)$1;y$2]:real^3 IN mp2
-  interval_lowerbound mp2 = cmp2:real^3 /\\\n             interval_upperbound mp2 = cmp2 + smp2 % vec 1:real^3
-  ?cmp2:real^3 smp2.\n               &0 < smp2 /\\ mp2 = interval[cmp2, cmp2 + smp2 % vec 1]
-  vector[(cv:real^3)$1+sv;(y:real^2)$1;y$2]:real^3
-  mp2:real^3->bool
-  interval[vector[(interval_lowerbound(mp2:real^3->bool))$2;\n                              (interval_lowerbound mp2)$3]:real^2,\n                      vector[(interval_upperbound mp2)$2;\n                              (interval_upperbound mp2)$3]]
-  vector[(cv:real^3)$1 + sv;(y:real^2)$1;y$2]:real^3
-  mp2:real^3->bool
-  ?mp2:real^3->bool. mp2 IN D /\\\n              vector[(cv:real^3)$1 + sv;(y:real^2)$1;y$2]:real^3 IN mp2 /\\\n              interval_lowerbound mp2$1 = interval_upperbound(v:real^3->bool)$1
-  y:real^2
-  interval(vector[(cv:real^3)$2;cv$3]:real^2,\n                    vector[cv$2 + sv;cv$3 + sv]) SUBSET\n           UNIONS(E:(real^2->bool)->bool)
-  ef:real^2->bool
-  closed(UNIONS(E:(real^2->bool)->bool))
-  (p:real^2) IN ep
-  mp:real^3->bool
-  (cv:real^3)$2 <= interval_lowerbound(mp:real^3->bool)$2 /\\\n           interval_upperbound(mp:real^3->bool)$2 <= cv$2 + sv /\\\n           cv$3 <= interval_lowerbound(mp:real^3->bool)$3 /\\\n           interval_upperbound(mp:real^3->bool)$3 <= cv$3 + sv
-  mp:real^3->bool
-  (ep:real^2->bool) IN E
-  ep:real^2->bool
-  p:real^2
-  UNIONS(E:(real^2->bool)->bool) = (face_sq:real^2->bool)
-  ef:real^2->bool
-  cube_dissection(E:(real^2->bool)->bool)
-  ~(interval_length(m1:real^3->bool) = interval_length(m2:real^3->bool))
-  interval_length(e1:real^2->bool) = s1 /\\\n         interval_length(e2:real^2->bool) = s2
-  e2:real^2->bool
-  e1:real^2->bool
-  pairwise (\\k k':real^2->bool.\n         ~(interval_length k = interval_length k')) E
-  interior(m1:real^3->bool) INTER interior m2 = {}
-  (y:real^2) IN interior(e2:real^2->bool)
-  (y:real^2) IN interior(e1:real^2->bool)
-  vector[(c1:real^3)$1 + min s1 s2 / &2;\n                (y:real^2)$1; y$2]:real^3 IN interior m1 /\\\n         vector[(c1:real^3)$1 + min s1 s2 / &2;\n                (y:real^2)$1; y$2]:real^3 IN interior m2
-  y:real^2
-  (~p ==> F) ==> p
-  interior(m1:real^3->bool) INTER interior m2 = {}
-  (c1:real^3)$1 = (c2:real^3)$1
-  e2:real^2->bool
-  e1:real^2->bool
-  forall e1 e2:real^2->bool. e1 IN E /\\ e2 IN E /\\ ~(e1 = e2)\n       ==> interior e1 INTER interior e2 = {}
-  sma:real
-  vector[(cma:real^3)$2; cma$3]:real^2
-  interval_lowerbound(ma:real^3->bool) = cma /\\\n         interval_upperbound ma = cma + sma % vec 1:real^3
-  ?cma:real^3 sma. &0 < sma /\\ ma = interval[cma, cma + sma % vec 1]
-  ma:real^3->bool
-  ea:real^2->bool
-  forall e:real^2->bool. e IN E ==> cube e
-  D:(real^3->bool)->bool
-  FINITE(E:(real^2->bool)->bool)
-  k:real^3->bool
-  (proj_k:real^2->bool) IN E
-  (z:real^3)$3 < interval_upperbound(v:real^3->bool) $ 3
-  interval_lowerbound(v:real^3->bool) $ 3 < (z:real^3)$3
-  (z:real^3)$2 < interval_upperbound(v:real^3->bool) $ 2
-  interval_lowerbound(v:real^3->bool) $ 2 < (z:real^3)$2
-  z:real^3
-  ?z:real^3. z IN k /\\ (cv:real^3)$2 < z$2 /\\ z$2 < cv$2 + sv /\\\n                  cv$3 < z$3 /\\ z$3 < cv$3 + sv
-  cube_dissection (E:(real^2->bool)->bool) /\\\n     UNIONS E = (face_sq:real^2->bool) /\\\n     (proj_k:real^2->bool) IN E /\\\n     (forall e:real^2->bool. e IN E /\\ ~(e = proj_k)\n          ==> interval_length proj_k < interval_length e)
-  proj_k = interval[vector[(ck:real^3)$2; ck$3]:real^2,\n                        vector[ck$2 + sk; ck$3 + sk]]
-  face_sq = interval[vector[(cv:real^3)$2; cv$3]:real^2,\n                         vector[cv$2 + sv; cv$3 + sv]]
-  E = IMAGE (\\m:real^3->bool.\n       interval[vector[(interval_lowerbound m)$2;\n                       (interval_lowerbound m)$3]:real^2,\n                vector[(interval_upperbound m)$2;\n                       (interval_upperbound m)$3]])\n       {m | m IN D /\\\n            interval_lowerbound m $ 1 = (cv:real^3)$1 + sv /\\\n            (?z:real^3. z IN m /\\\n                 cv$2 < z$2 /\\ z$2 < cv$2 + sv /\\\n                 cv$3 < z$3 /\\ z$3 < cv$3 + sv)}
-  k:real^3->bool
-  sk < sv
-  k:real^3->bool
-  (cv:real^3)$2 <= (ck:real^3)$2 /\\ ck$2 + sk <= cv$2 + sv /\\\n     cv$3 <= ck$3 /\\ ck$3 + sk <= cv$3 + sv
-  interval_lowerbound(k:real^3->bool) $ 1 =\n                 interval_upperbound(v:real^3->bool) $ 1
-  (ck:real^3)$1 = (cv:real^3)$1 + sv
-  (interval_lowerbound(v:real^3->bool) = cv /\\\n      interval_upperbound v = cv + sv % vec 1:real^3) /\\\n     (interval_lowerbound(k:real^3->bool) = ck /\\\n      interval_upperbound k = ck + sk % vec 1:real^3)
-  ?ck:real^3 sk. &0 < sk /\\ k = interval[ck, ck + sk % vec 1]
-  ?cv:real^3 sv. &0 < sv /\\ v = interval[cv, cv + sv % vec 1]
-  cube(k:real^3->bool)
-  FINITE(D:(real^3->bool)->bool)
-  (D:(real^3->bool)->bool) division_of UNIONS D
-  forall D (a:real^3) d (v:real^3->bool) k.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j')\n    ==> interval_lowerbound (v:real^3->bool) $ 2 < interval_lowerbound k $ 2 /\\\n        interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n        interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n        interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3
-  m1:real^3->bool
-  vector[(ck:real^3)$2 + sk; ck$3 + sk]:real^2
-  vector[(ck:real^3)$2; ck$3]:real^2
-  INFINITE({x:real | a < x /\\ x < b} DIFF s)
-  forall s a b. FINITE s /\\ a < b ==> ?x:real. a < x /\\ x < b /\\ ~(x IN s)
-  j:real^3->bool
-  m:real^3->bool
-  (D:(real^3->bool)->bool) division_of UNIONS D
-  vector[(ck:real^3)$1 + sk + (min (sm - sk) sj) / &2;\n              w2; w3]:real^3
-  (cm:real^3)$1 = (ck:real^3)$1
-  ~(interior (m:real^3->bool) INTER interior j = {})
-  x <= y /\\ ~(x = y) ==> x < y
-  (vector[interval_upperbound (v:real^3->bool) $ 1;\n           w2; w3]:real^3) IN interval[cm:real^3, cm + sm % vec 1]
-  (cm:real^3)$2 <= w2 /\\ w2 <= cm$2 + sm /\\\n       cm$3 <= w3 /\\ w3 <= cm$3 + sm
-  (cm:real^3)$2 < w2 /\\ w2 < cm$2 + sm /\\\n     cm$3 < w3 /\\ w3 < cm$3 + sm
-  ~(w2 = interval_lowerbound (m:real^3->bool) $ 2) /\\\n     ~(w2 = interval_upperbound (m:real^3->bool) $ 2) /\\\n     ~(w3 = interval_lowerbound (m:real^3->bool) $ 3) /\\\n     ~(w3 = interval_upperbound (m:real^3->bool) $ 3)
-  m:real^3->bool
-  interval_lowerbound (m:real^3->bool) $ 2 IN\n       IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 2) D /\\\n     interval_upperbound (m:real^3->bool) $ 2 IN\n       IMAGE (\\k':real^3->bool. interval_upperbound k' $ 2) D /\\\n     interval_lowerbound (m:real^3->bool) $ 3 IN\n       IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 3) D /\\\n     interval_upperbound (m:real^3->bool) $ 3 IN\n       IMAGE (\\k':real^3->bool. interval_upperbound k' $ 3) D
-  (cj:real^3)$1 = interval_upperbound (v:real^3->bool) $ 1
-  ~(m = j:real^3->bool)
-  interval_length (k:real^3->bool) < interval_length (m:real^3->bool)
-  sk < sm
-  vector[interval_upperbound (v:real^3->bool) $ 1;\n                w2; w3]:real^3
-  m IN D /\\ ~(m = k:real^3->bool) /\\\n       interval_lowerbound (m:real^3->bool) $ 1 =\n         interval_upperbound (v:real^3->bool) $ 1 /\\\n       (?zz:real^3. zz IN m /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < zz$2 /\\\n         zz$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < zz$3 /\\\n         zz$3 < interval_upperbound (v:real^3->bool) $ 3)
-  interval_length (k:real^3->bool) < interval_length (m:real^3->bool)
-  interval_lowerbound m = (cm:real^3) /\\\n     interval_upperbound m = cm + sm % vec 1:real^3
-  (cm + sm % vec 1:real^3)$2 = cm$2 + sm /\\\n     (cm + sm % vec 1:real^3)$3 = cm$3 + sm
-  ?cm:real^3 sm. &0 < sm /\\ m = interval[cm, cm + sm % vec 1]
-  cube(m:real^3->bool)
-  (vector[interval_upperbound (v:real^3->bool) $ 1; w2; w3]:real^3) IN\n        (k:real^3->bool)
-  ~(m = k:real^3->bool)
-  m:real^3->bool
-  vector[interval_upperbound (v:real^3->bool) $ 1; w2; w3]:real^3
-  interval_lowerbound (v:real^3->bool) $ 2 < w2 /\\ (cj:real^3)$2 < w2 /\\\n       w2 < interval_upperbound (v:real^3->bool) $ 2 /\\ w2 < cj$2 + sj /\\\n       interval_lowerbound (v:real^3->bool) $ 3 < w3 /\\\n       w3 < (cj:real^3)$3 + sj /\\\n       w3 < interval_upperbound (v:real^3->bool) $ 3
-  min (interval_upperbound (v:real^3->bool) $ 3) ((cj:real^3)$3 + sj)
-  (ck:real^3)$3 + sk
-  w3:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 3) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 3) D
-  (<):real->real->bool
-  min (interval_upperbound (v:real^3->bool) $ 2) ((cj:real^3)$2 + sj)
-  max (interval_lowerbound (v:real^3->bool) $ 2) ((cj:real^3)$2)
-  w2:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 2) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 2) D
-  (<):real->real->bool
-  interval_lowerbound (v:real^3->bool) $ 2 < w2 /\\ (cj:real^3)$2 < w2 /\\\n       w2 < interval_upperbound (v:real^3->bool) $ 2 /\\ w2 < cj$2 + sj /\\\n       interval_lowerbound (v:real^3->bool) $ 3 < w3 /\\ cj$3 < w3 /\\\n       w3 < interval_upperbound (v:real^3->bool) $ 3
-  (ck:real^3)$3
-  max (interval_lowerbound (v:real^3->bool) $ 3) ((cj:real^3)$3)
-  w3:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 3) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 3) D
-  (<):real->real->bool
-  min (interval_upperbound (v:real^3->bool) $ 2) ((cj:real^3)$2 + sj)
-  max (interval_lowerbound (v:real^3->bool) $ 2) ((cj:real^3)$2)
-  w2:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 2) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 2) D
-  (<):real->real->bool
-  interval_lowerbound (v:real^3->bool) $ 2 < w2 /\\\n       w2 < (cj:real^3)$2 + sj /\\\n       w2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n       interval_lowerbound (v:real^3->bool) $ 3 < w3 /\\ cj$3 < w3 /\\\n       w3 < interval_upperbound (v:real^3->bool) $ 3 /\\ w3 < cj$3 + sj
-  min (interval_upperbound (v:real^3->bool) $ 2) ((cj:real^3)$2 + sj)
-  (ck:real^3)$2 + sk
-  w2:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 2) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 2) D
-  (<):real->real->bool
-  min (interval_upperbound (v:real^3->bool) $ 3) ((cj:real^3)$3 + sj)
-  max (interval_lowerbound (v:real^3->bool) $ 3) ((cj:real^3)$3)
-  w3:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 3) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 3) D
-  (<):real->real->bool
-  interval_lowerbound (v:real^3->bool) $ 2 < w2 /\\ (cj:real^3)$2 < w2 /\\\n       interval_lowerbound (v:real^3->bool) $ 3 < w3 /\\ cj$3 < w3 /\\\n       w3 < interval_upperbound (v:real^3->bool) $ 3 /\\ w3 < cj$3 + sj /\\\n       w2 < interval_upperbound (v:real^3->bool) $ 2
-  (ck:real^3)$2
-  max (interval_lowerbound (v:real^3->bool) $ 2) ((cj:real^3)$2)
-  w2:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 2) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 2) D
-  (<):real->real->bool
-  min (interval_upperbound (v:real^3->bool) $ 3) ((cj:real^3)$3 + sj)
-  max (interval_lowerbound (v:real^3->bool) $ 3) ((cj:real^3)$3)
-  w3:real
-  IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 3) D UNION\n    IMAGE (\\k':real^3->bool. interval_upperbound k' $ 3) D
-  (<):real->real->bool
-  pairwise (\\k:real^3->bool k'. ~(interval_length k = interval_length k')) D
-  FINITE(IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 2) D UNION\n            IMAGE (\\k':real^3->bool. interval_upperbound k' $ 2) D) /\\\n     FINITE(IMAGE (\\k':real^3->bool. interval_lowerbound k' $ 3) D UNION\n            IMAGE (\\k':real^3->bool. interval_upperbound k' $ 3) D)
-  (cj:real^3)$2 <= (z':real^3)$2 /\\ z'$2 <= cj$2 + sj /\\\n     cj$3 <= z'$3 /\\ z'$3 <= cj$3 + sj
-  (z':real^3) IN interval[cj:real^3, cj + sj % vec 1]
-  (interval_lowerbound (v:real^3->bool) $ 2 < (ck:real^3)$2 /\\\n     ck$2 + sk < interval_upperbound (v:real^3->bool) $ 2 /\\\n     interval_lowerbound (v:real^3->bool) $ 3 < ck$3 /\\\n     ck$3 + sk < interval_upperbound (v:real^3->bool) $ 3) /\\\n     (ck$2 < (z':real^3)$2 /\\ z'$2 < ck$2 + sk /\\\n      ck$3 < z'$3 /\\ z'$3 < ck$3 + sk)
-  interval_lowerbound (k:real^3->bool) $ 2 = (ck:real^3)$2 /\\\n     interval_lowerbound k $ 3 = ck$3 /\\\n     interval_upperbound k $ 2 = ck$2 + sk /\\\n     interval_upperbound k $ 3 = ck$3 + sk
-  (ck:real^3)$1 = interval_upperbound (v:real^3->bool) $ 1
-  (cj:real^3)$1 = (ck:real^3)$1 + sk
-  (ck + sk % vec 1:real^3)$1 = ck$1 + sk /\\\n     (ck + sk % vec 1:real^3)$2 = ck$2 + sk /\\\n     (ck + sk % vec 1:real^3)$3 = ck$3 + sk /\\\n     (cj + sj % vec 1:real^3)$1 = cj$1 + sj /\\\n     (cj + sj % vec 1:real^3)$2 = cj$2 + sj /\\\n     (cj + sj % vec 1:real^3)$3 = cj$3 + sj
-  (interval_lowerbound k = (ck:real^3) /\\\n      interval_upperbound k = ck + sk % vec 1:real^3) /\\\n     (interval_lowerbound j = (cj:real^3) /\\\n      interval_upperbound j = cj + sj % vec 1:real^3)
-  ?cj:real^3 sj. &0 < sj /\\ j = interval[cj, cj + sj % vec 1]
-  ?ck:real^3 sk. &0 < sk /\\ k = interval[ck, ck + sk % vec 1]
-  cube(j:real^3->bool)
-  cube(k:real^3->bool)
-  FINITE(D:(real^3->bool)->bool)
-  (D:(real^3->bool)->bool) division_of UNIONS D
-  k:real^3->bool
-  v:real^3->bool
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
-  forall D (a:real^3) d (v:real^3->bool) k j.\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v /\\\n    k IN D /\\\n    interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n    (?z:real^3. z IN k /\\\n         interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\ z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n         interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\ z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n    (forall j'. j' IN D /\\ ~(j' = k) /\\\n          interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n          (?z:real^3. z IN j' /\\\n               interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n               z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n               interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n               z$3 < interval_upperbound (v:real^3->bool) $ 3)\n          ==> interval_length k < interval_length j') /\\\n    j IN D /\\\n    interval_lowerbound j $ 1 = interval_upperbound k $ 1 /\\\n    (?z:real^3. z IN j /\\\n         interval_lowerbound k $ 2 < z$2 /\\ z$2 < interval_upperbound k $ 2 /\\\n         interval_lowerbound k $ 3 < z$3 /\\ z$3 < interval_upperbound k $ 3)\n    ==> interval_lowerbound k $ 2 <= interval_lowerbound j $ 2 /\\\n        interval_upperbound j $ 2 <= interval_upperbound k $ 2 /\\\n        interval_lowerbound k $ 3 <= interval_lowerbound j $ 3 /\\\n        interval_upperbound j $ 3 <= interval_upperbound k $ 3
-  zw:real^3
-  j0:real^3->bool
-  ?j0:real^3->bool. j0 IN D /\\ (zw:real^3) IN j0 /\\\n     interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1
-  interval_lowerbound (v:real^3->bool) $ 2 <\n        interval_lowerbound (k:real^3->bool) $ 2
-  interval_upperbound (k:real^3->bool) $ 2 <\n        interval_upperbound (v:real^3->bool) $ 2
-  interval_lowerbound (v:real^3->bool) $ 3 <\n        interval_lowerbound (k:real^3->bool) $ 3
-  interval_upperbound (k:real^3->bool) $ 3 <\n        interval_upperbound (v:real^3->bool) $ 3
-  &0 < sk
-  (zw:real^3)$1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n     interval_lowerbound (v:real^3->bool) $ 2 < zw$2 /\\\n     zw$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n     interval_lowerbound (v:real^3->bool) $ 3 < zw$3 /\\\n     zw$3 < interval_upperbound (v:real^3->bool) $ 3
-  interval_lowerbound (v:real^3->bool) $ 2 <\n                 interval_lowerbound (k:real^3->bool) $ 2
-  ~((zw:real^3) IN (k:real^3->bool))
-  zw = vector[interval_upperbound (v:real^3->bool) $ 1;\n     (interval_lowerbound (v:real^3->bool) $ 2 + (ck:real^3)$2) / &2;\n     (interval_lowerbound (v:real^3->bool) $ 3 + ck$3) / &2]:real^3
-  interval_lowerbound (k:real^3->bool) = (ck:real^3) /\\\n     interval_upperbound k = ck + sk % vec 1:real^3
-  ?ck:real^3 sk. &0 < sk /\\ k = interval[ck, ck + sk % vec 1]
-  k:real^3->bool
-  v:real^3->bool
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
-  interval_lowerbound (v:real^3->bool) $ 2 <\n       interval_lowerbound (k:real^3->bool) $ 2 /\\\n     interval_upperbound k $ 2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n     interval_lowerbound (v:real^3->bool) $ 3 < interval_lowerbound k $ 3 /\\\n     interval_upperbound k $ 3 < interval_upperbound (v:real^3->bool) $ 3
-  forall D (a:real^3) d (v:real^3->bool) (k:real^3->bool).\n     &0 < d /\\\n     cube_dissection D /\\\n     UNIONS D = interval[a, a + d % vec 1] /\\\n     valley D v /\\\n     k IN D /\\\n     interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n     (?z. z IN k /\\\n          interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n          z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n          interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n          z$3 < interval_upperbound (v:real^3->bool) $ 3) /\\\n     (forall j'. j' IN D /\\ ~(j' = k) /\\\n           interval_lowerbound j' $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n           (?z. z IN j' /\\\n                interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n                z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n                z$3 < interval_upperbound (v:real^3->bool) $ 3)\n           ==> interval_length k < interval_length j')\n     ==> ?j0. j0 IN D /\\ ~(j0 = k) /\\\n              interval_lowerbound j0 $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n              (?z'. z' IN j0 /\\\n                    interval_lowerbound (v:real^3->bool) $ 2 < z'$2 /\\\n                    z'$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n                    interval_lowerbound (v:real^3->bool) $ 3 < z'$3 /\\\n                    z'$3 < interval_upperbound (v:real^3->bool) $ 3)
+  op_dollar(interval_upperbound(interval([((a : Cart[Real, Tybit1[Unit]]) - op_pct((d : Real), basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])), 1) == op_dollar(a, 1) && op_dollar(interval_lowerbound(interval([(a - op_pct(d, basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])), 2) == op_dollar(a, 2) && op_dollar(interval_upperbound(interval([(a - op_pct(d, basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])), 2) == op_dollar(a, 2) + d && op_dollar(interval_lowerbound(interval([(a - op_pct(d, basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])), 3) == op_dollar(a, 3) && op_dollar(interval_upperbound(interval([(a - op_pct(d, basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])), 3) == op_dollar(a, 3) + d && interval_length(interval([(a - op_pct(d, basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])) == d
+  \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((a : Cart[Real, Tybit1[Unit]]) - (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((d : Real), (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)), i) <= (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(a - (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(d, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)) + (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(d, (vec : (Num) -> Cart[Real, Tybit1[Unit]])(1)), i)
+  division_of((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) && !(D == {interval([(a, a + op_pct(d, vec(1)))])}) \226\134\146 valley(D, interval([(a - op_pct(d, basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))]))
+  (\226\136\131 i : Num, 1 <= i && i <= 3 && (P : (Num) -> Bool)(i)) == !(\226\136\128 i : Num, 1 <= i && i <= 3 \226\134\146 !P(i))
+  op_dollar((x : Cart[Real, Tybit1[Unit]]), 3) < op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3)
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3) < op_dollar((x : Cart[Real, Tybit1[Unit]]), 3)
+  op_dollar((x : Cart[Real, Tybit1[Unit]]), 2) < op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar((x : Cart[Real, Tybit1[Unit]]), 2)
+  op_dollar((x : Cart[Real, Tybit1[Unit]]), 1) == op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  IN((x : Cart[Real, Tybit1[Unit]]), (j : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  !(interior((j : (Cart[Real, Tybit1[Unit]]) -> Bool)) == {})
+  !(interior((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == {})
+  INTER(interior((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), interior((j : (Cart[Real, Tybit1[Unit]]) -> Bool))) == {}
+  interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (u : Cart[Real, Tybit1[Unit]]) && interval_upperbound(k) == (v : Cart[Real, Tybit1[Unit]]) && interval_lowerbound((j : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (p : Cart[Real, Tybit1[Unit]]) && interval_upperbound(j) == (q : Cart[Real, Tybit1[Unit]])
+  \226\136\131 p : Cart[Real, Tybit1[Unit]], \226\136\131 q : Cart[Real, Tybit1[Unit]], (j : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(p, q)]) && !(interval([(p, q)]) == {})
+  \226\136\131 u : Cart[Real, Tybit1[Unit]], \226\136\131 v : Cart[Real, Tybit1[Unit]], (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(u, v)]) && !(interval([(u, v)]) == {})
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 j : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 x : Cart[Real, Tybit1[Unit]], division_of(D, UNIONS(D)) && !(interior(k) == {}) && !(interior(j) == {}) && IN(k, D) && IN(j, D) && !(j == k) && IN(x, k) && IN(x, j) && op_dollar(x, 1) == op_dollar(interval_upperbound(k), 1) && op_dollar(interval_lowerbound(k), 2) < op_dollar(x, 2) && op_dollar(x, 2) < op_dollar(interval_upperbound(k), 2) && op_dollar(interval_lowerbound(k), 3) < op_dollar(x, 3) && op_dollar(x, 3) < op_dollar(interval_upperbound(k), 3) \226\134\146 op_dollar(interval_lowerbound(j), 1) == op_dollar(interval_upperbound(k), 1)
+  interval_lowerbound((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (c1 : Cart[Real, Tybit1[Unit]]) && interval_upperbound(m1) == c1 + op_pct((s1 : Real), vec(1)) && interval_lowerbound((m2 : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (c2 : Cart[Real, Tybit1[Unit]]) && interval_upperbound(m2) == c2 + op_pct((s2 : Real), vec(1))
+  (\226\136\131 c1 : Cart[Real, Tybit1[Unit]], \226\136\131 s1 : Real, real_of_num(0) < s1 && (m1 : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(c1, c1 + op_pct(s1, vec(1)))])) && (\226\136\131 c2 : Cart[Real, Tybit1[Unit]], \226\136\131 s2 : Real, real_of_num(0) < s2 && (m2 : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(c2, c2 + op_pct(s2, vec(1)))]))
+  !((e1 : (Cart[Real, Tybit0[Unit]]) -> Bool) == (e2 : (Cart[Real, Tybit0[Unit]]) -> Bool))
+  !((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool) == (m2 : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (m2 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN((e2 : (Cart[Real, Tybit0[Unit]]) -> Bool), (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  (m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN((e1 : (Cart[Real, Tybit0[Unit]]) -> Bool), (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  (interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((ck : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 2) + (sk : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 3) + sk]))]) == (interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 2) + (sv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3) + sv]))])
+  !((interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((ck : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 2) + (sk : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 3) + sk]))]) == ({} : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !((interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 2) + (sv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3) + sv]))]) == ({} : (Cart[Real, Tybit0[Unit]]) -> Bool))
+  (proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 2) + (sv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3) + sv])
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3)])
+  (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)
+  interval_lowerbound((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cm1 : Cart[Real, Tybit1[Unit]]) && interval_upperbound(m1) == cm1 + op_pct((sm1 : Real), vec(1))
+  interval_length((e0 : (Cart[Real, Tybit0[Unit]]) -> Bool)) == (sm1 : Real)
+  interval_length((proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool)) == (sk : Real)
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (sk : Real) && interval_length((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (sm1 : Real)
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) < interval_length((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  !((e0 : (Cart[Real, Tybit0[Unit]]) -> Bool) == (proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool))
+  !((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool) == (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  \226\136\131 cm1 : Cart[Real, Tybit1[Unit]], \226\136\131 sm1 : Real, real_of_num(0) < sm1 && (m1 : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cm1, cm1 + op_pct(sm1, vec(1)))])
+  (m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN((e0 : (Cart[Real, Tybit0[Unit]]) -> Bool), (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  (e0 : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  \226\136\128 e : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(e, (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && !(e == (proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 interval_length(proj_k) < interval_length(e)
+  (interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 2) + (sv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3) + sv]))]) == (closure : ((Cart[Real, Tybit0[Unit]]) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)((interval : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]), Cart[Real, Tybit0[Unit]]) -> Bool)(((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 2) + sv, (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3) + sv]))))
+  real_of_num(0) < (sv : Real)
+  !((interval : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]), Cart[Real, Tybit0[Unit]]) -> Bool)(((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 2) + (sv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cv, 3) + sv]))) == ({} : (Cart[Real, Tybit0[Unit]]) -> Bool))
+  IN(vector([op_dollar((cv : Cart[Real, Tybit1[Unit]]), 1) + (sv : Real), op_dollar((y : Cart[Real, Tybit0[Unit]]), 1), op_dollar(y, 2)]), (mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  interval_lowerbound((mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cmp2 : Cart[Real, Tybit1[Unit]]) && interval_upperbound(mp2) == cmp2 + op_pct((smp2 : Real), vec(1))
+  \226\136\131 cmp2 : Cart[Real, Tybit1[Unit]], \226\136\131 smp2 : Real, real_of_num(0) < smp2 && (mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cmp2, cmp2 + op_pct(smp2, vec(1)))])
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 1) + (sv : Real), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((y : Cart[Real, Tybit0[Unit]]), 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(y, 2)])
+  (mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (interval : (List[(Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])], Cart[Real, Tybit0[Unit]]) -> Bool)([((vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((interval_lowerbound : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Cart[Real, Tybit1[Unit]])((mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((interval_lowerbound : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Cart[Real, Tybit1[Unit]])(mp2), 3)]), (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((interval_upperbound : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Cart[Real, Tybit1[Unit]])(mp2), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((interval_upperbound : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Cart[Real, Tybit1[Unit]])(mp2), 3)]))])
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cv : Cart[Real, Tybit1[Unit]]), 1) + (sv : Real), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((y : Cart[Real, Tybit0[Unit]]), 1), (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)(y, 2)])
+  (mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  \226\136\131 mp2 : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(mp2, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && IN(vector([op_dollar((cv : Cart[Real, Tybit1[Unit]]), 1) + (sv : Real), op_dollar((y : Cart[Real, Tybit0[Unit]]), 1), op_dollar(y, 2)]), mp2) && op_dollar(interval_lowerbound(mp2), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  (y : Cart[Real, Tybit0[Unit]])
+  SUBSET(interval((vector([op_dollar((cv : Cart[Real, Tybit1[Unit]]), 2), op_dollar(cv, 3)]), vector([op_dollar(cv, 2) + (sv : Real), op_dollar(cv, 3) + sv]))), UNIONS((E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)))
+  (ef : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  closed(UNIONS((E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)))
+  IN((p : Cart[Real, Tybit0[Unit]]), (ep : (Cart[Real, Tybit0[Unit]]) -> Bool))
+  (mp : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  op_dollar((cv : Cart[Real, Tybit1[Unit]]), 2) <= op_dollar(interval_lowerbound((mp : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) && op_dollar(interval_upperbound(mp), 2) <= op_dollar(cv, 2) + (sv : Real) && op_dollar(cv, 3) <= op_dollar(interval_lowerbound(mp), 3) && op_dollar(interval_upperbound(mp), 3) <= op_dollar(cv, 3) + sv
+  (mp : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN((ep : (Cart[Real, Tybit0[Unit]]) -> Bool), (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  (ep : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  (p : Cart[Real, Tybit0[Unit]])
+  UNIONS((E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) == (face_sq : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  (ef : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  cube_dissection((E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  !(interval_length((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)) == interval_length((m2 : (Cart[Real, Tybit1[Unit]]) -> Bool)))
+  interval_length((e1 : (Cart[Real, Tybit0[Unit]]) -> Bool)) == (s1 : Real) && interval_length((e2 : (Cart[Real, Tybit0[Unit]]) -> Bool)) == (s2 : Real)
+  (e2 : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  (e1 : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  pairwise((k : (Cart[Real, Tybit0[Unit]]) -> Bool) => (k' : (Cart[Real, Tybit0[Unit]]) -> Bool) => !(interval_length(k) == interval_length(k')), (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  INTER(interior((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)), interior((m2 : (Cart[Real, Tybit1[Unit]]) -> Bool))) == {}
+  IN((y : Cart[Real, Tybit0[Unit]]), interior((e2 : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+  IN((y : Cart[Real, Tybit0[Unit]]), interior((e1 : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+  IN(vector([op_dollar((c1 : Cart[Real, Tybit1[Unit]]), 1) + min((s1 : Real), (s2 : Real)) / real_of_num(2), op_dollar((y : Cart[Real, Tybit0[Unit]]), 1), op_dollar(y, 2)]), interior((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool))) && IN(vector([op_dollar(c1, 1) + min(s1, s2) / real_of_num(2), op_dollar(y, 1), op_dollar(y, 2)]), interior((m2 : (Cart[Real, Tybit1[Unit]]) -> Bool)))
+  (y : Cart[Real, Tybit0[Unit]])
+  (!(p : Bool) \226\134\146 false) \226\134\146 p
+  INTER(interior((m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)), interior((m2 : (Cart[Real, Tybit1[Unit]]) -> Bool))) == {}
+  op_dollar((c1 : Cart[Real, Tybit1[Unit]]), 1) == op_dollar((c2 : Cart[Real, Tybit1[Unit]]), 1)
+  (e2 : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  (e1 : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  \226\136\128 e1 : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 e2 : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(e1, (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && IN(e2, E) && !(e1 == e2) \226\134\146 INTER(interior(e1), interior(e2)) == {}
+  (sma : Real)
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((cma : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(cma, 3)])
+  interval_lowerbound((ma : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cma : Cart[Real, Tybit1[Unit]]) && interval_upperbound(ma) == cma + op_pct((sma : Real), vec(1))
+  \226\136\131 cma : Cart[Real, Tybit1[Unit]], \226\136\131 sma : Real, real_of_num(0) < sma && (ma : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cma, cma + op_pct(sma, vec(1)))])
+  (ma : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (ea : (Cart[Real, Tybit0[Unit]]) -> Bool)
+  \226\136\128 e : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(e, (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) \226\134\146 cube(e)
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  FINITE((E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN((proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool), (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool))
+  op_dollar((z : Cart[Real, Tybit1[Unit]]), 3) < op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3)
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3) < op_dollar((z : Cart[Real, Tybit1[Unit]]), 3)
+  op_dollar((z : Cart[Real, Tybit1[Unit]]), 2) < op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar((z : Cart[Real, Tybit1[Unit]]), 2)
+  (z : Cart[Real, Tybit1[Unit]])
+  \226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, (k : (Cart[Real, Tybit1[Unit]]) -> Bool)) && op_dollar((cv : Cart[Real, Tybit1[Unit]]), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(cv, 2) + (sv : Real) && op_dollar(cv, 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(cv, 3) + sv
+  cube_dissection((E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)) && UNIONS(E) == (face_sq : (Cart[Real, Tybit0[Unit]]) -> Bool) && IN((proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool), E) && (\226\136\128 e : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(e, E) && !(e == proj_k) \226\134\146 interval_length(proj_k) < interval_length(e))
+  (proj_k : (Cart[Real, Tybit0[Unit]]) -> Bool) == interval([(vector([op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2), op_dollar(ck, 3)]), vector([op_dollar(ck, 2) + (sk : Real), op_dollar(ck, 3) + sk]))])
+  (face_sq : (Cart[Real, Tybit0[Unit]]) -> Bool) == interval([(vector([op_dollar((cv : Cart[Real, Tybit1[Unit]]), 2), op_dollar(cv, 3)]), vector([op_dollar(cv, 2) + (sv : Real), op_dollar(cv, 3) + sv]))])
+  (E : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool) == IMAGE((m : (Cart[Real, Tybit1[Unit]]) -> Bool) => interval([(vector([op_dollar(interval_lowerbound(m), 2), op_dollar(interval_lowerbound(m), 3)]), vector([op_dollar(interval_upperbound(m), 2), op_dollar(interval_upperbound(m), 3)]))]), {(m : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(m, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && op_dollar(interval_lowerbound(m), 1) == op_dollar((cv : Cart[Real, Tybit1[Unit]]), 1) + (sv : Real) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, m) && op_dollar(cv, 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(cv, 2) + sv && op_dollar(cv, 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(cv, 3) + sv)})
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (sk : Real) < (sv : Real)
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  op_dollar((cv : Cart[Real, Tybit1[Unit]]), 2) <= op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2) && op_dollar(ck, 2) + (sk : Real) <= op_dollar(cv, 2) + (sv : Real) && op_dollar(cv, 3) <= op_dollar(ck, 3) && op_dollar(ck, 3) + sk <= op_dollar(cv, 3) + sv
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 1) == op_dollar((cv : Cart[Real, Tybit1[Unit]]), 1) + (sv : Real)
+  (interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cv : Cart[Real, Tybit1[Unit]]) && interval_upperbound(v) == cv + op_pct((sv : Real), vec(1))) && interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (ck : Cart[Real, Tybit1[Unit]]) && interval_upperbound(k) == ck + op_pct((sk : Real), vec(1))
+  \226\136\131 ck : Cart[Real, Tybit1[Unit]], \226\136\131 sk : Real, real_of_num(0) < sk && (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(ck, ck + op_pct(sk, vec(1)))])
+  \226\136\131 cv : Cart[Real, Tybit1[Unit]], \226\136\131 sv : Real, real_of_num(0) < sv && (v : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cv, cv + op_pct(sv, vec(1)))])
+  cube((k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  FINITE((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
+  division_of((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), UNIONS(D))
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, \226\136\128 v : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) && valley(D, v) && IN(k, D) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) && (\226\136\128 j' : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(j', D) && !(j' == k) && op_dollar(interval_lowerbound(j'), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, j') && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) \226\134\146 interval_length(k) < interval_length(j')) \226\134\146 op_dollar(interval_lowerbound(v), 2) < op_dollar(interval_lowerbound(k), 2) && op_dollar(interval_upperbound(k), 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(interval_lowerbound(k), 3) && op_dollar(interval_upperbound(k), 3) < op_dollar(interval_upperbound(v), 3)
+  (m1 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((ck : Cart[Real, Tybit1[Unit]]), 2) + (sk : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 3) + sk])
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((ck : Cart[Real, Tybit1[Unit]]), 2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(ck, 3)])
+  INFINITE(DIFF({(x : Real) | (a : Real) < x && x < (b : Real)}, (s : (Real) -> Bool)))
+  \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 b : Real, FINITE(s) && a < b \226\134\146 (\226\136\131 x : Real, a < x && x < b && !IN(x, s))
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (m : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  division_of((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), UNIONS(D))
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((ck : Cart[Real, Tybit1[Unit]]), 1) + ((sk : Real) + min((sm : Real) - sk, (sj : Real)) / real_of_num(2)), (w2 : Real), (w3 : Real)])
+  op_dollar((cm : Cart[Real, Tybit1[Unit]]), 1) == op_dollar((ck : Cart[Real, Tybit1[Unit]]), 1)
+  !(INTER(interior((m : (Cart[Real, Tybit1[Unit]]) -> Bool)), interior((j : (Cart[Real, Tybit1[Unit]]) -> Bool))) == {})
+  (x : Real) <= (y : Real) && !(x == y) \226\134\146 x < y
+  IN(vector([op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1), (w2 : Real), (w3 : Real)]), interval([((cm : Cart[Real, Tybit1[Unit]]), cm + op_pct((sm : Real), vec(1)))]))
+  op_dollar((cm : Cart[Real, Tybit1[Unit]]), 2) <= (w2 : Real) && w2 <= op_dollar(cm, 2) + (sm : Real) && op_dollar(cm, 3) <= (w3 : Real) && w3 <= op_dollar(cm, 3) + sm
+  op_dollar((cm : Cart[Real, Tybit1[Unit]]), 2) < (w2 : Real) && w2 < op_dollar(cm, 2) + (sm : Real) && op_dollar(cm, 3) < (w3 : Real) && w3 < op_dollar(cm, 3) + sm
+  !((w2 : Real) == op_dollar(interval_lowerbound((m : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)) && !(w2 == op_dollar(interval_upperbound(m), 2)) && !((w3 : Real) == op_dollar(interval_lowerbound(m), 3)) && !(w3 == op_dollar(interval_upperbound(m), 3))
+  (m : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  IN(op_dollar(interval_lowerbound((m : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))) && IN(op_dollar(interval_upperbound(m), 2), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D)) && IN(op_dollar(interval_lowerbound(m), 3), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), D)) && IN(op_dollar(interval_upperbound(m), 3), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
+  op_dollar((cj : Cart[Real, Tybit1[Unit]]), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  !((m : (Cart[Real, Tybit1[Unit]]) -> Bool) == (j : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) < interval_length((m : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (sk : Real) < (sm : Real)
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((interval_upperbound : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Cart[Real, Tybit1[Unit]])((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1), (w2 : Real), (w3 : Real)])
+  IN((m : (Cart[Real, Tybit1[Unit]]) -> Bool), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && !(m == (k : (Cart[Real, Tybit1[Unit]]) -> Bool)) && op_dollar(interval_lowerbound(m), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) && (\226\136\131 zz : Cart[Real, Tybit1[Unit]], IN(zz, m) && op_dollar(interval_lowerbound(v), 2) < op_dollar(zz, 2) && op_dollar(zz, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(zz, 3) && op_dollar(zz, 3) < op_dollar(interval_upperbound(v), 3))
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) < interval_length((m : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  interval_lowerbound((m : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cm : Cart[Real, Tybit1[Unit]]) && interval_upperbound(m) == cm + op_pct((sm : Real), vec(1))
+  op_dollar((cm : Cart[Real, Tybit1[Unit]]) + op_pct((sm : Real), vec(1)), 2) == op_dollar(cm, 2) + sm && op_dollar(cm + op_pct(sm, vec(1)), 3) == op_dollar(cm, 3) + sm
+  \226\136\131 cm : Cart[Real, Tybit1[Unit]], \226\136\131 sm : Real, real_of_num(0) < sm && (m : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cm, cm + op_pct(sm, vec(1)))])
+  cube((m : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  IN(vector([op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1), (w2 : Real), (w3 : Real)]), (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  !((m : (Cart[Real, Tybit1[Unit]]) -> Bool) == (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (m : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((interval_upperbound : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Cart[Real, Tybit1[Unit]])((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1), (w2 : Real), (w3 : Real)])
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) < w2 && w2 < op_dollar(interval_upperbound(v), 2) && w2 < op_dollar(cj, 2) + (sj : Real) && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && w3 < op_dollar(cj, 3) + sj && w3 < op_dollar(interval_upperbound(v), 3)
+  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3) + (sj : Real))
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 3) + (sk : Real)
+  (w3 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
+  op_lt
+  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real))
+  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2))
+  (w2 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
+  op_lt
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) < w2 && w2 < op_dollar(interval_upperbound(v), 2) && w2 < op_dollar(cj, 2) + (sj : Real) && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && op_dollar(cj, 3) < w3 && w3 < op_dollar(interval_upperbound(v), 3)
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 3)
+  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3))
+  (w3 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
+  op_lt
+  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real))
+  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2))
+  (w2 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
+  op_lt
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && w2 < op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real) && w2 < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && op_dollar(cj, 3) < w3 && w3 < op_dollar(interval_upperbound(v), 3) && w3 < op_dollar(cj, 3) + sj
+  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real))
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2) + (sk : Real)
+  (w2 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
+  op_lt
+  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3) + (sj : Real))
+  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3))
+  (w3 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
+  op_lt
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) < w2 && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && op_dollar(cj, 3) < w3 && w3 < op_dollar(interval_upperbound(v), 3) && w3 < op_dollar(cj, 3) + (sj : Real) && w2 < op_dollar(interval_upperbound(v), 2)
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2)
+  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2))
+  (w2 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
+  op_lt
+  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3) + (sj : Real))
+  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3))
+  (w3 : Real)
+  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
+  op_lt
+  pairwise((k : (Cart[Real, Tybit1[Unit]]) -> Bool) => (k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => !(interval_length(k) == interval_length(k')), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
+  FINITE(UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))) && FINITE(UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), D), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D)))
+  op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) <= op_dollar((z' : Cart[Real, Tybit1[Unit]]), 2) && op_dollar(z', 2) <= op_dollar(cj, 2) + (sj : Real) && op_dollar(cj, 3) <= op_dollar(z', 3) && op_dollar(z', 3) <= op_dollar(cj, 3) + sj
+  IN((z' : Cart[Real, Tybit1[Unit]]), interval([((cj : Cart[Real, Tybit1[Unit]]), cj + op_pct((sj : Real), vec(1)))]))
+  (op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2) && op_dollar(ck, 2) + (sk : Real) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(ck, 3) && op_dollar(ck, 3) + sk < op_dollar(interval_upperbound(v), 3)) && op_dollar(ck, 2) < op_dollar((z' : Cart[Real, Tybit1[Unit]]), 2) && op_dollar(z', 2) < op_dollar(ck, 2) + sk && op_dollar(ck, 3) < op_dollar(z', 3) && op_dollar(z', 3) < op_dollar(ck, 3) + sk
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) == op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2) && op_dollar(interval_lowerbound(k), 3) == op_dollar(ck, 3) && op_dollar(interval_upperbound(k), 2) == op_dollar(ck, 2) + (sk : Real) && op_dollar(interval_upperbound(k), 3) == op_dollar(ck, 3) + sk
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  op_dollar((cj : Cart[Real, Tybit1[Unit]]), 1) == op_dollar((ck : Cart[Real, Tybit1[Unit]]), 1) + (sk : Real)
+  op_dollar((ck : Cart[Real, Tybit1[Unit]]) + op_pct((sk : Real), vec(1)), 1) == op_dollar(ck, 1) + sk && op_dollar(ck + op_pct(sk, vec(1)), 2) == op_dollar(ck, 2) + sk && op_dollar(ck + op_pct(sk, vec(1)), 3) == op_dollar(ck, 3) + sk && op_dollar((cj : Cart[Real, Tybit1[Unit]]) + op_pct((sj : Real), vec(1)), 1) == op_dollar(cj, 1) + sj && op_dollar(cj + op_pct(sj, vec(1)), 2) == op_dollar(cj, 2) + sj && op_dollar(cj + op_pct(sj, vec(1)), 3) == op_dollar(cj, 3) + sj
+  (interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (ck : Cart[Real, Tybit1[Unit]]) && interval_upperbound(k) == ck + op_pct((sk : Real), vec(1))) && interval_lowerbound((j : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (cj : Cart[Real, Tybit1[Unit]]) && interval_upperbound(j) == cj + op_pct((sj : Real), vec(1))
+  \226\136\131 cj : Cart[Real, Tybit1[Unit]], \226\136\131 sj : Real, real_of_num(0) < sj && (j : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cj, cj + op_pct(sj, vec(1)))])
+  \226\136\131 ck : Cart[Real, Tybit1[Unit]], \226\136\131 sk : Real, real_of_num(0) < sk && (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(ck, ck + op_pct(sk, vec(1)))])
+  cube((j : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  cube((k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  FINITE((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
+  division_of((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), UNIONS(D))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (v : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, \226\136\128 v : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 j : (Cart[Real, Tybit1[Unit]]) -> Bool, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) && valley(D, v) && IN(k, D) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) && (\226\136\128 j' : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(j', D) && !(j' == k) && op_dollar(interval_lowerbound(j'), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, j') && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) \226\134\146 interval_length(k) < interval_length(j')) && IN(j, D) && op_dollar(interval_lowerbound(j), 1) == op_dollar(interval_upperbound(k), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, j) && op_dollar(interval_lowerbound(k), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(k), 2) && op_dollar(interval_lowerbound(k), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(k), 3)) \226\134\146 op_dollar(interval_lowerbound(k), 2) <= op_dollar(interval_lowerbound(j), 2) && op_dollar(interval_upperbound(j), 2) <= op_dollar(interval_upperbound(k), 2) && op_dollar(interval_lowerbound(k), 3) <= op_dollar(interval_lowerbound(j), 3) && op_dollar(interval_upperbound(j), 3) <= op_dollar(interval_upperbound(k), 3)
+  (zw : Cart[Real, Tybit1[Unit]])
+  (j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  \226\136\131 j0 : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(j0, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && IN((zw : Cart[Real, Tybit1[Unit]]), j0) && op_dollar(interval_lowerbound(j0), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)
+  op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3) < op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3)
+  op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3) < op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3)
+  real_of_num(0) < (sk : Real)
+  op_dollar((zw : Cart[Real, Tybit1[Unit]]), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) && op_dollar(interval_lowerbound(v), 2) < op_dollar(zw, 2) && op_dollar(zw, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(zw, 3) && op_dollar(zw, 3) < op_dollar(interval_upperbound(v), 3)
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)
+  !IN((zw : Cart[Real, Tybit1[Unit]]), (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (zw : Cart[Real, Tybit1[Unit]]) == vector([op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1), (op_dollar(interval_lowerbound(v), 2) + op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2)) / real_of_num(2), (op_dollar(interval_lowerbound(v), 3) + op_dollar(ck, 3)) / real_of_num(2)])
+  interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (ck : Cart[Real, Tybit1[Unit]]) && interval_upperbound(k) == ck + op_pct((sk : Real), vec(1))
+  \226\136\131 ck : Cart[Real, Tybit1[Unit]], \226\136\131 sk : Real, real_of_num(0) < sk && (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(ck, ck + op_pct(sk, vec(1)))])
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (v : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) && op_dollar(interval_upperbound(k), 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(interval_lowerbound(k), 3) && op_dollar(interval_upperbound(k), 3) < op_dollar(interval_upperbound(v), 3)
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, \226\136\128 v : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 k : (Cart[Real, Tybit1[Unit]]) -> Bool, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) && valley(D, v) && IN(k, D) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) && (\226\136\128 j' : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(j', D) && !(j' == k) && op_dollar(interval_lowerbound(j'), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, j') && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3)) \226\134\146 interval_length(k) < interval_length(j')) \226\134\146 (\226\136\131 j0 : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(j0, D) && !(j0 == k) && op_dollar(interval_lowerbound(j0), 1) == op_dollar(interval_upperbound(v), 1) && (\226\136\131 z' : Cart[Real, Tybit1[Unit]], IN(z', j0) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z', 2) && op_dollar(z', 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z', 3) && op_dollar(z', 3) < op_dollar(interval_upperbound(v), 3)))
   2
-  j:real^3->bool
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
   2
-  k:real^3->bool
-  x <= y /\\ ~(x = y) ==> x < y
-  cube(j:real^3->bool)
-  j:real^3->bool
-  k:real^3->bool
-  v:real^3->bool
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
-  interval_lowerbound (k:real^3->bool) $ 2 <=\n         interval_lowerbound (j:real^3->bool) $ 2 /\\\n       interval_upperbound j $ 2 <= interval_upperbound k $ 2 /\\\n       interval_lowerbound k $ 3 <= interval_lowerbound j $ 3 /\\\n       interval_upperbound j $ 3 <= interval_upperbound k $ 3
-  cube(k:real^3->bool)
-  &0 < interval_length(k:real^3->bool)
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (x : Real) <= (y : Real) && !(x == y) \226\134\146 x < y
+  cube((j : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (v : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) <= op_dollar(interval_lowerbound((j : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) && op_dollar(interval_upperbound(j), 2) <= op_dollar(interval_upperbound(k), 2) && op_dollar(interval_lowerbound(k), 3) <= op_dollar(interval_lowerbound(j), 3) && op_dollar(interval_upperbound(j), 3) <= op_dollar(interval_upperbound(k), 3)
+  cube((k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  real_of_num(0) < interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool))
   1
-  k:real^3->bool
-  ~(j:real^3->bool = k)
-  j:real^3->bool
-  j:real^3->bool
-  k:real^3->bool
-  v:real^3->bool
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
-  j:real^3->bool
-  zc:real^3
-  jc:real^3->bool
-  k:real^3->bool
-  D:(real^3->bool)->bool
-  jc:real^3->bool
-  jc:real^3->bool
-  interval_upperbound (k:real^3->bool)$1 <\n         (a + d % vec 1:real^3)$1
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  !((j : (Cart[Real, Tybit1[Unit]]) -> Bool) == (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (v : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  (j : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (zc : Cart[Real, Tybit1[Unit]])
+  (jc : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  (jc : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (jc : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) < op_dollar((a : Cart[Real, Tybit1[Unit]]) + op_pct((d : Real), vec(1)), 1)
   1 <= 3
   1 <= 1
   1
-  zc:real^3
-  ck + sk % vec 1:real^3
-  ck:real^3
-  a + d % vec 1:real^3
-  a:real^3
-  D:(real^3->bool)->bool
-  &0 < sk
-  (k:real^3->bool) SUBSET interval[a:real^3,a + d % vec 1]
-  (zc:real^3)$1 = interval_upperbound (k:real^3->bool)$1
-  (a:real^3)$1 < (zc:real^3)$1
-  &0 < sk
-  (zc:real^3) $ 3 < interval_upperbound (k:real^3->bool) $ 3
-  interval_lowerbound (k:real^3->bool) $ 3 < (zc:real^3) $ 3
-  (zc:real^3) $ 2 < interval_upperbound (k:real^3->bool) $ 2
-  interval_lowerbound (k:real^3->bool) $ 2 < (zc:real^3) $ 2
-  (zc:real^3)$1 = interval_upperbound (k:real^3->bool) $ 1
-  (zc:real^3) IN (k:real^3->bool)
-  interval_upperbound (j0:real^3->bool) IN interval[a:real^3, a + d % vec 1]
-  interval_upperbound (j0:real^3->bool) IN j0
-  ~(interval[cj:real^3, cj + sj % vec 1] = {})
-  ?cj:real^3 sj. &0 < sj /\\ j0 = interval[cj, cj + sj % vec 1]
-  interval_upperbound (j0:real^3->bool) $ 1 <= (a + d % vec 1:real^3) $ 1
-  ~(j0:real^3->bool = {})
-  (j0:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
+  (zc : Cart[Real, Tybit1[Unit]])
+  (ck : Cart[Real, Tybit1[Unit]]) + op_pct((sk : Real), vec(1))
+  (ck : Cart[Real, Tybit1[Unit]])
+  (a : Cart[Real, Tybit1[Unit]]) + op_pct((d : Real), vec(1))
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  real_of_num(0) < (sk : Real)
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  op_dollar((zc : Cart[Real, Tybit1[Unit]]), 1) == op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  op_dollar((a : Cart[Real, Tybit1[Unit]]), 1) < op_dollar((zc : Cart[Real, Tybit1[Unit]]), 1)
+  real_of_num(0) < (sk : Real)
+  op_dollar((zc : Cart[Real, Tybit1[Unit]]), 3) < op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3)
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3) < op_dollar((zc : Cart[Real, Tybit1[Unit]]), 3)
+  op_dollar((zc : Cart[Real, Tybit1[Unit]]), 2) < op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2)
+  op_dollar(interval_lowerbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < op_dollar((zc : Cart[Real, Tybit1[Unit]]), 2)
+  op_dollar((zc : Cart[Real, Tybit1[Unit]]), 1) == op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1)
+  IN((zc : Cart[Real, Tybit1[Unit]]), (k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  IN(interval_upperbound((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  IN(interval_upperbound((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)), j0)
+  !(interval([((cj : Cart[Real, Tybit1[Unit]]), cj + op_pct((sj : Real), vec(1)))]) == {})
+  \226\136\131 cj : Cart[Real, Tybit1[Unit]], \226\136\131 sj : Real, real_of_num(0) < sj && (j0 : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(cj, cj + op_pct(sj, vec(1)))])
+  op_dollar(interval_upperbound((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) <= op_dollar((a : Cart[Real, Tybit1[Unit]]) + op_pct((d : Real), vec(1)), 1)
+  !((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool) == {})
+  SUBSET((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
   1
-  j0:real^3->bool
-  interval_upperbound (j0:real^3->bool) $ 1 = interval_lowerbound j0 $ 1 + interval_length j0
-  cube(j0:real^3->bool)
-  interval_length (k:real^3->bool) < interval_length (j0:real^3->bool)
-  j0:real^3->bool
-  k:real^3->bool
-  v:real^3->bool
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
+  (j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  op_dollar(interval_upperbound((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) == op_dollar(interval_lowerbound(j0), 1) + interval_length(j0)
+  cube((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) < interval_length((j0 : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (j0 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (v : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
   1
-  k:real^3->bool
-  interval_upperbound (k:real^3->bool) $ 1 = interval_lowerbound k $ 1 + interval_length k
-  interval_upperbound (k:real^3->bool) $ 1 < (a + d % vec 1:real^3) $ 1
-  (k:real^3->bool) SUBSET interval[a:real^3, a + d % vec 1]
-  ~(interval[ck:real^3,ck + sk % vec 1] = {})
-  ~(k:real^3->bool = {})
-  ?ck:real^3 sk. &0 < sk /\\ k = interval[ck, ck + sk % vec 1]
-  zc:real^3
-  cube(k:real^3->bool)
-  k:real^3->bool
-  interval_length (k:real^3->bool) < interval_length (v:real^3->bool)
-  k:real^3->bool
-  D:(real^3->bool)->bool
-  z:real^3
-  k0:real^3->bool
-  {k:real^3->bool | k IN D /\\\n       interval_lowerbound k $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n       (?z:real^3. z IN k /\\\n            interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n            z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n            interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n            z$3 < interval_upperbound (v:real^3->bool) $ 3)}
-  interval_length:(real^3->bool)->real
-  pairwise (\\k:real^3->bool k'. ~(interval_length k = interval_length k')) D
-  vector[(av:real^3)$1 + dv; av$2 + dv / &2; av$3 + dv / &2]:real^3
-  k1:real^3->bool
-  k1:real^3->bool
-  vector[(av:real^3)$1 + dv; av$2 + dv / &2; av$3 + dv / &2]:real^3
-  ~(interval[av:real^3, av + dv % vec 1] = {})
-  interval_upperbound (v:real^3->bool) $ 1 = (av:real^3)$1 + dv /\\\n       interval_lowerbound (v:real^3->bool) $ 2 = av$2 /\\\n       interval_upperbound (v:real^3->bool) $ 2 = av$2 + dv /\\\n       interval_lowerbound (v:real^3->bool) $ 3 = av$3 /\\\n       interval_upperbound (v:real^3->bool) $ 3 = av$3 + dv
-  dv:real
-  av:real^3
-  ?k0:real^3->bool. k0 IN D /\\\n       interval_lowerbound k0 $ 1 = interval_upperbound (v:real^3->bool) $ 1 /\\\n       (?z:real^3. z IN k0 /\\\n            interval_lowerbound (v:real^3->bool) $ 2 < z$2 /\\\n            z$2 < interval_upperbound (v:real^3->bool) $ 2 /\\\n            interval_lowerbound (v:real^3->bool) $ 3 < z$3 /\\\n            z$3 < interval_upperbound (v:real^3->bool) $ 3)
-  cube(v:real^3->bool)
-  FINITE(D:(real^3->bool)->bool)
-  (D:(real^3->bool)->bool) division_of UNIONS D
-  forall D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v\n    ==> ?k. k IN D /\\ interval_length k < interval_length v /\\\n            valley D k
-  k:real^3->bool
-  CARD {k':real^3->bool | k' IN (D:(real^3->bool)->bool) /\\\n               interval_length k' < interval_length (k:real^3->bool)}\n         < CARD {k':real^3->bool | k' IN D /\\\n                 interval_length k' < interval_length (v':real^3->bool)}
-  FINITE {k':real^3->bool | k' IN (D:(real^3->bool)->bool) /\\\n                 interval_length k' < interval_length (v':real^3->bool)}
-  k:real^3->bool
-  {k':real^3->bool | k' IN (D:(real^3->bool)->bool) /\\\n                          interval_length k' < interval_length (k:real^3->bool)}\n      PSUBSET\n      {k':real^3->bool | k' IN D /\\\n                          interval_length k' < interval_length (v':real^3->bool)}
-  CARD {k':real^3->bool | k' IN (D:(real^3->bool)->bool) /\\\n           interval_length k' < interval_length (k:real^3->bool)}
-  k:real^3->bool
-  v':real^3->bool
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
-  v':real^3->bool
-  n:num
-  forall n (v:real^3->bool).\n       CARD {k:real^3->bool | k IN (D:(real^3->bool)->bool) /\\\n             interval_length k < interval_length v}\n       = n /\\ valley D v ==> F
-  FINITE(D:(real^3->bool)->bool)
-  (D:(real^3->bool)->bool) division_of UNIONS D
-  forall D (a:real^3) d (v:real^3->bool).\n    &0 < d /\\\n    cube_dissection D /\\\n    UNIONS D = interval[a, a + d % vec 1] /\\\n    valley D v ==> F
-  interval[a - d % basis 1:real^3,\n                           a - d % basis 1 + d % vec 1]
-  d:real
-  a:real^3
-  D:(real^3->bool)->bool
-  D = {interval[a:real^3, a + d % vec 1]}
-  forall(a:real^3) d D.\n        &0 < d /\\\n        cube_dissection D /\\\n        UNIONS D = interval[a, a + d % vec 1]\n        ==> D = {interval[a, a + d % vec 1]}
-  d:real
-  a:real^3
-  forall D:(real^3->bool)->bool.\n        cube_dissection D /\\ cube(UNIONS D) ==> D = {UNIONS D}
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) == op_dollar(interval_lowerbound(k), 1) + interval_length(k)
+  op_dollar(interval_upperbound((k : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) < op_dollar((a : Cart[Real, Tybit1[Unit]]) + op_pct((d : Real), vec(1)), 1)
+  SUBSET((k : (Cart[Real, Tybit1[Unit]]) -> Bool), interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))]))
+  !(interval([((ck : Cart[Real, Tybit1[Unit]]), ck + op_pct((sk : Real), vec(1)))]) == {})
+  !((k : (Cart[Real, Tybit1[Unit]]) -> Bool) == {})
+  \226\136\131 ck : Cart[Real, Tybit1[Unit]], \226\136\131 sk : Real, real_of_num(0) < sk && (k : (Cart[Real, Tybit1[Unit]]) -> Bool) == interval([(ck, ck + op_pct(sk, vec(1)))])
+  (zc : Cart[Real, Tybit1[Unit]])
+  cube((k : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool)) < interval_length((v : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  (z : Cart[Real, Tybit1[Unit]])
+  (k0 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  {(k : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && op_dollar(interval_lowerbound(k), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3))}
+  (interval_length : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Real)
+  pairwise((k : (Cart[Real, Tybit1[Unit]]) -> Bool) => (k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => !(interval_length(k) == interval_length(k')), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((av : Cart[Real, Tybit1[Unit]]), 1) + (dv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(av, 2) + dv / real_of_num(2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(av, 3) + dv / real_of_num(2)])
+  (k1 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (k1 : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((av : Cart[Real, Tybit1[Unit]]), 1) + (dv : Real), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(av, 2) + dv / real_of_num(2), (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)(av, 3) + dv / real_of_num(2)])
+  !(interval([((av : Cart[Real, Tybit1[Unit]]), av + op_pct((dv : Real), vec(1)))]) == {})
+  op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) == op_dollar((av : Cart[Real, Tybit1[Unit]]), 1) + (dv : Real) && op_dollar(interval_lowerbound(v), 2) == op_dollar(av, 2) && op_dollar(interval_upperbound(v), 2) == op_dollar(av, 2) + dv && op_dollar(interval_lowerbound(v), 3) == op_dollar(av, 3) && op_dollar(interval_upperbound(v), 3) == op_dollar(av, 3) + dv
+  (dv : Real)
+  (av : Cart[Real, Tybit1[Unit]])
+  \226\136\131 k0 : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k0, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && op_dollar(interval_lowerbound(k0), 1) == op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 1) && (\226\136\131 z : Cart[Real, Tybit1[Unit]], IN(z, k0) && op_dollar(interval_lowerbound(v), 2) < op_dollar(z, 2) && op_dollar(z, 2) < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < op_dollar(z, 3) && op_dollar(z, 3) < op_dollar(interval_upperbound(v), 3))
+  cube((v : (Cart[Real, Tybit1[Unit]]) -> Bool))
+  FINITE((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
+  division_of((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), UNIONS(D))
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, \226\136\128 v : (Cart[Real, Tybit1[Unit]]) -> Bool, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) && valley(D, v) \226\134\146 (\226\136\131 k : (Cart[Real, Tybit1[Unit]]) -> Bool, IN(k, D) && interval_length(k) < interval_length(v) && valley(D, k))
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  CARD({(k' : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k', (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && interval_length(k') < interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool))}) < CARD({(k' : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k', D) && interval_length(k') < interval_length((v' : (Cart[Real, Tybit1[Unit]]) -> Bool))})
+  FINITE({(k' : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k', (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && interval_length(k') < interval_length((v' : (Cart[Real, Tybit1[Unit]]) -> Bool))})
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  PSUBSET({(k' : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k', (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && interval_length(k') < interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool))}, {(k' : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k', D) && interval_length(k') < interval_length((v' : (Cart[Real, Tybit1[Unit]]) -> Bool))})
+  CARD({(k' : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k', (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && interval_length(k') < interval_length((k : (Cart[Real, Tybit1[Unit]]) -> Bool))})
+  (k : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (v' : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  (v' : (Cart[Real, Tybit1[Unit]]) -> Bool)
+  (n : Num)
+  \226\136\128 n : Num, \226\136\128 v : (Cart[Real, Tybit1[Unit]]) -> Bool, CARD({(k : (Cart[Real, Tybit1[Unit]]) -> Bool) | IN(k, (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)) && interval_length(k) < interval_length(v)}) == n && valley(D, v) \226\134\146 false
+  FINITE((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
+  division_of((D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool), UNIONS(D))
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, \226\136\128 v : (Cart[Real, Tybit1[Unit]]) -> Bool, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) && valley(D, v) \226\134\146 false
+  interval([((a : Cart[Real, Tybit1[Unit]]) - op_pct((d : Real), basis(1)), a - op_pct(d, basis(1)) + op_pct(d, vec(1)))])
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
+  (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool) == {interval([((a : Cart[Real, Tybit1[Unit]]), a + op_pct((d : Real), vec(1)))])}
+  \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 d : Real, \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, real_of_num(0) < d && cube_dissection(D) && UNIONS(D) == interval([(a, a + op_pct(d, vec(1)))]) \226\134\146 D == {interval([(a, a + op_pct(d, vec(1)))])}
+  (d : Real)
+  (a : Cart[Real, Tybit1[Unit]])
+  \226\136\128 D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool, cube_dissection(D) && cube(UNIONS(D)) \226\134\146 D == {UNIONS(D)}
 cube =  |- (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\k:fun(cart(real,'N),bool). ((#=:fun(bool,fun(bool,bool)) (#cube:fun(fun(cart(real,'N),bool),bool) k:fun(cart(real,'N),bool))) (#?:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#?:fun(fun(real,bool),bool) (\d:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) d:real)) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) k:fun(cart(real,'N),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) d:real) (#vec:fun(num,cart(real,'N)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))))))))))
 CUBE_IMP_NONEMPTY_INTERIOR =  |- (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\k:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (#cube:fun(fun(cart(real,'N),bool),bool) k:fun(cart(real,'N),bool))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#interior:fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool)) k:fun(cart(real,'N),bool))) #EMPTY:fun(cart(real,'N),bool))))))
 CUBE_IMP_NONEMPTY =  |- (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\k:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (#cube:fun(fun(cart(real,'N),bool),bool) k:fun(cart(real,'N),bool))) (#~:fun(bool,bool) ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) k:fun(cart(real,'N),bool)) #EMPTY:fun(cart(real,'N),bool))))))
