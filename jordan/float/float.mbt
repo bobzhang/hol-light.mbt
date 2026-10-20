@@ -410,7 +410,7 @@ pub fn mk_decimal(x65 : @num.Num) -> @kernel.Term raise {
   let a = Int::to_int64(@num.sign_num(r))
   let b = mk_pos_decimal(@num.abs_num(r))
   if (a < 0L) {
-    @kernel.mk_comb(@term_syntax.parse_term("op_minus_minus"), b)
+    @kernel.mk_comb(@term_syntax.parse_term("real_neg"), b)
   } else {
     b
   }
@@ -1294,7 +1294,7 @@ pub fn iwrite_real_le_rhs(x276 : @kernel.Thm, x277 : @kernel.Thm) -> @kernel.Thm
   let thm = x277
   let bvar = @basics.genvar(@parser.parse_type("real"))
   let t278 = @kernel.concl(rel)
-  let (bt, _) = @basics.dest_binop(@term_syntax.parse_term("op_lt_eq"), t278)
+  let (bt, _) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t278)
   let sub : (@kernel.Term) -> @kernel.Thm raise = @equal.subs_conv(@list.List([@kernel.assume_rule(@basics.mk_eq(bt, bvar))]))
   let rule : (@kernel.Thm) -> @kernel.Thm raise = fn(x279 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x279
@@ -1303,9 +1303,9 @@ pub fn iwrite_real_le_rhs(x276 : @kernel.Thm, x277 : @kernel.Thm) -> @kernel.Thm
   let t280 = rule(thm)
   let (subrel, subthm) = (rule(rel), t280)
   let t281 = @kernel.concl(subthm)
-  let (a, p) = @basics.dest_binop(@term_syntax.parse_term("op_lt_eq"), t281)
+  let (a, p) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t281)
   let t282 = @kernel.concl(subrel)
-  let (_, c) = @basics.dest_binop(@term_syntax.parse_term("op_lt_eq"), t282)
+  let (_, c) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t282)
   let pfn = @kernel.mk_abs(bvar, p)
   let imp_th = @equal.beta_rule(@bool.specl(@list.List([a, bvar, c, pfn]), real_add_le_subst_rhs()))
   let ppart = @calc_rat.real_arith(@basics.dest_conj(@basics.dest_conj(@basics.dest_imp(@kernel.concl(imp_th)).0).1).0)
@@ -1330,7 +1330,7 @@ pub fn iwrite_real_le_lhs(x286 : @kernel.Thm, x287 : @kernel.Thm) -> @kernel.Thm
   let thm = x287
   let avar = @basics.genvar(@parser.parse_type("real"))
   let t288 = @kernel.concl(rel)
-  let (_, at) = @basics.dest_binop(@term_syntax.parse_term("op_lt_eq"), t288)
+  let (_, at) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t288)
   let sub : (@kernel.Term) -> @kernel.Thm raise = @equal.subs_conv(@list.List([@kernel.assume_rule(@basics.mk_eq(at, avar))]))
   let rule : (@kernel.Thm) -> @kernel.Thm raise = fn(x289 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x289
@@ -1339,9 +1339,9 @@ pub fn iwrite_real_le_lhs(x286 : @kernel.Thm, x287 : @kernel.Thm) -> @kernel.Thm
   let t290 = rule(thm)
   let (subrel, subthm) = (rule(rel), t290)
   let t291 = @kernel.concl(subthm)
-  let (p, b) = @basics.dest_binop(@term_syntax.parse_term("op_lt_eq"), t291)
+  let (p, b) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t291)
   let t292 = @kernel.concl(subrel)
-  let (c, _) = @basics.dest_binop(@term_syntax.parse_term("op_lt_eq"), t292)
+  let (c, _) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t292)
   let pfn = @kernel.mk_abs(avar, p)
   let imp_th = @equal.beta_rule(@bool.specl(@list.List([avar, b, c, pfn]), real_add_le_subst_lhs()))
   let ppart = @calc_rat.real_arith(@basics.dest_conj(@basics.dest_conj(@basics.dest_imp(@kernel.concl(imp_th)).0).1).0)
@@ -2193,7 +2193,7 @@ fn step_97() -> Unit raise {
   let t713 = @tactics_ext.h(@simp.rewrite_rule(@list.List([@equal.gsym(@real.real_abs_refl())])))((x636 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp_int(0L, x636))
   let t714 = @tactics_ext.h(@drule.match_mp(@analysis.real_lt_imp_le()))((x635 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp_int(4L, x635))
   let t715 = @tactics_ext.h(@simp.rewrite_rule(@list.List([@analysis.abs_mul()])))((x634 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp_int(0L, x634))
-  let t631 = @term_syntax.parse_term("abs")
+  let t631 = @term_syntax.parse_term("real_abs")
   let t716 = @tactics_ext.h((x632 : @kernel.Thm) => @equal.ap_term(t631, x632))((x633 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp_int(1L, x633))
   let t717 = @tactics_ext.popl_tac(@list.List([1L, 2L, 3L, 4L]))
   let t630 = @tactics_ext.h_rule2(fn(x626 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -3017,7 +3017,7 @@ fn step_124() -> Unit raise {
 pub fn interval_of_neg(x940 : @kernel.Term) -> @kernel.Thm raise {
   let tm = x940
   let (sign, u) = @kernel.dest_comb(tm)
-  let _ = if (sign == @term_syntax.parse_term("op_minus_minus")) {
+  let _ = if (sign == @term_syntax.parse_term("real_neg")) {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1413:12")
@@ -3052,7 +3052,7 @@ pub fn interval_to_less_conv(x946 : @kernel.Thm, x947 : @kernel.Thm) -> @kernel.
   let (b, g, ey) = dest_interval(@kernel.concl(thm2))
   let rthm = @kernel.assume_rule(@term_syntax.parse_term("∀ f : Real, ∀ g : Real, ∀ ex : Real, ∀ ey : Real, real_of_num(0) < g - (ey + (ex + f))"))
   let rspec = @kernel.concl(@bool.specl(@list.List([f, g, ex, ey]), rthm))
-  let rspec_simp = float_conv(@basics.dest_binop(@term_syntax.parse_term("op_lt"), rspec).1)
+  let rspec_simp = float_conv(@basics.dest_binop(@term_syntax.parse_term("real_lt"), rspec).1)
   let rthm2 = @tactics_refine.prove(rspec, @tactics.then_tac(@simp.rewrite_tac(@list.List([rspec_simp, float_pos(), int_pos_p(), int_pos_neg()])), @int.arith_tac))
   let fthm = @bool.conj(thm1, @bool.conj(thm2, rthm2))
   @drule.match_mp(interval_to_less())(fthm)
@@ -3255,12 +3255,12 @@ pub fn interval_of_decimal(x971 : Int64, x972 : @kernel.Term) -> @kernel.Thm rai
   }
   let f = mk_float(f_num)
   let ex = mk_float(ex_num)
-  let fplus_ex = float_conv(@basics.mk_binop(@term_syntax.parse_term("op_plus"), f, ex))
-  let fminus_ex = float_conv(@basics.mk_binop(@term_syntax.parse_term("op_minus"), f, ex))
+  let fplus_ex = float_conv(@basics.mk_binop(@term_syntax.parse_term("real_add"), f, ex))
+  let fminus_ex = float_conv(@basics.mk_binop(@term_syntax.parse_term("real_sub"), f, ex))
   let fplus_term = @equal.rhs(@kernel.concl(fplus_ex))
   let fminus_term = @equal.rhs(@kernel.concl(fminus_ex))
-  let th1 = dec_float(@basics.mk_binop(@term_syntax.parse_term("op_lt_eq"), fminus_term, dec))
-  let th2 = dec_float(@basics.mk_binop(@term_syntax.parse_term("op_lt_eq"), dec, fplus_term))
+  let th1 = dec_float(@basics.mk_binop(@term_syntax.parse_term("real_le"), fminus_term, dec))
+  let th2 = dec_float(@basics.mk_binop(@term_syntax.parse_term("real_le"), dec, fplus_term))
   let intv = mk_interval(dec, f, ex)
   @bool.eqt_elim(@simp.simp_conv(@list.List([interval_minmax(), fplus_ex, fminus_ex, th1, th2]))(intv))
 }
