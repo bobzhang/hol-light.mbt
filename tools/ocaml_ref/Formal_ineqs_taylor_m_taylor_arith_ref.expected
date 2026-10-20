@@ -12,367 +12,367 @@ Formal_ineqs/taylor/m_taylor_arith quotations (372):
   sin
   cos
   matan
-  all_n n [] (s:num->A->bool)
-  SUC n = m /\\ s n (x:A) ==> \n    (all_n m t s <=> all_n n (CONS x t) s)
-  SUC n = m ==> \n    (all_n n (CONS x t) s <=> (s n (x:A) /\\ all_n m t s))
-  s : num -> A -> bool
+  all_n((n : Num), NIL, (s : (Num, A) -> Bool))
+  SUC((n : Num)) == (m : Num) && (s : (Num, A) -> Bool)(n, (x : A)) \226\134\146 all_n(m, (t : List[A]), s) == all_n(n, CONS(x, t), s)
+  SUC((n : Num)) == (m : Num) \226\134\146 all_n(n, CONS((x : A), (t : List[A])), (s : (Num, A) -> Bool)) == (s(n, x) && all_n(m, t, s))
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  s : num -> A -> bool
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (s : (Num, A) -> Bool)
   1
-  all_n : num -> (A)list -> (num -> A -> bool) -> bool
-  x:real^N
-  diff2c_domain domain (g:real^N->real)
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (g:real^N->real)
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N) /\\ lift o g differentiable at y
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y + g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y + partial i g y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t\t\t       (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x + g x) domain y w bounds d_bounds_list dd_bounds_list
-  interval_arith (partial i f (x:real^N) + partial i g x) int <=>\n\t\t\t\t (\\i int. interval_arith (partial i f x + partial i g x) int) i int
-  interval_arith (partial2 j i f (x:real^N) + partial2 j i g x) int <=>\n\t\t\t (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int) j int
-  all_n 1 list \n\t\t(\\j int. interval_arith (partial2 j i f (x:real^N) + partial2 j i g x) int) <=>\n\t\t(\\i list. all_n 1 list \n\t\t   (\\j int. interval_arith (partial2 j i f x + partial2 j i g x) int)) i list
-  x:real^N
-  diff2c_domain domain (g:real^N->real)
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (g:real^N->real)
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N) /\\ lift o g differentiable at y
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y - g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y - partial i g y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t\t\t       (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x - g x) domain y w bounds d_bounds_list dd_bounds_list
-  interval_arith (partial i f (x:real^N) - partial i g x) int <=>\n\t\t\t\t (\\i int. interval_arith (partial i f x - partial i g x) int) i int
-  interval_arith (partial2 j i f (x:real^N) - partial2 j i g x) int <=>\n\t\t\t (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int) j int
-  all_n 1 list \n\t\t(\\j int. interval_arith (partial2 j i f (x:real^N) - partial2 j i g x) int) <=>\n\t\t(\\i list. all_n 1 list \n\t\t   (\\j int. interval_arith (partial2 j i f x - partial2 j i g x) int)) i list
-  x:real^N
-  diff2c_domain domain (g:real^N->real)
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (g:real^N->real)
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N) /\\ lift o g differentiable at y
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     diff2c_domain domain g ==>\n     interval_arith (f y * g y) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (partial i f y * g y + f y * partial i g y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int))) ==>\n     m_taylor_interval (\\x. f x * g x) domain y w bounds d_bounds_list dd_bounds_list
-  interval_arith (partial i f (y:real^N) * g y + f y * partial i g y) int <=>\n\t  (\\i int. interval_arith (partial i f y * g y + f y * partial i g y) int) i int
-  interval_arith ((partial2 j i f x * g (x:real^N) + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int <=>\n\t  (\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\tpartial j f x * partial i g x + f x * partial2 j i g x) int) j int
-  all_n 1 list (\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\tpartial j f x * partial i g x + f (x:real^N) * partial2 j i g x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((partial2 j i f x * g x + partial i f x * partial j g x) +\n\t\t\t\t   partial j f x * partial i g x + f x * partial2 j i g x) int)) i list
-  all_n 1
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (-- (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (-- partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (-- partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. -- (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  (&0 * a) * b + &1 * c = c
+  (all_n : (Num, List[A], (Num, A) -> Bool) -> Bool)
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (g : (Cart[Real, N]) -> Real))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (g : (Cart[Real, N]) -> Real))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N]))) && differentiable(o(lift, (g : (Cart[Real, N]) -> Real)), at(y))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 diff2c_domain(domain, (g : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(f(y) + g(y), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, y) + partial(i, g, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) + partial2(j, i, g, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => f(x) + g(x), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  interval_arith(partial((i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) + partial(i, (g : (Cart[Real, N]) -> Real), x), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x) + partial(i, g, x), int))(i, int)
+  interval_arith(partial2((j : Num), (i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) + partial2(j, i, (g : (Cart[Real, N]) -> Real), x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) + partial2(j, i, g, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, (i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) + partial2(j, i, (g : (Cart[Real, N]) -> Real), x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) + partial2(j, i, g, x), int)))(i, list)
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (g : (Cart[Real, N]) -> Real))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (g : (Cart[Real, N]) -> Real))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N]))) && differentiable(o(lift, (g : (Cart[Real, N]) -> Real)), at(y))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 diff2c_domain(domain, (g : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(f(y) - g(y), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, y) - partial(i, g, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) - partial2(j, i, g, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => f(x) - g(x), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  interval_arith(partial((i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) - partial(i, (g : (Cart[Real, N]) -> Real), x), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x) - partial(i, g, x), int))(i, int)
+  interval_arith(partial2((j : Num), (i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) - partial2(j, i, (g : (Cart[Real, N]) -> Real), x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) - partial2(j, i, g, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, (i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) - partial2(j, i, (g : (Cart[Real, N]) -> Real), x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) - partial2(j, i, g, x), int)))(i, list)
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (g : (Cart[Real, N]) -> Real))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (g : (Cart[Real, N]) -> Real))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N]))) && differentiable(o(lift, (g : (Cart[Real, N]) -> Real)), at(y))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 diff2c_domain(domain, (g : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(f(y) * g(y), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, y) * g(y) + f(y) * partial(i, g, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) * g(x) + partial(i, f, x) * partial(j, g, x) + (partial(j, f, x) * partial(i, g, x) + f(x) * partial2(j, i, g, x)), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => f(x) * g(x), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  interval_arith(partial((i : Num), (f : (Cart[Real, N]) -> Real), (y : Cart[Real, N])) * (g : (Cart[Real, N]) -> Real)(y) + f(y) * partial(i, g, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, y) * g(y) + f(y) * partial(i, g, y), int))(i, int)
+  interval_arith(partial2((j : Num), (i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) * (g : (Cart[Real, N]) -> Real)(x) + partial(i, f, x) * partial(j, g, x) + (partial(j, f, x) * partial(i, g, x) + f(x) * partial2(j, i, g, x)), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) * g(x) + partial(i, f, x) * partial(j, g, x) + (partial(j, f, x) * partial(i, g, x) + f(x) * partial2(j, i, g, x)), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, (i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) * (g : (Cart[Real, N]) -> Real)(x) + partial(i, f, x) * partial(j, g, x) + (partial(j, f, x) * partial(i, g, x) + f(x) * partial2(j, i, g, x)), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x) * g(x) + partial(i, f, x) * partial(j, g, x) + (partial(j, f, x) * partial(i, g, x) + f(x) * partial2(j, i, g, x)), int)))(i, list)
+  (all_n : (Num, List[_], (Num, _) -> Bool) -> Bool)(1)
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(-f(y), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(-partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => -f(x), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  real_of_num(0) * (a : Real) * (b : Real) + real_of_num(1) * (c : Real) == c
   abs _
   abs
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   abs
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   abs _
-  &0 < a ==> abs a = a
+  real_of_num(0) < (a : Real) \226\134\146 abs(a) == a
   abs _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  &0 < f (y:real^N)
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> &0 < f x
-  m_taylor_interval f domain (y:real^N) w bounds d_bounds_list dd_bounds_list ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     m_taylor_interval (\\x. abs (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  (&0 * a) * b + -- &1 * c = --c
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  real_of_num(0) < (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 real_of_num(0) < (f : (Cart[Real, N]) -> Real)(x)
+  m_taylor_interval((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith(f(x), (f_bounds : (Real, Real)))) \226\134\146 interval_pos(f_bounds) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => abs(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  real_of_num(0) * (a : Real) * (b : Real) + -real_of_num(1) * (c : Real) == -c
   abs _
   abs
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   abs
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   abs _
-  a < &0 ==> abs a = --a
+  (a : Real) < real_of_num(0) \226\134\146 abs(a) == -a
   abs _
-  diff2c_domain domain (f:real^N->real)
-  lift o (f:real^N->real) = (\\x. --((lift o (\\t. --f t)) x))
-  lift o (f:real^N->real) differentiable at y
-  f:real^N->real = (\\x. -- (--f x))
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  f (y:real^N) < &0
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> f x < &0
-  m_taylor_interval (\\x. --f x) domain (y:real^N) w bounds d_bounds_list dd_bounds_list ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_neg f_bounds ==>\n     m_taylor_interval (\\x. abs (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  forall k x. (\\x. x pow k) real_differentiable atreal x
-  \\x. x pow k
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
-  (\\x:real. x pow k)
-  f:real^N->real
-  y:real^N
-  diff2c_domain domain (f:real^N->real)
-  (\\x:real^N. f x pow k) = (\\x. x pow k) o f
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith ((f y) pow k) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&k * (f y) pow (k - 1)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((&(k * (k - 1)) * f x pow (k - 2)) * partial j f x) \n\t\t\t\t * partial i f x + (&k * f x pow (k - 1)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. (f x) pow k) domain y w bounds d_bounds_list dd_bounds_list
-  (a * b) * c + (a * x) * y = a * (b * c + x * y)
-  2 - 1 = 1 /\\ 2 - 2 = 0
-  k:num
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  o(lift, (f : (Cart[Real, N]) -> Real)) == ((x : Cart[Real, N]) => -o(lift, (t : Cart[Real, N]) => -f(t), x))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  (f : (Cart[Real, N]) -> Real) == ((x : Cart[Real, N]) => --f(x))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) < real_of_num(0)
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 (f : (Cart[Real, N]) -> Real)(x) < real_of_num(0)
+  m_taylor_interval((x : Cart[Real, N]) => -(f : (Cart[Real, N]) -> Real)(x), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith(f(x), (f_bounds : (Real, Real)))) \226\134\146 interval_neg(f_bounds) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => abs(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  \226\136\128 k : Num, \226\136\128 x : Real, real_differentiable((x : Real) => pow(x, k), atreal(x))
+  (x : Real) => pow(x, (k : Num))
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (x : Real) => pow(x, (k : Num))
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  ((x : Cart[Real, N]) => pow((f : (Cart[Real, N]) -> Real)(x), (k : Num))) == o((x : Real) => pow(x, k), f)
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(pow(f(y), (k : Num)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k) * pow(f(y), k - 1) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k * (k - 1)) * pow(f(x), k - 2) * partial(j, f, x) * partial(i, f, x) + real_of_num(k) * pow(f(x), k - 1) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => pow(f(x), k), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  (a : Real) * (b : Real) * (c : Real) + a * (x : Real) * (y : Real) == a * (b * c + x * y)
+  2 - 1 == 1 && 2 - 2 == 0
+  (k : Num)
   2
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith ((f y) pow 2) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&2 * f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (&2 * (partial j f x * partial i f x \n\t\t\t\t       + f x * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. (f x) pow 2) domain y w bounds d_bounds_list dd_bounds_list
-  (((k * k1) * f2) * j) * i + (k * f2 * f) * x = \n\t (k * f2) * ((k1 * j) * i + f * x)
-  k >= 2 ==> k - 1 = (k - 2) + 1
-  forall x. x pow (k - 1) = x pow (k - 2) * x
-  k >= 2 ==> k = 1 + (k - 1)
-  forall x. x pow k = x * x pow (k - 1)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (f y * f y pow (k - 1)) bounds ==>\n     k >= 2 ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith ((&k * f y pow (k - 1)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f x) * partial i f x\n\t\t\t\t\t\t\t     + f x * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. (f x) pow k) domain y w bounds d_bounds_list dd_bounds_list
-  a pow 3 = a * a * a
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(pow(f(y), 2), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * f(y) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * (partial(j, f, x) * partial(i, f, x) + f(x) * partial2(j, i, f, x)), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => pow(f(x), 2), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  (k : Real) * (k1 : Real) * (f2 : Real) * (j : Real) * (i : Real) + k * (f2 * (f : Real)) * (x : Real) == k * f2 * (k1 * j * i + f * x)
+  (k : Num) >= 2 \226\134\146 k - 1 == k - 2 + 1
+  \226\136\128 x : Real, pow(x, (k : Num) - 1) == pow(x, k - 2) * x
+  (k : Num) >= 2 \226\134\146 k == 1 + (k - 1)
+  \226\136\128 x : Real, pow(x, (k : Num)) == x * pow(x, k - 1)
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(f(y) * pow(f(y), (k : Num) - 1), (bounds : (Real, Real))) \226\134\146 k >= 2 \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k) * pow(f(y), k - 1) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k) * pow(f(x), k - 2) * (real_of_num(k - 1) * partial(j, f, x) * partial(i, f, x) + f(x) * partial2(j, i, f, x)), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => pow(f(x), k), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  pow((a : Real), 3) == a * (a * a)
   inv _
   inv
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   inv
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   inv _
   inv _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  ~(f (y:real^N) = &0)
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> ~(f x = &0)
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_not_zero f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (inv (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (--inv (f y * f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f x -\n\t\t\t\t   inv (f x * f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. inv (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  &4 * a * b = (&2 * a) * (&2 * b)
-  a pow 3 = a * a pow 2
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  !((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) == real_of_num(0))
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 !((f : (Cart[Real, N]) -> Real)(x) == real_of_num(0))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 interval_not_zero(f_bounds) \226\134\146 diff2c_domain(domain, f) \226\134\146 interval_arith(inv(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(-inv(f(y) * f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * inv(f(x) * (f(x) * f(x))) * partial(j, f, x) * partial(i, f, x) - inv(f(x) * f(x)) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => inv(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  real_of_num(4) * ((a : Real) * (b : Real)) == real_of_num(2) * a * (real_of_num(2) * b)
+  pow((a : Real), 3) == a * pow(a, 2)
   sqrt _
   sqrt
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   sqrt
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   sqrt _
   sqrt _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  &0 < f (y:real^N)
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> &0 < f x
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (sqrt (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (&2 * sqrt (f y)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--inv ((&2 * sqrt (f x)) * (&2 * f x)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (&2 * sqrt (f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. sqrt (f x)) domain y w bounds d_bounds_list dd_bounds_list
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  real_of_num(0) < (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 real_of_num(0) < (f : (Cart[Real, N]) -> Real)(x)
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 interval_pos(f_bounds) \226\134\146 diff2c_domain(domain, f) \226\134\146 interval_arith(sqrt(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(inv(real_of_num(2) * sqrt(f(y))) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-inv(real_of_num(2) * sqrt(f(x)) * (real_of_num(2) * f(x))) * partial(j, f, x) * partial(i, f, x) + inv(real_of_num(2) * sqrt(f(x))) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => sqrt(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
   exp _
   exp
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   exp
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   exp _
   exp _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (exp (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (exp (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((exp (f x) * partial j f x) \n\t\t\t\t * partial i f x + exp (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. exp (f x)) domain y w bounds d_bounds_list dd_bounds_list
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(exp(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(exp(f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(exp(f(x)) * partial(j, f, x) * partial(i, f, x) + exp(f(x)) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => exp(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
   log _
   log
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   log
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   log _
   log _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  &0 < f (y:real^N)
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> &0 < f x
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_pos f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (log (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f x +\n\t\t\t\t   inv (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. log (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  f x pow 2
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  real_of_num(0) < (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 real_of_num(0) < (f : (Cart[Real, N]) -> Real)(x)
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 interval_pos(f_bounds) \226\134\146 diff2c_domain(domain, f) \226\134\146 interval_arith(log(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(inv(f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-pow(inv(f(x)), 2) * partial(j, f, x) * partial(i, f, x) + inv(f(x)) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => log(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  pow((f : (_) -> Real)((x : _)), 2)
   atn _
   atn
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   atn
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   atn _
   atn _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (atn (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (inv (&1 + f y * f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f x) \n\t\t\t\t * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. atn (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  (--c * p1) * p2 + --s * p3 = --((c * p1) * p2 + s * p3)
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(atn(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(inv(real_of_num(1) + f(y) * f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-real_of_num(2) * f(x) * pow(inv(real_of_num(1) + f(x) * f(x)), 2) * partial(j, f, x) * partial(i, f, x) + inv(real_of_num(1) + f(x) * f(x)) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => atn(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  -(c : Real) * (p1 : Real) * (p2 : Real) + -(s : Real) * (p3 : Real) == -(c * p1 * p2 + s * p3)
   cos _
   cos
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   cos
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   cos _
   cos _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (cos (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (--sin (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (--((cos (f x) * partial j f x) * partial i f x \n\t\t\t\t    + sin (f x) * partial2 j i f x)) int))) ==>\n     m_taylor_interval (\\x. cos (f x)) domain y w bounds d_bounds_list dd_bounds_list
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(cos(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(-sin(f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-(cos(f(x)) * partial(j, f, x) * partial(i, f, x) + sin(f(x)) * partial2(j, i, f, x)), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => cos(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
   sin _
   sin
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   sin
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   sin _
   sin _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     diff2c_domain domain f ==>\n     interval_arith (sin (f y)) bounds ==>\n     all_n 1 d_bounds_list (\\i int. interval_arith (cos (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((--sin (f x)) * partial j f x) * partial i f x\n\t\t\t\t   + cos (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. sin (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  iabs f_bounds < &1
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(sin(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(cos(f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-sin(f(x)) * partial(j, f, x) * partial(i, f, x) + cos(f(x)) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => sin(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  iabs((f_bounds : (Real, Real))) < real_of_num(1)
   acs _
   acs
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   acs
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   acs _
   acs _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  abs (f (y:real^N)) < &1
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> abs (f x) < &1
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     iabs f_bounds < &1 ==>\n     diff2c_domain domain f ==>\n     interval_arith (acs (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (--inv (sqrt (&1 - f y * f y)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f x -\n\t\t\t\t   inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. acs (f x)) domain y w bounds d_bounds_list dd_bounds_list
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  abs((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) < real_of_num(1)
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 abs((f : (Cart[Real, N]) -> Real)(x)) < real_of_num(1)
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 iabs(f_bounds) < real_of_num(1) \226\134\146 diff2c_domain(domain, f) \226\134\146 interval_arith(acs(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(-inv(sqrt(real_of_num(1) - f(y) * f(y))) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-(f(x) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))) * partial(j, f, x) * partial(i, f, x) - inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => acs(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
   asn _
   asn
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   asn
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   asn _
   asn _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  abs (f (y:real^N)) < &1
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> abs (f x) < &1
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     iabs f_bounds < &1 ==>\n     diff2c_domain domain f ==>\n     interval_arith (asn (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (inv (sqrt (&1 - f y * f y)) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. asn (f x)) domain y w bounds d_bounds_list dd_bounds_list
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  abs((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) < real_of_num(1)
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 abs((f : (Cart[Real, N]) -> Real)(x)) < real_of_num(1)
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 iabs(f_bounds) < real_of_num(1) \226\134\146 diff2c_domain(domain, f) \226\134\146 interval_arith(asn(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(inv(sqrt(real_of_num(1) - f(y) * f(y))) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(f(x) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)) * partial(j, f, x) * partial(i, f, x) + inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => asn(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
   matan _
   matan
-  f:real^N->real
-  x:real^N
-  x:real^N
-  diff2c_domain domain (f:real^N->real)
+  (f : (Cart[Real, N]) -> Real)
+  (x : Cart[Real, N])
+  (x : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
   matan
-  f:real^N->real
-  y:real^N
+  (f : (Cart[Real, N]) -> Real)
+  (y : Cart[Real, N])
   matan _
   matan _
-  diff2c_domain domain (f:real^N->real)
-  w:real^N
-  -- &1 < f (y:real^N)
-  f_bounds:real#real
-  forall x:real^N. x IN interval [domain] ==> -- &1 < f x
-  w:real^N
-  diff2c_domain domain (f:real^N->real)
-  lift o f differentiable at (y:real^N)
-  m_cell_domain domain (y:real^N) w ==>\n     (forall x. x IN interval [domain] ==> interval_arith (f x) f_bounds) ==>\n     interval_gt (-- &1) f_bounds ==>\n     diff2c_domain domain f ==>\n     interval_arith (matan (f y)) bounds ==>\n     all_n 1 d_bounds_list \n     (\\i int. interval_arith (dmatan (f y) * partial i f y) int) ==>\n     (forall x. x IN interval [domain] ==> all_n 1 dd_bounds_list (\\i list_i. all_n 1 list_i \n\t(\\j int. interval_arith ((ddmatan (f x) * partial j f x) * partial i f x +\n\t\t\t\t   dmatan (f x) * partial2 j i f x) int))) ==>\n     m_taylor_interval (\\x. matan (f x)) domain y w bounds d_bounds_list dd_bounds_list
-  interval_arith ((&2 * f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith ((&2 * f y) * partial i f y) int) i int
-  interval_arith (&2 * (partial j f (x:real^N) * partial i f x + \n\t\t\t\t f x * partial2 j i f x)) int <=>\n\t  (\\j int. interval_arith (&2 * (partial j f x * partial i f x + \n\t\t\t\t f x * partial2 j i f x)) int) j int
-  all_n 1 list \n     (\\j int. interval_arith (&2 * (partial j f (x:real^N) * partial i f x + \n\t\t\t\t      f x * partial2 j i f x)) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith (&2 * (partial j f x * partial i f x + \n\t\t\t\t\t f x * partial2 j i f x)) int)) i list
-  interval_arith ((&k * f y pow (k - 1)) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith ((&k * f y pow (k - 1)) * partial i f y) int) i int
-  interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f (x:real^N)) \n\t\t\t\t\t* partial i f x + f x * partial2 j i f x)) int <=>\n\t  (\\j int. interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f (x:real^N)) \n\t\t\t\t\t* partial i f x + f x * partial2 j i f x)) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f (x:real^N)) \n\t\t\t\t\t* partial i f x + f x * partial2 j i f x)) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((&k * f x pow (k - 2)) * ((&(k - 1) * partial j f (x:real^N)) \n\t\t\t\t\t* partial i f x + f x * partial2 j i f x)) int)) i list
-  interval_arith (--inv (f y * f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (--inv (f y * f y) * partial i f y) int) i int
-  interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f (x:real^N) -\n\t\t\t\t   inv (f x * f x) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f x -\n\t\t\t\t     inv (f x * f x) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f (x:real^N) -\n\t\t\t\tinv (f x * f x) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith (((&2 * inv (f x * f x * f x)) * partial j f x) * partial i f x -\n\t\t\t\t\t    inv (f x * f x) * partial2 j i f x) int)) i list
-  interval_arith (inv (&2 * sqrt (f y)) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (inv (&2 * sqrt (f y)) * partial i f y) int) i int
-  interval_arith ((--inv ((&2 * sqrt (f x)) * (&2 * f x)) * partial j f x) * partial i f (x:real^N) +\n\t\t\t   inv (&2 * sqrt (f x)) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith ((--inv ((&2 * sqrt (f x))*(&2 * f x)) * partial j f x) * partial i f x +\n\t\t\t\t     inv (&2 * sqrt (f x)) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((--inv ((&2 * sqrt (f x)) * (&2 * f x)) * partial j f x) * partial i f x +\n\t\t\t\t     inv (&2 * sqrt (f x)) * partial2 j i f (x:real^N)) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((--inv ((&2 * sqrt (f x)) * (&2 * f x)) * partial j f x) * partial i f x +\n\t\t\t\t   inv (&2 * sqrt (f x)) * partial2 j i f (x:real^N)) int)) i list
-  interval_arith (exp (f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (exp (f y) * partial i f y) int) i int
-  interval_arith ((exp (f x) * partial j f (x:real^N)) \n\t\t\t * partial i f x + exp (f x) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith ((exp (f x) * partial j f x) \n\t\t\t\t   * partial i f x + exp (f x) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((exp (f x) * partial j f (x:real^N)) \n\t\t\t      * partial i f x + exp (f x) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((exp (f x) * partial j f x) \n\t\t\t\t * partial i f x + exp (f x) * partial2 j i f x) int)) i list
-  interval_arith (inv (f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (inv (f y) * partial i f y) int) i int
-  interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f (x:real^N) +\n\t\t\t   inv (f x) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f x +\n\t\t\t\t     inv (f x) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f x +\n\t\t\t\t     inv (f x) * partial2 j i f (x:real^N)) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((--(inv (f x) pow 2) * partial j f x) * partial i f x +\n\t\t\t\t   inv (f x) * partial2 j i f (x:real^N)) int)) i list
-  interval_arith (inv (&1 + f y * f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (inv (&1 + f y * f y) * partial i f y) int) i int
-  interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f (x:real^N)) \n\t\t\t * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f x) \n\t\t\t\t   * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f (x:real^N)) \n\t\t\t      * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((((-- &2 * f x) * inv (&1 + f x * f x) pow 2) * partial j f x) \n\t\t\t\t * partial i f x + inv (&1 + f x * f x) * partial2 j i f x) int)) i list
-  interval_arith (--sin (f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (--sin (f y) * partial i f y) int) i int
-  interval_arith (--((cos (f x) * partial j f (x:real^N)) * partial i f x\n\t\t\t      + sin (f x) * partial2 j i f x)) int <=>\n\t  (\\j int. interval_arith (--((cos (f x) * partial j f x) * partial i f x\n\t\t\t\t\t+ sin (f x) * partial2 j i f x)) int) j int
-  all_n 1 list \n     (\\j int. interval_arith (--((cos (f x) * partial j f (x:real^N)) * partial i f x\n\t\t\t      + sin (f x) * partial2 j i f x)) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith (--((cos (f x) * partial j f (x:real^N)) * partial i f x\n\t\t\t      + sin (f x) * partial2 j i f x)) int)) i list
-  interval_arith (cos (f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (cos (f y) * partial i f y) int) i int
-  interval_arith ((--sin (f x) * partial j f (x:real^N)) * partial i f x\n\t\t\t      + cos (f x) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith ((--sin (f x) * partial j f x) * partial i f x\n\t\t\t\t\t+ cos (f x) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((--sin (f x) * partial j f (x:real^N)) * partial i f x\n\t\t\t      + cos (f x) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((--sin (f x) * partial j f (x:real^N)) * partial i f x\n\t\t\t      + cos (f x) * partial2 j i f x) int)) i list
-  interval_arith (inv (sqrt (&1 - f y * f y)) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (inv (sqrt (&1 - f y * f y)) * partial i f y) int) i int
-  interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) + inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int <=>\n\n\t  (\\j int. interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) + inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) + inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith (((f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) + inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int)) i list
-  interval_arith (--inv (sqrt (&1 - f y * f y)) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (--inv (sqrt (&1 - f y * f y)) * partial i f y) int) i int
-  interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) - inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int <=>\n\n\t  (\\j int. interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) - inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) - inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((--(f x / sqrt ((&1 - f x * f x) pow 3)) * partial j f x) * partial i f (x:real^N) - inv (sqrt (&1 - f x * f x)) * partial2 j i f x) int)) i list
-  interval_arith (dmatan (f y) * partial i f (y:real^N)) int <=>\n\t  (\\i int. interval_arith (dmatan (f y) * partial i f y) int) i int
-  interval_arith ((ddmatan (f x) * partial j f x) * partial i f (x:real^N) + \n\t\t\t dmatan (f x) * partial2 j i f x) int <=>\n\t  (\\j int. interval_arith ((ddmatan (f x) * partial j f x) * partial i f (x:real^N) + \n\t\t\t\t     dmatan (f x) * partial2 j i f x) int) j int
-  all_n 1 list \n     (\\j int. interval_arith ((ddmatan (f x) * partial j f x) * partial i f (x:real^N) \n\t\t\t      + dmatan (f x) * partial2 j i f x) int) <=>\n     (\\i list. all_n 1 list \n\t(\\j int. interval_arith ((ddmatan (f x) * partial j f x) * partial i f (x:real^N) \n\t\t\t\t + dmatan (f x) * partial2 j i f x) int)) i list
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  (w : Cart[Real, N])
+  -real_of_num(1) < (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
+  (f_bounds : (Real, Real))
+  \226\136\128 x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) \226\134\146 -real_of_num(1) < (f : (Cart[Real, N]) -> Real)(x)
+  (w : Cart[Real, N])
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N])))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))) \226\134\146 interval_gt(-real_of_num(1), f_bounds) \226\134\146 diff2c_domain(domain, f) \226\134\146 interval_arith(matan(f(y)), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(dmatan(f(y)) * partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(ddmatan(f(x)) * partial(j, f, x) * partial(i, f, x) + dmatan(f(x)) * partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => matan(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
+  interval_arith(real_of_num(2) * (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * f(y) * partial(i, f, y), int))(i, int)
+  interval_arith(real_of_num(2) * (partial((j : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) * partial((i : Num), f, x) + f(x) * partial2(j, i, f, x)), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * (partial(j, f, x) * partial(i, f, x) + f(x) * partial2(j, i, f, x)), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * (partial(j, (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) * partial((i : Num), f, x) + f(x) * partial2(j, i, f, x)), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * (partial(j, f, x) * partial(i, f, x) + f(x) * partial2(j, i, f, x)), int)))(i, list)
+  interval_arith(real_of_num((k : Num)) * pow((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])), k - 1) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k) * pow(f(y), k - 1) * partial(i, f, y), int))(i, int)
+  interval_arith(real_of_num((k : Num)) * pow((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])), k - 2) * (real_of_num(k - 1) * partial((j : Num), f, x) * partial((i : Num), f, x) + f(x) * partial2(j, i, f, x)), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k) * pow(f(x), k - 2) * (real_of_num(k - 1) * partial(j, f, x) * partial(i, f, x) + f(x) * partial2(j, i, f, x)), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num((k : Num)) * pow((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])), k - 2) * (real_of_num(k - 1) * partial(j, f, x) * partial((i : Num), f, x) + f(x) * partial2(j, i, f, x)), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(k) * pow(f(x), k - 2) * (real_of_num(k - 1) * partial(j, f, x) * partial(i, f, x) + f(x) * partial2(j, i, f, x)), int)))(i, list)
+  interval_arith(-inv((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) * f(y)) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(-inv(f(y) * f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(real_of_num(2) * inv((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) * (f(x) * f(x))) * partial((j : Num), f, x) * partial((i : Num), f, x) - inv(f(x) * f(x)) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * inv(f(x) * (f(x) * f(x))) * partial(j, f, x) * partial(i, f, x) - inv(f(x) * f(x)) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * inv((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) * (f(x) * f(x))) * partial(j, f, x) * partial((i : Num), f, x) - inv(f(x) * f(x)) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(real_of_num(2) * inv(f(x) * (f(x) * f(x))) * partial(j, f, x) * partial(i, f, x) - inv(f(x) * f(x)) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(inv(real_of_num(2) * sqrt((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(inv(real_of_num(2) * sqrt(f(y))) * partial(i, f, y), int))(i, int)
+  interval_arith(-inv(real_of_num(2) * sqrt((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * (real_of_num(2) * f(x))) * partial((j : Num), f, x) * partial((i : Num), f, x) + inv(real_of_num(2) * sqrt(f(x))) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(-inv(real_of_num(2) * sqrt(f(x)) * (real_of_num(2) * f(x))) * partial(j, f, x) * partial(i, f, x) + inv(real_of_num(2) * sqrt(f(x))) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(-inv(real_of_num(2) * sqrt((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * (real_of_num(2) * f(x))) * partial(j, f, x) * partial((i : Num), f, x) + inv(real_of_num(2) * sqrt(f(x))) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(-inv(real_of_num(2) * sqrt(f(x)) * (real_of_num(2) * f(x))) * partial(j, f, x) * partial(i, f, x) + inv(real_of_num(2) * sqrt(f(x))) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(exp((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(exp(f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(exp((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial((j : Num), f, x) * partial((i : Num), f, x) + exp(f(x)) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(exp(f(x)) * partial(j, f, x) * partial(i, f, x) + exp(f(x)) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(exp((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial(j, f, x) * partial((i : Num), f, x) + exp(f(x)) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(exp(f(x)) * partial(j, f, x) * partial(i, f, x) + exp(f(x)) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(inv((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(inv(f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(-pow(inv((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))), 2) * partial((j : Num), f, x) * partial((i : Num), f, x) + inv(f(x)) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(-pow(inv(f(x)), 2) * partial(j, f, x) * partial(i, f, x) + inv(f(x)) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(-pow(inv((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))), 2) * partial(j, f, x) * partial((i : Num), f, x) + inv(f(x)) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(-pow(inv(f(x)), 2) * partial(j, f, x) * partial(i, f, x) + inv(f(x)) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(inv(real_of_num(1) + (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) * f(y)) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(inv(real_of_num(1) + f(y) * f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(-real_of_num(2) * (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) * pow(inv(real_of_num(1) + f(x) * f(x)), 2) * partial((j : Num), f, x) * partial((i : Num), f, x) + inv(real_of_num(1) + f(x) * f(x)) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(-real_of_num(2) * f(x) * pow(inv(real_of_num(1) + f(x) * f(x)), 2) * partial(j, f, x) * partial(i, f, x) + inv(real_of_num(1) + f(x) * f(x)) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(-real_of_num(2) * (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) * pow(inv(real_of_num(1) + f(x) * f(x)), 2) * partial(j, f, x) * partial((i : Num), f, x) + inv(real_of_num(1) + f(x) * f(x)) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(-real_of_num(2) * f(x) * pow(inv(real_of_num(1) + f(x) * f(x)), 2) * partial(j, f, x) * partial(i, f, x) + inv(real_of_num(1) + f(x) * f(x)) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(-sin((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(-sin(f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(-(cos((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial((j : Num), f, x) * partial((i : Num), f, x) + sin(f(x)) * partial2(j, i, f, x)), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(-(cos(f(x)) * partial(j, f, x) * partial(i, f, x) + sin(f(x)) * partial2(j, i, f, x)), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(-(cos((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial(j, f, x) * partial((i : Num), f, x) + sin(f(x)) * partial2(j, i, f, x)), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(-(cos(f(x)) * partial(j, f, x) * partial(i, f, x) + sin(f(x)) * partial2(j, i, f, x)), int)))(i, list)
+  interval_arith(cos((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(cos(f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(-sin((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial((j : Num), f, x) * partial((i : Num), f, x) + cos(f(x)) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(-sin(f(x)) * partial(j, f, x) * partial(i, f, x) + cos(f(x)) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(-sin((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial(j, f, x) * partial((i : Num), f, x) + cos(f(x)) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(-sin(f(x)) * partial(j, f, x) * partial(i, f, x) + cos(f(x)) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(inv(sqrt(real_of_num(1) - (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) * f(y))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(inv(sqrt(real_of_num(1) - f(y) * f(y))) * partial(i, f, y), int))(i, int)
+  interval_arith((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)) * partial((j : Num), f, x) * partial((i : Num), f, x) + inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(f(x) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)) * partial(j, f, x) * partial(i, f, x) + inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)) * partial(j, f, x) * partial((i : Num), f, x) + inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(f(x) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3)) * partial(j, f, x) * partial(i, f, x) + inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(-inv(sqrt(real_of_num(1) - (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) * f(y))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(-inv(sqrt(real_of_num(1) - f(y) * f(y))) * partial(i, f, y), int))(i, int)
+  interval_arith(-((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))) * partial((j : Num), f, x) * partial((i : Num), f, x) - inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(-(f(x) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))) * partial(j, f, x) * partial(i, f, x) - inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(-((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N])) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))) * partial(j, f, x) * partial((i : Num), f, x) - inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(-(f(x) / sqrt(pow(real_of_num(1) - f(x) * f(x), 3))) * partial(j, f, x) * partial(i, f, x) - inv(sqrt(real_of_num(1) - f(x) * f(x))) * partial2(j, i, f, x), int)))(i, list)
+  interval_arith(dmatan((f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))) * partial((i : Num), f, y), (int : (Real, Real))) == ((i : Num) => (int : (Real, Real)) => interval_arith(dmatan(f(y)) * partial(i, f, y), int))(i, int)
+  interval_arith(ddmatan((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial((j : Num), f, x) * partial((i : Num), f, x) + dmatan(f(x)) * partial2(j, i, f, x), (int : (Real, Real))) == ((j : Num) => (int : (Real, Real)) => interval_arith(ddmatan(f(x)) * partial(j, f, x) * partial(i, f, x) + dmatan(f(x)) * partial2(j, i, f, x), int))(j, int)
+  all_n(1, (list : List[(Real, Real)]), (j : Num) => (int : (Real, Real)) => interval_arith(ddmatan((f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))) * partial(j, f, x) * partial((i : Num), f, x) + dmatan(f(x)) * partial2(j, i, f, x), int)) == ((i : Num) => (list : List[(Real, Real)]) => all_n(1, list, (j : Num) => (int : (Real, Real)) => interval_arith(ddmatan(f(x)) * partial(j, f, x) * partial(i, f, x) + dmatan(f(x)) * partial2(j, i, f, x), int)))(i, list)
 M_taylor_arith.MK_M_LIN_APPROX' = ((#differentiable:fun(fun(cart(real,'N),cart(real,1)),fun(net(cart(real,'N)),bool)) ((#o:fun(fun(real,cart(real,1)),fun(fun(cart(real,'N),real),fun(cart(real,'N),cart(real,1)))) #lift:fun(real,cart(real,1))) f:fun(cart(real,'N),real))) (#at:fun(cart(real,'N),net(cart(real,'N))) x:cart(real,'N))), ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'N),real) x:cart(real,'N))) f_bounds:prod(real,real)), (((#all_n:fun(num,fun(list(prod(real,real)),fun(fun(num,fun(prod(real,real),bool)),bool))) (#D1:fun(num,num) #_0:num)) df_bounds_list:list(prod(real,real))) (\i:num. (\int:prod(real,real). ((#interval_arith:fun(real,fun(prod(real,real),bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) int:prod(real,real))))) |- ((((#m_lin_approx:fun(fun(cart(real,'N),real),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),bool)))) f:fun(cart(real,'N),real)) x:cart(real,'N)) f_bounds:prod(real,real)) df_bounds_list:list(prod(real,real)))
 M_taylor_arith.DEST_M_LIN_APPROX' =  |- ((#=:fun(bool,fun(bool,bool)) ((((#m_lin_approx:fun(fun(cart(real,'N),real),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),bool)))) f:fun(cart(real,'N),real)) x:cart(real,'N)) f_bounds:prod(real,real)) df_bounds_list:list(prod(real,real)))) ((#/\:fun(bool,fun(bool,bool)) ((#differentiable:fun(fun(cart(real,'N),cart(real,1)),fun(net(cart(real,'N)),bool)) ((#o:fun(fun(real,cart(real,1)),fun(fun(cart(real,'N),real),fun(cart(real,'N),cart(real,1)))) #lift:fun(real,cart(real,1))) f:fun(cart(real,'N),real))) (#at:fun(cart(real,'N),net(cart(real,'N))) x:cart(real,'N)))) ((#/\:fun(bool,fun(bool,bool)) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'N),real) x:cart(real,'N))) f_bounds:prod(real,real))) (((#all_n:fun(num,fun(list(prod(real,real)),fun(fun(num,fun(prod(real,real),bool)),bool))) (#D1:fun(num,num) #_0:num)) df_bounds_list:list(prod(real,real))) (\i:num. (\int:prod(real,real). ((#interval_arith:fun(real,fun(prod(real,real),bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) int:prod(real,real))))))))
 M_taylor_arith.ALL_N_EMPTY' =  |- (((#all_n:fun(num,fun(list('A),fun(fun(num,fun('A,bool)),bool))) n:num) #NIL:list('A)) s:fun(num,fun('A,bool)))
