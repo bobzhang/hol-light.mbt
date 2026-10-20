@@ -9093,297 +9093,297 @@ test "Logic/linear matches Logic/linear.ml" {
       #|0..0..4..11..25..54..110..196..368..solved at 513
       #|0..0..4..11..25..54..110..196..368..solved at 513
       #|Logic/linear quotations (291):
-      #|  forall c1 c2 p. clause c1 /\\ clause c2 ==> clause(resolve p c1 c2)
-      #|  forall hyps cl. (forall c. c IN hyps ==> clause c) /\\ presproof hyps cl ==> clause cl
-      #|  forall c1 c2 c1' c2' p.\n        c1 SUBSET c1' /\\ c2 SUBSET c2'\n        ==> (resolve p c1 c2) SUBSET (resolve p c1' c2')
-      #|  (forall c. clause(c) ==> ppresproof {c} c) /\\\n    (forall p asm1 asm2 c1 c2.\n            ppresproof asm1 c1 /\\ ppresproof asm2 c2 /\\\n            p IN c1 /\\ ~~ p IN c2\n                ==> ppresproof (asm1 UNION asm2) (resolve p c1 c2))
-      #|  asm:(form->bool)->bool
-      #|  c:form->bool
-      #|  asm:(form->bool)->bool
-      #|  c:form->bool IN hyps
-      #|  {c:form->bool}
-      #|  c:form->bool
-      #|  c:form->bool
-      #|  c:form->bool
-      #|  forall hyps. (forall c. c IN hyps ==> clause c)\n          ==> forall c. presproof hyps c <=>\n                        ?asm. asm SUBSET hyps /\\ ppresproof asm c
-      #|  forall asm cl. ppresproof asm cl ==> clause cl /\\ (forall c. c IN asm ==> clause c)
-      #|  r:form
-      #|  q:form
-      #|  d:form->bool
-      #|  c2:form->bool
-      #|  c1:form->bool
-      #|  asm2:(form->bool)->bool
-      #|  asm1:(form->bool)->bool
-      #|  p:form
-      #|  ppresproof asm cl
-      #|  forall asm cl. ppresproof asm cl\n            ==> forall d. (forall c. c IN asm ==> ?p. p IN c /\\ pholds d p)\n                    ==> ?p. p IN cl /\\ pholds d p
-      #|  forall asm cl. ppresproof asm cl\n            ==> forall d. d psatisfies (IMAGE interp asm) ==> pholds d (interp cl)
-      #|  forall asm. ppresproof asm {} ==> ~(psatisfiable (IMAGE interp asm))
-      #|  ~(negative q)
-      #|  literal q
-      #|  q:form
-      #|  c:form->bool
-      #|  FINITE(c:form->bool)
-      #|  c:form->bool
-      #|  \\x:form. T
-      #|  forall asm. ppresproof asm {} ==> ?c. c IN asm /\\ forall p. p IN c ==> negative p
-      #|  (forall cl. cl IN hyps ==> lpresproof hyps [cl]) /\\\n    (forall c1 c2 lis p.\n        lpresproof hyps (CONS c1 lis) /\\\n        (c2 IN hyps \\/ MEM c2 lis) /\\\n        p IN c1 /\\ ~~p IN c2\n        ==> lpresproof hyps (CONS (resolve p c1 c2) (CONS c1 lis)))
-      #|  c:(form->bool)list
-      #|  c:(form->bool)list
-      #|  forall hyps hyps' c.\n        hyps SUBSET hyps' /\\ lpresproof hyps c ==> lpresproof hyps' c
-      #|  forall c1 c2 p. literal p ==> (resolve (~~p) c1 c2 = resolve p c2 c1)
-      #|  (p = q) \\/ (p = ~~q)
-      #|  q:form
-      #|  forall c1 c2 p. clause c1 /\\ tautologous c1\n             ==> tautologous(resolve p c1 c2) \\/ c2 SUBSET (resolve p c1 c2)
-      #|  (p = q) \\/ (p = ~~q)
-      #|  q:form
-      #|  forall c1 c2 p. clause c2 /\\ tautologous c2 /\\ literal p\n             ==> tautologous(resolve p c1 c2) \\/ c1 SUBSET (resolve p c1 c2)
-      #|  forall c1 c2. tautologous c1 /\\ c1 SUBSET c2 ==> tautologous c2
-      #|  (suffix lis [] <=> (lis = [])) /\\\n   (suffix lis (CONS s cs) <=> (lis = CONS s cs) \\/ suffix lis cs)
-      #|  forall lis. suffix lis lis
-      #|  l1:(A)list = []
-      #|  forall l1 l2. suffix l1 l2 /\\ ~(l1 = []) ==> (LAST l1 :A = LAST l2)
-      #|  forall l1 l2 l3. suffix l1 l2 /\\ suffix l2 l3 ==> suffix l1 l3
-      #|  forall x:A l lis. suffix (CONS x l) lis ==> MEM x lis
-      #|  forall x l1 l2. suffix l1 l2 ==> suffix l1 (CONS x l2)
-      #|  x <= y ==> x <= SUC y
-      #|  forall l1 l2. suffix l1 l2 ==> LENGTH l1 <= LENGTH l2
-      #|  ~(SUC n <= n)
-      #|  forall x l. ~(suffix (CONS x l) l)
-      #|  forall l1 l2. suffix l1 l2 /\\ suffix l2 l1 ==> (l1 = l2)
-      #|  forall q. literal q ==> literal(~~q)
-      #|  (forall q basm B casm C c.\n        literal q\n        ==> (P q basm B casm C c = P (~~q) casm C basm B c)) /\\\n    (forall q basm B casm C. literal q\n        ==> (Q q basm B casm C = Q (~~q) casm C basm B)) /\\\n    (forall q basm B casm C.\n        Q q basm B casm C\n        ==> literal q ==> forall c. c IN basm ==> P q basm B casm C c)\n    ==> forall q basm B casm C.\n        Q q basm B casm C\n        ==> literal q ==> forall c. c IN basm UNION casm ==> P q basm B casm C c
-      #|  (forall p q basm B casm C main aasm A.\n        literal q\n        ==> (P p q basm B casm C main aasm A =\n             P p (~~q) casm C basm B main aasm A)) /\\\n    (forall p q basm B casm C main aasm A.\n        ~~p IN B ==> literal q ==> P p q basm B casm C main aasm A)\n    ==> forall p q basm B casm C main aasm A.\n            ~~p IN B \\/ ~~p IN C ==> literal q\n            ==> P p q basm B casm C main aasm A
-      #|  A SUBSET resolve q (resolve p A B) C
-      #|  A SUBSET resolve p A B
-      #|  main:(form->bool)list
-      #|  A:form->bool
-      #|  CONS (D:form->bool) middle = CONS A main
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 p : Form, clause(c1) && clause(c2) \226\134\146 clause(resolve(p, c1, c2))
+      #|  \226\136\128 hyps : ((Form) -> Bool) -> Bool, \226\136\128 cl : (Form) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, hyps) \226\134\146 clause(c)) && presproof(hyps, cl) \226\134\146 clause(cl)
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 c1' : (Form) -> Bool, \226\136\128 c2' : (Form) -> Bool, \226\136\128 p : Form, SUBSET(c1, c1') && SUBSET(c2, c2') \226\134\146 SUBSET(resolve(p, c1, c2), resolve(p, c1', c2'))
+      #|  (\226\136\128 c : (Form) -> Bool, clause(c) \226\134\146 (ppresproof : (((Form) -> Bool) -> Bool, (Form) -> Bool) -> Bool)({c}, c)) && (\226\136\128 p : Form, \226\136\128 asm1 : ((Form) -> Bool) -> Bool, \226\136\128 asm2 : ((Form) -> Bool) -> Bool, \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, ppresproof(asm1, c1) && ppresproof(asm2, c2) && IN(p, c1) && IN(op_tilde_tilde(p), c2) \226\134\146 ppresproof(UNION(asm1, asm2), resolve(p, c1, c2)))
+      #|  (asm : ((Form) -> Bool) -> Bool)
+      #|  (c : (Form) -> Bool)
+      #|  (asm : ((Form) -> Bool) -> Bool)
+      #|  IN((c : (Form) -> Bool), (hyps : ((Form) -> Bool) -> Bool))
+      #|  {(c : (Form) -> Bool)}
+      #|  (c : (Form) -> Bool)
+      #|  (c : (Form) -> Bool)
+      #|  (c : (Form) -> Bool)
+      #|  \226\136\128 hyps : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, hyps) \226\134\146 clause(c)) \226\134\146 (\226\136\128 c : (Form) -> Bool, presproof(hyps, c) == (\226\136\131 asm : ((Form) -> Bool) -> Bool, SUBSET(asm, hyps) && ppresproof(asm, c)))
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, \226\136\128 cl : (Form) -> Bool, ppresproof(asm, cl) \226\134\146 clause(cl) && (\226\136\128 c : (Form) -> Bool, IN(c, asm) \226\134\146 clause(c))
+      #|  (r : Form)
+      #|  (q : Form)
+      #|  (d : (Form) -> Bool)
+      #|  (c2 : (Form) -> Bool)
+      #|  (c1 : (Form) -> Bool)
+      #|  (asm2 : ((Form) -> Bool) -> Bool)
+      #|  (asm1 : ((Form) -> Bool) -> Bool)
+      #|  (p : Form)
+      #|  ppresproof((asm : ((Form) -> Bool) -> Bool), (cl : (Form) -> Bool))
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, \226\136\128 cl : (Form) -> Bool, ppresproof(asm, cl) \226\134\146 (\226\136\128 d : (Form) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, asm) \226\134\146 (\226\136\131 p : Form, IN(p, c) && pholds(d, p))) \226\134\146 (\226\136\131 p : Form, IN(p, cl) && pholds(d, p)))
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, \226\136\128 cl : (Form) -> Bool, ppresproof(asm, cl) \226\134\146 (\226\136\128 d : (Form) -> Bool, psatisfies(d, IMAGE(interp, asm)) \226\134\146 pholds(d, interp(cl)))
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, ppresproof(asm, {}) \226\134\146 !psatisfiable(IMAGE(interp, asm))
+      #|  !negative((q : Form))
+      #|  literal((q : Form))
+      #|  (q : Form)
+      #|  (c : (Form) -> Bool)
+      #|  FINITE((c : (Form) -> Bool))
+      #|  (c : (Form) -> Bool)
+      #|  (x : Form) => true
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, ppresproof(asm, {}) \226\134\146 (\226\136\131 c : (Form) -> Bool, IN(c, asm) && (\226\136\128 p : Form, IN(p, c) \226\134\146 negative(p)))
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 (lpresproof : (((Form) -> Bool) -> Bool, List[(Form) -> Bool]) -> Bool)(hyps, [cl])) && (\226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, lpresproof(hyps, CONS(c1, lis)) && (IN(c2, hyps) || MEM(c2, lis)) && IN(p, c1) && IN(op_tilde_tilde(p), c2) \226\134\146 lpresproof(hyps, CONS(resolve(p, c1, c2), CONS(c1, lis))))
+      #|  (c : List[(Form) -> Bool])
+      #|  (c : List[(Form) -> Bool])
+      #|  \226\136\128 hyps : ((Form) -> Bool) -> Bool, \226\136\128 hyps' : ((Form) -> Bool) -> Bool, \226\136\128 c : List[(Form) -> Bool], SUBSET(hyps, hyps') && lpresproof(hyps, c) \226\134\146 lpresproof(hyps', c)
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 p : Form, literal(p) \226\134\146 resolve(op_tilde_tilde(p), c1, c2) == resolve(p, c2, c1)
+      #|  (p : Form) == (q : Form) || p == op_tilde_tilde(q)
+      #|  (q : Form)
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 p : Form, clause(c1) && tautologous(c1) \226\134\146 tautologous(resolve(p, c1, c2)) || SUBSET(c2, resolve(p, c1, c2))
+      #|  (p : Form) == (q : Form) || p == op_tilde_tilde(q)
+      #|  (q : Form)
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 p : Form, clause(c2) && tautologous(c2) && literal(p) \226\134\146 tautologous(resolve(p, c1, c2)) || SUBSET(c1, resolve(p, c1, c2))
+      #|  \226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, tautologous(c1) && SUBSET(c1, c2) \226\134\146 tautologous(c2)
+      #|  (suffix : (List[_], List[_]) -> Bool)((lis : List[_]), NIL) == (lis == NIL) && suffix(lis, CONS((s : _), (cs : List[_]))) == (lis == CONS(s, cs) || suffix(lis, cs))
+      #|  \226\136\128 lis : List[_], suffix(lis, lis)
+      #|  (l1 : List[A]) == NIL
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], suffix(l1, l2) && !(l1 == NIL) \226\134\146 LAST(l1) == LAST(l2)
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 l3 : List[_], suffix(l1, l2) && suffix(l2, l3) \226\134\146 suffix(l1, l3)
+      #|  \226\136\128 x : A, \226\136\128 l : List[A], \226\136\128 lis : List[A], suffix(CONS(x, l), lis) \226\134\146 MEM(x, lis)
+      #|  \226\136\128 x : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], suffix(l1, l2) \226\134\146 suffix(l1, CONS(x, l2))
+      #|  (x : Num) <= (y : Num) \226\134\146 x <= SUC(y)
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], suffix(l1, l2) \226\134\146 LENGTH(l1) <= LENGTH(l2)
+      #|  !(SUC((n : Num)) <= n)
+      #|  \226\136\128 x : _, \226\136\128 l : List[_], !suffix(CONS(x, l), l)
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], suffix(l1, l2) && suffix(l2, l1) \226\134\146 l1 == l2
+      #|  \226\136\128 q : Form, literal(q) \226\134\146 literal(op_tilde_tilde(q))
+      #|  (\226\136\128 q : Form, \226\136\128 basm : (_) -> Bool, \226\136\128 B : _, \226\136\128 casm : (_) -> Bool, \226\136\128 C : _, \226\136\128 c : _, literal(q) \226\134\146 (P : (Form, (_) -> Bool, _, (_) -> Bool, _, _) -> Bool)(q, basm, B, casm, C, c) == P(op_tilde_tilde(q), casm, C, basm, B, c)) && (\226\136\128 q : Form, \226\136\128 basm : (_) -> Bool, \226\136\128 B : _, \226\136\128 casm : (_) -> Bool, \226\136\128 C : _, literal(q) \226\134\146 (Q : (Form, (_) -> Bool, _, (_) -> Bool, _) -> Bool)(q, basm, B, casm, C) == Q(op_tilde_tilde(q), casm, C, basm, B)) && (\226\136\128 q : Form, \226\136\128 basm : (_) -> Bool, \226\136\128 B : _, \226\136\128 casm : (_) -> Bool, \226\136\128 C : _, Q(q, basm, B, casm, C) \226\134\146 literal(q) \226\134\146 (\226\136\128 c : _, IN(c, basm) \226\134\146 P(q, basm, B, casm, C, c))) \226\134\146 (\226\136\128 q : Form, \226\136\128 basm : (_) -> Bool, \226\136\128 B : _, \226\136\128 casm : (_) -> Bool, \226\136\128 C : _, Q(q, basm, B, casm, C) \226\134\146 literal(q) \226\134\146 (\226\136\128 c : _, IN(c, UNION(basm, casm)) \226\134\146 P(q, basm, B, casm, C, c)))
+      #|  (\226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 basm : _, \226\136\128 B : (Form) -> Bool, \226\136\128 casm : _, \226\136\128 C : (Form) -> Bool, \226\136\128 main : _, \226\136\128 aasm : _, \226\136\128 A : _, literal(q) \226\134\146 (P : (Form, Form, _, (Form) -> Bool, _, (Form) -> Bool, _, _, _) -> Bool)(p, q, basm, B, casm, C, main, aasm, A) == P(p, op_tilde_tilde(q), casm, C, basm, B, main, aasm, A)) && (\226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 basm : _, \226\136\128 B : (Form) -> Bool, \226\136\128 casm : _, \226\136\128 C : (Form) -> Bool, \226\136\128 main : _, \226\136\128 aasm : _, \226\136\128 A : _, IN(op_tilde_tilde(p), B) \226\134\146 literal(q) \226\134\146 P(p, q, basm, B, casm, C, main, aasm, A)) \226\134\146 (\226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 basm : _, \226\136\128 B : (Form) -> Bool, \226\136\128 casm : _, \226\136\128 C : (Form) -> Bool, \226\136\128 main : _, \226\136\128 aasm : _, \226\136\128 A : _, IN(op_tilde_tilde(p), B) || IN(op_tilde_tilde(p), C) \226\134\146 literal(q) \226\134\146 P(p, q, basm, B, casm, C, main, aasm, A))
+      #|  SUBSET((A : (Form) -> Bool), resolve((q : Form), resolve((p : Form), A, (B : (Form) -> Bool)), (C : (Form) -> Bool)))
+      #|  SUBSET((A : (Form) -> Bool), resolve((p : Form), A, (B : (Form) -> Bool)))
+      #|  (main : List[(Form) -> Bool])
+      #|  (A : (Form) -> Bool)
+      #|  CONS((D : (Form) -> Bool), (middle : List[(Form) -> Bool])) == CONS((A : (Form) -> Bool), (main : List[(Form) -> Bool]))
       #|  CONS (A:form->bool) main = CONS E final
-      #|  ~~p IN B
-      #|  ~~p IN resolve q B C
-      #|  p:form IN A
-      #|  ~~q IN C
-      #|  q:form IN B
-      #|  ~(p:form = q)
-      #|  ~(p = ~~ q)
-      #|  E SUBSET resolve q (resolve p A B) C
-      #|  ~~ p IN E
-      #|  (~~(~~p) = p) /\\ (~~(~~q) = q)
-      #|  ~~(~~p) = p
+      #|  IN(op_tilde_tilde((p : Form)), (B : (Form) -> Bool))
+      #|  IN(op_tilde_tilde((p : Form)), resolve((q : Form), (B : (Form) -> Bool), (C : (Form) -> Bool)))
+      #|  IN((p : Form), (A : (Form) -> Bool))
+      #|  IN(op_tilde_tilde((q : Form)), (C : (Form) -> Bool))
+      #|  IN((q : Form), (B : (Form) -> Bool))
+      #|  !((p : Form) == (q : Form))
+      #|  !((p : Form) == op_tilde_tilde((q : Form)))
+      #|  SUBSET((E : (Form) -> Bool), resolve((q : Form), resolve((p : Form), (A : (Form) -> Bool), (B : (Form) -> Bool)), (C : (Form) -> Bool)))
+      #|  IN(op_tilde_tilde((p : Form)), (E : (Form) -> Bool))
+      #|  op_tilde_tilde(op_tilde_tilde((p : Form))) == p && op_tilde_tilde(op_tilde_tilde((q : Form))) == q
+      #|  op_tilde_tilde(op_tilde_tilde((p : Form))) == p
       #|  suffix (CONS (A:form->bool) main) (CONS E final)
       #|  CONS (E:form->bool) final
-      #|  resolve (~~p) E A
+      #|  resolve(op_tilde_tilde((p : Form)), (E : (Form) -> Bool), (A : (Form) -> Bool))
       #|  CONS (A:form->bool) main = CONS E final
-      #|  ~~p IN B
-      #|  ~~p IN resolve q B C
-      #|  ~~q IN C
-      #|  q:form IN B
-      #|  ~(p:form = q)
-      #|  ~(p = ~~ q)
-      #|  ~(~~ p IN E)
-      #|  E SUBSET resolve q (resolve p A B) C
+      #|  IN(op_tilde_tilde((p : Form)), (B : (Form) -> Bool))
+      #|  IN(op_tilde_tilde((p : Form)), resolve((q : Form), (B : (Form) -> Bool), (C : (Form) -> Bool)))
+      #|  IN(op_tilde_tilde((q : Form)), (C : (Form) -> Bool))
+      #|  IN((q : Form), (B : (Form) -> Bool))
+      #|  !((p : Form) == (q : Form))
+      #|  !((p : Form) == op_tilde_tilde((q : Form)))
+      #|  !IN(op_tilde_tilde((p : Form)), (E : (Form) -> Bool))
+      #|  SUBSET((E : (Form) -> Bool), resolve((q : Form), resolve((p : Form), (A : (Form) -> Bool), (B : (Form) -> Bool)), (C : (Form) -> Bool)))
       #|  final:(form->bool)list
-      #|  E:form->bool
-      #|  ~~p IN E
+      #|  (E : (Form) -> Bool)
+      #|  IN(op_tilde_tilde((p : Form)), (E : (Form) -> Bool))
       #|  final:(form->bool)list
-      #|  E:form->bool
-      #|  ~(q:form IN D)
-      #|  D SUBSET resolve p A B
-      #|  middle:(form->bool)list
-      #|  D:form->bool
+      #|  (E : (Form) -> Bool)
+      #|  !IN((q : Form), (D : (Form) -> Bool))
+      #|  SUBSET((D : (Form) -> Bool), resolve((p : Form), (A : (Form) -> Bool), (B : (Form) -> Bool)))
+      #|  (middle : List[(Form) -> Bool])
+      #|  (D : (Form) -> Bool)
       #|  final:(form->bool)list
-      #|  E:form->bool
-      #|  basm:(form->bool)->bool UNION aasm
-      #|  q:form
-      #|  middle:(form->bool)list
-      #|  D:form->bool
-      #|  forall c lis p asm'.\n               clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n               ==> (?c' lis'.\n                        suffix (CONS c lis) (CONS c' lis') /\\\n                        lpresproof (casm UNION asm') (CONS c' lis') /\\\n                        c' SUBSET resolve p c C)
-      #|  q:form IN D
-      #|  ?c' lis'.\n       suffix (CONS D middle) (CONS c' lis') /\\\n       suffix (CONS A main) (CONS c' lis') /\\\n       lpresproof ((basm UNION casm) UNION aasm) (CONS c' lis') /\\\n       c' SUBSET resolve q (resolve p A B) C
-      #|  middle:(form->bool)list
-      #|  D:form->bool
-      #|  aasm:(form->bool)->bool
-      #|  p:form
-      #|  main:(form->bool)list
-      #|  A:form->bool
-      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN B\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (basm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c B)
-      #|  q IN resolve q B C
-      #|  q:form IN C
-      #|  B SUBSET (resolve q B C)
-      #|  basm:(form->bool)->bool UNION aasm
+      #|  (E : (Form) -> Bool)
+      #|  UNION((basm : ((Form) -> Bool) -> Bool), (aasm : ((Form) -> Bool) -> Bool))
+      #|  (q : Form)
+      #|  (middle : List[(Form) -> Bool])
+      #|  (D : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, \226\136\128 asm' : ((Form) -> Bool) -> Bool, clause(c) && lpresproof(asm', CONS(c, lis)) && IN(p, c) && IN(op_tilde_tilde(p), (C : (Form) -> Bool)) \226\134\146 (\226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS(c, lis), CONS(c', lis')) && lpresproof(UNION((casm : ((Form) -> Bool) -> Bool), asm'), CONS(c', lis')) && SUBSET(c', resolve(p, c, C)))
+      #|  IN((q : Form), (D : (Form) -> Bool))
+      #|  \226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS((D : (Form) -> Bool), (middle : List[(Form) -> Bool])), CONS(c', lis')) && suffix(CONS((A : (Form) -> Bool), (main : List[(Form) -> Bool])), CONS(c', lis')) && lpresproof(UNION(UNION((basm : ((Form) -> Bool) -> Bool), (casm : ((Form) -> Bool) -> Bool)), (aasm : ((Form) -> Bool) -> Bool)), CONS(c', lis')) && SUBSET(c', resolve((q : Form), resolve((p : Form), A, (B : (Form) -> Bool)), (C : (Form) -> Bool)))
+      #|  (middle : List[(Form) -> Bool])
+      #|  (D : (Form) -> Bool)
+      #|  (aasm : ((Form) -> Bool) -> Bool)
+      #|  (p : Form)
+      #|  (main : List[(Form) -> Bool])
+      #|  (A : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, \226\136\128 asm' : ((Form) -> Bool) -> Bool, clause(c) && lpresproof(asm', CONS(c, lis)) && IN(p, c) && IN(op_tilde_tilde(p), (B : (Form) -> Bool)) \226\134\146 (\226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS(c, lis), CONS(c', lis')) && lpresproof(UNION((basm : ((Form) -> Bool) -> Bool), asm'), CONS(c', lis')) && SUBSET(c', resolve(p, c, B)))
+      #|  IN((q : Form), resolve(q, (B : (Form) -> Bool), (C : (Form) -> Bool)))
+      #|  IN((q : Form), (C : (Form) -> Bool))
+      #|  SUBSET((B : (Form) -> Bool), resolve((q : Form), B, (C : (Form) -> Bool)))
+      #|  UNION((basm : ((Form) -> Bool) -> Bool), (aasm : ((Form) -> Bool) -> Bool))
       #|  final:(form->bool)list
-      #|  D:form->bool
-      #|  literal q
-      #|  aasm:(form->bool)->bool
-      #|  ~~q
-      #|  main:(form->bool)list
-      #|  A:form->bool
-      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN B\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (basm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c B)
-      #|  p = ~~q
-      #|  p = ~~q
-      #|  ~~q IN B
-      #|  C SUBSET (resolve q B C)
-      #|  casm:(form->bool)->bool UNION aasm
+      #|  (D : (Form) -> Bool)
+      #|  literal((q : Form))
+      #|  (aasm : ((Form) -> Bool) -> Bool)
+      #|  op_tilde_tilde((q : Form))
+      #|  (main : List[(Form) -> Bool])
+      #|  (A : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, \226\136\128 asm' : ((Form) -> Bool) -> Bool, clause(c) && lpresproof(asm', CONS(c, lis)) && IN(p, c) && IN(op_tilde_tilde(p), (B : (Form) -> Bool)) \226\134\146 (\226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS(c, lis), CONS(c', lis')) && lpresproof(UNION((basm : ((Form) -> Bool) -> Bool), asm'), CONS(c', lis')) && SUBSET(c', resolve(p, c, B)))
+      #|  (p : Form) == op_tilde_tilde((q : Form))
+      #|  (p : Form) == op_tilde_tilde((q : Form))
+      #|  IN(op_tilde_tilde((q : Form)), (B : (Form) -> Bool))
+      #|  SUBSET((C : (Form) -> Bool), resolve((q : Form), (B : (Form) -> Bool), C))
+      #|  UNION((casm : ((Form) -> Bool) -> Bool), (aasm : ((Form) -> Bool) -> Bool))
       #|  final:(form->bool)list
-      #|  D:form->bool
-      #|  aasm:(form->bool)->bool
-      #|  q:form
-      #|  main:(form->bool)list
-      #|  A:form->bool
-      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (casm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c C)
-      #|  p:form = q
-      #|  p:form = q
-      #|  A:form->bool
-      #|  aasm:(form->bool)->bool
-      #|  main:(form->bool)list
-      #|  C:form->bool
-      #|  casm:(form->bool)->bool
-      #|  B:form->bool
-      #|  basm:(form->bool)->bool
-      #|  q:form
-      #|  p:form
-      #|  p:form
-      #|  q:form
-      #|  basm:(form->bool)->bool
-      #|  B:form->bool
-      #|  casm:(form->bool)->bool
-      #|  C:form->bool
-      #|  main:(form->bool)list
-      #|  aasm:(form->bool)->bool
-      #|  A:form->bool
-      #|  ~~p IN resolve q B C
-      #|  ~~p IN B \\/ ~~p IN C
-      #|  aasm:(form->bool)->bool
-      #|  p:form
-      #|  main:(form->bool)list
-      #|  A:form->bool
-      #|  ~(q:form IN B1)
-      #|  B1:(form->bool) SUBSET B
-      #|  main:(form->bool)list
-      #|  B1:form->bool
+      #|  (D : (Form) -> Bool)
+      #|  (aasm : ((Form) -> Bool) -> Bool)
+      #|  (q : Form)
+      #|  (main : List[(Form) -> Bool])
+      #|  (A : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, \226\136\128 asm' : ((Form) -> Bool) -> Bool, clause(c) && lpresproof(asm', CONS(c, lis)) && IN(p, c) && IN(op_tilde_tilde(p), (C : (Form) -> Bool)) \226\134\146 (\226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS(c, lis), CONS(c', lis')) && lpresproof(UNION((casm : ((Form) -> Bool) -> Bool), asm'), CONS(c', lis')) && SUBSET(c', resolve(p, c, C)))
+      #|  (p : Form) == (q : Form)
+      #|  (p : Form) == (q : Form)
+      #|  (A : (Form) -> Bool)
+      #|  (aasm : ((Form) -> Bool) -> Bool)
+      #|  (main : List[(Form) -> Bool])
+      #|  (C : (Form) -> Bool)
+      #|  (casm : ((Form) -> Bool) -> Bool)
+      #|  (B : (Form) -> Bool)
+      #|  (basm : ((Form) -> Bool) -> Bool)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  (q : Form)
+      #|  (basm : ((Form) -> Bool) -> Bool)
+      #|  (B : (Form) -> Bool)
+      #|  (casm : ((Form) -> Bool) -> Bool)
+      #|  (C : (Form) -> Bool)
+      #|  (main : List[(Form) -> Bool])
+      #|  (aasm : ((Form) -> Bool) -> Bool)
+      #|  (A : (Form) -> Bool)
+      #|  IN(op_tilde_tilde((p : Form)), resolve((q : Form), (B : (Form) -> Bool), (C : (Form) -> Bool)))
+      #|  IN(op_tilde_tilde((p : Form)), (B : (Form) -> Bool)) || IN(op_tilde_tilde(p), (C : (Form) -> Bool))
+      #|  (aasm : ((Form) -> Bool) -> Bool)
+      #|  (p : Form)
+      #|  (main : List[(Form) -> Bool])
+      #|  (A : (Form) -> Bool)
+      #|  !IN((q : Form), (B1 : (Form) -> Bool))
+      #|  SUBSET((B1 : (Form) -> Bool), (B : (Form) -> Bool))
+      #|  (main : List[(Form) -> Bool])
+      #|  (B1 : (Form) -> Bool)
       #|  final:(form->bool)list
-      #|  D:form->bool
-      #|  basm:(form->bool)->bool
-      #|  q:form
-      #|  main:(form->bool)list
-      #|  B1:form->bool
-      #|  forall c lis p asm'.\n           clause c /\\ lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~ p IN C\n           ==> (?c' lis'.\n                    suffix (CONS c lis) (CONS c' lis') /\\\n                    lpresproof (casm UNION asm') (CONS c' lis') /\\\n                    c' SUBSET resolve p c C)
-      #|  q:form IN B1
-      #|  main:(form->bool)list
-      #|  B1:form->bool
-      #|  c:form->bool
-      #|  forall c. c IN basm\n           ==> (?cl' lis.\n                    lpresproof basm (CONS cl' lis) /\\\n                    cl' SUBSET B /\\\n                    (LAST (CONS cl' lis) = c))
-      #|  c:form->bool
-      #|  q:form
-      #|  basm:(form->bool)->bool
-      #|  B:form->bool
-      #|  casm:(form->bool)->bool
-      #|  C:form->bool
-      #|  literal q
-      #|  C:form->bool
-      #|  B:form->bool
-      #|  casm:(form->bool)->bool
-      #|  basm:(form->bool)->bool
-      #|  q:form
-      #|  CONS (c:form->bool) lis
-      #|  resolve p c cl
-      #|  hyp:(form->bool)->bool
-      #|  p:form
-      #|  lis:(form->bool)list
-      #|  c:form->bool
-      #|  []:(form->bool)list
-      #|  cl:form->bool
-      #|  cl:form->bool
-      #|  forall asm cl. ppresproof asm cl\n             ==> (forall c. c IN asm ==> clause c) /\\ clause cl /\\\n                 (forall c. c IN asm\n                      ==> ?cl' lis. lpresproof asm (CONS cl' lis) /\\\n                                    cl' SUBSET cl /\\\n                                    (LAST (CONS cl' lis) = c)) /\\\n                 (forall c lis p asm'.\n                        clause c /\\\n                        lpresproof asm' (CONS c lis) /\\ p IN c /\\ ~~p IN cl\n                        ==> ?c' lis'. suffix (CONS c lis) (CONS c' lis') /\\\n                                      lpresproof (asm UNION asm')\n                                                 (CONS c' lis') /\\\n                                      c' SUBSET (resolve p c cl))
-      #|  forall asm cl. ppresproof asm cl\n            ==> forall c. c IN asm\n                    ==> ?cl' lis. lpresproof asm (CONS cl' lis) /\\\n                                  cl' SUBSET cl /\\\n                                  (LAST (CONS cl' lis) = c)
-      #|  literal q
-      #|  (forall cl. cl IN hyps ==> lresproof hyps [cl]) /\\\n    (forall c1 c2 lis cl.\n        lresproof hyps (CONS c1 lis) /\\ (c2 IN hyps \\/ MEM c2 lis) /\\\n        isaresolvent cl (c1,c2)\n        ==> lresproof hyps (CONS cl (CONS c1 lis)))
-      #|  t:A list
-      #|  t:A list
-      #|  ~(t:A list = [])
-      #|  t':A list
-      #|  t':A list
-      #|  t:A list = []
-      #|  forall P:(A->A->bool) l1 l2.\n       ~(l1 = []) /\\ ALL2 P l1 l2 ==> P (LAST l1) (LAST l2)
-      #|  forall l1 l2. ALL2 P l1 l2 /\\ MEM x l1 ==> ?y. MEM y l2 /\\ P x y
-      #|  forall hyps. (forall c. c IN hyps ==> clause c)\n          ==> forall lis. lresproof hyps lis ==> ALL clause lis
-      #|  B1:form->bool
-      #|  A1:form->bool
-      #|  B:form->bool
-      #|  CONS (IMAGE (formsubst (mgu (A1 UNION {~~ l | l IN B1})))\n                          (A DIFF A1 UNION C DIFF B1))\n                   (CONS A lis)
-      #|  {~~l | l IN B1} = IMAGE (~~) B1
-      #|  mgu (A1 UNION {~~ l | l IN B1})
-      #|  B1:form->bool
-      #|  A1:form->bool
-      #|  termsubst k = termsubst (termsubst k o j) o termsubst (rename B (FVS A))
-      #|  termsubst k o (j:num->term)
-      #|  k:num->term
-      #|  B' instance_of B
-      #|  j:num->term
-      #|  FVS(A)
-      #|  B:form->bool
-      #|  C = IMAGE (formsubst (rename B (FVS A))) B
-      #|  p:form
-      #|  resolve p A' B'
-      #|  B':form->bool
-      #|  A':form->bool
-      #|  IMAGE (formsubst (rename B (FVS A))) B
-      #|  A:form->bool
-      #|  clause B
-      #|  B:form->bool
-      #|  B':form->bool
-      #|  asm SUBSET {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
-      #|  ?B. B' instance_of B /\\ (B IN hyps \\/ MEM B lis)
-      #|  clause A /\\ forall c. MEM c lis ==> clause c
-      #|  lis:(form->bool)list
-      #|  A:form->bool
-      #|  alist:(form->bool)list
-      #|  alist:(form->bool)list
-      #|  ALL2 (instance_of) (CONS A' lis') alist
-      #|  lresproof hyps alist
-      #|  B':form->bool
-      #|  asm SUBSET {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
-      #|  clause B'
-      #|  clause A'
-      #|  alist:(form->bool)list
-      #|  p:form
-      #|  lis':(form->bool)list
-      #|  B':form->bool
-      #|  A':form->bool
-      #|  [cl0:form->bool]
-      #|  jj:num->term
-      #|  cl0:form->bool
-      #|  cl:form->bool
-      #|  asm SUBSET {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
-      #|  cl:form->bool
-      #|  asm SUBSET {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
-      #|  clause cl
-      #|  cl:form->bool
-      #|  forall plis. lpresproof asm plis\n           ==> (forall c. MEM c plis ==> clause c) /\\\n               ?lis. lresproof hyps lis /\\ ALL2 (instance_of) plis lis
-      #|  formsubst jj p
-      #|  jj:num->term
-      #|  sos instance_of (LAST (CONS {} lis))
-      #|  p:form
-      #|  lis:(form->bool)list
-      #|  {} instance_of emp
-      #|  emp:form->bool = {}
-      #|  lis:(form->bool)list
-      #|  emp:form->bool
-      #|  CONS {} (qlist:(form->bool)list)
-      #|  forall plis. lpresproof asm plis\n           ==> ?lis. lresproof hyps lis /\\ ALL2 (instance_of) plis lis
-      #|  qlist:(form->bool)list
-      #|  a /\\ b /\\ c <=> b /\\ a /\\ c
-      #|  emptyclause:form->bool
-      #|  sos:form->bool
-      #|  sos:form->bool
-      #|  asm:(form->bool)->bool
-      #|  {IMAGE (formsubst v) cl | cl,v | cl IN hyps}
-      #|  d:form->bool
-      #|  ~(psatisfiable\n        {interp cl |\n         cl IN {IMAGE(formsubst v) cl | cl,v | cl IN hyps}})
-      #|  IMAGE interp hyps
-      #|  (forall cl. cl IN hyps ==> clause cl) /\\\n   ~(?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n        interpretation (language(IMAGE interp hyps)) M /\\ ~(Dom M = {}) /\\\n        M satisfies (IMAGE interp hyps))\n   ==> ?lis. lresproof hyps (CONS {} lis) /\\\n             (forall p. p IN (LAST (CONS {} lis)) ==> negative p)
-      #|  (b ==> a) ==> ~a ==> ~b
+      #|  (D : (Form) -> Bool)
+      #|  (basm : ((Form) -> Bool) -> Bool)
+      #|  (q : Form)
+      #|  (main : List[(Form) -> Bool])
+      #|  (B1 : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, \226\136\128 asm' : ((Form) -> Bool) -> Bool, clause(c) && lpresproof(asm', CONS(c, lis)) && IN(p, c) && IN(op_tilde_tilde(p), (C : (Form) -> Bool)) \226\134\146 (\226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS(c, lis), CONS(c', lis')) && lpresproof(UNION((casm : ((Form) -> Bool) -> Bool), asm'), CONS(c', lis')) && SUBSET(c', resolve(p, c, C)))
+      #|  IN((q : Form), (B1 : (Form) -> Bool))
+      #|  (main : List[(Form) -> Bool])
+      #|  (B1 : (Form) -> Bool)
+      #|  (c : (Form) -> Bool)
+      #|  \226\136\128 c : (Form) -> Bool, IN(c, (basm : ((Form) -> Bool) -> Bool)) \226\134\146 (\226\136\131 cl' : (Form) -> Bool, \226\136\131 lis : List[(Form) -> Bool], lpresproof(basm, CONS(cl', lis)) && SUBSET(cl', (B : (Form) -> Bool)) && LAST(CONS(cl', lis)) == c)
+      #|  (c : (Form) -> Bool)
+      #|  (q : Form)
+      #|  (basm : ((Form) -> Bool) -> Bool)
+      #|  (B : (Form) -> Bool)
+      #|  (casm : ((Form) -> Bool) -> Bool)
+      #|  (C : (Form) -> Bool)
+      #|  literal((q : Form))
+      #|  (C : (Form) -> Bool)
+      #|  (B : (Form) -> Bool)
+      #|  (casm : ((Form) -> Bool) -> Bool)
+      #|  (basm : ((Form) -> Bool) -> Bool)
+      #|  (q : Form)
+      #|  CONS((c : (Form) -> Bool), (lis : List[(Form) -> Bool]))
+      #|  resolve((p : Form), (c : (Form) -> Bool), (cl : (Form) -> Bool))
+      #|  (hyp : ((Form) -> Bool) -> Bool)
+      #|  (p : Form)
+      #|  (lis : List[(Form) -> Bool])
+      #|  (c : (Form) -> Bool)
+      #|  (NIL : List[(Form) -> Bool])
+      #|  (cl : (Form) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, \226\136\128 cl : (Form) -> Bool, ppresproof(asm, cl) \226\134\146 (\226\136\128 c : (Form) -> Bool, IN(c, asm) \226\134\146 clause(c)) && clause(cl) && (\226\136\128 c : (Form) -> Bool, IN(c, asm) \226\134\146 (\226\136\131 cl' : (Form) -> Bool, \226\136\131 lis : List[(Form) -> Bool], lpresproof(asm, CONS(cl', lis)) && SUBSET(cl', cl) && LAST(CONS(cl', lis)) == c)) && (\226\136\128 c : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 p : Form, \226\136\128 asm' : ((Form) -> Bool) -> Bool, clause(c) && lpresproof(asm', CONS(c, lis)) && IN(p, c) && IN(op_tilde_tilde(p), cl) \226\134\146 (\226\136\131 c' : (Form) -> Bool, \226\136\131 lis' : List[(Form) -> Bool], suffix(CONS(c, lis), CONS(c', lis')) && lpresproof(UNION(asm, asm'), CONS(c', lis')) && SUBSET(c', resolve(p, c, cl))))
+      #|  \226\136\128 asm : ((Form) -> Bool) -> Bool, \226\136\128 cl : (Form) -> Bool, ppresproof(asm, cl) \226\134\146 (\226\136\128 c : (Form) -> Bool, IN(c, asm) \226\134\146 (\226\136\131 cl' : (Form) -> Bool, \226\136\131 lis : List[(Form) -> Bool], lpresproof(asm, CONS(cl', lis)) && SUBSET(cl', cl) && LAST(CONS(cl', lis)) == c))
+      #|  literal((q : Form))
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 (lresproof : (((Form) -> Bool) -> Bool, List[(Form) -> Bool]) -> Bool)(hyps, [cl])) && (\226\136\128 c1 : (Form) -> Bool, \226\136\128 c2 : (Form) -> Bool, \226\136\128 lis : List[(Form) -> Bool], \226\136\128 cl : (Form) -> Bool, lresproof(hyps, CONS(c1, lis)) && (IN(c2, hyps) || MEM(c2, lis)) && isaresolvent(cl, (c1, c2)) \226\134\146 lresproof(hyps, CONS(cl, CONS(c1, lis))))
+      #|  (t : List[A])
+      #|  (t : List[A])
+      #|  !((t : List[A]) == NIL)
+      #|  (t' : List[A])
+      #|  (t' : List[A])
+      #|  (t : List[A]) == NIL
+      #|  \226\136\128 P : (A, A) -> Bool, \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], !(l1 == NIL) && ALL2(P, l1, l2) \226\134\146 P(LAST(l1), LAST(l2))
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ALL2((P : (_, _) -> Bool), l1, l2) && MEM((x : _), l1) \226\134\146 (\226\136\131 y : _, MEM(y, l2) && P(x, y))
+      #|  \226\136\128 hyps : ((Form) -> Bool) -> Bool, (\226\136\128 c : (Form) -> Bool, IN(c, hyps) \226\134\146 clause(c)) \226\134\146 (\226\136\128 lis : List[(Form) -> Bool], lresproof(hyps, lis) \226\134\146 ALL(clause, lis))
+      #|  (B1 : (Form) -> Bool)
+      #|  (A1 : (Form) -> Bool)
+      #|  (B : (Form) -> Bool)
+      #|  CONS(IMAGE(formsubst(mgu(UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))), UNION(DIFF((A : (Form) -> Bool), A1), DIFF((C : (Form) -> Bool), B1))), CONS(A, (lis : List[(Form) -> Bool])))
+      #|  {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))} == IMAGE(op_tilde_tilde, B1)
+      #|  mgu(UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))
+      #|  (B1 : (Form) -> Bool)
+      #|  (A1 : (Form) -> Bool)
+      #|  termsubst((k : (Num) -> Term)) == o(termsubst(o(termsubst(k), (j : (Num) -> Term))), termsubst(rename((B : (Form) -> Bool), FVS((A : (Form) -> Bool)))))
+      #|  o(termsubst((k : (Num) -> Term)), (j : (Num) -> Term))
+      #|  (k : (Num) -> Term)
+      #|  instance_of((B' : (Form) -> Bool), (B : (Form) -> Bool))
+      #|  (j : (Num) -> Term)
+      #|  FVS((A : (Form) -> Bool))
+      #|  (B : (Form) -> Bool)
+      #|  (C : (Form) -> Bool) == IMAGE(formsubst(rename((B : (Form) -> Bool), FVS((A : (Form) -> Bool)))), B)
+      #|  (p : Form)
+      #|  resolve((p : Form), (A' : (Form) -> Bool), (B' : (Form) -> Bool))
+      #|  (B' : (Form) -> Bool)
+      #|  (A' : (Form) -> Bool)
+      #|  IMAGE(formsubst(rename((B : (Form) -> Bool), FVS((A : (Form) -> Bool)))), B)
+      #|  (A : (Form) -> Bool)
+      #|  clause((B : (Form) -> Bool))
+      #|  (B : (Form) -> Bool)
+      #|  (B' : (Form) -> Bool)
+      #|  SUBSET((asm : ((Form) -> Bool) -> Bool), {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))})
+      #|  \226\136\131 B : (Form) -> Bool, instance_of((B' : (Form) -> Bool), B) && (IN(B, (hyps : ((Form) -> Bool) -> Bool)) || MEM(B, (lis : List[(Form) -> Bool])))
+      #|  clause((A : (Form) -> Bool)) && (\226\136\128 c : (Form) -> Bool, MEM(c, (lis : List[(Form) -> Bool])) \226\134\146 clause(c))
+      #|  (lis : List[(Form) -> Bool])
+      #|  (A : (Form) -> Bool)
+      #|  (alist : List[(Form) -> Bool])
+      #|  (alist : List[(Form) -> Bool])
+      #|  ALL2(instance_of, CONS((A' : (Form) -> Bool), (lis' : List[(Form) -> Bool])), (alist : List[(Form) -> Bool]))
+      #|  lresproof((hyps : ((Form) -> Bool) -> Bool), (alist : List[(Form) -> Bool]))
+      #|  (B' : (Form) -> Bool)
+      #|  SUBSET((asm : ((Form) -> Bool) -> Bool), {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))})
+      #|  clause((B' : (Form) -> Bool))
+      #|  clause((A' : (Form) -> Bool))
+      #|  (alist : List[(Form) -> Bool])
+      #|  (p : Form)
+      #|  (lis' : List[(Form) -> Bool])
+      #|  (B' : (Form) -> Bool)
+      #|  (A' : (Form) -> Bool)
+      #|  [(cl0 : (Form) -> Bool)]
+      #|  (jj : (Num) -> Term)
+      #|  (cl0 : (Form) -> Bool)
+      #|  (cl : (Form) -> Bool)
+      #|  SUBSET((asm : ((Form) -> Bool) -> Bool), {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))})
+      #|  (cl : (Form) -> Bool)
+      #|  SUBSET((asm : ((Form) -> Bool) -> Bool), {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))})
+      #|  clause((cl : (Form) -> Bool))
+      #|  (cl : (Form) -> Bool)
+      #|  \226\136\128 plis : List[(Form) -> Bool], lpresproof((asm : ((Form) -> Bool) -> Bool), plis) \226\134\146 (\226\136\128 c : (Form) -> Bool, MEM(c, plis) \226\134\146 clause(c)) && (\226\136\131 lis : List[(Form) -> Bool], lresproof((hyps : ((Form) -> Bool) -> Bool), lis) && ALL2(instance_of, plis, lis))
+      #|  formsubst((jj : (Num) -> Term), (p : Form))
+      #|  (jj : (Num) -> Term)
+      #|  instance_of((sos : (Form) -> Bool), LAST(CONS({}, (lis : List[(Form) -> Bool]))))
+      #|  (p : Form)
+      #|  (lis : List[(Form) -> Bool])
+      #|  instance_of({}, (emp : (Form) -> Bool))
+      #|  (emp : (Form) -> Bool) == {}
+      #|  (lis : List[(Form) -> Bool])
+      #|  (emp : (Form) -> Bool)
+      #|  CONS({}, (qlist : List[(Form) -> Bool]))
+      #|  \226\136\128 plis : List[(Form) -> Bool], lpresproof((asm : ((Form) -> Bool) -> Bool), plis) \226\134\146 (\226\136\131 lis : List[(Form) -> Bool], lresproof((hyps : ((Form) -> Bool) -> Bool), lis) && ALL2(instance_of, plis, lis))
+      #|  (qlist : List[(Form) -> Bool])
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
+      #|  (emptyclause : (Form) -> Bool)
+      #|  (sos : (Form) -> Bool)
+      #|  (sos : (Form) -> Bool)
+      #|  (asm : ((Form) -> Bool) -> Bool)
+      #|  {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))}
+      #|  (d : (Form) -> Bool)
+      #|  !psatisfiable({interp((cl : (Form) -> Bool)) | IN(cl, {IMAGE(formsubst(v), cl) | cl : (Form) -> Bool, v : (Num) -> Term | IN(cl, (hyps : ((Form) -> Bool) -> Bool))})})
+      #|  IMAGE(interp, (hyps : ((Form) -> Bool) -> Bool))
+      #|  (\226\136\128 cl : (Form) -> Bool, IN(cl, (hyps : ((Form) -> Bool) -> Bool)) \226\134\146 clause(cl)) && !(\226\136\131 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(IMAGE(interp, hyps)), M) && !(Dom(M) == {}) && satisfies(M, IMAGE(interp, hyps))) \226\134\146 (\226\136\131 lis : List[(Form) -> Bool], lresproof(hyps, CONS({}, lis)) && (\226\136\128 p : Form, IN(p, LAST(CONS({}, lis))) \226\134\146 negative(p)))
+      #|  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 !a \226\134\146 !b
       #|RESOLVE_CLAUSE =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). (#forall:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#clause:fun(fun(form,bool),bool) c1:fun(form,bool))) (#clause:fun(fun(form,bool),bool) c2:fun(form,bool)))) (#clause:fun(fun(form,bool),bool) (((#resolve:fun(form,fun(fun(form,bool),fun(fun(form,bool),fun(form,bool)))) p:form) c1:fun(form,bool)) c2:fun(form,bool))))))))))
       #|PRESPROOF_CLAUSE =  |- (#forall:fun(fun(fun(fun(form,bool),bool),bool),bool) (\hyps:fun(fun(form,bool),bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\cl:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun(form,bool),bool),bool) (\c:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun(form,bool),fun(fun(fun(form,bool),bool),bool)) c:fun(form,bool)) hyps:fun(fun(form,bool),bool))) (#clause:fun(fun(form,bool),bool) c:fun(form,bool)))))) ((#presproof:fun(fun(fun(form,bool),bool),fun(fun(form,bool),bool)) hyps:fun(fun(form,bool),bool)) cl:fun(form,bool)))) (#clause:fun(fun(form,bool),bool) cl:fun(form,bool)))))))
       #|RESOLVE_MONO =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\c1:fun(form,bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\c2:fun(form,bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\c1':fun(form,bool). (#forall:fun(fun(fun(form,bool),bool),bool) (\c2':fun(form,bool). (#forall:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(form,bool),fun(fun(form,bool),bool)) c1:fun(form,bool)) c1':fun(form,bool))) ((#SUBSET:fun(fun(form,bool),fun(fun(form,bool),bool)) c2:fun(form,bool)) c2':fun(form,bool)))) ((#SUBSET:fun(fun(form,bool),fun(fun(form,bool),bool)) (((#resolve:fun(form,fun(fun(form,bool),fun(fun(form,bool),fun(form,bool)))) p:form) c1:fun(form,bool)) c2:fun(form,bool))) (((#resolve:fun(form,fun(fun(form,bool),fun(fun(form,bool),fun(form,bool)))) p:form) c1':fun(form,bool)) c2':fun(form,bool))))))))))))))
