@@ -3,7 +3,7 @@
 ///|
 /// NTRIE
 fn step_1() -> Unit raise {
-  ntrie_c.set(@pair.new_definition(@parser.parse_term("NTRIE s:num->bool = s")))
+  ntrie_c.set(@pair.new_definition(@term_syntax.parse_term("(NTRIE : ((Num) -> Bool, Num) -> Bool)((s : (Num) -> Bool)) == s")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn ntrie() -> @kernel.Thm {
 ///|
 /// NEMPTY
 fn step_2() -> Unit raise {
-  nempty_c.set(@pair.new_definition(@parser.parse_term("NEMPTY:num->bool = {}")))
+  nempty_c.set(@pair.new_definition(@term_syntax.parse_term("(NEMPTY : (Num) -> Bool) == {}")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn nempty() -> @kernel.Thm {
 ///|
 /// NZERO
 fn step_3() -> Unit raise {
-  nzero_c.set(@pair.new_definition(@parser.parse_term("NZERO = {_0}")))
+  nzero_c.set(@pair.new_definition(@term_syntax.parse_term("(NZERO : (Num) -> Bool) == {_0}")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn nzero() -> @kernel.Thm {
 ///|
 /// NNODE
 fn step_4() -> Unit raise {
-  nnode_c.set(@pair.new_definition(@parser.parse_term("NNODE s t = IMAGE BIT0 s UNION IMAGE BIT1 t")))
+  nnode_c.set(@pair.new_definition(@term_syntax.parse_term("(NNODE : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((s : (Num) -> Bool), (t : (Num) -> Bool)) == UNION(IMAGE(BIT0, s), IMAGE(BIT1, t))")))
 }
 
 ///|
@@ -65,7 +65,7 @@ pub fn nnode() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t1 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([nempty(), nzero(), nnode()])), t1)
-  ntrie_relations_c.set(@tactics.prove(@parser.parse_term("NNODE NEMPTY NEMPTY = NEMPTY /\\\n   NNODE NZERO  NEMPTY = NZERO"), t2))
+  ntrie_relations_c.set(@tactics.prove(@term_syntax.parse_term("NNODE(NEMPTY, NEMPTY) == NEMPTY && NNODE(NZERO, NEMPTY) == NZERO"), t2))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn ntrie_relations() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t3 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t3)
-  ntrie_in_c.set(@tactics.prove(@parser.parse_term("(forall s n. NUMERAL n IN NTRIE s <=> n IN s) /\\\n   (forall n. ~(n IN NEMPTY)) /\\\n   (forall n. n IN NZERO <=> n = _0) /\\\n   (forall s t. _0 IN NNODE s t <=> _0 IN s) /\\\n   (forall s t n. BIT0 n IN NNODE s t <=> n IN s) /\\\n   (forall s t n. BIT1 n IN NNODE s t <=> n IN t)"), t4))
+  ntrie_in_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ n : Num, IN(NUMERAL(n), NTRIE(s)) == IN(n, s)) && (∀ n : Num, !IN(n, NEMPTY)) && (∀ n : Num, IN(n, NZERO) == (n == _0)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, IN(_0, NNODE(s, t)) == IN(_0, s)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ n : Num, IN(BIT0(n), NNODE(s, t)) == IN(n, s)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ n : Num, IN(BIT1(n), NNODE(s, t)) == IN(n, t))"), t4))
 }
 
 ///|
@@ -100,7 +100,7 @@ fn step_7() -> Unit raise {
   let t6 = @sets.set_tac(@list.List([]))
   let t5 = @simp.rewrite_tac(@list.List([@sets.in_union(), @sets.in_image(), @sets.in_insert(), @sets.not_in_empty(), @calc_num.arith_eq()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode(), @sets.subset(), @sets.forall_in_union(), @sets.forall_in_image(), @sets.forall_in_insert()])), t5), t6)
-  ntrie_subset_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s SUBSET NTRIE t <=> s SUBSET t) /\\\n   (forall s. NEMPTY SUBSET s) /\\\n   (forall s:num->bool. s SUBSET s) /\\\n   ~(NZERO SUBSET NEMPTY) /\\\n   (forall s t. NNODE s t SUBSET NEMPTY <=> s SUBSET NEMPTY /\\ t SUBSET NEMPTY) /\\\n   (forall s t. NNODE s t SUBSET NZERO <=> s SUBSET NZERO /\\ t SUBSET NEMPTY) /\\\n   (forall s t. NZERO SUBSET NNODE s t <=> NZERO SUBSET s) /\\\n   (forall s1 s2 t1 t2.\n      NNODE s1 t1 SUBSET NNODE s2 t2 <=> s1 SUBSET s2 /\\ t1 SUBSET t2)"), t7))
+  ntrie_subset_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(NTRIE(s), NTRIE(t)) == SUBSET(s, t)) && (∀ s : (Num) -> Bool, SUBSET(NEMPTY, s)) && (∀ s : (Num) -> Bool, SUBSET(s, s)) && !SUBSET(NZERO, NEMPTY) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(NNODE(s, t), NEMPTY) == (SUBSET(s, NEMPTY) && SUBSET(t, NEMPTY))) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(NNODE(s, t), NZERO) == (SUBSET(s, NZERO) && SUBSET(t, NEMPTY))) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, SUBSET(NZERO, NNODE(s, t)) == SUBSET(NZERO, s)) && (∀ s1 : (Num) -> Bool, ∀ s2 : (Num) -> Bool, ∀ t1 : (Num) -> Bool, ∀ t2 : (Num) -> Bool, SUBSET(NNODE(s1, t1), NNODE(s2, t2)) == (SUBSET(s1, s2) && SUBSET(t1, t2)))"), t7))
 }
 
 ///|
@@ -117,7 +117,7 @@ pub fn ntrie_subset() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t8 = @sets.set_tac(@list.List([]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset_antisym_eq()), ntrie_subset(), nempty(), nzero()])), t8)
-  ntrie_eq_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s = NTRIE t <=> s = t) /\\\n   ~(NZERO = NEMPTY) /\\\n   ~(NEMPTY = NZERO) /\\\n   (forall s t. NNODE s t = NEMPTY <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (forall s t. NEMPTY = NNODE s t <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (forall s t. NNODE s t = NZERO <=> s = NZERO /\\ t = NEMPTY) /\\\n   (forall s t. NZERO = NNODE s t <=> s = NZERO /\\ t = NEMPTY) /\\\n   (forall s1 s2 t1 t2. NNODE s1 t1 = NNODE s2 t2 <=> s1 = s2 /\\ t1 = t2)"), t9))
+  ntrie_eq_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (NTRIE(s) == NTRIE(t)) == (s == t)) && !(NZERO == NEMPTY) && !(NEMPTY == NZERO) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (NNODE(s, t) == NEMPTY) == (s == NEMPTY && t == NEMPTY)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (NEMPTY == NNODE(s, t)) == (s == NEMPTY && t == NEMPTY)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (NNODE(s, t) == NZERO) == (s == NZERO && t == NEMPTY)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (NZERO == NNODE(s, t)) == (s == NZERO && t == NEMPTY)) && (∀ s1 : (Num) -> Bool, ∀ s2 : (Num) -> Bool, ∀ t1 : (Num) -> Bool, ∀ t2 : (Num) -> Bool, (NNODE(s1, t1) == NNODE(s2, t2)) == (s1 == s2 && t1 == t2))"), t9))
 }
 
 ///|
@@ -137,7 +137,7 @@ fn step_9() -> Unit raise {
   let t11 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t10 = @tactics.repeat_tac(@tactics.strip_tac)
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t10), t11), t12), t13)
-  ntrie_sing_c.set(@tactics.prove(@parser.parse_term("(forall n. {NUMERAL n} = NTRIE {n}) /\\\n   {_0} = NZERO /\\\n   (forall n. {BIT0 n} = if n = _0 then NZERO else NNODE {n} NEMPTY) /\\\n   (forall n. {BIT1 n} = NNODE NEMPTY {n})"), t14))
+  ntrie_sing_c.set(@tactics.prove(@term_syntax.parse_term("(∀ n : Num, {NUMERAL(n)} == NTRIE({n})) && {_0} == NZERO && (∀ n : Num, {BIT0(n)} == (if n == _0 { NZERO } else { NNODE({n}, NEMPTY) })) && (∀ n : Num, {BIT1(n)} == NNODE(NEMPTY, {n}))"), t14))
 }
 
 ///|
@@ -157,7 +157,7 @@ fn step_10() -> Unit raise {
   let t16 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t15 = @tactics.repeat_tac(@tactics.strip_tac)
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t15), t16), t17), t18)
-  ntrie_insert_c.set(@tactics.prove(@parser.parse_term("(forall s n. NUMERAL n INSERT NTRIE s = NTRIE (n INSERT s)) /\\\n   _0 INSERT NEMPTY = NZERO /\\\n   _0 INSERT NZERO = NZERO /\\\n   (forall s t. _0 INSERT NNODE s t = NNODE (_0 INSERT s) t) /\\\n   (forall n. BIT0 n INSERT NZERO = if n = _0 then NZERO else\n                              NNODE (n INSERT NZERO) NEMPTY) /\\\n   (forall n. BIT1 n INSERT NZERO = NNODE NZERO {n}) /\\\n   (forall s t n. BIT0 n INSERT NNODE s t = NNODE (n INSERT s) t) /\\\n   (forall s t n. BIT1 n INSERT NNODE s t = NNODE s (n INSERT t))"), t19))
+  ntrie_insert_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ n : Num, INSERT(NUMERAL(n), NTRIE(s)) == NTRIE(INSERT(n, s))) && INSERT(_0, NEMPTY) == NZERO && INSERT(_0, NZERO) == NZERO && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, INSERT(_0, NNODE(s, t)) == NNODE(INSERT(_0, s), t)) && (∀ n : Num, INSERT(BIT0(n), NZERO) == (if n == _0 { NZERO } else { NNODE(INSERT(n, NZERO), NEMPTY) })) && (∀ n : Num, INSERT(BIT1(n), NZERO) == NNODE(NZERO, {n})) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ n : Num, INSERT(BIT0(n), NNODE(s, t)) == NNODE(INSERT(n, s), t)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ n : Num, INSERT(BIT1(n), NNODE(s, t)) == NNODE(s, INSERT(n, t)))"), t19))
 }
 
 ///|
@@ -174,7 +174,7 @@ pub fn ntrie_insert() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t20 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t21 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t20)
-  ntrie_union_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s UNION NTRIE t = NTRIE (s UNION t)) /\\\n   (forall s. s UNION NEMPTY = s) /\\\n   (forall s. NEMPTY UNION s = s) /\\\n   NZERO UNION NZERO = NZERO /\\\n   (forall s t. NNODE s t UNION NZERO = NNODE (s UNION NZERO) t) /\\\n   (forall s t. NZERO UNION NNODE s t = NNODE (s UNION NZERO) t) /\\\n   (forall s t r q. NNODE s t UNION NNODE r q = NNODE (s UNION r) (t UNION q))"), t21))
+  ntrie_union_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, UNION(NTRIE(s), NTRIE(t)) == NTRIE(UNION(s, t))) && (∀ s : (Num) -> Bool, UNION(s, NEMPTY) == s) && (∀ s : (Num) -> Bool, UNION(NEMPTY, s) == s) && UNION(NZERO, NZERO) == NZERO && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, UNION(NNODE(s, t), NZERO) == NNODE(UNION(s, NZERO), t)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, UNION(NZERO, NNODE(s, t)) == NNODE(UNION(s, NZERO), t)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ r : (Num) -> Bool, ∀ q : (Num) -> Bool, UNION(NNODE(s, t), NNODE(r, q)) == NNODE(UNION(s, r), UNION(t, q)))"), t21))
 }
 
 ///|
@@ -191,7 +191,7 @@ pub fn ntrie_union() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t22 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t23 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode()])), t22)
-  ntrie_inter_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s INTER NTRIE t = NTRIE (s INTER t)) /\\\n   (forall s. NEMPTY INTER s = NEMPTY) /\\\n   (forall s. s INTER NEMPTY = NEMPTY) /\\\n   NZERO INTER NZERO = NZERO /\\\n   (forall s t. NZERO INTER NNODE s t = NZERO INTER s) /\\\n   (forall s t. NNODE s t INTER NZERO = NZERO INTER s) /\\\n   (forall s1 s2 t1 t2.\n      NNODE s1 t1 INTER NNODE s2 t2 = NNODE (s1 INTER s2) (t1 INTER t2))"), t23))
+  ntrie_inter_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, INTER(NTRIE(s), NTRIE(t)) == NTRIE(INTER(s, t))) && (∀ s : (Num) -> Bool, INTER(NEMPTY, s) == NEMPTY) && (∀ s : (Num) -> Bool, INTER(s, NEMPTY) == NEMPTY) && INTER(NZERO, NZERO) == NZERO && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, INTER(NZERO, NNODE(s, t)) == INTER(NZERO, s)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, INTER(NNODE(s, t), NZERO) == INTER(NZERO, s)) && (∀ s1 : (Num) -> Bool, ∀ s2 : (Num) -> Bool, ∀ t1 : (Num) -> Bool, ∀ t2 : (Num) -> Bool, INTER(NNODE(s1, t1), NNODE(s2, t2)) == NNODE(INTER(s1, s2), INTER(t1, t2)))"), t23))
 }
 
 ///|
@@ -211,7 +211,7 @@ fn step_13() -> Unit raise {
   let t25 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t24 = @tactics.repeat_tac(@tactics.strip_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t24), t25), t26), t27)
-  ntrie_delete_c.set(@tactics.prove(@parser.parse_term("(forall s n. NTRIE s DELETE NUMERAL n = NTRIE (s DELETE n)) /\\\n   (forall n. NEMPTY DELETE n = NEMPTY) /\\\n   (forall n. NZERO DELETE n = if n = _0 then NEMPTY else NZERO) /\\\n   (forall s t. NNODE s t DELETE _0 = NNODE (s DELETE _0) t) /\\\n   (forall s t n. NNODE s t DELETE BIT0 n = NNODE (s DELETE n) t) /\\\n   (forall s t n. NNODE s t DELETE BIT1 n = NNODE s (t DELETE n))"), t28))
+  ntrie_delete_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ n : Num, DELETE(NTRIE(s), NUMERAL(n)) == NTRIE(DELETE(s, n))) && (∀ n : Num, DELETE(NEMPTY, n) == NEMPTY) && (∀ n : Num, DELETE(NZERO, n) == (if n == _0 { NEMPTY } else { NZERO })) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DELETE(NNODE(s, t), _0) == NNODE(DELETE(s, _0), t)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ n : Num, DELETE(NNODE(s, t), BIT0(n)) == NNODE(DELETE(s, n), t)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, ∀ n : Num, DELETE(NNODE(s, t), BIT1(n)) == NNODE(s, DELETE(t, n)))"), t28))
 }
 
 ///|
@@ -227,7 +227,7 @@ pub fn ntrie_delete() -> @kernel.Thm {
 /// NTRIE_DISJOINT
 fn step_14() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([ntrie(), @sets.disjoint(), @equal.gsym(nempty()), ntrie_inter(), @sets.inter_aci(), ntrie_eq()]))
-  ntrie_disjoint_c.set(@tactics.prove(@parser.parse_term("(forall s t. DISJOINT (NTRIE s) (NTRIE t) <=> DISJOINT s t) /\\\n   (forall s. DISJOINT s NEMPTY) /\\\n   (forall s. DISJOINT NEMPTY s) /\\\n   ~DISJOINT NZERO NZERO /\\\n   (forall s t. DISJOINT NZERO (NNODE s t) <=> DISJOINT s NZERO) /\\\n   (forall s t. DISJOINT (NNODE s t) NZERO <=> DISJOINT s NZERO) /\\\n   (forall s1 s2 t1 t2. DISJOINT (NNODE s1 t1) (NNODE s2 t2) <=>\n                  DISJOINT s1 s2 /\\ DISJOINT t1 t2)"), t29))
+  ntrie_disjoint_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DISJOINT(NTRIE(s), NTRIE(t)) == DISJOINT(s, t)) && (∀ s : (Num) -> Bool, DISJOINT(s, NEMPTY)) && (∀ s : (Num) -> Bool, DISJOINT(NEMPTY, s)) && !DISJOINT(NZERO, NZERO) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DISJOINT(NZERO, NNODE(s, t)) == DISJOINT(s, NZERO)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DISJOINT(NNODE(s, t), NZERO) == DISJOINT(s, NZERO)) && (∀ s1 : (Num) -> Bool, ∀ s2 : (Num) -> Bool, ∀ t1 : (Num) -> Bool, ∀ t2 : (Num) -> Bool, DISJOINT(NNODE(s1, t1), NNODE(s2, t2)) == (DISJOINT(s1, s2) && DISJOINT(t1, t2)))"), t29))
 }
 
 ///|
@@ -244,7 +244,7 @@ pub fn ntrie_disjoint() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t30 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode()])), t30)
-  ntrie_diff_c.set(@tactics.prove(@parser.parse_term("(forall s t. NTRIE s DIFF NTRIE t = NTRIE (s DIFF t)) /\\\n   (forall s. NEMPTY DIFF s = NEMPTY) /\\\n   (forall s. s DIFF NEMPTY = s) /\\\n   NZERO DIFF NZERO = NEMPTY /\\\n   (forall s t. NZERO DIFF NNODE s t = NZERO DIFF s) /\\\n   (forall s t. NNODE s t DIFF NZERO = NNODE (s DIFF NZERO) t) /\\\n   (forall s1 t1 s2 t2. NNODE s1 t1 DIFF NNODE s2 t2 =\n                  NNODE (s1 DIFF s2) (t1 DIFF t2))"), t31))
+  ntrie_diff_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DIFF(NTRIE(s), NTRIE(t)) == NTRIE(DIFF(s, t))) && (∀ s : (Num) -> Bool, DIFF(NEMPTY, s) == NEMPTY) && (∀ s : (Num) -> Bool, DIFF(s, NEMPTY) == s) && DIFF(NZERO, NZERO) == NEMPTY && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DIFF(NZERO, NNODE(s, t)) == DIFF(NZERO, s)) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, DIFF(NNODE(s, t), NZERO) == NNODE(DIFF(s, NZERO), t)) && (∀ s1 : (Num) -> Bool, ∀ t1 : (Num) -> Bool, ∀ s2 : (Num) -> Bool, ∀ t2 : (Num) -> Bool, DIFF(NNODE(s1, t1), NNODE(s2, t2)) == NNODE(DIFF(s1, s2), DIFF(t1, t2)))"), t31))
 }
 
 ///|
@@ -259,7 +259,7 @@ pub fn ntrie_diff() -> @kernel.Thm {
 ///|
 /// NTRIE_IMAGE_DEF
 fn step_16() -> Unit raise {
-  ntrie_image_def_c.set(@pair.new_definition(@parser.parse_term("forall f:num->A acc s. NTRIE_IMAGE f acc s = IMAGE f s UNION acc")))
+  ntrie_image_def_c.set(@pair.new_definition(@term_syntax.parse_term("∀ f : (Num) -> A, ∀ acc : (A) -> Bool, ∀ s : (Num) -> Bool, (NTRIE_IMAGE : ((Num) -> A, (A) -> Bool, (Num) -> Bool, A) -> Bool)(f, acc, s) == UNION(IMAGE(f, s), acc)")))
 }
 
 ///|
@@ -276,7 +276,7 @@ pub fn ntrie_image_def() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t32 = @sets.set_tac(@list.List([]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode(), ntrie_image_def()])), t32)
-  ntrie_image_c.set(@tactics.prove(@parser.parse_term("(forall f:num->A acc. NTRIE_IMAGE f acc NEMPTY = acc) /\\\n   (forall f:num->A acc. NTRIE_IMAGE f acc NZERO = f _0 INSERT acc) /\\\n   (forall f:num->A acc s t.\n      NTRIE_IMAGE f acc (NNODE s t) =\n      NTRIE_IMAGE (\\n. f (BIT1 n)) (NTRIE_IMAGE (\\n. f (BIT0 n)) acc s) t)"), t33))
+  ntrie_image_c.set(@tactics.prove(@term_syntax.parse_term("(∀ f : (Num) -> A, ∀ acc : (A) -> Bool, NTRIE_IMAGE(f, acc, NEMPTY) == acc) && (∀ f : (Num) -> A, ∀ acc : (A) -> Bool, NTRIE_IMAGE(f, acc, NZERO) == INSERT(f(_0), acc)) && (∀ f : (Num) -> A, ∀ acc : (A) -> Bool, ∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, NTRIE_IMAGE(f, acc, NNODE(s, t)) == NTRIE_IMAGE((n : Num) => f(BIT1(n)), NTRIE_IMAGE((n : Num) => f(BIT0(n)), acc, s), t))"), t33))
 }
 
 ///|
@@ -292,7 +292,7 @@ pub fn ntrie_image() -> @kernel.Thm {
 /// IMAGE_EQ_NTRIE_IMAGE
 fn step_18() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), @class.eta_ax(), ntrie_image_def(), @sets.union_empty()]))
-  image_eq_ntrie_image_c.set(@tactics.prove(@parser.parse_term("forall f:num->A s. IMAGE f (NTRIE s) = NTRIE_IMAGE (\\n. f (NUMERAL n)) {} s"), t34))
+  image_eq_ntrie_image_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> A, ∀ s : (Num) -> Bool, IMAGE(f, NTRIE(s)) == NTRIE_IMAGE((n : Num) => f(NUMERAL(n)), {}, s)"), t34))
 }
 
 ///|
@@ -815,7 +815,7 @@ pub fn ntrie_ty() -> @kernel.HolType {
 ///|
 /// neg_tm
 fn step_33() -> Unit raise {
-  neg_tm_c.set(@parser.parse_term("(~)"))
+  neg_tm_c.set(@term_syntax.parse_term("op_tilde"))
 }
 
 ///|
@@ -830,7 +830,7 @@ pub fn neg_tm() -> @kernel.Term {
 ///|
 /// eq_tm
 fn step_34() -> Unit raise {
-  eq_tm_c.set(@parser.parse_term("(=):(num->bool)->(num->bool)->bool"))
+  eq_tm_c.set(@term_syntax.parse_term("(op_eq : ((Num) -> Bool, (Num) -> Bool) -> Bool)"))
 }
 
 ///|
@@ -845,7 +845,7 @@ pub fn eq_tm() -> @kernel.Term {
 ///|
 /// iff_tm
 fn step_35() -> Unit raise {
-  iff_tm_c.set(@parser.parse_term("(=):bool->bool->bool"))
+  iff_tm_c.set(@term_syntax.parse_term("(op_eq : (Bool, Bool) -> Bool)"))
 }
 
 ///|
@@ -860,7 +860,7 @@ pub fn iff_tm() -> @kernel.Term {
 ///|
 /// conj_tm
 fn step_36() -> Unit raise {
-  conj_tm_c.set(@parser.parse_term("(/\\):bool->bool->bool"))
+  conj_tm_c.set(@term_syntax.parse_term("op_slash_bslash"))
 }
 
 ///|
@@ -875,7 +875,7 @@ pub fn conj_tm() -> @kernel.Term {
 ///|
 /// IN_tm
 fn step_37() -> Unit raise {
-  in_tm_c.set(@parser.parse_term("(IN):num->(num->bool)->bool"))
+  in_tm_c.set(@term_syntax.parse_term("(IN : (Num, (Num) -> Bool) -> Bool)"))
 }
 
 ///|
@@ -890,7 +890,7 @@ pub fn in_tm() -> @kernel.Term {
 ///|
 /// EMPTY_tm
 fn step_38() -> Unit raise {
-  empty_tm_c.set(@parser.parse_term("{}:num->bool"))
+  empty_tm_c.set(@term_syntax.parse_term("({} : (Num) -> Bool)"))
 }
 
 ///|
@@ -905,7 +905,7 @@ pub fn empty_tm() -> @kernel.Term {
 ///|
 /// SUBSET_tm
 fn step_39() -> Unit raise {
-  subset_tm_c.set(@parser.parse_term("(SUBSET):(num->bool)->(num->bool)->bool"))
+  subset_tm_c.set(@term_syntax.parse_term("(SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)"))
 }
 
 ///|
@@ -920,7 +920,7 @@ pub fn subset_tm() -> @kernel.Term {
 ///|
 /// PSUBSET_tm
 fn step_40() -> Unit raise {
-  psubset_tm_c.set(@parser.parse_term("(PSUBSET):(num->bool)->(num->bool)->bool"))
+  psubset_tm_c.set(@term_syntax.parse_term("(PSUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)"))
 }
 
 ///|
@@ -935,7 +935,7 @@ pub fn psubset_tm() -> @kernel.Term {
 ///|
 /// DISJOINT_tm
 fn step_41() -> Unit raise {
-  disjoint_tm_c.set(@parser.parse_term("(DISJOINT):(num->bool)->(num->bool)->bool"))
+  disjoint_tm_c.set(@term_syntax.parse_term("(DISJOINT : ((Num) -> Bool, (Num) -> Bool) -> Bool)"))
 }
 
 ///|
@@ -950,7 +950,7 @@ pub fn disjoint_tm() -> @kernel.Term {
 ///|
 /// INSERT_tm
 fn step_42() -> Unit raise {
-  insert_tm_c.set(@parser.parse_term("(INSERT):num->(num->bool)->(num->bool)"))
+  insert_tm_c.set(@term_syntax.parse_term("(INSERT : (Num, (Num) -> Bool, Num) -> Bool)"))
 }
 
 ///|
@@ -965,7 +965,7 @@ pub fn insert_tm() -> @kernel.Term {
 ///|
 /// UNION_tm
 fn step_43() -> Unit raise {
-  union_tm_c.set(@parser.parse_term("(UNION):(num->bool)->(num->bool)->(num->bool)"))
+  union_tm_c.set(@term_syntax.parse_term("(UNION : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)"))
 }
 
 ///|
@@ -980,7 +980,7 @@ pub fn union_tm() -> @kernel.Term {
 ///|
 /// INTER_tm
 fn step_44() -> Unit raise {
-  inter_tm_c.set(@parser.parse_term("(INTER):(num->bool)->(num->bool)->(num->bool)"))
+  inter_tm_c.set(@term_syntax.parse_term("(INTER : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)"))
 }
 
 ///|
@@ -995,7 +995,7 @@ pub fn inter_tm() -> @kernel.Term {
 ///|
 /// DELETE_tm
 fn step_45() -> Unit raise {
-  delete_tm_c.set(@parser.parse_term("(DELETE):(num->bool)->num->(num->bool)"))
+  delete_tm_c.set(@term_syntax.parse_term("(DELETE : ((Num) -> Bool, Num, Num) -> Bool)"))
 }
 
 ///|
@@ -1010,7 +1010,7 @@ pub fn delete_tm() -> @kernel.Term {
 ///|
 /// DIFF_tm
 fn step_46() -> Unit raise {
-  diff_tm_c.set(@parser.parse_term("(DIFF):(num->bool)->(num->bool)->(num->bool)"))
+  diff_tm_c.set(@term_syntax.parse_term("(DIFF : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)"))
 }
 
 ///|
@@ -1099,7 +1099,7 @@ fn step_47() -> Unit raise {
 ///|
 /// nvar
 fn step_48() -> Unit raise {
-  nvar_c.set(@parser.parse_term("n:num"))
+  nvar_c.set(@term_syntax.parse_term("(n : Num)"))
 }
 
 ///|
@@ -1221,7 +1221,7 @@ pub fn ntrie_in_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// NUM_NZ_RULE, NTRIE_ZERO_IN_RULE, NTRIE_CHOOSE_RULE, NTRIE_IN_CONV
 fn step_51() -> Unit raise {
   let t124 = @simp.rewrite_tac(@list.List([@calc_num.arith_eq()]))
-  let t125 = (@parser.parse_term("~(BIT1 n = _0) /\\\n       (~(n = _0) <=> ~(BIT0 n = _0))"), t124)
+  let t125 = (@term_syntax.parse_term("!(BIT1((n : Num)) == _0) && !(n == _0) == !(BIT0(n) == _0)"), t124)
   let (pth1, pth2) = (fn(x122 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
     @bool.conj_pair(standardize(x122))
   })((fn(x123 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1239,7 +1239,7 @@ fn step_51() -> Unit raise {
     }
   }
   let t129 = @simp.rewrite_tac(@list.List([ntrie_in(), @calc_num.arith_eq()]))
-  let t130 = (@parser.parse_term("~(_0 IN NEMPTY) /\\\n      _0 IN NZERO /\\\n      ~(n IN NEMPTY) /\\\n      (_0 IN s <=> _0 IN NNODE s t) /\\\n      (n IN s <=> BIT0 n IN NNODE s t) /\\\n      (n IN t <=> BIT1 n IN NNODE s t) /\\\n      ~(BIT1 n IN NZERO) /\\\n      (~(n = _0) <=> ~(BIT0 n IN NZERO))"), t129)
+  let t130 = (@term_syntax.parse_term("!IN(_0, NEMPTY) && IN(_0, NZERO) && !IN((n : Num), NEMPTY) && IN(_0, (s : (Num) -> Bool)) == IN(_0, NNODE(s, (t : (Num) -> Bool))) && IN(n, s) == IN(BIT0(n), NNODE(s, t)) && IN(n, t) == IN(BIT1(n), NNODE(s, t)) && !IN(BIT1(n), NZERO) && !(n == _0) == !IN(BIT0(n), NZERO)"), t129)
   let (num_nz_rule_1, ntrie_zero_in_rule_1, ntrie_choose_rule_1, ntrie_in_conv_2) = match (fn(x127 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x127))
   })((fn(x128 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1320,7 +1320,7 @@ fn step_51() -> Unit raise {
             }
           }
           let t137 = @simp.rewrite_tac(@list.List([@nums.numeral(), ntrie()]))
-          let t138 = (@parser.parse_term("(n IN s <=> (NUMERAL n IN NTRIE s <=> T)) /\\\n          (~(n IN s) <=> (NUMERAL n IN NTRIE s <=> F))"), t137)
+          let t138 = (@term_syntax.parse_term("IN((n : Num), (s : (Num) -> Bool)) == (IN(NUMERAL(n), NTRIE(s)) == true) && !IN(n, s) == (IN(NUMERAL(n), NTRIE(s)) == false)"), t137)
           let (pth1_1, pth2_1) = (fn(x135 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
             @bool.conj_pair(standardize(x135))
           })((fn(x136 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1360,7 +1360,7 @@ fn step_52() -> Unit raise {
   let t143 = @sets.set_tac(@list.List([]))
   let t142 = @simp.rewrite_tac(@list.List([nempty()]))
   let t144 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([ntrie_subset()])), t142), t143)
-  let t145 = (@parser.parse_term("s SUBSET s /\\\n     NEMPTY SUBSET NEMPTY /\\\n     NZERO SUBSET NZERO /\\\n     NEMPTY SUBSET NZERO /\\\n     NEMPTY SUBSET t /\\\n     ~(NZERO SUBSET NEMPTY) /\\\n     (n IN s ==> ~(s SUBSET NEMPTY)) /\\\n     (NZERO SUBSET s <=> NZERO SUBSET NNODE s t) /\\\n     (~(NZERO SUBSET s) <=> ~(NZERO SUBSET NNODE s t)) /\\\n     (s SUBSET NZERO <=> NNODE s NEMPTY SUBSET NZERO) /\\\n     (~(s SUBSET NZERO) <=> ~(NNODE s NEMPTY SUBSET NZERO)) /\\\n     (n IN t ==> ~(NNODE s t SUBSET NZERO)) /\\\n     (s1 SUBSET s2 /\\ t1 SUBSET t2 <=> NNODE s1 t1 SUBSET NNODE s2 t2) /\\\n     (~(s1 SUBSET s2) ==> ~(NNODE s1 t1 SUBSET NNODE s2 t2)) /\\\n     (~(t1 SUBSET t2) ==> ~(NNODE s1 t1 SUBSET NNODE s2 t2))"), t144)
+  let t145 = (@term_syntax.parse_term("SUBSET((s : (Num) -> Bool), s) && SUBSET(NEMPTY, NEMPTY) && SUBSET(NZERO, NZERO) && SUBSET(NEMPTY, NZERO) && SUBSET(NEMPTY, (t : (Num) -> Bool)) && !SUBSET(NZERO, NEMPTY) && (IN((n : Num), s) → !SUBSET(s, NEMPTY)) && SUBSET(NZERO, s) == SUBSET(NZERO, NNODE(s, t)) && !SUBSET(NZERO, s) == !SUBSET(NZERO, NNODE(s, t)) && SUBSET(s, NZERO) == SUBSET(NNODE(s, NEMPTY), NZERO) && !SUBSET(s, NZERO) == !SUBSET(NNODE(s, NEMPTY), NZERO) && (IN(n, t) → !SUBSET(NNODE(s, t), NZERO)) && (SUBSET((s1 : (Num) -> Bool), (s2 : (Num) -> Bool)) && SUBSET((t1 : (Num) -> Bool), (t2 : (Num) -> Bool))) == SUBSET(NNODE(s1, t1), NNODE(s2, t2)) && (!SUBSET(s1, s2) → !SUBSET(NNODE(s1, t1), NNODE(s2, t2))) && (!SUBSET(t1, t2) → !SUBSET(NNODE(s1, t1), NNODE(s2, t2)))"), t144)
   ntrie_subset_conv_c.set(match (fn(x140 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x140))
   })((fn(x141 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1438,7 +1438,7 @@ fn step_52() -> Unit raise {
         }
       }
       let t153 = @simp.rewrite_tac(@list.List([ntrie()]))
-      let t154 = (@parser.parse_term("(s SUBSET t <=> (NTRIE s SUBSET NTRIE t <=> T)) /\\\n       (~(s SUBSET t) <=> (NTRIE s SUBSET NTRIE t <=> F))"), t153)
+      let t154 = (@term_syntax.parse_term("SUBSET((s : (Num) -> Bool), (t : (Num) -> Bool)) == (SUBSET(NTRIE(s), NTRIE(t)) == true) && !SUBSET(s, t) == (SUBSET(NTRIE(s), NTRIE(t)) == false)"), t153)
       let (pth_sub_eqt, pth_sub_eqf) = (fn(x151 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
         @bool.conj_pair(standardize(x151))
       })((fn(x152 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1478,7 +1478,7 @@ pub fn ntrie_subset_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_53() -> Unit raise {
   let t158 = @sets.set_tac(@list.List([nempty(), nzero()]))
   let t159 = @tactics.then_tac(@simp.simp_tac(@list.List([ntrie_eq()])), t158)
-  let t160 = (@parser.parse_term("s = s /\\\n     NEMPTY = NEMPTY /\\\n     NZERO = NZERO /\\\n     ~(NEMPTY = NZERO) /\\\n     ~(NZERO = NEMPTY) /\\\n     (n IN s ==> ~(s = NEMPTY)) /\\\n     (n IN t ==> ~(NEMPTY = t)) /\\\n     (~(n = _0) ==> n IN s ==> ~(s = NZERO)) /\\\n     (~(n = _0) ==> n IN t ==> ~(NZERO = t)) /\\\n     (s1 = s2 /\\ t1 = t2 <=> NNODE s1 t1 = NNODE s2 t2) /\\\n     (~(s1 = s2) ==> ~(NNODE s1 t1 = NNODE s2 t2)) /\\\n     (~(t1 = t2) ==> ~(NNODE s1 t1 = NNODE s2 t2))"), t159)
+  let t160 = (@term_syntax.parse_term("(s : (Num) -> Bool) == s && NEMPTY == NEMPTY && NZERO == NZERO && !(NEMPTY == NZERO) && !(NZERO == NEMPTY) && (IN((n : Num), s) → !(s == NEMPTY)) && (IN(n, (t : (Num) -> Bool)) → !(NEMPTY == t)) && (!(n == _0) → IN(n, s) → !(s == NZERO)) && (!(n == _0) → IN(n, t) → !(NZERO == t)) && ((s1 : (Num) -> Bool) == (s2 : (Num) -> Bool) && (t1 : (Num) -> Bool) == (t2 : (Num) -> Bool)) == (NNODE(s1, t1) == NNODE(s2, t2)) && (!(s1 == s2) → !(NNODE(s1, t1) == NNODE(s2, t2))) && (!(t1 == t2) → !(NNODE(s1, t1) == NNODE(s2, t2)))"), t159)
   ntrie_eq_conv_c.set(match (fn(x156 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x156))
   })((fn(x157 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1536,7 +1536,7 @@ fn step_53() -> Unit raise {
         }
       }
       let t165 = @simp.rewrite_tac(@list.List([ntrie()]))
-      let t166 = (@parser.parse_term("(s = t <=> (NTRIE s = NTRIE t <=> T)) /\\\n     (~(s = t) <=> (NTRIE s = NTRIE t <=> F))"), t165)
+      let t166 = (@term_syntax.parse_term("((s : (Num) -> Bool) == (t : (Num) -> Bool)) == ((NTRIE(s) == NTRIE(t)) == true) && !(s == t) == ((NTRIE(s) == NTRIE(t)) == false)"), t165)
       let (pth1, pth2) = (fn(x163 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
         @bool.conj_pair(standardize(x163))
       })((fn(x164 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1594,7 +1594,7 @@ fn step_54() -> Unit raise {
   let t171 = @meson.meson_tac(@list.List([nzero()]))
   let t170 = @simp.asm_rewrite_tac(@list.List([ntrie_eq()]))
   let t172 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_sing(), ntrie(), ntrie_eq()])), @class.cond_cases_tac), t170), t171)
-  let t173 = (@parser.parse_term("({n} = s <=> ({NUMERAL n} = NTRIE s)) /\\\n     ({_0} = NZERO) /\\\n     ({n} = s ==> {BIT0 n} = NNODE s NEMPTY) /\\\n     ({n} = s <=> {BIT1 n} = NNODE NEMPTY s)"), t172)
+  let t173 = (@term_syntax.parse_term("({(n : Num)} == (s : (Num) -> Bool)) == ({NUMERAL(n)} == NTRIE(s)) && {_0} == NZERO && ({n} == s → {BIT0(n)} == NNODE(s, NEMPTY)) && ({n} == s) == ({BIT1(n)} == NNODE(NEMPTY, s))"), t172)
   let (ntrie_sing_rule_1, ntrie_sing_conv_1) = match (fn(x168 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x168))
   })((fn(x169 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1663,7 +1663,7 @@ fn step_55() -> Unit raise {
   let t179 = @simp.asm_rewrite_tac(@list.List([ntrie_insert(), ntrie_eq()]))
   let t178 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t181 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_insert(), ntrie_eq()])), t178), t179), t180)
-  let t182 = (@parser.parse_term("(n INSERT s = t <=> NUMERAL n INSERT NTRIE s = NTRIE t) /\\\n     ({n} = s <=> n INSERT NEMPTY = s) /\\\n     (_0 INSERT NEMPTY = NZERO) /\\\n     (_0 INSERT NZERO = NZERO) /\\\n     (_0 INSERT s = s1 <=> _0 INSERT NNODE s t = NNODE s1 t) /\\\n     (n INSERT NZERO = t <=> BIT0 n INSERT NZERO = NNODE t NEMPTY) /\\\n     ({n} = t <=> BIT1 n INSERT NZERO = NNODE NZERO t) /\\\n     (n INSERT s = s1 <=> BIT0 n INSERT NNODE s t = NNODE s1 t) /\\\n     (n INSERT t = t1 <=> BIT1 n INSERT NNODE s t = NNODE s t1)"), t181)
+  let t182 = (@term_syntax.parse_term("(INSERT((n : Num), (s : (Num) -> Bool)) == (t : (Num) -> Bool)) == (INSERT(NUMERAL(n), NTRIE(s)) == NTRIE(t)) && ({n} == s) == (INSERT(n, NEMPTY) == s) && INSERT(_0, NEMPTY) == NZERO && INSERT(_0, NZERO) == NZERO && (INSERT(_0, s) == (s1 : (Num) -> Bool)) == (INSERT(_0, NNODE(s, t)) == NNODE(s1, t)) && (INSERT(n, NZERO) == t) == (INSERT(BIT0(n), NZERO) == NNODE(t, NEMPTY)) && ({n} == t) == (INSERT(BIT1(n), NZERO) == NNODE(NZERO, t)) && (INSERT(n, s) == s1) == (INSERT(BIT0(n), NNODE(s, t)) == NNODE(s1, t)) && (INSERT(n, t) == (t1 : (Num) -> Bool)) == (INSERT(BIT1(n), NNODE(s, t)) == NNODE(s, t1))"), t181)
   let (ntrie_insert_rule_1, ntrie_insert_conv_1) = match (fn(x176 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x176))
   })((fn(x177 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1739,7 +1739,7 @@ fn step_56() -> Unit raise {
   let t188 = @tactics.repeat_tac(@tactics.first_x_assum(@tactics.subst_var_tac))
   let t187 = @tactics.try_tac(@tactics.eq_tac)
   let t190 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t187), t188), t189)
-  let t191 = (@parser.parse_term("(s1 UNION s2 = s <=> NTRIE s1 UNION NTRIE s2 = NTRIE s) /\\\n     NEMPTY UNION NEMPTY = NEMPTY /\\\n     NEMPTY UNION NZERO = NZERO /\\\n     NZERO UNION NEMPTY = NZERO /\\\n     NZERO UNION NZERO = NZERO /\\\n     (s UNION NEMPTY = s) /\\\n     (NEMPTY UNION t = t) /\\\n     (s UNION NZERO = s1 <=> NNODE s t UNION NZERO = NNODE s1 t) /\\\n     (s UNION NZERO = s1 <=> NZERO UNION NNODE s t = NNODE s1 t) /\\\n     (s1 UNION s2 = s /\\ t1 UNION t2 = t <=>\n      NNODE s1 t1 UNION NNODE s2 t2 = NNODE s t)"), t190)
+  let t191 = (@term_syntax.parse_term("(UNION((s1 : (Num) -> Bool), (s2 : (Num) -> Bool)) == (s : (Num) -> Bool)) == (UNION(NTRIE(s1), NTRIE(s2)) == NTRIE(s)) && UNION(NEMPTY, NEMPTY) == NEMPTY && UNION(NEMPTY, NZERO) == NZERO && UNION(NZERO, NEMPTY) == NZERO && UNION(NZERO, NZERO) == NZERO && UNION(s, NEMPTY) == s && UNION(NEMPTY, (t : (Num) -> Bool)) == t && (UNION(s, NZERO) == s1) == (UNION(NNODE(s, t), NZERO) == NNODE(s1, t)) && (UNION(s, NZERO) == s1) == (UNION(NZERO, NNODE(s, t)) == NNODE(s1, t)) && (UNION(s1, s2) == s && UNION((t1 : (Num) -> Bool), (t2 : (Num) -> Bool)) == t) == (UNION(NNODE(s1, t1), NNODE(s2, t2)) == NNODE(s, t))"), t190)
   ntrie_union_conv_c.set(match (fn(x185 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x185))
   })((fn(x186 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1830,7 +1830,7 @@ fn ntrie_nzero_union_nnode_l(pth2 : @kernel.Thm, pth4 : @kernel.Thm, pth7 : @ker
 /// MK_NNODE_RULE
 fn step_57() -> Unit raise {
   let t201 = @simp.rewrite_tac(@list.List([ntrie_eq()]))
-  let t202 = (@parser.parse_term("NNODE NEMPTY NEMPTY = NEMPTY  /\\\n     NNODE NZERO NEMPTY = NZERO"), t201)
+  let t202 = (@term_syntax.parse_term("NNODE(NEMPTY, NEMPTY) == NEMPTY && NNODE(NZERO, NEMPTY) == NZERO"), t201)
   let (pth0, pth1) = (fn(x199 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
     @bool.conj_pair(standardize(x199))
   })((fn(x200 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1859,7 +1859,7 @@ pub fn mk_nnode_rule(x : (@kernel.Term, @kernel.Term)) -> @kernel.Thm raise {
 fn step_58() -> Unit raise {
   let t206 = @sets.set_tac(@list.List([]))
   let t207 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_inter(), ntrie_eq(), ntrie(), nzero(), nempty()])), t206)
-  let t208 = (@parser.parse_term("(s1 INTER s2 = s <=> NTRIE s1 INTER NTRIE s2 = NTRIE s) /\\\n     NEMPTY INTER NEMPTY = NEMPTY /\\\n     NEMPTY INTER NZERO = NEMPTY /\\\n     NZERO INTER NEMPTY = NEMPTY /\\\n     s INTER NEMPTY = NEMPTY /\\\n     NEMPTY INTER t = NEMPTY /\\\n     NZERO INTER NZERO = NZERO /\\\n     (s INTER NZERO = s1 <=> NNODE s t INTER NZERO = s1) /\\\n     (s INTER NZERO = s1 <=> NZERO INTER NNODE s t = s1) /\\\n     (_0 IN t <=> NZERO INTER t = NZERO) /\\\n     (~(_0 IN t) <=> NZERO INTER t = NEMPTY) /\\\n     (s1 INTER s2 = s /\\ t1 INTER t2 = t <=>\n      NNODE s1 t1 INTER NNODE s2 t2 = NNODE s t)"), t207)
+  let t208 = (@term_syntax.parse_term("(INTER((s1 : (Num) -> Bool), (s2 : (Num) -> Bool)) == (s : (Num) -> Bool)) == (INTER(NTRIE(s1), NTRIE(s2)) == NTRIE(s)) && INTER(NEMPTY, NEMPTY) == NEMPTY && INTER(NEMPTY, NZERO) == NEMPTY && INTER(NZERO, NEMPTY) == NEMPTY && INTER(s, NEMPTY) == NEMPTY && INTER(NEMPTY, (t : (Num) -> Bool)) == NEMPTY && INTER(NZERO, NZERO) == NZERO && (INTER(s, NZERO) == s1) == (INTER(NNODE(s, t), NZERO) == s1) && (INTER(s, NZERO) == s1) == (INTER(NZERO, NNODE(s, t)) == s1) && IN(_0, t) == (INTER(NZERO, t) == NZERO) && !IN(_0, t) == (INTER(NZERO, t) == NEMPTY) && (INTER(s1, s2) == s && INTER((t1 : (Num) -> Bool), (t2 : (Num) -> Bool)) == t) == (INTER(NNODE(s1, t1), NNODE(s2, t2)) == NNODE(s, t))"), t207)
   ntrie_inter_conv_c.set(match (fn(x204 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x204))
   })((fn(x205 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -1993,7 +1993,7 @@ pub fn ntrie_delete_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_59() -> Unit raise {
   let t218 = @meson.meson_tac(@list.List([ntrie_eq(), ntrie_delete()]))
   let t219 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_delete(), @calc_num.arith_eq(), ntrie()])), t218)
-  let t220 = (@parser.parse_term("(s DELETE n = t <=> NTRIE s DELETE NUMERAL n = NTRIE t) /\\\n     NEMPTY DELETE _0 = NEMPTY /\\\n     NEMPTY DELETE n = NEMPTY /\\\n     NZERO DELETE _0 = NEMPTY /\\\n     (~(n = _0) <=> NZERO DELETE BIT0 n = NZERO) /\\\n     NZERO DELETE BIT1 n = NZERO /\\\n     (s DELETE _0 = s1 <=> NNODE s t DELETE _0 = NNODE s1 t) /\\\n     (s DELETE n = s1 <=> NNODE s t DELETE BIT0 n = NNODE s1 t) /\\\n     (t DELETE n = t1 <=> NNODE s t DELETE BIT1 n = NNODE s t1)"), t219)
+  let t220 = (@term_syntax.parse_term("(DELETE((s : (Num) -> Bool), (n : Num)) == (t : (Num) -> Bool)) == (DELETE(NTRIE(s), NUMERAL(n)) == NTRIE(t)) && DELETE(NEMPTY, _0) == NEMPTY && DELETE(NEMPTY, n) == NEMPTY && DELETE(NZERO, _0) == NEMPTY && !(n == _0) == (DELETE(NZERO, BIT0(n)) == NZERO) && DELETE(NZERO, BIT1(n)) == NZERO && (DELETE(s, _0) == (s1 : (Num) -> Bool)) == (DELETE(NNODE(s, t), _0) == NNODE(s1, t)) && (DELETE(s, n) == s1) == (DELETE(NNODE(s, t), BIT0(n)) == NNODE(s1, t)) && (DELETE(t, n) == (t1 : (Num) -> Bool)) == (DELETE(NNODE(s, t), BIT1(n)) == NNODE(s, t1))"), t219)
   let (ntrie_delete_zero_1, ntrie_nnode_delete_zero_1, ntrie_delete_conv_1) = match (fn(x216 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x216))
   })((fn(x217 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -2088,7 +2088,7 @@ fn step_60() -> Unit raise {
   let t230 = @sets.set_tac(@list.List([]))
   let t229 = @simp.rewrite_tac(@list.List([nzero()]))
   let t231 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([ntrie_disjoint()])), t229), t230)
-  let t232 = (@parser.parse_term("DISJOINT NEMPTY NEMPTY /\\\n     DISJOINT NEMPTY NZERO /\\\n     DISJOINT NZERO NEMPTY /\\\n     ~DISJOINT NZERO NZERO /\\\n     DISJOINT s NEMPTY /\\\n     DISJOINT NEMPTY t /\\\n     (_0 IN s <=> ~DISJOINT s NZERO) /\\\n     (~(_0 IN s) <=> DISJOINT s NZERO) /\\\n     (_0 IN t <=> ~DISJOINT NZERO t) /\\\n     (~(_0 IN t) <=> DISJOINT NZERO t) /\\\n     (DISJOINT s1 s2 /\\ DISJOINT t1 t2 <=>\n     DISJOINT (NNODE s1 t1) (NNODE s2 t2)) /\\\n     (~DISJOINT s1 s2 ==> ~DISJOINT (NNODE s1 t1) (NNODE s2 t2)) /\\\n     (~DISJOINT t1 t2 ==> ~DISJOINT (NNODE s1 t1) (NNODE s2 t2))"), t231)
+  let t232 = (@term_syntax.parse_term("DISJOINT(NEMPTY, NEMPTY) && DISJOINT(NEMPTY, NZERO) && DISJOINT(NZERO, NEMPTY) && !DISJOINT(NZERO, NZERO) && DISJOINT((s : (Num) -> Bool), NEMPTY) && DISJOINT(NEMPTY, (t : (Num) -> Bool)) && IN(_0, s) == !DISJOINT(s, NZERO) && !IN(_0, s) == DISJOINT(s, NZERO) && IN(_0, t) == !DISJOINT(NZERO, t) && !IN(_0, t) == DISJOINT(NZERO, t) && (DISJOINT((s1 : (Num) -> Bool), (s2 : (Num) -> Bool)) && DISJOINT((t1 : (Num) -> Bool), (t2 : (Num) -> Bool))) == DISJOINT(NNODE(s1, t1), NNODE(s2, t2)) && (!DISJOINT(s1, s2) → !DISJOINT(NNODE(s1, t1), NNODE(s2, t2))) && (!DISJOINT(t1, t2) → !DISJOINT(NNODE(s1, t1), NNODE(s2, t2)))"), t231)
   ntrie_disjoint_conv_c.set(match (fn(x227 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x227))
   })((fn(x228 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -2142,7 +2142,7 @@ fn step_60() -> Unit raise {
         }
       }
       let t240 = @simp.rewrite_tac(@list.List([ntrie()]))
-      let t241 = (@parser.parse_term("(DISJOINT s t <=> (DISJOINT (NTRIE s) (NTRIE t) <=> T)) /\\\n     (~DISJOINT s t <=> (DISJOINT (NTRIE s) (NTRIE t) <=> F))"), t240)
+      let t241 = (@term_syntax.parse_term("DISJOINT((s : (Num) -> Bool), (t : (Num) -> Bool)) == (DISJOINT(NTRIE(s), NTRIE(t)) == true) && !DISJOINT(s, t) == (DISJOINT(NTRIE(s), NTRIE(t)) == false)"), t240)
       let (pth1_1, pth2_1) = (fn(x238 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
         @bool.conj_pair(standardize(x238))
       })((fn(x239 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -2182,7 +2182,7 @@ fn step_61() -> Unit raise {
   let t246 = @sets.set_tac(@list.List([]))
   let t245 = @simp.rewrite_tac(@list.List([nzero(), nempty()]))
   let t247 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_diff(), ntrie_eq()])), t245), t246)
-  let t248 = (@parser.parse_term("NEMPTY DIFF NEMPTY = NEMPTY /\\\n     NEMPTY DIFF NZERO = NEMPTY /\\\n     NZERO DIFF NEMPTY = NZERO /\\\n     NZERO DIFF NZERO = NEMPTY /\\\n     NEMPTY DIFF t = NEMPTY /\\\n     s DIFF NEMPTY = s /\\\n     s DIFF NZERO = s DELETE _0 /\\\n     (_0 IN t <=> NZERO DIFF t = NEMPTY) /\\\n     (~(_0 IN t) <=> NZERO DIFF t = NZERO) /\\\n     (s1 DIFF s2 = s /\\ t1 DIFF t2 = t <=>\n      NNODE s1 t1 DIFF NNODE s2 t2 = NNODE s t)"), t247)
+  let t248 = (@term_syntax.parse_term("DIFF(NEMPTY, NEMPTY) == NEMPTY && DIFF(NEMPTY, NZERO) == NEMPTY && DIFF(NZERO, NEMPTY) == NZERO && DIFF(NZERO, NZERO) == NEMPTY && DIFF(NEMPTY, (t : (Num) -> Bool)) == NEMPTY && DIFF((s : (Num) -> Bool), NEMPTY) == s && DIFF(s, NZERO) == DELETE(s, _0) && IN(_0, t) == (DIFF(NZERO, t) == NEMPTY) && !IN(_0, t) == (DIFF(NZERO, t) == NZERO) && (DIFF((s1 : (Num) -> Bool), (s2 : (Num) -> Bool)) == s && DIFF((t1 : (Num) -> Bool), (t2 : (Num) -> Bool)) == t) == (DIFF(NNODE(s1, t1), NNODE(s2, t2)) == NNODE(s, t))"), t247)
   ntrie_diff_conv_c.set(match (fn(x243 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x243))
   })((fn(x244 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -2230,7 +2230,7 @@ fn step_61() -> Unit raise {
         }
       }
       let t252 = @simp.rewrite_tac(@list.List([ntrie()]))
-      let t253 = (@parser.parse_term("(s DIFF t = s1 <=> NTRIE s DIFF NTRIE t = NTRIE s1)"), t252)
+      let t253 = (@term_syntax.parse_term("(DIFF((s : (Num) -> Bool), (t : (Num) -> Bool)) == (s1 : (Num) -> Bool)) == (DIFF(NTRIE(s), NTRIE(t)) == NTRIE(s1))"), t252)
       let pth_3 = standardize((fn(x251 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
         @tactics.prove(x251.0, x251.1)
       })(t253))
@@ -2262,7 +2262,7 @@ pub fn ntrie_diff_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// NTRIE_ENCODE_CONV
 fn step_62() -> Unit raise {
   let t257 = @simp.rewrite_tac(@list.List([ntrie(), nempty(), @nums.numeral()]))
-  let t258 = (@parser.parse_term("{} = NEMPTY /\\\n     s = NTRIE s /\\\n     (INSERT) (NUMERAL n) = (INSERT) n"), t257)
+  let t258 = (@term_syntax.parse_term("{} == NEMPTY && (s : (Num) -> Bool) == NTRIE(s) && INSERT(NUMERAL((n : Num))) == INSERT(n)"), t257)
   ntrie_encode_conv_c.set(match (fn(x255 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     @bool.conjuncts_rule(standardize(x255))
   })((fn(x256 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -2501,9 +2501,9 @@ pub fn ntrie_decode_conv_v1(x : @kernel.Term) -> @kernel.Thm raise {
 /// NTRIE_REL_CONV
 fn step_75() -> Unit raise {
   let t277 = @simp.basic_net()
-  let t274 = (@parser.parse_term("NUMERAL n IN NTRIE s"), ntrie_in_conv_v1)
-  let t275 = (@parser.parse_term("DISJOINT (NTRIE s) (NTRIE t)"), ntrie_disjoint_conv_v1)
-  let t276 = (@parser.parse_term("NTRIE s SUBSET NTRIE t"), ntrie_subset_conv_v1)
+  let t274 = (@term_syntax.parse_term("IN(NUMERAL((n : Num)), NTRIE((s : (Num) -> Bool)))"), ntrie_in_conv_v1)
+  let t275 = (@term_syntax.parse_term("DISJOINT(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_disjoint_conv_v1)
+  let t276 = (@term_syntax.parse_term("SUBSET(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_subset_conv_v1)
   let gconv_net = @lib.itlist(fn(x271 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise), x272 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
     let s273 = ((x270 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) => @lib.uncurry(fn(x267 : @kernel.Term, x268 : (@kernel.Term) -> @kernel.Thm raise) -> ((@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise) raise {
       fn(x269 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
@@ -2511,7 +2511,7 @@ fn step_75() -> Unit raise {
       }
     }, x270))(x271)
     s273(x272)
-  }, @list.List([(@parser.parse_term("NTRIE s = NTRIE t"), ntrie_eq_conv_v1), t276, t275, t274]), t277)
+  }, @list.List([(@term_syntax.parse_term("NTRIE((s : (Num) -> Bool)) == NTRIE((t : (Num) -> Bool))"), ntrie_eq_conv_v1), t276, t275, t274]), t277)
   ntrie_rel_conv_c.set(@simp.rewrites_conv(gconv_net))
 }
 
@@ -2528,14 +2528,14 @@ pub fn ntrie_rel_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// NTRIE_RED_CONV
 fn step_76() -> Unit raise {
   let t293 = @simp.basic_net()
-  let t285 = (@parser.parse_term("NTRIE s DIFF NTRIE t"), ntrie_diff_conv_v1)
-  let t286 = (@parser.parse_term("NTRIE s DELETE NUMERAL n"), ntrie_delete_conv_v1)
-  let t287 = (@parser.parse_term("NTRIE s INTER NTRIE t"), ntrie_inter_conv_v1)
-  let t288 = (@parser.parse_term("NTRIE s UNION NTRIE t"), ntrie_union_conv_v1)
-  let t289 = (@parser.parse_term("NUMERAL n INSERT NTRIE s"), ntrie_insert_conv_v1)
-  let t290 = (@parser.parse_term("NUMERAL n IN NTRIE s"), ntrie_in_conv_v1)
-  let t291 = (@parser.parse_term("DISJOINT (NTRIE s) (NTRIE t)"), ntrie_disjoint_conv_v1)
-  let t292 = (@parser.parse_term("NTRIE s SUBSET NTRIE t"), ntrie_subset_conv_v1)
+  let t285 = (@term_syntax.parse_term("DIFF(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_diff_conv_v1)
+  let t286 = (@term_syntax.parse_term("DELETE(NTRIE((s : (Num) -> Bool)), NUMERAL((n : Num)))"), ntrie_delete_conv_v1)
+  let t287 = (@term_syntax.parse_term("INTER(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_inter_conv_v1)
+  let t288 = (@term_syntax.parse_term("UNION(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_union_conv_v1)
+  let t289 = (@term_syntax.parse_term("INSERT(NUMERAL((n : Num)), NTRIE((s : (Num) -> Bool)))"), ntrie_insert_conv_v1)
+  let t290 = (@term_syntax.parse_term("IN(NUMERAL((n : Num)), NTRIE((s : (Num) -> Bool)))"), ntrie_in_conv_v1)
+  let t291 = (@term_syntax.parse_term("DISJOINT(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_disjoint_conv_v1)
+  let t292 = (@term_syntax.parse_term("SUBSET(NTRIE((s : (Num) -> Bool)), NTRIE((t : (Num) -> Bool)))"), ntrie_subset_conv_v1)
   let gconv_net = @lib.itlist(fn(x282 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise), x283 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
     let s284 = ((x281 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) => @lib.uncurry(fn(x278 : @kernel.Term, x279 : (@kernel.Term) -> @kernel.Thm raise) -> ((@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise) raise {
       fn(x280 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
@@ -2543,7 +2543,7 @@ fn step_76() -> Unit raise {
       }
     }, x281))(x282)
     s284(x283)
-  }, @list.List([(@parser.parse_term("NTRIE s = NTRIE t"), ntrie_eq_conv_v1), t292, t291, t290, t289, t288, t287, t286, t285]), t293)
+  }, @list.List([(@term_syntax.parse_term("NTRIE((s : (Num) -> Bool)) == NTRIE((t : (Num) -> Bool))"), ntrie_eq_conv_v1), t292, t291, t290, t289, t288, t287, t286, t285]), t293)
   ntrie_red_conv_c.set(@simp.rewrites_conv(gconv_net))
 }
 
