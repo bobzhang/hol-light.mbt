@@ -79089,9 +79089,9 @@ Multivariate/realanalysis quotations (4427):
   \226\136\128 f : (_) -> Real, \226\136\128 g : (_) -> Real, \226\136\128 h : (_) -> Real, \226\136\128 a : Real, eventually((n : _) => f(n) <= g(n), (net : Net[_])) && op_minus_minus_minus_gt(f, a, net) && eventually((n : _) => g(n) <= h(n), net) && op_minus_minus_minus_gt(h, a, net) \226\134\146 op_minus_minus_minus_gt(g, a, net)
   \226\136\128 s : (Num) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(s, l, sequentially) \226\134\146 real_bounded(IMAGE(s, UNIV))
   \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, op_minus_minus_minus_gt((x : _) => abs(f(x)), real_of_num(0), net) == op_minus_minus_minus_gt(f, real_of_num(0), net)
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], IN(x, s) && real_of_num(0) < dist((x, a)) && dist((x, a)) <= d \226\134\146 abs(f(x) - l) < e)))
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], IN(x, s) && real_of_num(0) < dist((x, a)) && dist((x, a)) < d \226\134\146 abs(f(x) - l) < e)))
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], op_minus_minus_minus_gt(f, l, at(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < d \226\134\146 abs(f(x) - l) < e)))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], IN(x, s) && real_of_num(0) < distance((x, a)) && distance((x, a)) <= d \226\134\146 abs(f(x) - l) < e)))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, op_minus_minus_minus_gt(f, l, within(at(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], IN(x, s) && real_of_num(0) < distance((x, a)) && distance((x, a)) < d \226\134\146 abs(f(x) - l) < e)))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], op_minus_minus_minus_gt(f, l, at(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < d \226\134\146 abs(f(x) - l) < e)))
   \226\136\128 f : (Cart[Real, _]) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_infinity) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 b : Real, \226\136\128 x : Cart[Real, _], norm(x) >= b \226\134\146 abs(f(x) - l) < e))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(f, l, at_infinity) == op_minus_minus_minus_gt(o(f, inv), l, at(Cx(real_of_num(0))))
   \226\136\128 s : (Num) -> Real, \226\136\128 l : Real, op_minus_minus_minus_gt(s, l, sequentially) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(s(n) - l) < e))
@@ -79341,9 +79341,9 @@ Multivariate/realanalysis quotations (4427):
   \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 p : (Real) -> Bool, eventually(p, within(atreal(a), s)) == (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 p(x)))
   ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (c \226\134\146 a && b \226\134\146 d)
   \226\136\128 s : (Real) -> Bool, \226\136\128 a : Real, \226\136\128 p : (Real) -> Bool, eventually(p, within(atreal(a), s)) == (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 p(x)))
-  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 dist((f(x), l)) < e)))
-  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 dist((f(x), l)) < e)))
-  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, op_minus_minus_gt(f, l, atreal(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 dist((f(x), l)) < e)))
+  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 distance((f(x), l)) < e)))
+  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 distance((f(x), l)) < e)))
+  \226\136\128 f : (Real) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], \226\136\128 a : Real, op_minus_minus_gt(f, l, atreal(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 distance((f(x), l)) < e)))
   \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) <= d \226\134\146 abs(f(x) - l) < e)))
   \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, op_minus_minus_minus_gt(f, l, within(atreal(a), s)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, IN(x, s) && real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 abs(f(x) - l) < e)))
   \226\136\128 f : (Real) -> Real, \226\136\128 l : Real, \226\136\128 a : Real, op_minus_minus_minus_gt(f, l, atreal(a)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Real, real_of_num(0) < abs(x - a) && abs(x - a) < d \226\134\146 abs(f(x) - l) < e)))
@@ -79482,8 +79482,8 @@ Multivariate/realanalysis quotations (4427):
   abs((x : Real) - x) == real_of_num(0)
   real_of_num(0) < (e : Real)
   (e : Real)
-  real_continuous((f : (Cart[Real, _]) -> Real), within(at((x : Cart[Real, _])), (s : (Cart[Real, _]) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], IN(x', s) && dist((x', x)) < d \226\134\146 abs(f(x') - f(x)) < e)))
-  real_continuous((f : (Cart[Real, _]) -> Real), at((x : Cart[Real, _]))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], dist((x', x)) < d \226\134\146 abs(f(x') - f(x)) < e)))
+  real_continuous((f : (Cart[Real, _]) -> Real), within(at((x : Cart[Real, _])), (s : (Cart[Real, _]) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], IN(x', s) && distance((x', x)) < d \226\134\146 abs(f(x') - f(x)) < e)))
+  real_continuous((f : (Cart[Real, _]) -> Real), at((x : Cart[Real, _]))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, _], distance((x', x)) < d \226\134\146 abs(f(x') - f(x)) < e)))
   abs((x : Real) - x) == real_of_num(0)
   real_of_num(0) < (e : Real)
   (e : Real)
@@ -79500,8 +79500,8 @@ Multivariate/realanalysis quotations (4427):
   real_of_num(0) < (e : Real)
   (e : Real)
   (real_of_num(0) < abs((x : Real) - (y : Real))) == !(x == y)
-  continuous((f : (Real) -> Cart[Real, _]), within(atreal((x : Real)), (s : (Real) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 dist((f(x'), f(x))) < e)))
-  continuous((f : (Real) -> Cart[Real, _]), atreal((x : Real))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 dist((f(x'), f(x))) < e)))
+  continuous((f : (Real) -> Cart[Real, _]), within(atreal((x : Real)), (s : (Real) -> Bool))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 distance((f(x'), f(x))) < e)))
+  continuous((f : (Real) -> Cart[Real, _]), atreal((x : Real))) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 distance((f(x'), f(x))) < e)))
   \226\136\128 f : (Real) -> Cart[Real, _], \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, continuous(f, atreal(x)) \226\134\146 continuous(f, within(atreal(x), s))
   \226\136\128 x : Real, continuous(Cx, atreal(x))
   \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, continuous(Cx, within(atreal(x), s))
@@ -79509,7 +79509,7 @@ Multivariate/realanalysis quotations (4427):
   (e : Real)
   (k : Real)
   (k : Real)
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, N], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && real_continuous(f, within(at(x), s)) \226\134\146 real_continuous(g, within(at(x), s))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, N], IN(x', s) && distance((x', x)) < d \226\134\146 f(x') == g(x')) && real_continuous(f, within(at(x), s)) \226\134\146 real_continuous(g, within(at(x), s))
   abs((x : Real) - x) == real_of_num(0)
   min((d : Real), (e : Real))
   (e : Real)
@@ -79517,7 +79517,7 @@ Multivariate/realanalysis quotations (4427):
   (k : Real)
   \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Real, IN(x', s) && abs(x' - x) < d \226\134\146 f(x') == g(x')) && real_continuous(f, within(atreal(x), s)) \226\134\146 real_continuous(g, within(atreal(x), s))
   (UNIV : (Cart[Real, N]) -> Bool)
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, N], dist((x', x)) < d \226\134\146 f(x') == g(x')) && real_continuous(f, at(x)) \226\134\146 real_continuous(g, at(x))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 g : (Cart[Real, N]) -> Real, \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, N], distance((x', x)) < d \226\134\146 f(x') == g(x')) && real_continuous(f, at(x)) \226\134\146 real_continuous(g, at(x))
   (UNIV : (Real) -> Bool)
   \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 x : Real, \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Real, abs(x' - x) < d \226\134\146 f(x') == g(x')) && real_continuous(f, atreal(x)) \226\134\146 real_continuous(g, atreal(x))
   \226\136\128 net : Net[_], \226\136\128 c : Real, real_continuous((x : _) => c, net)
@@ -79649,12 +79649,12 @@ Multivariate/realanalysis quotations (4427):
   \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 z : Cart[Real, _], real_continuous(norm, within(at(z), s))
   (e : Real)
   (e : Real)
-  \226\136\128 a : Cart[Real, _], \226\136\128 z : Cart[Real, _], real_continuous((x : Cart[Real, _]) => dist((a, x)), at(z))
+  \226\136\128 a : Cart[Real, _], \226\136\128 z : Cart[Real, _], real_continuous((x : Cart[Real, _]) => distance((a, x)), at(z))
   :real
   :real
   :real
   :real
-  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 z : Cart[Real, _], real_continuous((x : Cart[Real, _]) => dist((a, x)), within(at(z), s))
+  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 z : Cart[Real, _], real_continuous((x : Cart[Real, _]) => distance((a, x)), within(at(z), s))
   (has_real_derivative : ((Real) -> Real, Real, Net[Real]) -> Bool)((f : (Real) -> Real), (f' : Real), (net : Net[Real])) == op_minus_minus_minus_gt((x : Real) => inv(x - netlimit(net)) * (f(x) - (f(netlimit(net)) + f' * (x - netlimit(net)))), real_of_num(0), net)
   (real_differentiable : ((Real) -> Real, Net[Real]) -> Bool)((f : (Real) -> Real), (net : Net[Real])) == (\226\136\131 f' : Real, has_real_derivative(f, f', net))
   (real_derivative : ((Real) -> Real, Real) -> Real)((f : (Real) -> Real), (x : Real)) == select((f' : Real) => has_real_derivative(f, f', atreal(x)))
@@ -79670,7 +79670,7 @@ Multivariate/realanalysis quotations (4427):
   has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((a : Real)), (s : (Real) -> Bool))) == op_minus_minus_minus_gt((x : Real) => (f(x) - f(a)) / (x - a), f', within(atreal(a), s))
   has_real_derivative((f : (Real) -> Real), (f' : Real), atreal((a : Real))) == op_minus_minus_minus_gt((x : Real) => (f(x) - f(a)) / (x - a), f', atreal(a))
   real_of_num(0) < abs((y : Real) - (x : Real)) \226\134\146 (fy : Real) - ((fx : Real) + (f' : Real) * (y - x)) == (y - x) * ((fy - fx) / (y - x) - f')
-  dist(((x : Cart[Real, _]), vec(0))) == norm(x)
+  distance(((x : Cart[Real, _]), vec(0))) == norm(x)
   :real
   :real
   has_real_derivative((f : (Real) -> Real), (f' : Real), within(atreal((x : Real)), (s : (Real) -> Bool))) == has_derivative(o(lift, o(f, drop)), (x : Cart[Real, Unit]) => op_pct(f', x), within(at(lift(x)), IMAGE(lift, s)))
@@ -79769,7 +79769,7 @@ Multivariate/realanalysis quotations (4427):
   \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative(f, f', within(atreal(x), s))
   \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 a : Real, \226\136\128 s : (Real) -> Bool, IN(a, s) && real_open(s) \226\134\146 has_real_derivative(f, f', within(atreal(a), s)) == has_real_derivative(f, f', atreal(a))
   \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 z : Real, real_differentiable(f, atreal(z)) \226\134\146 real_differentiable(f, within(atreal(z), s))
-  dist(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) < (d : Real) \226\134\146 (z : Real) <= norm(a - b) \226\134\146 z < d
+  distance(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) < (d : Real) \226\134\146 (z : Real) <= norm(a - b) \226\134\146 z < d
   :real
   (d : Real)
   ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) \226\134\146 (e : Bool)) == (a && b && c \226\134\146 d \226\134\146 e)
@@ -79808,7 +79808,7 @@ Multivariate/realanalysis quotations (4427):
   (n : Num)
   \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 n : Num, has_real_derivative(f, f', within(atreal(x), s)) \226\134\146 has_real_derivative((x : Real) => pow(f(x), n), real_of_num(n) * (pow(f(x), n - 1) * f'), within(atreal(x), s))
   \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 n : Num, has_real_derivative(f, f', atreal(x)) \226\134\146 has_real_derivative((x : Real) => pow(f(x), n), real_of_num(n) * (pow(f(x), n - 1) * f'), atreal(x))
-  inv
+  complex_inv
   \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 has_real_derivative(inv, -inv(pow(x, 2)), atreal(x))
   !((g : Real) == real_of_num(0)) \226\134\146 -(f : Real) / pow(g, 2) == -inv(pow(g, 2)) * f
   \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 x : Real, \226\136\128 s : (Real) -> Bool, has_real_derivative(f, f', within(atreal(x), s)) && !(f(x) == real_of_num(0)) \226\134\146 has_real_derivative((x : Real) => inv(f(x)), -f' / pow(f(x), 2), within(atreal(x), s))
@@ -80273,27 +80273,27 @@ Multivariate/realanalysis quotations (4427):
   (N : Num)
   (c : Real) - (l : Real)
   \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, has_limsup(f, l, sequentially) == ((\226\136\131 b : Real, \226\136\128 n : Num, f(n) <= b) && op_minus_minus_minus_gt((n : Num) => sup({f((k : Num)) | k >= n}), l, sequentially))
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_limsup(f, l, at(a)) == ((\226\136\128 c : Real, l < c \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 f(x) <= c))) && (\226\136\128 c : Real, \226\136\128 r : Real, real_of_num(0) < r && c < l \226\134\146 (\226\136\131 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r && c < f(x))))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_limsup(f, l, at(a)) == ((\226\136\128 c : Real, l < c \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < r \226\134\146 f(x) <= c))) && (\226\136\128 c : Real, \226\136\128 r : Real, real_of_num(0) < r && c < l \226\134\146 (\226\136\131 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < r && c < f(x))))
   (l : Real) + ((c : Real) - l) / real_of_num(2) == (c + l) / real_of_num(2)
   (x : Cart[Real, N])
   (x : Cart[Real, N])
   (b0 : Real)
-  sup({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+  sup({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < distance((y, (a : Cart[Real, N]))) && distance((y, a)) <= distance(((x : Cart[Real, N]), a))})
   min((r0 : Real), (d : Real))
   (l : Real) < (c : Real) \226\134\146 real_of_num(0) < (c - l) / real_of_num(2)
   ((c : Real) - (l : Real)) / real_of_num(2)
   ((c : Real) + (l : Real)) / real_of_num(2)
-  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
+  distance(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
   :real
   :real
-  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
+  distance(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
   :real
   :real
   (x : Cart[Real, N])
   (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
-  sup({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+  sup({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < distance((y, (a : Cart[Real, N]))) && distance((y, a)) <= distance(((x : Cart[Real, N]), a))})
   (b : Real) < b
-  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
+  distance(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
   :real
   :real
   (x : Cart[Real, N])
@@ -80303,7 +80303,7 @@ Multivariate/realanalysis quotations (4427):
   (l : Real) - (b : Real)
   (r0 : Real)
   (b0 : Real)
-  dist((op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N])), a)) == inv(real_of_num(2)) * dist((x, a))
+  distance((op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N])), a)) == inv(real_of_num(2)) * distance((x, a))
   :real
   :real
   (y : Cart[Real, N])
@@ -80313,7 +80313,7 @@ Multivariate/realanalysis quotations (4427):
   (y : Cart[Real, N])
   (c : Real)
   (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
-  dist(((x : Cart[Real, N]), (a : Cart[Real, N])))
+  distance(((x : Cart[Real, N]), (a : Cart[Real, N])))
   real_of_num(0) < (e : Real) \226\134\146 !((l : Real) <= l - e)
   (l : Real) - (e : Real)
   (d : Real)
@@ -80321,7 +80321,7 @@ Multivariate/realanalysis quotations (4427):
   (r : Real)
   (c : Real)
   (l : Real) < l + real_of_num(1)
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_limsup(f, l, at(a)) == ((\226\136\131 b : Real, \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 f(x) <= b)) && op_minus_minus_minus_gt((x : Cart[Real, N]) => sup({f((y : Cart[Real, N])) | real_of_num(0) < dist((y, a)) && dist((y, a)) <= dist((x, a))}), l, at(a)))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_limsup(f, l, at(a)) == ((\226\136\131 b : Real, \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < r \226\134\146 f(x) <= b)) && op_minus_minus_minus_gt((x : Cart[Real, N]) => sup({f((y : Cart[Real, N])) | real_of_num(0) < distance((y, a)) && distance((y, a)) <= distance((x, a))}), l, at(a)))
   (x : Real)
   (d : Real)
   (c : Real) - (a : Real) * (b : Real)
@@ -80421,27 +80421,27 @@ Multivariate/realanalysis quotations (4427):
   (N : Num)
   (l : Real) - (c : Real)
   \226\136\128 f : (Num) -> Real, \226\136\128 l : Real, has_liminf(f, l, sequentially) == ((\226\136\131 b : Real, \226\136\128 n : Num, b <= f(n)) && op_minus_minus_minus_gt((n : Num) => inf({f((k : Num)) | k >= n}), l, sequentially))
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_liminf(f, l, at(a)) == ((\226\136\128 c : Real, c < l \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 c <= f(x)))) && (\226\136\128 c : Real, \226\136\128 r : Real, real_of_num(0) < r && l < c \226\134\146 (\226\136\131 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r && f(x) < c)))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_liminf(f, l, at(a)) == ((\226\136\128 c : Real, c < l \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < r \226\134\146 c <= f(x)))) && (\226\136\128 c : Real, \226\136\128 r : Real, real_of_num(0) < r && l < c \226\134\146 (\226\136\131 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < r && f(x) < c)))
   (l : Real) - (l - (c : Real)) / real_of_num(2) == (c + l) / real_of_num(2)
   (x : Cart[Real, N])
   (x : Cart[Real, N])
   (b0 : Real)
-  inf({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+  inf({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < distance((y, (a : Cart[Real, N]))) && distance((y, a)) <= distance(((x : Cart[Real, N]), a))})
   min((r0 : Real), (d : Real))
   (c : Real) < (l : Real) \226\134\146 real_of_num(0) < (l - c) / real_of_num(2)
   ((l : Real) - (c : Real)) / real_of_num(2)
   ((c : Real) + (l : Real)) / real_of_num(2)
-  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
+  distance(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
   :real
   :real
-  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
+  distance(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
   :real
   :real
   (x : Cart[Real, N])
   (f : (Cart[Real, N]) -> Real)((x : Cart[Real, N]))
-  inf({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < dist((y, (a : Cart[Real, N]))) && dist((y, a)) <= dist(((x : Cart[Real, N]), a))})
+  inf({(f : (Cart[Real, N]) -> Real)((y : Cart[Real, N])) | real_of_num(0) < distance((y, (a : Cart[Real, N]))) && distance((y, a)) <= distance(((x : Cart[Real, N]), a))})
   (b : Real) < b
-  dist(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
+  distance(((a : Cart[Real, N]) + (v : Cart[Real, N]), a)) == norm(v)
   :real
   :real
   (x : Cart[Real, N])
@@ -80451,7 +80451,7 @@ Multivariate/realanalysis quotations (4427):
   (b : Real) - (l : Real)
   (r0 : Real)
   (b0 : Real)
-  dist((op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N])), a)) == inv(real_of_num(2)) * dist((x, a))
+  distance((op_pct(inv(real_of_num(2)), (x : Cart[Real, N]) + (a : Cart[Real, N])), a)) == inv(real_of_num(2)) * distance((x, a))
   :real
   :real
   (y : Cart[Real, N])
@@ -80461,7 +80461,7 @@ Multivariate/realanalysis quotations (4427):
   (y : Cart[Real, N])
   (c : Real)
   (f : (Cart[Real, N]) -> Real)((y : Cart[Real, N]))
-  dist(((x : Cart[Real, N]), (a : Cart[Real, N])))
+  distance(((x : Cart[Real, N]), (a : Cart[Real, N])))
   real_of_num(0) < (e : Real) \226\134\146 !((l : Real) + e <= l)
   (l : Real) + (e : Real)
   (d : Real)
@@ -80469,7 +80469,7 @@ Multivariate/realanalysis quotations (4427):
   (r : Real)
   (c : Real)
   (l : Real) - real_of_num(1) < l
-  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_liminf(f, l, at(a)) == ((\226\136\131 b : Real, \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < dist((x, a)) && dist((x, a)) < r \226\134\146 b <= f(x))) && op_minus_minus_minus_gt((x : Cart[Real, N]) => inf({f((y : Cart[Real, N])) | real_of_num(0) < dist((y, a)) && dist((y, a)) <= dist((x, a))}), l, at(a)))
+  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 l : Real, \226\136\128 a : Cart[Real, N], has_liminf(f, l, at(a)) == ((\226\136\131 b : Real, \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, N], real_of_num(0) < distance((x, a)) && distance((x, a)) < r \226\134\146 b <= f(x))) && op_minus_minus_minus_gt((x : Cart[Real, N]) => inf({f((y : Cart[Real, N])) | real_of_num(0) < distance((y, a)) && distance((y, a)) <= distance((x, a))}), l, at(a)))
   (a : (Num) -> Real)((n : Num)) == pow(root(n, a(n)), n)
   (N : Num) + 1
   (n : Num) => pow((b : Real) + (real_of_num(1) - b) * inv(real_of_num(2)), n)
@@ -80536,7 +80536,7 @@ Multivariate/realanalysis quotations (4427):
   (N : Num)
   (z : Cart[Real, Tybit0[Unit]]) => vsum((k : (Num) -> Bool), (i : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(z, i))
   FINITE((k : (Num) -> Bool))
-  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && compact(s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 b * norm(z) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], N <= n && IN(z, s) \226\134\146 dist((vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => a(i) * pow(z, i)), l(z))) < e))
+  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && compact(s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 b * norm(z) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], N <= n && IN(z, s) \226\134\146 distance((vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => a(i) * pow(z, i)), l(z))) < e))
   0
   (b : Real)
   (k : (Num) -> Bool)
@@ -80550,7 +80550,7 @@ Multivariate/realanalysis quotations (4427):
   (N : Num)
   (z : Cart[Real, Tybit0[Unit]]) => vsum((k : (Num) -> Bool), (i : Num) => Cx(real_of_num(i)) * ((a : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(z, i - 1)))
   FINITE((k : (Num) -> Bool))
-  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && compact(s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 b * norm(z) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], N <= n && IN(z, s) \226\134\146 dist((vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => Cx(real_of_num(i)) * (a(i) * pow(z, i - 1))), l(z))) < e))
+  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 b : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : (Num) -> Bool, has_limsup((n : Num) => root(n, norm(a(n))), b, within(sequentially, k)) && compact(s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 b * norm(z) < real_of_num(1)) \226\134\146 (\226\136\131 l : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], N <= n && IN(z, s) \226\134\146 distance((vsum(INTER(k, op_dot_dot(0, n)), (i : Num) => Cx(real_of_num(i)) * (a(i) * pow(z, i - 1))), l(z))) < e))
   (x : Real)
   norm(lift((x : Real))) < (r : Real)
   0
@@ -82999,7 +82999,7 @@ Multivariate/realanalysis quotations (4427):
   negligible(real)
   \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, measurable_on(f, s) && measurable_on(g, s) \226\134\146 measurable_on((x : Cart[Real, N]) => f(x) * g(x), s)
   (x : Real) < (y : Real) \226\134\146 (z : Real) <= x \226\134\146 z <= y
-  dist(((g : Cart[Real, _]), (f : Cart[Real, _]))) < norm(f) / real_of_num(2) \226\134\146 norm(f) / real_of_num(2) <= norm(g)
+  distance(((g : Cart[Real, _]), (f : Cart[Real, _]))) < norm(f) / real_of_num(2) \226\134\146 norm(f) / real_of_num(2) <= norm(g)
   :real
   :real
   (n : Num)
