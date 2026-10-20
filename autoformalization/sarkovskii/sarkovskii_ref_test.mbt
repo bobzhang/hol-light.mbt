@@ -79636,2481 +79636,2481 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|0..0..1..solved at 4
       #|0..0..solved at 2
       #|Autoformalization/sarkovskii quotations (2475):
-      #|  periodic_point (f:A->A) n x <=> ITER n f x = x
-      #|  minimal_period (f:A->A) n x <=>\n        0 < n /\\\n        periodic_point f n x /\\\n        forall m. 0 < m /\\ m < n ==> ~periodic_point f m x
-      #|  has_period (f:A->A) n <=> ?x. minimal_period f n x
-      #|  forall f:A->A x. periodic_point f 0 x
-      #|  forall f:A->A n x m.\n        periodic_point f n x ==> periodic_point f (m * n) x
-      #|  (n:num) + m = m + n
-      #|  forall f:A->A n x m.\n        periodic_point f n x ==> ITER (n + m) f x = ITER m f x
-      #|  forall f:A->A n x i.\n        periodic_point f n x\n        ==> periodic_point f n (ITER i f x)
-      #|  ITER (n - 1) (f:A->A) (f y) = y
-      #|  ITER (n - 1) (f:A->A) (f x) = x
-      #|  (n:num) - 1 + 1 = n
-      #|  forall f:A->A n x y.\n        0 < n /\\\n        periodic_point f n x /\\\n        periodic_point f n y\n        ==> (f x = f y <=> x = y)
-      #|  ITER (k:num) (f:A->A) (y:A)
-      #|  ITER (k:num) (f:A->A) (x:A)
-      #|  n:num
-      #|  f:A->A
-      #|  y:A
-      #|  x:A
-      #|  forall f:A->A n k x y.\n        0 < (n:num) /\\\n        periodic_point (f:A->A) n (x:A) /\\\n        periodic_point f n (y:A)\n        ==> (ITER (k:num) f x = ITER k f y <=> x = y)
-      #|  forall f:A->A k m x.\n        periodic_point (ITER k f) m x <=>\n        periodic_point f (m * k) x
-      #|  ITER (m DIV n * n + m MOD n) (f:A->A) x
-      #|  periodic_point (f:A->A) (m DIV n * n) x
-      #|  n:num
-      #|  m:num
-      #|  forall f:A->A n x m.\n        0 < n /\\ periodic_point f n x\n        ==> ITER m f x = ITER (m MOD n) f x
-      #|  \\k:num. ITER k (f:A->A) x
-      #|  ITER (n + (j - i)) (f:A->A) x = ITER (j - i) f x
-      #|  ((n:num) - i) + i = n /\\\n    (n - i) + j = n + (j - i)
-      #|  ITER ((n:num) - i) (f:A->A) (ITER i f x) =\n    ITER (n - i) f (ITER j f x)
-      #|  forall f:A->A n x i j.\n        periodic_point f n x /\\\n        i <= j /\\\n        j <= n /\\\n        ITER i f x = ITER j f x\n        ==> periodic_point f (j - i) x
-      #|  m:num
-      #|  m:num
-      #|  n:num
-      #|  k:num
-      #|  m MOD n
-      #|  0 < m MOD n /\\ m MOD n < n
-      #|  m MOD n = 0
-      #|  m:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  periodic_point (f:A->A) (m MOD n) x
-      #|  m:num
-      #|  forall f:A->A n x.\n        minimal_period f n x <=>\n        0 < n /\\ forall m. periodic_point f m x <=> n divides m
-      #|  forall f:A->A n x. minimal_period f n x ==> 0 < n
-      #|  x:A
-      #|  forall f:A->A n. has_period f n ==> 0 < n
-      #|  forall f:A->A n x. minimal_period f n x ==> periodic_point f n x
-      #|  forall f:A->A n x m.\n        minimal_period f n x\n        ==> (periodic_point f m x <=> n divides m)
-      #|  m:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  m:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  x:A
-      #|  ITER m (f:A->A) (x:A)
-      #|  k:num
-      #|  n:num
-      #|  f:A->A
-      #|  periodic_point (f:A->A) m x
-      #|  ITER k (f:A->A) (ITER m f x) = ITER k f x
-      #|  (k:num) + m = m + k
-      #|  ITER k (f:A->A) (ITER m f x) =\n        ITER m f (ITER k f x)
-      #|  m:num
-      #|  forall f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period f n (ITER k f x)
-      #|  (n:num) divides (j - i)
-      #|  j - i:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  (n:num) divides (j - i)
-      #|  j:num
-      #|  i:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  periodic_point (f:A->A) (j - i) x
-      #|  forall f:A->A n x i j.\n        minimal_period f n x /\\\n        i <= j /\\\n        j < n /\\\n        ITER i f x = ITER j f x\n        ==> i = j
-      #|  i:num
-      #|  j:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  (j:num) = i
-      #|  j:num
-      #|  i:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  (i:num) <= j
-      #|  forall f:A->A n x i j.\n        minimal_period f n x /\\\n        i < n /\\\n        j < n\n        ==> (ITER i f x = ITER j f x <=> i = j)
-      #|  forall f:A->A m n x.\n        minimal_period f m x /\\ minimal_period f n x\n        ==> m = n
-      #|  m:num
-      #|  n = 0
-      #|  m:num
-      #|  n:num
-      #|  n:num
-      #|  x:A
-      #|  f:A->A
-      #|  (=):A->A->bool
-      #|  forall f:A->A x m.\n        0 < m /\\ periodic_point f m x\n        ==> ?n. n divides m /\\ minimal_period f n x
-      #|  m:num
-      #|  gcd(n,k)
-      #|  n:num
-      #|  m:num
-      #|  n DIV gcd(n,k) * gcd(n,k) = n
-      #|  n DIV gcd(n,k) = 0
-      #|  n DIV gcd(n,k) * gcd(n,k) = n
-      #|  gcd(n,k) divides n
-      #|  forall f:A->A n x k.\n        minimal_period f n x\n        ==> minimal_period (ITER k f) (n DIV gcd(n,k)) x
-      #|  forall f:A->A n k.\n        has_period f n\n        ==> has_period (ITER k f) (n DIV gcd(n,k))
-      #|  (m:num) - (m - r) = r
-      #|  (d:num) divides (m - (m - r))
-      #|  forall d m r.\n        d divides m /\\ 0 < r /\\ r < d /\\ r <= m\n        ==> ~(d divides (m - r))
-      #|  r:num
-      #|  m:num
-      #|  m - r:num
-      #|  forall m r.\n        0 < r /\\ 2 * r < m\n        ==> ~((m - r) divides m)
-      #|  j:num
-      #|  i:num
-      #|  x:A
-      #|  n:num
-      #|  f:A->A
-      #|  j:num
-      #|  i:num
-      #|  CARD {i:num | i < n}
-      #|  forall f:A->A n x.\n        minimal_period f n x\n        ==> CARD (IMAGE (\\i. ITER i f x) {i | i < n}) = n
-      #|  (SUC i) MOD n
-      #|  f(ITER i (f:A->A) x) = ITER ((SUC i) MOD n) f x
-      #|  (SUC i) MOD n < n
-      #|  ITER (SUC i) (f:A->A) x = ITER ((SUC i) MOD n) f x
-      #|  periodic_point (f:A->A) n x
-      #|  0 < (n:num)
-      #|  i:num
-      #|  forall f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> f y IN IMAGE (\\i. ITER i f x) {i | i < n}
-      #|  i:num
-      #|  forall f:A->A n x y.\n        minimal_period f n x /\\\n        y IN IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> minimal_period f n y
-      #|  k - 1 + 1 = k
-      #|  k - 1
-      #|  k:num
-      #|  i + 1
-      #|  i:num
-      #|  y:real
-      #|  j:num
-      #|  i:num
-      #|  \\i. (g:num->real)(i + 1)
-      #|  g:num->real
-      #|  s:real->bool
-      #|  n:num
-      #|  (<=):real->real->bool
-      #|  (s:real->bool) HAS_SIZE n
-      #|  s:real->bool = IMAGE (\\i. ITER i (f:real->real) x) {i | i < n}
-      #|  forall f:real->real n x.\n        minimal_period f n x\n        ==> ?z.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              IMAGE z {i | i < n} =\n              IMAGE (\\i. ITER i f x) {i | i < n}
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  (i:num) < j
-      #|  (i:num) = j
-      #|  forall z:num->real n i j.\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i < n /\\\n        j < n\n        ==> (z i = z j <=> i = j)
-      #|  j:num
-      #|  j:num
-      #|  (f:real->real)((z:num->real) i) IN\n      IMAGE (\\k. ITER k f x) {k | k < n}
-      #|  i:num
-      #|  (z:num->real) i IN\n      IMAGE (\\k. ITER k (f:real->real) x) {k | k < n}
-      #|  ?j:num. j < n /\\ (f:real->real)((z:num->real) i) = z j
-      #|  i:num
-      #|  p:num->num
-      #|  p:num->num =\n    \\i. @j:num. j < n /\\ (f:real->real)((z:num->real) i) = z j
-      #|  forall f:real->real n x z.\n        minimal_period f n x /\\\n        IMAGE z {i | i < n} = IMAGE (\\i. ITER i f x) {i | i < n}\n        ==> ?p:num->num.\n              forall i. i < n ==> p i < n /\\ f(z i) = z(p i)
-      #|  ITER k (p:num->num) i
-      #|  i:num
-      #|  i:num
-      #|  forall f:A->A z p n.\n        (forall i:num.\n             i < n\n             ==> (p:num->num) i < n /\\\n                 f((z:num->A) i) = z(p i))\n        ==> forall k i:num.\n              i < n\n              ==> ITER k p i < n /\\\n                  ITER k f (z i) = z(ITER k p i)
-      #|  m:num
-      #|  (z:num->real) i
-      #|  n:num
-      #|  f:real->real
-      #|  i:num
-      #|  ITER m (p:num->num) i
-      #|  n:num
-      #|  z:num->real
-      #|  i:num
-      #|  m:num
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  m:num
-      #|  (z:num->real) i
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  minimal_period (f:real->real) n ((z:num->real) i)
-      #|  i:num
-      #|  (z:num->real) i IN\n    IMAGE (\\k. ITER k (f:real->real) x) {k | k < n}
-      #|  i:num
-      #|  forall f:real->real n x z p.\n        minimal_period f n x /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        IMAGE z {i | i < n} =\n        IMAGE (\\i. ITER i f x) {i | i < n} /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i))\n        ==> forall i. i < n ==> minimal_period p n i
-      #|  adjacent_interval_cover p i j <=>\n        (p i <= j /\\ j + 1 <= p(i + 1)) \\/\n        (p(i + 1) <= j /\\ j + 1 <= p i)
-      #|  forall p n i j.\n        p i < n /\\\n        p(i + 1) < n /\\\n        adjacent_interval_cover p i j\n        ==> j + 1 < n
-      #|  forall p i j.\n        adjacent_interval_cover p i j <=>\n        MIN (p i) (p(i + 1)) <= j /\\\n        j < MAX (p i) (p(i + 1))
-      #|  forall p i j k l.\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p i k /\\\n        j <= l /\\\n        l <= k\n        ==> adjacent_interval_cover p i l
-      #|  j:num
-      #|  a:num
-      #|  p:num->num
-      #|  d:num
-      #|  d:num
-      #|  (a:num) < b
-      #|  (a + SUC d) + 1 = a + SUC(SUC d)
-      #|  a + SUC d
-      #|  i:num
-      #|  i:num
-      #|  j:num
-      #|  a:num
-      #|  p:num->num
-      #|  (p:num->num) (a + SUC d) <= j
-      #|  i:num
-      #|  i:num
-      #|  j:num
-      #|  a:num
-      #|  p:num->num
-      #|  (a + SUC d) + 1 = a + SUC(SUC d)
-      #|  a + SUC d
-      #|  (p:num->num) (a + SUC d) <= j
-      #|  j:num
-      #|  a:num
-      #|  p:num->num
-      #|  a:num
-      #|  j:num
-      #|  a:num
-      #|  p:num->num
-      #|  forall d p a j.\n        ((p a <= j /\\ j < p(a + SUC d)) \\/\n         (p(a + SUC d) <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < a + SUC d /\\\n              adjacent_interval_cover p i j
-      #|  forall p a b j.\n        a < b /\\\n        ((p a <= j /\\ j < p b) \\/ (p b <= j /\\ j < p a))\n        ==> ?i.\n              a <= i /\\\n              i < b /\\\n              adjacent_interval_cover p i j
-      #|  h:num
-      #|  h:num
-      #|  l:num
-      #|  b:num
-      #|  a + 1
-      #|  p:num->num
-      #|  (b:num) = a + 1
-      #|  (b:num) = a
-      #|  (a:num) + 1 < b
-      #|  ~adjacent_interval_cover (p:num->num) b l
-      #|  adjacent_interval_cover (p:num->num) b k
-      #|  l < (p:num->num) b /\\ l < p(b + 1)
-      #|  ~adjacent_interval_cover (p:num->num) a l
-      #|  adjacent_interval_cover (p:num->num) a j
-      #|  (p:num->num) a <= l /\\ p(a + 1) <= l
-      #|  b:num
-      #|  adjacent_interval_cover (p:num->num) b l
-      #|  a:num
-      #|  adjacent_interval_cover (p:num->num) a l
-      #|  forall p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        j <= l /\\\n        l <= k\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l
-      #|  h:num
-      #|  h:num
-      #|  l:num
-      #|  b:num
-      #|  a + 1
-      #|  p:num->num
-      #|  (b:num) = a + 1
-      #|  (b:num) = a
-      #|  (a:num) + 1 < b
-      #|  ~adjacent_interval_cover (p:num->num) b l
-      #|  adjacent_interval_cover (p:num->num) b k
-      #|  (p:num->num) b <= l /\\ p(b + 1) <= l
-      #|  ~adjacent_interval_cover (p:num->num) a l
-      #|  adjacent_interval_cover (p:num->num) a j
-      #|  l < (p:num->num) a /\\ l < p(a + 1)
-      #|  b:num
-      #|  adjacent_interval_cover (p:num->num) b l
-      #|  a:num
-      #|  adjacent_interval_cover (p:num->num) a l
-      #|  forall p a b j k l.\n        a <= b /\\\n        adjacent_interval_cover p a j /\\\n        adjacent_interval_cover p b k /\\\n        k <= l /\\\n        l <= j\n        ==> ?h.\n              a <= h /\\\n              h <= b /\\\n              adjacent_interval_cover p h l
-      #|  (adjacent_interval_reachable p 0 i j <=> j = i) /\\\n    (forall k. adjacent_interval_reachable p (SUC k) i j <=>\n         ?h. adjacent_interval_reachable p k i h /\\\n             adjacent_interval_cover p h j)
-      #|  forall p i j.\n        adjacent_interval_reachable p 1 i j <=>\n        adjacent_interval_cover p i j
-      #|  h + 1
-      #|  h:num
-      #|  j:num
-      #|  h:num
-      #|  n:num
-      #|  p:num->num
-      #|  h:num
-      #|  i:num
-      #|  (h:num) + 1 < n
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  i:num
-      #|  forall p n k i j.\n        (forall r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        adjacent_interval_reachable p k i j\n        ==> j + 1 < n
-      #|  l:num
-      #|  l:num
-      #|  h:num
-      #|  i:num
-      #|  adjacent_interval_reachable p (SUC k) i l
-      #|  l:num
-      #|  j:num
-      #|  h:num
-      #|  i:num
-      #|  forall p k i h j.\n        adjacent_interval_cover p i h /\\\n        adjacent_interval_reachable p k h j\n        ==> adjacent_interval_reachable p (SUC k) i j
-      #|  m:num
-      #|  m:num
-      #|  j:num
-      #|  i:num
-      #|  adjacent_interval_reachable p (k + l) i m
-      #|  m:num
-      #|  h:num
-      #|  j:num
-      #|  i:num
-      #|  forall p k l i j h.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p l j h\n        ==> adjacent_interval_reachable p (k + l) i h
-      #|  j:num
-      #|  i:num
-      #|  i:num
-      #|  k:num
-      #|  p:num->num
-      #|  forall p k i j.\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_reachable p k i j\n        ==> adjacent_interval_reachable p (SUC k) i j
-      #|  h:num
-      #|  h:num
-      #|  h:num
-      #|  a:num
-      #|  b:num
-      #|  i:num
-      #|  h:num
-      #|  h:num
-      #|  m:num
-      #|  j:num
-      #|  l:num
-      #|  a:num
-      #|  b:num
-      #|  p:num->num
-      #|  h:num
-      #|  b:num
-      #|  a:num
-      #|  i:num
-      #|  h:num
-      #|  h:num
-      #|  m:num
-      #|  l:num
-      #|  j:num
-      #|  b:num
-      #|  a:num
-      #|  p:num->num
-      #|  (a:num) <= b
-      #|  ?h. adjacent_interval_reachable p k i h /\\\n          adjacent_interval_cover p h m
-      #|  b:num
-      #|  a:num
-      #|  m:num
-      #|  l:num
-      #|  j:num
-      #|  i:num
-      #|  forall p k i j l m.\n        adjacent_interval_reachable p k i j /\\\n        adjacent_interval_reachable p k i l /\\\n        j <= m /\\\n        m <= l\n        ==> adjacent_interval_reachable p k i m
-      #|  k:num
-      #|  r:num
-      #|  q:num->num
-      #|  (q:num->num) k
-      #|  i:num
-      #|  (q:num->num) k
-      #|  q:num->num
-      #|  (r:num) = k
-      #|  SUC(r:num) < SUC k
-      #|  (r:num) < k
-      #|  r:num
-      #|  0 < SUC k
-      #|  \\r. if r < SUC k then (q:num->num) r else j
-      #|  q:num->num
-      #|  h:num
-      #|  i:num
-      #|  h:num
-      #|  j:num
-      #|  i:num
-      #|  (q:num->num) 0 = i
-      #|  (q:num->num) 0 = j
-      #|  (q:num->num) 0
-      #|  q:num->num
-      #|  \\r:num. (i:num)
-      #|  j:num
-      #|  i:num
-      #|  forall p k i j.\n        adjacent_interval_reachable p k i j <=>\n        ?q. q 0 = i /\\\n            q k = j /\\\n            forall r. r < k\n                ==> adjacent_interval_cover p (q r) (q(SUC r))
-      #|  (q:num->num) r + 1
-      #|  (q:num->num) r
-      #|  (q:num->num)(SUC r)
-      #|  (q:num->num) r
-      #|  n:num
-      #|  p:num->num
-      #|  r <= k ==> (q:num->num) r + 1 < n
-      #|  (q:num->num) r + 1 < n
-      #|  forall p n k i (q:num->num).\n        (forall r. r < n ==> p r < n) /\\\n        i + 1 < n /\\\n        q 0 = i /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> forall r. r <= k ==> q r + 1 < n
-      #|  SUC k
-      #|  u:A->bool
-      #|  k:num
-      #|  k:num
-      #|  m:num
-      #|  CARD(u:A->bool)
+      #|  (periodic_point : ((A) -> A, Num, A) -> Bool)((f : (A) -> A), (n : Num), (x : A)) == (ITER(n, f, x) == x)
+      #|  (minimal_period : ((A) -> A, Num, A) -> Bool)((f : (A) -> A), (n : Num), (x : A)) == (0 < n && periodic_point(f, n, x) && (\226\136\128 m : Num, 0 < m && m < n \226\134\146 !periodic_point(f, m, x)))
+      #|  (has_period : ((A) -> A, Num) -> Bool)((f : (A) -> A), (n : Num)) == (\226\136\131 x : A, minimal_period(f, n, x))
+      #|  \226\136\128 f : (A) -> A, \226\136\128 x : A, periodic_point(f, 0, x)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 m : Num, periodic_point(f, n, x) \226\134\146 periodic_point(f, m * n, x)
+      #|  (n : Num) + (m : Num) == m + n
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 m : Num, periodic_point(f, n, x) \226\134\146 ITER(n + m, f, x) == ITER(m, f, x)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 i : Num, periodic_point(f, n, x) \226\134\146 periodic_point(f, n, ITER(i, f, x))
+      #|  ITER((n : Num) - 1, (f : (A) -> A), f((y : A))) == y
+      #|  ITER((n : Num) - 1, (f : (A) -> A), f((x : A))) == x
+      #|  (n : Num) - 1 + 1 == n
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 y : A, 0 < n && periodic_point(f, n, x) && periodic_point(f, n, y) \226\134\146 (f(x) == f(y)) == (x == y)
+      #|  ITER((k : Num), (f : (A) -> A), (y : A))
+      #|  ITER((k : Num), (f : (A) -> A), (x : A))
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 x : A, \226\136\128 y : A, 0 < n && periodic_point(f, n, x) && periodic_point(f, n, y) \226\134\146 (ITER(k, f, x) == ITER(k, f, y)) == (x == y)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 k : Num, \226\136\128 m : Num, \226\136\128 x : A, periodic_point(ITER(k, f), m, x) == periodic_point(f, m * k, x)
+      #|  ITER(DIV((m : Num), (n : Num)) * n + MOD(m, n), (f : (A) -> A), (x : A))
+      #|  periodic_point((f : (A) -> A), DIV((m : Num), (n : Num)) * n, (x : A))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 m : Num, 0 < n && periodic_point(f, n, x) \226\134\146 ITER(m, f, x) == ITER(MOD(m, n), f, x)
+      #|  (k : Num) => ITER(k, (f : (A) -> A), (x : A))
+      #|  ITER((n : Num) + ((j : Num) - (i : Num)), (f : (A) -> A), (x : A)) == ITER(j - i, f, x)
+      #|  (n : Num) - (i : Num) + i == n && n - i + (j : Num) == n + (j - i)
+      #|  ITER((n : Num) - (i : Num), (f : (A) -> A), ITER(i, f, (x : A))) == ITER(n - i, f, ITER((j : Num), f, x))
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 i : Num, \226\136\128 j : Num, periodic_point(f, n, x) && i <= j && j <= n && ITER(i, f, x) == ITER(j, f, x) \226\134\146 periodic_point(f, j - i, x)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  MOD((m : Num), (n : Num))
+      #|  0 < MOD((m : Num), (n : Num)) && MOD(m, n) < n
+      #|  MOD((m : Num), (n : Num)) == 0
+      #|  (m : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  periodic_point((f : (A) -> A), MOD((m : Num), (n : Num)), (x : A))
+      #|  (m : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, minimal_period(f, n, x) == (0 < n && (\226\136\128 m : Num, periodic_point(f, m, x) == divides(n, m)))
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, minimal_period(f, n, x) \226\134\146 0 < n
+      #|  (x : A)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, has_period(f, n) \226\134\146 0 < n
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, minimal_period(f, n, x) \226\134\146 periodic_point(f, n, x)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 m : Num, minimal_period(f, n, x) \226\134\146 periodic_point(f, m, x) == divides(n, m)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  (x : A)
+      #|  ITER((m : Num), (f : (A) -> A), (x : A))
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  periodic_point((f : (A) -> A), (m : Num), (x : A))
+      #|  ITER((k : Num), (f : (A) -> A), ITER((m : Num), f, (x : A))) == ITER(k, f, x)
+      #|  (k : Num) + (m : Num) == m + k
+      #|  ITER((k : Num), (f : (A) -> A), ITER((m : Num), f, (x : A))) == ITER(m, f, ITER(k, f, x))
+      #|  (m : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 k : Num, minimal_period(f, n, x) \226\134\146 minimal_period(f, n, ITER(k, f, x))
+      #|  divides((n : Num), (j : Num) - (i : Num))
+      #|  (j : Num) - (i : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  divides((n : Num), (j : Num) - (i : Num))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  periodic_point((f : (A) -> A), (j : Num) - (i : Num), (x : A))
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 i : Num, \226\136\128 j : Num, minimal_period(f, n, x) && i <= j && j < n && ITER(i, f, x) == ITER(j, f, x) \226\134\146 i == j
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  (j : Num) == (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  (i : Num) <= (j : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 i : Num, \226\136\128 j : Num, minimal_period(f, n, x) && i < n && j < n \226\134\146 (ITER(i, f, x) == ITER(j, f, x)) == (i == j)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : A, minimal_period(f, m, x) && minimal_period(f, n, x) \226\134\146 m == n
+      #|  (m : Num)
+      #|  (n : Num) == 0
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  (f : (A) -> A)
+      #|  (op_eq : (A, A) -> Bool)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 x : A, \226\136\128 m : Num, 0 < m && periodic_point(f, m, x) \226\134\146 (\226\136\131 n : Num, divides(n, m) && minimal_period(f, n, x))
+      #|  (m : Num)
+      #|  gcd(((n : Num), (k : Num)))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  DIV((n : Num), gcd((n, (k : Num)))) * gcd((n, k)) == n
+      #|  DIV((n : Num), gcd((n, (k : Num)))) == 0
+      #|  DIV((n : Num), gcd((n, (k : Num)))) * gcd((n, k)) == n
+      #|  divides(gcd(((n : Num), (k : Num))), n)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 k : Num, minimal_period(f, n, x) \226\134\146 minimal_period(ITER(k, f), DIV(n, gcd((n, k))), x)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 k : Num, has_period(f, n) \226\134\146 has_period(ITER(k, f), DIV(n, gcd((n, k))))
+      #|  (m : Num) - (m - (r : Num)) == r
+      #|  divides((d : Num), (m : Num) - (m - (r : Num)))
+      #|  \226\136\128 d : Num, \226\136\128 m : Num, \226\136\128 r : Num, divides(d, m) && 0 < r && r < d && r <= m \226\134\146 !divides(d, m - r)
+      #|  (r : Num)
+      #|  (m : Num)
+      #|  (m : Num) - (r : Num)
+      #|  \226\136\128 m : Num, \226\136\128 r : Num, 0 < r && 2 * r < m \226\134\146 !divides(m - r, m)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (A) -> A)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  CARD({(i : Num) | i < (n : Num)})
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, minimal_period(f, n, x) \226\134\146 CARD(IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n})) == n
+      #|  MOD(SUC((i : Num)), (n : Num))
+      #|  (f : (A) -> A)(ITER((i : Num), f, (x : A))) == ITER(MOD(SUC(i), (n : Num)), f, x)
+      #|  MOD(SUC((i : Num)), (n : Num)) < n
+      #|  ITER(SUC((i : Num)), (f : (A) -> A), (x : A)) == ITER(MOD(SUC(i), (n : Num)), f, x)
+      #|  periodic_point((f : (A) -> A), (n : Num), (x : A))
+      #|  0 < (n : Num)
+      #|  (i : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 y : A, minimal_period(f, n, x) && IN(y, IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n})) \226\134\146 IN(f(y), IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n}))
+      #|  (i : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, \226\136\128 y : A, minimal_period(f, n, x) && IN(y, IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n})) \226\134\146 minimal_period(f, n, y)
+      #|  (k : Num) - 1 + 1 == k
+      #|  (k : Num) - 1
+      #|  (k : Num)
+      #|  (i : Num) + 1
+      #|  (i : Num)
+      #|  (y : Real)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num) => (g : (Num) -> Real)(i + 1)
+      #|  (g : (Num) -> Real)
+      #|  (s : (Real) -> Bool)
+      #|  (n : Num)
+      #|  op_lt_eq
+      #|  HAS_SIZE((s : (Real) -> Bool), (n : Num))
+      #|  (s : (Real) -> Bool) == IMAGE((i : Num) => ITER(i, (f : (Real) -> Real), (x : Real)), {(i : Num) | i < (n : Num)})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 x : Real, minimal_period(f, n, x) \226\134\146 (\226\136\131 z : (Num) -> Real, (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && IMAGE(z, {(i : Num) | i < n}) == IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n}))
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num) < (j : Num)
+      #|  (i : Num) == (j : Num)
+      #|  \226\136\128 z : (Num) -> Real, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < n \226\134\146 z(r) < z(s)) && i < n && j < n \226\134\146 (z(i) == z(j)) == (i == j)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  IN((f : (Real) -> Real)((z : (Num) -> Real)((i : Num))), IMAGE((k : Num) => ITER(k, f, (x : Real)), {(k : Num) | k < (n : Num)}))
+      #|  (i : Num)
+      #|  IN((z : (Num) -> Real)((i : Num)), IMAGE((k : Num) => ITER(k, (f : (Real) -> Real), (x : Real)), {(k : Num) | k < (n : Num)}))
+      #|  \226\136\131 j : Num, j < (n : Num) && (f : (Real) -> Real)((z : (Num) -> Real)((i : Num))) == z(j)
+      #|  (i : Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num) == ((i : Num) => select((j : Num) => j < (n : Num) && (f : (Real) -> Real)((z : (Num) -> Real)(i)) == z(j)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 z : (Num) -> Real, minimal_period(f, n, x) && IMAGE(z, {(i : Num) | i < n}) == IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n}) \226\134\146 (\226\136\131 p : (Num) -> Num, \226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i)))
+      #|  ITER((k : Num), (p : (Num) -> Num), (i : Num))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 z : (Num) -> A, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) \226\134\146 (\226\136\128 k : Num, \226\136\128 i : Num, i < n \226\134\146 ITER(k, p, i) < n && ITER(k, f, z(i)) == z(ITER(k, p, i)))
+      #|  (m : Num)
+      #|  (z : (Num) -> Real)((i : Num))
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (i : Num)
+      #|  ITER((m : Num), (p : (Num) -> Num), (i : Num))
+      #|  (n : Num)
+      #|  (z : (Num) -> Real)
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (m : Num)
+      #|  (z : (Num) -> Real)((i : Num))
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  minimal_period((f : (Real) -> Real), (n : Num), (z : (Num) -> Real)((i : Num)))
+      #|  (i : Num)
+      #|  IN((z : (Num) -> Real)((i : Num)), IMAGE((k : Num) => ITER(k, (f : (Real) -> Real), (x : Real)), {(k : Num) | k < (n : Num)}))
+      #|  (i : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 x : Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, minimal_period(f, n, x) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && IMAGE(z, {(i : Num) | i < n}) == IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n}) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) \226\134\146 (\226\136\128 i : Num, i < n \226\134\146 minimal_period(p, n, i))
+      #|  (adjacent_interval_cover : ((Num) -> Num, Num, Num) -> Bool)((p : (Num) -> Num), (i : Num), (j : Num)) == (p(i) <= j && j + 1 <= p(i + 1) || p(i + 1) <= j && j + 1 <= p(i))
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, p(i) < n && p(i + 1) < n && adjacent_interval_cover(p, i, j) \226\134\146 j + 1 < n
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 i : Num, \226\136\128 j : Num, adjacent_interval_cover(p, i, j) == (MIN(p(i), p(i + 1)) <= j && j < MAX(p(i), p(i + 1)))
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 i : Num, \226\136\128 j : Num, \226\136\128 k : Num, \226\136\128 l : Num, adjacent_interval_cover(p, i, j) && adjacent_interval_cover(p, i, k) && j <= l && l <= k \226\134\146 adjacent_interval_cover(p, i, l)
+      #|  (j : Num)
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (a : Num) < (b : Num)
+      #|  (a : Num) + SUC((d : Num)) + 1 == a + SUC(SUC(d))
+      #|  (a : Num) + SUC((d : Num))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((a : Num) + SUC((d : Num))) <= (j : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) + SUC((d : Num)) + 1 == a + SUC(SUC(d))
+      #|  (a : Num) + SUC((d : Num))
+      #|  (p : (Num) -> Num)((a : Num) + SUC((d : Num))) <= (j : Num)
+      #|  (j : Num)
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num)
+      #|  (j : Num)
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 d : Num, \226\136\128 p : (Num) -> Num, \226\136\128 a : Num, \226\136\128 j : Num, p(a) <= j && j < p(a + SUC(d)) || p(a + SUC(d)) <= j && j < p(a) \226\134\146 (\226\136\131 i : Num, a <= i && i < a + SUC(d) && adjacent_interval_cover(p, i, j))
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 j : Num, a < b && (p(a) <= j && j < p(b) || p(b) <= j && j < p(a)) \226\134\146 (\226\136\131 i : Num, a <= i && i < b && adjacent_interval_cover(p, i, j))
+      #|  (h : Num)
+      #|  (h : Num)
+      #|  (l : Num)
+      #|  (b : Num)
+      #|  (a : Num) + 1
+      #|  (p : (Num) -> Num)
+      #|  (b : Num) == (a : Num) + 1
+      #|  (b : Num) == (a : Num)
+      #|  (a : Num) + 1 < (b : Num)
+      #|  !adjacent_interval_cover((p : (Num) -> Num), (b : Num), (l : Num))
+      #|  adjacent_interval_cover((p : (Num) -> Num), (b : Num), (k : Num))
+      #|  (l : Num) < (p : (Num) -> Num)((b : Num)) && l < p(b + 1)
+      #|  !adjacent_interval_cover((p : (Num) -> Num), (a : Num), (l : Num))
+      #|  adjacent_interval_cover((p : (Num) -> Num), (a : Num), (j : Num))
+      #|  (p : (Num) -> Num)((a : Num)) <= (l : Num) && p(a + 1) <= l
+      #|  (b : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (b : Num), (l : Num))
+      #|  (a : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (a : Num), (l : Num))
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 j : Num, \226\136\128 k : Num, \226\136\128 l : Num, a <= b && adjacent_interval_cover(p, a, j) && adjacent_interval_cover(p, b, k) && j <= l && l <= k \226\134\146 (\226\136\131 h : Num, a <= h && h <= b && adjacent_interval_cover(p, h, l))
+      #|  (h : Num)
+      #|  (h : Num)
+      #|  (l : Num)
+      #|  (b : Num)
+      #|  (a : Num) + 1
+      #|  (p : (Num) -> Num)
+      #|  (b : Num) == (a : Num) + 1
+      #|  (b : Num) == (a : Num)
+      #|  (a : Num) + 1 < (b : Num)
+      #|  !adjacent_interval_cover((p : (Num) -> Num), (b : Num), (l : Num))
+      #|  adjacent_interval_cover((p : (Num) -> Num), (b : Num), (k : Num))
+      #|  (p : (Num) -> Num)((b : Num)) <= (l : Num) && p(b + 1) <= l
+      #|  !adjacent_interval_cover((p : (Num) -> Num), (a : Num), (l : Num))
+      #|  adjacent_interval_cover((p : (Num) -> Num), (a : Num), (j : Num))
+      #|  (l : Num) < (p : (Num) -> Num)((a : Num)) && l < p(a + 1)
+      #|  (b : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (b : Num), (l : Num))
+      #|  (a : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (a : Num), (l : Num))
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 j : Num, \226\136\128 k : Num, \226\136\128 l : Num, a <= b && adjacent_interval_cover(p, a, j) && adjacent_interval_cover(p, b, k) && k <= l && l <= j \226\134\146 (\226\136\131 h : Num, a <= h && h <= b && adjacent_interval_cover(p, h, l))
+      #|  (adjacent_interval_reachable : ((Num) -> Num, Num, Num, Num) -> Bool)((p : (Num) -> Num), 0, (i : Num), (j : Num)) == (j == i) && (\226\136\128 k : Num, adjacent_interval_reachable(p, SUC(k), i, j) == (\226\136\131 h : Num, adjacent_interval_reachable(p, k, i, h) && adjacent_interval_cover(p, h, j)))
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 i : Num, \226\136\128 j : Num, adjacent_interval_reachable(p, 1, i, j) == adjacent_interval_cover(p, i, j)
+      #|  (h : Num) + 1
+      #|  (h : Num)
+      #|  (j : Num)
+      #|  (h : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  (h : Num) + 1 < (n : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 r : Num, r < n \226\134\146 p(r) < n) && i + 1 < n && adjacent_interval_reachable(p, k, i, j) \226\134\146 j + 1 < n
+      #|  (l : Num)
+      #|  (l : Num)
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  adjacent_interval_reachable((p : (Num) -> Num), SUC((k : Num)), (i : Num), (l : Num))
+      #|  (l : Num)
+      #|  (j : Num)
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 k : Num, \226\136\128 i : Num, \226\136\128 h : Num, \226\136\128 j : Num, adjacent_interval_cover(p, i, h) && adjacent_interval_reachable(p, k, h, j) \226\134\146 adjacent_interval_reachable(p, SUC(k), i, j)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  adjacent_interval_reachable((p : (Num) -> Num), (k : Num) + (l : Num), (i : Num), (m : Num))
+      #|  (m : Num)
+      #|  (h : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 k : Num, \226\136\128 l : Num, \226\136\128 i : Num, \226\136\128 j : Num, \226\136\128 h : Num, adjacent_interval_reachable(p, k, i, j) && adjacent_interval_reachable(p, l, j, h) \226\134\146 adjacent_interval_reachable(p, k + l, i, h)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (k : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 k : Num, \226\136\128 i : Num, \226\136\128 j : Num, adjacent_interval_cover(p, i, i) && adjacent_interval_reachable(p, k, i, j) \226\134\146 adjacent_interval_reachable(p, SUC(k), i, j)
+      #|  (h : Num)
+      #|  (h : Num)
+      #|  (h : Num)
+      #|  (a : Num)
+      #|  (b : Num)
+      #|  (i : Num)
+      #|  (h : Num)
+      #|  (h : Num)
+      #|  (m : Num)
+      #|  (j : Num)
+      #|  (l : Num)
+      #|  (a : Num)
+      #|  (b : Num)
+      #|  (p : (Num) -> Num)
+      #|  (h : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (i : Num)
+      #|  (h : Num)
+      #|  (h : Num)
+      #|  (m : Num)
+      #|  (l : Num)
+      #|  (j : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) <= (b : Num)
+      #|  \226\136\131 h : Num, adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h) && adjacent_interval_cover(p, h, (m : Num))
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (m : Num)
+      #|  (l : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 k : Num, \226\136\128 i : Num, \226\136\128 j : Num, \226\136\128 l : Num, \226\136\128 m : Num, adjacent_interval_reachable(p, k, i, j) && adjacent_interval_reachable(p, k, i, l) && j <= m && m <= l \226\134\146 adjacent_interval_reachable(p, k, i, m)
+      #|  (k : Num)
+      #|  (r : Num)
+      #|  (q : (Num) -> Num)
+      #|  (q : (Num) -> Num)((k : Num))
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)((k : Num))
+      #|  (q : (Num) -> Num)
+      #|  (r : Num) == (k : Num)
+      #|  SUC((r : Num)) < SUC((k : Num))
+      #|  (r : Num) < (k : Num)
+      #|  (r : Num)
+      #|  0 < SUC((k : Num))
+      #|  (r : Num) => if r < SUC((k : Num)) { (q : (Num) -> Num)(r) } else { (j : Num) }
+      #|  (q : (Num) -> Num)
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  (h : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)(0) == (i : Num)
+      #|  (q : (Num) -> Num)(0) == (j : Num)
+      #|  (q : (Num) -> Num)(0)
+      #|  (q : (Num) -> Num)
+      #|  (r : Num) => (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 k : Num, \226\136\128 i : Num, \226\136\128 j : Num, adjacent_interval_reachable(p, k, i, j) == (\226\136\131 q : (Num) -> Num, q(0) == i && q(k) == j && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))))
+      #|  (q : (Num) -> Num)((r : Num)) + 1
+      #|  (q : (Num) -> Num)((r : Num))
+      #|  (q : (Num) -> Num)(SUC((r : Num)))
+      #|  (q : (Num) -> Num)((r : Num))
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (r : Num) <= (k : Num) \226\134\146 (q : (Num) -> Num)(r) + 1 < (n : Num)
+      #|  (q : (Num) -> Num)((r : Num)) + 1 < (n : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 i : Num, \226\136\128 q : (Num) -> Num, (\226\136\128 r : Num, r < n \226\134\146 p(r) < n) && i + 1 < n && q(0) == i && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))) \226\134\146 (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n)
+      #|  SUC((k : Num))
+      #|  (u : (A) -> Bool)
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (m : Num)
+      #|  CARD((u : (A) -> Bool))
       #|  0
-      #|  CARD((s:num->A->bool) 0)
-      #|  \\m. ?k. m = CARD((s:num->A->bool) k)
-      #|  forall s:num->A->bool u.\n        FINITE u /\\\n        (forall k. s k SUBSET u) /\\\n        (forall k. s k SUBSET s(SUC k))\n        ==> ?k. s(SUC k) = s k
-      #|  CARD(IMAGE (\\m. ITER m (p:num->num) a) {m | m < n}) <=\n    CARD(a..b)
-      #|  a:num
-      #|  CARD(IMAGE (\\m. ITER m (p:num->num) a) {m | m < n}) = n
-      #|  IMAGE (\\m. ITER m (p:num->num) a) {m | m < n}\n    SUBSET (a..b)
-      #|  forall r. a <= r /\\ r <= b\n             ==> a <= (p:num->num) r /\\ p r <= b
-      #|  ITER m (p:num->num) a
-      #|  forall m. ITER m (p:num->num) a IN (a..b)
-      #|  r:num
-      #|  (b:num) - 1 + 1 = b
-      #|  (b:num) - 1 + 1 = b
-      #|  b - 1
-      #|  (r:num) = b
-      #|  r:num
-      #|  forall r. a <= r /\\ r <= b\n        ==> a <= (p:num->num) r /\\ p r <= b
-      #|  (p:num->num) h - 1
-      #|  h:num
-      #|  a <= (p:num->num) h - 1 /\\ p h - 1 < b
-      #|  (p:num->num) (h + 1)
-      #|  h:num
-      #|  a <= (p:num->num) (h + 1) /\\ p(h + 1) < b
-      #|  (p:num->num) (h + 1) < p h
-      #|  (p:num->num) (h + 1) - 1
-      #|  h:num
-      #|  a <= (p:num->num) (h + 1) - 1 /\\\n        p(h + 1) - 1 < b
-      #|  (p:num->num) h
-      #|  h:num
-      #|  a <= (p:num->num) h /\\ p h < b
-      #|  (p:num->num) h < p(h + 1)
-      #|  h + 1
-      #|  h:num
-      #|  h + 1
-      #|  h:num
-      #|  n:num
-      #|  p:num->num
-      #|  ~((p:num->num) h = p(h + 1))
-      #|  h:num
-      #|  forall h. a <= h /\\ h < b\n        ==> a <= (p:num->num) h /\\\n            p h <= b /\\\n            a <= p(h + 1) /\\\n            p(h + 1) <= b
-      #|  forall p n a b.\n        a < b /\\\n        b < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i) /\\\n        (forall i j.\n             a <= i /\\\n             i < b /\\\n             adjacent_interval_cover p i j\n             ==> a <= j /\\ j < b)\n        ==> a = 0 /\\ b + 1 = n
-      #|  h + 1 < n /\\\n    adjacent_interval_reachable (p:num->num) k i h
-      #|  h:num
-      #|  k:num
-      #|  adjacent_interval_reachable (p:num->num) k i l
-      #|  (l:num) + 1 < n
-      #|  l:num
-      #|  (a:num) <= l /\\ l <= b
-      #|  l:num
-      #|  h:num
-      #|  l + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i l
-      #|  h:num
-      #|  h + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i h
-      #|  l:num
-      #|  h:num
-      #|  b + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i b
-      #|  b + 1
-      #|  a:num
-      #|  n:num
-      #|  p:num->num
-      #|  ~((j:num) = i)
-      #|  (i:num) = j
-      #|  (a:num) < b
-      #|  adjacent_interval_reachable (p:num->num) k i j
-      #|  j:num
-      #|  (a:num) <= j /\\ j <= b
-      #|  k:num
-      #|  i:num
-      #|  (a:num) <= i /\\ i <= b
-      #|  (a:num) < b
-      #|  h:num
-      #|  b:num
-      #|  a:num
-      #|  i:num
-      #|  k:num
-      #|  p:num->num
-      #|  b + 1 < n /\\\n          adjacent_interval_reachable (p:num->num) k i b
-      #|  h + 1 < n /\\\n            adjacent_interval_reachable (p:num->num) k i h
-      #|  h:num
-      #|  (h:num) < a
-      #|  (a:num) <= h
-      #|  h:num
-      #|  forall h.\n        (h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h <=>\n         a <= h /\\ h <= b)
-      #|  h:num
-      #|  n:num
-      #|  i:num
-      #|  \\h. h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h
-      #|  i:num
-      #|  \\h. h + 1 < n /\\\n         adjacent_interval_reachable (p:num->num) k i h
-      #|  j:num
-      #|  i:num
-      #|  j + 1 < n /\\\n    adjacent_interval_reachable (p:num->num) k i j
-      #|  h:num
-      #|  l IN {q | q + 1 < n /\\\n                  adjacent_interval_reachable\n                   (p:num->num) k i q}
-      #|  h + 1
-      #|  h:num
-      #|  l:num
-      #|  h:num
-      #|  n:num
-      #|  p:num->num
-      #|  (l:num) + 1 < n
-      #|  l:num
-      #|  h:num
-      #|  forall h l.\n        h + 1 < n /\\\n        adjacent_interval_reachable (p:num->num) k i h /\\\n        adjacent_interval_cover p h l\n        ==> l + 1 < n /\\\n            adjacent_interval_reachable p k i l
-      #|  k:num
-      #|  h:num
-      #|  m:num
-      #|  m:num
-      #|  0..n
-      #|  \\k. {h | h + 1 < n /\\\n              adjacent_interval_reachable (p:num->num) k i h}
-      #|  forall m. adjacent_interval_reachable (p:num->num) m i i
-      #|  forall p n i j.\n        (forall r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(j = i) /\\\n        adjacent_interval_cover p i i /\\\n        adjacent_interval_cover p i j\n        ==> ?k.\n              forall h. h + 1 < n\n                  ==> adjacent_interval_reachable p k i h
-      #|  i + 1
-      #|  i - 1
-      #|  2 = SUC(SUC 0)
+      #|  CARD((s : (Num, A) -> Bool)(0))
+      #|  (m : Num) => \226\136\131 k : Num, m == CARD((s : (Num, A) -> Bool)(k))
+      #|  \226\136\128 s : (Num, A) -> Bool, \226\136\128 u : (A) -> Bool, FINITE(u) && (\226\136\128 k : Num, SUBSET(s(k), u)) && (\226\136\128 k : Num, SUBSET(s(k), s(SUC(k)))) \226\134\146 (\226\136\131 k : Num, s(SUC(k)) == s(k))
+      #|  CARD(IMAGE((m : Num) => ITER(m, (p : (Num) -> Num), (a : Num)), {(m : Num) | m < (n : Num)})) <= CARD(op_dot_dot(a, (b : Num)))
+      #|  (a : Num)
+      #|  CARD(IMAGE((m : Num) => ITER(m, (p : (Num) -> Num), (a : Num)), {(m : Num) | m < (n : Num)})) == n
+      #|  SUBSET(IMAGE((m : Num) => ITER(m, (p : (Num) -> Num), (a : Num)), {(m : Num) | m < (n : Num)}), op_dot_dot(a, (b : Num)))
+      #|  \226\136\128 r : Num, (a : Num) <= r && r <= (b : Num) \226\134\146 a <= (p : (Num) -> Num)(r) && p(r) <= b
+      #|  ITER((m : Num), (p : (Num) -> Num), (a : Num))
+      #|  \226\136\128 m : Num, IN(ITER(m, (p : (Num) -> Num), (a : Num)), op_dot_dot(a, (b : Num)))
+      #|  (r : Num)
+      #|  (b : Num) - 1 + 1 == b
+      #|  (b : Num) - 1 + 1 == b
+      #|  (b : Num) - 1
+      #|  (r : Num) == (b : Num)
+      #|  (r : Num)
+      #|  \226\136\128 r : Num, (a : Num) <= r && r <= (b : Num) \226\134\146 a <= (p : (Num) -> Num)(r) && p(r) <= b
+      #|  (p : (Num) -> Num)((h : Num)) - 1
+      #|  (h : Num)
+      #|  (a : Num) <= (p : (Num) -> Num)((h : Num)) - 1 && p(h) - 1 < (b : Num)
+      #|  (p : (Num) -> Num)((h : Num) + 1)
+      #|  (h : Num)
+      #|  (a : Num) <= (p : (Num) -> Num)((h : Num) + 1) && p(h + 1) < (b : Num)
+      #|  (p : (Num) -> Num)((h : Num) + 1) < p(h)
+      #|  (p : (Num) -> Num)((h : Num) + 1) - 1
+      #|  (h : Num)
+      #|  (a : Num) <= (p : (Num) -> Num)((h : Num) + 1) - 1 && p(h + 1) - 1 < (b : Num)
+      #|  (p : (Num) -> Num)((h : Num))
+      #|  (h : Num)
+      #|  (a : Num) <= (p : (Num) -> Num)((h : Num)) && p(h) < (b : Num)
+      #|  (p : (Num) -> Num)((h : Num)) < p(h + 1)
+      #|  (h : Num) + 1
+      #|  (h : Num)
+      #|  (h : Num) + 1
+      #|  (h : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  !((p : (Num) -> Num)((h : Num)) == p(h + 1))
+      #|  (h : Num)
+      #|  \226\136\128 h : Num, (a : Num) <= h && h < (b : Num) \226\134\146 a <= (p : (Num) -> Num)(h) && p(h) <= b && a <= p(h + 1) && p(h + 1) <= b
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 a : Num, \226\136\128 b : Num, a < b && b < n && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) && (\226\136\128 i : Num, \226\136\128 j : Num, a <= i && i < b && adjacent_interval_cover(p, i, j) \226\134\146 a <= j && j < b) \226\134\146 a == 0 && b + 1 == n
+      #|  (h : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h)
+      #|  (h : Num)
+      #|  (k : Num)
+      #|  adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), (l : Num))
+      #|  (l : Num) + 1 < (n : Num)
+      #|  (l : Num)
+      #|  (a : Num) <= (l : Num) && l <= (b : Num)
+      #|  (l : Num)
+      #|  (h : Num)
+      #|  (l : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), l)
+      #|  (h : Num)
+      #|  (h : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h)
+      #|  (l : Num)
+      #|  (h : Num)
+      #|  (b : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), b)
+      #|  (b : Num) + 1
+      #|  (a : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  !((j : Num) == (i : Num))
+      #|  (i : Num) == (j : Num)
+      #|  (a : Num) < (b : Num)
+      #|  adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), (j : Num))
+      #|  (j : Num)
+      #|  (a : Num) <= (j : Num) && j <= (b : Num)
+      #|  (k : Num)
+      #|  (i : Num)
+      #|  (a : Num) <= (i : Num) && i <= (b : Num)
+      #|  (a : Num) < (b : Num)
+      #|  (h : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (i : Num)
+      #|  (k : Num)
+      #|  (p : (Num) -> Num)
+      #|  (b : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), b)
+      #|  (h : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h)
+      #|  (h : Num)
+      #|  (h : Num) < (a : Num)
+      #|  (a : Num) <= (h : Num)
+      #|  (h : Num)
+      #|  \226\136\128 h : Num, (h + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h)) == ((a : Num) <= h && h <= (b : Num))
+      #|  (h : Num)
+      #|  (n : Num)
+      #|  (i : Num)
+      #|  (h : Num) => h + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h)
+      #|  (i : Num)
+      #|  (h : Num) => h + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num) + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), j)
+      #|  (h : Num)
+      #|  IN((l : Num), {(q : Num) | q + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), q)})
+      #|  (h : Num) + 1
+      #|  (h : Num)
+      #|  (l : Num)
+      #|  (h : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (l : Num) + 1 < (n : Num)
+      #|  (l : Num)
+      #|  (h : Num)
+      #|  \226\136\128 h : Num, \226\136\128 l : Num, h + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), (k : Num), (i : Num), h) && adjacent_interval_cover(p, h, l) \226\134\146 l + 1 < n && adjacent_interval_reachable(p, k, i, l)
+      #|  (k : Num)
+      #|  (h : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  op_dot_dot(0, (n : Num))
+      #|  (k : Num) => {(h : Num) | h + 1 < (n : Num) && adjacent_interval_reachable((p : (Num) -> Num), k, (i : Num), h)}
+      #|  \226\136\128 m : Num, adjacent_interval_reachable((p : (Num) -> Num), m, (i : Num), i)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, (\226\136\128 r : Num, r < n \226\134\146 p(r) < n && minimal_period(p, n, r)) && i + 1 < n && j + 1 < n && !(j == i) && adjacent_interval_cover(p, i, i) && adjacent_interval_cover(p, i, j) \226\134\146 (\226\136\131 k : Num, \226\136\128 h : Num, h + 1 < n \226\134\146 adjacent_interval_reachable(p, k, i, h))
+      #|  (i : Num) + 1
+      #|  (i : Num) - 1
+      #|  2 == SUC(SUC(0))
       #|  2
       #|  0
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  (p:num->num) (i + 1) = i /\\ p i = i + 1
-      #|  i + 1 < (p:num->num) i
-      #|  (p:num->num) (i + 1) < i
-      #|  (p:num->num) (i + 1) < i \\/ i + 1 < p i
-      #|  i + 1
-      #|  i - 1
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((i : Num) + 1) == i && p(i) == i + 1
+      #|  (i : Num) + 1 < (p : (Num) -> Num)(i)
+      #|  (p : (Num) -> Num)((i : Num) + 1) < i
+      #|  (p : (Num) -> Num)((i : Num) + 1) < i || i + 1 < p(i)
+      #|  (i : Num) + 1
+      #|  (i : Num) - 1
       #|  1
       #|  0
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  (p:num->num) i = i
-      #|  i + 1 < (p:num->num) (i + 1)
-      #|  (p:num->num) i < i
-      #|  (p:num->num) i < i \\/ i + 1 < p(i + 1)
-      #|  i + 1
-      #|  i:num
-      #|  i:num
-      #|  (p:num->num) i < n /\\\n    minimal_period p n i /\\\n    p(i + 1) < n
-      #|  forall p n i.\n        2 < n /\\\n        (forall r. r < n ==> p r < n /\\ minimal_period p n r) /\\\n        i + 1 < n /\\\n        adjacent_interval_cover p i i\n        ==> ?j.\n              j + 1 < n /\\\n              ~(j = i) /\\\n              adjacent_interval_cover p i j
-      #|  (i:num) < (p:num->num) i
-      #|  (p:num->num) (i + 1) <= i
-      #|  (i:num) + 1 < n
-      #|  i:num
-      #|  ~((p:num->num) (i + 1) = i + 1)
-      #|  ~((p:num->num) (i + 1) <= i)
-      #|  (i:num) + 1 < n
-      #|  forall j. j < n /\\ j < (p:num->num) j ==> j <= i
-      #|  i + 1
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((i : Num)) == i
+      #|  (i : Num) + 1 < (p : (Num) -> Num)(i + 1)
+      #|  (p : (Num) -> Num)((i : Num)) < i
+      #|  (p : (Num) -> Num)((i : Num)) < i || i + 1 < p(i + 1)
+      #|  (i : Num) + 1
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (p : (Num) -> Num)((i : Num)) < (n : Num) && minimal_period(p, n, i) && p(i + 1) < n
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 i : Num, 2 < n && (\226\136\128 r : Num, r < n \226\134\146 p(r) < n && minimal_period(p, n, r)) && i + 1 < n && adjacent_interval_cover(p, i, i) \226\134\146 (\226\136\131 j : Num, j + 1 < n && !(j == i) && adjacent_interval_cover(p, i, j))
+      #|  (i : Num) < (p : (Num) -> Num)(i)
+      #|  (p : (Num) -> Num)((i : Num) + 1) <= i
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num)
+      #|  !((p : (Num) -> Num)((i : Num) + 1) == i + 1)
+      #|  !((p : (Num) -> Num)((i : Num) + 1) <= i)
+      #|  (i : Num) + 1 < (n : Num)
+      #|  \226\136\128 j : Num, j < (n : Num) && j < (p : (Num) -> Num)(j) \226\134\146 j <= (i : Num)
+      #|  (i : Num) + 1
       #|  1
       #|  0
-      #|  i + 1
-      #|  n:num
-      #|  p:num->num
-      #|  ~((p:num->num) (i + 1) = i + 1)
-      #|  (p:num->num) (i + 1) <= i
-      #|  (p:num->num) (i + 1) <= i
-      #|  (i:num) + 1 < n
-      #|  i + 1
-      #|  (p:num->num) (i + 1) < n /\\\n    minimal_period p n (i + 1)
-      #|  (i:num) < (p:num->num) i
-      #|  (i:num) < n
-      #|  i:num
-      #|  (i:num) + 1 < n
-      #|  i:num
-      #|  j:num
-      #|  n:num
+      #|  (i : Num) + 1
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  !((p : (Num) -> Num)((i : Num) + 1) == i + 1)
+      #|  (p : (Num) -> Num)((i : Num) + 1) <= i
+      #|  (p : (Num) -> Num)((i : Num) + 1) <= i
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num) + 1
+      #|  (p : (Num) -> Num)((i : Num) + 1) < (n : Num) && minimal_period(p, n, i + 1)
+      #|  (i : Num) < (p : (Num) -> Num)(i)
+      #|  (i : Num) < (n : Num)
+      #|  (i : Num)
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (n : Num)
       #|  1
       #|  0
       #|  0
-      #|  n:num
-      #|  p:num->num
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
       #|  0
-      #|  \\j:num. j < n /\\ j < (p:num->num) j
-      #|  ?i:num.\n        (i < n /\\ i < (p:num->num) i) /\\\n        forall j. j < n /\\ j < p j ==> j <= i
+      #|  (j : Num) => j < (n : Num) && j < (p : (Num) -> Num)(j)
+      #|  \226\136\131 i : Num, (i < (n : Num) && i < (p : (Num) -> Num)(i)) && (\226\136\128 j : Num, j < n && j < p(j) \226\134\146 j <= i)
       #|  0
-      #|  (p:num->num) 0 < n /\\ minimal_period p n 0
-      #|  forall p n.\n        1 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i.\n              i + 1 < n /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i
-      #|  i + 1
-      #|  EVEN n
-      #|  (n:num) = 2 * (i + 1)
-      #|  CARD((i + 1)..(n - 1)) <= CARD(0..i)
-      #|  CARD(0..i) <= CARD((i + 1)..(n - 1))
-      #|  s:num
-      #|  r:num
-      #|  CARD(IMAGE (p:num->num) ((i + 1)..(n - 1))) =\n    CARD((i + 1)..(n - 1))
-      #|  s:num
-      #|  r:num
-      #|  CARD(IMAGE (p:num->num) (0..i)) = CARD(0..i)
-      #|  r:num
-      #|  r:num
-      #|  IMAGE (p:num->num) ((i + 1)..(n - 1)) SUBSET (0..i)
-      #|  r:num
-      #|  r:num
-      #|  r:num
-      #|  IMAGE (p:num->num) (0..i) SUBSET ((i + 1)..(n - 1))
-      #|  s:num
-      #|  r:num
-      #|  s:num
-      #|  r:num
-      #|  n:num
-      #|  p:num->num
-      #|  s:num
-      #|  r:num
-      #|  forall r s.\n        r < n /\\ s < n /\\ (p:num->num) r = p s\n        ==> r = s
-      #|  h:num
-      #|  ?j. j + 1 < n /\\\n          ~(j = i) /\\\n          adjacent_interval_cover (p:num->num) j i
-      #|  h:num
-      #|  (r:num) = i + 1
-      #|  i:num
-      #|  r:num
-      #|  i + 1
-      #|  p:num->num
-      #|  (p:num->num) r <= i
-      #|  r:num
-      #|  forall r. i + 1 <= r /\\ r < n ==> (p:num->num) r <= i
-      #|  h:num
-      #|  ?j. j + 1 < n /\\\n          ~(j = i) /\\\n          adjacent_interval_cover (p:num->num) j i
-      #|  h:num
-      #|  i:num
-      #|  i:num
-      #|  r:num
-      #|  p:num->num
-      #|  i < (p:num->num) r
-      #|  (r:num) = i
-      #|  r:num
-      #|  forall r. r <= i ==> i < (p:num->num) r
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  ?j. j + 1 < n /\\ ~(j = i) /\\ adjacent_interval_cover p j i
-      #|  i + 1
-      #|  (p:num->num) (i + 1) < n
-      #|  (i:num) + 1 < n
-      #|  i:num
-      #|  (p:num->num) i < n
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?i j.\n              i + 1 < n /\\\n              j + 1 < n /\\\n              ~(j = i) /\\\n              p(i + 1) <= i /\\\n              i + 1 <= p i /\\\n              adjacent_interval_cover p i i /\\\n              adjacent_interval_cover p j i
-      #|  (r:num) = m
-      #|  SUC(r:num) < SUC m
-      #|  (r:num) < m
-      #|  r:num
-      #|  0 < SUC m
-      #|  m < SUC m
-      #|  SUC m - 1 = m
-      #|  0 < SUC m
-      #|  0 < SUC m
-      #|  0 < SUC m
-      #|  0 < SUC m
-      #|  (r:num) = SUC m
-      #|  (r:num) < SUC m
-      #|  r:num
-      #|  \\r. if r < SUC m then (q:num->num) r else i
-      #|  SUC m
-      #|  r:num
-      #|  r:num
-      #|  q:num->num
-      #|  i:num
-      #|  m:num
-      #|  n:num
-      #|  p:num->num
-      #|  (q:num->num) 0 = i
-      #|  (q:num->num) 0 = j
-      #|  (q:num->num) 0
-      #|  (m:num) = 0
-      #|  (j:num) = i
-      #|  (m:num) = 0
-      #|  0 < (m:num)
-      #|  q:num->num
-      #|  j:num
-      #|  i:num
-      #|  m:num
-      #|  p:num->num
-      #|  adjacent_interval_reachable (p:num->num) m i j
-      #|  h:num
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  h:num
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  j:num
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
-      #|  s:num
-      #|  (q:num->A) r
-      #|  (~p ==> F) <=> p
-      #|  (r + SUC d) - 1 = r + d
-      #|  SUC d - 1 = d
-      #|  s:num
-      #|  1 < SUC d <=> ~(d = 0)
-      #|  \\s. (q:num->A)(r + s)
-      #|  ((r + SUC d) - r)
-      #|  1 < SUC d <=> ~(d = 0)
-      #|  1 < (r + SUC d) - r
-      #|  (q:num->A)(SUC r)
-      #|  (~p ==> F) <=> p
-      #|  (r + SUC 0) - 1 = r
-      #|  ~(d = 0)
-      #|  d:num
-      #|  r:num
-      #|  q:num->A
-      #|  k:num
-      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
-      #|  forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
-      #|  ~((i:num) <= r) /\\ ~(SUC i <= r)
-      #|  s:num
-      #|  SUC r + (s - r) = SUC s
-      #|  ~(SUC r <= r)
-      #|  (i:num) = r
-      #|  (i:num) <= r /\\ SUC i <= r
-      #|  (i:num) < r
-      #|  i:num
-      #|  (i:num) + (s - r)
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  \\i. if i <= r then (q:num->A) i else q(i + (s - r))
-      #|  (k:num) - (s - r)
-      #|  r < k - (s - r) /\\\n    1 < k - (s - r) /\\\n    k - (s - r) < k
-      #|  (r:num) = 0
-      #|  0 < r
-      #|  s:num
-      #|  r:num
-      #|  q:num->A
-      #|  k:num
-      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
-      #|  forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
-      #|  forall r s k:num.\n               r < s /\\ s < k ==> s - r <= k
-      #|  k:num
-      #|  s:num
-      #|  r:num
-      #|  (s:num) - r
-      #|  k:num
-      #|  ~(SUC r < SUC r)
-      #|  r < SUC r
-      #|  (i:num) = r
-      #|  (i:num) < SUC r /\\ SUC i < SUC r
-      #|  (i:num) < r
-      #|  i:num
-      #|  (i:num) < SUC r
-      #|  j:num
-      #|  i:num
-      #|  0 < SUC r
-      #|  ~(SUC r < SUC r)
-      #|  0 < SUC r
-      #|  i:num
-      #|  \\i. if i < SUC r then (q:num->A) i else q 0
-      #|  (~p ==> F) <=> p
-      #|  r:num
-      #|  ~((i:num) <= r) /\\ ~(SUC i <= r)
-      #|  ~(SUC r <= r)
-      #|  (i:num) = r
-      #|  (i:num) <= r /\\ SUC i <= r
-      #|  (i:num) < r
-      #|  i:num
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  j:num
-      #|  i:num
-      #|  0 <= (r:num) /\\ ~(l <= r)
-      #|  h:num->A
-      #|  (~p ==> F) <=> p
-      #|  (j:num) <= r
-      #|  (i:num) <= r
-      #|  j:num
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  (forall i. i <= l ==> v((h:num->A) i)) /\\\n      (forall i. i < l\n           ==> (if i <= r then i else i + d) < k) /\\\n      (forall i j. i < j /\\ j < l\n             ==> (if i <= r then i else i + d) <\n                 (if j <= r then j else j + d))
-      #|  h = \\i:num. if i <= r then (q:num->A) i else q(i + d)
-      #|  SUC r + d = s
-      #|  0 < (d:num) /\\ d <= k /\\ 1 < l /\\ l < k /\\ l + d = k
-      #|  l = (k:num) - d
-      #|  d = (s:num) - SUC r
-      #|  s:num
-      #|  r:num
-      #|  q:num->A
-      #|  k:num
-      #|  \\k. ?q:num->A.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
-      #|  forall v e w.\n        (?k (q:num->A).\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              ~(q(k - 1) = q 0) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r))))\n        ==> ?k q.\n              1 < k /\\\n              (forall r. r <= k ==> v(q r)) /\\\n              q 0 = q k /\\\n              w(q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k ==> ~e (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k ==> ~e (q r) (q 0)) /\\\n              (forall r. r < k ==> e (q r) (q(SUC r)))
-      #|  (l:num) < k
-      #|  l:num
-      #|  (i:num) < l
-      #|  i:num
-      #|  ~((i:num) <= r)
-      #|  (r:num) + 1 < k
-      #|  0 < (r:num)
-      #|  0 < r /\\ r + 1 < k ==> SUC r < k
-      #|  SUC r
+      #|  (p : (Num) -> Num)(0) < (n : Num) && minimal_period(p, n, 0)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, 1 < n && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) \226\134\146 (\226\136\131 i : Num, i + 1 < n && p(i + 1) <= i && i + 1 <= p(i))
+      #|  (i : Num) + 1
+      #|  EVEN((n : Num))
+      #|  (n : Num) == 2 * ((i : Num) + 1)
+      #|  CARD(op_dot_dot((i : Num) + 1, (n : Num) - 1)) <= CARD(op_dot_dot(0, i))
+      #|  CARD(op_dot_dot(0, (i : Num))) <= CARD(op_dot_dot(i + 1, (n : Num) - 1))
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  CARD(IMAGE((p : (Num) -> Num), op_dot_dot((i : Num) + 1, (n : Num) - 1))) == CARD(op_dot_dot(i + 1, n - 1))
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  CARD(IMAGE((p : (Num) -> Num), op_dot_dot(0, (i : Num)))) == CARD(op_dot_dot(0, i))
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  SUBSET(IMAGE((p : (Num) -> Num), op_dot_dot((i : Num) + 1, (n : Num) - 1)), op_dot_dot(0, i))
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  SUBSET(IMAGE((p : (Num) -> Num), op_dot_dot(0, (i : Num))), op_dot_dot(i + 1, (n : Num) - 1))
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  \226\136\128 r : Num, \226\136\128 s : Num, r < (n : Num) && s < n && (p : (Num) -> Num)(r) == p(s) \226\134\146 r == s
+      #|  (h : Num)
+      #|  \226\136\131 j : Num, j + 1 < (n : Num) && !(j == (i : Num)) && adjacent_interval_cover((p : (Num) -> Num), j, i)
+      #|  (h : Num)
+      #|  (r : Num) == (i : Num) + 1
+      #|  (i : Num)
+      #|  (r : Num)
+      #|  (i : Num) + 1
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((r : Num)) <= (i : Num)
+      #|  (r : Num)
+      #|  \226\136\128 r : Num, (i : Num) + 1 <= r && r < (n : Num) \226\134\146 (p : (Num) -> Num)(r) <= i
+      #|  (h : Num)
+      #|  \226\136\131 j : Num, j + 1 < (n : Num) && !(j == (i : Num)) && adjacent_interval_cover((p : (Num) -> Num), j, i)
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (r : Num)
+      #|  (p : (Num) -> Num)
+      #|  (i : Num) < (p : (Num) -> Num)((r : Num))
+      #|  (r : Num) == (i : Num)
+      #|  (r : Num)
+      #|  \226\136\128 r : Num, r <= (i : Num) \226\134\146 i < (p : (Num) -> Num)(r)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  \226\136\131 j : Num, j + 1 < (n : Num) && !(j == (i : Num)) && adjacent_interval_cover((p : (Num) -> Num), j, i)
+      #|  (i : Num) + 1
+      #|  (p : (Num) -> Num)((i : Num) + 1) < (n : Num)
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num)
+      #|  (p : (Num) -> Num)((i : Num)) < (n : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, ODD(n) && 2 < n && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) \226\134\146 (\226\136\131 i : Num, \226\136\131 j : Num, i + 1 < n && j + 1 < n && !(j == i) && p(i + 1) <= i && i + 1 <= p(i) && adjacent_interval_cover(p, i, i) && adjacent_interval_cover(p, j, i))
+      #|  (r : Num) == (m : Num)
+      #|  SUC((r : Num)) < SUC((m : Num))
+      #|  (r : Num) < (m : Num)
+      #|  (r : Num)
+      #|  0 < SUC((m : Num))
+      #|  (m : Num) < SUC(m)
+      #|  SUC((m : Num)) - 1 == m
+      #|  0 < SUC((m : Num))
+      #|  0 < SUC((m : Num))
+      #|  0 < SUC((m : Num))
+      #|  0 < SUC((m : Num))
+      #|  (r : Num) == SUC((m : Num))
+      #|  (r : Num) < SUC((m : Num))
+      #|  (r : Num)
+      #|  (r : Num) => if r < SUC((m : Num)) { (q : (Num) -> Num)(r) } else { (i : Num) }
+      #|  SUC((m : Num))
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  (q : (Num) -> Num)
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (q : (Num) -> Num)(0) == (i : Num)
+      #|  (q : (Num) -> Num)(0) == (j : Num)
+      #|  (q : (Num) -> Num)(0)
+      #|  (m : Num) == 0
+      #|  (j : Num) == (i : Num)
+      #|  (m : Num) == 0
+      #|  0 < (m : Num)
+      #|  (q : (Num) -> Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (p : (Num) -> Num)
+      #|  adjacent_interval_reachable((p : (Num) -> Num), (m : Num), (i : Num), (j : Num))
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (h : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, ODD(n) && 2 < n && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) \226\134\146 (\226\136\131 k : Num, \226\136\131 q : (Num) -> Num, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n) && q(0) == q(k) && p(q(0) + 1) <= q(0) && q(0) + 1 <= p(q(0)) && adjacent_interval_cover(p, q(0), q(0)) && !(q(k - 1) == q(0)) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))))
+      #|  (s : Num)
+      #|  (q : (Num) -> A)((r : Num))
+      #|  (!(p : Bool) \226\134\146 false) == p
+      #|  (r : Num) + SUC((d : Num)) - 1 == r + d
+      #|  SUC((d : Num)) - 1 == d
+      #|  (s : Num)
+      #|  (1 < SUC((d : Num))) == !(d == 0)
+      #|  (s : Num) => (q : (Num) -> A)((r : Num) + s)
+      #|  (r : Num) + SUC((d : Num)) - r
+      #|  (1 < SUC((d : Num))) == !(d == 0)
+      #|  1 < (r : Num) + SUC((d : Num)) - r
+      #|  (q : (Num) -> A)(SUC((r : Num)))
+      #|  (!(p : Bool) \226\134\146 false) == p
+      #|  (r : Num) + SUC(0) - 1 == r
+      #|  !((d : Num) == 0)
+      #|  (d : Num)
+      #|  (r : Num)
+      #|  (q : (Num) -> A)
+      #|  (k : Num)
+      #|  (k : Num) => \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 (v : (A) -> Bool)(q(r))) && q(0) == q(k) && (w : (A) -> Bool)(q(0)) && !(q(k - 1) == q(0)) && (\226\136\128 r : Num, r < k \226\134\146 (e : (A, A) -> Bool)(q(r), q(SUC(r))))
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 w : (A) -> Bool, (\226\136\131 k : Num, \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 v(q(r))) && q(0) == q(k) && w(q(0)) && !(q(k - 1) == q(0)) && (\226\136\128 r : Num, r < k \226\134\146 e(q(r), q(SUC(r))))) \226\134\146 (\226\136\131 k : Num, \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 v(q(r))) && q(0) == q(k) && w(q(0)) && (\226\136\128 r : Num, 0 < r && r < k \226\134\146 !(q(r) == q(0))) && (\226\136\128 r : Num, r < k \226\134\146 e(q(r), q(SUC(r)))))
+      #|  !((i : Num) <= (r : Num)) && !(SUC(i) <= r)
+      #|  (s : Num)
+      #|  SUC((r : Num)) + ((s : Num) - r) == SUC(s)
+      #|  !(SUC((r : Num)) <= r)
+      #|  (i : Num) == (r : Num)
+      #|  (i : Num) <= (r : Num) && SUC(i) <= r
+      #|  (i : Num) < (r : Num)
+      #|  (i : Num)
+      #|  (i : Num) + ((s : Num) - (r : Num))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num) => if i <= (r : Num) { (q : (Num) -> A)(i) } else { q(i + ((s : Num) - r)) }
+      #|  (k : Num) - ((s : Num) - (r : Num))
+      #|  (r : Num) < (k : Num) - ((s : Num) - r) && 1 < k - (s - r) && k - (s - r) < k
+      #|  (r : Num) == 0
+      #|  0 < (r : Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  (q : (Num) -> A)
+      #|  (k : Num)
+      #|  (k : Num) => \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 (v : (A) -> Bool)(q(r))) && q(0) == q(k) && (w : (A) -> Bool)(q(0)) && (\226\136\128 r : Num, 0 < r && r < k \226\134\146 !(q(r) == q(0))) && (\226\136\128 r : Num, r < k \226\134\146 (e : (A, A) -> Bool)(q(r), q(SUC(r))))
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 w : (A) -> Bool, (\226\136\131 k : Num, \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 v(q(r))) && q(0) == q(k) && w(q(0)) && !(q(k - 1) == q(0)) && (\226\136\128 r : Num, r < k \226\134\146 e(q(r), q(SUC(r))))) \226\134\146 (\226\136\131 k : Num, \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 v(q(r))) && q(0) == q(k) && w(q(0)) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < k \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, r < k \226\134\146 e(q(r), q(SUC(r)))))
+      #|  \226\136\128 r : Num, \226\136\128 s : Num, \226\136\128 k : Num, r < s && s < k \226\134\146 s - r <= k
+      #|  (k : Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  (s : Num) - (r : Num)
+      #|  (k : Num)
+      #|  !(SUC((r : Num)) < SUC(r))
+      #|  (r : Num) < SUC(r)
+      #|  (i : Num) == (r : Num)
+      #|  (i : Num) < SUC((r : Num)) && SUC(i) < SUC(r)
+      #|  (i : Num) < (r : Num)
+      #|  (i : Num)
+      #|  (i : Num) < SUC((r : Num))
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  0 < SUC((r : Num))
+      #|  !(SUC((r : Num)) < SUC(r))
+      #|  0 < SUC((r : Num))
+      #|  (i : Num)
+      #|  (i : Num) => if i < SUC((r : Num)) { (q : (Num) -> A)(i) } else { q(0) }
+      #|  (!(p : Bool) \226\134\146 false) == p
+      #|  (r : Num)
+      #|  !((i : Num) <= (r : Num)) && !(SUC(i) <= r)
+      #|  !(SUC((r : Num)) <= r)
+      #|  (i : Num) == (r : Num)
+      #|  (i : Num) <= (r : Num) && SUC(i) <= r
+      #|  (i : Num) < (r : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  0 <= (r : Num) && !((l : Num) <= r)
+      #|  (h : (Num) -> A)
+      #|  (!(p : Bool) \226\134\146 false) == p
+      #|  (j : Num) <= (r : Num)
+      #|  (i : Num) <= (r : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (\226\136\128 i : Num, i <= (l : Num) \226\134\146 (v : (A) -> Bool)((h : (Num) -> A)(i))) && (\226\136\128 i : Num, i < l \226\134\146 (if i <= (r : Num) { i } else { i + (d : Num) }) < (k : Num)) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < l \226\134\146 (if i <= r { i } else { i + d }) < (if j <= r { j } else { j + d }))
+      #|  (h : (Num) -> A) == ((i : Num) => if i <= (r : Num) { (q : (Num) -> A)(i) } else { q(i + (d : Num)) })
+      #|  SUC((r : Num)) + (d : Num) == (s : Num)
+      #|  0 < (d : Num) && d <= (k : Num) && 1 < (l : Num) && l < k && l + d == k
+      #|  (l : Num) == (k : Num) - (d : Num)
+      #|  (d : Num) == (s : Num) - SUC((r : Num))
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  (q : (Num) -> A)
+      #|  (k : Num)
+      #|  (k : Num) => \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 (v : (A) -> Bool)(q(r))) && q(0) == q(k) && (w : (A) -> Bool)(q(0)) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < k \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, r < k \226\134\146 (e : (A, A) -> Bool)(q(r), q(SUC(r))))
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 w : (A) -> Bool, (\226\136\131 k : Num, \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 v(q(r))) && q(0) == q(k) && w(q(0)) && !(q(k - 1) == q(0)) && (\226\136\128 r : Num, r < k \226\134\146 e(q(r), q(SUC(r))))) \226\134\146 (\226\136\131 k : Num, \226\136\131 q : (Num) -> A, 1 < k && (\226\136\128 r : Num, r <= k \226\134\146 v(q(r))) && q(0) == q(k) && w(q(0)) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < k \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, \226\136\128 s : Num, r + 1 < s && s < k \226\134\146 !e(q(r), q(s))) && (\226\136\128 r : Num, 0 < r && r + 1 < k \226\134\146 !e(q(r), q(0))) && (\226\136\128 r : Num, r < k \226\134\146 e(q(r), q(SUC(r)))))
+      #|  (l : Num) < (k : Num)
+      #|  (l : Num)
+      #|  (i : Num) < (l : Num)
+      #|  (i : Num)
+      #|  !((i : Num) <= (r : Num))
+      #|  (r : Num) + 1 < (k : Num)
+      #|  0 < (r : Num)
+      #|  0 < (r : Num) && r + 1 < (k : Num) \226\134\146 SUC(r) < k
+      #|  SUC((r : Num))
       #|  0
-      #|  ~(SUC k = k)
-      #|  ~(SUC k < k)
-      #|  (i:num) = k
-      #|  SUC(i:num) = k
-      #|  (i:num) < k
-      #|  (i:num) < k
-      #|  SUC(i:num) < k
-      #|  i:num
-      #|  k:num
-      #|  (i:num) = k
-      #|  SUC i
-      #|  (i:num) < k
-      #|  0 < (k:num)
-      #|  i:num
-      #|  ~(k + 1 = k)
-      #|  ~(k + 1 < k)
-      #|  0 < (k:num)
-      #|  (i:num) < k
-      #|  i:num
-      #|  \\i. if i < k then (q:num->A)(SUC i)\n        else if i = k then q 0 else q 1
-      #|  (j:num) = k
-      #|  j:num
-      #|  forall j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)
+      #|  !(SUC((k : Num)) == k)
+      #|  !(SUC((k : Num)) < k)
+      #|  (i : Num) == (k : Num)
+      #|  SUC((i : Num)) == (k : Num)
+      #|  (i : Num) < (k : Num)
+      #|  (i : Num) < (k : Num)
+      #|  SUC((i : Num)) < (k : Num)
+      #|  (i : Num)
+      #|  (k : Num)
+      #|  (i : Num) == (k : Num)
+      #|  SUC((i : Num))
+      #|  (i : Num) < (k : Num)
+      #|  0 < (k : Num)
+      #|  (i : Num)
+      #|  !((k : Num) + 1 == k)
+      #|  !((k : Num) + 1 < k)
+      #|  0 < (k : Num)
+      #|  (i : Num) < (k : Num)
+      #|  (i : Num)
+      #|  (i : Num) => if i < (k : Num) { (q : (Num) -> A)(SUC(i)) } else { if i == k { q(0) } else { q(1) } }
+      #|  (j : Num) == (k : Num)
+      #|  (j : Num)
+      #|  \226\136\128 j : Num, 1 < j && j <= (k : Num) \226\134\146 !((q : (Num) -> A)(j) == q(1))
       #|  1
       #|  0
-      #|  ~((q:num->A) 0 = q 1)
-      #|  forall v e k (q:num->A).\n        1 < k /\\\n        (forall i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (forall i. i <= k + 1 ==> v(r i)) /\\\n              r 0 = r(k + 1) /\\\n              (forall i. 0 < i /\\ i < k + 1 ==> ~(r i = r 0)) /\\\n              (forall i. i < k + 1 ==> e (r i) (r(SUC i)))
+      #|  !((q : (Num) -> A)(0) == q(1))
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 k : Num, \226\136\128 q : (Num) -> A, 1 < k && (\226\136\128 i : Num, i <= k \226\134\146 v(q(i))) && q(0) == q(k) && e(q(0), q(0)) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, i < k \226\134\146 e(q(i), q(SUC(i)))) \226\134\146 (\226\136\131 r : (Num) -> A, (\226\136\128 i : Num, i <= k + 1 \226\134\146 v(r(i))) && r(0) == r(k + 1) && (\226\136\128 i : Num, 0 < i && i < k + 1 \226\134\146 !(r(i) == r(0))) && (\226\136\128 i : Num, i < k + 1 \226\134\146 e(r(i), r(SUC(i)))))
       #|  0
-      #|  SUC(i:num) < k + t
-      #|  i < k + t /\\ ~(i < k) /\\ ~(SUC i < k)
-      #|  (k:num) < k + t
-      #|  SUC(i:num) = k
-      #|  (i:num) < k
-      #|  (i:num) < k
-      #|  SUC(i:num) < k
-      #|  i:num
-      #|  SUC i
-      #|  (i:num) < k
-      #|  0 < (k:num)
-      #|  i:num
-      #|  0 < (k:num)
-      #|  (i:num) < k
-      #|  i:num
-      #|  \\i. if i < k then (q:num->A)(SUC i)\n        else if i < k + t then q 0 else q 1
-      #|  (j:num) = k
-      #|  j:num
-      #|  forall j. 1 < j /\\ j <= k ==> ~((q:num->A) j = q 1)
+      #|  SUC((i : Num)) < (k : Num) + (t : Num)
+      #|  (i : Num) < (k : Num) + (t : Num) && !(i < k) && !(SUC(i) < k)
+      #|  (k : Num) < k + (t : Num)
+      #|  SUC((i : Num)) == (k : Num)
+      #|  (i : Num) < (k : Num)
+      #|  (i : Num) < (k : Num)
+      #|  SUC((i : Num)) < (k : Num)
+      #|  (i : Num)
+      #|  SUC((i : Num))
+      #|  (i : Num) < (k : Num)
+      #|  0 < (k : Num)
+      #|  (i : Num)
+      #|  0 < (k : Num)
+      #|  (i : Num) < (k : Num)
+      #|  (i : Num)
+      #|  (i : Num) => if i < (k : Num) { (q : (Num) -> A)(SUC(i)) } else { if i < k + (t : Num) { q(0) } else { q(1) } }
+      #|  (j : Num) == (k : Num)
+      #|  (j : Num)
+      #|  \226\136\128 j : Num, 1 < j && j <= (k : Num) \226\134\146 !((q : (Num) -> A)(j) == q(1))
       #|  1
       #|  0
-      #|  ~((q:num->A) 0 = q 1)
-      #|  forall v e k (q:num->A) t.\n        1 < k /\\\n        0 < t /\\\n        (forall i. i <= k ==> v(q i)) /\\\n        q 0 = q k /\\\n        e (q 0) (q 0) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i. i < k ==> e (q i) (q(SUC i)))\n        ==> ?r.\n              (forall i. i <= k + t ==> v(r i)) /\\\n              r 0 = r(k + t) /\\\n              (forall i. 0 < i /\\ i < k + t ==> ~(r i = r 0)) /\\\n              (forall i. i < k + t ==> e (r i) (r(SUC i)))
-      #|  SUC 0 = 1
-      #|  j:num
-      #|  i:num
-      #|  q:num->num
-      #|  {i:num | i < k}
-      #|  forall q (k:num).\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> forall x. x < k ==> ?i. i < k /\\ q i = x
-      #|  forall r s:num. r < s ==> s = r + 1 \\/ r + 1 < s
-      #|  x:num
-      #|  k:num
-      #|  q:num->num
-      #|  forall p q k r x.\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        x < k /\\\n        adjacent_interval_cover p (q r) x /\\\n        (forall s. s <= r ==> ~(q s = x))\n        ==> x = q(r + 1)
-      #|  forall s r:num. s <= r ==> s < r + 1
-      #|  forall x. a <= x /\\ x <= b\n             ==> ?s. s <= r /\\ (q:num->num) s = x
-      #|  (q:num->num) (r + 1)
-      #|  b < (q:num->num) (r + 1)
-      #|  (q:num->num) (r + 1) < a
-      #|  forall(q:num->num) k r a b.\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        r + 1 < k /\\\n        (forall s. s <= r ==> a <= q s /\\ q s <= b) /\\\n        (forall x. a <= x /\\ x <= b ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) < a \\/ b < q(r + 1)
-      #|  s:num
-      #|  s:num
-      #|  x:num
-      #|  r + 1
-      #|  (x:num) = lo - 1
-      #|  x:num
-      #|  (s:num) = r + 1
-      #|  s:num
-      #|  (s:num) <= r
-      #|  s:num
-      #|  s:num
-      #|  s:num
-      #|  (p:num->num) (hi + 1)
-      #|  r:num
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (p:num->num) (hi + 1) = q(r + 1)
-      #|  adjacent_interval_cover (p:num->num)\n      ((q:num->num) (r:num)) (p(hi + 1))
-      #|  s:num
-      #|  s:num
-      #|  lo - 1
-      #|  r:num
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (lo:num) - 1 = q(r + 1)
-      #|  adjacent_interval_cover (p:num->num)\n      ((q:num->num) (r:num)) (lo - 1)
-      #|  0 < (lo:num)
-      #|  adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) (q(r + 1))
-      #|  (p:num->num) (hi + 1) <= q(r + 1) /\\\n    q(r + 1) + 1 <= lo
-      #|  adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) (q(r + 1))
-      #|  (q:num->num) (r + 1) < lo
-      #|  ~adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) a
-      #|  (p:num->num) (hi + 1) <= a
-      #|  hi:num
-      #|  lo:num
-      #|  r:num
-      #|  k:num
-      #|  q:num->num
-      #|  (q:num->num) (r + 1) < lo \\/ hi < q(r + 1)
-      #|  r:num
-      #|  (hi:num) < k
-      #|  forall p q k r a lo hi.\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = hi /\\\n        p hi = lo /\\\n        lo <= a /\\ a <= hi /\\\n        (forall s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (forall x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> 0 < lo /\\\n            q(r + 1) = lo - 1 /\\\n            p(hi + 1) = lo - 1 /\\\n            (forall s. s <= r + 1 ==> lo - 1 <= q s /\\ q s <= hi) /\\\n            (forall x. lo - 1 <= x /\\ x <= hi\n                 ==> ?s. s <= r + 1 /\\ q s = x)
-      #|  s:num
-      #|  s:num
-      #|  x:num
-      #|  r + 1
-      #|  (x:num) = hi + 1
-      #|  x:num
-      #|  (s:num) = r + 1
-      #|  s:num
-      #|  (s:num) <= r
-      #|  s:num
-      #|  s:num
-      #|  s:num
-      #|  hi + 2
-      #|  r:num
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (hi:num) + 2 = q(r + 1)
-      #|  adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) (hi + 2)
-      #|  hi + 2 < (p:num->num) lo
-      #|  (p:num->num) lo = hi + 2
-      #|  (p:num->num) lo = hi + 2
-      #|  lo:num
-      #|  (p:num->num) lo <= k
-      #|  s:num
-      #|  s:num
-      #|  hi + 1
-      #|  r:num
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (hi:num) + 1 = q(r + 1)
-      #|  adjacent_interval_cover (p:num->num)\n      ((q:num->num) (r:num)) (hi + 1)
-      #|  adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) (q(r + 1))
-      #|  hi + 1 <= (q:num->num) (r + 1) /\\\n    q(r + 1) + 1 <= (p:num->num) lo
-      #|  adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) (q(r + 1))
-      #|  hi < (q:num->num) (r + 1)
-      #|  ~adjacent_interval_cover (p:num->num)\n        ((q:num->num) (r:num)) a
-      #|  a < (p:num->num) lo
-      #|  hi:num
-      #|  lo:num
-      #|  r:num
-      #|  k:num
-      #|  q:num->num
-      #|  (q:num->num) (r + 1) < lo \\/ hi < q(r + 1)
-      #|  r + 1
-      #|  (q:num->num) (r + 1) < k
-      #|  r:num
-      #|  (lo:num) < k
-      #|  forall p q k r a lo hi.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        r + 1 < k /\\\n        ~adjacent_interval_cover p (q r) a /\\\n        adjacent_interval_cover p (q r) (q(r + 1)) /\\\n        q r = lo /\\\n        p(lo + 1) = hi + 1 /\\\n        lo <= a /\\ a <= hi /\\\n        (forall s. s <= r ==> lo <= q s /\\ q s <= hi) /\\\n        (forall x. lo <= x /\\ x <= hi ==> ?s. s <= r /\\ q s = x)\n        ==> q(r + 1) = hi + 1 /\\\n            p lo = hi + 2 /\\\n            (forall s. s <= r + 1 ==> lo <= q s /\\ q s <= hi + 1) /\\\n            (forall x. lo <= x /\\ x <= hi + 1\n                 ==> ?s. s <= r + 1 /\\ q s = x)
+      #|  !((q : (Num) -> A)(0) == q(1))
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 k : Num, \226\136\128 q : (Num) -> A, \226\136\128 t : Num, 1 < k && 0 < t && (\226\136\128 i : Num, i <= k \226\134\146 v(q(i))) && q(0) == q(k) && e(q(0), q(0)) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, i < k \226\134\146 e(q(i), q(SUC(i)))) \226\134\146 (\226\136\131 r : (Num) -> A, (\226\136\128 i : Num, i <= k + t \226\134\146 v(r(i))) && r(0) == r(k + t) && (\226\136\128 i : Num, 0 < i && i < k + t \226\134\146 !(r(i) == r(0))) && (\226\136\128 i : Num, i < k + t \226\134\146 e(r(i), r(SUC(i)))))
+      #|  SUC(0) == 1
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)
+      #|  {(i : Num) | i < (k : Num)}
+      #|  \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) \226\134\146 (\226\136\128 x : Num, x < k \226\134\146 (\226\136\131 i : Num, i < k && q(i) == x))
+      #|  \226\136\128 r : Num, \226\136\128 s : Num, r < s \226\134\146 s == r + 1 || r + 1 < s
+      #|  (x : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 r : Num, \226\136\128 x : Num, (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && r + 1 < k && x < k && adjacent_interval_cover(p, q(r), x) && (\226\136\128 s : Num, s <= r \226\134\146 !(q(s) == x)) \226\134\146 x == q(r + 1)
+      #|  \226\136\128 s : Num, \226\136\128 r : Num, s <= r \226\134\146 s < r + 1
+      #|  \226\136\128 x : Num, (a : Num) <= x && x <= (b : Num) \226\134\146 (\226\136\131 s : Num, s <= (r : Num) && (q : (Num) -> Num)(s) == x)
+      #|  (q : (Num) -> Num)((r : Num) + 1)
+      #|  (b : Num) < (q : (Num) -> Num)((r : Num) + 1)
+      #|  (q : (Num) -> Num)((r : Num) + 1) < (a : Num)
+      #|  \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 r : Num, \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && r + 1 < k && (\226\136\128 s : Num, s <= r \226\134\146 a <= q(s) && q(s) <= b) && (\226\136\128 x : Num, a <= x && x <= b \226\134\146 (\226\136\131 s : Num, s <= r && q(s) == x)) \226\134\146 q(r + 1) < a || b < q(r + 1)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (x : Num)
+      #|  (r : Num) + 1
+      #|  (x : Num) == (lo : Num) - 1
+      #|  (x : Num)
+      #|  (s : Num) == (r : Num) + 1
+      #|  (s : Num)
+      #|  (s : Num) <= (r : Num)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (p : (Num) -> Num)((hi : Num) + 1)
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((hi : Num) + 1) == (q : (Num) -> Num)((r : Num) + 1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), p((hi : Num) + 1))
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (lo : Num) - 1
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (lo : Num) - 1 == (q : (Num) -> Num)((r : Num) + 1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), (lo : Num) - 1)
+      #|  0 < (lo : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), q(r + 1))
+      #|  (p : (Num) -> Num)((hi : Num) + 1) <= (q : (Num) -> Num)((r : Num) + 1) && q(r + 1) + 1 <= (lo : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), q(r + 1))
+      #|  (q : (Num) -> Num)((r : Num) + 1) < (lo : Num)
+      #|  !adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), (a : Num))
+      #|  (p : (Num) -> Num)((hi : Num) + 1) <= (a : Num)
+      #|  (hi : Num)
+      #|  (lo : Num)
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (q : (Num) -> Num)((r : Num) + 1) < (lo : Num) || (hi : Num) < q(r + 1)
+      #|  (r : Num)
+      #|  (hi : Num) < (k : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 r : Num, \226\136\128 a : Num, \226\136\128 lo : Num, \226\136\128 hi : Num, (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && r + 1 < k && !adjacent_interval_cover(p, q(r), a) && adjacent_interval_cover(p, q(r), q(r + 1)) && q(r) == hi && p(hi) == lo && lo <= a && a <= hi && (\226\136\128 s : Num, s <= r \226\134\146 lo <= q(s) && q(s) <= hi) && (\226\136\128 x : Num, lo <= x && x <= hi \226\134\146 (\226\136\131 s : Num, s <= r && q(s) == x)) \226\134\146 0 < lo && q(r + 1) == lo - 1 && p(hi + 1) == lo - 1 && (\226\136\128 s : Num, s <= r + 1 \226\134\146 lo - 1 <= q(s) && q(s) <= hi) && (\226\136\128 x : Num, lo - 1 <= x && x <= hi \226\134\146 (\226\136\131 s : Num, s <= r + 1 && q(s) == x))
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (x : Num)
+      #|  (r : Num) + 1
+      #|  (x : Num) == (hi : Num) + 1
+      #|  (x : Num)
+      #|  (s : Num) == (r : Num) + 1
+      #|  (s : Num)
+      #|  (s : Num) <= (r : Num)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (hi : Num) + 2
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (hi : Num) + 2 == (q : (Num) -> Num)((r : Num) + 1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), (hi : Num) + 2)
+      #|  (hi : Num) + 2 < (p : (Num) -> Num)((lo : Num))
+      #|  (p : (Num) -> Num)((lo : Num)) == (hi : Num) + 2
+      #|  (p : (Num) -> Num)((lo : Num)) == (hi : Num) + 2
+      #|  (lo : Num)
+      #|  (p : (Num) -> Num)((lo : Num)) <= (k : Num)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (hi : Num) + 1
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (hi : Num) + 1 == (q : (Num) -> Num)((r : Num) + 1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), (hi : Num) + 1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), q(r + 1))
+      #|  (hi : Num) + 1 <= (q : (Num) -> Num)((r : Num) + 1) && q(r + 1) + 1 <= (p : (Num) -> Num)((lo : Num))
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), q(r + 1))
+      #|  (hi : Num) < (q : (Num) -> Num)((r : Num) + 1)
+      #|  !adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)((r : Num)), (a : Num))
+      #|  (a : Num) < (p : (Num) -> Num)((lo : Num))
+      #|  (hi : Num)
+      #|  (lo : Num)
+      #|  (r : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (q : (Num) -> Num)((r : Num) + 1) < (lo : Num) || (hi : Num) < q(r + 1)
+      #|  (r : Num) + 1
+      #|  (q : (Num) -> Num)((r : Num) + 1) < (k : Num)
+      #|  (r : Num)
+      #|  (lo : Num) < (k : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 r : Num, \226\136\128 a : Num, \226\136\128 lo : Num, \226\136\128 hi : Num, (\226\136\128 i : Num, i <= k \226\134\146 p(i) <= k) && (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && r + 1 < k && !adjacent_interval_cover(p, q(r), a) && adjacent_interval_cover(p, q(r), q(r + 1)) && q(r) == lo && p(lo + 1) == hi + 1 && lo <= a && a <= hi && (\226\136\128 s : Num, s <= r \226\134\146 lo <= q(s) && q(s) <= hi) && (\226\136\128 x : Num, lo <= x && x <= hi \226\134\146 (\226\136\131 s : Num, s <= r && q(s) == x)) \226\134\146 q(r + 1) == hi + 1 && p(lo) == hi + 2 && (\226\136\128 s : Num, s <= r + 1 \226\134\146 lo <= q(s) && q(s) <= hi + 1) && (\226\136\128 x : Num, lo <= x && x <= hi + 1 \226\134\146 (\226\136\131 s : Num, s <= r + 1 && q(s) == x))
       #|  0
       #|  1
-      #|  (x:num) = a - 1
-      #|  x:num
-      #|  (s:num) = 1
-      #|  (s:num) = 0
-      #|  s:num
-      #|  (s:num) = 0
-      #|  s:num
-      #|  a + 1
+      #|  (x : Num) == (a : Num) - 1
+      #|  (x : Num)
+      #|  (s : Num) == 1
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (a : Num) + 1
       #|  0
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (a:num) + 1 = q 1
-      #|  adjacent_interval_cover (p:num->num) (q 0) (a + 1)
-      #|  (a:num) + 1 < p a
-      #|  (p:num->num) a = a + 1
-      #|  (p:num->num) a = a + 1
-      #|  a:num
-      #|  (p:num->num) a <= k
-      #|  (s:num) = 0
-      #|  s:num
-      #|  (p:num->num) (a + 1)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) + 1 == (q : (Num) -> Num)(1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), (a : Num) + 1)
+      #|  (a : Num) + 1 < (p : (Num) -> Num)(a)
+      #|  (p : (Num) -> Num)((a : Num)) == a + 1
+      #|  (p : (Num) -> Num)((a : Num)) == a + 1
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)((a : Num)) <= (k : Num)
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (p : (Num) -> Num)((a : Num) + 1)
       #|  0
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (p:num->num) (a + 1) = q 1
-      #|  adjacent_interval_cover (p:num->num) (q 0) (p(a + 1))
-      #|  (s:num) = 0
-      #|  s:num
-      #|  a - 1
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((a : Num) + 1) == (q : (Num) -> Num)(1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), p((a : Num) + 1))
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (a : Num) - 1
       #|  0
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (a:num) - 1 = q 1
-      #|  adjacent_interval_cover (p:num->num) (q 0) (a - 1)
-      #|  0 < (a:num)
-      #|  adjacent_interval_cover (p:num->num) (q 0) (q 1)
-      #|  (p:num->num) (a + 1) <= q 1 /\\ q 1 + 1 <= p a
-      #|  (a:num) + 1 <= (p:num->num) a
-      #|  (q:num->num) 1 < a
-      #|  forall pa pa1 q a:num.\n          q < a /\\ a + 1 <= pa\n          ==> ~(pa <= q /\\ q + 1 <= pa1)
-      #|  a:num
-      #|  (q:num->num) 1
-      #|  (p:num->num) (a + 1)
-      #|  (p:num->num) a
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) - 1 == (q : (Num) -> Num)(1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), (a : Num) - 1)
+      #|  0 < (a : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), q(1))
+      #|  (p : (Num) -> Num)((a : Num) + 1) <= (q : (Num) -> Num)(1) && q(1) + 1 <= p(a)
+      #|  (a : Num) + 1 <= (p : (Num) -> Num)(a)
+      #|  (q : (Num) -> Num)(1) < (a : Num)
+      #|  \226\136\128 pa : Num, \226\136\128 pa1 : Num, \226\136\128 q : Num, \226\136\128 a : Num, q < a && a + 1 <= pa \226\134\146 !(pa <= q && q + 1 <= pa1)
+      #|  (a : Num)
+      #|  (q : (Num) -> Num)(1)
+      #|  (p : (Num) -> Num)((a : Num) + 1)
+      #|  (p : (Num) -> Num)((a : Num))
       #|  1
-      #|  (q:num->num) 1 < k
+      #|  (q : (Num) -> Num)(1) < (k : Num)
       #|  0
-      #|  (a:num) < k
-      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> 0 < a /\\\n            q 1 = a - 1 /\\\n            p(a + 1) = a - 1 /\\\n            p a = a + 1 /\\\n            (forall s. s <= 1 ==> a - 1 <= q s /\\ q s <= a) /\\\n            (forall x. a - 1 <= x /\\ x <= a\n                 ==> ?s. s <= 1 /\\ q s = x)
+      #|  (a : Num) < (k : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 a : Num, (\226\136\128 i : Num, i <= k \226\134\146 p(i) <= k) && (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && 1 < k && q(0) == a && p(a + 1) <= a && a + 1 <= p(a) && q(1) < a && adjacent_interval_cover(p, q(0), q(1)) \226\134\146 0 < a && q(1) == a - 1 && p(a + 1) == a - 1 && p(a) == a + 1 && (\226\136\128 s : Num, s <= 1 \226\134\146 a - 1 <= q(s) && q(s) <= a) && (\226\136\128 x : Num, a - 1 <= x && x <= a \226\134\146 (\226\136\131 s : Num, s <= 1 && q(s) == x))
       #|  0
       #|  1
-      #|  (x:num) = a + 1
-      #|  x:num
-      #|  (s:num) = 1
-      #|  (s:num) = 0
-      #|  s:num
-      #|  (s:num) = 0
-      #|  s:num
-      #|  a + 2
+      #|  (x : Num) == (a : Num) + 1
+      #|  (x : Num)
+      #|  (s : Num) == 1
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (a : Num) + 2
       #|  0
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (a:num) + 2 = q 1
-      #|  adjacent_interval_cover (p:num->num) (q 0) (a + 2)
-      #|  (a:num) + 2 < p a
-      #|  (p:num->num) a = a + 2
-      #|  (p:num->num) a = a + 2
-      #|  a:num
-      #|  (p:num->num) a <= k
-      #|  (s:num) = 0
-      #|  s:num
-      #|  (p:num->num) (a + 1)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) + 2 == (q : (Num) -> Num)(1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), (a : Num) + 2)
+      #|  (a : Num) + 2 < (p : (Num) -> Num)(a)
+      #|  (p : (Num) -> Num)((a : Num)) == a + 2
+      #|  (p : (Num) -> Num)((a : Num)) == a + 2
+      #|  (a : Num)
+      #|  (p : (Num) -> Num)((a : Num)) <= (k : Num)
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (p : (Num) -> Num)((a : Num) + 1)
       #|  0
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (p:num->num) (a + 1) = q 1
-      #|  adjacent_interval_cover (p:num->num) (q 0) (p(a + 1))
-      #|  (p:num->num) (a + 1) < a
-      #|  (p:num->num) (a + 1) = a
-      #|  (p:num->num) (a + 1) = a
-      #|  (s:num) = 0
-      #|  s:num
-      #|  a + 1
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (p : (Num) -> Num)((a : Num) + 1) == (q : (Num) -> Num)(1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), p((a : Num) + 1))
+      #|  (p : (Num) -> Num)((a : Num) + 1) < a
+      #|  (p : (Num) -> Num)((a : Num) + 1) == a
+      #|  (p : (Num) -> Num)((a : Num) + 1) == a
+      #|  (s : Num) == 0
+      #|  (s : Num)
+      #|  (a : Num) + 1
       #|  0
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (a:num) + 1 = q 1
-      #|  adjacent_interval_cover (p:num->num) (q 0) (a + 1)
-      #|  adjacent_interval_cover (p:num->num) (q 0) (q 1)
-      #|  (p:num->num) (a + 1) <= q 1 /\\ q 1 + 1 <= p a
-      #|  (a:num) < (q:num->num) 1
-      #|  (p:num->num) (a + 1) <= a
-      #|  forall pa pa1 q a:num.\n          pa1 <= a /\\ a < q\n          ==> ~(pa <= q /\\ q + 1 <= pa1)
-      #|  a:num
-      #|  (q:num->num) 1
-      #|  (p:num->num) (a + 1)
-      #|  (p:num->num) a
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) + 1 == (q : (Num) -> Num)(1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), (a : Num) + 1)
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(0), q(1))
+      #|  (p : (Num) -> Num)((a : Num) + 1) <= (q : (Num) -> Num)(1) && q(1) + 1 <= p(a)
+      #|  (a : Num) < (q : (Num) -> Num)(1)
+      #|  (p : (Num) -> Num)((a : Num) + 1) <= a
+      #|  \226\136\128 pa : Num, \226\136\128 pa1 : Num, \226\136\128 q : Num, \226\136\128 a : Num, pa1 <= a && a < q \226\134\146 !(pa <= q && q + 1 <= pa1)
+      #|  (a : Num)
+      #|  (q : (Num) -> Num)(1)
+      #|  (p : (Num) -> Num)((a : Num) + 1)
+      #|  (p : (Num) -> Num)((a : Num))
       #|  1
-      #|  (q:num->num) 1 < k
+      #|  (q : (Num) -> Num)(1) < (k : Num)
       #|  0
-      #|  (a:num) < k
-      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1 /\\\n        adjacent_interval_cover p (q 0) (q 1)\n        ==> q 1 = a + 1 /\\\n            p(a + 1) = a /\\\n            p a = a + 2 /\\\n            (forall s. s <= 1 ==> a <= q s /\\ q s <= a + 1) /\\\n            (forall x. a <= x /\\ x <= a + 1\n                 ==> ?s. s <= 1 /\\ q s = x)
-      #|  s <= (2 * t + 2) + 1 ==> s <= 2 * SUC t + 1
-      #|  s:num
-      #|  x <= a + SUC t ==> x <= a + t + 1
-      #|  a - SUC t - 1 <= x ==> (a - t - 1) - 1 <= x
-      #|  x:num
-      #|  x:num
-      #|  x <= a + t + 1 ==> x <= a + SUC t
-      #|  (a - t - 1) - 1 <= x ==> a - SUC t - 1 <= x
-      #|  s <= 2 * SUC t + 1 ==> s <= (2 * t + 2) + 1
-      #|  s:num
-      #|  s:num
-      #|  (a - t - 1) - 1 = a - SUC t - 1
-      #|  a + SUC t + 1 = (a + t + 1) + 1
-      #|  (p:num->num)((a + t + 1) + 1)
-      #|  (a + t) + 2 = a + SUC t + 1
-      #|  a - SUC t = a - t - 1
-      #|  (p:num->num)(a - t - 1)
-      #|  (a - t - 1) - 1 = a - SUC t - 1
-      #|  2 * SUC t + 1 = (2 * t + 2) + 1
-      #|  (q:num->num)((2 * t + 2) + 1)
-      #|  (a + t) + 1 = a + SUC t
-      #|  2 * SUC t = (2 * t + 1) + 1
-      #|  (q:num->num)((2 * t + 1) + 1)
-      #|  0 < a - t - 1 ==> SUC t < a
-      #|  s <= (2 * t + 1) + 1 ==> s <= 2 * t + 2
-      #|  s:num
-      #|  x <= a + t + 1 ==> x <= (a + t) + 1
-      #|  x:num
-      #|  x:num
-      #|  x <= (a + t) + 1 ==> x <= a + t + 1
-      #|  s:num
-      #|  s:num
-      #|  (a:num) <= a + t + 1
-      #|  (a:num) - t - 1 <= a
-      #|  (q:num->num)((2 * t + 1) + 1)
-      #|  (a:num) + t + 1
-      #|  (a:num) - t - 1
-      #|  a:num
-      #|  2 * (t:num) + 2
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (a:num) <= a + t
-      #|  (a:num) - t - 1 <= a
-      #|  (a - t - 1) + 1 = a - t
-      #|  (a:num) + t
-      #|  (a:num) - t - 1
-      #|  a:num
-      #|  2 * (t:num) + 1
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  1 < k ==> 0 < k
+      #|  (a : Num) < (k : Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 a : Num, (\226\136\128 i : Num, i <= k \226\134\146 p(i) <= k) && (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && 1 < k && q(0) == a && p(a + 1) <= a && a + 1 <= p(a) && a < q(1) && adjacent_interval_cover(p, q(0), q(1)) \226\134\146 q(1) == a + 1 && p(a + 1) == a && p(a) == a + 2 && (\226\136\128 s : Num, s <= 1 \226\134\146 a <= q(s) && q(s) <= a + 1) && (\226\136\128 x : Num, a <= x && x <= a + 1 \226\134\146 (\226\136\131 s : Num, s <= 1 && q(s) == x))
+      #|  (s : Num) <= 2 * (t : Num) + 2 + 1 \226\134\146 s <= 2 * SUC(t) + 1
+      #|  (s : Num)
+      #|  (x : Num) <= (a : Num) + SUC((t : Num)) \226\134\146 x <= a + (t + 1)
+      #|  (a : Num) - SUC((t : Num)) - 1 <= (x : Num) \226\134\146 a - t - 1 - 1 <= x
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (x : Num) <= (a : Num) + ((t : Num) + 1) \226\134\146 x <= a + SUC(t)
+      #|  (a : Num) - (t : Num) - 1 - 1 <= (x : Num) \226\134\146 a - SUC(t) - 1 <= x
+      #|  (s : Num) <= 2 * SUC((t : Num)) + 1 \226\134\146 s <= 2 * t + 2 + 1
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (a : Num) - (t : Num) - 1 - 1 == a - SUC(t) - 1
+      #|  (a : Num) + (SUC((t : Num)) + 1) == a + (t + 1) + 1
+      #|  (p : (Num) -> Num)((a : Num) + ((t : Num) + 1) + 1)
+      #|  (a : Num) + (t : Num) + 2 == a + (SUC(t) + 1)
+      #|  (a : Num) - SUC((t : Num)) == a - t - 1
+      #|  (p : (Num) -> Num)((a : Num) - (t : Num) - 1)
+      #|  (a : Num) - (t : Num) - 1 - 1 == a - SUC(t) - 1
+      #|  2 * SUC((t : Num)) + 1 == 2 * t + 2 + 1
+      #|  (q : (Num) -> Num)(2 * (t : Num) + 2 + 1)
+      #|  (a : Num) + (t : Num) + 1 == a + SUC(t)
+      #|  2 * SUC((t : Num)) == 2 * t + 1 + 1
+      #|  (q : (Num) -> Num)(2 * (t : Num) + 1 + 1)
+      #|  0 < (a : Num) - (t : Num) - 1 \226\134\146 SUC(t) < a
+      #|  (s : Num) <= 2 * (t : Num) + 1 + 1 \226\134\146 s <= 2 * t + 2
+      #|  (s : Num)
+      #|  (x : Num) <= (a : Num) + ((t : Num) + 1) \226\134\146 x <= a + t + 1
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (x : Num) <= (a : Num) + (t : Num) + 1 \226\134\146 x <= a + (t + 1)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (a : Num) <= a + ((t : Num) + 1)
+      #|  (a : Num) - (t : Num) - 1 <= a
+      #|  (q : (Num) -> Num)(2 * (t : Num) + 1 + 1)
+      #|  (a : Num) + ((t : Num) + 1)
+      #|  (a : Num) - (t : Num) - 1
+      #|  (a : Num)
+      #|  2 * (t : Num) + 2
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) <= a + (t : Num)
+      #|  (a : Num) - (t : Num) - 1 <= a
+      #|  (a : Num) - (t : Num) - 1 + 1 == a - t
+      #|  (a : Num) + (t : Num)
+      #|  (a : Num) - (t : Num) - 1
+      #|  (a : Num)
+      #|  2 * (t : Num) + 1
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  1 < (k : Num) \226\134\146 0 < k
       #|  0
-      #|  a:num
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> forall t. 2 * t + 1 < k\n                ==> t < a /\\\n                    q(2 * t) = a + t /\\\n                    q(2 * t + 1) = a - t - 1 /\\\n                    p(a - t) = a + t + 1 /\\\n                    p(a + t + 1) = a - t - 1 /\\\n                    (forall s. s <= 2 * t + 1\n                         ==> a - t - 1 <= q s /\\ q s <= a + t) /\\\n                    (forall x. a - t - 1 <= x /\\ x <= a + t\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)
-      #|  s <= (2 * t + 2) + 1 ==> s <= 2 * SUC t + 1
-      #|  s:num
-      #|  x <= a + SUC t + 1 ==> x <= (a + t + 1) + 1
-      #|  a - SUC t <= x ==> a - t - 1 <= x
-      #|  x:num
-      #|  x:num
-      #|  x <= (a + t + 1) + 1 ==> x <= a + SUC t + 1
-      #|  a - t - 1 <= x ==> a - SUC t <= x
-      #|  s <= 2 * SUC t + 1 ==> s <= (2 * t + 2) + 1
-      #|  s:num
-      #|  s:num
-      #|  (a - t) - 1 = a - SUC t
-      #|  a + SUC t + 1 = (a + t + 1) + 1
-      #|  (p:num->num)((a + t + 1) + 1)
-      #|  (a + t + 1) + 2 = a + SUC t + 2
-      #|  a - SUC t = a - t - 1
-      #|  (p:num->num)(a - t - 1)
-      #|  (a + t + 1) + 1 = a + SUC t + 1
-      #|  2 * SUC t + 1 = (2 * t + 2) + 1
-      #|  (q:num->num)((2 * t + 2) + 1)
-      #|  (a - t) - 1 = a - SUC t
-      #|  2 * SUC t = (2 * t + 1) + 1
-      #|  (q:num->num)((2 * t + 1) + 1)
-      #|  0 < a - t ==> SUC t <= a
-      #|  s <= (2 * t + 1) + 1 ==> s <= 2 * t + 2
-      #|  s:num
-      #|  x:num
-      #|  x:num
-      #|  s:num
-      #|  s:num
-      #|  (a:num) <= a + t + 1
-      #|  (a:num) - t - 1 <= a
-      #|  0 < a - t ==> (a - t - 1) + 1 = a - t
-      #|  (a - t - 1) + 1 = a - t
-      #|  (q:num->num)((2 * t + 1) + 1)
-      #|  (a:num) + t + 1
-      #|  (a:num) - t - 1
-      #|  a:num
-      #|  2 * (t:num) + 2
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (a:num) <= a + t + 1
-      #|  (a:num) - t <= a
-      #|  (a:num) + t + 1
-      #|  (a:num) - t
-      #|  a:num
-      #|  2 * (t:num) + 1
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  1 < k ==> 0 < k
+      #|  (a : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 a : Num, (\226\136\128 i : Num, i <= k \226\134\146 p(i) <= k) && (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && (\226\136\128 r : Num, 0 < r && r + 1 < k \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(r + 1))) && 1 < k && q(0) == a && p(a + 1) <= a && a + 1 <= p(a) && q(1) < a \226\134\146 (\226\136\128 t : Num, 2 * t + 1 < k \226\134\146 t < a && q(2 * t) == a + t && q(2 * t + 1) == a - t - 1 && p(a - t) == a + (t + 1) && p(a + (t + 1)) == a - t - 1 && (\226\136\128 s : Num, s <= 2 * t + 1 \226\134\146 a - t - 1 <= q(s) && q(s) <= a + t) && (\226\136\128 x : Num, a - t - 1 <= x && x <= a + t \226\134\146 (\226\136\131 s : Num, s <= 2 * t + 1 && q(s) == x)))
+      #|  (s : Num) <= 2 * (t : Num) + 2 + 1 \226\134\146 s <= 2 * SUC(t) + 1
+      #|  (s : Num)
+      #|  (x : Num) <= (a : Num) + (SUC((t : Num)) + 1) \226\134\146 x <= a + (t + 1) + 1
+      #|  (a : Num) - SUC((t : Num)) <= (x : Num) \226\134\146 a - t - 1 <= x
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (x : Num) <= (a : Num) + ((t : Num) + 1) + 1 \226\134\146 x <= a + (SUC(t) + 1)
+      #|  (a : Num) - (t : Num) - 1 <= (x : Num) \226\134\146 a - SUC(t) <= x
+      #|  (s : Num) <= 2 * SUC((t : Num)) + 1 \226\134\146 s <= 2 * t + 2 + 1
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (a : Num) - (t : Num) - 1 == a - SUC(t)
+      #|  (a : Num) + (SUC((t : Num)) + 1) == a + (t + 1) + 1
+      #|  (p : (Num) -> Num)((a : Num) + ((t : Num) + 1) + 1)
+      #|  (a : Num) + ((t : Num) + 1) + 2 == a + (SUC(t) + 2)
+      #|  (a : Num) - SUC((t : Num)) == a - t - 1
+      #|  (p : (Num) -> Num)((a : Num) - (t : Num) - 1)
+      #|  (a : Num) + ((t : Num) + 1) + 1 == a + (SUC(t) + 1)
+      #|  2 * SUC((t : Num)) + 1 == 2 * t + 2 + 1
+      #|  (q : (Num) -> Num)(2 * (t : Num) + 2 + 1)
+      #|  (a : Num) - (t : Num) - 1 == a - SUC(t)
+      #|  2 * SUC((t : Num)) == 2 * t + 1 + 1
+      #|  (q : (Num) -> Num)(2 * (t : Num) + 1 + 1)
+      #|  0 < (a : Num) - (t : Num) \226\134\146 SUC(t) <= a
+      #|  (s : Num) <= 2 * (t : Num) + 1 + 1 \226\134\146 s <= 2 * t + 2
+      #|  (s : Num)
+      #|  (x : Num)
+      #|  (x : Num)
+      #|  (s : Num)
+      #|  (s : Num)
+      #|  (a : Num) <= a + ((t : Num) + 1)
+      #|  (a : Num) - (t : Num) - 1 <= a
+      #|  0 < (a : Num) - (t : Num) \226\134\146 a - t - 1 + 1 == a - t
+      #|  (a : Num) - (t : Num) - 1 + 1 == a - t
+      #|  (q : (Num) -> Num)(2 * (t : Num) + 1 + 1)
+      #|  (a : Num) + ((t : Num) + 1)
+      #|  (a : Num) - (t : Num) - 1
+      #|  (a : Num)
+      #|  2 * (t : Num) + 2
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (a : Num) <= a + ((t : Num) + 1)
+      #|  (a : Num) - (t : Num) <= a
+      #|  (a : Num) + ((t : Num) + 1)
+      #|  (a : Num) - (t : Num)
+      #|  (a : Num)
+      #|  2 * (t : Num) + 1
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  1 < (k : Num) \226\134\146 0 < k
       #|  0
-      #|  a:num
-      #|  k:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  forall p q k a.\n        (forall i. i <= k ==> p i <= k) /\\\n        (forall i. i < k ==> q i < k) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < k\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < k\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        1 < k /\\\n        q 0 = a /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> forall t. 2 * t + 1 < k\n                ==> t <= a /\\\n                    q(2 * t) = a - t /\\\n                    q(2 * t + 1) = a + t + 1 /\\\n                    p(a - t) = a + t + 2 /\\\n                    p(a + t + 1) = a - t /\\\n                    (forall s. s <= 2 * t + 1\n                         ==> a - t <= q s /\\ q s <= a + t + 1) /\\\n                    (forall x. a - t <= x /\\ x <= a + t + 1\n                         ==> ?s. s <= 2 * t + 1 /\\ q s = x)
-      #|  r < m ==> 2 * r + 1 < 2 * m
-      #|  r:num
-      #|  r:num
-      #|  (p:num->num) 0 <= m
-      #|  0 < m ==> 2 * m - 1 < 2 * m
-      #|  adjacent_interval_cover (p:num->num)\n        (q(2 * m - 1)) (q((2 * m - 1) + 1))
-      #|  adjacent_interval_cover (p:num->num) 0 m
-      #|  (2 * m - 1) + 1 = 2 * m
-      #|  0 < m ==> m + m - 1 + 1 = 2 * m
-      #|  (a:num) + m - 1 + 1 = 2 * m
-      #|  0 < m ==> 1 = m - (m - 1)
-      #|  (p:num->num) 1 = p(a - (m - 1))
-      #|  (p:num->num) 1 = 2 * m
-      #|  0 < m ==> m - (m - 1) - 1 = 0
-      #|  0 < m ==> 2 * m - 1 = 2 * (m - 1) + 1
-      #|  2 * m - 1 = 2 * (m - 1) + 1
-      #|  (q:num->num)(2 * m - 1) = 0
-      #|  m - 1 < a /\\ a + (m - 1) < 2 * m ==> a = m
-      #|  (a:num) = m
-      #|  (a:num) + (m - 1) < 2 * m
-      #|  0 < m ==> 2 * (m - 1) < 2 * m
-      #|  (q:num->num)(2 * (m - 1)) < 2 * m
-      #|  0 < m ==> 2 * (m - 1) + 1 < 2 * m
-      #|  m - 1
-      #|  0 < m ==> 1 < 2 * m
-      #|  a:num
-      #|  2 * (m:num)
-      #|  q:num->num
-      #|  p:num->num
-      #|  forall p q m a.\n        (forall i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (forall i. i < 2 * m ==> q i < 2 * m) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        q 1 < a\n        ==> a = m /\\\n            q(2 * m - 1) = 0 /\\\n            p 1 = 2 * m /\\\n            (forall r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))
-      #|  r < m ==> 2 * r + 1 < 2 * m
-      #|  r:num
-      #|  r:num
-      #|  (m:num) <= p(2 * m)
-      #|  0 < m ==> 2 * m - 1 < 2 * m
-      #|  adjacent_interval_cover (p:num->num)\n        (q(2 * m - 1)) (q((2 * m - 1) + 1))
-      #|  adjacent_interval_cover (p:num->num) (2 * m - 1) (m - 1)
-      #|  (2 * m - 1) + 1 = 2 * m
-      #|  (a:num) - (m - 1) = 0
-      #|  (p:num->num)(2 * m - 1) =\n      p(a + (m - 1) + 1)
-      #|  (p:num->num)(2 * m - 1) = 0
-      #|  (a:num) + (m - 1) + 1 = 2 * m - 1
-      #|  0 < m ==> 2 * m - 1 = 2 * (m - 1) + 1
-      #|  (q:num->num)(2 * m - 1) =\n      q(2 * (m - 1) + 1)
-      #|  (q:num->num)(2 * m - 1) = 2 * m - 1
-      #|  m - 1 <= a /\\ a + (m - 1) + 1 < 2 * m\n      ==> a = m - 1
-      #|  (a:num) = m - 1
-      #|  (a:num) + (m - 1) + 1 < 2 * m
-      #|  0 < m ==> 2 * (m - 1) + 1 < 2 * m
-      #|  (q:num->num)(2 * (m - 1) + 1) < 2 * m
-      #|  0 < m ==> 2 * (m - 1) + 1 < 2 * m
-      #|  m - 1
-      #|  0 < m ==> 1 < 2 * m
-      #|  a:num
-      #|  2 * (m:num)
-      #|  q:num->num
-      #|  p:num->num
-      #|  forall p q m a.\n        (forall i. i <= 2 * m ==> p i <= 2 * m) /\\\n        (forall i. i < 2 * m ==> q i < 2 * m) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i j. i + 1 < j /\\ j < 2 * m\n               ==> ~adjacent_interval_cover p (q i) (q j)) /\\\n        (forall r. 0 < r /\\ r + 1 < 2 * m\n             ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n        (forall r. r < 2 * m\n             ==> adjacent_interval_cover p (q r) (q(r + 1))) /\\\n        0 < m /\\\n        q 0 = a /\\\n        q(2 * m) = q 0 /\\\n        p(a + 1) <= a /\\\n        a + 1 <= p a /\\\n        a < q 1\n        ==> a = m - 1 /\\\n            q(2 * m - 1) = 2 * m - 1 /\\\n            p(2 * m - 1) = 0 /\\\n            (forall r. r < m\n                 ==> adjacent_interval_cover p\n                      (q(2 * m - 1)) (q(2 * r)))
-      #|  r + (i + 1) - 1 = (r + i - 1) + 1
-      #|  ~(i + 1 = 0)
-      #|  r + 1 - 1 = r
-      #|  ~(1 = 0)
-      #|  (i:num) = 0
-      #|  i:num
-      #|  ~((i:num) = 0)
-      #|  i:num
-      #|  ~((k:num) - r = 0)
-      #|  i:num
-      #|  \\i. if i = 0 then (q:num->A)(k - 1)\n        else q(r + i - 1)
-      #|  forall v e (q:num->A) k r.\n        0 < k /\\\n        r < k /\\\n        (forall i. i < k ==> v(q i)) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j)) /\\\n        e (q(k - 1)) (q r) /\\\n        (forall i. i < k ==> e (q i) (q(i + 1)))\n        ==> ?u.\n              (forall i. i <= k - r ==> v(u i)) /\\\n              u 0 = u(k - r) /\\\n              (forall i. 0 < i /\\ i < k - r ==> ~(u i = u 0)) /\\\n              (forall i. i < k - r ==> e (u i) (u(i + 1)))
-      #|  u:num->A
-      #|  s <= m ==> 2 * m - 2 * (m - s) = 2 * s
-      #|  2 * m - 2 * (m - s) = 2 * s
-      #|  u:num->A
-      #|  0 < s /\\ s <= m ==> m - s < m
-      #|  0 < s /\\ s <= m ==> 2 * (m - s) < 2 * m
-      #|  0 < m ==> 0 < 2 * m
-      #|  2 * (m - s)
-      #|  2 * (m:num)
-      #|  q:num->A
-      #|  e:A->A->bool
-      #|  v:A->bool
-      #|  s:num
-      #|  forall v e (q:num->A) m.\n        0 < m /\\\n        (forall i. i < 2 * m ==> v(q i)) /\\\n        (forall i j. i < j /\\ j < 2 * m ==> ~(q i = q j)) /\\\n        (forall i. i < 2 * m ==> e (q i) (q(i + 1))) /\\\n        (forall r. r < m ==> e (q(2 * m - 1)) (q(2 * r)))\n        ==> forall s. 0 < s /\\ s <= m\n                ==> ?u.\n                      (forall i. i <= 2 * s ==> v(u i)) /\\\n                      u 0 = u(2 * s) /\\\n                      (forall i. 0 < i /\\ i < 2 * s\n                           ==> ~(u i = u 0)) /\\\n                      (forall i. i < 2 * s ==> e (u i) (u(i + 1)))
-      #|  {j:num | j < n}
-      #|  IMAGE (q:num->num) {i | i < k}
-      #|  IMAGE (q:num->num) {i | i < k} SUBSET {j | j < n}
-      #|  i:num
-      #|  j:num
-      #|  (j:num) < i
-      #|  j:num
-      #|  i:num
-      #|  (i:num) < j
-      #|  (i:num) = j
-      #|  j:num
-      #|  i:num
-      #|  CARD {i:num | i < k}
-      #|  CARD(IMAGE (q:num->num) {i | i < k}) = k
-      #|  forall q (k:num) (n:num).\n        (forall i. i < k ==> q i < n) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k <= n
-      #|  i:num
-      #|  i:num
-      #|  n - 1
-      #|  k:num
-      #|  q:num->num
-      #|  forall q (k:num) (n:num).\n        0 < k /\\\n        (forall i. i < k ==> q i + 1 < n) /\\\n        (forall i j. i < j /\\ j < k ==> ~(q i = q j))\n        ==> k < n
-      #|  q:num->num
-      #|  k:num
-      #|  (q:num->num) k = a
-      #|  i:num
-      #|  n:num
-      #|  k:num
-      #|  q:num->num
-      #|  (k:num) < n
-      #|  q:num->num
-      #|  k:num
-      #|  u:num->num
-      #|  l:num
-      #|  \\i:num. i = a
-      #|  adjacent_interval_cover (p:num->num)
-      #|  \\i:num. i + 1 < n
-      #|  (p:num->num)(a + 1) <= a /\\\n    a + 1 <= p a /\\\n    adjacent_interval_cover p a a
-      #|  a = (u:num->num) 0
-      #|  u:num->num
-      #|  l:num
-      #|  n:num
-      #|  p:num->num
-      #|  forall p n.\n        ODD n /\\\n        2 < n /\\\n        (forall i. i < n ==> p i < n /\\ minimal_period p n i)\n        ==> ?k q.\n              1 < k /\\\n              k < n /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
-      #|  IMAGE lift {x | x IN s /\\ (f:real->real) x = y} =\n      {x | x IN IMAGE lift s /\\ (lift o f o drop) x = lift y}
-      #|  s:real->bool
-      #|  forall f s y.\n        real_compact s /\\ f real_continuous_on s\n        ==> real_compact {x | x IN s /\\ f x = y}
-      #|  x:real
-      #|  x:real
-      #|  y:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  y:real
-      #|  b:real
-      #|  a:real
-      #|  f:real->real
-      #|  y:real
-      #|  forall f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        ((f a <= c /\\ d <= f b) \\/ (f b <= c /\\ d <= f a))\n        ==> real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])
-      #|  (z:num->real) (j + 1) < z i
-      #|  (j:num) + 1 = i
-      #|  (j:num) + 1 = i
-      #|  (j:num) < i
-      #|  (z:num->real) (i + 1) < z j
-      #|  (i:num) + 1 = j
-      #|  (i:num) + 1 = j
-      #|  (i:num) < j
-      #|  forall z n i j x.\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        x IN real_interval[z i,z(i + 1)] /\\\n        x IN real_interval[z j,z(j + 1)]\n        ==> (i + 1 = j /\\ x = z j) \\/\n            (j + 1 = i /\\ x = z i)
-      #|  (p:num->num) i
-      #|  j + 1
-      #|  j:num
-      #|  (p:num->num) (i + 1)
-      #|  (p:num->num) (i + 1)
-      #|  j + 1
-      #|  j:num
-      #|  (p:num->num) i
-      #|  (:real)
-      #|  j + 1
-      #|  j:num
-      #|  i + 1
-      #|  i:num
-      #|  s:num
-      #|  r:num
-      #|  (r:num) = s
-      #|  s:num
-      #|  r:num
-      #|  forall r s. r <= s /\\ s < n ==> (z:num->real) r <= z s
-      #|  forall f z p n i j.\n        f real_continuous_on (:real) /\\\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        p i < n /\\\n        p(i + 1) < n /\\\n        f(z i) = z(p i) /\\\n        f(z(i + 1)) = z(p(i + 1)) /\\\n        adjacent_interval_cover p i j\n        ==> real_interval[z j,z(j + 1)]\n            SUBSET IMAGE f (real_interval[z i,z(i + 1)])
-      #|  i:num
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  (i:num) + 1 < n
-      #|  i:num
-      #|  (i:num) + 1 < n
-      #|  i + 1
-      #|  (p:num->num) (i + 1) < n /\\\n    minimal_period p n (i + 1) /\\\n    (f:real->real)((z:num->real) (i + 1)) = z(p(i + 1))
-      #|  (i:num) + 1 < n
-      #|  i:num
-      #|  (p:num->num) i < n /\\\n    minimal_period p n i /\\\n    (f:real->real)((z:num->real) i) = z(p i)
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  n:num
-      #|  p:num->num
-      #|  forall f z p n.\n        f real_continuous_on (:real) /\\\n        1 < n /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n\n             ==> p i < n /\\\n                 minimal_period p n i /\\\n                 f(z i) = z(p i))\n        ==> ?i.\n              i + 1 < n /\\\n              real_interval[z i,z(i + 1)]\n              SUBSET IMAGE f (real_interval[z i,z(i + 1)])
-      #|  v:real
-      #|  u:real
-      #|  real_interval[u,y]
-      #|  z:real
-      #|  z:real
-      #|  z:real = v
-      #|  (u <= w /\\ w <= y) /\\ (f:real->real) w = d
-      #|  w:real
-      #|  real_interval[u,y]
-      #|  d:real
-      #|  z:real
-      #|  u:real
-      #|  f:real->real
-      #|  (f:real->real) z <= d
-      #|  z:real = u
-      #|  (x <= w /\\ w <= y) /\\ (f:real->real) w = c
-      #|  w:real
-      #|  real_interval[u,y]
-      #|  c:real
-      #|  v:real
-      #|  z:real
-      #|  f:real->real
-      #|  c <= (f:real->real) z
-      #|  z:real
-      #|  forall z. z IN real_interval[u,v]\n        ==> c <= (f:real->real) z /\\ f z <= d
-      #|  v:real
-      #|  u:real
-      #|  y:real
-      #|  {z | z IN real_interval[u,y] /\\ (f:real->real) z = d}
-      #|  real_compact\n      {z | z IN real_interval[u,y] /\\ (f:real->real) z = d}
-      #|  real_interval[x,y]
-      #|  (f:real->real) real_continuous_on real_interval[u,y]
-      #|  x:real
-      #|  {z | z IN real_interval[x,y] /\\ (f:real->real) z = c}
-      #|  real_compact\n      {z | z IN real_interval[x,y] /\\ (f:real->real) z = c}
-      #|  forall f x y c d.\n        x < y /\\\n        c < d /\\\n        f real_continuous_on real_interval[x,y] /\\\n        f x = c /\\\n        f y = d\n        ==> ?u v.\n              x <= u /\\ u <= v /\\ v <= y /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]
-      #|  w:real
-      #|  w:real
-      #|  IMAGE (\\z:real. --z)
-      #|  --(z:real)
-      #|  w:real
-      #|  z:real
-      #|  IMAGE (\\z:real. --z) (real_interval[--d,--c]) =\n    real_interval[c,d]
-      #|  v:real
-      #|  u:real
-      #|  real_interval[a,b]
-      #|  --c:real
-      #|  --d:real
-      #|  x:real
-      #|  y:real
-      #|  \\z:real. --((f:real->real) z)
-      #|  y < x
-      #|  v:real
-      #|  u:real
-      #|  v:real
-      #|  u:real
-      #|  real_interval[a,b]
-      #|  d:real
-      #|  c:real
-      #|  y:real
-      #|  x:real
-      #|  f:real->real
-      #|  x < y
-      #|  ~(x:real = y)
-      #|  y:real
-      #|  x:real
-      #|  c IN IMAGE (f:real->real) (real_interval[a,b]) /\\\n    d IN IMAGE f (real_interval[a,b])
-      #|  c < d
-      #|  x:real
-      #|  x:real
-      #|  x:real
-      #|  d:real
-      #|  c:real = d
-      #|  forall f a b c d.\n        a <= b /\\\n        c <= d /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[c,d] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a,b] /\\\n              IMAGE f (real_interval[u,v]) = real_interval[c,d]
-      #|  z:real
-      #|  z:real
-      #|  y:real
-      #|  x:real
-      #|  (f:real->real) y - y
-      #|  (f:real->real) x - x
-      #|  IMAGE (\\z. (f:real->real) z - z) s
-      #|  &0 IN real_interval[(f:real->real) x - x,f y - y]
-      #|  is_realinterval (IMAGE (\\z. (f:real->real) z - z) s)
-      #|  forall f s.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        (?x. x IN s /\\ f x <= x) /\\\n        (?y. y IN s /\\ y <= f y)\n        ==> ?x. x IN s /\\ f x = x
-      #|  &0
-      #|  x:real
-      #|  x:real
-      #|  b:real
-      #|  x:real
-      #|  x:real
-      #|  a:real
-      #|  forall f a b.\n        a <= b /\\\n        f real_continuous_on real_interval[a,b] /\\\n        real_interval[a,b] SUBSET IMAGE f (real_interval[a,b])\n        ==> ?x. x IN real_interval[a,b] /\\ f x = x
-      #|  IMAGE (f:real->real) s
-      #|  (:real)
-      #|  forall f n s.\n        f real_continuous_on (:real)\n        ==> ITER n f real_continuous_on s
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  i = 0
-      #|  i:num
-      #|  q:real
-      #|  p:real
+      #|  (a : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 a : Num, (\226\136\128 i : Num, i <= k \226\134\146 p(i) <= k) && (\226\136\128 i : Num, i < k \226\134\146 q(i) < k) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < k \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && (\226\136\128 r : Num, 0 < r && r + 1 < k \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(r + 1))) && 1 < k && q(0) == a && p(a + 1) <= a && a + 1 <= p(a) && a < q(1) \226\134\146 (\226\136\128 t : Num, 2 * t + 1 < k \226\134\146 t <= a && q(2 * t) == a - t && q(2 * t + 1) == a + (t + 1) && p(a - t) == a + (t + 2) && p(a + (t + 1)) == a - t && (\226\136\128 s : Num, s <= 2 * t + 1 \226\134\146 a - t <= q(s) && q(s) <= a + (t + 1)) && (\226\136\128 x : Num, a - t <= x && x <= a + (t + 1) \226\134\146 (\226\136\131 s : Num, s <= 2 * t + 1 && q(s) == x)))
+      #|  (r : Num) < (m : Num) \226\134\146 2 * r + 1 < 2 * m
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  (p : (Num) -> Num)(0) <= (m : Num)
+      #|  0 < (m : Num) \226\134\146 2 * m - 1 < 2 * m
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(2 * (m : Num) - 1), q(2 * m - 1 + 1))
+      #|  adjacent_interval_cover((p : (Num) -> Num), 0, (m : Num))
+      #|  2 * (m : Num) - 1 + 1 == 2 * m
+      #|  0 < (m : Num) \226\134\146 m + (m - 1 + 1) == 2 * m
+      #|  (a : Num) + ((m : Num) - 1 + 1) == 2 * m
+      #|  0 < (m : Num) \226\134\146 1 == m - (m - 1)
+      #|  (p : (Num) -> Num)(1) == p((a : Num) - ((m : Num) - 1))
+      #|  (p : (Num) -> Num)(1) == 2 * (m : Num)
+      #|  0 < (m : Num) \226\134\146 m - (m - 1) - 1 == 0
+      #|  0 < (m : Num) \226\134\146 2 * m - 1 == 2 * (m - 1) + 1
+      #|  2 * (m : Num) - 1 == 2 * (m - 1) + 1
+      #|  (q : (Num) -> Num)(2 * (m : Num) - 1) == 0
+      #|  (m : Num) - 1 < (a : Num) && a + (m - 1) < 2 * m \226\134\146 a == m
+      #|  (a : Num) == (m : Num)
+      #|  (a : Num) + ((m : Num) - 1) < 2 * m
+      #|  0 < (m : Num) \226\134\146 2 * (m - 1) < 2 * m
+      #|  (q : (Num) -> Num)(2 * ((m : Num) - 1)) < 2 * m
+      #|  0 < (m : Num) \226\134\146 2 * (m - 1) + 1 < 2 * m
+      #|  (m : Num) - 1
+      #|  0 < (m : Num) \226\134\146 1 < 2 * m
+      #|  (a : Num)
+      #|  2 * (m : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 m : Num, \226\136\128 a : Num, (\226\136\128 i : Num, i <= 2 * m \226\134\146 p(i) <= 2 * m) && (\226\136\128 i : Num, i < 2 * m \226\134\146 q(i) < 2 * m) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < 2 * m \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < 2 * m \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && (\226\136\128 r : Num, 0 < r && r + 1 < 2 * m \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < 2 * m \226\134\146 adjacent_interval_cover(p, q(r), q(r + 1))) && 0 < m && q(0) == a && q(2 * m) == q(0) && p(a + 1) <= a && a + 1 <= p(a) && q(1) < a \226\134\146 a == m && q(2 * m - 1) == 0 && p(1) == 2 * m && (\226\136\128 r : Num, r < m \226\134\146 adjacent_interval_cover(p, q(2 * m - 1), q(2 * r)))
+      #|  (r : Num) < (m : Num) \226\134\146 2 * r + 1 < 2 * m
+      #|  (r : Num)
+      #|  (r : Num)
+      #|  (m : Num) <= (p : (Num) -> Num)(2 * m)
+      #|  0 < (m : Num) \226\134\146 2 * m - 1 < 2 * m
+      #|  adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(2 * (m : Num) - 1), q(2 * m - 1 + 1))
+      #|  adjacent_interval_cover((p : (Num) -> Num), 2 * (m : Num) - 1, m - 1)
+      #|  2 * (m : Num) - 1 + 1 == 2 * m
+      #|  (a : Num) - ((m : Num) - 1) == 0
+      #|  (p : (Num) -> Num)(2 * (m : Num) - 1) == p((a : Num) + (m - 1 + 1))
+      #|  (p : (Num) -> Num)(2 * (m : Num) - 1) == 0
+      #|  (a : Num) + ((m : Num) - 1 + 1) == 2 * m - 1
+      #|  0 < (m : Num) \226\134\146 2 * m - 1 == 2 * (m - 1) + 1
+      #|  (q : (Num) -> Num)(2 * (m : Num) - 1) == q(2 * (m - 1) + 1)
+      #|  (q : (Num) -> Num)(2 * (m : Num) - 1) == 2 * m - 1
+      #|  (m : Num) - 1 <= (a : Num) && a + (m - 1 + 1) < 2 * m \226\134\146 a == m - 1
+      #|  (a : Num) == (m : Num) - 1
+      #|  (a : Num) + ((m : Num) - 1 + 1) < 2 * m
+      #|  0 < (m : Num) \226\134\146 2 * (m - 1) + 1 < 2 * m
+      #|  (q : (Num) -> Num)(2 * ((m : Num) - 1) + 1) < 2 * m
+      #|  0 < (m : Num) \226\134\146 2 * (m - 1) + 1 < 2 * m
+      #|  (m : Num) - 1
+      #|  0 < (m : Num) \226\134\146 1 < 2 * m
+      #|  (a : Num)
+      #|  2 * (m : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 q : (Num) -> Num, \226\136\128 m : Num, \226\136\128 a : Num, (\226\136\128 i : Num, i <= 2 * m \226\134\146 p(i) <= 2 * m) && (\226\136\128 i : Num, i < 2 * m \226\134\146 q(i) < 2 * m) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < 2 * m \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, \226\136\128 j : Num, i + 1 < j && j < 2 * m \226\134\146 !adjacent_interval_cover(p, q(i), q(j))) && (\226\136\128 r : Num, 0 < r && r + 1 < 2 * m \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < 2 * m \226\134\146 adjacent_interval_cover(p, q(r), q(r + 1))) && 0 < m && q(0) == a && q(2 * m) == q(0) && p(a + 1) <= a && a + 1 <= p(a) && a < q(1) \226\134\146 a == m - 1 && q(2 * m - 1) == 2 * m - 1 && p(2 * m - 1) == 0 && (\226\136\128 r : Num, r < m \226\134\146 adjacent_interval_cover(p, q(2 * m - 1), q(2 * r)))
+      #|  (r : Num) + ((i : Num) + 1 - 1) == r + (i - 1) + 1
+      #|  !((i : Num) + 1 == 0)
+      #|  (r : Num) + (1 - 1) == r
+      #|  !(1 == 0)
+      #|  (i : Num) == 0
+      #|  (i : Num)
+      #|  !((i : Num) == 0)
+      #|  (i : Num)
+      #|  !((k : Num) - (r : Num) == 0)
+      #|  (i : Num)
+      #|  (i : Num) => if i == 0 { (q : (Num) -> A)((k : Num) - 1) } else { q((r : Num) + (i - 1)) }
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 q : (Num) -> A, \226\136\128 k : Num, \226\136\128 r : Num, 0 < k && r < k && (\226\136\128 i : Num, i < k \226\134\146 v(q(i))) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) && e(q(k - 1), q(r)) && (\226\136\128 i : Num, i < k \226\134\146 e(q(i), q(i + 1))) \226\134\146 (\226\136\131 u : (Num) -> A, (\226\136\128 i : Num, i <= k - r \226\134\146 v(u(i))) && u(0) == u(k - r) && (\226\136\128 i : Num, 0 < i && i < k - r \226\134\146 !(u(i) == u(0))) && (\226\136\128 i : Num, i < k - r \226\134\146 e(u(i), u(i + 1))))
+      #|  (u : (Num) -> A)
+      #|  (s : Num) <= (m : Num) \226\134\146 2 * m - 2 * (m - s) == 2 * s
+      #|  2 * (m : Num) - 2 * (m - (s : Num)) == 2 * s
+      #|  (u : (Num) -> A)
+      #|  0 < (s : Num) && s <= (m : Num) \226\134\146 m - s < m
+      #|  0 < (s : Num) && s <= (m : Num) \226\134\146 2 * (m - s) < 2 * m
+      #|  0 < (m : Num) \226\134\146 0 < 2 * m
+      #|  2 * ((m : Num) - (s : Num))
+      #|  2 * (m : Num)
+      #|  (q : (Num) -> A)
+      #|  (e : (A, A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (s : Num)
+      #|  \226\136\128 v : (A) -> Bool, \226\136\128 e : (A, A) -> Bool, \226\136\128 q : (Num) -> A, \226\136\128 m : Num, 0 < m && (\226\136\128 i : Num, i < 2 * m \226\134\146 v(q(i))) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < 2 * m \226\134\146 !(q(i) == q(j))) && (\226\136\128 i : Num, i < 2 * m \226\134\146 e(q(i), q(i + 1))) && (\226\136\128 r : Num, r < m \226\134\146 e(q(2 * m - 1), q(2 * r))) \226\134\146 (\226\136\128 s : Num, 0 < s && s <= m \226\134\146 (\226\136\131 u : (Num) -> A, (\226\136\128 i : Num, i <= 2 * s \226\134\146 v(u(i))) && u(0) == u(2 * s) && (\226\136\128 i : Num, 0 < i && i < 2 * s \226\134\146 !(u(i) == u(0))) && (\226\136\128 i : Num, i < 2 * s \226\134\146 e(u(i), u(i + 1)))))
+      #|  {(j : Num) | j < (n : Num)}
+      #|  IMAGE((q : (Num) -> Num), {(i : Num) | i < (k : Num)})
+      #|  SUBSET(IMAGE((q : (Num) -> Num), {(i : Num) | i < (k : Num)}), {(j : Num) | j < (n : Num)})
+      #|  (i : Num)
+      #|  (j : Num)
+      #|  (j : Num) < (i : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num) < (j : Num)
+      #|  (i : Num) == (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  CARD({(i : Num) | i < (k : Num)})
+      #|  CARD(IMAGE((q : (Num) -> Num), {(i : Num) | i < (k : Num)})) == k
+      #|  \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 n : Num, (\226\136\128 i : Num, i < k \226\134\146 q(i) < n) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) \226\134\146 k <= n
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (n : Num) - 1
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  \226\136\128 q : (Num) -> Num, \226\136\128 k : Num, \226\136\128 n : Num, 0 < k && (\226\136\128 i : Num, i < k \226\134\146 q(i) + 1 < n) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < k \226\134\146 !(q(i) == q(j))) \226\134\146 k < n
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)((k : Num)) == (a : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (k : Num) < (n : Num)
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  (u : (Num) -> Num)
+      #|  (l : Num)
+      #|  (i : Num) => i == (a : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num))
+      #|  (i : Num) => i + 1 < (n : Num)
+      #|  (p : (Num) -> Num)((a : Num) + 1) <= a && a + 1 <= p(a) && adjacent_interval_cover(p, a, a)
+      #|  (a : Num) == (u : (Num) -> Num)(0)
+      #|  (u : (Num) -> Num)
+      #|  (l : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, ODD(n) && 2 < n && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) \226\134\146 (\226\136\131 k : Num, \226\136\131 q : (Num) -> Num, 1 < k && k < n && (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n) && q(0) == q(k) && p(q(0) + 1) <= q(0) && q(0) + 1 <= p(q(0)) && adjacent_interval_cover(p, q(0), q(0)) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < k \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, \226\136\128 s : Num, r + 1 < s && s < k \226\134\146 !adjacent_interval_cover(p, q(r), q(s))) && (\226\136\128 r : Num, 0 < r && r + 1 < k \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))))
+      #|  IMAGE(lift, {(x : Real) | IN(x, (s : (Real) -> Bool)) && (f : (Real) -> Real)(x) == (y : Real)}) == {(x : Cart[Real, Unit]) | IN(x, IMAGE(lift, s)) && o(lift, o(f, drop), x) == lift(y)}
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 y : Real, real_compact(s) && real_continuous_on(f, s) \226\134\146 real_compact({(x : Real) | IN(x, s) && f(x) == y})
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (y : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (f : (Real) -> Real)
+      #|  (y : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a <= b && c <= d && real_continuous_on(f, real_interval([(a, b)])) && (f(a) <= c && d <= f(b) || f(b) <= c && d <= f(a)) \226\134\146 SUBSET(real_interval([(c, d)]), IMAGE(f, real_interval([(a, b)])))
+      #|  (z : (Num) -> Real)((j : Num) + 1) < z((i : Num))
+      #|  (j : Num) + 1 == (i : Num)
+      #|  (j : Num) + 1 == (i : Num)
+      #|  (j : Num) < (i : Num)
+      #|  (z : (Num) -> Real)((i : Num) + 1) < z((j : Num))
+      #|  (i : Num) + 1 == (j : Num)
+      #|  (i : Num) + 1 == (j : Num)
+      #|  (i : Num) < (j : Num)
+      #|  \226\136\128 z : (Num) -> Real, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, \226\136\128 x : Real, (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < n \226\134\146 z(r) < z(s)) && i + 1 < n && j + 1 < n && !(i == j) && IN(x, real_interval([(z(i), z(i + 1))])) && IN(x, real_interval([(z(j), z(j + 1))])) \226\134\146 i + 1 == j && x == z(j) || j + 1 == i && x == z(i)
+      #|  (p : (Num) -> Num)((i : Num))
+      #|  (j : Num) + 1
+      #|  (j : Num)
+      #|  (p : (Num) -> Num)((i : Num) + 1)
+      #|  (p : (Num) -> Num)((i : Num) + 1)
+      #|  (j : Num) + 1
+      #|  (j : Num)
+      #|  (p : (Num) -> Num)((i : Num))
+      #|  (UNIV : (Real) -> Bool)
+      #|  (j : Num) + 1
+      #|  (j : Num)
+      #|  (i : Num) + 1
+      #|  (i : Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  (r : Num) == (s : Num)
+      #|  (s : Num)
+      #|  (r : Num)
+      #|  \226\136\128 r : Num, \226\136\128 s : Num, r <= s && s < (n : Num) \226\134\146 (z : (Num) -> Real)(r) <= z(s)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, real_continuous_on(f, UNIV) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < n \226\134\146 z(r) < z(s)) && i + 1 < n && j + 1 < n && p(i) < n && p(i + 1) < n && f(z(i)) == z(p(i)) && f(z(i + 1)) == z(p(i + 1)) && adjacent_interval_cover(p, i, j) \226\134\146 SUBSET(real_interval([(z(j), z(j + 1))]), IMAGE(f, real_interval([(z(i), z(i + 1))])))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num)
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num) + 1
+      #|  (p : (Num) -> Num)((i : Num) + 1) < (n : Num) && minimal_period(p, n, i + 1) && (f : (Real) -> Real)((z : (Num) -> Real)(i + 1)) == z(p(i + 1))
+      #|  (i : Num) + 1 < (n : Num)
+      #|  (i : Num)
+      #|  (p : (Num) -> Num)((i : Num)) < (n : Num) && minimal_period(p, n, i) && (f : (Real) -> Real)((z : (Num) -> Real)(i)) == z(p(i))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, real_continuous_on(f, UNIV) && 1 < n && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i) && f(z(i)) == z(p(i))) \226\134\146 (\226\136\131 i : Num, i + 1 < n && SUBSET(real_interval([(z(i), z(i + 1))]), IMAGE(f, real_interval([(z(i), z(i + 1))]))))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_interval([((u : Real), (y : Real))])
+      #|  (z : Real)
+      #|  (z : Real)
+      #|  (z : Real) == (v : Real)
+      #|  ((u : Real) <= (w : Real) && w <= (y : Real)) && (f : (Real) -> Real)(w) == (d : Real)
+      #|  (w : Real)
+      #|  real_interval([((u : Real), (y : Real))])
+      #|  (d : Real)
+      #|  (z : Real)
+      #|  (u : Real)
+      #|  (f : (Real) -> Real)
+      #|  (f : (Real) -> Real)((z : Real)) <= (d : Real)
+      #|  (z : Real) == (u : Real)
+      #|  ((x : Real) <= (w : Real) && w <= (y : Real)) && (f : (Real) -> Real)(w) == (c : Real)
+      #|  (w : Real)
+      #|  real_interval([((u : Real), (y : Real))])
+      #|  (c : Real)
+      #|  (v : Real)
+      #|  (z : Real)
+      #|  (f : (Real) -> Real)
+      #|  (c : Real) <= (f : (Real) -> Real)((z : Real))
+      #|  (z : Real)
+      #|  \226\136\128 z : Real, IN(z, real_interval([((u : Real), (v : Real))])) \226\134\146 (c : Real) <= (f : (Real) -> Real)(z) && f(z) <= (d : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (y : Real)
+      #|  {(z : Real) | IN(z, real_interval([((u : Real), (y : Real))])) && (f : (Real) -> Real)(z) == (d : Real)}
+      #|  real_compact({(z : Real) | IN(z, real_interval([((u : Real), (y : Real))])) && (f : (Real) -> Real)(z) == (d : Real)})
+      #|  real_interval([((x : Real), (y : Real))])
+      #|  real_continuous_on((f : (Real) -> Real), real_interval([((u : Real), (y : Real))]))
+      #|  (x : Real)
+      #|  {(z : Real) | IN(z, real_interval([((x : Real), (y : Real))])) && (f : (Real) -> Real)(z) == (c : Real)}
+      #|  real_compact({(z : Real) | IN(z, real_interval([((x : Real), (y : Real))])) && (f : (Real) -> Real)(z) == (c : Real)})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 c : Real, \226\136\128 d : Real, x < y && c < d && real_continuous_on(f, real_interval([(x, y)])) && f(x) == c && f(y) == d \226\134\146 (\226\136\131 u : Real, \226\136\131 v : Real, x <= u && u <= v && v <= y && IMAGE(f, real_interval([(u, v)])) == real_interval([(c, d)]))
+      #|  (w : Real)
+      #|  (w : Real)
+      #|  IMAGE((z : Real) => -z)
+      #|  -(z : Real)
+      #|  (w : Real)
+      #|  (z : Real)
+      #|  IMAGE((z : Real) => -z, real_interval([(-(d : Real), -(c : Real))])) == real_interval([(c, d)])
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  -(c : Real)
+      #|  -(d : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  (z : Real) => -(f : (Real) -> Real)(z)
+      #|  (y : Real) < (x : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  (d : Real)
+      #|  (c : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real) < (y : Real)
+      #|  !((x : Real) == (y : Real))
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  IN((c : Real), IMAGE((f : (Real) -> Real), real_interval([((a : Real), (b : Real))]))) && IN((d : Real), IMAGE(f, real_interval([(a, b)])))
+      #|  (c : Real) < (d : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (d : Real)
+      #|  (c : Real) == (d : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 d : Real, a <= b && c <= d && real_continuous_on(f, real_interval([(a, b)])) && SUBSET(real_interval([(c, d)]), IMAGE(f, real_interval([(a, b)]))) \226\134\146 (\226\136\131 u : Real, \226\136\131 v : Real, u <= v && SUBSET(real_interval([(u, v)]), real_interval([(a, b)])) && IMAGE(f, real_interval([(u, v)])) == real_interval([(c, d)]))
+      #|  (z : Real)
+      #|  (z : Real)
+      #|  (y : Real)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)((y : Real)) - y
+      #|  (f : (Real) -> Real)((x : Real)) - x
+      #|  IMAGE((z : Real) => (f : (Real) -> Real)(z) - z, (s : (Real) -> Bool))
+      #|  IN(real_of_num(0), real_interval([((f : (Real) -> Real)((x : Real)) - x, f((y : Real)) - y)]))
+      #|  is_realinterval(IMAGE((z : Real) => (f : (Real) -> Real)(z) - z, (s : (Real) -> Bool)))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && real_continuous_on(f, s) && (\226\136\131 x : Real, IN(x, s) && f(x) <= x) && (\226\136\131 y : Real, IN(y, s) && y <= f(y)) \226\134\146 (\226\136\131 x : Real, IN(x, s) && f(x) == x)
+      #|  real_of_num(0)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (b : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (a : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b && real_continuous_on(f, real_interval([(a, b)])) && SUBSET(real_interval([(a, b)]), IMAGE(f, real_interval([(a, b)]))) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a, b)])) && f(x) == x)
+      #|  IMAGE((f : (Real) -> Real), (s : (Real) -> Bool))
+      #|  (UNIV : (Real) -> Bool)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, UNIV) \226\134\146 real_continuous_on(ITER(n, f), s)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  (i : Num) == 0
+      #|  (i : Num)
+      #|  (q : Real)
+      #|  (p : Real)
       #|  0
-      #|  real_interval[(a:num->real) 1,(b:num->real) 1]
-      #|  (:real)
+      #|  real_interval([((a : (Num) -> Real)(1), (b : (Num) -> Real)(1))])
+      #|  (UNIV : (Real) -> Bool)
       #|  0
-      #|  v:real
-      #|  u:real
-      #|  (b:num->real) 0
-      #|  (a:num->real) 0
-      #|  f:real->real
-      #|  SUC i
-      #|  i:num
-      #|  SUC i
-      #|  i:num
-      #|  \\i. (b:num->real) (SUC i)
-      #|  \\i. (a:num->real) (SUC i)
-      #|  b:num->real
-      #|  a:num->real
-      #|  i = 0
-      #|  i:num
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  (b : (Num) -> Real)(0)
+      #|  (a : (Num) -> Real)(0)
+      #|  (f : (Real) -> Real)
+      #|  SUC((i : Num))
+      #|  (i : Num)
+      #|  SUC((i : Num))
+      #|  (i : Num)
+      #|  (i : Num) => (b : (Num) -> Real)(SUC(i))
+      #|  (i : Num) => (a : (Num) -> Real)(SUC(i))
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (i : Num) == 0
+      #|  (i : Num)
       #|  0
-      #|  (b:num->real) 0
-      #|  (a:num->real) 0
-      #|  b:num->real
-      #|  a:num->real
-      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i]))\n        ==> ?u v.\n              u <= v /\\\n              real_interval[u,v] SUBSET real_interval[a 0,b 0] /\\\n              IMAGE (ITER n f) (real_interval[u,v]) =\n              real_interval[a n,b n] /\\\n              forall i. i <= n\n                  ==> IMAGE (ITER i f) (real_interval[u,v])\n                      SUBSET real_interval[a i,b i]
-      #|  0 < SUC n
-      #|  x:real
-      #|  i:num
-      #|  IMAGE (ITER i (f:real->real)) (real_interval[u,v])\n      SUBSET real_interval[(a:num->real) i,(b:num->real) i]
-      #|  i:num
-      #|  x:real
-      #|  x:real
-      #|  v:real
-      #|  u:real
-      #|  ITER n (f:real->real)
-      #|  real_interval[(a:num->real) 0,(b:num->real) 0]
-      #|  real_interval[u,v] SUBSET\n    IMAGE (ITER n (f:real->real)) (real_interval[u,v])
-      #|  b:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  f:real->real
-      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0\n        ==> ?x.\n              x IN real_interval[a 0,b 0] /\\\n              ITER n f x = x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]
-      #|  x:real
-      #|  0 < (d:num) /\\ d < n /\\\n      x IN real_interval[(a:num->real) 0,b 0] /\\\n      x IN real_interval[a d,b d]
-      #|  x IN real_interval[(a:num->real) d,b d]
-      #|  d:num
-      #|  ITER d (f:real->real) x IN real_interval[(a:num->real) d,b d]
-      #|  0 < (d:num)
-      #|  (d:num) = (n:num)
-      #|  (d:num) = (n:num)
-      #|  (d:num) <= (n:num)
-      #|  n:num
-      #|  x:real
-      #|  f:real->real
-      #|  b:num->real
-      #|  a:num->real
-      #|  n:num
-      #|  f:real->real
-      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (forall i x.\n             0 < i /\\ i < n /\\\n             x IN real_interval[a 0,b 0] /\\\n             x IN real_interval[a i,b i]\n             ==> ~(ITER i f x = x))\n        ==> ?x.\n              minimal_period f n x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]
-      #|  x:real
-      #|  i:num
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  minimal_period (f:real->real) n x
-      #|  x = (z:num->real)((q:num->num) 0)
+      #|  (b : (Num) -> Real)(0)
+      #|  (a : (Num) -> Real)(0)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, real_continuous_on(f, UNIV) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) <= b(i)) && (\226\136\128 i : Num, i < n \226\134\146 SUBSET(real_interval([(a(SUC(i)), b(SUC(i)))]), IMAGE(f, real_interval([(a(i), b(i))])))) \226\134\146 (\226\136\131 u : Real, \226\136\131 v : Real, u <= v && SUBSET(real_interval([(u, v)]), real_interval([(a(0), b(0))])) && IMAGE(ITER(n, f), real_interval([(u, v)])) == real_interval([(a(n), b(n))]) && (\226\136\128 i : Num, i <= n \226\134\146 SUBSET(IMAGE(ITER(i, f), real_interval([(u, v)])), real_interval([(a(i), b(i))]))))
+      #|  0 < SUC((n : Num))
+      #|  (x : Real)
+      #|  (i : Num)
+      #|  SUBSET(IMAGE(ITER((i : Num), (f : (Real) -> Real)), real_interval([((u : Real), (v : Real))])), real_interval([((a : (Num) -> Real)(i), (b : (Num) -> Real)(i))]))
+      #|  (i : Num)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  ITER((n : Num), (f : (Real) -> Real))
+      #|  real_interval([((a : (Num) -> Real)(0), (b : (Num) -> Real)(0))])
+      #|  SUBSET(real_interval([((u : Real), (v : Real))]), IMAGE(ITER((n : Num), (f : (Real) -> Real)), real_interval([(u, v)])))
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, real_continuous_on(f, UNIV) && (\226\136\128 i : Num, i <= n \226\134\146 a(i) <= b(i)) && (\226\136\128 i : Num, i < n \226\134\146 SUBSET(real_interval([(a(SUC(i)), b(SUC(i)))]), IMAGE(f, real_interval([(a(i), b(i))])))) && a(n) == a(0) && b(n) == b(0) \226\134\146 (\226\136\131 x : Real, IN(x, real_interval([(a(0), b(0))])) && ITER(n, f, x) == x && (\226\136\128 i : Num, i <= n \226\134\146 IN(ITER(i, f, x), real_interval([(a(i), b(i))]))))
+      #|  (x : Real)
+      #|  0 < (d : Num) && d < (n : Num) && IN((x : Real), real_interval([((a : (Num) -> Real)(0), (b : (Num) -> Real)(0))])) && IN(x, real_interval([(a(d), b(d))]))
+      #|  IN((x : Real), real_interval([((a : (Num) -> Real)((d : Num)), (b : (Num) -> Real)(d))]))
+      #|  (d : Num)
+      #|  IN(ITER((d : Num), (f : (Real) -> Real), (x : Real)), real_interval([((a : (Num) -> Real)(d), (b : (Num) -> Real)(d))]))
+      #|  0 < (d : Num)
+      #|  (d : Num) == (n : Num)
+      #|  (d : Num) == (n : Num)
+      #|  (d : Num) <= (n : Num)
+      #|  (n : Num)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)
+      #|  (b : (Num) -> Real)
+      #|  (a : (Num) -> Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, real_continuous_on(f, UNIV) && 0 < n && (\226\136\128 i : Num, i <= n \226\134\146 a(i) <= b(i)) && (\226\136\128 i : Num, i < n \226\134\146 SUBSET(real_interval([(a(SUC(i)), b(SUC(i)))]), IMAGE(f, real_interval([(a(i), b(i))])))) && a(n) == a(0) && b(n) == b(0) && (\226\136\128 i : Num, \226\136\128 x : Real, 0 < i && i < n && IN(x, real_interval([(a(0), b(0))])) && IN(x, real_interval([(a(i), b(i))])) \226\134\146 !(ITER(i, f, x) == x)) \226\134\146 (\226\136\131 x : Real, minimal_period(f, n, x) && (\226\136\128 i : Num, i <= n \226\134\146 IN(ITER(i, f, x), real_interval([(a(i), b(i))]))))
+      #|  (x : Real)
+      #|  (i : Num)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  minimal_period((f : (Real) -> Real), (n : Num), (x : Real))
+      #|  (x : Real) == (z : (Num) -> Real)((q : (Num) -> Num)(0))
       #|  0
-      #|  (q:num->num) 0
-      #|  x = (z:num->real)((q:num->num) i)
-      #|  i:num
-      #|  (q:num->num) i
-      #|  i:num
+      #|  (q : (Num) -> Num)(0)
+      #|  (x : Real) == (z : (Num) -> Real)((q : (Num) -> Num)((i : Num)))
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)((i : Num))
+      #|  (i : Num)
       #|  0
-      #|  x:real
-      #|  (q:num->num) i
-      #|  (q:num->num) 0
-      #|  n:num
-      #|  z:num->real
-      #|  ?h. h < n /\\ x = (z:num->real) h
-      #|  x:real
-      #|  i:num
-      #|  SUC i
-      #|  i:num
-      #|  (q:num->num)(SUC i)
-      #|  (q:num->num) i
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  i:num
-      #|  i:num
-      #|  ((p:num->num) ((q:num->num) (i:num)) < n /\\\n         (f:real->real)(z(q i)) = z(p(q i))) /\\\n        (p(q i + 1) < n /\\ f(z(q i + 1)) = z(p(q i + 1)))
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  \\i:num. (z:num->real)((q:num->num) i + 1)
-      #|  \\i:num. (z:num->real)((q:num->num) i)
-      #|  k:num
-      #|  f:real->real
-      #|  forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
-      #|  x:real
-      #|  x:real
-      #|  n:num
-      #|  d:num
-      #|  f:real->real
-      #|  (d:num) = n
-      #|  minimal_period (f:real->real) n x
+      #|  (x : Real)
+      #|  (q : (Num) -> Num)((i : Num))
+      #|  (q : (Num) -> Num)(0)
+      #|  (n : Num)
+      #|  (z : (Num) -> Real)
+      #|  \226\136\131 h : Num, h < (n : Num) && (x : Real) == (z : (Num) -> Real)(h)
+      #|  (x : Real)
+      #|  (i : Num)
+      #|  SUC((i : Num))
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)(SUC((i : Num)))
+      #|  (q : (Num) -> Num)((i : Num))
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  ((p : (Num) -> Num)((q : (Num) -> Num)((i : Num))) < (n : Num) && (f : (Real) -> Real)((z : (Num) -> Real)(q(i))) == z(p(q(i)))) && p(q(i) + 1) < n && f(z(q(i) + 1)) == z(p(q(i) + 1))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num) => (z : (Num) -> Real)((q : (Num) -> Num)(i) + 1)
+      #|  (i : Num) => (z : (Num) -> Real)((q : (Num) -> Num)(i))
+      #|  (k : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 q : (Num) -> Num, real_continuous_on(f, UNIV) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) && (\226\136\128 i : Num, i < n \226\134\146 minimal_period(f, n, z(i))) && 0 < k && k < n && (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n) && q(0) == q(k) && (\226\136\128 r : Num, 0 < r && r < k \226\134\146 !(q(r) == q(0))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))) \226\134\146 (\226\136\131 x : Real, minimal_period(f, k, x))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (d : Num)
+      #|  (f : (Real) -> Real)
+      #|  (d : Num) == (n : Num)
+      #|  minimal_period((f : (Real) -> Real), (n : Num), (x : Real))
       #|  0
-      #|  (q:num->num) 0
-      #|  d:num
-      #|  (q:num->num) d
-      #|  d:num
+      #|  (q : (Num) -> Num)(0)
+      #|  (d : Num)
+      #|  (q : (Num) -> Num)((d : Num))
+      #|  (d : Num)
       #|  0
-      #|  x:real
-      #|  (q:num->num) d
-      #|  (q:num->num) 0
-      #|  n:num
-      #|  z:num->real
-      #|  ?h. h < n /\\ x = (z:num->real) h
-      #|  x IN\n      real_interval[(z:num->real)((q:num->num) d),z(q d + 1)]
-      #|  d:num
-      #|  ITER d (f:real->real) x IN\n      real_interval[(z:num->real)((q:num->num) d),z(q d + 1)]
-      #|  ITER d (f:real->real) x = x
-      #|  0 < (d:num) /\\ d < k
-      #|  (d:num) = k
-      #|  (d:num) = k
-      #|  (d:num) <= k
-      #|  k:num
-      #|  x:real
-      #|  f:real->real
-      #|  SUC i
-      #|  i:num
-      #|  (q:num->num)(SUC i)
-      #|  (q:num->num) i
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  i:num
-      #|  i:num
-      #|  ((p:num->num) ((q:num->num) (i:num)) < n /\\\n         (f:real->real)(z(q i)) = z(p(q i))) /\\\n        (p(q i + 1) < n /\\ f(z(q i + 1)) = z(p(q i + 1)))
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  \\i:num. (z:num->real)((q:num->num) i + 1)
-      #|  \\i:num. (z:num->real)((q:num->num) i)
-      #|  k:num
-      #|  f:real->real
-      #|  forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        ~(n divides k) /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r. 0 < r /\\ r < k ==> ~(q r = q 0)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
-      #|  i:num
+      #|  (x : Real)
+      #|  (q : (Num) -> Num)((d : Num))
+      #|  (q : (Num) -> Num)(0)
+      #|  (n : Num)
+      #|  (z : (Num) -> Real)
+      #|  \226\136\131 h : Num, h < (n : Num) && (x : Real) == (z : (Num) -> Real)(h)
+      #|  IN((x : Real), real_interval([((z : (Num) -> Real)((q : (Num) -> Num)((d : Num))), z(q(d) + 1))]))
+      #|  (d : Num)
+      #|  IN(ITER((d : Num), (f : (Real) -> Real), (x : Real)), real_interval([((z : (Num) -> Real)((q : (Num) -> Num)(d)), z(q(d) + 1))]))
+      #|  ITER((d : Num), (f : (Real) -> Real), (x : Real)) == x
+      #|  0 < (d : Num) && d < (k : Num)
+      #|  (d : Num) == (k : Num)
+      #|  (d : Num) == (k : Num)
+      #|  (d : Num) <= (k : Num)
+      #|  (k : Num)
+      #|  (x : Real)
+      #|  (f : (Real) -> Real)
+      #|  SUC((i : Num))
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)(SUC((i : Num)))
+      #|  (q : (Num) -> Num)((i : Num))
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  ((p : (Num) -> Num)((q : (Num) -> Num)((i : Num))) < (n : Num) && (f : (Real) -> Real)((z : (Num) -> Real)(q(i))) == z(p(q(i)))) && p(q(i) + 1) < n && f(z(q(i) + 1)) == z(p(q(i) + 1))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num) => (z : (Num) -> Real)((q : (Num) -> Num)(i) + 1)
+      #|  (i : Num) => (z : (Num) -> Real)((q : (Num) -> Num)(i))
+      #|  (k : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 q : (Num) -> Num, real_continuous_on(f, UNIV) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) && (\226\136\128 i : Num, i < n \226\134\146 minimal_period(f, n, z(i))) && 0 < k && !divides(n, k) && (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n) && q(0) == q(k) && (\226\136\128 r : Num, 0 < r && r < k \226\134\146 !(q(r) == q(0))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))) \226\134\146 (\226\136\131 x : Real, minimal_period(f, k, x))
+      #|  (i : Num)
       #|  0
-      #|  i:num
-      #|  q:num->num
-      #|  k:num
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  forall f z p n k q.\n        f real_continuous_on (:real) /\\\n        (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n        (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n        (forall i. i < n ==> minimal_period f n (z i)) /\\\n        0 < k /\\\n        k < n /\\\n        (forall r. r <= k ==> q r + 1 < n) /\\\n        q 0 = q k /\\\n        (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n        (forall r. r < k\n             ==> adjacent_interval_cover p (q r) (q(SUC r)))\n        ==> ?x. minimal_period f k x
-      #|  DISJOINT (s:real->bool) t\n     ==> ~((x:real) IN s /\\ x IN t)
-      #|  i:num
-      #|  DISJOINT (real_interval[(a:num->real) 0,b 0])\n             (real_interval[a i,b i])
-      #|  x:real
-      #|  i:num
-      #|  forall f n a b.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        (forall i. i <= n ==> a i <= b i) /\\\n        (forall i. i < n\n             ==> real_interval[a(SUC i),b(SUC i)]\n                 SUBSET IMAGE f (real_interval[a i,b i])) /\\\n        a n = a 0 /\\\n        b n = b 0 /\\\n        (forall i. 0 < i /\\ i < n\n             ==> DISJOINT (real_interval[a 0,b 0])\n                          (real_interval[a i,b i]))\n        ==> ?x.\n              minimal_period f n x /\\\n              forall i. i <= n ==> ITER i f x IN real_interval[a i,b i]
-      #|  q:num->num
-      #|  k:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  n:num
-      #|  p:num->num
-      #|  i:num
-      #|  (z:num->real) i
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  i:num
-      #|  forall i. i < n\n        ==> minimal_period (f:real->real) n ((z:num->real) i)
-      #|  i:num
-      #|  i:num
-      #|  forall i. i < n\n        ==> (p:num->num) i < n /\\ minimal_period p n i
-      #|  p:num->num
-      #|  z:num->real
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  forall i. i < n ==> minimal_period (p:num->num) n i
-      #|  z:num->real
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  minimal_period (f:real->real) n x
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  forall f n.\n        ODD n /\\\n        2 < n /\\\n        has_period f n\n        ==> ?z p k q.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              1 < k /\\\n              k < n /\\\n              (forall r. r <= k ==> q r + 1 < n) /\\\n              q 0 = q k /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < k ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < k\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < k\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < k\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
-      #|  x:real
-      #|  r:num->num
-      #|  m:num
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  (k:num) + (m - k) = m
-      #|  r:num->num
-      #|  m - k:num
-      #|  q:num->num
-      #|  k:num
-      #|  adjacent_interval_cover (p:num->num)
-      #|  \\i:num. i + 1 < n
-      #|  (k:num) < m
-      #|  n:num
-      #|  f:real->real
-      #|  forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m /\\\n        ~(n divides m)\n        ==> has_period f m
-      #|  m:num
-      #|  m - 2:num
-      #|  f:real->real
-      #|  m - 2:num
-      #|  n:num
-      #|  f:real->real
-      #|  has_period (f:real->real) (m - 2)
+      #|  (i : Num)
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 k : Num, \226\136\128 q : (Num) -> Num, real_continuous_on(f, UNIV) && (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) && (\226\136\128 i : Num, i < n \226\134\146 minimal_period(f, n, z(i))) && 0 < k && k < n && (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n) && q(0) == q(k) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < k \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))) \226\134\146 (\226\136\131 x : Real, minimal_period(f, k, x))
+      #|  DISJOINT((s : (Real) -> Bool), (t : (Real) -> Bool)) \226\134\146 !(IN((x : Real), s) && IN(x, t))
+      #|  (i : Num)
+      #|  DISJOINT(real_interval([((a : (Num) -> Real)(0), (b : (Num) -> Real)(0))]), real_interval([(a((i : Num)), b(i))]))
+      #|  (x : Real)
+      #|  (i : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 a : (Num) -> Real, \226\136\128 b : (Num) -> Real, real_continuous_on(f, UNIV) && 0 < n && (\226\136\128 i : Num, i <= n \226\134\146 a(i) <= b(i)) && (\226\136\128 i : Num, i < n \226\134\146 SUBSET(real_interval([(a(SUC(i)), b(SUC(i)))]), IMAGE(f, real_interval([(a(i), b(i))])))) && a(n) == a(0) && b(n) == b(0) && (\226\136\128 i : Num, 0 < i && i < n \226\134\146 DISJOINT(real_interval([(a(0), b(0))]), real_interval([(a(i), b(i))]))) \226\134\146 (\226\136\131 x : Real, minimal_period(f, n, x) && (\226\136\128 i : Num, i <= n \226\134\146 IN(ITER(i, f, x), real_interval([(a(i), b(i))]))))
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (i : Num)
+      #|  (z : (Num) -> Real)((i : Num))
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, i < (n : Num) \226\134\146 minimal_period((f : (Real) -> Real), n, (z : (Num) -> Real)(i))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, i < (n : Num) \226\134\146 (p : (Num) -> Num)(i) < n && minimal_period(p, n, i)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 i : Num, i < (n : Num) \226\134\146 minimal_period((p : (Num) -> Num), n, i)
+      #|  (z : (Num) -> Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  minimal_period((f : (Real) -> Real), (n : Num), (x : Real))
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, ODD(n) && 2 < n && has_period(f, n) \226\134\146 (\226\136\131 z : (Num) -> Real, \226\136\131 p : (Num) -> Num, \226\136\131 k : Num, \226\136\131 q : (Num) -> Num, (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) && (\226\136\128 i : Num, i < n \226\134\146 minimal_period(f, n, z(i))) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) && 1 < k && k < n && (\226\136\128 r : Num, r <= k \226\134\146 q(r) + 1 < n) && q(0) == q(k) && p(q(0) + 1) <= q(0) && q(0) + 1 <= p(q(0)) && adjacent_interval_cover(p, q(0), q(0)) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < k \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, \226\136\128 s : Num, r + 1 < s && s < k \226\134\146 !adjacent_interval_cover(p, q(r), q(s))) && (\226\136\128 r : Num, 0 < r && r + 1 < k \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < k \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))))
+      #|  (x : Real)
+      #|  (r : (Num) -> Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (k : Num) + ((m : Num) - k) == m
+      #|  (r : (Num) -> Num)
+      #|  (m : Num) - (k : Num)
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num))
+      #|  (i : Num) => i + 1 < (n : Num)
+      #|  (k : Num) < (m : Num)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, real_continuous_on(f, UNIV) && ODD(n) && 2 < n && has_period(f, n) && n < m && !divides(n, m) \226\134\146 has_period(f, m)
+      #|  (m : Num)
+      #|  (m : Num) - 2
+      #|  (f : (Real) -> Real)
+      #|  (m : Num) - 2
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  has_period((f : (Real) -> Real), (m : Num) - 2)
       #|  2
-      #|  m:num
-      #|  ~((m - 2) divides (m:num))
+      #|  (m : Num)
+      #|  !divides((m : Num) - 2, m)
       #|  2
-      #|  m:num
-      #|  n:num
-      #|  ~((n:num) divides (m - 2))
-      #|  ODD(m - 2)
-      #|  ODD m
-      #|  m:num
-      #|  m - 1:num
-      #|  f:real->real
-      #|  m - 1:num
-      #|  n:num
-      #|  f:real->real
-      #|  has_period (f:real->real) (m - 1)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  !divides((n : Num), (m : Num) - 2)
+      #|  ODD((m : Num) - 2)
+      #|  ODD((m : Num))
+      #|  (m : Num)
+      #|  (m : Num) - 1
+      #|  (f : (Real) -> Real)
+      #|  (m : Num) - 1
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  has_period((f : (Real) -> Real), (m : Num) - 1)
       #|  1
-      #|  m:num
-      #|  ~((m - 1) divides (m:num))
+      #|  (m : Num)
+      #|  !divides((m : Num) - 1, m)
       #|  1
-      #|  m:num
-      #|  n:num
-      #|  ~((n:num) divides (m - 1))
-      #|  ODD(m - 1)
-      #|  EVEN m
-      #|  n:num
-      #|  m:num
-      #|  2 * (n:num) <= m
-      #|  m:num
-      #|  n:num
-      #|  f:real->real
-      #|  (n:num) divides m
-      #|  forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        n < m\n        ==> has_period f m
-      #|  q:num->num
-      #|  p:num->num
-      #|  z:num->real
-      #|  (k:num) + 1
-      #|  w:real
-      #|  has_period (f:real->real) (k + 1)
-      #|  r:num->num
-      #|  (k:num) + 1
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  r:num->num
-      #|  q:num->num
-      #|  k:num
-      #|  adjacent_interval_cover (p:num->num)
-      #|  \\i:num. i + 1 < n
-      #|  (k:num) + 1 < n
-      #|  (k:num) + 1 = n
-      #|  k:num
-      #|  ODD k
-      #|  (k:num) = n - 1
-      #|  y:real
-      #|  has_period (f:real->real) k
-      #|  q:num->num
-      #|  k:num
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  n:num
-      #|  f:real->real
-      #|  forall f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (forall m. ODD m /\\ 1 < m /\\ m < n ==> ~has_period f m)\n        ==> ?z p q.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n\n                   ==> p i < n /\\ minimal_period p n i) /\\\n              (forall r. r <= n - 1 ==> q r + 1 < n) /\\\n              q 0 = q(n - 1) /\\\n              p(q 0 + 1) <= q 0 /\\\n              q 0 + 1 <= p(q 0) /\\\n              adjacent_interval_cover p (q 0) (q 0) /\\\n              (forall r s. r < s /\\ s < n - 1 ==> ~(q r = q s)) /\\\n              (forall r s. r + 1 < s /\\ s < n - 1\n                     ==> ~adjacent_interval_cover p (q r) (q s)) /\\\n              (forall r. 0 < r /\\ r + 1 < n - 1\n                   ==> ~adjacent_interval_cover p (q r) (q 0)) /\\\n              (forall r. r < n - 1\n                   ==> adjacent_interval_cover p (q r) (q(SUC r)))
-      #|  i:num
-      #|  i:num
-      #|  i:num
-      #|  (z:num->real) i
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  i:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  p:num->num
-      #|  z:num->real
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  z:num->real
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  x:real
-      #|  n:num
-      #|  f:real->real
-      #|  forall f n.\n        has_period (f:real->real) n\n        ==> ?z p.\n              (forall i j. i < j /\\ j < n ==> z i < z j) /\\\n              (forall i. i < n ==> p i < n /\\ f(z i) = z(p i)) /\\\n              (forall i. i < n ==> minimal_period f n (z i)) /\\\n              (forall i. i < n ==> p i < n /\\ minimal_period p n i)
-      #|  (p:num->num) (p (p (p 0))) = 0
-      #|  ~((p:num->num) 0 = 0)
-      #|  ~((p:num->num) (p 0) = 0)
-      #|  ~((p:num->num) (p (p 0)) = 0)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  !divides((n : Num), (m : Num) - 1)
+      #|  ODD((m : Num) - 1)
+      #|  EVEN((m : Num))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  2 * (n : Num) <= (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  divides((n : Num), (m : Num))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, real_continuous_on(f, UNIV) && ODD(n) && 2 < n && has_period(f, n) && n < m \226\134\146 has_period(f, m)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (k : Num) + 1
+      #|  (w : Real)
+      #|  has_period((f : (Real) -> Real), (k : Num) + 1)
+      #|  (r : (Num) -> Num)
+      #|  (k : Num) + 1
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (r : (Num) -> Num)
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num))
+      #|  (i : Num) => i + 1 < (n : Num)
+      #|  (k : Num) + 1 < (n : Num)
+      #|  (k : Num) + 1 == (n : Num)
+      #|  (k : Num)
+      #|  ODD((k : Num))
+      #|  (k : Num) == (n : Num) - 1
+      #|  (y : Real)
+      #|  has_period((f : (Real) -> Real), (k : Num))
+      #|  (q : (Num) -> Num)
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, real_continuous_on(f, UNIV) && ODD(n) && 2 < n && has_period(f, n) && (\226\136\128 m : Num, ODD(m) && 1 < m && m < n \226\134\146 !has_period(f, m)) \226\134\146 (\226\136\131 z : (Num) -> Real, \226\136\131 p : (Num) -> Num, \226\136\131 q : (Num) -> Num, (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) && (\226\136\128 i : Num, i < n \226\134\146 minimal_period(f, n, z(i))) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)) && (\226\136\128 r : Num, r <= n - 1 \226\134\146 q(r) + 1 < n) && q(0) == q(n - 1) && p(q(0) + 1) <= q(0) && q(0) + 1 <= p(q(0)) && adjacent_interval_cover(p, q(0), q(0)) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < n - 1 \226\134\146 !(q(r) == q(s))) && (\226\136\128 r : Num, \226\136\128 s : Num, r + 1 < s && s < n - 1 \226\134\146 !adjacent_interval_cover(p, q(r), q(s))) && (\226\136\128 r : Num, 0 < r && r + 1 < n - 1 \226\134\146 !adjacent_interval_cover(p, q(r), q(0))) && (\226\136\128 r : Num, r < n - 1 \226\134\146 adjacent_interval_cover(p, q(r), q(SUC(r)))))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  (z : (Num) -> Real)((i : Num))
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (i : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (z : (Num) -> Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, has_period(f, n) \226\134\146 (\226\136\131 z : (Num) -> Real, \226\136\131 p : (Num) -> Num, (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && f(z(i)) == z(p(i))) && (\226\136\128 i : Num, i < n \226\134\146 minimal_period(f, n, z(i))) && (\226\136\128 i : Num, i < n \226\134\146 p(i) < n && minimal_period(p, n, i)))
+      #|  (p : (Num) -> Num)(p(p(p(0)))) == 0
+      #|  !((p : (Num) -> Num)(0) == 0)
+      #|  !((p : (Num) -> Num)(p(0)) == 0)
+      #|  !((p : (Num) -> Num)(p(p(0))) == 0)
       #|  3
-      #|  p 3 = 0 \\/ p 3 = 1 \\/ p 3 = 2 \\/ p 3 = 3
+      #|  (p : (Num) -> Num)(3) == 0 || p(3) == 1 || p(3) == 2 || p(3) == 3
       #|  2
-      #|  p 2 = 0 \\/ p 2 = 1 \\/ p 2 = 2 \\/ p 2 = 3
+      #|  (p : (Num) -> Num)(2) == 0 || p(2) == 1 || p(2) == 2 || p(2) == 3
       #|  1
-      #|  p 1 = 0 \\/ p 1 = 1 \\/ p 1 = 2 \\/ p 1 = 3
+      #|  (p : (Num) -> Num)(1) == 0 || p(1) == 1 || p(1) == 2 || p(1) == 3
       #|  0
-      #|  p 0 = 0 \\/ p 0 = 1 \\/ p 0 = 2 \\/ p 0 = 3
+      #|  (p : (Num) -> Num)(0) == 0 || p(0) == 1 || p(0) == 2 || p(0) == 3
       #|  3
       #|  0
       #|  4
-      #|  p:num->num
-      #|  1
-      #|  2
-      #|  3
-      #|  periodic_point (p:num->num) 3 0
-      #|  ~((p:num->num) (p (p 0)) = 0)
-      #|  2
-      #|  0
-      #|  4
-      #|  p:num->num
-      #|  1
-      #|  2
-      #|  periodic_point (p:num->num) 2 0
-      #|  ~((p:num->num) (p 0) = 0)
-      #|  1
-      #|  0
-      #|  4
-      #|  p:num->num
-      #|  periodic_point (p:num->num) 1 0
-      #|  ~((p:num->num) 0 = 0)
+      #|  (p : (Num) -> Num)
       #|  1
       #|  2
       #|  3
-      #|  4
-      #|  (p:num->num) (p (p (p 0))) = 0
-      #|  0
-      #|  minimal_period (p:num->num) 4 0
-      #|  forall p.\n        (forall i. i < 4 ==> p i < 4 /\\ minimal_period p 4 i)\n        ==> (adjacent_interval_cover p 0 1 /\\\n             adjacent_interval_cover p 1 0) \\/\n            (adjacent_interval_cover p 0 2 /\\\n             adjacent_interval_cover p 2 0) \\/\n            (adjacent_interval_cover p 1 2 /\\\n             adjacent_interval_cover p 2 1)
-      #|  (r:num) = 0 \\/ r = 1
-      #|  r:num
-      #|  (r:num) = 0 /\\ s = 1
-      #|  (r:num) = 1
-      #|  r:num
-      #|  \\r:num. if r = 1 then (j:num) else (i:num)
-      #|  2
-      #|  n:num
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  forall f z p n i j.\n        f real_continuous_on (:real) /\\\n        (forall r s. r < s /\\ s < n ==> z r < z s) /\\\n        (forall r. r < n ==> p r < n /\\ f(z r) = z(p r)) /\\\n        (forall r. r < n ==> minimal_period f n (z r)) /\\\n        i + 1 < n /\\\n        j + 1 < n /\\\n        ~(i = j) /\\\n        adjacent_interval_cover p i j /\\\n        adjacent_interval_cover p j i\n        ==> ?x. minimal_period f 2 x
-      #|  2
-      #|  1
-      #|  4
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
+      #|  periodic_point((p : (Num) -> Num), 3, 0)
+      #|  !((p : (Num) -> Num)(p(p(0))) == 0)
       #|  2
       #|  0
       #|  4
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
+      #|  (p : (Num) -> Num)
+      #|  1
+      #|  2
+      #|  periodic_point((p : (Num) -> Num), 2, 0)
+      #|  !((p : (Num) -> Num)(p(0)) == 0)
       #|  1
       #|  0
       #|  4
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  p:num->num
-      #|  4
-      #|  f:real->real
-      #|  forall f. f real_continuous_on (:real) /\\ has_period f 4\n       ==> has_period f 2
-      #|  n:num
-      #|  (x:num->real) k
-      #|  (k:num) = 0
-      #|  forall k. 0 < k /\\ k <= n ==> (x:num->real) 0 < x k
-      #|  i:num
-      #|  forall i. i < n ==> (x:num->real) i < x(SUC i)
-      #|  ?i:num. i < n /\\ (x:num->real)(SUC i) <= x i
-      #|  forall x n.\n        0 < n /\\ x n = x 0\n        ==> ?i. i < n /\\ x(SUC i) <= x i
-      #|  m:num
-      #|  z:real
-      #|  z:real
-      #|  (:real)
-      #|  f:real->real
-      #|  n:num
-      #|  \\i:num. --(ITER i (f:real->real) x)
-      #|  ?i. i < n /\\\n        ITER i (f:real->real) x <= f(ITER i f x)
-      #|  n:num
-      #|  \\i:num. ITER i (f:real->real) x
-      #|  ?i. i < n /\\\n        (f:real->real)(ITER i f x) <= ITER i f x
-      #|  0 < (n:num) /\\ periodic_point (f:real->real) n x
-      #|  forall f n.\n        f real_continuous_on (:real) /\\ has_period f n\n        ==> has_period f 1
-      #|  x:real
-      #|  s <= m ==> 2 * s < 2 * m + 1
-      #|  0 < s ==> 0 < 2 * s
-      #|  u:num->num
-      #|  2 * s
-      #|  2 * m + 1
-      #|  p:num->num
-      #|  z:num->real
-      #|  f:real->real
-      #|  u:num->num
-      #|  s:num
-      #|  i:num
-      #|  m:num
-      #|  q:num->num
-      #|  adjacent_interval_cover (p:num->num)
-      #|  \\i:num. i + 1 < 2 * m + 1
-      #|  s:num
-      #|  (q:num->num) 0
-      #|  m:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (q:num->num) 0 < q 1
-      #|  (q:num->num) 0
-      #|  m:num
-      #|  q:num->num
-      #|  p:num->num
-      #|  (q:num->num) 1 < q 0
-      #|  forall r. r < m\n        ==> adjacent_interval_cover (p:num->num)\n             (q(2 * m - 1)) (q(2 * r))
+      #|  (p : (Num) -> Num)
+      #|  periodic_point((p : (Num) -> Num), 1, 0)
+      #|  !((p : (Num) -> Num)(0) == 0)
       #|  1
-      #|  0
-      #|  ~((q:num->num) 0 = q 1)
-      #|  i:num
-      #|  i:num
-      #|  forall i. i < 2 * m ==> (q:num->num) i < 2 * m
-      #|  i:num
-      #|  i:num
-      #|  forall i. i <= 2 * m ==> (p:num->num) i <= 2 * m
-      #|  (2 * m + 1) - 1 = 2 * m
-      #|  0 < m ==> 2 < 2 * m + 1
-      #|  m:num
-      #|  2 * (m:num) + 1
-      #|  f:real->real
-      #|  forall f m.\n        f real_continuous_on (:real) /\\\n        0 < m /\\\n        has_period f (2 * m + 1) /\\\n        (forall d. ODD d /\\ 1 < d /\\ d < 2 * m + 1\n             ==> ~has_period f d)\n        ==> forall s. 0 < s /\\ s <= m ==> has_period f (2 * s)
-      #|  i < 2 * m ==> i <= 2 * m
-      #|  i:num
-      #|  s:num
-      #|  2 < SUC(2 * m) ==> 0 < m
-      #|  m:num
-      #|  f:real->real
-      #|  m:num
-      #|  forall f n.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        2 < n /\\\n        has_period f n /\\\n        (forall d. ODD d /\\ 1 < d /\\ d < n ==> ~has_period f d)\n        ==> forall s. 0 < s /\\ 2 * s < n ==> has_period f (2 * s)
-      #|  EVEN d
-      #|  ~((m:num) = d)
-      #|  m:num
-      #|  d:num
-      #|  f:real->real
-      #|  s:num
-      #|  d:num
-      #|  f:real->real
-      #|  s:num
-      #|  (m:num) < d
-      #|  forall e. ODD e /\\ 1 < e /\\ e < d\n        ==> ~has_period (f:real->real) e
-      #|  ODD 2
-      #|  1 < d /\\ ~(d = 2) ==> 2 < d
-      #|  2 < (d:num)
-      #|  n:num
-      #|  \\d:num. ODD d /\\ 1 < d /\\ has_period (f:real->real) d
-      #|  forall f n m.\n        f real_continuous_on (:real) /\\\n        ODD n /\\\n        1 < n /\\\n        has_period f n /\\\n        EVEN m /\\\n        0 < m\n        ==> has_period f m
-      #|  (n:num) = m
-      #|  x:A
-      #|  n DIV 2 * 2 = n
-      #|  (n:num) = 2 * m
-      #|  x:A
-      #|  EVEN n
-      #|  x:A
-      #|  n DIV gcd(n,2)
-      #|  m:num
-      #|  ITER 2 (f:A->A)
-      #|  m = n DIV gcd(n,2)
-      #|  m * 2
-      #|  x:A
-      #|  f:A->A
-      #|  periodic_point (f:A->A) (m * 2) x
-      #|  0 < (m:num)
-      #|  forall f:A->A m.\n        has_period (ITER 2 f) m\n        ==> (ODD m /\\ has_period f m) \\/ has_period f (2 * m)
-      #|  2 * m
-      #|  m:num
-      #|  f:real->real
-      #|  1 < m ==> m < 2 * m
-      #|  (m:num) < 2 * m
-      #|  ODD 2
-      #|  1 < m /\\ ~(m = 2) ==> 2 < m
-      #|  2 < (m:num)
-      #|  m:num
-      #|  f:real->real
-      #|  forall f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER 2 f) m\n        ==> has_period f (2 * m)
-      #|  ~(2 EXP a = 0)
-      #|  2 EXP a
-      #|  2 EXP a
-      #|  (2 EXP a) * m
-      #|  m:num
-      #|  (2 EXP a) divides (2 EXP a) * m
-      #|  gcd((2 EXP a) * m,2 EXP a) = 2 EXP a
-      #|  2 EXP a
-      #|  (2 EXP a) * m
-      #|  f:A->A
-      #|  forall f:A->A a m.\n        has_period f ((2 EXP a) * m)\n        ==> has_period (ITER (2 EXP a) f) m
-      #|  m:num
-      #|  2 EXP a
-      #|  m:num
-      #|  m:num
-      #|  2 EXP a
-      #|  1
-      #|  0 < k ==> 1 <= k
-      #|  1 <= 2 EXP a
-      #|  m:num
-      #|  (2 EXP a) * m
-      #|  f:real->real
-      #|  m:num
-      #|  ITER 2 (f:real->real)
-      #|  x:real
-      #|  ITER (2 EXP SUC a) (f:real->real) =\n     ITER (2 EXP a) (ITER 2 f)
-      #|  m:num
-      #|  f:real->real
-      #|  ITER 1 (f:real->real) = f
-      #|  forall a f m.\n        f real_continuous_on (:real) /\\\n        1 < m /\\\n        has_period (ITER (2 EXP a) f) m\n        ==> has_period f ((2 EXP a) * m)
-      #|  (2 EXP b) * 2 = 2 EXP SUC b
       #|  2
-      #|  f:real->real
-      #|  b:num
-      #|  has_period (ITER (2 EXP b) (f:real->real)) 2
-      #|  (2 EXP b) * 4 = 2 EXP SUC (SUC b)
-      #|  4
-      #|  b:num
-      #|  f:real->real
-      #|  has_period (ITER (2 EXP b) (f:real->real)) 4
-      #|  (ITER (2 EXP b) f) real_continuous_on (:real)
-      #|  b:num
-      #|  a:num
-      #|  2
-      #|  f:real->real
-      #|  (a:num) = 0
-      #|  forall f a.\n        f real_continuous_on (:real) /\\\n        has_period f (2 EXP (SUC a))\n        ==> has_period f (2 EXP a)
-      #|  b:num
-      #|  (b:num) = SUC a
-      #|  b:num
-      #|  (b:num) = 0
-      #|  b:num
-      #|  forall f a b.\n        f real_continuous_on (:real) /\\\n        b <= a /\\\n        has_period f (2 EXP a)\n        ==> has_period f (2 EXP b)
-      #|  forall n. ODD n ==> 0 < n
-      #|  1 < n /\\ ~(n = 2) ==> 2 < n
-      #|  forall n. ODD n /\\ 1 < n ==> 2 < n
-      #|  0 < n /\\ ~(n = 1) ==> 1 < n
-      #|  forall n. EVEN n /\\ 0 < n ==> 1 < n
-      #|  forall a b. a <= b\n          ==> 2 EXP a * 2 EXP (b - a) = 2 EXP b
-      #|  v:num
-      #|  f:real->real
-      #|  b:num
-      #|  v:num
-      #|  u:num
-      #|  ITER (2 EXP b) (f:real->real)
-      #|  has_period (ITER (2 EXP b) (f:real->real)) v
-      #|  b:num
-      #|  a:num
-      #|  2 EXP a * k = 2 EXP b * v
-      #|  k:num
-      #|  f:real->real
-      #|  a:num
-      #|  k:num
-      #|  u:num
-      #|  ITER (2 EXP a) (f:real->real)
-      #|  has_period (ITER (2 EXP a) (f:real->real)) k
-      #|  v:num
-      #|  EVEN k /\\ 0 < k
-      #|  k:num = 2 EXP (b - a) * v
-      #|  1 < (v:num)
-      #|  b:num
-      #|  SUC a
-      #|  f:real->real
-      #|  2
-      #|  f:real->real
-      #|  a:num
-      #|  2
-      #|  u:num
-      #|  ITER (2 EXP a) (f:real->real)
-      #|  has_period (ITER (2 EXP a) (f:real->real)) 2
-      #|  b:num
-      #|  a:num
-      #|  2 EXP (b - a)
-      #|  f:real->real
-      #|  a:num
-      #|  2 EXP (b - a)
-      #|  u:num
-      #|  ITER (2 EXP a) (f:real->real)
-      #|  has_period (ITER (2 EXP a) (f:real->real))\n                   (2 EXP (b - a))
-      #|  (a:num) < b
-      #|  (v:num) = 1
-      #|  2 < (u:num)
-      #|  u:num
-      #|  a:num
-      #|  f:real->real
-      #|  has_period (ITER (2 EXP a) (f:real->real)) u
-      #|  (ITER (2 EXP a) f) real_continuous_on (:real)
-      #|  forall f a u b v.\n        f real_continuous_on (:real) /\\\n        ODD u /\\\n        1 < u /\\\n        ODD v /\\\n        has_period f (2 EXP a * u) /\\\n        (v = 1 \\/ a < b \\/ a = b /\\ u < v)\n        ==> has_period f (2 EXP b * v)
-      #|  sarkovskii_precedes m n <=>\n    ?a b u v.\n        ODD u /\\\n        ODD v /\\\n        m = 2 EXP a * u /\\\n        n = 2 EXP b * v /\\\n        ((1 < u /\\\n          (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n         (u = 1 /\\ v = 1 /\\ b < a))
-      #|  forall m n.\n        sarkovskii_precedes m n\n        ==> 0 < m /\\ 0 < n
-      #|  (c:num) = 0
-      #|  (c:num) = 0
-      #|  u = 2 EXP c * v
-      #|  forall a b u v.\n        ODD u /\\\n        2 EXP a * u = 2 EXP b * v /\\\n        a <= b\n        ==> b <= a
-      #|  u:num
-      #|  v:num
-      #|  a:num
-      #|  b:num
-      #|  (a:num) <= b
-      #|  v:num
-      #|  u:num
-      #|  b:num
-      #|  a:num
-      #|  (b:num) <= a
-      #|  b:num
-      #|  a:num
-      #|  (a:num) = b
-      #|  forall a b u v.\n        ODD u /\\\n        ODD v /\\\n        2 EXP a * u = 2 EXP b * v\n        ==> a = b /\\ u = v
-      #|  v:num
-      #|  u:num
-      #|  b:num
-      #|  a:num
-      #|  (b:num) = d /\\ (v:num) = x
-      #|  (a:num) = c /\\ (u:num) = w
-      #|  forall a b u v.\n        ODD u /\\\n        ODD v\n        ==> (sarkovskii_precedes (2 EXP a * u) (2 EXP b * v) <=>\n             (1 < u /\\\n              (v = 1 \\/ a < b \\/ a = b /\\ u < v)) \\/\n             (u = 1 /\\ v = 1 /\\ b < a))
-      #|  (a:num) = b /\\ (u:num) = v
-      #|  forall n. ~sarkovskii_precedes n n
-      #|  (b:num) = c /\\ (v:num) = w
-      #|  forall m n p.\n        sarkovskii_precedes m n /\\\n        sarkovskii_precedes n p\n        ==> sarkovskii_precedes m p
-      #|  forall m n.\n        sarkovskii_precedes m n\n        ==> ~sarkovskii_precedes n m
-      #|  (u:num) = v
-      #|  (a:num) = b
-      #|  (v:num) = 1
-      #|  (u:num) = 1
-      #|  0 < u /\\ 0 < v
-      #|  n:num
-      #|  m:num
-      #|  forall m n.\n        0 < m /\\\n        0 < n\n        ==> m = n \\/\n            sarkovskii_precedes m n \\/\n            sarkovskii_precedes n m
-      #|  u:num
       #|  3
-      #|  v:num
+      #|  4
+      #|  (p : (Num) -> Num)(p(p(p(0)))) == 0
       #|  0
-      #|  b:num
-      #|  (b:num) = 0 /\\ (v:num) = 3
-      #|  forall n. ~sarkovskii_precedes n 3
-      #|  n:num
-      #|  3
-      #|  forall n.\n        0 < n\n        ==> (sarkovskii_precedes 3 n <=> ~(n = 3))
+      #|  minimal_period((p : (Num) -> Num), 4, 0)
+      #|  \226\136\128 p : (Num) -> Num, (\226\136\128 i : Num, i < 4 \226\134\146 p(i) < 4 && minimal_period(p, 4, i)) \226\134\146 adjacent_interval_cover(p, 0, 1) && adjacent_interval_cover(p, 1, 0) || adjacent_interval_cover(p, 0, 2) && adjacent_interval_cover(p, 2, 0) || adjacent_interval_cover(p, 1, 2) && adjacent_interval_cover(p, 2, 1)
+      #|  (r : Num) == 0 || r == 1
+      #|  (r : Num)
+      #|  (r : Num) == 0 && (s : Num) == 1
+      #|  (r : Num) == 1
+      #|  (r : Num)
+      #|  (r : Num) => if r == 1 { (j : Num) } else { (i : Num) }
+      #|  2
+      #|  (n : Num)
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 z : (Num) -> Real, \226\136\128 p : (Num) -> Num, \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 j : Num, real_continuous_on(f, UNIV) && (\226\136\128 r : Num, \226\136\128 s : Num, r < s && s < n \226\134\146 z(r) < z(s)) && (\226\136\128 r : Num, r < n \226\134\146 p(r) < n && f(z(r)) == z(p(r))) && (\226\136\128 r : Num, r < n \226\134\146 minimal_period(f, n, z(r))) && i + 1 < n && j + 1 < n && !(i == j) && adjacent_interval_cover(p, i, j) && adjacent_interval_cover(p, j, i) \226\134\146 (\226\136\131 x : Real, minimal_period(f, 2, x))
+      #|  2
       #|  1
-      #|  u:num
+      #|  4
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  2
       #|  0
-      #|  a:num
-      #|  (a:num) = 0 /\\ (u:num) = 1
-      #|  forall n. ~sarkovskii_precedes 1 n
+      #|  4
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
       #|  1
-      #|  n:num
-      #|  forall n.\n        0 < n\n        ==> (sarkovskii_precedes n 1 <=> ~(n = 1))
-      #|  m = 2 EXP a * 1
-      #|  b:num
-      #|  a:num
-      #|  f:real->real
-      #|  m = 2 EXP a * u
-      #|  v:num
-      #|  b:num
-      #|  u:num
-      #|  a:num
-      #|  f:real->real
-      #|  forall f m n.\n        f real_continuous_on (:real) /\\\n        sarkovskii_precedes m n /\\\n        has_period f m\n        ==> has_period f n
-      #|  n:num
-      #|  m:num
-      #|  f:real->real
-      #|  forall f m n.\n        f real_continuous_on (:real) /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period f m\n        ==> has_period f n
-      #|  n:num
+      #|  0
+      #|  4
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (p : (Num) -> Num)
+      #|  4
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, real_continuous_on(f, UNIV) && has_period(f, 4) \226\134\146 has_period(f, 2)
+      #|  (n : Num)
+      #|  (x : (Num) -> Real)((k : Num))
+      #|  (k : Num) == 0
+      #|  \226\136\128 k : Num, 0 < k && k <= (n : Num) \226\134\146 (x : (Num) -> Real)(0) < x(k)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, i < (n : Num) \226\134\146 (x : (Num) -> Real)(i) < x(SUC(i))
+      #|  \226\136\131 i : Num, i < (n : Num) && (x : (Num) -> Real)(SUC(i)) <= x(i)
+      #|  \226\136\128 x : (Num) -> Real, \226\136\128 n : Num, 0 < n && x(n) == x(0) \226\134\146 (\226\136\131 i : Num, i < n && x(SUC(i)) <= x(i))
+      #|  (m : Num)
+      #|  (z : Real)
+      #|  (z : Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  (n : Num)
+      #|  (i : Num) => -ITER(i, (f : (Real) -> Real), (x : Real))
+      #|  \226\136\131 i : Num, i < (n : Num) && ITER(i, (f : (Real) -> Real), (x : Real)) <= f(ITER(i, f, x))
+      #|  (n : Num)
+      #|  (i : Num) => ITER(i, (f : (Real) -> Real), (x : Real))
+      #|  \226\136\131 i : Num, i < (n : Num) && (f : (Real) -> Real)(ITER(i, f, (x : Real))) <= ITER(i, f, x)
+      #|  0 < (n : Num) && periodic_point((f : (Real) -> Real), n, (x : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, real_continuous_on(f, UNIV) && has_period(f, n) \226\134\146 has_period(f, 1)
+      #|  (x : Real)
+      #|  (s : Num) <= (m : Num) \226\134\146 2 * s < 2 * m + 1
+      #|  0 < (s : Num) \226\134\146 0 < 2 * s
+      #|  (u : (Num) -> Num)
+      #|  2 * (s : Num)
+      #|  2 * (m : Num) + 1
+      #|  (p : (Num) -> Num)
+      #|  (z : (Num) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (u : (Num) -> Num)
+      #|  (s : Num)
+      #|  (i : Num)
+      #|  (m : Num)
+      #|  (q : (Num) -> Num)
+      #|  adjacent_interval_cover((p : (Num) -> Num))
+      #|  (i : Num) => i + 1 < 2 * (m : Num) + 1
+      #|  (s : Num)
+      #|  (q : (Num) -> Num)(0)
+      #|  (m : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (q : (Num) -> Num)(0) < q(1)
+      #|  (q : (Num) -> Num)(0)
+      #|  (m : Num)
+      #|  (q : (Num) -> Num)
+      #|  (p : (Num) -> Num)
+      #|  (q : (Num) -> Num)(1) < q(0)
+      #|  \226\136\128 r : Num, r < (m : Num) \226\134\146 adjacent_interval_cover((p : (Num) -> Num), (q : (Num) -> Num)(2 * m - 1), q(2 * r))
+      #|  1
+      #|  0
+      #|  !((q : (Num) -> Num)(0) == q(1))
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, i < 2 * (m : Num) \226\134\146 (q : (Num) -> Num)(i) < 2 * m
+      #|  (i : Num)
+      #|  (i : Num)
+      #|  \226\136\128 i : Num, i <= 2 * (m : Num) \226\134\146 (p : (Num) -> Num)(i) <= 2 * m
+      #|  2 * (m : Num) + 1 - 1 == 2 * m
+      #|  0 < (m : Num) \226\134\146 2 < 2 * m + 1
+      #|  (m : Num)
+      #|  2 * (m : Num) + 1
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 m : Num, real_continuous_on(f, UNIV) && 0 < m && has_period(f, 2 * m + 1) && (\226\136\128 d : Num, ODD(d) && 1 < d && d < 2 * m + 1 \226\134\146 !has_period(f, d)) \226\134\146 (\226\136\128 s : Num, 0 < s && s <= m \226\134\146 has_period(f, 2 * s))
+      #|  (i : Num) < 2 * (m : Num) \226\134\146 i <= 2 * m
+      #|  (i : Num)
+      #|  (s : Num)
+      #|  2 < SUC(2 * (m : Num)) \226\134\146 0 < m
+      #|  (m : Num)
+      #|  (f : (Real) -> Real)
+      #|  (m : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, real_continuous_on(f, UNIV) && ODD(n) && 2 < n && has_period(f, n) && (\226\136\128 d : Num, ODD(d) && 1 < d && d < n \226\134\146 !has_period(f, d)) \226\134\146 (\226\136\128 s : Num, 0 < s && 2 * s < n \226\134\146 has_period(f, 2 * s))
+      #|  EVEN((d : Num))
+      #|  !((m : Num) == (d : Num))
+      #|  (m : Num)
+      #|  (d : Num)
+      #|  (f : (Real) -> Real)
+      #|  (s : Num)
+      #|  (d : Num)
+      #|  (f : (Real) -> Real)
+      #|  (s : Num)
+      #|  (m : Num) < (d : Num)
+      #|  \226\136\128 e : Num, ODD(e) && 1 < e && e < (d : Num) \226\134\146 !has_period((f : (Real) -> Real), e)
+      #|  ODD(2)
+      #|  1 < (d : Num) && !(d == 2) \226\134\146 2 < d
+      #|  2 < (d : Num)
+      #|  (n : Num)
+      #|  (d : Num) => ODD(d) && 1 < d && has_period((f : (Real) -> Real), d)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, real_continuous_on(f, UNIV) && ODD(n) && 1 < n && has_period(f, n) && EVEN(m) && 0 < m \226\134\146 has_period(f, m)
+      #|  (n : Num) == (m : Num)
+      #|  (x : A)
+      #|  DIV((n : Num), 2) * 2 == n
+      #|  (n : Num) == 2 * (m : Num)
+      #|  (x : A)
+      #|  EVEN((n : Num))
+      #|  (x : A)
+      #|  DIV((n : Num), gcd((n, 2)))
+      #|  (m : Num)
+      #|  ITER(2, (f : (A) -> A))
+      #|  (m : Num) == DIV((n : Num), gcd((n, 2)))
+      #|  (m : Num) * 2
+      #|  (x : A)
+      #|  (f : (A) -> A)
+      #|  periodic_point((f : (A) -> A), (m : Num) * 2, (x : A))
+      #|  0 < (m : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 m : Num, has_period(ITER(2, f), m) \226\134\146 ODD(m) && has_period(f, m) || has_period(f, 2 * m)
+      #|  2 * (m : Num)
+      #|  (m : Num)
+      #|  (f : (Real) -> Real)
+      #|  1 < (m : Num) \226\134\146 m < 2 * m
+      #|  (m : Num) < 2 * m
+      #|  ODD(2)
+      #|  1 < (m : Num) && !(m == 2) \226\134\146 2 < m
+      #|  2 < (m : Num)
+      #|  (m : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 m : Num, real_continuous_on(f, UNIV) && 1 < m && has_period(ITER(2, f), m) \226\134\146 has_period(f, 2 * m)
+      #|  !(EXP(2, (a : Num)) == 0)
+      #|  EXP(2, (a : Num))
+      #|  EXP(2, (a : Num))
+      #|  EXP(2, (a : Num)) * (m : Num)
+      #|  (m : Num)
+      #|  divides(EXP(2, (a : Num)), EXP(2, a) * (m : Num))
+      #|  gcd((EXP(2, (a : Num)) * (m : Num), EXP(2, a))) == EXP(2, a)
+      #|  EXP(2, (a : Num))
+      #|  EXP(2, (a : Num)) * (m : Num)
+      #|  (f : (A) -> A)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 a : Num, \226\136\128 m : Num, has_period(f, EXP(2, a) * m) \226\134\146 has_period(ITER(EXP(2, a), f), m)
+      #|  (m : Num)
+      #|  EXP(2, (a : Num))
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  EXP(2, (a : Num))
+      #|  1
+      #|  0 < (k : Num) \226\134\146 1 <= k
+      #|  1 <= EXP(2, (a : Num))
+      #|  (m : Num)
+      #|  EXP(2, (a : Num)) * (m : Num)
+      #|  (f : (Real) -> Real)
+      #|  (m : Num)
+      #|  ITER(2, (f : (Real) -> Real))
+      #|  (x : Real)
+      #|  ITER(EXP(2, SUC((a : Num))), (f : (Real) -> Real)) == ITER(EXP(2, a), ITER(2, f))
+      #|  (m : Num)
+      #|  (f : (Real) -> Real)
+      #|  ITER(1, (f : (Real) -> Real)) == f
+      #|  \226\136\128 a : Num, \226\136\128 f : (Real) -> Real, \226\136\128 m : Num, real_continuous_on(f, UNIV) && 1 < m && has_period(ITER(EXP(2, a), f), m) \226\134\146 has_period(f, EXP(2, a) * m)
+      #|  EXP(2, (b : Num)) * 2 == EXP(2, SUC(b))
+      #|  2
+      #|  (f : (Real) -> Real)
+      #|  (b : Num)
+      #|  has_period(ITER(EXP(2, (b : Num)), (f : (Real) -> Real)), 2)
+      #|  EXP(2, (b : Num)) * 4 == EXP(2, SUC(SUC(b)))
+      #|  4
+      #|  (b : Num)
+      #|  (f : (Real) -> Real)
+      #|  has_period(ITER(EXP(2, (b : Num)), (f : (Real) -> Real)), 4)
+      #|  real_continuous_on(ITER(EXP(2, (b : Num)), (f : (Real) -> Real)), UNIV)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  2
+      #|  (f : (Real) -> Real)
+      #|  (a : Num) == 0
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Num, real_continuous_on(f, UNIV) && has_period(f, EXP(2, SUC(a))) \226\134\146 has_period(f, EXP(2, a))
+      #|  (b : Num)
+      #|  (b : Num) == SUC((a : Num))
+      #|  (b : Num)
+      #|  (b : Num) == 0
+      #|  (b : Num)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Num, \226\136\128 b : Num, real_continuous_on(f, UNIV) && b <= a && has_period(f, EXP(2, a)) \226\134\146 has_period(f, EXP(2, b))
+      #|  \226\136\128 n : Num, ODD(n) \226\134\146 0 < n
+      #|  1 < (n : Num) && !(n == 2) \226\134\146 2 < n
+      #|  \226\136\128 n : Num, ODD(n) && 1 < n \226\134\146 2 < n
+      #|  0 < (n : Num) && !(n == 1) \226\134\146 1 < n
+      #|  \226\136\128 n : Num, EVEN(n) && 0 < n \226\134\146 1 < n
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, a <= b \226\134\146 EXP(2, a) * EXP(2, b - a) == EXP(2, b)
+      #|  (v : Num)
+      #|  (f : (Real) -> Real)
+      #|  (b : Num)
+      #|  (v : Num)
+      #|  (u : Num)
+      #|  ITER(EXP(2, (b : Num)), (f : (Real) -> Real))
+      #|  has_period(ITER(EXP(2, (b : Num)), (f : (Real) -> Real)), (v : Num))
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  EXP(2, (a : Num)) * (k : Num) == EXP(2, (b : Num)) * (v : Num)
+      #|  (k : Num)
+      #|  (f : (Real) -> Real)
+      #|  (a : Num)
+      #|  (k : Num)
+      #|  (u : Num)
+      #|  ITER(EXP(2, (a : Num)), (f : (Real) -> Real))
+      #|  has_period(ITER(EXP(2, (a : Num)), (f : (Real) -> Real)), (k : Num))
+      #|  (v : Num)
+      #|  EVEN((k : Num)) && 0 < k
+      #|  (k : Num) == EXP(2, (b : Num) - (a : Num)) * (v : Num)
+      #|  1 < (v : Num)
+      #|  (b : Num)
+      #|  SUC((a : Num))
+      #|  (f : (Real) -> Real)
+      #|  2
+      #|  (f : (Real) -> Real)
+      #|  (a : Num)
+      #|  2
+      #|  (u : Num)
+      #|  ITER(EXP(2, (a : Num)), (f : (Real) -> Real))
+      #|  has_period(ITER(EXP(2, (a : Num)), (f : (Real) -> Real)), 2)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  EXP(2, (b : Num) - (a : Num))
+      #|  (f : (Real) -> Real)
+      #|  (a : Num)
+      #|  EXP(2, (b : Num) - (a : Num))
+      #|  (u : Num)
+      #|  ITER(EXP(2, (a : Num)), (f : (Real) -> Real))
+      #|  has_period(ITER(EXP(2, (a : Num)), (f : (Real) -> Real)), EXP(2, (b : Num) - a))
+      #|  (a : Num) < (b : Num)
+      #|  (v : Num) == 1
+      #|  2 < (u : Num)
+      #|  (u : Num)
+      #|  (a : Num)
+      #|  (f : (Real) -> Real)
+      #|  has_period(ITER(EXP(2, (a : Num)), (f : (Real) -> Real)), (u : Num))
+      #|  real_continuous_on(ITER(EXP(2, (a : Num)), (f : (Real) -> Real)), UNIV)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 a : Num, \226\136\128 u : Num, \226\136\128 b : Num, \226\136\128 v : Num, real_continuous_on(f, UNIV) && ODD(u) && 1 < u && ODD(v) && has_period(f, EXP(2, a) * u) && (v == 1 || a < b || a == b && u < v) \226\134\146 has_period(f, EXP(2, b) * v)
+      #|  (sarkovskii_precedes : (Num, Num) -> Bool)((m : Num), (n : Num)) == (\226\136\131 a : Num, \226\136\131 b : Num, \226\136\131 u : Num, \226\136\131 v : Num, ODD(u) && ODD(v) && m == EXP(2, a) * u && n == EXP(2, b) * v && (1 < u && (v == 1 || a < b || a == b && u < v) || u == 1 && v == 1 && b < a))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, sarkovskii_precedes(m, n) \226\134\146 0 < m && 0 < n
+      #|  (c : Num) == 0
+      #|  (c : Num) == 0
+      #|  (u : Num) == EXP(2, (c : Num)) * (v : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 u : Num, \226\136\128 v : Num, ODD(u) && EXP(2, a) * u == EXP(2, b) * v && a <= b \226\134\146 b <= a
+      #|  (u : Num)
+      #|  (v : Num)
+      #|  (a : Num)
+      #|  (b : Num)
+      #|  (a : Num) <= (b : Num)
+      #|  (v : Num)
+      #|  (u : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (b : Num) <= (a : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (a : Num) == (b : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 u : Num, \226\136\128 v : Num, ODD(u) && ODD(v) && EXP(2, a) * u == EXP(2, b) * v \226\134\146 a == b && u == v
+      #|  (v : Num)
+      #|  (u : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (b : Num) == (d : Num) && (v : Num) == (x : Num)
+      #|  (a : Num) == (c : Num) && (u : Num) == (w : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 u : Num, \226\136\128 v : Num, ODD(u) && ODD(v) \226\134\146 sarkovskii_precedes(EXP(2, a) * u, EXP(2, b) * v) == (1 < u && (v == 1 || a < b || a == b && u < v) || u == 1 && v == 1 && b < a)
+      #|  (a : Num) == (b : Num) && (u : Num) == (v : Num)
+      #|  \226\136\128 n : Num, !sarkovskii_precedes(n, n)
+      #|  (b : Num) == (c : Num) && (v : Num) == (w : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, sarkovskii_precedes(m, n) && sarkovskii_precedes(n, p) \226\134\146 sarkovskii_precedes(m, p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, sarkovskii_precedes(m, n) \226\134\146 !sarkovskii_precedes(n, m)
+      #|  (u : Num) == (v : Num)
+      #|  (a : Num) == (b : Num)
+      #|  (v : Num) == 1
+      #|  (u : Num) == 1
+      #|  0 < (u : Num) && 0 < (v : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 0 < m && 0 < n \226\134\146 m == n || sarkovskii_precedes(m, n) || sarkovskii_precedes(n, m)
+      #|  (u : Num)
       #|  3
-      #|  f:real->real
-      #|  forall f n.\n        f real_continuous_on (:real) /\\\n        0 < n /\\\n        has_period f 3\n        ==> has_period f n
-      #|  has_period_on (f:A->A) n s <=>\n        ?x. x IN s /\\ minimal_period f n x
-      #|  e:real
-      #|  a:real
-      #|  e:real
-      #|  a:real
-      #|  e:real
-      #|  a:real
-      #|  e:real
-      #|  a:real
-      #|  forall f s.\n        f real_continuous_on s <=>\n        continuous_map\n         (subtopology euclideanreal s,euclideanreal) f
-      #|  forall s t h k.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) <=>\n        h real_continuous_on s /\\\n        IMAGE h s SUBSET t /\\\n        k real_continuous_on t /\\\n        IMAGE k t SUBSET s /\\\n        (forall x. x IN s ==> k(h x) = x) /\\\n        (forall y. y IN t ==> h(k y) = y)
-      #|  x:real
-      #|  x:real
-      #|  forall f h k s t.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> forall n x.\n              x IN s\n              ==> ITER n (h o f o k) (h x) = h(ITER n f x) /\\\n                  ITER n f x IN s
-      #|  (h:real->real) (ITER m f x) = h x
-      #|  k:real->real
-      #|  x:real
-      #|  m:num
-      #|  t:real->bool
-      #|  s:real->bool
-      #|  k:real->real
-      #|  h:real->real
-      #|  f:real->real
-      #|  m:num
-      #|  forall m. periodic_point ((h:real->real) o f o k) m (h x) <=>\n        periodic_point f m x
-      #|  forall f h k s t n x.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s /\\\n        x IN s\n        ==> (minimal_period (h o f o k) n (h x) <=>\n             minimal_period f n x)
-      #|  (k:real->real) y
-      #|  n:num
-      #|  t:real->bool
-      #|  s:real->bool
-      #|  k:real->real
-      #|  h:real->real
-      #|  f:real->real
-      #|  (k:real->real) y
-      #|  x:real
-      #|  n:num
-      #|  t:real->bool
-      #|  s:real->bool
-      #|  k:real->real
-      #|  h:real->real
-      #|  f:real->real
-      #|  (h:real->real) x
-      #|  forall f h k s t n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        IMAGE f s SUBSET s\n        ==> (has_period_on f n s <=>\n             has_period_on (h o f o k) n t)
-      #|  x:real
-      #|  g:real->real
-      #|  s:real->bool
-      #|  s:real->bool
-      #|  f:real->real
+      #|  (v : Num)
+      #|  0
+      #|  (b : Num)
+      #|  (b : Num) == 0 && (v : Num) == 3
+      #|  \226\136\128 n : Num, !sarkovskii_precedes(n, 3)
+      #|  (n : Num)
+      #|  3
+      #|  \226\136\128 n : Num, 0 < n \226\134\146 sarkovskii_precedes(3, n) == !(n == 3)
+      #|  1
+      #|  (u : Num)
+      #|  0
+      #|  (a : Num)
+      #|  (a : Num) == 0 && (u : Num) == 1
+      #|  \226\136\128 n : Num, !sarkovskii_precedes(1, n)
+      #|  1
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, 0 < n \226\134\146 sarkovskii_precedes(n, 1) == !(n == 1)
+      #|  (m : Num) == EXP(2, (a : Num)) * 1
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (f : (Real) -> Real)
+      #|  (m : Num) == EXP(2, (a : Num)) * (u : Num)
+      #|  (v : Num)
+      #|  (b : Num)
+      #|  (u : Num)
+      #|  (a : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, real_continuous_on(f, UNIV) && sarkovskii_precedes(m, n) && has_period(f, m) \226\134\146 has_period(f, n)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, real_continuous_on(f, UNIV) && (m == n || sarkovskii_precedes(m, n)) && has_period(f, m) \226\134\146 has_period(f, n)
+      #|  (n : Num)
+      #|  3
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, real_continuous_on(f, UNIV) && 0 < n && has_period(f, 3) \226\134\146 has_period(f, n)
+      #|  (has_period_on : ((A) -> A, Num, (A) -> Bool) -> Bool)((f : (A) -> A), (n : Num), (s : (A) -> Bool)) == (\226\136\131 x : A, IN(x, s) && minimal_period(f, n, x))
+      #|  (e : Real)
+      #|  (a : Real)
+      #|  (e : Real)
+      #|  (a : Real)
+      #|  (e : Real)
+      #|  (a : Real)
+      #|  (e : Real)
+      #|  (a : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_continuous_on(f, s) == continuous_map((subtopology(euclideanreal, s), euclideanreal), f)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 h : (Real) -> Real, \226\136\128 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, t)), (h, k)) == (real_continuous_on(h, s) && SUBSET(IMAGE(h, s), t) && real_continuous_on(k, t) && SUBSET(IMAGE(k, t), s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 k(h(x)) == x) && (\226\136\128 y : Real, IN(y, t) \226\134\146 h(k(y)) == y))
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 k : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, t)), (h, k)) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\128 n : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 ITER(n, o(h, o(f, k)), h(x)) == h(ITER(n, f, x)) && IN(ITER(n, f, x), s))
+      #|  (h : (Real) -> Real)(ITER((m : Num), (f : (Real) -> Real), (x : Real))) == h(x)
+      #|  (k : (Real) -> Real)
+      #|  (x : Real)
+      #|  (m : Num)
+      #|  (t : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, periodic_point(o((h : (Real) -> Real), o((f : (Real) -> Real), (k : (Real) -> Real))), m, h((x : Real))) == periodic_point(f, m, x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 k : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 n : Num, \226\136\128 x : Real, homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, t)), (h, k)) && SUBSET(IMAGE(f, s), s) && IN(x, s) \226\134\146 minimal_period(o(h, o(f, k)), n, h(x)) == minimal_period(f, n, x)
+      #|  (k : (Real) -> Real)((y : Real))
+      #|  (n : Num)
+      #|  (t : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (k : (Real) -> Real)((y : Real))
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  (t : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (h : (Real) -> Real)((x : Real))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 h : (Real) -> Real, \226\136\128 k : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 n : Num, homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, t)), (h, k)) && SUBSET(IMAGE(f, s), s) \226\134\146 has_period_on(f, n, s) == has_period_on(o(h, o(f, k)), n, t)
+      #|  (x : Real)
+      #|  (g : (Real) -> Real)
+      #|  (s : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
       #|  euclideanreal
-      #|  forall f s.\n        real_closed s /\\\n        is_realinterval s /\\\n        ~(s = {}) /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s\n        ==> ?g.\n              g real_continuous_on (:real) /\\\n              IMAGE g (:real) SUBSET s /\\\n              (forall x. x IN s ==> g x = f x)
-      #|  x:A
-      #|  x:A
-      #|  forall f g s.\n        IMAGE f (:A) SUBSET s /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> forall n x.\n              x IN s\n              ==> ITER n f x = ITER n g x /\\\n                  ITER n f x IN s
-      #|  x:A
-      #|  m:num
-      #|  s:A->bool
-      #|  g:A->A
-      #|  f:A->A
-      #|  m:num
-      #|  forall m. periodic_point (f:A->A) m (x:A) <=>\n        periodic_point g m x
-      #|  forall f g s n x.\n        IMAGE f (:A) SUBSET s /\\\n        (forall y. y IN s ==> f y = g y) /\\\n        x IN s\n        ==> (minimal_period f n x <=> minimal_period g n x)
-      #|  ITER m (f:A->A) x
-      #|  m:num
-      #|  n:num
-      #|  forall f:A->A s n x.\n        IMAGE f (:A) SUBSET s /\\\n        0 < n /\\\n        periodic_point f n x\n        ==> x IN s
-      #|  x:A
-      #|  n:num
-      #|  s:A->bool
-      #|  g:A->A
-      #|  f:A->A
-      #|  x:A
-      #|  x:A
-      #|  n:num
-      #|  s:A->bool
-      #|  g:A->A
-      #|  f:A->A
-      #|  x:A
-      #|  x:A
-      #|  n:num
-      #|  s:A->bool
-      #|  f:A->A
-      #|  (x:A) IN s
-      #|  forall f g s n.\n        IMAGE f (:A) SUBSET s /\\\n        (forall x. x IN s ==> f x = g x)\n        ==> (has_period f n <=> has_period_on g n s)
-      #|  n:num
-      #|  s:real->bool
-      #|  f:real->real
-      #|  g:real->real
-      #|  n:num
-      #|  m:num
-      #|  g:real->real
-      #|  has_period (g:real->real) n
-      #|  m:num
-      #|  s:real->bool
-      #|  f:real->real
-      #|  g:real->real
-      #|  has_period (g:real->real) m
-      #|  s:real->bool
-      #|  f:real->real
-      #|  ~(s:real->bool = {})
-      #|  forall f s m n.\n        real_closed s /\\\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
-      #|  n:num
-      #|  t:real->bool
-      #|  s:real->bool
-      #|  k:real->real
-      #|  h:real->real
-      #|  f:real->real
-      #|  n:num
-      #|  m:num
-      #|  t:real->bool
-      #|  (h:real->real) o (f:real->real) o (k:real->real)
-      #|  has_period_on\n     ((h:real->real) o (f:real->real) o (k:real->real))\n     n (t:real->bool)
-      #|  m:num
-      #|  t:real->bool
-      #|  s:real->bool
-      #|  k:real->real
-      #|  h:real->real
-      #|  f:real->real
-      #|  has_period_on\n     ((h:real->real) o (f:real->real) o (k:real->real))\n     m (t:real->bool)
-      #|  (f:real->real)((k:real->real) x) IN s
-      #|  (k:real->real) x IN s
-      #|  x:real
-      #|  IMAGE ((h:real->real) o (f:real->real) o (k:real->real))\n          (t:real->bool) SUBSET t
-      #|  IMAGE (k:real->real) t
-      #|  IMAGE (f:real->real) s
-      #|  s:real->bool
-      #|  IMAGE (k:real->real) t
-      #|  s:real->bool
-      #|  ((h:real->real) o (f:real->real) o (k:real->real))\n    real_continuous_on (t:real->bool)
-      #|  forall f s t h k m n.\n        homeomorphic_maps\n         (subtopology euclideanreal s,\n          subtopology euclideanreal t) (h,k) /\\\n        real_closed t /\\\n        is_realinterval t /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
-      #|  x:real
-      #|  x:real
-      #|  (((c:real) * (x:real) + (d:real)) - d) / c = x
-      #|  x:real
-      #|  forall s c d.\n        ~(c = &0)\n        ==> homeomorphic_maps\n             (subtopology euclideanreal s,\n              subtopology euclideanreal\n               (IMAGE (\\x. c * x + d) s))\n             ((\\x. c * x + d),(\\y. (y - d) / c))
-      #|  homeomorphic_maps\n    (subtopology euclideanreal (:real),\n     subtopology euclideanreal {x | &0 < x})\n    (exp,log)
-      #|  abs y = y
-      #|  abs y = y
-      #|  y:real
-      #|  abs y = y
-      #|  {x:real | &0 <= x /\\ x < &1}
-      #|  \\x:real. x
-      #|  x:real
-      #|  abs (x / (&1 + abs x)) = x / (&1 + abs x)
-      #|  x:real
-      #|  &0
-      #|  &0 <= x / (&1 + abs x)
-      #|  x:real
-      #|  &0
-      #|  x:real
-      #|  {x:real | &0 <= x}
-      #|  \\x:real. x
-      #|  homeomorphic_maps\n    (subtopology euclideanreal {x | &0 <= x},\n     subtopology euclideanreal {x | &0 <= x /\\ x < &1})\n    ((\\x. x / (&1 + abs x)),\n     (\\y. y / (&1 - abs y)))
-      #|  subtopology euclideanreal (real_interval(-- &1,&1))
-      #|  (\\x. (x - -- &1) / &2) o\n     (\\y. y / (&1 + abs y))
-      #|  (\\y. y / (&1 - abs y)) o\n     (\\x:real. &2 * x + -- &1)
-      #|  homeomorphic_maps\n     (subtopology euclideanreal (real_interval(-- &1,&1)),\n      subtopology euclideanreal (:real))\n     ((\\y. y / (&1 - abs y)),\n      (\\x. x / (&1 + abs x)))
-      #|  (y + &1) / &2
-      #|  x:real
-      #|  y:real
-      #|  IMAGE (\\x:real. &2 * x + -- &1)\n          {x | &0 < x /\\ x < &1} =\n    real_interval(-- &1,&1)
-      #|  -- &1
-      #|  &2
-      #|  {x:real | &0 < x /\\ x < &1}
-      #|  ?h k.\n        homeomorphic_maps\n         (subtopology euclideanreal {x | &0 < x /\\ x < &1},\n          subtopology euclideanreal (:real)) (h,k)
-      #|  homeomorphic_maps\n    (subtopology euclideanreal {x | &0 <= x /\\ x < &1},\n     subtopology euclideanreal {x | &0 <= x})\n    ((\\y. y / (&1 - abs y)),\n     (\\x. x / (&1 + abs x)))
-      #|  ((b:real) - (a:real)) * (y:real) < b - a
-      #|  &0 < ((b:real) - (a:real)) * (y:real)
-      #|  (a:real) + ((b:real) - a) * (y:real)
-      #|  &0 < (b:real) - (a:real)
-      #|  &0 < (x:real) - (a:real)
-      #|  inv((b:real) - (a:real)) * (x:real) +\n        --(inv(b - a) * a) = (x - a) / (b - a)
-      #|  x:real
-      #|  y:real
-      #|  IMAGE\n     (\\x:real. inv(b - a) * x + --(inv(b - a) * a))\n     {x | a < x /\\ x < b} =\n    {y | &0 < y /\\ y < &1}
-      #|  --(inv((b:real) - (a:real)) * (a:real))
-      #|  inv((b:real) - (a:real))
-      #|  {x:real | a < x /\\ x < b}
-      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 < y /\\ y < &1}) (h,k)
-      #|  ((b:real) - (a:real)) * (y:real) < b - a
-      #|  &0 <= ((b:real) - (a:real)) * (y:real)
-      #|  (a:real) + ((b:real) - a) * (y:real)
-      #|  &0 <= (b:real) - (a:real)
-      #|  &0 < (b:real) - (a:real)
-      #|  &0 <= (x:real) - (a:real)
-      #|  inv((b:real) - (a:real)) * (x:real) +\n        --(inv(b - a) * a) = (x - a) / (b - a)
-      #|  x:real
-      #|  y:real
-      #|  IMAGE\n     (\\x:real. inv(b - a) * x + --(inv(b - a) * a))\n     {x | a <= x /\\ x < b} =\n    {y | &0 <= y /\\ y < &1}
-      #|  --(inv((b:real) - (a:real)) * (a:real))
-      #|  inv((b:real) - (a:real))
-      #|  {x:real | a <= x /\\ x < b}
-      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)
-      #|  &0 <= ((b:real) - (a:real)) * (y:real)
-      #|  ((b:real) - (a:real)) * (y:real) < b - a
-      #|  (b:real) - ((b:real) - a) * (y:real)
-      #|  &0 <= (b:real) - (a:real)
-      #|  &0 < (b:real) - (a:real)
-      #|  &0 <= (b:real) - (x:real)
-      #|  --inv((b:real) - (a:real)) * (x:real) +\n        inv(b - a) * b = (b - x) / (b - a)
-      #|  x:real
-      #|  y:real
-      #|  IMAGE\n     (\\x:real. --inv(b - a) * x + inv(b - a) * b)\n     {x | a < x /\\ x <= b} =\n    {y | &0 <= y /\\ y < &1}
-      #|  inv((b:real) - (a:real)) * (b:real)
-      #|  --inv((b:real) - (a:real))
-      #|  {x:real | a < x /\\ x <= b}
-      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal\n                 {y | &0 <= y /\\ y < &1}) (h,k)
-      #|  subtopology euclideanreal {x:real | &0 < x /\\ x < &1}
-      #|  (k:real->real) o (k':real->real)
-      #|  (h':real->real) o (h:real->real)
-      #|  b:real
-      #|  a:real
-      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x < b},\n                subtopology euclideanreal (:real)) (h,k)
-      #|  subtopology euclideanreal {x:real | &0 <= x /\\ x < &1}
-      #|  (k:real->real) o (\\x. x / (&1 + abs x))
-      #|  (\\y. y / (&1 - abs y)) o (h:real->real)
-      #|  b:real
-      #|  a:real
-      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a <= x /\\ x < b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)
-      #|  subtopology euclideanreal {x:real | &0 <= x /\\ x < &1}
-      #|  (k:real->real) o (\\x. x / (&1 + abs x))
-      #|  (\\y. y / (&1 - abs y)) o (h:real->real)
-      #|  b:real
-      #|  a:real
-      #|  forall a b.\n        a < b\n        ==> ?h k.\n              homeomorphic_maps\n               (subtopology euclideanreal\n                 {x | a < x /\\ x <= b},\n                subtopology euclideanreal {x | &0 <= x}) (h,k)
-      #|  subtopology euclideanreal {x:real | &0 < x}
-      #|  (\\y:real. (y - --(a:real)) / &1) o exp
-      #|  log o (\\x:real. &1 * x + --a)
-      #|  homeomorphic_maps\n     (subtopology euclideanreal {x:real | &0 < x},\n      subtopology euclideanreal (:real)) (log,exp)
-      #|  (y:real) + (a:real)
-      #|  x:real
-      #|  y:real
-      #|  IMAGE (\\x:real. &1 * x + --a) {x | a < x} =\n    {x | &0 < x}
-      #|  --(a:real)
-      #|  &1
-      #|  {x:real | a < x}
-      #|  forall a.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | a < x},\n            subtopology euclideanreal (:real)) (h,k)
-      #|  subtopology euclideanreal {x:real | &0 < x}
-      #|  (\\y:real. (y - (b:real)) / -- &1) o exp
-      #|  log o (\\x:real. -- &1 * x + b)
-      #|  homeomorphic_maps\n     (subtopology euclideanreal {x:real | &0 < x},\n      subtopology euclideanreal (:real)) (log,exp)
-      #|  (b:real) - (y:real)
-      #|  x:real
-      #|  y:real
-      #|  IMAGE (\\x:real. -- &1 * x + b) {x | x < b} =\n    {x | &0 < x}
-      #|  (b:real)
-      #|  -- &1
-      #|  {x:real | x < b}
-      #|  forall b.\n        ?h k.\n          homeomorphic_maps\n           (subtopology euclideanreal {x | x < b},\n            subtopology euclideanreal (:real)) (h,k)
-      #|  I:real->real
-      #|  I:real->real
-      #|  real_interval[a,b]
-      #|  {x:real | a <= x /\\ x <= b} = real_interval[a,b]
-      #|  k:real->real
-      #|  h:real->real
-      #|  {x:real | &0 <= x}
-      #|  b:real
-      #|  a:real
-      #|  {x:real | a <= x /\\ x < b} = {}
-      #|  (a:real) < b
-      #|  (a:real) < b
-      #|  k:real->real
-      #|  h:real->real
-      #|  {x:real | &0 <= x}
-      #|  b:real
-      #|  a:real
-      #|  {x:real | a < x /\\ x <= b} = {}
-      #|  (a:real) < b
-      #|  (a:real) < b
-      #|  k:real->real
-      #|  h:real->real
-      #|  (:real)
-      #|  b:real
-      #|  a:real
-      #|  {x:real | a < x /\\ x < b} = {}
-      #|  (a:real) < b
-      #|  (a:real) < b
-      #|  k:real->real
-      #|  h:real->real
-      #|  (:real)
-      #|  b:real
-      #|  I:real->real
-      #|  I:real->real
-      #|  {x:real | x <= b}
-      #|  I:real->real
-      #|  I:real->real
-      #|  {x:real | a <= x}
-      #|  k:real->real
-      #|  h:real->real
-      #|  (:real)
-      #|  a:real
-      #|  I:real->real
-      #|  I:real->real
-      #|  (:real)
-      #|  s:real->bool
-      #|  forall s.\n        is_realinterval s /\\\n        ~(s = {})\n        ==> ?t h k.\n              real_closed t /\\\n              is_realinterval t /\\\n              homeomorphic_maps\n               (subtopology euclideanreal s,\n                subtopology euclideanreal t) (h,k)
-      #|  n:num
-      #|  m:num
-      #|  k:real->real
-      #|  h:real->real
-      #|  t:real->bool
-      #|  s:real->bool
-      #|  f:real->real
-      #|  s:real->bool
-      #|  ~(s:real->bool = {})
-      #|  forall f s m n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        (m = n \\/ sarkovskii_precedes m n) /\\\n        has_period_on f m s\n        ==> has_period_on f n s
-      #|  n:num
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_closed(s) && is_realinterval(s) && !(s == {}) && real_continuous_on(f, s) && SUBSET(IMAGE(f, s), s) \226\134\146 (\226\136\131 g : (Real) -> Real, real_continuous_on(g, UNIV) && SUBSET(IMAGE(g, UNIV), s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 g(x) == f(x)))
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 g : (A) -> A, \226\136\128 s : (A) -> Bool, SUBSET(IMAGE(f, UNIV), s) && (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 (\226\136\128 n : Num, \226\136\128 x : A, IN(x, s) \226\134\146 ITER(n, f, x) == ITER(n, g, x) && IN(ITER(n, f, x), s))
+      #|  (x : A)
+      #|  (m : Num)
+      #|  (s : (A) -> Bool)
+      #|  (g : (A) -> A)
+      #|  (f : (A) -> A)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, periodic_point((f : (A) -> A), m, (x : A)) == periodic_point((g : (A) -> A), m, x)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 g : (A) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, \226\136\128 x : A, SUBSET(IMAGE(f, UNIV), s) && (\226\136\128 y : A, IN(y, s) \226\134\146 f(y) == g(y)) && IN(x, s) \226\134\146 minimal_period(f, n, x) == minimal_period(g, n, x)
+      #|  ITER((m : Num), (f : (A) -> A), (x : A))
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  \226\136\128 f : (A) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, \226\136\128 x : A, SUBSET(IMAGE(f, UNIV), s) && 0 < n && periodic_point(f, n, x) \226\134\146 IN(x, s)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
+      #|  (g : (A) -> A)
+      #|  (f : (A) -> A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
+      #|  (g : (A) -> A)
+      #|  (f : (A) -> A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
+      #|  (f : (A) -> A)
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  \226\136\128 f : (A) -> A, \226\136\128 g : (A) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, SUBSET(IMAGE(f, UNIV), s) && (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 has_period(f, n) == has_period_on(g, n, s)
+      #|  (n : Num)
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (g : (Real) -> Real)
+      #|  has_period((g : (Real) -> Real), (n : Num))
+      #|  (m : Num)
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  (g : (Real) -> Real)
+      #|  has_period((g : (Real) -> Real), (m : Num))
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  !((s : (Real) -> Bool) == {})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, real_closed(s) && is_realinterval(s) && real_continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && (m == n || sarkovskii_precedes(m, n)) && has_period_on(f, m, s) \226\134\146 has_period_on(f, n, s)
+      #|  (n : Num)
+      #|  (t : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (t : (Real) -> Bool)
+      #|  o((h : (Real) -> Real), o((f : (Real) -> Real), (k : (Real) -> Real)))
+      #|  has_period_on(o((h : (Real) -> Real), o((f : (Real) -> Real), (k : (Real) -> Real))), (n : Num), (t : (Real) -> Bool))
+      #|  (m : Num)
+      #|  (t : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (f : (Real) -> Real)
+      #|  has_period_on(o((h : (Real) -> Real), o((f : (Real) -> Real), (k : (Real) -> Real))), (m : Num), (t : (Real) -> Bool))
+      #|  IN((f : (Real) -> Real)((k : (Real) -> Real)((x : Real))), (s : (Real) -> Bool))
+      #|  IN((k : (Real) -> Real)((x : Real)), (s : (Real) -> Bool))
+      #|  (x : Real)
+      #|  SUBSET(IMAGE(o((h : (Real) -> Real), o((f : (Real) -> Real), (k : (Real) -> Real))), (t : (Real) -> Bool)), t)
+      #|  IMAGE((k : (Real) -> Real), (t : (Real) -> Bool))
+      #|  IMAGE((f : (Real) -> Real), (s : (Real) -> Bool))
+      #|  (s : (Real) -> Bool)
+      #|  IMAGE((k : (Real) -> Real), (t : (Real) -> Bool))
+      #|  (s : (Real) -> Bool)
+      #|  real_continuous_on(o((h : (Real) -> Real), o((f : (Real) -> Real), (k : (Real) -> Real))), (t : (Real) -> Bool))
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 t : (Real) -> Bool, \226\136\128 h : (Real) -> Real, \226\136\128 k : (Real) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, t)), (h, k)) && real_closed(t) && is_realinterval(t) && real_continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && (m == n || sarkovskii_precedes(m, n)) && has_period_on(f, m, s) \226\134\146 has_period_on(f, n, s)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  ((c : Real) * (x : Real) + (d : Real) - d) / c == x
+      #|  (x : Real)
+      #|  \226\136\128 s : (Real) -> Bool, \226\136\128 c : Real, \226\136\128 d : Real, !(c == real_of_num(0)) \226\134\146 homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, IMAGE((x : Real) => c * x + d, s))), ((x : Real) => c * x + d, (y : Real) => (y - d) / c))
+      #|  homeomorphic_maps((subtopology(euclideanreal, UNIV), subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x})), (exp, log))
+      #|  abs((y : Real)) == y
+      #|  abs((y : Real)) == y
+      #|  (y : Real)
+      #|  abs((y : Real)) == y
+      #|  {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)}
+      #|  (x : Real) => x
+      #|  (x : Real)
+      #|  abs((x : Real) / (real_of_num(1) + abs(x))) == x / (real_of_num(1) + abs(x))
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  real_of_num(0) <= (x : Real) / (real_of_num(1) + abs(x))
+      #|  (x : Real)
+      #|  real_of_num(0)
+      #|  (x : Real)
+      #|  {(x : Real) | real_of_num(0) <= x}
+      #|  (x : Real) => x
+      #|  homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x}), subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)})), ((x : Real) => x / (real_of_num(1) + abs(x)), (y : Real) => y / (real_of_num(1) - abs(y))))
+      #|  subtopology(euclideanreal, real_interval((-real_of_num(1), real_of_num(1))))
+      #|  o((x : Real) => (x - -real_of_num(1)) / real_of_num(2), (y : Real) => y / (real_of_num(1) + abs(y)))
+      #|  o((y : Real) => y / (real_of_num(1) - abs(y)), (x : Real) => real_of_num(2) * x + -real_of_num(1))
+      #|  homeomorphic_maps((subtopology(euclideanreal, real_interval((-real_of_num(1), real_of_num(1)))), subtopology(euclideanreal, UNIV)), ((y : Real) => y / (real_of_num(1) - abs(y)), (x : Real) => x / (real_of_num(1) + abs(x))))
+      #|  ((y : Real) + real_of_num(1)) / real_of_num(2)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  IMAGE((x : Real) => real_of_num(2) * x + -real_of_num(1), {(x : Real) | real_of_num(0) < x && x < real_of_num(1)}) == real_interval((-real_of_num(1), real_of_num(1)))
+      #|  -real_of_num(1)
+      #|  real_of_num(2)
+      #|  {(x : Real) | real_of_num(0) < x && x < real_of_num(1)}
+      #|  \226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x && x < real_of_num(1)}), subtopology(euclideanreal, UNIV)), (h, k))
+      #|  homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)}), subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x})), ((y : Real) => y / (real_of_num(1) - abs(y)), (x : Real) => x / (real_of_num(1) + abs(x))))
+      #|  ((b : Real) - (a : Real)) * (y : Real) < b - a
+      #|  real_of_num(0) < ((b : Real) - (a : Real)) * (y : Real)
+      #|  (a : Real) + ((b : Real) - a) * (y : Real)
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  real_of_num(0) < (x : Real) - (a : Real)
+      #|  inv((b : Real) - (a : Real)) * (x : Real) + -(inv(b - a) * a) == (x - a) / (b - a)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  IMAGE((x : Real) => inv((b : Real) - (a : Real)) * x + -(inv(b - a) * a), {(x : Real) | a < x && x < b}) == {(y : Real) | real_of_num(0) < y && y < real_of_num(1)}
+      #|  -(inv((b : Real) - (a : Real)) * a)
+      #|  inv((b : Real) - (a : Real))
+      #|  {(x : Real) | (a : Real) < x && x < (b : Real)}
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a < x && x < b}), subtopology(euclideanreal, {(y : Real) | real_of_num(0) < y && y < real_of_num(1)})), (h, k)))
+      #|  ((b : Real) - (a : Real)) * (y : Real) < b - a
+      #|  real_of_num(0) <= ((b : Real) - (a : Real)) * (y : Real)
+      #|  (a : Real) + ((b : Real) - a) * (y : Real)
+      #|  real_of_num(0) <= (b : Real) - (a : Real)
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  real_of_num(0) <= (x : Real) - (a : Real)
+      #|  inv((b : Real) - (a : Real)) * (x : Real) + -(inv(b - a) * a) == (x - a) / (b - a)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  IMAGE((x : Real) => inv((b : Real) - (a : Real)) * x + -(inv(b - a) * a), {(x : Real) | a <= x && x < b}) == {(y : Real) | real_of_num(0) <= y && y < real_of_num(1)}
+      #|  -(inv((b : Real) - (a : Real)) * a)
+      #|  inv((b : Real) - (a : Real))
+      #|  {(x : Real) | (a : Real) <= x && x < (b : Real)}
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a <= x && x < b}), subtopology(euclideanreal, {(y : Real) | real_of_num(0) <= y && y < real_of_num(1)})), (h, k)))
+      #|  real_of_num(0) <= ((b : Real) - (a : Real)) * (y : Real)
+      #|  ((b : Real) - (a : Real)) * (y : Real) < b - a
+      #|  (b : Real) - (b - (a : Real)) * (y : Real)
+      #|  real_of_num(0) <= (b : Real) - (a : Real)
+      #|  real_of_num(0) < (b : Real) - (a : Real)
+      #|  real_of_num(0) <= (b : Real) - (x : Real)
+      #|  -inv((b : Real) - (a : Real)) * (x : Real) + inv(b - a) * b == (b - x) / (b - a)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  IMAGE((x : Real) => -inv((b : Real) - (a : Real)) * x + inv(b - a) * b, {(x : Real) | a < x && x <= b}) == {(y : Real) | real_of_num(0) <= y && y < real_of_num(1)}
+      #|  inv((b : Real) - (a : Real)) * b
+      #|  -inv((b : Real) - (a : Real))
+      #|  {(x : Real) | (a : Real) < x && x <= (b : Real)}
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a < x && x <= b}), subtopology(euclideanreal, {(y : Real) | real_of_num(0) <= y && y < real_of_num(1)})), (h, k)))
+      #|  subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x && x < real_of_num(1)})
+      #|  o((k : (Real) -> Real), (k' : (Real) -> Real))
+      #|  o((h' : (Real) -> Real), (h : (Real) -> Real))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a < x && x < b}), subtopology(euclideanreal, UNIV)), (h, k)))
+      #|  subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)})
+      #|  o((k : (Real) -> Real), (x : Real) => x / (real_of_num(1) + abs(x)))
+      #|  o((y : Real) => y / (real_of_num(1) - abs(y)), (h : (Real) -> Real))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a <= x && x < b}), subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x})), (h, k)))
+      #|  subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)})
+      #|  o((k : (Real) -> Real), (x : Real) => x / (real_of_num(1) + abs(x)))
+      #|  o((y : Real) => y / (real_of_num(1) - abs(y)), (h : (Real) -> Real))
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, a < b \226\134\146 (\226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a < x && x <= b}), subtopology(euclideanreal, {(x : Real) | real_of_num(0) <= x})), (h, k)))
+      #|  subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x})
+      #|  o((y : Real) => (y - -(a : Real)) / real_of_num(1), exp)
+      #|  o(log, (x : Real) => real_of_num(1) * x + -(a : Real))
+      #|  homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x}), subtopology(euclideanreal, UNIV)), (log, exp))
+      #|  (y : Real) + (a : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  IMAGE((x : Real) => real_of_num(1) * x + -(a : Real), {(x : Real) | a < x}) == {(x : Real) | real_of_num(0) < x}
+      #|  -(a : Real)
+      #|  real_of_num(1)
+      #|  {(x : Real) | (a : Real) < x}
+      #|  \226\136\128 a : Real, \226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | a < x}), subtopology(euclideanreal, UNIV)), (h, k))
+      #|  subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x})
+      #|  o((y : Real) => (y - (b : Real)) / -real_of_num(1), exp)
+      #|  o(log, (x : Real) => -real_of_num(1) * x + (b : Real))
+      #|  homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | real_of_num(0) < x}), subtopology(euclideanreal, UNIV)), (log, exp))
+      #|  (b : Real) - (y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  IMAGE((x : Real) => -real_of_num(1) * x + (b : Real), {(x : Real) | x < b}) == {(x : Real) | real_of_num(0) < x}
+      #|  (b : Real)
+      #|  -real_of_num(1)
+      #|  {(x : Real) | x < (b : Real)}
+      #|  \226\136\128 b : Real, \226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, homeomorphic_maps((subtopology(euclideanreal, {(x : Real) | x < b}), subtopology(euclideanreal, UNIV)), (h, k))
+      #|  (I : (Real) -> Real)
+      #|  (I : (Real) -> Real)
+      #|  real_interval([((a : Real), (b : Real))])
+      #|  {(x : Real) | (a : Real) <= x && x <= (b : Real)} == real_interval([(a, b)])
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  {(x : Real) | real_of_num(0) <= x}
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  {(x : Real) | (a : Real) <= x && x < (b : Real)} == {}
+      #|  (a : Real) < (b : Real)
+      #|  (a : Real) < (b : Real)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  {(x : Real) | real_of_num(0) <= x}
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  {(x : Real) | (a : Real) < x && x <= (b : Real)} == {}
+      #|  (a : Real) < (b : Real)
+      #|  (a : Real) < (b : Real)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  {(x : Real) | (a : Real) < x && x < (b : Real)} == {}
+      #|  (a : Real) < (b : Real)
+      #|  (a : Real) < (b : Real)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (b : Real)
+      #|  (I : (Real) -> Real)
+      #|  (I : (Real) -> Real)
+      #|  {(x : Real) | x <= (b : Real)}
+      #|  (I : (Real) -> Real)
+      #|  (I : (Real) -> Real)
+      #|  {(x : Real) | (a : Real) <= x}
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (a : Real)
+      #|  (I : (Real) -> Real)
+      #|  (I : (Real) -> Real)
+      #|  (UNIV : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  \226\136\128 s : (Real) -> Bool, is_realinterval(s) && !(s == {}) \226\134\146 (\226\136\131 t : (Real) -> Bool, \226\136\131 h : (Real) -> Real, \226\136\131 k : (Real) -> Real, real_closed(t) && is_realinterval(t) && homeomorphic_maps((subtopology(euclideanreal, s), subtopology(euclideanreal, t)), (h, k)))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (k : (Real) -> Real)
+      #|  (h : (Real) -> Real)
+      #|  (t : (Real) -> Bool)
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  (s : (Real) -> Bool)
+      #|  !((s : (Real) -> Bool) == {})
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, is_realinterval(s) && real_continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && (m == n || sarkovskii_precedes(m, n)) && has_period_on(f, m, s) \226\134\146 has_period_on(f, n, s)
+      #|  (n : Num)
       #|  3
-      #|  s:real->bool
-      #|  f:real->real
-      #|  forall f s n.\n        is_realinterval s /\\\n        f real_continuous_on s /\\\n        IMAGE f s SUBSET s /\\\n        0 < n /\\\n        has_period_on f 3 s\n        ==> has_period_on f n s
+      #|  (s : (Real) -> Bool)
+      #|  (f : (Real) -> Real)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, \226\136\128 n : Num, is_realinterval(s) && real_continuous_on(f, s) && SUBSET(IMAGE(f, s), s) && 0 < n && has_period_on(f, 3, s) \226\134\146 has_period_on(f, n, s)
       #|periodic_point =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) (((#periodic_point:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A)) ((#=:fun('A,fun('A,bool)) (((#ITER:fun(num,fun(fun('A,'A),fun('A,'A))) n:num) f:fun('A,'A)) x:'A)) x:'A))))))))
       #|minimal_period =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) (((#minimal_period:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) ((#/\:fun(bool,fun(bool,bool)) (((#periodic_point:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) m:num)) ((#<:fun(num,fun(num,bool)) m:num) n:num))) (#~:fun(bool,bool) (((#periodic_point:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) m:num) x:'A))))))))))))))
       #|has_period =  |- (#forall:fun(fun(fun('A,'A),bool),bool) (\f:fun('A,'A). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#has_period:fun(fun('A,'A),fun(num,bool)) f:fun('A,'A)) n:num)) (#?:fun(fun('A,bool),bool) (\x:'A. (((#minimal_period:fun(fun('A,'A),fun(num,fun('A,bool))) f:fun('A,'A)) n:num) x:'A))))))))
