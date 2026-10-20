@@ -153,6 +153,193 @@ fn calls(cs : Array[Char]) -> Array[(Int, Int, String)] {
 }
 
 ///|
+fn ident_char(c : Char) -> Bool {
+  c is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_') || c.to_int() > 127
+}
+
+///|
+/// How often each identifier step_N occurs in `all` (a load step is named
+/// twice: its definition and the call that runs it).
+fn step_counts(all : String) -> Map[String, Int] {
+  let out : Map[String, Int] = Map::new()
+  let cs = all.to_array()
+  let mut k = 0
+  while k < cs.length() {
+    if ident_char(cs[k]) {
+      let mut e = k
+      while e < cs.length() && ident_char(cs[e]) {
+        e += 1
+      }
+      if e - k > 5 && cs[k] == 's' {
+        let w = String::from_array(cs[k:e])
+        if w.has_prefix("step_") && w[5:].iter().all(c => c is ('0'..='9')) {
+          out[w] = out.get(w).unwrap_or(0) + 1
+        }
+      }
+      k = e
+    } else {
+      k += 1
+    }
+  }
+  out
+}
+
+///|
+/// For each position in `positions` (calls in `cs`), whether the call runs
+/// once, while its package loads: directly in a load step, not in another
+/// function or in a lambda or local function in one. Those can run later,
+/// under another environment (overload priorities, interface, type
+/// abbreviations) than the one the tool checks the spelling in. A load step
+/// is `init`, `load`, `load_steps`, or a private `step_N` that the package
+/// names exactly once besides its definition (the call that runs it). One
+/// scan of the source: strings, multiline strings, comments and character
+/// literals are skipped, functions are top-level at brace depth 0, and in a
+/// function any `fn` or `=>` (a lambda, a local function, a match arm or a
+/// catch handler) marks its group, so that everything after it in the group
+/// counts as possibly later.
+fn load_step_calls(
+  cs : Array[Char],
+  positions : Array[Int],
+  steps : Map[String, Int],
+) -> Map[Int, Bool] {
+  let out : Map[Int, Bool] = Map::new()
+  let n = cs.length()
+  let groups : Array[Bool] = []
+  let mut top = ""
+  let mut top_pub = false
+  let mut prev_ident = ""
+  let mut next = 0
+  let mut i = 0
+  let mut line_start = true
+  fn is_step(name : String, is_pub : Bool) -> Bool {
+    name is ("init" | "load" | "load_steps") ||
+    (!is_pub && steps.get(name) == Some(2))
+  }
+  while i < n {
+    // the calls up to here
+    while next < positions.length() && positions[next] <= i {
+      if positions[next] == i {
+        out[i] = groups.length() > 0 && is_step(top, top_pub) && !groups.iter().any(g => g)
+      }
+      next += 1
+    }
+    let c = cs[i]
+    if c == '\n' {
+      line_start = true
+      i += 1
+      continue
+    }
+    if line_start && (c == ' ' || c == '\t') {
+      i += 1
+      continue
+    }
+    if line_start && i + 1 < n && c is ('#' | '$') && cs[i + 1] == '|' {
+      while i < n && cs[i] != '\n' {
+        i += 1
+      }
+      continue
+    }
+    line_start = false
+    if c == '/' && i + 1 < n && cs[i + 1] == '/' {
+      while i < n && cs[i] != '\n' {
+        i += 1
+      }
+      continue
+    }
+    if c == '"' {
+      // a call starts with its @: positions inside strings are not calls
+      i += 1
+      while i < n && cs[i] != '"' && cs[i] != '\n' {
+        i += if cs[i] == '\\' { 2 } else { 1 }
+      }
+      i += 1
+      continue
+    }
+    if c == '\'' {
+      // a character literal: 'x', or an escape up to the closing '
+      if i + 2 < n && cs[i + 1] != '\\' && cs[i + 2] == '\'' {
+        i += 3
+        continue
+      }
+      if i + 1 < n && cs[i + 1] == '\\' {
+        let mut j = i + 2
+        while j < n && cs[j] != '\'' && cs[j] != '\n' {
+          j += 1
+        }
+        i = j + 1
+        continue
+      }
+      i += 1
+      continue
+    }
+    if c is ('(' | '[' | '{') {
+      groups.push(false)
+      i += 1
+      continue
+    }
+    if c is (')' | ']' | '}') {
+      ignore(groups.pop())
+      i += 1
+      continue
+    }
+    if c == '=' && i + 1 < n && cs[i + 1] == '>' {
+      if !groups.is_empty() {
+        groups[groups.length() - 1] = true
+      }
+      i += 2
+      continue
+    }
+    if ident_char(c) && !(c is ('0'..='9')) {
+      let mut j = i
+      while j < n && ident_char(cs[j]) {
+        j += 1
+      }
+      let word = String::from_array(cs[i:j])
+      if word == "fn" {
+        if groups.is_empty() {
+          // a top-level function: its name after optional [..] generics
+          let mut k = j
+          while k < n && cs[k] is (' ' | '\t' | '\n') {
+            k += 1
+          }
+          if k < n && cs[k] == '[' {
+            let mut d = 0
+            while k < n {
+              if cs[k] == '[' {
+                d += 1
+              } else if cs[k] == ']' {
+                d -= 1
+                if d == 0 {
+                  k += 1
+                  break
+                }
+              }
+              k += 1
+            }
+          }
+          while k < n && cs[k] is (' ' | '\t' | '\n') {
+            k += 1
+          }
+          let mut e = k
+          while e < n && ident_char(cs[e]) {
+            e += 1
+          }
+          top = String::from_array(cs[k:e])
+          top_pub = prev_ident == "pub"
+        } else {
+          groups[groups.length() - 1] = true
+        }
+      }
+      prev_ident = word
+      i = j
+      continue
+    }
+    i += 1
+  }
+  out
+}
+
+///|
 /// The calls `prefix"...")` of `cs`, as `calls` finds them.
 fn calls_of(cs : Array[Char], prefix : String) -> Array[(Int, Int, String)] {
   let out = []
@@ -940,11 +1127,18 @@ async fn main {
   let new_spelling : Map[Int, String] = Map::new()
   let left = []
   let mut site = 0
+  let steps = step_counts(sources.map(p => p.1).join("\n"))
   for p in sources {
-    for c in calls(p.1.to_array()) {
+    let cs = p.1.to_array()
+    let file_calls = calls(cs)
+    let load_only = load_step_calls(cs, file_calls.map(c => c.0), steps)
+    for c in file_calls {
       let old = unquote(c.2)
       let kind = match rec.runs.get(site) {
         None => "not run"
+        // checked in the environment it runs in only when that is the
+        // load's
+        Some(_) if !load_only.get(c.0).unwrap_or(false) => "may run later"
         Some(runs) =>
           if runs.iter().any(r => r.1.has_prefix(unprintable)) {
             "unprintable"

@@ -25,6 +25,7 @@ Quotations written in HOL Light's extensible syntax (`@parser.parse_term("forall
    - `not run`: the quotation is inside a function not called while the package loads.
    - `unprintable`: no spelling reads back as exactly the same term. Most are set comprehensions (`{x | P x}`): HOL binds a generated `GEN%PVAR%n` there, which theorems show and the term syntax has no way to write. Others: a free variable whose type repeats an invented type variable (holes cannot tie those together), or a name with no spelling.
    - `conflict`: the site read differently on different runs (a function called under different overload priorities).
+   - `may run later`: the quotation is in a function other than the load steps (`step_N`), or in a lambda in one. It can run after the package has loaded, under another environment (overload priorities, interface, type abbreviations) than the one the tool checks it in, so it stays as it is.
    
    A leftover may be converted by hand (step 4a).
 4a. **Hand-converting a leftover.** Replace `@parser.parse_term("old")` by `@term_syntax.parse_term("new")` in the package's source, and change nothing else. Then run, under the same large stack:
