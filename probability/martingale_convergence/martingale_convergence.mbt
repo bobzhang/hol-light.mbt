@@ -23623,7 +23623,7 @@ fn step_313() -> Unit raise {
   let t15784 = @term_syntax.parse_term("(L : Real)")
   let t15785 = @term_syntax.parse_term("(a : (Num) -> Real)")
   let t15786 = @term_syntax.parse_term("sequentially")
-  let t15787 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("abs"), t15786, t15785, t15784]), @realanalysis.reallim_real_continuous_function()))
+  let t15787 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("real_abs"), t15786, t15785, t15784]), @realanalysis.reallim_real_continuous_function()))
   let t15790 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t15787), t15788), t15789)
   abs_lim_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : (Num) -> Real, ∀ L : Real, op_minus_minus_minus_gt(a, L, sequentially) → op_minus_minus_minus_gt((n : Num) => abs(a(n)), abs(L), sequentially)"), t15790))
 }
