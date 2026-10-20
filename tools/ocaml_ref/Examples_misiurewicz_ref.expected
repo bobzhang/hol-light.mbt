@@ -87264,7 +87264,7 @@ Warning: inventing type variables
 0..0..1..2..solved at 9
 Examples/misiurewicz quotations (493):
   forall f z. (f has_complex_derivative f') (at z)\n         ==> ((\\w. cexp(f w)) has_complex_derivative (f' * cexp(f z))) (at z)
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   forall f z. f complex_differentiable at z\n         ==> (\\w. cexp(f w)) complex_differentiable at z
   forall f z. f complex_differentiable at z\n         ==> complex_derivative (\\w. cexp(f w)) z =\n             complex_derivative f z * cexp(f z)
   forall n z. (ITER n cexp) complex_differentiable at z
