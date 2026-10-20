@@ -16704,358 +16704,358 @@ proving that 49 is composite
 0..0..1..2..3..7..12..solved at 20
 0..0..1..2..3..7..12..solved at 20
 100/bertrand quotations (1246):
-  ISQRT n = @m. m EXP 2 <= n /\\ n < (m + 1) EXP 2
-  m:num
-  n:num
+  (ISQRT : (Num) -> Num)((n : Num)) == select((m : Num) => EXP(m, 2) <= n && n < EXP(m + 1, 2))
+  (m : Num)
+  (n : Num)
   0
-  ~(m + 1 <= m)
-  (?m. m EXP 2 <= n) /\\ (?a. forall m. m EXP 2 <= n ==> m <= a)
-  forall n. ISQRT(n) EXP 2 <= n /\\ n < (ISQRT(n) + 1) EXP 2
-  x <= 0 <=> (x = 0)
+  !((m : Num) + 1 <= m)
+  (\226\136\131 m : Num, EXP(m, 2) <= (n : Num)) && (\226\136\131 a : Num, \226\136\128 m : Num, EXP(m, 2) <= n \226\134\146 m <= a)
+  \226\136\128 n : Num, EXP(ISQRT(n), 2) <= n && n < EXP(ISQRT(n) + 1, 2)
+  ((x : Num) <= 0) == (x == 0)
   0
-  ISQRT 0 = 0
+  ISQRT(0) == 0
   2
-  (ISQRT n) EXP 2 < (m + 1) EXP 2 /\\\n                m EXP 2 < (ISQRT n + 1) EXP 2
-  n:num
-  forall m n. (ISQRT n = m) <=> m EXP 2 <= n /\\ n < (m + 1) EXP 2
-  n:num
+  EXP(ISQRT((n : Num)), 2) < EXP((m : Num) + 1, 2) && EXP(m, 2) < EXP(ISQRT(n) + 1, 2)
+  (n : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, (ISQRT(n) == m) == (EXP(m, 2) <= n && n < EXP(m + 1, 2))
+  (n : Num)
   2
-  ISQRT(n) EXP 2 < m EXP 2 /\\ m EXP 2 <= SUC(ISQRT n) EXP 2
-  m = SUC(ISQRT n)
-  m:num
-  n:num
-  a <= n /\\ n < b /\\ ~(SUC n = a) /\\ ~(SUC n = b)\n      ==> a <= SUC n /\\ SUC n < b
-  forall n. ISQRT(SUC n) =\n       if ?m. SUC n = m EXP 2 then SUC(ISQRT n) else ISQRT n
-  ln(&2) =\n   &7 * ln(&1 + inv(&8)) - &2 * ln(&1 + inv(&24)) - &4 * ln(&1 + inv(&80))
-  x = (&1 + inv(&8)) pow n * (x / (&1 + inv(&8)) pow n)
-  &0 < &1 + inv(&8)
-  &1 + (x - &1) = x
-  &0 < x\n     ==> (ln((&1 + inv(&8)) pow n * x / (&1 + inv(&8)) pow n) =\n          &n * ln(&1 + inv(&8)) + ln(&1 + (x / (&1 + inv(&8)) pow n - &1)))
+  EXP(ISQRT((n : Num)), 2) < EXP((m : Num), 2) && EXP(m, 2) <= EXP(SUC(ISQRT(n)), 2)
+  (m : Num) == SUC(ISQRT((n : Num)))
+  (m : Num)
+  (n : Num)
+  (a : Num) <= (n : Num) && n < (b : Num) && !(SUC(n) == a) && !(SUC(n) == b) \226\134\146 a <= SUC(n) && SUC(n) < b
+  \226\136\128 n : Num, ISQRT(SUC(n)) == (if (\226\136\131 m : Num, SUC(n) == EXP(m, 2)) { SUC(ISQRT(n)) } else { ISQRT(n) })
+  ln(real_of_num(2)) == real_of_num(7) * ln(real_of_num(1) + inv(real_of_num(8))) - real_of_num(2) * ln(real_of_num(1) + inv(real_of_num(24))) - real_of_num(4) * ln(real_of_num(1) + inv(real_of_num(80)))
+  (x : Real) == pow(real_of_num(1) + inv(real_of_num(8)), (n : Num)) * (x / pow(real_of_num(1) + inv(real_of_num(8)), n))
+  real_of_num(0) < real_of_num(1) + inv(real_of_num(8))
+  real_of_num(1) + ((x : Real) - real_of_num(1)) == x
+  real_of_num(0) < (x : Real) \226\134\146 ln(pow(real_of_num(1) + inv(real_of_num(8)), (n : Num)) * (x / pow(real_of_num(1) + inv(real_of_num(8)), n))) == real_of_num(n) * ln(real_of_num(1) + inv(real_of_num(8))) + ln(real_of_num(1) + (x / pow(real_of_num(1) + inv(real_of_num(8)), n) - real_of_num(1)))
   ln
-  x:real
-  n:num
-  x = &2 pow n * (x / &2 pow n)
-  &0 < &2
-  &1 + (x - &1) = x
-  &0 < x\n     ==> (ln(&2 pow n * x / &2 pow n) =\n          &n * ln(&2) + ln(&1 + (x / &2 pow n - &1)))
+  (x : Real)
+  (n : Num)
+  (x : Real) == pow(real_of_num(2), (n : Num)) * (x / pow(real_of_num(2), n))
+  real_of_num(0) < real_of_num(2)
+  real_of_num(1) + ((x : Real) - real_of_num(1)) == x
+  real_of_num(0) < (x : Real) \226\134\146 ln(pow(real_of_num(2), (n : Num)) * (x / pow(real_of_num(2), n))) == real_of_num(n) * ln(real_of_num(2)) + ln(real_of_num(1) + (x / pow(real_of_num(2), n) - real_of_num(1)))
   ln
-  x:real
-  n:num
-  b < a ==> n + a <= c ==> n + b < c
-  &n / &r < floor (&n / &r) + &1
-  &n / &r
-  &n / &r
-  &2 * &n + &d = &2 * (&n + &d / &2)
-  floor(&n / &r) = floor((&n + &d / &2) / &r)
-  forall n r d.\n        d < 2 /\\ 0 < r\n        ==> &2 * floor(&n / &r) <= floor(&(2 * n + d) / &r) /\\\n            floor(&(2 * n + d) / &r) <= &2 * floor(&n / &r) + &1
-  forall n. ln(&(FACT n)) = sum(1,n) (\\d. ln(&d))
-  (a + b) - c - (a - c) = b
-  2 + n = SUC(1 + n)
+  (x : Real)
+  (n : Num)
+  (b : Real) < (a : Real) \226\134\146 (n : Real) + a <= (c : Real) \226\134\146 n + b < c
+  real_of_num((n : Num)) / real_of_num((r : Num)) < floor(real_of_num(n) / real_of_num(r)) + real_of_num(1)
+  real_of_num((n : Num)) / real_of_num((r : Num))
+  real_of_num((n : Num)) / real_of_num((r : Num))
+  real_of_num(2) * real_of_num((n : Num)) + real_of_num((d : Num)) == real_of_num(2) * (real_of_num(n) + real_of_num(d) / real_of_num(2))
+  floor(real_of_num((n : Num)) / real_of_num((r : Num))) == floor((real_of_num(n) + real_of_num((d : Num)) / real_of_num(2)) / real_of_num(r))
+  \226\136\128 n : Num, \226\136\128 r : Num, \226\136\128 d : Num, d < 2 && 0 < r \226\134\146 real_of_num(2) * floor(real_of_num(n) / real_of_num(r)) <= floor(real_of_num(2 * n + d) / real_of_num(r)) && floor(real_of_num(2 * n + d) / real_of_num(r)) <= real_of_num(2) * floor(real_of_num(n) / real_of_num(r)) + real_of_num(1)
+  \226\136\128 n : Num, ln(real_of_num(FACT(n))) == sum((1, n), (d : Num) => ln(real_of_num(d)))
+  (a : Real) + (b : Real) - (c : Real) - (a - c) == b
+  2 + (n : Num) == SUC(1 + n)
   1
-  m:num
-  f:num->real
-  ~(r = 0) <=> 1 <= r
-  0 < r <=> 1 <= r
-  &0 < &r /\\ &r < k r /\\ k r < &(r + 1)
-  a < b /\\ b < c ==> abs(c - b) <= c - a
-  r:num
-  sum(1,n) (\\i. ln(&(i + 1)) - ln(&i))
-  sum(1,n) (\\n. abs(ln(&(n + 1)) - ln(k n)))
+  (m : Num)
+  (f : (Num) -> Real)
+  !((r : Num) == 0) == (1 <= r)
+  (0 < (r : Num)) == (1 <= r)
+  real_of_num(0) < real_of_num((r : Num)) && real_of_num(r) < (k : (Num) -> Real)(r) && k(r) < real_of_num(r + 1)
+  (a : Real) < (b : Real) && b < (c : Real) \226\134\146 abs(c - b) <= c - a
+  (r : Num)
+  sum((1, (n : Num)), (i : Num) => ln(real_of_num(i + 1)) - ln(real_of_num(i)))
+  sum((1, (n : Num)), (n : Num) => abs(ln(real_of_num(n + 1)) - ln((k : (Num) -> Real)(n))))
   0 + 1
-  sum(1,n + 1) (\\i. ln (&i)) = sum(1,n) (\\i. ln(&(i + 1)))
-  abs(x - (y - z)) <= a ==> abs(x - (y - (z + &1))) <= &1 + a
-  forall n. abs(sum(1,n+1) (\\i. ln(&i)) - (&(n + 1) * ln (&(n + 1)) - &(n + 1)))\n        <= &1 + ln(&(n + 1))
-  (a = b + c * &1) <=> (b = a - c)
-  (a - b = c) <=> (a = b + c)
-  SUC(n + 1) = n + 2
-  (n + 1) + 1 = n + 2
-  n + 1
-  forall n. &(n + 1) * ln(&(n + 1)) = sum(1,n) (\\i. ln(k i) + &1)
-  k:num->real
-  ~(n = 0)
-  &n
-  \\x. x * ln(x)
-  x:real
-  x:real
-  a < a + &1
-  (n + &1) - n = &1
-  &(n + 1)
-  &n
-  \\x. ln(x) + &1
-  \\x. x * ln(x)
-  forall n. ~(n = 0)\n        ==> ?z. &n < z /\\ z < &(n + 1) /\\\n                (&(n + 1) * ln(&(n + 1)) - &n * ln(&n) = ln(z) + &1)
-  forall n. ~(n = 0) ==> abs(ln(&(FACT n)) - (&n * ln(&n) - &n)) <= &1 + ln(&n)
-  primepow q <=> ?p k. 1 <= k /\\ prime p /\\ (q = p EXP k)
-  aprimedivisor q = @p. prime p /\\ p divides q
-  p:num
-  k:num
-  p:num
-  q:num
-  forall q. primepow q ==> 2 <= q
+  sum((1, (n : Num) + 1), (i : Num) => ln(real_of_num(i))) == sum((1, n), (i : Num) => ln(real_of_num(i + 1)))
+  abs((x : Real) - ((y : Real) - (z : Real))) <= (a : Real) \226\134\146 abs(x - (y - (z + real_of_num(1)))) <= real_of_num(1) + a
+  \226\136\128 n : Num, abs(sum((1, n + 1), (i : Num) => ln(real_of_num(i))) - (real_of_num(n + 1) * ln(real_of_num(n + 1)) - real_of_num(n + 1))) <= real_of_num(1) + ln(real_of_num(n + 1))
+  ((a : Real) == (b : Real) + (c : Real) * real_of_num(1)) == (b == a - c)
+  ((a : Real) - (b : Real) == (c : Real)) == (a == b + c)
+  SUC((n : Num) + 1) == n + 2
+  (n : Num) + 1 + 1 == n + 2
+  (n : Num) + 1
+  \226\136\128 n : Num, real_of_num(n + 1) * ln(real_of_num(n + 1)) == sum((1, n), (i : Num) => ln((k : (Num) -> Real)(i)) + real_of_num(1))
+  (k : (Num) -> Real)
+  !((n : Num) == 0)
+  real_of_num((n : Num))
+  (x : Real) => x * ln(x)
+  (x : Real)
+  (x : Real)
+  (a : Real) < a + real_of_num(1)
+  (n : Real) + real_of_num(1) - n == real_of_num(1)
+  real_of_num((n : Num) + 1)
+  real_of_num((n : Num))
+  (x : Real) => ln(x) + real_of_num(1)
+  (x : Real) => x * ln(x)
+  \226\136\128 n : Num, !(n == 0) \226\134\146 (\226\136\131 z : Real, real_of_num(n) < z && z < real_of_num(n + 1) && real_of_num(n + 1) * ln(real_of_num(n + 1)) - real_of_num(n) * ln(real_of_num(n)) == ln(z) + real_of_num(1))
+  \226\136\128 n : Num, !(n == 0) \226\134\146 abs(ln(real_of_num(FACT(n))) - (real_of_num(n) * ln(real_of_num(n)) - real_of_num(n))) <= real_of_num(1) + ln(real_of_num(n))
+  (primepow : (Num) -> Bool)((q : Num)) == (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && q == EXP(p, k))
+  (aprimedivisor : (Num) -> Num)((q : Num)) == select((p : Num) => prime(p) && divides(p, q))
+  (p : Num)
+  (k : Num)
+  (p : Num)
+  (q : Num)
+  \226\136\128 q : Num, primepow(q) \226\134\146 2 <= q
   2 <= 0
-  ~(primepow 0)
-  1 <= k ==> (k = SUC(k - 1))
-  q:num
-  forall p k. prime p /\\ 1 <= k ==> (aprimedivisor(p EXP k) = p)
-  forall n. ~(n = 1) ==> prime(aprimedivisor n) /\\ (aprimedivisor n) divides n
-  m:num
-  2 EXP n
-  n:num
-  2:num
-  n <= 2 EXP SUC n
-  n:num
-  n:num
-  2 EXP (SUC n)
-  SUC n
-  forall m n. 2 <= m ==> ?k. n <= m EXP k
-  forall p. prime p ==> primepow p
-  primepow 0 <=> F
+  !primepow(0)
+  1 <= (k : Num) \226\134\146 k == SUC(k - 1)
+  (q : Num)
+  \226\136\128 p : Num, \226\136\128 k : Num, prime(p) && 1 <= k \226\134\146 aprimedivisor(EXP(p, k)) == p
+  \226\136\128 n : Num, !(n == 1) \226\134\146 prime(aprimedivisor(n)) && divides(aprimedivisor(n), n)
+  (m : Num)
+  EXP(2, (n : Num))
+  (n : Num)
+  2
+  (n : Num) <= EXP(2, SUC(n))
+  (n : Num)
+  (n : Num)
+  EXP(2, SUC((n : Num)))
+  SUC((n : Num))
+  \226\136\128 m : Num, \226\136\128 n : Num, 2 <= m \226\134\146 (\226\136\131 k : Num, n <= EXP(m, k))
+  \226\136\128 p : Num, prime(p) \226\134\146 primepow(p)
+  primepow(0) == false
   1 <= 0
-  primepow 1 <=> F
-  prime p ==> 1 <= k /\\ (q = p EXP k) ==> (primepow q <=> T)
-  (P_p = P) /\\ (P_r = P:num)
-  k:num
-  P_p divides P /\\ P_r divides P
-  d_r:num
-  P_r:num
-  d_p:num
-  P_p:num
-  p:num
-  r:num
-  k:num
-  P:num
-  (p * x = r * y + 1) /\\ ~(p = 1) /\\ ~(r = 1) /\\ (q = p * r * d)\n     ==> (primepow q <=> F)
-  p:num
-  k:num
-  q:num
-  r:num
-  d:num
-  x:num
-  y:num
+  primepow(1) == false
+  prime((p : Num)) \226\134\146 1 <= (k : Num) && (q : Num) == EXP(p, k) \226\134\146 primepow(q) == true
+  (P_p : Num) == (P : Num) && (P_r : Num) == P
+  (k : Num)
+  divides((P_p : Num), (P : Num)) && divides((P_r : Num), P)
+  (d_r : Num)
+  (P_r : Num)
+  (d_p : Num)
+  (P_p : Num)
+  (p : Num)
+  (r : Num)
+  (k : Num)
+  (P : Num)
+  (p : Num) * (x : Num) == (r : Num) * (y : Num) + 1 && !(p == 1) && !(r == 1) && (q : Num) == p * (r * (d : Num)) \226\134\146 primepow(q) == false
+  (p : Num)
+  (k : Num)
+  (q : Num)
+  (r : Num)
+  (d : Num)
+  (x : Num)
+  (y : Num)
   primepow
-  prime p ==> 1 <= k /\\ (q = p EXP k) ==> (aprimedivisor q = p)
-  p:num
-  k:num
-  q:num
+  prime((p : Num)) \226\134\146 1 <= (k : Num) && (q : Num) == EXP(p, k) \226\134\146 aprimedivisor(q) == p
+  (p : Num)
+  (k : Num)
+  (q : Num)
   aprimedivisor
-  mangoldt d = if primepow d then ln(&(aprimedivisor d)) else &0
-  2 <= a ==> 1 <= a
-  forall d. &0 <= mangoldt d
-  a * b * c = b * a * c:num
-  p divides r
-  p * m = q EXP j * r
-  p divides q
-  p divides (q EXP j) \\/ p divides r
-  r:num
-  a + 1 <= b ==> a < b
-  (b ==> a) /\\ ~a ==> (a <=> b)
-  q = p:num
-  q = p:num
-  j:num
-  q:num
-  primepow d
-  d divides (p * m) <=> d divides m
-  primepow d
-  d:num
-  1 <= k + 1
-  ~(k + 1 <= k)
-  r:num
-  ~((p EXP k) divides m)
-  primepow (p EXP k)
-  a * b * c = b * a * c:num
-  p divides r
-  p * m = q EXP j * r
-  p divides q
-  p divides (q EXP j) \\/ p divides r
-  r:num
-  1 <= k ==> (k = SUC(k - 1))
-  p EXP k divides (p * m)
-  p EXP j < p EXP k
-  p EXP ((k - 1) - j)
-  p EXP (k - 1)
-  (b ==> a) /\\ b ==> (a <=> b)
-  q = p:num
-  j:num
-  q:num
-  primepow d
-  d divides (p * m) <=> d divides m
-  primepow d
-  d:num
-  (a = a') /\\ (l + b = c) ==> (l + a + b = a' + c)
-  k <= p ==> (1 + p = k + 1 + (p - k))
-  1 + p * m = p EXP k + 1 + (p * m - p EXP k)
-  ~(1 + m <= d /\\ d <= m)
-  d:num
-  forall d. d >= 1 + m\n          ==> ((if primepow d /\\ d divides m then ln (&(aprimedivisor d))\n                else &0) = &0)
-  (b = &0) ==> (a = a + b)
-  2 <= p ==> 1 <= p
-  1 * y <= x ==> (1 + x = (1 + y) + (x - y))
-  1 + p * m = (1 + m) + (p * m - m)
-  sum (1,m)\n     (\\d. if primepow d /\\ d divides m then ln (&(aprimedivisor d)) else &0) =\n    sum (1,p * m)\n     (\\d. if primepow d /\\ d divides m then ln (&(aprimedivisor d)) else &0)
-  k:num
-  a ==> b ==> c <=> b /\\ a ==> c
-  p EXP k
-  k:num
-  p * m:num
-  p:num
-  ?k. forall j. 1 <= j /\\ (p EXP j) divides (p * m) ==> j <= k
+  (mangoldt : (Num) -> Real)((d : Num)) == (if primepow(d) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) })
+  2 <= (a : Num) \226\134\146 1 <= a
+  \226\136\128 d : Num, real_of_num(0) <= mangoldt(d)
+  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+  divides((p : Num), (r : Num))
+  (p : Num) * (m : Num) == EXP((q : Num), (j : Num)) * (r : Num)
+  divides((p : Num), (q : Num))
+  divides((p : Num), EXP((q : Num), (j : Num))) || divides(p, (r : Num))
+  (r : Num)
+  (a : Num) + 1 <= (b : Num) \226\134\146 a < b
+  ((b : Bool) \226\134\146 (a : Bool)) && !a \226\134\146 a == b
+  (q : Num) == (p : Num)
+  (q : Num) == (p : Num)
+  (j : Num)
+  (q : Num)
+  primepow((d : Num))
+  divides((d : Num), (p : Num) * (m : Num)) == divides(d, m)
+  primepow((d : Num))
+  (d : Num)
+  1 <= (k : Num) + 1
+  !((k : Num) + 1 <= k)
+  (r : Num)
+  !divides(EXP((p : Num), (k : Num)), (m : Num))
+  primepow(EXP((p : Num), (k : Num)))
+  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+  divides((p : Num), (r : Num))
+  (p : Num) * (m : Num) == EXP((q : Num), (j : Num)) * (r : Num)
+  divides((p : Num), (q : Num))
+  divides((p : Num), EXP((q : Num), (j : Num))) || divides(p, (r : Num))
+  (r : Num)
+  1 <= (k : Num) \226\134\146 k == SUC(k - 1)
+  divides(EXP((p : Num), (k : Num)), p * (m : Num))
+  EXP((p : Num), (j : Num)) < EXP(p, (k : Num))
+  EXP((p : Num), (k : Num) - 1 - (j : Num))
+  EXP((p : Num), (k : Num) - 1)
+  ((b : Bool) \226\134\146 (a : Bool)) && b \226\134\146 a == b
+  (q : Num) == (p : Num)
+  (j : Num)
+  (q : Num)
+  primepow((d : Num))
+  divides((d : Num), (p : Num) * (m : Num)) == divides(d, m)
+  primepow((d : Num))
+  (d : Num)
+  (a : Real) == (a' : Real) && (l : Real) + (b : Real) == (c : Real) \226\134\146 l + (a + b) == a' + c
+  (k : Num) <= (p : Num) \226\134\146 1 + p == k + (1 + (p - k))
+  1 + (p : Num) * (m : Num) == EXP(p, (k : Num)) + (1 + (p * m - EXP(p, k)))
+  !(1 + (m : Num) <= (d : Num) && d <= m)
+  (d : Num)
+  \226\136\128 d : Num, d >= 1 + (m : Num) \226\134\146 (if primepow(d) && divides(d, m) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }) == real_of_num(0)
+  (b : Real) == real_of_num(0) \226\134\146 (a : Real) == a + b
+  2 <= (p : Num) \226\134\146 1 <= p
+  1 * (y : Num) <= (x : Num) \226\134\146 1 + x == 1 + y + (x - y)
+  1 + (p : Num) * (m : Num) == 1 + m + (p * m - m)
+  sum((1, (m : Num)), (d : Num) => if primepow(d) && divides(d, m) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }) == sum((1, (p : Num) * m), (d : Num) => if primepow(d) && divides(d, m) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) })
+  (k : Num)
+  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (b && a \226\134\146 c)
+  EXP((p : Num), (k : Num))
+  (k : Num)
+  (p : Num) * (m : Num)
+  (p : Num)
+  \226\136\131 k : Num, \226\136\128 j : Num, 1 <= j && divides(EXP((p : Num), j), p * (m : Num)) \226\134\146 j <= k
   1
-  ?k. 1 <= k /\\ (p EXP k) divides (p * m)
-  0 < n <=> ~(n = 0)
-  1 < p <=> 2 <= p
-  m < p * m <=> 1 * m < p * m
-  m:num
-  m:num
-  p:num
+  \226\136\131 k : Num, 1 <= k && divides(EXP((p : Num), k), p * (m : Num))
+  (0 < (n : Num)) == !(n == 0)
+  (1 < (p : Num)) == (2 <= p)
+  ((m : Num) < (p : Num) * m) == (1 * m < p * m)
+  (m : Num)
+  (m : Num)
+  (p : Num)
   2 <= 1
-  r:num
-  sum(1,n) (\\d. &0)
-  n = 1
-  n:num
-  forall n. ~(n = 0)\n       ==> (ln(&n) =\n            sum(1,n) (\\d. if primepow d /\\ d divides n\n                          then ln(&(aprimedivisor d)) else &0))
-  (divides) p
-  (divides) p
-  t + m * d + 1 = (t + 1) + m * d
-  d divides (t + m * d + 1)
+  (r : Num)
+  sum((1, (n : Num)), (d : Num) => real_of_num(0))
+  (n : Num) == 1
+  (n : Num)
+  \226\136\128 n : Num, !(n == 0) \226\134\146 ln(real_of_num(n)) == sum((1, n), (d : Num) => if primepow(d) && divides(d, n) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) })
+  divides((p : Num))
+  divides((p : Num))
+  (t : Num) + ((m : Num) * (d : Num) + 1) == t + 1 + m * d
+  divides((d : Num), (t : Num) + ((m : Num) * d + 1))
   2 <= 1
-  t = 0
-  d divides (t + m * d + 1)
-  t + m * d + 1 < d - 1 + m * d + 1
-  ~(d divides (t + 1))
-  t:num
-  s:num
-  sum(m * d + 1,d - 1) (\\x. &0)
-  (b = &0) ==> (a + b = a)
-  1 <= d ==> (d = 1 + (d - 1))
-  m:num
-  sum(0,q) (\\x. ln (&(aprimedivisor d)))
-  (a + b) - b = a
-  a + b <= c ==> a <= c:num
-  d * q + x < y + 1 + q * d <=> x <= y
-  d * (q + SUC e) < r + 1 + q * d
-  e:num
-  1 <= d ==> ~(d = 0)
-  1 + x <= y * z ==> x < z * y
-  t:num
-  d divides s
-  s:num
-  sum(1 + q * d,r) (\\x. &0)
-  (b = &0) /\\ (a = c) ==> (a + b = c)
-  r < d:num
-  0 < d <=> 1 <= d
-  floor (&(q * d + r) / &d) = &q
-  r = n MOD d
-  q = n DIV d
-  n:num
-  1 <= d ==> ~(d = 0)
-  primepow d
-  d:num
-  1 <= d /\\ 1 + d <= r /\\ (r <= d \\/ (d = 0)) ==> F
-  r:num
-  sum(1 + d,n - d) (\\k. &0)
-  (a = a + b) <=> (b = &0)
-  d < n + 1 ==> (n = d + (n - d))
-  ~(n = 0) <=> 1 <= n
-  d:num
-  sum(1,n) (\\m. sum(1,n) (\\d. if primepow d /\\ d divides m\n                                then ln (&(aprimedivisor d))\n                                else &0))
-  forall n. ln(&(FACT n)) = sum(1,n) (\\d. mangoldt(d) * floor(&n / &d))
-  psi(n) = sum(1,n) (\\d. mangoldt(d))
-  0 < r <=> 1 <= r
-  (a = &1) ==> &1 <= a
-  0 < r <=> 1 <= r
-  (b = &0) /\\ &1 <= a ==> &1 <= a - &2 * b
-  a = a * &1
-  0 < r <=> 1 <= r
-  m * a - &2 * m * b = m * (a - &2 * b)
-  r:num
-  1 + n <= r ==> ~(r <= n)
-  r < n + 1 <=> r <= n
-  sum(1,n) (\\k. &0)
-  (c = &0) /\\ (b = d) ==> ((a + b) - a = c + d)
-  2 * n + d = n + (n + d)
-  sum(1,2 * n + d) (\\d. mangoldt d) - sum(1,n) (\\d. mangoldt d) =\n    sum(1,2 * n + d) (\\d. if d <= n then &0 else mangoldt d)
-  0 < r <=> 1 <= r
-  &2 * a <= b /\\ b <= &2 * a + &1\n      ==> b - &2 * a <= &1
-  m * f - &2 * m * f' = m * (f - &2 * f')
-  r:num
-  1 + n <= r
-  1 + n <= r ==> 0 < r
-  r:num
-  sum(1 + n,n + d) (\\k. &0)
-  (a = a + b) <=> (b = &0)
-  2 * n + d = n + (n + d)
-  sum (1,n) (\\d. mangoldt d * floor (&n / &d)) =\n    sum (1,2 * n + d) (\\d. mangoldt d * floor (&n / &d))
-  d = k MOD 2
-  n = k DIV 2
+  (t : Num) == 0
+  divides((d : Num), (t : Num) + ((m : Num) * d + 1))
+  (t : Num) + ((m : Num) * (d : Num) + 1) < d - 1 + (m * d + 1)
+  !divides((d : Num), (t : Num) + 1)
+  (t : Num)
+  (s : Num)
+  sum(((m : Num) * (d : Num) + 1, d - 1), (x : Num) => real_of_num(0))
+  (b : Real) == real_of_num(0) \226\134\146 (a : Real) + b == a
+  1 <= (d : Num) \226\134\146 d == 1 + (d - 1)
+  (m : Num)
+  sum((0, (q : Num)), (x : Num) => ln(real_of_num(aprimedivisor((d : Num)))))
+  (a : Real) + (b : Real) - b == a
+  (a : Num) + (b : Num) <= (c : Num) \226\134\146 a <= c
+  ((d : Num) * (q : Num) + (x : Num) < (y : Num) + (1 + q * d)) == (x <= y)
+  (d : Num) * ((q : Num) + SUC((e : Num))) < (r : Num) + (1 + q * d)
+  (e : Num)
+  1 <= (d : Num) \226\134\146 !(d == 0)
+  1 + (x : Num) <= (y : Num) * (z : Num) \226\134\146 x < z * y
+  (t : Num)
+  divides((d : Num), (s : Num))
+  (s : Num)
+  sum((1 + (q : Num) * (d : Num), (r : Num)), (x : Num) => real_of_num(0))
+  (b : Real) == real_of_num(0) && (a : Real) == (c : Real) \226\134\146 a + b == c
+  (r : Num) < (d : Num)
+  (0 < (d : Num)) == (1 <= d)
+  floor(real_of_num((q : Num) * (d : Num) + (r : Num)) / real_of_num(d)) == real_of_num(q)
+  (r : Num) == MOD((n : Num), (d : Num))
+  (q : Num) == DIV((n : Num), (d : Num))
+  (n : Num)
+  1 <= (d : Num) \226\134\146 !(d == 0)
+  primepow((d : Num))
+  (d : Num)
+  1 <= (d : Num) && 1 + d <= (r : Num) && (r <= d || d == 0) \226\134\146 false
+  (r : Num)
+  sum((1 + (d : Num), (n : Num) - d), (k : Num) => real_of_num(0))
+  ((a : Real) == a + (b : Real)) == (b == real_of_num(0))
+  (d : Num) < (n : Num) + 1 \226\134\146 n == d + (n - d)
+  !((n : Num) == 0) == (1 <= n)
+  (d : Num)
+  sum((1, (n : Num)), (m : Num) => sum((1, n), (d : Num) => if primepow(d) && divides(d, m) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }))
+  \226\136\128 n : Num, ln(real_of_num(FACT(n))) == sum((1, n), (d : Num) => mangoldt(d) * floor(real_of_num(n) / real_of_num(d)))
+  (psi : (Num) -> Real)((n : Num)) == sum((1, n), (d : Num) => mangoldt(d))
+  (0 < (r : Num)) == (1 <= r)
+  (a : Real) == real_of_num(1) \226\134\146 real_of_num(1) <= a
+  (0 < (r : Num)) == (1 <= r)
+  (b : Real) == real_of_num(0) && real_of_num(1) <= (a : Real) \226\134\146 real_of_num(1) <= a - real_of_num(2) * b
+  (a : Real) == a * real_of_num(1)
+  (0 < (r : Num)) == (1 <= r)
+  (m : Real) * (a : Real) - real_of_num(2) * (m * (b : Real)) == m * (a - real_of_num(2) * b)
+  (r : Num)
+  1 + (n : Num) <= (r : Num) \226\134\146 !(r <= n)
+  ((r : Num) < (n : Num) + 1) == (r <= n)
+  sum((1, (n : Num)), (k : Num) => real_of_num(0))
+  (c : Real) == real_of_num(0) && (b : Real) == (d : Real) \226\134\146 (a : Real) + b - a == c + d
+  2 * (n : Num) + (d : Num) == n + (n + d)
+  sum((1, 2 * (n : Num) + (d : Num)), (d : Num) => mangoldt(d)) - sum((1, n), (d : Num) => mangoldt(d)) == sum((1, 2 * n + d), (d : Num) => if d <= n { real_of_num(0) } else { mangoldt(d) })
+  (0 < (r : Num)) == (1 <= r)
+  real_of_num(2) * (a : Real) <= (b : Real) && b <= real_of_num(2) * a + real_of_num(1) \226\134\146 b - real_of_num(2) * a <= real_of_num(1)
+  (m : Real) * (f : Real) - real_of_num(2) * (m * (f' : Real)) == m * (f - real_of_num(2) * f')
+  (r : Num)
+  1 + (n : Num) <= (r : Num)
+  1 + (n : Num) <= (r : Num) \226\134\146 0 < r
+  (r : Num)
+  sum((1 + (n : Num), n + (d : Num)), (k : Num) => real_of_num(0))
+  ((a : Real) == a + (b : Real)) == (b == real_of_num(0))
+  2 * (n : Num) + (d : Num) == n + (n + d)
+  sum((1, (n : Num)), (d : Num) => mangoldt(d) * floor(real_of_num(n) / real_of_num(d))) == sum((1, 2 * n + (d : Num)), (d : Num) => mangoldt(d) * floor(real_of_num(n) / real_of_num(d)))
+  (d : Num) == MOD((k : Num), 2)
+  (n : Num) == DIV((k : Num), 2)
   2
-  k:num
-  k:num
-  forall n. ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2))) <= psi(n) /\\\n       psi(n) - psi(n DIV 2) <= ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2)))
-  &0 <= ln(&2)
-  0 < q <=> ~(q = 0)
-  &0 < q ==> &0 < q * &2
-  &0 < q /\\ &0 <= r ==> &0 < q * &2 + r
-  0 < q <=> ~(q = 0)
-  &3 * ln(&q * &2) + &3
-  l2 + lnn <= (&4 * lnn + &3) - a - b\n    <=> a + b + l2 <= &3 * lnn + &3
-  &0 <= x ==> abs(x) <= x
-  abs(b - (a + b)) = abs a
-  ~(q = 0)
-  r < 2 ==> (r = 0) \\/ (r = 1)
-  r < 2
-  &0 <= x /\\ x <= &1 * y ==> abs(x) <= y
-  ln(&2) + ln(&q * &2 + &r)
-  x <= a - b - c - d <=> x + b <= a - c - d
-  (q * &2 + r) * l2 - ((q * &2) * (lq + l2) - q * &2 - &2 * (q * lq - q)) =\n    r * l2
-  0 < q <=> ~(q = 0)
-  abs(a - (a2 - &2 * a1)) <= b - &2 * b1 - b2\n    ==> abs(l2 - a2) <= b2\n        ==> abs(l1 - a1) <= b1\n            ==> abs((l2 - &2 * l1) - a) <= b
-  q * 2
-  q:num
-  ln(&(FACT(q * 2)))
-  forall a'. abs((a' - b) - c) <= d - abs(a' - a) ==> abs((a - b) - c) <= d
-  &0 <= x /\\ x <= &1 ==> abs(x) <= &1 + &1
-  &2 = &1 + &1
-  x <= &2 ==> x <= &3
+  (k : Num)
+  (k : Num)
+  \226\136\128 n : Num, ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2)))) <= psi(n) && psi(n) - psi(DIV(n, 2)) <= ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2))))
+  real_of_num(0) <= ln(real_of_num(2))
+  (0 < (q : Num)) == !(q == 0)
+  real_of_num(0) < (q : Real) \226\134\146 real_of_num(0) < q * real_of_num(2)
+  real_of_num(0) < (q : Real) && real_of_num(0) <= (r : Real) \226\134\146 real_of_num(0) < q * real_of_num(2) + r
+  (0 < (q : Num)) == !(q == 0)
+  real_of_num(3) * ln(real_of_num((q : Num)) * real_of_num(2)) + real_of_num(3)
+  ((l2 : Real) + (lnn : Real) <= real_of_num(4) * lnn + real_of_num(3) - (a : Real) - (b : Real)) == (a + (b + l2) <= real_of_num(3) * lnn + real_of_num(3))
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) <= x
+  abs((b : Real) - ((a : Real) + b)) == abs(a)
+  !((q : Num) == 0)
+  (r : Num) < 2 \226\134\146 r == 0 || r == 1
+  (r : Num) < 2
+  real_of_num(0) <= (x : Real) && x <= real_of_num(1) * (y : Real) \226\134\146 abs(x) <= y
+  ln(real_of_num(2)) + ln(real_of_num((q : Num)) * real_of_num(2) + real_of_num((r : Num)))
+  ((x : Real) <= (a : Real) - (b : Real) - (c : Real) - (d : Real)) == (x + b <= a - c - d)
+  ((q : Real) * real_of_num(2) + (r : Real)) * (l2 : Real) - (q * real_of_num(2) * ((lq : Real) + l2) - q * real_of_num(2) - real_of_num(2) * (q * lq - q)) == r * l2
+  (0 < (q : Num)) == !(q == 0)
+  abs((a : Real) - ((a2 : Real) - real_of_num(2) * (a1 : Real))) <= (b : Real) - real_of_num(2) * (b1 : Real) - (b2 : Real) \226\134\146 abs((l2 : Real) - a2) <= b2 \226\134\146 abs((l1 : Real) - a1) <= b1 \226\134\146 abs(l2 - real_of_num(2) * l1 - a) <= b
+  (q : Num) * 2
+  (q : Num)
+  ln(real_of_num(FACT((q : Num) * 2)))
+  \226\136\128 a' : Real, abs(a' - (b : Real) - (c : Real)) <= (d : Real) - abs(a' - (a : Real)) \226\134\146 abs(a - b - c) <= d
+  real_of_num(0) <= (x : Real) && x <= real_of_num(1) \226\134\146 abs(x) <= real_of_num(1) + real_of_num(1)
+  real_of_num(2) == real_of_num(1) + real_of_num(1)
+  (x : Real) <= real_of_num(2) \226\134\146 x <= real_of_num(3)
   1
-  r < 2 ==> ((r = 0) <=> ~(r = 1))
-  ~(q * 2 + r = 0)
-  q = 0
-  r = n MOD 2
-  q = n DIV 2
+  (r : Num) < 2 \226\134\146 (r == 0) == !(r == 1)
+  !((q : Num) * 2 + (r : Num) == 0)
+  (q : Num) == 0
+  (r : Num) == MOD((n : Num), 2)
+  (q : Num) == DIV((n : Num), 2)
   2
-  n:num
-  n = 0
-  forall n. abs((ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2)))) - &n * ln(&2))\n       <= &4 * ln(if n = 0 then &1 else &n) + &3
-  m <= a /\\ b <= m /\\ abs(m - n) <= k\n              ==> n - k <= a /\\ b <= n + k
-  forall n. &n * ln(&2) - (&4 * ln (if n = 0 then &1 else &n) + &3) <= psi(n) /\\\n       psi(n) - psi(n DIV 2)\n       <= &n * ln(&2) + (&4 * ln (if n = 0 then &1 else &n) + &3)
-  mangoldt 0 = ln(&1)
+  (n : Num)
+  (n : Num) == 0
+  \226\136\128 n : Num, abs(ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2)))) - real_of_num(n) * ln(real_of_num(2))) <= real_of_num(4) * ln(if n == 0 { real_of_num(1) } else { real_of_num(n) }) + real_of_num(3)
+  (m : Real) <= (a : Real) && (b : Real) <= m && abs(m - (n : Real)) <= (k : Real) \226\134\146 n - k <= a && b <= n + k
+  \226\136\128 n : Num, real_of_num(n) * ln(real_of_num(2)) - (real_of_num(4) * ln(if n == 0 { real_of_num(1) } else { real_of_num(n) }) + real_of_num(3)) <= psi(n) && psi(n) - psi(DIV(n, 2)) <= real_of_num(n) * ln(real_of_num(2)) + (real_of_num(4) * ln(if n == 0 { real_of_num(1) } else { real_of_num(n) }) + real_of_num(3))
+  mangoldt(0) == ln(real_of_num(1))
   1 <= 0
-  mangoldt 1 = ln(&1)
-  prime p ==> 1 <= k /\\ (q = p EXP k) ==> (mangoldt q = ln(&p))
-  (P_p = P) /\\ (P_r = P:num)
-  k:num
-  P_p divides P /\\ P_r divides P
-  d_r:num
-  P_r:num
-  d_p:num
-  P_p:num
-  p:num
-  r:num
-  k:num
-  P:num
-  ~(primepow q)
-  (p * x = r * y + 1) /\\ ~(p = 1) /\\ ~(r = 1) /\\ (q = p * r * d)\n     ==> (mangoldt q = ln(&1))
-  p:num
-  k:num
-  q:num
-  r:num
-  d:num
-  x:num
-  y:num
+  mangoldt(1) == ln(real_of_num(1))
+  prime((p : Num)) \226\134\146 1 <= (k : Num) && (q : Num) == EXP(p, k) \226\134\146 mangoldt(q) == ln(real_of_num(p))
+  (P_p : Num) == (P : Num) && (P_r : Num) == P
+  (k : Num)
+  divides((P_p : Num), (P : Num)) && divides((P_r : Num), P)
+  (d_r : Num)
+  (P_r : Num)
+  (d_p : Num)
+  (P_p : Num)
+  (p : Num)
+  (r : Num)
+  (k : Num)
+  (P : Num)
+  !primepow((q : Num))
+  (p : Num) * (x : Num) == (r : Num) * (y : Num) + 1 && !(p == 1) && !(r == 1) && (q : Num) == p * (r * (d : Num)) \226\134\146 mangoldt(q) == ln(real_of_num(1))
+  (p : Num)
+  (k : Num)
+  (q : Num)
+  (r : Num)
+  (d : Num)
+  (x : Num)
+  (y : Num)
   mangoldt
-  psi(0) = ln(&1)
-  psi(SUC n) = psi(n) + mangoldt(SUC n)
-  n:num
+  psi(0) == ln(real_of_num(1))
+  psi(SUC((n : Num))) == psi(n) + mangoldt(SUC(n))
+  (n : Num)
   [2, 1]
   [3, 1]
   [2, 2]
@@ -17355,601 +17355,601 @@ proving that 49 is composite
   [2, 1; 149, 1]
   [13, 1; 23, 1]
   [2, 2; 3, 1; 5, 2]
-  a <= b /\\ l <= a /\\ rest ==> l <= a /\\ l <= b /\\ rest
-  T /\\ a <=> a
-  n <= 128 <=> n < 129
-  forall n. n <= 128 ==> psi(n) <= &133 / &128 * &n
-  a <= b ==> x <= a ==> x <= b
-  forall n. n <= 128 ==> psi(n) <= (&3 / &2 * ln(&2)) * &n
-  fa <= ga /\\ &0 <= d ==> (gx - fx - (ga - fa) = d) ==> fx <= gx
-  z:real
-  x:real = a
-  a <= x
-  x:real
-  a:real
-  d:real->real
-  \\x:real. g(x) - f(x)
-  forall f g d a.\n        f(a) <= g(a) /\\\n        (forall x. a <= x ==> ((\\x. g(x) - f(x)) diffl (d(x)))(x)) /\\\n        (forall x. a <= x ==> &0 <= d(x))\n        ==> forall x. a <= x ==> f(x) <= g(x)
-  n:num
-  a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n                 inv(&1 + a) <= b ==> inv(&1 + x) <= b
-  x:real
-  x:real
-  x:real
-  x = &n - &1
-  a <= n ==> a - &1 <= n - &1
-  ~(n <= b) ==> b + 1 <= n
-  &n = &1 + (&n - &1)
-  logtm <= ((c - a * b) * l2) * n\n      ==> (a * l2) * n * b <= (c * l2) * n - logtm
+  (a : Real) <= (b : Real) && (l : Real) <= a && (rest : Bool) \226\134\146 l <= a && l <= b && rest
+  (true && (a : Bool)) == a
+  ((n : Num) <= 128) == (n < 129)
+  \226\136\128 n : Num, n <= 128 \226\134\146 psi(n) <= real_of_num(133) / real_of_num(128) * real_of_num(n)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  \226\136\128 n : Num, n <= 128 \226\134\146 psi(n) <= real_of_num(3) / real_of_num(2) * ln(real_of_num(2)) * real_of_num(n)
+  (fa : Real) <= (ga : Real) && real_of_num(0) <= (d : Real) \226\134\146 (gx : Real) - (fx : Real) - (ga - fa) == d \226\134\146 fx <= gx
+  (z : Real)
+  (x : Real) == (a : Real)
+  (a : Real) <= (x : Real)
+  (x : Real)
+  (a : Real)
+  (d : (Real) -> Real)
+  (x : Real) => (g : (Real) -> Real)(x) - (f : (Real) -> Real)(x)
+  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 d : (Real) -> Real, \226\136\128 a : Real, f(a) <= g(a) && (\226\136\128 x : Real, a <= x \226\134\146 diffl((x : Real) => g(x) - f(x), d(x), x)) && (\226\136\128 x : Real, a <= x \226\134\146 real_of_num(0) <= d(x)) \226\134\146 (\226\136\128 x : Real, a <= x \226\134\146 f(x) <= g(x))
+  (n : Num)
+  (a : Real) <= (x : Real) \226\134\146 inv(real_of_num(1) + x) <= inv(real_of_num(1) + a) && inv(real_of_num(1) + a) <= (b : Real) \226\134\146 inv(real_of_num(1) + x) <= b
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real) == real_of_num((n : Num)) - real_of_num(1)
+  (a : Real) <= (n : Real) \226\134\146 a - real_of_num(1) <= n - real_of_num(1)
+  !((n : Num) <= (b : Num)) \226\134\146 b + 1 <= n
+  real_of_num((n : Num)) == real_of_num(1) + (real_of_num(n) - real_of_num(1))
+  (logtm : Real) <= ((c : Real) - (a : Real) * (b : Real)) * (l2 : Real) * (n : Real) \226\134\146 a * l2 * (n * b) <= c * l2 * n - logtm
   2
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  n DIV 2
-  pn2 <= ((a - &1) * l2) * n - logtm\n      ==> u <= v /\\ pn - pn2 <= n * l2 + logtm ==> pn <= (a * l2) * n
-  ~(n = 0)
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  (<=) (n:num)
-  &n / &2
-  x:real
-  n:num
-  a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n                 inv(&1 + a) <= b ==> inv(&1 + x) <= b
-  x:real
-  x:real
-  x:real
-  x = &n - &1
-  a <= n ==> a - &1 <= n - &1
-  ~(n <= b) ==> b + 1 <= n
-  &n = &1 + (&n - &1)
-  logtm <= ((c - a * b) * l2) * n\n      ==> (a * l2) * n * b <= (c * l2) * n - logtm
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  DIV((n : Num), 2)
+  (pn2 : Real) <= ((a : Real) - real_of_num(1)) * (l2 : Real) * (n : Real) - (logtm : Real) \226\134\146 (u : Real) <= (v : Real) && (pn : Real) - pn2 <= n * l2 + logtm \226\134\146 pn <= a * l2 * n
+  !((n : Num) == 0)
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  op_lt_eq((n : Num))
+  real_of_num((n : Num)) / real_of_num(2)
+  (x : Real)
+  (n : Num)
+  (a : Real) <= (x : Real) \226\134\146 inv(real_of_num(1) + x) <= inv(real_of_num(1) + a) && inv(real_of_num(1) + a) <= (b : Real) \226\134\146 inv(real_of_num(1) + x) <= b
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real) == real_of_num((n : Num)) - real_of_num(1)
+  (a : Real) <= (n : Real) \226\134\146 a - real_of_num(1) <= n - real_of_num(1)
+  !((n : Num) <= (b : Num)) \226\134\146 b + 1 <= n
+  real_of_num((n : Num)) == real_of_num(1) + (real_of_num(n) - real_of_num(1))
+  (logtm : Real) <= ((c : Real) - (a : Real) * (b : Real)) * (l2 : Real) * (n : Real) \226\134\146 a * l2 * (n * b) <= c * l2 * n - logtm
   2
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  n DIV 2
-  pn2 <= ((a - &1) * l2) * n - logtm\n      ==> u <= v /\\ pn - pn2 <= n * l2 + logtm ==> pn <= (a * l2) * n
-  ~(n = 0)
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  (<=) (n:num)
-  &n / &2
-  x:real
-  n:num
-  a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n                 inv(&1 + a) <= b ==> inv(&1 + x) <= b
-  x:real
-  x:real
-  x:real
-  x = &n - &1
-  a <= n ==> a - &1 <= n - &1
-  ~(n <= b) ==> b + 1 <= n
-  &n = &1 + (&n - &1)
-  logtm <= ((c - a * b) * l2) * n\n      ==> (a * l2) * n * b <= (c * l2) * n - logtm
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  DIV((n : Num), 2)
+  (pn2 : Real) <= ((a : Real) - real_of_num(1)) * (l2 : Real) * (n : Real) - (logtm : Real) \226\134\146 (u : Real) <= (v : Real) && (pn : Real) - pn2 <= n * l2 + logtm \226\134\146 pn <= a * l2 * n
+  !((n : Num) == 0)
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  op_lt_eq((n : Num))
+  real_of_num((n : Num)) / real_of_num(2)
+  (x : Real)
+  (n : Num)
+  (a : Real) <= (x : Real) \226\134\146 inv(real_of_num(1) + x) <= inv(real_of_num(1) + a) && inv(real_of_num(1) + a) <= (b : Real) \226\134\146 inv(real_of_num(1) + x) <= b
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real) == real_of_num((n : Num)) - real_of_num(1)
+  (a : Real) <= (n : Real) \226\134\146 a - real_of_num(1) <= n - real_of_num(1)
+  !((n : Num) <= (b : Num)) \226\134\146 b + 1 <= n
+  real_of_num((n : Num)) == real_of_num(1) + (real_of_num(n) - real_of_num(1))
+  (logtm : Real) <= ((c : Real) - (a : Real) * (b : Real)) * (l2 : Real) * (n : Real) \226\134\146 a * l2 * (n * b) <= c * l2 * n - logtm
   2
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  n DIV 2
-  pn2 <= ((a - &1) * l2) * n - logtm\n      ==> u <= v /\\ pn - pn2 <= n * l2 + logtm ==> pn <= (a * l2) * n
-  ~(n = 0)
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  (<=) (n:num)
-  &n / &2
-  x:real
-  &0 < x ==> &0 < &1 + x
-  a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n               inv(&1 + a) <= b ==> inv(&1 + x) <= b
-  z:real
-  &0 < a ==> a <= x ==> &0 < &1 + x
-  x:real
-  x:real
-  x = &n - &1
-  ~(n <= b) ==> b + 1 <= n
-  &2 pow k
-  &2 pow j <= &n - &1
-  &n = &1 + (&n - &1)
-  d <= c - &1 - c2 <=> c2 + d + &1 <= c
-  (d * ln (&2)) * &n
-  logtm <= ((c - a * b) * l2) * n\n    ==> (a * l2) * n * b <= (c * l2) * n - logtm
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  DIV((n : Num), 2)
+  (pn2 : Real) <= ((a : Real) - real_of_num(1)) * (l2 : Real) * (n : Real) - (logtm : Real) \226\134\146 (u : Real) <= (v : Real) && (pn : Real) - pn2 <= n * l2 + logtm \226\134\146 pn <= a * l2 * n
+  !((n : Num) == 0)
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  op_lt_eq((n : Num))
+  real_of_num((n : Num)) / real_of_num(2)
+  (x : Real)
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+  (a : Real) <= (x : Real) \226\134\146 inv(real_of_num(1) + x) <= inv(real_of_num(1) + a) && inv(real_of_num(1) + a) <= (b : Real) \226\134\146 inv(real_of_num(1) + x) <= b
+  (z : Real)
+  real_of_num(0) < (a : Real) \226\134\146 a <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+  (x : Real)
+  (x : Real)
+  (x : Real) == real_of_num((n : Num)) - real_of_num(1)
+  !((n : Num) <= (b : Num)) \226\134\146 b + 1 <= n
+  pow(real_of_num(2), (k : Num))
+  pow(real_of_num(2), (j : Num)) <= real_of_num((n : Num)) - real_of_num(1)
+  real_of_num((n : Num)) == real_of_num(1) + (real_of_num(n) - real_of_num(1))
+  ((d : Real) <= (c : Real) - real_of_num(1) - (c2 : Real)) == (c2 + (d + real_of_num(1)) <= c)
+  (d : Real) * ln(real_of_num(2)) * real_of_num((n : Num))
+  (logtm : Real) <= ((c : Real) - (a : Real) * (b : Real)) * (l2 : Real) * (n : Real) \226\134\146 a * l2 * (n * b) <= c * l2 * n - logtm
   2
-  n:num
-  a <= b ==> x <= a ==> x <= b
-  n <= 2 * k ==> n < 2 * (k + 1)
-  n DIV 2
-  pn2 <= ((a - &1) * l2) * n - logtm\n    ==> u <= v /\\ pn - pn2 <= n * l2 + logtm ==> pn <= (a * l2) * n
-  2 EXP k
-  forall a. ~(a = 0) /\\ ~(n <= a) ==> ~(n = 0)
-  ~(n = 0)
-  n:num
-  n <= 2 EXP k
-  &4 * ln(&1 + &2 pow j) + &3 <= (d * ln(&2)) * (&1 + &2 pow j) /\\\n   &4 / (&1 + &2 pow j) <= d * ln(&2) /\\ &0 <= c /\\ c / &2 + d + &1 <= c\n   ==> forall k. j <= k /\\\n           (forall n. n <= 2 EXP k ==> psi(n) <= (c * ln(&2)) * &n)\n           ==> forall n. n <= 2 EXP (SUC k) ==> psi(n) <= (c * ln(&2)) * &n
-  &n / &2
-  x:real
-  c2 + (c2 - &1) + &1 = &2 * c2
-  c / &2 + (c / &2 - &1) + &1 <= c
-  ~(k <= j:num)
-  2 EXP (SUC j) <= 2 EXP k
-  k <= j:num
-  2 EXP 0
-  m:num
-  m:num
-  ~(a = 0) /\\ m <= a ==> SUC m <= 2 * a
-  m:num
-  m:num
-  m:num
-  ?j. m <= 2 EXP j
-  m:num
-  d = c / &2 - &1
-  (forall n. n <= 2 EXP k ==> psi(n) <= (c * ln(&2)) * &n)\n   ==> &4 * ln(&1 + &2 pow k) + &3\n         <= ((c / &2 - &1) * ln(&2)) * (&1 + &2 pow k) /\\\n       &4 / (&1 + &2 pow k) <= (c / &2 - &1) * ln(&2) /\\ &0 <= c\n           ==> forall n. psi(n) <= (c * ln(&2)) * &n
-  2 EXP 10
-  forall n. psi(n) <= (&4407 / &2048 * ln (&2)) * &n
-  (&4407 / &2048 * ln (&2)) * &n
-  forall n. psi(n) <= &3 / &2 * &n
-  a <= b /\\ b <= l /\\ rest ==> a <= l /\\ b <= l /\\ rest
-  inv(&1 + &299)
-  x:real
-  x:real
-  ~(n < 300)
-  &299 <= x
-  &n = &1 + x
-  x = &n - &1
-  &1 / &11 * &n
-  c <= n * (b - a) ==> a * n <= n * b - c
-  ~(n < 300) ==> ~(n = 0)
-  a <= b ==> b <= x ==> a <= x
-  n:num
-  T /\\ a <=> a
-  n:num
-  n:num
-  n < 300
-  forall n. 4 <= n ==> &3 / &5 * &n <= psi(n)
-  x:real
-  theta(n) = sum(1,n) (\\p. if prime p then ln(&p) else &0)
-  theta(0) = ln(&1)
-  theta(SUC n) = theta(n) + (if prime(SUC n) then ln(&(SUC n)) else &0)
-  n:num
+  (n : Num)
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  (n : Num) <= 2 * (k : Num) \226\134\146 n < 2 * (k + 1)
+  DIV((n : Num), 2)
+  (pn2 : Real) <= ((a : Real) - real_of_num(1)) * (l2 : Real) * (n : Real) - (logtm : Real) \226\134\146 (u : Real) <= (v : Real) && (pn : Real) - pn2 <= n * l2 + logtm \226\134\146 pn <= a * l2 * n
+  EXP(2, (k : Num))
+  \226\136\128 a : Num, !(a == 0) && !((n : Num) <= a) \226\134\146 !(n == 0)
+  !((n : Num) == 0)
+  (n : Num)
+  (n : Num) <= EXP(2, (k : Num))
+  real_of_num(4) * ln(real_of_num(1) + pow(real_of_num(2), (j : Num))) + real_of_num(3) <= (d : Real) * ln(real_of_num(2)) * (real_of_num(1) + pow(real_of_num(2), j)) && real_of_num(4) / (real_of_num(1) + pow(real_of_num(2), j)) <= d * ln(real_of_num(2)) && real_of_num(0) <= (c : Real) && c / real_of_num(2) + (d + real_of_num(1)) <= c \226\134\146 (\226\136\128 k : Num, j <= k && (\226\136\128 n : Num, n <= EXP(2, k) \226\134\146 psi(n) <= c * ln(real_of_num(2)) * real_of_num(n)) \226\134\146 (\226\136\128 n : Num, n <= EXP(2, SUC(k)) \226\134\146 psi(n) <= c * ln(real_of_num(2)) * real_of_num(n)))
+  real_of_num((n : Num)) / real_of_num(2)
+  (x : Real)
+  (c2 : Real) + (c2 - real_of_num(1) + real_of_num(1)) == real_of_num(2) * c2
+  (c : Real) / real_of_num(2) + (c / real_of_num(2) - real_of_num(1) + real_of_num(1)) <= c
+  !((k : Num) <= (j : Num))
+  EXP(2, SUC((j : Num))) <= EXP(2, (k : Num))
+  (k : Num) <= (j : Num)
+  EXP(2, 0)
+  (m : Num)
+  (m : Num)
+  !((a : Num) == 0) && (m : Num) <= a \226\134\146 SUC(m) <= 2 * a
+  (m : Num)
+  (m : Num)
+  (m : Num)
+  \226\136\131 j : Num, (m : Num) <= EXP(2, j)
+  (m : Num)
+  (d : Real) == (c : Real) / real_of_num(2) - real_of_num(1)
+  (\226\136\128 n : Num, n <= EXP(2, (k : Num)) \226\134\146 psi(n) <= (c : Real) * ln(real_of_num(2)) * real_of_num(n)) \226\134\146 real_of_num(4) * ln(real_of_num(1) + pow(real_of_num(2), k)) + real_of_num(3) <= (c / real_of_num(2) - real_of_num(1)) * ln(real_of_num(2)) * (real_of_num(1) + pow(real_of_num(2), k)) && real_of_num(4) / (real_of_num(1) + pow(real_of_num(2), k)) <= (c / real_of_num(2) - real_of_num(1)) * ln(real_of_num(2)) && real_of_num(0) <= c \226\134\146 (\226\136\128 n : Num, psi(n) <= c * ln(real_of_num(2)) * real_of_num(n))
+  EXP(2, 10)
+  \226\136\128 n : Num, psi(n) <= real_of_num(4407) / real_of_num(2048) * ln(real_of_num(2)) * real_of_num(n)
+  real_of_num(4407) / real_of_num(2048) * ln(real_of_num(2)) * real_of_num((n : Num))
+  \226\136\128 n : Num, psi(n) <= real_of_num(3) / real_of_num(2) * real_of_num(n)
+  (a : Real) <= (b : Real) && b <= (l : Real) && (rest : Bool) \226\134\146 a <= l && b <= l && rest
+  inv(real_of_num(1) + real_of_num(299))
+  (x : Real)
+  (x : Real)
+  !((n : Num) < 300)
+  real_of_num(299) <= (x : Real)
+  real_of_num((n : Num)) == real_of_num(1) + (x : Real)
+  (x : Real) == real_of_num((n : Num)) - real_of_num(1)
+  real_of_num(1) / real_of_num(11) * real_of_num((n : Num))
+  (c : Real) <= (n : Real) * ((b : Real) - (a : Real)) \226\134\146 a * n <= n * b - c
+  !((n : Num) < 300) \226\134\146 !(n == 0)
+  (a : Real) <= (b : Real) \226\134\146 b <= (x : Real) \226\134\146 a <= x
+  (n : Num)
+  (true && (a : Bool)) == a
+  (n : Num)
+  (n : Num)
+  (n : Num) < 300
+  \226\136\128 n : Num, 4 <= n \226\134\146 real_of_num(3) / real_of_num(5) * real_of_num(n) <= psi(n)
+  (x : Real)
+  (theta : (Num) -> Real)((n : Num)) == sum((1, n), (p : Num) => if prime(p) { ln(real_of_num(p)) } else { real_of_num(0) })
+  theta(0) == ln(real_of_num(1))
+  theta(SUC((n : Num))) == theta(n) + (if prime(SUC(n)) { ln(real_of_num(SUC(n))) } else { real_of_num(0) })
+  (n : Num)
   EVEN
-  ~(p = 1)
-  p EXP (2 * j) = p EXP (2 * k + 1)
-  q = p:num
-  p EXP (2 * j) = q EXP (2 * k + 1)
-  2 * j
-  q divides p
-  forall p q j k.\n     ~(prime(p) /\\ prime(q) /\\ 1 <= j /\\ (p EXP (2 * j) = q EXP (2 * k + 1)))
-  ~(k = 0) ==> 1 <= k
-  (k * 2 + 1 = 1) <=> (k = 0)
-  1 <= j ==> ~(1 = 2 * j + 1)
-  p = 1
-  p = 0
-  p EXP (k * 2 + 1) = p EXP (2 * j + 1)
-  q = p:num
-  p EXP (k * 2 + 1) = q EXP (2 * j + 1)
-  k * 2 + 1
-  q divides p
-  j:num
-  q:num
-  (a = a') /\\ (b = &0) /\\ (c = &0) ==> (a = a' + b + c)
-  k = 0
-  ~(k = 0) ==> 1 <= k
+  !((p : Num) == 1)
+  EXP((p : Num), 2 * (j : Num)) == EXP(p, 2 * (k : Num) + 1)
+  (q : Num) == (p : Num)
+  EXP((p : Num), 2 * (j : Num)) == EXP((q : Num), 2 * (k : Num) + 1)
+  2 * (j : Num)
+  divides((q : Num), (p : Num))
+  \226\136\128 p : Num, \226\136\128 q : Num, \226\136\128 j : Num, \226\136\128 k : Num, !(prime(p) && prime(q) && 1 <= j && EXP(p, 2 * j) == EXP(q, 2 * k + 1))
+  !((k : Num) == 0) \226\134\146 1 <= k
+  ((k : Num) * 2 + 1 == 1) == (k == 0)
+  1 <= (j : Num) \226\134\146 !(1 == 2 * j + 1)
+  (p : Num) == 1
+  (p : Num) == 0
+  EXP((p : Num), (k : Num) * 2 + 1) == EXP(p, 2 * (j : Num) + 1)
+  (q : Num) == (p : Num)
+  EXP((p : Num), (k : Num) * 2 + 1) == EXP((q : Num), 2 * (j : Num) + 1)
+  (k : Num) * 2 + 1
+  divides((q : Num), (p : Num))
+  (j : Num)
+  (q : Num)
+  (a : Real) == (a' : Real) && (b : Real) == real_of_num(0) && (c : Real) == real_of_num(0) \226\134\146 a == a' + (b + c)
+  (k : Num) == 0
+  !((k : Num) == 0) \226\134\146 1 <= k
   EVEN
-  ~(k * 2 = 1)
-  k = 0
-  1 <= k * 2 + 0
-  d < 2 ==> (d = 0) \\/ (d = 1)
-  d = m MOD 2
-  k = m DIV 2
+  !((k : Num) * 2 == 1)
+  (k : Num) == 0
+  1 <= (k : Num) * 2 + 0
+  (d : Num) < 2 \226\134\146 d == 0 || d == 1
+  (d : Num) == MOD((m : Num), 2)
+  (k : Num) == DIV((m : Num), 2)
   2
-  m:num
-  m:num
-  p:num
-  1 <= k ==> 1 <= 2 * k /\\ 1 <= 2 * k + 1
-  ~(?p k. 1 <= k /\\ prime p /\\ (r = p EXP (2 * k))) /\\\n                  ~(?p k. 1 <= k /\\ prime p /\\ (r = p EXP (2 * k + 1))) /\\\n                  ~(prime r)
-  ?p k. 1 <= k /\\ prime p /\\ (r = p EXP k)
-  r:num
-  psi(n) = theta(n) +\n            sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                          then ln(&(aprimedivisor d)) else &0) +\n            sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k + 1))\n                          then ln(&(aprimedivisor d)) else &0)
-  m <= s:num
-  s < m + n:num
-  s + 1 <= r
-  r < (m + n) - (s + 1) + s + 1:num
-  sum(s + 1,(m + n) - (s + 1)) (\\r. &0)
-  m <= s:num
-  s < m + n:num
-  r < s - m + m:num
-  m <= r:num
-  sum(m,s - m) (\\r. &0)
-  &0 <= x /\\ &0 <= y ==> a <= x + a + y
-  m <= s ==> (m + (s - m) = s:num)
-  s < m + n:num
-  m <= s:num
-  n = (s - m) + 1 + ((m + n) - (s + 1))
-  s:num
-  r:num
-  sum(m,n) (\\r. &0)
-  f(p + q:num) = &0
-  p + q:num
-  forall s. p <= s /\\ s < p + SUC q /\\ ~(f s = &0)\n           ==> (?r:num. m <= r /\\ r < m + n /\\ (i r = s))
-  f <= s'' ==> s <= s' ==> s + f <= s' + s''
-  r < p + SUC q <=> (r = p + q) \\/ r < p + q
-  p + q < p + SUC q
-  (i:num->num) r = p + q
-  r:num
-  sum(m,n) (\\r. if p <= i r /\\ i r < p + SUC q then f (i r) else &0) =\n    sum(m,n) (\\r. if p <= i r /\\ i r < p + q then f (i r) else &0) +\n    sum(m,n) (\\r. if i r = p + q then f(i r) else &0)
-  s < p + q ==> s < p + SUC q
-  ~(p <= q /\\ q < p + 0)
-  q:num
-  q:num
-  r:num
-  sum(m,n) (\\r. if p:num <= i(r) /\\ i(r) < p + q\n                            then f(i(r)) else &0)
-  forall f i m n p q.\n        (forall r. m <= r /\\ r < m + n ==> &0 <= f(i r)) /\\\n        (forall s. p <= s /\\ s < p + q /\\ ~(f(s) = &0)\n             ==> ?r. m <= r /\\ r < m + n /\\ (i r = s))\n        ==> sum(p,q) f <= sum(m,n) (\\r. f(i r))
-  r * p = p EXP (2 * k + 1)
-  q = p:num
-  2 * k + 1
-  q divides p
-  q = aprimedivisor r
-  2 <= n ==> ~(n = 1)
-  r:num
-  k:num
-  p:num
-  (b ==> a) ==> ~a ==> b ==> c
-  k:num
-  p:num
-  1 <= k ==> 1 <= 2 * k + 1
-  p EXP (2 * k) * p = p EXP (2 * k + 1)
-  1 <= k ==> 1 <= 2 * k
-  k:num
-  p:num
-  ?p k. 1 <= k /\\ prime p /\\ (r = p EXP (2 * k))
-  1 <= k ==> 1 <= 2 * k /\\ 1 <= 2 * k + 1
-  ?p k. 1 <= k /\\ prime p /\\ (r = p EXP k)
-  r:num
-  b <= c ==> a <= b ==> a <= c
-  1 <= k
-  p EXP (2 * k + 1)
-  1 <= k ==> ~(2 * k = 0)
-  2 <= n <=> ~(n = 0) /\\ ~(n = 1)
-  1 <= k ==> 1 <= 2 * k
-  1 <= k ==> 1 <= 2 * k
-  p EXP (2 * k)
-  k:num
-  p:num
-  ?p k. 1 <= k /\\ prime p /\\ (s = p EXP (2 * k + 1))
-  s:num
-  2 <= n ==> 1 <= n
-  1 <= k + 1
-  p EXP k * p = p EXP (k + 1)
-  k:num
-  p:num
-  1 <= k ==> 1 <= 2 * k + 1
-  ?p k. 1 <= k /\\ prime p /\\ (r = p EXP k)
-  r:num
-  n:num
+  (m : Num)
+  (m : Num)
+  (p : Num)
+  1 <= (k : Num) \226\134\146 1 <= 2 * k && 1 <= 2 * k + 1
+  !(\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (r : Num) == EXP(p, 2 * k)) && !(\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && r == EXP(p, 2 * k + 1)) && !prime(r)
+  \226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (r : Num) == EXP(p, k)
+  (r : Num)
+  psi((n : Num)) == theta(n) + (sum((1, n), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }) + sum((1, n), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k + 1)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }))
+  (m : Num) <= (s : Num)
+  (s : Num) < (m : Num) + (n : Num)
+  (s : Num) + 1 <= (r : Num)
+  (r : Num) < (m : Num) + (n : Num) - ((s : Num) + 1) + (s + 1)
+  sum(((s : Num) + 1, (m : Num) + (n : Num) - (s + 1)), (r : Num) => real_of_num(0))
+  (m : Num) <= (s : Num)
+  (s : Num) < (m : Num) + (n : Num)
+  (r : Num) < (s : Num) - (m : Num) + m
+  (m : Num) <= (r : Num)
+  sum(((m : Num), (s : Num) - m), (r : Num) => real_of_num(0))
+  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (a : Real) <= x + (a + y)
+  (m : Num) <= (s : Num) \226\134\146 m + (s - m) == s
+  (s : Num) < (m : Num) + (n : Num)
+  (m : Num) <= (s : Num)
+  (n : Num) == (s : Num) - (m : Num) + (1 + (m + n - (s + 1)))
+  (s : Num)
+  (r : Num)
+  sum(((m : Num), (n : Num)), (r : Num) => real_of_num(0))
+  (f : (Num) -> Real)((p : Num) + (q : Num)) == real_of_num(0)
+  (p : Num) + (q : Num)
+  \226\136\128 s : Num, (p : Num) <= s && s < p + SUC((q : Num)) && !((f : (Num) -> Real)(s) == real_of_num(0)) \226\134\146 (\226\136\131 r : Num, (m : Num) <= r && r < m + (n : Num) && (i : (Num) -> Num)(r) == s)
+  (f : Real) <= (s'' : Real) \226\134\146 (s : Real) <= (s' : Real) \226\134\146 s + f <= s' + s''
+  ((r : Num) < (p : Num) + SUC((q : Num))) == (r == p + q || r < p + q)
+  (p : Num) + (q : Num) < p + SUC(q)
+  (i : (Num) -> Num)((r : Num)) == (p : Num) + (q : Num)
+  (r : Num)
+  sum(((m : Num), (n : Num)), (r : Num) => if (p : Num) <= (i : (Num) -> Num)(r) && i(r) < p + SUC((q : Num)) { (f : (Num) -> Real)(i(r)) } else { real_of_num(0) }) == sum((m, n), (r : Num) => if p <= i(r) && i(r) < p + q { f(i(r)) } else { real_of_num(0) }) + sum((m, n), (r : Num) => if i(r) == p + q { f(i(r)) } else { real_of_num(0) })
+  (s : Num) < (p : Num) + (q : Num) \226\134\146 s < p + SUC(q)
+  !((p : Num) <= (q : Num) && q < p + 0)
+  (q : Num)
+  (q : Num)
+  (r : Num)
+  sum(((m : Num), (n : Num)), (r : Num) => if (p : Num) <= (i : (Num) -> Num)(r) && i(r) < p + (q : Num) { (f : (Num) -> Real)(i(r)) } else { real_of_num(0) })
+  \226\136\128 f : (Num) -> Real, \226\136\128 i : (Num) -> Num, \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, (\226\136\128 r : Num, m <= r && r < m + n \226\134\146 real_of_num(0) <= f(i(r))) && (\226\136\128 s : Num, p <= s && s < p + q && !(f(s) == real_of_num(0)) \226\134\146 (\226\136\131 r : Num, m <= r && r < m + n && i(r) == s)) \226\134\146 sum((p, q), f) <= sum((m, n), (r : Num) => f(i(r)))
+  (r : Num) * (p : Num) == EXP(p, 2 * (k : Num) + 1)
+  (q : Num) == (p : Num)
+  2 * (k : Num) + 1
+  divides((q : Num), (p : Num))
+  (q : Num) == aprimedivisor((r : Num))
+  2 <= (n : Num) \226\134\146 !(n == 1)
+  (r : Num)
+  (k : Num)
+  (p : Num)
+  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 !a \226\134\146 b \226\134\146 (c : Bool)
+  (k : Num)
+  (p : Num)
+  1 <= (k : Num) \226\134\146 1 <= 2 * k + 1
+  EXP((p : Num), 2 * (k : Num)) * p == EXP(p, 2 * k + 1)
+  1 <= (k : Num) \226\134\146 1 <= 2 * k
+  (k : Num)
+  (p : Num)
+  \226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (r : Num) == EXP(p, 2 * k)
+  1 <= (k : Num) \226\134\146 1 <= 2 * k && 1 <= 2 * k + 1
+  \226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (r : Num) == EXP(p, k)
+  (r : Num)
+  (b : Real) <= (c : Real) \226\134\146 (a : Real) <= b \226\134\146 a <= c
+  1 <= (k : Num)
+  EXP((p : Num), 2 * (k : Num) + 1)
+  1 <= (k : Num) \226\134\146 !(2 * k == 0)
+  (2 <= (n : Num)) == (!(n == 0) && !(n == 1))
+  1 <= (k : Num) \226\134\146 1 <= 2 * k
+  1 <= (k : Num) \226\134\146 1 <= 2 * k
+  EXP((p : Num), 2 * (k : Num))
+  (k : Num)
+  (p : Num)
+  \226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (s : Num) == EXP(p, 2 * k + 1)
+  (s : Num)
+  2 <= (n : Num) \226\134\146 1 <= n
+  1 <= (k : Num) + 1
+  EXP((p : Num), (k : Num)) * p == EXP(p, k + 1)
+  (k : Num)
+  (p : Num)
+  1 <= (k : Num) \226\134\146 1 <= 2 * k + 1
+  \226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && (r : Num) == EXP(p, k)
+  (r : Num)
+  (n : Num)
   2
-  n:num
+  (n : Num)
   2
-  \\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP k)\n                  then d * (aprimedivisor d) else d
-  \\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k + 1))\n                    then ln(&(aprimedivisor d)) else &0
-  sum(2,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k + 1))\n                 then ln(&(aprimedivisor d)) else &0)\n   <= sum(2,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                    then ln(&(aprimedivisor d)) else &0)
-  1 <= k ==> ~(2 * k = 0) /\\ ~(2 * k + 1 = 0)
-  b <= d /\\ (a = &0) /\\ (c = &0) ==> a + b <= c + d
-  ~(n = 0) ==> (n = 1 + (n - 1))
-  n = 0
-  forall n. sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k + 1))\n                     then ln(&(aprimedivisor d)) else &0)\n       <= sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                        then ln(&(aprimedivisor d)) else &0)
-  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-  1 + n = SUC n
+  (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, k)) { d * aprimedivisor(d) } else { d }
+  (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k + 1)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }
+  sum((2, (n : Num)), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k + 1)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }) <= sum((2, n), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) })
+  1 <= (k : Num) \226\134\146 !(2 * k == 0) && !(2 * k + 1 == 0)
+  (b : Real) <= (d : Real) && (a : Real) == real_of_num(0) && (c : Real) == real_of_num(0) \226\134\146 a + b <= c + d
+  !((n : Num) == 0) \226\134\146 n == 1 + (n - 1)
+  (n : Num) == 0
+  \226\136\128 n : Num, sum((1, n), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k + 1)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) }) <= sum((1, n), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) })
+  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+  1 + (n : Num) == SUC(n)
   2
-  SUC n
-  1 + n = SUC n
-  n:num
+  SUC((n : Num))
+  1 + (n : Num) == SUC(n)
+  (n : Num)
   2
-  (1 + ISQRT n) EXP 2 = SUC n
-  1 + ISQRT n = m
-  m:num
-  1 + n = SUC n
-  ~(?p k. 1 <= k /\\ prime p /\\ (1 + n = p EXP (2 * k)))
-  ?m. SUC n = m EXP 2
-  forall n. psi(ISQRT(n)) =\n        sum(1,n) (\\d. if ?p k. 1 <= k /\\ prime p /\\ (d = p EXP (2 * k))\n                      then ln(&(aprimedivisor d)) else &0)
-  ~(p = 0) ==> 1 <= p
-  1 <= k ==> 1 <= 2 * k + 1
-  k:num
-  p:num
-  r:num
-  n:num
-  forall n. theta(n) + psi(ISQRT n) <= psi(n) /\\\n       psi(n) <= theta(n) + &2 * psi(ISQRT n)
-  aprimedivisor p = p
-  prime p
-  p:num
-  forall n. theta(n) <= psi(n)
-  a <= b /\\ l <= a /\\ rest ==> l <= a /\\ l <= b /\\ rest
-  T /\\ a <=> a
-  n <= 30 <=> n < 31
-  forall n. n <= 30 ==> psi(n) <= &65 / &64 * &n
-  forall n. theta(n) <= &3 / &2 * &n
-  a <= b /\\ b <= l /\\ rest ==> a <= l /\\ b <= l /\\ rest
-  ~(n < 413)
-  &413
-  (a * b) * (a * b) = a * a * b * b
-  &n
-  &(ISQRT n) pow 2 <= (&n * &16 / &325) pow 2
-  ~(n >= 900)
-  n:num
-  (ISQRT n) EXP (SUC 1) <= 30 EXP (SUC 1)
-  &65 / &64 * &(ISQRT n)
-  d <= (a - b) * n ==> a * n <= ps ==> ps <= th + d ==> b * n <= th
-  5 <= n ==> 4 <= n
-  n:num
-  n:num
-  T /\\ a <=> a
-  n:num
-  n:num
-  n < 413
-  5 <= n
-  n < 413
-  n >= 900
-  (a * b) * (a * b) = a * a * b * b
-  &n
-  &(ISQRT n) pow 2 <= (&n * &1 / &30) pow 2
-  &3 / &2 * &(ISQRT n)
-  d <= (a - b) * n ==> a * n <= ps ==> ps <= th + d ==> b * n <= th
-  n >= 900 ==> 4 <= n
-  n:num
-  n:num
-  n >= 900
-  forall n. 5 <= n ==> &1 / &2 * &n <= theta(n)
-  ~(x < &1)
-  x:real
-  x < &1
-  forall x. &0 <= x ==> &0 <= floor x
-  &0 <= x ==> (abs x = x)
-  x:real
-  forall x. &0 <= x ==> ?k. floor x = &k
-  0 < k + 1
-  0 < d <=> ~(d = 0)
-  0 < d <=> ~(d = 0)
-  k = 0
-  forall n d k. ~(d = 0)\n           ==> ((floor(&n / &d) = &k) =\n                  if k = 0 then &n < &d\n                  else &n / &(k + 1) < &d /\\ &d <= &n / &k)
-  0 < k + 1 /\\ (~(k = 0) ==> 0 < k)
-  k:num
-  ?k. floor (&n / &d) = &k
-  forall n d. ~(d = 0)\n         ==> ?k. (floor(&n / &d) = &k) /\\\n                 d * k <= n /\\ n < d * (k + 1)
-  ODD(k) ==> ~(k = 0)
-  2 * k1 < (2 * k3 + 1) + 1 /\\ 2 * k3 + 1 < 2 * (k1 + 1)\n    ==> (k3 = k1)
-  d * 2 * k1 < d * ((2 * k3 + 1) + 1) /\\\n                d * (2 * k3 + 1) < d * 2 * (k1 + 1)
-  k3:num
-  k:num
-  2 * k1 + 1
-  2 * k1 < k2 + 1 /\\ k2 < 2 * (k1 + 1)\n      ==> (k2 = 2 * k1) \\/ (k2 = 2 * k1 + 1)
-  d * 2 * k1 < d * (k2 + 1) /\\ d * k2 < d * 2 * (k1 + 1)
-  a /\\ b /\\ c <=> ~(a ==> ~(b /\\ c))
-  d * k1 <= n DIV 2
-  n DIV 2 < d * (k1 + 1)
-  k2:num
-  k1:num
-  n DIV 2
-  n:num
-  forall n d. ~(d = 0)\n         ==> (floor (&n / &d) - &2 * floor (&(n DIV 2) / &d) =\n                if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                then &1 else &0)
-  2 * j + 1 < 2 * k + 3 /\\ 2 * k + 2 < 2 * j + 2 ==> (j = k)
-  r = 0
-  (2 * j + 1) * r < (2 * k + 3) * r /\\\n                (2 * k + 2) * r < (2 * j + 2) * r
-  a < 1 + b ==> a <= b
-  1 + a <= b ==> a < b
-  SUC(2 * k) = 2 * k + 1
-  SUC(2 * k) + 1 = 2 * k + 2
-  j:num
-  oj:num
-  SUC(2 * k) + 1 = 2 * k + 2
-  2 * SUC k + 1 = 2 * k + 3
-  r:num
-  (2 * k + 1) + 1 = SUC(2 * k) + 1
-  n < r <=> 1 + n <= r
-  n <= r <=> n < 1 + r
-  2 * k + 1
-  r:num
-  sum (1,n DIV (SUC (2 * k) + 1))\n                  (\\d. if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                       then mangoldt d else &0)
-  forall b. (a - b = d) /\\ (b = c) ==> (a - c = d)
-  (s - ss = x + y) ==> (ss = a - ((b + x) + y)) ==> (s = a - b)
-  2 * SUC k = SUC(SUC(2 * k))
-  SUC k
-  k:num
-  ~(m = 0) ==> m - 2 < m
-  m - 2
-  1 + n = SUC n
-  1 + n = SUC n
-  k:num
-  m = 1
-  n < n + 1 /\\ ~(n + 1 = 0)
-  n DIV (n + 1) = 0
-  m = 0
-  m:num
-  n = 0
-  forall n m k. (m + 2 * k = n)\n         ==> (sum (1,n DIV (2 * k + 1))\n                  (\\d. if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                       then mangoldt d else &0) =\n              sum (1,n) (\\d. --(&1) pow (d + 1) * psi (n DIV d)) -\n              sum (1,2 * k)\n                  (\\d. --(&1) pow (d + 1) * psi (n DIV d)))
+  EXP(1 + ISQRT((n : Num)), 2) == SUC(n)
+  1 + ISQRT((n : Num)) == (m : Num)
+  (m : Num)
+  1 + (n : Num) == SUC(n)
+  !(\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && 1 + (n : Num) == EXP(p, 2 * k))
+  \226\136\131 m : Num, SUC((n : Num)) == EXP(m, 2)
+  \226\136\128 n : Num, psi(ISQRT(n)) == sum((1, n), (d : Num) => if (\226\136\131 p : Num, \226\136\131 k : Num, 1 <= k && prime(p) && d == EXP(p, 2 * k)) { ln(real_of_num(aprimedivisor(d))) } else { real_of_num(0) })
+  !((p : Num) == 0) \226\134\146 1 <= p
+  1 <= (k : Num) \226\134\146 1 <= 2 * k + 1
+  (k : Num)
+  (p : Num)
+  (r : Num)
+  (n : Num)
+  \226\136\128 n : Num, theta(n) + psi(ISQRT(n)) <= psi(n) && psi(n) <= theta(n) + real_of_num(2) * psi(ISQRT(n))
+  aprimedivisor((p : Num)) == p
+  prime((p : Num))
+  (p : Num)
+  \226\136\128 n : Num, theta(n) <= psi(n)
+  (a : Real) <= (b : Real) && (l : Real) <= a && (rest : Bool) \226\134\146 l <= a && l <= b && rest
+  (true && (a : Bool)) == a
+  ((n : Num) <= 30) == (n < 31)
+  \226\136\128 n : Num, n <= 30 \226\134\146 psi(n) <= real_of_num(65) / real_of_num(64) * real_of_num(n)
+  \226\136\128 n : Num, theta(n) <= real_of_num(3) / real_of_num(2) * real_of_num(n)
+  (a : Real) <= (b : Real) && b <= (l : Real) && (rest : Bool) \226\134\146 a <= l && b <= l && rest
+  !((n : Num) < 413)
+  real_of_num(413)
+  (a : Real) * (b : Real) * (a * b) == a * (a * (b * b))
+  real_of_num((n : Num))
+  pow(real_of_num(ISQRT((n : Num))), 2) <= pow(real_of_num(n) * (real_of_num(16) / real_of_num(325)), 2)
+  !((n : Num) >= 900)
+  (n : Num)
+  EXP(ISQRT((n : Num)), SUC(1)) <= EXP(30, SUC(1))
+  real_of_num(65) / real_of_num(64) * real_of_num(ISQRT((n : Num)))
+  (d : Real) <= ((a : Real) - (b : Real)) * (n : Real) \226\134\146 a * n <= (ps : Real) \226\134\146 ps <= (th : Real) + d \226\134\146 b * n <= th
+  5 <= (n : Num) \226\134\146 4 <= n
+  (n : Num)
+  (n : Num)
+  (true && (a : Bool)) == a
+  (n : Num)
+  (n : Num)
+  (n : Num) < 413
+  5 <= (n : Num)
+  (n : Num) < 413
+  (n : Num) >= 900
+  (a : Real) * (b : Real) * (a * b) == a * (a * (b * b))
+  real_of_num((n : Num))
+  pow(real_of_num(ISQRT((n : Num))), 2) <= pow(real_of_num(n) * (real_of_num(1) / real_of_num(30)), 2)
+  real_of_num(3) / real_of_num(2) * real_of_num(ISQRT((n : Num)))
+  (d : Real) <= ((a : Real) - (b : Real)) * (n : Real) \226\134\146 a * n <= (ps : Real) \226\134\146 ps <= (th : Real) + d \226\134\146 b * n <= th
+  (n : Num) >= 900 \226\134\146 4 <= n
+  (n : Num)
+  (n : Num)
+  (n : Num) >= 900
+  \226\136\128 n : Num, 5 <= n \226\134\146 real_of_num(1) / real_of_num(2) * real_of_num(n) <= theta(n)
+  !((x : Real) < real_of_num(1))
+  (x : Real)
+  (x : Real) < real_of_num(1)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 real_of_num(0) <= floor(x)
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  (x : Real)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 (\226\136\131 k : Num, floor(x) == real_of_num(k))
+  0 < (k : Num) + 1
+  (0 < (d : Num)) == !(d == 0)
+  (0 < (d : Num)) == !(d == 0)
+  (k : Num) == 0
+  \226\136\128 n : Num, \226\136\128 d : Num, \226\136\128 k : Num, !(d == 0) \226\134\146 (floor(real_of_num(n) / real_of_num(d)) == real_of_num(k)) == (if k == 0 { real_of_num(n) < real_of_num(d) } else { real_of_num(n) / real_of_num(k + 1) < real_of_num(d) && real_of_num(d) <= real_of_num(n) / real_of_num(k) })
+  0 < (k : Num) + 1 && (!(k == 0) \226\134\146 0 < k)
+  (k : Num)
+  \226\136\131 k : Num, floor(real_of_num((n : Num)) / real_of_num((d : Num))) == real_of_num(k)
+  \226\136\128 n : Num, \226\136\128 d : Num, !(d == 0) \226\134\146 (\226\136\131 k : Num, floor(real_of_num(n) / real_of_num(d)) == real_of_num(k) && d * k <= n && n < d * (k + 1))
+  ODD((k : Num)) \226\134\146 !(k == 0)
+  2 * (k1 : Num) < 2 * (k3 : Num) + 1 + 1 && 2 * k3 + 1 < 2 * (k1 + 1) \226\134\146 k3 == k1
+  (d : Num) * (2 * (k1 : Num)) < d * (2 * (k3 : Num) + 1 + 1) && d * (2 * k3 + 1) < d * (2 * (k1 + 1))
+  (k3 : Num)
+  (k : Num)
+  2 * (k1 : Num) + 1
+  2 * (k1 : Num) < (k2 : Num) + 1 && k2 < 2 * (k1 + 1) \226\134\146 k2 == 2 * k1 || k2 == 2 * k1 + 1
+  (d : Num) * (2 * (k1 : Num)) < d * ((k2 : Num) + 1) && d * k2 < d * (2 * (k1 + 1))
+  ((a : Bool) && (b : Bool) && (c : Bool)) == !(a \226\134\146 !(b && c))
+  (d : Num) * (k1 : Num) <= DIV((n : Num), 2)
+  DIV((n : Num), 2) < (d : Num) * ((k1 : Num) + 1)
+  (k2 : Num)
+  (k1 : Num)
+  DIV((n : Num), 2)
+  (n : Num)
+  \226\136\128 n : Num, \226\136\128 d : Num, !(d == 0) \226\134\146 floor(real_of_num(n) / real_of_num(d)) - real_of_num(2) * floor(real_of_num(DIV(n, 2)) / real_of_num(d)) == (if (\226\136\131 k : Num, ODD(k) && DIV(n, k + 1) < d && d <= DIV(n, k)) { real_of_num(1) } else { real_of_num(0) })
+  2 * (j : Num) + 1 < 2 * (k : Num) + 3 && 2 * k + 2 < 2 * j + 2 \226\134\146 j == k
+  (r : Num) == 0
+  (2 * (j : Num) + 1) * (r : Num) < (2 * (k : Num) + 3) * r && (2 * k + 2) * r < (2 * j + 2) * r
+  (a : Num) < 1 + (b : Num) \226\134\146 a <= b
+  1 + (a : Num) <= (b : Num) \226\134\146 a < b
+  SUC(2 * (k : Num)) == 2 * k + 1
+  SUC(2 * (k : Num)) + 1 == 2 * k + 2
+  (j : Num)
+  (oj : Num)
+  SUC(2 * (k : Num)) + 1 == 2 * k + 2
+  2 * SUC((k : Num)) + 1 == 2 * k + 3
+  (r : Num)
+  2 * (k : Num) + 1 + 1 == SUC(2 * k) + 1
+  ((n : Num) < (r : Num)) == (1 + n <= r)
+  ((n : Num) <= (r : Num)) == (n < 1 + r)
+  2 * (k : Num) + 1
+  (r : Num)
+  sum((1, DIV((n : Num), SUC(2 * (k : Num)) + 1)), (d : Num) => if (\226\136\131 k : Num, ODD(k) && DIV(n, k + 1) < d && d <= DIV(n, k)) { mangoldt(d) } else { real_of_num(0) })
+  \226\136\128 b : Real, (a : Real) - b == (d : Real) && b == (c : Real) \226\134\146 a - c == d
+  (s : Real) - (ss : Real) == (x : Real) + (y : Real) \226\134\146 ss == (a : Real) - ((b : Real) + x + y) \226\134\146 s == a - b
+  2 * SUC((k : Num)) == SUC(SUC(2 * k))
+  SUC((k : Num))
+  (k : Num)
+  !((m : Num) == 0) \226\134\146 m - 2 < m
+  (m : Num) - 2
+  1 + (n : Num) == SUC(n)
+  1 + (n : Num) == SUC(n)
+  (k : Num)
+  (m : Num) == 1
+  (n : Num) < n + 1 && !(n + 1 == 0)
+  DIV((n : Num), n + 1) == 0
+  (m : Num) == 0
+  (m : Num)
+  (n : Num) == 0
+  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 k : Num, m + 2 * k == n \226\134\146 sum((1, DIV(n, 2 * k + 1)), (d : Num) => if (\226\136\131 k : Num, ODD(k) && DIV(n, k + 1) < d && d <= DIV(n, k)) { mangoldt(d) } else { real_of_num(0) }) == sum((1, n), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d))) - sum((1, 2 * k), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d)))
   0
-  n:num
-  n:num
-  1 <= d ==> ~(d = 0)
-  r:num
-  sum(1,n) (\\d. if ?k. ODD k /\\ n DIV (k + 1) < d /\\ d <= n DIV k\n                  then mangoldt d else &0)
-  m * x - &2 * m * y = m * (x - &2 * y)
-  1 + n DIV 2 <= r
-  0 < r /\\ n DIV 2 < r
-  r:num
-  (b = &0) ==> (a = a + b)
-  2 = 0
-  n = n DIV 2 + (n - n DIV 2)
-  sum (1,n DIV 2) (\\d. mangoldt d * floor (&(n DIV 2) / &d)) =\n    sum (1,n) (\\d. mangoldt d * floor (&(n DIV 2) / &d))
-  forall n. ln(&(FACT(n))) - &2 * ln(&(FACT(n DIV 2))) =\n          sum(1,n) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
-  forall m n. m <= n ==> psi(m) <= psi(n)
-  psi(0) = &0
-  forall n. &0 <= psi(n)
-  &0 <= a + --b <=> b <= a
-  s1 <= s1' /\\ s2' <= s2\n    ==> &0 <= a + b /\\ &0 <= --c + --d\n        ==> s1 <= (s1' + a) + b /\\ (s2' + c) + d <= s2
-  SUC(SUC n) + 1 = SUC(SUC(n + 1))
-  2 * SUC n = SUC(SUC(2 * n))
-  m:num
-  forall n m p. m <= p\n         ==> sum(1,2 * m) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n               <= sum(1,2 * p) (\\d. --(&1) pow (d + 1) * psi(n DIV d)) /\\\n             sum(1,2 * p + 1) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n               <= sum(1,2 * m + 1) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
-  r < 2 <=> (r = 0) \\/ (r = 1)
-  r = n MOD 2
-  q = n DIV 2
+  (n : Num)
+  (n : Num)
+  1 <= (d : Num) \226\134\146 !(d == 0)
+  (r : Num)
+  sum((1, (n : Num)), (d : Num) => if (\226\136\131 k : Num, ODD(k) && DIV(n, k + 1) < d && d <= DIV(n, k)) { mangoldt(d) } else { real_of_num(0) })
+  (m : Real) * (x : Real) - real_of_num(2) * (m * (y : Real)) == m * (x - real_of_num(2) * y)
+  1 + DIV((n : Num), 2) <= (r : Num)
+  0 < (r : Num) && DIV((n : Num), 2) < r
+  (r : Num)
+  (b : Real) == real_of_num(0) \226\134\146 (a : Real) == a + b
+  2 == 0
+  (n : Num) == DIV(n, 2) + (n - DIV(n, 2))
+  sum((1, DIV((n : Num), 2)), (d : Num) => mangoldt(d) * floor(real_of_num(DIV(n, 2)) / real_of_num(d))) == sum((1, n), (d : Num) => mangoldt(d) * floor(real_of_num(DIV(n, 2)) / real_of_num(d)))
+  \226\136\128 n : Num, ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2)))) == sum((1, n), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d)))
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 psi(m) <= psi(n)
+  psi(0) == real_of_num(0)
+  \226\136\128 n : Num, real_of_num(0) <= psi(n)
+  (real_of_num(0) <= (a : Real) + -(b : Real)) == (b <= a)
+  (s1 : Real) <= (s1' : Real) && (s2' : Real) <= (s2 : Real) \226\134\146 real_of_num(0) <= (a : Real) + (b : Real) && real_of_num(0) <= -(c : Real) + -(d : Real) \226\134\146 s1 <= s1' + a + b && s2' + c + d <= s2
+  SUC(SUC((n : Num))) + 1 == SUC(SUC(n + 1))
+  2 * SUC((n : Num)) == SUC(SUC(2 * n))
+  (m : Num)
+  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, m <= p \226\134\146 sum((1, 2 * m), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d))) <= sum((1, 2 * p), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d))) && sum((1, 2 * p + 1), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d))) <= sum((1, 2 * m + 1), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d)))
+  ((r : Num) < 2) == (r == 0 || r == 1)
+  (r : Num) == MOD((n : Num), 2)
+  (q : Num) == DIV((n : Num), 2)
   2
-  n:num
-  m <= n DIV 2
-  sum(1,SUC(2 * n DIV 2))\n                 (\\d. -- &1 pow (d + 1) * psi (n DIV d))
-  m:num
-  1 + n <= r ==> n < r /\\ ~(r = 0)
-  n DIV r = 0
-  r:num
-  ~(k <= n) ==> n <= k:num
-  (b = a) ==> a <= b
-  k <= n:num
-  forall n k. ODD(k)\n         ==> ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))\n             <= sum(1,k) (\\d. --(&1) pow (d + 1) * psi(n DIV d))
-  r < 2 <=> (r = 0) \\/ (r = 1)
-  r = n MOD 2
-  q = n DIV 2
+  (n : Num)
+  (m : Num) <= DIV((n : Num), 2)
+  sum((1, SUC(2 * DIV((n : Num), 2))), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d)))
+  (m : Num)
+  1 + (n : Num) <= (r : Num) \226\134\146 n < r && !(r == 0)
+  DIV((n : Num), (r : Num)) == 0
+  (r : Num)
+  !((k : Num) <= (n : Num)) \226\134\146 n <= k
+  (b : Real) == (a : Real) \226\134\146 a <= b
+  (k : Num) <= (n : Num)
+  \226\136\128 n : Num, \226\136\128 k : Num, ODD(k) \226\134\146 ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2)))) <= sum((1, k), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d)))
+  ((r : Num) < 2) == (r == 0 || r == 1)
+  (r : Num) == MOD((n : Num), 2)
+  (q : Num) == DIV((n : Num), 2)
   2
-  n:num
-  m <= n DIV 2
-  sum(1,2 * n DIV 2)\n                 (\\d. -- &1 pow (d + 1) * psi (n DIV d))
-  m:num
-  1 + n <= r ==> n < r /\\ ~(r = 0)
-  n DIV r = 0
-  r:num
-  ~(k <= n) ==> n <= k:num
-  (a = b) ==> a <= b
-  k <= n:num
-  forall n k. EVEN(k)\n         ==> sum(1,k) (\\d. --(&1) pow (d + 1) * psi(n DIV d))\n             <= ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))
+  (n : Num)
+  (m : Num) <= DIV((n : Num), 2)
+  sum((1, 2 * DIV((n : Num), 2)), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d)))
+  (m : Num)
+  1 + (n : Num) <= (r : Num) \226\134\146 n < r && !(r == 0)
+  DIV((n : Num), (r : Num)) == 0
+  (r : Num)
+  !((k : Num) <= (n : Num)) \226\134\146 n <= k
+  (a : Real) == (b : Real) \226\134\146 a <= b
+  (k : Num) <= (n : Num)
+  \226\136\128 n : Num, \226\136\128 k : Num, EVEN(k) \226\134\146 sum((1, k), (d : Num) => pow(-real_of_num(1), d + 1) * psi(DIV(n, d))) <= ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2))))
   3
-  n:num
+  (n : Num)
   2
-  n:num
-  forall n. psi(n) - psi(n DIV 2)\n       <= ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2))) /\\\n       ln(&(FACT n)) - &2 * ln(&(FACT (n DIV 2)))\n       <= psi(n) - psi(n DIV 2) + psi(n DIV 3)
-  a <= x ==> inv(&1 + x) <= inv(&1 + a) /\\\n               inv(&1 + a) <= b ==> inv(&1 + x) <= b
-  x:real
-  x:real
-  x:real
-  x = &n - &1
-  a <= n ==> a - &1 <= n - &1
-  n >= b ==> b <= n:num
-  &n = &1 + (&n - &1)
-  &n * &1 / &38
-  n >= 1200 ==> ~(n = 0)
-  ltm <= nl2 - a ==> abs(lf - nl2) <= ltm ==> a <= lf
-  n:num
+  (n : Num)
+  \226\136\128 n : Num, psi(n) - psi(DIV(n, 2)) <= ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2)))) && ln(real_of_num(FACT(n))) - real_of_num(2) * ln(real_of_num(FACT(DIV(n, 2)))) <= psi(n) - psi(DIV(n, 2)) + psi(DIV(n, 3))
+  (a : Real) <= (x : Real) \226\134\146 inv(real_of_num(1) + x) <= inv(real_of_num(1) + a) && inv(real_of_num(1) + a) <= (b : Real) \226\134\146 inv(real_of_num(1) + x) <= b
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real) == real_of_num((n : Num)) - real_of_num(1)
+  (a : Real) <= (n : Real) \226\134\146 a - real_of_num(1) <= n - real_of_num(1)
+  (n : Num) >= (b : Num) \226\134\146 b <= n
+  real_of_num((n : Num)) == real_of_num(1) + (real_of_num(n) - real_of_num(1))
+  real_of_num((n : Num)) * (real_of_num(1) / real_of_num(38))
+  (n : Num) >= 1200 \226\134\146 !(n == 0)
+  (ltm : Real) <= (nl2 : Real) - (a : Real) \226\134\146 abs((lf : Real) - nl2) <= ltm \226\134\146 a <= lf
+  (n : Num)
   3
-  n:num
-  &3 / &2 * &n / &3
-  a <= b ==> x <= a ==> x <= b
-  n DIV 3
-  &n / &6 + &n / &2
-  b + p3 <= a ==> u <= v /\\ a <= p - p2 + p3 ==> b <= p - p2
-  n:num
-  forall n. n >= 1200 ==> &n / &6 <= psi(n) - psi(n DIV 2)
-  x:real
-  324 * n
-  324 * i * i < a ==> (i * 18) * (i * 18) < a
-  (ISQRT n * 18) EXP (SUC 1) < n EXP (SUC 1)
-  &3 / &2 * &(ISQRT n)
-  &2 * psi (ISQRT n) < &n / &6
-  ISQRT(n DIV 2)
-  n DIV 2
-  n:num
-  forall n. n >= 1200 ==> theta(n DIV 2) < theta(n)
-  (b + a = c) ==> (a = &0) ==> ~(b < c)
-  n + 1 <= r /\\ r < n + n + 1 ==> n <= r /\\ r <= 2 * n
-  sum(n + 1,n) (\\r. &0)
-  sum(n + 1,n) (\\p. if prime p then ln (&p) else &0) = &0
-  ~(a /\\ b /\\ c) <=> b /\\ c ==> ~a
-  2 * n
-  forall n. n >= 2400 ==> ?p. prime(p) /\\ n <= p /\\ p <= 2 * n
-  (p /\\ b1 ==> a1) /\\ (~b1 ==> a2) ==> p ==> b1 /\\ a1 \\/ a2
-  a /\\ b ==> c <=> a ==> c \\/ ~b
-  forall n. 0 < n /\\ n < 2400\n       ==> n <= 2 /\\ 2 <= 2 * n \\/\n           n <= 3 /\\ 3 <= 2 * n \\/\n           n <= 5 /\\ 5 <= 2 * n \\/\n           n <= 7 /\\ 7 <= 2 * n \\/\n           n <= 13 /\\ 13 <= 2 * n \\/\n           n <= 23 /\\ 23 <= 2 * n \\/\n           n <= 43 /\\ 43 <= 2 * n \\/\n           n <= 83 /\\ 83 <= 2 * n \\/\n           n <= 163 /\\ 163 <= 2 * n \\/\n           n <= 317 /\\ 317 <= 2 * n \\/\n           n <= 631 /\\ 631 <= 2 * n \\/\n           n <= 1259 /\\ 1259 <= 2 * n \\/\n           n <= 2503 /\\ 2503 <= 2 * n
+  (n : Num)
+  real_of_num(3) / real_of_num(2) * (real_of_num((n : Num)) / real_of_num(3))
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
+  DIV((n : Num), 3)
+  real_of_num((n : Num)) / real_of_num(6) + real_of_num(n) / real_of_num(2)
+  (b : Real) + (p3 : Real) <= (a : Real) \226\134\146 (u : Real) <= (v : Real) && a <= (p : Real) - (p2 : Real) + p3 \226\134\146 b <= p - p2
+  (n : Num)
+  \226\136\128 n : Num, n >= 1200 \226\134\146 real_of_num(n) / real_of_num(6) <= psi(n) - psi(DIV(n, 2))
+  (x : Real)
+  324 * (n : Num)
+  324 * ((i : Num) * i) < (a : Num) \226\134\146 i * 18 * (i * 18) < a
+  EXP(ISQRT((n : Num)) * 18, SUC(1)) < EXP(n, SUC(1))
+  real_of_num(3) / real_of_num(2) * real_of_num(ISQRT((n : Num)))
+  real_of_num(2) * psi(ISQRT((n : Num))) < real_of_num(n) / real_of_num(6)
+  ISQRT(DIV((n : Num), 2))
+  DIV((n : Num), 2)
+  (n : Num)
+  \226\136\128 n : Num, n >= 1200 \226\134\146 theta(DIV(n, 2)) < theta(n)
+  (b : Real) + (a : Real) == (c : Real) \226\134\146 a == real_of_num(0) \226\134\146 !(b < c)
+  (n : Num) + 1 <= (r : Num) && r < n + (n + 1) \226\134\146 n <= r && r <= 2 * n
+  sum(((n : Num) + 1, n), (r : Num) => real_of_num(0))
+  sum(((n : Num) + 1, n), (p : Num) => if prime(p) { ln(real_of_num(p)) } else { real_of_num(0) }) == real_of_num(0)
+  !((a : Bool) && (b : Bool) && (c : Bool)) == (b && c \226\134\146 !a)
+  2 * (n : Num)
+  \226\136\128 n : Num, n >= 2400 \226\134\146 (\226\136\131 p : Num, prime(p) && n <= p && p <= 2 * n)
+  ((p : Bool) && (b1 : Bool) \226\134\146 (a1 : Bool)) && (!b1 \226\134\146 (a2 : Bool)) \226\134\146 p \226\134\146 b1 && a1 || a2
+  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (a \226\134\146 c || !b)
+  \226\136\128 n : Num, 0 < n && n < 2400 \226\134\146 n <= 2 && 2 <= 2 * n || n <= 3 && 3 <= 2 * n || n <= 5 && 5 <= 2 * n || n <= 7 && 7 <= 2 * n || n <= 13 && 13 <= 2 * n || n <= 23 && 23 <= 2 * n || n <= 43 && 43 <= 2 * n || n <= 83 && 83 <= 2 * n || n <= 163 && 163 <= 2 * n || n <= 317 && 317 <= 2 * n || n <= 631 && 631 <= 2 * n || n <= 1259 && 1259 <= 2 * n || n <= 2503 && 2503 <= 2 * n
   prime
-  0 < n <=> ~(n = 0)
-  n:num
-  n >= 2400 \\/ n < 2400
-  forall n. ~(n = 0) ==> ?p. prime p /\\ n <= p /\\ p <= 2 * n
-  pii(n) = sum(1,n) (\\p. if prime(p) then &1 else &0)
-  pii(0) = &0
-  pii(SUC n) = pii(n) + (if prime(SUC n) then &1 else &0)
-  n:num
-  {p | p < SUC n}
-  forall n. FINITE {p | p <= n /\\ prime(p)}
-  ~(SUC n <= n)
-  1 + n = SUC n
-  {p | p <= SUC n /\\ prime p} =\n                if prime(SUC n) then (SUC n) INSERT {p | p <= n /\\ prime p}\n                else {p | p <= n /\\ prime p}
-  {p | p <= 0 /\\ prime p} = {}
-  forall n. pii(n) = &(CARD {p | p <= n /\\ prime(p)})
-  r < n + 1
-  1 <= r
-  &0 < &r /\\ &r <= &n
-  r:num
-  x <= y ==> a <= x ==> a <= y
-  3 <= n ==> (n = 3) \\/ (n = 4) \\/ 5 <= n
-  3 <= n ==> 1 < n
-  forall n. 3 <= n ==> &1 / &2 * (&n / ln(&n)) <= pii(n)
-  forall n. n < 50 ==> 3 <= n ==> ln(&n) * pii(n) <= &5 * &n
-  p:num
-  forall n. &0 <= theta n
-  forall m n. m <= n ==> pii(m) <= pii(n)
-  pii(0) = &0
-  forall n. &0 <= pii(n)
-  ~(m = 0)
-  1 + m <= r
-  &0 < &m /\\ &m <= &r
-  r:num
-  d:num
-  a <= n - m ==> &0 <= m ==> a <= n
-  m:num
-  theta n
-  ~(m <= n:num)
-  1 <= n <=> ~(n = 0)
-  &0 <= a * (c - b) ==> a * (b - c) <= &0
-  &0
-  m <= n:num
-  forall m n. ~(m = 0) ==> ln(&m) * (pii n - pii m) <= &3 / &2 * &n
-  &7 <= x ==> &1 <= x
-  x:real
-  x:real
-  &(ISQRT n)
+  (0 < (n : Num)) == !(n == 0)
+  (n : Num)
+  (n : Num) >= 2400 || n < 2400
+  \226\136\128 n : Num, !(n == 0) \226\134\146 (\226\136\131 p : Num, prime(p) && n <= p && p <= 2 * n)
+  (pii : (Num) -> Real)((n : Num)) == sum((1, n), (p : Num) => if prime(p) { real_of_num(1) } else { real_of_num(0) })
+  pii(0) == real_of_num(0)
+  pii(SUC((n : Num))) == pii(n) + (if prime(SUC(n)) { real_of_num(1) } else { real_of_num(0) })
+  (n : Num)
+  {(p : Num) | p < SUC((n : Num))}
+  \226\136\128 n : Num, FINITE({(p : Num) | p <= n && prime(p)})
+  !(SUC((n : Num)) <= n)
+  1 + (n : Num) == SUC(n)
+  {(p : Num) | p <= SUC((n : Num)) && prime(p)} == (if prime(SUC(n)) { INSERT(SUC(n), {(p : Num) | p <= n && prime(p)}) } else { {(p : Num) | p <= n && prime(p)} })
+  {(p : Num) | p <= 0 && prime(p)} == {}
+  \226\136\128 n : Num, pii(n) == real_of_num(CARD({(p : Num) | p <= n && prime(p)}))
+  (r : Num) < (n : Num) + 1
+  1 <= (r : Num)
+  real_of_num(0) < real_of_num((r : Num)) && real_of_num(r) <= real_of_num((n : Num))
+  (r : Num)
+  (x : Real) <= (y : Real) \226\134\146 (a : Real) <= x \226\134\146 a <= y
+  3 <= (n : Num) \226\134\146 n == 3 || n == 4 || 5 <= n
+  3 <= (n : Num) \226\134\146 1 < n
+  \226\136\128 n : Num, 3 <= n \226\134\146 real_of_num(1) / real_of_num(2) * (real_of_num(n) / ln(real_of_num(n))) <= pii(n)
+  \226\136\128 n : Num, n < 50 \226\134\146 3 <= n \226\134\146 ln(real_of_num(n)) * pii(n) <= real_of_num(5) * real_of_num(n)
+  (p : Num)
+  \226\136\128 n : Num, real_of_num(0) <= theta(n)
+  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 pii(m) <= pii(n)
+  pii(0) == real_of_num(0)
+  \226\136\128 n : Num, real_of_num(0) <= pii(n)
+  !((m : Num) == 0)
+  1 + (m : Num) <= (r : Num)
+  real_of_num(0) < real_of_num((m : Num)) && real_of_num(m) <= real_of_num((r : Num))
+  (r : Num)
+  (d : Num)
+  (a : Real) <= (n : Real) - (m : Real) \226\134\146 real_of_num(0) <= m \226\134\146 a <= n
+  (m : Num)
+  theta((n : Num))
+  !((m : Num) <= (n : Num))
+  (1 <= (n : Num)) == !(n == 0)
+  real_of_num(0) <= (a : Real) * ((c : Real) - (b : Real)) \226\134\146 a * (b - c) <= real_of_num(0)
+  real_of_num(0)
+  (m : Num) <= (n : Num)
+  \226\136\128 m : Num, \226\136\128 n : Num, !(m == 0) \226\134\146 ln(real_of_num(m)) * (pii(n) - pii(m)) <= real_of_num(3) / real_of_num(2) * real_of_num(n)
+  real_of_num(7) <= (x : Real) \226\134\146 real_of_num(1) <= x
+  (x : Real)
+  (x : Real)
+  real_of_num(ISQRT((n : Num)))
   2
-  50 <= n
-  n:num
-  7 EXP 2 < (ISQRT n + 1) EXP 2
-  &7 <= &(ISQRT n)
-  0 < n <=> ~(n = 0)
-  inv(&(ISQRT n))
-  0 < n <=> ~(n = 0)
-  &0 < x ==> &0 < x + &1
-  a - b <= b * (d - &1) ==> a <= b * d
-  &0 <= x ==> &0 < x + &1
-  50 <= n
-  &0 < &n /\\ &n <= (&(ISQRT n) + &1) pow 2
-  ln((&(ISQRT n) + &1) pow 2)
-  a * p <= ls * p ==> ls * (p - ps) <= an ==> a * p <= an + ls * ps
-  50 <= n
-  n:num
-  ~(ISQRT n = 0)
-  n:num
-  ISQRT n
-  forall n. 50 <= n\n       ==> ln(&n) * pii(n)\n           <= &9 / &4 * (&3 / &2 * &n + ln(&(ISQRT(n))) * pii(ISQRT(n)))
-  x:real
-  ISQRT n * ISQRT n
-  &(ISQRT n) * &7
-  i * (a * c) <= n * (d - a * b) ==> a * (b * n + c * i) <= d * n
-  &9 / &4 * (&3 / &2 * &n + &5 * &(ISQRT n))
-  a <= b ==> x <= a ==> x <= b
+  50 <= (n : Num)
+  (n : Num)
+  EXP(7, 2) < EXP(ISQRT((n : Num)) + 1, 2)
+  real_of_num(7) <= real_of_num(ISQRT((n : Num)))
+  (0 < (n : Num)) == !(n == 0)
+  inv(real_of_num(ISQRT((n : Num))))
+  (0 < (n : Num)) == !(n == 0)
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < x + real_of_num(1)
+  (a : Real) - (b : Real) <= b * ((d : Real) - real_of_num(1)) \226\134\146 a <= b * d
+  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < x + real_of_num(1)
+  50 <= (n : Num)
+  real_of_num(0) < real_of_num((n : Num)) && real_of_num(n) <= pow(real_of_num(ISQRT(n)) + real_of_num(1), 2)
+  ln(pow(real_of_num(ISQRT((n : Num))) + real_of_num(1), 2))
+  (a : Real) * (p : Real) <= (ls : Real) * p \226\134\146 ls * (p - (ps : Real)) <= (an : Real) \226\134\146 a * p <= an + ls * ps
+  50 <= (n : Num)
+  (n : Num)
+  !(ISQRT((n : Num)) == 0)
+  (n : Num)
+  ISQRT((n : Num))
+  \226\136\128 n : Num, 50 <= n \226\134\146 ln(real_of_num(n)) * pii(n) <= real_of_num(9) / real_of_num(4) * (real_of_num(3) / real_of_num(2) * real_of_num(n) + ln(real_of_num(ISQRT(n))) * pii(ISQRT(n)))
+  (x : Real)
+  ISQRT((n : Num)) * ISQRT(n)
+  real_of_num(ISQRT((n : Num))) * real_of_num(7)
+  (i : Real) * ((a : Real) * (c : Real)) <= (n : Real) * ((d : Real) - a * (b : Real)) \226\134\146 a * (b * n + c * i) <= d * n
+  real_of_num(9) / real_of_num(4) * (real_of_num(3) / real_of_num(2) * real_of_num((n : Num)) + real_of_num(5) * real_of_num(ISQRT(n)))
+  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
   2
-  50 <= n
-  1 * n < m ==> n < m
-  n:num
-  (ISQRT n) EXP 2 < n EXP 2
-  50 <= n ==> 3 <= n
-  7 <= n ==> 3 <= n
+  50 <= (n : Num)
+  1 * (n : Num) < (m : Num) \226\134\146 n < m
+  (n : Num)
+  EXP(ISQRT((n : Num)), 2) < EXP(n, 2)
+  50 <= (n : Num) \226\134\146 3 <= n
+  7 <= (n : Num) \226\134\146 3 <= n
   2
-  50 <= n
-  n:num
-  7 EXP 2 < (ISQRT n + 1) EXP 2
-  7 <= ISQRT n
-  ISQRT n
-  n < 50
-  n:num
-  3 <= n ==> 1 < n
-  forall n. 3 <= n ==> pii(n) <= &5 * (&n / ln(&n))
+  50 <= (n : Num)
+  (n : Num)
+  EXP(7, 2) < EXP(ISQRT((n : Num)) + 1, 2)
+  7 <= ISQRT((n : Num))
+  ISQRT((n : Num))
+  (n : Num) < 50
+  (n : Num)
+  3 <= (n : Num) \226\134\146 1 < n
+  \226\136\128 n : Num, 3 <= n \226\134\146 pii(n) <= real_of_num(5) * (real_of_num(n) / ln(real_of_num(n)))
 ISQRT =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#ISQRT:fun(num,num) n:num)) (#@:fun(fun(num,bool),num) (\m:num. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 ISQRT_WORKS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#EXP:fun(num,fun(num,num)) (#ISQRT:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num)) ((#<:fun(num,fun(num,bool)) n:num) ((#EXP:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) (#ISQRT:fun(num,num) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
 ISQRT_0 =  |- ((#=:fun(num,fun(num,bool)) (#ISQRT:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))
