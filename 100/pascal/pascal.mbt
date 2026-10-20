@@ -1414,7 +1414,7 @@ fn step_65() -> Unit raise {
   let t346 = @simp.once_rewrite_tac(@list.List([@vectors.collinear_3()]))
   let t345 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dot_eq_0())]))
   let t350 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@vectors.vector_sub_eq())])), t345), t346), t347), t348), t349)
-  collinear_not_cocircular_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Real, ∀ c : Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ y : Cart[Real, Tybit0[Unit]], ∀ z : Cart[Real, Tybit0[Unit]], dist((c, x)) == r && dist((c, y)) == r && dist((c, z)) == r && !(x == y) && !(x == z) && !(y == z) → !collinear({x, y, z})"), t350))
+  collinear_not_cocircular_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Real, ∀ c : Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ y : Cart[Real, Tybit0[Unit]], ∀ z : Cart[Real, Tybit0[Unit]], distance((c, x)) == r && distance((c, y)) == r && distance((c, z)) == r && !(x == y) && !(x == z) && !(y == z) → !collinear({x, y, z})"), t350))
 }
 
 ///|
@@ -1468,9 +1468,9 @@ fn step_66() -> Unit raise {
   }, @list.List([@theorems.imp_imp()]))
   let t353 = @simp.rewrite_tac(@list.List([@lists.pairwise(), @lists.all(), @sets.in_elim_thm()]))
   let t352 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac))
-  let t351 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("{(x : Cart[Real, Tybit0[Unit]]) | dist(((c : Cart[Real, Tybit0[Unit]]), x)) == (r : Real)}"), pascal_affine()))
+  let t351 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("{(x : Cart[Real, Tybit0[Unit]]) | distance(((c : Cart[Real, Tybit0[Unit]]), x)) == (r : Real)}"), pascal_affine()))
   let t385 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t351), t352), t353), t357), @tactics.disch_tac), @tactics.strip_tac), t358), t359), @tactics.conj_tac), t384)
-  pascal_affine_circle_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Cart[Real, Tybit0[Unit]], ∀ r : Real, ∀ x1 : Cart[Real, Tybit0[Unit]], ∀ x2 : Cart[Real, Tybit0[Unit]], ∀ x3 : Cart[Real, Tybit0[Unit]], ∀ x4 : Cart[Real, Tybit0[Unit]], ∀ x5 : Cart[Real, Tybit0[Unit]], ∀ x6 : Cart[Real, Tybit0[Unit]], ∀ x7 : Cart[Real, Tybit0[Unit]], ∀ x8 : Cart[Real, Tybit0[Unit]], ∀ x9 : Cart[Real, Tybit0[Unit]], PAIRWISE((x : Cart[Real, Tybit0[Unit]]) => (y : Cart[Real, Tybit0[Unit]]) => !(x == y), [x1, x2, x3, x4, x5, x6]) && dist((c, x1)) == r && dist((c, x2)) == r && dist((c, x3)) == r && dist((c, x4)) == r && dist((c, x5)) == r && dist((c, x6)) == r && collinear({x1, x9, x5}) && collinear({x1, x8, x6}) && collinear({x2, x9, x4}) && collinear({x2, x7, x6}) && collinear({x3, x8, x4}) && collinear({x3, x7, x5}) → collinear({x7, x8, x9})"), t385))
+  pascal_affine_circle_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Cart[Real, Tybit0[Unit]], ∀ r : Real, ∀ x1 : Cart[Real, Tybit0[Unit]], ∀ x2 : Cart[Real, Tybit0[Unit]], ∀ x3 : Cart[Real, Tybit0[Unit]], ∀ x4 : Cart[Real, Tybit0[Unit]], ∀ x5 : Cart[Real, Tybit0[Unit]], ∀ x6 : Cart[Real, Tybit0[Unit]], ∀ x7 : Cart[Real, Tybit0[Unit]], ∀ x8 : Cart[Real, Tybit0[Unit]], ∀ x9 : Cart[Real, Tybit0[Unit]], PAIRWISE((x : Cart[Real, Tybit0[Unit]]) => (y : Cart[Real, Tybit0[Unit]]) => !(x == y), [x1, x2, x3, x4, x5, x6]) && distance((c, x1)) == r && distance((c, x2)) == r && distance((c, x3)) == r && distance((c, x4)) == r && distance((c, x5)) == r && distance((c, x6)) == r && collinear({x1, x9, x5}) && collinear({x1, x8, x6}) && collinear({x2, x9, x4}) && collinear({x2, x7, x6}) && collinear({x3, x8, x4}) && collinear({x3, x7, x5}) → collinear({x7, x8, x9})"), t385))
 }
 
 ///|
