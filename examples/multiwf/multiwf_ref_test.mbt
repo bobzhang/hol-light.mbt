@@ -5647,85 +5647,85 @@ test "Examples/multiwf matches Examples/multiwf.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Examples/multiwf quotations (79):
-      #|  forall s. (s = EMPTY) ==> FINITE s
-      #|  forall s a. (s = {a}) ==> FINITE s
-      #|  {a | ~(f a + g a = 0)} = {a | ~(f a = 0)} UNION {a | ~(g a = 0)}
-      #|  \\a:A. 0
-      #|  ?f. FINITE {a:A | ~(f a = 0)}
-      #|  mempty = multiset (\\b. 0)
-      #|  a mmember M <=> ~(multiplicity M a = 0)
-      #|  msing a = multiset (\\b. if b = a then 1 else 0)
-      #|  M munion N = multiset(\\b. multiplicity M b + multiplicity N b)
-      #|  M mdiff N = multiset(\\b. multiplicity M b - multiplicity N b)
-      #|  (M = N) = forall a. multiplicity M a = multiplicity N a
-      #|  FINITE {a | ~(f a = 0)} /\\ (f a = y) ==> (multiplicity(multiset f) a = y)
-      #|  multiplicity mempty a = 0
-      #|  a:A
-      #|  multiplicity (msing (a:A)) b = if b = a then 1 else 0
-      #|  multiplicity (M munion N) a = multiplicity M a + multiplicity N a
-      #|  {a:A | ~(multiplicity M a = 0)}
-      #|  multiplicity (M mdiff N) (a:A) = multiplicity M a - multiplicity N a
-      #|  a:A
-      #|  ~(M munion (msing(a:A)) = mempty)
-      #|  x mmember (M munion N) <=> x mmember M \\/ x mmember N
-      #|  x mmember (msing a) <=> (x = a)
-      #|  M munion mempty = M
-      #|  M1 munion (M2 munion M3) = (M1 munion M2) munion M3
-      #|  (M1 munion M2 = M2 munion M1) /\\\n   ((M1 munion M2) munion M3 = M1 munion M2 munion M3) /\\\n   (M1 munion M2 munion M3 = M2 munion M1 munion M3)
-      #|  (M1 munion N = M2 munion N) <=> (M1 = M2)
-      #|  a mmember (M munion (msing b)) /\\ ~(b = a) ==> a mmember M
-      #|  ~(multiplicity M (a:A) = 0)
-      #|  (a:A) mmember M ==> (M = (M mdiff (msing a)) munion (msing a))
-      #|  {a:A | ~(multiplicity M a = 0)}
-      #|  SUC n - 1 = n
-      #|  forall M. (multiplicity M a = n) /\\\n           {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n           ==> P M
-      #|  forall a:A M. P M ==> P (M munion msing a)
-      #|  M = (M mdiff (msing(a:A))) munion (msing a)
-      #|  {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)
-      #|  (forall M. ({a | ~(multiplicity M a = 0)} SUBSET s) ==> P M) /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall n M. (multiplicity M a = n) /\\\n             {a:A | ~(multiplicity M a = 0)} SUBSET (a INSERT s)\n             ==> P M
-      #|  a:A
-      #|  M:(A)multiset = mempty
-      #|  P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall s. FINITE s ==> forall M. {a:A | ~(multiplicity M a = 0)} SUBSET s ==> P M
-      #|  {a:A | ~(multiplicity M a = 0)}
-      #|  P mempty /\\\n   (forall a:A M. P M ==> P (M munion (msing a)))\n   ==> forall M. P M
-      #|  forall x. (forall y. y << x ==> WFP(<<) y) ==> WFP(<<) x
-      #|  a ==> b <=> a ==> a /\\ b
-      #|  forall P. (forall x. x IN WFP(<<) /\\ (forall y. y << x ==> P(y)) ==> P(x))\n       ==> forall x:A. x IN WFP(<<) ==> P(x)
-      #|  WF(<<) <=> (WFP(<<) = UNIV:A->bool)
-      #|  a:A
-      #|  \\(n:num) x y. ((<<):A->A->bool) y x
-      #|  \\(n:num) (x:A). ~WFP(<<) x
-      #|  a:A
-      #|  (x:num->A) o SUC
-      #|  (x:num->A) (SUC 0)
-      #|  x:num->A
-      #|  a:A
+      #|  \226\136\128 s : (_) -> Bool, s == {} \226\134\146 FINITE(s)
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 a : _, s == {a} \226\134\146 FINITE(s)
+      #|  {(a : _) | !((f : (_) -> Num)(a) + (g : (_) -> Num)(a) == 0)} == UNION({(a : _) | !(f(a) == 0)}, {(a : _) | !(g(a) == 0)})
+      #|  (a : A) => 0
+      #|  \226\136\131 f : (A) -> Num, FINITE({(a : A) | !(f(a) == 0)})
+      #|  (mempty : Multiset[_]) == multiset((b : _) => 0)
+      #|  (mmember : (_, Multiset[_]) -> Bool)((a : _), (M : Multiset[_])) == !(multiplicity(M, a) == 0)
+      #|  (msing : (_) -> Multiset[_])((a : _)) == multiset((b : _) => if b == a { 1 } else { 0 })
+      #|  (munion : (Multiset[_], Multiset[_]) -> Multiset[_])((M : Multiset[_]), (N : Multiset[_])) == multiset((b : _) => multiplicity(M, b) + multiplicity(N, b))
+      #|  (mdiff : (Multiset[_], Multiset[_]) -> Multiset[_])((M : Multiset[_]), (N : Multiset[_])) == multiset((b : _) => multiplicity(M, b) - multiplicity(N, b))
+      #|  ((M : Multiset[_]) == (N : Multiset[_])) == (\226\136\128 a : _, multiplicity(M, a) == multiplicity(N, a))
+      #|  FINITE({(a : _) | !((f : (_) -> Num)(a) == 0)}) && f((a : _)) == (y : Num) \226\134\146 multiplicity(multiset(f), a) == y
+      #|  multiplicity(mempty, (a : _)) == 0
+      #|  (a : A)
+      #|  multiplicity(msing((a : A)), (b : A)) == (if b == a { 1 } else { 0 })
+      #|  multiplicity(munion((M : Multiset[_]), (N : Multiset[_])), (a : _)) == multiplicity(M, a) + multiplicity(N, a)
+      #|  {(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}
+      #|  multiplicity(mdiff((M : Multiset[A]), (N : Multiset[A])), (a : A)) == multiplicity(M, a) - multiplicity(N, a)
+      #|  (a : A)
+      #|  !(munion((M : Multiset[A]), msing((a : A))) == mempty)
+      #|  mmember((x : _), munion((M : Multiset[_]), (N : Multiset[_]))) == (mmember(x, M) || mmember(x, N))
+      #|  mmember((x : _), msing((a : _))) == (x == a)
+      #|  munion((M : Multiset[_]), mempty) == M
+      #|  munion((M1 : Multiset[_]), munion((M2 : Multiset[_]), (M3 : Multiset[_]))) == munion(munion(M1, M2), M3)
+      #|  munion((M1 : Multiset[_]), (M2 : Multiset[_])) == munion(M2, M1) && munion(munion(M1, M2), (M3 : Multiset[_])) == munion(M1, munion(M2, M3)) && munion(M1, munion(M2, M3)) == munion(M2, munion(M1, M3))
+      #|  (munion((M1 : Multiset[_]), (N : Multiset[_])) == munion((M2 : Multiset[_]), N)) == (M1 == M2)
+      #|  mmember((a : _), munion((M : Multiset[_]), msing((b : _)))) && !(b == a) \226\134\146 mmember(a, M)
+      #|  !(multiplicity((M : Multiset[A]), (a : A)) == 0)
+      #|  mmember((a : A), (M : Multiset[A])) \226\134\146 M == munion(mdiff(M, msing(a)), msing(a))
+      #|  {(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}
+      #|  SUC((n : Num)) - 1 == n
+      #|  \226\136\128 M : Multiset[A], multiplicity(M, (a : A)) == (n : Num) && SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, INSERT(a, (s : (A) -> Bool))) \226\134\146 (P : (Multiset[A]) -> Bool)(M)
+      #|  \226\136\128 a : A, \226\136\128 M : Multiset[A], (P : (Multiset[A]) -> Bool)(M) \226\134\146 P(munion(M, msing(a)))
+      #|  (M : Multiset[A]) == munion(mdiff(M, msing((a : A))), msing(a))
+      #|  SUBSET({(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}, INSERT((a : A), (s : (A) -> Bool)))
+      #|  (\226\136\128 M : Multiset[A], SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, (s : (A) -> Bool)) \226\134\146 (P : (Multiset[A]) -> Bool)(M)) && (\226\136\128 a : A, \226\136\128 M : Multiset[A], P(M) \226\134\146 P(munion(M, msing(a)))) \226\134\146 (\226\136\128 n : Num, \226\136\128 M : Multiset[A], multiplicity(M, (a : A)) == n && SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, INSERT(a, s)) \226\134\146 P(M))
+      #|  (a : A)
+      #|  (M : Multiset[A]) == mempty
+      #|  (P : (Multiset[A]) -> Bool)(mempty) && (\226\136\128 a : A, \226\136\128 M : Multiset[A], P(M) \226\134\146 P(munion(M, msing(a)))) \226\134\146 (\226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 (\226\136\128 M : Multiset[A], SUBSET({(a : A) | !(multiplicity(M, a) == 0)}, s) \226\134\146 P(M)))
+      #|  {(a : A) | !(multiplicity((M : Multiset[A]), a) == 0)}
+      #|  (P : (Multiset[A]) -> Bool)(mempty) && (\226\136\128 a : A, \226\136\128 M : Multiset[A], P(M) \226\134\146 P(munion(M, msing(a)))) \226\134\146 (\226\136\128 M : Multiset[A], P(M))
+      #|  \226\136\128 x : _, (\226\136\128 y : _, (op_lt_lt : (_, _) -> Bool)(y, x) \226\134\146 (WFP : ((_, _) -> Bool, _) -> Bool)(op_lt_lt, y)) \226\134\146 WFP(op_lt_lt, x)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (a \226\134\146 a && b)
+      #|  \226\136\128 P : (A) -> Bool, (\226\136\128 x : A, IN(x, WFP((op_lt_lt : (A, A) -> Bool))) && (\226\136\128 y : A, op_lt_lt(y, x) \226\134\146 P(y)) \226\134\146 P(x)) \226\134\146 (\226\136\128 x : A, IN(x, WFP(op_lt_lt)) \226\134\146 P(x))
+      #|  WF((op_lt_lt : (A, A) -> Bool)) == (WFP(op_lt_lt) == UNIV)
+      #|  (a : A)
+      #|  (n : Num) => (x : A) => (y : A) => (op_lt_lt : (A, A) -> Bool)(y, x)
+      #|  (n : Num) => (x : A) => !WFP((op_lt_lt : (A, A) -> Bool), x)
+      #|  (a : A)
+      #|  o((x : (Num) -> A), SUC)
+      #|  (x : (Num) -> A)(SUC(0))
+      #|  (x : (Num) -> A)
+      #|  (a : A)
       #|  forall(<<):A->A->bool.\n        WFP(<<) = {a | forall x. (forall n. x(SUC n) << x n) ==> ~(x 0 = a)}
-      #|  morder(<<) N M <=> ?M0 a K. (M = M0 munion (msing a)) /\\\n                               (N = M0 munion K) /\\\n                               (forall b. b mmember K ==> b << a)
-      #|  M0 munion msing (a:A) = M1 munion msing b
-      #|  K:(A)multiset
-      #|  b:A
-      #|  M2:(A)multiset
-      #|  M2 munion K:(A)multiset
-      #|  a:A
-      #|  M0 munion (msing a) = M1 munion (msing(b:A))
-      #|  M1 mdiff (msing(a:A))
-      #|  ?M2. M1 = M2 munion (msing(a:A))
-      #|  K:(A)multiset
-      #|  b:A = a
-      #|  b:A = a
-      #|  K:(A)multiset
-      #|  b:A
-      #|  M1:(A)multiset
-      #|  morder(<<) N (M0 munion (msing a))\n   ==> (?M. morder(<<) M M0 /\\ (N = M munion (msing a))) \\/\n       (?K. (N = M0 munion K) /\\ (forall b:A. b mmember K ==> b << a))
-      #|  N:(A)multiset
-      #|  N:(A)multiset
-      #|  N:(A)multiset
-      #|  (forall M b:A. b << a /\\ M IN WFP(morder(<<))\n            ==> (M munion (msing b)) IN WFP(morder(<<))) /\\\n   M0 IN WFP(morder(<<)) /\\\n   (forall M. morder(<<) M M0 ==> (M munion (msing a)) IN WFP(morder(<<)))\n   ==> (M0 munion (msing a)) IN WFP(morder(<<))
-      #|  (forall M b. b << a /\\ M IN WFP(morder(<<))\n          ==> (M munion (msing b)) IN WFP(morder(<<)))\n   ==> forall M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))
-      #|  WF(<<)\n   ==> forall a M. M IN WFP(morder(<<)) ==> (M munion (msing a)) IN WFP(morder(<<))
-      #|  WF(<<) ==> forall M. M IN WFP(morder(<<))
-      #|  WF(<<) ==> WF(morder(<<))
+      #|  (morder : ((_, _) -> Bool, Multiset[_], Multiset[_]) -> Bool)((op_lt_lt : (_, _) -> Bool), (N : Multiset[_]), (M : Multiset[_])) == (\226\136\131 M0 : Multiset[_], \226\136\131 a : _, \226\136\131 K : Multiset[_], M == munion(M0, msing(a)) && N == munion(M0, K) && (\226\136\128 b : _, mmember(b, K) \226\134\146 op_lt_lt(b, a)))
+      #|  munion((M0 : Multiset[A]), msing((a : A))) == munion((M1 : Multiset[A]), msing((b : A)))
+      #|  (K : Multiset[A])
+      #|  (b : A)
+      #|  (M2 : Multiset[A])
+      #|  munion((M2 : Multiset[A]), (K : Multiset[A]))
+      #|  (a : A)
+      #|  munion((M0 : Multiset[A]), msing((a : A))) == munion((M1 : Multiset[A]), msing((b : A)))
+      #|  mdiff((M1 : Multiset[A]), msing((a : A)))
+      #|  \226\136\131 M2 : Multiset[A], (M1 : Multiset[A]) == munion(M2, msing((a : A)))
+      #|  (K : Multiset[A])
+      #|  (b : A) == (a : A)
+      #|  (b : A) == (a : A)
+      #|  (K : Multiset[A])
+      #|  (b : A)
+      #|  (M1 : Multiset[A])
+      #|  morder((op_lt_lt : (A, A) -> Bool), (N : Multiset[A]), munion((M0 : Multiset[A]), msing((a : A)))) \226\134\146 (\226\136\131 M : Multiset[A], morder(op_lt_lt, M, M0) && N == munion(M, msing(a))) || (\226\136\131 K : Multiset[A], N == munion(M0, K) && (\226\136\128 b : A, mmember(b, K) \226\134\146 op_lt_lt(b, a)))
+      #|  (N : Multiset[A])
+      #|  (N : Multiset[A])
+      #|  (N : Multiset[A])
+      #|  (\226\136\128 M : Multiset[A], \226\136\128 b : A, (op_lt_lt : (A, A) -> Bool)(b, (a : A)) && IN(M, WFP(morder(op_lt_lt))) \226\134\146 IN(munion(M, msing(b)), WFP(morder(op_lt_lt)))) && IN((M0 : Multiset[A]), WFP(morder(op_lt_lt))) && (\226\136\128 M : Multiset[A], morder(op_lt_lt, M, M0) \226\134\146 IN(munion(M, msing(a)), WFP(morder(op_lt_lt)))) \226\134\146 IN(munion(M0, msing(a)), WFP(morder(op_lt_lt)))
+      #|  (\226\136\128 M : Multiset[_], \226\136\128 b : _, (op_lt_lt : (_, _) -> Bool)(b, (a : _)) && IN(M, WFP(morder(op_lt_lt))) \226\134\146 IN(munion(M, msing(b)), WFP(morder(op_lt_lt)))) \226\134\146 (\226\136\128 M : Multiset[_], IN(M, WFP(morder(op_lt_lt))) \226\134\146 IN(munion(M, msing(a)), WFP(morder(op_lt_lt))))
+      #|  WF((op_lt_lt : (_, _) -> Bool)) \226\134\146 (\226\136\128 a : _, \226\136\128 M : Multiset[_], IN(M, WFP(morder(op_lt_lt))) \226\134\146 IN(munion(M, msing(a)), WFP(morder(op_lt_lt))))
+      #|  WF((op_lt_lt : (_, _) -> Bool)) \226\134\146 (\226\136\128 M : Multiset[_], IN(M, WFP(morder(op_lt_lt))))
+      #|  WF((op_lt_lt : (_, _) -> Bool)) \226\134\146 WF(morder(op_lt_lt))
       #|EMPTY_IS_FINITE =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(fun('?1,bool),fun(fun('?1,bool),bool)) s:fun('?1,bool)) #EMPTY:fun('?1,bool))) (#FINITE:fun(fun('?1,bool),bool) s:fun('?1,bool)))))
       #|SING_IS_FINITE =  |- (#forall:fun(fun(fun('?2,bool),bool),bool) (\s:fun('?2,bool). (#forall:fun(fun('?2,bool),bool) (\a:'?2. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(fun('?2,bool),fun(fun('?2,bool),bool)) s:fun('?2,bool)) ((#INSERT:fun('?2,fun(fun('?2,bool),fun('?2,bool))) a:'?2) #EMPTY:fun('?2,bool)))) (#FINITE:fun(fun('?2,bool),bool) s:fun('?2,bool)))))))
       #|UNION_NONZERO =  |- ((#=:fun(fun('?3,bool),fun(fun('?3,bool),bool)) (#GSPEC:fun(fun('?3,bool),fun('?3,bool)) (\GEN%PVAR%1:'?3. (#?:fun(fun('?3,bool),bool) (\a:'?3. (((#SETSPEC:fun('?3,fun(bool,fun('?3,bool))) GEN%PVAR%1:'?3) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (f:fun('?3,num) a:'?3)) (g:fun('?3,num) a:'?3))) (#NUMERAL:fun(num,num) #_0:num)))) a:'?3)))))) ((#UNION:fun(fun('?3,bool),fun(fun('?3,bool),fun('?3,bool))) (#GSPEC:fun(fun('?3,bool),fun('?3,bool)) (\GEN%PVAR%2:'?3. (#?:fun(fun('?3,bool),bool) (\a:'?3. (((#SETSPEC:fun('?3,fun(bool,fun('?3,bool))) GEN%PVAR%2:'?3) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (f:fun('?3,num) a:'?3)) (#NUMERAL:fun(num,num) #_0:num)))) a:'?3)))))) (#GSPEC:fun(fun('?3,bool),fun('?3,bool)) (\GEN%PVAR%3:'?3. (#?:fun(fun('?3,bool),bool) (\a:'?3. (((#SETSPEC:fun('?3,fun(bool,fun('?3,bool))) GEN%PVAR%3:'?3) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (g:fun('?3,num) a:'?3)) (#NUMERAL:fun(num,num) #_0:num)))) a:'?3)))))))
