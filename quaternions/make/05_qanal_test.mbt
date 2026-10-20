@@ -74743,135 +74743,135 @@ test "Quaternions/qanal matches Quaternions/qanal.ml" {
       #|  quat_ii:quat
       #|  quat_cnj:quat->quat
       #|  quat_real:quat->bool
-      #|  forall q. norm q pow 2 = Re(cnj q * q)
-      #|  forall x n. inv (x pow n) = inv x pow n
-      #|  forall x. Re x = &0 ==> x pow 2 = --(Hx(norm x) pow 2)
-      #|  forall net:(A)net P f g l m b1 b2.\n     eventually (\\x. forall n. P n ==> norm(l n) <= b1) net /\\\n     eventually (\\x. forall n. P n ==> norm(m n) <= b2) net /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n. P n ==> norm(g n x - m n) < e) net)\n     ==> forall e. &0 < e\n             ==> eventually\n                  (\\x. forall n. P n ==> norm(f n x * g n x - l n * m n) < e)\n                  net
-      #|  b <= norm l /\\ norm(f - l) < b / &2 ==> b / &2 <= norm f
+      #|  \226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], pow(norm(q), 2) == Re(cnj(q) * q)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 n : Num, inv(pow(x, n)) == pow(inv(x), n)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Tybit0[Unit]]], Re(x) == real_of_num(0) \226\134\146 pow(x, 2) == -pow(Hx(norm(x)), 2)
+      #|  \226\136\128 net : Net[A], \226\136\128 P : (B) -> Bool, \226\136\128 f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 m : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b1 : Real, \226\136\128 b2 : Real, eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(l(n)) <= b1, net) && eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(m(n)) <= b2, net) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(f(n, x) - l(n)) < e, net)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(g(n, x) - m(n)) < e, net)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(f(n, x) * g(n, x) - l(n) * m(n)) < e, net))
+      #|  (b : Real) <= norm((l : Cart[Real, Tybit0[Tybit0[Unit]]])) && norm((f : Cart[Real, Tybit0[Tybit0[Unit]]]) - l) < b / real_of_num(2) \226\134\146 b / real_of_num(2) <= norm(f)
       #|  :real
       #|  :real
-      #|  b / &2
-      #|  b pow 2 / &2 = b / &2 * b
-      #|  (a * e) * b = e * a * b:real
-      #|  norm ((f:B->A->quat) n x)
-      #|  norm ((l:B->quat) n)
-      #|  q:quat
-      #|  p:quat
-      #|  forall p q. ~(p = Hx(&0)) /\\ ~(q = Hx(&0))\n      ==> inv p - inv q = inv p * (q - p) * inv q
-      #|  ~((f:B->A->quat) n x = Hx(&0)) /\\ ~(l n = Hx(&0))
-      #|  n:B
-      #|  n:B
-      #|  x:A
-      #|  (p ==> q /\\ r) <=> (p ==> q) /\\ (p ==> r)
-      #|  \\x. forall n. P n ==> b <= norm(l n) /\\\n                    b / &2 <= norm((f:B->A->quat) n x) /\\\n                    norm(f n x - l n) < e * b pow 2 / &2
-      #|  forall net:(A)net P f l b.\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     &0 < b /\\ eventually (\\x. forall n. P n ==> b <= norm(l n)) net\n     ==> forall e. &0 < e\n             ==> eventually\n                 (\\x. forall n. P n ==> norm(inv(f n x) - inv(l n)) < e) net
-      #|  forall net:(A)net f g l m.\n     (f --> l) net /\\ (g --> m) net ==> ((\\x. f x * g x) --> l * m) net
-      #|  norm(l:quat)
+      #|  (b : Real) / real_of_num(2)
+      #|  pow((b : Real), 2) / real_of_num(2) == b / real_of_num(2) * b
+      #|  (a : Real) * (e : Real) * (b : Real) == e * (a * b)
+      #|  norm((f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]])((n : B), (x : A)))
+      #|  norm((l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]])((n : B)))
+      #|  (q : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (p : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  \226\136\128 p : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], !(p == Hx(real_of_num(0))) && !(q == Hx(real_of_num(0))) \226\134\146 inv(p) - inv(q) == inv(p) * ((q - p) * inv(q))
+      #|  !((f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]])((n : B), (x : A)) == Hx(real_of_num(0))) && !((l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]])(n) == Hx(real_of_num(0)))
+      #|  (n : B)
+      #|  (n : B)
+      #|  (x : A)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (x : A) => \226\136\128 n : B, (P : (B) -> Bool)(n) \226\134\146 (b : Real) <= norm((l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]])(n)) && b / real_of_num(2) <= norm((f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]])(n, x)) && norm(f(n, x) - l(n)) < (e : Real) * (pow(b, 2) / real_of_num(2))
+      #|  \226\136\128 net : Net[A], \226\136\128 P : (B) -> Bool, \226\136\128 f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(f(n, x) - l(n)) < e, net)) && real_of_num(0) < b && eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 b <= norm(l(n)), net) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(inv(f(n, x)) - inv(l(n))) < e, net))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 m : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, net) && op_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_gt((x : A) => f(x) * g(x), l * m, net)
+      #|  norm((l : Cart[Real, Tybit0[Tybit0[Unit]]]))
       #|  \\n:one. (l:quat)
       #|  \\n:one. (f:A->quat)
       #|  \\x:one. T
-      #|  net:(A)net
-      #|  forall net:(A)net f l.\n     (f --> l) net /\\ ~(l = Hx(&0))\n     ==> ((\\x. inv(f x)) --> inv(l)) net
-      #|  forall net:(A)net f l n.\n     (f --> l) net ==> ((\\x. f(x) pow n) --> l pow n) net
-      #|  forall f l c. (f --> l) net ==> ((\\x:A. c * f x) --> c * l) net
-      #|  forall f l c. (f --> l) net ==> ((\\x:A. f x * c) --> l * c) net
-      #|  forall net f. (f --> Hx(&0)) net ==> ((\\x:A. --(f x)) --> Hx(&0)) net
-      #|  forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x + g x) --> Hx(&0)) net
-      #|  forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x - g x) --> Hx(&0)) net
-      #|  forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x * g x) --> Hx(&0)) net
-      #|  Hx(&0) = c * Hx(&0)
-      #|  forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. c * f x) --> Hx(&0)) net
-      #|  Hx(&0) = Hx(&0) * c
-      #|  forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. f x * c) --> Hx(&0)) net
-      #|  n:num
-      #|  forall net f n. (f --> Hx(&0)) net /\\ ~(n = 0)\n             ==> ((\\x:A. (f x) pow n) --> Hx(&0)) net
-      #|  forall net:(A)net f g.\n     eventually (\\n. norm (f n) <= norm (g n)) net /\\ (g --> Hx(&0)) net\n     ==> (f --> Hx(&0)) net
-      #|  forall f s. (forall n. n IN s ==> f n = Hx(&0)) ==> (f sums Hx(&0)) s
-      #|  B:real
-      #|  forall f g. (f --> Hx(&0)) net /\\ eventually (\\a:A. norm(g a) <= B) net\n         ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net
-      #|  B:real
-      #|  forall net:(A)net f g.\n     eventually (\\a. norm(f a) <= B) net /\\ (g --> Hx(&0)) net\n     ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, net) && !(l == Hx(real_of_num(0))) \226\134\146 op_minus_minus_gt((x : A) => inv(f(x)), inv(l), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 n : Num, op_minus_minus_gt(f, l, net) \226\134\146 op_minus_minus_gt((x : A) => pow(f(x), n), pow(l, n), net)
+      #|  \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, (net : Net[A])) \226\134\146 op_minus_minus_gt((x : A) => c * f(x), c * l, net)
+      #|  \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, (net : Net[A])) \226\134\146 op_minus_minus_gt((x : A) => f(x) * c, l * c, net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((x : A) => -f(x), Hx(real_of_num(0)), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((x : A) => f(x) + g(x), Hx(real_of_num(0)), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((x : A) => f(x) - g(x), Hx(real_of_num(0)), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((x : A) => f(x) * g(x), Hx(real_of_num(0)), net)
+      #|  Hx(real_of_num(0)) == (c : Cart[Real, Tybit0[Tybit0[Unit]]]) * Hx(real_of_num(0))
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((x : A) => c * f(x), Hx(real_of_num(0)), net)
+      #|  Hx(real_of_num(0)) == Hx(real_of_num(0)) * (c : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((x : A) => f(x) * c, Hx(real_of_num(0)), net)
+      #|  (n : Num)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 n : Num, op_minus_minus_gt(f, Hx(real_of_num(0)), net) && !(n == 0) \226\134\146 op_minus_minus_gt((x : A) => pow(f(x), n), Hx(real_of_num(0)), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], eventually((n : A) => norm(f(n)) <= norm(g(n)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt(f, Hx(real_of_num(0)), net)
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Num) -> Bool, (\226\136\128 n : Num, IN(n, s) \226\134\146 f(n) == Hx(real_of_num(0))) \226\134\146 sums(f, Hx(real_of_num(0)), s)
+      #|  (B : Real)
+      #|  \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), (net : Net[A])) && eventually((a : A) => norm(g(a)) <= (B : Real), net) \226\134\146 op_minus_minus_gt((z : A) => f(z) * g(z), Hx(real_of_num(0)), net)
+      #|  (B : Real)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], eventually((a : A) => norm(f(a)) <= (B : Real), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) \226\134\146 op_minus_minus_gt((z : A) => f(z) * g(z), Hx(real_of_num(0)), net)
       #|  1
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Re(f x) <= b) net\n     ==> Re(l) <= b
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Re(f(x)) <= b, net) \226\134\146 Re(l) <= b
       #|  2
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im1(f x) <= b) net\n     ==> Im1(l) <= b
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Im1(f(x)) <= b, net) \226\134\146 Im1(l) <= b
       #|  3
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im2(f x) <= b) net\n     ==> Im2(l) <= b
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Im2(f(x)) <= b, net) \226\134\146 Im2(l) <= b
       #|  4
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im3(f x) <= b) net\n     ==> Im3(l) <= b
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Im3(f(x)) <= b, net) \226\134\146 Im3(l) <= b
       #|  1
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Re(f x)) net\n     ==> b <= Re(l)
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Re(f(x)), net) \226\134\146 b <= Re(l)
       #|  2
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im1(f x)) net\n     ==> b <= Im1(l)
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Im1(f(x)), net) \226\134\146 b <= Im1(l)
       #|  3
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im2(f x)) net\n     ==> b <= Im2(l)
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Im2(f(x)), net) \226\134\146 b <= Im2(l)
       #|  4
-      #|  b:real
-      #|  l:quat
-      #|  f:A->quat
-      #|  net:(A)net
-      #|  forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im3(f x)) net\n     ==> b <= Im3(l)
-      #|  forall f l c s. (f sums l) s ==> ((\\x. c * f x) sums c * l) s
-      #|  ((\\x. (\\y. y * c) (f x)) sums (\\y. y * c) l) s
-      #|  forall f l c s. (f sums l) s ==> ((\\x. f x * c) sums l * c) s
-      #|  forall f c s. summable s f ==> summable s (\\x. c * f x)
-      #|  forall f c s. summable s f ==> summable s (\\x. f x * c)
-      #|  forall net:(A)net f g.\n     f continuous net /\\ g continuous net\n     ==> (\\x. f(x) * g(x)) continuous net
-      #|  forall net:(A)net f.\n     f continuous net /\\ ~(f(netlimit net) = Hx(&0))\n     ==> (\\x. inv(f x)) continuous net
-      #|  forall net:(A)net f n. f continuous net ==> (\\x. f(x) pow n) continuous net
-      #|  forall f s a. f continuous (at a within s) /\\ ~(f a = Hx(&0))\n           ==> (\\x:real^N. inv(f x)) continuous (at a within s)
-      #|  forall f a. f continuous (at a) /\\ ~(f a = Hx(&0))\n         ==> (\\x:real^N. inv(f x)) continuous (at a)
-      #|  forall f g s. f continuous_on s /\\ g continuous_on s\n           ==> (\\x:real^N. f(x) * g(x)) continuous_on s
-      #|  forall f:real^N->quat s. f continuous_on s ==> (\\x. c * f(x)) continuous_on s
-      #|  forall f:real^N->quat s. f continuous_on s ==> (\\x. f(x) * c) continuous_on s
-      #|  forall f:real^N->quat.\n     f continuous_on s /\\\n     (forall x. x IN s ==> ~(f x = Hx(&0)))\n     ==> (\\x. inv(f x)) continuous_on s
-      #|  forall f n s. f continuous_on s ==> (\\x:real^N. f(x) pow n) continuous_on s
-      #|  norm(a - b:real^N) < d ==> abs(norm a - norm b) < d
+      #|  (b : Real)
+      #|  (l : Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])
+      #|  (net : Net[A])
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Im3(f(x)), net) \226\134\146 b <= Im3(l)
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Num) -> Bool, sums(f, l, s) \226\134\146 sums((x : Num) => c * f(x), c * l, s)
+      #|  sums((x : Num) => ((y : Cart[Real, Tybit0[Tybit0[Unit]]]) => y * (c : Cart[Real, Tybit0[Tybit0[Unit]]]))((f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]])(x)), ((y : Cart[Real, Tybit0[Tybit0[Unit]]]) => y * c)((l : Cart[Real, Tybit0[Tybit0[Unit]]])), (s : (Num) -> Bool))
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 l : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Num) -> Bool, sums(f, l, s) \226\134\146 sums((x : Num) => f(x) * c, l * c, s)
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Num) -> Bool, summable(s, f) \226\134\146 summable(s, (x : Num) => c * f(x))
+      #|  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 c : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Num) -> Bool, summable(s, f) \226\134\146 summable(s, (x : Num) => f(x) * c)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], continuous(f, net) && continuous(g, net) \226\134\146 continuous((x : A) => f(x) * g(x), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], continuous(f, net) && !(f(netlimit(net)) == Hx(real_of_num(0))) \226\134\146 continuous((x : A) => inv(f(x)), net)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 n : Num, continuous(f, net) \226\134\146 continuous((x : A) => pow(f(x), n), net)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], continuous(f, within(at(a), s)) && !(f(a) == Hx(real_of_num(0))) \226\134\146 continuous((x : Cart[Real, N]) => inv(f(x)), within(at(a), s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 a : Cart[Real, N], continuous(f, at(a)) && !(f(a) == Hx(real_of_num(0))) \226\134\146 continuous((x : Cart[Real, N]) => inv(f(x)), at(a))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) && continuous_on(g, s) \226\134\146 continuous_on((x : Cart[Real, N]) => f(x) * g(x), s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) \226\134\146 continuous_on((x : Cart[Real, N]) => (c : Cart[Real, Tybit0[Tybit0[Unit]]]) * f(x), s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) \226\134\146 continuous_on((x : Cart[Real, N]) => f(x) * (c : Cart[Real, Tybit0[Tybit0[Unit]]]), s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], continuous_on(f, (s : (Cart[Real, N]) -> Bool)) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 !(f(x) == Hx(real_of_num(0)))) \226\134\146 continuous_on((x : Cart[Real, N]) => inv(f(x)), s)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 n : Num, \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) \226\134\146 continuous_on((x : Cart[Real, N]) => pow(f(x), n), s)
+      #|  norm((a : Cart[Real, N]) - (b : Cart[Real, N])) < (d : Real) \226\134\146 abs(norm(a) - norm(b)) < d
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  forall z:real^N. (\\z. Hx(norm z)) continuous at z
-      #|  forall z:real^N s. (\\z. Hx(norm z)) continuous (at z within s)
-      #|  forall s. (\\z:real^N. Hx(norm z)) continuous_on s
-      #|  forall c z:real^N. (\\z. Hx(c dot z)) continuous at z
-      #|  forall c z:real^N s. (\\z. Hx(c dot z)) continuous (at z within s)
-      #|  forall s c:real^N. (\\z. Hx(c dot z)) continuous_on s
-      #|  forall net f. f continuous net ==> (\\x:A. Hx(drop(f x))) continuous net
-      #|  forall f s. f continuous_on s ==> (\\x:real^N. Hx(drop(f x))) continuous_on s
-      #|  forall f. (\\x:A. Hx(f x)) continuous net <=> (\\x. lift(f x)) continuous net
-      #|  forall f s. (\\x:real^N. Hx(f x)) continuous_on s <=>\n         (\\x. lift(f x)) continuous_on s
-      #|  linear(Hx o  Re) /\\\n   linear(Hx o Im1) /\\\n   linear(Hx o Im2) /\\\n   linear(Hx o Im3)
-      #|  (forall q. (Hx o  Re) continuous at q) /\\\n   (forall q. (Hx o Im1) continuous at q) /\\\n   (forall q. (Hx o Im2) continuous at q) /\\\n   (forall q. (Hx o Im3) continuous at q)
-      #|  (forall s. (Hx o  Re) continuous_on s) /\\\n   (forall s. (Hx o Im1) continuous_on s) /\\\n   (forall s. (Hx o Im2) continuous_on s) /\\\n   (forall s. (Hx o Im3) continuous_on s)
+      #|  \226\136\128 z : Cart[Real, N], continuous((z : Cart[Real, N]) => Hx(norm(z)), at(z))
+      #|  \226\136\128 z : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous((z : Cart[Real, N]) => Hx(norm(z)), within(at(z), s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on((z : Cart[Real, N]) => Hx(norm(z)), s)
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 z : Cart[Real, N], continuous((z : Cart[Real, N]) => Hx(dot(c, z)), at(z))
+      #|  \226\136\128 c : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous((z : Cart[Real, N]) => Hx(dot(c, z)), within(at(z), s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : Cart[Real, N], continuous_on((z : Cart[Real, N]) => Hx(dot(c, z)), s)
+      #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Unit], continuous(f, net) \226\134\146 continuous((x : A) => Hx(drop(f(x))), net)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on(f, s) \226\134\146 continuous_on((x : Cart[Real, N]) => Hx(drop(f(x))), s)
+      #|  \226\136\128 f : (A) -> Real, continuous((x : A) => Hx(f(x)), (net : Net[A])) == continuous((x : A) => lift(f(x)), net)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, continuous_on((x : Cart[Real, N]) => Hx(f(x)), s) == continuous_on((x : Cart[Real, N]) => lift(f(x)), s)
+      #|  linear(o(Hx, Re)) && linear(o(Hx, Im1)) && linear(o(Hx, Im2)) && linear(o(Hx, Im3))
+      #|  (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Re), at(q))) && (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im1), at(q))) && (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im2), at(q))) && (\226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im3), at(q)))
+      #|  (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Re), s)) && (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im1), s)) && (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im2), s)) && (\226\136\128 s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im3), s))
       #|QUAT_SQNORM_MUL =  |- (#forall:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\q:cart(real,tybit0(tybit0(1))). ((#=:fun(real,fun(real,bool)) ((#real_pow:fun(real,fun(num,real)) (#vector_norm:fun(cart(real,tybit0(tybit0(1))),real) q:cart(real,tybit0(tybit0(1))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#quat_Re:fun(cart(real,tybit0(tybit0(1))),real) ((#quat_mul:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1))))) (#quat_cnj:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) q:cart(real,tybit0(tybit0(1))))) q:cart(real,tybit0(tybit0(1))))))))
       #|QUAT_INV_POW =  |- (#forall:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),bool)) (#quat_inv:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) x:cart(real,tybit0(tybit0(1)))) n:num))) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) (#quat_inv:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) x:cart(real,tybit0(tybit0(1))))) n:num))))))
       #|QUAT_NORM_IMG =  |- (#forall:fun(fun(cart(real,tybit0(tybit0(1))),bool),bool) (\x:cart(real,tybit0(tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#quat_Re:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(cart(real,tybit0(tybit0(1))),fun(cart(real,tybit0(tybit0(1))),bool)) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) x:cart(real,tybit0(tybit0(1)))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#vector_neg:fun(cart(real,tybit0(tybit0(1))),cart(real,tybit0(tybit0(1)))) ((#quat_pow:fun(cart(real,tybit0(tybit0(1))),fun(num,cart(real,tybit0(tybit0(1))))) (#Hx:fun(real,cart(real,tybit0(tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(tybit0(1))),real) x:cart(real,tybit0(tybit0(1)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))

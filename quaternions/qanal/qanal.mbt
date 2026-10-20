@@ -11,7 +11,7 @@ fn step_1() -> Unit raise {
 fn step_2() -> Unit raise {
   let t1 = @tactics.conv_tac(@equal.binop_conv(@calc_rat.real_poly_conv))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_sqnorm(), @quaternion.quat_cnj(), @quaternion.quat_mul(), @quaternion.quat_components()])), @tactics.gen_tac), t1), @tactics.refl_tac)
-  quat_sqnorm_mul_c.set(@tactics.prove(@parser.parse_term("forall q. norm q pow 2 = Re(cnj q * q)"), t2))
+  quat_sqnorm_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], pow(norm(q), 2) == Re(cnj(q) * q)"), t2))
 }
 
 ///|
@@ -35,7 +35,7 @@ fn step_3() -> Unit raise {
   }, @list.List([@quaternion.quat_pow()])), t6)
   let t8 = @list.List([@simp.rewrite_tac(@list.List([@quaternion.quat_pow(), @quaternion.quat_inv_1()])), t7])
   let t9 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @quaternions_misc.induct_tac), t8)
-  quat_inv_pow_c.set(@tactics.prove(@parser.parse_term("forall x n. inv (x pow n) = inv x pow n"), t9))
+  quat_inv_pow_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, inv(pow(x, n)) == pow(inv(x), n)"), t9))
 }
 
 ///|
@@ -54,7 +54,7 @@ fn step_4() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([@quaternion.quat_mul(), @quaternion.quat_components(), @quaternion.hx_components(), @quaternion.quat_neg_components(), @quaternion.quat_cnj_components(), @qcalc.cnj_quat()]))
   let t10 = @simp.rewrite_tac(@list.List([@quaternion.quat_pow_2(), @quaternion.forall_quat(), @quaternion.quat_eq()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_norm_pow_2()])), t10), t11), t12)
-  quat_norm_img_c.set(@tactics.prove(@parser.parse_term("forall x. Re x = &0 ==> x pow 2 = --(Hx(norm x) pow 2)"), t13))
+  quat_norm_img_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], Re(x) == real_of_num(0) → pow(x, 2) == -pow(Hx(norm(x)), 2)"), t13))
 }
 
 ///|
@@ -79,7 +79,7 @@ fn step_5() -> Unit raise {
     })(((x17 : @kernel.Thm) => @bool.conj(@quaternion.bilinear_quat_mul(), x17))(x18))
   })
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t19), t20)
-  uniform_lim_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net P f g l m b1 b2.\n     eventually (\\x. forall n. P n ==> norm(l n) <= b1) net /\\\n     eventually (\\x. forall n. P n ==> norm(m n) <= b2) net /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n. P n ==> norm(g n x - m n) < e) net)\n     ==> forall e. &0 < e\n             ==> eventually\n                  (\\x. forall n. P n ==> norm(f n x * g n x - l n * m n) < e)\n                  net"), t21))
+  uniform_lim_quat_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ P : (B) -> Bool, ∀ f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ m : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b1 : Real, ∀ b2 : Real, eventually((x : A) => ∀ n : B, P(n) → norm(l(n)) <= b1, net) && eventually((x : A) => ∀ n : B, P(n) → norm(m(n)) <= b2, net) && (∀ e : Real, real_of_num(0) < e → eventually((x : A) => ∀ n : B, P(n) → norm(f(n, x) - l(n)) < e, net)) && (∀ e : Real, real_of_num(0) < e → eventually((x : A) => ∀ n : B, P(n) → norm(g(n, x) - m(n)) < e, net)) → (∀ e : Real, real_of_num(0) < e → eventually((x : A) => ∀ n : B, P(n) → norm(f(n, x) * g(n, x) - l(n) * m(n)) < e, net))"), t21))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn uniform_lim_quat_mul() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t84 = @simp.asm_simp_tac(@list.List([@misc.real_half(), @real.real_pow_lt(), @real.real_lt_mul()]))
   let t85 = @tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t84)
-  let t83 = @meson.asm_meson_tac(@list.List([@vectors.norm_arith(@parser.parse_term("b <= norm l /\\ norm(f - l) < b / &2 ==> b / &2 <= norm f"))]))
+  let t83 = @meson.asm_meson_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("(b : Real) <= norm((l : Cart[Real, Tybit0[Tybit0[Unit]]])) && norm((f : Cart[Real, Tybit0[Tybit0[Unit]]]) - l) < b / real_of_num(2) → b / real_of_num(2) <= norm(f)"))]))
   let t82 = @simp.rewrite_tac(@list.List([]))
   let t81 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@metric.eventually_mono()))
   let t80 = @tactics.first_x_assum(fn(x73 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -111,7 +111,7 @@ fn step_6() -> Unit raise {
     @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(th_1), t75), t79)
   })
   let t72 = @simp.asm_rewrite_tac(@list.List([@misc.real_half()]))
-  let t69 = @parser.parse_term("b / &2")
+  let t69 = @term_syntax.parse_term("(b : Real) / real_of_num(2)")
   let t86 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(fn(x71 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x66 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s67 = @tactics.mp_tac(x66)
@@ -122,28 +122,28 @@ fn step_6() -> Unit raise {
   }), t72), t80), t81), t82), t83), t85])
   let t87 = @tactics.thenl(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@metric.eventually_and()])), @tactics.conj_tac), t86)
   let t65 = @tactics.match_mp_tac(@real.real_le_mul2())
-  let t64 = @simp.asm_simp_tac(@list.List([@real.real_le_lmul_eq(), @calc_rat.real_arith(@parser.parse_term("b pow 2 / &2 = b / &2 * b"))]))
-  let t63 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a * e) * b = e * a * b:real"))]))
+  let t64 = @simp.asm_simp_tac(@list.List([@real.real_le_lmul_eq(), @calc_rat.real_arith(@term_syntax.parse_term("pow((b : Real), 2) / real_of_num(2) == b / real_of_num(2) * b"))]))
+  let t63 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(a : Real) * (e : Real) * (b : Real) == e * (a * b)"))]))
   let t60 = @drule.match_mp(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@realarith.real_lte_trans()))
   let t62 = @tactics.first_x_assum(fn(x61 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t60(x61))
   })
   let t59 = @simp.once_rewrite_tac(@list.List([@vectors.norm_sub()]))
   let t58 = @simp.asm_simp_tac(@list.List([@quaternion.quat_norm_nz(), @quaternion.quat_norm_zero(), @realax.real_mul_assoc(), @real.real_mul_rinv(), @realax.real_mul_lid()]))
-  let t57 = @tactics.exists_tac(@parser.parse_term("norm ((f:B->A->quat) n x)"))
+  let t57 = @tactics.exists_tac(@term_syntax.parse_term("norm((f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]])((n : B), (x : A)))"))
   let t56 = @tactics.match_mp_tac(@real.real_lt_lcancel_imp())
   let t55 = @simp.asm_simp_tac(@list.List([@quaternion.quat_norm_nz(), @quaternion.quat_norm_zero(), @equal.gsym(@realax.real_mul_assoc()), @realax.real_mul_linv(), @realarith.real_mul_rid()]))
-  let t54 = @tactics.exists_tac(@parser.parse_term("norm ((l:B->quat) n)"))
+  let t54 = @tactics.exists_tac(@term_syntax.parse_term("norm((l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]])((n : B)))"))
   let t53 = @tactics.match_mp_tac(@real.real_lt_rcancel_imp())
   let t52 = @simp.rewrite_tac(@list.List([@quaternion.quat_norm_mul(), @quaternion.quat_norm_inv()]))
   let t50 = @simp.asm_simp_tac(@list.List([@quaternion.quat_sub_rdistrib(), @equal.gsym(@quaternion.quat_mul_assoc()), @quaternion.quat_mul_linv(), @quaternion.quat_mul_rid(), @quaternion.quat_mul_lid()]))
-  let t49 = @tactics.exists_tac(@parser.parse_term("q:quat"))
+  let t49 = @tactics.exists_tac(@term_syntax.parse_term("(q : Cart[Real, Tybit0[Tybit0[Unit]]])"))
   let t48 = @tactics.match_mp_tac(@quaternion.quat_mul_rcancel())
   let t47 = @simp.asm_simp_tac(@list.List([@quaternion.quat_sub_ldistrib(), @quaternion.quat_mul_assoc(), @quaternion.quat_mul_rinv(), @quaternion.quat_mul_lid()]))
-  let t46 = @tactics.exists_tac(@parser.parse_term("p:quat"))
+  let t46 = @tactics.exists_tac(@term_syntax.parse_term("(p : Cart[Real, Tybit0[Tybit0[Unit]]])"))
   let t45 = @tactics.match_mp_tac(@quaternion.quat_mul_lcancel())
   let t51 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t45), t46), t47), t48), t49), t50), @tactics.all_tac])
-  let t44 = @tactics.subgoal_then(@parser.parse_term("forall p q. ~(p = Hx(&0)) /\\ ~(q = Hx(&0))\n      ==> inv p - inv q = inv p * (q - p) * inv q"), fn(x42 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t44 = @tactics.subgoal_then(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], !(p == Hx(real_of_num(0))) && !(q == Hx(real_of_num(0))) → inv(p) - inv(q) == inv(p) * ((q - p) * inv(q))"), fn(x42 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x42
     @simp.asm_simp_tac(@list.List([th]))
   })
@@ -154,10 +154,10 @@ fn step_6() -> Unit raise {
       s38(x39)
     }
   })), t40), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
-  let t36 = @tactics.subgoal_then(@parser.parse_term("~((f:B->A->quat) n x = Hx(&0)) /\\ ~(l n = Hx(&0))"), @tactics.strip_assume_tac)
+  let t36 = @tactics.subgoal_then(@term_syntax.parse_term("!((f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]])((n : B), (x : A)) == Hx(real_of_num(0))) && !((l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]])(n) == Hx(real_of_num(0)))"), @tactics.strip_assume_tac)
   let t35 = @tactics.repeat_tac(@tactics.disch_tac)
   let t33 = @simp.asm_rewrite_tac(@list.List([]))
-  let t30 = @parser.parse_term("n:B")
+  let t30 = @term_syntax.parse_term("(n : B)")
   let t34 = @tactics.repeat_tac(@tactics.then_tac(@tactics.first_x_assum(fn(x32 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x27 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s28 = @tactics.mp_tac(x27)
@@ -166,14 +166,14 @@ fn step_6() -> Unit raise {
       }
     })(((x31 : @kernel.Thm) => @bool.spec(t30, x31))(x32))
   }), t33))
-  let t26 = @tactics.x_gen_tac(@parser.parse_term("n:B"))
-  let t88 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:A")), @tactics.strip_tac), t26), @tactics.disch_tac), t34), t35), t36), t41), t44), t51), t52), t53), t54), t55), t56), t57), t58), t59), t62), t63), t64), t65), @calc_rat.asm_real_arith_tac), t87])
+  let t26 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : B)"))
+  let t88 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(x : A)")), @tactics.strip_tac), t26), @tactics.disch_tac), t34), t35), t36), t41), t44), t51), t52), t53), t54), t55), t56), t57), t58), t59), t62), t63), t64), t65), @calc_rat.asm_real_arith_tac), t87])
   let t25 = @simp.rewrite_tac(@list.List([@theorems.forall_and_thm()]))
-  let t24 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(p ==> q /\\ r) <=> (p ==> q) /\\ (p ==> r)"))]))
-  let t23 = @tactics.exists_tac(@parser.parse_term("\\x. forall n. P n ==> b <= norm(l n) /\\\n                    b / &2 <= norm((f:B->A->quat) n x) /\\\n                    norm(f n x - l n) < e * b pow 2 / &2"))
+  let t24 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool) && (r : Bool)) == ((p → q) && (p → r))"))]))
+  let t23 = @tactics.exists_tac(@term_syntax.parse_term("(x : A) => ∀ n : B, (P : (B) -> Bool)(n) → (b : Real) <= norm((l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]])(n)) && b / real_of_num(2) <= norm((f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]])(n, x)) && norm(f(n, x) - l(n)) < (e : Real) * (pow(b, 2) / real_of_num(2))"))
   let t22 = @tactics.match_mp_tac(@metric.eventually_mono())
   let t89 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t22), t23), t24), t25), @tactics.conj_tac), t88)
-  uniform_lim_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net P f l b.\n     (forall e. &0 < e\n          ==> eventually (\\x. forall n:B. P n ==> norm(f n x - l n) < e) net) /\\\n     &0 < b /\\ eventually (\\x. forall n. P n ==> b <= norm(l n)) net\n     ==> forall e. &0 < e\n             ==> eventually\n                 (\\x. forall n. P n ==> norm(inv(f n x) - inv(l n)) < e) net"), t89))
+  uniform_lim_quat_inv_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ P : (B) -> Bool, ∀ f : (B, A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : (B) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, (∀ e : Real, real_of_num(0) < e → eventually((x : A) => ∀ n : B, P(n) → norm(f(n, x) - l(n)) < e, net)) && real_of_num(0) < b && eventually((x : A) => ∀ n : B, P(n) → b <= norm(l(n)), net) → (∀ e : Real, real_of_num(0) < e → eventually((x : A) => ∀ n : B, P(n) → norm(inv(f(n, x)) - inv(l(n))) < e, net))"), t89))
 }
 
 ///|
@@ -189,7 +189,7 @@ pub fn uniform_lim_quat_inv() -> @kernel.Thm {
 /// LIM_QUAT_MUL
 fn step_7() -> Unit raise {
   let t90 = @simp.simp_tac(@list.List([@topology.lim_bilinear(), @quaternion.bilinear_quat_mul()]))
-  lim_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g l m.\n     (f --> l) net /\\ (g --> m) net ==> ((\\x. f x * g x) --> l * m) net"), t90))
+  lim_quat_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ m : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, net) && op_minus_minus_gt(g, m, net) → op_minus_minus_gt((x : A) => f(x) * g(x), l * m, net)"), t90))
 }
 
 ///|
@@ -207,13 +207,13 @@ fn step_8() -> Unit raise {
   let t97 = @equal.gsym(@topology.tendsto())
   let t98 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@vectors.dist()), t97, @quaternion.quat_norm_nz()]))
   let t96 = @simp.asm_rewrite_tac(@list.List([@realax.real_le_refl(), @metric.eventually_true()]))
-  let t91 = @parser.parse_term("norm(l:quat)")
+  let t91 = @term_syntax.parse_term("norm((l : Cart[Real, Tybit0[Tybit0[Unit]]]))")
   let t92 = @parser.parse_term("\\n:one. (l:quat)")
   let t93 = @parser.parse_term("\\n:one. (f:A->quat)")
   let t94 = @parser.parse_term("\\x:one. T")
-  let t95 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t94, t93, t92, t91]), uniform_lim_quat_inv()))
+  let t95 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t94, t93, t92, t91]), uniform_lim_quat_inv()))
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t95), t96), t98)
-  lim_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l.\n     (f --> l) net /\\ ~(l = Hx(&0))\n     ==> ((\\x. inv(f x)) --> inv(l)) net"), t99))
+  lim_quat_inv_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, net) && !(l == Hx(real_of_num(0))) → op_minus_minus_gt((x : A) => inv(f(x)), inv(l), net)"), t99))
 }
 
 ///|
@@ -231,7 +231,7 @@ fn step_9() -> Unit raise {
   let t101 = @simp.asm_simp_tac(@list.List([lim_quat_mul(), @quaternion.quat_pow(), @topology.lim_const()]))
   let t100 = @tactics.repeat_tac(@tactics.gen_tac)
   let t102 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()])), t100), @tactics.disch_tac), @quaternions_misc.induct_tac), t101)
-  lim_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l n.\n     (f --> l) net ==> ((\\x. f(x) pow n) --> l pow n) net"), t102))
+  lim_quat_pow_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, op_minus_minus_gt(f, l, net) → op_minus_minus_gt((x : A) => pow(f(x), n), pow(l, n), net)"), t102))
 }
 
 ///|
@@ -247,7 +247,7 @@ pub fn lim_quat_pow() -> @kernel.Thm {
 /// LIM_QUAT_LMUL
 fn step_10() -> Unit raise {
   let t103 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
-  lim_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f l c. (f --> l) net ==> ((\\x:A. c * f x) --> c * l) net"), t103))
+  lim_quat_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, (net : Net[A])) → op_minus_minus_gt((x : A) => c * f(x), c * l, net)"), t103))
 }
 
 ///|
@@ -263,7 +263,7 @@ pub fn lim_quat_lmul() -> @kernel.Thm {
 /// LIM_QUAT_RMUL
 fn step_11() -> Unit raise {
   let t104 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
-  lim_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f l c. (f --> l) net ==> ((\\x:A. f x * c) --> l * c) net"), t104))
+  lim_quat_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, l, (net : Net[A])) → op_minus_minus_gt((x : A) => f(x) * c, l * c, net)"), t104))
 }
 
 ///|
@@ -289,7 +289,7 @@ fn step_12() -> Unit raise {
     })(t108(x109))
   })
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t110), t111)
-  lim_null_quat_neg_c.set(@tactics.prove(@parser.parse_term("forall net f. (f --> Hx(&0)) net ==> ((\\x:A. --(f x)) --> Hx(&0)) net"), t112))
+  lim_null_quat_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) → op_minus_minus_gt((x : A) => -f(x), Hx(real_of_num(0)), net)"), t112))
 }
 
 ///|
@@ -315,7 +315,7 @@ fn step_13() -> Unit raise {
     })(t116(x117))
   })
   let t120 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t118), t119)
-  lim_null_quat_add_c.set(@tactics.prove(@parser.parse_term("forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x + g x) --> Hx(&0)) net"), t120))
+  lim_null_quat_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) → op_minus_minus_gt((x : A) => f(x) + g(x), Hx(real_of_num(0)), net)"), t120))
 }
 
 ///|
@@ -341,7 +341,7 @@ fn step_14() -> Unit raise {
     })(t124(x125))
   })
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t126), t127)
-  lim_null_quat_sub_c.set(@tactics.prove(@parser.parse_term("forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x - g x) --> Hx(&0)) net"), t128))
+  lim_null_quat_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) → op_minus_minus_gt((x : A) => f(x) - g(x), Hx(real_of_num(0)), net)"), t128))
 }
 
 ///|
@@ -367,7 +367,7 @@ fn step_15() -> Unit raise {
     })(t132(x133))
   })
   let t136 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t134), t135)
-  lim_null_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net f g. (f --> Hx(&0)) net /\\ (g --> Hx(&0)) net\n             ==> ((\\x:A. f x * g x) --> Hx(&0)) net"), t136))
+  lim_null_quat_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) → op_minus_minus_gt((x : A) => f(x) * g(x), Hx(real_of_num(0)), net)"), t136))
 }
 
 ///|
@@ -383,9 +383,9 @@ pub fn lim_null_quat_mul() -> @kernel.Thm {
 /// LIM_NULL_QUAT_LMUL
 fn step_16() -> Unit raise {
   let t138 = @simp.asm_simp_tac(@list.List([lim_quat_lmul()]))
-  let t137 = @tactics.subst1_tac(@qnormalizer.quat_poly(@parser.parse_term("Hx(&0) = c * Hx(&0)")))
+  let t137 = @tactics.subst1_tac(@qnormalizer.quat_poly(@term_syntax.parse_term("Hx(real_of_num(0)) == (c : Cart[Real, Tybit0[Tybit0[Unit]]]) * Hx(real_of_num(0))")))
   let t139 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t137), t138)
-  lim_null_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. c * f x) --> Hx(&0)) net"), t139))
+  lim_null_quat_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) → op_minus_minus_gt((x : A) => c * f(x), Hx(real_of_num(0)), net)"), t139))
 }
 
 ///|
@@ -401,9 +401,9 @@ pub fn lim_null_quat_lmul() -> @kernel.Thm {
 /// LIM_NULL_QUAT_RMUL
 fn step_17() -> Unit raise {
   let t141 = @simp.asm_simp_tac(@list.List([lim_quat_rmul()]))
-  let t140 = @tactics.subst1_tac(@qnormalizer.quat_poly(@parser.parse_term("Hx(&0) = Hx(&0) * c")))
+  let t140 = @tactics.subst1_tac(@qnormalizer.quat_poly(@term_syntax.parse_term("Hx(real_of_num(0)) == Hx(real_of_num(0)) * (c : Cart[Real, Tybit0[Tybit0[Unit]]])")))
   let t142 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t140), t141)
-  lim_null_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall net f c. (f --> Hx(&0)) net ==> ((\\x:A. f x * c) --> Hx(&0)) net"), t142))
+  lim_null_quat_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), net) → op_minus_minus_gt((x : A) => f(x) * c, Hx(real_of_num(0)), net)"), t142))
 }
 
 ///|
@@ -420,7 +420,7 @@ pub fn lim_null_quat_rmul() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t152 = @simp.asm_rewrite_tac(@list.List([@quaternion.quat_pow_zero()]))
   let t149 = @drule.match_mp(lim_quat_pow())
-  let t146 = @parser.parse_term("n:num")
+  let t146 = @term_syntax.parse_term("(n : Num)")
   let t151 = @tactics.first_x_assum(fn(x150 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x148 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x143 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -432,7 +432,7 @@ fn step_18() -> Unit raise {
     })(t149(x150))
   })
   let t153 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t151), t152)
-  lim_null_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall net f n. (f --> Hx(&0)) net /\\ ~(n = 0)\n             ==> ((\\x:A. (f x) pow n) --> Hx(&0)) net"), t153))
+  lim_null_quat_pow_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, op_minus_minus_gt(f, Hx(real_of_num(0)), net) && !(n == 0) → op_minus_minus_gt((x : A) => pow(f(x), n), Hx(real_of_num(0)), net)"), t153))
 }
 
 ///|
@@ -448,7 +448,7 @@ pub fn lim_null_quat_pow() -> @kernel.Thm {
 /// LIM_NULL_QUAT_BOUND
 fn step_19() -> Unit raise {
   let t154 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0()), @topology.lim_transform_bound()]))
-  lim_null_quat_bound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n     eventually (\\n. norm (f n) <= norm (g n)) net /\\ (g --> Hx(&0)) net\n     ==> (f --> Hx(&0)) net"), t154))
+  lim_null_quat_bound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], eventually((n : A) => norm(f(n)) <= norm(g(n)), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) → op_minus_minus_gt(f, Hx(real_of_num(0)), net)"), t154))
 }
 
 ///|
@@ -464,7 +464,7 @@ pub fn lim_null_quat_bound() -> @kernel.Thm {
 /// SUMS_QUAT_0
 fn step_20() -> Unit raise {
   let t155 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0()), @topology.sums_0()]))
-  sums_quat_0_c.set(@tactics.prove(@parser.parse_term("forall f s. (forall n. n IN s ==> f n = Hx(&0)) ==> (f sums Hx(&0)) s"), t155))
+  sums_quat_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Num) -> Bool, (∀ n : Num, IN(n, s) → f(n) == Hx(real_of_num(0))) → sums(f, Hx(real_of_num(0)), s)"), t155))
 }
 
 ///|
@@ -482,13 +482,13 @@ fn step_21() -> Unit raise {
   let t163 = @meson.asm_meson_tac(@list.List([]))
   let t162 = @tactics.match_mp_tac(@metric.eventually_mono())
   let t161 = @simp.asm_rewrite_tac(@list.List([@trivia.o_def(), @vectors.norm_lift(), @vectors.real_abs_norm()]))
-  let t160 = @tactics.exists_tac(@parser.parse_term("B:real"))
+  let t160 = @tactics.exists_tac(@term_syntax.parse_term("(B : Real)"))
   let t159 = @tactics.match_mp_tac(@topology.lim_null_vmul_bounded())
   let t158 = @tactics.repeat_tac(@tactics.strip_tac)
   let t157 = @simp.rewrite_tac(@list.List([@quaternion.quat_norm_mul(), @vectors.lift_cmul()]))
   let t156 = @simp.once_rewrite_tac(@list.List([@topology.lim_null_norm()]))
   let t164 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0())])), t156), t157), t158), t159), t160), t161), t162), t163)
-  lim_null_quat_rmul_bounded_c.set(@tactics.prove(@parser.parse_term("forall f g. (f --> Hx(&0)) net /\\ eventually (\\a:A. norm(g a) <= B) net\n         ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net"), t164))
+  lim_null_quat_rmul_bounded_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], op_minus_minus_gt(f, Hx(real_of_num(0)), (net : Net[A])) && eventually((a : A) => norm(g(a)) <= (B : Real), net) → op_minus_minus_gt((z : A) => f(z) * g(z), Hx(real_of_num(0)), net)"), t164))
 }
 
 ///|
@@ -506,7 +506,7 @@ fn step_22() -> Unit raise {
   let t174 = @meson.asm_meson_tac(@list.List([]))
   let t173 = @tactics.match_mp_tac(@metric.eventually_mono())
   let t172 = @simp.asm_rewrite_tac(@list.List([@trivia.o_def(), @vectors.norm_lift(), @vectors.real_abs_norm()]))
-  let t171 = @tactics.exists_tac(@parser.parse_term("B:real"))
+  let t171 = @tactics.exists_tac(@term_syntax.parse_term("(B : Real)"))
   let t170 = @tactics.match_mp_tac(@topology.lim_null_vmul_bounded())
   let t169 = @tactics.repeat_tac(@tactics.strip_tac)
   let t168 = @simp.rewrite_tac(@list.List([@vectors.lift_cmul()]))
@@ -514,7 +514,7 @@ fn step_22() -> Unit raise {
   let t166 = @simp.rewrite_tac(@list.List([@quaternion.quat_norm_mul()]))
   let t165 = @simp.once_rewrite_tac(@list.List([@topology.lim_null_norm()]))
   let t175 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_vec_0())])), t165), t166), t167), t168), t169), t170), t171), t172), t173), t174)
-  lim_null_quat_lmul_bounded_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n     eventually (\\a. norm(f a) <= B) net /\\ (g --> Hx(&0)) net\n     ==> ((\\z. f(z) * g(z)) --> Hx(&0)) net"), t175))
+  lim_null_quat_lmul_bounded_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], eventually((a : A) => norm(f(a)) <= (B : Real), net) && op_minus_minus_gt(g, Hx(real_of_num(0)), net) → op_minus_minus_gt((z : A) => f(z) * g(z), Hx(real_of_num(0)), net)"), t175))
 }
 
 ///|
@@ -530,14 +530,14 @@ pub fn lim_null_quat_lmul_bounded() -> @kernel.Thm {
 /// LIM_QUAT_RE_UBOUND
 fn step_23() -> Unit raise {
   let t182 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t177 = @parser.parse_term("1")
-  let t178 = @parser.parse_term("b:real")
-  let t179 = @parser.parse_term("l:quat")
-  let t180 = @parser.parse_term("f:A->quat")
-  let t181 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t180, t179, t178, t177]), @topology.lim_component_ubound()))
+  let t177 = @term_syntax.parse_term("1")
+  let t178 = @term_syntax.parse_term("(b : Real)")
+  let t179 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t180 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t181 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t180, t179, t178, t177]), @topology.lim_component_ubound()))
   let t176 = @tactics.repeat_tac(@tactics.strip_tac)
   let t183 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_re_def()])), t176), t181), t182)
-  lim_quat_re_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Re(f x) <= b) net\n     ==> Re(l) <= b"), t183))
+  lim_quat_re_ubound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Re(f(x)) <= b, net) → Re(l) <= b"), t183))
 }
 
 ///|
@@ -553,14 +553,14 @@ pub fn lim_quat_re_ubound() -> @kernel.Thm {
 /// LIM_IM1_UBOUND
 fn step_24() -> Unit raise {
   let t190 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t185 = @parser.parse_term("2")
-  let t186 = @parser.parse_term("b:real")
-  let t187 = @parser.parse_term("l:quat")
-  let t188 = @parser.parse_term("f:A->quat")
-  let t189 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t188, t187, t186, t185]), @topology.lim_component_ubound()))
+  let t185 = @term_syntax.parse_term("2")
+  let t186 = @term_syntax.parse_term("(b : Real)")
+  let t187 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t188 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t189 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t188, t187, t186, t185]), @topology.lim_component_ubound()))
   let t184 = @tactics.repeat_tac(@tactics.strip_tac)
   let t191 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im1_def()])), t184), t189), t190)
-  lim_im1_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im1(f x) <= b) net\n     ==> Im1(l) <= b"), t191))
+  lim_im1_ubound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Im1(f(x)) <= b, net) → Im1(l) <= b"), t191))
 }
 
 ///|
@@ -576,14 +576,14 @@ pub fn lim_im1_ubound() -> @kernel.Thm {
 /// LIM_IM2_UBOUND
 fn step_25() -> Unit raise {
   let t198 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t193 = @parser.parse_term("3")
-  let t194 = @parser.parse_term("b:real")
-  let t195 = @parser.parse_term("l:quat")
-  let t196 = @parser.parse_term("f:A->quat")
-  let t197 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t196, t195, t194, t193]), @topology.lim_component_ubound()))
+  let t193 = @term_syntax.parse_term("3")
+  let t194 = @term_syntax.parse_term("(b : Real)")
+  let t195 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t196 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t197 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t196, t195, t194, t193]), @topology.lim_component_ubound()))
   let t192 = @tactics.repeat_tac(@tactics.strip_tac)
   let t199 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im2_def()])), t192), t197), t198)
-  lim_im2_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im2(f x) <= b) net\n     ==> Im2(l) <= b"), t199))
+  lim_im2_ubound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Im2(f(x)) <= b, net) → Im2(l) <= b"), t199))
 }
 
 ///|
@@ -599,14 +599,14 @@ pub fn lim_im2_ubound() -> @kernel.Thm {
 /// LIM_IM3_UBOUND
 fn step_26() -> Unit raise {
   let t206 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t201 = @parser.parse_term("4")
-  let t202 = @parser.parse_term("b:real")
-  let t203 = @parser.parse_term("l:quat")
-  let t204 = @parser.parse_term("f:A->quat")
-  let t205 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t204, t203, t202, t201]), @topology.lim_component_ubound()))
+  let t201 = @term_syntax.parse_term("4")
+  let t202 = @term_syntax.parse_term("(b : Real)")
+  let t203 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t204 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t205 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t204, t203, t202, t201]), @topology.lim_component_ubound()))
   let t200 = @tactics.repeat_tac(@tactics.strip_tac)
   let t207 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im3_def()])), t200), t205), t206)
-  lim_im3_ubound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. Im3(f x) <= b) net\n     ==> Im3(l) <= b"), t207))
+  lim_im3_ubound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => Im3(f(x)) <= b, net) → Im3(l) <= b"), t207))
 }
 
 ///|
@@ -637,14 +637,14 @@ pub fn quat_lim_ubound_components() -> @kernel.Thm {
 /// LIM_QUAT_RE_LBOUND
 fn step_28() -> Unit raise {
   let t214 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t209 = @parser.parse_term("1")
-  let t210 = @parser.parse_term("b:real")
-  let t211 = @parser.parse_term("l:quat")
-  let t212 = @parser.parse_term("f:A->quat")
-  let t213 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t212, t211, t210, t209]), @topology.lim_component_lbound()))
+  let t209 = @term_syntax.parse_term("1")
+  let t210 = @term_syntax.parse_term("(b : Real)")
+  let t211 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t212 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t213 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t212, t211, t210, t209]), @topology.lim_component_lbound()))
   let t208 = @tactics.repeat_tac(@tactics.strip_tac)
   let t215 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_re_def()])), t208), t213), t214)
-  lim_quat_re_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Re(f x)) net\n     ==> b <= Re(l)"), t215))
+  lim_quat_re_lbound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Re(f(x)), net) → b <= Re(l)"), t215))
 }
 
 ///|
@@ -660,14 +660,14 @@ pub fn lim_quat_re_lbound() -> @kernel.Thm {
 /// LIM_IM1_LBOUND
 fn step_29() -> Unit raise {
   let t222 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t217 = @parser.parse_term("2")
-  let t218 = @parser.parse_term("b:real")
-  let t219 = @parser.parse_term("l:quat")
-  let t220 = @parser.parse_term("f:A->quat")
-  let t221 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t220, t219, t218, t217]), @topology.lim_component_lbound()))
+  let t217 = @term_syntax.parse_term("2")
+  let t218 = @term_syntax.parse_term("(b : Real)")
+  let t219 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t220 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t221 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t220, t219, t218, t217]), @topology.lim_component_lbound()))
   let t216 = @tactics.repeat_tac(@tactics.strip_tac)
   let t223 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im1_def()])), t216), t221), t222)
-  lim_im1_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im1(f x)) net\n     ==> b <= Im1(l)"), t223))
+  lim_im1_lbound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Im1(f(x)), net) → b <= Im1(l)"), t223))
 }
 
 ///|
@@ -683,14 +683,14 @@ pub fn lim_im1_lbound() -> @kernel.Thm {
 /// LIM_IM2_LBOUND
 fn step_30() -> Unit raise {
   let t230 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t225 = @parser.parse_term("3")
-  let t226 = @parser.parse_term("b:real")
-  let t227 = @parser.parse_term("l:quat")
-  let t228 = @parser.parse_term("f:A->quat")
-  let t229 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t228, t227, t226, t225]), @topology.lim_component_lbound()))
+  let t225 = @term_syntax.parse_term("3")
+  let t226 = @term_syntax.parse_term("(b : Real)")
+  let t227 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t228 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t229 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t228, t227, t226, t225]), @topology.lim_component_lbound()))
   let t224 = @tactics.repeat_tac(@tactics.strip_tac)
   let t231 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im2_def()])), t224), t229), t230)
-  lim_im2_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im2(f x)) net\n     ==> b <= Im2(l)"), t231))
+  lim_im2_lbound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Im2(f(x)), net) → b <= Im2(l)"), t231))
 }
 
 ///|
@@ -706,14 +706,14 @@ pub fn lim_im2_lbound() -> @kernel.Thm {
 /// LIM_IM3_LBOUND
 fn step_31() -> Unit raise {
   let t238 = @simp.asm_rewrite_tac(@list.List([@cart.dimindex_4(), @calc_num.arith()]))
-  let t233 = @parser.parse_term("4")
-  let t234 = @parser.parse_term("b:real")
-  let t235 = @parser.parse_term("l:quat")
-  let t236 = @parser.parse_term("f:A->quat")
-  let t237 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("net:(A)net"), t236, t235, t234, t233]), @topology.lim_component_lbound()))
+  let t233 = @term_syntax.parse_term("4")
+  let t234 = @term_syntax.parse_term("(b : Real)")
+  let t235 = @term_syntax.parse_term("(l : Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t236 = @term_syntax.parse_term("(f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
+  let t237 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(net : Net[A])"), t236, t235, t234, t233]), @topology.lim_component_lbound()))
   let t232 = @tactics.repeat_tac(@tactics.strip_tac)
   let t239 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_im3_def()])), t232), t237), t238)
-  lim_im3_lbound_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f l b.\n     ~(trivial_limit net) /\\ (f --> l) net /\\\n     eventually (\\x. b <= Im3(f x)) net\n     ==> b <= Im3(l)"), t239))
+  lim_im3_lbound_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ b : Real, !trivial_limit(net) && op_minus_minus_gt(f, l, net) && eventually((x : A) => b <= Im3(f(x)), net) → b <= Im3(l)"), t239))
 }
 
 ///|
@@ -753,7 +753,7 @@ fn step_33() -> Unit raise {
   let t241 = @simp.asm_rewrite_tac(@list.List([]))
   let t240 = @tactics.match_mp_tac(@topology.series_linear())
   let t247 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t240), t241), t245), t246)
-  series_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f l c s. (f sums l) s ==> ((\\x. c * f x) sums c * l) s"), t247))
+  series_quat_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Num) -> Bool, sums(f, l, s) → sums((x : Num) => c * f(x), c * l, s)"), t247))
 }
 
 ///|
@@ -777,13 +777,13 @@ fn step_34() -> Unit raise {
   }, @list.List([@equal.gsym(@class.eta_ax())]))
   let t253 = @simp.asm_rewrite_tac(@list.List([]))
   let t252 = @tactics.match_mp_tac(@topology.series_linear())
-  let t251 = @tactics.subgoal_then(@parser.parse_term("((\\x. (\\y. y * c) (f x)) sums (\\y. y * c) l) s"), fn(x248 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t251 = @tactics.subgoal_then(@term_syntax.parse_term("sums((x : Num) => ((y : Cart[Real, Tybit0[Tybit0[Unit]]]) => y * (c : Cart[Real, Tybit0[Tybit0[Unit]]]))((f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]])(x)), ((y : Cart[Real, Tybit0[Tybit0[Unit]]]) => y * c)((l : Cart[Real, Tybit0[Tybit0[Unit]]])), (s : (Num) -> Bool))"), fn(x248 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x248
     let t250 = @simp.rewrite_tac(@list.List([]))
     @tactics.then_tac(@tactics.mp_tac(th), t250)
   })
   let t259 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t251), t252), t253), t257), t258)
-  series_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f l c s. (f sums l) s ==> ((\\x. f x * c) sums l * c) s"), t259))
+  series_quat_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ l : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Num) -> Bool, sums(f, l, s) → sums((x : Num) => f(x) * c, l * c, s)"), t259))
 }
 
 ///|
@@ -800,7 +800,7 @@ pub fn series_quat_rmul() -> @kernel.Thm {
 fn step_35() -> Unit raise {
   let t260 = @meson.meson_tac(@list.List([series_quat_lmul()]))
   let t261 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.summable()])), t260)
-  summable_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f c s. summable s f ==> summable s (\\x. c * f x)"), t261))
+  summable_quat_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Num) -> Bool, summable(s, f) → summable(s, (x : Num) => c * f(x))"), t261))
 }
 
 ///|
@@ -817,7 +817,7 @@ pub fn summable_quat_lmul() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let t262 = @meson.meson_tac(@list.List([series_quat_rmul()]))
   let t263 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.summable()])), t262)
-  summable_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f c s. summable s f ==> summable s (\\x. f x * c)"), t263))
+  summable_quat_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ c : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Num) -> Bool, summable(s, f) → summable(s, (x : Num) => f(x) * c)"), t263))
 }
 
 ///|
@@ -833,7 +833,7 @@ pub fn summable_quat_rmul() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_MUL
 fn step_37() -> Unit raise {
   let t264 = @simp.simp_tac(@list.List([@topology.continuous(), lim_quat_mul()]))
-  continuous_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f g.\n     f continuous net /\\ g continuous net\n     ==> (\\x. f(x) * g(x)) continuous net"), t264))
+  continuous_quat_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], continuous(f, net) && continuous(g, net) → continuous((x : A) => f(x) * g(x), net)"), t264))
 }
 
 ///|
@@ -849,7 +849,7 @@ pub fn continuous_quat_mul() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_INV
 fn step_38() -> Unit raise {
   let t265 = @simp.simp_tac(@list.List([@topology.continuous(), lim_quat_inv()]))
-  continuous_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f.\n     f continuous net /\\ ~(f(netlimit net) = Hx(&0))\n     ==> (\\x. inv(f x)) continuous net"), t265))
+  continuous_quat_inv_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], continuous(f, net) && !(f(netlimit(net)) == Hx(real_of_num(0))) → continuous((x : A) => inv(f(x)), net)"), t265))
 }
 
 ///|
@@ -865,7 +865,7 @@ pub fn continuous_quat_inv() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_POW
 fn step_39() -> Unit raise {
   let t266 = @simp.simp_tac(@list.List([@topology.continuous(), lim_quat_pow()]))
-  continuous_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall net:(A)net f n. f continuous net ==> (\\x. f(x) pow n) continuous net"), t266))
+  continuous_quat_pow_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, continuous(f, net) → continuous((x : A) => pow(f(x), n), net)"), t266))
 }
 
 ///|
@@ -881,7 +881,7 @@ pub fn continuous_quat_pow() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_INV_WITHIN
 fn step_40() -> Unit raise {
   let t267 = @meson.meson_tac(@list.List([continuous_quat_inv(), @topology.continuous_trivial_limit(), @topology.netlimit_within()]))
-  continuous_quat_inv_within_c.set(@tactics.prove(@parser.parse_term("forall f s a. f continuous (at a within s) /\\ ~(f a = Hx(&0))\n           ==> (\\x:real^N. inv(f x)) continuous (at a within s)"), t267))
+  continuous_quat_inv_within_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Cart[Real, N]) -> Bool, ∀ a : Cart[Real, N], continuous(f, within(at(a), s)) && !(f(a) == Hx(real_of_num(0))) → continuous((x : Cart[Real, N]) => inv(f(x)), within(at(a), s))"), t267))
 }
 
 ///|
@@ -897,7 +897,7 @@ pub fn continuous_quat_inv_within() -> @kernel.Thm {
 /// CONTINUOUS_QUAT_INV_AT
 fn step_41() -> Unit raise {
   let t268 = @simp.simp_tac(@list.List([continuous_quat_inv(), @topology.netlimit_at()]))
-  continuous_quat_inv_at_c.set(@tactics.prove(@parser.parse_term("forall f a. f continuous (at a) /\\ ~(f a = Hx(&0))\n         ==> (\\x:real^N. inv(f x)) continuous (at a)"), t268))
+  continuous_quat_inv_at_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ a : Cart[Real, N], continuous(f, at(a)) && !(f(a) == Hx(real_of_num(0))) → continuous((x : Cart[Real, N]) => inv(f(x)), at(a))"), t268))
 }
 
 ///|
@@ -914,7 +914,7 @@ pub fn continuous_quat_inv_at() -> @kernel.Thm {
 fn step_42() -> Unit raise {
   let t269 = @simp.simp_tac(@list.List([continuous_quat_mul()]))
   let t270 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_on_eq_continuous_within()])), t269)
-  continuous_on_quat_mul_c.set(@tactics.prove(@parser.parse_term("forall f g s. f continuous_on s /\\ g continuous_on s\n           ==> (\\x:real^N. f(x) * g(x)) continuous_on s"), t270))
+  continuous_on_quat_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ g : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Cart[Real, N]) -> Bool, continuous_on(f, s) && continuous_on(g, s) → continuous_on((x : Cart[Real, N]) => f(x) * g(x), s)"), t270))
 }
 
 ///|
@@ -931,7 +931,7 @@ pub fn continuous_on_quat_mul() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   let t271 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
   let t272 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_on_v1()])), t271)
-  continuous_on_quat_lmul_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->quat s. f continuous_on s ==> (\\x. c * f(x)) continuous_on s"), t272))
+  continuous_on_quat_lmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Cart[Real, N]) -> Bool, continuous_on(f, s) → continuous_on((x : Cart[Real, N]) => (c : Cart[Real, Tybit0[Tybit0[Unit]]]) * f(x), s)"), t272))
 }
 
 ///|
@@ -948,7 +948,7 @@ pub fn continuous_on_quat_lmul() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t273 = @simp.simp_tac(@list.List([lim_quat_mul(), @topology.lim_const()]))
   let t274 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_on_v1()])), t273)
-  continuous_on_quat_rmul_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->quat s. f continuous_on s ==> (\\x. f(x) * c) continuous_on s"), t274))
+  continuous_on_quat_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : (Cart[Real, N]) -> Bool, continuous_on(f, s) → continuous_on((x : Cart[Real, N]) => f(x) * (c : Cart[Real, Tybit0[Tybit0[Unit]]]), s)"), t274))
 }
 
 ///|
@@ -964,7 +964,7 @@ pub fn continuous_on_quat_rmul() -> @kernel.Thm {
 /// CONTINUOUS_ON_QUAT_INV
 fn step_45() -> Unit raise {
   let t275 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_quat_inv_within()]))
-  continuous_on_quat_inv_c.set(@tactics.prove(@parser.parse_term("forall f:real^N->quat.\n     f continuous_on s /\\\n     (forall x. x IN s ==> ~(f x = Hx(&0)))\n     ==> (\\x. inv(f x)) continuous_on s"), t275))
+  continuous_on_quat_inv_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], continuous_on(f, (s : (Cart[Real, N]) -> Bool)) && (∀ x : Cart[Real, N], IN(x, s) → !(f(x) == Hx(real_of_num(0)))) → continuous_on((x : Cart[Real, N]) => inv(f(x)), s)"), t275))
 }
 
 ///|
@@ -980,7 +980,7 @@ pub fn continuous_on_quat_inv() -> @kernel.Thm {
 /// CONTINUOUS_ON_QUAT_POW
 fn step_46() -> Unit raise {
   let t276 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_quat_pow()]))
-  continuous_on_quat_pow_c.set(@tactics.prove(@parser.parse_term("forall f n s. f continuous_on s ==> (\\x:real^N. f(x) pow n) continuous_on s"), t276))
+  continuous_on_quat_pow_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, ∀ s : (Cart[Real, N]) -> Bool, continuous_on(f, s) → continuous_on((x : Cart[Real, N]) => pow(f(x), n), s)"), t276))
 }
 
 ///|
@@ -995,9 +995,9 @@ pub fn continuous_on_quat_pow() -> @kernel.Thm {
 ///|
 /// CONTINUOUS_AT_HX_NORM
 fn step_47() -> Unit raise {
-  let t277 = @meson.meson_tac(@list.List([@vectors.norm_arith(@parser.parse_term("norm(a - b:real^N) < d ==> abs(norm a - norm b) < d"))]))
+  let t277 = @meson.meson_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("norm((a : Cart[Real, N]) - (b : Cart[Real, N])) < (d : Real) → abs(norm(a) - norm(b)) < d"))]))
   let t278 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous_at_v1(), @vectors.dist(), @equal.gsym(@quaternion.hx_sub()), @quaternion.norm_hx()])), t277)
-  continuous_at_hx_norm_c.set(@tactics.prove(@parser.parse_term("forall z:real^N. (\\z. Hx(norm z)) continuous at z"), t278))
+  continuous_at_hx_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Cart[Real, N], continuous((z : Cart[Real, N]) => Hx(norm(z)), at(z))"), t278))
 }
 
 ///|
@@ -1013,7 +1013,7 @@ pub fn continuous_at_hx_norm() -> @kernel.Thm {
 /// CONTINUOUS_WITHIN_HX_NORM
 fn step_48() -> Unit raise {
   let t279 = @simp.simp_tac(@list.List([continuous_at_hx_norm(), @topology.continuous_at_within()]))
-  continuous_within_hx_norm_c.set(@tactics.prove(@parser.parse_term("forall z:real^N s. (\\z. Hx(norm z)) continuous (at z within s)"), t279))
+  continuous_within_hx_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Cart[Real, N], ∀ s : (Cart[Real, N]) -> Bool, continuous((z : Cart[Real, N]) => Hx(norm(z)), within(at(z), s))"), t279))
 }
 
 ///|
@@ -1029,7 +1029,7 @@ pub fn continuous_within_hx_norm() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_NORM
 fn step_49() -> Unit raise {
   let t280 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_within_hx_norm()]))
-  continuous_on_hx_norm_c.set(@tactics.prove(@parser.parse_term("forall s. (\\z:real^N. Hx(norm z)) continuous_on s"), t280))
+  continuous_on_hx_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Cart[Real, N]) -> Bool, continuous_on((z : Cart[Real, N]) => Hx(norm(z)), s)"), t280))
 }
 
 ///|
@@ -1047,7 +1047,7 @@ fn step_50() -> Unit raise {
   let t282 = @simp.rewrite_tac(@list.List([@vectors.linear(), @vectors.dot_radd(), @vectors.dot_rmul(), @quaternion.hx_add(), @quaternion.quat_cmul(), @quaternion.hx_mul()]))
   let t281 = @tactics.match_mp_tac(@topology.linear_continuous_at())
   let t283 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t281), t282)
-  continuous_at_hx_dot_c.set(@tactics.prove(@parser.parse_term("forall c z:real^N. (\\z. Hx(c dot z)) continuous at z"), t283))
+  continuous_at_hx_dot_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Cart[Real, N], ∀ z : Cart[Real, N], continuous((z : Cart[Real, N]) => Hx(dot(c, z)), at(z))"), t283))
 }
 
 ///|
@@ -1063,7 +1063,7 @@ pub fn continuous_at_hx_dot() -> @kernel.Thm {
 /// CONTINUOUS_WITHIN_HX_DOT
 fn step_51() -> Unit raise {
   let t284 = @simp.simp_tac(@list.List([continuous_at_hx_dot(), @topology.continuous_at_within()]))
-  continuous_within_hx_dot_c.set(@tactics.prove(@parser.parse_term("forall c z:real^N s. (\\z. Hx(c dot z)) continuous (at z within s)"), t284))
+  continuous_within_hx_dot_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Cart[Real, N], ∀ z : Cart[Real, N], ∀ s : (Cart[Real, N]) -> Bool, continuous((z : Cart[Real, N]) => Hx(dot(c, z)), within(at(z), s))"), t284))
 }
 
 ///|
@@ -1079,7 +1079,7 @@ pub fn continuous_within_hx_dot() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_DOT
 fn step_52() -> Unit raise {
   let t285 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_within_hx_dot()]))
-  continuous_on_hx_dot_c.set(@tactics.prove(@parser.parse_term("forall s c:real^N. (\\z. Hx(c dot z)) continuous_on s"), t285))
+  continuous_on_hx_dot_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Cart[Real, N]) -> Bool, ∀ c : Cart[Real, N], continuous_on((z : Cart[Real, N]) => Hx(dot(c, z)), s)"), t285))
 }
 
 ///|
@@ -1098,7 +1098,7 @@ fn step_53() -> Unit raise {
   let t286 = @equal.gsym(@vectors.drop_sub())
   let t287 = @simp.rewrite_tac(@list.List([@vectors.dist(), @equal.gsym(@quaternion.hx_sub()), @quaternion.norm_hx(), t286]))
   let t289 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous(), @topology.tendsto()])), t287), t288)
-  continuous_hx_drop_c.set(@tactics.prove(@parser.parse_term("forall net f. f continuous net ==> (\\x:A. Hx(drop(f x))) continuous net"), t289))
+  continuous_hx_drop_c.set(@tactics.prove(@term_syntax.parse_term("∀ net : Net[A], ∀ f : (A) -> Cart[Real, Unit], continuous(f, net) → continuous((x : A) => Hx(drop(f(x))), net)"), t289))
 }
 
 ///|
@@ -1114,7 +1114,7 @@ pub fn continuous_hx_drop() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_DROP
 fn step_54() -> Unit raise {
   let t290 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_hx_drop()]))
-  continuous_on_hx_drop_c.set(@tactics.prove(@parser.parse_term("forall f s. f continuous_on s ==> (\\x:real^N. Hx(drop(f x))) continuous_on s"), t290))
+  continuous_on_hx_drop_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Cart[Real, Unit], ∀ s : (Cart[Real, N]) -> Bool, continuous_on(f, s) → continuous_on((x : Cart[Real, N]) => Hx(drop(f(x))), s)"), t290))
 }
 
 ///|
@@ -1132,7 +1132,7 @@ fn step_55() -> Unit raise {
   let t292 = @simp.rewrite_tac(@list.List([@quaternion.norm_hx(), @vectors.norm_lift()]))
   let t291 = @equal.gsym(@vectors.lift_sub())
   let t293 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.continuous(), @topology.tendsto(), @vectors.dist(), @equal.gsym(@quaternion.hx_sub()), t291])), t292)
-  continuous_hx_lift_c.set(@tactics.prove(@parser.parse_term("forall f. (\\x:A. Hx(f x)) continuous net <=> (\\x. lift(f x)) continuous net"), t293))
+  continuous_hx_lift_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> Real, continuous((x : A) => Hx(f(x)), (net : Net[A])) == continuous((x : A) => lift(f(x)), net)"), t293))
 }
 
 ///|
@@ -1148,7 +1148,7 @@ pub fn continuous_hx_lift() -> @kernel.Thm {
 /// CONTINUOUS_ON_HX_LIFT
 fn step_56() -> Unit raise {
   let t294 = @simp.rewrite_tac(@list.List([@topology.continuous_on_eq_continuous_within(), continuous_hx_lift()]))
-  continuous_on_hx_lift_c.set(@tactics.prove(@parser.parse_term("forall f s. (\\x:real^N. Hx(f x)) continuous_on s <=>\n         (\\x. lift(f x)) continuous_on s"), t294))
+  continuous_on_hx_lift_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, N]) -> Real, ∀ s : (Cart[Real, N]) -> Bool, continuous_on((x : Cart[Real, N]) => Hx(f(x)), s) == continuous_on((x : Cart[Real, N]) => lift(f(x)), s)"), t294))
 }
 
 ///|
@@ -1164,7 +1164,7 @@ pub fn continuous_on_hx_lift() -> @kernel.Thm {
 /// LINEAR_QUAT_COMPONENTS
 fn step_57() -> Unit raise {
   let t295 = @simp.rewrite_tac(@list.List([@vectors.linear(), @trivia.o_thm(), @quaternion.quat_add_components(), @quaternion.quat_cmul_components(), @quaternion.hx_add(), @quaternion.hx_mul(), @quaternion.quat_cmul()]))
-  linear_quat_components_c.set(@tactics.prove(@parser.parse_term("linear(Hx o  Re) /\\\n   linear(Hx o Im1) /\\\n   linear(Hx o Im2) /\\\n   linear(Hx o Im3)"), t295))
+  linear_quat_components_c.set(@tactics.prove(@term_syntax.parse_term("linear(o(Hx, Re)) && linear(o(Hx, Im1)) && linear(o(Hx, Im2)) && linear(o(Hx, Im3))"), t295))
 }
 
 ///|
@@ -1182,7 +1182,7 @@ fn step_58() -> Unit raise {
   let t297 = @simp.rewrite_tac(@list.List([linear_quat_components()]))
   let t296 = @tactics.match_mp_tac(@topology.linear_continuous_at())
   let t298 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t296), t297)
-  continuous_at_quat_components_c.set(@tactics.prove(@parser.parse_term("(forall q. (Hx o  Re) continuous at q) /\\\n   (forall q. (Hx o Im1) continuous at q) /\\\n   (forall q. (Hx o Im2) continuous at q) /\\\n   (forall q. (Hx o Im3) continuous at q)"), t298))
+  continuous_at_quat_components_c.set(@tactics.prove(@term_syntax.parse_term("(∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Re), at(q))) && (∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im1), at(q))) && (∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im2), at(q))) && (∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], continuous(o(Hx, Im3), at(q)))"), t298))
 }
 
 ///|
@@ -1200,7 +1200,7 @@ fn step_59() -> Unit raise {
   let t300 = @simp.rewrite_tac(@list.List([linear_quat_components()]))
   let t299 = @tactics.match_mp_tac(@topology.linear_continuous_on())
   let t301 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t299), t300)
-  continuous_on_quat_components_c.set(@tactics.prove(@parser.parse_term("(forall s. (Hx o  Re) continuous_on s) /\\\n   (forall s. (Hx o Im1) continuous_on s) /\\\n   (forall s. (Hx o Im2) continuous_on s) /\\\n   (forall s. (Hx o Im3) continuous_on s)"), t301))
+  continuous_on_quat_components_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Re), s)) && (∀ s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im1), s)) && (∀ s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im2), s)) && (∀ s : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool, continuous_on(o(Hx, Im3), s))"), t301))
 }
 
 ///|
