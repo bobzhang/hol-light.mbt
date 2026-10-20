@@ -7,11 +7,11 @@ fn step_1() -> Unit raise {
     @list.List([@sets.empty_gspec(), @sets.finite_empty()]),
   )
   let t2 = @tactics.then_tac(
-    @tactics.exists_tac(@parser.parse_term("(\\x. &0):A->int")),
+    @tactics.exists_tac(@term_syntax.parse_term("(x : A) => int_of_num(0)")),
     t1,
   )
   let th = @tactics.prove(
-    @parser.parse_term("?f:A->int. FINITE {x | ~(f x = &0)}"),
+    @term_syntax.parse_term("∃ f : (A) -> Int, FINITE({(x : A) | !(f(x) == int_of_num(0))})"),
     t2,
   )
   frag_tybij_c.set(
@@ -54,7 +54,7 @@ pub fn frag_support() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   frag_0_c.set(
     @pair.new_definition(
-      @parser.parse_term("frag_0:A frag = mk_frag (\\x. &0)"),
+      @term_syntax.parse_term("(frag_0 : Frag[A]) == mk_frag((x : A) => int_of_num(0))"),
     ),
   )
 }
@@ -209,7 +209,7 @@ fn step_10() -> Unit raise {
     t4,
   )
   dest_frag_0_c.set(
-    @tactics.prove(@parser.parse_term("dest_frag(frag_0:A frag) = \\x. &0"), t5),
+    @tactics.prove(@term_syntax.parse_term("dest_frag(frag_0) == ((x : A) => int_of_num(0))"), t5),
   )
 }
 
@@ -232,7 +232,7 @@ fn step_11() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("~(if p then F else T) <=> p"),
+        @term_syntax.parse_term("!(if (p : Bool) { false } else { true }) == p"),
       ),
     ]),
   )
@@ -322,7 +322,7 @@ fn step_13() -> Unit raise {
     ]),
   )
   let t17 = @tactics.exists_tac(
-    @parser.parse_term("{a:A | ~(dest_frag x a = &0)}"),
+    @term_syntax.parse_term("{(a : A) | !(dest_frag((x : Frag[A]), a) == int_of_num(0))}"),
   )
   let t16 = @tactics.match_mp_tac(@sets.finite_subset())
   let t15 = @simp.rewrite_tac(
@@ -488,10 +488,10 @@ fn step_16() -> Unit raise {
   let t41 = @drule.match_mp(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("c = d ==> forall a:A. dest_frag c a = dest_frag d a"),
+      @term_syntax.parse_term("(c : Frag[A]) == (d : Frag[A]) → (∀ a : A, dest_frag(c, a) == dest_frag(d, a))"),
     ),
   )
-  let t38 = @parser.parse_term("a:A")
+  let t38 = @term_syntax.parse_term("(a : A)")
   let t45 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -592,7 +592,7 @@ fn step_16() -> Unit raise {
     t44,
   )
   frag_of_nonzero_c.set(
-    @tactics.prove(@parser.parse_term("forall a:A. ~(frag_of a = frag_0)"), t45),
+    @tactics.prove(@term_syntax.parse_term("∀ a : A, !(frag_of(a) == frag_0)"), t45),
   )
 }
 
@@ -728,7 +728,7 @@ fn step_18() -> Unit raise {
   )
   finite_frag_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:A frag. FINITE(frag_support (x:A frag))"),
+      @term_syntax.parse_term("∀ x : Frag[A], FINITE(frag_support(x))"),
       t63,
     ),
   )
@@ -752,7 +752,7 @@ fn step_19() -> Unit raise {
     @list.List([frag_support(), dest_frag_0(), @sets.empty_gspec()]),
   )
   frag_support_0_c.set(
-    @tactics.prove(@parser.parse_term("frag_support frag_0 = {}"), t64),
+    @tactics.prove(@term_syntax.parse_term("(frag_support : (Frag[_], _) -> Bool)((frag_0 : Frag[_])) == ({} : (_) -> Bool)"), t64),
   )
 }
 
@@ -773,7 +773,7 @@ fn step_20() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("~(if p then F else T) <=> p"),
+        @term_syntax.parse_term("!(if (p : Bool) { false } else { true }) == p"),
       ),
     ]),
   )
@@ -798,7 +798,7 @@ fn step_20() -> Unit raise {
   )
   frag_support_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a:A. frag_support(frag_of a) = {a}"),
+      @term_syntax.parse_term("∀ a : A, frag_support(frag_of(a)) == {a}"),
       t70,
     ),
   )
@@ -823,7 +823,7 @@ fn step_21() -> Unit raise {
   )
   frag_support_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:A frag. frag_support(frag_neg x) = frag_support x"),
+      @term_syntax.parse_term("∀ x : Frag[A], frag_support(frag_neg(x)) == frag_support(x)"),
       t71,
     ),
   )
@@ -977,7 +977,7 @@ fn step_25() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([frag_tybij()]),
-        @parser.parse_term("c = d <=> dest_frag c = dest_frag d"),
+        @term_syntax.parse_term("((c : Frag[_]) == (d : Frag[_])) == (dest_frag(c) == dest_frag(d))"),
       ),
     ]),
   )
@@ -990,7 +990,7 @@ fn step_25() -> Unit raise {
   )
   frag_support_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall c:A frag. frag_support c = {} <=> c = frag_0"),
+      @term_syntax.parse_term("∀ c : Frag[A], (frag_support(c) == {}) == (c == frag_0)"),
       t83,
     ),
   )
@@ -1013,12 +1013,12 @@ fn step_26() -> Unit raise {
   let t84 = @meson.meson_tac(
     @list.List([
       frag_support_of(),
-      @sets.set_rule(@parser.parse_term("{x} = {y} <=> x = y")),
+      @sets.set_rule(@term_syntax.parse_term("({(x : _)} == {(y : _)}) == (x == y)")),
     ]),
   )
   frag_of_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y:A. frag_of x = frag_of y <=> x = y"),
+      @term_syntax.parse_term("∀ x : A, ∀ y : A, (frag_of(x) == frag_of(y)) == (x == y)"),
       t84,
     ),
   )
@@ -1202,7 +1202,7 @@ fn step_28() -> Unit raise {
     ]),
   )
   neutral_frag_add_c.set(
-    @tactics.prove(@parser.parse_term("neutral frag_add :A frag = frag_0"), t98),
+    @tactics.prove(@term_syntax.parse_term("(neutral : ((Frag[A], Frag[A]) -> Frag[A]) -> Frag[A])((frag_add : (Frag[A], Frag[A]) -> Frag[A])) == (frag_0 : Frag[A])"), t98),
   )
 }
 
@@ -1226,7 +1226,7 @@ fn step_29() -> Unit raise {
     t99,
   )
   monoidal_frag_add_c.set(
-    @tactics.prove(@parser.parse_term("monoidal frag_add"), t100),
+    @tactics.prove(@term_syntax.parse_term("(monoidal : ((Frag[_], Frag[_]) -> Frag[_]) -> Bool)((frag_add : (Frag[_], Frag[_]) -> Frag[_]))"), t100),
   )
 }
 
@@ -1256,7 +1256,7 @@ fn step_30() -> Unit raise {
   let t113 = @simp.rewrite_tac(
     @list.List([
       neutral_frag_add(),
-      frag_module(@parser.parse_term("frag_cmul a frag_0 = frag_0")),
+      frag_module(@term_syntax.parse_term("(frag_cmul : (Int, Frag[_]) -> Frag[_])((a : Int), (frag_0 : Frag[_])) == (frag_0 : Frag[_])")),
     ]),
   )
   let t112 = @simp.simp_tac(
@@ -1265,23 +1265,23 @@ fn step_30() -> Unit raise {
     ]),
   )
   let t111 = @tactics.match_mp_tac(@sets.finite_induct_strong())
-  let t109 = @parser.parse_term("k:B->bool")
+  let t109 = @term_syntax.parse_term("(k : (B) -> Bool)")
   let t110 = @tactics.spec_tac(
-    @parser.parse_term("{x | x IN k /\\ ~((f:B->A frag) x = frag_0)}"),
+    @term_syntax.parse_term("{(x : B) | IN(x, (k : (B) -> Bool)) && !((f : (B) -> Frag[A])(x) == frag_0)}"),
     t109,
   )
   let t108 = @tactics.undisch_tac(
-    @parser.parse_term("FINITE {x | x IN k /\\ ~((f:B->A frag) x = frag_0)}"),
+    @term_syntax.parse_term("FINITE({(x : B) | IN(x, (k : (B) -> Bool)) && !((f : (B) -> Frag[A])(x) == frag_0)})"),
   )
   let t107 = @simp.asm_rewrite_tac(
-    @list.List([frag_module(@parser.parse_term("frag_cmul a frag_0 = frag_0"))]),
+    @list.List([frag_module(@term_syntax.parse_term("(frag_cmul : (Int, Frag[_]) -> Frag[_])((a : Int), (frag_0 : Frag[_])) == (frag_0 : Frag[_])"))]),
   )
   let t106 = @simp.asm_rewrite_tac(
     @list.List([
       @iterate.support(),
       neutral_frag_add(),
       frag_module(
-        @parser.parse_term("frag_cmul a c = frag_0 <=> a = &0 \\/ c = frag_0"),
+        @term_syntax.parse_term("(frag_cmul((a : Int), (c : Frag[_])) == frag_0) == (a == int_of_num(0) || c == frag_0)"),
       ),
     ]),
   )
@@ -1293,11 +1293,11 @@ fn step_30() -> Unit raise {
   let t104 = @simp.asm_simp_tac(
     @list.List([
       @int.int_mul_lzero(),
-      frag_module(@parser.parse_term("frag_cmul (&0) x = frag_0")),
+      frag_module(@term_syntax.parse_term("frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0")),
       t103,
     ]),
   )
-  let t101 = @class.asm_cases_tac(@parser.parse_term("a:int = &0"))
+  let t101 = @class.asm_cases_tac(@term_syntax.parse_term("(a : Int) == int_of_num(0)"))
   let t115 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1383,9 +1383,9 @@ fn step_31() -> Unit raise {
     ]),
   )
   let t126 = @tactics.match_mp_tac(@sets.finite_induct_strong())
-  let t124 = @parser.parse_term("k:B->bool")
+  let t124 = @term_syntax.parse_term("(k : (B) -> Bool)")
   let t125 = @tactics.spec_tac(
-    @parser.parse_term("support frag_add (f:B->A frag) k"),
+    @term_syntax.parse_term("support(frag_add, (f : (B) -> Frag[A]), (k : (B) -> Bool))"),
     t124,
   )
   let t144 = @list.List([
@@ -1751,7 +1751,7 @@ fn step_34() -> Unit raise {
   )
   frag_extend_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A->B frag. frag_extend f frag_0 = frag_0"),
+      @term_syntax.parse_term("∀ f : (A) -> Frag[B], frag_extend(f, frag_0) == frag_0"),
       t155,
     ),
   )
@@ -1791,7 +1791,7 @@ fn step_35() -> Unit raise {
   )
   frag_extend_of_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A->B frag a. frag_extend f (frag_of a) = f a"),
+      @term_syntax.parse_term("∀ f : (A) -> Frag[B], ∀ a : A, frag_extend(f, frag_of(a)) == f(a)"),
       t159,
     ),
   )
@@ -1814,7 +1814,7 @@ fn step_36() -> Unit raise {
       @int.int_entire(),
       frag_cmul_sum(),
       frag_module(
-        @parser.parse_term("frag_cmul (a * b) c = frag_cmul a (frag_cmul b c)"),
+        @term_syntax.parse_term("frag_cmul((a : Int) * (b : Int), (c : Frag[_])) == frag_cmul(a, frag_cmul(b, c))"),
       ),
     ]),
   )
@@ -1823,11 +1823,11 @@ fn step_36() -> Unit raise {
   )
   let t161 = @simp.asm_rewrite_tac(
     @list.List([
-      frag_module(@parser.parse_term("frag_cmul (&0) x = frag_0")),
+      frag_module(@term_syntax.parse_term("frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0")),
       frag_extend_0(),
     ]),
   )
-  let t160 = @class.asm_cases_tac(@parser.parse_term("c:int = &0"))
+  let t160 = @class.asm_cases_tac(@term_syntax.parse_term("(c : Int) == int_of_num(0)"))
   let t164 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1866,7 +1866,7 @@ fn step_37() -> Unit raise {
   let t166 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
-        frag_module(@parser.parse_term("frag_neg x = frag_cmul (-- &1) x")),
+        frag_module(@term_syntax.parse_term("frag_neg((x : Frag[_])) == frag_cmul(-int_of_num(1), x)")),
       ]),
     ),
     t165,
@@ -1988,9 +1988,9 @@ fn step_38() -> Unit raise {
     ]),
   )
   let t182 = @simp.rewrite_tac(@list.List([finite_frag_support()]))
-  let t180 = @tactics.exists_tac(@parser.parse_term("frag_support (y:A frag)"))
+  let t180 = @tactics.exists_tac(@term_syntax.parse_term("frag_support((y : Frag[A]))"))
   let t181 = @list.List([
-    @tactics.exists_tac(@parser.parse_term("frag_support (x:A frag)")),
+    @tactics.exists_tac(@term_syntax.parse_term("frag_support((x : Frag[A]))")),
     t180,
   ])
   let t179 = @tactics.match_mp_tac(@sets.finite_subset())
@@ -2220,7 +2220,7 @@ fn step_39() -> Unit raise {
     @simp.rewrite_tac(
       @list.List([
         frag_module(
-          @parser.parse_term("frag_sub x y = frag_add x (frag_cmul (-- &1) y)"),
+          @term_syntax.parse_term("frag_sub((x : Frag[_]), (y : Frag[_])) == frag_add(x, frag_cmul(-int_of_num(1), y))"),
         ),
       ]),
     ),
@@ -2585,11 +2585,11 @@ fn step_44() -> Unit raise {
     t242,
   )
   let t241 = @simp.asm_simp_tac(@list.List([@sets.in_insert()]))
-  let t240 = @class.asm_cases_tac(@parser.parse_term("b:A = a"))
-  let t238 = @parser.parse_term("k:A->bool")
+  let t240 = @class.asm_cases_tac(@term_syntax.parse_term("(b : A) == (a : A)"))
+  let t238 = @term_syntax.parse_term("(k : (A) -> Bool)")
   let t239 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t238]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t238]),
   )
   let t237 = @simp.simp_tac(
     @list.List([dest_frag_add(), dest_frag_cmul(), dest_frag_of()]),
@@ -2656,14 +2656,14 @@ fn step_44() -> Unit raise {
       @simp.simp_tac(@list.List([th, finite_frag_support()]))
     },
   )
-  let t231 = @tactics.x_gen_tac(@parser.parse_term("b:A"))
+  let t231 = @tactics.x_gen_tac(@term_syntax.parse_term("(b : A)"))
   let t230 = @simp.rewrite_tac(
     @list.List([@trivia.o_thm(), @class.fun_eq_thm(), @trivia.i_thm()]),
   )
   let t229 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([frag_tybij()]),
-      @parser.parse_term("dest_frag x = dest_frag y ==> x = y"),
+      @term_syntax.parse_term("dest_frag((x : Frag[_])) == dest_frag((y : Frag[_])) → x == y"),
     ),
   )
   let t245 = @tactics.thenl(
@@ -2687,7 +2687,7 @@ fn step_44() -> Unit raise {
   )
   frag_expansion_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:A frag. x = frag_extend frag_of x"),
+      @term_syntax.parse_term("∀ x : Frag[A], x == frag_extend(frag_of, x)"),
       t245,
     ),
   )
@@ -2708,14 +2708,14 @@ fn step_45() -> Unit raise {
   let t265 = @simp.asm_simp_tac(
     @list.List([@equal.gsym(@int.int_forall_pos())]),
   )
-  let t261 = @parser.parse_term("a:int")
-  let t262 = @tactics.spec_tac(@parser.parse_term("--a:int"), t261)
-  let t260 = @tactics.undisch_tac(@parser.parse_term("&0:int <= --a"))
+  let t261 = @term_syntax.parse_term("(a : Int)")
+  let t262 = @tactics.spec_tac(@term_syntax.parse_term("-(a : Int)"), t261)
+  let t260 = @tactics.undisch_tac(@term_syntax.parse_term("int_of_num(0) <= -(a : Int)"))
   let t259 = @simp.asm_simp_tac(
     @list.List([
       dest_frag_cmul(),
       dest_frag_0(),
-      frag_module(@parser.parse_term("frag_sub x y = frag_sub x z <=> y = z")),
+      frag_module(@term_syntax.parse_term("(frag_sub((x : Frag[_]), (y : Frag[_])) == frag_sub(x, (z : Frag[_]))) == (y == z)")),
     ]),
   )
   let t263 = @tactics.then_tac(
@@ -2736,23 +2736,23 @@ fn step_45() -> Unit raise {
     ),
     t262,
   )
-  let t257 = @parser.parse_term("a:int")
-  let t258 = @tactics.spec_tac(@parser.parse_term("a:int"), t257)
+  let t257 = @term_syntax.parse_term("(a : Int)")
+  let t258 = @tactics.spec_tac(@term_syntax.parse_term("(a : Int)"), t257)
   let t264 = @list.List([
     @tactics.then_tac(
-      @tactics.undisch_tac(@parser.parse_term("&0:int <= a")),
+      @tactics.undisch_tac(@term_syntax.parse_term("int_of_num(0) <= (a : Int)")),
       t258,
     ),
     t263,
   ])
   let t256 = @tactics.disj_cases_tac(
-    @int.int_arith(@parser.parse_term("&0:int <= a \\/ &0 <= --a")),
+    @int.int_arith(@term_syntax.parse_term("int_of_num(0) <= (a : Int) || int_of_num(0) <= -a")),
   )
-  let t255 = @tactics.x_gen_tac(@parser.parse_term("a:int"))
+  let t255 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : Int)"))
   let t253 = @simp.asm_simp_tac(
     @list.List([
       dest_frag_0(),
-      frag_module(@parser.parse_term("frag_cmul (&0) x = frag_0")),
+      frag_module(@term_syntax.parse_term("frag_cmul(int_of_num(0), (x : Frag[_])) == frag_0")),
     ]),
   )
   let t252 = frag_module(
@@ -2773,7 +2773,7 @@ fn step_45() -> Unit raise {
     @tactics.all_tac,
   ])
   let t251 = @tactics.subgoal_then(
-    @parser.parse_term("forall n. (P:(A frag)->bool) (frag_cmul (&n) c)"),
+    @term_syntax.parse_term("∀ n : Num, (P : (Frag[A]) -> Bool)(frag_cmul(int_of_num(n), (c : Frag[A])))"),
     fn(
       x248 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2890,7 +2890,7 @@ fn step_46() -> Unit raise {
   let t290 = @simp.once_rewrite_tac(
     @list.List([
       frag_module(
-        @parser.parse_term("frag_add x y = frag_sub x (frag_sub frag_0 y)"),
+        @term_syntax.parse_term("frag_add((x : Frag[_]), (y : Frag[_])) == frag_sub(x, frag_sub(frag_0, y))"),
       ),
     ]),
   )
@@ -2904,15 +2904,15 @@ fn step_46() -> Unit raise {
     ]),
   )
   let t286 = @tactics.match_mp_tac(@sets.finite_induct_strong())
-  let t284 = @parser.parse_term("k:A->bool")
+  let t284 = @term_syntax.parse_term("(k : (A) -> Bool)")
   let t285 = @tactics.spec_tac(
-    @parser.parse_term("frag_support(c:A frag)"),
+    @term_syntax.parse_term("frag_support((c : Frag[A]))"),
     t284,
   )
   let t283 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("c:A frag"), finite_frag_support()),
+    @bool.ispec(@term_syntax.parse_term("(c : Frag[A])"), finite_frag_support()),
   )
-  let t282 = @tactics.x_gen_tac(@parser.parse_term("c:A frag"))
+  let t282 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : Frag[A])"))
   let t281 = @simp.rewrite_tac(@list.List([frag_extend(), @trivia.o_thm()]))
   let t280 = @simp.gen_rewrite_tac(
     fn(
@@ -2947,7 +2947,7 @@ fn step_46() -> Unit raise {
   )
   let t268 = @simp.asm_rewrite_tac(@list.List([]))
   let t267 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("P:A frag->bool"), frag_closure_sub_cmul()),
+    @bool.ispec(@term_syntax.parse_term("(P : (Frag[A]) -> Bool)"), frag_closure_sub_cmul()),
   )
   let t295 = @tactics.then_tac(
     @tactics.then_tac(
@@ -3086,8 +3086,8 @@ fn step_48() -> Unit raise {
     @list.List([frag_extend_0(), frag_extend_sub(), frag_extend_of()]),
   )
   let t325 = @tactics.match_mp_tac(frag_induction())
-  let t323 = @parser.parse_term("c:A frag")
-  let t324 = @tactics.spec_tac(@parser.parse_term("c:A frag"), t323)
+  let t323 = @term_syntax.parse_term("(c : Frag[A])")
+  let t324 = @tactics.spec_tac(@term_syntax.parse_term("(c : Frag[A])"), t323)
   let t332 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
