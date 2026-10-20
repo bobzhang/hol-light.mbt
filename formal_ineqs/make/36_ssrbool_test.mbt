@@ -168,126 +168,126 @@ test "Formal_ineqs/lib/ssrbool matches Formal_ineqs/lib/ssrbool.ml" {
       #|Formal_ineqs/lib/ssrbool quotations (122):
       #|  :bool
       #|  :bool
-      #|  P <=> Q
-      #|  P ==> Q
-      #|  Q ==> P
-      #|  ~P ==> ~Q
-      #|  ~Q ==> ~P
-      #|  T
-      #|  ~F
-      #|  (b = F) ==> ~b
-      #|  ~b ==> b = F
-      #|  b ==> ~b = F
-      #|  ~b = F ==> b
-      #|  ~ ~b = b
-      #|  ~ ~ b ==> b
-      #|  ~b1 = ~b2 ==> b1 = b2
-      #|  b = ~c ==> ~b = c
-      #|  ~b = c ==> b = ~c
-      #|  (c ==> b) ==> ~b ==> ~c
-      #|  (c ==> ~b) ==> b ==> ~c
-      #|  (~c ==> b) ==> ~b ==> c
-      #|  (~c ==> ~b) ==> b ==> c
-      #|  (~b ==> F) ==> b
-      #|  (~b ==> b) ==> b
-      #|  (~c ==> b) ==> b = F ==> c
-      #|  (c ==> b) ==> b = F ==> ~c
-      #|  (c ==> ~b) ==> b ==> c = F
-      #|  (c ==> b) ==> ~b ==> c = F
-      #|  (c ==> b) ==> b = F ==> c = F
-      #|  isSome NONE = F /\\ (forall x. isSome (SOME x) = T)
+      #|  (P : Bool) == (Q : Bool)
+      #|  (P : Bool) \226\134\146 (Q : Bool)
+      #|  (Q : Bool) \226\134\146 (P : Bool)
+      #|  !(P : Bool) \226\134\146 !(Q : Bool)
+      #|  !(Q : Bool) \226\134\146 !(P : Bool)
+      #|  true
+      #|  !false
+      #|  (b : Bool) == false \226\134\146 !b
+      #|  !(b : Bool) \226\134\146 b == false
+      #|  (b : Bool) \226\134\146 !b == false
+      #|  !(b : Bool) == false \226\134\146 b
+      #|  !!(b : Bool) == b
+      #|  !!(b : Bool) \226\134\146 b
+      #|  !(b1 : Bool) == !(b2 : Bool) \226\134\146 b1 == b2
+      #|  (b : Bool) == !(c : Bool) \226\134\146 !b == c
+      #|  !(b : Bool) == (c : Bool) \226\134\146 b == !c
+      #|  ((c : Bool) \226\134\146 (b : Bool)) \226\134\146 !b \226\134\146 !c
+      #|  ((c : Bool) \226\134\146 !(b : Bool)) \226\134\146 b \226\134\146 !c
+      #|  (!(c : Bool) \226\134\146 (b : Bool)) \226\134\146 !b \226\134\146 c
+      #|  (!(c : Bool) \226\134\146 !(b : Bool)) \226\134\146 b \226\134\146 c
+      #|  (!(b : Bool) \226\134\146 false) \226\134\146 b
+      #|  (!(b : Bool) \226\134\146 b) \226\134\146 b
+      #|  (!(c : Bool) \226\134\146 (b : Bool)) \226\134\146 b == false \226\134\146 c
+      #|  ((c : Bool) \226\134\146 (b : Bool)) \226\134\146 b == false \226\134\146 !c
+      #|  ((c : Bool) \226\134\146 !(b : Bool)) \226\134\146 b \226\134\146 c == false
+      #|  ((c : Bool) \226\134\146 (b : Bool)) \226\134\146 !b \226\134\146 c == false
+      #|  ((c : Bool) \226\134\146 (b : Bool)) \226\134\146 b == false \226\134\146 c == false
+      #|  (isSome : (Option[_]) -> Bool)(NONE) == false && (\226\136\128 x : _, isSome(SOME(x)) == true)
       #|  :A
       #|  :A
       #|  :A -> B
       #|  :bool
-      #|  (if b then vT else vT) = vT
-      #|  (if ~b then vT else vF) = if b then vF else vT
-      #|  f (if b then vT else vF) = if b then f vT else f vF
-      #|  (if b then (fT:A->B) else fF) x = if b then fT x else fF x
-      #|  (T /\\ b) = b
-      #|  (F /\\ b) = F
-      #|  (b /\\ T) = b
-      #|  (b /\\ F) = F
-      #|  (b /\\ b) = b
-      #|  (b /\\ c) = (c /\\ b)
-      #|  b /\\ (c /\\ p) <=> (b /\\ c) /\\ p
-      #|  b /\\ (c /\\ p) <=> c /\\ (b /\\ p)
-      #|  (b /\\ c) /\\ p <=> (b /\\ p) /\\ c
-      #|  T \\/ b <=> T
-      #|  F \\/ b <=> b
-      #|  b \\/ T <=> T
-      #|  b \\/ F <=> b
-      #|  b \\/ b <=> b
-      #|  b \\/ c <=> c \\/ b
-      #|  b \\/ (c \\/ p) <=> (b \\/ c) \\/ p
-      #|  b \\/ (c \\/ p) <=> c \\/ (b \\/ p)
-      #|  (b \\/ c) \\/ p <=> (b \\/ p) \\/ c
-      #|  b /\\ ~b <=> F
-      #|  ~b /\\ b <=> F
-      #|  b \\/ ~b
-      #|  ~b \\/ b
-      #|  (b \\/ c) /\\ p <=> (b /\\ p) \\/ (c /\\ p)
-      #|  b /\\ (c \\/ p) <=> (b /\\ c) \\/ (b /\\ p)
-      #|  (b /\\ c) \\/ p <=> (b \\/ p) /\\ (c \\/ p)
-      #|  b \\/ (c /\\ p) <=> (b \\/ c) /\\ (b \\/ p)
-      #|  (b ==> a) ==> (a /\\ b <=> b)
-      #|  (a ==> b) ==> (a /\\ b <=> a)
-      #|  (a ==> (b <=> c)) ==> (a /\\ b <=> a /\\ c)
-      #|  (b ==> (a <=> c)) ==> (a /\\ b <=> c /\\ b)
-      #|  (a ==> b) ==> (a \\/ b <=> b)
-      #|  (b ==> a) ==> (a \\/ b <=> a)
-      #|  (~ a ==> (b <=> c)) ==> (a \\/ b <=> a \\/ c)
-      #|  (~ b ==> (a <=> c)) ==> (a \\/ b <=> c \\/ b)
-      #|  ~ (a /\\ b) <=> ~ a \\/ ~ b
-      #|  ~ (a \\/ b) <=> ~ a /\\ ~ b
-      #|  ((a /\\ b) \\/ a) = a
-      #|  a \\/ b /\\ a <=> a
-      #|  (a \\/ b) /\\ a <=> a
-      #|  a /\\ (b \\/ a) <=> a
-      #|  b ==> T
-      #|  (b ==> F) <=> ~ b
-      #|  F ==> b
-      #|  (T ==> b) <=> b
-      #|  b ==> b
-      #|  ~ (a ==> b) <=> a /\\ ~ b
-      #|  (a ==> b) <=> ~ a \\/ b
-      #|  (~ a ==> b) <=> a \\/ b
-      #|  (a ==> ~ b) <=> (b ==> ~ a)
-      #|  (~ a ==> ~ b) <=> b ==> a
-      #|  (~ a ==> b) ==> ((a ==> b) <=> b)
-      #|  (b ==> ~ a) ==> ((a ==> b) <=> ~ a)
-      #|  (a ==> (b <=> c)) ==> ((a ==> b) <=> (a ==> c))
-      #|  XOR p q = if p then ~q else q
+      #|  (if (b : Bool) { (vT : _) } else { vT }) == vT
+      #|  (if !(b : Bool) { (vT : _) } else { (vF : _) }) == (if b { vF } else { vT })
+      #|  (f : (_) -> _)(if (b : Bool) { (vT : _) } else { (vF : _) }) == (if b { f(vT) } else { f(vF) })
+      #|  COND((b : Bool), (fT : (A) -> B), (fF : (A) -> B), (x : A)) == (if b { fT(x) } else { fF(x) })
+      #|  (true && (b : Bool)) == b
+      #|  (false && (b : Bool)) == false
+      #|  ((b : Bool) && true) == b
+      #|  ((b : Bool) && false) == false
+      #|  ((b : Bool) && b) == b
+      #|  ((b : Bool) && (c : Bool)) == (c && b)
+      #|  ((b : Bool) && (c : Bool) && (p : Bool)) == ((b && c) && p)
+      #|  ((b : Bool) && (c : Bool) && (p : Bool)) == (c && b && p)
+      #|  (((b : Bool) && (c : Bool)) && (p : Bool)) == ((b && p) && c)
+      #|  (true || (b : Bool)) == true
+      #|  (false || (b : Bool)) == b
+      #|  ((b : Bool) || true) == true
+      #|  ((b : Bool) || false) == b
+      #|  ((b : Bool) || b) == b
+      #|  ((b : Bool) || (c : Bool)) == (c || b)
+      #|  ((b : Bool) || (c : Bool) || (p : Bool)) == ((b || c) || p)
+      #|  ((b : Bool) || (c : Bool) || (p : Bool)) == (c || b || p)
+      #|  (((b : Bool) || (c : Bool)) || (p : Bool)) == ((b || p) || c)
+      #|  ((b : Bool) && !b) == false
+      #|  (!(b : Bool) && b) == false
+      #|  (b : Bool) || !b
+      #|  !(b : Bool) || b
+      #|  (((b : Bool) || (c : Bool)) && (p : Bool)) == (b && p || c && p)
+      #|  ((b : Bool) && ((c : Bool) || (p : Bool))) == (b && c || b && p)
+      #|  ((b : Bool) && (c : Bool) || (p : Bool)) == ((b || p) && (c || p))
+      #|  ((b : Bool) || (c : Bool) && (p : Bool)) == ((b || c) && (b || p))
+      #|  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 (a && b) == b
+      #|  ((a : Bool) \226\134\146 (b : Bool)) \226\134\146 (a && b) == a
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a && b) == (a && c)
+      #|  ((b : Bool) \226\134\146 (a : Bool) == (c : Bool)) \226\134\146 (a && b) == (c && b)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) \226\134\146 (a || b) == b
+      #|  ((b : Bool) \226\134\146 (a : Bool)) \226\134\146 (a || b) == a
+      #|  (!(a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a || b) == (a || c)
+      #|  (!(b : Bool) \226\134\146 (a : Bool) == (c : Bool)) \226\134\146 (a || b) == (c || b)
+      #|  !((a : Bool) && (b : Bool)) == (!a || !b)
+      #|  !((a : Bool) || (b : Bool)) == (!a && !b)
+      #|  ((a : Bool) && (b : Bool) || a) == a
+      #|  ((a : Bool) || (b : Bool) && a) == a
+      #|  (((a : Bool) || (b : Bool)) && a) == a
+      #|  ((a : Bool) && ((b : Bool) || a)) == a
+      #|  (b : Bool) \226\134\146 true
+      #|  ((b : Bool) \226\134\146 false) == !b
+      #|  false \226\134\146 (b : Bool)
+      #|  (true \226\134\146 (b : Bool)) == b
+      #|  (b : Bool) \226\134\146 b
+      #|  !((a : Bool) \226\134\146 (b : Bool)) == (a && !b)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) == (a || b)
+      #|  ((a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 !a)
+      #|  (!(a : Bool) \226\134\146 !(b : Bool)) == (b \226\134\146 a)
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) \226\134\146 (a \226\134\146 b) == b
+      #|  ((b : Bool) \226\134\146 !(a : Bool)) \226\134\146 (a \226\134\146 b) == !a
+      #|  ((a : Bool) \226\134\146 (b : Bool) == (c : Bool)) \226\134\146 (a \226\134\146 b) == (a \226\134\146 c)
+      #|  (XOR : (Bool, Bool) -> Bool)((p : Bool), (q : Bool)) == (if p { !q } else { q })
       #|  XOR
-      #|  F + b <=> b
-      #|  b + F <=> b
-      #|  b + b <=> F
-      #|  b + c <=> c + b
-      #|  a + (b + c) <=> (a + b) + c
-      #|  (a + b) + c <=> (a + c) + b
-      #|  a + (b + c) <=> b + (a + c)
-      #|  (a + b) /\\ c <=> (a /\\ c) + (b /\\ c)
-      #|  a /\\ (b + c) <=> (a /\\ b) + (a /\\ c)
-      #|  x + (x + y) <=> y
-      #|  (y + x) + x <=> y
-      #|  (y1 + x <=> y2 + x) ==> (y1 = y2)
-      #|  (x + y1 <=> x + y2) ==> (y1 = y2)
-      #|  T + b <=> ~b
-      #|  b + T <=> ~ b
-      #|  a + ~ b <=> ~ (a + b)
-      #|  ~ a + b <=> ~ (a + b)
-      #|  subpred p1 p2 <=> (forall x. p1 x ==> p2 x)
-      #|  subrel r1 r2 <=> (forall x y. r1 x y ==> r2 x y)
-      #|  pred0 = (\\x. F)
-      #|  predT = (\\x. T)
-      #|  predI p1 p2 = (\\x. p1 x /\\ p2 x)
-      #|  predU p1 p2 = (\\x. p1 x \\/ p2 x)
-      #|  predC p = (\\x. ~p x)
-      #|  predD p1 p2 = (\\x. ~p2 x /\\ p1 x)
-      #|  preim f (d:A->bool) = (\\x. d (f x))
-      #|  relU r1 r2 = (\\x y. r1 x y \\/ r2 x y)
-      #|  subrel r1 (relU r1 r2)
-      #|  subrel r2 (relU r1 r2)
+      #|  false + (b : Bool) == b
+      #|  (b : Bool) + false == b
+      #|  (b : Bool) + b == false
+      #|  (b : Bool) + (c : Bool) == c + b
+      #|  (a : Bool) + ((b : Bool) + (c : Bool)) == a + b + c
+      #|  (a : Bool) + (b : Bool) + (c : Bool) == a + c + b
+      #|  (a : Bool) + ((b : Bool) + (c : Bool)) == b + (a + c)
+      #|  ((a : Bool) + (b : Bool) && (c : Bool)) == (a && c) + (b && c)
+      #|  ((a : Bool) && (b : Bool) + (c : Bool)) == (a && b) + (a && c)
+      #|  (x : Bool) + (x + (y : Bool)) == y
+      #|  (y : Bool) + (x : Bool) + x == y
+      #|  (y1 : Bool) + (x : Bool) == (y2 : Bool) + x \226\134\146 y1 == y2
+      #|  (x : Bool) + (y1 : Bool) == x + (y2 : Bool) \226\134\146 y1 == y2
+      #|  true + (b : Bool) == !b
+      #|  (b : Bool) + true == !b
+      #|  (a : Bool) + !(b : Bool) == !(a + b)
+      #|  !(a : Bool) + (b : Bool) == !(a + b)
+      #|  (subpred : ((_) -> Bool, (_) -> Bool) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == (\226\136\128 x : _, p1(x) \226\134\146 p2(x))
+      #|  (subrel : ((_, _) -> Bool, (_, _) -> Bool) -> Bool)((r1 : (_, _) -> Bool), (r2 : (_, _) -> Bool)) == (\226\136\128 x : _, \226\136\128 y : _, r1(x, y) \226\134\146 r2(x, y))
+      #|  (pred0 : (_) -> Bool) == ((x : _) => false)
+      #|  (predT : (_) -> Bool) == ((x : _) => true)
+      #|  (predI : ((_) -> Bool, (_) -> Bool, _) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == ((x : _) => p1(x) && p2(x))
+      #|  (predU : ((_) -> Bool, (_) -> Bool, _) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == ((x : _) => p1(x) || p2(x))
+      #|  (predC : ((_) -> Bool, _) -> Bool)((p : (_) -> Bool)) == ((x : _) => !p(x))
+      #|  (predD : ((_) -> Bool, (_) -> Bool, _) -> Bool)((p1 : (_) -> Bool), (p2 : (_) -> Bool)) == ((x : _) => !p2(x) && p1(x))
+      #|  (preim : ((_) -> A, (A) -> Bool, _) -> Bool)((f : (_) -> A), (d : (A) -> Bool)) == ((x : _) => d(f(x)))
+      #|  (relU : ((_, _) -> Bool, (_, _) -> Bool, _, _) -> Bool)((r1 : (_, _) -> Bool), (r2 : (_, _) -> Bool)) == ((x : _) => (y : _) => r1(x, y) || r2(x, y))
+      #|  subrel((r1 : (_, _) -> Bool), relU(r1, (r2 : (_, _) -> Bool)))
+      #|  subrel((r2 : (_, _) -> Bool), relU((r1 : (_, _) -> Bool), r2))
       #|Ssrbool.iffLR =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))
       #|Ssrbool.iffRL =  |- (#forall:fun(fun(bool,bool),bool) (\Q:bool. (#forall:fun(fun(bool,bool),bool) (\P:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#==>:fun(bool,fun(bool,bool)) Q:bool) P:bool))))))
       #|Ssrbool.iffLRn =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) P:bool)) (#~:fun(bool,bool) Q:bool)))))))
