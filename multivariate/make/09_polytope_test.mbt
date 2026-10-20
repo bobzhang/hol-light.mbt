@@ -61400,2982 +61400,2982 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|0..0..1..3..9..18..28..solved at 35
       #|0..0..1..3..solved at 8
       #|Multivariate/polytope quotations (2976):
-      #|  t face_of s <=>\n        t SUBSET s /\\ convex t /\\\n        forall a b x. a IN s /\\ b IN s /\\ x IN t /\\ x IN segment(a,b)\n                ==> a IN t /\\ b IN t
-      #|  forall a f s:real^N->bool.\n        (IMAGE (\\x. a + x) f) face_of (IMAGE (\\x. a + x) s) <=> f face_of s
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) face_of (IMAGE f s) <=> c face_of s)
-      #|  forall s. convex s ==> s face_of s
-      #|  forall s. s face_of s <=> convex s
-      #|  forall s. {} face_of s
-      #|  forall s. s face_of {} <=> s = {}
-      #|  forall s t u. s face_of t /\\ t face_of u\n           ==> s face_of u
-      #|  forall f s t.\n        t face_of s\n        ==> (f face_of t <=> f face_of s /\\ f SUBSET t)
-      #|  forall f s t. f face_of s /\\ f SUBSET t /\\ t SUBSET s ==> f face_of t
-      #|  forall f s t.\n        f face_of s /\\ convex t\n        ==> (f INTER t) face_of (s INTER t)
-      #|  forall s t1 t2. t1 face_of s /\\ t2 face_of s\n             ==> (t1 INTER t2) face_of s
-      #|  forall P s. ~(P = {}) /\\ (forall t. t IN P ==> t face_of s)\n         ==> (INTERS P) face_of s
-      #|  forall f t f' t'.\n     f face_of t /\\ f' face_of t' ==> (f INTER f') face_of (t INTER t')
-      #|  x:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  s DIFF t:real^N->bool
-      #|  u < &1
-      #|  x:real^N = &1 % a + u % b <=> a = x + --u %  b
-      #|  x < &1 ==> ~(&1 - x = &0)
-      #|  (%) (inv(&1 - u)) :real^N->real^N
-      #|  u:real
-      #|  (x:real^N) IN segment(a,b)
-      #|  ~((a:real^N) IN affine hull t)
-      #|  (a:real^N) IN (s DIFF t) /\\ b IN  (s DIFF t)
-      #|  a:real^N = b
-      #|  (a:real^N) IN affine hull t
-      #|  forall a b x:real^N. a IN s /\\ b IN s /\\ x IN t /\\ x IN segment(a,b) /\\\n                     (a IN affine hull t ==> b IN affine hull t)\n                     ==> a IN t /\\ b IN t
-      #|  x:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  &0 < e ==> abs(min (&1 / &2) e) <= e
-      #|  y - ((&1 - u) % y + u % x):real^N = u % (y - x)
-      #|  min (&1 / &2) (e / norm(x - y:real^N))
-      #|  y:real^N
-      #|  x:real^N
-      #|  x:real^N = y
-      #|  e:real
-      #|  y:real^N
-      #|  t:real^N->bool
-      #|  t:real^N -> bool = {}
-      #|  x:real^N
-      #|  (t:real^N->bool) SUBSET s
-      #|  forall s t:real^N->bool.\n        convex s\n        ==> (t face_of s <=>\n             t SUBSET s /\\\n             convex(s DIFF t) /\\\n             t = (affine hull t) INTER s)
-      #|  d = (&1 - u) * d + u * d
-      #|  x < a ==> x = a ==> F
-      #|  (c:real^N) dot x = d
-      #|  u:real
-      #|  a:real^N = b
-      #|  (x:real^N) IN segment(a,b)
-      #|  a <= x /\\ b <= x /\\ ~(a < x) /\\ ~(b < x) ==> a = x /\\ b = x
-      #|  x:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  d:real
-      #|  c:real^N
-      #|  s:real^N->bool
-      #|  forall s a:real^N b.\n        convex(s INTER {x | a dot x = b}) /\\ (forall x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) face_of s
-      #|  --b:real
-      #|  --a:real^N
-      #|  s:real^N->bool
-      #|  forall s a:real^N b.\n        convex(s INTER {x | a dot x = b}) /\\ (forall x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) face_of s
-      #|  forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) face_of s
-      #|  forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) face_of s
-      #|  forall s t. t face_of s ==> t SUBSET s
-      #|  forall s t. t face_of s ==> convex t
-      #|  forall s t. convex s /\\ closed s /\\ t face_of s ==> closed t
-      #|  forall s t. convex s /\\ compact s /\\ t face_of s ==> compact t
-      #|  c1 INTER c2:real^N->bool
-      #|  c2:real^N->bool
-      #|  c1:real^N->bool
-      #|  forall c1 c2 d1 d2:real^N->bool.\n        (c1 INTER c2) face_of c1 /\\ (c1 INTER c2) face_of c2 /\\\n        d1 face_of c1 /\\ d2 face_of c2\n        ==> (d1 INTER d2) face_of d1 /\\ (d1 INTER d2) face_of d2
-      #|  &0 < e ==> e / (&1 + e) - e * (&1 - e / (&1 + e)) = &0
-      #|  b:real^N = (&1 - u) % (b + e % (b - c)) + u % c <=>\n        (u - e * (&1 - u)) % (b - c) = vec 0
-      #|  &0 < n ==> (&1 + e / n) * n = n + e
-      #|  &0 < x ==> &0 < &1 + x
-      #|  (e / norm(b - c:real^N)) / (&1 + e / norm(b - c))
-      #|  b:real^N = b + e <=> e = vec 0
-      #|  ~(b:real^N = d)
-      #|  b:real^N
-      #|  (d:real^N) IN t /\\ c IN t
-      #|  b + u % (b - c):real^N = (&1 - --u) % b + --u % c
-      #|  dist(b:real^N,b + e) = norm e
+      #|  (face_of : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((t : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == (SUBSET(t, s) && convex(t) && (\226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 x : Cart[Real, _], IN(a, s) && IN(b, s) && IN(x, t) && IN(x, segment((a, b))) \226\134\146 IN(a, t) && IN(b, t)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, face_of(IMAGE((x : Cart[Real, N]) => a + x, f), IMAGE((x : Cart[Real, N]) => a + x, s)) == face_of(f, s)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 face_of(IMAGE(f, c), IMAGE(f, s)) == face_of(c, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, convex(s) \226\134\146 face_of(s, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, face_of(s, s) == convex(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, face_of({}, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, face_of(s, {}) == (s == {})
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 u : (Cart[Real, _]) -> Bool, face_of(s, t) && face_of(t, u) \226\134\146 face_of(s, u)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, face_of(t, s) \226\134\146 face_of(f, t) == (face_of(f, s) && SUBSET(f, t))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, face_of(f, s) && SUBSET(f, t) && SUBSET(t, s) \226\134\146 face_of(f, t)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, face_of(f, s) && convex(t) \226\134\146 face_of(INTER(f, t), INTER(s, t))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t1 : (Cart[Real, _]) -> Bool, \226\136\128 t2 : (Cart[Real, _]) -> Bool, face_of(t1, s) && face_of(t2, s) \226\134\146 face_of(INTER(t1, t2), s)
+      #|  \226\136\128 P : ((Cart[Real, _]) -> Bool) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, !(P == {}) && (\226\136\128 t : (Cart[Real, _]) -> Bool, IN(t, P) \226\134\146 face_of(t, s)) \226\134\146 face_of(INTERS(P), s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, \226\136\128 f' : (Cart[Real, _]) -> Bool, \226\136\128 t' : (Cart[Real, _]) -> Bool, face_of(f, t) && face_of(f', t') \226\134\146 face_of(INTER(f, f'), INTER(t, t'))
+      #|  (x : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  DIFF((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (u : Real) < real_of_num(1)
+      #|  ((x : Cart[Real, N]) == op_pct(real_of_num(1), (a : Cart[Real, N])) + op_pct((u : Real), (b : Cart[Real, N]))) == (a == x + op_pct(-u, b))
+      #|  (x : Real) < real_of_num(1) \226\134\146 !(real_of_num(1) - x == real_of_num(0))
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv(real_of_num(1) - (u : Real)))
+      #|  (u : Real)
+      #|  IN((x : Cart[Real, N]), segment(((a : Cart[Real, N]), (b : Cart[Real, N]))))
+      #|  !IN((a : Cart[Real, N]), hull(affine, (t : (Cart[Real, N]) -> Bool)))
+      #|  IN((a : Cart[Real, N]), DIFF((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))) && IN((b : Cart[Real, N]), DIFF(s, t))
+      #|  (a : Cart[Real, N]) == (b : Cart[Real, N])
+      #|  IN((a : Cart[Real, N]), hull(affine, (t : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], IN(a, (s : (Cart[Real, N]) -> Bool)) && IN(b, s) && IN(x, (t : (Cart[Real, N]) -> Bool)) && IN(x, segment((a, b))) && (IN(a, hull(affine, t)) \226\134\146 IN(b, hull(affine, t))) \226\134\146 IN(a, t) && IN(b, t)
+      #|  (x : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  real_of_num(0) < (e : Real) \226\134\146 abs(min(real_of_num(1) / real_of_num(2), e)) <= e
+      #|  (y : Cart[Real, N]) - (op_pct(real_of_num(1) - (u : Real), y) + op_pct(u, (x : Cart[Real, N]))) == op_pct(u, y - x)
+      #|  min(real_of_num(1) / real_of_num(2), (e : Real) / norm((x : Cart[Real, N]) - (y : Cart[Real, N])))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N]) == (y : Cart[Real, N])
+      #|  (e : Real)
+      #|  (y : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (x : Cart[Real, N])
+      #|  SUBSET((t : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 face_of(t, s) == (SUBSET(t, s) && convex(DIFF(s, t)) && t == INTER(hull(affine, t), s))
+      #|  (d : Real) == (real_of_num(1) - (u : Real)) * d + u * d
+      #|  (x : Real) < (a : Real) \226\134\146 x == a \226\134\146 false
+      #|  dot((c : Cart[Real, N]), (x : Cart[Real, N])) == (d : Real)
+      #|  (u : Real)
+      #|  (a : Cart[Real, N]) == (b : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), segment(((a : Cart[Real, N]), (b : Cart[Real, N]))))
+      #|  (a : Real) <= (x : Real) && (b : Real) <= x && !(a < x) && !(b < x) \226\134\146 a == x && b == x
+      #|  (x : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (d : Real)
+      #|  (c : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, convex(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b})) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) <= b) \226\134\146 face_of(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}), s)
+      #|  -(b : Real)
+      #|  -(a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, convex(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b})) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) >= b) \226\134\146 face_of(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}), s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) <= b) \226\134\146 face_of(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}), s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) >= b) \226\134\146 face_of(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}), s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, face_of(t, s) \226\134\146 SUBSET(t, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, face_of(t, s) \226\134\146 convex(t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(s) && closed(s) && face_of(t, s) \226\134\146 closed(t)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, convex(s) && compact(s) && face_of(t, s) \226\134\146 compact(t)
+      #|  INTER((c1 : (Cart[Real, N]) -> Bool), (c2 : (Cart[Real, N]) -> Bool))
+      #|  (c2 : (Cart[Real, N]) -> Bool)
+      #|  (c1 : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, \226\136\128 d1 : (Cart[Real, N]) -> Bool, \226\136\128 d2 : (Cart[Real, N]) -> Bool, face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2) && face_of(d1, c1) && face_of(d2, c2) \226\134\146 face_of(INTER(d1, d2), d1) && face_of(INTER(d1, d2), d2)
+      #|  real_of_num(0) < (e : Real) \226\134\146 e / (real_of_num(1) + e) - e * (real_of_num(1) - e / (real_of_num(1) + e)) == real_of_num(0)
+      #|  ((b : Cart[Real, N]) == op_pct(real_of_num(1) - (u : Real), b + op_pct((e : Real), b - (c : Cart[Real, N]))) + op_pct(u, c)) == (op_pct(u - e * (real_of_num(1) - u), b - c) == vec(0))
+      #|  real_of_num(0) < (n : Real) \226\134\146 (real_of_num(1) + (e : Real) / n) * n == n + e
+      #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
+      #|  (e : Real) / norm((b : Cart[Real, N]) - (c : Cart[Real, N])) / (real_of_num(1) + e / norm(b - c))
+      #|  ((b : Cart[Real, N]) == b + (e : Cart[Real, N])) == (e == vec(0))
+      #|  !((b : Cart[Real, N]) == (d : Cart[Real, N]))
+      #|  (b : Cart[Real, N])
+      #|  IN((d : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool)) && IN((c : Cart[Real, N]), t)
+      #|  (b : Cart[Real, N]) + op_pct((u : Real), b - (c : Cart[Real, N])) == op_pct(real_of_num(1) - -u, b) + op_pct(-u, c)
+      #|  dist(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)
       #|  :real
       #|  :real
-      #|  d:real^N
-      #|  d:real^N = b + e / norm(b - c) % (b - c)
-      #|  c:real^N = b
-      #|  e:real
-      #|  b:real^N
-      #|  c:real^N
-      #|  forall s t u:real^N->bool.\n      t face_of s /\\ u SUBSET s /\\\n      ~(DISJOINT t (relative_interior u))\n      ==> u SUBSET t
-      #|  t:real^N->bool
-      #|  u:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s t u:real^N->bool.\n        t face_of s /\\ u face_of s /\\\n        ~(DISJOINT (relative_interior t) (relative_interior u))\n        ==> t = u
-      #|  s:real^N->bool
-      #|  f:real^N->bool
-      #|  s:real^N->bool
-      #|  forall f s:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f INTER relative_interior s = {}
-      #|  s:real^N->bool
-      #|  forall f s:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f INTER interior s = {}
-      #|  u:real^N->bool
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s t u:real^N->bool.\n        t face_of s /\\ convex s /\\ u SUBSET s /\\\n        ~DISJOINT (affine hull t) (relative_interior u)\n        ==> u SUBSET t
-      #|  s:real^N->bool
-      #|  f:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s f:real^N->bool.\n        convex s /\\ f face_of s /\\ ~(f = s)\n        ==> affine hull f INTER relative_interior s = {}
-      #|  s SUBSET u DIFF t <=> s SUBSET u /\\ s INTER t = {}
-      #|  forall s f:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f SUBSET (s DIFF relative_interior s)
-      #|  s:real^N->bool
-      #|  forall s f:real^N->bool.\n        f face_of s /\\ ~(f = s) ==> f SUBSET relative_frontier s
-      #|  forall f s:real^N->bool.\n        f face_of s /\\ aff_dim f < aff_dim s\n        ==> f SUBSET relative_frontier s
-      #|  relative_frontier s:real^N->bool
-      #|  interior s:real^N->bool = {}
-      #|  forall f s:real^N->bool.\n        f face_of s /\\ aff_dim f < &(dimindex(:N))\n        ==> f SUBSET frontier s
-      #|  ~(f = {}) /\\ f SUBSET s ==> ~DISJOINT f s
-      #|  s:real^N->bool
-      #|  f:real^N->bool = {}
-      #|  forall f s:real^N->bool.\n        convex s /\\ f face_of s /\\ ~(f = s) ==> aff_dim f < aff_dim s
-      #|  ~(k = &1)
-      #|  ~(k = &0)
-      #|  k % (x - y):real^N = a % b % y + k % x <=> (a * b + k) % y = vec 0
-      #|  inv(k) % (x - y):real^N = (&1 - inv k) % inv(&1 - k) % y + inv(k) % x
-      #|  forall s x y:real^N.\n          affine s /\\ ~(k = &0) /\\ ~(k = &1) /\\ x IN s /\\ inv(&1 - k) % y IN s\n          ==> inv(k) % (x - y) IN s
-      #|  sum s (c:real^N->real) = &1
-      #|  sum(s DIFF f) c = sum s c - sum f (c:real^N->real)
-      #|  ~(k = &1) /\\ f = &1 - k ==> inv(&1 - k) * f = &1
-      #|  (\\x. inv(&1 - k) * c x):real^N->real
-      #|  \\x. inv k * (c:real^N->real) x
-      #|  a + b - a:real^N = b
-      #|  w = vsum f (\\x:real^N. c x % x) +\n                      vsum (s DIFF f) (\\x:real^N. c x % x)
-      #|  inv(k) % (w - vsum f (\\x:real^N. c x % x))
-      #|  b ==> ~b ==> c
-      #|  f:real^N->bool
-      #|  c:real^N->real
-      #|  &1 = &1 - x <=> x = &0
-      #|  sum s (c:real^N->real) = &1
-      #|  sum(s DIFF f) c = sum s c - sum f (c:real^N->real)
-      #|  vsum f (\\x:real^N. c x % x) = vec 0
-      #|  c:real^N->real
-      #|  w:real^N
-      #|  b ==> ~b ==> c
-      #|  k = &1
-      #|  &0 < k
-      #|  k = sum (s DIFF f:real^N->bool) c
-      #|  b:real^N->real
-      #|  a:real^N->real
-      #|  &0 <= x /\\ &0 <= y ==> (x + y = &0 <=> x = &0 /\\ y = &0)
-      #|  forall x:real^N. x IN (s DIFF f) ==> c x = &0
-      #|  sum (s DIFF f:real^N->bool) c = &0
-      #|  forall x:real^N. x IN s ==> &0 <= c x
-      #|  (c:real^N->real) = \\x. (&1 - u) * a x + u * b x
-      #|  b:real^N->real
-      #|  a:real^N->real
-      #|  (x:real^N) IN convex hull s
-      #|  (y:real^N) IN convex hull s
-      #|  (w:real^N) IN affine hull f
-      #|  u:real
-      #|  w:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  FINITE(f:real^N->bool)
-      #|  forall f s:real^N->bool.\n        FINITE s /\\ f SUBSET s /\\\n        DISJOINT (affine hull f) (convex hull (s DIFF f))\n        ==> (convex hull f) face_of (convex hull s)
-      #|  ~(a IN s) ==> t SUBSET {a} ==> DISJOINT s t
-      #|  s SUBSET a INSERT s
-      #|  convex hull s:real^N->bool
-      #|  forall f s a:real^N.\n        FINITE s /\\ ~(a IN affine hull s) /\\ f face_of (convex hull s)\n        ==> f face_of (convex hull (a INSERT s))
-      #|  &1 / &2
-      #|  &2 % a - b:real^N = a + &1 % (a - b)
-      #|  &2 % a - b:real^N = b <=> a = b
-      #|  ~(a:real^N = b)
-      #|  a:real^N
-      #|  b:real^N
-      #|  &2 % a - b:real^N
-      #|  (b:real^N) IN f
-      #|  b:real^N
-      #|  a:real^N
-      #|  f:real^N->bool = {}
-      #|  forall s f:real^N->bool.\n        affine s /\\ f face_of s ==> f = {} \\/ f = s
-      #|  forall s:real^N->bool f. affine s ==> (f face_of s <=> f = {} \\/ f = s)
-      #|  d - (d + &1):int = -- &1
-      #|  ~p ==> p ==> q
-      #|  dimindex(:N) + 1
-      #|  SUC n <= m + 1 ==> n <= m + 1
-      #|  a /\\ b ==> (a ==> (c <=> b)) ==> c
-      #|  SUC n <= m + 1 ==> n <= m
-      #|  s PSUBSET t ==> s SUBSET t
-      #|  INTERS(d(n:num)):real^N->bool
-      #|  s:real^N->bool
-      #|  INTERS(d(SUC n)):real^N->bool
-      #|  SUC n <= m + 1 ==> n <= m + 1
-      #|  s:real^N->bool
-      #|  s PSUBSET t ==> ~(s = t)
-      #|  SUC n <= m + 1 ==> n <= m
-      #|  SUC n <= k + 1 ==> n <= k + 1
-      #|  aff_dim(INTERS(d(n:num)):real^N->bool)
-      #|  forall d':int. d < d' /\\ d' < m - n ==> d < m - (n + &1)
-      #|  e:real^N->bool
-      #|  forall t. t PSUBSET s /\\ u SUBSET t ==> ~(u = s)
-      #|  e:real^N->bool
-      #|  e:real^N->bool
+      #|  (d : Cart[Real, N])
+      #|  (d : Cart[Real, N]) == (b : Cart[Real, N]) + op_pct((e : Real) / norm(b - (c : Cart[Real, N])), b - c)
+      #|  (c : Cart[Real, N]) == (b : Cart[Real, N])
+      #|  (e : Real)
+      #|  (b : Cart[Real, N])
+      #|  (c : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, face_of(t, s) && SUBSET(u, s) && !DISJOINT(t, relative_interior(u)) \226\134\146 SUBSET(u, t)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, face_of(t, s) && face_of(u, s) && !DISJOINT(relative_interior(t), relative_interior(u)) \226\134\146 t == u
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) \226\134\146 INTER(f, relative_interior(s)) == {}
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) \226\134\146 INTER(f, interior(s)) == {}
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, face_of(t, s) && convex(s) && SUBSET(u, s) && !DISJOINT(hull(affine, t), relative_interior(u)) \226\134\146 SUBSET(u, t)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, convex(s) && face_of(f, s) && !(f == s) \226\134\146 INTER(hull(affine, f), relative_interior(s)) == {}
+      #|  SUBSET((s : (_) -> Bool), DIFF((u : (_) -> Bool), (t : (_) -> Bool))) == (SUBSET(s, u) && INTER(s, t) == {})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) \226\134\146 SUBSET(f, DIFF(s, relative_interior(s)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) \226\134\146 SUBSET(f, relative_frontier(s))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, face_of(f, s) && aff_dim(f) < aff_dim(s) \226\134\146 SUBSET(f, relative_frontier(s))
+      #|  relative_frontier((s : (Cart[Real, N]) -> Bool))
+      #|  interior((s : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, s) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(f) < int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, (frontier : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s))
+      #|  !((f : (_) -> Bool) == {}) && SUBSET(f, (s : (_) -> Bool)) \226\134\146 !DISJOINT(f, s)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && face_of(f, s) && !(f == s) \226\134\146 aff_dim(f) < aff_dim(s)
+      #|  !((k : Real) == real_of_num(1))
+      #|  !((k : Real) == real_of_num(0))
+      #|  (op_pct((k : Real), (x : Cart[Real, N]) - (y : Cart[Real, N])) == op_pct((a : Real), op_pct((b : Real), y)) + op_pct(k, x)) == (op_pct(a * b + k, y) == vec(0))
+      #|  op_pct(inv((k : Real)), (x : Cart[Real, N]) - (y : Cart[Real, N])) == op_pct(real_of_num(1) - inv(k), op_pct(inv(real_of_num(1) - k), y)) + op_pct(inv(k), x)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], affine(s) && !((k : Real) == real_of_num(0)) && !(k == real_of_num(1)) && IN(x, s) && IN(op_pct(inv(real_of_num(1) - k), y), s) \226\134\146 IN(op_pct(inv(k), x - y), s)
+      #|  sum((s : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Real)) == real_of_num(1)
+      #|  sum(DIFF((s : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Bool)), (c : (Cart[Real, N]) -> Real)) == sum(s, c) - sum(f, c)
+      #|  !((k : Real) == real_of_num(1)) && (f : Real) == real_of_num(1) - k \226\134\146 inv(real_of_num(1) - k) * f == real_of_num(1)
+      #|  (x : Cart[Real, N]) => inv(real_of_num(1) - (k : Real)) * (c : (Cart[Real, N]) -> Real)(x)
+      #|  (x : Cart[Real, N]) => inv((k : Real)) * (c : (Cart[Real, N]) -> Real)(x)
+      #|  (a : Cart[Real, N]) + ((b : Cart[Real, N]) - a) == b
+      #|  (w : Cart[Real, N]) == vsum((f : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]) => op_pct((c : (Cart[Real, N]) -> Real)(x), x)) + vsum(DIFF((s : (Cart[Real, N]) -> Bool), f), (x : Cart[Real, N]) => op_pct(c(x), x))
+      #|  op_pct(inv((k : Real)), (w : Cart[Real, N]) - vsum((f : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]) => op_pct((c : (Cart[Real, N]) -> Real)(x), x)))
+      #|  (b : Bool) \226\134\146 !b \226\134\146 (c : Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Real)
+      #|  (real_of_num(1) == real_of_num(1) - (x : Real)) == (x == real_of_num(0))
+      #|  sum((s : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Real)) == real_of_num(1)
+      #|  sum(DIFF((s : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Bool)), (c : (Cart[Real, N]) -> Real)) == sum(s, c) - sum(f, c)
+      #|  vsum((f : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]) => op_pct((c : (Cart[Real, N]) -> Real)(x), x)) == vec(0)
+      #|  (c : (Cart[Real, N]) -> Real)
+      #|  (w : Cart[Real, N])
+      #|  (b : Bool) \226\134\146 !b \226\134\146 (c : Bool)
+      #|  (k : Real) == real_of_num(1)
+      #|  real_of_num(0) < (k : Real)
+      #|  (k : Real) == sum(DIFF((s : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Bool)), (c : (Cart[Real, N]) -> Real))
+      #|  (b : (Cart[Real, N]) -> Real)
+      #|  (a : (Cart[Real, N]) -> Real)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) \226\134\146 (x + y == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))
+      #|  \226\136\128 x : Cart[Real, N], IN(x, DIFF((s : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Bool))) \226\134\146 (c : (Cart[Real, N]) -> Real)(x) == real_of_num(0)
+      #|  sum(DIFF((s : (Cart[Real, N]) -> Bool), (f : (Cart[Real, N]) -> Bool)), (c : (Cart[Real, N]) -> Real)) == real_of_num(0)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 real_of_num(0) <= (c : (Cart[Real, N]) -> Real)(x)
+      #|  (c : (Cart[Real, N]) -> Real) == ((x : Cart[Real, N]) => (real_of_num(1) - (u : Real)) * (a : (Cart[Real, N]) -> Real)(x) + u * (b : (Cart[Real, N]) -> Real)(x))
+      #|  (b : (Cart[Real, N]) -> Real)
+      #|  (a : (Cart[Real, N]) -> Real)
+      #|  IN((x : Cart[Real, N]), hull(convex, (s : (Cart[Real, N]) -> Bool)))
+      #|  IN((y : Cart[Real, N]), hull(convex, (s : (Cart[Real, N]) -> Bool)))
+      #|  IN((w : Cart[Real, N]), hull(affine, (f : (Cart[Real, N]) -> Bool)))
+      #|  (u : Real)
+      #|  (w : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  FINITE((f : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) && SUBSET(f, s) && DISJOINT(hull(affine, f), hull(convex, DIFF(s, f))) \226\134\146 face_of(hull(convex, f), hull(convex, s))
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 SUBSET((t : (_) -> Bool), {a}) \226\134\146 DISJOINT(s, t)
+      #|  SUBSET((s : (_) -> Bool), INSERT((a : _), s))
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], FINITE(s) && !IN(a, hull(affine, s)) && face_of(f, hull(convex, s)) \226\134\146 face_of(f, hull(convex, INSERT(a, s)))
+      #|  real_of_num(1) / real_of_num(2)
+      #|  op_pct(real_of_num(2), (a : Cart[Real, N])) - (b : Cart[Real, N]) == a + op_pct(real_of_num(1), a - b)
+      #|  (op_pct(real_of_num(2), (a : Cart[Real, N])) - (b : Cart[Real, N]) == b) == (a == b)
+      #|  !((a : Cart[Real, N]) == (b : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  op_pct(real_of_num(2), (a : Cart[Real, N])) - (b : Cart[Real, N])
+      #|  IN((b : Cart[Real, N]), (f : (Cart[Real, N]) -> Bool))
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, affine(s) && face_of(f, s) \226\134\146 f == {} || f == s
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, affine(s) \226\134\146 face_of(f, s) == (f == {} || f == s)
+      #|  (d : Int) - (d + int_of_num(1)) == -int_of_num(1)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1
+      #|  SUC((n : Num)) <= (m : Num) + 1 \226\134\146 n <= m + 1
+      #|  (a : Bool) && (b : Bool) \226\134\146 (a \226\134\146 (c : Bool) == b) \226\134\146 c
+      #|  SUC((n : Num)) <= (m : Num) + 1 \226\134\146 n <= m
+      #|  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(s, t)
+      #|  INTERS((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  INTERS((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  SUC((n : Num)) <= (m : Num) + 1 \226\134\146 n <= m + 1
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == t)
+      #|  SUC((n : Num)) <= (m : Num) + 1 \226\134\146 n <= m
+      #|  SUC((n : Num)) <= (k : Num) + 1 \226\134\146 n <= k + 1
+      #|  aff_dim(INTERS((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num))))
+      #|  \226\136\128 d' : Int, (d : Int) < d' && d' < (m : Int) - (n : Int) \226\134\146 d < m - (n + int_of_num(1))
+      #|  (e : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 t : (_) -> Bool, PSUBSET(t, (s : (_) -> Bool)) && SUBSET((u : (_) -> Bool), t) \226\134\146 !(u == s)
+      #|  (e : (Cart[Real, N]) -> Bool)
+      #|  (e : (Cart[Real, N]) -> Bool)
       #|  0
-      #|  aff_dim(s:real^N->bool)
-      #|  forall n. n <= dimindex(:N) + 1\n        ==> aff_dim(INTERS(d n):real^N->bool) < &(dimindex(:N)) - &n
-      #|  n <= N ==> n <= N + 1
-      #|  n:num
-      #|  (d:num->(real^N->bool)->bool) n
-      #|  forall n. n <= dimindex(:N)\n        ==> (INTERS(d(SUC n)):real^N->bool) PSUBSET INTERS(d n)
-      #|  (d:num->(real^N->bool)->bool) n
-      #|  SUC n <= m + 1 ==> n <= m + 1
-      #|  forall n. n <= dimindex(:N) + 1\n        ==> (d n) SUBSET (f:(real^N->bool)->bool) /\\\n            FINITE(d n) /\\ CARD(d n) <= n + 1
-      #|  forall n:num. ~(d n:(real^N->bool)->bool = {})
-      #|  d 0 = {c {} :real^N->bool} /\\ forall n. d(SUC n) = c(d n) INSERT d n
-      #|  c:((real^N->bool)->bool)->real^N->bool
-      #|  forall f':(real^N->bool)->bool.\n        FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1\n        ==> ?c. c IN f /\\ c INTER (INTERS f') PSUBSET (INTERS f')
-      #|  t:real^N->bool
-      #|  t:real^N->bool
-      #|  t SUBSET s ==> t = s INTER t
-      #|  f = (s:real^N->bool) INSERT (f DELETE s)
-      #|  f':(real^N->bool)->bool
-      #|  f DELETE\n      (s:real^N->bool)
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  {s:real^N->bool}
-      #|  s IN f ==> f = {s} \\/ ?t. ~(t = s) /\\ t IN f
-      #|  (s:real^N->bool) IN f
-      #|  forall s f:(real^N->bool)->bool.\n        convex s /\\ (forall c. c IN f ==> c face_of s /\\ ~(c = s))\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1 /\\\n                 INTERS f' = INTERS f
-      #|  forall s f:(real^N->bool)->bool.\n        convex s /\\ (forall c. c IN f ==> c face_of s)\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 1 /\\\n                 INTERS f' = INTERS f
-      #|  d - (d + &2):int < i <=> -- &1 <= i
-      #|  ~p ==> p ==> q
-      #|  dimindex(:N) + 2
-      #|  SUC n <= m + 2 ==> n <= m + 2
-      #|  a /\\ b ==> (a ==> (c <=> b)) ==> c
-      #|  SUC n <= m + 2 ==> n <= m + 1
-      #|  s PSUBSET t ==> s SUBSET t
-      #|  INTERS(d(n:num)):real^N->bool
-      #|  s:real^N->bool
-      #|  INTERS(d(SUC n)):real^N->bool
-      #|  SUC n <= m + 2 ==> n <= m + 2
-      #|  s:real^N->bool
-      #|  s PSUBSET t ==> ~(s = t)
-      #|  SUC n <= m + 2 ==> n <= m + 1
-      #|  SUC n <= k + 2 ==> n <= k + 2
-      #|  aff_dim(INTERS(d(n:num)):real^N->bool)
-      #|  forall d':int. d < d' /\\ d' <= m - n ==> d <= m - (n + &1)
-      #|  forall n. n <= dimindex(:N) + 2\n        ==> aff_dim(INTERS(d n):real^N->bool) <= &(dimindex(:N)) - &n
-      #|  n <= N + 1 ==> n <= N + 2
-      #|  n:num
-      #|  (d:num->(real^N->bool)->bool) n
-      #|  forall n. n <= dimindex(:N) + 1\n        ==> (INTERS(d(SUC n)):real^N->bool) PSUBSET INTERS(d n)
-      #|  (d:num->(real^N->bool)->bool) n
-      #|  SUC n <= m + 2 ==> n <= m + 2
-      #|  forall n. n <= dimindex(:N) + 2\n        ==> (d n) SUBSET (f:(real^N->bool)->bool) /\\\n            FINITE(d n) /\\ CARD(d n) <= n + 1
-      #|  forall n:num. ~(d n:(real^N->bool)->bool = {})
-      #|  d 0 = {c {} :real^N->bool} /\\ forall n. d(SUC n) = c(d n) INSERT d n
-      #|  c:((real^N->bool)->bool)->real^N->bool
-      #|  forall f':(real^N->bool)->bool.\n        FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 2\n        ==> ?c. c IN f /\\ c INTER (INTERS f') PSUBSET (INTERS f')
-      #|  forall s f:(real^N->bool)->bool.\n        (forall c. c IN f ==> c face_of s)\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\ CARD f' <= dimindex(:N) + 2 /\\\n                 INTERS f' = INTERS f
-      #|  forall s a:real^N.\n        {f | f face_of IMAGE (\\x. a + x) s} =\n        IMAGE (IMAGE (\\x. a + x)) {f | f face_of s}
-      #|  IMAGE f {x | P x} = {f x | P x}
-      #|  {y | (?x. P x /\\ y = f x) /\\ Q y} = {f x |x| P x /\\ Q(f x)}
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> {t | t face_of (IMAGE f s)} = IMAGE (IMAGE f) {t | t face_of s}
-      #|  (forall x y. f x = f y ==> x = y)  ==> (forall s x. f x IN IMAGE f s <=> x IN s)
-      #|  d:real < e
-      #|  x:real^N = a % x <=> (a - &1) % x = vec 0
-      #|  (&1 - d) / (e - d)
-      #|  (x:real^N) IN s
-      #|  x:real^N
-      #|  e % x:real^N
-      #|  d % x :real^N
-      #|  c:real
-      #|  &1 / &2
-      #|  &2
-      #|  c:real
-      #|  ~(c = &1) ==> c < &1 \\/ &1 < c
-      #|  ?d e. &0 <= d /\\ &0 <= e /\\ d < &1 /\\ &1 < e /\\ d < e /\\\n                      (d = c \\/ e = c)
-      #|  c = &1
-      #|  x:real^N = vec 0
-      #|  c:real
-      #|  x:real^N
-      #|  forall s f:real^N->bool. conic s /\\ f face_of s ==> conic f
-      #|  (&1 - u) % a + u % a:real^N = a
-      #|  b':real^N = a'
-      #|  b:real^M = a
-      #|  b':real^N
-      #|  b:real^M
-      #|  a':real^N
-      #|  a:real^M
-      #|  forall f s:real^M->bool f' s':real^N->bool.\n        f face_of s /\\ f' face_of s' ==> (f PCROSS f') face_of (s PCROSS s')
-      #|  (&1 - u) % a + u % a:real^N = a
-      #|  pastecart (y:real^M) (x:real^N)
-      #|  (c:real^(M,N)finite_sum->bool) SUBSET s PCROSS s'
-      #|  pastecart (y:real^M) (x:real^N)
-      #|  pastecart (y:real^M) (b:real^N)
-      #|  pastecart (y:real^M) (a:real^N)
-      #|  y:real^M
-      #|  x:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  pastecart (x:real^M) (y:real^N)
-      #|  (c:real^(M,N)finite_sum->bool) SUBSET s PCROSS s'
-      #|  pastecart (x:real^M) (y:real^N)
-      #|  pastecart (b:real^M) (y:real^N)
-      #|  pastecart (a:real^M) (y:real^N)
-      #|  y:real^N
-      #|  x:real^M
-      #|  b:real^M
-      #|  a:real^M
-      #|  s SUBSET (if p then {} else t) ==> s SUBSET t
-      #|  sndcart:real^(M,N)finite_sum->real^N
-      #|  fstcart:real^(M,N)finite_sum->real^M
-      #|  ~(s = {}) /\\ s SUBSET t ==> ~DISJOINT s t
-      #|  (s:real^M->bool) PCROSS (s':real^N->bool)
-      #|  (p /\\ q ==> r) /\\ p /\\ q ==> p /\\ q /\\ r
-      #|  IMAGE sndcart (c:real^(M,N)finite_sum->bool)
-      #|  IMAGE fstcart (c:real^(M,N)finite_sum->bool)
-      #|  c:real^(M,N)finite_sum->bool = {}
-      #|  forall s:real^M->bool s':real^N->bool c.\n        c face_of (s PCROSS s') <=>\n        ?f f'. f face_of s /\\ f' face_of s' /\\ c = f PCROSS f'
-      #|  f':real^N->bool = {}
-      #|  f:real^M->bool = {}
-      #|  forall f s:real^M->bool f' s':real^N->bool.\n        (f PCROSS f') face_of (s PCROSS s') <=>\n        f = {} \\/ f' = {} \\/ f face_of s /\\ f' face_of s'
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  a:real = b <=> a <= b /\\ a = b
-      #|  forall a:real^N b. {x | a dot x = b} face_of {x | a dot x <= b}
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  a:real = b <=> a >= b /\\ a = b
-      #|  forall a:real^N b. {x | a dot x = b} face_of {x | a dot x >= b}
-      #|  {x:real^N | a dot x <= b}
-      #|  f face_of {x:real^N | a dot x = b}
-      #|  (~r ==> p \\/ q) ==> p \\/ q \\/ r
-      #|  {x | p} = if p then UNIV else {}
-      #|  a:real^N = vec 0
-      #|  forall f a:real^N b.\n         f face_of {x | a dot x <= b} <=>\n         f = {} \\/ f = {x | a dot x = b} \\/ f = {x | a dot x <= b}
-      #|  --b:real
-      #|  --a:real^N
-      #|  f:real^N->bool
-      #|  forall f a:real^N b.\n         f face_of {x | a dot x >= b} <=>\n         f = {} \\/ f = {x | a dot x = b} \\/ f = {x | a dot x >= b}
-      #|  y:real^N
-      #|  (forall x. x IN i ==> x IN s /\\ ~(x IN t)) ==> ~(i = {}) ==> ~(t = s)
-      #|  ~(relative_interior s:real^N->bool = {})
-      #|  s INTER {y:real^N | a dot y = a dot x}
-      #|  a:real^N
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  forall s x:real^N.\n        convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ x IN f
-      #|  x:real^N
-      #|  forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> relative_frontier s = UNIONS {f | f face_of s /\\ ~(f = s)}
-      #|  f IN t ==> INTERS t SUBSET f
-      #|  ~(s = t) ==> s SUBSET t /\\ t SUBSET s ==> F
-      #|  f:real^N->bool
-      #|  x IN s /\\ ~(x IN s /\\ ~(x IN relative_interior s))\n    ==> x IN relative_interior s
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  INTERS {f | f face_of s /\\ (x:real^N) IN f}
-      #|  forall s:real^N->bool x.\n        convex s /\\ x IN s ==> ?f. f face_of s /\\ x IN relative_interior f
-      #|  forall s:real^N->bool.\n        convex s ==> UNIONS {relative_interior f | f face_of s} = s
-      #|  s:real^N->bool
-      #|  forall s:real^N->bool x.\n        convex s /\\ x IN s ==> ?!f. f face_of s /\\ x IN relative_interior f
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  forall s t:real^N->bool.\n        convex s /\\ t SUBSET s /\\\n        ~(relative_interior t DIFF relative_interior s = {})\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ t SUBSET f
-      #|  t:real^N->bool
-      #|  t:real^N->bool
-      #|  {}:real^N->bool
-      #|  t:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        convex s /\\ ~(s = {}) /\\\n        convex t /\\ t SUBSET s DIFF relative_interior s\n        ==> ?f. f face_of s /\\ ~(f = s) /\\ t SUBSET f
-      #|  P a ==> f a INSERT {f x | P x /\\ ~(x = a)} = {f x | P x}
-      #|  u UNION s = t /\\ DISJOINT u s ==> s = t DIFF u
-      #|  forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> UNIONS { relative_interior f | f face_of s /\\ ~(f = s)} =\n            relative_frontier s
-      #|  (forall x. P x ==> (Q x <=> R x))\n    ==> {f x | P x /\\ Q x} = {f x | P x /\\ R x}
-      #|  forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> UNIONS { relative_interior f |\n                     f face_of s /\\ aff_dim f < aff_dim s} =\n            relative_frontier s
-      #|  s:real^N->bool
-      #|  f:real^N->bool
-      #|  f:real^N->bool
-      #|  f:real^N->bool
-      #|  f:real^N->bool
-      #|  z:real^N
-      #|  forall s:real^N->bool.\n        convex s /\\ closed s\n        ==> frontier s =\n            UNIONS {f | f face_of s /\\ aff_dim f < &(dimindex(:N))}
-      #|  l:real^N->bool
-      #|  k:real^N->bool
-      #|  s INTER t:real^N->bool
-      #|  l:real^N->bool
-      #|  k:real^N->bool
-      #|  f:real^N->bool
-      #|  (x:real^N) IN s /\\ x IN t
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  x:real^N
-      #|  f:real^N->bool
-      #|  {}:real^N->bool
-      #|  relative_interior f:real^N->bool = {}
-      #|  forall s t f:real^N->bool.\n        convex s /\\ convex t /\\ f face_of (s INTER t)\n        ==> ?k l. k face_of s /\\ l face_of t /\\ k INTER l = f
-      #|  t exposed_face_of s <=>\n    t face_of s /\\\n    ?a b. s SUBSET {x | a dot x <= b} /\\ t = s INTER {x | a dot x = b}
-      #|  forall s t:real^N->bool. t exposed_face_of s ==> t face_of s
-      #|  &1:real
-      #|  vec 0:real^N
-      #|  forall s:real^N->bool. {} exposed_face_of s
-      #|  &0:real
-      #|  vec 0:real^N
-      #|  convex(s:real^N->bool)
-      #|  forall s:real^N->bool. s exposed_face_of s <=> convex s
-      #|  forall s:real^N->bool. convex s ==> s exposed_face_of s
-      #|  a:real^N = vec 0
-      #|  b:real
-      #|  a:real^N
-      #|  b:real
-      #|  a:real^N
-      #|  t:real^N->bool = s
-      #|  t:real^N->bool = {}
-      #|  forall s t. t exposed_face_of s <=>\n             t face_of s /\\\n             (t = {} \\/ t = s \\/\n              ?a b. ~(a = vec 0) /\\\n                    s SUBSET {x:real^N | a dot x <= b} /\\\n                    t = s INTER {x | a dot x = b})
-      #|  (x + y) - y:real = x
-      #|  b + (c:real^N) dot a
-      #|  b - (c:real^N) dot a
-      #|  b:real
-      #|  c:real^N
-      #|  y + (x - y):real^N = x
-      #|  \\x:real^N. a + x
-      #|  forall a f s:real^N->bool.\n        (IMAGE (\\x. a + x) f) exposed_face_of (IMAGE (\\x. a + x) s) <=>\n        f exposed_face_of s
-      #|  (g:real^M->real^N) a
-      #|  g:real^M->real^N
-      #|  adjoint(f:real^M->real^N)
-      #|  a:real^M
-      #|  adjoint(f:real^M->real^N) a
-      #|  a:real^N
-      #|  f:real^M->real^N
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n      ==> ((IMAGE f c) exposed_face_of (IMAGE f s) <=> c exposed_face_of s)
-      #|  forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x <= b)\n        ==> (s INTER {x | a dot x = b}) exposed_face_of s
-      #|  --b:real
-      #|  --a:real^N
-      #|  s:real^N->bool
-      #|  forall s a:real^N b.\n        convex s /\\ (forall x. x IN s ==> a dot x >= b)\n        ==> (s INTER {x | a dot x = b}) exposed_face_of s
-      #|  x:real^N
-      #|  x:real^N
-      #|  (s INTER t1) INTER (s INTER t2) = s INTER u <=>\n    forall x. x IN s ==> (x IN t1 /\\ x IN t2 <=> x IN u)
-      #|  b + b':real
-      #|  a + a':real^N
-      #|  b:real
-      #|  a:real^N
-      #|  b':real
-      #|  a':real^N
-      #|  forall s t u:real^N->bool.\n        t exposed_face_of s /\\ u exposed_face_of s\n        ==> (t INTER u) exposed_face_of s
-      #|  P:(real^N->bool)->bool = {}
-      #|  P:(real^N->bool)->bool
-      #|  t:real^N->bool
-      #|  Q:(real^N->bool)->bool
-      #|  Q:(real^N->bool)->bool
-      #|  FINITE(Q:(real^N->bool)->bool)
-      #|  forall t:real^N->bool. t IN Q ==> t exposed_face_of s
-      #|  INTERS s = UNIV <=> forall t. t IN s ==> t = UNIV
-      #|  Q:(real^N->bool)->bool = {}
-      #|  Q:(real^N->bool)->bool
-      #|  P:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  forall P s:real^N->bool.\n        ~(P = {}) /\\ (forall t. t IN P ==> t exposed_face_of s)\n        ==> INTERS P exposed_face_of s
-      #|  b:real^N
-      #|  a0:real^N
-      #|  b0:real^N
-      #|  a:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  b:real^N
-      #|  a0:real^N
-      #|  b:real^N
-      #|  b0:real^N
-      #|  a:real^N
-      #|  a:real^N
-      #|  t INTER {y:real^N | u dot y = u dot b0}
-      #|  s INTER {x:real^N | u dot x = u dot a0}
-      #|  b0:real^N
-      #|  a0:real^N
-      #|  z:real
-      #|  u:real^N
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  f = {x + y :real^N | x IN s /\\ y IN t}
-      #|  {}:real^N->bool
-      #|  f:real^N->bool = {}
-      #|  forall s t f:real^N->bool.\n        convex s /\\ convex t /\\\n        f exposed_face_of {x + y | x IN s /\\ y IN t}\n        ==> ?k l. k exposed_face_of s /\\ l exposed_face_of t /\\\n                  f = {x + y | x IN k /\\ y IN l}
-      #|  w + --a:real^N = w + &1 % (w - (w + a))
-      #|  s' INTER a = s' INTER b\n        ==> s SUBSET s' ==> s INTER b = s INTER a
-      #|  {x:real^N | a dot x <= b}
-      #|  s SUBSET s' /\\ s SUBSET (UNIV DIFF {x | P x}) UNION {x | Q x}\n        ==> s SUBSET (UNIV DIFF (s' INTER {x | P x})) UNION\n                     (s' INTER {x | Q x})
-      #|  affine hull s:real^N->bool
-      #|  forall s'. s SUBSET s' /\\\n            s SUBSET (UNIV DIFF (s' INTER {x | P x})) UNION\n                     (s' INTER {x | Q x})\n            ==> s SUBSET {x | ~P x \\/ Q x}
-      #|  b <= a <=> ~(a <= b) \\/ a = b
-      #|  --b':real
-      #|  --a':real^N
-      #|  b':real
-      #|  a':real^N
-      #|  {x | T} = UNIV
-      #|  &0
-      #|  vec 0:real^N
-      #|  s SUBSET affine hull (s:real^N->bool)
-      #|  t:real^N->bool = s
-      #|  s' INTER t' = {}\n      ==> s SUBSET s' /\\ t SUBSET t' ==> s INTER t = {}
-      #|  p ==> p /\\ ~(~p /\\ q)
-      #|  ~(&0 = &1)
-      #|  {x | T} = UNIV
-      #|  &1
-      #|  vec 0:real^N
-      #|  --b:real
-      #|  --a:real^N
-      #|  affine hull s:real^N->bool
-      #|  b:real
-      #|  a:real^N
-      #|  forall t s. t exposed_face_of s <=>\n         t face_of s /\\\n          ?a b. s SUBSET {x:real^N | a dot x <= b} /\\\n                t = s INTER {x | a dot x = b} /\\\n                (~(t = {}) /\\ ~(t = s) ==> ~(a = vec 0)) /\\\n                (forall w. w IN affine hull s /\\ ~(t = s)\n                     ==> (w + a) IN affine hull s)
-      #|  z:real^N
-      #|  ~(relative_interior s:real^N->bool = {})
-      #|  s INTER {y:real^N | a dot y = a dot x}
-      #|  a:real^N
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  forall s x:real^N.\n           convex s /\\ x IN s /\\ ~(x IN relative_interior s)\n           ==> ?f. f exposed_face_of s /\\ ~(f = s) /\\ x IN f
-      #|  x extreme_point_of s <=>\n    x IN s /\\ forall a b. a IN s /\\ b IN s ==> ~(x IN segment(a,b))
-      #|  b:real^N
-      #|  a:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall s x:real^N.\n       convex s /\\ x IN s DIFF relative_interior s /\\\n       (forall a b. {a,b} SUBSET s DIFF relative_interior s ==> ~(x IN segment(a,b)))\n       ==> x extreme_point_of s
-      #|  forall s x:real^N. x IN s /\\ convex(s DELETE x) ==> x extreme_point_of s
-      #|  forall s t:real^N->bool.\n        convex s /\\ t SUBSET {x | x extreme_point_of s} ==> convex(s DIFF t)
-      #|  forall s x:real^N.\n        convex s ==> (x extreme_point_of s <=> x IN s /\\ convex(s DELETE x))
-      #|  forall x s. {x} face_of s <=> x extreme_point_of s
-      #|  forall s f:real^N->bool.\n        f face_of s /\\ aff_dim f = &0 <=> ?a. a extreme_point_of s /\\ f = {a}
-      #|  forall s x:real^N.\n        x extreme_point_of s /\\ ~(s = {x})\n        ==> ~(x IN relative_interior s)
-      #|  s = {x:real^N}
-      #|  forall s x:real^N. x extreme_point_of s ==> ~(x IN interior s)
-      #|  forall s x:real^N.\n        x extreme_point_of s /\\ ~(s = {x}) ==> x IN relative_frontier s
-      #|  forall s x:real^N. x extreme_point_of s ==> x IN frontier s
-      #|  forall f s v. f face_of s\n           ==> (v extreme_point_of f <=> v extreme_point_of s /\\ v IN f)
-      #|  x:real^N = x + d <=> d = vec 0
-      #|  x:real^N = x - d <=> d = vec 0
-      #|  ((&1 - u) % a + u % b) + d / &2 % (b - a):real^N =\n      (&1 - (u + d / &2)) % a + (u + d / &2) % b
-      #|  ((&1 - u) % a + u % b) - d / &2 % (b - a):real^N =\n      (&1 - (u - d / &2)) % a + (u - d / &2) % b
-      #|  x + d / &2 % (b - a):real^N
-      #|  x - d / &2 % (b - a):real^N
-      #|  d = min (&1 - u) u
-      #|  u:real
-      #|  b:real^N
-      #|  a:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall s x:real^N.\n        convex s\n        ==> (x extreme_point_of s <=>\n             x IN s /\\\n             forall a b. a IN s /\\ b IN s /\\ x = midpoint(a,b) ==> x = a /\\ x = b)
-      #|  s:real^N->bool
-      #|  convex:(real^N->bool)->bool
-      #|  (convex hull s) DELETE (x:real^N)
-      #|  s:real^N->bool
-      #|  convex:(real^N->bool)->bool
-      #|  forall x:real^N s. x extreme_point_of (convex hull s) ==> x IN s
-      #|  forall s. {x | x extreme_point_of (convex hull s)} SUBSET s
-      #|  forall x. ~(x extreme_point_of {})
-      #|  forall a x. x extreme_point_of {a} <=> x = a
-      #|  forall a:real^N x s.\n           (a + x) extreme_point_of (IMAGE (\\x. a + x) s) <=>\n           x extreme_point_of s
-      #|  forall f:real^M->real^N.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((f x) extreme_point_of (IMAGE f s) <=> x extreme_point_of s)
-      #|  a + x:real^N = y <=> x = y - a
-      #|  forall a s. {x:real^N | x extreme_point_of (IMAGE (\\x. a + x) s)} =\n         IMAGE (\\x. a + x) {x | x extreme_point_of s}
-      #|  forall x s t. x extreme_point_of s /\\ x extreme_point_of t\n           ==> x extreme_point_of (s INTER t)
-      #|  forall x s t. (x extreme_point_of s \\/ x extreme_point_of t) /\\ x IN s INTER t\n           ==> x extreme_point_of (s INTER t)
-      #|  forall f:real^M->real^N.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> {y | y extreme_point_of (IMAGE f s)} =\n            IMAGE f {x | x extreme_point_of s}
-      #|  forall s a b c. (forall x. x IN s ==> a dot x <= b) /\\\n             s INTER {x | a dot x = b} = {c}\n             ==> c extreme_point_of s
-      #|  forall s a b c. (forall x. x IN s ==> a dot x >= b) /\\\n             s INTER {x | a dot x = b} = {c}\n             ==> c extreme_point_of s
-      #|  b:real
-      #|  a:real^N
-      #|  forall s a b c:real^N.\n        (forall x. x IN s ==> a dot x <= b) /\\\n        s INTER {x | a dot x = b} = {c}\n        ==> {c} exposed_face_of s
-      #|  c:real^N
-      #|  --b:real
-      #|  --a:real^N
-      #|  s:real^N->bool
-      #|  forall s a b c:real^N.\n        (forall x. x IN s ==> a dot x >= b) /\\\n        s INTER {x | a dot x = b} = {c}\n        ==> {c} exposed_face_of s
-      #|  b - x:real^N
-      #|  (b:real^N) dot x = b dot b
-      #|  x:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  (b:real^N) dot b
-      #|  b:real^N
-      #|  a:real^N
-      #|  forall s a b:real^N.\n        b IN s /\\ (forall x. x IN s ==> dist(a,x) <= dist(a,b))\n        ==> {b} exposed_face_of s
-      #|  s:real^N->bool
-      #|  collinear {a:real^N,b,c}
-      #|  (a:real^N) IN s /\\ b IN s /\\ c IN s
-      #|  (a:real^N) extreme_point_of s /\\\n    b extreme_point_of s /\\ c extreme_point_of s
-      #|  c:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  2 < n <=> 3 <= n
-      #|  a /\\ ~b <=> ~(a ==> b)
-      #|  forall s. collinear s\n       ==> FINITE {x:real^N | x extreme_point_of s} /\\\n           CARD {x | x extreme_point_of s} <= 2
-      #|  &0 <= &0 /\\ ~(&1 = &0)
-      #|  c % x:real^N = x <=> (c - &1) % x = vec 0
-      #|  forall s x:real^N.\n        conic s /\\ x extreme_point_of s ==> x = vec 0
-      #|  ~(a IN s) ==> a INSERT s DIFF {a} = s
-      #|  (a:real^N) INSERT s
-      #|  {a:real^N}
-      #|  (a:real^N) IN s
-      #|  forall s a:real^N.\n        FINITE s /\\ ~(a IN convex hull s)\n        ==> a extreme_point_of (convex hull (a INSERT s))
-      #|  y:real^N
-      #|  z:real^N
-      #|  x:real^N
-      #|  ~(z IN s) ==> t SUBSET s ==> ~(z IN t)
-      #|  z:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  y:real^N
-      #|  u < &1 /\\ ~(a = &0) ==> (inv((&1 - u) * a) * (&1 - u)) * a = &1
-      #|  z:real^N
-      #|  (%) (inv((&1 - u) * a)):real^N->real^N
-      #|  c = &0
-      #|  y:real^N
-      #|  &0 < u /\\ ~(c = &0) ==> (inv(u * c) * u) * c = &1
-      #|  z:real^N
-      #|  (%) (inv(u * c)):real^N->real^N
-      #|  c = &0
-      #|  a = &0
-      #|  &0 <= x /\\ &0 <= y /\\ ~(x = &0 /\\ y = &0) ==> &0 < x + y
-      #|  &0 < (&1 - u) * a + u * c
-      #|  (%) (inv((&1 - u) * a + u * c)):real^N->real^N
-      #|  z:real^N
-      #|  b / ((&1 - u) * a + u * c)
-      #|  ?c. &0 <= c /\\ x:real^N = c % y
-      #|  u:real
-      #|  z:real^N = x
-      #|  y:real^N
-      #|  b:real
-      #|  z:real^N
-      #|  c:real
-      #|  x:real^N
-      #|  a:real
-      #|  forall f s:real^N->bool.\n      f face_of s /\\ ~(vec 0 IN affine hull s)\n      ==> (conic hull f) face_of (conic hull s)
-      #|  x:real^N = vec 0
-      #|  x:real^N
-      #|  inv c:real
-      #|  c % x:real^N
-      #|  x:real^N
-      #|  c:real
-      #|  x:real^N
-      #|  c:real
-      #|  forall x:real^N. x IN conic hull s /\\ x IN f /\\ ~(x = vec 0)\n                   ==> x IN conic hull (f INTER affine hull s)
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  f INTER affine hull s:real^N->bool
-      #|  f = {vec 0:real^N}
-      #|  forall s f:real^N->bool.\n        f face_of (conic hull s) /\\ ~(vec 0 IN affine hull s)\n        ==> f = {vec 0} \\/ ?f'. f' face_of s /\\ conic hull f' = f
-      #|  u * b:real
-      #|  (&1 - u) * a
-      #|  u:real
-      #|  ~(z IN s) ==> forall t. t SUBSET s ==> ~(z IN t)
-      #|  affine hull {u:real^N,v}
-      #|  b = &0
-      #|  a = &0
-      #|  v:real^N
-      #|  b:real
-      #|  u:real^N
-      #|  a:real
-      #|  x IN s ==> ~(s = {})
-      #|  {a} = {b} <=> a = b
-      #|  forall s x:real^N.\n        ~(vec 0 IN affine hull s)\n        ==> (x extreme_point_of conic hull s <=> x = vec 0 /\\ ~(s = {}))
-      #|  {}:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall s f:real^N->bool.\n     ~(vec 0 IN affine hull s)\n     ==> (f face_of (conic hull s) <=>\n          f = {vec 0} /\\ ~(s = {}) \\/ ?f'. f' face_of s /\\ conic hull f' = f)
-      #|  x <= y /\\ ~(x < y) <=> x = y
-      #|  r = &0
-      #|  a:real^N
-      #|  forall a r x:real^N.\n        x extreme_point_of cball(a,r) <=> x IN sphere(a,r)
-      #|  norm(x:real^N) = dist(vec 0,x)
+      #|  aff_dim((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 \226\134\146 (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)((INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(n))) < int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(n)
+      #|  (n : Num) <= (N : Num) \226\134\146 n <= N + 1
+      #|  (n : Num)
+      #|  (d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num))
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (PSUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(SUC(n))), (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(d(n)))
+      #|  (d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num))
+      #|  SUC((n : Num)) <= (m : Num) + 1 \226\134\146 n <= m + 1
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 \226\134\146 (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(n), (f : ((Cart[Real, N]) -> Bool) -> Bool)) && (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(d(n)) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(d(n)) <= n + 1
+      #|  \226\136\128 n : Num, !((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(n) == {})
+      #|  (d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(0) == {(c : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({})} && (\226\136\128 n : Num, d(SUC(n)) == INSERT(c(d(n)), d(n)))
+      #|  (c : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f') && (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f', (f : ((Cart[Real, N]) -> Bool) -> Bool)) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(f') <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(c, f) && (PSUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(c, (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f')), (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f')))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 t == INTER(s, t)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool) == INSERT((s : (Cart[Real, N]) -> Bool), DELETE(f, s))
+      #|  (f' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  {(s : (Cart[Real, N]) -> Bool)}
+      #|  IN((s : _), (f : (_) -> Bool)) \226\134\146 f == {s} || (\226\136\131 t : _, !(t == s) && IN(t, f))
+      #|  IN((s : (Cart[Real, N]) -> Bool), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (\226\136\128 c : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(c, f) \226\134\146 (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(c, s) && !(c == s)) \226\134\146 (\226\136\131 f' : ((Cart[Real, N]) -> Bool) -> Bool, (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f') && (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f', f) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(f') <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 && (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f') == (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (\226\136\128 c : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(c, f) \226\134\146 (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(c, s)) \226\134\146 (\226\136\131 f' : ((Cart[Real, N]) -> Bool) -> Bool, (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f') && (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f', f) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(f') <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 && (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f') == (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f))
+      #|  ((d : Int) - (d + int_of_num(2)) < (i : Int)) == (-int_of_num(1) <= i)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 2
+      #|  SUC((n : Num)) <= (m : Num) + 2 \226\134\146 n <= m + 2
+      #|  (a : Bool) && (b : Bool) \226\134\146 (a \226\134\146 (c : Bool) == b) \226\134\146 c
+      #|  SUC((n : Num)) <= (m : Num) + 2 \226\134\146 n <= m + 1
+      #|  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(s, t)
+      #|  INTERS((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  INTERS((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(SUC((n : Num))))
+      #|  SUC((n : Num)) <= (m : Num) + 2 \226\134\146 n <= m + 2
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  PSUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == t)
+      #|  SUC((n : Num)) <= (m : Num) + 2 \226\134\146 n <= m + 1
+      #|  SUC((n : Num)) <= (k : Num) + 2 \226\134\146 n <= k + 2
+      #|  aff_dim(INTERS((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num))))
+      #|  \226\136\128 d' : Int, (d : Int) < d' && d' <= (m : Int) - (n : Int) \226\134\146 d <= m - (n + int_of_num(1))
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 2 \226\134\146 (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)((INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(n))) <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(n)
+      #|  (n : Num) <= (N : Num) + 1 \226\134\146 n <= N + 2
+      #|  (n : Num)
+      #|  (d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num))
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1 \226\134\146 (PSUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(SUC(n))), (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(d(n)))
+      #|  (d : (Num, (Cart[Real, N]) -> Bool) -> Bool)((n : Num))
+      #|  SUC((n : Num)) <= (m : Num) + 2 \226\134\146 n <= m + 2
+      #|  \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 2 \226\134\146 (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(n), (f : ((Cart[Real, N]) -> Bool) -> Bool)) && (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(d(n)) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(d(n)) <= n + 1
+      #|  \226\136\128 n : Num, !((d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(n) == {})
+      #|  (d : (Num, (Cart[Real, N]) -> Bool) -> Bool)(0) == {(c : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({})} && (\226\136\128 n : Num, d(SUC(n)) == INSERT(c(d(n)), d(n)))
+      #|  (c : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f') && (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f', (f : ((Cart[Real, N]) -> Bool) -> Bool)) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(f') <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 2 \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(c, f) && (PSUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(c, (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f')), (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f')))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 c : (Cart[Real, N]) -> Bool, (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(c, f) \226\134\146 (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(c, s)) \226\134\146 (\226\136\131 f' : ((Cart[Real, N]) -> Bool) -> Bool, (FINITE : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f') && (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(f', f) && (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(f') <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 2 && (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f') == (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)(f))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], {(f : (Cart[Real, N]) -> Bool) | face_of(f, IMAGE((x : Cart[Real, N]) => a + x, s))} == IMAGE(IMAGE((x : Cart[Real, N]) => a + x), {(f : (Cart[Real, N]) -> Bool) | face_of(f, s)})
+      #|  IMAGE((f : (_) -> _), {(x : _) | (P : (_) -> Bool)(x)}) == {f((x : _)) | P(x)}
+      #|  {(y : _) | (\226\136\131 x : _, (P : (_) -> Bool)(x) && y == (f : (_) -> _)(x)) && (Q : (_) -> Bool)(y)} == {f(x) | x : _ | P(x) && Q(f(x))}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 {(t : (Cart[Real, N]) -> Bool) | face_of(t, IMAGE(f, s))} == IMAGE(IMAGE(f), {(t : (Cart[Real, M]) -> Bool) | face_of(t, s)})
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (f : (_) -> _)(x) == f(y) \226\134\146 x == y) \226\134\146 (\226\136\128 s : (_) -> Bool, \226\136\128 x : _, IN(f(x), IMAGE(f, s)) == IN(x, s))
+      #|  (d : Real) < (e : Real)
+      #|  ((x : Cart[Real, N]) == op_pct((a : Real), x)) == (op_pct(a - real_of_num(1), x) == vec(0))
+      #|  (real_of_num(1) - (d : Real)) / ((e : Real) - d)
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  op_pct((e : Real), (x : Cart[Real, N]))
+      #|  op_pct((d : Real), (x : Cart[Real, N]))
+      #|  (c : Real)
+      #|  real_of_num(1) / real_of_num(2)
+      #|  real_of_num(2)
+      #|  (c : Real)
+      #|  !((c : Real) == real_of_num(1)) \226\134\146 c < real_of_num(1) || real_of_num(1) < c
+      #|  \226\136\131 d : Real, \226\136\131 e : Real, real_of_num(0) <= d && real_of_num(0) <= e && d < real_of_num(1) && real_of_num(1) < e && d < e && (d == (c : Real) || e == c)
+      #|  (c : Real) == real_of_num(1)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, conic(s) && face_of(f, s) \226\134\146 conic(f)
+      #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, a) == a
+      #|  (b' : Cart[Real, N]) == (a' : Cart[Real, N])
+      #|  (b : Cart[Real, M]) == (a : Cart[Real, M])
+      #|  (b' : Cart[Real, N])
+      #|  (b : Cart[Real, M])
+      #|  (a' : Cart[Real, N])
+      #|  (a : Cart[Real, M])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 f' : (Cart[Real, N]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, face_of(f, s) && face_of(f', s') \226\134\146 face_of(PCROSS(f, f'), PCROSS(s, s'))
+      #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, a) == a
+      #|  pastecart((y : Cart[Real, M]), (x : Cart[Real, N]))
+      #|  SUBSET((c : (Cart[Real, Finite_sum[M, N]]) -> Bool), PCROSS((s : (Cart[Real, M]) -> Bool), (s' : (Cart[Real, N]) -> Bool)))
+      #|  pastecart((y : Cart[Real, M]), (x : Cart[Real, N]))
+      #|  pastecart((y : Cart[Real, M]), (b : Cart[Real, N]))
+      #|  pastecart((y : Cart[Real, M]), (a : Cart[Real, N]))
+      #|  (y : Cart[Real, M])
+      #|  (x : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  pastecart((x : Cart[Real, M]), (y : Cart[Real, N]))
+      #|  SUBSET((c : (Cart[Real, Finite_sum[M, N]]) -> Bool), PCROSS((s : (Cart[Real, M]) -> Bool), (s' : (Cart[Real, N]) -> Bool)))
+      #|  pastecart((x : Cart[Real, M]), (y : Cart[Real, N]))
+      #|  pastecart((b : Cart[Real, M]), (y : Cart[Real, N]))
+      #|  pastecart((a : Cart[Real, M]), (y : Cart[Real, N]))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, M])
+      #|  (b : Cart[Real, M])
+      #|  (a : Cart[Real, M])
+      #|  SUBSET((s : (_) -> Bool), if (p : Bool) { {} } else { (t : (_) -> Bool) }) \226\134\146 SUBSET(s, t)
+      #|  (sndcart : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, N])
+      #|  (fstcart : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, M])
+      #|  !((s : (_) -> Bool) == {}) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 !DISJOINT(s, t)
+      #|  PCROSS((s : (Cart[Real, M]) -> Bool), (s' : (Cart[Real, N]) -> Bool))
+      #|  ((p : Bool) && (q : Bool) \226\134\146 (r : Bool)) && p && q \226\134\146 p && q && r
+      #|  IMAGE(sndcart, (c : (Cart[Real, Finite_sum[M, N]]) -> Bool))
+      #|  IMAGE(fstcart, (c : (Cart[Real, Finite_sum[M, N]]) -> Bool))
+      #|  (c : (Cart[Real, Finite_sum[M, N]]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, Finite_sum[M, N]]) -> Bool, face_of(c, PCROSS(s, s')) == (\226\136\131 f : (Cart[Real, M]) -> Bool, \226\136\131 f' : (Cart[Real, N]) -> Bool, face_of(f, s) && face_of(f', s') && c == PCROSS(f, f'))
+      #|  (f' : (Cart[Real, N]) -> Bool) == {}
+      #|  (f : (Cart[Real, M]) -> Bool) == {}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 f' : (Cart[Real, N]) -> Bool, \226\136\128 s' : (Cart[Real, N]) -> Bool, face_of(PCROSS(f, f'), PCROSS(s, s')) == (f == {} || f' == {} || face_of(f, s) && face_of(f', s'))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  ((a : Real) == (b : Real)) == (a <= b && a == b)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, face_of({(x : Cart[Real, N]) | dot(a, x) == b}, {(x : Cart[Real, N]) | dot(a, x) <= b})
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  ((a : Real) == (b : Real)) == (a >= b && a == b)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, face_of({(x : Cart[Real, N]) | dot(a, x) == b}, {(x : Cart[Real, N]) | dot(a, x) >= b})
+      #|  {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) <= (b : Real)}
+      #|  face_of((f : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == (b : Real)})
+      #|  (!(r : Bool) \226\134\146 (p : Bool) || (q : Bool)) \226\134\146 p || q || r
+      #|  {(x : _) | (p : Bool)} == (if p { UNIV } else { {} })
+      #|  (a : Cart[Real, N]) == vec(0)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, face_of(f, {(x : Cart[Real, N]) | dot(a, x) <= b}) == (f == {} || f == {(x : Cart[Real, N]) | dot(a, x) == b} || f == {(x : Cart[Real, N]) | dot(a, x) <= b})
+      #|  -(b : Real)
+      #|  -(a : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, face_of(f, {(x : Cart[Real, N]) | dot(a, x) >= b}) == (f == {} || f == {(x : Cart[Real, N]) | dot(a, x) == b} || f == {(x : Cart[Real, N]) | dot(a, x) >= b})
+      #|  (y : Cart[Real, N])
+      #|  (\226\136\128 x : _, IN(x, (i : (_) -> Bool)) \226\134\146 IN(x, (s : (_) -> Bool)) && !IN(x, (t : (_) -> Bool))) \226\134\146 !(i == {}) \226\134\146 !(t == s)
+      #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(y : Cart[Real, N]) | dot((a : Cart[Real, N]), y) == dot(a, (x : Cart[Real, N]))})
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && IN(x, s) && !IN(x, relative_interior(s)) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) && IN(x, f))
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && closed(s) \226\134\146 relative_frontier(s) == UNIONS({(f : (Cart[Real, N]) -> Bool) | face_of(f, s) && !(f == s)})
+      #|  IN((f : (_) -> Bool), (t : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(t), f)
+      #|  !((s : (_) -> Bool) == (t : (_) -> Bool)) \226\134\146 SUBSET(s, t) && SUBSET(t, s) \226\134\146 false
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool)) && !(IN(x, s) && !IN(x, relative_interior(s))) \226\134\146 IN(x, relative_interior(s))
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  INTERS({(f : (Cart[Real, N]) -> Bool) | face_of(f, (s : (Cart[Real, N]) -> Bool)) && IN((x : Cart[Real, N]), f)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && IN(x, s) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, face_of(f, s) && IN(x, relative_interior(f)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 UNIONS({relative_interior((f : (Cart[Real, N]) -> Bool)) | face_of(f, s)}) == s
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && IN(x, s) \226\134\146 existsunique((f : (Cart[Real, N]) -> Bool) => face_of(f, s) && IN(x, relative_interior(f)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && SUBSET(t, s) && !(DIFF(relative_interior(t), relative_interior(s)) == {}) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) && SUBSET(t, f))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && !(s == {}) && convex(t) && SUBSET(t, DIFF(s, relative_interior(s))) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, face_of(f, s) && !(f == s) && SUBSET(t, f))
+      #|  (P : (_) -> Bool)((a : _)) \226\134\146 INSERT((f : (_) -> _)(a), {f((x : _)) | P(x) && !(x == a)}) == {f((x : _)) | P(x)}
+      #|  UNION((u : (_) -> Bool), (s : (_) -> Bool)) == (t : (_) -> Bool) && DISJOINT(u, s) \226\134\146 s == DIFF(t, u)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && closed(s) \226\134\146 UNIONS({relative_interior((f : (Cart[Real, N]) -> Bool)) | face_of(f, s) && !(f == s)}) == relative_frontier(s)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x) == (R : (_) -> Bool)(x)) \226\134\146 {(f : (_) -> _)((x : _)) | P(x) && Q(x)} == {f((x : _)) | P(x) && R(x)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && closed(s) \226\134\146 UNIONS({relative_interior((f : (Cart[Real, N]) -> Bool)) | face_of(f, s) && aff_dim(f) < aff_dim(s)}) == relative_frontier(s)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (z : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (convex : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (closed : ((Cart[Real, N]) -> Bool) -> Bool)(s) \226\134\146 (frontier : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s) == (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({(f : (Cart[Real, N]) -> Bool) | (face_of : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f, s) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(f) < int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))})
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)) && IN(x, (t : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  relative_interior((f : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, convex(s) && convex(t) && face_of(f, INTER(s, t)) \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, \226\136\131 l : (Cart[Real, N]) -> Bool, face_of(k, s) && face_of(l, t) && INTER(k, l) == f)
+      #|  (exposed_face_of : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((t : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == (face_of(t, s) && (\226\136\131 a : Cart[Real, _], \226\136\131 b : Real, SUBSET(s, {(x : Cart[Real, _]) | dot(a, x) <= b}) && t == INTER(s, {(x : Cart[Real, _]) | dot(a, x) == b})))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, exposed_face_of(t, s) \226\134\146 face_of(t, s)
+      #|  real_of_num(1)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, exposed_face_of({}, s)
+      #|  real_of_num(0)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  convex((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, exposed_face_of(s, s) == convex(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 exposed_face_of(s, s)
+      #|  (a : Cart[Real, N]) == vec(0)
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, exposed_face_of(t, s) == (face_of(t, s) && (t == {} || t == s || (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && SUBSET(s, {(x : Cart[Real, N]) | dot(a, x) <= b}) && t == INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}))))
+      #|  (x : Real) + (y : Real) - y == x
+      #|  (b : Real) + dot((c : Cart[Real, N]), (a : Cart[Real, N]))
+      #|  (b : Real) - dot((c : Cart[Real, N]), (a : Cart[Real, N]))
+      #|  (b : Real)
+      #|  (c : Cart[Real, N])
+      #|  (y : Cart[Real, N]) + ((x : Cart[Real, N]) - y) == x
+      #|  (x : Cart[Real, N]) => (a : Cart[Real, N]) + x
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, exposed_face_of(IMAGE((x : Cart[Real, N]) => a + x, f), IMAGE((x : Cart[Real, N]) => a + x, s)) == exposed_face_of(f, s)
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])((a : Cart[Real, M]))
+      #|  (g : (Cart[Real, M]) -> Cart[Real, N])
+      #|  adjoint((f : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  (a : Cart[Real, M])
+      #|  adjoint((f : (Cart[Real, M]) -> Cart[Real, N]), (a : Cart[Real, N]))
+      #|  (a : Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 exposed_face_of(IMAGE(f, c), IMAGE(f, s)) == exposed_face_of(c, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) <= b) \226\134\146 exposed_face_of(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}), s)
+      #|  -(b : Real)
+      #|  -(a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, convex(s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) >= b) \226\134\146 exposed_face_of(INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}), s)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (INTER(INTER((s : (_) -> Bool), (t1 : (_) -> Bool)), INTER(s, (t2 : (_) -> Bool))) == INTER(s, (u : (_) -> Bool))) == (\226\136\128 x : _, IN(x, s) \226\134\146 (IN(x, t1) && IN(x, t2)) == IN(x, u))
+      #|  (b : Real) + (b' : Real)
+      #|  (a : Cart[Real, N]) + (a' : Cart[Real, N])
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  (b' : Real)
+      #|  (a' : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, exposed_face_of(t, s) && exposed_face_of(u, s) \226\134\146 exposed_face_of(INTER(t, u), s)
+      #|  (P : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  (P : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (Q : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (Q : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  FINITE((Q : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  \226\136\128 t : (Cart[Real, N]) -> Bool, IN(t, (Q : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 exposed_face_of(t, (s : (Cart[Real, N]) -> Bool))
+      #|  (INTERS((s : ((_) -> Bool) -> Bool)) == UNIV) == (\226\136\128 t : (_) -> Bool, IN(t, s) \226\134\146 t == UNIV)
+      #|  (Q : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  (Q : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (P : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 P : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, !(P == {}) && (\226\136\128 t : (Cart[Real, N]) -> Bool, IN(t, P) \226\134\146 exposed_face_of(t, s)) \226\134\146 exposed_face_of(INTERS(P), s)
+      #|  (b : Cart[Real, N])
+      #|  (a0 : Cart[Real, N])
+      #|  (b0 : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a0 : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (b0 : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  INTER((t : (Cart[Real, N]) -> Bool), {(y : Cart[Real, N]) | dot((u : Cart[Real, N]), y) == dot(u, (b0 : Cart[Real, N]))})
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((u : Cart[Real, N]), x) == dot(u, (a0 : Cart[Real, N]))})
+      #|  (b0 : Cart[Real, N])
+      #|  (a0 : Cart[Real, N])
+      #|  (z : Real)
+      #|  (u : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))}
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, convex(s) && convex(t) && exposed_face_of(f, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)}) \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, \226\136\131 l : (Cart[Real, N]) -> Bool, exposed_face_of(k, s) && exposed_face_of(l, t) && f == {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, k) && IN(y, l)})
+      #|  (w : Cart[Real, N]) + -(a : Cart[Real, N]) == w + op_pct(real_of_num(1), w - (w + a))
+      #|  INTER((s' : (_) -> Bool), (a : (_) -> Bool)) == INTER(s', (b : (_) -> Bool)) \226\134\146 SUBSET((s : (_) -> Bool), s') \226\134\146 INTER(s, b) == INTER(s, a)
+      #|  {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) <= (b : Real)}
+      #|  SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) && SUBSET(s, UNION(DIFF(UNIV, {(x : _) | (P : (_) -> Bool)(x)}), {(x : _) | (Q : (_) -> Bool)(x)})) \226\134\146 SUBSET(s, UNION(DIFF(UNIV, INTER(s', {(x : _) | P(x)})), INTER(s', {(x : _) | Q(x)})))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s' : (_) -> Bool, SUBSET((s : (_) -> Bool), s') && SUBSET(s, UNION(DIFF(UNIV, INTER(s', {(x : _) | (P : (_) -> Bool)(x)})), INTER(s', {(x : _) | (Q : (_) -> Bool)(x)}))) \226\134\146 SUBSET(s, {(x : _) | !P(x) || Q(x)})
+      #|  ((b : Real) <= (a : Real)) == (!(a <= b) || a == b)
+      #|  -(b' : Real)
+      #|  -(a' : Cart[Real, N])
+      #|  (b' : Real)
+      #|  (a' : Cart[Real, N])
+      #|  {(x : _) | true} == UNIV
+      #|  real_of_num(0)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), hull(affine, s))
+      #|  (t : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool)
+      #|  INTER((s' : (_) -> Bool), (t' : (_) -> Bool)) == {} \226\134\146 SUBSET((s : (_) -> Bool), s') && SUBSET((t : (_) -> Bool), t') \226\134\146 INTER(s, t) == {}
+      #|  (p : Bool) \226\134\146 p && !(!p && (q : Bool))
+      #|  !(real_of_num(0) == real_of_num(1))
+      #|  {(x : _) | true} == UNIV
+      #|  real_of_num(1)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  -(b : Real)
+      #|  -(a : Cart[Real, N])
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, exposed_face_of(t, s) == (face_of(t, s) && (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, SUBSET(s, {(x : Cart[Real, N]) | dot(a, x) <= b}) && t == INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}) && (!(t == {}) && !(t == s) \226\134\146 !(a == vec(0))) && (\226\136\128 w : Cart[Real, N], IN(w, hull(affine, s)) && !(t == s) \226\134\146 IN(w + a, hull(affine, s)))))
+      #|  (z : Cart[Real, N])
+      #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(y : Cart[Real, N]) | dot((a : Cart[Real, N]), y) == dot(a, (x : Cart[Real, N]))})
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && IN(x, s) && !IN(x, relative_interior(s)) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, exposed_face_of(f, s) && !(f == s) && IN(x, f))
+      #|  (extreme_point_of : (Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((x : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool)) == (IN(x, s) && (\226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], IN(a, s) && IN(b, s) \226\134\146 !IN(x, segment((a, b)))))
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && IN(x, DIFF(s, relative_interior(s))) && (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], SUBSET({a, b}, DIFF(s, relative_interior(s))) \226\134\146 !IN(x, segment((a, b)))) \226\134\146 extreme_point_of(x, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(x, s) && convex(DELETE(s, x)) \226\134\146 extreme_point_of(x, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && SUBSET(t, {(x : Cart[Real, N]) | extreme_point_of(x, s)}) \226\134\146 convex(DIFF(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) \226\134\146 extreme_point_of(x, s) == (IN(x, s) && convex(DELETE(s, x)))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, face_of({x}, s) == extreme_point_of(x, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, (face_of(f, s) && aff_dim(f) == int_of_num(0)) == (\226\136\131 a : Cart[Real, N], extreme_point_of(a, s) && f == {a})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], extreme_point_of(x, s) && !(s == {x}) \226\134\146 !IN(x, relative_interior(s))
+      #|  (s : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N])}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], extreme_point_of(x, s) \226\134\146 !IN(x, interior(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], extreme_point_of(x, s) && !(s == {x}) \226\134\146 IN(x, relative_frontier(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], extreme_point_of(x, s) \226\134\146 IN(x, frontier(s))
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 v : Cart[Real, _], face_of(f, s) \226\134\146 extreme_point_of(v, f) == (extreme_point_of(v, s) && IN(v, f))
+      #|  ((x : Cart[Real, N]) == x + (d : Cart[Real, N])) == (d == vec(0))
+      #|  ((x : Cart[Real, N]) == x - (d : Cart[Real, N])) == (d == vec(0))
+      #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, (b : Cart[Real, N])) + op_pct((d : Real) / real_of_num(2), b - a) == op_pct(real_of_num(1) - (u + d / real_of_num(2)), a) + op_pct(u + d / real_of_num(2), b)
+      #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, N])) + op_pct(u, (b : Cart[Real, N])) - op_pct((d : Real) / real_of_num(2), b - a) == op_pct(real_of_num(1) - (u - d / real_of_num(2)), a) + op_pct(u - d / real_of_num(2), b)
+      #|  (x : Cart[Real, N]) + op_pct((d : Real) / real_of_num(2), (b : Cart[Real, N]) - (a : Cart[Real, N]))
+      #|  (x : Cart[Real, N]) - op_pct((d : Real) / real_of_num(2), (b : Cart[Real, N]) - (a : Cart[Real, N]))
+      #|  (d : Real) == min(real_of_num(1) - (u : Real), u)
+      #|  (u : Real)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) \226\134\146 extreme_point_of(x, s) == (IN(x, s) && (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], IN(a, s) && IN(b, s) && x == midpoint((a, b)) \226\134\146 x == a && x == b))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (convex : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  DELETE(hull(convex, (s : (Cart[Real, N]) -> Bool)), (x : Cart[Real, N]))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (convex : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, extreme_point_of(x, hull(convex, s)) \226\134\146 IN(x, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, SUBSET({(x : Cart[Real, _]) | extreme_point_of(x, hull(convex, s))}, s)
+      #|  \226\136\128 x : Cart[Real, _], !extreme_point_of(x, {})
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 x : Cart[Real, _], extreme_point_of(x, {a}) == (x == a)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, extreme_point_of(a + x, IMAGE((x : Cart[Real, N]) => a + x, s)) == extreme_point_of(x, s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 extreme_point_of(f((x : Cart[Real, M])), IMAGE(f, (s : (Cart[Real, M]) -> Bool))) == extreme_point_of(x, s)
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == y - a)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, {(x : Cart[Real, N]) | extreme_point_of(x, IMAGE((x : Cart[Real, N]) => a + x, s))} == IMAGE((x : Cart[Real, N]) => a + x, {(x : Cart[Real, N]) | extreme_point_of(x, s)})
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, extreme_point_of(x, s) && extreme_point_of(x, t) \226\134\146 extreme_point_of(x, INTER(s, t))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, (extreme_point_of(x, s) || extreme_point_of(x, t)) && IN(x, INTER(s, t)) \226\134\146 extreme_point_of(x, INTER(s, t))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 {(y : Cart[Real, N]) | extreme_point_of(y, IMAGE(f, (s : (Cart[Real, M]) -> Bool)))} == IMAGE(f, {(x : Cart[Real, M]) | extreme_point_of(x, s)})
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], \226\136\128 b : Real, \226\136\128 c : Cart[Real, _], (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 dot(a, x) <= b) && INTER(s, {(x : Cart[Real, _]) | dot(a, x) == b}) == {c} \226\134\146 extreme_point_of(c, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 a : Cart[Real, _], \226\136\128 b : Real, \226\136\128 c : Cart[Real, _], (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 dot(a, x) >= b) && INTER(s, {(x : Cart[Real, _]) | dot(a, x) == b}) == {c} \226\134\146 extreme_point_of(c, s)
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, \226\136\128 c : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) <= b) && INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}) == {c} \226\134\146 exposed_face_of({c}, s)
+      #|  (c : Cart[Real, N])
+      #|  -(b : Real)
+      #|  -(a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, \226\136\128 c : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) >= b) && INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}) == {c} \226\134\146 exposed_face_of({c}, s)
+      #|  (b : Cart[Real, N]) - (x : Cart[Real, N])
+      #|  dot((b : Cart[Real, N]), (x : Cart[Real, N])) == dot(b, b)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  dot((b : Cart[Real, N]), b)
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], IN(b, s) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dist((a, x)) <= dist((a, b))) \226\134\146 exposed_face_of({b}, s)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  collinear({(a : Cart[Real, N]), (b : Cart[Real, N]), (c : Cart[Real, N])})
+      #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)) && IN((b : Cart[Real, N]), s) && IN((c : Cart[Real, N]), s)
+      #|  extreme_point_of((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)) && extreme_point_of((b : Cart[Real, N]), s) && extreme_point_of((c : Cart[Real, N]), s)
+      #|  (c : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (2 < (n : Num)) == (3 <= n)
+      #|  ((a : Bool) && !(b : Bool)) == !(a \226\134\146 b)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, collinear(s) \226\134\146 FINITE({(x : Cart[Real, N]) | extreme_point_of(x, s)}) && CARD({(x : Cart[Real, N]) | extreme_point_of(x, s)}) <= 2
+      #|  real_of_num(0) <= real_of_num(0) && !(real_of_num(1) == real_of_num(0))
+      #|  (op_pct((c : Real), (x : Cart[Real, N])) == x) == (op_pct(c - real_of_num(1), x) == vec(0))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], conic(s) && extreme_point_of(x, s) \226\134\146 x == vec(0)
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 DIFF(INSERT(a, s), {a}) == s
+      #|  INSERT((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  {(a : Cart[Real, N])}
+      #|  IN((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], FINITE(s) && !IN(a, hull(convex, s)) \226\134\146 extreme_point_of(a, hull(convex, INSERT(a, s)))
+      #|  (y : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  !IN((z : _), (s : (_) -> Bool)) \226\134\146 SUBSET((t : (_) -> Bool), s) \226\134\146 !IN(z, t)
+      #|  (z : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (y : Cart[Real, N])
+      #|  (u : Real) < real_of_num(1) && !((a : Real) == real_of_num(0)) \226\134\146 inv((real_of_num(1) - u) * a) * (real_of_num(1) - u) * a == real_of_num(1)
+      #|  (z : Cart[Real, N])
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((real_of_num(1) - (u : Real)) * (a : Real)))
+      #|  (c : Real) == real_of_num(0)
+      #|  (y : Cart[Real, N])
+      #|  real_of_num(0) < (u : Real) && !((c : Real) == real_of_num(0)) \226\134\146 inv(u * c) * u * c == real_of_num(1)
+      #|  (z : Cart[Real, N])
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((u : Real) * (c : Real)))
+      #|  (c : Real) == real_of_num(0)
+      #|  (a : Real) == real_of_num(0)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) && !(x == real_of_num(0) && y == real_of_num(0)) \226\134\146 real_of_num(0) < x + y
+      #|  real_of_num(0) < (real_of_num(1) - (u : Real)) * (a : Real) + u * (c : Real)
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((real_of_num(1) - (u : Real)) * (a : Real) + u * (c : Real)))
+      #|  (z : Cart[Real, N])
+      #|  (b : Real) / ((real_of_num(1) - (u : Real)) * (a : Real) + u * (c : Real))
+      #|  \226\136\131 c : Real, real_of_num(0) <= c && (x : Cart[Real, N]) == op_pct(c, (y : Cart[Real, N]))
+      #|  (u : Real)
+      #|  (z : Cart[Real, N]) == (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (b : Real)
+      #|  (z : Cart[Real, N])
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, face_of(f, s) && !IN(vec(0), hull(affine, s)) \226\134\146 face_of(hull(conic, f), hull(conic, s))
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (x : Cart[Real, N])
+      #|  inv((c : Real))
+      #|  op_pct((c : Real), (x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  \226\136\128 x : Cart[Real, N], IN(x, hull(conic, (s : (Cart[Real, N]) -> Bool))) && IN(x, (f : (Cart[Real, N]) -> Bool)) && !(x == vec(0)) \226\134\146 IN(x, hull(conic, INTER(f, hull(affine, s))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  INTER((f : (Cart[Real, N]) -> Bool), hull(affine, (s : (Cart[Real, N]) -> Bool)))
+      #|  (f : (Cart[Real, N]) -> Bool) == {vec(0)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, hull(conic, s)) && !IN(vec(0), hull(affine, s)) \226\134\146 f == {vec(0)} || (\226\136\131 f' : (Cart[Real, N]) -> Bool, face_of(f', s) && hull(conic, f') == f)
+      #|  (u : Real) * (b : Real)
+      #|  (real_of_num(1) - (u : Real)) * (a : Real)
+      #|  (u : Real)
+      #|  !IN((z : _), (s : (_) -> Bool)) \226\134\146 (\226\136\128 t : (_) -> Bool, SUBSET(t, s) \226\134\146 !IN(z, t))
+      #|  hull(affine, {(u : Cart[Real, N]), (v : Cart[Real, N])})
+      #|  (b : Real) == real_of_num(0)
+      #|  (a : Real) == real_of_num(0)
+      #|  (v : Cart[Real, N])
+      #|  (b : Real)
+      #|  (u : Cart[Real, N])
+      #|  (a : Real)
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 !(s == {})
+      #|  ({(a : _)} == {(b : _)}) == (a == b)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], !IN(vec(0), hull(affine, s)) \226\134\146 extreme_point_of(x, hull(conic, s)) == (x == vec(0) && !(s == {}))
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, s)) \226\134\146 face_of(f, hull(conic, s)) == (f == {vec(0)} && !(s == {}) || (\226\136\131 f' : (Cart[Real, N]) -> Bool, face_of(f', s) && hull(conic, f') == f))
+      #|  ((x : Real) <= (y : Real) && !(x < y)) == (x == y)
+      #|  (r : Real) == real_of_num(0)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 r : Real, \226\136\128 x : Cart[Real, N], extreme_point_of(x, cball((a, r))) == IN(x, sphere((a, r)))
+      #|  norm((x : Cart[Real, N])) == dist((vec(0), x))
       #|  :real
       #|  :real
-      #|  a % x:real^N
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  ~(t:real^N->bool = {})
-      #|  x:real^N
-      #|  a:real
-      #|  interval[vec 0,lift(r / setdist({vec 0:real^N},t))] PCROSS\n              (t:real^N->bool)
-      #|  r:real
-      #|  vec 0:real^N
-      #|  k:real^N->bool
-      #|  k:real^N->bool
-      #|  (p <=> q /\\ r) ==> p ==> q
-      #|  IMAGE (\\z. drop(fstcart z) % (sndcart z:real^N))\n           ({t | &0 <= drop t} PCROSS s)
-      #|  {t | &0 <= drop t} PCROSS (t:real^N->bool)
-      #|  \\z. drop(fstcart z) % (sndcart z:real^N)
-      #|  forall s t:real^N->bool.\n        compact t /\\ ~(vec 0 IN t) /\\ t SUBSET s\n        ==> closed_in (subtopology euclidean (conic hull s))\n                      (conic hull t)
-      #|  s:real^N->bool
-      #|  (:real^N)
-      #|  forall s:real^N->bool.\n     vec 0 IN relative_interior s \\/ compact s /\\ ~(vec 0 IN s)\n     ==> closed(conic hull s)
-      #|  \\n. c % (a:num->real^N) n
-      #|  a:num->real^N
-      #|  c:real
-      #|  x:real^N
-      #|  forall s:real^N->bool. conic s ==> conic(closure s)
-      #|  s:real^N->bool
-      #|  forall s:real^N->bool.\n        vec 0 IN relative_interior s \\/ bounded s /\\ ~(vec 0 IN closure s)\n        ==> closure(conic hull s) = conic hull (closure s)
-      #|  u:real^N->bool
-      #|  s:real^N->bool
-      #|  \\x:real^N. c % x
-      #|  c:real
-      #|  conic hull s DELETE (vec 0:real^N) =\n     UNIONS {IMAGE (\\x. c % x) s | &0 < c} DELETE vec 0
-      #|  forall u s:real^N->bool.\n        conic u /\\ open_in (subtopology euclidean u) s\n        ==> open_in (subtopology euclidean u) (conic hull s DELETE vec 0)
-      #|  s:real^N->bool
-      #|  (:real^N)
-      #|  forall s:real^N->bool. open s ==> open(conic hull s DELETE vec 0)
-      #|  sum (t:real^N->bool) q = &1
-      #|  q:real^N->real
-      #|  t:real^N->bool
-      #|  &0 < b ==> (b * t = b <=> t = &1)
-      #|  sum t (\\x:real^N. a dot q x % x) = b * sum t q
-      #|  q:real^N->real
-      #|  t:real^N->bool
-      #|  z:real^N
-      #|  forall z:real^N. z IN span u /\\ a dot z = b ==> z IN affine hull u
-      #|  &0 < a /\\ &0 < b ==> a / b * b / a = &1
-      #|  c * b:real
-      #|  forall y. &0 < y /\\ abs(x - y) < y ==> &0 < x
-      #|  &0 < (a:real^N) dot y
-      #|  (b / (a dot y)) % y:real^N
-      #|  (a dot (y:real^N)) / b
-      #|  y:real^N = vec 0
-      #|  dist (b / (a dot y) % y:real^N,x) < norm x
-      #|  d:real
-      #|  &0 < b /\\ &0 < c ==> b / (c * b) * c = &1
-      #|  min e (norm(x:real^N))
-      #|  (\\y:real^N. (b / (a dot y)) % y) continuous (at (c % x))
-      #|  k:real
-      #|  &0 < c
-      #|  a dot (c % x:real^N)
-      #|  (\\y:real^N. lift(a dot y)) continuous (at (c % x))
-      #|  forall x:real^N. x IN s ==> a dot x = b
-      #|  e:real
-      #|  x:real^N
-      #|  x:real^N
-      #|  c:real
-      #|  conic hull (affine hull u):real^N->bool
-      #|  s SUBSET t ==> s DELETE a SUBSET t
-      #|  b:real
-      #|  a:real^N
-      #|  p /\\ q /\\ r /\\ s <=> r /\\ p /\\ q /\\ s
-      #|  affine hull u:real^N->bool
-      #|  {vec 0:real^N}
-      #|  vec 0 INSERT s SUBSET t ==> s SUBSET t
-      #|  affine hull (vec 0 INSERT u:real^N->bool) = affine hull u
-      #|  (vec 0:real^N) IN affine hull u
-      #|  u:real^N->bool = {}
-      #|  s:real^N->bool = {}
-      #|  forall u s:real^N->bool.\n        open_in (subtopology euclidean (affine hull u)) s\n        ==> open_in (subtopology euclidean (affine hull (conic hull u)))\n                    (conic hull s DELETE vec 0)
-      #|  y:real^N
-      #|  y:real^N
-      #|  min d k:real
-      #|  abs c:real
-      #|  c:real
-      #|  inv(c) % y:real^N
-      #|  y:real^N
-      #|  c * e:real
-      #|  e:real
-      #|  x:real^N = vec 0
-      #|  c = &0
-      #|  c:real
-      #|  x:real^N
-      #|  forall s:real^N->bool. conic s ==> conic(vec 0 INSERT interior s)
-      #|  a IN s ==> a INSERT s = s
-      #|  forall s:real^N->bool. conic s /\\ vec 0 IN interior s ==> conic(interior s)
-      #|  abs c:real
-      #|  c:real
-      #|  inv(c) % y:real^N
-      #|  &0
-      #|  x:real^N
-      #|  y:real^N
-      #|  c * e:real
-      #|  e:real
-      #|  x:real^N = vec 0
-      #|  c = &0
-      #|  c:real
-      #|  x:real^N
-      #|  forall s:real^N->bool. conic s ==> conic(vec 0 INSERT relative_interior s)
-      #|  a IN s ==> a INSERT s = s
-      #|  forall s:real^N->bool.\n        conic s /\\ vec 0 IN relative_interior s\n        ==> conic(relative_interior s)
-      #|  s SUBSET t ==> s DELETE a SUBSET t
-      #|  forall s:real^N->bool.\n        conic hull (relative_interior s) DELETE (vec 0) SUBSET\n        relative_interior(conic hull s)
-      #|  x:real^N = inv a % a % x
-      #|  x:real^N
-      #|  a:real
-      #|  ~(a % x:real^N = vec 0)
-      #|  z:real^N = inv b % y
-      #|  z:real^N
-      #|  b = &0
-      #|  z:real^N
-      #|  b:real
-      #|  y:real^N
-      #|  ?y:real^N. ~(y = vec 0) /\\ y IN c
-      #|  a % x:real^N = vec 0
-      #|  x:real^N
-      #|  a:real
-      #|  c SUBSET k ==> (forall x. x IN k ==> x IN c ==> x IN u) ==> c SUBSET u
-      #|  forall s c:real^N->bool.\n        conic c /\\ ~(c = {vec 0}) /\\ c SUBSET conic hull s\n        ==> conic hull (s INTER c) = c
-      #|  affine hull (conic hull s):real^N->bool
-      #|  conic hull s:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  relative_interior s:real^N->bool
-      #|  ~(a IN t) ==> (a INSERT s) INTER t = s INTER t
-      #|  conic hull s:real^N->bool
-      #|  s = t ==> t SUBSET s
-      #|  conic hull\n      ((vec 0 INSERT relative_interior (conic hull s:real^N->bool)) INTER\n        affine hull s)
-      #|  ~(a IN t) /\\ a INSERT t SUBSET s ==> t SUBSET s DELETE a
-      #|  ~((vec 0:real^N) IN relative_interior(conic hull s))
-      #|  relative_interior (conic hull s):real^N->bool = {}
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        ~(vec 0 IN affine hull s)\n        ==> relative_interior(conic hull s) =\n            conic hull (relative_interior s) DELETE (vec 0)
-      #|  a IN s ==> s = a INSERT (s DELETE a)
-      #|  forall s:real^N->bool.\n        ~(vec 0 IN affine hull s)\n        ==> conic hull (relative_interior s) =\n            if relative_interior s = {} then {}\n            else (vec 0) INSERT relative_interior(conic hull s)
-      #|  ~(z IN s) ==> t SUBSET s ==> z IN t ==> F
-      #|  c % x:real^N = d % z
-      #|  a + --b = &0 <=> a = b
-      #|  a + --b % y:real^N = vec 0 <=> a = b % y
-      #|  --d:real
-      #|  c:real
-      #|  vec 0 IN affine hull {x:real^N,z}
-      #|  z:real^N
-      #|  d:real
-      #|  x:real^N
-      #|  c:real
-      #|  &0
-      #|  y:real^N = vec 0
-      #|  y:real^N
-      #|  forall s t:real^N->bool.\n        ~(vec 0 IN affine hull s) /\\ t SUBSET s\n        ==> conic hull (s DIFF t) =\n            if t = s then {}\n            else conic hull s DIFF (conic hull t DELETE vec 0)
-      #|  forall q t. ~(z IN s) ==> t SUBSET s ==> z IN t ==> q
-      #|  a + --b = &0 <=> a = b
-      #|  a + --b % y:real^N = vec 0 <=> a = b % y
-      #|  --d:real
-      #|  c:real
-      #|  vec 0 IN affine hull {x:real^N,y}
-      #|  x:real^N = y
-      #|  c:real = d
-      #|  &0
-      #|  z:real^N = vec 0
-      #|  y:real^N
-      #|  d:real
-      #|  x:real^N
-      #|  c:real
-      #|  z:real^N
-      #|  s INTER t:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        ~(vec 0 IN affine hull (s UNION t))\n        ==> conic hull (s INTER t) =\n            if s INTER t = {} then {}\n            else conic hull s INTER conic hull t
-      #|  (%) (inv d):real^N->real^N
-      #|  z:real^N = c % x
-      #|  &0 < d
-      #|  c / d:real
-      #|  y:real^N
-      #|  p /\\ ~q ==> (p ==> q) ==> r
-      #|  x:real^N
-      #|  vec 0:real^N
-      #|  u:real^N->bool
-      #|  c:real
-      #|  d:real
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  z:real^N
-      #|  x:real^N
-      #|  y:real^N
-      #|  x:real^N = y
-      #|  c:real = d
-      #|  &0
-      #|  z:real^N = vec 0
-      #|  y:real^N
-      #|  d:real
-      #|  x:real^N
-      #|  c:real
-      #|  z:real^N = vec 0
-      #|  z:real^N
-      #|  conic hull (s INTER t) DELETE (vec 0:real^N)
-      #|  s DELETE vec 0 SUBSET t /\\ vec 0 IN t ==> s SUBSET t
-      #|  t:real^N->bool = {}
-      #|  s:real^N->bool = {}
-      #|  forall s t u:real^N->bool.\n        convex u /\\ vec 0 IN relative_interior u /\\\n        s UNION t SUBSET relative_frontier u\n        ==> conic hull s INTER conic hull t =\n            if s = {} \\/ t = {} then {}\n            else if s INTER t = {} then {vec 0}\n            else conic hull (s INTER t)
-      #|  a IN s ==> s DIFF (s DELETE a) = {a}
-      #|  {a} = {b} <=> b = a
-      #|  a:real^N
-      #|  affine(s:real^N->bool)
-      #|  s:real^N->bool
-      #|  ~((vec 0:real^N) IN closure s)
-      #|  forall s:real^N->bool.\n        bounded s /\\ ~(vec 0 IN affine hull s)\n        ==> relative_frontier(conic hull s) =\n            if ?a. s = {a} then {vec 0}\n            else conic hull (relative_frontier s)
-      #|  forall s:real^N->bool.\n        bounded s /\\ ~(vec 0 IN affine hull s)\n        ==> conic hull (relative_frontier s) =\n            if ?a. s = {a} then {}\n            else relative_frontier(conic hull s)
-      #|  a IN s ==> ~(s = {})
-      #|  (vec 0:real^N) IN interior {x | a dot x <= c}
-      #|  {x:real^N | a dot x <= c}
-      #|  b:real = &0
-      #|  c:real
-      #|  b:real
-      #|  a:real^N
-      #|  s:real^N->bool = {} /\\ t:real^N->bool = {}
-      #|  DISJOINT {x} s <=> ~(x IN s)
-      #|  affine hull (s UNION t):real^N->bool
-      #|  {vec 0:real^N}
-      #|  forall s t:real^N->bool.\n        ~(vec 0 IN affine hull (s UNION t))\n        ==> conic hull s INTER conic hull t =\n            if s = {} \\/ t = {} then {}\n            else if s INTER t = {} then {vec 0}\n            else conic hull (s INTER t)
-      #|  a = b + &1 ==> a * y = b * y + y
-      #|  a % y - --y:real^N = (a + &1) % y
-      #|  dist(a:real^N,b) = dist(--a,--b)
+      #|  op_pct((a : Real), (x : Cart[Real, N]))
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  !((t : (Cart[Real, N]) -> Bool) == {})
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  PCROSS(interval([(vec(0), lift((r : Real) / setdist(({vec(0)}, (t : (Cart[Real, N]) -> Bool)))))]), t)
+      #|  (r : Real)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (p : Bool) == ((q : Bool) && (r : Bool)) \226\134\146 p \226\134\146 q
+      #|  IMAGE((z : Cart[Real, Finite_sum[Unit, N]]) => op_pct(drop(fstcart(z)), sndcart(z)), PCROSS({(t : Cart[Real, Unit]) | real_of_num(0) <= drop(t)}, (s : (Cart[Real, N]) -> Bool)))
+      #|  PCROSS({(t : Cart[Real, Unit]) | real_of_num(0) <= drop(t)}, (t : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, Finite_sum[Unit, N]]) => op_pct(drop(fstcart(z)), sndcart(z))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(t) && !IN(vec(0), t) && SUBSET(t, s) \226\134\146 closed_in(subtopology(euclidean, hull(conic, s)), hull(conic, t))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, IN(vec(0), relative_interior(s)) || compact(s) && !IN(vec(0), s) \226\134\146 closed(hull(conic, s))
+      #|  (n : Num) => op_pct((c : Real), (a : (Num) -> Cart[Real, N])(n))
+      #|  (a : (Num) -> Cart[Real, N])
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, conic(s) \226\134\146 conic(closure(s))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, IN(vec(0), relative_interior(s)) || bounded(s) && !IN(vec(0), closure(s)) \226\134\146 closure(hull(conic, s)) == hull(conic, closure(s))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) => op_pct((c : Real), x)
+      #|  (c : Real)
+      #|  DELETE(hull(conic, (s : (Cart[Real, N]) -> Bool)), vec(0)) == DELETE(UNIONS({IMAGE((x : Cart[Real, N]) => op_pct((c : Real), x), s) | real_of_num(0) < c}), vec(0))
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, conic(u) && open_in(subtopology(euclidean, u), s) \226\134\146 open_in(subtopology(euclidean, u), DELETE(hull(conic, s), vec(0)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (UNIV : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 open(DELETE(hull(conic, s), vec(0)))
+      #|  sum((t : (Cart[Real, N]) -> Bool), (q : (Cart[Real, N]) -> Real)) == real_of_num(1)
+      #|  (q : (Cart[Real, N]) -> Real)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(0) < (b : Real) \226\134\146 (b * (t : Real) == b) == (t == real_of_num(1))
+      #|  sum((t : (Cart[Real, N]) -> Bool), (x : Cart[Real, N]) => dot((a : Cart[Real, N]), op_pct((q : (Cart[Real, N]) -> Real)(x), x))) == (b : Real) * sum(t, q)
+      #|  (q : (Cart[Real, N]) -> Real)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (z : Cart[Real, N])
+      #|  \226\136\128 z : Cart[Real, N], IN(z, span((u : (Cart[Real, N]) -> Bool))) && dot((a : Cart[Real, N]), z) == (b : Real) \226\134\146 IN(z, hull(affine, u))
+      #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real) \226\134\146 a / b * (b / a) == real_of_num(1)
+      #|  (c : Real) * (b : Real)
+      #|  \226\136\128 y : Real, real_of_num(0) < y && abs((x : Real) - y) < y \226\134\146 real_of_num(0) < x
+      #|  real_of_num(0) < dot((a : Cart[Real, N]), (y : Cart[Real, N]))
+      #|  op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y)
+      #|  dot((a : Cart[Real, N]), (y : Cart[Real, N])) / (b : Real)
+      #|  (y : Cart[Real, N]) == vec(0)
+      #|  dist((op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y), (x : Cart[Real, N]))) < norm(x)
+      #|  (d : Real)
+      #|  real_of_num(0) < (b : Real) && real_of_num(0) < (c : Real) \226\134\146 b / (c * b) * c == real_of_num(1)
+      #|  min((e : Real), norm((x : Cart[Real, N])))
+      #|  continuous((y : Cart[Real, N]) => op_pct((b : Real) / dot((a : Cart[Real, N]), y), y), at(op_pct((c : Real), (x : Cart[Real, N]))))
+      #|  (k : Real)
+      #|  real_of_num(0) < (c : Real)
+      #|  dot((a : Cart[Real, N]), op_pct((c : Real), (x : Cart[Real, N])))
+      #|  continuous((y : Cart[Real, N]) => lift(dot((a : Cart[Real, N]), y)), at(op_pct((c : Real), (x : Cart[Real, N]))))
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (s : (Cart[Real, N]) -> Bool)) \226\134\146 dot((a : Cart[Real, N]), x) == (b : Real)
+      #|  (e : Real)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  hull(conic, hull(affine, (u : (Cart[Real, N]) -> Bool)))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DELETE(s, (a : _)), t)
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == (r && p && q && s)
+      #|  hull(affine, (u : (Cart[Real, N]) -> Bool))
+      #|  {(vec : (Num) -> Cart[Real, N])(0)}
+      #|  SUBSET(INSERT(vec(0), (s : (Cart[Real, _]) -> Bool)), (t : (Cart[Real, _]) -> Bool)) \226\134\146 SUBSET(s, t)
+      #|  hull(affine, INSERT(vec(0), (u : (Cart[Real, N]) -> Bool))) == hull(affine, u)
+      #|  IN(vec(0), hull(affine, (u : (Cart[Real, N]) -> Bool)))
+      #|  (u : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, hull(affine, u)), s) \226\134\146 open_in(subtopology(euclidean, hull(affine, hull(conic, u))), DELETE(hull(conic, s), vec(0)))
+      #|  (y : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  min((d : Real), (k : Real))
+      #|  abs((c : Real))
+      #|  (c : Real)
+      #|  op_pct(inv((c : Real)), (y : Cart[Real, N]))
+      #|  (y : Cart[Real, N])
+      #|  (c : Real) * (e : Real)
+      #|  (e : Real)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (c : Real) == real_of_num(0)
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, conic(s) \226\134\146 conic(INSERT(vec(0), interior(s)))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 INSERT(a, s) == s
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, conic(s) && IN(vec(0), interior(s)) \226\134\146 conic(interior(s))
+      #|  abs((c : Real))
+      #|  (c : Real)
+      #|  op_pct(inv((c : Real)), (y : Cart[Real, N]))
+      #|  real_of_num(0)
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (c : Real) * (e : Real)
+      #|  (e : Real)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (c : Real) == real_of_num(0)
+      #|  (c : Real)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, conic(s) \226\134\146 conic(INSERT(vec(0), relative_interior(s)))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 INSERT(a, s) == s
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, conic(s) && IN(vec(0), relative_interior(s)) \226\134\146 conic(relative_interior(s))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DELETE(s, (a : _)), t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, SUBSET(DELETE(hull(conic, relative_interior(s)), vec(0)), relative_interior(hull(conic, s)))
+      #|  (x : Cart[Real, N]) == op_pct(inv((a : Real)), op_pct(a, x))
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  !(op_pct((a : Real), (x : Cart[Real, N])) == vec(0))
+      #|  (z : Cart[Real, N]) == op_pct(inv((b : Real)), (y : Cart[Real, N]))
+      #|  (z : Cart[Real, N])
+      #|  (b : Real) == real_of_num(0)
+      #|  (z : Cart[Real, N])
+      #|  (b : Real)
+      #|  (y : Cart[Real, N])
+      #|  \226\136\131 y : Cart[Real, N], !(y == vec(0)) && IN(y, (c : (Cart[Real, N]) -> Bool))
+      #|  op_pct((a : Real), (x : Cart[Real, N])) == vec(0)
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  SUBSET((c : (_) -> Bool), (k : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, k) \226\134\146 IN(x, c) \226\134\146 IN(x, (u : (_) -> Bool))) \226\134\146 SUBSET(c, u)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, conic(c) && !(c == {vec(0)}) && SUBSET(c, hull(conic, s)) \226\134\146 hull(conic, INTER(s, c)) == c
+      #|  hull(affine, hull(conic, (s : (Cart[Real, N]) -> Bool)))
+      #|  hull(conic, (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool))
+      #|  !IN((a : _), (t : (_) -> Bool)) \226\134\146 INTER(INSERT(a, (s : (_) -> Bool)), t) == INTER(s, t)
+      #|  hull(conic, (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 SUBSET(t, s)
+      #|  hull(conic, INTER(INSERT(vec(0), relative_interior(hull(conic, (s : (Cart[Real, N]) -> Bool)))), hull(affine, s)))
+      #|  !IN((a : _), (t : (_) -> Bool)) && SUBSET(INSERT(a, t), (s : (_) -> Bool)) \226\134\146 SUBSET(t, DELETE(s, a))
+      #|  !IN(vec(0), relative_interior(hull(conic, (s : (Cart[Real, N]) -> Bool))))
+      #|  relative_interior(hull(conic, (s : (Cart[Real, N]) -> Bool))) == {}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, s)) \226\134\146 relative_interior(hull(conic, s)) == DELETE(hull(conic, relative_interior(s)), vec(0))
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 s == INSERT(a, DELETE(s, a))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, s)) \226\134\146 hull(conic, relative_interior(s)) == (if relative_interior(s) == {} { {} } else { INSERT(vec(0), relative_interior(hull(conic, s))) })
+      #|  !IN((z : _), (s : (_) -> Bool)) \226\134\146 SUBSET((t : (_) -> Bool), s) \226\134\146 IN(z, t) \226\134\146 false
+      #|  op_pct((c : Real), (x : Cart[Real, N])) == op_pct((d : Real), (z : Cart[Real, N]))
+      #|  ((a : Real) + -(b : Real) == real_of_num(0)) == (a == b)
+      #|  ((a : Cart[Real, N]) + op_pct(-(b : Real), (y : Cart[Real, N])) == vec(0)) == (a == op_pct(b, y))
+      #|  -(d : Real)
+      #|  (c : Real)
+      #|  IN(vec(0), hull(affine, {(x : Cart[Real, N]), (z : Cart[Real, N])}))
+      #|  (z : Cart[Real, N])
+      #|  (d : Real)
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  real_of_num(0)
+      #|  (y : Cart[Real, N]) == vec(0)
+      #|  (y : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, s)) && SUBSET(t, s) \226\134\146 hull(conic, DIFF(s, t)) == (if t == s { {} } else { DIFF(hull(conic, s), DELETE(hull(conic, t), vec(0))) })
+      #|  \226\136\128 q : Bool, \226\136\128 t : (_) -> Bool, !IN((z : _), (s : (_) -> Bool)) \226\134\146 SUBSET(t, s) \226\134\146 IN(z, t) \226\134\146 q
+      #|  ((a : Real) + -(b : Real) == real_of_num(0)) == (a == b)
+      #|  ((a : Cart[Real, N]) + op_pct(-(b : Real), (y : Cart[Real, N])) == vec(0)) == (a == op_pct(b, y))
+      #|  -(d : Real)
+      #|  (c : Real)
+      #|  IN(vec(0), hull(affine, {(x : Cart[Real, N]), (y : Cart[Real, N])}))
+      #|  (x : Cart[Real, N]) == (y : Cart[Real, N])
+      #|  (c : Real) == (d : Real)
+      #|  real_of_num(0)
+      #|  (z : Cart[Real, N]) == vec(0)
+      #|  (y : Cart[Real, N])
+      #|  (d : Real)
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  (z : Cart[Real, N])
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, UNION(s, t))) \226\134\146 hull(conic, INTER(s, t)) == (if INTER(s, t) == {} { {} } else { INTER(hull(conic, s), hull(conic, t)) })
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((d : Real)))
+      #|  (z : Cart[Real, N]) == op_pct((c : Real), (x : Cart[Real, N]))
+      #|  real_of_num(0) < (d : Real)
+      #|  (c : Real) / (d : Real)
+      #|  (y : Cart[Real, N])
+      #|  (p : Bool) && !(q : Bool) \226\134\146 (p \226\134\146 q) \226\134\146 (r : Bool)
+      #|  (x : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (c : Real)
+      #|  (d : Real)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N]) == (y : Cart[Real, N])
+      #|  (c : Real) == (d : Real)
+      #|  real_of_num(0)
+      #|  (z : Cart[Real, N]) == vec(0)
+      #|  (y : Cart[Real, N])
+      #|  (d : Real)
+      #|  (x : Cart[Real, N])
+      #|  (c : Real)
+      #|  (z : Cart[Real, N]) == vec(0)
+      #|  (z : Cart[Real, N])
+      #|  DELETE(hull(conic, INTER((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool))), vec(0))
+      #|  SUBSET(DELETE((s : (Cart[Real, _]) -> Bool), vec(0)), (t : (Cart[Real, _]) -> Bool)) && IN(vec(0), t) \226\134\146 SUBSET(s, t)
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, convex(u) && IN(vec(0), relative_interior(u)) && SUBSET(UNION(s, t), relative_frontier(u)) \226\134\146 INTER(hull(conic, s), hull(conic, t)) == (if s == {} || t == {} { {} } else { if INTER(s, t) == {} { {vec(0)} } else { hull(conic, INTER(s, t)) } })
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 DIFF(s, DELETE(s, a)) == {a}
+      #|  ({(a : _)} == {(b : _)}) == (b == a)
+      #|  (a : Cart[Real, N])
+      #|  affine((s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !IN(vec(0), closure((s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && !IN(vec(0), hull(affine, s)) \226\134\146 relative_frontier(hull(conic, s)) == (if (\226\136\131 a : Cart[Real, N], s == {a}) { {vec(0)} } else { hull(conic, relative_frontier(s)) })
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && !IN(vec(0), hull(affine, s)) \226\134\146 hull(conic, relative_frontier(s)) == (if (\226\136\131 a : Cart[Real, N], s == {a}) { {} } else { relative_frontier(hull(conic, s)) })
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 !(s == {})
+      #|  IN(vec(0), interior({(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) <= (c : Real)}))
+      #|  {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) <= (c : Real)}
+      #|  (b : Real) == real_of_num(0)
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == {} && (t : (Cart[Real, N]) -> Bool) == {}
+      #|  DISJOINT({(x : _)}, (s : (_) -> Bool)) == !IN(x, s)
+      #|  hull(affine, UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)))
+      #|  {(vec : (Num) -> Cart[Real, N])(0)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !IN(vec(0), hull(affine, UNION(s, t))) \226\134\146 INTER(hull(conic, s), hull(conic, t)) == (if s == {} || t == {} { {} } else { if INTER(s, t) == {} { {vec(0)} } else { hull(conic, INTER(s, t)) } })
+      #|  (a : Real) == (b : Real) + real_of_num(1) \226\134\146 a * (y : Real) == b * y + y
+      #|  op_pct((a : Real), (y : Cart[Real, N])) - -y == op_pct(a + real_of_num(1), y)
+      #|  dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) == dist((-a, -b))
       #|  :real
       #|  :real
-      #|  y:real^N
-      #|  y:real^N
-      #|  a = &0
-      #|  a:real
-      #|  (--x:real^N) IN conic hull s
-      #|  x:real^N
-      #|  conic hull s:real^N->bool = span s
-      #|  (vec 0:real^N) IN affine hull s
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        convex s\n        ==> (vec 0 IN relative_interior(conic hull s) <=>\n             vec 0 IN relative_interior s)
-      #|  f facet_of s <=> f face_of s /\\ ~(f = {}) /\\ aff_dim f = aff_dim s - &1
-      #|  forall s. ~(s facet_of {})
-      #|  ~(x:int = x - &1)
-      #|  forall s. ~(s facet_of s)
-      #|  forall f s. f facet_of s ==> f face_of s
-      #|  forall f s. f facet_of s ==> f SUBSET s
-      #|  ~(x - &1:int = x)
-      #|  forall f s. f facet_of s ==> ~(f = {}) /\\ ~(f = s)
-      #|  forall a:real^N f s.\n        (IMAGE (\\x. a + x) f) facet_of (IMAGE (\\x. a + x) s) <=> f facet_of s
-      #|  forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) facet_of (IMAGE f s) <=> c facet_of s)
-      #|  forall a:real^N b.\n        ~(a = vec 0) ==> {x | a dot x = b} facet_of {x | a dot x <= b}
-      #|  forall a:real^N b.\n        ~(a = vec 0) ==> {x | a dot x = b} facet_of {x | a dot x >= b}
-      #|  ~(~p /\\ p)
-      #|  {x | p} = if p then UNIV else {}
-      #|  a:real^N = vec 0
-      #|  (p \\/ q) /\\ ~p /\\ r <=> (~p /\\ q) /\\ r
-      #|  forall f a:real^N b.\n        f facet_of {x | a dot x <= b} <=>\n        ~(a = vec 0) /\\ f = {x | a dot x = b}
-      #|  --b:real
-      #|  --a:real^N
-      #|  f:real^N->bool
-      #|  forall f a:real^N b.\n        f facet_of {x | a dot x >= b} <=>\n        ~(a = vec 0) /\\ f = {x | a dot x = b}
-      #|  s:real^N->bool
-      #|  aff_dim(f:real^N->bool)
-      #|  ~p ==> p ==> q
-      #|  t:int = s - &1 ==> forall f. t < f /\\ f < s ==> F
-      #|  t:real^N->bool = f
-      #|  t:real^N->bool
-      #|  f:real^N->bool
-      #|  s:real^N->bool
-      #|  f:real^N->bool
-      #|  ~(t:int = t - &1)
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  ~(relative_interior t:real^N->bool = {})
-      #|  forall s t:real^N->bool. convex s /\\ t facet_of s ==> t exposed_face_of s
-      #|  conic hull f:real^N->bool
-      #|  s SUBSET t ==> s DIFF u SUBSET t
-      #|  affine hull s:real^N->bool
-      #|  z IN i ==> (c DIFF i) INTER (z INSERT s) = (c DIFF i) INTER s
-      #|  f:real^N->bool
-      #|  s:real^N->bool
-      #|  ~(vec 0 IN affine hull (f:real^N->bool))
-      #|  relative_interior f:real^N->bool
-      #|  s:real^N->bool
-      #|  z:real^N
-      #|  z:real^N
-      #|  relative_interior s:real^N->bool = {}
-      #|  forall s f:real^N->bool.\n        convex s /\\ f facet_of s\n        ==> open_in (subtopology euclidean (relative_frontier s))\n                    (relative_interior f)
-      #|  (s DIFF i) DIFF i = s DIFF i
-      #|  {f x | x = a} = {f a}
-      #|  forall f:real^N->bool. f face_of s /\\ aff_dim f = &1 <=> f = s
-      #|  &1:int <= a ==> a <= &2 ==> a = &1 \\/ a = &2
-      #|  {f x | P x /\\ (?a. x = s a)} = {f (s a) |a| P (s a)}
-      #|  ~(&1:int = &0)
+      #|  (y : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (a : Real) == real_of_num(0)
+      #|  (a : Real)
+      #|  IN(-(x : Cart[Real, N]), hull(conic, (s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N])
+      #|  hull(conic, (s : (Cart[Real, N]) -> Bool)) == span(s)
+      #|  IN(vec(0), hull(affine, (s : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) \226\134\146 IN(vec(0), relative_interior(hull(conic, s))) == IN(vec(0), relative_interior(s))
+      #|  (facet_of : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == (face_of(f, s) && !(f == {}) && aff_dim(f) == aff_dim(s) - int_of_num(1))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, !facet_of(s, {})
+      #|  !((x : Int) == x - int_of_num(1))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, !facet_of(s, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, facet_of(f, s) \226\134\146 face_of(f, s)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, facet_of(f, s) \226\134\146 SUBSET(f, s)
+      #|  !((x : Int) - int_of_num(1) == x)
+      #|  \226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, facet_of(f, s) \226\134\146 !(f == {}) && !(f == s)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, facet_of(IMAGE((x : Cart[Real, N]) => a + x, f), IMAGE((x : Cart[Real, N]) => a + x, s)) == facet_of(f, s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 facet_of(IMAGE(f, c), IMAGE(f, s)) == facet_of(c, s)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, !(a == vec(0)) \226\134\146 facet_of({(x : Cart[Real, N]) | dot(a, x) == b}, {(x : Cart[Real, N]) | dot(a, x) <= b})
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, !(a == vec(0)) \226\134\146 facet_of({(x : Cart[Real, N]) | dot(a, x) == b}, {(x : Cart[Real, N]) | dot(a, x) >= b})
+      #|  !(!(p : Bool) && p)
+      #|  {(x : _) | (p : Bool)} == (if p { UNIV } else { {} })
+      #|  (a : Cart[Real, N]) == vec(0)
+      #|  (((p : Bool) || (q : Bool)) && !p && (r : Bool)) == ((!p && q) && r)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, facet_of(f, {(x : Cart[Real, N]) | dot(a, x) <= b}) == (!(a == vec(0)) && f == {(x : Cart[Real, N]) | dot(a, x) == b})
+      #|  -(b : Real)
+      #|  -(a : Cart[Real, N])
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, facet_of(f, {(x : Cart[Real, N]) | dot(a, x) >= b}) == (!(a == vec(0)) && f == {(x : Cart[Real, N]) | dot(a, x) == b})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  aff_dim((f : (Cart[Real, N]) -> Bool))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  (t : Int) == (s : Int) - int_of_num(1) \226\134\146 (\226\136\128 f : Int, t < f && f < s \226\134\146 false)
+      #|  (t : (Cart[Real, N]) -> Bool) == (f : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  !((t : Int) == t - int_of_num(1))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  !(relative_interior((t : (Cart[Real, N]) -> Bool)) == {})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && facet_of(t, s) \226\134\146 exposed_face_of(t, s)
+      #|  hull(conic, (f : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF(s, (u : (_) -> Bool)), t)
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  IN((z : _), (i : (_) -> Bool)) \226\134\146 INTER(DIFF((c : (_) -> Bool), i), INSERT(z, (s : (_) -> Bool))) == INTER(DIFF(c, i), s)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !IN(vec(0), hull(affine, (f : (Cart[Real, N]) -> Bool)))
+      #|  relative_interior((f : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (z : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  relative_interior((s : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, convex(s) && facet_of(f, s) \226\134\146 open_in(subtopology(euclidean, relative_frontier(s)), relative_interior(f))
+      #|  DIFF(DIFF((s : (_) -> Bool), (i : (_) -> Bool)), i) == DIFF(s, i)
+      #|  {(f : (_) -> _)((x : _)) | x == (a : _)} == {f(a)}
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, (face_of(f, (s : (Cart[Real, N]) -> Bool)) && aff_dim(f) == int_of_num(1)) == (f == s)
+      #|  int_of_num(1) <= (a : Int) \226\134\146 a <= int_of_num(2) \226\134\146 a == int_of_num(1) || a == int_of_num(2)
+      #|  {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x) && (\226\136\131 a : _, x == (s : (_) -> _)(a))} == {f(s(a)) | a : _ | P(s(a))}
+      #|  !(int_of_num(1) == int_of_num(0))
       #|  f1 SUBSET f /\\ DISJOINT f f0 /\\ fn = {} /\\ f0 = e\n      ==>  e = (fn UNION f0 UNION f1) DIFF f
-      #|  {f x | P x \\/ Q x} = {f x | P x} UNION {f x | Q x}
-      #|  -- &1:int <= f /\\ &1 <= s /\\ s <= &2\n      ==> (f < s <=> f = -- &1 /\\ &0 <= s \\/\n                     f = &0 \\/\n                     f = &1 /\\ s = &2)
-      #|  {x:real^N | x extreme_point_of s} =\n    relative_frontier s DIFF\n    UNIONS {relative_interior f | f face_of s /\\ aff_dim f = &1}
-      #|  relative_frontier s:real^N->bool
-      #|  a:int <= &2\n    ==> -- &1 <= a ==> a = -- &1 \\/ a = &0 \\/ &1 <= a
-      #|  forall s:real^N->bool.\n        closed s /\\ convex s /\\ aff_dim s <= &2\n        ==> closed {x | x extreme_point_of s}
-      #|  s:int = &2 ==> (f = &1 <=> ~(f = -- &1) /\\ f = s - &1)
-      #|  e edge_of s <=> e face_of s /\\ aff_dim e = &1
-      #|  forall a:real^N f s.\n        (IMAGE (\\x. a + x) f) edge_of (IMAGE (\\x. a + x) s) <=> f edge_of s
-      #|  forall f:real^M->real^N c s.\n      linear f /\\ (forall x y. f x = f y ==> x = y)\n      ==> ((IMAGE f c) edge_of (IMAGE f s) <=> c edge_of s)
-      #|  forall s t. s edge_of t ==> s SUBSET t
-      #|  norm(x:real^N) = (&1 - u) * norm x + u * norm x
-      #|  &0 < u /\\ u < &1 ==> abs u = u /\\ abs(&1 - u) = &1 - u
-      #|  u:real
-      #|  a:real^N = b
-      #|  (x:real^N) IN segment(a,b)
-      #|  a <= x /\\ b <= x /\\ (a < x ==> x < x) /\\ (b < x ==> x < x)\n    ==> a = b /\\ x = b
-      #|  x:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  b:real^N
-      #|  a:real^N
-      #|  x:real^N
-      #|  vec 0:real^N
-      #|  s:real^N->bool
-      #|  forall s:real^N->bool.\n        compact s /\\ convex s /\\ ~(s = {}) ==> ?x. x extreme_point_of s
-      #|  (v:real^N) extreme_point_of t
-      #|  (a:real^N) dot m
-      #|  (a:real^N) dot u
-      #|  (a:real^N) dot v > b
-      #|  {x | x IN s /\\ P x} = s INTER {x | P x}
-      #|  t:real^N->bool
-      #|  (v:real^N) extreme_point_of s
-      #|  {x | x IN s /\\ P x} = s INTER {x | P x}
-      #|  v:real^N
-      #|  ?x:real^N. x extreme_point_of t
-      #|  t = {x:real^N | x IN s /\\ a dot x = a dot m}
-      #|  m:real^N
-      #|  s:real^N->bool
-      #|  \\x:real^N. a dot x
-      #|  b:real
-      #|  a:real^N
-      #|  ~(a /\\ b) <=> a ==> ~b
-      #|  u:real^N
-      #|  closure(convex hull {x:real^N | x extreme_point_of s})
-      #|  (~p ==> F) ==> p
-      #|  u:real^N
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        convex s /\\ compact s\n        ==> s = closure(convex hull {x | x extreme_point_of s})
-      #|  vec 0:real^N = --a + x <=> x = a
-      #|  vec 0:real^N = --a + x <=> x = a
-      #|  IMAGE (\\x:real^N. --a + x) s
-      #|  a:real^N
-      #|  forall x:real^N. x IN span (s INTER {x | a dot x = &0}) ==> a dot x = &0
-      #|  b /\\ ~a ==> ~(a <=> b)
-      #|  c:real^N
-      #|  s:real^N->bool
-      #|  s INTER {x:real^N | a dot x = &0}
-      #|  s SUBSET t ==> x IN s ==> x IN t
-      #|  (vec 0:real^N) IN convex hull\n          {x | x extreme_point_of (s INTER {x | a dot x = &0})}
-      #|  &0
-      #|  a:real^N
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  vec 0:real^N
-      #|  s:real^N->bool
-      #|  ~(relative_interior(s:real^N->bool) = {})
-      #|  (vec 0:real^N) IN relative_interior s
-      #|  s:real^N->bool
-      #|  (vec 0:real^N) IN relative_interior s
-      #|  dim(s:real^N->bool)
-      #|  forall s:real^N->bool.\n        convex s /\\ compact s /\\ (vec 0) IN s\n        ==> (vec 0) IN convex hull {x | x extreme_point_of s}
-      #|  forall s:real^N->bool.\n        convex s /\\ compact s\n        ==> s = convex hull {x | x extreme_point_of s}
-      #|  convex hull {x:real^N | x extreme_point_of s}
-      #|  forall s e:real^N->bool.\n        compact s /\\ convex s\n        ==> (convex hull e = s <=>\n             e SUBSET s /\\ {x | x extreme_point_of s} SUBSET e)
-      #|  forall s. FINITE s\n       ==> convex hull s =\n           convex hull {x | x extreme_point_of (convex hull s)}
-      #|  P /\\ t SUBSET s ==> (t PSUBSET s ==> ~P) ==> t = s
-      #|  {x:real^N | x extreme_point_of (convex hull s)}
-      #|  forall s:real^N->bool.\n        compact s /\\\n        (forall t. t PSUBSET s ==> ~(convex hull t = convex hull s))\n        ==> {x | x extreme_point_of (convex hull s)} = s
-      #|  forall s x:real^N.\n        compact s /\\\n        (forall t. t PSUBSET s ==> ~(convex hull t = convex hull s))\n        ==> (x extreme_point_of (convex hull s) <=> x IN s)
-      #|  convex hull t:real^N->bool
-      #|  s SUBSET convex hull (s DELETE (a:real^N))
-      #|  a:real^N
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  forall s x:real^N.\n        compact s /\\\n        (forall a. a IN s ==> ~(a IN convex hull (s DELETE a)))\n        ==> (x extreme_point_of (convex hull s) <=> x IN s)
-      #|  forall s x. ~affine_dependent s\n         ==> (x extreme_point_of (convex hull s) <=> x IN s)
-      #|  forall s:real^N->bool.\n        ~affine_dependent s ==> {x | x extreme_point_of convex hull s} = s
-      #|  forall s t:real^N->bool.\n        ~affine_dependent s /\\ ~affine_dependent t /\\\n        convex hull s = convex hull t\n        ==> s = t
-      #|  x = a \\/ x = b <=> x IN {a,b}
-      #|  forall a b x. x extreme_point_of (convex hull {a,b}) <=> x = a \\/ x = b
-      #|  forall a b x:real^N. x extreme_point_of segment[a,b] <=> x = a \\/ x = b
-      #|  x:real^N
-      #|  {x:real^N | x extreme_point_of t}
-      #|  forall s t:real^N->bool.\n        compact s /\\ t face_of (convex hull s)\n        ==> ?s'. s' SUBSET s /\\ t = convex hull s'
-      #|  s:real^N->bool
-      #|  affine hull (s DIFF c:real^N->bool)
-      #|  \n     forall t. u SUBSET t /\\ DISJOINT s t ==> DISJOINT s u
-      #|  forall s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t face_of (convex hull s) <=>\n             ?c. c SUBSET s /\\ t = convex hull c)
-      #|  ~(s = 0) ==> s = s - 1 + 1
-      #|  x - &1:int = y - &1 - &1 <=> y = x + &1
-      #|  ~affine_dependent(s DELETE (u:real^N))
-      #|  u:real^N
-      #|  CARD((u:real^N) INSERT c) = CARD c + 1
-      #|  s DIFF t = {a} ==> t SUBSET s ==> s = a INSERT t
-      #|  u:real^N
-      #|  (s DIFF c:real^N->bool) HAS_SIZE 1
-      #|  x - &1:int = y - &1 - &1 <=> y = x + &1
-      #|  ~affine_dependent(c:real^N->bool)
-      #|  aff_dim(convex hull c:real^N->bool) = aff_dim(s:real^N->bool) - &1
-      #|  c:real^N->bool
-      #|  forall s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t facet_of (convex hull s) <=>\n             ~(t = {}) /\\ ?u. u IN s /\\ t = convex hull (s DELETE u))
-      #|  2 <= 1 + x <=> ~(x = 0)
-      #|  ~(s = 0) ==> s = 1 + s - 1
-      #|  CARD s = 1 + CARD(s DELETE (u:real^N))
-      #|  (u:real^N) IN s
-      #|  t = convex hull (s DELETE (u:real^N))
-      #|  u:real^N
-      #|  forall s t:real^N->bool.\n        ~affine_dependent s\n        ==> (t facet_of (convex hull s) <=>\n             2 <= CARD s /\\ ?u. u IN s /\\ t = convex hull (s DELETE u))
-      #|  segment[a:real^N,b]
-      #|  forall s a b:real^N.\n    segment[a,b] face_of s ==> a extreme_point_of s /\\ b extreme_point_of s
-      #|  forall s a b:real^N.\n        segment[a,b] edge_of s\n        ==> ~(a = b) /\\ a extreme_point_of s /\\ b extreme_point_of s
-      #|  ~(a IN s) ==> a INSERT s DIFF s = {a}
-      #|  convex hull v:real^N->bool
-      #|  {a} UNION s = a INSERT s
-      #|  (a:real^N) IN v
-      #|  v = {x:real^N | x extreme_point_of (convex hull s)}
-      #|  {x:real^N | x extreme_point_of convex hull s}
-      #|  convex hull s:real^N->bool
-      #|  a INSERT s = {a} UNION s
-      #|  forall s a x:real^N.\n        FINITE s /\\ ~(a IN affine hull s)\n        ==> (x extreme_point_of (convex hull (a INSERT s)) <=>\n             x = a \\/ x extreme_point_of (convex hull s))
-      #|  ~(x = &0)
-      #|  u + v + w:real = x
-      #|  inv x * w:real
-      #|  inv x * v:real
-      #|  inv x * u:real
-      #|  affine hull {a:real^N,b,c}
-      #|  forall t. x IN t /\\ t SUBSET s ==> x IN s
-      #|  (%) (inv x):real^N->real^N
-      #|  forall a b c p:real^N u v w x.\n          x % p = u % a + v % b + w % c\n          ==> forall s. u + v + w = x /\\ ~(x = &0) /\\ affine s /\\\n                  a IN s /\\ b IN s /\\ c IN s\n                  ==> p IN s
-      #|  p ==> ~p ==> q
-      #|  affine hull s:real^N->bool
-      #|  a + (b - c):real^N = vec 0 ==> a = c + --b
-      #|  ~(ux = &0)
-      #|  (&1 - v) * ub + v * uc = ux
-      #|  inv u * v * uc:real = (v * uc) / u
-      #|  (%) (inv ux) :real^N->real^N
-      #|  b < a + b <=> &0 < a
-      #|  &0 <= x /\\ ~(x = &0) ==> &0 < x
-      #|  (v * uc) / ux:real
-      #|  x:real^N
-      #|  c:real^N = b
-      #|  &1 - x = &1 <=> x = &0
-      #|  x <= y /\\ w <= z /\\ ~(x = y /\\ w = z) ==> x + w < y + z
-      #|  (&1 - v) * &1 + v * &1
-      #|  p ==> ~p ==> q
-      #|  &1 - ux - a = &0 ==> ux = &0 ==> ~(a < &1)
-      #|  x:real^N
-      #|  ux = &0
-      #|  x:real^N
-      #|  &0
-      #|  v * &0 + a = b ==> b = a
-      #|  ub = &0
-      #|  ub = &0
-      #|  x:real^N
-      #|  &0
-      #|  a + v * &0 = b ==> b = a
-      #|  uc = &0
-      #|  uc = &0
-      #|  (&1 - ux) - ((&1 - v) * (&1 - ub) + v * (&1 - uc)) = &0\n      ==> (&1 - v) * ub + v * uc = ux
-      #|  &1 - ux - ((&1 - v) * (&1 - ub) + v * (&1 - uc)) = &0
-      #|  (&1 - ux) % a + ux % x:real^N =\n    (&1 - v) % ((&1 - ub) % a + ub % b) + v % ((&1 - uc) % a + uc % c) <=>\n    ((&1 - ux) - ((&1 - v) * (&1 - ub) + v * (&1 - uc))) % a +\n    (ux % x - (((&1 - v) * ub) % b + (v * uc) % c)) = vec 0
-      #|  v:real
-      #|  convex hull f:real^N->bool = f
-      #|  x:real^N
-      #|  ux:real
-      #|  c:real^N
-      #|  uc:real
-      #|  b:real^N
-      #|  ub:real
-      #|  s SUBSET (a INSERT s)
-      #|  convex hull s:real^N->bool
-      #|  f:real^N->bool = {}
-      #|  (f:real^N->bool) face_of convex hull s
-      #|  s:real^N->bool = {}
-      #|  f:real^N->bool
-      #|  f':real^N->bool
-      #|  f':real^N->bool
-      #|  x:real^N = a
-      #|  s SUBSET (a INSERT s)
-      #|  convex hull ((a:real^N) INSERT s)
-      #|  (convex hull t) INTER (convex hull s):real^N->bool
-      #|  convex hull ((a:real^N) INSERT s)
-      #|  (a:real^N) IN t
-      #|  t:real^N->bool
-      #|  forall f s a:real^N.\n        FINITE s /\\ ~(a IN affine hull s)\n        ==> (f face_of (convex hull (a INSERT s)) <=>\n             f face_of (convex hull s) \\/\n             ?f'. f' face_of (convex hull s) /\\\n                  f = convex hull (a INSERT f'))
-      #|  (b:real^N) IN f /\\ (c:real^N) IN f
-      #|  ~DISJOINT {x | P x} t ==> (forall x. x IN t ==> ~P x) ==> Q
-      #|  convex hull s:real^N->bool
-      #|  convex hull s:real^N->bool
-      #|  e SUBSET s ==> forall t. e SUBSET t \\/ ~DISJOINT e (s DIFF t)
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s t:real^N->bool.\n        compact s /\\ t SUBSET s /\\\n        DISJOINT (s DIFF t) {x | x extreme_point_of convex hull s}\n        ==> convex hull s = convex hull t
-      #|  convex hull s:real^N->bool
-      #|  forall s t:real^N->bool.\n        compact s /\\ t SUBSET s /\\\n        s DIFF t SUBSET interior(convex hull s)\n        ==> convex hull s = convex hull t
-      #|  t:real^N->bool
-      #|  forall s t:real^N->bool.\n        convex hull s = convex hull t\n        ==> DISJOINT (s DIFF t) {x | x extreme_point_of (convex hull s)}
-      #|  w * v <= &1 * (u - w * u + w * v) <=> &0 <= (&1 - w) * u
-      #|  &0 < u - w * u + w * v
-      #|  inv(u - w * u + w * v) * (u - w * u) =\n    &1 - inv(u - w * u + w * v) * w * v
-      #|  (%) (inv(u - w * u + w * v)):real^N->real^N
-      #|  u = &0 /\\ v = &0
-      #|  ~((&1 - w) * u = &0 /\\ w * v = &0) /\\\n       &0 <= (&1 - w) * u /\\ &0 <= w * v\n       ==> &0 < u - w * u + w * v
-      #|  &0 < u - w * u + w * v
-      #|  c:real^N = (&1 - w) % ((&1 - u) % c + u % x) + w % ((&1 - v) % c + v % y)\n    <=> (u - w * u) % x + (w * v) % y = ((u - w * u) + w * v) % c
-      #|  w:real
-      #|  y:real^N
-      #|  v:real
-      #|  x:real^N
-      #|  u:real
-      #|  s SUBSET x INSERT s
-      #|  s:real^N->bool = {}
-      #|  forall s a b c:real^N.\n        a IN convex hull (c INSERT s) /\\\n        b IN convex hull (c INSERT s) /\\\n        c IN segment(a,b)\n        ==> convex hull (c INSERT s) = convex hull s
-      #|  s = (a:real^N) INSERT t
-      #|  t = s DELETE (a:real^N)
-      #|  s DELETE (a:real^N) = s \\/ a IN s
-      #|  a extreme_point_of convex hull s\n      ==> {x | x extreme_point_of convex hull s} SUBSET s ==> a IN s
-      #|  forall s a:real^N. convex hull (s DELETE a) = convex hull s <=>\n                ~(a extreme_point_of convex hull s)
-      #|  (d * a pow 2):real = a * d * a
-      #|  ay - (ax + d * --a) <= b ==> ax <= ay ==> d * a <= b
-      #|  y - (x + d % --a):real^N
-      #|  a:real^N
-      #|  dist(x:real^N,x + a) = norm a
+      #|  {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)} == UNION({f((x : _)) | P(x)}, {f((x : _)) | Q(x)})
+      #|  -int_of_num(1) <= (f : Int) && int_of_num(1) <= (s : Int) && s <= int_of_num(2) \226\134\146 (f < s) == (f == -int_of_num(1) && int_of_num(0) <= s || f == int_of_num(0) || f == int_of_num(1) && s == int_of_num(2))
+      #|  {(x : Cart[Real, N]) | extreme_point_of(x, (s : (Cart[Real, N]) -> Bool))} == DIFF(relative_frontier(s), UNIONS({relative_interior((f : (Cart[Real, N]) -> Bool)) | face_of(f, s) && aff_dim(f) == int_of_num(1)}))
+      #|  relative_frontier((s : (Cart[Real, N]) -> Bool))
+      #|  (a : Int) <= int_of_num(2) \226\134\146 -int_of_num(1) <= a \226\134\146 a == -int_of_num(1) || a == int_of_num(0) || int_of_num(1) <= a
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, closed(s) && convex(s) && aff_dim(s) <= int_of_num(2) \226\134\146 closed({(x : Cart[Real, N]) | extreme_point_of(x, s)})
+      #|  (s : Int) == int_of_num(2) \226\134\146 ((f : Int) == int_of_num(1)) == (!(f == -int_of_num(1)) && f == s - int_of_num(1))
+      #|  (edge_of : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((e : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == (face_of(e, s) && aff_dim(e) == int_of_num(1))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, edge_of(IMAGE((x : Cart[Real, N]) => a + x, f), IMAGE((x : Cart[Real, N]) => a + x, s)) == edge_of(f, s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 c : (Cart[Real, M]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 edge_of(IMAGE(f, c), IMAGE(f, s)) == edge_of(c, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, edge_of(s, t) \226\134\146 SUBSET(s, t)
+      #|  norm((x : Cart[Real, N])) == (real_of_num(1) - (u : Real)) * norm(x) + u * norm(x)
+      #|  real_of_num(0) < (u : Real) && u < real_of_num(1) \226\134\146 abs(u) == u && abs(real_of_num(1) - u) == real_of_num(1) - u
+      #|  (u : Real)
+      #|  (a : Cart[Real, N]) == (b : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), segment(((a : Cart[Real, N]), (b : Cart[Real, N]))))
+      #|  (a : Real) <= (x : Real) && (b : Real) <= x && (a < x \226\134\146 x < x) && (b < x \226\134\146 x < x) \226\134\146 a == b && x == b
+      #|  (x : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && convex(s) && !(s == {}) \226\134\146 (\226\136\131 x : Cart[Real, N], extreme_point_of(x, s))
+      #|  extreme_point_of((v : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  dot((a : Cart[Real, N]), (m : Cart[Real, N]))
+      #|  dot((a : Cart[Real, N]), (u : Cart[Real, N]))
+      #|  dot((a : Cart[Real, N]), (v : Cart[Real, N])) > (b : Real)
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(s, {(x : _) | P(x)})
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  extreme_point_of((v : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(s, {(x : _) | P(x)})
+      #|  (v : Cart[Real, N])
+      #|  \226\136\131 x : Cart[Real, N], extreme_point_of(x, (t : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && dot((a : Cart[Real, N]), x) == dot(a, (m : Cart[Real, N]))}
+      #|  (m : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) => dot((a : Cart[Real, N]), x)
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+      #|  (u : Cart[Real, N])
+      #|  closure(hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, (s : (Cart[Real, N]) -> Bool))}))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (u : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && compact(s) \226\134\146 s == closure(hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, s)}))
+      #|  (vec(0) == -(a : Cart[Real, N]) + (x : Cart[Real, N])) == (x == a)
+      #|  (vec(0) == -(a : Cart[Real, N]) + (x : Cart[Real, N])) == (x == a)
+      #|  IMAGE((x : Cart[Real, N]) => -(a : Cart[Real, N]) + x, (s : (Cart[Real, N]) -> Bool))
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 x : Cart[Real, N], IN(x, span(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == real_of_num(0)}))) \226\134\146 dot(a, x) == real_of_num(0)
+      #|  (b : Bool) && !(a : Bool) \226\134\146 !(a == b)
+      #|  (c : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == real_of_num(0)})
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
+      #|  IN(vec(0), hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) == real_of_num(0)}))}))
+      #|  real_of_num(0)
+      #|  (a : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
+      #|  IN(vec(0), relative_interior((s : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN(vec(0), relative_interior((s : (Cart[Real, N]) -> Bool)))
+      #|  dim((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && compact(s) && IN(vec(0), s) \226\134\146 IN(vec(0), hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, s)}))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && compact(s) \226\134\146 s == hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, s)})
+      #|  hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, (s : (Cart[Real, N]) -> Bool))})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : (Cart[Real, N]) -> Bool, compact(s) && convex(s) \226\134\146 (hull(convex, e) == s) == (SUBSET(e, s) && SUBSET({(x : Cart[Real, N]) | extreme_point_of(x, s)}, e))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, FINITE(s) \226\134\146 hull(convex, s) == hull(convex, {(x : Cart[Real, _]) | extreme_point_of(x, hull(convex, s))})
+      #|  (P : Bool) && SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 (PSUBSET(t, s) \226\134\146 !P) \226\134\146 t == s
+      #|  {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, (s : (Cart[Real, N]) -> Bool)))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, compact(s) && (\226\136\128 t : (Cart[Real, N]) -> Bool, PSUBSET(t, s) \226\134\146 !(hull(convex, t) == hull(convex, s))) \226\134\146 {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, s))} == s
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], compact(s) && (\226\136\128 t : (Cart[Real, N]) -> Bool, PSUBSET(t, s) \226\134\146 !(hull(convex, t) == hull(convex, s))) \226\134\146 extreme_point_of(x, hull(convex, s)) == IN(x, s)
+      #|  hull(convex, (t : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((s : (Cart[Real, N]) -> Bool), hull(convex, DELETE(s, (a : Cart[Real, N]))))
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], compact(s) && (\226\136\128 a : Cart[Real, N], IN(a, s) \226\134\146 !IN(a, hull(convex, DELETE(s, a)))) \226\134\146 extreme_point_of(x, hull(convex, s)) == IN(x, s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 x : Cart[Real, _], !affine_dependent(s) \226\134\146 extreme_point_of(x, hull(convex, s)) == IN(x, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !affine_dependent(s) \226\134\146 {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, s))} == s
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !affine_dependent(s) && !affine_dependent(t) && hull(convex, s) == hull(convex, t) \226\134\146 s == t
+      #|  ((x : _) == (a : _) || x == (b : _)) == IN(x, {a, b})
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 x : Cart[Real, _], extreme_point_of(x, hull(convex, {a, b})) == (x == a || x == b)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], extreme_point_of(x, segment([(a, b)])) == (x == a || x == b)
+      #|  (x : Cart[Real, N])
+      #|  {(x : Cart[Real, N]) | extreme_point_of(x, (t : (Cart[Real, N]) -> Bool))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && face_of(t, hull(convex, s)) \226\134\146 (\226\136\131 s' : (Cart[Real, N]) -> Bool, SUBSET(s', s) && t == hull(convex, s'))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  hull(affine, DIFF((s : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((u : (_) -> Bool), t) && DISJOINT((s : (_) -> Bool), t) \226\134\146 DISJOINT(s, u)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !affine_dependent(s) \226\134\146 face_of(t, hull(convex, s)) == (\226\136\131 c : (Cart[Real, N]) -> Bool, SUBSET(c, s) && t == hull(convex, c))
+      #|  !((s : Num) == 0) \226\134\146 s == s - 1 + 1
+      #|  ((x : Int) - int_of_num(1) == (y : Int) - int_of_num(1) - int_of_num(1)) == (y == x + int_of_num(1))
+      #|  !affine_dependent(DELETE((s : (Cart[Real, N]) -> Bool), (u : Cart[Real, N])))
+      #|  (u : Cart[Real, N])
+      #|  CARD(INSERT((u : Cart[Real, N]), (c : (Cart[Real, N]) -> Bool))) == CARD(c) + 1
+      #|  DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == {(a : _)} \226\134\146 SUBSET(t, s) \226\134\146 s == INSERT(a, t)
+      #|  (u : Cart[Real, N])
+      #|  HAS_SIZE(DIFF((s : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Bool)), 1)
+      #|  ((x : Int) - int_of_num(1) == (y : Int) - int_of_num(1) - int_of_num(1)) == (y == x + int_of_num(1))
+      #|  !affine_dependent((c : (Cart[Real, N]) -> Bool))
+      #|  aff_dim(hull(convex, (c : (Cart[Real, N]) -> Bool))) == aff_dim((s : (Cart[Real, N]) -> Bool)) - int_of_num(1)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !affine_dependent(s) \226\134\146 facet_of(t, hull(convex, s)) == (!(t == {}) && (\226\136\131 u : Cart[Real, N], IN(u, s) && t == hull(convex, DELETE(s, u))))
+      #|  (2 <= 1 + (x : Num)) == !(x == 0)
+      #|  !((s : Num) == 0) \226\134\146 s == 1 + (s - 1)
+      #|  CARD((s : (Cart[Real, N]) -> Bool)) == 1 + CARD(DELETE(s, (u : Cart[Real, N])))
+      #|  IN((u : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool) == hull(convex, DELETE((s : (Cart[Real, N]) -> Bool), (u : Cart[Real, N])))
+      #|  (u : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, !affine_dependent(s) \226\134\146 facet_of(t, hull(convex, s)) == (2 <= CARD(s) && (\226\136\131 u : Cart[Real, N], IN(u, s) && t == hull(convex, DELETE(s, u))))
+      #|  segment([((a : Cart[Real, N]), (b : Cart[Real, N]))])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], face_of(segment([(a, b)]), s) \226\134\146 extreme_point_of(a, s) && extreme_point_of(b, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], edge_of(segment([(a, b)]), s) \226\134\146 !(a == b) && extreme_point_of(a, s) && extreme_point_of(b, s)
+      #|  !IN((a : _), (s : (_) -> Bool)) \226\134\146 DIFF(INSERT(a, s), s) == {a}
+      #|  hull(convex, (v : (Cart[Real, N]) -> Bool))
+      #|  UNION({(a : _)}, (s : (_) -> Bool)) == INSERT(a, s)
+      #|  IN((a : Cart[Real, N]), (v : (Cart[Real, N]) -> Bool))
+      #|  (v : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, (s : (Cart[Real, N]) -> Bool)))}
+      #|  {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, (s : (Cart[Real, N]) -> Bool)))}
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], FINITE(s) && !IN(a, hull(affine, s)) \226\134\146 extreme_point_of(x, hull(convex, INSERT(a, s))) == (x == a || extreme_point_of(x, hull(convex, s)))
+      #|  !((x : Real) == real_of_num(0))
+      #|  (u : Real) + ((v : Real) + (w : Real)) == (x : Real)
+      #|  inv((x : Real)) * (w : Real)
+      #|  inv((x : Real)) * (v : Real)
+      #|  inv((x : Real)) * (u : Real)
+      #|  hull(affine, {(a : Cart[Real, N]), (b : Cart[Real, N]), (c : Cart[Real, N])})
+      #|  \226\136\128 t : (_) -> Bool, IN((x : _), t) && SUBSET(t, (s : (_) -> Bool)) \226\134\146 IN(x, s)
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((x : Real)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 p : Cart[Real, N], \226\136\128 u : Real, \226\136\128 v : Real, \226\136\128 w : Real, \226\136\128 x : Real, op_pct(x, p) == op_pct(u, a) + (op_pct(v, b) + op_pct(w, c)) \226\134\146 (\226\136\128 s : (Cart[Real, N]) -> Bool, u + (v + w) == x && !(x == real_of_num(0)) && affine(s) && IN(a, s) && IN(b, s) && IN(c, s) \226\134\146 IN(p, s))
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (a : Cart[Real, N]) + ((b : Cart[Real, N]) - (c : Cart[Real, N])) == vec(0) \226\134\146 a == c + -b
+      #|  !((ux : Real) == real_of_num(0))
+      #|  (real_of_num(1) - (v : Real)) * (ub : Real) + v * (uc : Real) == (ux : Real)
+      #|  inv((u : Real)) * ((v : Real) * (uc : Real)) == v * uc / u
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((ux : Real)))
+      #|  ((b : Real) < (a : Real) + b) == (real_of_num(0) < a)
+      #|  real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) \226\134\146 real_of_num(0) < x
+      #|  (v : Real) * (uc : Real) / (ux : Real)
+      #|  (x : Cart[Real, N])
+      #|  (c : Cart[Real, N]) == (b : Cart[Real, N])
+      #|  (real_of_num(1) - (x : Real) == real_of_num(1)) == (x == real_of_num(0))
+      #|  (x : Real) <= (y : Real) && (w : Real) <= (z : Real) && !(x == y && w == z) \226\134\146 x + w < y + z
+      #|  (real_of_num(1) - (v : Real)) * real_of_num(1) + v * real_of_num(1)
+      #|  (p : Bool) \226\134\146 !p \226\134\146 (q : Bool)
+      #|  real_of_num(1) - (ux : Real) - (a : Real) == real_of_num(0) \226\134\146 ux == real_of_num(0) \226\134\146 !(a < real_of_num(1))
+      #|  (x : Cart[Real, N])
+      #|  (ux : Real) == real_of_num(0)
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0)
+      #|  (v : Real) * real_of_num(0) + (a : Real) == (b : Real) \226\134\146 b == a
+      #|  (ub : Real) == real_of_num(0)
+      #|  (ub : Real) == real_of_num(0)
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0)
+      #|  (a : Real) + (v : Real) * real_of_num(0) == (b : Real) \226\134\146 b == a
+      #|  (uc : Real) == real_of_num(0)
+      #|  (uc : Real) == real_of_num(0)
+      #|  real_of_num(1) - (ux : Real) - ((real_of_num(1) - (v : Real)) * (real_of_num(1) - (ub : Real)) + v * (real_of_num(1) - (uc : Real))) == real_of_num(0) \226\134\146 (real_of_num(1) - v) * ub + v * uc == ux
+      #|  real_of_num(1) - (ux : Real) - ((real_of_num(1) - (v : Real)) * (real_of_num(1) - (ub : Real)) + v * (real_of_num(1) - (uc : Real))) == real_of_num(0)
+      #|  (op_pct(real_of_num(1) - (ux : Real), (a : Cart[Real, N])) + op_pct(ux, (x : Cart[Real, N])) == op_pct(real_of_num(1) - (v : Real), op_pct(real_of_num(1) - (ub : Real), a) + op_pct(ub, (b : Cart[Real, N]))) + op_pct(v, op_pct(real_of_num(1) - (uc : Real), a) + op_pct(uc, (c : Cart[Real, N])))) == (op_pct(real_of_num(1) - ux - ((real_of_num(1) - v) * (real_of_num(1) - ub) + v * (real_of_num(1) - uc)), a) + (op_pct(ux, x) - (op_pct((real_of_num(1) - v) * ub, b) + op_pct(v * uc, c))) == vec(0))
+      #|  (v : Real)
+      #|  hull(convex, (f : (Cart[Real, N]) -> Bool)) == f
+      #|  (x : Cart[Real, N])
+      #|  (ux : Real)
+      #|  (c : Cart[Real, N])
+      #|  (uc : Real)
+      #|  (b : Cart[Real, N])
+      #|  (ub : Real)
+      #|  SUBSET((s : (_) -> Bool), INSERT((a : _), s))
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  (f : (Cart[Real, N]) -> Bool) == {}
+      #|  face_of((f : (Cart[Real, N]) -> Bool), hull(convex, (s : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N]) -> Bool)
+      #|  (f' : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N]) == (a : Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), INSERT((a : _), s))
+      #|  hull(convex, INSERT((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  INTER(hull(convex, (t : (Cart[Real, N]) -> Bool)), hull(convex, (s : (Cart[Real, N]) -> Bool)))
+      #|  hull(convex, INSERT((a : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)))
+      #|  IN((a : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], FINITE(s) && !IN(a, hull(affine, s)) \226\134\146 face_of(f, hull(convex, INSERT(a, s))) == (face_of(f, hull(convex, s)) || (\226\136\131 f' : (Cart[Real, N]) -> Bool, face_of(f', hull(convex, s)) && f == hull(convex, INSERT(a, f'))))
+      #|  IN((b : Cart[Real, N]), (f : (Cart[Real, N]) -> Bool)) && IN((c : Cart[Real, N]), f)
+      #|  !DISJOINT({(x : _) | (P : (_) -> Bool)(x)}, (t : (_) -> Bool)) \226\134\146 (\226\136\128 x : _, IN(x, t) \226\134\146 !P(x)) \226\134\146 (Q : Bool)
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((e : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 (\226\136\128 t : (_) -> Bool, SUBSET(e, t) || !DISJOINT(e, DIFF(s, t)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && SUBSET(t, s) && DISJOINT(DIFF(s, t), {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, s))}) \226\134\146 hull(convex, s) == hull(convex, t)
+      #|  hull(convex, (s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(s) && SUBSET(t, s) && SUBSET(DIFF(s, t), interior(hull(convex, s))) \226\134\146 hull(convex, s) == hull(convex, t)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hull(convex, s) == hull(convex, t) \226\134\146 DISJOINT(DIFF(s, t), {(x : Cart[Real, N]) | extreme_point_of(x, hull(convex, s))})
+      #|  ((w : Real) * (v : Real) <= real_of_num(1) * ((u : Real) - w * u + w * v)) == (real_of_num(0) <= (real_of_num(1) - w) * u)
+      #|  real_of_num(0) < (u : Real) - (w : Real) * u + w * (v : Real)
+      #|  inv((u : Real) - (w : Real) * u + w * (v : Real)) * (u - w * u) == real_of_num(1) - inv(u - w * u + w * v) * (w * v)
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((u : Real) - (w : Real) * u + w * (v : Real)))
+      #|  (u : Real) == real_of_num(0) && (v : Real) == real_of_num(0)
+      #|  !((real_of_num(1) - (w : Real)) * (u : Real) == real_of_num(0) && w * (v : Real) == real_of_num(0)) && real_of_num(0) <= (real_of_num(1) - w) * u && real_of_num(0) <= w * v \226\134\146 real_of_num(0) < u - w * u + w * v
+      #|  real_of_num(0) < (u : Real) - (w : Real) * u + w * (v : Real)
+      #|  ((c : Cart[Real, N]) == op_pct(real_of_num(1) - (w : Real), op_pct(real_of_num(1) - (u : Real), c) + op_pct(u, (x : Cart[Real, N]))) + op_pct(w, op_pct(real_of_num(1) - (v : Real), c) + op_pct(v, (y : Cart[Real, N])))) == (op_pct(u - w * u, x) + op_pct(w * v, y) == op_pct(u - w * u + w * v, c))
+      #|  (w : Real)
+      #|  (y : Cart[Real, N])
+      #|  (v : Real)
+      #|  (x : Cart[Real, N])
+      #|  (u : Real)
+      #|  SUBSET((s : (_) -> Bool), INSERT((x : _), s))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], IN(a, hull(convex, INSERT(c, s))) && IN(b, hull(convex, INSERT(c, s))) && IN(c, segment((a, b))) \226\134\146 hull(convex, INSERT(c, s)) == hull(convex, s)
+      #|  (s : (Cart[Real, N]) -> Bool) == INSERT((a : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool) == DELETE((s : (Cart[Real, N]) -> Bool), (a : Cart[Real, N]))
+      #|  DELETE((s : (Cart[Real, N]) -> Bool), (a : Cart[Real, N])) == s || IN(a, s)
+      #|  extreme_point_of((a : Cart[Real, _]), hull(convex, (s : (Cart[Real, _]) -> Bool))) \226\134\146 SUBSET({(x : Cart[Real, _]) | extreme_point_of(x, hull(convex, s))}, s) \226\134\146 IN(a, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], (hull(convex, DELETE(s, a)) == hull(convex, s)) == !extreme_point_of(a, hull(convex, s))
+      #|  (d : Real) * pow((a : Real), 2) == a * (d * a)
+      #|  (ay : Real) - ((ax : Real) + (d : Real) * -(a : Real)) <= (b : Real) \226\134\146 ax <= ay \226\134\146 d * a <= b
+      #|  (y : Cart[Real, N]) - ((x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N])))
+      #|  (a : Cart[Real, N])
+      #|  dist(((x : Cart[Real, N]), x + (a : Cart[Real, N]))) == norm(a)
       #|  :real
       #|  :real
-      #|  y:real^N
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  setdist({x + d % --a:real^N},{y | a dot x <= a dot y})
-      #|  dist(x:real^N,x + d % --a)
-      #|  (x + d % --a:real^N) IN frontier t
-      #|  x + d % --a:real^N
-      #|  d:real
-      #|  ~((x:real^N) IN frontier t)
-      #|  --a:real^N
-      #|  x:real^N
-      #|  t:real^N->bool
-      #|  a:real^N
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  (x:real^N) IN frontier s
-      #|  x:real^N
-      #|  (x:real^N) IN t
-      #|  (x:real^N) IN frontier s
-      #|  x:real^N
-      #|  (x:real^N) IN frontier t
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  t:real^N->bool
-      #|  x:real^N
-      #|  y:real^N
-      #|  hausdist(s:real^N->bool,t)
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  frontier t:real^N->bool
-      #|  frontier s:real^N->bool
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  closure s:real^N->bool
-      #|  t:real^N->bool
-      #|  closure t:real^N->bool
-      #|  compact(closure s:real^N->bool) /\\\n    compact(closure t:real^N->bool) /\\\n    convex(closure s:real^N->bool) /\\\n    convex(closure t:real^N->bool) /\\\n    ~(closure s = {}) /\\ ~(closure t = {})
-      #|  closure(frontier s):real^N->bool = frontier(closure s) /\\\n    closure(frontier t):real^N->bool = frontier(closure t)
-      #|  t:real^N->bool = {}
-      #|  s:real^N->bool = {}
-      #|  forall s t:real^N->bool.\n        convex s /\\ convex t /\\ bounded s /\\ bounded t\n        ==> hausdist(frontier s,frontier t) = hausdist(s,t)
-      #|  t:real^N->bool = {}
-      #|  s:real^N->bool = {}
-      #|  forall s t x:real^N.\n\n        bounded s /\\ bounded t /\\ hausdist(s,t) < setdist({x},s)\n        ==> ~(x IN t)
-      #|  (y:real^N) IN s
-      #|  y:real^N
-      #|  x:real^N
-      #|  setdist({x},(:real^N) DIFF s)
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  (~p ==> F) ==> p
-      #|  forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < setdist({x},(:real^N) DIFF s)\n        ==> x IN t
-      #|  d < f - h ==> f <= d + g ==> h < g
-      #|  s:real^N->bool
-      #|  y:real^N
-      #|  setdist({x},(:real^N) DIFF s) - hausdist(s:real^N->bool,t)
-      #|  forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < setdist({x},(:real^N) DIFF s)\n        ==> x IN interior t
-      #|  UNIV DIFF s = {} <=> s = UNIV
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  t:real^N->bool
-      #|  r:real
-      #|  a:real^N
-      #|  forall s:real^N->bool.\n      bounded s /\\ convex s /\\ ~(interior s = {})\n      ==> ?e. &0 < e /\\\n              forall s'. bounded s' /\\ convex s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                   ==> ~(interior s' = {})
-      #|  setdist({x},(:real^N) DIFF interior s)
-      #|  d < f - h ==> h' = h /\\ f <= d + g ==> h' < g
-      #|  interior s:real^N->bool
-      #|  y:real^N
-      #|  setdist({x:real^N},frontier s) - hausdist(s:real^N->bool,t)
-      #|  (x:real^N) IN interior t
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  x < a ==> a = b ==> x < b
-      #|  x:real^N
-      #|  closure t:real^N->bool
-      #|  closure s:real^N->bool
-      #|  ~((x:real^N) IN frontier s)
-      #|  forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\\n        ~(t = {}) /\\ hausdist(s,t) < setdist({x},frontier s)\n        ==> ~(x IN frontier s) /\\ ~(x IN frontier t) /\\ (x IN t <=> x IN s)
-      #|  forall s t x:real^N.\n        bounded s /\\ bounded t /\\ convex s /\\ convex t /\\\n        ~(t = {}) /\\ hausdist(s,t) < setdist({x},frontier s)\n        ==> (x IN t <=> x IN s)
-      #|  (%) (inv a):real^N->real^N
-      #|  norm(x:real^N) = dist(vec 0,x)
+      #|  (y : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  setdist(({(x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N]))}, {(y : Cart[Real, N]) | dot(a, x) <= dot(a, y)}))
+      #|  dist(((x : Cart[Real, N]), x + op_pct((d : Real), -(a : Cart[Real, N]))))
+      #|  IN((x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N])), frontier((t : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N]))
+      #|  (d : Real)
+      #|  !IN((x : Cart[Real, N]), frontier((t : (Cart[Real, N]) -> Bool)))
+      #|  -(a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, N]), frontier((s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), (t : (Cart[Real, N]) -> Bool))
+      #|  IN((x : Cart[Real, N]), frontier((s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N])
+      #|  IN((x : Cart[Real, N]), frontier((t : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  hausdist(((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  frontier((t : (Cart[Real, N]) -> Bool))
+      #|  frontier((s : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  closure((s : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  closure((t : (Cart[Real, N]) -> Bool))
+      #|  compact(closure((s : (Cart[Real, N]) -> Bool))) && compact(closure((t : (Cart[Real, N]) -> Bool))) && convex(closure(s)) && convex(closure(t)) && !(closure(s) == {}) && !(closure(t) == {})
+      #|  closure(frontier((s : (Cart[Real, N]) -> Bool))) == frontier(closure(s)) && closure(frontier((t : (Cart[Real, N]) -> Bool))) == frontier(closure(t))
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, convex(s) && convex(t) && bounded(s) && bounded(t) \226\134\146 hausdist((frontier(s), frontier(t))) == hausdist((s, t))
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && hausdist((s, t)) < setdist(({x}, s)) \226\134\146 !IN(x, t)
+      #|  IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  setdist(({(x : Cart[Real, N])}, DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && convex(s) && convex(t) && !(t == {}) && hausdist((s, t)) < setdist(({x}, DIFF(UNIV, s))) \226\134\146 IN(x, t)
+      #|  (d : Real) < (f : Real) - (h : Real) \226\134\146 f <= d + (g : Real) \226\134\146 h < g
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (y : Cart[Real, N])
+      #|  setdist(({(x : Cart[Real, N])}, DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))) - hausdist((s, (t : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && convex(s) && convex(t) && !(t == {}) && hausdist((s, t)) < setdist(({x}, DIFF(UNIV, s))) \226\134\146 IN(x, interior(t))
+      #|  (DIFF(UNIV, (s : (_) -> Bool)) == {}) == (s == UNIV)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (r : Real)
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, bounded(s) && convex(s) && !(interior(s) == {}) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 s' : (Cart[Real, N]) -> Bool, bounded(s') && convex(s') && !(s' == {}) && hausdist((s, s')) < e \226\134\146 !(interior(s') == {})))
+      #|  setdist(({(x : Cart[Real, N])}, DIFF(UNIV, interior((s : (Cart[Real, N]) -> Bool)))))
+      #|  (d : Real) < (f : Real) - (h : Real) \226\134\146 (h' : Real) == h && f <= d + (g : Real) \226\134\146 h' < g
+      #|  interior((s : (Cart[Real, N]) -> Bool))
+      #|  (y : Cart[Real, N])
+      #|  setdist(({(x : Cart[Real, N])}, frontier((s : (Cart[Real, N]) -> Bool)))) - hausdist((s, (t : (Cart[Real, N]) -> Bool)))
+      #|  IN((x : Cart[Real, N]), interior((t : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (x : Real) < (a : Real) \226\134\146 a == (b : Real) \226\134\146 x < b
+      #|  (x : Cart[Real, N])
+      #|  closure((t : (Cart[Real, N]) -> Bool))
+      #|  closure((s : (Cart[Real, N]) -> Bool))
+      #|  !IN((x : Cart[Real, N]), frontier((s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && convex(s) && convex(t) && !(t == {}) && hausdist((s, t)) < setdist(({x}, frontier(s))) \226\134\146 !IN(x, frontier(s)) && !IN(x, frontier(t)) && IN(x, t) == IN(x, s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], bounded(s) && bounded(t) && convex(s) && convex(t) && !(t == {}) && hausdist((s, t)) < setdist(({x}, frontier(s))) \226\134\146 IN(x, t) == IN(x, s)
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(inv((a : Real)))
+      #|  norm((x : Cart[Real, N])) == dist((vec(0), x))
       #|  :real
       #|  :real
-      #|  norm(y:real^N)
-      #|  abs x <= a ==> x <= a
-      #|  y:real^N
-      #|  inv(a) * u:real
-      #|  a * u:real
-      #|  y:real^N
-      #|  u:real
-      #|  (forall s. convex s ==> p s) <=> (forall s. p (convex hull s))
-      #|  forall a x:real^N s.\n          convex s /\\ &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n          a * norm(x) < setdist({vec 0},s)\n          ==> (x IN conic hull s <=>\n               a % x IN convex hull (vec 0 INSERT s))
-      #|  closure s:real^N->bool
-      #|  x:real^N
-      #|  a:real
-      #|  forall a x:real^N s.\n        convex s /\\ bounded s /\\ ~(vec 0 IN closure s) /\\\n        &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n        a * norm(x) < setdist({vec 0},s)\n        ==> (x IN closure(conic hull s) <=>\n             a % x IN closure(convex hull (vec 0 INSERT s)))
-      #|  y IN ball(x:real^N,norm x)
-      #|  y:real^N
-      #|  (forall x. P x ==> (Q x <=> R x))\n        ==> ((forall x. P x ==> Q x) <=> (forall x. P x ==> R x))
-      #|  min d (min e (norm(x:real^N)))
-      #|  e:real
-      #|  (forall e. &0 < e <=> &0 < a * e) /\\ (forall e. &0 < e <=> &0 < e / a) /\\\n        (forall e. a * e / a = e) /\\ (forall d e. a * d <= a * e <=> d <= e) /\\\n        ((forall d e. d <= e ==> P e ==> P d) /\\ (forall d e. d <= e ==> Q e ==> Q d)) /\\\n        (forall e. &0 < e ==> ?d. &0 < d /\\ d <= e /\\ (P d <=> Q(a * d)))\n        ==> ((?e. &0 < e /\\ P e) <=> (?e. &0 < e /\\ Q e))
-      #|  y:real^N
-      #|  setdist({vec 0:real^N},s) / a - norm(x:real^N)
-      #|  ?d. &0 < d /\\\n        forall y. y IN ball(x:real^N,d) ==> a * norm y < setdist({vec 0:real^N},s)
-      #|  forall a x:real^N s.\n       convex s /\\ &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n       a * norm(x) < setdist({vec 0},s)\n       ==> (x IN interior(conic hull s) <=>\n            a % x IN interior(convex hull (vec 0 INSERT s)))
+      #|  norm((y : Cart[Real, N]))
+      #|  abs((x : Real)) <= (a : Real) \226\134\146 x <= a
+      #|  (y : Cart[Real, N])
+      #|  inv((a : Real)) * (u : Real)
+      #|  (a : Real) * (u : Real)
+      #|  (y : Cart[Real, N])
+      #|  (u : Real)
+      #|  (\226\136\128 s : (Cart[Real, _]) -> Bool, convex(s) \226\134\146 (p : ((Cart[Real, _]) -> Bool) -> Bool)(s)) == (\226\136\128 s : (Cart[Real, _]) -> Bool, p(hull(convex, s)))
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && real_of_num(0) < a && !(x == vec(0)) && !(s == {}) && a * norm(x) < setdist(({vec(0)}, s)) \226\134\146 IN(x, hull(conic, s)) == IN(op_pct(a, x), hull(convex, INSERT(vec(0), s)))
+      #|  closure((s : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && !IN(vec(0), closure(s)) && real_of_num(0) < a && !(x == vec(0)) && !(s == {}) && a * norm(x) < setdist(({vec(0)}, s)) \226\134\146 IN(x, closure(hull(conic, s))) == IN(op_pct(a, x), closure(hull(convex, INSERT(vec(0), s))))
+      #|  IN((y : Cart[Real, N]), ball(((x : Cart[Real, N]), norm(x))))
+      #|  (y : Cart[Real, N])
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x) == (R : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 Q(x)) == (\226\136\128 x : _, P(x) \226\134\146 R(x))
+      #|  min((d : Real), min((e : Real), norm((x : Cart[Real, N]))))
+      #|  (e : Real)
+      #|  (\226\136\128 e : Real, (real_of_num(0) < e) == (real_of_num(0) < (a : Real) * e)) && (\226\136\128 e : Real, (real_of_num(0) < e) == (real_of_num(0) < e / a)) && (\226\136\128 e : Real, a * (e / a) == e) && (\226\136\128 d : Real, \226\136\128 e : Real, (a * d <= a * e) == (d <= e)) && ((\226\136\128 d : Real, \226\136\128 e : Real, d <= e \226\134\146 (P : (Real) -> Bool)(e) \226\134\146 P(d)) && (\226\136\128 d : Real, \226\136\128 e : Real, d <= e \226\134\146 (Q : (Real) -> Bool)(e) \226\134\146 Q(d))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && d <= e && P(d) == Q(a * d))) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && P(e)) == (\226\136\131 e : Real, real_of_num(0) < e && Q(e))
+      #|  (y : Cart[Real, N])
+      #|  setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool))) / (a : Real) - norm((x : Cart[Real, N]))
+      #|  \226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, N], IN(y, ball(((x : Cart[Real, N]), d))) \226\134\146 (a : Real) * norm(y) < setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool))))
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && real_of_num(0) < a && !(x == vec(0)) && !(s == {}) && a * norm(x) < setdist(({vec(0)}, s)) \226\134\146 IN(x, interior(hull(conic, s))) == IN(op_pct(a, x), interior(hull(convex, INSERT(vec(0), s))))
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  forall a x:real^N s.\n       convex s /\\ bounded s /\\ ~(vec 0 IN closure s) /\\\n       &0 < a /\\ ~(x = vec 0) /\\ ~(s = {}) /\\\n       a * norm(x) < setdist({vec 0},s)\n       ==> (x IN frontier(conic hull s) <=>\n            a % x IN frontier(convex hull (vec 0 INSERT s)))
-      #|  s:real^N->bool
-      #|  s':real^N->bool
-      #|  x:real^N
-      #|  a:real
-      #|  x:real^N
-      #|  a:real
-      #|  a % x:real^N
-      #|  convex hull ((vec 0:real^N) INSERT s')
-      #|  convex hull ((vec 0:real^N) INSERT s)
-      #|  s':real^N->bool
-      #|  &0 < x <=> &0 <= x /\\ ~(x = &0)
-      #|  min (min d (setdist({vec 0:real^N},s)))\n     (setdist({a % x:real^N},frontier (convex hull (vec 0 INSERT s))))
-      #|  s:real^N->bool
-      #|  s':real^N->bool
-      #|  {vec 0:real^N}
-      #|  s':real^N->bool
-      #|  x / &2 < x <=> &0 < x
-      #|  setdist({vec 0:real^N},s) / &2
-      #|  setdist({vec 0:real^N},s) / &2 / norm(x:real^N)
-      #|  ?a d. &0 < a /\\ &0 < d /\\\n          a * norm(x:real^N) < setdist({vec 0:real^N},s) /\\\n          forall s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < d\n               ==> a * norm(x) < setdist({vec 0:real^N},s')
-      #|  &0 < setdist({vec 0:real^N},s)
-      #|  forall s x:real^N.\n       convex s /\\ bounded s /\\ ~(s = {}) /\\ ~(vec 0 IN closure s) /\\\n       ~(x = vec 0) /\\ ~(x IN frontier(conic hull s))\n       ==> ?e. &0 < e /\\\n               forall s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                    ==> ~(x IN frontier(conic hull s')) /\\\n                        (x IN conic hull s' <=> x IN conic hull s)
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  &0 < setdist({vec 0:real^N},s)
-      #|  x:real^N = vec 0
-      #|  forall s x:real^N.\n       convex s /\\ bounded s /\\ ~(s = {}) /\\ ~(vec 0 IN closure s) /\\\n       ~(x IN frontier(conic hull s))\n       ==> ?e. &0 < e /\\\n               forall s'. convex s' /\\ bounded s' /\\ ~(s' = {}) /\\ hausdist(s,s') < e\n                    ==> (x IN conic hull s' <=> x IN conic hull s)
-      #|  x - u:real^N
-      #|  u:real^N
-      #|  a <= b ==> forall c. b < c ==> a < c
-      #|  e:real
-      #|  x:real^N
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  forall s t:real^N->bool e.\n        bounded s /\\ convex s /\\ ~(s = {}) /\\\n        bounded t /\\ convex t /\\ ~(t = {}) /\\\n        hausdist(s,t) < e\n        ==> (s DIFF t) UNION (t DIFF s) SUBSET\n            {u + v:real^N | u IN frontier s /\\ v IN ball(vec 0,e)}
-      #|  polytope s <=> ?v. FINITE v /\\ s = convex hull v
-      #|  forall a s. polytope (IMAGE (\\x:real^N. a + x) s) <=> polytope s
-      #|  IMAGE (f:real^M->real^N) s
-      #|  s:real^M->bool
-      #|  forall f:real^M->real^N p.\n        linear f /\\ polytope p ==> polytope(IMAGE f p)
-      #|  f:real^M->real^N
-      #|  f:real^M->real^N
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> (polytope (IMAGE f s) <=> polytope s)
-      #|  polytope {}
-      #|  forall s:real^N->bool. polytope s ==> polytope(IMAGE (--) s)
-      #|  forall s. FINITE s ==> polytope(convex hull s)
-      #|  {a:real^N,b}
-      #|  forall a b:real^N. polytope(segment[a,b])
-      #|  forall s:real^M->bool t:real^N->bool.\n        polytope s /\\ polytope t ==> polytope(s PCROSS t)
-      #|  (s:real^M->bool) PCROSS (t:real^N->bool)
-      #|  sndcart:real^(M,N)finite_sum->real^N
-      #|  (s:real^M->bool) PCROSS (t:real^N->bool)
-      #|  fstcart:real^(M,N)finite_sum->real^M
-      #|  t:real^N->bool = {}
-      #|  s:real^M->bool = {}
-      #|  forall s:real^M->bool t:real^N->bool.\n        polytope(s PCROSS t) <=>\n        s = {} \\/ t = {} \\/ polytope s /\\ polytope t
-      #|  forall f s:real^N->bool. polytope s /\\ f face_of s ==> polytope f
-      #|  IMAGE ((hull) convex) {t:real^N->bool | t SUBSET v}
-      #|  v:real^N->bool
-      #|  forall s:real^N->bool. polytope s ==> FINITE {f | f face_of s}
-      #|  {x | P x /\\ Q x} = {x | x IN {x | P x} /\\ Q x}
-      #|  forall s:real^N->bool. polytope s ==> FINITE {f | f facet_of s}
-      #|  forall a b. polytope(interval[a,b])
-      #|  forall a. polytope {a}
-      #|  IMAGE (\\x:real^N. c % x) u
-      #|  u:real^N->bool
-      #|  forall c s:real^N->bool. polytope s ==> polytope (IMAGE (\\x. c % x) s)
-      #|  inv(c):real
-      #|  c = &0
-      #|  forall s:real^N->bool c.\n        polytope (IMAGE (\\x. c % x) s) <=> c = &0 \\/ polytope s
-      #|  forall s m c:real^N.\n        polytope (IMAGE (\\x. m % x + c) s) <=> m = &0 \\/ polytope s
-      #|  forall s m c:real^N. polytope s ==> polytope (IMAGE (\\x. m % x + c) s)
-      #|  {x + y:real^N | x IN u /\\ y IN v}
-      #|  v:real^N->bool
-      #|  u:real^N->bool
-      #|  forall s t:real^N->bool.\n        polytope s /\\ polytope t ==> polytope {x + y | x IN s /\\ y IN t}
-      #|  forall s. polytope s ==> compact s
-      #|  forall s. polytope s ==> convex s
-      #|  forall s. polytope s ==> closed s
-      #|  forall s. polytope s ==> bounded s
-      #|  forall s:real^1->bool. polytope s <=> ?a b. s = interval[a,b]
-      #|  ~(&1:int = &0)
-      #|  a:real^N = b
-      #|  b:real^N
-      #|  a:real^N
-      #|  p:real^N->bool = {}
-      #|  aff_dim(p:real^N->bool) = &1
-      #|  p:real^N->bool
-      #|  forall p:real^N->bool.\n        polytope p /\\ aff_dim p = &1 <=> ?a b. ~(a = b) /\\ p = segment[a,b]
-      #|  a:real^N
-      #|  c:real^N->bool
-      #|  f:real^N->bool
-      #|  {z} UNION i = z INSERT i
-      #|  z INSERT i = {z} UNION i
-      #|  c:real^N->bool
-      #|  forall f s a:real^N.\n         polytope s /\\ ~(a IN affine hull s)\n         ==> (f face_of convex hull (a INSERT s) <=>\n              f face_of s \\/\n              (?f'. f' face_of s /\\ f = convex hull (a INSERT f')))
-      #|  dist(x:real^N,y)
-      #|  y:real^N
-      #|  x:real^N
-      #|  closure s SUBSET UNIONS (IMAGE (\\x:real^N. ball (x,e / &2)) k)
-      #|  x:real^N
-      #|  &0 < e ==> x <= e / &2 ==> x < e
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  k:real^N->bool = {}
-      #|  k:real^N->bool
-      #|  p /\\ q /\\ r <=> q /\\ p /\\ r
-      #|  e / &2
-      #|  x:real^N
-      #|  {ball(x:real^N,e / &2) | x IN s}
-      #|  closure s:real^N->bool
-      #|  {}:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?k. FINITE k /\\ convex hull k SUBSET s /\\\n                hausdist(convex hull k,s) < e /\\\n                (k = {} ==> s = {})
-      #|  vec 0:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  dist(x:real^N,y)
-      #|  y:real^N
-      #|  x:real^N = z + y <=> x - z = y
-      #|  x:real^N
-      #|  x:real^N
-      #|  &0 < e ==> x <= e / &2 ==> x < e
-      #|  z - y:real^N
-      #|  y:real^N
-      #|  z:real^N
-      #|  z:real^N
-      #|  ball(vec 0:real^N,e / &2)
-      #|  ~p \\/ q <=> p ==> q
-      #|  x:real^N
-      #|  hausdist(convex hull k,\n                      {x + y:real^N | x IN s /\\ y IN ball(vec 0,e / &2)})
-      #|  x:real^N
-      #|  hausdist(convex hull k,\n                      {x + y:real^N | x IN s /\\ y IN ball(vec 0,e / &2)})
-      #|  {f x y | x IN s /\\ y IN t} = {} <=> s = {} \\/ t = {}
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  k:real^N->bool
-      #|  {f x y | x IN s /\\ y IN t} = {} <=> s = {} \\/ t = {}
-      #|  e / &2
-      #|  {x + y:real^N | x IN s /\\ y IN ball(vec 0,e / &2)}
-      #|  {}:real^N->bool
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?k. FINITE k /\\ s SUBSET convex hull k /\\\n                hausdist(convex hull k,s) < e
-      #|  convex hull k:real^N->bool
-      #|  k:real^N->bool
-      #|  forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?p. polytope p /\\ p SUBSET s /\\ hausdist(p,s) < e /\\\n                (p = {} ==> s = {})
-      #|  convex hull k:real^N->bool
-      #|  k:real^N->bool
-      #|  forall s:real^N->bool e.\n        bounded s /\\ convex s /\\ &0 < e\n        ==> ?p. polytope p /\\ s SUBSET p /\\ hausdist(p,s) < e
-      #|  polyhedron s <=>\n        ?f. FINITE f /\\\n            s = INTERS f /\\\n            (forall h. h IN f ==> ?a b. ~(a = vec 0) /\\ h = {x | a dot x <= b})
-      #|  INTERS(f UNION g) = INTERS f INTER INTERS g
-      #|  f UNION g:(real^N->bool)->bool
-      #|  g:(real^N->bool)->bool
-      #|  f:(real^N->bool)->bool
-      #|  forall s t:real^N->bool.\n        polyhedron s /\\ polyhedron t ==> polyhedron (s INTER t)
-      #|  {}:(real^N->bool)->bool
-      #|  polyhedron(:real^N)
-      #|  --x <= &0 <=> &0 <= x
-      #|  &0
-      #|  --basis k:real^N
-      #|  k:num
-      #|  IMAGE (\\i. {x:real^N | &0 <= x$i}) (1..dimindex(:N))
-      #|  polyhedron {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
-      #|  forall f:(real^N->bool)->bool.\n        FINITE f /\\ (forall s. s IN f ==> polyhedron s) ==> polyhedron(INTERS f)
-      #|  -- &1
-      #|  --(basis 1):real^N
-      #|  -- &1
-      #|  basis 1:real^N
-      #|  ~(a <= -- &1 /\\ --a <= -- &1)
-      #|  {{x:real^N | basis 1 dot x <= -- &1},\n               {x | --(basis 1) dot x <= -- &1}}
-      #|  polyhedron({}:real^N->bool)
-      #|  b:real
-      #|  a:real^N
-      #|  {{x:real^N | a dot x <= b}}
-      #|  {x | p} = if p then UNIV else {}
-      #|  a:real^N = vec 0
-      #|  forall a b. polyhedron {x:real^N | a dot x <= b}
-      #|  a:real >= b <=> --a <= --b
-      #|  forall a b. polyhedron {x:real^N | a dot x >= b}
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  x:real = b <=> x <= b /\\ x >= b
-      #|  forall a b. polyhedron {x:real^N | a dot x = b}
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s:real^N->bool. affine s ==> polyhedron s
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  forall s:real^N->bool. polyhedron s ==> closed s
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  forall s:real^N->bool. polyhedron s ==> convex s
-      #|  forall s. polyhedron(affine hull s)
-      #|  s = t /\\ s SUBSET u ==> s = u INTER t
-      #|  forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b})
-      #|  (x:real^N) IN affine hull s
-      #|  x:real^N
-      #|  (b:(real^N->bool)->real) h
-      #|  (a:(real^N->bool)->real^N) h
-      #|  h:real^N->bool
-      #|  IMAGE (\\h:real^N->bool. {x:real^N | a h dot x <= b h})\n                    {h | h IN f /\\ ~(affine hull s SUBSET h)}
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  {}:real^N->bool
-      #|  {affine hull s,h:real^N->bool}
-      #|  forall t. t SUBSET s /\\ INTERS t = {} ==> INTERS s = {}
-      #|  ~(s:real^N->bool = {})
-      #|  ~p /\\ ~q /\\ (r ==> r') ==> (p \\/ q \\/ r ==> r')
-      #|  (b:(real^N->bool)->real) h
-      #|  (a:(real^N->bool)->real^N) h
-      #|  affine hull s:real^N->bool
-      #|  (h:real^N->bool) IN f
-      #|  h:real^N->bool
-      #|  forall h. h IN f /\\ ~(affine hull s SUBSET h)\n        ==> ?a' b'. ~(a' = vec 0) /\\\n                  affine hull s INTER {x:real^N | a' dot x <= b'} =\n                  affine hull s INTER h /\\\n                  forall w. w IN affine hull s ==> (w + a') IN affine hull s
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  {}:(real^N->bool)->bool
-      #|  f:(real^N->bool)->bool = {}
-      #|  {}:(real^N->bool)->bool
-      #|  s:real^N->bool = {}
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool.\n        polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b} /\\\n                           (forall x. x IN affine hull s\n                                ==> (x + a) IN affine hull s))
-      #|  s SUBSET t ==> ~(s = t) ==> s PSUBSET t
-      #|  a /\\ c /\\ (~b ==> d) ==> ~(a /\\ b /\\ c) ==> d
-      #|  f':(real^N->bool)->bool
-      #|  CARD(f':(real^N->bool)->bool)
-      #|  f':(real^N->bool)->bool
-      #|  f:(real^N->bool)->bool
-      #|  n:num
-      #|  (?f. FINITE f /\\ P f) <=> (?n f. f HAS_SIZE n /\\ P f)
-      #|  forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b} /\\\n                           (forall x. x IN affine hull s\n                                ==> (x + a) IN affine hull s)) /\\\n            forall f'. f' PSUBSET f ==> s PSUBSET (affine hull s) INTER (INTERS f')
-      #|  forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            s = (affine hull s) INTER (INTERS f) /\\\n            (forall h. h IN f\n                 ==> ?a b. ~(a = vec 0) /\\ h = {x:real^N | a dot x <= b}) /\\\n            forall f'. f' PSUBSET f ==> s PSUBSET (affine hull s) INTER (INTERS f')
-      #|  a * (&1 - b) = (&1 - b) * a
-      #|  l * (a:(real^N->bool)->real^N) i dot z + (a i dot x) * (&1 - l)
-      #|  a < b * (&1 - l) <=> l * b + a < b
-      #|  &1 - l
-      #|  &0 < e
-      #|  &0 < a /\\ &0 < b /\\ b < c ==> abs(min a b) < c
-      #|  x - (l % z + (&1 - l) % x):real^N = --l % (z - x)
-      #|  min (&1 / &2) (e / &2 / norm(z - x:real^N))
-      #|  e:real
-      #|  ?l. &0 < l /\\ l < &1 /\\ (l % z + (&1 - l) % x:real^N) IN s
-      #|  ~(z:real^N = x)
-      #|  a:real > b <=> ~(a <= b)
-      #|  ~((z:real^N) IN s)
-      #|  (a:(real^N->bool)->real^N) i dot z > b i
-      #|  z:real^N
-      #|  f DELETE (i:real^N->bool)
-      #|  i:real^N->bool
-      #|  (forall s. s IN f ==> i s SUBSET s)\n        ==> INTERS (IMAGE i f) INTER t SUBSET t INTER INTERS f
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  INTERS {interior h | (h:real^N->bool) IN f}
-      #|  x:real^N
-      #|  forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> relative_interior s =\n                {x | x IN s /\\ forall h. h IN f ==> a h dot x < b h}
-      #|  aff_dim(c:real^N->bool) <\n    aff_dim(s INTER {x:real^N | a(i:real^N->bool) dot x = b i})
-      #|  (~p ==> F) ==> p
-      #|  s INTER {x:real^N | a(i:real^N->bool) dot x = b i}
-      #|  s:real^N->bool
-      #|  c:real^N->bool
-      #|  c face_of (s INTER {x:real^N | a(i:real^N->bool) dot x = b i})
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  c SUBSET (s INTER {x:real^N | a(i:real^N->bool) dot x = b i})
-      #|  (i:real^N->bool) IN f
-      #|  i:real^N->bool
-      #|  forall t:real^N->bool. t IN f ==> x IN t
-      #|  x <= y /\\ ~(x < y) ==> x = y
-      #|  (a:(real^N->bool)->real^N) i dot x = b i
-      #|  i:real^N->bool
-      #|  (x:real^N) IN s
-      #|  s:real^N->bool
-      #|  ~(c:real^N->bool = s)
-      #|  ~((x:real^N) IN relative_interior s)
-      #|  ~(i:int = i - &1)
-      #|  ~(c:real^N->bool = s)
-      #|  x:real^N
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  ~(relative_interior(c:real^N->bool) = {})
-      #|  c:real^N->bool
-      #|  (&1 - t) * x + t * y <= z <=> t * (y - x) <= z - x
-      #|  j:real^N->bool = h
-      #|  (j:real^N->bool) IN f
-      #|  j:real^N->bool
-      #|  b /\\ (b ==> a) ==> a /\\ b
-      #|  &0 < x ==> inv x * (&1 - x) = inv x - &1
-      #|  y:real^N = (&1 - inv t) % w + inv(t) % c
-      #|  c:real^N = (&1 - t) % w + t % y
-      #|  &0 <= --x /\\ &0 < y ==> x <= y
-      #|  j:real^N->bool
-      #|  a j dot (w:real^N) < a(j:real^N->bool) dot y
-      #|  j:real^N->bool
-      #|  a /\\ (a ==> b) ==> a /\\ b
-      #|  inf (IMAGE\n       (\\j. if &0 < a j dot y - a j dot (w:real^N)\n            then (b j - a j dot w) / (a j dot y - a j dot w)\n            else &1) (f DELETE (h:real^N->bool)))
-      #|  &1
-      #|  f DELETE (h:real^N->bool) = {}
-      #|  ?t. &0 < t /\\\n          forall j. j IN f /\\ ~(j:real^N->bool = h)\n              ==> t * (a j dot y - a j dot w) <= b j - a j dot (w:real^N)
-      #|  y:real^N
-      #|  s SUBSET affine hull t /\\ affine hull t = t ==> s SUBSET t
-      #|  affine hull (s INTER {x | (a:(real^N->bool)->real^N) h dot x = b h}) =\n      (affine hull s) INTER {x | a h dot x = b h}
-      #|  (i:real^N->bool) IN f
-      #|  convex(i:real^N->bool)
-      #|  i:real^N->bool = h
-      #|  i:real^N->bool
-      #|  (w:real^N) IN s
-      #|  (&1 - l) % x + l % z:real^N = x + l % (z - x)
-      #|  (a:(real^N->bool)->real^N) h dot w = b h
-      #|  i:real^N->bool
-      #|  forall t:real^N->bool. t IN f /\\ ~(t = h) ==> z IN t
-      #|  (&1 - l) * x < (&1 - l) * z /\\ l * y <= l * z\n        ==> (&1 - l) * x + l * y < z
-      #|  i:real^N->bool
-      #|  forall i. i IN f /\\ ~(i = h) ==> (a:(real^N->bool)->real^N) i dot w < b i
-      #|  w:real^N = (&1 - l) % x + l % z:real^N
-      #|  &0 < l /\\ l < &1
-      #|  l = (b h - (a:(real^N->bool)->real^N) h dot x) /\n                    (a h dot z - a h dot x)
-      #|  (a:(real^N->bool)->real^N) h dot x < a h dot z
-      #|  x:real^N
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  ~(z:real^N = x)
-      #|  a:real > b <=> ~(a <= b)
-      #|  ~((z:real^N) IN s)
-      #|  (a:(real^N->bool)->real^N) h dot z > b h
-      #|  z:real^N
-      #|  f DELETE (h:real^N->bool)
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  x:real^N
-      #|  forall h:real^N->bool.\n       h IN f ==> (s INTER {x:real^N | a h dot x = b h}) facet_of s
-      #|  polyhedron(s:real^N->bool)
-      #|  f DELETE (h:real^N->bool)
-      #|  h:real^N->bool
-      #|  f:(real^N->bool)->bool = {}
-      #|  ~(s PSUBSET s)
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c facet_of s <=>\n                ?h. h IN f /\\ c = s INTER {x | a h dot x = b h}
-      #|  h:real^N->bool
-      #|  x:real^N
-      #|  s:real^N->bool
-      #|  (i:real^N->bool) IN f
-      #|  i:real^N->bool
-      #|  forall t:real^N->bool. t IN f ==> x IN t
-      #|  x <= y /\\ ~(x < y) ==> x = y
-      #|  (a:(real^N->bool)->real^N) i dot x = b i
-      #|  i:real^N->bool
-      #|  (x:real^N) IN s
-      #|  s:real^N->bool
-      #|  ~(c:real^N->bool = s)
-      #|  ~((x:real^N) IN relative_interior s)
-      #|  x:real^N
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  ~(relative_interior(c:real^N->bool) = {})
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  x:real^N
-      #|  forall h:real^N->bool.\n        h IN f ==> (s INTER {x:real^N | a h dot x = b h}) face_of s
-      #|  polyhedron(s:real^N->bool)
-      #|  f:(real^N->bool)->bool = {}
-      #|  forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> ?h. h IN f /\\ c SUBSET (s INTER {x | a h dot x = b h})
-      #|  forall t s. (forall a. P a ==> t SUBSET s INTER INTERS {f x | P x})\n           ==> t SUBSET INTERS {s INTER f x | P x}
-      #|  j:real^N->bool
-      #|  (?s. s IN f /\\ s SUBSET t) ==> u INTER INTERS f SUBSET t
-      #|  (a:(real^N->bool)->real^N) j dot z <= b j
-      #|  j:real^N->bool
-      #|  s SUBSET INTERS f <=> forall t. t IN f ==> s SUBSET t
-      #|  j:real^N->bool
-      #|  s SUBSET INTERS f <=> forall t. t IN f ==> s SUBSET t
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, convex(s) && bounded(s) && !IN(vec(0), closure(s)) && real_of_num(0) < a && !(x == vec(0)) && !(s == {}) && a * norm(x) < setdist(({vec(0)}, s)) \226\134\146 IN(x, frontier(hull(conic, s))) == IN(op_pct(a, x), frontier(hull(convex, INSERT(vec(0), s))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s' : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  (x : Cart[Real, N])
+      #|  (a : Real)
+      #|  op_pct((a : Real), (x : Cart[Real, N]))
+      #|  hull(convex, INSERT(vec(0), (s' : (Cart[Real, N]) -> Bool)))
+      #|  hull(convex, INSERT(vec(0), (s : (Cart[Real, N]) -> Bool)))
+      #|  (s' : (Cart[Real, N]) -> Bool)
+      #|  (real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))
+      #|  min(min((d : Real), setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool)))), setdist(({op_pct((a : Real), (x : Cart[Real, N]))}, frontier(hull(convex, INSERT(vec(0), s))))))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s' : (Cart[Real, N]) -> Bool)
+      #|  {(vec : (Num) -> Cart[Real, N])(0)}
+      #|  (s' : (Cart[Real, N]) -> Bool)
+      #|  ((x : Real) / real_of_num(2) < x) == (real_of_num(0) < x)
+      #|  setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool))) / real_of_num(2)
+      #|  setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool))) / real_of_num(2) / norm((x : Cart[Real, N]))
+      #|  \226\136\131 a : Real, \226\136\131 d : Real, real_of_num(0) < a && real_of_num(0) < d && a * norm((x : Cart[Real, N])) < setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool))) && (\226\136\128 s' : (Cart[Real, N]) -> Bool, convex(s') && bounded(s') && !(s' == {}) && hausdist((s, s')) < d \226\134\146 a * norm(x) < setdist(({vec(0)}, s')))
+      #|  real_of_num(0) < setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && bounded(s) && !(s == {}) && !IN(vec(0), closure(s)) && !(x == vec(0)) && !IN(x, frontier(hull(conic, s))) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 s' : (Cart[Real, N]) -> Bool, convex(s') && bounded(s') && !(s' == {}) && hausdist((s, s')) < e \226\134\146 !IN(x, frontier(hull(conic, s'))) && IN(x, hull(conic, s')) == IN(x, hull(conic, s))))
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(0) < setdist(({vec(0)}, (s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], convex(s) && bounded(s) && !(s == {}) && !IN(vec(0), closure(s)) && !IN(x, frontier(hull(conic, s))) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 s' : (Cart[Real, N]) -> Bool, convex(s') && bounded(s') && !(s' == {}) && hausdist((s, s')) < e \226\134\146 IN(x, hull(conic, s')) == IN(x, hull(conic, s))))
+      #|  (x : Cart[Real, N]) - (u : Cart[Real, N])
+      #|  (u : Cart[Real, N])
+      #|  (a : Real) <= (b : Real) \226\134\146 (\226\136\128 c : Real, b < c \226\134\146 a < c)
+      #|  (e : Real)
+      #|  (x : Cart[Real, N])
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, bounded(s) && convex(s) && !(s == {}) && bounded(t) && convex(t) && !(t == {}) && hausdist((s, t)) < e \226\134\146 SUBSET(UNION(DIFF(s, t), DIFF(t, s)), {(u : Cart[Real, N]) + (v : Cart[Real, N]) | IN(u, frontier(s)) && IN(v, ball((vec(0), e)))})
+      #|  (polytope : ((Cart[Real, _]) -> Bool) -> Bool)((s : (Cart[Real, _]) -> Bool)) == (\226\136\131 v : (Cart[Real, _]) -> Bool, FINITE(v) && s == hull(convex, v))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(IMAGE((x : Cart[Real, N]) => a + x, s)) == polytope(s)
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))
+      #|  (s : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : (Cart[Real, M]) -> Bool, linear(f) && polytope(p) \226\134\146 polytope(IMAGE(f, p))
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 polytope(IMAGE(f, s)) == polytope(s)
+      #|  (polytope : ((Cart[Real, _]) -> Bool) -> Bool)(({} : (Cart[Real, _]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) \226\134\146 polytope(IMAGE(op_minus_minus, s))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, FINITE(s) \226\134\146 polytope(hull(convex, s))
+      #|  {(a : Cart[Real, N]), (b : Cart[Real, N])}
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], polytope(segment([(a, b)]))
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polytope(s) && polytope(t) \226\134\146 polytope(PCROSS(s, t))
+      #|  PCROSS((s : (Cart[Real, M]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (sndcart : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, N])
+      #|  PCROSS((s : (Cart[Real, M]) -> Bool), (t : (Cart[Real, N]) -> Bool))
+      #|  (fstcart : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, M])
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  (s : (Cart[Real, M]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polytope(PCROSS(s, t)) == (s == {} || t == {} || polytope(s) && polytope(t))
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) && face_of(f, s) \226\134\146 polytope(f)
+      #|  IMAGE(hull(convex), {(t : (Cart[Real, N]) -> Bool) | SUBSET(t, (v : (Cart[Real, N]) -> Bool))})
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) \226\134\146 FINITE({(f : (Cart[Real, N]) -> Bool) | face_of(f, s)})
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(x : _) | P(x)}) && Q(x)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) \226\134\146 FINITE({(f : (Cart[Real, N]) -> Bool) | facet_of(f, s)})
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], polytope(interval([(a, b)]))
+      #|  \226\136\128 a : Cart[Real, _], polytope({a})
+      #|  IMAGE((x : Cart[Real, N]) => op_pct((c : Real), x), (u : (Cart[Real, N]) -> Bool))
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : Real, \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) \226\134\146 polytope(IMAGE((x : Cart[Real, N]) => op_pct(c, x), s))
+      #|  inv((c : Real))
+      #|  (c : Real) == real_of_num(0)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : Real, polytope(IMAGE((x : Cart[Real, N]) => op_pct(c, x), s)) == (c == real_of_num(0) || polytope(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 m : Real, \226\136\128 c : Cart[Real, N], polytope(IMAGE((x : Cart[Real, N]) => op_pct(m, x) + c, s)) == (m == real_of_num(0) || polytope(s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 m : Real, \226\136\128 c : Cart[Real, N], polytope(s) \226\134\146 polytope(IMAGE((x : Cart[Real, N]) => op_pct(m, x) + c, s))
+      #|  {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (u : (Cart[Real, N]) -> Bool)) && IN(y, (v : (Cart[Real, N]) -> Bool))}
+      #|  (v : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polytope(s) && polytope(t) \226\134\146 polytope({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, polytope(s) \226\134\146 compact(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, polytope(s) \226\134\146 convex(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, polytope(s) \226\134\146 closed(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, polytope(s) \226\134\146 bounded(s)
+      #|  \226\136\128 s : (Cart[Real, Unit]) -> Bool, polytope(s) == (\226\136\131 a : Cart[Real, Unit], \226\136\131 b : Cart[Real, Unit], s == interval([(a, b)]))
+      #|  !(int_of_num(1) == int_of_num(0))
+      #|  (a : Cart[Real, N]) == (b : Cart[Real, N])
+      #|  (b : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  (p : (Cart[Real, N]) -> Bool) == {}
+      #|  aff_dim((p : (Cart[Real, N]) -> Bool)) == int_of_num(1)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 p : (Cart[Real, N]) -> Bool, (polytope(p) && aff_dim(p) == int_of_num(1)) == (\226\136\131 a : Cart[Real, N], \226\136\131 b : Cart[Real, N], !(a == b) && p == segment([(a, b)]))
+      #|  (a : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  UNION({(z : _)}, (i : (_) -> Bool)) == INSERT(z, i)
+      #|  INSERT((z : _), (i : (_) -> Bool)) == UNION({z}, i)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], polytope(s) && !IN(a, hull(affine, s)) \226\134\146 face_of(f, hull(convex, INSERT(a, s))) == (face_of(f, s) || (\226\136\131 f' : (Cart[Real, N]) -> Bool, face_of(f', s) && f == hull(convex, INSERT(a, f'))))
+      #|  dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  SUBSET(closure((s : (Cart[Real, N]) -> Bool)), UNIONS(IMAGE((x : Cart[Real, N]) => ball((x, (e : Real) / real_of_num(2))), (k : (Cart[Real, N]) -> Bool))))
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) < (e : Real) \226\134\146 (x : Real) <= e / real_of_num(2) \226\134\146 x < e
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (k : (Cart[Real, N]) -> Bool) == {}
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
+      #|  (e : Real) / real_of_num(2)
+      #|  (x : Cart[Real, N])
+      #|  {ball(((x : Cart[Real, N]), (e : Real) / real_of_num(2))) | IN(x, (s : (Cart[Real, N]) -> Bool))}
+      #|  closure((s : (Cart[Real, N]) -> Bool))
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, bounded(s) && convex(s) && real_of_num(0) < e \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, FINITE(k) && SUBSET(hull(convex, k), s) && hausdist((hull(convex, k), s)) < e && (k == {} \226\134\146 s == {}))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  dist(((x : Cart[Real, N]), (y : Cart[Real, N])))
+      #|  (y : Cart[Real, N])
+      #|  ((x : Cart[Real, N]) == (z : Cart[Real, N]) + (y : Cart[Real, N])) == (x - z == y)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) < (e : Real) \226\134\146 (x : Real) <= e / real_of_num(2) \226\134\146 x < e
+      #|  (z : Cart[Real, N]) - (y : Cart[Real, N])
+      #|  (y : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (ball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (e : Real) / real_of_num(2)))
+      #|  (!(p : Bool) || (q : Bool)) == (p \226\134\146 q)
+      #|  (x : Cart[Real, N])
+      #|  hausdist((hull(convex, (k : (Cart[Real, N]) -> Bool)), {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, ball((vec(0), (e : Real) / real_of_num(2))))}))
+      #|  (x : Cart[Real, N])
+      #|  hausdist((hull(convex, (k : (Cart[Real, N]) -> Bool)), {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, ball((vec(0), (e : Real) / real_of_num(2))))}))
+      #|  ({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, (t : (_) -> Bool))} == {}) == (s == {} || t == {})
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  ({(f : (_, _) -> _)((x : _), (y : _)) | IN(x, (s : (_) -> Bool)) && IN(y, (t : (_) -> Bool))} == {}) == (s == {} || t == {})
+      #|  (e : Real) / real_of_num(2)
+      #|  {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, ball((vec(0), (e : Real) / real_of_num(2))))}
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, bounded(s) && convex(s) && real_of_num(0) < e \226\134\146 (\226\136\131 k : (Cart[Real, N]) -> Bool, FINITE(k) && SUBSET(s, hull(convex, k)) && hausdist((hull(convex, k), s)) < e)
+      #|  hull(convex, (k : (Cart[Real, N]) -> Bool))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, bounded(s) && convex(s) && real_of_num(0) < e \226\134\146 (\226\136\131 p : (Cart[Real, N]) -> Bool, polytope(p) && SUBSET(p, s) && hausdist((p, s)) < e && (p == {} \226\134\146 s == {}))
+      #|  hull(convex, (k : (Cart[Real, N]) -> Bool))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, bounded(s) && convex(s) && real_of_num(0) < e \226\134\146 (\226\136\131 p : (Cart[Real, N]) -> Bool, polytope(p) && SUBSET(s, p) && hausdist((p, s)) < e)
+      #|  (polyhedron : ((Cart[Real, _]) -> Bool) -> Bool)((s : (Cart[Real, _]) -> Bool)) == (\226\136\131 f : ((Cart[Real, _]) -> Bool) -> Bool, FINITE(f) && s == INTERS(f) && (\226\136\128 h : (Cart[Real, _]) -> Bool, IN(h, f) \226\134\146 (\226\136\131 a : Cart[Real, _], \226\136\131 b : Real, !(a == vec(0)) && h == {(x : Cart[Real, _]) | dot(a, x) <= b})))
+      #|  INTERS(UNION((f : ((_) -> Bool) -> Bool), (g : ((_) -> Bool) -> Bool))) == INTER(INTERS(f), INTERS(g))
+      #|  UNION((f : ((Cart[Real, N]) -> Bool) -> Bool), (g : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (g : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polyhedron(s) && polyhedron(t) \226\134\146 polyhedron(INTER(s, t))
+      #|  ({} : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (polyhedron : ((Cart[Real, N]) -> Bool) -> Bool)((UNIV : (Cart[Real, N]) -> Bool))
+      #|  (-(x : Real) <= real_of_num(0)) == (real_of_num(0) <= x)
+      #|  real_of_num(0)
+      #|  -(basis : (Num) -> Cart[Real, N])((k : Num))
+      #|  (k : Num)
+      #|  (IMAGE : ((Num, Cart[Real, N]) -> Bool, (Num) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((i : Num) => {(x : Cart[Real, N]) | real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)}, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (polyhedron : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)})
+      #|  \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 polyhedron(s)) \226\134\146 polyhedron(INTERS(f))
+      #|  -real_of_num(1)
+      #|  -(basis : (Num) -> Cart[Real, N])(1)
+      #|  -real_of_num(1)
+      #|  (basis : (Num) -> Cart[Real, N])(1)
+      #|  !((a : Real) <= -real_of_num(1) && -a <= -real_of_num(1))
+      #|  {{(x : Cart[Real, N]) | dot(basis(1), x) <= -real_of_num(1)}, {(x : Cart[Real, N]) | dot(-basis(1), x) <= -real_of_num(1)}}
+      #|  (polyhedron : ((Cart[Real, N]) -> Bool) -> Bool)(({} : (Cart[Real, N]) -> Bool))
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  {{(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) <= (b : Real)}}
+      #|  {(x : _) | (p : Bool)} == (if p { UNIV } else { {} })
+      #|  (a : Cart[Real, N]) == vec(0)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, polyhedron({(x : Cart[Real, N]) | dot(a, x) <= b})
+      #|  ((a : Real) >= (b : Real)) == (-a <= -b)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, polyhedron({(x : Cart[Real, N]) | dot(a, x) >= b})
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  ((x : Real) == (b : Real)) == (x <= b && x >= b)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, polyhedron({(x : Cart[Real, N]) | dot(a, x) == b})
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, affine(s) \226\134\146 polyhedron(s)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 closed(s)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 convex(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, polyhedron(hull(affine, s))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) && SUBSET(s, (u : (_) -> Bool)) \226\134\146 s == INTER(u, t)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && h == {(x : Cart[Real, N]) | dot(a, x) <= b})))
+      #|  IN((x : Cart[Real, N]), hull(affine, (s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N])
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h : (Cart[Real, N]) -> Bool))
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  IMAGE((h : (Cart[Real, N]) -> Bool) => {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}, {(h : (Cart[Real, N]) -> Bool) | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && !SUBSET(hull(affine, (s : (Cart[Real, N]) -> Bool)), h)})
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  {hull(affine, (s : (Cart[Real, N]) -> Bool)), (h : (Cart[Real, N]) -> Bool)}
+      #|  \226\136\128 t : ((_) -> Bool) -> Bool, SUBSET(t, (s : ((_) -> Bool) -> Bool)) && INTERS(t) == {} \226\134\146 INTERS(s) == {}
+      #|  !((s : (Cart[Real, N]) -> Bool) == {})
+      #|  !(p : Bool) && !(q : Bool) && ((r : Bool) \226\134\146 (r' : Bool)) \226\134\146 p || q || r \226\134\146 r'
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h : (Cart[Real, N]) -> Bool))
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  IN((h : (Cart[Real, N]) -> Bool), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && !SUBSET(hull(affine, (s : (Cart[Real, N]) -> Bool)), h) \226\134\146 (\226\136\131 a' : Cart[Real, N], \226\136\131 b' : Real, !(a' == vec(0)) && INTER(hull(affine, s), {(x : Cart[Real, N]) | dot(a', x) <= b'}) == INTER(hull(affine, s), h) && (\226\136\128 w : Cart[Real, N], IN(w, hull(affine, s)) \226\134\146 IN(w + a', hull(affine, s))))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  ({} : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  ({} : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && h == {(x : Cart[Real, N]) | dot(a, x) <= b} && (\226\136\128 x : Cart[Real, N], IN(x, hull(affine, s)) \226\134\146 IN(x + a, hull(affine, s))))))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == t) \226\134\146 PSUBSET(s, t)
+      #|  (a : Bool) && (c : Bool) && (!(b : Bool) \226\134\146 (d : Bool)) \226\134\146 !(a && b && c) \226\134\146 d
+      #|  (f' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  CARD((f' : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (f' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (n : Num)
+      #|  (\226\136\131 f : (_) -> Bool, FINITE(f) && (P : ((_) -> Bool) -> Bool)(f)) == (\226\136\131 n : Num, \226\136\131 f : (_) -> Bool, HAS_SIZE(f, n) && P(f))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && h == {(x : Cart[Real, N]) | dot(a, x) <= b} && (\226\136\128 x : Cart[Real, N], IN(x, hull(affine, s)) \226\134\146 IN(x + a, hull(affine, s))))) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && h == {(x : Cart[Real, N]) | dot(a, x) <= b})) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))))
+      #|  (a : Real) * (real_of_num(1) - (b : Real)) == (real_of_num(1) - b) * a
+      #|  (l : Real) * dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N])) + dot(a(i), (x : Cart[Real, N])) * (real_of_num(1) - l)
+      #|  ((a : Real) < (b : Real) * (real_of_num(1) - (l : Real))) == (l * b + a < b)
+      #|  real_of_num(1) - (l : Real)
+      #|  real_of_num(0) < (e : Real)
+      #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real) && b < (c : Real) \226\134\146 abs(min(a, b)) < c
+      #|  (x : Cart[Real, N]) - (op_pct((l : Real), (z : Cart[Real, N])) + op_pct(real_of_num(1) - l, x)) == op_pct(-l, z - x)
+      #|  min(real_of_num(1) / real_of_num(2), (e : Real) / real_of_num(2) / norm((z : Cart[Real, N]) - (x : Cart[Real, N])))
+      #|  (e : Real)
+      #|  \226\136\131 l : Real, real_of_num(0) < l && l < real_of_num(1) && IN(op_pct(l, (z : Cart[Real, N])) + op_pct(real_of_num(1) - l, (x : Cart[Real, N])), (s : (Cart[Real, N]) -> Bool))
+      #|  !((z : Cart[Real, N]) == (x : Cart[Real, N]))
+      #|  ((a : Real) > (b : Real)) == !(a <= b)
+      #|  !IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N])) > (b : ((Cart[Real, N]) -> Bool) -> Real)(i)
+      #|  (z : Cart[Real, N])
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (i : (Cart[Real, N]) -> Bool))
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 s : (_) -> Bool, IN(s, (f : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET((i : ((_) -> Bool, _) -> Bool)(s), s)) \226\134\146 SUBSET(INTER(INTERS(IMAGE(i, f)), (t : (_) -> Bool)), INTER(t, INTERS(f)))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  INTERS({interior((h : (Cart[Real, N]) -> Bool)) | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool))})
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N], \226\136\128 b : ((Cart[Real, N]) -> Bool) -> Real, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 !(a(h) == vec(0)) && h == {(x : Cart[Real, N]) | dot(a(h), x) <= b(h)}) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))) \226\134\146 relative_interior(s) == {(x : Cart[Real, N]) | IN(x, s) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 dot(a(h), x) < b(h))}
+      #|  aff_dim((c : (Cart[Real, N]) -> Bool)) < aff_dim(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(i)}))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(i)})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  face_of((c : (Cart[Real, N]) -> Bool), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(i)}))
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((c : (Cart[Real, N]) -> Bool), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(i)}))
+      #|  IN((i : (Cart[Real, N]) -> Bool), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 t : (Cart[Real, N]) -> Bool, IN(t, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 IN((x : Cart[Real, N]), t)
+      #|  (x : Real) <= (y : Real) && !(x < y) \226\134\146 x == y
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), (x : Cart[Real, N])) == (b : ((Cart[Real, N]) -> Bool) -> Real)(i)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !((c : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool))
+      #|  !IN((x : Cart[Real, N]), relative_interior((s : (Cart[Real, N]) -> Bool)))
+      #|  !((i : Int) == i - int_of_num(1))
+      #|  !((c : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  !(relative_interior((c : (Cart[Real, N]) -> Bool)) == {})
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  ((real_of_num(1) - (t : Real)) * (x : Real) + t * (y : Real) <= (z : Real)) == (t * (y - x) <= z - x)
+      #|  (j : (Cart[Real, N]) -> Bool) == (h : (Cart[Real, N]) -> Bool)
+      #|  IN((j : (Cart[Real, N]) -> Bool), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  (b : Bool) && (b \226\134\146 (a : Bool)) \226\134\146 a && b
+      #|  real_of_num(0) < (x : Real) \226\134\146 inv(x) * (real_of_num(1) - x) == inv(x) - real_of_num(1)
+      #|  (y : Cart[Real, N]) == op_pct(real_of_num(1) - inv((t : Real)), (w : Cart[Real, N])) + op_pct(inv(t), (c : Cart[Real, N]))
+      #|  (c : Cart[Real, N]) == op_pct(real_of_num(1) - (t : Real), (w : Cart[Real, N])) + op_pct(t, (y : Cart[Real, N]))
+      #|  real_of_num(0) <= -(x : Real) && real_of_num(0) < (y : Real) \226\134\146 x <= y
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((j : (Cart[Real, N]) -> Bool)), (w : Cart[Real, N])) < dot(a(j), (y : Cart[Real, N]))
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
+      #|  inf(IMAGE((j : (Cart[Real, N]) -> Bool) => if real_of_num(0) < dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(j), (y : Cart[Real, N])) - dot(a(j), (w : Cart[Real, N])) { ((b : ((Cart[Real, N]) -> Bool) -> Real)(j) - dot(a(j), w)) / (dot(a(j), y) - dot(a(j), w)) } else { real_of_num(1) }, DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool))))
+      #|  real_of_num(1)
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool)) == {}
+      #|  \226\136\131 t : Real, real_of_num(0) < t && (\226\136\128 j : (Cart[Real, N]) -> Bool, IN(j, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && !(j == (h : (Cart[Real, N]) -> Bool)) \226\134\146 t * (dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(j), (y : Cart[Real, N])) - dot(a(j), (w : Cart[Real, N]))) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(j) - dot(a(j), w))
+      #|  (y : Cart[Real, N])
+      #|  SUBSET((s : (Cart[Real, _]) -> Bool), hull(affine, (t : (Cart[Real, _]) -> Bool))) && hull(affine, t) == t \226\134\146 SUBSET(s, t)
+      #|  hull(affine, INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)})) == INTER(hull(affine, s), {(x : Cart[Real, N]) | dot(a(h), x) == b(h)})
+      #|  IN((i : (Cart[Real, N]) -> Bool), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  convex((i : (Cart[Real, N]) -> Bool))
+      #|  (i : (Cart[Real, N]) -> Bool) == (h : (Cart[Real, N]) -> Bool)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  IN((w : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  op_pct(real_of_num(1) - (l : Real), (x : Cart[Real, N])) + op_pct(l, (z : Cart[Real, N])) == x + op_pct(l, z - x)
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), (w : Cart[Real, N])) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 t : (Cart[Real, N]) -> Bool, IN(t, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && !(t == (h : (Cart[Real, N]) -> Bool)) \226\134\146 IN((z : Cart[Real, N]), t)
+      #|  (real_of_num(1) - (l : Real)) * (x : Real) < (real_of_num(1) - l) * (z : Real) && l * (y : Real) <= l * z \226\134\146 (real_of_num(1) - l) * x + l * y < z
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 i : (Cart[Real, N]) -> Bool, IN(i, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && !(i == (h : (Cart[Real, N]) -> Bool)) \226\134\146 dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(i), (w : Cart[Real, N])) < (b : ((Cart[Real, N]) -> Bool) -> Real)(i)
+      #|  (w : Cart[Real, N]) == op_pct(real_of_num(1) - (l : Real), (x : Cart[Real, N])) + op_pct(l, (z : Cart[Real, N]))
+      #|  real_of_num(0) < (l : Real) && l < real_of_num(1)
+      #|  (l : Real) == ((b : ((Cart[Real, N]) -> Bool) -> Real)((h : (Cart[Real, N]) -> Bool)) - dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), (x : Cart[Real, N]))) / (dot(a(h), (z : Cart[Real, N])) - dot(a(h), x))
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), (x : Cart[Real, N])) < dot(a(h), (z : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !((z : Cart[Real, N]) == (x : Cart[Real, N]))
+      #|  ((a : Real) > (b : Real)) == !(a <= b)
+      #|  !IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N])) > (b : ((Cart[Real, N]) -> Bool) -> Real)(h)
+      #|  (z : Cart[Real, N])
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 facet_of(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}), s)
+      #|  polyhedron((s : (Cart[Real, N]) -> Bool))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  !PSUBSET((s : (_) -> Bool), s)
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N], \226\136\128 b : ((Cart[Real, N]) -> Bool) -> Real, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 !(a(h) == vec(0)) && h == {(x : Cart[Real, N]) | dot(a(h), x) <= b(h)}) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))) \226\134\146 (\226\136\128 c : (Cart[Real, N]) -> Bool, facet_of(c, s) == (\226\136\131 h : (Cart[Real, N]) -> Bool, IN(h, f) && c == INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)})))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN((i : (Cart[Real, N]) -> Bool), (f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 t : (Cart[Real, N]) -> Bool, IN(t, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 IN((x : Cart[Real, N]), t)
+      #|  (x : Real) <= (y : Real) && !(x < y) \226\134\146 x == y
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool)), (x : Cart[Real, N])) == (b : ((Cart[Real, N]) -> Bool) -> Real)(i)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  !((c : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool))
+      #|  !IN((x : Cart[Real, N]), relative_interior((s : (Cart[Real, N]) -> Bool)))
+      #|  (x : Cart[Real, N])
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  !(relative_interior((c : (Cart[Real, N]) -> Bool)) == {})
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 face_of(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}), s)
+      #|  polyhedron((s : (Cart[Real, N]) -> Bool))
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N], \226\136\128 b : ((Cart[Real, N]) -> Bool) -> Real, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 !(a(h) == vec(0)) && h == {(x : Cart[Real, N]) | dot(a(h), x) <= b(h)}) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))) \226\134\146 (\226\136\128 c : (Cart[Real, N]) -> Bool, face_of(c, s) && !(c == {}) && !(c == s) \226\134\146 (\226\136\131 h : (Cart[Real, N]) -> Bool, IN(h, f) && SUBSET(c, INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)}))))
+      #|  \226\136\128 t : (_) -> Bool, \226\136\128 s : (_) -> Bool, (\226\136\128 a : _, (P : (_) -> Bool)(a) \226\134\146 SUBSET(t, INTER(s, INTERS({(f : (_, _) -> Bool)((x : _)) | P(x)})))) \226\134\146 SUBSET(t, INTERS({INTER(s, f((x : _))) | P(x)}))
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\131 s : (_) -> Bool, IN(s, (f : ((_) -> Bool) -> Bool)) && SUBSET(s, (t : (_) -> Bool))) \226\134\146 SUBSET(INTER((u : (_) -> Bool), INTERS(f)), t)
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((j : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N])) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(j)
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), INTERS((f : ((_) -> Bool) -> Bool))) == (\226\136\128 t : (_) -> Bool, IN(t, f) \226\134\146 SUBSET(s, t))
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), INTERS((f : ((_) -> Bool) -> Bool))) == (\226\136\128 t : (_) -> Bool, IN(t, f) \226\134\146 SUBSET(s, t))
       #|  ae SUBSET as /\\ ae SUBSET hs /\\\n    b INTER hs SUBSET fs\n    ==> (b INTER ae) SUBSET (as INTER fs) INTER hs
-      #|  i:real^N->bool
-      #|  e:real
-      #|  open s /\\ x IN s ==> ?e. &0 < e /\\ ball(x,e) SUBSET s
-      #|  (forall h. P h ==> s SUBSET t h) <=> s SUBSET INTERS (IMAGE t {h | P h})
-      #|  ?e. &0 < e /\\ forall h. h IN f /\\ a(h:real^N->bool) dot z < b h\n                      ==> ball(z,e) SUBSET {w:real^N | a h dot w < b h}
-      #|  z:real^N
-      #|  s:real^N->bool
-      #|  h:real^N->bool
-      #|  (forall x. P x <=> Q x) ==> {f x | P x} = {f x | Q x}
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  (e : Real)
+      #|  open((s : (Cart[Real, _]) -> Bool)) && IN((x : Cart[Real, _]), s) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && SUBSET(ball((x, e)), s))
+      #|  (\226\136\128 h : _, (P : (_) -> Bool)(h) \226\134\146 SUBSET((s : (_) -> Bool), (t : (_, _) -> Bool)(h))) == SUBSET(s, INTERS(IMAGE(t, {(h : _) | P(h)})))
+      #|  \226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), (z : Cart[Real, N])) < (b : ((Cart[Real, N]) -> Bool) -> Real)(h) \226\134\146 SUBSET(ball((z, e)), {(w : Cart[Real, N]) | dot(a(h), w) < b(h)}))
+      #|  (z : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) == (Q : (_) -> Bool)(x)) \226\134\146 {(f : (_) -> _)((x : _)) | P(x)} == {f((x : _)) | Q(x)}
       #|  {s INTER {x | a(h:real^N->bool) dot x = b h} |h|\n     h IN f /\\ c SUBSET (s INTER {x:real^N | a h dot x = b h})} =\n    {s INTER {x | a(h:real^N->bool) dot x = b h} |h|\n     h IN f /\\ z IN s INTER {x:real^N | a h dot x = b h}}
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  (z:real^N) IN s
-      #|  z:real^N
-      #|  ~(relative_interior(c:real^N->bool) = {})
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  x:real^N
-      #|  forall h:real^N->bool.\n        h IN f ==> (s INTER {x:real^N | a h dot x = b h}) face_of s
-      #|  polyhedron(s:real^N->bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  IN((z : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  !(relative_interior((c : (Cart[Real, N]) -> Bool)) == {})
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 face_of(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}), s)
+      #|  polyhedron((s : (Cart[Real, N]) -> Bool))
       #|  forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> c = INTERS {s INTER {x | a h dot x = b h} |h|\n                                h IN f /\\\n                                c SUBSET (s INTER {x | a h dot x = b h})}
-      #|  t IN f ==> INTERS f SUBSET t
-      #|  t SUBSET u ==> (s INTER t) SUBSET u
-      #|  (b:(real^N->bool)->real) i
-      #|  (a:(real^N->bool)->real^N) i
-      #|  i:real^N->bool
-      #|  c:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool c.\n        polyhedron s /\\ c facet_of s\n        ==> ?a b. ~(a = vec 0) /\\\n                  s SUBSET {x | a dot x <= b} /\\\n                  c = s INTER {x | a dot x = b}
-      #|  h:real^N->bool
-      #|  c:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool c.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> c = INTERS {f | f facet_of s /\\ c SUBSET f}
-      #|  {f:real^N->bool | f facet_of s /\\ c SUBSET f} = {}
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s:real^N->bool c.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> ?f. f facet_of s /\\ c SUBSET f
-      #|  s:real^N->bool
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s c:real^N->bool.\n        polyhedron s /\\ c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n        ==> ?f. c face_of f /\\ f facet_of s
-      #|  f:real^N->bool
-      #|  s:real^N->bool
-      #|  f:real^N->bool = s
-      #|  f:real^N->bool = {}
-      #|  forall s f:real^N->bool. polyhedron s ==> (f exposed_face_of s <=> f face_of s)
-      #|  c:real^N->bool = s
-      #|  c:real^N->bool = {}
-      #|  c:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool c. polyhedron s /\\ c face_of s ==> polyhedron c
-      #|  {h:real^N->bool |\n     h IN f /\\ c SUBSET s INTER {x:real^N | a h dot x = b h}}
-      #|  c:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
+      #|  IN((t : (_) -> Bool), (f : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(f), t)
+      #|  SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER((s : (_) -> Bool), t), u)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((i : (Cart[Real, N]) -> Bool))
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((i : (Cart[Real, N]) -> Bool))
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, polyhedron(s) && facet_of(c, s) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && SUBSET(s, {(x : Cart[Real, N]) | dot(a, x) <= b}) && c == INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, polyhedron(s) && face_of(c, s) && !(c == {}) && !(c == s) \226\134\146 c == INTERS({(f : (Cart[Real, N]) -> Bool) | facet_of(f, s) && SUBSET(c, f)})
+      #|  {(f : (Cart[Real, N]) -> Bool) | facet_of(f, (s : (Cart[Real, N]) -> Bool)) && SUBSET((c : (Cart[Real, N]) -> Bool), f)} == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, polyhedron(s) && face_of(c, s) && !(c == {}) && !(c == s) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, facet_of(f, s) && SUBSET(c, f))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, polyhedron(s) && face_of(c, s) && !(c == {}) && !(c == s) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, face_of(c, f) && facet_of(f, s))
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 exposed_face_of(f, s) == face_of(f, s)
+      #|  (c : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool) == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, polyhedron(s) && face_of(c, s) \226\134\146 polyhedron(c)
+      #|  {(h : (Cart[Real, N]) -> Bool) | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((c : (Cart[Real, N]) -> Bool), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}))}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
       #|  {INTERS {s INTER {x:real^N | a(h:real^N->bool) dot x = b h} | h | h IN f'}\n    |f'| f' SUBSET f}
-      #|  s:real^N->bool
-      #|  {}:real^N->bool
-      #|  forall a b. FINITE (s DELETE a DELETE b) ==> FINITE s
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool. polyhedron s ==> FINITE {f | f face_of s}
-      #|  forall s:real^N->bool. polyhedron s ==> FINITE {f | f exposed_face_of s}
-      #|  {v | {v} = {a}} = {a}
-      #|  forall a:real^N. ~({a} = f)
-      #|  f:real^N->bool
-      #|  {v} face_of s <=> {v} IN {f | f face_of s}
-      #|  forall s:real^N->bool. polyhedron s ==> FINITE {v | v extreme_point_of s}
-      #|  {x | P x /\\ Q x} = {x | x IN {x | P x} /\\ Q x}
-      #|  forall s:real^N->bool. polyhedron s ==> FINITE {f | f facet_of s}
-      #|  x:real^N
-      #|  g:real^N->bool
-      #|  h:real^N->bool
-      #|  h = {x:real^N | a h dot x <= b h}
-      #|  h:real^N->bool
-      #|  (x:real^N) IN INTERS f
-      #|  h:real^N->bool
-      #|  (forall x. P x ==> Q x \\/ R x) ==> (forall x. P x ==> Q x) \\/ (?x. P x /\\ R x)
-      #|  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-      #|  x:real^N
-      #|  (forall x. x IN s ==> P x \\/ x IN t) /\\ (forall x. x IN t ==> ~P x)\n    ==> {x | x IN s /\\ P x} = s DIFF t
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool.\n        polyhedron s\n        ==> relative_interior s = s DIFF UNIONS {f | f facet_of s}
-      #|  f SUBSET s ==> s DIFF (s DIFF f) = f
-      #|  forall s:real^N->bool.\n        polyhedron s\n        ==> s DIFF relative_interior s = UNIONS {f | f facet_of s}
-      #|  forall s:real^N->bool.\n        polyhedron s ==> relative_frontier s = UNIONS {f | f facet_of s}
-      #|  forall s:real^N->bool.\n        polyhedron s\n        ==> relative_frontier s = UNIONS {f | f face_of s /\\ ~(f = s)}
-      #|  (&1 - u) * x <= (&1 - u) * b /\\ u * y < u * b\n    ==> ~((&1 - u) * x + u * y = b)
-      #|  (a:(real^N->bool)->real^N) k dot y = b k
-      #|  y IN segment(x:real^N,z)
-      #|  (a:(real^N->bool)->real^N) k dot z < b k /\\ a k dot x <= b k
-      #|  s INTER {x:real^N | a(h1:real^N->bool) dot x = b h1} =\n                   s INTER {x | a h2 dot x = b h2}
-      #|  h1:real^N->bool
-      #|  h:real^N->bool = h2
-      #|  ?k:real^N->bool. k IN f /\\ ~(k = h2) /\\ a k dot (y:real^N) = b k
-      #|  h:real^N->bool
-      #|  {y | ?x. x IN s /\\ y = f x} = IMAGE f s
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  y:real^N
-      #|  x:real^N
-      #|  z:real^N
-      #|  s:real^N->bool
-      #|  segment[x:real^N,z]
-      #|  x:real^N
-      #|  f DELETE (h2:real^N->bool)
-      #|  (~p ==> F) ==> p
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  s:real^N->bool
-      #|  z:real^N
-      #|  ~(relative_interior s:real^N->bool = {})
-      #|  polyhedron(s:real^N->bool)
-      #|  ~(s = {}) ==> {} PSUBSET s
-      #|  f:(real^N->bool)->bool = {}
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall h1 h2. h1 IN f /\\ h2 IN f /\\\n                    s INTER {x | a h1 dot x = b h1} =\n                    s INTER {x | a h2 dot x = b h2}\n                    ==> h1 = h2
-      #|  affine hull s INTER INTERS f:real^N->bool
-      #|  t SUBSET s /\\ ~(t PSUBSET s) ==> s = t
-      #|  f':(real^N->bool)->bool
-      #|  f':(real^N->bool)->bool
-      #|  forall f'. f' PSUBSET f\n         ==> (s:real^N->bool) PSUBSET affine hull s INTER INTERS f'
-      #|  CARD(f:(real^N->bool)->bool)
-      #|  forall f s:real^N->bool.\n        FINITE f /\\\n        affine hull s INTER INTERS f = s\n        ==> ?f'. FINITE f' /\\ f' SUBSET f /\\\n                 affine hull s INTER INTERS f' = s /\\\n                 (forall f''. f'' PSUBSET f'\n                        ==> s PSUBSET affine hull s INTER INTERS f'')
-      #|  f' UNION f'':(real^N->bool)->bool
-      #|  f'':(real^N->bool)->bool
-      #|  affine hull s:real^N->bool
-      #|  f':(real^N->bool)->bool
-      #|  s SUBSET t /\\ u = s ==> t INTER u = s
-      #|  s:real^N->bool
-      #|  f:(real^N->bool)->bool
-      #|  f:(real^N->bool)->bool
-      #|  forall s. polyhedron s <=>\n        ?f. FINITE f /\\\n            affine hull s INTER INTERS f = s /\\\n            (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f') /\\\n            (forall h. h IN f\n                 ==> (?a:real^N b. ~(a = vec 0) /\\ h = {x | a dot x <= b}))
-      #|  s:real^N->bool
-      #|  h:real^N->bool
-      #|  s:real^N->bool
-      #|  x:real^N
-      #|  p:real^N
-      #|  c:real^N
-      #|  (t INTER s) face_of t /\\ t INTER s = s ==> s face_of t
-      #|  {y:real^N | a(h:real^N->bool) dot y = b h} face_of\n                {y | a h dot y <= b h}
-      #|  c:real^N
-      #|  s INTER {y:real^N | d dot y = d dot x}
-      #|  d:real^N
-      #|  (&1 - l) % c + l % p:real^N
-      #|  s:real^N->bool
-      #|  ?h:real^N->bool. h IN f /\\ x IN h
-      #|  x:real^N = (&1 - l) % c + l % p
-      #|  l = &1
-      #|  l = &0
-      #|  l:real
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  (:real^N) DIFF s
-      #|  affine hull s:real^N->bool
-      #|  segment[c:real^N,p] INTER (UNIV DIFF s)
-      #|  segment[c:real^N,p] INTER relative_interior s
-      #|  segment[c:real^N,p]
-      #|  ?x:real^N. x IN segment[c,p] /\\ x IN (s DIFF relative_interior s)
-      #|  c:real^N
-      #|  ~(relative_interior(s:real^N->bool) = {})
-      #|  (~p ==> F) ==> p
-      #|  p:real^N
-      #|  s SUBSET INTERS f <=> forall h. h IN f ==> s SUBSET h
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  ({} : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 a : _, \226\136\128 b : _, FINITE(DELETE(DELETE((s : (_) -> Bool), a), b)) \226\134\146 FINITE(s)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 FINITE({(f : (Cart[Real, N]) -> Bool) | face_of(f, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 FINITE({(f : (Cart[Real, N]) -> Bool) | exposed_face_of(f, s)})
+      #|  {(v : _) | {v} == {(a : _)}} == {a}
+      #|  \226\136\128 a : Cart[Real, N], !({a} == (f : (Cart[Real, N]) -> Bool))
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  face_of({(v : Cart[Real, _])}, (s : (Cart[Real, _]) -> Bool)) == IN({v}, {(f : (Cart[Real, _]) -> Bool) | face_of(f, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 FINITE({(v : Cart[Real, N]) | extreme_point_of(v, s)})
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(x : _) | P(x)}) && Q(x)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 FINITE({(f : (Cart[Real, N]) -> Bool) | facet_of(f, s)})
+      #|  (x : Cart[Real, N])
+      #|  (g : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, N]), INTERS((f : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x) || (R : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 Q(x)) || (\226\136\131 x : _, P(x) && R(x))
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+      #|  (x : Cart[Real, N])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (P : (_) -> Bool)(x) || IN(x, (t : (_) -> Bool))) && (\226\136\128 x : _, IN(x, t) \226\134\146 !P(x)) \226\134\146 {(x : _) | IN(x, s) && P(x)} == DIFF(s, t)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 relative_interior(s) == DIFF(s, UNIONS({(f : (Cart[Real, N]) -> Bool) | facet_of(f, s)}))
+      #|  SUBSET((f : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 DIFF(s, DIFF(s, f)) == f
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 DIFF(s, relative_interior(s)) == UNIONS({(f : (Cart[Real, N]) -> Bool) | facet_of(f, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 relative_frontier(s) == UNIONS({(f : (Cart[Real, N]) -> Bool) | facet_of(f, s)})
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 relative_frontier(s) == UNIONS({(f : (Cart[Real, N]) -> Bool) | face_of(f, s) && !(f == s)})
+      #|  (real_of_num(1) - (u : Real)) * (x : Real) <= (real_of_num(1) - u) * (b : Real) && u * (y : Real) < u * b \226\134\146 !((real_of_num(1) - u) * x + u * y == b)
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((k : (Cart[Real, N]) -> Bool)), (y : Cart[Real, N])) == (b : ((Cart[Real, N]) -> Bool) -> Real)(k)
+      #|  IN((y : Cart[Real, N]), segment(((x : Cart[Real, N]), (z : Cart[Real, N]))))
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((k : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N])) < (b : ((Cart[Real, N]) -> Bool) -> Real)(k) && dot(a(k), (x : Cart[Real, N])) <= b(k)
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h1)}) == INTER(s, {(x : Cart[Real, N]) | dot(a((h2 : (Cart[Real, N]) -> Bool)), x) == b(h2)})
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool) == (h2 : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 k : (Cart[Real, N]) -> Bool, IN(k, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && !(k == (h2 : (Cart[Real, N]) -> Bool)) && dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(k), (y : Cart[Real, N])) == (b : ((Cart[Real, N]) -> Bool) -> Real)(k)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  {(y : _) | \226\136\131 x : _, IN(x, (s : (_) -> Bool)) && y == (f : (_) -> _)(x)} == IMAGE(f, s)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  segment([((x : Cart[Real, N]), (z : Cart[Real, N]))])
+      #|  (x : Cart[Real, N])
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (z : Cart[Real, N])
+      #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
+      #|  polyhedron((s : (Cart[Real, N]) -> Bool))
+      #|  !((s : (_) -> Bool) == {}) \226\134\146 PSUBSET({}, s)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N], \226\136\128 b : ((Cart[Real, N]) -> Bool) -> Real, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 !(a(h) == vec(0)) && h == {(x : Cart[Real, N]) | dot(a(h), x) <= b(h)}) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))) \226\134\146 (\226\136\128 h1 : (Cart[Real, N]) -> Bool, \226\136\128 h2 : (Cart[Real, N]) -> Bool, IN(h1, f) && IN(h2, f) && INTER(s, {(x : Cart[Real, N]) | dot(a(h1), x) == b(h1)}) == INTER(s, {(x : Cart[Real, N]) | dot(a(h2), x) == b(h2)}) \226\134\146 h1 == h2)
+      #|  INTER(hull(affine, (s : (Cart[Real, N]) -> Bool)), INTERS((f : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) && !PSUBSET(t, s) \226\134\146 s == t
+      #|  (f' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (f' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 PSUBSET((s : (Cart[Real, N]) -> Bool), INTER(hull(affine, s), INTERS(f')))
+      #|  CARD((f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(f) && INTER(hull(affine, s), INTERS(f)) == s \226\134\146 (\226\136\131 f' : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f') && SUBSET(f', f) && INTER(hull(affine, s), INTERS(f')) == s && (\226\136\128 f'' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f'', f') \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f'')))))
+      #|  UNION((f' : ((Cart[Real, N]) -> Bool) -> Bool), (f'' : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (f'' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  (f' : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && (u : (_) -> Bool) == s \226\134\146 INTER(t, u) == s
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && INTER(hull(affine, s), INTERS(f)) == s && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && h == {(x : Cart[Real, N]) | dot(a, x) <= b})))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  (p : Cart[Real, N])
+      #|  (c : Cart[Real, N])
+      #|  face_of(INTER((t : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)), t) && INTER(t, s) == s \226\134\146 face_of(s, t)
+      #|  face_of({(y : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), y) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}, {(y : Cart[Real, N]) | dot(a(h), y) <= b(h)})
+      #|  (c : Cart[Real, N])
+      #|  INTER((s : (Cart[Real, N]) -> Bool), {(y : Cart[Real, N]) | dot((d : Cart[Real, N]), y) == dot(d, (x : Cart[Real, N]))})
+      #|  (d : Cart[Real, N])
+      #|  op_pct(real_of_num(1) - (l : Real), (c : Cart[Real, N])) + op_pct(l, (p : Cart[Real, N]))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && IN((x : Cart[Real, N]), h)
+      #|  (x : Cart[Real, N]) == op_pct(real_of_num(1) - (l : Real), (c : Cart[Real, N])) + op_pct(l, (p : Cart[Real, N]))
+      #|  (l : Real) == real_of_num(1)
+      #|  (l : Real) == real_of_num(0)
+      #|  (l : Real)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))
+      #|  hull(affine, (s : (Cart[Real, N]) -> Bool))
+      #|  INTER(segment([((c : Cart[Real, N]), (p : Cart[Real, N]))]), DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)))
+      #|  INTER(segment([((c : Cart[Real, N]), (p : Cart[Real, N]))]), relative_interior((s : (Cart[Real, N]) -> Bool)))
+      #|  segment([((c : Cart[Real, N]), (p : Cart[Real, N]))])
+      #|  \226\136\131 x : Cart[Real, N], IN(x, segment([((c : Cart[Real, N]), (p : Cart[Real, N]))])) && IN(x, DIFF((s : (Cart[Real, N]) -> Bool), relative_interior(s)))
+      #|  (c : Cart[Real, N])
+      #|  !(relative_interior((s : (Cart[Real, N]) -> Bool)) == {})
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (p : Cart[Real, N])
+      #|  SUBSET((s : (_) -> Bool), INTERS((f : ((_) -> Bool) -> Bool))) == (\226\136\128 h : (_) -> Bool, IN(h, f) \226\134\146 SUBSET(s, h))
       #|  s = affine hull s INTER\n        INTERS {{x:real^N | a(h:real^N->bool) dot x <= b h} | h IN f}
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  a ==> b /\\ c <=> (a ==> b) /\\ (a ==> c)
-      #|  forall h:real^N->bool.\n        h IN f\n        ==> h face_of s /\\\n            ?a b. ~(a = vec 0) /\\\n                  s SUBSET {x | a dot x <= b} /\\\n                  h = s INTER {x | a dot x = b}
-      #|  {x | P x /\\ Q x} = {x | x IN {x | P x} /\\ Q x}
-      #|  FINITE(f:(real^N->bool)->bool)
-      #|  f = {h:real^N->bool | h exposed_face_of s /\\ ~(h = {}) /\\ ~(h = s)}
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n    polyhedron s <=> closed s /\\ convex s /\\ FINITE {f | f exposed_face_of s}
-      #|  {f:real^N->bool | f face_of s}
-      #|  forall s:real^N->bool.\n        polyhedron s <=>\n        closed s /\\ convex s /\\ FINITE {f | f face_of s}
-      #|  (forall x y. Q x y ==> R x y) ==> (forall x y. P x /\\ P y /\\ Q x y ==> R x y)
-      #|  a + x:real^N = y <=> x = y - a
-      #|  IMAGE (\\x:real^N. a + x)
-      #|  forall a s. polyhedron (IMAGE (\\x:real^N. a + x) s) <=> polyhedron s
-      #|  f:real^M->real^N
-      #|  IMAGE (f:real^M->real^N)
-      #|  forall f:real^M->real^N s.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> (polyhedron (IMAGE f s) <=> polyhedron s)
-      #|  --x:real^N = y <=> x = --y
-      #|  forall s:real^N->bool. polyhedron s ==> polyhedron(IMAGE (--) s)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 face_of(h, (s : (Cart[Real, N]) -> Bool)) && (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && SUBSET(s, {(x : Cart[Real, N]) | dot(a, x) <= b}) && h == INTER(s, {(x : Cart[Real, N]) | dot(a, x) == b}))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(x : _) | P(x)}) && Q(x)}
+      #|  FINITE((f : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool) == {(h : (Cart[Real, N]) -> Bool) | exposed_face_of(h, (s : (Cart[Real, N]) -> Bool)) && !(h == {}) && !(h == s)}
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (closed(s) && convex(s) && FINITE({(f : (Cart[Real, N]) -> Bool) | exposed_face_of(f, s)}))
+      #|  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (s : (Cart[Real, N]) -> Bool))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (closed(s) && convex(s) && FINITE({(f : (Cart[Real, N]) -> Bool) | face_of(f, s)}))
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (Q : (_, _) -> Bool)(x, y) \226\134\146 (R : (_, _) -> Bool)(x, y)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) && P(y) && Q(x, y) \226\134\146 R(x, y))
+      #|  ((a : Cart[Real, N]) + (x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == y - a)
+      #|  IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) + x)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(IMAGE((x : Cart[Real, N]) => a + x, s)) == polyhedron(s)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 polyhedron(IMAGE(f, s)) == polyhedron(s)
+      #|  (-(x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == -y)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 polyhedron(IMAGE(op_minus_minus, s))
       #|  {x | f x IN INTERS s} = INTERS {{x | f x IN c} | c IN s}
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  forall f:real^M->real^N s.\n        linear f /\\ polyhedron s ==> polyhedron {x | f x IN s}
-      #|  {v:real^N | v extreme_point_of s}
-      #|  forall s:real^N->bool. polytope s <=> polyhedron s /\\ bounded s
-      #|  forall s t. polytope s /\\ polytope t ==> polytope(s INTER t)
-      #|  forall s t:real^N->bool. polytope s /\\ polyhedron t ==> polytope(s INTER t)
-      #|  forall s t:real^N->bool. polyhedron s /\\ polytope t ==> polytope(s INTER t)
-      #|  forall p. polytope p ==> polyhedron p
-      #|  {v:real^N}
-      #|  p:real^N->bool
-      #|  v:real^N
-      #|  p:real^N->bool
-      #|  p:real^N->bool = {}
-      #|  forall p:real^N->bool. polytope p /\\ &0 < aff_dim p ==> ?f. f facet_of p
-      #|  forall a b. polyhedron(interval[a,b])
-      #|  forall s. FINITE s ==> polyhedron(convex hull s)
-      #|  {f x | p x} = {y | ?x. p x /\\ y = f x}
-      #|  &0 <= u /\\ &0 < x /\\ x <= &1 - u\n      ==> (&0 <= u + x /\\ u + x <= &1) /\\ ~(u + x <= u)
-      #|  u + k:real
-      #|  &0 < e /\\ x <= e / &2 ==> x < e
-      #|  u % x - (u + k) % x:real^N = --k % x
-      #|  (u + k) % t % v:real^N
-      #|  &0 < k
-      #|  k = min (e / &2 / norm(t % v:real^N)) (&1 - u)
-      #|  e:real
-      #|  f:real^N->bool
-      #|  (?s. s IN f /\\ t SUBSET s) ==> t SUBSET UNIONS f
-      #|  f:real^N->bool
-      #|  x IN s DIFF (s DIFF t) ==> x IN t
-      #|  (u % t % v:real^N) IN (p DIFF relative_interior p)
-      #|  &1 - x + x = &1
-      #|  inv(u * t):real
-      #|  &1 - inv(u * t)
-      #|  convex hull {vec 0:real^N,u % t % v}
-      #|  forall t. t SUBSET s /\\ x IN t ==> x IN s
-      #|  inv t <= &0
-      #|  &0 < u /\\ u < &1
-      #|  &1 < t ==> &0 < t
-      #|  &1 < t ==> ~(t = &0)
-      #|  &1 < t ==> &0 <= t
-      #|  inv(t) <= u
-      #|  u = &1
-      #|  u:real
-      #|  &1 < t ==> &0 < abs t
-      #|  vec 0:real^N
-      #|  segment[vec 0,t % v:real^N] INTER p
-      #|  (vec 0:real^N) IN p
-      #|  a < b ==> ~(abs(max (&2) b) <= a)
-      #|  max (&2) ((B + &1) / norm (v:real^N))
-      #|  B:real
-      #|  ?t. &1 < t /\\ ~((t % v:real^N) IN p)
-      #|  p:real^N->bool
-      #|  v:real^N = vec 0
-      #|  v:real^N
-      #|  convex hull p:real^N->bool
-      #|  f:real^N->bool
-      #|  p:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  (vec 0:real^N) INSERT s
-      #|  (vec 0:real^N) IN (vec 0 INSERT s)
-      #|  s:real^N->bool
-      #|  a:real^N
-      #|  a:real^N
-      #|  forall s p:real^N->bool.\n        polytope p /\\ &0 < aff_dim p /\\ ~(s = {}) /\\ s SUBSET p\n        ==> p = UNIONS { convex hull (s UNION f) | f facet_of p}
-      #|  (vec 0:real^N) IN convex hull (vec 0 INSERT s)
-      #|  h = {x:real^N | a h dot x <= b h}
-      #|  inf(IMAGE (t:(real^N->bool)->real) f) % x:real^N =\n                  (&1 - inf(IMAGE t f) / t h) % vec 0 +\n                  (inf(IMAGE t f) / t h) % t h % x
-      #|  h:real^N->bool
-      #|  convex hull ((vec 0:real^N) INSERT s)
-      #|  forall s t. s SUBSET t /\\ x IN s ==> x IN t
-      #|  x:real^N = inv(inf(IMAGE t (f:(real^N->bool)->bool))) %\n                           inf(IMAGE t f) % x
-      #|  t:(real^N->bool)->real
-      #|  e / &2 / norm(x:real^N)
-      #|  &1
-      #|  x:real^N = vec 0
-      #|  e:real
-      #|  h = {x:real^N | a h dot x <= b h}
-      #|  (vec 0:real^N) IN interior h
-      #|  h = {x:real^N | a h dot x <= b h}
-      #|  h:real^N->bool
-      #|  vec 0:real^N
-      #|  &0 < (b:(real^N->bool)->real) h
-      #|  &1
-      #|  (b:(real^N->bool)->real) h = &0
-      #|  h:real^N->bool
-      #|  forall h:real^N->bool. h IN f ==> ?t. &0 < t /\\ (t % x) IN h
-      #|  x:real^N
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  s SUBSET t ==> INTERS t SUBSET INTERS s
-      #|  convex hull ((vec 0:real^N) INSERT s)
-      #|  (b:(real^N->bool)->real) h
-      #|  (a:(real^N->bool)->real^N) h
-      #|  h:real^N->bool
-      #|  h:real^N->bool
-      #|  {h:real^N->bool | h IN f /\\ b h = &0}
-      #|  bounded:(real^N->bool)->bool
-      #|  ~(f:(real^N->bool)->bool = {})
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  polyhedron(convex hull ((vec 0:real^N) INSERT s))
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool. FINITE s ==> polyhedron(convex_cone hull s)
-      #|  forall s:real^N->bool. FINITE s ==> closed(convex_cone hull s)
-      #|  c:real^N->bool = {}
-      #|  c:real^N->bool
-      #|  forall s:real^N->bool. polytope s ==> polyhedron(convex_cone hull s)
-      #|  c:real^N->bool = {}
-      #|  c:real^N->bool
-      #|  forall s:real^N->bool. polytope s ==> polyhedron(conic hull s)
-      #|  forall s:real^N->bool.\n    vec 0 IN relative_interior s \\/ polytope s \\/ compact s /\\ ~(vec 0 IN s)\n    ==> closed(conic hull s)
-      #|  s:real^N->bool = {}
-      #|  forall s:real^N->bool.\n        FINITE s \\/\n        polytope s \\/\n        vec 0 IN relative_interior (convex hull s) \\/\n        compact s /\\ ~(vec 0 IN convex hull s)\n        ==> closed(convex_cone hull s)
-      #|  convex hull c:real^N->bool
-      #|  forall s. x IN s /\\ s SUBSET t ==> x IN t
-      #|  x:real^N = inv t % t % x
-      #|  e / &2 / norm(x:real^N)
-      #|  &1
-      #|  x:real^N = vec 0
-      #|  e:real
-      #|  ?t. &0 < t /\\ (t % x:real^N) IN p
-      #|  x:real^N
-      #|  s INTER p:real^N->bool
-      #|  c:real^N->bool
-      #|  polytope(s INTER p:real^N->bool)
-      #|  interval[--vec 1:real^N,vec 1:real^N]
-      #|  ?p:real^N->bool. polytope p /\\ vec 0 IN interior p
-      #|  forall s:real^N->bool.\n        polyhedron s /\\ conic s /\\ ~(s = {})\n        ==> ?c. FINITE c /\\ s = convex_cone hull c
-      #|  k exposed_face_of s <=>\n                                 k IN {f | f exposed_face_of s}
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, linear(f) && polyhedron(s) \226\134\146 polyhedron({(x : Cart[Real, M]) | IN(f(x), s)})
+      #|  {(v : Cart[Real, N]) | extreme_point_of(v, (s : (Cart[Real, N]) -> Bool))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) == (polyhedron(s) && bounded(s))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, polytope(s) && polytope(t) \226\134\146 polytope(INTER(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polytope(s) && polyhedron(t) \226\134\146 polytope(INTER(s, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polyhedron(s) && polytope(t) \226\134\146 polytope(INTER(s, t))
+      #|  \226\136\128 p : (Cart[Real, _]) -> Bool, polytope(p) \226\134\146 polyhedron(p)
+      #|  {(v : Cart[Real, N])}
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (v : Cart[Real, N])
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 p : (Cart[Real, N]) -> Bool, polytope(p) && int_of_num(0) < aff_dim(p) \226\134\146 (\226\136\131 f : (Cart[Real, N]) -> Bool, facet_of(f, p))
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], polyhedron(interval([(a, b)]))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, FINITE(s) \226\134\146 polyhedron(hull(convex, s))
+      #|  {(f : (_) -> _)((x : _)) | (p : (_) -> Bool)(x)} == {(y : _) | \226\136\131 x : _, p(x) && y == f(x)}
+      #|  real_of_num(0) <= (u : Real) && real_of_num(0) < (x : Real) && x <= real_of_num(1) - u \226\134\146 (real_of_num(0) <= u + x && u + x <= real_of_num(1)) && !(u + x <= u)
+      #|  (u : Real) + (k : Real)
+      #|  real_of_num(0) < (e : Real) && (x : Real) <= e / real_of_num(2) \226\134\146 x < e
+      #|  op_pct((u : Real), (x : Cart[Real, N])) - op_pct(u + (k : Real), x) == op_pct(-k, x)
+      #|  op_pct((u : Real) + (k : Real), op_pct((t : Real), (v : Cart[Real, N])))
+      #|  real_of_num(0) < (k : Real)
+      #|  (k : Real) == min((e : Real) / real_of_num(2) / norm(op_pct((t : Real), (v : Cart[Real, N]))), real_of_num(1) - (u : Real))
+      #|  (e : Real)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\131 s : (_) -> Bool, IN(s, (f : ((_) -> Bool) -> Bool)) && SUBSET((t : (_) -> Bool), s)) \226\134\146 SUBSET(t, UNIONS(f))
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  IN((x : _), DIFF((s : (_) -> Bool), DIFF(s, (t : (_) -> Bool)))) \226\134\146 IN(x, t)
+      #|  IN(op_pct((u : Real), op_pct((t : Real), (v : Cart[Real, N]))), DIFF((p : (Cart[Real, N]) -> Bool), relative_interior(p)))
+      #|  real_of_num(1) - (x : Real) + x == real_of_num(1)
+      #|  inv((u : Real) * (t : Real))
+      #|  real_of_num(1) - inv((u : Real) * (t : Real))
+      #|  hull(convex, {vec(0), op_pct((u : Real), op_pct((t : Real), (v : Cart[Real, N])))})
+      #|  \226\136\128 t : (_) -> Bool, SUBSET(t, (s : (_) -> Bool)) && IN((x : _), t) \226\134\146 IN(x, s)
+      #|  inv((t : Real)) <= real_of_num(0)
+      #|  real_of_num(0) < (u : Real) && u < real_of_num(1)
+      #|  real_of_num(1) < (t : Real) \226\134\146 real_of_num(0) < t
+      #|  real_of_num(1) < (t : Real) \226\134\146 !(t == real_of_num(0))
+      #|  real_of_num(1) < (t : Real) \226\134\146 real_of_num(0) <= t
+      #|  inv((t : Real)) <= (u : Real)
+      #|  (u : Real) == real_of_num(1)
+      #|  (u : Real)
+      #|  real_of_num(1) < (t : Real) \226\134\146 real_of_num(0) < abs(t)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  INTER(segment([(vec(0), op_pct((t : Real), (v : Cart[Real, N])))]), (p : (Cart[Real, N]) -> Bool))
+      #|  IN(vec(0), (p : (Cart[Real, N]) -> Bool))
+      #|  (a : Real) < (b : Real) \226\134\146 !(abs(max(real_of_num(2), b)) <= a)
+      #|  max(real_of_num(2), ((B : Real) + real_of_num(1)) / norm((v : Cart[Real, N])))
+      #|  (B : Real)
+      #|  \226\136\131 t : Real, real_of_num(1) < t && !IN(op_pct(t, (v : Cart[Real, N])), (p : (Cart[Real, N]) -> Bool))
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (v : Cart[Real, N]) == vec(0)
+      #|  (v : Cart[Real, N])
+      #|  hull(convex, (p : (Cart[Real, N]) -> Bool))
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  INSERT(vec(0), (s : (Cart[Real, N]) -> Bool))
+      #|  IN(vec(0), INSERT(vec(0), (s : (Cart[Real, N]) -> Bool)))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 p : (Cart[Real, N]) -> Bool, polytope(p) && int_of_num(0) < aff_dim(p) && !(s == {}) && SUBSET(s, p) \226\134\146 p == UNIONS({hull(convex, UNION(s, (f : (Cart[Real, N]) -> Bool))) | facet_of(f, p)})
+      #|  IN(vec(0), hull(convex, INSERT(vec(0), (s : (Cart[Real, N]) -> Bool))))
+      #|  (h : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}
+      #|  op_pct(inf(IMAGE((t : ((Cart[Real, N]) -> Bool) -> Real), (f : ((Cart[Real, N]) -> Bool) -> Bool))), (x : Cart[Real, N])) == op_pct(real_of_num(1) - inf(IMAGE(t, f)) / t((h : (Cart[Real, N]) -> Bool)), vec(0)) + op_pct(inf(IMAGE(t, f)) / t(h), op_pct(t(h), x))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  hull(convex, INSERT(vec(0), (s : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, SUBSET(s, t) && IN((x : _), s) \226\134\146 IN(x, t)
+      #|  (x : Cart[Real, N]) == op_pct(inv(inf(IMAGE((t : ((Cart[Real, N]) -> Bool) -> Real), (f : ((Cart[Real, N]) -> Bool) -> Bool)))), op_pct(inf(IMAGE(t, f)), x))
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (e : Real) / real_of_num(2) / norm((x : Cart[Real, N]))
+      #|  real_of_num(1)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (e : Real)
+      #|  (h : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}
+      #|  IN(vec(0), interior((h : (Cart[Real, N]) -> Bool)))
+      #|  (h : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  real_of_num(0) < (b : ((Cart[Real, N]) -> Bool) -> Real)((h : (Cart[Real, N]) -> Bool))
+      #|  real_of_num(1)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h : (Cart[Real, N]) -> Bool)) == real_of_num(0)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 t : Real, real_of_num(0) < t && IN(op_pct(t, (x : Cart[Real, N])), h))
+      #|  (x : Cart[Real, N])
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((s : ((_) -> Bool) -> Bool), (t : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(t), INTERS(s))
+      #|  hull(convex, INSERT(vec(0), (s : (Cart[Real, N]) -> Bool)))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h : (Cart[Real, N]) -> Bool))
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  {(h : (Cart[Real, N]) -> Bool) | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && (b : ((Cart[Real, N]) -> Bool) -> Real)(h) == real_of_num(0)}
+      #|  (bounded : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  !((f : ((Cart[Real, N]) -> Bool) -> Bool) == {})
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  polyhedron(hull(convex, INSERT(vec(0), (s : (Cart[Real, N]) -> Bool))))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) \226\134\146 polyhedron(hull(convex_cone, s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) \226\134\146 closed(hull(convex_cone, s))
+      #|  (c : (Cart[Real, N]) -> Bool) == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) \226\134\146 polyhedron(hull(convex_cone, s))
+      #|  (c : (Cart[Real, N]) -> Bool) == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polytope(s) \226\134\146 polyhedron(hull(conic, s))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, IN(vec(0), relative_interior(s)) || polytope(s) || compact(s) && !IN(vec(0), s) \226\134\146 closed(hull(conic, s))
+      #|  (s : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) || polytope(s) || IN(vec(0), relative_interior(hull(convex, s))) || compact(s) && !IN(vec(0), hull(convex, s)) \226\134\146 closed(hull(convex_cone, s))
+      #|  hull(convex, (c : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (_) -> Bool, IN((x : _), s) && SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (x : Cart[Real, N]) == op_pct(inv((t : Real)), op_pct(t, x))
+      #|  (e : Real) / real_of_num(2) / norm((x : Cart[Real, N]))
+      #|  real_of_num(1)
+      #|  (x : Cart[Real, N]) == vec(0)
+      #|  (e : Real)
+      #|  \226\136\131 t : Real, real_of_num(0) < t && IN(op_pct(t, (x : Cart[Real, N])), (p : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  INTER((s : (Cart[Real, N]) -> Bool), (p : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  polytope(INTER((s : (Cart[Real, N]) -> Bool), (p : (Cart[Real, N]) -> Bool)))
+      #|  (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(-(vec : (Num) -> Cart[Real, N])(1), (vec : (Num) -> Cart[Real, N])(1))])
+      #|  \226\136\131 p : (Cart[Real, N]) -> Bool, polytope(p) && IN(vec(0), interior(p))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) && conic(s) && !(s == {}) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, FINITE(c) && s == hull(convex_cone, c))
+      #|  exposed_face_of((k : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == IN(k, {(f : (Cart[Real, _]) -> Bool) | exposed_face_of(f, s)})
       #|  { {x + y:real^N | x IN k /\\ y IN l} |\n                  k exposed_face_of s /\\ l exposed_face_of t}
-      #|  forall s t:real^N->bool.\n    polyhedron s /\\ polytope t ==> polyhedron {x + y | x IN s /\\ y IN t}
-      #|  &1
-      #|  x:real^N = c % x <=> (c - &1) % x = vec 0
-      #|  d:real^(N,1)finite_sum
-      #|  c:real
-      #|  forall y:real^(N,1)finite_sum. y IN convex hull u ==> sndcart y = vec 1
-      #|  u:real^(N,1)finite_sum->bool = {}
-      #|  vec 0:real^(N,1)finite_sum
-      #|  a:real^(N,1)finite_sum
-      #|  a:real^(N,1)finite_sum
-      #|  (a:real^(N,1)finite_sum) IN convex_cone hull t
-      #|  sndcart(a:real^(N,1)finite_sum) = vec 0
-      #|  fstcart(a:real^(N,1)finite_sum) +\n                   fstcart(b:real^(N,1)finite_sum) = z
-      #|  b:real^(N,1)finite_sum
-      #|  (p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)
-      #|  a:real^(N,1)finite_sum
-      #|  z:real^N
-      #|  s = {x:real^N | pastecart x (vec 1:real^1) IN s'}
-      #|  IMAGE fstcart (u:real^(N,1)finite_sum->bool)
-      #|  IMAGE fstcart (t:real^(N,1)finite_sum->bool)
-      #|  x:real^(N,1)finite_sum
-      #|  x:real^(N,1)finite_sum =\n                drop(sndcart x) % inv(drop(sndcart x)) % x
-      #|  &0 <= x <=> x = &0 \\/ &0 < x
-      #|  x:real^(N,1)finite_sum
-      #|  x:real^(N,1)finite_sum
-      #|  (x:real^(N,1)finite_sum) IN s'
-      #|  forall x:real^(N,1)finite_sum. x IN c ==> &0 <= drop(sndcart x)
-      #|  IMAGE (\\x. inv(drop(sndcart x)) % x)\n           {x:real^(N,1)finite_sum | x IN c /\\ ~(drop(sndcart x) = &0)}
-      #|  {x:real^(N,1)finite_sum | x IN c /\\ drop(sndcart x) = &0}
-      #|  c:real^(N,1)finite_sum->bool
-      #|  vec 0:real^(N,1)finite_sum
-      #|  &0
-      #|  pastecart (a(h:real^N->bool)) (--lift(b h)):real^(N,1)finite_sum
-      #|  h:real^N->bool
-      #|  &0
-      #|  pastecart (vec 0) (--vec 1):real^(N,1)finite_sum
-      #|  x - y <= &0 <=> x <= y
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polyhedron(s) && polytope(t) \226\134\146 polyhedron({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+      #|  real_of_num(1)
+      #|  ((x : Cart[Real, N]) == op_pct((c : Real), x)) == (op_pct(c - real_of_num(1), x) == vec(0))
+      #|  (d : Cart[Real, Finite_sum[N, Unit]])
+      #|  (c : Real)
+      #|  \226\136\128 y : Cart[Real, Finite_sum[N, Unit]], IN(y, hull(convex, (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))) \226\134\146 sndcart(y) == vec(1)
+      #|  (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {}
+      #|  (vec : (Num) -> Cart[Real, Finite_sum[N, Unit]])(0)
+      #|  (a : Cart[Real, Finite_sum[N, Unit]])
+      #|  (a : Cart[Real, Finite_sum[N, Unit]])
+      #|  IN((a : Cart[Real, Finite_sum[N, Unit]]), hull(convex_cone, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)))
+      #|  sndcart((a : Cart[Real, Finite_sum[N, Unit]])) == vec(0)
+      #|  fstcart((a : Cart[Real, Finite_sum[N, Unit]])) + fstcart((b : Cart[Real, Finite_sum[N, Unit]])) == (z : Cart[Real, N])
+      #|  (b : Cart[Real, Finite_sum[N, Unit]])
+      #|  ((p : Bool) \226\134\146 (q : Bool) == (r : Bool)) \226\134\146 (p && q) == (p && r)
+      #|  (a : Cart[Real, Finite_sum[N, Unit]])
+      #|  (z : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(pastecart(x, vec(1)), (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))}
+      #|  IMAGE(fstcart, (u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  IMAGE(fstcart, (t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (x : Cart[Real, Finite_sum[N, Unit]]) == op_pct(drop(sndcart(x)), op_pct(inv(drop(sndcart(x))), x))
+      #|  (real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  (x : Cart[Real, Finite_sum[N, Unit]])
+      #|  IN((x : Cart[Real, Finite_sum[N, Unit]]), (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool))
+      #|  \226\136\128 x : Cart[Real, Finite_sum[N, Unit]], IN(x, (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) \226\134\146 real_of_num(0) <= drop(sndcart(x))
+      #|  IMAGE((x : Cart[Real, Finite_sum[N, Unit]]) => op_pct(inv(drop(sndcart(x))), x), {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && !(drop(sndcart(x)) == real_of_num(0))})
+      #|  {(x : Cart[Real, Finite_sum[N, Unit]]) | IN(x, (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)) && drop(sndcart(x)) == real_of_num(0)}
+      #|  (c : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  (vec : (Num) -> Cart[Real, Finite_sum[N, Unit]])(0)
+      #|  real_of_num(0)
+      #|  pastecart((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), -lift((b : ((Cart[Real, N]) -> Bool) -> Real)(h)))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  real_of_num(0)
+      #|  (pastecart : (Cart[Real, N], Cart[Real, Unit]) -> Cart[Real, Finite_sum[N, Unit]])((vec : (Num) -> Cart[Real, N])(0), -vec(1))
+      #|  ((x : Real) - (y : Real) <= real_of_num(0)) == (x <= y)
       #|  { x:real^(N,1)finite_sum |\n            pastecart (vec 0) (--vec 1) dot x <= &0} INSERT\n          { {x | pastecart (a h) (--lift(b h)) dot x <= &0} |\n            (h:real^N->bool) IN f}
-      #|  s':real^(N,1)finite_sum->bool
-      #|  ?t u. FINITE t /\\ FINITE u /\\\n          (forall y:real^(N,1)finite_sum. y IN t ==> drop(sndcart y) = &0) /\\\n          (forall y. y IN u ==> drop(sndcart y) = &1) /\\\n          s' = convex_cone hull (t UNION u)
-      #|  s':real^(N,1)finite_sum->bool =\n        {x | &0 <= drop(sndcart x) /\\\n             forall h:real^N->bool.\n                h IN f ==> a h dot (fstcart x) <= b h * drop(sndcart x)}
-      #|  h = {x | P x} <=> {x | P x} = h
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  forall s:real^N->bool.\n        polyhedron s <=> ?t u. FINITE t /\\ FINITE u /\\\n                               s = {x + y | x IN convex_cone hull t /\\\n                                            y IN convex hull u}
-      #|  IMAGE (f:real^M->real^N) u
-      #|  IMAGE (f:real^M->real^N) t
-      #|  u:real^M->bool
-      #|  t:real^M->bool
-      #|  forall f:real^M->real^N s.\n        linear f /\\ polyhedron s ==> polyhedron(IMAGE f s)
-      #|  {h x y | x IN {f a b | P a /\\ Q b} /\\\n             y IN {g a b | R a /\\ S b}} =\n    {h (f a b) (g c d) | P a /\\ Q b /\\ R c /\\ S d}
-      #|  {u + v:real^N | u IN u1 /\\ v IN u2}
-      #|  t1 UNION t2:real^N->bool
-      #|  u2:real^N->bool
-      #|  t2:real^N->bool
-      #|  u1:real^N->bool
-      #|  t1:real^N->bool
-      #|  forall s t:real^N->bool.\n    polyhedron s /\\ polyhedron t ==> polyhedron {x + y | x IN s /\\ y IN t}
-      #|  &0 < abs(norm(y:real^N) + &1)
+      #|  (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
+      #|  \226\136\131 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, FINITE(t) && FINITE(u) && (\226\136\128 y : Cart[Real, Finite_sum[N, Unit]], IN(y, t) \226\134\146 drop(sndcart(y)) == real_of_num(0)) && (\226\136\128 y : Cart[Real, Finite_sum[N, Unit]], IN(y, u) \226\134\146 drop(sndcart(y)) == real_of_num(1)) && (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == hull(convex_cone, UNION(t, u))
+      #|  (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {(x : Cart[Real, Finite_sum[N, Unit]]) | real_of_num(0) <= drop(sndcart(x)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), fstcart(x)) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h) * drop(sndcart(x)))}
+      #|  ((h : (_) -> Bool) == {(x : _) | (P : (_) -> Bool)(x)}) == ({(x : _) | P(x)} == h)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) == (\226\136\131 t : (Cart[Real, N]) -> Bool, \226\136\131 u : (Cart[Real, N]) -> Bool, FINITE(t) && FINITE(u) && s == {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, hull(convex_cone, t)) && IN(y, hull(convex, u))})
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (u : (Cart[Real, M]) -> Bool))
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (t : (Cart[Real, M]) -> Bool))
+      #|  (u : (Cart[Real, M]) -> Bool)
+      #|  (t : (Cart[Real, M]) -> Bool)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && polyhedron(s) \226\134\146 polyhedron(IMAGE(f, s))
+      #|  {(h : (_, _) -> _)((x : _), (y : _)) | IN(x, {(f : (_, _) -> _)((a : _), (b : _)) | (P : (_) -> Bool)(a) && (Q : (_) -> Bool)(b)}) && IN(y, {(g : (_, _) -> _)((a : _), (b : _)) | (R : (_) -> Bool)(a) && (S : (_) -> Bool)(b)})} == {h(f((a : _), (b : _)), g((c : _), (d : _))) | P(a) && Q(b) && R(c) && S(d)}
+      #|  {(u : Cart[Real, N]) + (v : Cart[Real, N]) | IN(u, (u1 : (Cart[Real, N]) -> Bool)) && IN(v, (u2 : (Cart[Real, N]) -> Bool))}
+      #|  UNION((t1 : (Cart[Real, N]) -> Bool), (t2 : (Cart[Real, N]) -> Bool))
+      #|  (u2 : (Cart[Real, N]) -> Bool)
+      #|  (t2 : (Cart[Real, N]) -> Bool)
+      #|  (u1 : (Cart[Real, N]) -> Bool)
+      #|  (t1 : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polyhedron(s) && polyhedron(t) \226\134\146 polyhedron({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
+      #|  real_of_num(0) < abs(norm((y : Cart[Real, N])) + real_of_num(1))
       #|  :real
-      #|  &0 < e /\\ e * z / y < e * &1 ==> abs e / y * z < e
-      #|  dist(x + e:real^N,x) = norm e
+      #|  real_of_num(0) < (e : Real) && e * ((z : Real) / (y : Real)) < e * real_of_num(1) \226\134\146 abs(e) / y * z < e
+      #|  dist(((x : Cart[Real, N]) + (e : Cart[Real, N]), x)) == norm(e)
       #|  :real
       #|  :real
-      #|  &0 <= y /\\ &0 < e ==> e / (y + &1) * (y + &1) / e = &1
-      #|  y:real^N
-      #|  (norm(y:real^N) + &1) / e % x:real^N
-      #|  e / (norm y + &1) % ((norm y + &1) / e % x + y):real^N
-      #|  e:real
-      #|  y:real^N
-      #|  x:real^N
-      #|  vec 0:real^N
-      #|  x:real^N
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  k UNION c:real^N->bool
-      #|  {f x y | x,y | F} = {}
-      #|  c:real^N->bool = {}
-      #|  c:real^N->bool
-      #|  k:real^N->bool
-      #|  forall s:real^N->bool.\n        polyhedron s /\\ convex_cone s <=>\n        ?k. FINITE k /\\ s = convex_cone hull k
+      #|  real_of_num(0) <= (y : Real) && real_of_num(0) < (e : Real) \226\134\146 e / (y + real_of_num(1)) * ((y + real_of_num(1)) / e) == real_of_num(1)
+      #|  (y : Cart[Real, N])
+      #|  op_pct((norm((y : Cart[Real, N])) + real_of_num(1)) / (e : Real), (x : Cart[Real, N]))
+      #|  op_pct((e : Real) / (norm((y : Cart[Real, N])) + real_of_num(1)), op_pct((norm(y) + real_of_num(1)) / e, (x : Cart[Real, N])) + y)
+      #|  (e : Real)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (x : Cart[Real, N])
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  UNION((k : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Bool))
+      #|  {(f : (_, _) -> _)(x, y) | x : _, y : _ | false} == {}
+      #|  (c : (Cart[Real, N]) -> Bool) == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (polyhedron(s) && convex_cone(s)) == (\226\136\131 k : (Cart[Real, N]) -> Bool, FINITE(k) && s == hull(convex_cone, k))
       #|  :real
-      #|  &0 <= --x <=> ~(&0 < x)
-      #|  x / y:real = --x * -- inv y
-      #|  y < &0 ==> x / y * y = x
-      #|  c / (transp(A:real^N^M) ** (y:real^M))$k % basis k:real^N
-      #|  k:num
-      #|  vec 0:real^N
-      #|  c:real
-      #|  y:real^M
-      #|  b:real^M
-      #|  {(A:real^N^M) ** (x:real^N) |\n        forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i}
-      #|  y < &0 ==> &0 <= x ==> ~(x = y)
-      #|  y dot ((A:real^N^M) ** x - b) = &0
-      #|  (q ==> ~p) /\\ (~p ==> q) ==> (p <=> ~q)
-      #|  forall A:real^N^M b.\n        (?x:real^N.\n            A ** x = b /\\\n            (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= x$i)) <=>\n        ~(?y:real^M.\n            b dot y < &0 /\\\n            (forall i. 1 <= i /\\ i <= dimindex(:N) ==> &0 <= (transp A ** y)$i))
-      #|  vec 0:real^M
-      #|  c / norm((y:real^M) ** (A:real^N^M)) pow 2 %\n           (transp A ** y)
-      #|  y < &0 ==> c / --y * y = --c
-      #|  --c / --((y:real^M)$k) % basis k:real^M
-      #|  vec 0:real^N
-      #|  k:num
-      #|  vec 0:real^M
-      #|  vec 0:real^N
-      #|  c:real
-      #|  y:real^M
-      #|  {f x + y | x,y | P y} =\n          {z + y | z,y | z IN IMAGE (f:real^M->real^N) (:real^M) /\\\n                         y IN {w | P w}}
-      #|  b:real^M
-      #|  {(A:real^N^M) ** (x:real^N) + s |x,s|\n        forall i. 1 <= i /\\ i <= dimindex(:M) ==> &0 <= s$i}
-      #|  &0 <= (b - (A:real^N^M) ** x) dot y
-      #|  ~(p /\\ q) /\\ (~p ==> q) ==> (p <=> ~q)
-      #|  forall A:real^N^M b.\n        (?x:real^N.\n            (forall i. 1 <= i /\\ i <= dimindex(:M) ==> (A ** x)$i <= b$i)) <=>\n        ~(?y:real^M.\n            (forall i. 1 <= i /\\ i <= dimindex(:M) ==> &0 <= y$i) /\\\n            y ** A = vec 0 /\\ b dot y < &0)
-      #|  v:real
-      #|  u:real
-      #|  --((u + v) / &2)
-      #|  x - y > k ==> y <= x - k
-      #|  k + v <= u <=> v <= u - k
-      #|  k <= u - v
-      #|  z:real^N
-      #|  x:real^N
-      #|  x:real^N
-      #|  a dot (z:real^N) + k
-      #|  z:real^N
-      #|  ~(t:real^N->bool = {})
-      #|  x:real^N
-      #|  z:real^N
-      #|  x:real^N
-      #|  a dot (z:real^N) - k
-      #|  z:real^N
-      #|  ~(s:real^N->bool = {})
-      #|  v = sup(IMAGE (\\x:real^N. a dot x) t)
-      #|  u = inf(IMAGE (\\x:real^N. a dot x) s)
-      #|  IMAGE (\\x:real^N. a dot x) t
-      #|  IMAGE (\\x:real^N. a dot x) s
-      #|  --a:real^N
-      #|  k:real
-      #|  a:real^N
-      #|  vec 0:real^N = x + y <=> y = --x
-      #|  y = --x:real^N <=> --y = x
-      #|  {x + y:real^N | x IN s /\\ y IN IMAGE (--) t}
-      #|  forall s t:real^N->bool.\n        polyhedron s /\\ polyhedron t /\\ ~(s = {}) /\\ ~(t = {}) /\\ DISJOINT s t\n        ==> ?a b. ~(a = vec 0) /\\\n                  (forall x. x IN s ==> a dot x < b) /\\\n                  (forall x. x IN t ==> a dot x > b)
-      #|  (s:real^N->bool) HAS_SIZE 1
-      #|  CARD(s:real^N->bool) = 0 \\/ CARD s = 1 \\/ 2 <= CARD s
-      #|  forall s:real^N->bool.\n        ~affine_dependent s\n        ==> (convex hull s) DIFF relative_interior(convex hull s) =\n            UNIONS { convex hull (s DELETE a) | a | a IN s}
-      #|  2 <= n + 1 <=> 1 <= n
-      #|  (convex hull s) DIFF relative_interior(convex hull s):real^N->bool
-      #|  (convex hull t) SUBSET convex hull (s DELETE (a:real^N))
-      #|  a:real^N
-      #|  ?a:real^N. a IN s /\\ ~(a IN t)
-      #|  s:int <= n /\\ ~(s = n) ==> s + &1 <= n
-      #|  aff_dim(s:real^N->bool) + &1
-      #|  x < n + 1 <=> x <= n
-      #|  t:num < s ==> t = s ==> F
-      #|  CARD:(real^N->bool)->num
-      #|  (t:real^N->bool) PSUBSET s
-      #|  (x + &1) - &1:int = x
-      #|  s:real^N->bool
-      #|  t:real^N->bool
-      #|  x:real^N
-      #|  (convex hull s:real^N->bool) DIFF {}
-      #|  affine_dependent(s:real^N->bool)
-      #|  forall s:real^N->bool.\n        s HAS_SIZE (dimindex(:N) + 1)\n        ==> frontier(convex hull s) =\n               UNIONS { convex hull (s DELETE a) | a | a IN s}
-      #|  s UNION t UNION u = t UNION u UNION s
-      #|  forall a b c:real^N.\n        ~collinear {a,b,c}\n        ==> convex hull {a,b,c} DIFF relative_interior(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]
-      #|  forall a b c:real^N.\n        ~collinear {a,b,c}\n        ==> relative_frontier(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]
-      #|  {a:real^2,b,c} HAS_SIZE (dimindex(:2) + 1)
-      #|  c:real^2 = b
-      #|  c:real^2 = a
-      #|  b:real^2 = a
-      #|  s = {a} UNION s <=> a IN s
-      #|  s = s UNION {a} <=> a IN s
-      #|  s = {a} UNION s <=> a IN s
-      #|  s = s UNION {a} <=> a IN s
-      #|  s = {a} UNION s <=> a IN s
-      #|  s = s UNION {a} <=> a IN s
-      #|  s UNION t UNION u = t UNION u UNION s
-      #|  forall a b c:real^2.\n        frontier(convex hull {a,b,c}) =\n            segment[a,b] UNION segment[b,c] UNION segment[c,a]
-      #|  forall a b c:real^2.\n        inside(segment[a,b] UNION segment[b,c] UNION segment[c,a]) =\n                interior(convex hull {a,b,c})
-      #|  i SUBSET s /\\ c = s ==> i = s DIFF (c DIFF i)
-      #|  forall a b c:real^2.\n        interior(convex hull {a,b,c}) =\n        (convex hull {a,b,c}) DIFF\n        (segment[a,b] UNION segment[b,c] UNION segment[c,a])
-      #|  &0 < --u * --a /\\ &0 < --v * --b ==> ~(u * a + v * b < &0)
-      #|  (a1:real^N) dot w < &0
-      #|  (&0 < --u * a2 <=> &0 < a2) /\\ (&0 < v * a3 <=> &0 < a3)\n      ==> u * a2 + v * a3 <= &0 /\\ a2 <= &0 ==> a3 <= &0
-      #|  ~({x | a1 dot x <= &0} INTER {x | a2 dot x <= &0} SUBSET\n        {x:real^N | a3 dot x <= &0})
-      #|  (&0 < u * a2 <=> &0 < a2) /\\ (&0 < --v * a3 <=> &0 < a3)\n      ==> u * a2 + v * a3 <= &0 /\\ a3 <= &0 ==> a2 <= &0
-      #|  ~({x | a1 dot x <= &0} INTER {x | a3 dot x <= &0} SUBSET\n        {x:real^N | a2 dot x <= &0})
-      #|  x <= &0 <=> &0 <= --x
-      #|  ~({x | a2 dot x <= &0} INTER {x | a3 dot x <= &0} SUBSET\n        {x:real^N | a1 dot x <= &0})
-      #|  &0 < u /\\ &0 < v \\/ &0 < u /\\ &0 < --v \\/\n    &0 < --u /\\ &0 < v \\/ &0 < --u /\\ &0 < --v
-      #|  a * b < &0 <=> &0 < --a * b
-      #|  a * b <= &0 <=> &0 <= a * --b
-      #|  u = &0 \\/ &0 < u \\/ &0 < --u
-      #|  v = &0
-      #|  a * b < &0 <=> &0 < --a * b
-      #|  a * b <= &0 <=> &0 <= a * --b
-      #|  v = &0 \\/ &0 < v \\/ &0 < --v
-      #|  u = &0
-      #|  v:real
-      #|  u:real
-      #|  (p ==> q) /\\ (p ==> r) ==> p ==> q /\\ r
-      #|  (forall a1 a2 a3. P a1 a2 a3 ==> P a2 a1 a3 /\\ P a3 a1 a2) /\\\n    (forall a1 a2 a3. Q a1 a2 a3 ==> ~(P a1 a2 a3))\n    ==> forall a3 a2 a1. P a1 a2 a3\n                   ==> ~(Q a1 a2 a3 \\/ Q a2 a1 a3 \\/ Q a3 a1 a2)
-      #|  ~(3 > x) <=> 3 <= x
-      #|  {a1:real^N,a2,a3}
-      #|  affine hull p :real^N->bool = span p
-      #|  p <= r + 2 ==> u <= p /\\ 3 <= t ==> ~(u = t + r)
-      #|  r:real^N->bool
-      #|  {a1:real^N,a2,a3}
-      #|  p - &2:int <= q <=> p <= q + &2
-      #|  aff_dim(r:real^N->bool) = &(dim r)
-      #|  aff_dim(p:real^N->bool) = &(dim p)
-      #|  a + b:real = a <=> b = &0
-      #|  a + b:real < a <=> b < &0
-      #|  a + b:real <= a <=> b <= &0
-      #|  z:real^N
-      #|  a3:real^N
-      #|  (a:(real^N->bool)->real^N) h3
-      #|  a2:real^N
-      #|  (a:(real^N->bool)->real^N) h2
-      #|  a1:real^N
-      #|  (a:(real^N->bool)->real^N) h1
-      #|  (z:real^N) IN r
-      #|  ~((a:(real^N->bool)->real^N) h1 = vec 0) /\\\n    ~((a:(real^N->bool)->real^N) h2 = vec 0) /\\\n    ~((a:(real^N->bool)->real^N) h3 = vec 0)
-      #|  (r:real^N->bool) SUBSET affine hull p
-      #|  (a h1) dot (z:real^N) = b h1 /\\\n                (a h2) dot z = b h2 /\\\n                (a (h3:real^N->bool)) dot z = b h3
-      #|  (z:real^N) IN (affine hull p)
-      #|  (z:real^N) IN (affine hull p)
-      #|  h3:real^N->bool
-      #|  h2:real^N->bool
-      #|  h1:real^N->bool
-      #|  z:real^N
-      #|  z:real^N
-      #|  z:real^N
-      #|  aff_dim(p:real^N->bool) - &2 <= aff_dim(r:real^N->bool)
-      #|  ~((a:(real^N->bool)->real^N) h2 = a h3)
-      #|  ~((a:(real^N->bool)->real^N) h1 = a h3)
-      #|  ~((a:(real^N->bool)->real^N) h1 = a h2)
-      #|  ?z:real^N. z IN r
-      #|  forall x. x IN r ==> (a h1) dot (x:real^N) = b h1 /\\\n                   (a h2) dot x = b h2 /\\\n                   (a (h3:real^N->bool)) dot x = b h3
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  p:real^N->bool
-      #|  ~(relative_interior p :real^N->bool = {})
-      #|  ?w. (a:(real^N->bool)->real^N) h1 dot w < b h1 /\\\n        a h2 dot w < b h2 /\\ a h3 dot w < b h3
-      #|  f DELETE (h1:real^N->bool) = h2 INSERT h3 INSERT (f DELETE h1) /\\\n        f =  h1 INSERT h2 INSERT h3 INSERT (f DELETE h1)
-      #|  f DELETE (h2:real^N->bool) = h1 INSERT h3 INSERT (f DELETE h2) /\\\n        f =  h2 INSERT h1 INSERT h3 INSERT (f DELETE h2)
-      #|  f DELETE (h3:real^N->bool) = h1 INSERT h2 INSERT (f DELETE h3) /\\\n        f =  h1 INSERT h2 INSERT h3 INSERT (f DELETE h3)
-      #|  s = t ==> s PSUBSET t ==> F
-      #|  f DELETE (h1:real^N->bool)
-      #|  f DELETE (h2:real^N->bool)
-      #|  f DELETE (h3:real^N->bool)
-      #|  ~({x | a h1 dot x <= b h1} INTER {x | a h2 dot x <= b h2}\n      SUBSET {x | a h3 dot x <= b h3}) /\\\n    ~({x | a h1 dot x <= b h1} INTER {x | a h3 dot x <= b h3}\n      SUBSET {x | a h2 dot x <= b h2}) /\\\n    ~({x | a h2 dot x <= b h2} INTER {x | a h3 dot x <= b h3}\n      SUBSET {x:real^N | a(h1:real^N->bool) dot x <= b h1})
-      #|  b SUBSET a ==> a INTER b INTER s = b INTER s
-      #|  f DELETE h1 = h3 INSERT (f DIFF {h1,h3}) /\\\n                      f = (h1:real^N->bool) INSERT h3 INSERT (f DIFF {h1,h3})
-      #|  f DELETE h3 = h1 INSERT (f DIFF {h1,h3}) /\\\n                      f = (h3:real^N->bool) INSERT h1 INSERT (f DIFF {h1,h3})
-      #|  (p ==> s = t) ==> s PSUBSET t ==> ~p
-      #|  f DELETE (h1:real^N->bool)
-      #|  f DELETE (h3:real^N->bool)
-      #|  b(h1:real^N->bool) <= b h3 \\/ b h3 <= b h1
-      #|  b SUBSET a ==> a INTER b INTER s = b INTER s
-      #|  f DELETE h2 = h3 INSERT (f DIFF {h2,h3}) /\\\n                      f = (h2:real^N->bool) INSERT h3 INSERT (f DIFF {h2,h3})
-      #|  f DELETE h3 = h2 INSERT (f DIFF {h2,h3}) /\\\n                      f = (h3:real^N->bool) INSERT h2 INSERT (f DIFF {h2,h3})
-      #|  (p ==> s = t) ==> s PSUBSET t ==> ~p
-      #|  f DELETE (h2:real^N->bool)
-      #|  f DELETE (h3:real^N->bool)
-      #|  b(h2:real^N->bool) <= b h3 \\/ b h3 <= b h2
-      #|  b SUBSET a ==> a INTER b INTER s = b INTER s
-      #|  f DELETE h1 = h2 INSERT (f DIFF {h1,h2}) /\\\n                      f = (h1:real^N->bool) INSERT h2 INSERT (f DIFF {h1,h2})
-      #|  f DELETE h2 = h1 INSERT (f DIFF {h1,h2}) /\\\n                      f = (h2:real^N->bool) INSERT h1 INSERT (f DIFF {h1,h2})
-      #|  (p ==> s = t) ==> s PSUBSET t ==> ~p
-      #|  f DELETE (h1:real^N->bool)
-      #|  f DELETE (h2:real^N->bool)
-      #|  b(h1:real^N->bool) <= b h2 \\/ b h2 <= b h1
-      #|  ~((a:(real^N->bool)->real^N) h1 = a h2) /\\\n                 ~(a h2 = a h3) /\\ ~(a h1 = a h3)
-      #|  h1:real^N->bool
-      #|  h2:real^N->bool
-      #|  h3:real^N->bool
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  p:real^N->bool
-      #|  vec 0:real^N = v <=> v = vec 0
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  f:(real^N->bool)->bool
-      #|  p:real^N->bool
-      #|  ~(f1:real^N->bool = {}) /\\\n    ~(f2:real^N->bool = {}) /\\\n    ~(f3:real^N->bool = {})
-      #|  ~(p - &2:int <= x:int) ==> ~(x = p - &2)
-      #|  ~p ==> p ==> q
-      #|  aff_dim(r:real^N->bool) = aff_dim(p:real^N->bool) - &2
-      #|  f3:real^N->bool
-      #|  ~(s = {a,b})\n    ==> a IN s /\\ b IN s ==> ?c. ~(c = a) /\\ ~(c = b) /\\ c IN s
-      #|  f2:real^N->bool
-      #|  f1:real^N->bool
-      #|  {f:real^N->bool | f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f}\n    = {f1,f2}
-      #|  f2:real^N->bool
-      #|  ~(s = {a}) ==> a IN s ==> ?b. ~(b = a) /\\ b IN s
-      #|  ~(x - &2:int = x - &1)
-      #|  {f:real^N->bool | f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f}\n    = {f1}
-      #|  f1:real^N->bool
-      #|  p:real^N->bool
-      #|  aff_dim(r:real^N->bool) = aff_dim(p:real^N->bool) - &2
-      #|  {f:real^N->bool | f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f}\n    = {}
-      #|  f:real^N->bool = {}
-      #|  f:real^N->bool
-      #|  {f:real^N->bool | f facet_of p /\\ r SUBSET f} =\n    {f | f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f}
-      #|  r:real^N->bool
-      #|  r:real^N->bool
-      #|  &2 <= aff_dim(p:real^N->bool)
-      #|  ~(p:int = p - &2)
-      #|  r:real^N->bool
-      #|  p:real^N->bool
-      #|  forall p:real^N->bool r.\n    polyhedron p /\\ r face_of p /\\ ~(r = {}) /\\ aff_dim r = aff_dim p - &2\n    ==> ?f1 f2. f1 face_of p /\\ aff_dim f1 = aff_dim p - &1 /\\\n                f2 face_of p /\\ aff_dim f2 = aff_dim p - &1 /\\\n                 ~(f1 = f2) /\\ r SUBSET f1 /\\ r SUBSET f2 /\\ f1 INTER f2 = r /\\\n                forall f. f face_of p /\\ aff_dim f = aff_dim p - &1 /\\ r SUBSET f\n                    ==> f = f1 \\/ f = f2
-      #|  f3:real^N->bool
-      #|  f2:real^N->bool
-      #|  f1:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h1:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h2:real^N->bool
-      #|  h1:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h2:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h2:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h1:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h3:real^N->bool
-      #|  h1:real^N->bool
-      #|  a3:real^N
-      #|  a2:real^N
-      #|  a1:real^N
-      #|  aff_dim(convex hull {v:real^N | v extreme_point_of p}) + &1
-      #|  forall p:real^N->bool.\n        polytope p ==> aff_dim p + &1 <= &(CARD {v | v extreme_point_of p})
-      #|  m:num = n ==> n <= m
-      #|  {f | ?h. h IN s /\\ f = g h} = IMAGE g s
-      #|  --a / b:real = --(a / b)
-      #|  &0 <= x * --y /\\ &0 <= z ==> x * y <= z
-      #|  &0 <= --x * y /\\ &0 <= z ==> x * y <= z
-      #|  (a:(real^N->bool)->real^N) k
-      #|  x = &0 /\\ &0 <= y ==> x <= y
-      #|  k:real^N->bool = h
-      #|  k = {x:real^N | a k dot x <= b k}
-      #|  k:real^N->bool
-      #|  ~(abs(B + &1) <= B)
-      #|  (B + &1) / norm(n) % n:real^N
-      #|  --(B + &1) / norm(n) % n:real^N
-      #|  &0 <= (a:(real^N->bool)->real^N) h dot n \\/\n      &0 <= --((a:(real^N->bool)->real^N) h dot n)
-      #|  B:real
-      #|  n:real^N
-      #|  n - 1 < n <=> ~(n = 0)
-      #|  CARD(H DELETE (h:real^N->bool))
-      #|  CARD(IMAGE (a:(real^N->bool)->real^N) (H DELETE h))
-      #|  h <= p ==> h':num < h ==> ~(h' = p)
-      #|  dim:(real^N->bool)->num
-      #|  span(IMAGE (a:(real^N->bool)->real^N) (H DELETE h))\n      PSUBSET span(p)
-      #|  h:real^N->bool
-      #|  (B + &1) / norm n % n:real^N
-      #|  B:real
-      #|  ?n:real^N. n IN span p /\\ ~(n = vec 0)
-      #|  H:(real^N->bool)->bool = {}
-      #|  ~(dim(p:real^N->bool) = 0)
-      #|  H:(real^N->bool)->bool = {}
-      #|  H:(real^N->bool)->bool = {}
-      #|  ~(h <= a) ==> a + 1 <= h
-      #|  (CARD(H:(real^N->bool)->bool))
-      #|  h:real^N->bool
-      #|  (h:real^N->bool) IN H
-      #|  h:real^N->bool
-      #|  (vec 0:real^N) IN p
-      #|  forall h:real^N->bool. h IN H ==> &0 <= b h
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  H:(real^N->bool)->bool
-      #|  p:real^N->bool
-      #|  vec 0:real^N = v <=> v = vec 0
-      #|  b:(real^N->bool)->real
-      #|  a:(real^N->bool)->real^N
-      #|  H:(real^N->bool)->bool
-      #|  p:real^N->bool
-      #|  ~(aff_dim(p:real^N->bool) = &0)
-      #|  CARD {f:real^N->bool | f facet_of p}
-      #|  z:real^N
-      #|  z:real^N
-      #|  ?n. {f:real^N->bool | f facet_of p} HAS_SIZE n /\\ aff_dim p + &1 <= &n
-      #|  p:real^N->bool = {}
-      #|  forall p:real^N->bool.\n        polytope p /\\ ~(aff_dim p = &0)\n        ==> aff_dim p + &1 <= &(CARD {f | f facet_of p})
-      #|  n simplex s <=> ?c. ~(affine_dependent c) /\\\n                      &(CARD c):int = n + &1 /\\\n                      s = convex hull c
-      #|  ~affine_dependent c /\\ P(CARD c) <=>\n    ~affine_dependent c /\\ ?n. c HAS_SIZE n /\\ P n
-      #|  forall a:real^N s n. n simplex (IMAGE (\\x. a + x) s) <=> n simplex s
-      #|  (d:real^N->bool) SUBSET convex hull d
-      #|  {x | (f:real^M->real^N) x IN d}
-      #|  d:real^N->bool
-      #|  f:real^M->real^N
-      #|  s:real^N->bool
-      #|  n:num
-      #|  IMAGE (f:real^M->real^N)
-      #|  forall f. (forall a. P(f a) <=> Q a) /\\ (forall b. P b ==> ?a. b = f a)\n        ==> ((?b. P b) <=> (?a. Q a))
-      #|  ~affine_dependent c /\\ P(CARD c) <=>\n    ~affine_dependent c /\\ ?n. c HAS_SIZE n /\\ P n
-      #|  forall f:real^M->real^N s n.\n        linear f /\\ (forall x y. f x = f y ==> x = y)\n        ==> (n simplex (IMAGE f s) <=> n simplex s)
-      #|  n simplex s <=> ?c. FINITE c /\\\n                       ~(affine_dependent c) /\\\n                       &(CARD c):int = n + &1 /\\\n                       s = convex hull c
-      #|  forall c:real^N->bool n.\n    ~affine_dependent c /\\ &(CARD c) = n + &1 ==> n simplex (convex hull c)
-      #|  forall n s. n simplex s ==> polytope s
-      #|  forall s n. n simplex s ==> polyhedron s
-      #|  forall s:real^N->bool n. n simplex s ==> convex s
-      #|  forall s:real^N->bool n. n simplex s ==> compact s
-      #|  forall s:real^N->bool n. n simplex s ==> closed s
-      #|  forall n s. n simplex s ==> -- &1 <= n
-      #|  forall n. n simplex {} <=> n = -- &1
-      #|  a /\\ b /\\ c /\\ d <=> c /\\ a /\\ b /\\ d
-      #|  a /\\ b <=> ~(a ==> ~b)
-      #|  forall s. (-- &1) simplex s <=> s = {}
-      #|  x:int = n + &1 <=> n = x - &1
-      #|  forall s n. n simplex s ==> aff_dim s = n
-      #|  c' SUBSET (c DELETE (a:real^N))
-      #|  (a:real^N) IN convex hull c'
-      #|  a:real^N
-      #|  a:real^N
-      #|  convex hull c:real^N->bool = convex hull c'
-      #|  c' = {v:real^N | v extreme_point_of (convex hull c)}
-      #|  s SUBSET t /\\ ~(s PSUBSET t) ==> s = t
-      #|  {v:real^N | v extreme_point_of s} = c
-      #|  c:real^N->bool
-      #|  forall n s:real^N->bool.\n       n simplex s\n       ==> FINITE {v | v extreme_point_of s} /\\\n           ~(affine_dependent {v | v extreme_point_of s}) /\\\n           &(CARD {v | v extreme_point_of s}) = n + &1 /\\\n           s = convex hull {v | v extreme_point_of s}
-      #|  a - &1 + &1:int = a
-      #|  c':real^N->bool
-      #|  &(CARD(c':real^N->bool)) - &1:int
-      #|  ?c':real^N->bool. c' SUBSET c /\\ f = convex hull c'
-      #|  c:real^N->bool
-      #|  forall n s f:real^N->bool.\n        n simplex s /\\ f face_of s ==> ?m. m <= n /\\ m simplex f
-      #|  c = {x:real^N | x extreme_point_of s}
-      #|  forall n s f:real^N->bool.\n        n simplex s /\\ f face_of s\n        ==> ?c. c SUBSET {x | x extreme_point_of s} /\\ f = convex hull c
-      #|  {v:real^N | v extreme_point_of s}
-      #|  affine hull ({v:real^N | v extreme_point_of s} DIFF c)
-      #|  forall t. u SUBSET t /\\ DISJOINT s t ==> DISJOINT s u
-      #|  forall s n c:real^N->bool.\n      n simplex s /\\ c SUBSET {x | x extreme_point_of s}\n      ==> (convex hull c) face_of s
-      #|  forall n s. n simplex s\n         ==> {f | f face_of s} =\n             {convex hull c | c SUBSET {v | v extreme_point_of s}}
-      #|  affine hull b:real^N->bool
-      #|  convex hull b:real^N->bool
-      #|  convex hull a:real^N->bool
-      #|  forall s t u. x IN s /\\ s SUBSET t /\\ t SUBSET u /\\ u SUBSET v ==> x IN v
-      #|  x:real^N
-      #|  x:real^N
-      #|  forall a b. a SUBSET {v:real^N | v extreme_point_of s} /\\\n          b SUBSET {v | v extreme_point_of s} /\\\n          convex hull a SUBSET convex hull b\n          ==> a SUBSET b
-      #|  forall n s:real^N->bool.\n        n simplex s\n        ==> {f | f face_of s} HAS_SIZE 2 EXP (num_of_int(n + &1))
-      #|  forall n s. n simplex s ==> FINITE {f | f face_of s}
-      #|  forall n s. n simplex s ==> CARD {f | f face_of s} = 2 EXP (num_of_int(n + &1))
-      #|  (vec 0:real^N) INSERT c
-      #|  convex hull ((vec 0:real^N) INSERT c)
-      #|  c:real^N->bool
-      #|  s:real^N->bool
-      #|  s:real^N->bool
-      #|  n:num
-      #|  --(&1):int <= n <=> n = --(&1) \\/ &0 <= n
-      #|  d:int
-      #|  forall n. --(&1) <= n /\\ n <= &(dimindex(:N)) ==> ?s:real^N->bool. n simplex s
-      #|  b:real^N
-      #|  IMAGE (\\x:real^N. (a - b) + x) c
-      #|  b:real^N
-      #|  ~(relative_interior c:real^N->bool = {})
-      #|  c:real^N->bool
-      #|  n:int
-      #|  forall a:real^N n.\n        &0 <= n /\\ n <= &(dimindex (:N))\n        ==>  ?s. n simplex s /\\ a IN relative_interior s
-      #|  &(dimindex(:N)):int
-      #|  a:real^N
-      #|  forall a:real^N. ?s. &(dimindex(:N)) simplex s /\\ a IN interior s
-      #|  forall n. --(&1) <= n /\\ n <= &(dimindex(:N))\n       ==> ?s:real^N->bool. polytope s /\\ aff_dim s = n
-      #|  {a:real^N}
-      #|  forall n a:real^N. n simplex {a} <=> n = &0
-      #|  (t:real^N->bool) HAS_SIZE 1
-      #|  t:real^N->bool
-      #|  forall s:real^N->bool. &0 simplex s <=> ?a. s = {a}
-      #|  {a:real^N,b}
-      #|  forall a b:real^N. (if a = b then &0 else &1) simplex segment[a,b]
-      #|  forall a b. ?n. n simplex segment[a,b]
-      #|  p:real^N->bool
-      #|  p:real^N->bool = {}
-      #|  forall p:real^N->bool. polytope p /\\ aff_dim p <= &1 ==> ?n. n simplex p
-      #|  a INSERT s = {a} UNION s
-      #|  (a:real^N) IN k
-      #|  ~((a:real^N) IN affine hull s)
-      #|  (a:real^N) INSERT k
-      #|  k:real^N->bool
-      #|  forall n s a:real^N.\n        n simplex s /\\ ~(a IN affine hull s)\n        ==> (n + &1) simplex (convex hull (a INSERT s))
-      #|  forall s a:real^N.\n        (?n. n simplex s) /\\ ~(a IN affine hull s)\n        ==> ?n. n simplex (convex hull (a INSERT s))
-      #|  {v:real^N | v extreme_point_of s}
-      #|  forall s:real^N->bool i.\n        i simplex s <=>\n          convex s /\\ compact s /\\\n          FINITE {v | v extreme_point_of s} /\\\n          &(CARD {v | v extreme_point_of s}) = i + &1 /\\\n          ~affine_dependent {v | v extreme_point_of s}
-      #|  forall s:real^N->bool.\n        (&n - &1) simplex s <=>\n          convex s /\\ compact s /\\\n          {v | v extreme_point_of s} HAS_SIZE n /\\\n          ~affine_dependent {v | v extreme_point_of s}
-      #|  s:real^N->bool
-      #|  forall s:real^N->bool.\n        (&n - &1) simplex s /\\ ~(vec 0 IN affine hull s) <=>\n        convex s /\\ compact s /\\\n        {v | v extreme_point_of s} HAS_SIZE n /\\\n        independent {v | v extreme_point_of s}
-      #|  &1:int <= d ==> d - &1 = -- &1 ==> F
-      #|  forall c. &(dimindex (:N)) - &1 simplex c ==> ~({v | v extreme_point_of c} = {})
-      #|  simplicial_complex c <=>\n        FINITE c /\\\n        (forall s. s IN c ==> ?n. n simplex s) /\\\n        (forall f s. s IN c /\\ f face_of s ==> f IN c) /\\\n        (forall s s'. s IN c /\\ s' IN c\n                ==> (s INTER s') face_of s /\\ (s INTER s') face_of s')
-      #|  triangulation(tr:(real^N->bool)->bool) <=>\n        FINITE tr /\\\n        (forall t. t IN tr ==> ?n. n simplex t) /\\\n        (forall t t'. t IN tr /\\ t' IN tr\n                ==> (t INTER t') face_of t /\\ (t INTER t') face_of t')
-      #|  forall a:real^N tr.\n   simplicial_complex(IMAGE (IMAGE (\\x. a + x)) tr) <=> simplicial_complex tr
-      #|  forall f:real^M->real^N tr.\n       linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n       ==> (simplicial_complex(IMAGE (IMAGE f) tr) <=> simplicial_complex tr)
-      #|  forall a:real^N tr.\n        triangulation(IMAGE (IMAGE (\\x. a + x)) tr) <=> triangulation tr
-      #|  forall f:real^M->real^N tr.\n        linear f /\\ (forall x y. f x = f y ==> x = y) /\\ (forall y. ?x. f x = y)\n        ==> (triangulation(IMAGE (IMAGE f) tr) <=> triangulation tr)
-      #|  forall tr. simplicial_complex tr ==> triangulation tr
-      #|  forall tr:(real^N->bool)->bool tr'.\n        triangulation tr /\\ tr' SUBSET tr ==> triangulation tr'
-      #|  forall tr1 tr2.\n        triangulation(tr1 UNION tr2) <=>\n        triangulation tr1 /\\ triangulation tr2 /\\\n        (forall s t. s IN tr1 /\\ t IN tr2\n               ==> s INTER t face_of s /\\ s INTER t face_of t)
-      #|  convex hull d':real^N->bool = t INTER t'
-      #|  convex hull d:real^N->bool = t INTER t'
-      #|  s = t ==> s SUBSET t
-      #|  convex hull {x:real^N | x extreme_point_of (t INTER t')}
-      #|  d':real^N->bool
-      #|  d:real^N->bool
-      #|  t INTER t':real^N->bool
-      #|  t:real^N->bool
-      #|  n:int
-      #|  t INTER t':real^N->bool
-      #|  t':real^N->bool
-      #|  m:int
-      #|  n:int
-      #|  m:int
-      #|  t':real^N->bool
-      #|  t:real^N->bool
-      #|  forall tr t t':real^N->bool.\n        triangulation tr /\\ t IN tr /\\ t' IN tr\n        ==> t INTER t' = convex hull ({x | x extreme_point_of t} INTER\n                                      {x | x extreme_point_of t'})
-      #|  t':real^N->bool
-      #|  t:real^N->bool
-      #|  t':real^N->bool
-      #|  t:real^N->bool
-      #|  t':real^N->bool
-      #|  t:real^N->bool
-      #|  t':real^N->bool
-      #|  t:real^N->bool
-      #|  t':real^N->bool
-      #|  t:real^N->bool
-      #|  {f | ?t. t IN tr /\\ P f t} = UNIONS (IMAGE (\\t. {f | P f t}) tr)
-      #|  forall tr. triangulation tr\n        ==> simplicial_complex {f:real^N->bool | ?t. t IN tr /\\ f face_of t}
-      #|  s:real^N->bool
-      #|  {x | P x /\\ Q x} = {x | x IN {y | P y} /\\ Q x}
-      #|  forall s:real^N->bool n d.\n        n simplex s ==> triangulation {c | c face_of s /\\ aff_dim c = d}
-      #|  {c:real^N->bool | c face_of s /\\ aff_dim c = aff_dim s - &1}
-      #|  forall s:real^N->bool n. n simplex s ==> triangulation {c | c facet_of s}
-      #|  d:real^N->bool
-      #|  c:real^N->bool
-      #|  c INTER d:real^N->bool
-      #|  forall c d:real^N->bool.\n        c INTER d face_of c /\\ c INTER d face_of d /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}
-      #|  c:real^N->bool
-      #|  d:real^N->bool
-      #|  forall t c d:real^N->bool.\n        triangulation t /\\ c IN t /\\ d IN t /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}
-      #|  forall t c d:real^N->bool.\n        simplicial_complex t /\\ c IN t /\\ d IN t /\\ ~(c = d)\n        ==> relative_interior c INTER relative_interior d = {}
-      #|  vec 0:real^N
-      #|  k:real^N->bool
-      #|  closure u:real^N->bool
-      #|  k:real^N->bool
-      #|  u:real^N->bool
-      #|  c:real^N->bool
-      #|  closure u:real^N->bool
-      #|  z:real^N
-      #|  forall t u z. convex u /\\ bounded u /\\ z IN interior u /\\\n           triangulation t /\\ UNIONS t SUBSET frontier u\n           ==> forall c:real^N->bool. c IN t ==> ~(z IN affine hull c)
+      #|  (real_of_num(0) <= -(x : Real)) == !(real_of_num(0) < x)
+      #|  (x : Real) / (y : Real) == -x * -inv(y)
+      #|  (y : Real) < real_of_num(0) \226\134\146 (x : Real) / y * y == x
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((c : Real) / (op_dollar : (Cart[Real, N], Num) -> Real)((matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])((transp : (Cart[Cart[Real, N], M]) -> Cart[Cart[Real, M], N])((A : Cart[Cart[Real, N], M])), (y : Cart[Real, M])), (k : Num)), (basis : (Num) -> Cart[Real, N])(k))
+      #|  (k : Num)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (c : Real)
+      #|  (y : Cart[Real, M])
+      #|  (b : Cart[Real, M])
+      #|  {(matrix_vector_mul : (Cart[Cart[Real, N], M], Cart[Real, N]) -> Cart[Real, M])((A : Cart[Cart[Real, N], M]), (x : Cart[Real, N])) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)}
+      #|  (y : Real) < real_of_num(0) \226\134\146 real_of_num(0) <= (x : Real) \226\134\146 !(x == y)
+      #|  dot((y : Cart[Real, M]), matrix_vector_mul((A : Cart[Cart[Real, N], M]), (x : Cart[Real, N])) - (b : Cart[Real, M])) == real_of_num(0)
+      #|  ((q : Bool) \226\134\146 !(p : Bool)) && (!p \226\134\146 q) \226\134\146 p == !q
+      #|  \226\136\128 A : Cart[Cart[Real, N], M], \226\136\128 b : Cart[Real, M], (\226\136\131 x : Cart[Real, N], (matrix_vector_mul : (Cart[Cart[Real, N], M], Cart[Real, N]) -> Cart[Real, M])(A, x) == b && (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(x, i))) == !(\226\136\131 y : Cart[Real, M], (dot : (Cart[Real, M], Cart[Real, M]) -> Real)(b, y) < real_of_num(0) && (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)((matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])((transp : (Cart[Cart[Real, N], M]) -> Cart[Cart[Real, M], N])(A), y), i)))
+      #|  (vec : (Num) -> Cart[Real, M])(0)
+      #|  op_pct((c : Real) / pow(norm(vector_matrix_mul((y : Cart[Real, M]), (A : Cart[Cart[Real, N], M]))), 2), matrix_vector_mul(transp(A), y))
+      #|  (y : Real) < real_of_num(0) \226\134\146 (c : Real) / -y * y == -c
+      #|  (op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(-(c : Real) / -(op_dollar : (Cart[Real, M], Num) -> Real)((y : Cart[Real, M]), (k : Num)), (basis : (Num) -> Cart[Real, M])(k))
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (k : Num)
+      #|  (vec : (Num) -> Cart[Real, M])(0)
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (c : Real)
+      #|  (y : Cart[Real, M])
+      #|  {(f : (Cart[Real, M]) -> Cart[Real, N])(x) + y | x : Cart[Real, M], y : Cart[Real, N] | (P : (Cart[Real, N]) -> Bool)(y)} == {(z : Cart[Real, N]) + (y : Cart[Real, N]) | IN(z, IMAGE(f, UNIV)) && IN(y, {(w : Cart[Real, N]) | P(w)})}
+      #|  (b : Cart[Real, M])
+      #|  {(matrix_vector_mul : (Cart[Cart[Real, N], M], Cart[Real, N]) -> Cart[Real, M])((A : Cart[Cart[Real, N], M]), x) + s | x : Cart[Real, N], s : Cart[Real, M] | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, M], Num) -> Real)(s, i)}
+      #|  real_of_num(0) <= dot((b : Cart[Real, M]) - matrix_vector_mul((A : Cart[Cart[Real, N], M]), (x : Cart[Real, N])), (y : Cart[Real, M]))
+      #|  !((p : Bool) && (q : Bool)) && (!p \226\134\146 q) \226\134\146 p == !q
+      #|  \226\136\128 A : Cart[Cart[Real, N], M], \226\136\128 b : Cart[Real, M], (\226\136\131 x : Cart[Real, N], \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, M], Num) -> Real)((matrix_vector_mul : (Cart[Cart[Real, N], M], Cart[Real, N]) -> Cart[Real, M])(A, x), i) <= (op_dollar : (Cart[Real, M], Num) -> Real)(b, i)) == !(\226\136\131 y : Cart[Real, M], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 real_of_num(0) <= (op_dollar : (Cart[Real, M], Num) -> Real)(y, i)) && (vector_matrix_mul : (Cart[Real, M], Cart[Cart[Real, N], M]) -> Cart[Real, N])(y, A) == (vec : (Num) -> Cart[Real, N])(0) && (dot : (Cart[Real, M], Cart[Real, M]) -> Real)(b, y) < real_of_num(0))
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  -(((u : Real) + (v : Real)) / real_of_num(2))
+      #|  (x : Real) - (y : Real) > (k : Real) \226\134\146 y <= x - k
+      #|  ((k : Real) + (v : Real) <= (u : Real)) == (v <= u - k)
+      #|  (k : Real) <= (u : Real) - (v : Real)
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  dot((a : Cart[Real, N]), (z : Cart[Real, N])) + (k : Real)
+      #|  (z : Cart[Real, N])
+      #|  !((t : (Cart[Real, N]) -> Bool) == {})
+      #|  (x : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  dot((a : Cart[Real, N]), (z : Cart[Real, N])) - (k : Real)
+      #|  (z : Cart[Real, N])
+      #|  !((s : (Cart[Real, N]) -> Bool) == {})
+      #|  (v : Real) == sup(IMAGE((x : Cart[Real, N]) => dot((a : Cart[Real, N]), x), (t : (Cart[Real, N]) -> Bool)))
+      #|  (u : Real) == inf(IMAGE((x : Cart[Real, N]) => dot((a : Cart[Real, N]), x), (s : (Cart[Real, N]) -> Bool)))
+      #|  IMAGE((x : Cart[Real, N]) => dot((a : Cart[Real, N]), x), (t : (Cart[Real, N]) -> Bool))
+      #|  IMAGE((x : Cart[Real, N]) => dot((a : Cart[Real, N]), x), (s : (Cart[Real, N]) -> Bool))
+      #|  -(a : Cart[Real, N])
+      #|  (k : Real)
+      #|  (a : Cart[Real, N])
+      #|  (vec(0) == (x : Cart[Real, N]) + (y : Cart[Real, N])) == (y == -x)
+      #|  ((y : Cart[Real, N]) == -(x : Cart[Real, N])) == (-y == x)
+      #|  {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, IMAGE(op_minus_minus, (t : (Cart[Real, N]) -> Bool)))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polyhedron(s) && polyhedron(t) && !(s == {}) && !(t == {}) && DISJOINT(s, t) \226\134\146 (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, !(a == vec(0)) && (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 dot(a, x) < b) && (\226\136\128 x : Cart[Real, N], IN(x, t) \226\134\146 dot(a, x) > b))
+      #|  HAS_SIZE((s : (Cart[Real, N]) -> Bool), 1)
+      #|  CARD((s : (Cart[Real, N]) -> Bool)) == 0 || CARD(s) == 1 || 2 <= CARD(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, !affine_dependent(s) \226\134\146 DIFF(hull(convex, s), relative_interior(hull(convex, s))) == UNIONS({hull(convex, DELETE(s, a)) | a : Cart[Real, N] | IN(a, s)})
+      #|  (2 <= (n : Num) + 1) == (1 <= n)
+      #|  DIFF(hull(convex, (s : (Cart[Real, N]) -> Bool)), relative_interior(hull(convex, s)))
+      #|  SUBSET(hull(convex, (t : (Cart[Real, N]) -> Bool)), hull(convex, DELETE((s : (Cart[Real, N]) -> Bool), (a : Cart[Real, N]))))
+      #|  (a : Cart[Real, N])
+      #|  \226\136\131 a : Cart[Real, N], IN(a, (s : (Cart[Real, N]) -> Bool)) && !IN(a, (t : (Cart[Real, N]) -> Bool))
+      #|  (s : Int) <= (n : Int) && !(s == n) \226\134\146 s + int_of_num(1) <= n
+      #|  aff_dim((s : (Cart[Real, N]) -> Bool)) + int_of_num(1)
+      #|  ((x : Num) < (n : Num) + 1) == (x <= n)
+      #|  (t : Num) < (s : Num) \226\134\146 t == s \226\134\146 false
+      #|  (CARD : ((Cart[Real, N]) -> Bool) -> Num)
+      #|  PSUBSET((t : (Cart[Real, N]) -> Bool), (s : (Cart[Real, N]) -> Bool))
+      #|  (x : Int) + int_of_num(1) - int_of_num(1) == x
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (x : Cart[Real, N])
+      #|  DIFF(hull(convex, (s : (Cart[Real, N]) -> Bool)), {})
+      #|  affine_dependent((s : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (HAS_SIZE : ((Cart[Real, N]) -> Bool, Num) -> Bool)(s, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) + 1) \226\134\146 (frontier : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((convex : ((Cart[Real, N]) -> Bool) -> Bool), s)) == (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({(hull : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((convex : ((Cart[Real, N]) -> Bool) -> Bool), (DELETE : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)(s, a)) | a : Cart[Real, N] | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(a, s)})
+      #|  UNION((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == UNION(t, UNION(u, s))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], !collinear({a, b, c}) \226\134\146 DIFF(hull(convex, {a, b, c}), relative_interior(hull(convex, {a, b, c}))) == UNION(segment([(a, b)]), UNION(segment([(b, c)]), segment([(c, a)])))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], !collinear({a, b, c}) \226\134\146 relative_frontier(hull(convex, {a, b, c})) == UNION(segment([(a, b)]), UNION(segment([(b, c)]), segment([(c, a)])))
+      #|  (HAS_SIZE : ((Cart[Real, Tybit0[Unit]]) -> Bool, Num) -> Bool)({(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])}, (dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool)) + 1)
+      #|  (c : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  (c : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  ((s : (_) -> Bool) == UNION({(a : _)}, s)) == IN(a, s)
+      #|  ((s : (_) -> Bool) == UNION(s, {(a : _)})) == IN(a, s)
+      #|  ((s : (_) -> Bool) == UNION({(a : _)}, s)) == IN(a, s)
+      #|  ((s : (_) -> Bool) == UNION(s, {(a : _)})) == IN(a, s)
+      #|  ((s : (_) -> Bool) == UNION({(a : _)}, s)) == IN(a, s)
+      #|  ((s : (_) -> Bool) == UNION(s, {(a : _)})) == IN(a, s)
+      #|  UNION((s : (_) -> Bool), UNION((t : (_) -> Bool), (u : (_) -> Bool))) == UNION(t, UNION(u, s))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], frontier(hull(convex, {a, b, c})) == UNION(segment([(a, b)]), UNION(segment([(b, c)]), segment([(c, a)])))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], inside(UNION(segment([(a, b)]), UNION(segment([(b, c)]), segment([(c, a)])))) == interior(hull(convex, {a, b, c}))
+      #|  SUBSET((i : (_) -> Bool), (s : (_) -> Bool)) && (c : (_) -> Bool) == s \226\134\146 i == DIFF(s, DIFF(c, i))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], interior(hull(convex, {a, b, c})) == DIFF(hull(convex, {a, b, c}), UNION(segment([(a, b)]), UNION(segment([(b, c)]), segment([(c, a)]))))
+      #|  real_of_num(0) < -(u : Real) * -(a : Real) && real_of_num(0) < -(v : Real) * -(b : Real) \226\134\146 !(u * a + v * b < real_of_num(0))
+      #|  dot((a1 : Cart[Real, N]), (w : Cart[Real, N])) < real_of_num(0)
+      #|  (real_of_num(0) < -(u : Real) * (a2 : Real)) == (real_of_num(0) < a2) && (real_of_num(0) < (v : Real) * (a3 : Real)) == (real_of_num(0) < a3) \226\134\146 u * a2 + v * a3 <= real_of_num(0) && a2 <= real_of_num(0) \226\134\146 a3 <= real_of_num(0)
+      #|  !SUBSET(INTER({(x : Cart[Real, N]) | dot((a1 : Cart[Real, N]), x) <= real_of_num(0)}, {(x : Cart[Real, N]) | dot((a2 : Cart[Real, N]), x) <= real_of_num(0)}), {(x : Cart[Real, N]) | dot((a3 : Cart[Real, N]), x) <= real_of_num(0)})
+      #|  (real_of_num(0) < (u : Real) * (a2 : Real)) == (real_of_num(0) < a2) && (real_of_num(0) < -(v : Real) * (a3 : Real)) == (real_of_num(0) < a3) \226\134\146 u * a2 + v * a3 <= real_of_num(0) && a3 <= real_of_num(0) \226\134\146 a2 <= real_of_num(0)
+      #|  !SUBSET(INTER({(x : Cart[Real, N]) | dot((a1 : Cart[Real, N]), x) <= real_of_num(0)}, {(x : Cart[Real, N]) | dot((a3 : Cart[Real, N]), x) <= real_of_num(0)}), {(x : Cart[Real, N]) | dot((a2 : Cart[Real, N]), x) <= real_of_num(0)})
+      #|  ((x : Real) <= real_of_num(0)) == (real_of_num(0) <= -x)
+      #|  !SUBSET(INTER({(x : Cart[Real, N]) | dot((a2 : Cart[Real, N]), x) <= real_of_num(0)}, {(x : Cart[Real, N]) | dot((a3 : Cart[Real, N]), x) <= real_of_num(0)}), {(x : Cart[Real, N]) | dot((a1 : Cart[Real, N]), x) <= real_of_num(0)})
+      #|  real_of_num(0) < (u : Real) && real_of_num(0) < (v : Real) || real_of_num(0) < u && real_of_num(0) < -v || real_of_num(0) < -u && real_of_num(0) < v || real_of_num(0) < -u && real_of_num(0) < -v
+      #|  ((a : Real) * (b : Real) < real_of_num(0)) == (real_of_num(0) < -a * b)
+      #|  ((a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= a * -b)
+      #|  (u : Real) == real_of_num(0) || real_of_num(0) < u || real_of_num(0) < -u
+      #|  (v : Real) == real_of_num(0)
+      #|  ((a : Real) * (b : Real) < real_of_num(0)) == (real_of_num(0) < -a * b)
+      #|  ((a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= a * -b)
+      #|  (v : Real) == real_of_num(0) || real_of_num(0) < v || real_of_num(0) < -v
+      #|  (u : Real) == real_of_num(0)
+      #|  (v : Real)
+      #|  (u : Real)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool)) \226\134\146 p \226\134\146 q && r
+      #|  (\226\136\128 a1 : _, \226\136\128 a2 : _, \226\136\128 a3 : _, (P : (_, _, _) -> Bool)(a1, a2, a3) \226\134\146 P(a2, a1, a3) && P(a3, a1, a2)) && (\226\136\128 a1 : _, \226\136\128 a2 : _, \226\136\128 a3 : _, (Q : (_, _, _) -> Bool)(a1, a2, a3) \226\134\146 !P(a1, a2, a3)) \226\134\146 (\226\136\128 a3 : _, \226\136\128 a2 : _, \226\136\128 a1 : _, P(a1, a2, a3) \226\134\146 !(Q(a1, a2, a3) || Q(a2, a1, a3) || Q(a3, a1, a2)))
+      #|  !(3 > (x : Num)) == (3 <= x)
+      #|  {(a1 : Cart[Real, N]), (a2 : Cart[Real, N]), (a3 : Cart[Real, N])}
+      #|  hull(affine, (p : (Cart[Real, N]) -> Bool)) == span(p)
+      #|  (p : Num) <= (r : Num) + 2 \226\134\146 (u : Num) <= p && 3 <= (t : Num) \226\134\146 !(u == t + r)
+      #|  (r : (Cart[Real, N]) -> Bool)
+      #|  {(a1 : Cart[Real, N]), (a2 : Cart[Real, N]), (a3 : Cart[Real, N])}
+      #|  ((p : Int) - int_of_num(2) <= (q : Int)) == (p <= q + int_of_num(2))
+      #|  aff_dim((r : (Cart[Real, N]) -> Bool)) == int_of_num(dim(r))
+      #|  aff_dim((p : (Cart[Real, N]) -> Bool)) == int_of_num(dim(p))
+      #|  ((a : Real) + (b : Real) == a) == (b == real_of_num(0))
+      #|  ((a : Real) + (b : Real) < a) == (b < real_of_num(0))
+      #|  ((a : Real) + (b : Real) <= a) == (b <= real_of_num(0))
+      #|  (z : Cart[Real, N])
+      #|  (a3 : Cart[Real, N])
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h3 : (Cart[Real, N]) -> Bool))
+      #|  (a2 : Cart[Real, N])
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h2 : (Cart[Real, N]) -> Bool))
+      #|  (a1 : Cart[Real, N])
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool))
+      #|  IN((z : Cart[Real, N]), (r : (Cart[Real, N]) -> Bool))
+      #|  !((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)) == vec(0)) && !(a((h2 : (Cart[Real, N]) -> Bool)) == vec(0)) && !(a((h3 : (Cart[Real, N]) -> Bool)) == vec(0))
+      #|  SUBSET((r : (Cart[Real, N]) -> Bool), hull(affine, (p : (Cart[Real, N]) -> Bool)))
+      #|  dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)), (z : Cart[Real, N])) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h1) && dot(a((h2 : (Cart[Real, N]) -> Bool)), z) == b(h2) && dot(a((h3 : (Cart[Real, N]) -> Bool)), z) == b(h3)
+      #|  IN((z : Cart[Real, N]), hull(affine, (p : (Cart[Real, N]) -> Bool)))
+      #|  IN((z : Cart[Real, N]), hull(affine, (p : (Cart[Real, N]) -> Bool)))
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (z : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  aff_dim((p : (Cart[Real, N]) -> Bool)) - int_of_num(2) <= aff_dim((r : (Cart[Real, N]) -> Bool))
+      #|  !((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h2 : (Cart[Real, N]) -> Bool)) == a((h3 : (Cart[Real, N]) -> Bool)))
+      #|  !((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)) == a((h3 : (Cart[Real, N]) -> Bool)))
+      #|  !((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)) == a((h2 : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\131 z : Cart[Real, N], IN(z, (r : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 x : Cart[Real, N], IN(x, (r : (Cart[Real, N]) -> Bool)) \226\134\146 dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h1) && dot(a((h2 : (Cart[Real, N]) -> Bool)), x) == b(h2) && dot(a((h3 : (Cart[Real, N]) -> Bool)), x) == b(h3)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  !(relative_interior((p : (Cart[Real, N]) -> Bool)) == {})
+      #|  \226\136\131 w : Cart[Real, N], dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)), w) < (b : ((Cart[Real, N]) -> Bool) -> Real)(h1) && dot(a((h2 : (Cart[Real, N]) -> Bool)), w) < b(h2) && dot(a((h3 : (Cart[Real, N]) -> Bool)), w) < b(h3)
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h1 : (Cart[Real, N]) -> Bool)) == INSERT((h2 : (Cart[Real, N]) -> Bool), INSERT((h3 : (Cart[Real, N]) -> Bool), DELETE(f, h1))) && f == INSERT(h1, INSERT(h2, INSERT(h3, DELETE(f, h1))))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool)) == INSERT((h1 : (Cart[Real, N]) -> Bool), INSERT((h3 : (Cart[Real, N]) -> Bool), DELETE(f, h2))) && f == INSERT(h2, INSERT(h1, INSERT(h3, DELETE(f, h2))))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h3 : (Cart[Real, N]) -> Bool)) == INSERT((h1 : (Cart[Real, N]) -> Bool), INSERT((h2 : (Cart[Real, N]) -> Bool), DELETE(f, h3))) && f == INSERT(h1, INSERT(h2, INSERT(h3, DELETE(f, h3))))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 PSUBSET(s, t) \226\134\146 false
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h1 : (Cart[Real, N]) -> Bool))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h3 : (Cart[Real, N]) -> Bool))
+      #|  !SUBSET(INTER({(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h1)}, {(x : Cart[Real, N]) | dot(a((h2 : (Cart[Real, N]) -> Bool)), x) <= b(h2)}), {(x : Cart[Real, N]) | dot(a((h3 : (Cart[Real, N]) -> Bool)), x) <= b(h3)}) && !SUBSET(INTER({(x : Cart[Real, N]) | dot(a(h1), x) <= b(h1)}, {(x : Cart[Real, N]) | dot(a(h3), x) <= b(h3)}), {(x : Cart[Real, N]) | dot(a(h2), x) <= b(h2)}) && !SUBSET(INTER({(x : Cart[Real, N]) | dot(a(h2), x) <= b(h2)}, {(x : Cart[Real, N]) | dot(a(h3), x) <= b(h3)}), {(x : Cart[Real, N]) | dot(a(h1), x) <= b(h1)})
+      #|  SUBSET((b : (_) -> Bool), (a : (_) -> Bool)) \226\134\146 INTER(a, INTER(b, (s : (_) -> Bool))) == INTER(b, s)
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h1 : (Cart[Real, N]) -> Bool)) == INSERT((h3 : (Cart[Real, N]) -> Bool), DIFF(f, {h1, h3})) && f == INSERT(h1, INSERT(h3, DIFF(f, {h1, h3})))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h3 : (Cart[Real, N]) -> Bool)) == INSERT((h1 : (Cart[Real, N]) -> Bool), DIFF(f, {h1, h3})) && f == INSERT(h3, INSERT(h1, DIFF(f, {h1, h3})))
+      #|  ((p : Bool) \226\134\146 (s : (_) -> Bool) == (t : (_) -> Bool)) \226\134\146 PSUBSET(s, t) \226\134\146 !p
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h1 : (Cart[Real, N]) -> Bool))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h3 : (Cart[Real, N]) -> Bool))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h1 : (Cart[Real, N]) -> Bool)) <= b((h3 : (Cart[Real, N]) -> Bool)) || b(h3) <= b(h1)
+      #|  SUBSET((b : (_) -> Bool), (a : (_) -> Bool)) \226\134\146 INTER(a, INTER(b, (s : (_) -> Bool))) == INTER(b, s)
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool)) == INSERT((h3 : (Cart[Real, N]) -> Bool), DIFF(f, {h2, h3})) && f == INSERT(h2, INSERT(h3, DIFF(f, {h2, h3})))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h3 : (Cart[Real, N]) -> Bool)) == INSERT((h2 : (Cart[Real, N]) -> Bool), DIFF(f, {h2, h3})) && f == INSERT(h3, INSERT(h2, DIFF(f, {h2, h3})))
+      #|  ((p : Bool) \226\134\146 (s : (_) -> Bool) == (t : (_) -> Bool)) \226\134\146 PSUBSET(s, t) \226\134\146 !p
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h3 : (Cart[Real, N]) -> Bool))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h2 : (Cart[Real, N]) -> Bool)) <= b((h3 : (Cart[Real, N]) -> Bool)) || b(h3) <= b(h2)
+      #|  SUBSET((b : (_) -> Bool), (a : (_) -> Bool)) \226\134\146 INTER(a, INTER(b, (s : (_) -> Bool))) == INTER(b, s)
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h1 : (Cart[Real, N]) -> Bool)) == INSERT((h2 : (Cart[Real, N]) -> Bool), DIFF(f, {h1, h2})) && f == INSERT(h1, INSERT(h2, DIFF(f, {h1, h2})))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool)) == INSERT((h1 : (Cart[Real, N]) -> Bool), DIFF(f, {h1, h2})) && f == INSERT(h2, INSERT(h1, DIFF(f, {h1, h2})))
+      #|  ((p : Bool) \226\134\146 (s : (_) -> Bool) == (t : (_) -> Bool)) \226\134\146 PSUBSET(s, t) \226\134\146 !p
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h1 : (Cart[Real, N]) -> Bool))
+      #|  DELETE((f : ((Cart[Real, N]) -> Bool) -> Bool), (h2 : (Cart[Real, N]) -> Bool))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)((h1 : (Cart[Real, N]) -> Bool)) <= b((h2 : (Cart[Real, N]) -> Bool)) || b(h2) <= b(h1)
+      #|  !((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h1 : (Cart[Real, N]) -> Bool)) == a((h2 : (Cart[Real, N]) -> Bool))) && !(a(h2) == a((h3 : (Cart[Real, N]) -> Bool))) && !(a(h1) == a(h3))
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (vec(0) == (v : Cart[Real, N])) == (v == vec(0))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  !((f1 : (Cart[Real, N]) -> Bool) == {}) && !((f2 : (Cart[Real, N]) -> Bool) == {}) && !((f3 : (Cart[Real, N]) -> Bool) == {})
+      #|  !((p : Int) - int_of_num(2) <= (x : Int)) \226\134\146 !(x == p - int_of_num(2))
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  aff_dim((r : (Cart[Real, N]) -> Bool)) == aff_dim((p : (Cart[Real, N]) -> Bool)) - int_of_num(2)
+      #|  (f3 : (Cart[Real, N]) -> Bool)
+      #|  !((s : (_) -> Bool) == {(a : _), (b : _)}) \226\134\146 IN(a, s) && IN(b, s) \226\134\146 (\226\136\131 c : _, !(c == a) && !(c == b) && IN(c, s))
+      #|  (f2 : (Cart[Real, N]) -> Bool)
+      #|  (f1 : (Cart[Real, N]) -> Bool)
+      #|  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (p : (Cart[Real, N]) -> Bool)) && aff_dim(f) == aff_dim(p) - int_of_num(1) && SUBSET((r : (Cart[Real, N]) -> Bool), f)} == {(f1 : (Cart[Real, N]) -> Bool), (f2 : (Cart[Real, N]) -> Bool)}
+      #|  (f2 : (Cart[Real, N]) -> Bool)
+      #|  !((s : (_) -> Bool) == {(a : _)}) \226\134\146 IN(a, s) \226\134\146 (\226\136\131 b : _, !(b == a) && IN(b, s))
+      #|  !((x : Int) - int_of_num(2) == x - int_of_num(1))
+      #|  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (p : (Cart[Real, N]) -> Bool)) && aff_dim(f) == aff_dim(p) - int_of_num(1) && SUBSET((r : (Cart[Real, N]) -> Bool), f)} == {(f1 : (Cart[Real, N]) -> Bool)}
+      #|  (f1 : (Cart[Real, N]) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  aff_dim((r : (Cart[Real, N]) -> Bool)) == aff_dim((p : (Cart[Real, N]) -> Bool)) - int_of_num(2)
+      #|  {(f : (Cart[Real, N]) -> Bool) | face_of(f, (p : (Cart[Real, N]) -> Bool)) && aff_dim(f) == aff_dim(p) - int_of_num(1) && SUBSET((r : (Cart[Real, N]) -> Bool), f)} == {}
+      #|  (f : (Cart[Real, N]) -> Bool) == {}
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  {(f : (Cart[Real, N]) -> Bool) | facet_of(f, (p : (Cart[Real, N]) -> Bool)) && SUBSET((r : (Cart[Real, N]) -> Bool), f)} == {(f : (Cart[Real, N]) -> Bool) | face_of(f, p) && aff_dim(f) == aff_dim(p) - int_of_num(1) && SUBSET(r, f)}
+      #|  (r : (Cart[Real, N]) -> Bool)
+      #|  (r : (Cart[Real, N]) -> Bool)
+      #|  int_of_num(2) <= aff_dim((p : (Cart[Real, N]) -> Bool))
+      #|  !((p : Int) == p - int_of_num(2))
+      #|  (r : (Cart[Real, N]) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 p : (Cart[Real, N]) -> Bool, \226\136\128 r : (Cart[Real, N]) -> Bool, polyhedron(p) && face_of(r, p) && !(r == {}) && aff_dim(r) == aff_dim(p) - int_of_num(2) \226\134\146 (\226\136\131 f1 : (Cart[Real, N]) -> Bool, \226\136\131 f2 : (Cart[Real, N]) -> Bool, face_of(f1, p) && aff_dim(f1) == aff_dim(p) - int_of_num(1) && face_of(f2, p) && aff_dim(f2) == aff_dim(p) - int_of_num(1) && !(f1 == f2) && SUBSET(r, f1) && SUBSET(r, f2) && INTER(f1, f2) == r && (\226\136\128 f : (Cart[Real, N]) -> Bool, face_of(f, p) && aff_dim(f) == aff_dim(p) - int_of_num(1) && SUBSET(r, f) \226\134\146 f == f1 || f == f2))
+      #|  (f3 : (Cart[Real, N]) -> Bool)
+      #|  (f2 : (Cart[Real, N]) -> Bool)
+      #|  (f1 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h2 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h3 : (Cart[Real, N]) -> Bool)
+      #|  (h1 : (Cart[Real, N]) -> Bool)
+      #|  (a3 : Cart[Real, N])
+      #|  (a2 : Cart[Real, N])
+      #|  (a1 : Cart[Real, N])
+      #|  aff_dim(hull(convex, {(v : Cart[Real, N]) | extreme_point_of(v, (p : (Cart[Real, N]) -> Bool))})) + int_of_num(1)
+      #|  \226\136\128 p : (Cart[Real, N]) -> Bool, polytope(p) \226\134\146 aff_dim(p) + int_of_num(1) <= int_of_num(CARD({(v : Cart[Real, N]) | extreme_point_of(v, p)}))
+      #|  (m : Num) == (n : Num) \226\134\146 n <= m
+      #|  {(f : _) | \226\136\131 h : _, IN(h, (s : (_) -> Bool)) && f == (g : (_) -> _)(h)} == IMAGE(g, s)
+      #|  -(a : Real) / (b : Real) == -(a / b)
+      #|  real_of_num(0) <= (x : Real) * -(y : Real) && real_of_num(0) <= (z : Real) \226\134\146 x * y <= z
+      #|  real_of_num(0) <= -(x : Real) * (y : Real) && real_of_num(0) <= (z : Real) \226\134\146 x * y <= z
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((k : (Cart[Real, N]) -> Bool))
+      #|  (x : Real) == real_of_num(0) && real_of_num(0) <= (y : Real) \226\134\146 x <= y
+      #|  (k : (Cart[Real, N]) -> Bool) == (h : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(k), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(k)}
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  !(abs((B : Real) + real_of_num(1)) <= B)
+      #|  op_pct(((B : Real) + real_of_num(1)) / norm((n : Cart[Real, N])), n)
+      #|  op_pct(-((B : Real) + real_of_num(1)) / norm((n : Cart[Real, N])), n)
+      #|  real_of_num(0) <= dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), (n : Cart[Real, N])) || real_of_num(0) <= -dot(a(h), n)
+      #|  (B : Real)
+      #|  (n : Cart[Real, N])
+      #|  ((n : Num) - 1 < n) == !(n == 0)
+      #|  CARD(DELETE((H : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool)))
+      #|  CARD(IMAGE((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N]), DELETE((H : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool))))
+      #|  (h : Num) <= (p : Num) \226\134\146 (h' : Num) < h \226\134\146 !(h' == p)
+      #|  (dim : ((Cart[Real, N]) -> Bool) -> Num)
+      #|  PSUBSET(span(IMAGE((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N]), DELETE((H : ((Cart[Real, N]) -> Bool) -> Bool), (h : (Cart[Real, N]) -> Bool)))), span((p : (Cart[Real, N]) -> Bool)))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  op_pct(((B : Real) + real_of_num(1)) / norm((n : Cart[Real, N])), n)
+      #|  (B : Real)
+      #|  \226\136\131 n : Cart[Real, N], IN(n, span((p : (Cart[Real, N]) -> Bool))) && !(n == vec(0))
+      #|  (H : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  !(dim((p : (Cart[Real, N]) -> Bool)) == 0)
+      #|  (H : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  (H : ((Cart[Real, N]) -> Bool) -> Bool) == {}
+      #|  !((h : Num) <= (a : Num)) \226\134\146 a + 1 <= h
+      #|  CARD((H : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (h : (Cart[Real, N]) -> Bool)
+      #|  IN(vec(0), (p : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 real_of_num(0) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (H : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (vec(0) == (v : Cart[Real, N])) == (v == vec(0))
+      #|  (b : ((Cart[Real, N]) -> Bool) -> Real)
+      #|  (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
+      #|  (H : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  !(aff_dim((p : (Cart[Real, N]) -> Bool)) == int_of_num(0))
+      #|  CARD({(f : (Cart[Real, N]) -> Bool) | facet_of(f, (p : (Cart[Real, N]) -> Bool))})
+      #|  (z : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  \226\136\131 n : Num, HAS_SIZE({(f : (Cart[Real, N]) -> Bool) | facet_of(f, (p : (Cart[Real, N]) -> Bool))}, n) && aff_dim(p) + int_of_num(1) <= int_of_num(n)
+      #|  (p : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 p : (Cart[Real, N]) -> Bool, polytope(p) && !(aff_dim(p) == int_of_num(0)) \226\134\146 aff_dim(p) + int_of_num(1) <= int_of_num(CARD({(f : (Cart[Real, N]) -> Bool) | facet_of(f, p)}))
+      #|  (simplex : (Int, (Cart[Real, _]) -> Bool) -> Bool)((n : Int), (s : (Cart[Real, _]) -> Bool)) == (\226\136\131 c : (Cart[Real, _]) -> Bool, !affine_dependent(c) && int_of_num(CARD(c)) == n + int_of_num(1) && s == hull(convex, c))
+      #|  (!affine_dependent((c : (Cart[Real, _]) -> Bool)) && (P : (Num) -> Bool)(CARD(c))) == (!affine_dependent(c) && (\226\136\131 n : Num, HAS_SIZE(c, n) && P(n)))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, simplex(n, IMAGE((x : Cart[Real, N]) => a + x, s)) == simplex(n, s)
+      #|  SUBSET((d : (Cart[Real, N]) -> Bool), hull(convex, d))
+      #|  {(x : Cart[Real, M]) | IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (d : (Cart[Real, N]) -> Bool))}
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, M]) -> Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (n : Num)
+      #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]))
+      #|  \226\136\128 f : (_) -> _, (\226\136\128 a : _, (P : (_) -> Bool)(f(a)) == (Q : (_) -> Bool)(a)) && (\226\136\128 b : _, P(b) \226\134\146 (\226\136\131 a : _, b == f(a))) \226\134\146 (\226\136\131 b : _, P(b)) == (\226\136\131 a : _, Q(a))
+      #|  (!affine_dependent((c : (Cart[Real, _]) -> Bool)) && (P : (Num) -> Bool)(CARD(c))) == (!affine_dependent(c) && (\226\136\131 n : Num, HAS_SIZE(c, n) && P(n)))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 n : Int, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 simplex(n, IMAGE(f, s)) == simplex(n, s)
+      #|  simplex((n : Int), (s : (Cart[Real, _]) -> Bool)) == (\226\136\131 c : (Cart[Real, _]) -> Bool, FINITE(c) && !affine_dependent(c) && int_of_num(CARD(c)) == n + int_of_num(1) && s == hull(convex, c))
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, !affine_dependent(c) && int_of_num(CARD(c)) == n + int_of_num(1) \226\134\146 simplex(n, hull(convex, c))
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, _]) -> Bool, simplex(n, s) \226\134\146 polytope(s)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 n : Int, simplex(n, s) \226\134\146 polyhedron(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, simplex(n, s) \226\134\146 convex(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, simplex(n, s) \226\134\146 compact(s)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, simplex(n, s) \226\134\146 closed(s)
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, _]) -> Bool, simplex(n, s) \226\134\146 -int_of_num(1) <= n
+      #|  \226\136\128 n : Int, (simplex : (Int, (Cart[Real, _]) -> Bool) -> Bool)(n, ({} : (Cart[Real, _]) -> Bool)) == (n == -int_of_num(1))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == (c && a && b && d)
+      #|  ((a : Bool) && (b : Bool)) == !(a \226\134\146 !b)
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, simplex(-int_of_num(1), s) == (s == {})
+      #|  ((x : Int) == (n : Int) + int_of_num(1)) == (n == x - int_of_num(1))
+      #|  \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 n : Int, simplex(n, s) \226\134\146 aff_dim(s) == n
+      #|  SUBSET((c' : (Cart[Real, N]) -> Bool), DELETE((c : (Cart[Real, N]) -> Bool), (a : Cart[Real, N])))
+      #|  IN((a : Cart[Real, N]), hull(convex, (c' : (Cart[Real, N]) -> Bool)))
+      #|  (a : Cart[Real, N])
+      #|  (a : Cart[Real, N])
+      #|  hull(convex, (c : (Cart[Real, N]) -> Bool)) == hull(convex, (c' : (Cart[Real, N]) -> Bool))
+      #|  (c' : (Cart[Real, N]) -> Bool) == {(v : Cart[Real, N]) | extreme_point_of(v, hull(convex, (c : (Cart[Real, N]) -> Bool)))}
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) && !PSUBSET(s, t) \226\134\146 s == t
+      #|  {(v : Cart[Real, N]) | extreme_point_of(v, (s : (Cart[Real, N]) -> Bool))} == (c : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, N]) -> Bool, simplex(n, s) \226\134\146 FINITE({(v : Cart[Real, N]) | extreme_point_of(v, s)}) && !affine_dependent({(v : Cart[Real, N]) | extreme_point_of(v, s)}) && int_of_num(CARD({(v : Cart[Real, N]) | extreme_point_of(v, s)})) == n + int_of_num(1) && s == hull(convex, {(v : Cart[Real, N]) | extreme_point_of(v, s)})
+      #|  (a : Int) - int_of_num(1) + int_of_num(1) == a
+      #|  (c' : (Cart[Real, N]) -> Bool)
+      #|  int_of_num(CARD((c' : (Cart[Real, N]) -> Bool))) - int_of_num(1)
+      #|  \226\136\131 c' : (Cart[Real, N]) -> Bool, SUBSET(c', (c : (Cart[Real, N]) -> Bool)) && (f : (Cart[Real, N]) -> Bool) == hull(convex, c')
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, simplex(n, s) && face_of(f, s) \226\134\146 (\226\136\131 m : Int, m <= n && simplex(m, f))
+      #|  (c : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | extreme_point_of(x, (s : (Cart[Real, N]) -> Bool))}
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, simplex(n, s) && face_of(f, s) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, SUBSET(c, {(x : Cart[Real, N]) | extreme_point_of(x, s)}) && f == hull(convex, c))
+      #|  {(v : Cart[Real, N]) | extreme_point_of(v, (s : (Cart[Real, N]) -> Bool))}
+      #|  hull(affine, DIFF({(v : Cart[Real, N]) | extreme_point_of(v, (s : (Cart[Real, N]) -> Bool))}, (c : (Cart[Real, N]) -> Bool)))
+      #|  \226\136\128 t : (_) -> Bool, SUBSET((u : (_) -> Bool), t) && DISJOINT((s : (_) -> Bool), t) \226\134\146 DISJOINT(s, u)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, \226\136\128 c : (Cart[Real, N]) -> Bool, simplex(n, s) && SUBSET(c, {(x : Cart[Real, N]) | extreme_point_of(x, s)}) \226\134\146 face_of(hull(convex, c), s)
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, _]) -> Bool, simplex(n, s) \226\134\146 {(f : (Cart[Real, _]) -> Bool) | face_of(f, s)} == {hull(convex, (c : (Cart[Real, _]) -> Bool)) | SUBSET(c, {(v : Cart[Real, _]) | extreme_point_of(v, s)})}
+      #|  hull(affine, (b : (Cart[Real, N]) -> Bool))
+      #|  hull(convex, (b : (Cart[Real, N]) -> Bool))
+      #|  hull(convex, (a : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, \226\136\128 u : (_) -> Bool, IN((x : _), s) && SUBSET(s, t) && SUBSET(t, u) && SUBSET(u, (v : (_) -> Bool)) \226\134\146 IN(x, v)
+      #|  (x : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  \226\136\128 a : (Cart[Real, N]) -> Bool, \226\136\128 b : (Cart[Real, N]) -> Bool, SUBSET(a, {(v : Cart[Real, N]) | extreme_point_of(v, (s : (Cart[Real, N]) -> Bool))}) && SUBSET(b, {(v : Cart[Real, N]) | extreme_point_of(v, s)}) && SUBSET(hull(convex, a), hull(convex, b)) \226\134\146 SUBSET(a, b)
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, N]) -> Bool, simplex(n, s) \226\134\146 HAS_SIZE({(f : (Cart[Real, N]) -> Bool) | face_of(f, s)}, EXP(2, num_of_int(n + int_of_num(1))))
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, _]) -> Bool, simplex(n, s) \226\134\146 FINITE({(f : (Cart[Real, _]) -> Bool) | face_of(f, s)})
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, _]) -> Bool, simplex(n, s) \226\134\146 CARD({(f : (Cart[Real, _]) -> Bool) | face_of(f, s)}) == EXP(2, num_of_int(n + int_of_num(1)))
+      #|  INSERT(vec(0), (c : (Cart[Real, N]) -> Bool))
+      #|  hull(convex, INSERT(vec(0), (c : (Cart[Real, N]) -> Bool)))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (n : Num)
+      #|  (-int_of_num(1) <= (n : Int)) == (n == -int_of_num(1) || int_of_num(0) <= n)
+      #|  (d : Int)
+      #|  \226\136\128 n : Int, -int_of_num(1) <= n && n <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 (\226\136\131 s : (Cart[Real, N]) -> Bool, (simplex : (Int, (Cart[Real, N]) -> Bool) -> Bool)(n, s))
+      #|  (b : Cart[Real, N])
+      #|  IMAGE((x : Cart[Real, N]) => (a : Cart[Real, N]) - (b : Cart[Real, N]) + x, (c : (Cart[Real, N]) -> Bool))
+      #|  (b : Cart[Real, N])
+      #|  !(relative_interior((c : (Cart[Real, N]) -> Bool)) == {})
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (n : Int)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 n : Int, int_of_num(0) <= n && n <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 (\226\136\131 s : (Cart[Real, N]) -> Bool, (simplex : (Int, (Cart[Real, N]) -> Bool) -> Bool)(n, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(a, (relative_interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s)))
+      #|  int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  (a : Cart[Real, N])
+      #|  \226\136\128 a : Cart[Real, N], \226\136\131 s : (Cart[Real, N]) -> Bool, (simplex : (Int, (Cart[Real, N]) -> Bool) -> Bool)(int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(a, (interior : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s))
+      #|  \226\136\128 n : Int, -int_of_num(1) <= n && n <= int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 (\226\136\131 s : (Cart[Real, N]) -> Bool, (polytope : ((Cart[Real, N]) -> Bool) -> Bool)(s) && (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)(s) == n)
+      #|  {(a : Cart[Real, N])}
+      #|  \226\136\128 n : Int, \226\136\128 a : Cart[Real, N], simplex(n, {a}) == (n == int_of_num(0))
+      #|  HAS_SIZE((t : (Cart[Real, N]) -> Bool), 1)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, simplex(int_of_num(0), s) == (\226\136\131 a : Cart[Real, N], s == {a})
+      #|  {(a : Cart[Real, N]), (b : Cart[Real, N])}
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], simplex(if a == b { int_of_num(0) } else { int_of_num(1) }, segment([(a, b)]))
+      #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\131 n : Int, simplex(n, segment([(a, b)]))
+      #|  (p : (Cart[Real, N]) -> Bool)
+      #|  (p : (Cart[Real, N]) -> Bool) == {}
+      #|  \226\136\128 p : (Cart[Real, N]) -> Bool, polytope(p) && aff_dim(p) <= int_of_num(1) \226\134\146 (\226\136\131 n : Int, simplex(n, p))
+      #|  INSERT((a : _), (s : (_) -> Bool)) == UNION({a}, s)
+      #|  IN((a : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool))
+      #|  !IN((a : Cart[Real, N]), hull(affine, (s : (Cart[Real, N]) -> Bool)))
+      #|  INSERT((a : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 n : Int, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], simplex(n, s) && !IN(a, hull(affine, s)) \226\134\146 simplex(n + int_of_num(1), hull(convex, INSERT(a, s)))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], (\226\136\131 n : Int, simplex(n, s)) && !IN(a, hull(affine, s)) \226\134\146 (\226\136\131 n : Int, simplex(n, hull(convex, INSERT(a, s))))
+      #|  {(v : Cart[Real, N]) | extreme_point_of(v, (s : (Cart[Real, N]) -> Bool))}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 i : Int, simplex(i, s) == (convex(s) && compact(s) && FINITE({(v : Cart[Real, N]) | extreme_point_of(v, s)}) && int_of_num(CARD({(v : Cart[Real, N]) | extreme_point_of(v, s)})) == i + int_of_num(1) && !affine_dependent({(v : Cart[Real, N]) | extreme_point_of(v, s)}))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, simplex(int_of_num((n : Num)) - int_of_num(1), s) == (convex(s) && compact(s) && HAS_SIZE({(v : Cart[Real, N]) | extreme_point_of(v, s)}, n) && !affine_dependent({(v : Cart[Real, N]) | extreme_point_of(v, s)}))
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, (simplex(int_of_num((n : Num)) - int_of_num(1), s) && !IN(vec(0), hull(affine, s))) == (convex(s) && compact(s) && HAS_SIZE({(v : Cart[Real, N]) | extreme_point_of(v, s)}, n) && independent({(v : Cart[Real, N]) | extreme_point_of(v, s)}))
+      #|  int_of_num(1) <= (d : Int) \226\134\146 d - int_of_num(1) == -int_of_num(1) \226\134\146 false
+      #|  \226\136\128 c : (Cart[Real, _]) -> Bool, simplex(int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) - int_of_num(1), c) \226\134\146 !({(v : Cart[Real, _]) | extreme_point_of(v, c)} == {})
+      #|  (simplicial_complex : (((Cart[Real, _]) -> Bool) -> Bool) -> Bool)((c : ((Cart[Real, _]) -> Bool) -> Bool)) == (FINITE(c) && (\226\136\128 s : (Cart[Real, _]) -> Bool, IN(s, c) \226\134\146 (\226\136\131 n : Int, simplex(n, s))) && (\226\136\128 f : (Cart[Real, _]) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, IN(s, c) && face_of(f, s) \226\134\146 IN(f, c)) && (\226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 s' : (Cart[Real, _]) -> Bool, IN(s, c) && IN(s', c) \226\134\146 face_of(INTER(s, s'), s) && face_of(INTER(s, s'), s')))
+      #|  (triangulation : (((Cart[Real, N]) -> Bool) -> Bool) -> Bool)((tr : ((Cart[Real, N]) -> Bool) -> Bool)) == (FINITE(tr) && (\226\136\128 t : (Cart[Real, N]) -> Bool, IN(t, tr) \226\134\146 (\226\136\131 n : Int, simplex(n, t))) && (\226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, IN(t, tr) && IN(t', tr) \226\134\146 face_of(INTER(t, t'), t) && face_of(INTER(t, t'), t')))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, simplicial_complex(IMAGE(IMAGE((x : Cart[Real, N]) => a + x), tr)) == simplicial_complex(tr)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 tr : ((Cart[Real, M]) -> Bool) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 simplicial_complex(IMAGE(IMAGE(f), tr)) == simplicial_complex(tr)
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(IMAGE(IMAGE((x : Cart[Real, N]) => a + x), tr)) == triangulation(tr)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 tr : ((Cart[Real, M]) -> Bool) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 triangulation(IMAGE(IMAGE(f), tr)) == triangulation(tr)
+      #|  \226\136\128 tr : ((Cart[Real, _]) -> Bool) -> Bool, simplicial_complex(tr) \226\134\146 triangulation(tr)
+      #|  \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 tr' : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(tr) && SUBSET(tr', tr) \226\134\146 triangulation(tr')
+      #|  \226\136\128 tr1 : ((Cart[Real, _]) -> Bool) -> Bool, \226\136\128 tr2 : ((Cart[Real, _]) -> Bool) -> Bool, triangulation(UNION(tr1, tr2)) == (triangulation(tr1) && triangulation(tr2) && (\226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, IN(s, tr1) && IN(t, tr2) \226\134\146 face_of(INTER(s, t), s) && face_of(INTER(s, t), t)))
+      #|  hull(convex, (d' : (Cart[Real, N]) -> Bool)) == INTER((t : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool))
+      #|  hull(convex, (d : (Cart[Real, N]) -> Bool)) == INTER((t : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool))
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) \226\134\146 SUBSET(s, t)
+      #|  hull(convex, {(x : Cart[Real, N]) | extreme_point_of(x, INTER((t : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool)))})
+      #|  (d' : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  INTER((t : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (n : Int)
+      #|  INTER((t : (Cart[Real, N]) -> Bool), (t' : (Cart[Real, N]) -> Bool))
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (m : Int)
+      #|  (n : Int)
+      #|  (m : Int)
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, triangulation(tr) && IN(t, tr) && IN(t', tr) \226\134\146 INTER(t, t') == hull(convex, INTER({(x : Cart[Real, N]) | extreme_point_of(x, t)}, {(x : Cart[Real, N]) | extreme_point_of(x, t')}))
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (t' : (Cart[Real, N]) -> Bool)
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  {(f : _) | \226\136\131 t : _, IN(t, (tr : (_) -> Bool)) && (P : (_, _) -> Bool)(f, t)} == UNIONS(IMAGE((t : _) => {(f : _) | P(f, t)}, tr))
+      #|  \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(tr) \226\134\146 simplicial_complex({(f : (Cart[Real, N]) -> Bool) | \226\136\131 t : (Cart[Real, N]) -> Bool, IN(t, tr) && face_of(f, t)})
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == {(x : _) | IN(x, {(y : _) | P(y)}) && Q(x)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, \226\136\128 d : Int, simplex(n, s) \226\134\146 triangulation({(c : (Cart[Real, N]) -> Bool) | face_of(c, s) && aff_dim(c) == d})
+      #|  {(c : (Cart[Real, N]) -> Bool) | face_of(c, (s : (Cart[Real, N]) -> Bool)) && aff_dim(c) == aff_dim(s) - int_of_num(1)}
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Int, simplex(n, s) \226\134\146 triangulation({(c : (Cart[Real, N]) -> Bool) | facet_of(c, s)})
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  INTER((c : (Cart[Real, N]) -> Bool), (d : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, face_of(INTER(c, d), c) && face_of(INTER(c, d), d) && !(c == d) \226\134\146 INTER(relative_interior(c), relative_interior(d)) == {}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, triangulation(t) && IN(c, t) && IN(d, t) && !(c == d) \226\134\146 INTER(relative_interior(c), relative_interior(d)) == {}
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 d : (Cart[Real, N]) -> Bool, simplicial_complex(t) && IN(c, t) && IN(d, t) && !(c == d) \226\134\146 INTER(relative_interior(c), relative_interior(d)) == {}
+      #|  (vec : (Num) -> Cart[Real, N])(0)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  closure((u : (Cart[Real, N]) -> Bool))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (u : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  closure((u : (Cart[Real, N]) -> Bool))
+      #|  (z : Cart[Real, N])
+      #|  \226\136\128 t : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 z : Cart[Real, N], convex(u) && bounded(u) && IN(z, interior(u)) && triangulation(t) && SUBSET(UNIONS(t), frontier(u)) \226\134\146 (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, t) \226\134\146 !IN(z, hull(affine, c)))
       #|  UNIONS {{f:real^N->bool | f face_of c} | c IN tr}
-      #|  forall tr:(real^N->bool)->bool tr'.\n        triangulation tr /\\ (forall c'. c' IN tr' ==> ?c. c IN tr /\\ c' face_of c)\n        ==> triangulation tr'
-      #|  &0 < x ==> abs x = x
-      #|  a < abs(x - y)\n     ==> &0 < a\n         ==> ?n. integer n /\\ (x < n * a /\\ n * a < y \\/\n                               y <  n * a /\\ n * a < x)
-      #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
-      #|  a >= b /\\ a <= b <=> a = b
-      #|  a <= b /\\ a >= b <=> a = b
-      #|  s INTER s = s
-      #|  (s INTER t) INTER (s' INTER t') = (s INTER s') INTER (t INTER t')
-      #|  b:real
-      #|  (a:real^N) dot x
-      #|  x:real^N
-      #|  c:real^N->bool
-      #|  forall c x:real^N. c IN m /\\ x IN c ==> ?d. d IN n /\\ x IN d /\\ d SUBSET c
-      #|  x:real^N
-      #|  c:real^N->bool
-      #|  (forall x. x IN s) ==> t INTER s = t
+      #|  \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 tr' : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(tr) && (\226\136\128 c' : (Cart[Real, N]) -> Bool, IN(c', tr') \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, tr) && face_of(c', c))) \226\134\146 triangulation(tr')
+      #|  real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
+      #|  (a : Real) < abs((x : Real) - (y : Real)) \226\134\146 real_of_num(0) < a \226\134\146 (\226\136\131 n : Real, integer(n) && (x < n * a && n * a < y || y < n * a && n * a < x))
+      #|  ((p : Bool) || (q : Bool) \226\134\146 (r : Bool)) == ((p \226\134\146 r) && (q \226\134\146 r))
+      #|  ((a : Real) >= (b : Real) && a <= b) == (a == b)
+      #|  ((a : Real) <= (b : Real) && a >= b) == (a == b)
+      #|  INTER((s : (_) -> Bool), s) == s
+      #|  INTER(INTER((s : (_) -> Bool), (t : (_) -> Bool)), INTER((s' : (_) -> Bool), (t' : (_) -> Bool))) == INTER(INTER(s, s'), INTER(t, t'))
+      #|  (b : Real)
+      #|  dot((a : Cart[Real, N]), (x : Cart[Real, N]))
+      #|  (x : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) && IN(x, c) \226\134\146 (\226\136\131 d : (Cart[Real, N]) -> Bool, IN(d, (n : ((Cart[Real, N]) -> Bool) -> Bool)) && IN(x, d) && SUBSET(d, c))
+      #|  (x : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool))) \226\134\146 INTER((t : (_) -> Bool), s) == t
       #|  {c INTER {x:real^N | a dot x <= b} | c IN n} UNION\n                {c INTER {x:real^N | a dot x >= b} | c IN n}
-      #|  n:(real^N->bool)->bool
-      #|  i:(real^N#real)->bool
-      #|  b:real
-      #|  a:real^N
-      #|  m:(real^N->bool)->bool
+      #|  (n : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (i : ((Cart[Real, N], Real)) -> Bool)
+      #|  (b : Real)
+      #|  (a : Cart[Real, N])
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
       #|  forall m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c <= d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> forall i. FINITE i\n                ==> ?m'. UNIONS m' = UNIONS m /\\\n                         FINITE m' /\\\n                         (forall c. c IN m' ==> ?d. d IN m /\\ c SUBSET d) /\\\n                         (forall c x. c IN m /\\ x IN c\n                                ==> ?d. d IN m' /\\ x IN d /\\ d SUBSET c) /\\\n                         (forall c. c IN m' ==> polytope c) /\\\n                         (forall c. c IN m' ==> aff_dim c <= d) /\\\n                         (forall c1 c2. c1 IN m' /\\ c2 IN m'\n                                  ==> c1 INTER c2 face_of c1 /\\\n                                      c1 INTER c2 face_of c2) /\\\n                         (forall c x y. c IN m' /\\ x IN c /\\ y IN c\n                                  ==> forall a b. (a,b) IN i\n                                            ==> a dot x <= b /\\ a dot y <= b \\/\n                                                a dot x >= b /\\ a dot y >= b)
-      #|  a < x /\\ x < b\n                ==> abs a <= c /\\ abs b <= c ==> abs x <= c
-      #|  j:real
-      #|  i:num
-      #|  j * e / &2 / &(dimindex(:N))
-      #|  basis i:real^N
-      #|  y:real^N
-      #|  x:real^N
-      #|  c:real^N->bool
-      #|  j:real
-      #|  i:num
-      #|  y:real^N
-      #|  x:real^N
-      #|  &0 < e /\\ x <= e / &2 ==> x < e
-      #|  c:real^N->bool
-      #|  n:(real^N->bool)->bool
-      #|  { (basis i:real^N,j * e / &2 / &(dimindex(:N))) |\n      i IN 1..dimindex(:N) /\\ j IN k}
-      #|  d:int
-      #|  m:(real^N->bool)->bool
-      #|  k = {i | integer i /\\ abs(i * e / &2 / &(dimindex(:N))) <= B}
-      #|  B / (e / &2 / &(dimindex(:N)))
-      #|  --B / (e / &2 / &(dimindex(:N)))
-      #|  B:real
-      #|  bounded(UNIONS m:real^N->bool)
+      #|  (a : Real) < (x : Real) && x < (b : Real) \226\134\146 abs(a) <= (c : Real) && abs(b) <= c \226\134\146 abs(x) <= c
+      #|  (j : Real)
+      #|  (i : Num)
+      #|  (j : Real) * ((e : Real) / real_of_num(2) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (basis : (Num) -> Cart[Real, N])((i : Num))
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (j : Real)
+      #|  (i : Num)
+      #|  (y : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  real_of_num(0) < (e : Real) && (x : Real) <= e / real_of_num(2) \226\134\146 x < e
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (n : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  {((basis : (Num) -> Cart[Real, N])((i : Num)), (j : Real) * ((e : Real) / real_of_num(2) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (IN : (Real, (Real) -> Bool) -> Bool)(j, (k : (Real) -> Bool))}
+      #|  (d : Int)
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (k : (Real) -> Bool) == {(i : Real) | integer(i) && abs(i * ((e : Real) / real_of_num(2) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))) <= (B : Real)}
+      #|  (B : Real) / ((e : Real) / real_of_num(2) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  -(B : Real) / ((e : Real) / real_of_num(2) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (B : Real)
+      #|  bounded(UNIONS((m : ((Cart[Real, N]) -> Bool) -> Bool)))
       #|  forall m:(real^N->bool)->bool d e.\n     &0 < e /\\\n     FINITE m /\\\n     (forall c. c IN m ==> polytope c) /\\\n     (forall c. c IN m ==> aff_dim c <= d) /\\\n     (forall c1 c2. c1 IN m /\\ c2 IN m\n              ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n     ==> ?m'. (forall c. c IN m' ==> diameter c < e) /\\\n              UNIONS m' = UNIONS m /\\\n              FINITE m' /\\\n              (forall c. c IN m' ==> ?d. d IN m /\\ c SUBSET d) /\\\n              (forall c x. c IN m /\\ x IN c\n                     ==> ?d. d IN m' /\\ x IN d /\\ d SUBSET c) /\\\n              (forall c. c IN m' ==> polytope c) /\\\n              (forall c. c IN m' ==> aff_dim c <= d) /\\\n              (forall c1 c2. c1 IN m' /\\ c2 IN m'\n                       ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)
-      #|  w:real^N
-      #|  v:real^N
-      #|  z:real^N
-      #|  s:real^N->bool
-      #|  v:real^N
-      #|  w:real^N
-      #|  z:real^N
-      #|  s:real^N->bool
-      #|  {a,b,c} = {b,a,c}
-      #|  w:real^N
-      #|  x:real^N
-      #|  z:real^N
-      #|  v:real^N
-      #|  ~(v:real^N = z) /\\ ~(w:real^N = z)
-      #|  F ==> p
-      #|  x:real^N = z
-      #|  w:real^N
-      #|  v:real^N = w
-      #|  w:real^N
-      #|  v:real^N
-      #|  x:real^N
-      #|  u:real^N->bool = {}
-      #|  t:real^N->bool = {}
-      #|  s SUBSET t ==> z INSERT s SUBSET z INSERT t
-      #|  forall s t u z:real^N.\n          convex s /\\ convex t /\\ convex u /\\ z IN relative_interior s /\\\n          t SUBSET relative_frontier s /\\ u SUBSET relative_frontier s\n          ==> convex hull (z INSERT t) INTER convex hull (z INSERT u) =\n              convex hull (z INSERT (t INTER u))
-      #|  relative_frontier c:real^N->bool
-      #|  c:real^N->bool
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  x IN s ==> s SUBSET t ==> x IN t
-      #|  k:real^N->bool
-      #|  ?k:real^N->bool. k IN sc /\\ y IN k /\\ k SUBSET f
-      #|  c:real^N->bool
-      #|  f:real^N->bool
-      #|  ?g. FINITE g /\\ g SUBSET sc /\\ f:real^N->bool = UNIONS g
-      #|  f:real^N->bool
-      #|  \\s. (y:real^N) IN s
-      #|  c:real^N->bool
-      #|  y:real^N
-      #|  (c:real^N->bool) IN fat
-      #|  aff_dim:(real^N->bool)->int
-      #|  x:real^N
-      #|  z:real^N
-      #|  c:real^N->bool
-      #|  (z:real^N) IN relative_interior c
-      #|  z:real^N = @z. z IN relative_interior c
-      #|  x:real^N
-      #|  relative_frontier c:real^N->bool
-      #|  k:real^N->bool
-      #|  k:real^N->bool
-      #|  { convex hull ((@z:real^N. z IN relative_interior c) INSERT k) |k|\n           k IN sc /\\ k SUBSET relative_frontier c}
-      #|  x:int <= n /\\ ~(x < n) ==> x = n
-      #|  (c:real^N->bool) IN fat
-      #|  (c:real^N->bool) IN sk
-      #|  c:real^N->bool
-      #|  k:int < n ==> k + &1 <= n
-      #|  k INTER l:real^N->bool
-      #|  c:real^N->bool
-      #|  a SUBSET a' /\\ z IN r ==> a' INTER r = {} ==> ~(z IN a)
-      #|  l:real^N->bool
-      #|  d:real^N->bool
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  i:real^N->bool
-      #|  {z} UNION i = z INSERT i
-      #|  z INSERT i = {z} UNION i
-      #|  i:real^N->bool
-      #|  l:real^N->bool
-      #|  k:real^N->bool
-      #|  l:real^N->bool
-      #|  k:real^N->bool
-      #|  convex hull k:real^N->bool = k
-      #|  ~(aff_dim (c:real^N->bool) = aff_dim (d:real^N->bool))
-      #|  relative_interior c SUBSET c /\\\n             (c INTER d) INTER relative_interior c = {}\n             ==> d INTER relative_interior c = {}
-      #|  relative_frontier d:real^N->bool
-      #|  d:real^N->bool
-      #|  forall c. s SUBSET c /\\ c INTER d = {} ==> DISJOINT s d
-      #|  relative_frontier c:real^N->bool
-      #|  c:real^N->bool
-      #|  convex hull (z INSERT k) INTER l:real^N->bool =\n           convex hull k INTER l
-      #|  convex hull l:real^N->bool = l
-      #|  ~(aff_dim (d:real^N->bool) = aff_dim (c:real^N->bool))
-      #|  relative_interior c SUBSET c /\\\n             (c INTER d) INTER relative_interior c = {}\n             ==> d INTER relative_interior c = {}
-      #|  relative_frontier c:real^N->bool
-      #|  c:real^N->bool
-      #|  forall c. s SUBSET c /\\ c INTER d = {} ==> DISJOINT s d
-      #|  relative_frontier d:real^N->bool
-      #|  d:real^N->bool
-      #|  convex hull (z INSERT k) INTER\n           convex hull (w INSERT l):real^N->bool =\n           convex hull (z INSERT k) INTER convex hull l
-      #|  (w:real^N) IN relative_interior d
-      #|  w:real^N = @z. z IN relative_interior d
-      #|  d:real^N->bool = c
-      #|  (z:real^N) IN relative_interior c
-      #|  z:real^N = @z. z IN relative_interior c
-      #|  l:real^N->bool
-      #|  d:real^N->bool
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  i:real^N->bool
-      #|  {z} UNION i = z INSERT i
-      #|  z INSERT i = {z} UNION i
-      #|  a SUBSET a' /\\ z IN r ==> a' INTER r = {} ==> ~(z IN a)
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  ~((z:real^N) IN affine hull i)
-      #|  i:real^N->bool
-      #|  k:real^N->bool
-      #|  k:real^N->bool
-      #|  convex hull k:real^N->bool = k
-      #|  aff_dim(d:real^N->bool)
-      #|  aff_dim s < aff_dim t ==> ~(s = t)
-      #|  relative_interior c SUBSET c /\\\n              (c INTER d) INTER relative_interior c = {}\n              ==> d INTER relative_interior c = {}
-      #|  d INTER s = {} ==> l SUBSET d ==> DISJOINT l s
-      #|  d:real^N->bool
-      #|  ?d:real^N->bool. d IN sk /\\ l SUBSET d
-      #|  relative_frontier c:real^N->bool
-      #|  c:real^N->bool
-      #|  l INTER convex hull (z INSERT k):real^N->bool =\n            l INTER convex hull k
-      #|  (z:real^N) IN relative_interior c
-      #|  z:real^N = @z. z IN relative_interior c
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  l:real^N->bool
-      #|  (forall x y. R x y ==> R y x) /\\\n          (forall x y. P x /\\ P y ==> R x y) /\\\n          (forall x y. P x /\\ Q y ==> R x y) /\\\n          (forall x y. Q x /\\ Q y ==> R x y)\n          ==> forall x y. (P x \\/ Q x) /\\ (P y \\/ Q y) ==> R x y
-      #|  j:real^N->bool
-      #|  k:real^N->bool
-      #|  {z} UNION i = z INSERT i
-      #|  z INSERT i = {z} UNION i
-      #|  k:real^N->bool
-      #|  j DELETE (z:real^N)
-      #|  k:real^N->bool
-      #|  convex hull (j DELETE (z:real^N))
-      #|  c:real^N->bool
-      #|  (z:real^N) IN j
-      #|  j:real^N->bool
-      #|  f:real^N->bool
-      #|  (z:real^N) INSERT i
-      #|  a SUBSET a' /\\ z IN r ==> a' INTER r = {} ==> ~(z IN a)
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  ~((z:real^N) IN affine hull i)
-      #|  {z} UNION i = z INSERT i
-      #|  z INSERT i = {z} UNION i
-      #|  i:real^N->bool
-      #|  k:real^N->bool
-      #|  (z:real^N) IN relative_interior c
-      #|  z:real^N = @z. z IN relative_interior c
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  f:real^N->bool
-      #|  z IN r ==> a INTER r = {} ==> ~(z IN a)
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  k:real^N->bool
-      #|  c:real^N->bool
-      #|  A /\\ x IN s /\\ P x <=> A /\\ x IN (s INTER {x | P x})
-      #|  sc UNION { convex hull ((@z:real^N. z IN relative_interior c) INSERT k) |\n                 c IN fat /\\ k IN sc /\\ k SUBSET relative_frontier c}
-      #|  s SUBSET t ==> t INTER u = {} ==> s INTER u = {}
-      #|  f:real^N->bool
-      #|  c:real^N->bool
-      #|  relative_frontier c:real^N->bool
-      #|  aff_dim(l:real^N->bool)
-      #|  aff_dim s < aff_dim t ==> ~(s = t)
-      #|  l INTER c:real^N->bool
-      #|  ?l:real^N->bool. l IN sk /\\ k SUBSET l
-      #|  ?f:real^N->bool. f face_of c /\\ ~(f = c) /\\ k SUBSET f
-      #|  forall c k. c IN fat /\\ k IN sc /\\ k SUBSET relative_frontier c\n             ==> affine hull k INTER relative_interior c:real^N->bool = {}
-      #|  x:int < n ==> x + &1 <= n
-      #|  t:real^N->bool
-      #|  r = aff_dim(k:real^N->bool)
-      #|  ?r. r simplex (k:real^N->bool)
-      #|  forall k. k IN sc ==> ?t. ~affine_dependent t /\\\n                          CARD t <= n /\\ aff_dim k < &n /\\\n                          k:real^N->bool = convex hull t
-      #|  (c:real^N->bool) IN fat
-      #|  (p ==> q /\\ r) /\\ p /\\ (q ==> s) ==> p /\\ q /\\ r /\\ s
-      #|  (forall c:real^N->bool. c IN fat ==> polytope c) /\\\n      (forall c. c IN fat ==> convex c) /\\\n      (forall c. c IN fat ==> closed c) /\\\n      (forall c. c IN fat ==> (@z. z IN relative_interior c) IN relative_interior c)
-      #|  fat = {c:real^N->bool | c IN m /\\ aff_dim c = &n}
-      #|  (q /\\ r ==> p) /\\ (q ==> q')\n        ==> q /\\ r ==> p /\\ q' /\\ r
-      #|  FINITE(t:(real^N->bool)->bool)
-      #|  t:(real^N->bool)->bool
-      #|  ?t. simplicial_complex t /\\\n         (forall k. k IN t ==> aff_dim k <= &n) /\\\n         (forall c. c IN m ==> (?f. f SUBSET t /\\ c = UNIONS f)) /\\\n         (forall k. k IN t ==> (?c:real^N->bool. c IN m /\\ k SUBSET c))
-      #|  sc:(real^N->bool)->bool
-      #|  x:int <= y - &1 <=> x < y
-      #|  sk:(real^N->bool)->bool
-      #|  sk = {c:real^N->bool | c IN m /\\ aff_dim c < &n}
-      #|  n - 1 < n <=> ~(n = 0)
-      #|  n - 1
-      #|  1 < n ==> ~(n = 0)
-      #|  m:(real^N->bool)->bool
-      #|  n <= 1
-      #|  m:(real^N->bool)->bool
-      #|  n:num
-      #|  forall n m:(real^N->bool)->bool.\n          FINITE m /\\\n          (forall c. c IN m ==> polytope c) /\\\n          (forall c. c IN m ==> aff_dim c <= &n) /\\\n          (forall c f. c IN m /\\ f face_of c ==> f IN m) /\\\n          (forall c1 c2. c1 IN m /\\ c2 IN m\n                   ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n          ==> ?t. simplicial_complex t /\\\n                  (forall k. k IN t ==> aff_dim k <= &n) /\\\n                  UNIONS t = UNIONS m /\\\n                  (forall c. c IN m\n                       ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                  (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)
-      #|  forall c:real^N->bool. c IN m ==> c = {}
-      #|  m:(real^N->bool)->bool
-      #|  (q ==> p) /\\ q ==> p /\\ q
-      #|  t:(real^N->bool)->bool
+      #|  (w : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  (v : Cart[Real, N])
+      #|  (w : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  {(a : _), (b : _), (c : _)} == {b, a, c}
+      #|  (w : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  !((v : Cart[Real, N]) == (z : Cart[Real, N])) && !((w : Cart[Real, N]) == z)
+      #|  false \226\134\146 (p : Bool)
+      #|  (x : Cart[Real, N]) == (z : Cart[Real, N])
+      #|  (w : Cart[Real, N])
+      #|  (v : Cart[Real, N]) == (w : Cart[Real, N])
+      #|  (w : Cart[Real, N])
+      #|  (v : Cart[Real, N])
+      #|  (x : Cart[Real, N])
+      #|  (u : (Cart[Real, N]) -> Bool) == {}
+      #|  (t : (Cart[Real, N]) -> Bool) == {}
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 SUBSET(INSERT((z : _), s), INSERT(z, t))
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 z : Cart[Real, N], convex(s) && convex(t) && convex(u) && IN(z, relative_interior(s)) && SUBSET(t, relative_frontier(s)) && SUBSET(u, relative_frontier(s)) \226\134\146 INTER(hull(convex, INSERT(z, t)), hull(convex, INSERT(z, u))) == hull(convex, INSERT(z, INTER(t, u)))
+      #|  relative_frontier((c : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 k : (Cart[Real, N]) -> Bool, IN(k, (sc : ((Cart[Real, N]) -> Bool) -> Bool)) && IN((y : Cart[Real, N]), k) && SUBSET(k, (f : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 g : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(g) && SUBSET(g, (sc : ((Cart[Real, N]) -> Bool) -> Bool)) && (f : (Cart[Real, N]) -> Bool) == UNIONS(g)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool) => IN((y : Cart[Real, N]), s)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (y : Cart[Real, N])
+      #|  IN((c : (Cart[Real, N]) -> Bool), (fat : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (aff_dim : ((Cart[Real, N]) -> Bool) -> Int)
+      #|  (x : Cart[Real, N])
+      #|  (z : Cart[Real, N])
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  IN((z : Cart[Real, N]), relative_interior((c : (Cart[Real, N]) -> Bool)))
+      #|  (z : Cart[Real, N]) == select((z : Cart[Real, N]) => IN(z, relative_interior((c : (Cart[Real, N]) -> Bool))))
+      #|  (x : Cart[Real, N])
+      #|  relative_frontier((c : (Cart[Real, N]) -> Bool))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  {hull(convex, INSERT(select((z : Cart[Real, N]) => IN(z, relative_interior((c : (Cart[Real, N]) -> Bool)))), k)) | k : (Cart[Real, N]) -> Bool | IN(k, (sc : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET(k, relative_frontier(c))}
+      #|  (x : Int) <= (n : Int) && !(x < n) \226\134\146 x == n
+      #|  IN((c : (Cart[Real, N]) -> Bool), (fat : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  IN((c : (Cart[Real, N]) -> Bool), (sk : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (k : Int) < (n : Int) \226\134\146 k + int_of_num(1) <= n
+      #|  INTER((k : (Cart[Real, N]) -> Bool), (l : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  SUBSET((a : (_) -> Bool), (a' : (_) -> Bool)) && IN((z : _), (r : (_) -> Bool)) \226\134\146 INTER(a', r) == {} \226\134\146 !IN(z, a)
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  UNION({(z : _)}, (i : (_) -> Bool)) == INSERT(z, i)
+      #|  INSERT((z : _), (i : (_) -> Bool)) == UNION({z}, i)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  hull(convex, (k : (Cart[Real, N]) -> Bool)) == k
+      #|  !(aff_dim((c : (Cart[Real, N]) -> Bool)) == aff_dim((d : (Cart[Real, N]) -> Bool)))
+      #|  SUBSET(relative_interior((c : (Cart[Real, _]) -> Bool)), c) && INTER(INTER(c, (d : (Cart[Real, _]) -> Bool)), relative_interior(c)) == {} \226\134\146 INTER(d, relative_interior(c)) == {}
+      #|  relative_frontier((d : (Cart[Real, N]) -> Bool))
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (_) -> Bool, SUBSET((s : (_) -> Bool), c) && INTER(c, (d : (_) -> Bool)) == {} \226\134\146 DISJOINT(s, d)
+      #|  relative_frontier((c : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  INTER(hull(convex, INSERT((z : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool))), (l : (Cart[Real, N]) -> Bool)) == INTER(hull(convex, k), l)
+      #|  hull(convex, (l : (Cart[Real, N]) -> Bool)) == l
+      #|  !(aff_dim((d : (Cart[Real, N]) -> Bool)) == aff_dim((c : (Cart[Real, N]) -> Bool)))
+      #|  SUBSET(relative_interior((c : (Cart[Real, _]) -> Bool)), c) && INTER(INTER(c, (d : (Cart[Real, _]) -> Bool)), relative_interior(c)) == {} \226\134\146 INTER(d, relative_interior(c)) == {}
+      #|  relative_frontier((c : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (_) -> Bool, SUBSET((s : (_) -> Bool), c) && INTER(c, (d : (_) -> Bool)) == {} \226\134\146 DISJOINT(s, d)
+      #|  relative_frontier((d : (Cart[Real, N]) -> Bool))
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  INTER(hull(convex, INSERT((z : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool))), hull(convex, INSERT((w : Cart[Real, N]), (l : (Cart[Real, N]) -> Bool)))) == INTER(hull(convex, INSERT(z, k)), hull(convex, l))
+      #|  IN((w : Cart[Real, N]), relative_interior((d : (Cart[Real, N]) -> Bool)))
+      #|  (w : Cart[Real, N]) == select((z : Cart[Real, N]) => IN(z, relative_interior((d : (Cart[Real, N]) -> Bool))))
+      #|  (d : (Cart[Real, N]) -> Bool) == (c : (Cart[Real, N]) -> Bool)
+      #|  IN((z : Cart[Real, N]), relative_interior((c : (Cart[Real, N]) -> Bool)))
+      #|  (z : Cart[Real, N]) == select((z : Cart[Real, N]) => IN(z, relative_interior((c : (Cart[Real, N]) -> Bool))))
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  UNION({(z : _)}, (i : (_) -> Bool)) == INSERT(z, i)
+      #|  INSERT((z : _), (i : (_) -> Bool)) == UNION({z}, i)
+      #|  SUBSET((a : (_) -> Bool), (a' : (_) -> Bool)) && IN((z : _), (r : (_) -> Bool)) \226\134\146 INTER(a', r) == {} \226\134\146 !IN(z, a)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  !IN((z : Cart[Real, N]), hull(affine, (i : (Cart[Real, N]) -> Bool)))
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  hull(convex, (k : (Cart[Real, N]) -> Bool)) == k
+      #|  aff_dim((d : (Cart[Real, N]) -> Bool))
+      #|  aff_dim((s : (Cart[Real, _]) -> Bool)) < aff_dim((t : (Cart[Real, _]) -> Bool)) \226\134\146 !(s == t)
+      #|  SUBSET(relative_interior((c : (Cart[Real, _]) -> Bool)), c) && INTER(INTER(c, (d : (Cart[Real, _]) -> Bool)), relative_interior(c)) == {} \226\134\146 INTER(d, relative_interior(c)) == {}
+      #|  INTER((d : (_) -> Bool), (s : (_) -> Bool)) == {} \226\134\146 SUBSET((l : (_) -> Bool), d) \226\134\146 DISJOINT(l, s)
+      #|  (d : (Cart[Real, N]) -> Bool)
+      #|  \226\136\131 d : (Cart[Real, N]) -> Bool, IN(d, (sk : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((l : (Cart[Real, N]) -> Bool), d)
+      #|  relative_frontier((c : (Cart[Real, N]) -> Bool))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  INTER((l : (Cart[Real, N]) -> Bool), hull(convex, INSERT((z : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool)))) == INTER(l, hull(convex, k))
+      #|  IN((z : Cart[Real, N]), relative_interior((c : (Cart[Real, N]) -> Bool)))
+      #|  (z : Cart[Real, N]) == select((z : Cart[Real, N]) => IN(z, relative_interior((c : (Cart[Real, N]) -> Bool))))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (l : (Cart[Real, N]) -> Bool)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (R : (_, _) -> Bool)(x, y) \226\134\146 R(y, x)) && (\226\136\128 x : _, \226\136\128 y : _, (P : (_) -> Bool)(x) && P(y) \226\134\146 R(x, y)) && (\226\136\128 x : _, \226\136\128 y : _, P(x) && (Q : (_) -> Bool)(y) \226\134\146 R(x, y)) && (\226\136\128 x : _, \226\136\128 y : _, Q(x) && Q(y) \226\134\146 R(x, y)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, (P(x) || Q(x)) && (P(y) || Q(y)) \226\134\146 R(x, y))
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  UNION({(z : _)}, (i : (_) -> Bool)) == INSERT(z, i)
+      #|  INSERT((z : _), (i : (_) -> Bool)) == UNION({z}, i)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  DELETE((j : (Cart[Real, N]) -> Bool), (z : Cart[Real, N]))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  hull(convex, DELETE((j : (Cart[Real, N]) -> Bool), (z : Cart[Real, N])))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  IN((z : Cart[Real, N]), (j : (Cart[Real, N]) -> Bool))
+      #|  (j : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  INSERT((z : Cart[Real, N]), (i : (Cart[Real, N]) -> Bool))
+      #|  SUBSET((a : (_) -> Bool), (a' : (_) -> Bool)) && IN((z : _), (r : (_) -> Bool)) \226\134\146 INTER(a', r) == {} \226\134\146 !IN(z, a)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  !IN((z : Cart[Real, N]), hull(affine, (i : (Cart[Real, N]) -> Bool)))
+      #|  UNION({(z : _)}, (i : (_) -> Bool)) == INSERT(z, i)
+      #|  INSERT((z : _), (i : (_) -> Bool)) == UNION({z}, i)
+      #|  (i : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  IN((z : Cart[Real, N]), relative_interior((c : (Cart[Real, N]) -> Bool)))
+      #|  (z : Cart[Real, N]) == select((z : Cart[Real, N]) => IN(z, relative_interior((c : (Cart[Real, N]) -> Bool))))
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  IN((z : _), (r : (_) -> Bool)) \226\134\146 INTER((a : (_) -> Bool), r) == {} \226\134\146 !IN(z, a)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (k : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  ((A : Bool) && IN((x : _), (s : (_) -> Bool)) && (P : (_) -> Bool)(x)) == (A && IN(x, INTER(s, {(x : _) | P(x)})))
+      #|  UNION((sc : ((Cart[Real, N]) -> Bool) -> Bool), {hull(convex, INSERT(select((z : Cart[Real, N]) => IN(z, relative_interior((c : (Cart[Real, N]) -> Bool)))), (k : (Cart[Real, N]) -> Bool))) | IN(c, (fat : ((Cart[Real, N]) -> Bool) -> Bool)) && IN(k, sc) && SUBSET(k, relative_frontier(c))})
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, (u : (_) -> Bool)) == {} \226\134\146 INTER(s, u) == {}
+      #|  (f : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  relative_frontier((c : (Cart[Real, N]) -> Bool))
+      #|  aff_dim((l : (Cart[Real, N]) -> Bool))
+      #|  aff_dim((s : (Cart[Real, _]) -> Bool)) < aff_dim((t : (Cart[Real, _]) -> Bool)) \226\134\146 !(s == t)
+      #|  INTER((l : (Cart[Real, N]) -> Bool), (c : (Cart[Real, N]) -> Bool))
+      #|  \226\136\131 l : (Cart[Real, N]) -> Bool, IN(l, (sk : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((k : (Cart[Real, N]) -> Bool), l)
+      #|  \226\136\131 f : (Cart[Real, N]) -> Bool, face_of(f, (c : (Cart[Real, N]) -> Bool)) && !(f == c) && SUBSET((k : (Cart[Real, N]) -> Bool), f)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 k : (Cart[Real, N]) -> Bool, IN(c, (fat : ((Cart[Real, N]) -> Bool) -> Bool)) && IN(k, (sc : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET(k, relative_frontier(c)) \226\134\146 INTER(hull(affine, k), relative_interior(c)) == {}
+      #|  (x : Int) < (n : Int) \226\134\146 x + int_of_num(1) <= n
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (r : Int) == aff_dim((k : (Cart[Real, N]) -> Bool))
+      #|  \226\136\131 r : Int, simplex(r, (k : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, (sc : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 t : (Cart[Real, N]) -> Bool, !affine_dependent(t) && CARD(t) <= (n : Num) && aff_dim(k) < int_of_num(n) && k == hull(convex, t))
+      #|  IN((c : (Cart[Real, N]) -> Bool), (fat : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) && p && (q \226\134\146 (s : Bool)) \226\134\146 p && q && r && s
+      #|  (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (fat : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 polytope(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, fat) \226\134\146 convex(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, fat) \226\134\146 closed(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, fat) \226\134\146 IN(select((z : Cart[Real, N]) => IN(z, relative_interior(c))), relative_interior(c)))
+      #|  (fat : ((Cart[Real, N]) -> Bool) -> Bool) == {(c : (Cart[Real, N]) -> Bool) | IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(c) == int_of_num((n : Num))}
+      #|  ((q : Bool) && (r : Bool) \226\134\146 (p : Bool)) && (q \226\134\146 (q' : Bool)) \226\134\146 q && r \226\134\146 p && q' && r
+      #|  FINITE((t : ((Cart[Real, N]) -> Bool) -> Bool))
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, simplicial_complex(t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 aff_dim(k) <= int_of_num((n : Num))) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c)))
+      #|  (sc : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  ((x : Int) <= (y : Int) - int_of_num(1)) == (x < y)
+      #|  (sk : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (sk : ((Cart[Real, N]) -> Bool) -> Bool) == {(c : (Cart[Real, N]) -> Bool) | IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(c) < int_of_num((n : Num))}
+      #|  ((n : Num) - 1 < n) == !(n == 0)
+      #|  (n : Num) - 1
+      #|  1 < (n : Num) \226\134\146 !(n == 0)
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (n : Num) <= 1
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 m : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 polytope(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 aff_dim(c) <= int_of_num(n)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, IN(c, m) && face_of(f, c) \226\134\146 IN(f, m)) && (\226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, IN(c1, m) && IN(c2, m) \226\134\146 face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2)) \226\134\146 (\226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, simplicial_complex(t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 aff_dim(k) <= int_of_num(n)) && UNIONS(t) == UNIONS(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c))))
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 c == {}
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
       #|  UNIONS {{f:real^N->bool | f face_of c} | c IN m}
-      #|  n:num
-      #|  n:num
-      #|  &0:int <= d
-      #|  forall m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c <= d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                (forall k. k IN t ==> aff_dim k <= d) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)
-      #|  &(dimindex(:N)):int
-      #|  m:(real^N->bool)->bool
-      #|  forall m:(real^N->bool)->bool.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)
-      #|  (x:real^N) IN UNIONS f
-      #|  ?f. FINITE f /\\ f SUBSET t /\\ d:real^N->bool = UNIONS f
-      #|  ?d. d IN n /\\ (x:real^N) IN d /\\ d SUBSET c
-      #|  x:real^N
-      #|  {k:real^N->bool | k IN t /\\ k SUBSET c}
-      #|  c:real^N->bool
-      #|  t:(real^N->bool)->bool
-      #|  n:(real^N->bool)->bool
-      #|  n:(real^N->bool)->bool
-      #|  e:real
-      #|  &(dimindex(:N)):int
-      #|  m:(real^N->bool)->bool
-      #|  forall m:(real^N->bool)->bool e.\n        &0 < e /\\ FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. simplicial_complex t /\\\n                (forall k. k IN t ==> diameter k < e) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)
-      #|  t:real^N->bool
-      #|  s:real^N->bool
-      #|  forall s t:real^N->bool.\n          closed t /\\\n          closure(interior(s UNION t)) = s UNION t /\\\n          closure(interior s) = s /\\ closure(interior t) = {}\n          ==> s UNION t = s
-      #|  {x | x IN s /\\ ~P x} UNION {x | x IN s /\\ P x} = s
-      #|  u = UNIONS {c | c IN s /\\ ~(interior c = {})} UNION\n        UNIONS {c:real^N->bool | c IN s /\\ interior c = {}}
-      #|  forall s u:real^N->bool.\n        closure(interior u) = u /\\\n        FINITE s /\\ (forall c. c IN s ==> closed c /\\ convex c) /\\ UNIONS s = u\n        ==> UNIONS {c | c IN s /\\ ~(interior c = {})} = u
-      #|  c:real^N->bool
-      #|  c:real^N->bool
-      #|  (x:real^N) IN u /\\ x IN UNIONS s
-      #|  ?c. c IN s /\\ aff_dim(c:real^N->bool) < aff_dim(u:real^N->bool)
-      #|  x:real^N
-      #|  t = s ==> s SUBSET t
-      #|  c:real^N->bool
-      #|  closure(INTERS\n     {u DIFF c:real^N->bool |c| c IN s /\\ aff_dim c < aff_dim u})
-      #|  closed s /\\ u SUBSET closure s ==> u SUBSET s
-      #|  forall c. c IN s ==> aff_dim(c:real^N->bool) = aff_dim(u:real^N->bool)
-      #|  closed(u:real^N->bool)
-      #|  forall s u:real^N->bool.\n        FINITE s /\\ (forall c. c IN s ==> closed c /\\ convex c) /\\\n        UNIONS s = u /\\ convex u\n        ==> UNIONS {c | c IN s /\\ aff_dim c = aff_dim u} = u
-      #|  d = aff_dim(c:real^N->bool)
-      #|  {k:real^N->bool | k IN f /\\ aff_dim k = d}
-      #|  f:(real^N->bool)->bool
-      #|  c:real^N->bool
-      #|  forall c:real^N->bool. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f
-      #|  c:real^N->bool
-      #|  (q ==> p) /\\ q ==> p /\\ q
-      #|  {k:real^N->bool | k IN t /\\ aff_dim k = d}
-      #|  t:(real^N->bool)->bool
-      #|  m:(real^N->bool)->bool
-      #|  forall m:(real^N->bool)->bool d.\n        FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c = d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. triangulation t /\\\n                (forall k. k IN t ==> aff_dim k = d) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)
-      #|  d = aff_dim(c:real^N->bool)
-      #|  {k:real^N->bool | k IN f /\\ aff_dim k = d}
-      #|  f:(real^N->bool)->bool
-      #|  c:real^N->bool
-      #|  forall c:real^N->bool. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f
-      #|  c:real^N->bool
-      #|  (q ==> p) /\\ q ==> p /\\ q
-      #|  {k:real^N->bool | k IN t /\\ aff_dim k = d}
-      #|  t:(real^N->bool)->bool
-      #|  e:real
-      #|  m:(real^N->bool)->bool
-      #|  forall m:(real^N->bool)->bool d e.\n        &0 < e /\\ FINITE m /\\\n        (forall c. c IN m ==> polytope c) /\\\n        (forall c. c IN m ==> aff_dim c = d) /\\\n        (forall c1 c2. c1 IN m /\\ c2 IN m\n                 ==> c1 INTER c2 face_of c1 /\\ c1 INTER c2 face_of c2)\n        ==> ?t. triangulation t /\\\n                (forall k. k IN t ==> diameter k < e) /\\\n                (forall k. k IN t ==> aff_dim k = d) /\\\n                UNIONS t = UNIONS m /\\\n                (forall c. c IN m ==> ?f. FINITE f /\\ f SUBSET t /\\ c = UNIONS f) /\\\n                (forall k. k IN t ==> ?c. c IN m /\\ k SUBSET c)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  int_of_num(0) <= (d : Int)
+      #|  \226\136\128 m : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 d : Int, FINITE(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 polytope(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 aff_dim(c) <= d) && (\226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, IN(c1, m) && IN(c2, m) \226\134\146 face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2)) \226\134\146 (\226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, simplicial_complex(t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 aff_dim(k) <= d) && UNIONS(t) == UNIONS(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c))))
+      #|  int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 m : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 polytope(c)) && (\226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, IN(c1, m) && IN(c2, m) \226\134\146 face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2)) \226\134\146 (\226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, simplicial_complex(t) && UNIONS(t) == UNIONS(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c))))
+      #|  IN((x : Cart[Real, N]), UNIONS((f : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  \226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, (t : ((Cart[Real, N]) -> Bool) -> Bool)) && (d : (Cart[Real, N]) -> Bool) == UNIONS(f)
+      #|  \226\136\131 d : (Cart[Real, N]) -> Bool, IN(d, (n : ((Cart[Real, N]) -> Bool) -> Bool)) && IN((x : Cart[Real, N]), d) && SUBSET(d, (c : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  {(k : (Cart[Real, N]) -> Bool) | IN(k, (t : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET(k, (c : (Cart[Real, N]) -> Bool))}
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (n : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (n : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (e : Real)
+      #|  int_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 m : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 e : Real, real_of_num(0) < e && FINITE(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 polytope(c)) && (\226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, IN(c1, m) && IN(c2, m) \226\134\146 face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2)) \226\134\146 (\226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, simplicial_complex(t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 diameter(k) < e) && UNIONS(t) == UNIONS(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c))))
+      #|  (t : (Cart[Real, N]) -> Bool)
+      #|  (s : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed(t) && closure(interior(UNION(s, t))) == UNION(s, t) && closure(interior(s)) == s && closure(interior(t)) == {} \226\134\146 UNION(s, t) == s
+      #|  UNION({(x : _) | IN(x, (s : (_) -> Bool)) && !(P : (_) -> Bool)(x)}, {(x : _) | IN(x, s) && P(x)}) == s
+      #|  (u : (Cart[Real, N]) -> Bool) == UNION(UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, (s : ((Cart[Real, N]) -> Bool) -> Bool)) && !(interior(c) == {})}), UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, s) && interior(c) == {}}))
+      #|  \226\136\128 s : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, closure(interior(u)) == u && FINITE(s) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, s) \226\134\146 closed(c) && convex(c)) && UNIONS(s) == u \226\134\146 UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, s) && !(interior(c) == {})}) == u
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  IN((x : Cart[Real, N]), (u : (Cart[Real, N]) -> Bool)) && IN(x, UNIONS((s : ((Cart[Real, N]) -> Bool) -> Bool)))
+      #|  \226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, (s : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(c) < aff_dim((u : (Cart[Real, N]) -> Bool))
+      #|  (x : Cart[Real, N])
+      #|  (t : (_) -> Bool) == (s : (_) -> Bool) \226\134\146 SUBSET(s, t)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  closure(INTERS({DIFF((u : (Cart[Real, N]) -> Bool), c) | c : (Cart[Real, N]) -> Bool | IN(c, (s : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(c) < aff_dim(u)}))
+      #|  closed((s : (Cart[Real, _]) -> Bool)) && SUBSET((u : (Cart[Real, _]) -> Bool), closure(s)) \226\134\146 SUBSET(u, s)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (s : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 aff_dim(c) == aff_dim((u : (Cart[Real, N]) -> Bool))
+      #|  closed((u : (Cart[Real, N]) -> Bool))
+      #|  \226\136\128 s : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, FINITE(s) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, s) \226\134\146 closed(c) && convex(c)) && UNIONS(s) == u && convex(u) \226\134\146 UNIONS({(c : (Cart[Real, N]) -> Bool) | IN(c, s) && aff_dim(c) == aff_dim(u)}) == u
+      #|  (d : Int) == aff_dim((c : (Cart[Real, N]) -> Bool))
+      #|  {(k : (Cart[Real, N]) -> Bool) | IN(k, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(k) == (d : Int)}
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, (t : ((Cart[Real, N]) -> Bool) -> Bool)) && c == UNIONS(f))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
+      #|  {(k : (Cart[Real, N]) -> Bool) | IN(k, (t : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(k) == (d : Int)}
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 m : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 d : Int, FINITE(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 polytope(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 aff_dim(c) == d) && (\226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, IN(c1, m) && IN(c2, m) \226\134\146 face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2)) \226\134\146 (\226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 aff_dim(k) == d) && UNIONS(t) == UNIONS(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c))))
+      #|  (d : Int) == aff_dim((c : (Cart[Real, N]) -> Bool))
+      #|  {(k : (Cart[Real, N]) -> Bool) | IN(k, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(k) == (d : Int)}
+      #|  (f : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  \226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, (t : ((Cart[Real, N]) -> Bool) -> Bool)) && c == UNIONS(f))
+      #|  (c : (Cart[Real, N]) -> Bool)
+      #|  ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
+      #|  {(k : (Cart[Real, N]) -> Bool) | IN(k, (t : ((Cart[Real, N]) -> Bool) -> Bool)) && aff_dim(k) == (d : Int)}
+      #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  (e : Real)
+      #|  (m : ((Cart[Real, N]) -> Bool) -> Bool)
+      #|  \226\136\128 m : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 d : Int, \226\136\128 e : Real, real_of_num(0) < e && FINITE(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 polytope(c)) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 aff_dim(c) == d) && (\226\136\128 c1 : (Cart[Real, N]) -> Bool, \226\136\128 c2 : (Cart[Real, N]) -> Bool, IN(c1, m) && IN(c2, m) \226\134\146 face_of(INTER(c1, c2), c1) && face_of(INTER(c1, c2), c2)) \226\134\146 (\226\136\131 t : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 diameter(k) < e) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 aff_dim(k) == d) && UNIONS(t) == UNIONS(m) && (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, m) \226\134\146 (\226\136\131 f : ((Cart[Real, N]) -> Bool) -> Bool, FINITE(f) && SUBSET(f, t) && c == UNIONS(f))) && (\226\136\128 k : (Cart[Real, N]) -> Bool, IN(k, t) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, m) && SUBSET(k, c))))
       #|face_of =  |- (#forall:fun(fun(fun(cart(real,'?1),bool),bool),bool) (\s:fun(cart(real,'?1),bool). (#forall:fun(fun(fun(cart(real,'?1),bool),bool),bool) (\t:fun(cart(real,'?1),bool). ((#=:fun(bool,fun(bool,bool)) ((#face_of:fun(fun(cart(real,'?1),bool),fun(fun(cart(real,'?1),bool),bool)) t:fun(cart(real,'?1),bool)) s:fun(cart(real,'?1),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'?1),bool),fun(fun(cart(real,'?1),bool),bool)) t:fun(cart(real,'?1),bool)) s:fun(cart(real,'?1),bool))) ((#/\:fun(bool,fun(bool,bool)) (#convex:fun(fun(cart(real,'?1),bool),bool) t:fun(cart(real,'?1),bool))) (#forall:fun(fun(cart(real,'?1),bool),bool) (\a:cart(real,'?1). (#forall:fun(fun(cart(real,'?1),bool),bool) (\b:cart(real,'?1). (#forall:fun(fun(cart(real,'?1),bool),bool) (\x:cart(real,'?1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) a:cart(real,'?1)) s:fun(cart(real,'?1),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) b:cart(real,'?1)) s:fun(cart(real,'?1),bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) x:cart(real,'?1)) t:fun(cart(real,'?1),bool))) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) x:cart(real,'?1)) (#open_segment:fun(prod(cart(real,'?1),cart(real,'?1)),fun(cart(real,'?1),bool)) ((#,:fun(cart(real,'?1),fun(cart(real,'?1),prod(cart(real,'?1),cart(real,'?1)))) a:cart(real,'?1)) b:cart(real,'?1)))))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) a:cart(real,'?1)) t:fun(cart(real,'?1),bool))) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) b:cart(real,'?1)) t:fun(cart(real,'?1),bool)))))))))))))))))
       #|FACE_OF_TRANSLATION_EQ =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\f:fun(cart(real,'N),bool). (#forall:fun(fun(fun(cart(real,'N),bool),bool),bool) (\s:fun(cart(real,'N),bool). ((#=:fun(bool,fun(bool,bool)) ((#face_of:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (\x:cart(real,'N). ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) x:cart(real,'N)))) f:fun(cart(real,'N),bool))) ((#IMAGE:fun(fun(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) (\x:cart(real,'N). ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) a:cart(real,'N)) x:cart(real,'N)))) s:fun(cart(real,'N),bool)))) ((#face_of:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) f:fun(cart(real,'N),bool)) s:fun(cart(real,'N),bool)))))))))
       #|FACE_OF_LINEAR_IMAGE =  |- (#forall:fun(fun(fun(cart(real,'M),cart(real,'N)),bool),bool) (\f:fun(cart(real,'M),cart(real,'N)). (#forall:fun(fun(fun(cart(real,'M),bool),bool),bool) (\c:fun(cart(real,'M),bool). (#forall:fun(fun(fun(cart(real,'M),bool),bool),bool) (\s:fun(cart(real,'M),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#linear:fun(fun(cart(real,'M),cart(real,'N)),bool) f:fun(cart(real,'M),cart(real,'N)))) (#forall:fun(fun(cart(real,'M),bool),bool) (\x:cart(real,'M). (#forall:fun(fun(cart(real,'M),bool),bool) (\y:cart(real,'M). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,'N),fun(cart(real,'N),bool)) (f:fun(cart(real,'M),cart(real,'N)) x:cart(real,'M))) (f:fun(cart(real,'M),cart(real,'N)) y:cart(real,'M)))) ((#=:fun(cart(real,'M),fun(cart(real,'M),bool)) x:cart(real,'M)) y:cart(real,'M))))))))) ((#=:fun(bool,fun(bool,bool)) ((#face_of:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) ((#IMAGE:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),fun(cart(real,'N),bool))) f:fun(cart(real,'M),cart(real,'N))) c:fun(cart(real,'M),bool))) ((#IMAGE:fun(fun(cart(real,'M),cart(real,'N)),fun(fun(cart(real,'M),bool),fun(cart(real,'N),bool))) f:fun(cart(real,'M),cart(real,'N))) s:fun(cart(real,'M),bool)))) ((#face_of:fun(fun(cart(real,'M),bool),fun(fun(cart(real,'M),bool),bool)) c:fun(cart(real,'M),bool)) s:fun(cart(real,'M),bool))))))))))
