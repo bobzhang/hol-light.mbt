@@ -75093,240 +75093,240 @@ test "Multivariate/cvectors matches Multivariate/cvectors.ml" {
       #|Warning: inventing type variables
       #|0..0..1..solved at 4
       #|Multivariate/cvectors quotations (416):
-      #|  forall x:real^N i. 1 <= i /\\ i <= dimindex (:N) ==> x$i <= norm x
-      #|  forall x. Re x <= norm x /\\ Im x <= norm x /\\ abs(Re x) <= norm x\n  /\\ abs(Im x) <= norm x
-      #|  forall x. &0 <= norm x + Re x /\\ &0 <= norm x - Re x
-      #|  ~(2=0)
-      #|  forall x y.\n    real x /\\ real y ==> norm (x + ii * y) pow 2 = norm x pow 2 + norm y pow 2
-      #|  (p <=> r \\/ q) ==> (p /\\ ~r ==> q) 
-      #|  (y/z*t)*z=(y/z*z)*t:complex
-      #|  x=y/z*t <=> x*z=(y/z*t)*z:complex
-      #|  forall x y z t. ~(z=Cx(&0)) ==> (x = y/z * t <=> x*z = y * t)
-      #|  z:complex
-      #|  x:complex
-      #|  Im y/abs(Im y) * sqrt x * sqrt (norm y-Re y) / sqrt(&2) =\n        Im y/abs (Im y) * (sqrt x * sqrt (norm y - Re y))/sqrt(&2)
-      #|  sqrt x * sqrt (norm y + Re y) / sqrt (&2) =\n        (sqrt x * sqrt (norm y + Re y)) / sqrt (&2)
-      #|  &0 <= x
-      #|  sqrt ((norm y + Re y) / &2) =\n      sqrt (norm y + Re y) / sqrt (&2)
-      #|  sqrt ((x * (norm y + Re y)) / &2) =\n      sqrt (x * (norm y + Re y)) / sqrt (&2)
-      #|  sqrt ((norm y - Re y) / &2) =\n      sqrt (norm y - Re y) / sqrt (&2)
-      #|  sqrt ((x * (norm y - Re y)) / &2) =\n      sqrt (x * (norm y - Re y)) / sqrt (&2)
-      #|  sqrt x * Im y / abs(Im y) * sqrt ((norm y-Re y) / &2) =\n      Im y / abs (Im y) * sqrt x * sqrt ((norm y - Re y) / &2)
-      #|  Im y * x * inv x * inv (abs(Im y)) =\n        Im y * (x * inv x) * inv (abs (Im y)) 
-      #|  (x*Im y) / (x*abs(Im y)) = Im y / abs(Im y)
-      #|  ~(x<y /\\ y<x)
-      #|  ~(x<y /\\ ~(x <=y))
-      #|  ~(&0 <= y) = y < &0
-      #|  ~(&0 <= y) = &0 > y
-      #|  forall x y. &0 < x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y
-      #|  forall x y. &0 <= x ==> csqrt(Cx x * y) = Cx(sqrt x) * csqrt y
-      #|  forall x y:real. (x+y) pow 2 = x pow 2 + y pow 2 + &2 * x * y
-      #|  forall x y:complex. (x+y) pow 2 = x pow 2 + y pow 2 + Cx(&2) * x * y
-      #|  forall s n. FINITE(s INTER (0..n))
-      #|  forall x y. norm x <= norm (pastecart x y)
-      #|  forall x y. norm y <= norm (pastecart x y)
-      #|  forall s f1:num->real^N f2:num->real^M l1 l2. (f1 sums l1) s /\\ (f2 sums l2) s\n    <=> ((\\x. pastecart (f1 x) (f2 x)) sums (pastecart l1 l2)) s
-      #|  forall s f l g. linear g ==> ((f sums l) s ==> ((g o f) sums (g l)) s)
-      #|  real_of_complex c = @r. c = Cx r
-      #|  forall c. real c ==> Cx(real_of_complex c) = c
-      #|  forall c. real c ==> real_of_complex c = Re c
-      #|  forall r. real_of_complex (Cx r) = r
-      #|  forall c. real c ==> norm c = abs (real_of_complex c)
-      #|  forall x y. real x /\\ real y\n    ==> real_of_complex (x+y) = real_of_complex x + real_of_complex y
-      #|  forall x y. real x /\\ real y ==> real (x*y)
-      #|  forall x y. real x /\\ real y\n    ==> real_of_complex (x*y) = real_of_complex x * real_of_complex y
-      #|  forall x. real x ==> (real_of_complex x = &0 <=> x = Cx(&0))
-      #|  forall x. real(cnj x + x) /\\ real(x + cnj x)
-      #|  vector_const (k:A) :A^N = lambda i. k
-      #|  vector_map (f:A->B) (v:A^N) :B^N = lambda i. f(v$i)
-      #|  vector_map2 (f:A->B->C) (v1:A^N) (v2:B^N) :C^N =\n    lambda i. f (v1$i) (v2$i)
-      #|  vector_map3 (f:A->B->C->D) (v1:A^N) (v2:B^N) (v3:C^N) :D^N =\n    lambda i. f (v1$i) (v2$i) (v3$i)
-      #|  forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ (forall x:A^N. x$i = x$k)\n  /\\ (forall x:B^N. x$i = x$k) /\\ (forall x:C^N. x$i = x$k) /\\ (forall x:D^N. x$i = x$k)
-      #|  forall i k. ((vector_const k):A^N)$i = k
-      #|  forall i f:A->B v:A^N. (vector_map f v)$i = f (v$i)
-      #|  forall i f:A->B->C v1:A^N v2. (vector_map2 f v1 v2)$i = f (v1$i) (v2$i)
-      #|  forall i f:A->B->C->D v1:A^N v2 v3. (vector_map3 f v1 v2 v3)$i =\n    f (v1$i) (v2$i) (v3$i)
-      #|  forall f:A->B k. vector_map f ((vector_const k):A^N) = vector_const (f k)
-      #|  forall f:A->B g:C->A v:C^N.\n    vector_map f (vector_map g v) = vector_map (f o g) v
-      #|  forall f:A->B g:C->D->A u v:D^N.\n    vector_map f (vector_map2 g u v) = vector_map2 (\\x y. f (g x y)) u v
-      #|  forall f:A->B->C k v:B^N.\n    vector_map2 f (vector_const k) v = vector_map (f k) v
-      #|  forall f:A->B->C k v:A^N.\n    vector_map2 f v (vector_const k) = vector_map (\\x. f x k) v
-      #|  forall f:A->B->C g:D->A v1 v2:B^N.\n    vector_map2 f (vector_map g v1) v2 = vector_map2 (f o g) v1 v2
-      #|  forall f:A->B->C g:D->B v1 v2:D^N.\n    vector_map2 f v1 (vector_map g v2) = vector_map2 (\\x y. f x (g y)) v1 v2
-      #|  forall f:A->B->C g:D->E->A v1 v2 v3:B^N.\n    vector_map2 f (vector_map2 g v1 v2) v3 =\n      vector_map3 (\\x y. f (g x y)) v1 v2 v3
-      #|  forall f:A->B->C g:D->E->B v1 v2 v3:E^N.\n    vector_map2 f v1 (vector_map2 g v2 v3) =\n      vector_map3 (\\x y z. f x (g y z)) v1 v2 v3
-      #|  forall f:complex->complex g. f = vector_map g\n    <=> forall z. f z = complex (g (Re z), g (Im z))
-      #|  (--):complex->complex = vector_map ((--):real->real)
-      #|  (--):real^N->real^N = vector_map ((--):real->real)
-      #|  forall f:A^N->B^N g:C^N->A^N f' g'. f = vector_map f' /\\ g = vector_map g' ==>\n    f o g = vector_map (f' o g')
-      #|  forall f:complex->complex->complex g. f = vector_map2 g <=>\n    forall z1 z2. f z1 z2 = complex (g (Re z1) (Re z2), g (Im z1) (Im z2))
-      #|  forall f:complex->complex->complex g:complex->complex f' g'.\n    f = vector_map2 f' /\\ g = vector_map g'\n      ==> (\\x y. f x (g y)) = vector_map2 (\\x y. f' x (g' y))
-      #|  (+):complex->complex->complex = vector_map2 ((+):real->real->real)
-      #|  (+):real^N->real^N->real^N = vector_map2 ((+):real->real->real)
-      #|  (-) = \\x y:real. x-y
-      #|  (-) = \\x y:complex. x-y
-      #|  (-):complex->complex->complex = vector_map2 ((-):real->real->real)
-      #|  (-):real^N->real^N->real^N = vector_map2 ((-):real->real->real)
-      #|  1<= i-dimindex(:N) /\\ i-dimindex(:N) <= dimindex(:M)
-      #|  forall f:A->B x:A^N y:A^M.\n    pastecart (vector_map f x) (vector_map f y) =\n      vector_map f (pastecart x y)
-      #|  1<= i-dimindex(:N) /\\ i-dimindex(:N) <= dimindex(:M)
-      #|  forall f:A->B->C x1:A^N x2 y1:A^M y2.\n    pastecart (vector_map2 f x1 x2) (vector_map2 f y1 y2)\n      = vector_map2 f (pastecart x1 y1) (pastecart x2 y2)
-      #|  vector_zip (v1:A^N) (v2:B^N) : (A#B)^N = lambda i. (v1$i,v2$i)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) <= (norm : (Cart[Real, N]) -> Real)(x)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], Re(x) <= norm(x) && Im(x) <= norm(x) && abs(Re(x)) <= norm(x) && abs(Im(x)) <= norm(x)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], real_of_num(0) <= norm(x) + Re(x) && real_of_num(0) <= norm(x) - Re(x)
+      #|  !(2 == 0)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], real(x) && real(y) \226\134\146 pow(norm(x + ii * y), 2) == pow(norm(x), 2) + pow(norm(y), 2)
+      #|  (p : Bool) == ((r : Bool) || (q : Bool)) \226\134\146 p && !r \226\134\146 q
+      #|  (y : Cart[Real, Tybit0[Unit]]) / (z : Cart[Real, Tybit0[Unit]]) * (t : Cart[Real, Tybit0[Unit]]) * z == y / z * z * t
+      #|  ((x : Cart[Real, Tybit0[Unit]]) == (y : Cart[Real, Tybit0[Unit]]) / (z : Cart[Real, Tybit0[Unit]]) * (t : Cart[Real, Tybit0[Unit]])) == (x * z == y / z * t * z)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 t : Cart[Real, Tybit0[Unit]], !(z == Cx(real_of_num(0))) \226\134\146 (x == y / z * t) == (x * z == y * t)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  Im((y : Cart[Real, Tybit0[Unit]])) / abs(Im(y)) * (sqrt((x : Real)) * (sqrt(norm(y) - Re(y)) / sqrt(real_of_num(2)))) == Im(y) / abs(Im(y)) * (sqrt(x) * sqrt(norm(y) - Re(y)) / sqrt(real_of_num(2)))
+      #|  sqrt((x : Real)) * (sqrt(norm((y : Cart[Real, Tybit0[Unit]])) + Re(y)) / sqrt(real_of_num(2))) == sqrt(x) * sqrt(norm(y) + Re(y)) / sqrt(real_of_num(2))
+      #|  real_of_num(0) <= (x : Real)
+      #|  sqrt((norm((y : Cart[Real, Tybit0[Unit]])) + Re(y)) / real_of_num(2)) == sqrt(norm(y) + Re(y)) / sqrt(real_of_num(2))
+      #|  sqrt((x : Real) * (norm((y : Cart[Real, Tybit0[Unit]])) + Re(y)) / real_of_num(2)) == sqrt(x * (norm(y) + Re(y))) / sqrt(real_of_num(2))
+      #|  sqrt((norm((y : Cart[Real, Tybit0[Unit]])) - Re(y)) / real_of_num(2)) == sqrt(norm(y) - Re(y)) / sqrt(real_of_num(2))
+      #|  sqrt((x : Real) * (norm((y : Cart[Real, Tybit0[Unit]])) - Re(y)) / real_of_num(2)) == sqrt(x * (norm(y) - Re(y))) / sqrt(real_of_num(2))
+      #|  sqrt((x : Real)) * (Im((y : Cart[Real, Tybit0[Unit]])) / abs(Im(y)) * sqrt((norm(y) - Re(y)) / real_of_num(2))) == Im(y) / abs(Im(y)) * (sqrt(x) * sqrt((norm(y) - Re(y)) / real_of_num(2)))
+      #|  Im((y : Cart[Real, Tybit0[Unit]])) * ((x : Real) * (inv(x) * inv(abs(Im(y))))) == Im(y) * (x * inv(x) * inv(abs(Im(y))))
+      #|  (x : Real) * Im((y : Cart[Real, Tybit0[Unit]])) / (x * abs(Im(y))) == Im(y) / abs(Im(y))
+      #|  !((x : Real) < (y : Real) && y < x)
+      #|  !((x : Real) < (y : Real) && !(x <= y))
+      #|  !(real_of_num(0) <= (y : Real)) == (y < real_of_num(0))
+      #|  !(real_of_num(0) <= (y : Real)) == (real_of_num(0) > y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Cart[Real, Tybit0[Unit]], real_of_num(0) < x \226\134\146 csqrt(Cx(x) * y) == Cx(sqrt(x)) * csqrt(y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Cart[Real, Tybit0[Unit]], real_of_num(0) <= x \226\134\146 csqrt(Cx(x) * y) == Cx(sqrt(x)) * csqrt(y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, pow(x + y, 2) == pow(x, 2) + (pow(y, 2) + real_of_num(2) * (x * y))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], pow(x + y, 2) == pow(x, 2) + (pow(y, 2) + Cx(real_of_num(2)) * (x * y))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 n : Num, FINITE(INTER(s, op_dot_dot(0, n)))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], norm(x) <= norm(pastecart(x, y))
+      #|  \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], norm(y) <= norm(pastecart(x, y))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 f1 : (Num) -> Cart[Real, N], \226\136\128 f2 : (Num) -> Cart[Real, M], \226\136\128 l1 : Cart[Real, N], \226\136\128 l2 : Cart[Real, M], (sums(f1, l1, s) && sums(f2, l2, s)) == sums((x : Num) => pastecart(f1(x), f2(x)), pastecart(l1, l2), s)
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 f : (Num) -> Cart[Real, _], \226\136\128 l : Cart[Real, _], \226\136\128 g : (Cart[Real, _]) -> Cart[Real, _], linear(g) \226\134\146 sums(f, l, s) \226\134\146 sums(o(g, f), g(l), s)
+      #|  (real_of_complex : (Cart[Real, Tybit0[Unit]]) -> Real)((c : Cart[Real, Tybit0[Unit]])) == select((r : Real) => c == Cx(r))
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], real(c) \226\134\146 Cx(real_of_complex(c)) == c
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], real(c) \226\134\146 real_of_complex(c) == Re(c)
+      #|  \226\136\128 r : Real, real_of_complex(Cx(r)) == r
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], real(c) \226\134\146 norm(c) == abs(real_of_complex(c))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], real(x) && real(y) \226\134\146 real_of_complex(x + y) == real_of_complex(x) + real_of_complex(y)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], real(x) && real(y) \226\134\146 real(x * y)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], real(x) && real(y) \226\134\146 real_of_complex(x * y) == real_of_complex(x) * real_of_complex(y)
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], real(x) \226\134\146 (real_of_complex(x) == real_of_num(0)) == (x == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], real(cnj(x) + x) && real(x + cnj(x))
+      #|  (vector_const : (A) -> Cart[A, N])((k : A)) == lambda((i : Num) => k)
+      #|  (vector_map : ((A) -> B, Cart[A, N]) -> Cart[B, N])((f : (A) -> B), (v : Cart[A, N])) == lambda((i : Num) => f(op_dollar(v, i)))
+      #|  (vector_map2 : ((A, B) -> C, Cart[A, N], Cart[B, N]) -> Cart[C, N])((f : (A, B) -> C), (v1 : Cart[A, N]), (v2 : Cart[B, N])) == lambda((i : Num) => f(op_dollar(v1, i), op_dollar(v2, i)))
+      #|  (vector_map3 : ((A, B, C) -> D, Cart[A, N], Cart[B, N], Cart[C, N]) -> Cart[D, N])((f : (A, B, C) -> D), (v1 : Cart[A, N]), (v2 : Cart[B, N]), (v3 : Cart[C, N])) == lambda((i : Num) => f(op_dollar(v1, i), op_dollar(v2, i), op_dollar(v3, i)))
+      #|  \226\136\128 i : Num, \226\136\131 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 x : Cart[A, N], (op_dollar : (Cart[A, N], Num) -> A)(x, i) == (op_dollar : (Cart[A, N], Num) -> A)(x, k)) && (\226\136\128 x : Cart[B, N], (op_dollar : (Cart[B, N], Num) -> B)(x, i) == (op_dollar : (Cart[B, N], Num) -> B)(x, k)) && (\226\136\128 x : Cart[C, N], (op_dollar : (Cart[C, N], Num) -> C)(x, i) == (op_dollar : (Cart[C, N], Num) -> C)(x, k)) && (\226\136\128 x : Cart[D, N], (op_dollar : (Cart[D, N], Num) -> D)(x, i) == (op_dollar : (Cart[D, N], Num) -> D)(x, k))
+      #|  \226\136\128 i : Num, \226\136\128 k : A, (op_dollar : (Cart[A, N], Num) -> A)((vector_const : (A) -> Cart[A, N])(k), i) == k
+      #|  \226\136\128 i : Num, \226\136\128 f : (A) -> B, \226\136\128 v : Cart[A, N], op_dollar(vector_map(f, v), i) == f(op_dollar(v, i))
+      #|  \226\136\128 i : Num, \226\136\128 f : (A, B) -> C, \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[B, N], op_dollar(vector_map2(f, v1, v2), i) == f(op_dollar(v1, i), op_dollar(v2, i))
+      #|  \226\136\128 i : Num, \226\136\128 f : (A, B, C) -> D, \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[B, N], \226\136\128 v3 : Cart[C, N], op_dollar(vector_map3(f, v1, v2, v3), i) == f(op_dollar(v1, i), op_dollar(v2, i), op_dollar(v3, i))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 k : A, (vector_map : ((A) -> B, Cart[A, N]) -> Cart[B, N])(f, (vector_const : (A) -> Cart[A, N])(k)) == (vector_const : (B) -> Cart[B, N])(f(k))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (C) -> A, \226\136\128 v : Cart[C, N], vector_map(f, vector_map(g, v)) == vector_map(o(f, g), v)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (C, D) -> A, \226\136\128 u : Cart[C, N], \226\136\128 v : Cart[D, N], vector_map(f, vector_map2(g, u, v)) == vector_map2((x : C) => (y : D) => f(g(x, y)), u, v)
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 k : A, \226\136\128 v : Cart[B, N], vector_map2(f, vector_const(k), v) == vector_map(f(k), v)
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 k : B, \226\136\128 v : Cart[A, N], vector_map2(f, v, vector_const(k)) == vector_map((x : A) => f(x, k), v)
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 g : (D) -> A, \226\136\128 v1 : Cart[D, N], \226\136\128 v2 : Cart[B, N], vector_map2(f, vector_map(g, v1), v2) == vector_map2(o(f, g), v1, v2)
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 g : (D) -> B, \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[D, N], vector_map2(f, v1, vector_map(g, v2)) == vector_map2((x : A) => (y : D) => f(x, g(y)), v1, v2)
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 g : (D, E) -> A, \226\136\128 v1 : Cart[D, N], \226\136\128 v2 : Cart[E, N], \226\136\128 v3 : Cart[B, N], vector_map2(f, vector_map2(g, v1, v2), v3) == vector_map3((x : D) => (y : E) => f(g(x, y)), v1, v2, v3)
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 g : (D, E) -> B, \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[D, N], \226\136\128 v3 : Cart[E, N], vector_map2(f, v1, vector_map2(g, v2, v3)) == vector_map3((x : A) => (y : D) => (z : E) => f(x, g(y, z)), v1, v2, v3)
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Real, (f == vector_map(g)) == (\226\136\128 z : Cart[Real, Tybit0[Unit]], f(z) == complex((g(Re(z)), g(Im(z)))))
+      #|  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == (vector_map : ((Real) -> Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(op_minus_minus)
+      #|  (op_minus_minus : (Cart[Real, N]) -> Cart[Real, N]) == (vector_map : ((Real) -> Real, Cart[Real, N]) -> Cart[Real, N])(op_minus_minus)
+      #|  \226\136\128 f : (Cart[A, N]) -> Cart[B, N], \226\136\128 g : (Cart[C, N]) -> Cart[A, N], \226\136\128 f' : (A) -> B, \226\136\128 g' : (C) -> A, f == vector_map(f') && g == vector_map(g') \226\134\146 o(f, g) == vector_map(o(f', g'))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real, Real) -> Real, (f == vector_map2(g)) == (\226\136\128 z1 : Cart[Real, Tybit0[Unit]], \226\136\128 z2 : Cart[Real, Tybit0[Unit]], f(z1, z2) == complex((g(Re(z1), Re(z2)), g(Im(z1), Im(z2)))))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : (Real, Real) -> Real, \226\136\128 g' : (Real) -> Real, f == vector_map2(f') && g == vector_map(g') \226\134\146 ((x : Cart[Real, Tybit0[Unit]]) => (y : Cart[Real, Tybit0[Unit]]) => f(x, g(y))) == vector_map2((x : Real) => (y : Real) => f'(x, g'(y)))
+      #|  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == (vector_map2 : ((Real, Real) -> Real, Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(op_plus)
+      #|  (op_plus : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]) == (vector_map2 : ((Real, Real) -> Real, Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(op_plus)
+      #|  op_minus == ((x : Real) => (y : Real) => x - y)
+      #|  op_minus == ((x : Cart[Real, Tybit0[Unit]]) => (y : Cart[Real, Tybit0[Unit]]) => x - y)
+      #|  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == (vector_map2 : ((Real, Real) -> Real, Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(op_minus)
+      #|  (op_minus : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N]) == (vector_map2 : ((Real, Real) -> Real, Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])(op_minus)
+      #|  1 <= (i : Num) - (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && i - (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))
+      #|  \226\136\128 f : (A) -> B, \226\136\128 x : Cart[A, N], \226\136\128 y : Cart[A, M], pastecart(vector_map(f, x), vector_map(f, y)) == vector_map(f, pastecart(x, y))
+      #|  1 <= (i : Num) - (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && i - (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 x1 : Cart[A, N], \226\136\128 x2 : Cart[B, N], \226\136\128 y1 : Cart[A, M], \226\136\128 y2 : Cart[B, M], pastecart(vector_map2(f, x1, x2), vector_map2(f, y1, y2)) == vector_map2(f, pastecart(x1, y1), pastecart(x2, y2))
+      #|  (vector_zip : (Cart[A, N], Cart[B, N]) -> Cart[(A, B), N])((v1 : Cart[A, N]), (v2 : Cart[B, N])) == lambda((i : Num) => (op_dollar(v1, i), op_dollar(v2, i)))
       #|  :C
       #|  :A#B
-      #|  forall i v1:A^N v2:B^N. (vector_zip v1 v2)$i = (v1$i,v2$i)
-      #|  vector_unzip (v:(A#B)^N):(A^N)#(B^N) = vector_map FST v,vector_map SND v
-      #|  forall i v:(A#B)^N. (FST (vector_unzip v))$i = FST (v$i)\n    /\\ (SND (vector_unzip v))$i = SND (v$i)
-      #|  forall f:A->B->C v1:A^N v2:B^N.\n    vector_map2 f v1 v2 = vector_map (UNCURRY f) (vector_zip v1 v2)
+      #|  \226\136\128 i : Num, \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[B, N], op_dollar(vector_zip(v1, v2), i) == (op_dollar(v1, i), op_dollar(v2, i))
+      #|  (vector_unzip : (Cart[(A, B), N]) -> (Cart[A, N], Cart[B, N]))((v : Cart[(A, B), N])) == (vector_map(FST, v), vector_map(SND, v))
+      #|  \226\136\128 i : Num, \226\136\128 v : Cart[(A, B), N], op_dollar(FST(vector_unzip(v)), i) == FST(op_dollar(v, i)) && op_dollar(SND(vector_unzip(v)), i) == SND(op_dollar(v, i))
+      #|  \226\136\128 f : (A, B) -> C, \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[B, N], vector_map2(f, v1, v2) == vector_map(UNCURRY(f), vector_zip(v1, v2))
       #|  :A-> B-> B
-      #|  cvector_zero:complex^N = vector_const (Cx(&0))
-      #|  cvector_neg :complex^N->complex^N = vector_map (--)
-      #|  cvector_add :complex^N->complex^N->complex^N = vector_map2 (+)
-      #|  cvector_sub :complex^N->complex^N->complex^N = vector_map2 (-)
-      #|  (cvector_mul:complex->complex^N->complex^N) a = vector_map (( * ) a)
-      #|  (%):real->real^N->real^N
-      #|  (cvector_neg):complex^N->complex^N
-      #|  (cvector_add):complex^N->complex^N->complex^N
-      #|  (cvector_sub):complex^N->complex^N->complex^N
-      #|  (cvector_mul):complex->complex^N->complex^N
-      #|  forall i. (cvector_zero:complex^N)$i = Cx(&0)
-      #|  forall x:complex^N. ~(x=cvector_zero)\n    <=> ?i. 1 <= i /\\ i <= dimindex(:N) /\\ ~(x$i = Cx(&0))
-      #|  forall X Y:complex^N i. ((X + Y)$i = X$i + Y$i)
-      #|  forall X:complex^N Y i. ((X - Y)$i = X$i - Y$i)
-      #|  forall X:complex^N i. ((--X)$i = --(X$i))
-      #|  forall c:complex X:complex^N i. ((c % X)$i = c * X$i)
-      #|  (a ==> b ==> c) ==> (a ==> b) ==> (a ==> c)
-      #|  (a ==> b) \\/ (a ==> c) <=> a ==> b \\/ c
-      #|  (a ==> b) /\\ (a ==> c) <=> a ==> b /\\ c
-      #|  forall x y:complex^N. x + y = y + x
-      #|  forall x y z:complex^N. x + (y + z) = (x + y) + z
-      #|  forall x:complex^N. x + cvector_zero = x /\\ cvector_zero + x = x
-      #|  forall x:complex^N. x + -- x = cvector_zero /\\ --x + x = cvector_zero
-      #|  forall a b x:complex^N. a % (b % x) = (a * b) % x
-      #|  forall c x y:complex^N. c % (x - y) = c % x - c % y
-      #|  forall a b x:complex^N. (a + b) % x = a % x + b % x
-      #|  forall x:complex^N. Cx(&1) % x = x
-      #|  forall x:complex^N. x - x = cvector_zero
-      #|  forall x y:complex^N. x - (x + y) = --y
-      #|  forall x y:complex^N. --(x - y) = y - x
-      #|  forall x y:complex^N. (x - y = cvector_zero) <=> (x = y)
-      #|  forall x. Cx(&0) % x = cvector_zero
-      #|  forall x y:complex^N. (x - y) + y = x
-      #|  forall x y:complex^N. y + (x - y) = x
-      #|  forall c x y:complex^N. c % (x + y) = c % x + c % y
-      #|  forall a b x:complex^N. (a + b) % x = a % x + b % x
-      #|  forall a b x:complex^N. (a - b) % x = a % x - b % x
-      #|  forall x y:complex^N. (x + y:complex^N) - x = y
-      #|  forall x y:complex^N. (x + y = x) <=> (y = cvector_zero)
-      #|  forall x y:complex^N. x - y = x + --(y:complex^N)
-      #|  forall x:complex^N. x - cvector_zero = x
-      #|  forall c:complex. c % cvector_zero = cvector_zero
-      #|  forall x:complex^N. Cx(&0) % x = cvector_zero
-      #|  a=Cx(&0)
-      #|  forall a:complex x:complex^N.\n    (a % x = cvector_zero <=> a = Cx(&0) \\/ x = cvector_zero)
-      #|  forall x:complex^N. --x = (--(Cx(&1))) % x
-      #|  forall x:complex^N. cvector_zero - x = --x
-      #|  forall x:complex^N. --(--(x:complex^N)) = x
-      #|  forall c x:complex^N. --c % x = --(c % x)
-      #|  forall c x:complex^N. c % --x = --(c % x)
-      #|  --cvector_zero = cvector_zero
-      #|  forall x:complex^N. --x = cvector_zero <=> x = cvector_zero
-      #|  forall x y z:complex^N.\n    (x + y = y + x) /\\ ((x + y) + z = x + y + z) /\\ (x + y + z = y + x + z)
-      #|  forall a x y:complex^N. a % x = a % y <=> a = Cx(&0) \\/ x = y
-      #|  forall a b x:complex^N. a % x = b % x <=> a = b \\/ x = cvector_zero
-      #|  clinear (f:complex^M->complex^N)\n    <=> (forall x y. f(x + y) = f(x) + f(y)) /\\ (forall c x. f(c % x) = c % f(x))
-      #|  forall f:complex^M->complex^N c. clinear f ==> clinear (\\x. c % f x)
-      #|  forall f:complex^M->complex^N. clinear f ==> clinear (\\x. --(f x))
-      #|  forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x + g x)
-      #|  forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (\\x. f x - g x)
-      #|  forall f:complex^M->complex^N g. clinear f /\\ clinear g ==> clinear (g o f)
-      #|  clinear (\\x:complex^N. x)
-      #|  clinear (I:complex^N->complex^N)
-      #|  clinear ((\\x. cvector_zero):complex^M->complex^N)
-      #|  clinear ((--):complex^N->complex^N)
-      #|  forall f:complex^M->complex^N v:complex^P k.\n     clinear f /\\ 1 <= k /\\ k <= dimindex(:N) ==> clinear (\\x. (f x)$k % v)
-      #|  forall f:complex^M->complex^N. clinear f ==> (f cvector_zero = cvector_zero)
-      #|  forall f:complex^M->complex^N c x. clinear f ==> (f (c % x) = c % f x)
-      #|  forall f:complex^M->complex^N x. clinear f ==> (f (--x) = --(f x))
-      #|  forall f:complex^M->complex^N x y. clinear f ==> (f (x + y) = f x + f y)
-      #|  forall f:complex^M->complex^N x y. clinear f ==> (f(x - y) = f x - f y)
-      #|  forall f:complex^M->complex^N.\n  clinear f\n   ==> ((forall x y. f x = f y ==> x = y)\n    <=> (forall x. f x = cvector_zero ==> x = cvector_zero))
-      #|  x <= b ==> x + a <= a + b:num
-      #|  x <= a ==> x <= a + b:num
-      #|  clinear fstcart /\\ clinear sndcart
-      #|  x <= b ==> x + a <= a + b:num
-      #|  x <= a ==> x <= a + b:num
-      #|  fstcart cvector_zero = cvector_zero /\\ sndcart cvector_zero = cvector_zero
-      #|  forall x:complex^(M,N)finite_sum y.\n  fstcart(x + y) = fstcart(x) + fstcart(y)\n  /\\ sndcart(x + y) = sndcart(x) + sndcart(y)
-      #|  forall x:complex^(M,N)finite_sum c.\n  fstcart(c % x) = c % fstcart(x) /\\ sndcart(c % x) = c % sndcart(x)
-      #|  pastecart (cvector_zero:complex^N) (cvector_zero:complex^M) = cvector_zero
-      #|  forall x:complex^N y:complex^M.\n    pastecart x y = cvector_zero <=> x = cvector_zero /\\ y = cvector_zero
+      #|  (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N]) == vector_const(Cx(real_of_num(0)))
+      #|  (cvector_neg : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) == vector_map(op_minus_minus)
+      #|  (cvector_add : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) == vector_map2(op_plus)
+      #|  (cvector_sub : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) == vector_map2(op_minus)
+      #|  (cvector_mul : (Cart[Real, Tybit0[Unit]], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((a : Cart[Real, Tybit0[Unit]])) == vector_map(op_star(a))
+      #|  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])
+      #|  (cvector_neg : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  (cvector_add : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  (cvector_sub : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  (cvector_mul : (Cart[Real, Tybit0[Unit]], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  \226\136\128 i : Num, (op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N]), i) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], !(x == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N])) == (\226\136\131 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && !((op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])(x, i) == Cx(real_of_num(0))))
+      #|  \226\136\128 X : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 Y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, op_dollar(X + Y, i) == op_dollar(X, i) + op_dollar(Y, i)
+      #|  \226\136\128 X : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 Y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, op_dollar(X - Y, i) == op_dollar(X, i) - op_dollar(Y, i)
+      #|  \226\136\128 X : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, op_dollar(-X, i) == -op_dollar(X, i)
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 X : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, op_dollar(cvector_mul(c, X), i) == c * op_dollar(X, i)
+      #|  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a \226\134\146 b) \226\134\146 a \226\134\146 c
+      #|  (((a : Bool) \226\134\146 (b : Bool)) || (a \226\134\146 (c : Bool))) == (a \226\134\146 b || c)
+      #|  (((a : Bool) \226\134\146 (b : Bool)) && (a \226\134\146 (c : Bool))) == (a \226\134\146 b && c)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x + y == y + x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], N], x + (y + z) == x + y + z
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], x + cvector_zero == x && cvector_zero + x == x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], x + -x == cvector_zero && -x + x == cvector_zero
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(a, cvector_mul(b, x)) == cvector_mul(a * b, x)
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(c, x - y) == cvector_mul(c, x) - cvector_mul(c, y)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(a + b, x) == cvector_mul(a, x) + cvector_mul(b, x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(Cx(real_of_num(1)), x) == x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], x - x == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x - (x + y) == -y
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], -(x - y) == y - x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], (x - y == cvector_zero) == (x == y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], _], cvector_mul(Cx(real_of_num(0)), x) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x - y + y == x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], y + (x - y) == x
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(c, x + y) == cvector_mul(c, x) + cvector_mul(c, y)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(a + b, x) == cvector_mul(a, x) + cvector_mul(b, x)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(a - b, x) == cvector_mul(a, x) - cvector_mul(b, x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x + y - x == y
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], (x + y == x) == (y == cvector_zero)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x - y == x + -y
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], x - cvector_zero == x
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], (cvector_mul : (Cart[Real, Tybit0[Unit]], Cart[Cart[Real, Tybit0[Unit]], _]) -> Cart[Cart[Real, Tybit0[Unit]], _])(c, (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], _])) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], _])
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(Cx(real_of_num(0)), x) == cvector_zero
+      #|  (a : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (cvector_mul(a, x) == cvector_zero) == (a == Cx(real_of_num(0)) || x == cvector_zero)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], -x == cvector_mul(-Cx(real_of_num(1)), x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_zero - x == -x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], --x == x
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(-c, x) == -cvector_mul(c, x)
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(c, -x) == -cvector_mul(c, x)
+      #|  -(cvector_zero : Cart[Cart[Real, Tybit0[Unit]], _]) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], _])
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (-x == cvector_zero) == (x == cvector_zero)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], N], x + y == y + x && x + y + z == x + (y + z) && x + (y + z) == y + (x + z)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], (cvector_mul(a, x) == cvector_mul(a, y)) == (a == Cx(real_of_num(0)) || x == y)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (cvector_mul(a, x) == cvector_mul(b, x)) == (a == b || x == cvector_zero)
+      #|  (clinear : ((Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N])) == ((\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], M], f(x + y) == f(x) + f(y)) && (\226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], f(cvector_mul(c, x)) == cvector_mul(c, f(x))))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 c : Cart[Real, Tybit0[Unit]], clinear(f) \226\134\146 clinear((x : Cart[Cart[Real, Tybit0[Unit]], M]) => cvector_mul(c, f(x)))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], clinear(f) \226\134\146 clinear((x : Cart[Cart[Real, Tybit0[Unit]], M]) => -f(x))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 g : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], clinear(f) && clinear(g) \226\134\146 clinear((x : Cart[Cart[Real, Tybit0[Unit]], M]) => f(x) + g(x))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 g : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], clinear(f) && clinear(g) \226\134\146 clinear((x : Cart[Cart[Real, Tybit0[Unit]], M]) => f(x) - g(x))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 g : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], _], clinear(f) && clinear(g) \226\134\146 clinear(o(g, f))
+      #|  clinear((x : Cart[Cart[Real, Tybit0[Unit]], N]) => x)
+      #|  (clinear : ((Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((I : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]))
+      #|  (clinear : ((Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((x : Cart[Cart[Real, Tybit0[Unit]], M]) => (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N]))
+      #|  (clinear : ((Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((op_minus_minus : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], P], \226\136\128 k : Num, (clinear : ((Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)(f) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (clinear : ((Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], P]) -> Bool)((x : Cart[Cart[Real, Tybit0[Unit]], M]) => (cvector_mul : (Cart[Real, Tybit0[Unit]], Cart[Cart[Real, Tybit0[Unit]], P]) -> Cart[Cart[Real, Tybit0[Unit]], P])((op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])(f(x), k), v))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], clinear(f) \226\134\146 f(cvector_zero) == cvector_zero
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], clinear(f) \226\134\146 f(cvector_mul(c, x)) == cvector_mul(c, f(x))
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], clinear(f) \226\134\146 f(-x) == -f(x)
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], M], clinear(f) \226\134\146 f(x + y) == f(x) + f(y)
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], M], clinear(f) \226\134\146 f(x - y) == f(x) - f(y)
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], clinear(f) \226\134\146 (\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], M], f(x) == f(y) \226\134\146 x == y) == (\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], M], f(x) == cvector_zero \226\134\146 x == cvector_zero)
+      #|  (x : Num) <= (b : Num) \226\134\146 x + (a : Num) <= a + b
+      #|  (x : Num) <= (a : Num) \226\134\146 x <= a + (b : Num)
+      #|  (clinear : ((Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]]) -> Cart[Cart[Real, Tybit0[Unit]], _]) -> Bool)((fstcart : (Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]]) -> Cart[Cart[Real, Tybit0[Unit]], _])) && (clinear : ((Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]]) -> Cart[Cart[Real, Tybit0[Unit]], _]) -> Bool)((sndcart : (Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]]) -> Cart[Cart[Real, Tybit0[Unit]], _]))
+      #|  (x : Num) <= (b : Num) \226\134\146 x + (a : Num) <= a + b
+      #|  (x : Num) <= (a : Num) \226\134\146 x <= a + (b : Num)
+      #|  (fstcart : (Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]]) -> Cart[Cart[Real, Tybit0[Unit]], _])((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]])) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], _]) && (sndcart : (Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]]) -> Cart[Cart[Real, Tybit0[Unit]], _])((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], Finite_sum[_, _]])) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], _])
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Finite_sum[M, N]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Finite_sum[M, N]], fstcart(x + y) == fstcart(x) + fstcart(y) && sndcart(x + y) == sndcart(x) + sndcart(y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Finite_sum[M, N]], \226\136\128 c : Cart[Real, Tybit0[Unit]], fstcart(cvector_mul(c, x)) == cvector_mul(c, fstcart(x)) && sndcart(cvector_mul(c, x)) == cvector_mul(c, sndcart(x))
+      #|  (pastecart : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], Finite_sum[N, M]])((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N]), (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], M])) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], Finite_sum[N, M]])
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], M], (pastecart(x, y) == cvector_zero) == (x == cvector_zero && y == cvector_zero)
       #|  forall x1 y2 x2:complex^N y2:complex^M.\n  pastecart x1 y1 + pastecart x2 y2 = pastecart (x1 + x2) (y1 + y2)
-      #|  forall x1 x2 c:complex.\n  pastecart (c % x1) (c % y1) = c % pastecart x1 y1
-      #|  cvector_re :complex^N -> real^N = vector_map Re
-      #|  cvector_im :complex^N -> real^N = vector_map Im
-      #|  vector_to_cvector :real^N -> complex^N = vector_map Cx
-      #|  forall x:complex^N i. (cvector_re x)$i = Re (x$i)
-      #|  forall x:complex^N i. (cvector_im x)$i = Im (x$i)
-      #|  forall x:real^N i. (vector_to_cvector x)$i = Cx(x$i)
-      #|  vector_to_cvector (vec 0) = cvector_zero:complex^N
-      #|  forall x:real^N. vector_to_cvector x = cvector_zero <=> x = vec 0
-      #|  forall x:complex^N. x = cvector_zero <=> cvector_re x = vec 0 /\\ cvector_im x = vec 0
-      #|  forall a x:real^N. vector_to_cvector (a % x) = Cx a % vector_to_cvector x
-      #|  forall x:complex^N y z.\n    x = vector_to_cvector y + ii % vector_to_cvector z\n    <=> cvector_re x = y /\\ cvector_im x = z
-      #|  forall x:real^N. cvector_re (vector_to_cvector x) = x
-      #|  forall x:real^N. cvector_im (vector_to_cvector x) = vec 0
-      #|  forall x:real^N. cvector_im (ii % vector_to_cvector x) = x
-      #|  forall x:complex^N.\n    vector_to_cvector (cvector_re x) + ii % vector_to_cvector (cvector_im x)\n      = x
-      #|  forall x y:real^N. cvector_im (vector_to_cvector x + ii % vector_to_cvector y) = y
-      #|  forall x y:real^N. cvector_re (vector_to_cvector x + ii % vector_to_cvector y)= x
-      #|  forall x y:complex^N. cvector_re (x+y) = cvector_re x + cvector_re y
-      #|  forall x y:complex^N. cvector_im (x+y) = cvector_im x + cvector_im y
-      #|  forall a x:complex^N. cvector_re (Cx a % x) = a % cvector_re x
-      #|  forall a x:complex^N. cvector_im (Cx a % x) = a % cvector_im x
-      #|  forall f v:A^N. cvector_re (vector_map f v) = vector_map (Re o f) v
-      #|  forall f v:A^N. cvector_im (vector_map f v) = vector_map (Im o f) v
-      #|  forall f:real->A v:complex^N.\n    vector_map f (cvector_re v) = vector_map (f o Re) v
-      #|  forall f:real->A v:complex^N.\n    vector_map f (cvector_im v) = vector_map (f o Im) v
-      #|  forall f v1:A^N v2:B^N.\n    cvector_re (vector_map2 f v1 v2) = vector_map2 (\\x y. Re (f x y)) v1 v2
-      #|  forall f v1:A^N v2:B^N.\n    cvector_im (vector_map2 f v1 v2) = vector_map2 (\\x y. Im (f x y)) v1 v2
-      #|  cvector_flatten (v:complex^N) :real^(N,N) finite_sum =\n    pastecart (cvector_re v) (cvector_im v)
-      #|  forall v:complex^N i.\n  1 <= i /\\ i <= 2 * dimindex(:N)\n    ==> (cvector_flatten v)$i =\n      if i <= dimindex(:N)\n      then (cvector_re v)$i\n      else (cvector_im v)$(i-dimindex(:N))
-      #|  complex_vector (v1,v2) :complex^N\n    = vector_map2 (\\x y. Cx x + ii * Cx y) v1 v2
-      #|  forall v1 v2:real^N.\n  complex_vector (v1,v2) = vector_to_cvector v1 + ii % vector_to_cvector v2
-      #|  cvector_unflatten (v:real^(N,N) finite_sum) :complex^N\n    = complex_vector (fstcart v, sndcart v)
-      #|  cvector_unflatten o cvector_flatten = I :complex^N -> complex^N
-      #|  cvector_flatten o cvector_unflatten =\n    I :real^(N,N) finite_sum -> real^(N,N) finite_sum
-      #|  forall f:complex^N->complex^M.\n    clinear f ==> linear (cvector_flatten o f o cvector_unflatten)
-      #|  forall f g.\n    f = vector_map g\n      ==> forall x:complex^N.\n        cvector_flatten (vector_map f x) = vector_map g (cvector_flatten x)
-      #|  forall x:complex^N. cvector_flatten (--x) = --(cvector_flatten x)
-      #|  forall x:complex^N. --x = cvector_unflatten (--(cvector_flatten x))
-      #|  forall f g.\n    f = vector_map2 g ==>\n      forall x y:complex^N.\n        cvector_flatten (vector_map2 f x y) =\n          vector_map2 g (cvector_flatten x) (cvector_flatten y)
-      #|  forall x y:complex^N.\n    cvector_flatten (x+y) = cvector_flatten x + cvector_flatten y
-      #|  forall x y:complex^N.\n    x+y = cvector_unflatten (cvector_flatten x + cvector_flatten y)
-      #|  forall x y:complex^N. cvector_flatten (x-y) = cvector_flatten x - cvector_flatten y
-      #|  forall x y:complex^N. x-y = cvector_unflatten (cvector_flatten x - cvector_flatten y)
-      #|  cvector_cnj : complex^N->complex^N = vector_map cnj
-      #|  forall x y:complex^N. cvector_cnj (x+y) = cvector_cnj x + cvector_cnj y
-      #|  forall x y:complex^N. cvector_cnj (x-y) = cvector_cnj x - cvector_cnj y
-      #|  forall x:complex^N. cvector_cnj (--x) = --(cvector_cnj x)
-      #|  forall x:complex^N. cvector_re (cvector_cnj x) = cvector_re x
-      #|  forall x:complex^N. cvector_im (cvector_cnj x) = --(cvector_im x)
-      #|  forall x:complex^N. cvector_cnj (cvector_cnj x) = x
-      #|  ((ccross):complex^3 -> complex^3 -> complex^3) x y = vector [\n    x$2 * y$3 - x$3 * y$2;\n    x$3 * y$1 - x$1 * y$3;\n    x$1 * y$2 - x$2 * y$1\n  ]
-      #|  forall x y:complex^3.\n  (x ccross y)$1 = x$2 * y$3 - x$3 * y$2\n  /\\ (x ccross y)$2 = x$3 * y$1 - x$1 * y$3\n  /\\ (x ccross y)$3 = x$1 * y$2 - x$2 * y$1
-      #|  forall x y:complex^3. x = y <=> x$1 = y$1 /\\ x$2 = y$2 /\\ x$3 = y$3
-      #|  forall x:complex^3. cvector_zero ccross x = cvector_zero
-      #|  forall x:complex^3. x ccross cvector_zero = cvector_zero
-      #|  forall x y:complex^3. (x ccross y) = --(y ccross x)
-      #|  forall x:complex^3. x ccross x = cvector_zero
-      #|  forall x y z:complex^3. (x + y) ccross z = (x ccross z) + (y ccross z)
-      #|  forall x y z:complex^3. x ccross(y + z) = (x ccross y) + (x ccross z)
-      #|  forall c x y:complex^3. (c % x) ccross y = c % (x ccross y)
-      #|  forall c x y:complex^3. x ccross (c % y) = c % (x ccross y)
-      #|  forall x y:complex^3. (--x) ccross y = --(x ccross y)
-      #|  forall x y:complex^3. x ccross (--y) = --(x ccross y)
-      #|  forall(x:complex^3) y z.\n    x ccross (y ccross z) + y ccross (z ccross x) + z ccross (x ccross y) =\n      cvector_zero
+      #|  \226\136\128 x1 : Cart[Cart[Real, Tybit0[Unit]], _], \226\136\128 x2 : _, \226\136\128 c : Cart[Real, Tybit0[Unit]], pastecart(cvector_mul(c, x1), cvector_mul(c, (y1 : Cart[Cart[Real, Tybit0[Unit]], _]))) == cvector_mul(c, pastecart(x1, y1))
+      #|  (cvector_re : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, N]) == vector_map(Re)
+      #|  (cvector_im : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, N]) == vector_map(Im)
+      #|  (vector_to_cvector : (Cart[Real, N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) == vector_map(Cx)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, op_dollar(cvector_re(x), i) == Re(op_dollar(x, i))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, op_dollar(cvector_im(x), i) == Im(op_dollar(x, i))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 i : Num, op_dollar(vector_to_cvector(x), i) == Cx(op_dollar(x, i))
+      #|  (vector_to_cvector : (Cart[Real, N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((vec : (Num) -> Cart[Real, N])(0)) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  \226\136\128 x : Cart[Real, N], (vector_to_cvector(x) == cvector_zero) == (x == vec(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (x == cvector_zero) == (cvector_re(x) == vec(0) && cvector_im(x) == vec(0))
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Real, N], vector_to_cvector(op_pct(a, x)) == cvector_mul(Cx(a), vector_to_cvector(x))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Real, N], \226\136\128 z : Cart[Real, N], (x == vector_to_cvector(y) + cvector_mul(ii, vector_to_cvector(z))) == (cvector_re(x) == y && cvector_im(x) == z)
+      #|  \226\136\128 x : Cart[Real, N], cvector_re(vector_to_cvector(x)) == x
+      #|  \226\136\128 x : Cart[Real, N], cvector_im(vector_to_cvector(x)) == vec(0)
+      #|  \226\136\128 x : Cart[Real, N], cvector_im(cvector_mul(ii, vector_to_cvector(x))) == x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], vector_to_cvector(cvector_re(x)) + cvector_mul(ii, vector_to_cvector(cvector_im(x))) == x
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], cvector_im(vector_to_cvector(x) + cvector_mul(ii, vector_to_cvector(y))) == y
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], cvector_re(vector_to_cvector(x) + cvector_mul(ii, vector_to_cvector(y))) == x
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_re(x + y) == cvector_re(x) + cvector_re(y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_im(x + y) == cvector_im(x) + cvector_im(y)
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_re(cvector_mul(Cx(a), x)) == op_pct(a, cvector_re(x))
+      #|  \226\136\128 a : Real, \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_im(cvector_mul(Cx(a), x)) == op_pct(a, cvector_im(x))
+      #|  \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 v : Cart[A, N], cvector_re(vector_map(f, v)) == vector_map(o(Re, f), v)
+      #|  \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 v : Cart[A, N], cvector_im(vector_map(f, v)) == vector_map(o(Im, f), v)
+      #|  \226\136\128 f : (Real) -> A, \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], N], vector_map(f, cvector_re(v)) == vector_map(o(f, Re), v)
+      #|  \226\136\128 f : (Real) -> A, \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], N], vector_map(f, cvector_im(v)) == vector_map(o(f, Im), v)
+      #|  \226\136\128 f : (A, B) -> Cart[Real, Tybit0[Unit]], \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[B, N], cvector_re(vector_map2(f, v1, v2)) == vector_map2((x : A) => (y : B) => Re(f(x, y)), v1, v2)
+      #|  \226\136\128 f : (A, B) -> Cart[Real, Tybit0[Unit]], \226\136\128 v1 : Cart[A, N], \226\136\128 v2 : Cart[B, N], cvector_im(vector_map2(f, v1, v2)) == vector_map2((x : A) => (y : B) => Im(f(x, y)), v1, v2)
+      #|  (cvector_flatten : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Finite_sum[N, N]])((v : Cart[Cart[Real, Tybit0[Unit]], N])) == pastecart(cvector_re(v), cvector_im(v))
+      #|  \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 i : Num, 1 <= i && i <= 2 * (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, Finite_sum[N, N]], Num) -> Real)((cvector_flatten : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Finite_sum[N, N]])(v), i) == (if i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) { (op_dollar : (Cart[Real, N], Num) -> Real)((cvector_re : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, N])(v), i) } else { (op_dollar : (Cart[Real, N], Num) -> Real)((cvector_im : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, N])(v), i - (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) })
+      #|  (complex_vector : ((Cart[Real, N], Cart[Real, N])) -> Cart[Cart[Real, Tybit0[Unit]], N])(((v1 : Cart[Real, N]), (v2 : Cart[Real, N]))) == vector_map2((x : Real) => (y : Real) => Cx(x) + ii * Cx(y), v1, v2)
+      #|  \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], complex_vector((v1, v2)) == vector_to_cvector(v1) + cvector_mul(ii, vector_to_cvector(v2))
+      #|  (cvector_unflatten : (Cart[Real, Finite_sum[N, N]]) -> Cart[Cart[Real, Tybit0[Unit]], N])((v : Cart[Real, Finite_sum[N, N]])) == complex_vector((fstcart(v), sndcart(v)))
+      #|  (o : ((Cart[Real, Finite_sum[N, N]]) -> Cart[Cart[Real, Tybit0[Unit]], N], (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Finite_sum[N, N]], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((cvector_unflatten : (Cart[Real, Finite_sum[N, N]]) -> Cart[Cart[Real, Tybit0[Unit]], N]), (cvector_flatten : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Finite_sum[N, N]])) == (I : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  (o : ((Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Finite_sum[N, N]], (Cart[Real, Finite_sum[N, N]]) -> Cart[Cart[Real, Tybit0[Unit]], N], Cart[Real, Finite_sum[N, N]]) -> Cart[Real, Finite_sum[N, N]])((cvector_flatten : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Finite_sum[N, N]]), (cvector_unflatten : (Cart[Real, Finite_sum[N, N]]) -> Cart[Cart[Real, Tybit0[Unit]], N])) == (I : (Cart[Real, Finite_sum[N, N]]) -> Cart[Real, Finite_sum[N, N]])
+      #|  \226\136\128 f : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], M], clinear(f) \226\134\146 linear(o(cvector_flatten, o(f, cvector_unflatten)))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Real, f == vector_map(g) \226\134\146 (\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_flatten(vector_map(f, x)) == vector_map(g, cvector_flatten(x)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_flatten(-x) == -cvector_flatten(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], -x == cvector_unflatten(-cvector_flatten(x))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real, Real) -> Real, f == vector_map2(g) \226\134\146 (\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_flatten(vector_map2(f, x, y)) == vector_map2(g, cvector_flatten(x), cvector_flatten(y)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_flatten(x + y) == cvector_flatten(x) + cvector_flatten(y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x + y == cvector_unflatten(cvector_flatten(x) + cvector_flatten(y))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_flatten(x - y) == cvector_flatten(x) - cvector_flatten(y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], x - y == cvector_unflatten(cvector_flatten(x) - cvector_flatten(y))
+      #|  (cvector_cnj : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N]) == vector_map(cnj)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_cnj(x + y) == cvector_cnj(x) + cvector_cnj(y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cvector_cnj(x - y) == cvector_cnj(x) - cvector_cnj(y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_cnj(-x) == -cvector_cnj(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_re(cvector_cnj(x)) == cvector_re(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_im(cvector_cnj(x)) == -cvector_im(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_cnj(cvector_cnj(x)) == x
+      #|  (ccross : (Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]) -> Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]])((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), (y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]])) == vector([op_dollar(x, 2) * op_dollar(y, 3) - op_dollar(x, 3) * op_dollar(y, 2), op_dollar(x, 3) * op_dollar(y, 1) - op_dollar(x, 1) * op_dollar(y, 3), op_dollar(x, 1) * op_dollar(y, 2) - op_dollar(x, 2) * op_dollar(y, 1)])
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], op_dollar(ccross(x, y), 1) == op_dollar(x, 2) * op_dollar(y, 3) - op_dollar(x, 3) * op_dollar(y, 2) && op_dollar(ccross(x, y), 2) == op_dollar(x, 3) * op_dollar(y, 1) - op_dollar(x, 1) * op_dollar(y, 3) && op_dollar(ccross(x, y), 3) == op_dollar(x, 1) * op_dollar(y, 2) - op_dollar(x, 2) * op_dollar(y, 1)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], (x == y) == (op_dollar(x, 1) == op_dollar(y, 1) && op_dollar(x, 2) == op_dollar(y, 2) && op_dollar(x, 3) == op_dollar(y, 3))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(cvector_zero, x) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, cvector_zero) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, y) == -ccross(y, x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, x) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x + y, z) == ccross(x, z) + ccross(y, z)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, y + z) == ccross(x, y) + ccross(x, z)
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(cvector_mul(c, x), y) == cvector_mul(c, ccross(x, y))
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, cvector_mul(c, y)) == cvector_mul(c, ccross(x, y))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(-x, y) == -ccross(x, y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, -y) == -ccross(x, y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, ccross(y, z)) + (ccross(y, ccross(z, x)) + ccross(z, ccross(x, y))) == cvector_zero
       #|  vector_neg:complex->complex
       #|  vector_add:complex->complex->complex
       #|  vector_sub:complex->complex->complex
@@ -75334,181 +75334,181 @@ test "Multivariate/cvectors matches Multivariate/cvectors.ml" {
       #|  complex_div:complex->complex->complex
       #|  complex_pow:complex->num->complex
       #|  complex_inv:complex->complex
-      #|  (cdot) (x:complex^N) (y:complex^N) =\n    vsum (1..dimindex(:N)) (\\i. x$i * cnj(y$i))
-      #|  dimindex (:N)
-      #|  forall x:complex^N y. x cdot y = cnj (y cdot x)
-      #|  forall x:complex^N. real(x cdot x)
-      #|  cnj ((z:real^2^N)$(x':num))
-      #|  (y:real^2^N)$(x':num)
-      #|  (x:real^2^N)$(x':num)
-      #|  dimindex (:N)
-      #|  forall x:complex^N y z. (x + y) cdot z = (x cdot z) + (y cdot z)
-      #|  cnj ((z:real^2^N)$(x':num))
-      #|  cnj((y:real^2^N)$(x':num))
-      #|  (x:real^2^N)$(x':num)
-      #|  dimindex (:N)
-      #|  forall x:complex^N y z. x cdot (y + z) = (x cdot y) + (x cdot z)
-      #|  cnj ((z:real^2^N)$(x':num))
-      #|  (y:real^2^N)$(x':num)
-      #|  (x:real^2^N)$(x':num)
-      #|  dimindex (:N)
-      #|  forall x:complex^N y z. (x - y) cdot z = (x cdot z) - (y cdot z)
-      #|  cnj ((z:real^2^N)$(x':num))
-      #|  cnj((y:real^2^N)$(x':num))
-      #|  (x:real^2^N)$(x':num)
-      #|  dimindex (:N)
-      #|  forall x:complex^N y z. x cdot (y - z) = (x cdot y) - (x cdot z)
-      #|  dimindex (:N)
-      #|  forall c:complex x:complex^N y. (c % x) cdot y = c * (x cdot y)
-      #|  dimindex (:N)
+      #|  (cdot : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Cart[Real, Tybit0[Unit]], N]), (y : Cart[Cart[Real, Tybit0[Unit]], N])) == (vsum : ((Num) -> Bool, (Num) -> Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])(x, i) * cnj((op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])(y, i)))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, y) == cnj(cdot(y, x))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], real(cdot(x, x))
+      #|  cnj(op_dollar((z : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num)))
+      #|  op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x + y, z) == cdot(x, z) + cdot(y, z)
+      #|  cnj(op_dollar((z : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num)))
+      #|  cnj(op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num)))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, y + z) == cdot(x, y) + cdot(x, z)
+      #|  cnj(op_dollar((z : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num)))
+      #|  op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x - y, z) == cdot(x, z) - cdot(y, z)
+      #|  cnj(op_dollar((z : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num)))
+      #|  cnj(op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num)))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], N]), (x' : Num))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, y - z) == cdot(x, y) - cdot(x, z)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cdot(cvector_mul(c, x), y) == c * cdot(x, y)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  forall c:complex x:complex^N x y. x cdot (c % y) = cnj c * (x cdot y)
-      #|  dimindex (:N)
-      #|  forall x:complex^N y. (--x) cdot y = --(x cdot y)
-      #|  dimindex (:N)
-      #|  forall x:complex^N y. x cdot (--y) = --(x cdot y)
-      #|  forall x:complex^N. cvector_zero cdot x = Cx (&0)
-      #|  cnj (Cx(&0)) = Cx(&0)
-      #|  forall x:complex^N. x cdot cvector_zero = Cx (&0)
-      #|  forall x y:complex^3.\n    x cdot y = (x$1 * cnj (y$1) + x$2 * cnj (y$2) + x$3 * cnj (y$3))
-      #|  forall x y:complex^N. x cdot y + y cdot x = Cx(&2 * Re(x cdot y))
-      #|  forall r c.\n    (vector_to_cvector r) ccross c =\n      vector_to_cvector (r cross (cvector_re c))\n      + ii % (vector_to_cvector (r cross (cvector_im c)))
-      #|  forall r c.\n    c ccross (vector_to_cvector r) =\n      vector_to_cvector ((cvector_re c) cross r)\n      + ii % (vector_to_cvector ((cvector_im c) cross r))
-      #|  dimindex (:N)
-      #|  dimindex (:N)
-      #|  forall r c.\n    (vector_to_cvector r) cdot c =\n      Cx (r dot (cvector_re c)) - ii * Cx (r dot (cvector_im c))
-      #|  dimindex (:N)
-      #|  dimindex (:N)
-      #|  forall r c.\n    c cdot (vector_to_cvector r) =\n      Cx ((cvector_re c) dot r) + ii * Cx ((cvector_im c) dot r)
-      #|  cnorm2 (v:complex^N) = real_of_complex (v cdot v)
-      #|  forall v:complex^N. Cx(cnorm2 v) = v cdot v
-      #|  cnorm2 (cvector_zero:complex^N) = &0
-      #|  forall x:complex^N. cnorm2 x = (vector_map norm x) dot (vector_map norm x)
-      #|  forall x:complex^N. cnorm2 x = &0 <=> x = cvector_zero
-      #|  x = Cx y ==> real_of_complex x = y
-      #|  (p<=>q) <=> ((p==>q) /\\ (q==>p))
-      #|  forall x:complex^N. x cdot x = Cx(&0) <=> x = cvector_zero
-      #|  forall x:complex^N. &0 <= cnorm2 x
-      #|  forall x:complex^N. &0 <= real_of_complex (x cdot x)
-      #|  x * cnj x * y = (x * cnj x) * y
-      #|  forall a x:complex^N. cnorm2 (a % x) = (norm a) pow 2 * cnorm2 x
-      #|  FINITE (1..dimindex(:N))
-      #|  x-(--Cx(&1))*y = x+y
-      #|  (x*x+x*(--ii)*y)+(ii*y)*x+(ii*y)*(--ii)*y = x*x-(ii*ii)*y*y
-      #|  forall x y:real^N.\n    cnorm2 (vector_to_cvector x + ii % vector_to_cvector y) =\n      norm x pow 2 + norm y pow 2
-      #|  forall v:complex^N.\n    cnorm2 v = norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2
-      #|  forall x:complex^N. cnorm2 x = norm (x cdot x)
-      #|  forall x y:complex^N. cnorm2 (x-y) = cnorm2 (y-x)
-      #|  forall x:real^N. cnorm2 (vector_to_cvector x) = norm x pow 2
-      #|  cnorm :complex^N->real = sqrt o cnorm2
-      #|  cnorm:complex^N->real
-      #|  norm (cvector_zero:complex^N) = &0
-      #|  forall x:complex^N. norm x pow 2 = cnorm2 x
-      #|  forall x y:real^N.\n    norm (vector_to_cvector x + ii % vector_to_cvector y) =\n      sqrt(norm x pow 2 + norm y pow 2)
-      #|  forall v:complex^N.\n    norm v = sqrt(norm (cvector_re v) pow 2 + norm (cvector_im v) pow 2)
-      #|  forall a x:complex^N. norm (a % x) = norm a * norm x
-      #|  forall x:complex^N. norm x = &0 <=> x = cvector_zero
-      #|  forall x:complex^N. &0 <= norm x
-      #|  forall x y:complex^N. norm (x-y) = norm (y-x)
-      #|  forall x:real^N. norm (vector_to_cvector x) = norm x
-      #|  forall k. 1 <= k /\\ k <= dimindex(:N)\n    ==> norm (vector_to_cvector (basis k :real^N)) = &1
-      #|  norm(basis 1:real^N) = &1
-      #|  forall c. &0 <= c ==> ?x:complex^N. norm(x) = c
-      #|  cunit (X:complex^N) = inv(Cx(norm X))% X
-      #|  cunit cvector_zero = cvector_zero:complex^N
-      #|  (x*y)*x=(x*x)*y
-      #|  x = cvector_zero:complex^N
-      #|  forall x:complex^N. (cunit x cdot x) % cunit x = x
-      #|  collinear_cvectors x (y:complex^N) <=> ?a. y = a % x \\/ x = a % y
-      #|  forall x y:complex^N. collinear_cvectors x y <=> collinear_cvectors y x
-      #|  Cx(&0)
-      #|  forall x:complex^N. collinear_cvectors x cvector_zero
-      #|  inv a :complex
-      #|  ~(a=Cx(&0))
-      #|  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ?a. ~(a=Cx(&0)) /\\ y = a % x
-      #|  Cx(&0)
-      #|  y=cvector_zero:complex^N
-      #|  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) ==> ?a. y = a % x
-      #|  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(y=cvector_zero) ==> ?a. x = a % y
-      #|  forall x. x= &1 ==> ~(x= &0)
-      #|  forall x y:real^N.\n    collinear_cvectors x (vector_to_cvector y) /\\ norm y = &1\n      ==> x = (x cdot (vector_to_cvector y)) % vector_to_cvector y
-      #|  (y:complex^3)$1/(x:complex^3)$1
-      #|  (y:complex^3)$2/(x:complex^3)$2
-      #|  (y:complex^3)$3/(x:complex^3)$3
-      #|  Cx(&0)
-      #|  (x:complex^3)$3 = Cx(&0)
-      #|  (x:complex^3)$2 = Cx(&0)
-      #|  (x:complex^3)$1 = Cx(&0)
-      #|  forall x y:complex^3. x ccross y = cvector_zero <=> collinear_cvectors x y
-      #|  (p\\/q) <=> (~p ==> q)
-      #|  forall a x y:complex^N. ~(a = Cx(&0)) /\\ x = a % y ==> y = inv a % x
-      #|  a=Cx(&0)
-      #|  forall a x y:complex^N. ~(x = cvector_zero) /\\ x = a % y ==> y = inv a % x
-      #|  Cx c
-      #|  Cx(&0)
-      #|  Re(inv a)
-      #|  vector_to_cvector (y:real^N) =\n      inv a % vector_to_cvector x
-      #|  (p\\/q) <=> (~p ==> q)
-      #|  Re a
-      #|  forall x y:real^N.\n    collinear_cvectors (vector_to_cvector x) (vector_to_cvector y)\n      <=> collinear {vec 0,x,y}
-      #|  corthogonal (x:complex^N) y <=> x cdot y = Cx(&0)
-      #|  forall x y:complex^N. corthogonal x y <=> corthogonal y x
-      #|  forall x:complex^N. corthogonal cvector_zero x /\\ corthogonal x cvector_zero
-      #|  forall x y:complex^N.\n    collinear_cvectors x y /\\ ~(x=cvector_zero) /\\ ~(y=cvector_zero)\n      ==> ~(corthogonal x y)
-      #|  forall x y a.\n    (corthogonal x y ==> corthogonal x (a%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal x (a%y))\n    /\\ (corthogonal x y ==> corthogonal (a%x) y)\n    /\\ (corthogonal x y \\/ a = Cx(&0) <=> corthogonal (a%x) y)
-      #|  forall x y a b.\n    (corthogonal x y ==> corthogonal (a%x) (b%y))\n    /\\ (corthogonal x y \\/ a = Cx(&0) \\/ b = Cx(&0)\n      <=> corthogonal (a%x) (b%y))
-      #|  forall r c.\n    (corthogonal c (vector_to_cvector r)\n      <=> orthogonal (cvector_re c) r /\\ orthogonal (cvector_im c) r)\n    /\\ (corthogonal (vector_to_cvector r) c\n      <=> orthogonal r (cvector_re c) /\\ orthogonal r (cvector_im c))
-      #|  forall x y:complex^N.\n    (corthogonal x (cunit y) <=> corthogonal x y)\n    /\\ (corthogonal (cunit x) y <=> corthogonal x y)
-      #|  y=cvector_zero:complex^N
-      #|  forall x y:complex^N. corthogonal (x - (x cdot cunit y) % cunit y) y
-      #|  x cdot y = Cx (&0) ==> y cdot x = Cx(&0)
-      #|  forall x y:complex^N. corthogonal x y ==> cnorm2 (x+y) = cnorm2 x + cnorm2 y
-      #|  x * ((y * inv x) * x) * (z * inv x') * inv x'\n    = (y * z) * (x * inv x) * (x * inv x' * inv x'):complex
-      #|  (forall x y. P x y ==> f x y = (g x y:real))\n    ==> P x y /\\ a <= g x y * b ==> a <= f x y * b
-      #|  (forall x:complex^N y. p (x - f x y) y)\n      ==> cnorm2 x * z = cnorm2 (x - f x y + f x y) * z
-      #|  y = cvector_zero:complex^N
-      #|  forall x y:complex^N. norm (x cdot y) pow 2 <= cnorm2 x * cnorm2 y
-      #|  &0 <= x /\\ &0 <= y /\\ abs x <= abs y ==> x <= y
-      #|  forall x y:complex^N. norm (x cdot y) <= norm x * norm y
-      #|  x = y + x <=> y = &0
-      #|  x * ((y * inv x) * x) * (z * inv x') * inv x' =\n        (y * z) * (x * inv x) * (x * inv x' * inv x'):complex
-      #|  (forall x y. P x y ==> g x y = (f x y:real)) ==>\n        P x y /\\ (a = f x y * z ==> R) ==> (a = g x y * z ==> R)
-      #|  (forall x:complex^N y. p (x - f x y) y) ==>\n      cnorm2 x * z = cnorm2 (x - f x y + f x y) * z
-      #|  y = cvector_zero:complex^N
-      #|  forall x y:complex^N.\n    norm (x cdot y) pow 2 = cnorm2 x * cnorm2 y <=> collinear_cvectors x y
-      #|  x=y <=> abs x = abs y /\\ (&0 <= x /\\ &0 <= y \\/ x < &0 /\\ y < &0)
-      #|  forall x y:complex^N.\n  norm (x cdot y) = norm x * norm y <=> collinear_cvectors x y
-      #|  x+ &2*y+z<=x+z+ &2*t <=> y<=t:real
-      #|  (x+y)+z+t = x+(y+z)+t:complex
-      #|  abs x <= abs y /\\ &0 <= x /\\ &0 <= y ==> x <= y
-      #|  forall x y:complex^N. norm (x+y) <= norm x + norm y
-      #|  y-x:complex^N
-      #|  x:complex^N
-      #|  x<=y+z <=> x-y<=z:real
-      #|  --x <= y <=>  --y <= x
-      #|  (forall x y. P x y <=> Q x y) ==> Q x y ==> P x y
-      #|  forall x y:complex^N. abs (norm x - norm y) <= norm (x-y)
-      #|  (cvsum:(A->bool)->(A->complex^N)->complex^N) s f = lambda i. vsum s (\\x. (f x)$i)
-      #|  csummable (s:num->bool) (f:num->complex^N)\n    <=> summable s (cvector_re o f) /\\ summable s (cvector_im o f)
-      #|  cinfsum (s:num->bool) (f:num->complex^N) :complex^N\n    = vector_to_cvector (infsum s (\\x. cvector_re (f x)))\n      + ii % vector_to_cvector (infsum s (\\x.cvector_im (f x)))
-      #|  fstcart (l:real^(N,N) finite_sum)
-      #|  (cvector_re o f) :num->real^N
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cdot(-x, y) == -cdot(x, y)
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, -y) == -cdot(x, y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cdot(cvector_zero, x) == Cx(real_of_num(0))
+      #|  cnj(Cx(real_of_num(0))) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, cvector_zero) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], cdot(x, y) == op_dollar(x, 1) * cnj(op_dollar(y, 1)) + (op_dollar(x, 2) * cnj(op_dollar(y, 2)) + op_dollar(x, 3) * cnj(op_dollar(y, 3)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, y) + cdot(y, x) == Cx(real_of_num(2) * Re(cdot(x, y)))
+      #|  \226\136\128 r : Cart[Real, Tybit1[Unit]], \226\136\128 c : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(vector_to_cvector(r), c) == vector_to_cvector(cross(r, cvector_re(c))) + cvector_mul(ii, vector_to_cvector(cross(r, cvector_im(c))))
+      #|  \226\136\128 r : Cart[Real, Tybit1[Unit]], \226\136\128 c : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(c, vector_to_cvector(r)) == vector_to_cvector(cross(cvector_re(c), r)) + cvector_mul(ii, vector_to_cvector(cross(cvector_im(c), r)))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 r : Cart[Real, _], \226\136\128 c : Cart[Cart[Real, Tybit0[Unit]], _], cdot(vector_to_cvector(r), c) == Cx(dot(r, cvector_re(c))) - ii * Cx(dot(r, cvector_im(c)))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+      #|  \226\136\128 r : Cart[Real, _], \226\136\128 c : Cart[Cart[Real, Tybit0[Unit]], _], cdot(c, vector_to_cvector(r)) == Cx(dot(cvector_re(c), r)) + ii * Cx(dot(cvector_im(c), r))
+      #|  (cnorm2 : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Real)((v : Cart[Cart[Real, Tybit0[Unit]], N])) == real_of_complex(cdot(v, v))
+      #|  \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], N], Cx(cnorm2(v)) == cdot(v, v)
+      #|  (cnorm2 : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Real)((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N])) == real_of_num(0)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cnorm2(x) == dot(vector_map(norm, x), vector_map(norm, x))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (cnorm2(x) == real_of_num(0)) == (x == cvector_zero)
+      #|  (x : Cart[Real, Tybit0[Unit]]) == Cx((y : Real)) \226\134\146 real_of_complex(x) == y
+      #|  ((p : Bool) == (q : Bool)) == ((p \226\134\146 q) && (q \226\134\146 p))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (cdot(x, x) == Cx(real_of_num(0))) == (x == cvector_zero)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], real_of_num(0) <= cnorm2(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], real_of_num(0) <= real_of_complex(cdot(x, x))
+      #|  (x : Cart[Real, Tybit0[Unit]]) * (cnj(x) * (y : Cart[Real, Tybit0[Unit]])) == x * cnj(x) * y
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cnorm2(cvector_mul(a, x)) == pow(norm(a), 2) * cnorm2(x)
+      #|  FINITE(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+      #|  (x : Cart[Real, Tybit0[Unit]]) - -Cx(real_of_num(1)) * (y : Cart[Real, Tybit0[Unit]]) == x + y
+      #|  (x : Cart[Real, Tybit0[Unit]]) * x + x * (-ii * (y : Cart[Real, Tybit0[Unit]])) + (ii * y * x + ii * y * (-ii * y)) == x * x - ii * ii * (y * y)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], cnorm2(vector_to_cvector(x) + cvector_mul(ii, vector_to_cvector(y))) == pow(norm(x), 2) + pow(norm(y), 2)
+      #|  \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], N], cnorm2(v) == pow(norm(cvector_re(v)), 2) + pow(norm(cvector_im(v)), 2)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cnorm2(x) == norm(cdot(x, x))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cnorm2(x - y) == cnorm2(y - x)
+      #|  \226\136\128 x : Cart[Real, N], cnorm2(vector_to_cvector(x)) == pow(norm(x), 2)
+      #|  (cnorm : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Real) == o(sqrt, cnorm2)
+      #|  (cnorm : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Real)
+      #|  (norm : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Real)((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N])) == real_of_num(0)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], pow(norm(x), 2) == cnorm2(x)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], norm(vector_to_cvector(x) + cvector_mul(ii, vector_to_cvector(y))) == sqrt(pow(norm(x), 2) + pow(norm(y), 2))
+      #|  \226\136\128 v : Cart[Cart[Real, Tybit0[Unit]], N], norm(v) == sqrt(pow(norm(cvector_re(v)), 2) + pow(norm(cvector_im(v)), 2))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], norm(cvector_mul(a, x)) == norm(a) * norm(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], (norm(x) == real_of_num(0)) == (x == cvector_zero)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], real_of_num(0) <= norm(x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], norm(x - y) == norm(y - x)
+      #|  \226\136\128 x : Cart[Real, N], norm(vector_to_cvector(x)) == norm(x)
+      #|  \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (norm : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Real)((vector_to_cvector : (Cart[Real, N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((basis : (Num) -> Cart[Real, N])(k))) == real_of_num(1)
+      #|  (norm : (Cart[Real, N]) -> Real)((basis : (Num) -> Cart[Real, N])(1)) == real_of_num(1)
+      #|  \226\136\128 c : Real, real_of_num(0) <= c \226\134\146 (\226\136\131 x : Cart[Cart[Real, Tybit0[Unit]], N], norm(x) == c)
+      #|  (cunit : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((X : Cart[Cart[Real, Tybit0[Unit]], N])) == cvector_mul(inv(Cx(norm(X))), X)
+      #|  (cunit : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N])) == (cvector_zero : Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  (x : Cart[Real, Tybit0[Unit]]) * (y : Cart[Real, Tybit0[Unit]]) * x == x * x * y
+      #|  (x : Cart[Cart[Real, Tybit0[Unit]], N]) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], cvector_mul(cdot(cunit(x), x), cunit(x)) == x
+      #|  (collinear_cvectors : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((x : Cart[Cart[Real, Tybit0[Unit]], N]), (y : Cart[Cart[Real, Tybit0[Unit]], N])) == (\226\136\131 a : Cart[Real, Tybit0[Unit]], y == cvector_mul(a, x) || x == cvector_mul(a, y))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], collinear_cvectors(x, y) == collinear_cvectors(y, x)
+      #|  Cx(real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], collinear_cvectors(x, cvector_zero)
+      #|  inv((a : Cart[Real, Tybit0[Unit]]))
+      #|  !((a : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], collinear_cvectors(x, y) && !(x == cvector_zero) && !(y == cvector_zero) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], !(a == Cx(real_of_num(0))) && y == cvector_mul(a, x))
+      #|  Cx(real_of_num(0))
+      #|  (y : Cart[Cart[Real, Tybit0[Unit]], N]) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], collinear_cvectors(x, y) && !(x == cvector_zero) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], y == cvector_mul(a, x))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], collinear_cvectors(x, y) && !(y == cvector_zero) \226\134\146 (\226\136\131 a : Cart[Real, Tybit0[Unit]], x == cvector_mul(a, y))
+      #|  \226\136\128 x : Real, x == real_of_num(1) \226\134\146 !(x == real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Real, N], collinear_cvectors(x, vector_to_cvector(y)) && norm(y) == real_of_num(1) \226\134\146 x == cvector_mul(cdot(x, vector_to_cvector(y)), vector_to_cvector(y))
+      #|  op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 1) / op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 1)
+      #|  op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 2) / op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 2)
+      #|  op_dollar((y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 3) / op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 3)
+      #|  Cx(real_of_num(0))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 3) == Cx(real_of_num(0))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 2) == Cx(real_of_num(0))
+      #|  op_dollar((x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]]), 1) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], (ccross(x, y) == cvector_zero) == collinear_cvectors(x, y)
+      #|  ((p : Bool) || (q : Bool)) == (!p \226\134\146 q)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], !(a == Cx(real_of_num(0))) && x == cvector_mul(a, y) \226\134\146 y == cvector_mul(inv(a), x)
+      #|  (a : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], !(x == cvector_zero) && x == cvector_mul(a, y) \226\134\146 y == cvector_mul(inv(a), x)
+      #|  Cx((c : Real))
+      #|  Cx(real_of_num(0))
+      #|  Re(inv((a : Cart[Real, Tybit0[Unit]])))
+      #|  vector_to_cvector((y : Cart[Real, N])) == cvector_mul(inv((a : Cart[Real, Tybit0[Unit]])), vector_to_cvector((x : Cart[Real, N])))
+      #|  ((p : Bool) || (q : Bool)) == (!p \226\134\146 q)
+      #|  Re((a : Cart[Real, Tybit0[Unit]]))
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], collinear_cvectors(vector_to_cvector(x), vector_to_cvector(y)) == collinear({vec(0), x, y})
+      #|  (corthogonal : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((x : Cart[Cart[Real, Tybit0[Unit]], N]), (y : Cart[Cart[Real, Tybit0[Unit]], N])) == (cdot(x, y) == Cx(real_of_num(0)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], corthogonal(x, y) == corthogonal(y, x)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], corthogonal(cvector_zero, x) && corthogonal(x, cvector_zero)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], collinear_cvectors(x, y) && !(x == cvector_zero) && !(y == cvector_zero) \226\134\146 !corthogonal(x, y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], _], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], _], \226\136\128 a : Cart[Real, Tybit0[Unit]], (corthogonal(x, y) \226\134\146 corthogonal(x, cvector_mul(a, y))) && (corthogonal(x, y) || a == Cx(real_of_num(0))) == corthogonal(x, cvector_mul(a, y)) && (corthogonal(x, y) \226\134\146 corthogonal(cvector_mul(a, x), y)) && (corthogonal(x, y) || a == Cx(real_of_num(0))) == corthogonal(cvector_mul(a, x), y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], _], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], _], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (corthogonal(x, y) \226\134\146 corthogonal(cvector_mul(a, x), cvector_mul(b, y))) && (corthogonal(x, y) || a == Cx(real_of_num(0)) || b == Cx(real_of_num(0))) == corthogonal(cvector_mul(a, x), cvector_mul(b, y))
+      #|  \226\136\128 r : Cart[Real, _], \226\136\128 c : Cart[Cart[Real, Tybit0[Unit]], _], corthogonal(c, vector_to_cvector(r)) == (orthogonal(cvector_re(c), r) && orthogonal(cvector_im(c), r)) && corthogonal(vector_to_cvector(r), c) == (orthogonal(r, cvector_re(c)) && orthogonal(r, cvector_im(c)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], corthogonal(x, cunit(y)) == corthogonal(x, y) && corthogonal(cunit(x), y) == corthogonal(x, y)
+      #|  (y : Cart[Cart[Real, Tybit0[Unit]], N]) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], corthogonal(x - cvector_mul(cdot(x, cunit(y)), cunit(y)), y)
+      #|  cdot((x : Cart[Cart[Real, Tybit0[Unit]], _]), (y : Cart[Cart[Real, Tybit0[Unit]], _])) == Cx(real_of_num(0)) \226\134\146 cdot(y, x) == Cx(real_of_num(0))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], corthogonal(x, y) \226\134\146 cnorm2(x + y) == cnorm2(x) + cnorm2(y)
+      #|  (x : Cart[Real, Tybit0[Unit]]) * ((y : Cart[Real, Tybit0[Unit]]) * inv(x) * x * ((z : Cart[Real, Tybit0[Unit]]) * inv((x' : Cart[Real, Tybit0[Unit]])) * inv(x'))) == y * z * (x * inv(x) * (x * (inv(x') * inv(x'))))
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (P : (_, _) -> Bool)(x, y) \226\134\146 (f : (_, _) -> Real)(x, y) == (g : (_, _) -> Real)(x, y)) \226\134\146 P((x : _), (y : _)) && (a : Real) <= g(x, y) * (b : Real) \226\134\146 a <= f(x, y) * b
+      #|  (\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : _, (p : (Cart[Cart[Real, Tybit0[Unit]], N], _) -> Bool)(x - (f : (Cart[Cart[Real, Tybit0[Unit]], N], _) -> Cart[Cart[Real, Tybit0[Unit]], N])(x, y), y)) \226\134\146 cnorm2((x : Cart[Cart[Real, Tybit0[Unit]], N])) * (z : Real) == cnorm2(x - f(x, (y : _)) + f(x, y)) * z
+      #|  (y : Cart[Cart[Real, Tybit0[Unit]], N]) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], pow(norm(cdot(x, y)), 2) <= cnorm2(x) * cnorm2(y)
+      #|  real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) && abs(x) <= abs(y) \226\134\146 x <= y
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], norm(cdot(x, y)) <= norm(x) * norm(y)
+      #|  ((x : Real) == (y : Real) + x) == (y == real_of_num(0))
+      #|  (x : Cart[Real, Tybit0[Unit]]) * ((y : Cart[Real, Tybit0[Unit]]) * inv(x) * x * ((z : Cart[Real, Tybit0[Unit]]) * inv((x' : Cart[Real, Tybit0[Unit]])) * inv(x'))) == y * z * (x * inv(x) * (x * (inv(x') * inv(x'))))
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (P : (_, _) -> Bool)(x, y) \226\134\146 (g : (_, _) -> Real)(x, y) == (f : (_, _) -> Real)(x, y)) \226\134\146 P((x : _), (y : _)) && ((a : Real) == f(x, y) * (z : Real) \226\134\146 (R : Bool)) \226\134\146 a == g(x, y) * z \226\134\146 R
+      #|  (\226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : _, (p : (Cart[Cart[Real, Tybit0[Unit]], N], _) -> Bool)(x - (f : (Cart[Cart[Real, Tybit0[Unit]], N], _) -> Cart[Cart[Real, Tybit0[Unit]], N])(x, y), y)) \226\134\146 cnorm2((x : Cart[Cart[Real, Tybit0[Unit]], N])) * (z : Real) == cnorm2(x - f(x, (y : _)) + f(x, y)) * z
+      #|  (y : Cart[Cart[Real, Tybit0[Unit]], N]) == cvector_zero
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], (pow(norm(cdot(x, y)), 2) == cnorm2(x) * cnorm2(y)) == collinear_cvectors(x, y)
+      #|  ((x : Real) == (y : Real)) == (abs(x) == abs(y) && (real_of_num(0) <= x && real_of_num(0) <= y || x < real_of_num(0) && y < real_of_num(0)))
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], (norm(cdot(x, y)) == norm(x) * norm(y)) == collinear_cvectors(x, y)
+      #|  ((x : Real) + (real_of_num(2) * (y : Real) + (z : Real)) <= x + (z + real_of_num(2) * (t : Real))) == (y <= t)
+      #|  (x : Cart[Real, Tybit0[Unit]]) + (y : Cart[Real, Tybit0[Unit]]) + ((z : Cart[Real, Tybit0[Unit]]) + (t : Cart[Real, Tybit0[Unit]])) == x + (y + z + t)
+      #|  abs((x : Real)) <= abs((y : Real)) && real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 x <= y
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], norm(x + y) <= norm(x) + norm(y)
+      #|  (y : Cart[Cart[Real, Tybit0[Unit]], N]) - (x : Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  (x : Cart[Cart[Real, Tybit0[Unit]], N])
+      #|  ((x : Real) <= (y : Real) + (z : Real)) == (x - y <= z)
+      #|  (-(x : Real) <= (y : Real)) == (-y <= x)
+      #|  (\226\136\128 x : _, \226\136\128 y : _, (P : (_, _) -> Bool)(x, y) == (Q : (_, _) -> Bool)(x, y)) \226\134\146 Q((x : _), (y : _)) \226\134\146 P(x, y)
+      #|  \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], abs(norm(x) - norm(y)) <= norm(x - y)
+      #|  (cvsum : ((A) -> Bool, (A) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((s : (A) -> Bool), (f : (A) -> Cart[Cart[Real, Tybit0[Unit]], N])) == lambda((i : Num) => vsum(s, (x : A) => op_dollar(f(x), i)))
+      #|  (csummable : ((Num) -> Bool, (Num) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Bool)((s : (Num) -> Bool), (f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N])) == (summable(s, o(cvector_re, f)) && summable(s, o(cvector_im, f)))
+      #|  (cinfsum : ((Num) -> Bool, (Num) -> Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], N])((s : (Num) -> Bool), (f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N])) == vector_to_cvector(infsum(s, (x : Num) => cvector_re(f(x)))) + cvector_mul(ii, vector_to_cvector(infsum(s, (x : Num) => cvector_im(f(x)))))
+      #|  fstcart((l : Cart[Real, Finite_sum[N, N]]))
+      #|  o(cvector_re, (f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N]))
       #|  :M
       #|  :N
-      #|  (p /\\ q <=> r) ==> (r ==> q)
-      #|  sndcart (l:real^(N,N) finite_sum)
-      #|  sndcart (l:real^(N,N) finite_sum)
-      #|  (cvector_im o f) :num->real^N
+      #|  ((p : Bool) && (q : Bool)) == (r : Bool) \226\134\146 r \226\134\146 q
+      #|  sndcart((l : Cart[Real, Finite_sum[N, N]]))
+      #|  sndcart((l : Cart[Real, Finite_sum[N, N]]))
+      #|  o(cvector_im, (f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N]))
       #|  :M
       #|  :N
-      #|  (p /\\ q <=> r) ==> (r ==> p)
-      #|  fstcart (l:real^(N,N) finite_sum)
-      #|  pastecart (l:real^N) (l':real^N)
-      #|  forall s (f:num->complex^N). csummable s f <=> summable s (cvector_flatten o f)
-      #|  forall s f.\n    csummable s f ==>\n      ((cinfsum s f):complex^N) =\n        cvector_unflatten (infsum s (cvector_flatten o f))
-      #|  cvector_flatten o (h:complex^N -> complex^M) o (f:num -> complex^N) =\n    \\n. (cvector_flatten o h o cvector_unflatten) (cvector_flatten (f n))
-      #|  forall f h:complex^N->complex^M s.\n    csummable s f /\\ clinear h ==> csummable s (h o f)
-      #|  cvector_flatten o (h:complex^M->complex^N) o (f:num->complex^M) =\n    \\n. (cvector_flatten o h o cvector_unflatten) ((cvector_flatten o f) n)
-      #|  forall f (h:complex^M->complex^N) s.\n    csummable s f /\\ clinear h ==> cinfsum s (h o f) = h (cinfsum s f)
+      #|  ((p : Bool) && (q : Bool)) == (r : Bool) \226\134\146 r \226\134\146 p
+      #|  fstcart((l : Cart[Real, Finite_sum[N, N]]))
+      #|  pastecart((l : Cart[Real, N]), (l' : Cart[Real, N]))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N], csummable(s, f) == summable(s, o(cvector_flatten, f))
+      #|  \226\136\128 s : (Num) -> Bool, \226\136\128 f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N], csummable(s, f) \226\134\146 cinfsum(s, f) == cvector_unflatten(infsum(s, o(cvector_flatten, f)))
+      #|  o(cvector_flatten, o((h : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], M]), (f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N]))) == ((n : Num) => o(cvector_flatten, o(h, cvector_unflatten), cvector_flatten(f(n))))
+      #|  \226\136\128 f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 h : (Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Cart[Real, Tybit0[Unit]], M], \226\136\128 s : (Num) -> Bool, csummable(s, f) && clinear(h) \226\134\146 csummable(s, o(h, f))
+      #|  o(cvector_flatten, o((h : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N]), (f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], M]))) == ((n : Num) => o(cvector_flatten, o(h, cvector_unflatten), o(cvector_flatten, f, n)))
+      #|  \226\136\128 f : (Num) -> Cart[Cart[Real, Tybit0[Unit]], M], \226\136\128 h : (Cart[Cart[Real, Tybit0[Unit]], M]) -> Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 s : (Num) -> Bool, csummable(s, f) && clinear(h) \226\134\146 cinfsum(s, o(h, f)) == h(cinfsum(s, f))
       #|COMPONENT_LE_NORM_ALT =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#real_le:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num)) (#vector_norm:fun(cart(real,'N),real) x:cart(real,'N))))))))
       #|RE_IM_NORM =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#Re:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#Im:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (#Re:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) (#Im:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))))))))
       #|RE_NORM =  |- (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). ((#real_le:fun(real,fun(real,bool)) (#Re:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1)))) (#vector_norm:fun(cart(real,tybit0(1)),real) x:cart(real,tybit0(1))))))
