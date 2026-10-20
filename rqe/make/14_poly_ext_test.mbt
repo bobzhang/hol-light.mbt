@@ -6741,37 +6741,37 @@ test "Rqe/poly_ext matches Rqe/poly_ext.ml" {
       #|  (x : Real) => poly((l : List[Real]), x)
       #|  \226\136\128 l : List[Real], \226\136\128 x : Real, diffl((x : Real) => poly(l, x), poly(poly_diff(l), x), x)
       #|  (pol1 : Real) + ((d : Real) + (y : Real) * (q : Real)) == pol1 + d + y * q && (c : Real) + (x : Real) * (p : Real) + (pol2 : Real) == c + pol2 + x * p && c + x * p + (d + x * q) == c + d + x * (p + q) && c + x * real_of_num(0) == c
-      #|  op_plus
+      #|  real_add
       #|  -((c : Real) + (x : Real) * (p : Real)) == -c + x * -p
       #|  (pol1 : Real) * ((d : Real) + (y : Real) * (q : Real)) == pol1 * d + y * (pol1 * q) && ((c : Real) + (x : Real) * (p : Real)) * (pol2 : Real) == c * pol2 + x * (p * pol2) && pol1 * (d + x * q) == pol1 * d + (real_of_num(0) + x * (pol1 * q)) && real_of_num(0) * pol2 == real_of_num(0) && pol1 * real_of_num(0) == real_of_num(0)
-      #|  op_star
+      #|  real_mul
       #|  real_of_num(0)
       #|  0
       #|  (x : Real) == real_of_num(0) + x * real_of_num(1)
-      #|  op_minus_minus
-      #|  op_plus
-      #|  op_minus
-      #|  op_star
-      #|  pow
+      #|  real_neg
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  real_pow
       #|  op_slash
-      #|  op_plus
-      #|  op_minus
-      #|  op_star
-      #|  op_minus_minus
-      #|  pow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  real_neg
+      #|  real_pow
       #|  (a : Real) + (b : Real) * real_of_num(0) == a
       #|  (a : Real) + (b : Real) * real_of_num(0) == a
-      #|  op_star
+      #|  real_mul
       #|  real_of_num(0)
       #|  op_plus(real_of_num(0))
-      #|  op_plus
-      #|  op_star
-      #|  pow
+      #|  real_add
+      #|  real_mul
+      #|  real_pow
       #|  real_of_num(1)
       #|  real_of_num(0)
       #|  (op_eq : (Real, Real) -> Bool)
-      #|  op_gt
-      #|  op_lt
+      #|  real_gt
+      #|  real_lt
       #|  poly_diff
       #|  \226\136\128 x : Real, \226\136\128 y : Real, (x < y) == (x - y < real_of_num(0))
       #|  \226\136\128 x : Real, \226\136\128 y : Real, (x <= y) == (x - y <= real_of_num(0))
