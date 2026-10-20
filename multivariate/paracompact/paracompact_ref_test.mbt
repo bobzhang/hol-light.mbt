@@ -21053,1862 +21053,1862 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..2..solved at 6
       #|Multivariate/paracompact quotations (1856):
-      #|  countably_paracompact_space (top:A topology) <=>\n        forall U. COUNTABLE U /\\\n            (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n            ==> ?V. (forall v. v IN V ==> open_in top v) /\\\n                    UNIONS V = topspace top /\\\n                    (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                    locally_finite_in top V
-      #|  U:(A->bool)->bool
-      #|  forall top:A topology.\n        paracompact_space top ==> countably_paracompact_space top
-      #|  forall top:A topology.\n        metrizable_space top ==> countably_paracompact_space top
-      #|  forall f:num->(A->bool).\n          (forall n. f(SUC n) SUBSET f n) ==> forall m n. m <= n ==> f n SUBSET f m
-      #|  ~((y:A) IN UNIONS {v:A->bool | v IN V /\\\n         ~(v INTER (f:num->(A->bool)) (n0:num) = {})})
-      #|  n0:num
-      #|  UNIONS {v:A->bool | v IN V /\\\n             ~(v INTER (f:num->(A->bool)) (n0:num) = {})}
-      #|  n0:num
-      #|  y:A
-      #|  y:A
-      #|  (forall x:A. ~(x IN s)) ==> s = {}
-      #|  (f:num->(A->bool)) N SUBSET f((nv:(A->bool)->num) w)
-      #|  ~((w:A->bool) INTER (f:num->(A->bool)) N = {})
-      #|  w:A->bool
-      #|  forall v:A->bool. v IN V\n        ==> v SUBSET topspace top DIFF (f:num->(A->bool))\n              ((nv:(A->bool)->num) v)
-      #|  (f:num->(A->bool)) N SUBSET f(nv(w:A->bool))
-      #|  w:A->bool
-      #|  w:A->bool
-      #|  N:num
-      #|  N:num
-      #|  nv:(A->bool)->num
-      #|  x:A
-      #|  w:A->bool
-      #|  {v:A->bool | v IN V /\\ ~(v INTER u = {})}
-      #|  FINITE {v:A->bool | v IN V /\\ (x:A) IN v}
-      #|  u:A->bool
-      #|  x:A
-      #|  w:A->bool
-      #|  locally_finite_in top (V:(A->bool)->bool)
-      #|  (w:A->bool) IN V
-      #|  w:A->bool
+      #|  (countably_paracompact_space : (Topology[A]) -> Bool)((top : Topology[A])) == (\226\136\128 U : ((A) -> Bool) -> Bool, COUNTABLE(U) && (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 open_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && locally_finite_in(top, V)))
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], paracompact_space(top) \226\134\146 countably_paracompact_space(top)
+      #|  \226\136\128 top : Topology[A], metrizable_space(top) \226\134\146 countably_paracompact_space(top)
+      #|  \226\136\128 f : (Num, A) -> Bool, (\226\136\128 n : Num, SUBSET(f(SUC(n)), f(n))) \226\134\146 (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(f(n), f(m)))
+      #|  !IN((y : A), UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && !(INTER(v, (f : (Num, A) -> Bool)((n0 : Num))) == {})}))
+      #|  (n0 : Num)
+      #|  UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && !(INTER(v, (f : (Num, A) -> Bool)((n0 : Num))) == {})})
+      #|  (n0 : Num)
+      #|  (y : A)
+      #|  (y : A)
+      #|  (\226\136\128 x : A, !IN(x, (s : (A) -> Bool))) \226\134\146 s == {}
+      #|  SUBSET((f : (Num, A) -> Bool)((N : Num)), f((nv : ((A) -> Bool) -> Num)((w : (A) -> Bool))))
+      #|  !(INTER((w : (A) -> Bool), (f : (Num, A) -> Bool)((N : Num))) == {})
+      #|  (w : (A) -> Bool)
+      #|  \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(v, DIFF(topspace((top : Topology[A])), (f : (Num, A) -> Bool)((nv : ((A) -> Bool) -> Num)(v))))
+      #|  SUBSET((f : (Num, A) -> Bool)((N : Num)), f((nv : ((A) -> Bool) -> Num)((w : (A) -> Bool))))
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (nv : ((A) -> Bool) -> Num)
+      #|  (x : A)
+      #|  (w : (A) -> Bool)
+      #|  {(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && !(INTER(v, (u : (A) -> Bool)) == {})}
+      #|  FINITE({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && IN((x : A), v)})
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  (w : (A) -> Bool)
+      #|  locally_finite_in((top : Topology[A]), (V : ((A) -> Bool) -> Bool))
+      #|  IN((w : (A) -> Bool), (V : ((A) -> Bool) -> Bool))
+      #|  (w : (A) -> Bool)
       #|  0
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  forall x:A. ?n:num. ~(x IN UNIONS {v:A->bool | v IN V /\\\n                      ~(v INTER (f:num->(A->bool)) n = {})})
-      #|  x:A
-      #|  v0:A->bool
-      #|  v0:A->bool
-      #|  (x:A) IN UNIONS V
-      #|  n:num
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  n:num
-      #|  forall x:A. ?n:num. ~(x IN f n)
-      #|  \\n:num. UNIONS {v:A->bool | v IN V /\\\n                     ~(v INTER (f:num->(A->bool)) n = {})}
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\131 n : Num, !IN(x, UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && !(INTER(v, (f : (Num, A) -> Bool)(n)) == {})}))
+      #|  (x : A)
+      #|  (v0 : (A) -> Bool)
+      #|  (v0 : (A) -> Bool)
+      #|  IN((x : A), UNIONS((V : ((A) -> Bool) -> Bool)))
+      #|  (n : Num)
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  \226\136\128 x : A, \226\136\131 n : Num, !IN(x, (f : (Num, A) -> Bool)(n))
+      #|  (n : Num) => UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && !(INTER(v, (f : (Num, A) -> Bool)(n)) == {})})
       #|  0
-      #|  v:A->bool
-      #|  (v:A->bool) IN V
-      #|  v:A->bool
-      #|  nv:(A->bool)->num
-      #|  ?nv:(A->bool)->num. forall v:A->bool. v IN V\n        ==> v SUBSET topspace top DIFF (f:num->(A->bool))(nv v)
-      #|  V:(A->bool)->bool
-      #|  m:num
-      #|  m:num
-      #|  x:A
-      #|  x:A
-      #|  (s:A->bool) SUBSET t ==> t DIFF s SUBSET t
-      #|  IMAGE (\\n:num. topspace top DIFF (f:num->(A->bool)) n) (:num)
-      #|  INTERS {(f:num->(A->bool)) n | n IN (:num)} = {}
-      #|  forall x:A. ?n:num. ~(x IN f n)
-      #|  f:num->(A->bool)
-      #|  forall top:A topology.\n        countably_paracompact_space top\n        ==> forall f. (forall n. closed_in top (f n)) /\\\n                (forall n. f(SUC n) SUBSET f n) /\\\n                INTERS {f n | n IN (:num)} = {}\n                ==> ?g. (forall n. open_in top (g n)) /\\\n                        (forall n. f n SUBSET g n) /\\\n                        INTERS {g n | n IN (:num)} = {}
-      #|  N:num
-      #|  (nv:(A->bool)->num) w
-      #|  n0:num
-      #|  (h:A->bool) IN s ==> t INTER INTERS s SUBSET h
-      #|  (H:num->A->bool) n0
-      #|  (s:A->bool) SUBSET c ==> s INTER (t DIFF c) = {}
-      #|  m:num
-      #|  m:num
-      #|  s:A->bool
-      #|  IMAGE (\\n:num. (u:num->A->bool) n INTER\n       INTERS(IMAGE (H:num->A->bool) {i:num | i < n}))\n       {j:num | j <= n0}
-      #|  n0:num
-      #|  topspace top DIFF top closure_of (H:num->A->bool) n0
-      #|  n0:num
-      #|  ?n0:num. ~((x:A) IN (g:num->A->bool) n0)
-      #|  x:A
-      #|  (s:A->bool) SUBSET t ==> s INTER u SUBSET t
-      #|  n:num
-      #|  (u:num->A->bool) n
-      #|  n:num
-      #|  x:A
-      #|  j:num
-      #|  j:num
-      #|  i:num
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  (x:A) IN topspace top DIFF\n        UNIONS(IMAGE (u:num->A->bool) {i:num | i <= j})
-      #|  j:num
-      #|  n:num
-      #|  n:num
-      #|  x:A
-      #|  UNIONS(IMAGE (u:num->A->bool) (:num)) = topspace top
-      #|  ?n:num. (x:A) IN u n
-      #|  x:A
-      #|  (s:A->bool) SUBSET t ==> s INTER u SUBSET t
-      #|  n:num
+      #|  (v : (A) -> Bool)
+      #|  IN((v : (A) -> Bool), (V : ((A) -> Bool) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  (nv : ((A) -> Bool) -> Num)
+      #|  \226\136\131 nv : ((A) -> Bool) -> Num, \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(v, DIFF(topspace((top : Topology[A])), (f : (Num, A) -> Bool)(nv(v))))
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  (x : A)
+      #|  SUBSET((s : (A) -> Bool), (t : (A) -> Bool)) \226\134\146 SUBSET(DIFF(t, s), t)
+      #|  IMAGE((n : Num) => DIFF(topspace((top : Topology[A])), (f : (Num, A) -> Bool)(n)), UNIV)
+      #|  INTERS({(f : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == {}
+      #|  \226\136\128 x : A, \226\136\131 n : Num, !IN(x, (f : (Num, A) -> Bool)(n))
+      #|  (f : (Num, A) -> Bool)
+      #|  \226\136\128 top : Topology[A], countably_paracompact_space(top) \226\134\146 (\226\136\128 f : (Num, A) -> Bool, (\226\136\128 n : Num, closed_in(top, f(n))) && (\226\136\128 n : Num, SUBSET(f(SUC(n)), f(n))) && INTERS({f((n : Num)) | IN(n, UNIV)}) == {} \226\134\146 (\226\136\131 g : (Num, A) -> Bool, (\226\136\128 n : Num, open_in(top, g(n))) && (\226\136\128 n : Num, SUBSET(f(n), g(n))) && INTERS({g((n : Num)) | IN(n, UNIV)}) == {}))
+      #|  (N : Num)
+      #|  (nv : ((A) -> Bool) -> Num)((w : (A) -> Bool))
+      #|  (n0 : Num)
+      #|  IN((h : (A) -> Bool), (s : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(INTER((t : (A) -> Bool), INTERS(s)), h)
+      #|  (H : (Num, A) -> Bool)((n0 : Num))
+      #|  SUBSET((s : (A) -> Bool), (c : (A) -> Bool)) \226\134\146 INTER(s, DIFF((t : (A) -> Bool), c)) == {}
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (s : (A) -> Bool)
+      #|  IMAGE((n : Num) => INTER((u : (Num, A) -> Bool)(n), INTERS(IMAGE((H : (Num, A) -> Bool), {(i : Num) | i < n}))), {(j : Num) | j <= (n0 : Num)})
+      #|  (n0 : Num)
+      #|  DIFF(topspace((top : Topology[A])), closure_of(top, (H : (Num, A) -> Bool)((n0 : Num))))
+      #|  (n0 : Num)
+      #|  \226\136\131 n0 : Num, !IN((x : A), (g : (Num, A) -> Bool)(n0))
+      #|  (x : A)
+      #|  SUBSET((s : (A) -> Bool), (t : (A) -> Bool)) \226\134\146 SUBSET(INTER(s, (u : (A) -> Bool)), t)
+      #|  (n : Num)
+      #|  (u : (Num, A) -> Bool)((n : Num))
+      #|  (n : Num)
+      #|  (x : A)
+      #|  (j : Num)
+      #|  (j : Num)
+      #|  (i : Num)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  IN((x : A), DIFF(topspace((top : Topology[A])), UNIONS(IMAGE((u : (Num, A) -> Bool), {(i : Num) | i <= (j : Num)}))))
+      #|  (j : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  UNIONS(IMAGE((u : (Num, A) -> Bool), UNIV)) == topspace((top : Topology[A]))
+      #|  \226\136\131 n : Num, IN((x : A), (u : (Num, A) -> Bool)(n))
+      #|  (x : A)
+      #|  SUBSET((s : (A) -> Bool), (t : (A) -> Bool)) \226\134\146 SUBSET(INTER(s, (u : (A) -> Bool)), t)
+      #|  (n : Num)
       #|  0
-      #|  n = 0
-      #|  n:num
-      #|  IMAGE (\\n:num. (u:num->A->bool) n INTER\n      INTERS(IMAGE (H:num->A->bool) {i:num | i < n})) (:num)
-      #|  n:num
-      #|  H:num->A->bool
-      #|  ?H:num->A->bool. forall n. open_in top (H n) /\\\n      topspace top DIFF UNIONS(IMAGE (u:num->A->bool) {i | i <= n})\n        SUBSET H n /\\\n      top closure_of H n SUBSET (g:num->A->bool) n
-      #|  g:num->A->bool
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  IMAGE((n : Num) => INTER((u : (Num, A) -> Bool)(n), INTERS(IMAGE((H : (Num, A) -> Bool), {(i : Num) | i < n}))), UNIV)
+      #|  (n : Num)
+      #|  (H : (Num, A) -> Bool)
+      #|  \226\136\131 H : (Num, A) -> Bool, \226\136\128 n : Num, open_in((top : Topology[A]), H(n)) && SUBSET(DIFF(topspace(top), UNIONS(IMAGE((u : (Num, A) -> Bool), {(i : Num) | i <= n}))), H(n)) && SUBSET(closure_of(top, H(n)), (g : (Num, A) -> Bool)(n))
+      #|  (g : (Num, A) -> Bool)
       #|  0
-      #|  k:num
-      #|  UNIONS(IMAGE (u:num->A->bool) (:num)) = topspace top
-      #|  ?k:num. (x:A) IN u k
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  (s:(A->bool)->bool) SUBSET t\n       ==> u DIFF UNIONS t SUBSET u DIFF UNIONS s
-      #|  \\n:num. topspace top DIFF\n      UNIONS(IMAGE (u:num->A->bool) {i:num | i <= n})
-      #|  COUNTABLE(IMAGE (u:num->A->bool) (:num))
-      #|  u:num->A->bool
-      #|  UNIONS U = topspace (top:A topology)
-      #|  {}:(A->bool)->bool
-      #|  U:(A->bool)->bool = {}
-      #|  U:(A->bool)->bool
-      #|  forall top:A topology.\n        normal_space top /\\\n        (forall f. (forall n. closed_in top (f n)) /\\\n             (forall n. f(SUC n) SUBSET f n) /\\\n             INTERS {f n | n IN (:num)} = {}\n             ==> ?g. (forall n. open_in top (g n)) /\\\n                     (forall n. f n SUBSET g n) /\\\n                     INTERS {g n | n IN (:num)} = {})\n        ==> countably_paracompact_space top
-      #|  {}:A->bool
-      #|  {}:A->bool
-      #|  {}:A->bool
-      #|  forall top:A topology.\n        normal_space top\n        ==> (countably_paracompact_space top <=>\n             forall f. (forall n. closed_in top (f n)) /\\\n                 (forall n. f(SUC n) SUBSET f n) /\\\n                 INTERS {f n | n IN (:num)} = {}\n                 ==> ?g. (forall n. open_in top (g n)) /\\\n                         (forall n. f n SUBSET g n) /\\\n                         INTERS {g n | n IN (:num)} = {})
-      #|  {(s:A->bool) INTER v | v IN V}
-      #|  (v:A->bool) SUBSET (f:(A->bool)->(A->bool)) x
-      #|  x:A->bool
-      #|  x:A->bool
-      #|  x:A->bool
-      #|  ~((v:A->bool) SUBSET topspace top DIFF s)
-      #|  v:A->bool
-      #|  (x:A) IN s
-      #|  (x:A) IN v
-      #|  v:A->bool
-      #|  s INTER v:A->bool
-      #|  v:A->bool
-      #|  UNIONS (V:(A->bool)->bool) = topspace top
-      #|  (x:A) IN UNIONS V
-      #|  (x:A) IN s
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  v:A->bool
-      #|  {s INTER v:A->bool | v | v IN V /\\ ~(v SUBSET topspace top DIFF s)}
-      #|  COUNTABLE(U:(A->bool)->bool)
-      #|  V:(A->bool)->bool
-      #|  closed_in top (s:A->bool)
-      #|  forall u:A->bool. u IN U ==> open_in top ((f:(A->bool)->(A->bool)) u) /\\\n                              u = s INTER f u
-      #|  u:A->bool
-      #|  u:A->bool
-      #|  forall u:A->bool. u IN U ==> (f:(A->bool)->(A->bool)) u SUBSET topspace top
-      #|  COUNTABLE(U:(A->bool)->bool)
-      #|  u:A->bool
-      #|  forall u:A->bool. u IN U ==> u SUBSET (f:(A->bool)->(A->bool)) u
-      #|  (s:A->bool) SUBSET topspace top
-      #|  x:A->bool
-      #|  (topspace top DIFF s:A->bool) INSERT IMAGE (f:(A->bool)->(A->bool)) U
-      #|  {}:A->bool
-      #|  u:A->bool
-      #|  (u:A->bool) IN U
-      #|  u:A->bool
-      #|  f:(A->bool)->(A->bool)
-      #|  ?f:(A->bool)->(A->bool).\n       forall u. u IN U ==> open_in top (f u) /\\ u = s INTER f u
-      #|  U:(A->bool)->bool
-      #|  forall top s:A->bool.\n        countably_paracompact_space top /\\ closed_in top s\n        ==> countably_paracompact_space(subtopology top s)
-      #|  U:((A#B)->bool)->bool
-      #|  w':A->bool
-      #|  z:A->bool
-      #|  u:(A#B)->bool
-      #|  ?u':(A#B)->bool. ?w':A->bool.\n     (w' IN Z /\\ u' IN (Ux:A->((A#B)->bool)->bool)((xw:(A->bool)->A) w')) /\\\n     (z:A->bool) CROSS topspace top' INTER (u:(A#B)->bool) =\n     w' CROSS topspace top' INTER u'
-      #|  u:(A#B)->bool
-      #|  z:A->bool
-      #|  \\v:(A#B)->bool. @u:(A#B)->bool.\n     ?w:A->bool. (w IN Z /\\ u IN (Ux:A->((A#B)->bool)->bool)\n       ((xw:(A->bool)->A) w)) /\\\n                 v = w CROSS topspace top' INTER u
-      #|  u:(A#B)->bool
-      #|  z:A->bool
-      #|  (z:A->bool) CROSS topspace top' INTER (u:(A#B)->bool)
-      #|  u:(A#B)->bool
-      #|  (xw:(A->bool)->A) z
-      #|  (a:A,b:B) IN UNIONS ((Ux:A->((A#B)->bool)->bool)((xw:(A->bool)->A) z))
-      #|  z:A->bool
-      #|  (a:A) IN UNIONS Z
-      #|  s:(A#B)->bool
-      #|  b:B
-      #|  a:A
-      #|  u:(A#B)->bool
-      #|  z:A->bool
-      #|  {(z:A->bool) CROSS topspace top' INTER (u:(A#B)->bool) |\n               z IN Z /\\ u IN (Ux:A->((A#B)->bool)->bool)((xw:(A->bool)->A) z)}
-      #|  p:A
-      #|  p:A
-      #|  G:((A#B)->bool)->bool
-      #|  c:A->bool
-      #|  z:A->bool
-      #|  z:A->bool
-      #|  ?xw:(A->bool)->A. forall z. z IN Z\n       ==> xw z IN topspace top /\\\n           z SUBSET (W:(((A#B)->bool)->bool)->(A->bool))\n                    ((Ux:A->((A#B)->bool)->bool)(xw z))
-      #|  Z:(A->bool)->bool
-      #|  x:A
-      #|  x:A
-      #|  (V:A->(A->bool)) x
-      #|  x:A
-      #|  y:A
-      #|  y:A
-      #|  open_in top ((W:(((A#B)->bool)->bool)->(A->bool))\n                     ((Ux:A->((A#B)->bool)->bool) q))
-      #|  q:A
-      #|  x:A
-      #|  y:A
-      #|  y:A
-      #|  q:A
-      #|  forall p:A. p IN topspace top\n            ==> (W:(((A#B)->bool)->bool)->(A->bool))\n                ((Ux:A->((A#B)->bool)->bool) p) CROSS\n                topspace (top':B topology) SUBSET UNIONS (Ux p)
-      #|  IMAGE (W:(((A#B)->bool)->bool)->(A->bool))\n           (IMAGE (Ux:A->((A#B)->bool)->bool) (topspace top))
-      #|  COUNTABLE(U:((A#B)->bool)->bool)
-      #|  y:A
-      #|  y:A
-      #|  G:((A#B)->bool)->bool
-      #|  {G:((A#B)->bool)->bool | G SUBSET U /\\ FINITE G}
-      #|  COUNTABLE (IMAGE (Ux:A->((A#B)->bool)->bool) (topspace top))
-      #|  x0:A
-      #|  (a:A,b:B) IN UNIONS ((Ux:A->((A#B)->bool)->bool) x0)
-      #|  x0:A
-      #|  t:A->bool
-      #|  b:B
-      #|  a:A
-      #|  p:A
-      #|  forall p:A. p IN topspace top\n           ==> (W:(((A#B)->bool)->bool)->(A->bool))(Ux p) CROSS topspace top'\n               SUBSET UNIONS ((Ux:A->((A#B)->bool)->bool) p)
-      #|  W = \\(G:((A#B)->bool)->bool).\n       UNIONS {(V:A->(A->bool)) x | x | x IN topspace top /\\\n               (Ux:A->((A#B)->bool)->bool) x = G}
-      #|  Ux:A->((A#B)->bool)->bool
-      #|  V:A->(A->bool)
-      #|  (x:A,b:B)
-      #|  b:B
-      #|  a:A
-      #|  x:A
-      #|  forall x:A. x IN topspace top\n           ==> ?v (Ux:((A#B)->bool)->bool). open_in top v /\\ x IN v /\\\n                      FINITE Ux /\\ Ux SUBSET U /\\\n                      (v:A->bool) CROSS topspace top' SUBSET UNIONS Ux
-      #|  U:((A#B)->bool)->bool
-      #|  forall(top:A topology) (top':B topology).\n        countably_paracompact_space top /\\ compact_space top'\n        ==> countably_paracompact_space(prod_topology top top')
-      #|  UNIONS ((Sn:num->(A->bool)->bool) n)
-      #|  top:A topology
-      #|  n:num
-      #|  n:num
-      #|  UNIONS ((Sn:num->(A->bool)->bool) m) SUBSET topspace top
-      #|  UNIONS ((Sn:num->(A->bool)->bool) m)
-      #|  top:A topology
-      #|  m:num
-      #|  m:num
-      #|  x:A
-      #|  UNIONS ((Sn:num->(A->bool)->bool) 0)
-      #|  top:A topology
+      #|  (k : Num)
+      #|  UNIONS(IMAGE((u : (Num, A) -> Bool), UNIV)) == topspace((top : Topology[A]))
+      #|  \226\136\131 k : Num, IN((x : A), (u : (Num, A) -> Bool)(k))
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  SUBSET((s : ((A) -> Bool) -> Bool), (t : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(DIFF((u : (A) -> Bool), UNIONS(t)), DIFF(u, UNIONS(s)))
+      #|  (n : Num) => DIFF(topspace((top : Topology[A])), UNIONS(IMAGE((u : (Num, A) -> Bool), {(i : Num) | i <= n})))
+      #|  COUNTABLE(IMAGE((u : (Num, A) -> Bool), UNIV))
+      #|  (u : (Num, A) -> Bool)
+      #|  UNIONS((U : ((A) -> Bool) -> Bool)) == topspace((top : Topology[A]))
+      #|  ({} : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool) == {}
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], normal_space(top) && (\226\136\128 f : (Num, A) -> Bool, (\226\136\128 n : Num, closed_in(top, f(n))) && (\226\136\128 n : Num, SUBSET(f(SUC(n)), f(n))) && INTERS({f((n : Num)) | IN(n, UNIV)}) == {} \226\134\146 (\226\136\131 g : (Num, A) -> Bool, (\226\136\128 n : Num, open_in(top, g(n))) && (\226\136\128 n : Num, SUBSET(f(n), g(n))) && INTERS({g((n : Num)) | IN(n, UNIV)}) == {})) \226\134\146 countably_paracompact_space(top)
+      #|  ({} : (A) -> Bool)
+      #|  ({} : (A) -> Bool)
+      #|  ({} : (A) -> Bool)
+      #|  \226\136\128 top : Topology[A], normal_space(top) \226\134\146 countably_paracompact_space(top) == (\226\136\128 f : (Num, A) -> Bool, (\226\136\128 n : Num, closed_in(top, f(n))) && (\226\136\128 n : Num, SUBSET(f(SUC(n)), f(n))) && INTERS({f((n : Num)) | IN(n, UNIV)}) == {} \226\134\146 (\226\136\131 g : (Num, A) -> Bool, (\226\136\128 n : Num, open_in(top, g(n))) && (\226\136\128 n : Num, SUBSET(f(n), g(n))) && INTERS({g((n : Num)) | IN(n, UNIV)}) == {}))
+      #|  {INTER((s : (A) -> Bool), (v : (A) -> Bool)) | IN(v, (V : ((A) -> Bool) -> Bool))}
+      #|  SUBSET((v : (A) -> Bool), (f : ((A) -> Bool, A) -> Bool)((x : (A) -> Bool)))
+      #|  (x : (A) -> Bool)
+      #|  (x : (A) -> Bool)
+      #|  (x : (A) -> Bool)
+      #|  !SUBSET((v : (A) -> Bool), DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)))
+      #|  (v : (A) -> Bool)
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  IN((x : A), (v : (A) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  INTER((s : (A) -> Bool), (v : (A) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  UNIONS((V : ((A) -> Bool) -> Bool)) == topspace((top : Topology[A]))
+      #|  IN((x : A), UNIONS((V : ((A) -> Bool) -> Bool)))
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  (v : (A) -> Bool)
+      #|  {INTER((s : (A) -> Bool), v) | v : (A) -> Bool | IN(v, (V : ((A) -> Bool) -> Bool)) && !SUBSET(v, DIFF(topspace((top : Topology[A])), s))}
+      #|  COUNTABLE((U : ((A) -> Bool) -> Bool))
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  closed_in((top : Topology[A]), (s : (A) -> Bool))
+      #|  \226\136\128 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), (f : ((A) -> Bool, A) -> Bool)(u)) && u == INTER((s : (A) -> Bool), f(u))
+      #|  (u : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  \226\136\128 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET((f : ((A) -> Bool, A) -> Bool)(u), topspace((top : Topology[A])))
+      #|  COUNTABLE((U : ((A) -> Bool) -> Bool))
+      #|  (u : (A) -> Bool)
+      #|  \226\136\128 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(u, (f : ((A) -> Bool, A) -> Bool)(u))
+      #|  SUBSET((s : (A) -> Bool), topspace((top : Topology[A])))
+      #|  (x : (A) -> Bool)
+      #|  INSERT(DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)), IMAGE((f : ((A) -> Bool, A) -> Bool), (U : ((A) -> Bool) -> Bool)))
+      #|  ({} : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  IN((u : (A) -> Bool), (U : ((A) -> Bool) -> Bool))
+      #|  (u : (A) -> Bool)
+      #|  (f : ((A) -> Bool, A) -> Bool)
+      #|  \226\136\131 f : ((A) -> Bool, A) -> Bool, \226\136\128 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), f(u)) && u == INTER((s : (A) -> Bool), f(u))
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, countably_paracompact_space(top) && closed_in(top, s) \226\134\146 countably_paracompact_space(subtopology(top, s))
+      #|  (U : (((A, B)) -> Bool) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (z : (A) -> Bool)
+      #|  (u : ((A, B)) -> Bool)
+      #|  \226\136\131 u' : ((A, B)) -> Bool, \226\136\131 w' : (A) -> Bool, (IN(w', (Z : ((A) -> Bool) -> Bool)) && IN(u', (Ux : (A, ((A, B)) -> Bool) -> Bool)((xw : ((A) -> Bool) -> A)(w')))) && INTER(CROSS((z : (A) -> Bool), topspace((top' : Topology[B]))), (u : ((A, B)) -> Bool)) == INTER(CROSS(w', topspace(top')), u')
+      #|  (u : ((A, B)) -> Bool)
+      #|  (z : (A) -> Bool)
+      #|  (v : ((A, B)) -> Bool) => select((u : ((A, B)) -> Bool) => \226\136\131 w : (A) -> Bool, (IN(w, (Z : ((A) -> Bool) -> Bool)) && IN(u, (Ux : (A, ((A, B)) -> Bool) -> Bool)((xw : ((A) -> Bool) -> A)(w)))) && v == INTER(CROSS(w, topspace((top' : Topology[B]))), u))
+      #|  (u : ((A, B)) -> Bool)
+      #|  (z : (A) -> Bool)
+      #|  INTER(CROSS((z : (A) -> Bool), topspace((top' : Topology[B]))), (u : ((A, B)) -> Bool))
+      #|  (u : ((A, B)) -> Bool)
+      #|  (xw : ((A) -> Bool) -> A)((z : (A) -> Bool))
+      #|  IN(((a : A), (b : B)), UNIONS((Ux : (A, ((A, B)) -> Bool) -> Bool)((xw : ((A) -> Bool) -> A)((z : (A) -> Bool)))))
+      #|  (z : (A) -> Bool)
+      #|  IN((a : A), UNIONS((Z : ((A) -> Bool) -> Bool)))
+      #|  (s : ((A, B)) -> Bool)
+      #|  (b : B)
+      #|  (a : A)
+      #|  (u : ((A, B)) -> Bool)
+      #|  (z : (A) -> Bool)
+      #|  {INTER(CROSS((z : (A) -> Bool), topspace((top' : Topology[B]))), (u : ((A, B)) -> Bool)) | IN(z, (Z : ((A) -> Bool) -> Bool)) && IN(u, (Ux : (A, ((A, B)) -> Bool) -> Bool)((xw : ((A) -> Bool) -> A)(z)))}
+      #|  (p : A)
+      #|  (p : A)
+      #|  (G : (((A, B)) -> Bool) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (z : (A) -> Bool)
+      #|  (z : (A) -> Bool)
+      #|  \226\136\131 xw : ((A) -> Bool) -> A, \226\136\128 z : (A) -> Bool, IN(z, (Z : ((A) -> Bool) -> Bool)) \226\134\146 IN(xw(z), topspace((top : Topology[A]))) && SUBSET(z, (W : ((((A, B)) -> Bool) -> Bool, A) -> Bool)((Ux : (A, ((A, B)) -> Bool) -> Bool)(xw(z))))
+      #|  (Z : ((A) -> Bool) -> Bool)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (V : (A, A) -> Bool)((x : A))
+      #|  (x : A)
+      #|  (y : A)
+      #|  (y : A)
+      #|  open_in((top : Topology[A]), (W : ((((A, B)) -> Bool) -> Bool, A) -> Bool)((Ux : (A, ((A, B)) -> Bool) -> Bool)((q : A))))
+      #|  (q : A)
+      #|  (x : A)
+      #|  (y : A)
+      #|  (y : A)
+      #|  (q : A)
+      #|  \226\136\128 p : A, IN(p, topspace((top : Topology[A]))) \226\134\146 SUBSET(CROSS((W : ((((A, B)) -> Bool) -> Bool, A) -> Bool)((Ux : (A, ((A, B)) -> Bool) -> Bool)(p)), topspace((top' : Topology[B]))), UNIONS(Ux(p)))
+      #|  IMAGE((W : ((((A, B)) -> Bool) -> Bool, A) -> Bool), IMAGE((Ux : (A, ((A, B)) -> Bool) -> Bool), topspace((top : Topology[A]))))
+      #|  COUNTABLE((U : (((A, B)) -> Bool) -> Bool))
+      #|  (y : A)
+      #|  (y : A)
+      #|  (G : (((A, B)) -> Bool) -> Bool)
+      #|  {(G : (((A, B)) -> Bool) -> Bool) | SUBSET(G, (U : (((A, B)) -> Bool) -> Bool)) && FINITE(G)}
+      #|  COUNTABLE(IMAGE((Ux : (A, ((A, B)) -> Bool) -> Bool), topspace((top : Topology[A]))))
+      #|  (x0 : A)
+      #|  IN(((a : A), (b : B)), UNIONS((Ux : (A, ((A, B)) -> Bool) -> Bool)((x0 : A))))
+      #|  (x0 : A)
+      #|  (t : (A) -> Bool)
+      #|  (b : B)
+      #|  (a : A)
+      #|  (p : A)
+      #|  \226\136\128 p : A, IN(p, topspace((top : Topology[A]))) \226\134\146 SUBSET(CROSS((W : ((((A, B)) -> Bool) -> Bool, A) -> Bool)((Ux : (A, ((A, B)) -> Bool) -> Bool)(p)), topspace((top' : Topology[B]))), UNIONS(Ux(p)))
+      #|  (W : ((((A, B)) -> Bool) -> Bool, A) -> Bool) == ((G : (((A, B)) -> Bool) -> Bool) => UNIONS({(V : (A, A) -> Bool)((x : A)) | IN(x, topspace((top : Topology[A]))) && (Ux : (A, ((A, B)) -> Bool) -> Bool)(x) == G}))
+      #|  (Ux : (A, ((A, B)) -> Bool) -> Bool)
+      #|  (V : (A, A) -> Bool)
+      #|  ((x : A), (b : B))
+      #|  (b : B)
+      #|  (a : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, topspace((top : Topology[A]))) \226\134\146 (\226\136\131 v : (A) -> Bool, \226\136\131 Ux : (((A, B)) -> Bool) -> Bool, open_in(top, v) && IN(x, v) && FINITE(Ux) && SUBSET(Ux, (U : (((A, B)) -> Bool) -> Bool)) && SUBSET(CROSS(v, topspace((top' : Topology[B]))), UNIONS(Ux)))
+      #|  (U : (((A, B)) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], countably_paracompact_space(top) && compact_space(top') \226\134\146 countably_paracompact_space(prod_topology(top, top'))
+      #|  UNIONS((Sn : (Num, (A) -> Bool) -> Bool)((n : Num)))
+      #|  (top : Topology[A])
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  SUBSET(UNIONS((Sn : (Num, (A) -> Bool) -> Bool)((m : Num))), topspace((top : Topology[A])))
+      #|  UNIONS((Sn : (Num, (A) -> Bool) -> Bool)((m : Num)))
+      #|  (top : Topology[A])
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (x : A)
+      #|  UNIONS((Sn : (Num, (A) -> Bool) -> Bool)(0))
+      #|  (top : Topology[A])
       #|  0
-      #|  (x:A) IN topspace top
-      #|  (x:A) IN C
-      #|  x:A
-      #|  n:num
-      #|  IMAGE (\\n:num. topspace top DIFF\n                top closure_of (UNIONS ((Sn:num->(A->bool)->bool) n)))\n              (:num)
-      #|  b:A->bool
-      #|  m:num
-      #|  m:num
-      #|  ?m:num. (b:A->bool) IN (Bn:num->(A->bool)->bool) m
-      #|  top closure_of (b:A->bool) SUBSET v
-      #|  top closure_of (b:A->bool) INTER C = {}
-      #|  b:A->bool
-      #|  u:A->bool
-      #|  x:A
-      #|  v:A->bool
-      #|  u:A->bool
-      #|  x:A
-      #|  topspace top DIFF C:A->bool
-      #|  regular_space (top:A topology)
-      #|  x:A
-      #|  forall x:A. x IN topspace top /\\ ~(x IN C)\n           ==> ?m:num. x IN UNIONS ((Sn:num->(A->bool)->bool) m)
-      #|  b:A->bool
-      #|  n:num
-      #|  forall n:num. top closure_of\n             (UNIONS ((Sn:num->(A->bool)->bool) n)) INTER C = {}
-      #|  (Sn:num->(A->bool)->bool) n SUBSET (Bn:num->(A->bool)->bool) n
-      #|  n:num
-      #|  forall n:num. locally_finite_in top ((Sn:num->(A->bool)->bool) n)
-      #|  Sn = \\n:num. {b:A->bool | b IN Bn n /\\\n                                top closure_of b INTER C = {}}
-      #|  Bn:num->(A->bool)->bool
-      #|  forall top:A topology C (B:(A->bool)->bool).\n        regular_space top /\\\n        closed_in top C /\\\n        (forall b. b IN B ==> open_in top b) /\\\n        (forall x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> gdelta_in top C
-      #|  x:A
-      #|  N:num
-      #|  N:num
-      #|  abs((g:A->real) x)
-      #|  (~p ==> F) ==> p
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  IN((x : A), (C : (A) -> Bool))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  IMAGE((n : Num) => DIFF(topspace((top : Topology[A])), closure_of(top, UNIONS((Sn : (Num, (A) -> Bool) -> Bool)(n)))), UNIV)
+      #|  (b : (A) -> Bool)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  \226\136\131 m : Num, IN((b : (A) -> Bool), (Bn : (Num, (A) -> Bool) -> Bool)(m))
+      #|  SUBSET(closure_of((top : Topology[A]), (b : (A) -> Bool)), (v : (A) -> Bool))
+      #|  INTER(closure_of((top : Topology[A]), (b : (A) -> Bool)), (C : (A) -> Bool)) == {}
+      #|  (b : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  (v : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  DIFF(topspace((top : Topology[A])), (C : (A) -> Bool))
+      #|  regular_space((top : Topology[A]))
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, topspace((top : Topology[A]))) && !IN(x, (C : (A) -> Bool)) \226\134\146 (\226\136\131 m : Num, IN(x, UNIONS((Sn : (Num, (A) -> Bool) -> Bool)(m))))
+      #|  (b : (A) -> Bool)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, INTER(closure_of((top : Topology[A]), UNIONS((Sn : (Num, (A) -> Bool) -> Bool)(n))), (C : (A) -> Bool)) == {}
+      #|  SUBSET((Sn : (Num, (A) -> Bool) -> Bool)((n : Num)), (Bn : (Num, (A) -> Bool) -> Bool)(n))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, locally_finite_in((top : Topology[A]), (Sn : (Num, (A) -> Bool) -> Bool)(n))
+      #|  (Sn : (Num, (A) -> Bool) -> Bool) == ((n : Num) => {(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && INTER(closure_of((top : Topology[A]), b), (C : (A) -> Bool)) == {}})
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 C : (A) -> Bool, \226\136\128 B : ((A) -> Bool) -> Bool, regular_space(top) && closed_in(top, C) && (\226\136\128 b : (A) -> Bool, IN(b, B) \226\134\146 open_in(top, b)) && (\226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in(top, u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, B) && IN(x, b) && SUBSET(b, u))) && sigma_locally_finite_in(top, B) \226\134\146 gdelta_in(top, C)
+      #|  (x : A)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  abs((g : (A) -> Real)((x : A)))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
       #|  forall m. sum(0..m)\n               (\\k. (fn:num->A->real) k x * inv(&2) pow (k+1)) = &0
       #|  forall n:num. (fn:num->A->real) n x = &0
-      #|  (x:A) IN A
+      #|  IN((x : A), (A : (A) -> Bool))
       #|  &0 <= sum(0..N + n)\n           (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))
       #|  \\k:num. (fn:num->A->real) k (x:A) * inv(&2) pow (k + 1)
-      #|  0..N + n
-      #|  n..n
+      #|  op_dot_dot(0, (N : Num) + (n : Num))
+      #|  op_dot_dot((n : Num), n)
       #|  inv(&2) pow (n + 1) <=\n           sum(0..N + n)\n             (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))
-      #|  x:A
-      #|  N + n:num
-      #|  N:num
-      #|  inv(&2) pow (n + 1)
+      #|  (x : A)
+      #|  (N : Num) + (n : Num)
+      #|  (N : Num)
+      #|  pow(inv(real_of_num(2)), (n : Num) + 1)
       #|  (fn:num->A->real) n x = &1
-      #|  (~p ==> F) ==> p
-      #|  n:num
-      #|  x:A
-      #|  &1 < (g:A->real) x
-      #|  N:num
-      #|  x:A
-      #|  N:num
-      #|  N:num
-      #|  (g:A->real) x - &1
-      #|  (g:A->real) x < &0
-      #|  N:num
-      #|  x:A
-      #|  N:num
-      #|  N:num
-      #|  --((g:A->real) x)
-      #|  &0 <= b ==> &1 - b <= &1
-      #|  &1 - inv(&2) = inv(&2)
-      #|  m:num
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (n : Num)
+      #|  (x : A)
+      #|  real_of_num(1) < (g : (A) -> Real)((x : A))
+      #|  (N : Num)
+      #|  (x : A)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (g : (A) -> Real)((x : A)) - real_of_num(1)
+      #|  (g : (A) -> Real)((x : A)) < real_of_num(0)
+      #|  (N : Num)
+      #|  (x : A)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  -(g : (A) -> Real)((x : A))
+      #|  real_of_num(0) <= (b : Real) \226\134\146 real_of_num(1) - b <= real_of_num(1)
+      #|  real_of_num(1) - inv(real_of_num(2)) == inv(real_of_num(2))
+      #|  (m : Num)
       #|  0
-      #|  inv(&2)
-      #|  sum(0..m) (\\k. inv(&2) pow (k + 1))
+      #|  inv(real_of_num(2))
+      #|  sum(op_dot_dot(0, (m : Num)), (k : Num) => pow(inv(real_of_num(2)), k + 1))
       #|  forall m. &0 <= sum(0..m)\n              (\\k. (fn:num->A->real) k x * inv(&2) pow (k+1)) /\\\n            sum(0..m)\n              (\\k. fn k x * inv(&2) pow (k+1)) <= &1
-      #|  x:A
-      #|  g:A->real
-      #|  m:num
-      #|  a <= b /\\ &0 <= c ==> a - c <= b
-      #|  &1 - inv(&2) = inv(&2)
-      #|  nn:num
-      #|  SUC m
-      #|  inv(&2)
-      #|  inv(&2) pow m
-      #|  sum(m+1..nn) (\\k. inv(&2) pow (k + 1))
-      #|  a - b = c /\\ &0 <= c ==> abs(a - b) <= c
+      #|  (x : A)
+      #|  (g : (A) -> Real)
+      #|  (m : Num)
+      #|  (a : Real) <= (b : Real) && real_of_num(0) <= (c : Real) \226\134\146 a - c <= b
+      #|  real_of_num(1) - inv(real_of_num(2)) == inv(real_of_num(2))
+      #|  (nn : Num)
+      #|  SUC((m : Num))
+      #|  inv(real_of_num(2))
+      #|  pow(inv(real_of_num(2)), (m : Num))
+      #|  sum(op_dot_dot((m : Num) + 1, (nn : Num)), (k : Num) => pow(inv(real_of_num(2)), k + 1))
+      #|  (a : Real) - (b : Real) == (c : Real) && real_of_num(0) <= c \226\134\146 abs(a - b) <= c
       #|  sum(m+1..nn) (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))
       #|  &0 <= sum(m+1..nn)\n        (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))
-      #|  nn:num
-      #|  m:num
+      #|  (nn : Num)
+      #|  (m : Num)
       #|  0
       #|  \\k. (fn:num->A->real) k x * inv(&2) pow (k + 1)
       #|  sum(0..nn) (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1)) -\n       sum(0..m) (\\k. fn k x * inv(&2) pow (k + 1)) =\n       sum(m+1..nn) (\\k. fn k x * inv(&2) pow (k + 1))
-      #|  nn:num
-      #|  m:num
-      #|  N:num
-      #|  e:real
-      #|  inv(&2)
-      #|  e:real
-      #|  g:A->real
+      #|  (nn : Num)
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  inv(real_of_num(2))
+      #|  (e : Real)
+      #|  (g : (A) -> Real)
       #|  ?g:A->real. continuous_map(top,euclideanreal) g /\\\n       (forall e. &0 < e\n            ==> eventually\n                  (\\n. forall(x:A). x IN topspace top\n                       ==> abs(g x - sum (0..n)\n                              (\\k. (fn:num->A->real) k x *\n                                   inv(&2) pow (k + 1))) < e)\n                  sequentially)
       #|  (\\n x:A. sum(0..n)\n       (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1))):num->A->real
       #|  real_euclidean_metric
-      #|  top:A topology
+      #|  (top : Topology[A])
       #|  forall n. continuous_map(top:A topology, euclideanreal)\n          (\\x. sum(0..n) (\\k. (fn:num->A->real) k x * inv(&2) pow (k + 1)))
       #|  continuous_map\n         (top:A topology,\n          subtopology euclideanreal (real_interval [&0,&1]))\n         ((fn:num->A->real) n)
       #|  continuous_map\n         (top:A topology,\n          subtopology euclideanreal (real_interval [&0,&1]))\n         ((fn:num->A->real) n)
       #|  (forall n:num. continuous_map(top,euclideanreal) ((fn:num->A->real) n)) /\\\n     (forall n x:A. x IN topspace top ==> &0 <= fn n x /\\ fn n x <= &1)
       #|  fn:num->A->real
-      #|  &1
-      #|  &0
-      #|  topspace top DIFF (U:num->A->bool) n
-      #|  A:A->bool
-      #|  top:A topology
+      #|  real_of_num(1)
+      #|  real_of_num(0)
+      #|  DIFF(topspace((top : Topology[A])), (U : (Num, A) -> Bool)((n : Num)))
+      #|  (A : (A) -> Bool)
+      #|  (top : Topology[A])
       #|  forall n. ?fn:A->real.\n       continuous_map\n         (top, subtopology euclideanreal (real_interval[&0,&1])) fn /\\\n       (forall x. x IN A ==> fn x = &0) /\\\n       (forall x. x IN topspace top DIFF (U:num->A->bool) n ==> fn x = &1)
-      #|  forall n:num. (A:A->bool) SUBSET U n
-      #|  {(U:num->A->bool) n | n IN (:num)} = topspace top INSERT u
-      #|  (A:A->bool) = INTERS {U n | n IN (:num)}
-      #|  (U:num->A->bool) n IN (topspace top:A->bool) INSERT u
-      #|  forall n:num. open_in top ((U:num->A->bool) n)
-      #|  U:num->A->bool
-      #|  (topspace top:A->bool) INSERT u
-      #|  u:(A->bool)->bool
-      #|  gdelta_in (top:A topology) (A:A->bool)
-      #|  forall top:A topology A.\n        normal_space top /\\ closed_in top A /\\ gdelta_in top A\n        ==> ?f. continuous_map(top,euclideanreal) f /\\\n                (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n                (forall x. x IN topspace top ==> (f x = &0 <=> x IN A))
-      #|  b:A->bool
-      #|  m:num
-      #|  UNIONS {b':A->bool | b' IN (Bn:num->(A->bool)->bool) m /\\\n                            top closure_of b' SUBSET W}
-      #|  p:num
-      #|  p:num
-      #|  t:(A->bool)->bool
-      #|  (b:A->bool) IN B
-      #|  m:num
-      #|  ?m:num. (b:A->bool) IN (Bn:num->(A->bool)->bool) m
-      #|  u:A->bool
-      #|  v:A->bool
-      #|  top closure_of (b:A->bool) SUBSET W
-      #|  b:A->bool
-      #|  ?b:A->bool. b IN B /\\ (x:A) IN b /\\ b SUBSET (u:A->bool)
-      #|  v:A->bool
-      #|  u:A->bool
-      #|  x:A
-      #|  W:A->bool
-      #|  regular_space (top:A topology)
-      #|  x:A
-      #|  (Bn:num->(A->bool)->bool) n
-      #|  forall n. locally_finite_in top\n         {b:A->bool | b IN (Bn:num->(A->bool)->bool) n /\\\n                      top closure_of b SUBSET W}
-      #|  \\n. UNIONS {b:A->bool | b IN (Bn:num->(A->bool)->bool) n /\\\n                          top closure_of b SUBSET W}
-      #|  n:num
-      #|  (Bn:num->(A->bool)->bool) (n:num)
-      #|  forall n:num (b:A->bool). b IN (Bn:num->(A->bool)->bool) n ==> open_in top b
-      #|  Bn:num->(A->bool)->bool
-      #|  forall top:A topology B W.\n        regular_space top /\\ open_in top W /\\\n        (forall b. b IN B ==> open_in top b) /\\\n        (forall x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> ?En. (forall n. open_in top (En n)) /\\\n                 (forall n. top closure_of (En n) SUBSET W) /\\\n                 W SUBSET UNIONS {En n | n IN (:num)}
-      #|  (V:num->A->bool) p
-      #|  top:A topology
-      #|  p:num
-      #|  forall k. k IN 0..m\n           ==> ~((x:A) IN top closure_of ((V:num->A->bool) k))
-      #|  (U:num->A->bool) m
-      #|  top:A topology
-      #|  m:num
-      #|  p:num
-      #|  m:num
-      #|  k:num
-      #|  ?k':num. top closure_of ((U:num->A->bool) k) =\n                top closure_of (U k') /\\ k' IN 0..p
-      #|  top closure_of ((U:num->A->bool) k)
-      #|  k:num
-      #|  (x:A) IN (V':num->A->bool) p
-      #|  (x:A) IN (V:num->A->bool) p /\\\n      (forall k. k IN (0..p)\n           ==> ~(x IN top closure_of ((U:num->A->bool) k)))
-      #|  k:num
-      #|  ?k':num. top closure_of ((V:num->A->bool) k) =\n                top closure_of (V k') /\\ k' IN 0..m
-      #|  top closure_of ((V:num->A->bool) k)
-      #|  k:num
-      #|  (x:A) IN (U':num->A->bool) m
-      #|  (x:A) IN (U:num->A->bool) m /\\\n      (forall k. k IN (0..m)\n           ==> ~(x IN top closure_of ((V:num->A->bool) k)))
-      #|  p:num
-      #|  sv:A->bool
-      #|  m:num
-      #|  su:A->bool
-      #|  x:A
-      #|  DISJOINT s t <=> forall x:A. x IN s ==> ~(x IN t)
-      #|  x:A
-      #|  k:num
-      #|  forall n:num. top closure_of (U:num->A->bool) n\n              SUBSET topspace top DIFF t
-      #|  k:num
-      #|  c:A->bool
-      #|  m:num
-      #|  (V':num->A->bool) m
-      #|  m:num
-      #|  sv:A->bool
-      #|  (x:A) IN topspace top
-      #|  (x:A) IN topspace top DIFF s
-      #|  (x:A) IN UNIONS {(V:num->A->bool) n | n IN (:num)}
-      #|  x:A
-      #|  x:A
-      #|  k:num
-      #|  forall n:num. top closure_of (V:num->A->bool) n\n              SUBSET topspace top DIFF s
-      #|  k:num
-      #|  c:A->bool
-      #|  m:num
-      #|  (U':num->A->bool) m
-      #|  m:num
-      #|  su:A->bool
-      #|  (x:A) IN topspace top
-      #|  (x:A) IN topspace top DIFF t
-      #|  (x:A) IN UNIONS {(U:num->A->bool) n | n IN (:num)}
-      #|  x:A
-      #|  forall n. open_in top ((V':num->A->bool) n)
-      #|  forall n. open_in top ((U':num->A->bool) n)
-      #|  UNIONS {(V':num->A->bool) n | n IN (:num)}
-      #|  UNIONS {(U':num->A->bool) n | n IN (:num)}
-      #|  V' = \\n. (V:num->A->bool) n DIFF\n              UNIONS (IMAGE (\\k. top closure_of ((U:num->A->bool) k))\n                            (0..n))
-      #|  U' = \\n. (U:num->A->bool) n DIFF\n              UNIONS (IMAGE (\\k. top closure_of ((V:num->A->bool) k))\n                            (0..n))
-      #|  V:num->A->bool
-      #|  (t:A->bool) SUBSET u /\\ DISJOINT s t ==> t SUBSET u DIFF s
-      #|  topspace top DIFF s:A->bool
-      #|  B:(A->bool)->bool
-      #|  top:A topology
-      #|  U:num->A->bool
-      #|  (s:A->bool) SUBSET u /\\ DISJOINT s t ==> s SUBSET u DIFF t
-      #|  topspace top DIFF t:A->bool
-      #|  B:(A->bool)->bool
-      #|  top:A topology
-      #|  t:A->bool
-      #|  s:A->bool
-      #|  forall top:A topology B.\n        regular_space top /\\\n        (forall b. b IN B ==> open_in top b) /\\\n        (forall x u. open_in top u /\\ x IN u\n               ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n        sigma_locally_finite_in top B\n        ==> normal_space top
-      #|  n:num
-      #|  (En:num->A->bool) m
-      #|  top:A topology
-      #|  m:num
-      #|  topspace top DIFF s SUBSET\n         UNIONS {(En:num->A->bool) n | n IN (:num)}
-      #|  (x:A) IN UNIONS {(En:num->A->bool) n | n IN (:num)}
-      #|  ?m:num. (x:A) IN (En:num->A->bool) m
-      #|  (~p ==> F) ==> p
+      #|  \226\136\128 n : Num, SUBSET((A : (A) -> Bool), (U : (Num, A) -> Bool)(n))
+      #|  {(U : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)} == INSERT(topspace((top : Topology[A])), (u : ((A) -> Bool) -> Bool))
+      #|  (A : (A) -> Bool) == INTERS({(U : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  IN((U : (Num, A) -> Bool)((n : Num)), INSERT(topspace((top : Topology[A])), (u : ((A) -> Bool) -> Bool)))
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (U : (Num, A) -> Bool)(n))
+      #|  (U : (Num, A) -> Bool)
+      #|  INSERT(topspace((top : Topology[A])), (u : ((A) -> Bool) -> Bool))
+      #|  (u : ((A) -> Bool) -> Bool)
+      #|  gdelta_in((top : Topology[A]), (A : (A) -> Bool))
+      #|  \226\136\128 top : Topology[A], \226\136\128 A : (A) -> Bool, normal_space(top) && closed_in(top, A) && gdelta_in(top, A) \226\134\146 (\226\136\131 f : (A) -> Real, continuous_map((top, euclideanreal), f) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= f(x) && f(x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 (f(x) == real_of_num(0)) == IN(x, A)))
+      #|  (b : (A) -> Bool)
+      #|  (m : Num)
+      #|  UNIONS({(b' : (A) -> Bool) | IN(b', (Bn : (Num, (A) -> Bool) -> Bool)((m : Num))) && SUBSET(closure_of((top : Topology[A]), b'), (W : (A) -> Bool))})
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (t : ((A) -> Bool) -> Bool)
+      #|  IN((b : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  (m : Num)
+      #|  \226\136\131 m : Num, IN((b : (A) -> Bool), (Bn : (Num, (A) -> Bool) -> Bool)(m))
+      #|  (u : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  SUBSET(closure_of((top : Topology[A]), (b : (A) -> Bool)), (W : (A) -> Bool))
+      #|  (b : (A) -> Bool)
+      #|  \226\136\131 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) && IN((x : A), b) && SUBSET(b, (u : (A) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  (W : (A) -> Bool)
+      #|  regular_space((top : Topology[A]))
+      #|  (x : A)
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  \226\136\128 n : Num, locally_finite_in((top : Topology[A]), {(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && SUBSET(closure_of(top, b), (W : (A) -> Bool))})
+      #|  (n : Num) => UNIONS({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && SUBSET(closure_of((top : Topology[A]), b), (W : (A) -> Bool))})
+      #|  (n : Num)
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 b : (A) -> Bool, IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 open_in((top : Topology[A]), b)
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 B : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, regular_space(top) && open_in(top, W) && (\226\136\128 b : (A) -> Bool, IN(b, B) \226\134\146 open_in(top, b)) && (\226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in(top, u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, B) && IN(x, b) && SUBSET(b, u))) && sigma_locally_finite_in(top, B) \226\134\146 (\226\136\131 En : (Num, A) -> Bool, (\226\136\128 n : Num, open_in(top, En(n))) && (\226\136\128 n : Num, SUBSET(closure_of(top, En(n)), W)) && SUBSET(W, UNIONS({En((n : Num)) | IN(n, UNIV)})))
+      #|  (V : (Num, A) -> Bool)((p : Num))
+      #|  (top : Topology[A])
+      #|  (p : Num)
+      #|  \226\136\128 k : Num, IN(k, op_dot_dot(0, (m : Num))) \226\134\146 !IN((x : A), closure_of((top : Topology[A]), (V : (Num, A) -> Bool)(k)))
+      #|  (U : (Num, A) -> Bool)((m : Num))
+      #|  (top : Topology[A])
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (k : Num)
+      #|  \226\136\131 k' : Num, closure_of((top : Topology[A]), (U : (Num, A) -> Bool)((k : Num))) == closure_of(top, U(k')) && IN(k', op_dot_dot(0, (p : Num)))
+      #|  closure_of((top : Topology[A]), (U : (Num, A) -> Bool)((k : Num)))
+      #|  (k : Num)
+      #|  IN((x : A), (V' : (Num, A) -> Bool)((p : Num)))
+      #|  IN((x : A), (V : (Num, A) -> Bool)((p : Num))) && (\226\136\128 k : Num, IN(k, op_dot_dot(0, p)) \226\134\146 !IN(x, closure_of((top : Topology[A]), (U : (Num, A) -> Bool)(k))))
+      #|  (k : Num)
+      #|  \226\136\131 k' : Num, closure_of((top : Topology[A]), (V : (Num, A) -> Bool)((k : Num))) == closure_of(top, V(k')) && IN(k', op_dot_dot(0, (m : Num)))
+      #|  closure_of((top : Topology[A]), (V : (Num, A) -> Bool)((k : Num)))
+      #|  (k : Num)
+      #|  IN((x : A), (U' : (Num, A) -> Bool)((m : Num)))
+      #|  IN((x : A), (U : (Num, A) -> Bool)((m : Num))) && (\226\136\128 k : Num, IN(k, op_dot_dot(0, m)) \226\134\146 !IN(x, closure_of((top : Topology[A]), (V : (Num, A) -> Bool)(k))))
+      #|  (p : Num)
+      #|  (sv : (A) -> Bool)
+      #|  (m : Num)
+      #|  (su : (A) -> Bool)
+      #|  (x : A)
+      #|  DISJOINT((s : (A) -> Bool), (t : (A) -> Bool)) == (\226\136\128 x : A, IN(x, s) \226\134\146 !IN(x, t))
+      #|  (x : A)
+      #|  (k : Num)
+      #|  \226\136\128 n : Num, SUBSET(closure_of((top : Topology[A]), (U : (Num, A) -> Bool)(n)), DIFF(topspace(top), (t : (A) -> Bool)))
+      #|  (k : Num)
+      #|  (c : (A) -> Bool)
+      #|  (m : Num)
+      #|  (V' : (Num, A) -> Bool)((m : Num))
+      #|  (m : Num)
+      #|  (sv : (A) -> Bool)
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  IN((x : A), DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)))
+      #|  IN((x : A), UNIONS({(V : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (k : Num)
+      #|  \226\136\128 n : Num, SUBSET(closure_of((top : Topology[A]), (V : (Num, A) -> Bool)(n)), DIFF(topspace(top), (s : (A) -> Bool)))
+      #|  (k : Num)
+      #|  (c : (A) -> Bool)
+      #|  (m : Num)
+      #|  (U' : (Num, A) -> Bool)((m : Num))
+      #|  (m : Num)
+      #|  (su : (A) -> Bool)
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  IN((x : A), DIFF(topspace((top : Topology[A])), (t : (A) -> Bool)))
+      #|  IN((x : A), UNIONS({(U : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  (x : A)
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (V' : (Num, A) -> Bool)(n))
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (U' : (Num, A) -> Bool)(n))
+      #|  UNIONS({(V' : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  UNIONS({(U' : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  (V' : (Num, A) -> Bool) == ((n : Num) => DIFF((V : (Num, A) -> Bool)(n), UNIONS(IMAGE((k : Num) => closure_of((top : Topology[A]), (U : (Num, A) -> Bool)(k)), op_dot_dot(0, n)))))
+      #|  (U' : (Num, A) -> Bool) == ((n : Num) => DIFF((U : (Num, A) -> Bool)(n), UNIONS(IMAGE((k : Num) => closure_of((top : Topology[A]), (V : (Num, A) -> Bool)(k)), op_dot_dot(0, n)))))
+      #|  (V : (Num, A) -> Bool)
+      #|  SUBSET((t : (A) -> Bool), (u : (A) -> Bool)) && DISJOINT((s : (A) -> Bool), t) \226\134\146 SUBSET(t, DIFF(u, s))
+      #|  DIFF(topspace((top : Topology[A])), (s : (A) -> Bool))
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (U : (Num, A) -> Bool)
+      #|  SUBSET((s : (A) -> Bool), (u : (A) -> Bool)) && DISJOINT(s, (t : (A) -> Bool)) \226\134\146 SUBSET(s, DIFF(u, t))
+      #|  DIFF(topspace((top : Topology[A])), (t : (A) -> Bool))
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 B : ((A) -> Bool) -> Bool, regular_space(top) && (\226\136\128 b : (A) -> Bool, IN(b, B) \226\134\146 open_in(top, b)) && (\226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in(top, u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, B) && IN(x, b) && SUBSET(b, u))) && sigma_locally_finite_in(top, B) \226\134\146 normal_space(top)
+      #|  (n : Num)
+      #|  (En : (Num, A) -> Bool)((m : Num))
+      #|  (top : Topology[A])
+      #|  (m : Num)
+      #|  SUBSET(DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)), UNIONS({(En : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  IN((x : A), UNIONS({(En : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  \226\136\131 m : Num, IN((x : A), (En : (Num, A) -> Bool)(m))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
       #|  0
-      #|  (x:A) IN topspace top
-      #|  n:num
-      #|  n:num
-      #|  x:A
-      #|  s:A->bool =\n     INTERS {topspace top DIFF top closure_of (En n) | n IN (:num)}
-      #|  En:num->A->bool
-      #|  topspace top DIFF s:A->bool
-      #|  B:(A->bool)->bool
-      #|  top:A topology
-      #|  forall top:A topology B s.\n     regular_space top /\\\n     (forall b. b IN B ==> open_in top b) /\\\n     (forall x u. open_in top u /\\ x IN u\n            ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n     sigma_locally_finite_in top B /\\\n     closed_in top s\n     ==> gdelta_in top s
-      #|  M + n0:num
-      #|  x:A
-      #|  M + n0:num
-      #|  M:num
-      #|  inv(&2 pow (n0 + 1))
-      #|  ~((g:A->real) x <= &0)
-      #|  j:num
-      #|  sum {n0} (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1)))
-      #|  n:num
-      #|  forall n. n0 <= n ==>\n         inv(&2 pow (n0 + 1)) <=\n         sum(0..n) (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1)))
-      #|  x:A
-      #|  n0:num
-      #|  (h:num->A->real) n0 x = &1
-      #|  ?n0:num. ~((x:A) IN c n0)
-      #|  x:A
-      #|  x:A
-      #|  M:num
-      #|  M:num
-      #|  abs((g:A->real) x)
-      #|  ~(&0 < abs((g:A->real) x))
-      #|  (h:num->A->real) i x = &0
-      #|  i:num
-      #|  forall n. sum(0..n) (\\k. (h:num->A->real) k x * inv(&2 pow (k+1))) = &0
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  &0 <= y ==> &1 - y <= &1
-      #|  (\\k. inv(&2) pow (k + 1)) =\n       (\\k. inv(&2) pow k - inv(&2) pow (k + 1))
-      #|  i:num
-      #|  sum(0..M) (\\k. inv(&2) pow (k + 1))
-      #|  sum(0..M) (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1))) <= &1
-      #|  x:A
-      #|  M:num
-      #|  M:num
-      #|  (g:A->real) x - &1
-      #|  ~(&1 < (g:A->real) x)
-      #|  i:num
-      #|  &0 <= sum(0..M)\n              (\\k. (h:num->A->real) k x * inv(&2 pow (k + 1)))
-      #|  x:A
-      #|  M:num
-      #|  M:num
-      #|  --((g:A->real) x)
-      #|  ~((g:A->real) x < &0)
-      #|  x:A
-      #|  g:A->real
-      #|  g:A->real
-      #|  k:num
-      #|  sum(m'+1..q) (\\k. inv(&2) pow (k + 1))
-      #|  inv(&2) pow (m' + 1)
-      #|  inv(&2) pow N
-      #|  &0 <= sum(m'+1..q)\n             (\\k. (h:num->A->real) k y * inv (&2 pow (k + 1)))
-      #|  a + b = c ==> c - a = b
-      #|  sum(0..q) (\\k. (h:num->A->real) k y * inv (&2 pow (k + 1))) -\n      sum(0..m') (\\k. h k y * inv (&2 pow (k + 1))) =\n      sum(m'+1..q) (\\k. h k y * inv (&2 pow (k + 1)))
-      #|  y:A
-      #|  q:num
-      #|  m':num
-      #|  &0 <= y ==> x - y <= x
-      #|  (\\k. inv(&2) pow (k + 1)) =\n       (\\k. inv(&2) pow k - inv(&2) pow (k + 1))
-      #|  forall a b. sum(a..b) (\\k. inv(&2) pow (k + 1)) <= inv(&2) pow a
-      #|  N:num
-      #|  N:num
-      #|  e:real
-      #|  inv(&2)
-      #|  e:real
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  (s : (A) -> Bool) == INTERS({DIFF(topspace((top : Topology[A])), closure_of(top, (En : (Num, A) -> Bool)((n : Num)))) | IN(n, UNIV)})
+      #|  (En : (Num, A) -> Bool)
+      #|  DIFF(topspace((top : Topology[A])), (s : (A) -> Bool))
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  \226\136\128 top : Topology[A], \226\136\128 B : ((A) -> Bool) -> Bool, \226\136\128 s : (A) -> Bool, regular_space(top) && (\226\136\128 b : (A) -> Bool, IN(b, B) \226\134\146 open_in(top, b)) && (\226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in(top, u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, B) && IN(x, b) && SUBSET(b, u))) && sigma_locally_finite_in(top, B) && closed_in(top, s) \226\134\146 gdelta_in(top, s)
+      #|  (M : Num) + (n0 : Num)
+      #|  (x : A)
+      #|  (M : Num) + (n0 : Num)
+      #|  (M : Num)
+      #|  inv(pow(real_of_num(2), (n0 : Num) + 1))
+      #|  !((g : (A) -> Real)((x : A)) <= real_of_num(0))
+      #|  (j : Num)
+      #|  sum({(n0 : Num)}, (k : Num) => (h : (Num, A) -> Real)(k, (x : A)) * inv(pow(real_of_num(2), k + 1)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, (n0 : Num) <= n \226\134\146 inv(pow(real_of_num(2), n0 + 1)) <= sum(op_dot_dot(0, n), (k : Num) => (h : (Num, A) -> Real)(k, (x : A)) * inv(pow(real_of_num(2), k + 1)))
+      #|  (x : A)
+      #|  (n0 : Num)
+      #|  (h : (Num, A) -> Real)((n0 : Num), (x : A)) == real_of_num(1)
+      #|  \226\136\131 n0 : Num, !IN((x : A), (c : (Num, A) -> Bool)(n0))
+      #|  (x : A)
+      #|  (x : A)
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  abs((g : (A) -> Real)((x : A)))
+      #|  !(real_of_num(0) < abs((g : (A) -> Real)((x : A))))
+      #|  (h : (Num, A) -> Real)((i : Num), (x : A)) == real_of_num(0)
+      #|  (i : Num)
+      #|  \226\136\128 n : Num, sum(op_dot_dot(0, n), (k : Num) => (h : (Num, A) -> Real)(k, (x : A)) * inv(pow(real_of_num(2), k + 1))) == real_of_num(0)
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  real_of_num(0) <= (y : Real) \226\134\146 real_of_num(1) - y <= real_of_num(1)
+      #|  ((k : Num) => pow(inv(real_of_num(2)), k + 1)) == ((k : Num) => pow(inv(real_of_num(2)), k) - pow(inv(real_of_num(2)), k + 1))
+      #|  (i : Num)
+      #|  sum(op_dot_dot(0, (M : Num)), (k : Num) => pow(inv(real_of_num(2)), k + 1))
+      #|  sum(op_dot_dot(0, (M : Num)), (k : Num) => (h : (Num, A) -> Real)(k, (x : A)) * inv(pow(real_of_num(2), k + 1))) <= real_of_num(1)
+      #|  (x : A)
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  (g : (A) -> Real)((x : A)) - real_of_num(1)
+      #|  !(real_of_num(1) < (g : (A) -> Real)((x : A)))
+      #|  (i : Num)
+      #|  real_of_num(0) <= sum(op_dot_dot(0, (M : Num)), (k : Num) => (h : (Num, A) -> Real)(k, (x : A)) * inv(pow(real_of_num(2), k + 1)))
+      #|  (x : A)
+      #|  (M : Num)
+      #|  (M : Num)
+      #|  -(g : (A) -> Real)((x : A))
+      #|  !((g : (A) -> Real)((x : A)) < real_of_num(0))
+      #|  (x : A)
+      #|  (g : (A) -> Real)
+      #|  (g : (A) -> Real)
+      #|  (k : Num)
+      #|  sum(op_dot_dot((m' : Num) + 1, (q : Num)), (k : Num) => pow(inv(real_of_num(2)), k + 1))
+      #|  pow(inv(real_of_num(2)), (m' : Num) + 1)
+      #|  pow(inv(real_of_num(2)), (N : Num))
+      #|  real_of_num(0) <= sum(op_dot_dot((m' : Num) + 1, (q : Num)), (k : Num) => (h : (Num, A) -> Real)(k, (y : A)) * inv(pow(real_of_num(2), k + 1)))
+      #|  (a : Real) + (b : Real) == (c : Real) \226\134\146 c - a == b
+      #|  sum(op_dot_dot(0, (q : Num)), (k : Num) => (h : (Num, A) -> Real)(k, (y : A)) * inv(pow(real_of_num(2), k + 1))) - sum(op_dot_dot(0, (m' : Num)), (k : Num) => h(k, y) * inv(pow(real_of_num(2), k + 1))) == sum(op_dot_dot(m' + 1, q), (k : Num) => h(k, y) * inv(pow(real_of_num(2), k + 1)))
+      #|  (y : A)
+      #|  (q : Num)
+      #|  (m' : Num)
+      #|  real_of_num(0) <= (y : Real) \226\134\146 (x : Real) - y <= x
+      #|  ((k : Num) => pow(inv(real_of_num(2)), k + 1)) == ((k : Num) => pow(inv(real_of_num(2)), k) - pow(inv(real_of_num(2)), k + 1))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, sum(op_dot_dot(a, b), (k : Num) => pow(inv(real_of_num(2)), k + 1)) <= pow(inv(real_of_num(2)), a)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (e : Real)
+      #|  inv(real_of_num(2))
+      #|  (e : Real)
       #|  0
-      #|  (\\n (x:A). sum(0..n) (\\k. (h:num->A->real) k x *\n                                inv(&2 pow (k + 1))))
+      #|  (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => (h : (Num, A) -> Real)(k, x) * inv(pow(real_of_num(2), k + 1)))
       #|  real_euclidean_metric
-      #|  top:A topology
-      #|  (f:A->real) y IN real_interval[&0,&1]
-      #|  y:A
-      #|  f:A->real
-      #|  f:A->real
-      #|  &1
-      #|  &0
-      #|  topspace top DIFF (c:num->A->bool) n
-      #|  s:A->bool
-      #|  top:A topology
-      #|  n:num
-      #|  forall n:num. ?f:A->real.\n       continuous_map(top, euclideanreal) f /\\\n       (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n       (forall x. x IN s ==> f x = &0) /\\\n       (forall x. x IN topspace top DIFF (c:num->A->bool) n ==> f x = &1)
-      #|  ?h:num->A->real.\n     (forall n. continuous_map(top, euclideanreal) (h n)) /\\\n     (forall n x:A. x IN topspace top ==> &0 <= h n x /\\ h n x <= &1) /\\\n     (forall n x:A. x IN s ==> h n x = &0) /\\\n     (forall n x:A. x IN topspace top DIFF (c:num->A->bool) n ==> h n x = &1)
-      #|  forall n:num. (s:A->bool) SUBSET (c:num->A->bool) n
-      #|  (s:A->bool) SUBSET topspace top
-      #|  c:num->A->bool
-      #|  forall top:A topology s.\n     normal_space top /\\ closed_in top s /\\ gdelta_in top s\n     ==> ?f. continuous_map(top, euclideanreal) f /\\\n             (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n             (forall x. x IN s ==> f x = &0) /\\\n             (forall x. x IN topspace top DIFF s ==> &0 < f x)
-      #|  &0 <= x ==> abs x = x
-      #|  ~(&0 < abs x) ==> x = &0
-      #|  t':real
-      #|  d - abs(t0 - a)
-      #|  t0:real
-      #|  forall a:real d. &0 < d ==> real_open {t | abs(t - a) < d}
-      #|  mdist(metric(topspace top:A->bool,d:A#A->real)) = (d:A#A->real)
-      #|  mspace(metric(topspace top:A->bool,d:A#A->real)) = topspace top
-      #|  mball(metric(topspace top:A->bool,d:A#A->real)) (x:A,r) SUBSET\n       (u:A->bool)
-      #|  z:A
-      #|  x:A
-      #|  forall a:A. a IN topspace top ==> (d:A#A->real)(a,a) = &0
-      #|  forall x:A r. x IN topspace top /\\ &0 < r\n      ==> open_in top {y:A | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
-      #|  {y:A | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
-      #|  r:real
-      #|  x:A
-      #|  forall x:A. x IN u\n      ==> ?r. &0 < r /\\\n          mball(metric(topspace top:A->bool,d:A#A->real)) (x,r) SUBSET u
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  mspace(metric(topspace top:A->bool,d:A#A->real)) = topspace top
-      #|  open_in (mtopology(metric(topspace top:A->bool,d:A#A->real)))\n               (u:A->bool)
-      #|  (u:A->bool) SUBSET topspace top /\\\n      forall x. x IN u ==>\n        ?r. &0 < r /\\\n            mball(metric(topspace top:A->bool,d:A#A->real)) (x,r) SUBSET u
-      #|  b0:A->bool
-      #|  n0:num
-      #|  b':A->bool
-      #|  n':num
-      #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n              g b' y * inv(&(SUC n')))
-      #|  y:A
-      #|  x:A
-      #|  forall x:A y:A z.\n         x IN topspace top /\\ y IN topspace top /\\\n         z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                   g b y * inv(&(SUC n))) |\n               n,b | b IN Bn n}\n         ==> z <= &1
-      #|  b':A->bool
-      #|  n':num
-      #|  w:real
-      #|  &1
-      #|  abs((g:(A->bool)->A->real) b0 x * inv(&(SUC n0)) -\n            g b0 y * inv(&(SUC n0)))
-      #|  sup {abs ((g:(A->bool)->A->real) b x * inv (&(SUC n)) -\n                  g b y * inv (&(SUC n))) |\n             n,b | b IN Bn n} <\n        (g:(A->bool)->A->real) b0 x * inv (&(SUC n0))
-      #|  F
-      #|  y:A
-      #|  forall x:A. x IN topspace top /\\ ~(x IN b0) ==>\n        (g:(A->bool)->A->real) b0 x = &0
-      #|  (g:(A->bool)->A->real) b0 y = &0
-      #|  (y:A) IN b0
-      #|  y:A
-      #|  (g:(A->bool)->A->real) b0 x * inv(&(SUC n0))
-      #|  &0 < (g:(A->bool)->A->real) b0 x
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN B ==>\n      continuous_map(top,euclideanreal) (g b) /\\\n      (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n      (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n      (forall x. x IN b ==> &0 < g b x)
-      #|  (forall x:A. x IN topspace top /\\ ~(x IN b0) ==>\n         (g:(A->bool)->A->real) b0 x = &0) /\\\n       (forall x:A. x IN b0 ==> &0 < (g:(A->bool)->A->real) b0 x)
-      #|  mm:num
-      #|  mm:num
-      #|  s:(A->bool)->bool
-      #|  B = UNIONS {(Bn:num->(A->bool)->bool) n | n IN (:num)}
-      #|  (b0:A->bool) IN B
-      #|  ?n0:num. (b0:A->bool) IN Bn n0
-      #|  b0:A->bool
-      #|  u:A->bool
-      #|  x:A
-      #|  forall x:A u:A->bool. open_in top u /\\ x IN u\n      ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u
-      #|  (x:A) IN topspace top
-      #|  x:A
-      #|  u:A->bool
-      #|  forall z:A. z IN V /\\ z IN topspace top ==> (d:A#A->real)(y0,z) < eps
-      #|  (d:A#A->real)(y0,z) < eps
-      #|  mdist(metric(topspace top:A->bool,d:A#A->real)) = (d:A#A->real)
-      #|  mspace(metric(topspace top:A->bool,d:A#A->real)) = topspace top
-      #|  z:A
-      #|  y0:A
-      #|  x:A
-      #|  metric(topspace top:A->bool,d:A#A->real)
-      #|  (d:A#A->real)(x,y0) + d(y0,z)
-      #|  (z:A) IN topspace top
-      #|  z:A
-      #|  V:A->bool
-      #|  &0 < eps
-      #|  &0 < eps
-      #|  eps / &4
-      #|  &1 * inv(&(N0:num))
-      #|  ~(N0:num = 0)
-      #|  ~((nn':num) <= (N0:num))
-      #|  inv(&(SUC nn')) <= inv(&(N0:num))
-      #|  &0 <= (g:(A->bool)->A->real) b' z /\\ g b' z <= &1
-      #|  &0 <= (g:(A->bool)->A->real) b' y0 /\\ g b' y0 <= &1
-      #|  abs((g:(A->bool)->A->real) b' y0 - g b' z) <= &1
-      #|  abs((g:(A->bool)->A->real) b' y0 * inv(&(SUC nn')) -\n               g b' z * inv(&(SUC nn'))) =\n           abs(g b' y0 - g b' z) * inv(&(SUC nn'))
-      #|  (b':A->bool) IN B
-      #|  nn':num
-      #|  (z:A) IN (Vn:num->A->bool) nn'
-      #|  (nn':num) <= (N0:num)
-      #|  b':A->bool
-      #|  nn':num
-      #|  w:real
-      #|  z:A
-      #|  y0:A
-      #|  forall x:A y:A.\n         ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n                g b y * inv(&(SUC n))) |\n            n,b | b IN Bn n} = {})
-      #|  eps / &2
-      #|  forall x:A y:A. (d:A#A->real)(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  z:A
-      #|  m:num
-      #|  m:num
-      #|  m:num
-      #|  m:num
-      #|  ~(N0 = 0)
+      #|  (top : Topology[A])
+      #|  IN((f : (A) -> Real)((y : A)), real_interval([(real_of_num(0), real_of_num(1))]))
+      #|  (y : A)
+      #|  (f : (A) -> Real)
+      #|  (f : (A) -> Real)
+      #|  real_of_num(1)
+      #|  real_of_num(0)
+      #|  DIFF(topspace((top : Topology[A])), (c : (Num, A) -> Bool)((n : Num)))
+      #|  (s : (A) -> Bool)
+      #|  (top : Topology[A])
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\131 f : (A) -> Real, continuous_map(((top : Topology[A]), euclideanreal), f) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= f(x) && f(x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 f(x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, DIFF(topspace(top), (c : (Num, A) -> Bool)(n))) \226\134\146 f(x) == real_of_num(1))
+      #|  \226\136\131 h : (Num, A) -> Real, (\226\136\128 n : Num, continuous_map(((top : Topology[A]), euclideanreal), h(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= h(n, x) && h(n, x) <= real_of_num(1)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 h(n, x) == real_of_num(0)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, DIFF(topspace(top), (c : (Num, A) -> Bool)(n))) \226\134\146 h(n, x) == real_of_num(1))
+      #|  \226\136\128 n : Num, SUBSET((s : (A) -> Bool), (c : (Num, A) -> Bool)(n))
+      #|  SUBSET((s : (A) -> Bool), topspace((top : Topology[A])))
+      #|  (c : (Num, A) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, normal_space(top) && closed_in(top, s) && gdelta_in(top, s) \226\134\146 (\226\136\131 f : (A) -> Real, continuous_map((top, euclideanreal), f) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= f(x) && f(x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, s) \226\134\146 f(x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, DIFF(topspace(top), s)) \226\134\146 real_of_num(0) < f(x)))
+      #|  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+      #|  !(real_of_num(0) < abs((x : Real))) \226\134\146 x == real_of_num(0)
+      #|  (t' : Real)
+      #|  (d : Real) - abs((t0 : Real) - (a : Real))
+      #|  (t0 : Real)
+      #|  \226\136\128 a : Real, \226\136\128 d : Real, real_of_num(0) < d \226\134\146 real_open({(t : Real) | abs(t - a) < d})
+      #|  mdist(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == d
+      #|  mspace(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == topspace(top)
+      #|  SUBSET(mball(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real))), ((x : A), (r : Real))), (u : (A) -> Bool))
+      #|  (z : A)
+      #|  (x : A)
+      #|  \226\136\128 a : A, IN(a, topspace((top : Topology[A]))) \226\134\146 (d : ((A, A)) -> Real)((a, a)) == real_of_num(0)
+      #|  \226\136\128 x : A, \226\136\128 r : Real, IN(x, topspace((top : Topology[A]))) && real_of_num(0) < r \226\134\146 open_in(top, {(y : A) | IN(y, topspace(top)) && (d : ((A, A)) -> Real)((x, y)) < r})
+      #|  {(y : A) | IN(y, topspace((top : Topology[A]))) && (d : ((A, A)) -> Real)(((x : A), y)) < (r : Real)}
+      #|  (r : Real)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, (u : (A) -> Bool)) \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && SUBSET(mball(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real))), (x, r)), u))
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  mspace(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == topspace(top)
+      #|  open_in(mtopology(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))), (u : (A) -> Bool))
+      #|  SUBSET((u : (A) -> Bool), topspace((top : Topology[A]))) && (\226\136\128 x : A, IN(x, u) \226\134\146 (\226\136\131 r : Real, real_of_num(0) < r && SUBSET(mball(metric((topspace(top), (d : ((A, A)) -> Real))), (x, r)), u)))
+      #|  (b0 : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n' : Num)))) - g(b', (y : A)) * inv(real_of_num(SUC(n'))))
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : Real, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) && IN(z, {abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) \226\134\146 z <= real_of_num(1)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (w : Real)
+      #|  real_of_num(1)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n0 : Num)))) - g(b0, (y : A)) * inv(real_of_num(SUC(n0))))
+      #|  sup({abs((g : ((A) -> Bool, A) -> Real)(b, (x : A)) * inv(real_of_num(SUC(n))) - g(b, (y : A)) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) < g((b0 : (A) -> Bool), x) * inv(real_of_num(SUC((n0 : Num))))
+      #|  false
+      #|  (y : A)
+      #|  \226\136\128 x : A, IN(x, topspace((top : Topology[A]))) && !IN(x, (b0 : (A) -> Bool)) \226\134\146 (g : ((A) -> Bool, A) -> Real)(b0, x) == real_of_num(0)
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (y : A)) == real_of_num(0)
+      #|  IN((y : A), (b0 : (A) -> Bool))
+      #|  (y : A)
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n0 : Num))))
+      #|  real_of_num(0) < (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A))
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  (\226\136\128 x : A, IN(x, topspace((top : Topology[A]))) && !IN(x, (b0 : (A) -> Bool)) \226\134\146 (g : ((A) -> Bool, A) -> Real)(b0, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b0) \226\134\146 real_of_num(0) < g(b0, x))
+      #|  (mm : Num)
+      #|  (mm : Num)
+      #|  (s : ((A) -> Bool) -> Bool)
+      #|  (B : ((A) -> Bool) -> Bool) == UNIONS({(Bn : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  IN((b0 : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  \226\136\131 n0 : Num, IN((b0 : (A) -> Bool), (Bn : (Num, (A) -> Bool) -> Bool)(n0))
+      #|  (b0 : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in((top : Topology[A]), u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) && IN(x, b) && SUBSET(b, u))
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (x : A)
+      #|  (u : (A) -> Bool)
+      #|  \226\136\128 z : A, IN(z, (V : (A) -> Bool)) && IN(z, topspace((top : Topology[A]))) \226\134\146 (d : ((A, A)) -> Real)(((y0 : A), z)) < (eps : Real)
+      #|  (d : ((A, A)) -> Real)(((y0 : A), (z : A))) < (eps : Real)
+      #|  mdist(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == d
+      #|  mspace(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == topspace(top)
+      #|  (z : A)
+      #|  (y0 : A)
+      #|  (x : A)
+      #|  metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))
+      #|  (d : ((A, A)) -> Real)(((x : A), (y0 : A))) + d((y0, (z : A)))
+      #|  IN((z : A), topspace((top : Topology[A])))
+      #|  (z : A)
+      #|  (V : (A) -> Bool)
+      #|  real_of_num(0) < (eps : Real)
+      #|  real_of_num(0) < (eps : Real)
+      #|  (eps : Real) / real_of_num(4)
+      #|  real_of_num(1) * inv(real_of_num((N0 : Num)))
+      #|  !((N0 : Num) == 0)
+      #|  !((nn' : Num) <= (N0 : Num))
+      #|  inv(real_of_num(SUC((nn' : Num)))) <= inv(real_of_num((N0 : Num)))
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (z : A)) && g(b', z) <= real_of_num(1)
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y0 : A)) && g(b', y0) <= real_of_num(1)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y0 : A)) - g(b', (z : A))) <= real_of_num(1)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y0 : A)) * inv(real_of_num(SUC((nn' : Num)))) - g(b', (z : A)) * inv(real_of_num(SUC(nn')))) == abs(g(b', y0) - g(b', z)) * inv(real_of_num(SUC(nn')))
+      #|  IN((b' : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  (nn' : Num)
+      #|  IN((z : A), (Vn : (Num, A) -> Bool)((nn' : Num)))
+      #|  (nn' : Num) <= (N0 : Num)
+      #|  (b' : (A) -> Bool)
+      #|  (nn' : Num)
+      #|  (w : Real)
+      #|  (z : A)
+      #|  (y0 : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, !({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))} == {})
+      #|  (eps : Real) / real_of_num(2)
+      #|  \226\136\128 x : A, \226\136\128 y : A, (d : ((A, A)) -> Real)((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  (z : A)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  !((N0 : Num) == 0)
       #|  0
-      #|  INTERS (IMAGE (Vn:num->A->bool) {m:num | m <= N0})
-      #|  Vn:num->A->bool
-      #|  &0 < eps
-      #|  z:A
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN B\n           ==> continuous_map(top,euclideanreal) (g b) /\\\n               (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n               (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n               (forall x. x IN b ==> &0 < g b x)
-      #|  (g:(A->bool)->A->real) b0 z = &0
-      #|  y0:A
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN B\n           ==> continuous_map(top,euclideanreal) (g b) /\\\n               (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n               (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n               (forall x. x IN b ==> &0 < g b x)
-      #|  (g:(A->bool)->A->real) b0 y0 = &0
-      #|  b0:A->bool
-      #|  nn:num
-      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
-      #|  (b0:A->bool) IN B
-      #|  z:A
-      #|  (b0:A->bool) INTER (LF:num->A->bool) nn = {}
-      #|  ~((z:A) IN b0)
-      #|  nn:num
-      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n           y0 IN LF n /\\\n           FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
-      #|  y0:A
-      #|  (b0:A->bool) INTER (LF:num->A->bool) nn = {}
-      #|  ~((y0:A) IN b0)
-      #|  ~((b0:A->bool) IN Fb)
-      #|  (b0:A->bool) INTER (LF:num->A->bool) nn = {}
-      #|  (z:A) IN (Wb:(A->bool)->A->bool) b0
-      #|  z:A
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN Fb ==>\n           open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n           forall z:A. z IN Wb b /\\ z IN topspace top\n             ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
-      #|  abs((g:(A->bool)->A->real) b0 z - g b0 y0)
-      #|  (b0:A->bool) IN Fb
-      #|  abs((g:(A->bool)->A->real) b0 z * inv(&(SUC nn)) -\n              g b0 y0 * inv(&(SUC nn))) =\n          abs(g b0 z - g b0 y0) * inv(&(SUC nn))
-      #|  b0:A->bool
-      #|  z:A
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN Fb ==>\n          open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n          forall z:A. z IN Wb b /\\ z IN topspace top\n            ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
-      #|  b0:A->bool
-      #|  nn:num
-      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n          y0 IN LF n /\\\n          FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN Fb ==>\n          open_in top ((Wb:(A->bool)->A->bool) b) /\\ y0 IN Wb b /\\\n          forall z:A. z IN Wb b /\\ z IN topspace top\n            ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
-      #|  b0:A->bool
-      #|  nn:num
-      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n          y0 IN LF n /\\\n          FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
-      #|  (LF:num->A->bool) nn INTER\n         INTERS(IMAGE (Wb:(A->bool)->A->bool) Fb)
-      #|  &0 < eps
-      #|  z:A
-      #|  b:A->bool
-      #|  forall b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (forall x. x IN b ==> &0 < g b x)
-      #|  (g:(A->bool)->A->real) b z = &0
-      #|  y0:A
-      #|  b:A->bool
-      #|  forall b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (forall x. x IN b ==> &0 < g b x)
-      #|  (g:(A->bool)->A->real) b y0 = &0
-      #|  b:A->bool
-      #|  nn:num
-      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
-      #|  (b:A->bool) IN B
-      #|  z:A
-      #|  (b:A->bool) INTER (LF:num->A->bool) nn = {}
-      #|  ~((z:A) IN b)
-      #|  y0:A
-      #|  (b:A->bool) INTER (LF:num->A->bool) nn = {}
-      #|  ~((y0:A) IN b)
-      #|  b:A->bool
-      #|  Fb:(A->bool)->bool = {}
-      #|  (b:A->bool) INTER (LF:num->A->bool) nn = {}
-      #|  b:A->bool
-      #|  z:A
-      #|  nn:num
-      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n        y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
-      #|  (LF:num->A->bool) nn
-      #|  Fb:(A->bool)->bool = {}
-      #|  Wb:(A->bool)->A->bool
-      #|  &0 < eps
-      #|  {z:A | z IN topspace top /\\\n           abs((g:(A->bool)->A->real) b0 z - g b0 y0) < eps / &2}
-      #|  {z:A | z IN topspace top /\\\n            abs((g:(A->bool)->A->real) b0 z - g b0 y0) < eps / &2} =\n          {x | x IN topspace top /\\\n            g b0 x IN {t:real | abs(t - g b0 y0) < eps / &2}}
-      #|  (a ==> b) ==> a ==> b
-      #|  &0 < eps
-      #|  {t:real | abs(t - (g:(A->bool)->A->real) b0 y0) < eps / &2}
+      #|  INTERS(IMAGE((Vn : (Num, A) -> Bool), {(m : Num) | m <= (N0 : Num)}))
+      #|  (Vn : (Num, A) -> Bool)
+      #|  real_of_num(0) < (eps : Real)
+      #|  (z : A)
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (z : A)) == real_of_num(0)
+      #|  (y0 : A)
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (y0 : A)) == real_of_num(0)
+      #|  (b0 : (A) -> Bool)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, \226\136\128 b : (A) -> Bool, IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 IN(b, (B : ((A) -> Bool) -> Bool))
+      #|  IN((b0 : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  (z : A)
+      #|  INTER((b0 : (A) -> Bool), (LF : (Num, A) -> Bool)((nn : Num))) == {}
+      #|  !IN((z : A), (b0 : (A) -> Bool))
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (LF : (Num, A) -> Bool)(n)) && IN((y0 : A), LF(n)) && FINITE({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(b, LF(n)) == {})})
+      #|  (y0 : A)
+      #|  INTER((b0 : (A) -> Bool), (LF : (Num, A) -> Bool)((nn : Num))) == {}
+      #|  !IN((y0 : A), (b0 : (A) -> Bool))
+      #|  !IN((b0 : (A) -> Bool), (Fb : ((A) -> Bool) -> Bool))
+      #|  INTER((b0 : (A) -> Bool), (LF : (Num, A) -> Bool)((nn : Num))) == {}
+      #|  IN((z : A), (Wb : ((A) -> Bool, A) -> Bool)((b0 : (A) -> Bool)))
+      #|  (z : A)
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (Fb : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), (Wb : ((A) -> Bool, A) -> Bool)(b)) && IN((y0 : A), Wb(b)) && (\226\136\128 z : A, IN(z, Wb(b)) && IN(z, topspace(top)) \226\134\146 abs((g : ((A) -> Bool, A) -> Real)(b, z) - g(b, y0)) < (eps : Real) / real_of_num(2))
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (z : A)) - g(b0, (y0 : A)))
+      #|  IN((b0 : (A) -> Bool), (Fb : ((A) -> Bool) -> Bool))
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (z : A)) * inv(real_of_num(SUC((nn : Num)))) - g(b0, (y0 : A)) * inv(real_of_num(SUC(nn)))) == abs(g(b0, z) - g(b0, y0)) * inv(real_of_num(SUC(nn)))
+      #|  (b0 : (A) -> Bool)
+      #|  (z : A)
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (Fb : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), (Wb : ((A) -> Bool, A) -> Bool)(b)) && IN((y0 : A), Wb(b)) && (\226\136\128 z : A, IN(z, Wb(b)) && IN(z, topspace(top)) \226\134\146 abs((g : ((A) -> Bool, A) -> Real)(b, z) - g(b, y0)) < (eps : Real) / real_of_num(2))
+      #|  (b0 : (A) -> Bool)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (LF : (Num, A) -> Bool)(n)) && IN((y0 : A), LF(n)) && FINITE({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(b, LF(n)) == {})})
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (Fb : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), (Wb : ((A) -> Bool, A) -> Bool)(b)) && IN((y0 : A), Wb(b)) && (\226\136\128 z : A, IN(z, Wb(b)) && IN(z, topspace(top)) \226\134\146 abs((g : ((A) -> Bool, A) -> Real)(b, z) - g(b, y0)) < (eps : Real) / real_of_num(2))
+      #|  (b0 : (A) -> Bool)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (LF : (Num, A) -> Bool)(n)) && IN((y0 : A), LF(n)) && FINITE({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(b, LF(n)) == {})})
+      #|  INTER((LF : (Num, A) -> Bool)((nn : Num)), INTERS(IMAGE((Wb : ((A) -> Bool, A) -> Bool), (Fb : ((A) -> Bool) -> Bool))))
+      #|  real_of_num(0) < (eps : Real)
+      #|  (z : A)
+      #|  (b : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  (g : ((A) -> Bool, A) -> Real)((b : (A) -> Bool), (z : A)) == real_of_num(0)
+      #|  (y0 : A)
+      #|  (b : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  (g : ((A) -> Bool, A) -> Real)((b : (A) -> Bool), (y0 : A)) == real_of_num(0)
+      #|  (b : (A) -> Bool)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, \226\136\128 b : (A) -> Bool, IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 IN(b, (B : ((A) -> Bool) -> Bool))
+      #|  IN((b : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  (z : A)
+      #|  INTER((b : (A) -> Bool), (LF : (Num, A) -> Bool)((nn : Num))) == {}
+      #|  !IN((z : A), (b : (A) -> Bool))
+      #|  (y0 : A)
+      #|  INTER((b : (A) -> Bool), (LF : (Num, A) -> Bool)((nn : Num))) == {}
+      #|  !IN((y0 : A), (b : (A) -> Bool))
+      #|  (b : (A) -> Bool)
+      #|  (Fb : ((A) -> Bool) -> Bool) == {}
+      #|  INTER((b : (A) -> Bool), (LF : (Num, A) -> Bool)((nn : Num))) == {}
+      #|  (b : (A) -> Bool)
+      #|  (z : A)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (LF : (Num, A) -> Bool)(n)) && IN((y0 : A), LF(n)) && FINITE({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(b, LF(n)) == {})})
+      #|  (LF : (Num, A) -> Bool)((nn : Num))
+      #|  (Fb : ((A) -> Bool) -> Bool) == {}
+      #|  (Wb : ((A) -> Bool, A) -> Bool)
+      #|  real_of_num(0) < (eps : Real)
+      #|  {(z : A) | IN(z, topspace((top : Topology[A]))) && abs((g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), z) - g(b0, (y0 : A))) < (eps : Real) / real_of_num(2)}
+      #|  {(z : A) | IN(z, topspace((top : Topology[A]))) && abs((g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), z) - g(b0, (y0 : A))) < (eps : Real) / real_of_num(2)} == {(x : A) | IN(x, topspace(top)) && IN(g(b0, x), {(t : Real) | abs(t - g(b0, y0)) < eps / real_of_num(2)})}
+      #|  ((a : Bool) \226\134\146 (b : Bool)) \226\134\146 a \226\134\146 b
+      #|  real_of_num(0) < (eps : Real)
+      #|  {(t : Real) | abs(t - (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (y0 : A))) < (eps : Real) / real_of_num(2)}
       #|  euclideanreal
-      #|  top:A topology
-      #|  (g:(A->bool)->A->real) b0
-      #|  open_in top {z:A | z IN topspace top /\\\n           abs((g:(A->bool)->A->real) b0 z - g b0 y0) < eps / &2}
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN B\n         ==> continuous_map(top,euclideanreal) (g b) /\\\n             (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n             (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n             (forall x. x IN b ==> &0 < g b x)
-      #|  continuous_map(top,euclideanreal) ((g:(A->bool)->A->real) b0)
-      #|  (b0:A->bool) IN Fb
-      #|  b0:A->bool
-      #|  nn:num
-      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
-      #|  (b0:A->bool) IN B
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN Fb ==>\n          ?Wb:A->bool. open_in top Wb /\\ y0 IN Wb /\\\n            forall z:A. z IN Wb /\\ z IN topspace top\n              ==> abs((g:(A->bool)->A->real) b z - g b y0) < eps / &2
-      #|  nn:num
-      #|  forall n:num. open_in top ((LF:num->A->bool) n) /\\\n        y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
-      #|  FINITE (Fb:(A->bool)->bool)
-      #|  Fb = {b:A->bool | b IN (Bn:num->(A->bool)->bool) nn /\\\n                           ~(b INTER (LF:num->A->bool) nn = {})}
-      #|  nn:num
-      #|  forall n:num. n <= N0 ==>\n         ?Vn:A->bool. open_in top Vn /\\ y0 IN Vn /\\\n           forall z:A (b:A->bool). z IN Vn /\\ z IN topspace top /\\\n                 b IN (Bn:num->(A->bool)->bool) n\n             ==> abs((g:(A->bool)->A->real) b z * inv(&(SUC n)) -\n                     g b y0 * inv(&(SUC n))) <= eps / &2
-      #|  V:A->bool
-      #|  ?V:A->bool. open_in top V /\\ y0 IN V /\\\n        forall z. z IN V /\\ z IN topspace top ==> (d:A#A->real)(y0,z) < eps
-      #|  y0:A
-      #|  locally_finite_in top ((Bn:num->(A->bool)->bool) nn)
-      #|  nn:num
-      #|  LF:num->A->bool
-      #|  ?LF:num->A->bool. forall n. open_in top (LF n) /\\ y0 IN LF n /\\\n        FINITE {b:A->bool | b IN Bn n /\\ ~(b INTER LF n = {})}
-      #|  &0 < eps
-      #|  ?N0:num. ~(N0 = 0) /\\ &0 < inv(&N0) /\\ inv(&N0) < eps / &4
-      #|  (d:A#A->real)(x,y0) < r
-      #|  &0 < eps
-      #|  eps = r - (d:A#A->real)(x,y0)
-      #|  y0:A
-      #|  forall x:A r. x IN topspace top /\\ &0 < r\n       ==> open_in top {y | y IN topspace top /\\ (d:A#A->real)(x,y) < r}
-      #|  a:A
-      #|  metric(topspace top:A->bool,d:A#A->real)
-      #|  a:A
-      #|  forall a:A. a IN topspace top ==> (d:A#A->real)(a,a) = &0
-      #|  mdist(metric(topspace top:A->bool, d:A#A->real)) = d:A#A->real
-      #|  mspace(metric(topspace top:A->bool, d:A#A->real)) = topspace top
-      #|  top:A topology = mtopology(metric(topspace top:A->bool, d:A#A->real))
-      #|  b':A->bool
-      #|  n':num
-      #|  b'':A->bool
-      #|  n'':num
-      #|  abs((g:(A->bool)->A->real) b'' y * inv(&(SUC n'')) -\n               g b'' z * inv(&(SUC n'')))
-      #|  z:A
-      #|  y:A
-      #|  forall x:A y:A z.\n          x IN topspace top /\\ y IN topspace top /\\\n          z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                    g b y * inv(&(SUC n))) |\n                n,b | b IN Bn n}\n          ==> z <= &1
-      #|  b'':A->bool
-      #|  n'':num
-      #|  v:real
-      #|  &1
-      #|  b':A->bool
-      #|  n':num
-      #|  b'':A->bool
-      #|  n'':num
-      #|  abs((g:(A->bool)->A->real) b'' x * inv(&(SUC n'')) -\n               g b'' y * inv(&(SUC n'')))
-      #|  y:A
-      #|  x:A
-      #|  forall x:A y:A z.\n          x IN topspace top /\\ y IN topspace top /\\\n          z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                    g b y * inv(&(SUC n))) |\n                n,b | b IN Bn n}\n          ==> z <= &1
-      #|  b'':A->bool
-      #|  n'':num
-      #|  v:real
-      #|  &1
-      #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n                     g b' y * inv(&(SUC n'))) +\n                 abs(g b' y * inv(&(SUC n')) -\n                     g b' z * inv(&(SUC n')))
-      #|  b':A->bool
-      #|  n':num
-      #|  w:real
-      #|  z:A
-      #|  x:A
-      #|  forall x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
-      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  b':A->bool
-      #|  n':num
-      #|  w:real
-      #|  x:A
-      #|  x:A
-      #|  forall x:A y:A.\n        ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n               g b y * inv(&(SUC n))) |\n           n,b | b IN Bn n} = {})
-      #|  &0 <= x /\\ x <= &0 ==> x = &0
-      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  b0:A->bool
-      #|  n0:num
-      #|  b':A->bool
-      #|  n':num
-      #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n              g b' y * inv(&(SUC n')))
-      #|  y:A
-      #|  x:A
-      #|  forall x:A y:A z.\n         x IN topspace top /\\ y IN topspace top /\\\n         z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                   g b y * inv(&(SUC n))) |\n               n,b | b IN Bn n}\n         ==> z <= &1
-      #|  b':A->bool
-      #|  n':num
-      #|  w:real
-      #|  &1
-      #|  &0 < (g:(A->bool)->A->real) b0 x
-      #|  (g:(A->bool)->A->real) b0 y = &0
-      #|  (g:(A->bool)->A->real) b0 x * inv(&(SUC n0)) =\n         abs(g b0 x * inv(&(SUC n0)) - g b0 y * inv(&(SUC n0)))
-      #|  (g:(A->bool)->A->real) b0 x * inv(&(SUC n0))
-      #|  y:A
-      #|  forall x:A. x IN topspace top /\\ ~(x IN b0) ==>\n               (g:(A->bool)->A->real) b0 x = &0
-      #|  (g:(A->bool)->A->real) b0 y = &0
-      #|  x:A
-      #|  forall x:A. x IN b0 ==> &0 < (g:(A->bool)->A->real) b0 x
-      #|  &0 < (g:(A->bool)->A->real) b0 x
-      #|  b0:A->bool
-      #|  forall b:A->bool. b IN B ==>\n       continuous_map(top,euclideanreal) (g b) /\\\n       (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n       (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n       (forall x. x IN b ==> &0 < g b x)
-      #|  m:num
-      #|  m:num
-      #|  s:(A->bool)->bool
-      #|  B = UNIONS {(Bn:num->(A->bool)->bool) n | n IN (:num)}
-      #|  (b0:A->bool) IN B
-      #|  ?n0:num. (b0:A->bool) IN Bn n0
-      #|  (b0:A->bool) SUBSET topspace top DIFF {y:A}
-      #|  ~((y:A) IN b0)
-      #|  b0:A->bool
-      #|  topspace top DIFF {y:A}
-      #|  x:A
-      #|  forall x:A u. open_in top u /\\ x IN u ==>\n       ?b. b IN B /\\ x IN b /\\ b SUBSET u
-      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n       inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  &0 < (d:A#A->real)(x,y)
-      #|  x:A = y
-      #|  b':A->bool
-      #|  n':num
-      #|  abs((g:(A->bool)->A->real) b' x * inv(&(SUC n')) -\n            g b' y * inv(&(SUC n')))
-      #|  y:A
-      #|  x:A
-      #|  forall x:A y:A z.\n       x IN topspace top /\\ y IN topspace top /\\\n       z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                 g b y * inv(&(SUC n))) |\n             n,b | b IN Bn n}\n       ==> z <= &1
-      #|  b':A->bool
-      #|  n':num
-      #|  w:real
-      #|  y:A
-      #|  x:A
-      #|  forall x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
-      #|  &0 <= x /\\ x <= &1 ==> &0 <= x
-      #|  forall x:A y:A. d(x,y) = sup {abs(g (b:A->bool) x *\n      inv(&(SUC n)) - g b y * inv(&(SUC n))) | n,b | b IN Bn n}
-      #|  is_metric_space(topspace top:A->bool, d:A#A->real)
-      #|  inv(&(SUC n')) <= &1
-      #|  &0 <= inv(&(SUC n'))
-      #|  (g:(A->bool)->A->real) b' y <= &1
-      #|  &0 <= (g:(A->bool)->A->real) b' y
-      #|  &1 * &1
-      #|  &0 <= inv(&(SUC n'))
-      #|  &0 <= (g:(A->bool)->A->real) b' y
-      #|  inv(&(SUC n')) <= &1
-      #|  &0 <= inv(&(SUC n'))
-      #|  (g:(A->bool)->A->real) b' x <= &1
-      #|  &0 <= (g:(A->bool)->A->real) b' x
-      #|  &1 * &1
-      #|  &0 <= inv(&(SUC n'))
-      #|  &0 <= (g:(A->bool)->A->real) b' x
-      #|  &0 <= inv(&(SUC n')) /\\ inv(&(SUC n')) <= &1
-      #|  y:A
-      #|  b':A->bool
-      #|  forall b:A->bool x:A.\n      b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
-      #|  &0 <= (g:(A->bool)->A->real) b' y /\\ g b' y <= &1
-      #|  x:A
-      #|  b':A->bool
-      #|  forall b:A->bool x:A.\n      b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
-      #|  &0 <= (g:(A->bool)->A->real) b' x /\\ g b' x <= &1
-      #|  b':A->bool
-      #|  n':num
-      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
-      #|  (b':A->bool) IN B
-      #|  &0 <= u /\\ u <= &1 /\\ &0 <= v /\\ v <= &1 ==> abs(u - v) <= &1
-      #|  b':A->bool
-      #|  n':num
-      #|  forall x:A y:A z.\n       x IN topspace top /\\ y IN topspace top /\\\n       z IN {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                  g b y * inv(&(SUC n))) |\n              n,b | b IN Bn n}\n       ==> z <= &1
-      #|  x:A
-      #|  b:A->bool
-      #|  forall b:A->bool. b IN B\n     ==> continuous_map(top,euclideanreal) (g b) /\\\n         (forall x. x IN topspace top ==> &0 <= g b x /\\ g b x <= &1) /\\\n         (forall x. x IN topspace top /\\ ~(x IN b) ==> g b x = &0) /\\\n         (forall x. x IN b ==> &0 < g b x)
-      #|  forall b:A->bool x:A.\n       b IN B /\\ x IN topspace top ==> &0 <= g b x /\\ g b x <= &1
-      #|  n:num
-      #|  (Bn:num->(A->bool)->bool) n
-      #|  B = UNIONS {(Bn:num->(A->bool)->bool) n | n IN (:num)}
-      #|  forall n:num (b:A->bool). b IN Bn n ==> b IN B
-      #|  ~(J:num#(A->bool)->bool = {})
-      #|  forall x:A y:A.\n       ~({abs(g (b:A->bool) x * inv(&(SUC n)) -\n              g b y * inv(&(SUC n))) |\n          n,b | b IN Bn n} = {})
-      #|  \\p:A#A.\n     sup {abs(g (b:A->bool) (FST p) * inv(&(SUC n)) -\n              g b (SND p) * inv(&(SUC n))) |\n          n,b | b IN Bn n}
-      #|  d:A#A->real
-      #|  ?d:A#A->real. forall x y.\n       d(x,y) = sup {abs(g (b:A->bool) x * inv(&(SUC n)) -\n                         g b y * inv(&(SUC n))) |\n                     n,b | b IN Bn n}
-      #|  b0:A->bool
-      #|  n0:num
-      #|  n0:num,(b0:A->bool)
-      #|  b0:A->bool
-      #|  n0:num
-      #|  B = UNIONS {(Bn:num->(A->bool)->bool) n | n IN (:num)}
-      #|  ~(B:(A->bool)->bool = {})
-      #|  ?n0:num (b0:A->bool). b0 IN Bn n0
-      #|  ~(J:num#(A->bool)->bool = {})
-      #|  J = {(n:num,b:A->bool) | b IN Bn n}
-      #|  topspace top:A->bool
-      #|  a:A
-      #|  a:A
-      #|  ~(B:(A->bool)->bool = {})
-      #|  g:(A->bool)->A->real
-      #|  (b:A->bool) SUBSET topspace top
-      #|  (x:A) IN b
-      #|  forall x:A. x IN topspace top DIFF (topspace top DIFF b) ==> &0 < f x
-      #|  x:A
-      #|  f:A->real
-      #|  f:A->real
-      #|  topspace top DIFF b:A->bool
-      #|  top:A topology
-      #|  (b:A->bool) SUBSET topspace top
-      #|  open_in top (b:A->bool)
-      #|  b:A->bool
-      #|  forall b:A->bool. b IN B ==>\n        ?f. continuous_map(top, euclideanreal) f /\\\n            (forall x. x IN topspace top ==> &0 <= f x /\\ f x <= &1) /\\\n            (forall x. x IN topspace top /\\ ~(x IN b) ==> f x = &0) /\\\n            (forall x. x IN b ==> &0 < f x)
-      #|  B:(A->bool)->bool
-      #|  forall s:A->bool. closed_in top s ==> gdelta_in top s
-      #|  B:(A->bool)->bool
-      #|  normal_space (top:A topology)
-      #|  Bn:num->(A->bool)->bool
-      #|  sigma_locally_finite_in top (B:(A->bool)->bool)
-      #|  Bn:num->(A->bool)->bool
-      #|  top:A topology = discrete_topology ({}:A->bool)
-      #|  topspace top:A->bool = {}
-      #|  forall top:A topology.\n        regular_space top /\\ hausdorff_space top /\\\n        (?B. (forall b. b IN B ==> open_in top b) /\\\n             (forall x u. open_in top u /\\ x IN u\n                    ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n             sigma_locally_finite_in top B)\n        ==> metrizable_space top
-      #|  (d:A#A->real)(x,y) = &0
-      #|  metric(topspace top:A->bool, d:A#A->real)
-      #|  nn':num
-      #|  nn':num
-      #|  nn':num
-      #|  nn':num
-      #|  nn':num
-      #|  nn':num
-      #|  b':A->bool
-      #|  z:A
-      #|  D:num->(A->bool)->bool
-      #|  u INTER (c0:A->bool)
-      #|  mball((mc:(A->bool)->A metric) c0)\n     ((x:A), eps(c0:A->bool))
-      #|  a + b < &2 * b /\\ &2 * b <= c ==> a + b <= c
-      #|  a < b / &2 ==> &2 * a < b
-      #|  (N - 1) + 1 = N
-      #|  inf(IMAGE (eps:(A->bool)->real) CC_x)
-      #|  &2 * inv(&(N - 1 + 1)) <= eps(c0:A->bool)
-      #|  a < b ==> a + b < &2 * b
-      #|  mdist ((mc:(A->bool)->A metric) c0) ((y:A),(x:A)) +\n        inv(&(N - 1 + 1)) < &2 * inv(&(N - 1 + 1))
-      #|  (x:A) IN mball((mc:(A->bool)->A metric) c0)\n          ((y:A), inv(&(N - 1 + 1)))
-      #|  mball((mc:(A->bool)->A metric) c0)\n      ((y:A), inv(&(N - 1 + 1)))
-      #|  (d:A->bool) SUBSET\n      mball((mc:(A->bool)->A metric) c0) ((x:A), eps(c0:A->bool))
-      #|  c0:A->bool
-      #|  IMAGE (eps:(A->bool)->real) CC_x
-      #|  inf(IMAGE (eps:(A->bool)->real) CC_x) <= eps(c0:A->bool)
-      #|  (c0:A->bool) IN CC_x
-      #|  x IN mball ((mc:(A->bool)->A metric) c0)\n       ((y:A),inv(&((N - 1) + 1)))
-      #|  (x:A) IN mspace((mc:(A->bool)->A metric) c0)
-      #|  (x:A) IN c0
-      #|  y:A
-      #|  c0:A->bool
-      #|  d:A->bool
-      #|  N - 1
-      #|  N - 1
-      #|  d:A->bool
-      #|  d:A->bool
-      #|  ?d:A->bool. d IN (D:num->(A->bool)->bool) (N - 1) /\\ x IN d
-      #|  N:num
-      #|  inf(IMAGE (eps:(A->bool)->real) CC_x) / &2
-      #|  &0 < inf (IMAGE (eps:(A->bool)->real) CC_x)
-      #|  ~(CC_x:(A->bool)->bool = {})
-      #|  c:A->bool
-      #|  {c:A->bool | c IN CC /\\ ~(c INTER w = {})}
-      #|  FINITE (CC_x:(A->bool)->bool)
-      #|  CC_x = {c:A->bool | c IN CC /\\ x IN c}
-      #|  eps:(A->bool)->real
-      #|  y:A
-      #|  y:A
-      #|  r:real
-      #|  r:real
-      #|  x:A
-      #|  u:A->bool
-      #|  subtopology top (c:A->bool) =\n       mtopology ((mc:(A->bool)->A metric) c)
-      #|  open_in (mtopology((mc:(A->bool)->A metric) c))\n      (u INTER c:A->bool)
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN CC /\\ x IN c\n       ==> ?e. &0 < e /\\\n               mball ((mc:(A->bool)->A metric) c) ((x:A),e) SUBSET u INTER c
-      #|  w:A->bool
-      #|  x:A
-      #|  (x:A) IN topspace top
-      #|  u:A->bool
-      #|  x:A
-      #|  UNIONS {(D:num->(A->bool)->bool) m | m IN (:num)}
-      #|  D:num->(A->bool)->bool
-      #|  x':A
-      #|  c:A->bool
-      #|  x':A
-      #|  c:A->bool
-      #|  b:A->bool
-      #|  d:A->bool
-      #|  d:A->bool
-      #|  Dm:(A->bool)->bool
-      #|  Dm:(A->bool)->bool
-      #|  z:A
-      #|  c:A->bool
-      #|  c:A->bool
-      #|  ?c:A->bool. c IN CC /\\ z IN c
-      #|  (z:A) IN mspace((mc:(A->bool)->A metric) c)
-      #|  x':A
-      #|  c:A->bool
-      #|  z:A
-      #|  v:A->bool
-      #|  subtopology top (c:A->bool) =\n       mtopology ((mc:(A->bool)->A metric) c)
-      #|  open_in (subtopology top (c:A->bool))\n       (mball ((mc:(A->bool)->A metric) c) ((x':A), inv(&(m + 1))))
-      #|  x':A
-      #|  c:A->bool
-      #|  {mball ((mc:(A->bool)->A metric) c) ((x:A), inv(&(m + 1))) |\n       c IN CC /\\ x IN c}
-      #|  m:num
-      #|  forall m:num. ?Dm:(A->bool)->bool.\n       (forall d. d IN Dm ==> open_in top d) /\\\n       UNIONS Dm = topspace top /\\\n       (forall d. d IN Dm ==>\n            ?c (x:A). c IN CC /\\ x IN c /\\\n                      d SUBSET mball ((mc:(A->bool)->A metric) c)\n                                     (x, inv(&(m + 1)))) /\\\n       locally_finite_in top Dm
-      #|  topspace top INTER (c:A->bool) = c
-      #|  (c:A->bool) SUBSET topspace top
-      #|  subtopology top (c:A->bool) =\n     mtopology ((mc:(A->bool)->A metric) c)
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN CC ==> mspace((mc:(A->bool)->A metric) c) = c
-      #|  ?mc:(A->bool)->A metric.\n       forall c. c IN CC ==> subtopology top c = mtopology (mc c)
-      #|  subtopology (subtopology top u) (c:A->bool) =\n                  subtopology top c
-      #|  u:A->bool
-      #|  c:A->bool
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN CC ==> metrizable_space(subtopology top c)
-      #|  CC:(A->bool)->bool
-      #|  u:A->bool
-      #|  x:A
-      #|  {u:A->bool | open_in top u /\\ metrizable_space(subtopology top u)}
-      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        (forall x. x IN topspace top\n             ==> ?u. open_in top u /\\ x IN u /\\\n                     metrizable_space(subtopology top u))\n        ==> ?B. (forall b. b IN B ==> open_in top b) /\\\n                (forall x u. open_in top u /\\ x IN u\n                       ==> ?b. b IN B /\\ x IN b /\\ b SUBSET u) /\\\n                sigma_locally_finite_in top B
-      #|  topspace:(A)topology->A->bool
+      #|  (top : Topology[A])
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool))
+      #|  open_in((top : Topology[A]), {(z : A) | IN(z, topspace(top)) && abs((g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), z) - g(b0, (y0 : A))) < (eps : Real) / real_of_num(2)})
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool)))
+      #|  IN((b0 : (A) -> Bool), (Fb : ((A) -> Bool) -> Bool))
+      #|  (b0 : (A) -> Bool)
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, \226\136\128 b : (A) -> Bool, IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 IN(b, (B : ((A) -> Bool) -> Bool))
+      #|  IN((b0 : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (Fb : ((A) -> Bool) -> Bool)) \226\134\146 (\226\136\131 Wb : (A) -> Bool, open_in((top : Topology[A]), Wb) && IN((y0 : A), Wb) && (\226\136\128 z : A, IN(z, Wb) && IN(z, topspace(top)) \226\134\146 abs((g : ((A) -> Bool, A) -> Real)(b, z) - g(b, y0)) < (eps : Real) / real_of_num(2)))
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (LF : (Num, A) -> Bool)(n)) && IN((y0 : A), LF(n)) && FINITE({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(b, LF(n)) == {})})
+      #|  FINITE((Fb : ((A) -> Bool) -> Bool))
+      #|  (Fb : ((A) -> Bool) -> Bool) == {(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)((nn : Num))) && !(INTER(b, (LF : (Num, A) -> Bool)(nn)) == {})}
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, n <= (N0 : Num) \226\134\146 (\226\136\131 Vn : (A) -> Bool, open_in((top : Topology[A]), Vn) && IN((y0 : A), Vn) && (\226\136\128 z : A, \226\136\128 b : (A) -> Bool, IN(z, Vn) && IN(z, topspace(top)) && IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 abs((g : ((A) -> Bool, A) -> Real)(b, z) * inv(real_of_num(SUC(n))) - g(b, y0) * inv(real_of_num(SUC(n)))) <= (eps : Real) / real_of_num(2)))
+      #|  (V : (A) -> Bool)
+      #|  \226\136\131 V : (A) -> Bool, open_in((top : Topology[A]), V) && IN((y0 : A), V) && (\226\136\128 z : A, IN(z, V) && IN(z, topspace(top)) \226\134\146 (d : ((A, A)) -> Real)((y0, z)) < (eps : Real))
+      #|  (y0 : A)
+      #|  locally_finite_in((top : Topology[A]), (Bn : (Num, (A) -> Bool) -> Bool)((nn : Num)))
+      #|  (nn : Num)
+      #|  (LF : (Num, A) -> Bool)
+      #|  \226\136\131 LF : (Num, A) -> Bool, \226\136\128 n : Num, open_in((top : Topology[A]), LF(n)) && IN((y0 : A), LF(n)) && FINITE({(b : (A) -> Bool) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(b, LF(n)) == {})})
+      #|  real_of_num(0) < (eps : Real)
+      #|  \226\136\131 N0 : Num, !(N0 == 0) && real_of_num(0) < inv(real_of_num(N0)) && inv(real_of_num(N0)) < (eps : Real) / real_of_num(4)
+      #|  (d : ((A, A)) -> Real)(((x : A), (y0 : A))) < (r : Real)
+      #|  real_of_num(0) < (eps : Real)
+      #|  (eps : Real) == (r : Real) - (d : ((A, A)) -> Real)(((x : A), (y0 : A)))
+      #|  (y0 : A)
+      #|  \226\136\128 x : A, \226\136\128 r : Real, IN(x, topspace((top : Topology[A]))) && real_of_num(0) < r \226\134\146 open_in(top, {(y : A) | IN(y, topspace(top)) && (d : ((A, A)) -> Real)((x, y)) < r})
+      #|  (a : A)
+      #|  metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))
+      #|  (a : A)
+      #|  \226\136\128 a : A, IN(a, topspace((top : Topology[A]))) \226\134\146 (d : ((A, A)) -> Real)((a, a)) == real_of_num(0)
+      #|  mdist(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == d
+      #|  mspace(metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))) == topspace(top)
+      #|  (top : Topology[A]) == mtopology(metric((topspace(top), (d : ((A, A)) -> Real))))
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (b'' : (A) -> Bool)
+      #|  (n'' : Num)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b'' : (A) -> Bool), (y : A)) * inv(real_of_num(SUC((n'' : Num)))) - g(b'', (z : A)) * inv(real_of_num(SUC(n''))))
+      #|  (z : A)
+      #|  (y : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : Real, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) && IN(z, {abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) \226\134\146 z <= real_of_num(1)
+      #|  (b'' : (A) -> Bool)
+      #|  (n'' : Num)
+      #|  (v : Real)
+      #|  real_of_num(1)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (b'' : (A) -> Bool)
+      #|  (n'' : Num)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b'' : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n'' : Num)))) - g(b'', (y : A)) * inv(real_of_num(SUC(n''))))
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : Real, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) && IN(z, {abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) \226\134\146 z <= real_of_num(1)
+      #|  (b'' : (A) -> Bool)
+      #|  (n'' : Num)
+      #|  (v : Real)
+      #|  real_of_num(1)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n' : Num)))) - g(b', (y : A)) * inv(real_of_num(SUC(n')))) + abs(g(b', y) * inv(real_of_num(SUC(n'))) - g(b', (z : A)) * inv(real_of_num(SUC(n'))))
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (w : Real)
+      #|  (z : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, !({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))} == {})
+      #|  \226\136\128 x : A, \226\136\128 y : A, (d : ((A, A)) -> Real)((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  \226\136\128 x : A, \226\136\128 y : A, (d : ((A, A)) -> Real)((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (w : Real)
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, !({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))} == {})
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
+      #|  \226\136\128 x : A, \226\136\128 y : A, (d : ((A, A)) -> Real)((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  (b0 : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n' : Num)))) - g(b', (y : A)) * inv(real_of_num(SUC(n'))))
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : Real, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) && IN(z, {abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) \226\134\146 z <= real_of_num(1)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (w : Real)
+      #|  real_of_num(1)
+      #|  real_of_num(0) < (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A))
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (y : A)) == real_of_num(0)
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n0 : Num)))) == abs(g(b0, x) * inv(real_of_num(SUC(n0))) - g(b0, (y : A)) * inv(real_of_num(SUC(n0))))
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n0 : Num))))
+      #|  (y : A)
+      #|  \226\136\128 x : A, IN(x, topspace((top : Topology[A]))) && !IN(x, (b0 : (A) -> Bool)) \226\134\146 (g : ((A) -> Bool, A) -> Real)(b0, x) == real_of_num(0)
+      #|  (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (y : A)) == real_of_num(0)
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, (b0 : (A) -> Bool)) \226\134\146 real_of_num(0) < (g : ((A) -> Bool, A) -> Real)(b0, x)
+      #|  real_of_num(0) < (g : ((A) -> Bool, A) -> Real)((b0 : (A) -> Bool), (x : A))
+      #|  (b0 : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (s : ((A) -> Bool) -> Bool)
+      #|  (B : ((A) -> Bool) -> Bool) == UNIONS({(Bn : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  IN((b0 : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  \226\136\131 n0 : Num, IN((b0 : (A) -> Bool), (Bn : (Num, (A) -> Bool) -> Bool)(n0))
+      #|  SUBSET((b0 : (A) -> Bool), DIFF(topspace((top : Topology[A])), {(y : A)}))
+      #|  !IN((y : A), (b0 : (A) -> Bool))
+      #|  (b0 : (A) -> Bool)
+      #|  DIFF(topspace((top : Topology[A])), {(y : A)})
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in((top : Topology[A]), u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) && IN(x, b) && SUBSET(b, u))
+      #|  \226\136\128 x : A, \226\136\128 y : A, (d : ((A, A)) -> Real)((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  real_of_num(0) < (d : ((A, A)) -> Real)(((x : A), (y : A)))
+      #|  (x : A) == (y : A)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  abs((g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A)) * inv(real_of_num(SUC((n' : Num)))) - g(b', (y : A)) * inv(real_of_num(SUC(n'))))
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : Real, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) && IN(z, {abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) \226\134\146 z <= real_of_num(1)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  (w : Real)
+      #|  (y : A)
+      #|  (x : A)
+      #|  \226\136\128 x : A, \226\136\128 y : A, !({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))} == {})
+      #|  real_of_num(0) <= (x : Real) && x <= real_of_num(1) \226\134\146 real_of_num(0) <= x
+      #|  \226\136\128 x : A, \226\136\128 y : A, (d : ((A, A)) -> Real)((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  is_metric_space((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))
+      #|  inv(real_of_num(SUC((n' : Num)))) <= real_of_num(1)
+      #|  real_of_num(0) <= inv(real_of_num(SUC((n' : Num))))
+      #|  (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y : A)) <= real_of_num(1)
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y : A))
+      #|  real_of_num(1) * real_of_num(1)
+      #|  real_of_num(0) <= inv(real_of_num(SUC((n' : Num))))
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y : A))
+      #|  inv(real_of_num(SUC((n' : Num)))) <= real_of_num(1)
+      #|  real_of_num(0) <= inv(real_of_num(SUC((n' : Num))))
+      #|  (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A)) <= real_of_num(1)
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A))
+      #|  real_of_num(1) * real_of_num(1)
+      #|  real_of_num(0) <= inv(real_of_num(SUC((n' : Num))))
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A))
+      #|  real_of_num(0) <= inv(real_of_num(SUC((n' : Num)))) && inv(real_of_num(SUC(n'))) <= real_of_num(1)
+      #|  (y : A)
+      #|  (b' : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, \226\136\128 x : A, IN(b, (B : ((A) -> Bool) -> Bool)) && IN(x, topspace((top : Topology[A]))) \226\134\146 real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)(b, x) && g(b, x) <= real_of_num(1)
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (y : A)) && g(b', y) <= real_of_num(1)
+      #|  (x : A)
+      #|  (b' : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, \226\136\128 x : A, IN(b, (B : ((A) -> Bool) -> Bool)) && IN(x, topspace((top : Topology[A]))) \226\134\146 real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)(b, x) && g(b, x) <= real_of_num(1)
+      #|  real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)((b' : (A) -> Bool), (x : A)) && g(b', x) <= real_of_num(1)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  \226\136\128 n : Num, \226\136\128 b : (A) -> Bool, IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 IN(b, (B : ((A) -> Bool) -> Bool))
+      #|  IN((b' : (A) -> Bool), (B : ((A) -> Bool) -> Bool))
+      #|  real_of_num(0) <= (u : Real) && u <= real_of_num(1) && real_of_num(0) <= (v : Real) && v <= real_of_num(1) \226\134\146 abs(u - v) <= real_of_num(1)
+      #|  (b' : (A) -> Bool)
+      #|  (n' : Num)
+      #|  \226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : Real, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) && IN(z, {abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}) \226\134\146 z <= real_of_num(1)
+      #|  (x : A)
+      #|  (b : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 continuous_map(((top : Topology[A]), euclideanreal), (g : ((A) -> Bool, A) -> Real)(b)) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= g(b, x) && g(b, x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 g(b, x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < g(b, x))
+      #|  \226\136\128 b : (A) -> Bool, \226\136\128 x : A, IN(b, (B : ((A) -> Bool) -> Bool)) && IN(x, topspace((top : Topology[A]))) \226\134\146 real_of_num(0) <= (g : ((A) -> Bool, A) -> Real)(b, x) && g(b, x) <= real_of_num(1)
+      #|  (n : Num)
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)((n : Num))
+      #|  (B : ((A) -> Bool) -> Bool) == UNIONS({(Bn : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  \226\136\128 n : Num, \226\136\128 b : (A) -> Bool, IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 IN(b, (B : ((A) -> Bool) -> Bool))
+      #|  !((J : ((Num, (A) -> Bool)) -> Bool) == {})
+      #|  \226\136\128 x : A, \226\136\128 y : A, !({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))} == {})
+      #|  (p : (A, A)) => sup({abs((g : ((A) -> Bool, A) -> Real)(b, FST(p)) * inv(real_of_num(SUC(n))) - g(b, SND(p)) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  (d : ((A, A)) -> Real)
+      #|  \226\136\131 d : ((A, A)) -> Real, \226\136\128 x : A, \226\136\128 y : A, d((x, y)) == sup({abs((g : ((A) -> Bool, A) -> Real)(b, x) * inv(real_of_num(SUC(n))) - g(b, y) * inv(real_of_num(SUC(n)))) | n : Num, b : (A) -> Bool | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))})
+      #|  (b0 : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  ((n0 : Num), (b0 : (A) -> Bool))
+      #|  (b0 : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (B : ((A) -> Bool) -> Bool) == UNIONS({(Bn : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  !((B : ((A) -> Bool) -> Bool) == {})
+      #|  \226\136\131 n0 : Num, \226\136\131 b0 : (A) -> Bool, IN(b0, (Bn : (Num, (A) -> Bool) -> Bool)(n0))
+      #|  !((J : ((Num, (A) -> Bool)) -> Bool) == {})
+      #|  (J : ((Num, (A) -> Bool)) -> Bool) == {((n : Num), (b : (A) -> Bool)) | IN(b, (Bn : (Num, (A) -> Bool) -> Bool)(n))}
+      #|  topspace((top : Topology[A]))
+      #|  (a : A)
+      #|  (a : A)
+      #|  !((B : ((A) -> Bool) -> Bool) == {})
+      #|  (g : ((A) -> Bool, A) -> Real)
+      #|  SUBSET((b : (A) -> Bool), topspace((top : Topology[A])))
+      #|  IN((x : A), (b : (A) -> Bool))
+      #|  \226\136\128 x : A, IN(x, DIFF(topspace((top : Topology[A])), DIFF(topspace(top), (b : (A) -> Bool)))) \226\134\146 real_of_num(0) < (f : (A) -> Real)(x)
+      #|  (x : A)
+      #|  (f : (A) -> Real)
+      #|  (f : (A) -> Real)
+      #|  DIFF(topspace((top : Topology[A])), (b : (A) -> Bool))
+      #|  (top : Topology[A])
+      #|  SUBSET((b : (A) -> Bool), topspace((top : Topology[A])))
+      #|  open_in((top : Topology[A]), (b : (A) -> Bool))
+      #|  (b : (A) -> Bool)
+      #|  \226\136\128 b : (A) -> Bool, IN(b, (B : ((A) -> Bool) -> Bool)) \226\134\146 (\226\136\131 f : (A) -> Real, continuous_map(((top : Topology[A]), euclideanreal), f) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= f(x) && f(x) <= real_of_num(1)) && (\226\136\128 x : A, IN(x, topspace(top)) && !IN(x, b) \226\134\146 f(x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, b) \226\134\146 real_of_num(0) < f(x)))
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, closed_in((top : Topology[A]), s) \226\134\146 gdelta_in(top, s)
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  normal_space((top : Topology[A]))
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)
+      #|  sigma_locally_finite_in((top : Topology[A]), (B : ((A) -> Bool) -> Bool))
+      #|  (Bn : (Num, (A) -> Bool) -> Bool)
+      #|  (top : Topology[A]) == discrete_topology({})
+      #|  topspace((top : Topology[A])) == {}
+      #|  \226\136\128 top : Topology[A], regular_space(top) && hausdorff_space(top) && (\226\136\131 B : ((A) -> Bool) -> Bool, (\226\136\128 b : (A) -> Bool, IN(b, B) \226\134\146 open_in(top, b)) && (\226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in(top, u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, B) && IN(x, b) && SUBSET(b, u))) && sigma_locally_finite_in(top, B)) \226\134\146 metrizable_space(top)
+      #|  (d : ((A, A)) -> Real)(((x : A), (y : A))) == real_of_num(0)
+      #|  metric((topspace((top : Topology[A])), (d : ((A, A)) -> Real)))
+      #|  (nn' : Num)
+      #|  (nn' : Num)
+      #|  (nn' : Num)
+      #|  (nn' : Num)
+      #|  (nn' : Num)
+      #|  (nn' : Num)
+      #|  (b' : (A) -> Bool)
+      #|  (z : A)
+      #|  (D : (Num, (A) -> Bool) -> Bool)
+      #|  INTER((u : (A) -> Bool), (c0 : (A) -> Bool))
+      #|  mball((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool)), ((x : A), (eps : ((A) -> Bool) -> Real)(c0)))
+      #|  (a : Real) + (b : Real) < real_of_num(2) * b && real_of_num(2) * b <= (c : Real) \226\134\146 a + b <= c
+      #|  (a : Real) < (b : Real) / real_of_num(2) \226\134\146 real_of_num(2) * a < b
+      #|  (N : Num) - 1 + 1 == N
+      #|  inf(IMAGE((eps : ((A) -> Bool) -> Real), (CC_x : ((A) -> Bool) -> Bool)))
+      #|  real_of_num(2) * inv(real_of_num((N : Num) - 1 + 1)) <= (eps : ((A) -> Bool) -> Real)((c0 : (A) -> Bool))
+      #|  (a : Real) < (b : Real) \226\134\146 a + b < real_of_num(2) * b
+      #|  mdist((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool)), ((y : A), (x : A))) + inv(real_of_num((N : Num) - 1 + 1)) < real_of_num(2) * inv(real_of_num(N - 1 + 1))
+      #|  IN((x : A), mball((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool)), ((y : A), inv(real_of_num((N : Num) - 1 + 1)))))
+      #|  mball((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool)), ((y : A), inv(real_of_num((N : Num) - 1 + 1))))
+      #|  SUBSET((d : (A) -> Bool), mball((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool)), ((x : A), (eps : ((A) -> Bool) -> Real)(c0))))
+      #|  (c0 : (A) -> Bool)
+      #|  IMAGE((eps : ((A) -> Bool) -> Real), (CC_x : ((A) -> Bool) -> Bool))
+      #|  inf(IMAGE((eps : ((A) -> Bool) -> Real), (CC_x : ((A) -> Bool) -> Bool))) <= eps((c0 : (A) -> Bool))
+      #|  IN((c0 : (A) -> Bool), (CC_x : ((A) -> Bool) -> Bool))
+      #|  IN((x : A), mball((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool)), ((y : A), inv(real_of_num((N : Num) - 1 + 1)))))
+      #|  IN((x : A), mspace((mc : ((A) -> Bool) -> Metric[A])((c0 : (A) -> Bool))))
+      #|  IN((x : A), (c0 : (A) -> Bool))
+      #|  (y : A)
+      #|  (c0 : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  (N : Num) - 1
+      #|  (N : Num) - 1
+      #|  (d : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  \226\136\131 d : (A) -> Bool, IN(d, (D : (Num, (A) -> Bool) -> Bool)((N : Num) - 1)) && IN((x : A), d)
+      #|  (N : Num)
+      #|  inf(IMAGE((eps : ((A) -> Bool) -> Real), (CC_x : ((A) -> Bool) -> Bool))) / real_of_num(2)
+      #|  real_of_num(0) < inf(IMAGE((eps : ((A) -> Bool) -> Real), (CC_x : ((A) -> Bool) -> Bool)))
+      #|  !((CC_x : ((A) -> Bool) -> Bool) == {})
+      #|  (c : (A) -> Bool)
+      #|  {(c : (A) -> Bool) | IN(c, (CC : ((A) -> Bool) -> Bool)) && !(INTER(c, (w : (A) -> Bool)) == {})}
+      #|  FINITE((CC_x : ((A) -> Bool) -> Bool))
+      #|  (CC_x : ((A) -> Bool) -> Bool) == {(c : (A) -> Bool) | IN(c, (CC : ((A) -> Bool) -> Bool)) && IN((x : A), c)}
+      #|  (eps : ((A) -> Bool) -> Real)
+      #|  (y : A)
+      #|  (y : A)
+      #|  (r : Real)
+      #|  (r : Real)
+      #|  (x : A)
+      #|  (u : (A) -> Bool)
+      #|  subtopology((top : Topology[A]), (c : (A) -> Bool)) == mtopology((mc : ((A) -> Bool) -> Metric[A])(c))
+      #|  open_in(mtopology((mc : ((A) -> Bool) -> Metric[A])((c : (A) -> Bool))), INTER((u : (A) -> Bool), c))
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (CC : ((A) -> Bool) -> Bool)) && IN((x : A), c) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && SUBSET(mball((mc : ((A) -> Bool) -> Metric[A])(c), (x, e)), INTER((u : (A) -> Bool), c)))
+      #|  (w : (A) -> Bool)
+      #|  (x : A)
+      #|  IN((x : A), topspace((top : Topology[A])))
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  UNIONS({(D : (Num, (A) -> Bool) -> Bool)((m : Num)) | IN(m, UNIV)})
+      #|  (D : (Num, (A) -> Bool) -> Bool)
+      #|  (x' : A)
+      #|  (c : (A) -> Bool)
+      #|  (x' : A)
+      #|  (c : (A) -> Bool)
+      #|  (b : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  (Dm : ((A) -> Bool) -> Bool)
+      #|  (Dm : ((A) -> Bool) -> Bool)
+      #|  (z : A)
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  \226\136\131 c : (A) -> Bool, IN(c, (CC : ((A) -> Bool) -> Bool)) && IN((z : A), c)
+      #|  IN((z : A), mspace((mc : ((A) -> Bool) -> Metric[A])((c : (A) -> Bool))))
+      #|  (x' : A)
+      #|  (c : (A) -> Bool)
+      #|  (z : A)
+      #|  (v : (A) -> Bool)
+      #|  subtopology((top : Topology[A]), (c : (A) -> Bool)) == mtopology((mc : ((A) -> Bool) -> Metric[A])(c))
+      #|  open_in(subtopology((top : Topology[A]), (c : (A) -> Bool)), mball((mc : ((A) -> Bool) -> Metric[A])(c), ((x' : A), inv(real_of_num((m : Num) + 1)))))
+      #|  (x' : A)
+      #|  (c : (A) -> Bool)
+      #|  {mball((mc : ((A) -> Bool) -> Metric[A])((c : (A) -> Bool)), ((x : A), inv(real_of_num((m : Num) + 1)))) | IN(c, (CC : ((A) -> Bool) -> Bool)) && IN(x, c)}
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\131 Dm : ((A) -> Bool) -> Bool, (\226\136\128 d : (A) -> Bool, IN(d, Dm) \226\134\146 open_in((top : Topology[A]), d)) && UNIONS(Dm) == topspace(top) && (\226\136\128 d : (A) -> Bool, IN(d, Dm) \226\134\146 (\226\136\131 c : (A) -> Bool, \226\136\131 x : A, IN(c, (CC : ((A) -> Bool) -> Bool)) && IN(x, c) && SUBSET(d, mball((mc : ((A) -> Bool) -> Metric[A])(c), (x, inv(real_of_num(m + 1))))))) && locally_finite_in(top, Dm)
+      #|  INTER(topspace((top : Topology[A])), (c : (A) -> Bool)) == c
+      #|  SUBSET((c : (A) -> Bool), topspace((top : Topology[A])))
+      #|  subtopology((top : Topology[A]), (c : (A) -> Bool)) == mtopology((mc : ((A) -> Bool) -> Metric[A])(c))
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (CC : ((A) -> Bool) -> Bool)) \226\134\146 mspace((mc : ((A) -> Bool) -> Metric[A])(c)) == c
+      #|  \226\136\131 mc : ((A) -> Bool) -> Metric[A], \226\136\128 c : (A) -> Bool, IN(c, (CC : ((A) -> Bool) -> Bool)) \226\134\146 subtopology((top : Topology[A]), c) == mtopology(mc(c))
+      #|  subtopology(subtopology((top : Topology[A]), (u : (A) -> Bool)), (c : (A) -> Bool)) == subtopology(top, c)
+      #|  (u : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (CC : ((A) -> Bool) -> Bool)) \226\134\146 metrizable_space(subtopology((top : Topology[A]), c))
+      #|  (CC : ((A) -> Bool) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (x : A)
+      #|  {(u : (A) -> Bool) | open_in((top : Topology[A]), u) && metrizable_space(subtopology(top, u))}
+      #|  \226\136\128 top : Topology[A], paracompact_space(top) && hausdorff_space(top) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 (\226\136\131 u : (A) -> Bool, open_in(top, u) && IN(x, u) && metrizable_space(subtopology(top, u)))) \226\134\146 (\226\136\131 B : ((A) -> Bool) -> Bool, (\226\136\128 b : (A) -> Bool, IN(b, B) \226\134\146 open_in(top, b)) && (\226\136\128 x : A, \226\136\128 u : (A) -> Bool, open_in(top, u) && IN(x, u) \226\134\146 (\226\136\131 b : (A) -> Bool, IN(b, B) && IN(x, b) && SUBSET(b, u))) && sigma_locally_finite_in(top, B))
+      #|  (topspace : (Topology[A], A) -> Bool)
       #|  collectionwise_normal_space (top:A topology) <=>\n        forall F. (forall c. c IN F ==> closed_in top c) /\\\n            pairwise DISJOINT F /\\\n            locally_finite_in top F\n            ==> ?G. (forall c. c IN F ==> open_in top (G c) /\\ c SUBSET G c) /\\\n                    pairwise (\\c d. DISJOINT (G c) (G d)) F
-      #|  forall s t a b:A->bool.\n          s SUBSET a /\\ t SUBSET b /\\ DISJOINT a b ==> DISJOINT s t
-      #|  c:A->bool
-      #|  x:A
-      #|  (H:(A->bool)->(A->bool)) c
-      #|  top closure_of ((H:(A->bool)->(A->bool)) c)
-      #|  forall u:A->bool. s SUBSET u /\\ DISJOINT u t ==> DISJOINT s t
-      #|  d:A->bool
-      #|  c:A->bool
-      #|  c:A->bool
-      #|  d:A->bool
-      #|  d:A->bool
-      #|  x:A
-      #|  c:A->bool
-      #|  \\c:A->bool. (H:(A->bool)->(A->bool)) c DIFF\n       UNIONS {(top:A topology) closure_of H d |\n               d IN (fam:(A->bool)->bool) /\\ ~(d = c)}
-      #|  {top closure_of (H:(A->bool)->(A->bool)) d |\n       d IN (fam:(A->bool)->bool)}
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN fam\n     ==> closed_in top\n           (UNIONS {top closure_of (H:(A->bool)->(A->bool)) d |\n                    d IN (fam:(A->bool)->bool) /\\ ~(d = c)})
-      #|  ~(c':A->bool = c)
-      #|  (c:A->bool) IN fam
-      #|  ~(w INTER c:A->bool = {})
-      #|  c':A->bool
-      #|  w:A->bool
-      #|  (w:A->bool) SUBSET topspace top DIFF UNIONS(fam DELETE c':A->bool)
-      #|  c':A->bool = c
-      #|  ~(w INTER c':A->bool = {})
-      #|  c':A->bool
-      #|  (@c':A->bool. c' IN fam /\\ (?x:A. x IN w /\\ x IN c')) = c
-      #|  w:A->bool
-      #|  w:A->bool
-      #|  (z:A) IN UNIONS {w:A->bool | w IN W /\\ ~(w INTER c = {})}
-      #|  z:A
-      #|  ~(top closure_of ((H:(A->bool)->(A->bool)) c)\n     INTER (V:A->bool) = {})
-      #|  c:A->bool
-      #|  s:A->bool
-      #|  IMAGE (\\w:A->bool. top closure_of ((H:(A->bool)->(A->bool))\n        (@c. c IN fam /\\ ~(w INTER c = {}))))\n      {w:A->bool | w IN W /\\ ~(V INTER w = {})}
-      #|  V:A->bool
-      #|  V:A->bool
-      #|  x:A
-      #|  locally_finite_in top (W:(A->bool)->bool)
-      #|  x:A
-      #|  locally_finite_in top\n      {top closure_of (H:(A->bool)->(A->bool)) c |\n       c IN (fam:(A->bool)->bool)}
-      #|  UNIONS((fam:(A->bool)->bool) DELETE c)
-      #|  topspace top DIFF UNIONS((fam:(A->bool)->bool) DELETE c)
-      #|  forall c d:A->bool. c IN fam /\\ d IN fam /\\ ~(c = d)\n     ==> DISJOINT (top closure_of ((H:(A->bool)->(A->bool)) c)) d
-      #|  UNIONS {w:A->bool | w IN W /\\ ~(w INTER c = {})}
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN fam\n     ==> top closure_of ((H:(A->bool)->(A->bool)) c) SUBSET\n         topspace top DIFF UNIONS(fam DELETE c)
-      #|  H:(A->bool)->(A->bool)
-      #|  w:A->bool
-      #|  w:A->bool
-      #|  (x:A) IN UNIONS W
-      #|  x:A
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN fam\n     ==> ?v. open_in top v /\\ c SUBSET v /\\\n             top closure_of v SUBSET\n               UNIONS {w:A->bool | w IN W /\\ ~(w INTER c = {})}
-      #|  c:A->bool
-      #|  y:A
-      #|  (c:A->bool) SUBSET UNIONS(fam DELETE c')
-      #|  z:A
-      #|  ~(w INTER c:A->bool = {})
-      #|  c':A->bool = c
-      #|  c:A->bool
-      #|  (z:A) IN UNIONS fam
-      #|  z:A
-      #|  ~(w INTER c:A->bool = {})
-      #|  c':A->bool
-      #|  (u:A->bool) IN (topspace top DIFF UNIONS (fam:(A->bool)->bool)) INSERT\n       IMAGE (\\c. topspace top DIFF UNIONS(fam DELETE c)) fam
-      #|  u:A->bool
-      #|  w:A->bool
-      #|  forall w c:A->bool. w IN W /\\ c IN fam /\\ ~(w INTER c = {})\n     ==> w SUBSET topspace top DIFF UNIONS(fam DELETE c)
-      #|  W:(A->bool)->bool
-      #|  topspace top DIFF UNIONS (fam:(A->bool)->bool)
-      #|  c:A->bool
-      #|  topspace top DIFF UNIONS((fam:(A->bool)->bool) DELETE c)
-      #|  c:A->bool
-      #|  (x:A) IN UNIONS fam
-      #|  x:A
-      #|  (topspace top DIFF UNIONS (fam:(A->bool)->bool)) INSERT\n     IMAGE (\\c:A->bool. topspace top DIFF UNIONS(fam DELETE c)) fam
-      #|  d:A->bool
-      #|  c:A->bool
-      #|  pairwise DISJOINT (fam:(A->bool)->bool)
-      #|  (d:A->bool) = c
-      #|  d:A->bool
-      #|  x:A
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN fam\n     ==> c SUBSET (topspace top DIFF UNIONS(fam DELETE c))
-      #|  closed_in top (UNIONS (fam:(A->bool)->bool))
-      #|  fam:(A->bool)->bool
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN fam ==> closed_in top (UNIONS(fam DELETE c))
-      #|  normal_space (top:A topology)
-      #|  fam:(A->bool)->bool
-      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top\n        ==> collectionwise_normal_space top
-      #|  pairwise (\\c d. DISJOINT ((G:(A->bool)->(A->bool)) c) (G d))\n             {s, t}
-      #|  (G:(A->bool)->(A->bool)) t
-      #|  (G:(A->bool)->(A->bool)) s
-      #|  G:(A->bool)->(A->bool)
-      #|  locally_finite_in top {s:A->bool, t}
-      #|  pairwise DISJOINT {s:A->bool, t}
-      #|  {s:A->bool, t}
-      #|  s:A->bool = t
-      #|  t:A->bool
-      #|  s:A->bool
-      #|  forall top:A topology.\n        collectionwise_normal_space top /\\ t1_space top\n        ==> normal_space top
-      #|  forall top:A topology.\n        metrizable_space top ==> collectionwise_normal_space top
-      #|  d:A->bool
-      #|  c:A->bool
-      #|  pairwise (\\c d. DISJOINT ((G:(A->bool)->(A->bool)) c) (G d)) CC
-      #|  forall a b c:A->bool. DISJOINT a b ==> DISJOINT (a INTER c) (b INTER c)
-      #|  d:A->bool
-      #|  c:A->bool
-      #|  c:A->bool
-      #|  c:A->bool
-      #|  (G:(A->bool)->(A->bool)) c
-      #|  c:A->bool
-      #|  \\c:A->bool. (G:(A->bool)->(A->bool)) c INTER (s:A->bool)
-      #|  G:(A->bool)->(A->bool)
-      #|  CC:(A->bool)->bool
-      #|  locally_finite_in top (CC:(A->bool)->bool)
-      #|  c:A->bool
-      #|  c:A->bool
-      #|  forall c:A->bool. c IN CC ==> closed_in top c /\\ c SUBSET s
-      #|  CC:(A->bool)->bool
-      #|  forall top s:A->bool.\n        collectionwise_normal_space top /\\ closed_in top s\n        ==> collectionwise_normal_space(subtopology top s)
-      #|  top:A topology
-      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        (forall x. x IN topspace top\n             ==> ?u. open_in top u /\\ x IN u /\\\n                     metrizable_space(subtopology top u))\n        ==> metrizable_space top
-      #|  realcompact_space (top:A topology) <=>\n        completely_regular_space top /\\\n        ?f:A->A->real.\n            embedding_map(top, product_topology (topspace top) (\\i. euclideanreal)) f /\\\n            closed_in (product_topology (topspace top) (\\i. euclideanreal))\n                      (IMAGE f (topspace top))
-      #|  locally_metrizable_space (top:A topology) <=>\n  forall x. x IN topspace top\n      ==> ?U. open_in top U /\\ x IN U /\\ metrizable_space (subtopology top U)
-      #|  topspace top:A->bool
-      #|  x:A
-      #|  forall top:A topology.\n        metrizable_space top <=>\n        paracompact_space top /\\ hausdorff_space top /\\ locally_metrizable_space top
-      #|  forall top:A topology.\n        paracompact_space top /\\ hausdorff_space top /\\\n        locally_metrizable_space top /\\ second_countable top\n        ==> metrizable_space top
-      #|  m:num
-      #|  y:A
-      #|  (s:A->bool) SUBSET t ==> s INTER (u DIFF t) = {}
-      #|  forall(f:num->A->bool) m n.\n        m < n\n        ==> f m INTER (f n DIFF UNIONS {f k | k < n}) = {}
-      #|  (u:A->bool) INTER (f:num->A->bool) m = {}
-      #|  ((f:num->A->bool) n DIFF UNIONS {f k | k < n}) INTER f m = {}
-      #|  (f:num->A->bool) m INTER (f n DIFF UNIONS {f k | k < n}) = {}
-      #|  n:num
-      #|  n:num
-      #|  u:A->bool
-      #|  IMAGE (\\n. (f:num->A->bool) n DIFF UNIONS {f k | k < n})\n           {n | n <= m}
-      #|  (f:num->A->bool) m
-      #|  (x:A) IN UNIONS {f n | n IN (:num)}
-      #|  \\p:num. (x:A) IN f p
-      #|  ?m:num. (x:A) IN f m /\\ (forall k. k < m ==> ~(x IN f k))
-      #|  x:A
-      #|  n:num
-      #|  (f:num->A->bool) n
-      #|  n:num
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, SUBSET(s, a) && SUBSET(t, b) && DISJOINT(a, b) \226\134\146 DISJOINT(s, t)
+      #|  (c : (A) -> Bool)
+      #|  (x : A)
+      #|  (H : ((A) -> Bool, A) -> Bool)((c : (A) -> Bool))
+      #|  closure_of((top : Topology[A]), (H : ((A) -> Bool, A) -> Bool)((c : (A) -> Bool)))
+      #|  \226\136\128 u : (A) -> Bool, SUBSET((s : (A) -> Bool), u) && DISJOINT(u, (t : (A) -> Bool)) \226\134\146 DISJOINT(s, t)
+      #|  (d : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  (x : A)
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool) => DIFF((H : ((A) -> Bool, A) -> Bool)(c), UNIONS({closure_of((top : Topology[A]), H((d : (A) -> Bool))) | IN(d, (fam : ((A) -> Bool) -> Bool)) && !(d == c)}))
+      #|  {closure_of((top : Topology[A]), (H : ((A) -> Bool, A) -> Bool)((d : (A) -> Bool))) | IN(d, (fam : ((A) -> Bool) -> Bool))}
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (fam : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), UNIONS({closure_of(top, (H : ((A) -> Bool, A) -> Bool)((d : (A) -> Bool))) | IN(d, fam) && !(d == c)}))
+      #|  !((c' : (A) -> Bool) == (c : (A) -> Bool))
+      #|  IN((c : (A) -> Bool), (fam : ((A) -> Bool) -> Bool))
+      #|  !(INTER((w : (A) -> Bool), (c : (A) -> Bool)) == {})
+      #|  (c' : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  SUBSET((w : (A) -> Bool), DIFF(topspace((top : Topology[A])), UNIONS(DELETE((fam : ((A) -> Bool) -> Bool), (c' : (A) -> Bool)))))
+      #|  (c' : (A) -> Bool) == (c : (A) -> Bool)
+      #|  !(INTER((w : (A) -> Bool), (c' : (A) -> Bool)) == {})
+      #|  (c' : (A) -> Bool)
+      #|  select((c' : (A) -> Bool) => IN(c', (fam : ((A) -> Bool) -> Bool)) && (\226\136\131 x : A, IN(x, (w : (A) -> Bool)) && IN(x, c'))) == (c : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  IN((z : A), UNIONS({(w : (A) -> Bool) | IN(w, (W : ((A) -> Bool) -> Bool)) && !(INTER(w, (c : (A) -> Bool)) == {})}))
+      #|  (z : A)
+      #|  !(INTER(closure_of((top : Topology[A]), (H : ((A) -> Bool, A) -> Bool)((c : (A) -> Bool))), (V : (A) -> Bool)) == {})
+      #|  (c : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  IMAGE((w : (A) -> Bool) => closure_of((top : Topology[A]), (H : ((A) -> Bool, A) -> Bool)(select((c : (A) -> Bool) => IN(c, (fam : ((A) -> Bool) -> Bool)) && !(INTER(w, c) == {})))), {(w : (A) -> Bool) | IN(w, (W : ((A) -> Bool) -> Bool)) && !(INTER((V : (A) -> Bool), w) == {})})
+      #|  (V : (A) -> Bool)
+      #|  (V : (A) -> Bool)
+      #|  (x : A)
+      #|  locally_finite_in((top : Topology[A]), (W : ((A) -> Bool) -> Bool))
+      #|  (x : A)
+      #|  locally_finite_in((top : Topology[A]), {closure_of(top, (H : ((A) -> Bool, A) -> Bool)((c : (A) -> Bool))) | IN(c, (fam : ((A) -> Bool) -> Bool))})
+      #|  UNIONS(DELETE((fam : ((A) -> Bool) -> Bool), (c : (A) -> Bool)))
+      #|  DIFF(topspace((top : Topology[A])), UNIONS(DELETE((fam : ((A) -> Bool) -> Bool), (c : (A) -> Bool))))
+      #|  \226\136\128 c : (A) -> Bool, \226\136\128 d : (A) -> Bool, IN(c, (fam : ((A) -> Bool) -> Bool)) && IN(d, fam) && !(c == d) \226\134\146 DISJOINT(closure_of((top : Topology[A]), (H : ((A) -> Bool, A) -> Bool)(c)), d)
+      #|  UNIONS({(w : (A) -> Bool) | IN(w, (W : ((A) -> Bool) -> Bool)) && !(INTER(w, (c : (A) -> Bool)) == {})})
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (fam : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(closure_of((top : Topology[A]), (H : ((A) -> Bool, A) -> Bool)(c)), DIFF(topspace(top), UNIONS(DELETE(fam, c))))
+      #|  (H : ((A) -> Bool, A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  IN((x : A), UNIONS((W : ((A) -> Bool) -> Bool)))
+      #|  (x : A)
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (fam : ((A) -> Bool) -> Bool)) \226\134\146 (\226\136\131 v : (A) -> Bool, open_in((top : Topology[A]), v) && SUBSET(c, v) && SUBSET(closure_of(top, v), UNIONS({(w : (A) -> Bool) | IN(w, (W : ((A) -> Bool) -> Bool)) && !(INTER(w, c) == {})})))
+      #|  (c : (A) -> Bool)
+      #|  (y : A)
+      #|  SUBSET((c : (A) -> Bool), UNIONS(DELETE((fam : ((A) -> Bool) -> Bool), (c' : (A) -> Bool))))
+      #|  (z : A)
+      #|  !(INTER((w : (A) -> Bool), (c : (A) -> Bool)) == {})
+      #|  (c' : (A) -> Bool) == (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  IN((z : A), UNIONS((fam : ((A) -> Bool) -> Bool)))
+      #|  (z : A)
+      #|  !(INTER((w : (A) -> Bool), (c : (A) -> Bool)) == {})
+      #|  (c' : (A) -> Bool)
+      #|  IN((u : (A) -> Bool), INSERT(DIFF(topspace((top : Topology[A])), UNIONS((fam : ((A) -> Bool) -> Bool))), IMAGE((c : (A) -> Bool) => DIFF(topspace(top), UNIONS(DELETE(fam, c))), fam)))
+      #|  (u : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  \226\136\128 w : (A) -> Bool, \226\136\128 c : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) && IN(c, (fam : ((A) -> Bool) -> Bool)) && !(INTER(w, c) == {}) \226\134\146 SUBSET(w, DIFF(topspace((top : Topology[A])), UNIONS(DELETE(fam, c))))
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  DIFF(topspace((top : Topology[A])), UNIONS((fam : ((A) -> Bool) -> Bool)))
+      #|  (c : (A) -> Bool)
+      #|  DIFF(topspace((top : Topology[A])), UNIONS(DELETE((fam : ((A) -> Bool) -> Bool), (c : (A) -> Bool))))
+      #|  (c : (A) -> Bool)
+      #|  IN((x : A), UNIONS((fam : ((A) -> Bool) -> Bool)))
+      #|  (x : A)
+      #|  INSERT(DIFF(topspace((top : Topology[A])), UNIONS((fam : ((A) -> Bool) -> Bool))), IMAGE((c : (A) -> Bool) => DIFF(topspace(top), UNIONS(DELETE(fam, c))), fam))
+      #|  (d : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  pairwise(DISJOINT, (fam : ((A) -> Bool) -> Bool))
+      #|  (d : (A) -> Bool) == (c : (A) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  (x : A)
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (fam : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(c, DIFF(topspace((top : Topology[A])), UNIONS(DELETE(fam, c))))
+      #|  closed_in((top : Topology[A]), UNIONS((fam : ((A) -> Bool) -> Bool)))
+      #|  (fam : ((A) -> Bool) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (fam : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), UNIONS(DELETE(fam, c)))
+      #|  normal_space((top : Topology[A]))
+      #|  (fam : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], paracompact_space(top) && hausdorff_space(top) \226\134\146 collectionwise_normal_space(top)
+      #|  pairwise((c : (A) -> Bool) => (d : (A) -> Bool) => DISJOINT((G : ((A) -> Bool, A) -> Bool)(c), G(d)), {(s : (A) -> Bool), (t : (A) -> Bool)})
+      #|  (G : ((A) -> Bool, A) -> Bool)((t : (A) -> Bool))
+      #|  (G : ((A) -> Bool, A) -> Bool)((s : (A) -> Bool))
+      #|  (G : ((A) -> Bool, A) -> Bool)
+      #|  locally_finite_in((top : Topology[A]), {(s : (A) -> Bool), (t : (A) -> Bool)})
+      #|  pairwise(DISJOINT, {(s : (A) -> Bool), (t : (A) -> Bool)})
+      #|  {(s : (A) -> Bool), (t : (A) -> Bool)}
+      #|  (s : (A) -> Bool) == (t : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 top : Topology[A], collectionwise_normal_space(top) && t1_space(top) \226\134\146 normal_space(top)
+      #|  \226\136\128 top : Topology[A], metrizable_space(top) \226\134\146 collectionwise_normal_space(top)
+      #|  (d : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  pairwise((c : (A) -> Bool) => (d : (A) -> Bool) => DISJOINT((G : ((A) -> Bool, A) -> Bool)(c), G(d)), (CC : ((A) -> Bool) -> Bool))
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, \226\136\128 c : (A) -> Bool, DISJOINT(a, b) \226\134\146 DISJOINT(INTER(a, c), INTER(b, c))
+      #|  (d : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  (G : ((A) -> Bool, A) -> Bool)((c : (A) -> Bool))
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool) => INTER((G : ((A) -> Bool, A) -> Bool)(c), (s : (A) -> Bool))
+      #|  (G : ((A) -> Bool, A) -> Bool)
+      #|  (CC : ((A) -> Bool) -> Bool)
+      #|  locally_finite_in((top : Topology[A]), (CC : ((A) -> Bool) -> Bool))
+      #|  (c : (A) -> Bool)
+      #|  (c : (A) -> Bool)
+      #|  \226\136\128 c : (A) -> Bool, IN(c, (CC : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c) && SUBSET(c, (s : (A) -> Bool))
+      #|  (CC : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, collectionwise_normal_space(top) && closed_in(top, s) \226\134\146 collectionwise_normal_space(subtopology(top, s))
+      #|  (top : Topology[A])
+      #|  \226\136\128 top : Topology[A], paracompact_space(top) && hausdorff_space(top) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 (\226\136\131 u : (A) -> Bool, open_in(top, u) && IN(x, u) && metrizable_space(subtopology(top, u)))) \226\134\146 metrizable_space(top)
+      #|  (realcompact_space : (Topology[A]) -> Bool)((top : Topology[A])) == (completely_regular_space(top) && (\226\136\131 f : (A, A) -> Real, embedding_map((top, product_topology(topspace(top), (i : A) => euclideanreal)), f) && closed_in(product_topology(topspace(top), (i : A) => euclideanreal), IMAGE(f, topspace(top)))))
+      #|  (locally_metrizable_space : (Topology[A]) -> Bool)((top : Topology[A])) == (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 (\226\136\131 U : (A) -> Bool, open_in(top, U) && IN(x, U) && metrizable_space(subtopology(top, U))))
+      #|  topspace((top : Topology[A]))
+      #|  (x : A)
+      #|  \226\136\128 top : Topology[A], metrizable_space(top) == (paracompact_space(top) && hausdorff_space(top) && locally_metrizable_space(top))
+      #|  \226\136\128 top : Topology[A], paracompact_space(top) && hausdorff_space(top) && locally_metrizable_space(top) && second_countable(top) \226\134\146 metrizable_space(top)
+      #|  (m : Num)
+      #|  (y : A)
+      #|  SUBSET((s : (A) -> Bool), (t : (A) -> Bool)) \226\134\146 INTER(s, DIFF((u : (A) -> Bool), t)) == {}
+      #|  \226\136\128 f : (Num, A) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 INTER(f(m), DIFF(f(n), UNIONS({f((k : Num)) | k < n}))) == {}
+      #|  INTER((u : (A) -> Bool), (f : (Num, A) -> Bool)((m : Num))) == {}
+      #|  INTER(DIFF((f : (Num, A) -> Bool)((n : Num)), UNIONS({f((k : Num)) | k < n})), f((m : Num))) == {}
+      #|  INTER((f : (Num, A) -> Bool)((m : Num)), DIFF(f((n : Num)), UNIONS({f((k : Num)) | k < n}))) == {}
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (u : (A) -> Bool)
+      #|  IMAGE((n : Num) => DIFF((f : (Num, A) -> Bool)(n), UNIONS({f((k : Num)) | k < n})), {(n : Num) | n <= (m : Num)})
+      #|  (f : (Num, A) -> Bool)((m : Num))
+      #|  IN((x : A), UNIONS({(f : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  (p : Num) => IN((x : A), (f : (Num, A) -> Bool)(p))
+      #|  \226\136\131 m : Num, IN((x : A), (f : (Num, A) -> Bool)(m)) && (\226\136\128 k : Num, k < m \226\134\146 !IN(x, f(k)))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (f : (Num, A) -> Bool)((n : Num))
+      #|  (n : Num)
       #|  forall top:A topology f.\n        (forall n. open_in top (f n)) /\\\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> locally_finite_in top\n              {f n DIFF UNIONS {f k | k < n} | n IN (:num)}
-      #|  m:num
-      #|  (f:num->A->bool) m DIFF UNIONS {f k | k < m}
-      #|  \\p:num. (x:A) IN f p
-      #|  ?m:num. (x:A) IN f m /\\ (forall k. k < m ==> ~(x IN f k))
-      #|  n':num
-      #|  s:A->bool
-      #|  x:A IN UNIONS {f n | n IN (:num)}
-      #|  n:num
-      #|  (f:num->A->bool) n
-      #|  n:num
-      #|  s:A->bool
-      #|  x:A
+      #|  (m : Num)
+      #|  DIFF((f : (Num, A) -> Bool)((m : Num)), UNIONS({f((k : Num)) | k < m}))
+      #|  (p : Num) => IN((x : A), (f : (Num, A) -> Bool)(p))
+      #|  \226\136\131 m : Num, IN((x : A), (f : (Num, A) -> Bool)(m)) && (\226\136\128 k : Num, k < m \226\134\146 !IN(x, f(k)))
+      #|  (n' : Num)
+      #|  (s : (A) -> Bool)
+      #|  IN((x : A), UNIONS({(f : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  (n : Num)
+      #|  (f : (Num, A) -> Bool)((n : Num))
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
+      #|  (x : A)
       #|  forall top:A topology f.\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> UNIONS {f n DIFF UNIONS {f k | k < n} | n IN (:num)} =\n            topspace top
-      #|  INTERS(IMAGE (Wfn:num->A->bool) N0) SUBSET Wfn n0
-      #|  s:A->bool
-      #|  n0:num
-      #|  n0 IN (N0:num->bool)
-      #|  n0:num
-      #|  n0:num
-      #|  s:A->bool
-      #|  UNIONS (IMAGE\n    (\\n. {s:A->bool | s IN (f:num->(A->bool)->bool) n /\\\n                      ~(s INTER (Wfn:num->A->bool) n = {})})\n    N0)
-      #|  W0 INTER INTERS(IMAGE (Wfn:num->A->bool) N0)
-      #|  s:A->bool
-      #|  n0:num
-      #|  n0 IN (N0:num->bool)
-      #|  n0:num
-      #|  s:A->bool
-      #|  (s:(A->bool)->bool) = {} ==> FINITE s
-      #|  W0:A->bool
-      #|  N0:num->bool = {}
-      #|  Wfn:num->A->bool
-      #|  x:A
-      #|  forall n:num. ?W:A->bool. open_in top W /\\ x IN W /\\\n       FINITE {s:A->bool | s IN (f:num->(A->bool)->bool) n /\\\n                            ~(s INTER W = {})}
-      #|  {u:A->bool | u IN {(A:num->A->bool) k | k IN (:num)} /\\\n                     ~(u INTER W0 = {})}
-      #|  n2:num
-      #|  n1:num
-      #|  n1:num = n2
-      #|  forall n1 n2:num. n1 IN N0 /\\ n2 IN N0 /\\\n                   (A:num->A->bool) n1 = A n2 ==> n1 = n2
-      #|  FINITE (N0:num->bool)
-      #|  N0 = {n:num | ~((A:num->A->bool) n INTER W0 = {})}
-      #|  W0:A->bool
-      #|  x:A
-      #|  x:A
-      #|  n:num
-      #|  s:A->bool
-      #|  forall s:A->bool. s IN UNIONS {(f:num->(A->bool)->bool) n | n IN (:num)} <=>\n                 ?n. s IN f n
-      #|  forall n. (A:num->A->bool) n SUBSET topspace top
-      #|  forall top:A topology A f.\n        locally_finite_in top {A n | n IN (:num)} /\\\n        (forall n. locally_finite_in top ((f:num->(A->bool)->bool) n)) /\\\n        (forall n (s:A->bool). s IN f n ==> s SUBSET A n) /\\\n        (forall m n. ~(m = n) ==> A m INTER A n = {})\n        ==> locally_finite_in top (UNIONS {f n | n IN (:num)})
-      #|  n:num
-      #|  {b:A->bool | open_in top b /\\\n                   ?u. u IN U /\\ top closure_of b SUBSET u}
-      #|  forall top:A topology U.\n        regular_space top /\\\n        (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n        ==> ?W. (forall w. w IN W ==> open_in top w) /\\\n                UNIONS W = topspace top /\\\n                (forall w. w IN W ==> ?u. u IN U /\\ top closure_of w SUBSET u)
-      #|  (O:A->bool) SUBSET top closure_of O
-      #|  (v:A->bool) SUBSET CX
-      #|  DISJOINT CX (top closure_of (O:A->bool))
-      #|  ~(v INTER (O:A->bool) = {})
-      #|  v:A->bool
-      #|  y:A
-      #|  (v:A->bool) SUBSET CX
-      #|  (x:A) IN v
-      #|  top:A topology
-      #|  (O:A->bool) SUBSET top closure_of O
-      #|  v:A->bool
-      #|  {v:A->bool | v IN V /\\ x IN v}
-      #|  O:A->bool
-      #|  O:A->bool
-      #|  x:A
-      #|  CX:A->bool
-      #|  (x:A) IN topspace top DIFF CX
-      #|  ~((x:A) IN CX)
-      #|  closed_in top (CX:A->bool)
-      #|  CX = UNIONS {v:A->bool | v IN V /\\ ~(x IN v)}
-      #|  x:A
-      #|  v:A->bool
-      #|  forall top:A topology V.\n        regular_space top /\\\n        (forall v. v IN V ==> closed_in top v) /\\\n        UNIONS V = topspace top /\\\n        (forall W. W SUBSET V ==> closed_in top (UNIONS W)) /\\\n        (forall x. x IN topspace top ==> FINITE {v | v IN V /\\ x IN v})\n        ==> locally_finite_in top V
-      #|  top:A topology
-      #|  top closure_of (r:A->bool)
-      #|  u:A->bool
-      #|  u:A->bool
-      #|  r:A->bool
-      #|  r:A->bool
-      #|  n0:num
-      #|  (r:A->bool) IN R
-      #|  (d:A->bool) IN Dn0
+      #|  SUBSET(INTERS(IMAGE((Wfn : (Num, A) -> Bool), (N0 : (Num) -> Bool))), Wfn((n0 : Num)))
+      #|  (s : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  IN((n0 : Num), (N0 : (Num) -> Bool))
+      #|  (n0 : Num)
+      #|  (n0 : Num)
+      #|  (s : (A) -> Bool)
+      #|  UNIONS(IMAGE((n : Num) => {(s : (A) -> Bool) | IN(s, (f : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(s, (Wfn : (Num, A) -> Bool)(n)) == {})}, (N0 : (Num) -> Bool)))
+      #|  INTER((W0 : (A) -> Bool), INTERS(IMAGE((Wfn : (Num, A) -> Bool), (N0 : (Num) -> Bool))))
+      #|  (s : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  IN((n0 : Num), (N0 : (Num) -> Bool))
+      #|  (n0 : Num)
+      #|  (s : (A) -> Bool)
+      #|  (s : ((A) -> Bool) -> Bool) == {} \226\134\146 FINITE(s)
+      #|  (W0 : (A) -> Bool)
+      #|  (N0 : (Num) -> Bool) == {}
+      #|  (Wfn : (Num, A) -> Bool)
+      #|  (x : A)
+      #|  \226\136\128 n : Num, \226\136\131 W : (A) -> Bool, open_in((top : Topology[A]), W) && IN((x : A), W) && FINITE({(s : (A) -> Bool) | IN(s, (f : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(s, W) == {})})
+      #|  {(u : (A) -> Bool) | IN(u, {(A : (Num, A) -> Bool)((k : Num)) | IN(k, UNIV)}) && !(INTER(u, (W0 : (A) -> Bool)) == {})}
+      #|  (n2 : Num)
+      #|  (n1 : Num)
+      #|  (n1 : Num) == (n2 : Num)
+      #|  \226\136\128 n1 : Num, \226\136\128 n2 : Num, IN(n1, (N0 : (Num) -> Bool)) && IN(n2, N0) && (A : (Num, A) -> Bool)(n1) == A(n2) \226\134\146 n1 == n2
+      #|  FINITE((N0 : (Num) -> Bool))
+      #|  (N0 : (Num) -> Bool) == {(n : Num) | !(INTER((A : (Num, A) -> Bool)(n), (W0 : (A) -> Bool)) == {})}
+      #|  (W0 : (A) -> Bool)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 s : (A) -> Bool, IN(s, UNIONS({(f : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)})) == (\226\136\131 n : Num, IN(s, f(n)))
+      #|  \226\136\128 n : Num, SUBSET((A : (Num, A) -> Bool)(n), topspace((top : Topology[A])))
+      #|  \226\136\128 top : Topology[A], \226\136\128 A : (Num, A) -> Bool, \226\136\128 f : (Num, (A) -> Bool) -> Bool, locally_finite_in(top, {A((n : Num)) | IN(n, UNIV)}) && (\226\136\128 n : Num, locally_finite_in(top, f(n))) && (\226\136\128 n : Num, \226\136\128 s : (A) -> Bool, IN(s, f(n)) \226\134\146 SUBSET(s, A(n))) && (\226\136\128 m : Num, \226\136\128 n : Num, !(m == n) \226\134\146 INTER(A(m), A(n)) == {}) \226\134\146 locally_finite_in(top, UNIONS({f((n : Num)) | IN(n, UNIV)}))
+      #|  (n : Num)
+      #|  {(b : (A) -> Bool) | open_in((top : Topology[A]), b) && (\226\136\131 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) && SUBSET(closure_of(top, b), u))}
+      #|  \226\136\128 top : Topology[A], \226\136\128 U : ((A) -> Bool) -> Bool, regular_space(top) && (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 W : ((A) -> Bool) -> Bool, (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 open_in(top, w)) && UNIONS(W) == topspace(top) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(closure_of(top, w), u))))
+      #|  SUBSET((O : (A) -> Bool), closure_of((top : Topology[A]), O))
+      #|  SUBSET((v : (A) -> Bool), (CX : (A) -> Bool))
+      #|  DISJOINT((CX : (A) -> Bool), closure_of((top : Topology[A]), (O : (A) -> Bool)))
+      #|  !(INTER((v : (A) -> Bool), (O : (A) -> Bool)) == {})
+      #|  (v : (A) -> Bool)
+      #|  (y : A)
+      #|  SUBSET((v : (A) -> Bool), (CX : (A) -> Bool))
+      #|  IN((x : A), (v : (A) -> Bool))
+      #|  (top : Topology[A])
+      #|  SUBSET((O : (A) -> Bool), closure_of((top : Topology[A]), O))
+      #|  (v : (A) -> Bool)
+      #|  {(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && IN((x : A), v)}
+      #|  (O : (A) -> Bool)
+      #|  (O : (A) -> Bool)
+      #|  (x : A)
+      #|  (CX : (A) -> Bool)
+      #|  IN((x : A), DIFF(topspace((top : Topology[A])), (CX : (A) -> Bool)))
+      #|  !IN((x : A), (CX : (A) -> Bool))
+      #|  closed_in((top : Topology[A]), (CX : (A) -> Bool))
+      #|  (CX : (A) -> Bool) == UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && !IN((x : A), v)})
+      #|  (x : A)
+      #|  (v : (A) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 V : ((A) -> Bool) -> Bool, regular_space(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 W : ((A) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top, UNIONS(W))) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 FINITE({(v : (A) -> Bool) | IN(v, V) && IN(x, v)})) \226\134\146 locally_finite_in(top, V)
+      #|  (top : Topology[A])
+      #|  closure_of((top : Topology[A]), (r : (A) -> Bool))
+      #|  (u : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (r : (A) -> Bool)
+      #|  (r : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  IN((r : (A) -> Bool), (R : ((A) -> Bool) -> Bool))
+      #|  IN((d : (A) -> Bool), (Dn0 : ((A) -> Bool) -> Bool))
       #|  ?r:A->bool. r IN (fn:num->(A->bool)->bool) n0 /\\\n                               d = r INTER (S:num->A->bool) n0
-      #|  n0:num
-      #|  Dn0:(A->bool)->bool
-      #|  d:A->bool
-      #|  r INTER (S:num->A->bool) n0 SUBSET\n                      top closure_of (r INTER (S:num->A->bool) n0)
-      #|  r:A->bool
-      #|  n0:num
-      #|  r:A->bool
-      #|  r INTER (S:num->A->bool) n0 SUBSET topspace top
-      #|  (x:A) IN r INTER (S:num->A->bool) n0
-      #|  r:A->bool
-      #|  n0:num
-      #|  (Dn:num->(A->bool)->bool) n0
-      #|  r INTER (S:num->A->bool) n0
-      #|  top closure_of (r INTER (S:num->A->bool) n0)
-      #|  (x:A) IN (P:num->A->bool) n0
+      #|  (n0 : Num)
+      #|  (Dn0 : ((A) -> Bool) -> Bool)
+      #|  (d : (A) -> Bool)
+      #|  SUBSET(INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num))), closure_of((top : Topology[A]), INTER(r, S(n0))))
+      #|  (r : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (r : (A) -> Bool)
+      #|  SUBSET(INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num))), topspace((top : Topology[A])))
+      #|  IN((x : A), INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num))))
+      #|  (r : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (Dn : (Num, (A) -> Bool) -> Bool)((n0 : Num))
+      #|  INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num)))
+      #|  closure_of((top : Topology[A]), INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num))))
+      #|  IN((x : A), (P : (Num, A) -> Bool)((n0 : Num)))
       #|  ?r:A->bool. r IN (fn:num->(A->bool)->bool) n0 /\\ x IN r
-      #|  (x:A) IN (s:A->bool)
-      #|  (x:A) IN (P:num->A->bool) n0
-      #|  n0:num
-      #|  s:A->bool
-      #|  x:A
-      #|  {top closure_of d:A->bool |\n      d IN UNIONS {(Dn:num->(A->bool)->bool) n | n IN (:num)}}
-      #|  S:num->A->bool
-      #|  top:A topology
-      #|  locally_finite_in top\n       (UNIONS {(Dn:num->(A->bool)->bool) n | n IN (:num)})
-      #|  forall n:num (s:A->bool). s IN (Dn:num->(A->bool)->bool) n\n                          ==> s SUBSET (S:num->A->bool) n
-      #|  (s:A->bool) = r INTER (S:num->A->bool) n
-      #|  ~((s:A->bool) INTER (O:A->bool) = {})
-      #|  r:A->bool
-      #|  r:A->bool
-      #|  s:A->bool
+      #|  IN((x : A), (s : (A) -> Bool))
+      #|  IN((x : A), (P : (Num, A) -> Bool)((n0 : Num)))
+      #|  (n0 : Num)
+      #|  (s : (A) -> Bool)
+      #|  (x : A)
+      #|  {closure_of((top : Topology[A]), (d : (A) -> Bool)) | IN(d, UNIONS({(Dn : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)}))}
+      #|  (S : (Num, A) -> Bool)
+      #|  (top : Topology[A])
+      #|  locally_finite_in((top : Topology[A]), UNIONS({(Dn : (Num, (A) -> Bool) -> Bool)((n : Num)) | IN(n, UNIV)}))
+      #|  \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, IN(s, (Dn : (Num, (A) -> Bool) -> Bool)(n)) \226\134\146 SUBSET(s, (S : (Num, A) -> Bool)(n))
+      #|  (s : (A) -> Bool) == INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n : Num)))
+      #|  !(INTER((s : (A) -> Bool), (O : (A) -> Bool)) == {})
+      #|  (r : (A) -> Bool)
+      #|  (r : (A) -> Bool)
+      #|  (s : (A) -> Bool)
       #|  IMAGE (\\r:A->bool. r INTER (S:num->A->bool) n)\n                      {r | r IN (fn:num->(A->bool)->bool) n /\\\n                           ~(r INTER O = {})}
-      #|  O:A->bool
-      #|  O:A->bool
-      #|  x:A
-      #|  n:num
-      #|  x:A
-      #|  n:num
-      #|  r:A->bool
-      #|  r:A->bool
-      #|  forall n:num. locally_finite_in top ((Dn:num->(A->bool)->bool) n)
+      #|  (O : (A) -> Bool)
+      #|  (O : (A) -> Bool)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (x : A)
+      #|  (n : Num)
+      #|  (r : (A) -> Bool)
+      #|  (r : (A) -> Bool)
+      #|  \226\136\128 n : Num, locally_finite_in((top : Topology[A]), (Dn : (Num, (A) -> Bool) -> Bool)(n))
       #|  Dn = \\n:num. {r INTER (S:num->A->bool) n |\n                    r | r IN (fn:num->(A->bool)->bool) n}
-      #|  (s:A->bool) INTER t = {} ==> t INTER (s DIFF a) = {}
-      #|  m:num
-      #|  n:num
-      #|  P:num->A->bool
-      #|  (s:A->bool) INTER t = {} ==> (s DIFF a) INTER t = {}
-      #|  n:num
-      #|  m:num
-      #|  P:num->A->bool
-      #|  ~(m:num = n) ==> m < n \\/ n < m
-      #|  forall m n:num. ~(m = n) ==> (S:num->A->bool) m INTER S n = {}
-      #|  top:A topology
-      #|  UNIONS {(S:num->A->bool) n | n IN (:num)} = topspace top
-      #|  top:A topology
-      #|  locally_finite_in top {(S:num->A->bool) n | n IN (:num)}
-      #|  S = \\n:num. (P:num->A->bool) n DIFF UNIONS {P k | k < n}
-      #|  r:A->bool
-      #|  n0:num
-      #|  (P:num->A->bool) n0
-      #|  (r:A->bool) IN R
+      #|  INTER((s : (A) -> Bool), (t : (A) -> Bool)) == {} \226\134\146 INTER(t, DIFF(s, (a : (A) -> Bool))) == {}
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (P : (Num, A) -> Bool)
+      #|  INTER((s : (A) -> Bool), (t : (A) -> Bool)) == {} \226\134\146 INTER(DIFF(s, (a : (A) -> Bool)), t) == {}
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (P : (Num, A) -> Bool)
+      #|  !((m : Num) == (n : Num)) \226\134\146 m < n || n < m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m == n) \226\134\146 INTER((S : (Num, A) -> Bool)(m), S(n)) == {}
+      #|  (top : Topology[A])
+      #|  UNIONS({(S : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == topspace((top : Topology[A]))
+      #|  (top : Topology[A])
+      #|  locally_finite_in((top : Topology[A]), {(S : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
+      #|  (S : (Num, A) -> Bool) == ((n : Num) => DIFF((P : (Num, A) -> Bool)(n), UNIONS({P((k : Num)) | k < n})))
+      #|  (r : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (P : (Num, A) -> Bool)((n0 : Num))
+      #|  IN((r : (A) -> Bool), (R : ((A) -> Bool) -> Bool))
       #|  ?n0:num. (r:A->bool) IN (fn:num->(A->bool)->bool) n0
-      #|  r:A->bool
-      #|  (x:A) IN UNIONS R
-      #|  x:A
-      #|  UNIONS {(P:num->A->bool) n | n IN (:num)} = topspace top
-      #|  forall n:num. open_in top ((P:num->A->bool) n)
+      #|  (r : (A) -> Bool)
+      #|  IN((x : A), UNIONS((R : ((A) -> Bool) -> Bool)))
+      #|  (x : A)
+      #|  UNIONS({(P : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == topspace((top : Topology[A]))
+      #|  \226\136\128 n : Num, open_in((top : Topology[A]), (P : (Num, A) -> Bool)(n))
       #|  P = \\n:num. UNIONS ((fn:num->(A->bool)->bool) n)
       #|  forall n:num. (fn:num->(A->bool)->bool) n SUBSET R
       #|  fn:num->(A->bool)->bool
-      #|  forall top:A topology U R.\n        (forall r. r IN R ==> open_in top r) /\\\n        UNIONS R = topspace top /\\\n        (forall r. r IN R ==> ?u. u IN U /\\ top closure_of r SUBSET u) /\\\n        sigma_locally_finite_in top R\n        ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                UNIONS V = topspace top /\\\n                (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                locally_finite_in top V
-      #|  w:A->bool
-      #|  (f:(A->bool)->(A->bool)) w
-      #|  UNIONS {v':A->bool | v' IN V /\\\n            (f:(A->bool)->(A->bool)) v' =\n            (f:(A->bool)->(A->bool)) w}
-      #|  w:A->bool
-      #|  w:A->bool
-      #|  w:A->bool
-      #|  (x:A) IN UNIONS {v:A->bool | v IN V /\\\n          (f:(A->bool)->(A->bool)) v = u0}
-      #|  u0:A->bool
-      #|  t:A->bool
-      #|  x:A
+      #|  \226\136\128 top : Topology[A], \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 R : ((A) -> Bool) -> Bool, (\226\136\128 r : (A) -> Bool, IN(r, R) \226\134\146 open_in(top, r)) && UNIONS(R) == topspace(top) && (\226\136\128 r : (A) -> Bool, IN(r, R) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(closure_of(top, r), u))) && sigma_locally_finite_in(top, R) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && locally_finite_in(top, V))
+      #|  (w : (A) -> Bool)
+      #|  (f : ((A) -> Bool, A) -> Bool)((w : (A) -> Bool))
+      #|  UNIONS({(v' : (A) -> Bool) | IN(v', (V : ((A) -> Bool) -> Bool)) && (f : ((A) -> Bool, A) -> Bool)(v') == f((w : (A) -> Bool))})
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  IN((x : A), UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && (f : ((A) -> Bool, A) -> Bool)(v) == (u0 : (A) -> Bool)}))
+      #|  (u0 : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (x : A)
       #|  UNIONS {UNIONS {v:A->bool | v IN V /\\\n                (f:(A->bool)->(A->bool)) v = u} | u IN S} =\n       UNIONS {v:A->bool | v IN V /\\ (f:(A->bool)->(A->bool)) v IN S}
-      #|  S:(A->bool)->bool
-      #|  v:A->bool
-      #|  (f:(A->bool)->(A->bool)) v
-      #|  v:A->bool
-      #|  (x:A) IN UNIONS V
-      #|  x:A
-      #|  u:A->bool
-      #|  u:A->bool
-      #|  u:A->bool
-      #|  \\u:A->bool. UNIONS {v:A->bool | v IN V /\\\n                         (f:(A->bool)->(A->bool)) v = u}
-      #|  f:(A->bool)->(A->bool)
-      #|  ?f:(A->bool)->(A->bool). forall v. v IN V ==> f v IN U /\\ v SUBSET f v
-      #|  V:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  forall top:A topology U.\n        (forall U'. (forall u. u IN U' ==> open_in top u) /\\ UNIONS U' = topspace top\n              ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                      UNIONS V = topspace top /\\\n                      (forall v. v IN V ==> ?u. u IN U' /\\ v SUBSET u) /\\\n                      (forall W. W SUBSET V ==> closed_in top (UNIONS W))) /\\\n        (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n        ==> ?c. (forall u. u IN U ==> closed_in top (c u)) /\\\n                (forall u. u IN U ==> c u SUBSET u) /\\\n                UNIONS {c u | u IN U} = topspace top /\\\n                (forall S. S SUBSET U\n                     ==> closed_in top (UNIONS {c u | u IN S}))
-      #|  UNIONS (V DIFF V1) SUBSET topspace top DIFF (t:A->bool)
-      #|  (w:A->bool) IN V1
-      #|  w:A->bool
-      #|  UNIONS V1 SUBSET topspace top DIFF (s:A->bool)
-      #|  topspace top DIFF UNIONS (V DIFF V1:(A->bool)->bool):A->bool
-      #|  topspace top DIFF UNIONS V1:A->bool
-      #|  V1 SUBSET (V:(A->bool)->bool)
-      #|  UNIONS V1 UNION UNIONS (V DIFF V1:(A->bool)->bool) =\n       topspace top:A->bool
-      #|  v:A->bool
-      #|  v:A->bool
-      #|  forall v:A->bool. v IN V DIFF V1\n                  ==> v SUBSET topspace top DIFF t
-      #|  closed_in top (UNIONS (V DIFF V1):A->bool)
-      #|  closed_in top (UNIONS V1:A->bool)
-      #|  V1 SUBSET (V:(A->bool)->bool)
-      #|  V1 = {v:A->bool | v IN V /\\\n                      v SUBSET (topspace top DIFF s)}
-      #|  u:A->bool
-      #|  v:A->bool
-      #|  v:A->bool
-      #|  forall v:A->bool. v IN V\n                  ==> v SUBSET topspace top DIFF s \\/\n                      v SUBSET topspace top DIFF t
-      #|  V:(A->bool)->bool
-      #|  {topspace top DIFF s, topspace top DIFF t}:(A->bool)->bool
-      #|  s SUBSET topspace (top:A topology) /\\ t SUBSET topspace top
-      #|  t:A->bool
-      #|  s:A->bool
-      #|  forall top:A topology.\n        (forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     (forall W. W SUBSET V ==> closed_in top (UNIONS W)))\n        ==> normal_space top
-      #|  {a:A}
-      #|  a:A
-      #|  s:A->bool = {}
-      #|  forall s:A->bool. (forall x y. x IN s /\\ y IN s ==> x = y) ==> FINITE s
-      #|  ~(t INTER (topspace top DIFF top closure_of R:A->bool) =\n               {})
-      #|  R:A->bool
-      #|  (f:K->A->bool) k0 INTER R SUBSET top closure_of R
-      #|  k0:K
-      #|  t:A->bool
-      #|  {}:(A->bool)->bool
-      #|  topspace top DIFF top closure_of R:A->bool
-      #|  k0:K
-      #|  k0:K
-      #|  t:A->bool
-      #|  ~(((f:K->A->bool) k2 INTER R) INTER v1 = {})
-      #|  ~(((f:K->A->bool) k1 INTER R) INTER v1 = {})
-      #|  k2:K
-      #|  k1:K
-      #|  IMAGE (\\k:K. (f:K->A->bool) k INTER R)\n                    {k | k IN s /\\ ~((f k INTER R) INTER v1 = {})}
-      #|  v1:A->bool
-      #|  v1:A->bool
-      #|  (x:A) IN S'
-      #|  (x:A) IN S'
-      #|  (x:A) IN top closure_of R
-      #|  x:A
-      #|  (a:A->bool) SUBSET t ==> a INTER r SUBSET t
-      #|  k:K
-      #|  k:K
-      #|  (d:K->A->bool) k
-      #|  x:A
-      #|  UNIONS {(d:K->A->bool) k | k IN s}
-      #|  (a:A->bool) SUBSET b /\\ a SUBSET c ==> a SUBSET b INTER c
-      #|  k:K
-      #|  k:K
-      #|  \\k:K. (f:K->A->bool) k INTER R
-      #|  topspace top DIFF S' SUBSET (v0:A->bool)
-      #|  S' SUBSET topspace top:A->bool
-      #|  DISJOINT u0 (v0:A->bool)
-      #|  u0 SUBSET topspace top:A->bool
-      #|  topspace top DIFF v0:A->bool
-      #|  u0:A->bool
-      #|  v0:A->bool
-      #|  u0:A->bool
-      #|  (d:A->bool) SUBSET s /\\ s SUBSET u\n           ==> d INTER (u DIFF s) = {}
-      #|  topspace top DIFF S':A->bool
-      #|  UNIONS {(d:K->A->bool) k | k IN s}
-      #|  R:A->bool
-      #|  ?R:A->bool. open_in top R /\\\n       UNIONS {(d:K->A->bool) k | k IN s} SUBSET R /\\\n       top closure_of R SUBSET S'
-      #|  k':K
-      #|  k0:K
-      #|  pairwise (\\a b. DISJOINT ((f:K->A->bool) a) (f b)) s
-      #|  ~((f:K->A->bool) k0 INTER f k' = {})
-      #|  (~p ==> F) ==> p
-      #|  k':K
-      #|  forall k':K. k' IN s /\\ ~((f:K->A->bool) k0 INTER f k' = {})\n                         ==> k' = k0
-      #|  k2:K
-      #|  k1:K
-      #|  (f:K->A->bool) k0
-      #|  k0:K
-      #|  t:A->bool
-      #|  x:A
-      #|  UNIONS {(d:K->A->bool) k | k IN s} SUBSET S'
-      #|  v0:A->bool
-      #|  y:A
-      #|  v0:A->bool
-      #|  v0:A->bool
-      #|  x:A
-      #|  open_in top (S':A->bool)
-      #|  S':A->bool = {x | ?v. open_in top v /\\ x IN v /\\\n       forall k1:K k2:K. k1 IN s /\\ k2 IN s /\\\n       ~(v INTER (f:K->A->bool) k1 = {}) /\\\n       ~(v INTER f k2 = {}) ==> k1 = k2}
-      #|  forall top:A topology (s:K->bool) (f:K->A->bool) (d:K->A->bool).\n    normal_space top /\\\n    (forall k. k IN s ==> open_in top (f k)) /\\\n    pairwise (\\a b. DISJOINT (f a:A->bool) (f b)) s /\\\n    (forall k. k IN s ==> d k SUBSET f k) /\\\n    closed_in top (UNIONS {d k | k IN s})\n    ==> ?w:K->A->bool.\n          (forall k. k IN s ==> open_in top (w k)) /\\\n          (forall k. k IN s ==> d k SUBSET w k) /\\\n          (forall k. k IN s ==> w k SUBSET f k) /\\\n          locally_finite_in top {w k | k IN s}
-      #|  W:(A->bool)->bool
-      #|  W:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  C:(A->bool)->bool
-      #|  C:(A->bool)->bool
-      #|  B:(A->bool)->bool
-      #|  B:(A->bool)->bool
-      #|  top:A topology
-      #|  U:(A->bool)->bool
-      #|  forall top:A topology.\n        regular_space top /\\\n        (forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     locally_finite_in top V)\n        ==> paracompact_space top
-      #|  R:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  top:A topology
-      #|  nn:num
-      #|  \\nn:num. {(EE:num->(A->bool)->(A->bool)) nn w | w IN W}
-      #|  top closure_of (ww:A->bool)
-      #|  u:A->bool
-      #|  ww:A->bool
-      #|  ?u:A->bool. u IN U /\\\n           top closure_of (ww:A->bool) SUBSET u
-      #|  (C:num->(A->bool)->(A->bool)) (SUC nn) ww
-      #|  (VV:num->(A->bool)->(A->bool)) (SUC nn) ww
-      #|  (EE:num->(A->bool)->(A->bool)) nn ww SUBSET ww
-      #|  nn:num
-      #|  F':(A->bool)->bool
-      #|  r:A->bool
-      #|  x:A
-      #|  w:A->bool
-      #|  n:num
-      #|  {(EE:num->(A->bool)->(A->bool)) n w'' | w'' IN W}
-      #|  (EE:num->(A->bool)->(A->bool)) n w
-      #|  (x:A) IN UNIONS {(cc:(A->bool)->(A->bool)) u |\n             u IN {(VV:num->(A->bool)->(A->bool)) (SUC n) w |\n               n IN (:num) /\\ w IN W}}
-      #|  x:A
-      #|  (VV:num->(A->bool)->(A->bool)) (SUC nn) w'
-      #|  nn:num
-      #|  F':(A->bool)->bool
-      #|  s:A->bool
-      #|  nn:num
-      #|  nn:num
-      #|  F':(A->bool)->bool
-      #|  r:A->bool
+      #|  (S : ((A) -> Bool) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (f : ((A) -> Bool, A) -> Bool)((v : (A) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  IN((x : A), UNIONS((V : ((A) -> Bool) -> Bool)))
+      #|  (x : A)
+      #|  (u : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (u : (A) -> Bool) => UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && (f : ((A) -> Bool, A) -> Bool)(v) == u})
+      #|  (f : ((A) -> Bool, A) -> Bool)
+      #|  \226\136\131 f : ((A) -> Bool, A) -> Bool, \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 IN(f(v), (U : ((A) -> Bool) -> Bool)) && SUBSET(v, f(v))
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], \226\136\128 U : ((A) -> Bool) -> Bool, (\226\136\128 U' : ((A) -> Bool) -> Bool, (\226\136\128 u : (A) -> Bool, IN(u, U') \226\134\146 open_in(top, u)) && UNIONS(U') == topspace(top) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U') && SUBSET(v, u))) && (\226\136\128 W : ((A) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top, UNIONS(W))))) && (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 c : ((A) -> Bool, A) -> Bool, (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 closed_in(top, c(u))) && (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 SUBSET(c(u), u)) && UNIONS({c((u : (A) -> Bool)) | IN(u, U)}) == topspace(top) && (\226\136\128 S : ((A) -> Bool) -> Bool, SUBSET(S, U) \226\134\146 closed_in(top, UNIONS({c((u : (A) -> Bool)) | IN(u, S)}))))
+      #|  SUBSET(UNIONS(DIFF((V : ((A) -> Bool) -> Bool), (V1 : ((A) -> Bool) -> Bool))), DIFF(topspace((top : Topology[A])), (t : (A) -> Bool)))
+      #|  IN((w : (A) -> Bool), (V1 : ((A) -> Bool) -> Bool))
+      #|  (w : (A) -> Bool)
+      #|  SUBSET(UNIONS((V1 : ((A) -> Bool) -> Bool)), DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)))
+      #|  DIFF(topspace((top : Topology[A])), UNIONS(DIFF((V : ((A) -> Bool) -> Bool), (V1 : ((A) -> Bool) -> Bool))))
+      #|  DIFF(topspace((top : Topology[A])), UNIONS((V1 : ((A) -> Bool) -> Bool)))
+      #|  SUBSET((V1 : ((A) -> Bool) -> Bool), (V : ((A) -> Bool) -> Bool))
+      #|  UNION(UNIONS((V1 : ((A) -> Bool) -> Bool)), UNIONS(DIFF((V : ((A) -> Bool) -> Bool), V1))) == topspace((top : Topology[A]))
+      #|  (v : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  \226\136\128 v : (A) -> Bool, IN(v, DIFF((V : ((A) -> Bool) -> Bool), (V1 : ((A) -> Bool) -> Bool))) \226\134\146 SUBSET(v, DIFF(topspace((top : Topology[A])), (t : (A) -> Bool)))
+      #|  closed_in((top : Topology[A]), UNIONS(DIFF((V : ((A) -> Bool) -> Bool), (V1 : ((A) -> Bool) -> Bool))))
+      #|  closed_in((top : Topology[A]), UNIONS((V1 : ((A) -> Bool) -> Bool)))
+      #|  SUBSET((V1 : ((A) -> Bool) -> Bool), (V : ((A) -> Bool) -> Bool))
+      #|  (V1 : ((A) -> Bool) -> Bool) == {(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && SUBSET(v, DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)))}
+      #|  (u : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET(v, DIFF(topspace((top : Topology[A])), (s : (A) -> Bool))) || SUBSET(v, DIFF(topspace(top), (t : (A) -> Bool)))
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  {DIFF(topspace((top : Topology[A])), (s : (A) -> Bool)), DIFF(topspace(top), (t : (A) -> Bool))}
+      #|  SUBSET((s : (A) -> Bool), topspace((top : Topology[A]))) && SUBSET((t : (A) -> Bool), topspace(top))
+      #|  (t : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  \226\136\128 top : Topology[A], (\226\136\128 U : ((A) -> Bool) -> Bool, (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && (\226\136\128 W : ((A) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top, UNIONS(W))))) \226\134\146 normal_space(top)
+      #|  {(a : A)}
+      #|  (a : A)
+      #|  (s : (A) -> Bool) == {}
+      #|  \226\136\128 s : (A) -> Bool, (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) \226\134\146 x == y) \226\134\146 FINITE(s)
+      #|  !(INTER((t : (A) -> Bool), DIFF(topspace((top : Topology[A])), closure_of(top, (R : (A) -> Bool)))) == {})
+      #|  (R : (A) -> Bool)
+      #|  SUBSET(INTER((f : (K, A) -> Bool)((k0 : K)), (R : (A) -> Bool)), closure_of((top : Topology[A]), R))
+      #|  (k0 : K)
+      #|  (t : (A) -> Bool)
+      #|  ({} : ((A) -> Bool) -> Bool)
+      #|  DIFF(topspace((top : Topology[A])), closure_of(top, (R : (A) -> Bool)))
+      #|  (k0 : K)
+      #|  (k0 : K)
+      #|  (t : (A) -> Bool)
+      #|  !(INTER(INTER((f : (K, A) -> Bool)((k2 : K)), (R : (A) -> Bool)), (v1 : (A) -> Bool)) == {})
+      #|  !(INTER(INTER((f : (K, A) -> Bool)((k1 : K)), (R : (A) -> Bool)), (v1 : (A) -> Bool)) == {})
+      #|  (k2 : K)
+      #|  (k1 : K)
+      #|  IMAGE((k : K) => INTER((f : (K, A) -> Bool)(k), (R : (A) -> Bool)), {(k : K) | IN(k, (s : (K) -> Bool)) && !(INTER(INTER(f(k), R), (v1 : (A) -> Bool)) == {})})
+      #|  (v1 : (A) -> Bool)
+      #|  (v1 : (A) -> Bool)
+      #|  IN((x : A), (S' : (A) -> Bool))
+      #|  IN((x : A), (S' : (A) -> Bool))
+      #|  IN((x : A), closure_of((top : Topology[A]), (R : (A) -> Bool)))
+      #|  (x : A)
+      #|  SUBSET((a : (A) -> Bool), (t : (A) -> Bool)) \226\134\146 SUBSET(INTER(a, (r : (A) -> Bool)), t)
+      #|  (k : K)
+      #|  (k : K)
+      #|  (d : (K, A) -> Bool)((k : K))
+      #|  (x : A)
+      #|  UNIONS({(d : (K, A) -> Bool)((k : K)) | IN(k, (s : (K) -> Bool))})
+      #|  SUBSET((a : (A) -> Bool), (b : (A) -> Bool)) && SUBSET(a, (c : (A) -> Bool)) \226\134\146 SUBSET(a, INTER(b, c))
+      #|  (k : K)
+      #|  (k : K)
+      #|  (k : K) => INTER((f : (K, A) -> Bool)(k), (R : (A) -> Bool))
+      #|  SUBSET(DIFF(topspace((top : Topology[A])), (S' : (A) -> Bool)), (v0 : (A) -> Bool))
+      #|  SUBSET((S' : (A) -> Bool), topspace((top : Topology[A])))
+      #|  DISJOINT((u0 : (A) -> Bool), (v0 : (A) -> Bool))
+      #|  SUBSET((u0 : (A) -> Bool), topspace((top : Topology[A])))
+      #|  DIFF(topspace((top : Topology[A])), (v0 : (A) -> Bool))
+      #|  (u0 : (A) -> Bool)
+      #|  (v0 : (A) -> Bool)
+      #|  (u0 : (A) -> Bool)
+      #|  SUBSET((d : (A) -> Bool), (s : (A) -> Bool)) && SUBSET(s, (u : (A) -> Bool)) \226\134\146 INTER(d, DIFF(u, s)) == {}
+      #|  DIFF(topspace((top : Topology[A])), (S' : (A) -> Bool))
+      #|  UNIONS({(d : (K, A) -> Bool)((k : K)) | IN(k, (s : (K) -> Bool))})
+      #|  (R : (A) -> Bool)
+      #|  \226\136\131 R : (A) -> Bool, open_in((top : Topology[A]), R) && SUBSET(UNIONS({(d : (K, A) -> Bool)((k : K)) | IN(k, (s : (K) -> Bool))}), R) && SUBSET(closure_of(top, R), (S' : (A) -> Bool))
+      #|  (k' : K)
+      #|  (k0 : K)
+      #|  pairwise((a : K) => (b : K) => DISJOINT((f : (K, A) -> Bool)(a), f(b)), (s : (K) -> Bool))
+      #|  !(INTER((f : (K, A) -> Bool)((k0 : K)), f((k' : K))) == {})
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (k' : K)
+      #|  \226\136\128 k' : K, IN(k', (s : (K) -> Bool)) && !(INTER((f : (K, A) -> Bool)((k0 : K)), f(k')) == {}) \226\134\146 k' == k0
+      #|  (k2 : K)
+      #|  (k1 : K)
+      #|  (f : (K, A) -> Bool)((k0 : K))
+      #|  (k0 : K)
+      #|  (t : (A) -> Bool)
+      #|  (x : A)
+      #|  SUBSET(UNIONS({(d : (K, A) -> Bool)((k : K)) | IN(k, (s : (K) -> Bool))}), (S' : (A) -> Bool))
+      #|  (v0 : (A) -> Bool)
+      #|  (y : A)
+      #|  (v0 : (A) -> Bool)
+      #|  (v0 : (A) -> Bool)
+      #|  (x : A)
+      #|  open_in((top : Topology[A]), (S' : (A) -> Bool))
+      #|  (S' : (A) -> Bool) == {(x : A) | \226\136\131 v : (A) -> Bool, open_in((top : Topology[A]), v) && IN(x, v) && (\226\136\128 k1 : K, \226\136\128 k2 : K, IN(k1, (s : (K) -> Bool)) && IN(k2, s) && !(INTER(v, (f : (K, A) -> Bool)(k1)) == {}) && !(INTER(v, f(k2)) == {}) \226\134\146 k1 == k2)}
+      #|  \226\136\128 top : Topology[A], \226\136\128 s : (K) -> Bool, \226\136\128 f : (K, A) -> Bool, \226\136\128 d : (K, A) -> Bool, normal_space(top) && (\226\136\128 k : K, IN(k, s) \226\134\146 open_in(top, f(k))) && pairwise((a : K) => (b : K) => DISJOINT(f(a), f(b)), s) && (\226\136\128 k : K, IN(k, s) \226\134\146 SUBSET(d(k), f(k))) && closed_in(top, UNIONS({d((k : K)) | IN(k, s)})) \226\134\146 (\226\136\131 w : (K, A) -> Bool, (\226\136\128 k : K, IN(k, s) \226\134\146 open_in(top, w(k))) && (\226\136\128 k : K, IN(k, s) \226\134\146 SUBSET(d(k), w(k))) && (\226\136\128 k : K, IN(k, s) \226\134\146 SUBSET(w(k), f(k))) && locally_finite_in(top, {w((k : K)) | IN(k, s)}))
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  (C : ((A) -> Bool) -> Bool)
+      #|  (C : ((A) -> Bool) -> Bool)
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  (B : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], regular_space(top) && (\226\136\128 U : ((A) -> Bool) -> Bool, (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && locally_finite_in(top, V))) \226\134\146 paracompact_space(top)
+      #|  (R : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (nn : Num)
+      #|  (nn : Num) => {(EE : (Num, (A) -> Bool, A) -> Bool)(nn, (w : (A) -> Bool)) | IN(w, (W : ((A) -> Bool) -> Bool))}
+      #|  closure_of((top : Topology[A]), (ww : (A) -> Bool))
+      #|  (u : (A) -> Bool)
+      #|  (ww : (A) -> Bool)
+      #|  \226\136\131 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) && SUBSET(closure_of((top : Topology[A]), (ww : (A) -> Bool)), u)
+      #|  (C : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), (ww : (A) -> Bool))
+      #|  (VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), (ww : (A) -> Bool))
+      #|  SUBSET((EE : (Num, (A) -> Bool, A) -> Bool)((nn : Num), (ww : (A) -> Bool)), ww)
+      #|  (nn : Num)
+      #|  (F' : ((A) -> Bool) -> Bool)
+      #|  (r : (A) -> Bool)
+      #|  (x : A)
+      #|  (w : (A) -> Bool)
+      #|  (n : Num)
+      #|  {(EE : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w'' : (A) -> Bool)) | IN(w'', (W : ((A) -> Bool) -> Bool))}
+      #|  (EE : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w : (A) -> Bool))
+      #|  IN((x : A), UNIONS({(cc : ((A) -> Bool, A) -> Bool)((u : (A) -> Bool)) | IN(u, {(VV : (Num, (A) -> Bool, A) -> Bool)(SUC((n : Num)), (w : (A) -> Bool)) | IN(n, UNIV) && IN(w, (W : ((A) -> Bool) -> Bool))})}))
+      #|  (x : A)
+      #|  (VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), (w' : (A) -> Bool))
+      #|  (nn : Num)
+      #|  (F' : ((A) -> Bool) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  (nn : Num)
+      #|  (nn : Num)
+      #|  (F' : ((A) -> Bool) -> Bool)
+      #|  (r : (A) -> Bool)
       #|  UNIONS {{(EE:num->(A->bool)->(A->bool)) n w | w IN W} |\n               n IN (:num)}
-      #|  EE:num->(A->bool)->(A->bool)
-      #|  \\(w:A->bool). (cc:(A->bool)->(A->bool))\n            ((VV:num->(A->bool)->(A->bool)) (SUC nn) w)
-      #|  \\(w:A->bool). (VV:num->(A->bool)->(A->bool)) (SUC nn) w
-      #|  W:(A->bool)->bool
-      #|  top:A topology
-      #|  nn:num
-      #|  forall n:num. ?EE:(A->bool)->(A->bool).\n         (forall w:A->bool. w IN W ==> open_in top (EE w)) /\\\n         (forall w:A->bool. w IN W ==>\n            cc ((VV:num->(A->bool)->(A->bool)) (SUC n) w) SUBSET EE w) /\\\n         (forall w:A->bool. w IN W ==> EE w SUBSET VV (SUC n) w) /\\\n         locally_finite_in top {EE w | w IN W}
-      #|  cc:(A->bool)->(A->bool)
-      #|  w0:A->bool
-      #|  n0:num
-      #|  (VV:num->(A->bool)->(A->bool)) (SUC n0) w0
-      #|  w0:A->bool
-      #|  n0:num
-      #|  x:A
-      #|  x:A
-      #|  ww:A->bool
-      #|  nn:num
-      #|  {(VV:num->(A->bool)->(A->bool)) (SUC n) (w:A->bool) |\n        n IN (:num) /\\ w IN W}
-      #|  top:A topology
-      #|  x:A
-      #|  v:A->bool
-      #|  n0:num
-      #|  ~p <=> (p ==> F)
-      #|  v:A->bool
-      #|  SUC n0
-      #|  ~p <=> (p ==> F)
-      #|  v:A->bool
-      #|  s:A->bool
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  n0:num
-      #|  (mn:num->(A->bool)) n0
-      #|  n0:num
-      #|  SUC n0
-      #|  (mn:num->(A->bool)) (SUC n0)
-      #|  n0:num
-      #|  woset(ord:(A->bool)->(A->bool)->bool)
-      #|  (mn:num->(A->bool)) (SUC n0) = mn n0
-      #|  w_min:A->bool
+      #|  (EE : (Num, (A) -> Bool, A) -> Bool)
+      #|  (w : (A) -> Bool) => (cc : ((A) -> Bool, A) -> Bool)((VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), w))
+      #|  (w : (A) -> Bool) => (VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), w)
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, \226\136\131 EE : ((A) -> Bool, A) -> Bool, (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), EE(w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET((cc : ((A) -> Bool, A) -> Bool)((VV : (Num, (A) -> Bool, A) -> Bool)(SUC(n), w)), EE(w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(EE(w), VV(SUC(n), w))) && locally_finite_in(top, {EE((w : (A) -> Bool)) | IN(w, W)})
+      #|  (cc : ((A) -> Bool, A) -> Bool)
+      #|  (w0 : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (VV : (Num, (A) -> Bool, A) -> Bool)(SUC((n0 : Num)), (w0 : (A) -> Bool))
+      #|  (w0 : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (ww : (A) -> Bool)
+      #|  (nn : Num)
+      #|  {(VV : (Num, (A) -> Bool, A) -> Bool)(SUC((n : Num)), (w : (A) -> Bool)) | IN(n, UNIV) && IN(w, (W : ((A) -> Bool) -> Bool))}
+      #|  (top : Topology[A])
+      #|  (x : A)
+      #|  (v : (A) -> Bool)
+      #|  (n0 : Num)
+      #|  !(p : Bool) == (p \226\134\146 false)
+      #|  (v : (A) -> Bool)
+      #|  SUC((n0 : Num))
+      #|  !(p : Bool) == (p \226\134\146 false)
+      #|  (v : (A) -> Bool)
+      #|  (s : (A) -> Bool)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (n0 : Num)
+      #|  (mn : (Num, A) -> Bool)((n0 : Num))
+      #|  (n0 : Num)
+      #|  SUC((n0 : Num))
+      #|  (mn : (Num, A) -> Bool)(SUC((n0 : Num)))
+      #|  (n0 : Num)
+      #|  woset((ord : ((A) -> Bool, (A) -> Bool) -> Bool))
+      #|  (mn : (Num, A) -> Bool)(SUC((n0 : Num))) == mn(n0)
+      #|  (w_min : (A) -> Bool)
       #|  0
-      #|  (mn:num->(A->bool)) 0
-      #|  kk:num
-      #|  kk:num
-      #|  z:A->bool
-      #|  {(mn:num->(A->bool)) k | k IN (:num)}
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  x:A
-      #|  (mn:num->(A->bool)) (SUC k)
-      #|  k:num
-      #|  ~((x:A) IN (C:num->(A->bool)->(A->bool)) k\n              ((mn:num->(A->bool)) k))
-      #|  (mn:num->(A->bool)) k = mn (SUC k)
-      #|  (mn:num->(A->bool)) k
-      #|  (mn:num->(A->bool)) (SUC k)
-      #|  k:num
-      #|  SUC k
-      #|  forall k:num. (ord:(A->bool)->(A->bool)->bool)\n           ((mn:num->(A->bool)) (SUC k)) (mn k)
-      #|  mn:num->(A->bool)
-      #|  (x:A) IN UNIONS\n                 {(C:num->(A->bool)->(A->bool)) n w | w IN W}
-      #|  n:num
-      #|  {w:A->bool | w IN W /\\\n             (x:A) IN (C:num->(A->bool)->(A->bool)) n w}
-      #|  forall n:num. ?w0:A->bool. w0 IN W /\\\n           (x:A) IN (C:num->(A->bool)->(A->bool)) n w0 /\\\n           forall v. v IN W /\\ x IN C n v ==>\n             (ord:(A->bool)->(A->bool)->bool) w0 v
-      #|  x:A
-      #|  forall x:A. x IN topspace top ==>\n        ?n:num w:A->bool. w IN W /\\\n          x IN (VV:num->(A->bool)->(A->bool)) (SUC n) w
-      #|  (VV:num->(A->bool)->(A->bool)) n w2 INTER\n         (C:num->(A->bool)->(A->bool)) n w1 = {}
-      #|  w1:A->bool
-      #|  (C:num->(A->bool)->(A->bool)) n w1
-      #|  y:A
-      #|  (C:num->(A->bool)->(A->bool)) n w1 SUBSET\n         UNIONS {C n v | v IN W /\\ ~(v = w2)}
-      #|  (VV:num->(A->bool)->(A->bool)) n w1 SUBSET\n         (C:num->(A->bool)->(A->bool)) n w1
-      #|  forall n:num w1 w2:A->bool. w1 IN W /\\ w2 IN W /\\ ~(w1 = w2)\n         ==> (VV:num->(A->bool)->(A->bool)) n w1 INTER VV n w2 = {}
-      #|  v:A->bool
-      #|  (C:num->(A->bool)->(A->bool)) n v
-      #|  (y:A) IN\n         UNIONS {(C:num->(A->bool)->(A->bool)) n v' |\n                 v' IN W /\\ ~(v' = w)}
-      #|  (~p ==> F) ==> p
-      #|  v:A->bool = w
-      #|  (y:A) IN UNIONS {(C:num->(A->bool)->(A->bool)) n v | v IN W}
-      #|  ?v:A->bool. v IN W /\\\n            (y:A) IN (C:num->(A->bool)->(A->bool)) n v
-      #|  n:num
-      #|  y:A
-      #|  forall n:num w:A->bool. w IN W ==>\n        (VV:num->(A->bool)->(A->bool)) n w SUBSET C n w
-      #|  {(C:num->(A->bool)->(A->bool)) n w' |\n           w' IN {v:A->bool | v IN W /\\ ~(v = w)}} =\n         {C n v | v IN W /\\ ~(v = w)}
-      #|  {v:A->bool | v IN W /\\ ~(v = w)}
-      #|  n:num
-      #|  forall n:num w:A->bool. w IN W ==>\n        open_in top ((VV:num->(A->bool)->(A->bool)) n w)
-      #|  VV = \\(n:num) (w:A->bool).\n      topspace top DIFF\n        UNIONS {(C:num->(A->bool)->(A->bool)) n v | v IN W /\\\n                ~(v = w)}
-      #|  w2:A->bool
-      #|  (C:num->(A->bool)->(A->bool)) n w2
-      #|  y:A
-      #|  (C:num->(A->bool)->(A->bool)) n w2 SUBSET\n         UNIONS {C n v | v IN W /\\\n           (ord:(A->bool)->(A->bool)->bool) v w1 /\\ ~(v = w1)}
-      #|  w1:A->bool
-      #|  n:num
-      #|  (C:num->(A->bool)->(A->bool)) (SUC n) w1 SUBSET\n         w1 DIFF UNIONS {C n v | v IN W /\\\n           (ord:(A->bool)->(A->bool)->bool) v w1 /\\ ~(v = w1)}
-      #|  forall n:num w1 w2:A->bool.\n         w1 IN W /\\ w2 IN W /\\\n         (ord:(A->bool)->(A->bool)->bool) w2 w1 /\\ ~(w2 = w1)\n         ==> (C:num->(A->bool)->(A->bool)) (SUC n) w1 INTER\n             C n w2 = {}
-      #|  a:A
+      #|  (mn : (Num, A) -> Bool)(0)
+      #|  (kk : Num)
+      #|  (kk : Num)
+      #|  (z : (A) -> Bool)
+      #|  {(mn : (Num, A) -> Bool)((k : Num)) | IN(k, UNIV)}
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (x : A)
+      #|  (mn : (Num, A) -> Bool)(SUC((k : Num)))
+      #|  (k : Num)
+      #|  !IN((x : A), (C : (Num, (A) -> Bool, A) -> Bool)((k : Num), (mn : (Num, A) -> Bool)(k)))
+      #|  (mn : (Num, A) -> Bool)((k : Num)) == mn(SUC(k))
+      #|  (mn : (Num, A) -> Bool)((k : Num))
+      #|  (mn : (Num, A) -> Bool)(SUC((k : Num)))
+      #|  (k : Num)
+      #|  SUC((k : Num))
+      #|  \226\136\128 k : Num, (ord : ((A) -> Bool, (A) -> Bool) -> Bool)((mn : (Num, A) -> Bool)(SUC(k)), mn(k))
+      #|  (mn : (Num, A) -> Bool)
+      #|  IN((x : A), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w : (A) -> Bool)) | IN(w, (W : ((A) -> Bool) -> Bool))}))
+      #|  (n : Num)
+      #|  {(w : (A) -> Bool) | IN(w, (W : ((A) -> Bool) -> Bool)) && IN((x : A), (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), w))}
+      #|  \226\136\128 n : Num, \226\136\131 w0 : (A) -> Bool, IN(w0, (W : ((A) -> Bool) -> Bool)) && IN((x : A), (C : (Num, (A) -> Bool, A) -> Bool)(n, w0)) && (\226\136\128 v : (A) -> Bool, IN(v, W) && IN(x, C(n, v)) \226\134\146 (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(w0, v))
+      #|  (x : A)
+      #|  \226\136\128 x : A, IN(x, topspace((top : Topology[A]))) \226\134\146 (\226\136\131 n : Num, \226\136\131 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) && IN(x, (VV : (Num, (A) -> Bool, A) -> Bool)(SUC(n), w)))
+      #|  INTER((VV : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w2 : (A) -> Bool)), (C : (Num, (A) -> Bool, A) -> Bool)(n, (w1 : (A) -> Bool))) == {}
+      #|  (w1 : (A) -> Bool)
+      #|  (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w1 : (A) -> Bool))
+      #|  (y : A)
+      #|  SUBSET((C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w1 : (A) -> Bool)), UNIONS({C(n, (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && !(v == (w2 : (A) -> Bool))}))
+      #|  SUBSET((VV : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w1 : (A) -> Bool)), (C : (Num, (A) -> Bool, A) -> Bool)(n, w1))
+      #|  \226\136\128 n : Num, \226\136\128 w1 : (A) -> Bool, \226\136\128 w2 : (A) -> Bool, IN(w1, (W : ((A) -> Bool) -> Bool)) && IN(w2, W) && !(w1 == w2) \226\134\146 INTER((VV : (Num, (A) -> Bool, A) -> Bool)(n, w1), VV(n, w2)) == {}
+      #|  (v : (A) -> Bool)
+      #|  (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool))
+      #|  IN((y : A), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v' : (A) -> Bool)) | IN(v', (W : ((A) -> Bool) -> Bool)) && !(v' == (w : (A) -> Bool))}))
+      #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
+      #|  (v : (A) -> Bool) == (w : (A) -> Bool)
+      #|  IN((y : A), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool))}))
+      #|  \226\136\131 v : (A) -> Bool, IN(v, (W : ((A) -> Bool) -> Bool)) && IN((y : A), (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), v))
+      #|  (n : Num)
+      #|  (y : A)
+      #|  \226\136\128 n : Num, \226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET((VV : (Num, (A) -> Bool, A) -> Bool)(n, w), (C : (Num, (A) -> Bool, A) -> Bool)(n, w))
+      #|  {(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w' : (A) -> Bool)) | IN(w', {(v : (A) -> Bool) | IN(v, (W : ((A) -> Bool) -> Bool)) && !(v == (w : (A) -> Bool))})} == {C(n, (v : (A) -> Bool)) | IN(v, W) && !(v == w)}
+      #|  {(v : (A) -> Bool) | IN(v, (W : ((A) -> Bool) -> Bool)) && !(v == (w : (A) -> Bool))}
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), (VV : (Num, (A) -> Bool, A) -> Bool)(n, w))
+      #|  (VV : (Num, (A) -> Bool, A) -> Bool) == ((n : Num) => (w : (A) -> Bool) => DIFF(topspace((top : Topology[A])), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)(n, (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && !(v == w)})))
+      #|  (w2 : (A) -> Bool)
+      #|  (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w2 : (A) -> Bool))
+      #|  (y : A)
+      #|  SUBSET((C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w2 : (A) -> Bool)), UNIONS({C(n, (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, (w1 : (A) -> Bool)) && !(v == w1)}))
+      #|  (w1 : (A) -> Bool)
+      #|  (n : Num)
+      #|  SUBSET((C : (Num, (A) -> Bool, A) -> Bool)(SUC((n : Num)), (w1 : (A) -> Bool)), DIFF(w1, UNIONS({C(n, (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w1) && !(v == w1)})))
+      #|  \226\136\128 n : Num, \226\136\128 w1 : (A) -> Bool, \226\136\128 w2 : (A) -> Bool, IN(w1, (W : ((A) -> Bool) -> Bool)) && IN(w2, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(w2, w1) && !(w2 == w1) \226\134\146 INTER((C : (Num, (A) -> Bool, A) -> Bool)(SUC(n), w1), C(n, w2)) == {}
+      #|  (a : A)
       #|  UNIONS {UNIONS {v:A->bool | v IN V2 /\\\n             (g2:(A->bool)->(A->bool)) v = w'} |\n            w' | (w':A->bool) IN ss} =\n           UNIONS {v:A->bool | v IN V2 /\\ g2 v IN ss}
-      #|  ss:(A->bool)->bool
-      #|  v:A->bool
-      #|  (g2:(A->bool)->(A->bool)) v
-      #|  UNIONS {v':A->bool | v' IN V2 /\\\n              (g2:(A->bool)->(A->bool)) v' = g2 v}
-      #|  v:A->bool
-      #|  y:A
-      #|  v:A->bool
-      #|  y:A
-      #|  v:A->bool
-      #|  w':A->bool
-      #|  v:A->bool
-      #|  v:A->bool
-      #|  w':A->bool
-      #|  w':A->bool
-      #|  \\w':A->bool. UNIONS {v:A->bool | v IN V2 /\\\n           (g2:(A->bool)->(A->bool)) v = w'}
-      #|  v:A->bool
-      #|  w':A->bool
-      #|  w':A->bool
-      #|  oo:A->bool
-      #|  v:A->bool
-      #|  (v:A->bool) IN V2
-      #|  v:A->bool
-      #|  g2:(A->bool)->(A->bool)
-      #|  ?g2:(A->bool)->(A->bool). forall v:A->bool. v IN V2 ==>\n           g2 v IN W /\\\n           v SUBSET g2 v DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n u |\n              u IN W /\\\n              (ord:(A->bool)->(A->bool)->bool) u (g2 v) /\\\n              ~(u = g2 v)}
-      #|  V2:(A->bool)->bool
-      #|  woset(ord:(A->bool)->(A->bool)->bool)
-      #|  vv:A->bool
-      #|  ss:A->bool
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  ww:A->bool
-      #|  ww:A->bool
-      #|  ww DIFF UNIONS\n                {(C:num->(A->bool)->(A->bool)) n v | v |\n                 v IN W /\\\n                 (ord:(A->bool)->(A->bool)->bool) v ww /\\\n                 ~(v = ww)}
-      #|  ww:A->bool
-      #|  (xx:A) IN UNIONS\n                     {(C:num->(A->bool)->(A->bool)) n ww | ww IN W}
-      #|  {ww:A->bool | ww IN W /\\\n                 (xx:A) IN (C:num->(A->bool)->(A->bool)) n ww}
-      #|  xx:A
-      #|  w':A->bool
-      #|  w':A->bool
-      #|  {v:A->bool | v IN W /\\\n                 (ord:(A->bool)->(A->bool)->bool) v w' /\\\n                 ~(v = w')}
-      #|  w':A->bool
+      #|  (ss : ((A) -> Bool) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (g2 : ((A) -> Bool, A) -> Bool)((v : (A) -> Bool))
+      #|  UNIONS({(v' : (A) -> Bool) | IN(v', (V2 : ((A) -> Bool) -> Bool)) && (g2 : ((A) -> Bool, A) -> Bool)(v') == g2((v : (A) -> Bool))})
+      #|  (v : (A) -> Bool)
+      #|  (y : A)
+      #|  (v : (A) -> Bool)
+      #|  (y : A)
+      #|  (v : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (w' : (A) -> Bool) => UNIONS({(v : (A) -> Bool) | IN(v, (V2 : ((A) -> Bool) -> Bool)) && (g2 : ((A) -> Bool, A) -> Bool)(v) == w'})
+      #|  (v : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (oo : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  IN((v : (A) -> Bool), (V2 : ((A) -> Bool) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  (g2 : ((A) -> Bool, A) -> Bool)
+      #|  \226\136\131 g2 : ((A) -> Bool, A) -> Bool, \226\136\128 v : (A) -> Bool, IN(v, (V2 : ((A) -> Bool) -> Bool)) \226\134\146 IN(g2(v), (W : ((A) -> Bool) -> Bool)) && SUBSET(v, DIFF(g2(v), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (u : (A) -> Bool)) | IN(u, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(u, g2(v)) && !(u == g2(v))})))
+      #|  (V2 : ((A) -> Bool) -> Bool)
+      #|  woset((ord : ((A) -> Bool, (A) -> Bool) -> Bool))
+      #|  (vv : (A) -> Bool)
+      #|  (ss : (A) -> Bool)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (ww : (A) -> Bool)
+      #|  (ww : (A) -> Bool)
+      #|  DIFF((ww : (A) -> Bool), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, ww) && !(v == ww)}))
+      #|  (ww : (A) -> Bool)
+      #|  IN((xx : A), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (ww : (A) -> Bool)) | IN(ww, (W : ((A) -> Bool) -> Bool))}))
+      #|  {(ww : (A) -> Bool) | IN(ww, (W : ((A) -> Bool) -> Bool)) && IN((xx : A), (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), ww))}
+      #|  (xx : A)
+      #|  (w' : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  {(v : (A) -> Bool) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, (w' : (A) -> Bool)) && !(v == w')}
+      #|  (w' : (A) -> Bool)
       #|  {w' DIFF UNIONS\n           {(C:num->(A->bool)->(A->bool)) n v | v |\n            v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w' /\\\n            ~(v = w')} |\n          w' | (w':A->bool) IN W}
-      #|  ?c':(A->bool)->(A->bool).\n           (forall w'. w' IN W ==> closed_in top (c' w')) /\\\n           (forall w':A->bool. w' IN W ==>\n              c' w' SUBSET w' DIFF UNIONS\n                {(C:num->(A->bool)->(A->bool)) n v | v IN W /\\\n                 (ord:(A->bool)->(A->bool)->bool) v w' /\\ ~(v = w')}) /\\\n           UNIONS {c' w' | w' IN W} = topspace top /\\\n           (forall ss:(A->bool)->bool. ss SUBSET W ==>\n              closed_in top (UNIONS {c' w' | w' IN ss}))
-      #|  n:num
-      #|  forall n:num w:A->bool. w IN W ==>\n        (C:num->(A->bool)->(A->bool)) (SUC n) w SUBSET\n        w DIFF UNIONS {C n v | v IN W /\\\n          (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}
-      #|  w DIFF UNIONS\n            {(C:num->(A->bool)->(A->bool)) n v |\n             v IN W /\\\n             (ord:(A->bool)->(A->bool)->bool) v w /\\\n             ~(v = w)}
-      #|  w:A->bool
-      #|  c':(A->bool)->(A->bool)
-      #|  ?c':(A->bool)->(A->bool).\n               (forall w. w IN W ==> closed_in top (c' w)) /\\\n               (forall w:A->bool. w IN W ==>\n                  c' w SUBSET w DIFF UNIONS\n                    {(C:num->(A->bool)->(A->bool)) n v |\n                     v IN W /\\\n                     (ord:(A->bool)->(A->bool)->bool) v w /\\\n                     ~(v = w)}) /\\\n               UNIONS {c' w | w IN W} = topspace top /\\\n               (forall ss:(A->bool)->bool. ss SUBSET W ==>\n                  closed_in top (UNIONS {c' w | w IN ss}))
-      #|  (forall w:A->bool. w IN W ==>\n             closed_in top\n               ((nxt:((A->bool)->(A->bool))->(A->bool)->(A->bool))\n                ((C:num->(A->bool)->(A->bool)) n) w)) /\\\n           (forall w:A->bool. w IN W ==>\n             nxt (C n) w SUBSET w DIFF UNIONS\n               {C n v | v IN W /\\\n                (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}) /\\\n           UNIONS {nxt (C n) w | w IN W} = topspace top /\\\n           (forall ss:(A->bool)->bool. ss SUBSET W ==>\n             closed_in top (UNIONS {nxt (C n) w | w IN ss}))
-      #|  vv:A->bool
-      #|  (g:(A->bool)->(A->bool)) vv
-      #|  UNIONS {v':A->bool | v' IN V /\\\n                    (g:(A->bool)->(A->bool)) v' =\n                    (g:(A->bool)->(A->bool)) vv}
-      #|  vv:A->bool
-      #|  y:A
-      #|  vv:A->bool
-      #|  y:A
-      #|  vv:A->bool
-      #|  ww:A->bool
+      #|  \226\136\131 c' : ((A) -> Bool, A) -> Bool, (\226\136\128 w' : (A) -> Bool, IN(w', (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c'(w'))) && (\226\136\128 w' : (A) -> Bool, IN(w', W) \226\134\146 SUBSET(c'(w'), DIFF(w', UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w') && !(v == w')})))) && UNIONS({c'((w' : (A) -> Bool)) | IN(w', W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({c'((w' : (A) -> Bool)) | IN(w', ss)})))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, \226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET((C : (Num, (A) -> Bool, A) -> Bool)(SUC(n), w), DIFF(w, UNIONS({C(n, (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))
+      #|  DIFF((w : (A) -> Bool), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)}))
+      #|  (w : (A) -> Bool)
+      #|  (c' : ((A) -> Bool, A) -> Bool)
+      #|  \226\136\131 c' : ((A) -> Bool, A) -> Bool, (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c'(w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(c'(w), DIFF(w, UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))) && UNIONS({c'((w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({c'((w : (A) -> Bool)) | IN(w, ss)})))
+      #|  (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), (nxt : (((A) -> Bool, A) -> Bool, (A) -> Bool, A) -> Bool)((C : (Num, (A) -> Bool, A) -> Bool)((n : Num)), w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(nxt(C(n), w), DIFF(w, UNIONS({C(n, (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))) && UNIONS({nxt(C(n), (w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({nxt(C(n), (w : (A) -> Bool)) | IN(w, ss)})))
+      #|  (vv : (A) -> Bool)
+      #|  (g : ((A) -> Bool, A) -> Bool)((vv : (A) -> Bool))
+      #|  UNIONS({(v' : (A) -> Bool) | IN(v', (V : ((A) -> Bool) -> Bool)) && (g : ((A) -> Bool, A) -> Bool)(v') == g((vv : (A) -> Bool))})
+      #|  (vv : (A) -> Bool)
+      #|  (y : A)
+      #|  (vv : (A) -> Bool)
+      #|  (y : A)
+      #|  (vv : (A) -> Bool)
+      #|  (ww : (A) -> Bool)
       #|  UNIONS {UNIONS {v:A->bool | v IN V /\\\n                 (g:(A->bool)->(A->bool)) v = w} |\n                 (w:A->bool) IN ss} =\n               UNIONS {v:A->bool | v IN V /\\ g v IN ss}
-      #|  ss:(A->bool)->bool
-      #|  v:A->bool
-      #|  v:A->bool
-      #|  (g:(A->bool)->(A->bool)) v
-      #|  UNIONS {v':A->bool | v' IN V /\\\n                (g:(A->bool)->(A->bool)) v' =\n                  (g:(A->bool)->(A->bool)) v}
-      #|  v:A->bool
-      #|  x:A
-      #|  w:A->bool
-      #|  v:A->bool
-      #|  v:A->bool
-      #|  w:A->bool
-      #|  w:A->bool
-      #|  \\w:A->bool. UNIONS {v:A->bool | v IN V /\\\n               (g:(A->bool)->(A->bool)) v = w}
-      #|  v:A->bool
-      #|  w':A->bool
-      #|  w':A->bool
-      #|  oo:A->bool
-      #|  v:A->bool
-      #|  (v:A->bool) IN V
-      #|  v:A->bool
-      #|  g:(A->bool)->(A->bool)
-      #|  ?g:(A->bool)->(A->bool). forall v:A->bool. v IN V ==>\n               g v IN W /\\\n               v SUBSET g v DIFF UNIONS\n                 {(C:num->(A->bool)->(A->bool)) n u |\n                  u IN W /\\\n                  (ord:(A->bool)->(A->bool)->bool) u (g v) /\\\n                  ~(u = g v)}
-      #|  V:(A->bool)->bool
+      #|  (ss : ((A) -> Bool) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (g : ((A) -> Bool, A) -> Bool)((v : (A) -> Bool))
+      #|  UNIONS({(v' : (A) -> Bool) | IN(v', (V : ((A) -> Bool) -> Bool)) && (g : ((A) -> Bool, A) -> Bool)(v') == g((v : (A) -> Bool))})
+      #|  (v : (A) -> Bool)
+      #|  (x : A)
+      #|  (w : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool)
+      #|  (w : (A) -> Bool) => UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && (g : ((A) -> Bool, A) -> Bool)(v) == w})
+      #|  (v : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (w' : (A) -> Bool)
+      #|  (oo : (A) -> Bool)
+      #|  (v : (A) -> Bool)
+      #|  IN((v : (A) -> Bool), (V : ((A) -> Bool) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  (g : ((A) -> Bool, A) -> Bool)
+      #|  \226\136\131 g : ((A) -> Bool, A) -> Bool, \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 IN(g(v), (W : ((A) -> Bool) -> Bool)) && SUBSET(v, DIFF(g(v), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (u : (A) -> Bool)) | IN(u, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(u, g(v)) && !(u == g(v))})))
+      #|  (V : ((A) -> Bool) -> Bool)
       #|  {w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\\n                (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)} |\n              w | (w:A->bool) IN W}
-      #|  ?c':(A->bool)->(A->bool).\n             (forall w. w IN W ==> closed_in top (c' w)) /\\\n             (forall w:A->bool. w IN W ==>\n                c' w SUBSET w DIFF UNIONS\n                  {(C:num->(A->bool)->(A->bool)) n v |\n                   v IN W /\\\n                   (ord:(A->bool)->(A->bool)->bool) v w /\\\n                   ~(v = w)}) /\\\n             UNIONS {c' w | w IN W} = topspace top /\\\n             (forall ss:(A->bool)->bool. ss SUBSET W ==>\n                closed_in top (UNIONS {c' w | w IN ss}))
-      #|  woset(ord:(A->bool)->(A->bool)->bool)
-      #|  vv:A->bool
-      #|  ss:A->bool
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  ww:A->bool
-      #|  ww:A->bool
-      #|  ww DIFF UNIONS\n                  {(C:num->(A->bool)->(A->bool)) n v | v |\n                   v IN W /\\\n                   (ord:(A->bool)->(A->bool)->bool) v ww /\\\n                   ~(v = ww)}
-      #|  ww:A->bool
-      #|  (xx:A) IN UNIONS\n                       {(C:num->(A->bool)->(A->bool)) n w | w IN W}
-      #|  {w:A->bool | w IN W /\\\n                   (xx:A) IN (C:num->(A->bool)->(A->bool)) n w}
-      #|  xx:A
-      #|  ww:A->bool
-      #|  ww:A->bool
-      #|  {v:A->bool | v IN W /\\\n                   (ord:(A->bool)->(A->bool)->bool) v w /\\\n                   ~(v = w)}
-      #|  w:A->bool
+      #|  \226\136\131 c' : ((A) -> Bool, A) -> Bool, (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c'(w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(c'(w), DIFF(w, UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))) && UNIONS({c'((w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({c'((w : (A) -> Bool)) | IN(w, ss)})))
+      #|  woset((ord : ((A) -> Bool, (A) -> Bool) -> Bool))
+      #|  (vv : (A) -> Bool)
+      #|  (ss : (A) -> Bool)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (ww : (A) -> Bool)
+      #|  (ww : (A) -> Bool)
+      #|  DIFF((ww : (A) -> Bool), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, ww) && !(v == ww)}))
+      #|  (ww : (A) -> Bool)
+      #|  IN((xx : A), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w : (A) -> Bool)) | IN(w, (W : ((A) -> Bool) -> Bool))}))
+      #|  {(w : (A) -> Bool) | IN(w, (W : ((A) -> Bool) -> Bool)) && IN((xx : A), (C : (Num, (A) -> Bool, A) -> Bool)((n : Num), w))}
+      #|  (xx : A)
+      #|  (ww : (A) -> Bool)
+      #|  (ww : (A) -> Bool)
+      #|  {(v : (A) -> Bool) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, (w : (A) -> Bool)) && !(v == w)}
+      #|  (w : (A) -> Bool)
       #|  (forall w:A->bool. w IN W ==>\n             open_in top (w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)})) /\\\n           UNIONS {w DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n v | v |\n              v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n              ~(v = w)} | w | w IN W} = topspace top
-      #|  forall n:num.\n        (forall w:A->bool. w IN W ==> closed_in top (C n w)) /\\\n        (forall w:A->bool. w IN W ==> C n w SUBSET w) /\\\n        UNIONS {(C:num->(A->bool)->(A->bool)) n w | w IN W} =\n          topspace top /\\\n        (forall ss:(A->bool)->bool. ss SUBSET W ==>\n           closed_in top (UNIONS {C n w | w IN ss}))
-      #|  C:num->(A->bool)->(A->bool)
-      #|  \\(c:(A->bool)->(A->bool)) (n:num).\n          (nxt:((A->bool)->(A->bool))->(A->bool)->(A->bool)) c
-      #|  c0:(A->bool)->(A->bool)
-      #|  nxt = \\(c:(A->bool)->(A->bool)).\n         @c':(A->bool)->(A->bool).\n           (forall w:A->bool. w IN W ==> closed_in top (c' w)) /\\\n           (forall w:A->bool. w IN W ==>\n              c' w SUBSET w DIFF\n                UNIONS {c v | v IN W /\\\n                  (ord:(A->bool)->(A->bool)->bool) v w /\\ ~(v = w)}) /\\\n           UNIONS {c' w | w IN W} = topspace top /\\\n           (forall ss:(A->bool)->bool. ss SUBSET W ==>\n              closed_in top (UNIONS {c' w | w IN ss}))
-      #|  c0:(A->bool)->(A->bool)
-      #|  W:(A->bool)->bool
-      #|  top:A topology
-      #|  ord:(A->bool)->(A->bool)->bool
-      #|  W:(A->bool)->bool
-      #|  normal_space (top:A topology)
-      #|  ?R:(A->bool)->bool.\n       (forall r. r IN R ==> open_in top r) /\\\n       UNIONS R = topspace top /\\\n       (forall r. r IN R ==> ?u. u IN U /\\ top closure_of r SUBSET u) /\\\n       sigma_locally_finite_in top R
-      #|  W:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  top:A topology
-      #|  U:(A->bool)->bool
-      #|  forall top:A topology.\n        regular_space top /\\\n        (forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n             ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                     UNIONS V = topspace top /\\\n                     (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                     (forall W. W SUBSET V ==> closed_in top (UNIONS W)))\n        ==> paracompact_space top
-      #|  n:num
-      #|  n:num
-      #|  (w:A->bool) IN W
-      #|  w:A->bool
-      #|  w1:A->bool
-      #|  n:num
-      #|  n0:num
-      #|  ww:A->bool
-      #|  SUC nn
-      #|  w':A->bool
-      #|  nn:num
-      #|  w':A->bool
-      #|  UNIONS {(cc:(A->bool)->(A->bool))\n             ((VV:num->(A->bool)->(A->bool)) (SUC nn) k) |\n             k IN W} =\n           UNIONS {cc u | u IN {VV (SUC nn) w | w IN W}}
-      #|  k:A->bool
-      #|  nn:num
-      #|  (VV:num->(A->bool)->(A->bool)) (SUC nn) k
-      #|  k:A->bool
-      #|  b:A->bool
-      #|  a:A->bool
-      #|  k:A->bool
-      #|  k:A->bool
-      #|  SUC nn
-      #|  b:A->bool
-      #|  a:A->bool
-      #|  SUC nn
-      #|  w':A->bool
-      #|  nn:num
-      #|  n:num
-      #|  w:A->bool
-      #|  ww:A->bool
-      #|  nn:num
-      #|  SUC nn
-      #|  nn:num
-      #|  V:(A->bool)->bool
-      #|  W:(A->bool)->bool
-      #|  V:(A->bool)->bool
-      #|  V:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  U:(A->bool)->bool
-      #|  forall top:A topology.\n        regular_space top\n        ==> (paracompact_space top <=>\n             forall U. (forall u. u IN U ==> open_in top u) /\\ UNIONS U = topspace top\n                 ==> ?V. (forall v. v IN V ==> closed_in top v) /\\\n                         UNIONS V = topspace top /\\\n                         (forall v. v IN V ==> ?u. u IN U /\\ v SUBSET u) /\\\n                         (forall W. W SUBSET V ==> closed_in top (UNIONS W)))
-      #|  regular_space (top':B topology)
-      #|  top:A topology
-      #|  f:A->B
-      #|  t1_space (top':B topology)
-      #|  normal_space (top':B topology)
-      #|  closed_map(top:A topology,top':B topology) f
-      #|  K:(A->bool)->bool
-      #|  closed_in top (UNIONS S0:A->bool)
-      #|  a0:A
-      #|  k0':A->bool
-      #|  IMAGE (f:A->B) k0'
-      #|  k0':A->bool
-      #|  a0:A
-      #|  k0':A->bool
-      #|  a0:A
-      #|  a0:A
-      #|  (bb:B) IN t0
-      #|  k0':A->bool
-      #|  t0:B->bool
-      #|  bb:B
-      #|  UNIONS {IMAGE (f:A->B) k | k IN S0} =\n                    IMAGE f (UNIONS S0)
-      #|  kk:A->bool
-      #|  kk:A->bool
-      #|  kk:A->bool
-      #|  s:B->bool
-      #|  SS SUBSET {IMAGE (f:A->B) k | k IN K}
-      #|  s:B->bool
-      #|  SS = {IMAGE (f:A->B) k | k IN S0}
-      #|  (S0:(A->bool)->bool) SUBSET K
-      #|  S0 = {k:A->bool | k IN K /\\ IMAGE (f:A->B) k IN SS}
-      #|  SS:(B->bool)->bool
-      #|  (a:A) IN {x | x IN topspace top /\\ (f:A->B) x IN u0}
-      #|  a:A
-      #|  y:B
-      #|  u0:B->bool
-      #|  u0':B->bool
-      #|  u0':B->bool
+      #|  \226\136\128 n : Num, (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), (C : (Num, (A) -> Bool, A) -> Bool)(n, w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(C(n, w), w)) && UNIONS({C(n, (w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({C(n, (w : (A) -> Bool)) | IN(w, ss)})))
+      #|  (C : (Num, (A) -> Bool, A) -> Bool)
+      #|  (c : ((A) -> Bool, A) -> Bool) => (n : Num) => (nxt : (((A) -> Bool, A) -> Bool, (A) -> Bool, A) -> Bool)(c)
+      #|  (c0 : ((A) -> Bool, A) -> Bool)
+      #|  (nxt : (((A) -> Bool, A) -> Bool, (A) -> Bool, A) -> Bool) == ((c : ((A) -> Bool, A) -> Bool) => select((c' : ((A) -> Bool, A) -> Bool) => (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c'(w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(c'(w), DIFF(w, UNIONS({c((v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))) && UNIONS({c'((w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({c'((w : (A) -> Bool)) | IN(w, ss)})))))
+      #|  (c0 : ((A) -> Bool, A) -> Bool)
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (ord : ((A) -> Bool, (A) -> Bool) -> Bool)
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  normal_space((top : Topology[A]))
+      #|  \226\136\131 R : ((A) -> Bool) -> Bool, (\226\136\128 r : (A) -> Bool, IN(r, R) \226\134\146 open_in((top : Topology[A]), r)) && UNIONS(R) == topspace(top) && (\226\136\128 r : (A) -> Bool, IN(r, R) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, (U : ((A) -> Bool) -> Bool)) && SUBSET(closure_of(top, r), u))) && sigma_locally_finite_in(top, R)
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  (top : Topology[A])
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], regular_space(top) && (\226\136\128 U : ((A) -> Bool) -> Bool, (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && (\226\136\128 W : ((A) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top, UNIONS(W))))) \226\134\146 paracompact_space(top)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  IN((w : (A) -> Bool), (W : ((A) -> Bool) -> Bool))
+      #|  (w : (A) -> Bool)
+      #|  (w1 : (A) -> Bool)
+      #|  (n : Num)
+      #|  (n0 : Num)
+      #|  (ww : (A) -> Bool)
+      #|  SUC((nn : Num))
+      #|  (w' : (A) -> Bool)
+      #|  (nn : Num)
+      #|  (w' : (A) -> Bool)
+      #|  UNIONS({(cc : ((A) -> Bool, A) -> Bool)((VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), (k : (A) -> Bool))) | IN(k, (W : ((A) -> Bool) -> Bool))}) == UNIONS({cc((u : (A) -> Bool)) | IN(u, {VV(SUC(nn), (w : (A) -> Bool)) | IN(w, W)})})
+      #|  (k : (A) -> Bool)
+      #|  (nn : Num)
+      #|  (VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), (k : (A) -> Bool))
+      #|  (k : (A) -> Bool)
+      #|  (b : (A) -> Bool)
+      #|  (a : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  SUC((nn : Num))
+      #|  (b : (A) -> Bool)
+      #|  (a : (A) -> Bool)
+      #|  SUC((nn : Num))
+      #|  (w' : (A) -> Bool)
+      #|  (nn : Num)
+      #|  (n : Num)
+      #|  (w : (A) -> Bool)
+      #|  (ww : (A) -> Bool)
+      #|  (nn : Num)
+      #|  SUC((nn : Num))
+      #|  (nn : Num)
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  (W : ((A) -> Bool) -> Bool)
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  (V : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  (U : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 top : Topology[A], regular_space(top) \226\134\146 paracompact_space(top) == (\226\136\128 U : ((A) -> Bool) -> Bool, (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(top, u)) && UNIONS(U) == topspace(top) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && (\226\136\128 W : ((A) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top, UNIONS(W)))))
+      #|  regular_space((top' : Topology[B]))
+      #|  (top : Topology[A])
+      #|  (f : (A) -> B)
+      #|  t1_space((top' : Topology[B]))
+      #|  normal_space((top' : Topology[B]))
+      #|  closed_map(((top : Topology[A]), (top' : Topology[B])), (f : (A) -> B))
+      #|  (K : ((A) -> Bool) -> Bool)
+      #|  closed_in((top : Topology[A]), UNIONS((S0 : ((A) -> Bool) -> Bool)))
+      #|  (a0 : A)
+      #|  (k0' : (A) -> Bool)
+      #|  IMAGE((f : (A) -> B), (k0' : (A) -> Bool))
+      #|  (k0' : (A) -> Bool)
+      #|  (a0 : A)
+      #|  (k0' : (A) -> Bool)
+      #|  (a0 : A)
+      #|  (a0 : A)
+      #|  IN((bb : B), (t0 : (B) -> Bool))
+      #|  (k0' : (A) -> Bool)
+      #|  (t0 : (B) -> Bool)
+      #|  (bb : B)
+      #|  UNIONS({IMAGE((f : (A) -> B), (k : (A) -> Bool)) | IN(k, (S0 : ((A) -> Bool) -> Bool))}) == IMAGE(f, UNIONS(S0))
+      #|  (kk : (A) -> Bool)
+      #|  (kk : (A) -> Bool)
+      #|  (kk : (A) -> Bool)
+      #|  (s : (B) -> Bool)
+      #|  SUBSET((SS : ((B) -> Bool) -> Bool), {IMAGE((f : (A) -> B), (k : (A) -> Bool)) | IN(k, (K : ((A) -> Bool) -> Bool))})
+      #|  (s : (B) -> Bool)
+      #|  (SS : ((B) -> Bool) -> Bool) == {IMAGE((f : (A) -> B), (k : (A) -> Bool)) | IN(k, (S0 : ((A) -> Bool) -> Bool))}
+      #|  SUBSET((S0 : ((A) -> Bool) -> Bool), (K : ((A) -> Bool) -> Bool))
+      #|  (S0 : ((A) -> Bool) -> Bool) == {(k : (A) -> Bool) | IN(k, (K : ((A) -> Bool) -> Bool)) && IN(IMAGE((f : (A) -> B), k), (SS : ((B) -> Bool) -> Bool))}
+      #|  (SS : ((B) -> Bool) -> Bool)
+      #|  IN((a : A), {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (u0 : (B) -> Bool))})
+      #|  (a : A)
+      #|  (y : B)
+      #|  (u0 : (B) -> Bool)
+      #|  (u0' : (B) -> Bool)
+      #|  (u0' : (B) -> Bool)
       #|  ?preimg:(A->bool).\n             preimg IN\n             {{x | x IN topspace top /\\ (f:A->B) x IN u} |\n              (u:B->bool) IN U} /\\\n             (k0:A->bool) SUBSET preimg
-      #|  ?u0:B->bool. u0 IN U /\\\n                       (k0:A->bool) SUBSET\n                       {x | x IN topspace top /\\ (f:A->B) x IN u0}
-      #|  k0:A->bool
-      #|  IMAGE (f:A->B) k
-      #|  k:A->bool
-      #|  (x:A) IN UNIONS K
-      #|  x:A
-      #|  (y:B) IN IMAGE (f:A->B) (topspace top)
-      #|  y:B
-      #|  IMAGE (f:A->B) (topspace top)
-      #|  k:A->bool
-      #|  k:A->bool
-      #|  k:A->bool
-      #|  {IMAGE (f:A->B) k | k IN K}
-      #|  K:(A->bool)->bool
-      #|  {x:A | x IN topspace top /\\ (f:A->B) x IN u}
-      #|  u:B->bool
-      #|  (f:A->B) x IN UNIONS U
-      #|  (f:A->B) x IN topspace top'
-      #|  x:A
-      #|  top':B topology
-      #|  u:B->bool
+      #|  \226\136\131 u0 : (B) -> Bool, IN(u0, (U : ((B) -> Bool) -> Bool)) && SUBSET((k0 : (A) -> Bool), {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), u0)})
+      #|  (k0 : (A) -> Bool)
+      #|  IMAGE((f : (A) -> B), (k : (A) -> Bool))
+      #|  (k : (A) -> Bool)
+      #|  IN((x : A), UNIONS((K : ((A) -> Bool) -> Bool)))
+      #|  (x : A)
+      #|  IN((y : B), IMAGE((f : (A) -> B), topspace((top : Topology[A]))))
+      #|  (y : B)
+      #|  IMAGE((f : (A) -> B), topspace((top : Topology[A])))
+      #|  (k : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  (k : (A) -> Bool)
+      #|  {IMAGE((f : (A) -> B), (k : (A) -> Bool)) | IN(k, (K : ((A) -> Bool) -> Bool))}
+      #|  (K : ((A) -> Bool) -> Bool)
+      #|  {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (u : (B) -> Bool))}
+      #|  (u : (B) -> Bool)
+      #|  IN((f : (A) -> B)((x : A)), UNIONS((U : ((B) -> Bool) -> Bool)))
+      #|  IN((f : (A) -> B)((x : A)), topspace((top' : Topology[B])))
+      #|  (x : A)
+      #|  (top' : Topology[B])
+      #|  (u : (B) -> Bool)
       #|  {({x | x IN topspace top /\\ (f:A->B) x IN u}) | u IN U}
-      #|  U:(B->bool)->bool
-      #|  forall U:(B->bool)->bool.\n         (forall u:B->bool. u IN U ==> open_in top' u) /\\\n         UNIONS U = topspace top'\n         ==> ?V:(B->bool)->bool.\n                 (forall v:B->bool. v IN V ==> closed_in top' v) /\\\n                 UNIONS V = topspace top' /\\\n                 (forall v:B->bool. v IN V ==> ?u:B->bool. u IN U /\\ v SUBSET u) /\\\n                 (forall W:(B->bool)->bool. W SUBSET V ==> closed_in top' (UNIONS W))
-      #|  regular_space (top:A topology)
-      #|  forall top top' (f:A->B).\n        paracompact_space top /\\ hausdorff_space top /\\\n        continuous_map(top,top') f /\\\n        closed_map(top,top') f /\\\n        IMAGE f (topspace top) = topspace top'\n        ==> paracompact_space top'
+      #|  (U : ((B) -> Bool) -> Bool)
+      #|  \226\136\128 U : ((B) -> Bool) -> Bool, (\226\136\128 u : (B) -> Bool, IN(u, U) \226\134\146 open_in((top' : Topology[B]), u)) && UNIONS(U) == topspace(top') \226\134\146 (\226\136\131 V : ((B) -> Bool) -> Bool, (\226\136\128 v : (B) -> Bool, IN(v, V) \226\134\146 closed_in(top', v)) && UNIONS(V) == topspace(top') && (\226\136\128 v : (B) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (B) -> Bool, IN(u, U) && SUBSET(v, u))) && (\226\136\128 W : ((B) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top', UNIONS(W))))
+      #|  regular_space((top : Topology[A]))
+      #|  \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, paracompact_space(top) && hausdorff_space(top) && continuous_map((top, top'), f) && closed_map((top, top'), f) && IMAGE(f, topspace(top)) == topspace(top') \226\134\146 paracompact_space(top')
       #|countably_paracompact_space =  |- (#forall:fun(fun(topology('A),bool),bool) (\top:topology('A). ((#=:fun(bool,fun(bool,bool)) (#countably_paracompact_space:fun(topology('A),bool) top:topology('A))) (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\U:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#COUNTABLE:fun(fun(fun('A,bool),bool),bool) U:fun(fun('A,bool),bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) u:fun('A,bool)) U:fun(fun('A,bool),bool))) ((#open_in:fun(topology('A),fun(fun('A,bool),bool)) top:topology('A)) u:fun('A,bool)))))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) U:fun(fun('A,bool),bool))) (#topspace:fun(topology('A),fun('A,bool)) top:topology('A)))))) (#?:fun(fun(fun(fun('A,bool),bool),bool),bool) (\V:fun(fun('A,bool),bool). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\v:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) v:fun('A,bool)) V:fun(fun('A,bool),bool))) ((#open_in:fun(topology('A),fun(fun('A,bool),bool)) top:topology('A)) v:fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) V:fun(fun('A,bool),bool))) (#topspace:fun(topology('A),fun('A,bool)) top:topology('A)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\v:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) v:fun('A,bool)) V:fun(fun('A,bool),bool))) (#?:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) u:fun('A,bool)) U:fun(fun('A,bool),bool))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) v:fun('A,bool)) u:fun('A,bool))))))))) ((#locally_finite_in:fun(topology('A),fun(fun(fun('A,bool),bool),bool)) top:topology('A)) V:fun(fun('A,bool),bool)))))))))))))
       #|PARACOMPACT_IMP_COUNTABLY_PARACOMPACT_SPACE =  |- (#forall:fun(fun(topology('A),bool),bool) (\top:topology('A). ((#==>:fun(bool,fun(bool,bool)) (#paracompact_space:fun(topology('A),bool) top:topology('A))) (#countably_paracompact_space:fun(topology('A),bool) top:topology('A)))))
       #|METRIZABLE_IMP_COUNTABLY_PARACOMPACT_SPACE =  |- (#forall:fun(fun(topology('A),bool),bool) (\top:topology('A). ((#==>:fun(bool,fun(bool,bool)) (#metrizable_space:fun(topology('A),bool) top:topology('A))) (#countably_paracompact_space:fun(topology('A),bool) top:topology('A)))))
