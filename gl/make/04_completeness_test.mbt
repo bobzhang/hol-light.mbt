@@ -8620,212 +8620,212 @@ test "GL/completeness matches GL/completeness.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..solved at 4
       #|GL/completeness quotations (206):
-      #|  CONJLIST [] = True /\\\n   (forall p X. CONJLIST (CONS p X) = if X = [] then p else p && CONJLIST X)
-      #|  CONJLIST t
-      #|  forall p X. MEM p X ==> |-- (CONJLIST X --> p)
-      #|  forall X Y. (forall p. MEM p Y ==> MEM p X) ==> |-- (CONJLIST X --> CONJLIST Y)
-      #|  forall p X. |-- (CONJLIST (CONS p X) <-> p && CONJLIST X)
-      #|  forall p X. |-- (CONJLIST (CONS p X) --> p)
-      #|  forall p X. |-- (CONJLIST (CONS p X) --> CONJLIST X)
-      #|  forall p h t. |-- (p --> h) /\\ |-- (p --> CONJLIST t)\n           ==> |-- (p --> CONJLIST (CONS h t))
-      #|  CONJLIST X
-      #|  (forall X q. |-- (p --> CONJLIST X) /\\ MEM q X ==> |-- (p --> q)) /\\\n     (forall X. (forall q. MEM q X ==> |-- (p --> q)) ==> |-- (p --> CONJLIST X))
-      #|  forall p X. |-- (p --> CONJLIST X) <=> (forall q. MEM q X ==> |-- (p --> q))
-      #|  forall X Y. Y SUBLIST X ==> |-- (CONJLIST X --> CONJLIST Y)
-      #|  p:form
-      #|  h:form
-      #|  h && CONJLIST t
-      #|  forall l m.\n     (forall p. MEM p m ==> ?q. MEM q l /\\ |-- (q --> p))\n     ==> |-- (CONJLIST l --> CONJLIST m)
-      #|  (h && CONJLIST t) && CONJLIST m
-      #|  h && (CONJLIST t && CONJLIST m)
-      #|  h && CONJLIST (APPEND t m)
-      #|  forall l m. |-- (CONJLIST (APPEND l m) <-> CONJLIST l && CONJLIST m)
-      #|  forall X. MEM False X ==> |-- (Not (CONJLIST X))
-      #|  Box (h && CONJLIST t)
-      #|  Box h && Box (CONJLIST t)
-      #|  Box h && CONJLIST (MAP (Box) t)
-      #|  forall l. |-- (CONJLIST (MAP (Box) l) <-> Box (CONJLIST l))
-      #|  CONSISTENT (l:form list) <=> ~ (|-- (Not (CONJLIST l)))
-      #|  forall p. CONSISTENT [p] <=> ~ |-- (Not p)
-      #|  p && Not p
-      #|  forall X p. MEM p X /\\ MEM (Not p) X ==> |-- (Not (CONJLIST X))
-      #|  CONJLIST Y
-      #|  |-- (CONJLIST Y --> False) /\\ Y SUBLIST X\n                ==> |-- (CONJLIST X --> False)
-      #|  forall X Y. CONSISTENT X /\\ Y SUBLIST X ==> CONSISTENT Y
-      #|  Not (h && CONJLIST t)
-      #|  forall h t. CONSISTENT (CONS h t) <=> ~ |-- (Not h || Not (CONJLIST t))
-      #|  p && Not p
-      #|  forall X p. MEM p X /\\ MEM (Not p) X ==> ~CONSISTENT X
+      #|  (CONJLIST : (List[Form]) -> Form)(NIL) == True && (\226\136\128 p : Form, \226\136\128 X : List[Form], CONJLIST(CONS(p, X)) == (if X == NIL { p } else { op_amp_amp(p, CONJLIST(X)) }))
+      #|  CONJLIST((t : List[Form]))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], MEM(p, X) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(X), p))
+      #|  \226\136\128 X : List[Form], \226\136\128 Y : List[Form], (\226\136\128 p : Form, MEM(p, Y) \226\134\146 MEM(p, X)) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(X), CONJLIST(Y)))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], op_bar_minus_minus(op_lt_minus_gt(CONJLIST(CONS(p, X)), op_amp_amp(p, CONJLIST(X))))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], op_bar_minus_minus(op_minus_minus_gt(CONJLIST(CONS(p, X)), p))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], op_bar_minus_minus(op_minus_minus_gt(CONJLIST(CONS(p, X)), CONJLIST(X)))
+      #|  \226\136\128 p : Form, \226\136\128 h : Form, \226\136\128 t : List[Form], op_bar_minus_minus(op_minus_minus_gt(p, h)) && op_bar_minus_minus(op_minus_minus_gt(p, CONJLIST(t))) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(p, CONJLIST(CONS(h, t))))
+      #|  CONJLIST((X : List[Form]))
+      #|  (\226\136\128 X : List[Form], \226\136\128 q : Form, op_bar_minus_minus(op_minus_minus_gt((p : Form), CONJLIST(X))) && MEM(q, X) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(p, q))) && (\226\136\128 X : List[Form], (\226\136\128 q : Form, MEM(q, X) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(p, q))) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(p, CONJLIST(X))))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], op_bar_minus_minus(op_minus_minus_gt(p, CONJLIST(X))) == (\226\136\128 q : Form, MEM(q, X) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(p, q)))
+      #|  \226\136\128 X : List[Form], \226\136\128 Y : List[Form], SUBLIST(Y, X) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(X), CONJLIST(Y)))
+      #|  (p : Form)
+      #|  (h : Form)
+      #|  op_amp_amp((h : Form), CONJLIST((t : List[Form])))
+      #|  \226\136\128 l : List[Form], \226\136\128 m : List[Form], (\226\136\128 p : Form, MEM(p, m) \226\134\146 (\226\136\131 q : Form, MEM(q, l) && op_bar_minus_minus(op_minus_minus_gt(q, p)))) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(l), CONJLIST(m)))
+      #|  op_amp_amp(op_amp_amp((h : Form), CONJLIST((t : List[Form]))), CONJLIST((m : List[Form])))
+      #|  op_amp_amp((h : Form), op_amp_amp(CONJLIST((t : List[Form])), CONJLIST((m : List[Form]))))
+      #|  op_amp_amp((h : Form), CONJLIST(APPEND((t : List[Form]), (m : List[Form]))))
+      #|  \226\136\128 l : List[Form], \226\136\128 m : List[Form], op_bar_minus_minus(op_lt_minus_gt(CONJLIST(APPEND(l, m)), op_amp_amp(CONJLIST(l), CONJLIST(m))))
+      #|  \226\136\128 X : List[Form], MEM(False, X) \226\134\146 op_bar_minus_minus(Not(CONJLIST(X)))
+      #|  Box(op_amp_amp((h : Form), CONJLIST((t : List[Form]))))
+      #|  op_amp_amp(Box((h : Form)), Box(CONJLIST((t : List[Form]))))
+      #|  op_amp_amp(Box((h : Form)), CONJLIST(MAP(Box, (t : List[Form]))))
+      #|  \226\136\128 l : List[Form], op_bar_minus_minus(op_lt_minus_gt(CONJLIST(MAP(Box, l)), Box(CONJLIST(l))))
+      #|  (CONSISTENT : (List[Form]) -> Bool)((l : List[Form])) == !op_bar_minus_minus(Not(CONJLIST(l)))
+      #|  \226\136\128 p : Form, CONSISTENT([p]) == !op_bar_minus_minus(Not(p))
+      #|  op_amp_amp((p : Form), Not(p))
+      #|  \226\136\128 X : List[Form], \226\136\128 p : Form, MEM(p, X) && MEM(Not(p), X) \226\134\146 op_bar_minus_minus(Not(CONJLIST(X)))
+      #|  CONJLIST((Y : List[Form]))
+      #|  op_bar_minus_minus(op_minus_minus_gt(CONJLIST((Y : List[Form])), False)) && SUBLIST(Y, (X : List[Form])) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(X), False))
+      #|  \226\136\128 X : List[Form], \226\136\128 Y : List[Form], CONSISTENT(X) && SUBLIST(Y, X) \226\134\146 CONSISTENT(Y)
+      #|  Not(op_amp_amp((h : Form), CONJLIST((t : List[Form]))))
+      #|  \226\136\128 h : Form, \226\136\128 t : List[Form], CONSISTENT(CONS(h, t)) == !op_bar_minus_minus(op_bar_bar(Not(h), Not(CONJLIST(t))))
+      #|  op_amp_amp((p : Form), Not(p))
+      #|  \226\136\128 X : List[Form], \226\136\128 p : Form, MEM(p, X) && MEM(Not(p), X) \226\134\146 !CONSISTENT(X)
       #|  False
-      #|  |-- ((Not h || Not CONJLIST t) --> (Not Not h || Not CONJLIST t)\n         --> (Not CONJLIST t))
-      #|  forall h t. CONSISTENT t\n         ==> CONSISTENT (CONS h t) \\/ CONSISTENT (CONS (Not h) t)
-      #|  forall X. MEM False X ==> ~ CONSISTENT X
-      #|  MAXIMAL_CONSISTENT p X <=>\n   CONSISTENT X /\\ NOREPETITION X /\\\n   (forall q. q SUBFORMULA p ==> MEM q X \\/ MEM (Not q) X)
-      #|  ~ CONSISTENT X
-      #|  |-- (CONJLIST X --> False)
-      #|  |-- (CONJLIST X --> b && Not b)
-      #|  MEM (Not b) X
-      #|  forall p X A b. MAXIMAL_CONSISTENT p X /\\\n             (forall q. MEM q A ==> MEM q X) /\\\n             b SUBFORMULA p /\\\n             |-- (CONJLIST A --> b)\n             ==> MEM b X
-      #|  forall X p q. MAXIMAL_CONSISTENT p X /\\ q SUBFORMULA p\n           ==> (MEM (Not q) X <=> ~ MEM q X)
-      #|  forall X p q. MAXIMAL_CONSISTENT p X /\\ q SUBFORMULA p\n           ==> (MEM q X \\/ MEM (Not q) X)
-      #|  q && Not q
-      #|  |-- (Not (CONJLIST w))
-      #|  MEM (Not q) w
-      #|  MEM (q:form) w
-      #|  forall p w q. MAXIMAL_CONSISTENT p w /\\ q SUBFORMULA p\n           ==> (MEM q w <=> |-- (CONJLIST w --> q))
-      #|  q && Not q
-      #|  |-- (Not (CONJLIST w))
-      #|  MEM (q:form) w
-      #|  MEM (Not q) w
-      #|  forall p w q. MAXIMAL_CONSISTENT p w /\\ q SUBFORMULA p\n           ==> (MEM (Not q) w <=> |-- (CONJLIST w --> Not q))
-      #|  (forall p q. p SUBFORMULA q ==> p SUBSENTENCE q) /\\\n   (forall p q. p SUBFORMULA q ==> Not p SUBSENTENCE q)
-      #|  GL_STANDARD_FRAME p (W,R) <=>\n   W = {w | MAXIMAL_CONSISTENT p w /\\\n            (forall q. MEM q w ==> q SUBSENTENCE p)} /\\\n   ITF (W,R) /\\\n   (forall q w. Box q SUBFORMULA p /\\ w IN W\n          ==> (MEM (Box q) w <=> forall x. R w x ==> MEM q x))
-      #|  forall p q. p SUBFORMULA q ==> p SUBSENTENCE q
-      #|  forall p q. p SUBFORMULA q ==> Not p SUBSENTENCE q
-      #|  GL_STANDARD_MODEL p (W,R) V <=>\n   GL_STANDARD_FRAME p (W,R) /\\\n   (forall a w. w IN W ==> (V a w <=> MEM (Atom a) w /\\ Atom a SUBFORMULA p))
-      #|  w':form list
-      #|  a SUBFORMULA p
-      #|  w':form list
-      #|  w:form list
-      #|  a:form
-      #|  w: form list
-      #|  a: form
-      #|  w':form list
-      #|  a SUBFORMULA p
-      #|  Box a
-      #|  a SUBFORMULA p
-      #|  |-- (CONJLIST w --> q2) \\/ |-- (CONJLIST w --> Not q2)
-      #|  |-- (CONJLIST w --> q1) \\/ |-- (CONJLIST w --> Not q1)
-      #|  forall q. q SUBFORMULA p\n          ==> (MEM (Not q) w <=> |-- (CONJLIST w --> Not q))
-      #|  (q1 --> q2) && (q2 --> q1)
-      #|  q1 && Not q1
-      #|  MEM q1 w \\/ MEM (Not q1) w
-      #|  q1 || q2
-      #|  ~ (|-- (CONJLIST w --> False))
-      #|  MEM q2 w \\/ MEM (Not q2) w
-      #|  MEM q1 w \\/ MEM (Not q1) w
-      #|  |-- (CONJLIST w --> q1 || q2)
-      #|  forall q. q SUBFORMULA p ==> (MEM q w <=> |-- (CONJLIST w --> q))
-      #|  w:form list
-      #|  P /\\ (P /\\ Q ==> R) ==> ((P ==> Q) ==> R)
-      #|  w:form list
-      #|  P /\\ (P /\\ Q ==> R) ==> ((P ==> Q) ==> R)
-      #|  w: form list
-      #|  P /\\ (P /\\ Q ==> R) ==> ((P ==> Q) ==> R)
-      #|  Not True
-      #|  True SUBFORMULA p
-      #|  q:form
-      #|  q:form
-      #|  forall W R p V q.\n     ~ |-- p /\\\n     GL_STANDARD_MODEL p (W,R) V /\\\n     q SUBFORMULA p\n     ==> forall w. w IN W ==> (MEM q w <=> holds (W,R) V q w)
-      #|  M:form list
-      #|  CONS (Not h) X
-      #|  M:form list
-      #|  CONS (h:form) X
-      #|  CONSISTENT (CONS (h:form) X)
-      #|  X:form list
-      #|  MEM (Not h) X
-      #|  X:form list
-      #|  MEM (h:form) X
-      #|  X:form list
-      #|  M:form list
-      #|  X:form list
-      #|  L':form list
-      #|  p:form
-      #|  X':form list
-      #|  forall L X. CONSISTENT X /\\ NOREPETITION X /\\\n           (forall q. MEM q X ==> q SUBSENTENCE p) /\\\n           (forall q. MEM q L ==> q SUBFORMULA p) /\\\n           (forall q. q SUBFORMULA p ==> MEM q L \\/ MEM q X \\/ MEM (Not q) X)\n           ==> ?M. MAXIMAL_CONSISTENT p M /\\\n                   (forall q. MEM q M ==> q SUBSENTENCE p) /\\\n                   X SUBLIST M
-      #|  forall p X. CONSISTENT X /\\\n         (forall q. MEM q X ==> q SUBSENTENCE p)\n         ==> ?M. MAXIMAL_CONSISTENT p M /\\\n                 (forall q. MEM q M ==> q SUBSENTENCE p) /\\\n                 X SUBLIST M
-      #|  M:form list
-      #|  [Not p]
-      #|  p:form
-      #|  forall p. ~ |-- p\n       ==> ?M. MAXIMAL_CONSISTENT p M /\\\n               MEM (Not p) M /\\\n               (forall q. MEM q M ==> q SUBSENTENCE p)
-      #|  GL_STANDARD_REL p w x <=>\n   MAXIMAL_CONSISTENT p w /\\ (forall q. MEM q w ==> q SUBSENTENCE p) /\\\n   MAXIMAL_CONSISTENT p x /\\ (forall q. MEM q x ==> q SUBSENTENCE p) /\\\n   (forall B. MEM (Box B) w ==> MEM (Box B) x /\\ MEM B x) /\\\n   (?E. MEM (Box E) x /\\ MEM (Not (Box E)) w)
-      #|  ~ CONSISTENT M
-      #|  {q | q SUBSENTENCE p} =\n       {q | q SUBFORMULA p} UNION IMAGE (Not) {q | q SUBFORMULA p}
-      #|  {l | NOREPETITION l /\\\n           forall q. MEM q l ==> q IN {q | q SUBSENTENCE p}}
-      #|  forall p. ~ |-- p\n       ==> ITF ({M | MAXIMAL_CONSISTENT p M /\\\n                     (forall q. MEM q M ==> q SUBSENTENCE p)},\n                GL_STANDARD_REL p)
-      #|  h:form
+      #|  op_bar_minus_minus(op_minus_minus_gt(op_bar_bar(Not((h : Form)), Not(CONJLIST((t : List[Form])))), op_minus_minus_gt(op_bar_bar(Not(Not(h)), Not(CONJLIST(t))), Not(CONJLIST(t)))))
+      #|  \226\136\128 h : Form, \226\136\128 t : List[Form], CONSISTENT(t) \226\134\146 CONSISTENT(CONS(h, t)) || CONSISTENT(CONS(Not(h), t))
+      #|  \226\136\128 X : List[Form], MEM(False, X) \226\134\146 !CONSISTENT(X)
+      #|  (MAXIMAL_CONSISTENT : (Form, List[Form]) -> Bool)((p : Form), (X : List[Form])) == (CONSISTENT(X) && NOREPETITION(X) && (\226\136\128 q : Form, SUBFORMULA(q, p) \226\134\146 MEM(q, X) || MEM(Not(q), X)))
+      #|  !CONSISTENT((X : List[Form]))
+      #|  op_bar_minus_minus(op_minus_minus_gt(CONJLIST((X : List[Form])), False))
+      #|  op_bar_minus_minus(op_minus_minus_gt(CONJLIST((X : List[Form])), op_amp_amp((b : Form), Not(b))))
+      #|  MEM(Not((b : Form)), (X : List[Form]))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], \226\136\128 A : List[Form], \226\136\128 b : Form, MAXIMAL_CONSISTENT(p, X) && (\226\136\128 q : Form, MEM(q, A) \226\134\146 MEM(q, X)) && SUBFORMULA(b, p) && op_bar_minus_minus(op_minus_minus_gt(CONJLIST(A), b)) \226\134\146 MEM(b, X)
+      #|  \226\136\128 X : List[Form], \226\136\128 p : Form, \226\136\128 q : Form, MAXIMAL_CONSISTENT(p, X) && SUBFORMULA(q, p) \226\134\146 MEM(Not(q), X) == !MEM(q, X)
+      #|  \226\136\128 X : List[Form], \226\136\128 p : Form, \226\136\128 q : Form, MAXIMAL_CONSISTENT(p, X) && SUBFORMULA(q, p) \226\134\146 MEM(q, X) || MEM(Not(q), X)
+      #|  op_amp_amp((q : Form), Not(q))
+      #|  op_bar_minus_minus(Not(CONJLIST((w : List[Form]))))
+      #|  MEM(Not((q : Form)), (w : List[Form]))
+      #|  MEM((q : Form), (w : List[Form]))
+      #|  \226\136\128 p : Form, \226\136\128 w : List[Form], \226\136\128 q : Form, MAXIMAL_CONSISTENT(p, w) && SUBFORMULA(q, p) \226\134\146 MEM(q, w) == op_bar_minus_minus(op_minus_minus_gt(CONJLIST(w), q))
+      #|  op_amp_amp((q : Form), Not(q))
+      #|  op_bar_minus_minus(Not(CONJLIST((w : List[Form]))))
+      #|  MEM((q : Form), (w : List[Form]))
+      #|  MEM(Not((q : Form)), (w : List[Form]))
+      #|  \226\136\128 p : Form, \226\136\128 w : List[Form], \226\136\128 q : Form, MAXIMAL_CONSISTENT(p, w) && SUBFORMULA(q, p) \226\134\146 MEM(Not(q), w) == op_bar_minus_minus(op_minus_minus_gt(CONJLIST(w), Not(q)))
+      #|  (\226\136\128 p : Form, \226\136\128 q : Form, SUBFORMULA(p, q) \226\134\146 (SUBSENTENCE : (Form, Form) -> Bool)(p, q)) && (\226\136\128 p : Form, \226\136\128 q : Form, SUBFORMULA(p, q) \226\134\146 SUBSENTENCE(Not(p), q))
+      #|  (GL_STANDARD_FRAME : (Form, ((List[Form]) -> Bool, (List[Form], List[Form]) -> Bool)) -> Bool)((p : Form), ((W : (List[Form]) -> Bool), (R : (List[Form], List[Form]) -> Bool))) == (W == {(w : List[Form]) | MAXIMAL_CONSISTENT(p, w) && (\226\136\128 q : Form, MEM(q, w) \226\134\146 SUBSENTENCE(q, p))} && ITF((W, R)) && (\226\136\128 q : Form, \226\136\128 w : List[Form], SUBFORMULA(Box(q), p) && IN(w, W) \226\134\146 MEM(Box(q), w) == (\226\136\128 x : List[Form], R(w, x) \226\134\146 MEM(q, x))))
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, SUBFORMULA(p, q) \226\134\146 SUBSENTENCE(p, q)
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, SUBFORMULA(p, q) \226\134\146 SUBSENTENCE(Not(p), q)
+      #|  (GL_STANDARD_MODEL : (Form, ((List[Form]) -> Bool, (List[Form], List[Form]) -> Bool), (List[Char], List[Form]) -> Bool) -> Bool)((p : Form), ((W : (List[Form]) -> Bool), (R : (List[Form], List[Form]) -> Bool)), (V : (List[Char], List[Form]) -> Bool)) == (GL_STANDARD_FRAME(p, (W, R)) && (\226\136\128 a : List[Char], \226\136\128 w : List[Form], IN(w, W) \226\134\146 V(a, w) == (MEM(Atom(a), w) && SUBFORMULA(Atom(a), p))))
+      #|  (w' : List[Form])
+      #|  SUBFORMULA((a : Form), (p : Form))
+      #|  (w' : List[Form])
+      #|  (w : List[Form])
+      #|  (a : Form)
+      #|  (w : List[Form])
+      #|  (a : Form)
+      #|  (w' : List[Form])
+      #|  SUBFORMULA((a : Form), (p : Form))
+      #|  Box((a : Form))
+      #|  SUBFORMULA((a : Form), (p : Form))
+      #|  op_bar_minus_minus(op_minus_minus_gt(CONJLIST((w : List[Form])), (q2 : Form))) || op_bar_minus_minus(op_minus_minus_gt(CONJLIST(w), Not(q2)))
+      #|  op_bar_minus_minus(op_minus_minus_gt(CONJLIST((w : List[Form])), (q1 : Form))) || op_bar_minus_minus(op_minus_minus_gt(CONJLIST(w), Not(q1)))
+      #|  \226\136\128 q : Form, SUBFORMULA(q, (p : Form)) \226\134\146 MEM(Not(q), (w : List[Form])) == op_bar_minus_minus(op_minus_minus_gt(CONJLIST(w), Not(q)))
+      #|  op_amp_amp(op_minus_minus_gt((q1 : Form), (q2 : Form)), op_minus_minus_gt(q2, q1))
+      #|  op_amp_amp((q1 : Form), Not(q1))
+      #|  MEM((q1 : Form), (w : List[Form])) || MEM(Not(q1), w)
+      #|  op_bar_bar((q1 : Form), (q2 : Form))
+      #|  !op_bar_minus_minus(op_minus_minus_gt(CONJLIST((w : List[Form])), False))
+      #|  MEM((q2 : Form), (w : List[Form])) || MEM(Not(q2), w)
+      #|  MEM((q1 : Form), (w : List[Form])) || MEM(Not(q1), w)
+      #|  op_bar_minus_minus(op_minus_minus_gt(CONJLIST((w : List[Form])), op_bar_bar((q1 : Form), (q2 : Form))))
+      #|  \226\136\128 q : Form, SUBFORMULA(q, (p : Form)) \226\134\146 MEM(q, (w : List[Form])) == op_bar_minus_minus(op_minus_minus_gt(CONJLIST(w), q))
+      #|  (w : List[Form])
+      #|  (P : Bool) && (P && (Q : Bool) \226\134\146 (R : Bool)) \226\134\146 (P \226\134\146 Q) \226\134\146 R
+      #|  (w : List[Form])
+      #|  (P : Bool) && (P && (Q : Bool) \226\134\146 (R : Bool)) \226\134\146 (P \226\134\146 Q) \226\134\146 R
+      #|  (w : List[Form])
+      #|  (P : Bool) && (P && (Q : Bool) \226\134\146 (R : Bool)) \226\134\146 (P \226\134\146 Q) \226\134\146 R
+      #|  Not(True)
+      #|  SUBFORMULA(True, (p : Form))
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  \226\136\128 W : (List[Form]) -> Bool, \226\136\128 R : (List[Form], List[Form]) -> Bool, \226\136\128 p : Form, \226\136\128 V : (List[Char], List[Form]) -> Bool, \226\136\128 q : Form, !op_bar_minus_minus(p) && GL_STANDARD_MODEL(p, (W, R), V) && SUBFORMULA(q, p) \226\134\146 (\226\136\128 w : List[Form], IN(w, W) \226\134\146 MEM(q, w) == holds((W, R), V, q, w))
+      #|  (M : List[Form])
+      #|  CONS(Not((h : Form)), (X : List[Form]))
+      #|  (M : List[Form])
+      #|  CONS((h : Form), (X : List[Form]))
+      #|  CONSISTENT(CONS((h : Form), (X : List[Form])))
+      #|  (X : List[Form])
+      #|  MEM(Not((h : Form)), (X : List[Form]))
+      #|  (X : List[Form])
+      #|  MEM((h : Form), (X : List[Form]))
+      #|  (X : List[Form])
+      #|  (M : List[Form])
+      #|  (X : List[Form])
+      #|  (L' : List[Form])
+      #|  (p : Form)
+      #|  (X' : List[Form])
+      #|  \226\136\128 L : List[Form], \226\136\128 X : List[Form], CONSISTENT(X) && NOREPETITION(X) && (\226\136\128 q : Form, MEM(q, X) \226\134\146 SUBSENTENCE(q, (p : Form))) && (\226\136\128 q : Form, MEM(q, L) \226\134\146 SUBFORMULA(q, p)) && (\226\136\128 q : Form, SUBFORMULA(q, p) \226\134\146 MEM(q, L) || MEM(q, X) || MEM(Not(q), X)) \226\134\146 (\226\136\131 M : List[Form], MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)) && SUBLIST(X, M))
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], CONSISTENT(X) && (\226\136\128 q : Form, MEM(q, X) \226\134\146 SUBSENTENCE(q, p)) \226\134\146 (\226\136\131 M : List[Form], MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)) && SUBLIST(X, M))
+      #|  (M : List[Form])
+      #|  [Not((p : Form))]
+      #|  (p : Form)
+      #|  \226\136\128 p : Form, !op_bar_minus_minus(p) \226\134\146 (\226\136\131 M : List[Form], MAXIMAL_CONSISTENT(p, M) && MEM(Not(p), M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)))
+      #|  (GL_STANDARD_REL : (Form, List[Form], List[Form]) -> Bool)((p : Form), (w : List[Form]), (x : List[Form])) == (MAXIMAL_CONSISTENT(p, w) && (\226\136\128 q : Form, MEM(q, w) \226\134\146 SUBSENTENCE(q, p)) && MAXIMAL_CONSISTENT(p, x) && (\226\136\128 q : Form, MEM(q, x) \226\134\146 SUBSENTENCE(q, p)) && (\226\136\128 B : Form, MEM(Box(B), w) \226\134\146 MEM(Box(B), x) && MEM(B, x)) && (\226\136\131 E : Form, MEM(Box(E), x) && MEM(Not(Box(E)), w)))
+      #|  !CONSISTENT((M : List[Form]))
+      #|  {(q : Form) | SUBSENTENCE(q, (p : Form))} == UNION({(q : Form) | SUBFORMULA(q, p)}, IMAGE(Not, {(q : Form) | SUBFORMULA(q, p)}))
+      #|  {(l : List[Form]) | NOREPETITION(l) && (\226\136\128 q : Form, MEM(q, l) \226\134\146 IN(q, {(q : Form) | SUBSENTENCE(q, (p : Form))}))}
+      #|  \226\136\128 p : Form, !op_bar_minus_minus(p) \226\134\146 ITF(({(M : List[Form]) | MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p))}, GL_STANDARD_REL(p)))
+      #|  (h : Form)
       #|  ~ MEM p (match h with Box c -> [Box c] | _ -> [])
-      #|  ?c. h = Box c
+      #|  \226\136\131 c : Form, (h : Form) == Box(c)
       #|  forall p l. MEM p (FLATMAP (\\x. match x with Box c -> [Box c] | _ -> []) l) <=>\n           (?q. p = Box q /\\ MEM p l)
-      #|  h:form
+      #|  (h : Form)
       #|  CONJLIST (match h with Box c -> [Box c] | _ -> [])
       #|  CONJLIST (MAP (Box) (match h with Box c -> [c; Box c] | _ -> [])) &&\n       CONJLIST (MAP (Box)\n         (FLATMAP (\\x. match x with Box c -> [c; Box c] | _ -> []) t))
       #|  CONJLIST (match h with Box c -> [Box c] | _ -> []) &&\n       CONJLIST (FLATMAP (\\x. match x with Box c -> [Box c] | _ -> []) t)
       #|  forall w. |-- (CONJLIST (FLATMAP (\\x. match x with Box c -> [Box c] | _ -> []) w)\n              -->\n              CONJLIST (MAP (Box)\n                (FLATMAP (\\x. match x with Box c -> [c; Box c] | _ -> []) w)))
-      #|  Box q
-      #|  Not q
-      #|  q:form
-      #|  Box B
-      #|  Box B
-      #|  X:form list
-      #|  Box a
-      #|  Box a SUBSENTENCE p
-      #|  y:form
+      #|  Box((q : Form))
+      #|  Not((q : Form))
+      #|  (q : Form)
+      #|  Box((B : Form))
+      #|  Box((B : Form))
+      #|  (X : List[Form])
+      #|  Box((a : Form))
+      #|  SUBSENTENCE(Box((a : Form)), (p : Form))
+      #|  (y : Form)
       #|  CONS (Not q) (CONS (Box q)\n        (FLATMAP (\\x. match x with Box c -> [c; Box c] | _ -> []) w))
-      #|  p:form
-      #|  Not (CONJLIST(CONS x l))
-      #|  CONJLIST (CONS x l) --> False
-      #|  Box (CONJLIST l)
-      #|  forall x y l.\n        |-- (Not (Not y && CONJLIST (CONS x l)))\n        ==> |-- ((CONJLIST (MAP (Box) l)) --> Box(x --> y))
+      #|  (p : Form)
+      #|  Not(CONJLIST(CONS((x : Form), (l : List[Form]))))
+      #|  op_minus_minus_gt(CONJLIST(CONS((x : Form), (l : List[Form]))), False)
+      #|  Box(CONJLIST((l : List[Form])))
+      #|  \226\136\128 x : Form, \226\136\128 y : Form, \226\136\128 l : List[Form], op_bar_minus_minus(Not(op_amp_amp(Not(y), CONJLIST(CONS(x, l))))) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(MAP(Box, l)), Box(op_minus_minus_gt(x, y))))
       #|  CONJLIST (MAP (Box)\n        (FLATMAP (\\x. match x with Box c -> [c; Box c] | _ -> []) w))
-      #|  Box(Box q --> q)
+      #|  Box(op_minus_minus_gt(Box((q : Form)), q))
       #|  FLATMAP (\\x. match x with Box c -> [Box c] | _ -> []) w
-      #|  p:form
+      #|  (p : Form)
       #|  CONSISTENT (CONS (Not q) (CONS (Box q)\n       (FLATMAP (\\x. match x with Box c -> [c; Box c] | _ -> []) w)))
-      #|  forall p M w q.\n     ~ |-- p /\\\n     MAXIMAL_CONSISTENT p M /\\\n     (forall q. MEM q M ==> q SUBSENTENCE p) /\\\n     MAXIMAL_CONSISTENT p w /\\\n     (forall q. MEM q w ==> q SUBSENTENCE p) /\\\n     MEM (Not p) M /\\\n     Box q SUBFORMULA p /\\\n     (forall x. GL_STANDARD_REL p w x ==> MEM q x)\n     ==> MEM (Box q) w
-      #|  M:form list
-      #|  M:form list
-      #|  p:form
-      #|  p:form
-      #|  \\a w. Atom a SUBFORMULA p /\\ MEM (Atom a) w
-      #|  p:form
-      #|  GL_STANDARD_REL p
-      #|  {M | MAXIMAL_CONSISTENT p M /\\ (forall q. MEM q M ==> q SUBSENTENCE p)}
-      #|  forall M p.\n     ~(|-- p) /\\\n     MAXIMAL_CONSISTENT p M /\\\n     MEM (Not p) M /\\\n     (forall q. MEM q M ==> q SUBSENTENCE p)\n     ==>\n     ~holds\n        ({M | MAXIMAL_CONSISTENT p M /\\ (forall q. MEM q M ==> q SUBSENTENCE p)},\n         GL_STANDARD_REL p)\n        (\\a w. Atom a SUBFORMULA p /\\ MEM (Atom a) w)\n        p M
-      #|  M:form list
-      #|  ~ |-- p
-      #|  \\a w. Atom a SUBFORMULA p /\\ MEM (Atom a) w
-      #|  forall p. ~(|-- p)\n       ==>\n       ~holds_in\n          ({M | MAXIMAL_CONSISTENT p M /\\ (forall q. MEM q M ==> q SUBSENTENCE p)},\n           GL_STANDARD_REL p)\n          p
-      #|  ({M | MAXIMAL_CONSISTENT p M /\\\n                    (forall q. MEM q M ==> q SUBSENTENCE p)},\n               GL_STANDARD_REL p)
-      #|  forall p. ITF:(form list->bool)#(form list->form list->bool)->bool |= p\n       ==> |-- p
-      #|  \\w1:form list w2:A. w1 IN W1 /\\ w2 = f w1
-      #|  f (w1:form list):A
-      #|  \\a:string w:A. ?x:form list. w = f x /\\ V1 a x
-      #|  \\x y:A. ?a b:form list.\n        a IN W1 /\\ b IN W1 /\\ x = f a /\\ y = f b /\\ R1 a b
-      #|  IMAGE (f:form list->A) W1
-      #|  (:num)
-      #|  (:form list) <=_c (:A)
-      #|  ?f:form list->A. (forall x y. f x = f y ==> x = y)
-      #|  INFINITE (:A)\n     ==> forall p. ITF:(A->bool)#(A->A->bool)->bool |= p\n             ==> ITF:(form list->bool)#(form list->form list->bool)->bool |= p
-      #|  forall p. INFINITE (:A) /\\ ITF:(A->bool)#(A->A->bool)->bool |= p ==> |-- p
-      #|  forall p q r. |-- (p && q && r --> p && r)
-      #|  forall p. |-- (Box p --> Box (Box p))
-      #|  forall p q. |-- (Box (p --> q) && Box p --> Box q)
-      #|  forall p q. |-- (Box (p <-> q) --> (Box p <-> Box q))
-      #|  forall l m x:A. set_of_list l = set_of_list m /\\ MEM x l\n             ==> MEM x m
-      #|  p:form
-      #|  forall X Y. set_of_list X = set_of_list Y\n         ==> |-- (CONJLIST X --> CONJLIST Y)
-      #|  forall X Y. set_of_list X = set_of_list Y\n         ==> |-- (CONJLIST X <-> CONJLIST Y)
-      #|  Not (CONJLIST Y)
-      #|  forall X Y. set_of_list X = set_of_list Y /\\ CONSISTENT X\n         ==> CONSISTENT Y
-      #|  forall p X Y. set_of_list X = set_of_list Y /\\ NOREPETITION Y /\\\n           MAXIMAL_CONSISTENT p X\n           ==> MAXIMAL_CONSISTENT p Y
-      #|  forall p u1 u2 w1 w2.\n     set_of_list u1 = set_of_list w1 /\\ NOREPETITION w1 /\\\n     set_of_list u2 = set_of_list w2 /\\ NOREPETITION w2 /\\\n     GL_STANDARD_REL p u1 u2\n     ==> GL_STANDARD_REL p w1 w2
-      #|  forall M. MAXIMAL_CONSISTENT p M /\\\n       (forall q. MEM q M ==> q SUBSENTENCE p)\n       ==> set_of_list M IN GL_STDWORLDS p
+      #|  \226\136\128 p : Form, \226\136\128 M : List[Form], \226\136\128 w : List[Form], \226\136\128 q : Form, !op_bar_minus_minus(p) && MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)) && MAXIMAL_CONSISTENT(p, w) && (\226\136\128 q : Form, MEM(q, w) \226\134\146 SUBSENTENCE(q, p)) && MEM(Not(p), M) && SUBFORMULA(Box(q), p) && (\226\136\128 x : List[Form], GL_STANDARD_REL(p, w, x) \226\134\146 MEM(q, x)) \226\134\146 MEM(Box(q), w)
+      #|  (M : List[Form])
+      #|  (M : List[Form])
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  (a : List[Char]) => (w : List[Form]) => SUBFORMULA(Atom(a), (p : Form)) && MEM(Atom(a), w)
+      #|  (p : Form)
+      #|  GL_STANDARD_REL((p : Form))
+      #|  {(M : List[Form]) | MAXIMAL_CONSISTENT((p : Form), M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p))}
+      #|  \226\136\128 M : List[Form], \226\136\128 p : Form, !op_bar_minus_minus(p) && MAXIMAL_CONSISTENT(p, M) && MEM(Not(p), M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)) \226\134\146 !holds(({(M : List[Form]) | MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p))}, GL_STANDARD_REL(p)), (a : List[Char]) => (w : List[Form]) => SUBFORMULA(Atom(a), p) && MEM(Atom(a), w), p, M)
+      #|  (M : List[Form])
+      #|  !op_bar_minus_minus((p : Form))
+      #|  (a : List[Char]) => (w : List[Form]) => SUBFORMULA(Atom(a), (p : Form)) && MEM(Atom(a), w)
+      #|  \226\136\128 p : Form, !op_bar_minus_minus(p) \226\134\146 !holds_in(({(M : List[Form]) | MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p))}, GL_STANDARD_REL(p)), p)
+      #|  ({(M : List[Form]) | MAXIMAL_CONSISTENT((p : Form), M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p))}, GL_STANDARD_REL(p))
+      #|  \226\136\128 p : Form, (op_bar_eq : ((((List[Form]) -> Bool, (List[Form], List[Form]) -> Bool)) -> Bool, Form) -> Bool)((ITF : (((List[Form]) -> Bool, (List[Form], List[Form]) -> Bool)) -> Bool), p) \226\134\146 op_bar_minus_minus(p)
+      #|  (w1 : List[Form]) => (w2 : A) => IN(w1, (W1 : (List[Form]) -> Bool)) && w2 == (f : (List[Form]) -> A)(w1)
+      #|  (f : (List[Form]) -> A)((w1 : List[Form]))
+      #|  (a : List[Char]) => (w : A) => \226\136\131 x : List[Form], w == (f : (List[Form]) -> A)(x) && (V1 : (List[Char], List[Form]) -> Bool)(a, x)
+      #|  (x : A) => (y : A) => \226\136\131 a : List[Form], \226\136\131 b : List[Form], IN(a, (W1 : (List[Form]) -> Bool)) && IN(b, W1) && x == (f : (List[Form]) -> A)(a) && y == f(b) && (R1 : (List[Form], List[Form]) -> Bool)(a, b)
+      #|  IMAGE((f : (List[Form]) -> A), (W1 : (List[Form]) -> Bool))
+      #|  (UNIV : (Num) -> Bool)
+      #|  (op_lt_eq_us_c : ((List[Form]) -> Bool, (A) -> Bool) -> Bool)(UNIV, (UNIV : (A) -> Bool))
+      #|  \226\136\131 f : (List[Form]) -> A, \226\136\128 x : List[Form], \226\136\128 y : List[Form], f(x) == f(y) \226\134\146 x == y
+      #|  (INFINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) \226\134\146 (\226\136\128 p : Form, (op_bar_eq : ((((A) -> Bool, (A, A) -> Bool)) -> Bool, Form) -> Bool)((ITF : (((A) -> Bool, (A, A) -> Bool)) -> Bool), p) \226\134\146 (op_bar_eq : ((((List[Form]) -> Bool, (List[Form], List[Form]) -> Bool)) -> Bool, Form) -> Bool)((ITF : (((List[Form]) -> Bool, (List[Form], List[Form]) -> Bool)) -> Bool), p))
+      #|  \226\136\128 p : Form, (INFINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) && (op_bar_eq : ((((A) -> Bool, (A, A) -> Bool)) -> Bool, Form) -> Bool)((ITF : (((A) -> Bool, (A, A) -> Bool)) -> Bool), p) \226\134\146 op_bar_minus_minus(p)
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(op_minus_minus_gt(op_amp_amp(p, op_amp_amp(q, r)), op_amp_amp(p, r)))
+      #|  \226\136\128 p : Form, op_bar_minus_minus(op_minus_minus_gt(Box(p), Box(Box(p))))
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(op_minus_minus_gt(op_amp_amp(Box(op_minus_minus_gt(p, q)), Box(p)), Box(q)))
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(op_minus_minus_gt(Box(op_lt_minus_gt(p, q)), op_lt_minus_gt(Box(p), Box(q))))
+      #|  \226\136\128 l : List[A], \226\136\128 m : List[A], \226\136\128 x : A, set_of_list(l) == set_of_list(m) && MEM(x, l) \226\134\146 MEM(x, m)
+      #|  (p : Form)
+      #|  \226\136\128 X : List[Form], \226\136\128 Y : List[Form], set_of_list(X) == set_of_list(Y) \226\134\146 op_bar_minus_minus(op_minus_minus_gt(CONJLIST(X), CONJLIST(Y)))
+      #|  \226\136\128 X : List[Form], \226\136\128 Y : List[Form], set_of_list(X) == set_of_list(Y) \226\134\146 op_bar_minus_minus(op_lt_minus_gt(CONJLIST(X), CONJLIST(Y)))
+      #|  Not(CONJLIST((Y : List[Form])))
+      #|  \226\136\128 X : List[Form], \226\136\128 Y : List[Form], set_of_list(X) == set_of_list(Y) && CONSISTENT(X) \226\134\146 CONSISTENT(Y)
+      #|  \226\136\128 p : Form, \226\136\128 X : List[Form], \226\136\128 Y : List[Form], set_of_list(X) == set_of_list(Y) && NOREPETITION(Y) && MAXIMAL_CONSISTENT(p, X) \226\134\146 MAXIMAL_CONSISTENT(p, Y)
+      #|  \226\136\128 p : Form, \226\136\128 u1 : List[Form], \226\136\128 u2 : List[Form], \226\136\128 w1 : List[Form], \226\136\128 w2 : List[Form], set_of_list(u1) == set_of_list(w1) && NOREPETITION(w1) && set_of_list(u2) == set_of_list(w2) && NOREPETITION(w2) && GL_STANDARD_REL(p, u1, u2) \226\134\146 GL_STANDARD_REL(p, w1, w2)
+      #|  \226\136\128 M : List[Form], MAXIMAL_CONSISTENT((p : Form), M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)) \226\134\146 IN(set_of_list(M), (GL_STDWORLDS : (Form, (Form) -> Bool) -> Bool)(p))
       #|  (==>)
-      #|  forall w1 w2. GL_STANDARD_REL p w1 w2\n           ==> GL_STDREL p (set_of_list w1) (set_of_list w2)
-      #|  forall p w1 w2. GL_STDREL p w1 w2 ==>\n             w1 IN GL_STDWORLDS p /\\\n             w2 IN GL_STDWORLDS p
-      #|  y2:form list
-      #|  y2:form list
-      #|  x2:form list
-      #|  list_of_set u2:form list
-      #|  set_of_list u1:form->bool
-      #|  forall p. BISIMIMULATION\n       (\n         {M | MAXIMAL_CONSISTENT p M /\\ (forall q. MEM q M ==> q SUBSENTENCE p)},\n         GL_STANDARD_REL p,\n         (\\a w. Atom a SUBFORMULA p /\\ MEM (Atom a) w)\n       )\n       (GL_STDWORLDS p,\n        GL_STDREL p,\n        (\\a w. Atom a SUBFORMULA p /\\ Atom a IN w))\n       (\\w1 w2.\n          MAXIMAL_CONSISTENT p w1 /\\\n          (forall q. MEM q w1 ==> q SUBSENTENCE p) /\\\n          w2 IN GL_STDWORLDS p /\\\n          set_of_list w1 = w2)
-      #|  (\\w1 w2.\n          MAXIMAL_CONSISTENT p w1 /\\\n          (forall q. MEM q w1 ==> q SUBSENTENCE p) /\\\n          w2 IN GL_STDWORLDS p /\\\n          set_of_list w1 = w2)
-      #|  (p <=> q) ==> (~p ==> ~q)
-      #|  set_of_list M:form->bool
-      #|  \\a w. Atom a SUBFORMULA p /\\ Atom a IN w
-      #|  ~ |-- p
-      #|  forall p. ~(|-- p) ==> ~holds_in (GL_STDWORLDS p, GL_STDREL p) p
+      #|  \226\136\128 w1 : List[Form], \226\136\128 w2 : List[Form], GL_STANDARD_REL((p : Form), w1, w2) \226\134\146 (GL_STDREL : (Form, (Form) -> Bool, (Form) -> Bool) -> Bool)(p, set_of_list(w1), set_of_list(w2))
+      #|  \226\136\128 p : Form, \226\136\128 w1 : (Form) -> Bool, \226\136\128 w2 : (Form) -> Bool, GL_STDREL(p, w1, w2) \226\134\146 IN(w1, GL_STDWORLDS(p)) && IN(w2, GL_STDWORLDS(p))
+      #|  (y2 : List[Form])
+      #|  (y2 : List[Form])
+      #|  (x2 : List[Form])
+      #|  list_of_set((u2 : (Form) -> Bool))
+      #|  set_of_list((u1 : List[Form]))
+      #|  \226\136\128 p : Form, BISIMIMULATION(({(M : List[Form]) | MAXIMAL_CONSISTENT(p, M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p))}, GL_STANDARD_REL(p), (a : List[Char]) => (w : List[Form]) => SUBFORMULA(Atom(a), p) && MEM(Atom(a), w)), (GL_STDWORLDS(p), GL_STDREL(p), (a : List[Char]) => (w : (Form) -> Bool) => SUBFORMULA(Atom(a), p) && IN(Atom(a), w)), (w1 : List[Form]) => (w2 : (Form) -> Bool) => MAXIMAL_CONSISTENT(p, w1) && (\226\136\128 q : Form, MEM(q, w1) \226\134\146 SUBSENTENCE(q, p)) && IN(w2, GL_STDWORLDS(p)) && set_of_list(w1) == w2)
+      #|  (w1 : List[Form]) => (w2 : (Form) -> Bool) => MAXIMAL_CONSISTENT((p : Form), w1) && (\226\136\128 q : Form, MEM(q, w1) \226\134\146 SUBSENTENCE(q, p)) && IN(w2, GL_STDWORLDS(p)) && set_of_list(w1) == w2
+      #|  (p : Bool) == (q : Bool) \226\134\146 !p \226\134\146 !q
+      #|  set_of_list((M : List[Form]))
+      #|  (a : List[Char]) => (w : (Form) -> Bool) => SUBFORMULA(Atom(a), (p : Form)) && IN(Atom(a), w)
+      #|  !op_bar_minus_minus((p : Form))
+      #|  \226\136\128 p : Form, !op_bar_minus_minus(p) \226\134\146 !holds_in((GL_STDWORLDS(p), GL_STDREL(p)), p)
       #|CONJLIST =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(form,fun(form,bool)) (#CONJLIST:fun(list(form),form) #NIL:list(form))) #True:form)) (#forall:fun(fun(form,bool),bool) (\p:form. (#forall:fun(fun(list(form),bool),bool) (\X:list(form). ((#=:fun(form,fun(form,bool)) (#CONJLIST:fun(list(form),form) ((#CONS:fun(form,fun(list(form),list(form))) p:form) X:list(form)))) (((#COND:fun(bool,fun(form,fun(form,form))) ((#=:fun(list(form),fun(list(form),bool)) X:list(form)) #NIL:list(form))) p:form) ((#&&:fun(form,fun(form,form)) p:form) (#CONJLIST:fun(list(form),form) X:list(form))))))))))
       #|CONJLIST_IMP_MEM =  |- (#forall:fun(fun(form,bool),bool) (\p:form. (#forall:fun(fun(list(form),bool),bool) (\X:list(form). ((#==>:fun(bool,fun(bool,bool)) ((#MEM:fun(form,fun(list(form),bool)) p:form) X:list(form))) (#|--:fun(form,bool) ((#-->:fun(form,fun(form,form)) (#CONJLIST:fun(list(form),form) X:list(form))) p:form)))))))
       #|CONJLIST_MONO =  |- (#forall:fun(fun(list(form),bool),bool) (\X:list(form). (#forall:fun(fun(list(form),bool),bool) (\Y:list(form). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\p:form. ((#==>:fun(bool,fun(bool,bool)) ((#MEM:fun(form,fun(list(form),bool)) p:form) Y:list(form))) ((#MEM:fun(form,fun(list(form),bool)) p:form) X:list(form)))))) (#|--:fun(form,bool) ((#-->:fun(form,fun(form,form)) (#CONJLIST:fun(list(form),form) X:list(form))) (#CONJLIST:fun(list(form),form) Y:list(form)))))))))
