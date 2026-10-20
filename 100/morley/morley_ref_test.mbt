@@ -81751,122 +81751,122 @@ test "100/morley matches 100/morley.ml" {
       #|0..0..11..49..115..1532..3602..solved at 3647
       #|0..0..10..20..58..179..379..820..1479..2357..3698..solved at 5983
       #|100/morley quotations (116):
-      #|  reflect2d t = rotate2d t o cnj o rotate2d(--t)
-      #|  forall s t. reflect2d s o reflect2d t = rotate2d (&2 * (s - t))
-      #|  rotate_about a t x = a + rotate2d t (x - a)
-      #|  reflect_across (a,b) x = a + reflect2d (Arg(b - a)) (x - a)
-      #|  x:complex
-      #|  (a + x) - a:real^N = x
-      #|  forall a b c.\n        ~(b = a) /\\ ~(c = a)\n        ==> reflect_across(a,b) o reflect_across(a,c) =\n            rotate_about a (&2 * Arg((b - a) / (c - a)))
-      #|  forall a b c.\n        ~(b = a) /\\ ~(c = a) /\\ &0 <= Im((c - a) / (b - a))\n        ==> reflect_across(a,c) o reflect_across(a,b) =\n            rotate_about a (&2 * angle(c,a,b))
-      #|  forall a b. ~(a = b) ==> reflect_across(a,b) o reflect_across(a,b) = I
-      #|  (b' - a') * (b - a) = n pow 2 /\\ ~(n = Cx(&0))\n      ==> b - a = ((b - a) * inv n) pow 2 * (b' - a')
-      #|  (z - a) - (z - b):complex = b - a
-      #|  b - a = ((b - a) * n) pow 2 * (cnj za - cnj zb)\n      ==> a + ((b - a) * n) pow 2 * cnj za =\n          b + ((a - b) * n) pow 2 * cnj zb
-      #|  z:complex
-      #|  b:complex
-      #|  a:complex
-      #|  a * a * cnj b = a pow 2 * cnj b
-      #|  ~(a = Cx(&0)) /\\ a * b = c ==> b = c / a
-      #|  cexp(ii * Cx(Arg(b - a))) = (b - a) / Cx(norm(b - a)) /\\\n                cexp(ii * Cx(Arg(a - b))) = (a - b) / Cx(norm(a - b))
-      #|  --ii * --z = ii * z
-      #|  a:complex = b
-      #|  forall a b. reflect_across(a,b) = reflect_across(b,a)
-      #|  a + x - a:real^N = x
-      #|  a + b:real^N = a + c <=> b = c
-      #|  forall n a t. ITER n (rotate_about a t) = rotate_about a (&n * t)
-      #|  forall a b c. &0 <= Im ((c - a) / (b - a)) <=> &0 <= Im((a - b) / (c - b))
-      #|  (forall x. f(g x) = x) /\\ (forall y. g(f y) = y)\n    ==> (f x = y <=> x = g y)
-      #|  rotate_about a t w = z <=> w = rotate_about a (--t) z
-      #|  &2
-      #|  &0
-      #|  a + (b - c):real = a - (c - b)
-      #|  &2 * a = &2 * b <=> a = b
-      #|  ii * t + Cx(&2) * ii * z = ii * u + v * ii <=>\n    t + Cx(&2) * z - u = v
-      #|  (e1:complex) * e2 pow 2 = e3 ==> e1 * (n * e2) pow 2 = e3 * n pow 2
-      #|  ~(z = a)\n    ==> c * (z - a) pow 2 = b * cnj (z - a) * (z - a)\n        ==> c * (z - a) = b * cnj(z - a)
-      #|  z:complex = a
-      #|  ii * a + ii * a = ii * Cx(&2) * a
-      #|  forall a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = t\n        ==> rotate_about a t z = reflect_across (a,b) z
-      #|  rotate_about a (&2 * Arg((b - a) / (z - a))) z
-      #|  a = &4 * pi + t <=> t = a + --(&4 * pi)
-      #|  forall a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = &4 * pi + t\n        ==> rotate_about a t z = reflect_across (a,b) z
-      #|  norm(j pow 3) = &1
-      #|  C - A:complex = j * (B - C) /\\ A - B = j pow 2 * (B - C)
-      #|  forall A B C j.\n        j pow 3 = Cx(&1) /\\ ~(j = Cx(&1)) /\\\n        A + j * B + j pow 2 * C = Cx(&0)\n        ==> dist(A,B) = dist(B,C) /\\ dist(C,A) = dist(B,C)
+      #|  (reflect2d : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((t : Real)) == o(rotate2d(t), o(cnj, rotate2d(-t)))
+      #|  \226\136\128 s : Real, \226\136\128 t : Real, o(reflect2d(s), reflect2d(t)) == rotate2d(real_of_num(2) * (s - t))
+      #|  (rotate_about : (Cart[Real, Tybit0[Unit]], Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Tybit0[Unit]]), (t : Real), (x : Cart[Real, Tybit0[Unit]])) == a + rotate2d(t, x - a)
+      #|  (reflect_across : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]), Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])), (x : Cart[Real, Tybit0[Unit]])) == a + reflect2d(Arg(b - a), x - a)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - a == x
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], !(b == a) && !(c == a) \226\134\146 o(reflect_across((a, b)), reflect_across((a, c))) == rotate_about(a, real_of_num(2) * Arg((b - a) / (c - a)))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], !(b == a) && !(c == a) && real_of_num(0) <= Im((c - a) / (b - a)) \226\134\146 o(reflect_across((a, c)), reflect_across((a, b))) == rotate_about(a, real_of_num(2) * angle((c, a, b)))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], !(a == b) \226\134\146 o(reflect_across((a, b)), reflect_across((a, b))) == I
+      #|  ((b' : Cart[Real, Tybit0[Unit]]) - (a' : Cart[Real, Tybit0[Unit]])) * ((b : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]])) == pow((n : Cart[Real, Tybit0[Unit]]), 2) && !(n == Cx(real_of_num(0))) \226\134\146 b - a == pow((b - a) * inv(n), 2) * (b' - a')
+      #|  (z : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]]) - (z - (b : Cart[Real, Tybit0[Unit]])) == b - a
+      #|  (b : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]]) == pow((b - a) * (n : Cart[Real, Tybit0[Unit]]), 2) * (cnj((za : Cart[Real, Tybit0[Unit]])) - cnj((zb : Cart[Real, Tybit0[Unit]]))) \226\134\146 a + pow((b - a) * n, 2) * cnj(za) == b + pow((a - b) * n, 2) * cnj(zb)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]]) * (a * cnj((b : Cart[Real, Tybit0[Unit]]))) == pow(a, 2) * cnj(b)
+      #|  !((a : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && a * (b : Cart[Real, Tybit0[Unit]]) == (c : Cart[Real, Tybit0[Unit]]) \226\134\146 b == c / a
+      #|  cexp(ii * Cx(Arg((b : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]])))) == (b - a) / Cx(norm(b - a)) && cexp(ii * Cx(Arg(a - b))) == (a - b) / Cx(norm(a - b))
+      #|  -ii * -(z : Cart[Real, Tybit0[Unit]]) == ii * z
+      #|  (a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], reflect_across((a, b)) == reflect_across((b, a))
+      #|  (a : Cart[Real, N]) + ((x : Cart[Real, N]) - a) == x
+      #|  ((a : Cart[Real, N]) + (b : Cart[Real, N]) == a + (c : Cart[Real, N])) == (b == c)
+      #|  \226\136\128 n : Num, \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, ITER(n, rotate_about(a, t)) == rotate_about(a, real_of_num(n) * t)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], (real_of_num(0) <= Im((c - a) / (b - a))) == (real_of_num(0) <= Im((a - b) / (c - b)))
+      #|  (\226\136\128 x : _, (f : (_) -> _)((g : (_) -> _)(x)) == x) && (\226\136\128 y : _, g(f(y)) == y) \226\134\146 (f((x : _)) == (y : _)) == (x == g(y))
+      #|  (rotate_about((a : Cart[Real, Tybit0[Unit]]), (t : Real), (w : Cart[Real, Tybit0[Unit]])) == (z : Cart[Real, Tybit0[Unit]])) == (w == rotate_about(a, -t, z))
+      #|  real_of_num(2)
+      #|  real_of_num(0)
+      #|  (a : Real) + ((b : Real) - (c : Real)) == a - (c - b)
+      #|  (real_of_num(2) * (a : Real) == real_of_num(2) * (b : Real)) == (a == b)
+      #|  (ii * (t : Cart[Real, Tybit0[Unit]]) + Cx(real_of_num(2)) * (ii * (z : Cart[Real, Tybit0[Unit]])) == ii * (u : Cart[Real, Tybit0[Unit]]) + (v : Cart[Real, Tybit0[Unit]]) * ii) == (t + (Cx(real_of_num(2)) * z - u) == v)
+      #|  (e1 : Cart[Real, Tybit0[Unit]]) * pow((e2 : Cart[Real, Tybit0[Unit]]), 2) == (e3 : Cart[Real, Tybit0[Unit]]) \226\134\146 e1 * pow((n : Cart[Real, Tybit0[Unit]]) * e2, 2) == e3 * pow(n, 2)
+      #|  !((z : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])) \226\134\146 (c : Cart[Real, Tybit0[Unit]]) * pow(z - a, 2) == (b : Cart[Real, Tybit0[Unit]]) * (cnj(z - a) * (z - a)) \226\134\146 c * (z - a) == b * cnj(z - a)
+      #|  (z : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
+      #|  ii * (a : Cart[Real, Tybit0[Unit]]) + ii * a == ii * (Cx(real_of_num(2)) * a)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, !(b == a) && real_of_num(2) * Arg((b - a) / (z - a)) == t \226\134\146 rotate_about(a, t, z) == reflect_across((a, b), z)
+      #|  rotate_about((a : Cart[Real, Tybit0[Unit]]), real_of_num(2) * Arg(((b : Cart[Real, Tybit0[Unit]]) - a) / ((z : Cart[Real, Tybit0[Unit]]) - a)), z)
+      #|  ((a : Real) == real_of_num(4) * pi + (t : Real)) == (t == a + -(real_of_num(4) * pi))
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, !(b == a) && real_of_num(2) * Arg((b - a) / (z - a)) == real_of_num(4) * pi + t \226\134\146 rotate_about(a, t, z) == reflect_across((a, b), z)
+      #|  norm(pow((j : Cart[Real, Tybit0[Unit]]), 3)) == real_of_num(1)
+      #|  (C : Cart[Real, Tybit0[Unit]]) - (A : Cart[Real, Tybit0[Unit]]) == (j : Cart[Real, Tybit0[Unit]]) * ((B : Cart[Real, Tybit0[Unit]]) - C) && A - B == pow(j, 2) * (B - C)
+      #|  \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], \226\136\128 j : Cart[Real, Tybit0[Unit]], pow(j, 3) == Cx(real_of_num(1)) && !(j == Cx(real_of_num(1))) && A + (j * B + pow(j, 2) * C) == Cx(real_of_num(0)) \226\134\146 dist((A, B)) == dist((B, C)) && dist((C, A)) == dist((B, C))
       #|  3
-      #|  ITER 3 (\\z. a * z + b) = (\\z. a pow 3 * z + b * (Cx(&1) + a + a pow 2))
-      #|  (\\z. a1 * z + b1) o (\\z. a2 * z + b2) =\n   (\\z. (a1 * a2) * z + (b1 + a1 * b2))
-      #|  I = (\\z. Cx(&1) * z + Cx(&0))
-      #|  Cx(&1)
-      #|  Cx(&0)
+      #|  ITER(3, (z : Cart[Real, Tybit0[Unit]]) => (a : Cart[Real, Tybit0[Unit]]) * z + (b : Cart[Real, Tybit0[Unit]])) == ((z : Cart[Real, Tybit0[Unit]]) => pow(a, 3) * z + b * (Cx(real_of_num(1)) + (a + pow(a, 2))))
+      #|  o((z : Cart[Real, Tybit0[Unit]]) => (a1 : Cart[Real, Tybit0[Unit]]) * z + (b1 : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]) => (a2 : Cart[Real, Tybit0[Unit]]) * z + (b2 : Cart[Real, Tybit0[Unit]])) == ((z : Cart[Real, Tybit0[Unit]]) => a1 * a2 * z + (b1 + a1 * b2))
+      #|  I == ((z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) * z + Cx(real_of_num(0)))
+      #|  Cx(real_of_num(1))
+      #|  Cx(real_of_num(0))
       #|  forall a b a' b. (\\z. a * z + b) = (\\z. a' * z + b') <=> a = a' /\\ b = b'
-      #|  forall a t. rotate_about a t =\n         (\\z. cexp(ii * Cx(t)) * z + (Cx(&1) - cexp(ii * Cx(t))) * a)
-      #|  s = Cx(&0) ==> s + t = Cx(&0) ==> t = Cx(&0)
-      #|  a3 * (a1 * B + b1) + b3 = B\n      ==> ~(a1 * a3 = Cx(&1))\n          ==> B = (a3 * b1 + b3) / (Cx(&1) - a1 * a3)
-      #|  (a1 * a2 * a3) * a1 pow 2 * a2 *\n    (a1 - a1 * a2 * a3) * (a2 - a1 * a2 * a3) * (a3 - a1 * a2 * a3) *\n    (C + (a1 * a2 * a3) * A + (a1 * a2 * a3) pow 2 * B) = Cx(&0)
-      #|  forall a1 a2 a3 b1 b2 b3 A B C.\n        (\\z. a3 * z + b3) ((\\z. a1 * z + b1) B) = B /\\\n        (\\z. a1 * z + b1) ((\\z. a2 * z + b2) C) = C /\\\n        (\\z. a2 * z + b2) ((\\z. a3 * z + b3) A) = A /\\\n        ITER 3 (\\z. a1 * z + b1) o ITER 3 (\\z. a2 * z + b2) o\n        ITER 3 (\\z. a3 * z + b3) = I /\\\n        ~(a1 * a2 * a3 = Cx(&1)) /\\\n        ~(a1 * a2 = Cx(&1)) /\\\n        ~(a2 * a3 = Cx(&1)) /\\\n        ~(a3 * a1 = Cx(&1))\n        ==> (a1 * a2 * a3) pow 3 = Cx (&1) /\\\n            ~(a1 * a2 * a3 = Cx (&1)) /\\\n            C + (a1 * a2 * a3) * A + (a1 * a2 * a3) pow 2 * B = Cx(&0)
-      #|  (forall A B C P Q R a b c g1 g2 g3.\n       Ant A B C P Q R a b c g1 g2 g3 ==> Cns A B C P Q R a b c g1 g2 g3)\n    ==> (forall A B C P Q R a b c g1 g2 g3.\n           Ant A B C P Q R a b c g1 g2 g3\n           ==> Ant B C A Q R P b c a g2 g3 g1)\n        ==> (forall A B C P Q R a b c g1 g2 g3.\n                   Ant A B C P Q R a b c g1 g2 g3\n                   ==> Cns A B C P Q R a b c g1 g2 g3 /\\\n                       Cns B C A Q R P b c a g2 g3 g1 /\\\n                       Cns C A B R P Q c a b g3 g1 g2)
-      #|  g3:complex->complex
-      #|  g2:complex->complex
-      #|  g1:complex->complex
-      #|  c:real
-      #|  b:real
-      #|  a:real
-      #|  R:complex
-      #|  Q:complex
-      #|  P:complex
-      #|  C:complex
-      #|  B:complex
-      #|  A:complex
-      #|  b3:complex
-      #|  b2:complex
-      #|  b1:complex
-      #|  a1 * a2 * a3:complex
-      #|  b3 = (Cx (&1) - a3) * C
-      #|  b2 = (Cx (&1) - a2) * B
-      #|  b1 = (Cx (&1) - a1) * A
-      #|  a3 = cexp(ii * Cx(&2 * c))
-      #|  a2 = cexp(ii * Cx(&2 * b))
-      #|  a1 = cexp(ii * Cx(&2 * a))
-      #|  &3 * x / &3 = x
-      #|  &0 <= a /\\ &0 <= b /\\ &0 <= c /\\ &0 < pi /\\\n      &3 * a + &3 * b + &3 * c = pi /\\ ~(&3 * c = pi)\n      ==> (&0 < &2 * a + &2 * b /\\ &2 * a + &2 * b < &2 * pi) /\\\n          (&0 < &2 * a + &2 * b + &2 * c /\\\n           &2 * a + &2 * b + &2 * c < &2 * pi)
-      #|  ~(cexp(ii * Cx(&2 * a)) * cexp(ii * Cx(&2 * b)) = Cx(&1)) /\\\n    ~(cexp(ii * Cx(&2 * a)) * cexp(ii * Cx(&2 * b)) *\n      cexp(ii * Cx(&2 * c)) = Cx(&1))
-      #|  a / &3 = &0 <=> a = &0
-      #|  angle(A:real^2,C,Q) = &0
-      #|  angle(B:real^2,C,A) / &3 = c
-      #|  &2 * a = &4 * pi + &2 * --c <=>\n                            a = &2 * pi - c
-      #|  angle(C:real^2,A,Q) = a
-      #|  reflect_across(A,C) Q
-      #|  (g3:complex->complex)(g1(Q)) = Q
-      #|  a <= pi /\\ &0 < pi ==> ~(a / &3 = pi / &2)
-      #|  forall x y z. ~(angle(x:real^2,y,z) / &3 = pi / &2)
-      #|  ~(P:real^2 = B) /\\ ~(P = C)
-      #|  &0 <= --x <=> x <= &0
-      #|  &0 <= u * --a ==> u * a <= &0
-      #|  (u % A + v % B + w % C) - C:real^N =\n                   v % (B - C) + u % (A - C) + ((u + v + w) - &1) % C
-      #|  &0 <= Im((B - C) / (P - C))
-      #|  (u % A + v % B + w % C) - B:real^N =\n                 u % (A - B) + w % (C - B) + ((u + v + w) - &1) % B
-      #|  &0 <= Im((P - B) / (C - B))
-      #|  &3 * &2 * a / &3 = &2 * a
-      #|  ITER 3 g1 o ITER 3 g2 o ITER 3 g3 = (I:real^2->real^2)
-      #|  g3 = rotate_about C (&2 * c)
-      #|  g2 = rotate_about B (&2 * b)
-      #|  g1 = rotate_about A (&2 * a)
-      #|  c = angle(B:real^2,C,A) / &3
-      #|  b = angle(A:real^2,B,C) / &3
-      #|  a = angle(C:real^2,A,B) / &3
-      #|  B:real^2 = C
-      #|  A:real^2 = C
-      #|  A:real^2 = B
-      #|  Q:real^2
-      #|  R:real^2
-      #|  P:real^2
-      #|  R:real^2
-      #|  Q:real^2
-      #|  P:real^2
-      #|  (forall A B C. &0 <= Im((C - A) / (B - A)) \\/\n              &0 <= Im((B - A) / (C - A))) /\\\n     (forall A B C. Property A B C ==> Property A C B) /\\\n     (forall A B C. &0 <= Im((C - A) / (B - A)) ==> Property A B C)\n     ==> forall A B C. Property A B C
-      #|  forall A B C:real^2 P Q R.\n     ~collinear{A,B,C} /\\ {P,Q,R} SUBSET convex hull {A,B,C} /\\\n     angle(A,B,R) = angle(A,B,C) / &3 /\\\n     angle(B,A,R) = angle(B,A,C) / &3 /\\\n     angle(B,C,P) = angle(B,C,A) / &3 /\\\n     angle(C,B,P) = angle(C,B,A) / &3 /\\\n     angle(C,A,Q) = angle(C,A,B) / &3 /\\\n     angle(A,C,Q) = angle(A,C,B) / &3\n     ==> dist(R,P) = dist(P,Q) /\\ dist(Q,R) = dist(P,Q)
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, rotate_about(a, t) == ((z : Cart[Real, Tybit0[Unit]]) => cexp(ii * Cx(t)) * z + (Cx(real_of_num(1)) - cexp(ii * Cx(t))) * a)
+      #|  (s : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)) \226\134\146 s + (t : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)) \226\134\146 t == Cx(real_of_num(0))
+      #|  (a3 : Cart[Real, Tybit0[Unit]]) * ((a1 : Cart[Real, Tybit0[Unit]]) * (B : Cart[Real, Tybit0[Unit]]) + (b1 : Cart[Real, Tybit0[Unit]])) + (b3 : Cart[Real, Tybit0[Unit]]) == B \226\134\146 !(a1 * a3 == Cx(real_of_num(1))) \226\134\146 B == (a3 * b1 + b3) / (Cx(real_of_num(1)) - a1 * a3)
+      #|  (a1 : Cart[Real, Tybit0[Unit]]) * ((a2 : Cart[Real, Tybit0[Unit]]) * (a3 : Cart[Real, Tybit0[Unit]])) * (pow(a1, 2) * (a2 * ((a1 - a1 * (a2 * a3)) * ((a2 - a1 * (a2 * a3)) * ((a3 - a1 * (a2 * a3)) * ((C : Cart[Real, Tybit0[Unit]]) + (a1 * (a2 * a3) * (A : Cart[Real, Tybit0[Unit]]) + pow(a1 * (a2 * a3), 2) * (B : Cart[Real, Tybit0[Unit]])))))))) == Cx(real_of_num(0))
+      #|  \226\136\128 a1 : Cart[Real, Tybit0[Unit]], \226\136\128 a2 : Cart[Real, Tybit0[Unit]], \226\136\128 a3 : Cart[Real, Tybit0[Unit]], \226\136\128 b1 : Cart[Real, Tybit0[Unit]], \226\136\128 b2 : Cart[Real, Tybit0[Unit]], \226\136\128 b3 : Cart[Real, Tybit0[Unit]], \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], ((z : Cart[Real, Tybit0[Unit]]) => a3 * z + b3)(((z : Cart[Real, Tybit0[Unit]]) => a1 * z + b1)(B)) == B && ((z : Cart[Real, Tybit0[Unit]]) => a1 * z + b1)(((z : Cart[Real, Tybit0[Unit]]) => a2 * z + b2)(C)) == C && ((z : Cart[Real, Tybit0[Unit]]) => a2 * z + b2)(((z : Cart[Real, Tybit0[Unit]]) => a3 * z + b3)(A)) == A && o(ITER(3, (z : Cart[Real, Tybit0[Unit]]) => a1 * z + b1), o(ITER(3, (z : Cart[Real, Tybit0[Unit]]) => a2 * z + b2), ITER(3, (z : Cart[Real, Tybit0[Unit]]) => a3 * z + b3))) == I && !(a1 * (a2 * a3) == Cx(real_of_num(1))) && !(a1 * a2 == Cx(real_of_num(1))) && !(a2 * a3 == Cx(real_of_num(1))) && !(a3 * a1 == Cx(real_of_num(1))) \226\134\146 pow(a1 * (a2 * a3), 3) == Cx(real_of_num(1)) && !(a1 * (a2 * a3) == Cx(real_of_num(1))) && C + (a1 * (a2 * a3) * A + pow(a1 * (a2 * a3), 2) * B) == Cx(real_of_num(0))
+      #|  (\226\136\128 A : _, \226\136\128 B : _, \226\136\128 C : _, \226\136\128 P : _, \226\136\128 Q : _, \226\136\128 R : _, \226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 g1 : _, \226\136\128 g2 : _, \226\136\128 g3 : _, (Ant : (_, _, _, _, _, _, _, _, _, _, _, _) -> Bool)(A, B, C, P, Q, R, a, b, c, g1, g2, g3) \226\134\146 (Cns : (_, _, _, _, _, _, _, _, _, _, _, _) -> Bool)(A, B, C, P, Q, R, a, b, c, g1, g2, g3)) \226\134\146 (\226\136\128 A : _, \226\136\128 B : _, \226\136\128 C : _, \226\136\128 P : _, \226\136\128 Q : _, \226\136\128 R : _, \226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 g1 : _, \226\136\128 g2 : _, \226\136\128 g3 : _, Ant(A, B, C, P, Q, R, a, b, c, g1, g2, g3) \226\134\146 Ant(B, C, A, Q, R, P, b, c, a, g2, g3, g1)) \226\134\146 (\226\136\128 A : _, \226\136\128 B : _, \226\136\128 C : _, \226\136\128 P : _, \226\136\128 Q : _, \226\136\128 R : _, \226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 g1 : _, \226\136\128 g2 : _, \226\136\128 g3 : _, Ant(A, B, C, P, Q, R, a, b, c, g1, g2, g3) \226\134\146 Cns(A, B, C, P, Q, R, a, b, c, g1, g2, g3) && Cns(B, C, A, Q, R, P, b, c, a, g2, g3, g1) && Cns(C, A, B, R, P, Q, c, a, b, g3, g1, g2))
+      #|  (g3 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g2 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (g1 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (c : Real)
+      #|  (b : Real)
+      #|  (a : Real)
+      #|  (R : Cart[Real, Tybit0[Unit]])
+      #|  (Q : Cart[Real, Tybit0[Unit]])
+      #|  (P : Cart[Real, Tybit0[Unit]])
+      #|  (C : Cart[Real, Tybit0[Unit]])
+      #|  (B : Cart[Real, Tybit0[Unit]])
+      #|  (A : Cart[Real, Tybit0[Unit]])
+      #|  (b3 : Cart[Real, Tybit0[Unit]])
+      #|  (b2 : Cart[Real, Tybit0[Unit]])
+      #|  (b1 : Cart[Real, Tybit0[Unit]])
+      #|  (a1 : Cart[Real, Tybit0[Unit]]) * ((a2 : Cart[Real, Tybit0[Unit]]) * (a3 : Cart[Real, Tybit0[Unit]]))
+      #|  (b3 : Cart[Real, Tybit0[Unit]]) == (Cx(real_of_num(1)) - (a3 : Cart[Real, Tybit0[Unit]])) * (C : Cart[Real, Tybit0[Unit]])
+      #|  (b2 : Cart[Real, Tybit0[Unit]]) == (Cx(real_of_num(1)) - (a2 : Cart[Real, Tybit0[Unit]])) * (B : Cart[Real, Tybit0[Unit]])
+      #|  (b1 : Cart[Real, Tybit0[Unit]]) == (Cx(real_of_num(1)) - (a1 : Cart[Real, Tybit0[Unit]])) * (A : Cart[Real, Tybit0[Unit]])
+      #|  (a3 : Cart[Real, Tybit0[Unit]]) == cexp(ii * Cx(real_of_num(2) * (c : Real)))
+      #|  (a2 : Cart[Real, Tybit0[Unit]]) == cexp(ii * Cx(real_of_num(2) * (b : Real)))
+      #|  (a1 : Cart[Real, Tybit0[Unit]]) == cexp(ii * Cx(real_of_num(2) * (a : Real)))
+      #|  real_of_num(3) * ((x : Real) / real_of_num(3)) == x
+      #|  real_of_num(0) <= (a : Real) && real_of_num(0) <= (b : Real) && real_of_num(0) <= (c : Real) && real_of_num(0) < pi && real_of_num(3) * a + (real_of_num(3) * b + real_of_num(3) * c) == pi && !(real_of_num(3) * c == pi) \226\134\146 (real_of_num(0) < real_of_num(2) * a + real_of_num(2) * b && real_of_num(2) * a + real_of_num(2) * b < real_of_num(2) * pi) && real_of_num(0) < real_of_num(2) * a + (real_of_num(2) * b + real_of_num(2) * c) && real_of_num(2) * a + (real_of_num(2) * b + real_of_num(2) * c) < real_of_num(2) * pi
+      #|  !(cexp(ii * Cx(real_of_num(2) * (a : Real))) * cexp(ii * Cx(real_of_num(2) * (b : Real))) == Cx(real_of_num(1))) && !(cexp(ii * Cx(real_of_num(2) * a)) * (cexp(ii * Cx(real_of_num(2) * b)) * cexp(ii * Cx(real_of_num(2) * (c : Real)))) == Cx(real_of_num(1)))
+      #|  ((a : Real) / real_of_num(3) == real_of_num(0)) == (a == real_of_num(0))
+      #|  angle(((A : Cart[Real, Tybit0[Unit]]), (C : Cart[Real, Tybit0[Unit]]), (Q : Cart[Real, Tybit0[Unit]]))) == real_of_num(0)
+      #|  angle(((B : Cart[Real, Tybit0[Unit]]), (C : Cart[Real, Tybit0[Unit]]), (A : Cart[Real, Tybit0[Unit]]))) / real_of_num(3) == (c : Real)
+      #|  (real_of_num(2) * (a : Real) == real_of_num(4) * pi + real_of_num(2) * -(c : Real)) == (a == real_of_num(2) * pi - c)
+      #|  angle(((C : Cart[Real, Tybit0[Unit]]), (A : Cart[Real, Tybit0[Unit]]), (Q : Cart[Real, Tybit0[Unit]]))) == (a : Real)
+      #|  reflect_across(((A : Cart[Real, Tybit0[Unit]]), (C : Cart[Real, Tybit0[Unit]])), (Q : Cart[Real, Tybit0[Unit]]))
+      #|  (g3 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((g1 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((Q : Cart[Real, Tybit0[Unit]]))) == Q
+      #|  (a : Real) <= pi && real_of_num(0) < pi \226\134\146 !(a / real_of_num(3) == pi / real_of_num(2))
+      #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], !(angle((x, y, z)) / real_of_num(3) == pi / real_of_num(2))
+      #|  !((P : Cart[Real, Tybit0[Unit]]) == (B : Cart[Real, Tybit0[Unit]])) && !(P == (C : Cart[Real, Tybit0[Unit]]))
+      #|  (real_of_num(0) <= -(x : Real)) == (x <= real_of_num(0))
+      #|  real_of_num(0) <= (u : Real) * -(a : Real) \226\134\146 u * a <= real_of_num(0)
+      #|  op_pct((u : Real), (A : Cart[Real, N])) + (op_pct((v : Real), (B : Cart[Real, N])) + op_pct((w : Real), (C : Cart[Real, N]))) - C == op_pct(v, B - C) + (op_pct(u, A - C) + op_pct(u + (v + w) - real_of_num(1), C))
+      #|  real_of_num(0) <= Im(((B : Cart[Real, Tybit0[Unit]]) - (C : Cart[Real, Tybit0[Unit]])) / ((P : Cart[Real, Tybit0[Unit]]) - C))
+      #|  op_pct((u : Real), (A : Cart[Real, N])) + (op_pct((v : Real), (B : Cart[Real, N])) + op_pct((w : Real), (C : Cart[Real, N]))) - B == op_pct(u, A - B) + (op_pct(w, C - B) + op_pct(u + (v + w) - real_of_num(1), B))
+      #|  real_of_num(0) <= Im(((P : Cart[Real, Tybit0[Unit]]) - (B : Cart[Real, Tybit0[Unit]])) / ((C : Cart[Real, Tybit0[Unit]]) - B))
+      #|  real_of_num(3) * (real_of_num(2) * ((a : Real) / real_of_num(3))) == real_of_num(2) * a
+      #|  o(ITER(3, (g1 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])), o(ITER(3, (g2 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])), ITER(3, (g3 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])))) == I
+      #|  (g3 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == rotate_about((C : Cart[Real, Tybit0[Unit]]), real_of_num(2) * (c : Real))
+      #|  (g2 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == rotate_about((B : Cart[Real, Tybit0[Unit]]), real_of_num(2) * (b : Real))
+      #|  (g1 : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == rotate_about((A : Cart[Real, Tybit0[Unit]]), real_of_num(2) * (a : Real))
+      #|  (c : Real) == angle(((B : Cart[Real, Tybit0[Unit]]), (C : Cart[Real, Tybit0[Unit]]), (A : Cart[Real, Tybit0[Unit]]))) / real_of_num(3)
+      #|  (b : Real) == angle(((A : Cart[Real, Tybit0[Unit]]), (B : Cart[Real, Tybit0[Unit]]), (C : Cart[Real, Tybit0[Unit]]))) / real_of_num(3)
+      #|  (a : Real) == angle(((C : Cart[Real, Tybit0[Unit]]), (A : Cart[Real, Tybit0[Unit]]), (B : Cart[Real, Tybit0[Unit]]))) / real_of_num(3)
+      #|  (B : Cart[Real, Tybit0[Unit]]) == (C : Cart[Real, Tybit0[Unit]])
+      #|  (A : Cart[Real, Tybit0[Unit]]) == (C : Cart[Real, Tybit0[Unit]])
+      #|  (A : Cart[Real, Tybit0[Unit]]) == (B : Cart[Real, Tybit0[Unit]])
+      #|  (Q : Cart[Real, Tybit0[Unit]])
+      #|  (R : Cart[Real, Tybit0[Unit]])
+      #|  (P : Cart[Real, Tybit0[Unit]])
+      #|  (R : Cart[Real, Tybit0[Unit]])
+      #|  (Q : Cart[Real, Tybit0[Unit]])
+      #|  (P : Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], real_of_num(0) <= Im((C - A) / (B - A)) || real_of_num(0) <= Im((B - A) / (C - A))) && (\226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], (Property : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Bool)(A, B, C) \226\134\146 Property(A, C, B)) && (\226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], real_of_num(0) <= Im((C - A) / (B - A)) \226\134\146 Property(A, B, C)) \226\134\146 (\226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], Property(A, B, C))
+      #|  \226\136\128 A : Cart[Real, Tybit0[Unit]], \226\136\128 B : Cart[Real, Tybit0[Unit]], \226\136\128 C : Cart[Real, Tybit0[Unit]], \226\136\128 P : Cart[Real, Tybit0[Unit]], \226\136\128 Q : Cart[Real, Tybit0[Unit]], \226\136\128 R : Cart[Real, Tybit0[Unit]], !collinear({A, B, C}) && SUBSET({P, Q, R}, hull(convex, {A, B, C})) && angle((A, B, R)) == angle((A, B, C)) / real_of_num(3) && angle((B, A, R)) == angle((B, A, C)) / real_of_num(3) && angle((B, C, P)) == angle((B, C, A)) / real_of_num(3) && angle((C, B, P)) == angle((C, B, A)) / real_of_num(3) && angle((C, A, Q)) == angle((C, A, B)) / real_of_num(3) && angle((A, C, Q)) == angle((A, C, B)) / real_of_num(3) \226\134\146 dist((R, P)) == dist((P, Q)) && dist((Q, R)) == dist((P, Q))
       #|reflect2d =  |- (#forall:fun(fun(real,bool),bool) (\t:real. ((#=:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool)) (#reflect2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real)) ((#o:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) (#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real)) ((#o:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) #cnj:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#real_neg:fun(real,real) t:real)))))))
       #|REFLECT2D_COMPOSE =  |- (#forall:fun(fun(real,bool),bool) (\s:real. (#forall:fun(fun(real,bool),bool) (\t:real. ((#=:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool)) ((#o:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) (#reflect2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) s:real)) (#reflect2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real))) (#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_sub:fun(real,fun(real,real)) s:real) t:real))))))))
       #|rotate_about =  |- (#forall:fun(fun(real,bool),bool) (\t:real. (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\x:cart(real,tybit0(1)). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\a:cart(real,tybit0(1)). ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (((#rotate_about:fun(cart(real,tybit0(1)),fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) a:cart(real,tybit0(1))) t:real) x:cart(real,tybit0(1)))) ((#vector_add:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) a:cart(real,tybit0(1))) ((#rotate2d:fun(real,fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) t:real) ((#vector_sub:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) x:cart(real,tybit0(1))) a:cart(real,tybit0(1))))))))))))
