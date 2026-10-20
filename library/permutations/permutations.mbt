@@ -31,7 +31,7 @@ pub fn permutes() -> @kernel.Thm {
 /// inverse
 fn step_3() -> Unit raise {
   inverse_c.set(
-    @pair.new_definition(@parser.parse_term("inverse(f) = \\y. @x. f x = y")),
+    @pair.new_definition(@term_syntax.parse_term("(inverse : ((_) -> _, _) -> _)((f : (_) -> _)) == ((y : _) => select((x : _) => f(x) == y))")),
   )
 }
 
@@ -54,7 +54,7 @@ fn step_4() -> Unit raise {
   )
   surjective_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. (forall y. ?x. f x = y) <=> forall y. f(inverse f y) = y"),
+      @term_syntax.parse_term("∀ f : (_) -> _, (∀ y : _, ∃ x : _, f(x) == y) == (∀ y : _, f(inverse(f, y)) == y)"),
       t2,
     ),
   )
@@ -84,7 +84,7 @@ fn step_5() -> Unit raise {
   )
   surjective_inverse_o_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f. (forall y. ?x. f x = y) <=> (f o inverse f = I)"),
+      @term_syntax.parse_term("∀ f : (_) -> _, (∀ y : _, ∃ x : _, f(x) == y) == (o(f, inverse(f)) == I)"),
       t3,
     ),
   )
@@ -172,7 +172,7 @@ fn step_8() -> Unit raise {
   )
   inverse_unique_o_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f g. f o g = I /\\ g o f = I ==> inverse f = g"),
+      @term_syntax.parse_term("∀ f : (_) -> _, ∀ g : (_) -> _, o(f, g) == I && o(g, f) == I → inverse(f) == g"),
       t7,
     ),
   )
@@ -194,7 +194,7 @@ pub fn inverse_unique_o() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@trivia.i_o_id()]))
   let t9 = @tactics.then_tac(@tactics.match_mp_tac(inverse_unique_o()), t8)
-  inverse_i_c.set(@tactics.prove(@parser.parse_term("inverse I = I"), t9))
+  inverse_i_c.set(@tactics.prove(@term_syntax.parse_term("(inverse : ((_) -> _, _) -> _)((I : (_) -> _)) == (I : (_) -> _)"), t9))
 }
 
 ///|
@@ -210,9 +210,9 @@ pub fn inverse_i() -> @kernel.Thm {
 /// INVERSE_UNIQUE_ALT
 fn step_10() -> Unit raise {
   let t14 = @meson.asm_meson_tac(@list.List([]))
-  let t13 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t13 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t12 = @tactics.match_mp_tac(@class.select_unique())
-  let t11 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t11 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t10 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), inverse()]))
   let t15 = @tactics.then_tac(
     @tactics.then_tac(
@@ -282,7 +282,7 @@ fn step_12() -> Unit raise {
     ),
     t16,
   )
-  swap_refl_c.set(@tactics.prove(@parser.parse_term("forall a. swap(a,a) = I"), t17))
+  swap_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : _, swap((a, a)) == I"), t17))
 }
 
 ///|
@@ -305,7 +305,7 @@ fn step_13() -> Unit raise {
     t18,
   )
   swap_sym_c.set(
-    @tactics.prove(@parser.parse_term("forall a b. swap(a,b) = swap(b,a)"), t19),
+    @tactics.prove(@term_syntax.parse_term("∀ a : _, ∀ b : _, swap((a, b)) == swap((b, a))"), t19),
   )
 }
 
@@ -329,7 +329,7 @@ fn step_14() -> Unit raise {
     t20,
   )
   swap_idempotent_c.set(
-    @tactics.prove(@parser.parse_term("forall a b. swap(a,b) o swap(a,b) = I"), t21),
+    @tactics.prove(@term_syntax.parse_term("∀ a : _, ∀ b : _, o(swap((a, b)), swap((a, b))) == I"), t21),
   )
 }
 
@@ -355,7 +355,7 @@ fn step_15() -> Unit raise {
   )
   inverse_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. inverse(swap(a,b)) = swap(a,b)"),
+      @term_syntax.parse_term("∀ a : _, ∀ b : _, inverse(swap((a, b))) == swap((a, b))"),
       t24,
     ),
   )
@@ -377,7 +377,7 @@ fn step_16() -> Unit raise {
   let t26 = @tactics.then_tac(@simp.rewrite_tac(@list.List([swap()])), t25)
   swap_galois_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b x y. x = swap(a,b) y <=> y = swap(a,b) x"),
+      @term_syntax.parse_term("∀ a : _, ∀ b : _, ∀ x : _, ∀ y : _, (x == swap((a, b), y)) == (y == swap((a, b), x))"),
       t26,
     ),
   )
@@ -397,7 +397,7 @@ pub fn swap_galois() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([swap()]))
   swap_left_c.set(
-    @tactics.prove(@parser.parse_term("forall a b:A. swap(a,b) a = b"), t27),
+    @tactics.prove(@term_syntax.parse_term("∀ a : A, ∀ b : A, swap((a, b), a) == b"), t27),
   )
 }
 
@@ -416,7 +416,7 @@ fn step_18() -> Unit raise {
   let t28 = @meson.meson_tac(@list.List([]))
   let t29 = @tactics.then_tac(@simp.rewrite_tac(@list.List([swap()])), t28)
   swap_right_c.set(
-    @tactics.prove(@parser.parse_term("forall a b:A. swap(a,b) b = a"), t29),
+    @tactics.prove(@term_syntax.parse_term("∀ a : A, ∀ b : A, swap((a, b), b) == a"), t29),
   )
 }
 
@@ -436,7 +436,7 @@ fn step_19() -> Unit raise {
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([swap()])), t30)
   swap_other_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b x:A. ~(x = a) /\\ ~(x = b) ==> swap(a,b) x = x"),
+      @term_syntax.parse_term("∀ a : A, ∀ b : A, ∀ x : A, !(x == a) && !(x == b) → swap((a, b), x) == x"),
       t31,
     ),
   )
@@ -455,18 +455,18 @@ pub fn swap_other() -> @kernel.Thm {
 /// SWAP_TRIPLE
 fn step_20() -> Unit raise {
   let t41 = @simp.asm_rewrite_tac(@list.List([]))
-  let t40 = @class.asm_cases_tac(@parser.parse_term("x:A = c"))
+  let t40 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (c : A)"))
   let t39 = @simp.asm_rewrite_tac(@list.List([]))
-  let t38 = @class.asm_cases_tac(@parser.parse_term("x:A = b"))
+  let t38 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (b : A)"))
   let t37 = @simp.asm_rewrite_tac(@list.List([]))
-  let t36 = @class.asm_cases_tac(@parser.parse_term("x:A = a"))
-  let t35 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t36 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (a : A)"))
+  let t35 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t34 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.o_thm(), swap()]),
   )
   let t33 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t32 = @tactics.subgoal_then(
-    @parser.parse_term("~(b:A = a) /\\ ~(c:A = b) /\\ ~(c:A = a)"),
+    @term_syntax.parse_term("!((b : A) == (a : A)) && !((c : A) == b) && !(c == a)"),
     @tactics.strip_assume_tac,
   )
   let t42 = @tactics.then_tac(
@@ -526,18 +526,18 @@ pub fn swap_triple() -> @kernel.Thm {
 /// SWAP_TRIPLE_ALT
 fn step_21() -> Unit raise {
   let t52 = @simp.asm_rewrite_tac(@list.List([]))
-  let t51 = @class.asm_cases_tac(@parser.parse_term("z:A = y"))
+  let t51 = @class.asm_cases_tac(@term_syntax.parse_term("(z : A) == (y : A)"))
   let t50 = @simp.asm_rewrite_tac(@list.List([]))
-  let t49 = @class.asm_cases_tac(@parser.parse_term("z:A = x"))
+  let t49 = @class.asm_cases_tac(@term_syntax.parse_term("(z : A) == (x : A)"))
   let t48 = @simp.asm_rewrite_tac(@list.List([]))
-  let t47 = @class.asm_cases_tac(@parser.parse_term("z:A = a"))
-  let t46 = @tactics.x_gen_tac(@parser.parse_term("z:A"))
+  let t47 = @class.asm_cases_tac(@term_syntax.parse_term("(z : A) == (a : A)"))
+  let t46 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : A)"))
   let t45 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.o_thm(), swap()]),
   )
   let t44 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t43 = @tactics.subgoal_then(
-    @parser.parse_term("~(x:A = a) /\\ ~(y:A = a) /\\ ~(y:A = x)"),
+    @term_syntax.parse_term("!((x : A) == (a : A)) && !((y : A) == a) && !(y == x)"),
     @tactics.strip_assume_tac,
   )
   let t53 = @tactics.then_tac(
@@ -756,7 +756,7 @@ fn step_24() -> Unit raise {
   let t69 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutes()])), t68)
   permutes_in_image_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s x. p permutes s ==> (p(x) IN s <=> x IN s)"),
+      @term_syntax.parse_term("∀ p : (_) -> _, ∀ s : (_) -> Bool, ∀ x : _, permutes(p, s) → IN(p(x), s) == IN(x, s)"),
       t69,
     ),
   )
@@ -785,7 +785,7 @@ fn step_25() -> Unit raise {
   )
   permutes_image_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s. p permutes s ==> IMAGE p s = s"),
+      @term_syntax.parse_term("∀ p : (_) -> _, ∀ s : (_) -> Bool, permutes(p, s) → IMAGE(p, s) == s"),
       t71,
     ),
   )
@@ -807,7 +807,7 @@ fn step_26() -> Unit raise {
   let t73 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutes()])), t72)
   permutes_injective_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s. p permutes s ==> forall x y. p(x) = p(y) <=> x = y"),
+      @term_syntax.parse_term("∀ p : (_) -> _, ∀ s : (_) -> Bool, permutes(p, s) → (∀ x : _, ∀ y : _, (p(x) == p(y)) == (x == y))"),
       t73,
     ),
   )
@@ -831,7 +831,7 @@ fn step_27() -> Unit raise {
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutes()])), t74)
   permutes_surjective_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s. p permutes s ==> forall y. ?x. p(x) = y"),
+      @term_syntax.parse_term("∀ p : (_) -> _, ∀ s : (_) -> Bool, permutes(p, s) → (∀ y : _, ∃ x : _, p(x) == y)"),
       t75,
     ),
   )
@@ -992,7 +992,7 @@ fn step_30() -> Unit raise {
   )
   permutes_subset_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s t. p permutes s /\\ s SUBSET t ==> p permutes t"),
+      @term_syntax.parse_term("∀ p : (_) -> _, ∀ s : (_) -> Bool, ∀ t : (_) -> Bool, permutes(p, s) && SUBSET(s, t) → permutes(p, t)"),
       t89,
     ),
   )
@@ -1025,7 +1025,7 @@ fn step_31() -> Unit raise {
     t90,
   )
   permutes_empty_c.set(
-    @tactics.prove(@parser.parse_term("forall p. p permutes {} <=> p = I"), t91),
+    @tactics.prove(@term_syntax.parse_term("∀ p : (_) -> _, permutes(p, {}) == (p == I)"), t91),
   )
 }
 
@@ -1054,7 +1054,7 @@ fn step_32() -> Unit raise {
     t92,
   )
   permutes_sing_c.set(
-    @tactics.prove(@parser.parse_term("forall p a.  p permutes {a} <=> p = I"), t93),
+    @tactics.prove(@term_syntax.parse_term("∀ p : (_) -> _, ∀ a : _, permutes(p, {a}) == (p == I)"), t93),
   )
 }
 
@@ -1077,7 +1077,7 @@ fn step_33() -> Unit raise {
   )
   permutes_univ_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. p permutes UNIV <=> forall y:A. ?!x. p x = y"),
+      @term_syntax.parse_term("∀ p : (A) -> A, permutes(p, UNIV) == (∀ y : A, existsunique((x : A) => p(x) == y))"),
       t95,
     ),
   )
@@ -1131,7 +1131,7 @@ fn step_35() -> Unit raise {
   )
   permutes_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b s. a IN s /\\ b IN s ==> swap(a,b) permutes s"),
+      @term_syntax.parse_term("∀ a : _, ∀ b : _, ∀ s : (_) -> Bool, IN(a, s) && IN(b, s) → permutes(swap((a, b)), s)"),
       t99,
     ),
   )
@@ -1208,14 +1208,14 @@ pub fn permutes_bijections() -> @kernel.Thm {
 /// PERMUTES_INVERSE_FUNCTION
 fn step_38() -> Unit raise {
   let t110 = @meson.asm_meson_tac(@list.List([]))
-  let t108 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t108 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t109 = @list.List([
-    @tactics.exists_tac(@parser.parse_term("(q:A->A) x")),
+    @tactics.exists_tac(@term_syntax.parse_term("(q : (A) -> A)((x : A))")),
     t108,
   ])
-  let t107 = @class.asm_cases_tac(@parser.parse_term("(x:A) IN s"))
+  let t107 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : A), (s : (A) -> Bool))"))
   let t106 = @simp.rewrite_tac(@list.List([@theorems.exists_unique()]))
-  let t105 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t105 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t111 = @tactics.then_tac(
     @tactics.thenl(
       @tactics.then_tac(
@@ -1242,7 +1242,7 @@ fn step_38() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.disch_tac,
-        @tactics.exists_tac(@parser.parse_term("inverse p:A->A")),
+        @tactics.exists_tac(@term_syntax.parse_term("inverse((p : (A) -> A))")),
       ),
       t104,
     ),
@@ -1278,7 +1278,7 @@ pub fn permutes_inverse_function() -> @kernel.Thm {
 fn step_39() -> Unit raise {
   let t120 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t119 = @simp.rewrite_tac(@list.List([@sets.forall_in_image()]))
-  let t118 = @tactics.exists_tac(@parser.parse_term("IMAGE (p:A->A) s"))
+  let t118 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((p : (A) -> A), (s : (A) -> Bool))"))
   let t117 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([]),
@@ -1507,7 +1507,7 @@ fn step_45() -> Unit raise {
   let t167 = @simp.asm_rewrite_tac(@list.List([]))
   let t166 = @simp.asm_simp_tac(@list.List([swap_other()]))
   let t164 = @simp.asm_rewrite_tac(@list.List([]))
-  let t161 = @parser.parse_term("(p:A->A)")
+  let t161 = @term_syntax.parse_term("(p : (A) -> A)")
   let t165 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1595,13 +1595,13 @@ fn step_45() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([swap_right()])),
     @tactics.all_tac,
   ])
-  let t155 = @class.asm_cases_tac(@parser.parse_term("(x:A) = (p:A->A) b"))
+  let t155 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (p : (A) -> A)((b : A))"))
   let t154 = @list.List([
     @simp.asm_rewrite_tac(@list.List([swap_left()])),
     @tactics.all_tac,
   ])
-  let t153 = @class.asm_cases_tac(@parser.parse_term("(x:A) = (p:A->A) a"))
-  let t152 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t153 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (p : (A) -> A)((a : A))"))
+  let t152 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t151 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.o_thm()]),
   )
@@ -1610,13 +1610,13 @@ fn step_45() -> Unit raise {
   )
   let t150 = @list.List([
     @tactics.then_tac(
-      @tactics.undisch_tac(@parser.parse_term("inverse (p:A->A) o p = I")),
+      @tactics.undisch_tac(@term_syntax.parse_term("o(inverse((p : (A) -> A)), p) == I")),
       t149,
     ),
     @tactics.all_tac,
   ])
   let t148 = @tactics.subgoal_then(
-    @parser.parse_term("forall y:A. inverse (p:A->A) (p y) = y"),
+    @term_syntax.parse_term("∀ y : A, inverse((p : (A) -> A), p(y)) == y"),
     fn(
       x145 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1669,13 +1669,13 @@ fn step_45() -> Unit raise {
   )
   let t144 = @list.List([
     @tactics.then_tac(
-      @tactics.undisch_tac(@parser.parse_term("(p:A->A) o inverse p = I")),
+      @tactics.undisch_tac(@term_syntax.parse_term("o((p : (A) -> A), inverse(p)) == I")),
       t143,
     ),
     @tactics.all_tac,
   ])
   let t142 = @tactics.subgoal_then(
-    @parser.parse_term("forall y:A. (p:A->A)(inverse p y) = y"),
+    @term_syntax.parse_term("∀ y : A, (p : (A) -> A)(inverse(p, y)) == y"),
     fn(
       x139 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1821,7 +1821,7 @@ fn step_46() -> Unit raise {
     t169,
   )
   permutes_id_c.set(
-    @tactics.prove(@parser.parse_term("forall s:A->bool. (\\x. x) permutes s"), t170),
+    @tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, permutes((x : A) => x, s)"), t170),
   )
 }
 
@@ -1842,7 +1842,7 @@ fn step_47() -> Unit raise {
     @simp.rewrite_tac(@list.List([permutes(), @trivia.i_thm()])),
     t171,
   )
-  permutes_i_c.set(@tactics.prove(@parser.parse_term("forall s. I permutes s"), t172))
+  permutes_i_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (_) -> Bool, permutes(I, s)"), t172))
 }
 
 ///|
@@ -2015,7 +2015,7 @@ fn step_49() -> Unit raise {
   )
   permutes_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s. p permutes s ==> inverse(p) permutes s"),
+      @term_syntax.parse_term("∀ p : (_) -> _, ∀ s : (_) -> Bool, permutes(p, s) → permutes(inverse(p), s)"),
       t187,
     ),
   )
@@ -2044,7 +2044,7 @@ fn step_50() -> Unit raise {
   )
   permutes_inverse_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. p permutes s ==> inverse(inverse p) = p"),
+      @term_syntax.parse_term("∀ p : (_) -> _, permutes(p, (s : (_) -> Bool)) → inverse(inverse(p)) == p"),
       t189,
     ),
   )
@@ -2082,7 +2082,7 @@ fn step_51() -> Unit raise {
     ),
     t193,
   ])
-  let t191 = @tactics.exists_tac(@parser.parse_term("(a:A) INSERT s"))
+  let t191 = @tactics.exists_tac(@term_syntax.parse_term("INSERT((a : A), (s : (A) -> Bool))"))
   let t190 = @tactics.match_mp_tac(permutes_superset())
   let t195 = @tactics.thenl(
     @tactics.then_tac(
@@ -2130,10 +2130,10 @@ fn step_52() -> Unit raise {
   ])
   let t208 = @tactics.match_mp_tac(permutes_compose())
   let t207 = @simp.asm_rewrite_tac(@list.List([]))
-  let t205 = @parser.parse_term("q:A->A")
+  let t205 = @term_syntax.parse_term("(q : (A) -> A)")
   let t206 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("b:A"), t205]),
+    @list.List([@term_syntax.parse_term("(b : A)"), t205]),
   )
   let t212 = @tactics.thenl(
     @tactics.then_tac(
@@ -2165,7 +2165,7 @@ fn step_52() -> Unit raise {
       permutes_insert_lemma(),
     ]),
   )
-  let t202 = @parser.parse_term("swap(a,p a) o (p:A->A)")
+  let t202 = @term_syntax.parse_term("o(swap(((a : A), (p : (A) -> A)(a))), p)")
   let t213 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2218,7 +2218,7 @@ fn step_52() -> Unit raise {
                 s200(x201)
               }
             },
-            @list.List([@parser.parse_term("(p:A->A) a"), t202]),
+            @list.List([@term_syntax.parse_term("(p : (A) -> A)((a : A))"), t202]),
           ),
         ),
         t203,
@@ -2229,7 +2229,7 @@ fn step_52() -> Unit raise {
   ])
   let t198 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t197 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t196 = @tactics.x_gen_tac(@parser.parse_term("p:A->A"))
+  let t196 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : (A) -> A)"))
   let t214 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2280,7 +2280,7 @@ fn step_53() -> Unit raise {
   let t266 = @simp.asm_simp_tac(
     @list.List([swap_idempotent(), @trivia.o_assoc(), @trivia.i_o_id()]),
   )
-  let t263 = @parser.parse_term("(\\q:A->A. swap(a:A,b) o q)")
+  let t263 = @term_syntax.parse_term("(q : (A) -> A) => o(swap(((a : A), (b : A))), q)")
   let t267 = @tactics.then_tac(
     @tactics.first_x_assum(fn(
       x265 : @kernel.Thm,
@@ -2354,7 +2354,7 @@ fn step_53() -> Unit raise {
   )
   let t259 = @meson.asm_meson_tac(@list.List([permutes()]))
   let t258 = @tactics.subgoal_then(
-    @parser.parse_term("(q:A->A) a = a /\\ (r:A->A) a = a"),
+    @term_syntax.parse_term("(q : (A) -> A)((a : A)) == a && (r : (A) -> A)(a) == a"),
     fn(
       x256 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2381,7 +2381,7 @@ fn step_53() -> Unit raise {
     },
   )
   let t255 = @simp.rewrite_tac(@list.List([@trivia.o_thm(), swap()]))
-  let t252 = @parser.parse_term("a:A")
+  let t252 = @term_syntax.parse_term("(a : A)")
   let t268 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2472,7 +2472,7 @@ fn step_53() -> Unit raise {
     ),
     t267,
   ])
-  let t246 = @tactics.subgoal_then(@parser.parse_term("c:A = b"), fn(
+  let t246 = @tactics.subgoal_then(@term_syntax.parse_term("(c : A) == (b : A)"), fn(
     x243 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -2518,12 +2518,12 @@ fn step_53() -> Unit raise {
       s244(x245)
     }
   })
-  let t239 = @parser.parse_term("r:A->A")
-  let t240 = @parser.parse_term("c:A")
-  let t241 = @parser.parse_term("q:A->A")
+  let t239 = @term_syntax.parse_term("(r : (A) -> A)")
+  let t240 = @term_syntax.parse_term("(c : A)")
+  let t241 = @term_syntax.parse_term("(q : (A) -> A)")
   let t242 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("b:A"), t241, t240, t239]),
+    @list.List([@term_syntax.parse_term("(b : A)"), t241, t240, t239]),
   )
   let t238 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t237 = @simp.rewrite_tac(
@@ -2612,12 +2612,12 @@ fn step_53() -> Unit raise {
       }
     })(@equal.sym(x232))
   })
-  let t228 = @tactics.x_gen_tac(@parser.parse_term("k:num"))
+  let t228 = @tactics.x_gen_tac(@term_syntax.parse_term("(k : Num)"))
   let t227 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.has_size())]))
-  let t225 = @parser.parse_term("s:A->bool")
+  let t225 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t226 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t225]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t225]),
   )
   let t223 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t224 = @list.List([
@@ -2709,7 +2709,7 @@ fn step_53() -> Unit raise {
     @list.List([
       permutes_empty(),
       @sets.card_clauses(),
-      @sets.set_rule(@parser.parse_term("{x | x = a} = {a}")),
+      @sets.set_rule(@term_syntax.parse_term("{(x : _) | x == (a : _)} == {a}")),
     ]),
   )
   let t215 = @tactics.match_mp_tac(@sets.finite_induct_strong())
@@ -2809,7 +2809,7 @@ fn step_54() -> Unit raise {
   )
   finite_permutations_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s. FINITE s ==> FINITE {p | p permutes s}"),
+      @term_syntax.parse_term("∀ s : (_) -> Bool, FINITE(s) → FINITE({(p : (_) -> _) | permutes(p, s)})"),
       t270,
     ),
   )
@@ -2857,8 +2857,8 @@ pub fn card_permutations() -> @kernel.Thm {
 /// PERMUTES_FINITE_INJECTIVE
 fn step_56() -> Unit raise {
   let t287 = @meson.asm_meson_tac(@list.List([]))
-  let t286 = @class.asm_cases_tac(@parser.parse_term("(y:A) IN s"))
-  let t285 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t286 = @class.asm_cases_tac(@term_syntax.parse_term("IN((y : A), (s : (A) -> Bool))"))
+  let t285 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t284 = @simp.asm_rewrite_tac(
     @list.List([
       @sets.subset(),
@@ -2872,7 +2872,7 @@ fn step_56() -> Unit raise {
       @sets.surjective_iff_injective(),
     ),
   )
-  let t278 = @parser.parse_term("p:A->A")
+  let t278 = @term_syntax.parse_term("(p : (A) -> A)")
   let t283 = @tactics.first_assum(fn(
     x282 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2966,7 +2966,7 @@ fn step_56() -> Unit raise {
   let t274 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t273 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("(p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)"),
+      @term_syntax.parse_term("((p : Bool) → (q : Bool) == (r : Bool)) → (p && q) == (p && r)"),
     ),
   )
   let t272 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -3032,8 +3032,8 @@ pub fn permutes_finite_injective() -> @kernel.Thm {
 /// PERMUTES_FINITE_SURJECTIVE
 fn step_57() -> Unit raise {
   let t304 = @meson.asm_meson_tac(@list.List([]))
-  let t303 = @class.asm_cases_tac(@parser.parse_term("(y:A) IN s"))
-  let t302 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t303 = @class.asm_cases_tac(@term_syntax.parse_term("IN((y : A), (s : (A) -> Bool))"))
+  let t302 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t301 = @simp.asm_rewrite_tac(
     @list.List([
       @sets.subset(),
@@ -3047,7 +3047,7 @@ fn step_57() -> Unit raise {
       @sets.surjective_iff_injective(),
     ),
   )
-  let t295 = @parser.parse_term("p:A->A")
+  let t295 = @term_syntax.parse_term("(p : (A) -> A)")
   let t300 = @tactics.first_assum(fn(
     x299 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3141,7 +3141,7 @@ fn step_57() -> Unit raise {
   let t291 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t290 = @tactics.match_mp_tac(
     @class.taut(
-      @parser.parse_term("(p ==> (q <=> r)) ==> (p /\\ q <=> p /\\ r)"),
+      @term_syntax.parse_term("((p : Bool) → (q : Bool) == (r : Bool)) → (p && q) == (p && r)"),
     ),
   )
   let t289 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -3209,14 +3209,14 @@ fn step_58() -> Unit raise {
   let t325 = @meson.asm_meson_tac(@list.List([permutes_injective()]))
   let t324 = @simp.asm_rewrite_tac(@list.List([]))
   let t323 = @simp.rewrite_tac(@list.List([]))
-  let t322 = @parser.parse_term("y:A")
+  let t322 = @term_syntax.parse_term("(y : A)")
   let t326 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.map_every(
             @tactics.x_gen_tac,
-            @list.List([@parser.parse_term("x:A"), t322]),
+            @list.List([@term_syntax.parse_term("(x : A)"), t322]),
           ),
           @tactics.strip_tac,
         ),
@@ -3228,7 +3228,7 @@ fn step_58() -> Unit raise {
   )
   let t320 = @simp.simp_tac(@list.List([]))
   let t321 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t320])
-  let t319 = @tactics.subgoal_then(@parser.parse_term("(f:A->A) x IN t"), fn(
+  let t319 = @tactics.subgoal_then(@term_syntax.parse_term("IN((f : (A) -> A)((x : A)), (t : (A) -> Bool))"), fn(
     x316 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -3281,7 +3281,7 @@ fn step_58() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
-            @tactics.x_gen_tac(@parser.parse_term("x:A")),
+            @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)")),
             @tactics.disch_tac,
           ),
           t314,
@@ -3299,7 +3299,7 @@ fn step_58() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
-            @tactics.x_gen_tac(@parser.parse_term("x:A")),
+            @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)")),
             @tactics.disch_tac,
           ),
           t312,
@@ -3338,7 +3338,7 @@ fn step_58() -> Unit raise {
   })
   let t307 = @simp.asm_rewrite_tac(@list.List([]))
   let t306 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("t:A->bool"), permutes_finite_injective()),
+    @bool.spec(@term_syntax.parse_term("(t : (A) -> Bool)"), permutes_finite_injective()),
   )
   let t329 = @tactics.thenl(
     @tactics.then_tac(
@@ -3393,7 +3393,7 @@ fn step_59() -> Unit raise {
   )
   restrict_i_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t:A->bool. (\\x. if x IN t then I x else x) = I"),
+      @term_syntax.parse_term("∀ t : (A) -> Bool, ((x : A) => if IN(x, t) { I(x) } else { x }) == I"),
       t331,
     ),
   )
@@ -3414,7 +3414,7 @@ fn step_60() -> Unit raise {
   let t341 = @simp.asm_rewrite_tac(@list.List([]))
   let t339 = @simp.asm_simp_tac(@list.List([]))
   let t340 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t339])
-  let t338 = @tactics.subgoal_then(@parser.parse_term("(g:A->A) x IN t"), fn(
+  let t338 = @tactics.subgoal_then(@term_syntax.parse_term("IN((g : (A) -> A)((x : A)), (t : (A) -> Bool))"), fn(
     x335 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -3467,8 +3467,8 @@ fn step_60() -> Unit raise {
     ),
     t341,
   ])
-  let t334 = @class.asm_cases_tac(@parser.parse_term("(x:A) IN t"))
-  let t333 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t334 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : A), (t : (A) -> Bool))"))
+  let t333 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t332 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.o_thm()]),
   )
@@ -3521,7 +3521,7 @@ fn step_61() -> Unit raise {
   let t419 = @list.List([@tactics.refl_tac, @meson.asm_meson_tac(@list.List([]))])
   let t418 = @simp.expand_tac("g")
   let t417 = @tactics.subgoal_then(
-    @parser.parse_term("(g:A->A) (inverse f y) = f (inverse f y)"),
+    @term_syntax.parse_term("(g : (A) -> A)(inverse((f : (A) -> A), (y : A))) == f(inverse(f, y))"),
     fn(
       x415 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3549,7 +3549,7 @@ fn step_61() -> Unit raise {
   )
   let t414 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t413 = @tactics.subgoal_then(
-    @parser.parse_term("inverse (f:A->A) y IN t"),
+    @term_syntax.parse_term("IN(inverse((f : (A) -> A), (y : A)), (t : (A) -> Bool))"),
     fn(
       x410 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3619,7 +3619,7 @@ fn step_61() -> Unit raise {
     ),
     t422,
   ])
-  let t409 = @class.asm_cases_tac(@parser.parse_term("(y:A) IN t"))
+  let t409 = @class.asm_cases_tac(@term_syntax.parse_term("IN((y : A), (t : (A) -> Bool))"))
   let t408 = @tactics.disch_then(fn(
     x406 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3714,7 +3714,7 @@ fn step_61() -> Unit raise {
     })(t403(x404))
   })
   let t399 = @tactics.match_mp_tac(@theorems.eq_sym())
-  let t398 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
+  let t398 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : A)"))
   let t397 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t395 = @tactics.disch_then(fn(
     x393 : @kernel.Thm,
@@ -3879,7 +3879,7 @@ fn step_61() -> Unit raise {
       }
     })(@bool.conjunct1(x385))
   })
-  let t381 = @kernel.assume_rule(@parser.parse_term("(f:A->A) permutes s"))
+  let t381 = @kernel.assume_rule(@term_syntax.parse_term("permutes((f : (A) -> A), (s : (A) -> Bool))"))
   let t396 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3897,7 +3897,7 @@ fn step_61() -> Unit raise {
     @tactics.all_tac,
   ])
   let t380 = @tactics.subgoal_then(
-    @parser.parse_term("forall y:A. (f:A->A) (inverse f y) = y"),
+    @term_syntax.parse_term("∀ y : A, (f : (A) -> A)(inverse(f, y)) == y"),
     fn(
       x377 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4020,7 +4020,7 @@ fn step_61() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
-          @kernel.assume_rule(@parser.parse_term("(f:A->A) permutes s")),
+          @kernel.assume_rule(@term_syntax.parse_term("permutes((f : (A) -> A), (s : (A) -> Bool))")),
         ),
         t370,
       ),
@@ -4029,7 +4029,7 @@ fn step_61() -> Unit raise {
     t372,
   ])
   let t364 = @tactics.subgoal_then(
-    @parser.parse_term("inverse (f:A->A) z = w"),
+    @term_syntax.parse_term("inverse((f : (A) -> A), (z : A)) == (w : A)"),
     fn(
       x361 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4078,7 +4078,7 @@ fn step_61() -> Unit raise {
     },
   )
   let t360 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("w:A"))(@tactics.strip_assume_tac),
+    @tactics.x_choose_then(@term_syntax.parse_term("(w : A)"))(@tactics.strip_assume_tac),
   )
   let t374 = @tactics.thenl(
     @tactics.then_tac(
@@ -4089,7 +4089,7 @@ fn step_61() -> Unit raise {
   )
   let t375 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t374])
   let t359 = @tactics.subgoal_then(
-    @parser.parse_term("(z:A) IN IMAGE (f:A->A) t"),
+    @term_syntax.parse_term("IN((z : A), IMAGE((f : (A) -> A), (t : (A) -> Bool)))"),
     fn(
       x356 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4148,7 +4148,7 @@ fn step_61() -> Unit raise {
     @tactics.all_tac,
   ])
   let t355 = @tactics.subgoal_then(
-    @parser.parse_term("forall z:A. z IN t ==> inverse f z IN t"),
+    @term_syntax.parse_term("∀ z : A, IN(z, (t : (A) -> Bool)) → IN(inverse((f : (A) -> A), z), t)"),
     fn(
       x352 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4202,7 +4202,7 @@ fn step_61() -> Unit raise {
     @tactics.then_tac(@tactics.then_tac(@simp.expand_tac("g"), t349), t350),
     @tactics.all_tac,
   ])
-  let t348 = @tactics.subgoal_then(@parser.parse_term("(g:A->A) permutes t"), fn(
+  let t348 = @tactics.subgoal_then(@term_syntax.parse_term("permutes((g : (A) -> A), (t : (A) -> Bool))"), fn(
     x345 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -4249,7 +4249,7 @@ fn step_61() -> Unit raise {
     }
   })
   let t344 = @simp.abbrev_tac(
-    @parser.parse_term("g = \\x:A. if x IN t then f x else x"),
+    @term_syntax.parse_term("(g : (A) -> A) == ((x : A) => if IN(x, (t : (A) -> Bool)) { (f : (A) -> A)(x) } else { x })"),
   )
   let t424 = @tactics.thenl(
     @tactics.then_tac(
@@ -4322,8 +4322,8 @@ fn step_62() -> Unit raise {
   let t430 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t429 = @simp.rewrite_tac(@list.List([swap()]))
   let t428 = @simp.asm_rewrite_tac(@list.List([]))
-  let t427 = @class.asm_cases_tac(@parser.parse_term("(x:A) IN s"))
-  let t426 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t427 = @class.asm_cases_tac(@term_syntax.parse_term("IN((x : A), (s : (A) -> Bool))"))
+  let t426 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t425 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t432 = @tactics.then_tac(
     @tactics.then_tac(
@@ -4427,7 +4427,7 @@ fn step_64() -> Unit raise {
   )
   nsum_permute_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f p s. p permutes s ==> nsum s f = nsum s (f o p)"),
+      @term_syntax.parse_term("∀ f : (_) -> Num, ∀ p : (_) -> _, ∀ s : (_) -> Bool, permutes(p, s) → nsum(s, f) == nsum(s, o(f, p))"),
       t440,
     ),
   )
@@ -4480,7 +4480,7 @@ fn step_66() -> Unit raise {
   )
   sum_permute_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f p s. p permutes s ==> sum s f = sum s (f o p)"),
+      @term_syntax.parse_term("∀ f : (_) -> Real, ∀ p : (_) -> _, ∀ s : (_) -> Bool, permutes(p, s) → sum(s, f) == sum(s, o(f, p))"),
       t444,
     ),
   )
@@ -4575,13 +4575,13 @@ fn step_68() -> Unit raise {
       }
     }),
   )
-  let t448 = @parser.parse_term("x:A = c")
-  let t449 = @parser.parse_term("x:A = b")
+  let t448 = @term_syntax.parse_term("(x : A) == (c : A)")
+  let t449 = @term_syntax.parse_term("(x : A) == (b : A)")
   let t450 = @tactics.map_every(
     @class.asm_cases_tac,
-    @list.List([@parser.parse_term("x:A = a"), t449, t448]),
+    @list.List([@term_syntax.parse_term("(x : A) == (a : A)"), t449, t448]),
   )
-  let t447 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t447 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t446 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), swap(), @trivia.o_thm(), @trivia.i_thm()]),
   )
@@ -4727,13 +4727,13 @@ fn step_70() -> Unit raise {
       }
     }),
   )
-  let t471 = @parser.parse_term("x:A = c")
-  let t472 = @parser.parse_term("x:A = b")
+  let t471 = @term_syntax.parse_term("(x : A) == (c : A)")
+  let t472 = @term_syntax.parse_term("(x : A) == (b : A)")
   let t473 = @tactics.map_every(
     @class.asm_cases_tac,
-    @list.List([@parser.parse_term("x:A = a"), t472, t471]),
+    @list.List([@term_syntax.parse_term("(x : A) == (a : A)"), t472, t471]),
   )
-  let t470 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t470 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t469 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), swap(), @trivia.o_thm(), @trivia.i_thm()]),
   )
@@ -4872,11 +4872,11 @@ fn step_74() -> Unit raise {
     @list.List([@class.fun_eq_thm(), @trivia.o_thm(), @trivia.i_thm()]),
   )
   let t490 = @simp.asm_rewrite_tac(@list.List([]))
-  let t487 = @parser.parse_term("c:A")
-  let t488 = @parser.parse_term("b:A")
+  let t487 = @term_syntax.parse_term("(c : A)")
+  let t488 = @term_syntax.parse_term("(b : A)")
   let t489 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("a:A"), t488, t487]),
+      @list.List([@term_syntax.parse_term("(a : A)"), t488, t487]),
       three_cycle_compose_reverse(),
     ),
   )
@@ -4920,16 +4920,16 @@ pub fn three_cycle_inverse() -> @kernel.Thm {
 fn step_75() -> Unit raise {
   let t506 = @simp.asm_rewrite_tac(@list.List([]))
   let t505 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
-  let t504 = @class.asm_cases_tac(@parser.parse_term("x:A = e"))
+  let t504 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (e : A)"))
   let t503 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
-  let t502 = @class.asm_cases_tac(@parser.parse_term("x:A = d"))
+  let t502 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (d : A)"))
   let t501 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
-  let t500 = @class.asm_cases_tac(@parser.parse_term("x:A = c"))
+  let t500 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (c : A)"))
   let t499 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
-  let t498 = @class.asm_cases_tac(@parser.parse_term("x:A = b"))
+  let t498 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (b : A)"))
   let t497 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
-  let t496 = @class.asm_cases_tac(@parser.parse_term("x:A = a"))
-  let t495 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t496 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (a : A)"))
+  let t495 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t494 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.o_thm(), three_cycle()]),
   )
@@ -5005,7 +5005,7 @@ fn step_76() -> Unit raise {
     @tactics.all_tac,
   ])
   let t517 = @tactics.subgoal_then(
-    @parser.parse_term("inverse(three_cycle c e (b:A)) = three_cycle c b e"),
+    @term_syntax.parse_term("inverse(three_cycle((c : A), (e : A), (b : A))) == three_cycle(c, b, e)"),
     fn(
       x514 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5059,7 +5059,7 @@ fn step_76() -> Unit raise {
     @tactics.all_tac,
   ])
   let t511 = @tactics.subgoal_then(
-    @parser.parse_term("inverse(three_cycle d a (c:A)) = three_cycle d c a"),
+    @term_syntax.parse_term("inverse(three_cycle((d : A), (a : A), (c : A))) == three_cycle(d, c, a)"),
     fn(
       x508 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5220,7 +5220,7 @@ fn step_78() -> Unit raise {
 fn step_79() -> Unit raise {
   permutation_c.set(
     @pair.new_definition(
-      @parser.parse_term("permutation p <=> ?n. swapseq n p"),
+      @term_syntax.parse_term("(permutation : ((_) -> _) -> Bool)((p : (_) -> _)) == (∃ n : Num, swapseq(n, p))"),
     ),
   )
 }
@@ -5257,7 +5257,7 @@ fn step_81() -> Unit raise {
     @simp.rewrite_tac(@list.List([permutation()])),
     t525,
   )
-  permutation_i_c.set(@tactics.prove(@parser.parse_term("permutation I"), t526))
+  permutation_i_c.set(@tactics.prove(@term_syntax.parse_term("(permutation : ((_) -> _) -> Bool)((I : (_) -> _))"), t526))
 }
 
 ///|
@@ -5276,7 +5276,7 @@ fn step_82() -> Unit raise {
     @list.List([swapseq_rules(), @trivia.i_o_id(), swapseq_i(), swap_refl()]),
   )
   let t527 = @simp.asm_rewrite_tac(
-    @list.List([@calc_num.num_conv(@parser.parse_term("1"))]),
+    @list.List([@calc_num.num_conv(@term_syntax.parse_term("1"))]),
   )
   let t529 = @tactics.then_tac(
     @tactics.then_tac(
@@ -5290,7 +5290,7 @@ fn step_82() -> Unit raise {
   )
   swapseq_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. swapseq (if a = b then 0 else 1) (swap(a,b))"),
+      @term_syntax.parse_term("∀ a : _, ∀ b : _, swapseq(if a == b { 0 } else { 1 }, swap((a, b)))"),
       t529,
     ),
   )
@@ -5314,7 +5314,7 @@ fn step_83() -> Unit raise {
     t530,
   )
   permutation_swap_c.set(
-    @tactics.prove(@parser.parse_term("forall a b. permutation(swap(a,b))"), t531),
+    @tactics.prove(@term_syntax.parse_term("∀ a : _, ∀ b : _, permutation(swap((a, b)))"), t531),
   )
 }
 
@@ -5484,14 +5484,14 @@ fn step_87() -> Unit raise {
     @list.List([@trivia.o_assoc()]),
   )
   let t550 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@trivia.o_assoc())]))
-  let t549 = @tactics.exists_tac(@parser.parse_term("(q:A->A) o swap (a,b)"))
+  let t549 = @tactics.exists_tac(@term_syntax.parse_term("o((q : (A) -> A), swap(((a : A), (b : A))))"))
   let t548 = @simp.asm_rewrite_tac(@list.List([]))
-  let t544 = @parser.parse_term("b:A")
-  let t545 = @parser.parse_term("a:A")
-  let t546 = @parser.parse_term("q:A->A")
+  let t544 = @term_syntax.parse_term("(b : A)")
+  let t545 = @term_syntax.parse_term("(a : A)")
+  let t546 = @term_syntax.parse_term("(q : (A) -> A)")
   let t547 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("n:num"), t546, t545, t544]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t546, t545, t544]),
       swapseq_endswap(),
     ),
   )
@@ -5560,7 +5560,7 @@ fn step_88() -> Unit raise {
   )
   swapseq_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n p. swapseq n p ==> swapseq n (inverse p)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ p : (_) -> _, swapseq(n, p) → swapseq(n, inverse(p))"),
       t565,
     ),
   )
@@ -5587,7 +5587,7 @@ fn step_89() -> Unit raise {
   )
   permutation_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. permutation p ==> permutation(inverse p)"),
+      @term_syntax.parse_term("∀ p : (_) -> _, permutation(p) → permutation(inverse(p))"),
       t567,
     ),
   )
@@ -5608,12 +5608,12 @@ pub fn permutation_inverse() -> @kernel.Thm {
 /// SYMMETRY_LEMMA
 fn step_90() -> Unit raise {
   let t572 = @meson.asm_meson_tac(@list.List([]))
-  let t568 = @parser.parse_term("b:A = d")
-  let t569 = @parser.parse_term("b:A = c")
-  let t570 = @parser.parse_term("a:A = d")
+  let t568 = @term_syntax.parse_term("(b : A) == (d : A)")
+  let t569 = @term_syntax.parse_term("(b : A) == (c : A)")
+  let t570 = @term_syntax.parse_term("(a : A) == (d : A)")
   let t571 = @tactics.map_every(
     @class.asm_cases_tac,
-    @list.List([@parser.parse_term("a:A = c"), t570, t569, t568]),
+    @list.List([@term_syntax.parse_term("(a : A) == (c : A)"), t570, t569, t568]),
   )
   let t573 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t571),
@@ -5642,8 +5642,8 @@ pub fn symmetry_lemma() -> @kernel.Thm {
 /// SWAP_GENERAL
 fn step_91() -> Unit raise {
   let t598 = @meson.asm_meson_tac(@list.List([swap_independent()]))
-  let t596 = @parser.parse_term("b:A")
-  let t597 = @parser.parse_term("d:A")
+  let t596 = @term_syntax.parse_term("(b : A)")
+  let t597 = @term_syntax.parse_term("(d : A)")
   let t599 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.disj2_tac,
@@ -5694,14 +5694,14 @@ fn step_91() -> Unit raise {
             s594(x595)
           }
         },
-        @list.List([@parser.parse_term("c:A"), t597, t596]),
+        @list.List([@term_syntax.parse_term("(c : A)"), t597, t596]),
       ),
     ),
     t598,
   )
   let t592 = @meson.asm_meson_tac(@list.List([swap_common_p()]))
-  let t590 = @parser.parse_term("c:A")
-  let t591 = @parser.parse_term("d:A")
+  let t590 = @term_syntax.parse_term("(c : A)")
+  let t591 = @term_syntax.parse_term("(d : A)")
   let t600 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.disj2_tac,
@@ -5752,14 +5752,14 @@ fn step_91() -> Unit raise {
             s588(x589)
           }
         },
-        @list.List([@parser.parse_term("c:A"), t591, t590]),
+        @list.List([@term_syntax.parse_term("(c : A)"), t591, t590]),
       ),
     ),
     t592,
   )
   let t586 = @meson.asm_meson_tac(@list.List([swap_common()]))
-  let t584 = @parser.parse_term("b:A")
-  let t585 = @parser.parse_term("d:A")
+  let t584 = @term_syntax.parse_term("(b : A)")
+  let t585 = @term_syntax.parse_term("(d : A)")
   let t601 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.disj2_tac,
@@ -5810,7 +5810,7 @@ fn step_91() -> Unit raise {
             s582(x583)
           }
         },
-        @list.List([@parser.parse_term("b:A"), t585, t584]),
+        @list.List([@term_syntax.parse_term("(b : A)"), t585, t584]),
       ),
     ),
     t586,
@@ -5921,11 +5921,11 @@ fn step_92() -> Unit raise {
       @equal.gsym(@trivia.o_assoc()),
     ]),
   )
-  let t701 = @parser.parse_term("n:num")
+  let t701 = @term_syntax.parse_term("(n : Num)")
   let t704 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.spec_tac(@parser.parse_term("n:num"), t701),
+        @tactics.spec_tac(@term_syntax.parse_term("(n : Num)"), t701),
         @nums.induct_tac,
       ),
       t702,
@@ -5936,7 +5936,7 @@ fn step_92() -> Unit raise {
   let t699 = @simp.asm_rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.o_thm(), swap()]),
   )
-  let t698 = @simp.abbrev_tac(@parser.parse_term("r:A->A = swap(a:A,z) o q"))
+  let t698 = @simp.abbrev_tac(@term_syntax.parse_term("(r : (A) -> A) == o(swap(((a : A), (z : A))), (q : (A) -> A))"))
   let t697 = @simp.rewrite_tac(@list.List([@equal.gsym(@trivia.o_assoc())]))
   let t696 = @tactics.first_x_assum(fn(
     x695 : @kernel.Thm,
@@ -6035,9 +6035,9 @@ fn step_92() -> Unit raise {
     ),
     t704,
   ])
-  let t682 = @parser.parse_term("z:A")
-  let t683 = @parser.parse_term("a:A")
-  let t684 = @list.List([@parser.parse_term("q:A->A"), t683, t682])
+  let t682 = @term_syntax.parse_term("(z : A)")
+  let t683 = @term_syntax.parse_term("(a : A)")
+  let t684 = @list.List([@term_syntax.parse_term("(q : (A) -> A)"), t683, t682])
   let t687 = @tactics.first_x_assum(fn(
     x686 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6250,11 +6250,11 @@ fn step_92() -> Unit raise {
       ),
     ),
   )
-  let t665 = @parser.parse_term("z:A")
-  let t666 = @parser.parse_term("y:A")
+  let t665 = @term_syntax.parse_term("(z : A)")
+  let t666 = @term_syntax.parse_term("(y : A)")
   let t667 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:A"), t666, t665]),
+    @list.List([@term_syntax.parse_term("(x : A)"), t666, t665]),
   )
   let t664 = @simp.asm_rewrite_tac(
     @list.List([
@@ -6360,12 +6360,12 @@ fn step_92() -> Unit raise {
     ),
   )
   let t656 = @simp.asm_rewrite_tac(@list.List([]))
-  let t652 = @parser.parse_term("d:A")
-  let t653 = @parser.parse_term("c:A")
-  let t654 = @parser.parse_term("b:A")
+  let t652 = @term_syntax.parse_term("(d : A)")
+  let t653 = @term_syntax.parse_term("(c : A)")
+  let t654 = @term_syntax.parse_term("(b : A)")
   let t655 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("a:A"), t654, t653, t652]),
+      @list.List([@term_syntax.parse_term("(a : A)"), t654, t653, t652]),
       swap_general(),
     ),
   )
@@ -6679,12 +6679,12 @@ fn step_92() -> Unit raise {
   let t627 = @simp.rewrite_tac(
     @list.List([@nums.suc_inj(), @equal.gsym(@theorems.conj_assoc())]),
   )
-  let t623 = @parser.parse_term("m:num")
-  let t624 = @parser.parse_term("q:A->A")
-  let t625 = @parser.parse_term("d:A")
+  let t623 = @term_syntax.parse_term("(m : Num)")
+  let t624 = @term_syntax.parse_term("(q : (A) -> A)")
+  let t625 = @term_syntax.parse_term("(d : A)")
   let t626 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("c:A"), t625, t624, t623]),
+    @list.List([@term_syntax.parse_term("(c : A)"), t625, t624, t623]),
   )
   let t622 = @simp.rewrite_tac(
     @list.List([
@@ -6919,13 +6919,13 @@ pub fn fixing_swapseq_decrease() -> @kernel.Thm {
 /// SWAPSEQ_IDENTITY_EVEN
 fn step_93() -> Unit raise {
   let t748 = @simp.rewrite_tac(@list.List([@arith.suc_sub1(), @arith.even()]))
-  let t746 = @parser.parse_term("m:num")
-  let t747 = @tactics.spec_tac(@parser.parse_term("m:num"), t746)
-  let t745 = @tactics.undisch_tac(@parser.parse_term("~(m = 0)"))
+  let t746 = @term_syntax.parse_term("(m : Num)")
+  let t747 = @tactics.spec_tac(@term_syntax.parse_term("(m : Num)"), t746)
+  let t745 = @tactics.undisch_tac(@term_syntax.parse_term("!((m : Num) == 0)"))
   let t744 = @simp.asm_rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("m - 1 < SUC m"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(m : Num) - 1 < SUC(m)"))]),
   )
-  let t743 = @tactics.undisch_then(@parser.parse_term("SUC m = n"), fn(
+  let t743 = @tactics.undisch_then(@term_syntax.parse_term("SUC((m : Num)) == (n : Num)"), fn(
     x742 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -6993,7 +6993,7 @@ fn step_93() -> Unit raise {
       }
     })(@equal.sym(x742))
   })
-  let t735 = @parser.parse_term("m - 1")
+  let t735 = @term_syntax.parse_term("(m : Num) - 1")
   let t738 = @tactics.first_x_assum(fn(
     x737 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7063,12 +7063,12 @@ fn step_93() -> Unit raise {
     })(((x736 : @kernel.Thm) => @bool.spec(t735, x736))(x737))
   })
   let t731 = @simp.asm_rewrite_tac(@list.List([@trivia.i_thm()]))
-  let t727 = @parser.parse_term("b:A")
-  let t728 = @parser.parse_term("a:A")
-  let t729 = @parser.parse_term("p:A->A")
+  let t727 = @term_syntax.parse_term("(b : A)")
+  let t728 = @term_syntax.parse_term("(a : A)")
+  let t729 = @term_syntax.parse_term("(p : (A) -> A)")
   let t730 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("m:num"), t729, t728, t727]),
+      @list.List([@term_syntax.parse_term("(m : Num)"), t729, t728, t727]),
       fixing_swapseq_decrease(),
     ),
   )
@@ -7095,12 +7095,12 @@ fn step_93() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(@equal.gsym(x725))
   })
-  let t721 = @parser.parse_term("m:num")
-  let t722 = @parser.parse_term("p:A->A")
-  let t723 = @parser.parse_term("b:A")
+  let t721 = @term_syntax.parse_term("(m : Num)")
+  let t722 = @term_syntax.parse_term("(p : (A) -> A)")
+  let t723 = @term_syntax.parse_term("(b : A)")
   let t724 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t723, t722, t721]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t723, t722, t721]),
   )
   let t720 = @simp.rewrite_tac(
     @list.List([@arith.even(), @theorems.left_imp_exists_thm()]),
@@ -7232,7 +7232,7 @@ fn step_93() -> Unit raise {
     },
     @list.List([swapseq_cases()]),
   )
-  let t707 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t707 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t749 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7287,7 +7287,7 @@ fn step_93() -> Unit raise {
   )
   swapseq_identity_even_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. swapseq n (I:A->A) ==> EVEN n"),
+      @term_syntax.parse_term("∀ n : Num, (swapseq : (Num, (A) -> A) -> Bool)(n, (I : (A) -> A)) → EVEN(n)"),
       t749,
     ),
   )
@@ -7309,7 +7309,7 @@ pub fn swapseq_identity_even() -> @kernel.Thm {
 fn step_94() -> Unit raise {
   evenperm_c.set(
     @pair.new_definition(
-      @parser.parse_term("evenperm(p) = EVEN(@n. swapseq n p)"),
+      @term_syntax.parse_term("(evenperm : ((_) -> _) -> Bool)((p : (_) -> _)) == EVEN(select((n : Num) => swapseq(n, p)))"),
     ),
   )
 }
@@ -7397,7 +7397,7 @@ fn step_95() -> Unit raise {
     })(t767(x768))
   })
   let t763 = @simp.asm_simp_tac(@list.List([swapseq_compose()]))
-  let t759 = @parser.parse_term("swapseq (n + m) :(A->A)->bool")
+  let t759 = @term_syntax.parse_term("(swapseq : (Num, (A) -> A) -> Bool)((n : Num) + (m : Num))")
   let t762 = @tactics.first_x_assum(fn(
     x761 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7606,7 +7606,7 @@ pub fn evenperm_unique() -> @kernel.Thm {
 fn step_97() -> Unit raise {
   let t774 = @meson.meson_tac(@list.List([swapseq_rules(), @arith.even()]))
   let t775 = @tactics.then_tac(@tactics.match_mp_tac(evenperm_unique()), t774)
-  evenperm_i_c.set(@tactics.prove(@parser.parse_term("evenperm I = T"), t775))
+  evenperm_i_c.set(@tactics.prove(@term_syntax.parse_term("(evenperm : ((_) -> _) -> Bool)((I : (_) -> _)) == true"), t775))
 }
 
 ///|
@@ -7625,7 +7625,7 @@ fn step_98() -> Unit raise {
     @list.List([@equal.gsym(@trivia.i_def()), evenperm_i()]),
   )
   evenperm_id_c.set(
-    @tactics.prove(@parser.parse_term("evenperm(\\x:A. x)"), t776),
+    @tactics.prove(@term_syntax.parse_term("evenperm((x : A) => x)"), t776),
   )
 }
 
@@ -7641,11 +7641,11 @@ pub fn evenperm_id() -> @kernel.Thm {
 ///|
 /// EVENPERM_SWAP
 fn step_99() -> Unit raise {
-  let t778 = @calc_num.num_red_conv(@parser.parse_term("EVEN 1"))
+  let t778 = @calc_num.num_red_conv(@term_syntax.parse_term("EVEN(1)"))
   let t779 = @meson.meson_tac(
     @list.List([
       swapseq_swap(),
-      @calc_num.num_red_conv(@parser.parse_term("EVEN 0")),
+      @calc_num.num_red_conv(@term_syntax.parse_term("EVEN(0)")),
       t778,
     ]),
   )
@@ -7656,7 +7656,7 @@ fn step_99() -> Unit raise {
   )
   evenperm_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b:A. evenperm(swap(a,b)) = (a = b)"),
+      @term_syntax.parse_term("∀ a : A, ∀ b : A, evenperm(swap((a, b))) == (a == b)"),
       t780,
     ),
   )
@@ -7874,7 +7874,7 @@ fn step_102() -> Unit raise {
   )
   permutation_bijective_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. permutation p ==> forall y. ?!x. p(x) = y"),
+      @term_syntax.parse_term("∀ p : (_) -> _, permutation(p) → (∀ y : _, existsunique((x : _) => p(x) == y))"),
       t802,
     ),
   )
@@ -7905,20 +7905,20 @@ fn step_103() -> Unit raise {
     ]),
   )
   let t810 = @tactics.exists_tac(
-    @parser.parse_term("(a:A) INSERT b INSERT {x | ~(p x = x)}"),
+    @term_syntax.parse_term("INSERT((a : A), INSERT((b : A), {(x : A) | !((p : (A) -> A)(x) == x)}))"),
   )
   let t809 = @tactics.match_mp_tac(@sets.finite_subset())
-  let t806 = @parser.parse_term("p:A->A")
-  let t807 = @parser.parse_term("b:A")
+  let t806 = @term_syntax.parse_term("(p : (A) -> A)")
+  let t807 = @term_syntax.parse_term("(b : A)")
   let t808 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t807, t806]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t807, t806]),
   )
   let t805 = @simp.rewrite_tac(
     @list.List([
       @trivia.i_thm(),
       @sets.finite_rules(),
-      @sets.set_rule(@parser.parse_term("{x | F} = {}")),
+      @sets.set_rule(@term_syntax.parse_term("{(x : _) | false} == {}")),
     ]),
   )
   let t804 = @tactics.match_mp_tac(swapseq_induct())
@@ -7961,7 +7961,7 @@ fn step_103() -> Unit raise {
   )
   permutation_finite_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. permutation p ==> FINITE {x:A | ~(p x = x)}"),
+      @term_syntax.parse_term("∀ p : (A) -> A, permutation(p) → FINITE({(x : A) | !(p(x) == x)})"),
       t814,
     ),
   )
@@ -7983,7 +7983,7 @@ pub fn permutation_finite_support() -> @kernel.Thm {
 fn step_104() -> Unit raise {
   let t845 = @meson.asm_meson_tac(@list.List([]))
   let t844 = @simp.asm_rewrite_tac(@list.List([]))
-  let t843 = @class.asm_cases_tac(@parser.parse_term("(p:A->A) a = a"))
+  let t843 = @class.asm_cases_tac(@term_syntax.parse_term("(p : (A) -> A)((a : A)) == a"))
   let t846 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7998,7 +7998,7 @@ fn step_104() -> Unit raise {
   let t841 = @simp.rewrite_tac(
     @list.List([
       @class.taut(
-        @parser.parse_term("(if p then x else y) <=> p /\\ x \\/ ~p /\\ y"),
+        @term_syntax.parse_term("(if (p : Bool) { (x : Bool) } else { (y : Bool) }) == (p && x || !p && y)"),
       ),
     ]),
   )
@@ -8013,7 +8013,7 @@ fn step_104() -> Unit raise {
   )
   let t839 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t838 = @simp.asm_rewrite_tac(@list.List([]))
-  let t837 = @class.asm_cases_tac(@parser.parse_term("(p:A->A) a = a"))
+  let t837 = @class.asm_cases_tac(@term_syntax.parse_term("(p : (A) -> A)((a : A)) == a"))
   let t836 = @simp.rewrite_tac(
     @list.List([@theorems.exists_unique_thm(), swap(), @trivia.o_thm()]),
   )
@@ -8026,7 +8026,7 @@ fn step_104() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.undisch_tac(
-                    @parser.parse_term("forall y. ?!x. (p:A->A) x = y"),
+                    @term_syntax.parse_term("∀ y : A, existsunique((x : A) => (p : (A) -> A)(x) == y)"),
                   ),
                   t836,
                 ),
@@ -8053,7 +8053,7 @@ fn step_104() -> Unit raise {
     @simp.rewrite_tac(@list.List([swap_idempotent(), @trivia.i_o_id()])),
   ])
   let t830 = @tactics.subgoal_then(
-    @parser.parse_term("permutation((swap(a,p(a)) o swap(a,p(a))) o (p:A->A))"),
+    @term_syntax.parse_term("permutation(o(o(swap(((a : A), (p : (A) -> A)(a))), swap((a, p(a)))), p))"),
     fn(
       x827 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8103,15 +8103,15 @@ fn step_104() -> Unit raise {
   )
   let t826 = @tactics.repeat_tac(@tactics.strip_tac)
   let t825 = @simp.rewrite_tac(@list.List([@sets.in_insert()]))
-  let t823 = @parser.parse_term("s:A->bool")
+  let t823 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t824 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t823]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t823]),
   )
   let t821 = @simp.asm_rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.i_thm()]),
   )
-  let t820 = @tactics.subgoal_then(@parser.parse_term("p:A->A = I"), fn(
+  let t820 = @tactics.subgoal_then(@term_syntax.parse_term("(p : (A) -> A) == I"), fn(
     x818 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -8227,7 +8227,7 @@ pub fn permutation_lemma() -> @kernel.Thm {
 /// PERMUTATION
 fn step_105() -> Unit raise {
   let t852 = @simp.asm_simp_tac(@list.List([@sets.in_elim_thm()]))
-  let t851 = @tactics.exists_tac(@parser.parse_term("{x:A | ~(p x = x)}"))
+  let t851 = @tactics.exists_tac(@term_syntax.parse_term("{(x : A) | !((p : (A) -> A)(x) == x)}"))
   let t850 = @tactics.match_mp_tac(permutation_lemma())
   let t849 = @simp.simp_tac(
     @list.List([permutation_bijective(), permutation_finite_support()]),
@@ -8448,7 +8448,7 @@ fn step_108() -> Unit raise {
       permutation_compose(),
     ),
   )
-  let t892 = @parser.parse_term("inverse(q:A->A)")
+  let t892 = @term_syntax.parse_term("inverse((q : (A) -> A))")
   let t897 = @tactics.disch_then(fn(
     x896 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8544,7 +8544,7 @@ fn step_108() -> Unit raise {
       permutation_compose(),
     ),
   )
-  let t884 = @parser.parse_term("inverse(p:A->A)")
+  let t884 = @term_syntax.parse_term("inverse((p : (A) -> A))")
   let t898 = @list.List([
     @tactics.disch_then(fn(
       x888 : @kernel.Thm,
@@ -8782,7 +8782,7 @@ fn step_110() -> Unit raise {
   let t907 = @simp.asm_simp_tac(
     @list.List([@sets.in_elim_thm(), @sets.subset()]),
   )
-  let t906 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
+  let t906 = @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t909 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t906),
@@ -8793,7 +8793,7 @@ fn step_110() -> Unit raise {
   let t905 = @simp.asm_simp_tac(@list.List([@sets.in_elim_thm()]))
   let t910 = @list.List([
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("{x:A | ~(p x = x)}")),
+      @tactics.exists_tac(@term_syntax.parse_term("{(x : A) | !((p : (A) -> A)(x) == x)}")),
       t905,
     ),
     t909,
@@ -9005,7 +9005,7 @@ fn step_112() -> Unit raise {
     @tactics.all_tac,
   ])
   let t925 = @tactics.subgoal_then(
-    @parser.parse_term("p = swap(x,p x) o swap(x,p x) o (p:A->A)"),
+    @term_syntax.parse_term("(p : (A) -> A) == o(swap(((x : A), p(x))), o(swap((x, p(x))), p))"),
     fn(
       x922 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9136,18 +9136,18 @@ pub fn permutes_induct() -> @kernel.Thm {
 /// PERMUTES_INDUCT_STRONG
 fn step_113() -> Unit raise {
   let t949 = @simp.asm_simp_tac(@list.List([swap_refl(), @trivia.i_o_id()]))
-  let t948 = @class.asm_cases_tac(@parser.parse_term("a:A = b"))
-  let t946 = @parser.parse_term("b:A")
+  let t948 = @class.asm_cases_tac(@term_syntax.parse_term("(a : A) == (b : A)"))
+  let t946 = @term_syntax.parse_term("(b : A)")
   let t947 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t946]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t946]),
   )
   let t945 = @simp.asm_simp_tac(
     @list.List([permutes_i(), permutes_compose(), permutes_swap()]),
   )
   let t944 = @tactics.match_mp_tac(permutes_induct())
   let t943 = @simp.once_rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("p ==> q <=> p ==> p /\\ q"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (p → p && q)"))]),
   )
   let t950 = @tactics.then_tac(
     @tactics.then_tac(
@@ -9197,7 +9197,7 @@ pub fn permutes_induct_strong() -> @kernel.Thm {
 fn step_114() -> Unit raise {
   sign_c.set(
     @pair.new_definition(
-      @parser.parse_term("(sign p):real = if evenperm p then &1 else -- &1"),
+      @term_syntax.parse_term("(sign : ((_) -> _) -> Real)((p : (_) -> _)) == (if evenperm(p) { real_of_num(1) } else { -real_of_num(1) })"),
     ),
   )
 }
@@ -9218,7 +9218,7 @@ fn step_115() -> Unit raise {
     @simp.rewrite_tac(@list.List([sign()])),
     @calc_rat.real_arith_tac,
   )
-  sign_nz_c.set(@tactics.prove(@parser.parse_term("forall p. ~(sign p = &0)"), t951))
+  sign_nz_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : (_) -> _, !(sign(p) == real_of_num(0))"), t951))
 }
 
 ///|
@@ -9234,7 +9234,7 @@ pub fn sign_nz() -> @kernel.Thm {
 /// SIGN_I
 fn step_116() -> Unit raise {
   let t952 = @simp.rewrite_tac(@list.List([sign(), evenperm_i()]))
-  sign_i_c.set(@tactics.prove(@parser.parse_term("sign I = &1"), t952))
+  sign_i_c.set(@tactics.prove(@term_syntax.parse_term("(sign : ((_) -> _) -> Real)((I : (_) -> _)) == real_of_num(1)"), t952))
 }
 
 ///|
@@ -9250,7 +9250,7 @@ pub fn sign_i() -> @kernel.Thm {
 /// SIGN_ID
 fn step_117() -> Unit raise {
   let t953 = @simp.rewrite_tac(@list.List([sign(), evenperm_id()]))
-  sign_id_c.set(@tactics.prove(@parser.parse_term("sign(\\x:A. x) = &1"), t953))
+  sign_id_c.set(@tactics.prove(@term_syntax.parse_term("sign((x : A) => x) == real_of_num(1)"), t953))
 }
 
 ///|
@@ -9271,7 +9271,7 @@ fn step_118() -> Unit raise {
   )
   sign_inverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p. permutation p ==> sign(inverse p) = sign p"),
+      @term_syntax.parse_term("∀ p : (_) -> _, permutation(p) → sign(inverse(p)) == sign(p)"),
       t954,
     ),
   )
@@ -9318,7 +9318,7 @@ fn step_120() -> Unit raise {
   let t956 = @simp.rewrite_tac(@list.List([sign(), evenperm_swap()]))
   sign_swap_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b. sign(swap(a,b)) = if a = b then &1 else -- &1"),
+      @term_syntax.parse_term("∀ a : _, ∀ b : _, sign(swap((a, b))) == (if a == b { real_of_num(1) } else { -real_of_num(1) })"),
       t956,
     ),
   )
@@ -9352,7 +9352,7 @@ fn step_121() -> Unit raise {
     t958,
   )
   sign_idempotent_c.set(
-    @tactics.prove(@parser.parse_term("forall p. sign(p) * sign(p) = &1"), t959),
+    @tactics.prove(@term_syntax.parse_term("∀ p : (_) -> _, sign(p) * sign(p) == real_of_num(1)"), t959),
   )
 }
 
@@ -9375,7 +9375,7 @@ fn step_122() -> Unit raise {
     @calc_rat.real_arith_tac,
   )
   real_abs_sign_c.set(
-    @tactics.prove(@parser.parse_term("forall p. abs(sign p) = &1"), t960),
+    @tactics.prove(@term_syntax.parse_term("∀ p : (_) -> _, abs(sign(p)) == real_of_num(1)"), t960),
   )
 }
 
@@ -9408,7 +9408,7 @@ fn step_123() -> Unit raise {
   )
   real_sgn_sign_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p:A->A. real_sgn(sign p) = sign p"),
+      @term_syntax.parse_term("∀ p : (A) -> A, real_sgn(sign(p)) == sign(p)"),
       t963,
     ),
   )
@@ -9523,15 +9523,15 @@ fn step_124() -> Unit raise {
     },
   )
   let t1059 = @tactics.first_x_assum(
-    @tactics.x_choose_then(@parser.parse_term("x:A"))(t1058),
+    @tactics.x_choose_then(@term_syntax.parse_term("(x : A)"))(t1058),
   )
   let t1051 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
   let t1050 = @simp.asm_rewrite_tac(@list.List([]))
   let t1049 = @class.asm_cases_tac(
-    @parser.parse_term("?x. y = (f:A->B) x /\\ x IN s"),
+    @term_syntax.parse_term("∃ x : A, (y : B) == (f : (A) -> B)(x) && IN(x, (s : (A) -> Bool))"),
   )
   let t1048 = @simp.rewrite_tac(@list.List([@sets.in_image()]))
-  let t1047 = @tactics.x_gen_tac(@parser.parse_term("y:B"))
+  let t1047 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : B)"))
   let t1046 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([permutes_alt()])),
   )
@@ -9610,10 +9610,10 @@ fn step_124() -> Unit raise {
     @tactics.ap_term_tac,
   )
   let t1038 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t1037 = @tactics.exists_tac(@parser.parse_term("p:A->A"))
+  let t1037 = @tactics.exists_tac(@term_syntax.parse_term("(p : (A) -> A)"))
   let t1036 = @tactics.match_mp_tac(permutes_transfer())
   let t1035 = @simp.asm_simp_tac(@list.List([@sets.finite_image()]))
-  let t1034 = @tactics.exists_tac(@parser.parse_term("IMAGE (f:A->B) s"))
+  let t1034 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((f : (A) -> B), (s : (A) -> Bool))"))
   let t1044 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9646,7 +9646,7 @@ fn step_124() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1020 = @tactics.subgoal_then(
-    @parser.parse_term("evenperm(swap(a,b)) = evenperm(swap((f:A->B) a,f b))"),
+    @term_syntax.parse_term("evenperm(swap(((a : A), (b : A)))) == evenperm(swap(((f : (A) -> B)(a), f(b))))"),
     fn(
       x1017 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9817,11 +9817,11 @@ fn step_124() -> Unit raise {
     },
     evenperm_compose(),
   )
-  let t992 = @parser.parse_term("p:A->A")
-  let t993 = @parser.parse_term("b:A")
+  let t992 = @term_syntax.parse_term("(p : (A) -> A)")
+  let t993 = @term_syntax.parse_term("(b : A)")
   let t994 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("a:A"), t993, t992]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t993, t992]),
   )
   let t990 = @simp.rewrite_tac(@list.List([evenperm_i()]))
   let t989 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -9931,7 +9931,7 @@ fn step_124() -> Unit raise {
       @simp.rewrite_tac(@list.List([th]))
     },
   )
-  let t974 = @parser.parse_term("g:B->A")
+  let t974 = @term_syntax.parse_term("(g : (B) -> A)")
   let t976 = @tactics.disch_then((x975 : @kernel.Thm) => {
     @tactics.x_choose_tac(t974, x975)
   })
@@ -10913,8 +10913,8 @@ fn step_126() -> Unit raise {
   let t1116 = @simp.asm_simp_tac(
     @list.List([@pair.pair_eq(), @sets.in_image(), @pair.forall_pair_thm()]),
   )
-  let t1115 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
-  let t1114 = @tactics.exists_tac(@parser.parse_term("\\x:A. x,(b:B)"))
+  let t1115 = @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
+  let t1114 = @tactics.exists_tac(@term_syntax.parse_term("(x : A) => (x, (b : B))"))
   let t1113 = @tactics.match_mp_tac(sign_transfer())
   let t1112 = @simp.asm_simp_tac(
     @list.List([@sets.card_clauses(), @realax.real_pow(), @sets.in_sing()]),
@@ -10971,10 +10971,10 @@ fn step_126() -> Unit raise {
     @list.List([@sets.finite_cross_eq(), @sets.finite_sing()]),
   )
   let t1102 = @tactics.exists_tac(
-    @parser.parse_term("(s:A->bool) CROSS (t:B->bool)"),
+    @term_syntax.parse_term("CROSS((s : (A) -> Bool), (t : (B) -> Bool))"),
   )
   let t1103 = @list.List([
-    @tactics.exists_tac(@parser.parse_term("(s:A->bool) CROSS {b:B}")),
+    @tactics.exists_tac(@term_syntax.parse_term("CROSS((s : (A) -> Bool), {(b : B)})")),
     t1102,
   ])
   let t1111 = @list.List([
@@ -11003,15 +11003,15 @@ fn step_126() -> Unit raise {
     sign_compose(),
   )
   let t1090 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1089 = @class.asm_cases_tac(@parser.parse_term("(j:B) IN t"))
+  let t1089 = @class.asm_cases_tac(@term_syntax.parse_term("IN((j : B), (t : (B) -> Bool))"))
   let t1088 = @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty()]))
-  let t1087 = @class.asm_cases_tac(@parser.parse_term("j:B = b"))
+  let t1087 = @class.asm_cases_tac(@term_syntax.parse_term("(j : B) == (b : B)"))
   let t1086 = @simp.asm_rewrite_tac(@list.List([@sets.in_insert()]))
-  let t1085 = @class.asm_cases_tac(@parser.parse_term("(i:A) IN s"))
-  let t1083 = @parser.parse_term("j:B")
+  let t1085 = @class.asm_cases_tac(@term_syntax.parse_term("IN((i : A), (s : (A) -> Bool))"))
+  let t1083 = @term_syntax.parse_term("(j : B)")
   let t1084 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("i:A"), t1083]),
+    @list.List([@term_syntax.parse_term("(i : A)"), t1083]),
   )
   let t1091 = @list.List([
     @tactics.then_tac(
@@ -11095,11 +11095,11 @@ fn step_126() -> Unit raise {
       }
     },
   )
-  let t1076 = @parser.parse_term("t:B->bool")
+  let t1076 = @term_syntax.parse_term("(t : (B) -> Bool)")
   let t1077 = @tactics.then_tac(
     @tactics.map_every(
       @tactics.x_gen_tac,
-      @list.List([@parser.parse_term("b:B"), t1076]),
+      @list.List([@term_syntax.parse_term("(b : B)"), t1076]),
     ),
     @tactics.strip_tac,
   )
@@ -11408,9 +11408,9 @@ fn step_126() -> Unit raise {
     ]),
   )
   let t1130 = @tactics.exists_tac(
-    @parser.parse_term("(t:B->bool) CROSS (s:A->bool)"),
+    @term_syntax.parse_term("CROSS((t : (B) -> Bool), (s : (A) -> Bool))"),
   )
-  let t1129 = @tactics.exists_tac(@parser.parse_term("\\(i:B,j:A). j,i"))
+  let t1129 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((B, A)) -> (A, B)) => ∀ i : B, ∀ j : A, GEQ(f((i, j)), (j, i)))"))
   let t1128 = @tactics.match_mp_tac(sign_transfer())
   let t1127 = @tactics.disch_then(fn(
     x1126 : @kernel.Thm,
@@ -11481,11 +11481,11 @@ fn step_126() -> Unit raise {
     })(@equal.sym(x1126))
   })
   let t1122 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1119 = @parser.parse_term("s:A->bool")
-  let t1120 = @parser.parse_term("t:B->bool")
+  let t1119 = @term_syntax.parse_term("(s : (A) -> Bool)")
+  let t1120 = @term_syntax.parse_term("(t : (B) -> Bool)")
   let t1121 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("p:B->B"), t1120, t1119]),
+      @list.List([@term_syntax.parse_term("(p : (B) -> B)"), t1120, t1119]),
       lemma1,
     ),
   )
@@ -11587,7 +11587,7 @@ fn step_126() -> Unit raise {
     ]),
   )
   let t1156 = @tactics.exists_tac(
-    @parser.parse_term("(s:A->bool) CROSS (t:B->bool)"),
+    @term_syntax.parse_term("CROSS((s : (A) -> Bool), (t : (B) -> Bool))"),
   )
   let t1162 = @list.List([
     @tactics.then_tac(
@@ -11877,8 +11877,8 @@ fn step_127() -> Unit raise {
     @tactics.all_tac,
     @meson.asm_meson_tac(@list.List([permutes()])),
   ])
-  let t1168 = @class.asm_cases_tac(@parser.parse_term("(n:num) IN s"))
-  let t1167 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t1168 = @class.asm_cases_tac(@term_syntax.parse_term("IN((n : Num), (s : (Num) -> Bool))"))
+  let t1167 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t1166 = @tactics.match_mp_tac(@arith.num_wf())
   let t1165 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.i_thm()]),
@@ -11947,10 +11947,10 @@ fn step_128() -> Unit raise {
     ),
     t1176,
   ])
-  let t1174 = @parser.parse_term("s:num->bool")
+  let t1174 = @term_syntax.parse_term("(s : (Num) -> Bool)")
   let t1175 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("inverse(p:num->num)"), t1174]),
+      @list.List([@term_syntax.parse_term("inverse((p : (Num) -> Num))"), t1174]),
       permutes_numset_le(),
     ),
   )
@@ -12026,7 +12026,7 @@ fn step_130() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.disch_tac,
-        @tactics.exists_tac(@parser.parse_term("inverse(q:A->A) o (p:A->A)")),
+        @tactics.exists_tac(@term_syntax.parse_term("o(inverse((q : (A) -> A)), (p : (A) -> A))")),
       ),
       t1183,
     ),
@@ -12036,7 +12036,7 @@ fn step_130() -> Unit raise {
     @meson.asm_meson_tac(@list.List([permutes_compose()])),
     t1185,
   ])
-  let t1182 = @tactics.x_gen_tac(@parser.parse_term("p:A->A"))
+  let t1182 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : (A) -> A)"))
   let t1181 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1187 = @tactics.thenl(
     @tactics.then_tac(
@@ -12094,7 +12094,7 @@ fn step_131() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.disch_tac,
-        @tactics.exists_tac(@parser.parse_term("(p:A->A) o inverse(q:A->A)")),
+        @tactics.exists_tac(@term_syntax.parse_term("o((p : (A) -> A), inverse((q : (A) -> A)))")),
       ),
       t1190,
     ),
@@ -12104,7 +12104,7 @@ fn step_131() -> Unit raise {
     @meson.asm_meson_tac(@list.List([permutes_compose()])),
     t1192,
   ])
-  let t1189 = @tactics.x_gen_tac(@parser.parse_term("p:A->A"))
+  let t1189 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : (A) -> A)"))
   let t1188 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1194 = @tactics.thenl(
     @tactics.then_tac(
@@ -12220,7 +12220,7 @@ fn step_133() -> Unit raise {
       )
     },
     @list.List([
-      @sets.set_rule(@parser.parse_term("{f x | p x} = IMAGE f {x | p x}")),
+      @sets.set_rule(@term_syntax.parse_term("{(f : (_) -> _)((x : _)) | (p : (_) -> Bool)(x)} == IMAGE(f, {(x : _) | p(x)})")),
     ]),
   )
   let t1201 = @simp.gen_rewrite_tac(
@@ -12350,7 +12350,7 @@ fn step_134() -> Unit raise {
     t1254(t1253(x1255))
   })
   let t1249 = @simp.rewrite_tac(@list.List([@trivia.o_assoc()]))
-  let t1245 = @parser.parse_term("\\p:num->num. inverse(q:num->num) o p")
+  let t1245 = @term_syntax.parse_term("(p : (Num) -> Num) => o(inverse((q : (Num) -> Num)), p)")
   let t1248 = @tactics.first_x_assum(fn(
     x1247 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12462,7 +12462,7 @@ fn step_134() -> Unit raise {
       )
     },
     @list.List([
-      @sets.set_rule(@parser.parse_term("{f x | p x} = IMAGE f {x | p x}")),
+      @sets.set_rule(@term_syntax.parse_term("{(f : (_) -> _)((x : _)) | (p : (_) -> Bool)(x)} == IMAGE(f, {(x : _) | p(x)})")),
     ]),
   )
   let t1225 = @tactics.first_assum(fn(
@@ -12632,7 +12632,7 @@ fn step_135() -> Unit raise {
     t1294(t1293(x1295))
   })
   let t1289 = @simp.rewrite_tac(@list.List([@equal.gsym(@trivia.o_assoc())]))
-  let t1285 = @parser.parse_term("\\p:num->num. p o inverse(q:num->num)")
+  let t1285 = @term_syntax.parse_term("(p : (Num) -> Num) => o(p, inverse((q : (Num) -> Num)))")
   let t1288 = @tactics.first_x_assum(fn(
     x1287 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12744,7 +12744,7 @@ fn step_135() -> Unit raise {
       )
     },
     @list.List([
-      @sets.set_rule(@parser.parse_term("{f x | p x} = IMAGE f {x | p x}")),
+      @sets.set_rule(@term_syntax.parse_term("{(f : (_) -> _)((x : _)) | (p : (_) -> Bool)(x)} == IMAGE(f, {(x : _) | p(x)})")),
     ]),
   )
   let t1265 = @tactics.first_assum(fn(
@@ -12856,7 +12856,7 @@ fn step_136() -> Unit raise {
   let t1348 = @simp.asm_simp_tac(@list.List([@sets.in_elim_thm()]))
   let t1347 = @tactics.match_mp_tac(@sets.card_image_inj())
   let t1346 = @tactics.match_mp_tac(
-    @int.arith_rule(@parser.parse_term("b = a ==> 2 * a = a + b")),
+    @int.arith_rule(@term_syntax.parse_term("(b : Num) == (a : Num) → 2 * a == a + b")),
   )
   let t1344 = @tactics.disch_then(fn(
     x1341 : @kernel.Thm,
@@ -13318,7 +13318,7 @@ fn step_136() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1312 = @tactics.subgoal_then(
-    @parser.parse_term("forall Q. FINITE {p:A->A | p permutes s /\\ Q p}"),
+    @term_syntax.parse_term("∀ Q : ((A) -> A) -> Bool, FINITE({(p : (A) -> A) | permutes(p, (s : (A) -> Bool)) && Q(p)})"),
     fn(
       x1309 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13371,7 +13371,7 @@ fn step_136() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1307 = @tactics.subgoal_then(
-    @parser.parse_term("forall p:A->A. p permutes s ==> permutation p"),
+    @term_syntax.parse_term("∀ p : (A) -> A, permutes(p, (s : (A) -> Bool)) → permutation(p)"),
     fn(
       x1304 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13421,15 +13421,15 @@ fn step_136() -> Unit raise {
   )
   let t1302 = @sets.set_tac(@list.List([]))
   let t1301 = @simp.asm_rewrite_tac(
-    @list.List([@sets.has_size_conv(@parser.parse_term("s HAS_SIZE 2"))]),
+    @list.List([@sets.has_size_conv(@term_syntax.parse_term("HAS_SIZE((s : (_) -> Bool), 2)"))]),
   )
-  let t1300 = @parser.parse_term("s:A->bool")
+  let t1300 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t1303 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.mp_tac(
           @bool.specl(
-            @list.List([@parser.parse_term("2"), t1300]),
+            @list.List([@term_syntax.parse_term("2"), t1300]),
             @sets.choose_subset_strong(),
           ),
         ),
@@ -13440,7 +13440,7 @@ fn step_136() -> Unit raise {
     @tactics.all_tac,
   ])
   let t1299 = @tactics.subgoal_then(
-    @parser.parse_term("?a b:A. a IN s /\\ b IN s /\\ ~(a = b)"),
+    @term_syntax.parse_term("∃ a : A, ∃ b : A, IN(a, (s : (A) -> Bool)) && IN(b, s) && !(a == b)"),
     @tactics.strip_assume_tac,
   )
   let t1353 = @tactics.thenl(
@@ -13493,7 +13493,7 @@ pub fn card_even_permutations() -> @kernel.Thm {
 /// PERMUTES_INVOLUTION
 fn step_137() -> Unit raise {
   let t1356 = @meson.asm_meson_tac(@list.List([]))
-  let t1355 = @tactics.exists_tac(@parser.parse_term("p:A->A"))
+  let t1355 = @tactics.exists_tac(@term_syntax.parse_term("(p : (A) -> A)"))
   let t1354 = @tactics.match_mp_tac(permutes_bijections())
   let t1357 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13546,13 +13546,13 @@ fn step_138() -> Unit raise {
     ),
     t1421,
   ])
-  let t1417 = @parser.parse_term("CARD {a:A,p a}")
+  let t1417 = @term_syntax.parse_term("CARD({(a : A), (p : (A) -> A)(a)})")
   let t1418 = @tactics.trans_tac(@arith.le_trans())(t1417)
   let t1416 = @tactics.match_mp_tac(
-    @int.arith_rule(@parser.parse_term("2 <= n ==> n - 1 - 1 + 2 = n")),
+    @int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → n - 1 - 1 + 2 == n")),
   )
   let t1415 = @tactics.match_mp_tac(
-    @int.arith_rule(@parser.parse_term("m + 2 = n ==> SUC(m DIV 2) = n DIV 2")),
+    @int.arith_rule(@term_syntax.parse_term("(m : Num) + 2 == (n : Num) → SUC(DIV(m, 2)) == DIV(n, 2)")),
   )
   let t1414 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@bool.conjunct2(@realax.real_pow()))]),
@@ -13566,7 +13566,7 @@ fn step_138() -> Unit raise {
     ]),
   )
   let t1411 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t1410 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
+  let t1410 = @tactics.exists_tac(@term_syntax.parse_term("(s : (A) -> Bool)"))
   let t1413 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t1410),
@@ -13575,7 +13575,7 @@ fn step_138() -> Unit raise {
     t1412,
   ])
   let t1409 = @tactics.subgoal_then(
-    @parser.parse_term("FINITE {x:A | ~(p x = x)}"),
+    @term_syntax.parse_term("FINITE({(x : A) | !((p : (A) -> A)(x) == x)})"),
     fn(
       x1406 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13680,7 +13680,7 @@ fn step_138() -> Unit raise {
   )
   let t1400 = @tactics.match_mp_tac(
     @calc_rat.real_ring(
-      @parser.parse_term("-- &1 * a:real = b ==> s * -- &1 = a ==> s = b"),
+      @term_syntax.parse_term("-real_of_num(1) * (a : Real) == (b : Real) → (s : Real) * -real_of_num(1) == a → s == b"),
     ),
   )
   let t1399 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
@@ -13688,7 +13688,7 @@ fn step_138() -> Unit raise {
   let t1397 = @simp.asm_simp_tac(
     @list.List([sign_compose(), permutation_swap(), sign_swap()]),
   )
-  let t1393 = @parser.parse_term("p o swap(a:A,p a)")
+  let t1393 = @term_syntax.parse_term("o((p : (A) -> A), swap(((a : A), p(a))))")
   let t1396 = @tactics.disch_then(fn(
     x1395 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13763,7 +13763,7 @@ fn step_138() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t1388 = @tactics.subgoal_then(@parser.parse_term("permutation(p:A->A)"), fn(
+  let t1388 = @tactics.subgoal_then(@term_syntax.parse_term("permutation((p : (A) -> A))"), fn(
     x1385 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -13816,13 +13816,13 @@ fn step_138() -> Unit raise {
   let t1383 = @simp.asm_simp_tac(
     @list.List([
       @sets.card_eq_0(),
-      @int.arith_rule(@parser.parse_term("n - 1 - 1 < n <=> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) - 1 - 1 < n) == !(n == 0)")),
     ]),
   )
   let t1382 = @simp.asm_simp_tac(
     @list.List([@sets.card_delete(), @sets.finite_delete(), @sets.in_delete()]),
   )
-  let t1378 = @parser.parse_term("s DELETE (a:A) DELETE (p a)")
+  let t1378 = @term_syntax.parse_term("DELETE(DELETE((s : (A) -> Bool), (a : A)), (p : (A) -> A)(a))")
   let t1381 = @tactics.first_x_assum(fn(
     x1380 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13893,10 +13893,10 @@ fn step_138() -> Unit raise {
   })
   let t1374 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t1373 = @tactics.subgoal_then(
-    @parser.parse_term("(a:A) IN s /\\ p a IN s"),
+    @term_syntax.parse_term("IN((a : A), (s : (A) -> Bool)) && IN((p : (A) -> A)(a), s)"),
     @tactics.strip_assume_tac,
   )
-  let t1372 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
+  let t1372 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t1371 = @simp.rewrite_tac(
     @list.List([
       @theorems.left_imp_exists_thm(),
@@ -13992,9 +13992,9 @@ fn step_138() -> Unit raise {
       @calc_num.arith_eq(),
     ]),
   )
-  let t1360 = @class.asm_cases_tac(@parser.parse_term("p:A->A = I"))
+  let t1360 = @class.asm_cases_tac(@term_syntax.parse_term("(p : (A) -> A) == I"))
   let t1359 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t1358 = @wf.wf_induct_tac(@parser.parse_term("CARD(s:A->bool)"))
+  let t1358 = @wf.wf_induct_tac(@term_syntax.parse_term("CARD((s : (A) -> Bool))"))
   let t1423 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14133,7 +14133,7 @@ fn step_139() -> Unit raise {
   let t1426 = @simp.simp_tac(
     @list.List([
       @arith.mod_cases(),
-      @int.arith_rule(@parser.parse_term("x < n ==> x + 1 < 2 * n")),
+      @int.arith_rule(@term_syntax.parse_term("(x : Num) < (n : Num) → x + 1 < 2 * n")),
     ]),
   )
   let t1425 = @simp.simp_tac(@list.List([]))
@@ -14192,10 +14192,10 @@ fn step_140() -> Unit raise {
   )
   let t1438 = @simp.rewrite_tac(@list.List([@arith.add1()]))
   let t1437 = @simp.asm_rewrite_tac(@list.List([@arith.mod_lt_eq()]))
-  let t1436 = @class.asm_cases_tac(@parser.parse_term("m:num < n"))
+  let t1436 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) < (n : Num)"))
   let t1435 = @simp.asm_rewrite_tac(@list.List([@bool.conjunct1(@arith.lt())]))
-  let t1434 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
-  let t1433 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
+  let t1434 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
+  let t1433 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)"))
   let t1442 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14319,7 +14319,7 @@ fn step_141() -> Unit raise {
   let t1445 = @simp.asm_rewrite_tac(
     @list.List([permutes_cyclic(), @sets.finite_numseg_lt()]),
   )
-  let t1444 = @tactics.exists_tac(@parser.parse_term("{i:num | i < n}"))
+  let t1444 = @tactics.exists_tac(@term_syntax.parse_term("{(i : Num) | i < (n : Num)}"))
   let t1446 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14357,7 +14357,7 @@ fn step_142() -> Unit raise {
   let t1449 = @simp.asm_rewrite_tac(
     @list.List([permutes_cyclic_n(), @sets.finite_numseg_lt()]),
   )
-  let t1448 = @tactics.exists_tac(@parser.parse_term("{i:num | i < n}"))
+  let t1448 = @tactics.exists_tac(@term_syntax.parse_term("{(i : Num) | i < (n : Num)}"))
   let t1447 = @simp.rewrite_tac(@list.List([permutation_permutes()]))
   let t1450 = @tactics.then_tac(
     @tactics.then_tac(
@@ -14406,18 +14406,18 @@ fn step_143() -> Unit raise {
     t1466,
   )
   let t1464 = @simp.asm_simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("m < n ==> m < SUC n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(m : Num) < (n : Num) → m < SUC(n)"))]),
   )
-  let t1463 = @class.asm_cases_tac(@parser.parse_term("m:num < n"))
+  let t1463 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) < (n : Num)"))
   let t1462 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("m + 1 < n ==> m < n /\\ m < SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("(m : Num) + 1 < (n : Num) → m < n && m < SUC(n)")),
     ]),
   )
-  let t1461 = @class.asm_cases_tac(@parser.parse_term("m + 1 < n"))
-  let t1460 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
+  let t1461 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) + 1 < (n : Num)"))
+  let t1460 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)"))
   let t1459 = @simp.rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("m + 1 < SUC n <=> m < n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("((m : Num) + 1 < SUC((n : Num))) == (m < n)"))]),
   )
   let t1458 = @tactics.pop_assum_list(fn(
     x1457 : @list.List[@kernel.Thm],
@@ -14460,7 +14460,7 @@ fn step_143() -> Unit raise {
                           @list.List([
                             @arith.mod_cases(),
                             @int.arith_rule(
-                              @parser.parse_term("x < n ==> x + 1 < 2 * n"),
+                              @term_syntax.parse_term("(x : Num) < (n : Num) → x + 1 < 2 * n"),
                             ),
                           ]),
                         ),
@@ -14583,7 +14583,7 @@ pub fn evenperm_cyclic() -> @kernel.Thm {
 fn step_144() -> Unit raise {
   let t1487 = @meson.meson_tac(@list.List([@arith.not_even()]))
   let t1486 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1485 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t1485 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t1484 = @simp.rewrite_tac(
     @list.List([evenperm_cyclic(), @arith.even(), @arith.not_even()]),
   )
@@ -14595,10 +14595,10 @@ fn step_144() -> Unit raise {
   )
   let t1480 = @simp.rewrite_tac(@list.List([@arith.add1()]))
   let t1479 = @simp.asm_rewrite_tac(@list.List([@arith.mod_lt_eq()]))
-  let t1478 = @class.asm_cases_tac(@parser.parse_term("m:num < n"))
+  let t1478 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) < (n : Num)"))
   let t1477 = @simp.asm_rewrite_tac(@list.List([@bool.conjunct1(@arith.lt())]))
-  let t1476 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
-  let t1475 = @tactics.x_gen_tac(@parser.parse_term("m:num"))
+  let t1476 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
+  let t1475 = @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)"))
   let t1482 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14737,13 +14737,13 @@ pub fn evenperm_cyclic_n() -> @kernel.Thm {
 fn step_145() -> Unit raise {
   let t1492 = @simp.asm_rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n <= 1 <=> n = 1 \\/ n = 0")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) <= 1) == (n == 1 || n == 0)")),
     ]),
   )
   let t1491 = @simp.asm_rewrite_tac(
     @list.List([@arith.le_refl(), @calc_num.arith()]),
   )
-  let t1490 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t1490 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t1489 = @simp.rewrite_tac(
     @list.List([
       @calc_int.real_pow_neg(),
@@ -14794,13 +14794,13 @@ fn step_146() -> Unit raise {
   let t1499 = @meson.meson_tac(@list.List([]))
   let t1498 = @simp.asm_rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n <= 1 <=> n = 1 \\/ n = 0")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) <= 1) == (n == 1 || n == 0)")),
     ]),
   )
   let t1497 = @simp.asm_rewrite_tac(
     @list.List([@arith.le_refl(), @calc_num.arith()]),
   )
-  let t1496 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t1496 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t1495 = @simp.rewrite_tac(
     @list.List([
       @calc_int.real_pow_neg(),
@@ -14856,7 +14856,7 @@ fn step_147() -> Unit raise {
     t1501,
   )
   let pth_empty = @tactics.prove(
-    @parser.parse_term("{p | p permutes {}} = {I}"),
+    @term_syntax.parse_term("{(p : (_) -> _) | permutes(p, {})} == {I}"),
     t1502,
   )
   let pth_cross = @sets.set_rule(
@@ -14938,7 +14938,7 @@ fn step_148() -> Unit raise {
   let t1546 = @simp.rewrite_tac(
     @list.List([@trivia.o_assoc(), swap_idempotent(), @trivia.i_o_id()]),
   )
-  let t1542 = @parser.parse_term("(\\p:A->A. swap(a:A,c) o p)")
+  let t1542 = @term_syntax.parse_term("(p : (A) -> A) => o(swap(((a : A), (c : A))), p)")
   let t1545 = @tactics.first_x_assum(fn(
     x1544 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -15061,7 +15061,7 @@ fn step_148() -> Unit raise {
   )
   let t1535 = @meson.asm_meson_tac(@list.List([permutes()]))
   let t1534 = @simp.rewrite_tac(@list.List([@trivia.o_thm(), swap()]))
-  let t1531 = @parser.parse_term("a:A")
+  let t1531 = @term_syntax.parse_term("(a : A)")
   let t1548 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -15150,16 +15150,16 @@ fn step_148() -> Unit raise {
     t1547,
   ])
   let t1525 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")),
   )
   let t1524 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t1523 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t1519 = @parser.parse_term("q:A->A")
-  let t1520 = @parser.parse_term("c:A")
-  let t1521 = @parser.parse_term("p:A->A")
+  let t1519 = @term_syntax.parse_term("(q : (A) -> A)")
+  let t1520 = @term_syntax.parse_term("(c : A)")
+  let t1521 = @term_syntax.parse_term("(p : (A) -> A)")
   let t1522 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("b:A"), t1521, t1520, t1519]),
+    @list.List([@term_syntax.parse_term("(b : A)"), t1521, t1520, t1519]),
   )
   let t1518 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1517 = @simp.rewrite_tac(
