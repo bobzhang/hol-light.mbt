@@ -5704,108 +5704,108 @@ test "100/inclusion_exclusion matches 100/inclusion_exclusion.ml" {
       #|0..0..2..solved at 5
       #|0..0..1..solved at 4
       #|100/inclusion_exclusion quotations (102):
-      #|  s DELETE (x:A)
-      #|  (a /\\ ~b ==> c) ==> a ==> b \\/ c
-      #|  forall s x:A t. s SUBSET (x INSERT t) <=>\n                s SUBSET t \\/ ?u. u SUBSET t /\\ s = x INSERT u
-      #|  {t:A->bool | t SUBSET s}
-      #|  forall s:A->bool p. FINITE s ==> FINITE {t | t SUBSET s /\\ p t}
-      #|  {t | t SUBSET (a INSERT s) /\\ P t} =\n     {t | t SUBSET s /\\ P t} UNION\n     {a INSERT t |t| t SUBSET s /\\ P(a INSERT t)}
-      #|  FINITE(B:I->bool)
-      #|  B:I->bool
-      #|  {s | P s /\\ ~(s = e)} = {s | P s} DELETE e
-      #|  x - a:real = x + b <=> b = --a
-      #|  f((x:I->(A->bool)) a) +\n              sum {B | B SUBSET A /\\ ~(B = {})}\n                  (\\B. --(&1) pow (CARD B) *\n                       f(INTERS(IMAGE x (a INSERT B))))
-      #|  (fa + s) - fas:real = s + s' <=> fa - fas = s'
-      #|  A:I->bool
-      #|  n:num
-      #|  (s INTER t) UNION (t DIFF s) = t
-      #|  s UNION (t DIFF s) = s UNION t
-      #|  forall s t:A->bool. P s /\\ P t /\\ DISJOINT s t\n                                 ==> f(s UNION t):real = f(s) + f(t)
-      #|  s:A->bool
-      #|  (x:I->(A->bool)) a
-      #|  t:A->bool
-      #|  UNIONS(IMAGE (x:I->(A->bool)) A)
-      #|  u:I->bool
-      #|  A:I->bool
-      #|  FINITE(A:I->bool)
-      #|  forall b. b IN A ==> P((x:I->(A->bool)) b)
-      #|  P(x a) /\\ P(UNIONS(IMAGE (x:I->(A->bool)) A))
-      #|  (f(x a) + f(UNIONS (IMAGE (x:I->(A->bool)) A))) -\n              f(x a INTER UNIONS (IMAGE x A)):real
-      #|  x:I->A->bool
-      #|  A:I->bool
-      #|  a:I
-      #|  A0:I->bool
-      #|  n:num
-      #|  {}:A->bool
-      #|  {}:A->bool
-      #|  ~(p /\\ ~p)
-      #|  (forall n s. s HAS_SIZE n ==> P s) ==> (forall s. FINITE s ==> P s)
-      #|  forall P (f:(A->bool)->real) (A:I->bool) (x:I->(A->bool)).\n        (forall s t. P s /\\ P t /\\ DISJOINT s t\n               ==> f(s UNION t) = f(s) + f(t)) /\\\n        P {} /\\\n        (forall s t. P s /\\ P t ==> P(s INTER t) /\\ P(s UNION t) /\\ P(s DIFF t)) /\\\n        FINITE A /\\ (forall a. a IN A ==> P(x a))\n        ==> f(UNIONS(IMAGE x A)) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS(IMAGE x B)))
-      #|  t DIFF s:A->bool
-      #|  s:A->bool
-      #|  t DIFF s:A->bool
-      #|  s INTER t:A->bool
-      #|  x:I->(A->bool)
-      #|  \\s. (x:I->(A->bool)) a INTER x s
-      #|  \\x:A->bool. x
-      #|  A:(A->bool)->bool
-      #|  f:(A->bool)->real
-      #|  P:(A->bool)->bool
-      #|  forall P (f:(A->bool)->real) (A:(A->bool)->bool).\n        (forall s t. P s /\\ P t /\\ DISJOINT s t\n               ==> f(s UNION t) = f(s) + f(t)) /\\\n        P {} /\\\n        (forall s t. P s /\\ P t ==> P(s INTER t) /\\ P(s UNION t) /\\ P(s DIFF t)) /\\\n        FINITE A /\\ (forall a. a IN A ==> P(a))\n        ==> f(UNIONS A) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS B))
-      #|  \\x:A->bool. T
-      #|  forall(f:(A->bool)->real) (A:I->bool) (x:I->(A->bool)).\n        (forall s t. DISJOINT s t ==> f(s UNION t) = f(s) + f(t)) /\\ FINITE A\n        ==> f(UNIONS(IMAGE x A)) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS(IMAGE x B)))
-      #|  \\x:A->bool. x
-      #|  A:(A->bool)->bool
-      #|  f:(A->bool)->real
-      #|  forall(f:(A->bool)->real) (A:(A->bool)->bool).\n        (forall s t. DISJOINT s t ==> f(s UNION t) = f(s) + f(t)) /\\ FINITE A\n        ==> f(UNIONS A) =\n            sum {B | B SUBSET A /\\ ~(B = {})}\n                (\\B. (-- &1) pow (CARD B + 1) * f(INTERS B))
-      #|  s:(A->bool)->bool
-      #|  \\s:A->bool. &(CARD s)
-      #|  \\s:A->bool. FINITE s
-      #|  forall s:(A->bool)->bool.\n        FINITE s /\\ (forall k. k IN s ==> FINITE k)\n        ==> &(CARD(UNIONS s)) =\n                sum {t | t SUBSET s /\\ ~(t = {})}\n                    (\\t. (-- &1) pow (CARD t + 1) * &(CARD(INTERS t)))
-      #|  ~(1 <= 0)
-      #|  n:num
-      #|  1 <= a <=> ~(a = 0)
-      #|  s = t /\\ sum t f = sum t g ==> sum s f = sum t g
-      #|  CARD
-      #|  forall s:(A->bool)->bool.\n        FINITE s /\\ (forall k. k IN s ==> FINITE k)\n        ==> &(CARD(UNIONS s)) =\n                sum (1..CARD s) (\\n. (-- &1) pow (n + 1) *\n                                     sum {t | t SUBSET s /\\ t HAS_SIZE n}\n                                         (\\t. &(CARD(INTERS t))))
-      #|  {t:A->bool | t SUBSET s}
-      #|  forall s:A->bool p. FINITE s ==> FINITE {t | t SUBSET s /\\ p t}
+      #|  DELETE((s : (A) -> Bool), (x : A))
+      #|  ((a : Bool) && !(b : Bool) \226\134\146 (c : Bool)) \226\134\146 a \226\134\146 b || c
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 x : A, \226\136\128 t : (A) -> Bool, SUBSET(s, INSERT(x, t)) == (SUBSET(s, t) || (\226\136\131 u : (A) -> Bool, SUBSET(u, t) && s == INSERT(x, u)))
+      #|  {(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 p : ((A) -> Bool) -> Bool, FINITE(s) \226\134\146 FINITE({(t : (A) -> Bool) | SUBSET(t, s) && p(t)})
+      #|  {(t : (_) -> Bool) | SUBSET(t, INSERT((a : _), (s : (_) -> Bool))) && (P : ((_) -> Bool) -> Bool)(t)} == UNION({(t : (_) -> Bool) | SUBSET(t, s) && P(t)}, {INSERT(a, t) | t : (_) -> Bool | SUBSET(t, s) && P(INSERT(a, t))})
+      #|  FINITE((B : (I) -> Bool))
+      #|  (B : (I) -> Bool)
+      #|  {(s : _) | (P : (_) -> Bool)(s) && !(s == (e : _))} == DELETE({(s : _) | P(s)}, e)
+      #|  ((x : Real) - (a : Real) == x + (b : Real)) == (b == -a)
+      #|  (f : ((A) -> Bool) -> Real)((x : (I, A) -> Bool)((a : I))) + sum({(B : (I) -> Bool) | SUBSET(B, (A : (I) -> Bool)) && !(B == {})}, (B : (I) -> Bool) => pow(-real_of_num(1), CARD(B)) * f(INTERS(IMAGE(x, INSERT(a, B)))))
+      #|  ((fa : Real) + (s : Real) - (fas : Real) == s + (s' : Real)) == (fa - fas == s')
+      #|  (A : (I) -> Bool)
+      #|  (n : Num)
+      #|  UNION(INTER((s : (_) -> Bool), (t : (_) -> Bool)), DIFF(t, s)) == t
+      #|  UNION((s : (_) -> Bool), DIFF((t : (_) -> Bool), s)) == UNION(s, t)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, (P : ((A) -> Bool) -> Bool)(s) && P(t) && DISJOINT(s, t) \226\134\146 (f : ((A) -> Bool) -> Real)(UNION(s, t)) == f(s) + f(t)
+      #|  (s : (A) -> Bool)
+      #|  (x : (I, A) -> Bool)((a : I))
+      #|  (t : (A) -> Bool)
+      #|  UNIONS(IMAGE((x : (I, A) -> Bool), (A : (I) -> Bool)))
+      #|  (u : (I) -> Bool)
+      #|  (A : (I) -> Bool)
+      #|  FINITE((A : (I) -> Bool))
+      #|  \226\136\128 b : I, IN(b, (A : (I) -> Bool)) \226\134\146 (P : ((A) -> Bool) -> Bool)((x : (I, A) -> Bool)(b))
+      #|  (P : ((A) -> Bool) -> Bool)((x : (I, A) -> Bool)((a : I))) && P(UNIONS(IMAGE(x, (A : (I) -> Bool))))
+      #|  (f : ((A) -> Bool) -> Real)((x : (I, A) -> Bool)((a : I))) + f(UNIONS(IMAGE(x, (A : (I) -> Bool)))) - f(INTER(x(a), UNIONS(IMAGE(x, A))))
+      #|  (x : (I, A) -> Bool)
+      #|  (A : (I) -> Bool)
+      #|  (a : I)
+      #|  (A0 : (I) -> Bool)
+      #|  (n : Num)
+      #|  ({} : (A) -> Bool)
+      #|  ({} : (A) -> Bool)
+      #|  !((p : Bool) && !p)
+      #|  (\226\136\128 n : Num, \226\136\128 s : (_) -> Bool, HAS_SIZE(s, n) \226\134\146 (P : ((_) -> Bool) -> Bool)(s)) \226\134\146 (\226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 P(s))
+      #|  \226\136\128 P : ((A) -> Bool) -> Bool, \226\136\128 f : ((A) -> Bool) -> Real, \226\136\128 A : (I) -> Bool, \226\136\128 x : (I, A) -> Bool, (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, P(s) && P(t) && DISJOINT(s, t) \226\134\146 f(UNION(s, t)) == f(s) + f(t)) && P({}) && (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, P(s) && P(t) \226\134\146 P(INTER(s, t)) && P(UNION(s, t)) && P(DIFF(s, t))) && FINITE(A) && (\226\136\128 a : I, IN(a, A) \226\134\146 P(x(a))) \226\134\146 f(UNIONS(IMAGE(x, A))) == sum({(B : (I) -> Bool) | SUBSET(B, A) && !(B == {})}, (B : (I) -> Bool) => pow(-real_of_num(1), CARD(B) + 1) * f(INTERS(IMAGE(x, B))))
+      #|  DIFF((t : (A) -> Bool), (s : (A) -> Bool))
+      #|  (s : (A) -> Bool)
+      #|  DIFF((t : (A) -> Bool), (s : (A) -> Bool))
+      #|  INTER((s : (A) -> Bool), (t : (A) -> Bool))
+      #|  (x : (I, A) -> Bool)
+      #|  (s : I) => INTER((x : (I, A) -> Bool)((a : I)), x(s))
+      #|  (x : (A) -> Bool) => x
+      #|  (A : ((A) -> Bool) -> Bool)
+      #|  (f : ((A) -> Bool) -> Real)
+      #|  (P : ((A) -> Bool) -> Bool)
+      #|  \226\136\128 P : ((A) -> Bool) -> Bool, \226\136\128 f : ((A) -> Bool) -> Real, \226\136\128 A : ((A) -> Bool) -> Bool, (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, P(s) && P(t) && DISJOINT(s, t) \226\134\146 f(UNION(s, t)) == f(s) + f(t)) && P({}) && (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, P(s) && P(t) \226\134\146 P(INTER(s, t)) && P(UNION(s, t)) && P(DIFF(s, t))) && FINITE(A) && (\226\136\128 a : (A) -> Bool, IN(a, A) \226\134\146 P(a)) \226\134\146 f(UNIONS(A)) == sum({(B : ((A) -> Bool) -> Bool) | SUBSET(B, A) && !(B == {})}, (B : ((A) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(B) + 1) * f(INTERS(B)))
+      #|  (x : (A) -> Bool) => true
+      #|  \226\136\128 f : ((A) -> Bool) -> Real, \226\136\128 A : (I) -> Bool, \226\136\128 x : (I, A) -> Bool, (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, DISJOINT(s, t) \226\134\146 f(UNION(s, t)) == f(s) + f(t)) && FINITE(A) \226\134\146 f(UNIONS(IMAGE(x, A))) == sum({(B : (I) -> Bool) | SUBSET(B, A) && !(B == {})}, (B : (I) -> Bool) => pow(-real_of_num(1), CARD(B) + 1) * f(INTERS(IMAGE(x, B))))
+      #|  (x : (A) -> Bool) => x
+      #|  (A : ((A) -> Bool) -> Bool)
+      #|  (f : ((A) -> Bool) -> Real)
+      #|  \226\136\128 f : ((A) -> Bool) -> Real, \226\136\128 A : ((A) -> Bool) -> Bool, (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, DISJOINT(s, t) \226\134\146 f(UNION(s, t)) == f(s) + f(t)) && FINITE(A) \226\134\146 f(UNIONS(A)) == sum({(B : ((A) -> Bool) -> Bool) | SUBSET(B, A) && !(B == {})}, (B : ((A) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(B) + 1) * f(INTERS(B)))
+      #|  (s : ((A) -> Bool) -> Bool)
+      #|  (s : (A) -> Bool) => real_of_num(CARD(s))
+      #|  (s : (A) -> Bool) => FINITE(s)
+      #|  \226\136\128 s : ((A) -> Bool) -> Bool, FINITE(s) && (\226\136\128 k : (A) -> Bool, IN(k, s) \226\134\146 FINITE(k)) \226\134\146 real_of_num(CARD(UNIONS(s))) == sum({(t : ((A) -> Bool) -> Bool) | SUBSET(t, s) && !(t == {})}, (t : ((A) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(t) + 1) * real_of_num(CARD(INTERS(t))))
+      #|  !(1 <= 0)
+      #|  (n : Num)
+      #|  (1 <= (a : Num)) == !(a == 0)
+      #|  (s : (_) -> Bool) == (t : (_) -> Bool) && sum(t, (f : (_) -> Real)) == sum(t, (g : (_) -> Real)) \226\134\146 sum(s, f) == sum(t, g)
+      #|  (CARD : ((_) -> Bool) -> Num)
+      #|  \226\136\128 s : ((A) -> Bool) -> Bool, FINITE(s) && (\226\136\128 k : (A) -> Bool, IN(k, s) \226\134\146 FINITE(k)) \226\134\146 real_of_num(CARD(UNIONS(s))) == sum(op_dot_dot(1, CARD(s)), (n : Num) => pow(-real_of_num(1), n + 1) * sum({(t : ((A) -> Bool) -> Bool) | SUBSET(t, s) && HAS_SIZE(t, n)}, (t : ((A) -> Bool) -> Bool) => real_of_num(CARD(INTERS(t)))))
+      #|  {(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 p : ((A) -> Bool) -> Bool, FINITE(s) \226\134\146 FINITE({(t : (A) -> Bool) | SUBSET(t, s) && p(t)})
       #|  forall f:A->B s x y.\n        FINITE s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        x = y + CARD (IMAGE f s)\n        ==> x = y + CARD s
-      #|  (v:A->bool) SUBSET s
-      #|  t = (x:A) INSERT v
-      #|  v:A->bool
-      #|  t:A->bool
-      #|  ~(a /\\ b) <=> b ==> ~a
-      #|  \\u. (x:A) INSERT u
+      #|  SUBSET((v : (A) -> Bool), (s : (A) -> Bool))
+      #|  (t : (A) -> Bool) == INSERT((x : A), (v : (A) -> Bool))
+      #|  (v : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  !((a : Bool) && (b : Bool)) == (b \226\134\146 !a)
+      #|  (u : (A) -> Bool) => INSERT((x : A), u)
       #|  :B
       #|  :A
-      #|  forall x:A s. FINITE s /\\ ~(x IN s) /\\ u SUBSET s\n           ==> CARD {t | t SUBSET (x INSERT s) /\\ u SUBSET t /\\ ODD(CARD t)} =\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ ODD(CARD t)} +\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ EVEN(CARD t)} /\\\n               CARD {t | t SUBSET (x INSERT s) /\\ u SUBSET t /\\ EVEN(CARD t)} =\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ EVEN(CARD t)} +\n                 CARD {t | t SUBSET s /\\ u SUBSET t /\\ ODD(CARD t)}
-      #|  s:A->bool = v
-      #|  FINITE v /\\ (s:A->bool) SUBSET v
-      #|  v:A->bool = u DELETE x
-      #|  ~((x:A) IN (u DELETE x))
-      #|  x IN s ==> s = x INSERT (s DELETE x)
-      #|  x:A
-      #|  CARD(u:A->bool)
-      #|  a /\\ b /\\ c <=> b /\\ a /\\ c
-      #|  forall s u:A->bool.\n        FINITE u /\\ s PSUBSET u\n        ==> CARD {t | s SUBSET t /\\ t SUBSET u /\\ EVEN(CARD t)} =\n            CARD {t | s SUBSET t /\\ t SUBSET u /\\ ODD(CARD t)}
-      #|  x * &1 + x * -- &1 = &0
-      #|  sum {x | x IN s /\\ EVEN(f x)} (\\x. (-- &1) pow (f x)) +\n              sum {x:A | x IN s /\\ ODD(f x)} (\\x. (-- &1) pow (f x))
-      #|  forall s:A->bool f.\n        FINITE s /\\\n        CARD {x | x IN s /\\ EVEN(f x)} = CARD {x | x IN s /\\ ODD(f x)}\n        ==> sum s (\\x. (-- &1) pow (f x)) = &0
-      #|  (a /\\ b) /\\ c <=> b /\\ a /\\ c
-      #|  {x | x = a} = {a}
-      #|  u:A->bool
-      #|  sum {u | u SUBSET s} (\\u:A->bool. if u = s then f(s) else &0)
-      #|  s SUBSET t ==> (u SUBSET t /\\ u SUBSET s <=> u SUBSET s)
-      #|  sum {t:A->bool | t SUBSET s}\n                  (\\t. (-- &1) pow (CARD t) *\n                       sum {u | u IN {u | u SUBSET s} /\\ u SUBSET t}\n                           (\\u. (-- &1) pow (CARD u) * f(u)))
-      #|  forall f g:(A->bool)->real.\n    (forall s. FINITE s\n         ==> g(s) = sum {t | t SUBSET s} (\\t. (-- &1) pow (CARD t) * f(t)))\n    ==> forall s. FINITE s\n            ==> f(s) = sum {t | t SUBSET s} (\\t. (-- &1) pow (CARD t) * g(t))
-      #|  ~(-- &1 = &0)
-      #|  u:A->bool
-      #|  (*) ((-- &1) pow (CARD(s:A->bool)))
-      #|  s:A->bool
-      #|  g:(A->bool)->real
-      #|  \\t. -- &1 pow CARD(t:A->bool) * f t
-      #|  forall f g:(A->bool)->real.\n        (forall s. FINITE s ==> g(s) = sum {t | t SUBSET s} f)\n        ==> forall s. FINITE s\n                ==> f(s) = sum {t | t SUBSET s}\n                               (\\t. (-- &1) pow (CARD s - CARD t) * g(t))
+      #|  \226\136\128 x : A, \226\136\128 s : (A) -> Bool, FINITE(s) && !IN(x, s) && SUBSET((u : (A) -> Bool), s) \226\134\146 CARD({(t : (A) -> Bool) | SUBSET(t, INSERT(x, s)) && SUBSET(u, t) && ODD(CARD(t))}) == CARD({(t : (A) -> Bool) | SUBSET(t, s) && SUBSET(u, t) && ODD(CARD(t))}) + CARD({(t : (A) -> Bool) | SUBSET(t, s) && SUBSET(u, t) && EVEN(CARD(t))}) && CARD({(t : (A) -> Bool) | SUBSET(t, INSERT(x, s)) && SUBSET(u, t) && EVEN(CARD(t))}) == CARD({(t : (A) -> Bool) | SUBSET(t, s) && SUBSET(u, t) && EVEN(CARD(t))}) + CARD({(t : (A) -> Bool) | SUBSET(t, s) && SUBSET(u, t) && ODD(CARD(t))})
+      #|  (s : (A) -> Bool) == (v : (A) -> Bool)
+      #|  FINITE((v : (A) -> Bool)) && SUBSET((s : (A) -> Bool), v)
+      #|  (v : (A) -> Bool) == DELETE((u : (A) -> Bool), (x : A))
+      #|  !IN((x : A), DELETE((u : (A) -> Bool), x))
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 s == INSERT(x, DELETE(s, x))
+      #|  (x : A)
+      #|  CARD((u : (A) -> Bool))
+      #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 u : (A) -> Bool, FINITE(u) && PSUBSET(s, u) \226\134\146 CARD({(t : (A) -> Bool) | SUBSET(s, t) && SUBSET(t, u) && EVEN(CARD(t))}) == CARD({(t : (A) -> Bool) | SUBSET(s, t) && SUBSET(t, u) && ODD(CARD(t))})
+      #|  (x : Real) * real_of_num(1) + x * -real_of_num(1) == real_of_num(0)
+      #|  sum({(x : A) | IN(x, (s : (A) -> Bool)) && EVEN((f : (A) -> Num)(x))}, (x : A) => pow(-real_of_num(1), f(x))) + sum({(x : A) | IN(x, s) && ODD(f(x))}, (x : A) => pow(-real_of_num(1), f(x)))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> Num, FINITE(s) && CARD({(x : A) | IN(x, s) && EVEN(f(x))}) == CARD({(x : A) | IN(x, s) && ODD(f(x))}) \226\134\146 sum(s, (x : A) => pow(-real_of_num(1), f(x))) == real_of_num(0)
+      #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
+      #|  {(x : _) | x == (a : _)} == {a}
+      #|  (u : (A) -> Bool)
+      #|  sum({(u : (A) -> Bool) | SUBSET(u, (s : (A) -> Bool))}, (u : (A) -> Bool) => if u == s { (f : ((A) -> Bool) -> Real)(s) } else { real_of_num(0) })
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (SUBSET((u : (_) -> Bool), t) && SUBSET(u, s)) == SUBSET(u, s)
+      #|  sum({(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}, (t : (A) -> Bool) => pow(-real_of_num(1), CARD(t)) * sum({(u : (A) -> Bool) | IN(u, {(u : (A) -> Bool) | SUBSET(u, s)}) && SUBSET(u, t)}, (u : (A) -> Bool) => pow(-real_of_num(1), CARD(u)) * (f : ((A) -> Bool) -> Real)(u)))
+      #|  \226\136\128 f : ((A) -> Bool) -> Real, \226\136\128 g : ((A) -> Bool) -> Real, (\226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 g(s) == sum({(t : (A) -> Bool) | SUBSET(t, s)}, (t : (A) -> Bool) => pow(-real_of_num(1), CARD(t)) * f(t))) \226\134\146 (\226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 f(s) == sum({(t : (A) -> Bool) | SUBSET(t, s)}, (t : (A) -> Bool) => pow(-real_of_num(1), CARD(t)) * g(t)))
+      #|  !(-real_of_num(1) == real_of_num(0))
+      #|  (u : (A) -> Bool)
+      #|  op_star(pow(-real_of_num(1), CARD((s : (A) -> Bool))))
+      #|  (s : (A) -> Bool)
+      #|  (g : ((A) -> Bool) -> Real)
+      #|  (t : (A) -> Bool) => pow(-real_of_num(1), CARD(t)) * (f : ((A) -> Bool) -> Real)(t)
+      #|  \226\136\128 f : ((A) -> Bool) -> Real, \226\136\128 g : ((A) -> Bool) -> Real, (\226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 g(s) == sum({(t : (A) -> Bool) | SUBSET(t, s)}, f)) \226\134\146 (\226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 f(s) == sum({(t : (A) -> Bool) | SUBSET(t, s)}, (t : (A) -> Bool) => pow(-real_of_num(1), CARD(s) - CARD(t)) * g(t)))
       #|SUBSET_INSERT_EXISTS =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) ((#INSERT:fun('A,fun(fun('A,bool),fun('A,bool))) x:'A) t:fun('A,bool)))) ((#\/:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) t:fun('A,bool))) (#?:fun(fun(fun('A,bool),bool),bool) (\u:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) u:fun('A,bool)) t:fun('A,bool))) ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) ((#INSERT:fun('A,fun(fun('A,bool),fun('A,bool))) x:'A) u:fun('A,bool))))))))))))))
       #|INCLUSION_EXCLUSION_REAL_RESTRICTED_INDEXED =  |- (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\P:fun(fun('A,bool),bool). (#forall:fun(fun(fun(fun('A,bool),real),bool),bool) (\f:fun(fun('A,bool),real). (#forall:fun(fun(fun('I,bool),bool),bool) (\A:fun('I,bool). (#forall:fun(fun(fun('I,fun('A,bool)),bool),bool) (\x:fun('I,fun('A,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) t:fun('A,bool))) ((#DISJOINT:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) t:fun('A,bool))))) ((#=:fun(real,fun(real,bool)) (f:fun(fun('A,bool),real) ((#UNION:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))) ((#real_add:fun(real,fun(real,real)) (f:fun(fun('A,bool),real) s:fun('A,bool))) (f:fun(fun('A,bool),real) t:fun('A,bool)))))))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) #EMPTY:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) s:fun('A,bool))) (P:fun(fun('A,bool),bool) t:fun('A,bool)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) ((#INTER:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) ((#UNION:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))) (P:fun(fun('A,bool),bool) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('I,bool),bool) A:fun('I,bool))) (#forall:fun(fun('I,bool),bool) (\a:'I. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('I,fun(fun('I,bool),bool)) a:'I) A:fun('I,bool))) (P:fun(fun('A,bool),bool) (x:fun('I,fun('A,bool)) a:'I)))))))))) ((#=:fun(real,fun(real,bool)) (f:fun(fun('A,bool),real) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) ((#IMAGE:fun(fun('I,fun('A,bool)),fun(fun('I,bool),fun(fun('A,bool),bool))) x:fun('I,fun('A,bool))) A:fun('I,bool))))) ((#sum:fun(fun(fun('I,bool),bool),fun(fun(fun('I,bool),real),real)) (#GSPEC:fun(fun(fun('I,bool),bool),fun(fun('I,bool),bool)) (\GEN%PVAR%1:fun('I,bool). (#?:fun(fun(fun('I,bool),bool),bool) (\B:fun('I,bool). (((#SETSPEC:fun(fun('I,bool),fun(bool,fun(fun('I,bool),bool))) GEN%PVAR%1:fun('I,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun('I,bool),fun(fun('I,bool),bool)) B:fun('I,bool)) A:fun('I,bool))) (#~:fun(bool,bool) ((#=:fun(fun('I,bool),fun(fun('I,bool),bool)) B:fun('I,bool)) #EMPTY:fun('I,bool))))) B:fun('I,bool))))))) (\B:fun('I,bool). ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun('I,bool),num) B:fun('I,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (f:fun(fun('A,bool),real) (#INTERS:fun(fun(fun('A,bool),bool),fun('A,bool)) ((#IMAGE:fun(fun('I,fun('A,bool)),fun(fun('I,bool),fun(fun('A,bool),bool))) x:fun('I,fun('A,bool))) B:fun('I,bool)))))))))))))))))
       #|INCLUSION_EXCLUSION_REAL_RESTRICTED =  |- (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\P:fun(fun('A,bool),bool). (#forall:fun(fun(fun(fun('A,bool),real),bool),bool) (\f:fun(fun('A,bool),real). (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\A:fun(fun('A,bool),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) s:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) t:fun('A,bool))) ((#DISJOINT:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) t:fun('A,bool))))) ((#=:fun(real,fun(real,bool)) (f:fun(fun('A,bool),real) ((#UNION:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))) ((#real_add:fun(real,fun(real,real)) (f:fun(fun('A,bool),real) s:fun('A,bool))) (f:fun(fun('A,bool),real) t:fun('A,bool)))))))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) #EMPTY:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\t:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) s:fun('A,bool))) (P:fun(fun('A,bool),bool) t:fun('A,bool)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) ((#INTER:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(fun('A,bool),bool) ((#UNION:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool)))) (P:fun(fun('A,bool),bool) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) t:fun('A,bool))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun(fun('A,bool),bool),bool) A:fun(fun('A,bool),bool))) (#forall:fun(fun(fun('A,bool),bool),bool) (\a:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) a:fun('A,bool)) A:fun(fun('A,bool),bool))) (P:fun(fun('A,bool),bool) a:fun('A,bool)))))))))) ((#=:fun(real,fun(real,bool)) (f:fun(fun('A,bool),real) (#UNIONS:fun(fun(fun('A,bool),bool),fun('A,bool)) A:fun(fun('A,bool),bool)))) ((#sum:fun(fun(fun(fun('A,bool),bool),bool),fun(fun(fun(fun('A,bool),bool),real),real)) (#GSPEC:fun(fun(fun(fun('A,bool),bool),bool),fun(fun(fun('A,bool),bool),bool)) (\GEN%PVAR%2:fun(fun('A,bool),bool). (#?:fun(fun(fun(fun('A,bool),bool),bool),bool) (\B:fun(fun('A,bool),bool). (((#SETSPEC:fun(fun(fun('A,bool),bool),fun(bool,fun(fun(fun('A,bool),bool),bool))) GEN%PVAR%2:fun(fun('A,bool),bool)) ((#/\:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) B:fun(fun('A,bool),bool)) A:fun(fun('A,bool),bool))) (#~:fun(bool,bool) ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) B:fun(fun('A,bool),bool)) #EMPTY:fun(fun('A,bool),bool))))) B:fun(fun('A,bool),bool))))))) (\B:fun(fun('A,bool),bool). ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#+:fun(num,fun(num,num)) (#CARD:fun(fun(fun('A,bool),bool),num) B:fun(fun('A,bool),bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (f:fun(fun('A,bool),real) (#INTERS:fun(fun(fun('A,bool),bool),fun('A,bool)) B:fun(fun('A,bool),bool))))))))))))))
