@@ -13754,227 +13754,227 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..2..4..11..solved at 17
       #|Arithmetic/derived quotations (221):
-      #|  negativef p = ?q. p = q --> False
-      #|  negatef p = if negativef p then @q. p = q --> False else p --> False
-      #|  forall A p q. A |-- p --> (q --> p)
-      #|  forall A p q r. A |-- (p --> q --> r) --> (p --> q) --> (p --> r)
-      #|  forall A p. A |-- ((p --> False) --> False) --> p
-      #|  forall A x p q. A |-- (!!x (p --> q)) --> (!!x p) --> (!!x q)
-      #|  forall A x p. ~(x IN FV p) ==> A |-- p --> !!x p
-      #|  forall A x t. ~(x IN FVT t) ==> A |-- ??x (V x === t)
-      #|  forall A t. A |-- t === t
-      #|  (forall A s t. A |-- s === t --> Suc s === Suc t) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s ++ u === t ++ v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s ** u === t ** v)
-      #|  (forall A s t u v. A |-- s === t --> u === v --> s === u --> t === v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s << u --> t << v) /\\\n   (forall A s t u v. A |-- s === t --> u === v --> s <<= u --> t <<= v)
-      #|  forall A p q. A |-- (p <-> q) --> p --> q
-      #|  forall A p q. A |-- (p <-> q) --> q --> p
-      #|  forall A p q. A |-- (p --> q) --> (q --> p) --> (p <-> q)
-      #|  A |-- True <-> (False --> False)
-      #|  forall A p. A |-- Not p <-> (p --> False)
-      #|  forall A p q. A |-- (p && q) <-> (p --> q --> False) --> False
-      #|  forall A p q. A |-- (p || q) <-> Not(Not p && Not q)
-      #|  forall A x p. A |-- (??x p) <-> Not(!!x (Not p))
-      #|  forall A p. p IN A ==> A |-- p
-      #|  forall A p. A |-- (p --> q) /\\ A |-- p ==> A |-- q
-      #|  forall A p x. A |-- p ==> A |-- !!x p
-      #|  forall A p q. A |-- p <-> q ==> A |-- p --> q
-      #|  forall A p q. A |-- p <-> q ==> A |-- q --> p
-      #|  forall A p q. A |-- p --> q /\\ A |-- q --> p ==> A |-- p <-> q
-      #|  forall A p q. A |-- q ==> A |-- p --> q
-      #|  forall A p. A |-- p --> p
-      #|  forall A p q r. A |-- q --> r ==> A |-- (p --> q) --> (p --> r)
-      #|  forall A p q. A |-- p --> p --> q ==> A |-- p --> q
-      #|  forall A p q. A |-- p --> q /\\ A |-- q --> r ==> A |-- p --> r
-      #|  forall A p q r. A |-- p --> q --> r ==> A |-- q --> p --> r
-      #|  forall A p q1 q2 r. A |-- p --> q1 /\\ A |-- p --> q2 /\\ A |-- q1 --> q2 --> r\n                 ==> A |-- p --> r
-      #|  forall A p q r. A |-- (q --> r) --> (p --> q) --> (p --> r)
-      #|  forall A p q r. A |-- p --> q ==> A |-- (q --> r) --> (p --> r)
-      #|  forall A p q r s. A |-- p --> q --> r /\\ A |-- r --> s ==> A |-- p --> q --> s
-      #|  forall A p q r. A |-- (p --> q --> r) --> (q --> p --> r)
-      #|  forall A p q. A |-- p --> q ==> A |-- Not q --> Not p
-      #|  forall p q. A |-- (q --> False) --> p --> (p --> q) --> False
-      #|  forall A p q r. A |-- p --> r ==> A |-- p --> q --> r
-      #|  A |-- (p' --> p) --> (q --> q') --> (p --> q) --> (p' --> q')
-      #|  forall A p. A |-- False --> p
-      #|  forall A p q. A |-- (p --> False) --> (p --> r)
-      #|  forall A p r. A |-- p --> negatef p --> r
-      #|  forall A p. A |-- (p --> False) --> p ==> A |-- p
-      #|  forall p q. A |-- p --> q /\\ A |-- (p --> False) --> q ==> A |-- q
-      #|  forall p q r. A |-- (q --> False) --> p --> r\n           ==> A |-- ((p --> q) --> False) --> r
-      #|  forall A p q r. A |-- (p --> False) --> r /\\ A |-- q --> r\n             ==> A |-- (p --> q) --> r
-      #|  forall A. A |-- True
-      #|  forall A p q. A |-- p && q --> p
-      #|  forall A p q. A |-- p && q --> q
-      #|  forall A p q. A |-- p --> q --> p && q
-      #|  forall A p q. A |-- p && q <=> A |-- p /\\ A |-- q
-      #|  forall A p q r. A |-- p && q --> r ==> A |-- p --> q --> r
-      #|  forall A p q r. A |-- p --> q --> r ==> A |-- p && q --> r
-      #|  forall A p. A |-- (p --> False) --> False <-> p
-      #|  forall A p q. A |-- p <-> q <=> A |-- q <-> p
-      #|  forall A p q r. A |-- p <-> q /\\ A |-- q <-> r ==> A |-- p <-> r
-      #|  forall A p. A |-- Not(Not p) <-> p
-      #|  forall A p q. A |-- Not p --> Not q <=> A |-- q --> p
-      #|  forall A p q. A |-- q --> p || q
-      #|  forall A p q. A |-- p --> p || q
-      #|  forall A p q r. A |-- p --> r /\\ A |-- q --> r\n             ==> A |-- p || q --> r
-      #|  forall A p q. A |-- (p <-> q) <-> (p --> q) && (q --> p)
-      #|  forall A p. A |-- p <-> p
-      #|  forall A s t. A |-- s === t --> t === s
-      #|  forall A p x s t tm.\n     A |-- s === t -->\n           termsubst ((x |-> s) v) tm === termsubst ((x |-> t) v) tm
-      #|  forall A x s t tm.\n     A |-- s === t --> termsubst (x |=> s) tm === termsubst (x |=> t) tm
-      #|  forall A x t tm.\n     A |-- V x === t --> tm === termsubst (x |=> t) tm
-      #|  forall A x p q. ~(x IN FV(p)) /\\ A |-- p --> q\n             ==> A |-- p --> !!x q
-      #|  forall x p q. A |-- p --> q ==> A |-- (!!x p) --> (!!x q)
-      #|  forall x p q. A |-- p --> q ==> A |-- (??x p) --> (??x q)
-      #|  A |-- ((q --> False) --> !!x (Not(p --> q)))\n                      --> (q --> False) --> False
-      #|  A |-- (q --> False) --> !!x p --> !!x (Not(p --> q))
-      #|  A |-- (q --> False) --> !!x (p --> Not(p --> q))
-      #|  forall A x p q. A |-- ??x (p --> q) /\\ ~(x IN FV(q)) ==> A |-- (!!x p) --> q
-      #|  forall A x t p q. ~(x IN FVT(t)) /\\ ~(x IN FV(q)) /\\ A |-- V x === t --> p --> q\n               ==> A |-- (!!x p) --> q
-      #|  V y
-      #|  x = y:num
-      #|  forall A x y p q. ((x = y) \\/ ~(x IN FV(q)) /\\ ~(y IN FV(p))) /\\\n               A |-- V x === V y --> p --> q\n               ==> A |-- (!!x p) --> (!!y q)
-      #|  (complexity False = 1) /\\\n   (complexity True = 1) /\\\n   (forall s t. complexity (s === t) = 1) /\\\n   (forall s t. complexity (s << t) = 1) /\\\n   (forall s t. complexity (s <<= t) = 1) /\\\n   (forall p. complexity (Not p) = complexity p + 3) /\\\n   (forall p q. complexity (p && q) = complexity p + complexity q + 6) /\\\n   (forall p q. complexity (p || q) = complexity p + complexity q + 16) /\\\n   (forall p q. complexity (p --> q) = complexity p + complexity q + 1) /\\\n   (forall p q. complexity (p <-> q) = 2 * (complexity p + complexity q) + 9) /\\\n   (forall x p. complexity (!!x p) = complexity p + 1) /\\\n   (forall x p. complexity (??x p) = complexity p + 8)
-      #|  forall p i. complexity(formsubst i p) = complexity p
-      #|  w:num = u
-      #|  w:num
-      #|  ~(y IN FV (formsubst ((v |-> t) i) (!! u p)))
-      #|  z:num = y
-      #|  ~(x IN FV (formsubst ((v |-> s) i) (!! u p)))
-      #|  z:num = x
-      #|  z:num
-      #|  FVT(s) UNION FVT(t) UNION\n    FV(formsubst ((u |-> V x) ((v |-> s) i)) p) UNION\n    FV(formsubst ((u |-> V y) ((v |-> t) i)) p)
-      #|  !!z (formsubst ((v |-> s) ((u |-> V z) i)) p\n                       --> formsubst ((v |-> t) ((u |-> V z) i)) p)
-      #|  (!!z (formsubst ((v |-> s) ((u |-> V z) i)) p))\n                     --> (!!z (formsubst ((v |-> t) ((u |-> V z) i)) p))
-      #|  z:num
-      #|  ?z. ~(z IN FVT s) /\\ ~(z IN FVT t) /\\\n        A |-- !!x (formsubst ((u |-> V x) ((v |-> s) i)) p)\n              --> !!z (formsubst ((u |-> V z) ((v |-> s) i)) p) /\\\n        A |-- !!z (formsubst ((u |-> V z) ((v |-> t) i)) p)\n              --> !!y (formsubst ((u |-> V y) ((v |-> t) i)) p)
-      #|  w:num = u
-      #|  w:num
-      #|  ~(y IN FV (formsubst ((v |-> t) i) (!! u p)))
-      #|  ~(x IN FV (formsubst ((v |-> s) i) (!! u p)))
-      #|  y:num = x
-      #|  v:num = u
-      #|  ~(x IN FV(formsubst ((v |-> s) i) (!!u p))) /\\\n                ~(y IN FV(formsubst ((v |-> t) i) (!!u p)))
-      #|  y = if ?y. y IN FV (!! u p) /\\ u IN FVT ((v |-> t) i y)\n         then VARIANT (FV (formsubst ((u |-> V u) ((v |-> t) i)) p))\n         else u
-      #|  x = if ?y. y IN FV (!! u p) /\\ u IN FVT ((v |-> s) i y)\n         then VARIANT (FV (formsubst ((u |-> V u) ((v |-> s) i)) p))\n         else u
-      #|  t:term
-      #|  s:term
-      #|  i:num->term
-      #|  v:num
-      #|  a < b + 1 <=> a <= b
-      #|  p:form
-      #|  u:num
-      #|  Not(!!x (Not p))
-      #|  p:form
-      #|  x:num
-      #|  (p --> q) && (q --> p)
-      #|  q:form
-      #|  p:form
-      #|  p < p + q + 1 /\\ q < p + q + 1
-      #|  q:form
-      #|  p:form
-      #|  Not(Not p && Not q)
-      #|  q:form
-      #|  p:form
-      #|  (p --> q --> False) --> False
-      #|  q:form
-      #|  p:form
-      #|  p --> False
-      #|  p:form
-      #|  p:form
-      #|  p:form
-      #|  complexity p
-      #|  forall A p x v s t. A |-- s === t\n                       --> formsubst ((x |-> s) v) p\n                           --> formsubst ((x |-> t) v) p
-      #|  q:form
-      #|  p:form
-      #|  (=) (z:num)
-      #|  forall A p x s t. A |-- s === t\n                     --> formsubst (x |=> s) p --> formsubst (x |=> t) p
-      #|  forall A p x t. A |-- V x === t --> p --> formsubst (x |=> t) p
-      #|  forall A x z p. ~(z IN FV p) ==> A |-- (!!x p) --> !!z (formsubst (x |=> V z) p)
-      #|  (VARS False = {}) /\\\n  (VARS True = {}) /\\\n  (VARS (s === t) = FVT s UNION FVT t) /\\\n  (VARS (s << t) = FVT s UNION FVT t) /\\\n  (VARS (s <<= t) = FVT s UNION FVT t) /\\\n  (VARS (Not p) = VARS p) /\\\n  (VARS (p && q) = VARS p UNION VARS q) /\\\n  (VARS (p || q) = VARS p UNION VARS q) /\\\n  (VARS (p --> q) = VARS p UNION VARS q) /\\\n  (VARS (p <-> q) = VARS p UNION VARS q) /\\\n  (VARS (!! x p) = x INSERT VARS p) /\\\n  (VARS (?? x p) = x INSERT VARS p)
-      #|  forall p. FINITE(VARS p)
-      #|  forall p. FV(p) SUBSET VARS(p)
-      #|  forall x z t v s. ~(z IN FVT s)\n               ==> (termsubst ((x |-> t) v) s =\n                    termsubst ((z |-> t) v) (termsubst (x |=> V z) s))
-      #|  forall x z t s. ~(z IN FVT s)\n             ==> (termsubst (x |=> t) s =\n                  termsubst (z |=> t) (termsubst (x |=> V z) s))
-      #|  w:num
-      #|  y:num
-      #|  z = VARIANT\n       {x' | ?y. y IN FV p /\\ x' IN FVT ((x |-> V x) (termsubst j o i) y)}
-      #|  y:num = x
-      #|  y IN FV p
-      #|  y:num
-      #|  z:num
-      #|  {x' | ?y. (?y'. y' IN FV p /\\ y IN FVT ((x |-> V x) i y')) /\\\n                x' IN FVT ((x |-> V x) j y)} =\n      {x' | ?y. y IN FV p /\\ x' IN FVT ((x |-> V x) (termsubst j o i) y)}
-      #|  x IN FVT(j(z:num))
-      #|  z:num
-      #|  y:num = x
-      #|  y IN FV p
-      #|  y:num
-      #|  (?y. ((?y'. y' IN FV p /\\ y IN FVT ((x |-> V x) i y')) /\\ ~(y = x)) /\\\n          x IN FVT (j y)) <=>\n    (?y. (y IN FV p /\\ ~(y = x)) /\\\n         (?y'. y' IN FVT (i y) /\\ x IN FVT (j y')))
-      #|  j:num->term
-      #|  i:num->term
-      #|  p:form
-      #|  x:num
-      #|  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
-      #|  forall p i j.\n        (forall x. x IN VARS p ==> safe_for x i)\n        ==> formsubst j (formsubst i p) = formsubst (termsubst j o i) p
-      #|  forall z p x t. ~(z IN VARS p)\n             ==> (formsubst (z |=> t) (formsubst (x |=> V z) p) =\n                  formsubst (x |=> t) p)
-      #|  t:term
-      #|  forall A x p t. ~(x IN FVT(t)) ==> A |-- !!x p --> formsubst (x |=> t) p
-      #|  formsubst (x |=> t) p =\n      formsubst (z |=> t) (formsubst (x |=> V z) p)
-      #|  !!z (formsubst (x |=> V z) p)
-      #|  z = VARIANT (FVT t UNION VARS p)
-      #|  x IN FVT(t)
-      #|  forall A x p t. A |-- !!x p --> formsubst (x |=> t) p
-      #|  forall A x p t. A |-- !!x p ==> A |-- formsubst (x |=> t) p
-      #|  V x
-      #|  forall A x p. A |-- !!x p ==> A |-- p
-      #|  ??x (V x === v x)
-      #|  x:num
-      #|  formsubst v p = formsubst ((x |-> v x) v) p
-      #|  x:num
-      #|  (x |-> V x) v
-      #|  p:form
-      #|  x:num
-      #|  forall x. x IN FV p ==> v x = V x
-      #|  CARD {x | x IN FV(p) /\\ ~(v x = V x)}
-      #|  forall A p v. (forall x y. x IN FV p /\\ y IN FV p /\\ x IN FVT(v y)\n                    ==> x = y /\\ v x = V x) /\\\n             A |-- p\n             ==> A |-- formsubst v p
-      #|  x < n /\\ y < n ==> ~(x = y + n)
-      #|  ~p /\\ q ==> (r \\/ q ==> p) ==> s
-      #|  x + n:num
-      #|  y:num
-      #|  x:num
-      #|  {x | ?y. y IN s /\\ x = f y} = IMAGE f s
-      #|  ~(x + n:num < n)
-      #|  formsubst v p =\n    formsubst (\\i. v(i - n)) (formsubst (\\i. V(i + n)) p)
-      #|  SUC(SETMAX(VARS p UNION FV(formsubst v p)))
-      #|  ?n. forall x. x IN VARS p \\/ x IN FV(formsubst v p) ==> x < n
-      #|  forall A v p. A |-- p ==> A |-- formsubst v p
-      #|  forall A B p. A SUBSET B /\\ A |-- p ==> B |-- p
-      #|  r:form
-      #|  forall A p q. p INSERT A |-- q /\\ closed p ==> A |-- p --> q
-      #|  forall A p q. closed p ==> (A |-- p --> q <=> p INSERT A |-- q)
-      #|  forall A s t u. A |-- s === t --> t === u --> s === u
-      #|  forall A p q x. A |-- p --> !!x q ==> A |-- p --> formsubst (x |=> t) q
-      #|  forall A s t u. A |-- s === t /\\ A |-- t === u ==> A |-- s === u
-      #|  forall A s t. A |-- s === t <=> A |-- t === s
-      #|  forall A x p q. A |-- p --> q ==> A |-- !!x p --> !!x q
-      #|  forall A x p q. A |-- p <-> q ==> A |-- !!x p <-> !!x q
-      #|  forall A x p q. A |-- p <-> q ==> A |-- ??x p <-> ??x q
-      #|  forall A s t. A |-- s === t ==> A |-- Suc s === Suc t
-      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ++ u === t ++ v
-      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s ** u === t ** v
-      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s === u <-> t === v
-      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s <<= u <-> t <<= v
-      #|  forall A s t u v. A |-- s === t /\\ A |-- u === v ==> A |-- s << u <-> t << v
-      #|  Not(formsubst (x |=> t) (Not p))
-      #|  Not(!!x (Not p))
-      #|  forall A x t p. A |-- formsubst (x |=> t) p --> ??x p
-      #|  forall A x t p. A |-- formsubst (x |=> t) p ==> A |-- ??x p
-      #|  Not(!!x (Not p))
-      #|  Not(Not p)
-      #|  forall A x p. ~(x IN FV p) ==> A |-- (??x p) --> p
-      #|  x:num
-      #|  forall A x p q. A |-- !!x (p --> q) /\\ ~(x IN FV q) ==> A |-- (??x p) --> q
-      #|  A |-- s === s' /\\ A |-- t === t' ==> A |-- s === t --> s' === t'
-      #|  forall v n. termsubst v (numeral n) = numeral n
+      #|  (negativef : (Form) -> Bool)((p : Form)) == (\226\136\131 q : Form, p == op_minus_minus_gt(q, False))
+      #|  (negatef : (Form) -> Form)((p : Form)) == (if negativef(p) { select((q : Form) => p == op_minus_minus_gt(q, False)) } else { op_minus_minus_gt(p, False) })
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, p)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, r)), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, False), False), p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, op_minus_minus_gt(p, q)), op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, !IN(x, FV(p)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, op_bang_bang(x, p)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 t : Term, !IN(x, FVT(t)) \226\134\146 op_bar_minus_minus(A, op_q_q(x, op_eq_eq_eq(V(x), t)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 t : Term, op_bar_minus_minus(A, op_eq_eq_eq(t, t))
+      #|  (\226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(Suc(s), Suc(t))))) && (\226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_eq_eq_eq(op_plus_plus(s, u), op_plus_plus(t, v)))))) && (\226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_eq_eq_eq(op_star_star(s, u), op_star_star(t, v))))))
+      #|  (\226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_eq_eq_eq(s, u), op_eq_eq_eq(t, v)))))) && (\226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_lt_lt(s, u), op_lt_lt(t, v)))))) && (\226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(u, v), op_minus_minus_gt(op_lt_lt_eq(s, u), op_lt_lt_eq(t, v))))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_lt_minus_gt(p, q), op_minus_minus_gt(p, q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_lt_minus_gt(p, q), op_minus_minus_gt(q, p)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(op_minus_minus_gt(q, p), op_lt_minus_gt(p, q))))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_lt_minus_gt(True, op_minus_minus_gt(False, False)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_lt_minus_gt(Not(p), op_minus_minus_gt(p, False)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_amp_amp(p, q), op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, False)), False)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_bar_bar(p, q), Not(op_amp_amp(Not(p), Not(q)))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_q_q(x, p), Not(op_bang_bang(x, Not(p)))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, IN(p, A) \226\134\146 op_bar_minus_minus(A, p)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, (q : Form))) && op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(A, q)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 x : Num, op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(A, op_bang_bang(x, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(q, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, op_minus_minus_gt(q, p)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(p, q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, q) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(q, r)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(p, q))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, op_minus_minus_gt(q, (r : Form))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, r))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(q, op_minus_minus_gt(p, r)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q1 : Form, \226\136\128 q2 : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q1)) && op_bar_minus_minus(A, op_minus_minus_gt(p, q2)) && op_bar_minus_minus(A, op_minus_minus_gt(q1, op_minus_minus_gt(q2, r))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, r))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(q, r), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p, r))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(q, r), op_minus_minus_gt(p, r)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, \226\136\128 s : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r))) && op_bar_minus_minus(A, op_minus_minus_gt(r, s)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, s)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, op_minus_minus_gt(q, r)), op_minus_minus_gt(q, op_minus_minus_gt(p, r))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(Not(q), Not(p)))
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt(q, False), op_minus_minus_gt(p, op_minus_minus_gt(op_minus_minus_gt(p, q), False))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, r)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r)))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt((p' : Form), (p : Form)), op_minus_minus_gt(op_minus_minus_gt((q : Form), (q' : Form)), op_minus_minus_gt(op_minus_minus_gt(p, q), op_minus_minus_gt(p', q')))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(False, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : _, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), op_minus_minus_gt(p, (r : Form))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(negatef(p), r)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), p)) \226\134\146 op_bar_minus_minus(A, p)
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q)) && op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), q)) \226\134\146 op_bar_minus_minus(A, q)
+      #|  \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt(q, False), op_minus_minus_gt(p, r))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, q), False), r))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), r)) && op_bar_minus_minus(A, op_minus_minus_gt(q, r)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), r))
+      #|  \226\136\128 A : (Form) -> Bool, op_bar_minus_minus(A, True)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, op_amp_amp(p, q))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_amp_amp(p, q)) == (op_bar_minus_minus(A, p) && op_bar_minus_minus(A, q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), r)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_minus_minus_gt(q, r))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_amp_amp(p, q), r))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_minus_minus_gt(op_minus_minus_gt(p, False), False), p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) == op_bar_minus_minus(A, op_lt_minus_gt(q, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) && op_bar_minus_minus(A, op_lt_minus_gt(q, r)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(p, r))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_lt_minus_gt(Not(Not(p)), p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(Not(p), Not(q))) == op_bar_minus_minus(A, op_minus_minus_gt(q, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(q, op_bar_bar(p, q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, op_bar_bar(p, q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 r : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, r)) && op_bar_minus_minus(A, op_minus_minus_gt(q, r)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bar_bar(p, q), r))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(op_lt_minus_gt(p, q), op_amp_amp(op_minus_minus_gt(p, q), op_minus_minus_gt(q, p))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(t, s)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : _, \226\136\128 x : Num, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 tm : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(termsubst(op_bar_minus_gt(x, s, (v : (Num) -> Term)), tm), termsubst(op_bar_minus_gt(x, t, v), tm))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 tm : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(termsubst(op_bar_eq_gt(x, s), tm), termsubst(op_bar_eq_gt(x, t), tm))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 tm : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), op_eq_eq_eq(tm, termsubst(op_bar_eq_gt(x, t), tm))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, !IN(x, FV(p)) && op_bar_minus_minus(A, op_minus_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, op_bang_bang(x, q)))
+      #|  \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q)))
+      #|  \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_q_q(x, p), op_q_q(x, q)))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt(op_minus_minus_gt((q : Form), False), op_bang_bang((x : Num), Not(op_minus_minus_gt((p : Form), q)))), op_minus_minus_gt(op_minus_minus_gt(q, False), False)))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt((q : Form), False), op_minus_minus_gt(op_bang_bang((x : Num), (p : Form)), op_bang_bang(x, Not(op_minus_minus_gt(p, q))))))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_minus_minus_gt((q : Form), False), op_bang_bang((x : Num), op_minus_minus_gt((p : Form), Not(op_minus_minus_gt(p, q))))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_q_q(x, op_minus_minus_gt(p, q))) && !IN(x, FV(q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, \226\136\128 q : Form, !IN(x, FVT(t)) && !IN(x, FV(q)) && op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), op_minus_minus_gt(p, q))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), q))
+      #|  V((y : Num))
+      #|  (x : Num) == (y : Num)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 p : Form, \226\136\128 q : Form, (x == y || !IN(x, FV(q)) && !IN(y, FV(p))) && op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), V(y)), op_minus_minus_gt(p, q))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(y, q)))
+      #|  (complexity : (Form) -> Num)(False) == 1 && complexity(True) == 1 && (\226\136\128 s : Term, \226\136\128 t : Term, complexity(op_eq_eq_eq(s, t)) == 1) && (\226\136\128 s : Term, \226\136\128 t : Term, complexity(op_lt_lt(s, t)) == 1) && (\226\136\128 s : Term, \226\136\128 t : Term, complexity(op_lt_lt_eq(s, t)) == 1) && (\226\136\128 p : Form, complexity(Not(p)) == complexity(p) + 3) && (\226\136\128 p : Form, \226\136\128 q : Form, complexity(op_amp_amp(p, q)) == complexity(p) + (complexity(q) + 6)) && (\226\136\128 p : Form, \226\136\128 q : Form, complexity(op_bar_bar(p, q)) == complexity(p) + (complexity(q) + 16)) && (\226\136\128 p : Form, \226\136\128 q : Form, complexity(op_minus_minus_gt(p, q)) == complexity(p) + (complexity(q) + 1)) && (\226\136\128 p : Form, \226\136\128 q : Form, complexity(op_lt_minus_gt(p, q)) == 2 * (complexity(p) + complexity(q)) + 9) && (\226\136\128 x : Num, \226\136\128 p : Form, complexity(op_bang_bang(x, p)) == complexity(p) + 1) && (\226\136\128 x : Num, \226\136\128 p : Form, complexity(op_q_q(x, p)) == complexity(p) + 8)
+      #|  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, complexity(formsubst(i, p)) == complexity(p)
+      #|  (w : Num) == (u : Num)
+      #|  (w : Num)
+      #|  !IN((y : Num), FV(formsubst(op_bar_minus_gt((v : Num), (t : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))
+      #|  (z : Num) == (y : Num)
+      #|  !IN((x : Num), FV(formsubst(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))
+      #|  (z : Num) == (x : Num)
+      #|  (z : Num)
+      #|  UNION(FVT((s : Term)), UNION(FVT((t : Term)), UNION(FV(formsubst(op_bar_minus_gt((u : Num), V((x : Num)), op_bar_minus_gt((v : Num), s, (i : (Num) -> Term))), (p : Form))), FV(formsubst(op_bar_minus_gt(u, V((y : Num)), op_bar_minus_gt(v, t, i)), p)))))
+      #|  op_bang_bang((z : Num), op_minus_minus_gt(formsubst(op_bar_minus_gt((v : Num), (s : Term), op_bar_minus_gt((u : Num), V(z), (i : (Num) -> Term))), (p : Form)), formsubst(op_bar_minus_gt(v, (t : Term), op_bar_minus_gt(u, V(z), i)), p)))
+      #|  op_minus_minus_gt(op_bang_bang((z : Num), formsubst(op_bar_minus_gt((v : Num), (s : Term), op_bar_minus_gt((u : Num), V(z), (i : (Num) -> Term))), (p : Form))), op_bang_bang(z, formsubst(op_bar_minus_gt(v, (t : Term), op_bar_minus_gt(u, V(z), i)), p)))
+      #|  (z : Num)
+      #|  \226\136\131 z : Num, !IN(z, FVT((s : Term))) && !IN(z, FVT((t : Term))) && op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(op_bang_bang((x : Num), formsubst(op_bar_minus_gt((u : Num), V(x), op_bar_minus_gt((v : Num), s, (i : (Num) -> Term))), (p : Form))), op_bang_bang(z, formsubst(op_bar_minus_gt(u, V(z), op_bar_minus_gt(v, s, i)), p)))) && op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(z, formsubst(op_bar_minus_gt(u, V(z), op_bar_minus_gt(v, t, i)), p)), op_bang_bang((y : Num), formsubst(op_bar_minus_gt(u, V(y), op_bar_minus_gt(v, t, i)), p))))
+      #|  (w : Num) == (u : Num)
+      #|  (w : Num)
+      #|  !IN((y : Num), FV(formsubst(op_bar_minus_gt((v : Num), (t : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))
+      #|  !IN((x : Num), FV(formsubst(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form)))))
+      #|  (y : Num) == (x : Num)
+      #|  (v : Num) == (u : Num)
+      #|  !IN((x : Num), FV(formsubst(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term)), op_bang_bang((u : Num), (p : Form))))) && !IN((y : Num), FV(formsubst(op_bar_minus_gt(v, (t : Term), i), op_bang_bang(u, p))))
+      #|  (y : Num) == (if (\226\136\131 y : Num, IN(y, FV(op_bang_bang((u : Num), (p : Form)))) && IN(u, FVT(op_bar_minus_gt((v : Num), (t : Term), (i : (Num) -> Term), y)))) { VARIANT(FV(formsubst(op_bar_minus_gt(u, V(u), op_bar_minus_gt(v, t, i)), p))) } else { u })
+      #|  (x : Num) == (if (\226\136\131 y : Num, IN(y, FV(op_bang_bang((u : Num), (p : Form)))) && IN(u, FVT(op_bar_minus_gt((v : Num), (s : Term), (i : (Num) -> Term), y)))) { VARIANT(FV(formsubst(op_bar_minus_gt(u, V(u), op_bar_minus_gt(v, s, i)), p))) } else { u })
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  (i : (Num) -> Term)
+      #|  (v : Num)
+      #|  ((a : Num) < (b : Num) + 1) == (a <= b)
+      #|  (p : Form)
+      #|  (u : Num)
+      #|  Not(op_bang_bang((x : Num), Not((p : Form))))
+      #|  (p : Form)
+      #|  (x : Num)
+      #|  op_amp_amp(op_minus_minus_gt((p : Form), (q : Form)), op_minus_minus_gt(q, p))
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (p : Num) < p + ((q : Num) + 1) && q < p + (q + 1)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  Not(op_amp_amp(Not((p : Form)), Not((q : Form))))
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  op_minus_minus_gt(op_minus_minus_gt((p : Form), op_minus_minus_gt((q : Form), False)), False)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  op_minus_minus_gt((p : Form), False)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  complexity((p : Form))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 x : Num, \226\136\128 v : (Num) -> Term, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(formsubst(op_bar_minus_gt(x, s, v), p), formsubst(op_bar_minus_gt(x, t, v), p))))
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  op_eq((z : Num))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 x : Num, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(formsubst(op_bar_eq_gt(x, s), p), formsubst(op_bar_eq_gt(x, t), p))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 x : Num, \226\136\128 t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), op_minus_minus_gt(p, formsubst(op_bar_eq_gt(x, t), p))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 z : Num, \226\136\128 p : Form, !IN(z, FV(p)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(z, formsubst(op_bar_eq_gt(x, V(z)), p))))
+      #|  (VARS : (Form, Num) -> Bool)(False) == {} && VARS(True) == {} && VARS(op_eq_eq_eq((s : Term), (t : Term))) == UNION(FVT(s), FVT(t)) && VARS(op_lt_lt(s, t)) == UNION(FVT(s), FVT(t)) && VARS(op_lt_lt_eq(s, t)) == UNION(FVT(s), FVT(t)) && VARS(Not((p : Form))) == VARS(p) && VARS(op_amp_amp(p, (q : Form))) == UNION(VARS(p), VARS(q)) && VARS(op_bar_bar(p, q)) == UNION(VARS(p), VARS(q)) && VARS(op_minus_minus_gt(p, q)) == UNION(VARS(p), VARS(q)) && VARS(op_lt_minus_gt(p, q)) == UNION(VARS(p), VARS(q)) && VARS(op_bang_bang((x : Num), p)) == INSERT(x, VARS(p)) && VARS(op_q_q(x, p)) == INSERT(x, VARS(p))
+      #|  \226\136\128 p : Form, FINITE(VARS(p))
+      #|  \226\136\128 p : Form, SUBSET(FV(p), VARS(p))
+      #|  \226\136\128 x : Num, \226\136\128 z : Num, \226\136\128 t : Term, \226\136\128 v : (Num) -> Term, \226\136\128 s : Term, !IN(z, FVT(s)) \226\134\146 termsubst(op_bar_minus_gt(x, t, v), s) == termsubst(op_bar_minus_gt(z, t, v), termsubst(op_bar_eq_gt(x, V(z)), s))
+      #|  \226\136\128 x : Num, \226\136\128 z : Num, \226\136\128 t : Term, \226\136\128 s : Term, !IN(z, FVT(s)) \226\134\146 termsubst(op_bar_eq_gt(x, t), s) == termsubst(op_bar_eq_gt(z, t), termsubst(op_bar_eq_gt(x, V(z)), s))
+      #|  (w : Num)
+      #|  (y : Num)
+      #|  (z : Num) == VARIANT({(x' : Num) | \226\136\131 y : Num, IN(y, FV((p : Form))) && IN(x', FVT(op_bar_minus_gt((x : Num), V(x), o(termsubst((j : (Num) -> Term)), (i : (Num) -> Term)), y)))})
+      #|  (y : Num) == (x : Num)
+      #|  IN((y : Num), FV((p : Form)))
+      #|  (y : Num)
+      #|  (z : Num)
+      #|  {(x' : Num) | \226\136\131 y : Num, (\226\136\131 y' : Num, IN(y', FV((p : Form))) && IN(y, FVT(op_bar_minus_gt((x : Num), V(x), (i : (Num) -> Term), y')))) && IN(x', FVT(op_bar_minus_gt(x, V(x), (j : (Num) -> Term), y)))} == {(x' : Num) | \226\136\131 y : Num, IN(y, FV(p)) && IN(x', FVT(op_bar_minus_gt(x, V(x), o(termsubst(j), i), y)))}
+      #|  IN((x : Num), FVT((j : (Num) -> Term)((z : Num))))
+      #|  (z : Num)
+      #|  (y : Num) == (x : Num)
+      #|  IN((y : Num), FV((p : Form)))
+      #|  (y : Num)
+      #|  (\226\136\131 y : Num, ((\226\136\131 y' : Num, IN(y', FV((p : Form))) && IN(y, FVT(op_bar_minus_gt((x : Num), V(x), (i : (Num) -> Term), y')))) && !(y == x)) && IN(x, FVT((j : (Num) -> Term)(y)))) == (\226\136\131 y : Num, (IN(y, FV(p)) && !(y == x)) && (\226\136\131 y' : Num, IN(y', FVT(i(y))) && IN(x, FVT(j(y')))))
+      #|  (j : (Num) -> Term)
+      #|  (i : (Num) -> Term)
+      #|  (p : Form)
+      #|  (x : Num)
+      #|  ((p : Bool) || (q : Bool) \226\134\146 (r : Bool)) == ((p \226\134\146 r) && (q \226\134\146 r))
+      #|  \226\136\128 p : Form, \226\136\128 i : (Num) -> Term, \226\136\128 j : (Num) -> Term, (\226\136\128 x : Num, IN(x, VARS(p)) \226\134\146 safe_for(x, i)) \226\134\146 formsubst(j, formsubst(i, p)) == formsubst(o(termsubst(j), i), p)
+      #|  \226\136\128 z : Num, \226\136\128 p : Form, \226\136\128 x : Num, \226\136\128 t : Term, !IN(z, VARS(p)) \226\134\146 formsubst(op_bar_eq_gt(z, t), formsubst(op_bar_eq_gt(x, V(z)), p)) == formsubst(op_bar_eq_gt(x, t), p)
+      #|  (t : Term)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 t : Term, !IN(x, FVT(t)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), formsubst(op_bar_eq_gt(x, t), p)))
+      #|  formsubst(op_bar_eq_gt((x : Num), (t : Term)), (p : Form)) == formsubst(op_bar_eq_gt((z : Num), t), formsubst(op_bar_eq_gt(x, V(z)), p))
+      #|  op_bang_bang((z : Num), formsubst(op_bar_eq_gt((x : Num), V(z)), (p : Form)))
+      #|  (z : Num) == VARIANT(UNION(FVT((t : Term)), VARS((p : Form))))
+      #|  IN((x : Num), FVT((t : Term)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 t : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), formsubst(op_bar_eq_gt(x, t), p)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 t : Term, op_bar_minus_minus(A, op_bang_bang(x, p)) \226\134\146 op_bar_minus_minus(A, formsubst(op_bar_eq_gt(x, t), p))
+      #|  V((x : Num))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, op_bar_minus_minus(A, op_bang_bang(x, p)) \226\134\146 op_bar_minus_minus(A, p)
+      #|  op_q_q((x : Num), op_eq_eq_eq(V(x), (v : (Num) -> Term)(x)))
+      #|  (x : Num)
+      #|  formsubst((v : (Num) -> Term), (p : Form)) == formsubst(op_bar_minus_gt((x : Num), v(x), v), p)
+      #|  (x : Num)
+      #|  op_bar_minus_gt((x : Num), V(x), (v : (Num) -> Term))
+      #|  (p : Form)
+      #|  (x : Num)
+      #|  \226\136\128 x : Num, IN(x, FV((p : Form))) \226\134\146 (v : (Num) -> Term)(x) == V(x)
+      #|  CARD({(x : Num) | IN(x, FV((p : Form))) && !((v : (Num) -> Term)(x) == V(x))})
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 v : (Num) -> Term, (\226\136\128 x : Num, \226\136\128 y : Num, IN(x, FV(p)) && IN(y, FV(p)) && IN(x, FVT(v(y))) \226\134\146 x == y && v(x) == V(x)) && op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(A, formsubst(v, p))
+      #|  (x : Num) < (n : Num) && (y : Num) < n \226\134\146 !(x == y + n)
+      #|  !(p : Bool) && (q : Bool) \226\134\146 ((r : Bool) || q \226\134\146 p) \226\134\146 (s : Bool)
+      #|  (x : Num) + (n : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  {(x : _) | \226\136\131 y : _, IN(y, (s : (_) -> Bool)) && x == (f : (_) -> _)(y)} == IMAGE(f, s)
+      #|  !((x : Num) + (n : Num) < n)
+      #|  formsubst((v : (Num) -> Term), (p : Form)) == formsubst((i : Num) => v(i - (n : Num)), formsubst((i : Num) => V(i + n), p))
+      #|  SUC(SETMAX(UNION(VARS((p : Form)), FV(formsubst((v : (Num) -> Term), p)))))
+      #|  \226\136\131 n : Num, \226\136\128 x : Num, IN(x, VARS((p : Form))) || IN(x, FV(formsubst((v : (Num) -> Term), p))) \226\134\146 x < n
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 v : (Num) -> Term, \226\136\128 p : Form, op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(A, formsubst(v, p))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 B : (Form) -> Bool, \226\136\128 p : Form, SUBSET(A, B) && op_bar_minus_minus(A, p) \226\134\146 op_bar_minus_minus(B, p)
+      #|  (r : Form)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(INSERT(p, A), q) && closed(p) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, q))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, closed(p) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, q)) == op_bar_minus_minus(INSERT(p, A), q)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_minus_minus_gt(op_eq_eq_eq(t, u), op_eq_eq_eq(s, u))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 q : Form, \226\136\128 x : Num, op_bar_minus_minus(A, op_minus_minus_gt(p, op_bang_bang(x, q))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, formsubst(op_bar_eq_gt(x, (t : Term)), q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(t, u)) \226\134\146 op_bar_minus_minus(A, op_eq_eq_eq(s, u))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) == op_bar_minus_minus(A, op_eq_eq_eq(t, s))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_minus_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(op_bang_bang(x, p), op_bang_bang(x, q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_lt_minus_gt(p, q)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(op_q_q(x, p), op_q_q(x, q)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) \226\134\146 op_bar_minus_minus(A, op_eq_eq_eq(Suc(s), Suc(t)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) \226\134\146 op_bar_minus_minus(A, op_eq_eq_eq(op_plus_plus(s, u), op_plus_plus(t, v)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) \226\134\146 op_bar_minus_minus(A, op_eq_eq_eq(op_star_star(s, u), op_star_star(t, v)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(op_eq_eq_eq(s, u), op_eq_eq_eq(t, v)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(op_lt_lt_eq(s, u), op_lt_lt_eq(t, v)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 u : Term, \226\136\128 v : Term, op_bar_minus_minus(A, op_eq_eq_eq(s, t)) && op_bar_minus_minus(A, op_eq_eq_eq(u, v)) \226\134\146 op_bar_minus_minus(A, op_lt_minus_gt(op_lt_lt(s, u), op_lt_lt(t, v)))
+      #|  Not(formsubst(op_bar_eq_gt((x : Num), (t : Term)), Not((p : Form))))
+      #|  Not(op_bang_bang((x : Num), Not((p : Form))))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(formsubst(op_bar_eq_gt(x, t), p), op_q_q(x, p)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, op_bar_minus_minus(A, formsubst(op_bar_eq_gt(x, t), p)) \226\134\146 op_bar_minus_minus(A, op_q_q(x, p))
+      #|  Not(op_bang_bang((x : Num), Not((p : Form))))
+      #|  Not(Not((p : Form)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, !IN(x, FV(p)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_q_q(x, p), p))
+      #|  (x : Num)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_bang_bang(x, op_minus_minus_gt(p, q))) && !IN(x, FV(q)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_q_q(x, p), q))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_eq_eq_eq((s : Term), (s' : Term))) && op_bar_minus_minus(A, op_eq_eq_eq((t : Term), (t' : Term))) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(s, t), op_eq_eq_eq(s', t')))
+      #|  \226\136\128 v : (Num) -> Term, \226\136\128 n : Num, termsubst(v, numeral(n)) == numeral(n)
       #|negativef =  |- (#forall:fun(fun(form,bool),bool) (\p:form. ((#=:fun(bool,fun(bool,bool)) (#negativef:fun(form,bool) p:form)) (#?:fun(fun(form,bool),bool) (\q:form. ((#=:fun(form,fun(form,bool)) p:form) ((#-->:fun(form,fun(form,form)) q:form) #False:form)))))))
       #|negatef =  |- (#forall:fun(fun(form,bool),bool) (\p:form. ((#=:fun(form,fun(form,bool)) (#negatef:fun(form,form) p:form)) (((#COND:fun(bool,fun(form,fun(form,form))) (#negativef:fun(form,bool) p:form)) (#@:fun(fun(form,bool),form) (\q:form. ((#=:fun(form,fun(form,bool)) p:form) ((#-->:fun(form,fun(form,form)) q:form) #False:form))))) ((#-->:fun(form,fun(form,form)) p:form) #False:form)))))
       #|axiom_addimp =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\A:fun(form,bool). (#forall:fun(fun(form,bool),bool) (\p:form. (#forall:fun(fun(form,bool),bool) (\q:form. ((#|--:fun(fun(form,bool),fun(form,bool)) A:fun(form,bool)) ((#-->:fun(form,fun(form,form)) p:form) ((#-->:fun(form,fun(form,form)) q:form) p:form)))))))))
