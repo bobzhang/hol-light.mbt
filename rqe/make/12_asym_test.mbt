@@ -7143,8 +7143,8 @@ test "Rqe/asym matches Rqe/asym.ml" {
       #|  (pneg_aux : (Num, List[Real]) -> List[Real])((n : Num), NIL) == NIL && pneg_aux(n, CONS((h : Real), (t : List[Real]))) == CONS(pow(-real_of_num(1), n) * h, pneg_aux(SUC(n), t))
       #|  (pneg : (List[Real]) -> List[Real])(NIL) == NIL && pneg(CONS((h : Real), (t : List[Real]))) == pneg_aux(0, CONS(h, t))
       #|  \226\136\128 t : List[Real], \226\136\128 n : Num, pneg_aux(SUC(SUC(n)), t) == pneg_aux(n, t)
-      #|  \226\136\128 p : List[Real], neg(neg(p)) == p
-      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, neg(pneg_aux(SUC(n), p)) == pneg_aux(n, p)
+      #|  \226\136\128 p : List[Real], poly_neg(poly_neg(p)) == p
+      #|  \226\136\128 p : List[Real], \226\136\128 n : Num, poly_neg(pneg_aux(SUC(n), p)) == pneg_aux(n, p)
       #|  pow(-real_of_num(1), (n : Num)) == real_of_num(1)
       #|  \226\136\128 k : Real, \226\136\128 p : List[Real], \226\136\128 n : Num, EVEN(n) \226\134\146 poly(p, -k) == poly(pneg_aux(n, p), k)
       #|  poly(pneg_aux(0, CONS((h : Real), (t : List[Real]))), (x : Real)) == poly(CONS(h, t), -x)
@@ -7153,18 +7153,18 @@ test "Rqe/asym matches Rqe/asym.ml" {
       #|  \226\136\128 x : Num, EVEN(SUC(x)) == ODD(x)
       #|  \226\136\128 x : Num, ODD(SUC(x)) == EVEN(x)
       #|  (t : List[_]) == NIL
-      #|  \226\136\128 p : _, pneg(CONS((h : Real), (t : List[Real]))) == CONS(h, neg(pneg(t)))
+      #|  \226\136\128 p : _, pneg(CONS((h : Real), (t : List[Real]))) == CONS(h, poly_neg(pneg(t)))
       #|  \226\136\128 p : List[Real], (pneg(p) == NIL) == (p == NIL)
       #|  \226\136\128 p : List[Real], \226\136\128 n : Num, (pneg_aux(n, p) == NIL) == (p == NIL)
       #|  \226\136\128 p : List[Real], (poly_cmul((c : Real), p) == NIL) == (p == NIL)
-      #|  \226\136\128 p : List[Real], (neg(p) == NIL) == (p == NIL)
+      #|  \226\136\128 p : List[Real], (poly_neg(p) == NIL) == (p == NIL)
       #|  !(poly_cmul(-real_of_num(1), (t : List[Real])) == NIL)
       #|  (t : List[_]) == NIL
-      #|  \226\136\128 p : List[Real], !(p == NIL) \226\134\146 LAST(neg(p)) == -LAST(p)
-      #|  !(neg(pneg((t : List[Real]))) == NIL)
+      #|  \226\136\128 p : List[Real], !(p == NIL) \226\134\146 LAST(poly_neg(p)) == -LAST(p)
+      #|  !(poly_neg(pneg((t : List[Real]))) == NIL)
       #|  EVEN(degree((t : List[Real])))
       #|  normal((t : List[Real]))
-      #|  !(neg(pneg((t : List[Real]))) == NIL)
+      #|  !(poly_neg(pneg((t : List[Real]))) == NIL)
       #|  ODD(degree((t : List[Real])))
       #|  normal((t : List[Real]))
       #|  (t : List[_]) == NIL
