@@ -37,7 +37,7 @@ fn step_2() -> Unit raise {
   let t3 = @tactics.match_mp_tac(@real.sqrt_unique())
   let t2 = @simp.rewrite_tac(@list.List([@vectors.dist(), @vectors.vector_norm()]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2), t3), @tactics.conj_tac), t8), t9), t10), t11), t12), t13), t14), t15), t16), t17), t18)
-  dist_segment_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ a1 : Real, ∀ a2 : Real, real_of_num(0) <= a1 && a1 <= a2 && a2 <= real_of_num(2) * pi && real_of_num(0) <= (radius : Real) → dist(((centre : Cart[Real, Tybit0[Unit]]) + op_pct(radius, vector([cos(a1), sin(a1)])), centre + op_pct(radius, vector([cos(a2), sin(a2)])))) == real_of_num(2) * (radius * sin((a2 - a1) / real_of_num(2)))"), t19))
+  dist_segment_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ a1 : Real, ∀ a2 : Real, real_of_num(0) <= a1 && a1 <= a2 && a2 <= real_of_num(2) * pi && real_of_num(0) <= (radius : Real) → distance(((centre : Cart[Real, Tybit0[Unit]]) + op_pct(radius, vector([cos(a1), sin(a1)])), centre + op_pct(radius, vector([cos(a2), sin(a2)])))) == real_of_num(2) * (radius * sin((a2 - a1) / real_of_num(2)))"), t19))
 }
 
 ///|
@@ -99,7 +99,7 @@ fn step_3() -> Unit raise {
     }, x27))(x28))
   }))
   let t50 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), t40), t41), t47), t48), t49)
-  ptolemy_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ D : Cart[Real, Tybit0[Unit]], ∀ a : Real, ∀ b : Real, ∀ c : Real, ∀ d : Real, ∀ centre : Cart[Real, Tybit0[Unit]], ∀ radius : Real, A == centre + op_pct(radius, vector([cos(a), sin(a)])) && B == centre + op_pct(radius, vector([cos(b), sin(b)])) && C == centre + op_pct(radius, vector([cos(c), sin(c)])) && D == centre + op_pct(radius, vector([cos(d), sin(d)])) && real_of_num(0) <= radius && real_of_num(0) <= a && a <= b && b <= c && c <= d && d <= real_of_num(2) * pi → dist((A, C)) * dist((B, D)) == dist((A, B)) * dist((C, D)) + dist((A, D)) * dist((B, C))"), t50))
+  ptolemy_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ D : Cart[Real, Tybit0[Unit]], ∀ a : Real, ∀ b : Real, ∀ c : Real, ∀ d : Real, ∀ centre : Cart[Real, Tybit0[Unit]], ∀ radius : Real, A == centre + op_pct(radius, vector([cos(a), sin(a)])) && B == centre + op_pct(radius, vector([cos(b), sin(b)])) && C == centre + op_pct(radius, vector([cos(c), sin(c)])) && D == centre + op_pct(radius, vector([cos(d), sin(d)])) && real_of_num(0) <= radius && real_of_num(0) <= a && a <= b && b <= c && c <= d && d <= real_of_num(2) * pi → distance((A, C)) * distance((B, D)) == distance((A, B)) * distance((C, D)) + distance((A, D)) * distance((B, C))"), t50))
 }
 
 ///|
