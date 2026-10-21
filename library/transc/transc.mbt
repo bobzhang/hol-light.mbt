@@ -20006,7 +20006,7 @@ fn step_63() -> Unit raise {
   let t2076 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@realax.real_mul_assoc())]),
   )
-  let t2072 = @term_syntax.parse_term("op_star")
+  let t2072 = @term_syntax.parse_term("real_mul")
   let t2069 = @term_syntax.parse_term("exp((x : Real))")
   let t2075 = @tactics.disch_then(fn(
     x2074 : @kernel.Thm,
@@ -35524,7 +35524,7 @@ fn step_140() -> Unit raise {
   })
   let t3514 = @tactics.mp_tac(@analysis.real_lt_01())
   let t3513 = @simp.rewrite_tac(@list.List([@analysis.real_neg_neg()]))
-  let t3509 = @term_syntax.parse_term("op_minus_minus")
+  let t3509 = @term_syntax.parse_term("real_neg")
   let t3512 = @tactics.disch_then(fn(
     x3511 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
