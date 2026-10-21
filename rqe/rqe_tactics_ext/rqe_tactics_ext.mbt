@@ -336,7 +336,7 @@ pub fn claim(x48 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kerne
 ///|
 /// lem
 fn step_4() -> Unit raise {
-  lem_c.set(@class.taut(@parser.parse_term("(a = b) <=> (a ==> b) /\\ (b ==> a)")))
+  lem_c.set(@class.taut(@term_syntax.parse_term("((a : Bool) == (b : Bool)) == ((a → b) && (b → a))")))
 }
 
 ///|
@@ -669,7 +669,7 @@ pub fn[TA] ignore_(x147 : TA) -> @tactics.Tactic raise {
 ///|
 /// CCONTR_TAC
 fn step_5() -> Unit raise {
-  ccontr_tac_c.set(@tactics.then_tac(@tactics.match_mp_tac(@class.taut(@parser.parse_term("(~x ==> F) ==> x"))), @tactics.strip_tac))
+  ccontr_tac_c.set(@tactics.then_tac(@tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(!(x : Bool) → false) → x"))), @tactics.strip_tac))
 }
 
 ///|
