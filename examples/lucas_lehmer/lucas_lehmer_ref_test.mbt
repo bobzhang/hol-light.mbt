@@ -39566,7 +39566,7 @@ test "Examples/lucas_lehmer matches Examples/lucas_lehmer.ml" {
       #|  2 <= 1
       #|  (q : Num)
       #|  \226\136\131 q : Num, abs((a : Real)) == real_of_num(q)
-      #|  abs
+      #|  real_abs
       #|  (b : Real) == real_of_num(0)
       #|  real_of_num(1) - -real_of_num(1) == real_of_num(2)
       #|  (b : Real)

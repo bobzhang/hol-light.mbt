@@ -5781,21 +5781,21 @@ test "Rqe/rqe_real matches Rqe/rqe_real.ml" {
       #|  real_of_num(0)
       #|  (op_eq : (Real, Real) -> Bool)
       #|  (op_lt_gt : (Real, Real) -> Bool)
-      #|  op_lt
-      #|  op_gt
-      #|  op_lt_eq
-      #|  op_gt_eq
-      #|  op_star
-      #|  op_minus
-      #|  op_minus_minus
+      #|  real_lt
+      #|  real_gt
+      #|  real_le
+      #|  real_ge
+      #|  real_mul
+      #|  real_sub
+      #|  real_neg
       #|  op_slash
-      #|  op_plus
+      #|  real_add
       #|  real_of_num(0)
       #|  real_of_num(1)
       #|  (LAST : (List[Real]) -> Real)
       #|  (APPEND : (List[Real], List[Real]) -> List[Real])
       #|  diffl
-      #|  pow
+      #|  real_pow
       #|  -(x : Real)
       #|  (z : Real)
       #|  (y : Real)

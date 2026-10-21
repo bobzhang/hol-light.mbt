@@ -368,7 +368,7 @@ fn step_9() -> Unit raise {
     ((x101 : @list.List[@kernel.Thm]) => @lib.map(@simp.rewr_conv, x101))(@bool.conjuncts_rule(x102))
   })(@calc_rat.real_arith(t103)) {
     More(cnv_r, tail=More(cnv_l, tail=More(cnv_2, tail=More(cnv_0, tail=Empty)))) => {
-      let t104 = @term_syntax.parse_term("op_plus")
+      let t104 = @term_syntax.parse_term("real_add")
       let dest_add : (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise = (x105 : @kernel.Term) => @basics.dest_binop(t104, x105)
       fn poly_add_conv_1(x106 : @list.List[@kernel.Term], x107 : @kernel.Term) -> @kernel.Thm raise {
         let vars = x106
@@ -462,7 +462,7 @@ fn step_12() -> Unit raise {
     ((x118 : @list.List[@kernel.Thm]) => @lib.map(@simp.rewr_conv, x118))(@bool.conjuncts_rule(x119))
   })(@calc_rat.real_arith(t120)) {
     More(cnv_l1, tail=More(cnv_r1, tail=More(cnv_2, tail=More(cnv_l0, tail=More(cnv_r0, tail=Empty))))) => {
-      let t121 = @term_syntax.parse_term("op_star")
+      let t121 = @term_syntax.parse_term("real_mul")
       let dest_mul : (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise = (x122 : @kernel.Term) => @basics.dest_binop(t121, x122)
       let zero_tm = @term_syntax.parse_term("real_of_num(0)")
       fn poly_mul_conv_1(x123 : @list.List[@kernel.Term], x124 : @kernel.Term) -> @kernel.Thm raise {
@@ -560,11 +560,11 @@ pub fn poly_pow_conv(x : @list.List[@kernel.Term]) -> @equal.Conv raise {
 fn step_14() -> Unit raise {
   let cnv_var : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(@calc_rat.real_arith(@term_syntax.parse_term("(x : Real) == real_of_num(0) + x * real_of_num(1)")))
   let cnv_div : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(@realax.real_div())
-  let neg_tm = @term_syntax.parse_term("op_minus_minus")
-  let add_tm = @term_syntax.parse_term("op_plus")
-  let sub_tm = @term_syntax.parse_term("op_minus")
-  let mul_tm = @term_syntax.parse_term("op_star")
-  let pow_tm = @term_syntax.parse_term("pow")
+  let neg_tm = @term_syntax.parse_term("real_neg")
+  let add_tm = @term_syntax.parse_term("real_add")
+  let sub_tm = @term_syntax.parse_term("real_sub")
+  let mul_tm = @term_syntax.parse_term("real_mul")
+  let pow_tm = @term_syntax.parse_term("real_pow")
   let div_tm = @term_syntax.parse_term("op_slash")
   fn polynate_conv_1(x143 : @list.List[@kernel.Term], x144 : @kernel.Term) -> @kernel.Thm raise {
     let vars = x143
@@ -628,7 +628,7 @@ pub fn polynate_conv(x : @list.List[@kernel.Term]) -> @equal.Conv raise {
 ///|
 /// poly_add_
 fn step_15() -> Unit raise {
-  let add_tm = @term_syntax.parse_term("op_plus")
+  let add_tm = @term_syntax.parse_term("real_add")
   poly_add__c.set(fn(x154 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise {
     let vars = x154
     fn(x155 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
@@ -654,7 +654,7 @@ pub fn poly_add_(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.T
 ///|
 /// poly_sub_
 fn step_16() -> Unit raise {
-  let sub_tm = @term_syntax.parse_term("op_minus")
+  let sub_tm = @term_syntax.parse_term("real_sub")
   poly_sub__c.set(fn(x158 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise {
     let vars = x158
     fn(x159 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
@@ -680,7 +680,7 @@ pub fn poly_sub_(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.T
 ///|
 /// poly_mul_
 fn step_17() -> Unit raise {
-  let mul_tm = @term_syntax.parse_term("op_star")
+  let mul_tm = @term_syntax.parse_term("real_mul")
   poly_mul__c.set(fn(x162 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise {
     let vars = x162
     fn(x163 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
@@ -706,7 +706,7 @@ pub fn poly_mul_(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.T
 ///|
 /// poly_neg_
 fn step_18() -> Unit raise {
-  let neg_tm = @term_syntax.parse_term("op_minus_minus")
+  let neg_tm = @term_syntax.parse_term("real_neg")
   poly_neg__c.set(fn(x166 : @kernel.Term) -> @kernel.Term raise {
     let p = x166
     @kernel.rand(@kernel.concl(poly_neg_conv(@kernel.mk_comb(neg_tm, p))))
@@ -725,7 +725,7 @@ pub fn poly_neg_(x : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// poly_pow_
 fn step_19() -> Unit raise {
-  let pow_tm = @term_syntax.parse_term("pow")
+  let pow_tm = @term_syntax.parse_term("real_pow")
   poly_pow__c.set(fn(x167 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> ((Int64) -> @kernel.Term raise) raise) raise {
     let vars = x167
     fn(x168 : @kernel.Term) -> ((Int64) -> @kernel.Term raise) raise {
@@ -914,7 +914,7 @@ pub fn headconst(x195 : @kernel.Term) -> @num.Num raise {
 ///|
 /// MONIC_CONV
 fn step_23() -> Unit raise {
-  let mul_tm = @term_syntax.parse_term("op_star")
+  let mul_tm = @term_syntax.parse_term("real_mul")
   monic_conv_c.set(fn(x196 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let vars = x196
     fn(x197 : @kernel.Term) -> @kernel.Thm raise {
@@ -941,9 +941,9 @@ pub fn monic_conv(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Th
 fn step_24() -> Unit raise {
   let zero_tm = @term_syntax.parse_term("real_of_num(0)")
   let add0_tm = @term_syntax.parse_term("op_plus(real_of_num(0))")
-  let add_tm = @term_syntax.parse_term("op_plus")
-  let mul_tm = @term_syntax.parse_term("op_star")
-  let pow_tm = @term_syntax.parse_term("pow")
+  let add_tm = @term_syntax.parse_term("real_add")
+  let mul_tm = @term_syntax.parse_term("real_mul")
+  let pow_tm = @term_syntax.parse_term("real_pow")
   let one_tm = @term_syntax.parse_term("real_of_num(1)")
   let mk_varpow : (@list.List[@kernel.Term]) -> ((Int64) -> @kernel.Term raise) raise = fn(x200 : @list.List[@kernel.Term]) -> ((Int64) -> @kernel.Term raise) raise {
     let vars = x200
@@ -1029,8 +1029,8 @@ fn step_25() -> Unit raise {
   let zero = @num.num_of_int64(0L)
   let zero_tm = @term_syntax.parse_term("real_of_num(0)")
   let eq_tm = @term_syntax.parse_term("(op_eq : (Real, Real) -> Bool)")
-  let gt_tm = @term_syntax.parse_term("op_gt")
-  let lt_tm = @term_syntax.parse_term("op_lt")
+  let gt_tm = @term_syntax.parse_term("real_gt")
+  let lt_tm = @term_syntax.parse_term("real_lt")
   sign_const_c.set(fn(x222 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x222
     let x = @calc_int.rat_of_term(tm)

@@ -108,7 +108,7 @@ pub fn rneq() -> @kernel.Term {
 ///|
 /// rlt
 fn step_8() -> Unit raise {
-  rlt_c.set(@term_syntax.parse_term("op_lt"))
+  rlt_c.set(@term_syntax.parse_term("real_lt"))
 }
 
 ///|
@@ -123,7 +123,7 @@ pub fn rlt() -> @kernel.Term {
 ///|
 /// rgt
 fn step_9() -> Unit raise {
-  rgt_c.set(@term_syntax.parse_term("op_gt"))
+  rgt_c.set(@term_syntax.parse_term("real_gt"))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn rgt() -> @kernel.Term {
 ///|
 /// rle
 fn step_10() -> Unit raise {
-  rle_c.set(@term_syntax.parse_term("op_lt_eq"))
+  rle_c.set(@term_syntax.parse_term("real_le"))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn rle() -> @kernel.Term {
 ///|
 /// rge
 fn step_11() -> Unit raise {
-  rge_c.set(@term_syntax.parse_term("op_gt_eq"))
+  rge_c.set(@term_syntax.parse_term("real_ge"))
 }
 
 ///|
@@ -168,7 +168,7 @@ pub fn rge() -> @kernel.Term {
 ///|
 /// rm
 fn step_12() -> Unit raise {
-  rm_c.set(@term_syntax.parse_term("op_star"))
+  rm_c.set(@term_syntax.parse_term("real_mul"))
 }
 
 ///|
@@ -183,7 +183,7 @@ pub fn rm() -> @kernel.Term {
 ///|
 /// rs
 fn step_13() -> Unit raise {
-  rs_c.set(@term_syntax.parse_term("op_minus"))
+  rs_c.set(@term_syntax.parse_term("real_sub"))
 }
 
 ///|
@@ -198,7 +198,7 @@ pub fn rs() -> @kernel.Term {
 ///|
 /// rn
 fn step_14() -> Unit raise {
-  rn_c.set(@term_syntax.parse_term("op_minus_minus"))
+  rn_c.set(@term_syntax.parse_term("real_neg"))
 }
 
 ///|
@@ -228,7 +228,7 @@ pub fn rd() -> @kernel.Term {
 ///|
 /// rp
 fn step_16() -> Unit raise {
-  rp_c.set(@term_syntax.parse_term("op_plus"))
+  rp_c.set(@term_syntax.parse_term("real_add"))
 }
 
 ///|
@@ -382,7 +382,7 @@ pub fn mk_mult(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
 ///|
 /// pow_tm
 fn step_24() -> Unit raise {
-  pow_tm_c.set(@term_syntax.parse_term("pow"))
+  pow_tm_c.set(@term_syntax.parse_term("real_pow"))
 }
 
 ///|

@@ -1174,7 +1174,7 @@ pub fn geom_mul() -> @kernel.Thm {
 fn step_64() -> Unit raise {
   let t237 = @tactics.match_accept_tac(bilinear_product())
   let t238 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@equal.gsym(@class.fun_eq_thm()), @class.eta_ax()]))(geom_mul())])), t237)
-  bilinear_geom_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((op_star : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))"), t238))
+  bilinear_geom_c.set(@tactics.prove(@term_syntax.parse_term("(bilinear : ((Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]) -> Bool)((geom_mul : (Cart[Real, Multivector[_]], Cart[Real, Multivector[_]]) -> Cart[Real, Multivector[_]]))"), t238))
 }
 
 ///|
@@ -1343,7 +1343,7 @@ fn step_73() -> Unit raise {
       @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_trans()), t260)
     })(x261)(x261)
   }), @tactics.conj_tac), t263), t264), t265), t266), t267)
-  geom_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], ∀ z : Cart[Real, Multivector[N]], x * (y * z) == x * y * z"), t268))
+  geom_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Multivector[N]], ∀ y : Cart[Real, Multivector[N]], ∀ z : Cart[Real, Multivector[N]], geom_mul(x, geom_mul(y, z)) == geom_mul(geom_mul(x, y), z)"), t268))
 }
 
 ///|
@@ -1811,7 +1811,7 @@ fn step_100() -> Unit raise {
   let t336 = @simp.asm_rewrite_tac(@list.List([]))
   let t335 = @simp.rewrite_tac(@list.List([geom_mul(), product_mbasis()]))
   let t339 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t335), @class.cond_cases_tac), t336), @tactics.ap_thm_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t337), t338)
-  geom_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s) * (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(UNION(DIFF(s, t), DIFF(t, s)))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t339))
+  geom_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (geom_mul : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t)) == (if SUBSET(s, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && SUBSET(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { (op_pct : (Real, Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])(pow(-real_of_num(1), CARD({((i : Num), (j : Num)) | IN(i, s) && IN(j, t) && i > j})), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(UNION(DIFF(s, t), DIFF(t, s)))) } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t339))
 }
 
 ///|
@@ -1854,7 +1854,7 @@ fn step_101() -> Unit raise {
   let t341 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t340 = @simp.rewrite_tac(@list.List([geom_mul(), product_mbasis_sing()]))
   let t362 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t340), @class.cond_cases_tac), t341), t345), t348), t349), t350), t352), t353), t359), t360), t361), @vectors.vector_arith_tac)
-  geom_mbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j}) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { if i == j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({}) } else { if i < j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } else { -(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } } } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t362))
+  geom_mbasis_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, (geom_mul : (Cart[Real, Multivector[N]], Cart[Real, Multivector[N]]) -> Cart[Real, Multivector[N]])((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i}), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({j})) == (if IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && IN(j, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) { if i == j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({}) } else { if i < j { (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } else { -(mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])({i, j}) } } } else { (vec : (Num) -> Cart[Real, Multivector[N]])(0) })"), t362))
 }
 
 ///|

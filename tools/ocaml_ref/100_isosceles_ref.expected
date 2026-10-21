@@ -80000,10 +80000,10 @@ Warning: inventing type variables
 100/isosceles quotations (112):
   :M
   :N
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], dist((A, C)) == dist((B, C)) \226\134\146 angle((C, A, B)) == angle((A, B, C))
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], distance((A, C)) == distance((B, C)) \226\134\146 angle((C, A, B)) == angle((A, B, C))
   :M
   :N
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], angle((C, A, B)) == angle((A, B, C)) && !collinear({A, B, C}) \226\134\146 dist((A, C)) == dist((B, C))
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], angle((C, A, B)) == angle((A, B, C)) && !collinear({A, B, C}) \226\134\146 distance((A, C)) == distance((B, C))
   (x : Real) == (z : Real) \226\134\146 x + (y : Real) == (p : Real) \226\134\146 (z == p / real_of_num(2)) == (x == p / real_of_num(2) && y == p / real_of_num(2))
   (C : Cart[Real, N])
   (D : Cart[Real, N])
@@ -80018,7 +80018,7 @@ Warning: inventing type variables
   (C : Cart[Real, N])
   (D : Cart[Real, N])
   (A : Cart[Real, N])
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], dist((A, C)) == dist((B, C)) && D == midpoint((A, B)) \226\134\146 angle((A, C, D)) == angle((B, C, D))
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], distance((A, C)) == distance((B, C)) && D == midpoint((A, B)) \226\134\146 angle((A, C, D)) == angle((B, C, D))
   (C : Cart[Real, N])
   (D : Cart[Real, N])
   (B : Cart[Real, N])
@@ -80031,7 +80031,7 @@ Warning: inventing type variables
   (A : Cart[Real, N])
   (C : Cart[Real, N])
   (D : Cart[Real, N])
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], between(D, (A, B)) && dist((A, C)) == dist((B, C)) && angle((A, C, D)) == angle((B, C, D)) \226\134\146 orthogonal(A - B, C - D)
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], between(D, (A, B)) && distance((A, C)) == distance((B, C)) && angle((A, C, D)) == angle((B, C, D)) \226\134\146 orthogonal(A - B, C - D)
   angle(((C : Cart[Real, N]), (A : Cart[Real, N]), (B : Cart[Real, N]))) == angle((A, B, C))
   (a : Real) == (a' : Real) && (b : Real) == (b' : Real) \226\134\146 a + ((x : Real) + b) == (p : Real) \226\134\146 a' + ((x' : Real) + b') == p \226\134\146 x' == x
   (D : Cart[Real, N])
@@ -80057,10 +80057,10 @@ Warning: inventing type variables
   (B : Cart[Real, N])
   (D : Cart[Real, N]) == (A : Cart[Real, N])
   (A : Cart[Real, N]) == (B : Cart[Real, N])
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], between(D, (A, B)) && dist((A, C)) == dist((B, C)) && orthogonal(A - B, C - D) \226\134\146 D == midpoint((A, B))
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], between(D, (A, B)) && distance((A, C)) == distance((B, C)) && orthogonal(A - B, C - D) \226\134\146 D == midpoint((A, B))
   (D : Cart[Real, N])
   (D : Cart[Real, N])
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], D == midpoint((A, B)) && orthogonal(A - B, C - D) \226\134\146 dist((A, C)) == dist((B, C))
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], D == midpoint((A, B)) && orthogonal(A - B, C - D) \226\134\146 distance((A, C)) == distance((B, C))
   (B : Cart[Real, N])
   (C : Cart[Real, N])
   (D : Cart[Real, N])
@@ -80078,8 +80078,8 @@ Warning: inventing type variables
   (A : Cart[Real, N]) == (B : Cart[Real, N])
   !((C : Cart[Real, N]) == (D : Cart[Real, N]))
   (C : Cart[Real, N]) == (D : Cart[Real, N])
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], !collinear({D, C, A}) && between(D, (A, B)) && angle((A, C, D)) == angle((B, C, D)) && orthogonal(A - B, C - D) \226\134\146 dist((A, C)) == dist((B, C))
-  op_pct(inv(real_of_num(2)), (A : Cart[Real, _]) + (B : Cart[Real, _])) - A == op_pct(inv(real_of_num(2)), B - A)
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], !collinear({D, C, A}) && between(D, (A, B)) && angle((A, C, D)) == angle((B, C, D)) && orthogonal(A - B, C - D) \226\134\146 distance((A, C)) == distance((B, C))
+  vector_sub(op_pct(real_inv(real_of_num(2)), vector_add((A : Cart[Real, _]), (B : Cart[Real, _]))), A) == op_pct(real_inv(real_of_num(2)), vector_sub(B, A))
   {(bd : _), (c : _), (a : _)} == {c, a, bd}
   ((q : Bool) \226\134\146 (p : Bool)) \226\134\146 !p \226\134\146 q \226\134\146 (r : Bool)
   !collinear({(D : Cart[Real, N]), (C : Cart[Real, N]), (A : Cart[Real, N])})
@@ -80109,7 +80109,7 @@ Warning: inventing type variables
   (C : Cart[Real, N])
   (A : Cart[Real, N])
   (A : Cart[Real, N]) == (B : Cart[Real, N])
-  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], !collinear({D, C, A}) && D == midpoint((A, B)) && angle((A, C, D)) == angle((B, C, D)) \226\134\146 dist((A, C)) == dist((B, C))
+  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], \226\136\128 D : Cart[Real, N], !collinear({D, C, A}) && D == midpoint((A, B)) && angle((A, C, D)) == angle((B, C, D)) \226\134\146 distance((A, C)) == distance((B, C))
 ISOSCELES_TRIANGLE_THEOREM =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\A:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\B:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\C:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) A:cart(real,'N)) C:cart(real,'N)))) (#distance:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) B:cart(real,'N)) C:cart(real,'N))))) ((#=:fun(real,fun(real,bool)) (#angle:fun(prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))),real) ((#,:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))))) C:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) A:cart(real,'N)) B:cart(real,'N))))) (#angle:fun(prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))),real) ((#,:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))))) A:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) B:cart(real,'N)) C:cart(real,'N))))))))))))
 ISOSCELES_TRIANGLE_CONVERSE =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\A:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\B:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\C:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#angle:fun(prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))),real) ((#,:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))))) C:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) A:cart(real,'N)) B:cart(real,'N))))) (#angle:fun(prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))),real) ((#,:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))))) A:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) B:cart(real,'N)) C:cart(real,'N)))))) (#~:fun(bool,bool) (#collinear:fun(fun(cart(real,'N),bool),bool) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) A:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) B:cart(real,'N)) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) C:cart(real,'N)) #EMPTY:fun(cart(real,'N),bool)))))))) ((#=:fun(real,fun(real,bool)) (#distance:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) A:cart(real,'N)) C:cart(real,'N)))) (#distance:fun(prod(cart(real,'N),cart(real,'N)),real) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) B:cart(real,'N)) C:cart(real,'N)))))))))))
 lemma =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\A:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\B:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\C:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\D:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#between:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),bool)) D:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) A:cart(real,'N)) B:cart(real,'N)))) ((#=:fun(bool,fun(bool,bool)) ((#orthogonal:fun(cart(real,'N),fun(cart(real,'N),bool)) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) A:cart(real,'N)) B:cart(real,'N))) ((#vector_sub:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) C:cart(real,'N)) D:cart(real,'N)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#angle:fun(prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))),real) ((#,:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))))) A:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) D:cart(real,'N)) C:cart(real,'N))))) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#=:fun(real,fun(real,bool)) (#angle:fun(prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))),real) ((#,:fun(cart(real,'N),fun(prod(cart(real,'N),cart(real,'N)),prod(cart(real,'N),prod(cart(real,'N),cart(real,'N))))) B:cart(real,'N)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) D:cart(real,'N)) C:cart(real,'N))))) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))))

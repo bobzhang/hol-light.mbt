@@ -49718,29 +49718,29 @@ Warning: inventing type variables
 0..0..4..20..solved at 24
 0..0..3..19..67..174..solved at 180
 Multivariate/tarski quotations (128):
-  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], dist((a, b)) == dist((b, a))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], distance((a, b)) == distance((b, a))
   :real
   :real
-  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 p : Cart[Real, _], \226\136\128 q : Cart[Real, _], \226\136\128 r : Cart[Real, _], \226\136\128 s : Cart[Real, _], dist((a, b)) == dist((p, q)) && dist((a, b)) == dist((r, s)) \226\134\146 dist((p, q)) == dist((r, s))
-  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], dist((a, b)) == dist((c, c)) \226\134\146 a == b
+  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 p : Cart[Real, _], \226\136\128 q : Cart[Real, _], \226\136\128 r : Cart[Real, _], \226\136\128 s : Cart[Real, _], distance((a, b)) == distance((p, q)) && distance((a, b)) == distance((r, s)) \226\134\146 distance((p, q)) == distance((r, s))
+  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], distance((a, b)) == distance((c, c)) \226\134\146 a == b
   :real
   :real
   (a : Real) == real_of_num(1) + (b : Real) \226\134\146 a * (q : Real) == q + b * q
   (q : Cart[Real, _]) - -op_pct((a : Real), q) == op_pct(real_of_num(1) + a, q)
-  -op_pct(dist(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) / norm((q : Cart[Real, Tybit0[Unit]])), q)
+  -op_pct(distance(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) / norm((q : Cart[Real, Tybit0[Unit]])), q)
   (q : Cart[Real, Tybit0[Unit]]) == vec(0)
   (a : Cart[Real, Tybit0[Unit]])
-  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\131 x : Cart[Real, Tybit0[Unit]], between(a, (q, x)) && dist((a, x)) == dist((b, c))
-  dist(((b : Cart[Real, N]), b + (x : Cart[Real, N]))) == norm(x)
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\131 x : Cart[Real, Tybit0[Unit]], between(a, (q, x)) && distance((a, x)) == distance((b, c))
+  distance(((b : Cart[Real, N]), b + (x : Cart[Real, N]))) == norm(x)
   :real
   :real
-  dist(((b : Cart[Real, N]), (x : Cart[Real, N]))) == dist((b, (y : Cart[Real, N])))
-  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], !(b == a) && between(b, (a, x)) && between(b, (a, y)) && dist((b, x)) == dist((b, y)) \226\134\146 x == y
-  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))
+  distance(((b : Cart[Real, N]), (x : Cart[Real, N]))) == distance((b, (y : Cart[Real, N])))
+  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], !(b == a) && between(b, (a, x)) && between(b, (a, y)) && distance((b, x)) == distance((b, y)) \226\134\146 x == y
+  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))
   :real
   :real
   ((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)
-  dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))
+  distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))
   :real
   :real
   (k : Cart[Real, Tybit0[Unit]]) + (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]]))
@@ -49754,7 +49754,7 @@ Multivariate/tarski quotations (128):
   (c : Cart[Real, Tybit0[Unit]])
   (b : Cart[Real, Tybit0[Unit]])
   (a : Cart[Real, Tybit0[Unit]])
-  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 b' : Cart[Real, Tybit0[Unit]], \226\136\128 c' : Cart[Real, Tybit0[Unit]], \226\136\128 x' : Cart[Real, Tybit0[Unit]], !(a == b) && dist((a, b)) == dist((a', b')) && dist((a, c)) == dist((a', c')) && dist((b, c)) == dist((b', c')) && between(b, (a, x)) && between(b', (a', x')) && dist((b, x)) == dist((b', x')) \226\134\146 dist((c, x)) == dist((c', x'))
+  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 b' : Cart[Real, Tybit0[Unit]], \226\136\128 c' : Cart[Real, Tybit0[Unit]], \226\136\128 x' : Cart[Real, Tybit0[Unit]], !(a == b) && distance((a, b)) == distance((a', b')) && distance((a, c)) == distance((a', c')) && distance((b, c)) == distance((b', c')) && between(b, (a, x)) && between(b', (a', x')) && distance((b, x)) == distance((b', x')) \226\134\146 distance((c, x)) == distance((c', x'))
   \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], between(b, (a, a)) \226\134\146 a == b
   real_of_num(0) <= (real_of_num(1) - (d : Real)) * (real_of_num(1) + (e : Real)) && real_of_num(0) <= d * e
   (real_of_num(1) - (d : Real) + ((e : Real) - d * e)) / (real_of_num(1) - d + e)
@@ -49802,7 +49802,7 @@ Multivariate/tarski quotations (128):
   :real
   :real
   :real
-  \226\136\128 p : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], !(p == q) && dist((a, p)) == dist((a, q)) && dist((b, p)) == dist((b, q)) && dist((c, p)) == dist((c, q)) \226\134\146 between(b, (a, c)) || between(c, (b, a)) || between(a, (c, b))
+  \226\136\128 p : Cart[Real, Tybit0[Unit]], \226\136\128 q : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], !(p == q) && distance((a, p)) == distance((a, q)) && distance((b, p)) == distance((b, q)) && distance((c, p)) == distance((c, q)) \226\134\146 between(b, (a, c)) || between(c, (b, a)) || between(a, (c, b))
   (b : Cart[Real, N]) - op_pct(real_of_num(1) + (u : Real), b) == -op_pct(u, b)
   op_pct(real_of_num(1) + (u : Real), (c : Cart[Real, N]))
   op_pct(real_of_num(1) + (u : Real), (b : Cart[Real, N]))

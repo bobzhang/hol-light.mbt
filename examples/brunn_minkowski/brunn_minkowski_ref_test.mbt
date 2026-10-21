@@ -80072,7 +80072,7 @@ test "Examples/brunn_minkowski matches Examples/brunn_minkowski.ml" {
       #|  (x : Cart[Real, N])
       #|  (n : Num)
       #|  inv(real_of_num((n : Num)) + real_of_num(1)) <= inv(real_of_num(n))
-      #|  dist(((y : Cart[Real, N]) + (e : Cart[Real, N]), y)) == norm(e)
+      #|  distance(((y : Cart[Real, N]) + (e : Cart[Real, N]), y)) == norm(e)
       #|  :real
       #|  :real
       #|  (y : Cart[Real, N])

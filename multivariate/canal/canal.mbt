@@ -1664,7 +1664,7 @@ pub fn summable_complex_div() -> @kernel.Thm {
 /// SERIES_COMPLEX_MUL
 fn step_70() -> Unit raise {
   let t545 = @simp.rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
-  let t546 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("op_star"), @topology.series_bilinear())), t545)
+  let t546 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("complex_mul"), @topology.series_bilinear())), t545)
   series_complex_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : (Num) -> Cart[Real, Tybit0[Unit]], ∀ y : (Num) -> Cart[Real, Tybit0[Unit]], ∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], sums(x, a, from(0)) && sums(y, b, from(0)) && (summable(from(0), (n : Num) => lift(norm(x(n)))) || summable(from(0), (n : Num) => lift(norm(y(n))))) → sums((n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)), a * b, from(0))"), t546))
 }
 
@@ -1681,7 +1681,7 @@ pub fn series_complex_mul() -> @kernel.Thm {
 /// SERIES_COMPLEX_MUL_UNIQUE
 fn step_71() -> Unit raise {
   let t547 = @simp.rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
-  let t548 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("op_star"), @topology.series_bilinear_unique())), t547)
+  let t548 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("complex_mul"), @topology.series_bilinear_unique())), t547)
   series_complex_mul_unique_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : (Num) -> Cart[Real, Tybit0[Unit]], ∀ y : (Num) -> Cart[Real, Tybit0[Unit]], ∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], sums(x, a, from(0)) && sums(y, b, from(0)) && sums((n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)), c, from(0)) → a * b == c"), t548))
 }
 
@@ -1698,7 +1698,7 @@ pub fn series_complex_mul_unique() -> @kernel.Thm {
 /// SUMMABLE_COMPLEX_MUL_LEFT
 fn step_72() -> Unit raise {
   let t549 = @simp.rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
-  let t550 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("op_star"), @topology.summable_bilinear_left())), t549)
+  let t550 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("complex_mul"), @topology.summable_bilinear_left())), t549)
   summable_complex_mul_left_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : (Num) -> Cart[Real, Tybit0[Unit]], ∀ y : (Num) -> Cart[Real, Tybit0[Unit]], ∀ m : Num, ∀ n : Num, ∀ p : Num, summable(from(m), (n : Num) => lift(norm(x(n)))) && summable(from(n), y) → summable(from(p), (n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)))"), t550))
 }
 
@@ -1715,7 +1715,7 @@ pub fn summable_complex_mul_left() -> @kernel.Thm {
 /// SUMMABLE_COMPLEX_MUL_RIGHT
 fn step_73() -> Unit raise {
   let t551 = @simp.rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
-  let t552 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("op_star"), @topology.summable_bilinear_right())), t551)
+  let t552 = @tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("complex_mul"), @topology.summable_bilinear_right())), t551)
   summable_complex_mul_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : (Num) -> Cart[Real, Tybit0[Unit]], ∀ y : (Num) -> Cart[Real, Tybit0[Unit]], ∀ m : Num, ∀ n : Num, ∀ p : Num, summable(from(m), x) && summable(from(n), (n : Num) => lift(norm(y(n)))) → summable(from(p), (n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)))"), t552))
 }
 
@@ -2028,7 +2028,7 @@ pub fn continuous_on_cproduct() -> @kernel.Thm {
 fn step_92() -> Unit raise {
   let t582 = @simp.asm_rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
   let t578 = @term_syntax.parse_term("(s : (Cart[Real, N]) -> Bool)")
-  let t579 = @term_syntax.parse_term("op_star")
+  let t579 = @term_syntax.parse_term("complex_mul")
   let t580 = @term_syntax.parse_term("(g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])")
   let t581 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])"), t580, t579, t578]), @topology.bilinear_uniformly_continuous_on_compose()))
   let t583 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t581), t582)
@@ -2803,7 +2803,7 @@ pub fn complex_differentiable_at_within() -> @kernel.Thm {
 fn step_138() -> Unit raise {
   let t671 = @meson.meson_tac(@list.List([@derivatives.has_derivative_transform_within()]))
   let t672 = @tactics.then_tac(@simp.rewrite_tac(@list.List([has_complex_derivative()])), t671)
-  has_complex_derivative_transform_within_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ f' : Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ s : (Cart[Real, Tybit0[Unit]]) -> Bool, ∀ d : Real, real_of_num(0) < d && IN(x, s) && (∀ x' : Cart[Real, Tybit0[Unit]], IN(x', s) && dist((x', x)) < d → f(x') == g(x')) && has_complex_derivative(f, f', within(at(x), s)) → has_complex_derivative(g, f', within(at(x), s))"), t672))
+  has_complex_derivative_transform_within_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ f' : Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ s : (Cart[Real, Tybit0[Unit]]) -> Bool, ∀ d : Real, real_of_num(0) < d && IN(x, s) && (∀ x' : Cart[Real, Tybit0[Unit]], IN(x', s) && distance((x', x)) < d → f(x') == g(x')) && has_complex_derivative(f, f', within(at(x), s)) → has_complex_derivative(g, f', within(at(x), s))"), t672))
 }
 
 ///|
@@ -2837,7 +2837,7 @@ pub fn has_complex_derivative_transform_within_open() -> @kernel.Thm {
 fn step_140() -> Unit raise {
   let t675 = @meson.meson_tac(@list.List([has_complex_derivative_transform_within(), @sets.in_univ()]))
   let t676 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@equal.gsym(@topology.within_univ())])), t675)
-  has_complex_derivative_transform_at_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ f' : Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ d : Real, real_of_num(0) < d && (∀ x' : Cart[Real, Tybit0[Unit]], dist((x', x)) < d → f(x') == g(x')) && has_complex_derivative(f, f', at(x)) → has_complex_derivative(g, f', at(x))"), t676))
+  has_complex_derivative_transform_at_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ f' : Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ d : Real, real_of_num(0) < d && (∀ x' : Cart[Real, Tybit0[Unit]], distance((x', x)) < d → f(x') == g(x')) && has_complex_derivative(f, f', at(x)) → has_complex_derivative(g, f', at(x))"), t676))
 }
 
 ///|
@@ -3848,7 +3848,7 @@ pub fn complex_differentiable_cproduct_within() -> @kernel.Thm {
 fn step_187() -> Unit raise {
   let t926 = @meson.meson_tac(@list.List([has_complex_derivative_transform_within()]))
   let t927 = @tactics.then_tac(@simp.rewrite_tac(@list.List([complex_differentiable()])), t926)
-  complex_differentiable_transform_within_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ s : (Cart[Real, Tybit0[Unit]]) -> Bool, ∀ d : Real, real_of_num(0) < d && IN(x, s) && (∀ x' : Cart[Real, Tybit0[Unit]], IN(x', s) && dist((x', x)) < d → f(x') == g(x')) && complex_differentiable(f, within(at(x), s)) → complex_differentiable(g, within(at(x), s))"), t927))
+  complex_differentiable_transform_within_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ s : (Cart[Real, Tybit0[Unit]]) -> Bool, ∀ d : Real, real_of_num(0) < d && IN(x, s) && (∀ x' : Cart[Real, Tybit0[Unit]], IN(x', s) && distance((x', x)) < d → f(x') == g(x')) && complex_differentiable(f, within(at(x), s)) → complex_differentiable(g, within(at(x), s))"), t927))
 }
 
 ///|
@@ -4010,7 +4010,7 @@ pub fn complex_differentiable_cproduct_at() -> @kernel.Thm {
 fn step_195() -> Unit raise {
   let t961 = @meson.meson_tac(@list.List([has_complex_derivative_transform_at()]))
   let t962 = @tactics.then_tac(@simp.rewrite_tac(@list.List([complex_differentiable()])), t961)
-  complex_differentiable_transform_at_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ d : Real, real_of_num(0) < d && (∀ x' : Cart[Real, Tybit0[Unit]], dist((x', x)) < d → f(x') == g(x')) && complex_differentiable(f, at(x)) → complex_differentiable(g, at(x))"), t962))
+  complex_differentiable_transform_at_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ d : Real, real_of_num(0) < d && (∀ x' : Cart[Real, Tybit0[Unit]], distance((x', x)) < d → f(x') == g(x')) && complex_differentiable(f, at(x)) → complex_differentiable(g, at(x))"), t962))
 }
 
 ///|
@@ -5122,7 +5122,7 @@ fn step_250() -> Unit raise {
   let t1245 = @simp.asm_simp_tac(@list.List([holomorphic_on_imp_continuous_on(), @topology.centre_in_ball(), @topology.open_ball()]))
   let t1244 = @tactics.exists_tac(@term_syntax.parse_term("ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real)))"))
   let t1253 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@topology.continuous_on_open_avoid()), t1244), t1245), t1252])
-  let t1243 = @tactics.subgoal_then(@term_syntax.parse_term("∃ e : Real, real_of_num(0) < e && (∀ y : Cart[Real, Tybit0[Unit]], dist(((z : Cart[Real, Tybit0[Unit]]), y)) < e → !((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) == Cx(real_of_num(0))))"), fn(x1240 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1243 = @tactics.subgoal_then(@term_syntax.parse_term("∃ e : Real, real_of_num(0) < e && (∀ y : Cart[Real, Tybit0[Unit]], distance(((z : Cart[Real, Tybit0[Unit]]), y)) < e → !((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) == Cx(real_of_num(0))))"), fn(x1240 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1241 = @tactics.mp_tac(x1240)
     fn(x1242 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1241(x1242)
@@ -6797,7 +6797,7 @@ fn step_302() -> Unit raise {
   }))
   let t1911 = @simp.rewrite_tac(@list.List([@topology.summable()]))
   let t1927 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1911), t1915), t1916), t1917), t1918), t1919), t1920), t1921), t1922), t1923), t1924), t1925), t1926)
-  series_comparison_uniform_complex_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A, Num) -> Cart[Real, N], ∀ g : (Num) -> Cart[Real, Tybit0[Unit]], ∀ P : (A) -> Bool, ∀ s : (Num) -> Bool, summable(s, g) && (∀ n : Num, IN(n, s) → real(g(n)) && real_of_num(0) <= Re(g(n))) && (∃ N : Num, ∀ n : Num, ∀ x : A, N <= n && IN(n, s) && P(x) → norm(f(x, n)) <= norm(g(n))) → (∃ l : (A) -> Cart[Real, N], ∀ e : Real, real_of_num(0) < e → (∃ N : Num, ∀ n : Num, ∀ x : A, N <= n && P(x) → dist((vsum(INTER(s, op_dot_dot(0, n)), f(x)), l(x))) < e))"), t1927))
+  series_comparison_uniform_complex_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A, Num) -> Cart[Real, N], ∀ g : (Num) -> Cart[Real, Tybit0[Unit]], ∀ P : (A) -> Bool, ∀ s : (Num) -> Bool, summable(s, g) && (∀ n : Num, IN(n, s) → real(g(n)) && real_of_num(0) <= Re(g(n))) && (∃ N : Num, ∀ n : Num, ∀ x : A, N <= n && IN(n, s) && P(x) → norm(f(x, n)) <= norm(g(n))) → (∃ l : (A) -> Cart[Real, N], ∀ e : Real, real_of_num(0) < e → (∃ N : Num, ∀ n : Num, ∀ x : A, N <= n && P(x) → distance((vsum(INTER(s, op_dot_dot(0, n)), f(x)), l(x))) < e))"), t1927))
 }
 
 ///|
@@ -6870,7 +6870,7 @@ fn step_305() -> Unit raise {
   let t1962 = @term_syntax.parse_term("(e : Real)")
   let t1963 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("norm((z : Cart[Real, Tybit0[Unit]]))"), t1962]), @real.real_arch_pow_inv()))
   let t1961 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)"))
-  let t1960 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((x : Cart[Real, _]), vec(0))) == norm(x)"))]))
+  let t1960 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((x : Cart[Real, _]), vec(0))) == norm(x)"))]))
   let t1959 = @simp.rewrite_tac(@list.List([@topology.lim_sequentially(), @equal.gsym(@complexes.complex_vec_0())]))
   let t1958 = @simp.rewrite_tac(@list.List([@topology.lim_const()]))
   let t1957 = @tactics.match_mp_tac(@topology.lim_sub())
@@ -8320,9 +8320,9 @@ fn step_343() -> Unit raise {
   let t2672 = @tactics.x_gen_tac(@term_syntax.parse_term("(N : Num)"))
   let t2671 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t2669 = @tactics.match_mp_tac(@vectors.vsum_combine_r())
-  let t2668 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("(a : Cart[Real, Tybit0[Unit]]) + (c : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]]) → dist((a, b)) == norm(c)")))
+  let t2668 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("(a : Cart[Real, Tybit0[Unit]]) + (c : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]]) → distance((a, b)) == norm(c)")))
   let t2670 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2668), t2669), @int.asm_arith_tac), @tactics.all_tac])
-  let t2667 = @tactics.subgoal_then(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Unit]], ∀ m : Num, ∀ n : Num, m <= n → dist((vsum(op_dot_dot(0, m), f), vsum(op_dot_dot(0, n), f))) == norm(vsum(op_dot_dot(m + 1, n), f))"), fn(x2665 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2667 = @tactics.subgoal_then(@term_syntax.parse_term("∀ f : (Num) -> Cart[Real, Tybit0[Unit]], ∀ m : Num, ∀ n : Num, m <= n → distance((vsum(op_dot_dot(0, m), f), vsum(op_dot_dot(0, n), f))) == norm(vsum(op_dot_dot(m + 1, n), f))"), fn(x2665 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x2665
     @simp.simp_tac(@list.List([th]))
   })
@@ -8651,12 +8651,12 @@ fn step_349() -> Unit raise {
   let t2917 = @simp.rewrite_tac(@list.List([@topology.in_cball(), @vectors.dist()]))
   let t2928 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("1")), t2917), t2918), t2919), t2920), t2921), t2922), t2923), t2924), t2925), t2926), t2927)
   let t2916 = @tactics.conv_tac(@vectors.norm_arith)
-  let t2915 = @tactics.undisch_tac(@term_syntax.parse_term("dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)"))
+  let t2915 = @tactics.undisch_tac(@term_syntax.parse_term("distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)"))
   let t2914 = @simp.expand_tac("R")
   let t2913 = @simp.rewrite_tac(@list.List([@complexes.complex_norm_cx()]))
   let t2909 = @meson.meson_tac(@list.List([]))
   let t2910 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.summable(), @complexes.complex_ring(@term_syntax.parse_term("(z : Cart[Real, Tybit0[Unit]]) + (r : Cart[Real, Tybit0[Unit]]) - z == r"))])), t2909)
-  let t2911 = @list.List([@simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)"))])), t2910])
+  let t2911 = @list.List([@simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)"))])), t2910])
   let t2906 = @term_syntax.parse_term("(z : Cart[Real, Tybit0[Unit]]) + Cx(((r : Real) + (R : Real)) / real_of_num(2))")
   let t2912 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.first_x_assum(fn(x2908 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x2903 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -8688,12 +8688,12 @@ fn step_349() -> Unit raise {
   let t2885 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) => (w : Cart[Real, Tybit0[Unit]]) => vsum(INTER((k : (Num) -> Bool), op_dot_dot(0, n)), (i : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(w - (z : Cart[Real, Tybit0[Unit]]), i))"))
   let t2884 = @tactics.match_mp_tac(@bool.ispec(@term_syntax.parse_term("sequentially"), @topology.continuous_uniform_limit()))
   let t2882 = @tactics.conv_tac(@vectors.norm_arith)
-  let t2881 = @tactics.undisch_tac(@term_syntax.parse_term("dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)"))
+  let t2881 = @tactics.undisch_tac(@term_syntax.parse_term("distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)"))
   let t2883 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@simp.expand_tac("R"), t2881), t2882)])
   let t2880 = @simp.rewrite_tac(@list.List([@topology.interior_cball(), @topology.in_ball()]))
   let t2879 = @tactics.exists_tac(@term_syntax.parse_term("cball(((z : Cart[Real, Tybit0[Unit]]), (R : Real)))"))
   let t2878 = @tactics.match_mp_tac(@topology.continuous_on_interior())
-  let t2877 = @simp.abbrev_tac(@term_syntax.parse_term("(R : Real) == ((r : Real) + dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]])))) / real_of_num(2)"))
+  let t2877 = @simp.abbrev_tac(@term_syntax.parse_term("(R : Real) == ((r : Real) + distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]])))) / real_of_num(2)"))
   let t2876 = @simp.rewrite_tac(@list.List([@topology.in_ball()]))
   let t2875 = @tactics.x_gen_tac(@term_syntax.parse_term("(w : Cart[Real, Tybit0[Unit]])"))
   let t2874 = @simp.simp_tac(@list.List([@topology.continuous_on_eq_continuous_at(), @topology.open_ball()]))
@@ -8862,7 +8862,7 @@ fn step_350() -> Unit raise {
   }, @list.List([@arith.num_wop()]))
   let t2960 = @simp.once_rewrite_tac(@list.List([@meson.meson(@list.List([]), @term_syntax.parse_term("(∀ x : _, (P : (_) -> Bool)(x) → (Q : (_) -> Bool)(x)) == !(∃ x : _, P(x) && !Q(x))"))]))
   let t3086 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t2960), t2964), t2965), t2966), t2970), t3006), t3010), t3016), t3020), t3028), t3032), t3034), t3038), t3085)
-  power_series_limit_point_of_zeros_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ c : (Num) -> Cart[Real, Tybit0[Unit]], ∀ z : Cart[Real, Tybit0[Unit]], ∀ k : (Num) -> Bool, ∀ r : Real, ∀ s : (Cart[Real, Tybit0[Unit]]) -> Bool, real_of_num(0) < r && (∀ w : Cart[Real, Tybit0[Unit]], dist((w, z)) < r → sums((i : Num) => c(i) * pow(w - z, i), f(w), k)) && (∀ w : Cart[Real, Tybit0[Unit]], IN(w, s) → f(w) == Cx(real_of_num(0))) && limit_point_of(z, s) → (∀ i : Num, IN(i, k) → c(i) == Cx(real_of_num(0)))"), t3086))
+  power_series_limit_point_of_zeros_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], ∀ c : (Num) -> Cart[Real, Tybit0[Unit]], ∀ z : Cart[Real, Tybit0[Unit]], ∀ k : (Num) -> Bool, ∀ r : Real, ∀ s : (Cart[Real, Tybit0[Unit]]) -> Bool, real_of_num(0) < r && (∀ w : Cart[Real, Tybit0[Unit]], distance((w, z)) < r → sums((i : Num) => c(i) * pow(w - z, i), f(w), k)) && (∀ w : Cart[Real, Tybit0[Unit]], IN(w, s) → f(w) == Cx(real_of_num(0))) && limit_point_of(z, s) → (∀ i : Num, IN(i, k) → c(i) == Cx(real_of_num(0)))"), t3086))
 }
 
 ///|

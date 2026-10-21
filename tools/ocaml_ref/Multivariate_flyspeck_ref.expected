@@ -82239,7 +82239,7 @@ Multivariate/flyspeck quotations (2071):
   2
   \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], norm(cross(x, y)) == norm(x) * (norm(y) * sin(vector_angle(x, y)))
   ((a : Bool) && (b : Bool) && (c : Bool)) == !(a \226\134\146 !(b && c))
-  coplanar(INSERT(vec(0), INSERT(-(x : Cart[Real, _]), (s : (Cart[Real, _]) -> Bool)))) == coplanar(INSERT(vec(0), INSERT(x, s)))
+  coplanar(INSERT(vec(0), INSERT(vector_neg((x : Cart[Real, _])), (s : (Cart[Real, _]) -> Bool)))) == coplanar(INSERT(vec(0), INSERT(x, s)))
   \226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, coplanar(s) \226\134\146 negligible(s)
   IN((a : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(a, t)
   (v2 : Cart[Real, N])
@@ -82369,15 +82369,15 @@ Multivariate/flyspeck quotations (2071):
   (a : Cart[Real, Tybit1[Unit]])
   \226\136\128 p : (Cart[Real, Tybit1[Unit]]) -> Bool, plane(p) \226\134\146 (\226\136\131 a : Cart[Real, Tybit1[Unit]], \226\136\131 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]], orthogonal_transformation(f) && det(matrix(f)) == real_of_num(1) && IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, IMAGE(f, {(z : Cart[Real, Tybit1[Unit]]) | op_dollar(z, 3) == real_of_num(0)})) == p)
   (x : Cart[Real, N]) => (u : Cart[Real, N]) + x
-  ((u : Cart[Real, _]) == u + (a : Cart[Real, _])) == (a == vec(0))
+  ((u : Cart[Real, _]) == vector_add(u, (a : Cart[Real, _]))) == (a == vec(0))
   (b : Cart[Real, N])
   (x : Cart[Real, N]) => if x == (a : Cart[Real, N]) { (u : Real) - real_of_num(1) } else { real_of_num(1) }
   {(a : Cart[Real, N]), (b : Cart[Real, N])}
   (u : Real)
-  ((b : Cart[Real, _]) - (a : Cart[Real, _]) == op_pct((c : Real), -a)) == (op_pct(c - real_of_num(1), a) + op_pct(real_of_num(1), b) == vec(0))
+  (vector_sub((b : Cart[Real, _]), (a : Cart[Real, _])) == op_pct((c : Real), vector_neg(a))) == (vector_add(op_pct(real_sub(c, real_of_num(1)), a), op_pct(real_of_num(1), b)) == vec(0))
   (u : Cart[Real, N]) + (b : Cart[Real, N]) - (u + (a : Cart[Real, N])) == b - a
   (u : Cart[Real, N]) - (u + (a : Cart[Real, N])) == -a
-  (-(x : Cart[Real, _]) == vec(0)) == (x == vec(0))
+  (vector_neg((x : Cart[Real, _])) == vec(0)) == (x == vec(0))
   (u : Cart[Real, N]) + (b : Cart[Real, N])
   (u : Cart[Real, N]) + (a : Cart[Real, N])
   (u : Cart[Real, N])
@@ -82398,7 +82398,7 @@ Multivariate/flyspeck quotations (2071):
   ((v1 : Cart[Real, N]) == (v0 : Cart[Real, N]) + (x : Cart[Real, N])) == (x == v1 - v0)
   (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)
   IMAGE((v : Cart[Real, Tybit1[Unit]]) => (v0 : Cart[Real, Tybit1[Unit]]) + v, span({(v1 : Cart[Real, Tybit1[Unit]]) - v0, (v2 : Cart[Real, Tybit1[Unit]]) - v0, (v3 : Cart[Real, Tybit1[Unit]]) - v0}))
-  ((u : Cart[Real, _]) == u + (a : Cart[Real, _])) == (a == vec(0))
+  ((u : Cart[Real, _]) == vector_add(u, (a : Cart[Real, _]))) == (a == vec(0))
   (v0 : Cart[Real, Tybit1[Unit]]) + (b : Cart[Real, Tybit1[Unit]])
   (v0 : Cart[Real, Tybit1[Unit]]) + (a : Cart[Real, Tybit1[Unit]])
   (v0 : Cart[Real, Tybit1[Unit]])
@@ -82492,26 +82492,26 @@ Multivariate/flyspeck quotations (2071):
   (real_of_num(0) < (a : Real) / real_of_num(2)) == (real_of_num(0) < a)
   (real_of_num(0) <= (a : Real) / real_of_num(2)) == (real_of_num(0) <= a)
   UNION(INSERT((x : _), (s : (_) -> Bool)), (t : (_) -> Bool)) == INSERT(x, UNION(s, t))
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : _, DISJOINT({x}, {v}) \226\134\146 aff_ge({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_of_num(0) <= t2 && t1 + t2 == real_of_num(1) && y == op_pct(t1, x) + op_pct(t2, v)}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x}, {v, w}) \226\134\146 aff_ge({x}, {v, w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) <= t2 && real_of_num(0) <= t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_ge({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) <= t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : _, DISJOINT({x}, {v}) \226\134\146 aff_gt({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_of_num(0) < t2 && t1 + t2 == real_of_num(1) && y == op_pct(t1, x) + op_pct(t2, v)}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x}, {v, w}) \226\134\146 aff_gt({x}, {v, w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) < t2 && real_of_num(0) < t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_gt({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_of_num(0) < t3 && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
-  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], DISJOINT({v, w, x}, {y}) \226\134\146 aff_gt({v, w, x}, {y}) == {(z : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, \226\136\131 t4 : Real, real_of_num(0) < t4 && t1 + (t2 + (t3 + t4)) == real_of_num(1) && z == op_pct(t1, v) + (op_pct(t2, w) + (op_pct(t3, x) + op_pct(t4, y)))}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], DISJOINT({x}, {v}) \226\134\146 aff_lt({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, t2 < real_of_num(0) && t1 + t2 == real_of_num(1) && y == op_pct(t1, x) + op_pct(t2, v)}
-  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_lt({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, t3 < real_of_num(0) && t1 + (t2 + t3) == real_of_num(1) && y == op_pct(t1, x) + (op_pct(t2, v) + op_pct(t3, w))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : _, DISJOINT({x}, {v}) \226\134\146 aff_ge({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_le(real_of_num(0), t2) && real_add(t1, t2) == real_of_num(1) && y == vector_add(op_pct(t1, x), op_pct(t2, v))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x}, {v, w}) \226\134\146 aff_ge({x}, {v, w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_le(real_of_num(0), t2) && real_le(real_of_num(0), t3) && real_add(t1, real_add(t2, t3)) == real_of_num(1) && y == vector_add(op_pct(t1, x), vector_add(op_pct(t2, v), op_pct(t3, w)))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_ge({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_le(real_of_num(0), t3) && real_add(t1, real_add(t2, t3)) == real_of_num(1) && y == vector_add(op_pct(t1, x), vector_add(op_pct(t2, v), op_pct(t3, w)))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : _, DISJOINT({x}, {v}) \226\134\146 aff_gt({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_lt(real_of_num(0), t2) && real_add(t1, t2) == real_of_num(1) && y == vector_add(op_pct(t1, x), op_pct(t2, v))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x}, {v, w}) \226\134\146 aff_gt({x}, {v, w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_lt(real_of_num(0), t2) && real_lt(real_of_num(0), t3) && real_add(t1, real_add(t2, t3)) == real_of_num(1) && y == vector_add(op_pct(t1, x), vector_add(op_pct(t2, v), op_pct(t3, w)))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_gt({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_lt(real_of_num(0), t3) && real_add(t1, real_add(t2, t3)) == real_of_num(1) && y == vector_add(op_pct(t1, x), vector_add(op_pct(t2, v), op_pct(t3, w)))}
+  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], \226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], DISJOINT({v, w, x}, {y}) \226\134\146 aff_gt({v, w, x}, {y}) == {(z : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, \226\136\131 t4 : Real, real_lt(real_of_num(0), t4) && real_add(t1, real_add(t2, real_add(t3, t4))) == real_of_num(1) && z == vector_add(op_pct(t1, v), vector_add(op_pct(t2, w), vector_add(op_pct(t3, x), op_pct(t4, y))))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], DISJOINT({x}, {v}) \226\134\146 aff_lt({x}, {v}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, real_lt(t2, real_of_num(0)) && real_add(t1, t2) == real_of_num(1) && y == vector_add(op_pct(t1, x), op_pct(t2, v))}
+  \226\136\128 x : Cart[Real, _], \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({x, v}, {w}) \226\134\146 aff_lt({x, v}, {w}) == {(y : Cart[Real, _]) | \226\136\131 t1 : Real, \226\136\131 t2 : Real, \226\136\131 t3 : Real, real_lt(t3, real_of_num(0)) && real_add(t1, real_add(t2, t3)) == real_of_num(1) && y == vector_add(op_pct(t1, x), vector_add(op_pct(t2, v), op_pct(t3, w)))}
   ((t : Real) + (s : Real) == real_of_num(1)) == (t == real_of_num(1) - s)
   (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _) -> Bool)(b, c) && (Q : (_, _) -> Bool)(b, c) && (R : (_, _, _) -> Bool)(a, b, c) && (S : (_, _) -> Bool)(b, c)) == (\226\136\131 b : _, \226\136\131 c : _, P(b, c) && Q(b, c) && S(b, c) && (\226\136\131 a : _, R(a, b, c)))
   DISJOINT({(a : _)}, {(b : _), (c : _)}) == (!(b == a) && !(c == a))
-  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], !(v == vec(0)) && !(w == vec(0)) \226\134\146 aff_ge({vec(0)}, {v, w}) == {op_pct((a : Real), v) + op_pct((b : Real), w) | real_of_num(0) <= a && real_of_num(0) <= b}
+  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], !(v == vec(0)) && !(w == vec(0)) \226\134\146 aff_ge({vec(0)}, {v, w}) == {vector_add(op_pct((a : Real), v), op_pct((b : Real), w)) | real_le(real_of_num(0), a) && real_le(real_of_num(0), b)}
   real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) <= a / real_of_num(2) && a / real_of_num(2) + a / real_of_num(2) == a
   {(a : _)} == {a, a}
   \226\136\128 v : Cart[Real, _], !(v == vec(0)) \226\134\146 aff_ge({vec(0)}, {v}) == {op_pct((a : Real), v) | real_of_num(0) <= a}
   ((t : Real) + (u : Real) == real_of_num(1)) == (t == real_of_num(1) - u)
   (\226\136\131 a : _, \226\136\131 b : _, \226\136\131 c : _, (P : (_, _, _) -> Bool)(a, b, c)) == (\226\136\131 c : _, \226\136\131 b : _, \226\136\131 a : _, P(a, b, c))
   ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
-  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({vec(0), v}, {w}) \226\134\146 aff_ge({vec(0), v}, {w}) == {op_pct(s, v) + op_pct(t, w) | s : Real, t : Real | real_of_num(0) <= t}
+  \226\136\128 v : Cart[Real, _], \226\136\128 w : Cart[Real, _], DISJOINT({vec(0), v}, {w}) \226\134\146 aff_ge({vec(0), v}, {w}) == {vector_add(op_pct(s, v), op_pct(t, w)) | s : Real, t : Real | real_le(real_of_num(0), t)}
   sum(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (g : (Cart[Real, N]) -> Real)) == real_of_num(1)
   sum(UNION((s : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)), (f : (Cart[Real, N]) -> Real)) == real_of_num(1)
   (x : Cart[Real, N]) => (real_of_num(1) - (u : Real)) * (f : (Cart[Real, N]) -> Real)(x) + u * (g : (Cart[Real, N]) -> Real)(x)
@@ -82724,7 +82724,7 @@ Multivariate/flyspeck quotations (2071):
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], compact(s) && convex(s) && IN(a, s) \226\134\146 (\226\136\131 c : Cart[Real, N], INTER(aff_ge({a}, {b}), s) == segment([(a, c)]))
   (conv0 : ((Cart[Real, A]) -> Bool, Cart[Real, A]) -> Bool)((S : (Cart[Real, A]) -> Bool)) == affsign(sgn_gt, {}, S)
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], f(x) == f(y) \226\134\146 x == y) \226\134\146 conv0(IMAGE(f, s)) == IMAGE(f, conv0(s))
-  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, conv0(IMAGE((x : Cart[Real, _]) => a + x, s)) == IMAGE((x : Cart[Real, _]) => a + x, conv0(s))
+  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, conv0(IMAGE((x : Cart[Real, _]) => vector_add(a, x), s)) == IMAGE((x : Cart[Real, _]) => vector_add(a, x), conv0(s))
   \226\136\128 s : (Cart[Real, _]) -> Bool, SUBSET(conv0(s), hull(convex, s))
   \226\136\128 s : (Cart[Real, _]) -> Bool, conv0(s) == aff_gt({}, s)
   \226\136\128 s : (Cart[Real, N]) -> Bool, FINITE(s) \226\134\146 hull(convex, s) == UNION(conv0(s), UNIONS({hull(convex, DELETE(s, a)) | a : Cart[Real, N] | IN(a, s)}))
@@ -82759,12 +82759,12 @@ Multivariate/flyspeck quotations (2071):
   \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 t1 : Real, \226\136\128 t2 : Real, \226\136\128 t3 : Real, orthonormal(e1, e2, e3) \226\134\146 (op_pct(t1, e1) + (op_pct(t2, e2) + op_pct(t3, e3)) == vec(0)) == (t1 == real_of_num(0) && t2 == real_of_num(0) && t3 == real_of_num(0))
   (op_pct((a : Real), (x : Cart[Real, Tybit1[Unit]])) + (op_pct((b : Real), (y : Cart[Real, Tybit1[Unit]])) + op_pct((c : Real), (z : Cart[Real, Tybit1[Unit]]))) == op_pct((a' : Real), x) + (op_pct((b' : Real), y) + op_pct((c' : Real), z))) == (op_pct(a - a', x) + (op_pct(b - b', y) + op_pct(c - c', z)) == vec(0))
   \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 s1 : Real, \226\136\128 s2 : Real, \226\136\128 s3 : Real, \226\136\128 t1 : Real, \226\136\128 t2 : Real, \226\136\128 t3 : Real, orthonormal(e1, e2, e3) \226\134\146 (op_pct(s1, e1) + (op_pct(s2, e2) + op_pct(s3, e3)) == op_pct(t1, e1) + (op_pct(t2, e2) + op_pct(t3, e3))) == (s1 == t1 && s2 == t2 && s3 == t3)
-  (arcV : (Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((u : Cart[Real, _]), (v : Cart[Real, _]), (w : Cart[Real, _])) == acs(dot(v - u, w - u) / (norm(v - u) * norm(w - u)))
+  (arcV : (Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((u : Cart[Real, _]), (v : Cart[Real, _]), (w : Cart[Real, _])) == acs(real_div(dot(vector_sub(v, u), vector_sub(w, u)), real_mul(vector_norm(vector_sub(v, u)), vector_norm(vector_sub(w, u)))))
   (w : Cart[Real, N]) == (u : Cart[Real, N])
   (v : Cart[Real, N]) == (u : Cart[Real, N])
   \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], arcV(u, v, w) == angle((v, u, w))
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], linear(f) && (\226\136\128 x : Cart[Real, _], norm(f(x)) == norm(x)) \226\134\146 arcV(f(a), f(b), f(c)) == arcV(a, b, c)
-  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], \226\136\128 d : Cart[Real, _], arcV(a + b, a + c, a + d) == arcV(b, c, d)
+  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], \226\136\128 d : Cart[Real, _], arcV(vector_add(a, b), vector_add(a, c), vector_add(a, d)) == arcV(b, c, d)
   op_pct(cos((p : Real)), (e : Cart[Real, Tybit0[Unit]])) + op_pct(sin(p), rotate2d(pi / real_of_num(2), e)) == rotate2d(p, e)
   op_pct((a : Real), op_pct((b : Real), (x : Cart[Real, Tybit0[Unit]]))) == op_pct(b, op_pct(a, x))
   norm((v1 : Cart[Real, Tybit0[Unit]]))
@@ -82810,12 +82810,12 @@ Multivariate/flyspeck quotations (2071):
   dot((w : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) / dot(w, w)
   dot((w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]])) / dot(w, w)
   (v : Cart[Real, Tybit1[Unit]])
-  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\131 theta : Real, real_of_num(0) <= theta && theta < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) && (!collinear({v, w, w1}) \226\134\146 real_of_num(0) < r1) && (!collinear({v, w, w2}) \226\134\146 real_of_num(0) < r2)))
-  (azim : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == (if collinear({v, w, w1}) || collinear({v, w, w2}) { real_of_num(0) } else { select((theta : Real) => real_of_num(0) <= theta && theta < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) && real_of_num(0) < r1 && real_of_num(0) < r2))) })
+  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\131 theta : Real, real_of_num(0) <= theta && theta < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(distance((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) && (!collinear({v, w, w1}) \226\134\146 real_of_num(0) < r1) && (!collinear({v, w, w2}) \226\134\146 real_of_num(0) < r2)))
+  (azim : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == (if collinear({v, w, w1}) || collinear({v, w, w2}) { real_of_num(0) } else { select((theta : Real) => real_of_num(0) <= theta && theta < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(distance((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) && real_of_num(0) < r1 && real_of_num(0) < r2))) })
   (pow((d : Real) * ((h : Real) * d), 2) == d * d * ((r : Real) * real_of_num(1) + h * (d * (h * d)))) == (d == real_of_num(0) || r == real_of_num(0))
   (r : Real) * (c : Real) + (r * (s : Real) + (f : Real)) == r * (s + c) + f
   (r : Real) * (c : Real) * (r * c) == pow(r, 2) * pow(c, 2)
-  op_pct(dist(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
+  op_pct(distance(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
   {(v : _), (w : _), (x : _)} == {w, v, x}
   real_of_num(0)
   (r1 : Real)
@@ -82859,7 +82859,7 @@ Multivariate/flyspeck quotations (2071):
   (w1 : Cart[Real, Tybit1[Unit]])
   (w : Cart[Real, Tybit1[Unit]])
   (v : Cart[Real, Tybit1[Unit]])
-  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= azim(v, w, w1, w2) && azim(v, w, w1, w2) < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + azim(v, w, w1, w2)), e1) + (op_pct(r2 * sin(psi + azim(v, w, w1, w2)), e2) + op_pct(h2, w - v)) && (!collinear({v, w, w1}) \226\134\146 real_of_num(0) < r1) && (!collinear({v, w, w2}) \226\134\146 real_of_num(0) < r2)))
+  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], real_of_num(0) <= azim(v, w, w1, w2) && azim(v, w, w1, w2) < real_of_num(2) * pi && (\226\136\131 h1 : Real, \226\136\131 h2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], orthonormal(e1, e2, e3) && op_pct(distance((w, v)), e3) == w - v && !(w == v) \226\134\146 (\226\136\131 psi : Real, \226\136\131 r1 : Real, \226\136\131 r2 : Real, w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + azim(v, w, w1, w2)), e1) + (op_pct(r2 * sin(psi + azim(v, w, w1, w2)), e2) + op_pct(h2, w - v)) && (!collinear({v, w, w1}) \226\134\146 real_of_num(0) < r1) && (!collinear({v, w, w2}) \226\134\146 real_of_num(0) < r2)))
   real_of_num(0) < pi \226\134\146 (x : Real) * (real_of_num(2) * pi) / (real_of_num(2) * pi) == x
   (n : Real)
   (real_of_num(2) * ((m : Real) * pi) + (x : Real) == real_of_num(2) * ((n : Real) * pi)) == (x == (n - m) * (real_of_num(2) * pi))
@@ -82868,7 +82868,7 @@ Multivariate/flyspeck quotations (2071):
   real_of_num(0) < (x : Real) && real_of_num(0) < (y : Real) \226\134\146 (abs(x) == abs(y)) == (x == y)
   (r : Real) * (c : Real) == (r' : Real) * (c' : Real) && r * (s : Real) == r' * (s' : Real) && (u : Real) == (v : Real) \226\134\146 pow(s, 2) + pow(c, 2) == real_of_num(1) && pow(s', 2) + pow(c', 2) == real_of_num(1) && real_of_num(0) < r && (pow(r, 2) == pow(r', 2) \226\134\146 r == r') \226\134\146 s == s' && c == c'
   ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool)) == ((c && d) && a && b)
-  op_pct(dist(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
+  op_pct(distance(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
   (s2 : Real)
   (s1 : Real)
   (phi : Real)
@@ -82885,12 +82885,12 @@ Multivariate/flyspeck quotations (2071):
   (azim((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) - (theta : Real)) / (real_of_num(2) * pi) == real_of_num(0)
   pow((s : Real), 2) + pow((c : Real), 2) == real_of_num(1) \226\134\146 ((r : Real) * c == real_of_num(0) && r * s == real_of_num(0)) == (r == real_of_num(0))
   ((a : Cart[Real, N]) + ((b : Cart[Real, N]) + op_pct((c : Real), (x : Cart[Real, N]))) == op_pct((d : Real), x)) == (a + (b + op_pct(c - d, x)) == vec(0))
-  op_pct(dist(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
+  op_pct(distance(((w : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]]))), (e3 : Cart[Real, Tybit1[Unit]])) == w - v
   {(a : _), (b : _), (c : _)} == {b, a, c}
   !collinear({(v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])}) && !collinear({v, w, (w1 : Cart[Real, Tybit1[Unit]])})
-  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 h1 : Real, \226\136\128 h2 : Real, \226\136\128 r1 : Real, \226\136\128 r2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 psi : Real, \226\136\128 theta : Real, real_of_num(0) <= theta && theta < real_of_num(2) * pi && orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && !(w == v) && real_of_num(0) < r1 && real_of_num(0) < r2 && w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) \226\134\146 azim(v, w, w1, w2) == theta
+  \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], \226\136\128 h1 : Real, \226\136\128 h2 : Real, \226\136\128 r1 : Real, \226\136\128 r2 : Real, \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 psi : Real, \226\136\128 theta : Real, real_of_num(0) <= theta && theta < real_of_num(2) * pi && orthonormal(e1, e2, e3) && op_pct(distance((w, v)), e3) == w - v && !(w == v) && real_of_num(0) < r1 && real_of_num(0) < r2 && w1 - v == op_pct(r1 * cos(psi), e1) + (op_pct(r1 * sin(psi), e2) + op_pct(h1, w - v)) && w2 - v == op_pct(r2 * cos(psi + theta), e1) + (op_pct(r2 * sin(psi + theta), e2) + op_pct(h2, w - v)) \226\134\146 azim(v, w, w1, w2) == theta
   {(a : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]]), a + (y : Cart[Real, Tybit1[Unit]]), a + (z : Cart[Real, Tybit1[Unit]])} == IMAGE((x : Cart[Real, Tybit1[Unit]]) => a + x, {x, y, z})
-  dist(((a : Cart[Real, _]) + (v : Cart[Real, _]), a + (w : Cart[Real, _]))) == dist((v, w))
+  distance((vector_add((a : Cart[Real, _]), (v : Cart[Real, _])), vector_add(a, (w : Cart[Real, _])))) == distance((v, w))
   :real
   :real
   ((a : Cart[Real, Tybit1[Unit]]) + (w : Cart[Real, Tybit1[Unit]]) == a + (v : Cart[Real, Tybit1[Unit]])) == (w == v)
@@ -83110,7 +83110,7 @@ Multivariate/flyspeck quotations (2071):
   azim((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]])) - pi
   real_of_num(0) <= sin(azim((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (x : Cart[Real, Tybit1[Unit]]), (y : Cart[Real, Tybit1[Unit]])))
   \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], (azim(v, w, x, y) <= pi) == (real_of_num(0) <= dot(cross(w - v, x - v), y - v))
-  (dihV : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((w0 : Cart[Real, _]), (w1 : Cart[Real, _]), (w2 : Cart[Real, _]), (w3 : Cart[Real, _])) == LET((va : Cart[Real, _]) => LET_END(LET((vb : Cart[Real, _]) => LET_END(LET((vc : Cart[Real, _]) => LET_END(LET((vap : Cart[Real, _]) => LET_END(LET((vbp : Cart[Real, _]) => LET_END(arcV(vec(0), vap, vbp)), op_pct(dot(vc, vc), vb) - op_pct(dot(vb, vc), vc))), op_pct(dot(vc, vc), va) - op_pct(dot(va, vc), vc))), w1 - w0)), w3 - w0)), w2 - w0)
+  (dihV : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((w0 : Cart[Real, _]), (w1 : Cart[Real, _]), (w2 : Cart[Real, _]), (w3 : Cart[Real, _])) == LET((va : Cart[Real, _]) => LET_END(LET((vb : Cart[Real, _]) => LET_END(LET((vc : Cart[Real, _]) => LET_END(LET((vap : Cart[Real, _]) => LET_END(LET((vbp : Cart[Real, _]) => LET_END(arcV(vec(0), vap, vbp)), vector_sub(op_pct(dot(vc, vc), vb), op_pct(dot(vb, vc), vc)))), vector_sub(op_pct(dot(vc, vc), va), op_pct(dot(va, vc), vc)))), vector_sub(w1, w0))), vector_sub(w3, w0))), vector_sub(w2, w0))
   dihV((w0 : Cart[Real, N]), (w1 : Cart[Real, N]), (w2 : Cart[Real, N]), (w3 : Cart[Real, N])) == LET((va : Cart[Real, N]) => LET_END(LET((vb : Cart[Real, N]) => LET_END(LET((vc : Cart[Real, N]) => LET_END(LET((vap : Cart[Real, N]) => LET_END(LET((vbp : Cart[Real, N]) => LET_END(angle((vap, vec(0), vbp))), op_pct(dot(vc, vc), vb) - op_pct(dot(vb, vc), vc))), op_pct(dot(vc, vc), va) - op_pct(dot(va, vc), vc))), w1 - w0)), w3 - w0)), w2 - w0)
   (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
   \226\136\128 a : Cart[Real, N], \226\136\128 w0 : Cart[Real, N], \226\136\128 w1 : Cart[Real, N], \226\136\128 w2 : Cart[Real, N], \226\136\128 w3 : Cart[Real, N], dihV(a + w0, a + w1, a + w2, a + w3) == dihV(w0, w1, w2, w3)
@@ -83167,8 +83167,8 @@ Multivariate/flyspeck quotations (2071):
   \226\136\128 v0 : Cart[Real, N], \226\136\128 v1 : Cart[Real, N], \226\136\128 v2 : Cart[Real, N], \226\136\128 v3 : Cart[Real, N], dihV(v0, v1, v3, v2) == dihV(v0, v1, v2, v3)
   -(a : Cart[Real, N]) - -(b : Cart[Real, N]) == -(a - b)
   -(a : Cart[Real, N]) - -(b : Cart[Real, N]) == -(a - b)
-  \226\136\128 v0 : Cart[Real, _], \226\136\128 v1 : Cart[Real, _], \226\136\128 v2 : Cart[Real, _], \226\136\128 v3 : Cart[Real, _], dihV(-v0, -v1, -v2, -v3) == dihV(v0, v1, v2, v3)
-  \226\136\128 v1 : Cart[Real, _], \226\136\128 v2 : Cart[Real, _], \226\136\128 v3 : Cart[Real, _], dihV(vec(0), -v1, -v2, -v3) == dihV(vec(0), v1, v2, v3)
+  \226\136\128 v0 : Cart[Real, _], \226\136\128 v1 : Cart[Real, _], \226\136\128 v2 : Cart[Real, _], \226\136\128 v3 : Cart[Real, _], dihV(vector_neg(v0), vector_neg(v1), vector_neg(v2), vector_neg(v3)) == dihV(v0, v1, v2, v3)
+  \226\136\128 v1 : Cart[Real, _], \226\136\128 v2 : Cart[Real, _], \226\136\128 v3 : Cart[Real, _], dihV(vec(0), vector_neg(v1), vector_neg(v2), vector_neg(v3)) == dihV(vec(0), v1, v2, v3)
   (u : Cart[Real, N])
   \226\136\128 e : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 w : Cart[Real, N], orthogonal(e - u, v - u) && orthogonal(e - u, w - u) && !(e == u) \226\134\146 dihV(u, e, v, w) == arcV(u, v, w)
   \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], !collinear({v, w, v1}) && !collinear({v, w, v2}) && azim(v, w, v1, v2) <= pi \226\134\146 azim(v, w, v1, v2) == dihV(v, w, v1, v2)
@@ -83240,7 +83240,7 @@ Multivariate/flyspeck quotations (2071):
   ((u : Cart[Real, Tybit1[Unit]]) == (u' : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]])) == (u - u' == x)
   (v : Cart[Real, Tybit1[Unit]])
   ((u : Cart[Real, Tybit1[Unit]]) == (v : Cart[Real, Tybit1[Unit]]) + ((u' : Cart[Real, Tybit1[Unit]]) + (x : Cart[Real, Tybit1[Unit]]))) == (u - v == u' + x)
-  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], !(u == v) && !(w == v) \226\134\146 (\226\136\131 u' : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, \226\136\131 phi : Real, \226\136\131 e3 : Cart[Real, Tybit1[Unit]], phi == arcV(v, u, w) && r == dist((u, v)) && op_pct(dist((w, v)), e3) == w - v && dot(u', e3) == real_of_num(0) && u == v + (u' + op_pct(r * cos(phi), e3)))
+  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], !(u == v) && !(w == v) \226\134\146 (\226\136\131 u' : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, \226\136\131 phi : Real, \226\136\131 e3 : Cart[Real, Tybit1[Unit]], phi == arcV(v, u, w) && r == distance((u, v)) && op_pct(distance((w, v)), e3) == w - v && dot(u', e3) == real_of_num(0) && u == v + (u' + op_pct(r * cos(phi), e3)))
   Im((d1 : Cart[Real, Tybit0[Unit]])) == real_of_num(0)
   (z : Cart[Real, Tybit0[Unit]])
   (d1 : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1))
@@ -83294,7 +83294,7 @@ Multivariate/flyspeck quotations (2071):
   (v : Cart[Real, Tybit1[Unit]])
   (v : Cart[Real, Tybit1[Unit]])
   ((u' : Cart[Real, Tybit1[Unit]]) == (u : Cart[Real, Tybit1[Unit]]) + ((v : Cart[Real, Tybit1[Unit]]) + (w : Cart[Real, Tybit1[Unit]]))) == (u' - u == v + w)
-  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 u' : Cart[Real, Tybit1[Unit]], \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 phi : Real, \226\136\128 theta : Real, !collinear({v, w, u}) && !collinear({v, w, u'}) && orthonormal(e1, e2, e3) && op_pct(dist((w, v)), e3) == w - v && IN(v + e1, aff_gt({v, w}, {u})) && r == dist((v, u')) && phi == arcV(v, u', w) && theta == azim(v, w, u, u') \226\134\146 u' == v + (op_pct(r * (cos(theta) * sin(phi)), e1) + (op_pct(r * (sin(theta) * sin(phi)), e2) + op_pct(r * cos(phi), e3)))
+  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], \226\136\128 u' : Cart[Real, Tybit1[Unit]], \226\136\128 e1 : Cart[Real, Tybit1[Unit]], \226\136\128 e2 : Cart[Real, Tybit1[Unit]], \226\136\128 e3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 phi : Real, \226\136\128 theta : Real, !collinear({v, w, u}) && !collinear({v, w, u'}) && orthonormal(e1, e2, e3) && op_pct(distance((w, v)), e3) == w - v && IN(v + e1, aff_gt({v, w}, {u})) && r == distance((v, u')) && phi == arcV(v, u', w) && theta == azim(v, w, u, u') \226\134\146 u' == v + (op_pct(r * (cos(theta) * sin(phi)), e1) + (op_pct(r * (sin(theta) * sin(phi)), e2) + op_pct(r * cos(phi), e3)))
   (wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (w1 : Cart[Real, Tybit1[Unit]]), (w2 : Cart[Real, Tybit1[Unit]])) == {(y : Cart[Real, Tybit1[Unit]]) | !collinear({v0, v1, y}) && real_of_num(0) < azim(v0, v1, w1, y) && azim(v0, v1, w1, y) < azim(v0, v1, w1, w2)}
   \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 w1 : Cart[Real, Tybit1[Unit]], \226\136\128 w2 : Cart[Real, Tybit1[Unit]], !(v0 == v1) \226\134\146 wedge(v0, v1, w1, w2) == {(y : Cart[Real, Tybit1[Unit]]) | !IN(y, hull(affine, {v0, v1})) && real_of_num(0) < azim(v0, v1, w1, y) && azim(v0, v1, w1, y) < azim(v0, v1, w1, w2)}
   {(a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]), a + (z : Cart[Real, N])} == IMAGE((x : Cart[Real, N]) => a + x, {x, y, z})
@@ -83529,8 +83529,8 @@ Multivariate/flyspeck quotations (2071):
   (x : Cart[Real, Tybit1[Unit]])
   (delta_x : (Real, Real, Real, Real, Real, Real) -> Real)((x1 : Real), (x2 : Real), (x3 : Real), (x4 : Real), (x5 : Real), (x6 : Real)) == x1 * (x4 * (-x1 + (x2 + (x3 - x4 + (x5 + x6))))) + (x2 * (x5 * (x1 - x2 + (x3 + (x4 - x5 + x6)))) + (x3 * (x6 * (x1 + (x2 - x3 + (x4 + (x5 - x6))))) - x2 * (x3 * x4) - x1 * (x3 * x5) - x1 * (x2 * x6) - x4 * (x5 * x6)))
   ((x : Real) / real_of_num(6) == (y : Real) / real_of_num(12)) == (y == real_of_num(2) * x)
-  \226\136\128 x1 : Cart[Real, Tybit1[Unit]], \226\136\128 x2 : Cart[Real, Tybit1[Unit]], \226\136\128 x3 : Cart[Real, Tybit1[Unit]], \226\136\128 x4 : Cart[Real, Tybit1[Unit]], measure(hull(convex, {x1, x2, x3, x4})) == sqrt(delta_x(pow(dist((x1, x2)), 2), pow(dist((x1, x3)), 2), pow(dist((x1, x4)), 2), pow(dist((x3, x4)), 2), pow(dist((x2, x4)), 2), pow(dist((x2, x3)), 2))) / real_of_num(12)
-  \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 v4 : Cart[Real, Tybit1[Unit]], measure(conv0({v1, v2, v3, v4})) == LET((x12 : Real) => LET_END(LET((x13 : Real) => LET_END(LET((x14 : Real) => LET_END(LET((x23 : Real) => LET_END(LET((x24 : Real) => LET_END(LET((x34 : Real) => LET_END(sqrt(delta_x(x12, x13, x14, x34, x24, x23)) / real_of_num(12)), pow(dist((v3, v4)), 2))), pow(dist((v2, v4)), 2))), pow(dist((v2, v3)), 2))), pow(dist((v1, v4)), 2))), pow(dist((v1, v3)), 2))), pow(dist((v1, v2)), 2))
+  \226\136\128 x1 : Cart[Real, Tybit1[Unit]], \226\136\128 x2 : Cart[Real, Tybit1[Unit]], \226\136\128 x3 : Cart[Real, Tybit1[Unit]], \226\136\128 x4 : Cart[Real, Tybit1[Unit]], measure(hull(convex, {x1, x2, x3, x4})) == sqrt(delta_x(pow(distance((x1, x2)), 2), pow(distance((x1, x3)), 2), pow(distance((x1, x4)), 2), pow(distance((x3, x4)), 2), pow(distance((x2, x4)), 2), pow(distance((x2, x3)), 2))) / real_of_num(12)
+  \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 v4 : Cart[Real, Tybit1[Unit]], measure(conv0({v1, v2, v3, v4})) == LET((x12 : Real) => LET_END(LET((x13 : Real) => LET_END(LET((x14 : Real) => LET_END(LET((x23 : Real) => LET_END(LET((x24 : Real) => LET_END(LET((x34 : Real) => LET_END(sqrt(delta_x(x12, x13, x14, x34, x24, x23)) / real_of_num(12)), pow(distance((v3, v4)), 2))), pow(distance((v2, v4)), 2))), pow(distance((v2, v3)), 2))), pow(distance((v1, v4)), 2))), pow(distance((v1, v3)), 2))), pow(distance((v1, v2)), 2))
   pow((s : Real), 2) == real_of_num(1) - pow((x : Real), 2) && pow(x, 2) < real_of_num(1) \226\134\146 inv(s) + (x * (-(real_of_num(2) * x) * (inv(real_of_num(2)) * inv(s))) + s) == real_of_num(2) * s
   (x : Real) / real_of_num(2) - -(x / real_of_num(2)) == x
   real_of_num(1)
@@ -83550,7 +83550,7 @@ Multivariate/flyspeck quotations (2071):
   op_pct(inv((r : Real)), (w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]))
   (w : Cart[Real, Tybit0[Unit]])
   (abs((r : Real)) * (x : Real) <= r) == (abs(r) * x <= r * real_of_num(1))
-  dist(((z : Cart[Real, _]), (a : Cart[Real, _]) + z)) == norm(a)
+  distance(((z : Cart[Real, _]), vector_add((a : Cart[Real, _]), z))) == vector_norm(a)
   :real
   :real
   pi
@@ -83577,7 +83577,7 @@ Multivariate/flyspeck quotations (2071):
   (z : Cart[Real, Tybit1[Unit]])
   \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(cball((z, r))) == real_of_num(4) / real_of_num(3) * (pi * pow(r, 3))
   \226\136\128 z : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 measure(ball((z, r))) == real_of_num(4) / real_of_num(3) * (pi * pow(r, 3))
-  (rconesgn : ((Real, Real) -> Bool, Cart[Real, A], Cart[Real, A], Real, Cart[Real, A]) -> Bool)((sgn : (Real, Real) -> Bool), (v : Cart[Real, A]), (w : Cart[Real, A]), (h : Real)) == {(x : Cart[Real, A]) | sgn(dot(x - v, w - v), dist((x, v)) * (dist((w, v)) * h))}
+  (rconesgn : ((Real, Real) -> Bool, Cart[Real, A], Cart[Real, A], Real, Cart[Real, A]) -> Bool)((sgn : (Real, Real) -> Bool), (v : Cart[Real, A]), (w : Cart[Real, A]), (h : Real)) == {(x : Cart[Real, A]) | sgn(dot(x - v, w - v), distance((x, v)) * (distance((w, v)) * h))}
   (rcone_gt : (Cart[Real, _], Cart[Real, _], Real, Cart[Real, _]) -> Bool) == rconesgn(op_gt)
   (rcone_ge : (Cart[Real, _], Cart[Real, _], Real, Cart[Real, _]) -> Bool) == rconesgn(op_gt_eq)
   (rcone_eq : (Cart[Real, _], Cart[Real, _], Real, Cart[Real, _]) -> Bool) == rconesgn(op_eq)
@@ -83598,7 +83598,7 @@ Multivariate/flyspeck quotations (2071):
   (v0 : Cart[Real, N])
   \226\136\128 v0 : Cart[Real, N], \226\136\128 v1 : Cart[Real, N], \226\136\128 a : Real, open(rcone_gt(v0, v1, a))
   op_pct(real_of_num(2), (v : Cart[Real, N])) - (x : Cart[Real, N]) - v == -(x - v)
-  dist((op_pct(real_of_num(2), (x : Cart[Real, _])) - (y : Cart[Real, _]), x)) == dist((y, x))
+  distance((vector_sub(op_pct(real_of_num(2), (x : Cart[Real, _])), (y : Cart[Real, _])), x)) == distance((y, x))
   :real
   :real
   (a : Cart[Real, N]) - (a - (b : Cart[Real, N])) == b
@@ -83637,7 +83637,7 @@ Multivariate/flyspeck quotations (2071):
   \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 bounded(frustt(v0, v1, h, a)) && convex(frustt(v0, v1, h, a)) && measurable(frustt(v0, v1, h, a)) && measure(frustt(v0, v1, h, a)) == (if v1 == v0 || real_of_num(1) <= a || h < real_of_num(0) { real_of_num(0) } else { pi * ((pow(h / a, 2) - pow(h, 2)) * (h / real_of_num(3))) })
   \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 measurable(frustt(v0, v1, h, a)) && measure(frustt(v0, v1, h, a)) == (if v1 == v0 || real_of_num(1) <= a || h < real_of_num(0) { real_of_num(0) } else { pi * ((pow(h / a, 2) - pow(h, 2)) * (h / real_of_num(3))) })
   (scale : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((t : Cart[Real, Tybit1[Unit]]), (u : Cart[Real, Tybit1[Unit]])) == vector([op_dollar(t, 1) * op_dollar(u, 1), op_dollar(t, 2) * op_dollar(u, 2), op_dollar(t, 3) * op_dollar(u, 3)])
-  (normball : (Cart[Real, A], Real, Cart[Real, A]) -> Bool)((x : Cart[Real, A]), (r : Real)) == {(y : Cart[Real, A]) | dist((y, x)) < r}
+  (normball : (Cart[Real, A], Real, Cart[Real, A]) -> Bool)((x : Cart[Real, A]), (r : Real)) == {(y : Cart[Real, A]) | distance((y, x)) < r}
   (ellipsoid : (Cart[Real, Tybit1[Unit]], Real, Cart[Real, Tybit1[Unit]]) -> Bool)((t : Cart[Real, Tybit1[Unit]]), (r : Real)) == IMAGE(scale(t), normball(vec(0), r))
   \226\136\128 z : Cart[Real, _], \226\136\128 r : Real, normball(z, r) == ball((z, r))
   ((x : Cart[Real, Tybit1[Unit]]) => lambda((k : Num) => op_dollar((t : Cart[Real, Tybit1[Unit]]), k) * op_dollar(x, k))) == scale(t)
@@ -83719,13 +83719,13 @@ Multivariate/flyspeck quotations (2071):
   \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 bounded(conic_cap(v0, v1, r, a)) && convex(conic_cap(v0, v1, r, a)) && measurable(conic_cap(v0, v1, r, a)) && measure(conic_cap(v0, v1, r, a)) == (if v1 == v0 || real_of_num(1) <= a || r < real_of_num(0) { real_of_num(0) } else { real_of_num(2) / real_of_num(3) * (pi * ((real_of_num(1) - a) * pow(r, 3))) })
   \226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 a : Real, real_of_num(0) < a \226\134\146 measurable(conic_cap(v0, v1, r, a)) && measure(conic_cap(v0, v1, r, a)) == (if v1 == v0 || real_of_num(1) <= a || r < real_of_num(0) { real_of_num(0) } else { real_of_num(2) / real_of_num(3) * (pi * ((real_of_num(1) - a) * pow(r, 3))) })
   vector_angle((c : Cart[Real, N]), op_pct(inv((a : Real)) * (u : Real) - inv(a) + real_of_num(1), c)) == (k : Real)
-  (c : Cart[Real, _]) + op_pct((a : Real), c) == op_pct(a + real_of_num(1), c)
-  (op_pct((a : Real), (c : Cart[Real, _])) + (x : Cart[Real, _]) == op_pct((b : Real), c)) == (x == op_pct(b - a, c))
+  vector_add((c : Cart[Real, _]), op_pct((a : Real), c)) == op_pct(real_add(a, real_of_num(1)), c)
+  (vector_add(op_pct((a : Real), (c : Cart[Real, _])), (x : Cart[Real, _])) == op_pct((b : Real), c)) == (x == op_pct(real_sub(b, a), c))
   (x : Cart[Real, N]) => op_pct(inv((a : Real)), x)
   (u : Real)
   real_of_num(0) <= (a : Real) && a < real_of_num(1) \226\134\146 !(abs(a) == real_of_num(1))
   ((a : Real) * (x : Real) == x) == (a == real_of_num(1) || x == real_of_num(0))
-  dist(((x : Cart[Real, _]), x + (a : Cart[Real, _]))) == norm(a)
+  distance(((x : Cart[Real, _]), vector_add(x, (a : Cart[Real, _])))) == vector_norm(a)
   :real
   :real
   (c : Cart[Real, N]) + (x : Cart[Real, N])
@@ -83788,7 +83788,7 @@ Multivariate/flyspeck quotations (2071):
   (z : Cart[Real, Tybit0[Unit]])
   {(z : Cart[Real, Tybit0[Unit]]) | dot(cexp(ii * Cx(pi / real_of_num(2) + (t : Real))), z) == real_of_num(0)}
   \226\136\128 t : Real, negligible({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == t})
-  norm((z : Cart[Real, _])) == dist((vec(0), z))
+  norm((z : Cart[Real, _])) == distance((vec(0), z))
   :real
   :real
   {(z : _) | (P : (_) -> Bool)(z) && (Q : (_) -> Bool)(z)} == INTER({(z : _) | P(z)}, {(z : _) | Q(z)})
@@ -83825,7 +83825,7 @@ Multivariate/flyspeck quotations (2071):
   (t : Real) => pow((r : Real), 2) * sin(t)
   real_of_num(0) < (p : Real) \226\134\146 (t : Real) / (real_of_num(2) * p) * (real_of_num(2) * p) == t
   real_of_num(0) < (p : Real) \226\134\146 (t : Real) / (real_of_num(2) * p) * (p * (r : Real)) == t * (r / real_of_num(2))
-  dist((vec(0), (z : Cart[Real, _]))) == norm(z)
+  distance((vec(0), (z : Cart[Real, _]))) == norm(z)
   :real
   :real
   (r : Real)
@@ -83835,7 +83835,7 @@ Multivariate/flyspeck quotations (2071):
   real_of_num(2) * pi
   (t : Real) => measure({(z : Cart[Real, Tybit0[Unit]]) | norm(z) <= (r : Real) && Arg(z) <= t})
   \226\136\128 t : Real, \226\136\128 r : Real, real_of_num(0) <= r && real_of_num(0) <= t && t <= real_of_num(2) * pi \226\134\146 measure({(x : Cart[Real, Tybit0[Unit]]) | norm(x) <= r && Arg(x) <= t}) == t * (pow(r, 2) / real_of_num(2))
-  UNION({(x : Cart[Real, Tybit0[Unit]]) | dist((vec(0), x)) == (r : Real)}, UNION({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == real_of_num(0)}, {(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (t : Real)}))
+  UNION({(x : Cart[Real, Tybit0[Unit]]) | distance((vec(0), x)) == (r : Real)}, UNION({(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == real_of_num(0)}, {(z : Cart[Real, Tybit0[Unit]]) | Arg(z) == (t : Real)}))
   {(x : Cart[Real, Tybit0[Unit]]) | norm(x) <= (r : Real) && Arg(x) <= (t : Real)}
   !(real_of_num(0) <= (r : Real)) \226\134\146 !(norm((x : Cart[Real, _])) < r)
   :real
@@ -84201,20 +84201,20 @@ Multivariate/flyspeck quotations (2071):
   (solid_triangle : (Cart[Real, _], (Cart[Real, _]) -> Bool, Real, Cart[Real, _]) -> Bool)((v0 : Cart[Real, _]), (S : (Cart[Real, _]) -> Bool), (r : Real)) == INTER(normball(v0, r), cone0(v0, S))
   (rect : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]])) == {(v : Cart[Real, Tybit1[Unit]]) | \226\136\128 i : Num, op_dollar(a, i) < op_dollar(v, i) && op_dollar(v, i) < op_dollar(b, i)}
   \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], rect(a, b) == interval((a, b))
-  rcone_ge((z : Cart[Real, _]), (w : Cart[Real, _]), (h : Real)) == UNION(rcone_gt(z, w, h), {(x : Cart[Real, _]) | dot(x - z, w - z) == norm(x - z) * (norm(w - z) * h)})
-  rcone_gt((z : Cart[Real, _]), (w : Cart[Real, _]), (h : Real)) == DIFF(rcone_ge(z, w, h), {(x : Cart[Real, _]) | dot(x - z, w - z) == norm(x - z) * (norm(w - z) * h)})
+  rcone_ge((z : Cart[Real, _]), (w : Cart[Real, _]), (h : Real)) == UNION(rcone_gt(z, w, h), {(x : Cart[Real, _]) | dot(vector_sub(x, z), vector_sub(w, z)) == real_mul(vector_norm(vector_sub(x, z)), real_mul(vector_norm(vector_sub(w, z)), h))})
+  rcone_gt((z : Cart[Real, _]), (w : Cart[Real, _]), (h : Real)) == DIFF(rcone_ge(z, w, h), {(x : Cart[Real, _]) | dot(vector_sub(x, z), vector_sub(w, z)) == real_mul(vector_norm(vector_sub(x, z)), real_mul(vector_norm(vector_sub(w, z)), h))})
   (negligible : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)
   (measure : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Real)
   (is_sphere : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((x : (Cart[Real, Tybit1[Unit]]) -> Bool)) == (\226\136\131 v : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, r > real_of_num(0) && x == {(w : Cart[Real, Tybit1[Unit]]) | norm(w - v) == r})
   (c_cone : ((Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real), Cart[Real, Tybit1[Unit]]) -> Bool)(((v : Cart[Real, Tybit1[Unit]]), (w : Cart[Real, Tybit1[Unit]]), (r : Real))) == {(x : Cart[Real, Tybit1[Unit]]) | dot(x - v, w) == norm(x - v) * (norm(w) * r)}
-  (circular_cone : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((V : (Cart[Real, Tybit1[Unit]]) -> Bool)) == exists(GABS((f : ((Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]])) -> Bool) => \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], GEQ(f((v, w)), \226\136\131 r : Real, !(w == vec(0)) && V == c_cone((v, w, r)))))
+  (circular_cone : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((V : (Cart[Real, Tybit1[Unit]]) -> Bool)) == op_q(GABS((f : ((Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]])) -> Bool) => \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], GEQ(f((v, w)), \226\136\131 r : Real, !(w == vec(0)) && V == c_cone((v, w, r)))))
   ((w : Cart[Real, N]) + (v : Cart[Real, N]) == v) == (w == vec(0))
   (w : Cart[Real, N]) + (v : Cart[Real, N]) - v == w
   (r : Real)
   (v : Cart[Real, Tybit1[Unit]])
   (w : Cart[Real, Tybit1[Unit]]) + (v : Cart[Real, Tybit1[Unit]])
   (s : (Cart[Real, Tybit1[Unit]]) -> Bool)
-  (\226\136\128 P : (Cart[Real, Tybit1[Unit]]) -> Bool, plane(P) || is_sphere(P) || circular_cone(P) \226\134\146 NULLSET(P)) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, NULLSET(s) && NULLSET(t) \226\134\146 NULLSET(UNION(s, t)))
+  (\226\136\128 P : (Cart[Real, Tybit1[Unit]]) -> Bool, plane(P) || is_sphere(P) || circular_cone(P) \226\134\146 negligible(P)) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, negligible(s) && negligible(t) \226\134\146 negligible(UNION(s, t)))
   (primitive : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)((C : (Cart[Real, Tybit1[Unit]]) -> Bool)) == ((\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, C == solid_triangle(v0, {v1, v2, v3}, r)) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], C == conv0({v0, v1, v2, v3})) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 h : Real, \226\136\131 a : Real, real_of_num(0) < a && C == INTER(frustt(v0, v1, h, a), wedge(v0, v1, v2, v3))) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, \226\136\131 c : Real, C == INTER(conic_cap(v0, v1, r, c), wedge(v0, v1, v2, v3))) || (\226\136\131 a : Cart[Real, Tybit1[Unit]], \226\136\131 b : Cart[Real, Tybit1[Unit]], C == rect(a, b)) || (\226\136\131 t : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, C == ellipsoid(t, r)) || (\226\136\131 v0 : Cart[Real, Tybit1[Unit]], \226\136\131 v1 : Cart[Real, Tybit1[Unit]], \226\136\131 v2 : Cart[Real, Tybit1[Unit]], \226\136\131 v3 : Cart[Real, Tybit1[Unit]], \226\136\131 r : Real, C == INTER(normball(v0, r), wedge(v0, v1, v2, v3))))
   collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]])})
   collinear({(v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]])})
@@ -84228,11 +84228,11 @@ Multivariate/flyspeck quotations (2071):
   (i : Num) => op_dollar((t : Cart[Real, Tybit1[Unit]]), i)
   (t : Cart[Real, Tybit1[Unit]])
   (X : (Cart[Real, Tybit1[Unit]]) -> Bool)
-  (\226\136\128 C : (Cart[Real, Tybit1[Unit]]) -> Bool, primitive(C) \226\134\146 measurable(C)) && (\226\136\128 Z : (Cart[Real, Tybit1[Unit]]) -> Bool, NULLSET(Z) \226\134\146 measurable(Z)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : Cart[Real, Tybit1[Unit]], measurable(X) \226\134\146 measurable(IMAGE(scale(t), X))) && (\226\136\128 X : (Cart[Real, _]) -> Bool, \226\136\128 v : Cart[Real, _], measurable(X) \226\134\146 measurable(IMAGE(op_plus(v), X))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(UNION(s, t))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(INTER(s, t))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(DIFF(s, t)))
+  (\226\136\128 C : (Cart[Real, Tybit1[Unit]]) -> Bool, primitive(C) \226\134\146 measurable(C)) && (\226\136\128 Z : (Cart[Real, Tybit1[Unit]]) -> Bool, negligible(Z) \226\134\146 measurable(Z)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : Cart[Real, Tybit1[Unit]], measurable(X) \226\134\146 measurable(IMAGE(scale(t), X))) && (\226\136\128 X : (Cart[Real, _]) -> Bool, \226\136\128 v : Cart[Real, _], measurable(X) \226\134\146 measurable(IMAGE(vector_add(v), X))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(UNION(s, t))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(INTER(s, t))) && (\226\136\128 s : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(s) && measurable(t) \226\134\146 measurable(DIFF(s, t)))
   (vol_solid_triangle : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _], Real) -> Real)((v0 : Cart[Real, _]), (v1 : Cart[Real, _]), (v2 : Cart[Real, _]), (v3 : Cart[Real, _]), (r : Real)) == LET((a123 : Real) => LET_END(LET((a231 : Real) => LET_END(LET((a312 : Real) => LET_END((a123 + (a231 + (a312 - pi))) * (pow(r, 3) / real_of_num(3))), dihV(v0, v3, v1, v2))), dihV(v0, v2, v3, v1))), dihV(v0, v1, v2, v3))
   (vol_frustt_wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real, Real) -> Real)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]]), (h : Real), (a : Real)) == azim(v0, v1, v2, v3) * (pow(h, 3) * ((real_of_num(1) / (a * a) - real_of_num(1)) / real_of_num(6)))
   (vol_conic_cap_wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real, Real) -> Real)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]]), (r : Real), (c : Real)) == azim(v0, v1, v2, v3) * ((real_of_num(1) - c) * (pow(r, 3) / real_of_num(3)))
-  (vol_conv : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((v1 : Cart[Real, _]), (v2 : Cart[Real, _]), (v3 : Cart[Real, _]), (v4 : Cart[Real, _])) == LET((x12 : Real) => LET_END(LET((x13 : Real) => LET_END(LET((x14 : Real) => LET_END(LET((x23 : Real) => LET_END(LET((x24 : Real) => LET_END(LET((x34 : Real) => LET_END(sqrt(delta_x(x12, x13, x14, x34, x24, x23)) / real_of_num(12)), pow(dist((v3, v4)), 2))), pow(dist((v2, v4)), 2))), pow(dist((v2, v3)), 2))), pow(dist((v1, v4)), 2))), pow(dist((v1, v3)), 2))), pow(dist((v1, v2)), 2))
+  (vol_conv : (Cart[Real, _], Cart[Real, _], Cart[Real, _], Cart[Real, _]) -> Real)((v1 : Cart[Real, _]), (v2 : Cart[Real, _]), (v3 : Cart[Real, _]), (v4 : Cart[Real, _])) == LET((x12 : Real) => LET_END(LET((x13 : Real) => LET_END(LET((x14 : Real) => LET_END(LET((x23 : Real) => LET_END(LET((x24 : Real) => LET_END(LET((x34 : Real) => LET_END(sqrt(delta_x(x12, x13, x14, x34, x24, x23)) / real_of_num(12)), pow(distance((v3, v4)), 2))), pow(distance((v2, v4)), 2))), pow(distance((v2, v3)), 2))), pow(distance((v1, v4)), 2))), pow(distance((v1, v3)), 2))), pow(distance((v1, v2)), 2))
   (vol_rect : (Cart[Real, _], Cart[Real, _]) -> Real)((a : Cart[Real, _]), (b : Cart[Real, _])) == (if op_dollar(a, 1) < op_dollar(b, 1) && op_dollar(a, 2) < op_dollar(b, 2) && op_dollar(a, 3) < op_dollar(b, 3) { (op_dollar(b, 3) - op_dollar(a, 3)) * ((op_dollar(b, 2) - op_dollar(a, 2)) * (op_dollar(b, 1) - op_dollar(a, 1))) } else { real_of_num(0) })
   (vol_ball_wedge : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]], Real) -> Real)((v0 : Cart[Real, Tybit1[Unit]]), (v1 : Cart[Real, Tybit1[Unit]]), (v2 : Cart[Real, Tybit1[Unit]]), (v3 : Cart[Real, Tybit1[Unit]]), (r : Real)) == azim(v0, v1, v2, v3) * (real_of_num(2) * (pow(r, 3) / real_of_num(3)))
   (SDIFF : ((_) -> Bool, (_) -> Bool, _) -> Bool)((X : (_) -> Bool), (Y : (_) -> Bool)) == UNION(DIFF(X, Y), DIFF(Y, X))
@@ -84251,7 +84251,7 @@ Multivariate/flyspeck quotations (2071):
   (X : (Cart[Real, Tybit1[Unit]]) -> Bool)
   (t : (Cart[Real, Tybit1[Unit]]) -> Bool)
   (s : (Cart[Real, Tybit1[Unit]]) -> Bool)
-  (\226\136\128 C : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(C) \226\134\146 vol(C) >= real_of_num(0)) && (\226\136\128 Z : (Cart[Real, Tybit1[Unit]]) -> Bool, NULLSET(Z) \226\134\146 vol(Z) == real_of_num(0)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 Y : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(X) && measurable(Y) && NULLSET(SDIFF(X, Y)) \226\134\146 vol(X) == vol(Y)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : Cart[Real, Tybit1[Unit]], measurable(X) && measurable(IMAGE(scale(t), X)) \226\134\146 vol(IMAGE(scale(t), X)) == abs(op_dollar(t, 1) * (op_dollar(t, 2) * op_dollar(t, 3))) * vol(X)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 v : Cart[Real, Tybit1[Unit]], measurable(X) \226\134\146 vol(IMAGE(op_plus(v), X)) == vol(X)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, r > real_of_num(0) && !coplanar({v0, v1, v2, v3}) \226\134\146 vol(solid_triangle(v0, {v1, v2, v3}, r)) == vol_solid_triangle(v0, v1, v2, v3, r)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], vol(conv0({v0, v1, v2, v3})) == vol_conv(v0, v1, v2, v3)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && h >= real_of_num(0) && a > real_of_num(0) && a <= real_of_num(1) \226\134\146 vol(INTER(frustt(v0, v1, h, a), wedge(v0, v1, v2, v3))) == vol_frustt_wedge(v0, v1, v2, v3, h, a)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 c : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && r >= real_of_num(0) && c >= -real_of_num(1) && c <= real_of_num(1) \226\134\146 vol(INTER(conic_cap(v0, v1, r, c), wedge(v0, v1, v2, v3))) == vol_conic_cap_wedge(v0, v1, v2, v3, r, c)) && (\226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], vol(rect(a, b)) == vol_rect(a, b)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && r >= real_of_num(0) \226\134\146 vol(INTER(normball(v0, r), wedge(v0, v1, v2, v3))) == vol_ball_wedge(v0, v1, v2, v3, r))
+  (\226\136\128 C : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(C) \226\134\146 measure(C) >= real_of_num(0)) && (\226\136\128 Z : (Cart[Real, Tybit1[Unit]]) -> Bool, negligible(Z) \226\134\146 measure(Z) == real_of_num(0)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 Y : (Cart[Real, Tybit1[Unit]]) -> Bool, measurable(X) && measurable(Y) && negligible(SDIFF(X, Y)) \226\134\146 measure(X) == measure(Y)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 t : Cart[Real, Tybit1[Unit]], measurable(X) && measurable(IMAGE(scale(t), X)) \226\134\146 measure(IMAGE(scale(t), X)) == abs(op_dollar(t, 1) * (op_dollar(t, 2) * op_dollar(t, 3))) * measure(X)) && (\226\136\128 X : (Cart[Real, Tybit1[Unit]]) -> Bool, \226\136\128 v : Cart[Real, Tybit1[Unit]], measurable(X) \226\134\146 measure(IMAGE(op_plus(v), X)) == measure(X)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, r > real_of_num(0) && !coplanar({v0, v1, v2, v3}) \226\134\146 measure(solid_triangle(v0, {v1, v2, v3}, r)) == vol_solid_triangle(v0, v1, v2, v3, r)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], measure(conv0({v0, v1, v2, v3})) == vol_conv(v0, v1, v2, v3)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 h : Real, \226\136\128 a : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && h >= real_of_num(0) && a > real_of_num(0) && a <= real_of_num(1) \226\134\146 measure(INTER(frustt(v0, v1, h, a), wedge(v0, v1, v2, v3))) == vol_frustt_wedge(v0, v1, v2, v3, h, a)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, \226\136\128 c : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && r >= real_of_num(0) && c >= -real_of_num(1) && c <= real_of_num(1) \226\134\146 measure(INTER(conic_cap(v0, v1, r, c), wedge(v0, v1, v2, v3))) == vol_conic_cap_wedge(v0, v1, v2, v3, r, c)) && (\226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 b : Cart[Real, Tybit1[Unit]], measure(rect(a, b)) == vol_rect(a, b)) && (\226\136\128 v0 : Cart[Real, Tybit1[Unit]], \226\136\128 v1 : Cart[Real, Tybit1[Unit]], \226\136\128 v2 : Cart[Real, Tybit1[Unit]], \226\136\128 v3 : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, !collinear({v0, v1, v2}) && !collinear({v0, v1, v3}) && r >= real_of_num(0) \226\134\146 measure(INTER(normball(v0, r), wedge(v0, v1, v2, v3))) == vol_ball_wedge(v0, v1, v2, v3, r))
   inv((t : Real))
   (q : Cart[Real, N])
   op_pct((t : Real), (q : Cart[Real, N]))
@@ -84277,9 +84277,9 @@ Multivariate/flyspeck quotations (2071):
   \226\136\128 P : (Cart[Real, N]) -> Bool, \226\136\128 f : (Cart[Real, N]) -> Bool, \226\136\128 f' : (Cart[Real, N]) -> Bool, \226\136\128 p : Cart[Real, N], \226\136\128 q : Cart[Real, N], \226\136\128 s : Real, \226\136\128 t : Real, polyhedron(P) && IN(vec(0), interior(P)) && face_of(f, P) && !(f == P) && face_of(f', P) && !(f' == P) && IN(p, f) && IN(q, f') && s > real_of_num(0) && t > real_of_num(0) && op_pct(s, p) == op_pct(t, q) \226\134\146 s == t
   (vertices : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((s : (Cart[Real, N]) -> Bool)) == {(x : Cart[Real, N]) | extreme_point_of(x, s)}
   (edges : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Bool) -> Bool)((s : (Cart[Real, _]) -> Bool)) == {{(v : Cart[Real, _]), (w : Cart[Real, _])} | edge_of(segment([(v, w)]), s)}
-  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, vertices(IMAGE((x : Cart[Real, _]) => a + x, s)) == IMAGE((x : Cart[Real, _]) => a + x, vertices(s))
+  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, vertices(IMAGE((x : Cart[Real, _]) => vector_add(a, x), s)) == IMAGE((x : Cart[Real, _]) => vector_add(a, x), vertices(s))
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], f(x) == f(y) \226\134\146 x == y) \226\134\146 vertices(IMAGE(f, s)) == IMAGE(f, vertices(s))
-  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, edges(IMAGE((x : Cart[Real, _]) => a + x, s)) == IMAGE(IMAGE((x : Cart[Real, _]) => a + x), edges(s))
+  \226\136\128 a : Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, edges(IMAGE((x : Cart[Real, _]) => vector_add(a, x), s)) == IMAGE(IMAGE((x : Cart[Real, _]) => vector_add(a, x)), edges(s))
   (f : (Cart[Real, M]) -> Cart[Real, N])((w : Cart[Real, M]))
   (f : (Cart[Real, M]) -> Cart[Real, N])((v : Cart[Real, M]))
   (w : Cart[Real, M])

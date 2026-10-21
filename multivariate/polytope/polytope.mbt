@@ -654,7 +654,7 @@ fn step_28() -> Unit raise {
   let t262 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.vector_arith(@term_syntax.parse_term("(b : Cart[Real, N]) + op_pct((u : Real), b - (c : Cart[Real, N])) == op_pct(real_of_num(1) - -u, b) + op_pct(-u, c)"))])), t260), t261)
   let t259 = @simp.asm_simp_tac(@list.List([@real.real_div_rmul(), @vectors.norm_eq_0(), @vectors.vector_sub_eq()]))
   let t258 = @simp.rewrite_tac(@list.List([@vectors.norm_mul(), @real.real_abs_div(), @vectors.real_abs_norm()]))
-  let t263 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)"))])), t258), t259), @calc_rat.asm_real_arith_tac), t262])
+  let t263 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((b : Cart[Real, N]), b + (e : Cart[Real, N]))) == norm(e)"))])), t258), t259), @calc_rat.asm_real_arith_tac), t262])
   let t293 = @list.List([@tactics.thenl(@tactics.then_tac(@simp.expand_tac("d"), @tactics.conj_tac), t263), t292])
   let t254 = @term_syntax.parse_term("(d : Cart[Real, N])")
   let t257 = @tactics.disch_then(fn(x256 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4163,7 +4163,7 @@ fn step_113() -> Unit raise {
   let t2074 = @simp.rewrite_tac(@list.List([@vectors.dist_0(), @vectors.norm_le()]))
   let t2073 = @determinants.geom_origin_tac(@term_syntax.parse_term("(a : Cart[Real, N])"))
   let t2101 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2073), t2074), t2075), t2076), t2081), @tactics.conj_tac), t2098), t2099), t2100), @calc_rat.real_arith_tac)
-  exposed_point_of_furthest_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Cart[Real, N]) -> Bool, ∀ a : Cart[Real, N], ∀ b : Cart[Real, N], IN(b, s) && (∀ x : Cart[Real, N], IN(x, s) → dist((a, x)) <= dist((a, b))) → exposed_face_of({b}, s)"), t2101))
+  exposed_point_of_furthest_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Cart[Real, N]) -> Bool, ∀ a : Cart[Real, N], ∀ b : Cart[Real, N], IN(b, s) && (∀ x : Cart[Real, N], IN(x, s) → distance((a, x)) <= distance((a, b))) → exposed_face_of({b}, s)"), t2101))
 }
 
 ///|
@@ -4738,7 +4738,7 @@ pub fn extreme_point_of_cball() -> @kernel.Thm {
 fn step_122() -> Unit raise {
   let t2505 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t2504 = @tactics.match_mp_tac(@topology.setdist_le_dist())
-  let t2503 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("norm((x : Cart[Real, N])) == dist((vec(0), x))"))]))
+  let t2503 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("norm((x : Cart[Real, N])) == distance((vec(0), x))"))]))
   let t2502 = @tactics.match_mp_tac(@real.real_le_lmul())
   let t2501 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@realax.real_le_trans()))
   let t2500 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_mul(), @realax.real_abs()]))
@@ -5031,7 +5031,7 @@ fn step_128() -> Unit raise {
   let t2704 = @simp.rewrite_tac(@list.List([@convex.conic_hull_explicit(), @sets.in_elim_thm()]))
   let t2703 = @simp.asm_rewrite_tac(@list.List([@vectors.vector_mul_rzero(), @vectors.dist_0(), @realarith.real_lt_refl()]))
   let t2702 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Cart[Real, N]) == vec(0)"))
-  let t2701 = @tactics.undisch_tac(@term_syntax.parse_term("dist((op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y), (x : Cart[Real, N]))) < norm(x)"))
+  let t2701 = @tactics.undisch_tac(@term_syntax.parse_term("distance((op_pct((b : Real) / dot((a : Cart[Real, N]), (y : Cart[Real, N])), y), (x : Cart[Real, N]))) < norm(x)"))
   let t2700 = @simp.asm_rewrite_tac(@list.List([]))
   let t2699 = @tactics.disch_then(fn(x2693 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x2693
@@ -5984,7 +5984,7 @@ fn step_143() -> Unit raise {
   let t3265 = @simp.rewrite_tac(@list.List([@vectors.norm_mul()]))
   let t3264 = @simp.rewrite_tac(@list.List([@vectors.dist(), @vectors.vector_sub_lzero(), @vectors.vector_neg_0(), @vectors.vector_neg_neg(), @vectors.vector_sub_rzero(), @vectors.vector_arith(@term_syntax.parse_term("op_pct((a : Real), (y : Cart[Real, N])) - -y == op_pct(a + real_of_num(1), y)"))]))
   let t3263 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3262 = @simp.once_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) == dist((-a, -b))"))]))
+  let t3262 = @simp.once_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((a : Cart[Real, N]), (b : Cart[Real, N]))) == distance((-a, -b))"))]))
   let t3268 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@topology.between_in_segment()), @vectors.between()])), t3262), t3263), t3264), t3265), t3266), @calc_rat.asm_real_arith_tac), t3267])
   let t3261 = @simp.asm_rewrite_tac(@list.List([@topology.in_open_segment()]))
   let t3260 = @tactics.exists_tac(@term_syntax.parse_term("(y : Cart[Real, N])"))
@@ -8047,7 +8047,7 @@ fn step_195() -> Unit raise {
   let t4441 = @simp.rewrite_tac(@list.List([@vectors.dot_rsub(), @vectors.dot_radd(), @vectors.dot_rneg(), @simp.once_rewrite_rule(@list.List([@vectors.dist_sym()]))(@vectors.dist()), @vectors.dot_rmul()]))
   let t4439 = @term_syntax.parse_term("(y : Cart[Real, N]) - ((x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N])))")
   let t4440 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(a : Cart[Real, N])"), t4439]), @vectors.norm_cauchy_schwarz()))
-  let t4438 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((x : Cart[Real, N]), x + (a : Cart[Real, N]))) == norm(a)"))]))
+  let t4438 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((x : Cart[Real, N]), x + (a : Cart[Real, N]))) == norm(a)"))]))
   let t4437 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : Cart[Real, N])"))
   let t4436 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @sets.in_sing(), @theorems.right_forall_imp_thm(), @theorems.forall_unwind_thm2(), @sets.in_elim_thm()]))
   let t4434 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -8061,7 +8061,7 @@ fn step_195() -> Unit raise {
   let t4428 = @tactics.trans_tac(@realax.real_le_trans())(t4427)
   let t4425 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t4426 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@topology.setdist_le_dist()), t4425), @tactics.all_tac])
-  let t4423 = @term_syntax.parse_term("dist(((x : Cart[Real, N]), x + op_pct((d : Real), -(a : Cart[Real, N]))))")
+  let t4423 = @term_syntax.parse_term("distance(((x : Cart[Real, N]), x + op_pct((d : Real), -(a : Cart[Real, N]))))")
   let t4424 = @tactics.trans_tac(@realax.real_le_trans())(t4423)
   let t4421 = @simp.asm_simp_tac(@list.List([@topology.frontier(), @sets.in_diff(), @topology.closure_closed(), @topology.compact_imp_closed()]))
   let t4422 = @list.List([@tactics.then_tac(@tactics.undisch_tac(@term_syntax.parse_term("IN((x : Cart[Real, N]) + op_pct((d : Real), -(a : Cart[Real, N])), frontier((t : (Cart[Real, N]) -> Bool)))")), t4421), @tactics.all_tac])
@@ -8457,7 +8457,7 @@ fn step_202() -> Unit raise {
   let t4646 = @tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@real.real_le_inv_eq(), @realax.real_le_mul(), @realarith.real_lt_imp_le()])), t4644), t4645)
   let t4637 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t4636 = @tactics.match_mp_tac(@topology.setdist_le_dist())
-  let t4635 = @simp.once_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("norm((x : Cart[Real, N])) == dist((vec(0), x))"))]))
+  let t4635 = @simp.once_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("norm((x : Cart[Real, N])) == distance((vec(0), x))"))]))
   let t4632 = @drule.match_mp(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@realarith.real_lte_trans()))
   let t4634 = @tactics.first_x_assum(fn(x4633 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t4632(x4633))
@@ -9318,7 +9318,7 @@ fn step_233() -> Unit raise {
   let t5020 = @simp.asm_simp_tac(@list.List([@sets.in_sing(), @misc.hull_inc()]))
   let t5019 = @tactics.match_mp_tac(@topology.setdist_le_dist())
   let t5018 = @simp.asm_simp_tac(@list.List([@realarith.real_lt_imp_le()]))
-  let t5016 = @term_syntax.parse_term("dist(((x : Cart[Real, N]), (y : Cart[Real, N])))")
+  let t5016 = @term_syntax.parse_term("distance(((x : Cart[Real, N]), (y : Cart[Real, N])))")
   let t5017 = @tactics.trans_tac(@realax.real_le_trans())(t5016)
   let t5015 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(y : Cart[Real, N])"))(@tactics.strip_assume_tac))
   let t5014 = @simp.once_rewrite_tac(@list.List([@vectors.dist_sym()]))
@@ -9417,7 +9417,7 @@ fn step_234() -> Unit raise {
   let t5113 = @simp.asm_rewrite_tac(@list.List([@sets.in_sing()]))
   let t5112 = @tactics.match_mp_tac(@topology.setdist_le_dist())
   let t5111 = @simp.asm_simp_tac(@list.List([@realarith.real_lt_imp_le()]))
-  let t5109 = @term_syntax.parse_term("dist(((x : Cart[Real, N]), (y : Cart[Real, N])))")
+  let t5109 = @term_syntax.parse_term("distance(((x : Cart[Real, N]), (y : Cart[Real, N])))")
   let t5110 = @tactics.trans_tac(@realax.real_le_trans())(t5109)
   let t5108 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(y : Cart[Real, N])"))(@tactics.strip_assume_tac))
   let t5107 = @simp.rewrite_tac(@list.List([@theorems.unwind_thm1(), @topology.in_ball_0(), @equal.gsym(@vectors.dist())]))
@@ -14069,7 +14069,7 @@ fn step_303() -> Unit raise {
   let t8062 = @simp.asm_simp_tac(@list.List([@real.real_lt_lmul_eq(), @real.real_lt_ldiv_eq(), @vectors.norm_arith(@term_syntax.parse_term("real_of_num(0) < abs(norm((y : Cart[Real, N])) + real_of_num(1))"))]))
   let t8061 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < (e : Real) && e * ((z : Real) / (y : Real)) < e * real_of_num(1) → abs(e) / y * z < e")))
   let t8060 = @simp.rewrite_tac(@list.List([@vectors.norm_mul(), @real.real_abs_div()]))
-  let t8059 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((x : Cart[Real, N]) + (e : Cart[Real, N]), x)) == norm(e)"))]))
+  let t8059 = @simp.rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((x : Cart[Real, N]) + (e : Cart[Real, N]), x)) == norm(e)"))]))
   let t8058 = @simp.asm_simp_tac(@list.List([@vectors.norm_pos_le(), @vectors.vector_mul_lid(), @calc_rat.real_field(@term_syntax.parse_term("real_of_num(0) <= (y : Real) && real_of_num(0) < (e : Real) → e / (y + real_of_num(1)) * ((y + real_of_num(1)) / e) == real_of_num(1)"))]))
   let t8063 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.vector_add_ldistrib(), @vectors.vector_mul_assoc()])), t8058), t8059), t8060), t8061), t8062), @calc_rat.real_arith_tac)
   let t8057 = @tactics.conv_tac(@vectors.norm_arith)

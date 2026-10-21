@@ -13124,7 +13124,7 @@ Arithmetic/tarski quotations (66):
   gnumeral m n = (gterm(numeral m) = n)
   arith_gnumeral1 a b = formsubst ((3 |-> a) ((4 |-> b) V))\n       (??1 (??2\n       (V 3 === arith_pair (V 0) (V 1) &&\n        V 4 === arith_pair (Suc(V 0)) (arith_pair (numeral 2) (V 1)))))
   forall v a b. holds v (arith_gnumeral1 a b) <=>\n                ?x y. termval v a = NPAIR x y /\\\n                      termval v b = NPAIR (SUC x) (NPAIR 2 y)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   forall s t. FV(arith_gnumeral1 s t) = FVT s UNION FVT t
   arith_gnumeral1' x y = arith_rtc arith_gnumeral1 x y
   forall v s t. holds v (arith_gnumeral1' s t) <=>\n              RTC (\\a b. ?x y. a = NPAIR x y /\\\n                               b = NPAIR (SUC x) (NPAIR 2 y))\n                  (termval v s) (termval v t)
@@ -13137,7 +13137,7 @@ Arithmetic/tarski quotations (66):
   fn:num->num
   (gterm o numeral)
   forall v s t. holds v (arith_gnumeral s t) <=>\n            gnumeral (termval v s) (termval v t)
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
   forall s t. FV(arith_gnumeral s t) =  FVT(s) UNION FVT(t)
   qdiag x q = qsubst (x,numeral(gform q)) q
   arith_qdiag x s t =\n        formsubst ((1 |-> s) ((2 |-> t) V))\n        (?? 3\n           (arith_gnumeral (V 1) (V 3) &&\n            arith_pair (numeral 10)  (arith_pair (numeral(number x))\n                                                 (arith_pair (numeral 5)\n              (arith_pair (arith_pair (numeral 1)\n       (arith_pair (arith_pair (numeral 0) (numeral(number x))) (V 3)))\n                   (V 1)))) ===\n        V 2))

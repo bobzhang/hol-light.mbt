@@ -90715,13 +90715,13 @@ test "100/pnt matches 100/pnt.ml" {
       #|4 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|100/pnt quotations (1323):
-      #|  vector_neg:complex->complex
-      #|  vector_add:complex->complex->complex
-      #|  vector_sub:complex->complex->complex
-      #|  complex_mul:complex->complex->complex
-      #|  complex_div:complex->complex->complex
-      #|  complex_pow:complex->num->complex
-      #|  complex_inv:complex->complex
+      #|  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  2 <= (n : Num) \226\134\146 1 < n
       #|  2 <= (n : Num) \226\134\146 0 < n
       #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) && 2 <= n \226\134\146 real_of_num(1) < norm(cpow(Cx(real_of_num(n)), s))
@@ -90758,8 +90758,8 @@ test "100/pnt matches 100/pnt.ml" {
       #|  1
       #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => if n == 0 { Cx(real_of_num(1)) / cpow(z, (s : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(1))) } else { if n == 1 { (Cx(real_of_num(1)) - s) / cpow(z, s) } else { s * ((s - Cx(real_of_num(1))) / cpow(z, s + Cx(real_of_num(1)))) } }
       #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, !(n == 0) && real_of_num(0) <= Re(s) + real_of_num(1) \226\134\146 norm((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(n)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(n + 1)), s - Cx(real_of_num(1))))) <= norm(s * ((s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(n)), s + Cx(real_of_num(1)))))
-      #|  (f has_complex_derivative f') net
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  exp(real_of_num((m : Num)) * log(real_of_num((n : Num))))
       #|  \226\136\128 m : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, real_of_num(m) <= Re(s) && !(n == 0) \226\134\146 pow(real_of_num(n), m) <= norm(cpow(Cx(real_of_num(n)), s))
       #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 m : Num, real_of_num(m) <= Re(s) && !(n == 0) \226\134\146 norm(Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s)) <= inv(pow(real_of_num(n), m))
@@ -90836,7 +90836,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => -clog(Cx(real_of_num(n))) / cpow(Cx(real_of_num(n)), z)
       #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), z)
       #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(1) < Re(s) \226\134\146 sums((n : Num) => -clog(Cx(real_of_num(n))) / cpow(Cx(real_of_num(n)), s), complex_derivative(zeta, s), from(1))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  :real
       #|  :real
       #|  (s : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])
@@ -90860,7 +90860,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  (s : Cart[Real, Tybit0[Unit]])
       #|  (m : Num)
       #|  \226\136\128 n : Num, 1 <= n \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : Cart[Real, Tybit0[Unit]], IN(s, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(0)}) \226\134\146 sums((m : Num) => (s - Cx(real_of_num(1))) / cpow(Cx(real_of_num(m)), s) - (Cx(real_of_num(1)) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1))) - Cx(real_of_num(1)) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1)))), g(s), from(n)) && sums((m : Num) => (Cx(real_of_num(1)) - (s - Cx(real_of_num(1))) * clog(Cx(real_of_num(m)))) / cpow(Cx(real_of_num(m)), s) - (clog(Cx(real_of_num(m + 1))) / cpow(Cx(real_of_num(m + 1)), s - Cx(real_of_num(1))) - clog(Cx(real_of_num(m))) / cpow(Cx(real_of_num(m)), s - Cx(real_of_num(1)))), g'(s), from(n)) && has_complex_derivative(g, g'(s), at(s)))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  :real
       #|  :real
       #|  :real
@@ -90925,7 +90925,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  vsum(INTER({(m : Num) | 1 <= m && (\226\136\128 p : Num, prime(p) && divides(p, m) \226\134\146 (n : Num) < p)}, op_dot_dot(0, (N1 : Num) + ((N2 : Num) + 1))), (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), (s : Cart[Real, Tybit0[Unit]]))) - Cx(real_of_num(1)) == vsum(DELETE(INTER({(m : Num) | 1 <= m && (\226\136\128 p : Num, prime(p) && divides(p, m) \226\134\146 n < p)}, op_dot_dot(0, N1 + (N2 + 1))), 1), (n : Num) => Cx(real_of_num(1)) / cpow(Cx(real_of_num(n)), s))
       #|  (x : Real) <= (y : Real) \226\134\146 y < (e : Real) \226\134\146 x < e
       #|  (N1 : Num) + ((N2 : Num) + 1)
-      #|  dist(((x : Cart[Real, _]), (z : Cart[Real, _]))) < (e : Real) / real_of_num(2) && dist(((y : Cart[Real, _]), z)) <= dist((x, y)) + dist((x, z)) \226\134\146 dist((x, y)) < e / real_of_num(2) \226\134\146 dist((y, z)) < e
+      #|  distance(((x : Cart[Real, _]), (z : Cart[Real, _]))) < (e : Real) / real_of_num(2) && distance(((y : Cart[Real, _]), z)) <= distance((x, y)) + distance((x, z)) \226\134\146 distance((x, y)) < e / real_of_num(2) \226\134\146 distance((y, z)) < e
       #|  (N1 : Num) + ((N2 : Num) + 1)
       #|  (N2 : Num)
       #|  (e : Real) / real_of_num(2)
@@ -91035,7 +91035,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]]) => inv(z - Cx(real_of_num(1)))
       #|  (z : Cart[Real, Tybit0[Unit]]) => clog(Cx(real_of_num(1)) - z)
       #|  norm((z : Cart[Real, Tybit0[Unit]])) <= real_of_num(1) / real_of_num(2) \226\134\146 norm(clog(Cx(real_of_num(1)) - z)) <= real_of_num(2) * norm(z)
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  :real
       #|  :real
       #|  :real
@@ -91063,7 +91063,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  !((y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 y * (Cx(real_of_num(1)) - inv(y)) == y - Cx(real_of_num(1))
       #|  !((x : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 -((a : Cart[Real, Tybit0[Unit]]) * x) / pow(x, 2) == -(a / x)
       #|  \226\136\131 logzeta : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 logzeta' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : Cart[Real, Tybit0[Unit]], IN(s, {(s : Cart[Real, Tybit0[Unit]]) | Re(s) > real_of_num(1)}) \226\134\146 sums((p : Num) => clog(Cx(real_of_num(1)) - inv(cpow(Cx(real_of_num(p)), s))), logzeta(s), {(p : Num) | prime(p)}) && sums((p : Num) => clog(Cx(real_of_num(p))) / (cpow(Cx(real_of_num(p)), s) - Cx(real_of_num(1))), logzeta'(s), {(p : Num) | prime(p)}) && has_complex_derivative(logzeta, logzeta'(s), at(s))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
       #|  real_of_num(1) < (s : Real) \226\134\146 !(s == real_of_num(0))
@@ -91133,7 +91133,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  real_of_num(1) <= (x : Real)
       #|  (n : Num) == 0 || 1 <= n
       #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(1) <= x \226\134\146 sum(op_dot_dot(1, n), (n : Num) => exp((x - real_of_num(1)) * log(real_of_num(n)))) <= exp(x * log(real_of_num(n) + real_of_num(1))) / x
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) + ((a : Real) - x) <= a
       #|  2 <= (i : Num) \226\134\146 0 < i
       #|  (x : Real) == (y : Real) && real_of_num(1) + (u : Real) <= (v : Real) \226\134\146 x <= u \226\134\146 real_of_num(1) + y <= v
@@ -91154,7 +91154,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  2 <= (n : Num)
       #|  (n : Num) == 0 || 1 <= n
       #|  \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(0) < x && x <= real_of_num(1) \226\134\146 sum(op_dot_dot(1, n), (n : Num) => exp((x - real_of_num(1)) * log(real_of_num(n)))) <= exp(x * log(real_of_num(n))) / x
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  1 <= (n : Num) \226\134\146 n - 1 + 1 == n
       #|  exp((x : Real) * log(real_of_num((n : Num) - 1) + real_of_num(1))) / x
       #|  (0 < (n : Num)) == (1 <= n)
@@ -91195,7 +91195,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  (r : Num)
       #|  sum(op_dot_dot((n : Num) + 1, (m : Num)), (n : Num) => real_of_num(1) / exp((Re((z : Cart[Real, Tybit0[Unit]])) + real_of_num(1)) * log(real_of_num(n))))
       #|  \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 m : Num, (\226\136\128 m : Num, 1 <= m \226\134\146 norm(a(m)) <= real_of_num(1)) && 1 <= n && real_of_num(1) <= Re((w : Cart[Real, Tybit0[Unit]])) && real_of_num(0) < Re((z : Cart[Real, Tybit0[Unit]])) \226\134\146 norm(vsum(op_dot_dot(n + 1, m), (n : Num) => a(n) / cpow(Cx(real_of_num(n)), w + z))) <= real_of_num(1) / (Re(z) * exp(Re(z) * log(real_of_num(n))))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  1
       #|  Cx((d : Real))
       #|  abs((x : Real)) == abs(x - real_of_num(0))
@@ -91521,7 +91521,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, 1 <= n \226\134\146 norm(a(n)) <= real_of_num(1)) && analytic_on(f, {(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= real_of_num(1)}) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) > real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1))) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], Re(z) >= real_of_num(1) \226\134\146 sums((n : Num) => a(n) / cpow(Cx(real_of_num(n)), z), f(z), from(1)))
       #|  :real
       #|  :real
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  Cx((b : Real))
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  real_of_num(0) < (b : Real) \226\134\146 abs(b) == b
@@ -91556,7 +91556,7 @@ test "100/pnt matches 100/pnt.ml" {
       #|  (n : Num) + 1 <= (m : Num)
       #|  (n : Num) + 1 <= (m : Num) \226\134\146 n <= m
       #|  \226\136\128 n : Num, \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, !(n == 0) && real_of_num(1) < Re(s) && n + 1 <= m \226\134\146 sum(op_dot_dot(n, m), (x : Num) => norm(Cx(real_of_num(1)) / cpow(Cx(real_of_num(x)), s))) <= (real_of_num(1) / real_of_num(n) + real_of_num(1) / (Re(s) - real_of_num(1))) * exp((real_of_num(1) - Re(s)) * log(real_of_num(n)))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
       #|  (m : Num)
       #|  (n : Num) + 1
@@ -91641,10 +91641,10 @@ test "100/pnt matches 100/pnt.ml" {
       #|  complex_derivative(nearzeta(1), (s : Cart[Real, Tybit0[Unit]]))
       #|  (z : Cart[Real, Tybit0[Unit]]) => nearzeta(1, z) + Cx(real_of_num(1))
       #|  (w : Cart[Real, Tybit0[Unit]])
-      #|  dist((Cx(real_of_num(1)), (s : Cart[Real, Tybit0[Unit]])))
+      #|  distance((Cx(real_of_num(1)), (s : Cart[Real, Tybit0[Unit]])))
       #|  (s : Cart[Real, Tybit0[Unit]]) => (nearzeta(1, s) + Cx(real_of_num(1))) * inv(s - Cx(real_of_num(1)))
       #|  \226\136\128 s : Cart[Real, Tybit0[Unit]], real_of_num(0) < Re(s) && !(s == Cx(real_of_num(1))) \226\134\146 complex_derivative(zeta, s) == complex_derivative(nearzeta(1), s) / (s - Cx(real_of_num(1))) - (nearzeta(1, s) + Cx(real_of_num(1))) / pow(s - Cx(real_of_num(1)), 2)
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1)))
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  (z : Cart[Real, Tybit0[Unit]]) - (w : Cart[Real, Tybit0[Unit]])
@@ -91891,8 +91891,8 @@ test "100/pnt matches 100/pnt.ml" {
       #|  Cx(real_of_num((k : Num)) + real_of_num(1))
       #|  (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => if n == 0 { clog(z) } else { if n == 1 { inv(z) } else { -inv(pow(z, 2)) } }
       #|  \226\136\128 k : Num, 1 <= k \226\134\146 abs((real_of_num(k) + real_of_num(1)) * (log(real_of_num(k) + real_of_num(1)) - log(real_of_num(k))) - real_of_num(1)) <= real_of_num(2) / real_of_num(k)
-      #|  (f has_complex_derivative f') net
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  real_of_num(0) < real_of_num(1) + abs((B : Real))
       #|  (e : Real) * (inv(real_of_num(2)) * (i : Real)) * (x : Real) == e * inv(real_of_num(2)) * (x * i)
       #|  abs(real_of_num(1) + abs((B : Real))) == real_of_num(1) + abs(B)
@@ -92034,8 +92034,8 @@ test "100/pnt matches 100/pnt.ml" {
       #|  (n : Num) => ((real_of_num(n) + real_of_num(1)) / log(real_of_num(n) + real_of_num(1)) * sum({(p : Num) | prime(p) && p <= n}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) - sum(op_dot_dot(1, n), (k : Num) => sum({(p : Num) | prime(p) && p <= k}, (p : Num) => log(real_of_num(p)) / real_of_num(p)) * ((real_of_num(k) + real_of_num(1)) / log(real_of_num(k) + real_of_num(1)) - real_of_num(k) / log(real_of_num(k))))) / (real_of_num(n) / log(real_of_num(n)))
       #|  {(p : Num) | prime(p) && p == 0} == {}
       #|  op_minus_minus_minus_gt((n : Num) => real_of_num(CARD({(p : Num) | prime(p) && p <= n})) / (real_of_num(n) / log(real_of_num(n))), real_of_num(1), sequentially)
-      #|  (f has_complex_derivative f') net
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  ((x : Real) < pow(x, 2)) == (real_of_num(0) < x * (x - real_of_num(1)))
       #|  real_of_num(1) < (x : Real) \226\134\146 real_of_num(0) < x
       #|LT_NORM_CPOW_NUM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\s:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (#Re:fun(cart(real,tybit0(1)),real) s:cart(real,tybit0(1))))) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#vector_norm:fun(cart(real,tybit0(1)),real) ((#cpow:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) n:num))) s:cart(real,tybit0(1))))))))))

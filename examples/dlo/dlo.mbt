@@ -34,7 +34,7 @@ pub fn list_conj(x : @list.List[@kernel.Term]) -> @kernel.Term raise {
 ///|
 /// mk_lt
 fn step_3() -> Unit raise {
-  let t5 = @term_syntax.parse_term("op_lt")
+  let t5 = @term_syntax.parse_term("real_lt")
   mk_lt_c.set(fn(x8 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x9 : @kernel.Term) -> @kernel.Term raise {
       ((x6 : @kernel.Term, x7 : @kernel.Term) => @basics.mk_binop(t5, x6, x7))(x8, x9)

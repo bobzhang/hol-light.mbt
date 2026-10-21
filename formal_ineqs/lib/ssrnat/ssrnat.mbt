@@ -3,7 +3,7 @@
 ///|
 /// Formal_ineqs/lib/ssrnat.hl:8
 fn step_1() -> Unit raise {
-  @preterm.overload_interface("+", @term_syntax.parse_term("op_plus"))
+  @preterm.overload_interface("+", @term_syntax.parse_term("XOR"))
 }
 
 ///|

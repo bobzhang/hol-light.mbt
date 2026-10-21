@@ -5806,7 +5806,7 @@ Examples/machin quotations (171):
   abs((x : Real)) <= abs(x)
   (n : Num)
   (x : Real) <= (a : Real) \226\134\146 (\226\136\128 b : Real, a <= b \226\134\146 x <= b) && (\226\136\128 b : Real, a < b \226\134\146 x < b)
-  op_lt_eq
+  real_le
   inv(real_of_num(1) - abs((x : Real)))
   (1 <= (n : Num)) == !(n == 0)
   0
@@ -5896,7 +5896,7 @@ Examples/machin quotations (171):
   (n : Num)
   (k : Num)
   inv
-  op_lt_eq
+  real_le
   pow(real_of_num(2))
   (a : Real) * ((b : Real) * ((c : Real) * (d : Real))) == c * b * (d * a)
   op_star(inv(cos(atn((y : Real)))))
@@ -5952,8 +5952,8 @@ Examples/machin quotations (171):
   abs((x : Real) - (r : Real)) <= inv(pow(real_of_num(2), SUC((p : Num)))) \226\134\146 (\226\136\128 a : Real, abs(pow(real_of_num(2), p) * r - a) <= inv(real_of_num(2)) \226\134\146 abs(x - a / pow(real_of_num(2), p)) <= inv(pow(real_of_num(2), p)))
   atn
   real_of_num(1) / real_of_num(8)
-  op_star
-  op_plus
+  real_mul
+  real_add
   real_of_num
 REAL_LE_1_POW2 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))))
 REAL_LT_1_POW2 =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) n:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))))))

@@ -261,8 +261,8 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Formal_ineqs/taylor/m_taylor_arith quotations (372):
-      #|  abs
-      #|  pow
+      #|  real_abs
+      #|  real_pow
       #|  sqrt
       #|  exp
       #|  log
@@ -341,12 +341,12 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2c_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 interval_arith(-f(y), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(-partial(i, f, y), int)) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 all_n(1, (dd_bounds_list : List[List[(Real, Real)]]), (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(-partial2(j, i, f, x), int)))) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => -f(x), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
       #|  real_of_num(0) * (a : Real) * (b : Real) + real_of_num(1) * (c : Real) == c
       #|  abs _
-      #|  abs
+      #|  real_abs
       #|  (f : (Cart[Real, N]) -> Real)
       #|  (x : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
-      #|  abs
+      #|  real_abs
       #|  (f : (Cart[Real, N]) -> Real)
       #|  (y : Cart[Real, N])
       #|  abs _
@@ -360,12 +360,12 @@ test "Formal_ineqs/taylor/m_taylor_arith matches Formal_ineqs/taylor/m_taylor_ar
       #|  m_taylor_interval((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith(f(x), (f_bounds : (Real, Real)))) \226\134\146 interval_pos(f_bounds) \226\134\146 m_taylor_interval((x : Cart[Real, N]) => abs(f(x)), domain, y, w, bounds, d_bounds_list, dd_bounds_list)
       #|  real_of_num(0) * (a : Real) * (b : Real) + -real_of_num(1) * (c : Real) == -c
       #|  abs _
-      #|  abs
+      #|  real_abs
       #|  (f : (Cart[Real, N]) -> Real)
       #|  (x : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real))
-      #|  abs
+      #|  real_abs
       #|  (f : (Cart[Real, N]) -> Real)
       #|  (y : Cart[Real, N])
       #|  abs _

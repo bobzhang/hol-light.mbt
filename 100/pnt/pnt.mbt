@@ -1328,7 +1328,7 @@ fn step_31() -> Unit raise {
     })(((x790 : @kernel.Thm) => @bool.spec(t789, x790))(x791))
   })
   let t785 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([@vectors.dist_triangle(), @vectors.dist_sym()]))])
-  let t784 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("dist(((x : Cart[Real, _]), (z : Cart[Real, _]))) < (e : Real) / real_of_num(2) && dist(((y : Cart[Real, _]), z)) <= dist((x, y)) + dist((x, z)) → dist((x, y)) < e / real_of_num(2) → dist((y, z)) < e")))
+  let t784 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("distance(((x : Cart[Real, _]), (z : Cart[Real, _]))) < (e : Real) / real_of_num(2) && distance(((y : Cart[Real, _]), z)) <= distance((x, y)) + distance((x, z)) → distance((x, y)) < e / real_of_num(2) → distance((y, z)) < e")))
   let t783 = @simp.simp_tac(@list.List([@arith.not_le()]))
   let t779 = @term_syntax.parse_term("(N1 : Num) + ((N2 : Num) + 1)")
   let t782 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(N2 : Num)"))(fn(x781 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -5067,7 +5067,7 @@ fn step_71() -> Unit raise {
   let t3345 = @simp.asm_rewrite_tac(@list.List([@realarith.real_lt_refl()]))
   let t3346 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(w : Cart[Real, Tybit0[Unit]])")), @class.cond_cases_tac), t3345), @tactics.all_tac])
   let t3344 = @simp.asm_simp_tac(@list.List([@vectors.dist_pos_lt()]))
-  let t3343 = @tactics.exists_tac(@term_syntax.parse_term("dist((Cx(real_of_num(1)), (s : Cart[Real, Tybit0[Unit]])))"))
+  let t3343 = @tactics.exists_tac(@term_syntax.parse_term("distance((Cx(real_of_num(1)), (s : Cart[Real, Tybit0[Unit]])))"))
   let t3342 = @tactics.exists_tac(@term_syntax.parse_term("(s : Cart[Real, Tybit0[Unit]]) => (nearzeta(1, s) + Cx(real_of_num(1))) * inv(s - Cx(real_of_num(1)))"))
   let t3341 = @tactics.match_mp_tac(@canal.has_complex_derivative_transform_at())
   let t3340 = @simp.rewrite_tac(@list.List([@transcendentals.cpow_1(), @complexes.complex_div(), @complexes.complex_mul_lid(), @complexes.complex_inv_1()]))

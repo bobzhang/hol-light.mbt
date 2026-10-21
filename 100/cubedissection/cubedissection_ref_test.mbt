@@ -68276,45 +68276,45 @@ test "100/cubedissection matches 100/cubedissection.ml" {
       #|  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 3) + (sk : Real)
       #|  (w3 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
-      #|  op_lt
+      #|  real_lt
       #|  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real))
       #|  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2))
       #|  (w2 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
-      #|  op_lt
+      #|  real_lt
       #|  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) < w2 && w2 < op_dollar(interval_upperbound(v), 2) && w2 < op_dollar(cj, 2) + (sj : Real) && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && op_dollar(cj, 3) < w3 && w3 < op_dollar(interval_upperbound(v), 3)
       #|  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 3)
       #|  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3))
       #|  (w3 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
-      #|  op_lt
+      #|  real_lt
       #|  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real))
       #|  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2))
       #|  (w2 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
-      #|  op_lt
+      #|  real_lt
       #|  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && w2 < op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real) && w2 < op_dollar(interval_upperbound(v), 2) && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && op_dollar(cj, 3) < w3 && w3 < op_dollar(interval_upperbound(v), 3) && w3 < op_dollar(cj, 3) + sj
       #|  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) + (sj : Real))
       #|  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2) + (sk : Real)
       #|  (w2 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
-      #|  op_lt
+      #|  real_lt
       #|  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3) + (sj : Real))
       #|  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3))
       #|  (w3 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
-      #|  op_lt
+      #|  real_lt
       #|  op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2) < (w2 : Real) && op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) < w2 && op_dollar(interval_lowerbound(v), 3) < (w3 : Real) && op_dollar(cj, 3) < w3 && w3 < op_dollar(interval_upperbound(v), 3) && w3 < op_dollar(cj, 3) + (sj : Real) && w2 < op_dollar(interval_upperbound(v), 2)
       #|  op_dollar((ck : Cart[Real, Tybit1[Unit]]), 2)
       #|  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 2), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2))
       #|  (w2 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))
-      #|  op_lt
+      #|  real_lt
       #|  min(op_dollar(interval_upperbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3) + (sj : Real))
       #|  max(op_dollar(interval_lowerbound((v : (Cart[Real, Tybit1[Unit]]) -> Bool)), 3), op_dollar((cj : Cart[Real, Tybit1[Unit]]), 3))
       #|  (w3 : Real)
       #|  UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D))
-      #|  op_lt
+      #|  real_lt
       #|  pairwise((k : (Cart[Real, Tybit1[Unit]]) -> Bool) => (k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => !(interval_length(k) == interval_length(k')), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool))
       #|  FINITE(UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 2), (D : ((Cart[Real, Tybit1[Unit]]) -> Bool) -> Bool)), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 2), D))) && FINITE(UNION(IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_lowerbound(k'), 3), D), IMAGE((k' : (Cart[Real, Tybit1[Unit]]) -> Bool) => op_dollar(interval_upperbound(k'), 3), D)))
       #|  op_dollar((cj : Cart[Real, Tybit1[Unit]]), 2) <= op_dollar((z' : Cart[Real, Tybit1[Unit]]), 2) && op_dollar(z', 2) <= op_dollar(cj, 2) + (sj : Real) && op_dollar(cj, 3) <= op_dollar(z', 3) && op_dollar(z', 3) <= op_dollar(cj, 3) + sj

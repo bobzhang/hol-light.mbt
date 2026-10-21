@@ -417,7 +417,7 @@ fn step_19() -> Unit raise {
   let t91 = @simp.rewrite_tac(@list.List([@vectors.dot_3(), @vectors.vector_3()]))
   let pth = @tactics.prove(@term_syntax.parse_term("(dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (x2 : Real), (x3 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(y1 : Real), (y2 : Real), (y3 : Real)])) == x1 * y1 + (x2 * y2 + x3 * y3)"), t91)
   let t94 = @equal.rand_conv(real_rat5_add_conv)
-  let t93 = @equal.depth_binop_conv(@term_syntax.parse_term("op_plus"), real_rat5_mul_conv)
+  let t93 = @equal.depth_binop_conv(@term_syntax.parse_term("real_add"), real_rat5_mul_conv)
   vector3_dot_conv_c.set(@equal.thenc(@equal.thenc(@equal.thenc(@simp.gen_rewrite_conv(fn(x92 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x92
   }, @list.List([pth])), t93), t94), real_rat5_add_conv))
@@ -3104,7 +3104,7 @@ fn step_69() -> Unit raise {
   let t1615 = @term_syntax.parse_term("(d : Cart[Real, N]) - (c : Cart[Real, N])")
   let t1616 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(b : Cart[Real, N]) - (a : Cart[Real, N])"), t1615]), @determinants.orthogonal_transformation_exists()))
   let t1642 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1616), @tactics.ants_tac), t1620), t1621), t1622), t1623), t1624), t1630), t1634), t1635), t1637), t1638), @tactics.ap_term_tac), @tactics.binop_tac), t1639), t1640), t1641)
-  congruent_segments_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ c : Cart[Real, N], ∀ d : Cart[Real, N], dist((a, b)) == dist((c, d)) → congruent(segment([(a, b)]), segment([(c, d)]))"), t1642))
+  congruent_segments_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ c : Cart[Real, N], ∀ d : Cart[Real, N], distance((a, b)) == distance((c, d)) → congruent(segment([(a, b)]), segment([(c, d)]))"), t1642))
 }
 
 ///|
@@ -3150,7 +3150,7 @@ pub fn compute_dist(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) 
 ///|
 /// le_rat5
 fn step_71() -> Unit raise {
-  let t1651 = @term_syntax.parse_term("op_lt_eq")
+  let t1651 = @term_syntax.parse_term("real_le")
   let mk_le : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x1654 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x1655 : @kernel.Term) -> @kernel.Term raise {
       ((x1652 : @kernel.Term, x1653 : @kernel.Term) => @basics.mk_binop(t1651, x1652, x1653))(x1654, x1655)

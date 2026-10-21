@@ -6227,8 +6227,8 @@ CPU time (user): <t>
   (\226\136\128 n : Num, \226\136\131 p : Num, abs(real_of_num(n)) == real_of_num(p)) && (\226\136\128 x : Real, \226\136\128 y : Real, (\226\136\131 m : Num, abs(x) == real_of_num(m)) && (\226\136\131 n : Num, abs(y) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(x + y) == real_of_num(p))) && (\226\136\128 x : Real, \226\136\128 y : Real, (\226\136\131 m : Num, abs(x) == real_of_num(m)) && (\226\136\131 n : Num, abs(y) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(x - y) == real_of_num(p))) && (\226\136\128 x : Real, \226\136\128 y : Real, (\226\136\131 m : Num, abs(x) == real_of_num(m)) && (\226\136\131 n : Num, abs(y) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(x * y) == real_of_num(p))) && (\226\136\128 x : Real, \226\136\128 r : Num, (\226\136\131 n : Num, abs(x) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(pow(x, r)) == real_of_num(p))) && (\226\136\128 x : Real, (\226\136\131 n : Num, abs(x) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(-x) == real_of_num(p))) && (\226\136\128 x : Real, (\226\136\131 n : Num, abs(x) == real_of_num(n)) \226\134\146 (\226\136\131 p : Num, abs(abs(x)) == real_of_num(p)))
   (a : Real) == poly([a], (x : Real))
   (x : Real) * poly((p : List[Real]), x) == poly(CONS(real_of_num(0), p), x)
-  op_plus
-  op_star
+  real_add
+  real_mul
   (cot : (Real) -> Real)((x : Real)) == cos(x) / sin(x)
   cot((x : Real)) == inv(tan(x))
   (r : Num)
@@ -6306,7 +6306,7 @@ CPU time (user): <t>
   (h : Real) * ((c : Real) * (s' : Real) - (s : Real) * (c' : Real)) * ((t : Real) * (s * c)) == t * h * (c * (c * (s * s')) - s * (s * (c * c')))
   real_of_num(2) * (sin((y : Real)) * cos(y))
   !integer((x : Real))
-  abs
+  real_abs
   ((a : Bool) && (b : Bool) || a && (c : Bool)) == (a && (b || c))
   ((a : Real) * ((b : Real) * (c : Real)) == (d : Real)) == (b * (a * c) == d)
   !(sin((y : Real)) == real_of_num(0)) && !(cos(y) == real_of_num(0))
@@ -6317,7 +6317,7 @@ CPU time (user): <t>
   ((h : Real) * ((c : Real) * (s' : Real)) + h * (-(s : Real) * (c' : Real))) * ((t : Real) * (s * c)) == t * h * (c * (c * (s * s')) - s * (s * (c * c')))
   real_of_num(2) * (sin((y : Real)) * cos(y))
   !integer((x : Real))
-  abs
+  real_abs
   ((a : Bool) && (b : Bool) || a && (c : Bool)) == (a && (b || c))
   ((a : Real) * ((b : Real) * (c : Real)) == (d : Real)) == (b * (a * c) == d)
   !(sin((y : Real)) == real_of_num(0)) && !(cos(y) == real_of_num(0))

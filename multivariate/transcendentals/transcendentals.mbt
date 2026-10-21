@@ -18574,7 +18574,7 @@ fn step_746() -> Unit raise {
   let t6388 = @term_syntax.parse_term("o(Cx, Re)")
   let t6389 = @term_syntax.parse_term("(z : Cart[Real, Tybit0[Unit]]) => cexp(ii * Cx(Im(z)))")
   let t6390 = @term_syntax.parse_term("o(Cx, Re)")
-  let t6391 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("op_star"), t6390, t6389, t6388, t6387, t6386]), @derivatives.has_derivative_bilinear_at()))
+  let t6391 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("complex_mul"), t6390, t6389, t6388, t6387, t6386]), @derivatives.has_derivative_bilinear_at()))
   let t6384 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@trivia.o_def()])), @tactics.disch_tac)
   let t6383 = @simp.rewrite_tac(@list.List([@canal.linear_cx_im()]))
   let t6382 = @simp.gen_rewrite_tac(fn(x6379 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {

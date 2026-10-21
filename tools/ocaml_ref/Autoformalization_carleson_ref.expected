@@ -82291,7 +82291,7 @@ Autoformalization/carleson quotations (19012):
   interval([(lift(-pi), lift(pi))])
   (t : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t))
   (t : Cart[Real, Unit]) => cexp(-(ii * (Cx(real_of_int((n : Int))) * Cx(drop(t)))))
-  op_star
+  complex_mul
   ((t : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(t)) * cexp(-(ii * (Cx(real_of_int((n : Int))) * Cx(drop(t)))))) == ((t : Cart[Real, Unit]) => cexp(-(ii * (Cx(real_of_int(n)) * Cx(drop(t))))) * g(drop(t)))
   \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Int, absolutely_integrable_on((t : Cart[Real, Unit]) => g(drop(t)), interval([(lift(-pi), lift(pi))])) \226\134\146 absolutely_integrable_on((t : Cart[Real, Unit]) => g(drop(t)) * cexp(-(ii * (Cx(real_of_int(n)) * Cx(drop(t))))), interval([(lift(-pi), lift(pi))]))
   (a : Real) == (b : Real) \226\134\146 (x : Real) <= a \226\134\146 x <= b
@@ -82438,7 +82438,7 @@ Autoformalization/carleson quotations (19012):
   interval([(lift(-pi), lift(pi))])
   (z : Cart[Real, Unit]) => (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
   (z : Cart[Real, Unit]) => Cx(dirichlet_kernel((N : Num), (t : Real) - drop(z)))
-  op_star
+  complex_mul
   (t : Real)
   (N : Num)
   continuous_on((z : Cart[Real, Unit]) => Cx(dirichlet_kernel((N : Num), (t : Real) - drop(z))), interval([(lift(-pi), lift(pi))]))
@@ -82908,13 +82908,13 @@ Autoformalization/carleson quotations (19012):
   (z : Cart[Real, Finite_sum[Unit, Unit]])
   (z : Cart[Real, Finite_sum[Unit, Unit]]) == (z0 : Cart[Real, Finite_sum[Unit, Unit]])
   (a : Real)
-  norm((z : Cart[Real, Finite_sum[Unit, Unit]]) - (z0 : Cart[Real, Finite_sum[Unit, Unit]])) == dist((z0, z))
+  norm((z : Cart[Real, Finite_sum[Unit, Unit]]) - (z0 : Cart[Real, Finite_sum[Unit, Unit]])) == distance((z0, z))
   \226\136\128 w : Cart[Real, Finite_sum[Unit, Unit]], op_dollar(w, 1) == drop(fstcart(w)) && op_dollar(w, 2) == drop(sndcart(w))
   2
   (z : Cart[Real, Finite_sum[Unit, Unit]]) - (z0 : Cart[Real, Finite_sum[Unit, Unit]])
   1
   (z : Cart[Real, Finite_sum[Unit, Unit]]) - (z0 : Cart[Real, Finite_sum[Unit, Unit]])
-  drop(fstcart((z : Cart[Real, Finite_sum[Unit, Unit]]))) < (a : Real) && real_of_num(0) < drop(sndcart(z)) && dist(((z0 : Cart[Real, Finite_sum[Unit, Unit]]), z)) < (d1 : Real)
+  drop(fstcart((z : Cart[Real, Finite_sum[Unit, Unit]]))) < (a : Real) && real_of_num(0) < drop(sndcart(z)) && distance(((z0 : Cart[Real, Finite_sum[Unit, Unit]]), z)) < (d1 : Real)
   (z : Cart[Real, Finite_sum[Unit, Unit]])
   min((d1 : Real), min(drop(sndcart((z0 : Cart[Real, Finite_sum[Unit, Unit]]))), (a : Real) - drop(fstcart(z0))))
   (d1 : Real)
@@ -87223,7 +87223,7 @@ Autoformalization/carleson quotations (19012):
   (UNIV : (Cart[Real, Unit]) -> Bool)
   (z : Cart[Real, Unit]) => cnj((g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)))
   (z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z))
-  op_star
+  complex_mul
   \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(f) && schwartz(g) \226\134\146 integrable_on((z : Cart[Real, Unit]) => f(drop(z)) * cnj(g(drop(z))), UNIV)
   inv(real_of_num(2)) + inv(real_of_num(2)) == real_of_num(1)
   real_of_num(0) < real_of_num(2)
@@ -93825,7 +93825,7 @@ Autoformalization/carleson quotations (19012):
   {inv(sqrt(real_of_num(2) * pi)) * norm(integral(IMAGE(lift, real_interval([((a : Real), (b : Real))])), (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) | a <= b}
   \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, (\226\136\131 B : Real, \226\136\128 a : Real, \226\136\128 b : Real, a <= b \226\134\146 inv(sqrt(real_of_num(2) * pi)) * norm(integral(IMAGE(lift, real_interval([(a, b)])), (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))) <= B) \226\134\146 real_of_num(0) <= carleson_Ahat(f, y)
   real_of_num((M : Num))
-  \226\136\128 sp : Cart[Real, Tybit0[Unit]], \226\136\128 sq : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e && norm(sp - c) <= e / real_of_num(3) && norm(sq - c) <= e / real_of_num(3) \226\134\146 dist((sp, sq)) < e
+  \226\136\128 sp : Cart[Real, Tybit0[Unit]], \226\136\128 sq : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e && norm(sp - c) <= e / real_of_num(3) && norm(sq - c) <= e / real_of_num(3) \226\134\146 distance((sp, sq)) < e
   :real
   :real
   (e : Real)
@@ -93842,7 +93842,7 @@ Autoformalization/carleson quotations (19012):
   (e : Real)
   (n : Num) => (II : (Real, Real) -> Cart[Real, Tybit0[Unit]])(-real_of_num(n), real_of_num(n))
   \226\136\128 II : (Real, Real) -> Cart[Real, Tybit0[Unit]], (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Real, real_of_num(0) <= N && (\226\136\128 a : Real, \226\136\128 b : Real, a <= -N && N <= b \226\134\146 norm(II(a, b) - II(-N, N)) <= e))) \226\134\146 (\226\136\131 z : Cart[Real, Tybit0[Unit]], op_minus_minus_gt((n : Num) => II(-real_of_num(n), real_of_num(n)), z, sequentially))
-  \226\136\128 sx : Cart[Real, Tybit0[Unit]], \226\136\128 sk : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, norm(sx - c) <= e / real_of_num(3) && norm(sk - c) <= e / real_of_num(3) && dist((sk, z)) < e / real_of_num(3) \226\134\146 dist((sx, z)) < e
+  \226\136\128 sx : Cart[Real, Tybit0[Unit]], \226\136\128 sk : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, norm(sx - c) <= e / real_of_num(3) && norm(sk - c) <= e / real_of_num(3) && distance((sk, z)) < e / real_of_num(3) \226\134\146 distance((sx, z)) < e
   :real
   :real
   :real
@@ -93854,7 +93854,7 @@ Autoformalization/carleson quotations (19012):
   norm((II : (Real, Real) -> Cart[Real, Tybit0[Unit]])(-(x : Real), x) - II(-(N : Real), N)) <= (e : Real) / real_of_num(3)
   norm((II : (Real, Real) -> Cart[Real, Tybit0[Unit]])(-real_of_num((K : Num) + (Mn : Num)), real_of_num(K + Mn)) - II(-(N : Real), N)) <= (e : Real) / real_of_num(3)
   (K : Num) + (Mn : Num)
-  dist(((II : (Real, Real) -> Cart[Real, Tybit0[Unit]])(-real_of_num((K : Num) + (Mn : Num)), real_of_num(K + Mn)), (z : Cart[Real, Tybit0[Unit]]))) < (e : Real) / real_of_num(3)
+  distance(((II : (Real, Real) -> Cart[Real, Tybit0[Unit]])(-real_of_num((K : Num) + (Mn : Num)), real_of_num(K + Mn)), (z : Cart[Real, Tybit0[Unit]]))) < (e : Real) / real_of_num(3)
   real_of_num((Mn : Num))
   (N : Real) <= real_of_num((K : Num) + (Mn : Num))
   (x : Real)
@@ -94010,7 +94010,7 @@ Autoformalization/carleson quotations (19012):
   (s : (Cart[Real, Unit]) -> Bool)
   (y : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(y))
   (y : Cart[Real, Unit]) => cexp(-(ii * (Cx((d : Real)) * Cx(drop(y)))))
-  op_star
+  complex_mul
   \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, \226\136\128 s : (Cart[Real, Unit]) -> Bool, measurable(s) && absolutely_integrable_on((z : Cart[Real, Unit]) => f(drop(z)), s) \226\134\146 absolutely_integrable_on((y : Cart[Real, Unit]) => cexp(-(ii * (Cx(d) * Cx(drop(y))))) * f(drop(y)), s)
   integrable_on((x : Cart[Real, Unit]) => if IN(x, interval([(lift(-(n : Real)), lift(n))])) { cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) } else { vec(0) }, interval([(lift((a : Real)), lift((b : Real)))]))
   SUBSET(interval([(lift(-(n : Real)), lift(n))]), interval([(lift((a : Real)), lift((b : Real)))]))
@@ -95408,7 +95408,7 @@ Autoformalization/carleson quotations (19012):
   (UNIV : (Cart[Real, Unit]) -> Bool)
   (u : Cart[Real, Unit]) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(u)) * Cx(carleson_theta((z : Real), drop(u)))
   (u : Cart[Real, Unit]) => cexp(-(ii * (Cx(-(x : Real)) * Cx(drop(u)))))
-  op_star
+  complex_mul
   -(x : Real)
   (y : Real) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), y) * Cx(carleson_theta((z : Real), y))
   abs(real_of_num(2) * pi) == real_of_num(2) * pi
@@ -95885,7 +95885,7 @@ Autoformalization/carleson quotations (19012):
   (UNIV : (Cart[Real, Unit]) -> Bool)
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (w : Cart[Real, Unit]) => cexp(ii * (Cx((t : Real)) * Cx(drop(w))))
-  op_star
+  complex_mul
   \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, absolutely_integrable_on(g, UNIV) \226\134\146 absolutely_integrable_on((w : Cart[Real, Unit]) => cexp(ii * (Cx(t) * Cx(drop(w)))) * g(w), UNIV)
   \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, sequentially) \226\134\146 op_minus_minus_minus_gt((m : Num) => norm(f(m)), norm(l), sequentially)
   \226\136\128 ff : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Real, fourier(ff, -x) == Cx(real_of_num(1) / sqrt(real_of_num(2) * pi)) * integral(UNIV, (w : Cart[Real, Unit]) => cexp(ii * (Cx(x) * Cx(drop(w)))) * ff(drop(w)))
@@ -96982,16 +96982,16 @@ Autoformalization/carleson quotations (19012):
   {(k : Int) | abs(k) <= int_of_num((K : Num))}
   \226\136\128 j : Num, vsum({(k : Int) | abs(k) <= int_of_num((K : Num))}, (k : Int) => vsum({(nI : Int) | abs(nI) <= int_of_num((N : Num))}, (nI : Int) => if (Q : (Num, Int) -> Bool)(j, k) { (gg : (Num, Int, Int) -> Cart[Real, Tybit0[Unit]])(j, k, nI) } else { vec(0) })) == vsum({((k : Int), (nI : Int)) | abs(k) <= int_of_num(K) && abs(nI) <= int_of_num(N)}, GABS((f : ((Int, Int)) -> Cart[Real, Tybit0[Unit]]) => \226\136\128 k : Int, \226\136\128 nI : Int, GEQ(f((k, nI)), if Q(j, k) { gg(j, k, nI) } else { vec(0) })))
   \226\136\128 gg : (Num, Int, Int) -> Cart[Real, Tybit0[Unit]], \226\136\128 Q : (Num, Int) -> Bool, \226\136\128 n : Num, \226\136\128 K : Num, \226\136\128 N : Num, vsum({(j : Num) | j <= n}, (j : Num) => vsum({(k : Int) | abs(k) <= int_of_num(K)}, (k : Int) => if Q(j, k) { vsum({(nI : Int) | abs(nI) <= int_of_num(N)}, (nI : Int) => gg(j, k, nI)) } else { vec(0) })) == vsum({((j : Num), (k : Int), (nI : Int)) | j <= n && abs(k) <= int_of_num(K) && abs(nI) <= int_of_num(N)}, GABS((f : ((Num, Int, Int)) -> Cart[Real, Tybit0[Unit]]) => \226\136\128 j : Num, \226\136\128 k : Int, \226\136\128 nI : Int, GEQ(f((j, k, nI)), if Q(j, k) { gg(j, k, nI) } else { vec(0) })))
-  abs(dist(((x : Cart[Real, N]), (y : Cart[Real, N])))) == dist((x, y))
-  \226\136\128 a : (Num) -> Cart[Real, N], \226\136\128 L : Cart[Real, N], op_minus_minus_gt(a, L, sequentially) == op_minus_minus_minus_gt((m : Num) => dist((a(m), L)), real_of_num(0), sequentially)
+  abs(distance(((x : Cart[Real, N]), (y : Cart[Real, N])))) == distance((x, y))
+  \226\136\128 a : (Num) -> Cart[Real, N], \226\136\128 L : Cart[Real, N], op_minus_minus_gt(a, L, sequentially) == op_minus_minus_minus_gt((m : Num) => distance((a(m), L)), real_of_num(0), sequentially)
   (m : Num)
   (L : Cart[Real, N])
   (a : (Num) -> Cart[Real, N])((m : Num))
   (b : (Num, Num) -> Cart[Real, N])((m : Num), (nfun : (Num) -> Num)(m))
-  abs(dist(((b : (Num, Num) -> Cart[Real, N])((m : Num), (nfun : (Num) -> Num)(m)), (L : Cart[Real, N])))) == dist((b(m, nfun(m)), L))
+  abs(distance(((b : (Num, Num) -> Cart[Real, N])((m : Num), (nfun : (Num) -> Num)(m)), (L : Cart[Real, N])))) == distance((b(m, nfun(m)), L))
   (m : Num)
   0
-  (m : Num) => inv(real_of_num(m) + real_of_num(1)) + dist(((a : (Num) -> Cart[Real, N])(m), (L : Cart[Real, N])))
+  (m : Num) => inv(real_of_num(m) + real_of_num(1)) + distance(((a : (Num) -> Cart[Real, N])(m), (L : Cart[Real, N])))
   (nfun : (Num) -> Num)
   (nfun : (Num) -> Num)
   (N : Num)
@@ -96999,7 +96999,7 @@ Autoformalization/carleson quotations (19012):
   inv(real_of_num((m : Num)) + real_of_num(1))
   (m : Num)
   (m : Num)
-  \226\136\128 m : Num, \226\136\131 N : Num, dist(((b : (Num, Num) -> Cart[Real, N])(m, N), (a : (Num) -> Cart[Real, N])(m))) < inv(real_of_num(m) + real_of_num(1))
+  \226\136\128 m : Num, \226\136\131 N : Num, distance(((b : (Num, Num) -> Cart[Real, N])(m, N), (a : (Num) -> Cart[Real, N])(m))) < inv(real_of_num(m) + real_of_num(1))
   \226\136\128 b : (Num, Num) -> Cart[Real, N], \226\136\128 a : (Num) -> Cart[Real, N], \226\136\128 L : Cart[Real, N], op_minus_minus_gt(a, L, sequentially) && (\226\136\128 m : Num, op_minus_minus_gt((N : Num) => b(m, N), a(m), sequentially)) \226\134\146 (\226\136\131 nfun : (Num) -> Num, op_minus_minus_gt((m : Num) => b(m, nfun(m)), L, sequentially))
   (nfun : (Num) -> Num)
   carleson_Ahat_trunc((f : (Real) -> Cart[Real, Tybit0[Unit]]), (n : Real), (y : Real)) <= inv(sqrt(real_of_num(2) * pi)) * drop(integral(IMAGE(lift, real_interval([(-n, n)])), (x : Cart[Real, Unit]) => lift(norm(f(drop(x))))))
@@ -98610,7 +98610,7 @@ Autoformalization/carleson quotations (19012):
   (UNIV : (Cart[Real, Unit]) -> Bool)
   (u : Cart[Real, Unit]) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(u)) * Cx((g : (Real) -> Real)(drop(u)))
   (u : Cart[Real, Unit]) => cexp(-(ii * (Cx(-(x : Real)) * Cx(drop(u)))))
-  op_star
+  complex_mul
   -(x : Real)
   (y : Real) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), y) * Cx((g : (Real) -> Real)(y))
   abs(real_of_num(2) * pi) == real_of_num(2) * pi
@@ -100657,7 +100657,7 @@ Autoformalization/carleson quotations (19012):
   (s : (Cart[Real, Unit]) -> Bool)
   (G : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((d : Real)) * Cx(drop(x)))))
-  op_star
+  complex_mul
   \226\136\128 G : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, \226\136\128 s : (Cart[Real, Unit]) -> Bool, lebesgue_measurable(s) && absolutely_integrable_on(G, s) \226\134\146 absolutely_integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(d) * Cx(drop(x))))) * G(x), s)
   ((x : Cart[Real, Unit]) => lift(norm((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) - (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))))) == ((x : Cart[Real, Unit]) => lift(norm(((z : Cart[Real, Unit]) => f(drop(z)) - g(drop(z)))(x))))
   ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * ((f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)) - (g : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) == ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)) - cexp(-(ii * (Cx(y) * Cx(drop(x))))) * g(drop(x)))
@@ -100935,7 +100935,7 @@ Autoformalization/carleson quotations (19012):
   real_of_num(0) == inv(pow((e : Real), 2)) * real_of_num(0)
   ((n : Num) => pow(lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => (dn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n, x) - (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)), 2) / pow((e : Real), 2)) == ((n : Num) => inv(pow(e, 2)) * pow(lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => dn(n, x) - g(x)), 2))
   op_minus_minus_minus_gt((n : Num) => pow(lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => (dn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(n, x) - (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)), 2) / pow((e : Real), 2), real_of_num(0), sequentially)
-  \226\136\128 dn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, IN(dn(n), lspace(UNIV, real_of_num(2)))) && IN(g, lspace(UNIV, real_of_num(2))) && op_minus_minus_minus_gt((n : Num) => lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => dn(n, x) - g(x)), real_of_num(0), sequentially) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((n : Num) => \226\136\131 t : (Cart[Real, Unit]) -> Bool, SUBSET({(x : Cart[Real, Unit]) | IN(x, UNIV) && dist((dn(n, x), g(x))) >= e}, t) && measurable(t) && measure(t) < e, sequentially))
+  \226\136\128 dn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, IN(dn(n), lspace(UNIV, real_of_num(2)))) && IN(g, lspace(UNIV, real_of_num(2))) && op_minus_minus_minus_gt((n : Num) => lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => dn(n, x) - g(x)), real_of_num(0), sequentially) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((n : Num) => \226\136\131 t : (Cart[Real, Unit]) -> Bool, SUBSET({(x : Cart[Real, Unit]) | IN(x, UNIV) && distance((dn(n, x), g(x))) >= e}, t) && measurable(t) && measure(t) < e, sequentially))
   (N : Num)
   (x : Cart[Real, Unit])
   op_minus_minus_gt((n : Num) => (dn : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((r : (Num) -> Num)(n), (x : Cart[Real, Unit])), (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), sequentially)

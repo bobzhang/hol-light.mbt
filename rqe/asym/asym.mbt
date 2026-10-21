@@ -3202,7 +3202,7 @@ fn step_84() -> Unit raise {
   let t1619 = @meson.asm_meson_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul()]))
   let t1620 = @simp.rewrite_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul()]))
   let t1621 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul()])), t1620, @rewrites.real_simp_tac, @tactics.ap_term_tac, t1619])
-  poly_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], neg(neg(p)) == p"), t1621))
+  poly_neg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], poly_neg(poly_neg(p)) == p"), t1621))
 }
 
 ///|
@@ -3228,7 +3228,7 @@ fn step_85() -> Unit raise {
   let t1629 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1630 = @simp.rewrite_tac(@list.List([pneg_aux()]))
   let t1631 = @list.List([@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([pneg_aux(), @poly.poly_neg(), @poly.poly_cmul()])), t1630, t1629, t1628, t1627, @rewrites.real_simp_tac, @tactics.ap_term_tac, t1626, t1625, t1624, t1623])
-  poly_pneg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], ∀ n : Num, neg(pneg_aux(SUC(n), p)) == pneg_aux(n, p)"), t1631))
+  poly_pneg_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], ∀ n : Num, poly_neg(pneg_aux(SUC(n), p)) == pneg_aux(n, p)"), t1631))
 }
 
 ///|
@@ -3372,7 +3372,7 @@ fn step_91() -> Unit raise {
   let t1674 = @simp.rewrite_tac(@list.List([poly_pneg_aux_suc()]))
   let t1675 = @simp.once_rewrite_tac(@list.List([@equal.gsym(poly_pneg_neg())]))
   let t1676 = @list.List([@simp.rewrite_tac(@list.List([pneg(), pneg_aux()])), @rewrites.real_simp_tac, t1675, t1674, t1673, t1672, t1671, t1670, t1669, t1668])
-  pneg_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : _, pneg(CONS((h : Real), (t : List[Real]))) == CONS(h, neg(pneg(t)))"), t1676))
+  pneg_cons_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : _, pneg(CONS((h : Real), (t : List[Real]))) == CONS(h, poly_neg(pneg(t)))"), t1676))
 }
 
 ///|
@@ -3436,7 +3436,7 @@ pub fn poly_cmul_nil() -> @kernel.Thm {
 /// POLY_NEG_NIL
 fn step_95() -> Unit raise {
   let t1680 = @list.List([@tactics.then_tac(@lists.list_induct_tac, @meson.meson_tac(@list.List([@poly.poly_neg(), @poly.poly_cmul(), @lists.not_cons_nil()])))])
-  poly_neg_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], (neg(p) == NIL) == (p == NIL)"), t1680))
+  poly_neg_nil_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], (poly_neg(p) == NIL) == (p == NIL)"), t1680))
 }
 
 ///|
@@ -3465,7 +3465,7 @@ fn step_96() -> Unit raise {
   let t1691 = @rqe_tactics_ext.cases_on(@term_syntax.parse_term("(t : List[_]) == NIL"))
   let t1692 = @tactics.disch_then(@rqe_tactics_ext.ignore_)
   let t1693 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([])), t1692, t1691, t1690, @calc_rat.real_arith_tac, t1689, t1688, t1687, t1686, @tactics.strip_tac, t1685, t1684])
-  neg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], !(p == NIL) → LAST(neg(p)) == -LAST(p)"), t1693))
+  neg_last_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : List[Real], !(p == NIL) → LAST(poly_neg(p)) == -LAST(p)"), t1693))
 }
 
 ///|
@@ -3483,7 +3483,7 @@ fn step_97() -> Unit raise {
   let t1703 = @simp.asm_simp_tac(@list.List([neg_last(), pneg_nil()]))
   let t1704 = @simp.asm_simp_tac(@list.List([@rqe_list.last_cons()]))
   let t1705 = @meson.asm_meson_tac(@list.List([poly_neg_nil(), pneg_nil()]))
-  let t1706 = @rqe_tactics_ext.claim(@term_syntax.parse_term("!(neg(pneg((t : List[Real]))) == NIL)"))
+  let t1706 = @rqe_tactics_ext.claim(@term_syntax.parse_term("!(poly_neg(pneg((t : List[Real]))) == NIL)"))
   let t1707 = @simp.rewrite_tac(@list.List([pneg_cons()]))
   let t1708 = @simp.asm_simp_tac(@list.List([@rqe_list.last_cons()]))
   let t1709 = @tactics.disch_then(fn(x1700 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3501,7 +3501,7 @@ fn step_97() -> Unit raise {
   let t1717 = @meson.asm_meson_tac(@list.List([neg_last(), pneg_nil()]))
   let t1718 = @simp.asm_simp_tac(@list.List([@rqe_list.last_cons()]))
   let t1719 = @meson.asm_meson_tac(@list.List([poly_neg_nil(), pneg_nil()]))
-  let t1720 = @rqe_tactics_ext.claim(@term_syntax.parse_term("!(neg(pneg((t : List[Real]))) == NIL)"))
+  let t1720 = @rqe_tactics_ext.claim(@term_syntax.parse_term("!(poly_neg(pneg((t : List[Real]))) == NIL)"))
   let t1721 = @simp.rewrite_tac(@list.List([pneg_cons()]))
   let t1722 = @simp.asm_simp_tac(@list.List([@rqe_list.last_cons()]))
   let t1723 = @tactics.disch_then(fn(x1697 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
