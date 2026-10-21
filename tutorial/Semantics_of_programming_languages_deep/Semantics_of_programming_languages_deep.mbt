@@ -93,31 +93,31 @@ fn step_5() -> Unit raise {
 ///|
 /// Tutorial/Semantics_of_programming_languages_deep.ml:18
 fn step_6() -> Unit raise {
-  @preterm.override_interface(";;", @parser.parse_term("Sequence"))
+  @preterm.override_interface(";;", @term_syntax.parse_term("Sequence"))
 }
 
 ///|
 /// Tutorial/Semantics_of_programming_languages_deep.ml:19
 fn step_7() -> Unit raise {
-  @preterm.override_interface(":=", @parser.parse_term("Assign"))
+  @preterm.override_interface(":=", @term_syntax.parse_term("Assign"))
 }
 
 ///|
 /// Tutorial/Semantics_of_programming_languages_deep.ml:20
 fn step_8() -> Unit raise {
-  @preterm.overload_interface("+", @parser.parse_term("Plus"))
+  @preterm.overload_interface("+", @term_syntax.parse_term("Plus"))
 }
 
 ///|
 /// Tutorial/Semantics_of_programming_languages_deep.ml:21
 fn step_9() -> Unit raise {
-  @preterm.overload_interface("*", @parser.parse_term("Times"))
+  @preterm.overload_interface("*", @term_syntax.parse_term("Times"))
 }
 
 ///|
 /// value
 fn step_10() -> Unit raise {
-  value_c.set(@define.define_(@parser.parse_term("(value (Literal n) s = n) /\\\n  (value (Variable x) s = s(x)) /\\\n  (value (e1 + e2) s = value e1 s + value e2 s) /\\\n  (value (e1 * e2) s = value e1 s * value e2 s)")))
+  value_c.set(@define.define_(@term_syntax.parse_term("(value : (Expression, (List[Char]) -> Num) -> Num)(Literal((n : Num)), (s : (List[Char]) -> Num)) == n && value(Variable((x : List[Char])), s) == s(x) && value((e1 : Expression) + (e2 : Expression), s) == value(e1, s) + value(e2, s) && value(e1 * e2, s) == value(e1, s) * value(e2, s)")))
 }
 
 ///|
@@ -159,7 +159,7 @@ pub fn sem_cases() -> @kernel.Thm {
 ///|
 /// sem_RULES, sem_INDUCT, sem_CASES
 fn step_11() -> Unit raise {
-  let (sem_rules, sem_induct, sem_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall x e s s'. s'(x) = value e s /\\ (forall y. ~(y = x) ==> s'(y) = s(y))\n               ==> sem (x := e) s s') /\\\n   (forall c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s'' ==> sem(c1 ;; c2) s s'') /\\\n   (forall e c1 c2 s s'. ~(value e s = 0) /\\ sem(c1) s s' ==> sem(If e c1 c2) s s') /\\\n   (forall e c1 c2 s s'. value e s = 0 /\\ sem(c2) s s' ==> sem(If e c1 c2) s s') /\\\n   (forall e c s. value e s = 0 ==> sem(While e c) s s) /\\\n   (forall e c s s' s''. ~(value e s = 0) /\\ sem(c) s s' /\\ sem(While e c) s' s''\n                   ==> sem(While e c) s s'')"))
+  let (sem_rules, sem_induct, sem_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ x : List[Char], ∀ e : Expression, ∀ s : (List[Char]) -> Num, ∀ s' : (List[Char]) -> Num, s'(x) == value(e, s) && (∀ y : List[Char], !(y == x) → s'(y) == s(y)) → (sem : (Command, (List[Char]) -> Num, (List[Char]) -> Num) -> Bool)(Assign(x, e), s, s')) && (∀ c1 : Command, ∀ c2 : Command, ∀ s : (List[Char]) -> Num, ∀ s' : (List[Char]) -> Num, ∀ s'' : (List[Char]) -> Num, sem(c1, s, s') && sem(c2, s', s'') → sem(Sequence(c1, c2), s, s'')) && (∀ e : Expression, ∀ c1 : Command, ∀ c2 : Command, ∀ s : (List[Char]) -> Num, ∀ s' : (List[Char]) -> Num, !(value(e, s) == 0) && sem(c1, s, s') → sem(If(e, c1, c2), s, s')) && (∀ e : Expression, ∀ c1 : Command, ∀ c2 : Command, ∀ s : (List[Char]) -> Num, ∀ s' : (List[Char]) -> Num, value(e, s) == 0 && sem(c2, s, s') → sem(If(e, c1, c2), s, s')) && (∀ e : Expression, ∀ c : Command, ∀ s : (List[Char]) -> Num, value(e, s) == 0 → sem(While(e, c), s, s)) && (∀ e : Expression, ∀ c : Command, ∀ s : (List[Char]) -> Num, ∀ s' : (List[Char]) -> Num, ∀ s'' : (List[Char]) -> Num, !(value(e, s) == 0) && sem(c, s, s') && sem(While(e, c), s', s'') → sem(While(e, c), s, s''))"))
   sem_rules_c.set(sem_rules)
   sem_induct_c.set(sem_induct)
   sem_cases_c.set(sem_cases)
@@ -177,7 +177,7 @@ fn step_12() -> Unit raise {
   let t2 = @tactics.repeat_tac(@tactics.conj_tac)
   let t1 = @tactics.match_mp_tac(sem_induct())
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()])), t1), t2), t3), @tactics.disch_tac), t4), t6), t7), t8)
-  determinism_c.set(@tactics.prove(@parser.parse_term("forall c s s' s''. sem c s s' /\\ sem c s s'' ==> (s' = s'')"), t9))
+  determinism_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Command, ∀ s : (List[Char]) -> Num, ∀ s' : (List[Char]) -> Num, ∀ s'' : (List[Char]) -> Num, sem(c, s, s') && sem(c, s, s'') → s' == s''"), t9))
 }
 
 ///|
@@ -192,7 +192,7 @@ pub fn determinism() -> @kernel.Thm {
 ///|
 /// wlp
 fn step_13() -> Unit raise {
-  wlp_c.set(@pair.new_definition(@parser.parse_term("wlp c q s <=> forall s'. sem c s s' ==> q s'")))
+  wlp_c.set(@pair.new_definition(@term_syntax.parse_term("(wlp : (Command, ((List[Char]) -> Num) -> Bool, (List[Char]) -> Num) -> Bool)((c : Command), (q : ((List[Char]) -> Num) -> Bool), (s : (List[Char]) -> Num)) == (∀ s' : (List[Char]) -> Num, sem(c, s, s') → q(s'))")))
 }
 
 ///|
@@ -207,7 +207,7 @@ pub fn wlp() -> @kernel.Thm {
 ///|
 /// terminates
 fn step_14() -> Unit raise {
-  terminates_c.set(@pair.new_definition(@parser.parse_term("terminates c s <=> ?s'. sem c s s'")))
+  terminates_c.set(@pair.new_definition(@term_syntax.parse_term("(terminates : (Command, (List[Char]) -> Num) -> Bool)((c : Command), (s : (List[Char]) -> Num)) == (∃ s' : (List[Char]) -> Num, sem(c, s, s'))")))
 }
 
 ///|
@@ -222,7 +222,7 @@ pub fn terminates() -> @kernel.Thm {
 ///|
 /// wp
 fn step_15() -> Unit raise {
-  wp_c.set(@pair.new_definition(@parser.parse_term("wp c q s <=> terminates c s /\\ wlp c q s")))
+  wp_c.set(@pair.new_definition(@term_syntax.parse_term("(wp : (Command, ((List[Char]) -> Num) -> Bool, (List[Char]) -> Num) -> Bool)((c : Command), (q : ((List[Char]) -> Num) -> Bool), (s : (List[Char]) -> Num)) == (terminates(c, s) && wlp(c, q, s))")))
 }
 
 ///|
@@ -239,7 +239,7 @@ pub fn wp() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), @sets.empty()])), t10)
-  wp_total_c.set(@tactics.prove(@parser.parse_term("forall c. (wp c EMPTY = EMPTY)"), t11))
+  wp_total_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Command, wp(c, {}) == {}"), t11))
 }
 
 ///|
@@ -256,7 +256,7 @@ pub fn wp_total() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t12 = @meson.meson_tac(@list.List([]))
   let t13 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), wp(), wlp(), terminates()])), t12)
-  wp_monotonic_c.set(@tactics.prove(@parser.parse_term("q SUBSET r ==> wp c q SUBSET wp c r"), t13))
+  wp_monotonic_c.set(@tactics.prove(@term_syntax.parse_term("SUBSET((q : ((List[Char]) -> Num) -> Bool), (r : ((List[Char]) -> Num) -> Bool)) → SUBSET(wp((c : Command), q), wp(c, r))"), t13))
 }
 
 ///|
@@ -273,7 +273,7 @@ pub fn wp_monotonic() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([determinism()]))
   let t15 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @sets.in_(), wp(), wlp(), @sets.in_elim_thm(), @sets.union(), terminates()])), t14)
-  wp_disjunctive_c.set(@tactics.prove(@parser.parse_term("(wp c p) UNION (wp c q) = wp c (p UNION q)"), t15))
+  wp_disjunctive_c.set(@tactics.prove(@term_syntax.parse_term("UNION(wp((c : Command), (p : ((List[Char]) -> Num) -> Bool)), wp(c, (q : ((List[Char]) -> Num) -> Bool))) == wp(c, UNION(p, q))"), t15))
 }
 
 ///|
@@ -306,7 +306,7 @@ fn step_19() -> Unit raise {
   }, @list.List([sem_cases()]))
   let t16 = @tactics.repeat_tac(@tactics.gen_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([wp(), wlp(), terminates(), @class.fun_eq_thm(), @trivia.o_thm()])), t16), t24), t26), t27)
-  wp_seq_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 q. wp (c1 ;; c2) = wp c1 o wp c2"), t28))
+  wp_seq_c.set(@tactics.prove(@term_syntax.parse_term("∀ c1 : Command, ∀ c2 : Command, ∀ q : _, wp(Sequence(c1, c2)) == o(wp(c1), wp(c2))"), t28))
 }
 
 ///|
@@ -321,7 +321,7 @@ pub fn wp_seq() -> @kernel.Thm {
 ///|
 /// correct
 fn step_20() -> Unit raise {
-  correct_c.set(@pair.new_definition(@parser.parse_term("correct p c q <=> p SUBSET (wp c q)")))
+  correct_c.set(@pair.new_definition(@term_syntax.parse_term("(correct : (((List[Char]) -> Num) -> Bool, Command, ((List[Char]) -> Num) -> Bool) -> Bool)((p : ((List[Char]) -> Num) -> Bool), (c : Command), (q : ((List[Char]) -> Num) -> Bool)) == SUBSET(p, wp(c, q))")))
 }
 
 ///|
@@ -337,7 +337,7 @@ pub fn correct() -> @kernel.Thm {
 /// CORRECT_PRESTRENGTH
 fn step_21() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([correct(), @sets.subset_trans()]))
-  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q"), t29))
+  correct_prestrength_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((List[Char]) -> Num) -> Bool, ∀ p' : ((List[Char]) -> Num) -> Bool, ∀ c : Command, ∀ q : ((List[Char]) -> Num) -> Bool, SUBSET(p, p') && correct(p', c, q) → correct(p, c, q)"), t29))
 }
 
 ///|
@@ -354,7 +354,7 @@ pub fn correct_prestrength() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t30 = @meson.meson_tac(@list.List([wp_monotonic(), @sets.subset_trans()]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct()])), t30)
-  correct_postweak_c.set(@tactics.prove(@parser.parse_term("forall p c q q'. correct p c q' /\\ q' SUBSET q ==> correct p c q"), t31))
+  correct_postweak_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((List[Char]) -> Num) -> Bool, ∀ c : Command, ∀ q : ((List[Char]) -> Num) -> Bool, ∀ q' : ((List[Char]) -> Num) -> Bool, correct(p, c, q') && SUBSET(q', q) → correct(p, c, q)"), t31))
 }
 
 ///|
@@ -371,7 +371,7 @@ pub fn correct_postweak() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t32 = @meson.meson_tac(@list.List([wp_monotonic(), @sets.subset_trans()]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), wp_seq(), @trivia.o_thm()])), t32)
-  correct_seq_c.set(@tactics.prove(@parser.parse_term("forall p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 ;; c2) q"), t33))
+  correct_seq_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((List[Char]) -> Num) -> Bool, ∀ q : ((List[Char]) -> Num) -> Bool, ∀ r : ((List[Char]) -> Num) -> Bool, ∀ c1 : Command, ∀ c2 : Command, correct(p, c1, r) && correct(r, c2, q) → correct(p, Sequence(c1, c2), q)"), t33))
 }
 
 ///|
