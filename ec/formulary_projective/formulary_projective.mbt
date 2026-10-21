@@ -3,7 +3,7 @@
 ///|
 /// pr_dbl_2007_bl
 fn step_1() -> Unit raise {
-  pr_dbl_2007_bl_c.set(@pair.new_definition(@parser.parse_term("pr_dbl_2007_bl (f:A ring,a:A,b:A) (x1,y1,z1) =\n      let xx = ring_pow f x1 2 in\n      let zz = ring_pow f z1 2 in\n      let t0 = ring_mul f (ring_of_num f 3) xx in\n      let t1 = ring_mul f a zz in\n      let w = ring_add f t1 t0 in\n      let t2 = ring_mul f y1 z1 in\n      let s = ring_mul f (ring_of_num f 2) t2 in\n      let ss = ring_pow f s 2 in\n      let sss = ring_mul f s ss in\n      let r = ring_mul f y1 s in\n      let rr = ring_pow f r 2 in\n      let t3 = ring_add f x1 r in\n      let t4 = ring_pow f t3 2 in\n      let t5 = ring_sub f t4 xx in\n      let b = ring_sub f t5 rr in\n      let t6 = ring_pow f w 2 in\n      let t7 = ring_mul f (ring_of_num f 2) b in\n      let h = ring_sub f t6 t7 in\n      let x3 = ring_mul f h s in\n      let t8 = ring_sub f b h in\n      let t9 = ring_mul f (ring_of_num f 2) rr in\n      let t10 = ring_mul f w t8 in\n      let y3 = ring_sub f t10 t9 in\n      let z3 = sss in\n      (x3,y3,z3)")))
+  pr_dbl_2007_bl_c.set(@pair.new_definition(@term_syntax.parse_term("(pr_dbl_2007_bl : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A))) == LET((xx : A) => LET_END(LET((zz : A) => LET_END(LET((t0 : A) => LET_END(LET((t1 : A) => LET_END(LET((w : A) => LET_END(LET((t2 : A) => LET_END(LET((s : A) => LET_END(LET((ss : A) => LET_END(LET((sss : A) => LET_END(LET((r : A) => LET_END(LET((rr : A) => LET_END(LET((t3 : A) => LET_END(LET((t4 : A) => LET_END(LET((t5 : A) => LET_END(LET((b : A) => LET_END(LET((t6 : A) => LET_END(LET((t7 : A) => LET_END(LET((h : A) => LET_END(LET((x3 : A) => LET_END(LET((t8 : A) => LET_END(LET((t9 : A) => LET_END(LET((t10 : A) => LET_END(LET((y3 : A) => LET_END(LET((z3 : A) => LET_END((x3, y3, z3)), sss)), ring_sub(f, t10, t9))), ring_mul(f, w, t8))), ring_mul(f, ring_of_num(f, 2), rr))), ring_sub(f, b, h))), ring_mul(f, h, s))), ring_sub(f, t6, t7))), ring_mul(f, ring_of_num(f, 2), b))), ring_pow(f, w, 2))), ring_sub(f, t5, rr))), ring_sub(f, t4, xx))), ring_pow(f, t3, 2))), ring_add(f, x1, r))), ring_pow(f, r, 2))), ring_mul(f, y1, s))), ring_mul(f, s, ss))), ring_pow(f, s, 2))), ring_mul(f, ring_of_num(f, 2), t2))), ring_mul(f, y1, z1))), ring_add(f, t1, t0))), ring_mul(f, a, zz))), ring_mul(f, ring_of_num(f, 3), xx))), ring_pow(f, z1, 2))), ring_pow(f, x1, 2))")))
 }
 
 ///|
@@ -21,11 +21,11 @@ fn step_2() -> Unit raise {
   let t6 = @simp.asm_simp_tac(@list.List([@ringtheory.field_imp_integral_domain()]))
   let t5 = @simp.asm_rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def(), @pair.pair_eq(), @projective.projective_eq()]))
   let t4 = @simp.asm_rewrite_tac(@list.List([@projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
-  let t3 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
+  let t3 = @class.asm_cases_tac(@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"))
   let t2 = @simp.rewrite_tac(@list.List([pr_dbl_2007_bl(), @projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
   let t1 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @tactics.strip_tac), t2), t3), t4), t5), @ringtheory.field_tac), t6)
-  pr_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (pr_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                          (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t7))
+  pr_dbl_2007_bl_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x1 : A, ∀ y1 : A, ∀ z1 : A, field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, (x1, y1, z1)) → projective_eq(f, pr_dbl_2007_bl((f, a, b), (x1, y1, z1)), projective_add((f, a, b), (x1, y1, z1), (x1, y1, z1)))"), t7))
 }
 
 ///|
@@ -40,7 +40,7 @@ pub fn pr_dbl_2007_bl_v1() -> @kernel.Thm {
 ///|
 /// p3_dbl_2007_bl_2
 fn step_3() -> Unit raise {
-  p3_dbl_2007_bl_2_c.set(@pair.new_definition(@parser.parse_term("p3_dbl_2007_bl_2 (f:A ring,a:A,b:A) (x1,y1,z1) =\n      let t0 = ring_sub f x1 z1 in\n      let t1 = ring_add f x1 z1 in\n      let t2 = ring_mul f t0 t1 in\n      let w = ring_mul f (ring_of_num f 3) t2 in\n      let t3 = ring_mul f y1 z1 in\n      let s = ring_mul f (ring_of_num f 2) t3 in\n      let ss = ring_pow f s 2 in\n      let sss = ring_mul f s ss in\n      let r = ring_mul f y1 s in\n      let rr = ring_pow f r 2 in\n      let t4 = ring_mul f x1 r in\n      let b = ring_mul f (ring_of_num f 2) t4 in\n      let t5 = ring_pow f w 2 in\n      let t6 = ring_mul f (ring_of_num f 2) b in\n      let h = ring_sub f t5 t6 in\n      let x3 = ring_mul f h s in\n      let t7 = ring_sub f b h in\n      let t8 = ring_mul f (ring_of_num f 2) rr in\n      let t9 = ring_mul f w t7 in\n      let y3 = ring_sub f t9 t8 in\n      let z3 = sss in\n      (x3,y3,z3)")))
+  p3_dbl_2007_bl_2_c.set(@pair.new_definition(@term_syntax.parse_term("(p3_dbl_2007_bl_2 : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A))) == LET((t0 : A) => LET_END(LET((t1 : A) => LET_END(LET((t2 : A) => LET_END(LET((w : A) => LET_END(LET((t3 : A) => LET_END(LET((s : A) => LET_END(LET((ss : A) => LET_END(LET((sss : A) => LET_END(LET((r : A) => LET_END(LET((rr : A) => LET_END(LET((t4 : A) => LET_END(LET((b : A) => LET_END(LET((t5 : A) => LET_END(LET((t6 : A) => LET_END(LET((h : A) => LET_END(LET((x3 : A) => LET_END(LET((t7 : A) => LET_END(LET((t8 : A) => LET_END(LET((t9 : A) => LET_END(LET((y3 : A) => LET_END(LET((z3 : A) => LET_END((x3, y3, z3)), sss)), ring_sub(f, t9, t8))), ring_mul(f, w, t7))), ring_mul(f, ring_of_num(f, 2), rr))), ring_sub(f, b, h))), ring_mul(f, h, s))), ring_sub(f, t5, t6))), ring_mul(f, ring_of_num(f, 2), b))), ring_pow(f, w, 2))), ring_mul(f, ring_of_num(f, 2), t4))), ring_mul(f, x1, r))), ring_pow(f, r, 2))), ring_mul(f, y1, s))), ring_mul(f, s, ss))), ring_pow(f, s, 2))), ring_mul(f, ring_of_num(f, 2), t3))), ring_mul(f, y1, z1))), ring_mul(f, ring_of_num(f, 3), t2))), ring_mul(f, t0, t1))), ring_add(f, x1, z1))), ring_sub(f, x1, z1))")))
 }
 
 ///|
@@ -58,7 +58,7 @@ fn step_4() -> Unit raise {
   let t17 = @simp.asm_simp_tac(@list.List([@ringtheory.field_imp_integral_domain()]))
   let t16 = @simp.asm_rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def(), @pair.pair_eq(), @projective.projective_eq()]))
   let t15 = @simp.asm_rewrite_tac(@list.List([@projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
-  let t14 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
+  let t14 = @class.asm_cases_tac(@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"))
   let t13 = @simp.rewrite_tac(@list.List([p3_dbl_2007_bl_2(), @projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
   let t12 = @tactics.first_x_assum(fn(x9 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10 = @tactics.subst_all_tac(x9)
@@ -68,7 +68,7 @@ fn step_4() -> Unit raise {
   })
   let t8 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t8), @tactics.strip_tac), t12), t13), t14), t15), t16), @ringtheory.field_tac), t17)
-  p3_dbl_2007_bl_2_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_of_int f (-- &3) /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (p3_dbl_2007_bl_2 (f,a,b) (x1,y1,z1))\n                            (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t18))
+  p3_dbl_2007_bl_2_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x1 : A, ∀ y1 : A, ∀ z1 : A, field(f) && a == ring_of_int(f, -int_of_num(3)) && IN(b, ring_carrier(f)) && projective_point(f, (x1, y1, z1)) → projective_eq(f, p3_dbl_2007_bl_2((f, a, b), (x1, y1, z1)), projective_add((f, a, b), (x1, y1, z1), (x1, y1, z1)))"), t18))
 }
 
 ///|
@@ -83,7 +83,7 @@ pub fn p3_dbl_2007_bl_2_v1() -> @kernel.Thm {
 ///|
 /// p0_dbl_2007_bl
 fn step_5() -> Unit raise {
-  p0_dbl_2007_bl_c.set(@pair.new_definition(@parser.parse_term("p0_dbl_2007_bl (f:A ring,a:A,b:A) (x1,y1,z1) =\n      let xx = ring_pow f x1 2 in\n      let zz = ring_pow f z1 2 in\n      let w = ring_mul f (ring_of_num f 3) xx in\n      let t2 = ring_mul f y1 z1 in\n      let s = ring_mul f (ring_of_num f 2) t2 in\n      let ss = ring_pow f s 2 in\n      let sss = ring_mul f s ss in\n      let r = ring_mul f y1 s in\n      let rr = ring_pow f r 2 in\n      let t3 = ring_add f x1 r in\n      let t4 = ring_pow f t3 2 in\n      let t5 = ring_sub f t4 xx in\n      let b = ring_sub f t5 rr in\n      let t6 = ring_pow f w 2 in\n      let t7 = ring_mul f (ring_of_num f 2) b in\n      let h = ring_sub f t6 t7 in\n      let x3 = ring_mul f h s in\n      let t8 = ring_sub f b h in\n      let t9 = ring_mul f (ring_of_num f 2) rr in\n      let t10 = ring_mul f w t8 in\n      let y3 = ring_sub f t10 t9 in\n      let z3 = sss in\n      (x3,y3,z3)")))
+  p0_dbl_2007_bl_c.set(@pair.new_definition(@term_syntax.parse_term("(p0_dbl_2007_bl : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A))) == LET((xx : A) => LET_END(LET((zz : A) => LET_END(LET((w : A) => LET_END(LET((t2 : A) => LET_END(LET((s : A) => LET_END(LET((ss : A) => LET_END(LET((sss : A) => LET_END(LET((r : A) => LET_END(LET((rr : A) => LET_END(LET((t3 : A) => LET_END(LET((t4 : A) => LET_END(LET((t5 : A) => LET_END(LET((b : A) => LET_END(LET((t6 : A) => LET_END(LET((t7 : A) => LET_END(LET((h : A) => LET_END(LET((x3 : A) => LET_END(LET((t8 : A) => LET_END(LET((t9 : A) => LET_END(LET((t10 : A) => LET_END(LET((y3 : A) => LET_END(LET((z3 : A) => LET_END((x3, y3, z3)), sss)), ring_sub(f, t10, t9))), ring_mul(f, w, t8))), ring_mul(f, ring_of_num(f, 2), rr))), ring_sub(f, b, h))), ring_mul(f, h, s))), ring_sub(f, t6, t7))), ring_mul(f, ring_of_num(f, 2), b))), ring_pow(f, w, 2))), ring_sub(f, t5, rr))), ring_sub(f, t4, xx))), ring_pow(f, t3, 2))), ring_add(f, x1, r))), ring_pow(f, r, 2))), ring_mul(f, y1, s))), ring_mul(f, s, ss))), ring_pow(f, s, 2))), ring_mul(f, ring_of_num(f, 2), t2))), ring_mul(f, y1, z1))), ring_mul(f, ring_of_num(f, 3), xx))), ring_pow(f, z1, 2))), ring_pow(f, x1, 2))")))
 }
 
 ///|
@@ -101,7 +101,7 @@ fn step_6() -> Unit raise {
   let t28 = @simp.asm_simp_tac(@list.List([@ringtheory.field_imp_integral_domain()]))
   let t27 = @simp.asm_rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def(), @pair.pair_eq(), @projective.projective_eq()]))
   let t26 = @simp.asm_rewrite_tac(@list.List([@projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
-  let t25 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
+  let t25 = @class.asm_cases_tac(@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"))
   let t24 = @simp.rewrite_tac(@list.List([p0_dbl_2007_bl(), @projective.projective_add(), @projective.projective_eq(), @projective.projective_neg(), @projective.projective_0()]))
   let t23 = @tactics.first_x_assum(fn(x20 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s21 = @tactics.subst_all_tac(x20)
@@ -111,7 +111,7 @@ fn step_6() -> Unit raise {
   })
   let t19 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t19), @tactics.strip_tac), t23), t24), t25), t26), t27), @ringtheory.field_tac), t28)
-  p0_dbl_2007_bl_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1:A.\n        field f /\\\n        a = ring_0 f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1)\n        ==> projective_eq f (p0_dbl_2007_bl (f,a,b) (x1,y1,z1))\n                            (projective_add (f,a,b) (x1,y1,z1) (x1,y1,z1))"), t29))
+  p0_dbl_2007_bl_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x1 : A, ∀ y1 : A, ∀ z1 : A, field(f) && a == ring_0(f) && IN(b, ring_carrier(f)) && projective_point(f, (x1, y1, z1)) → projective_eq(f, p0_dbl_2007_bl((f, a, b), (x1, y1, z1)), projective_add((f, a, b), (x1, y1, z1), (x1, y1, z1)))"), t29))
 }
 
 ///|
@@ -126,7 +126,7 @@ pub fn p0_dbl_2007_bl_v1() -> @kernel.Thm {
 ///|
 /// pr_add_1998_cmo_2
 fn step_7() -> Unit raise {
-  pr_add_1998_cmo_2_c.set(@pair.new_definition(@parser.parse_term("pr_add_1998_cmo_2 (f:A ring,a:A,b:A) (x1,y1,z1) (x2,y2,z2) =\n      let y1z2 = ring_mul f y1 z2 in\n      let x1z2 = ring_mul f x1 z2 in\n      let z1z2 = ring_mul f z1 z2 in\n      let t0 = ring_mul f y2 z1 in\n      let u = ring_sub f t0 y1z2 in\n      let uu = ring_pow f u 2 in\n      let t1 = ring_mul f x2 z1 in\n      let v = ring_sub f t1 x1z2 in\n      let vv = ring_pow f v 2 in\n      let vvv = ring_mul f v vv in\n      let r = ring_mul f vv x1z2 in\n      let t2 = ring_mul f (ring_of_num f 2) r in\n      let t3 = ring_mul f uu z1z2 in\n      let t4 = ring_sub f t3 vvv in\n      let a = ring_sub f t4 t2 in\n      let x3 = ring_mul f v a in\n      let t5 = ring_sub f r a in\n      let t6 = ring_mul f vvv y1z2 in\n      let t7 = ring_mul f u t5 in\n      let y3 = ring_sub f t7 t6 in\n      let z3 = ring_mul f vvv z1z2 in\n      (x3,y3,z3)")))
+  pr_add_1998_cmo_2_c.set(@pair.new_definition(@term_syntax.parse_term("(pr_add_1998_cmo_2 : ((Ring[A], A, A), (A, A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A)), ((x2 : A), (y2 : A), (z2 : A))) == LET((y1z2 : A) => LET_END(LET((x1z2 : A) => LET_END(LET((z1z2 : A) => LET_END(LET((t0 : A) => LET_END(LET((u : A) => LET_END(LET((uu : A) => LET_END(LET((t1 : A) => LET_END(LET((v : A) => LET_END(LET((vv : A) => LET_END(LET((vvv : A) => LET_END(LET((r : A) => LET_END(LET((t2 : A) => LET_END(LET((t3 : A) => LET_END(LET((t4 : A) => LET_END(LET((a : A) => LET_END(LET((x3 : A) => LET_END(LET((t5 : A) => LET_END(LET((t6 : A) => LET_END(LET((t7 : A) => LET_END(LET((y3 : A) => LET_END(LET((z3 : A) => LET_END((x3, y3, z3)), ring_mul(f, vvv, z1z2))), ring_sub(f, t7, t6))), ring_mul(f, u, t5))), ring_mul(f, vvv, y1z2))), ring_sub(f, r, a))), ring_mul(f, v, a))), ring_sub(f, t4, t2))), ring_sub(f, t3, vvv))), ring_mul(f, uu, z1z2))), ring_mul(f, ring_of_num(f, 2), r))), ring_mul(f, vv, x1z2))), ring_mul(f, v, vv))), ring_pow(f, v, 2))), ring_sub(f, t1, x1z2))), ring_mul(f, x2, z1))), ring_pow(f, u, 2))), ring_sub(f, t0, y1z2))), ring_mul(f, y2, z1))), ring_mul(f, z1, z2))), ring_mul(f, x1, z2))), ring_mul(f, y1, z2))")))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn pr_add_1998_cmo_2() -> @kernel.Thm {
 ///|
 /// PR_ADD_1998_CMO_2
 fn step_8() -> Unit raise {
-  let t52 = @parser.parse_term("(=):A->A->bool")
+  let t52 = @term_syntax.parse_term("(op_eq : (A, A) -> Bool)")
   let t59 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x58 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x49 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s50 = @tactics.mp_tac(x49)
@@ -184,7 +184,7 @@ fn step_8() -> Unit raise {
   }))
   let t30 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t60 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t30), t37), t38), t42), t46), t47), t48), t59), @ringtheory.field_tac)
-  pr_add_1998_cmo_2_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1) /\\ projective_point f (x2,y2,z2) /\\\n        ~(z1 = ring_0 f) /\\ ~(z2 = ring_0 f) /\\\n        ~(projective_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> projective_eq f (pr_add_1998_cmo_2 (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                            (projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t60))
+  pr_add_1998_cmo_2_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x1 : A, ∀ y1 : A, ∀ z1 : A, ∀ x2 : A, ∀ y2 : A, ∀ z2 : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, (x1, y1, z1)) && projective_point(f, (x2, y2, z2)) && !(z1 == ring_0(f)) && !(z2 == ring_0(f)) && !projective_eq(f, (x1, y1, z1), (x2, y2, z2)) → projective_eq(f, pr_add_1998_cmo_2((f, a, b), (x1, y1, z1), (x2, y2, z2)), projective_add((f, a, b), (x1, y1, z1), (x2, y2, z2)))"), t60))
 }
 
 ///|
@@ -199,7 +199,7 @@ pub fn pr_add_1998_cmo_2_v1() -> @kernel.Thm {
 ///|
 /// pr_madd_1998_cmo
 fn step_9() -> Unit raise {
-  pr_madd_1998_cmo_c.set(@pair.new_definition(@parser.parse_term("pr_madd_1998_cmo (f:A ring,a:A,b:A) (x1,y1,z1) (x2,y2,z2) =\n      let t0 = ring_mul f y2 z1 in\n      let u = ring_sub f t0 y1 in\n      let uu = ring_pow f u 2 in\n      let t1 = ring_mul f x2 z1 in\n      let v = ring_sub f t1 x1 in\n      let vv = ring_pow f v 2 in\n      let vvv = ring_mul f v vv in\n      let r = ring_mul f vv x1 in\n      let t2 = ring_mul f (ring_of_num f 2) r in\n      let t3 = ring_mul f uu z1 in\n      let t4 = ring_sub f t3 vvv in\n      let a = ring_sub f t4 t2 in\n      let x3 = ring_mul f v a in\n      let t5 = ring_sub f r a in\n      let t6 = ring_mul f vvv y1 in\n      let t7 = ring_mul f u t5 in\n      let y3 = ring_sub f t7 t6 in\n      let z3 = ring_mul f vvv z1 in\n      (x3,y3,z3)")))
+  pr_madd_1998_cmo_c.set(@pair.new_definition(@term_syntax.parse_term("(pr_madd_1998_cmo : ((Ring[A], A, A), (A, A, A), (A, A, _)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A)), ((x2 : A), (y2 : A), (z2 : _))) == LET((t0 : A) => LET_END(LET((u : A) => LET_END(LET((uu : A) => LET_END(LET((t1 : A) => LET_END(LET((v : A) => LET_END(LET((vv : A) => LET_END(LET((vvv : A) => LET_END(LET((r : A) => LET_END(LET((t2 : A) => LET_END(LET((t3 : A) => LET_END(LET((t4 : A) => LET_END(LET((a : A) => LET_END(LET((x3 : A) => LET_END(LET((t5 : A) => LET_END(LET((t6 : A) => LET_END(LET((t7 : A) => LET_END(LET((y3 : A) => LET_END(LET((z3 : A) => LET_END((x3, y3, z3)), ring_mul(f, vvv, z1))), ring_sub(f, t7, t6))), ring_mul(f, u, t5))), ring_mul(f, vvv, y1))), ring_sub(f, r, a))), ring_mul(f, v, a))), ring_sub(f, t4, t2))), ring_sub(f, t3, vvv))), ring_mul(f, uu, z1))), ring_mul(f, ring_of_num(f, 2), r))), ring_mul(f, vv, x1))), ring_mul(f, v, vv))), ring_pow(f, v, 2))), ring_sub(f, t1, x1))), ring_mul(f, x2, z1))), ring_pow(f, u, 2))), ring_sub(f, t0, y1))), ring_mul(f, y2, z1))")))
 }
 
 ///|
@@ -214,7 +214,7 @@ pub fn pr_madd_1998_cmo() -> @kernel.Thm {
 ///|
 /// PR_MADD_1998_CMO
 fn step_10() -> Unit raise {
-  let t83 = @parser.parse_term("(=):A->A->bool")
+  let t83 = @term_syntax.parse_term("(op_eq : (A, A) -> Bool)")
   let t90 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x89 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x80 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s81 = @tactics.mp_tac(x80)
@@ -257,7 +257,7 @@ fn step_10() -> Unit raise {
   }))
   let t61 = @simp.rewrite_tac(@list.List([@projective.projective_point()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t61), t68), t69), t73), t77), t78), t79), t90), @ringtheory.field_tac)
-  pr_madd_1998_cmo_v1_c.set(@tactics.prove(@parser.parse_term("forall f a b x1 y1 z1 x2 y2 z2:A.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f (x1,y1,z1) /\\ projective_point f (x2,y2,z2) /\\\n        z2 = ring_1 f /\\\n        ~(z1 = ring_0 f) /\\ ~(projective_eq f (x1,y1,z1) (x2,y2,z2))\n        ==> projective_eq f (pr_madd_1998_cmo (f,a,b) (x1,y1,z1) (x2,y2,z2))\n                            (projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2))"), t91))
+  pr_madd_1998_cmo_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x1 : A, ∀ y1 : A, ∀ z1 : A, ∀ x2 : A, ∀ y2 : A, ∀ z2 : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, (x1, y1, z1)) && projective_point(f, (x2, y2, z2)) && z2 == ring_1(f) && !(z1 == ring_0(f)) && !projective_eq(f, (x1, y1, z1), (x2, y2, z2)) → projective_eq(f, pr_madd_1998_cmo((f, a, b), (x1, y1, z1), (x2, y2, z2)), projective_add((f, a, b), (x1, y1, z1), (x2, y2, z2)))"), t91))
 }
 
 ///|
