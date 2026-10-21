@@ -762,7 +762,7 @@ pub fn exp_2() -> @kernel.Thm {
 ///|
 /// binom
 fn step_57() -> Unit raise {
-  binom_c.set(@define.define_(@parser.parse_term("(forall n. binom(n,0) = 1) /\\\n  (forall k. binom(0,SUC(k)) = 0) /\\\n  (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
+  binom_c.set(@define.define_(@term_syntax.parse_term("(∀ n : Num, (binom : ((Num, Num)) -> Num)((n, 0)) == 1) && (∀ k : Num, binom((0, SUC(k))) == 0) && (∀ n : Num, ∀ k : Num, binom((SUC(n), SUC(k))) == binom((n, SUC(k))) + binom((n, k)))")))
 }
 
 ///|
