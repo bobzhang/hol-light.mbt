@@ -372,106 +372,106 @@ test "class matches class.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|class quotations (100):
-      #|  forall t:A->B. (\\x. t x) = t
-      #|  t:A->B
-      #|  (\\x. (t:A->B) x) = t
-      #|  x:A
-      #|  x:A
-      #|  forall(f:A->B) g. (forall x. f x = g x) ==> f = g
-      #|  forall(f:A->B) g. f = g <=> (forall x. f x = g x)
+      #|  \226\136\128 t : (A) -> B, ((x : A) => t(x)) == t
+      #|  (t : (A) -> B)
+      #|  ((x : A) => (t : (A) -> B)(x)) == t
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, (\226\136\128 x : A, f(x) == g(x)) \226\134\146 f == g
+      #|  \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, (f == g) == (\226\136\128 x : A, f(x) == g(x))
       #|  :(A->bool)->A
-      #|  forall P (x:A). P x ==> P((@) P)
-      #|  ((@) P):A
-      #|  P:A->bool
-      #|  (?) = \\P:A->bool. P ((@) P)
-      #|  P:A->bool
-      #|  (?) (P:A->bool) ==> P((@) P)
-      #|  P:A->bool
-      #|  (P:A->bool)((@) P) = (?) P
-      #|  x:A
-      #|  forall x:A. (@y. y = x) = x
-      #|  forall P x. (forall y:A. P y = (y = x)) ==> ((@) P = x)
-      #|  p \\/ T <=> T
-      #|  ~(T <=> F)
-      #|  T
-      #|  F
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 x : A, P(x) \226\134\146 P(select(P))
+      #|  select((P : (A) -> Bool))
+      #|  (P : (A) -> Bool)
+      #|  op_q == ((P : (A) -> Bool) => P(select(P)))
+      #|  (P : (A) -> Bool)
+      #|  op_q((P : (A) -> Bool)) \226\134\146 P(select(P))
+      #|  (P : (A) -> Bool)
+      #|  (P : (A) -> Bool)(select(P)) == op_q(P)
+      #|  (x : A)
+      #|  \226\136\128 x : A, select((y : A) => y == x) == x
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 x : A, (\226\136\128 y : A, P(y) == (y == x)) \226\134\146 select(P) == x
+      #|  ((p : Bool) || true) == true
+      #|  !(true == false)
+      #|  true
+      #|  false
       #|  (((@x. (x <=> F) \\/ t) <=> F) \\/ t) /\\ (((@x. (x <=> T) \\/ t) <=> T) \\/ t)
-      #|  forall t. t \\/ ~t
-      #|  t:bool
-      #|  forall t. (t <=> T) \\/ (t <=> F)
+      #|  \226\136\128 t : Bool, t || !t
+      #|  (t : Bool)
+      #|  \226\136\128 t : Bool, t == true || t == false
       #|  forall t1 t2. (~(t1 /\\ t2) <=> ~t1 \\/ ~t2) /\\ (~(t1 \\/ t2) <=> ~t1 /\\ ~t2)
-      #|  (forall t. ~ ~t <=> t) /\\ (~T <=> F) /\\ (~F <=> T)
-      #|  forall t1 t2. ~(t1 ==> t2) <=> t1 /\\ ~t2
-      #|  forall t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)
-      #|  P:bool
-      #|  (~P ==> F) ==> P
-      #|  a:bool
-      #|  b:bool
-      #|  (a ==> b) <=> (~b ==> ~a)
-      #|  F
-      #|  p <=> ~p ==> F
-      #|  x:A
-      #|  ~(?x:A. P x)
-      #|  forall P. ~(?x:A. P x) <=> (forall x. ~(P x))
-      #|  (a <=> ~b) <=> (~a <=> b)
-      #|  forall P. (?x:A. ~(P x)) <=> ~(forall x. P x)
-      #|  forall P. ~(forall x. P x) <=> (?x:A. ~(P x))
-      #|  forall P. (forall x. ~(P x)) <=> ~(?x:A. P x)
-      #|  b:bool
-      #|  (forall b. P b) <=> P T /\\ P F
-      #|  (~p <=> ~q) ==> (p <=> q)
-      #|  (?b. P b) <=> P T \\/ P F
-      #|  (a <=> b) <=> (~a <=> ~b)
-      #|  forall P Q. (forall x:A. P x \\/ Q) <=> (forall x. P x) \\/ Q
-      #|  (a <=> b) <=> (~a <=> ~b)
-      #|  forall P Q. (forall x:A. P \\/ Q x) <=> P \\/ (forall x. Q x)
-      #|  forall P Q. (forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)
-      #|  forall P Q. P \\/ (forall x:A. Q x) <=> (forall x. P \\/ Q x)
-      #|  (a <=> b) <=> (~a <=> ~b)
-      #|  forall P Q. ((forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)
-      #|  forall P Q. (?x. P x ==> Q) <=> ((forall x:A. P x) ==> Q)
-      #|  (a <=> b) <=> (~a <=> ~b)
-      #|  forall P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)
-      #|  forall P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)
+      #|  (\226\136\128 t : Bool, !!t == t) && !true == false && !false == true
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, !(t1 \226\134\146 t2) == (t1 && !t2)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (!t1 \226\134\146 !t2) == (t2 \226\134\146 t1)
+      #|  (P : Bool)
+      #|  (!(P : Bool) \226\134\146 false) \226\134\146 P
+      #|  (a : Bool)
+      #|  (b : Bool)
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (!b \226\134\146 !a)
+      #|  false
+      #|  (p : Bool) == (!p \226\134\146 false)
+      #|  (x : A)
+      #|  !(\226\136\131 x : A, (P : (A) -> Bool)(x))
+      #|  \226\136\128 P : (A) -> Bool, !(\226\136\131 x : A, P(x)) == (\226\136\128 x : A, !P(x))
+      #|  ((a : Bool) == !(b : Bool)) == (!a == b)
+      #|  \226\136\128 P : (A) -> Bool, (\226\136\131 x : A, !P(x)) == !(\226\136\128 x : A, P(x))
+      #|  \226\136\128 P : (A) -> Bool, !(\226\136\128 x : A, P(x)) == (\226\136\131 x : A, !P(x))
+      #|  \226\136\128 P : (A) -> Bool, (\226\136\128 x : A, !P(x)) == !(\226\136\131 x : A, P(x))
+      #|  (b : Bool)
+      #|  (\226\136\128 b : Bool, (P : (Bool) -> Bool)(b)) == (P(true) && P(false))
+      #|  !(p : Bool) == !(q : Bool) \226\134\146 p == q
+      #|  (\226\136\131 b : Bool, (P : (Bool) -> Bool)(b)) == (P(true) || P(false))
+      #|  ((a : Bool) == (b : Bool)) == (!a == !b)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (\226\136\128 x : A, P(x) || Q) == ((\226\136\128 x : A, P(x)) || Q)
+      #|  ((a : Bool) == (b : Bool)) == (!a == !b)
+      #|  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (\226\136\128 x : A, P || Q(x)) == (P || (\226\136\128 x : A, Q(x)))
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, ((\226\136\128 x : A, P(x)) || Q) == (\226\136\128 x : A, P(x) || Q)
+      #|  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P || (\226\136\128 x : A, Q(x))) == (\226\136\128 x : A, P || Q(x))
+      #|  ((a : Bool) == (b : Bool)) == (!a == !b)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, ((\226\136\128 x : A, P(x)) \226\134\146 Q) == (\226\136\131 x : A, P(x) \226\134\146 Q)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (\226\136\131 x : A, P(x) \226\134\146 Q) == ((\226\136\128 x : A, P(x)) \226\134\146 Q)
+      #|  ((a : Bool) == (b : Bool)) == (!a == !b)
+      #|  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P \226\134\146 (\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P \226\134\146 Q(x))
+      #|  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (\226\136\131 x : A, P \226\134\146 Q(x)) == (P \226\134\146 (\226\136\131 x : A, Q(x)))
       #|  COND = \\t t1 t2. @x:A. ((t <=> T) ==> (x = t1)) /\\\n                          ((t <=> F) ==> (x = t2))
       #|  forall(t1:A) t2. ((if T then t1 else t2) = t1) /\\\n               ((if F then t1 else t2) = t2)
-      #|  b:bool
+      #|  (b : Bool)
       #|  forall b t1 t2. (if b then t1 else t2) <=> (~b \\/ t1) /\\ (b \\/ t2)
-      #|  b:bool
-      #|  forall b (t:A). (if b then t else t) = t
-      #|  b:bool
+      #|  (b : Bool)
+      #|  \226\136\128 b : Bool, \226\136\128 t : A, (if b { t } else { t }) == t
+      #|  (b : Bool)
       #|  forall b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)
-      #|  b:bool
+      #|  (b : Bool)
       #|  forall b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)
-      #|  b:bool
+      #|  (b : Bool)
       #|  forall b (f:A->B) g. (\\x. if b then f x else g x) = (if b then f else g)
-      #|  p:bool
+      #|  (p : Bool)
       #|  forall p x y:A. (if ~p then x else y) = (if p then y else x)
-      #|  b:bool
+      #|  (b : Bool)
       #|  (A ==> B) /\\ (C ==> D) ==> (if b then A else C) ==> (if b then B else D)
-      #|  c:bool
+      #|  (c : Bool)
       #|  (P:A->bool) (if c then x else y) <=> (c ==> P x) /\\ (~c ==> P y)
-      #|  ~ ~ p <=> p
-      #|  (y:A->B) x
-      #|  \\x:A. @y:B. P x y
-      #|  forall P. (forall x:A. ?y:B. P x y) <=> (?y. forall x. P x (y x))
+      #|  !!(p : Bool) == p
+      #|  (y : (A) -> B)((x : A))
+      #|  (x : A) => select((y : B) => (P : (A, B) -> Bool)(x, y))
+      #|  \226\136\128 P : (A, B) -> Bool, (\226\136\128 x : A, \226\136\131 y : B, P(x, y)) == (\226\136\131 y : (A) -> B, \226\136\128 x : A, P(x, y(x)))
       #|  forall P R. (forall x:A. P x ==> ?y:B. R x y) <=> (?f. forall x. P x ==> R x (f x))
       #|  forall P:A->B->bool. (forall x. ?!y. P x y) <=> ?f. forall x y. P x y <=> (f x = y)
-      #|  x:A
+      #|  (x : A)
       #|  (\\z. if z = x then y1 else (f:A->B) z) =\n                  (\\z. if z = x then y2 else (f:A->B) z)
-      #|  f:A->B
-      #|  y2:B
-      #|  y1:B
-      #|  x:A
-      #|  x:A
-      #|  x:A
-      #|  forall P. (forall x:A. ?!y:B. P x y) <=> (?!f. forall x. P x (f x))
+      #|  (f : (A) -> B)
+      #|  (y2 : B)
+      #|  (y1 : B)
+      #|  (x : A)
+      #|  (x : A)
+      #|  (x : A)
+      #|  \226\136\128 P : (A, B) -> Bool, (\226\136\128 x : A, existsunique((y : B) => P(x, y))) == existsunique((f : (A) -> B) => \226\136\128 x : A, P(x, f(x)))
       #|  (g = g') ==>\n        (g' ==> (t = t')) ==>\n        (~g' ==> (e = e')) ==>\n        ((if g then t else e) = (if g' then t' else e'))
-      #|  (if x = x then y else z) = y
-      #|  x:bool
-      #|  forall P. P F /\\ P T ==> forall x. P x
-      #|  \\x. if x then b:A else a
-      #|  forall a b:A. ?f. f F = a /\\ f T = b
+      #|  (if (x : _) == x { (y : _) } else { (z : _) }) == y
+      #|  (x : Bool)
+      #|  \226\136\128 P : (Bool) -> Bool, P(false) && P(true) \226\134\146 (\226\136\128 x : Bool, P(x))
+      #|  (x : Bool) => if x { (b : A) } else { (a : A) }
+      #|  \226\136\128 a : A, \226\136\128 b : A, \226\136\131 f : (Bool) -> A, f(false) == a && f(true) == b
       #|ETA_AX =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
       #|EQ_EXT =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (g:fun('A,'B) x:'A))))) ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) f:fun('A,'B)) g:fun('A,'B)))))))
       #|FUN_EQ_THM =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) f:fun('A,'B)) g:fun('A,'B))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (g:fun('A,'B) x:'A)))))))))
