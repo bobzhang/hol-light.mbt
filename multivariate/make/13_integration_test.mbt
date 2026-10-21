@@ -70133,7 +70133,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
       #|  (y : Cart[Real, N])
       #|  real_of_num(0) < (e : Real)
-      #|  norm((d : Cart[Real, _])) == (e : Real) / real_of_num(2) \226\134\146 dist(((x : Cart[Real, _]) + d, (y : Cart[Real, _]))) < e / real_of_num(2) \226\134\146 dist((x, y)) < e
+      #|  norm((d : Cart[Real, _])) == (e : Real) / real_of_num(2) \226\134\146 distance(((x : Cart[Real, _]) + d, (y : Cart[Real, _]))) < e / real_of_num(2) \226\134\146 distance((x, y)) < e
       #|  :real
       #|  :real
       #|  SUBSET((b1 : (_) -> Bool), INTER((k : (_) -> Bool), UNION((i : (_) -> Bool), (s : (_) -> Bool)))) \226\134\146 SUBSET((b2 : (_) -> Bool), b1) && INTER(b2, i) == {} \226\134\146 SUBSET(b2, INTER(k, s))
@@ -70632,7 +70632,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (n : Num)
       #|  (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)((b : Cart[Real, N]), i) - (op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i)) / (e : Real)
       #|  (e : Real)
-      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, interval([((A : (Num) -> Cart[Real, N])(n), (B : (Num) -> Cart[Real, N])(n))])) && IN(y, interval([(A(n), B(n))])) \226\134\146 dist((x, y)) < e)
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], IN(x, interval([((A : (Num) -> Cart[Real, N])(n), (B : (Num) -> Cart[Real, N])(n))])) && IN(y, interval([(A(n), B(n))])) \226\134\146 distance((x, y)) < e)
       #|  (n : Num) => SND((E : (Num) -> (Cart[Real, N], Cart[Real, N]))(n))
       #|  (n : Num) => FST((E : (Num) -> (Cart[Real, N], Cart[Real, N]))(n))
       #|  (E : (Num) -> (Cart[Real, N], Cart[Real, N]))
@@ -71617,7 +71617,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  norm((x : Cart[Real, M]))
       #|  (k : Num)
       #|  (x : Cart[Real, M])
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  (d : Cart[Real, M])
@@ -71634,7 +71634,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  norm((x : Cart[Real, M]))
       #|  (k : Num)
       #|  (x : Cart[Real, M])
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  (d : Cart[Real, M])
@@ -71652,7 +71652,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\131 y : Cart[Real, N], has_integral((f : (Cart[Real, M]) -> Cart[Real, N]), y, interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
       #|  (n : Real) <= (B : Real) \226\134\146 n < B + real_of_num(1)
       #|  (i : Cart[Real, N])
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  (d : Cart[Real, M])
@@ -71904,7 +71904,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  norm((x : Cart[Real, M]))
       #|  abs((x : Real)) <= (B : Real) \226\134\146 min((a : Real), -B) <= x && x <= max((b : Real), B)
       #|  (k : Num)
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  (lambda : ((Num) -> Real) -> Cart[Real, M])((i : Num) => max((op_dollar : (Cart[Real, M], Num) -> Real)((b : Cart[Real, M]), i), (B : Real)))
@@ -71919,11 +71919,11 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 i : Cart[Real, N], has_integral(f, i, s) == ((\226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], integrable_on((x : Cart[Real, M]) => if IN(x, s) { f(x) } else { vec(0) }, interval([(a, b)]))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], SUBSET(ball((vec(0), B)), interval([(a, b)])) \226\134\146 norm(integral(interval([(a, b)]), (x : Cart[Real, M]) => if IN(x, s) { f(x) } else { vec(0) }) - i) < e))))
       #|  norm((x : Cart[Real, M]))
       #|  (x : Cart[Real, M])
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)(((vec : (Num) -> Cart[Real, M])(0), real_of_num((n : Num))))
-      #|  norm((i1 : Cart[Real, _]) - (i2 : Cart[Real, _])) < (e : Real) / real_of_num(2) \226\134\146 dist((i1, (i : Cart[Real, _]))) < e / real_of_num(2) \226\134\146 norm(i2 - i) < e
+      #|  norm((i1 : Cart[Real, _]) - (i2 : Cart[Real, _])) < (e : Real) / real_of_num(2) \226\134\146 distance((i1, (i : Cart[Real, _]))) < e / real_of_num(2) \226\134\146 norm(i2 - i) < e
       #|  :real
       #|  :real
       #|  (n : Num)
@@ -71938,7 +71938,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (e : Real) / real_of_num(2)
       #|  (e : Real)
       #|  (i : Cart[Real, N])
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  (N : Num)
@@ -72169,7 +72169,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  norm((x : Cart[Real, N]))
       #|  abs((x : Real)) <= (B : Real) \226\134\146 min((a : Real), -B) <= x && x <= max((b : Real), B)
       #|  (k : Num)
-      #|  dist((vec(0), (x : Cart[Real, _]))) == norm(x)
+      #|  distance((vec(0), (x : Cart[Real, _]))) == norm(x)
       #|  :real
       #|  :real
       #|  ((a : Bool) && (c : Bool)) && ((b : Bool) && (d : Bool) \226\134\146 (e : Bool)) \226\134\146 (a \226\134\146 b) \226\134\146 (c \226\134\146 d) \226\134\146 e
@@ -72668,7 +72668,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  interval([(vec(0), (x : Cart[Real, Unit]))])
       #|  drop(integral(interval([(vec((n : Num)), (x : Cart[Real, Unit]))]), (x : Cart[Real, Unit]) => lift((e : Real) / real_of_num(2))))
       #|  drop((x : Cart[Real, Unit]))
-      #|  dist(((a : Cart[Real, N]), (l : Cart[Real, N]))) < (e : Real) / real_of_num(2) && norm((b : Cart[Real, N])) <= e / real_of_num(2) \226\134\146 dist((a + b, l)) < e
+      #|  distance(((a : Cart[Real, N]), (l : Cart[Real, N]))) < (e : Real) / real_of_num(2) && norm((b : Cart[Real, N])) <= e / real_of_num(2) \226\134\146 distance((a + b, l)) < e
       #|  :real
       #|  :real
       #|  drop((x : Cart[Real, Unit]))
@@ -72925,7 +72925,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  set_variation(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), (f : ((Cart[Real, M]) -> Bool) -> Cart[Real, N]))
       #|  (d : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  (k : (Cart[Real, M]) -> Bool) => set_variation(k, (f : ((Cart[Real, M]) -> Bool) -> Cart[Real, N]))
-      #|  op_plus
+      #|  real_add
       #|  (k : (Cart[Real, M]) -> Bool) => has_bounded_setvariation_on((f : ((Cart[Real, M]) -> Bool) -> Cart[Real, N]), k)
       #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (b \226\134\146 a && c \226\134\146 d)
       #|  (b : Cart[Real, M])
@@ -73191,7 +73191,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (a : Cart[Real, M])
       #|  (d : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])
-      #|  norm((x : Cart[Real, _])) <= (K : Real) \226\134\146 dist((vec(0), x)) < K + real_of_num(1)
+      #|  norm((x : Cart[Real, _])) <= (K : Real) \226\134\146 distance((vec(0), x)) < K + real_of_num(1)
       #|  :real
       #|  (ball : ((Cart[Real, M], Real), Cart[Real, M]) -> Bool)(((vec : (Num) -> Cart[Real, M])(0), (K : Real) + real_of_num(1)))
       #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
@@ -74162,7 +74162,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (e : Real)
       #|  has_integral((g : (Cart[Real, M]) -> Cart[Real, N]), (l : Cart[Real, N]), interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
       #|  (l : Cart[Real, N])
-      #|  norm((sm : Cart[Real, N]) - (gm : Cart[Real, N])) < (e : Real) / real_of_num(3) && norm((sn : Cart[Real, N]) - (gn : Cart[Real, N])) < e / real_of_num(3) \226\134\146 dist((sm, sn)) < e / real_of_num(3) \226\134\146 dist((gm, gn)) < e
+      #|  norm((sm : Cart[Real, N]) - (gm : Cart[Real, N])) < (e : Real) / real_of_num(3) && norm((sn : Cart[Real, N]) - (gn : Cart[Real, N])) < e / real_of_num(3) \226\134\146 distance((sm, sn)) < e / real_of_num(3) \226\134\146 distance((gm, gn)) < e
       #|  :real
       #|  :real
       #|  :real
@@ -74295,7 +74295,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (f : (Num, Cart[Real, M]) -> Cart[Real, N])
       #|  inv(real_of_num((N : Num)))
       #|  inv(real_of_num((n : Num)) + real_of_num(1))
-      #|  dist(((a : Cart[Real, N]), (b : Cart[Real, N]))) == norm(b - a)
+      #|  distance(((a : Cart[Real, N]), (b : Cart[Real, N]))) == norm(b - a)
       #|  :real
       #|  :real
       #|  (n : Num)
@@ -74476,7 +74476,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  abs((x : Real)) <= (e : Real) \226\134\146 x <= e
       #|  (a : Real) * (inv((b : Real)) * inv((c : Real))) == a / c / b
       #|  real_of_num(2) * ((e : Real) / real_of_num(8) / (x : Real) * (y : Real)) == e / real_of_num(4) * (y / x)
-      #|  abs((vi : Real) - (ui : Real)) <= norm((v : Cart[Real, N]) - (u : Cart[Real, N])) && real_of_num(2) * (a : Real) <= (b : Real) \226\134\146 dist(((x : Cart[Real, N]), u)) < a && dist((x, v)) < a \226\134\146 vi - ui <= b
+      #|  abs((vi : Real) - (ui : Real)) <= norm((v : Cart[Real, N]) - (u : Cart[Real, N])) && real_of_num(2) * (a : Real) <= (b : Real) \226\134\146 distance(((x : Cart[Real, N]), u)) < a && distance((x, v)) < a \226\134\146 vi - ui <= b
       #|  :real
       #|  :real
       #|  interval([((u : Cart[Real, M]), (v : Cart[Real, M]))])
@@ -74852,17 +74852,17 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (n : Num)
       #|  (\226\136\131 k : _, (P : (_) -> Bool)(k) && (Q : (_) -> Bool)(k)) == !(\226\136\128 k : _, P(k) \226\134\146 !Q(k))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 c : Cart[Real, M], \226\136\128 d : Cart[Real, M], \226\136\128 e : Real, integrable_on(f, interval([(a, b)])) && IN(c, interval([(a, b)])) && IN(d, interval([(a, b)])) && real_of_num(0) < e \226\134\146 (\226\136\131 k : Real, real_of_num(0) < k && (\226\136\128 c' : Cart[Real, M], \226\136\128 d' : Cart[Real, M], IN(c', interval([(a, b)])) && IN(d', interval([(a, b)])) && norm(c' - c) <= k && norm(d' - d) <= k \226\134\146 norm(integral(interval([(c', d')]), f) - integral(interval([(c, d)]), f)) < e))
-      #|  (x : Cart[Real, _]) == (a : Cart[Real, _]) && (y : Cart[Real, _]) == (b : Cart[Real, _]) \226\134\146 (e : Real) <= norm(x - y) \226\134\146 e <= dist((a, b))
+      #|  (x : Cart[Real, _]) == (a : Cart[Real, _]) && (y : Cart[Real, _]) == (b : Cart[Real, _]) \226\134\146 (e : Real) <= norm(x - y) \226\134\146 e <= distance((a, b))
       #|  :real
       #|  :real
       #|  :real
       #|  (N : Num)
-      #|  (x : Cart[Real, _]) == (a : Cart[Real, _]) && (y : Cart[Real, _]) == (b : Cart[Real, _]) \226\134\146 (e : Real) <= norm(x - y) \226\134\146 e <= dist((a, b))
+      #|  (x : Cart[Real, _]) == (a : Cart[Real, _]) && (y : Cart[Real, _]) == (b : Cart[Real, _]) \226\134\146 (e : Real) <= norm(x - y) \226\134\146 e <= distance((a, b))
       #|  :real
       #|  :real
       #|  :real
       #|  (N : Num)
-      #|  (x : Cart[Real, _]) == (a : Cart[Real, _]) && (y : Cart[Real, _]) == (b : Cart[Real, _]) \226\134\146 (e : Real) <= norm(x - y) \226\134\146 e <= dist((a, b))
+      #|  (x : Cart[Real, _]) == (a : Cart[Real, _]) && (y : Cart[Real, _]) == (b : Cart[Real, _]) \226\134\146 (e : Real) <= norm(x - y) \226\134\146 e <= distance((a, b))
       #|  :real
       #|  :real
       #|  :real
@@ -75297,10 +75297,10 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 c : Real, is_interval(s) \226\134\146 (has_bounded_variation_on(f, s) && vector_variation(s, f) <= c) == (\226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], SUBSET(interval([(a, b)]), s) \226\134\146 has_bounded_variation_on(f, interval([(a, b)])) && vector_variation(interval([(a, b)]), f) <= c)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 f(x) == g(x)) && has_bounded_variation_on(f, s) \226\134\146 has_bounded_variation_on(g, s)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 f(x) == g(x)) \226\134\146 vector_variation(s, f) == vector_variation(s, g)
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], dist((f(x), f(y))) == dist((g(x), g(y)))) \226\134\146 has_bounded_variation_on(f, s) == has_bounded_variation_on(g, s)
-      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y))) \226\134\146 has_bounded_variation_on(o(f, g), s) == has_bounded_variation_on(g, s)
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], dist((f(x), f(y))) == dist((g(x), g(y)))) \226\134\146 vector_variation(s, f) == vector_variation(s, g)
-      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y))) \226\134\146 vector_variation(s, o(f, g)) == vector_variation(s, g)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], distance((f(x), f(y))) == distance((g(x), g(y)))) \226\134\146 has_bounded_variation_on(f, s) == has_bounded_variation_on(g, s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y))) \226\134\146 has_bounded_variation_on(o(f, g), s) == has_bounded_variation_on(g, s)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], distance((f(x), f(y))) == distance((g(x), g(y)))) \226\134\146 vector_variation(s, f) == vector_variation(s, g)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y))) \226\134\146 vector_variation(s, o(f, g)) == vector_variation(s, g)
       #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 a : Cart[Real, N], has_bounded_variation_on((x : Cart[Real, Unit]) => a + f(x), s) == has_bounded_variation_on(f, s)
       #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
@@ -75328,11 +75328,11 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && IN(y, s) \226\134\146 dist(((g : (Cart[Real, Unit]) -> Cart[Real, N])(x), g(y))) <= dist(((f : (Cart[Real, Unit]) -> Cart[Real, M])(x), f(y)))
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_bounded_variation_on(f, s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) < drop(y) \226\134\146 dist((g(x), g(y))) <= dist((f(x), f(y)))) \226\134\146 has_bounded_variation_on(g, s)
+      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && IN(y, s) \226\134\146 distance(((g : (Cart[Real, Unit]) -> Cart[Real, N])(x), g(y))) <= distance(((f : (Cart[Real, Unit]) -> Cart[Real, M])(x), f(y)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_bounded_variation_on(f, s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) < drop(y) \226\134\146 distance((g(x), g(y))) <= distance((f(x), f(y)))) \226\134\146 has_bounded_variation_on(g, s)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Real, has_bounded_variation_on((x : Cart[Real, Unit]) => lift(f(x)), (s : (Cart[Real, Unit]) -> Bool)) \226\134\146 has_bounded_variation_on((x : Cart[Real, Unit]) => lift(abs(f(x))), s)
-      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && IN(y, s) \226\134\146 dist(((g : (Cart[Real, Unit]) -> Cart[Real, N])(x), g(y))) <= dist(((f : (Cart[Real, Unit]) -> Cart[Real, M])(x), f(y)))
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_bounded_variation_on(f, s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) < drop(y) \226\134\146 dist((g(x), g(y))) <= dist((f(x), f(y)))) \226\134\146 vector_variation(s, g) <= vector_variation(s, f)
+      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && IN(y, s) \226\134\146 distance(((g : (Cart[Real, Unit]) -> Cart[Real, N])(x), g(y))) <= distance(((f : (Cart[Real, Unit]) -> Cart[Real, M])(x), f(y)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_bounded_variation_on(f, s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) < drop(y) \226\134\146 distance((g(x), g(y))) <= distance((f(x), f(y)))) \226\134\146 vector_variation(s, g) <= vector_variation(s, f)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 i : Num, has_bounded_variation_on(f, s) \226\134\146 vector_variation(s, (x : Cart[Real, Unit]) => lift(op_dollar(f(x), i))) <= vector_variation(s, f)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Real, \226\136\128 s : (Cart[Real, Unit]) -> Bool, has_bounded_variation_on((x : Cart[Real, Unit]) => lift(f(x)), s) \226\134\146 vector_variation(s, (x : Cart[Real, Unit]) => lift(abs(f(x)))) <= vector_variation(s, (x : Cart[Real, Unit]) => lift(f(x)))
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 t : (Cart[Real, Unit]) -> Bool, has_bounded_variation_on(f, s) && SUBSET(t, s) \226\134\146 has_bounded_variation_on(f, t)
@@ -75869,7 +75869,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], linear(f) && bounded((s : (Cart[Real, Unit]) -> Bool)) \226\134\146 has_bounded_variation_on(f, s)
       #|  (a : Real) <= (b : Real) \226\134\146 abs(a - b) == b - a
       #|  (c : Cart[Real, N])
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], linear(f) && drop(a) <= drop(b) \226\134\146 vector_variation(interval([(a, b)]), f) == dist((f(a), f(b)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], linear(f) && drop(a) <= drop(b) \226\134\146 vector_variation(interval([(a, b)]), f) == distance((f(a), f(b)))
       #|  (y : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit])
       #|  (y : Cart[Real, Unit])
@@ -76087,7 +76087,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (a : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit]) => -(f : (Cart[Real, Unit]) -> Cart[Real, Unit])(x)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 c : Cart[Real, Unit], (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(a, b)])) && IN(y, interval([(a, b)])) && drop(x) <= drop(y) \226\134\146 drop(f(y)) <= drop(f(x))) && IN(c, interval([(a, b)])) \226\134\146 (\226\136\131 l : Cart[Real, Unit], op_minus_minus_gt(f, l, within(at(c), interval([(a, c)]))))
-      #|  dist((-(x : Cart[Real, Unit]), -(y : Cart[Real, Unit]))) == dist((x, y))
+      #|  distance((-(x : Cart[Real, Unit]), -(y : Cart[Real, Unit]))) == distance((x, y))
       #|  :real
       #|  :real
       #|  (\226\136\128 x : Cart[Real, Unit], (P : (Cart[Real, Unit]) -> Bool)(x)) == (\226\136\128 x : Cart[Real, Unit], P(-x))
@@ -76169,7 +76169,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (s : (Cart[Real, Unit]) -> Bool)
       #|  (x : Cart[Real, Unit]) => -(f : (Cart[Real, Unit]) -> Cart[Real, Unit])(x)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 a : Cart[Real, Unit], \226\136\128 B : Real, is_interval(s) && (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 B <= drop(f(x))) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) <= drop(y) \226\134\146 drop(f(y)) <= drop(f(x))) \226\134\146 (\226\136\131 l : Cart[Real, Unit], op_minus_minus_gt(f, l, within(at(a), {(x : Cart[Real, Unit]) | IN(x, s) && drop(x) <= drop(a)})))
-      #|  dist((-(x : Cart[Real, Unit]), -(y : Cart[Real, Unit]))) == dist((x, y))
+      #|  distance((-(x : Cart[Real, Unit]), -(y : Cart[Real, Unit]))) == distance((x, y))
       #|  :real
       #|  :real
       #|  (\226\136\128 x : Cart[Real, Unit], (P : (Cart[Real, Unit]) -> Bool)(x)) == (\226\136\128 x : Cart[Real, Unit], P(-x))
@@ -76529,14 +76529,14 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (u : Cart[Real, Unit])
       #|  (b : Cart[Real, Unit])
       #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])((b : Cart[Real, Unit]))
-      #|  \226\136\128 a : Cart[Real, N], dist(((u : Cart[Real, N]), a)) < (e : Real) / real_of_num(2) && dist(((v : Cart[Real, N]), a)) < e / real_of_num(2) \226\134\146 dist((u, v)) < e
+      #|  \226\136\128 a : Cart[Real, N], distance(((u : Cart[Real, N]), a)) < (e : Real) / real_of_num(2) && distance(((v : Cart[Real, N]), a)) < e / real_of_num(2) \226\134\146 distance((u, v)) < e
       #|  :real
       #|  :real
       #|  real_of_num(0) < (e : Real) && (x : Real) < e / real_of_num(2) \226\134\146 x < e
       #|  (v : Cart[Real, Unit])
       #|  (a : Cart[Real, Unit])
       #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])((a : Cart[Real, Unit]))
-      #|  \226\136\128 a : Cart[Real, N], dist(((u : Cart[Real, N]), a)) < (e : Real) / real_of_num(2) && dist(((v : Cart[Real, N]), a)) < e / real_of_num(2) \226\134\146 dist((u, v)) < e
+      #|  \226\136\128 a : Cart[Real, N], distance(((u : Cart[Real, N]), a)) < (e : Real) / real_of_num(2) && distance(((v : Cart[Real, N]), a)) < e / real_of_num(2) \226\134\146 distance((u, v)) < e
       #|  :real
       #|  :real
       #|  (drop((u : Cart[Real, Unit])) <= drop((a : Cart[Real, Unit])) && drop((v : Cart[Real, Unit])) <= drop(a) || drop(u) <= drop(a) && IN(v, interval([(a, (b : Cart[Real, Unit]))]))) || IN(u, interval([(a, b)])) && IN(v, interval([(a, b)])) || IN(u, interval([(a, b)])) && drop(b) <= drop(v) || drop(b) <= drop(u) && drop(b) <= drop(v)
@@ -76548,14 +76548,14 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (b : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit])
       #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
-      #|  \226\136\128 x : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && drop(x) <= drop((a : Cart[Real, Unit])) \226\134\146 dist(((f : (Cart[Real, Unit]) -> Cart[Real, N])(x), f(a))) < (e : Real) / real_of_num(2)
+      #|  \226\136\128 x : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && drop(x) <= drop((a : Cart[Real, Unit])) \226\134\146 distance(((f : (Cart[Real, Unit]) -> Cart[Real, N])(x), f(a))) < (e : Real) / real_of_num(2)
       #|  (s : Real) - (e : Real) < (ab : Real) \226\134\146 (t : Real) <= s \226\134\146 t - e < ab
       #|  (d : Real) <= (bx : Real) && (ax : Real) - (e : Real) < (ab : Real) \226\134\146 ab + bx == ax \226\134\146 d < e
       #|  (b : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit])
       #|  (a : Cart[Real, Unit])
       #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
-      #|  \226\136\128 x : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && drop((b : Cart[Real, Unit])) <= drop(x) \226\134\146 dist(((f : (Cart[Real, Unit]) -> Cart[Real, N])(x), f(b))) < (e : Real) / real_of_num(2)
+      #|  \226\136\128 x : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && drop((b : Cart[Real, Unit])) <= drop(x) \226\134\146 distance(((f : (Cart[Real, Unit]) -> Cart[Real, N])(x), f(b))) < (e : Real) / real_of_num(2)
       #|  min((d : Real), drop((b : Cart[Real, Unit])) - drop((a : Cart[Real, Unit])))
       #|  (d : Real)
       #|  (e : Real) / real_of_num(2)
@@ -76648,7 +76648,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (x : Cart[Real, Unit])
       #|  interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))]) == {}
       #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) && (\226\136\128 x : _, (R : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) && (\226\136\128 x : _, P(x) \226\134\146 R(x)) \226\134\146 (\226\136\131 x : _, P(x) && Q(x) && R(x))
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], has_bounded_variation_on(f, interval([(a, b)])) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 f(x) == g(lift(vector_variation(interval([(a, x)]), f)))) && continuous_on(g, {lift(vector_variation(interval([(a, u)]), f)) | u : Cart[Real, Unit] | IN(u, interval([(a, b)]))}) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, {lift(vector_variation(interval([(a, u)]), f)) | u : Cart[Real, Unit] | IN(u, interval([(a, b)]))}) && IN(y, {lift(vector_variation(interval([(a, u)]), f)) | u : Cart[Real, Unit] | IN(u, interval([(a, b)]))}) \226\134\146 dist((g(x), g(y))) <= dist((x, y))))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], has_bounded_variation_on(f, interval([(a, b)])) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 f(x) == g(lift(vector_variation(interval([(a, x)]), f)))) && continuous_on(g, {lift(vector_variation(interval([(a, u)]), f)) | u : Cart[Real, Unit] | IN(u, interval([(a, b)]))}) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, {lift(vector_variation(interval([(a, u)]), f)) | u : Cart[Real, Unit] | IN(u, interval([(a, b)]))}) && IN(y, {lift(vector_variation(interval([(a, u)]), f)) | u : Cart[Real, Unit] | IN(u, interval([(a, b)]))}) \226\134\146 distance((g(x), g(y))) <= distance((x, y))))
       #|  vector_variation(interval([(vec(0), (u : Cart[Real, Unit]))]), (x : Cart[Real, Unit]) => x)
       #|  (u : Cart[Real, Unit])
       #|  (v : Cart[Real, Unit])
@@ -76661,7 +76661,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  {lift(vector_variation(interval([((a : Cart[Real, Unit]), u)]), (f : (Cart[Real, Unit]) -> Cart[Real, N]))) | u : Cart[Real, Unit] | IN(u, interval([(a, (b : Cart[Real, Unit]))]))} == interval([(vec(0), (l : Cart[Real, Unit]))])
       #|  IMAGE((x : _) => (f : (_) -> _)(x), (s : (_) -> Bool)) == {f((x : _)) | IN(x, s)}
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 l : Cart[Real, Unit], drop(a) <= drop(b) && continuous_on(f, interval([(a, b)])) && has_bounded_variation_on(f, interval([(a, b)])) && vector_variation(interval([(a, b)]), f) == drop(l) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 f(x) == g(lift(vector_variation(interval([(a, x)]), f)))) && continuous_on(g, interval([(vec(0), l)])) && (\226\136\128 u : Cart[Real, Unit], \226\136\128 v : Cart[Real, Unit], IN(u, interval([(vec(0), l)])) && IN(v, interval([(vec(0), l)])) \226\134\146 dist((g(u), g(v))) <= dist((u, v))) && has_bounded_variation_on(g, interval([(vec(0), l)])) && IMAGE((x : Cart[Real, Unit]) => lift(vector_variation(interval([(a, x)]), f)), interval([(a, b)])) == interval([(vec(0), l)]) && IMAGE(g, interval([(vec(0), l)])) == IMAGE(f, interval([(a, b)])) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(vec(0), l)])) \226\134\146 vector_variation(interval([(vec(0), x)]), g) == drop(x)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 l : Cart[Real, Unit], drop(a) <= drop(b) && continuous_on(f, interval([(a, b)])) && has_bounded_variation_on(f, interval([(a, b)])) && vector_variation(interval([(a, b)]), f) == drop(l) \226\134\146 (\226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 f(x) == g(lift(vector_variation(interval([(a, x)]), f)))) && continuous_on(g, interval([(vec(0), l)])) && (\226\136\128 u : Cart[Real, Unit], \226\136\128 v : Cart[Real, Unit], IN(u, interval([(vec(0), l)])) && IN(v, interval([(vec(0), l)])) \226\134\146 distance((g(u), g(v))) <= distance((u, v))) && has_bounded_variation_on(g, interval([(vec(0), l)])) && IMAGE((x : Cart[Real, Unit]) => lift(vector_variation(interval([(a, x)]), f)), interval([(a, b)])) == interval([(vec(0), l)]) && IMAGE(g, interval([(vec(0), l)])) == IMAGE(f, interval([(a, b)])) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(vec(0), l)])) \226\134\146 vector_variation(interval([(vec(0), x)]), g) == drop(x)))
       #|  (n : Num) => (f : (Num, Cart[Real, Unit]) -> Cart[Real, Unit])((r : (Num) -> Num)((q : (Num) -> Num)(n)), (y : Cart[Real, Unit]))
       #|  (n : Num) => (f : (Num, Cart[Real, Unit]) -> Cart[Real, Unit])((r : (Num) -> Num)((q : (Num) -> Num)(n)), (x : Cart[Real, Unit]))
       #|  sequentially
@@ -76681,7 +76681,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (k : Real)
       #|  INTER((s : (Cart[Real, Unit]) -> Bool), UNION((d : (Cart[Real, Unit]) -> Bool), frontier(s)))
       #|  (n : Num) => (x : Cart[Real, Unit]) => (f : (Num, Cart[Real, Unit]) -> Cart[Real, Unit])((r : (Num) -> Num)(n), x)
-      #|  dist(((g : (Cart[Real, Unit]) -> Cart[Real, Unit])((a : Cart[Real, Unit])), g((x : Cart[Real, Unit])))) < (e : Real) / real_of_num(2) && dist((g((b : Cart[Real, Unit])), g(x))) < e / real_of_num(2)
+      #|  distance(((g : (Cart[Real, Unit]) -> Cart[Real, Unit])((a : Cart[Real, Unit])), g((x : Cart[Real, Unit])))) < (e : Real) / real_of_num(2) && distance((g((b : Cart[Real, Unit])), g(x))) < e / real_of_num(2)
       #|  (n : Num)
       #|  (N : Num)
       #|  (e : Real) / real_of_num(2)
@@ -77213,14 +77213,14 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : ((Cart[Real, M]) -> Bool) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, operative(op_plus, f) && absolutely_setcontinuous_on(f, s) && bounded(s) \226\134\146 has_bounded_setvariation_on(f, s)
       #|  (absolutely_continuous_on : ((Cart[Real, Unit]) -> Cart[Real, N], (Cart[Real, Unit]) -> Bool) -> Bool)((f : (Cart[Real, Unit]) -> Cart[Real, N]), (s : (Cart[Real, Unit]) -> Bool)) == absolutely_setcontinuous_on((k : (Cart[Real, Unit]) -> Bool) => f(interval_upperbound(k)) - f(interval_lowerbound(k)), s)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], IN(x, s) \226\134\146 f(x) == g(x)) && absolutely_continuous_on(f, s) \226\134\146 absolutely_continuous_on(g, s)
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], dist((f(x), f(y))) == dist((g(x), g(y)))) \226\134\146 absolutely_continuous_on(f, s) == absolutely_continuous_on(g, s)
-      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y))) \226\134\146 absolutely_continuous_on(o(f, g), s) == absolutely_continuous_on(g, s)
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, _], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], distance((f(x), f(y))) == distance((g(x), g(y)))) \226\134\146 absolutely_continuous_on(f, s) == absolutely_continuous_on(g, s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y))) \226\134\146 absolutely_continuous_on(o(f, g), s) == absolutely_continuous_on(g, s)
       #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 a : Cart[Real, N], absolutely_continuous_on((x : Cart[Real, Unit]) => a + f(x), s) == absolutely_continuous_on(f, s)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (absolutely_continuous_on : ((Cart[Real, Unit]) -> Cart[Real, N], (Cart[Real, Unit]) -> Bool) -> Bool)(f, s) == (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (absolutely_continuous_on : ((Cart[Real, Unit]) -> Cart[Real, Unit], (Cart[Real, Unit]) -> Bool) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), s))
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, (absolutely_continuous_on : ((Cart[Real, Unit]) -> Cart[Real, N], (Cart[Real, Unit]) -> Bool) -> Bool)(f, s) && 1 <= (i : Num) && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (absolutely_continuous_on : ((Cart[Real, Unit]) -> Cart[Real, Unit], (Cart[Real, Unit]) -> Bool) -> Bool)((x : Cart[Real, Unit]) => lift((op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)), s)
-      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && IN(y, s) \226\134\146 dist(((g : (Cart[Real, Unit]) -> Cart[Real, N])(x), g(y))) <= dist(((f : (Cart[Real, Unit]) -> Cart[Real, M])(x), f(y)))
-      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, absolutely_continuous_on(f, s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) < drop(y) \226\134\146 dist((g(x), g(y))) <= dist((f(x), f(y)))) \226\134\146 absolutely_continuous_on(g, s)
+      #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, (s : (Cart[Real, Unit]) -> Bool)) && IN(y, s) \226\134\146 distance(((g : (Cart[Real, Unit]) -> Cart[Real, N])(x), g(y))) <= distance(((f : (Cart[Real, Unit]) -> Cart[Real, M])(x), f(y)))
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, absolutely_continuous_on(f, s) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, s) && IN(y, s) && drop(x) < drop(y) \226\134\146 distance((g(x), g(y))) <= distance((f(x), f(y)))) \226\134\146 absolutely_continuous_on(g, s)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Real, absolutely_continuous_on((x : Cart[Real, Unit]) => lift(f(x)), (s : (Cart[Real, Unit]) -> Bool)) \226\134\146 absolutely_continuous_on((x : Cart[Real, Unit]) => lift(abs(f(x))), s)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 t : (Cart[Real, Unit]) -> Bool, absolutely_continuous_on(f, s) && SUBSET(t, s) \226\134\146 absolutely_continuous_on(f, t)
       #|  \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 c : Cart[Real, N], absolutely_continuous_on((x : Cart[Real, Unit]) => c, s)
@@ -77403,7 +77403,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) \226\134\146 rectifiable_path(o(f, g)) == rectifiable_path(g)
       #|  (a : Cart[Real, N]) + (x : Cart[Real, N]) - (a + (y : Cart[Real, N])) == x - y
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], path_length(o((x : Cart[Real, N]) => a + x, g)) == path_length(g)
-      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y))) \226\134\146 path_length(o(f, g)) == path_length(g)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y))) \226\134\146 path_length(o(f, g)) == path_length(g)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, M], linear(f) && (\226\136\128 x : Cart[Real, M], norm(f(x)) == norm(x)) \226\134\146 path_length(o(f, g)) == path_length(g)
       #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 q : (Cart[Real, Unit]) -> Cart[Real, N], (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 p(t) == q(t)) && rectifiable_path(p) \226\134\146 rectifiable_path(q)
       #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 q : (Cart[Real, Unit]) -> Cart[Real, N], (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 p(t) == q(t)) \226\134\146 path_length(p) == path_length(q)
@@ -77482,8 +77482,8 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 rectifiable_path(g) == (rectifiable_path(subpath(vec(0), t, g)) && rectifiable_path(subpath(t, vec(1), g)))
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 b : Real, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 norm(g(x) - g(y)) <= b * norm(x - y)) \226\134\146 rectifiable_path(g)
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 b : Real, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 norm(g(x) - g(y)) <= b * norm(x - y)) \226\134\146 path_length(g) <= b
-      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], rectifiable_path(g) && IN(a, interval([(vec(0), vec(1))])) && IN(b, interval([(vec(0), vec(1))])) \226\134\146 dist((g(a), g(b))) <= path_length(g)
-      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) \226\134\146 dist((pathstart(g), pathfinish(g))) <= path_length(g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], rectifiable_path(g) && IN(a, interval([(vec(0), vec(1))])) && IN(b, interval([(vec(0), vec(1))])) \226\134\146 distance((g(a), g(b))) <= path_length(g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) \226\134\146 distance((pathstart(g), pathfinish(g))) <= path_length(g)
       #|  (vec : (Num) -> Cart[Real, Unit])(1)
       #|  (t : Cart[Real, Unit])
       #|  interval([((t : Cart[Real, Unit]), vec(1))])
@@ -77498,7 +77498,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
       #|  (t : Cart[Real, Unit])
       #|  (SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 s == t) && SUBSET(s, t) \226\134\146 s == t
-      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) && path_length(g) == dist((pathstart(g), pathfinish(g))) \226\134\146 path_image(g) == segment([(pathstart(g), pathfinish(g))])
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) && path_length(g) == distance((pathstart(g), pathfinish(g))) \226\134\146 path_image(g) == segment([(pathstart(g), pathfinish(g))])
       #|  :real
       #|  :real
       #|  :real
@@ -77515,7 +77515,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (t : Cart[Real, Unit])
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) \226\134\146 SUBSET(path_image(g), cball((pathstart(g), path_length(g))))
       #|  op_pct(real_of_num(1) - (x : Real), (a : Cart[Real, N])) + op_pct(x, (b : Cart[Real, N])) == a + op_pct(x, b - a)
-      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], path_length(linepath((a, b))) == dist((a, b))
+      #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], path_length(linepath((a, b))) == distance((a, b))
       #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
       #|  (h' : (Cart[Real, Unit]) -> Cart[Real, Unit])
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 h : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 h' : (Cart[Real, Unit]) -> Cart[Real, Unit], rectifiable_path(g) && homeomorphism((interval([(vec(0), vec(1))]), interval([(vec(0), vec(1))])), (h, h')) \226\134\146 rectifiable_path(o(g, h))
@@ -77570,7 +77570,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (vec : (Num) -> Cart[Real, Unit])(1)
       #|  (vec : (Num) -> Cart[Real, Unit])(0)
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
-      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(h) && path_image(h) == path_image(g) && pathstart(h) == pathstart(g) && pathfinish(h) == pathfinish(g) && path_length(h) == path_length(g) && (arc(g) \226\134\146 arc(h)) && (simple_path(g) \226\134\146 simple_path(h)) && (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 path_length(subpath(vec(0), t, h)) == path_length(g) * drop(t)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((h(x), h(y))) <= path_length(g) * dist((x, y))))
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(h) && path_image(h) == path_image(g) && pathstart(h) == pathstart(g) && pathfinish(h) == pathfinish(g) && path_length(h) == path_length(g) && (arc(g) \226\134\146 arc(h)) && (simple_path(g) \226\134\146 simple_path(h)) && (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 path_length(subpath(vec(0), t, h)) == path_length(g) * drop(t)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance((h(x), h(y))) <= path_length(g) * distance((x, y))))
       #|  lift(real_of_num(1) / real_of_num(2))
       #|  lift(real_of_num(0))
       #|  lift(real_of_num(1) / real_of_num(2))
@@ -77603,7 +77603,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (B : Real)
       #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
       #|  (h : (Num, Cart[Real, Unit]) -> Cart[Real, N])
-      #|  norm((y : Cart[Real, N])) <= (B : Real) \226\134\146 dist(((x : Cart[Real, N]), y)) <= (l : Real) \226\134\146 norm(x) <= B + l
+      #|  norm((y : Cart[Real, N])) <= (B : Real) \226\134\146 distance(((x : Cart[Real, N]), y)) <= (l : Real) \226\134\146 norm(x) <= B + l
       #|  :real
       #|  :real
       #|  (z : Cart[Real, Unit])
@@ -77634,7 +77634,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  ((l : Real) + (i : Real) <= l) == !(real_of_num(0) < i)
       #|  (l : Real) + inv(real_of_num((n : Num)) + real_of_num(1))
       #|  (n : Num)
-      #|  \226\136\128 n : Num, \226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) && (P : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)(path_image(g), pathstart(g), pathfinish(g)) && path_length(g) < (l : Real) + inv(real_of_num(n) + real_of_num(1)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((g(x), g(y))) <= (l + real_of_num(1)) * dist((x, y)))
+      #|  \226\136\128 n : Num, \226\136\131 g : (Cart[Real, Unit]) -> Cart[Real, N], rectifiable_path(g) && (P : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)(path_image(g), pathstart(g), pathfinish(g)) && path_length(g) < (l : Real) + inv(real_of_num(n) + real_of_num(1)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance((g(x), g(y))) <= (l + real_of_num(1)) * distance((x, y)))
       #|  real_of_num(0) <= (l : Real)
       #|  (l : Real) == inf({path_length((g : (Cart[Real, Unit]) -> Cart[Real, N])) | rectifiable_path(g) && (P : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)(path_image(g), pathstart(g), pathfinish(g))})
       #|  {path_length((g : (Cart[Real, Unit]) -> Cart[Real, N])) | rectifiable_path(g) && (P : ((Cart[Real, N]) -> Bool, Cart[Real, N], Cart[Real, N]) -> Bool)(path_image(g), pathstart(g), pathfinish(g))}
@@ -77764,7 +77764,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (x : Real) < (e : Real) / real_of_num(2) && (y : Real) < e / real_of_num(2) \226\134\146 x + y < e
       #|  (P : Bool) && IN((y : _), IMAGE((h : (_) -> _), UNION((t : (_) -> Bool), (s : (_) -> Bool)))) \226\134\146 !IN(y, IMAGE(h, t)) \226\134\146 (\226\136\131 x : _, P && IN(x, s) && y == h(x))
       #|  !IN(pathstart((k : (Cart[Real, Unit]) -> Cart[Real, N])), path_image(subpath(vec(0), (q : Cart[Real, Unit]), (h : (Cart[Real, Unit]) -> Cart[Real, N]))))
-      #|  abs(drop((x : Cart[Real, Unit])) - (y : Real)) == dist((x, lift(y)))
+      #|  abs(drop((x : Cart[Real, Unit])) - (y : Real)) == distance((x, lift(y)))
       #|  abs(drop((p : Cart[Real, Unit])) - real_of_num(1) / real_of_num(2)) < real_of_num(1) / real_of_num(8)
       #|  (a : Real) + (b : Real) < (c : Real) \226\134\146 a + ((x : Real) + b) < x + c
       #|  (k : Real) == (g : Real) \226\134\146 (a : Real) + (b : Real) == k \226\134\146 g <= a + b
@@ -77821,7 +77821,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  path((h : (Cart[Real, Unit]) -> Cart[Real, N]))
       #|  (d1 : Real)
       #|  real_of_num(1) / real_of_num(8)
-      #|  \226\136\131 q : Cart[Real, Unit], IN(q, interval((vec(0), vec(1)))) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(q, vec(1))])) \226\134\146 dist(((h : (Cart[Real, Unit]) -> Cart[Real, N])(vec(1)), h(x))) < (d : Real)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(q, vec(1))])) && (g : (Cart[Real, Unit]) -> Cart[Real, N])(x) == h(y) \226\134\146 dist((x, lift(real_of_num(1) / real_of_num(2)))) < real_of_num(1) / real_of_num(8))
+      #|  \226\136\131 q : Cart[Real, Unit], IN(q, interval((vec(0), vec(1)))) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(q, vec(1))])) \226\134\146 distance(((h : (Cart[Real, Unit]) -> Cart[Real, N])(vec(1)), h(x))) < (d : Real)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(q, vec(1))])) && (g : (Cart[Real, Unit]) -> Cart[Real, N])(x) == h(y) \226\134\146 distance((x, lift(real_of_num(1) / real_of_num(2)))) < real_of_num(1) / real_of_num(8))
       #|  abs((x : Real)) < (e : Real) / real_of_num(8) && abs((y : Real)) < e / real_of_num(8) \226\134\146 x + y < e / real_of_num(4)
       #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
       #|  path_length(subpath(lift(real_of_num(1) / real_of_num(2)), (a : Cart[Real, Unit]), (g : (Cart[Real, Unit]) -> Cart[Real, N]))) + path_length(subpath(lift(real_of_num(1) / real_of_num(2)), (b : Cart[Real, Unit]), g))
@@ -77845,7 +77845,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (x : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit])
       #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
-      #|  \226\136\131 d2 : Real, real_of_num(0) < d2 && (\226\136\128 x : Cart[Real, N], IN(x, IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, N]), UNION(interval([(vec(0), lift(real_of_num(1) / real_of_num(4)))]), interval([(lift(real_of_num(3) / real_of_num(4)), vec(1))])))) \226\134\146 d2 <= dist((x, g(lift(real_of_num(1) / real_of_num(2))))))
+      #|  \226\136\131 d2 : Real, real_of_num(0) < d2 && (\226\136\128 x : Cart[Real, N], IN(x, IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, N]), UNION(interval([(vec(0), lift(real_of_num(1) / real_of_num(4)))]), interval([(lift(real_of_num(3) / real_of_num(4)), vec(1))])))) \226\134\146 d2 <= distance((x, g(lift(real_of_num(1) / real_of_num(2))))))
       #|  (d1 : Real)
       #|  (e : Real)
       #|  lift(real_of_num(1) / real_of_num(2))
@@ -77855,7 +77855,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (y : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit])
       #|  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(lift(real_of_num(1) / real_of_num(4)), lift(real_of_num(3) / real_of_num(4)))])) && IN(y, interval([(lift(real_of_num(1) / real_of_num(4)), lift(real_of_num(3) / real_of_num(4)))])) && (g : (Cart[Real, Unit]) -> Cart[Real, N])(x) == g(y) \226\134\146 x == y
-      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 a : Cart[Real, Unit], IN(a, interval([(vec(0), vec(1))])) && dist(((g : (Cart[Real, Unit]) -> Cart[Real, N])(a), (h : (Cart[Real, Unit]) -> Cart[Real, N])(vec(1)))) < d \226\134\146 dist((a, lift(real_of_num(1) / real_of_num(2)))) < e))
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 a : Cart[Real, Unit], IN(a, interval([(vec(0), vec(1))])) && distance(((g : (Cart[Real, Unit]) -> Cart[Real, N])(a), (h : (Cart[Real, Unit]) -> Cart[Real, N])(vec(1)))) < d \226\134\146 distance((a, lift(real_of_num(1) / real_of_num(2)))) < e))
       #|  ((a : Real) < (b : Real) \226\134\146 b <= a) \226\134\146 b <= a
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
       #|  (g' : (Cart[Real, Unit]) -> Cart[Real, N])
@@ -77918,13 +77918,13 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  SUBSET(interval([((t0 : Cart[Real, Unit]), (t : Cart[Real, Unit]))]), interval([(t0, t0 + lift((r0 : Real)))]))
       #|  absolutely_integrable_on((s : Cart[Real, Unit]) => (u : (Cart[Real, Unit]) -> Cart[Real, N])(s) - (v : (Cart[Real, Unit]) -> Cart[Real, N])(s), interval([((t0 : Cart[Real, Unit]), (t : Cart[Real, Unit]))]))
       #|  drop(integral(interval([((t0 : Cart[Real, Unit]), (t : Cart[Real, Unit]))]), (s : Cart[Real, Unit]) => lift(norm((f : (Cart[Real, Finite_sum[Unit, N]]) -> Cart[Real, N])(pastecart(s, (u : (Cart[Real, Unit]) -> Cart[Real, N])(s))) - f(pastecart(s, (v : (Cart[Real, Unit]) -> Cart[Real, N])(s)))))))
-      #|  dist(((u0 : Cart[Real, N]) + (u : Cart[Real, N]), u0 + (v : Cart[Real, N]))) == dist((u, v))
+      #|  distance(((u0 : Cart[Real, N]) + (u : Cart[Real, N]), u0 + (v : Cart[Real, N]))) == distance((u, v))
       #|  :real
       #|  :real
       #|  \226\136\128 r : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 x : Cart[Real, Unit], IN(x, interval([((t0 : Cart[Real, Unit]), t0 + lift((r0 : Real)))])) \226\134\146 RESTRICTION(interval([(t0, t0 + lift(r0))]), r, x) == r(x)
       #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 q : (Cart[Real, Unit]) -> Cart[Real, N], mdist((X : Metric[(Cart[Real, Unit]) -> Cart[Real, N]]), (RESTRICTION(interval([((t0 : Cart[Real, Unit]), t0 + lift((r0 : Real)))]), p), RESTRICTION(interval([(t0, t0 + lift(r0))]), q))) == mdist(X, (p, q))
       #|  real_of_num(0) < (y : Real) \226\134\146 !((x : Real) + y < x)
-      #|  \226\136\128 u : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 v : (Cart[Real, Unit]) -> Cart[Real, N], mdist((X : Metric[(Cart[Real, Unit]) -> Cart[Real, N]]), (u, v)) == sup({dist((u((t : Cart[Real, Unit])), v(t))) | IN(t, interval([((t0 : Cart[Real, Unit]), t0 + lift((r0 : Real)))]))})
+      #|  \226\136\128 u : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 v : (Cart[Real, Unit]) -> Cart[Real, N], mdist((X : Metric[(Cart[Real, Unit]) -> Cart[Real, N]]), (u, v)) == sup({distance((u((t : Cart[Real, Unit])), v(t))) | IN(t, interval([((t0 : Cart[Real, Unit]), t0 + lift((r0 : Real)))]))})
       #|  (B : Real) * (r0 : Real)
       #|  content(interval([((t0 : Cart[Real, Unit]), (t : Cart[Real, Unit]))])) == drop(t) - drop(t0)
       #|  IN((x : Cart[Real, Unit]), interval([((t0 : Cart[Real, Unit]), t0 + lift((r0 : Real)))]))
