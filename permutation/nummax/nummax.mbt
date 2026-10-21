@@ -4,7 +4,7 @@
 /// MAX_LT
 fn step_1() -> Unit raise {
   let t1 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.max()])), @int.arith_tac)
-  max_lt_c.set(@tactics.prove(@parser.parse_term("forall m n p. MAX m n < p <=> m < p /\\ n < p"), t1))
+  max_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (MAX(m, n) < p) == (m < p && n < p)"), t1))
 }
 
 ///|
@@ -20,7 +20,7 @@ pub fn max_lt() -> @kernel.Thm {
 /// MAX_LE
 fn step_2() -> Unit raise {
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.max()])), @int.arith_tac)
-  max_le_c.set(@tactics.prove(@parser.parse_term("forall m n p. MAX m n <= p <=> m <= p /\\ n <= p"), t2))
+  max_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (MAX(m, n) <= p) == (m <= p && n <= p)"), t2))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn max_le() -> @kernel.Thm {
 /// LT_MAX
 fn step_3() -> Unit raise {
   let t3 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.max()])), @int.arith_tac)
-  lt_max_c.set(@tactics.prove(@parser.parse_term("forall m n p. p < MAX m n <=> p < m \\/ p < n"), t3))
+  lt_max_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (p < MAX(m, n)) == (p < m || p < n)"), t3))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn lt_max() -> @kernel.Thm {
 /// LE_MAX
 fn step_4() -> Unit raise {
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.max()])), @int.arith_tac)
-  le_max_c.set(@tactics.prove(@parser.parse_term("forall m n p. p <= MAX m n <=> p <= m \\/ p <= n"), t4))
+  le_max_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, (p <= MAX(m, n)) == (p <= m || p <= n)"), t4))
 }
 
 ///|
@@ -71,7 +71,7 @@ fn step_5() -> Unit raise {
   let t7 = @list.List([@tactics.then_tac(@tactics.eq_tac, @simp.simp_tac(@list.List([]))), t6])
   let t5 = @tactics.repeat_tac(@tactics.gen_tac)
   let t8 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.wlog_le()), @tactics.conj_tac), t5), t7)
-  max_sym_c.set(@tactics.prove(@parser.parse_term("forall m n. MAX n m = MAX m n"), t8))
+  max_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, MAX(n, m) == MAX(m, n)"), t8))
 }
 
 ///|
@@ -98,23 +98,23 @@ fn step_6() -> Unit raise {
       s21(x22)
     }
   })
-  let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("~(m <= p)"), fn(x18 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@term_syntax.parse_term("!((m : Num) <= (p : Num))"), fn(x18 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x18
     @simp.rewrite_tac(@list.List([th_1]))
   }), t23), t27), @int.arith_tac)
   let t17 = @meson.asm_meson_tac(@list.List([]))
   let t16 = @tactics.match_mp_tac(@arith.le_trans())
-  let t29 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("m <= p"), fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t29 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@term_syntax.parse_term("(m : Num) <= (p : Num)"), fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x14
     @simp.rewrite_tac(@list.List([th]))
   }), t16), t17), t28])
   let t13 = @simp.asm_rewrite_tac(@list.List([]))
-  let t12 = @class.asm_cases_tac(@parser.parse_term("n <= p"))
+  let t12 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) <= (p : Num)"))
   let t11 = @simp.asm_rewrite_tac(@list.List([]))
-  let t10 = @class.asm_cases_tac(@parser.parse_term("m <= n"))
+  let t10 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) <= (n : Num)"))
   let t9 = @simp.rewrite_tac(@list.List([@arith.max()]))
   let t30 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9), t10), t11), t12), t13), t29)
-  max_assoc_c.set(@tactics.prove(@parser.parse_term("forall m n p. MAX (MAX m n) p = MAX m (MAX n p)"), t30))
+  max_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ p : Num, MAX(MAX(m, n), p) == MAX(m, MAX(n, p))"), t30))
 }
 
 ///|
@@ -131,13 +131,13 @@ pub fn max_assoc() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t34 = @meson.asm_meson_tac(@list.List([max_sym(), max_assoc()]))
   let t35 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.max()])), @int.arith_tac), t34])
-  let t36 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall n. MAX n n = n"), fn(x31 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t36 = @tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("∀ n : Num, MAX(n, n) == n"), fn(x31 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s32 = @tactics.assume_tac(x31)
     fn(x33 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s32(x33)
     }
   }), t35)
-  max_aci_c.set(@tactics.prove(@parser.parse_term("(forall m n. MAX n m = MAX m n) /\\\n    (forall m n p. MAX (MAX m n) p = MAX m (MAX n p)) /\\\n    (forall m n p. MAX m (MAX n p) = MAX n (MAX m p)) /\\\n    (forall m. MAX m m = m) /\\\n    (forall m n. MAX m (MAX m n) = MAX m n)"), t36))
+  max_aci_c.set(@tactics.prove(@term_syntax.parse_term("(∀ m : Num, ∀ n : Num, MAX(n, m) == MAX(m, n)) && (∀ m : Num, ∀ n : Num, ∀ p : Num, MAX(MAX(m, n), p) == MAX(m, MAX(n, p))) && (∀ m : Num, ∀ n : Num, ∀ p : Num, MAX(m, MAX(n, p)) == MAX(n, MAX(m, p))) && (∀ m : Num, MAX(m, m) == m) && (∀ m : Num, ∀ n : Num, MAX(m, MAX(m, n)) == MAX(m, n))"), t36))
 }
 
 ///|
@@ -154,7 +154,7 @@ pub fn max_aci() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([@arith.max()]))
   let t38 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([max_sym()])), t37), @int.arith_tac)
-  max_0_c.set(@tactics.prove(@parser.parse_term("(forall n. MAX n 0 = n) /\\ (forall n. MAX 0 n = n)"), t38))
+  max_0_c.set(@tactics.prove(@term_syntax.parse_term("(∀ n : Num, MAX(n, 0) == n) && (∀ n : Num, MAX(0, n) == n)"), t38))
 }
 
 ///|
@@ -169,7 +169,7 @@ pub fn max_0() -> @kernel.Thm {
 ///|
 /// MAXL
 fn step_9() -> Unit raise {
-  maxl_c.set(@define.define_(@parser.parse_term("MAXL [] = 0 /\\\n   (forall h t. MAXL (CONS h t) = MAX h (MAXL t))")))
+  maxl_c.set(@define.define_(@term_syntax.parse_term("(MAXL : (List[Num]) -> Num)(NIL) == 0 && (∀ h : Num, ∀ t : List[Num], MAXL(CONS(h, t)) == MAX(h, MAXL(t)))")))
 }
 
 ///|
@@ -186,7 +186,7 @@ pub fn maxl() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t39 = @simp.asm_simp_tac(@list.List([max_le()]))
   let t40 = @tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.all(), maxl(), @arith.le_0()]))), t39)
-  maxl_le_c.set(@tactics.prove(@parser.parse_term("forall l n. MAXL l <= n <=> ALL (\\m. m <= n) l"), t40))
+  maxl_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : List[Num], ∀ n : Num, (MAXL(l) <= n) == ALL((m : Num) => m <= n, l)"), t40))
 }
 
 ///|
@@ -202,7 +202,7 @@ pub fn maxl_le() -> @kernel.Thm {
 /// LT_MAXL
 fn step_11() -> Unit raise {
   let t41 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_simp_tac(@list.List([@lists.ex(), maxl(), @arith.not_lt(), @arith.le_0(), lt_max()])))
-  lt_maxl_c.set(@tactics.prove(@parser.parse_term("forall l n. n < MAXL l <=> EX (\\m. n < m) l"), t41))
+  lt_maxl_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : List[Num], ∀ n : Num, (n < MAXL(l)) == EX((m : Num) => n < m, l)"), t41))
 }
 
 ///|
@@ -220,7 +220,7 @@ fn step_12() -> Unit raise {
   let t43 = @simp.asm_simp_tac(@list.List([@arith.le_refl(), le_max()]))
   let t42 = @simp.rewrite_tac(@list.List([@lists.mem(), maxl()]))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t42), @tactics.strip_tac), t43)
-  le_maxl_c.set(@tactics.prove(@parser.parse_term("forall n l. MEM n l ==> n <= MAXL l"), t44))
+  le_maxl_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ l : List[Num], MEM(n, l) → n <= MAXL(l)"), t44))
 }
 
 ///|
@@ -237,10 +237,10 @@ pub fn le_maxl() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t48 = @meson.asm_meson_tac(@list.List([@arith.max()]))
   let t47 = @simp.asm_rewrite_tac(@list.List([maxl(), max_0()]))
-  let t46 = @class.asm_cases_tac(@parser.parse_term("t:num list=[]"))
+  let t46 = @class.asm_cases_tac(@term_syntax.parse_term("(t : List[Num]) == NIL"))
   let t45 = @simp.rewrite_tac(@list.List([@lists.mem(), maxl(), @lists.not_cons_nil()]))
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@morelist.null_eq_nil()])), @lists.list_induct_tac), t45), t46), t47), t48)
-  mem_maxl_c.set(@tactics.prove(@parser.parse_term("forall l. ~NULL l ==> MEM (MAXL l) l"), t49))
+  mem_maxl_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : List[Num], !NULL(l) → MEM(MAXL(l), l)"), t49))
 }
 
 ///|
