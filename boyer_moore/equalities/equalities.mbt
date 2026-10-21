@@ -76,7 +76,7 @@ pub fn use_equality_subst(x8 : Bool, x9 : Bool, x10 : @kernel.Thm, x11 : @kernel
 fn step_1() -> Unit raise {
   let t14 = @simp.asm_rewrite_tac(@list.List([]))
   let t15 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t14)
-  eq_eq_imp_disj_eq_c.set(@tactics.prove(@parser.parse_term("forall x x' y y'. (x = x') /\\ (y = y') ==> ((x \\/ y) = (x' \\/ y'))"), t15))
+  eq_eq_imp_disj_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Bool, ∀ x' : Bool, ∀ y : Bool, ∀ y' : Bool, x == x' && y == y' → (x || y) == (x' || y')"), t15))
 }
 
 ///|
