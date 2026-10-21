@@ -5799,16 +5799,16 @@ Jordan/real_ext_geom_series quotations (23):
   real_inv:real->real
   real_abs:real->real
   real_of_num:num->real
-  forall x a b.\n                (((~(x=(&0))==>(a*x = b*x)) /\\ ~(x=(&0))) ==>  (a = b))
-  b:real = x pow (m+n)
-  a:real = x pow m
-  (A==>(B==>C))    ==> (A ==> ((A==>B) ==>C))
-  x:real
-  a - b + b - b*x = a - x*b
-  ~(x=(&1)) ==> ~((&1 - x = (&0)))
-  ~(x = (&1))
-  &1 - x
-  forall m n x.(~(x=(&1)) ==>\n        (sum(m,n) (\\k.(x pow k)) = ((x pow m) - (x pow (m+n)))/((&1)-x)))
+  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, (!(x == real_of_num(0)) \226\134\146 a * x == b * x) && !(x == real_of_num(0)) \226\134\146 a == b
+  (b : Real) == pow((x : Real), (m : Num) + (n : Num))
+  (a : Real) == pow((x : Real), (m : Num))
+  ((A : Bool) \226\134\146 (B : Bool) \226\134\146 (C : Bool)) \226\134\146 A \226\134\146 (A \226\134\146 B) \226\134\146 C
+  (x : Real)
+  (a : Real) - (b : Real) + (b - b * (x : Real)) == a - x * b
+  !((x : Real) == real_of_num(1)) \226\134\146 !(real_of_num(1) - x == real_of_num(0))
+  !((x : Real) == real_of_num(1))
+  real_of_num(1) - (x : Real)
+  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 x : Real, !(x == real_of_num(1)) \226\134\146 sum((m, n), (k : Num) => pow(x, k)) == (pow(x, m) - pow(x, m + n)) / (real_of_num(1) - x)
 REAL_MUL_RTIMES =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) a:real) x:real)) ((#real_mul:fun(real,fun(real,real)) b:real) x:real)))) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) a:real) b:real))))))))
 GEOMETRIC_SUM =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#=:fun(real,fun(real,bool)) ((#psum:fun(prod(num,num),fun(fun(num,real),real)) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)) (\k:num. ((#real_pow:fun(real,fun(num,real)) x:real) k:num)))) ((#real_div:fun(real,fun(real,real)) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) x:real) m:num)) ((#real_pow:fun(real,fun(num,real)) x:real) ((#+:fun(num,fun(num,num)) m:num) n:num)))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real))))))))))
 types = metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
