@@ -21,7 +21,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_521
 fn step_4() -> Unit raise {
-  p_521_c.set(@pair.new_definition(@parser.parse_term("p_521 = 6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151")))
+  p_521_c.set(@pair.new_definition(@term_syntax.parse_term("(p_521 : Num) == 6864797660130609714981900799081393217269435300143305409394463459185543183397656052122559640661454554977296311391480858037121987999716643812574028291115057151")))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn p_521() -> @kernel.Thm {
 ///|
 /// n_521
 fn step_5() -> Unit raise {
-  n_521_c.set(@pair.new_definition(@parser.parse_term("n_521 = 6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005449")))
+  n_521_c.set(@pair.new_definition(@term_syntax.parse_term("(n_521 : Num) == 6864797660130609714981900799081393217269435300143305409394463459185543183397655394245057746333217197532963996371363321113864768612440380340372808892707005449")))
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn n_521() -> @kernel.Thm {
 ///|
 /// SEED_521
 fn step_6() -> Unit raise {
-  seed_521_c.set(@pair.new_definition(@parser.parse_term("SEED_521 = 0xd09e8800291cb85396cc6717393284aaa0da64ba")))
+  seed_521_c.set(@pair.new_definition(@term_syntax.parse_term("(SEED_521 : Num) == 1191005445398260649615595456645891205364046259386")))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn seed_521() -> @kernel.Thm {
 ///|
 /// c_521
 fn step_7() -> Unit raise {
-  c_521_c.set(@pair.new_definition(@parser.parse_term("c_521 = 0x0b48bfa5f420a34949539d2bdfc264eeeeb077688e44fbf0ad8f6d0edb37bd6b533281000518e19f1b9ffbe0fe9ed8a3c2200b8f875e523868c70c1e5bf55bad637")))
+  c_521_c.set(@pair.new_definition(@term_syntax.parse_term("(c_521 : Num) == 2420736670956961470587751833778383872272949280174637971106318223956010636355557333899035866342650378575221277268886182704643828850020061383251826928984446519")))
 }
 
 ///|
@@ -81,7 +81,7 @@ pub fn c_521() -> @kernel.Thm {
 ///|
 /// b_521
 fn step_8() -> Unit raise {
-  b_521_c.set(@pair.new_definition(@parser.parse_term("b_521 = 0x051953eb9618e1c9a1f929a21a0b68540eea2da725b99b315f3b8b489918ef109e156193951ec7e937b1652c0bd3bb1bf073573df883d2c34f1ef451fd46b503f00")))
+  b_521_c.set(@pair.new_definition(@term_syntax.parse_term("(b_521 : Num) == 1093849038073734274511112390766805569936207598951683748994586394495953116150735016013708737573759623248592132296706313309438452531591012912142327488478985984")))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn b_521() -> @kernel.Thm {
 ///|
 /// G_521
 fn step_9() -> Unit raise {
-  g_521_c.set(@pair.new_definition(@parser.parse_term("G_521 = SOME(&0xc6858e06b70404e9cd9e3ecb662395b4429c648139053fb521f828af606b4d3dbaa14b5e77efe75928fe1dc127a2ffa8de3348b3c1856a429bf97e7e31c2e5bd66:int,&0x11839296a789a3bc0045c8a5fb42c7d1bd998f54449579b446817afbd17273e662c97ee72995ef42640c550b9013fad0761353c7086a272c24088be94769fd16650:int)")))
+  g_521_c.set(@pair.new_definition(@term_syntax.parse_term("(G_521 : Option[(Int, Int)]) == SOME((int_of_num(2661740802050217063228768716723360960729859168756973147706671368418802944996427808491545080627771902352094241225065558662157113545570916814161637315895999846), int_of_num(3757180025770020463545507224491183603594455134769762486694567779615544477440556316691234405012945539562144444537289428522585666729196580810124344277578376784)))")))
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn g_521() -> @kernel.Thm {
 ///|
 /// nistp521
 fn step_10() -> Unit raise {
-  nistp521_c.set(@define.define_(@parser.parse_term("nistp521 =\n   (integer_mod_ring p_521,\n     ring_neg (integer_mod_ring p_521) (&3),\n     &b_521:int)")))
+  nistp521_c.set(@define.define_(@term_syntax.parse_term("(nistp521 : (Ring[Int], Int, Int)) == (integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521))")))
 }
 
 ///|
@@ -128,7 +128,7 @@ pub fn nistp521() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([p_521()])), t1)
-  p_521_v1_c.set(@tactics.prove(@parser.parse_term("p_521 = 2 EXP 521 - 1"), t2))
+  p_521_v1_c.set(@tactics.prove(@term_syntax.parse_term("p_521 == EXP(2, 521) - 1"), t2))
 }
 
 ///|
@@ -153,7 +153,7 @@ fn step_12() -> Unit raise {
   let t9 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p_521()])), t4), t8)
   prime_p521_c.set(@lib.time(fn(x3 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x3.0, x3.1)
-  }, (@parser.parse_term("prime p_521"), t9)))
+  }, (@term_syntax.parse_term("prime(p_521)"), t9)))
 }
 
 ///|
@@ -178,7 +178,7 @@ fn step_13() -> Unit raise {
   let t16 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([n_521()])), t11), t15)
   prime_n521_c.set(@lib.time(fn(x10 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x10.0, x10.1)
-  }, (@parser.parse_term("prime n_521"), t16)))
+  }, (@term_syntax.parse_term("prime(n_521)"), t16)))
 }
 
 ///|
@@ -196,7 +196,7 @@ fn step_14() -> Unit raise {
   let t18 = @tactics.conv_tac(@int.int_reduce_conv)
   let t17 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_rem_eq())]))
   let t19 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([g_521(), p_521(), b_521(), c_521()])), t17), t18)
-  sanity_check_521_c.set(@tactics.prove(@parser.parse_term("(&b_521 pow 2 * &c_521:int == -- &27) (mod &p_521)"), t19))
+  sanity_check_521_c.set(@tactics.prove(@term_syntax.parse_term("op_eq_eq(pow(int_of_num(b_521), 2) * int_of_num(c_521), -int_of_num(27), mod(int_of_num(p_521)))"), t19))
 }
 
 ///|
@@ -211,7 +211,7 @@ pub fn sanity_check_521() -> @kernel.Thm {
 ///|
 /// p521_group
 fn step_15() -> Unit raise {
-  p521_group_c.set(@define.define_(@parser.parse_term("p521_group =\n   weierstrass_group\n    (integer_mod_ring p_521,\n     ring_neg (integer_mod_ring p_521) (&3),\n     &b_521)")))
+  p521_group_c.set(@define.define_(@term_syntax.parse_term("(p521_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521)))")))
 }
 
 ///|
@@ -232,7 +232,7 @@ fn step_16() -> Unit raise {
   let t21 = @simp.rewrite_tac(@list.List([@ringtheory.field_integer_mod_ring(), @ringtheory.integer_mod_ring_char(), prime_p521()]))
   let t20 = @tactics.match_mp_tac(@weierstrass.weierstrass_group_v1())
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p521_group()])), t20), t21), t22), t23), t24)
-  p521_group_v1_c.set(@tactics.prove(@parser.parse_term("group_carrier p521_group =\n     weierstrass_curve\n      (integer_mod_ring p_521,ring_neg (integer_mod_ring p_521) (&3),&b_521) /\\\n   group_id p521_group =\n     NONE /\\\n   group_inv p521_group =\n     weierstrass_neg\n      (integer_mod_ring p_521,ring_neg (integer_mod_ring p_521) (&3),&b_521) /\\\n   group_mul p521_group =\n     weierstrass_add\n      (integer_mod_ring p_521,ring_neg (integer_mod_ring p_521) (&3),&b_521)"), t25))
+  p521_group_v1_c.set(@tactics.prove(@term_syntax.parse_term("group_carrier(p521_group) == weierstrass_curve((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521))) && group_id(p521_group) == NONE && group_inv(p521_group) == weierstrass_neg((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521))) && group_mul(p521_group) == weierstrass_add((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521)))"), t25))
 }
 
 ///|
@@ -254,7 +254,7 @@ fn step_17() -> Unit raise {
 /// NO_ROOTS_P521
 fn step_18() -> Unit raise {
   let t26 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p521(), @list.List([p_521(), b_521()]))
-  no_roots_p521_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 - &3 * x + &b_521 == &0) (mod &p_521))"), t26))
+  no_roots_p521_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Int, !op_eq_eq(pow(x, 3) - int_of_num(3) * x + int_of_num(b_521), int_of_num(0), mod(int_of_num(p_521)))"), t26))
 }
 
 ///|
@@ -271,7 +271,7 @@ pub fn no_roots_p521() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   let t27 = @tactics.conv_tac(@computegroup.ecgroup_carrier_conv)
   let t28 = @tactics.then_tac(@simp.rewrite_tac(@list.List([g_521()])), t27)
-  generator_in_group_carrier_521_c.set(@tactics.prove(@parser.parse_term("G_521 IN group_carrier p521_group"), t28))
+  generator_in_group_carrier_521_c.set(@tactics.prove(@term_syntax.parse_term("IN(G_521, group_carrier(p521_group))"), t28))
 }
 
 ///|
@@ -290,7 +290,7 @@ fn step_20() -> Unit raise {
   let t30 = @simp.rewrite_tac(@list.List([n_521()]))
   let t29 = @simp.rewrite_tac(@list.List([g_521(), @lib.el(1, @bool.conjuncts_rule(p521_group_v1())), @ind_types.option_distinct()]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@grouptheory.group_element_order_unique_prime(), generator_in_group_carrier_521(), prime_n521()])), t29), t30), t31), @tactics.refl_tac)
-  group_element_order_g521_c.set(@tactics.prove(@parser.parse_term("group_element_order p521_group G_521 = n_521"), t32))
+  group_element_order_g521_c.set(@tactics.prove(@term_syntax.parse_term("group_element_order(p521_group, G_521) == n_521"), t32))
 }
 
 ///|
@@ -310,7 +310,7 @@ fn step_21() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@ringtheory.finite_integer_mod_ring(), @ringtheory.field_integer_mod_ring(), prime_p521()]))
   let t33 = @tactics.match_mp_tac(@weierstrass.finite_weierstrass_curve())
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p521_group_v1()])), t33), t34), t35), t36)
-  finite_group_carrier_p521_c.set(@tactics.prove(@parser.parse_term("FINITE(group_carrier p521_group)"), t37))
+  finite_group_carrier_p521_c.set(@tactics.prove(@term_syntax.parse_term("FINITE(group_carrier(p521_group))"), t37))
 }
 
 ///|
@@ -335,7 +335,7 @@ fn step_22() -> Unit raise {
     })(t97(x98))
   })
   let t93 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.num_coprime()), @calc_num.arith(), @prime.coprime_2()]))
-  let t90 = @drule.match_mp(@int.integer_rule(@parser.parse_term("p divides (a * b:int) ==> coprime(a,p) ==> p divides b")))
+  let t90 = @drule.match_mp(@int.integer_rule(@term_syntax.parse_term("divides((p : Int), (a : Int) * (b : Int)) → coprime((a, p)) → divides(p, b)")))
   let t92 = @tactics.disch_then(fn(x91 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x87 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s88 = @tactics.mp_tac(x87)
@@ -344,9 +344,9 @@ fn step_22() -> Unit raise {
       }
     })(t90(x91))
   })
-  let t86 = @simp.rewrite_tac(@list.List([@int.int_rem_eq(), @int.integer_rule(@parser.parse_term("(--y:int == y) (mod p) <=> p divides (&2 * y)"))]))
+  let t86 = @simp.rewrite_tac(@list.List([@int.int_rem_eq(), @int.integer_rule(@term_syntax.parse_term("op_eq_eq(-(y : Int), y, mod((p : Int))) == divides(p, int_of_num(2) * y)"))]))
   let t85 = @list.List([@simp.asm_simp_tac(@list.List([@int.int_rem_lt()])), @tactics.all_tac])
-  let t83 = @drule.match_mp(@int.int_arith(@parser.parse_term("--y rem p = y ==> y rem p = y ==> (--y rem p = y rem p)")))
+  let t83 = @drule.match_mp(@int.int_arith(@term_syntax.parse_term("rem(-(y : Int), (p : Int)) == y → rem(y, p) == y → rem(-y, p) == rem(y, p)")))
   let t100 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.first_x_assum(fn(x84 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x80 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s81 = @tactics.mp_tac(x80)
@@ -356,8 +356,8 @@ fn step_22() -> Unit raise {
     })(t83(x84))
   })), @tactics.ants_tac), t85), t86), t92), t93), t99), @int.asm_int_arith_tac)
   let t79 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_rem_eq()), p_521(), @int.int_rem_zero()]))
-  let t78 = @simp.rewrite_tac(@list.List([@int.int_arith(@parser.parse_term("y - &3 * x + b:int = y + (-- &3) * x + b"))]))
-  let t77 = @tactics.mp_tac(@bool.spec(@parser.parse_term("x:int"), no_roots_p521()))
+  let t78 = @simp.rewrite_tac(@list.List([@int.int_arith(@term_syntax.parse_term("(y : Int) - int_of_num(3) * (x : Int) + (b : Int) == y + (-int_of_num(3) * x + b)"))]))
+  let t77 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x : Int)"), no_roots_p521()))
   let t76 = @tactics.conv_tac(@int.int_rem_down_conv)
   let t75 = @tactics.disch_then(@tactics.conjuncts_then2(@tactics.strip_assume_tac, fn(x74 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x71 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -369,14 +369,14 @@ fn step_22() -> Unit raise {
   }))
   let t70 = @tactics.conv_tac(@int.int_reduce_conv)
   let t101 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t70), t75), t76), t77), t78), t79), t100])
-  let t69 = @class.asm_cases_tac(@parser.parse_term("y:int = &0"))
+  let t69 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Int) == int_of_num(0)"))
   let t66 = @tactics.conv_tac(@int.int_reduce_conv)
   let t65 = @simp.rewrite_tac(@list.List([p_521(), @pair.pair_eq()]))
   let t64 = @tactics.conv_tac(@int.int_rem_down_conv)
   let t63 = @simp.rewrite_tac(@list.List([@ringtheory.in_integer_mod_ring_carrier(), @ringtheory.integer_mod_ring_clauses()]))
   let t62 = @simp.rewrite_tac(@list.List([@ind_types.option_inj()]))
-  let t60 = @parser.parse_term("y:int")
-  let t61 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:int"), t60]))
+  let t60 = @term_syntax.parse_term("(y : Int)")
+  let t61 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Int)"), t60]))
   let t59 = @simp.rewrite_tac(@list.List([@weierstrass.weierstrass_curve(), @weierstrass.weierstrass_neg(), @ind_types.option_distinct()]))
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @sets.in_(), @pair.forall_pair_thm()])), t59), t61), t62), t63), t64), t65), t66)
   let t58 = @tactics.conv_tac(@calc_num.num_reduce_conv)
@@ -408,9 +408,9 @@ fn step_22() -> Unit raise {
   }, t51), t52), @tactics.ants_tac), t55), t56), t57), t58), t67])
   let t40 = @simp.rewrite_tac(@list.List([p521_group_v1()]))
   let t39 = @simp.rewrite_tac(@list.List([generator_in_group_carrier_521(), group_element_order_g521(), finite_group_carrier_p521()]))
-  let t38 = @tactics.exists_tac(@parser.parse_term("G_521:(int#int)option"))
+  let t38 = @tactics.exists_tac(@term_syntax.parse_term("G_521"))
   let t102 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.group_adhoc_order_unique_lemma()), t38), t39), t40), @tactics.conj_tac), t68), t69), t101)
-  size_p521_group_c.set(@tactics.prove(@parser.parse_term("group_carrier p521_group HAS_SIZE n_521"), t102))
+  size_p521_group_c.set(@tactics.prove(@term_syntax.parse_term("HAS_SIZE(group_carrier(p521_group), n_521)"), t102))
 }
 
 ///|
@@ -426,7 +426,7 @@ pub fn size_p521_group() -> @kernel.Thm {
 /// P521_GROUP_ORDER
 fn step_23() -> Unit raise {
   let t103 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@sets.has_size()]))(size_p521_group())]))
-  p521_group_order_c.set(@tactics.prove(@parser.parse_term("CARD(group_carrier p521_group) = n_521"), t103))
+  p521_group_order_c.set(@tactics.prove(@term_syntax.parse_term("CARD(group_carrier(p521_group)) == n_521"), t103))
 }
 
 ///|
@@ -442,7 +442,7 @@ pub fn p521_group_order() -> @kernel.Thm {
 /// P521_GROUP_ELEMENT_ORDER
 fn step_24() -> Unit raise {
   let t104 = @meson.meson_tac(@list.List([size_p521_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n521()]))
-  p521_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p521_group\n       ==> group_element_order p521_group P =\n           if P = group_id p521_group then 1 else n_521"), t104))
+  p521_group_element_order_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : Option[(Int, Int)], IN(P, group_carrier(p521_group)) → group_element_order(p521_group, P) == (if P == group_id(p521_group) { 1 } else { n_521 })"), t104))
 }
 
 ///|
@@ -459,7 +459,7 @@ pub fn p521_group_element_order() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t105 = @simp.rewrite_tac(@list.List([group_element_order_g521(), @simp.rewrite_rule(@list.List([@sets.has_size()]))(size_p521_group())]))
   let t106 = @tactics.then_tac(@simp.simp_tac(@list.List([@grouptheory.subgroup_generated_element_order(), generator_in_group_carrier_521(), finite_group_carrier_p521()])), t105)
-  generated_p521_group_c.set(@tactics.prove(@parser.parse_term("subgroup_generated p521_group {G_521} = p521_group"), t106))
+  generated_p521_group_c.set(@tactics.prove(@term_syntax.parse_term("subgroup_generated(p521_group, {G_521}) == p521_group"), t106))
 }
 
 ///|
@@ -475,7 +475,7 @@ pub fn generated_p521_group() -> @kernel.Thm {
 /// CYCLIC_P521_GROUP
 fn step_26() -> Unit raise {
   let t107 = @meson.meson_tac(@list.List([@grouptheory.cyclic_group_alt(), generated_p521_group()]))
-  cyclic_p521_group_c.set(@tactics.prove(@parser.parse_term("cyclic_group p521_group"), t107))
+  cyclic_p521_group_c.set(@tactics.prove(@term_syntax.parse_term("cyclic_group(p521_group)"), t107))
 }
 
 ///|
@@ -491,7 +491,7 @@ pub fn cyclic_p521_group() -> @kernel.Thm {
 /// ABELIAN_P521_GROUP
 fn step_27() -> Unit raise {
   let t108 = @meson.meson_tac(@list.List([cyclic_p521_group(), @grouptheory.cyclic_imp_abelian_group()]))
-  abelian_p521_group_c.set(@tactics.prove(@parser.parse_term("abelian_group p521_group"), t108))
+  abelian_p521_group_c.set(@tactics.prove(@term_syntax.parse_term("abelian_group(p521_group)"), t108))
 }
 
 ///|
