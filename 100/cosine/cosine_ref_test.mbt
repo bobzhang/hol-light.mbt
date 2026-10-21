@@ -77583,7 +77583,7 @@ test "100/cosine matches 100/cosine.ml" {
       #|0..0..1..5..15..solved at 20
       #|100/cosine quotations (70):
       #|  (vangle : (Cart[Real, _], Cart[Real, _]) -> Real)((x : Cart[Real, _]), (y : Cart[Real, _])) == (if x == vec(0) || y == vec(0) { pi / real_of_num(2) } else { acs(dot(x, y) / (norm(x) * norm(y))) })
-      #|  (angle : ((Cart[Real, _], Cart[Real, _], Cart[Real, _])) -> Real)(((a : Cart[Real, _]), (b : Cart[Real, _]), (c : Cart[Real, _]))) == vangle(a - b, c - b)
+      #|  (angle : ((Cart[Real, _], Cart[Real, _], Cart[Real, _])) -> Real)(((a : Cart[Real, _]), (b : Cart[Real, _]), (c : Cart[Real, _]))) == vangle(vector_sub(a, b), vector_sub(c, b))
       #|  (y : Cart[Real, N])
       #|  (x : Cart[Real, N])
       #|  (a : Real) * ((b : Real) * (c : Real)) == c * (a * b)
@@ -77604,21 +77604,21 @@ test "100/cosine matches 100/cosine.ml" {
       #|  (x : Cart[Real, N])
       #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], vangle(x, y) == pi \226\134\146 op_pct(norm(x), y) + op_pct(norm(y), x) == vec(0)
       #|  (B : Cart[Real, N]) - (A : Cart[Real, N]) + ((C : Cart[Real, N]) - B) == C - A
-      #|  ((a : Cart[Real, _]) + op_pct((x : Real), (b : Cart[Real, _]) - (c : Cart[Real, _])) == vec(0)) == (a == op_pct(x, c - b))
-      #|  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], angle((A, B, C)) == pi \226\134\146 dist((A, C)) == dist((A, B)) + dist((B, C))
+      #|  (vector_add((a : Cart[Real, _]), op_pct((x : Real), vector_sub((b : Cart[Real, _]), (c : Cart[Real, _])))) == vec(0)) == (a == op_pct(x, vector_sub(c, b)))
+      #|  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], angle((A, B, C)) == pi \226\134\146 distance((A, C)) == distance((A, B)) + distance((B, C))
       #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], \226\136\128 C : Cart[Real, _], real_of_num(0) <= sin(angle((A, B, C)))
-      #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], \226\136\128 C : Cart[Real, _], dot(A - C, B - C) == dist((A, C)) * (dist((B, C)) * cos(angle((A, C, B))))
+      #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], \226\136\128 C : Cart[Real, _], dot(vector_sub(A, C), vector_sub(B, C)) == real_mul(distance((A, C)), real_mul(distance((B, C)), cos(angle((A, C, B)))))
       #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], angle((A, A, B)) == pi / real_of_num(2) && angle((B, A, A)) == pi / real_of_num(2)
       #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], !(A == B) \226\134\146 angle((A, B, A)) == real_of_num(0)
       #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], \226\136\128 C : Cart[Real, _], angle((A, B, C)) == angle((C, B, A))
       #|  \226\136\128 A : Cart[Real, _], \226\136\128 B : Cart[Real, _], \226\136\128 C : Cart[Real, _], real_of_num(0) <= angle((A, B, C)) && angle((A, B, C)) <= pi
-      #|  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], pow(dist((B, C)), 2) == pow(dist((A, B)), 2) + (pow(dist((A, C)), 2) - real_of_num(2) * (dist((A, B)) * (dist((A, C)) * cos(angle((B, A, C))))))
+      #|  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], pow(distance((B, C)), 2) == pow(distance((A, B)), 2) + (pow(distance((A, C)), 2) - real_of_num(2) * (distance((A, B)) * (distance((A, C)) * cos(angle((B, A, C))))))
       #|  ((a : Real) * ((real_of_num(1) - (x : Real)) * (b : Real)) == (c : Real) * ((real_of_num(1) - (y : Real)) * (d : Real))) == (a * b - a * (b * x) == c * d - c * (d * y))
       #|  !((a : Real) == real_of_num(0)) \226\134\146 pow(a, 2) * (x : Real) == pow(a, 2) * (y : Real) \226\134\146 x == y
       #|  (A : Cart[Real, N]) == (B : Cart[Real, N])
       #|  (x : Real) + (y : Real) == real_of_num(1) \226\134\146 x == real_of_num(1) - y
       #|  2
-      #|  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], sin(angle((A, B, C))) * dist((B, C)) == sin(angle((B, A, C))) * dist((A, C))
+      #|  \226\136\128 A : Cart[Real, N], \226\136\128 B : Cart[Real, N], \226\136\128 C : Cart[Real, N], sin(angle((A, B, C))) * distance((B, C)) == sin(angle((B, A, C))) * distance((A, C))
       #|  angle(((B : Cart[Real, N]), (C : Cart[Real, N]), (A : Cart[Real, N])))
       #|  angle(((A : Cart[Real, N]), (B : Cart[Real, N]), (C : Cart[Real, N])))
       #|  angle(((B : Cart[Real, N]), (A : Cart[Real, N]), (C : Cart[Real, N])))
