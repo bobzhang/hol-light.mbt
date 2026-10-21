@@ -3,7 +3,7 @@
 ///|
 /// assign
 fn step_1() -> Unit raise {
-  assign_c.set(@pair.new_definition(@parser.parse_term("Assign (f:S->S) (q:S->bool) = q o f")))
+  assign_c.set(@pair.new_definition(@term_syntax.parse_term("(Assign : ((S) -> S, (S) -> Bool, S) -> Bool)((f : (S) -> S), (q : (S) -> Bool)) == o(q, f)")))
 }
 
 ///|
@@ -39,7 +39,7 @@ pub fn sequence() -> @kernel.Thm {
 ///|
 /// if_def
 fn step_4() -> Unit raise {
-  if_def_c.set(@pair.new_definition(@parser.parse_term("If e (c:(S->bool)->(S->bool)) q = {s | if e s then c q s else q s}")))
+  if_def_c.set(@pair.new_definition(@term_syntax.parse_term("(If : ((S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | if e(s) { c(q, s) } else { q(s) }}")))
 }
 
 ///|
@@ -54,7 +54,7 @@ pub fn if_def() -> @kernel.Thm {
 ///|
 /// ite_def
 fn step_5() -> Unit raise {
-  ite_def_c.set(@pair.new_definition(@parser.parse_term("Ite e (c1:(S->bool)->(S->bool)) c2 q =\n    {s | if e s then c1 q s else c2 q s}")))
+  ite_def_c.set(@pair.new_definition(@term_syntax.parse_term("(Ite : ((S) -> Bool, ((S) -> Bool, S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c1 : ((S) -> Bool, S) -> Bool), (c2 : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | if e(s) { c1(q, s) } else { c2(q, s) }}")))
 }
 
 ///|
@@ -105,7 +105,7 @@ fn step_6() -> Unit raise {
 ///|
 /// while_def
 fn step_7() -> Unit raise {
-  while_def_c.set(@pair.new_definition(@parser.parse_term("While e c q =\n    {s | forall w. (forall s:S. (if e(s) then c w s else q s) ==> w s) ==> w s}")))
+  while_def_c.set(@pair.new_definition(@term_syntax.parse_term("(While : ((S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | ∀ w : (S) -> Bool, (∀ s : S, (if e(s) { c(w, s) } else { q(s) }) → w(s)) → w(s)}")))
 }
 
 ///|
@@ -120,7 +120,7 @@ pub fn while_def() -> @kernel.Thm {
 ///|
 /// monotonic
 fn step_8() -> Unit raise {
-  monotonic_c.set(@pair.new_definition(@parser.parse_term("monotonic c <=> forall q q'. q SUBSET q' ==> (c q) SUBSET (c q')")))
+  monotonic_c.set(@pair.new_definition(@term_syntax.parse_term("(monotonic : (((_) -> Bool, _) -> Bool) -> Bool)((c : ((_) -> Bool, _) -> Bool)) == (∀ q : (_) -> Bool, ∀ q' : (_) -> Bool, SUBSET(q, q') → SUBSET(c(q), c(q')))")))
 }
 
 ///|
@@ -136,7 +136,7 @@ pub fn monotonic() -> @kernel.Thm {
 /// MONOTONIC_ASSIGN
 fn step_9() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([monotonic(), assign(), @sets.subset(), @trivia.o_thm(), @sets.in_()]))
-  monotonic_assign_c.set(@tactics.prove(@parser.parse_term("monotonic (Assign f)"), t1))
+  monotonic_assign_c.set(@tactics.prove(@term_syntax.parse_term("monotonic(Assign((f : (_) -> _)))"), t1))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn monotonic_assign() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t2 = @sets.set_tac(@list.List([]))
   let t3 = @tactics.then_tac(@simp.rewrite_tac(@list.List([monotonic(), if_def()])), t2)
-  monotonic_if_c.set(@tactics.prove(@parser.parse_term("monotonic c ==> monotonic (If e c)"), t3))
+  monotonic_if_c.set(@tactics.prove(@term_syntax.parse_term("monotonic((c : ((_) -> Bool, _) -> Bool)) → monotonic(If((e : (_) -> Bool), c))"), t3))
 }
 
 ///|
@@ -170,7 +170,7 @@ pub fn monotonic_if() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t4 = @sets.set_tac(@list.List([]))
   let t5 = @tactics.then_tac(@simp.rewrite_tac(@list.List([monotonic(), ite_def()])), t4)
-  monotonic_ite_c.set(@tactics.prove(@parser.parse_term("monotonic c1 /\\ monotonic c2 ==> monotonic (Ite e c1 c2)"), t5))
+  monotonic_ite_c.set(@tactics.prove(@term_syntax.parse_term("monotonic((c1 : ((_) -> Bool, _) -> Bool)) && monotonic((c2 : ((_) -> Bool, _) -> Bool)) → monotonic(Ite((e : (_) -> Bool), c1, c2))"), t5))
 }
 
 ///|
@@ -204,7 +204,7 @@ pub fn monotonic_seq() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t8 = @sets.set_tac(@list.List([]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([monotonic(), while_def()])), t8)
-  monotonic_while_c.set(@tactics.prove(@parser.parse_term("monotonic c ==> monotonic(While e c)"), t9))
+  monotonic_while_c.set(@tactics.prove(@term_syntax.parse_term("monotonic((c : ((_) -> Bool, _) -> Bool)) → monotonic(While((e : (_) -> Bool), c))"), t9))
 }
 
 ///|
@@ -230,7 +230,7 @@ fn step_14() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), while_def(), @sets.in_elim_thm()]))
   let t18 = @tactics.disch_then(@tactics.match_mp_tac)
   let t17 = @simp.rewrite_tac(@list.List([if_def(), sequence(), @trivia.o_thm(), @sets.in_elim_thm(), @theorems.imp_imp()]))
-  let t15 = @parser.parse_term("forall s:S. (if e s then c w s else q s) ==> w s")
+  let t15 = @term_syntax.parse_term("∀ s : S, (if (e : (S) -> Bool)(s) { (c : ((S) -> Bool, S) -> Bool)((w : (S) -> Bool), s) } else { (q : (S) -> Bool)(s) }) → w(s)")
   let t16 = (fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x13 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x10 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -274,7 +274,7 @@ pub fn while_fix() -> @kernel.Thm {
 ///|
 /// correct
 fn step_16() -> Unit raise {
-  correct_c.set(@pair.new_definition(@parser.parse_term("correct p c q <=> p SUBSET (c q)")))
+  correct_c.set(@pair.new_definition(@term_syntax.parse_term("(correct : ((_) -> Bool, (_, _) -> Bool, _) -> Bool)((p : (_) -> Bool), (c : (_, _) -> Bool), (q : _)) == SUBSET(p, c(q))")))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn correct() -> @kernel.Thm {
 /// CORRECT_PRESTRENGTH
 fn step_17() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([correct(), @sets.subset_trans()]))
-  correct_prestrength_c.set(@tactics.prove(@parser.parse_term("forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q"), t29))
+  correct_prestrength_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : (_) -> Bool, ∀ p' : (_) -> Bool, ∀ c : (_, _) -> Bool, ∀ q : _, SUBSET(p, p') && correct(p', c, q) → correct(p, c, q)"), t29))
 }
 
 ///|
@@ -307,7 +307,7 @@ pub fn correct_prestrength() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t30 = @sets.set_tac(@list.List([]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), monotonic()])), t30)
-  correct_postweak_c.set(@tactics.prove(@parser.parse_term("forall p c q q'. monotonic c /\\ correct p c q' /\\ q' SUBSET q ==> correct p c q"), t31))
+  correct_postweak_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : (_) -> Bool, ∀ c : ((_) -> Bool, _) -> Bool, ∀ q : (_) -> Bool, ∀ q' : (_) -> Bool, monotonic(c) && correct(p, c, q') && SUBSET(q', q) → correct(p, c, q)"), t31))
 }
 
 ///|
@@ -323,7 +323,7 @@ pub fn correct_postweak() -> @kernel.Thm {
 /// CORRECT_ASSIGN
 fn step_19() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([correct(), assign()]))
-  correct_assign_c.set(@tactics.prove(@parser.parse_term("forall p f q. (p SUBSET (q o f)) ==> correct p (Assign f) q"), t32))
+  correct_assign_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : (_) -> Bool, ∀ f : (_) -> _, ∀ q : (_) -> Bool, SUBSET(p, o(q, f)) → correct(p, Assign(f), q)"), t32))
 }
 
 ///|
@@ -357,7 +357,7 @@ pub fn correct_seq() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t35 = @sets.set_tac(@list.List([]))
   let t36 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), ite_def()])), t35)
-  correct_ite_c.set(@tactics.prove(@parser.parse_term("forall p e c1 c2 q.\n       correct (p INTER e) c1 q /\\ correct (p INTER (UNIV DIFF e)) c2 q\n       ==> correct p (Ite e c1 c2) q"), t36))
+  correct_ite_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : (_) -> Bool, ∀ e : (_) -> Bool, ∀ c1 : ((_) -> Bool, _) -> Bool, ∀ c2 : ((_) -> Bool, _) -> Bool, ∀ q : (_) -> Bool, correct(INTER(p, e), c1, q) && correct(INTER(p, DIFF(UNIV, e)), c2, q) → correct(p, Ite(e, c1, c2), q)"), t36))
 }
 
 ///|
@@ -374,7 +374,7 @@ pub fn correct_ite() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   let t37 = @sets.set_tac(@list.List([]))
   let t38 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), if_def()])), t37)
-  correct_if_c.set(@tactics.prove(@parser.parse_term("forall p e c q.\n       correct (p INTER e) c q /\\ p INTER (UNIV DIFF e) SUBSET q\n       ==> correct p (If e c) q"), t38))
+  correct_if_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : (_) -> Bool, ∀ e : (_) -> Bool, ∀ c : ((_) -> Bool, _) -> Bool, ∀ q : (_) -> Bool, correct(INTER(p, e), c, q) && SUBSET(INTER(p, DIFF(UNIV, e)), q) → correct(p, If(e, c), q)"), t38))
 }
 
 ///|
@@ -404,8 +404,8 @@ fn step_23() -> Unit raise {
     })(t68(x69))
   })
   let t63 = @simp.asm_rewrite_tac(@list.List([]))
-  let t58 = @parser.parse_term("s:S")
-  let t59 = @list.List([@parser.parse_term("s:S"), t58])
+  let t58 = @term_syntax.parse_term("(s : S)")
+  let t59 = @list.List([@term_syntax.parse_term("(s : S)"), t58])
   let t62 = @tactics.first_x_assum(fn(x61 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x55 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s56 = @tactics.mp_tac(x55)
@@ -421,13 +421,13 @@ fn step_23() -> Unit raise {
     @simp.once_rewrite_tac(@list.List([@drule.match_mp(while_fix())(th)]))
   })
   let t49 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t48 = @tactics.x_gen_tac(@parser.parse_term("s:S"))
+  let t48 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : S)"))
   let t45 = @simp.rewrite_rule(@list.List([@wf.wf_ind()]))
   let t47 = @tactics.first_assum(fn(x46 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t45(x46))
   })
   let t44 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([]))])
-  let t43 = @tactics.subgoal_then(@parser.parse_term("forall s:S. invariant s ==> While e c q s"), fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t43 = @tactics.subgoal_then(@term_syntax.parse_term("∀ s : S, (invariant : (S) -> Bool)(s) → While((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool), s)"), fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s41 = @tactics.mp_tac(x40)
     fn(x42 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s41(x42)
@@ -465,7 +465,7 @@ pub fn assert_def() -> @kernel.Thm {
 ///|
 /// variant_def
 fn step_25() -> Unit raise {
-  variant_def_c.set(@pair.new_definition(@parser.parse_term("variant ((<<):S->S->bool) (q:S->bool) = q")))
+  variant_def_c.set(@pair.new_definition(@term_syntax.parse_term("(variant : ((S, S) -> Bool, (S) -> Bool, S) -> Bool)((op_lt_lt : (S, S) -> Bool), (q : (S) -> Bool)) == q")))
 }
 
 ///|
@@ -516,7 +516,7 @@ pub fn correct_while_vc() -> @kernel.Thm {
 /// MONOTONIC_ASSERT
 fn step_28() -> Unit raise {
   let t80 = @simp.rewrite_tac(@list.List([assert_def(), monotonic()]))
-  monotonic_assert_c.set(@tactics.prove(@parser.parse_term("monotonic (assert p)"), t80))
+  monotonic_assert_c.set(@tactics.prove(@term_syntax.parse_term("monotonic(op_assert((p : (_) -> Bool)))"), t80))
 }
 
 ///|
@@ -532,7 +532,7 @@ pub fn monotonic_assert() -> @kernel.Thm {
 /// MONOTONIC_VARIANT
 fn step_29() -> Unit raise {
   let t81 = @simp.rewrite_tac(@list.List([variant_def(), monotonic()]))
-  monotonic_variant_c.set(@tactics.prove(@parser.parse_term("monotonic (variant p)"), t81))
+  monotonic_variant_c.set(@tactics.prove(@term_syntax.parse_term("monotonic(variant((p : (_, _) -> Bool)))"), t81))
 }
 
 ///|
@@ -613,10 +613,10 @@ fn step_35() -> Unit raise {
   let t102 = @simp.simp_tac(@list.List([]))
   let t101 = @tactics.conv_tac(@equal.top_depth_conv(@pair.gen_beta_conv))
   let t100 = @simp.rewrite_tac(@list.List([@sets.in_(), @sets.inter(), @sets.univ(), @sets.diff(), @trivia.o_def(), @sets.in_elim_thm(), @pair.pair_eq()]))
-  let t96 = @parser.parse_term("y:num")
-  let t97 = @parser.parse_term("x:num")
-  let t98 = @parser.parse_term("n:num")
-  let t99 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("m:num"), t98, t97, t96]))
+  let t96 = @term_syntax.parse_term("(y : Num)")
+  let t97 = @term_syntax.parse_term("(x : Num)")
+  let t98 = @term_syntax.parse_term("(n : Num)")
+  let t99 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(m : Num)"), t98, t97, t96]))
   let t95 = @simp.rewrite_tac(@list.List([@sets.subset(), @pair.forall_pair_thm()]))
   ignore(@tactics.e(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(vc_tac), t95), t99), t100), t101), t102)))
 }
@@ -660,7 +660,7 @@ fn step_41() -> Unit raise {
 ///|
 /// refines
 fn step_42() -> Unit raise {
-  refines_c.set(@pair.new_definition(@parser.parse_term("c2 refines c1 <=> forall q. c1(q) SUBSET c2(q)")))
+  refines_c.set(@pair.new_definition(@term_syntax.parse_term("(refines : ((_, _) -> Bool, (_, _) -> Bool) -> Bool)((c2 : (_, _) -> Bool), (c1 : (_, _) -> Bool)) == (∀ q : _, SUBSET(c1(q), c2(q)))")))
 }
 
 ///|
@@ -676,7 +676,7 @@ pub fn refines() -> @kernel.Thm {
 /// REFINES_REFL
 fn step_43() -> Unit raise {
   let t103 = @simp.rewrite_tac(@list.List([refines(), @sets.subset_refl()]))
-  refines_refl_c.set(@tactics.prove(@parser.parse_term("forall c. c refines c"), t103))
+  refines_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : (_, _) -> Bool, refines(c, c)"), t103))
 }
 
 ///|
@@ -693,7 +693,7 @@ pub fn refines_refl() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t104 = @meson.meson_tac(@list.List([@sets.subset_trans()]))
   let t105 = @tactics.then_tac(@simp.rewrite_tac(@list.List([refines()])), t104)
-  refines_trans_c.set(@tactics.prove(@parser.parse_term("forall c1 c2 c3. c3 refines c2 /\\ c2 refines c1 ==> c3 refines c1"), t105))
+  refines_trans_c.set(@tactics.prove(@term_syntax.parse_term("∀ c1 : (_, _) -> Bool, ∀ c2 : (_, _) -> Bool, ∀ c3 : (_, _) -> Bool, refines(c3, c2) && refines(c2, c1) → refines(c3, c1)"), t105))
 }
 
 ///|
@@ -710,7 +710,7 @@ pub fn refines_trans() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t106 = @meson.meson_tac(@list.List([@sets.subset_trans()]))
   let t107 = @tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), refines()])), t106)
-  refines_correct_c.set(@tactics.prove(@parser.parse_term("correct p c1 q /\\ c2 refines c1 ==> correct p c2 q"), t107))
+  refines_correct_c.set(@tactics.prove(@term_syntax.parse_term("correct((p : (_) -> Bool), (c1 : (_, _) -> Bool), (q : _)) && refines((c2 : (_, _) -> Bool), c1) → correct(p, c2, q)"), t107))
 }
 
 ///|
@@ -727,7 +727,7 @@ pub fn refines_correct() -> @kernel.Thm {
 fn step_46() -> Unit raise {
   let t108 = @meson.meson_tac(@list.List([]))
   let t109 = @tactics.then_tac(@simp.rewrite_tac(@list.List([refines(), while_def(), @sets.subset(), @sets.in_elim_thm(), @sets.in_()])), t108)
-  refines_while_c.set(@tactics.prove(@parser.parse_term("c' refines c ==> While e c' refines While e c"), t109))
+  refines_while_c.set(@tactics.prove(@term_syntax.parse_term("refines((c' : ((_) -> Bool, _) -> Bool), (c : ((_) -> Bool, _) -> Bool)) → refines(While((e : (_) -> Bool), c'), While(e, c))"), t109))
 }
 
 ///|
@@ -742,7 +742,7 @@ pub fn refines_while() -> @kernel.Thm {
 ///|
 /// specification
 fn step_47() -> Unit raise {
-  specification_c.set(@pair.new_definition(@parser.parse_term("specification(p,q) r = if q SUBSET r then p else {}")))
+  specification_c.set(@pair.new_definition(@term_syntax.parse_term("(specification : (((_) -> Bool, (_) -> Bool), (_) -> Bool, _) -> Bool)(((p : (_) -> Bool), (q : (_) -> Bool)), (r : (_) -> Bool)) == (if SUBSET(q, r) { p } else { {} })")))
 }
 
 ///|
@@ -759,7 +759,7 @@ pub fn specification() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t110 = @meson.meson_tac(@list.List([@sets.subset_refl(), @sets.subset_empty()]))
   let t111 = @tactics.then_tac(@simp.rewrite_tac(@list.List([specification(), correct(), refines()])), t110)
-  refines_specification_c.set(@tactics.prove(@parser.parse_term("c refines specification(p,q) ==> correct p c q"), t111))
+  refines_specification_c.set(@tactics.prove(@term_syntax.parse_term("refines((c : ((_) -> Bool, _) -> Bool), specification(((p : (_) -> Bool), (q : (_) -> Bool)))) → correct(p, c, q)"), t111))
 }
 
 ///|
