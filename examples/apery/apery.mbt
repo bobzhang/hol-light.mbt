@@ -2923,7 +2923,7 @@ pub fn inv_tm() -> @kernel.Term {
 ///|
 /// mul_tm
 fn step_101() -> Unit raise {
-  mul_tm_c.set(@term_syntax.parse_term("op_star"))
+  mul_tm_c.set(@term_syntax.parse_term("real_mul"))
 }
 
 ///|
@@ -2938,7 +2938,7 @@ pub fn mul_tm() -> @kernel.Term {
 ///|
 /// add_tm
 fn step_102() -> Unit raise {
-  add_tm_c.set(@term_syntax.parse_term("op_plus"))
+  add_tm_c.set(@term_syntax.parse_term("real_add"))
 }
 
 ///|
@@ -2953,7 +2953,7 @@ pub fn add_tm() -> @kernel.Term {
 ///|
 /// sub_tm
 fn step_103() -> Unit raise {
-  sub_tm_c.set(@term_syntax.parse_term("op_minus"))
+  sub_tm_c.set(@term_syntax.parse_term("real_sub"))
 }
 
 ///|
@@ -2968,7 +2968,7 @@ pub fn sub_tm() -> @kernel.Term {
 ///|
 /// pow_tm
 fn step_104() -> Unit raise {
-  pow_tm_c.set(@term_syntax.parse_term("pow"))
+  pow_tm_c.set(@term_syntax.parse_term("real_pow"))
 }
 
 ///|
@@ -2983,7 +2983,7 @@ pub fn pow_tm() -> @kernel.Term {
 ///|
 /// neg_tm
 fn step_105() -> Unit raise {
-  neg_tm_c.set(@term_syntax.parse_term("op_minus_minus"))
+  neg_tm_c.set(@term_syntax.parse_term("real_neg"))
 }
 
 ///|
