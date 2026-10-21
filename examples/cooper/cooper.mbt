@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// dest_mul
 fn step_2() -> Unit raise {
-  let t1 = @term_syntax.parse_term("op_star")
+  let t1 = @term_syntax.parse_term("int_mul")
   dest_mul_v1_c.set((x2 : @kernel.Term) => @basics.dest_binop(t1, x2))
 }
 
@@ -25,7 +25,7 @@ pub fn dest_mul_v1(x : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 ///|
 /// dest_add
 fn step_3() -> Unit raise {
-  let t3 = @term_syntax.parse_term("op_plus")
+  let t3 = @term_syntax.parse_term("int_add")
   dest_add_v1_c.set((x4 : @kernel.Term) => @basics.dest_binop(t3, x4))
 }
 
@@ -1323,8 +1323,8 @@ pub fn int_mul_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_50() -> Unit raise {
   let neg_tm = @term_syntax.parse_term("op_minus_minus")
   let amp_tm = @term_syntax.parse_term("int_of_num")
-  let add_tm = @term_syntax.parse_term("op_plus")
-  let t357 = @term_syntax.parse_term("op_plus")
+  let add_tm = @term_syntax.parse_term("int_add")
+  let t357 = @term_syntax.parse_term("int_add")
   let dest : (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise = (x358 : @kernel.Term) => @basics.dest_binop(t357, x358)
   let m_tm = @term_syntax.parse_term("(m : Num)")
   let n_tm = @term_syntax.parse_term("(n : Num)")
@@ -1485,7 +1485,7 @@ pub fn int_pow_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// dest_add
 fn step_53() -> Unit raise {
-  let t388 = @term_syntax.parse_term("op_plus")
+  let t388 = @term_syntax.parse_term("int_add")
   dest_add_c.set((x389 : @kernel.Term) => @basics.dest_binop(t388, x389))
 }
 
@@ -1501,7 +1501,7 @@ pub fn dest_add(x : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 ///|
 /// dest_mul
 fn step_54() -> Unit raise {
-  let t390 = @term_syntax.parse_term("op_star")
+  let t390 = @term_syntax.parse_term("int_mul")
   dest_mul_c.set((x391 : @kernel.Term) => @basics.dest_binop(t390, x391))
 }
 
@@ -1533,7 +1533,7 @@ pub fn dest_pow(x : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 ///|
 /// dest_sub
 fn step_56() -> Unit raise {
-  let t394 = @term_syntax.parse_term("op_minus")
+  let t394 = @term_syntax.parse_term("int_sub")
   dest_sub_c.set((x395 : @kernel.Term) => @basics.dest_binop(t394, x395))
 }
 
@@ -1549,7 +1549,7 @@ pub fn dest_sub(x : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 ///|
 /// is_add
 fn step_57() -> Unit raise {
-  let t396 = @term_syntax.parse_term("op_plus")
+  let t396 = @term_syntax.parse_term("int_add")
   is_add_c.set(fn(x398 : @kernel.Term) -> Bool raise {
     ((x397 : @kernel.Term) => @basics.is_binop(t396, x397))(x398)
   })
@@ -1567,7 +1567,7 @@ pub fn is_add(x : @kernel.Term) -> Bool raise {
 ///|
 /// is_mul
 fn step_58() -> Unit raise {
-  let t399 = @term_syntax.parse_term("op_star")
+  let t399 = @term_syntax.parse_term("int_mul")
   is_mul_c.set(fn(x401 : @kernel.Term) -> Bool raise {
     ((x400 : @kernel.Term) => @basics.is_binop(t399, x400))(x401)
   })
@@ -1603,7 +1603,7 @@ pub fn is_pow(x : @kernel.Term) -> Bool raise {
 ///|
 /// is_sub
 fn step_60() -> Unit raise {
-  let t405 = @term_syntax.parse_term("op_minus")
+  let t405 = @term_syntax.parse_term("int_sub")
   is_sub_c.set(fn(x407 : @kernel.Term) -> Bool raise {
     ((x406 : @kernel.Term) => @basics.is_binop(t405, x406))(x407)
   })
@@ -1699,7 +1699,7 @@ pub fn polynomial_conv(x424 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @k
 ///|
 /// LINEAR_CMUL
 fn step_62() -> Unit raise {
-  let mul_tm = @term_syntax.parse_term("op_star")
+  let mul_tm = @term_syntax.parse_term("int_mul")
   linear_cmul_c.set(fn(x426 : @list.List[@kernel.Term]) -> ((@num.Num) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise {
     let vars = x426
     fn(x427 : @num.Num) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -1886,9 +1886,9 @@ pub fn multiply_1_conv(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @kern
 /// ADJUSTCOEFF_CONV
 fn step_65() -> Unit raise {
   let op_eq = @term_syntax.parse_term("(op_eq : (Int, Int) -> Bool)")
-  let op_lt = @term_syntax.parse_term("op_lt")
-  let op_gt = @term_syntax.parse_term("op_gt")
-  let op_divides = @term_syntax.parse_term("divides")
+  let op_lt = @term_syntax.parse_term("int_lt")
+  let op_gt = @term_syntax.parse_term("int_gt")
+  let op_divides = @term_syntax.parse_term("int_divides")
   let c_tm = @term_syntax.parse_term("(c : Int)")
   let d_tm = @term_syntax.parse_term("(d : Int)")
   let e_tm = @term_syntax.parse_term("(e : Int)")
