@@ -175,7 +175,7 @@ fn step_5() -> Unit raise {
   }))
   let t64 = @simp.rewrite_tac(@list.List([@vectors.dist(), norm_cross(), collinear(), between_thm()]))
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64), @tactics.strip_tac), t74), t79), t80), t89), t90)
-  ceva_weak_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ X : Cart[Real, Tybit0[Unit]], ∀ Y : Cart[Real, Tybit0[Unit]], ∀ Z : Cart[Real, Tybit0[Unit]], ∀ P : Cart[Real, Tybit0[Unit]], !collinear(INSERT(A, INSERT(B, INSERT(C, EMPTY)))) && between(X, (B, C)) && between(Y, (A, C)) && between(Z, (A, B)) && between(P, (A, X)) && between(P, (B, Y)) && between(P, (C, Z)) → dist((B, X)) * (dist((C, Y)) * dist((A, Z))) == dist((X, C)) * (dist((Y, A)) * dist((Z, B)))"), t91))
+  ceva_weak_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ X : Cart[Real, Tybit0[Unit]], ∀ Y : Cart[Real, Tybit0[Unit]], ∀ Z : Cart[Real, Tybit0[Unit]], ∀ P : Cart[Real, Tybit0[Unit]], !collinear({A, B, C}) && between(X, (B, C)) && between(Y, (A, C)) && between(Z, (A, B)) && between(P, (A, X)) && between(P, (B, Y)) && between(P, (C, Z)) → distance((B, X)) * (distance((C, Y)) * distance((A, Z))) == distance((X, C)) * (distance((Y, A)) * distance((Z, B)))"), t91))
 }
 
 ///|
@@ -337,7 +337,7 @@ fn step_6() -> Unit raise {
   let t93 = @term_syntax.parse_term("(A : Cart[Real, Tybit0[Unit]]) == (C : Cart[Real, Tybit0[Unit]])")
   let t94 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("(A : Cart[Real, Tybit0[Unit]]) == (B : Cart[Real, Tybit0[Unit]])"), t93, t92]))
   let t204 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t94), t95), t102), t103), t109), t114), t115), t119), t120), t122), t123), t124), t125), t126), t127), @tactics.eq_tac), t138), @tactics.disch_tac), t139), t141), t147), t148), t149), @tactics.conj_tac), t165), t166), t167), t180), t181), t185), t197), t198), t199), t200), t201), t202), t203), @calc_rat.asm_real_arith_tac)
-  ceva_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ X : Cart[Real, Tybit0[Unit]], ∀ Y : Cart[Real, Tybit0[Unit]], ∀ Z : Cart[Real, Tybit0[Unit]], !collinear(INSERT(A, INSERT(B, INSERT(C, EMPTY)))) && between(X, (B, C)) && between(Y, (C, A)) && between(Z, (A, B)) → (dist((B, X)) * (dist((C, Y)) * dist((A, Z))) == dist((X, C)) * (dist((Y, A)) * dist((Z, B)))) == (∃ P : Cart[Real, Tybit0[Unit]], between(P, (A, X)) && between(P, (B, Y)) && between(P, (C, Z)))"), t204))
+  ceva_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], ∀ X : Cart[Real, Tybit0[Unit]], ∀ Y : Cart[Real, Tybit0[Unit]], ∀ Z : Cart[Real, Tybit0[Unit]], !collinear({A, B, C}) && between(X, (B, C)) && between(Y, (C, A)) && between(Z, (A, B)) → (distance((B, X)) * (distance((C, Y)) * distance((A, Z))) == distance((X, C)) * (distance((Y, A)) * distance((Z, B)))) == (∃ P : Cart[Real, Tybit0[Unit]], between(P, (A, X)) && between(P, (B, Y)) && between(P, (C, Z)))"), t204))
 }
 
 ///|
@@ -425,7 +425,7 @@ fn step_8() -> Unit raise {
   let t219 = @simp.once_rewrite_tac(@list.List([between_sym()]))
   let t218 = @tactics.conv_tac(@equal.sym_conv)
   let t255 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t218), t219), t220), t221), t222), t223), t224), @tactics.eq_tac), t232), @tactics.disch_tac), t233), t242), t243), t244), t245), t246), t247), t248), t249), t254), @vectors.vector_arith_tac)
-  between_metrical_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, N], ∀ v : Cart[Real, N], ∀ w : Cart[Real, N], between(v, (u, w)) == (dist((u, v)) + dist((v, w)) == dist((u, w)))"), t255))
+  between_metrical_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, N], ∀ v : Cart[Real, N], ∀ w : Cart[Real, N], between(v, (u, w)) == (distance((u, v)) + distance((v, w)) == distance((u, w)))"), t255))
 }
 
 ///|
