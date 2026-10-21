@@ -5751,25 +5751,25 @@ test "Permutation/qsort matches Permutation/qsort.ml" {
       #|0..0..1..9..solved at 17
       #|0..0..1..9..solved at 17
       #|Permutation/qsort quotations (19):
-      #|  (forall le. ORDERED le []) /\\\n   (forall le h t. ORDERED le t /\\ ALL (le h) t ==> ORDERED le (CONS h t))
-      #|  forall le (h:A) t. ORDERED le (h :: t) ==> (ORDERED le t /\\ ALL (le h) t)
-      #|  forall le (h:A) t. ORDERED le (h :: t) <=> (ORDERED le t /\\ ALL (le h) t)
-      #|  (forall l1 l2:A list.\n        ORDERED le (APPEND l1 l2)\n        ==> ORDERED le l1 /\\ ORDERED le l2 /\\ ALL (\\x. ALL (le x) l2) l1) /\\\n     (forall l1 l2. ORDERED le l1 /\\ ORDERED le l2 /\\ ALL (\\x. ALL (le x) l2) l1\n              ==> ORDERED le (APPEND l1 l2))
-      #|  forall l1 l2:A list.\n      ORDERED le (APPEND l1 l2) <=>\n      ORDERED le l1 /\\ ORDERED le l2 /\\ ALL (\\x. ALL (le x) l2) l1
-      #|  ORDERED = PAIRWISE
-      #|  MEASURE (LENGTH:A list -> num)
-      #|  ?f. (forall le. f le [] = [] : A list) /\\\n        (forall le h t. f le (CONS h t) =\n                  APPEND (f le (FILTER (\\x. ~le h x) t))\n                  (CONS h (f le (FILTER (\\x. le h x) t))))
+      #|  (\226\136\128 le : (_, _) -> Bool, (ORDERED : ((_, _) -> Bool, List[_]) -> Bool)(le, NIL)) && (\226\136\128 le : (_, _) -> Bool, \226\136\128 h : _, \226\136\128 t : List[_], ORDERED(le, t) && ALL(le(h), t) \226\134\146 ORDERED(le, CONS(h, t)))
+      #|  \226\136\128 le : (A, A) -> Bool, \226\136\128 h : A, \226\136\128 t : List[A], ORDERED(le, CONS(h, t)) \226\134\146 ORDERED(le, t) && ALL(le(h), t)
+      #|  \226\136\128 le : (A, A) -> Bool, \226\136\128 h : A, \226\136\128 t : List[A], ORDERED(le, CONS(h, t)) == (ORDERED(le, t) && ALL(le(h), t))
+      #|  (\226\136\128 l1 : List[A], \226\136\128 l2 : List[A], ORDERED((le : (A, A) -> Bool), APPEND(l1, l2)) \226\134\146 ORDERED(le, l1) && ORDERED(le, l2) && ALL((x : A) => ALL(le(x), l2), l1)) && (\226\136\128 l1 : List[A], \226\136\128 l2 : List[A], ORDERED(le, l1) && ORDERED(le, l2) && ALL((x : A) => ALL(le(x), l2), l1) \226\134\146 ORDERED(le, APPEND(l1, l2)))
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], ORDERED((le : (A, A) -> Bool), APPEND(l1, l2)) == (ORDERED(le, l1) && ORDERED(le, l2) && ALL((x : A) => ALL(le(x), l2), l1))
+      #|  (ORDERED : ((_, _) -> Bool, List[_]) -> Bool) == (PAIRWISE : ((_, _) -> Bool, List[_]) -> Bool)
+      #|  (MEASURE : ((List[A]) -> Num, List[A], List[A]) -> Bool)((LENGTH : (List[A]) -> Num))
+      #|  \226\136\131 f : ((A, A) -> Bool, List[A]) -> List[A], (\226\136\128 le : (A, A) -> Bool, f(le, NIL) == NIL) && (\226\136\128 le : (A, A) -> Bool, \226\136\128 h : A, \226\136\128 t : List[A], f(le, CONS(h, t)) == APPEND(f(le, FILTER((x : A) => !le(h, x), t)), CONS(h, f(le, FILTER((x : A) => le(h, x), t)))))
       #|  :P
       #|  :P
       #|  :P
       #|  :P
       #|  :P
-      #|  forall le x l. COUNT x (QSORT le l) = COUNT x l
-      #|  forall le (l:A list). QSORT le l PERMUTED l
-      #|  forall P le l. ALL P (QSORT le l) <=> ALL P l
-      #|  forall le l. LENGTH (QSORT le l) =  LENGTH l
-      #|  forall le l x. MEM x (QSORT le l) <=> MEM x l
-      #|  forall le (l:A list).\n     (forall x y. le x y \\/ le y x) /\\ (forall x y z. le x y \\/ le y z ==> le x z)\n     ==> ORDERED le (QSORT le l)
+      #|  \226\136\128 le : (_, _) -> Bool, \226\136\128 x : _, \226\136\128 l : List[_], COUNT(x, QSORT(le, l)) == COUNT(x, l)
+      #|  \226\136\128 le : (A, A) -> Bool, \226\136\128 l : List[A], PERMUTED(QSORT(le, l), l)
+      #|  \226\136\128 P : (_) -> Bool, \226\136\128 le : (_, _) -> Bool, \226\136\128 l : List[_], ALL(P, QSORT(le, l)) == ALL(P, l)
+      #|  \226\136\128 le : (_, _) -> Bool, \226\136\128 l : List[_], LENGTH(QSORT(le, l)) == LENGTH(l)
+      #|  \226\136\128 le : (_, _) -> Bool, \226\136\128 l : List[_], \226\136\128 x : _, MEM(x, QSORT(le, l)) == MEM(x, l)
+      #|  \226\136\128 le : (A, A) -> Bool, \226\136\128 l : List[A], (\226\136\128 x : A, \226\136\128 y : A, le(x, y) || le(y, x)) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, le(x, y) || le(y, z) \226\134\146 le(x, z)) \226\134\146 ORDERED(le, QSORT(le, l))
       #|ORDERED_RULES =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\le:fun('?1,fun('?1,bool)). ((#ORDERED:fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) le:fun('?1,fun('?1,bool))) #NIL:list('?1))))) (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\le:fun('?1,fun('?1,bool)). (#forall:fun(fun('?1,bool),bool) (\h:'?1. (#forall:fun(fun(list('?1),bool),bool) (\t:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#ORDERED:fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) le:fun('?1,fun('?1,bool))) t:list('?1))) ((#ALL:fun(fun('?1,bool),fun(list('?1),bool)) (le:fun('?1,fun('?1,bool)) h:'?1)) t:list('?1)))) ((#ORDERED:fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) le:fun('?1,fun('?1,bool))) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t:list('?1)))))))))))
       #|ORDERED_INDUCT =  |- (#forall:fun(fun(fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)),bool),bool) (\ORDERED':fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\le:fun('?1,fun('?1,bool)). ((ORDERED':fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) le:fun('?1,fun('?1,bool))) #NIL:list('?1))))) (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\le:fun('?1,fun('?1,bool)). (#forall:fun(fun('?1,bool),bool) (\h:'?1. (#forall:fun(fun(list('?1),bool),bool) (\t:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((ORDERED':fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) le:fun('?1,fun('?1,bool))) t:list('?1))) ((#ALL:fun(fun('?1,bool),fun(list('?1),bool)) (le:fun('?1,fun('?1,bool)) h:'?1)) t:list('?1)))) ((ORDERED':fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) le:fun('?1,fun('?1,bool))) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t:list('?1)))))))))))) (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\a0:fun('?1,fun('?1,bool)). (#forall:fun(fun(list('?1),bool),bool) (\a1:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#ORDERED:fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) a0:fun('?1,fun('?1,bool))) a1:list('?1))) ((ORDERED':fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) a0:fun('?1,fun('?1,bool))) a1:list('?1))))))))))
       #|ORDERED_CASES =  |- (#forall:fun(fun(fun('?1,fun('?1,bool)),bool),bool) (\a0:fun('?1,fun('?1,bool)). (#forall:fun(fun(list('?1),bool),bool) (\a1:list('?1). ((#=:fun(bool,fun(bool,bool)) ((#ORDERED:fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) a0:fun('?1,fun('?1,bool))) a1:list('?1))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) a1:list('?1)) #NIL:list('?1))) (#?:fun(fun('?1,bool),bool) (\h:'?1. (#?:fun(fun(list('?1),bool),bool) (\t:list('?1). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) a1:list('?1)) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t:list('?1)))) ((#/\:fun(bool,fun(bool,bool)) ((#ORDERED:fun(fun('?1,fun('?1,bool)),fun(list('?1),bool)) a0:fun('?1,fun('?1,bool))) t:list('?1))) ((#ALL:fun(fun('?1,bool),fun(list('?1),bool)) (a0:fun('?1,fun('?1,bool)) h:'?1)) t:list('?1))))))))))))))
