@@ -74224,13 +74224,13 @@ Generating HOL version of proof
 0..0..2..4..11..20..34..58..solved at 78
 0..0..2..4..11..20..34..58..solved at 78
 Multivariate/canal quotations (990):
-  vector_neg:complex->complex
-  vector_add:complex->complex->complex
-  vector_sub:complex->complex->complex
-  complex_mul:complex->complex->complex
-  complex_div:complex->complex->complex
-  complex_pow:complex->num->complex
-  complex_inv:complex->complex
+  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
   (b : Real)
   Cx(real_of_num(1))
   \226\136\128 b : Real, closed({(z : Cart[Real, Tybit0[Unit]]) | Re(z) >= b})
@@ -74418,13 +74418,13 @@ Multivariate/canal quotations (990):
   \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Num) -> Bool, summable(s, f) \226\134\146 summable(s, (x : Num) => c * f(x))
   \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Num) -> Bool, summable(s, f) \226\134\146 summable(s, (x : Num) => f(x) * c)
   \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Num) -> Bool, summable(s, f) \226\134\146 summable(s, (x : Num) => f(x) / c)
-  op_star
+  complex_mul
   \226\136\128 x : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], sums(x, a, from(0)) && sums(y, b, from(0)) && (summable(from(0), (n : Num) => lift(norm(x(n)))) || summable(from(0), (n : Num) => lift(norm(y(n))))) \226\134\146 sums((n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)), a * b, from(0))
-  op_star
+  complex_mul
   \226\136\128 x : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], sums(x, a, from(0)) && sums(y, b, from(0)) && sums((n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)), c, from(0)) \226\134\146 a * b == c
-  op_star
+  complex_mul
   \226\136\128 x : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, summable(from(m), (n : Num) => lift(norm(x(n)))) && summable(from(n), y) \226\134\146 summable(from(p), (n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)))
-  op_star
+  complex_mul
   \226\136\128 x : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, summable(from(m), x) && summable(from(n), (n : Num) => lift(norm(y(n)))) \226\134\146 summable(from(p), (n : Num) => vsum(op_dot_dot(0, n), (i : Num) => x(i) * y(n - i)))
   \226\136\128 net : Net[_], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (_) -> Cart[Real, Tybit0[Unit]], continuous(f, net) && continuous(g, net) \226\134\146 continuous((x : _) => f(x) * g(x), net)
   \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 net : Net[_], continuous(f, net) \226\134\146 continuous((x : _) => c * f(x), net)
@@ -74445,7 +74445,7 @@ Multivariate/canal quotations (990):
   \226\136\128 f : (Cart[Real, _]) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 s : (Cart[Real, _]) -> Bool, continuous_on(f, s) \226\134\146 continuous_on((x : Cart[Real, _]) => pow(f(x), n), s)
   \226\136\128 f : (A, Cart[Real, _]) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (A) -> Bool, \226\136\128 s : (Cart[Real, _]) -> Bool, FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 continuous_on(f(i), s)) \226\134\146 continuous_on((z : Cart[Real, _]) => cproduct(k, (i : A) => f(i, z)), s)
   (s : (Cart[Real, N]) -> Bool)
-  op_star
+  complex_mul
   (g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
   (f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]])
   \226\136\128 f : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, N]) -> Bool, uniformly_continuous_on(f, s) && uniformly_continuous_on(g, s) && bounded(IMAGE(f, s)) && bounded(IMAGE(g, s)) \226\134\146 uniformly_continuous_on((x : Cart[Real, N]) => f(x) * g(x), s)
@@ -74501,9 +74501,9 @@ Multivariate/canal quotations (990):
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, has_complex_derivative(f, f', at(x)) \226\134\146 has_complex_derivative(f, f', within(at(x), s))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(a, s) && open(s) \226\134\146 has_complex_derivative(f, f', within(at(a), s)) == has_complex_derivative(f, f', at(a))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(f, at(z)) \226\134\146 complex_differentiable(f, within(at(z), s))
-  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_complex_derivative(f, f', within(at(x), s)) \226\134\146 has_complex_derivative(g, f', within(at(x), s))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], IN(x', s) && distance((x', x)) < d \226\134\146 f(x') == g(x')) && has_complex_derivative(f, f', within(at(x), s)) \226\134\146 has_complex_derivative(g, f', within(at(x), s))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], open(s) && IN(z, s) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, s) \226\134\146 f(w) == g(w)) && has_complex_derivative(f, f', at(z)) \226\134\146 has_complex_derivative(g, f', at(z))
-  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], dist((x', x)) < d \226\134\146 f(x') == g(x')) && has_complex_derivative(f, f', at(x)) \226\134\146 has_complex_derivative(g, f', at(x))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f' : Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], distance((x', x)) < d \226\134\146 f(x') == g(x')) && has_complex_derivative(f, f', at(x)) \226\134\146 has_complex_derivative(g, f', at(x))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, convex(s) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 has_complex_derivative(f, Cx(real_of_num(0)), within(at(x), s))) \226\134\146 (\226\136\131 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 f(x) == c)
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], convex(s) && IN(a, s) && f(a) == c && (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 has_complex_derivative(f, Cx(real_of_num(0)), within(at(x), s))) \226\134\146 (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 f(x) == c)
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) && connected(s) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 has_complex_derivative(f, Cx(real_of_num(0)), at(x))) \226\134\146 (\226\136\131 c : Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 f(x) == c)
@@ -74568,7 +74568,7 @@ Multivariate/canal quotations (990):
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, complex_differentiable(f, within(at(z), s)) && complex_differentiable(g, within(at(z), s)) && !(g(z) == Cx(real_of_num(0))) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => f(z) / g(z), within(at(z), s))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, complex_differentiable(f, within(at(z), s)) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => pow(f(z), n), within(at(z), s))
   \226\136\128 f : (A, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (A) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 complex_differentiable(f(i), within(at(z), s))) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => cproduct(k, (i : A) => f(i, z)), within(at(z), s))
-  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], IN(x', s) && dist((x', x)) < d \226\134\146 f(x') == g(x')) && complex_differentiable(f, within(at(x), s)) \226\134\146 complex_differentiable(g, within(at(x), s))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 d : Real, real_of_num(0) < d && IN(x, s) && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], IN(x', s) && distance((x', x)) < d \226\134\146 f(x') == g(x')) && complex_differentiable(f, within(at(x), s)) \226\134\146 complex_differentiable(g, within(at(x), s))
   real_of_num(1)
   (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 f(x) == g(x)) && holomorphic_on(f, s) \226\134\146 holomorphic_on(g, s)
@@ -74578,7 +74578,7 @@ Multivariate/canal quotations (990):
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(f, at(z)) && complex_differentiable(g, at(z)) && !(g(z) == Cx(real_of_num(0))) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => f(z) / g(z), at(z))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(f, at(z)) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => pow(f(z), n), at(z))
   \226\136\128 f : (A, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (A) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], FINITE(k) && (\226\136\128 i : A, IN(i, k) \226\134\146 complex_differentiable(f(i), at(z))) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => cproduct(k, (i : A) => f(i, z)), at(z))
-  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], dist((x', x)) < d \226\134\146 f(x') == g(x')) && complex_differentiable(f, at(x)) \226\134\146 complex_differentiable(g, at(x))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 d : Real, real_of_num(0) < d && (\226\136\128 x' : Cart[Real, Tybit0[Unit]], distance((x', x)) < d \226\134\146 f(x') == g(x')) && complex_differentiable(f, at(x)) \226\134\146 complex_differentiable(g, at(x))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, complex_differentiable(f, within(at(x), s)) && complex_differentiable(g, within(at(f(x)), IMAGE(f, s))) \226\134\146 complex_differentiable(o(g, f), within(at(x), s))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 x : Cart[Real, Tybit0[Unit]], complex_differentiable(f, at(x)) && complex_differentiable(g, at(f(x))) \226\134\146 complex_differentiable(o(g, f), at(x))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(a, s) && open(s) \226\134\146 complex_differentiable(f, within(at(a), s)) == complex_differentiable(f, at(a))
@@ -74665,7 +74665,7 @@ Multivariate/canal quotations (990):
   min((d : Real), (e : Real))
   (e : Real)
   ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real)))
-  \226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 y : Cart[Real, Tybit0[Unit]], dist(((z : Cart[Real, Tybit0[Unit]]), y)) < e \226\134\146 !((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) == Cx(real_of_num(0))))
+  \226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 y : Cart[Real, Tybit0[Unit]], distance(((z : Cart[Real, Tybit0[Unit]]), y)) < e \226\134\146 !((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(y) == Cx(real_of_num(0))))
   (d : Real)
   (z : Cart[Real, Tybit0[Unit]])
   (z : Cart[Real, Tybit0[Unit]])
@@ -74824,7 +74824,7 @@ Multivariate/canal quotations (990):
   lift(Re((l : Cart[Real, Tybit0[Unit]])))
   (l : Cart[Real, Tybit0[Unit]])
   (n : Num) => norm((g : (Num) -> Cart[Real, Tybit0[Unit]])(n))
-  \226\136\128 f : (A, Num) -> Cart[Real, N], \226\136\128 g : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 P : (A) -> Bool, \226\136\128 s : (Num) -> Bool, summable(s, g) && (\226\136\128 n : Num, IN(n, s) \226\134\146 real(g(n)) && real_of_num(0) <= Re(g(n))) && (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && IN(n, s) && P(x) \226\134\146 norm(f(x, n)) <= norm(g(n))) \226\134\146 (\226\136\131 l : (A) -> Cart[Real, N], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && P(x) \226\134\146 dist((vsum(INTER(s, op_dot_dot(0, n)), f(x)), l(x))) < e))
+  \226\136\128 f : (A, Num) -> Cart[Real, N], \226\136\128 g : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 P : (A) -> Bool, \226\136\128 s : (Num) -> Bool, summable(s, g) && (\226\136\128 n : Num, IN(n, s) \226\134\146 real(g(n)) && real_of_num(0) <= Re(g(n))) && (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && IN(n, s) && P(x) \226\134\146 norm(f(x, n)) <= norm(g(n))) \226\134\146 (\226\136\131 l : (A) -> Cart[Real, N], \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : A, N <= n && P(x) \226\134\146 distance((vsum(INTER(s, op_dot_dot(0, n)), f(x)), l(x))) < e))
   (x : (Num) -> Cart[Real, Tybit0[Unit]])
   (s : (Num) -> Bool)
   \226\136\128 x : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, (\226\136\128 n : Num, IN(n, s) \226\134\146 real(x(n)) && real_of_num(0) <= Re(x(n))) && summable(s, x) && SUBSET(t, s) \226\134\146 summable(t, x)
@@ -74837,7 +74837,7 @@ Multivariate/canal quotations (990):
   (e : Real)
   norm((z : Cart[Real, Tybit0[Unit]]))
   (e : Real)
-  dist(((x : Cart[Real, _]), vec(0))) == norm(x)
+  distance(((x : Cart[Real, _]), vec(0))) == norm(x)
   :real
   :real
   (n : Num)
@@ -75035,12 +75035,12 @@ Multivariate/canal quotations (990):
   norm((z : Cart[Real, Tybit0[Unit]])) < real_of_num(1)
   (z : Cart[Real, Tybit0[Unit]])
   (N : Num)
-  (a : Cart[Real, Tybit0[Unit]]) + (c : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]]) \226\134\146 dist((a, b)) == norm(c)
+  (a : Cart[Real, Tybit0[Unit]]) + (c : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]]) \226\134\146 distance((a, b)) == norm(c)
   :real
   :real
   :real
   :real
-  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 dist((vsum(op_dot_dot(0, m), f), vsum(op_dot_dot(0, n), f))) == norm(vsum(op_dot_dot(m + 1, n), f))
+  \226\136\128 f : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 distance((vsum(op_dot_dot(0, m), f), vsum(op_dot_dot(0, n), f))) == norm(vsum(op_dot_dot(m + 1, n), f))
   min((e : Real) / real_of_num(2), e / real_of_num(2) / (M : Real))
   (\226\136\128 m : _, \226\136\128 n : _, \226\136\128 z : _, (P : (_) -> Bool)(m) && P(n) && (Q : (_) -> Bool)(z) \226\134\146 (R : (_, _, _) -> Bool)(m, n, z)) == (\226\136\128 z : _, Q(z) \226\134\146 (\226\136\128 m : _, \226\136\128 n : _, P(m) && P(n) \226\134\146 R(m, n, z)))
   (e : Real)
@@ -75092,9 +75092,9 @@ Multivariate/canal quotations (990):
   (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
   norm((z : Cart[Real, Tybit0[Unit]]) - (x : Cart[Real, Tybit0[Unit]])) <= (R : Real)
   1
-  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)
+  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)
   (z : Cart[Real, Tybit0[Unit]]) + (r : Cart[Real, Tybit0[Unit]]) - z == r
-  dist(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)
+  distance(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)
   :real
   :real
   (z : Cart[Real, Tybit0[Unit]]) + Cx(((r : Real) + (R : Real)) / real_of_num(2))
@@ -75107,9 +75107,9 @@ Multivariate/canal quotations (990):
   1
   (n : Num) => (w : Cart[Real, Tybit0[Unit]]) => vsum(INTER((k : (Num) -> Bool), op_dot_dot(0, n)), (i : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(i) * pow(w - (z : Cart[Real, Tybit0[Unit]]), i))
   sequentially
-  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)
+  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) < (r : Real)
   cball(((z : Cart[Real, Tybit0[Unit]]), (R : Real)))
-  (R : Real) == ((r : Real) + dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]])))) / real_of_num(2)
+  (R : Real) == ((r : Real) + distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]])))) / real_of_num(2)
   (w : Cart[Real, Tybit0[Unit]])
   \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, ball((z, r))) \226\134\146 sums((n : Num) => a(n) * pow(w - z, n), f(w), k)) \226\134\146 continuous_on(f, ball((z, r)))
   :real
@@ -75153,7 +75153,7 @@ Multivariate/canal quotations (990):
   (m : Num)
   ((p : Bool) \226\134\146 !((q : Bool) && !(r : Bool))) == (q && p \226\134\146 r)
   (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) == !(\226\136\131 x : _, P(x) && !Q(x))
-  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 r : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, real_of_num(0) < r && (\226\136\128 w : Cart[Real, Tybit0[Unit]], dist((w, z)) < r \226\134\146 sums((i : Num) => c(i) * pow(w - z, i), f(w), k)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, s) \226\134\146 f(w) == Cx(real_of_num(0))) && limit_point_of(z, s) \226\134\146 (\226\136\128 i : Num, IN(i, k) \226\134\146 c(i) == Cx(real_of_num(0)))
+  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 k : (Num) -> Bool, \226\136\128 r : Real, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, real_of_num(0) < r && (\226\136\128 w : Cart[Real, Tybit0[Unit]], distance((w, z)) < r \226\134\146 sums((i : Num) => c(i) * pow(w - z, i), f(w), k)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, s) \226\134\146 f(w) == Cx(real_of_num(0))) && limit_point_of(z, s) \226\134\146 (\226\136\128 i : Num, IN(i, k) \226\134\146 c(i) == Cx(real_of_num(0)))
   min((r : Real) / real_of_num(2), (e : Real))
   (e : Real)
   (t : (Cart[Real, Tybit0[Unit]]) -> Bool)
