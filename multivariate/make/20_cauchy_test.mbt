@@ -88362,13 +88362,13 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|0..0..5..18..46..solved at 94
       #|0..0..4..12..solved at 28
       #|Multivariate/cauchy quotations (7972):
-      #|  vector_neg:complex->complex
-      #|  vector_add:complex->complex->complex
-      #|  vector_sub:complex->complex->complex
-      #|  complex_mul:complex->complex->complex
-      #|  complex_div:complex->complex->complex
-      #|  complex_pow:complex->num->complex
-      #|  complex_inv:complex->complex
+      #|  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  (piecewise_differentiable_on : ((Cart[Real, _]) -> Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (i : (Cart[Real, _]) -> Bool)) == (continuous_on(f, i) && (\226\136\131 s : (Cart[Real, _]) -> Bool, FINITE(s) && (\226\136\128 x : Cart[Real, _], IN(x, DIFF(i, s)) \226\134\146 differentiable(f, at(x)))))
       #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, piecewise_differentiable_on(f, s) \226\134\146 continuous_on(f, s)
       #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, piecewise_differentiable_on(f, s) && SUBSET(t, s) \226\134\146 piecewise_differentiable_on(f, t)
@@ -88385,7 +88385,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (b : Cart[Real, M])
       #|  (m : Real) == real_of_num(0)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 m : Real, \226\136\128 c : Cart[Real, M], piecewise_differentiable_on(f, IMAGE((x : Cart[Real, M]) => op_pct(m, x) + c, s)) \226\134\146 piecewise_differentiable_on(o(f, (x : Cart[Real, M]) => op_pct(m, x) + c), s)
-      #|  dist(((x : Cart[Real, Unit]), (c : Cart[Real, Unit])))
+      #|  distance(((x : Cart[Real, Unit]), (c : Cart[Real, Unit])))
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, N])
       #|  (f : (Cart[Real, Unit]) -> Cart[Real, N])
       #|  drop((x : Cart[Real, Unit])) <= drop((c : Cart[Real, Unit])) || drop(c) <= drop(x)
@@ -88486,13 +88486,13 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  UNION(INSERT(op_pct(real_of_num(1) / real_of_num(2), vec(1)), {(x : Cart[Real, Unit]) | IN(op_pct(real_of_num(2), x), (s1 : (Cart[Real, Unit]) -> Bool))}), {(x : Cart[Real, Unit]) | IN(op_pct(real_of_num(2), x) - vec(1), (s2 : (Cart[Real, Unit]) -> Bool))})
       #|  (s2 : (Cart[Real, Unit]) -> Bool)
       #|  (s1 : (Cart[Real, Unit]) -> Bool)
-      #|  dist((op_pct(real_of_num(1) / real_of_num(2), (x : Cart[Real, Unit]) + vec(1)), lift(real_of_num(1) / real_of_num(2))))
+      #|  distance((op_pct(real_of_num(1) / real_of_num(2), (x : Cart[Real, Unit]) + vec(1)), lift(real_of_num(1) / real_of_num(2))))
       #|  op_plus_plus((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (g2 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
       #|  (g2 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == o((x : Cart[Real, Unit]) => g2(op_pct(real_of_num(2), x) - vec(1)), (x : Cart[Real, Unit]) => op_pct(real_of_num(1) / real_of_num(2), x + vec(1)))
       #|  op_pct(real_of_num(1) / real_of_num(2), (x : Cart[Real, Unit]) + vec(1))
       #|  (x : Cart[Real, Unit])
       #|  INSERT(vec(0), INSERT(vec(1), {(x : Cart[Real, Unit]) | IN(op_pct(real_of_num(1) / real_of_num(2), x + vec(1)), (s : (Cart[Real, Unit]) -> Bool))}))
-      #|  dist((op_pct(real_of_num(1) / real_of_num(2), (x : Cart[Real, Unit])), lift(real_of_num(1) / real_of_num(2))))
+      #|  distance((op_pct(real_of_num(1) / real_of_num(2), (x : Cart[Real, Unit])), lift(real_of_num(1) / real_of_num(2))))
       #|  op_plus_plus((g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (g2 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
       #|  (g1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == o((x : Cart[Real, Unit]) => g1(op_pct(real_of_num(2), x)), (x : Cart[Real, Unit]) => op_pct(real_of_num(1) / real_of_num(2), x))
       #|  op_pct(real_of_num(1) / real_of_num(2), (x : Cart[Real, Unit]))
@@ -88583,7 +88583,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (vec : (Num) -> Cart[Real, Unit])(0)
       #|  integrable_on((x : Cart[Real, Unit]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) * vector_derivative(g, at(x)), interval([(vec(0), (a : Cart[Real, Unit]))]))
       #|  (a : Cart[Real, Unit]) + ((x : Cart[Real, Unit]) - vec(1)) == a - vec(1) + x
-      #|  dist((vec(1) - (a : Cart[Real, Unit]), (x : Cart[Real, Unit])))
+      #|  distance((vec(1) - (a : Cart[Real, Unit]), (x : Cart[Real, Unit])))
       #|  (x : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]) + (x - vec(1)))
       #|  real_of_num(1) - (a : Real) <= (x : Real) && !(x == real_of_num(1) - a) \226\134\146 !(a + x <= real_of_num(1))
       #|  ((x : Cart[Real, Unit]) == (y : Cart[Real, Unit]) - (a : Cart[Real, Unit]) + (z : Cart[Real, Unit])) == (y == a + (x - z))
@@ -88597,7 +88597,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (vec : (Num) -> Cart[Real, Unit])(0)
       #|  integrable_on((x : Cart[Real, Unit]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x)) * vector_derivative(g, at(x)), interval([((a : Cart[Real, Unit]), vec(1))]))
       #|  (vec : (Num) -> Cart[Real, Unit])(1) == (vec : (Num) -> Cart[Real, Unit])(0) + (vec : (Num) -> Cart[Real, Unit])(1)
-      #|  dist((vec(1) - (a : Cart[Real, Unit]), (x : Cart[Real, Unit])))
+      #|  distance((vec(1) - (a : Cart[Real, Unit]), (x : Cart[Real, Unit])))
       #|  (x : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Unit]) + x)
       #|  (x : Real) <= real_of_num(1) - (a : Real) \226\134\146 a + x <= real_of_num(1)
       #|  ((x : Cart[Real, Unit]) == (y : Cart[Real, Unit]) - (a : Cart[Real, Unit])) == (y == a + x)
@@ -88792,7 +88792,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  (x : Cart[Real, Tybit0[Unit]]) => (m : Cart[Real, Tybit0[Unit]]) / Cx(real_of_num(2)) * pow(x, 2) + (d : Cart[Real, Tybit0[Unit]]) * x
       #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 m : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], has_path_integral((x : Cart[Real, Tybit0[Unit]]) => m * x + d, Cx(real_of_num(0)), op_plus_plus(linepath((a, b)), op_plus_plus(linepath((b, c)), linepath((c, a)))))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 i : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], has_path_integral(f, i, op_plus_plus(linepath((a, b)), op_plus_plus(linepath((b, c)), linepath((c, d))))) \226\134\146 path_integral(linepath((a, b)), f) + (path_integral(linepath((b, c)), f) + path_integral(linepath((c, d)), f)) == i
       #|  {(f : (_) -> _)((x : _)) | IN(x, {(g : (_, _) -> _)((a : _), (b : _)) | (P : (_) -> Bool)(a) && (Q : (_) -> Bool)(b)})} == {f(g((a : _), (b : _))) | P(a) && Q(b)}
       #|  ((z : Cart[Real, Finite_sum[Unit, Unit]]) => (f : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(fstcart(z)), (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(sndcart(z)))) == o((y : Cart[Real, Finite_sum[Tybit0[Unit], Tybit0[Unit]]]) => f(fstcart(y), sndcart(y)), (p : Cart[Real, Finite_sum[Unit, Unit]]) => pastecart(g(fstcart(p)), h(sndcart(p))))
@@ -88837,7 +88837,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (c' : Cart[Real, Tybit0[Unit]]) == midpoint(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
       #|  (b' : Cart[Real, Tybit0[Unit]]) == midpoint(((c : Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]])))
       #|  (a' : Cart[Real, Tybit0[Unit]]) == midpoint(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])))
-      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, \226\136\128 K : Real, continuous_on(f, hull(convex, {a, b, c})) && dist((a, b)) <= K && dist((b, c)) <= K && dist((c, a)) <= K && norm(path_integral(linepath((a, b)), f) + (path_integral(linepath((b, c)), f) + path_integral(linepath((c, a)), f))) >= e * pow(K, 2) \226\134\146 (\226\136\131 a' : Cart[Real, Tybit0[Unit]], \226\136\131 b' : Cart[Real, Tybit0[Unit]], \226\136\131 c' : Cart[Real, Tybit0[Unit]], IN(a', hull(convex, {a, b, c})) && IN(b', hull(convex, {a, b, c})) && IN(c', hull(convex, {a, b, c})) && dist((a', b')) <= K / real_of_num(2) && dist((b', c')) <= K / real_of_num(2) && dist((c', a')) <= K / real_of_num(2) && norm(path_integral(linepath((a', b')), f) + (path_integral(linepath((b', c')), f) + path_integral(linepath((c', a')), f))) >= e * pow(K / real_of_num(2), 2))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, \226\136\128 K : Real, continuous_on(f, hull(convex, {a, b, c})) && distance((a, b)) <= K && distance((b, c)) <= K && distance((c, a)) <= K && norm(path_integral(linepath((a, b)), f) + (path_integral(linepath((b, c)), f) + path_integral(linepath((c, a)), f))) >= e * pow(K, 2) \226\134\146 (\226\136\131 a' : Cart[Real, Tybit0[Unit]], \226\136\131 b' : Cart[Real, Tybit0[Unit]], \226\136\131 c' : Cart[Real, Tybit0[Unit]], IN(a', hull(convex, {a, b, c})) && IN(b', hull(convex, {a, b, c})) && IN(c', hull(convex, {a, b, c})) && distance((a', b')) <= K / real_of_num(2) && distance((b', c')) <= K / real_of_num(2) && distance((c', a')) <= K / real_of_num(2) && norm(path_integral(linepath((a', b')), f) + (path_integral(linepath((b', c')), f) + path_integral(linepath((c', a')), f))) >= e * pow(K / real_of_num(2), 2))
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  (c : Cart[Real, Tybit0[Unit]])
       #|  (c : Cart[Real, Tybit0[Unit]])
@@ -88888,7 +88888,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
       #|  (e : Real)
       #|  (f' : Cart[Real, Tybit0[Unit]])
-      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, IN(x, s) && continuous_on(f, s) && complex_differentiable(f, within(at(x), s)) && real_of_num(0) < e \226\134\146 (\226\136\131 k : Real, real_of_num(0) < k && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], dist((a, b)) <= k && dist((b, c)) <= k && dist((c, a)) <= k && IN(x, hull(convex, {a, b, c})) && SUBSET(hull(convex, {a, b, c}), s) \226\134\146 norm(path_integral(linepath((a, b)), f) + (path_integral(linepath((b, c)), f) + path_integral(linepath((c, a)), f))) <= e * pow(dist((a, b)) + (dist((b, c)) + dist((c, a))), 2)))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, IN(x, s) && continuous_on(f, s) && complex_differentiable(f, within(at(x), s)) && real_of_num(0) < e \226\134\146 (\226\136\131 k : Real, real_of_num(0) < k && (\226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], distance((a, b)) <= k && distance((b, c)) <= k && distance((c, a)) <= k && IN(x, hull(convex, {a, b, c})) && SUBSET(hull(convex, {a, b, c}), s) \226\134\146 norm(path_integral(linepath((a, b)), f) + (path_integral(linepath((b, c)), f) + path_integral(linepath((c, a)), f))) <= e * pow(distance((a, b)) + (distance((b, c)) + distance((c, a))), 2)))
       #|  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
       #|  (ABC : (Num) -> A)(0) == (abc : A) && (\226\136\128 n : Num, ABC(SUC(n)) == select((abc : A) => (P : (A, Num) -> Bool)(abc, SUC(n)) && (Q : (A, A) -> Bool)(abc, ABC(n))))
       #|  \226\136\128 P : (A, Num) -> Bool, \226\136\128 Q : (A, A) -> Bool, \226\136\128 abc : A, P(abc, 0) && (\226\136\128 abc : A, \226\136\128 n : Num, P(abc, n) \226\134\146 (\226\136\131 abc' : A, P(abc', SUC(n)) && Q(abc', abc))) \226\134\146 (\226\136\131 ABC : (Num) -> A, ABC(0) == abc && (\226\136\128 n : Num, P(ABC(n), n) && Q(ABC(SUC(n)), ABC(n))))
@@ -88934,12 +88934,12 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (b' : Cart[Real, Tybit0[Unit]])
       #|  (a' : Cart[Real, Tybit0[Unit]])
       #|  (x : Real) == (y : Real) \226\134\146 x >= y
-      #|  \226\136\131 A : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\131 B : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\131 C : (Num) -> Cart[Real, Tybit0[Unit]], A(0) == (a : Cart[Real, Tybit0[Unit]]) && B(0) == (b : Cart[Real, Tybit0[Unit]]) && C(0) == (c : Cart[Real, Tybit0[Unit]]) && (\226\136\128 n : Num, (SUBSET(hull(convex, {A(n), B(n), C(n)}), hull(convex, {a, b, c})) && dist((A(n), B(n))) <= (K : Real) / pow(real_of_num(2), n) && dist((B(n), C(n))) <= K / pow(real_of_num(2), n) && dist((C(n), A(n))) <= K / pow(real_of_num(2), n) && norm(path_integral(linepath((A(n), B(n))), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])) + (path_integral(linepath((B(n), C(n))), f) + path_integral(linepath((C(n), A(n))), f))) >= (e : Real) * pow(K / pow(real_of_num(2), n), 2)) && SUBSET(hull(convex, {A(SUC(n)), B(SUC(n)), C(SUC(n))}), hull(convex, {A(n), B(n), C(n)})))
+      #|  \226\136\131 A : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\131 B : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\131 C : (Num) -> Cart[Real, Tybit0[Unit]], A(0) == (a : Cart[Real, Tybit0[Unit]]) && B(0) == (b : Cart[Real, Tybit0[Unit]]) && C(0) == (c : Cart[Real, Tybit0[Unit]]) && (\226\136\128 n : Num, (SUBSET(hull(convex, {A(n), B(n), C(n)}), hull(convex, {a, b, c})) && distance((A(n), B(n))) <= (K : Real) / pow(real_of_num(2), n) && distance((B(n), C(n))) <= K / pow(real_of_num(2), n) && distance((C(n), A(n))) <= K / pow(real_of_num(2), n) && norm(path_integral(linepath((A(n), B(n))), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])) + (path_integral(linepath((B(n), C(n))), f) + path_integral(linepath((C(n), A(n))), f))) >= (e : Real) * pow(K / pow(real_of_num(2), n), 2)) && SUBSET(hull(convex, {A(SUC(n)), B(SUC(n)), C(SUC(n))}), hull(convex, {A(n), B(n), C(n)})))
       #|  real_of_num(0) < (e : Real)
       #|  (e : Real) == norm((y : Cart[Real, Tybit0[Unit]])) / pow((K : Real), 2)
       #|  real_of_num(0) <= (x : Real) \226\134\146 real_of_num(0) < real_of_num(1) + x
       #|  real_of_num(0) < (K : Real)
-      #|  (K : Real) == real_of_num(1) + max(dist(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), max(dist((b, (c : Cart[Real, Tybit0[Unit]]))), dist((c, a))))
+      #|  (K : Real) == real_of_num(1) + max(distance(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), max(distance((b, (c : Cart[Real, Tybit0[Unit]]))), distance((c, a))))
       #|  (y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  path_integrable_on((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), op_plus_plus(linepath(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))), op_plus_plus(linepath((b, (c : Cart[Real, Tybit0[Unit]]))), linepath((c, a)))))
@@ -89201,7 +89201,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  IN((u : Cart[Real, Unit]), interval([(vec(0), vec(1))]))
       #|  (p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((u : Cart[Real, Unit]))
       #|  (e : Real)
-      #|  \226\136\128 e : Real, \226\136\128 pu : Cart[Real, Tybit0[Unit]], dist(((pt : Cart[Real, Tybit0[Unit]]), (pn : Cart[Real, Tybit0[Unit]]))) < (ee : Real) / real_of_num(3) \226\134\146 dist((pn, pu)) < e / real_of_num(3) && e <= ee && norm((gu : Cart[Real, Tybit0[Unit]]) - pu) < e / real_of_num(3) && norm((hu : Cart[Real, Tybit0[Unit]]) - pu) < e / real_of_num(3) \226\134\146 dist((pt, gu)) < ee && dist((pt, hu)) < ee
+      #|  \226\136\128 e : Real, \226\136\128 pu : Cart[Real, Tybit0[Unit]], distance(((pt : Cart[Real, Tybit0[Unit]]), (pn : Cart[Real, Tybit0[Unit]]))) < (ee : Real) / real_of_num(3) \226\134\146 distance((pn, pu)) < e / real_of_num(3) && e <= ee && norm((gu : Cart[Real, Tybit0[Unit]]) - pu) < e / real_of_num(3) && norm((hu : Cart[Real, Tybit0[Unit]]) - pu) < e / real_of_num(3) \226\134\146 distance((pt, gu)) < ee && distance((pt, hu)) < ee
       #|  :real
       #|  :real
       #|  :real
@@ -89236,7 +89236,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  \226\136\131 ff : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, path_image((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) \226\134\146 real_of_num(0) < (ee : (Cart[Real, Tybit0[Unit]]) -> Real)(z) && SUBSET(ball((z, ee(z))), (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, ball((z, ee(z)))) \226\134\146 has_complex_derivative(ff(z), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w), at(w)))
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
-      #|  dist(((gu : Cart[Real, Tybit0[Unit]]), (gt : Cart[Real, Tybit0[Unit]]))) < (eu : Real) / real_of_num(3) \226\134\146 norm((ht : Cart[Real, Tybit0[Unit]]) - gt) < (e : Real) / real_of_num(3) && e <= eu \226\134\146 dist((gu, ht)) < eu
+      #|  distance(((gu : Cart[Real, Tybit0[Unit]]), (gt : Cart[Real, Tybit0[Unit]]))) < (eu : Real) / real_of_num(3) \226\134\146 norm((ht : Cart[Real, Tybit0[Unit]]) - gt) < (e : Real) / real_of_num(3) && e <= eu \226\134\146 distance((gu, ht)) < eu
       #|  :real
       #|  :real
       #|  IN((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit])), ball(((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((u : Cart[Real, Unit])), (ee : (Cart[Real, Tybit0[Unit]]) -> Real)(p(u)))))
@@ -89438,7 +89438,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  bounded(IMAGE((w : Cart[Real, Tybit0[Unit]]) => w - (z : Cart[Real, Tybit0[Unit]]), path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))))
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, valid_path(g) && !IN(z, path_image(g)) && real_of_num(0) < e && (\226\136\128 x : Cart[Real, Unit], IN(x, interval((vec(0), vec(1)))) \226\134\146 e <= Im(vector_derivative(g, at(x)) * cnj(g(x) - z))) \226\134\146 real_of_num(0) < Re(winding_number((g, z)))
       #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], ((z : Cart[Real, Unit]) => op_pct(drop(z), x * y)) == o((w : Cart[Real, Tybit0[Unit]]) => x * w, (z : Cart[Real, Unit]) => op_pct(drop(z), y))
-      #|  op_star
+      #|  complex_mul
       #|  cexp(-(f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Unit]))) * ((g' : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(0))) + cexp(-f(x)) * -(g' / ((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x) - (z : Cart[Real, Tybit0[Unit]]))) * (g(x) - z) == Cx(real_of_num(0))
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g' : Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 x : Cart[Real, Unit], \226\136\128 z : Cart[Real, Tybit0[Unit]], has_vector_derivative(g, g', within(at(x), s)) && has_vector_derivative(f, g' / (g(x) - z), within(at(x), s)) && !(g(x) == z) \226\134\146 has_vector_derivative((x : Cart[Real, Unit]) => cexp(-f(x)) * (g(x) - z), Cx(real_of_num(0)), within(at(x), s))
       #|  interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])
@@ -89458,7 +89458,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (d1 : Real)
       #|  norm((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit])) - (z : Cart[Real, Tybit0[Unit]]))
       #|  continuous((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), within(at((t : Cart[Real, Unit])), interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])))
-      #|  \226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, Unit], IN(y, interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) && dist((y, (t : Cart[Real, Unit]))) < d \226\134\146 dist(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(y), g(t))) < norm(g(t) - (z : Cart[Real, Tybit0[Unit]])) && !IN(y, (k : (Cart[Real, Unit]) -> Bool)))
+      #|  \226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Cart[Real, Unit], IN(y, interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) && distance((y, (t : Cart[Real, Unit]))) < d \226\134\146 distance(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(y), g(t))) < norm(g(t) - (z : Cart[Real, Tybit0[Unit]])) && !IN(y, (k : (Cart[Real, Unit]) -> Bool)))
       #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], ((h : Cart[Real, Unit]) => op_pct(drop(h), x / y)) == o((x : Cart[Real, Tybit0[Unit]]) => inv(y) * x, (h : Cart[Real, Unit]) => op_pct(drop(h), x))
       #|  (a : Cart[Real, Tybit0[Unit]]) + ((b : Cart[Real, Tybit0[Unit]]) - (c : Cart[Real, Tybit0[Unit]])) == b + (a - c)
       #|  (u : Cart[Real, Unit]) => integral(interval([((a : Cart[Real, Unit]), (t : Cart[Real, Unit]))]), (x : Cart[Real, Unit]) => vector_derivative((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), within(at(x), interval([(a, (b : Cart[Real, Unit]))]))) / (g(x) - (z : Cart[Real, Tybit0[Unit]]))) + ((h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(g(u)) - h(g(t)))
@@ -89467,9 +89467,9 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  -Cx(real_of_num(1)) / pow((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]), 2)
       #|  (w : Cart[Real, Tybit0[Unit]])
-      #|  holomorphic_on((w : Cart[Real, Tybit0[Unit]]) => inv(w - (z : Cart[Real, Tybit0[Unit]])), ball(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit])), dist((g(t), z)))))
+      #|  holomorphic_on((w : Cart[Real, Tybit0[Unit]]) => inv(w - (z : Cart[Real, Tybit0[Unit]])), ball(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit])), distance((g(t), z)))))
       #|  ({} : (Cart[Real, Tybit0[Unit]]) -> Bool)
-      #|  ball(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit])), dist((g(t), (z : Cart[Real, Tybit0[Unit]])))))
+      #|  ball(((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit])), distance((g(t), (z : Cart[Real, Tybit0[Unit]])))))
       #|  (w : Cart[Real, Tybit0[Unit]]) => inv(w - (z : Cart[Real, Tybit0[Unit]]))
       #|  (t : Cart[Real, Unit])
       #|  (k : (Cart[Real, Unit]) -> Bool)
@@ -89489,8 +89489,8 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (w : Cart[Real, Tybit0[Unit]]) => inv(w - (z : Cart[Real, Tybit0[Unit]]))
       #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], !(w == (z : Cart[Real, Tybit0[Unit]])) \226\134\146 (\226\136\131 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], norm(y - w) < norm(w - z) \226\134\146 has_complex_derivative(h, inv(y - z), at(y)))
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], piecewise_differentiable_on(g, interval([(a, b)])) && drop(a) <= drop(b) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 !(g(x) == (z : Cart[Real, Tybit0[Unit]]))) \226\134\146 integrable_on((x : Cart[Real, Unit]) => vector_derivative(g, within(at(x), interval([(a, b)]))) / (g(x) - z), interval([(a, b)])) && cexp(-integral(interval([(a, b)]), (x : Cart[Real, Unit]) => vector_derivative(g, within(at(x), interval([(a, b)]))) / (g(x) - z))) * (g(b) - z) == g(a) - z
-      #|  (f has_complex_derivative f') net
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], piecewise_differentiable_on(g, interval([(a, b)])) && drop(a) <= drop(b) && (\226\136\128 x : Cart[Real, Unit], IN(x, interval([(a, b)])) \226\134\146 !(g(x) == z)) \226\134\146 integrable_on((x : Cart[Real, Unit]) => vector_derivative(g, at(x)) / (g(x) - z), interval([(a, b)])) && cexp(-integral(interval([(a, b)]), (x : Cart[Real, Unit]) => vector_derivative(g, at(x)) / (g(x) - z))) * (g(b) - z) == g(a) - z
       #|  Cx(real_of_num(1)) / (z : Cart[Real, Tybit0[Unit]]) * (w : Cart[Real, Tybit0[Unit]]) == w / z
       #|  (vec : (Num) -> Cart[Real, Unit])(1)
@@ -89595,7 +89595,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
       #|  (k : Real)
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) < min((d : Real), (e : Real)) / real_of_num(2)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) < min((d : Real), (e : Real)) / real_of_num(2)
       #|  (t : Cart[Real, Unit])
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t : Cart[Real, Unit]))
       #|  (t : Cart[Real, Unit])
@@ -89755,10 +89755,10 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  !((a : Real) == real_of_num(0)) \226\134\146 (x : Real) / a * pow(a, 2) == x * a
       #|  (b : Real) - (d : Real) / real_of_num(3) * norm((a : Cart[Real, Tybit0[Unit]]))
       #|  (a : Cart[Real, Tybit0[Unit]])
-      #|  abs(Re((w' : Cart[Real, Tybit0[Unit]])) - Re((w : Cart[Real, Tybit0[Unit]]))) <= norm(w' - w) && abs(Re(w')) < real_of_num(1) / real_of_num(2) \226\134\146 !(dist((w', w)) < abs(Re(w)) - real_of_num(1) / real_of_num(2))
+      #|  abs(Re((w' : Cart[Real, Tybit0[Unit]])) - Re((w : Cart[Real, Tybit0[Unit]]))) <= norm(w' - w) && abs(Re(w')) < real_of_num(1) / real_of_num(2) \226\134\146 !(distance((w', w)) < abs(Re(w)) - real_of_num(1) / real_of_num(2))
       #|  :real
       #|  :real
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), z)) == norm(d)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), z)) == norm(d)
       #|  :real
       #|  :real
       #|  (z : Cart[Real, Tybit0[Unit]]) - op_pct((d : Real) / real_of_num(2) / norm((a : Cart[Real, Tybit0[Unit]])), a)
@@ -89810,11 +89810,11 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
       #|  (z : Cart[Real, Tybit0[Unit]]) + Cx(real_of_num(1))
       #|  (w : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - f((z : Cart[Real, Tybit0[Unit]]))) / (w - z)
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
       #|  (w : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - f((z : Cart[Real, Tybit0[Unit]]))) / (w - z)
       #|  (w : Cart[Real, Tybit0[Unit]]) == (z : Cart[Real, Tybit0[Unit]])
       #|  (w : Cart[Real, Tybit0[Unit]])
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
       #|  (w : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - f((z : Cart[Real, Tybit0[Unit]]))) / (w - z)
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
@@ -89839,7 +89839,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  SUC((n : Num)) - n == 1
       #|  (n : Num) <= SUC(n)
       #|  (e : Real)
-      #|  \226\136\128 e : Real, norm((n' : Cart[Real, N]) - (n : Cart[Real, N])) < e / real_of_num(3) && e <= (ee : Real) \226\134\146 dist(((t : Cart[Real, N]), n)) < ee / real_of_num(3) \226\134\146 norm(n - t) < ee && norm(n' - t) < ee
+      #|  \226\136\128 e : Real, norm((n' : Cart[Real, N]) - (n : Cart[Real, N])) < e / real_of_num(3) && e <= (ee : Real) \226\134\146 distance(((t : Cart[Real, N]), n)) < ee / real_of_num(3) \226\134\146 norm(n - t) < ee && norm(n' - t) < ee
       #|  :real
       #|  :real
       #|  :real
@@ -89919,7 +89919,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  SUC((n : Num)) - n == 1
       #|  (n : Num) <= SUC(n)
       #|  (e : Real)
-      #|  \226\136\128 e : Real, norm((n' : Cart[Real, N]) - (n : Cart[Real, N])) < e / real_of_num(3) && e <= (ee : Real) \226\134\146 dist(((t : Cart[Real, N]), n)) < ee / real_of_num(3) \226\134\146 norm(n - t) < ee && norm(n' - t) < ee
+      #|  \226\136\128 e : Real, norm((n' : Cart[Real, N]) - (n : Cart[Real, N])) < e / real_of_num(3) && e <= (ee : Real) \226\134\146 distance(((t : Cart[Real, N]), n)) < ee / real_of_num(3) \226\134\146 norm(n - t) < ee && norm(n' - t) < ee
       #|  :real
       #|  :real
       #|  :real
@@ -90071,10 +90071,10 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 c1 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c2 : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 d : Cart[Real, Tybit0[Unit]], !(a == b) && simple_path(c1) && pathstart(c1) == a && pathfinish(c1) == b && simple_path(c2) && pathstart(c2) == a && pathfinish(c2) == b && simple_path(c) && pathstart(c) == a && pathfinish(c) == b && INTER(path_image(c1), path_image(c2)) == {a, b} && INTER(path_image(c1), path_image(c)) == {a, b} && INTER(path_image(c2), path_image(c)) == {a, b} && !(INTER(path_image(c), inside(UNION(path_image(c1), path_image(c2)))) == {}) && IN(z, inside(UNION(path_image(c1), path_image(c)))) && winding_number((op_plus_plus(c1, reversepath(c)), z)) == d && !(d == Cx(real_of_num(0))) \226\134\146 IN(z, inside(UNION(path_image(c1), path_image(c2)))) && winding_number((op_plus_plus(c1, reversepath(c2)), z)) == d
       #|  IN((c : _), (s : (_) -> Bool)) \226\134\146 s == (t : (_) -> Bool) \226\134\146 IN(c, t)
       #|  (c : Cart[Real, Tybit0[Unit]])
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a - (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a - (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
       #|  INTER((b : (_) -> Bool), (p : (_) -> Bool)) == {} \226\134\146 SUBSET((s : (_) -> Bool), b) \226\134\146 INTER(p, s) == {}
@@ -90082,7 +90082,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  INTER((s : (_) -> Bool), (t1 : (_) -> Bool)) == {(a : _)} && INTER(s, (t2 : (_) -> Bool)) == {(b : _)} \226\134\146 INTER(s, UNION(t1, t2)) == {a, b}
       #|  INTER((s : (_) -> Bool), (t1 : (_) -> Bool)) == {(a : _)} && INTER(s, (t2 : (_) -> Bool)) == {(b : _)} \226\134\146 INTER(s, UNION(t1, t2)) == {a, b}
       #|  (x : Real) * (e : Real) < real_of_num(1) * e && real_of_num(0) < e \226\134\146 x * (abs(e) * real_of_num(1)) < e
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
       #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, Tybit0[Unit]]) + (e : Cart[Real, Tybit0[Unit]])) + op_pct(u, a - e) == a + op_pct(real_of_num(1) - real_of_num(2) * u, e)
@@ -90125,13 +90125,13 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  linepath(((a : Cart[Real, Tybit0[Unit]]) - op_pct((e : Real), basis(1)), a + op_pct(e, basis(1))))
       #|  (p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, real_of_num(0) < e && simple_path(op_plus_plus(p, linepath((a - op_pct(e, basis(1)), a + op_pct(e, basis(1)))))) && pathstart(p) == a + op_pct(e, basis(1)) && pathfinish(p) == a - op_pct(e, basis(1)) && INTER(ball((a, e)), path_image(p)) == {} \226\134\146 (\226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, inside(path_image(op_plus_plus(p, linepath((a - op_pct(e, basis(1)), a + op_pct(e, basis(1)))))))) && norm(winding_number((op_plus_plus(p, linepath((a - op_pct(e, basis(1)), a + op_pct(e, basis(1))))), z))) == real_of_num(1))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) + (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) + (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a - (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a - (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
       #|  :real
       #|  :real
       #|  UNION((s : (_) -> Bool), (t : (_) -> Bool)) == (u : (_) -> Bool) \226\134\146 !IN((z : _), s) && !IN(z, t) \226\134\146 !IN(z, u)
@@ -90139,16 +90139,16 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  winding_number((linepath(((a : Cart[Real, Tybit0[Unit]]) - op_pct((d : Real), basis(1)), a - op_pct((kde : Real), basis(1)))), (z : Cart[Real, Tybit0[Unit]]))) + winding_number((linepath((a - op_pct(kde, basis(1)), a + op_pct((e : Real), basis(1)))), z))
       #|  (d : Cart[Real, Tybit0[Unit]]) + ((k : Cart[Real, Tybit0[Unit]]) + (e : Cart[Real, Tybit0[Unit]])) == (z : Cart[Real, Tybit0[Unit]]) \226\134\146 e + ((p : Cart[Real, Tybit0[Unit]]) + d) + k == p + z
       #|  IN((z : Cart[Real, _]), inside((s : (Cart[Real, _]) -> Bool))) \226\134\146 !IN(z, s)
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a - (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a - (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) + (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) + (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d - e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
       #|  :real
       #|  :real
       #|  UNION(UNION((c : (_) -> Bool), UNION((p : (_) -> Bool), (a : (_) -> Bool))), (b : (_) -> Bool)) == UNION(p, UNION(a, UNION(b, c)))
@@ -90156,7 +90156,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  ((k : Real) <= (real_of_num(1) - (u : Real)) * k + u * (e : Real)) == (real_of_num(0) <= u * (e - k)) && (k <= (real_of_num(1) - u) * (d : Real) + u * k) == (real_of_num(0) <= (real_of_num(1) - u) * (d - k))
       #|  (x : Real) <= (y : Real) \226\134\146 x <= abs(y)
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (d : Cart[Real, Tybit0[Unit]]))) == norm(d) && dist((a, a - (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (d : Cart[Real, Tybit0[Unit]]))) == norm(d) && distance((a, a - (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
       #|  :real
@@ -90165,7 +90165,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, IN(x, t) \226\134\146 !IN(x, s))
       #|  INTER((b : (_) -> Bool), (p : (_) -> Bool)) == {} \226\134\146 SUBSET((c : (_) -> Bool), b) \226\134\146 INTER(c, p) == {}
       #|  ((a : Bool) && (b : Bool) && (c : Bool)) == (b && a && c)
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e) && dist((a + d, a - e)) == norm(d + e) && dist((a - d, a - e)) == norm(d - e) && dist((a + d, a + e)) == norm(d - e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e) && distance((a + d, a - e)) == norm(d + e) && distance((a - d, a - e)) == norm(d - e) && distance((a + d, a + e)) == norm(d - e)
       #|  :real
       #|  :real
       #|  :real
@@ -90175,7 +90175,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  :real
       #|  :real
       #|  real_of_num(0) < (kd : Real) && (a : Real) * kd <= real_of_num(1) * kd && kd < (k : Real) \226\134\146 a * (abs(kd) * real_of_num(1)) < k
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a - (d : Cart[Real, Tybit0[Unit]]))) == norm(d)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a - (d : Cart[Real, Tybit0[Unit]]))) == norm(d)
       #|  :real
       #|  :real
       #|  op_pct(real_of_num(1) - (u : Real), (a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]])) + op_pct(u, a + d) == a - op_pct(real_of_num(1) - real_of_num(2) * u, d)
@@ -90186,7 +90186,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  ((a : Real) < (real_of_num(1) - (u : Real)) * (a + (x : Real)) + u * (a + (y : Real))) == (real_of_num(0) < (real_of_num(1) - u) * x + u * y) && ((real_of_num(1) - u) * (a - x) + u * (a - y) < a) == (real_of_num(0) < (real_of_num(1) - u) * x + u * y)
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], (\226\136\128 x : Cart[Real, _], IN(x, (t : (Cart[Real, _]) -> Bool)) \226\134\146 op_dollar(x, 1) < op_dollar(a, 1)) && (\226\136\128 x : Cart[Real, _], IN(x, (s : (Cart[Real, _]) -> Bool)) \226\134\146 op_dollar(a, 1) < op_dollar(x, 1)) \226\134\146 (\226\136\128 x : Cart[Real, _], !(IN(x, s) && IN(x, t)))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e) && dist((a + d, a - e)) == norm(d + e) && dist((a - d, a - e)) == norm(d - e) && dist((a + d, a + e)) == norm(d - e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e) && distance((a + d, a - e)) == norm(d + e) && distance((a - d, a - e)) == norm(d - e) && distance((a + d, a + e)) == norm(d - e)
       #|  :real
       #|  :real
       #|  :real
@@ -90209,12 +90209,12 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  DIFF(UNIV, path_image((p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
       #|  ((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]) == a) == (d == vec(0))
       #|  ((a : Cart[Real, Tybit0[Unit]]) + (e : Cart[Real, Tybit0[Unit]]) == a) == (e == vec(0))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a)) + dist((a, a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d) + norm(e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a)) + distance((a, a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d) + norm(e)
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
       #|  :real
       #|  :real
       #|  SUBSET(INTER((p : (_) -> Bool), (s : (_) -> Bool)), {(d : _), (e : _)}) \226\134\146 IN((a : _), s) && !(d == a) && !(e == a) \226\134\146 !IN(a, p)
@@ -90230,13 +90230,13 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  ((a : Cart[Real, Tybit0[Unit]]) == -(b : Cart[Real, Tybit0[Unit]])) == (-a == b)
       #|  (!IN((z : _), (s : (_) -> Bool)) && !IN(z, (t : (_) -> Bool))) == !IN(z, UNION(s, t))
       #|  winding_number((op_plus_plus((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), (z : Cart[Real, Tybit0[Unit]]))) == winding_number((g, z)) + winding_number((h, z)) && winding_number((op_plus_plus(h, g), z)) == winding_number((h, z)) + winding_number((g, z)) \226\134\146 winding_number((op_plus_plus(g, h), z)) == winding_number((op_plus_plus(h, g), z))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(e)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a)) == norm(d)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a)) == norm(d)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]) - (d : Cart[Real, Tybit0[Unit]]), a + (e : Cart[Real, Tybit0[Unit]]))) == norm(d + e)
       #|  :real
       #|  :real
       #|  (a : Cart[Real, Tybit0[Unit]])
@@ -90383,7 +90383,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 r : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 s : Real, \226\136\128 t : Real, pathstart(partcirclepath((z, r, s, t))) == z + Cx(r) * cexp(ii * Cx(s))
       #|  \226\136\128 r : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 s : Real, \226\136\128 t : Real, pathfinish(partcirclepath((z, r, s, t))) == z + Cx(r) * cexp(ii * Cx(t))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, \226\136\128 x : Cart[Real, Unit], has_vector_derivative(partcirclepath((z, r, s, t)), ii * (Cx(r) * ((Cx(t) - Cx(s)) * cexp(ii * linepath((Cx(s), Cx(t)), x)))), at(x))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, \226\136\128 x : Cart[Real, Unit], vector_derivative(partcirclepath((z, r, s, t)), at(x)) == ii * (Cx(r) * ((Cx(t) - Cx(s)) * cexp(ii * linepath((Cx(s), Cx(t)), x))))
       #|  (x : Cart[Real, Unit])
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, valid_path(partcirclepath((z, r, s, t)))
@@ -90402,7 +90402,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (x : Cart[Real, Unit])
       #|  ((a : Bool) == (b : Bool)) == ((a \226\134\146 b) && (b \226\134\146 a))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, real_of_num(0) <= r && s <= t \226\134\146 path_image(partcirclepath((z, r, s, t))) == {z + Cx(r) * cexp(ii * Cx((x : Real))) | s <= x && x <= t}
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), z + (x : Cart[Real, Tybit0[Unit]]))) == norm(x)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), z + (x : Cart[Real, Tybit0[Unit]]))) == norm(x)
       #|  :real
       #|  :real
       #|  (t : Cart[Real, Unit])
@@ -90410,7 +90410,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, real_of_num(0) <= r \226\134\146 SUBSET(path_image(partcirclepath((z, r, s, t))), sphere((z, r)))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, \226\136\128 w : Cart[Real, Tybit0[Unit]], real_of_num(0) <= r && IN(w, path_image(partcirclepath((z, r, s, t)))) \226\134\146 norm(w - z) == r
       #|  has_vector_derivative(partcirclepath(((z : Cart[Real, Tybit0[Unit]]), (r : Real), (s : Real), (t : Real))), ii * (Cx(t - s) * partcirclepath((Cx(real_of_num(0)), r, s, t), (u : Cart[Real, Unit]))), at(u))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (x : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit]) => ii * (Cx((t : Real) - (s : Real)) * partcirclepath((Cx(real_of_num(0)), (r : Real), s, t), x))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 t : Real, rectifiable_path(partcirclepath((z, r, s, t)))
@@ -90506,7 +90506,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 r : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], pathstart(circlepath((z, r))) == z + Cx(r)
       #|  \226\136\128 r : Real, \226\136\128 z : Cart[Real, Tybit0[Unit]], pathfinish(circlepath((z, r))) == z + Cx(r)
       #|  has_vector_derivative(circlepath(((z : Cart[Real, Tybit0[Unit]]), (r : Real))), Cx(real_of_num(2)) * (Cx(pi) * (ii * (Cx(r) * cexp(Cx(real_of_num(2)) * (Cx(pi) * (ii * Cx(drop((x : Cart[Real, Unit]))))))))), at(x))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  vector_derivative(circlepath(((z : Cart[Real, Tybit0[Unit]]), (r : Real))), at((x : Cart[Real, Unit]))) == Cx(real_of_num(2)) * (Cx(pi) * (ii * (Cx(r) * cexp(Cx(real_of_num(2)) * (Cx(pi) * (ii * Cx(drop(x))))))))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, valid_path(circlepath((z, r)))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, rectifiable_path(circlepath((z, r)))
@@ -90535,11 +90535,11 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (x : Cart[Real, Tybit0[Unit]])
       #|  Cx(real_of_num(2)) * ((p : Cart[Real, Tybit0[Unit]]) * ((i : Cart[Real, Tybit0[Unit]]) * (z : Cart[Real, Tybit0[Unit]]))) == Cx(real_of_num(2)) * (p * z) * i
       #|  (z : Cart[Real, Tybit0[Unit]]) + (r : Cart[Real, Tybit0[Unit]]) - z == r
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, real_of_num(0) <= r \226\134\146 path_image(circlepath((z, r))) == sphere((z, r))
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  (k : (Cart[Real, Tybit0[Unit]]) -> Bool)
@@ -90547,7 +90547,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  (B : Real) * (real_of_num(2) * (pi * (r : Real))) == B * (r * (real_of_num(2) * pi - real_of_num(0)))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 i : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 B : Real, \226\136\128 k : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(k) && has_path_integral(f, i, circlepath((z, r))) && real_of_num(0) <= B && real_of_num(0) < r && (\226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x - z) == r && !IN(x, k) \226\134\146 norm(f(x)) <= B) \226\134\146 norm(i) <= B * (real_of_num(2) * (pi * r))
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  (z : Cart[Real, Tybit0[Unit]])
@@ -90556,7 +90556,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 i : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 B : Real, has_path_integral(f, i, circlepath((z, r))) && real_of_num(0) <= B && real_of_num(0) < r && (\226\136\128 x : Cart[Real, Tybit0[Unit]], norm(x - z) == r \226\134\146 norm(f(x)) <= B) \226\134\146 norm(i) <= B * (real_of_num(2) * (pi * r))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, continuous_on(f, path_image(circlepath((z, r)))) \226\134\146 path_integrable_on(f, circlepath((z, r)))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, simple_path(circlepath((z, r))) == !(r == real_of_num(0))
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  (n : Real) < (r : Real) \226\134\146 (real_of_num(0) <= n \226\134\146 real_of_num(0) <= r && real_of_num(0) < r) && n < r
@@ -90684,8 +90684,8 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 f' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 k : Num, \226\136\128 B : Real, !(k == 0) && open(s) && valid_path(g) && (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 norm(vector_derivative(g, at(t))) <= B) && continuous_on(f', path_image(g)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, DIFF(s, path_image(g))) \226\134\146 has_path_integral((u : Cart[Real, Tybit0[Unit]]) => f'(u) / pow(u - w, k), f(w), g)) \226\134\146 (\226\136\128 w : Cart[Real, Tybit0[Unit]], IN(w, DIFF(s, path_image(g))) \226\134\146 path_integrable_on((u : Cart[Real, Tybit0[Unit]]) => f'(u) / pow(u - w, k + 1), g) && has_complex_derivative(f, Cx(real_of_num(k)) * path_integral(g, (u : Cart[Real, Tybit0[Unit]]) => f'(u) / pow(u - w, k + 1)), at(w)))
       #|  :real
       #|  :real
-      #|  (f has_complex_derivative f') net
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == s) == (\226\136\128 x : _, IN(x, t) \226\134\146 !IN(x, s))
       #|  DIFF(ball(((z : Cart[Real, Tybit0[Unit]]), (r : Real))), path_image(circlepath((z, r)))) == ball((z, r))
       #|  real_of_num(2) * (pi * (r : Real))
@@ -90741,7 +90741,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, open(s) && holomorphic_on(f, s) && IN(x, s) \226\134\146 has_complex_derivative(higher_complex_derivative(n, f), higher_complex_derivative(SUC(n), f, x), at(x))
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  ball(((a : Cart[Real, Tybit0[Unit]]), (e : Real)))
-      #|  (e : Real) - dist(((a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  (e : Real) - distance(((a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  (e : Real)
       #|  (z : Cart[Real, Tybit0[Unit]])
@@ -90853,7 +90853,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (x : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(2)) * (Cx(pi) * ii) / Cx(real_of_num(FACT((k : Num)))) * higher_complex_derivative(k, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), x)
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
-      #|  !(real_of_num(0) < (r : Real)) \226\134\146 !(dist(((a : Cart[Real, _]), (b : Cart[Real, _]))) < r)
+      #|  !(real_of_num(0) < (r : Real)) \226\134\146 !(distance(((a : Cart[Real, _]), (b : Cart[Real, _]))) < r)
       #|  :real
       #|  real_of_num(0) < (r : Real)
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 k : Num, \226\136\128 w : Cart[Real, Tybit0[Unit]], continuous_on(f, cball((z, r))) && holomorphic_on(f, ball((z, r))) && IN(w, ball((z, r))) \226\134\146 has_path_integral((u : Cart[Real, Tybit0[Unit]]) => f(u) / pow(u - w, k + 1), Cx(real_of_num(2)) * (Cx(pi) * ii) / Cx(real_of_num(FACT(k))) * higher_complex_derivative(k, f, w), circlepath((z, r)))
@@ -90876,14 +90876,14 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  ((r : Real) - (k : Real) < real_of_num(1) * r) == (real_of_num(0) < k)
       #|  (e : Real) / (B : Real) * (k : Real)
       #|  ((r : Real) - (k : Real)) / r
-      #|  (dist(((z : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) == (r : Real)) == (norm(x - z) == r)
+      #|  (distance(((z : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) == (r : Real)) == (norm(x - z) == r)
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  (r : Real) - dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]])))
+      #|  (r : Real) - distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]])))
       #|  \226\136\131 k : Real, real_of_num(0) < k && k <= (r : Real) && norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])) <= r - k && (\226\136\128 u : Cart[Real, Tybit0[Unit]], norm(u - z) == r \226\134\146 k <= norm(u - w))
       #|  IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), cball(((z : Cart[Real, Tybit0[Unit]]), (r : Real))))
       #|  \226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 u : Cart[Real, Tybit0[Unit]], IN(u, cball(((z : Cart[Real, Tybit0[Unit]]), (r : Real)))) \226\134\146 norm((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(u)) <= B)
@@ -90916,7 +90916,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (r : Real)
       #|  IN((w : Cart[Real, Tybit0[Unit]]), ball(((z : Cart[Real, Tybit0[Unit]]), (r : Real))))
       #|  ball(((z : Cart[Real, Tybit0[Unit]]), (r : Real)))
-      #|  ((r : Real) + dist(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))) / real_of_num(2)
+      #|  ((r : Real) + distance(((w : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))) / real_of_num(2)
       #|  \226\136\131 r : Real, real_of_num(0) < r && holomorphic_on((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), cball(((z : Cart[Real, Tybit0[Unit]]), r))) && IN((w : Cart[Real, Tybit0[Unit]]), ball((z, r)))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, holomorphic_on(f, ball((z, r))) && IN(w, ball((z, r))) \226\134\146 sums((n : Num) => higher_complex_derivative(n, f, z) / Cx(real_of_num(FACT(n))) * pow(w - z, n), f(w), from(0))
       #|  :real
@@ -90988,7 +90988,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) < a \226\134\146 x < b
       #|  !((x : Cart[Real, Tybit0[Unit]]) == (w : Cart[Real, Tybit0[Unit]])) \226\134\146 (a : Cart[Real, Tybit0[Unit]]) / (x - w) - (b : Cart[Real, Tybit0[Unit]]) / (x - w) == (a - b) / (x - w)
       #|  !((x : Cart[Real, Tybit0[Unit]]) == (w : Cart[Real, Tybit0[Unit]]))
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, Tybit0[Unit]])
@@ -90997,7 +90997,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (e : Real) * abs((r : Real) - norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])))
       #|  (e : Real)
       #|  cball(((z : Cart[Real, Tybit0[Unit]]), (r : Real)))
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (a : A)
@@ -91019,7 +91019,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Real) <= (b : Real) \226\134\146 (x : Real) < a \226\134\146 x < b
       #|  !((x : Cart[Real, Tybit0[Unit]]) == (w : Cart[Real, Tybit0[Unit]])) \226\134\146 (a : Cart[Real, Tybit0[Unit]]) / pow(x - w, 2) - (b : Cart[Real, Tybit0[Unit]]) / pow(x - w, 2) == (a - b) / pow(x - w, 2)
       #|  !((x : Cart[Real, Tybit0[Unit]]) == (w : Cart[Real, Tybit0[Unit]]))
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (x : Cart[Real, Tybit0[Unit]])
@@ -91028,7 +91028,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (e : Real) * pow(abs((r : Real) - norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]))), 2)
       #|  (e : Real)
       #|  cball(((z : Cart[Real, Tybit0[Unit]]), (r : Real)))
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (a : A)
@@ -91113,7 +91113,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  :real
       #|  real_of_num(0) < (r : Real)
       #|  \226\136\128 k : (Num) -> Bool, \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, summable(k, (n : Num) => a(n) * pow(Cx(r), n)) \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) < r \226\134\146 sums((n : Num) => a(n) * pow(z, n), g(z), k) && sums((n : Num) => Cx(real_of_num(n)) * (a(n) * pow(z, n - 1)), g'(z), k) && has_complex_derivative(g, g'(z), at(z)))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  :real
       #|  :real
       #|  :real
@@ -91129,7 +91129,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 k : (Num) -> Bool, \226\136\128 a : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 w : Cart[Real, Tybit0[Unit]], summable(k, (n : Num) => a(n) * pow(Cx(r), n)) \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 g' : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((w, r))) \226\134\146 sums((n : Num) => a(n) * pow(z - w, n), g(z), k) && sums((n : Num) => Cx(real_of_num(n)) * (a(n) * pow(z - w, n - 1)), g'(z), k) && has_complex_derivative(g, g'(z), at(z)))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (u : Cart[Real, Tybit0[Unit]])
       #|  (k : (Num) -> Bool)
       #|  (n : Num) => (a : (Num) -> Cart[Real, Tybit0[Unit]])(n) * pow((u : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]]), n)
@@ -91174,7 +91174,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (w : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(0))
       #|  \226\136\128 i : Num, IN(i, UNIV) \226\134\146 higher_complex_derivative(i, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])) / Cx(real_of_num(FACT(i))) - (if IN(i, (k : (Num) -> Bool)) { (c : (Num) -> Cart[Real, Tybit0[Unit]])(i) } else { vec(0) }) == Cx(real_of_num(0))
       #|  holomorphic_on((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball(((z : Cart[Real, Tybit0[Unit]]), (r : Real))))
-      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 n : Num, real_of_num(0) < r && IN(n, (k : (Num) -> Bool)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], dist((w, (z : Cart[Real, Tybit0[Unit]]))) < r \226\134\146 sums((i : Num) => c(i) * pow(w - z, i), f(w), k)) \226\134\146 higher_complex_derivative(n, f, z) / Cx(real_of_num(FACT(n))) == c(n)
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Num) -> Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 n : Num, real_of_num(0) < r && IN(n, (k : (Num) -> Bool)) && (\226\136\128 w : Cart[Real, Tybit0[Unit]], distance((w, (z : Cart[Real, Tybit0[Unit]]))) < r \226\134\146 sums((i : Num) => c(i) * pow(w - z, i), f(w), k)) \226\134\146 higher_complex_derivative(n, f, z) / Cx(real_of_num(FACT(n))) == c(n)
       #|  ((a : Cart[Real, Tybit0[Unit]]) * (f : Cart[Real, Tybit0[Unit]]) * ((i : Cart[Real, Tybit0[Unit]]) * (n : Cart[Real, Tybit0[Unit]])) == a * i) == (f * n == Cx(real_of_num(1)) || a * i == Cx(real_of_num(0)))
       #|  SUC((n : Num)) - 1 == n
       #|  (n : Num)
@@ -91199,8 +91199,8 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  Cx(real_of_num(0))
       #|  o(clog, (z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) + z)
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) < real_of_num(1) \226\134\146 sums((n : Num) => pow(-Cx(real_of_num(1)), n + 1) * (pow(z, n) / Cx(real_of_num(n))), clog(Cx(real_of_num(1)) + z), from(1))
-      #|  (f has_complex_derivative f') net
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  :real
       #|  :real
       #|  :real
@@ -91411,7 +91411,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  (w : Cart[Real, Tybit0[Unit]])
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
       #|  (z : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) - f((a : Cart[Real, Tybit0[Unit]]))) / (z - a)
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !(z == (a : Cart[Real, Tybit0[Unit]])) \226\134\146 complex_differentiable((z : Cart[Real, Tybit0[Unit]]) => if z == a { complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), a) } else { (f(z) - f(a)) / (z - a) }, within(at(z), s))
       #|  IN((a : Cart[Real, Tybit0[Unit]]), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
@@ -91451,10 +91451,10 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
-      #|  (real_of_num(0) < dist(((a : Cart[Real, _]), (b : Cart[Real, _])))) == !(a == b)
+      #|  (real_of_num(0) < distance(((a : Cart[Real, _]), (b : Cart[Real, _])))) == !(a == b)
       #|  :real
       #|  :real
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
       #|  (b : Cart[Real, Tybit0[Unit]])
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (z : Cart[Real, Tybit0[Unit]]) == (a : Cart[Real, Tybit0[Unit]])
@@ -91605,7 +91605,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], SUBSET(segment([(a, b)]), (u : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 continuous_on((w : Cart[Real, Tybit0[Unit]]) => path_integral(linepath((a, b)), (z : Cart[Real, Tybit0[Unit]]) => (d : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z, w)), u)
       #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], IN(w, (u : (Cart[Real, Tybit0[Unit]]) -> Bool)) && SUBSET(segment([(a, b)]), u) \226\134\146 path_integrable_on((z : Cart[Real, Tybit0[Unit]]) => (d : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z, w), linepath((a, b)))
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])))
       #|  (w : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((y : Cart[Real, Tybit0[Unit]])) - f(w)) / (y - w)
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  DIFF((s : (_) -> Bool), {(x : _)}) == DELETE(s, x)
@@ -91720,7 +91720,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  interior((t : (Cart[Real, Tybit0[Unit]]) -> Bool))
       #|  real_of_num(0) < (dd : Real)
       #|  SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))}, (u : (Cart[Real, N]) -> Bool)) \226\134\146 SUBSET((t' : (Cart[Real, N]) -> Bool), t) \226\134\146 SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t')}, u)
-      #|  dist(((y : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) < (dd : Real) / real_of_num(2)
+      #|  distance(((y : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) < (dd : Real) / real_of_num(2)
       #|  (x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  (x : Cart[Real, Tybit0[Unit]])
@@ -91770,7 +91770,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  DELETE((u : (Cart[Real, Tybit0[Unit]]) -> Bool), (y : Cart[Real, Tybit0[Unit]]))
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], !IN(y, path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))) \226\134\146 path_integrable_on((x : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x) - f(y)) / (x - y), g)
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]])))
       #|  (w : Cart[Real, Tybit0[Unit]]) => ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(w) - f((y : Cart[Real, Tybit0[Unit]]))) / (w - y)
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  DIFF((s : (_) -> Bool), {(x : _)}) == DELETE(s, x)
@@ -91843,7 +91843,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  (w : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1))
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, valid_path(g) && !IN(z, path_image(g)) && pathfinish(g) == pathstart(g) \226\134\146 has_path_integral((w : Cart[Real, Tybit0[Unit]]) => pow(inv(w - z), n), if n == 1 { Cx(real_of_num(2)) * (Cx(pi) * (ii * winding_number((g, z)))) } else { Cx(real_of_num(0)) }, g)
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (w : Cart[Real, Tybit0[Unit]]) => pow(inv(w - (z : Cart[Real, Tybit0[Unit]])), (n : Num))
       #|  !((n : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 inv(n) * (n * (w : Cart[Real, Tybit0[Unit]])) == w
       #|  (w : Cart[Real, Tybit0[Unit]])
@@ -91855,7 +91855,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (n : Cart[Real, Tybit0[Unit]]) == Cx((m : Real))
       #|  (m : Real)
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Cart[Real, Tybit0[Unit]], valid_path(g) && !IN(z, path_image(g)) && pathfinish(g) == pathstart(g) && complex_integer(n) \226\134\146 has_path_integral((w : Cart[Real, Tybit0[Unit]]) => cpow(w - z, n), if n == -Cx(real_of_num(1)) { Cx(real_of_num(2)) * (Cx(pi) * (ii * winding_number((g, z)))) } else { Cx(real_of_num(0)) }, g)
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (i : Num) < (n : Num) \226\134\146 i <= n
       #|  (i : Num) < (n : Num) && (j : Num) < i \226\134\146 1 < SUC(i - j)
       #|  (i : Num) < (n : Num) && (j : Num) < i \226\134\146 1 < SUC(i - j) && SUC(i - j) <= n
@@ -92147,7 +92147,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  from(0)
       #|  (n : Num) => higher_complex_derivative(n + (k : Num), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])) / Cx(real_of_num(FACT(n + k)))
       #|  ball(((z : Cart[Real, Tybit0[Unit]]), (s : Real)))
-      #|  \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, Tybit0[Unit]], dist(((z : Cart[Real, Tybit0[Unit]]), x)) < r \226\134\146 !((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x) == Cx(real_of_num(0))))
+      #|  \226\136\131 r : Real, real_of_num(0) < r && (\226\136\128 x : Cart[Real, Tybit0[Unit]], distance(((z : Cart[Real, Tybit0[Unit]]), x)) < r \226\134\146 !((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x) == Cx(real_of_num(0))))
       #|  0 <= (k : Num) && !(k == 0) \226\134\146 0 < k
       #|  !((k : Num) == 0) && (n : Num) <= k - 1 \226\134\146 n < k
       #|  (n : Num)
@@ -92217,7 +92217,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (x : Cart[Real, Tybit0[Unit]])
       #|  (u : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  (z : Cart[Real, Tybit0[Unit]])
-      #|  \226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, (u : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !(x == (z : Cart[Real, Tybit0[Unit]])) && dist((x, z)) < min((e' : Real), (e : Real))
+      #|  \226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, (u : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !(x == (z : Cart[Real, Tybit0[Unit]])) && distance((x, z)) < min((e' : Real), (e : Real))
       #|  limit_point_of((z : Cart[Real, Tybit0[Unit]]), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
       #|  cball(((z : Cart[Real, Tybit0[Unit]]), (e : Real)))
       #|  (a : (Cart[Real, Tybit0[Unit]]) -> Bool)
@@ -92525,26 +92525,26 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  !((z : Cart[Real, Tybit0[Unit]]) == (p : Cart[Real, Tybit0[Unit]]))
       #|  real_of_num(0) < (C : Real) && real_of_num(0) < (D : Real)
       #|  (c : Cart[Real, Tybit0[Unit]])
-      #|  dist(((p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) < (d : Real) / real_of_num(2)
-      #|  dist(((p : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) <= (d : Real) / real_of_num(2)
+      #|  distance(((p : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) < (d : Real) / real_of_num(2)
+      #|  distance(((p : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) <= (d : Real) / real_of_num(2)
       #|  (w : Cart[Real, Tybit0[Unit]])
       #|  (w : Cart[Real, Tybit0[Unit]])
-      #|  (dist(((a : Cart[Real, _]), (b : Cart[Real, _]))) <= dist((a, b)) / real_of_num(2)) == (a == b)
+      #|  (distance(((a : Cart[Real, _]), (b : Cart[Real, _]))) <= distance((a, b)) / real_of_num(2)) == (a == b)
       #|  :real
       #|  :real
       #|  cball(((p : Cart[Real, Tybit0[Unit]]), (r : Real)))
-      #|  min((r : Real), min((d : Real) / real_of_num(2), dist(((p : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) / real_of_num(2)))
+      #|  min((r : Real), min((d : Real) / real_of_num(2), distance(((p : Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]]))) / real_of_num(2)))
       #|  (r : Real)
       #|  IN((p : Cart[Real, Tybit0[Unit]]), interior((s : (Cart[Real, Tybit0[Unit]]) -> Bool)))
       #|  (p : Cart[Real, Tybit0[Unit]])
       #|  real_of_num(0) < (a : Real) && real_of_num(0) < (b : Real) && (c : Real) / real_of_num(2) == b \226\134\146 abs(min(a, b)) < c
-      #|  dist(((c : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]), c)) == norm(z)
+      #|  distance(((c : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]), c)) == norm(z)
       #|  :real
       #|  :real
       #|  (c : Cart[Real, Tybit0[Unit]]) + op_pct((a : Real), (z : Cart[Real, Tybit0[Unit]]) - c) == op_pct(real_of_num(1) - a, c) + op_pct(a, z)
-      #|  min(real_of_num(1) / real_of_num(2), (d : Real) / real_of_num(4) / dist(((z : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
-      #|  (c : Cart[Real, Tybit0[Unit]]) + op_pct(min(real_of_num(1) / real_of_num(2), (d : Real) / real_of_num(4) / dist(((z : Cart[Real, Tybit0[Unit]]), c))), z - c)
-      #|  \226\136\131 p : Cart[Real, Tybit0[Unit]], IN(p, segment(((z : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])))) && dist((p, c)) < (d : Real) / real_of_num(2)
+      #|  min(real_of_num(1) / real_of_num(2), (d : Real) / real_of_num(4) / distance(((z : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))))
+      #|  (c : Cart[Real, Tybit0[Unit]]) + op_pct(min(real_of_num(1) / real_of_num(2), (d : Real) / real_of_num(4) / distance(((z : Cart[Real, Tybit0[Unit]]), c))), z - c)
+      #|  \226\136\131 p : Cart[Real, Tybit0[Unit]], IN(p, segment(((z : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]])))) && distance((p, c)) < (d : Real) / real_of_num(2)
       #|  (d : Real)
       #|  (C : Real) - (B : Real)
       #|  (c : Cart[Real, Tybit0[Unit]])
@@ -92711,7 +92711,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  !((b : _) == (a : _)) \226\134\146 a == b \226\134\146 (p : Bool)
       #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
       #|  (z : Cart[Real, Tybit0[Unit]])
-      #|  norm((z : Cart[Real, _])) == dist((vec(0), z))
+      #|  norm((z : Cart[Real, _])) == distance((vec(0), z))
       #|  :real
       #|  :real
       #|  ((a : Real) <= (x : Real) && x <= (b : Real)) == (x <= b && !(x < a))
@@ -92751,7 +92751,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (c : Real)
       #|  (\226\136\128 x : _, \226\136\128 y : _, (P : (_, _) -> Bool)(x, y) == (Q : (_, _) -> Bool)(y, x)) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, P(x, y)) == (\226\136\128 x : _, \226\136\128 y : _, Q(x, y))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Real, \226\136\128 b : Real, real_of_num(0) < a && a <= b && holomorphic_on(f, {(z : Cart[Real, Tybit0[Unit]]) | exp(a) < norm(z) && norm(z) < exp(b)}) && continuous_on(f, {(z : Cart[Real, Tybit0[Unit]]) | exp(a) <= norm(z) && norm(z) <= exp(b)}) \226\134\146 real_log_convex_on((y : Real) => sup({norm(f((z : Cart[Real, Tybit0[Unit]]))) | norm(z) == exp(y)}), real_interval([(a, b)]))
-      #|  dist(((x : Cart[Real, _]), (y : Cart[Real, _]))) < norm(y) \226\134\146 !(x == vec(0))
+      #|  distance(((x : Cart[Real, _]), (y : Cart[Real, _]))) < norm(y) \226\134\146 !(x == vec(0))
       #|  :real
       #|  :real
       #|  min((d : Real), (r : Real)) <= r
@@ -92941,7 +92941,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  real_of_num(0) < real_of_num(2)
       #|  real_of_num(2) * pi == real_of_num(2) * (real_of_num(1) * pi)
       #|  (y : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]]) - y == z
-      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], dist(((x : Cart[Real, Tybit0[Unit]]), z)) < (a : Real) && dist(((y : Cart[Real, Tybit0[Unit]]), z)) < a \226\134\146 norm(x - y) < real_of_num(2) * a
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], distance(((x : Cart[Real, Tybit0[Unit]]), z)) < (a : Real) && distance(((y : Cart[Real, Tybit0[Unit]]), z)) < a \226\134\146 norm(x - y) < real_of_num(2) * a
       #|  :real
       #|  :real
       #|  real_of_num(2) * (x : Real) / (y : Real) == real_of_num(2) * (x / y)
@@ -93036,13 +93036,13 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  (n : Num)
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)
       #|  :real
       #|  :real
       #|  ((z : Cart[Real, Tybit0[Unit]]) == z + (a : Cart[Real, Tybit0[Unit]])) == (a == Cx(real_of_num(0)))
       #|  (z : Cart[Real, Tybit0[Unit]]) + Cx((r : Real) / real_of_num(2))
       #|  (z : Cart[Real, Tybit0[Unit]])
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), z + (r : Cart[Real, Tybit0[Unit]]))) == norm(r)
       #|  :real
       #|  :real
       #|  (z : Cart[Real, Tybit0[Unit]]) + Cx((r : Real) / real_of_num(2))
@@ -93145,7 +93145,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (c : Cart[Real, Tybit0[Unit]])
       #|  norm((z : Cart[Real, Tybit0[Unit]])) + norm((z' : Cart[Real, Tybit0[Unit]]) - z)
-      #|  dist((Cx(real_of_num(0)), (z : Cart[Real, Tybit0[Unit]]))) + dist((z, (x : Cart[Real, Tybit0[Unit]])))
+      #|  distance((Cx(real_of_num(0)), (z : Cart[Real, Tybit0[Unit]]))) + distance((z, (x : Cart[Real, Tybit0[Unit]])))
       #|  real_of_num(1) - norm((z : Cart[Real, Tybit0[Unit]]))
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  \226\136\131 c : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) < real_of_num(1) \226\134\146 (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) == c
@@ -93195,7 +93195,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])))
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  real_of_num(0) < (s : Real) \226\134\146 s * (z : Real) < s * real_of_num(1) \226\134\146 abs(s) * z < s
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (x : Cart[Real, Tybit0[Unit]]))) == norm(x)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (x : Cart[Real, Tybit0[Unit]]))) == norm(x)
       #|  :real
       #|  :real
       #|  IN((a : Cart[Real, Tybit0[Unit]]) + Cx((s : Real)) * (z : Cart[Real, Tybit0[Unit]]), ball((a, s)))
@@ -93377,7 +93377,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  cball((Cx(real_of_num(0)), (r : Real)))
       #|  ball((Cx(real_of_num(0)), (r : Real)))
       #|  (norm((z : Cart[Real, _])) < (R : Real) && (\226\136\128 w : Cart[Real, _], norm(w) == R \226\134\146 !(w == z))) == (norm(z) < R)
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (R : Real)
@@ -93396,16 +93396,16 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Cart[Real, Tybit0[Unit]]) + (x : Cart[Real, Tybit0[Unit]])
       #|  (x : Cart[Real, Tybit0[Unit]])
       #|  ((z : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]]) == (w : Cart[Real, Tybit0[Unit]]) - a) == (z == w)
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (z : Cart[Real, Tybit0[Unit]]))) == norm(z)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (z : Cart[Real, Tybit0[Unit]]))) == norm(z)
       #|  :real
       #|  :real
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  cball(((a : Cart[Real, Tybit0[Unit]]), (r : Real)))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (z : Cart[Real, Tybit0[Unit]]))) == norm(z)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (z : Cart[Real, Tybit0[Unit]]))) == norm(z)
       #|  :real
       #|  :real
       #|  ball(((a : Cart[Real, Tybit0[Unit]]), (r : Real)))
-      #|  norm((z : Cart[Real, Tybit0[Unit]])) < (r : Real) \226\134\146 dist(((a : Cart[Real, Tybit0[Unit]]), a + z)) <= r
+      #|  norm((z : Cart[Real, Tybit0[Unit]])) < (r : Real) \226\134\146 distance(((a : Cart[Real, Tybit0[Unit]]), a + z)) <= r
       #|  :real
       #|  (a : Cart[Real, Tybit0[Unit]]) + (z : Cart[Real, Tybit0[Unit]])
       #|  complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])) == complex_derivative(f, z) * (Cx(real_of_num(0)) + Cx(real_of_num(1))) - Cx(real_of_num(0))
@@ -93441,7 +93441,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  norm((p : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]])) < (r : Real)
       #|  (p : Cart[Real, Tybit0[Unit]])
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) == norm(b - a)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) == norm(b - a)
       #|  :real
       #|  :real
       #|  ball(((a : Cart[Real, Tybit0[Unit]]), real_of_num(1)))
@@ -93480,7 +93480,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  :real
       #|  :real
       #|  real_of_num(0) < (r : Real) \226\134\146 (abs(r) * (z : Real) < r) == (real_of_num(0) < r * (real_of_num(1) - z))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (b : Cart[Real, Tybit0[Unit]]))) == norm(b)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (b : Cart[Real, Tybit0[Unit]]))) == norm(b)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (r : Real) \226\134\146 (a : Real) * abs(r) == r * a
@@ -93494,7 +93494,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (b : Cart[Real, Tybit0[Unit]])
       #|  Cx(real_of_num(0))
       #|  real_of_num(0) < (r : Real) \226\134\146 (abs(r) * (z : Real) < r) == (real_of_num(0) < r * (real_of_num(1) - z))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (b : Cart[Real, Tybit0[Unit]]))) == norm(b)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (b : Cart[Real, Tybit0[Unit]]))) == norm(b)
       #|  :real
       #|  :real
       #|  !((r : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && !((c : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (d : Cart[Real, Tybit0[Unit]]) * r / (c * r) == d / c
@@ -93506,7 +93506,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (C : Cart[Real, Tybit0[Unit]]) == complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))
       #|  complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(0))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 r' : Real, real_of_num(0) < r && holomorphic_on(f, ball((a, r))) && r' <= r * (norm(complex_derivative(f, a)) / real_of_num(12)) \226\134\146 (\226\136\131 b : Cart[Real, Tybit0[Unit]], SUBSET(ball((b, r')), IMAGE(f, ball((a, r)))))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (r : Real)
       #|  (t : Real)
       #|  (a : Cart[Real, Tybit0[Unit]])
@@ -93520,7 +93520,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (real_of_num(0) < (x : Real) / real_of_num(12)) == (real_of_num(0) < x)
       #|  complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(0))
       #|  (r : Real) <= (t : Real) \226\134\146 r <= real_of_num(0) || real_of_num(0) < t
-      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, \226\136\128 r : Real, holomorphic_on(f, s) && IN(a, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, frontier(s)) \226\134\146 t <= dist((a, z))) && r <= t * (norm(complex_derivative(f, a)) / real_of_num(12)) \226\134\146 (\226\136\131 b : Cart[Real, Tybit0[Unit]], SUBSET(ball((b, r)), IMAGE(f, s)))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, \226\136\128 r : Real, holomorphic_on(f, s) && IN(a, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, frontier(s)) \226\134\146 t <= distance((a, z))) && r <= t * (norm(complex_derivative(f, a)) / real_of_num(12)) \226\134\146 (\226\136\131 b : Cart[Real, Tybit0[Unit]], SUBSET(ball((b, r)), IMAGE(f, s)))
       #|  (x : Real) <= pi + (a : Real) \226\134\146 a * real_of_num(3) <= (n : Real) * pi \226\134\146 x <= (real_of_num(1) + n / real_of_num(3)) * pi
       #|  (z : Cart[Real, Tybit0[Unit]]) => (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) / Cx(pi)
       #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
@@ -93670,7 +93670,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (R : (Cart[Real, Tybit0[Unit]]) -> Real)
       #|  (R : (Cart[Real, Tybit0[Unit]]) -> Real) == ((z : Cart[Real, Tybit0[Unit]]) => real_of_num(3) * exp(pi * exp(pi * (real_of_num(2) + (real_of_num(2) * norm(z) + real_of_num(12))))))
       #|  \226\136\131 R : (Cart[Real, Tybit0[Unit]]) -> Real, (\226\136\128 z : Cart[Real, Tybit0[Unit]], real_of_num(0) < R(z)) && (\226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, cball((Cx(real_of_num(0)), R(f(Cx(real_of_num(0))))))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, cball((Cx(real_of_num(0)), R(f(Cx(real_of_num(0))))))) \226\134\146 !(f(z) == Cx(real_of_num(0))) && !(f(z) == Cx(real_of_num(1)))) \226\134\146 norm(complex_derivative(f, Cx(real_of_num(0)))) < real_of_num(1))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  complex_derivative((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z / complex_derivative(f, w)), Cx(real_of_num(0))) == complex_derivative(f, w) * inv(complex_derivative(f, w))
       #|  (z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]) + z / complex_derivative(f, w))
       #|  false \226\134\146 (p : Bool)
@@ -93680,7 +93680,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  (R : (Cart[Real, Tybit0[Unit]]) -> Real)
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, UNIV) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], !(f(z) == Cx(real_of_num(0))) && !(f(z) == Cx(real_of_num(1)))) \226\134\146 (\226\136\131 c : Cart[Real, Tybit0[Unit]], f == ((x : Cart[Real, Tybit0[Unit]]) => c))
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (INTER(IMAGE((f : (_) -> _), UNIV), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, !IN(f(x), t))
       #|  !((a : Cart[Real, Tybit0[Unit]]) == (b : Cart[Real, Tybit0[Unit]])) \226\134\146 (Cx(real_of_num(1)) / (b - a) * ((f : Cart[Real, Tybit0[Unit]]) - b) + Cx(real_of_num(1)) == (c : Cart[Real, Tybit0[Unit]])) == (f == b + (b - a) / Cx(real_of_num(1)) * (c - Cx(real_of_num(1))))
       #|  (x : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / ((b : Cart[Real, Tybit0[Unit]]) - (a : Cart[Real, Tybit0[Unit]])) * ((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x) - b) + Cx(real_of_num(1))
@@ -93740,7 +93740,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (\226\136\131 x : _, (P : (_) -> Bool)(x)) == !(\226\136\128 x : _, !P(x))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, UNIV) && !(\226\136\131 a : Cart[Real, Tybit0[Unit]], f == ((x : Cart[Real, Tybit0[Unit]]) => a + x)) \226\134\146 (\226\136\131 x : Cart[Real, Tybit0[Unit]], f(f(x)) == x)
       #|  (z : Cart[Real, Tybit0[Unit]])
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (e : Real)
       #|  (d : Real)
       #|  (z : Cart[Real, Tybit0[Unit]])
@@ -93785,7 +93785,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])) == real_of_num(2) / real_of_num(3) * (r : Real)
       #|  real_of_num(0) < (x : Real) && x <= (y : Real) * real_of_num(3) \226\134\146 x / real_of_num(6) <= real_of_num(2) / real_of_num(3) * y
       #|  real_of_num(0) < (M : Real) \226\134\146 M * ((e : Real) / (real_of_num(6) * M)) == e / real_of_num(6)
-      #|  dist(((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) == norm(y - x)
+      #|  distance(((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) == norm(y - x)
       #|  :real
       #|  :real
       #|  (M : Real) * ((e : Real) * (r : Real) / (real_of_num(6) * M))
@@ -93797,18 +93797,18 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (e : Real) / (r : Real)
       #|  norm((z : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])) < (r : Real) / real_of_num(3) \226\134\146 norm(y - z) < real_of_num(2) / real_of_num(3) * r
       #|  :real
-      #|  dist(((a : Cart[Real, _]), (b : Cart[Real, _]))) <= real_of_num(2) / real_of_num(3) * (r : Real) \226\134\146 dist((a, b)) <= r
+      #|  distance(((a : Cart[Real, _]), (b : Cart[Real, _]))) <= real_of_num(2) / real_of_num(3) * (r : Real) \226\134\146 distance((a, b)) <= r
       #|  :real
       #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  ((p : Bool) \226\134\146 !(q : Bool)) == (q \226\134\146 !p)
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (r : Real) \226\134\146 real_of_num(0) <= real_of_num(2) / real_of_num(3) * r
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  circlepath(((z : Cart[Real, Tybit0[Unit]]), real_of_num(2) / real_of_num(3) * (r : Real)))
@@ -93822,10 +93822,10 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  abs((B : (Num) -> Real)((N : Num))) + real_of_num(1)
       #|  (N : Num)
       #|  (N : Num)
-      #|  dist(((a : Cart[Real, _]), (b : Cart[Real, _]))) <= real_of_num(2) / real_of_num(3) * (r : Real) \226\134\146 dist((a, b)) <= r
+      #|  distance(((a : Cart[Real, _]), (b : Cart[Real, _]))) <= real_of_num(2) / real_of_num(3) * (r : Real) \226\134\146 distance((a, b)) <= r
       #|  :real
       #|  cball(((z : Cart[Real, Tybit0[Unit]]), real_of_num(2) / real_of_num(3) * (r : Real)))
-      #|  \226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 n : Num, \226\136\128 w : Cart[Real, Tybit0[Unit]], dist(((z : Cart[Real, Tybit0[Unit]]), w)) <= real_of_num(2) / real_of_num(3) * (r : Real) \226\134\146 norm((f : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(n, w)) <= M)
+      #|  \226\136\131 M : Real, real_of_num(0) < M && (\226\136\128 n : Num, \226\136\128 w : Cart[Real, Tybit0[Unit]], distance(((z : Cart[Real, Tybit0[Unit]]), w)) <= real_of_num(2) / real_of_num(3) * (r : Real) \226\134\146 norm((f : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(n, w)) <= M)
       #|  (r : Real)
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (e : Real)
@@ -93918,7 +93918,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (w : Cart[Real, Tybit0[Unit]]) == (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(Cx(real_of_num(0)))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, ball((Cx(real_of_num(0)), real_of_num(1)))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((Cx(real_of_num(0)), real_of_num(1)))) \226\134\146 IN(f(z), ball((Cx(real_of_num(0)), real_of_num(1))))) && holomorphic_on(g, ball((Cx(real_of_num(0)), real_of_num(1)))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((Cx(real_of_num(0)), real_of_num(1)))) \226\134\146 IN(g(z), ball((Cx(real_of_num(0)), real_of_num(1))))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((Cx(real_of_num(0)), real_of_num(1)))) \226\134\146 f(g(z)) == z) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((Cx(real_of_num(0)), real_of_num(1)))) \226\134\146 g(f(z)) == z) \226\134\146 (\226\136\131 t : Real, \226\136\131 w : Cart[Real, Tybit0[Unit]], IN(w, ball((Cx(real_of_num(0)), real_of_num(1)))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((Cx(real_of_num(0)), real_of_num(1)))) \226\134\146 f(z) == moebius_function(t, w, z)))
       #|  real_of_num(0) < (r : Real) \226\134\146 r / real_of_num(2) < r
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (r : Real)
@@ -93933,7 +93933,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  norm((w : Cart[Real, Tybit0[Unit]]) - (z0 : Cart[Real, Tybit0[Unit]])) == (r : Real) / real_of_num(2)
       #|  IN((w : Cart[Real, Tybit0[Unit]]), ball(((z0 : Cart[Real, Tybit0[Unit]]), (r : Real))))
       #|  (w : Cart[Real, Tybit0[Unit]]) == (z0 : Cart[Real, Tybit0[Unit]])
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (w : Cart[Real, Tybit0[Unit]])
@@ -93943,7 +93943,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (n : Num)
       #|  (n : Num)
       #|  real_of_num(0) < (r : Real)
-      #|  dist(((w : Cart[Real, N]), (z : Cart[Real, N]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, N]), (z : Cart[Real, N]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  (e : Real)
@@ -93957,7 +93957,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  real_of_num(0) < (r : Real)
       #|  norm((w : Cart[Real, Tybit0[Unit]]) - (z0 : Cart[Real, Tybit0[Unit]])) == (r : Real) / real_of_num(2)
       #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) < (r : Real) / real_of_num(4)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) < (r : Real) / real_of_num(4)
       #|  norm((w : Cart[Real, Tybit0[Unit]]) - (z0 : Cart[Real, Tybit0[Unit]])) == (r : Real) / real_of_num(2)
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  1
@@ -93980,21 +93980,21 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Cart[Real, N]) + (b : Cart[Real, N]) - a == b
       #|  (z0 : Cart[Real, Tybit0[Unit]]) + Cx((r : Real) / real_of_num(2))
       #|  real_of_num(0) < (r : Real)
-      #|  dist(((w : Cart[Real, N]), (z : Cart[Real, N]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, N]), (z : Cart[Real, N]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  IMAGE(o(norm, (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])), {(w : Cart[Real, Tybit0[Unit]]) | norm(w - (z0 : Cart[Real, Tybit0[Unit]])) == (r : Real) / real_of_num(2)})
       #|  real_of_num(0) < (r : Real)
       #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
-      #|  dist(((w : Cart[Real, N]), (z : Cart[Real, N]))) == norm(z - w)
+      #|  distance(((w : Cart[Real, N]), (z : Cart[Real, N]))) == norm(z - w)
       #|  :real
       #|  :real
       #|  IMAGE(complex_derivative((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])), {(w : Cart[Real, Tybit0[Unit]]) | norm(w - (z0 : Cart[Real, Tybit0[Unit]])) == (r : Real) / real_of_num(2)})
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  real_of_num(0) < (r : Real) \226\134\146 r / real_of_num(2) < r
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (w : Cart[Real, Tybit0[Unit]]))) == norm(w - z)
       #|  :real
       #|  :real
       #|  (r : Real)
@@ -94029,7 +94029,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  ((x : Num) >= MAX((m : Num), (n : Num))) == (x >= m && x >= n)
       #|  norm((x1 : Cart[Real, Tybit0[Unit]]) - (x2 : Cart[Real, Tybit0[Unit]])) < (e : Real) / real_of_num(2) && norm((y1 : Cart[Real, Tybit0[Unit]]) - (y2 : Cart[Real, Tybit0[Unit]])) < e / real_of_num(2) \226\134\146 norm(x1 - y1 - (x2 - y2)) < e
       #|  :real
@@ -94097,7 +94097,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  Cx(inv((e : Real))) * ((z : Cart[Real, Tybit0[Unit]]) - (w : Cart[Real, Tybit0[Unit]]))
       #|  real_of_num(1) / real_of_num(2)
       #|  real_of_num(0) < (e : Real) \226\134\146 (abs(e) * (u : Real) <= e) == (e * u <= e * real_of_num(1))
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), w + (z : Cart[Real, Tybit0[Unit]]))) == norm(z)
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), w + (z : Cart[Real, Tybit0[Unit]]))) == norm(z)
       #|  :real
       #|  :real
       #|  (u : Cart[Real, Tybit0[Unit]])
@@ -94244,7 +94244,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (h : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((n : Num) => (z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z / Cx(real_of_num(n) + real_of_num(1))))
       #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, DELETE(ball((Cx(real_of_num(0)), real_of_num(1))), Cx(real_of_num(0)))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, DELETE(ball((Cx(real_of_num(0)), real_of_num(1))), Cx(real_of_num(0)))) \226\134\146 !(f(z) == Cx(real_of_num(0))) && !(f(z) == Cx(real_of_num(1)))) \226\134\146 (\226\136\131 e : Real, \226\136\131 b : Real, real_of_num(0) < e && e < real_of_num(1) && real_of_num(0) < b && ((\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, DELETE(ball((Cx(real_of_num(0)), e)), Cx(real_of_num(0)))) \226\134\146 norm(f(z)) <= b) || (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, DELETE(ball((Cx(real_of_num(0)), e)), Cx(real_of_num(0)))) \226\134\146 norm(f(z)) >= b)))
       #|  (z : Cart[Real, Tybit0[Unit]]) + ((w : Cart[Real, Tybit0[Unit]]) - z) == w
-      #|  norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])) == dist((z, w))
+      #|  norm((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])) == distance((z, w))
       #|  :real
       #|  :real
       #|  ((w : Cart[Real, Tybit0[Unit]]) - (z : Cart[Real, Tybit0[Unit]])) / Cx((r : Real))
@@ -94257,7 +94257,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (b : Real)
       #|  (e : Real)
       #|  ((r : Real) * (x : Real) < r) == (real_of_num(0) < r * (real_of_num(1) - x))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (b : Cart[Real, Tybit0[Unit]]))) == norm(b)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (b : Cart[Real, Tybit0[Unit]]))) == norm(b)
       #|  :real
       #|  :real
       #|  ((z : Cart[Real, Tybit0[Unit]]) + (a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]]) == z) == (a == Cx(real_of_num(0)) || b == Cx(real_of_num(0)))
@@ -94395,7 +94395,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (a : Cart[Real, Tybit0[Unit]])
       #|  ball(((z : Cart[Real, Tybit0[Unit]]), (r : Real)))
       #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
-      #|  min((r : Real), inf(IMAGE((x : Cart[Real, Tybit0[Unit]]) => dist(((z : Cart[Real, Tybit0[Unit]]), x)), {(x : Cart[Real, Tybit0[Unit]]) | IN(x, DELETE((n : (Cart[Real, Tybit0[Unit]]) -> Bool), z)) && IN((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x), {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})})))
+      #|  min((r : Real), inf(IMAGE((x : Cart[Real, Tybit0[Unit]]) => distance(((z : Cart[Real, Tybit0[Unit]]), x)), {(x : Cart[Real, Tybit0[Unit]]) | IN(x, DELETE((n : (Cart[Real, Tybit0[Unit]]) -> Bool), z)) && IN((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x), {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})})))
       #|  (r : Real)
       #|  {(x : Cart[Real, Tybit0[Unit]]) | IN(x, DELETE((n : (Cart[Real, Tybit0[Unit]]) -> Bool), (z : Cart[Real, Tybit0[Unit]]))) && IN((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(x), {(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])})} == {}
       #|  (r : Real)
@@ -94576,7 +94576,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  real_of_num(0) < (r : Real) \226\134\146 !(r / real_of_num(3) == real_of_num(0))
       #|  (z : Cart[Real, Tybit0[Unit]]) => Cx((r : Real) / real_of_num(3)) / ((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) + g((a : Cart[Real, Tybit0[Unit]]))) - Cx(r / real_of_num(3)) / (g(a) + g(a))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 !((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) + g((a : Cart[Real, Tybit0[Unit]])) == Cx(real_of_num(0)))
-      #|  dist((-(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) == norm(b + a)
+      #|  distance((-(a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))) == norm(b + a)
       #|  :real
       #|  :real
       #|  pow(-(z : Cart[Real, Tybit0[Unit]]), 2) == pow(z, 2)
@@ -94584,7 +94584,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (-(z : Cart[Real, Tybit0[Unit]]) == z) == (z == Cx(real_of_num(0)))
       #|  (w : Cart[Real, Tybit0[Unit]]) == (z : Cart[Real, Tybit0[Unit]])
       #|  (w : Cart[Real, Tybit0[Unit]])
-      #|  dist(((w : Cart[Real, Tybit0[Unit]]), -(z : Cart[Real, Tybit0[Unit]]))) == dist((-w, z))
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), -(z : Cart[Real, Tybit0[Unit]]))) == distance((-w, z))
       #|  :real
       #|  :real
       #|  -(g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]]))
@@ -94593,7 +94593,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (r : Real)
       #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Tybit0[Unit]]))
       #|  ball(((a : Cart[Real, Tybit0[Unit]]), (d : Real)))
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), a + (d : Cart[Real, Tybit0[Unit]]))) == norm(d)
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), a + (d : Cart[Real, Tybit0[Unit]]))) == norm(d)
       #|  :real
       #|  :real
       #|  IN((a : Cart[Real, Tybit0[Unit]]), ball((a, (d : Real)))) && IN(a + Cx(d / real_of_num(2)), ball((a, d))) && !(a + Cx(d / real_of_num(2)) == a)
@@ -94679,7 +94679,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (connected(s) && (\226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], path(g) && SUBSET(path_image(g), s) && pathfinish(g) == pathstart(g) && !IN(z, s) \226\134\146 winding_number((g, z)) == Cx(real_of_num(0))))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (connected(s) && (\226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], valid_path(g) && SUBSET(path_image(g), s) && pathfinish(g) == pathstart(g) && holomorphic_on(f, s) \226\134\146 has_path_integral(f, Cx(real_of_num(0)), g)))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (connected(s) && (\226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, s) \226\134\146 (\226\136\131 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 has_complex_derivative(h, f(z), at(z)))))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (connected(s) && (\226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 !(f(z) == Cx(real_of_num(0)))) \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(g, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 f(z) == cexp(g(z))))))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (connected(s) && (\226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 !(f(z) == Cx(real_of_num(0)))) \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(g, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 f(z) == pow(g(z), 2)))))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (connected(s) && (\226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 !(f(z) == Cx(real_of_num(0)))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) \226\134\146 (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(g, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 f(z) == pow(g(z), 2)))))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (s == {} || s == UNIV || (\226\136\131 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, s) && holomorphic_on(g, ball((Cx(real_of_num(0)), real_of_num(1)))) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 IN(f(z), ball((Cx(real_of_num(0)), real_of_num(1)))) && g(f(z)) == z) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((Cx(real_of_num(0)), real_of_num(1)))) \226\134\146 IN(g(z), s) && f(g(z)) == z)))) && (\226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) \226\134\146 simply_connected(s) == (s == {} || homeomorphic(s, ball((Cx(real_of_num(0)), real_of_num(1))))))
       #|  (x : Cart[Real, Tybit0[Unit]])
       #|  (y : Cart[Real, Tybit0[Unit]])
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  (z : Cart[Real, Tybit0[Unit]]) => z
       #|  o((r : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), o((sq : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), o((t : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]))))
       #|  (r : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(Cx(real_of_num(1)) / Cx(real_of_num(2)))
@@ -94822,7 +94822,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : (Cart[Real, Tybit0[Unit]]) -> Bool, path(g) && IN(c, components(DIFF(UNIV, path_image(g)))) && bounded(c) \226\134\146 simply_connected(c)
       #|  !((x : Cart[Real, Tybit0[Unit]]) == (z : Cart[Real, Tybit0[Unit]])) && !((gx : Cart[Real, Tybit0[Unit]]) + (gz : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (pow(gx, 2) - pow(gz, 2)) / (x - z) / (gx + gz) == (gx - gz) / (x - z)
       #|  INTER(ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real))), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) < norm(z) \226\134\146 !(x + z == vec(0))
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) < norm(z) \226\134\146 !(x + z == vec(0))
       #|  :real
       #|  :real
       #|  norm((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])))
@@ -95052,7 +95052,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (t' : Cart[Real, Unit])
       #|  \226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 cexp(-(ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t)) * ((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]])) == cexp(-ef(vec(0))) * (g(vec(0)) - z)
       #|  (gd : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t' : Cart[Real, Unit])) == gd(t') - vec(0)
-      #|  op_star
+      #|  complex_mul
       #|  !((w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 Cx(real_of_num(0)) == (a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]]) + a * -(inv(w) * b) * w
       #|  (t' : Cart[Real, Unit])
       #|  Cx(real_of_num(0)) == cexp(-(ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((t' : Cart[Real, Unit]))) * (gd : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t') + cexp(-ef(t')) * -(inv((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t') - (z : Cart[Real, Tybit0[Unit]])) * gd(t')) * (g(t') - z)
@@ -95064,7 +95064,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (interval : (List[(Cart[Real, Unit], Cart[Real, Unit])], Cart[Real, Unit]) -> Bool)([((vec : (Num) -> Cart[Real, Unit])(0), (vec : (Num) -> Cart[Real, Unit])(1))])
       #|  (t : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]])
       #|  (t : Cart[Real, Unit]) => cexp(-(ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t))
-      #|  op_star
+      #|  complex_mul
       #|  absolutely_continuous_on((t : Cart[Real, Unit]) => cexp(-(ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t)) * ((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]])), interval([(vec(0), vec(1))]))
       #|  absolutely_continuous_on((t : Cart[Real, Unit]) => (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]]), interval([(vec(0), vec(1))]))
       #|  exp((B : Real)) * norm(-(ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((u : Cart[Real, Unit])) - -ef((v : Cart[Real, Unit])))
@@ -95088,7 +95088,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  \226\136\131 k1 : (Cart[Real, Unit]) -> Bool, negligible(k1) && (\226\136\128 t : Cart[Real, Unit], IN(t, DIFF(interval([(vec(0), vec(1))]), k1)) \226\134\146 has_vector_derivative((ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), inv((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]])) * (gd : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), within(at(t), interval([(vec(0), vec(1))]))))
       #|  absolutely_continuous_on((ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval([(vec(0), vec(1))]))
       #|  (ef : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]) == ((t : Cart[Real, Unit]) => integral(interval([(vec(0), t)]), (s : Cart[Real, Unit]) => inv((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(s) - (z : Cart[Real, Tybit0[Unit]])) * (gd : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(s)))
-      #|  op_star
+      #|  complex_mul
       #|  absolutely_integrable_on((t : Cart[Real, Unit]) => inv((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]])) * (gd : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t), interval([(vec(0), vec(1))]))
       #|  bounded(IMAGE((t : Cart[Real, Unit]) => inv((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(t) - (z : Cart[Real, Tybit0[Unit]])), interval([(vec(0), vec(1))])))
       #|  !IN((z : Cart[Real, Tybit0[Unit]]), path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
@@ -95238,7 +95238,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (c : Cart[Real, Tybit0[Unit]])
       #|  DIFF(UNIV, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
       #|  (B : (Cart[Real, Tybit0[Unit]]) -> Bool)
-      #|  (e : Real) <= dist(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z' : Cart[Real, Tybit0[Unit]])), f((z : Cart[Real, Tybit0[Unit]]))))
+      #|  (e : Real) <= distance(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z' : Cart[Real, Tybit0[Unit]])), f((z : Cart[Real, Tybit0[Unit]]))))
       #|  \226\136\131 c : Cart[Real, Tybit0[Unit]], IN(c, {(f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])), f((z' : Cart[Real, Tybit0[Unit]]))}) && !IN(c, ball(((a : Cart[Real, Tybit0[Unit]]), (e : Real) / real_of_num(2))))
       #|  diameter((E : (Cart[Real, Tybit0[Unit]]) -> Bool))
       #|  \226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, closure((E : (Cart[Real, Tybit0[Unit]]) -> Bool))) \226\134\146 IN(x, cball(((a : Cart[Real, Tybit0[Unit]]), (e : Real) / real_of_num(4))))
@@ -95294,7 +95294,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (r : Real)
       #|  (z : Cart[Real, Tybit0[Unit]])
       #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
-      #|  dist(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z' : Cart[Real, Tybit0[Unit]])), f((z : Cart[Real, Tybit0[Unit]]))))
+      #|  distance(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z' : Cart[Real, Tybit0[Unit]])), f((z : Cart[Real, Tybit0[Unit]]))))
       #|  IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball((Cx(real_of_num(0)), real_of_num(1))))
       #|  (b : Cart[Real, Unit])
       #|  (a : Cart[Real, Unit])
@@ -95483,7 +95483,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (q : Real) == real_of_num(1)
       #|  (q : Real) == real_of_num(0)
       #|  (q : Real)
-      #|  (norm((w : Cart[Real, _])) < norm((z : Cart[Real, _])) + dist((z, w))) == !(dist((vec(0), w)) == dist((vec(0), z)) + dist((z, w)))
+      #|  (norm((w : Cart[Real, _])) < norm((z : Cart[Real, _])) + distance((z, w))) == !(distance((vec(0), w)) == distance((vec(0), z)) + distance((z, w)))
       #|  :real
       #|  :real
       #|  :real
@@ -95497,7 +95497,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (y : Cart[Real, Tybit0[Unit]])
       #|  !((z : Real) == real_of_num(0)) \226\134\146 (real_of_num(1) + (r : Real) / z) * z == z + r
       #|  \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(y, sphere(((z : Cart[Real, Tybit0[Unit]]), (r : Real)))) && !(y == (w : Cart[Real, Tybit0[Unit]])) \226\134\146 norm(y) < norm(w)
-      #|  dist(((z : Cart[Real, Tybit0[Unit]]), op_pct(real_of_num(1), z) + (w : Cart[Real, Tybit0[Unit]]))) == norm(w)
+      #|  distance(((z : Cart[Real, Tybit0[Unit]]), op_pct(real_of_num(1), z) + (w : Cart[Real, Tybit0[Unit]]))) == norm(w)
       #|  :real
       #|  :real
       #|  IN((w : Cart[Real, Tybit0[Unit]]), sphere(((z : Cart[Real, Tybit0[Unit]]), (r : Real))))
@@ -95582,7 +95582,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (e : Real)
       #|  (\226\136\131 d : Real, real_of_num(0) < d && (P : (Real) -> Bool)(d)) \226\134\146 (\226\136\128 d : Real, \226\136\128 e : Real, real_of_num(0) < d && d < e && P(e) \226\134\146 P(d)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && d < e && d < e / real_of_num(2) && P(d)))
       #|  real_of_num(0) < (d : Real) && real_of_num(0) < (e : Real) \226\134\146 real_of_num(0) < min(d, e) / real_of_num(4) && min(d, e) / real_of_num(4) < d && min(d, e) / real_of_num(4) < e && min(d, e) / real_of_num(4) < e / real_of_num(2)
-      #|  (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], (P : (Cart[Real, _]) -> Bool)(x) && P(y) && dist((x, y)) < d \226\134\146 (R : (Cart[Real, _], Cart[Real, _]) -> Bool)(x, y))) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], P(x) && P(y) && dist((x, y)) <= d \226\134\146 R(x, y)))
+      #|  (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], (P : (Cart[Real, _]) -> Bool)(x) && P(y) && distance((x, y)) < d \226\134\146 (R : (Cart[Real, _], Cart[Real, _]) -> Bool)(x, y))) \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, _], \226\136\128 y : Cart[Real, _], P(x) && P(y) && distance((x, y)) <= d \226\134\146 R(x, y)))
       #|  real_of_num(0) < (d : Real) \226\134\146 real_of_num(0) < d / real_of_num(2) && ((x : Real) <= d / real_of_num(2) \226\134\146 x < d)
       #|  (e : Real) / real_of_num(4)
       #|  (e : Real)
@@ -95592,12 +95592,12 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  setdist(({(f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(Cx(real_of_num(0)))}, frontier((s : (Cart[Real, Tybit0[Unit]]) -> Bool)))) * real_of_num(2)
       #|  \226\136\128 d : Real, (\226\136\128 d : Real, \226\136\128 e : Real, real_of_num(0) < d && d <= e && (P : (Real) -> Bool)(d) \226\134\146 P(e)) && real_of_num(0) < d && (\226\136\128 e : Real, real_of_num(0) < e && e < d \226\134\146 P(e)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 P(e))
       #|  real_of_num(0) < (e : Real) && real_of_num(0) < (d : Real) \226\134\146 real_of_num(0) < min(e, d / real_of_num(2)) && min(e, d / real_of_num(2)) <= e && min(e, d / real_of_num(2)) < d
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
       #|  (c : Real) <= (e : Real) / real_of_num(3) && (a : Real) < e / real_of_num(3) && (b : Real) < e / real_of_num(3) \226\134\146 (bc : Real) <= b + c \226\134\146 a + bc <= e
       #|  (b' : Cart[Real, Tybit0[Unit]])
       #|  (a' : Cart[Real, Tybit0[Unit]])
       #|  IN((b : Cart[Real, _]), segment([((a : Cart[Real, _]), b)])) && IN(b, (s : (Cart[Real, _]) -> Bool)) \226\134\146 !(INTER(segment([(a, b)]), s) == {})
-      #|  !((p : Cart[Real, _]) == (q : Cart[Real, _])) && (!((x : Cart[Real, _]) == (a : Cart[Real, _])) \226\134\146 dist((a, x)) < dist((p, q))) \226\134\146 !(dist((p, q)) <= dist((a, x)))
+      #|  !((p : Cart[Real, _]) == (q : Cart[Real, _])) && (!((x : Cart[Real, _]) == (a : Cart[Real, _])) \226\134\146 distance((a, x)) < distance((p, q))) \226\134\146 !(distance((p, q)) <= distance((a, x)))
       #|  :real
       #|  :real
       #|  :real
@@ -95615,7 +95615,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  DISJOINT(UNION((s : (_) -> Bool), (t : (_) -> Bool)), (u : (_) -> Bool)) == (DISJOINT(s, u) && DISJOINT(t, u))
       #|  UNION(segment([((a : Cart[Real, Tybit0[Unit]]), (a' : Cart[Real, Tybit0[Unit]]))]), UNION(segment([((b : Cart[Real, Tybit0[Unit]]), (b' : Cart[Real, Tybit0[Unit]]))]), (c : (Cart[Real, Tybit0[Unit]]) -> Bool)))
       #|  (c : (Cart[Real, Tybit0[Unit]]) -> Bool)
-      #|  dist(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
+      #|  distance(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]])))
       #|  (b' : Cart[Real, Tybit0[Unit]])
       #|  (a' : Cart[Real, Tybit0[Unit]])
       #|  IN((a' : Cart[Real, Tybit0[Unit]]), INTER(segment([((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]))]), frontier((s : (Cart[Real, Tybit0[Unit]]) -> Bool)))) && IN((b' : Cart[Real, Tybit0[Unit]]), INTER(segment([(a, b)]), frontier(s)))
@@ -95633,7 +95633,7 @@ test "Multivariate/cauchy matches Multivariate/cauchy.ml" {
       #|  (e : Real) / real_of_num(3)
       #|  frontier((s : (Cart[Real, Tybit0[Unit]]) -> Bool))
       #|  (e : Real)
-      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(x, DIFF(UNIV, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))) && IN(y, DIFF(UNIV, s)) && dist((x, y)) < d \226\134\146 (\226\136\131 c : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(x, c) && IN(y, c) && DISJOINT(c, s) && connected(c) && bounded(c) && diameter(c) <= e)))
+      #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], IN(x, DIFF(UNIV, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))) && IN(y, DIFF(UNIV, s)) && distance((x, y)) < d \226\134\146 (\226\136\131 c : (Cart[Real, Tybit0[Unit]]) -> Bool, IN(x, c) && IN(y, c) && DISJOINT(c, s) && connected(c) && bounded(c) && diameter(c) <= e)))
       #|  ball((Cx(real_of_num(0)), real_of_num(1)))
       #|  UNION(cball((Cx(real_of_num(0)), real_of_num(1) / real_of_num(2))), (A : (Cart[Real, Tybit0[Unit]]) -> Bool))
       #|  ball((Cx(real_of_num(0)), real_of_num(1)))
