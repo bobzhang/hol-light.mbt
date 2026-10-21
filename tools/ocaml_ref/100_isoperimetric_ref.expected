@@ -88634,7 +88634,7 @@ Warning: inventing type variables
   SUBSET(IMAGE((g : (_) -> _), (i : (_) -> Bool)), (j : (_) -> Bool)) \226\134\146 IN((c : _), i) \226\134\146 IN(g(c), j)
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !IN((x : _), t) \226\134\146 !IN(x, s)
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])((c : Cart[Real, Unit]))
-  \226\136\128 c : Cart[Real, N], (norm(c - (a : Cart[Real, N])) <= (v : Real) && norm((b : Cart[Real, N]) - c) <= (w : Real)) && !(dist((a, b)) == dist((a, c)) + dist((c, b))) \226\134\146 !(norm(b - a) == v + w)
+  \226\136\128 c : Cart[Real, N], (norm(c - (a : Cart[Real, N])) <= (v : Real) && norm((b : Cart[Real, N]) - c) <= (w : Real)) && !(distance((a, b)) == distance((a, c)) + distance((c, b))) \226\134\146 !(norm(b - a) == v + w)
   :real
   :real
   :real
@@ -88850,7 +88850,7 @@ Warning: inventing type variables
   INTER((s : (_) -> Bool), (f : (_) -> Bool)) == {} \226\134\146 SUBSET(s, UNION(f, (i : (_) -> Bool))) \226\134\146 SUBSET(s, i)
   SUBSET(IMAGE((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]), interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit])))), interior(hull(convex, path_image(g))))
   interval(((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))) == {}
-  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 L : Real, simple_path(g) && pathfinish(g) == pathstart(g) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((g(x), g(y))) <= L * dist((x, y))) && drop(a) < drop(b) && IN(a, interval([(vec(0), vec(1))])) && IN(b, interval([(vec(0), vec(1))])) && IN(g(a), frontier(hull(convex, path_image(g)))) && IN(g(b), frontier(hull(convex, path_image(g)))) && INTER(IMAGE(g, interval((a, b))), frontier(hull(convex, path_image(g)))) == {} \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(h) && pathstart(h) == pathstart(g) && pathfinish(h) == pathstart(g) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((h(x), h(y))) <= L * dist((x, y))) && path_length(h) < path_length(g) && hull(convex, path_image(h)) == hull(convex, path_image(g)) && (\226\136\128 x : Cart[Real, Unit], !IN(x, interval((a, b))) \226\134\146 h(x) == g(x)) && SUBSET(IMAGE(h, interval([(a, b)])), frontier(hull(convex, path_image(g)))))
+  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 L : Real, simple_path(g) && pathfinish(g) == pathstart(g) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance((g(x), g(y))) <= L * distance((x, y))) && drop(a) < drop(b) && IN(a, interval([(vec(0), vec(1))])) && IN(b, interval([(vec(0), vec(1))])) && IN(g(a), frontier(hull(convex, path_image(g)))) && IN(g(b), frontier(hull(convex, path_image(g)))) && INTER(IMAGE(g, interval((a, b))), frontier(hull(convex, path_image(g)))) == {} \226\134\146 (\226\136\131 h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(h) && pathstart(h) == pathstart(g) && pathfinish(h) == pathstart(g) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance((h(x), h(y))) <= L * distance((x, y))) && path_length(h) < path_length(g) && hull(convex, path_image(h)) == hull(convex, path_image(g)) && (\226\136\128 x : Cart[Real, Unit], !IN(x, interval((a, b))) \226\134\146 h(x) == g(x)) && SUBSET(IMAGE(h, interval([(a, b)])), frontier(hull(convex, path_image(g)))))
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
@@ -88895,7 +88895,7 @@ Warning: inventing type variables
   (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
   (n : Num)
   (n : Num)
-  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist(((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), h(y))) <= (L : Real) * dist((x, y))
+  \226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance(((h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])(x), h(y))) <= (L : Real) * distance((x, y))
   (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (n : Num)
   (\226\136\128 d : Num, (P : (Num) -> Bool)((n : Num) + d)) \226\134\146 (\226\136\128 m : Num, n <= m \226\134\146 P(m))
@@ -88934,7 +88934,7 @@ Warning: inventing type variables
   (h : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (n : Num)
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
-  \226\136\131 h : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, simple_path(h(n)) && rectifiable_path(h(n)) && pathstart(h(n)) == pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && pathfinish(h(n)) == pathfinish(g) && hull(convex, path_image(h(n))) == hull(convex, path_image(g)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((h(n, x), h(n, y))) <= (L : Real) * dist((x, y))) && (\226\136\128 x : Cart[Real, Unit], IN(x, UNIONS({interval(((a : (Num) -> Cart[Real, Unit])((m : Num)), (b : (Num) -> Cart[Real, Unit])(m))) | m < n})) \226\134\146 IN(h(n, x), frontier(hull(convex, path_image(g))))) && (\226\136\128 x : Cart[Real, Unit], !IN(x, UNIONS({interval((a((m : Num)), b(m))) | m < n})) \226\134\146 h(n, x) == g(x))) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, Unit], !(IN(x, interval((a(n), b(n)))) && (\226\136\128 m : Num, m < n \226\134\146 !IN(x, interval((a(m), b(m)))))) \226\134\146 h(SUC(n), x) == h(n, x))
+  \226\136\131 h : (Num, Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], (\226\136\128 n : Num, simple_path(h(n)) && rectifiable_path(h(n)) && pathstart(h(n)) == pathstart((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) && pathfinish(h(n)) == pathfinish(g) && hull(convex, path_image(h(n))) == hull(convex, path_image(g)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance((h(n, x), h(n, y))) <= (L : Real) * distance((x, y))) && (\226\136\128 x : Cart[Real, Unit], IN(x, UNIONS({interval(((a : (Num) -> Cart[Real, Unit])((m : Num)), (b : (Num) -> Cart[Real, Unit])(m))) | m < n})) \226\134\146 IN(h(n, x), frontier(hull(convex, path_image(g))))) && (\226\136\128 x : Cart[Real, Unit], !IN(x, UNIONS({interval((a((m : Num)), b(m))) | m < n})) \226\134\146 h(n, x) == g(x))) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, Unit], !(IN(x, interval((a(n), b(n)))) && (\226\136\128 m : Num, m < n \226\134\146 !IN(x, interval((a(m), b(m)))))) \226\134\146 h(SUC(n), x) == h(n, x))
   interval(((a : (Num) -> Cart[Real, Unit])((n : Num)), (b : (Num) -> Cart[Real, Unit])(n)))
   (INSERT((x : _), (s : (_) -> Bool)) == s) == IN(x, s)
   (q : Bool) && !(s : Bool) && (r : Bool) && (!(t : Bool) \226\134\146 (p : Bool)) \226\134\146 (p \226\134\146 q \226\134\146 r \226\134\146 s) \226\134\146 t
@@ -88981,7 +88981,7 @@ Warning: inventing type variables
   SUBSET(path_image((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])), frontier(hull(convex, path_image(g))))
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
-  real_of_num(0) <= (L : Real) && path_length((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == L && simple_path(g') && rectifiable_path(g') && pathfinish(g') == pathstart(g') && IN(pathstart(g'), frontier(hull(convex, path_image(g')))) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 dist((g'(x), g'(y))) <= L * dist((x, y)))
+  real_of_num(0) <= (L : Real) && path_length((g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])) == L && simple_path(g') && rectifiable_path(g') && pathfinish(g') == pathstart(g') && IN(pathstart(g'), frontier(hull(convex, path_image(g')))) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(vec(0), vec(1))])) && IN(y, interval([(vec(0), vec(1))])) \226\134\146 distance((g'(x), g'(y))) <= L * distance((x, y)))
   (g' : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (L : Real) == path_length((g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]]))
@@ -88997,7 +88997,7 @@ Warning: inventing type variables
   (y : Cart[Real, Unit])
   (vec : (Num) -> Cart[Real, Unit])(1)
   (vec : (Num) -> Cart[Real, Unit])(0)
-  dist(((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) < (e : Real) / real_of_num(2)
+  distance(((x : Cart[Real, Tybit0[Unit]]), (y : Cart[Real, Tybit0[Unit]]))) < (e : Real) / real_of_num(2)
   ball(((x : Cart[Real, Tybit0[Unit]]), (e : Real)))
   SUBSET((b : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER((s : (_) -> Bool), t) == {} \226\134\146 DISJOINT(b, s)
   DISJOINT((s : (_) -> Bool), (v : (_) -> Bool)) && SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER(s, t), DIFF(u, v))
