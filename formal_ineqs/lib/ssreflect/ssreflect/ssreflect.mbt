@@ -3,7 +3,7 @@
 ///|
 /// ssreflect_eq_def
 fn step_1() -> Unit raise {
-  ssreflect_eq_def_c.set(@pair.new_definition(@parser.parse_term("forall v P. ssreflect_eq (v:A) (P:bool) = P")))
+  ssreflect_eq_def_c.set(@pair.new_definition(@term_syntax.parse_term("∀ v : A, ∀ P : Bool, (ssreflect_eq : (A, Bool) -> Bool)(v, P) == P")))
 }
 
 ///|
@@ -1186,8 +1186,8 @@ pub fn disch_tac(x278 : @list.List[Int64], x279 : ArgType) -> @tactics.Tactic ra
 ///|
 /// process_thm
 fn step_7() -> Unit raise {
-  let conj_imp = @class.taut(@parser.parse_term("(A /\\ B ==> C) ==> (A ==> B ==> C)"))
-  let dummy_tm = @parser.parse_term("F")
+  let conj_imp = @class.taut(@term_syntax.parse_term("((A : Bool) && (B : Bool) → (C : Bool)) → A → B → C"))
+  let dummy_tm = @term_syntax.parse_term("false")
   process_thm_c.set(fn(x282 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> (@list.List[(String, @kernel.Term)], @kernel.Thm) raise) raise {
     let local_consts = x282
     fn process(x284 : @kernel.Thm) -> ((@list.List[(String, @kernel.Term)], @kernel.Thm)) raise {
@@ -1232,8 +1232,8 @@ pub fn process_thm(x : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> (@list.Lis
 ///|
 /// reconstruct_thm
 fn step_8() -> Unit raise {
-  let imp_conj = @class.taut(@parser.parse_term("(A ==> B ==> C) ==> (A /\\ B ==> C)"))
-  let triv_ths = @class.taut(@parser.parse_term("((T ==> A) <=> A) /\\ ((T /\\ A) = A) /\\ ((A /\\ T) = A)"))
+  let imp_conj = @class.taut(@term_syntax.parse_term("((A : Bool) → (B : Bool) → (C : Bool)) → A && B → C"))
+  let triv_ths = @class.taut(@term_syntax.parse_term("(true → (A : Bool)) == A && (true && A) == A && (A && true) == A"))
   fn reconstruct(x285 : @list.List[(String, @kernel.Term)], x286 : @kernel.Thm) -> @kernel.Thm raise {
     let list = x285
     let th = x286
@@ -1764,9 +1764,9 @@ fn step_12() -> Unit raise {
   }))
   let t390 = @simp.asm_rewrite_tac(@list.List([]))
   let t389 = @tactics.disch_then(@tactics.disj_cases_tac)
-  let t388 = @tactics.mp_tac(@bool.spec(@parser.parse_term("l:(A)list"), @lists.list_cases()))
+  let t388 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(l : List[A])"), @lists.list_cases()))
   let t402 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t388), t389), t390), t394), t398), t401)
-  list_cases_c.set(@tactics.prove(@parser.parse_term("forall P. P [] /\\ (forall(h:A) t. P (CONS h t)) ==> (forall l. P l)"), t402))
+  list_cases_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (List[A]) -> Bool, P(NIL) && (∀ h : A, ∀ t : List[A], P(CONS(h, t))) → (∀ l : List[A], P(l))"), t402))
 }
 
 ///|
@@ -1802,9 +1802,9 @@ fn step_14() -> Unit raise {
   }))
   let t405 = @simp.asm_rewrite_tac(@list.List([]))
   let t404 = @tactics.disch_then(@tactics.disj_cases_tac)
-  let t403 = @tactics.mp_tac(@bool.spec(@parser.parse_term("m:num"), @nums.num_cases()))
+  let t403 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(m : Num)"), @nums.num_cases()))
   let t409 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t403), t404), t405), t408)
-  num_cases_c.set(@tactics.prove(@parser.parse_term("forall P. P 0 /\\ (forall n. P (SUC n)) ==> (forall m. P m)"), t409))
+  num_cases_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Num) -> Bool, P(0) && (∀ n : Num, P(SUC(n))) → (∀ m : Num, P(m))"), t409))
 }
 
 ///|
