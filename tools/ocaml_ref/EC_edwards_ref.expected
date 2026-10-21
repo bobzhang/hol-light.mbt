@@ -36403,19 +36403,19 @@ EC/edwards quotations (264):
   d:A = ring_0 f
   forall f a (d:A).\n    field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f\n    ==> (edwards_nonsingular (f,a,d) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        ~(?c. c IN ring_carrier f /\\ ~(c = ring_0 f) /\\ ring_pow f c 2 = d))
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f}
   forall f a d:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(edwards_curve(f,a,d))
   ring_inv f x:A
@@ -36425,23 +36425,23 @@ EC/edwards quotations (264):
   forall s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n
   forall f a d:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ d IN ring_carrier f /\\\n             edwards_nonsingular(f,a,d)\n             ==> CARD(edwards_curve(f,a,d)) <= 2 * CARD(ring_carrier f)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   ring_inv f (ring_mul f e (ring_mul f x1 x2)):A
   ring_inv f (ring_mul f x1 y2):A
   forall a b. P a \\/ P b ==> ?x. P x
@@ -36450,18 +36450,18 @@ EC/edwards quotations (264):
   edwards_nonsingular(f,a:A,d)
   forall f a (d:A) x1 y1 x2 y2.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2)\n        ==> ~(ring_add f (ring_1 f)\n              (ring_mul f d\n                 (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))) =\n              ring_0 f) /\\\n            ~(ring_sub f (ring_1 f)\n              (ring_mul f d\n                 (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))) =\n              ring_0 f)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   forall f a d p. edwards_curve(f,a,d) p ==> edwards_point f p
   forall(f:A ring) a d p.\n        edwards_point f p\n        ==> edwards_point f (edwards_neg (f,a,d) p)
   forall(f:A ring) a d p q.\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_point f p /\\ edwards_point f q\n        ==> edwards_point f (edwards_add (f,a,d) p q)
@@ -36484,23 +36484,23 @@ EC/edwards quotations (264):
   forall f a (d:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q\n        ==> edwards_curve(f,a,d) (edwards_add (f,a,d) p q)
   forall f a (d:A) p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_add(f,a,d) (edwards_0 (f,a,d)) p = p
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   (x,y):A#A
   edwards_neg (f,a,d) (x,y):A#A
   d:A
@@ -36513,32 +36513,32 @@ EC/edwards quotations (264):
   f:A ring
   forall f a (d:A) p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_add(f,a,d) (edwards_neg (f,a,d) p) p = edwards_0(f,a,d)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   y1:A
   x1:A
   y2:A
@@ -36587,14 +36587,14 @@ EC/edwards quotations (264):
   forall f a (d:A).\n      field f /\\\n      a IN ring_carrier f /\\ d IN ring_carrier f /\\\n      edwards_nonsingular(f,a,d)\n      ==> abelian_group(edwards_group(f,a,d))
   forall f (a:A) d p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        p IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) p = 2 <=>\n             p = (ring_0 f,ring_neg f (ring_1 f)))
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   y:A
   x:A
   y:A
@@ -36607,14 +36607,14 @@ EC/edwards quotations (264):
   4 = 2 * 2
   forall f (a:A) d x y.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        (x,y) IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) (x,y) = 4 <=>\n             ring_mul f a (ring_pow f x 2) = ring_1 f /\\ y = ring_0 f)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   y:A
   x:A
   y:A
@@ -36627,16 +36627,16 @@ EC/edwards quotations (264):
   4 = 2 * 2
   forall f (a:A) d a' p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        a' IN ring_carrier f /\\ ring_mul f a (ring_pow f a' 2) = ring_1 f /\\\n        edwards_nonsingular (f,a,d) /\\\n        p IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) p = 4 <=>\n             p = (a',ring_0 f) \\/ p = (ring_neg f a',ring_0 f))
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
   y:A
   x:A
   y:A
@@ -36649,14 +36649,14 @@ EC/edwards quotations (264):
   8 = 2 * 4
   forall f (a:A) d x y.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        (x,y) IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) (x,y) = 8 <=>\n             ring_mul f a (ring_pow f x 2) = ring_pow f y 2 /\\\n             ring_mul f (ring_of_num f 4)\n                        (ring_mul f (ring_pow f a 2) (ring_pow f x 4)) =\n             ring_pow f (ring_add f (ring_1 f)\n                          (ring_mul f a (ring_mul f d (ring_pow f x 4)))) 2)
   :A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
-  (x:A) IN ring_carrier f
-  x:A
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
+  IN((x : A), ring_carrier((f : Ring[A])))
+  (x : A)
 edwards_point =  |- ((#=:fun(bool,fun(bool,bool)) ((#edwards_point:fun(ring('A),fun(prod('A,'A),bool)) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))))
 edwards_curve =  |- ((#=:fun(bool,fun(bool,bool)) ((#edwards_curve:fun(prod(ring('A),prod('A,'A)),fun(prod('A,'A),bool)) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) d:'A))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) x:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (#ring_1:fun(ring('A),'A) f:ring('A))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) d:'A) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) x:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 edwards_nonsingular =  |- ((#=:fun(bool,fun(bool,bool)) (#edwards_nonsingular:fun(prod(ring('A),prod('A,'A)),bool) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) d:'A)))) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\b:'A. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) b:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) b:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) a:'A))))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) d:'A) (#ring_0:fun(ring('A),'A) f:ring('A)))) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\c:'A. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) c:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) c:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) d:'A))))))))
