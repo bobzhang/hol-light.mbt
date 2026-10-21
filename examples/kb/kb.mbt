@@ -437,41 +437,41 @@ pub fn complete_equations(x120 : @list.List[@kernel.Term], x121 : @list.List[@ke
 ///|
 /// Examples/kb.ml:201
 fn step_1() -> Unit raise {
-  let t125 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall a b. i(a) * a * b = b")))])
-  let t123 = @parser.parse_term("i:num->num")
-  let t124 = @parser.parse_term("(*):num->num->num")
-  ignore(complete_equations(@list.List([@parser.parse_term("1"), t124, t123]), t125))
+  let t125 = @list.List([@bool.spec_all(@kernel.assume_rule(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, (i : (Num) -> Num)(a) * (a * b) == b")))])
+  let t123 = @term_syntax.parse_term("(i : (Num) -> Num)")
+  let t124 = @term_syntax.parse_term("op_star")
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("1"), t124, t123]), t125))
 }
 
 ///|
 /// Examples/kb.ml:208
 fn step_2() -> Unit raise {
-  let t126 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall a b c. (a * b) * (b * c) = b")))])
-  ignore(complete_equations(@list.List([@parser.parse_term("(*):num->num->num")]), t126))
+  let t126 = @list.List([@bool.spec_all(@kernel.assume_rule(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ c : Num, a * b * (b * c) == b")))])
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("op_star")]), t126))
 }
 
 ///|
 /// Examples/kb.ml:215
 fn step_3() -> Unit raise {
-  let t130 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall a b:num. a - a * b = b) /\\\n   (forall a b:num. a * b - b = a) /\\\n   (forall a. a * 1 = a) /\\\n   (forall a. 1 * a = a)"))))
-  let t127 = @parser.parse_term("(-):num->num->num")
-  let t128 = @parser.parse_term("(+):num->num->num")
-  let t129 = @parser.parse_term("( * ):num->num->num")
-  ignore(complete_equations(@list.List([@parser.parse_term("1"), t129, t128, t127]), t130))
+  let t130 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@term_syntax.parse_term("(∀ a : Num, ∀ b : Num, a - a * b == b) && (∀ a : Num, ∀ b : Num, a * b - b == a) && (∀ a : Num, a * 1 == a) && (∀ a : Num, 1 * a == a)"))))
+  let t127 = @term_syntax.parse_term("op_minus")
+  let t128 = @term_syntax.parse_term("op_plus")
+  let t129 = @term_syntax.parse_term("op_star")
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("1"), t129, t128, t127]), t130))
 }
 
 ///|
 /// Examples/kb.ml:227
 fn step_4() -> Unit raise {
-  let t132 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("((f(f(f(f(f c))))) = c:A) /\\ (f(f(f c)) = c)"))))
-  let t131 = @parser.parse_term("f:A->A")
-  ignore(complete_equations(@list.List([@parser.parse_term("c:A"), t131]), t132))
+  let t132 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@term_syntax.parse_term("(f : (A) -> A)(f(f(f(f((c : A)))))) == c && f(f(f(c))) == c"))))
+  let t131 = @term_syntax.parse_term("(f : (A) -> A)")
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("(c : A)"), t131]), t132))
 }
 
 ///|
 /// eqs
 fn step_5() -> Unit raise {
-  eqs_v1_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall x. 1 * x = x) /\\ (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)")))))
+  eqs_v1_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@term_syntax.parse_term("(∀ x : Num, 1 * x == x) && (∀ x : Num, (i : (Num) -> Num)(x) * x == 1) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z))")))))
 }
 
 ///|
@@ -486,15 +486,15 @@ pub fn eqs_v1() -> @list.List[@kernel.Thm] {
 ///|
 /// Examples/kb.ml:239
 fn step_6() -> Unit raise {
-  let t133 = @parser.parse_term("i:num->num")
-  let t134 = @parser.parse_term("(*):num->num->num")
-  ignore(complete_equations(@list.List([@parser.parse_term("1"), t134, t133]), eqs_v1()))
+  let t133 = @term_syntax.parse_term("(i : (Num) -> Num)")
+  let t134 = @term_syntax.parse_term("op_star")
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("1"), t134, t133]), eqs_v1()))
 }
 
 ///|
 /// eqs
 fn step_7() -> Unit raise {
-  eqs_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))")))))
+  eqs_c.set(@lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@term_syntax.parse_term("(∀ x : Num, 0 + x == x) && (∀ x : Num, (neg : (Num) -> Num)(x) + x == 0) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x + y + z == x + (y + z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, (x + y) * z == x * z + y * z)")))))
 }
 
 ///|
@@ -509,10 +509,10 @@ pub fn eqs() -> @list.List[@kernel.Thm] {
 ///|
 /// nreqs
 fn step_8() -> Unit raise {
-  let t135 = @parser.parse_term("( * ):num->num->num")
-  let t136 = @parser.parse_term("neg:num->num")
-  let t137 = @parser.parse_term("(+):num->num->num")
-  nreqs_c.set(complete_equations(@list.List([@parser.parse_term("0"), t137, t136, t135]), eqs()))
+  let t135 = @term_syntax.parse_term("op_star")
+  let t136 = @term_syntax.parse_term("(neg : (Num) -> Num)")
+  let t137 = @term_syntax.parse_term("op_plus")
+  nreqs_c.set(complete_equations(@list.List([@term_syntax.parse_term("0"), t137, t136, t135]), eqs()))
 }
 
 ///|
@@ -544,15 +544,15 @@ pub fn complete_tac(x138 : @list.List[@kernel.Term], x139 : @kernel.Thm) -> @tac
 ///|
 /// Examples/kb.ml:277
 fn step_9() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(forall x. 1 * x = x) /\\\n   (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)\n   ==> forall x y. i(y) * i(i(i(x * i(y)))) * x = 1")))
+  ignore(@tactics.g(@term_syntax.parse_term("(∀ x : Num, 1 * x == x) && (∀ x : Num, (i : (Num) -> Num)(x) * x == 1) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z)) → (∀ x : Num, ∀ y : Num, i(y) * (i(i(i(x * i(y)))) * x) == 1)")))
 }
 
 ///|
 /// Examples/kb.ml:282
 fn step_10() -> Unit raise {
-  let t145 = @parser.parse_term("i:num->num")
-  let t146 = @parser.parse_term("(*):num->num->num")
-  let t147 = @list.List([@parser.parse_term("1"), t146, t145])
+  let t145 = @term_syntax.parse_term("(i : (Num) -> Num)")
+  let t146 = @term_syntax.parse_term("op_star")
+  let t147 = @list.List([@term_syntax.parse_term("1"), t146, t145])
   ignore(@tactics.e(@tactics.disch_then((x148 : @kernel.Thm) => complete_tac(t147, x148))))
 }
 
@@ -565,16 +565,16 @@ fn step_11() -> Unit raise {
 ///|
 /// Examples/kb.ml:285
 fn step_12() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))\n   ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n        a + b)")))
+  ignore(@tactics.g(@term_syntax.parse_term("(∀ x : Num, 0 + x == x) && (∀ x : Num, (neg : (Num) -> Num)(x) + x == 0) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x + y + z == x + (y + z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, (x + y) * z == x * z + y * z) → neg(0) * ((x : Num) * (y : Num) + ((z : Num) + neg(neg((w : Num) + z)))) + neg(neg((b : Num)) + neg((a : Num))) == a + b")))
 }
 
 ///|
 /// Examples/kb.ml:293
 fn step_13() -> Unit raise {
-  let t149 = @parser.parse_term("( * ):num->num->num")
-  let t150 = @parser.parse_term("neg:num->num")
-  let t151 = @parser.parse_term("(+):num->num->num")
-  let t152 = @list.List([@parser.parse_term("0"), t151, t150, t149])
+  let t149 = @term_syntax.parse_term("op_star")
+  let t150 = @term_syntax.parse_term("(neg : (Num) -> Num)")
+  let t151 = @term_syntax.parse_term("op_plus")
+  let t152 = @list.List([@term_syntax.parse_term("0"), t151, t150, t149])
   ignore(@tactics.e(@tactics.disch_then((x153 : @kernel.Thm) => complete_tac(t152, x153))))
 }
 
