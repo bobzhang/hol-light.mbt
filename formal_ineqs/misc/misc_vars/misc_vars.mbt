@@ -1790,7 +1790,7 @@ pub fn eq_op_real() -> @kernel.Term {
 ///|
 /// lt_op_real
 fn step_113() -> Unit raise {
-  lt_op_real_c.set(standardize_tm(@term_syntax.parse_term("op_lt")))
+  lt_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_lt")))
 }
 
 ///|
@@ -1805,7 +1805,7 @@ pub fn lt_op_real() -> @kernel.Term {
 ///|
 /// le_op_real
 fn step_114() -> Unit raise {
-  le_op_real_c.set(standardize_tm(@term_syntax.parse_term("op_lt_eq")))
+  le_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_le")))
 }
 
 ///|
@@ -1820,7 +1820,7 @@ pub fn le_op_real() -> @kernel.Term {
 ///|
 /// ge_op_real
 fn step_115() -> Unit raise {
-  ge_op_real_c.set(standardize_tm(@term_syntax.parse_term("op_gt_eq")))
+  ge_op_real_c.set(standardize_tm(@term_syntax.parse_term("real_ge")))
 }
 
 ///|

@@ -142,9 +142,9 @@ test "Formal_ineqs/misc/misc_vars matches Formal_ineqs/misc/misc_vars.ml" {
       #|  real_inv
       #|  real_neg
       #|  (op_eq : (Real, Real) -> Bool)
-      #|  op_lt
-      #|  op_lt_eq
-      #|  op_gt_eq
+      #|  real_lt
+      #|  real_le
+      #|  real_ge
       #|  real_of_num
       #|  real_pow
       #|  :real
