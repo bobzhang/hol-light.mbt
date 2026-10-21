@@ -5585,32 +5585,32 @@ test "Boyer_Moore/rewrite_rules matches Boyer_Moore/rewrite_rules.ml" {
       #|Searching with limit 2
       #|Searching with limit 3
       #|Boyer_Moore/rewrite_rules quotations (26):
-      #|  y':bool
-      #|  y:bool
-      #|  x:bool
-      #|  (~x ==> (y = y')) = ((y \\/ x) = (y' \\/ x))
-      #|  y':bool
-      #|  y:bool
-      #|  x:bool
-      #|  (x ==> (y = y')) = ((y \\/ ~x) = (y' \\/ ~x))
-      #|  t:bool
-      #|  y':bool
-      #|  y:bool
-      #|  x:bool
-      #|  (~x ==> ((y \\/ t) = (y' \\/ t))) = ((y \\/ (x \\/ t)) = (y' \\/ (x \\/ t)))
-      #|  t:bool
-      #|  y':bool
-      #|  y:bool
-      #|  x:bool
-      #|  (x ==> ((y \\/ t) = (y' \\/ t))) = ((y \\/ (~x \\/ t)) = (y' \\/ (~x \\/ t)))
-      #|  t':bool
-      #|  t:bool
-      #|  x:bool
-      #|  (x ==> (t = t')) = ((~x \\/ t) = (~x \\/ t'))
-      #|  t':bool
-      #|  t:bool
-      #|  x:bool
-      #|  (~x ==> (t = t')) = ((x \\/ t) = (x \\/ t'))
+      #|  (y' : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  (!(x : Bool) \226\134\146 (y : Bool) == (y' : Bool)) == ((y || x) == (y' || x))
+      #|  (y' : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  ((x : Bool) \226\134\146 (y : Bool) == (y' : Bool)) == ((y || !x) == (y' || !x))
+      #|  (t : Bool)
+      #|  (y' : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  (!(x : Bool) \226\134\146 ((y : Bool) || (t : Bool)) == ((y' : Bool) || t)) == ((y || x || t) == (y' || x || t))
+      #|  (t : Bool)
+      #|  (y' : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  ((x : Bool) \226\134\146 ((y : Bool) || (t : Bool)) == ((y' : Bool) || t)) == ((y || !x || t) == (y' || !x || t))
+      #|  (t' : Bool)
+      #|  (t : Bool)
+      #|  (x : Bool)
+      #|  ((x : Bool) \226\134\146 (t : Bool) == (t' : Bool)) == ((!x || t) == (!x || t'))
+      #|  (t' : Bool)
+      #|  (t : Bool)
+      #|  (x : Bool)
+      #|  (!(x : Bool) \226\134\146 (t : Bool) == (t' : Bool)) == ((x || t) == (x || t'))
       #|NOT_IMP_EQ_EQ_EQ_OR =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) x:bool)) ((#=:fun(bool,fun(bool,bool)) y:bool) y':bool))) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) y:bool) x:bool)) ((#\/:fun(bool,fun(bool,bool)) y':bool) x:bool)))
       #|IMP_EQ_EQ_EQ_OR_NOT =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) x:bool) ((#=:fun(bool,fun(bool,bool)) y:bool) y':bool))) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) y:bool) (#~:fun(bool,bool) x:bool))) ((#\/:fun(bool,fun(bool,bool)) y':bool) (#~:fun(bool,bool) x:bool))))
       #|NOT_IMP_EQ_OR_EQ_EQ_OR_OR =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) x:bool)) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) y:bool) t:bool)) ((#\/:fun(bool,fun(bool,bool)) y':bool) t:bool)))) ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) y:bool) ((#\/:fun(bool,fun(bool,bool)) x:bool) t:bool))) ((#\/:fun(bool,fun(bool,bool)) y':bool) ((#\/:fun(bool,fun(bool,bool)) x:bool) t:bool))))
