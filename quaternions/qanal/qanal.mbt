@@ -1164,7 +1164,7 @@ pub fn continuous_on_hx_lift() -> @kernel.Thm {
 /// LINEAR_QUAT_COMPONENTS
 fn step_57() -> Unit raise {
   let t295 = @simp.rewrite_tac(@list.List([@vectors.linear(), @trivia.o_thm(), @quaternion.quat_add_components(), @quaternion.quat_cmul_components(), @quaternion.hx_add(), @quaternion.hx_mul(), @quaternion.quat_cmul()]))
-  linear_quat_components_c.set(@tactics.prove(@term_syntax.parse_term("linear(o(Hx, Re)) && linear(o(Hx, Im1)) && linear(o(Hx, Im2)) && linear(o(Hx, Im3))"), t295))
+  linear_quat_components_c.set(@tactics.prove(@term_syntax.parse_term("(linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Re)) && (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Im1)) && (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Im2)) && (linear : ((Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]]) -> Bool)((o : ((Real) -> Cart[Real, Tybit0[Tybit0[Unit]]], (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Real, Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])(Hx, Im3))"), t295))
 }
 
 ///|
