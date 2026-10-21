@@ -80349,13 +80349,13 @@ Functionspaces/cfunspace quotations (570):
   forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      let proj_v = inprod v u / inprod v v in\n      let orthogonal_component = u - proj_v % v in\n      u = proj_v % v + orthogonal_component\n      /\\ are_orthogonal1 (s,inprod) v orthogonal_component
   forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      let proj_v = inprod v u / inprod v v in\n      let orthogonal_component = u - proj_v % v in\n      u = proj_v % v + orthogonal_component
   forall s inprod. is_inner_space (s,inprod) ==> forall u v. u IN s /\\ v IN s ==>\n      are_orthogonal1 (s,inprod) v (u - (inprod v u / inprod v v) % v)
-  vector_neg:complex->complex
-  vector_add:complex->complex->complex
-  vector_sub:complex->complex->complex
-  complex_mul:complex->complex->complex
-  complex_div:complex->complex->complex
-  complex_pow:complex->num->complex
-  complex_inv:complex->complex
+  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
   ((x*y)*(z*t)*u)*v = (x*z)*(u*t)*(v*y)
   ((A : Bool) \226\134\146 (B : Bool)) \226\134\146 (A \226\134\146 (C : Bool)) == (A && B \226\134\146 C)
   forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n      ==> norm (inprod x y) pow 2\n        <= real_of_complex (inprod x x) * real_of_complex (inprod y y)
