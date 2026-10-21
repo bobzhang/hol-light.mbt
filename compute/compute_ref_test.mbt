@@ -286,7 +286,7 @@ test "compute matches compute.ml" {
       #|0..0..solved at 2
       #|Warning: inventing type variables
       #|compute quotations (1):
-      #|  COND: bool -> A -> A -> A
+      #|  (COND : (Bool, A, A) -> A)
       #|eval_bool =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) #F:bool)) (#~:fun(bool,bool) #F:bool))) #T:bool)
       #|eval_cond =  |- ((#=:fun('A,fun('A,bool)) (((#COND:fun(bool,fun('A,fun('A,'A))) ((#/\:fun(bool,fun(bool,bool)) #T:bool) #T:bool)) a:'A) b:'A)) a:'A)
       #|eval_let =  |- ((#=:fun(bool,fun(bool,bool)) ((#LET:fun(fun(bool,bool),fun(bool,bool)) (\x:bool. (#LET_END:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) x:bool) (#~:fun(bool,bool) x:bool))))) #T:bool)) (#LET_END:fun(bool,bool) #F:bool))

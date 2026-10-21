@@ -2322,7 +2322,7 @@ pub fn bool_redns() -> @list.List[@kernel.Thm] {
 pub fn bool_compset(x192 : Unit) -> Compset raise {
   let _ = x192
   let base = from_list(bool_redns())
-  match set_skip(base, @parser.parse_term("COND: bool -> A -> A -> A"), None) {
+  match set_skip(base, @term_syntax.parse_term("(COND : (Bool, A, A) -> A)"), None) {
     _ => base
   }
 }
