@@ -5526,7 +5526,7 @@ define quotations (111):
   tailadmissible(<<) p s t <=>\n        ?P G H. (forall f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                (forall f g a. (forall z. z << s(a) ==> (f z = g z))\n                         ==> (P f a = P g a) /\\\n                             (G f a = G g a) /\\ (H f a = H g a)) /\\\n                (forall f a:P. p f a ==> (t (f:A->B) a =\n                                    if P f a then f(G f a) else H f a))
   superadmissible(<<) p s t <=>\n        admissible(<<) (\\f a. T) s p ==> tailadmissible(<<) p s t
   _MATCH x (_SEQPATTERN r s) =\n   if ?y. r x y then _MATCH x r else _MATCH x s
-  forall p s c. admissible(<<) p s (\\f. c)
+  \226\136\128 p : ((_) -> _, _) -> Bool, \226\136\128 s : (_) -> _, \226\136\128 c : (_) -> _, admissible((op_lt_lt : (_, _) -> Bool), p, s, (f : (_) -> _) => c)
   forall(<<) p s t.\n        (forall f a. p f a ==> t a << s a)\n        ==> admissible((<<):A->A->bool) p s (\\f:A->B x:P. f(t x))
   forall(<<) p s:P->A g:(A->B)->P->C->D y:(A->B)->P->C.\n        admissible(<<) p s g /\\ admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g f x) (y f x))
   forall(<<) p s:P->A g:P->C->D y:(A->B)->P->C.\n        admissible(<<) p s y\n        ==> admissible(<<) p s (\\f x. (g x) (y f x))
@@ -5537,41 +5537,41 @@ define quotations (111):
   forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x:P. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. c1 f x (e f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. c2 f x (e f x))\n        ==> admissible(<<) p s (\\f x. _SEQPATTERN (c1 f x) (c2 f x) (e f x))
   (a <=> a') /\\ (a /\\ a' ==> (b <=> b'))\n                     ==> (a /\\ b <=> a' /\\ b')
   forall(<<) p s pat e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _UNGUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                         (GEQ (t f x) (y f x)))
-  x = x' /\\ y = y' ==> (x = y <=> x' = y')
+  (x : _) == (x' : _) && (y : _) == (y' : _) \226\134\146 (x == y) == (x' == y')
   (a <=> a') /\\ (a /\\ a' ==> (b <=> b'))\n                            ==> (a /\\ b <=> a' /\\ b')
   forall(<<) p s pat q e t y.\n      admissible (<<) p s pat /\\\n      admissible (<<) p s e /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s t /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x) s q /\\\n      admissible (<<) (\\f x. p f x /\\ pat f x = e f x /\\ q f x) s y\n        ==> admissible(<<) p s\n             (\\f x:P. _GUARDED_PATTERN (GEQ (pat f x) (e f x))\n                                       (q f x)\n                                       (GEQ (t f x) (y f x)))
   forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. nsum(a(x)..b(x)) (h f x))
   forall(<<) p:(B->C)->P->bool s:P->A h a b.\n        admissible(<<) (\\f (k,x). a(x) <= k /\\ k <= b(x) /\\ p f x)\n                       (\\(k,x). s x) (\\f (k,x). h f x k)\n   ==> admissible(<<) p s (\\f x. sum(a(x)..b(x)) (h f x))
-  x = y /\\ MAP f x = MAP g x ==> MAP f x = MAP g y
+  (x : List[_]) == (y : List[_]) && MAP((f : (_) -> _), x) == MAP((g : (_) -> _), x) \226\134\146 MAP(f, x) == MAP(g, y)
   forall(<<) p s h l.\n        admissible(<<) p s l /\\\n        admissible (<<) (\\f (y,x). p f x /\\ MEM y (l f x))\n                        (\\(y,x). s x) (\\f (y,x). h f x y)\n   ==> admissible (<<) p s (\\f:A->B x:P. MAP (h f x) (l f x))
   forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        admissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                       (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        admissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                       (\\f x. _MATCH (e f x) (c2 f x))\n        ==> admissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))
   \\f:A->B a:P. if p f a then t f a :B else fixed
-  \\f:A->B. (anything:P->A)
-  \\f:A->B x:P. F
+  (f : (A) -> B) => (anything : (P) -> A)
+  (f : (A) -> B) => (x : P) => false
   forall(<<) p s t:(A->B)->P->B.\n      admissible(<<) p s t ==> superadmissible(<<) p s t
-  forall p s c. superadmissible(<<) p s (\\f. c)
-  \\f:A->B. anything:P->B
-  \\f:A->B a:P. if p f a then t f a :A else s a
-  \\f:A->B x:P. T
+  \226\136\128 p : ((_) -> _, _) -> Bool, \226\136\128 s : (_) -> _, \226\136\128 c : (_) -> _, superadmissible((op_lt_lt : (_, _) -> Bool), p, s, (f : (_) -> _) => c)
+  (f : (A) -> B) => (anything : (P) -> B)
+  (f : (A) -> B) => (a : P) => if (p : ((A) -> B, P) -> Bool)(f, a) { (t : ((A) -> B, P) -> A)(f, a) } else { (s : (P) -> A)(a) }
+  (f : (A) -> B) => (x : P) => true
   forall(<<) p s t:(A->B)->P->A.\n      admissible(<<) p s t /\\\n      (forall f a. p f a ==> forall y. y << t f a ==> y << s a)\n      ==> superadmissible(<<) p s (\\f x. f(t f x))
   (a1 /\\ b1 /\\ c1 ==> a2 /\\ b2 /\\ c2 ==> x) <=>\n                    (a1 /\\ a2) /\\ (b1 /\\ b2) /\\ (c1 /\\ c2) ==> x
-  H2:(A->B)->P->B
-  G2:(A->B)->P->A
-  P2:(A->B)->P->bool
-  H1:(A->B)->P->B
-  G1:(A->B)->P->A
-  P1:(A->B)->P->bool
+  (H2 : ((A) -> B, P) -> B)
+  (G2 : ((A) -> B, P) -> A)
+  (P2 : ((A) -> B, P) -> Bool)
+  (H1 : ((A) -> B, P) -> B)
+  (G1 : ((A) -> B, P) -> A)
+  (P1 : ((A) -> B, P) -> Bool)
   forall(<<) p P s h k:(A->B)->P->B.\n        admissible(<<) p s P /\\\n        superadmissible(<<) (\\f x. p f x /\\ P f x) s h /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~P f x) s k\n        ==> superadmissible(<<) p s (\\f x. if P f x then h f x else k f x)
   \\f:A->B a:P. if p f a then if P f a then H2 f a else H1 f a else w:B
   \\f:A->B a:P. if p f a then if P f a then G2 f a else G1 f a else z:A
   \\f:A->B a:P. if p f a then if P f a then P2 f a else P1 f a else F
   forall(<<) p s c1 c2 e.\n        admissible(<<) p s (\\f x. ?y. c1 f x (e f x) y) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ?y. c1 f x (e f x) y) s\n                            (\\f x. _MATCH (e f x) (c1 f x)) /\\\n        superadmissible(<<) (\\f x. p f x /\\ ~(?y. c1 f x (e f x) y)) s\n                            (\\f x. _MATCH (e f x) (c2 f x))\n        ==> superadmissible(<<) p s\n              (\\f x:P. _MATCH (e f x) (_SEQPATTERN (c1 f x) (c2 f x)))
-  \\(f:A->B) x:P. (@z:B. F)
+  (f : (A) -> B) => (x : P) => select((z : B) => false)
   \\f:A->B x:P. arg x (@t. (pat:Q->D) t = e x):A
-  \\(f:A->B) x:P. p f x /\\ ?t:Q. pat t:D = e x
+  (f : (A) -> B) => (x : P) => (p : ((A) -> B, P) -> Bool)(f, x) && (\226\136\131 t : Q, (pat : (Q) -> D)(t) == (e : (P) -> D)(x))
   forall f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x)
   forall(<<) p s e:P->D pat:Q->D arg.\n      (forall f a t u. p f a /\\ pat t = e a /\\ pat u = e a ==> arg a t = arg a u) /\\\n      (forall f a t. p f a /\\ pat t = e a ==> forall y. y << arg a t ==> y << s a)\n      ==> superadmissible(<<) p s\n           (\\f:A->B x. _MATCH (e x)\n                    (\\u v. ?t. _UNGUARDED_PATTERN (GEQ (pat t) u)\n                                                  (GEQ (f(arg x t)) v)))
-  \\(f:A->B) x:P. (@z:B. F)
+  (f : (A) -> B) => (x : P) => select((z : B) => false)
   \\f:A->B x:P. arg x (@t. (pat:Q->D) t = e x /\\ q x t):A
   \\(f:A->B) x:P. p f x /\\ ?t:Q. pat t:D = e x /\\ q x t
   forall f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ q x t /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x /\\ q x t)
@@ -5580,25 +5580,25 @@ define quotations (111):
   \\f:A->B x:A. if ?y:P. s y = x\n                           then H2 f (@y. s y = x) else H1 f x:B
   \\f:A->B x:A.\n     if ?y:P. s y = x then G2 f (@y. s y = x) else G1 f x:A
   \\f:A->B x:A. if ?y:P. s y = x then P2 f (@y. s y = x) else P1 f x:bool
-  H2:(A->B)->P->B
-  G2:(A->B)->P->A
-  P2:(A->B)->P->bool
-  H1:(A->B)->A->B
-  G1:(A->B)->A->A
-  P1:(A->B)->A->bool
-  clauses:((P->A)#((A->B)->P->B))list
-  t:(A->B)->P->B
-  s:P->A
-  \\f:A->B x:A. @y:B. T
-  \\f:A->B. anything:A->A
-  \\f:A->B x:A. F
-  clauses:((P->A)#((A->B)->P->B))list
-  clauses:((P->A)#((A->B)->P->B))list
+  (H2 : ((A) -> B, P) -> B)
+  (G2 : ((A) -> B, P) -> A)
+  (P2 : ((A) -> B, P) -> Bool)
+  (H1 : ((A) -> B, A) -> B)
+  (G1 : ((A) -> B, A) -> A)
+  (P1 : ((A) -> B, A) -> Bool)
+  (clauses : List[((P) -> A, ((A) -> B, P) -> B)])
+  (t : ((A) -> B, P) -> B)
+  (s : (P) -> A)
+  (f : (A) -> B) => (x : A) => select((y : B) => true)
+  (f : (A) -> B) => (anything : (A) -> A)
+  (f : (A) -> B) => (x : A) => false
+  (clauses : List[((P) -> A, ((A) -> B, P) -> B)])
+  (clauses : List[((P) -> A, ((A) -> B, P) -> B)])
   forall(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). ?P G H.\n                     (forall f a y. P f a /\\ y << G f a ==> y << s a) /\\\n                     (forall f g a. (forall z. z << s(a) ==> (f z = g z))\n                              ==> (P f a = P g a) /\\\n                                  (G f a = G g a) /\\ (H f a = H g a)) /\\\n                     (forall f a:P. t f a = if P f a then f(G f a) else H f a))\n            clauses\n        ==> ?f:A->B. forall x. f x = CASEWISE clauses f x
   forall(<<) clauses.\n        WF((<<):A->A->bool) /\\\n        ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses\n        ==> ?f:A->B. forall x. f x = CASEWISE clauses f x
   forall clauses.\n   (?(<<). WF(<<) /\\\n           ALL (\\(s:P->A,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n   (forall s t s' t' f x y. MEM (s,t) clauses /\\ MEM (s',t') clauses\n                      ==> (s x = s' y) ==> (t f x = t' f y))\n   ==> ?f:A->B. ALL (\\(s,t). forall x. f (s x) = t f x) clauses
   forall P. (forall x y. P x y ==> P y x)\n         ==> forall l. (forall x y. MEM x l /\\ MEM y l ==> P x y) <=>\n                 ALL (\\x. P x x) l /\\ PAIRWISE P l
-  (\\x. P x) = (\\(a,b). P (a,b))
+  ((x : (_, _)) => (P : ((_, _)) -> _)(x)) == GABS((f : ((_, _)) -> _) => \226\136\128 a : _, \226\136\128 b : _, GEQ(f((a, b)), P((a, b))))
   \\(s,t) (s',t'). forall c x:A y:A. (s x = s' y) ==> (t c x = t' c y)
   forall clauses.\n        (?(<<). WF (<<) /\\\n                ALL (\\(s,t). tailadmissible(<<) (\\f a. T) s t) clauses) /\\\n        ALL (\\(s,t). forall f x y. (s x = s y) ==> (t f x = t f y)) clauses /\\\n        PAIRWISE (\\(s,t) (s',t'). forall f x y. (s x = s' y) ==> (t f x = t' f y))\n                 clauses\n        ==> (?f. ALL (\\(s,t). forall x. f (s x) = t f x) clauses)
   superadmissible(<<) (\\f x. T) s t <=> tailadmissible(<<) (\\f x. T) s t
@@ -5607,13 +5607,13 @@ define quotations (111):
   (1 = m + n) <=> (m = 1) /\\ (n = 0) \\/ (m = 0) /\\ (n = 1)
   (m + n = 1) <=> (m = 1) /\\ (n = 0) \\/ (m = 0) /\\ (n = 1)
   ((a <=> F) /\\ (b <=> b) ==> ((a ==> b) <=> T)) /\\\n        ((a <=> a') /\\ (a' ==> (b <=> T)) ==> ((a ==> b) <=> T)) /\\\n        ((a <=> a') /\\ (a' ==> (b <=> b')) ==> ((a ==> b) <=> (a' ==> b')))
-  F
-  (/\\)
+  false
+  op_slash_bslash
   ((?y. _UNGUARDED_PATTERN (GEQ s t) (GEQ z y)) <=> s = t) /\\\n       ((?y. _GUARDED_PATTERN (GEQ s t) g (GEQ z y)) <=> g /\\ s = t)
   ((forall z. GEQ (f z) (g z)) <=> (forall x y. GEQ (f(x,y)) (g(x,y)))) /\\\n       ((\\p. P p) = (\\(x,y). P(x,y)))
-  \\d c. (t:C#D->E) (c,d)
-  \\b d c. (t:B->C#D->E) b (c,d)
-  \\a b d c. (t:A->B->C#D->E) a b (c,d)
+  (d : D) => (c : C) => (t : ((C, D)) -> E)((c, d))
+  (b : B) => (d : D) => (c : C) => (t : (B, (C, D)) -> E)(b, (c, d))
+  (a : A) => (b : B) => (d : D) => (c : C) => (t : (A, B, (C, D)) -> E)(a, b, (c, d))
   (forall P. (forall t:A->B->C#D->E. P t) <=> (forall t. P (\\a b (c,d). t a b d c))) /\\\n       (forall P. (forall t:B->C#D->E. P t) <=> (forall t. P (\\b (c,d). t b d c))) /\\\n       (forall P. (forall t:C#D->E. P t) <=> (forall t. P (\\(c,d). t d c)))
   (a /\\ x = k ==> x = y ==> d) ==> (a /\\ x = k /\\ y = k ==> d)
   (a /\\ b /\\ c /\\ x = k ==> x = y ==> d)\n      ==> (a /\\ x = k /\\ b /\\ y = k /\\ c ==> d)
@@ -5622,13 +5622,13 @@ define quotations (111):
   1
   \\(x1:A,y1:B) (x2:A,y2:B). r x1 x2 \\/ (x1 = x2) /\\ s y1 y2
   (?r. WF(r) /\\\n            ?s. WF(s) /\\\n                P(\\(x1,y1) (x2,y2). r x1 x2 \\/ (x1 = x2) /\\ s y1 y2))\n       ==> ?t:A#B->A#B->bool. WF(t) /\\ P t
-  \\(b:B,a:A). a,b
-  R:A#B->A#B->bool
+  GABS((f : ((B, A)) -> (A, B)) => \226\136\128 b : B, \226\136\128 a : A, GEQ(f((b, a)), (a, b)))
+  (R : ((A, B), (A, B)) -> Bool)
   \\u:A#B v:A#B.\n                    (\\(x1:B,y1:A) (x2:B,y2:A). r x1 x2 \\/ (x1 = x2) /\\ s y1 y2)\n                     ((\\(a,b). b,a) u) ((\\(a,b). b,a) v)
   (?r. WF(r) /\\\n            ?s. WF(s) /\\\n                P(\\(x1,y1) (x2,y2). r y1 y2 \\/ (y1 = y2) /\\ s x1 x2))\n       ==> ?t:A#B->A#B->bool. WF(t) /\\ P t
   (?m:A->num. P(MEASURE m)) ==> ?r:A->A->bool. WF(r) /\\ P r
-  (/\\)
-  \\x:A y:A. F
+  op_slash_bslash
+  (x : A) => (y : A) => false
 CASEWISE_DEF =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?1,fun('?1,bool)) (((#CASEWISE:fun(list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))),fun('?4,fun('?3,'?1))) #NIL:list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1))))) f:'?4) x:'?3)) (#@:fun(fun('?1,bool),'?1) (\y:'?1. #T:bool)))) ((#=:fun('?1,fun('?1,bool)) (((#CASEWISE:fun(list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))),fun('?4,fun('?3,'?1))) ((#CONS:fun(prod(fun('?2,'?3),fun('?4,fun('?2,'?1))),fun(list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))),list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))))) h:prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))) t:list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))))) f:'?4) x:'?3)) (((#COND:fun(bool,fun('?1,fun('?1,'?1))) (#?:fun(fun('?2,bool),bool) (\y:'?2. ((#=:fun('?3,fun('?3,bool)) ((#FST:fun(prod(fun('?2,'?3),fun('?4,fun('?2,'?1))),fun('?2,'?3)) h:prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))) y:'?2)) x:'?3)))) (((#SND:fun(prod(fun('?2,'?3),fun('?4,fun('?2,'?1))),fun('?4,fun('?2,'?1))) h:prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))) f:'?4) (#@:fun(fun('?2,bool),'?2) (\y:'?2. ((#=:fun('?3,fun('?3,bool)) ((#FST:fun(prod(fun('?2,'?3),fun('?4,fun('?2,'?1))),fun('?2,'?3)) h:prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))) y:'?2)) x:'?3))))) (((#CASEWISE:fun(list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1)))),fun('?4,fun('?3,'?1))) t:list(prod(fun('?2,'?3),fun('?4,fun('?2,'?1))))) f:'?4) x:'?3))))
 CASEWISE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?5,fun('?5,bool)) (((#CASEWISE:fun(list(prod(fun('?6,'?7),fun('?8,fun('?6,'?5)))),fun('?8,fun('?7,'?5))) #NIL:list(prod(fun('?6,'?7),fun('?8,fun('?6,'?5))))) f:'?8) x:'?7)) (#@:fun(fun('?5,bool),'?5) (\y:'?5. #T:bool)))) ((#=:fun('?9,fun('?9,bool)) (((#CASEWISE:fun(list(prod(fun('?10,'?7),fun('?8,fun('?10,'?9)))),fun('?8,fun('?7,'?9))) ((#CONS:fun(prod(fun('?10,'?7),fun('?8,fun('?10,'?9))),fun(list(prod(fun('?10,'?7),fun('?8,fun('?10,'?9)))),list(prod(fun('?10,'?7),fun('?8,fun('?10,'?9)))))) ((#,:fun(fun('?10,'?7),fun(fun('?8,fun('?10,'?9)),prod(fun('?10,'?7),fun('?8,fun('?10,'?9))))) s:fun('?10,'?7)) t:fun('?8,fun('?10,'?9)))) clauses:list(prod(fun('?10,'?7),fun('?8,fun('?10,'?9)))))) f:'?8) x:'?7)) (((#COND:fun(bool,fun('?9,fun('?9,'?9))) (#?:fun(fun('?10,bool),bool) (\y:'?10. ((#=:fun('?7,fun('?7,bool)) (s:fun('?10,'?7) y:'?10)) x:'?7)))) ((t:fun('?8,fun('?10,'?9)) f:'?8) (#@:fun(fun('?10,bool),'?10) (\y:'?10. ((#=:fun('?7,fun('?7,bool)) (s:fun('?10,'?7) y:'?10)) x:'?7))))) (((#CASEWISE:fun(list(prod(fun('?10,'?7),fun('?8,fun('?10,'?9)))),fun('?8,fun('?7,'?9))) clauses:list(prod(fun('?10,'?7),fun('?8,fun('?10,'?9))))) f:'?8) x:'?7))))
 CASEWISE_CASES =  |- (#forall:fun(fun(list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))),bool),bool) (\clauses:list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))). (#forall:fun(fun('?13,bool),bool) (\c:'?13. (#forall:fun(fun('?12,bool),bool) (\x:'?12. ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(fun('?11,'?12),bool),bool) (\s:fun('?11,'?12). (#?:fun(fun(fun('?13,fun('?11,'?14)),bool),bool) (\t:fun('?13,fun('?11,'?14)). (#?:fun(fun('?11,bool),bool) (\a:'?11. ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun(prod(fun('?11,'?12),fun('?13,fun('?11,'?14))),fun(list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))),bool)) ((#,:fun(fun('?11,'?12),fun(fun('?13,fun('?11,'?14)),prod(fun('?11,'?12),fun('?13,fun('?11,'?14))))) s:fun('?11,'?12)) t:fun('?13,fun('?11,'?14)))) clauses:list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?12,fun('?12,bool)) (s:fun('?11,'?12) a:'?11)) x:'?12)) ((#=:fun('?14,fun('?14,bool)) (((#CASEWISE:fun(list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))),fun('?13,fun('?12,'?14))) clauses:list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14))))) c:'?13) x:'?12)) ((t:fun('?13,fun('?11,'?14)) c:'?13) a:'?11))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#?:fun(fun(fun('?11,'?12),bool),bool) (\s:fun('?11,'?12). (#?:fun(fun(fun('?13,fun('?11,'?14)),bool),bool) (\t:fun('?13,fun('?11,'?14)). (#?:fun(fun('?11,bool),bool) (\a:'?11. ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun(prod(fun('?11,'?12),fun('?13,fun('?11,'?14))),fun(list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))),bool)) ((#,:fun(fun('?11,'?12),fun(fun('?13,fun('?11,'?14)),prod(fun('?11,'?12),fun('?13,fun('?11,'?14))))) s:fun('?11,'?12)) t:fun('?13,fun('?11,'?14)))) clauses:list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))))) ((#=:fun('?12,fun('?12,bool)) (s:fun('?11,'?12) a:'?11)) x:'?12)))))))))) ((#=:fun('?14,fun('?14,bool)) (((#CASEWISE:fun(list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14)))),fun('?13,fun('?12,'?14))) clauses:list(prod(fun('?11,'?12),fun('?13,fun('?11,'?14))))) c:'?13) x:'?12)) (#@:fun(fun('?14,bool),'?14) (\y:'?14. #T:bool)))))))))))
