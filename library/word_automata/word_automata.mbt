@@ -13,7 +13,7 @@ fn step_1() -> Unit raise {
     t5,
   ])
   let t4 = @tactics.subgoal_then(
-    @parser.parse_term("forall s s':S. init s /\\ RTC step s s' ==> invariant s'"),
+    @term_syntax.parse_term("∀ s : S, ∀ s' : S, (init : (S) -> Bool)(s) && RTC((step : (S, S) -> Bool), s, s') → (invariant : (S) -> Bool)(s')"),
     fn(
       x1 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -559,7 +559,7 @@ fn step_6() -> Unit raise {
   )
   word_shladd_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x:N word. word_shladd x F = word_shl x 1"),
+      @term_syntax.parse_term("∀ x : Word[N], word_shladd(x, false) == word_shl(x, 1)"),
       t67,
     ),
   )
@@ -643,7 +643,7 @@ pub fn word_ishr_shladd() -> @kernel.Thm {
 /// WORD_USHR_SHLADD, WORD_ISHR_SHLADD
 fn step_8() -> Unit raise {
   let t94 = @meson.meson_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("i < n - 1 <=> SUC i < n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("((i : Num) < (n : Num) - 1) == (SUC(i) < n)"))]),
   )
   let t93 = @simp.simp_tac(
     @list.List([
@@ -665,7 +665,7 @@ fn step_8() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([@nums.num_cases()]),
-        @parser.parse_term("(forall i. P i) <=> P 0 /\\ (forall i. P(SUC i))"),
+        @term_syntax.parse_term("(∀ i : Num, (P : (Num) -> Bool)(i)) == (P(0) && (∀ i : Num, P(SUC(i))))"),
       ),
     ]),
   )
@@ -675,7 +675,7 @@ fn step_8() -> Unit raise {
       @meson.meson_tac(
         @list.List([
           @cart.dimindex_nonzero(),
-          @int.arith_rule(@parser.parse_term("n - 1 < n <=> ~(n = 0)")),
+          @int.arith_rule(@term_syntax.parse_term("((n : Num) - 1 < n) == !(n == 0)")),
         ]),
       ),
       @tactics.all_tac,
@@ -686,7 +686,7 @@ fn step_8() -> Unit raise {
     @list.List([
       @arith.lt_imp_ne(),
       @class.taut(
-        @parser.parse_term("p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)"),
+        @term_syntax.parse_term("((p : Bool) || (q : Bool) → (r : Bool)) == ((p → r) && (q → r))"),
       ),
     ]),
   )
@@ -707,7 +707,7 @@ fn step_8() -> Unit raise {
   let t84 = @simp.simp_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("i < n ==> (i + 1 < n <=> ~(i = n - 1))"),
+        @term_syntax.parse_term("(i : Num) < (n : Num) → (i + 1 < n) == !(i == n - 1)"),
       ),
     ]),
   )
@@ -833,7 +833,7 @@ fn step_9() -> Unit raise {
   let t110 = @simp.rewrite_tac(
     @list.List([
       @cart.dimindex_nonzero(),
-      @int.arith_rule(@parser.parse_term("n <= n - 1 <=> n = 0")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) <= n - 1) == (n == 0)")),
     ]),
   )
   let t109 = @simp.rewrite_tac(
@@ -909,12 +909,12 @@ fn step_9() -> Unit raise {
     })(t106(x107))
   })
   let t102 = @simp.rewrite_tac(
-    @list.List([@int.number_rule(@parser.parse_term("(n:num) divides n"))]),
+    @list.List([@int.number_rule(@term_syntax.parse_term("divides((n : Num), n)"))]),
   )
   let t101 = @simp.rewrite_tac(
     @list.List([@int.int_of_num_clauses(), @equal.gsym(@int.num_divides())]),
   )
-  let t99 = @int.arith_rule(@parser.parse_term("~(n = 0) ==> SUC(n - 1) = n"))
+  let t99 = @int.arith_rule(@term_syntax.parse_term("!((n : Num) == 0) → SUC(n - 1) == n"))
   let t100 = @simp.simp_tac(
     @list.List([
       @equal.gsym(@bool.conjunct2(@int.int_pow_v1())),
@@ -925,7 +925,7 @@ fn step_9() -> Unit raise {
   let t98 = @simp.rewrite_tac(
     @list.List([
       @int.integer_rule(
-        @parser.parse_term("(--x:int == &0) (mod n) <=> n divides x"),
+        @term_syntax.parse_term("op_eq_eq(-(x : Int), int_of_num(0), mod((n : Int))) == divides(n, x)"),
       ),
     ]),
   )
@@ -995,7 +995,7 @@ fn step_10() -> Unit raise {
   let t112 = @simp.simp_tac(
     @list.List([
       @theorems.forall_unwind_thm2(),
-      @class.taut(@parser.parse_term("~(p /\\ q /\\ r) <=> q ==> p ==> ~r")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool) && (r : Bool)) == (q → p → !r)")),
     ]),
   )
   let t114 = @tactics.then_tac(
@@ -1040,7 +1040,7 @@ fn step_11() -> Unit raise {
   let t115 = @simp.simp_tac(
     @list.List([
       @theorems.forall_unwind_thm2(),
-      @class.taut(@parser.parse_term("~(p /\\ q /\\ r) <=> q ==> p ==> ~r")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool) && (r : Bool)) == (q → p → !r)")),
     ]),
   )
   let t117 = @tactics.then_tac(
@@ -1085,7 +1085,7 @@ fn step_12() -> Unit raise {
   let t118 = @simp.simp_tac(
     @list.List([
       @theorems.forall_unwind_thm2(),
-      @class.taut(@parser.parse_term("~(p /\\ q /\\ r) <=> q ==> p ==> ~r")),
+      @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool) && (r : Bool)) == (q → p → !r)")),
     ]),
   )
   let t120 = @tactics.then_tac(
@@ -1232,13 +1232,13 @@ fn step_15() -> Unit raise {
     @list.List([
       @rstc.rtc_rules(),
       @arith.add1(),
-      @int.arith_rule(@parser.parse_term("i + 1 < n ==> i < n")),
+      @int.arith_rule(@term_syntax.parse_term("(i : Num) + 1 < (n : Num) → i < n")),
     ]),
   )
   let t132 = @meson.asm_meson_tac(@list.List([]))
   let t133 = @list.List([@tactics.match_mp_tac(@nums.num_induction()), t132])
   let t131 = @tactics.subgoal_then(
-    @parser.parse_term("forall i. i < n ==> RTC step ((b:num->S) 0) (b i)"),
+    @term_syntax.parse_term("∀ i : Num, i < (n : Num) → RTC((step : (S, S) -> Bool), (b : (Num) -> S)(0), b(i))"),
     fn(
       x128 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1304,8 +1304,8 @@ fn step_15() -> Unit raise {
     t135,
   )
   let n_ty = @parser.parse_type("N")
-  let plus = @parser.parse_term("(+):num->num->num")
-  let one_tm = @parser.parse_term("1")
+  let plus = @term_syntax.parse_term("op_plus")
+  let one_tm = @term_syntax.parse_term("1")
   let has_word_ty : (@kernel.Term) -> Bool raise = fn(
     x136 : @kernel.Term,
   ) -> Bool raise {
@@ -1576,7 +1576,7 @@ fn step_17() -> Unit raise {
   let t175 = @simp.asm_rewrite_tac(
     @list.List([
       @arith.add_sub(),
-      @int.arith_rule(@parser.parse_term("~(i + 1 = 0) /\\ 1 <= i + 1")),
+      @int.arith_rule(@term_syntax.parse_term("!((i : Num) + 1 == 0) && 1 <= i + 1")),
     ]),
   )
   let t174 = @simp.gen_rewrite_tac(
@@ -1791,7 +1791,7 @@ fn step_21() -> Unit raise {
         @list.List([
           @meson.meson(
             @list.List([@arith.le_1(), @cart.dimindex_nonzero()]),
-            @parser.parse_term("0 < dimindex(:N)"),
+            @term_syntax.parse_term("0 < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))"),
           ),
         ]),
       ),
@@ -1814,7 +1814,7 @@ fn step_22() -> Unit raise {
   let t190 = @simp.simp_conv(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("i + 1 < dimindex(:N) ==> i < dimindex(:N)"),
+        @term_syntax.parse_term("(i : Num) + 1 < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) → i < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))"),
       ),
     ]),
   )
@@ -2173,8 +2173,8 @@ pub fn horn_word_auto_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// CORE_WORD_AUTO_TAC
 fn step_24() -> Unit raise {
-  let true_tm = @parser.parse_term("T")
-  let false_tm = @parser.parse_term("F")
+  let true_tm = @term_syntax.parse_term("true")
+  let false_tm = @term_syntax.parse_term("false")
   let t225 = @simp.gen_rewrite_conv(
     fn(
       x222 : (@kernel.Term) -> @kernel.Thm raise,
@@ -2190,9 +2190,9 @@ fn step_24() -> Unit raise {
     ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       x220
     },
-    @list.List([@class.taut(@parser.parse_term("p ==> q <=> ~p \\/ q"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))]),
   )
-  let t219 = @class.taut(@parser.parse_term("p ==> F <=> ~p"))
+  let t219 = @class.taut(@term_syntax.parse_term("((p : Bool) → false) == !p"))
   let deimp_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(
     @equal.orelsec(
       @simp.gen_rewrite_conv(
@@ -2201,7 +2201,7 @@ fn step_24() -> Unit raise {
         ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
           x218
         },
-        @list.List([@class.taut(@parser.parse_term("T ==> p <=> p")), t219]),
+        @list.List([@class.taut(@term_syntax.parse_term("(true → (p : Bool)) == p")), t219]),
       ),
       t221,
     ),
