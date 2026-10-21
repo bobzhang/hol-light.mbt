@@ -6846,33 +6846,33 @@ Warning: inventing type variables
 0..0..1..6..23..101..481..1682..solved at 2448
 0..0..2..solved at 5
 Rqe/signs_thms quotations (27):
-  ~(p = &0) <=> p < &0 \\/ p > &0
-  (x > &0 <=> &0 < x) /\\ (x < &0 <=> &0 < --x)
-  ((p = &0) ==> c > &0 ==> (c * p = &0)) /\\\n     ((p = &0) ==> c < &0 ==> (c * p = &0)) /\\\n     (p > &0 ==> c > &0 ==> c * p > &0) /\\\n     (p > &0 ==> c < &0 ==> c * p < &0) /\\\n     (p < &0 ==> c > &0 ==> c * p < &0) /\\\n     (p < &0 ==> c < &0 ==> c * p > &0)
-  p <> &0 ==> c > &0 ==> c * p <> &0
-  p <> &0 ==> c < &0 ==> c * p <> &0
-  c < &0 ==> p < &0 ==> (c * p = p') ==> p' > &0
-  c > &0 ==> p < &0 ==> (c * p = p') ==> p' < &0
-  c < &0 ==> p > &0 ==> (c * p = p') ==> p' < &0
-  c > &0 ==> p > &0 ==> (c * p = p') ==> p' > &0
-  c < &0 ==> (p = &0) ==> (c * p = p') ==> (p' = &0)
-  c > &0 ==> (p = &0) ==> (c * p = p') ==> (p' = &0)
-  c < &0 ==> p <> &0 ==> (c * p = p') ==> p' <> &0
-  c > &0 ==> p <> &0 ==> (c * p = p') ==> p' <> &0
-  forall p. (p = &0) \\/ (p <> &0)
-  a \\/ b ==> (a ==> x) ==> (b ==> y) ==> (a /\\ x \\/ b /\\ y)
-  p2:bool
-  p1:bool
-  p0:bool
-  p:bool
-  forall a p p0 p1.\n((a = &0) /\\ (p <=> p0) \\/ (a <> &0) /\\ (p <=> p1)) <=> ((p <=> (a = &0) /\\ p0 \\/ a <> &0 /\\ p1 ))
-  forall p. p <> &0 ==> (p > &0) \\/ (p < &0)
-  a \\/ b ==> (a ==> x) ==> (b ==> y) ==> (a /\\ x \\/ b /\\ y)
-  p2:bool
-  p1:bool
-  p0:bool
-  p:bool
-  forall a p p1 p2.\n  (a <> &0) ==> ((a > &0 /\\ (p <=> p1) \\/ a < &0 /\\ (p <=> p2)) <=>\n   ((p <=> a > &0 /\\ p1 \\/ a < &0 /\\ p2)))
+  !((p : Real) == real_of_num(0)) == (p < real_of_num(0) || p > real_of_num(0))
+  ((x : Real) > real_of_num(0)) == (real_of_num(0) < x) && (x < real_of_num(0)) == (real_of_num(0) < -x)
+  ((p : Real) == real_of_num(0) \226\134\146 (c : Real) > real_of_num(0) \226\134\146 c * p == real_of_num(0)) && (p == real_of_num(0) \226\134\146 c < real_of_num(0) \226\134\146 c * p == real_of_num(0)) && (p > real_of_num(0) \226\134\146 c > real_of_num(0) \226\134\146 c * p > real_of_num(0)) && (p > real_of_num(0) \226\134\146 c < real_of_num(0) \226\134\146 c * p < real_of_num(0)) && (p < real_of_num(0) \226\134\146 c > real_of_num(0) \226\134\146 c * p < real_of_num(0)) && (p < real_of_num(0) \226\134\146 c < real_of_num(0) \226\134\146 c * p > real_of_num(0))
+  op_lt_gt((p : Real), real_of_num(0)) \226\134\146 (c : Real) > real_of_num(0) \226\134\146 op_lt_gt(c * p, real_of_num(0))
+  op_lt_gt((p : Real), real_of_num(0)) \226\134\146 (c : Real) < real_of_num(0) \226\134\146 op_lt_gt(c * p, real_of_num(0))
+  (c : Real) < real_of_num(0) \226\134\146 (p : Real) < real_of_num(0) \226\134\146 c * p == (p' : Real) \226\134\146 p' > real_of_num(0)
+  (c : Real) > real_of_num(0) \226\134\146 (p : Real) < real_of_num(0) \226\134\146 c * p == (p' : Real) \226\134\146 p' < real_of_num(0)
+  (c : Real) < real_of_num(0) \226\134\146 (p : Real) > real_of_num(0) \226\134\146 c * p == (p' : Real) \226\134\146 p' < real_of_num(0)
+  (c : Real) > real_of_num(0) \226\134\146 (p : Real) > real_of_num(0) \226\134\146 c * p == (p' : Real) \226\134\146 p' > real_of_num(0)
+  (c : Real) < real_of_num(0) \226\134\146 (p : Real) == real_of_num(0) \226\134\146 c * p == (p' : Real) \226\134\146 p' == real_of_num(0)
+  (c : Real) > real_of_num(0) \226\134\146 (p : Real) == real_of_num(0) \226\134\146 c * p == (p' : Real) \226\134\146 p' == real_of_num(0)
+  (c : Real) < real_of_num(0) \226\134\146 op_lt_gt((p : Real), real_of_num(0)) \226\134\146 c * p == (p' : Real) \226\134\146 op_lt_gt(p', real_of_num(0))
+  (c : Real) > real_of_num(0) \226\134\146 op_lt_gt((p : Real), real_of_num(0)) \226\134\146 c * p == (p' : Real) \226\134\146 op_lt_gt(p', real_of_num(0))
+  \226\136\128 p : Real, p == real_of_num(0) || op_lt_gt(p, real_of_num(0))
+  (a : Bool) || (b : Bool) \226\134\146 (a \226\134\146 (x : Bool)) \226\134\146 (b \226\134\146 (y : Bool)) \226\134\146 a && x || b && y
+  (p2 : Bool)
+  (p1 : Bool)
+  (p0 : Bool)
+  (p : Bool)
+  \226\136\128 a : Real, \226\136\128 p : Bool, \226\136\128 p0 : Bool, \226\136\128 p1 : Bool, (a == real_of_num(0) && p == p0 || op_lt_gt(a, real_of_num(0)) && p == p1) == (p == (a == real_of_num(0) && p0 || op_lt_gt(a, real_of_num(0)) && p1))
+  \226\136\128 p : Real, op_lt_gt(p, real_of_num(0)) \226\134\146 p > real_of_num(0) || p < real_of_num(0)
+  (a : Bool) || (b : Bool) \226\134\146 (a \226\134\146 (x : Bool)) \226\134\146 (b \226\134\146 (y : Bool)) \226\134\146 a && x || b && y
+  (p2 : Bool)
+  (p1 : Bool)
+  (p0 : Bool)
+  (p : Bool)
+  \226\136\128 a : Real, \226\136\128 p : Bool, \226\136\128 p1 : Bool, \226\136\128 p2 : Bool, op_lt_gt(a, real_of_num(0)) \226\134\146 (a > real_of_num(0) && p == p1 || a < real_of_num(0) && p == p2) == (p == (a > real_of_num(0) && p1 || a < real_of_num(0) && p2))
 pth_0g =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) p:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) c:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) p:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
 pth_0l =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) p:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) c:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) p:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
 pth_gg =  |- ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) p:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) ((#real_gt:fun(real,fun(real,bool)) c:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_gt:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) c:real) p:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
