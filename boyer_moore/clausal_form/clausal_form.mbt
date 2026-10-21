@@ -3,7 +3,7 @@
 ///|
 /// IMP_DISJ_THM
 fn step_1() -> Unit raise {
-  imp_disj_thm_c.set(@class.taut(@parser.parse_term("forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2")))
+  imp_disj_thm_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 → t2) == (!t1 || t2)")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn imp_disj_thm() -> @kernel.Thm {
 ///|
 /// RIGHT_OR_OVER_AND
 fn step_2() -> Unit raise {
-  right_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)")))
+  right_or_over_and_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t2 && t3 || t1) == ((t2 || t1) && (t3 || t1))")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn right_or_over_and() -> @kernel.Thm {
 ///|
 /// LEFT_OR_OVER_AND
 fn step_3() -> Unit raise {
-  left_or_over_and_c.set(@class.taut(@parser.parse_term("forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)")))
+  left_or_over_and_c.set(@class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t1 || t2 && t3) == ((t1 || t2) && (t1 || t3))")))
 }
 
 ///|
@@ -49,9 +49,9 @@ pub fn left_or_over_and() -> @kernel.Thm {
 /// EQ_EXPAND
 fn step_4() -> Unit raise {
   let t2 = @simp.rewrite_tac(@list.List([]))
-  let t1 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t3 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t1), t2)
-  eq_expand_c.set(@tactics.prove(@parser.parse_term("(x = y) = ((~x \\/ y) /\\ (~y \\/ x))"), t3))
+  let t1 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t3 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t1), t2)
+  eq_expand_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) == (y : Bool)) == ((!x || y) && (!y || x))"), t3))
 }
 
 ///|
@@ -66,8 +66,8 @@ pub fn eq_expand() -> @kernel.Thm {
 ///|
 /// IMP_EXPAND
 fn step_5() -> Unit raise {
-  let t4 = @bool.spec(@parser.parse_term("x:bool"), imp_disj_thm())
-  imp_expand_c.set(@bool.spec(@parser.parse_term("y:bool"), t4))
+  let t4 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), imp_disj_thm())
+  imp_expand_c.set(@bool.spec(@term_syntax.parse_term("(y : Bool)"), t4))
 }
 
 ///|
@@ -83,10 +83,10 @@ pub fn imp_expand() -> @kernel.Thm {
 /// COND_EXPAND
 fn step_6() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([]))
-  let t6 = @class.bool_cases_tac(@parser.parse_term("z:bool"))
-  let t5 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t5), t6), t7)
-  cond_expand_c.set(@tactics.prove(@parser.parse_term("(if x then y else z) = ((~x \\/ y) /\\ (x \\/ z))"), t8))
+  let t6 = @class.bool_cases_tac(@term_syntax.parse_term("(z : Bool)"))
+  let t5 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t5), t6), t7)
+  cond_expand_c.set(@tactics.prove(@term_syntax.parse_term("(if (x : Bool) { (y : Bool) } else { (z : Bool) }) == ((!x || y) && (x || z))"), t8))
 }
 
 ///|
@@ -102,7 +102,7 @@ pub fn cond_expand() -> @kernel.Thm {
 /// NOT_NOT_NORM
 fn step_7() -> Unit raise {
   let t9 = @bool.conjunct1(@class.not_clauses())
-  not_not_norm_c.set(@bool.spec(@parser.parse_term("x:bool"), t9))
+  not_not_norm_c.set(@bool.spec(@term_syntax.parse_term("(x : Bool)"), t9))
 }
 
 ///|
@@ -117,8 +117,8 @@ pub fn not_not_norm() -> @kernel.Thm {
 ///|
 /// NOT_CONJ_NORM
 fn step_8() -> Unit raise {
-  let t10 = @bool.spec(@parser.parse_term("x:bool"), @class.de_morgan_thm())
-  not_conj_norm_c.set(@bool.conjunct1(@bool.spec(@parser.parse_term("y:bool"), t10)))
+  let t10 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), @class.de_morgan_thm())
+  not_conj_norm_c.set(@bool.conjunct1(@bool.spec(@term_syntax.parse_term("(y : Bool)"), t10)))
 }
 
 ///|
@@ -133,8 +133,8 @@ pub fn not_conj_norm() -> @kernel.Thm {
 ///|
 /// NOT_DISJ_NORM
 fn step_9() -> Unit raise {
-  let t11 = @bool.spec(@parser.parse_term("x:bool"), @class.de_morgan_thm())
-  not_disj_norm_c.set(@bool.conjunct2(@bool.spec(@parser.parse_term("y:bool"), t11)))
+  let t11 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), @class.de_morgan_thm())
+  not_disj_norm_c.set(@bool.conjunct2(@bool.spec(@term_syntax.parse_term("(y : Bool)"), t11)))
 }
 
 ///|
@@ -149,9 +149,9 @@ pub fn not_disj_norm() -> @kernel.Thm {
 ///|
 /// LEFT_DIST_NORM
 fn step_10() -> Unit raise {
-  let t12 = @bool.spec(@parser.parse_term("x:bool"), left_or_over_and())
-  let t13 = @bool.spec(@parser.parse_term("y:bool"), t12)
-  left_dist_norm_c.set(@bool.spec(@parser.parse_term("z:bool"), t13))
+  let t12 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), left_or_over_and())
+  let t13 = @bool.spec(@term_syntax.parse_term("(y : Bool)"), t12)
+  left_dist_norm_c.set(@bool.spec(@term_syntax.parse_term("(z : Bool)"), t13))
 }
 
 ///|
@@ -166,9 +166,9 @@ pub fn left_dist_norm() -> @kernel.Thm {
 ///|
 /// RIGHT_DIST_NORM
 fn step_11() -> Unit raise {
-  let t14 = @bool.spec(@parser.parse_term("z:bool"), right_or_over_and())
-  let t15 = @bool.spec(@parser.parse_term("x:bool"), t14)
-  right_dist_norm_c.set(@bool.spec(@parser.parse_term("y:bool"), t15))
+  let t14 = @bool.spec(@term_syntax.parse_term("(z : Bool)"), right_or_over_and())
+  let t15 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), t14)
+  right_dist_norm_c.set(@bool.spec(@term_syntax.parse_term("(y : Bool)"), t15))
 }
 
 ///|
@@ -183,9 +183,9 @@ pub fn right_dist_norm() -> @kernel.Thm {
 ///|
 /// CONJ_ASSOC_NORM
 fn step_12() -> Unit raise {
-  let t16 = @bool.spec(@parser.parse_term("x:bool"), @theorems.conj_assoc())
-  let t17 = @bool.spec(@parser.parse_term("y:bool"), t16)
-  conj_assoc_norm_c.set(@equal.sym(@bool.spec(@parser.parse_term("z:bool"), t17)))
+  let t16 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), @theorems.conj_assoc())
+  let t17 = @bool.spec(@term_syntax.parse_term("(y : Bool)"), t16)
+  conj_assoc_norm_c.set(@equal.sym(@bool.spec(@term_syntax.parse_term("(z : Bool)"), t17)))
 }
 
 ///|
@@ -200,9 +200,9 @@ pub fn conj_assoc_norm() -> @kernel.Thm {
 ///|
 /// DISJ_ASSOC_NORM
 fn step_13() -> Unit raise {
-  let t18 = @bool.spec(@parser.parse_term("x:bool"), @theorems.disj_assoc())
-  let t19 = @bool.spec(@parser.parse_term("y:bool"), t18)
-  disj_assoc_norm_c.set(@equal.sym(@bool.spec(@parser.parse_term("z:bool"), t19)))
+  let t18 = @bool.spec(@term_syntax.parse_term("(x : Bool)"), @theorems.disj_assoc())
+  let t19 = @bool.spec(@term_syntax.parse_term("(y : Bool)"), t18)
+  disj_assoc_norm_c.set(@equal.sym(@bool.spec(@term_syntax.parse_term("(z : Bool)"), t19)))
 }
 
 ///|
