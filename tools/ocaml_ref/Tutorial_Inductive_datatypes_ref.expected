@@ -5518,117 +5518,117 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..0..solved at 3
 Tutorial/Inductive_datatypes quotations (111):
-  p:point
-  l:line
-  ((ON):point->line->bool) p l
-  F
-  (ON)
-  T
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  F
-  (ON)
-  T
-  (ON)
-  T
-  (ON)
-  T
-  (ON)
-  (forall p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7
-  (forall p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7
-  (~p <=> ~q) ==> (p <=> q)
-  (?p. P p) <=> P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                 P Point_5 \\/ P Point_6 \\/ P Point_7
-  (~p <=> ~q) ==> (p <=> q)
-  (?p. P p) <=> P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                 P Line_5 \\/ P Line_6 \\/ P Line_7
-  forall p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                          forall l'. p ON l' /\\ p' ON l' ==> l' = l
-  forall l l'. ?p. p ON l /\\ p ON l'
-  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)
-  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                  p ON l /\\ p' ON l /\\ p'' ON l
+  (p : Point)
+  (l : Line)
+  (ON : (Point, Line) -> Bool)((p : Point), (l : Line))
+  false
+  ON
+  true
+  ON
+  true
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  true
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  false
+  ON
+  false
+  ON
+  false
+  ON
+  false
+  ON
+  true
+  ON
+  true
+  ON
+  true
+  ON
+  (\226\136\128 p : Point, (P : (Point) -> Bool)(p)) == (P(Point_1) && P(Point_2) && P(Point_3) && P(Point_4) && P(Point_5) && P(Point_6) && P(Point_7))
+  (\226\136\128 p : Line, (P : (Line) -> Bool)(p)) == (P(Line_1) && P(Line_2) && P(Line_3) && P(Line_4) && P(Line_5) && P(Line_6) && P(Line_7))
+  !(p : Bool) == !(q : Bool) \226\134\146 p == q
+  (\226\136\131 p : Point, (P : (Point) -> Bool)(p)) == (P(Point_1) || P(Point_2) || P(Point_3) || P(Point_4) || P(Point_5) || P(Point_6) || P(Point_7))
+  !(p : Bool) == !(q : Bool) \226\134\146 p == q
+  (\226\136\131 p : Line, (P : (Line) -> Bool)(p)) == (P(Line_1) || P(Line_2) || P(Line_3) || P(Line_4) || P(Line_5) || P(Line_6) || P(Line_7))
+  \226\136\128 p : Point, \226\136\128 p' : Point, !(p == p') \226\134\146 (\226\136\131 l : Line, ON(p, l) && ON(p', l) && (\226\136\128 l' : Line, ON(p, l') && ON(p', l') \226\134\146 l' == l))
+  \226\136\128 l : Line, \226\136\128 l' : Line, \226\136\131 p : Point, ON(p, l) && ON(p, l')
+  \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && !(\226\136\131 l : Line, ON(p, l) && ON(p', l) && ON(p'', l))
+  \226\136\128 l : Line, \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && ON(p, l) && ON(p', l) && ON(p'', l)
 line_INDUCT =  |- (#forall:fun(fun(fun(line,bool),bool),bool) (\P:fun(line,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_1:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_2:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_3:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_4:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_5:line)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(line,bool) #Line_6:line)) (P:fun(line,bool) #Line_7:line)))))))) (#forall:fun(fun(line,bool),bool) (\x:line. (P:fun(line,bool) x:line))))))
 line_RECURSION =  |- (#forall:fun(fun('Z,bool),bool) (\f0:'Z. (#forall:fun(fun('Z,bool),bool) (\f1:'Z. (#forall:fun(fun('Z,bool),bool) (\f2:'Z. (#forall:fun(fun('Z,bool),bool) (\f3:'Z. (#forall:fun(fun('Z,bool),bool) (\f4:'Z. (#forall:fun(fun('Z,bool),bool) (\f5:'Z. (#forall:fun(fun('Z,bool),bool) (\f6:'Z. (#?:fun(fun(fun(line,'Z),bool),bool) (\fn:fun(line,'Z). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_1:line)) f0:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_2:line)) f1:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_3:line)) f2:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_4:line)) f3:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_5:line)) f4:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_6:line)) f5:'Z)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(line,'Z) #Line_7:line)) f6:'Z)))))))))))))))))))))))
 point_INDUCT =  |- (#forall:fun(fun(fun(point,bool),bool),bool) (\P:fun(point,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_1:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_2:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_3:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_4:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_5:point)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(point,bool) #Point_6:point)) (P:fun(point,bool) #Point_7:point)))))))) (#forall:fun(fun(point,bool),bool) (\x:point. (P:fun(point,bool) x:point))))))
