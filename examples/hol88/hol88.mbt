@@ -499,7 +499,7 @@ pub fn and_forall_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// PAIRED_BETA_CONV
 fn step_19() -> Unit raise {
-  let t46 = @term_syntax.parse_term("∀ P : (A) -> Bool, exists(P) → P(GABS(P))")
+  let t46 = @term_syntax.parse_term("∀ P : (A) -> Bool, op_q(P) → P(GABS(P))")
   let t47 = @simp.rewrite_conv(@list.List([@class.exists_thm(), @pair.gabs_def()]))
   let pth = @bool.eqt_elim(t47(t46))
   let pth1 = @equal.gsym(@pair.passoc_def())
