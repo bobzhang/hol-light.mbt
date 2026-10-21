@@ -516,13 +516,13 @@ fn step_3() -> Unit raise {
     }
     let v1 = @basics.genvar(@parser.parse_type("bool"))
     let v2 = @basics.genvar(@parser.parse_type("bool"))
-    let th1 = @kernel.assume_rule(@basics.mk_eq(v1, @parser.parse_term("F")))
+    let th1 = @kernel.assume_rule(@basics.mk_eq(v1, @term_syntax.parse_term("false")))
     let cnj = @bool.mk_conj(v1, v2)
     let th1_1 = @bool.disch(cnj, @kernel.eq_mp(th1, @bool.conjunct1(@kernel.assume_rule(cnj))))
-    let t144 = @bool.contr(cnj, @kernel.assume_rule(@parser.parse_term("F")))
-    let th2 = @bool.disch(@parser.parse_term("F"), t144)
+    let t144 = @bool.contr(cnj, @kernel.assume_rule(@term_syntax.parse_term("false")))
+    let th2 = @bool.disch(@term_syntax.parse_term("false"), t144)
     let t145 = @bool.imp_antisym_rule(th1_1, th2)
-    let fthm1 = @bool.disch(@basics.mk_eq(v1, @parser.parse_term("F")), t145)
+    let fthm1 = @bool.disch(@basics.mk_eq(v1, @term_syntax.parse_term("false")), t145)
     let fthm2 = @equal.conv_rule(@equal.once_depth_conv(@simp.rewr_conv(@theorems.conj_sym())), fthm1)
     let fandr : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(x146 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let th_1 = x146
@@ -538,10 +538,10 @@ fn step_3() -> Unit raise {
         @bool.mp(@kernel.inst_rule(@list.List([(@equal.lhs(@kernel.concl(th_2)), v1), (tm_1, v2)]), fthm2), th_2)
       }
     }
-    let th1_2 = @kernel.assume_rule(@basics.mk_eq(v1, @parser.parse_term("T")))
+    let th1_2 = @kernel.assume_rule(@basics.mk_eq(v1, @term_syntax.parse_term("true")))
     let th2_1 = subs_occs(@list.List([(@list.List([2L]), th1_2)]), @kernel.refl(@bool.mk_conj(v1, v2)))
     let t150 = @simp.once_rewrite_rule(@list.List([]))(th2_1)
-    let tthm1 = @bool.disch(@basics.mk_eq(v1, @parser.parse_term("T")), t150)
+    let tthm1 = @bool.disch(@basics.mk_eq(v1, @term_syntax.parse_term("true")), t150)
     let tthm2 = @equal.conv_rule(@equal.once_depth_conv(@simp.rewr_conv(@theorems.conj_sym())), tthm1)
     let tandr : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(x151 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let th_3 = x151
