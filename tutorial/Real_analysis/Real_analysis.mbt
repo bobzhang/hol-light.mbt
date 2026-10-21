@@ -3,7 +3,7 @@
 ///|
 /// cheb
 fn step_1() -> Unit raise {
-  cheb_c.set(@define.define_(@parser.parse_term("(forall x. cheb 0 x = &1) /\\\n  (forall x. cheb 1 x = x) /\\\n  (forall n x. cheb (n + 2) x = &2 * x * cheb (n + 1) x - cheb n x)")))
+  cheb_c.set(@define.define_(@term_syntax.parse_term("(∀ x : Real, (cheb : (Num, Real) -> Real)(0, x) == real_of_num(1)) && (∀ x : Real, cheb(1, x) == x) && (∀ n : Num, ∀ x : Real, cheb(n + 2, x) == real_of_num(2) * (x * cheb(n + 1, x)) - cheb(n, x))")))
 }
 
 ///|
@@ -20,12 +20,12 @@ pub fn cheb() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let t5 = @simp.asm_simp_tac(@list.List([@calc_num.arith()]))
   let t4 = @simp.asm_simp_tac(@list.List([@arith.add1(), @equal.gsym(@arith.add_assoc())]))
-  let t3 = @tactics.subgoal_then(@parser.parse_term("forall n. P n /\\ P(n + 1)"), fn(x1 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t3 = @tactics.subgoal_then(@term_syntax.parse_term("∀ n : Num, (P : (Num) -> Bool)(n) && P(n + 1)"), fn(x1 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1
     @meson.meson_tac(@list.List([th]))
   })
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t3), @nums.induct_tac), t4), t5)
-  cheb_induct_c.set(@tactics.prove(@parser.parse_term("forall P. P 0 /\\ P 1 /\\ (forall n. P n /\\ P(n + 1) ==> P(n + 2)) ==> forall n. P n"), t6))
+  cheb_induct_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Num) -> Bool, P(0) && P(1) && (∀ n : Num, P(n) && P(n + 1) → P(n + 2)) → (∀ n : Num, P(n))"), t6))
 }
 
 ///|
@@ -41,13 +41,13 @@ pub fn cheb_induct() -> @kernel.Thm {
 /// CHEB_COS
 fn step_3() -> Unit raise {
   let t12 = @tactics.conv_tac(@calc_rat.real_ring)
-  let t11 = @tactics.mp_tac(@bool.spec(@parser.parse_term("x:real"), @transc.sin_circle()))
+  let t11 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x : Real)"), @transc.sin_circle()))
   let t10 = @simp.rewrite_tac(@list.List([@transc.cos_add(), @transc.cos_double(), @transc.sin_double()]))
   let t9 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@realax.real_of_num_add()), @realax.real_mul_lid(), @real.real_add_rdistrib()]))
   let t8 = @tactics.repeat_tac(@tactics.strip_tac)
   let t7 = @simp.rewrite_tac(@list.List([cheb(), @analysis.real_mul_lzero(), @realax.real_mul_lid(), @transc.cos_0()]))
   let t13 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(cheb_induct()), t7), t8), t9), t10), t11), t12)
-  cheb_cos_c.set(@tactics.prove(@parser.parse_term("forall n x. cheb n (cos x) = cos(&n * x)"), t13))
+  cheb_cos_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ x : Real, cheb(n, cos(x)) == cos(real_of_num(n) * x)"), t13))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn cheb_cos() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([cheb_cos(), @transc.acs_cos(), @transc.cos_bounds()]))
   let t15 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@real.real_bounds_le())])), t14)
-  cheb_ripple_c.set(@tactics.prove(@parser.parse_term("forall x. abs(x) <= &1 ==> abs(cheb n x) <= &1"), t15))
+  cheb_ripple_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, abs(x) <= real_of_num(1) → abs(cheb((n : Num), x)) <= real_of_num(1)"), t15))
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn cheb_ripple() -> @kernel.Thm {
 /// NUM_ADD2_CONV
 fn step_5() -> Unit raise {
   let add_tm = @parser.parse_term("(+):num->num->num")
-  let two_tm = @parser.parse_term("2")
+  let two_tm = @term_syntax.parse_term("2")
   num_add2_conv_c.set(fn(x16 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x16
     let t17 = @num.num_of_int64(2L)
@@ -138,22 +138,22 @@ pub fn cheb_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Tutorial/Real_analysis.ml:50
 fn step_7() -> Unit raise {
-  ignore(cheb_conv(@parser.parse_term("cheb 8 x")))
+  ignore(cheb_conv(@term_syntax.parse_term("cheb(8, (x : Real))")))
 }
 
 ///|
 /// CHEB_2N1
 fn step_8() -> Unit raise {
   let t34 = @tactics.conv_tac(@calc_rat.real_ring)
-  let t30 = @int.arith_rule(@parser.parse_term("n + 3 = (n + 1) + 2"))
-  let t31 = @int.arith_rule(@parser.parse_term("n + 4 = (n + 2) + 2"))
-  let t32 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("n + 5 = (n + 3) + 2")), t31, t30, cheb()]))
+  let t30 = @int.arith_rule(@term_syntax.parse_term("(n : Num) + 3 == n + 1 + 2"))
+  let t31 = @int.arith_rule(@term_syntax.parse_term("(n : Num) + 4 == n + 2 + 2"))
+  let t32 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) + 5 == n + 3 + 2")), t31, t30, cheb()]))
   let t33 = @tactics.repeat_tac(@tactics.changed_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@arith.add_assoc()), @arith.left_add_distrib(), @calc_num.arith()])), t32)))
-  let t28 = cheb_conv(@parser.parse_term("cheb 3 x"))
-  let t29 = @simp.rewrite_tac(@list.List([@calc_num.arith(), cheb(), cheb_conv(@parser.parse_term("cheb 2 x")), t28]))
+  let t28 = cheb_conv(@term_syntax.parse_term("cheb(3, (x : Real))"))
+  let t29 = @simp.rewrite_tac(@list.List([@calc_num.arith(), cheb(), cheb_conv(@term_syntax.parse_term("cheb(2, (x : Real))")), t28]))
   let t27 = @tactics.match_mp_tac(cheb_induct())
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@theorems.swap_forall_thm()])), @tactics.gen_tac), t27), t29), t33), t34)
-  cheb_2n1_c.set(@tactics.prove(@parser.parse_term("forall n x. ((x - &1) * (cheb (2 * n + 1) x - &1) =\n          (cheb (n + 1) x - cheb n x) pow 2) /\\\n         (&2 * (x pow 2 - &1) * (cheb (2 * n + 2) x - &1) =\n          (cheb (n + 2) x - cheb n x) pow 2)"), t35))
+  cheb_2n1_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ x : Real, (x - real_of_num(1)) * (cheb(2 * n + 1, x) - real_of_num(1)) == pow(cheb(n + 1, x) - cheb(n, x), 2) && real_of_num(2) * ((pow(x, 2) - real_of_num(1)) * (cheb(2 * n + 2, x) - real_of_num(1))) == pow(cheb(n + 2, x) - cheb(n, x), 2)"), t35))
 }
 
 ///|
@@ -169,7 +169,7 @@ pub fn cheb_2n1() -> @kernel.Thm {
 /// IVT_LEMMA1
 fn step_9() -> Unit raise {
   let t36 = @meson.asm_meson_tac(@list.List([@analysis.ivt(), @analysis.ivt2(), @analysis.real_le_total()]))
-  ivt_lemma1_c.set(@tactics.prove(@parser.parse_term("forall f. (forall x. f contl x)\n       ==> forall x y. f(x) <= &0 /\\ &0 <= f(y) ==> ?x. f(x) = &0"), t36))
+  ivt_lemma1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, (∀ x : Real, contl(f, x)) → (∀ x : Real, ∀ y : Real, f(x) <= real_of_num(0) && real_of_num(0) <= f(y) → (∃ x : Real, f(x) == real_of_num(0)))"), t36))
 }
 
 ///|
@@ -187,9 +187,9 @@ fn step_10() -> Unit raise {
   let t40 = @meson.asm_meson_tac(@list.List([]))
   let t39 = @simp.simp_tac(@list.List([@analysis.real_le_sub_ladd(), @analysis.real_le_sub_radd(), @analysis.real_sub_0(), @realax.real_add_lid()]))
   let t38 = @simp.asm_simp_tac(@list.List([@analysis.cont_sub(), @analysis.cont_x()]))
-  let t37 = @tactics.mp_tac(@bool.spec(@parser.parse_term("\\x. f x - x"), ivt_lemma1()))
+  let t37 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x : Real) => (f : (Real) -> Real)(x) - x"), ivt_lemma1()))
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t37), t38), t39), t40)
-  ivt_lemma2_c.set(@tactics.prove(@parser.parse_term("forall f. (forall x. f contl x) /\\ (?x. f(x) <= x) /\\ (?y. y <= f(y)) ==> ?x. f(x) = x"), t41))
+  ivt_lemma2_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, (∀ x : Real, contl(f, x)) && (∃ x : Real, f(x) <= x) && (∃ y : Real, y <= f(y)) → (∃ x : Real, f(x) == x)"), t41))
 }
 
 ///|
@@ -218,11 +218,11 @@ fn step_11() -> Unit raise {
       @kernel.concl(x51)
     })(x52))
   })
-  let t44 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("P x \\/ P (f x) \\/ P (f(f x)) ==> ?x:real. P x")))
+  let t44 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @term_syntax.parse_term("(P : (Real) -> Bool)((x : Real)) || P((f : (Real) -> Real)(x)) || P(f(f(x))) → (∃ x : Real, P(x))")))
   let t43 = @simp.asm_rewrite_tac(@list.List([]))
   let t42 = @tactics.match_mp_tac(ivt_lemma2())
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t42), t43), @tactics.conj_tac), t44), t53), @calc_rat.real_arith_tac)
-  sarkovskii_trivial_c.set(@tactics.prove(@parser.parse_term("forall f:real->real. (forall x. f contl x) /\\ (?x. f(f(f(x))) = x) ==> ?x. f(x) = x"), t54))
+  sarkovskii_trivial_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, (∀ x : Real, contl(f, x)) && (∃ x : Real, f(f(f(x))) == x) → (∃ x : Real, f(x) == x)"), t54))
 }
 
 ///|

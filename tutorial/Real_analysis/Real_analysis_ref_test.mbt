@@ -5876,7 +5876,7 @@ test "Tutorial/Real_analysis matches Tutorial/Real_analysis.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|Tutorial/Real_analysis quotations (29):
-      #|  (forall x. cheb 0 x = &1) /\\\n  (forall x. cheb 1 x = x) /\\\n  (forall n x. cheb (n + 2) x = &2 * x * cheb (n + 1) x - cheb n x)
+      #|  (\226\136\128 x : Real, (cheb : (Num, Real) -> Real)(0, x) == real_of_num(1)) && (\226\136\128 x : Real, cheb(1, x) == x) && (\226\136\128 n : Num, \226\136\128 x : Real, cheb(n + 2, x) == real_of_num(2) * (x * cheb(n + 1, x)) - cheb(n, x))
       #|  :P
       #|  :P
       #|  :P
@@ -5886,25 +5886,25 @@ test "Tutorial/Real_analysis matches Tutorial/Real_analysis.ml" {
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  forall n. P n /\\ P(n + 1)
-      #|  forall P. P 0 /\\ P 1 /\\ (forall n. P n /\\ P(n + 1) ==> P(n + 2)) ==> forall n. P n
-      #|  x:real
-      #|  forall n x. cheb n (cos x) = cos(&n * x)
-      #|  forall x. abs(x) <= &1 ==> abs(cheb n x) <= &1
+      #|  \226\136\128 n : Num, (P : (Num) -> Bool)(n) && P(n + 1)
+      #|  \226\136\128 P : (Num) -> Bool, P(0) && P(1) && (\226\136\128 n : Num, P(n) && P(n + 1) \226\134\146 P(n + 2)) \226\134\146 (\226\136\128 n : Num, P(n))
+      #|  (x : Real)
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, cheb(n, cos(x)) == cos(real_of_num(n) * x)
+      #|  \226\136\128 x : Real, abs(x) <= real_of_num(1) \226\134\146 abs(cheb((n : Num), x)) <= real_of_num(1)
       #|  (+):num->num->num
       #|  2
-      #|  cheb 8 x
-      #|  n + 3 = (n + 1) + 2
-      #|  n + 4 = (n + 2) + 2
-      #|  n + 5 = (n + 3) + 2
-      #|  cheb 3 x
-      #|  cheb 2 x
-      #|  forall n x. ((x - &1) * (cheb (2 * n + 1) x - &1) =\n          (cheb (n + 1) x - cheb n x) pow 2) /\\\n         (&2 * (x pow 2 - &1) * (cheb (2 * n + 2) x - &1) =\n          (cheb (n + 2) x - cheb n x) pow 2)
-      #|  forall f. (forall x. f contl x)\n       ==> forall x y. f(x) <= &0 /\\ &0 <= f(y) ==> ?x. f(x) = &0
-      #|  \\x. f x - x
-      #|  forall f. (forall x. f contl x) /\\ (?x. f(x) <= x) /\\ (?y. y <= f(y)) ==> ?x. f(x) = x
-      #|  P x \\/ P (f x) \\/ P (f(f x)) ==> ?x:real. P x
-      #|  forall f:real->real. (forall x. f contl x) /\\ (?x. f(f(f(x))) = x) ==> ?x. f(x) = x
+      #|  cheb(8, (x : Real))
+      #|  (n : Num) + 3 == n + 1 + 2
+      #|  (n : Num) + 4 == n + 2 + 2
+      #|  (n : Num) + 5 == n + 3 + 2
+      #|  cheb(3, (x : Real))
+      #|  cheb(2, (x : Real))
+      #|  \226\136\128 n : Num, \226\136\128 x : Real, (x - real_of_num(1)) * (cheb(2 * n + 1, x) - real_of_num(1)) == pow(cheb(n + 1, x) - cheb(n, x), 2) && real_of_num(2) * ((pow(x, 2) - real_of_num(1)) * (cheb(2 * n + 2, x) - real_of_num(1))) == pow(cheb(n + 2, x) - cheb(n, x), 2)
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 x : Real, contl(f, x)) \226\134\146 (\226\136\128 x : Real, \226\136\128 y : Real, f(x) <= real_of_num(0) && real_of_num(0) <= f(y) \226\134\146 (\226\136\131 x : Real, f(x) == real_of_num(0)))
+      #|  (x : Real) => (f : (Real) -> Real)(x) - x
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 x : Real, contl(f, x)) && (\226\136\131 x : Real, f(x) <= x) && (\226\136\131 y : Real, y <= f(y)) \226\134\146 (\226\136\131 x : Real, f(x) == x)
+      #|  (P : (Real) -> Bool)((x : Real)) || P((f : (Real) -> Real)(x)) || P(f(f(x))) \226\134\146 (\226\136\131 x : Real, P(x))
+      #|  \226\136\128 f : (Real) -> Real, (\226\136\128 x : Real, contl(f, x)) && (\226\136\131 x : Real, f(f(f(x))) == x) \226\134\146 (\226\136\131 x : Real, f(x) == x)
       #|cheb =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#cheb:fun(num,fun(real,real)) (#NUMERAL:fun(num,num) #_0:num)) x:real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#cheb:fun(num,fun(real,real)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) x:real)) x:real)))) (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#cheb:fun(num,fun(real,real)) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:real)) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) x:real) ((#cheb:fun(num,fun(real,real)) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)))) ((#cheb:fun(num,fun(real,real)) n:num) x:real)))))))))
       #|CHEB_INDUCT =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) #_0:num))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) n:num)) (P:fun(num,bool) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))) (#forall:fun(fun(num,bool),bool) (\n:num. (P:fun(num,bool) n:num))))))
       #|CHEB_COS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#cheb:fun(num,fun(real,real)) n:num) (#cos:fun(real,real) x:real))) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) x:real)))))))
