@@ -667,7 +667,7 @@ pub fn vectorize_msum() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t94 = @simp.simp_tac(@list.List([@vectors.vsum_norm()]))
   let t95 = @tactics.then_tac(@simp.rewrite_tac(@list.List([matrix_norm(), vectorize_msum()])), t94)
-  msum_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], FINITE(s) → norm(msum(s, f)) <= sum(s, (x : A) => norm(f(x)))"), t95))
+  msum_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], FINITE(s) → matrix_norm(msum(s, f)) <= sum(s, (x : A) => matrix_norm(f(x)))"), t95))
 }
 
 ///|
@@ -683,10 +683,10 @@ pub fn msum_norm() -> @kernel.Thm {
 /// MSUM_NORM_LE
 fn step_41() -> Unit raise {
   let t98 = @simp.asm_simp_tac(@list.List([msum_norm(), @iterate.sum_le()]))
-  let t97 = @tactics.exists_tac(@term_syntax.parse_term("sum((s : (A) -> Bool), (x : A) => norm((f : (A) -> Cart[Cart[Real, M], N])(x)))"))
+  let t97 = @tactics.exists_tac(@term_syntax.parse_term("sum((s : (A) -> Bool), (x : A) => matrix_norm((f : (A) -> Cart[Cart[Real, M], N])(x)))"))
   let t96 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t96), t97), t98)
-  msum_norm_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], ∀ g : (A) -> Real, FINITE(s) && (∀ x : A, IN(x, s) → norm(f(x)) <= g(x)) → norm(msum(s, f)) <= sum(s, g)"), t99))
+  msum_norm_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], ∀ g : (A) -> Real, FINITE(s) && (∀ x : A, IN(x, s) → matrix_norm(f(x)) <= g(x)) → matrix_norm(msum(s, f)) <= sum(s, g)"), t99))
 }
 
 ///|
@@ -702,7 +702,7 @@ pub fn msum_norm_le() -> @kernel.Thm {
 /// MSUM_NORM_TRIANGLE
 fn step_42() -> Unit raise {
   let t100 = @meson.meson_tac(@list.List([msum_norm(), @realax.real_le_trans()]))
-  msum_norm_triangle_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], ∀ b : Real, FINITE(s) && sum(s, (a : A) => norm(f(a))) <= b → norm(msum(s, f)) <= b"), t100))
+  msum_norm_triangle_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], ∀ b : Real, FINITE(s) && sum(s, (a : A) => matrix_norm(f(a))) <= b → matrix_norm(msum(s, f)) <= b"), t100))
 }
 
 ///|
@@ -718,7 +718,7 @@ pub fn msum_norm_triangle() -> @kernel.Thm {
 /// MSUM_NORM_BOUND
 fn step_43() -> Unit raise {
   let t101 = @simp.simp_tac(@list.List([@equal.gsym(@iterate.sum_const()), msum_norm_le()]))
-  msum_norm_bound_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], ∀ b : Real, FINITE(s) && (∀ x : A, IN(x, s) → norm(f(x)) <= b) → norm(msum(s, f)) <= real_of_num(CARD(s)) * b"), t101))
+  msum_norm_bound_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ f : (A) -> Cart[Cart[Real, M], N], ∀ b : Real, FINITE(s) && (∀ x : A, IN(x, s) → matrix_norm(f(x)) <= b) → matrix_norm(msum(s, f)) <= real_of_num(CARD(s)) * b"), t101))
 }
 
 ///|
