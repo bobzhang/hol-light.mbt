@@ -39,7 +39,7 @@ pub fn cadical_refute_gen(x1 : (Int64) -> @kernel.Term raise, x2 : @kernel.Term)
 ///|
 /// CADICAL_REFUTE
 fn step_2() -> Unit raise {
-  let false_tm = @parser.parse_term("F")
+  let false_tm = @term_syntax.parse_term("false")
   cadical_refute_c.set(fn(x3 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x3
     let aar = @lib.array_of_list(@basics.atoms(tm).prepend(false_tm))
@@ -66,11 +66,11 @@ pub fn cadical_refute(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// CADICAL_PROVE
 fn step_3() -> Unit raise {
-  let false_tm = @parser.parse_term("F")
-  let p_tm = @parser.parse_term("p:bool")
-  let q_tm = @parser.parse_term("q:bool")
-  let pth_triv = @class.taut(@parser.parse_term("(~p <=> F) <=> p"))
-  let pth_main = @bool.undisch_all(@class.taut(@parser.parse_term("(~p <=> q) ==> (q ==> F) ==> p")))
+  let false_tm = @term_syntax.parse_term("false")
+  let p_tm = @term_syntax.parse_term("(p : Bool)")
+  let q_tm = @term_syntax.parse_term("(q : Bool)")
+  let pth_triv = @class.taut(@term_syntax.parse_term("(!(p : Bool) == false) == p"))
+  let pth_main = @bool.undisch_all(@class.taut(@term_syntax.parse_term("!(p : Bool) == (q : Bool) → (q → false) → p")))
   let presimp_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x5 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s6 = @equal.depth_conv(x5)
     fn(x7 : @kernel.Term) -> @kernel.Thm raise {
