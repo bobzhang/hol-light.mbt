@@ -79696,7 +79696,7 @@ test "Multivariate/lpspaces matches Multivariate/lpspaces.ml" {
       #|  (k : Num)
       #|  (x : Cart[Real, M])
       #|  (k : Num)
-      #|  norm((c : Cart[Real, N]) - (a : Cart[Real, N])) <= norm((b : Cart[Real, N]) - a) \226\134\146 dist((b, a)) < (ee : Real) \226\134\146 dist((c, a)) < ee
+      #|  norm((c : Cart[Real, N]) - (a : Cart[Real, N])) <= norm((b : Cart[Real, N]) - a) \226\134\146 distance((b, a)) < (ee : Real) \226\134\146 distance((c, a)) < ee
       #|  :real
       #|  :real
       #|  (n : Num)
