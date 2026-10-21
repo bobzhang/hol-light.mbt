@@ -5,7 +5,7 @@
 fn step_1() -> Unit raise {
   let t29 = @simp.asm_rewrite_tac(@list.List([@arith.mult_clauses()]))
   let t28 = @tactics.subgoal_then(
-    @parser.parse_term("forall x:A m:num n. pwr (pwr x m) n = pwr x (m * n)"),
+    @term_syntax.parse_term("∀ x : A, ∀ m : Num, ∀ n : Num, (pwr : (A, Num) -> A)(pwr(x, m), n) == pwr(x, m * n)"),
     fn(
       x26 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -152,13 +152,13 @@ fn step_1() -> Unit raise {
       }
     },
   )
-  let t12 = @calc_num.num_conv(@parser.parse_term("1"))
+  let t12 = @calc_num.num_conv(@term_syntax.parse_term("1"))
   let t13 = @simp.asm_rewrite_tac(
-    @list.List([@calc_num.num_conv(@parser.parse_term("2")), t12]),
+    @list.List([@calc_num.num_conv(@term_syntax.parse_term("2")), t12]),
   )
-  let t7 = @parser.parse_term("forall x:A y. mul x y :A = mul y x")
-  let t8 = @parser.parse_term("forall x:A y z. mul x (mul y z) = mul (mul x y) z")
-  let t9 = @parser.parse_term("forall x:A y. add x y :A = add y x")
+  let t7 = @term_syntax.parse_term("∀ x : A, ∀ y : A, (mul : (A, A) -> A)(x, y) == mul(y, x)")
+  let t8 = @term_syntax.parse_term("∀ x : A, ∀ y : A, ∀ z : A, (mul : (A, A) -> A)(x, mul(y, z)) == mul(mul(x, y), z)")
+  let t9 = @term_syntax.parse_term("∀ x : A, ∀ y : A, (add : (A, A) -> A)(x, y) == add(y, x)")
   let t10 = @tactics.then_tac(
     @tactics.map_every(
       fn(
@@ -208,7 +208,7 @@ fn step_1() -> Unit raise {
         })
       },
       @list.List([
-        @parser.parse_term("forall x:A y z. add x (add y z) = add (add x y) z"),
+        @term_syntax.parse_term("∀ x : A, ∀ y : A, ∀ z : A, (add : (A, A) -> A)(x, add(y, z)) == add(add(x, y), z)"),
         t9,
         t8,
         t7,
@@ -515,10 +515,10 @@ fn step_1() -> Unit raise {
             let zero_tm = @kernel.rand(@kernel.concl(pthm_06))
             let one_tm = @kernel.rand(@equal.lhand(@kernel.concl(pthm_14)))
             let ty = @kernel.type_of(@kernel.rand(@kernel.concl(pthm_01)))
-            let p_tm = @parser.parse_term("p:num")
-            let q_tm = @parser.parse_term("q:num")
-            let zeron_tm = @parser.parse_term("0")
-            let onen_tm = @parser.parse_term("1")
+            let p_tm = @term_syntax.parse_term("(p : Num)")
+            let q_tm = @term_syntax.parse_term("(q : Num)")
+            let zeron_tm = @term_syntax.parse_term("0")
+            let onen_tm = @term_syntax.parse_term("1")
             let a_tm = @kernel.mk_var("a", ty)
             let b_tm = @kernel.mk_var("b", ty)
             let c_tm = @kernel.mk_var("c", ty)
