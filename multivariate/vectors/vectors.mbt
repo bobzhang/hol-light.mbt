@@ -1580,7 +1580,7 @@ pub fn norm_real() -> @kernel.Thm {
 /// DIST_REAL
 fn step_101() -> Unit raise {
   let t131 = @simp.simp_tac(@list.List([dist(), norm_real(), vector_sub(), @cart.lambda_beta(), @arith.le_refl(), @cart.dimindex_1()]))
-  dist_real_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Unit], ∀ y : Cart[Real, Unit], dist((x, y)) == abs(op_dollar(x, 1) - op_dollar(y, 1))"), t131))
+  dist_real_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Unit], ∀ y : Cart[Real, Unit], distance((x, y)) == abs(op_dollar(x, 1) - op_dollar(y, 1))"), t131))
 }
 
 ///|
@@ -2280,7 +2280,7 @@ fn step_138() -> Unit raise {
   let t261 = @simp.rewrite_tac(@list.List([dot_rsub(), dot_radd(), dot_lsub(), dot_ladd()]))
   let t260 = @simp.simp_tac(@list.List([@real.sqrt_mono_lt_eq(), dot_pos_le(), @real.sqrt_lt_0()]))
   let t262 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([dist(), vector_norm(), @realax.real_gt(), @equal.gsym(norm_pos_lt())])), t260), t261), @calc_rat.real_arith_tac)
-  dist_increases_online_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ d : Cart[Real, _], !(d == vec(0)) → dist((a, b + d)) > dist((a, b)) || dist((a, b - d)) > dist((a, b))"), t262))
+  dist_increases_online_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ d : Cart[Real, _], !(d == vec(0)) → distance((a, b + d)) > distance((a, b)) || distance((a, b - d)) > distance((a, b))"), t262))
 }
 
 ///|
@@ -3464,7 +3464,7 @@ pub fn vector_eq() -> @kernel.Thm {
 ///|
 /// DIST_REFL
 fn step_154() -> Unit raise {
-  dist_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], dist((x, x)) == real_of_num(0)"), norm_arith_tac))
+  dist_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], distance((x, x)) == real_of_num(0)"), norm_arith_tac))
 }
 
 ///|
@@ -3479,7 +3479,7 @@ pub fn dist_refl() -> @kernel.Thm {
 ///|
 /// DIST_SYM
 fn step_155() -> Unit raise {
-  dist_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], dist((x, y)) == dist((y, x))"), norm_arith_tac))
+  dist_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], distance((x, y)) == distance((y, x))"), norm_arith_tac))
 }
 
 ///|
@@ -3494,7 +3494,7 @@ pub fn dist_sym() -> @kernel.Thm {
 ///|
 /// DIST_POS_LE
 fn step_156() -> Unit raise {
-  dist_pos_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], real_of_num(0) <= dist((x, y))"), norm_arith_tac))
+  dist_pos_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], real_of_num(0) <= distance((x, y))"), norm_arith_tac))
 }
 
 ///|
@@ -3509,7 +3509,7 @@ pub fn dist_pos_le() -> @kernel.Thm {
 ///|
 /// REAL_ABS_DIST
 fn step_157() -> Unit raise {
-  real_abs_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], abs(dist((x, y))) == dist((x, y))"), norm_arith_tac))
+  real_abs_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], abs(distance((x, y))) == distance((x, y))"), norm_arith_tac))
 }
 
 ///|
@@ -3524,7 +3524,7 @@ pub fn real_abs_dist() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE
 fn step_158() -> Unit raise {
-  dist_triangle_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], ∀ z : Cart[Real, N], dist((x, z)) <= dist((x, y)) + dist((y, z))"), norm_arith_tac))
+  dist_triangle_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], ∀ z : Cart[Real, N], distance((x, z)) <= distance((x, y)) + distance((y, z))"), norm_arith_tac))
 }
 
 ///|
@@ -3539,7 +3539,7 @@ pub fn dist_triangle() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_ALT
 fn step_159() -> Unit raise {
-  dist_triangle_alt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], dist((y, z)) <= dist((x, y)) + dist((x, z))"), norm_arith_tac))
+  dist_triangle_alt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], distance((y, z)) <= distance((x, y)) + distance((x, z))"), norm_arith_tac))
 }
 
 ///|
@@ -3554,7 +3554,7 @@ pub fn dist_triangle_alt() -> @kernel.Thm {
 ///|
 /// DIST_EQ_0
 fn step_160() -> Unit raise {
-  dist_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], (dist((x, y)) == real_of_num(0)) == (x == y)"), norm_arith_tac))
+  dist_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], (distance((x, y)) == real_of_num(0)) == (x == y)"), norm_arith_tac))
 }
 
 ///|
@@ -3569,7 +3569,7 @@ pub fn dist_eq_0() -> @kernel.Thm {
 ///|
 /// DIST_POS_LT
 fn step_161() -> Unit raise {
-  dist_pos_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], !(x == y) → real_of_num(0) < dist((x, y))"), norm_arith_tac))
+  dist_pos_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], !(x == y) → real_of_num(0) < distance((x, y))"), norm_arith_tac))
 }
 
 ///|
@@ -3584,7 +3584,7 @@ pub fn dist_pos_lt() -> @kernel.Thm {
 ///|
 /// DIST_NZ
 fn step_162() -> Unit raise {
-  dist_nz_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], !(x == y) == (real_of_num(0) < dist((x, y)))"), norm_arith_tac))
+  dist_nz_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], !(x == y) == (real_of_num(0) < distance((x, y)))"), norm_arith_tac))
 }
 
 ///|
@@ -3599,7 +3599,7 @@ pub fn dist_nz() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_LE
 fn step_163() -> Unit raise {
-  dist_triangle_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], ∀ e : Real, dist((x, z)) + dist((y, z)) <= e → dist((x, y)) <= e"), norm_arith_tac))
+  dist_triangle_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], ∀ e : Real, distance((x, z)) + distance((y, z)) <= e → distance((x, y)) <= e"), norm_arith_tac))
 }
 
 ///|
@@ -3614,7 +3614,7 @@ pub fn dist_triangle_le() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_LT
 fn step_164() -> Unit raise {
-  dist_triangle_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], ∀ e : Real, dist((x, z)) + dist((y, z)) < e → dist((x, y)) < e"), norm_arith_tac))
+  dist_triangle_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], ∀ e : Real, distance((x, z)) + distance((y, z)) < e → distance((x, y)) < e"), norm_arith_tac))
 }
 
 ///|
@@ -3629,7 +3629,7 @@ pub fn dist_triangle_lt() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_HALF_L
 fn step_165() -> Unit raise {
-  dist_triangle_half_l_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y : Cart[Real, _], dist((x1, y)) < (e : Real) / real_of_num(2) && dist((x2, y)) < e / real_of_num(2) → dist((x1, x2)) < e"), norm_arith_tac))
+  dist_triangle_half_l_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y : Cart[Real, _], distance((x1, y)) < (e : Real) / real_of_num(2) && distance((x2, y)) < e / real_of_num(2) → distance((x1, x2)) < e"), norm_arith_tac))
 }
 
 ///|
@@ -3644,7 +3644,7 @@ pub fn dist_triangle_half_l() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_HALF_R
 fn step_166() -> Unit raise {
-  dist_triangle_half_r_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y : Cart[Real, _], dist((y, x1)) < (e : Real) / real_of_num(2) && dist((y, x2)) < e / real_of_num(2) → dist((x1, x2)) < e"), norm_arith_tac))
+  dist_triangle_half_r_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y : Cart[Real, _], distance((y, x1)) < (e : Real) / real_of_num(2) && distance((y, x2)) < e / real_of_num(2) → distance((x1, x2)) < e"), norm_arith_tac))
 }
 
 ///|
@@ -3659,7 +3659,7 @@ pub fn dist_triangle_half_r() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_ADD
 fn step_167() -> Unit raise {
-  dist_triangle_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ x' : Cart[Real, _], ∀ y : Cart[Real, _], ∀ y' : Cart[Real, _], dist((x + y, x' + y')) <= dist((x, x')) + dist((y, y'))"), norm_arith_tac))
+  dist_triangle_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ x' : Cart[Real, _], ∀ y : Cart[Real, _], ∀ y' : Cart[Real, _], distance((x + y, x' + y')) <= distance((x, x')) + distance((y, y'))"), norm_arith_tac))
 }
 
 ///|
@@ -3675,7 +3675,7 @@ pub fn dist_triangle_add() -> @kernel.Thm {
 /// DIST_MUL
 fn step_168() -> Unit raise {
   let t677 = @simp.rewrite_tac(@list.List([dist(), @equal.gsym(vector_sub_ldistrib()), norm_mul()]))
-  dist_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ c : Real, dist((op_pct(c, x), op_pct(c, y))) == abs(c) * dist((x, y))"), t677))
+  dist_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ c : Real, distance((op_pct(c, x), op_pct(c, y))) == abs(c) * distance((x, y))"), t677))
 }
 
 ///|
@@ -3690,7 +3690,7 @@ pub fn dist_mul() -> @kernel.Thm {
 ///|
 /// DIST_TRIANGLE_ADD_HALF
 fn step_169() -> Unit raise {
-  dist_triangle_add_half_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ x' : Cart[Real, N], ∀ y : Cart[Real, N], ∀ y' : Cart[Real, N], dist((x, x')) < (e : Real) / real_of_num(2) && dist((y, y')) < e / real_of_num(2) → dist((x + y, x' + y')) < e"), norm_arith_tac))
+  dist_triangle_add_half_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ x' : Cart[Real, N], ∀ y : Cart[Real, N], ∀ y' : Cart[Real, N], distance((x, x')) < (e : Real) / real_of_num(2) && distance((y, y')) < e / real_of_num(2) → distance((x + y, x' + y')) < e"), norm_arith_tac))
 }
 
 ///|
@@ -3705,7 +3705,7 @@ pub fn dist_triangle_add_half() -> @kernel.Thm {
 ///|
 /// DIST_LE_0
 fn step_170() -> Unit raise {
-  dist_le_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], (dist((x, y)) <= real_of_num(0)) == (x == y)"), norm_arith_tac))
+  dist_le_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], (distance((x, y)) <= real_of_num(0)) == (x == y)"), norm_arith_tac))
 }
 
 ///|
@@ -3721,7 +3721,7 @@ pub fn dist_le_0() -> @kernel.Thm {
 /// DIST_EQ
 fn step_171() -> Unit raise {
   let t678 = @simp.rewrite_tac(@list.List([dist(), norm_pow_2(), norm_eq()]))
-  dist_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Cart[Real, _], ∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], (dist((w, x)) == dist((y, z))) == (pow(dist((w, x)), 2) == pow(dist((y, z)), 2))"), t678))
+  dist_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ w : Cart[Real, _], ∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], (distance((w, x)) == distance((y, z))) == (pow(distance((w, x)), 2) == pow(distance((y, z)), 2))"), t678))
 }
 
 ///|
@@ -3736,7 +3736,7 @@ pub fn dist_eq() -> @kernel.Thm {
 ///|
 /// DIST_0
 fn step_172() -> Unit raise {
-  dist_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], dist((x, vec(0))) == norm(x) && dist((vec(0), x)) == norm(x)"), norm_arith_tac))
+  dist_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], distance((x, vec(0))) == norm(x) && distance((vec(0), x)) == norm(x)"), norm_arith_tac))
 }
 
 ///|
@@ -3754,7 +3754,7 @@ fn step_173() -> Unit raise {
   let t680 = @tactics.conv_tac(@calc_rat.real_ring)
   let t679 = @simp.rewrite_tac(@list.List([dot_lsub(), dot_rsub(), dot_lmul(), dot_rmul()]))
   let t681 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([dist(), norm_eq_square(), norm_pos_le(), norm_pow_2()])), t679), t680)
-  dist_rescale_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Real, ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], norm(x) == norm(y) → dist((op_pct(a, x), y)) == dist((x, op_pct(a, y)))"), t681))
+  dist_rescale_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Real, ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], norm(x) == norm(y) → distance((op_pct(a, x), y)) == distance((x, op_pct(a, y)))"), t681))
 }
 
 ///|
@@ -3794,7 +3794,7 @@ fn step_174() -> Unit raise {
   let t683 = @simp.simp_tac(@list.List([@realax.real_min()]))
   let t682 = @list.List([@meson.meson_tac(@list.List([dist_sym(), @calc_rat.real_arith(@term_syntax.parse_term("min((a : Real), (b : Real)) == min(b, a)"))])), @tactics.all_tac])
   let t706 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@real.real_wlog_le()), @tactics.conj_tac), t682), t683), t684), t685), @tactics.disj2_tac), t686), t687), t689), t690), t691), t692), t693), t694), t696), t697), t698), t699), t700), t701), t702), t703), t704), t705), @calc_rat.asm_real_arith_tac)
-  dist_descale_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], real_of_num(0) <= a && real_of_num(0) <= b && norm(x) == norm(y) → dist((op_pct(a, x), op_pct(b, y))) >= min(a, b) * dist((x, y))"), t706))
+  dist_descale_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], real_of_num(0) <= a && real_of_num(0) <= b && norm(x) == norm(y) → distance((op_pct(a, x), op_pct(b, y))) >= min(a, b) * distance((x, y))"), t706))
 }
 
 ///|
@@ -5648,7 +5648,7 @@ fn step_263() -> Unit raise {
   let t1113 = @list.List([@simp.asm_simp_tac(@list.List([vector_choose_size()])), @tactics.all_tac])
   let t1112 = @tactics.subgoal_then(@term_syntax.parse_term("∃ c : Cart[Real, N], norm(c) == (e : Real)"), @tactics.choose_tac)
   let t1117 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1112), t1113), t1114), t1115), t1116)
-  vector_choose_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ e : Real, real_of_num(0) <= e → (∃ y : Cart[Real, N], dist((x, y)) == e)"), t1117))
+  vector_choose_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ e : Real, real_of_num(0) <= e → (∃ y : Cart[Real, N], distance((x, y)) == e)"), t1117))
 }
 
 ///|
@@ -8238,7 +8238,7 @@ fn step_391() -> Unit raise {
   let t1745 = @list.List([@simp.rewrite_tac(@list.List([@cart.finite_index_inrange()])), @tactics.all_tac])
   let t1744 = @tactics.subgoal_then(@term_syntax.parse_term("∃ k : Num, 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && (∀ A : Cart[Cart[Real, N], M], (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(A, (i : Num)) == (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(A, k))"), @tactics.choose_tac)
   let t1749 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1744), t1745), t1746), t1747), t1748)
-  matrix_add_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ i : Num, ∀ j : Num, op_dollar(op_dollar(A + B, i), j) == op_dollar(op_dollar(A, i), j) + op_dollar(op_dollar(B, i), j)"), t1749))
+  matrix_add_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ i : Num, ∀ j : Num, op_dollar(op_dollar(matrix_add(A, B), i), j) == op_dollar(op_dollar(A, i), j) + op_dollar(op_dollar(B, i), j)"), t1749))
 }
 
 ///|
@@ -8259,7 +8259,7 @@ fn step_392() -> Unit raise {
   let t1751 = @list.List([@simp.rewrite_tac(@list.List([@cart.finite_index_inrange()])), @tactics.all_tac])
   let t1750 = @tactics.subgoal_then(@term_syntax.parse_term("∃ k : Num, 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && (∀ A : Cart[Cart[Real, N], M], (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(A, (i : Num)) == (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(A, k))"), @tactics.choose_tac)
   let t1755 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1750), t1751), t1752), t1753), t1754)
-  matrix_sub_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ i : Num, ∀ j : Num, op_dollar(op_dollar(A - B, i), j) == op_dollar(op_dollar(A, i), j) - op_dollar(op_dollar(B, i), j)"), t1755))
+  matrix_sub_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ i : Num, ∀ j : Num, op_dollar(op_dollar(matrix_sub(A, B), i), j) == op_dollar(op_dollar(A, i), j) - op_dollar(op_dollar(B, i), j)"), t1755))
 }
 
 ///|
@@ -8280,7 +8280,7 @@ fn step_393() -> Unit raise {
   let t1757 = @list.List([@simp.rewrite_tac(@list.List([@cart.finite_index_inrange()])), @tactics.all_tac])
   let t1756 = @tactics.subgoal_then(@term_syntax.parse_term("∃ k : Num, 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && (∀ A : Cart[Cart[Real, N], M], (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(A, (i : Num)) == (op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(A, k))"), @tactics.choose_tac)
   let t1761 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1756), t1757), t1758), t1759), t1760)
-  matrix_neg_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ i : Num, ∀ j : Num, op_dollar(op_dollar(-A, i), j) == -op_dollar(op_dollar(A, i), j)"), t1761))
+  matrix_neg_component_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ i : Num, ∀ j : Num, op_dollar(op_dollar(matrix_neg(A), i), j) == -op_dollar(op_dollar(A, i), j)"), t1761))
 }
 
 ///|
@@ -8354,7 +8354,7 @@ pub fn mat_0_component() -> @kernel.Thm {
 /// MATRIX_ADD_ROW
 fn step_397() -> Unit raise {
   let t1775 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), vector_add_component(), matrix_add_component()]))
-  matrix_add_row_c.set(@tactics.prove(@term_syntax.parse_term("∀ X : Cart[Cart[Real, M], N], ∀ Y : Cart[Cart[Real, M], N], ∀ i : Num, op_dollar(X + Y, i) == op_dollar(X, i) + op_dollar(Y, i)"), t1775))
+  matrix_add_row_c.set(@tactics.prove(@term_syntax.parse_term("∀ X : Cart[Cart[Real, M], N], ∀ Y : Cart[Cart[Real, M], N], ∀ i : Num, op_dollar(matrix_add(X, Y), i) == op_dollar(X, i) + op_dollar(Y, i)"), t1775))
 }
 
 ///|
@@ -8370,7 +8370,7 @@ pub fn matrix_add_row() -> @kernel.Thm {
 /// MATRIX_SUB_ROW
 fn step_398() -> Unit raise {
   let t1776 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), vector_sub_component(), matrix_sub_component()]))
-  matrix_sub_row_c.set(@tactics.prove(@term_syntax.parse_term("∀ X : Cart[Cart[Real, M], N], ∀ Y : Cart[Cart[Real, M], N], ∀ i : Num, op_dollar(X - Y, i) == op_dollar(X, i) - op_dollar(Y, i)"), t1776))
+  matrix_sub_row_c.set(@tactics.prove(@term_syntax.parse_term("∀ X : Cart[Cart[Real, M], N], ∀ Y : Cart[Cart[Real, M], N], ∀ i : Num, op_dollar(matrix_sub(X, Y), i) == op_dollar(X, i) - op_dollar(Y, i)"), t1776))
 }
 
 ///|
@@ -8386,7 +8386,7 @@ pub fn matrix_sub_row() -> @kernel.Thm {
 /// MATRIX_NEG_ROW
 fn step_399() -> Unit raise {
   let t1777 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), vector_neg_component(), matrix_neg_component()]))
-  matrix_neg_row_c.set(@tactics.prove(@term_syntax.parse_term("∀ X : Cart[Cart[Real, M], N], ∀ i : Num, op_dollar(-X, i) == -op_dollar(X, i)"), t1777))
+  matrix_neg_row_c.set(@tactics.prove(@term_syntax.parse_term("∀ X : Cart[Cart[Real, M], N], ∀ i : Num, op_dollar(matrix_neg(X), i) == -op_dollar(X, i)"), t1777))
 }
 
 ///|
@@ -8605,7 +8605,7 @@ pub fn matrix_cmul_lid() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_SYM
 fn step_411() -> Unit raise {
-  matrix_add_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], A + B == B + A"), matrix_arith_tac))
+  matrix_add_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], matrix_add(A, B) == matrix_add(B, A)"), matrix_arith_tac))
 }
 
 ///|
@@ -8620,7 +8620,7 @@ pub fn matrix_add_sym() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_ASSOC
 fn step_412() -> Unit raise {
-  matrix_add_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ C : Cart[Cart[Real, N], M], A + (B + C) == A + B + C"), matrix_arith_tac))
+  matrix_add_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ C : Cart[Cart[Real, N], M], matrix_add(A, matrix_add(B, C)) == matrix_add(matrix_add(A, B), C)"), matrix_arith_tac))
 }
 
 ///|
@@ -8635,7 +8635,7 @@ pub fn matrix_add_assoc() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_LID
 fn step_413() -> Unit raise {
-  matrix_add_lid_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], mat(0) + A == A"), matrix_arith_tac))
+  matrix_add_lid_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], matrix_add(mat(0), A) == A"), matrix_arith_tac))
 }
 
 ///|
@@ -8650,7 +8650,7 @@ pub fn matrix_add_lid() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_RID
 fn step_414() -> Unit raise {
-  matrix_add_rid_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], A + mat(0) == A"), matrix_arith_tac))
+  matrix_add_rid_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], matrix_add(A, mat(0)) == A"), matrix_arith_tac))
 }
 
 ///|
@@ -8665,7 +8665,7 @@ pub fn matrix_add_rid() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_LNEG
 fn step_415() -> Unit raise {
-  matrix_add_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], -A + A == mat(0)"), matrix_arith_tac))
+  matrix_add_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], matrix_add(matrix_neg(A), A) == mat(0)"), matrix_arith_tac))
 }
 
 ///|
@@ -8680,7 +8680,7 @@ pub fn matrix_add_lneg() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_RNEG
 fn step_416() -> Unit raise {
-  matrix_add_rneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], A + -A == mat(0)"), matrix_arith_tac))
+  matrix_add_rneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], matrix_add(A, matrix_neg(A)) == mat(0)"), matrix_arith_tac))
 }
 
 ///|
@@ -8695,7 +8695,7 @@ pub fn matrix_add_rneg() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB
 fn step_417() -> Unit raise {
-  matrix_sub_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], A - B == A + -B"), matrix_arith_tac))
+  matrix_sub_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], matrix_sub(A, B) == matrix_add(A, matrix_neg(B))"), matrix_arith_tac))
 }
 
 ///|
@@ -8710,7 +8710,7 @@ pub fn matrix_sub_v1() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB_REFL
 fn step_418() -> Unit raise {
-  matrix_sub_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], A - A == mat(0)"), matrix_arith_tac))
+  matrix_sub_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, _], _], matrix_sub(A, A) == mat(0)"), matrix_arith_tac))
 }
 
 ///|
@@ -8725,7 +8725,7 @@ pub fn matrix_sub_refl() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB_EQ
 fn step_419() -> Unit raise {
-  matrix_sub_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], (A - B == mat(0)) == (A == B)"), matrix_arith_tac))
+  matrix_sub_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], (matrix_sub(A, B) == mat(0)) == (A == B)"), matrix_arith_tac))
 }
 
 ///|
@@ -8740,7 +8740,7 @@ pub fn matrix_sub_eq() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB_ADD
 fn step_420() -> Unit raise {
-  matrix_sub_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], A - B + B == A"), matrix_arith_tac))
+  matrix_sub_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], matrix_add(matrix_sub(A, B), B) == A"), matrix_arith_tac))
 }
 
 ///|
@@ -8755,7 +8755,7 @@ pub fn matrix_sub_add() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB_ADD2
 fn step_421() -> Unit raise {
-  matrix_sub_add2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], A + (B - A) == B"), matrix_arith_tac))
+  matrix_sub_add2_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], matrix_add(A, matrix_sub(B, A)) == B"), matrix_arith_tac))
 }
 
 ///|
@@ -8774,7 +8774,7 @@ fn step_422() -> Unit raise {
   let t1806 = @tactics.match_mp_tac(@iterate.sum_eq_numseg())
   let t1805 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1808 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([matrix_mul(), matrix_add(), @cart.cart_eq(), @cart.lambda_beta(), @equal.gsym(@iterate.sum_add_numseg())])), t1805), t1806), t1807)
-  matrix_add_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], ∀ C : Cart[Cart[Real, P], N], matrix_mul(A, B + C) == matrix_mul(A, B) + matrix_mul(A, C)"), t1808))
+  matrix_add_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], ∀ C : Cart[Cart[Real, P], N], matrix_mul(A, matrix_add(B, C)) == matrix_add(matrix_mul(A, B), matrix_mul(A, C))"), t1808))
 }
 
 ///|
@@ -8903,7 +8903,7 @@ pub fn matrix_mul_rzero() -> @kernel.Thm {
 fn step_428() -> Unit raise {
   let t1839 = @simp.rewrite_tac(@list.List([@real.real_add_rdistrib(), @iterate.sum_add_numseg()]))
   let t1840 = @tactics.then_tac(@simp.simp_tac(@list.List([matrix_mul(), matrix_add(), @cart.cart_eq(), @cart.lambda_beta()])), t1839)
-  matrix_add_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ C : Cart[Cart[Real, P], N], matrix_mul(A + B, C) == matrix_mul(A, C) + matrix_mul(B, C)"), t1840))
+  matrix_add_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ C : Cart[Cart[Real, P], N], matrix_mul(matrix_add(A, B), C) == matrix_add(matrix_mul(A, C), matrix_mul(B, C))"), t1840))
 }
 
 ///|
@@ -8920,7 +8920,7 @@ pub fn matrix_add_rdistrib() -> @kernel.Thm {
 fn step_429() -> Unit raise {
   let t1841 = @simp.rewrite_tac(@list.List([@real.real_sub_ldistrib(), @iterate.sum_sub_numseg()]))
   let t1842 = @tactics.then_tac(@simp.simp_tac(@list.List([matrix_mul(), matrix_sub(), @cart.cart_eq(), @cart.lambda_beta()])), t1841)
-  matrix_sub_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], ∀ C : Cart[Cart[Real, P], N], matrix_mul(A, B - C) == matrix_mul(A, B) - matrix_mul(A, C)"), t1842))
+  matrix_sub_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], ∀ C : Cart[Cart[Real, P], N], matrix_mul(A, matrix_sub(B, C)) == matrix_sub(matrix_mul(A, B), matrix_mul(A, C))"), t1842))
 }
 
 ///|
@@ -8937,7 +8937,7 @@ pub fn matrix_sub_ldistrib() -> @kernel.Thm {
 fn step_430() -> Unit raise {
   let t1843 = @simp.rewrite_tac(@list.List([@real.real_sub_rdistrib(), @iterate.sum_sub_numseg()]))
   let t1844 = @tactics.then_tac(@simp.simp_tac(@list.List([matrix_mul(), matrix_sub(), @cart.cart_eq(), @cart.lambda_beta()])), t1843)
-  matrix_sub_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ C : Cart[Cart[Real, P], N], matrix_mul(A - B, C) == matrix_mul(A, C) - matrix_mul(B, C)"), t1844))
+  matrix_sub_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ C : Cart[Cart[Real, P], N], matrix_mul(matrix_sub(A, B), C) == matrix_sub(matrix_mul(A, C), matrix_mul(B, C))"), t1844))
 }
 
 ///|
@@ -8987,7 +8987,7 @@ pub fn matrix_mul_rmul() -> @kernel.Thm {
 ///|
 /// MATRIX_CMUL_ADD_LDISTRIB
 fn step_433() -> Unit raise {
-  matrix_cmul_add_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ c : Real, op_pct_pct(c, A + B) == op_pct_pct(c, A) + op_pct_pct(c, B)"), matrix_arith_tac))
+  matrix_cmul_add_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ c : Real, op_pct_pct(c, matrix_add(A, B)) == matrix_add(op_pct_pct(c, A), op_pct_pct(c, B))"), matrix_arith_tac))
 }
 
 ///|
@@ -9002,7 +9002,7 @@ pub fn matrix_cmul_add_ldistrib() -> @kernel.Thm {
 ///|
 /// MATRIX_CMUL_SUB_LDISTRIB
 fn step_434() -> Unit raise {
-  matrix_cmul_sub_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ c : Real, op_pct_pct(c, A - B) == op_pct_pct(c, A) - op_pct_pct(c, B)"), matrix_arith_tac))
+  matrix_cmul_sub_ldistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], ∀ c : Real, op_pct_pct(c, matrix_sub(A, B)) == matrix_sub(op_pct_pct(c, A), op_pct_pct(c, B))"), matrix_arith_tac))
 }
 
 ///|
@@ -9017,7 +9017,7 @@ pub fn matrix_cmul_sub_ldistrib() -> @kernel.Thm {
 ///|
 /// MATRIX_CMUL_ADD_RDISTRIB
 fn step_435() -> Unit raise {
-  matrix_cmul_add_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ b : Real, ∀ c : Real, op_pct_pct(b + c, A) == op_pct_pct(b, A) + op_pct_pct(c, A)"), matrix_arith_tac))
+  matrix_cmul_add_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ b : Real, ∀ c : Real, op_pct_pct(b + c, A) == matrix_add(op_pct_pct(b, A), op_pct_pct(c, A))"), matrix_arith_tac))
 }
 
 ///|
@@ -9032,7 +9032,7 @@ pub fn matrix_cmul_add_rdistrib() -> @kernel.Thm {
 ///|
 /// MATRIX_CMUL_SUB_RDISTRIB
 fn step_436() -> Unit raise {
-  matrix_cmul_sub_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ b : Real, ∀ c : Real, op_pct_pct(b - c, A) == op_pct_pct(b, A) - op_pct_pct(c, A)"), matrix_arith_tac))
+  matrix_cmul_sub_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ b : Real, ∀ c : Real, op_pct_pct(b - c, A) == matrix_sub(op_pct_pct(b, A), op_pct_pct(c, A))"), matrix_arith_tac))
 }
 
 ///|
@@ -9079,7 +9079,7 @@ pub fn matrix_cmul_lzero() -> @kernel.Thm {
 ///|
 /// MATRIX_NEG_MINUS1
 fn step_439() -> Unit raise {
-  matrix_neg_minus1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], -A == op_pct_pct(-real_of_num(1), A)"), matrix_arith_tac))
+  matrix_neg_minus1_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], matrix_neg(A) == op_pct_pct(-real_of_num(1), A)"), matrix_arith_tac))
 }
 
 ///|
@@ -9094,7 +9094,7 @@ pub fn matrix_neg_minus1() -> @kernel.Thm {
 ///|
 /// MATRIX_ADD_AC
 fn step_440() -> Unit raise {
-  matrix_add_ac_c.set(@tactics.prove(@term_syntax.parse_term("(A : Cart[Cart[Real, N], M]) + (B : Cart[Cart[Real, N], M]) == B + A && A + B + (C : Cart[Cart[Real, N], M]) == A + (B + C) && A + (B + C) == B + (A + C)"), matrix_arith_tac))
+  matrix_add_ac_c.set(@tactics.prove(@term_syntax.parse_term("matrix_add((A : Cart[Cart[Real, N], M]), (B : Cart[Cart[Real, N], M])) == matrix_add(B, A) && matrix_add(matrix_add(A, B), (C : Cart[Cart[Real, N], M])) == matrix_add(A, matrix_add(B, C)) && matrix_add(A, matrix_add(B, C)) == matrix_add(B, matrix_add(A, C))"), matrix_arith_tac))
 }
 
 ///|
@@ -9109,7 +9109,7 @@ pub fn matrix_add_ac() -> @kernel.Thm {
 ///|
 /// MATRIX_NEG_ADD
 fn step_441() -> Unit raise {
-  matrix_neg_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], -(A + B) == -A + -B"), matrix_arith_tac))
+  matrix_neg_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], matrix_neg(matrix_add(A, B)) == matrix_add(matrix_neg(A), matrix_neg(B))"), matrix_arith_tac))
 }
 
 ///|
@@ -9124,7 +9124,7 @@ pub fn matrix_neg_add() -> @kernel.Thm {
 ///|
 /// MATRIX_NEG_SUB
 fn step_442() -> Unit raise {
-  matrix_neg_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], -(A - B) == B - A"), matrix_arith_tac))
+  matrix_neg_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], matrix_neg(matrix_sub(A, B)) == matrix_sub(B, A)"), matrix_arith_tac))
 }
 
 ///|
@@ -9139,7 +9139,7 @@ pub fn matrix_neg_sub() -> @kernel.Thm {
 ///|
 /// MATRIX_NEG_0
 fn step_443() -> Unit raise {
-  matrix_neg_0_c.set(@tactics.prove(@term_syntax.parse_term("-(mat : (Num) -> Cart[Cart[Real, _], _])(0) == (mat : (Num) -> Cart[Cart[Real, _], _])(0)"), matrix_arith_tac))
+  matrix_neg_0_c.set(@tactics.prove(@term_syntax.parse_term("(matrix_neg : (Cart[Cart[Real, _], _]) -> Cart[Cart[Real, _], _])((mat : (Num) -> Cart[Cart[Real, _], _])(0)) == (mat : (Num) -> Cart[Cart[Real, _], _])(0)"), matrix_arith_tac))
 }
 
 ///|
@@ -9154,7 +9154,7 @@ pub fn matrix_neg_0() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB_RZERO
 fn step_444() -> Unit raise {
-  matrix_sub_rzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], A - mat(0) == A"), matrix_arith_tac))
+  matrix_sub_rzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], matrix_sub(A, mat(0)) == A"), matrix_arith_tac))
 }
 
 ///|
@@ -9169,7 +9169,7 @@ pub fn matrix_sub_rzero() -> @kernel.Thm {
 ///|
 /// MATRIX_SUB_LZERO
 fn step_445() -> Unit raise {
-  matrix_sub_lzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], mat(0) - A == -A"), matrix_arith_tac))
+  matrix_sub_lzero_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], matrix_sub(mat(0), A) == matrix_neg(A)"), matrix_arith_tac))
 }
 
 ///|
@@ -9184,7 +9184,7 @@ pub fn matrix_sub_lzero() -> @kernel.Thm {
 ///|
 /// MATRIX_NEG_EQ_0
 fn step_446() -> Unit raise {
-  matrix_neg_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], (-A == mat(0)) == (A == mat(0))"), matrix_arith_tac))
+  matrix_neg_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], (matrix_neg(A) == mat(0)) == (A == mat(0))"), matrix_arith_tac))
 }
 
 ///|
@@ -9323,7 +9323,7 @@ pub fn matrix_vector_mul_sub_ldistrib() -> @kernel.Thm {
 /// MATRIX_VECTOR_MUL_ADD_RDISTRIB
 fn step_453() -> Unit raise {
   let t1878 = @simp.simp_tac(@list.List([@cart.cart_eq(), matrix_vector_mul(), matrix_add(), @cart.lambda_beta(), vector_add_component(), @real.real_add_rdistrib(), @iterate.sum_add_numseg()]))
-  matrix_vector_mul_add_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ B : Cart[Cart[Real, M], N], ∀ x : Cart[Real, M], matrix_vector_mul(A + B, x) == matrix_vector_mul(A, x) + matrix_vector_mul(B, x)"), t1878))
+  matrix_vector_mul_add_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ B : Cart[Cart[Real, M], N], ∀ x : Cart[Real, M], matrix_vector_mul(matrix_add(A, B), x) == matrix_vector_mul(A, x) + matrix_vector_mul(B, x)"), t1878))
 }
 
 ///|
@@ -9339,7 +9339,7 @@ pub fn matrix_vector_mul_add_rdistrib() -> @kernel.Thm {
 /// MATRIX_VECTOR_MUL_SUB_RDISTRIB
 fn step_454() -> Unit raise {
   let t1879 = @simp.simp_tac(@list.List([@cart.cart_eq(), matrix_vector_mul(), matrix_sub(), @cart.lambda_beta(), vector_sub_component(), @real.real_sub_rdistrib(), @iterate.sum_sub_numseg()]))
-  matrix_vector_mul_sub_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ B : Cart[Cart[Real, M], N], ∀ x : Cart[Real, M], matrix_vector_mul(A - B, x) == matrix_vector_mul(A, x) - matrix_vector_mul(B, x)"), t1879))
+  matrix_vector_mul_sub_rdistrib_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ B : Cart[Cart[Real, M], N], ∀ x : Cart[Real, M], matrix_vector_mul(matrix_sub(A, B), x) == matrix_vector_mul(A, x) - matrix_vector_mul(B, x)"), t1879))
 }
 
 ///|
@@ -9373,7 +9373,7 @@ pub fn matrix_vector_mul_rmul() -> @kernel.Thm {
 /// MATRIX_MUL_LNEG
 fn step_456() -> Unit raise {
   let t1883 = @simp.rewrite_tac(@list.List([matrix_neg_minus1(), matrix_mul_lmul()]))
-  matrix_mul_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], matrix_mul(-A, B) == -matrix_mul(A, B)"), t1883))
+  matrix_mul_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], matrix_mul(matrix_neg(A), B) == matrix_neg(matrix_mul(A, B))"), t1883))
 }
 
 ///|
@@ -9389,7 +9389,7 @@ pub fn matrix_mul_lneg() -> @kernel.Thm {
 /// MATRIX_MUL_RNEG
 fn step_457() -> Unit raise {
   let t1884 = @simp.rewrite_tac(@list.List([matrix_neg_minus1(), matrix_mul_rmul()]))
-  matrix_mul_rneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], matrix_mul(A, -B) == -matrix_mul(A, B)"), t1884))
+  matrix_mul_rneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, P], N], matrix_mul(A, matrix_neg(B)) == matrix_neg(matrix_mul(A, B))"), t1884))
 }
 
 ///|
@@ -9405,7 +9405,7 @@ pub fn matrix_mul_rneg() -> @kernel.Thm {
 /// MATRIX_NEG_NEG
 fn step_458() -> Unit raise {
   let t1885 = @simp.simp_tac(@list.List([@cart.cart_eq(), matrix_neg_component(), @calc_int.real_neg_neg()]))
-  matrix_neg_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], --A == A"), t1885))
+  matrix_neg_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], matrix_neg(matrix_neg(A)) == A"), t1885))
 }
 
 ///|
@@ -9595,7 +9595,7 @@ pub fn symmetric_matrix_cmul() -> @kernel.Thm {
 /// TRANSP_MATRIX_ADD
 fn step_468() -> Unit raise {
   let t1921 = @simp.simp_tac(@list.List([@cart.cart_eq(), transp(), @cart.lambda_beta(), matrix_add()]))
-  transp_matrix_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], transp(A + B) == transp(A) + transp(B)"), t1921))
+  transp_matrix_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], transp(matrix_add(A, B)) == matrix_add(transp(A), transp(B))"), t1921))
 }
 
 ///|
@@ -9611,7 +9611,7 @@ pub fn transp_matrix_add() -> @kernel.Thm {
 /// SYMMETRIC_MATRIX_ADD
 fn step_469() -> Unit raise {
   let t1922 = @simp.simp_tac(@list.List([symmetric_matrix(), transp_matrix_add()]))
-  symmetric_matrix_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], N], ∀ B : Cart[Cart[Real, N], N], symmetric_matrix(A) && symmetric_matrix(B) → symmetric_matrix(A + B)"), t1922))
+  symmetric_matrix_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], N], ∀ B : Cart[Cart[Real, N], N], symmetric_matrix(A) && symmetric_matrix(B) → symmetric_matrix(matrix_add(A, B))"), t1922))
 }
 
 ///|
@@ -9627,7 +9627,7 @@ pub fn symmetric_matrix_add() -> @kernel.Thm {
 /// TRANSP_MATRIX_SUB
 fn step_470() -> Unit raise {
   let t1923 = @simp.simp_tac(@list.List([@cart.cart_eq(), transp(), @cart.lambda_beta(), matrix_sub()]))
-  transp_matrix_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], transp(A - B) == transp(A) - transp(B)"), t1923))
+  transp_matrix_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ B : Cart[Cart[Real, N], M], transp(matrix_sub(A, B)) == matrix_sub(transp(A), transp(B))"), t1923))
 }
 
 ///|
@@ -9643,7 +9643,7 @@ pub fn transp_matrix_sub() -> @kernel.Thm {
 /// SYMMETRIC_MATRIX_SUB
 fn step_471() -> Unit raise {
   let t1924 = @simp.simp_tac(@list.List([symmetric_matrix(), transp_matrix_sub()]))
-  symmetric_matrix_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], N], ∀ B : Cart[Cart[Real, N], N], symmetric_matrix(A) && symmetric_matrix(B) → symmetric_matrix(A - B)"), t1924))
+  symmetric_matrix_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], N], ∀ B : Cart[Cart[Real, N], N], symmetric_matrix(A) && symmetric_matrix(B) → symmetric_matrix(matrix_sub(A, B))"), t1924))
 }
 
 ///|
@@ -9659,7 +9659,7 @@ pub fn symmetric_matrix_sub() -> @kernel.Thm {
 /// TRANSP_MATRIX_NEG
 fn step_472() -> Unit raise {
   let t1925 = @simp.simp_tac(@list.List([@cart.cart_eq(), transp(), @cart.lambda_beta(), matrix_neg()]))
-  transp_matrix_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], transp(-A) == -transp(A)"), t1925))
+  transp_matrix_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], transp(matrix_neg(A)) == matrix_neg(transp(A))"), t1925))
 }
 
 ///|
@@ -9676,7 +9676,7 @@ pub fn transp_matrix_neg() -> @kernel.Thm {
 fn step_473() -> Unit raise {
   let t1926 = @tactics.conv_tac(matrix_arith)
   let t1927 = @tactics.then_tac(@simp.rewrite_tac(@list.List([symmetric_matrix(), transp_matrix_neg()])), t1926)
-  symmetric_matrix_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], N], symmetric_matrix(-A) == symmetric_matrix(A)"), t1927))
+  symmetric_matrix_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], N], symmetric_matrix(matrix_neg(A)) == symmetric_matrix(A)"), t1927))
 }
 
 ///|
@@ -10099,7 +10099,7 @@ pub fn matrix_vector_lmul() -> @kernel.Thm {
 fn step_497() -> Unit raise {
   let t1985 = @tactics.conv_tac(vector_arith)
   let t1986 = @tactics.then_tac(@simp.rewrite_tac(@list.List([matrix_neg_minus1(), matrix_vector_lmul()])), t1985)
-  matrix_vector_mul_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ x : Cart[Real, M], matrix_vector_mul(-A, x) == -matrix_vector_mul(A, x)"), t1986))
+  matrix_vector_mul_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ x : Cart[Real, M], matrix_vector_mul(matrix_neg(A), x) == -matrix_vector_mul(A, x)"), t1986))
 }
 
 ///|
@@ -10335,7 +10335,7 @@ pub fn invertible_i() -> @kernel.Thm {
 fn step_507() -> Unit raise {
   let t2052 = @meson.meson_tac(@list.List([matrix_mul_lneg(), matrix_mul_rneg(), matrix_neg_neg()]))
   let t2053 = @tactics.then_tac(@simp.rewrite_tac(@list.List([invertible()])), t2052)
-  invertible_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], invertible(-A) == invertible(A)"), t2053))
+  invertible_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], invertible(matrix_neg(A)) == invertible(A)"), t2053))
 }
 
 ///|
@@ -10744,7 +10744,7 @@ pub fn matrix_cmul_v1() -> @kernel.Thm {
 /// MATRIX_NEG
 fn step_527() -> Unit raise {
   let t2148 = @simp.simp_tac(@list.List([@equal.gsym(matrix_neg_minus1()), vector_neg_minus1(), matrix_cmul_v1()]))
-  matrix_neg_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], linear(f) → matrix((x : Cart[Real, M]) => -f(x)) == -matrix(f)"), t2148))
+  matrix_neg_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], linear(f) → matrix((x : Cart[Real, M]) => -f(x)) == matrix_neg(matrix(f))"), t2148))
 }
 
 ///|
@@ -10761,7 +10761,7 @@ pub fn matrix_neg_v1() -> @kernel.Thm {
 fn step_528() -> Unit raise {
   let t2149 = @simp.simp_tac(@list.List([matrix_works(), linear_compose_add()]))
   let t2150 = @tactics.then_tac(@simp.rewrite_tac(@list.List([matrix_eq(), matrix_vector_mul_add_rdistrib()])), t2149)
-  matrix_add_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ g : (Cart[Real, M]) -> Cart[Real, N], linear(f) && linear(g) → matrix((x : Cart[Real, M]) => f(x) + g(x)) == matrix(f) + matrix(g)"), t2150))
+  matrix_add_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ g : (Cart[Real, M]) -> Cart[Real, N], linear(f) && linear(g) → matrix((x : Cart[Real, M]) => f(x) + g(x)) == matrix_add(matrix(f), matrix(g))"), t2150))
 }
 
 ///|
@@ -12435,7 +12435,7 @@ pub fn norm_1() -> @kernel.Thm {
 /// DIST_1
 fn step_608() -> Unit raise {
   let t2548 = @simp.rewrite_tac(@list.List([dist(), drop_sub(), norm_1()]))
-  dist_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Unit], ∀ y : Cart[Real, Unit], dist((x, y)) == abs(drop(x) - drop(y))"), t2548))
+  dist_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Unit], ∀ y : Cart[Real, Unit], distance((x, y)) == abs(drop(x) - drop(y))"), t2548))
 }
 
 ///|
@@ -12483,7 +12483,7 @@ pub fn norm_lift() -> @kernel.Thm {
 /// DIST_LIFT
 fn step_611() -> Unit raise {
   let t2551 = @simp.rewrite_tac(@list.List([dist_real(), lift_component()]))
-  dist_lift_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, dist((lift(x), lift(y))) == abs(x - y)"), t2551))
+  dist_lift_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, distance((lift(x), lift(y))) == abs(x - y)"), t2551))
 }
 
 ///|
@@ -12935,7 +12935,7 @@ pub fn indicator_complement() -> @kernel.Thm {
 fn step_635() -> Unit raise {
   let t2629 = @simp.rewrite_tac(@list.List([matrix_add_component()]))
   let t2630 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @misc.vectorize(), @cart.lambda_beta(), vector_add_component()])), t2629)
-  vectorize_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ m1 : Cart[Cart[Real, N], M], ∀ m2 : Cart[Cart[Real, N], M], vectorize(m1 + m2) == vectorize(m1) + vectorize(m2)"), t2630))
+  vectorize_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ m1 : Cart[Cart[Real, N], M], ∀ m2 : Cart[Cart[Real, N], M], vectorize(matrix_add(m1, m2)) == vectorize(m1) + vectorize(m2)"), t2630))
 }
 
 ///|
@@ -12969,7 +12969,7 @@ pub fn vectorize_cmul() -> @kernel.Thm {
 fn step_637() -> Unit raise {
   let t2633 = @simp.rewrite_tac(@list.List([matrix_sub_component()]))
   let t2634 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @misc.vectorize(), @cart.lambda_beta(), vector_sub_component()])), t2633)
-  vectorize_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ m1 : Cart[Cart[Real, N], M], ∀ m2 : Cart[Cart[Real, N], M], vectorize(m1 - m2) == vectorize(m1) - vectorize(m2)"), t2634))
+  vectorize_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ m1 : Cart[Cart[Real, N], M], ∀ m2 : Cart[Cart[Real, N], M], vectorize(matrix_sub(m1, m2)) == vectorize(m1) - vectorize(m2)"), t2634))
 }
 
 ///|
@@ -13034,7 +13034,7 @@ pub fn vectorize_eq_0() -> @kernel.Thm {
 /// MATRIFY_ADD
 fn step_641() -> Unit raise {
   let t2639 = @simp.simp_tac(@list.List([@cart.cart_eq(), @misc.matrify(), @cart.lambda_beta(), matrix_add_component(), vector_add_component()]))
-  matrify_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_prod[M, N]], ∀ y : Cart[Real, Finite_prod[M, N]], matrify(x + y) == matrify(x) + matrify(y)"), t2639))
+  matrify_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_prod[M, N]], ∀ y : Cart[Real, Finite_prod[M, N]], matrify(x + y) == matrix_add(matrify(x), matrify(y))"), t2639))
 }
 
 ///|
@@ -13066,7 +13066,7 @@ pub fn matrify_cmul() -> @kernel.Thm {
 /// MATRIFY_SUB
 fn step_643() -> Unit raise {
   let t2641 = @simp.simp_tac(@list.List([@cart.cart_eq(), @misc.matrify(), @cart.lambda_beta(), matrix_sub_component(), vector_sub_component()]))
-  matrify_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_prod[M, N]], ∀ y : Cart[Real, Finite_prod[M, N]], matrify(x - y) == matrify(x) - matrify(y)"), t2641))
+  matrify_sub_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_prod[M, N]], ∀ y : Cart[Real, Finite_prod[M, N]], matrify(x - y) == matrix_sub(matrify(x), matrify(y))"), t2641))
 }
 
 ///|
@@ -13495,7 +13495,7 @@ pub fn fstcart_sndcart_mat_zero() -> @kernel.Thm {
 /// FSTCART_SNDCART_MATRIX_ADD
 fn step_669() -> Unit raise {
   let t2680 = @simp.simp_tac(@list.List([@cart.cart_eq(), @cart.fstcart_component(), @cart.sndcart_component(), matrix_add_component()]))
-  fstcart_sndcart_matrix_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Cart[Real, K], Finite_sum[M, N]], ∀ y : Cart[Cart[Real, K], Finite_sum[M, N]], fstcart(x + y) == fstcart(x) + fstcart(y) && sndcart(x + y) == sndcart(x) + sndcart(y)"), t2680))
+  fstcart_sndcart_matrix_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Cart[Real, K], Finite_sum[M, N]], ∀ y : Cart[Cart[Real, K], Finite_sum[M, N]], fstcart(matrix_add(x, y)) == matrix_add(fstcart(x), fstcart(y)) && sndcart(matrix_add(x, y)) == matrix_add(sndcart(x), sndcart(y))"), t2680))
 }
 
 ///|
@@ -13542,7 +13542,7 @@ pub fn norm_fstcart() -> @kernel.Thm {
 /// DIST_FSTCART
 fn step_671() -> Unit raise {
   let t2692 = @simp.rewrite_tac(@list.List([dist(), @equal.gsym(fstcart_sub()), norm_fstcart()]))
-  dist_fstcart_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_sum[_, _]], ∀ y : Cart[Real, Finite_sum[_, _]], dist((fstcart(x), fstcart(y))) <= dist((x, y))"), t2692))
+  dist_fstcart_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_sum[_, _]], ∀ y : Cart[Real, Finite_sum[_, _]], distance((fstcart(x), fstcart(y))) <= distance((x, y))"), t2692))
 }
 
 ///|
@@ -13593,7 +13593,7 @@ pub fn norm_sndcart() -> @kernel.Thm {
 /// DIST_SNDCART
 fn step_673() -> Unit raise {
   let t2708 = @simp.rewrite_tac(@list.List([dist(), @equal.gsym(sndcart_sub()), norm_sndcart()]))
-  dist_sndcart_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_sum[_, _]], ∀ y : Cart[Real, Finite_sum[_, _]], dist((sndcart(x), sndcart(y))) <= dist((x, y))"), t2708))
+  dist_sndcart_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Finite_sum[_, _]], ∀ y : Cart[Real, Finite_sum[_, _]], distance((sndcart(x), sndcart(y))) <= distance((x, y))"), t2708))
 }
 
 ///|
@@ -13682,7 +13682,7 @@ pub fn norm_pastecart_le() -> @kernel.Thm {
 /// DIST_PASTECART_LE
 fn step_678() -> Unit raise {
   let t2722 = @simp.rewrite_tac(@list.List([dist(), pastecart_sub(), norm_pastecart_le()]))
-  dist_pastecart_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ y1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y2 : Cart[Real, _], dist((pastecart(x1, y1), pastecart(x2, y2))) <= dist((x1, x2)) + dist((y1, y2))"), t2722))
+  dist_pastecart_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ y1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y2 : Cart[Real, _], distance((pastecart(x1, y1), pastecart(x2, y2))) <= distance((x1, x2)) + distance((y1, y2))"), t2722))
 }
 
 ///|
@@ -13717,7 +13717,7 @@ pub fn norm_le_pastecart() -> @kernel.Thm {
 /// DIST_LE_PASTECART
 fn step_680() -> Unit raise {
   let t2727 = @simp.rewrite_tac(@list.List([dist(), pastecart_sub(), norm_le_pastecart()]))
-  dist_le_pastecart_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ y1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y2 : Cart[Real, _], dist((x1, x2)) <= dist((pastecart(x1, y1), pastecart(x2, y2))) && dist((y1, y2)) <= dist((pastecart(x1, y1), pastecart(x2, y2)))"), t2727))
+  dist_le_pastecart_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Real, _], ∀ y1 : Cart[Real, _], ∀ x2 : Cart[Real, _], ∀ y2 : Cart[Real, _], distance((x1, x2)) <= distance((pastecart(x1, y1), pastecart(x2, y2))) && distance((y1, y2)) <= distance((pastecart(x1, y1), pastecart(x2, y2)))"), t2727))
 }
 
 ///|
@@ -13750,7 +13750,7 @@ pub fn norm_pastecart_0() -> @kernel.Thm {
 /// DIST_PASTECART_CANCEL
 fn step_682() -> Unit raise {
   let t2730 = @simp.rewrite_tac(@list.List([dist(), pastecart_sub(), vector_sub_refl(), norm_pastecart_0()]))
-  dist_pastecart_cancel_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, _], ∀ x' : Cart[Real, _], ∀ y : Cart[Real, _], dist((pastecart(x, y), pastecart(x', y))) == dist((x, x'))) && (∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ y' : Cart[Real, _], dist((pastecart(x, y), pastecart(x, y'))) == dist((y, y')))"), t2730))
+  dist_pastecart_cancel_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, _], ∀ x' : Cart[Real, _], ∀ y : Cart[Real, _], distance((pastecart(x, y), pastecart(x', y))) == distance((x, x'))) && (∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ y' : Cart[Real, _], distance((pastecart(x, y), pastecart(x, y'))) == distance((y, y')))"), t2730))
 }
 
 ///|
@@ -20507,7 +20507,7 @@ fn step_953() -> Unit raise {
     }
   })
   let t4976 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4953), t4958), t4959), t4960), t4968), t4969), @tactics.strip_tac), t4970), t4972), @tactics.conj_tac), t4975)
-  matrix_rational_approximation_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ e : Real, real_of_num(0) < e → (∃ B : Cart[Cart[Real, N], M], (∀ i : Num, ∀ j : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) → rational((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(B, i), j))) && (onorm : ((Cart[Real, N]) -> Cart[Real, M]) -> Real)((x : Cart[Real, N]) => (matrix_vector_mul : (Cart[Cart[Real, N], M], Cart[Real, N]) -> Cart[Real, M])(A - B, x)) < e)"), t4976))
+  matrix_rational_approximation_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], ∀ e : Real, real_of_num(0) < e → (∃ B : Cart[Cart[Real, N], M], (∀ i : Num, ∀ j : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) → rational((op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], M], Num) -> Cart[Real, N])(B, i), j))) && (onorm : ((Cart[Real, N]) -> Cart[Real, M]) -> Real)((x : Cart[Real, N]) => (matrix_vector_mul : (Cart[Cart[Real, N], M], Cart[Real, N]) -> Cart[Real, M])((matrix_sub : (Cart[Cart[Real, N], M], Cart[Cart[Real, N], M]) -> Cart[Cart[Real, N], M])(A, B), x)) < e)"), t4976))
 }
 
 ///|
@@ -24418,7 +24418,7 @@ fn step_1049() -> Unit raise {
   let t6975 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("IMAGE((x : Cart[Real, M]) => matrix_vector_mul((A : Cart[Cart[Real, M], N]), x), UNIV)"), t6974]), dim_sums_inter()))
   let t6973 = @simp.rewrite_tac(@list.List([rank_dim_im()]))
   let t6987 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6973), t6975), t6976), t6981), t6982), t6983), t6984), t6985), t6986)
-  rank_triangle_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ B : Cart[Cart[Real, M], N], rank(A + B) <= rank(A) + rank(B)"), t6987))
+  rank_triangle_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, M], N], ∀ B : Cart[Cart[Real, M], N], rank(matrix_add(A, B)) <= rank(A) + rank(B)"), t6987))
 }
 
 ///|
@@ -24452,7 +24452,7 @@ fn step_1051() -> Unit raise {
   let t6999 = @simp.rewrite_tac(@list.List([@equal.gsym(matrix_mul_assoc())]))
   let t6998 = @simp.rewrite_tac(@list.List([matrix_sub_ldistrib(), matrix_sub_rdistrib()]))
   let t6997 = @simp.rewrite_tac(@list.List([transp_matrix_sub(), matrix_transp_mul()]))
-  let t6996 = @tactics.exists_tac(@term_syntax.parse_term("transp((B : Cart[Cart[Real, M], N]) - (C : Cart[Cart[Real, M], N]))"))
+  let t6996 = @tactics.exists_tac(@term_syntax.parse_term("transp(matrix_sub((B : Cart[Cart[Real, M], N]), (C : Cart[Cart[Real, M], N])))"))
   let t6995 = @tactics.match_mp_tac(@meson.meson(@list.List([matrix_mul_rzero()]), @term_syntax.parse_term("(∃ C : Cart[Cart[Real, M], N], matrix_mul(C, (A : Cart[Cart[Real, _], M])) == (B : Cart[Cart[Real, _], N])) → A == mat(0) → B == mat(0)")))
   let t6994 = @simp.gen_rewrite_tac(fn(x6991 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s6992 = @equal.rand_conv(x6991)
@@ -25157,7 +25157,7 @@ pub fn rank_cmul() -> @kernel.Thm {
 fn step_1077() -> Unit raise {
   let t7252 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
   let t7253 = @tactics.then_tac(@simp.rewrite_tac(@list.List([matrix_neg_minus1(), rank_cmul()])), t7252)
-  rank_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], rank(-A) == rank(A)"), t7253))
+  rank_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Cart[Real, N], M], rank(matrix_neg(A)) == rank(A)"), t7253))
 }
 
 ///|
@@ -26350,7 +26350,7 @@ pub fn norm_triangle_eq() -> @kernel.Thm {
 /// DIST_TRIANGLE_EQ
 fn step_1128() -> Unit raise {
   let t7596 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(norm_triangle_eq())])), norm_arith_tac)
-  dist_triangle_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], (dist((x, z)) == dist((x, y)) + dist((y, z))) == (op_pct(norm(x - y), y - z) == op_pct(norm(y - z), x - y))"), t7596))
+  dist_triangle_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, _], ∀ y : Cart[Real, _], ∀ z : Cart[Real, _], (distance((x, z)) == distance((x, y)) + distance((y, z))) == (op_pct(norm(x - y), y - z) == op_pct(norm(y - z), x - y))"), t7596))
 }
 
 ///|
@@ -26952,7 +26952,7 @@ pub fn orthogonal_and_collinear() -> @kernel.Thm {
 ///|
 /// between
 fn step_1152() -> Unit raise {
-  between_c.set(@pair.new_definition(@term_syntax.parse_term("(between : (Cart[Real, _], (Cart[Real, _], Cart[Real, _])) -> Bool)((x : Cart[Real, _]), ((a : Cart[Real, _]), (b : Cart[Real, _]))) == (dist((a, b)) == dist((a, x)) + dist((x, b)))")))
+  between_c.set(@pair.new_definition(@term_syntax.parse_term("(between : (Cart[Real, _], (Cart[Real, _], Cart[Real, _])) -> Bool)((x : Cart[Real, _]), ((a : Cart[Real, _]), (b : Cart[Real, _]))) == (distance((a, b)) == distance((a, x)) + distance((x, b)))")))
 }
 
 ///|
@@ -27360,7 +27360,7 @@ pub fn between_restricted_cases() -> @kernel.Thm {
 /// COLLINEAR_DIST_BETWEEN
 fn step_1169() -> Unit raise {
   let t7937 = @tactics.then_tac(@simp.simp_tac(@list.List([collinear_between_cases(), between(), dist_sym()])), norm_arith_tac)
-  collinear_dist_between_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ x : Cart[Real, _], collinear({x, a, b}) && dist((x, a)) <= dist((a, b)) && dist((x, b)) <= dist((a, b)) → between(x, (a, b))"), t7937))
+  collinear_dist_between_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ x : Cart[Real, _], collinear({x, a, b}) && distance((x, a)) <= distance((a, b)) && distance((x, b)) <= distance((a, b)) → between(x, (a, b))"), t7937))
 }
 
 ///|
@@ -27379,7 +27379,7 @@ fn step_1170() -> Unit raise {
   let t7938 = @simp.rewrite_tac(@list.List([between()]))
   let t7940 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([between_imp_collinear()])), t7938), norm_arith_tac), t7939])
   let t7941 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t7940)
-  between_collinear_dist_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ x : Cart[Real, N], between(x, (a, b)) == (collinear({a, x, b}) && dist((x, a)) <= dist((a, b)) && dist((x, b)) <= dist((a, b)))"), t7941))
+  between_collinear_dist_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ x : Cart[Real, N], between(x, (a, b)) == (collinear({a, x, b}) && distance((x, a)) <= distance((a, b)) && distance((x, b)) <= distance((a, b)))"), t7941))
 }
 
 ///|
@@ -27485,7 +27485,7 @@ pub fn midpoint_sym() -> @kernel.Thm {
 /// DIST_MIDPOINT
 fn step_1175() -> Unit raise {
   let t7963 = @tactics.then_tac(@simp.rewrite_tac(@list.List([midpoint()])), norm_arith_tac)
-  dist_midpoint_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], dist((a, midpoint((a, b)))) == dist((a, b)) / real_of_num(2) && dist((b, midpoint((a, b)))) == dist((a, b)) / real_of_num(2) && dist((midpoint((a, b)), a)) == dist((a, b)) / real_of_num(2) && dist((midpoint((a, b)), b)) == dist((a, b)) / real_of_num(2)"), t7963))
+  dist_midpoint_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], distance((a, midpoint((a, b)))) == distance((a, b)) / real_of_num(2) && distance((b, midpoint((a, b)))) == distance((a, b)) / real_of_num(2) && distance((midpoint((a, b)), a)) == distance((a, b)) / real_of_num(2) && distance((midpoint((a, b)), b)) == distance((a, b)) / real_of_num(2)"), t7963))
 }
 
 ///|
@@ -27575,7 +27575,7 @@ fn step_1180() -> Unit raise {
   let t7971 = @simp.simp_tac(@list.List([collinear_midpoint()]))
   let t7970 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) && (b → a == (c : Bool)) → a == (b && c)")))
   let t7978 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7970), t7971), t7972), @tactics.strip_tac), t7973), t7976), t7977), @calc_rat.real_arith_tac)
-  midpoint_collinear_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ c : Cart[Real, N], !(a == c) → (b == midpoint((a, c))) == (collinear({a, b, c}) && dist((a, b)) == dist((b, c)))"), t7978))
+  midpoint_collinear_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ c : Cart[Real, N], !(a == c) → (b == midpoint((a, c))) == (collinear({a, b, c}) && distance((a, b)) == distance((b, c)))"), t7978))
 }
 
 ///|
@@ -27595,7 +27595,7 @@ fn step_1181() -> Unit raise {
   let t7980 = @list.List([@simp.asm_simp_tac(@list.List([between_refl_eq(), midpoint_refl(), dist_sym()])), @tactics.all_tac])
   let t7979 = @class.asm_cases_tac(@term_syntax.parse_term("(a : Cart[Real, N]) == (c : Cart[Real, N])"))
   let t7983 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7979), t7980), @tactics.eq_tac), t7981), t7982)
-  midpoint_between_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ c : Cart[Real, N], (b == midpoint((a, c))) == (between(b, (a, c)) && dist((a, b)) == dist((b, c)))"), t7983))
+  midpoint_between_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ c : Cart[Real, N], (b == midpoint((a, c))) == (between(b, (a, c)) && distance((a, b)) == distance((b, c)))"), t7983))
 }
 
 ///|
@@ -28608,7 +28608,7 @@ pub fn preserves_norm_preserves_dot() -> @kernel.Thm {
 fn step_1221() -> Unit raise {
   let t8293 = @meson.meson_tac(@list.List([linear_sub()]))
   let t8294 = @tactics.then_tac(@simp.rewrite_tac(@list.List([dist()])), t8293)
-  preseves_norm_preserves_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], linear(f) && (∀ x : Cart[Real, M], norm(f(x)) == norm(x)) → (∀ x : Cart[Real, M], ∀ y : Cart[Real, M], dist((f(x), f(y))) == dist((x, y)))"), t8294))
+  preseves_norm_preserves_dist_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], linear(f) && (∀ x : Cart[Real, M], norm(f(x)) == norm(x)) → (∀ x : Cart[Real, M], ∀ y : Cart[Real, M], distance((f(x), f(y))) == distance((x, y)))"), t8294))
 }
 
 ///|
@@ -28759,7 +28759,7 @@ pub fn normal_matrix_kernel_transp() -> @kernel.Thm {
 /// Multivariate/vectors.ml:10579
 fn step_1227() -> Unit raise {
   let t8334 = @meson.meson(@list.List([]), @term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ x : Cart[Real, M], ∀ y : Cart[Real, M], (∀ x : Cart[Real, M], ∀ y : Cart[Real, M], f(x) == f(y) → x == y) → (f(x) == f(y)) == (x == y)"))
-  let t8335 = @meson.meson(@list.List([dist(), linear_sub()]), @term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ x : Cart[Real, M], ∀ y : Cart[Real, M], linear(f) && (∀ x : Cart[Real, M], norm(f(x)) == norm(x)) → dist((f(x), f(y))) == dist((x, y))"))
+  let t8335 = @meson.meson(@list.List([dist(), linear_sub()]), @term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ x : Cart[Real, M], ∀ y : Cart[Real, M], linear(f) && (∀ x : Cart[Real, M], norm(f(x)) == norm(x)) → distance((f(x), f(y))) == distance((x, y))"))
   let t8336 = @meson.meson(@list.List([]), @term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ x : Cart[Real, M], (∀ x : Cart[Real, M], norm(f(x)) == norm(x)) → norm(f(x)) == norm(x)"))
   let t8337 = @equal.gsym(linear_neg())
   let t8338 = @equal.gsym(linear_sub())
@@ -28783,7 +28783,7 @@ fn step_1228() -> Unit raise {
   let t8348 = vector_arith(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], a + x - (a + y) == x - y"))
   let t8349 = vector_arith(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ x : Cart[Real, _], ∀ y : Cart[Real, _], op_pct(inv(real_of_num(2)), a + x + (a + y)) == a + op_pct(inv(real_of_num(2)), x + y)"))
   let t8350 = vector_arith(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ x : Cart[Real, _], ∀ y : Cart[Real, _], op_pct(real_of_num(1) / real_of_num(2), a + x + (a + y)) == a + op_pct(real_of_num(1) / real_of_num(2), x + y)"))
-  let t8351 = norm_arith(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ x : Cart[Real, _], ∀ y : Cart[Real, _], dist((a + x, a + y)) == dist((x, y))"))
+  let t8351 = norm_arith(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ x : Cart[Real, _], ∀ y : Cart[Real, _], distance((a + x, a + y)) == distance((x, y))"))
   add_translation_invariants(@list.List([vector_arith(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], (a + x == a + y) == (x == y)")), t8351, t8350, t8349, t8348, t8347, t8346]))
 }
 
@@ -28918,7 +28918,7 @@ fn step_1242() -> Unit raise {
 /// Multivariate/vectors.ml:10693
 fn step_1243() -> Unit raise {
   let t8367 = @simp.simp_tac(@list.List([dist_mul(), @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < (c : Real) → abs(c) == c"))]))
-  let dist_scaling = @tactics.prove(@term_syntax.parse_term("∀ c : Real, real_of_num(0) < c → (∀ x : Cart[Real, _], ∀ y : Cart[Real, _], dist((op_pct(c, x), op_pct(c, y))) == c * dist((x, y)))"), t8367)
+  let dist_scaling = @tactics.prove(@term_syntax.parse_term("∀ c : Real, real_of_num(0) < c → (∀ x : Cart[Real, _], ∀ y : Cart[Real, _], distance((op_pct(c, x), op_pct(c, y))) == c * distance((x, y)))"), t8367)
   add_scaling_theorems(@list.List([dist_scaling]))
 }
 
