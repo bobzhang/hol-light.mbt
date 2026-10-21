@@ -658,35 +658,35 @@ test "grobner matches grobner.ml" {
       #|0..0..1..2..7..solved at 21
       #|0..0..1..2..7..solved at 18
       #|grobner quotations (29):
-      #|  c:A
-      #|  d:A
-      #|  n:A
-      #|  n0:A
+      #|  (c : A)
+      #|  (d : A)
+      #|  (n : A)
+      #|  (n0 : A)
       #|  forall(add:A->A->A) (mul:A->A->A) (n0:A).\n          (forall x. mul n0 x = n0) /\\\n          (forall x y z. (add x y = add x z) <=> (y = z)) /\\\n          (forall w x y z. (add (mul w y) (mul x z) = add (mul w z) (mul x y)) <=>\n                     (w = x) \\/ (y = z))\n          ==> (forall a b c d. ~(a = b) /\\ ~(c = d) <=>\n                         ~(add (mul a c) (mul b d) =\n                           add (mul a d) (mul b c))) /\\\n              (forall n a b c d. ~(n = n0)\n                           ==> (a = b) /\\ ~(c = d)\n                               ==> ~(add a (mul n c) = add b (mul n d)))
-      #|  (p ==> F) ==> (~q = p) ==> q
-      #|  F
+      #|  ((p : Bool) \226\134\146 false) \226\134\146 !(q : Bool) == p \226\134\146 q
+      #|  false
       #|  PRE
-      #|  (DIV):num->num->num
-      #|  (MOD):num->num->num
-      #|  P:num->bool
-      #|  n:num
-      #|  m:num
-      #|  P:num->num->bool
-      #|  a:num
-      #|  b:num
-      #|  (-):num->num->num
+      #|  DIV
+      #|  MOD
+      #|  (P : (Num) -> Bool)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (P : (Num, Num) -> Bool)
+      #|  (a : Num)
+      #|  (b : Num)
+      #|  op_minus
       #|  (EVEN(x) <=> (forall y. ~(x = SUC(2 * y)))) /\\\n     (ODD(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~EVEN(x) <=> (forall y. ~(x = 2 * y))) /\\\n     (~ODD(x) <=> (forall y. ~(x = SUC(2 * y))))
-      #|  a + b + c + d + e = a + c + e + b + d
+      #|  (a : Num) + ((b : Num) + ((c : Num) + ((d : Num) + (e : Num)))) == a + (c + (e + (b + d)))
       #|  (w = x + d) /\\ (y = z + e)\n     ==> ((w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
-      #|  z:num
-      #|  y:num
-      #|  x:num
-      #|  w:num
+      #|  (z : Num)
+      #|  (y : Num)
+      #|  (x : Num)
+      #|  (w : Num)
       #|  (forall x. 0 * x = 0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
-      #|  (EXP):num->num->num
-      #|  (*):num->num->num
-      #|  (+):num->num->num
-      #|  T
+      #|  EXP
+      #|  op_star
+      #|  op_plus
+      #|  true
       #|types = num/0 ind/0 prod/2 1/0 bool/0 fun/2
       #|constants = MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 60
