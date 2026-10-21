@@ -91,7 +91,7 @@ pub fn right_betas(
 /// EXISTS_EQUATION
 fn step_3() -> Unit raise {
   let t21 = @tactics.first_assum(@tactics.match_mp_tac)
-  let t20 = @tactics.exists_tac(@parser.parse_term("t:A"))
+  let t20 = @tactics.exists_tac(@term_syntax.parse_term("(t : A)"))
   let t19 = @tactics.first_assum(@tactics.match_mp_tac)
   let t18 = @tactics.repeat_tac(@tactics.strip_tac)
   let t22 = @tactics.then_tac(
@@ -114,7 +114,7 @@ fn step_3() -> Unit raise {
     @tactics.refl_tac,
   )
   let pth = @tactics.prove(
-    @parser.parse_term("forall P t. (forall x:A. (x = t) ==> P x) ==> (?) P"),
+    @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ t : A, (∀ x : A, x == t → P(x)) → op_q(P)"),
     t22,
   )
   exists_equation_c.set(fn(
@@ -229,7 +229,7 @@ fn step_4() -> Unit raise {
     let t41 = @bool.disch_all(th4)
     @bool.imp_antisym_rule(@bool.disch_all(th2), t41)
   }
-  let t_tm = @parser.parse_term("T")
+  let t_tm = @term_syntax.parse_term("true")
   let calculate_simp_sequence : (@list.List[_]) -> ((@list.List[(_, _)]) -> (
     @list.List[(_, _)],
     @list.List[(_, _)],
@@ -1102,8 +1102,8 @@ pub fn monotonicity_theorems() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// MONO_TAC
 fn step_6() -> Unit raise {
-  let imp = @parser.parse_term("(==>)")
-  let imp_refl = @itab.itaut(@parser.parse_term("forall p. p ==> p"))
+  let imp = @term_syntax.parse_term("op_eq_eq_gt")
+  let imp_refl = @itab.itaut(@term_syntax.parse_term("∀ p : Bool, p → p"))
   let mono_abs_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
       @list.List[@kernel.Term],
