@@ -348,7 +348,17 @@ async fn golden_tests(pkg : String) -> Array[String] {
   if !@fs.exists(make) {
     return []
   }
-  mbt_files(make).filter(f => f.has_suffix("_" + name + "_test.mbt"))
+  // NN_<name>_test.mbt exactly: 28_matan_test.mbt, not
+  // 53_informal_matan_test.mbt (another theory)
+  mbt_files(make).filter(f => {
+    let base = f.split("/").last().unwrap().to_owned()
+    match base.find("_") {
+      Some(i) =>
+        base[:i].iter().all(c => c is ('0'..='9')) &&
+        base[i + 1:] == name + "_test.mbt"
+      None => false
+    }
+  })
 }
 
 ///|
