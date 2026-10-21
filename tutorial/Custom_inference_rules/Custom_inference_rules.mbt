@@ -3,7 +3,7 @@
 ///|
 /// near_ring_axioms
 fn step_1() -> Unit raise {
-  near_ring_axioms_c.set(@parser.parse_term("(forall x. 0 + x = x) /\\\n   (forall x. neg x + x = 0) /\\\n   (forall x y z. (x + y) + z = x + y + z) /\\\n   (forall x y z. (x * y) * z = x * y * z) /\\\n   (forall x y z. (x + y) * z = (x * z) + (y * z))"))
+  near_ring_axioms_c.set(@term_syntax.parse_term("(∀ x : Num, 0 + x == x) && (∀ x : Num, (neg : (Num) -> Num)(x) + x == 0) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x + y + z == x + (y + z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, (x + y) * z == x * z + y * z)"))
 }
 
 ///|
@@ -422,29 +422,29 @@ pub fn complete_equations(x113 : @list.List[@kernel.Term], x114 : @list.List[@ke
 ///|
 /// Tutorial/Custom_inference_rules.ml:136
 fn step_2() -> Unit raise {
-  let t118 = @list.List([@bool.spec_all(@kernel.assume_rule(@parser.parse_term("forall a b. i(a) * a * b = b")))])
-  let t116 = @parser.parse_term("i:num->num")
-  let t117 = @parser.parse_term("( * ):num->num->num")
-  ignore(complete_equations(@list.List([@parser.parse_term("1"), t117, t116]), t118))
+  let t118 = @list.List([@bool.spec_all(@kernel.assume_rule(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, (i : (Num) -> Num)(a) * (a * b) == b")))])
+  let t116 = @term_syntax.parse_term("(i : (Num) -> Num)")
+  let t117 = @term_syntax.parse_term("op_star")
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("1"), t117, t116]), t118))
 }
 
 ///|
 /// Tutorial/Custom_inference_rules.ml:139
 fn step_3() -> Unit raise {
-  let t120 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("((f(f(f(f(f c))))) = c:A) /\\ (f(f(f c)) = c)"))))
-  let t119 = @parser.parse_term("f:A->A")
-  ignore(complete_equations(@list.List([@parser.parse_term("c:A"), t119]), t120))
+  let t120 = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@term_syntax.parse_term("(f : (A) -> A)(f(f(f(f((c : A)))))) == c && f(f(f(c))) == c"))))
+  let t119 = @term_syntax.parse_term("(f : (A) -> A)")
+  ignore(complete_equations(@list.List([@term_syntax.parse_term("(c : A)"), t119]), t120))
 }
 
 ///|
 /// Tutorial/Custom_inference_rules.ml:143
 fn step_4() -> Unit raise {
-  let eqs = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@parser.parse_term("(forall x. 1 * x = x) /\\ (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)"))))
-  let t122 = @parser.parse_term("i:num->num")
-  let t123 = @parser.parse_term("( * ):num->num->num")
+  let eqs = @lib.map(@bool.spec_all, @bool.conjuncts_rule(@kernel.assume_rule(@term_syntax.parse_term("(∀ x : Num, 1 * x == x) && (∀ x : Num, (i : (Num) -> Num)(x) * x == 1) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z))"))))
+  let t122 = @term_syntax.parse_term("(i : (Num) -> Num)")
+  let t123 = @term_syntax.parse_term("op_star")
   ignore(@lib.map(fn(x121 : @kernel.Thm) -> @kernel.Term raise {
     @kernel.concl(x121)
-  }, complete_equations(@list.List([@parser.parse_term("1"), t123, t122]), eqs)))
+  }, complete_equations(@list.List([@term_syntax.parse_term("1"), t123, t122]), eqs)))
 }
 
 ///|
@@ -467,15 +467,15 @@ pub fn complete_tac(x124 : @list.List[@kernel.Term], x125 : @kernel.Thm) -> @tac
 ///|
 /// Tutorial/Custom_inference_rules.ml:153
 fn step_5() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(forall x. 1 * x = x) /\\\n   (forall x. i(x) * x = 1) /\\\n   (forall x y z. (x * y) * z = x * y * z)\n   ==> forall x y. i(y) * i(i(i(x * i(y)))) * x = 1")))
+  ignore(@tactics.g(@term_syntax.parse_term("(∀ x : Num, 1 * x == x) && (∀ x : Num, (i : (Num) -> Num)(x) * x == 1) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z)) → (∀ x : Num, ∀ y : Num, i(y) * (i(i(i(x * i(y)))) * x) == 1)")))
 }
 
 ///|
 /// Tutorial/Custom_inference_rules.ml:158
 fn step_6() -> Unit raise {
-  let t131 = @parser.parse_term("i:num->num")
-  let t132 = @parser.parse_term("( * ):num->num->num")
-  let t133 = @list.List([@parser.parse_term("1"), t132, t131])
+  let t131 = @term_syntax.parse_term("(i : (Num) -> Num)")
+  let t132 = @term_syntax.parse_term("op_star")
+  let t133 = @list.List([@term_syntax.parse_term("1"), t132, t131])
   ignore(@tactics.e(@tactics.disch_then((x134 : @kernel.Thm) => complete_tac(t133, x134))))
 }
 
@@ -488,16 +488,16 @@ fn step_7() -> Unit raise {
 ///|
 /// Tutorial/Custom_inference_rules.ml:161
 fn step_8() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("(forall x. 0 + x = x) /\\\n     (forall x. neg x + x = 0) /\\\n     (forall x y z. (x + y) + z = x + y + z) /\\\n     (forall x y z. (x * y) * z = x * y * z) /\\\n     (forall x y z. (x + y) * z = (x * z) + (y * z))\n     ==> (neg 0  * (x * y + z + neg(neg(w + z))) + neg(neg b + neg a) =\n          a + b)")))
+  ignore(@tactics.g(@term_syntax.parse_term("(∀ x : Num, 0 + x == x) && (∀ x : Num, (neg : (Num) -> Num)(x) + x == 0) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x + y + z == x + (y + z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x * y * z == x * (y * z)) && (∀ x : Num, ∀ y : Num, ∀ z : Num, (x + y) * z == x * z + y * z) → neg(0) * ((x : Num) * (y : Num) + ((z : Num) + neg(neg((w : Num) + z)))) + neg(neg((b : Num)) + neg((a : Num))) == a + b")))
 }
 
 ///|
 /// Tutorial/Custom_inference_rules.ml:169
 fn step_9() -> Unit raise {
-  let t135 = @parser.parse_term("( * ):num->num->num")
-  let t136 = @parser.parse_term("neg:num->num")
-  let t137 = @parser.parse_term("(+):num->num->num")
-  let t138 = @list.List([@parser.parse_term("0"), t137, t136, t135])
+  let t135 = @term_syntax.parse_term("op_star")
+  let t136 = @term_syntax.parse_term("(neg : (Num) -> Num)")
+  let t137 = @term_syntax.parse_term("op_plus")
+  let t138 = @list.List([@term_syntax.parse_term("0"), t137, t136, t135])
   ignore(@tactics.e(@tactics.disch_then((x139 : @kernel.Thm) => complete_tac(t138, x139))))
 }
 
