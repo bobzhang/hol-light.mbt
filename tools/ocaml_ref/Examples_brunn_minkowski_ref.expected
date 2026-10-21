@@ -79999,7 +79999,7 @@ Examples/brunn_minkowski quotations (466):
   (x : Cart[Real, N])
   (n : Num)
   inv(real_of_num((n : Num)) + real_of_num(1)) <= inv(real_of_num(n))
-  dist(((y : Cart[Real, N]) + (e : Cart[Real, N]), y)) == norm(e)
+  distance(((y : Cart[Real, N]) + (e : Cart[Real, N]), y)) == norm(e)
   :real
   :real
   (y : Cart[Real, N])
