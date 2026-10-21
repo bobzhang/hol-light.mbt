@@ -5732,25 +5732,25 @@ test "Permutation/permutation matches Permutation/permutation.ml" {
       #|0..0..1..2..solved at 6
       #|0..0..1..2..7..14..21..solved at 28
       #|Permutation/permutation quotations (19):
-      #|  REVPERM 0 = [] /\\\n   REVPERM (SUC n) = n :: REVPERM n
+      #|  (REVPERM : (Num) -> List[Num])(0) == NIL && REVPERM(SUC((n : Num))) == CONS(n, REVPERM(n))
       #|  \\n. n + 1
-      #|  forall n m. MEM m (REVPERM n) <=> m < n
-      #|  forall n. LIST_UNIQ (REVPERM n)
-      #|  forall n. DELETE1 n (REVPERM (SUC n)) = REVPERM n
-      #|  forall n i. COUNT i (REVPERM n) = if i < n then 1 else 0
-      #|  forall n. set_of_list (REVPERM n) = {m | m < n}
-      #|  forall l. PERMUTATION l <=> REVPERM (LENGTH l) PERMUTED l
-      #|  PERMUTATION []
-      #|  forall l. PERMUTATION l ==> LIST_UNIQ l
-      #|  forall l. PERMUTATION l ==> (forall i. MEM i l <=> i < LENGTH l)
-      #|  forall l. PERMUTATION l <=> (forall x. COUNT x l = if x < LENGTH l then 1 else 0)
-      #|  forall l1 l2. LIST_UNIQ l1 /\\ LIST_UNIQ l2\n           ==> (l1 PERMUTED l2 <=> set_of_list l1 = set_of_list l2)
-      #|  forall l l':A list.\n        LIST_UNIQ l /\\ LENGTH l = LENGTH l' /\\ (forall x. MEM x l <=> MEM x l')\n        ==> l PERMUTED l'
-      #|  LIST_UNIQ (l:num list)
-      #|  forall l. PERMUTATION l <=> set_of_list l = {n | n < LENGTH l}
-      #|  forall l. (forall n. n < LENGTH l ==> MEM n l) ==> PERMUTATION l
-      #|  forall l. LIST_UNIQ l /\\ (forall n. MEM n l ==> n < LENGTH l) ==> PERMUTATION l
-      #|  forall l. PERMUTATION l <=> LIST_UNIQ l /\\ (forall n. MEM n l ==> n < LENGTH l)
+      #|  \226\136\128 n : Num, \226\136\128 m : Num, MEM(m, REVPERM(n)) == (m < n)
+      #|  \226\136\128 n : Num, LIST_UNIQ(REVPERM(n))
+      #|  \226\136\128 n : Num, DELETE1(n, REVPERM(SUC(n))) == REVPERM(n)
+      #|  \226\136\128 n : Num, \226\136\128 i : Num, COUNT(i, REVPERM(n)) == (if i < n { 1 } else { 0 })
+      #|  \226\136\128 n : Num, set_of_list(REVPERM(n)) == {(m : Num) | m < n}
+      #|  \226\136\128 l : List[Num], (PERMUTATION : (List[Num]) -> Bool)(l) == PERMUTED(REVPERM(LENGTH(l)), l)
+      #|  PERMUTATION(NIL)
+      #|  \226\136\128 l : List[Num], PERMUTATION(l) \226\134\146 LIST_UNIQ(l)
+      #|  \226\136\128 l : List[Num], PERMUTATION(l) \226\134\146 (\226\136\128 i : Num, MEM(i, l) == (i < LENGTH(l)))
+      #|  \226\136\128 l : List[Num], PERMUTATION(l) == (\226\136\128 x : Num, COUNT(x, l) == (if x < LENGTH(l) { 1 } else { 0 }))
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], LIST_UNIQ(l1) && LIST_UNIQ(l2) \226\134\146 PERMUTED(l1, l2) == (set_of_list(l1) == set_of_list(l2))
+      #|  \226\136\128 l : List[A], \226\136\128 l' : List[A], LIST_UNIQ(l) && LENGTH(l) == LENGTH(l') && (\226\136\128 x : A, MEM(x, l) == MEM(x, l')) \226\134\146 PERMUTED(l, l')
+      #|  LIST_UNIQ((l : List[Num]))
+      #|  \226\136\128 l : List[Num], PERMUTATION(l) == (set_of_list(l) == {(n : Num) | n < LENGTH(l)})
+      #|  \226\136\128 l : List[Num], (\226\136\128 n : Num, n < LENGTH(l) \226\134\146 MEM(n, l)) \226\134\146 PERMUTATION(l)
+      #|  \226\136\128 l : List[Num], LIST_UNIQ(l) && (\226\136\128 n : Num, MEM(n, l) \226\134\146 n < LENGTH(l)) \226\134\146 PERMUTATION(l)
+      #|  \226\136\128 l : List[Num], PERMUTATION(l) == (LIST_UNIQ(l) && (\226\136\128 n : Num, MEM(n, l) \226\134\146 n < LENGTH(l)))
       #|REVPERM =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(num),fun(list(num),bool)) (#REVPERM:fun(num,list(num)) (#NUMERAL:fun(num,num) #_0:num))) #NIL:list(num))) ((#=:fun(list(num),fun(list(num),bool)) (#REVPERM:fun(num,list(num)) (#SUC:fun(num,num) n:num))) ((#CONS:fun(num,fun(list(num),list(num))) n:num) (#REVPERM:fun(num,list(num)) n:num))))
       #|MEM_REVPERM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(bool,fun(bool,bool)) ((#MEM:fun(num,fun(list(num),bool)) m:num) (#REVPERM:fun(num,list(num)) n:num))) ((#<:fun(num,fun(num,bool)) m:num) n:num))))))
       #|LIST_UNIQ_REVPERM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#LIST_UNIQ:fun(list(num),bool) (#REVPERM:fun(num,list(num)) n:num))))
