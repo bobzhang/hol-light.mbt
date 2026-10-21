@@ -4710,7 +4710,7 @@ fn step_97() -> Unit raise {
   let t463 = @simp.rewrite_tac(
     @list.List([real_sub_add(), @realax.real_add_lid()]),
   )
-  let t460 = @term_syntax.parse_term("op_plus")
+  let t460 = @term_syntax.parse_term("real_add")
   let t457 = @term_syntax.parse_term("(y : Real)")
   let t469 = @list.List([
     @tactics.then_tac(
@@ -5960,7 +5960,7 @@ fn step_112() -> Unit raise {
       @list.List([@drule.match_mp(@realax.real_mul_linv())(th)]),
     )
   })
-  let t593 = @term_syntax.parse_term("op_star")
+  let t593 = @term_syntax.parse_term("real_mul")
   let t590 = @term_syntax.parse_term("(x : Real)")
   let t596 = @tactics.disch_then(fn(
     x595 : @kernel.Thm,
@@ -22363,7 +22363,7 @@ pub fn sum_differences_eq() -> @kernel.Thm {
 ///|
 /// REAL_SUM_CONV
 fn step_290() -> Unit raise {
-  let sum_tm = @term_syntax.parse_term("sum")
+  let sum_tm = @term_syntax.parse_term("psum")
   let t2352 = @simp.rewrite_tac(
     @list.List([
       @calc_num.num_conv(@term_syntax.parse_term("1")),
@@ -22427,7 +22427,7 @@ pub fn real_sum_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// REAL_HORNER_SUM_CONV
 fn step_291() -> Unit raise {
-  let sum_tm = @term_syntax.parse_term("sum")
+  let sum_tm = @term_syntax.parse_term("psum")
   let t2357 = @simp.rewrite_tac(
     @list.List([
       @calc_num.num_conv(@term_syntax.parse_term("1")),
@@ -32298,7 +32298,7 @@ fn step_364() -> Unit raise {
     real_sub_add(),
   )
   let t3332 = @tactics.subst1_tac(
-    @equal.sym(@equal.ap_term(@term_syntax.parse_term("abs"), t3331)),
+    @equal.sym(@equal.ap_term(@term_syntax.parse_term("real_abs"), t3331)),
   )
   let t3329 = @simp.asm_rewrite_tac(@list.List([real_lt_radd()]))
   let t3328 = @tactics.exists_tac(
@@ -69241,7 +69241,7 @@ fn step_510() -> Unit raise {
   let t7250 = @tactics.match_mp_tac(@realax.real_mul_linv())
   let t7249 = @simp.rewrite_tac(@list.List([@equal.gsym(real_neg_rmul())]))
   let t7246 = @bool.spec_all(@real.real_add_sub())
-  let t7247 = @equal.ap_term(@term_syntax.parse_term("op_minus_minus"), t7246)
+  let t7247 = @equal.ap_term(@term_syntax.parse_term("real_neg"), t7246)
   let t7248 = @simp.rewrite_tac(
     @list.List([@simp.rewrite_rule(@list.List([real_neg_sub()]))(t7247)]),
   )
