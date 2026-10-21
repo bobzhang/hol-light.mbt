@@ -214,7 +214,7 @@ fn step_9() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([admissible()]))
   admissible_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s c. admissible(<<) p s (\\f. c)"),
+      @term_syntax.parse_term("∀ p : ((_) -> _, _) -> Bool, ∀ s : (_) -> _, ∀ c : (_) -> _, admissible((op_lt_lt : (_, _) -> Bool), p, s, (f : (_) -> _) => c)"),
       t11,
     ),
   )
@@ -572,7 +572,7 @@ fn step_19() -> Unit raise {
     @tactics.match_mp_tac(
       @meson.meson(
         @list.List([]),
-        @parser.parse_term("x = x' /\\ y = y' ==> (x = y <=> x' = y')"),
+        @term_syntax.parse_term("(x : _) == (x' : _) && (y : _) == (y' : _) → (x == y) == (x' == y')"),
       ),
     ),
   )
@@ -716,7 +716,7 @@ fn step_22() -> Unit raise {
   let t59 = @tactics.match_mp_tac(
     @meson.meson(
       @list.List([]),
-      @parser.parse_term("x = y /\\ MAP f x = MAP g x ==> MAP f x = MAP g y"),
+      @term_syntax.parse_term("(x : List[_]) == (y : List[_]) && MAP((f : (_) -> _), x) == MAP((g : (_) -> _), x) → MAP(f, x) == MAP(g, y)"),
     ),
   )
   let t58 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -807,7 +807,7 @@ fn step_24() -> Unit raise {
   let t73 = @parser.parse_term(
     "\\f:A->B a:P. if p f a then t f a :B else fixed",
   )
-  let t74 = @parser.parse_term("\\f:A->B. (anything:P->A)")
+  let t74 = @term_syntax.parse_term("(f : (A) -> B) => (anything : (P) -> A)")
   let t75 = @tactics.map_every(
     fn(
       x70 : @kernel.Term,
@@ -855,7 +855,7 @@ fn step_24() -> Unit raise {
         s71(x72)
       }
     },
-    @list.List([@parser.parse_term("\\f:A->B x:P. F"), t74, t73]),
+    @list.List([@term_syntax.parse_term("(f : (A) -> B) => (x : P) => false"), t74, t73]),
   )
   let t69 = @tactics.repeat_tac(@tactics.strip_tac)
   let t78 = @tactics.then_tac(
@@ -905,7 +905,7 @@ fn step_25() -> Unit raise {
   )
   superadmissible_const_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s c. superadmissible(<<) p s (\\f. c)"),
+      @term_syntax.parse_term("∀ p : ((_) -> _, _) -> Bool, ∀ s : (_) -> _, ∀ c : (_) -> _, superadmissible((op_lt_lt : (_, _) -> Bool), p, s, (f : (_) -> _) => c)"),
       t81,
     ),
   )
@@ -927,8 +927,8 @@ pub fn superadmissible_const() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t90 = @meson.asm_meson_tac(@list.List([]))
   let t89 = @simp.asm_rewrite_tac(@list.List([]))
-  let t86 = @parser.parse_term("\\f:A->B. anything:P->B")
-  let t87 = @parser.parse_term("\\f:A->B a:P. if p f a then t f a :A else s a")
+  let t86 = @term_syntax.parse_term("(f : (A) -> B) => (anything : (P) -> B)")
+  let t87 = @term_syntax.parse_term("(f : (A) -> B) => (a : P) => if (p : ((A) -> B, P) -> Bool)(f, a) { (t : ((A) -> B, P) -> A)(f, a) } else { (s : (P) -> A)(a) }")
   let t88 = @tactics.map_every(
     fn(
       x83 : @kernel.Term,
@@ -976,7 +976,7 @@ fn step_26() -> Unit raise {
         s84(x85)
       }
     },
-    @list.List([@parser.parse_term("\\f:A->B x:P. T"), t87, t86]),
+    @list.List([@term_syntax.parse_term("(f : (A) -> B) => (x : P) => true"), t87, t86]),
   )
   let t82 = @tactics.repeat_tac(@tactics.strip_tac)
   let t91 = @tactics.then_tac(
@@ -1234,15 +1234,15 @@ fn step_27() -> Unit raise {
       ),
     ]),
   )
-  let t113 = @parser.parse_term("H2:(A->B)->P->B")
-  let t114 = @parser.parse_term("G2:(A->B)->P->A")
-  let t115 = @parser.parse_term("P2:(A->B)->P->bool")
-  let t116 = @parser.parse_term("H1:(A->B)->P->B")
-  let t117 = @parser.parse_term("G1:(A->B)->P->A")
+  let t113 = @term_syntax.parse_term("(H2 : ((A) -> B, P) -> B)")
+  let t114 = @term_syntax.parse_term("(G2 : ((A) -> B, P) -> A)")
+  let t115 = @term_syntax.parse_term("(P2 : ((A) -> B, P) -> Bool)")
+  let t116 = @term_syntax.parse_term("(H1 : ((A) -> B, P) -> B)")
+  let t117 = @term_syntax.parse_term("(G1 : ((A) -> B, P) -> A)")
   let t118 = @tactics.map_every(
     @tactics.x_gen_tac,
     @list.List([
-      @parser.parse_term("P1:(A->B)->P->bool"),
+      @term_syntax.parse_term("(P1 : ((A) -> B, P) -> Bool)"),
       t117,
       t116,
       t115,
@@ -1574,7 +1574,7 @@ fn step_29() -> Unit raise {
   let t160 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([admissible()])),
   )
-  let t157 = @parser.parse_term("\\(f:A->B) x:P. (@z:B. F)")
+  let t157 = @term_syntax.parse_term("(f : (A) -> B) => (x : P) => select((z : B) => false)")
   let t158 = @parser.parse_term(
     "\\f:A->B x:P. arg x (@t. (pat:Q->D) t = e x):A",
   )
@@ -1626,7 +1626,7 @@ fn step_29() -> Unit raise {
       }
     },
     @list.List([
-      @parser.parse_term("\\(f:A->B) x:P. p f x /\\ ?t:Q. pat t:D = e x"),
+      @term_syntax.parse_term("(f : (A) -> B) => (x : P) => (p : ((A) -> B, P) -> Bool)(f, x) && (∃ t : Q, (pat : (Q) -> D)(t) == (e : (P) -> D)(x))"),
       t158,
       t157,
     ]),
@@ -1729,7 +1729,7 @@ fn step_30() -> Unit raise {
   let t177 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([admissible()])),
   )
-  let t174 = @parser.parse_term("\\(f:A->B) x:P. (@z:B. F)")
+  let t174 = @term_syntax.parse_term("(f : (A) -> B) => (x : P) => select((z : B) => false)")
   let t175 = @parser.parse_term(
     "\\f:A->B x:P. arg x (@t. (pat:Q->D) t = e x /\\ q x t):A",
   )
@@ -1933,15 +1933,15 @@ fn step_32() -> Unit raise {
   )
   let t235 = @simp.asm_rewrite_tac(@list.List([]))
   let t234 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t228 = @parser.parse_term("H2:(A->B)->P->B")
-  let t229 = @parser.parse_term("G2:(A->B)->P->A")
-  let t230 = @parser.parse_term("P2:(A->B)->P->bool")
-  let t231 = @parser.parse_term("H1:(A->B)->A->B")
-  let t232 = @parser.parse_term("G1:(A->B)->A->A")
+  let t228 = @term_syntax.parse_term("(H2 : ((A) -> B, P) -> B)")
+  let t229 = @term_syntax.parse_term("(G2 : ((A) -> B, P) -> A)")
+  let t230 = @term_syntax.parse_term("(P2 : ((A) -> B, P) -> Bool)")
+  let t231 = @term_syntax.parse_term("(H1 : ((A) -> B, A) -> B)")
+  let t232 = @term_syntax.parse_term("(G1 : ((A) -> B, A) -> A)")
   let t233 = @tactics.map_every(
     @tactics.x_gen_tac,
     @list.List([
-      @parser.parse_term("P1:(A->B)->A->bool"),
+      @term_syntax.parse_term("(P1 : ((A) -> B, A) -> Bool)"),
       t232,
       t231,
       t230,
@@ -2098,15 +2098,15 @@ fn step_32() -> Unit raise {
       t221,
     )
   })
-  let t210 = @parser.parse_term("clauses:((P->A)#((A->B)->P->B))list")
-  let t211 = @parser.parse_term("t:(A->B)->P->B")
+  let t210 = @term_syntax.parse_term("(clauses : List[((P) -> A, ((A) -> B, P) -> B)])")
+  let t211 = @term_syntax.parse_term("(t : ((A) -> B, P) -> B)")
   let t212 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("s:P->A"), t211, t210]),
+    @list.List([@term_syntax.parse_term("(s : (P) -> A)"), t211, t210]),
   )
   let t208 = @simp.rewrite_tac(@list.List([]))
-  let t206 = @parser.parse_term("\\f:A->B x:A. @y:B. T")
-  let t207 = @parser.parse_term("\\f:A->B. anything:A->A")
+  let t206 = @term_syntax.parse_term("(f : (A) -> B) => (x : A) => select((y : B) => true)")
+  let t207 = @term_syntax.parse_term("(f : (A) -> B) => (anything : (A) -> A)")
   let t209 = @list.List([
     @tactics.then_tac(
       @tactics.map_every(
@@ -2156,7 +2156,7 @@ fn step_32() -> Unit raise {
             s204(x205)
           }
         },
-        @list.List([@parser.parse_term("\\f:A->B x:A. F"), t207, t206]),
+        @list.List([@term_syntax.parse_term("(f : (A) -> B) => (x : A) => false"), t207, t206]),
       ),
       t208,
     ),
@@ -2190,9 +2190,9 @@ fn step_32() -> Unit raise {
     @tactics.all_tac
   })
   let t198 = @simp.asm_rewrite_tac(@list.List([]))
-  let t196 = @parser.parse_term("clauses:((P->A)#((A->B)->P->B))list")
+  let t196 = @term_syntax.parse_term("(clauses : List[((P) -> A, ((A) -> B, P) -> B)])")
   let t197 = @tactics.spec_tac(
-    @parser.parse_term("clauses:((P->A)#((A->B)->P->B))list"),
+    @term_syntax.parse_term("(clauses : List[((P) -> A, ((A) -> B, P) -> B)])"),
     t196,
   )
   let t195 = @tactics.first_x_assum(fn(
@@ -2647,7 +2647,7 @@ fn step_35() -> Unit raise {
     @list.List([@class.fun_eq_thm(), @pair.forall_pair_thm()]),
   )
   let paired_lambda = @tactics.prove(
-    @parser.parse_term("(\\x. P x) = (\\(a,b). P (a,b))"),
+    @term_syntax.parse_term("((x : (_, _)) => (P : ((_, _)) -> _)(x)) == GABS((f : ((_, _)) -> _) => ∀ a : _, ∀ b : _, GEQ(f((a, b)), P((a, b))))"),
     t265,
   )
   let t266 = @bool.ispec(
@@ -2796,7 +2796,7 @@ fn step_38() -> Unit raise {
       @arith.even(),
     ]),
   )
-  let t279 = @parser.parse_term("EVEN")
+  let t279 = @term_syntax.parse_term("EVEN")
   let t282 = @tactics.disch_then(fn(
     x281 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2933,8 +2933,8 @@ fn step_38() -> Unit raise {
       ),
     ) {
     More(simp1, tail=More(simp2, tail=More(simp3, tail=Empty))) => {
-      let false_tm = @parser.parse_term("F")
-      let and_tm = @parser.parse_term("(/\\)")
+      let false_tm = @term_syntax.parse_term("false")
+      let and_tm = @term_syntax.parse_term("op_slash_bslash")
       let eq_refl = @bool.eqt_intro(@bool.spec_all(@theorems.eq_refl()))
       fn(x294 : @kernel.Term) -> @kernel.Thm raise {
         let tm = x294
@@ -3070,7 +3070,7 @@ fn step_38() -> Unit raise {
     @list.List([@class.fun_eq_thm(), @pair.forall_pair_thm()]),
   )
   let t336 = @tactics.match_mp_tac(@theorems.eq_imp())
-  let t330 = @parser.parse_term("\\d c. (t:C#D->E) (c,d)")
+  let t330 = @term_syntax.parse_term("(d : D) => (c : C) => (t : ((C, D)) -> E)((c, d))")
   let t333 = @tactics.first_x_assum(fn(
     x332 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3139,7 +3139,7 @@ fn step_38() -> Unit raise {
       }
     })(((x331 : @kernel.Thm) => @bool.spec(t330, x331))(x332))
   })
-  let t324 = @parser.parse_term("\\b d c. (t:B->C#D->E) b (c,d)")
+  let t324 = @term_syntax.parse_term("(b : B) => (d : D) => (c : C) => (t : (B, (C, D)) -> E)(b, (c, d))")
   let t334 = @tactics.first_x_assum(fn(
     x326 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3208,7 +3208,7 @@ fn step_38() -> Unit raise {
       }
     })(((x325 : @kernel.Thm) => @bool.spec(t324, x325))(x326))
   })
-  let t318 = @parser.parse_term("\\a b d c. (t:A->B->C#D->E) a b (c,d)")
+  let t318 = @term_syntax.parse_term("(a : A) => (b : B) => (d : D) => (c : C) => (t : (A, B, (C, D)) -> E)(a, b, (c, d))")
   let t335 = @list.List([
     @tactics.first_x_assum(fn(
       x320 : @kernel.Thm,
@@ -4931,7 +4931,7 @@ fn step_38() -> Unit raise {
       )((asl_5, w_5))
     }
   }
-  let one_tm = @parser.parse_term("1")
+  let one_tm = @term_syntax.parse_term("1")
   let constant_measure_then : (
     ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -5178,13 +5178,13 @@ fn step_38() -> Unit raise {
       @tactics.ap_term_tac,
     )
   })
-  let t561 = @parser.parse_term("\\(b:B,a:A). a,b")
+  let t561 = @term_syntax.parse_term("GABS((f : ((B, A)) -> (A, B)) => ∀ b : B, ∀ a : A, GEQ(f((b, a)), (a, b)))")
   let t562 = @simp.asm_simp_tac(
     @list.List([
       @wf.wf_lex(),
       @class.eta_ax(),
       @bool.ispecl(
-        @list.List([@parser.parse_term("R:A#B->A#B->bool"), t561]),
+        @list.List([@term_syntax.parse_term("(R : ((A, B), (A, B)) -> Bool)"), t561]),
         @wf.wf_measure_gen(),
       ),
     ]),
@@ -5300,10 +5300,10 @@ fn step_38() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise = @tactics.conv_tac(
     @equal.binder_conv(
-      @equal.depth_binop_conv(@parser.parse_term("(/\\)"), t582),
+      @equal.depth_binop_conv(@term_syntax.parse_term("op_slash_bslash"), t582),
     ),
   )
-  let false_tm_1 = @parser.parse_term("\\x:A y:A. F")
+  let false_tm_1 = @term_syntax.parse_term("(x : A) => (y : A) => false")
   let t587 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()])),
     @int.arith_tac,
