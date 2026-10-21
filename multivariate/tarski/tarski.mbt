@@ -3,7 +3,7 @@
 ///|
 /// TARSKI_AXIOM_1_EUCLIDEAN
 fn step_1() -> Unit raise {
-  tarski_axiom_1_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], dist((a, b)) == dist((b, a))"), @vectors.norm_arith_tac))
+  tarski_axiom_1_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], distance((a, b)) == distance((b, a))"), @vectors.norm_arith_tac))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn tarski_axiom_1_euclidean() -> @kernel.Thm {
 ///|
 /// TARSKI_AXIOM_2_EUCLIDEAN
 fn step_2() -> Unit raise {
-  tarski_axiom_2_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ p : Cart[Real, _], ∀ q : Cart[Real, _], ∀ r : Cart[Real, _], ∀ s : Cart[Real, _], dist((a, b)) == dist((p, q)) && dist((a, b)) == dist((r, s)) → dist((p, q)) == dist((r, s))"), @calc_rat.real_arith_tac))
+  tarski_axiom_2_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ p : Cart[Real, _], ∀ q : Cart[Real, _], ∀ r : Cart[Real, _], ∀ s : Cart[Real, _], distance((a, b)) == distance((p, q)) && distance((a, b)) == distance((r, s)) → distance((p, q)) == distance((r, s))"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn tarski_axiom_2_euclidean() -> @kernel.Thm {
 ///|
 /// TARSKI_AXIOM_3_EUCLIDEAN
 fn step_3() -> Unit raise {
-  tarski_axiom_3_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], dist((a, b)) == dist((c, c)) → a == b"), @vectors.norm_arith_tac))
+  tarski_axiom_3_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, _], ∀ b : Cart[Real, _], ∀ c : Cart[Real, _], distance((a, b)) == distance((c, c)) → a == b"), @vectors.norm_arith_tac))
 }
 
 ///|
@@ -53,13 +53,13 @@ fn step_4() -> Unit raise {
   let t8 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@calc_rat.real_ring(@term_syntax.parse_term("(a : Real) == real_of_num(1) + (b : Real) → a * (q : Real) == q + b * q"))), t6), t7])
   let t5 = @simp.rewrite_tac(@list.List([@vectors.dist(), @vectors.norm_mul(), @vectors.norm_neg(), @real.real_abs_div(), @vectors.real_abs_norm(), @vectors.vector_arith(@term_syntax.parse_term("(q : Cart[Real, _]) - -op_pct((a : Real), q) == op_pct(real_of_num(1) + a, q)"))]))
   let t4 = @simp.rewrite_tac(@list.List([@vectors.between(), @vectors.dist_0()]))
-  let t9 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("-op_pct(dist(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) / norm((q : Cart[Real, Tybit0[Unit]])), q)")), t4), t5), @tactics.conj_tac), t8)
+  let t9 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("-op_pct(distance(((b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) / norm((q : Cart[Real, Tybit0[Unit]])), q)")), t4), t5), @tactics.conj_tac), t8)
   let t10 = @list.List([@simp.asm_simp_tac(@list.List([@vectors.between_refl(), @vectors.vector_choose_size(), @vectors.dist_pos_le()])), t9])
   let t3 = @class.asm_cases_tac(@term_syntax.parse_term("(q : Cart[Real, Tybit0[Unit]]) == vec(0)"))
   let t2 = @simp.rewrite_tac(@list.List([@vectors.dist_0()]))
   let t1 = @tactics.repeat_tac(@tactics.gen_tac)
   let t11 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@determinants.geom_origin_tac(@term_syntax.parse_term("(a : Cart[Real, Tybit0[Unit]])")), t1), t2), t3), t10)
-  tarski_axiom_4_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ q : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], ∃ x : Cart[Real, Tybit0[Unit]], between(a, (q, x)) && dist((a, x)) == dist((b, c))"), t11))
+  tarski_axiom_4_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ q : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], ∃ x : Cart[Real, Tybit0[Unit]], between(a, (q, x)) && distance((a, x)) == distance((b, c))"), t11))
 }
 
 ///|
@@ -75,8 +75,8 @@ pub fn tarski_axiom_4_euclidean() -> @kernel.Thm {
 /// TARSKI_AXIOM_5_EUCLIDEAN
 fn step_5() -> Unit raise {
   let t22 = @simp.asm_simp_tac(@list.List([@real.real_eq_mul_rcancel(), @vectors.norm_eq_0(), @realax.real_abs(), @vectors.vector_sub_eq()]))
-  let t21 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((b : Cart[Real, N]), b + (x : Cart[Real, N]))) == norm(x)")), @vectors.norm_mul()]))
-  let t20 = @tactics.undisch_tac(@term_syntax.parse_term("dist(((b : Cart[Real, N]), (x : Cart[Real, N]))) == dist((b, (y : Cart[Real, N])))"))
+  let t21 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((b : Cart[Real, N]), b + (x : Cart[Real, N]))) == norm(x)")), @vectors.norm_mul()]))
+  let t20 = @tactics.undisch_tac(@term_syntax.parse_term("distance(((b : Cart[Real, N]), (x : Cart[Real, N]))) == distance((b, (y : Cart[Real, N])))"))
   let t19 = @tactics.repeat_tac(@tactics.strip_tac)
   let t18 = @simp.asm_simp_tac(@list.List([]))
   let t15 = @drule.match_mp(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@vectors.between_exists_extension()))
@@ -89,10 +89,10 @@ fn step_5() -> Unit raise {
     })(t15(x16))
   }))
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), t18), t19), t20), t21), t22)
-  let lemma = @tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], !(b == a) && between(b, (a, x)) && between(b, (a, y)) && dist((b, x)) == dist((b, y)) → x == y"), t23)
-  let t56 = @meson.asm_meson_tac(@list.List([@vectors.between_translation(), @determinants.orthogonal_transformation(), @vectors.norm_arith(@term_syntax.parse_term("dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))")), @determinants.orthogonal_transformation_isometry(), @convex.between_linear_image_eq(), @vectors.dist_eq_0(), @determinants.orthogonal_transformation_injective()]))
+  let lemma = @tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ x : Cart[Real, N], ∀ y : Cart[Real, N], !(b == a) && between(b, (a, x)) && between(b, (a, y)) && distance((b, x)) == distance((b, y)) → x == y"), t23)
+  let t56 = @meson.asm_meson_tac(@list.List([@vectors.between_translation(), @determinants.orthogonal_transformation(), @vectors.norm_arith(@term_syntax.parse_term("distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))")), @determinants.orthogonal_transformation_isometry(), @convex.between_linear_image_eq(), @vectors.dist_eq_0(), @determinants.orthogonal_transformation_injective()]))
   let t54 = @vectors.vector_arith(@term_syntax.parse_term("((a : Cart[Real, N]) + (x : Cart[Real, N]) == a + (y : Cart[Real, N])) == (x == y)"))
-  let t55 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("dist(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == dist((x, y))")), @vectors.between_translation(), t54]))
+  let t55 = @simp.asm_rewrite_tac(@list.List([@vectors.norm_arith(@term_syntax.parse_term("distance(((a : Cart[Real, N]) + (x : Cart[Real, N]), a + (y : Cart[Real, N]))) == distance((x, y))")), @vectors.between_translation(), t54]))
   let t51 = @term_syntax.parse_term("(k : Cart[Real, Tybit0[Unit]]) + (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]]))")
   let t52 = @tactics.map_every(fn(x48 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s49 = @tactics.exists_tac(x48)
@@ -134,7 +134,7 @@ fn step_5() -> Unit raise {
   let t28 = @term_syntax.parse_term("(b : Cart[Real, Tybit0[Unit]])")
   let t29 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(a : Cart[Real, Tybit0[Unit]])"), t28, t27, t26, t25, t24]), @convex.rigid_transformation_between_3()))
   let t57 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), @tactics.ants_tac), t30), t39), t43), t47), t53), t55), t56)
-  tarski_axiom_5_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ a' : Cart[Real, Tybit0[Unit]], ∀ b' : Cart[Real, Tybit0[Unit]], ∀ c' : Cart[Real, Tybit0[Unit]], ∀ x' : Cart[Real, Tybit0[Unit]], !(a == b) && dist((a, b)) == dist((a', b')) && dist((a, c)) == dist((a', c')) && dist((b, c)) == dist((b', c')) && between(b, (a, x)) && between(b', (a', x')) && dist((b, x)) == dist((b', x')) → dist((c, x)) == dist((c', x'))"), t57))
+  tarski_axiom_5_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], ∀ x : Cart[Real, Tybit0[Unit]], ∀ a' : Cart[Real, Tybit0[Unit]], ∀ b' : Cart[Real, Tybit0[Unit]], ∀ c' : Cart[Real, Tybit0[Unit]], ∀ x' : Cart[Real, Tybit0[Unit]], !(a == b) && distance((a, b)) == distance((a', b')) && distance((a, c)) == distance((a', c')) && distance((b, c)) == distance((b', c')) && between(b, (a, x)) && between(b', (a', x')) && distance((b, x)) == distance((b', x')) → distance((c, x)) == distance((c', x'))"), t57))
 }
 
 ///|
@@ -302,7 +302,7 @@ fn step_9() -> Unit raise {
   let t140 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.collinear_between_cases())]))
   let t139 = @simp.once_rewrite_tac(@list.List([@vectors.between_sym()]))
   let t146 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t139), t140), t141), t142), t143), t144), t145)
-  tarski_axiom_9_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Unit]], ∀ q : Cart[Real, Tybit0[Unit]], ∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], !(p == q) && dist((a, p)) == dist((a, q)) && dist((b, p)) == dist((b, q)) && dist((c, p)) == dist((c, q)) → between(b, (a, c)) || between(c, (b, a)) || between(a, (c, b))"), t146))
+  tarski_axiom_9_euclidean_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Unit]], ∀ q : Cart[Real, Tybit0[Unit]], ∀ a : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], ∀ c : Cart[Real, Tybit0[Unit]], !(p == q) && distance((a, p)) == distance((a, q)) && distance((b, p)) == distance((b, q)) && distance((c, p)) == distance((c, q)) → between(b, (a, c)) || between(c, (b, a)) || between(a, (c, b))"), t146))
 }
 
 ///|
