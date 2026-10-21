@@ -74801,13 +74801,13 @@ Multivariate/cvectors quotations (416):
   \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(-x, y) == -ccross(x, y)
   \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, -y) == -ccross(x, y)
   \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], \226\136\128 z : Cart[Cart[Real, Tybit0[Unit]], Tybit1[Unit]], ccross(x, ccross(y, z)) + (ccross(y, ccross(z, x)) + ccross(z, ccross(x, y))) == cvector_zero
-  vector_neg:complex->complex
-  vector_add:complex->complex->complex
-  vector_sub:complex->complex->complex
-  complex_mul:complex->complex->complex
-  complex_div:complex->complex->complex
-  complex_pow:complex->num->complex
-  complex_inv:complex->complex
+  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
   (cdot : (Cart[Cart[Real, Tybit0[Unit]], N], Cart[Cart[Real, Tybit0[Unit]], N]) -> Cart[Real, Tybit0[Unit]])((x : Cart[Cart[Real, Tybit0[Unit]], N]), (y : Cart[Cart[Real, Tybit0[Unit]], N])) == (vsum : ((Num) -> Bool, (Num) -> Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])(x, i) * cnj((op_dollar : (Cart[Cart[Real, Tybit0[Unit]], N], Num) -> Cart[Real, Tybit0[Unit]])(y, i)))
   (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
   \226\136\128 x : Cart[Cart[Real, Tybit0[Unit]], N], \226\136\128 y : Cart[Cart[Real, Tybit0[Unit]], N], cdot(x, y) == cnj(cdot(y, x))
