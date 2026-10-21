@@ -81364,13 +81364,13 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|1 basis elements and 0 critical pairs
       #|Translating certificate to HOL inferences
       #|100/dirichlet quotations (693):
-      #|  vector_neg:complex->complex
-      #|  vector_add:complex->complex->complex
-      #|  vector_sub:complex->complex->complex
-      #|  complex_mul:complex->complex->complex
-      #|  complex_div:complex->complex->complex
-      #|  complex_pow:complex->num->complex
-      #|  complex_inv:complex->complex
+      #|  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+      #|  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  \226\136\128 f : (Num, Num) -> Cart[Real, _], \226\136\128 x : Num, vsum(op_dot_dot(1, x), (n : Num) => vsum({(d : Num) | divides(d, n)}, f(n))) == vsum(op_dot_dot(1, x), (n : Num) => vsum(op_dot_dot(1, DIV(x, n)), (k : Num) => f(k * n, n)))
       #|  real_of_num(1) / real_of_num(2)
       #|  real_of_num(4) == real_of_num(2) * real_of_num(2)
@@ -81392,7 +81392,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]]) => (Cx(real_of_num(1)) - clog(z)) / pow(z, 2)
       #|  (z : Cart[Real, Tybit0[Unit]]) => clog(z) / z
       #|  \226\136\128 n : Num, 4 <= n \226\134\146 log(real_of_num(n) + real_of_num(1)) / (real_of_num(n) + real_of_num(1)) <= log(real_of_num(n)) / real_of_num(n)
-      #|  (f has_complex_derivative f') net
+      #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
       #|  cexp(clog((a : Cart[Real, Tybit0[Unit]])) / Cx(real_of_num((n : Num))))
       #|  (\226\136\128 x : _, !(Q : (_) -> Bool)(x) \226\134\146 !(P : (_) -> Bool)(x)) && (\226\136\131 x : _, P(x)) \226\134\146 (\226\136\131 x : _, P(x) && Q(x))
       #|  2 <= (n : Num) \226\134\146 !(n == 1)
@@ -81916,7 +81916,7 @@ test "100/dirichlet matches 100/dirichlet.ml" {
       #|  (d : Num)
       #|  sum(IMAGE((k : Num) => EXP((p : Num), k), op_dot_dot(0, (N : Num))), (x : Num) => Re(vsum({(d : Num) | divides(d, x)}, (d : Num) => (c : (Num) -> Cart[Real, Tybit0[Unit]])(d))) * pow((t : Real), x))
       #|  (a : Real) <= Re((z : Cart[Real, Tybit0[Unit]])) && abs(Re(z)) <= norm(z) \226\134\146 a <= norm(z)
-      #|  (B : Real) + real_of_num(1) <= norm((x : Cart[Real, _])) \226\134\146 norm((y : Cart[Real, _])) <= B \226\134\146 !(dist((x, y)) < real_of_num(1))
+      #|  (B : Real) + real_of_num(1) <= norm((x : Cart[Real, _])) \226\134\146 norm((y : Cart[Real, _])) <= B \226\134\146 !(distance((x, y)) < real_of_num(1))
       #|  :real
       #|  :real
       #|  norm((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(Cx((t : Real)))) <= (B : Real)
