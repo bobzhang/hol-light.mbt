@@ -55,7 +55,7 @@ fn step_2() -> Unit raise {
 ///|
 /// E_DEF
 fn step_3() -> Unit raise {
-  let t1 = @parser.parse_term("(E (Lit n) s = n)\n        /\\  (E (Var v) s = s v)\n        /\\  (E (Plus e1 e2) s = E e1 s + E e2 s)")
+  let t1 = @term_syntax.parse_term("(E : (Exp, (List[Char]) -> Num) -> Num)(Lit((n : Num)), (s : (List[Char]) -> Num)) == n && E(Var((v : List[Char])), s) == s(v) && E(Plus((e1 : Exp), (e2 : Exp)), s) == E(e1, s) + E(e2, s)")
   e_def_c.set(@recursion.new_recursive_definition(exp_recursion())(t1))
 }
 
@@ -123,7 +123,7 @@ fn step_5() -> Unit raise {
 ///|
 /// update_def
 fn step_6() -> Unit raise {
-  update_def_c.set(@pair.new_definition(@parser.parse_term("update x z s y = if (y = x) then z else s y")))
+  update_def_c.set(@pair.new_definition(@term_syntax.parse_term("(update : (_, _, (_) -> _, _) -> _)((x : _), (z : _), (s : (_) -> _), (y : _)) == (if y == x { z } else { s(y) })")))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn update_def() -> @kernel.Thm {
 ///|
 /// S_DEF
 fn step_7() -> Unit raise {
-  let t2 = @parser.parse_term("(S (LI n) s = update Acc n s)\n        /\\  (S (LOAD r) s = update Acc (s (Reg r)) s)\n        /\\  (S (STO r) s = update (Reg r) (s Acc) s)\n        /\\  (S (ADD r) s = update Acc (s (Reg r) + s Acc) s)")
+  let t2 = @term_syntax.parse_term("(S : (Inst, (Cell) -> Num, Cell) -> Num)(LI((n : Num)), (s : (Cell) -> Num)) == update(Acc, n, s) && S(LOAD((r : Num)), s) == update(Acc, s(Reg(r)), s) && S(STO(r), s) == update(Reg(r), s(Acc), s) && S(ADD(r), s) == update(Acc, s(Reg(r)) + s(Acc), s)")
   s_def_c.set(@recursion.new_recursive_definition(inst_recursion())(t2))
 }
 
@@ -154,7 +154,7 @@ pub fn s_def() -> @kernel.Thm {
 ///|
 /// S'_DEF
 fn step_8() -> Unit raise {
-  let t3 = @parser.parse_term("(S' [] s = s)\n        /\\  (S' (CONS inst rest) s = S' rest (S inst s))")
+  let t3 = @term_syntax.parse_term("(S' : (List[Inst], (Cell) -> Num, Cell) -> Num)(NIL, (s : (Cell) -> Num)) == s && S'(CONS((inst : Inst), (rest : List[Inst])), s) == S'(rest, S(inst, s))")
   s_p_def_c.set(@recursion.new_recursive_definition(@ind_types.list_recursion())(t3))
 }
 
@@ -170,7 +170,7 @@ pub fn s_p_def() -> @kernel.Thm {
 ///|
 /// C_DEF
 fn step_9() -> Unit raise {
-  let t4 = @parser.parse_term("(C (Lit n) map r = [LI n])\n         /\\  (C (Var v) map r = [LOAD (map v)])\n         /\\  (C (Plus e1 e2) map r =\n                  APPEND\n                      (APPEND (C e1 map r) [STO r])\n                      (APPEND (C e2 map (r + 1)) [ADD r]))")
+  let t4 = @term_syntax.parse_term("(C : (Exp, (List[Char]) -> Num, Num) -> List[Inst])(Lit((n : Num)), (map : (List[Char]) -> Num), (r : Num)) == [LI(n)] && C(Var((v : List[Char])), map, r) == [LOAD(map(v))] && C(Plus((e1 : Exp), (e2 : Exp)), map, r) == APPEND(APPEND(C(e1, map, r), [STO(r)]), APPEND(C(e2, map, r + 1), [ADD(r)]))")
   c_def_c.set(@recursion.new_recursive_definition(exp_recursion())(t4))
 }
 
@@ -203,7 +203,7 @@ pub fn cellth() -> @kernel.Thm {
 /// S'_APPEND
 fn step_11() -> Unit raise {
   let t6 = @tactics.then_tac(@lists.list_induct_tac, @simp.asm_simp_tac(@list.List([s_p_def(), @lists.append()])))
-  s_p_append_c.set(@tactics.prove(@parser.parse_term("forall p1 p2 s. S' (APPEND p1 p2) s = S' p2 (S' p1 s)"), t6))
+  s_p_append_c.set(@tactics.prove(@term_syntax.parse_term("∀ p1 : List[Inst], ∀ p2 : List[Inst], ∀ s : (Cell) -> Num, S'(APPEND(p1, p2), s) == S'(p2, S'(p1, s))"), t6))
 }
 
 ///|
@@ -219,7 +219,7 @@ pub fn s_p_append() -> @kernel.Thm {
 /// UPDATE_DIFFERENT
 fn step_12() -> Unit raise {
   let t7 = @simp.simp_tac(@list.List([update_def()]))
-  update_different_c.set(@tactics.prove(@parser.parse_term("forall x y z s. ~(x = y) ==> (update x z s y = s y)"), t7))
+  update_different_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : _, ∀ y : _, ∀ z : _, ∀ s : (_) -> _, !(x == y) → update(x, z, s, y) == s(y)"), t7))
 }
 
 ///|
@@ -235,7 +235,7 @@ pub fn update_different() -> @kernel.Thm {
 /// UPDATE_SAME
 fn step_13() -> Unit raise {
   let t8 = @simp.simp_tac(@list.List([update_def()]))
-  update_same_c.set(@tactics.prove(@parser.parse_term("forall x z s. update x z s x = z"), t8))
+  update_same_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : _, ∀ z : _, ∀ s : (_) -> _, update(x, z, s, x) == z"), t8))
 }
 
 ///|
@@ -251,10 +251,10 @@ pub fn update_same() -> @kernel.Thm {
 /// CORRECTNESS_THEOREM
 fn step_14() -> Unit raise {
   let t10 = @equal.gsym(@class.skolem_thm())
-  let t11 = @simp.simp_tac(@list.List([@int.arith_rule(@parser.parse_term("(x < y ==> x < y + 1 /\\ ~(x = y)) /\\ x < x + 1")), cellth(), update_same(), update_different(), t10, @theorems.exists_refl()]))
+  let t11 = @simp.simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((x : Num) < (y : Num) → x < y + 1 && !(x == y)) && x < x + 1")), cellth(), update_same(), update_different(), t10, @theorems.exists_refl()]))
   let t9 = @simp.rewrite_tac(@list.List([e_def(), s_def(), s_p_def(), update_def(), c_def(), s_p_append()]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(exp_induct()), t9), t11)
-  correctness_theorem_c.set(@tactics.prove(@parser.parse_term("forall e map s s' r.\n      (forall v. map v < r) ==>\n      (forall v. s v = s' (Reg (map v))) ==>\n          (S' (C e map r) s' Acc = E e s) /\\\n          (forall x. (x < r) ==> (S' (C e map r) s' (Reg x) = s' (Reg x)))"), t12))
+  correctness_theorem_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Exp, ∀ map : (List[Char]) -> Num, ∀ s : (List[Char]) -> Num, ∀ s' : (Cell) -> Num, ∀ r : Num, (∀ v : List[Char], map(v) < r) → (∀ v : List[Char], s(v) == s'(Reg(map(v)))) → S'(C(e, map, r), s', Acc) == E(e, s) && (∀ x : Num, x < r → S'(C(e, map, r), s', Reg(x)) == s'(Reg(x)))"), t12))
 }
 
 ///|
