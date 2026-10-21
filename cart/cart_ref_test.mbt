@@ -5481,54 +5481,54 @@ test "cart matches cart.ml" {
       #|0..0..1..solved at 4
       #|cart quotations (143):
       #|  dimindex(s:A->bool) = if FINITE(:A) then CARD(:A) else 1
-      #|  forall s:A->bool. ~(dimindex(s) = 0)
-      #|  1 <= x <=> ~(x = 0)
-      #|  forall s:A->bool. 1 <= dimindex(s)
-      #|  forall s. dimindex(s:A->bool) = dimindex(:A)
-      #|  (:A) HAS_SIZE n ==> dimindex(:A) = n
-      #|  (:N) HAS_SIZE dimindex (:N) <=> FINITE(:N)
-      #|  (:1) = {one}
-      #|  (:1) HAS_SIZE 1
-      #|  {i | i < dimindex(:N)} = 0..dimindex(:N)-1
+      #|  \226\136\128 s : (A) -> Bool, !(dimindex(s) == 0)
+      #|  (1 <= (x : Num)) == !(x == 0)
+      #|  \226\136\128 s : (A) -> Bool, 1 <= dimindex(s)
+      #|  \226\136\128 s : (A) -> Bool, (dimindex : ((A) -> Bool) -> Num)(s) == (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))
+      #|  (HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool), (n : Num)) \226\134\146 (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) == n
+      #|  (HAS_SIZE : ((N) -> Bool, Num) -> Bool)((UNIV : (N) -> Bool), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == (FINITE : ((N) -> Bool) -> Bool)((UNIV : (N) -> Bool))
+      #|  UNIV == {one}
+      #|  (HAS_SIZE : ((Unit) -> Bool, Num) -> Bool)((UNIV : (Unit) -> Bool), 1)
+      #|  {(i : Num) | i < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))} == op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1)
       #|  1
-      #|  ?x. x IN 1..dimindex(:A)
+      #|  \226\136\131 x : Num, IN(x, op_dot_dot(1, (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))))
       #|  UNIV:(A)finite_image->bool = IMAGE finite_index (1..dimindex(:A))
       #|  forall s. (UNIV:(A)finite_image->bool) HAS_SIZE dimindex(s:A->bool)
       #|  forall s. CARD(UNIV:(A)finite_image->bool) = dimindex(s:A->bool)
-      #|  FINITE(UNIV:(A)finite_image->bool)
-      #|  t:A->bool
+      #|  (FINITE : ((Finite_image[A]) -> Bool) -> Bool)((UNIV : (Finite_image[A]) -> Bool))
+      #|  (t : (A) -> Bool)
       #|  forall s t. dimindex(s:(A)finite_image->bool) = dimindex(t:A->bool)
       #|  forall i:(A)finite_image.\n        ?!n. 1 <= n /\\ n <= dimindex(:A) /\\ (finite_index n = i)
       #|  forall i j. 1 <= i /\\ i <= dimindex(:A) /\\\n         1 <= j /\\ j <= dimindex(:A)\n         ==> ((finite_index i :A finite_image = finite_index j) <=>\n              (i = j))
       #|  (forall k:(N)finite_image. P k) =\n   (forall i. 1 <= i /\\ i <= dimindex(:N) ==> P(finite_index i))
-      #|  ?f:(B)finite_image->A. T
-      #|  (x:A^N)$i = dest_cart x (finite_index i)
+      #|  \226\136\131 f : (Finite_image[B]) -> A, true
+      #|  (op_dollar : (Cart[A, N], Num) -> A)((x : Cart[A, N]), (i : Num)) == dest_cart(x, finite_index(i))
       #|  forall x:A^B y.\n    (x = y) <=> forall i. 1 <= i /\\ i <= dimindex(:B) ==> (x$i = y$i)
       #|  (lambda) g =\n     @f:A^B. forall i. 1 <= i /\\ i <= dimindex(:B) ==> (f$i = g i)
       #|  mk_cart(\\k. g(@i. 1 <= i /\\  i <= dimindex(:B) /\\\n                                (finite_index i = k))):A^B
       #|  forall i. 1 <= i /\\ i <= dimindex(:B)\n       ==> (((lambda) g:A^B) $i = g i)
       #|  forall f:A^B g.\n        (forall i. 1 <= i /\\ i <= dimindex(:B) ==> (f$i = g i)) <=>\n        ((lambda) g = f)
-      #|  forall g. (lambda i. g$i):A^B = g
+      #|  \226\136\128 g : Cart[A, B], lambda((i : Num) => op_dollar(g, i)) == g
       #|  forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\ forall x:A^N. x$i = x$k
       #|  forall i. ?k. 1 <= k /\\ k <= dimindex(:N) /\\\n           (forall x:A^N. x$i = x$k) /\\ (forall y:B^N. y$i = y$k)
-      #|  forall x y:A^N. x = y <=> forall i. x$i = y$i
-      #|  1 <= a ==> 1 <= a + b
+      #|  \226\136\128 x : Cart[A, N], \226\136\128 y : Cart[A, N], (x == y) == (\226\136\128 i : Num, op_dollar(x, i) == op_dollar(y, i))
+      #|  1 <= (a : Num) \226\134\146 1 <= a + (b : Num)
       #|  1
-      #|  ?x. x IN 1..(dimindex(:A) + dimindex(:B))
+      #|  \226\136\131 x : Num, IN(x, op_dot_dot(1, (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) + (dimindex : ((B) -> Bool) -> Num)((UNIV : (B) -> Bool))))
       #|  (pastecart:A^M->A^N->A^(M,N)finite_sum) f g =\n        lambda i. if i <= dimindex(:M) then f$i\n                  else g$(i - dimindex(:M))
-      #|  (fstcart:A^(M,N)finite_sum->A^M) f = lambda i. f$i
+      #|  (fstcart : (Cart[A, Finite_sum[M, N]]) -> Cart[A, M])((f : Cart[A, Finite_sum[M, N]])) == lambda((i : Num) => op_dollar(f, i))
       #|  (sndcart:A^(M,N)finite_sum->A^N) f =\n        lambda i. f$(i + dimindex(:M))
       #|  UNIV:(A,B)finite_sum->bool =\n       IMAGE mk_finite_sum (1..(dimindex(:A)+dimindex(:B)))
       #|  (UNIV:(M,N)finite_sum->bool) HAS_SIZE (dimindex(:M) + dimindex(:N))
       #|  dimindex(:(M,N)finite_sum) = dimindex(:M) + dimindex(:N)
-      #|  a <= b ==> a <= b + c
-      #|  forall x y. fstcart(pastecart (x:A^M) (y:A^N)) = x
-      #|  1 <= i ==> ~(i + a <= a)
-      #|  1 <= i /\\ i <= b ==> 1 <= i + a /\\ i + a <= a + b
-      #|  forall x y. sndcart(pastecart (x:A^M) (y:A^N)) = y
-      #|  ~(i <= a) ==> ((i - a) + a = i)
-      #|  ~(i <= a) ==> 1 <= i - a
-      #|  i <= a + b ==> i - a <= b
+      #|  (a : Num) <= (b : Num) \226\134\146 a <= b + (c : Num)
+      #|  \226\136\128 x : Cart[A, M], \226\136\128 y : Cart[A, N], fstcart(pastecart(x, y)) == x
+      #|  1 <= (i : Num) \226\134\146 !(i + (a : Num) <= a)
+      #|  1 <= (i : Num) && i <= (b : Num) \226\134\146 1 <= i + (a : Num) && i + a <= a + b
+      #|  \226\136\128 x : Cart[A, M], \226\136\128 y : Cart[A, N], sndcart(pastecart(x, y)) == y
+      #|  !((i : Num) <= (a : Num)) \226\134\146 i - a + a == i
+      #|  !((i : Num) <= (a : Num)) \226\134\146 1 <= i - a
+      #|  (i : Num) <= (a : Num) + (b : Num) \226\134\146 i - a <= b
       #|  forall z. pastecart (fstcart z) (sndcart z):A^(M,N)finite_sum = z
       #|  forall x y:A^(M,N)finite_sum.\n        x = y <=> fstcart x = fstcart y /\\ sndcart x = sndcart y
       #|  (forall p:A^(M,N)finite_sum. P p) <=> forall x y. P (pastecart x y)
@@ -5536,8 +5536,8 @@ test "cart matches cart.ml" {
       #|  forall x:A^M y:A^N w z. pastecart x y = pastecart w z <=> x = w /\\ y = z
       #|  forall x:A^(M,N)finite_sum i. 1 <= i /\\ i <= dimindex(:M)\n                           ==> fstcart x$i = x$i
       #|  forall x:A^(M,N)finite_sum i. 1 <= i /\\ i <= dimindex(:N)\n                           ==> sndcart x$i = x$(i + dimindex(:M))
-      #|  dimindex(:M) + 1 <= i ==> 1 <= i
-      #|  i <= dimindex(:(M,N)finite_sum)
+      #|  (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 <= (i : Num) \226\134\146 1 <= i
+      #|  (i : Num) <= (dimindex : ((Finite_sum[M, N]) -> Bool) -> Num)((UNIV : (Finite_sum[M, N]) -> Bool))
       #|  (forall u:A^M v:A^N i. 1 <= i /\\ i <= dimindex(:M) ==> pastecart u v$i = u$i) /\\\n   (forall u:A^M v:A^N i. dimindex(:M) + 1 <= i /\\ i <= dimindex(:M) + dimindex(:N)\n                    ==> pastecart u v$i = v$(i - dimindex(:M)))
       #|  1
       #|  ?x. x IN 1..(if dimindex(:B) < dimindex(:A)\n                  then dimindex(:A) - dimindex(:B) else 1)
@@ -5545,52 +5545,52 @@ test "cart matches cart.ml" {
       #|  (UNIV:(M,N)finite_diff->bool) HAS_SIZE\n   (if dimindex(:N) < dimindex(:M) then dimindex(:M) - dimindex(:N) else 1)
       #|  dimindex(:(M,N)finite_diff) =\n     if dimindex(:N) < dimindex(:M) then dimindex(:M) - dimindex(:N) else 1
       #|  1
-      #|  ?x. x IN 1..(dimindex(:A) * dimindex(:B))
+      #|  \226\136\131 x : Num, IN(x, op_dot_dot(1, (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) * (dimindex : ((B) -> Bool) -> Num)((UNIV : (B) -> Bool))))
       #|  UNIV:(A,B)finite_prod->bool =\n       IMAGE mk_finite_prod (1..(dimindex(:A)*dimindex(:B)))
       #|  (UNIV:(M,N)finite_prod->bool) HAS_SIZE (dimindex(:M) * dimindex(:N))
       #|  dimindex(:(M,N)finite_prod) = dimindex(:M) * dimindex(:N)
-      #|  (:(A)tybit0) = IMAGE mktybit0 (:(A,A)finite_sum)
-      #|  (:(A)tybit0) HAS_SIZE 2 * dimindex(:A)
+      #|  (UNIV : (Tybit0[A]) -> Bool) == (IMAGE : ((Finite_sum[A, A]) -> Tybit0[A], (Finite_sum[A, A]) -> Bool, Tybit0[A]) -> Bool)((mktybit0 : (Finite_sum[A, A]) -> Tybit0[A]), (UNIV : (Finite_sum[A, A]) -> Bool))
+      #|  (HAS_SIZE : ((Tybit0[A]) -> Bool, Num) -> Bool)((UNIV : (Tybit0[A]) -> Bool), 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)))
       #|  (:(A)tybit1) = IMAGE mktybit1 (:((A,A)finite_sum,1)finite_sum)
-      #|  (:(A)tybit1) HAS_SIZE 2 * dimindex(:A) + 1
-      #|  dimindex(:(A)tybit0) = 2 * dimindex(:A)
-      #|  dimindex(:(A)tybit1) = 2 * dimindex(:A) + 1
+      #|  (HAS_SIZE : ((Tybit1[A]) -> Bool, Num) -> Bool)((UNIV : (Tybit1[A]) -> Bool), 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) + 1)
+      #|  (dimindex : ((Tybit0[A]) -> Bool) -> Num)((UNIV : (Tybit0[A]) -> Bool)) == 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))
+      #|  (dimindex : ((Tybit1[A]) -> Bool) -> Num)((UNIV : (Tybit1[A]) -> Bool)) == 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) + 1
       #|  dimindex(:1) = 1 /\\\n   dimindex(:(A)tybit0) = 2 * dimindex(:A) /\\\n   dimindex(:(A)tybit1) = 2 * dimindex(:A) + 1
-      #|  FINITE (:1)
-      #|  FINITE (:A tybit0)
-      #|  FINITE (:A tybit1)
+      #|  (FINITE : ((Unit) -> Bool) -> Bool)((UNIV : (Unit) -> Bool))
+      #|  (FINITE : ((Tybit0[A]) -> Bool) -> Bool)((UNIV : (Tybit0[A]) -> Bool))
+      #|  (FINITE : ((Tybit1[A]) -> Bool) -> Bool)((UNIV : (Tybit1[A]) -> Bool))
       #|  FINITE(:1) /\\ FINITE(:A tybit0) /\\ FINITE(:A tybit1)
       #|  (dimindex(:A) = n <=> dimindex(s:A->bool) = NUMERAL n) /\\\n     (dimindex(:A) = n <=> dimindex(:A tybit0) = BIT0 n) /\\\n     (dimindex(:A) = n <=> dimindex(:A tybit1) = BIT1 n) /\\\n     dimindex(:1) = BIT1 _0
-      #|  n:num
-      #|  (:A) HAS_SIZE n <=> FINITE(:A) /\\ dimindex(:A) = n
-      #|  (HAS_SIZE) (:A)
-      #|  dimindex (:2) = 2
-      #|  dimindex (:3) = 3
-      #|  dimindex (:4) = 4
+      #|  (n : Num)
+      #|  (HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool), (n : Num)) == ((FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) && (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) == n)
+      #|  (HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool))
+      #|  (dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool)) == 2
+      #|  (dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) == 3
+      #|  (dimindex : ((Tybit0[Tybit0[Unit]]) -> Bool) -> Num)((UNIV : (Tybit0[Tybit0[Unit]]) -> Bool)) == 4
       #|  :2
       #|  :3
       #|  :4
-      #|  n < i /\\ ~(i = SUC n) ==> SUC n < i
-      #|  1 <= SUC n
-      #|  i <= n ==> ~(i = SUC n)
-      #|  (lambda i. if i = SUC n then @x. F else (v:A^N)$i):A^N
-      #|  (v:A^N)$(SUC n)
-      #|  v:A^N
-      #|  SUC n <= m ==> n <= m
-      #|  1 <= SUC n
+      #|  (n : Num) < (i : Num) && !(i == SUC(n)) \226\134\146 SUC(n) < i
+      #|  1 <= SUC((n : Num))
+      #|  (i : Num) <= (n : Num) \226\134\146 !(i == SUC(n))
+      #|  (lambda : ((Num) -> A) -> Cart[A, N])((i : Num) => if i == SUC((n : Num)) { (select : ((A) -> Bool) -> A)((x : A) => false) } else { (op_dollar : (Cart[A, N], Num) -> A)((v : Cart[A, N]), i) })
+      #|  op_dollar((v : Cart[A, N]), SUC((n : Num)))
+      #|  (v : Cart[A, N])
+      #|  SUC((n : Num)) <= (m : Num) \226\134\146 n <= m
+      #|  1 <= SUC((n : Num))
       #|  IMAGE (\\(x:A,v:A^N). (lambda i. if i = SUC n then x else v$i):A^N)\n          {x,v | x IN {x:A | P (SUC n) x} /\\\n                 v IN {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                ==> P i (v$i)) /\\\n                           (forall i. 1 <= i /\\ i <= dimindex (:N) /\\ n < i\n                                ==> v$i = (@x. F))}}
       #|  {v | forall i. 1 <= i /\\ i <= dimindex (:N) ==> v$i = (@x. F)} =\n      {(lambda i. @x. F):A^N}
-      #|  1 <= i /\\ i <= n /\\ 0 < i <=> 1 <= i /\\ i <= n
-      #|  1 <= i /\\ i <= n /\\ i <= 0 <=> F
-      #|  dimindex(:N)
+      #|  (1 <= (i : Num) && i <= (n : Num) && 0 < i) == (1 <= i && i <= n)
+      #|  (1 <= (i : Num) && i <= (n : Num) && i <= 0) == false
+      #|  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  forall n. n <= dimindex(:N)\n        ==> FINITE {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                 ==> P i (v$i)) /\\\n                            (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                                 ==> v$i = @x. F)}
       #|  forall P. (forall i. 1 <= i /\\ i <= dimindex(:N) ==> FINITE {x | P i x})\n       ==> FINITE {v:A^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> P i (v$i)}
-      #|  mk_cart:((N)finite_image->A)->A^N
-      #|  (:(N)finite_image->A) HAS_SIZE m EXP (dimindex(:N))
+      #|  (mk_cart : ((Finite_image[N]) -> A) -> Cart[A, N])
+      #|  (HAS_SIZE : (((Finite_image[N]) -> A) -> Bool, Num) -> Bool)((UNIV : ((Finite_image[N]) -> A) -> Bool), EXP((m : Num), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
       #|  forall m. (:A) HAS_SIZE m ==> (:A^N) HAS_SIZE m EXP (dimindex(:N))
       #|  FINITE(:A) ==> CARD(:A^N) = CARD(:A) EXP dimindex(:N)
-      #|  FINITE(:A) ==> FINITE(:A^N)
-      #|  (vector l):A^N = lambda i. EL (i - 1) l
+      #|  (FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) \226\134\146 (FINITE : ((Cart[A, N]) -> Bool) -> Bool)((UNIV : (Cart[A, N]) -> Bool))
+      #|  (vector : (List[A]) -> Cart[A, N])((l : List[A])) == lambda((i : Num) => EL(i - 1, l))
       #|  forall P (a:A^M) (b:A^N). pastecart a b IN {pastecart x y | P x y} <=> P a b
       #|  s PCROSS t = {pastecart (x:A^M) (y:A^N) | x IN s /\\ y IN t}
       #|  (forall z:A^(M,N)finite_sum. z IN s PCROSS t ==> P z) <=>\n   (forall x y. x IN s /\\ y IN t ==> P(pastecart x y))
@@ -5598,21 +5598,21 @@ test "cart matches cart.ml" {
       #|  forall s t (x:A^M) (y:A^N). (pastecart x y) IN (s PCROSS t) <=> x IN s /\\ y IN t
       #|  forall(s:A^M->bool) (t:A^N->bool). s PCROSS t = {} <=> s = {} \\/ t = {}
       #|  (forall s. (s PCROSS {}) :A^(M,N)finite_sum->bool = {}) /\\\n   (forall t. ({} PCROSS t) :A^(M,N)finite_sum->bool = {})
-      #|  forall(x:A^M) (y:A^N). {x} PCROSS {y} = {pastecart x y}
+      #|  \226\136\128 x : Cart[A, M], \226\136\128 y : Cart[A, N], PCROSS({x}, {y}) == {pastecart(x, y)}
       #|  forall(s:A^M->bool) (t:A^N->bool) s' t'.\n        s PCROSS t SUBSET s' PCROSS t' <=>\n        s = {} \\/ t = {} \\/ s SUBSET s' /\\ t SUBSET t'
       #|  forall(s:A^M->bool) (t:A^N->bool) s' t'.\n        s SUBSET s' /\\ t SUBSET t' ==> s PCROSS t SUBSET s' PCROSS t'
       #|  forall s s':real^M->bool t t':real^N->bool.\n        s PCROSS t = s' PCROSS t' <=>\n        (s = {} \\/ t = {}) /\\ (s' = {} \\/ t' = {}) \\/ s = s' /\\ t = t'
-      #|  (:A^M) PCROSS (:A^N) = (:A^(M,N)finite_sum)
-      #|  \\z:A^(M,N)finite_sum. fstcart z,sndcart z
-      #|  \\(x:A^M,y:A^N). pastecart x y
-      #|  k:num
-      #|  m * n:num
+      #|  (PCROSS : ((Cart[A, M]) -> Bool, (Cart[A, N]) -> Bool, Cart[A, Finite_sum[M, N]]) -> Bool)((UNIV : (Cart[A, M]) -> Bool), (UNIV : (Cart[A, N]) -> Bool)) == (UNIV : (Cart[A, Finite_sum[M, N]]) -> Bool)
+      #|  (z : Cart[A, Finite_sum[M, N]]) => (fstcart(z), sndcart(z))
+      #|  GABS((f : ((Cart[A, M], Cart[A, N])) -> Cart[A, Finite_sum[M, N]]) => \226\136\128 x : Cart[A, M], \226\136\128 y : Cart[A, N], GEQ(f((x, y)), pastecart(x, y)))
+      #|  (k : Num)
+      #|  (m : Num) * (n : Num)
       #|  forall(s:A^M->bool) (t:A^N->bool) m n.\n        s HAS_SIZE m /\\ t HAS_SIZE n ==> (s PCROSS t) HAS_SIZE (m * n)
       #|  forall(s:A^M->bool) (t:A^N->bool).\n        FINITE s /\\ FINITE t ==> FINITE(s PCROSS t)
-      #|  IMAGE sndcart ((s PCROSS t):A^(M,N)finite_sum->bool)
-      #|  IMAGE fstcart ((s PCROSS t):A^(M,N)finite_sum->bool)
-      #|  t:A^N->bool = {}
-      #|  s:A^M->bool = {}
+      #|  IMAGE(sndcart, PCROSS((s : (Cart[A, M]) -> Bool), (t : (Cart[A, N]) -> Bool)))
+      #|  IMAGE(fstcart, PCROSS((s : (Cart[A, M]) -> Bool), (t : (Cart[A, N]) -> Bool)))
+      #|  (t : (Cart[A, N]) -> Bool) == {}
+      #|  (s : (Cart[A, M]) -> Bool) == {}
       #|  forall(s:A^M->bool) (t:A^N->bool).\n        FINITE(s PCROSS t) <=> s = {} \\/ t = {} \\/ FINITE s /\\ FINITE t
       #|  forall s:real^M->bool t:real^N->bool.\n        IMAGE fstcart (s PCROSS t) = if t = {} then {} else s
       #|  forall s:real^M->bool t:real^N->bool.\n        IMAGE sndcart (s PCROSS t) = if s = {} then {} else t
