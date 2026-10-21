@@ -81008,7 +81008,7 @@ Probability/expectation quotations (6640):
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, random_variable(p, X) && random_variable(p, Y) \226\134\146 random_variable(p, (x : A) => min(X(x), Y(x)))
   (UNIV : (Real) -> Bool)
   (x : Real) => x
-  abs
+  real_abs
   (X : (A) -> Real)
   (p : Prob_space[A])
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, random_variable(p, X) \226\134\146 random_variable(p, (x : A) => abs(X(x)))
