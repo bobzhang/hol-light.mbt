@@ -79788,7 +79788,7 @@ test "Autoformalization/sarkovskii matches Autoformalization/sarkovskii.ml" {
       #|  (g : (Num) -> Real)
       #|  (s : (Real) -> Bool)
       #|  (n : Num)
-      #|  op_lt_eq
+      #|  real_le
       #|  HAS_SIZE((s : (Real) -> Bool), (n : Num))
       #|  (s : (Real) -> Bool) == IMAGE((i : Num) => ITER(i, (f : (Real) -> Real), (x : Real)), {(i : Num) | i < (n : Num)})
       #|  \226\136\128 f : (Real) -> Real, \226\136\128 n : Num, \226\136\128 x : Real, minimal_period(f, n, x) \226\134\146 (\226\136\131 z : (Num) -> Real, (\226\136\128 i : Num, \226\136\128 j : Num, i < j && j < n \226\134\146 z(i) < z(j)) && IMAGE(z, {(i : Num) | i < n}) == IMAGE((i : Num) => ITER(i, f, x), {(i : Num) | i < n}))

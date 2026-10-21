@@ -1259,7 +1259,7 @@ fn step_30() -> Unit raise {
     })(((x643 : @kernel.Thm) => @bool.specl(t642, x643))(x644))
   })
   let t637 = @list.List([@meson.meson_tac(@list.List([@realax.real_le_trans(), @realax.real_le_antisym()])), @tactics.all_tac])
-  let t636 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("op_lt_eq"), @iterate.topological_sort()))
+  let t636 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("real_le"), @iterate.topological_sort()))
   let t632 = @simp.asm_rewrite_tac(@list.List([]))
   let t633 = @tactics.then_tac(@tactics.match_mp_tac(minimal_period_orbit_card()), t632)
   let t631 = @simp.rewrite_tac(@list.List([@sets.finite_numseg_lt()]))
