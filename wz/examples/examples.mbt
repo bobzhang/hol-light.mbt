@@ -3,8 +3,8 @@
 ///|
 /// WZ_EXAMPLE_1
 fn step_1() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,k)) / &2 spow &n)")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) / spow(real_of_num(2), real_of_num(n)))")
   let atm = @list.List([])
   wz_example_1_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -21,8 +21,8 @@ pub fn wz_example_1() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_2
 fn step_2() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 / &(binom (2 * n,n)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) / real_of_num(binom((2 * n, n))))")
   let atm = @list.List([])
   wz_example_2_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -39,9 +39,9 @@ pub fn wz_example_2() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_3
 fn step_3() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) * &(binom (m,k + p)) /\n              &(binom (n + m,n + p)))")
-  let atm = @list.List([@parser.parse_term("&p <= &m")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(binom(((m : Num), k + (p : Num)))) / real_of_num(binom((n + m, n + p)))))")
+  let atm = @list.List([@term_syntax.parse_term("real_of_num((p : Num)) <= real_of_num((m : Num))")])
   wz_example_3_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -57,8 +57,8 @@ pub fn wz_example_3() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_4
 fn step_4() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n + 1)\n         (\\k. &(binom (n + 1,k + 1)) * (&k + &1) * (&k + &1) *\n              &(FACT k) / (&n + &1) spow (&k + &1))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(binom((n + 1, k + 1))) * ((real_of_num(k) + real_of_num(1)) * ((real_of_num(k) + real_of_num(1)) * (real_of_num(FACT(k)) / spow(real_of_num(n) + real_of_num(1), real_of_num(k) + real_of_num(1))))))")
   let atm = @list.List([])
   wz_example_4_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -75,8 +75,8 @@ pub fn wz_example_4() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_5
 fn step_5() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (-- &1 spow &k * &(binom (n,k)) *\n               &(binom (2 * k,k)) * &4 spow &n / &4 spow &k) /\n              &(binom (2 * n,n)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((2 * k, k))) * (spow(real_of_num(4), real_of_num(n)) / spow(real_of_num(4), real_of_num(k))))) / real_of_num(binom((2 * n, n))))")
   let atm = @list.List([])
   wz_example_5_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -93,8 +93,8 @@ pub fn wz_example_5() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_6
 fn step_6() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n + 1) (\\k. -- &1 spow &k * &(binom (n + 1,k)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * real_of_num(binom((n + 1, k))))")
   let atm = @list.List([])
   wz_example_6_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -111,8 +111,8 @@ pub fn wz_example_6() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_7
 fn step_7() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n + k,k)) pow 2 * &(binom (n,k)) pow 2)")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n + k, k))), 2) * pow(real_of_num(binom((n, k))), 2))")
   let atm = @list.List([])
   wz_example_7_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -129,8 +129,8 @@ pub fn wz_example_7() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_8
 fn step_8() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..2 * n)\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) pow 3) /\n              (-- &1 spow &n * &(FACT (3 * n)) / &(FACT n) pow 3))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, 2 * (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * pow(real_of_num(binom((2 * n, k))), 3) / (spow(-real_of_num(1), real_of_num(n)) * (real_of_num(FACT(3 * n)) / pow(real_of_num(FACT(n)), 3))))")
   let atm = @list.List([])
   wz_example_8_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -147,8 +147,8 @@ pub fn wz_example_8() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_9
 fn step_9() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,k)) pow 3)")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 3))")
   let atm = @list.List([])
   wz_example_9_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -165,8 +165,8 @@ pub fn wz_example_9() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_10
 fn step_10() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&1 - &2 * &n) *\n              (-- &1 spow &k * &(binom (n,k)) * &4 spow &k) /\n              &(binom (2 * k,k)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(1) - real_of_num(2) * real_of_num(n)) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * spow(real_of_num(4), real_of_num(k))) / real_of_num(binom((2 * k, k)))))")
   let atm = @list.List([])
   wz_example_10_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -183,8 +183,8 @@ pub fn wz_example_10() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_11
 fn step_11() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (n,k)) / &(FACT k))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) / real_of_num(FACT(k))))")
   let atm = @list.List([])
   wz_example_11_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -201,8 +201,8 @@ pub fn wz_example_11() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_12
 fn step_12() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum UNIV\n         (\\k. -- &1 spow &k *\n              (&(binom (a + n,a + k)) * &(binom (a + c,c + k)) *\n               &(binom (n + c,n + k))) /\n              (&(FACT (a + n + c)) /\n               (&(FACT a) * &(FACT n) * &(FACT c))))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom(((a : Num) + (n : Num), a + k))) * (real_of_num(binom((a + (c : Num), c + k))) * real_of_num(binom((n + c, n + k)))) / (real_of_num(FACT(a + (n + c))) / (real_of_num(FACT(a)) * (real_of_num(FACT(n)) * real_of_num(FACT(c)))))))")
   let atm = @list.List([])
   wz_example_12_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -219,8 +219,8 @@ pub fn wz_example_12() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_13
 fn step_13() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum UNIV\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) pow 2) /\n              (-- &1 spow &n * &(binom (2 * n,n))))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * pow(real_of_num(binom((2 * (n : Num), k))), 2) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((2 * n, n)))))")
   let atm = @list.List([])
   wz_example_13_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -237,8 +237,8 @@ pub fn wz_example_13() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_14
 fn step_14() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n + 1)\n         (\\k. &k * &(binom (n + 1,k)) /\n              ((&n + &1) * &2 spow &n))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(k) * (real_of_num(binom((n + 1, k))) / ((real_of_num(n) + real_of_num(1)) * spow(real_of_num(2), real_of_num(n)))))")
   let atm = @list.List([])
   wz_example_14_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -255,8 +255,8 @@ pub fn wz_example_14() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_15
 fn step_15() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n + 1)\n         (\\k. &(binom (n + 1 + k,2 * k)) * &(binom (2 * k,k)) *\n              -- &1 spow &k / (&k + &1))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(binom((n + (1 + k), 2 * k))) * (real_of_num(binom((2 * k, k))) * (spow(-real_of_num(1), real_of_num(k)) / (real_of_num(k) + real_of_num(1)))))")
   let atm = @list.List([])
   wz_example_15_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -273,8 +273,8 @@ pub fn wz_example_15() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_16
 fn step_16() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum UNIV\n         (\\k. ((&n + &2) / (&2 * &k + &1)) *\n              &(binom (n,2 * k)) * &2 spow (&n - &2 * &k - &1) *\n              &(binom (2 * k + 1,k)) / &(binom (2 * n + 1,n)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => (real_of_num((n : Num)) + real_of_num(2)) / (real_of_num(2) * real_of_num(k) + real_of_num(1)) * (real_of_num(binom((n, 2 * k))) * (spow(real_of_num(2), real_of_num(n) - real_of_num(2) * real_of_num(k) - real_of_num(1)) * (real_of_num(binom((2 * k + 1, k))) / real_of_num(binom((2 * n + 1, n)))))))")
   let atm = @list.List([])
   wz_example_16_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -291,8 +291,8 @@ pub fn wz_example_16() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_17
 fn step_17() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum UNIV\n         (\\k. &(binom (2 * n + 1,2 * k)) *\n              &3 spow &k / &2 spow &n)")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => real_of_num(binom((2 * (n : Num) + 1, 2 * k))) * (spow(real_of_num(3), real_of_num(k)) / spow(real_of_num(2), real_of_num(n))))")
   let atm = @list.List([])
   wz_example_17_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -309,8 +309,8 @@ pub fn wz_example_17() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_18
 fn step_18() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 * &(binom (2 * k,n)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * real_of_num(binom((2 * k, n))))")
   let atm = @list.List([])
   wz_example_18_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -327,9 +327,9 @@ pub fn wz_example_18() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_19
 fn step_19() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (n,k)) *\n              &(binom (n + x,n)) * &x / (&k + &x))")
-  let atm = @list.List([@parser.parse_term("~(&x = &0)")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((n + (x : Num), n))) * (real_of_num(x) / (real_of_num(k) + real_of_num(x))))))")
+  let atm = @list.List([@term_syntax.parse_term("!(real_of_num((x : Num)) == real_of_num(0))")])
   wz_example_19_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -345,8 +345,8 @@ pub fn wz_example_19() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_20
 fn step_20() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) * &(FACT k) * &(FACT k))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(FACT(k)) * real_of_num(FACT(k))))")
   let atm = @list.List([])
   wz_example_20_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -363,9 +363,9 @@ pub fn wz_example_20() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_21
 fn step_21() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) * x spow &k / (x + &1) spow &n)")
-  let atm = @list.List([@parser.parse_term("~(x + &1 = &0)")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (spow((x : Real), real_of_num(k)) / spow(x + real_of_num(1), real_of_num(n))))")
+  let atm = @list.List([@term_syntax.parse_term("!((x : Real) + real_of_num(1) == real_of_num(0))")])
   wz_example_21_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -381,9 +381,9 @@ pub fn wz_example_21() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_22
 fn step_22() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,2 * k)) * &2 / &2 spow &n)")
-  let atm = @list.List([@parser.parse_term("~(n = 0)")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, 2 * k))) * (real_of_num(2) / spow(real_of_num(2), real_of_num(n))))")
+  let atm = @list.List([@term_syntax.parse_term("!((n : Num) == 0)")])
   wz_example_22_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -399,8 +399,8 @@ pub fn wz_example_22() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_23
 fn step_23() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k + 1)) /\n              &2 spow (&2 * &n + &1))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k + 1))) / spow(real_of_num(2), real_of_num(2) * real_of_num(n) + real_of_num(1)))")
   let atm = @list.List([])
   wz_example_23_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -417,8 +417,8 @@ pub fn wz_example_23() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_24
 fn step_24() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&(binom (n,2 * k)) * &(binom (2 * k,k)) *\n               &2 spow &n) /\n              (&4 spow &k * &(binom (2 * n,n))))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, 2 * k))) * (real_of_num(binom((2 * k, k))) * spow(real_of_num(2), real_of_num(n))) / (spow(real_of_num(4), real_of_num(k)) * real_of_num(binom((2 * n, n)))))")
   let atm = @list.List([])
   wz_example_24_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -435,9 +435,9 @@ pub fn wz_example_24() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_25
 fn step_25() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 * &(binom (p + k,2 * n)) /\n              &(binom (p,n)) pow 2)")
-  let atm = @list.List([@parser.parse_term("n:num < p")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * (real_of_num(binom(((p : Num) + k, 2 * n))) / pow(real_of_num(binom((p, n))), 2)))")
+  let atm = @list.List([@term_syntax.parse_term("(n : Num) < (p : Num)")])
   wz_example_25_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -453,8 +453,8 @@ pub fn wz_example_25() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_26
 fn step_26() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,k)) pow 4)")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 4))")
   let atm = @list.List([])
   wz_example_26_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -471,8 +471,8 @@ pub fn wz_example_26() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_27
 fn step_27() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. ((&2 * &n + &1) / &4 spow &n) *\n              &(binom (2 * n,n)) * -- &1 spow &k *\n              &(binom (n,k)) * &2 spow &k / (&2 * &k + &1))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(2) * real_of_num(n) + real_of_num(1)) / spow(real_of_num(4), real_of_num(n)) * (real_of_num(binom((2 * n, n))) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (spow(real_of_num(2), real_of_num(k)) / (real_of_num(2) * real_of_num(k) + real_of_num(1)))))))")
   let atm = @list.List([])
   wz_example_27_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -489,8 +489,8 @@ pub fn wz_example_27() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_28
 fn step_28() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&n + &m + &1) * &(binom (n + m,m)) *\n              -- &1 spow &k * &(binom (n,k)) / (&m + &k + &1))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(n) + (real_of_num((m : Num)) + real_of_num(1))) * (real_of_num(binom((n + m, m))) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) / (real_of_num(m) + (real_of_num(k) + real_of_num(1)))))))")
   let atm = @list.List([])
   wz_example_28_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -507,8 +507,8 @@ pub fn wz_example_28() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_29
 fn step_29() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&(binom (2 * n + 1,2 * k)) *\n               &(binom (2 * k,k)) / &4 spow &k) /\n              (&(binom (4 * n + 1,2 * n)) / &4 spow &n))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k))) * (real_of_num(binom((2 * k, k))) / spow(real_of_num(4), real_of_num(k))) / (real_of_num(binom((4 * n + 1, 2 * n))) / spow(real_of_num(4), real_of_num(n))))")
   let atm = @list.List([])
   wz_example_29_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -525,9 +525,9 @@ pub fn wz_example_29() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_30
 fn step_30() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) * &(binom (k,j)) /\n              (&(binom (n,j)) * &2 spow (&n - &j)))")
-  let atm = @list.List([@parser.parse_term("j:num <= n")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(binom((k, (j : Num)))) / (real_of_num(binom((n, j))) * spow(real_of_num(2), real_of_num(n) - real_of_num(j)))))")
+  let atm = @list.List([@term_syntax.parse_term("(j : Num) <= (n : Num)")])
   wz_example_30_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -543,8 +543,8 @@ pub fn wz_example_30() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_31
 fn step_31() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (-- &1 spow (&n - &k) * &4 spow &k *\n               &(binom (n + k + 1,2 * k + 1))) / (&n + &1))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(n) - real_of_num(k)) * (spow(real_of_num(4), real_of_num(k)) * real_of_num(binom((n + (k + 1), 2 * k + 1)))) / (real_of_num(n) + real_of_num(1)))")
   let atm = @list.List([])
   wz_example_31_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -561,9 +561,9 @@ pub fn wz_example_31() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_32
 fn step_32() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. -- &1 spow (&k + &d) * &(binom (d,k)) *\n              &(binom (n + k,p + k)) / &(binom (n,p + d)))")
-  let atm = @list.List([@parser.parse_term("p + d:num <= n")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k) + real_of_num((d : Num))) * (real_of_num(binom((d, k))) * (real_of_num(binom((n + k, (p : Num) + k))) / real_of_num(binom((n, p + d))))))")
+  let atm = @list.List([@term_syntax.parse_term("(p : Num) + (d : Num) <= (n : Num)")])
   wz_example_32_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -579,10 +579,10 @@ pub fn wz_example_32() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_33
 fn step_33() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum UNIV\n         (\\k. &(binom (p,k)) * &(binom (q,k)) *\n              &(binom (n + k,p + q)) /\n              (&(binom (n,p)) * &(binom (n,q))))")
-  let t1 = @parser.parse_term("q:num <= n")
-  let atm = @list.List([@parser.parse_term("p:num <= n"), t1])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => real_of_num(binom(((p : Num), k))) * (real_of_num(binom(((q : Num), k))) * (real_of_num(binom(((n : Num) + k, p + q))) / (real_of_num(binom((n, p))) * real_of_num(binom((n, q)))))))")
+  let t1 = @term_syntax.parse_term("(q : Num) <= (n : Num)")
+  let atm = @list.List([@term_syntax.parse_term("(p : Num) <= (n : Num)"), t1])
   wz_example_33_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -598,9 +598,9 @@ pub fn wz_example_33() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_34
 fn step_34() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k)) *\n              &(binom (m + k,2 * n)) /\n              &(binom (2 * m + 1,2 * n)))")
-  let atm = @list.List([@parser.parse_term("n:num < m")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k))) * (real_of_num(binom(((m : Num) + k, 2 * n))) / real_of_num(binom((2 * m + 1, 2 * n)))))")
+  let atm = @list.List([@term_syntax.parse_term("(n : Num) < (m : Num)")])
   wz_example_34_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -616,9 +616,9 @@ pub fn wz_example_34() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_35
 fn step_35() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum UNIV\n         (\\k. -- &1 spow (&k + &1) *\n              &(binom (n,k + 1)) / (&k + &1))")
-  let atm = @list.List([@parser.parse_term("~(&n = &0)")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k) + real_of_num(1)) * (real_of_num(binom(((n : Num), k + 1))) / (real_of_num(k) + real_of_num(1))))")
+  let atm = @list.List([@term_syntax.parse_term("!(real_of_num((n : Num)) == real_of_num(0))")])
   wz_example_35_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -634,8 +634,8 @@ pub fn wz_example_35() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_36
 fn step_36() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (2 * n + 1,2 * k)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * real_of_num(binom((2 * n + 1, 2 * k))))")
   let atm = @list.List([])
   wz_example_36_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -652,8 +652,8 @@ pub fn wz_example_36() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_37
 fn step_37() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k + 1)) * &k /\n              ((&2 * &n - &1) * &4 spow (&n - &1)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k + 1))) * (real_of_num(k) / ((real_of_num(2) * real_of_num(n) - real_of_num(1)) * spow(real_of_num(4), real_of_num(n) - real_of_num(1)))))")
   let atm = @list.List([])
   wz_example_37_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -670,9 +670,9 @@ pub fn wz_example_37() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_38
 fn step_38() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (:num)\n         (\\k. (-- &1 spow &k * &(binom (x,k)) *\n               rbinom (&x,&2 * &n - &k)) /\n              (-- &1 spow &n * &(binom (x,n))))")
-  let atm = @list.List([@parser.parse_term("n:num < x")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom(((x : Num), k))) * rbinom((real_of_num(x), real_of_num(2) * real_of_num((n : Num)) - real_of_num(k)))) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((x, n)))))")
+  let atm = @list.List([@term_syntax.parse_term("(n : Num) < (x : Num)")])
   wz_example_38_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -688,9 +688,9 @@ pub fn wz_example_38() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_39
 fn step_39() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&n * -- &1 spow &k * &(binom (n,k)) *\n               &(binom (n + k,k)) * &4 spow &k) /\n              (-- &1 spow &n * &(binom (2 * k,k)) *\n               (&n + &k)))")
-  let atm = @list.List([@parser.parse_term("0 < n")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(n) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((n + k, k))) * spow(real_of_num(4), real_of_num(k))))) / (spow(-real_of_num(1), real_of_num(n)) * (real_of_num(binom((2 * k, k))) * (real_of_num(n) + real_of_num(k)))))")
+  let atm = @list.List([@term_syntax.parse_term("0 < (n : Num)")])
   wz_example_39_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -706,8 +706,8 @@ pub fn wz_example_39() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_40
 fn step_40() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..2 * n)\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) *\n               &(binom (2 * n + 2 * k,n + k)) *\n               &2 spow (&2 * &n - &k)) /\n              &(binom (2 * n,n)))")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, 2 * (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((2 * n, k))) * (real_of_num(binom((2 * n + 2 * k, n + k))) * spow(real_of_num(2), real_of_num(2) * real_of_num(n) - real_of_num(k)))) / real_of_num(binom((2 * n, n))))")
   let atm = @list.List([])
   wz_example_40_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
@@ -724,9 +724,9 @@ pub fn wz_example_40() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_41
 fn step_41() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (-- &1 spow &k * &(binom (n,k)) *\n               &(binom (x + k,r + k))) /\n              (-- &1 spow &n * &(binom (x,n + r))))")
-  let atm = @list.List([@parser.parse_term("n + r:num < x")])
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * real_of_num(binom(((x : Num) + k, (r : Num) + k)))) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((x, n + r)))))")
+  let atm = @list.List([@term_syntax.parse_term("(n : Num) + (r : Num) < (x : Num)")])
   wz_example_41_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -742,8 +742,8 @@ pub fn wz_example_41() -> @kernel.Thm {
 ///|
 /// WZ_EXAMPLE_42
 fn step_42() -> Unit raise {
-  let ntm = @parser.parse_term("n:num")
-  let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&(binom (n,k)) pow 2 *\n               &(binom (3 * n + k,2 * n))) /\n              &(binom (3 * n,n)) pow 2)")
+  let ntm = @term_syntax.parse_term("(n : Num)")
+  let stm = @term_syntax.parse_term("sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * real_of_num(binom((3 * n + k, 2 * n))) / pow(real_of_num(binom((3 * n, n))), 2))")
   let atm = @list.List([])
   wz_example_42_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
