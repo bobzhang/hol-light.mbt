@@ -3201,7 +3201,7 @@ fn step_107() -> Unit raise {
   let t514 = @term_syntax.parse_term("real_of_num(0)")
   let t512 = @term_syntax.parse_term("(k : Num)")
   let t513 = @kernel.mk_comb(@term_syntax.parse_term("real_of_num"), base_const())
-  let t515 = @basics.mk_eq(@basics.mk_binop(@term_syntax.parse_term("pow"), t513, t512), t514)
+  let t515 = @basics.mk_eq(@basics.mk_binop(@term_syntax.parse_term("real_pow"), t513, t512), t514)
   let t519 = @tactics.subgoal_then(@kernel.mk_comb(@term_syntax.parse_term("op_tilde"), t515), fn(x516 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s517 = @tactics.assume_tac(x516)
     fn(x518 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3312,7 +3312,7 @@ fn step_110() -> Unit raise {
   let t579 = @term_syntax.parse_term("real_of_num(0)")
   let t577 = @term_syntax.parse_term("(k : Num)")
   let t578 = @kernel.mk_comb(@term_syntax.parse_term("real_of_num"), base_const())
-  let t580 = @basics.mk_eq(@basics.mk_binop(@term_syntax.parse_term("pow"), t578, t577), t579)
+  let t580 = @basics.mk_eq(@basics.mk_binop(@term_syntax.parse_term("real_pow"), t578, t577), t579)
   let t584 = @tactics.subgoal_then(@kernel.mk_comb(@term_syntax.parse_term("op_tilde"), t580), fn(x581 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s582 = @tactics.assume_tac(x581)
     fn(x583 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3403,7 +3403,7 @@ fn step_111() -> Unit raise {
   let t644 = @term_syntax.parse_term("real_of_num(0)")
   let t642 = @term_syntax.parse_term("(k : Num)")
   let t643 = @kernel.mk_comb(@term_syntax.parse_term("real_of_num"), base_const())
-  let t645 = @basics.mk_eq(@basics.mk_binop(@term_syntax.parse_term("pow"), t643, t642), t644)
+  let t645 = @basics.mk_eq(@basics.mk_binop(@term_syntax.parse_term("real_pow"), t643, t642), t644)
   let t649 = @tactics.subgoal_then(@kernel.mk_comb(@term_syntax.parse_term("op_tilde"), t645), fn(x646 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s647 = @tactics.assume_tac(x646)
     fn(x648 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
