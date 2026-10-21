@@ -202,9 +202,9 @@ fn step_4() -> Unit raise {
     (Int::to_int64(t98.0), t98.1)
   }, algebra)
   let t91 = by(@list.List(["B"]), arithmetic)
-  let t92 = so(have, @parser.parse_term("q * q = 0"), t91)
+  let t92 = so(have, @term_syntax.parse_term("(q : Num) * q == 0"), t91)
   let t90 = using_(@list.List([@arith.le_mult2()]), trivial)
-  let t100 = @tactics.then_tac(@tactics.then_tac(so(have, @parser.parse_term("p * p <= q * q"), t90), t92), t99)
+  let t100 = @tactics.then_tac(@tactics.then_tac(so(have, @term_syntax.parse_term("(p : Num) * p <= (q : Num) * q"), t90), t92), t99)
   let t89 = so(fn(x83 : (@list.List[Unit]) -> (Int64, @list.List[Unit]) raise) -> ((((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x84 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s85 = we_pre(x83, x84)
@@ -217,10 +217,10 @@ fn step_4() -> Unit raise {
     (Int::to_int64(t88.0), t88.1)
   }, by(@list.List(["B", "C"]), algebra))
   let t82 = by(@list.List(["A"]), trivial)
-  let t101 = @list.List([@tactics.then_tac(so(have, @parser.parse_term("q * q = 2 * m * m ==> m = 0"), t82), t89), t100])
-  let t81 = cases(("D", @parser.parse_term("q < p \\/ p <= q")), arithmetic)
+  let t101 = @list.List([@tactics.then_tac(so(have, @term_syntax.parse_term("(q : Num) * q == 2 * ((m : Num) * m) → m == 0"), t82), t89), t100])
+  let t81 = cases(("D", @term_syntax.parse_term("(q : Num) < (p : Num) || p <= q")), arithmetic)
   let t79 = using_(@list.List([@arith.even_exists()]), trivial)
-  let t78 = @parser.parse_term("p = 2 * m")
+  let t78 = @term_syntax.parse_term("(p : Num) == 2 * (m : Num)")
   let t80 = so(fn(x74 : (@kernel.Term, String, @kernel.Term)) -> ((((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x75 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s76 = consider(x74, x75)
@@ -228,17 +228,17 @@ fn step_4() -> Unit raise {
         s76(x77)
       }
     }
-  }, (@parser.parse_term("m:num"), "C", t78), t79)
+  }, (@term_syntax.parse_term("(m : Num)"), "C", t78), t79)
   let t72 = using_(@list.List([@calc_num.arith(), @arith.even_mult()]), trivial)
-  let t73 = so(have, @parser.parse_term("EVEN(p)"), t72)
-  let t71 = so(have, @parser.parse_term("EVEN(p * p) <=> EVEN(2 * q * q)"), trivial)
-  let t70 = assume_("B", @parser.parse_term("p * p = 2 * q * q"))
-  let t69 = fix(@list.List([@parser.parse_term("q:num")]))
-  let t68 = assume_("A", @parser.parse_term("forall m. m < p ==> forall q. m * m = 2 * q * q ==> q = 0"))
-  let t67 = fix(@list.List([@parser.parse_term("p:num")]))
+  let t73 = so(have, @term_syntax.parse_term("EVEN((p : Num))"), t72)
+  let t71 = so(have, @term_syntax.parse_term("EVEN((p : Num) * p) == EVEN(2 * ((q : Num) * q))"), trivial)
+  let t70 = assume_("B", @term_syntax.parse_term("(p : Num) * p == 2 * ((q : Num) * q)"))
+  let t69 = fix(@list.List([@term_syntax.parse_term("(q : Num)")]))
+  let t68 = assume_("A", @term_syntax.parse_term("∀ m : Num, m < (p : Num) → (∀ q : Num, m * m == 2 * (q * q) → q == 0)"))
+  let t67 = fix(@list.List([@term_syntax.parse_term("(p : Num)")]))
   let t66 = @tactics.match_accept_tac(@arith.num_wf())
-  let t102 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(suffices_to_prove(@parser.parse_term("forall p. (forall m. m < p ==> (forall q. m * m = 2 * q * q ==> q = 0))\n        ==> (forall q. p * p = 2 * q * q ==> q = 0)"), t66), t67), t68), t69), t70), t71), t73), t80), t81), t101)
-  nsqrt_2_c.set(@tactics.prove(@parser.parse_term("forall p q. p * p = 2 * q * q ==> q = 0"), t102))
+  let t102 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(suffices_to_prove(@term_syntax.parse_term("∀ p : Num, (∀ m : Num, m < p → (∀ q : Num, m * m == 2 * (q * q) → q == 0)) → (∀ q : Num, p * p == 2 * (q * q) → q == 0)"), t66), t67), t68), t69), t70), t71), t73), t80), t81), t101)
+  nsqrt_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Num, ∀ q : Num, p * p == 2 * (q * q) → q == 0"), t102))
 }
 
 ///|
