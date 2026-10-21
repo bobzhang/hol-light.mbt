@@ -4,7 +4,7 @@
 /// empty_mat
 fn step_1() -> Unit raise {
   let t1 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpmat(), @rol.rol_empty(), @defs.interpsigns(), @lists.all2(), @defs.partition_line()]))])
-  empty_mat_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpmat [] [] [[]]"), t1))
+  empty_mat_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpmat(NIL, NIL, [NIL])"), t1))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn empty_mat() -> @kernel.Thm {
 ///|
 /// empty_sgns
 fn step_2() -> Unit raise {
-  empty_sgns_c.set(@list.List([@int.arith_rule(@parser.parse_term("&1 > &0"))]))
+  empty_sgns_c.set(@list.List([@int.arith_rule(@term_syntax.parse_term("real_of_num(1) > real_of_num(0)"))]))
 }
 
 ///|
@@ -35,7 +35,7 @@ pub fn empty_sgns() -> @list.List[@kernel.Thm] {
 /// monic_isign_lem
 fn step_3() -> Unit raise {
   let t20 = @simp.asm_rewrite_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt(), @realarith.real_entire()]))
-  let t16 = @parser.parse_term("x:real")
+  let t16 = @term_syntax.parse_term("(x : Real)")
   let t19 = @tactics.pop_assum(fn(x18 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x15 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x12 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -61,7 +61,7 @@ fn step_3() -> Unit raise {
   })
   let t2 = @tactics.repeat_tac(@tactics.strip_tac)
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@defs.interpsign()])), t2), t7), t11), t19), t20), @calc_rat.real_arith_tac)
-  monic_isign_lem_c.set(@tactics.prove(@parser.parse_term("(forall s c mp p. (forall x. c * p x = mp x) ==> c > &0 ==> interpsign s mp Pos ==> interpsign s p Pos) /\\\n   (forall s c mp p. (forall x. c * p x = mp x) ==> c < &0 ==> interpsign s mp Pos ==> interpsign s p Neg) /\\\n   (forall s c mp p. (forall x. c * p x = mp x) ==> c > &0 ==> interpsign s mp Neg ==> interpsign s p Neg) /\\\n   (forall s c mp p. (forall x. c * p x = mp x) ==> c < &0 ==> interpsign s mp Neg ==> interpsign s p Pos) /\\\n   (forall s c mp p. (forall x. c * p x = mp x) ==> c > &0 ==> interpsign s mp Zero ==> interpsign s p Zero) /\\\n   (forall s c mp p. (forall x. c * p x = mp x) ==> c < &0 ==> interpsign s mp Zero ==> interpsign s p Zero)"), t21))
+  monic_isign_lem_c.set(@tactics.prove(@term_syntax.parse_term("(∀ s : (Real) -> Bool, ∀ c : Real, ∀ mp : (Real) -> Real, ∀ p : (Real) -> Real, (∀ x : Real, c * p(x) == mp(x)) → c > real_of_num(0) → interpsign(s, mp, Pos) → interpsign(s, p, Pos)) && (∀ s : (Real) -> Bool, ∀ c : Real, ∀ mp : (Real) -> Real, ∀ p : (Real) -> Real, (∀ x : Real, c * p(x) == mp(x)) → c < real_of_num(0) → interpsign(s, mp, Pos) → interpsign(s, p, Neg)) && (∀ s : (Real) -> Bool, ∀ c : Real, ∀ mp : (Real) -> Real, ∀ p : (Real) -> Real, (∀ x : Real, c * p(x) == mp(x)) → c > real_of_num(0) → interpsign(s, mp, Neg) → interpsign(s, p, Neg)) && (∀ s : (Real) -> Bool, ∀ c : Real, ∀ mp : (Real) -> Real, ∀ p : (Real) -> Real, (∀ x : Real, c * p(x) == mp(x)) → c < real_of_num(0) → interpsign(s, mp, Neg) → interpsign(s, p, Pos)) && (∀ s : (Real) -> Bool, ∀ c : Real, ∀ mp : (Real) -> Real, ∀ p : (Real) -> Real, (∀ x : Real, c * p(x) == mp(x)) → c > real_of_num(0) → interpsign(s, mp, Zero) → interpsign(s, p, Zero)) && (∀ s : (Real) -> Bool, ∀ c : Real, ∀ mp : (Real) -> Real, ∀ p : (Real) -> Real, (∀ x : Real, c * p(x) == mp(x)) → c < real_of_num(0) → interpsign(s, mp, Zero) → interpsign(s, p, Zero))"), t21))
 }
 
 ///|
@@ -148,7 +148,7 @@ fn step_4() -> Unit raise {
 /// main_lem000
 fn step_5() -> Unit raise {
   let t22 = @list.List([@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.length()])), @int.arith_tac, @int.arith_tac])
-  main_lem000_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall l n. (LENGTH l = SUC n) ==> 0 < LENGTH l"), t22))
+  main_lem000_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ l : List[_], ∀ n : Num, LENGTH(l) == SUC(n) → 0 < LENGTH(l)"), t22))
 }
 
 ///|
@@ -164,7 +164,7 @@ pub fn main_lem000() -> @kernel.Thm {
 /// main_lem001
 fn step_6() -> Unit raise {
   let t23 = @list.List([@meson.meson_tac(@list.List([]))])
-  main_lem001_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("x <> &0 ==> (LAST l = x) ==> LAST l <> &0"), t23))
+  main_lem001_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("op_lt_gt((x : Real), real_of_num(0)) → LAST((l : List[Real])) == x → op_lt_gt(LAST(l), real_of_num(0))"), t23))
 }
 
 ///|
@@ -180,7 +180,7 @@ pub fn main_lem001() -> @kernel.Thm {
 /// main_lem002
 fn step_7() -> Unit raise {
   let t24 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq()])), @calc_rat.real_arith_tac)])
-  main_lem002_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(x <> y ==> x <> y) /\\\n   (x < y ==> x <> y) /\\\n   (x > y ==> x <> y) /\\\n   (~(x >= y) ==> x <> y) /\\\n   (~(x <= y) ==> x <> y) /\\\n   (~(x = y) ==> x <> y)"), t24))
+  main_lem002_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(op_lt_gt((x : Real), (y : Real)) → op_lt_gt(x, y)) && (x < y → op_lt_gt(x, y)) && (x > y → op_lt_gt(x, y)) && (!(x >= y) → op_lt_gt(x, y)) && (!(x <= y) → op_lt_gt(x, y)) && (!(x == y) → op_lt_gt(x, y))"), t24))
 }
 
 ///|
@@ -221,7 +221,7 @@ fn step_8() -> Unit raise {
   })
   let t39 = @tactics.repeat_tac(@tactics.strip_tac)
   let t40 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t39, t38, t37, t36, t35, @tactics.disj2_tac, t34])
-  factor_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Pos ==> interpsign s p Pos ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Pos"), t40))
+  factor_pos_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Pos) → interpsign(s, (p : (Real) -> Real), Pos) → (∀ x : Real, pow(x, (k : Num)) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Pos)"), t40))
 }
 
 ///|
@@ -262,7 +262,7 @@ fn step_9() -> Unit raise {
   })
   let t55 = @tactics.repeat_tac(@tactics.strip_tac)
   let t56 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t55, t54, t53, t52, t51, @tactics.disj2_tac, t50])
-  factor_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Pos ==> interpsign s p Neg ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Neg"), t56))
+  factor_pos_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Pos) → interpsign(s, (p : (Real) -> Real), Neg) → (∀ x : Real, pow(x, (k : Num)) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Neg)"), t56))
 }
 
 ///|
@@ -302,7 +302,7 @@ fn step_10() -> Unit raise {
   })
   let t70 = @tactics.repeat_tac(@tactics.strip_tac)
   let t71 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t70, t69, t68, t67, t66])
-  factor_pos_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Pos ==> interpsign s p Zero ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Zero"), t71))
+  factor_pos_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Pos) → interpsign(s, (p : (Real) -> Real), Zero) → (∀ x : Real, pow(x, (k : Num)) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Zero)"), t71))
 }
 
 ///|
@@ -343,7 +343,7 @@ fn step_11() -> Unit raise {
   })
   let t86 = @tactics.repeat_tac(@tactics.strip_tac)
   let t87 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t86, t85, t84, t83, t82, @tactics.disj1_tac, t81])
-  factor_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Zero ==> interpsign s p Pos ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Zero"), t87))
+  factor_zero_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Zero) → interpsign(s, (p : (Real) -> Real), Pos) → !((k : Num) == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Zero)"), t87))
 }
 
 ///|
@@ -384,7 +384,7 @@ fn step_12() -> Unit raise {
   })
   let t102 = @tactics.repeat_tac(@tactics.strip_tac)
   let t103 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t102, t101, t100, t99, t98, @tactics.disj1_tac, t97])
-  factor_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Zero ==> interpsign s p Neg ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Zero"), t103))
+  factor_zero_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Zero) → interpsign(s, (p : (Real) -> Real), Neg) → !((k : Num) == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Zero)"), t103))
 }
 
 ///|
@@ -423,7 +423,7 @@ fn step_13() -> Unit raise {
   })
   let t116 = @tactics.repeat_tac(@tactics.strip_tac)
   let t117 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t116, t115, t114, t113, @calc_rat.real_arith_tac])
-  factor_zero_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Zero ==> interpsign s p Zero ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Zero"), t117))
+  factor_zero_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Zero) → interpsign(s, (p : (Real) -> Real), Zero) → !((k : Num) == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Zero)"), t117))
 }
 
 ///|
@@ -464,7 +464,7 @@ fn step_14() -> Unit raise {
   })
   let t132 = @tactics.repeat_tac(@tactics.strip_tac)
   let t133 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t132, t131, t130, t129, t128, @tactics.disj2_tac, t127])
-  factor_neg_even_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Neg ==> interpsign s p Pos ==> EVEN k ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Pos"), t133))
+  factor_neg_even_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Neg) → interpsign(s, (p : (Real) -> Real), Pos) → EVEN((k : Num)) → !(k == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Pos)"), t133))
 }
 
 ///|
@@ -505,7 +505,7 @@ fn step_15() -> Unit raise {
   })
   let t148 = @tactics.repeat_tac(@tactics.strip_tac)
   let t149 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t148, t147, t146, t145, t144, @tactics.disj2_tac, t143])
-  factor_neg_even_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Neg ==> interpsign s p Neg ==> EVEN k ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Neg"), t149))
+  factor_neg_even_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Neg) → interpsign(s, (p : (Real) -> Real), Neg) → EVEN((k : Num)) → !(k == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Neg)"), t149))
 }
 
 ///|
@@ -545,7 +545,7 @@ fn step_16() -> Unit raise {
   })
   let t163 = @tactics.repeat_tac(@tactics.strip_tac)
   let t164 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t163, t162, t161, t160, t159])
-  factor_neg_even_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Neg ==> interpsign s p Zero ==> EVEN k ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Zero"), t164))
+  factor_neg_even_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Neg) → interpsign(s, (p : (Real) -> Real), Zero) → EVEN((k : Num)) → !(k == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Zero)"), t164))
 }
 
 ///|
@@ -586,7 +586,7 @@ fn step_17() -> Unit raise {
   })
   let t179 = @tactics.repeat_tac(@tactics.strip_tac)
   let t180 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t179, t178, t177, t176, t175, @tactics.disj1_tac, t174])
-  factor_neg_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Neg ==> interpsign s p Pos ==> ODD k ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Neg"), t180))
+  factor_neg_odd_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Neg) → interpsign(s, (p : (Real) -> Real), Pos) → ODD((k : Num)) → !(k == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Neg)"), t180))
 }
 
 ///|
@@ -627,7 +627,7 @@ fn step_18() -> Unit raise {
   })
   let t195 = @tactics.repeat_tac(@tactics.strip_tac)
   let t196 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t195, t194, t193, t192, t191, @tactics.disj1_tac, t190])
-  factor_neg_odd_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Neg ==> interpsign s p Neg ==> ODD k ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Pos"), t196))
+  factor_neg_odd_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Neg) → interpsign(s, (p : (Real) -> Real), Neg) → ODD((k : Num)) → !(k == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Pos)"), t196))
 }
 
 ///|
@@ -667,7 +667,7 @@ fn step_19() -> Unit raise {
   })
   let t210 = @tactics.repeat_tac(@tactics.strip_tac)
   let t211 = @list.List([@simp.rewrite_tac(@list.List([@defs.interpsign(), @realax.real_add_lid(), @analysis.real_mul_rid()])), t210, t209, t208, t207, t206])
-  factor_neg_odd_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("interpsign s (\\x. &0 + x * &1) Neg ==> interpsign s p Zero ==> ODD k ==> ~(k = 0) ==>\n   (forall x. x pow k * p x = q x) ==> interpsign s q Zero"), t211))
+  factor_neg_odd_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("interpsign((s : (Real) -> Bool), (x : Real) => real_of_num(0) + x * real_of_num(1), Neg) → interpsign(s, (p : (Real) -> Real), Zero) → ODD((k : Num)) → !(k == 0) → (∀ x : Real, pow(x, k) * p(x) == (q : (Real) -> Real)(x)) → interpsign(s, q, Zero)"), t211))
 }
 
 ///|
