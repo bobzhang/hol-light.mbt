@@ -5575,19 +5575,19 @@ test "Tutorial/Recursive_definitions matches Tutorial/Recursive_definitions.ml" 
       #|1 basis elements and 0 critical pairs
       #|Translating certificate to HOL inferences
       #|Tutorial/Recursive_definitions quotations (30):
-      #|  fib n = if n = 0 \\/ n = 1 then 1 else fib(n - 1) + fib(n - 2)
+      #|  (fib : (Num) -> Num)((n : Num)) == (if n == 0 || n == 1 { 1 } else { fib(n - 1) + fib(n - 2) })
       #|  \\n. n + 1
-      #|  (fib2 0 = 1) /\\\n  (fib2 1 = 1) /\\\n  (fib2 (n + 2) = fib2(n) + fib2(n + 1))
+      #|  (fib2 : (Num) -> Num)(0) == 1 && fib2(1) == 1 && fib2((n : Num) + 2) == fib2(n) + fib2(n + 1)
       #|  \\n. n + 1
-      #|  halve (2 * n) = n
-      #|  unknown n = unknown(n + 1)
-      #|  forall n. collatz(n) = if n <= 1 then n\n                   else if EVEN(n) then collatz(n DIV 2)\n                   else collatz(3 * n + 1)
-      #|  (fusc (2 * n) = if n = 0 then 0 else fusc(n)) /\\\n  (fusc (2 * n + 1) = if n = 0 then 1 else fusc(n) + fusc(n + 1))
+      #|  (halve : (Num) -> Num)(2 * (n : Num)) == n
+      #|  (unknown : (Num) -> _)((n : Num)) == unknown(n + 1)
+      #|  \226\136\128 n : Num, (collatz : (Num) -> Num)(n) == (if n <= 1 { n } else { if EVEN(n) { collatz(DIV(n, 2)) } else { collatz(3 * n + 1) } })
+      #|  (fusc : (Num) -> Num)(2 * (n : Num)) == (if n == 0 { 0 } else { fusc(n) }) && fusc(2 * n + 1) == (if n == 0 { 1 } else { fusc(n) + fusc(n + 1) })
       #|  \\n. n + 1
-      #|  n:num
+      #|  (n : Num)
       #|  0
-      #|  fusc 0 = 0 /\\\n   fusc 1 = 1 /\\\n   fusc (2 * n) = fusc(n) /\\\n   fusc (2 * n + 1) = fusc(n) + fusc(n + 1)
-      #|  (forall n. binom(n,0) = 1) /\\\n  (forall k. binom(0,SUC(k)) = 0) /\\\n  (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))
+      #|  fusc(0) == 0 && fusc(1) == 1 && fusc(2 * (n : Num)) == fusc(n) && fusc(2 * n + 1) == fusc(n) + fusc(n + 1)
+      #|  (\226\136\128 n : Num, (binom : ((Num, Num)) -> Num)((n, 0)) == 1) && (\226\136\128 k : Num, binom((0, SUC(k))) == 0) && (\226\136\128 n : Num, \226\136\128 k : Num, binom((SUC(n), SUC(k))) == binom((n, SUC(k))) + binom((n, k)))
       #|  :P
       #|  :P
       #|  :P
@@ -5595,16 +5595,16 @@ test "Tutorial/Recursive_definitions matches Tutorial/Recursive_definitions.ml" 
       #|  \\n. n + 1
       #|  \\n. n + 1
       #|  \\n. n + 1
-      #|  n < k ==> n < SUC(k)
-      #|  forall n k. n < k ==> (binom(n,k) = 0)
-      #|  forall n. binom(n,n) = 1
-      #|  SUC k
-      #|  forall n k. FACT n * FACT k * binom(n+k,k) = FACT(n + k)
-      #|  k <= n ==> SUC n - k = SUC(n - k)
-      #|  nsum(m+1..n+1) (\\i. f i)
-      #|  a = e /\\ b = c + d ==> a + b = c + d + e
-      #|  0 <= n + 1
-      #|  forall n. (x + y) EXP n = nsum(0..n) (\\k. binom(n,k) * x EXP k * y EXP (n - k))
+      #|  (n : Num) < (k : Num) \226\134\146 n < SUC(k)
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, n < k \226\134\146 binom((n, k)) == 0
+      #|  \226\136\128 n : Num, binom((n, n)) == 1
+      #|  SUC((k : Num))
+      #|  \226\136\128 n : Num, \226\136\128 k : Num, FACT(n) * (FACT(k) * binom((n + k, k))) == FACT(n + k)
+      #|  (k : Num) <= (n : Num) \226\134\146 SUC(n) - k == SUC(n - k)
+      #|  nsum(op_dot_dot((m : Num) + 1, (n : Num) + 1), (i : Num) => (f : (Num) -> Num)(i))
+      #|  (a : Num) == (e : Num) && (b : Num) == (c : Num) + (d : Num) \226\134\146 a + b == c + (d + e)
+      #|  0 <= (n : Num) + 1
+      #|  \226\136\128 n : Num, EXP((x : Num) + (y : Num), n) == nsum(op_dot_dot(0, n), (k : Num) => binom((n, k)) * (EXP(x, k) * EXP(y, n - k)))
       #|fib =  |- ((#=:fun(num,fun(num,bool)) (#fib:fun(num,num) n:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num))) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#+:fun(num,fun(num,num)) (#fib:fun(num,num) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#fib:fun(num,num) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
       #|fib2 =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fib2:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#fib2:fun(num,num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) (#fib2:fun(num,num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#+:fun(num,fun(num,num)) (#fib2:fun(num,num) n:num)) (#fib2:fun(num,num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
       #|halve =  |- ((#=:fun(num,fun(num,bool)) (#halve:fun(num,num) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num))) n:num)
