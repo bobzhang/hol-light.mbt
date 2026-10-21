@@ -3,7 +3,7 @@
 ///|
 /// jacobian_point
 fn step_1() -> Unit raise {
-  jacobian_point_c.set(@define.define_(@parser.parse_term("jacobian_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f")))
+  jacobian_point_c.set(@define.define_(@term_syntax.parse_term("(jacobian_point : (Ring[_], (_, _, _)) -> Bool)((f : Ring[_]), ((x : _), (y : _), (z : _))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(z, ring_carrier(f)))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn jacobian_point() -> @kernel.Thm {
 ///|
 /// jacobian_curve
 fn step_2() -> Unit raise {
-  jacobian_curve_c.set(@define.define_(@parser.parse_term("jacobian_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 4)))\n                               (ring_mul f b (ring_pow f z 6)))")))
+  jacobian_curve_c.set(@define.define_(@term_syntax.parse_term("(jacobian_curve : ((Ring[A], A, A), (A, A, A)) -> Bool)(((f : Ring[A]), (a : A), (b : A)), ((x : A), (y : A), (z : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(z, ring_carrier(f)) && ring_pow(f, y, 2) == ring_add(f, ring_pow(f, x, 3), ring_add(f, ring_mul(f, a, ring_mul(f, x, ring_pow(f, z, 4))), ring_mul(f, b, ring_pow(f, z, 6)))))")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn jacobian_curve() -> @kernel.Thm {
 ///|
 /// weierstrass_of_jacobian
 fn step_3() -> Unit raise {
-  weierstrass_of_jacobian_c.set(@define.define_(@parser.parse_term("weierstrass_of_jacobian (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x (ring_pow f z 2),\n                  ring_div f y (ring_pow f z 3))")))
+  weierstrass_of_jacobian_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_of_jacobian : (Ring[A], (A, A, A)) -> Option[(A, A)])((f : Ring[A]), ((x : A), (y : A), (z : A))) == (if z == ring_0(f) { NONE } else { SOME((ring_div(f, x, ring_pow(f, z, 2)), ring_div(f, y, ring_pow(f, z, 3)))) })")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn weierstrass_of_jacobian() -> @kernel.Thm {
 ///|
 /// jacobian_of_weierstrass
 fn step_4() -> Unit raise {
-  jacobian_of_weierstrass_c.set(@define.define_(@parser.parse_term("jacobian_of_weierstrass (f:A ring) NONE = (ring_1 f,ring_1 f,ring_0 f) /\\\n  jacobian_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)")))
+  jacobian_of_weierstrass_c.set(@define.define_(@term_syntax.parse_term("(jacobian_of_weierstrass : (Ring[A], Option[(A, A)]) -> (A, A, A))((f : Ring[A]), NONE) == (ring_1(f), ring_1(f), ring_0(f)) && jacobian_of_weierstrass(f, SOME(((x : A), (y : A)))) == (x, y, ring_1(f))")))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn jacobian_of_weierstrass() -> @kernel.Thm {
 ///|
 /// jacobian_eq
 fn step_5() -> Unit raise {
-  jacobian_eq_c.set(@define.define_(@parser.parse_term("jacobian_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x (ring_pow f z' 2) = ring_mul f x' (ring_pow f z 2) /\\\n        ring_mul f y (ring_pow f z' 3) = ring_mul f y' (ring_pow f z 3)")))
+  jacobian_eq_c.set(@define.define_(@term_syntax.parse_term("(jacobian_eq : (Ring[A], (A, A, A), (A, A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A), (z : A)), ((x' : A), (y' : A), (z' : A))) == ((z == ring_0(f)) == (z' == ring_0(f)) && ring_mul(f, x, ring_pow(f, z', 2)) == ring_mul(f, x', ring_pow(f, z, 2)) && ring_mul(f, y, ring_pow(f, z', 3)) == ring_mul(f, y', ring_pow(f, z, 3)))")))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn jacobian_eq() -> @kernel.Thm {
 ///|
 /// jacobian_0
 fn step_6() -> Unit raise {
-  jacobian_0_c.set(@pair.new_definition(@parser.parse_term("jacobian_0 (f:A ring,a:A,b:A) = (ring_1 f,ring_1 f,ring_0 f)")))
+  jacobian_0_c.set(@pair.new_definition(@term_syntax.parse_term("(jacobian_0 : ((Ring[A], A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A))) == (ring_1(f), ring_1(f), ring_0(f))")))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn jacobian_0() -> @kernel.Thm {
 ///|
 /// jacobian_neg
 fn step_7() -> Unit raise {
-  jacobian_neg_c.set(@pair.new_definition(@parser.parse_term("jacobian_neg (f,a:A,b:A) (x,y,z) = (x:A,ring_neg f y:A,z:A)")))
+  jacobian_neg_c.set(@pair.new_definition(@term_syntax.parse_term("(jacobian_neg : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x : A), (y : A), (z : A))) == (x, ring_neg(f, y), z)")))
 }
 
 ///|
@@ -108,7 +108,7 @@ pub fn jacobian_neg() -> @kernel.Thm {
 ///|
 /// jacobian_add
 fn step_8() -> Unit raise {
-  jacobian_add_c.set(@pair.new_definition(@parser.parse_term("jacobian_add (f:A ring,a,b) (x1,y1,z1) (x2,y2,z2) =\n   if z1 = ring_0 f then (x2,y2,z2)\n   else if z2 = ring_0 f then (x1,y1,z1)\n   else if jacobian_eq f (x1,y1,z1) (x2,y2,z2) then\n     let v = ring_mul f (ring_of_num f 4) (ring_mul f x1 (ring_pow f y1 2))\n     and w =\n       ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n       (ring_mul f a (ring_pow f z1 4)) in\n     let x3 =\n       ring_add f (ring_mul f (ring_neg f (ring_of_num f 2)) v)\n       (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f (ring_of_num f 8)) (ring_pow f y1 4))\n     (ring_mul f (ring_sub f v x3) w),\n     ring_mul f (ring_of_num f 2) (ring_mul f y1 z1)\n    else if jacobian_eq f (jacobian_neg (f,a,b) (x1,y1,z1)) (x2,y2,z2) then\n      jacobian_0 (f,a,b)\n    else\n     let r = ring_mul f x1 (ring_pow f z2 2)\n     and s = ring_mul f x2 (ring_pow f z1 2)\n     and t = ring_mul f y1 (ring_pow f z2 3)\n     and u = ring_mul f y2 (ring_pow f z1 3) in\n     let v = ring_sub f s r\n     and w = ring_sub f u t in\n     let x3 =\n         ring_add f\n         (ring_sub f (ring_neg f (ring_pow f v 3))\n         (ring_mul f (ring_of_num f 2) (ring_mul f r (ring_pow f v 2))))\n         (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f t) (ring_pow f v 3))\n     (ring_mul f (ring_sub f (ring_mul f r (ring_pow f v 2)) x3) w),\n     ring_mul f v (ring_mul f z1 z2)")))
+  jacobian_add_c.set(@pair.new_definition(@term_syntax.parse_term("(jacobian_add : ((Ring[A], A, A), (A, A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A)), ((x2 : A), (y2 : A), (z2 : A))) == (if z1 == ring_0(f) { (x2, y2, z2) } else { if z2 == ring_0(f) { (x1, y1, z1) } else { if jacobian_eq(f, (x1, y1, z1), (x2, y2, z2)) { LET((v : A) => (w : A) => LET_END(LET((x3 : A) => LET_END((x3, ring_add(f, ring_mul(f, ring_neg(f, ring_of_num(f, 8)), ring_pow(f, y1, 4)), ring_mul(f, ring_sub(f, v, x3), w)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, y1, z1)))), ring_add(f, ring_mul(f, ring_neg(f, ring_of_num(f, 2)), v), ring_pow(f, w, 2)))), ring_mul(f, ring_of_num(f, 4), ring_mul(f, x1, ring_pow(f, y1, 2))), ring_add(f, ring_mul(f, ring_of_num(f, 3), ring_pow(f, x1, 2)), ring_mul(f, a, ring_pow(f, z1, 4)))) } else { if jacobian_eq(f, jacobian_neg((f, a, b), (x1, y1, z1)), (x2, y2, z2)) { jacobian_0((f, a, b)) } else { LET((r : A) => (s : A) => (t : A) => (u : A) => LET_END(LET((v : A) => (w : A) => LET_END(LET((x3 : A) => LET_END((x3, ring_add(f, ring_mul(f, ring_neg(f, t), ring_pow(f, v, 3)), ring_mul(f, ring_sub(f, ring_mul(f, r, ring_pow(f, v, 2)), x3), w)), ring_mul(f, v, ring_mul(f, z1, z2)))), ring_add(f, ring_sub(f, ring_neg(f, ring_pow(f, v, 3)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, r, ring_pow(f, v, 2)))), ring_pow(f, w, 2)))), ring_sub(f, s, r), ring_sub(f, u, t))), ring_mul(f, x1, ring_pow(f, z2, 2)), ring_mul(f, x2, ring_pow(f, z1, 2)), ring_mul(f, y1, ring_pow(f, z2, 3)), ring_mul(f, y2, ring_pow(f, z1, 3))) } } } })")))
 }
 
 ///|
@@ -125,7 +125,7 @@ pub fn jacobian_add() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([jacobian_curve(), jacobian_point()]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t1)
-  jacobian_curve_imp_point_c.set(@tactics.prove(@parser.parse_term("forall f a b p. jacobian_curve(f,a,b) p ==> jacobian_point f p"), t2))
+  jacobian_curve_imp_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[_], ∀ a : _, ∀ b : _, ∀ p : (_, _, _), jacobian_curve((f, a, b), p) → jacobian_point(f, p)"), t2))
 }
 
 ///|
@@ -143,7 +143,7 @@ fn step_10() -> Unit raise {
   let t4 = @simp.simp_tac(@list.List([jacobian_point(), @ringtheory.ring_0_v1(), @ringtheory.ring_1_v1()]))
   let t3 = @simp.rewrite_tac(@list.List([@weierstrass.weierstrass_point(), jacobian_of_weierstrass()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t3), t4)
-  jacobian_of_weierstrass_point_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        jacobian_point f (jacobian_of_weierstrass f p) <=>\n        weierstrass_point f p"), t5))
+  jacobian_of_weierstrass_point_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], jacobian_point(f, jacobian_of_weierstrass(f, p)) == weierstrass_point(f, p)"), t5))
 }
 
 ///|
@@ -159,7 +159,7 @@ pub fn jacobian_of_weierstrass_point_eq() -> @kernel.Thm {
 /// JACOBIAN_OF_WEIERSTRASS_POINT
 fn step_11() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([jacobian_of_weierstrass_point_eq()]))
-  jacobian_of_weierstrass_point_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        weierstrass_point f p\n        ==> jacobian_point f (jacobian_of_weierstrass f p)"), t6))
+  jacobian_of_weierstrass_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], weierstrass_point(f, p) → jacobian_point(f, jacobian_of_weierstrass(f, p))"), t6))
 }
 
 ///|
@@ -177,7 +177,7 @@ fn step_12() -> Unit raise {
   let t8 = @simp.asm_simp_tac(@list.List([@weierstrass.weierstrass_point(), @ringtheory.ring_div_v1(), @ringtheory.ring_pow_v1()]))
   let t7 = @tactics.repeat_tac(@tactics.gen_tac)
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@pair.forall_pair_thm(), weierstrass_of_jacobian(), jacobian_point()])), t7), @class.cond_cases_tac), t8)
-  weierstrass_of_jacobian_point_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        jacobian_point f p\n        ==> weierstrass_point f (weierstrass_of_jacobian f p)"), t9))
+  weierstrass_of_jacobian_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : (A, A, A), jacobian_point(f, p) → weierstrass_point(f, weierstrass_of_jacobian(f, p))"), t9))
 }
 
 ///|
@@ -195,7 +195,7 @@ fn step_13() -> Unit raise {
   let t11 = @simp.simp_tac(@list.List([@pair.pair_eq()]))
   let t10 = @simp.rewrite_tac(@list.List([jacobian_of_weierstrass(), @ind_types.option_distinct(), @ind_types.option_inj()]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.field()])), t10), t11)
-  jacobian_of_weierstrass_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p q.\n        field f\n        ==> (jacobian_of_weierstrass f p = jacobian_of_weierstrass f q <=>\n             p = q)"), t12))
+  jacobian_of_weierstrass_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) → (jacobian_of_weierstrass(f, p) == jacobian_of_weierstrass(f, q)) == (p == q)"), t12))
 }
 
 ///|
@@ -215,7 +215,7 @@ fn step_14() -> Unit raise {
   let t14 = @tactics.repeat_tac(@tactics.strip_tac)
   let t13 = @simp.rewrite_tac(@list.List([weierstrass_of_jacobian(), jacobian_eq()]))
   let t17 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), jacobian_point()])), t13), t14), t15), t16), @ringtheory.field_tac)
-  weierstrass_of_jacobian_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p q.\n        field f /\\ jacobian_point f p /\\ jacobian_point f q\n        ==> (weierstrass_of_jacobian f p = weierstrass_of_jacobian f q <=>\n             jacobian_eq f p q)"), t17))
+  weierstrass_of_jacobian_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && jacobian_point(f, p) && jacobian_point(f, q) → (weierstrass_of_jacobian(f, p) == weierstrass_of_jacobian(f, q)) == jacobian_eq(f, p, q)"), t17))
 }
 
 ///|
@@ -232,7 +232,7 @@ pub fn weierstrass_of_jacobian_eq() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t18 = @simp.simp_tac(@list.List([weierstrass_of_jacobian(), jacobian_of_weierstrass(), @weierstrass.weierstrass_point(), @ringtheory.ring_pow_one(), @ringtheory.ring_div_1()]))
   let t19 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.field()])), t18)
-  weierstrass_of_jacobian_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        field f /\\ weierstrass_point f p\n        ==> weierstrass_of_jacobian f (jacobian_of_weierstrass f p) = p"), t19))
+  weierstrass_of_jacobian_of_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], field(f) && weierstrass_point(f, p) → weierstrass_of_jacobian(f, jacobian_of_weierstrass(f, p)) == p"), t19))
 }
 
 ///|
@@ -248,7 +248,7 @@ pub fn weierstrass_of_jacobian_of_weierstrass() -> @kernel.Thm {
 /// JACOBIAN_OF_WEIERSTRASS_OF_JACOBIAN
 fn step_16() -> Unit raise {
   let t20 = @simp.simp_tac(@list.List([@equal.gsym(weierstrass_of_jacobian_eq()), weierstrass_of_jacobian_of_weierstrass(), jacobian_of_weierstrass_point_eq(), weierstrass_of_jacobian_point()]))
-  jacobian_of_weierstrass_of_jacobian_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        field f /\\ jacobian_point f p\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_of_jacobian f p)) p"), t20))
+  jacobian_of_weierstrass_of_jacobian_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : (A, A, A), field(f) && jacobian_point(f, p) → jacobian_eq(f, jacobian_of_weierstrass(f, weierstrass_of_jacobian(f, p)), p)"), t20))
 }
 
 ///|
@@ -284,7 +284,7 @@ fn step_17() -> Unit raise {
       })(x31))
     })(x32)(x32)
   }), t33)
-  jacobian_of_weierstrass_curve_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> (jacobian_curve (f,a,b) (jacobian_of_weierstrass f p) <=>\n             weierstrass_curve (f,a,b) p)"), t34))
+  jacobian_of_weierstrass_curve_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) → jacobian_curve((f, a, b), jacobian_of_weierstrass(f, p)) == weierstrass_curve((f, a, b), p)"), t34))
 }
 
 ///|
@@ -300,7 +300,7 @@ pub fn jacobian_of_weierstrass_curve_eq() -> @kernel.Thm {
 /// JACOBIAN_OF_WEIERSTRASS_CURVE
 fn step_18() -> Unit raise {
   let t35 = @meson.meson_tac(@list.List([jacobian_of_weierstrass_curve_eq(), @weierstrass.weierstrass_curve_imp_point()]))
-  jacobian_of_weierstrass_curve_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve (f,a,b) p\n        ==> jacobian_curve (f,a,b) (jacobian_of_weierstrass f p)"), t35))
+  jacobian_of_weierstrass_curve_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) → jacobian_curve((f, a, b), jacobian_of_weierstrass(f, p))"), t35))
 }
 
 ///|
@@ -318,7 +318,7 @@ fn step_19() -> Unit raise {
   let t37 = @simp.asm_simp_tac(@list.List([@weierstrass.weierstrass_curve(), @ringtheory.ring_div_v1(), @ringtheory.ring_pow_v1()]))
   let t36 = @tactics.repeat_tac(@tactics.strip_tac)
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@pair.forall_pair_thm(), weierstrass_of_jacobian(), jacobian_curve()])), t36), @class.cond_cases_tac), t37), @ringtheory.field_tac)
-  weierstrass_of_jacobian_curve_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p\n        ==> weierstrass_curve (f,a,b) (weierstrass_of_jacobian f p)"), t38))
+  weierstrass_of_jacobian_curve_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_curve((f, a, b), p) → weierstrass_curve((f, a, b), weierstrass_of_jacobian(f, p))"), t38))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_20() -> Unit raise {
       })(x48))
     })(x49)(x49)
   }), t50)
-  jacobian_point_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p\n        ==> jacobian_point f (jacobian_neg (f,a,b) p)"), t51))
+  jacobian_point_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) → jacobian_point(f, jacobian_neg((f, a, b), p))"), t51))
 }
 
 ///|
@@ -388,7 +388,7 @@ fn step_21() -> Unit raise {
       })(x61))
     })(x62)(x62)
   }), t63)
-  jacobian_curve_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p\n        ==> jacobian_curve (f,a,b) (jacobian_neg (f,a,b) p)"), t64))
+  jacobian_curve_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_curve((f, a, b), p) → jacobian_curve((f, a, b), jacobian_neg((f, a, b), p))"), t64))
 }
 
 ///|
@@ -406,7 +406,7 @@ fn step_22() -> Unit raise {
   let t66 = @simp.asm_rewrite_tac(@list.List([@weierstrass.weierstrass_neg(), @ind_types.option_inj(), @pair.pair_eq()]))
   let t65 = @tactics.repeat_tac(@tactics.strip_tac)
   let t67 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), jacobian_neg(), weierstrass_of_jacobian(), jacobian_point()])), t65), @class.cond_cases_tac), t66), @ringtheory.field_tac)
-  weierstrass_of_jacobian_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p\n        ==> weierstrass_of_jacobian f (jacobian_neg (f,a,b) p) =\n            weierstrass_neg (f,a,b) (weierstrass_of_jacobian f p)"), t67))
+  weierstrass_of_jacobian_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) → weierstrass_of_jacobian(f, jacobian_neg((f, a, b), p)) == weierstrass_neg((f, a, b), weierstrass_of_jacobian(f, p))"), t67))
 }
 
 ///|
@@ -435,7 +435,7 @@ fn step_23() -> Unit raise {
     }
   })))
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t74), t75), t76)
-  jacobian_eq_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p p'.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f p' /\\ jacobian_eq f p p'\n        ==> jacobian_eq f\n              (jacobian_neg (f,a,b) p) (jacobian_neg (f,a,b) p')"), t77))
+  jacobian_eq_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ p' : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) && jacobian_point(f, p') && jacobian_eq(f, p, p') → jacobian_eq(f, jacobian_neg((f, a, b), p), jacobian_neg((f, a, b), p'))"), t77))
 }
 
 ///|
@@ -451,7 +451,7 @@ pub fn jacobian_eq_neg() -> @kernel.Thm {
 /// WEIERSTRASS_OF_JACOBIAN_NEG_OF_WEIERSTRASS
 fn step_24() -> Unit raise {
   let t78 = @simp.simp_tac(@list.List([weierstrass_of_jacobian_neg(), jacobian_of_weierstrass_point(), weierstrass_of_jacobian_of_weierstrass()]))
-  weierstrass_of_jacobian_neg_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> weierstrass_of_jacobian f\n             (jacobian_neg (f,a,b) (jacobian_of_weierstrass f p)) =\n            weierstrass_neg (f,a,b) p"), t78))
+  weierstrass_of_jacobian_neg_of_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) → weierstrass_of_jacobian(f, jacobian_neg((f, a, b), jacobian_of_weierstrass(f, p))) == weierstrass_neg((f, a, b), p)"), t78))
 }
 
 ///|
@@ -467,7 +467,7 @@ pub fn weierstrass_of_jacobian_neg_of_weierstrass() -> @kernel.Thm {
 /// JACOBIAN_OF_WEIERSTRASS_NEG
 fn step_25() -> Unit raise {
   let t79 = @simp.simp_tac(@list.List([@equal.gsym(weierstrass_of_jacobian_eq()), jacobian_of_weierstrass_point(), jacobian_point_neg(), @weierstrass.weierstrass_point_neg(), weierstrass_of_jacobian_neg(), weierstrass_of_jacobian_of_weierstrass()]))
-  jacobian_of_weierstrass_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_neg (f,a,b) p))\n             (jacobian_neg (f,a,b) (jacobian_of_weierstrass f p))"), t79))
+  jacobian_of_weierstrass_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) → jacobian_eq(f, jacobian_of_weierstrass(f, weierstrass_neg((f, a, b), p)), jacobian_neg((f, a, b), jacobian_of_weierstrass(f, p)))"), t79))
 }
 
 ///|
@@ -487,7 +487,7 @@ fn step_26() -> Unit raise {
   let t81 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t80 = @tactics.repeat_tac(@tactics.strip_tac)
   let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), jacobian_add(), jacobian_point(), jacobian_0(), jacobian_eq(), @pair.let_def(), @pair.let_end_def()])), t80), t81), t82), t83), @ringtheory.ring_carrier_tac)
-  jacobian_point_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q\n        ==> jacobian_point f (jacobian_add (f,a,b) p q)"), t84))
+  jacobian_point_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) && jacobian_point(f, q) → jacobian_point(f, jacobian_add((f, a, b), p, q))"), t84))
 }
 
 ///|
@@ -525,7 +525,7 @@ fn step_27() -> Unit raise {
       })(x97))
     })(x98)(x98)
   }), t99)
-  jacobian_curve_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_curve (f,a,b) p /\\ jacobian_curve (f,a,b) q\n        ==> jacobian_curve (f,a,b) (jacobian_add (f,a,b) p q)"), t100))
+  jacobian_curve_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_curve((f, a, b), p) && jacobian_curve((f, a, b), q) → jacobian_curve((f, a, b), jacobian_add((f, a, b), p, q))"), t100))
 }
 
 ///|
@@ -557,20 +557,20 @@ fn step_28() -> Unit raise {
   let t115 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_pow()]))
   let t114 = @simp.asm_rewrite_tac(@list.List([jacobian_eq(), jacobian_neg(), jacobian_0()]))
   let t113 = @simp.asm_rewrite_tac(@list.List([weierstrass_of_jacobian(), @weierstrass.weierstrass_add()]))
-  let t111 = @parser.parse_term("z2:A = ring_0 f")
-  let t112 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("z1:A = ring_0 f"), t111]))
+  let t111 = @term_syntax.parse_term("(z2 : A) == ring_0((f : Ring[A]))")
+  let t112 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"), t111]))
   let t110 = @simp.rewrite_tac(@list.List([weierstrass_of_jacobian(), jacobian_add()]))
-  let t101 = @parser.parse_term("z2:A")
-  let t102 = @parser.parse_term("y2:A")
-  let t103 = @parser.parse_term("x2:A")
-  let t104 = @parser.parse_term("z1:A")
-  let t105 = @parser.parse_term("y1:A")
-  let t106 = @parser.parse_term("x1:A")
-  let t107 = @parser.parse_term("b:A")
-  let t108 = @parser.parse_term("a:A")
-  let t109 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t108, t107, t106, t105, t104, t103, t102, t101]))
+  let t101 = @term_syntax.parse_term("(z2 : A)")
+  let t102 = @term_syntax.parse_term("(y2 : A)")
+  let t103 = @term_syntax.parse_term("(x2 : A)")
+  let t104 = @term_syntax.parse_term("(z1 : A)")
+  let t105 = @term_syntax.parse_term("(y1 : A)")
+  let t106 = @term_syntax.parse_term("(x1 : A)")
+  let t107 = @term_syntax.parse_term("(b : A)")
+  let t108 = @term_syntax.parse_term("(a : A)")
+  let t109 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t108, t107, t106, t105, t104, t103, t102, t101]))
   let t128 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23(), @pair.forall_pair_thm(), jacobian_point()])), t109), @tactics.strip_tac), t110), t112), t113), t114), t115), t116), t117), t118), t119), t120), t121), t122), t127), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_jacobian_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q\n        ==> weierstrass_of_jacobian f (jacobian_add (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_jacobian f p)\n             (weierstrass_of_jacobian f q)"), t128))
+  weierstrass_of_jacobian_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) && jacobian_point(f, q) → weierstrass_of_jacobian(f, jacobian_add((f, a, b), p, q)) == weierstrass_add((f, a, b), weierstrass_of_jacobian(f, p), weierstrass_of_jacobian(f, q))"), t128))
 }
 
 ///|
@@ -599,7 +599,7 @@ fn step_29() -> Unit raise {
     }
   })))
   let t138 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t135), t136), t137)
-  jacobian_eq_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p p' q q'.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f p' /\\\n        jacobian_point f q /\\ jacobian_point f q' /\\\n        jacobian_eq f p p' /\\ jacobian_eq f q q'\n        ==> jacobian_eq f\n              (jacobian_add (f,a,b) p q) (jacobian_add (f,a,b) p' q')"), t138))
+  jacobian_eq_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ p' : (A, A, A), ∀ q : (A, A, A), ∀ q' : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) && jacobian_point(f, p') && jacobian_point(f, q) && jacobian_point(f, q') && jacobian_eq(f, p, p') && jacobian_eq(f, q, q') → jacobian_eq(f, jacobian_add((f, a, b), p, q), jacobian_add((f, a, b), p', q'))"), t138))
 }
 
 ///|
@@ -615,7 +615,7 @@ pub fn jacobian_eq_add() -> @kernel.Thm {
 /// WEIERSTRASS_OF_JACOBIAN_ADD_OF_WEIERSTRASS
 fn step_30() -> Unit raise {
   let t139 = @simp.simp_tac(@list.List([weierstrass_of_jacobian_add(), jacobian_of_weierstrass_point(), weierstrass_of_jacobian_of_weierstrass()]))
-  weierstrass_of_jacobian_add_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_of_jacobian f\n             (jacobian_add (f,a,b)\n               (jacobian_of_weierstrass f p)\n               (jacobian_of_weierstrass f q)) =\n            weierstrass_add (f,a,b) p q"), t139))
+  weierstrass_of_jacobian_add_of_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) → weierstrass_of_jacobian(f, jacobian_add((f, a, b), jacobian_of_weierstrass(f, p), jacobian_of_weierstrass(f, q))) == weierstrass_add((f, a, b), p, q)"), t139))
 }
 
 ///|
@@ -631,7 +631,7 @@ pub fn weierstrass_of_jacobian_add_of_weierstrass() -> @kernel.Thm {
 /// JACOBIAN_OF_WEIERSTRASS_ADD
 fn step_31() -> Unit raise {
   let t140 = @simp.simp_tac(@list.List([@equal.gsym(weierstrass_of_jacobian_eq()), jacobian_of_weierstrass_point(), jacobian_point_add(), @weierstrass.weierstrass_point_add(), weierstrass_of_jacobian_add(), weierstrass_of_jacobian_of_weierstrass()]))
-  jacobian_of_weierstrass_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> jacobian_eq f\n             (jacobian_of_weierstrass f (weierstrass_add (f,a,b) p q))\n             (jacobian_add (f,a,b)\n               (jacobian_of_weierstrass f p)\n               (jacobian_of_weierstrass f q))"), t140))
+  jacobian_of_weierstrass_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) → jacobian_eq(f, jacobian_of_weierstrass(f, weierstrass_add((f, a, b), p, q)), jacobian_add((f, a, b), jacobian_of_weierstrass(f, p), jacobian_of_weierstrass(f, q)))"), t140))
 }
 
 ///|
@@ -646,7 +646,7 @@ pub fn jacobian_of_weierstrass_add() -> @kernel.Thm {
 ///|
 /// jacobian_add_unexceptional
 fn step_32() -> Unit raise {
-  jacobian_add_unexceptional_c.set(@pair.new_definition(@parser.parse_term("jacobian_add_unexceptional (f:A ring,a:A,b:A) (x1,y1,z1) (x2,y2,z2) =\n   if z1 = ring_0 f then (x2,y2,z2)\n   else if z2 = ring_0 f then (x1,y1,z1)\n   else\n     let r = ring_mul f x1 (ring_pow f z2 2)\n     and s = ring_mul f x2 (ring_pow f z1 2)\n     and t = ring_mul f y1 (ring_pow f z2 3)\n     and u = ring_mul f y2 (ring_pow f z1 3) in\n     let v = ring_sub f s r\n     and w = ring_sub f u t in\n     let x3 =\n         ring_add f\n         (ring_sub f (ring_neg f (ring_pow f v 3))\n         (ring_mul f (ring_of_num f 2) (ring_mul f r (ring_pow f v 2))))\n         (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f t) (ring_pow f v 3))\n     (ring_mul f (ring_sub f (ring_mul f r (ring_pow f v 2)) x3) w),\n     ring_mul f v (ring_mul f z1 z2)")))
+  jacobian_add_unexceptional_c.set(@pair.new_definition(@term_syntax.parse_term("(jacobian_add_unexceptional : ((Ring[A], A, A), (A, A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A)), ((x2 : A), (y2 : A), (z2 : A))) == (if z1 == ring_0(f) { (x2, y2, z2) } else { if z2 == ring_0(f) { (x1, y1, z1) } else { LET((r : A) => (s : A) => (t : A) => (u : A) => LET_END(LET((v : A) => (w : A) => LET_END(LET((x3 : A) => LET_END((x3, ring_add(f, ring_mul(f, ring_neg(f, t), ring_pow(f, v, 3)), ring_mul(f, ring_sub(f, ring_mul(f, r, ring_pow(f, v, 2)), x3), w)), ring_mul(f, v, ring_mul(f, z1, z2)))), ring_add(f, ring_sub(f, ring_neg(f, ring_pow(f, v, 3)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, r, ring_pow(f, v, 2)))), ring_pow(f, w, 2)))), ring_sub(f, s, r), ring_sub(f, u, t))), ring_mul(f, x1, ring_pow(f, z2, 2)), ring_mul(f, x2, ring_pow(f, z1, 2)), ring_mul(f, y1, ring_pow(f, z2, 3)), ring_mul(f, y2, ring_pow(f, z1, 3))) } })")))
 }
 
 ///|
@@ -678,21 +678,21 @@ fn step_33() -> Unit raise {
   let t156 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_pow()]))
   let t155 = @simp.asm_rewrite_tac(@list.List([jacobian_neg(), jacobian_0()]))
   let t154 = @simp.asm_rewrite_tac(@list.List([weierstrass_of_jacobian(), @weierstrass.weierstrass_add()]))
-  let t152 = @parser.parse_term("z2:A = ring_0 f")
-  let t153 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("z1:A = ring_0 f"), t152]))
+  let t152 = @term_syntax.parse_term("(z2 : A) == ring_0((f : Ring[A]))")
+  let t153 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"), t152]))
   let t151 = @simp.rewrite_tac(@list.List([jacobian_eq()]))
   let t150 = @simp.rewrite_tac(@list.List([weierstrass_of_jacobian(), jacobian_add_unexceptional()]))
-  let t141 = @parser.parse_term("z2:A")
-  let t142 = @parser.parse_term("y2:A")
-  let t143 = @parser.parse_term("x2:A")
-  let t144 = @parser.parse_term("z1:A")
-  let t145 = @parser.parse_term("y1:A")
-  let t146 = @parser.parse_term("x1:A")
-  let t147 = @parser.parse_term("b:A")
-  let t148 = @parser.parse_term("a:A")
-  let t149 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t148, t147, t146, t145, t144, t143, t142, t141]))
+  let t141 = @term_syntax.parse_term("(z2 : A)")
+  let t142 = @term_syntax.parse_term("(y2 : A)")
+  let t143 = @term_syntax.parse_term("(x2 : A)")
+  let t144 = @term_syntax.parse_term("(z1 : A)")
+  let t145 = @term_syntax.parse_term("(y1 : A)")
+  let t146 = @term_syntax.parse_term("(x1 : A)")
+  let t147 = @term_syntax.parse_term("(b : A)")
+  let t148 = @term_syntax.parse_term("(a : A)")
+  let t149 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t148, t147, t146, t145, t144, t143, t142, t141]))
   let t169 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23(), @pair.forall_pair_thm(), jacobian_point()])), t149), t150), t151), t153), t154), @tactics.strip_tac), t155), t156), t157), t158), t159), t160), t161), t162), t163), t168), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_jacobian_add_unexceptional_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        jacobian_point f p /\\ jacobian_point f q /\\\n        ~(jacobian_eq f p q)\n        ==> weierstrass_of_jacobian f (jacobian_add_unexceptional (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_jacobian f p)\n             (weierstrass_of_jacobian f q)"), t169))
+  weierstrass_of_jacobian_add_unexceptional_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) && jacobian_point(f, q) && !jacobian_eq(f, p, q) → weierstrass_of_jacobian(f, jacobian_add_unexceptional((f, a, b), p, q)) == weierstrass_add((f, a, b), weierstrass_of_jacobian(f, p), weierstrass_of_jacobian(f, q))"), t169))
 }
 
 ///|
@@ -707,7 +707,7 @@ pub fn weierstrass_of_jacobian_add_unexceptional() -> @kernel.Thm {
 ///|
 /// jacobian_double_unexceptional
 fn step_34() -> Unit raise {
-  jacobian_double_unexceptional_c.set(@pair.new_definition(@parser.parse_term("jacobian_double_unexceptional (f:A ring,a:A,b:A) (x1,y1,z1) =\n     let v = ring_mul f (ring_of_num f 4) (ring_mul f x1 (ring_pow f y1 2))\n     and w =\n       ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n       (ring_mul f a (ring_pow f z1 4)) in\n     let x3 =\n       ring_add f (ring_mul f (ring_neg f (ring_of_num f 2)) v)\n       (ring_pow f w 2) in\n     x3,\n     ring_add f (ring_mul f (ring_neg f (ring_of_num f 8)) (ring_pow f y1 4))\n     (ring_mul f (ring_sub f v x3) w),\n     ring_mul f (ring_of_num f 2) (ring_mul f y1 z1)")))
+  jacobian_double_unexceptional_c.set(@pair.new_definition(@term_syntax.parse_term("(jacobian_double_unexceptional : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x1 : A), (y1 : A), (z1 : A))) == LET((v : A) => (w : A) => LET_END(LET((x3 : A) => LET_END((x3, ring_add(f, ring_mul(f, ring_neg(f, ring_of_num(f, 8)), ring_pow(f, y1, 4)), ring_mul(f, ring_sub(f, v, x3), w)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, y1, z1)))), ring_add(f, ring_mul(f, ring_neg(f, ring_of_num(f, 2)), v), ring_pow(f, w, 2)))), ring_mul(f, ring_of_num(f, 4), ring_mul(f, x1, ring_pow(f, y1, 2))), ring_add(f, ring_mul(f, ring_of_num(f, 3), ring_pow(f, x1, 2)), ring_mul(f, a, ring_pow(f, z1, 4))))")))
 }
 
 ///|
@@ -739,16 +739,16 @@ fn step_35() -> Unit raise {
   let t180 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_pow()]))
   let t179 = @simp.asm_rewrite_tac(@list.List([jacobian_neg(), jacobian_0()]))
   let t178 = @simp.asm_rewrite_tac(@list.List([weierstrass_of_jacobian(), @weierstrass.weierstrass_add()]))
-  let t177 = @class.asm_cases_tac(@parser.parse_term("z1:A = ring_0 f"))
+  let t177 = @class.asm_cases_tac(@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"))
   let t176 = @simp.rewrite_tac(@list.List([weierstrass_of_jacobian(), jacobian_double_unexceptional()]))
-  let t170 = @parser.parse_term("z1:A")
-  let t171 = @parser.parse_term("y1:A")
-  let t172 = @parser.parse_term("x1:A")
-  let t173 = @parser.parse_term("b:A")
-  let t174 = @parser.parse_term("a:A")
-  let t175 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t174, t173, t172, t171, t170]))
+  let t170 = @term_syntax.parse_term("(z1 : A)")
+  let t171 = @term_syntax.parse_term("(y1 : A)")
+  let t172 = @term_syntax.parse_term("(x1 : A)")
+  let t173 = @term_syntax.parse_term("(b : A)")
+  let t174 = @term_syntax.parse_term("(a : A)")
+  let t175 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t174, t173, t172, t171, t170]))
   let t193 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23(), @pair.forall_pair_thm(), jacobian_point()])), t175), t176), t177), t178), @tactics.strip_tac), t179), t180), t181), t182), t183), t184), t185), t186), t187), t192), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_jacobian_double_unexceptional_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      jacobian_point f p\n      ==> weierstrass_of_jacobian f (jacobian_double_unexceptional (f,a,b) p) =\n          weierstrass_add (f,a,b)\n           (weierstrass_of_jacobian f p)\n           (weierstrass_of_jacobian f p)"), t193))
+  weierstrass_of_jacobian_double_unexceptional_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && jacobian_point(f, p) → weierstrass_of_jacobian(f, jacobian_double_unexceptional((f, a, b), p)) == weierstrass_add((f, a, b), weierstrass_of_jacobian(f, p), weierstrass_of_jacobian(f, p))"), t193))
 }
 
 ///|
