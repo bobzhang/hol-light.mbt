@@ -6378,13 +6378,13 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..solved at 2
 Complex/quelim quotations (180):
-  poly(exp((r : List[Complex]), degree((s : List[Complex])))) == poly(poly_mul(s, (u : List[Complex])))
+  poly(poly_exp((r : List[Complex]), degree((s : List[Complex])))) == poly(poly_mul(s, (u : List[Complex])))
   (ap : Complex) * (s : Complex) * ((u : Complex) * ((anp : Complex) * (rns : Complex))) == anp * ap * (rns * (s * u))
   (z : Complex)
-  poly_mul((u : List[Complex]), poly_mul(exp([-(a : Complex), Cx(real_of_num(1))], (n : Num) - order(a, (p : List[Complex]))), exp((r : List[Complex]), n - degree((s : List[Complex])))))
+  poly_mul((u : List[Complex]), poly_mul(poly_exp([-(a : Complex), Cx(real_of_num(1))], (n : Num) - order(a, (p : List[Complex]))), poly_exp((r : List[Complex]), n - degree((s : List[Complex])))))
   (u : List[Complex])
   (u : List[Complex])
-  !divides(exp([-(a : Complex), Cx(real_of_num(1))], SUC(order(a, (p : List[Complex])))), p)
+  !divides(poly_exp([-(a : Complex), Cx(real_of_num(1))], SUC(order(a, (p : List[Complex])))), p)
   (u : List[Complex])
   poly((s : List[Complex]), (a : Complex)) == Cx(real_of_num(0))
   (-(a : Complex) + (z : Complex) * Cx(real_of_num(1)) == Cx(real_of_num(0))) == (z == a)
@@ -6399,7 +6399,7 @@ Complex/quelim quotations (180):
   degree((s : List[Complex])) < (n : Num)
   (a : Complex) * (b : Complex) * ((c : Complex) * ((d : Complex) * (e : Complex))) == d * a * (c * b) * e
   (z : Complex)
-  poly_mul([inv((k : Complex))], poly_mul(exp([-(a : Complex), Cx(real_of_num(1))], (n : Num) - order(a, (p : List[Complex]))), exp((r : List[Complex]), n)))
+  poly_mul([inv((k : Complex))], poly_mul(poly_exp([-(a : Complex), Cx(real_of_num(1))], (n : Num) - order(a, (p : List[Complex]))), poly_exp((r : List[Complex]), n)))
   (k : Complex)
   (s : List[Complex])
   normalize((s : List[Complex]))
@@ -6410,7 +6410,7 @@ Complex/quelim quotations (180):
   !(poly((p : List[Complex])) == poly(NIL))
   !(poly((s : List[Complex])) == poly(NIL))
   (s : List[Complex])
-  divides(exp([-(a : Complex), Cx(real_of_num(1))], order(a, (p : List[Complex]))), p)
+  divides(poly_exp([-(a : Complex), Cx(real_of_num(1))], order(a, (p : List[Complex]))), p)
   (r : List[Complex])
   (n : Num)
   (n : Num)
@@ -6425,7 +6425,7 @@ Complex/quelim quotations (180):
   poly((p : List[Complex])) == poly(NIL)
   (a : Complex)
   (z : Complex)
-  poly_mul([inv((k : Complex))], exp((q : List[Complex]), (n : Num)))
+  poly_mul([inv((k : Complex))], poly_exp((q : List[Complex]), (n : Num)))
   (zeros : List[Complex])
   (k : Complex)
   ((a : Bool) \226\134\146 (b : Bool)) == (!b \226\134\146 !a)
@@ -6433,7 +6433,7 @@ Complex/quelim quotations (180):
   (q : List[Complex])
   (p : List[Complex])
   (n : Num)
-  \226\136\128 n : Num, \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (\226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 poly(q, x) == Cx(real_of_num(0))) && degree(p) == n && !(n == 0) \226\134\146 divides(p, exp(q, n))
+  \226\136\128 n : Num, \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (\226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 poly(q, x) == Cx(real_of_num(0))) && degree(p) == n && !(n == 0) \226\134\146 divides(p, poly_exp(q, n))
   [inv((k : Complex))]
   (k : Complex)
   (p : List[Complex])
@@ -6448,7 +6448,7 @@ Complex/quelim quotations (180):
   degree((p : List[Complex]))
   degree((p : List[Complex])) == 0
   poly((p : List[Complex])) == poly(NIL)
-  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (\226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 poly(q, x) == Cx(real_of_num(0))) == (divides(p, exp(q, degree(p))) || poly(p) == poly(NIL) && poly(q) == poly(NIL))
+  \226\136\128 p : List[Complex], \226\136\128 q : List[Complex], (\226\136\128 x : Complex, poly(p, x) == Cx(real_of_num(0)) \226\134\146 poly(q, x) == Cx(real_of_num(0))) == (divides(p, poly_exp(q, degree(p))) || poly(p) == poly(NIL) && poly(q) == poly(NIL))
   (z : Complex)
   (l : List[Complex])
   normalize((p : List[Complex]))
@@ -6532,8 +6532,8 @@ Complex/quelim quotations (180):
   !(poly(CONS((a : Complex), (p : List[Complex]))) == poly(NIL))
   (q : List[Complex])
   CONS((a : Complex), (p : List[Complex]))
-  !(LAST(CONS((a : Complex), (p : List[Complex]))) == Cx(real_of_num(0))) \226\134\146 (\226\136\131 x : Complex, poly(CONS(a, p), x) == Cx(real_of_num(0)) && !(poly((q : List[Complex]), x) == Cx(real_of_num(0)))) == !divides(CONS(a, p), exp(q, LENGTH(p)))
-  (\226\136\128 x : Complex, poly(exp((q : List[Complex]), (n : Num)), x) == poly((r : List[Complex]), x)) \226\134\146 divides((p : List[Complex]), exp(q, n)) == divides(p, r)
+  !(LAST(CONS((a : Complex), (p : List[Complex]))) == Cx(real_of_num(0))) \226\134\146 (\226\136\131 x : Complex, poly(CONS(a, p), x) == Cx(real_of_num(0)) && !(poly((q : List[Complex]), x) == Cx(real_of_num(0)))) == !divides(CONS(a, p), poly_exp(q, LENGTH(p)))
+  (\226\136\128 x : Complex, poly(poly_exp((q : List[Complex]), (n : Num)), x) == poly((r : List[Complex]), x)) \226\134\146 divides((p : List[Complex]), poly_exp(q, n)) == divides(p, r)
   poly
   (!(poly((p : List[Complex]), (x : Complex)) == Cx(real_of_num(0))) && !(poly((q : List[Complex]), x) == Cx(real_of_num(0)))) == !(poly(p, x) * poly(q, x) == Cx(real_of_num(0)))
   ((p : Bool) == true) == (!p == false) && (p == false) == (!p == true)
