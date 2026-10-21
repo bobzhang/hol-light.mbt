@@ -76961,13 +76961,13 @@ Warning: inventing type variables
 0..0..1..2..6..12..27..48..solved at 81
 0..0..solved at 2
 Multivariate/transcendentals quotations (2171):
-  vector_neg:complex->complex
-  vector_add:complex->complex->complex
-  vector_sub:complex->complex->complex
-  complex_mul:complex->complex->complex
-  complex_div:complex->complex->complex
-  complex_pow:complex->num->complex
-  complex_inv:complex->complex
+  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_plus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (op_minus : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_mul : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
+  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
   (cexp : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]])) == infsum(from(0), (n : Num) => pow(z, n) / Cx(real_of_num(FACT(n))))
   from(0)
   {0}
@@ -77043,7 +77043,7 @@ Multivariate/transcendentals quotations (2171):
   (n : Num) => (z : Cart[Real, Tybit0[Unit]]) => pow(z, n) / Cx(real_of_num(FACT(n)))
   ball((Cx(real_of_num(0)), norm((z : Cart[Real, Tybit0[Unit]])) + real_of_num(1)))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], has_complex_derivative(cexp, cexp(z), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   :real
   :real
   \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(cexp, at(z))
@@ -77055,7 +77055,7 @@ Multivariate/transcendentals quotations (2171):
   Cx(real_of_num(0))
   (\226\136\128 x : _, (P : (_) -> Bool)(x)) == (\226\136\128 x : _, IN(x, UNIV) \226\134\146 P(x))
   \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], cexp(w + z) * cexp(-z) == cexp(w)
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   Cx(real_of_num(0))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], cexp(z) * cexp(-z) == Cx(real_of_num(1))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], cexp(-z) * cexp(z) == Cx(real_of_num(1))
@@ -77190,11 +77190,11 @@ Multivariate/transcendentals quotations (2171):
   \226\136\128 x : Real, Cx(sin(x)) == csin(Cx(x))
   \226\136\128 x : Real, Cx(cos(x)) == ccos(Cx(x))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], has_complex_derivative(csin, ccos(z), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(csin, at(z))
   \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(csin, within(at(z), s))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], has_complex_derivative(ccos, -csin(z), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(ccos, at(z))
   \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(ccos, within(at(z), s))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], continuous(csin, at(z))
@@ -77600,7 +77600,7 @@ Multivariate/transcendentals quotations (2171):
   (n : Num)
   (k : Num) => cexp
   \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(cexp(z) - vsum(op_dot_dot(0, n), (k : Num) => pow(z, k) / Cx(real_of_num(FACT(k))))) <= exp(abs(Re(z))) * (pow(norm(z), n + 1) / real_of_num(FACT(n)))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   Cx(real_of_num(1))
   14
   abs(exp(real_of_num(1)) - real_of_num(5837465777) / real_of_num(2147483648)) <= inv(pow(real_of_num(2), 32))
@@ -77901,7 +77901,7 @@ Multivariate/transcendentals quotations (2171):
   \226\136\128 z : Cart[Real, Tybit0[Unit]], ctan(z) == -ii * ((cexp(Cx(real_of_num(2)) * (ii * z)) - Cx(real_of_num(1))) / (cexp(Cx(real_of_num(2)) * (ii * z)) + Cx(real_of_num(1))))
   (z : Cart[Real, Tybit0[Unit]])
   \226\136\128 z : Cart[Real, Tybit0[Unit]], !(ccos(z) == Cx(real_of_num(0))) \226\134\146 has_complex_derivative(ctan, inv(pow(ccos(z), 2)), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], !(ccos(z) == Cx(real_of_num(0))) \226\134\146 complex_differentiable(ctan, at(z))
   \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], !(ccos(z) == Cx(real_of_num(0))) \226\134\146 complex_differentiable(ctan, within(at(z), s))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], !(ccos(z) == Cx(real_of_num(0))) \226\134\146 continuous(ctan, at(z))
@@ -78088,7 +78088,7 @@ Multivariate/transcendentals quotations (2171):
   :real
   :real
   :real
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(z) == real_of_num(0) \226\134\146 real_of_num(0) < Re(z)) \226\134\146 complex_differentiable(csqrt, at(z))
   \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(z) == real_of_num(0) \226\134\146 real_of_num(0) < Re(z)) \226\134\146 complex_differentiable(csqrt, within(at(z), s))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(z) == real_of_num(0) \226\134\146 real_of_num(0) < Re(z)) \226\134\146 continuous(csqrt, at(z))
@@ -78125,11 +78125,11 @@ Multivariate/transcendentals quotations (2171):
   (z : Cart[Real, Tybit0[Unit]]) => cexp((s : Cart[Real, Tybit0[Unit]]) * clog(z))
   (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
   \226\136\128 s : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (Im(z) == real_of_num(0) \226\134\146 real_of_num(0) < Re(z)) \226\134\146 has_complex_derivative((z : Cart[Real, Tybit0[Unit]]) => cpow(z, s), s * cpow(z, s - Cx(real_of_num(1))), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   (s : Cart[Real, Tybit0[Unit]])
   (s : Cart[Real, Tybit0[Unit]])
   \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], !(w == Cx(real_of_num(0))) \226\134\146 has_complex_derivative((z : Cart[Real, Tybit0[Unit]]) => cpow(w, z), clog(w) * cpow(w, z), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   (s : Cart[Real, Tybit0[Unit]])
   (s : Cart[Real, Tybit0[Unit]])
   (w : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
@@ -78205,7 +78205,7 @@ Multivariate/transcendentals quotations (2171):
   \226\136\128 z : Cart[Real, Tybit0[Unit]], (Re(z) == real_of_num(0) \226\134\146 abs(Im(z)) < real_of_num(1)) \226\134\146 abs(Re(catn(z))) < pi / real_of_num(2)
   !((z : Cart[Real, Tybit0[Unit]]) == ii) && !(z == -ii)
   \226\136\128 z : Cart[Real, Tybit0[Unit]], (Re(z) == real_of_num(0) \226\134\146 abs(Im(z)) < real_of_num(1)) \226\134\146 has_complex_derivative(catn, inv(Cx(real_of_num(1)) + pow(z, 2)), at(z))
-  (f has_complex_derivative f') net
+  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], (Re(z) == real_of_num(0) \226\134\146 abs(Im(z)) < real_of_num(1)) \226\134\146 complex_differentiable(catn, at(z))
   \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 z : Cart[Real, Tybit0[Unit]], (Re(z) == real_of_num(0) \226\134\146 abs(Im(z)) < real_of_num(1)) \226\134\146 complex_differentiable(catn, within(at(z), s))
   \226\136\128 z : Cart[Real, Tybit0[Unit]], (Re(z) == real_of_num(0) \226\134\146 abs(Im(z)) < real_of_num(1)) \226\134\146 continuous(catn, at(z))
@@ -79053,7 +79053,7 @@ Multivariate/transcendentals quotations (2171):
   o(Cx, Re)
   (z : Cart[Real, Tybit0[Unit]]) => cexp(ii * Cx(Im(z)))
   o(Cx, Re)
-  op_star
+  complex_mul
   (z : Cart[Real, Tybit0[Unit]])
   (h : Cart[Real, Tybit0[Unit]]) => cexp(ii * Cx(Im((z : Cart[Real, Tybit0[Unit]])))) * h
   (z : Cart[Real, Tybit0[Unit]]) => ii * Cx(Im(z))
