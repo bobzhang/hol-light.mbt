@@ -5,7 +5,7 @@
 fn step_1() -> Unit raise {
   bitsize_c.set(
     @pair.new_definition(
-      @parser.parse_term("bitsize n = minimal i. n < 2 EXP i"),
+      @term_syntax.parse_term("(bitsize : (Num) -> Num)((n : Num)) == minimal((i : Num) => n < EXP(2, i))"),
     ),
   )
 }
@@ -27,7 +27,7 @@ fn step_2() -> Unit raise {
     @tactics.then_tac(@simp.rewrite_tac(@list.List([bitsize()])), t1),
     @int.arith_tac,
   )
-  bitsize_0_c.set(@tactics.prove(@parser.parse_term("bitsize 0 = 0"), t2))
+  bitsize_0_c.set(@tactics.prove(@term_syntax.parse_term("bitsize(0) == 0"), t2))
 }
 
 ///|
@@ -54,7 +54,7 @@ fn step_3() -> Unit raise {
     @int.arith_tac,
   )
   bitsize_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall k. bitsize (2 EXP k) = k + 1"), t4),
+    @tactics.prove(@term_syntax.parse_term("∀ k : Num, bitsize(EXP(2, k)) == k + 1"), t4),
   )
 }
 
@@ -72,10 +72,10 @@ pub fn bitsize_pow2() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let t5 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t6 = @tactics.then_tac(
-    @tactics.mp_tac(@bool.spec(@parser.parse_term("0"), bitsize_pow2())),
+    @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("0"), bitsize_pow2())),
     t5,
   )
-  bitsize_1_c.set(@tactics.prove(@parser.parse_term("bitsize 1 = 1"), t6))
+  bitsize_1_c.set(@tactics.prove(@term_syntax.parse_term("bitsize(1) == 1"), t6))
 }
 
 ///|
@@ -92,10 +92,10 @@ pub fn bitsize_1() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t7 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t8 = @tactics.then_tac(
-    @tactics.mp_tac(@bool.spec(@parser.parse_term("1"), bitsize_pow2())),
+    @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("1"), bitsize_pow2())),
     t7,
   )
-  bitsize_2_c.set(@tactics.prove(@parser.parse_term("bitsize 2 = 2"), t8))
+  bitsize_2_c.set(@tactics.prove(@term_syntax.parse_term("bitsize(2) == 2"), t8))
 }
 
 ///|
@@ -213,7 +213,7 @@ fn step_6() -> Unit raise {
     },
   )
   let t19 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("i:num"))(t18),
+    @tactics.x_choose_then(@term_syntax.parse_term("(i : Num)"))(t18),
   )
   let t11 = @list.List([
     @tactics.all_tac,
@@ -224,7 +224,7 @@ fn step_6() -> Unit raise {
       @arith.minimal_le(),
       @meson.meson(
         @list.List([@arith.lt_pow2_refl()]),
-        @parser.parse_term("?i. n < 2 EXP i"),
+        @term_syntax.parse_term("∃ i : Num, (n : Num) < EXP(2, i)"),
       ),
     ]),
   )
@@ -250,7 +250,7 @@ fn step_6() -> Unit raise {
   )
   bitsize_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. bitsize n <= k <=> n < 2 EXP k"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, (bitsize(n) <= k) == (n < EXP(2, k))"),
       t22,
     ),
   )
@@ -272,7 +272,7 @@ fn step_7() -> Unit raise {
     @list.List([@equal.gsym(bitsize_le()), @arith.le_refl()]),
   )
   bitsize_v1_c.set(
-    @tactics.prove(@parser.parse_term("forall n. n < 2 EXP bitsize n"), t23),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, n < EXP(2, bitsize(n))"), t23),
   )
 }
 
@@ -322,7 +322,7 @@ fn step_9() -> Unit raise {
     @list.List([
       @arith.not_le(),
       @arith.le_exp(),
-      @int.arith_rule(@parser.parse_term("~(2 = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("!(2 == 0)")),
       @arith.le_trans(),
       @arith.le_antisym(),
     ]),
@@ -333,7 +333,7 @@ fn step_9() -> Unit raise {
   )
   bitsize_unique_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. bitsize n = k <=> forall j. n < 2 EXP j <=> k <= j"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, (bitsize(n) == k) == (∀ j : Num, (n < EXP(2, j)) == (k <= j))"),
       t28,
     ),
   )
@@ -358,7 +358,7 @@ fn step_10() -> Unit raise {
     @int.arith_tac,
   )
   bitsize_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall n. bitsize n = 0 <=> n = 0"), t29),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, (bitsize(n) == 0) == (n == 0)"), t29),
   )
 }
 
@@ -375,7 +375,7 @@ pub fn bitsize_eq_0() -> @kernel.Thm {
 /// BITSIZE_MONO
 fn step_11() -> Unit raise {
   let t33 = @simp.asm_rewrite_tac(@list.List([bitsize_v1()]))
-  let t31 = @parser.parse_term("n:num")
+  let t31 = @term_syntax.parse_term("(n : Num)")
   let t32 = @tactics.trans_tac(@arith.let_trans())(t31)
   let t30 = @simp.rewrite_tac(@list.List([bitsize_le()]))
   let t34 = @tactics.then_tac(
@@ -387,7 +387,7 @@ fn step_11() -> Unit raise {
   )
   bitsize_mono_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. m <= n ==> bitsize m <= bitsize n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → bitsize(m) <= bitsize(n)"),
       t34,
     ),
   )
@@ -405,16 +405,16 @@ pub fn bitsize_mono() -> @kernel.Thm {
 ///|
 /// BITSIZE_MAX
 fn step_12() -> Unit raise {
-  let t36 = @int.arith_rule(@parser.parse_term("n <= m ==> MAX m n = m"))
+  let t36 = @int.arith_rule(@term_syntax.parse_term("(n : Num) <= (m : Num) → MAX(m, n) == m"))
   let t37 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("m <= n ==> MAX m n = n")),
+      @int.arith_rule(@term_syntax.parse_term("(m : Num) <= (n : Num) → MAX(m, n) == n")),
       bitsize_mono(),
       t36,
     ]),
   )
   let t35 = @tactics.disj_cases_tac(
-    @int.arith_rule(@parser.parse_term("m:num <= n \\/ n <= m")),
+    @int.arith_rule(@term_syntax.parse_term("(m : Num) <= (n : Num) || n <= m")),
   )
   let t38 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t35),
@@ -422,7 +422,7 @@ fn step_12() -> Unit raise {
   )
   bitsize_max_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitsize(MAX m n) = MAX (bitsize m) (bitsize n)"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, bitsize(MAX(m, n)) == MAX(bitsize(m), bitsize(n))"),
       t38,
     ),
   )
@@ -440,16 +440,16 @@ pub fn bitsize_max() -> @kernel.Thm {
 ///|
 /// BITSIZE_MIN
 fn step_13() -> Unit raise {
-  let t40 = @int.arith_rule(@parser.parse_term("n <= m ==> MIN m n = n"))
+  let t40 = @int.arith_rule(@term_syntax.parse_term("(n : Num) <= (m : Num) → MIN(m, n) == n"))
   let t41 = @simp.asm_simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("m <= n ==> MIN m n = m")),
+      @int.arith_rule(@term_syntax.parse_term("(m : Num) <= (n : Num) → MIN(m, n) == m")),
       bitsize_mono(),
       t40,
     ]),
   )
   let t39 = @tactics.disj_cases_tac(
-    @int.arith_rule(@parser.parse_term("m:num <= n \\/ n <= m")),
+    @int.arith_rule(@term_syntax.parse_term("(m : Num) <= (n : Num) || n <= m")),
   )
   let t42 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t39),
@@ -457,7 +457,7 @@ fn step_13() -> Unit raise {
   )
   bitsize_min_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitsize(MIN m n) = MIN (bitsize m) (bitsize n)"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, bitsize(MIN(m, n)) == MIN(bitsize(m), bitsize(n))"),
       t42,
     ),
   )
@@ -487,7 +487,7 @@ fn step_14() -> Unit raise {
   )
   bitsize_mult_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitsize(m * n) <= bitsize m + bitsize n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, bitsize(m * n) <= bitsize(m) + bitsize(n)"),
       t46,
     ),
   )
@@ -509,7 +509,7 @@ pub fn bitsize_mult_le() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t48 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n - 1 < n <=> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) - 1 < n) == !(n == 0)")),
       bitsize_eq_0(),
     ]),
   )
@@ -520,7 +520,7 @@ fn step_15() -> Unit raise {
   )
   bitsize_rev_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. 2 EXP (bitsize n - 1) <= n <=> ~(n = 0)"),
+      @term_syntax.parse_term("∀ n : Num, (EXP(2, bitsize(n) - 1) <= n) == !(n == 0)"),
       t49,
     ),
   )
@@ -541,7 +541,7 @@ fn step_16() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([bitsize_rev_eq()]))
   bitsize_rev_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. ~(n = 0) ==> 2 EXP (bitsize n - 1) <= n"),
+      @term_syntax.parse_term("∀ n : Num, !(n == 0) → EXP(2, bitsize(n) - 1) <= n"),
       t50,
     ),
   )
@@ -561,7 +561,7 @@ pub fn bitsize_rev() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t57 = @simp.asm_rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n = SUC(n - 1) <=> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) == SUC(n - 1)) == !(n == 0)")),
       bitsize_eq_0(),
     ]),
   )
@@ -572,7 +572,7 @@ fn step_17() -> Unit raise {
   let t54 = @simp.asm_rewrite_tac(
     @list.List([@arith.le_mult_lcancel(), bitsize_rev_eq()]),
   )
-  let t52 = @parser.parse_term("2 * 2 EXP (bitsize n - 1)")
+  let t52 = @term_syntax.parse_term("2 * EXP(2, bitsize((n : Num)) - 1)")
   let t53 = @tactics.trans_tac(@arith.le_trans())(t52)
   let t51 = @simp.asm_rewrite_tac(@list.List([bitsize_0(), @calc_num.arith()]))
   let t58 = @tactics.then_tac(
@@ -584,7 +584,7 @@ fn step_17() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.gen_tac,
-                  @class.asm_cases_tac(@parser.parse_term("n = 0")),
+                  @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0")),
                 ),
                 t51,
               ),
@@ -602,7 +602,7 @@ fn step_17() -> Unit raise {
   )
   bitsize_rev_eq_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. 2 EXP (bitsize n) <= 2 * n <=> ~(n = 0)"),
+      @term_syntax.parse_term("∀ n : Num, (EXP(2, bitsize(n)) <= 2 * n) == !(n == 0)"),
       t58,
     ),
   )
@@ -625,7 +625,7 @@ fn step_18() -> Unit raise {
   let t59 = @simp.rewrite_tac(@list.List([bitsize_rev_eq_alt()]))
   bitsize_rev_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. ~(n = 0) ==> 2 EXP bitsize n <= 2 * n"),
+      @term_syntax.parse_term("∀ n : Num, !(n == 0) → EXP(2, bitsize(n)) <= 2 * n"),
       t59,
     ),
   )
@@ -650,7 +650,7 @@ fn step_19() -> Unit raise {
   let t61 = @simp.asm_rewrite_tac(
     @list.List([@arith.le_0(), @calc_num.arith()]),
   )
-  let t60 = @class.asm_cases_tac(@parser.parse_term("k = 0"))
+  let t60 = @class.asm_cases_tac(@term_syntax.parse_term("(k : Num) == 0"))
   let t64 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -687,10 +687,10 @@ fn step_20() -> Unit raise {
     @list.List([@equal.gsym(@bool.conjunct2(@arith.exp()))]),
   )
   let t68 = @tactics.match_mp_tac(
-    @int.arith_rule(@parser.parse_term("2 * a = b ==> (a <= n <=> b <= 2 * n)")),
+    @int.arith_rule(@term_syntax.parse_term("2 * (a : Num) == (b : Num) → (a <= (n : Num)) == (b <= 2 * n)")),
   )
   let t67 = @simp.asm_rewrite_tac(@list.List([]))
-  let t66 = @class.asm_cases_tac(@parser.parse_term("k = 0"))
+  let t66 = @class.asm_cases_tac(@term_syntax.parse_term("(k : Num) == 0"))
   let t65 = @simp.rewrite_tac(@list.List([le_bitsize()]))
   let t70 = @tactics.then_tac(
     @tactics.then_tac(
@@ -742,7 +742,7 @@ fn step_21() -> Unit raise {
       fn(x73 : @kernel.Term) -> @kernel.Thm raise { s72(x73) }
     },
     @list.List([
-      @int.arith_rule(@parser.parse_term("n = k <=> k <= n /\\ ~(k + 1 <= n)")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) == (k : Num)) == (k <= n && !(k + 1 <= n))")),
     ]),
   )
   let t76 = @tactics.then_tac(
@@ -792,7 +792,7 @@ fn step_22() -> Unit raise {
     ]),
   )
   let t81 = @simp.once_rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("2 * a * b = a * 2 * b"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("2 * ((a : Num) * (b : Num)) == a * (2 * b)"))]),
   )
   let t80 = @simp.rewrite_tac(
     @list.List([
@@ -819,7 +819,7 @@ fn step_22() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.match_mp_tac(
                     @class.taut(
-                      @parser.parse_term("(p ==> q) /\\ p ==> p /\\ q"),
+                      @term_syntax.parse_term("((p : Bool) → (q : Bool)) && p → p && q"),
                     ),
                   ),
                   @tactics.conj_tac,
@@ -868,7 +868,7 @@ fn step_23() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([bitsize_mult(), @arith.le_refl()])),
     t93,
   ])
-  let t92 = @parser.parse_term("bitsize(2 EXP k * m)")
+  let t92 = @term_syntax.parse_term("bitsize(EXP(2, (k : Num)) * (m : Num))")
   let t95 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.trans_tac(@arith.le_trans())(t92),
@@ -878,7 +878,7 @@ fn step_23() -> Unit raise {
   )
   let t91 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("m + 1 <= r <=> m < r")),
+      @int.arith_rule(@term_syntax.parse_term("((m : Num) + 1 <= (r : Num)) == (m < r)")),
       bitsize_v1(),
     ]),
   )
@@ -890,7 +890,7 @@ fn step_23() -> Unit raise {
       @calc_num.arith_eq(),
     ]),
   )
-  let t88 = @parser.parse_term("2 EXP k * (m + 1)")
+  let t88 = @term_syntax.parse_term("EXP(2, (k : Num)) * ((m : Num) + 1)")
   let t89 = @tactics.trans_tac(@arith.lte_trans())(t88)
   let t96 = @list.List([
     @tactics.then_tac(
@@ -919,7 +919,7 @@ fn step_23() -> Unit raise {
         @tactics.thenl(
           @tactics.then_tac(
             @tactics.match_mp_tac(
-              @class.taut(@parser.parse_term("(p ==> q) /\\ p ==> p /\\ q")),
+              @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) && p → p && q")),
             ),
             @tactics.conj_tac,
           ),
@@ -960,19 +960,19 @@ fn step_24() -> Unit raise {
   )
   let t107 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("a < b <=> a + 1 <= b")),
+      @int.arith_rule(@term_syntax.parse_term("((a : Num) < (b : Num)) == (a + 1 <= b)")),
       le_bitsize(),
     ]),
   )
   let t106 = @simp.asm_simp_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("~(n:num <= k) ==> (j < n - k <=> k + j < n)"),
+        @term_syntax.parse_term("!((n : Num) <= (k : Num)) → ((j : Num) < n - k) == (k + j < n)"),
       ),
     ]),
   )
   let t105 = @int.arith_rule(
-    @parser.parse_term("~(n:num <= k) ==> k + n - k = n"),
+    @term_syntax.parse_term("!((n : Num) <= (k : Num)) → k + (n - k) == n"),
   )
   let t109 = @tactics.then_tac(
     @tactics.then_tac(
@@ -987,7 +987,7 @@ fn step_24() -> Unit raise {
     t108,
   )
   let t104 = @simp.asm_rewrite_tac(@list.List([bitsize_v1(), @arith.le_exp()]))
-  let t102 = @parser.parse_term("2 EXP bitsize n")
+  let t102 = @term_syntax.parse_term("EXP(2, bitsize((n : Num)))")
   let t103 = @tactics.trans_tac(@arith.lte_trans())(t102)
   let t101 = @simp.rewrite_tac(
     @list.List([
@@ -1003,7 +1003,7 @@ fn step_24() -> Unit raise {
           @tactics.then_tac(
             @simp.asm_simp_tac(
               @list.List([
-                @int.arith_rule(@parser.parse_term("n <= k ==> n - k = 0")),
+                @int.arith_rule(@term_syntax.parse_term("(n : Num) <= (k : Num) → n - k == 0")),
               ]),
             ),
             t101,
@@ -1016,7 +1016,7 @@ fn step_24() -> Unit raise {
     ),
     t109,
   ])
-  let t100 = @class.asm_cases_tac(@parser.parse_term("bitsize n <= k"))
+  let t100 = @class.asm_cases_tac(@term_syntax.parse_term("bitsize((n : Num)) <= (k : Num)"))
   let t99 = @simp.simp_tac(
     @list.List([
       @arith.rdiv_lt_eq(),
@@ -1038,7 +1038,7 @@ fn step_24() -> Unit raise {
   )
   bitsize_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. bitsize(n DIV 2 EXP k) = bitsize n - k"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, bitsize(DIV(n, EXP(2, k))) == bitsize(n) - k"),
       t111,
     ),
   )
