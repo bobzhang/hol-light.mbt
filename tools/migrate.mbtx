@@ -641,17 +641,48 @@ fn same_block(a : Array[String], b : Array[String]) -> Bool {
 }
 
 ///|
+/// The golden `t` and its .expected `e` must have the same trace of
+/// `theory` (n quotations), before either is rewritten.
+async fn check_traces_agree(t : String, e : String, theory : String, n : Int) -> Unit {
+  let blocks = []
+  for path in [t, e] {
+    let prefix = if path.has_suffix(".mbt") { "      #|" } else { "" }
+    let lines = read(path).split("\n").map(l => l.to_owned()).to_array()
+    guard lines.search(prefix + theory + " quotations (\{n}):") is Some(at) else {
+      return
+    }
+    let block = []
+    let mut k = at + 1
+    while k < lines.length() && lines[k].has_prefix(prefix + "  ") {
+      block.push(lines[k][prefix.length():].to_owned())
+      k += 1
+    }
+    blocks.push(block)
+  }
+  if blocks.length() == 2 && blocks[0] != blocks[1] {
+    fail("\{t} and \{e} differ in the trace of \{theory}")
+  }
+}
+
+///|
 /// Whether the golden's lines `a` are this run's `b` up to one renaming of
 /// counters, except lines that are an old quotation (in `a`) and its
 /// migration (in `b`) by known_migrations: for each line, whether it is
 /// one; None if any line is neither.
-fn migrated_lines(a : Array[String], b : Array[String], prefix : String) -> Array[Bool]? {
+fn migrated_lines(
+  a : Array[String],
+  b : Array[String],
+  prefix : String,
+) -> (Array[Bool], Renaming)? {
   let renaming = { there: Map::new(), back: Map::new() }
   let flags = []
   for k in 0..<a.length() {
     if renaming.same(a[k], b[k]) {
       flags.push(false)
       continue
+    }
+    if !a[k].has_prefix(prefix) || !b[k].has_prefix(prefix) {
+      return None
     }
     let g = a[k][prefix.length():].to_owned()
     let r = b[k][prefix.length():].to_owned()
@@ -665,7 +696,26 @@ fn migrated_lines(a : Array[String], b : Array[String], prefix : String) -> Arra
     }
     flags.push(true)
   }
-  Some(flags)
+  Some((flags, renaming))
+}
+
+///|
+/// `line` (this run's) with its counters in the golden's numbering where
+/// the renaming has them, so that a rewritten line does not collide with
+/// the golden's other counters.
+fn in_golden_numbering(line : String, renaming : Renaming) -> String {
+  let cs = line.to_array()
+  let out = StringBuilder()
+  let mut i = 0
+  for c in counters(line) {
+    let pos = line[i:].find(c).unwrap_or(0) + i
+    out.write_string(line[i:pos].to_owned())
+    out.write_string(renaming.back.get(c).unwrap_or(c))
+    i = pos + c.length()
+  }
+  ignore(cs)
+  out.write_string(line[i:].to_owned())
+  out.to_string()
 }
 
 ///|
@@ -722,12 +772,16 @@ async fn rewrite_trace(
     } else {
       None
     }
-    if cross is Some(flags) {
+    if cross is Some((flags, renaming)) {
       // other packages' migrated quotations: their lines read the new
-      // spelling, as this run does
+      // spelling, as this run does (in the golden's numbering)
       for k in 0..<new_lines.length() {
         out.push(
-          if flags[k] || new_lines[k] != old_lines[k] { new_lines[k] } else { lines[i + 1 + k] },
+          if flags[k] || new_lines[k] != old_lines[k] {
+            in_golden_numbering(new_lines[k], renaming)
+          } else {
+            lines[i + 1 + k]
+          },
         )
       }
       i += 1 + old_lines.length()
@@ -1013,11 +1067,14 @@ async fn retrace(pkg : String) -> Unit {
   let tests = golden_tests(pkg)
   for t in tests {
     keep.push(t)
-    rewrite_trace(t, theory, rec.trace, new_trace)
+    // the golden is embedded from the .expected file: both change alike,
+    // from the same trace
     guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
       fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
     }
     keep.push(e)
+    check_traces_agree(t, e, theory, rec.trace.length())
+    rewrite_trace(t, theory, rec.trace, new_trace)
     rewrite_trace(e, theory, rec.trace, new_trace)
   }
   println("\{pkg}: \{given.length()} converted by hand, checked")
@@ -1264,11 +1321,14 @@ async fn respell(pkg : String, rev : String) -> Unit {
   let tests = golden_tests(pkg)
   for t in tests {
     keep.push(t)
-    rewrite_trace(t, theory, now_trace, new_trace)
+    // the golden is embedded from the .expected file: both change alike,
+    // from the same trace
     guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
       fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
     }
     keep.push(e)
+    check_traces_agree(t, e, theory, now_trace.length())
+    rewrite_trace(t, theory, now_trace, new_trace)
     rewrite_trace(e, theory, now_trace, new_trace)
   }
   let failures = match tests {
@@ -1489,7 +1549,10 @@ async fn main {
   let args = []
   let mut i = 0
   while i < all.length() {
-    if all[i] == "--pairs" && i + 1 < all.length() {
+    if all[i] == "--pairs" {
+      if i + 1 >= all.length() {
+        fail("--pairs needs a file")
+      }
       known_migrations.val = load_migrations(all[i + 1])
       i += 2
     } else {
@@ -1575,12 +1638,14 @@ async fn main {
     }
     for t in golden_tests(pkg) {
       keep.push(t)
-      rewrite_trace(t, theory, rec.trace, new_trace)
-      // the golden is embedded from the .expected file: both change alike
+      // the golden is embedded from the .expected file: both change alike,
+      // from the same trace
       guard expected_file(read(t)) is Some(e) && @fs.exists(e) else {
         fail("\{t} names no tools/ocaml_ref/<name>_ref.expected file")
       }
       keep.push(e)
+      check_traces_agree(t, e, theory, rec.trace.length())
+      rewrite_trace(t, theory, rec.trace, new_trace)
       rewrite_trace(e, theory, rec.trace, new_trace)
     }
   }
