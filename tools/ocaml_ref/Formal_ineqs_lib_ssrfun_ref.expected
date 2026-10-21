@@ -63,78 +63,78 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 Formal_ineqs/lib/ssrfun quotations (72):
-  forall f x y. oapp f x (SOME y) = f y /\\ oapp f x NONE = x
-  odflt = oapp I
-  obind f = oapp f NONE
-  omap f = obind (\\x. SOME (f x))
-  pcomp f g x = obind f (g x)
-  (forall y. odflt x (SOME y) = y) /\\ odflt x NONE = x
-  obind f NONE = NONE /\\ (forall x. obind f (SOME x) = f x)
-  omap f NONE = NONE /\\ (forall x. omap f (SOME x) = SOME (f x))
-  x = y ==> y = x
-  x = y ==> y = z ==> x = z
-  x = y ==> f x = f y
-  x1 = y1 ==> x2 = y2 ==> f x1 x2 = f y1 y2
-  (forall x. f x = g x) <=> f = g
+  \226\136\128 f : (_) -> _, \226\136\128 x : _, \226\136\128 y : _, (oapp : ((_) -> _, _, Option[_]) -> _)(f, x, SOME(y)) == f(y) && oapp(f, x, NONE) == x
+  (odflt : (_, Option[_]) -> _) == oapp(I)
+  (obind : ((_) -> Option[_], Option[_]) -> Option[_])((f : (_) -> Option[_])) == oapp(f, NONE)
+  (omap : ((_) -> _, Option[_]) -> Option[_])((f : (_) -> _)) == obind((x : _) => SOME(f(x)))
+  (pcomp : ((_) -> Option[_], (_) -> Option[_], _) -> Option[_])((f : (_) -> Option[_]), (g : (_) -> Option[_]), (x : _)) == obind(f, g(x))
+  (\226\136\128 y : _, odflt((x : _), SOME(y)) == y) && odflt(x, NONE) == x
+  obind((f : (_) -> Option[_]), NONE) == NONE && (\226\136\128 x : _, obind(f, SOME(x)) == f(x))
+  omap((f : (_) -> _), NONE) == NONE && (\226\136\128 x : _, omap(f, SOME(x)) == SOME(f(x)))
+  (x : _) == (y : _) \226\134\146 y == x
+  (x : _) == (y : _) \226\134\146 y == (z : _) \226\134\146 x == z
+  (x : _) == (y : _) \226\134\146 (f : (_) -> _)(x) == f(y)
+  (x1 : _) == (y1 : _) \226\134\146 (x2 : _) == (y2 : _) \226\134\146 (f : (_, _) -> _)(x1, x2) == f(y1, y2)
+  (\226\136\128 x : _, (f : (_) -> _)(x) == (g : (_) -> _)(x)) == (f == g)
   :A -> R
-  injective f <=> (forall x1 x2. f x1 = f x2 ==> x1 = x2)
-  cancel f g <=> forall x. g (f x) = x
-  pcancel f g <=> forall x. g (f x) = SOME x
-  ocancel g h <=> forall x. oapp h x (g x) = x
-  cancel f g ==> pcancel f (\\y. SOME (g y))
-  pcancel f g ==> injective f
-  cancel f g ==> injective f
-  cancel f g ==> x = f y ==> g x = y
-  cancel f g ==> f x = y ==> x = g y
-  injective SOME
+  (injective : ((_) -> _) -> Bool)((f : (_) -> _)) == (\226\136\128 x1 : _, \226\136\128 x2 : _, f(x1) == f(x2) \226\134\146 x1 == x2)
+  (cancel : ((_) -> _, (_) -> _) -> Bool)((f : (_) -> _), (g : (_) -> _)) == (\226\136\128 x : _, g(f(x)) == x)
+  (pcancel : ((_) -> _, (_) -> Option[_]) -> Bool)((f : (_) -> _), (g : (_) -> Option[_])) == (\226\136\128 x : _, g(f(x)) == SOME(x))
+  (ocancel : ((_) -> Option[_], (_) -> _) -> Bool)((g : (_) -> Option[_]), (h : (_) -> _)) == (\226\136\128 x : _, oapp(h, x, g(x)) == x)
+  cancel((f : (_) -> _), (g : (_) -> _)) \226\134\146 pcancel(f, (y : _) => SOME(g(y)))
+  pcancel((f : (_) -> _), (g : (_) -> Option[_])) \226\134\146 injective(f)
+  cancel((f : (_) -> _), (g : (_) -> _)) \226\134\146 injective(f)
+  cancel((f : (_) -> _), (g : (_) -> _)) \226\134\146 (x : _) == f((y : _)) \226\134\146 g(x) == y
+  cancel((f : (_) -> _), (g : (_) -> _)) \226\134\146 f((x : _)) == (y : _) \226\134\146 x == g(y)
+  (injective : ((_) -> Option[_]) -> Bool)((SOME : (_) -> Option[_]))
   :B -> A
   :B -> A
   :C -> B
-  injective I
-  cancel f f' ==> injective f' ==> cancel f' f
-  injective f ==> injective h ==> injective (f o h)
-  cancel f f' ==> cancel h h' ==> cancel (f o h) (h' o f')
-  pcancel f f' ==> pcancel h h' ==> pcancel (f o h) (pcomp h' f')
-  injective f ==> (forall x. f x = g x) ==> injective g
-  cancel f f' ==> (forall x. f x = g x) ==> (forall x. f' x = g' x) ==> cancel g g'
-  cancel f f' ==> injective f' ==> cancel g f' ==> f = g
+  (injective : ((_) -> _) -> Bool)((I : (_) -> _))
+  cancel((f : (_) -> _), (f' : (_) -> _)) \226\134\146 injective(f') \226\134\146 cancel(f', f)
+  injective((f : (_) -> _)) \226\134\146 injective((h : (_) -> _)) \226\134\146 injective(o(f, h))
+  cancel((f : (_) -> _), (f' : (_) -> _)) \226\134\146 cancel((h : (_) -> _), (h' : (_) -> _)) \226\134\146 cancel(o(f, h), o(h', f'))
+  pcancel((f : (_) -> _), (f' : (_) -> Option[_])) \226\134\146 pcancel((h : (_) -> _), (h' : (_) -> Option[_])) \226\134\146 pcancel(o(f, h), pcomp(h', f'))
+  injective((f : (_) -> _)) \226\134\146 (\226\136\128 x : _, f(x) == (g : (_) -> _)(x)) \226\134\146 injective(g)
+  cancel((f : (_) -> _), (f' : (_) -> _)) \226\134\146 (\226\136\128 x : _, f(x) == (g : (_) -> _)(x)) \226\134\146 (\226\136\128 x : _, f'(x) == (g' : (_) -> _)(x)) \226\134\146 cancel(g, g')
+  cancel((f : (_) -> _), (f' : (_) -> _)) \226\134\146 injective(f') \226\134\146 cancel((g : (_) -> _), f') \226\134\146 f == g
   :B -> A
-  bijective f <=> ?g. cancel f g /\\ cancel g f
-  bijective f
-  injective f
-  cancel f' f <=> cancel f f'
-  cancel f f' ==> cancel f f'' ==> f' = f''
+  (bijective : ((_) -> _) -> Bool)((f : (_) -> _)) == (\226\136\131 g : (_) -> _, cancel(f, g) && cancel(g, f))
+  bijective((f : (_) -> _))
+  injective((f : (_) -> _))
+  cancel((f' : (_) -> _), (f : (_) -> _)) == cancel(f, f')
+  cancel((f : (_) -> _), (f' : (_) -> _)) \226\134\146 cancel(f, (f'' : (_) -> _)) \226\134\146 f' == f''
   :BB -> AA
   :CC -> BB
-  bijective f ==> forall g. (forall x. f x = g x) ==> bijective g
-  r o g
-  bijective f ==> bijective h ==> bijective (f o h)
-  bijective f ==> forall f'. cancel f f' ==> bijective f'
+  bijective((f : (_) -> _)) \226\134\146 (\226\136\128 g : (_) -> _, (\226\136\128 x : _, f(x) == g(x)) \226\134\146 bijective(g))
+  o((r : (_) -> _), (g : (_) -> _))
+  bijective((f : (_) -> _)) \226\134\146 bijective((h : (_) -> _)) \226\134\146 bijective(o(f, h))
+  bijective((f : (_) -> _)) \226\134\146 (\226\136\128 f' : (_) -> _, cancel(f, f') \226\134\146 bijective(f'))
   :A -> A
-  involutive f <=> cancel f f
-  involutive f
-  injective f
-  bijective f
-  left_inverse e inv op = forall x. op (inv x) x = e
-  right_inverse e inv op = forall x. op x (inv x) = e
-  left_injective op = forall x. injective (\\y. op y x)
-  right_injective op = forall y. injective (op y)
-  right_id e op = forall x. op x e = x
-  left_zero z op = forall x. op z x = z
-  right_commutative op = forall x y z. op (op x y) z = op (op x z) y
-  left_distributive op add = forall x y z. op (add x y) z = add (op x z) (op y z)
-  right_loop inv op = forall y. cancel (\\x. op x y) (\\x. op x (inv y))
-  rev_right_loop inv op = forall y. cancel (\\x. op x (inv y)) (\\x. op x y)
-  left_id e op = forall x. op e x = x
-  right_zero z op = forall x. op x z = z
-  left_commutative op = forall x y z. op x (op y z) = op y (op x z)
-  right_distributive op add = forall x y z. op x (add y z) = add (op x y) (op x z)
-  left_loop inv op = forall x. cancel (op x) (op (inv x))
-  rev_left_loop inv op = forall x. cancel (op (inv x)) (op x)
-  self_inverse e op = forall x. op x x = e
-  commutative op = forall x y. op x y = op y x
-  idempotent op = forall x. op x x = x
-  associative op = forall x y z. op x (op y z) = op (op x y) z
+  (involutive : ((_) -> _) -> Bool)((f : (_) -> _)) == cancel(f, f)
+  involutive((f : (_) -> _))
+  injective((f : (_) -> _))
+  bijective((f : (_) -> _))
+  (left_inverse : (_, (Real) -> Real, (Real, Real) -> _) -> Bool)((e : _), inv, (op : (Real, Real) -> _)) == (\226\136\128 x : Real, op(inv(x), x) == e)
+  (right_inverse : (_, (Real) -> Real, (Real, Real) -> _) -> Bool)((e : _), inv, (op : (Real, Real) -> _)) == (\226\136\128 x : Real, op(x, inv(x)) == e)
+  (left_injective : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 x : _, injective((y : _) => op(y, x)))
+  (right_injective : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 y : _, injective(op(y)))
+  (right_id : (_, (_, _) -> _) -> Bool)((e : _), (op : (_, _) -> _)) == (\226\136\128 x : _, op(x, e) == x)
+  (left_zero : (_, (_, _) -> _) -> Bool)((z : _), (op : (_, _) -> _)) == (\226\136\128 x : _, op(z, x) == z)
+  (right_commutative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, op(op(x, y), z) == op(op(x, z), y))
+  (left_distributive : ((_, _) -> _, (_, _) -> _) -> Bool)((op : (_, _) -> _), (add : (_, _) -> _)) == (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, op(add(x, y), z) == add(op(x, z), op(y, z)))
+  (right_loop : ((Real) -> Real, (_, Real) -> _) -> Bool)(inv, (op : (_, Real) -> _)) == (\226\136\128 y : Real, cancel((x : _) => op(x, y), (x : _) => op(x, inv(y))))
+  (rev_right_loop : ((Real) -> Real, (_, Real) -> _) -> Bool)(inv, (op : (_, Real) -> _)) == (\226\136\128 y : Real, cancel((x : _) => op(x, inv(y)), (x : _) => op(x, y)))
+  (left_id : (_, (_, _) -> _) -> Bool)((e : _), (op : (_, _) -> _)) == (\226\136\128 x : _, op(e, x) == x)
+  (right_zero : (_, (_, _) -> _) -> Bool)((z : _), (op : (_, _) -> _)) == (\226\136\128 x : _, op(x, z) == z)
+  (left_commutative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, op(x, op(y, z)) == op(y, op(x, z)))
+  (right_distributive : ((_, _) -> _, (_, _) -> _) -> Bool)((op : (_, _) -> _), (add : (_, _) -> _)) == (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, op(x, add(y, z)) == add(op(x, y), op(x, z)))
+  (left_loop : ((Real) -> Real, (Real, _) -> _) -> Bool)(inv, (op : (Real, _) -> _)) == (\226\136\128 x : Real, cancel(op(x), op(inv(x))))
+  (rev_left_loop : ((Real) -> Real, (Real, _) -> _) -> Bool)(inv, (op : (Real, _) -> _)) == (\226\136\128 x : Real, cancel(op(inv(x)), op(x)))
+  (self_inverse : (_, (_, _) -> _) -> Bool)((e : _), (op : (_, _) -> _)) == (\226\136\128 x : _, op(x, x) == e)
+  (commutative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 x : _, \226\136\128 y : _, op(x, y) == op(y, x))
+  (idempotent : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 x : _, op(x, x) == x)
+  (associative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, op(x, op(y, z)) == op(op(x, y), z))
 Ssrfun.oapp =  |- (#forall:fun(fun(fun('?1,'?2),bool),bool) (\f:fun('?1,'?2). (#forall:fun(fun('?2,bool),bool) (\x:'?2. (#forall:fun(fun('?1,bool),bool) (\y:'?1. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?2,fun('?2,bool)) (((#oapp:fun(fun('?1,'?2),fun('?2,fun(option('?1),'?2))) f:fun('?1,'?2)) x:'?2) (#SOME:fun('?1,option('?1)) y:'?1))) (f:fun('?1,'?2) y:'?1))) ((#=:fun('?2,fun('?2,bool)) (((#oapp:fun(fun('?1,'?2),fun('?2,fun(option('?1),'?2))) f:fun('?1,'?2)) x:'?2) #NONE:option('?1))) x:'?2))))))))
 Ssrfun.odflt =  |- ((#=:fun(fun('?3,fun(option('?3),'?3)),fun(fun('?3,fun(option('?3),'?3)),bool)) #odflt:fun('?3,fun(option('?3),'?3))) (#oapp:fun(fun('?3,'?3),fun('?3,fun(option('?3),'?3))) #I:fun('?3,'?3)))
 Ssrfun.obind =  |- (#forall:fun(fun(fun('?4,option('?5)),bool),bool) (\f:fun('?4,option('?5)). ((#=:fun(fun(option('?4),option('?5)),fun(fun(option('?4),option('?5)),bool)) (#obind:fun(fun('?4,option('?5)),fun(option('?4),option('?5))) f:fun('?4,option('?5)))) ((#oapp:fun(fun('?4,option('?5)),fun(option('?5),fun(option('?4),option('?5)))) f:fun('?4,option('?5))) #NONE:option('?5)))))
