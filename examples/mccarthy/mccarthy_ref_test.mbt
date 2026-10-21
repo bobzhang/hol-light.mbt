@@ -5580,16 +5580,16 @@ test "Examples/mccarthy matches Examples/mccarthy.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Examples/mccarthy quotations (10):
-      #|  (E (Lit n) s = n)\n        /\\  (E (Var v) s = s v)\n        /\\  (E (Plus e1 e2) s = E e1 s + E e2 s)
-      #|  update x z s y = if (y = x) then z else s y
-      #|  (S (LI n) s = update Acc n s)\n        /\\  (S (LOAD r) s = update Acc (s (Reg r)) s)\n        /\\  (S (STO r) s = update (Reg r) (s Acc) s)\n        /\\  (S (ADD r) s = update Acc (s (Reg r) + s Acc) s)
-      #|  (S' [] s = s)\n        /\\  (S' (CONS inst rest) s = S' rest (S inst s))
-      #|  (C (Lit n) map r = [LI n])\n         /\\  (C (Var v) map r = [LOAD (map v)])\n         /\\  (C (Plus e1 e2) map r =\n                  APPEND\n                      (APPEND (C e1 map r) [STO r])\n                      (APPEND (C e2 map (r + 1)) [ADD r]))
-      #|  forall p1 p2 s. S' (APPEND p1 p2) s = S' p2 (S' p1 s)
-      #|  forall x y z s. ~(x = y) ==> (update x z s y = s y)
-      #|  forall x z s. update x z s x = z
-      #|  (x < y ==> x < y + 1 /\\ ~(x = y)) /\\ x < x + 1
-      #|  forall e map s s' r.\n      (forall v. map v < r) ==>\n      (forall v. s v = s' (Reg (map v))) ==>\n          (S' (C e map r) s' Acc = E e s) /\\\n          (forall x. (x < r) ==> (S' (C e map r) s' (Reg x) = s' (Reg x)))
+      #|  (E : (Exp, (List[Char]) -> Num) -> Num)(Lit((n : Num)), (s : (List[Char]) -> Num)) == n && E(Var((v : List[Char])), s) == s(v) && E(Plus((e1 : Exp), (e2 : Exp)), s) == E(e1, s) + E(e2, s)
+      #|  (update : (_, _, (_) -> _, _) -> _)((x : _), (z : _), (s : (_) -> _), (y : _)) == (if y == x { z } else { s(y) })
+      #|  (S : (Inst, (Cell) -> Num, Cell) -> Num)(LI((n : Num)), (s : (Cell) -> Num)) == update(Acc, n, s) && S(LOAD((r : Num)), s) == update(Acc, s(Reg(r)), s) && S(STO(r), s) == update(Reg(r), s(Acc), s) && S(ADD(r), s) == update(Acc, s(Reg(r)) + s(Acc), s)
+      #|  (S' : (List[Inst], (Cell) -> Num, Cell) -> Num)(NIL, (s : (Cell) -> Num)) == s && S'(CONS((inst : Inst), (rest : List[Inst])), s) == S'(rest, S(inst, s))
+      #|  (C : (Exp, (List[Char]) -> Num, Num) -> List[Inst])(Lit((n : Num)), (map : (List[Char]) -> Num), (r : Num)) == [LI(n)] && C(Var((v : List[Char])), map, r) == [LOAD(map(v))] && C(Plus((e1 : Exp), (e2 : Exp)), map, r) == APPEND(APPEND(C(e1, map, r), [STO(r)]), APPEND(C(e2, map, r + 1), [ADD(r)]))
+      #|  \226\136\128 p1 : List[Inst], \226\136\128 p2 : List[Inst], \226\136\128 s : (Cell) -> Num, S'(APPEND(p1, p2), s) == S'(p2, S'(p1, s))
+      #|  \226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, \226\136\128 s : (_) -> _, !(x == y) \226\134\146 update(x, z, s, y) == s(y)
+      #|  \226\136\128 x : _, \226\136\128 z : _, \226\136\128 s : (_) -> _, update(x, z, s, x) == z
+      #|  ((x : Num) < (y : Num) \226\134\146 x < y + 1 && !(x == y)) && x < x + 1
+      #|  \226\136\128 e : Exp, \226\136\128 map : (List[Char]) -> Num, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (Cell) -> Num, \226\136\128 r : Num, (\226\136\128 v : List[Char], map(v) < r) \226\134\146 (\226\136\128 v : List[Char], s(v) == s'(Reg(map(v)))) \226\134\146 S'(C(e, map, r), s', Acc) == E(e, s) && (\226\136\128 x : Num, x < r \226\134\146 S'(C(e, map, r), s', Reg(x)) == s'(Reg(x)))
       #|string_INDUCT =  |- (#forall:fun(fun(fun(string,bool),bool),bool) (\P:fun(string,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(int),bool),bool) (\a:list(int). (P:fun(string,bool) (#String:fun(list(int),string) a:list(int)))))) (#forall:fun(fun(string,bool),bool) (\x:string. (P:fun(string,bool) x:string))))))
       #|string_RECURSION =  |- (#forall:fun(fun(fun(list(int),'Z),bool),bool) (\f:fun(list(int),'Z). (#?:fun(fun(fun(string,'Z),bool),bool) (\fn:fun(string,'Z). (#forall:fun(fun(list(int),bool),bool) (\a:list(int). ((#=:fun('Z,fun('Z,bool)) (fn:fun(string,'Z) (#String:fun(list(int),string) a:list(int)))) (f:fun(list(int),'Z) a:list(int)))))))))
       #|exp_INDUCT =  |- (#forall:fun(fun(fun(exp,bool),bool),bool) (\P:fun(exp,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(exp,bool) (#Lit:fun(num,exp) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(exp,bool) (#Var:fun(list(char),exp) a:list(char)))))) (#forall:fun(fun(exp,bool),bool) (\a0:exp. (#forall:fun(fun(exp,bool),bool) (\a1:exp. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(exp,bool) a0:exp)) (P:fun(exp,bool) a1:exp))) (P:fun(exp,bool) ((#Plus:fun(exp,fun(exp,exp)) a0:exp) a1:exp)))))))))) (#forall:fun(fun(exp,bool),bool) (\x:exp. (P:fun(exp,bool) x:exp))))))
