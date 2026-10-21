@@ -79281,34 +79281,34 @@ test "EC/family25519 matches EC/family25519.ml" {
       #|0..0..1..3..solved at 7
       #|0..0..1..3..solved at 7
       #|EC/family25519 quotations (28):
-      #|  c_25519 = 51042569399160536130206135233146329284152202253034631822681833788666877215207
-      #|  curve25519_of_edwards25519 =\n        montgomery_of_edwards (integer_mod_ring p_25519) (&c_25519)
-      #|  edwards25519_of_curve25519 =\n        edwards_of_montgomery (integer_mod_ring p_25519) (&c_25519)
-      #|  mcurve_of_ecurve (integer_mod_ring p_25519,&e_25519,&d_25519) (&c_25519) =\n   (integer_mod_ring p_25519,&A_25519,&1)
-      #|  &c_25519:int
-      #|  &d_25519:int
-      #|  &e_25519:int
-      #|  integer_mod_ring p_25519
-      #|  group_isomorphisms\n      (edwards25519_group,curve25519_group)\n      (curve25519_of_edwards25519,edwards25519_of_curve25519)
-      #|  edwards25519_group isomorphic_group curve25519_group
-      #|  curve25519_group isomorphic_group edwards25519_group
-      #|  curve25519_of_edwards25519 E_25519 = C_25519
-      #|  curve25519_of_edwards25519 EE_25519 = CC_25519
-      #|  edwards25519_of_curve25519 C_25519 = E_25519
-      #|  edwards25519_of_curve25519 CC_25519 = EE_25519
-      #|  wei25519_of_curve25519 =\n        weierstrass_of_montgomery (integer_mod_ring p_25519,&A_25519,&1)
-      #|  curve25519_of_wei25519 =\n        montgomery_of_weierstrass (integer_mod_ring p_25519,&A_25519,&1)
-      #|  wcurve_of_mcurve(integer_mod_ring p_25519,&A_25519,&1) =\n   (integer_mod_ring p_25519,&a_25519,&b_25519)
-      #|  &1:int
-      #|  &A_25519:int
-      #|  integer_mod_ring p_25519
-      #|  group_isomorphisms\n      (curve25519_group,wei25519_group)\n      (wei25519_of_curve25519,curve25519_of_wei25519)
-      #|  curve25519_group isomorphic_group wei25519_group
-      #|  wei25519_group isomorphic_group curve25519_group
-      #|  wei25519_of_curve25519 C_25519 = G_25519
-      #|  wei25519_of_curve25519 CC_25519 = GG_25519
-      #|  curve25519_of_wei25519 G_25519 = C_25519
-      #|  curve25519_of_wei25519 GG_25519 = CC_25519
+      #|  (c_25519 : Num) == 51042569399160536130206135233146329284152202253034631822681833788666877215207
+      #|  (curve25519_of_edwards25519 : ((Int, Int)) -> Option[(Int, Int)]) == montgomery_of_edwards(integer_mod_ring(p_25519), int_of_num(c_25519))
+      #|  (edwards25519_of_curve25519 : (Option[(Int, Int)]) -> (Int, Int)) == edwards_of_montgomery(integer_mod_ring(p_25519), int_of_num(c_25519))
+      #|  mcurve_of_ecurve((integer_mod_ring(p_25519), int_of_num(e_25519), int_of_num(d_25519)), int_of_num(c_25519)) == (integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))
+      #|  int_of_num(c_25519)
+      #|  int_of_num(d_25519)
+      #|  int_of_num(e_25519)
+      #|  integer_mod_ring(p_25519)
+      #|  group_isomorphisms((edwards25519_group, curve25519_group), (curve25519_of_edwards25519, edwards25519_of_curve25519))
+      #|  isomorphic_group(edwards25519_group, curve25519_group)
+      #|  isomorphic_group(curve25519_group, edwards25519_group)
+      #|  curve25519_of_edwards25519(E_25519) == C_25519
+      #|  curve25519_of_edwards25519(EE_25519) == CC_25519
+      #|  edwards25519_of_curve25519(C_25519) == E_25519
+      #|  edwards25519_of_curve25519(CC_25519) == EE_25519
+      #|  (wei25519_of_curve25519 : (Option[(Int, Int)]) -> Option[(Int, Int)]) == weierstrass_of_montgomery((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1)))
+      #|  (curve25519_of_wei25519 : (Option[(Int, Int)]) -> Option[(Int, Int)]) == montgomery_of_weierstrass((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1)))
+      #|  wcurve_of_mcurve((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))) == (integer_mod_ring(p_25519), int_of_num(a_25519), int_of_num(b_25519))
+      #|  int_of_num(1)
+      #|  int_of_num(A_25519)
+      #|  integer_mod_ring(p_25519)
+      #|  group_isomorphisms((curve25519_group, wei25519_group), (wei25519_of_curve25519, curve25519_of_wei25519))
+      #|  isomorphic_group(curve25519_group, wei25519_group)
+      #|  isomorphic_group(wei25519_group, curve25519_group)
+      #|  wei25519_of_curve25519(C_25519) == G_25519
+      #|  wei25519_of_curve25519(CC_25519) == GG_25519
+      #|  curve25519_of_wei25519(G_25519) == C_25519
+      #|  curve25519_of_wei25519(GG_25519) == CC_25519
       #|c_25519 =  |- ((#=:fun(num,fun(num,bool)) #c_25519:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
       #|curve25519_of_edwards25519 =  |- ((#=:fun(fun(prod(int,int),option(prod(int,int))),fun(fun(prod(int,int),option(prod(int,int))),bool)) #curve25519_of_edwards25519:fun(prod(int,int),option(prod(int,int)))) ((#montgomery_of_edwards:fun(ring(int),fun(int,fun(prod(int,int),option(prod(int,int))))) (#integer_mod_ring:fun(num,ring(int)) #p_25519:num)) (#int_of_num:fun(num,int) #c_25519:num)))
       #|edwards25519_of_curve25519 =  |- ((#=:fun(fun(option(prod(int,int)),prod(int,int)),fun(fun(option(prod(int,int)),prod(int,int)),bool)) #edwards25519_of_curve25519:fun(option(prod(int,int)),prod(int,int))) ((#edwards_of_montgomery:fun(ring(int),fun(int,fun(option(prod(int,int)),prod(int,int)))) (#integer_mod_ring:fun(num,ring(int)) #p_25519:num)) (#int_of_num:fun(num,int) #c_25519:num)))
