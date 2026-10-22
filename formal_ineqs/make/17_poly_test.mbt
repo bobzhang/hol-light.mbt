@@ -78,61 +78,61 @@ test "Formal_ineqs/trig/poly matches Formal_ineqs/trig/poly.ml" {
     @testkit.normalize_times(log.contents()),
     content=(
       #|Formal_ineqs/trig/poly quotations (55):
-      #|  real_zero = &0
-      #|  poly_f cs x = ITLIST (\\c s. c + x * s) cs (&0)
-      #|  poly_f_even cs x = poly_f cs (x * x)
-      #|  poly_f_odd cs x = x * poly_f_even cs x
-      #|  forall x. poly_f [] x = &0
-      #|  forall x h t. poly_f (CONS h t) x = h + x * poly_f t x
-      #|  forall x. poly_f_even [] x = &0
-      #|  forall x h t. poly_f_even (CONS h t) x = h + (x * x) * poly_f_even t x
-      #|  forall x. poly_f_odd [] x = &0
-      #|  forall x b a. poly_f (APPEND a b) x = poly_f a x + x pow (LENGTH a) * poly_f b x
-      #|  forall x b a. poly_f_even (APPEND a b) x \n\t\t\t       = poly_f_even a x + x pow (2 * LENGTH a) * poly_f_even b x
-      #|  forall x b a. poly_f_odd (APPEND a b) x \n\t\t\t      = poly_f_odd a x + x pow (2 * LENGTH a) * poly_f_odd b x
-      #|  forall x. interval_arith (poly_f [] x) (&0, &0)
-      #|  forall c x. poly_f [c] x = c
-      #|  forall c x. poly_f_even [c] x = c
-      #|  forall c x. poly_f_odd [c] x = c * x
-      #|  forall x. interval_arith (poly_f [] x) (real_zero, &0)
-      #|  forall c x bounds. interval_arith c bounds\n\t\t\t\t ==> interval_arith (poly_f [c] x) bounds
-      #|  c * a:real
-      #|  b + m:real
-      #|  forall x h t a b c m r.  \n\t\t\t\t       interval_arith (poly_f t x) (real_zero, a) /\\\n\t\t\t\t       interval_arith h (real_zero, b) /\\\n\t\t\t\t       interval_arith x (real_zero, c) /\\\n\t\t\t\t       c * a <= m /\\\n\t\t\t\t       b + m <= r\n\t\t\t\t       ==> interval_arith (poly_f (CONS h t) x) (real_zero, r)
-      #|  forall x. interval_arith (&0) (real_zero, poly_f [] x)
-      #|  forall c b x. interval_arith b (real_zero, c)\n\t\t\t\t==> interval_arith b (real_zero, poly_f [c] x)
-      #|  c * a:real
-      #|  b + m:real
-      #|  forall x h t a b c m r.  \n\t\t\t\t      interval_arith a (real_zero, poly_f t x) /\\\n\t\t\t\t      interval_arith b (real_zero, h) /\\\n\t\t\t\t      interval_arith c (real_zero, x) /\\\n\t\t\t\t      m <= c * a /\\\n\t\t\t\t      r <= b + m /\\\n\t\t\t\t      real_zero <= r\n\t\t\t\t       ==> interval_arith r (real_zero, poly_f (CONS h t) x)
-      #|  forall a x n. sum (0..n) (\\i. a i * x pow i) = poly_f (TABLE a (SUC n)) x
-      #|  forall a x n. sum (0..n) (\\i. a i * x pow (2 * i)) \n\t\t\t       = poly_f_even (TABLE a (SUC n)) x
-      #|  forall a x n. sum (0..n) (\\i. a i * x pow (2 * i + 1)) \n\t\t\t       = poly_f_odd (TABLE a (SUC n)) x
-      #|  (k + 1) + 1 = k + 2
-      #|  forall k. P k /\\ P (k + 1)
-      #|  forall P. P 0 /\\ P 1 /\\ (forall k. P k /\\ P (k + 1) ==> P (k + 2)) ==> (forall k. P k)
-      #|  x pow (2 * (m + 1)) * a * x = (x pow (2 * (m + 1)) * x pow 1) * a
-      #|  m + 1
-      #|  ~EVEN (2 * (m + 1) + 1)
-      #|  (2 * m + 1) + 1 = 2 * (m + 1)
-      #|  x pow (2 * m) * a * x = (x pow (2 * m) * x pow 1) * a
-      #|  (2 * m + 1) + 1 = 2 * (m + 1)
-      #|  m:num
-      #|  m + 1
-      #|  EVEN ((2 * m + 1) + 1) /\\ ~(EVEN (2 * m + 1))
-      #|  EVEN n
-      #|  2 * m = m * 2
-      #|  ~(2 = 0)
-      #|  ~(2 = 0) /\\ (forall m. (2 * m) DIV 2 = m) /\\ (forall m. (2 * m + 1) DIV 2 = m)
-      #|  ~(2 = 0)
-      #|  SUC (SUC (SUC n)) = 1 * 2 + SUC n
-      #|  SUC (SUC (SUC n)) DIV 2 = SUC (SUC n DIV 2)
-      #|  ~(2 = 0)
-      #|  SUC (SUC n) = 1 * 2 + n
-      #|  SUC (SUC n) DIV 2 + 1 = SUC (n DIV 2 + 1)
-      #|  n + 2 = SUC (SUC n)
-      #|  forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow i)\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) x\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) x
-      #|  forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i))\n\t\t\t\t= poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x)
-      #|  forall a x n. sum (0..n) (\\i. ((-- &1) pow i * a i) * x pow (2 * i + 1))\n\t\t\t\t= x * (poly_f_even (TABLE (\\i. a (2 * i)) (n DIV 2 + 1)) (x * x)\n                                   - poly_f_odd (TABLE (\\i. a (2 * i + 1)) (SUC n DIV 2)) (x * x))
+      #|  (real_zero : Real) == real_of_num(0)
+      #|  (poly_f : (List[Real], Real) -> Real)((cs : List[Real]), (x : Real)) == ITLIST((c : Real) => (s : Real) => c + x * s, cs, real_of_num(0))
+      #|  (poly_f_even : (List[Real], Real) -> Real)((cs : List[Real]), (x : Real)) == poly_f(cs, x * x)
+      #|  (poly_f_odd : (List[Real], Real) -> Real)((cs : List[Real]), (x : Real)) == x * poly_f_even(cs, x)
+      #|  \226\136\128 x : Real, poly_f(NIL, x) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 t : List[Real], poly_f(CONS(h, t), x) == h + x * poly_f(t, x)
+      #|  \226\136\128 x : Real, poly_f_even(NIL, x) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 t : List[Real], poly_f_even(CONS(h, t), x) == h + x * x * poly_f_even(t, x)
+      #|  \226\136\128 x : Real, poly_f_odd(NIL, x) == real_of_num(0)
+      #|  \226\136\128 x : Real, \226\136\128 b : List[Real], \226\136\128 a : List[Real], poly_f(APPEND(a, b), x) == poly_f(a, x) + pow(x, LENGTH(a)) * poly_f(b, x)
+      #|  \226\136\128 x : Real, \226\136\128 b : List[Real], \226\136\128 a : List[Real], poly_f_even(APPEND(a, b), x) == poly_f_even(a, x) + pow(x, 2 * LENGTH(a)) * poly_f_even(b, x)
+      #|  \226\136\128 x : Real, \226\136\128 b : List[Real], \226\136\128 a : List[Real], poly_f_odd(APPEND(a, b), x) == poly_f_odd(a, x) + pow(x, 2 * LENGTH(a)) * poly_f_odd(b, x)
+      #|  \226\136\128 x : Real, interval_arith(poly_f(NIL, x), (real_of_num(0), real_of_num(0)))
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, poly_f([c], x) == c
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, poly_f_even([c], x) == c
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, poly_f_odd([c], x) == c * x
+      #|  \226\136\128 x : Real, interval_arith(poly_f(NIL, x), (real_zero, real_of_num(0)))
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 bounds : (Real, Real), interval_arith(c, bounds) \226\134\146 interval_arith(poly_f([c], x), bounds)
+      #|  (c : Real) * (a : Real)
+      #|  (b : Real) + (m : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 t : List[Real], \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 m : Real, \226\136\128 r : Real, interval_arith(poly_f(t, x), (real_zero, a)) && interval_arith(h, (real_zero, b)) && interval_arith(x, (real_zero, c)) && c * a <= m && b + m <= r \226\134\146 interval_arith(poly_f(CONS(h, t), x), (real_zero, r))
+      #|  \226\136\128 x : Real, interval_arith(real_of_num(0), (real_zero, poly_f(NIL, x)))
+      #|  \226\136\128 c : Real, \226\136\128 b : Real, \226\136\128 x : Real, interval_arith(b, (real_zero, c)) \226\134\146 interval_arith(b, (real_zero, poly_f([c], x)))
+      #|  (c : Real) * (a : Real)
+      #|  (b : Real) + (m : Real)
+      #|  \226\136\128 x : Real, \226\136\128 h : Real, \226\136\128 t : List[Real], \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, \226\136\128 m : Real, \226\136\128 r : Real, interval_arith(a, (real_zero, poly_f(t, x))) && interval_arith(b, (real_zero, h)) && interval_arith(c, (real_zero, x)) && m <= c * a && r <= b + m && real_zero <= r \226\134\146 interval_arith(r, (real_zero, poly_f(CONS(h, t), x)))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 x : Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, i)) == poly_f(TABLE(a, SUC(n)), x)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 x : Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, 2 * i)) == poly_f_even(TABLE(a, SUC(n)), x)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 x : Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => a(i) * pow(x, 2 * i + 1)) == poly_f_odd(TABLE(a, SUC(n)), x)
+      #|  (k : Num) + 1 + 1 == k + 2
+      #|  \226\136\128 k : Num, (P : (Num) -> Bool)(k) && P(k + 1)
+      #|  \226\136\128 P : (Num) -> Bool, P(0) && P(1) && (\226\136\128 k : Num, P(k) && P(k + 1) \226\134\146 P(k + 2)) \226\134\146 (\226\136\128 k : Num, P(k))
+      #|  pow((x : Real), 2 * ((m : Num) + 1)) * ((a : Real) * x) == pow(x, 2 * (m + 1)) * pow(x, 1) * a
+      #|  (m : Num) + 1
+      #|  !EVEN(2 * ((m : Num) + 1) + 1)
+      #|  2 * (m : Num) + 1 + 1 == 2 * (m + 1)
+      #|  pow((x : Real), 2 * (m : Num)) * ((a : Real) * x) == pow(x, 2 * m) * pow(x, 1) * a
+      #|  2 * (m : Num) + 1 + 1 == 2 * (m + 1)
+      #|  (m : Num)
+      #|  (m : Num) + 1
+      #|  EVEN(2 * (m : Num) + 1 + 1) && !EVEN(2 * m + 1)
+      #|  EVEN((n : Num))
+      #|  2 * (m : Num) == m * 2
+      #|  !(2 == 0)
+      #|  !(2 == 0) && (\226\136\128 m : Num, DIV(2 * m, 2) == m) && (\226\136\128 m : Num, DIV(2 * m + 1, 2) == m)
+      #|  !(2 == 0)
+      #|  SUC(SUC(SUC((n : Num)))) == 1 * 2 + SUC(n)
+      #|  DIV(SUC(SUC(SUC((n : Num)))), 2) == SUC(DIV(SUC(n), 2))
+      #|  !(2 == 0)
+      #|  SUC(SUC((n : Num))) == 1 * 2 + n
+      #|  DIV(SUC(SUC((n : Num))), 2) + 1 == SUC(DIV(n, 2) + 1)
+      #|  (n : Num) + 2 == SUC(SUC(n))
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 x : Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) * a(i) * pow(x, i)) == poly_f_even(TABLE((i : Num) => a(2 * i), DIV(n, 2) + 1), x) - poly_f_odd(TABLE((i : Num) => a(2 * i + 1), DIV(SUC(n), 2)), x)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 x : Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) * a(i) * pow(x, 2 * i)) == poly_f_even(TABLE((i : Num) => a(2 * i), DIV(n, 2) + 1), x * x) - poly_f_odd(TABLE((i : Num) => a(2 * i + 1), DIV(SUC(n), 2)), x * x)
+      #|  \226\136\128 a : (Num) -> Real, \226\136\128 x : Real, \226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) * a(i) * pow(x, 2 * i + 1)) == x * (poly_f_even(TABLE((i : Num) => a(2 * i), DIV(n, 2) + 1), x * x) - poly_f_odd(TABLE((i : Num) => a(2 * i + 1), DIV(SUC(n), 2)), x * x))
       #|Poly.real_zero =  |- ((#=:fun(real,fun(real,bool)) #real_zero:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))
       #|Poly.poly_f =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(list(real),bool),bool) (\cs:list(real). ((#=:fun(real,fun(real,bool)) ((#poly_f:fun(list(real),fun(real,real)) cs:list(real)) x:real)) (((#ITLIST:fun(fun(real,fun(real,real)),fun(list(real),fun(real,real))) (\c:real. (\s:real. ((#real_add:fun(real,fun(real,real)) c:real) ((#real_mul:fun(real,fun(real,real)) x:real) s:real))))) cs:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
       #|Poly.poly_f_even =  |- (#forall:fun(fun(list(real),bool),bool) (\cs:list(real). (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#poly_f_even:fun(list(real),fun(real,real)) cs:list(real)) x:real)) ((#poly_f:fun(list(real),fun(real,real)) cs:list(real)) ((#real_mul:fun(real,fun(real,real)) x:real) x:real)))))))
