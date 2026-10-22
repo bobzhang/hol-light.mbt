@@ -107,11 +107,11 @@ pub fn otrips() -> @list.List[(((Int64, Int64), (Int64, Int64), (Int64, Int64)),
 ///|
 /// hol_of_value
 fn step_5() -> Unit raise {
-  let tm0 = @parser.parse_term("&0")
-  let tm1 = @parser.parse_term("&2")
-  let tm2 = @parser.parse_term("-- &2")
-  let tm3 = @parser.parse_term("sqrt(&2)")
-  let tm4 = @parser.parse_term("--sqrt(&2)")
+  let tm0 = @term_syntax.parse_term("real_of_num(0)")
+  let tm1 = @term_syntax.parse_term("real_of_num(2)")
+  let tm2 = @term_syntax.parse_term("-real_of_num(2)")
+  let tm3 = @term_syntax.parse_term("sqrt(real_of_num(2))")
+  let tm4 = @term_syntax.parse_term("-sqrt(real_of_num(2))")
   hol_of_value_c.set(fn(x22 : (Int64, Int64)) -> @kernel.Term raise {
     match x22 {
       (0L, 0L) => tm0
@@ -136,7 +136,7 @@ pub fn hol_of_value(x : (Int64, Int64)) -> @kernel.Term raise {
 ///|
 /// hol_of_point
 fn step_6() -> Unit raise {
-  let ptm = @parser.parse_term("vector:(real)list->real^3")
+  let ptm = @term_syntax.parse_term("(vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])")
   hol_of_point_c.set(fn(x23 : ((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.Term raise {
     let (x, y, z) = x23
     @kernel.mk_comb(ptm, @lists.mk_flist(@lib.map(hol_of_value, @list.List([x, y, z]))))
@@ -156,7 +156,7 @@ pub fn hol_of_point(x : ((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @ke
 /// SQRT_2_POW
 fn step_7() -> Unit raise {
   let t24 = @simp.simp_tac(@list.List([@real.sqrt_pow_2(), @analysis.real_pos()]))
-  sqrt_2_pow_c.set(@tactics.prove(@parser.parse_term("sqrt(&2) pow 2 = &2"), t24))
+  sqrt_2_pow_c.set(@tactics.prove(@term_syntax.parse_term("pow(sqrt(real_of_num(2)), 2) == real_of_num(2)"), t24))
 }
 
 ///|
@@ -171,8 +171,8 @@ pub fn sqrt_2_pow() -> @kernel.Thm {
 ///|
 /// PROVE_NONTRIVIAL
 fn step_8() -> Unit raise {
-  let ptm = @parser.parse_term("~(x :real^3 = vec 0)")
-  let xtm = @parser.parse_term("x:real^3")
+  let ptm = @term_syntax.parse_term("!((x : Cart[Real, Tybit1[Unit]]) == vec(0))")
+  let xtm = @term_syntax.parse_term("(x : Cart[Real, Tybit1[Unit]])")
   prove_nontrivial_c.set(fn(x25 : ((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.Thm raise {
     let x = x25
     let t30 = @tactics.conv_tac(@calc_rat.real_ring)
@@ -199,7 +199,7 @@ pub fn prove_nontrivial(x : ((Int64, Int64), (Int64, Int64), (Int64, Int64))) ->
 ///|
 /// PROVE_ORTHOGONAL
 fn step_9() -> Unit raise {
-  let ptm = @parser.parse_term("orthogonal:real^3->real^3->bool")
+  let ptm = @term_syntax.parse_term("(orthogonal : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)")
   prove_orthogonal_c.set(fn(x32 : (((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)))) -> @kernel.Thm raise {
     let (x, y) = x32
     let t35 = @tactics.conv_tac(@calc_rat.real_ring)
@@ -222,7 +222,7 @@ pub fn prove_orthogonal(x : (((Int64, Int64), (Int64, Int64), (Int64, Int64)), (
 ///|
 /// ppoint
 fn step_10() -> Unit raise {
-  let p = @parser.parse_term("P:real^3->bool")
+  let p = @term_syntax.parse_term("(P : (Cart[Real, Tybit1[Unit]]) -> Bool)")
   ppoint_c.set(fn(x37 : ((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.Term raise {
     let v = x37
     @kernel.mk_comb(p, hol_of_point(v))
@@ -336,7 +336,7 @@ fn step_11() -> Unit raise {
     })(prove_nontrivial(x66))
   }, points())
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t67), t72), t73)
-  kochen_specker_lemma_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x y:real^3. ~(x = vec 0) /\\ ~(y = vec 0) /\\ orthogonal x y /\\\n                     ~(P x) ==> P y) /\\\n       (forall x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z /\\\n                P x /\\ P y ==> ~(P z))\n       ==> F"), t74))
+  kochen_specker_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Cart[Real, Tybit1[Unit]]) -> Bool, (∀ x : Cart[Real, Tybit1[Unit]], ∀ y : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && !(y == vec(0)) && orthogonal(x, y) && !P(x) → P(y)) && (∀ x : Cart[Real, Tybit1[Unit]], ∀ y : Cart[Real, Tybit1[Unit]], ∀ z : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && !(y == vec(0)) && !(z == vec(0)) && orthogonal(x, y) && orthogonal(x, z) && orthogonal(y, z) && P(x) && P(y) → !P(z)) → false"), t74))
 }
 
 ///|
@@ -352,7 +352,7 @@ pub fn kochen_specker_lemma() -> @kernel.Thm {
 /// NONTRIVIAL_CROSS
 fn step_12() -> Unit raise {
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dot_eq_0())])), @Vectors.vec3_tac)
-  nontrivial_cross_c.set(@tactics.prove(@parser.parse_term("forall x y. orthogonal x y /\\ ~(x = vec 0) /\\ ~(y = vec 0)\n         ==> ~(x cross y = vec 0)"), t75))
+  nontrivial_cross_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit1[Unit]], ∀ y : Cart[Real, Tybit1[Unit]], orthogonal(x, y) && !(x == vec(0)) && !(y == vec(0)) → !(cross(x, y) == vec(0))"), t75))
 }
 
 ///|
@@ -367,7 +367,7 @@ pub fn nontrivial_cross() -> @kernel.Thm {
 ///|
 /// KOCHEN_SPECKER_PARADOX
 fn step_13() -> Unit raise {
-  let t86 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@parser.parse_term("~(1 = 0)")), nontrivial_cross(), @Vectors.orthogonal_cross()]))
+  let t86 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("!(1 == 0)")), nontrivial_cross(), @Vectors.orthogonal_cross()]))
   let t85 = @tactics.disch_then(fn(x83 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x83
     @tactics.then_tac(@tactics.strip_tac, @tactics.mp_tac(th))
@@ -380,9 +380,9 @@ fn step_13() -> Unit raise {
     }
   })
   let t77 = @simp.asm_rewrite_tac(@list.List([]))
-  let t76 = @tactics.mp_tac(@bool.spec(@parser.parse_term("\\x:real^3. spin(x) = 1"), kochen_specker_lemma()))
+  let t76 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x : Cart[Real, Tybit1[Unit]]) => (spin : (Cart[Real, Tybit1[Unit]]) -> Num)(x) == 1"), kochen_specker_lemma()))
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t76), t77), @tactics.conj_tac), t81), t82), t85), t86)
-  kochen_specker_paradox_c.set(@tactics.prove(@parser.parse_term("~(?spin:real^3->num.\n        forall x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z\n                ==> (spin x = 0) /\\ (spin y = 1) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 0) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 1) /\\ (spin z = 0))"), t87))
+  kochen_specker_paradox_c.set(@tactics.prove(@term_syntax.parse_term("!(∃ spin : (Cart[Real, Tybit1[Unit]]) -> Num, ∀ x : Cart[Real, Tybit1[Unit]], ∀ y : Cart[Real, Tybit1[Unit]], ∀ z : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && !(y == vec(0)) && !(z == vec(0)) && orthogonal(x, y) && orthogonal(x, z) && orthogonal(y, z) → spin(x) == 0 && spin(y) == 1 && spin(z) == 1 || spin(x) == 1 && spin(y) == 0 && spin(z) == 1 || spin(x) == 1 && spin(y) == 1 && spin(z) == 0)"), t87))
 }
 
 ///|
