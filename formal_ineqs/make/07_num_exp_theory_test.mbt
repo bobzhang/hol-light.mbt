@@ -101,72 +101,72 @@ test "Formal_ineqs/arith/num_exp_theory matches Formal_ineqs/arith/num_exp_theor
     @testkit.normalize_times(log.contents()),
     content=(
       #|Formal_ineqs/arith/num_exp_theory quotations (66):
-      #|  e:num
+      #|  (e : Num)
       #|  EXP
-      #|  n:num
+      #|  (n : Num)
       #|  ( * ):num->num->num
-      #|  (num_exp:num->num->num) n e
-      #|  forall n e1 e2. num_exp (num_exp n e1) e2 = num_exp n (e1 + e2)
-      #|  forall n e1 e2. num_exp n (e1 + e2) = num_exp n e1 * num_exp 1 e2
-      #|  forall n e1 e2. num_exp n (e1 + e2) = num_exp 1 e1 * num_exp n e2
-      #|  forall n. n = num_exp n 0
-      #|  forall m n e. m <= n ==> num_exp m e <= num_exp n e
-      #|  forall m n e. m < n ==> num_exp m e < num_exp n e
-      #|  forall n e. num_exp n e = 0 <=> n = 0
-      #|  forall n1 e1 n2 e2. num_exp n1 e1 * num_exp n2 e2 = num_exp (n1 * n2) (e1 + e2)
-      #|  e1 <= e2 ==> e2 - e1 + e1 = e2:num
-      #|  (a + b * c) * d = a * d + b * (c * d):num
-      #|  forall n1 e1 n2 e2. e1 <= e2 ==>\n                          num_exp n1 e1 + num_exp n2 e2 = num_exp (n1 + num_exp n2 (e2 - e1)) e1
-      #|  e1 <= e2 ==> e2 = (e2 - e1) + e1:num
-      #|  forall n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r ==>\n\t\t\t   num_exp n1 e1 - num_exp n2 e2 = num_exp (n1 - num_exp n2 r) e1
-      #|  e2 <= e1 ==> e1 = (e1 - e2) + e2:num
-      #|  forall n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r ==>\n\t\t\t   num_exp n1 e1 - num_exp n2 e2 = num_exp (num_exp n1 r - n2) e2
-      #|  e2 <= e1 ==> e1 = (e1 - e2) + e2:num
-      #|  forall n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r /\\ n2 <= num_exp n1 r\n\t\t\t      ==> num_exp n2 e2 <= num_exp n1 e1
-      #|  e1 <= e2 ==> e2 = (e2 - e1) + e1:num
-      #|  forall n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r <= n1\n\t\t\t      ==> num_exp n2 e2 <= num_exp n1 e1
-      #|  e2 <= e1 ==> e1 = (e1 - e2) + e2:num
-      #|  forall n1 e1 n2 e2 r x. e2 <= e1 /\\ e1 - e2 = r /\\ num_exp n1 r = x ==>\n\t\t\t       (num_exp n1 e1 <= num_exp n2 e2 <=> x <= n2)
-      #|  e1 <= e2 ==> e2 = (e2 - e1) + e1:num
-      #|  forall n1 e1 n2 e2 r x. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r = x ==>\n\t\t\t       (num_exp n1 e1 <= num_exp n2 e2 <=> n1 <= x)
-      #|  e2 <= e1 ==> e1 = (e1 - e2) + e2:num
-      #|  forall n1 e1 n2 e2 r. e2 <= e1 /\\ e1 - e2 = r /\\ n2 < num_exp n1 r\n\t\t\t    ==> num_exp n2 e2 < num_exp n1 e1
-      #|  e1 <= e2 ==> e2 = (e2 - e1) + e1:num
-      #|  forall n1 e1 n2 e2 r. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r < n1\n\t\t\t    ==> num_exp n2 e2 < num_exp n1 e1
-      #|  e2 <= e1 ==> e1 = (e1 - e2) + e2:num
-      #|  forall n1 e1 n2 e2 r x. e2 <= e1 /\\ e1 - e2 = r /\\ num_exp n1 r = x ==>\n\t\t\t       (num_exp n1 e1 < num_exp n2 e2 <=> x < n2)
-      #|  e1 <= e2 ==> e2 = (e2 - e1) + e1:num
-      #|  forall n1 e1 n2 e2 r x. e1 <= e2 /\\ e2 - e1 = r /\\ num_exp n2 r = x ==>\n\t\t\t       (num_exp n1 e1 < num_exp n2 e2 <=> n1 < x)
+      #|  (num_exp : (Num, Num) -> Num)((n : Num), (e : Num))
+      #|  \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, num_exp(num_exp(n, e1), e2) == num_exp(n, e1 + e2)
+      #|  \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, num_exp(n, e1 + e2) == num_exp(n, e1) * num_exp(1, e2)
+      #|  \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, num_exp(n, e1 + e2) == num_exp(1, e1) * num_exp(n, e2)
+      #|  \226\136\128 n : Num, n == num_exp(n, 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 e : Num, m <= n \226\134\146 num_exp(m, e) <= num_exp(n, e)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 e : Num, m < n \226\134\146 num_exp(m, e) < num_exp(n, e)
+      #|  \226\136\128 n : Num, \226\136\128 e : Num, (num_exp(n, e) == 0) == (n == 0)
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, num_exp(n1, e1) * num_exp(n2, e2) == num_exp(n1 * n2, e1 + e2)
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e2 - e1 + e1 == e2
+      #|  ((a : Num) + (b : Num) * (c : Num)) * (d : Num) == a * d + b * (c * d)
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, e1 <= e2 \226\134\146 num_exp(n1, e1) + num_exp(n2, e2) == num_exp(n1 + num_exp(n2, e2 - e1), e1)
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e2 == e2 - e1 + e1
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, e1 <= e2 && e2 - e1 == r \226\134\146 num_exp(n1, e1) - num_exp(n2, e2) == num_exp(n1 - num_exp(n2, r), e1)
+      #|  (e2 : Num) <= (e1 : Num) \226\134\146 e1 == e1 - e2 + e2
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, e2 <= e1 && e1 - e2 == r \226\134\146 num_exp(n1, e1) - num_exp(n2, e2) == num_exp(num_exp(n1, r) - n2, e2)
+      #|  (e2 : Num) <= (e1 : Num) \226\134\146 e1 == e1 - e2 + e2
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, e2 <= e1 && e1 - e2 == r && n2 <= num_exp(n1, r) \226\134\146 num_exp(n2, e2) <= num_exp(n1, e1)
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e2 == e2 - e1 + e1
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, e1 <= e2 && e2 - e1 == r && num_exp(n2, r) <= n1 \226\134\146 num_exp(n2, e2) <= num_exp(n1, e1)
+      #|  (e2 : Num) <= (e1 : Num) \226\134\146 e1 == e1 - e2 + e2
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, \226\136\128 x : Num, e2 <= e1 && e1 - e2 == r && num_exp(n1, r) == x \226\134\146 (num_exp(n1, e1) <= num_exp(n2, e2)) == (x <= n2)
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e2 == e2 - e1 + e1
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, \226\136\128 x : Num, e1 <= e2 && e2 - e1 == r && num_exp(n2, r) == x \226\134\146 (num_exp(n1, e1) <= num_exp(n2, e2)) == (n1 <= x)
+      #|  (e2 : Num) <= (e1 : Num) \226\134\146 e1 == e1 - e2 + e2
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, e2 <= e1 && e1 - e2 == r && n2 < num_exp(n1, r) \226\134\146 num_exp(n2, e2) < num_exp(n1, e1)
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e2 == e2 - e1 + e1
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, e1 <= e2 && e2 - e1 == r && num_exp(n2, r) < n1 \226\134\146 num_exp(n2, e2) < num_exp(n1, e1)
+      #|  (e2 : Num) <= (e1 : Num) \226\134\146 e1 == e1 - e2 + e2
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, \226\136\128 x : Num, e2 <= e1 && e1 - e2 == r && num_exp(n1, r) == x \226\134\146 (num_exp(n1, e1) < num_exp(n2, e2)) == (x < n2)
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e2 == e2 - e1 + e1
+      #|  \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, \226\136\128 x : Num, e1 <= e2 && e2 - e1 == r && num_exp(n2, r) == x \226\134\146 (num_exp(n1, e1) < num_exp(n2, e2)) == (n1 < x)
       #|  ( * ):num->num->num
-      #|  n2:num
-      #|  e2:num
+      #|  (n2 : Num)
+      #|  (e2 : Num)
       #|  EXP
-      #|  num_exp n2 e2
-      #|  e2 <= e1 ==> e2 + e1 - e2 = e1:num
-      #|  a * b * c = b * (a * c:num)
-      #|  num_exp n1 (e1 - e2)
-      #|  e2:num
+      #|  num_exp((n2 : Num), (e2 : Num))
+      #|  (e2 : Num) <= (e1 : Num) \226\134\146 e2 + (e1 - e2) == e1
+      #|  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+      #|  num_exp((n1 : Num), (e1 : Num) - (e2 : Num))
+      #|  (e2 : Num)
       #|  EXP
-      #|  num_exp n1 e1
-      #|  ~(n2 = 0) /\\ e2 <= e1 ==>\n                           num_exp n1 e1 DIV num_exp n2 e2 = num_exp n1 (e1 - e2) DIV n2
-      #|  n1:num
-      #|  e1:num
+      #|  num_exp((n1 : Num), (e1 : Num))
+      #|  !((n2 : Num) == 0) && (e2 : Num) <= (e1 : Num) \226\134\146 DIV(num_exp((n1 : Num), e1), num_exp(n2, e2)) == DIV(num_exp(n1, e1 - e2), n2)
+      #|  (n1 : Num)
+      #|  (e1 : Num)
       #|  EXP
-      #|  num_exp n1 e1
-      #|  e1 <= e2 ==> e1 + e2 - e1 = e2:num
-      #|  a * b * c = b * (a * c:num)
-      #|  num_exp n2 (e2 - e1)
-      #|  e1:num
+      #|  num_exp((n1 : Num), (e1 : Num))
+      #|  (e1 : Num) <= (e2 : Num) \226\134\146 e1 + (e2 - e1) == e2
+      #|  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+      #|  num_exp((n2 : Num), (e2 : Num) - (e1 : Num))
+      #|  (e1 : Num)
       #|  EXP
-      #|  num_exp n2 e2
-      #|  ~(n2 = 0) /\\ e1 <= e2 ==>\n                           num_exp n1 e1 DIV num_exp n2 e2 = n1 DIV num_exp n2 (e2 - e1)
-      #|  e1:num
-      #|  e2:num
-      #|  &n
-      #|  forall n e1 e2. ~(n = 0) /\\ e2 <= e1 ==> &(n EXP (e1 - e2)) =\n                              &(n EXP e1) * inv(&(n EXP e2))
-      #|  e2:num
-      #|  e1:num
-      #|  forall n e1 e2. e2 <= e1 ==> &(num_exp n (e1 - e2)) =\n                                  &(num_exp n e1) * inv(&(num_exp 1 e2))
+      #|  num_exp((n2 : Num), (e2 : Num))
+      #|  !((n2 : Num) == 0) && (e1 : Num) <= (e2 : Num) \226\134\146 DIV(num_exp((n1 : Num), e1), num_exp(n2, e2)) == DIV(n1, num_exp(n2, e2 - e1))
+      #|  (e1 : Num)
+      #|  (e2 : Num)
+      #|  real_of_num((n : Num))
+      #|  \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, !(n == 0) && e2 <= e1 \226\134\146 real_of_num(EXP(n, e1 - e2)) == real_of_num(EXP(n, e1)) * inv(real_of_num(EXP(n, e2)))
+      #|  (e2 : Num)
+      #|  (e1 : Num)
+      #|  \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, e2 <= e1 \226\134\146 real_of_num(num_exp(n, e1 - e2)) == real_of_num(num_exp(n, e1)) * inv(real_of_num(num_exp(1, e2)))
       #|Num_exp_theory.num_exp =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\e:num. ((#=:fun(num,fun(num,bool)) ((#num_exp:fun(num,fun(num,num)) n:num) e:num)) ((#*:fun(num,fun(num,num)) n:num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))) e:num)))))))
       #|Num_exp_theory.NUM_EXP_EXP =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\e1:num. (#forall:fun(fun(num,bool),bool) (\e2:num. ((#=:fun(num,fun(num,bool)) ((#num_exp:fun(num,fun(num,num)) ((#num_exp:fun(num,fun(num,num)) n:num) e1:num)) e2:num)) ((#num_exp:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) e1:num) e2:num)))))))))
       #|Num_exp_theory.NUM_EXP_SUM =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\e1:num. (#forall:fun(fun(num,bool),bool) (\e2:num. ((#=:fun(num,fun(num,bool)) ((#num_exp:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) e1:num) e2:num))) ((#*:fun(num,fun(num,num)) ((#num_exp:fun(num,fun(num,num)) n:num) e1:num)) ((#num_exp:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) e2:num)))))))))

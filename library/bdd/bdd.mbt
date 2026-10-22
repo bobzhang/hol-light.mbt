@@ -89,7 +89,7 @@ pub fn bdd_0() -> Int64 {
 ///|
 /// btm_of_int
 fn step_3() -> Unit raise {
-  let true_tm = @parser.parse_term("T")
+  let true_tm = @term_syntax.parse_term("true")
   btm_of_int_c.set(x17 => {
     fn(x18 : Int64) -> @kernel.Term raise {
       ((x15, x16) => btm_of_int_1_l(true_tm, x15, x16))(x17, x18)
@@ -195,21 +195,21 @@ pub fn[
 /// BDD_EXPAND
 fn step_4() -> Unit raise {
   let pth1 = @class.taut(
-    @parser.parse_term("~(if v then b1 else b2) <=> (if v then ~b1 else ~b2)"),
+    @term_syntax.parse_term("!(if (v : Bool) { (b1 : Bool) } else { (b2 : Bool) }) == (if v { !b1 } else { !b2 })"),
   )
   let pth2 = @class.taut(
-    @parser.parse_term("~(if v then b1 else ~b2) <=> (if v then ~b1 else b2)"),
+    @term_syntax.parse_term("!(if (v : Bool) { (b1 : Bool) } else { !(b2 : Bool) }) == (if v { !b1 } else { b2 })"),
   )
   let pth3 = @class.taut(
-    @parser.parse_term("~(if v then ~b1 else b2) <=> (if v then b1 else ~b2)"),
+    @term_syntax.parse_term("!(if (v : Bool) { !(b1 : Bool) } else { (b2 : Bool) }) == (if v { b1 } else { !b2 })"),
   )
   let pth4 = @class.taut(
-    @parser.parse_term("~(if v then ~b1 else ~b2) <=> (if v then b1 else b2)"),
+    @term_syntax.parse_term("!(if (v : Bool) { !(b1 : Bool) } else { !(b2 : Bool) }) == (if v { b1 } else { b2 })"),
   )
-  let neg_tm = @parser.parse_term("~")
-  let v_tm = @parser.parse_term("v:bool")
-  let b1_tm = @parser.parse_term("b1:bool")
-  let b2_tm = @parser.parse_term("b2:bool")
+  let neg_tm = @term_syntax.parse_term("op_tilde")
+  let v_tm = @term_syntax.parse_term("(v : Bool)")
+  let b1_tm = @term_syntax.parse_term("(b1 : Bool)")
+  let b2_tm = @term_syntax.parse_term("(b2 : Bool)")
   bdd_expand_v1_c.set(x30 => {
     fn(x31 : Int64) -> @kernel.Thm raise {
       ((x26, x27) => {
@@ -283,7 +283,7 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] bdd_expand_1_l(
 ///|
 /// BDD_LOOKUP
 fn step_5() -> Unit raise {
-  let pth1 = @class.taut(@parser.parse_term("b <=> (if v then b else b)"))
+  let pth1 = @class.taut(@term_syntax.parse_term("(b : Bool) == (if (v : Bool) { b } else { b })"))
   let pth2 = @class.taut(
     @parser.parse_term(
       "(b <=> (if v then l else r))\n     ==> (~b <=> (if v then ~l else ~r))",
@@ -294,10 +294,10 @@ fn step_5() -> Unit raise {
       "(b <=> (if v then l else ~r))\n     ==> (~b <=> (if v then ~l else r))",
     ),
   )
-  let b_tm = @parser.parse_term("b:bool")
-  let v_tm = @parser.parse_term("v:bool")
-  let l_tm = @parser.parse_term("l:bool")
-  let r_tm = @parser.parse_term("r:bool")
+  let b_tm = @term_syntax.parse_term("(b : Bool)")
+  let v_tm = @term_syntax.parse_term("(v : Bool)")
+  let l_tm = @term_syntax.parse_term("(l : Bool)")
+  let r_tm = @term_syntax.parse_term("(r : Bool)")
   fn bdd_lookup_1(
     x32 : FixedArray[@kernel.Term],
     x33 : (
@@ -434,10 +434,10 @@ pub fn[TA, TB] mk_utable(
 ///|
 /// bdd_and
 fn step_6() -> Unit raise {
-  let pth1 = @class.taut(@parser.parse_term("~T /\\ r1 <=> ~T"))
-  let pth2 = @class.taut(@parser.parse_term("l1 /\\ T <=> l1"))
-  let pth3 = @class.taut(@parser.parse_term("l1 /\\ l1 <=> l1"))
-  let pth4 = @class.taut(@parser.parse_term("~r1 /\\ r1 <=> ~T"))
+  let pth1 = @class.taut(@term_syntax.parse_term("(!true && (r1 : Bool)) == !true"))
+  let pth2 = @class.taut(@term_syntax.parse_term("((l1 : Bool) && true) == l1"))
+  let pth3 = @class.taut(@term_syntax.parse_term("((l1 : Bool) && l1) == l1"))
+  let pth4 = @class.taut(@term_syntax.parse_term("(!(r1 : Bool) && r1) == !true"))
   let pth5 = @class.taut(
     @parser.parse_term(
       "(b1 <=> (if v then l1 else r1))\n     ==> (b2 <=> (if v then l2 else r2))\n         ==> (b3 <=> (if v then l3 else r3))\n             ==> (l1 /\\ l2 <=> l3) ==> (r1 /\\ r2 <=> r3) ==> (b1 /\\ b2 <=> b3)",
@@ -453,17 +453,17 @@ fn step_6() -> Unit raise {
       "(b2 <=> (if v then l2 else r2))\n     ==> (b3 <=> (if v then l3 else r3))\n         ==> (b1 /\\ l2 <=> l3) ==> (b1 /\\ r2 <=> r3) ==> (b1 /\\ b2 <=> b3)",
     ),
   )
-  let pth8 = @class.taut(@parser.parse_term("l1 /\\ r1 <=> r1 /\\ l1"))
-  let b1_tm = @parser.parse_term("b1:bool")
-  let b2_tm = @parser.parse_term("b2:bool")
-  let b3_tm = @parser.parse_term("b3:bool")
-  let l1_tm = @parser.parse_term("l1:bool")
-  let l2_tm = @parser.parse_term("l2:bool")
-  let l3_tm = @parser.parse_term("l3:bool")
-  let r1_tm = @parser.parse_term("r1:bool")
-  let r2_tm = @parser.parse_term("r2:bool")
-  let r3_tm = @parser.parse_term("r3:bool")
-  let v_tm = @parser.parse_term("v:bool")
+  let pth8 = @class.taut(@term_syntax.parse_term("((l1 : Bool) && (r1 : Bool)) == (r1 && l1)"))
+  let b1_tm = @term_syntax.parse_term("(b1 : Bool)")
+  let b2_tm = @term_syntax.parse_term("(b2 : Bool)")
+  let b3_tm = @term_syntax.parse_term("(b3 : Bool)")
+  let l1_tm = @term_syntax.parse_term("(l1 : Bool)")
+  let l2_tm = @term_syntax.parse_term("(l2 : Bool)")
+  let l3_tm = @term_syntax.parse_term("(l3 : Bool)")
+  let r1_tm = @term_syntax.parse_term("(r1 : Bool)")
+  let r2_tm = @term_syntax.parse_term("(r2 : Bool)")
+  let r3_tm = @term_syntax.parse_term("(r3 : Bool)")
+  let v_tm = @term_syntax.parse_term("(v : Bool)")
   let bdd_and_1 = (
     x50 : (
       FixedArray[@kernel.Term],
@@ -1025,7 +1025,7 @@ pub fn[TA, TB, TC, TD] mk_ctable(
 ///|
 /// BDD_TRUE
 fn step_7() -> Unit raise {
-  bdd_true_c.set((bdd_1(), @kernel.refl(@parser.parse_term("T"))))
+  bdd_true_c.set((bdd_1(), @kernel.refl(@term_syntax.parse_term("true"))))
 }
 
 ///|
@@ -1040,7 +1040,7 @@ pub fn bdd_true() -> (Int64, @kernel.Thm) {
 ///|
 /// BDD_FALSE
 fn step_8() -> Unit raise {
-  bdd_false_c.set((bdd_0(), @class.taut(@parser.parse_term("F <=> ~T"))))
+  bdd_false_c.set((bdd_0(), @class.taut(@term_syntax.parse_term("false == !true"))))
 }
 
 ///|
@@ -1056,10 +1056,10 @@ pub fn bdd_false() -> (Int64, @kernel.Thm) {
 /// BDD_VAR
 fn step_9() -> Unit raise {
   let pth = @class.taut(
-    @parser.parse_term("(x <=> (if v then T else ~T)) ==> v = x"),
+    @term_syntax.parse_term("(x : Bool) == (if (v : Bool) { true } else { !true }) → v == x"),
   )
-  let x_tm = @parser.parse_term("x:bool")
-  let v_tm = @parser.parse_term("v:bool")
+  let x_tm = @term_syntax.parse_term("(x : Bool)")
+  let v_tm = @term_syntax.parse_term("(v : Bool)")
   bdd_var_c.set(x98 => {
     let (vtable, utable, ctable) = x98
     fn(x99 : @kernel.Term) -> (Int64, @kernel.Thm) raise {
@@ -1130,9 +1130,9 @@ pub fn bdd_var(
 ///|
 /// BDD_NEG
 fn step_10() -> Unit raise {
-  let neg_tm = @parser.parse_term("~")
-  let x_tm = @parser.parse_term("x:bool")
-  let pth = @class.taut(@parser.parse_term("~ ~ x <=> x"))
+  let neg_tm = @term_syntax.parse_term("op_tilde")
+  let x_tm = @term_syntax.parse_term("(x : Bool)")
+  let pth = @class.taut(@term_syntax.parse_term("!!(x : Bool) == x"))
   bdd_neg_c.set(x100 => {
     let (vtable, utable, ctable) = x100
     fn(x101 : (Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise {
@@ -1203,9 +1203,9 @@ pub fn bdd_neg(
 ///|
 /// BDD_AND
 fn step_11() -> Unit raise {
-  let and_tm = @parser.parse_term("/\\")
-  let t1_tm = @parser.parse_term("t1:bool")
-  let t2_tm = @parser.parse_term("t2:bool")
+  let and_tm = @term_syntax.parse_term("op_slash_bslash")
+  let t1_tm = @term_syntax.parse_term("(t1 : Bool)")
+  let t2_tm = @term_syntax.parse_term("(t2 : Bool)")
   let pth = @bool.specl(@list.List([t1_tm, t2_tm]), @theorems.conj_sym())
   bdd_and_v1_c.set(x105 => {
     let (vtable, utable, ctable) = x105
@@ -1305,7 +1305,7 @@ pub fn bdd_and_v1(
 ///|
 /// BDD_OR
 fn step_12() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("~(~a /\\ ~b) <=> a \\/ b"))
+  let pth = @class.taut(@term_syntax.parse_term("!(!(a : Bool) && !(b : Bool)) == (a || b)"))
   let rew : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(pth)
   let rewl : (@kernel.Term) -> @kernel.Thm raise = @equal.land_conv(rew)
   let rule : (@kernel.Thm) -> @kernel.Thm raise = (x111 : @kernel.Thm) => {
@@ -1378,7 +1378,7 @@ pub fn bdd_or(
 ///|
 /// BDD_IMP
 fn step_13() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("~(a /\\ ~b) <=> a ==> b"))
+  let pth = @class.taut(@term_syntax.parse_term("!((a : Bool) && !(b : Bool)) == (a → b)"))
   let rew : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(pth)
   let rewl : (@kernel.Term) -> @kernel.Thm raise = @equal.land_conv(rew)
   let rule : (@kernel.Thm) -> @kernel.Thm raise = (x117 : @kernel.Thm) => {
@@ -1451,7 +1451,7 @@ pub fn bdd_imp(
 /// BDD_IFF
 fn step_14() -> Unit raise {
   let pth = @class.taut(
-    @parser.parse_term("~(a /\\ ~b) /\\ ~(~a /\\ b) <=> (a <=> b)"),
+    @term_syntax.parse_term("(!((a : Bool) && !(b : Bool)) && !(!a && b)) == (a == b)"),
   )
   let rew : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(pth)
   let rewl : (@kernel.Term) -> @kernel.Thm raise = @equal.land_conv(rew)
@@ -1611,8 +1611,8 @@ pub fn bdd_of_term(
 ///|
 /// BDD_EXISTS
 fn step_15() -> Unit raise {
-  let t148 = @parser.parse_term("(?p:bool. ~T) <=> ~T")
-  let t149 = @parser.parse_term("(?p:bool. T) <=> T")
+  let t148 = @term_syntax.parse_term("(∃ p : Bool, !true) == !true")
+  let t149 = @term_syntax.parse_term("(∃ p : Bool, true) == true")
   let t150 = @parser.parse_term(
     "(?p. if x then q p else r p) <=> (if x then (?p. q p) else (?p. r p))",
   )
@@ -1632,7 +1632,7 @@ fn step_15() -> Unit raise {
           )
         },
         @list.List([
-          @parser.parse_term("(?p. if p then q else r) <=> q \\/ r"),
+          @term_syntax.parse_term("(∃ p : Bool, (if p { (q : Bool) } else { (r : Bool) })) == (q || r)"),
           t150,
           t149,
           t148,

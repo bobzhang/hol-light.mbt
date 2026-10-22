@@ -97,9 +97,9 @@ pub fn list_induct() -> @kernel.Thm {
 ///|
 /// CONTRAPOS
 fn step_4() -> Unit raise {
-  let a = @parser.parse_term("a:bool")
-  let b = @parser.parse_term("b:bool")
-  let pth = @itab.itaut(@parser.parse_term("(a ==> b) ==> (~b ==> ~a)"))
+  let a = @term_syntax.parse_term("(a : Bool)")
+  let b = @term_syntax.parse_term("(b : Bool)")
+  let pth = @itab.itaut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) → !b → !a"))
   contrapos_c.set(fn(x27 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x27
     try {

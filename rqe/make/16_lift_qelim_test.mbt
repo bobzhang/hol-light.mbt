@@ -6716,21 +6716,21 @@ test "Rqe/lift_qelim matches Rqe/lift_qelim.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|Rqe/lift_qelim quotations (15):
-      #|  ~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')
-      #|  ~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r
-      #|  (p <=> q) <=> (p /\\ q) \\/ (~p /\\ ~q)
-      #|  ~(p <=> q) <=> (p /\\ ~q) \\/ (~p /\\ q)
-      #|  p ==> q <=> ~p \\/ q
-      #|  ~(p ==> q) <=> p /\\ ~q
-      #|  ~(p \\/ q) <=> ~p /\\ ~q
-      #|  ~(p /\\ q) <=> ~p \\/ ~q
-      #|  ~(~p) <=> p
-      #|  (a \\/ b) \\/ c <=> a \\/ b \\/ c
-      #|  forall P. (forall x. P x) <=> ~ (?x. ~ P x)
-      #|  (~)
-      #|  (\\/)
-      #|  T
-      #|  F
+      #|  !existsunique((x : _) => (P : (_) -> Bool)(x)) == ((\226\136\128 x : _, !P(x)) || (\226\136\131 x : _, \226\136\131 x' : _, P(x) && P(x') && !(x == x')))
+      #|  !((p : Bool) && (q : Bool) || !p && (r : Bool)) == (p && !q || !p && !r)
+      #|  ((p : Bool) == (q : Bool)) == (p && q || !p && !q)
+      #|  !((p : Bool) == (q : Bool)) == (p && !q || !p && q)
+      #|  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+      #|  !((p : Bool) \226\134\146 (q : Bool)) == (p && !q)
+      #|  !((p : Bool) || (q : Bool)) == (!p && !q)
+      #|  !((p : Bool) && (q : Bool)) == (!p || !q)
+      #|  !!(p : Bool) == p
+      #|  (((a : Bool) || (b : Bool)) || (c : Bool)) == (a || b || c)
+      #|  \226\136\128 P : (_) -> Bool, (\226\136\128 x : _, P(x)) == !(\226\136\131 x : _, !P(x))
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  true
+      #|  false
       #|OR_ASSOC =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) ((#\/:fun(bool,fun(bool,bool)) b:bool) c:bool)))
       #|forall_thm =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\P:fun('?1,bool). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('?1,bool),bool) (\x:'?1. (P:fun('?1,bool) x:'?1)))) (#~:fun(bool,bool) (#?:fun(fun('?1,bool),bool) (\x:'?1. (#~:fun(bool,bool) (P:fun('?1,bool) x:'?1))))))))
       #|types = metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

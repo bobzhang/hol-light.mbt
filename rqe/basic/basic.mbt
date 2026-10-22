@@ -3,7 +3,7 @@
 ///|
 /// dest_beq
 fn step_1() -> Unit raise {
-  let t1 = @parser.parse_term("(<=>)")
+  let t1 = @term_syntax.parse_term("(op_eq : (Bool, Bool) -> Bool)")
   dest_beq_c.set((x2 : @kernel.Term) => @basics.dest_binop(t1, x2))
 }
 
@@ -19,7 +19,7 @@ pub fn dest_beq(x : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 ///|
 /// t_tm
 fn step_2() -> Unit raise {
-  t_tm_c.set(@parser.parse_term("T"))
+  t_tm_c.set(@term_syntax.parse_term("true"))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn t_tm() -> @kernel.Term {
 ///|
 /// f_tm
 fn step_3() -> Unit raise {
-  f_tm_c.set(@parser.parse_term("F"))
+  f_tm_c.set(@term_syntax.parse_term("false"))
 }
 
 ///|
@@ -55,7 +55,7 @@ fn step_4() -> Unit raise {
 ///|
 /// NEQ
 fn step_5() -> Unit raise {
-  neq_c.set(@pair.new_definition(@parser.parse_term("x <> y <=> ~(x = y)")))
+  neq_c.set(@pair.new_definition(@term_syntax.parse_term("(op_lt_gt : (_, _) -> Bool)((x : _), (y : _)) == !(x == y)")))
 }
 
 ///|
@@ -70,7 +70,7 @@ pub fn neq() -> @kernel.Thm {
 ///|
 /// nqt
 fn step_6() -> Unit raise {
-  nqt_c.set(@parser.parse_term("(<>):A -> A -> bool"))
+  nqt_c.set(@term_syntax.parse_term("(op_lt_gt : (A, A) -> Bool)"))
 }
 
 ///|
@@ -99,7 +99,7 @@ pub fn mk_neq(x3 : @kernel.Term, x4 : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// IMP_AND_THM
 fn step_7() -> Unit raise {
-  imp_and_thm_c.set(@class.taut(@parser.parse_term("(p ==> q ==> r) <=> (p /\\ q ==> r)")))
+  imp_and_thm_c.set(@class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool) → (r : Bool)) == (p && q → r)")))
 }
 
 ///|
@@ -114,7 +114,7 @@ pub fn imp_and_thm() -> @kernel.Thm {
 ///|
 /// AND_IMP_THM
 fn step_8() -> Unit raise {
-  and_imp_thm_c.set(@class.taut(@parser.parse_term("(p /\\ q ==> r) <=> (p ==> q ==> r)")))
+  and_imp_thm_c.set(@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool) → (r : Bool)) == (p → q → r)")))
 }
 
 ///|

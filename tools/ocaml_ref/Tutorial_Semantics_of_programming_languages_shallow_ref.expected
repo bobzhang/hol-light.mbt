@@ -12638,51 +12638,51 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..1..solved at 4
 Tutorial/Semantics_of_programming_languages_shallow quotations (45):
-  Assign (f:S->S) (q:S->bool) = q o f
+  (Assign : ((S) -> S, (S) -> Bool, S) -> Bool)((f : (S) -> S), (q : (S) -> Bool)) == o(q, f)
   (c1:(S->bool)->(S->bool)) ;; (c2:(S->bool)->(S->bool)) = c1 o c2
-  If e (c:(S->bool)->(S->bool)) q = {s | if e s then c q s else q s}
-  Ite e (c1:(S->bool)->(S->bool)) c2 q =\n    {s | if e s then c1 q s else c2 q s}
+  (If : ((S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | if e(s) { c(q, s) } else { q(s) }}
+  (Ite : ((S) -> Bool, ((S) -> Bool, S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c1 : ((S) -> Bool, S) -> Bool), (c2 : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | if e(s) { c1(q, s) } else { c2(q, s) }}
   forall q s. If e (c ;; while e c) q s ==> while e c q s
-  While e c q =\n    {s | forall w. (forall s:S. (if e(s) then c w s else q s) ==> w s) ==> w s}
-  monotonic c <=> forall q q'. q SUBSET q' ==> (c q) SUBSET (c q')
-  monotonic (Assign f)
-  monotonic c ==> monotonic (If e c)
-  monotonic c1 /\\ monotonic c2 ==> monotonic (Ite e c1 c2)
+  (While : ((S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | \226\136\128 w : (S) -> Bool, (\226\136\128 s : S, (if e(s) { c(w, s) } else { q(s) }) \226\134\146 w(s)) \226\134\146 w(s)}
+  (monotonic : (((_) -> Bool, _) -> Bool) -> Bool)((c : ((_) -> Bool, _) -> Bool)) == (\226\136\128 q : (_) -> Bool, \226\136\128 q' : (_) -> Bool, SUBSET(q, q') \226\134\146 SUBSET(c(q), c(q')))
+  monotonic(Assign((f : (_) -> _)))
+  monotonic((c : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(If((e : (_) -> Bool), c))
+  monotonic((c1 : ((_) -> Bool, _) -> Bool)) && monotonic((c2 : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(Ite((e : (_) -> Bool), c1, c2))
   monotonic c1 /\\ monotonic c2 ==> monotonic (c1 ;; c2)
-  monotonic c ==> monotonic(While e c)
-  forall s:S. (if e s then c w s else q s) ==> w s
+  monotonic((c : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(While((e : (_) -> Bool), c))
+  \226\136\128 s : S, (if (e : (S) -> Bool)(s) { (c : ((S) -> Bool, S) -> Bool)((w : (S) -> Bool), s) } else { (q : (S) -> Bool)(s) }) \226\134\146 w(s)
   forall e c q:S->bool.\n    monotonic c\n    ==> (forall s. If e (c ;; While e c) q s ==> While e c q s) /\\\n        (forall w'. (forall s. If e (c ;; (\\q. w')) q s ==> w' s)\n              ==> (forall a. While e c q a ==> w' a)) /\\\n        (forall s. While e c q s <=> If e (c ;; While e c) q s)
   forall e c. monotonic c ==> (While e c = If e (c ;; While e c))
-  correct p c q <=> p SUBSET (c q)
-  forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q
-  forall p c q q'. monotonic c /\\ correct p c q' /\\ q' SUBSET q ==> correct p c q
-  forall p f q. (p SUBSET (q o f)) ==> correct p (Assign f) q
+  (correct : ((_) -> Bool, (_, _) -> Bool, _) -> Bool)((p : (_) -> Bool), (c : (_, _) -> Bool), (q : _)) == SUBSET(p, c(q))
+  \226\136\128 p : (_) -> Bool, \226\136\128 p' : (_) -> Bool, \226\136\128 c : (_, _) -> Bool, \226\136\128 q : _, SUBSET(p, p') && correct(p', c, q) \226\134\146 correct(p, c, q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 c : ((_) -> Bool, _) -> Bool, \226\136\128 q : (_) -> Bool, \226\136\128 q' : (_) -> Bool, monotonic(c) && correct(p, c, q') && SUBSET(q', q) \226\134\146 correct(p, c, q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 f : (_) -> _, \226\136\128 q : (_) -> Bool, SUBSET(p, o(q, f)) \226\134\146 correct(p, Assign(f), q)
   forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; c2) q
-  forall p e c1 c2 q.\n       correct (p INTER e) c1 q /\\ correct (p INTER (UNIV DIFF e)) c2 q\n       ==> correct p (Ite e c1 c2) q
-  forall p e c q.\n       correct (p INTER e) c q /\\ p INTER (UNIV DIFF e) SUBSET q\n       ==> correct p (If e c) q
-  s:S
-  s:S
-  s:S
-  forall s:S. invariant s ==> While e c q s
+  \226\136\128 p : (_) -> Bool, \226\136\128 e : (_) -> Bool, \226\136\128 c1 : ((_) -> Bool, _) -> Bool, \226\136\128 c2 : ((_) -> Bool, _) -> Bool, \226\136\128 q : (_) -> Bool, correct(INTER(p, e), c1, q) && correct(INTER(p, DIFF(UNIV, e)), c2, q) \226\134\146 correct(p, Ite(e, c1, c2), q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 e : (_) -> Bool, \226\136\128 c : ((_) -> Bool, _) -> Bool, \226\136\128 q : (_) -> Bool, correct(INTER(p, e), c, q) && SUBSET(INTER(p, DIFF(UNIV, e)), q) \226\134\146 correct(p, If(e, c), q)
+  (s : S)
+  (s : S)
+  (s : S)
+  \226\136\128 s : S, (invariant : (S) -> Bool)(s) \226\134\146 While((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool), s)
   forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q
   assert (p:S->bool) (q:S->bool) = q
-  variant ((<<):S->S->bool) (q:S->bool) = q
+  (variant : ((S, S) -> Bool, (S) -> Bool, S) -> Bool)((op_lt_lt : (S, S) -> Bool), (q : (S) -> Bool)) == q
   forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; assert r ;; c2) q
   forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q
-  monotonic (assert p)
-  monotonic (variant p)
+  monotonic(op_assert((p : (_) -> Bool)))
+  monotonic(variant((p : (_, _) -> Bool)))
   correct\n    (\\(m,n,x,y). T)\n    (Assign (\\(m,n,x,y). m,n,m,n) ;;         // x,y := m,n\n     assert (\\(m,n,x,y). x = m /\\ y = n) ;;\n     While (\\(m,n,x,y). ~(x = 0 \\/ y = 0))\n      (assert (\\(m,n,x,y). gcd(x,y) = gcd(m,n)) ;;\n       variant(MEASURE(\\(m,n,x,y). x + y)) ;;\n       Ite (\\(m,n,x,y). x < y)\n           (Assign (\\(m,n,x,y). m,n,x,y - x))\n           (Assign (\\(m,n,x,y). m,n,x - y,y))) ;;\n     assert (\\(m,n,x,y). (x = 0 \\/ y = 0) /\\ gcd(x,y) = gcd(m,n)) ;;\n     If (\\(m,n,x,y). x = 0) (Assign (\\(m,n,x,y). (m,n,y,y))))\n  (\\(m,n,x,y). gcd(m,n) = x)
-  y:num
-  x:num
-  n:num
-  m:num
-  c2 refines c1 <=> forall q. c1(q) SUBSET c2(q)
-  forall c. c refines c
-  forall c1 c2 c3. c3 refines c2 /\\ c2 refines c1 ==> c3 refines c1
-  correct p c1 q /\\ c2 refines c1 ==> correct p c2 q
-  c' refines c ==> While e c' refines While e c
-  specification(p,q) r = if q SUBSET r then p else {}
-  c refines specification(p,q) ==> correct p c q
+  (y : Num)
+  (x : Num)
+  (n : Num)
+  (m : Num)
+  (refines : ((_, _) -> Bool, (_, _) -> Bool) -> Bool)((c2 : (_, _) -> Bool), (c1 : (_, _) -> Bool)) == (\226\136\128 q : _, SUBSET(c1(q), c2(q)))
+  \226\136\128 c : (_, _) -> Bool, refines(c, c)
+  \226\136\128 c1 : (_, _) -> Bool, \226\136\128 c2 : (_, _) -> Bool, \226\136\128 c3 : (_, _) -> Bool, refines(c3, c2) && refines(c2, c1) \226\134\146 refines(c3, c1)
+  correct((p : (_) -> Bool), (c1 : (_, _) -> Bool), (q : _)) && refines((c2 : (_, _) -> Bool), c1) \226\134\146 correct(p, c2, q)
+  refines((c' : ((_) -> Bool, _) -> Bool), (c : ((_) -> Bool, _) -> Bool)) \226\134\146 refines(While((e : (_) -> Bool), c'), While(e, c))
+  (specification : (((_) -> Bool, (_) -> Bool), (_) -> Bool, _) -> Bool)(((p : (_) -> Bool), (q : (_) -> Bool)), (r : (_) -> Bool)) == (if SUBSET(q, r) { p } else { {} })
+  refines((c : ((_) -> Bool, _) -> Bool), specification(((p : (_) -> Bool), (q : (_) -> Bool)))) \226\134\146 correct(p, c, q)
 assign =  |- (#forall:fun(fun(fun('S,bool),bool),bool) (\q:fun('S,bool). (#forall:fun(fun(fun('S,'S),bool),bool) (\f:fun('S,'S). ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) ((#Assign:fun(fun('S,'S),fun(fun('S,bool),fun('S,bool))) f:fun('S,'S)) q:fun('S,bool))) ((#o:fun(fun('S,bool),fun(fun('S,'S),fun('S,bool))) q:fun('S,bool)) f:fun('S,'S)))))))
 sequence =  |- (#forall:fun(fun(fun(fun('S,bool),fun('S,bool)),bool),bool) (\c1:fun(fun('S,bool),fun('S,bool)). (#forall:fun(fun(fun(fun('S,bool),fun('S,bool)),bool),bool) (\c2:fun(fun('S,bool),fun('S,bool)). ((#=:fun(fun(fun('S,bool),fun('S,bool)),fun(fun(fun('S,bool),fun('S,bool)),bool)) ((#;;:fun(fun(fun('S,bool),fun('S,bool)),fun(fun(fun('S,bool),fun('S,bool)),fun(fun('S,bool),fun('S,bool)))) c1:fun(fun('S,bool),fun('S,bool))) c2:fun(fun('S,bool),fun('S,bool)))) ((#o:fun(fun(fun('S,bool),fun('S,bool)),fun(fun(fun('S,bool),fun('S,bool)),fun(fun('S,bool),fun('S,bool)))) c1:fun(fun('S,bool),fun('S,bool))) c2:fun(fun('S,bool),fun('S,bool))))))))
 if_def =  |- (#forall:fun(fun(fun('S,bool),bool),bool) (\e:fun('S,bool). (#forall:fun(fun(fun(fun('S,bool),fun('S,bool)),bool),bool) (\c:fun(fun('S,bool),fun('S,bool)). (#forall:fun(fun(fun('S,bool),bool),bool) (\q:fun('S,bool). ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) (((#If:fun(fun('S,bool),fun(fun(fun('S,bool),fun('S,bool)),fun(fun('S,bool),fun('S,bool)))) e:fun('S,bool)) c:fun(fun('S,bool),fun('S,bool))) q:fun('S,bool))) (#GSPEC:fun(fun('S,bool),fun('S,bool)) (\GEN%PVAR%1:'S. (#?:fun(fun('S,bool),bool) (\s:'S. (((#SETSPEC:fun('S,fun(bool,fun('S,bool))) GEN%PVAR%1:'S) (((#COND:fun(bool,fun(bool,fun(bool,bool))) (e:fun('S,bool) s:'S)) ((c:fun(fun('S,bool),fun('S,bool)) q:fun('S,bool)) s:'S)) (q:fun('S,bool) s:'S))) s:'S))))))))))))

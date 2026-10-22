@@ -3,7 +3,7 @@
 ///|
 /// DISJ_IMP
 fn step_1() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("forall t1 t2. t1 \\/ t2 ==> ~t1 ==> t2"))
+  let pth = @class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, t1 || t2 → !t1 → t2"))
   disj_imp_c.set(fn(x1 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x1
     try {
@@ -28,7 +28,7 @@ pub fn disj_imp(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// IMP_ELIM
 fn step_2() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("forall t1 t2. (t1 ==> t2) ==> ~t1 \\/ t2"))
+  let pth = @class.taut(@term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 → t2) → !t1 || t2"))
   imp_elim_c.set(fn(x2 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x2
     try {

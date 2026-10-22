@@ -749,408 +749,408 @@ test "arith matches arith.ml" {
       #|0..0..0..1..2..3..7..14..22..33..57..84..141..221..305..441..638..849..solved at 1042
       #|0..0..0..1..2..3..4..5..6..11..16..21..40..59..78..103..128..153..192..231..270..358..446..534..650..766..882..1036..1190..1344..solved at 3172
       #|arith quotations (790):
-      #|  (PRE 0 = 0) /\\\n  (forall n. PRE (SUC n) = n)
+      #|  (PRE : (Num) -> Num)(0) == 0 && (\226\136\128 n : Num, PRE(SUC(n)) == n)
       #|  (forall n. 0 + n = n) /\\\n  (forall m n. (SUC m) + n = SUC(m + n))
-      #|  forall m. m + 0 = m
-      #|  forall m n. m + (SUC n) = SUC(m + n)
+      #|  \226\136\128 m : Num, m + 0 == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m + SUC(n) == SUC(m + n)
       #|  (forall n. 0 + n = n) /\\\n   (forall m. m + 0 = m) /\\\n   (forall m n. (SUC m) + n = SUC(m + n)) /\\\n   (forall m n. m + (SUC n) = SUC(m + n))
-      #|  forall m n. m + n = n + m
-      #|  forall m n p. m + (n + p) = (m + n) + p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m + n == n + m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m + (n + p) == m + n + p
       #|  (m + n = n + m) /\\\n   ((m + n) + p = m + (n + p)) /\\\n   (m + (n + p) = n + (m + p))
-      #|  forall m n. (m + n = 0) <=> (m = 0) /\\ (n = 0)
-      #|  forall m n p. (m + n = m + p) <=> (n = p)
-      #|  forall m n p. (m + p = n + p) <=> (m = n)
-      #|  forall m n. (m + n = m) <=> (n = 0)
-      #|  forall m n. (m + n = n) <=> (m = 0)
-      #|  forall n. BIT0 n = n + n
-      #|  forall n. BIT1 n = SUC(n + n)
-      #|  forall n. NUMERAL (BIT0 n) = NUMERAL n + NUMERAL n
-      #|  forall n. NUMERAL (BIT1 n) = SUC(NUMERAL n + NUMERAL n)
-      #|  1 = SUC 0
-      #|  2 = SUC 1
-      #|  forall m. SUC m = m + 1
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m + n == 0) == (m == 0 && n == 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + n == m + p) == (n == p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + p == n + p) == (m == n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m + n == m) == (n == 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m + n == n) == (m == 0)
+      #|  \226\136\128 n : Num, BIT0(n) == n + n
+      #|  \226\136\128 n : Num, BIT1(n) == SUC(n + n)
+      #|  \226\136\128 n : Num, NUMERAL(BIT0(n)) == NUMERAL(n) + NUMERAL(n)
+      #|  \226\136\128 n : Num, NUMERAL(BIT1(n)) == SUC(NUMERAL(n) + NUMERAL(n))
+      #|  1 == SUC(0)
+      #|  2 == SUC(1)
+      #|  \226\136\128 m : Num, SUC(m) == m + 1
       #|  (forall n. 0 * n = 0) /\\\n  (forall m n. (SUC m) * n = (m * n) + n)
-      #|  forall m. m * 0 = 0
-      #|  forall m n. m * (SUC n) = m + (m * n)
+      #|  \226\136\128 m : Num, m * 0 == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m * SUC(n) == m + m * n
       #|  (forall n. 0 * n = 0) /\\\n   (forall m. m * 0 = 0) /\\\n   (forall n. 1 * n = n) /\\\n   (forall m. m * 1 = m) /\\\n   (forall m n. (SUC m) * n = (m * n) + n) /\\\n   (forall m n. m * (SUC n) = m + (m * n))
-      #|  forall m n. m * n = n * m
-      #|  forall m n p. m * (n + p) = (m * n) + (m * p)
-      #|  forall m n p. (m + n) * p = (m * p) + (n * p)
-      #|  forall m n p. m * (n * p) = (m * n) * p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m * n == n * m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * (n + p) == m * n + m * p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + n) * p == m * p + n * p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * (n * p) == m * n * p
       #|  (m * n = n * m) /\\\n   ((m * n) * p = m * (n * p)) /\\\n   (m * (n * p) = n * (m * p))
-      #|  forall m n. (m * n = 0) <=> (m = 0) \\/ (n = 0)
-      #|  forall m n p. (m * n = m * p) <=> (m = 0) \\/ (n = p)
-      #|  forall m n p. (m * p = n * p) <=> (m = n) \\/ (p = 0)
-      #|  forall n. 2 * n = n + n
-      #|  forall m n. (m * n = 1) <=> (m = 1) /\\ (n = 1)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m * n == 0) == (m == 0 || n == 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m * n == m * p) == (m == 0 || n == p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m * p == n * p) == (m == n || p == 0)
+      #|  \226\136\128 n : Num, 2 * n == n + n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m * n == 1) == (m == 1 && n == 1)
       #|  (forall m. m EXP 0 = 1) /\\\n  (forall m n. m EXP (SUC n) = m * (m EXP n))
-      #|  forall m n. (m EXP n = 0) <=> (m = 0) /\\ ~(n = 0)
-      #|  forall x n. x EXP n = 1 <=> x = 1 \\/ n = 0
-      #|  forall n. 0 EXP n = if n = 0 then 1 else 0
-      #|  forall m n p. m EXP (n + p) = (m EXP n) * (m EXP p)
-      #|  forall n. 1 EXP n = 1
-      #|  forall n. n EXP 1 = n
-      #|  forall n. n EXP 2 = n * n
-      #|  forall p m n. (m * n) EXP p = m EXP p * n EXP p
-      #|  forall m n p. m EXP (n * p) = (m EXP n) EXP p
-      #|  forall x m n. (x EXP m) EXP n = x EXP (m * n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (EXP(m, n) == 0) == (m == 0 && !(n == 0))
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, (EXP(x, n) == 1) == (x == 1 || n == 0)
+      #|  \226\136\128 n : Num, EXP(0, n) == (if n == 0 { 1 } else { 0 })
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, EXP(m, n + p) == EXP(m, n) * EXP(m, p)
+      #|  \226\136\128 n : Num, EXP(1, n) == 1
+      #|  \226\136\128 n : Num, EXP(n, 1) == n
+      #|  \226\136\128 n : Num, EXP(n, 2) == n * n
+      #|  \226\136\128 p : Num, \226\136\128 m : Num, \226\136\128 n : Num, EXP(m * n, p) == EXP(m, p) * EXP(n, p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, EXP(m, n * p) == EXP(EXP(m, n), p)
+      #|  \226\136\128 x : Num, \226\136\128 m : Num, \226\136\128 n : Num, EXP(EXP(x, m), n) == EXP(x, m * n)
       #|  (forall m. (m <= 0) <=> (m = 0)) /\\\n  (forall m n. (m <= SUC n) <=> (m = SUC n) \\/ (m <= n))
       #|  (forall m. (m < 0) <=> F) /\\\n  (forall m n. (m < SUC n) <=> (m = n) \\/ (m < n))
-      #|  m >= n <=> n <= m
-      #|  m > n <=> n < m
-      #|  forall m n. MAX m n = if m <= n then n else m
-      #|  forall m n. MIN m n = if m <= n then m else n
-      #|  forall m n. (SUC m <= n) <=> (m < n)
-      #|  forall m n. (m < SUC n) <=> (m <= n)
-      #|  forall m n. (SUC m <= SUC n) <=> (m <= n)
-      #|  forall m n. (SUC m < SUC n) <=> (m < n)
-      #|  forall n. 0 <= n
-      #|  forall n. 0 < SUC n
-      #|  forall n. n <= n
-      #|  forall n. ~(n < n)
-      #|  forall m n:num. m < n ==> ~(m = n)
-      #|  forall m n. (m <= n /\\ n <= m) <=> (m = n)
-      #|  forall m n. ~(m < n /\\ n < m)
-      #|  forall m n. ~(m <= n /\\ n < m)
-      #|  forall m n. ~(m < n /\\ n <= m)
-      #|  forall m n p. m <= n /\\ n <= p ==> m <= p
-      #|  forall m n p. m < n /\\ n < p ==> m < p
-      #|  forall m n p. m <= n /\\ n < p ==> m < p
-      #|  forall m n p. m < n /\\ n <= p ==> m < p
-      #|  forall m n. m <= n \\/ n <= m
-      #|  forall m n. (m < n) \\/ (n < m) \\/ (m = n)
-      #|  forall m n. m <= n \\/ n < m
-      #|  forall m n. m < n \\/ n <= m
-      #|  forall m n. (m <= n) <=> (m < n) \\/ (m = n)
-      #|  forall m n. (m < n) <=> (m <= n) /\\ ~(m = n)
-      #|  forall m n. ~(m <= n) <=> (n < m)
-      #|  forall m n. ~(m < n) <=> n <= m
-      #|  forall m n. m < n ==> m <= n
-      #|  forall m n. (m = n) ==> m <= n
-      #|  forall n. 0 < n <=> ~(n = 0)
+      #|  (op_gt_eq : (Num, Num) -> Bool)((m : Num), (n : Num)) == (n <= m)
+      #|  (op_gt : (Num, Num) -> Bool)((m : Num), (n : Num)) == (n < m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (MAX : (Num, Num) -> Num)(m, n) == (if m <= n { n } else { m })
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (MIN : (Num, Num) -> Num)(m, n) == (if m <= n { m } else { n })
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (SUC(m) <= n) == (m < n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m < SUC(n)) == (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (SUC(m) <= SUC(n)) == (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (SUC(m) < SUC(n)) == (m < n)
+      #|  \226\136\128 n : Num, 0 <= n
+      #|  \226\136\128 n : Num, 0 < SUC(n)
+      #|  \226\136\128 n : Num, n <= n
+      #|  \226\136\128 n : Num, !(n < n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 !(m == n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m <= n && n <= m) == (m == n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m < n && n < m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m <= n && n < m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m < n && n <= m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n && n <= p \226\134\146 m <= p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m < n && n < p \226\134\146 m < p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n && n < p \226\134\146 m < p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m < n && n <= p \226\134\146 m < p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n || n <= m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n || n < m || m == n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n || n < m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n || n <= m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m <= n) == (m < n || m == n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m < n) == (m <= n && !(m == n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m <= n) == (n < m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m < n) == (n <= m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 m <= n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m == n \226\134\146 m <= n
+      #|  \226\136\128 n : Num, (0 < n) == !(n == 0)
       #|  (forall n. ~(n = 0) ==> 0 < n) /\\\n   (forall n. ~(n = 0) ==> 1 <= n) /\\\n   (forall n. 0 < n ==> ~(n = 0)) /\\\n   (forall n. 0 < n ==> 1 <= n) /\\\n   (forall n. 1 <= n ==> 0 < n) /\\\n   (forall n. 1 <= n ==> ~(n = 0))
-      #|  SUC d
-      #|  d:num
+      #|  SUC((d : Num))
+      #|  (d : Num)
       #|  0
-      #|  forall m n. (m <= n) <=> (?d. n = m + d)
-      #|  SUC d
-      #|  d:num
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m <= n) == (\226\136\131 d : Num, n == m + d)
+      #|  SUC((d : Num))
+      #|  (d : Num)
       #|  0
-      #|  forall m n. (m < n) <=> (?d. n = m + SUC d)
-      #|  forall m n. m <= m + n
-      #|  forall m n. n <= m + n
-      #|  forall m n. (m < m + n) <=> (0 < n)
-      #|  forall m n. (n < m + n) <=> (0 < m)
-      #|  forall m n p. (m + n) <= (m + p) <=> n <= p
-      #|  forall m n p. (m + p) <= (n + p) <=> (m <= n)
-      #|  forall m n p. (m + n) < (m + p) <=> n < p
-      #|  forall m n p. (m + p) < (n + p) <=> (m < n)
-      #|  a + b
-      #|  b:num
-      #|  a:num
-      #|  forall m n p q. m <= p /\\ n <= q ==> m + n <= p + q
-      #|  a + b
-      #|  b:num
-      #|  a:num
-      #|  forall m n p q. m <= p /\\ n < q ==> m + n < p + q
-      #|  forall m n p q. m < p /\\ n <= q ==> m + n < p + q
-      #|  forall m n p q. m < p /\\ n < q ==> m + n < p + q
-      #|  forall m n. (0 < m * n) <=> (0 < m) /\\ (0 < n)
-      #|  a * p + m * b + a * b
-      #|  b:num
-      #|  a:num
-      #|  forall m n p q. m <= n /\\ p <= q ==> m * p <= n * q
-      #|  forall m n p. ~(m = 0) /\\ n < p ==> m * n < m * p
-      #|  forall m n p. (m * n) <= (m * p) <=> (m = 0) \\/ n <= p
-      #|  forall m n p. (m * p) <= (n * p) <=> (m <= n) \\/ (p = 0)
-      #|  forall m n p. (m * n) < (m * p) <=> ~(m = 0) /\\ n < p
-      #|  forall m n p. (m * p) < (n * p) <=> (m < n) /\\ ~(p = 0)
-      #|  m < n
-      #|  n * p
-      #|  forall m n p q. m < n /\\ p < q ==> m * p < n * q
-      #|  forall n. n <= n * n
-      #|  forall n. n < 2 EXP n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m < n) == (\226\136\131 d : Num, n == m + SUC(d))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= m + n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, n <= m + n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m < m + n) == (0 < n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (n < m + n) == (0 < m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + n <= m + p) == (n <= p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + p <= n + p) == (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + n < m + p) == (n < p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m + p < n + p) == (m < n)
+      #|  (a : Num) + (b : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m <= p && n <= q \226\134\146 m + n <= p + q
+      #|  (a : Num) + (b : Num)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m <= p && n < q \226\134\146 m + n < p + q
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m < p && n <= q \226\134\146 m + n < p + q
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m < p && n < q \226\134\146 m + n < p + q
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (0 < m * n) == (0 < m && 0 < n)
+      #|  (a : Num) * (p : Num) + ((m : Num) * (b : Num) + a * b)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m <= n && p <= q \226\134\146 m * p <= n * q
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, !(m == 0) && n < p \226\134\146 m * n < m * p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m * n <= m * p) == (m == 0 || n <= p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m * p <= n * p) == (m <= n || p == 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m * n < m * p) == (!(m == 0) && n < p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m * p < n * p) == (m < n && !(p == 0))
+      #|  (m : Num) < (n : Num)
+      #|  (n : Num) * (p : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m < n && p < q \226\134\146 m * p < n * q
+      #|  \226\136\128 n : Num, n <= n * n
+      #|  \226\136\128 n : Num, n < EXP(2, n)
       #|  (forall m n. P m n <=> P n m) /\\ (forall m n. m <= n ==> P m n) ==> forall m n. P m n
       #|  (forall m. P m m) /\\ (forall m n. P m n <=> P n m) /\\ (forall m n. m < n ==> P m n)\n   ==> forall m y. P m y
       #|  forall P. (forall x y z. P x y z ==> P y x z /\\ P x z y) /\\\n       (forall x y z. x <= y /\\ y <= z ==> P x y z)\n       ==> forall x y z. P x y z
-      #|  \\n. forall m. m < n ==> P m
-      #|  forall P. (forall n. (forall m. m < n ==> P m) ==> P n) ==> forall n. P n
-      #|  forall P. (?n. P n) <=> (?n. P(n) /\\ forall m. m < n ==> ~P(m))
-      #|  m:num
-      #|  p = SUC m
-      #|  p:num
-      #|  p:num
-      #|  m:num
-      #|  m:num
-      #|  m:num
-      #|  (a /\\ b ==> c /\\ a) <=> (a /\\ b ==> c)
-      #|  m:num
-      #|  a:num
+      #|  (n : Num) => \226\136\128 m : Num, m < n \226\134\146 (P : (Num) -> Bool)(m)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 n : Num, (\226\136\128 m : Num, m < n \226\134\146 P(m)) \226\134\146 P(n)) \226\134\146 (\226\136\128 n : Num, P(n))
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\131 n : Num, P(n)) == (\226\136\131 n : Num, P(n) && (\226\136\128 m : Num, m < n \226\134\146 !P(m)))
+      #|  (m : Num)
+      #|  (p : Num) == SUC((m : Num))
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  ((a : Bool) && (b : Bool) \226\134\146 (c : Bool) && a) == (a && b \226\134\146 c)
+      #|  (m : Num)
+      #|  (a : Num)
       #|  forall P. (?x. P x) /\\ (?M. forall x. P x ==> x <= M) <=>\n       ?m. P m /\\ (forall x. P x ==> x <= m)
-      #|  m:num
+      #|  (m : Num)
       #|  (forall m n:num. m <= n ==> R m n) <=> (forall m d. R m (m + d))
       #|  forall P. (forall m:num. P m m) /\\\n       (forall m n. m <= n /\\ P m n ==> P m (SUC n))\n       ==> (forall m n. m <= n ==> P m n)
-      #|  ~(~p /\\ q) <=> q ==> p
-      #|  ~p ==> q <=> ~q ==> p
-      #|  q /\\ ~r ==> (p /\\ q <=> r) ==> ~p
-      #|  (forall x. P x) <=> ~(?x. ~P x)
+      #|  !(!(p : Bool) && (q : Bool)) == (q \226\134\146 p)
+      #|  (!(p : Bool) \226\134\146 (q : Bool)) == (!q \226\134\146 p)
+      #|  (q : Bool) && !(r : Bool) \226\134\146 ((p : Bool) && q) == r \226\134\146 !p
+      #|  (\226\136\128 x : _, (P : (_) -> Bool)(x)) == !(\226\136\131 x : _, !P(x))
       #|  forall(P:num->bool) m.\n        (forall n. m <= n ==> P n) /\\\n        (forall n. n < m /\\ P(n + 1) ==> P n)\n        ==> forall n. P n
       #|  (EVEN 0 <=> T) /\\\n   (forall n. EVEN (SUC n) <=> ~(EVEN n))
       #|  (ODD 0 <=> F) /\\\n   (forall n. ODD (SUC n) <=> ~(ODD n))
-      #|  forall n. ~(EVEN n) <=> ODD n
-      #|  forall n. ~(ODD n) <=> EVEN n
-      #|  forall n. EVEN n \\/ ODD n
-      #|  ~(p /\\ ~p)
-      #|  forall n. ~(EVEN n /\\ ODD n)
-      #|  p:num
-      #|  n:num
-      #|  p:num
-      #|  forall m n. EVEN(m + n) <=> (EVEN m <=> EVEN n)
-      #|  p:num
-      #|  n:num
-      #|  p:num
-      #|  forall m n. EVEN(m * n) <=> EVEN(m) \\/ EVEN(n)
-      #|  forall m n. EVEN(m EXP n) <=> EVEN(m) /\\ ~(n = 0)
-      #|  forall m n. ODD(m + n) <=> ~(ODD m <=> ODD n)
-      #|  forall m n. ODD(m * n) <=> ODD(m) /\\ ODD(n)
-      #|  forall m n. ODD(m EXP n) <=> ODD(m) \\/ (n = 0)
-      #|  forall n. EVEN(2 * n)
-      #|  forall n. ODD(SUC(2 * n))
-      #|  m:num
-      #|  SUC m
-      #|  m:num
+      #|  \226\136\128 n : Num, !EVEN(n) == ODD(n)
+      #|  \226\136\128 n : Num, !ODD(n) == EVEN(n)
+      #|  \226\136\128 n : Num, EVEN(n) || ODD(n)
+      #|  !((p : Bool) && !p)
+      #|  \226\136\128 n : Num, !(EVEN(n) && ODD(n))
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (p : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, EVEN(m + n) == (EVEN(m) == EVEN(n))
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  (p : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, EVEN(m * n) == (EVEN(m) || EVEN(n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, EVEN(EXP(m, n)) == (EVEN(m) && !(n == 0))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, ODD(m + n) == !(ODD(m) == ODD(n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, ODD(m * n) == (ODD(m) && ODD(n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, ODD(EXP(m, n)) == (ODD(m) || n == 0)
+      #|  \226\136\128 n : Num, EVEN(2 * n)
+      #|  \226\136\128 n : Num, ODD(SUC(2 * n))
+      #|  (m : Num)
+      #|  SUC((m : Num))
+      #|  (m : Num)
       #|  0
       #|  forall n. (EVEN n ==> ?m. n = 2 * m) /\\\n       (~EVEN n ==> ?m. n = SUC(2 * m))
-      #|  forall n. EVEN n <=> ?m. n = 2 * m
-      #|  forall n. ODD n <=> ?m. n = SUC(2 * m)
-      #|  SUC k
-      #|  k:num
-      #|  p:num
-      #|  m = 0
-      #|  m:num
-      #|  m:num
-      #|  n:num
-      #|  n:num
-      #|  forall n. (?k m. ODD m /\\ (n = 2 EXP k * m)) <=> ~(n = 0)
+      #|  \226\136\128 n : Num, EVEN(n) == (\226\136\131 m : Num, n == 2 * m)
+      #|  \226\136\128 n : Num, ODD(n) == (\226\136\131 m : Num, n == SUC(2 * m))
+      #|  SUC((k : Num))
+      #|  (k : Num)
+      #|  (p : Num)
+      #|  (m : Num) == 0
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, (\226\136\131 k : Num, \226\136\131 m : Num, ODD(m) && n == EXP(2, k) * m) == !(n == 0)
       #|  (forall m. m - 0 = m) /\\\n  (forall m n. m - (SUC n) = PRE(m - n))
-      #|  forall m. (0 - m = 0) /\\ (m - 0 = m)
-      #|  forall m n. PRE(SUC m - n) = m - n
-      #|  forall m n. SUC m - SUC n = m - n
-      #|  forall n. n - n = 0
-      #|  forall m n. (m + n) - n = m
-      #|  forall m n. (m + n) - m = n
-      #|  forall m n. (m - n = 0) <=> m <= n
-      #|  forall m n. m - (m + n) = 0
-      #|  forall m n. n - (m + n) = 0
-      #|  forall m n. n <= m ==> ((m - n) + n = m)
-      #|  forall m n p. (m + n) - (m + p) = n - p
-      #|  forall m n p. (m + p) - (n + p) = m - n
-      #|  p:num
-      #|  n:num
-      #|  forall m n p. m * (n - p) = m * n - m * p
-      #|  forall m n p. (m - n) * p = m * p - n * p
-      #|  forall n. SUC n - 1 = n
+      #|  \226\136\128 m : Num, 0 - m == 0 && m - 0 == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, PRE(SUC(m) - n) == m - n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, SUC(m) - SUC(n) == m - n
+      #|  \226\136\128 n : Num, n - n == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m + n - n == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m + n - m == n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (m - n == 0) == (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m - (m + n) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, n - (m + n) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, n <= m \226\134\146 m - n + n == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m + n - (m + p) == n - p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m + p - (n + p) == m - n
+      #|  (p : Num)
+      #|  (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * (n - p) == m * n - m * p
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (m - n) * p == m * p - n * p
+      #|  \226\136\128 n : Num, SUC(n) - 1 == n
       #|  EVEN
-      #|  n:num
-      #|  m:num
-      #|  m <= n:num
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (m : Num) <= (n : Num)
       #|  forall m n. EVEN(m - n) <=> m <= n \\/ (EVEN(m) <=> EVEN(n))
-      #|  forall m n. ODD(m - n) <=> n < m /\\ ~(ODD m <=> ODD n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, ODD(m - n) == (n < m && !(ODD(m) == ODD(n)))
       #|  (FACT 0 = 1) /\\\n   (forall n. FACT (SUC n) = (SUC n) * FACT(n))
-      #|  forall n. 0 < FACT n
-      #|  forall n. 1 <= FACT n
-      #|  forall n. ~(FACT n = 0)
-      #|  FACT(m + d)
-      #|  d:num
-      #|  d:num
-      #|  d:num
-      #|  forall m n. m <= n ==> FACT m <= FACT n
-      #|  forall n x. 0 < x EXP n <=> ~(x = 0) \\/ (n = 0)
-      #|  ~(x = 0)
-      #|  x * 1
-      #|  x EXP (m + SUC d)
-      #|  2 * x EXP m
-      #|  d:num
-      #|  d:num
-      #|  d:num
-      #|  ~(x = 0)
-      #|  1 * x EXP (n + d)
-      #|  d:num
-      #|  d:num
-      #|  d:num
-      #|  m:num
-      #|  m:num
-      #|  n:num
-      #|  n:num
-      #|  x = 0
+      #|  \226\136\128 n : Num, 0 < FACT(n)
+      #|  \226\136\128 n : Num, 1 <= FACT(n)
+      #|  \226\136\128 n : Num, !(FACT(n) == 0)
+      #|  FACT((m : Num) + (d : Num))
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 FACT(m) <= FACT(n)
+      #|  \226\136\128 n : Num, \226\136\128 x : Num, (0 < EXP(x, n)) == (!(x == 0) || n == 0)
+      #|  !((x : Num) == 0)
+      #|  (x : Num) * 1
+      #|  EXP((x : Num), (m : Num) + SUC((d : Num)))
+      #|  2 * EXP((x : Num), (m : Num))
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  !((x : Num) == 0)
+      #|  1 * EXP((x : Num), (n : Num) + (d : Num))
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (x : Num) == 0
       #|  forall x m n. x EXP m < x EXP n <=> 2 <= x /\\ m < n \\/\n                                 (x = 0) /\\ ~(m = 0) /\\ (n = 0)
       #|  forall x m n. x EXP m <= x EXP n <=>\n           if x = 0 then (m = 0) ==> (n = 0)\n           else (x = 1) \\/ m <= n
       #|  forall x m n. x EXP m = x EXP n <=>\n           if x = 0 then (m = 0 <=> n = 0)\n           else (x = 1) \\/ m = n
-      #|  forall x y n. x <= y ==> x EXP n <= y EXP n
-      #|  x * y EXP n
-      #|  forall x y n. x < y /\\ ~(n = 0) ==> x EXP n < y EXP n
-      #|  forall x y n. x EXP n <= y EXP n <=> x <= y \\/ n = 0
-      #|  forall x y n. x EXP n < y EXP n <=> x < y /\\ ~(n = 0)
-      #|  forall x y n. x EXP n = y EXP n <=> x = y \\/ n = 0
-      #|  q + 1
-      #|  d:num
-      #|  d:num
-      #|  q:num
-      #|  r:num
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, x <= y \226\134\146 EXP(x, n) <= EXP(y, n)
+      #|  (x : Num) * EXP((y : Num), (n : Num))
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, x < y && !(n == 0) \226\134\146 EXP(x, n) < EXP(y, n)
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, (EXP(x, n) <= EXP(y, n)) == (x <= y || n == 0)
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, (EXP(x, n) < EXP(y, n)) == (x < y && !(n == 0))
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 n : Num, (EXP(x, n) == EXP(y, n)) == (x == y || n == 0)
+      #|  (q : Num) + 1
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (q : Num)
+      #|  (r : Num)
       #|  0
-      #|  m:num
-      #|  \\r. ?q. m = q * n + r
-      #|  forall m n. ~(n = 0) ==> ?q r. (m = q * n + r) /\\ r < n
-      #|  r:num
-      #|  q:num
-      #|  n = 0
+      #|  (m : Num)
+      #|  (r : Num) => \226\136\131 q : Num, (m : Num) == q * (n : Num) + r
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(n == 0) \226\134\146 (\226\136\131 q : Num, \226\136\131 r : Num, m == q * n + r && r < n)
+      #|  (r : Num)
+      #|  (q : Num)
+      #|  (n : Num) == 0
       #|  forall m n. ?q r. if n = 0 then q = 0 /\\ r = m\n               else m = q * n + r /\\ r < n
       #|  forall m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\\ m MOD n < n
-      #|  forall n. n DIV 0 = 0
-      #|  forall n. n MOD 0 = n
-      #|  n = 0
+      #|  \226\136\128 n : Num, DIV(n, 0) == 0
+      #|  \226\136\128 n : Num, MOD(n, 0) == n
+      #|  (n : Num) == 0
       #|  (forall m n. m DIV n * n + m MOD n = m) /\\\n   (forall m n. n * m DIV n + m MOD n = m)
       #|  forall p m n. m DIV p = n DIV p /\\ m MOD p = n MOD p <=> m = n
-      #|  forall m n. m MOD n < n <=> ~(n = 0)
-      #|  forall m n. m MOD n < n <=> 0 < n
-      #|  n = 0
-      #|  r2 < n
-      #|  m = q1 * n + r2
-      #|  d:num
-      #|  d:num
-      #|  r2 < n
-      #|  r1 < n
-      #|  d:num
-      #|  q2:num
-      #|  q1:num
-      #|  m = q2 * n + r2
-      #|  r1:num = r2
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (MOD(m, n) < n) == !(n == 0)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (MOD(m, n) < n) == (0 < n)
+      #|  (n : Num) == 0
+      #|  (r2 : Num) < (n : Num)
+      #|  (m : Num) == (q1 : Num) * (n : Num) + (r2 : Num)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (r2 : Num) < (n : Num)
+      #|  (r1 : Num) < (n : Num)
+      #|  (d : Num)
+      #|  (q2 : Num)
+      #|  (q1 : Num)
+      #|  (m : Num) == (q2 : Num) * (n : Num) + (r2 : Num)
+      #|  (r1 : Num) == (r2 : Num)
       #|  forall m n q1 r1 q2 r2. ((m = q1 * n + r1) /\\ r1 < n) /\\\n                     ((m = q2 * n + r2) /\\ r2 < n)\n                     ==> (q1 = q2) /\\ (r1 = r2)
-      #|  r < n
-      #|  n:num
-      #|  m:num
+      #|  (r : Num) < (n : Num)
+      #|  (n : Num)
+      #|  (m : Num)
       #|  forall m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q) /\\ (m MOD n = r)
       #|  forall m n q r. (m = q * n + r) /\\ r < n ==> (m MOD n = r)
       #|  forall m n q r. (m = q * n + r) /\\ r < n ==> (m DIV n = q)
-      #|  n = 0
-      #|  (forall n. 0 DIV n = 0) /\\ (forall n. 0 MOD n = 0)
-      #|  m = 0
+      #|  (n : Num) == 0
+      #|  (\226\136\128 n : Num, DIV(0, n) == 0) && (\226\136\128 n : Num, MOD(0, n) == 0)
+      #|  (m : Num) == 0
       #|  (forall m n. ~(m = 0) ==> (m * n) DIV m = n) /\\\n   (forall m n. (m * n) MOD m = 0)
       #|  0
-      #|  forall m n. m < n ==> m MOD n = m
-      #|  forall m n. m MOD n = m <=> n = 0 \\/ m < n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 MOD(m, n) == m
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (MOD(m, n) == m) == (n == 0 || m < n)
       #|  1
       #|  forall n p. n < 2 * p ==> n MOD p = if n < p then n else n - p
       #|  forall m n p.\n        m < p /\\ n < p\n        ==> (m + n) MOD p = if m + n < p then m + n else (m + n) - p
-      #|  n:num
-      #|  q + n DIV p
-      #|  p = 0
-      #|  forall m n p q. m = n + q * p ==> m MOD p = n MOD p
-      #|  n:num
-      #|  n:num
-      #|  ~(n = 0)
-      #|  n = 0
-      #|  forall m n. m DIV n <= m
-      #|  m:num
-      #|  n = 0
-      #|  forall m n. n * (m DIV n) <= m
-      #|  n - m:num < m <=> (n - m) + m < m + m
+      #|  (n : Num)
+      #|  (q : Num) + DIV((n : Num), (p : Num))
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, \226\136\128 q : Num, m == n + q * p \226\134\146 MOD(m, p) == MOD(n, p)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  !((n : Num) == 0)
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, DIV(m, n) <= m
+      #|  (m : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, n * DIV(m, n) <= m
+      #|  ((n : Num) - (m : Num) < m) == (n - m + m < m + m)
       #|  1
-      #|  n MOD m = n - m
-      #|  m + n MOD m
-      #|  2 * m
-      #|  2 * m <= n
-      #|  forall m n. 0 < m /\\ m <= n ==> 2 * n MOD m <= n
-      #|  (forall n. n DIV 1 = n) /\\ (forall n. n MOD 1 = 0)
-      #|  m:num
-      #|  forall m n. m < n ==> m DIV n = 0
-      #|  n * p:num
-      #|  m:num
-      #|  m DIV (n * p) * p
-      #|  n = 0
-      #|  p = 0
-      #|  forall m n p. (m MOD (n * p)) MOD n = m MOD n
+      #|  MOD((n : Num), (m : Num)) == n - m
+      #|  (m : Num) + MOD((n : Num), m)
+      #|  2 * (m : Num)
+      #|  2 * (m : Num) <= (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 0 < m && m <= n \226\134\146 2 * MOD(n, m) <= n
+      #|  (\226\136\128 n : Num, DIV(n, 1) == n) && (\226\136\128 n : Num, MOD(n, 1) == 0)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 DIV(m, n) == 0
+      #|  (n : Num) * (p : Num)
+      #|  (m : Num)
+      #|  DIV((m : Num), (n : Num) * (p : Num)) * p
+      #|  (n : Num) == 0
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MOD(MOD(m, n * p), n) == MOD(m, n)
       #|  1
-      #|  n:num
-      #|  m:num
-      #|  n = 0
-      #|  forall m n. (m MOD n) MOD n = m MOD n
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, MOD(MOD(m, n), n) == MOD(m, n)
       #|  forall m n p. ~(n = 0) /\\ n <= p ==> (m MOD n) MOD p = m MOD n
-      #|  forall m n. EVEN n ==> m MOD n MOD 2 = m MOD 2
-      #|  a * b * c:num = b * a * c
-      #|  m * (n MOD p)
-      #|  p = 0
-      #|  forall m n p. ~(m = 0) ==> ((m * n) DIV (m * p) = n DIV p)
-      #|  a * b * c:num = b * a * c
-      #|  n DIV p
-      #|  m = 0
-      #|  p = 0
-      #|  forall m n p. (m * n) MOD (m * p) = m * n MOD p
-      #|  m = (m DIV n) * n + m MOD n
-      #|  m DIV n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, EVEN(n) \226\134\146 MOD(MOD(m, n), 2) == MOD(m, 2)
+      #|  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+      #|  (m : Num) * MOD((n : Num), (p : Num))
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, !(m == 0) \226\134\146 DIV(m * n, m * p) == DIV(n, p)
+      #|  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+      #|  DIV((n : Num), (p : Num))
+      #|  (m : Num) == 0
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MOD(m * n, m * p) == m * MOD(n, p)
+      #|  (m : Num) == DIV(m, (n : Num)) * n + MOD(m, n)
+      #|  DIV((m : Num), (n : Num))
       #|  forall m n. (?q. m = n * q) <=> if n = 0 then (m = 0) else (m MOD n = 0)
-      #|  (b DIV a) * a + b MOD a
-      #|  a * n < a * (b DIV a + 1)
-      #|  a * (b DIV a)
-      #|  forall a b n. ~(a = 0) ==> (n <= b DIV a <=> a * n <= b)
-      #|  forall a b n. ~(a = 0) ==> (b DIV a < n <=> b < a * n)
+      #|  DIV((b : Num), (a : Num)) * a + MOD(b, a)
+      #|  (a : Num) * (n : Num) < a * (DIV((b : Num), a) + 1)
+      #|  (a : Num) * DIV((b : Num), a)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, !(a == 0) \226\134\146 (n <= DIV(b, a)) == (a * n <= b)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, !(a == 0) \226\134\146 (DIV(b, a) < n) == (b < a * n)
       #|  forall a b n. ~(a = 0) ==> (b DIV a <= n <=> b < a * (n + 1))
       #|  forall a b n. ~(a = 0) ==> (n < b DIV a <=> a * (n + 1) <= b)
-      #|  forall a b n. ~(a = 0) /\\ b <= a * n ==> b DIV a <= n
-      #|  (forall k:num. k <= a ==> k <= b) ==> a <= b
-      #|  p = 0
-      #|  forall m n p. m <= n ==> m DIV p <= n DIV p
-      #|  (forall k:num. k <= a ==> k + 1 <= b) ==> a < b
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, !(a == 0) && b <= a * n \226\134\146 DIV(b, a) <= n
+      #|  (\226\136\128 k : Num, k <= (a : Num) \226\134\146 k <= (b : Num)) \226\134\146 a <= b
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m <= n \226\134\146 DIV(m, p) <= DIV(n, p)
+      #|  (\226\136\128 k : Num, k <= (a : Num) \226\134\146 k + 1 <= (b : Num)) \226\134\146 a < b
       #|  forall m n p. ~(p = 0) /\\ m + p <= n ==> m DIV p < n DIV p
-      #|  m:num
-      #|  m:num
-      #|  forall m n. ~(n = 0) ==> ((m DIV n = 0) <=> m < n)
-      #|  forall m n. ~(n = 0) ==> (m MOD n) DIV n = 0
-      #|  m:num
-      #|  n = 0
-      #|  forall m n. (m MOD n = 0) <=> ?q. m = q * n
-      #|  n = 0
-      #|  n = 1
-      #|  m = 0
-      #|  forall m n. m DIV n = m <=> m = 0 \\/ n = 1
-      #|  forall n. n MOD n = 0
-      #|  forall n. EVEN(n) <=> n MOD 2 = 0
-      #|  n:num
-      #|  n MOD 2
-      #|  n MOD 2 < 2
-      #|  forall n. ODD(n) <=> n MOD 2 = 1
-      #|  forall n. n MOD 2 = if EVEN n then 0 else 1
-      #|  forall m n. EVEN n ==> (EVEN(m MOD n) <=> EVEN m)
-      #|  forall m n. EVEN n ==> (ODD(m MOD n) <=> ODD m)
-      #|  (forall n. (2 * n) DIV 2 = n) /\\ (forall n. (n * 2) DIV 2 = n)
+      #|  (m : Num)
+      #|  (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(n == 0) \226\134\146 (DIV(m, n) == 0) == (m < n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(n == 0) \226\134\146 DIV(MOD(m, n), n) == 0
+      #|  (m : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (MOD(m, n) == 0) == (\226\136\131 q : Num, m == q * n)
+      #|  (n : Num) == 0
+      #|  (n : Num) == 1
+      #|  (m : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (DIV(m, n) == m) == (m == 0 || n == 1)
+      #|  \226\136\128 n : Num, MOD(n, n) == 0
+      #|  \226\136\128 n : Num, EVEN(n) == (MOD(n, 2) == 0)
+      #|  (n : Num)
+      #|  MOD((n : Num), 2)
+      #|  MOD((n : Num), 2) < 2
+      #|  \226\136\128 n : Num, ODD(n) == (MOD(n, 2) == 1)
+      #|  \226\136\128 n : Num, MOD(n, 2) == (if EVEN(n) { 0 } else { 1 })
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, EVEN(n) \226\134\146 EVEN(MOD(m, n)) == EVEN(m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, EVEN(n) \226\134\146 ODD(MOD(m, n)) == ODD(m)
+      #|  (\226\136\128 n : Num, DIV(2 * n, 2) == n) && (\226\136\128 n : Num, DIV(n * 2, 2) == n)
       #|  (forall n. EVEN n ==> 2 * n DIV 2 = n) /\\\n   (forall n. EVEN n ==> n DIV 2 * 2 = n)
-      #|  m * p DIV n
-      #|  n = 0
-      #|  forall m n p. (m * (p MOD n)) MOD n = (m * p) MOD n
-      #|  forall m n p. ((m MOD n) * p) MOD n = (m * p) MOD n
+      #|  (m : Num) * DIV((p : Num), (n : Num))
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MOD(m * MOD(p, n), n) == MOD(m * p, n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MOD(MOD(m, n) * p, n) == MOD(m * p, n)
       #|  forall m n p. ((m MOD n) * (p MOD n)) MOD n = (m * p) MOD n
-      #|  (m * ((m MOD n) EXP p) MOD n) MOD n
-      #|  p:num
-      #|  p:num
-      #|  n = 0
-      #|  forall m n p. ((m MOD n) EXP p) MOD n = (m EXP p) MOD n
-      #|  m + p DIV n
-      #|  n = 0
-      #|  (p ==> q) /\\ p ==> p /\\ q
+      #|  MOD((m : Num) * MOD(EXP(MOD(m, (n : Num)), (p : Num)), n), n)
+      #|  (p : Num)
+      #|  (p : Num)
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MOD(EXP(MOD(m, n), p), n) == MOD(EXP(m, p), n)
+      #|  (m : Num) + DIV((p : Num), (n : Num))
+      #|  (n : Num) == 0
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q
       #|  (forall m n p. (m * n + p) MOD n = p MOD n) /\\\n   (forall m n p. (n * m + p) MOD n = p MOD n) /\\\n   (forall m n p. (p + m * n) MOD n = p MOD n) /\\\n   (forall m n p. (p + n * m) MOD n = p MOD n)
-      #|  b MOD n
-      #|  (p ==> q) /\\ p ==> p /\\ q
+      #|  MOD((b : Num), (n : Num))
+      #|  ((p : Bool) \226\134\146 (q : Bool)) && p \226\134\146 p && q
       #|  (forall a b n. ~(n = 0) ==> (a * n + b) DIV n = a + b DIV n) /\\\n   (forall a b n. ~(n = 0) ==> (n * a + b) DIV n = a + b DIV n) /\\\n   (forall a b n. ~(n = 0) ==> (b + a * n) DIV n = b DIV n + a) /\\\n   (forall a b n. ~(n = 0) ==> (b + n * a) DIV n = b DIV n + a)
-      #|  (a + b) + (c + d) = (c + a) + (d + b)
-      #|  a DIV n + b DIV n
-      #|  n = 0
-      #|  forall a b n. (a MOD n + b MOD n) MOD n = (a + b) MOD n
-      #|  (a + b) + c + d = (a + c) + (b + d)
+      #|  (a : Num) + (b : Num) + ((c : Num) + (d : Num)) == c + a + (d + b)
+      #|  DIV((a : Num), (n : Num)) + DIV((b : Num), n)
+      #|  (n : Num) == 0
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 n : Num, MOD(MOD(a, n) + MOD(b, n), n) == MOD(a + b, n)
+      #|  (a : Num) + (b : Num) + ((c : Num) + (d : Num)) == a + c + (b + d)
       #|  forall a b n. ~(n = 0)\n           ==> (((a + b) MOD n = a MOD n + b MOD n) <=>\n                ((a + b) DIV n = a DIV n + b DIV n))
-      #|  b:num
-      #|  a:num
-      #|  a + b:num
-      #|  (+)
+      #|  (b : Num)
+      #|  (a : Num)
+      #|  (a : Num) + (b : Num)
+      #|  op_plus
       #|  forall n x y. (x + y) MOD n = x MOD n + y MOD n <=>\n           n = 0 \\/ x MOD n + y MOD n < n
       #|  forall n x y. (x + y) DIV n = x DIV n + y DIV n <=>\n           n = 0 \\/ x MOD n + y MOD n < n
       #|  \\/
@@ -1411,46 +1411,46 @@ test "arith matches arith.ml" {
       #|  F
       #|  forall n x y. x MOD n + y MOD n < n ==> (x + y) DIV n = x DIV n + y DIV n
       #|  forall n x y. x MOD n + y MOD n < n ==> (x + y) MOD n = x MOD n + y MOD n
-      #|  n:num
-      #|  n:num
+      #|  (n : Num)
+      #|  (n : Num)
       #|  0
-      #|  forall n. ~(n = 0) ==> (n DIV n = 1)
-      #|  n = 0
-      #|  forall m n. m MOD n <= m
-      #|  m:num
-      #|  n:num
-      #|  m * n DIV m
-      #|  forall m n p. ~(p = 0) /\\ p <= m ==> n DIV m <= n DIV p
-      #|  b * d * k <= b * c ==> (b * k) * d < (a + 1) * d
-      #|  k:num
-      #|  (forall k:num. k <= a ==> k <= b) ==> a <= b
-      #|  d = 0
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 DIV(n, n) == 1
+      #|  (n : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, MOD(m, n) <= m
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  (m : Num) * DIV((n : Num), m)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, !(p == 0) && p <= m \226\134\146 DIV(n, m) <= DIV(n, p)
+      #|  (b : Num) * ((d : Num) * (k : Num)) <= b * (c : Num) \226\134\146 b * k * d < ((a : Num) + 1) * d
+      #|  (k : Num)
+      #|  (\226\136\128 k : Num, k <= (a : Num) \226\134\146 k <= (b : Num)) \226\134\146 a <= b
+      #|  (d : Num) == 0
       #|  forall a b c d. ~(b = 0) /\\ b * c < (a + 1) * d ==> c DIV d <= a DIV b
-      #|  d = 0
-      #|  b = 0
+      #|  (d : Num) == 0
+      #|  (b : Num) == 0
       #|  forall a b c d.\n        b * c < (a + 1) * d /\\ a * d < (c + 1) * b ==> (a DIV b = c DIV d)
-      #|  n:num
-      #|  p = 0
-      #|  forall m n p. m * (n DIV p) <= (m * n) DIV p
-      #|  (forall k. k <= m <=> k <= n) ==> m = n
-      #|  n = 0
-      #|  p = 0
-      #|  forall m n p. (m DIV n) DIV p = m DIV (n * p)
-      #|  n * p:num
-      #|  m:num
-      #|  p:num
-      #|  m DIV n
-      #|  k + p * ((m DIV n) DIV p) <= (m DIV n)
-      #|  k:num
-      #|  (forall k. k <= m <=> k <= n) ==> m = n
-      #|  n = 0
-      #|  p = 0
-      #|  forall m n p. (m DIV n) MOD p = (m MOD (n * p)) DIV n
-      #|  d * n * p = n * (d * p)
-      #|  m DIV n DIV p * n * p
-      #|  (?a. a + x = a + y) ==> x = y
-      #|  p = 0
-      #|  n = 0
+      #|  (n : Num)
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * DIV(n, p) <= DIV(m * n, p)
+      #|  (\226\136\128 k : Num, (k <= (m : Num)) == (k <= (n : Num))) \226\134\146 m == n
+      #|  (n : Num) == 0
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, DIV(DIV(m, n), p) == DIV(m, n * p)
+      #|  (n : Num) * (p : Num)
+      #|  (m : Num)
+      #|  (p : Num)
+      #|  DIV((m : Num), (n : Num))
+      #|  (k : Num) + (p : Num) * DIV(DIV((m : Num), (n : Num)), p) <= DIV(m, n)
+      #|  (k : Num)
+      #|  (\226\136\128 k : Num, (k <= (m : Num)) == (k <= (n : Num))) \226\134\146 m == n
+      #|  (n : Num) == 0
+      #|  (p : Num) == 0
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MOD(DIV(m, n), p) == DIV(MOD(m, n * p), n)
+      #|  (d : Num) * ((n : Num) * (p : Num)) == n * (d * p)
+      #|  DIV(DIV((m : Num), (n : Num)), (p : Num)) * (n * p)
+      #|  (\226\136\131 a : Num, a + (x : Num) == a + (y : Num)) \226\134\146 x == y
+      #|  (p : Num) == 0
+      #|  (n : Num) == 0
       #|  forall m n p. m MOD (n * p) = n * (m DIV n) MOD p + m MOD n
       #|  \\/
       #|  ~
@@ -1463,40 +1463,40 @@ test "arith matches arith.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  ?d. m = n + d
-      #|  p EXP m
-      #|  m:num <= n
-      #|  m:num <= n
-      #|  m = 0
-      #|  p = 0
+      #|  \226\136\131 d : Num, (m : Num) == (n : Num) + d
+      #|  EXP((p : Num), (m : Num))
+      #|  (m : Num) <= (n : Num)
+      #|  (m : Num) <= (n : Num)
+      #|  (m : Num) == 0
+      #|  (p : Num) == 0
       #|  forall x p m n. x MOD (p EXP m) MOD (p EXP n) = x MOD (p EXP (MIN m n))
-      #|  m = 1
-      #|  p:num <= n
-      #|  m = 0
+      #|  (m : Num) == 1
+      #|  (p : Num) <= (n : Num)
+      #|  (m : Num) == 0
       #|  (forall m n p. ~(m = 0)\n            ==> (m EXP n) DIV (m EXP p) =\n                if p <= n then m EXP (n - p)\n                else if m = 1 then 1 else 0) /\\\n   (forall m n p. ~(m = 0)\n            ==> (m EXP n) MOD (m EXP p) =\n                if p <= n \\/ m = 1 then 0 else m EXP n)
       #|  forall P n. (forall a. a < n ==> P a) <=> n = 0 \\/ forall a. P(a MOD n)
       #|  forall P n. ~(n = 0) ==> ((forall a. P(a MOD n)) <=> (forall a. a < n ==> P a))
       #|  forall P n. (?a. a < n /\\ P a) <=> ~(n = 0) /\\ ?a. P(a MOD n)
       #|  forall P n. ~(n = 0) ==> ((?a. P(a MOD n)) <=> (?a. a < n /\\ P a))
-      #|  n:num
-      #|  n:num
+      #|  (n : Num)
+      #|  (n : Num)
       #|  P(PRE n) <=> forall m. n = SUC m \\/ m = 0 /\\ n = 0 ==> P m
-      #|  P:num->bool
-      #|  \\x:num. ~P x
+      #|  (P : (Num) -> Bool)
+      #|  (x : Num) => !(P : (Num) -> Bool)(x)
       #|  P(PRE n) <=> ?m. (n = SUC m \\/ m = 0 /\\ n = 0) /\\ P m
-      #|  e:num
-      #|  b:num
-      #|  a:num
+      #|  (e : Num)
+      #|  (b : Num)
+      #|  (a : Num)
       #|  P(a - b) <=> forall d. a = b + d \\/ a < b /\\ d = 0 ==> P d
-      #|  P:num->bool
-      #|  \\x:num. ~P x
+      #|  (P : (Num) -> Bool)
+      #|  (x : Num) => !(P : (Num) -> Bool)(x)
       #|  P(a - b) <=> ?d. (a = b + d \\/ a < b /\\ d = 0) /\\ P d
-      #|  n = 0
+      #|  (n : Num) == 0
       #|  P (m DIV n) (m MOD n) <=>\n        forall q r. n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n ==> P q r
-      #|  P:num->num->bool
-      #|  \\x:num y:num. ~P x y
+      #|  (P : (Num, Num) -> Bool)
+      #|  (x : Num) => (y : Num) => !(P : (Num, Num) -> Bool)(x, y)
       #|  P (m DIV n) (m MOD n) <=>\n        ?q r. (n = 0 /\\ q = 0 /\\ r = m \\/ m = q * n + r /\\ r < n) /\\ P q r
-      #|  (SUC(m MOD n)) MOD n = SUC m MOD n
+      #|  MOD(SUC(MOD((m : Num), (n : Num))), n) == MOD(SUC(m), n)
       #|  \\/
       #|  \\/
       #|  \\/
@@ -1512,33 +1512,33 @@ test "arith matches arith.ml" {
       #|  \\/
       #|  ~
       #|  F
-      #|  (+)
-      #|  (=) :num->num->bool
+      #|  op_plus
+      #|  (op_eq : (Num, Num) -> Bool)
       #|  (minimal) (P:num->bool) = @n. P n /\\ forall m. m < n ==> ~(P m)
       #|  forall P. (?n. P n) <=> P((minimal) P) /\\ (forall m. m < (minimal) P ==> ~(P m))
       #|  forall P n. P n /\\ (forall m. m < n ==> ~P m) ==> (minimal) P = n
       #|  forall P n.\n        (?r. P r) ==> (n <= (minimal) P <=> forall i. P i ==> n <= i)
       #|  forall P n. (?r. P r) ==> ((minimal) P <= n <=> ?i. i <= n /\\ P i)
-      #|  forall P n. P n ==> (minimal) P <= n
+      #|  \226\136\128 P : (Num) -> Bool, \226\136\128 n : Num, P(n) \226\134\146 minimal(P) <= n
       #|  forall P n. (?r. P r) /\\ (forall m. m < n ==> ~P m) ==> n <= (minimal) P
-      #|  (forall p:num. p <= m ==> p <= n) ==> m <= n
-      #|  ?n:num. Q n
+      #|  (\226\136\128 p : Num, p <= (m : Num) \226\134\146 p <= (n : Num)) \226\134\146 m <= n
+      #|  \226\136\131 n : Num, (Q : (Num) -> Bool)(n)
       #|  forall P Q. (?n. P n) /\\ (forall n. P n ==> Q n) ==> (minimal) Q <= (minimal) P
       #|  forall R. (forall x y z. R x y /\\ R y z ==> R x z)\n         ==> ((forall m n. m < n ==> R m n) <=> (forall n. R n (SUC n)))
-      #|  (a ==> (c <=> b)) ==> a /\\ b ==> c
+      #|  ((a : Bool) \226\134\146 (c : Bool) == (b : Bool)) \226\134\146 a && b \226\134\146 c
       #|  forall R. (forall x y z. R x y /\\ R y z ==> R x z) /\\ (forall n. R n (SUC n))\n       ==> forall m n. m < n ==> R m n
       #|  forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z)\n       ==> ((forall m n. m <= n ==> R m n) <=> (forall n. R n (SUC n)))
-      #|  (a /\\ a' ==> (c <=> b)) ==> a /\\ a' /\\ b ==> c
+      #|  ((a : Bool) && (a' : Bool) \226\134\146 (c : Bool) == (b : Bool)) \226\134\146 a && a' && b \226\134\146 c
       #|  forall R. (forall x. R x x) /\\ (forall x y z. R x y /\\ R y z ==> R x z) /\\\n       (forall n. R n (SUC n))\n       ==> forall m n. m <= n ==> R m n
-      #|  (forall n. P n) <=> P 0 /\\ forall n. P(SUC n)
+      #|  (\226\136\128 n : Num, (P : (Num) -> Bool)(n)) == (P(0) && (\226\136\128 n : Num, P(SUC(n))))
       #|  f 0 = (a:A) /\\ (forall n. f(SUC n) = @y. P (SUC n) y /\\ R n (f n) y)
       #|  forall P R a:A.\n        P 0 a /\\ (forall n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. f 0 = a /\\ (forall n. P n (f n)) /\\ (forall n. R n (f n) (f(SUC n)))
       #|  forall P R:num->A->A->bool.\n        (?a. P 0 a) /\\ (forall n x. P n x ==> ?y. P (SUC n) y /\\ R n x y)\n        ==> ?f. (forall n. P n (f n)) /\\ (forall n. R n (f n) (f(SUC n)))
-      #|  m = n <=> NUMERAL m = n
+      #|  ((m : Num) == (n : Num)) == (NUMERAL(m) == n)
       #|  0
       #|  (m = n <=> BIT0 m = 2 * n) /\\\n           (m = n <=> BIT1 m = 2 * n + 1)
-      #|  n:num
-      #|  m:num
+      #|  (n : Num)
+      #|  (m : Num)
       #|PRE =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) (#NUMERAL:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) #_0:num))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#PRE:fun(num,num) (#SUC:fun(num,num) n:num))) n:num))))
       #|ADD =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) n:num)))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) (#SUC:fun(num,num) m:num)) n:num)) (#SUC:fun(num,num) ((#+:fun(num,fun(num,num)) m:num) n:num))))))))
       #|ADD_0 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) m:num) (#NUMERAL:fun(num,num) #_0:num))) m:num)))

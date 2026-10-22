@@ -9942,8 +9942,8 @@ test "Rqe/dedmatrix matches Rqe/dedmatrix.ml" {
       #|  Neg
       #|  Pos
       #|  Neg
-      #|  APPEND:real list -> real list -> real list
-      #|  APPEND:(sign list) list -> (sign list) list -> (sign list) list
+      #|  (APPEND : (List[Real], List[Real]) -> List[Real])
+      #|  (APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])
       #|  interpmat
       #|  Pos
       #|  Neg

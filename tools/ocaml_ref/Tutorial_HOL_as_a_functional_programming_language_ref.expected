@@ -5608,7 +5608,7 @@ Warning: inventing type variables
 CPU time (user): <t>
 CPU time (user): <t>
 Tutorial/HOL_as_a_functional_programming_language quotations (170):
-  ?norm. (norm False = False) /\\\n         (norm True = True) /\\\n         (forall i. norm (Atomic i) = Atomic i) /\\\n         (forall y z. norm (Ite False y z) = norm z) /\\\n         (forall y z. norm (Ite True y z) = norm y) /\\\n         (forall i y z. norm (Ite (Atomic i) y z) =\n                    Ite (Atomic i) (norm y) (norm z)) /\\\n         (forall u v w y z. norm (Ite (Ite u v w) y z) =\n                        norm (Ite u (Ite v y z) (Ite w y z)))
+  \226\136\131 norm : (Ite) -> Ite, norm(False) == False && norm(True) == True && (\226\136\128 i : Num, norm(Atomic(i)) == Atomic(i)) && (\226\136\128 y : Ite, \226\136\128 z : Ite, norm(Ite(False, y, z)) == norm(z)) && (\226\136\128 y : Ite, \226\136\128 z : Ite, norm(Ite(True, y, z)) == norm(y)) && (\226\136\128 i : Num, \226\136\128 y : Ite, \226\136\128 z : Ite, norm(Ite(Atomic(i), y, z)) == Ite(Atomic(i), norm(y), norm(z))) && (\226\136\128 u : Ite, \226\136\128 v : Ite, \226\136\128 w : Ite, \226\136\128 y : Ite, \226\136\128 z : Ite, norm(Ite(Ite(u, v, w), y, z)) == norm(Ite(u, Ite(v, y, z), Ite(w, y, z))))
   :P
   :P
   :P
@@ -5621,7 +5621,7 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  (sizeof False = 1) /\\\n  (sizeof True = 1) /\\\n  (sizeof(Atomic i) = 1) /\\\n  (sizeof(Ite x y z) = sizeof x * (1 + sizeof y + sizeof z))
+  (sizeof : (Ite) -> Num)(False) == 1 && sizeof(True) == 1 && sizeof(Atomic((i : Num))) == 1 && sizeof(Ite((x : Ite), (y : Ite), (z : Ite))) == sizeof(x) * (1 + (sizeof(y) + sizeof(z)))
   :P
   :P
   :P
@@ -5635,12 +5635,12 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  MEASURE sizeof
+  MEASURE(sizeof)
   sizeof
-  forall e. ~(sizeof e = 0)
-  ~(b = 0) /\\ ~(c = 0) ==> a < (b + a) + c
-  forall P. P False /\\\n       P True /\\\n       (forall i. P(Atomic i)) /\\\n       (forall y z. P z ==> P(Ite False y z)) /\\\n       (forall y z. P y ==> P(Ite True y z)) /\\\n       (forall i y z. P y /\\ P z ==> P (Ite (Atomic i) y z)) /\\\n       (forall u v w x y z. P(Ite u (Ite v y z) (Ite w y z))\n                      ==> P(Ite (Ite u v w) y z))\n       ==> forall e. P e
-  (normalized False <=> T) /\\\n  (normalized True <=> T) /\\\n  (normalized(Atomic a) <=> T) /\\\n  (normalized(Ite False x y) <=> F) /\\\n  (normalized(Ite True x y) <=> F) /\\\n  (normalized(Ite (Atomic a) x y) <=> normalized x /\\ normalized y) /\\\n  (normalized(Ite (Ite u v w) x y) <=> F)
+  \226\136\128 e : Ite, !(sizeof(e) == 0)
+  !((b : Num) == 0) && !((c : Num) == 0) \226\134\146 (a : Num) < b + a + c
+  \226\136\128 P : (Ite) -> Bool, P(False) && P(True) && (\226\136\128 i : Num, P(Atomic(i))) && (\226\136\128 y : Ite, \226\136\128 z : Ite, P(z) \226\134\146 P(Ite(False, y, z))) && (\226\136\128 y : Ite, \226\136\128 z : Ite, P(y) \226\134\146 P(Ite(True, y, z))) && (\226\136\128 i : Num, \226\136\128 y : Ite, \226\136\128 z : Ite, P(y) && P(z) \226\134\146 P(Ite(Atomic(i), y, z))) && (\226\136\128 u : Ite, \226\136\128 v : Ite, \226\136\128 w : Ite, \226\136\128 x : _, \226\136\128 y : Ite, \226\136\128 z : Ite, P(Ite(u, Ite(v, y, z), Ite(w, y, z))) \226\134\146 P(Ite(Ite(u, v, w), y, z))) \226\134\146 (\226\136\128 e : Ite, P(e))
+  (normalized : (Ite) -> Bool)(False) == true && normalized(True) == true && normalized(Atomic((a : Num))) == true && normalized(Ite(False, (x : Ite), (y : Ite))) == false && normalized(Ite(True, x, y)) == false && normalized(Ite(Atomic(a), x, y)) == (normalized(x) && normalized(y)) && normalized(Ite(Ite((u : Ite), (v : Ite), (w : Ite)), x, y)) == false
   :P
   :P
   :P
@@ -5650,9 +5650,9 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   (+):num->num->num
   (+):num->num->num
   (+):num->num->num
-  forall e. normalized(norm e)
-  P False /\\\n   P True /\\\n   (forall i. P (Atomic i)) /\\\n   (forall i x y. P x /\\ P y ==> P (Ite (Atomic i) x y))\n   ==> forall e. normalized e ==> P e
-  (holds v False <=> F) /\\\n  (holds v True <=> T) /\\\n  (holds v (Atomic i) <=> v(i)) /\\\n  (holds v (Ite b x y) <=> if holds v b then holds v x else holds v y)
+  \226\136\128 e : Ite, normalized(norm(e))
+  (P : (Ite) -> Bool)(False) && P(True) && (\226\136\128 i : Num, P(Atomic(i))) && (\226\136\128 i : Num, \226\136\128 x : Ite, \226\136\128 y : Ite, P(x) && P(y) \226\134\146 P(Ite(Atomic(i), x, y))) \226\134\146 (\226\136\128 e : Ite, normalized(e) \226\134\146 P(e))
+  (holds : ((Num) -> Bool, Ite) -> Bool)((v : (Num) -> Bool), False) == false && holds(v, True) == true && holds(v, Atomic((i : Num))) == v(i) && holds(v, Ite((b : Ite), (x : Ite), (y : Ite))) == (if holds(v, b) { holds(v, x) } else { holds(v, y) })
   :P
   :P
   :P
@@ -5670,8 +5670,8 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   (+):num->num->num
   (+):num->num->num
   \\n. n + 1
-  forall e v. holds v (norm e) <=> holds v e
-  (taut (t,f) False <=> F) /\\\n  (taut (t,f) True <=> T) /\\\n  (taut (t,f) (Atomic i) <=> MEM i t) /\\\n  (taut (t,f) (Ite (Atomic i) x y) <=>\n      if MEM i t then taut (t,f) x\n      else if MEM i f then taut (t,f) y\n      else taut (CONS i t,f) x /\\ taut (t,CONS i f) y)
+  \226\136\128 e : Ite, \226\136\128 v : (Num) -> Bool, holds(v, norm(e)) == holds(v, e)
+  (taut : ((List[Num], List[Num]), Ite) -> Bool)(((t : List[Num]), (f : List[Num])), False) == false && taut((t, f), True) == true && taut((t, f), Atomic((i : Num))) == MEM(i, t) && taut((t, f), Ite(Atomic(i), (x : Ite), (y : Ite))) == (if MEM(i, t) { taut((t, f), x) } else { if MEM(i, f) { taut((t, f), y) } else { taut((CONS(i, t), f), x) && taut((t, CONS(i, f)), y) } })
   :P
   :P
   :P
@@ -5766,18 +5766,18 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   \\n. n + 1
   (+):num->num->num
   (+):num->num->num
-  tautology e = taut([],[]) (norm e)
-  (forall a. ~(a = i /\\ MEM a f)) <=> ~(MEM i f)
-  (forall a. ~(MEM a t /\\ a = i)) <=> ~(MEM i t)
-  \\a:num. MEM a t
-  forall e. normalized e\n       ==> forall f t. (forall a. ~(MEM a t /\\ MEM a f))\n                 ==> (taut (t,f) e <=>\n                      forall v. (forall a. MEM a t ==> v(a)) /\\ (forall a. MEM a f ==> ~v(a))\n                          ==> holds v e)
-  forall e. tautology e <=> forall v. holds v e
-  forall v. (F <=> holds v False) /\\\n       (T <=> holds v True) /\\\n       (forall i. v i <=> holds v (Atomic i)) /\\\n       (forall p. ~holds v p <=> holds v (Ite p False True)) /\\\n       (forall p q. (holds v p /\\ holds v q) <=> holds v (Ite p q False)) /\\\n       (forall p q. (holds v p \\/ holds v q) <=> holds v (Ite p True q)) /\\\n       (forall p q. (holds v p <=> holds v q) <=>\n                   holds v (Ite p q (Ite q False True))) /\\\n       (forall p q. holds v p ==> holds v q <=> holds v (Ite p q True))
-  (F /\\ a <=> F) /\\ (T /\\ a <=> a)
-  (F \\/ a <=> a) /\\ (T \\/ a <=> T)
-  forall v. v 1 \\/ v 2 \\/ v 3 \\/ v 4 \\/ v 5 \\/ v 6 \\/\n       ~v 1 \\/ ~v 2 \\/ ~v 3 \\/ ~v 4 \\/ ~v 5 \\/ ~v 6
-  v:num->bool
-  v:num->bool
+  (tautology : (Ite) -> Bool)((e : Ite)) == taut((NIL, NIL), norm(e))
+  (\226\136\128 a : _, !(a == (i : _) && MEM(a, (f : List[_])))) == !MEM(i, f)
+  (\226\136\128 a : _, !(MEM(a, (t : List[_])) && a == (i : _))) == !MEM(i, t)
+  (a : Num) => MEM(a, (t : List[Num]))
+  \226\136\128 e : Ite, normalized(e) \226\134\146 (\226\136\128 f : List[Num], \226\136\128 t : List[Num], (\226\136\128 a : Num, !(MEM(a, t) && MEM(a, f))) \226\134\146 taut((t, f), e) == (\226\136\128 v : (Num) -> Bool, (\226\136\128 a : Num, MEM(a, t) \226\134\146 v(a)) && (\226\136\128 a : Num, MEM(a, f) \226\134\146 !v(a)) \226\134\146 holds(v, e)))
+  \226\136\128 e : Ite, tautology(e) == (\226\136\128 v : (Num) -> Bool, holds(v, e))
+  \226\136\128 v : (Num) -> Bool, false == holds(v, False) && true == holds(v, True) && (\226\136\128 i : Num, v(i) == holds(v, Atomic(i))) && (\226\136\128 p : Ite, !holds(v, p) == holds(v, Ite(p, False, True))) && (\226\136\128 p : Ite, \226\136\128 q : Ite, (holds(v, p) && holds(v, q)) == holds(v, Ite(p, q, False))) && (\226\136\128 p : Ite, \226\136\128 q : Ite, (holds(v, p) || holds(v, q)) == holds(v, Ite(p, True, q))) && (\226\136\128 p : Ite, \226\136\128 q : Ite, (holds(v, p) == holds(v, q)) == holds(v, Ite(p, q, Ite(q, False, True)))) && (\226\136\128 p : Ite, \226\136\128 q : Ite, (holds(v, p) \226\134\146 holds(v, q)) == holds(v, Ite(p, q, True)))
+  (false && (a : Bool)) == false && (true && a) == a
+  (false || (a : Bool)) == a && (true || a) == true
+  \226\136\128 v : (Num) -> Bool, v(1) || v(2) || v(3) || v(4) || v(5) || v(6) || !v(1) || !v(2) || !v(3) || !v(4) || !v(5) || !v(6)
+  (v : (Num) -> Bool)
+  (v : (Num) -> Bool)
 ite_INDUCT =  |- (#forall:fun(fun(fun(ite,bool),bool),bool) (\P:fun(ite,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) #False:ite)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) #True:ite)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(ite,bool) (#Atomic:fun(num,ite) a:num))))) (#forall:fun(fun(ite,bool),bool) (\a0:ite. (#forall:fun(fun(ite,bool),bool) (\a1:ite. (#forall:fun(fun(ite,bool),bool) (\a2:ite. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) a0:ite)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(ite,bool) a1:ite)) (P:fun(ite,bool) a2:ite)))) (P:fun(ite,bool) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) a0:ite) a1:ite) a2:ite))))))))))))) (#forall:fun(fun(ite,bool),bool) (\x:ite. (P:fun(ite,bool) x:ite))))))
 ite_RECURSION =  |- (#forall:fun(fun('Z,bool),bool) (\f0:'Z. (#forall:fun(fun('Z,bool),bool) (\f1:'Z. (#forall:fun(fun(fun(num,'Z),bool),bool) (\f2:fun(num,'Z). (#forall:fun(fun(fun(ite,fun(ite,fun(ite,fun('Z,fun('Z,fun('Z,'Z)))))),bool),bool) (\f3:fun(ite,fun(ite,fun(ite,fun('Z,fun('Z,fun('Z,'Z)))))). (#?:fun(fun(fun(ite,'Z),bool),bool) (\fn:fun(ite,'Z). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(ite,'Z) #False:ite)) f0:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(ite,'Z) #True:ite)) f1:'Z)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. ((#=:fun('Z,fun('Z,bool)) (fn:fun(ite,'Z) (#Atomic:fun(num,ite) a:num))) (f2:fun(num,'Z) a:num))))) (#forall:fun(fun(ite,bool),bool) (\a0:ite. (#forall:fun(fun(ite,bool),bool) (\a1:ite. (#forall:fun(fun(ite,bool),bool) (\a2:ite. ((#=:fun('Z,fun('Z,bool)) (fn:fun(ite,'Z) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) a0:ite) a1:ite) a2:ite))) ((((((f3:fun(ite,fun(ite,fun(ite,fun('Z,fun('Z,fun('Z,'Z)))))) a0:ite) a1:ite) a2:ite) (fn:fun(ite,'Z) a0:ite)) (fn:fun(ite,'Z) a1:ite)) (fn:fun(ite,'Z) a2:ite))))))))))))))))))))))
 eth = (#?:fun(fun(fun(ite,fun(ite,bool)),bool),bool) (\<<:fun(ite,fun(ite,bool)). ((#/\:fun(bool,fun(bool,bool)) (#WF:fun(fun(ite,fun(ite,bool)),bool) <<:fun(ite,fun(ite,bool)))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(ite,bool),bool) (\u:ite. (#forall:fun(fun(ite,bool),bool) (\v:ite. (#forall:fun(fun(ite,bool),bool) (\w:ite. (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#==>:fun(bool,fun(bool,bool)) #T:bool) (#forall:fun(fun(ite,bool),bool) (\y':ite. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun(ite,fun(ite,bool)) y':ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) u:ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) v:ite) y:ite) z:ite)) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) w:ite) y:ite) z:ite)))) ((<<:fun(ite,fun(ite,bool)) y':ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) u:ite) v:ite) w:ite)) y:ite) z:ite))))))))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#==>:fun(bool,fun(bool,bool)) #T:bool) (#forall:fun(fun(ite,bool),bool) (\y':ite. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun(ite,fun(ite,bool)) y':ite) z:ite)) ((<<:fun(ite,fun(ite,bool)) y':ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) #False:ite) y:ite) z:ite))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#==>:fun(bool,fun(bool,bool)) #T:bool) (#forall:fun(fun(ite,bool),bool) (\y':ite. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun(ite,fun(ite,bool)) y':ite) y:ite)) ((<<:fun(ite,fun(ite,bool)) y':ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) #True:ite) y:ite) z:ite))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#==>:fun(bool,fun(bool,bool)) #T:bool) ((<<:fun(ite,fun(ite,bool)) z:ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) (#Atomic:fun(num,ite) i:num)) y:ite) z:ite)))))))))) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#==>:fun(bool,fun(bool,bool)) #T:bool) ((<<:fun(ite,fun(ite,bool)) y:ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) (#Atomic:fun(num,ite) i:num)) y:ite) z:ite)))))))))))))))) |- (#?:fun(fun(fun(ite,ite),bool),bool) (\norm:fun(ite,ite). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) #False:ite)) #False:ite)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) #True:ite)) #True:ite)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) (#Atomic:fun(num,ite) i:num))) (#Atomic:fun(num,ite) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) #False:ite) y:ite) z:ite))) (norm:fun(ite,ite) z:ite))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) #True:ite) y:ite) z:ite))) (norm:fun(ite,ite) y:ite))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) (#Atomic:fun(num,ite) i:num)) y:ite) z:ite))) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) (#Atomic:fun(num,ite) i:num)) (norm:fun(ite,ite) y:ite)) (norm:fun(ite,ite) z:ite)))))))))) (#forall:fun(fun(ite,bool),bool) (\u:ite. (#forall:fun(fun(ite,bool),bool) (\v:ite. (#forall:fun(fun(ite,bool),bool) (\w:ite. (#forall:fun(fun(ite,bool),bool) (\y:ite. (#forall:fun(fun(ite,bool),bool) (\z:ite. ((#=:fun(ite,fun(ite,bool)) (norm:fun(ite,ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) u:ite) v:ite) w:ite)) y:ite) z:ite))) (norm:fun(ite,ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) u:ite) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) v:ite) y:ite) z:ite)) (((#Ite:fun(ite,fun(ite,fun(ite,ite))) w:ite) y:ite) z:ite))))))))))))))))))))))

@@ -179,7 +179,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] grob_var(x21 : @list.List[TA], x22 
 ///|
 /// grob_const
 fn step_2() -> Unit raise {
-  let cx_tm = @parser.parse_term("Cx")
+  let cx_tm = @term_syntax.parse_term("Cx")
   grob_const_c.set(fn(x25 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise {
     let vars = x25
     fn(x26 : @kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise {
@@ -733,11 +733,11 @@ pub fn gr_po_pbner(x : @list.List[@list.List[(@num.Num, @list.List[Int64])]]) ->
 ///|
 /// grobify_term
 fn step_6() -> Unit raise {
-  let neg_tm = @parser.parse_term("(--):complex->complex")
-  let add_tm = @parser.parse_term("(+):complex->complex->complex")
-  let sub_tm = @parser.parse_term("(-):complex->complex->complex")
-  let mul_tm = @parser.parse_term("(*):complex->complex->complex")
-  let pow_tm = @parser.parse_term("(pow):complex->num->complex")
+  let neg_tm = @term_syntax.parse_term("complex_neg")
+  let add_tm = @term_syntax.parse_term("complex_add")
+  let sub_tm = @term_syntax.parse_term("complex_sub")
+  let mul_tm = @term_syntax.parse_term("complex_mul")
+  let pow_tm = @term_syntax.parse_term("complex_pow")
   fn grobify_term_1(x162 : @list.List[@kernel.Term], x163 : @kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise {
     let vars = x162
     let tm = x163
@@ -820,11 +820,11 @@ pub fn grobify_term(x : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.Li
 ///|
 /// grobvars
 fn step_7() -> Unit raise {
-  let neg_tm = @parser.parse_term("(--):complex->complex")
-  let add_tm = @parser.parse_term("(+):complex->complex->complex")
-  let sub_tm = @parser.parse_term("(-):complex->complex->complex")
-  let mul_tm = @parser.parse_term("(*):complex->complex->complex")
-  let pow_tm = @parser.parse_term("(pow):complex->num->complex")
+  let neg_tm = @term_syntax.parse_term("complex_neg")
+  let add_tm = @term_syntax.parse_term("complex_add")
+  let sub_tm = @term_syntax.parse_term("complex_sub")
+  let mul_tm = @term_syntax.parse_term("complex_mul")
+  let pow_tm = @term_syntax.parse_term("complex_pow")
   fn grobvars_1(x175 : @kernel.Term, x176 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
     let tm = x175
     let acc = x176
@@ -874,8 +874,8 @@ pub fn grobvars(x : @kernel.Term) -> @list.List[@kernel.Term] raise {
 ///|
 /// grobify_equations
 fn step_8() -> Unit raise {
-  let zero_tm = @parser.parse_term("Cx(&0)")
-  let sub_tm = @parser.parse_term("(-):complex->complex->complex")
+  let zero_tm = @term_syntax.parse_term("Cx(real_of_num(0))")
+  let sub_tm = @term_syntax.parse_term("complex_sub")
   let complex_ty = @parser.parse_type("complex")
   let grobify_equation : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise = fn(x178 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise {
     let vars = x178
@@ -1025,23 +1025,23 @@ pub fn[TA] resolve_proof(x200 : @list.List[TA], x201 : History) -> @list.List[(I
 /// holify_polynomial
 fn step_9() -> Unit raise {
   let complex_ty = @parser.parse_type("complex")
-  let pow_tm = @parser.parse_term("(pow):complex->num->complex")
-  let t209 = @parser.parse_term("(*):complex->complex->complex")
+  let pow_tm = @term_syntax.parse_term("complex_pow")
+  let t209 = @term_syntax.parse_term("complex_mul")
   let mk_mul : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x212 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x213 : @kernel.Term) -> @kernel.Term raise {
       ((x210 : @kernel.Term, x211 : @kernel.Term) => @basics.mk_binop(t209, x210, x211))(x212, x213)
     }
   }
-  let t214 = @parser.parse_term("(+):complex->complex->complex")
+  let t214 = @term_syntax.parse_term("complex_add")
   let mk_add : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x217 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x218 : @kernel.Term) -> @kernel.Term raise {
       ((x215 : @kernel.Term, x216 : @kernel.Term) => @basics.mk_binop(t214, x215, x216))(x217, x218)
     }
   }
-  let zero_tm = @parser.parse_term("Cx(&0)")
-  let add_tm = @parser.parse_term("(+):complex->complex->complex")
-  let mul_tm = @parser.parse_term("(*):complex->complex->complex")
-  let t220 = @parser.parse_term("Cx")
+  let zero_tm = @term_syntax.parse_term("Cx(real_of_num(0))")
+  let add_tm = @term_syntax.parse_term("complex_add")
+  let mul_tm = @term_syntax.parse_term("complex_mul")
+  let t220 = @term_syntax.parse_term("Cx")
   let complex_term_of_rat : (@num.Num) -> @kernel.Term raise = fn(x222 : @num.Num) -> @kernel.Term raise {
     ((x221 : @kernel.Term) => @lib.curry(fn(x219 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
       @kernel.mk_comb(x219.0, x219.1)
@@ -1147,9 +1147,9 @@ pub fn involved(x238 : @list.List[@list.List[Int64]], x239 : @list.List[Int64], 
 ///|
 /// GROBNER_REFUTE
 fn step_11() -> Unit raise {
-  let add_tm = @parser.parse_term("(+):complex->complex->complex")
-  let mul_tm = @parser.parse_term("(*):complex->complex->complex")
-  let apply_pth : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(@cpoly.simple_complex_arith(@parser.parse_term("(x = y) ==> (x + Cx(--(&1)) * (y + Cx(&1)) = Cx(&0)) ==> F")))
+  let add_tm = @term_syntax.parse_term("complex_add")
+  let mul_tm = @term_syntax.parse_term("complex_mul")
+  let apply_pth : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(@cpoly.simple_complex_arith(@term_syntax.parse_term("(x : Complex) == (y : Complex) → x + Cx(-real_of_num(1)) * (y + Cx(real_of_num(1))) == Cx(real_of_num(0)) → false")))
   let mk_add : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(x243 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let th1 = x243
     fn(x244 : @kernel.Thm) -> @kernel.Thm raise {
@@ -1231,21 +1231,21 @@ pub fn grobner_refute(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// COMPLEX_ARITH
 fn step_12() -> Unit raise {
-  let pth0 = @cpoly.simple_complex_arith(@parser.parse_term("(x = y) <=> (x - y = Cx(&0))"))
+  let pth0 = @cpoly.simple_complex_arith(@term_syntax.parse_term("((x : Complex) == (y : Complex)) == (x - y == Cx(real_of_num(0)))"))
   let t263 = @tactics.conv_tac((x262 : @kernel.Term) => @lib.time(@quelim.full_complex_quelim_conv, x262))
-  let pth1 = @tactics.prove(@parser.parse_term("forall x. ~(x = Cx(&0)) <=> ?z. z * x + Cx(&1) = Cx(&0)"), t263)
+  let pth1 = @tactics.prove(@term_syntax.parse_term("∀ x : Complex, !(x == Cx(real_of_num(0))) == (∃ z : Complex, z * x + Cx(real_of_num(1)) == Cx(real_of_num(0)))"), t263)
   let t265 = @tactics.conv_tac((x264 : @kernel.Term) => @lib.time(@quelim.full_complex_quelim_conv, x264))
-  let pth2a = @tactics.prove(@parser.parse_term("forall x y u v. ~(x = y) \\/ ~(u = v) <=>\n                ?w z. w * (x - y) + z * (u - v) + Cx(&1) = Cx(&0)"), t265)
+  let pth2a = @tactics.prove(@term_syntax.parse_term("∀ x : Complex, ∀ y : Complex, ∀ u : Complex, ∀ v : Complex, (!(x == y) || !(u == v)) == (∃ w : Complex, ∃ z : Complex, w * (x - y) + (z * (u - v) + Cx(real_of_num(1))) == Cx(real_of_num(0)))"), t265)
   let t267 = @tactics.conv_tac((x266 : @kernel.Term) => @lib.time(@quelim.full_complex_quelim_conv, x266))
-  let pth2b = @tactics.prove(@parser.parse_term("forall x y. ~(x = y) <=> ?z. z * (x - y) + Cx(&1) = Cx(&0)"), t267)
-  let pth3 = @class.taut(@parser.parse_term("(p ==> F) ==> (~q <=> p) ==> q"))
+  let pth2b = @tactics.prove(@term_syntax.parse_term("∀ x : Complex, ∀ y : Complex, !(x == y) == (∃ z : Complex, z * (x - y) + Cx(real_of_num(1)) == Cx(real_of_num(0)))"), t267)
+  let pth3 = @class.taut(@term_syntax.parse_term("((p : Bool) → false) → !(q : Bool) == p → q"))
   let gen_prenex_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x268 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s269 = @equal.redepth_conv(x268)
     fn(x270 : @kernel.Term) -> @kernel.Thm raise {
       s269(x270)
     }
   }, @list.List([@theorems.and_forall_thm(), @theorems.left_and_forall_thm(), @theorems.right_and_forall_thm(), @class.left_or_forall_thm(), @class.right_or_forall_thm(), @theorems.or_exists_thm(), @theorems.left_or_exists_thm(), @theorems.right_or_exists_thm(), @theorems.left_and_exists_thm(), @theorems.right_and_exists_thm()]))
-  let t283 = @parser.parse_term("Cx(&0)")
+  let t283 = @term_syntax.parse_term("Cx(real_of_num(0))")
   let t287 = @simp.gen_rewrite_conv(fn(x282 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x282
   }, @list.List([pth0]))

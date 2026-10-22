@@ -5641,30 +5641,30 @@ test "Permutation/nummax matches Permutation/nummax.ml" {
       #|0..0..solved at 4
       #|0..0..3..7..16..30..61..107..182..solved at 195
       #|Permutation/nummax quotations (24):
-      #|  forall m n p. MAX m n < p <=> m < p /\\ n < p
-      #|  forall m n p. MAX m n <= p <=> m <= p /\\ n <= p
-      #|  forall m n p. p < MAX m n <=> p < m \\/ p < n
-      #|  forall m n p. p <= MAX m n <=> p <= m \\/ p <= n
-      #|  forall m n. MAX n m = MAX m n
-      #|  ~(m <= p)
-      #|  m <= p
-      #|  n <= p
-      #|  m <= n
-      #|  forall m n p. MAX (MAX m n) p = MAX m (MAX n p)
-      #|  forall n. MAX n n = n
-      #|  (forall m n. MAX n m = MAX m n) /\\\n    (forall m n p. MAX (MAX m n) p = MAX m (MAX n p)) /\\\n    (forall m n p. MAX m (MAX n p) = MAX n (MAX m p)) /\\\n    (forall m. MAX m m = m) /\\\n    (forall m n. MAX m (MAX m n) = MAX m n)
-      #|  (forall n. MAX n 0 = n) /\\ (forall n. MAX 0 n = n)
-      #|  MAXL [] = 0 /\\\n   (forall h t. MAXL (CONS h t) = MAX h (MAXL t))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (MAX(m, n) < p) == (m < p && n < p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (MAX(m, n) <= p) == (m <= p && n <= p)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (p < MAX(m, n)) == (p < m || p < n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, (p <= MAX(m, n)) == (p <= m || p <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, MAX(n, m) == MAX(m, n)
+      #|  !((m : Num) <= (p : Num))
+      #|  (m : Num) <= (p : Num)
+      #|  (n : Num) <= (p : Num)
+      #|  (m : Num) <= (n : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MAX(MAX(m, n), p) == MAX(m, MAX(n, p))
+      #|  \226\136\128 n : Num, MAX(n, n) == n
+      #|  (\226\136\128 m : Num, \226\136\128 n : Num, MAX(n, m) == MAX(m, n)) && (\226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MAX(MAX(m, n), p) == MAX(m, MAX(n, p))) && (\226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, MAX(m, MAX(n, p)) == MAX(n, MAX(m, p))) && (\226\136\128 m : Num, MAX(m, m) == m) && (\226\136\128 m : Num, \226\136\128 n : Num, MAX(m, MAX(m, n)) == MAX(m, n))
+      #|  (\226\136\128 n : Num, MAX(n, 0) == n) && (\226\136\128 n : Num, MAX(0, n) == n)
+      #|  (MAXL : (List[Num]) -> Num)(NIL) == 0 && (\226\136\128 h : Num, \226\136\128 t : List[Num], MAXL(CONS(h, t)) == MAX(h, MAXL(t)))
       #|  :P
       #|  :P
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  forall l n. MAXL l <= n <=> ALL (\\m. m <= n) l
-      #|  forall l n. n < MAXL l <=> EX (\\m. n < m) l
-      #|  forall n l. MEM n l ==> n <= MAXL l
-      #|  t:num list=[]
-      #|  forall l. ~NULL l ==> MEM (MAXL l) l
+      #|  \226\136\128 l : List[Num], \226\136\128 n : Num, (MAXL(l) <= n) == ALL((m : Num) => m <= n, l)
+      #|  \226\136\128 l : List[Num], \226\136\128 n : Num, (n < MAXL(l)) == EX((m : Num) => n < m, l)
+      #|  \226\136\128 n : Num, \226\136\128 l : List[Num], MEM(n, l) \226\134\146 n <= MAXL(l)
+      #|  (t : List[Num]) == NIL
+      #|  \226\136\128 l : List[Num], !NULL(l) \226\134\146 MEM(MAXL(l), l)
       #|MAX_LT =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) ((#MAX:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) p:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num)))))))))
       #|MAX_LE =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) ((#MAX:fun(num,fun(num,num)) m:num) n:num)) p:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) p:num)) ((#<=:fun(num,fun(num,bool)) n:num) p:num)))))))))
       #|LT_MAX =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#=:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) ((#MAX:fun(num,fun(num,num)) m:num) n:num))) ((#\/:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) p:num) m:num)) ((#<:fun(num,fun(num,bool)) p:num) n:num)))))))))

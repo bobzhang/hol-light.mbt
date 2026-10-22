@@ -16010,9 +16010,9 @@ test "RichterHilbertAxiomGeometry/Topology matches RichterHilbertAxiomGeometry/T
       #|Warning: inventing type variables
       #|0..0..1..solved at 4
       #|RichterHilbertAxiomGeometry/Topology quotations (3):
-      #|  euclidean = mk_topology (UNIV, open)
-      #|  ball(x,e) = {y | dist(x,y) < e}
-      #|  cball(x,e) = {y | dist(x,y) <= e}
+      #|  (euclidean : Topology[Cart[Real, _]]) == mk_topology((UNIV, open))
+      #|  (ball : ((Cart[Real, _], Real), Cart[Real, _]) -> Bool)(((x : Cart[Real, _]), (e : Real))) == {(y : Cart[Real, _]) | distance((x, y)) < e}
+      #|  (cball : ((Cart[Real, _], Real), Cart[Real, _]) -> Bool)(((x : Cart[Real, _]), (e : Real))) == {(y : Cart[Real, _]) | distance((x, y)) <= e}
       #|NOTIN =  |- (#forall:fun(fun('?1,bool),bool) (\a:'?1. (#forall:fun(fun(fun('?1,bool),bool),bool) (\l:fun('?1,bool). ((#=:fun(bool,fun(bool,bool)) ((#NOTIN:fun('?1,fun(fun('?1,bool),bool)) a:'?1) l:fun('?1,bool))) (#~:fun(bool,bool) ((#IN:fun('?1,fun(fun('?1,bool),bool)) a:'?1) l:fun('?1,bool))))))))
       #|DIFF_UNION =  |- (#forall:fun(fun(fun('?2,bool),bool),bool) (\u:fun('?2,bool). (#forall:fun(fun(fun('?2,bool),bool),bool) (\s:fun('?2,bool). (#forall:fun(fun(fun('?2,bool),bool),bool) (\t:fun('?2,bool). ((#=:fun(fun('?2,bool),fun(fun('?2,bool),bool)) ((#DIFF:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) u:fun('?2,bool)) ((#UNION:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) s:fun('?2,bool)) t:fun('?2,bool)))) ((#INTER:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) ((#DIFF:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) u:fun('?2,bool)) s:fun('?2,bool))) ((#DIFF:fun(fun('?2,bool),fun(fun('?2,bool),fun('?2,bool))) u:fun('?2,bool)) t:fun('?2,bool))))))))))
       #|DIFF_INTER =  |- (#forall:fun(fun(fun('?3,bool),bool),bool) (\u:fun('?3,bool). (#forall:fun(fun(fun('?3,bool),bool),bool) (\s:fun('?3,bool). (#forall:fun(fun(fun('?3,bool),bool),bool) (\t:fun('?3,bool). ((#=:fun(fun('?3,bool),fun(fun('?3,bool),bool)) ((#DIFF:fun(fun('?3,bool),fun(fun('?3,bool),fun('?3,bool))) u:fun('?3,bool)) ((#INTER:fun(fun('?3,bool),fun(fun('?3,bool),fun('?3,bool))) s:fun('?3,bool)) t:fun('?3,bool)))) ((#UNION:fun(fun('?3,bool),fun(fun('?3,bool),fun('?3,bool))) ((#DIFF:fun(fun('?3,bool),fun(fun('?3,bool),fun('?3,bool))) u:fun('?3,bool)) s:fun('?3,bool))) ((#DIFF:fun(fun('?3,bool),fun(fun('?3,bool),fun('?3,bool))) u:fun('?3,bool)) t:fun('?3,bool))))))))))

@@ -3,10 +3,10 @@
 ///|
 /// NUM_REWRITES
 fn step_1() -> Unit raise {
-  let t1 = @int.arith_rule(@parser.parse_term("x * 1 = x"))
-  let t2 = @int.arith_rule(@parser.parse_term("1 * x = x"))
-  let t3 = @int.arith_rule(@parser.parse_term("0 + x = x"))
-  num_rewrites_c.set(Ref::{ val: @list.List([@arith.lt_trans(), @arith.let_trans(), @arith.lte_trans(), @arith.le_trans(), @arith.gt(), @arith.ge(), @arith.pre(), @int.arith_rule(@parser.parse_term("x + 0 = x")), t3, t2, t1]) })
+  let t1 = @int.arith_rule(@term_syntax.parse_term("(x : Num) * 1 == x"))
+  let t2 = @int.arith_rule(@term_syntax.parse_term("1 * (x : Num) == x"))
+  let t3 = @int.arith_rule(@term_syntax.parse_term("0 + (x : Num) == x"))
+  num_rewrites_c.set(Ref::{ val: @list.List([@arith.lt_trans(), @arith.let_trans(), @arith.lte_trans(), @arith.le_trans(), @arith.gt(), @arith.ge(), @arith.pre(), @int.arith_rule(@term_syntax.parse_term("(x : Num) + 0 == x")), t3, t2, t1]) })
 }
 
 ///|
@@ -46,11 +46,11 @@ pub fn extend_num_rewrites(x4 : @list.List[@kernel.Thm]) -> Unit raise {
 ///|
 /// REAL_REWRITES
 fn step_3() -> Unit raise {
-  let t5 = @int.arith_rule(@parser.parse_term("x - x = &0"))
-  let t6 = @int.arith_rule(@parser.parse_term("-- (-- x * y) = x * y"))
-  let t7 = @int.arith_rule(@parser.parse_term("-- &1 * -- &1 = &1"))
-  let t8 = @int.arith_rule(@parser.parse_term("-- &1 * x = -- x"))
-  real_rewrites_c.set(Ref::{ val: @list.List([@realax.real_mul_lid(), @analysis.real_mul_rid(), @analysis.real_mul_rzero(), @analysis.real_mul_lzero(), @realarith.real_lt_trans(), @realarith.real_let_trans(), @analysis.real_lte_trans(), @analysis.real_le_trans(), @analysis.real_le_mul(), @analysis.real_not_lt(), @realarith.real_lt_refl(), @analysis.real_le_refl(), @calc_int.real_add_rid(), @realax.real_add_lid(), @realax.real_add_ldistrib(), @real.real_add_rdistrib(), @analysis.real_neg_0(), @analysis.real_neg_mul2(), @real.real_of_num_lt(), @real.real_max_max(), @realax.real_pow(), @calc_rat.real_arith(@parser.parse_term("x - &0 = x")), @analysis.real_not_lt(), @analysis.real_not_le(), @real.real_inv_inv(), @real.real_inv_mul(), @realax.real_gt(), @realax.real_ge(), @real.real_pow_1(), t8, t7, t6, t5, @real.real_pow_one(), @analysis.real_neg_neg()]) })
+  let t5 = @int.arith_rule(@term_syntax.parse_term("(x : Real) - x == real_of_num(0)"))
+  let t6 = @int.arith_rule(@term_syntax.parse_term("-(-(x : Real) * (y : Real)) == x * y"))
+  let t7 = @int.arith_rule(@term_syntax.parse_term("-real_of_num(1) * -real_of_num(1) == real_of_num(1)"))
+  let t8 = @int.arith_rule(@term_syntax.parse_term("-real_of_num(1) * (x : Real) == -x"))
+  real_rewrites_c.set(Ref::{ val: @list.List([@realax.real_mul_lid(), @analysis.real_mul_rid(), @analysis.real_mul_rzero(), @analysis.real_mul_lzero(), @realarith.real_lt_trans(), @realarith.real_let_trans(), @analysis.real_lte_trans(), @analysis.real_le_trans(), @analysis.real_le_mul(), @analysis.real_not_lt(), @realarith.real_lt_refl(), @analysis.real_le_refl(), @calc_int.real_add_rid(), @realax.real_add_lid(), @realax.real_add_ldistrib(), @real.real_add_rdistrib(), @analysis.real_neg_0(), @analysis.real_neg_mul2(), @real.real_of_num_lt(), @real.real_max_max(), @realax.real_pow(), @calc_rat.real_arith(@term_syntax.parse_term("(x : Real) - real_of_num(0) == x")), @analysis.real_not_lt(), @analysis.real_not_le(), @real.real_inv_inv(), @real.real_inv_mul(), @realax.real_gt(), @realax.real_ge(), @real.real_pow_1(), t8, t7, t6, t5, @real.real_pow_one(), @analysis.real_neg_neg()]) })
 }
 
 ///|

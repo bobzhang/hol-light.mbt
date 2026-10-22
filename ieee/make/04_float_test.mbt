@@ -5575,19 +5575,19 @@ test "IEEE/float matches IEEE/float.ml" {
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|IEEE/float quotations (13):
-      #|  is_valid_flformat (r:num, p:num) = (1 < r /\\ (EVEN r) /\\ (1 < p))
-      #|  (2:num, 2:num)
-      #|  ?(fmt:num#num). is_valid_flformat fmt
-      #|  flr (fmt:flformat) = (FST (dest_flformat fmt))
-      #|  flp (fmt:flformat) = (SND (dest_flformat fmt))
-      #|  is_frac_and_exp (fmt:flformat) (x:real) (f:num) (e:int) =\n  (0 < f /\\\n   f < (flr fmt) EXP (flp fmt) /\\\n   abs(x) = &f * &(flr fmt) ipow (e - &(flp fmt) + &1))
-      #|  is_float (fmt:flformat) (x:real) =\n  (?(f:num) (e:int) . is_frac_and_exp(fmt) x f e)
-      #|  to_fformat (fmt:flformat) (e:int) = (mk_fformat ((flr fmt), (flp fmt), e))
-      #|  greatest_e (fmt:flformat) (x:real) =\n  sup_int({ (z:int) | &(flr fmt) ipow z <= abs(x) })
-      #|  greatest_m (fmt:flformat) (x:real) =\n  sup_num({ (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) })
-      #|  greatest_r (fmt:flformat) (x:real) =\n  (if (&0 <= x)\n   then\n     (x - &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))\n   else\n     (x + &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)))
-      #|  flround (fmt:flformat) (mode:roundmode) (x:real) =\n  (let m = (greatest_m(fmt) x)\n   and e = (greatest_e(fmt) x)\n   and y = (greatest_r(fmt) x)\n   in\n     (if (&0 <= x)\n      then\n        (&m * &(flr fmt) ipow e +\n           (fround(to_fformat fmt e) mode y))\n      else\n        (-- (&m * &(flr fmt) ipow e) +\n           (fround(to_fformat fmt e) mode y))))
-      #|  fl_eps (fmt:flformat) = (&(flr fmt) ipow (&1 - &(flp fmt))) / &2
+      #|  (is_valid_flformat : ((Num, Num)) -> Bool)(((r : Num), (p : Num))) == (1 < r && EVEN(r) && 1 < p)
+      #|  (2, 2)
+      #|  \226\136\131 fmt : (Num, Num), is_valid_flformat(fmt)
+      #|  (flr : (Flformat) -> Num)((fmt : Flformat)) == FST(dest_flformat(fmt))
+      #|  (flp : (Flformat) -> Num)((fmt : Flformat)) == SND(dest_flformat(fmt))
+      #|  (is_frac_and_exp : (Flformat, Real, Num, Int) -> Bool)((fmt : Flformat), (x : Real), (f : Num), (e : Int)) == (0 < f && f < EXP(flr(fmt), flp(fmt)) && abs(x) == real_of_num(f) * ipow(real_of_num(flr(fmt)), e - int_of_num(flp(fmt)) + int_of_num(1)))
+      #|  (is_float : (Flformat, Real) -> Bool)((fmt : Flformat), (x : Real)) == (\226\136\131 f : Num, \226\136\131 e : Int, is_frac_and_exp(fmt, x, f, e))
+      #|  (to_fformat : (Flformat, Int) -> Fformat)((fmt : Flformat), (e : Int)) == mk_fformat((flr(fmt), flp(fmt), e))
+      #|  (greatest_e : (Flformat, Real) -> Int)((fmt : Flformat), (x : Real)) == sup_int({(z : Int) | ipow(real_of_num(flr(fmt)), z) <= abs(x)})
+      #|  (greatest_m : (Flformat, Real) -> Num)((fmt : Flformat), (x : Real)) == sup_num({(m : Num) | real_of_num(m) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) <= abs(x)})
+      #|  (greatest_r : (Flformat, Real) -> Real)((fmt : Flformat), (x : Real)) == (if real_of_num(0) <= x { x - real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) } else { x + real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) })
+      #|  (flround : (Flformat, Roundmode, Real) -> Real)((fmt : Flformat), (mode : Roundmode), (x : Real)) == LET((m : Num) => (e : Int) => (y : Real) => LET_END(if real_of_num(0) <= x { real_of_num(m) * ipow(real_of_num(flr(fmt)), e) + fround(to_fformat(fmt, e), mode, y) } else { -(real_of_num(m) * ipow(real_of_num(flr(fmt)), e)) + fround(to_fformat(fmt, e), mode, y) }), greatest_m(fmt, x), greatest_e(fmt, x), greatest_r(fmt, x))
+      #|  (fl_eps : (Flformat) -> Real)((fmt : Flformat)) == ipow(real_of_num(flr(fmt)), int_of_num(1) - int_of_num(flp(fmt))) / real_of_num(2)
       #|is_valid_flformat =  |- ((#=:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) r:num) p:num))) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) r:num)) ((#/\:fun(bool,fun(bool,bool)) (#EVEN:fun(num,bool) r:num)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) p:num))))
       #|flformat_typbij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(flformat,bool),bool) (\a:flformat. ((#=:fun(flformat,fun(flformat,bool)) (#mk_flformat:fun(prod(num,num),flformat) (#dest_flformat:fun(flformat,prod(num,num)) a:flformat))) a:flformat)))) (#forall:fun(fun(prod(num,num),bool),bool) (\r:prod(num,num). ((#=:fun(bool,fun(bool,bool)) (#is_valid_flformat:fun(prod(num,num),bool) r:prod(num,num))) ((#=:fun(prod(num,num),fun(prod(num,num),bool)) (#dest_flformat:fun(flformat,prod(num,num)) (#mk_flformat:fun(prod(num,num),flformat) r:prod(num,num)))) r:prod(num,num))))))
       #|flr =  |- ((#=:fun(num,fun(num,bool)) (#flr:fun(flformat,num) fmt:flformat)) (#FST:fun(prod(num,num),num) (#dest_flformat:fun(flformat,prod(num,num)) fmt:flformat)))

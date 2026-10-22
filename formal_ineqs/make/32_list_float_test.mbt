@@ -37,22 +37,22 @@ test "Formal_ineqs/list/list_float matches Formal_ineqs/list/list_float.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Formal_ineqs/list/list_float quotations (16):
-      #|  list_sum list f = ITLIST (\\t1 t2. f t1 + t2) list (&0)
-      #|  list_sum2 f l1 l2 = ITLIST2 (\\a b c. f a b + c) l1 l2 (&0)
-      #|  error_mul_f2 a int = a * iabs int
-      #|  error_mul_f1 w x list = x * list_sum2 error_mul_f2 w list
-      #|  list_sum [] (f:A->real) = &0
-      #|  list_sum [h:A] f = f h
-      #|  list_sum (CONS (h:A) t) f = f h + list_sum t f
-      #|  list_sum2 (f:A->B->real) [] [] <= &0
-      #|  f h1 h2 <= x ==> list_sum2 (f:A->B->real) [h1] [h2] <= x
-      #|  x + y:real
-      #|  f h1 h2 <= x /\\ list_sum2 f t1 t2 <= y /\\ x + y <= z ==>\n\t\t\t\t\tlist_sum2 (f:A->B->real) (CONS h1 t1) (CONS h2 t2) <= z
-      #|  iabs int = x /\\ a * x <= y ==> error_mul_f2 a int <= y
-      #|  x * list_sum2 error_mul_f2 w list <= z ==>\n\t\t\t\t\t   error_mul_f1 w x list <= z
-      #|  list_sum2 error_mul_f2
-      #|  w:(real)list
-      #|  list:(real#real)list
+      #|  (list_sum : (List[_], (_) -> Real) -> Real)((list : List[_]), (f : (_) -> Real)) == ITLIST((t1 : _) => (t2 : Real) => f(t1) + t2, list, real_of_num(0))
+      #|  (list_sum2 : ((_, _) -> Real, List[_], List[_]) -> Real)((f : (_, _) -> Real), (l1 : List[_]), (l2 : List[_])) == ITLIST2((a : _) => (b : _) => (c : Real) => f(a, b) + c, l1, l2, real_of_num(0))
+      #|  (error_mul_f2 : (Real, (Real, Real)) -> Real)((a : Real), (int : (Real, Real))) == a * iabs(int)
+      #|  (error_mul_f1 : (List[Real], Real, List[(Real, Real)]) -> Real)((w : List[Real]), (x : Real), (list : List[(Real, Real)])) == x * list_sum2(error_mul_f2, w, list)
+      #|  list_sum(NIL, (f : (A) -> Real)) == real_of_num(0)
+      #|  list_sum([(h : A)], (f : (A) -> Real)) == f(h)
+      #|  list_sum(CONS((h : A), (t : List[A])), (f : (A) -> Real)) == f(h) + list_sum(t, f)
+      #|  list_sum2((f : (A, B) -> Real), NIL, NIL) <= real_of_num(0)
+      #|  (f : (A, B) -> Real)((h1 : A), (h2 : B)) <= (x : Real) \226\134\146 list_sum2(f, [h1], [h2]) <= x
+      #|  (x : Real) + (y : Real)
+      #|  (f : (A, B) -> Real)((h1 : A), (h2 : B)) <= (x : Real) && list_sum2(f, (t1 : List[A]), (t2 : List[B])) <= (y : Real) && x + y <= (z : Real) \226\134\146 list_sum2(f, CONS(h1, t1), CONS(h2, t2)) <= z
+      #|  iabs((int : (Real, Real))) == (x : Real) && (a : Real) * x <= (y : Real) \226\134\146 error_mul_f2(a, int) <= y
+      #|  (x : Real) * list_sum2(error_mul_f2, (w : List[Real]), (list : List[(Real, Real)])) <= (z : Real) \226\134\146 error_mul_f1(w, x, list) <= z
+      #|  list_sum2(error_mul_f2)
+      #|  (w : List[Real])
+      #|  (list : List[(Real, Real)])
       #|List_float.list_sum =  |- (#forall:fun(fun(fun('?1,real),bool),bool) (\f:fun('?1,real). (#forall:fun(fun(list('?1),bool),bool) (\list:list('?1). ((#=:fun(real,fun(real,bool)) ((#list_sum:fun(list('?1),fun(fun('?1,real),real)) list:list('?1)) f:fun('?1,real))) (((#ITLIST:fun(fun('?1,fun(real,real)),fun(list('?1),fun(real,real))) (\t1:'?1. (\t2:real. ((#real_add:fun(real,fun(real,real)) (f:fun('?1,real) t1:'?1)) t2:real)))) list:list('?1)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))
       #|List_float.list_sum2 =  |- (#forall:fun(fun(fun('?2,fun('?3,real)),bool),bool) (\f:fun('?2,fun('?3,real)). (#forall:fun(fun(list('?2),bool),bool) (\l1:list('?2). (#forall:fun(fun(list('?3),bool),bool) (\l2:list('?3). ((#=:fun(real,fun(real,bool)) (((#list_sum2:fun(fun('?2,fun('?3,real)),fun(list('?2),fun(list('?3),real))) f:fun('?2,fun('?3,real))) l1:list('?2)) l2:list('?3))) ((((#ITLIST2:fun(fun('?2,fun('?3,fun(real,real))),fun(list('?2),fun(list('?3),fun(real,real)))) (\a:'?2. (\b:'?3. (\c:real. ((#real_add:fun(real,fun(real,real)) ((f:fun('?2,fun('?3,real)) a:'?2) b:'?3)) c:real))))) l1:list('?2)) l2:list('?3)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
       #|List_float.error_mul_f2 =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(prod(real,real),bool),bool) (\int:prod(real,real). ((#=:fun(real,fun(real,bool)) ((#error_mul_f2:fun(real,fun(prod(real,real),real)) a:real) int:prod(real,real))) ((#real_mul:fun(real,fun(real,real)) a:real) (#iabs:fun(prod(real,real),real) int:prod(real,real))))))))

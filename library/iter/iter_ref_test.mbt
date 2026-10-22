@@ -5640,54 +5640,54 @@ test "Library/iter matches Library/iter.ml" {
       #|  (forall f x. ITER 0 f x = x) /\\\n    (forall f n x. ITER (SUC n) f x = ITER n f (f x))
       #|  (forall f. ITER 0 f = I) /\\\n    (forall f n. ITER (SUC n) f = ITER n f o f)
       #|  1
-      #|  forall f x. ITER 1 f x = f x
-      #|  forall f n m x. ITER n f (ITER m f x) = ITER (n + m) f x
-      #|  forall m n. ITER (m + n) f = ITER m f o ITER n f
-      #|  forall f n m x. ITER n (ITER m f) x = ITER (n * m) f x
-      #|  forall f n x. f x = x ==> ITER n f x = x
-      #|  m:num
-      #|  (d:num) divides m + d <=> d divides m
-      #|  m:num = n - d
-      #|  n:num = (n - d) + d
-      #|  d <= n:num
-      #|  n divides 0
-      #|  n = 0
-      #|  n:num
-      #|  d:num
-      #|  0 divides n <=> n = 0
+      #|  \226\136\128 f : (_) -> _, \226\136\128 x : _, ITER(1, f, x) == f(x)
+      #|  \226\136\128 f : (_) -> _, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 x : _, ITER(n, f, ITER(m, f, x)) == ITER(n + m, f, x)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, ITER(m + n, (f : (_) -> _)) == o(ITER(m, f), ITER(n, f))
+      #|  \226\136\128 f : (_) -> _, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 x : _, ITER(n, ITER(m, f), x) == ITER(n * m, f, x)
+      #|  \226\136\128 f : (_) -> _, \226\136\128 n : Num, \226\136\128 x : _, f(x) == x \226\134\146 ITER(n, f, x) == x
+      #|  (m : Num)
+      #|  divides((d : Num), (m : Num) + d) == divides(d, m)
+      #|  (m : Num) == (n : Num) - (d : Num)
+      #|  (n : Num) == n - (d : Num) + d
+      #|  (d : Num) <= (n : Num)
+      #|  divides((n : Num), 0)
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  (d : Num)
+      #|  divides(0, (n : Num)) == (n == 0)
       #|  0
-      #|  forall n. ~(n = 0) ==> ~P(f n:A)
+      #|  \226\136\128 n : Num, !(n == 0) \226\134\146 !(P : (A) -> Bool)((f : (Num) -> A)(n))
       #|  forall P f:num->A.\n         P(f 0) /\\ (forall m n. P(f m) /\\ ~(m = 0) ==> (P(f(m + n)) <=> P(f n)))\n         ==> ?d. forall n. P(f n) <=> d divides n
       #|  forall a b:num->A. (forall x y. R x y ==> R y x) /\\\n          (forall x y z. R x y /\\ R y z ==> R x z) /\\\n          (forall n. R (a n) (b n))\n          ==> (forall n. R (a n) z <=> R (b n) z)
-      #|  m:num
-      #|  \\n. ITER n f (z:A)
-      #|  \\x. (R:A->A->bool) x z
+      #|  (m : Num)
+      #|  (n : Num) => ITER(n, (f : (A) -> A), (z : A))
+      #|  (x : A) => (R : (A, A) -> Bool)(x, (z : A))
       #|  forall R f z:A.\n        R z z /\\\n        (forall x y. R x y ==> R y x) /\\\n        (forall x y z. R x y /\\ R y z ==> R x z) /\\\n        (forall x y. R x y ==> R (f x) (f y))\n        ==> ?d. forall n. R (ITER n f z) z <=> d divides n
-      #|  forall n. 0 divides n <=> n = 0
-      #|  m:num
-      #|  d = 0
-      #|  d:num
-      #|  z:A
-      #|  f:A->A
-      #|  R:A->A->bool
-      #|  p:num
-      #|  q - d = SUC(q - SUC d) /\\ p - d = SUC(p - SUC d)
-      #|  q:num
-      #|  q:num
+      #|  \226\136\128 n : Num, divides(0, n) == (n == 0)
+      #|  (m : Num)
+      #|  (d : Num) == 0
+      #|  (d : Num)
+      #|  (z : A)
+      #|  (f : (A) -> A)
+      #|  (R : (A, A) -> Bool)
+      #|  (p : Num)
+      #|  (q : Num) - (d : Num) == SUC(q - SUC(d)) && (p : Num) - d == SUC(p - SUC(d))
+      #|  (q : Num)
+      #|  (q : Num)
       #|  forall d. d <= p\n             ==> (R:A->A->bool) (ITER (p - d) f z) (ITER (q - d) f z)
-      #|  q - p:num
-      #|  q:num
-      #|  p:num
-      #|  c <= k ==> s <= c ==> ~(s = k + 1)
-      #|  ~p /\\ (~q ==> r) ==> (p <=> q) ==> r
-      #|  0..k
-      #|  \\n. (R:A->A->bool) (ITER n f z)
-      #|  ?m. 0 < m /\\ m <= k /\\ (R:A->A->bool) (ITER m f z) z
+      #|  (q : Num) - (p : Num)
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  (c : Num) <= (k : Num) \226\134\146 (s : Num) <= c \226\134\146 !(s == k + 1)
+      #|  !(p : Bool) && (!(q : Bool) \226\134\146 (r : Bool)) \226\134\146 p == q \226\134\146 r
+      #|  op_dot_dot(0, (k : Num))
+      #|  (n : Num) => (R : (A, A) -> Bool)(ITER(n, (f : (A) -> A), (z : A)))
+      #|  \226\136\131 m : Num, 0 < m && m <= (k : Num) && (R : (A, A) -> Bool)(ITER(m, (f : (A) -> A), (z : A)), z)
       #|  forall R f z:A k.\n     FINITE { R(ITER n f z) | n IN (:num)} /\\\n     CARD { R(ITER n f z) | n IN (:num)} <= k /\\\n     R z z /\\\n     (forall x y. R x y ==> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall x y. R (f x) (f y) <=> R x y)\n     ==> ?d. 0 < d /\\ d <= k /\\ forall n. R (ITER n f z) z <=> d divides n
       #|  CARD {(R:A->A->bool)(ITER n f z) | n IN (:num)}
-      #|  z:A
-      #|  f:A->A
-      #|  R:A->A->bool
+      #|  (z : A)
+      #|  (f : (A) -> A)
+      #|  (R : (A, A) -> Bool)
       #|  forall R f z:A.\n     FINITE { R(ITER n f z) | n IN (:num)} /\\\n     R z z /\\\n     (forall x y. R x y ==> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall x y. R (f x) (f y) <=> R x y)\n     ==> ?d. 0 < d /\\ forall n. R (ITER n f z) z <=> d divides n
       #|ITER =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('?1,'?1),bool),bool) (\f:fun('?1,'?1). ((#=:fun('?1,fun('?1,bool)) (((#ITER:fun(num,fun(fun('?1,'?1),fun('?1,'?1))) (#NUMERAL:fun(num,num) #_0:num)) f:fun('?1,'?1)) x:'?1)) x:'?1)))) (#forall:fun(fun(fun('?1,'?1),bool),bool) (\f:fun('?1,'?1). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun('?1,fun('?1,bool)) (((#ITER:fun(num,fun(fun('?1,'?1),fun('?1,'?1))) (#SUC:fun(num,num) n:num)) f:fun('?1,'?1)) x:'?1)) (f:fun('?1,'?1) (((#ITER:fun(num,fun(fun('?1,'?1),fun('?1,'?1))) n:num) f:fun('?1,'?1)) x:'?1))))))))
       #|ITER_POINTLESS =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('?2,'?2),bool),bool) (\f:fun('?2,'?2). ((#=:fun(fun('?2,'?2),fun(fun('?2,'?2),bool)) ((#ITER:fun(num,fun(fun('?2,'?2),fun('?2,'?2))) (#NUMERAL:fun(num,num) #_0:num)) f:fun('?2,'?2))) #I:fun('?2,'?2))))) (#forall:fun(fun(fun('?3,'?3),bool),bool) (\f:fun('?3,'?3). (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(fun('?3,'?3),fun(fun('?3,'?3),bool)) ((#ITER:fun(num,fun(fun('?3,'?3),fun('?3,'?3))) (#SUC:fun(num,num) n:num)) f:fun('?3,'?3))) ((#o:fun(fun('?3,'?3),fun(fun('?3,'?3),fun('?3,'?3))) f:fun('?3,'?3)) ((#ITER:fun(num,fun(fun('?3,'?3),fun('?3,'?3))) n:num) f:fun('?3,'?3)))))))))

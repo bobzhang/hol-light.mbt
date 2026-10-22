@@ -5788,28 +5788,28 @@ CPU time (user): <t>
 2 basis elements and 0 critical pairs
 Generating HOL version of proof
 Tutorial/Linking_external_tools quotations (22):
-  (pow)
-  (/)
-  ( * )
-  (-)
-  (+)
+  real_pow
+  op_slash
+  real_mul
+  real_sub
+  real_add
   cos
   sin
-  (--)
-  (--)
-  (pow)
+  real_neg
+  real_neg
+  real_pow
   :real
-  (x + sin(-- &2 * x)) pow 2 - cos(x - &22 / &7)
-  &1234567890
-  x pow 6 - &1
-  r * (r * x * (&1 - x)) * (&1 - r * x * (&1 - x)) - x
-  \\x. (x + &5) pow 2 + &77 * x
-  \\x. sin(x) + x pow 11
-  (sin(&(NUMERAL(BIT0 n)) * x) =\n    &2 * sin(&(NUMERAL n) * x) * cos(&(NUMERAL n) * x)) /\\\n   (sin(&(NUMERAL(BIT1 n)) * x) =\n        sin(&(NUMERAL(BIT0 n)) * x) * cos(x) +\n        sin(x) * cos(&(NUMERAL(BIT0 n)) * x)) /\\\n   (cos(&(NUMERAL(BIT0 n)) * x) =\n        cos(&(NUMERAL n) * x) pow 2 - sin(&(NUMERAL n) * x) pow 2) /\\\n   (cos(&(NUMERAL(BIT1 n)) * x) =\n        cos(&(NUMERAL(BIT0 n)) * x) * cos(x) -\n        sin(x) * sin(&(NUMERAL(BIT0 n)) * x))
-  \\x. sin(x) pow 3
-  \\x. sin(x) * sin(x) pow 5 * cos(x) pow 4 + cos(x)
-  (forall x. (f diffl f'(x)) x) ==> forall x. &0 <= x ==> defint(&0,x) f' (f x - f(&0))
-  \\x. sin(x) pow 13
+  pow((x : Real) + sin(-real_of_num(2) * x), 2) - cos(x - real_of_num(22) / real_of_num(7))
+  real_of_num(1234567890)
+  pow((x : Real), 6) - real_of_num(1)
+  (r : Real) * (r * ((x : Real) * (real_of_num(1) - x)) * (real_of_num(1) - r * (x * (real_of_num(1) - x)))) - x
+  (x : Real) => pow(x + real_of_num(5), 2) + real_of_num(77) * x
+  (x : Real) => sin(x) + pow(x, 11)
+  sin(real_of_num(NUMERAL(BIT0((n : Num)))) * (x : Real)) == real_of_num(2) * (sin(real_of_num(NUMERAL(n)) * x) * cos(real_of_num(NUMERAL(n)) * x)) && sin(real_of_num(NUMERAL(BIT1(n))) * x) == sin(real_of_num(NUMERAL(BIT0(n))) * x) * cos(x) + sin(x) * cos(real_of_num(NUMERAL(BIT0(n))) * x) && cos(real_of_num(NUMERAL(BIT0(n))) * x) == pow(cos(real_of_num(NUMERAL(n)) * x), 2) - pow(sin(real_of_num(NUMERAL(n)) * x), 2) && cos(real_of_num(NUMERAL(BIT1(n))) * x) == cos(real_of_num(NUMERAL(BIT0(n))) * x) * cos(x) - sin(x) * sin(real_of_num(NUMERAL(BIT0(n))) * x)
+  (x : Real) => pow(sin(x), 3)
+  (x : Real) => sin(x) * (pow(sin(x), 5) * pow(cos(x), 4)) + cos(x)
+  (\226\136\128 x : Real, diffl((f : (Real) -> Real), (f' : (Real) -> Real)(x), x)) \226\134\146 (\226\136\128 x : Real, real_of_num(0) <= x \226\134\146 defint((real_of_num(0), x), f', f(x) - f(real_of_num(0))))
+  (x : Real) => pow(sin(x), 13)
 SIN_N_CLAUSES =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num)))) x:real))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_mul:fun(real,fun(real,real)) (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) n:num))) x:real))) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) n:num))) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) n:num)))) x:real))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num)))) x:real))) (#cos:fun(real,real) x:real))) ((#real_mul:fun(real,fun(real,real)) (#sin:fun(real,real) x:real)) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num)))) x:real)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num)))) x:real))) ((#real_sub:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) n:num))) x:real))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_pow:fun(real,fun(num,real)) (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) n:num))) x:real))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) ((#=:fun(real,fun(real,bool)) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) n:num)))) x:real))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#cos:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num)))) x:real))) (#cos:fun(real,real) x:real))) ((#real_mul:fun(real,fun(real,real)) (#sin:fun(real,real) x:real)) (#sin:fun(real,real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) n:num)))) x:real))))))))
 FCT1_WEAK =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\x:real. (((#diffl:fun(fun(real,real),fun(real,fun(real,bool))) f:fun(real,real)) (f':fun(real,real) x:real)) x:real)))) (#forall:fun(fun(real,bool),bool) (\x:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) (((#defint:fun(prod(real,real),fun(fun(real,real),fun(real,bool))) ((#,:fun(real,fun(real,prod(real,real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) f':fun(real,real)) ((#real_sub:fun(real,fun(real,real)) (f:fun(real,real) x:real)) (f:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))
 types = metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

@@ -755,7 +755,7 @@ pub fn lrand(x160 : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// t_tm
 fn step_1() -> Unit raise {
-  t_tm_c.set(@parser.parse_term("T"))
+  t_tm_c.set(@term_syntax.parse_term("true"))
 }
 
 ///|
@@ -770,7 +770,7 @@ pub fn t_tm() -> @kernel.Term {
 ///|
 /// f_tm
 fn step_2() -> Unit raise {
-  f_tm_c.set(@parser.parse_term("F"))
+  f_tm_c.set(@term_syntax.parse_term("false"))
 }
 
 ///|

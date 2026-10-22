@@ -1021,9 +1021,9 @@ pub fn mk_float_domain(x237 : Int64, x238 : (@kernel.Term, @kernel.Term)) -> ((@
 ///|
 /// mk_standard_ineq
 fn step_5() -> Unit raise {
-  let lemma_lt = @calc_rat.real_arith(@parser.parse_term("a < b <=> a - b < &0"))
-  let lemma_le = @calc_rat.real_arith(@parser.parse_term("a <= b <=> a - b <= &0"))
-  let lemma_imp = @class.taut(@parser.parse_term("(P <=> Q) ==> (Q ==> P)"))
+  let lemma_lt = @calc_rat.real_arith(@term_syntax.parse_term("((a : Real) < (b : Real)) == (a - b < real_of_num(0))"))
+  let lemma_le = @calc_rat.real_arith(@term_syntax.parse_term("((a : Real) <= (b : Real)) == (a - b <= real_of_num(0))"))
+  let lemma_imp = @class.taut(@term_syntax.parse_term("(P : Bool) == (Q : Bool) → Q → P"))
   mk_standard_ineq_c.set(fn(x262 : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let thms = x262
     fn(x263 : @kernel.Term) -> @kernel.Thm raise {
@@ -1081,7 +1081,7 @@ pub fn mk_standard_ineq(x : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kern
 ///|
 /// expr_to_vector_fun
 fn step_6() -> Unit raise {
-  let comp_op = @parser.parse_term("$")
+  let comp_op = @term_syntax.parse_term("(op_dollar : (Cart[_, _], Num) -> _)")
   expr_to_vector_fun_c.set(fn(x281 : @kernel.Term) -> (@kernel.Term, @kernel.Term) raise {
     let expr_tm = x281
     let vars = @lib.list_sort(fn(x284 : @kernel.Term, x285 : @kernel.Term) -> Int raise {
@@ -1124,7 +1124,7 @@ pub fn expr_to_vector_fun(x : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) ra
 ///|
 /// exprs_to_vector_fun
 fn step_7() -> Unit raise {
-  let comp_op = @parser.parse_term("$")
+  let comp_op = @term_syntax.parse_term("(op_dollar : (Cart[_, _], Num) -> _)")
   exprs_to_vector_fun_c.set(fn(x289 : @list.List[@kernel.Term]) -> (@list.List[@kernel.Term], @kernel.Term) raise {
     let expr_tms = x289
     let vars = @lib.list_sort(fn(x292 : @kernel.Term, x293 : @kernel.Term) -> Int raise {

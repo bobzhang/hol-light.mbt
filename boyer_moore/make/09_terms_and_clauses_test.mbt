@@ -5575,28 +5575,28 @@ test "Boyer_Moore/terms_and_clauses matches Boyer_Moore/terms_and_clauses.ml" {
       #|Searching with limit 3
       #|Boyer_Moore/terms_and_clauses quotations (23):
       #|  :bool
-      #|  b:bool
-      #|  b:bool
-      #|  T
-      #|  F
-      #|  b:bool
+      #|  (b : Bool)
+      #|  (b : Bool)
+      #|  true
+      #|  false
+      #|  (b : Bool)
       #|  forall b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))
-      #|  b:bool
+      #|  (b : Bool)
       #|  forall b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))
-      #|  b:bool
-      #|  (if b then b else F) = b
-      #|  b:bool
-      #|  (if b then  T else F) = b
-      #|  x:bool
-      #|  (x = T) = x
+      #|  (b : Bool)
+      #|  (if (b : Bool) { b } else { false }) == b
+      #|  (b : Bool)
+      #|  (if (b : Bool) { true } else { false }) == b
+      #|  (x : Bool)
+      #|  ((x : Bool) == true) == x
       #|  (y:'a) = z
-      #|  x:bool
+      #|  (x : Bool)
       #|  (x = ((y:'a) = z)) = (if (y = z) then (x = T) else (x = F))
-      #|  x:bool
-      #|  (x = F) = (if x then F else T)
-      #|  b:bool
-      #|  (if b then x else y) \\/ z <=> ((~b \\/ x \\/ z) /\\ (b \\/ y \\/ z))
-      #|  (~)
+      #|  (x : Bool)
+      #|  ((x : Bool) == false) == (if x { false } else { true })
+      #|  (b : Bool)
+      #|  ((if (b : Bool) { (x : Bool) } else { (y : Bool) }) || (z : Bool)) == ((!b || x || z) && (b || y || z))
+      #|  op_tilde
       #|COND_T =  |- ((#=:fun('A,fun('A,bool)) (((#COND:fun(bool,fun('A,fun('A,'A))) #T:bool) t1:'A) t2:'A)) t1:'A)
       #|COND_F =  |- ((#=:fun('A,fun('A,bool)) (((#COND:fun(bool,fun('A,fun('A,'A))) #F:bool) t1:'A) t2:'A)) t2:'A)
       #|COND_LEFT =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun(''a,bool),bool) (\x:''a. (#forall:fun(fun(''a,bool),bool) (\x':''a. (#forall:fun(fun(''a,bool),bool) (\y:''a. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) ((#=:fun(''a,fun(''a,bool)) x:''a) x':''a))) ((#=:fun(''a,fun(''a,bool)) (((#COND:fun(bool,fun(''a,fun(''a,''a))) b:bool) x:''a) y:''a)) (((#COND:fun(bool,fun(''a,fun(''a,''a))) b:bool) x':''a) y:''a)))))))))))

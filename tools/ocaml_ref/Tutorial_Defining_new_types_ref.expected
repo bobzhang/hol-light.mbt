@@ -75933,34 +75933,34 @@ Generating HOL version of proof
 0..0..solved at 2
 0..0..1..2..6..11..solved at 22
 Tutorial/Defining_new_types quotations (28):
-  ?x:real^3. ~(x = vec 0)
-  x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
-  x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
-  ((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))
-  (forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)
-  p':real^3
-  p:real^3
-  forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l
-  forall l l'. ?p. p _|_ l /\\ p _|_ l'
-  basis 3 :real^3
-  basis 2 : real^3
-  basis 1 :real^3
-  ?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)
-  x cross vec 0 = vec 0 /\\ vec 0 cross x = vec 0
-  orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)
-  forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l
-  a + b:real^3
-  forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)
-  forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l
-  (||)
-  forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')
-  ?x:line. T
-  p on l <=> perpl (dest_point p) l
-  ((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))
-  forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)
-  forall l l'. ?p. p on l /\\ p on l'
-  ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)
-  forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l
+  \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0))
+  (op_us_bar_us : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == orthogonal(dest_dir(x), dest_dir(y))
+  (op_bar_bar : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == (cross(dest_dir(x), dest_dir(y)) == vec(0))
+  (\226\136\128 x : Direction, (P : (Cart[Real, Tybit1[Unit]]) -> Bool)(dest_dir(x))) == (\226\136\128 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) \226\134\146 P(x)) && (\226\136\131 x : Direction, P(dest_dir(x))) == (\226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && P(x))
+  (\226\136\128 x : Direction, op_bar_bar(x, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, op_bar_bar(x, y) == op_bar_bar(y, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 z : Direction, op_bar_bar(x, y) && op_bar_bar(y, z) \226\134\146 op_bar_bar(x, z))
+  (p' : Cart[Real, Tybit1[Unit]])
+  (p : Cart[Real, Tybit1[Unit]])
+  \226\136\128 p : Direction, \226\136\128 p' : Direction, !op_bar_bar(p, p') \226\134\146 (\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && (\226\136\128 l' : Direction, op_us_bar_us(p, l') && op_us_bar_us(p', l') \226\134\146 op_bar_bar(l', l)))
+  \226\136\128 l : Direction, \226\136\128 l' : Direction, \226\136\131 p : Direction, op_us_bar_us(p, l) && op_us_bar_us(p, l')
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)
+  (basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)
+  \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && !(\226\136\131 l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l))
+  cross((x : Cart[Real, Tybit1[Unit]]), vec(0)) == vec(0) && cross(vec(0), x) == vec(0)
+  orthogonal(cross((l : Cart[Real, Tybit1[Unit]]), basis(1)), l) && orthogonal(cross(l, basis(2)), l) && !(cross(cross(l, basis(1)), cross(l, basis(2))) == vec(0)) || orthogonal(cross(l, basis(1)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(1)), cross(l, basis(3))) == vec(0)) || orthogonal(cross(l, basis(2)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(2)), cross(l, basis(3))) == vec(0))
+  \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, !op_bar_bar(p, p') && op_us_bar_us(p, l) && op_us_bar_us(p', l)
+  (a : Cart[Real, Tybit1[Unit]]) + (b : Cart[Real, Tybit1[Unit]])
+  \226\136\128 x : Direction, \226\136\128 a : Direction, \226\136\128 b : Direction, op_us_bar_us(a, x) && op_us_bar_us(b, x) && !op_bar_bar(a, b) \226\134\146 (\226\136\131 c : Direction, op_us_bar_us(c, x) && !op_bar_bar(a, c) && !op_bar_bar(b, c))
+  \226\136\128 l : Direction, \226\136\131 p : Direction, \226\136\131 p' : Direction, \226\136\131 p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l)
+  op_bar_bar
+  \226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 x' : Direction, \226\136\128 y' : Direction, op_bar_bar(x, x') && op_bar_bar(y, y') \226\134\146 op_us_bar_us(x, y) == op_us_bar_us(x', y')
+  \226\136\131 x : Line, true
+  (on : (Point, Line) -> Bool)((p : Point), (l : Line)) == perpl(dest_point(p), l)
+  ((p : Point) == (p' : Point)) == (dest_point(p) == dest_point(p')) && (\226\136\128 p : Point, (P : (Line) -> Bool)(dest_point(p))) == (\226\136\128 l : Line, P(l)) && (\226\136\131 p : Point, P(dest_point(p))) == (\226\136\131 l : Line, P(l))
+  \226\136\128 p : Point, \226\136\128 p' : Point, !(p == p') \226\134\146 (\226\136\131 l : Line, on(p, l) && on(p', l) && (\226\136\128 l' : Line, on(p, l') && on(p', l') \226\134\146 l' == l))
+  \226\136\128 l : Line, \226\136\128 l' : Line, \226\136\131 p : Point, on(p, l) && on(p, l')
+  \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && !(\226\136\131 l : Line, on(p, l) && on(p', l) && on(p'', l))
+  \226\136\128 l : Line, \226\136\131 p : Point, \226\136\131 p' : Point, \226\136\131 p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && on(p, l) && on(p', l) && on(p'', l)
 direction_tybij =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(direction,bool),bool) (\a:direction. ((#=:fun(direction,fun(direction,bool)) (#mk_dir:fun(cart(real,tybit1(1)),direction) (#dest_dir:fun(direction,cart(real,tybit1(1))) a:direction))) a:direction)))) (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\r:cart(real,tybit1(1)). ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) r:cart(real,tybit1(1))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) (#mk_dir:fun(cart(real,tybit1(1)),direction) r:cart(real,tybit1(1))))) r:cart(real,tybit1(1)))))))
 perpdir =  |- (#forall:fun(fun(direction,bool),bool) (\x:direction. (#forall:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#_|_:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#orthogonal:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction)))))))
 pardir =  |- (#forall:fun(fun(direction,bool),bool) (\x:direction. (#forall:fun(fun(direction,bool),bool) (\y:direction. ((#=:fun(bool,fun(bool,bool)) ((#||:fun(direction,fun(direction,bool)) x:direction) y:direction)) ((#=:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),bool)) ((#cross:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) (#dest_dir:fun(direction,cart(real,tybit1(1))) x:direction)) (#dest_dir:fun(direction,cart(real,tybit1(1))) y:direction))) (#vec:fun(num,cart(real,tybit1(1))) (#NUMERAL:fun(num,num) #_0:num))))))))

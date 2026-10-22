@@ -81760,55 +81760,55 @@ Generating HOL version of proof
 0..0..0..solved at 3
 Examples/borsuk quotations (50):
   EVEN
-  a / &2 = n <=> a = &2 * n
-  integer n
-  &2 * n + &1 = &0 <=> n = --(&1 / &2)
-  ~(z = Cx(&0)) ==> a - b = z ==> ~(b - a = z)
-  n:real
-  Cx(&1)
-  ?n. integer n /\\ forall z:complex. norm z = &1 ==> m z = Cx(&2 * n + &1)
-  v:complex
-  ~(abs(x - y) < &1) ==> &1 <= abs((&2 * x + &1) - (&2 * y + &1))
-  w:complex
-  &1
-  z:complex
-  norm z = dist(vec 0,z)
+  ((a : Real) / real_of_num(2) == (n : Real)) == (a == real_of_num(2) * n)
+  integer((n : Real))
+  (real_of_num(2) * (n : Real) + real_of_num(1) == real_of_num(0)) == (n == -(real_of_num(1) / real_of_num(2)))
+  !((z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (a : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]]) == z \226\134\146 !(b - a == z)
+  (n : Real)
+  Cx(real_of_num(1))
+  \226\136\131 n : Real, integer(n) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) == real_of_num(1) \226\134\146 (m : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) == Cx(real_of_num(2) * n + real_of_num(1)))
+  (v : Cart[Real, Tybit0[Unit]])
+  !(abs((x : Real) - (y : Real)) < real_of_num(1)) \226\134\146 real_of_num(1) <= abs(real_of_num(2) * x + real_of_num(1) - (real_of_num(2) * y + real_of_num(1)))
+  (w : Cart[Real, Tybit0[Unit]])
+  real_of_num(1)
+  (z : Cart[Real, Tybit0[Unit]])
+  norm((z : Cart[Real, _])) == distance((vec(0), z))
   :real
   :real
-  ?n. forall z. z IN {z | norm(z) = &1} ==> (m:complex->complex)(z) = n
-  ~(p = Cx(&0))\n    ==> (p * ii * m = p * ii + (t * n * p) * ii <=> m = t * n + Cx(&1))
-  ~(y = Cx(&0)) /\\ x = -- y ==> x / y = Cx(-- &1)
-  cexp(h z) = k z /\\ cexp(h(--z:complex)) = k(--z)
-  z:complex
-  ~(p = Cx(&0)) ==> p * ii * h * inv(p * ii) = h
-  forall z:complex. norm(z) = &1 ==> cexp(Cx pi * ii * m z) = cexp(Cx pi * ii)
-  m = \\z:complex. (h(z) - h(--z)) / (Cx pi * ii)
-  h:complex->complex
-  r + i + s = &1 <=> s = &1 - (r + i)
-  x - y = Cx(&0) <=> y = x
-  z:complex
-  z:complex
-  {x:real^3 | norm x = &1}
-  {t | &0 <= t}
-  z:complex
-  a /\\ (a /\\ b ==> c) ==> (a ==> b) ==> c
-  &1
-  Cx(&0)
-  k:complex->complex
-  k = \\z. (g:real^3->real^2)\n                      (vector[Re z; Im z; sqrt(&1 - norm z pow 2)])
-  (g:real^3->real^2) = \\x. f(x) - f(--x)
-  ~(a /\\ b) <=> a ==> ~b
-  p <=> ~ ~ p
-  forall f:real^3->real^2.\n        f continuous_on {x | norm(x) = &1}\n        ==> ?x. norm(x) = &1 /\\ f(--x) = f(x)
-  z:complex
-  w:complex
-  Cx(&1)
-  --Cx(&1)
-  a - r % x:real^3 = a + r % --x
-  r % x:real^3
-  x:real^3
-  \\x. (f:real^3->real^2) (a + r % x)
-  forall f:real^3->real^2 a r.\n        &0 <= r /\\ f continuous_on {z | norm(z - a) = r}\n        ==> ?x. norm(x) = r /\\ f(a + x) = f(a - x)
+  \226\136\131 n : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, {(z : Cart[Real, Tybit0[Unit]]) | norm(z) == real_of_num(1)}) \226\134\146 (m : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) == n
+  !((p : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 (p * (ii * (m : Cart[Real, Tybit0[Unit]])) == p * ii + (t : Cart[Real, Tybit0[Unit]]) * ((n : Cart[Real, Tybit0[Unit]]) * p) * ii) == (m == t * n + Cx(real_of_num(1)))
+  !((y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) && (x : Cart[Real, Tybit0[Unit]]) == -y \226\134\146 x / y == Cx(-real_of_num(1))
+  cexp((h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : Cart[Real, Tybit0[Unit]]))) == (k : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) && cexp(h(-z)) == k(-z)
+  (z : Cart[Real, Tybit0[Unit]])
+  !((p : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) \226\134\146 p * (ii * ((h : Cart[Real, Tybit0[Unit]]) * inv(p * ii))) == h
+  \226\136\128 z : Cart[Real, Tybit0[Unit]], norm(z) == real_of_num(1) \226\134\146 cexp(Cx(pi) * (ii * (m : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z))) == cexp(Cx(pi) * ii)
+  (m : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => ((h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(z) - h(-z)) / (Cx(pi) * ii))
+  (h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  ((r : Real) + ((i : Real) + (s : Real)) == real_of_num(1)) == (s == real_of_num(1) - (r + i))
+  ((x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))) == (y == x)
+  (z : Cart[Real, Tybit0[Unit]])
+  (z : Cart[Real, Tybit0[Unit]])
+  {(x : Cart[Real, Tybit1[Unit]]) | norm(x) == real_of_num(1)}
+  {(t : Real) | real_of_num(0) <= t}
+  (z : Cart[Real, Tybit0[Unit]])
+  (a : Bool) && (a && (b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a \226\134\146 b) \226\134\146 c
+  real_of_num(1)
+  Cx(real_of_num(0))
+  (k : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+  (k : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((z : Cart[Real, Tybit0[Unit]]) => (g : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(vector([Re(z), Im(z), sqrt(real_of_num(1) - pow(norm(z), 2))])))
+  (g : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]]) == ((x : Cart[Real, Tybit1[Unit]]) => (f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(x) - f(-x))
+  !((a : Bool) && (b : Bool)) == (a \226\134\146 !b)
+  (p : Bool) == !!p
+  \226\136\128 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]], continuous_on(f, {(x : Cart[Real, Tybit1[Unit]]) | norm(x) == real_of_num(1)}) \226\134\146 (\226\136\131 x : Cart[Real, Tybit1[Unit]], norm(x) == real_of_num(1) && f(-x) == f(x))
+  (z : Cart[Real, Tybit0[Unit]])
+  (w : Cart[Real, Tybit0[Unit]])
+  Cx(real_of_num(1))
+  -Cx(real_of_num(1))
+  (a : Cart[Real, Tybit1[Unit]]) - op_pct((r : Real), (x : Cart[Real, Tybit1[Unit]])) == a + op_pct(r, -x)
+  op_pct((r : Real), (x : Cart[Real, Tybit1[Unit]]))
+  (x : Cart[Real, Tybit1[Unit]])
+  (x : Cart[Real, Tybit1[Unit]]) => (f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])((a : Cart[Real, Tybit1[Unit]]) + op_pct((r : Real), x))
+  \226\136\128 f : (Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 a : Cart[Real, Tybit1[Unit]], \226\136\128 r : Real, real_of_num(0) <= r && continuous_on(f, {(z : Cart[Real, Tybit1[Unit]]) | norm(z - a) == r}) \226\134\146 (\226\136\131 x : Cart[Real, Tybit1[Unit]], norm(x) == r && f(a + x) == f(a - x))
 THEOREM_1 =  |- (#forall:fun(fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))). ((#==>:fun(bool,fun(bool,bool)) ((#continuous_on:fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit1(1)),bool),bool)) f:fun(cart(real,tybit1(1)),cart(real,tybit0(1)))) (#GSPEC:fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool)) (\GEN%PVAR%1:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). (((#SETSPEC:fun(cart(real,tybit1(1)),fun(bool,fun(cart(real,tybit1(1)),bool))) GEN%PVAR%1:cart(real,tybit1(1))) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) x:cart(real,tybit1(1))))))))) (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) (#vector_neg:fun(cart(real,tybit1(1)),cart(real,tybit1(1))) x:cart(real,tybit1(1))))) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) x:cart(real,tybit1(1))))))))))
 BORSUK_ULAM =  |- (#forall:fun(fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))). (#forall:fun(fun(cart(real,tybit1(1)),bool),bool) (\a:cart(real,tybit1(1)). (#forall:fun(fun(real,bool),bool) (\r:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) r:real)) ((#continuous_on:fun(fun(cart(real,tybit1(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit1(1)),bool),bool)) f:fun(cart(real,tybit1(1)),cart(real,tybit0(1)))) (#GSPEC:fun(fun(cart(real,tybit1(1)),bool),fun(cart(real,tybit1(1)),bool)) (\GEN%PVAR%2:cart(real,tybit1(1)). (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\z:cart(real,tybit1(1)). (((#SETSPEC:fun(cart(real,tybit1(1)),fun(bool,fun(cart(real,tybit1(1)),bool))) GEN%PVAR%2:cart(real,tybit1(1))) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) ((#vector_sub:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) z:cart(real,tybit1(1))) a:cart(real,tybit1(1))))) r:real)) z:cart(real,tybit1(1)))))))))) (#?:fun(fun(cart(real,tybit1(1)),bool),bool) (\x:cart(real,tybit1(1)). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit1(1)),real) x:cart(real,tybit1(1)))) r:real)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) ((#vector_add:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) a:cart(real,tybit1(1))) x:cart(real,tybit1(1))))) (f:fun(cart(real,tybit1(1)),cart(real,tybit0(1))) ((#vector_sub:fun(cart(real,tybit1(1)),fun(cart(real,tybit1(1)),cart(real,tybit1(1)))) a:cart(real,tybit1(1))) x:cart(real,tybit1(1)))))))))))))))
 types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
