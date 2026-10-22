@@ -33,58 +33,58 @@ pub fn mk_float_interval_decimal(x : Int64) -> ((@kernel.Term) -> @kernel.Thm ra
 /// unary_interval_operations
 fn step_2() -> Unit raise {
   let table = @lib.hashtbl_create(10)
-  @lib.hashtbl_add(table, @parser.parse_term("--"), fn(x5 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("real_neg"), fn(x5 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let pp = x5
     @arith_float.float_interval_neg_v1
   })
-  @lib.hashtbl_add(table, @parser.parse_term("abs"), fn(x7 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("real_abs"), fn(x7 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let pp_1 = x7
     @arith_float.float_interval_abs
   })
-  @lib.hashtbl_add(table, @parser.parse_term("inv"), @more_float.float_interval_inv)
-  @lib.hashtbl_add(table, @parser.parse_term("sqrt"), fn(x9 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("inv"), @more_float.float_interval_inv)
+  @lib.hashtbl_add(table, @term_syntax.parse_term("sqrt"), fn(x9 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x10 : @kernel.Thm) -> @kernel.Thm raise {
       @arith_float.float_interval_sqrt_v1(x9, x10)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("exp"), fn(x11 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("exp"), fn(x11 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x12 : @kernel.Thm) -> @kernel.Thm raise {
       @exp_eval.float_interval_exp(x11, x12)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("log"), fn(x13 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("log"), fn(x13 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x14 : @kernel.Thm) -> @kernel.Thm raise {
       @log_eval.float_interval_log(x13, x14)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("atn"), fn(x15 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("atn"), fn(x15 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x16 : @kernel.Thm) -> @kernel.Thm raise {
       @atn_eval.float_interval_atn(x15, x16)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("acs"), fn(x17 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("acs"), fn(x17 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x18 : @kernel.Thm) -> @kernel.Thm raise {
       @asn_acs_eval.float_interval_acs(x17, x18)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("asn"), fn(x19 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("asn"), fn(x19 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x20 : @kernel.Thm) -> @kernel.Thm raise {
       @asn_acs_eval.float_interval_asn(x19, x20)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("sin"), fn(x21 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("sin"), fn(x21 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x22 : @kernel.Thm) -> @kernel.Thm raise {
       @sin_eval.float_interval_sin(x21, x22)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("cos"), fn(x23 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("cos"), fn(x23 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x24 : @kernel.Thm) -> @kernel.Thm raise {
       @cos_eval.float_interval_cos(x23, x24)
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("matan"), @matan_eval.float_interval_matan)
-  @lib.hashtbl_add(table, @parser.parse_term("dmatan"), @matan_eval.float_interval_dmatan)
-  @lib.hashtbl_add(table, @parser.parse_term("ddmatan"), fn(x25 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("matan"), @matan_eval.float_interval_matan)
+  @lib.hashtbl_add(table, @term_syntax.parse_term("dmatan"), @matan_eval.float_interval_dmatan)
+  @lib.hashtbl_add(table, @term_syntax.parse_term("ddmatan"), fn(x25 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     fn(x26 : @kernel.Thm) -> @kernel.Thm raise {
       @matan_eval.float_interval_ddmatan(x25, x26)
     }
@@ -105,22 +105,22 @@ pub fn unary_interval_operations() -> @lib.OHashtbl[@kernel.Term, (Int64) -> ((@
 /// binary_interval_operations
 fn step_3() -> Unit raise {
   let table = @lib.hashtbl_create(10)
-  @lib.hashtbl_add(table, @parser.parse_term("+"), fn(x27 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("real_add"), fn(x27 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
     fn(x28 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x29 : @kernel.Thm) -> @kernel.Thm raise {
         @arith_float.float_interval_add(x27, x28, x29)
       }
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("-"), fn(x30 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("real_sub"), fn(x30 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
     fn(x31 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x32 : @kernel.Thm) -> @kernel.Thm raise {
         @arith_float.float_interval_sub(x30, x31, x32)
       }
     }
   })
-  @lib.hashtbl_add(table, @parser.parse_term("*"), @arith_float.float_interval_mul)
-  @lib.hashtbl_add(table, @parser.parse_term("/"), fn(x33 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("real_mul"), @arith_float.float_interval_mul)
+  @lib.hashtbl_add(table, @term_syntax.parse_term("op_slash"), fn(x33 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
     fn(x34 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x35 : @kernel.Thm) -> @kernel.Thm raise {
         @arith_float.float_interval_div(x33, x34, x35)
@@ -143,7 +143,7 @@ pub fn binary_interval_operations() -> @lib.OHashtbl[@kernel.Term, (Int64) -> ((
 /// interval_constants
 fn step_4() -> Unit raise {
   let table = @lib.hashtbl_create(10)
-  @lib.hashtbl_add(table, @parser.parse_term("pi"), fn(x36 : Int64) -> @kernel.Thm raise {
+  @lib.hashtbl_add(table, @term_syntax.parse_term("pi"), fn(x36 : Int64) -> @kernel.Thm raise {
     let pp = x36
     @lib.array_get(@atn_eval.pi_approx_array(), @lib.int63_to_int(pp))
   })
@@ -568,7 +568,7 @@ pub fn eval_interval_fun_list(x79 : Int64, x80 : (@list.List[IntervalFun], @list
 /// interval_to_float_interval
 fn step_5() -> Unit raise {
   let t86 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), @calc_rat.real_arith_tac)
-  let t87 = (@parser.parse_term("interval_arith x (lo, hi) ==> \n\t\t\t\t   interval_arith lo (a, y) ==>\n\t\t\t\t   interval_arith hi (z, b)\n\t\t\t\t   ==> interval_arith x (a, b)"), t86)
+  let t87 = (@term_syntax.parse_term("interval_arith((x : Real), ((lo : Real), (hi : Real))) → interval_arith(lo, ((a : Real), (y : Real))) → interval_arith(hi, ((z : Real), (b : Real))) → interval_arith(x, (a, b))"), t86)
   let th = @bool.undisch_all((fn(x85 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x85.0, x85.1)
   })(t87))
