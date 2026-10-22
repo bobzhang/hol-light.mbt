@@ -69,18 +69,18 @@ test "Formal_ineqs/arith/interval_arith matches Formal_ineqs/arith/interval_arit
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Formal_ineqs/arith/interval_arith quotations (13):
-      #|  interval_arith (x:real) (lo, hi) <=> lo <= x /\\ x <= hi
-      #|  bounded_on f s f_bounds <=>\n\tforall x. x IN s ==> interval_arith (f x) f_bounds
-      #|  bounded_on_int f int f_bounds <=>\n\tforall x. interval_arith x int ==> interval_arith (f x) f_bounds
-      #|  iabs (x_lo, x_hi) = max x_hi (-- x_lo)
-      #|  interval_not_zero (lo, hi) <=> &0 < lo \\/ hi < &0
-      #|  interval_pos (lo, hi) <=> &0 < lo
-      #|  interval_neg (lo, hi) <=> hi < &0
-      #|  interval_gt f (lo, hi) <=> f < lo
-      #|  forall x. interval_arith x (x,x)
-      #|  (a <= lo /\\ hi <= b) /\\ interval_arith x (lo, hi)\n                              ==> interval_arith x (a,b)
-      #|  interval_arith x (a, b) ==>\n                           interval_arith (--x) (--b, --a)
-      #|  forall x a b. interval_arith (--x) (--b, --a) <=>\n\t\t\t      interval_arith x (a, b)
+      #|  (interval_arith : (Real, (Real, Real)) -> Bool)((x : Real), ((lo : Real), (hi : Real))) == (lo <= x && x <= hi)
+      #|  (bounded_on : ((_) -> Real, (_) -> Bool, (Real, Real)) -> Bool)((f : (_) -> Real), (s : (_) -> Bool), (f_bounds : (Real, Real))) == (\226\136\128 x : _, IN(x, s) \226\134\146 interval_arith(f(x), f_bounds))
+      #|  (bounded_on_int : ((Real) -> Real, (Real, Real), (Real, Real)) -> Bool)((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) == (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 interval_arith(f(x), f_bounds))
+      #|  (iabs : ((Real, Real)) -> Real)(((x_lo : Real), (x_hi : Real))) == max(x_hi, -x_lo)
+      #|  (interval_not_zero : ((Real, Real)) -> Bool)(((lo : Real), (hi : Real))) == (real_of_num(0) < lo || hi < real_of_num(0))
+      #|  (interval_pos : ((Real, _)) -> Bool)(((lo : Real), (hi : _))) == (real_of_num(0) < lo)
+      #|  (interval_neg : ((_, Real)) -> Bool)(((lo : _), (hi : Real))) == (hi < real_of_num(0))
+      #|  (interval_gt : (Real, (Real, _)) -> Bool)((f : Real), ((lo : Real), (hi : _))) == (f < lo)
+      #|  \226\136\128 x : Real, interval_arith(x, (x, x))
+      #|  ((a : Real) <= (lo : Real) && (hi : Real) <= (b : Real)) && interval_arith((x : Real), (lo, hi)) \226\134\146 interval_arith(x, (a, b))
+      #|  interval_arith((x : Real), ((a : Real), (b : Real))) \226\134\146 interval_arith(-x, (-b, -a))
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, interval_arith(-x, (-b, -a)) == interval_arith(x, (a, b))
       #|  interval_arith
       #|Interval_arith.interval_arith =  |- (#forall:fun(fun(real,bool),bool) (\lo:real. (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\hi:real. ((#=:fun(bool,fun(bool,bool)) ((#interval_arith:fun(real,fun(prod(real,real),bool)) x:real) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) lo:real) x:real)) ((#real_le:fun(real,fun(real,bool)) x:real) hi:real)))))))))
       #|Interval_arith.bounded_on =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). (#forall:fun(fun(fun('?1,real),bool),bool) (\f:fun('?1,real). (#forall:fun(fun(prod(real,real),bool),bool) (\f_bounds:prod(real,real). ((#=:fun(bool,fun(bool,bool)) (((#bounded_on:fun(fun('?1,real),fun(fun('?1,bool),fun(prod(real,real),bool))) f:fun('?1,real)) s:fun('?1,bool)) f_bounds:prod(real,real))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) x:'?1) s:fun('?1,bool))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun('?1,real) x:'?1)) f_bounds:prod(real,real))))))))))))

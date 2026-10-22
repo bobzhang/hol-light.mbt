@@ -9936,10 +9936,10 @@ test "Rqe/condense matches Rqe/condense.ml" {
       #|0..0..2..4..8..17..27..solved at 42
       #|0..0..1..2..5..8..11..solved at 19
       #|Rqe/condense quotations (8):
-      #|  APPEND:real list -> real list -> real list
-      #|  APPEND:(sign list) list -> (sign list) list -> (sign list) list
-      #|  LENGTH:real list -> num
-      #|  LENGTH:(sign list) list -> num
+      #|  (APPEND : (List[Real], List[Real]) -> List[Real])
+      #|  (APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])
+      #|  (LENGTH : (List[Real]) -> Num)
+      #|  (LENGTH : (List[List[Sign]]) -> Num)
       #|  ( * ):num -> num -> num
       #|  :real
       #|  2

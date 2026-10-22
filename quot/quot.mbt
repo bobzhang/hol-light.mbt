@@ -57,7 +57,7 @@ fn step_1() -> Unit raise {
     t12,
   )
   let select_lemma = @tactics.prove(
-    @parser.parse_term("forall x:A. (@y. x = y) = x"),
+    @term_syntax.parse_term("∀ x : A, select((y : A) => x == y) == x"),
     t13,
   )
   lift_function_c.set(fn(
@@ -364,7 +364,7 @@ fn step_2() -> Unit raise {
   )
   let t66 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t65 = @tactics.subgoal_then(
-    @parser.parse_term("dest(mk((R:Repty->Repty->bool) x):Absty) = R x"),
+    @term_syntax.parse_term("(dest : (Absty, Repty) -> Bool)((mk : ((Repty) -> Bool) -> Absty)((R : (Repty, Repty) -> Bool)((x : Repty)))) == R(x)"),
     fn(
       x62 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -412,7 +412,7 @@ fn step_2() -> Unit raise {
       }
     },
   )
-  let t61 = @tactics.x_gen_tac(@parser.parse_term("x:Repty"))
+  let t61 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Repty)"))
   let t60 = @tactics.repeat_tac(
     @tactics.disch_then(fn(
       x58 : @kernel.Thm,

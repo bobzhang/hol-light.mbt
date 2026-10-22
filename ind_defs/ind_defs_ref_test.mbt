@@ -293,11 +293,11 @@ test "ind_defs matches ind_defs.ml" {
       #|Searching with limit 0
       #|Searching with limit 1
       #|ind_defs quotations (5):
-      #|  t:A
-      #|  forall P t. (forall x:A. (x = t) ==> P x) ==> (?) P
-      #|  T
-      #|  (==>)
-      #|  forall p. p ==> p
+      #|  (t : A)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 t : A, (\226\136\128 x : A, x == t \226\134\146 P(x)) \226\134\146 op_q(P)
+      #|  true
+      #|  op_eq_eq_gt
+      #|  \226\136\128 p : Bool, p \226\134\146 p
       #|strip_ncomb = (f:fun('A,fun('A,fun('A,'A))) a:'A) [b:'A; c:'A]
       #|strip_ncomb_bad ! dest_comb: not a combination
       #|RIGHT_BETAS ! BETA_CONV: Not a beta-redex

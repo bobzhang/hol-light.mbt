@@ -3,7 +3,7 @@
 ///|
 /// weierstrass_point
 fn step_1() -> Unit raise {
-  weierstrass_point_c.set(@define.define_(@parser.parse_term("(weierstrass_point f NONE <=> T) /\\\n  (weierstrass_point f (SOME(x:A,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f)")))
+  weierstrass_point_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_point : (Ring[A], Option[(A, A)]) -> Bool)((f : Ring[A]), NONE) == true && weierstrass_point(f, SOME(((x : A), (y : A)))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn weierstrass_point() -> @kernel.Thm {
 ///|
 /// weierstrass_curve
 fn step_2() -> Unit raise {
-  weierstrass_curve_c.set(@define.define_(@parser.parse_term("(weierstrass_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (weierstrass_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3) (ring_add f (ring_mul f a x) b))")))
+  weierstrass_curve_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_curve : ((Ring[A], A, A), Option[(A, A)]) -> Bool)(((f : Ring[A]), (a : A), (b : A)), NONE) == true && weierstrass_curve((f, a, b), SOME(((x : A), (y : A)))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && ring_pow(f, y, 2) == ring_add(f, ring_pow(f, x, 3), ring_add(f, ring_mul(f, a, x), b)))")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn weierstrass_curve() -> @kernel.Thm {
 ///|
 /// weierstrass_neg
 fn step_3() -> Unit raise {
-  weierstrass_neg_c.set(@define.define_(@parser.parse_term("(weierstrass_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (weierstrass_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))")))
+  weierstrass_neg_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_neg : ((Ring[A], A, A), Option[(A, A)]) -> Option[(A, A)])(((f : Ring[A]), (a : A), (b : A)), NONE) == NONE && weierstrass_neg((f, a, b), SOME(((x : A), (y : A)))) == SOME((x, ring_neg(f, y)))")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn weierstrass_neg() -> @kernel.Thm {
 ///|
 /// weierstrass_add
 fn step_4() -> Unit raise {
-  weierstrass_add_c.set(@define.define_(@parser.parse_term("(forall y. weierstrass_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (forall x. weierstrass_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (forall x1 y1 x2 y2.\n        weierstrass_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let m = ring_div f\n              (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2)) a)\n              (ring_mul f (ring_of_num f 2) y1) in\n            let x3 = ring_sub f (ring_pow f m 2)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let m = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_pow f m 2)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
+  weierstrass_add_c.set(@define.define_(@term_syntax.parse_term("(∀ y : Option[(A, A)], (weierstrass_add : ((Ring[A], A, A), Option[(A, A)], Option[(A, A)]) -> Option[(A, A)])(((f : Ring[A]), (a : A), (b : A)), NONE, y) == y) && (∀ x : Option[(A, A)], weierstrass_add((f, a, b), x, NONE) == x) && (∀ x1 : A, ∀ y1 : A, ∀ x2 : A, ∀ y2 : A, weierstrass_add((f, a, b), SOME((x1, y1)), SOME((x2, y2))) == (if x1 == x2 { if y1 == y2 && !(y1 == ring_0(f)) { LET((m : A) => LET_END(LET((x3 : A) => LET_END(LET((y3 : A) => LET_END(SOME((x3, y3))), ring_sub(f, ring_mul(f, m, ring_sub(f, x1, x3)), y1))), ring_sub(f, ring_pow(f, m, 2), ring_mul(f, ring_of_num(f, 2), x1)))), ring_div(f, ring_add(f, ring_mul(f, ring_of_num(f, 3), ring_pow(f, x1, 2)), a), ring_mul(f, ring_of_num(f, 2), y1))) } else { NONE } } else { LET((m : A) => LET_END(LET((x3 : A) => LET_END(LET((y3 : A) => LET_END(SOME((x3, y3))), ring_sub(f, ring_mul(f, m, ring_sub(f, x1, x3)), y1))), ring_sub(f, ring_pow(f, m, 2), ring_add(f, x1, x2)))), ring_div(f, ring_sub(f, y2, y1), ring_sub(f, x2, x1))) }))")))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn weierstrass_add() -> @kernel.Thm {
 ///|
 /// weierstrass_nonsingular
 fn step_5() -> Unit raise {
-  weierstrass_nonsingular_c.set(@define.define_(@parser.parse_term("weierstrass_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(ring_add f (ring_mul f (ring_of_num f 4) (ring_pow f a 3))\n                     (ring_mul f (ring_of_num f 27) (ring_pow f b 2)) =\n          ring_0 f)")))
+  weierstrass_nonsingular_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_nonsingular : ((Ring[A], A, A)) -> Bool)(((f : Ring[A]), (a : A), (b : A))) == !(ring_add(f, ring_mul(f, ring_of_num(f, 4), ring_pow(f, a, 3)), ring_mul(f, ring_of_num(f, 27), ring_pow(f, b, 2))) == ring_0(f))")))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn weierstrass_nonsingular() -> @kernel.Thm {
 ///|
 /// weierstrass_group
 fn step_6() -> Unit raise {
-  weierstrass_group_c.set(@define.define_(@parser.parse_term("weierstrass_group (f:A ring,a:A,b:A) =\n        group(weierstrass_curve(f,a,b),\n              NONE,\n              weierstrass_neg(f,a,b),\n              weierstrass_add(f,a,b))")))
+  weierstrass_group_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_group : ((Ring[A], A, A)) -> Group[Option[(A, A)]])(((f : Ring[A]), (a : A), (b : A))) == group((weierstrass_curve((f, a, b)), NONE, weierstrass_neg((f, a, b)), weierstrass_add((f, a, b))))")))
 }
 
 ///|
@@ -121,12 +121,12 @@ fn step_7() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t6 = @simp.rewrite_tac(@list.List([@ind_types.option_distinct(), @sets.in_cross()]))
   let t11 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([weierstrass_curve(), @sets.subset(), @ind_types.forall_option_thm(), @sets.in_union(), @sets.in_sing(), @sets.in_image(), @ind_types.option_inj(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm(), @theorems.unwind_thm1()])), t6), t7), t8), t9), t10])
-  let t5 = @tactics.exists_tac(@parser.parse_term("IMAGE SOME\n     {(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f /\\\n              ring_pow f y 2 =\n              ring_add f (ring_pow f x 3) (ring_add f (ring_mul f a x) b)}\n    UNION {NONE}"))
+  let t5 = @tactics.exists_tac(@term_syntax.parse_term("UNION(IMAGE(SOME, {((x : A), (y : A)) | IN(x, ring_carrier((f : Ring[A]))) && IN(y, ring_carrier(f)) && ring_pow(f, y, 2) == ring_add(f, ring_pow(f, x, 3), ring_add(f, ring_mul(f, (a : A), x), (b : A)))}), {NONE})"))
   let t4 = @tactics.match_mp_tac(@sets.finite_card_le_subset())
-  let t3 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("(p ==> q) /\\ (p ==> r) <=> p ==> q /\\ r"))]))
+  let t3 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(((p : Bool) → (q : Bool)) && (p → (r : Bool))) == (p → q && r)"))]))
   let t2 = @tactics.repeat_tac(@tactics.gen_tac)
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm()])), t2), t3), @tactics.strip_tac), t4), t5), @tactics.conj_tac), t11), t12), t13), t14), t15)
-  let t17 = (@parser.parse_term("(forall f a b:A. field f /\\ FINITE(ring_carrier f)\n              ==> FINITE(weierstrass_curve(f,a,b))) /\\\n   (forall f a b:A. field f /\\ FINITE(ring_carrier f)\n              ==> CARD(weierstrass_curve(f,a,b))\n                   <= 2 * CARD(ring_carrier f) + 1)"), t16)
+  let t17 = (@term_syntax.parse_term("(∀ f : Ring[A], ∀ a : A, ∀ b : A, field(f) && FINITE(ring_carrier(f)) → FINITE(weierstrass_curve((f, a, b)))) && (∀ f : Ring[A], ∀ a : A, ∀ b : A, field(f) && FINITE(ring_carrier(f)) → CARD(weierstrass_curve((f, a, b))) <= 2 * CARD(ring_carrier(f)) + 1)"), t16)
   let (finite_weierstrass_curve, card_bound_weierstrass_curve) = @bool.conj_pair((fn(x1 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x1.0, x1.1)
   })(t17))
@@ -139,7 +139,7 @@ fn step_7() -> Unit raise {
 fn step_8() -> Unit raise {
   let t18 = @simp.simp_tac(@list.List([weierstrass_curve(), weierstrass_point()]))
   let t19 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t18)
-  weierstrass_curve_imp_point_c.set(@tactics.prove(@parser.parse_term("forall f a b p. weierstrass_curve(f,a,b) p ==> weierstrass_point f p"), t19))
+  weierstrass_curve_imp_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[_], ∀ a : _, ∀ b : _, ∀ p : Option[(_, _)], weierstrass_curve((f, a, b), p) → weierstrass_point(f, p)"), t19))
 }
 
 ///|
@@ -156,7 +156,7 @@ pub fn weierstrass_curve_imp_point() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t20 = @simp.simp_tac(@list.List([weierstrass_neg(), weierstrass_point(), @ringtheory.ring_neg_v1()]))
   let t21 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t20)
-  weierstrass_point_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        weierstrass_point f p\n        ==> weierstrass_point f (weierstrass_neg (f,a,b) p)"), t21))
+  weierstrass_point_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], weierstrass_point(f, p) → weierstrass_point(f, weierstrass_neg((f, a, b), p))"), t21))
 }
 
 ///|
@@ -176,7 +176,7 @@ fn step_10() -> Unit raise {
   let t23 = @tactics.repeat_tac(@tactics.strip_tac)
   let t22 = @simp.simp_tac(@list.List([weierstrass_add(), weierstrass_point(), @pair.let_def(), @pair.let_end_def()]))
   let t26 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t22), t23), t24), t25), @ringtheory.ring_carrier_tac)
-  weierstrass_point_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_point f (weierstrass_add (f,a,b) p q)"), t26))
+  weierstrass_point_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) → weierstrass_point(f, weierstrass_add((f, a, b), p, q))"), t26))
 }
 
 ///|
@@ -192,7 +192,7 @@ pub fn weierstrass_point_add() -> @kernel.Thm {
 /// WEIERSTRASS_CURVE_0
 fn step_11() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([weierstrass_curve()]))
-  weierstrass_curve_0_c.set(@tactics.prove(@parser.parse_term("forall f a b:A. weierstrass_curve(f,a,b) NONE"), t27))
+  weierstrass_curve_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, weierstrass_curve((f, a, b), NONE)"), t27))
 }
 
 ///|
@@ -210,7 +210,7 @@ fn step_12() -> Unit raise {
   let t29 = @tactics.conv_tac(@ringtheory.integral_domain_rule)
   let t28 = @tactics.repeat_tac(@tactics.gen_tac)
   let t30 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_neg_v1(), weierstrass_curve(), weierstrass_neg()])), t28), t29)
-  weierstrass_curve_neg_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p\n        ==> weierstrass_curve(f,a,b) (weierstrass_neg (f,a,b) p)"), t30))
+  weierstrass_curve_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], integral_domain(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) → weierstrass_curve((f, a, b), weierstrass_neg((f, a, b), p))"), t30))
 }
 
 ///|
@@ -232,7 +232,7 @@ fn step_13() -> Unit raise {
   let t59 = @list.List([@ringtheory.field_tac, @tactics.then_tac(fn(x58 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x58.0, x58.1)
   }, @ringtheory.ring_tac)])
-  let t57 = @tactics.subgoal_then(@parser.parse_term("~(ring_of_num f 2:A = ring_0 f)"), fn(x54 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t57 = @tactics.subgoal_then(@term_syntax.parse_term("!(ring_of_num((f : Ring[A]), 2) == ring_0(f))"), fn(x54 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s55 = @tactics.assume_tac(x54)
     fn(x56 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s55(x56)
@@ -262,14 +262,14 @@ fn step_13() -> Unit raise {
   })))
   let t38 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@class.de_morgan_thm()])))
   let t37 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
-  let t33 = @parser.parse_term("y2:A")
-  let t34 = @parser.parse_term("x2:A")
-  let t35 = @parser.parse_term("y1:A")
-  let t36 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x1:A"), t35, t34, t33]))
+  let t33 = @term_syntax.parse_term("(y2 : A)")
+  let t34 = @term_syntax.parse_term("(x2 : A)")
+  let t35 = @term_syntax.parse_term("(y1 : A)")
+  let t36 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x1 : A)"), t35, t34, t33]))
   let t32 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_add_v1(), weierstrass_curve(), weierstrass_add()]))
   let t31 = @tactics.replicate_tac(3, @tactics.gen_tac)
   let t65 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t31), t32), t36), t37), t38), t42), t46), t50), t60), t61), t62), t63), t64), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_curve_add_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\ weierstrass_curve(f,a,b) q\n        ==> weierstrass_curve(f,a,b) (weierstrass_add (f,a,b) p q)"), t65))
+  weierstrass_curve_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) && weierstrass_curve((f, a, b), q) → weierstrass_curve((f, a, b), weierstrass_add((f, a, b), p, q))"), t65))
 }
 
 ///|
@@ -302,12 +302,12 @@ fn step_14() -> Unit raise {
   })))
   let t71 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@class.de_morgan_thm()])))
   let t70 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
-  let t68 = @parser.parse_term("y:A")
-  let t69 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t68]))
+  let t68 = @term_syntax.parse_term("(y : A)")
+  let t69 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t68]))
   let t67 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_add_v1(), weierstrass_curve(), weierstrass_neg(), weierstrass_add()]))
   let t66 = @tactics.replicate_tac(3, @tactics.gen_tac)
   let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t66), t67), t69), t70), t71), t75), t79), t80), t81), t82), t83), @ringtheory.field_tac)
-  weierstrass_add_lneg_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p\n        ==> weierstrass_add(f,a,b) (weierstrass_neg (f,a,b) p) p = NONE"), t84))
+  weierstrass_add_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) → weierstrass_add((f, a, b), weierstrass_neg((f, a, b), p), p) == NONE"), t84))
 }
 
 ///|
@@ -346,13 +346,13 @@ fn step_15() -> Unit raise {
   })))
   let t91 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@class.de_morgan_thm()])))
   let t90 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
-  let t86 = @parser.parse_term("y2:A")
-  let t87 = @parser.parse_term("x2:A")
-  let t88 = @parser.parse_term("y1:A")
-  let t89 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x1:A"), t88, t87, t86]))
+  let t86 = @term_syntax.parse_term("(y2 : A)")
+  let t87 = @term_syntax.parse_term("(x2 : A)")
+  let t88 = @term_syntax.parse_term("(y1 : A)")
+  let t89 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x1 : A)"), t88, t87, t86]))
   let t85 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.ring_add_v1(), weierstrass_curve(), weierstrass_add()]))
   let t108 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), t85), t89), t90), t91), t95), t99), t103), t104), t105), t106), t107), @ringtheory.field_tac)
-  weierstrass_add_sym_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\ weierstrass_curve(f,a,b) q\n        ==> weierstrass_add (f,a,b) p q = weierstrass_add (f,a,b) q p"), t108))
+  weierstrass_add_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) && weierstrass_curve((f, a, b), q) → weierstrass_add((f, a, b), p, q) == weierstrass_add((f, a, b), q, p)"), t108))
 }
 
 ///|
@@ -368,7 +368,7 @@ pub fn weierstrass_add_sym() -> @kernel.Thm {
 /// WEIERSTRASS_ADD_ASSOC
 fn step_16() -> Unit raise {
   let t109 = @tactics.then_tac(@simp.rewrite_tac(@list.List([weierstrass_curve(), weierstrass_neg(), @ind_types.option_inj(), @pair.pair_eq()])), @ringtheory.field_tac)
-  let assoclemma = @tactics.prove(@parser.parse_term("forall f (a:A) b x1 y1 x2 y2.\n          field f /\\\n          a IN ring_carrier f /\\ b IN ring_carrier f /\\\n          weierstrass_curve(f,a,b) (SOME(x1,y1)) /\\\n          weierstrass_curve(f,a,b) (SOME(x2,y2))\n          ==> (~(SOME(x2,y2) = SOME(x1,y1)) /\\\n               ~(SOME(x2,y2) = weierstrass_neg (f,a,b) (SOME(x1,y1))) <=>\n               ~(x1 = x2))"), t109)
+  let assoclemma = @tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x1 : A, ∀ y1 : A, ∀ x2 : A, ∀ y2 : A, field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), SOME((x1, y1))) && weierstrass_curve((f, a, b), SOME((x2, y2))) → (!(SOME((x2, y2)) == SOME((x1, y1))) && !(SOME((x2, y2)) == weierstrass_neg((f, a, b), SOME((x1, y1))))) == !(x1 == x2)"), t109)
   let t172 = @tactics.orelse_tac(@ringtheory.field_tac, @tactics.then_tac(@tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([weierstrass_nonsingular()]))), @ringtheory.field_tac))
   let t171 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t170 = @tactics.repeat_tac(@tactics.first_x_assum(fn(x169 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -407,18 +407,18 @@ fn step_16() -> Unit raise {
   let t142 = @tactics.repeat_tac(@tactics.gen_tac)
   let t141 = @simp.rewrite_tac(@list.List([@ind_types.option_distinct()]))
   let t140 = @simp.asm_simp_tac(@list.List([assoclemma, @class.de_morgan_thm()]))
-  let t135 = @parser.parse_term("y3:A")
-  let t136 = @parser.parse_term("x3:A")
-  let t137 = @parser.parse_term("y2:A")
-  let t138 = @parser.parse_term("x2:A")
-  let t139 = @parser.parse_term("y1:A")
-  let t145 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x1:A"), t139, t138, t137, t136, t135])), t140), t141), t142), t143), @tactics.strip_tac), @tactics.strip_tac), t144)
-  let t133 = @parser.parse_term("y3:A")
-  let t134 = @tactics.try_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x3:A"), t133])))
-  let t131 = @parser.parse_term("y2:A")
-  let t132 = @tactics.try_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x2:A"), t131])))
-  let t129 = @parser.parse_term("y1:A")
-  let t130 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x1:A"), t129]))
+  let t135 = @term_syntax.parse_term("(y3 : A)")
+  let t136 = @term_syntax.parse_term("(x3 : A)")
+  let t137 = @term_syntax.parse_term("(y2 : A)")
+  let t138 = @term_syntax.parse_term("(x2 : A)")
+  let t139 = @term_syntax.parse_term("(y1 : A)")
+  let t145 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x1 : A)"), t139, t138, t137, t136, t135])), t140), t141), t142), t143), @tactics.strip_tac), @tactics.strip_tac), t144)
+  let t133 = @term_syntax.parse_term("(y3 : A)")
+  let t134 = @tactics.try_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x3 : A)"), t133])))
+  let t131 = @term_syntax.parse_term("(y2 : A)")
+  let t132 = @tactics.try_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x2 : A)"), t131])))
+  let t129 = @term_syntax.parse_term("(y1 : A)")
+  let t130 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x1 : A)"), t129]))
   let t146 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t130), t132), t134), t145])
   let t128 = @simp.rewrite_tac(@list.List([@equal.gsym(@theorems.conj_assoc())]))
   let t127 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
@@ -426,23 +426,23 @@ fn step_16() -> Unit raise {
   let t125 = t124.prepend(@bool.conjunct1(weierstrass_neg()))
   let t126 = @simp.rewrite_tac(t125.prepend(@bool.conjunct1(weierstrass_curve())))
   let t123 = @simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()]))
-  let t121 = @parser.parse_term("NONE:(A#A)option")
+  let t121 = @term_syntax.parse_term("(NONE : Option[(A, A)])")
   let t122 = @tactics.map_every(fn(x118 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s119 = @tactics.exists_tac(x118)
     fn(x120 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s119(x120)
     }
-  }, @list.List([@parser.parse_term("weierstrass_neg(f,a:A,b)"), t121]))
+  }, @list.List([@term_syntax.parse_term("weierstrass_neg(((f : Ring[A]), (a : A), (b : A)))"), t121]))
   let t117 = @tactics.match_mp_tac(@misc.associativity_lemma())
   let t116 = @simp.rewrite_tac(@list.List([@theorems.imp_imp(), @equal.gsym(@theorems.conj_assoc()), @theorems.right_imp_forall_thm()]))
   let t115 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t113 = @parser.parse_term("b:A")
-  let t114 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("a:A"), t113]))
+  let t113 = @term_syntax.parse_term("(b : A)")
+  let t114 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(a : A)"), t113]))
   let t112 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t111 = @tactics.x_gen_tac(@parser.parse_term("f:A ring"))
+  let t111 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : Ring[A])"))
   let t110 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t173 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23()])), t110), t111), t112), t114), t115), t116), t117), t122), t123), t126), t127), @tactics.conj_tac), t128), t146), t147), t148), t149), t150), t151), t152), t153), t154), t155), t156), t157), t158), t162), t170), t171), t172), @misc.not_ring_char_divides_tac)
-  weierstrass_add_assoc_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) p q r.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        weierstrass_nonsingular(f,a,b) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve(f,a,b) p /\\\n        weierstrass_curve(f,a,b) q /\\\n        weierstrass_curve(f,a,b) r\n        ==> weierstrass_add (f,a,b) p (weierstrass_add (f,a,b) q r) =\n            weierstrass_add (f,a,b) (weierstrass_add (f,a,b) p q) r"), t173))
+  weierstrass_add_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], ∀ r : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && weierstrass_nonsingular((f, a, b)) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) && weierstrass_curve((f, a, b), q) && weierstrass_curve((f, a, b), r) → weierstrass_add((f, a, b), p, weierstrass_add((f, a, b), q, r)) == weierstrass_add((f, a, b), weierstrass_add((f, a, b), p, q), r)"), t173))
 }
 
 ///|
@@ -460,7 +460,7 @@ fn step_17() -> Unit raise {
   let t181 = @simp.asm_simp_tac(@list.List([weierstrass_curve_neg(), @ringtheory.field_imp_integral_domain()]))
   let t182 = @tactics.then_tac(@tactics.match_mp_tac(weierstrass_add_sym()), t181)
   let t183 = @list.List([@simp.asm_simp_tac(@list.List([weierstrass_add_lneg()])), t182])
-  let t180 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("x = a /\\ x = y ==> x = a /\\ y = a")))
+  let t180 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @term_syntax.parse_term("(x : _) == (a : _) && x == (y : _) → x == a && y == a")))
   let t184 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_()])), @tactics.gen_tac), @tactics.strip_tac), t180), @tactics.conj_tac), t183)
   let t185 = @simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), weierstrass_add()]))
   let t179 = @simp.asm_simp_tac(@list.List([weierstrass_add_assoc()]))
@@ -474,7 +474,7 @@ fn step_17() -> Unit raise {
   let t175 = @simp.rewrite_tac(@list.List([weierstrass_group(), @equal.gsym(@bool.conjunct2(@grouptheory.group_tybij()))]))
   let t174 = @simp.rewrite_tac(@list.List([@grouptheory.group_carrier(), @grouptheory.group_id(), @grouptheory.group_inv(), @grouptheory.group_mul(), @equal.gsym(@pair.pair_eq())]))
   let t190 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t174), t175), t176), t189)
-  weierstrass_group_v1_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A).\n      field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      weierstrass_nonsingular(f,a,b)\n      ==> group_carrier(weierstrass_group(f,a,b)) = weierstrass_curve(f,a,b) /\\\n          group_id(weierstrass_group(f,a,b)) = NONE /\\\n          group_inv(weierstrass_group(f,a,b)) = weierstrass_neg(f,a,b) /\\\n          group_mul(weierstrass_group(f,a,b)) = weierstrass_add(f,a,b)"), t190))
+  weierstrass_group_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_nonsingular((f, a, b)) → group_carrier(weierstrass_group((f, a, b))) == weierstrass_curve((f, a, b)) && group_id(weierstrass_group((f, a, b))) == NONE && group_inv(weierstrass_group((f, a, b))) == weierstrass_neg((f, a, b)) && group_mul(weierstrass_group((f, a, b))) == weierstrass_add((f, a, b))"), t190))
 }
 
 ///|
@@ -489,7 +489,7 @@ pub fn weierstrass_group_v1() -> @kernel.Thm {
 ///|
 /// weierstrass_triplex
 fn step_18() -> Unit raise {
-  weierstrass_triplex_c.set(@define.define_(@parser.parse_term("weierstrass_triplex f (c:A) NONE = NONE /\\\n  weierstrass_triplex f c (SOME(x:A,y:A)) = SOME(ring_mul f c x,y)")))
+  weierstrass_triplex_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_triplex : (Ring[A], A, Option[(A, A)]) -> Option[(A, A)])((f : Ring[A]), (c : A), NONE) == NONE && weierstrass_triplex(f, c, SOME(((x : A), (y : A)))) == SOME((ring_mul(f, c, x), y))")))
 }
 
 ///|
@@ -519,9 +519,9 @@ fn step_19() -> Unit raise {
   })
   let t193 = @simp.simp_tac(@list.List([@sets.subset(), @sets.forall_in_image(), weierstrass_group_v1(), @grouptheory.group_id_v1()]))
   let t192 = @simp.asm_simp_tac(@list.List([@grouptheory.group_endomorphism(), @grouptheory.group_homomorphism_v1()]))
-  let t191 = @class.asm_cases_tac(@parser.parse_term("a:A = ring_0 f"))
+  let t191 = @class.asm_cases_tac(@term_syntax.parse_term("(a : A) == ring_0((f : Ring[A]))"))
   let t206 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t191), t192), t193), t195), t196), @tactics.strip_tac), t197), t198), t199), t200), t201), t202), t203), t204), t205), @ringtheory.field_tac)
-  group_endomorphism_triplex_c.set(@tactics.prove(@parser.parse_term("forall f a b c:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_nonsingular (f,a,b) /\\\n        c IN ring_carrier f /\\ ring_pow f c 3 = ring_1 f /\\ a = ring_0 f\n        ==> group_endomorphism (weierstrass_group(f,a,b))\n                               (weierstrass_triplex f c)"), t206))
+  group_endomorphism_triplex_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ c : A, field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_nonsingular((f, a, b)) && IN(c, ring_carrier(f)) && ring_pow(f, c, 3) == ring_1(f) && a == ring_0(f) → group_endomorphism(weierstrass_group((f, a, b)), weierstrass_triplex(f, c))"), t206))
 }
 
 ///|
@@ -536,7 +536,7 @@ pub fn group_endomorphism_triplex() -> @kernel.Thm {
 ///|
 /// weierstrass_quady
 fn step_20() -> Unit raise {
-  weierstrass_quady_c.set(@define.define_(@parser.parse_term("weierstrass_quady f (c:A) NONE = NONE /\\\n  weierstrass_quady f c (SOME(x:A,y:A)) = SOME(ring_neg f x,ring_mul f c y)")))
+  weierstrass_quady_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_quady : (Ring[A], A, Option[(A, A)]) -> Option[(A, A)])((f : Ring[A]), (c : A), NONE) == NONE && weierstrass_quady(f, c, SOME(((x : A), (y : A)))) == SOME((ring_neg(f, x), ring_mul(f, c, y)))")))
 }
 
 ///|
@@ -566,9 +566,9 @@ fn step_21() -> Unit raise {
   })
   let t209 = @simp.simp_tac(@list.List([@sets.subset(), @sets.forall_in_image(), weierstrass_group_v1(), @grouptheory.group_id_v1()]))
   let t208 = @simp.asm_simp_tac(@list.List([@grouptheory.group_endomorphism(), @grouptheory.group_homomorphism_v1()]))
-  let t207 = @class.asm_cases_tac(@parser.parse_term("b:A = ring_0 f"))
+  let t207 = @class.asm_cases_tac(@term_syntax.parse_term("(b : A) == ring_0((f : Ring[A]))"))
   let t222 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t207), t208), t209), t211), t212), @tactics.strip_tac), t213), t214), t215), t216), t217), t218), t219), t220), t221), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  group_endomorphism_quady_c.set(@tactics.prove(@parser.parse_term("forall f a b c:A.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_nonsingular (f,a,b) /\\\n        c IN ring_carrier f /\\ b = ring_0 f /\\\n        ring_pow f c 4 = ring_1 f /\\ ~(ring_pow f c 2 = ring_1 f)\n        ==> group_endomorphism (weierstrass_group(f,a,b))\n                               (weierstrass_quady f c)"), t222))
+  group_endomorphism_quady_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ c : A, field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_nonsingular((f, a, b)) && IN(c, ring_carrier(f)) && b == ring_0(f) && ring_pow(f, c, 4) == ring_1(f) && !(ring_pow(f, c, 2) == ring_1(f)) → group_endomorphism(weierstrass_group((f, a, b)), weierstrass_quady(f, c))"), t222))
 }
 
 ///|

@@ -210,10 +210,10 @@ pub fn inst_frees_in_hyps(x31 : @list.List[@kernel.Term], x32 : @kernel.Thm) -> 
 /// NOT_IMP_EQ_EQ_EQ_OR
 fn step_1() -> Unit raise {
   let t36 = @simp.rewrite_tac(@list.List([]))
-  let t35 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
-  let t34 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t34), t35), t36)
-  not_imp_eq_eq_eq_or_c.set(@tactics.prove(@parser.parse_term("(~x ==> (y = y')) = ((y \\/ x) = (y' \\/ x))"), t37))
+  let t35 = @class.bool_cases_tac(@term_syntax.parse_term("(y' : Bool)"))
+  let t34 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t34), t35), t36)
+  not_imp_eq_eq_eq_or_c.set(@tactics.prove(@term_syntax.parse_term("(!(x : Bool) → (y : Bool) == (y' : Bool)) == ((y || x) == (y' || x))"), t37))
 }
 
 ///|
@@ -229,10 +229,10 @@ pub fn not_imp_eq_eq_eq_or() -> @kernel.Thm {
 /// IMP_EQ_EQ_EQ_OR_NOT
 fn step_2() -> Unit raise {
   let t40 = @simp.rewrite_tac(@list.List([]))
-  let t39 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
-  let t38 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t38), t39), t40)
-  imp_eq_eq_eq_or_not_c.set(@tactics.prove(@parser.parse_term("(x ==> (y = y')) = ((y \\/ ~x) = (y' \\/ ~x))"), t41))
+  let t39 = @class.bool_cases_tac(@term_syntax.parse_term("(y' : Bool)"))
+  let t38 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t38), t39), t40)
+  imp_eq_eq_eq_or_not_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) → (y : Bool) == (y' : Bool)) == ((y || !x) == (y' || !x))"), t41))
 }
 
 ///|
@@ -248,11 +248,11 @@ pub fn imp_eq_eq_eq_or_not() -> @kernel.Thm {
 /// NOT_IMP_EQ_OR_EQ_EQ_OR_OR
 fn step_3() -> Unit raise {
   let t45 = @simp.rewrite_tac(@list.List([]))
-  let t44 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
-  let t43 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
-  let t42 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t46 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t42), t43), t44), t45)
-  not_imp_eq_or_eq_eq_or_or_c.set(@tactics.prove(@parser.parse_term("(~x ==> ((y \\/ t) = (y' \\/ t))) = ((y \\/ (x \\/ t)) = (y' \\/ (x \\/ t)))"), t46))
+  let t44 = @class.bool_cases_tac(@term_syntax.parse_term("(t : Bool)"))
+  let t43 = @class.bool_cases_tac(@term_syntax.parse_term("(y' : Bool)"))
+  let t42 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t46 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t42), t43), t44), t45)
+  not_imp_eq_or_eq_eq_or_or_c.set(@tactics.prove(@term_syntax.parse_term("(!(x : Bool) → ((y : Bool) || (t : Bool)) == ((y' : Bool) || t)) == ((y || x || t) == (y' || x || t))"), t46))
 }
 
 ///|
@@ -268,11 +268,11 @@ pub fn not_imp_eq_or_eq_eq_or_or() -> @kernel.Thm {
 /// IMP_EQ_OR_EQ_EQ_OR_NOT_OR
 fn step_4() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([]))
-  let t49 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
-  let t48 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
-  let t47 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t47), t48), t49), t50)
-  imp_eq_or_eq_eq_or_not_or_c.set(@tactics.prove(@parser.parse_term("(x ==> ((y \\/ t) = (y' \\/ t))) = ((y \\/ (~x \\/ t)) = (y' \\/ (~x \\/ t)))"), t51))
+  let t49 = @class.bool_cases_tac(@term_syntax.parse_term("(t : Bool)"))
+  let t48 = @class.bool_cases_tac(@term_syntax.parse_term("(y' : Bool)"))
+  let t47 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t51 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t47), t48), t49), t50)
+  imp_eq_or_eq_eq_or_not_or_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) → ((y : Bool) || (t : Bool)) == ((y' : Bool) || t)) == ((y || !x || t) == (y' || !x || t))"), t51))
 }
 
 ///|
@@ -288,10 +288,10 @@ pub fn imp_eq_or_eq_eq_or_not_or() -> @kernel.Thm {
 /// IMP_EQ_EQ_EQ_NOT_OR
 fn step_5() -> Unit raise {
   let t54 = @simp.rewrite_tac(@list.List([]))
-  let t53 = @class.bool_cases_tac(@parser.parse_term("t':bool"))
-  let t52 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
-  let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t52), t53), t54)
-  imp_eq_eq_eq_not_or_c.set(@tactics.prove(@parser.parse_term("(x ==> (t = t')) = ((~x \\/ t) = (~x \\/ t'))"), t55))
+  let t53 = @class.bool_cases_tac(@term_syntax.parse_term("(t' : Bool)"))
+  let t52 = @class.bool_cases_tac(@term_syntax.parse_term("(t : Bool)"))
+  let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t52), t53), t54)
+  imp_eq_eq_eq_not_or_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) → (t : Bool) == (t' : Bool)) == ((!x || t) == (!x || t'))"), t55))
 }
 
 ///|
@@ -307,10 +307,10 @@ pub fn imp_eq_eq_eq_not_or() -> @kernel.Thm {
 /// IMP_NOT_EQ_EQ_EQ_OR
 fn step_6() -> Unit raise {
   let t58 = @simp.rewrite_tac(@list.List([]))
-  let t57 = @class.bool_cases_tac(@parser.parse_term("t':bool"))
-  let t56 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
-  let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t56), t57), t58)
-  imp_not_eq_eq_eq_or_c.set(@tactics.prove(@parser.parse_term("(~x ==> (t = t')) = ((x \\/ t) = (x \\/ t'))"), t59))
+  let t57 = @class.bool_cases_tac(@term_syntax.parse_term("(t' : Bool)"))
+  let t56 = @class.bool_cases_tac(@term_syntax.parse_term("(t : Bool)"))
+  let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t56), t57), t58)
+  imp_not_eq_eq_eq_or_c.set(@tactics.prove(@term_syntax.parse_term("(!(x : Bool) → (t : Bool) == (t' : Bool)) == ((x || t) == (x || t'))"), t59))
 }
 
 ///|

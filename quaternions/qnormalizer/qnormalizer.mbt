@@ -4,7 +4,7 @@
 /// QUAT_MUL_HX_MUL_SYM
 fn step_1() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([@quaternion.quat_mul_assoc(), @quaternion.quat_mul_hx_sym()]))
-  quat_mul_hx_mul_sym_c.set(@tactics.prove(@parser.parse_term("(forall x y a. x * (Hx a * y) = Hx a * (x * y))"), t1))
+  quat_mul_hx_mul_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ a : Real, quat_mul(x, quat_mul(Hx(a), y)) == quat_mul(Hx(a), quat_mul(x, y))"), t1))
 }
 
 ///|
@@ -19,39 +19,39 @@ pub fn quat_mul_hx_mul_sym() -> @kernel.Thm {
 ///|
 /// QUAT_POLY_CONV
 fn step_2() -> Unit raise {
-  let hx_tm = @parser.parse_term("Hx")
+  let hx_tm = @term_syntax.parse_term("Hx")
   let is_quat_real : (@kernel.Term) -> Bool raise = fn(x2 : @kernel.Term) -> Bool raise {
     let tm = x2
     (@kernel.is_comb(tm) && (@kernel.rator(tm) == hx_tm))
   }
-  let t3 = @parser.parse_term("(+):quat->quat->quat")
+  let t3 = @term_syntax.parse_term("(op_plus : (Cart[Real, Tybit0[Tybit0[Unit]]], Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
   let is_quat_add : (@kernel.Term) -> Bool raise = fn(x5 : @kernel.Term) -> Bool raise {
     ((x4 : @kernel.Term) => @basics.is_binop(t3, x4))(x5)
   }
-  let t6 = @parser.parse_term("(+):quat->quat->quat")
+  let t6 = @term_syntax.parse_term("(op_plus : (Cart[Real, Tybit0[Tybit0[Unit]]], Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
   let mk_quat_add : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x9 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x10 : @kernel.Term) -> @kernel.Term raise {
       ((x7 : @kernel.Term, x8 : @kernel.Term) => @basics.mk_binop(t6, x7, x8))(x9, x10)
     }
   }
-  let t11 = @parser.parse_term("(+):quat->quat->quat")
+  let t11 = @term_syntax.parse_term("(op_plus : (Cart[Real, Tybit0[Tybit0[Unit]]], Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Tybit0[Tybit0[Unit]]])")
   let dest_quat_add : (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise = (x12 : @kernel.Term) => @basics.dest_binop(t11, x12)
-  let t13 = @parser.parse_term("quat_mul")
+  let t13 = @term_syntax.parse_term("quat_mul")
   let is_quat_mul : (@kernel.Term) -> Bool raise = fn(x15 : @kernel.Term) -> Bool raise {
     ((x14 : @kernel.Term) => @basics.is_binop(t13, x14))(x15)
   }
-  let t16 = @parser.parse_term("quat_mul")
+  let t16 = @term_syntax.parse_term("quat_mul")
   let dest_quat_mul : (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise = (x17 : @kernel.Term) => @basics.dest_binop(t16, x17)
-  let t18 = @parser.parse_term("quat_pow")
+  let t18 = @term_syntax.parse_term("quat_pow")
   let is_quat_pow : (@kernel.Term) -> Bool raise = fn(x20 : @kernel.Term) -> Bool raise {
     ((x19 : @kernel.Term) => @basics.is_binop(t18, x19))(x20)
   }
-  let t21 = @parser.parse_term("quat_pow")
+  let t21 = @term_syntax.parse_term("quat_pow")
   let dest_quat_pow : (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise = (x22 : @kernel.Term) => @basics.dest_binop(t21, x22)
   let t23 = @equal.gsym(@quaternion.quat_pow_suc_alt())
   let t24 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_pow()), t23]))
   let t25 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.quat_pow_add(), @quaternion.quat_pow_1(), @quaternion.quat_pow_2()])), t24)
-  let th1 = @tactics.prove(@parser.parse_term("(forall x m n. x:quat pow m * x pow n = x pow (m + n)) /\\\n       (forall x n. x:quat * x pow n = x pow (n + 1)) /\\\n       (forall x n. x:quat pow n * x = x pow (n + 1)) /\\\n       (forall x. x:quat * x = x pow 2)"), t25)
+  let th1 = @tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ m : Num, ∀ n : Num, quat_mul(quat_pow(x, m), quat_pow(x, n)) == quat_pow(x, m + n)) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, quat_mul(x, quat_pow(x, n)) == quat_pow(x, n + 1)) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, quat_mul(quat_pow(x, n), x) == quat_pow(x, n + 1)) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(x, x) == quat_pow(x, 2))"), t25)
   let t27 = @equal.rand_conv(@normalizer.num_normalize_conv)
   let pow_mul_fuse_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@simp.gen_rewrite_conv(fn(x26 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x26
@@ -92,7 +92,7 @@ fn step_2() -> Unit raise {
   let t40 = @simp.rewrite_tac(@list.List([@quaternion.hx_mul(), @quaternion.quat_mul_assoc()]))
   let t39 = @simp.once_rewrite_tac(@list.List([quat_mul_hx_mul_sym(), @quaternion.quat_mul_hx_sym()]))
   let t41 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@quaternion.hx_mul(), @quaternion.quat_mul_assoc()])), t39), t40)
-  let t42 = (@parser.parse_term("(forall a b x y. (Hx a * x) * (Hx b * y) = Hx (a * b) * x * y) /\\\n       (forall a b x. (Hx a * x) * Hx b = Hx (a * b) * x) /\\\n       (forall a b x. Hx a * (Hx b * x) = Hx (a * b) * x) /\\\n       (forall a x y. (Hx a * x) * y = Hx a * x * y) /\\\n       (forall a x y. x * (Hx a * y) = Hx a * x * y)"), t41)
+  let t42 = (@term_syntax.parse_term("(∀ a : Real, ∀ b : Real, ∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(quat_mul(Hx(a), x), quat_mul(Hx(b), y)) == quat_mul(Hx(a * b), quat_mul(x, y))) && (∀ a : Real, ∀ b : Real, ∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(quat_mul(Hx(a), x), Hx(b)) == quat_mul(Hx(a * b), x)) && (∀ a : Real, ∀ b : Real, ∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(Hx(a), quat_mul(Hx(b), x)) == quat_mul(Hx(a * b), x)) && (∀ a : Real, ∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(quat_mul(Hx(a), x), y) == quat_mul(Hx(a), quat_mul(x, y))) && (∀ a : Real, ∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(x, quat_mul(Hx(a), y)) == quat_mul(Hx(a), quat_mul(x, y)))"), t41)
   let term_mul_conv : (@kernel.Term) -> @kernel.Thm raise = match (fn(x37 : @kernel.Thm) -> @list.List[(@kernel.Term) -> @kernel.Thm raise] raise {
     ((x36 : @list.List[@kernel.Thm]) => @lib.map(@simp.rewr_conv, x36))(@bool.conjuncts_rule(x37))
   })((fn(x38 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -114,11 +114,11 @@ fn step_2() -> Unit raise {
     _ => raise @lib.MatchFailure("tscript.ml:68")
   }
   let t53 = @simp.rewrite_tac(@list.List([@quaternion.hx_add(), @quaternion.quat_add_rdistrib()]))
-  let th1_1 = @tactics.prove(@parser.parse_term("forall x y q. Hx x * q + Hx y * q = Hx(x+y) * q"), t53)
+  let th1_1 = @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(Hx(x), q) + quat_mul(Hx(y), q) == quat_mul(Hx(x + y), q)"), t53)
   let t54 = @simp.rewrite_tac(@list.List([@quaternion.hx_add(), @quaternion.quat_add_rdistrib(), @quaternion.quat_mul_lid()]))
-  let th2 = @tactics.prove(@parser.parse_term("forall x q. Hx x * q + q = Hx(x + &1) * q"), t54)
+  let th2 = @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(Hx(x), q) + q == quat_mul(Hx(x + real_of_num(1)), q)"), t54)
   let t55 = @simp.rewrite_tac(@list.List([@quaternion.hx_add(), @quaternion.quat_add_rdistrib(), @quaternion.quat_mul_lid()]))
-  let th3 = @tactics.prove(@parser.parse_term("forall x q. q + Hx x * q = Hx(&1 + x) * q"), t55)
+  let th3 = @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], q + quat_mul(Hx(x), q) == quat_mul(Hx(real_of_num(1) + x), q)"), t55)
   let t64 = @simp.rewr_conv(@quaternion.quat_mul_lzero())
   let t65 = @equal.orelsec(@equal.orelsec(@simp.rewr_conv(@quaternion.quat_mul_lid()), t64), @equal.all_conv)
   let t63 = @simp.rewr_conv(@equal.gsym(@quaternion.quat_mul_2()))
@@ -205,15 +205,15 @@ fn step_2() -> Unit raise {
     }
   }
   let t79 = @simp.rewrite_tac(@list.List([@quaternion.quat_add_ac()]))
-  let insert_term_th = @tactics.prove(@parser.parse_term("forall p q r:quat. p + (q + r) = q + (p + r)"), t79)
+  let insert_term_th = @tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ r : Cart[Real, Tybit0[Tybit0[Unit]]], p + (q + r) == q + (p + r)"), t79)
   let insert_term = (x80 : @kernel.Term, x81 : @kernel.Term) => insert_term_l(mk_quat_add, dest_quat_add, term_compare, terms_fuse_add_conv, insert_term_th, x80, x81)
   let insert_term_conv = (x87 : @kernel.Term) => insert_term_conv_l(mk_quat_add, dest_quat_add, term_compare, terms_fuse_add_conv, insert_term_th, x87)
   let t88 = @simp.rewrite_tac(@list.List([@quaternion.quat_add_ac()]))
-  let th_add1 = @tactics.prove(@parser.parse_term("forall p q r:quat. (p + q) + (r + s) = (p + r) + (q + s)"), t88)
+  let th_add1 = @tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ r : Cart[Real, Tybit0[Tybit0[Unit]]], p + q + (r + (s : Cart[Real, Tybit0[Tybit0[Unit]]])) == p + r + (q + s)"), t88)
   let t89 = @simp.rewrite_tac(@list.List([@quaternion.quat_add_ac()]))
-  let th_add2 = @tactics.prove(@parser.parse_term("forall p q r:quat. (p + q) + (r + s) = p + (q + (r + s))"), t89)
+  let th_add2 = @tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ r : Cart[Real, Tybit0[Tybit0[Unit]]], p + q + (r + (s : Cart[Real, Tybit0[Tybit0[Unit]]])) == p + (q + (r + s))"), t89)
   let t90 = @simp.rewrite_tac(@list.List([@quaternion.quat_add_ac()]))
-  let th_add3 = @tactics.prove(@parser.parse_term("forall p q r:quat. (p + q) + (r + s) = r + ((p + q) + s)"), t90)
+  let th_add3 = @tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ r : Cart[Real, Tybit0[Tybit0[Unit]]], p + q + (r + (s : Cart[Real, Tybit0[Tybit0[Unit]]])) == r + (p + q + s)"), t90)
   fn pre_add_conv(x91 : @kernel.Term) -> @kernel.Thm raise {
     let tm_8 = x91
     let (tm1_4, tm2_3) = dest_quat_add(tm_8)
@@ -261,7 +261,7 @@ fn step_2() -> Unit raise {
   }
   let rdistrib_conv_1 : (@kernel.Term) -> @kernel.Thm raise = rdistrib_conv
   let t102 = @simp.rewrite_tac(@list.List([@quaternion.quat_add_ldistrib(), @quaternion.quat_add_rdistrib(), @quaternion.quat_add_ac()]))
-  let th_mul = @tactics.prove(@parser.parse_term("forall p q r s:quat. (p + q) * (r + s) = p * r + ((p * s + q * r) + q * s)"), t102)
+  let th_mul = @tactics.prove(@term_syntax.parse_term("∀ p : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ q : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ r : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ s : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(p + q, r + s) == quat_mul(p, r) + (quat_mul(p, s) + quat_mul(q, r) + quat_mul(q, s))"), t102)
   let binop_conv2 : ((@kernel.Term) -> @kernel.Thm raise) -> (((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise = fn(x103 : (@kernel.Term) -> @kernel.Thm raise) -> (((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise {
     let conv1_1 = x103
     fn(x104 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -286,17 +286,17 @@ fn step_2() -> Unit raise {
     }
   }
   let t110 = @simp.rewrite_tac(@list.List([@nums.numeral()]))
-  let quat_pow_denumeral = @tactics.prove(@parser.parse_term("x:quat pow NUMERAL n = x pow n"), t110)
+  let quat_pow_denumeral = @tactics.prove(@term_syntax.parse_term("quat_pow((x : Cart[Real, Tybit0[Tybit0[Unit]]]), NUMERAL((n : Num))) == quat_pow(x, n)"), t110)
   let t112 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_pow_2()), @quaternion.quat_pow_pow(), @arith.mult_sym()]))
   let t111 = @simp.rewrite_tac(@list.List([@arith.bit0(), @quaternion.quat_pow_add()]))
   let t113 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t111), t112)
-  let quat_pow_bit0 = @tactics.prove(@parser.parse_term("forall x n. x:quat pow BIT0 n = (x * x) pow n"), t113)
+  let quat_pow_bit0 = @tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, quat_pow(x, BIT0(n)) == quat_pow(quat_mul(x, x), n)"), t113)
   let t115 = @simp.rewrite_tac(@list.List([@equal.gsym(@quaternion.quat_pow_2()), @quaternion.quat_pow_pow(), @arith.mult_sym()]))
   let t114 = @simp.rewrite_tac(@list.List([@arith.bit1(), @quaternion.quat_pow(), @quaternion.quat_pow_add()]))
   let t116 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t114), t115)
-  let quat_pow_bit1 = @tactics.prove(@parser.parse_term("forall x n. x:quat pow BIT1 n = x * (x * x) pow n"), t116)
+  let quat_pow_bit1 = @tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, quat_pow(x, BIT1(n)) == quat_mul(x, quat_pow(quat_mul(x, x), n))"), t116)
   let t117 = @simp.rewrite_tac(@list.List([@calc_num.denumeral(@quaternion.quat_pow()), @nums.numeral()]))
-  let quat_pow_0 = @tactics.prove(@parser.parse_term("forall x. x pow _0 = Hx(&1)"), t117)
+  let quat_pow_0 = @tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_pow(x, _0) == Hx(real_of_num(1))"), t117)
   fn pre_pow_conv(x118 : @kernel.Term) -> @kernel.Thm raise {
     let tm_12 = x118
     let t121 = @equal.rand_conv(@equal.thenc(@equal.land_conv(pre_mul_conv), pre_pow_conv))
@@ -311,7 +311,7 @@ fn step_2() -> Unit raise {
   let mul_conv = (x125 : @kernel.Term) => mul_conv_l(is_quat_add, is_quat_mul, is_quat_pow, pre_add_conv, pre_mul_conv, pre_pow_conv_1, x125)
   let pow_conv = (x126 : @kernel.Term) => pow_conv_l(is_quat_add, is_quat_mul, is_quat_pow, pre_add_conv, pre_mul_conv, pre_pow_conv_1, x126)
   let t129 = @simp.rewrite_tac(@list.List([@quaternion.quat_poly_clauses(), @quaternion.quat_cnj_add(), @quaternion.quat_cnj_mul(), @quaternion.quat_cnj_inv(), @quaternion.quat_cnj_pow(), @quaternion.cnj_hx(), @quaternion.quat_cnj_units()]))
-  let quat_desugar_clauses = @tactics.prove(@parser.parse_term("(forall x. Hx (&0) + x = x) /\\\n         (forall x. --x = Hx (-- &1) * x) /\\\n         (forall x y. x - y = x + Hx (-- &1) * y) /\\\n         (forall x. Hx (&1) * x = x) /\\\n         (forall x. x * Hx (&1) = x) /\\\n         (forall x. Hx (&0) * x = Hx (&0)) /\\\n         (forall x. x * Hx (&0) = Hx (&0)) /\\\n         (forall x. x pow 0 = Hx (&1)) /\\\n         (forall x y:quat. cnj (x + y) = cnj x + cnj y) /\\\n         (forall x y:quat. cnj (x * y) = cnj y * cnj x) /\\\n         (forall x:quat. cnj (inv x) = inv (cnj x)) /\\\n         (forall x:quat n. cnj (x pow n) = cnj x pow n) /\\\n         (forall a. cnj (Hx a) = Hx a) /\\\n         cnj ii =  Hx(-- &1) * ii /\\\n         cnj jj =  Hx(-- &1) * jj /\\\n         cnj kk =  Hx(-- &1) * kk"), t129)
+  let quat_desugar_clauses = @tactics.prove(@term_syntax.parse_term("(∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], Hx(real_of_num(0)) + x == x) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], -x == quat_mul(Hx(-real_of_num(1)), x)) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], x - y == x + quat_mul(Hx(-real_of_num(1)), y)) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(Hx(real_of_num(1)), x) == x) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(x, Hx(real_of_num(1))) == x) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(Hx(real_of_num(0)), x) == Hx(real_of_num(0))) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_mul(x, Hx(real_of_num(0))) == Hx(real_of_num(0))) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_pow(x, 0) == Hx(real_of_num(1))) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], quat_cnj(x + y) == quat_cnj(x) + quat_cnj(y)) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ y : Cart[Real, Tybit0[Tybit0[Unit]]], quat_cnj(quat_mul(x, y)) == quat_mul(quat_cnj(y), quat_cnj(x))) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], quat_cnj(quat_inv(x)) == quat_inv(quat_cnj(x))) && (∀ x : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ n : Num, quat_cnj(quat_pow(x, n)) == quat_pow(quat_cnj(x), n)) && (∀ a : Real, quat_cnj(Hx(a)) == Hx(a)) && quat_cnj(quat_ii) == quat_mul(Hx(-real_of_num(1)), quat_ii) && quat_cnj(jj) == quat_mul(Hx(-real_of_num(1)), jj) && quat_cnj(kk) == quat_mul(Hx(-real_of_num(1)), kk)"), t129)
   let quat_desugar_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewrite_conv(@list.List([quat_desugar_clauses]))
   quat_poly_conv_c.set(@equal.thenc(quat_desugar_conv, poly_conv))
 }

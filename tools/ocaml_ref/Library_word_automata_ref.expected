@@ -6968,51 +6968,51 @@ Warning: inventing type variables
 1 basis elements and 0 critical pairs
 1 basis elements and 0 critical pairs
 Library/word_automata quotations (48):
-  forall s s':S. init s /\\ RTC step s s' ==> invariant s'
+  \226\136\128 s : S, \226\136\128 s' : S, (init : (S) -> Bool)(s) && RTC((step : (S, S) -> Bool), s, s') \226\134\146 (invariant : (S) -> Bool)(s')
   forall init step final invariant.\n        (forall s. init s ==> invariant s) /\\\n        (forall s s'. invariant s /\\ step s s' ==> invariant s') /\\\n        (forall s. invariant s ==> final s)\n        ==> (forall s s':S. init s /\\ RTC step s s' ==> final s')
   (forall x n. word_shl x (SUC n):N word = word_shl (word_shl x 1) n) /\\\n     (forall x n. word_ushr x (SUC n):N word = word_ushr (word_ushr x 1) n) /\\\n     (forall x n. word_ishr x (SUC n):N word = word_ishr (word_ishr x 1) n)
   word_shladd (x:N word) b = word_or (word_shl x 1) (word(bitval b))
   forall(x:N word) b.\n        word_shladd (x:N word) b = word_add (word_shl x 1) (word(bitval b))
   (forall(x:N word) b. bit 0 (word_shladd x b) <=> b) /\\\n   (forall(x:N word) b i. bit (i + 1) (word_shladd x b) <=>\n                     i + 1 < dimindex(:N) /\\ bit i x)
-  forall x:N word. word_shladd x F = word_shl x 1
+  \226\136\128 x : Word[N], word_shladd(x, false) == word_shl(x, 1)
   word(NUMERAL(BIT0 n)):N word = word_shladd (word(NUMERAL n)) F /\\\n   word(NUMERAL(BIT1 n)):N word = word_shladd (word(NUMERAL n)) T
-  i < n - 1 <=> SUC i < n
-  (forall i. P i) <=> P 0 /\\ (forall i. P(SUC i))
-  n - 1 < n <=> ~(n = 0)
-  p \\/ q ==> r <=> (p ==> r) /\\ (q ==> r)
+  ((i : Num) < (n : Num) - 1) == (SUC(i) < n)
+  (\226\136\128 i : Num, (P : (Num) -> Bool)(i)) == (P(0) && (\226\136\128 i : Num, P(SUC(i))))
+  ((n : Num) - 1 < n) == !(n == 0)
+  ((p : Bool) || (q : Bool) \226\134\146 (r : Bool)) == ((p \226\134\146 r) && (q \226\134\146 r))
   ~(n = 0) ==> (i < n <=> i = n - 1 \\/ i < n - 1)
-  i < n ==> (i + 1 < n <=> ~(i = n - 1))
+  (i : Num) < (n : Num) \226\134\146 (i + 1 < n) == !(i == n - 1)
   (forall x y:N word.\n        word_ushr x 1 = y <=>\n        word_and word_INT_MIN y = word 0 /\\\n        word_shladd y (bit 0 x) = x) /\\\n   (forall x y:N word.\n        word_ishr x 1 = y <=>\n        word_and word_INT_MIN y = word_and word_INT_MIN x /\\\n        word_shladd y (bit 0 x) = x)
-  n <= n - 1 <=> n = 0
-  (n:num) divides n
-  ~(n = 0) ==> SUC(n - 1) = n
-  (--x:int == &0) (mod n) <=> n divides x
+  ((n : Num) <= n - 1) == (n == 0)
+  divides((n : Num), n)
+  !((n : Num) == 0) \226\134\146 SUC(n - 1) == n
+  op_eq_eq(-(x : Int), int_of_num(0), mod((n : Int))) == divides(n, x)
   word_shl (iword x) 1 = iword(&2 * x)
   ~(word_INT_MIN:N word = word 0) /\\\n   word_shladd word_INT_MIN F :N word = word 0
-  ~(p /\\ q /\\ r) <=> q ==> p ==> ~r
+  !((p : Bool) && (q : Bool) && (r : Bool)) == (q \226\134\146 p \226\134\146 !r)
   forall x y:N word.\n        val x < val y <=>\n        ~(word_and word_INT_MIN\n                   (word_or (word_and (word_not x) y)\n                            (word_and (word_or (word_not x) y)\n                                      (word_sub x y))) =\n          word 0)
-  ~(p /\\ q /\\ r) <=> q ==> p ==> ~r
+  !((p : Bool) && (q : Bool) && (r : Bool)) == (q \226\134\146 p \226\134\146 !r)
   forall x y:N word.\n        ival x < ival y <=>\n        ~(word_and word_INT_MIN\n                   (word_or (word_and x (word_not y))\n                            (word_and (word_not(word_xor x y))\n                                      (word_sub x y))) =\n          word 0)
-  ~(p /\\ q /\\ r) <=> q ==> p ==> ~r
+  !((p : Bool) && (q : Bool) && (r : Bool)) == (q \226\134\146 p \226\134\146 !r)
   forall x:N word.\n        ival x < &0 <=> ~(word_and word_INT_MIN x = word 0)
   forall x y:N word.\n        x = word 0 \\/ y = word 0 <=>\n        word_and (word_or x (word_neg x)) (word_or y (word_neg y)) = word 0
-  i + 1 < n ==> i < n
-  forall i. i < n ==> RTC step ((b:num->S) 0) (b i)
+  (i : Num) + 1 < (n : Num) \226\134\146 i < n
+  \226\136\128 i : Num, i < (n : Num) \226\134\146 RTC((step : (S, S) -> Bool), (b : (Num) -> S)(0), b(i))
   forall step init final b n.\n          (forall s s':S. init s /\\ RTC step s s' ==> final s')\n          ==> init(b 0)\n              ==> (forall i. i + 1 < n ==> step (b i) (b(i+1)))\n                  ==> forall i. i < n ==> final(b i)
   :N
-  (+):num->num->num
+  op_plus
   1
   (forall x z:N word. word_neg x = z ==> (bit 0 z <=> bit 0 x)) /\\\n   (forall x y z:N word. word_add x y = z ==> (bit 0 z <=> ~(bit 0 x <=> bit 0 y))) /\\\n   (forall x y z:N word. word_sub x y = z ==> (bit 0 z <=> ~(bit 0 x <=> bit 0 y))) /\\\n   (forall x (z:N word) b. word_shladd x b = z ==> (bit 0 z <=> b)) /\\\n   (forall a b:N word. a = b ==> (bit 0 a <=> bit 0 b))
-  ~(i + 1 = 0) /\\ 1 <= i + 1
+  !((i : Num) + 1 == 0) && 1 <= i + 1
   (forall x z:N word.\n        word_neg x = z\n        ==> forall i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     (bit (i + 1) x <=> ~bit i x /\\ ~bit i z))) /\\\n   (forall x y z:N word.\n        word_add x y = z\n        ==> forall i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     ((bit (i + 1) x <=> bit (i + 1) y) <=>\n                      bit i x /\\ bit i y \\/\n                      (bit i x \\/ bit i y) /\\ ~bit i z))) /\\\n   (forall x y z:N word.\n        word_sub x y = z\n        ==> forall i. i + 1 < dimindex(:N)\n                ==> (bit (i + 1) z <=>\n                     ((bit (i + 1) x <=> bit (i + 1) y) <=>\n                      ~bit i x /\\ bit i y \\/\n                      (~bit i x \\/ bit i y) /\\ bit i z))) /\\\n   (forall x (z:N word) b.\n        word_shladd x b = z\n        ==> forall i. i + 1 < dimindex(:N) ==> (bit (i + 1) z <=> bit i x)) /\\\n   (forall a b:N word.\n        a = b\n        ==> forall i. i + 1 < dimindex(:N) ==> (bit (i + 1) a = bit (i + 1) b))
-  0 < dimindex(:N)
-  i + 1 < dimindex(:N) ==> i < dimindex(:N)
+  0 < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+  (i : Num) + 1 < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 i < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
   (i + 1 < n ==> p) /\\ (i + 1 < n ==> q) <=> (i + 1 < n ==> p /\\ q)
-  T
-  F
-  p ==> q <=> ~p \\/ q
-  p ==> F <=> ~p
-  T ==> p <=> p
+  true
+  false
+  ((p : Bool) \226\134\146 (q : Bool)) == (!p || q)
+  ((p : Bool) \226\134\146 false) == !p
+  (true \226\134\146 (p : Bool)) == p
   forall x y:N word.\n    word_mul (word_shladd x T) y = word_add (word_shladd (word_mul x y) F) y /\\\n    word_mul y (word_shladd x T) = word_add (word_shladd (word_mul y x) F) y /\\\n    word_mul (word_shladd x F) y = word_shladd (word_mul x y) F /\\\n    word_mul y (word_shladd x F) = word_shladd (word_mul y x) F
   :N
   :4

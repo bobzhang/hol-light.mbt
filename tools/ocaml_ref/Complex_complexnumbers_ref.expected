@@ -6386,8 +6386,8 @@ Complex/complexnumbers quotations (198):
   (n : Num)
   (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_add(x, complex_add(y, z)) == complex_add(complex_add(x, y), z)) && (\226\136\128 x : Complex, \226\136\128 y : Complex, complex_add(x, y) == complex_add(y, x)) && (\226\136\128 x : Complex, complex_add(Cx(real_of_num(0)), x) == x) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_mul(y, z)) == complex_mul(complex_mul(x, y), z)) && (\226\136\128 x : Complex, \226\136\128 y : Complex, complex_mul(x, y) == complex_mul(y, x)) && (\226\136\128 x : Complex, complex_mul(Cx(real_of_num(1)), x) == x) && (\226\136\128 x : Complex, complex_mul(Cx(real_of_num(0)), x) == Cx(real_of_num(0))) && (\226\136\128 x : Complex, \226\136\128 y : Complex, \226\136\128 z : Complex, complex_mul(x, complex_add(y, z)) == complex_add(complex_mul(x, y), complex_mul(x, z))) && (\226\136\128 x : Complex, complex_pow(x, 0) == Cx(real_of_num(1))) && (\226\136\128 x : Complex, \226\136\128 n : Num, complex_pow(x, SUC(n)) == complex_mul(x, complex_pow(x, n)))
   (\226\136\128 x : Complex, complex_neg(x) == complex_mul(Cx(-real_of_num(1)), x)) && (\226\136\128 x : Complex, \226\136\128 y : Complex, complex_sub(x, y) == complex_add(x, complex_mul(Cx(-real_of_num(1)), y)))
-  p:num
-  q:num
+  (p : Num)
+  (q : Num)
   0
   1
   complex_neg

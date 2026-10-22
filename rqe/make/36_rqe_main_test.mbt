@@ -9937,8 +9937,8 @@ test "Rqe/rqe_main matches Rqe/rqe_main.ml" {
       #|0..0..2..4..8..17..27..solved at 42
       #|0..0..1..2..5..8..11..solved at 19
       #|Rqe/rqe_main quotations (4):
-      #|  LENGTH:(A list) -> num
-      #|  LAST:(A list) -> A
+      #|  (LENGTH : (List[A]) -> Num)
+      #|  (LAST : (List[A]) -> A)
       #|  poly_diff
       #|  interpmat
       #|types = sign/0 metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

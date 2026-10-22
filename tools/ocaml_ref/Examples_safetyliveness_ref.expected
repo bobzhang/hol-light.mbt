@@ -5531,16 +5531,16 @@ Warning: inventing type variables
 0..0..1..4..8..18..36..63..98..149..205..288..412..566..780..1068..1414..solved at 1641
 0..0..0..2..4..6..17..31..53..90..solved at 117
 Examples/safetyliveness quotations (10):
-  safety (p:(num->S)->bool) <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m <= n ==> s(m) = s'(m)) ==> ~(p s')
-  liveness (p:(num->S)->bool) <=>\n        forall s n. ?s'. (forall m. m <= n ==> s(m) = s'(m)) /\\ p s'
-  m < n ==> m < SUC n
-  forall p:(num->S)->bool.\n        safety p <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m < n ==> s(m) = s'(m)) ==> ~(p s')
-  m < n ==> m < SUC n
-  forall p:(num->S)->bool.\n        liveness p <=>\n        forall s n. ?s'. (forall m. m < n ==> s(m) = s'(m)) /\\ p s'
-  \\s:num->S. P s \\/ ~Q s
-  \\s:num->S. P s \\/ Q s
-  Q = \\s:num->S. forall i. ?b. (forall j. j <= i ==> b j = s j) /\\ P b
-  forall P:(num->S)->bool.\n      ?S L. safety S /\\ liveness L /\\ (forall x. S x /\\ L x <=> P x)
+  (safety : (((Num) -> S) -> Bool) -> Bool)((p : ((Num) -> S) -> Bool)) == (\226\136\128 s : (Num) -> S, !p(s) \226\134\146 (\226\136\131 n : Num, \226\136\128 s' : (Num) -> S, (\226\136\128 m : Num, m <= n \226\134\146 s(m) == s'(m)) \226\134\146 !p(s')))
+  (liveness : (((Num) -> S) -> Bool) -> Bool)((p : ((Num) -> S) -> Bool)) == (\226\136\128 s : (Num) -> S, \226\136\128 n : Num, \226\136\131 s' : (Num) -> S, (\226\136\128 m : Num, m <= n \226\134\146 s(m) == s'(m)) && p(s'))
+  (m : Num) < (n : Num) \226\134\146 m < SUC(n)
+  \226\136\128 p : ((Num) -> S) -> Bool, safety(p) == (\226\136\128 s : (Num) -> S, !p(s) \226\134\146 (\226\136\131 n : Num, \226\136\128 s' : (Num) -> S, (\226\136\128 m : Num, m < n \226\134\146 s(m) == s'(m)) \226\134\146 !p(s')))
+  (m : Num) < (n : Num) \226\134\146 m < SUC(n)
+  \226\136\128 p : ((Num) -> S) -> Bool, liveness(p) == (\226\136\128 s : (Num) -> S, \226\136\128 n : Num, \226\136\131 s' : (Num) -> S, (\226\136\128 m : Num, m < n \226\134\146 s(m) == s'(m)) && p(s'))
+  (s : (Num) -> S) => (P : ((Num) -> S) -> Bool)(s) || !(Q : ((Num) -> S) -> Bool)(s)
+  (s : (Num) -> S) => (P : ((Num) -> S) -> Bool)(s) || (Q : ((Num) -> S) -> Bool)(s)
+  (Q : ((Num) -> S) -> Bool) == ((s : (Num) -> S) => \226\136\128 i : Num, \226\136\131 b : (Num) -> S, (\226\136\128 j : Num, j <= i \226\134\146 b(j) == s(j)) && (P : ((Num) -> S) -> Bool)(b))
+  \226\136\128 P : ((Num) -> S) -> Bool, \226\136\131 S : ((Num) -> S) -> Bool, \226\136\131 L : ((Num) -> S) -> Bool, safety(S) && liveness(L) && (\226\136\128 x : (Num) -> S, (S(x) && L(x)) == P(x))
 safety =  |- (#forall:fun(fun(fun(fun(num,'S),bool),bool),bool) (\p:fun(fun(num,'S),bool). ((#=:fun(bool,fun(bool,bool)) (#safety:fun(fun(fun(num,'S),bool),bool) p:fun(fun(num,'S),bool))) (#forall:fun(fun(fun(num,'S),bool),bool) (\s:fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s:fun(num,'S)))) (#?:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun(num,'S),bool),bool) (\s':fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun('S,fun('S,bool)) (s:fun(num,'S) m:num)) (s':fun(num,'S) m:num)))))) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s':fun(num,'S))))))))))))))
 liveness =  |- (#forall:fun(fun(fun(fun(num,'S),bool),bool),bool) (\p:fun(fun(num,'S),bool). ((#=:fun(bool,fun(bool,bool)) (#liveness:fun(fun(fun(num,'S),bool),bool) p:fun(fun(num,'S),bool))) (#forall:fun(fun(fun(num,'S),bool),bool) (\s:fun(num,'S). (#forall:fun(fun(num,bool),bool) (\n:num. (#?:fun(fun(fun(num,'S),bool),bool) (\s':fun(num,'S). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun('S,fun('S,bool)) (s:fun(num,'S) m:num)) (s':fun(num,'S) m:num)))))) (p:fun(fun(num,'S),bool) s':fun(num,'S))))))))))))
 SAFETY =  |- (#forall:fun(fun(fun(fun(num,'S),bool),bool),bool) (\p:fun(fun(num,'S),bool). ((#=:fun(bool,fun(bool,bool)) (#safety:fun(fun(fun(num,'S),bool),bool) p:fun(fun(num,'S),bool))) (#forall:fun(fun(fun(num,'S),bool),bool) (\s:fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s:fun(num,'S)))) (#?:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun(num,'S),bool),bool) (\s':fun(num,'S). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) m:num) n:num)) ((#=:fun('S,fun('S,bool)) (s:fun(num,'S) m:num)) (s':fun(num,'S) m:num)))))) (#~:fun(bool,bool) (p:fun(fun(num,'S),bool) s':fun(num,'S))))))))))))))

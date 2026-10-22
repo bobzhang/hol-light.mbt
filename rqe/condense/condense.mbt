@@ -45,13 +45,13 @@ pub fn condense_v1(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// CONDENSE
 fn step_2() -> Unit raise {
-  let real_app = @parser.parse_term("APPEND:real list -> real list -> real list")
-  let sign_app = @parser.parse_term("APPEND:(sign list) list -> (sign list) list -> (sign list) list")
-  let real_len = @parser.parse_term("LENGTH:real list -> num")
-  let sign_len = @parser.parse_term("LENGTH:(sign list) list -> num")
+  let real_app = @term_syntax.parse_term("(APPEND : (List[Real], List[Real]) -> List[Real])")
+  let sign_app = @term_syntax.parse_term("(APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])")
+  let real_len = @term_syntax.parse_term("(LENGTH : (List[Real]) -> Num)")
+  let sign_len = @term_syntax.parse_term("(LENGTH : (List[List[Sign]]) -> Num)")
   let num_mul = @parser.parse_term("( * ):num -> num -> num")
   let real_ty = @parser.parse_type("real")
-  let two = @parser.parse_term("2")
+  let two = @term_syntax.parse_term("2")
   let sl_ty = @parser.parse_type("sign list")
   fn condense_rec(x2 : @kernel.Thm) -> @kernel.Thm raise {
     let mat_thm = x2

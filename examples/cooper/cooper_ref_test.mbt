@@ -5880,8 +5880,8 @@ test "Examples/cooper matches Examples/cooper.ml" {
       #|  int_sub
       #|  (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, x + (y + z) == x + y + z) && (\226\136\128 x : Int, \226\136\128 y : Int, x + y == y + x) && (\226\136\128 x : Int, int_of_num(0) + x == x) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, x * (y * z) == x * y * z) && (\226\136\128 x : Int, \226\136\128 y : Int, x * y == y * x) && (\226\136\128 x : Int, int_of_num(1) * x == x) && (\226\136\128 x : Int, int_of_num(0) * x == int_of_num(0)) && (\226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, x * (y + z) == x * y + x * z) && (\226\136\128 x : Int, pow(x, 0) == int_of_num(1)) && (\226\136\128 x : Int, \226\136\128 n : Num, pow(x, SUC(n)) == x * pow(x, n))
       #|  (\226\136\128 x : Int, -x == -int_of_num(1) * x) && (\226\136\128 x : Int, \226\136\128 y : Int, x - y == x + -int_of_num(1) * y)
-      #|  p:num
-      #|  q:num
+      #|  (p : Num)
+      #|  (q : Num)
       #|  0
       #|  1
       #|  int_mul

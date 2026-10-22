@@ -45,15 +45,15 @@ pub fn aci_conj(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
 fn step_2() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_imp(), @theorems.conj_assoc()]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.exists_unique_thm(), @class.de_morgan_thm(), @class.not_exists_thm()])), t8)
-  let not_exists_unique_thm = @tactics.prove(@parser.parse_term("~(?!x. P x) <=> (forall x. ~P x) \\/ ?x x'. P x /\\ P x' /\\ ~(x = x')"), t9)
-  let t10 = @class.taut(@parser.parse_term("~(p /\\ q \\/ ~p /\\ r) <=> p /\\ ~q \\/ ~p /\\ ~r"))
-  let t11 = @class.taut(@parser.parse_term("(p <=> q) <=> (p /\\ q) \\/ (~p /\\ ~q)"))
-  let t12 = @class.taut(@parser.parse_term("~(p <=> q) <=> (p /\\ ~q) \\/ (~p /\\ q)"))
-  let t13 = @class.taut(@parser.parse_term("p ==> q <=> ~p \\/ q"))
-  let t14 = @class.taut(@parser.parse_term("~(p ==> q) <=> p /\\ ~q"))
-  let t15 = @class.taut(@parser.parse_term("~(p \\/ q) <=> ~p /\\ ~q"))
-  let t16 = @class.taut(@parser.parse_term("~(p /\\ q) <=> ~p \\/ ~q"))
-  let tauts = @list.List([@class.taut(@parser.parse_term("~(~p) <=> p")), t16, t15, t14, t13, @class.not_forall_thm(), @class.not_exists_thm(), @theorems.exists_unique_thm(), not_exists_unique_thm, t12, t11, t10])
+  let not_exists_unique_thm = @tactics.prove(@term_syntax.parse_term("!existsunique((x : _) => (P : (_) -> Bool)(x)) == ((∀ x : _, !P(x)) || (∃ x : _, ∃ x' : _, P(x) && P(x') && !(x == x')))"), t9)
+  let t10 = @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool) || !p && (r : Bool)) == (p && !q || !p && !r)"))
+  let t11 = @class.taut(@term_syntax.parse_term("((p : Bool) == (q : Bool)) == (p && q || !p && !q)"))
+  let t12 = @class.taut(@term_syntax.parse_term("!((p : Bool) == (q : Bool)) == (p && !q || !p && q)"))
+  let t13 = @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))
+  let t14 = @class.taut(@term_syntax.parse_term("!((p : Bool) → (q : Bool)) == (p && !q)"))
+  let t15 = @class.taut(@term_syntax.parse_term("!((p : Bool) || (q : Bool)) == (!p && !q)"))
+  let t16 = @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (!p || !q)"))
+  let tauts = @list.List([@class.taut(@term_syntax.parse_term("!!(p : Bool) == p")), t16, t15, t14, t13, @class.not_forall_thm(), @class.not_exists_thm(), @theorems.exists_unique_thm(), not_exists_unique_thm, t12, t11, t10])
   qe_simplify_conv_c.set(@simp.gen_rewrite_conv(fn(x17 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s18 = @equal.top_sweep_conv(x17)
     fn(x19 : @kernel.Term) -> @kernel.Thm raise {
@@ -74,7 +74,7 @@ pub fn qe_simplify_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// OR_ASSOC
 fn step_3() -> Unit raise {
-  or_assoc_c.set(@class.taut(@parser.parse_term("(a \\/ b) \\/ c <=> a \\/ b \\/ c")))
+  or_assoc_c.set(@class.taut(@term_syntax.parse_term("(((a : Bool) || (b : Bool)) || (c : Bool)) == (a || b || c)")))
 }
 
 ///|
@@ -90,7 +90,7 @@ pub fn or_assoc() -> @kernel.Thm {
 /// forall_thm
 fn step_4() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([]))
-  forall_thm_c.set(@tactics.prove(@parser.parse_term("forall P. (forall x. P x) <=> ~ (?x. ~ P x)"), t20))
+  forall_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, (∀ x : _, P(x)) == !(∃ x : _, !P(x))"), t20))
 }
 
 ///|
@@ -150,7 +150,7 @@ pub fn push_exists_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// not_tm
 fn step_8() -> Unit raise {
-  not_tm_c.set(@parser.parse_term("(~)"))
+  not_tm_c.set(@term_syntax.parse_term("op_tilde"))
 }
 
 ///|
@@ -165,7 +165,7 @@ pub fn not_tm() -> @kernel.Term {
 ///|
 /// or_tm
 fn step_9() -> Unit raise {
-  or_tm_c.set(@parser.parse_term("(\\/)"))
+  or_tm_c.set(@term_syntax.parse_term("op_bslash_slash"))
 }
 
 ///|
@@ -180,7 +180,7 @@ pub fn or_tm() -> @kernel.Term {
 ///|
 /// t_tm
 fn step_10() -> Unit raise {
-  t_tm_c.set(@parser.parse_term("T"))
+  t_tm_c.set(@term_syntax.parse_term("true"))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn t_tm() -> @kernel.Term {
 ///|
 /// f_tm
 fn step_11() -> Unit raise {
-  f_tm_c.set(@parser.parse_term("F"))
+  f_tm_c.set(@term_syntax.parse_term("false"))
 }
 
 ///|

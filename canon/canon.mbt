@@ -115,20 +115,20 @@ fn use_fun_l(
 /// DISJ_ACI_RULE
 fn step_3() -> Unit raise {
   let pth_left = @bool.undisch(
-    @class.taut(@parser.parse_term("~(a \\/ b) ==> ~a")),
+    @class.taut(@term_syntax.parse_term("!((a : Bool) || (b : Bool)) → !a")),
   )
   let pth_right = @bool.undisch(
-    @class.taut(@parser.parse_term("~(a \\/ b) ==> ~b")),
+    @class.taut(@term_syntax.parse_term("!((a : Bool) || (b : Bool)) → !b")),
   )
   let pth = @lib.repeat(
     @bool.undisch,
-    @class.taut(@parser.parse_term("~a ==> ~b ==> ~(a \\/ b)")),
+    @class.taut(@term_syntax.parse_term("!(a : Bool) → !(b : Bool) → !(a || b)")),
   )
   let pth_neg = @bool.undisch(
-    @class.taut(@parser.parse_term("(~a <=> ~b) ==> (a <=> b)")),
+    @class.taut(@term_syntax.parse_term("!(a : Bool) == !(b : Bool) → a == b")),
   )
-  let a_tm = @parser.parse_term("a:bool")
-  let b_tm = @parser.parse_term("b:bool")
+  let a_tm = @term_syntax.parse_term("(a : Bool)")
+  let b_tm = @term_syntax.parse_term("(b : Bool)")
   let not_disj_pair : (@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise = fn(
     x11 : @kernel.Thm,
   ) -> (@kernel.Thm, @kernel.Thm) raise {
@@ -254,25 +254,25 @@ pub fn disj_canon_conv(x24 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// GEN_NNF_CONV
 fn step_4() -> Unit raise {
-  let and_tm = @parser.parse_term("(/\\)")
-  let or_tm = @parser.parse_term("(\\/)")
-  let not_tm = @parser.parse_term("(~)")
-  let pth_not_not = @class.taut(@parser.parse_term("~ ~ p = p"))
-  let pth_not_and = @class.taut(@parser.parse_term("~(p /\\ q) <=> ~p \\/ ~q"))
-  let pth_not_or = @class.taut(@parser.parse_term("~(p \\/ q) <=> ~p /\\ ~q"))
-  let pth_imp = @class.taut(@parser.parse_term("p ==> q <=> ~p \\/ q"))
-  let pth_not_imp = @class.taut(@parser.parse_term("~(p ==> q) <=> p /\\ ~q"))
+  let and_tm = @term_syntax.parse_term("op_slash_bslash")
+  let or_tm = @term_syntax.parse_term("op_bslash_slash")
+  let not_tm = @term_syntax.parse_term("op_tilde")
+  let pth_not_not = @class.taut(@term_syntax.parse_term("!!(p : Bool) == p"))
+  let pth_not_and = @class.taut(@term_syntax.parse_term("!((p : Bool) && (q : Bool)) == (!p || !q)"))
+  let pth_not_or = @class.taut(@term_syntax.parse_term("!((p : Bool) || (q : Bool)) == (!p && !q)"))
+  let pth_imp = @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))
+  let pth_not_imp = @class.taut(@term_syntax.parse_term("!((p : Bool) → (q : Bool)) == (p && !q)"))
   let pth_eq = @class.taut(
-    @parser.parse_term("(p <=> q) <=> p /\\ q \\/ ~p /\\ ~q"),
+    @term_syntax.parse_term("((p : Bool) == (q : Bool)) == (p && q || !p && !q)"),
   )
   let pth_not_eq = @class.taut(
-    @parser.parse_term("~(p <=> q) <=> p /\\ ~q \\/ ~p /\\ q"),
+    @term_syntax.parse_term("!((p : Bool) == (q : Bool)) == (p && !q || !p && q)"),
   )
   let pth_eq_p = @class.taut(
-    @parser.parse_term("(p <=> q) <=> (p \\/ ~q) /\\ (~p \\/ q)"),
+    @term_syntax.parse_term("((p : Bool) == (q : Bool)) == ((p || !q) && (!p || q))"),
   )
   let pth_not_eq_p = @class.taut(
-    @parser.parse_term("~(p <=> q) <=> (p \\/ q) /\\ (~p \\/ ~q)"),
+    @term_syntax.parse_term("!((p : Bool) == (q : Bool)) == ((p || q) && (!p || !q))"),
   )
   let t36 = @simp.rewrite_tac(
     @list.List([@theorems.conj_assoc(), @theorems.eq_sym_eq()]),
@@ -363,7 +363,7 @@ fn step_4() -> Unit raise {
         let t46 = @simp.rewrite_tac(
           @list.List([
             @bool.exists_unique_def(),
-            @class.taut(@parser.parse_term("a /\\ b ==> c <=> ~a \\/ ~b \\/ c")),
+            @class.taut(@term_syntax.parse_term("((a : Bool) && (b : Bool) → (c : Bool)) == (!a || !b || c)")),
           ]),
         )
         let t48 = @tactics.then_tac(
@@ -398,8 +398,8 @@ fn step_4() -> Unit raise {
           ),
           t48,
         )
-        let p_tm = @parser.parse_term("p:bool")
-        let q_tm = @parser.parse_term("q:bool")
+        let p_tm = @term_syntax.parse_term("(p : Bool)")
+        let q_tm = @term_syntax.parse_term("(q : Bool)")
         fn nnf_dconv(
           x49 : Bool,
           x50 : (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
@@ -1518,14 +1518,14 @@ pub fn dnf_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// WEAK_DNF_CONV, DNF_CONV
 fn step_9() -> Unit raise {
   let pth1 = @class.taut(
-    @parser.parse_term("a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c"),
+    @term_syntax.parse_term("((a : Bool) && ((b : Bool) || (c : Bool))) == (a && b || a && c)"),
   )
   let pth2 = @class.taut(
-    @parser.parse_term("(a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c"),
+    @term_syntax.parse_term("(((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)"),
   )
-  let a_tm = @parser.parse_term("a:bool")
-  let b_tm = @parser.parse_term("b:bool")
-  let c_tm = @parser.parse_term("c:bool")
+  let a_tm = @term_syntax.parse_term("(a : Bool)")
+  let b_tm = @term_syntax.parse_term("(b : Bool)")
+  let c_tm = @term_syntax.parse_term("(c : Bool)")
   fn distribute(x124 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x124
     match tm {
@@ -1564,7 +1564,7 @@ fn step_9() -> Unit raise {
     }
   }
   let strengthen : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(
-    @equal.depth_binop_conv(@parser.parse_term("(\\/)"), conj_canon_conv),
+    @equal.depth_binop_conv(@term_syntax.parse_term("op_bslash_slash"), conj_canon_conv),
     disj_canon_conv,
   )
   let weakdnf = (x127 : @kernel.Term) => weakdnf_l(distribute, strengthen, x127)
@@ -1675,14 +1675,14 @@ pub fn cnf_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// WEAK_CNF_CONV, CNF_CONV
 fn step_10() -> Unit raise {
   let pth1 = @class.taut(
-    @parser.parse_term("a \\/ (b /\\ c) <=> (a \\/ b) /\\ (a \\/ c)"),
+    @term_syntax.parse_term("((a : Bool) || (b : Bool) && (c : Bool)) == ((a || b) && (a || c))"),
   )
   let pth2 = @class.taut(
-    @parser.parse_term("(a /\\ b) \\/ c <=> (a \\/ c) /\\ (b \\/ c)"),
+    @term_syntax.parse_term("((a : Bool) && (b : Bool) || (c : Bool)) == ((a || c) && (b || c))"),
   )
-  let a_tm = @parser.parse_term("a:bool")
-  let b_tm = @parser.parse_term("b:bool")
-  let c_tm = @parser.parse_term("c:bool")
+  let a_tm = @term_syntax.parse_term("(a : Bool)")
+  let b_tm = @term_syntax.parse_term("(b : Bool)")
+  let c_tm = @term_syntax.parse_term("(c : Bool)")
   fn distribute(x132 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x132
     match tm {
@@ -1721,7 +1721,7 @@ fn step_10() -> Unit raise {
     }
   }
   let strengthen : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(
-    @equal.depth_binop_conv(@parser.parse_term("(/\\)"), disj_canon_conv),
+    @equal.depth_binop_conv(@term_syntax.parse_term("op_slash_bslash"), disj_canon_conv),
     conj_canon_conv,
   )
   let weakcnf = (x135 : @kernel.Term) => weakcnf_l(distribute, strengthen, x135)
@@ -1865,10 +1865,10 @@ fn step_11() -> Unit raise {
     @tactics.refl_tac,
   )
   let pth = @tactics.prove(
-    @parser.parse_term("(P:A->bool)((@) P) <=> (?) P"),
+    @term_syntax.parse_term("(P : (A) -> Bool)(select(P)) == op_q(P)"),
     t144,
   )
-  let ptm = @parser.parse_term("P:A->bool")
+  let ptm = @term_syntax.parse_term("(P : (A) -> Bool)")
   let select_elim_thm : (@kernel.Term) -> @kernel.Thm raise = fn(
     x145 : @kernel.Term,
   ) -> @kernel.Thm raise {
@@ -1893,8 +1893,8 @@ fn step_11() -> Unit raise {
       @lib.map(select_elim_thm, @basics.find_terms(@class.is_select, tm_1)),
     )(tm_1)
   }
-  let pth_1 = @bool.ispec(@parser.parse_term("P:A->bool"), @class.select_ax())
-  let ptm_1 = @parser.parse_term("P:A->bool")
+  let pth_1 = @bool.ispec(@term_syntax.parse_term("(P : (A) -> Bool)"), @class.select_ax())
+  let ptm_1 = @term_syntax.parse_term("(P : (A) -> Bool)")
   let select_ax_thm : (@kernel.Term) -> @kernel.Thm raise = fn(
     x148 : @kernel.Term,
   ) -> @kernel.Thm raise {
@@ -2064,7 +2064,7 @@ pub fn select_elim_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 fn step_12() -> Unit raise {
   let t164 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let pth = @tactics.prove(
-    @parser.parse_term("(s = \\x. t x) <=> (forall x. s x = t x)"),
+    @term_syntax.parse_term("((s : (_) -> _) == ((x : _) => (t : (_) -> _)(x))) == (∀ x : _, s(x) == t(x))"),
     t164,
   )
   let half_mk_abs_conv : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
@@ -2242,7 +2242,7 @@ pub fn conds_celim_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_13() -> Unit raise {
   let t184 = @simp.asm_rewrite_tac(@list.List([]))
   let t185 = @tactics.then_tac(
-    @class.bool_cases_tac(@parser.parse_term("b:bool")),
+    @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)")),
     t184,
   )
   let th_cond = @tactics.prove(
@@ -2253,7 +2253,7 @@ fn step_13() -> Unit raise {
   )
   let t186 = @simp.asm_rewrite_tac(@list.List([]))
   let t187 = @tactics.then_tac(
-    @class.bool_cases_tac(@parser.parse_term("b:bool")),
+    @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)")),
     t186,
   )
   let th_cond_p = @tactics.prove(
@@ -2263,8 +2263,8 @@ fn step_13() -> Unit raise {
     t187,
   )
   let propsimps = @simp.basic_net()
-  let false_tm = @parser.parse_term("F")
-  let true_tm = @parser.parse_term("T")
+  let false_tm = @term_syntax.parse_term("false")
+  let true_tm = @term_syntax.parse_term("true")
   let match_th : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(th_cond)
   let match_th_p : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(
     th_cond_p,
@@ -2459,7 +2459,7 @@ fn step_14() -> Unit raise {
   }
   let t209 = @simp.rewrite_tac(@list.List([@trivia.i_thm()]))
   let th_1 = @tactics.prove(
-    @parser.parse_term("forall(f:A->B) x. f x = I f x"),
+    @term_syntax.parse_term("∀ f : (A) -> B, ∀ x : A, f(x) == I(f, x)"),
     t209,
   )
   let app_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(th_1)

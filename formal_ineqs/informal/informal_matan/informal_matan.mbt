@@ -16,7 +16,7 @@ pub fn mk_float_interval_decimal(x1 : Int64, x2 : @kernel.Term) -> @informal_int
 ///|
 /// interval_neg_02
 fn step_1() -> Unit raise {
-  let t5 = mk_float_interval_decimal(10L, @parser.parse_term("#0.2"))
+  let t5 = mk_float_interval_decimal(10L, @term_syntax.parse_term("DECIMAL(2, 10)"))
   interval_neg_02_c.set(@informal_interval.neg_interval(t5.0, t5.1))
 }
 
@@ -32,7 +32,7 @@ pub fn interval_neg_02() -> @informal_interval.Interval {
 ///|
 /// interval_09
 fn step_2() -> Unit raise {
-  interval_09_c.set(mk_float_interval_decimal(10L, @parser.parse_term("#0.9")))
+  interval_09_c.set(mk_float_interval_decimal(10L, @term_syntax.parse_term("DECIMAL(9, 10)")))
 }
 
 ///|
@@ -47,7 +47,7 @@ pub fn interval_09() -> @informal_interval.Interval {
 ///|
 /// interval_1e8
 fn step_3() -> Unit raise {
-  interval_1e8_c.set(mk_float_interval_decimal(10L, @parser.parse_term("#0.00000001")))
+  interval_1e8_c.set(mk_float_interval_decimal(10L, @term_syntax.parse_term("DECIMAL(1, 100000000)")))
 }
 
 ///|
@@ -222,7 +222,7 @@ pub fn dmatan_interval(x : Int64) -> ((@informal_interval.Interval) -> @informal
 ///|
 /// ddmatan_interval
 fn step_7() -> Unit raise {
-  let v = mk_float_interval_decimal(20L, @parser.parse_term("#0.65"))
+  let v = mk_float_interval_decimal(20L, @term_syntax.parse_term("DECIMAL(65, 100)"))
   let v0 = @informal_interval.mk_small_num_interval(1L)
   let vs = @lib.array_init(20L, fn(x48 : Int64) -> @informal_interval.Interval raise {
     let i = x48

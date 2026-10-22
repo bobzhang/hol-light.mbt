@@ -3,7 +3,7 @@
 ///|
 /// divstep
 fn step_1() -> Unit raise {
-  divstep_c.set(@pair.new_definition(@parser.parse_term("divstep(d:real,f:int,g:int) =\n        if d > &0 /\\ g rem &2 = &1\n        then &1 - d, g, (g - f) div &2\n        else &1 + d, f, (g + (g rem &2) * f) div &2")))
+  divstep_c.set(@pair.new_definition(@term_syntax.parse_term("(divstep : ((Real, Int, Int)) -> (Real, Int, Int))(((d : Real), (f : Int), (g : Int))) == (if d > real_of_num(0) && rem(g, int_of_num(2)) == int_of_num(1) { (real_of_num(1) - d, g, div(g - f, int_of_num(2))) } else { (real_of_num(1) + d, f, div(g + rem(g, int_of_num(2)) * f, int_of_num(2))) })")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn divstep() -> @kernel.Thm {
 ///|
 /// divstep1
 fn step_2() -> Unit raise {
-  divstep1_c.set(@pair.new_definition(@parser.parse_term("divstep1(d:real,f:int,g:int) =\n        if d > &0 /\\ g rem &2 = &1\n        then --d, g, --f\n        else d, f, g")))
+  divstep1_c.set(@pair.new_definition(@term_syntax.parse_term("(divstep1 : ((Real, Int, Int)) -> (Real, Int, Int))(((d : Real), (f : Int), (g : Int))) == (if d > real_of_num(0) && rem(g, int_of_num(2)) == int_of_num(1) { (-d, g, -f) } else { (d, f, g) })")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn divstep1() -> @kernel.Thm {
 ///|
 /// divstep2
 fn step_3() -> Unit raise {
-  divstep2_c.set(@pair.new_definition(@parser.parse_term("divstep2(d:real,f:int,g:int) =\n        &1 + d,f,(g + (g rem &2) * f) div &2")))
+  divstep2_c.set(@pair.new_definition(@term_syntax.parse_term("(divstep2 : ((Real, Int, Int)) -> (Real, Int, Int))(((d : Real), (f : Int), (g : Int))) == (real_of_num(1) + d, f, div(g + rem(g, int_of_num(2)) * f, int_of_num(2)))")))
 }
 
 ///|
@@ -53,7 +53,7 @@ fn step_4() -> Unit raise {
   let t2 = @simp.asm_rewrite_tac(@list.List([divstep2()]))
   let t1 = @simp.asm_rewrite_tac(@list.List([@trivia.o_thm(), divstep1(), divstep()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), @class.cond_cases_tac), t2), t3), @tactics.conj_tac), t4), @tactics.ap_thm_tac), @tactics.ap_term_tac), @int.int_arith_tac)
-  divstep1_divstep2_c.set(@tactics.prove(@parser.parse_term("forall d f g.\n        f rem &2 = &1\n        ==> (divstep2 o divstep1) (d,f,g) = divstep (d,f,g)"), t5))
+  divstep1_divstep2_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : Real, ∀ f : Int, ∀ g : Int, rem(f, int_of_num(2)) == int_of_num(1) → o(divstep2, divstep1, (d, f, g)) == divstep((d, f, g))"), t5))
 }
 
 ///|
@@ -70,7 +70,7 @@ pub fn divstep1_divstep2() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([@pair.pair_eq()]))
   let t7 = @tactics.then_tac(@simp.rewrite_tac(@list.List([divstep()])), t6)
-  divstep_stays_odd_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g'.\n        f rem &2 = &1 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> f' rem &2 = &1"), t7))
+  divstep_stays_odd_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, rem(f, int_of_num(2)) == int_of_num(1) && divstep((d, f, g)) == (d', f', g') → rem(f', int_of_num(2)) == int_of_num(1)"), t7))
 }
 
 ///|
@@ -88,7 +88,7 @@ fn step_6() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([]))
   let t8 = @simp.rewrite_tac(@list.List([@int.int_mul_lzero(), @int.int_add_lid(), @int.int_div_zero(), @pair.pair_eq()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([divstep(), @theorems.imp_conj(), @int.int_rem_zero(), @int.int_of_num_eq(), @calc_num.arith_eq()])), t8), t9)
-  divstep_stays_zero_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g'.\n        g = &0 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> g' = &0"), t10))
+  divstep_stays_zero_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, g == int_of_num(0) && divstep((d, f, g)) == (d', f', g') → g' == int_of_num(0)"), t10))
 }
 
 ///|
@@ -104,12 +104,12 @@ pub fn divstep_stays_zero() -> @kernel.Thm {
 /// DIVSTEP_MAINTAINS_GCD
 fn step_7() -> Unit raise {
   let t33 = @tactics.conv_tac(@int.integer_rule)
-  let t31 = @parser.parse_term("p:int")
-  let t32 = @tactics.spec_tac(@parser.parse_term("&2:int"), t31)
+  let t31 = @term_syntax.parse_term("(p : Int)")
+  let t32 = @tactics.spec_tac(@term_syntax.parse_term("int_of_num(2)"), t31)
   let t30 = @simp.asm_rewrite_tac(@list.List([]))
-  let t28 = @parser.parse_term("&2:int")
-  let t29 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:int"), t28]), @int.int_division_simp()))
-  let t27 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("coprime(k:int,m)\n      ==> (d divides m /\\ d divides p <=>\n           d divides m /\\ d divides (k * p))")))
+  let t28 = @term_syntax.parse_term("int_of_num(2)")
+  let t29 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(m : Int)"), t28]), @int.int_division_simp()))
+  let t27 = @tactics.match_mp_tac(@int.integer_rule(@term_syntax.parse_term("coprime(((k : Int), (m : Int))) → (divides((d : Int), m) && divides(d, (p : Int))) == (divides(d, m) && divides(d, k * p))")))
   let t26 = @tactics.match_mp_tac(@integer.int_gcd_eq())
   let t25 = @tactics.disch_then(fn(x19 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x19
@@ -133,7 +133,7 @@ fn step_7() -> Unit raise {
     })(t15(x16))
   })
   let t34 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), t18), t25), t26), @tactics.gen_tac), t27), t29), t30), t32), t33)
-  let lemma = @tactics.prove(@parser.parse_term("forall m n. m rem &2 = &1 /\\ n rem &2 = &0 ==> gcd(m,n div &2) = gcd(m,n)"), t34)
+  let lemma = @tactics.prove(@term_syntax.parse_term("∀ m : Int, ∀ n : Int, rem(m, int_of_num(2)) == int_of_num(1) && rem(n, int_of_num(2)) == int_of_num(0) → gcd((m, div(n, int_of_num(2)))) == gcd((m, n))"), t34)
   let t76 = @tactics.conv_tac(@int.integer_rule)
   let t75 = @tactics.match_mp_tac(@integer.int_gcd_eq())
   let t74 = @tactics.disch_then(fn(x71 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -152,7 +152,7 @@ fn step_7() -> Unit raise {
   })))
   let t64 = @tactics.conv_tac(@int.int_reduce_conv)
   let t63 = @simp.asm_rewrite_tac(@list.List([]))
-  let t62 = @tactics.mp_tac(@bool.spec(@parser.parse_term("g:int"), @int.int_rem_2_cases()))
+  let t62 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(g : Int)"), @int.int_rem_2_cases()))
   let t60 = @equal.gsym(@int.int_add_rem())
   let t61 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@int.int_sub_rem()), t60]))
   let t54 = @drule.part_match(fn(x53 : @kernel.Term) -> @kernel.Term raise {
@@ -197,7 +197,7 @@ fn step_7() -> Unit raise {
       })(x58))
     })(x59)(x59)
   }), t61), t62), t63), t64), t68), t69), t70), t74), t75), t76)
-  divstep_maintains_gcd_c.set(@tactics.prove(@parser.parse_term("forall d f g d' f' g'.\n        f rem &2 = &1 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> gcd(f',g') = gcd(f,g)"), t77))
+  divstep_maintains_gcd_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, rem(f, int_of_num(2)) == int_of_num(1) && divstep((d, f, g)) == (d', f', g') → gcd((f', g')) == gcd((f, g))"), t77))
 }
 
 ///|
@@ -212,14 +212,14 @@ pub fn divstep_maintains_gcd() -> @kernel.Thm {
 ///|
 /// DIVSTEP_RANGE_2SCOMPLEMENT
 fn step_8() -> Unit raise {
-  let t97 = @bool.spec(@parser.parse_term("g:int"), @int.int_rem_2_cases())
+  let t97 = @bool.spec(@term_syntax.parse_term("(g : Int)"), @int.int_rem_2_cases())
   let t98 = @tactics.disj_cases_then(fn(x94 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s95 = @tactics.subst1_tac(x94)
     fn(x96 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s95(x96)
     }
   })(t97)
-  let t93 = @simp.asm_simp_tac(@list.List([@int.int_div_lt_eq(), @int.int_le_div_eq(), @int.int_arith(@parser.parse_term("&0:int < &2"))]))
+  let t93 = @simp.asm_simp_tac(@list.List([@int.int_div_lt_eq(), @int.int_le_div_eq(), @int.int_arith(@term_syntax.parse_term("int_of_num(0) < int_of_num(2)"))]))
   let t92 = @tactics.disch_then(@tactics.repeat_tcl(@tactics.conjuncts_then)(fn(x91 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x88 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s89 = @tactics.subst1_tac(x88)
@@ -244,7 +244,7 @@ fn step_8() -> Unit raise {
     })(t84(x85))
   })
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t86), @class.cond_cases_tac), t87), t92), t93), @list.List([@int.asm_int_arith_tac, @tactics.all_tac])), t98), @int.asm_int_arith_tac)
-  divstep_range_2scomplement_c.set(@tactics.prove(@parser.parse_term("forall B d f g d' f' g'.\n        divstep(d,f,g) = d',f',g' /\\\n        --B <= f /\\ f < B /\\\n        --B <= g /\\ g < B\n        ==> --B <= f' /\\ f' < B /\\\n            --B <= g' /\\ g' < B"), t99))
+  divstep_range_2scomplement_c.set(@tactics.prove(@term_syntax.parse_term("∀ B : Int, ∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, divstep((d, f, g)) == (d', f', g') && -B <= f && f < B && -B <= g && g < B → -B <= f' && f' < B && -B <= g' && g' < B"), t99))
 }
 
 ///|
@@ -259,14 +259,14 @@ pub fn divstep_range_2scomplement() -> @kernel.Thm {
 ///|
 /// DIVSTEP_RANGE_SIGNMAGNITUDE
 fn step_9() -> Unit raise {
-  let t119 = @bool.spec(@parser.parse_term("g:int"), @int.int_rem_2_cases())
+  let t119 = @bool.spec(@term_syntax.parse_term("(g : Int)"), @int.int_rem_2_cases())
   let t120 = @tactics.disj_cases_then(fn(x116 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s117 = @tactics.subst1_tac(x116)
     fn(x118 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s117(x118)
     }
   })(t119)
-  let t115 = @simp.asm_simp_tac(@list.List([@int.int_div_lt_eq(), @int.int_lt_div_eq(), @int.int_arith(@parser.parse_term("&0:int < &2"))]))
+  let t115 = @simp.asm_simp_tac(@list.List([@int.int_div_lt_eq(), @int.int_lt_div_eq(), @int.int_arith(@term_syntax.parse_term("int_of_num(0) < int_of_num(2)"))]))
   let t114 = @tactics.disch_then(@tactics.repeat_tcl(@tactics.conjuncts_then)(fn(x113 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x110 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s111 = @tactics.subst1_tac(x110)
@@ -291,7 +291,7 @@ fn step_9() -> Unit raise {
     })(t106(x107))
   })
   let t121 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t108), @class.cond_cases_tac), t109), t114), t115), @list.List([@int.asm_int_arith_tac, @tactics.all_tac])), t120), @int.asm_int_arith_tac)
-  divstep_range_signmagnitude_c.set(@tactics.prove(@parser.parse_term("forall B d f g d' f' g'.\n        divstep(d,f,g) = d',f',g' /\\\n        --B < f /\\ f < B /\\\n        --B < g /\\ g < B\n        ==> --B < f' /\\ f' < B /\\\n            --B < g' /\\ g' < B"), t121))
+  divstep_range_signmagnitude_c.set(@tactics.prove(@term_syntax.parse_term("∀ B : Int, ∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, divstep((d, f, g)) == (d', f', g') && -B < f && f < B && -B < g && g < B → -B < f' && f' < B && -B < g' && g' < B"), t121))
 }
 
 ///|
@@ -311,7 +311,7 @@ fn step_10() -> Unit raise {
   let t123 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t122)
   let t124 = @list.List([@meson.meson_tac(@list.List([])), t123])
   let t126 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([@iter.iter_alt(), @pair.pair_eq()]))), t124), t125)
-  iter_divstep_odd_c.set(@tactics.prove(@parser.parse_term("forall n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> f' rem &2 = &1"), t126))
+  iter_divstep_odd_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, rem(f, int_of_num(2)) == int_of_num(1) && ITER(n, divstep, (d, f, g)) == (d', f', g') → rem(f', int_of_num(2)) == int_of_num(1)"), t126))
 }
 
 ///|
@@ -331,7 +331,7 @@ fn step_11() -> Unit raise {
   let t128 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t127)
   let t129 = @list.List([@meson.meson_tac(@list.List([])), t128])
   let t131 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@iter.iter_alt(), @pair.pair_eq()]))), t129), t130)
-  iter_divstep_zero_c.set(@tactics.prove(@parser.parse_term("forall n d f g d' f' g'.\n        g = &0 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> g' = &0"), t131))
+  iter_divstep_zero_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, g == int_of_num(0) && ITER(n, divstep, (d, f, g)) == (d', f', g') → g' == int_of_num(0)"), t131))
 }
 
 ///|
@@ -348,7 +348,7 @@ pub fn iter_divstep_zero() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t132 = @metis.asm_metis_tac(@list.List([divstep_stays_odd(), divstep_maintains_gcd(), @pair.pair()]))
   let t133 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([@iter.iter_alt(), @pair.pair_eq()]))), t132)
-  iter_divstep_gcd_c.set(@tactics.prove(@parser.parse_term("forall n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> gcd(f',g') = gcd(f,g)"), t133))
+  iter_divstep_gcd_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ d : Real, ∀ f : Int, ∀ g : Int, ∀ d' : Real, ∀ f' : Int, ∀ g' : Int, rem(f, int_of_num(2)) == int_of_num(1) && ITER(n, divstep, (d, f, g)) == (d', f', g') → gcd((f', g')) == gcd((f, g))"), t133))
 }
 
 ///|
@@ -365,8 +365,8 @@ pub fn iter_divstep_gcd() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t147 = @meson.meson_tac(@list.List([iter_divstep_zero(), @pair.pair()]))
   let t146 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
-  let t144 = @parser.parse_term("q:real#int#int")
-  let t145 = @tactics.spec_tac(@parser.parse_term("ITER n divstep t"), t144)
+  let t144 = @term_syntax.parse_term("(q : (Real, Int, Int))")
+  let t145 = @tactics.spec_tac(@term_syntax.parse_term("ITER((n : Num), divstep, (t : (Real, Int, Int)))"), t144)
   let t143 = @tactics.disch_then(fn(x142 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x139 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s140 = @tactics.mp_tac(x139)
@@ -381,7 +381,7 @@ fn step_13() -> Unit raise {
   let t135 = @simp.rewrite_tac(@list.List([@arith.le_exists(), @theorems.left_imp_exists_thm(), @theorems.left_and_exists_thm()]))
   let t134 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([@arith.le_refl()]))])
   let t148 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t134), t135), t137), t138), t143), t145), t146), t147)
-  iter_divstep_bound_alt_c.set(@tactics.prove(@parser.parse_term("forall t m. (?n. n <= m /\\ SND(SND(ITER n divstep t)) = &0) <=>\n         SND(SND(ITER m divstep t)) = &0"), t148))
+  iter_divstep_bound_alt_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : (Real, Int, Int), ∀ m : Num, (∃ n : Num, n <= m && SND(SND(ITER(n, divstep, t))) == int_of_num(0)) == (SND(SND(ITER(m, divstep, t))) == int_of_num(0))"), t148))
 }
 
 ///|

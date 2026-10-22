@@ -73775,16 +73775,16 @@ test "Quaternions/misc matches Quaternions/misc.ml" {
       #|Warning: inventing type variables
       #|0..0..1..2..6..11..solved at 17
       #|Quaternions/misc quotations (14):
-      #|  forall u v:real^1. u = v <=> u$1 = v$1
-      #|  forall u v:real^2. u = v <=> u$1 = v$1 /\\ u$2 = v$2
-      #|  forall u v:real^3. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3
-      #|  forall u v:real^4. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3 /\\ u$4 = v$4
-      #|  j:num
-      #|  sum {i} (\\j. (basis i:real^N)$j * (x:real^N)$j)
-      #|  forall i x:real^N. 1 <= i /\\ i <= dimindex(:N) ==> basis i dot x = x$i
-      #|  forall x:real^N i. 1 <= i /\\ i <= dimindex(:N) ==> x dot basis i = x$i
-      #|  a pow 2 = &1 <=> (a - &1) * (a + &1) = &0
-      #|  forall x:real^N. norm x pow 2 = &1 <=> norm x = &1
+      #|  \226\136\128 u : Cart[Real, Unit], \226\136\128 v : Cart[Real, Unit], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1))
+      #|  \226\136\128 u : Cart[Real, Tybit0[Unit]], \226\136\128 v : Cart[Real, Tybit0[Unit]], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1) && op_dollar(u, 2) == op_dollar(v, 2))
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1) && op_dollar(u, 2) == op_dollar(v, 2) && op_dollar(u, 3) == op_dollar(v, 3))
+      #|  \226\136\128 u : Cart[Real, Tybit0[Tybit0[Unit]]], \226\136\128 v : Cart[Real, Tybit0[Tybit0[Unit]]], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1) && op_dollar(u, 2) == op_dollar(v, 2) && op_dollar(u, 3) == op_dollar(v, 3) && op_dollar(u, 4) == op_dollar(v, 4))
+      #|  (j : Num)
+      #|  (sum : ((Num) -> Bool, (Num) -> Real) -> Real)({(i : Num)}, (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)((basis : (Num) -> Cart[Real, N])(i), j) * (op_dollar : (Cart[Real, N], Num) -> Real)((x : Cart[Real, N]), j))
+      #|  \226\136\128 i : Num, \226\136\128 x : Cart[Real, N], 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((basis : (Num) -> Cart[Real, N])(i), x) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (dot : (Cart[Real, N], Cart[Real, N]) -> Real)(x, (basis : (Num) -> Cart[Real, N])(i)) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)
+      #|  (pow((a : Real), 2) == real_of_num(1)) == ((a - real_of_num(1)) * (a + real_of_num(1)) == real_of_num(0))
+      #|  \226\136\128 x : Cart[Real, N], (pow(norm(x), 2) == real_of_num(1)) == (norm(x) == real_of_num(1))
       #|  :real
       #|  :real
       #|  :real

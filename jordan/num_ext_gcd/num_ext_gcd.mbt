@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// DIVIDE
 fn step_2() -> Unit raise {
-  divide_c.set(@pair.new_definition(@parser.parse_term("DIVIDE a b = ?m. (b = m*a )")))
+  divide_c.set(@pair.new_definition(@term_syntax.parse_term("(DIVIDE : (Num, Num) -> Bool)((a : Num), (b : Num)) == (∃ m : Num, b == m * a)")))
 }
 
 ///|
@@ -30,7 +30,7 @@ fn step_3() -> Unit raise {
 ///|
 /// Jordan/num_ext_gcd.ml:19
 fn step_4() -> Unit raise {
-  @preterm.override_interface("||", @parser.parse_term("DIVIDE:num->num->bool"))
+  @preterm.override_interface("||", @term_syntax.parse_term("DIVIDE"))
 }
 
 ///|
@@ -46,8 +46,8 @@ pub fn div_tac(x1 : @kernel.Term) -> @tactics.Tactic raise {
 /// DIVIDE_DIVIDE
 fn step_5() -> Unit raise {
   let t5 = @simp.asm_rewrite_tac(@list.List([@arith.mult_assoc()]))
-  let t6 = @list.List([div_tac(@parser.parse_term("m'*m")), t5])
-  divide_divide_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b c. (((a || b) /\\ (b || c)) ==> (a || c))"), t6))
+  let t6 = @list.List([div_tac(@term_syntax.parse_term("(m' : Num) * (m : Num)")), t5])
+  divide_divide_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ c : Num, DIVIDE(a, b) && DIVIDE(b, c) → DIVIDE(a, c)"), t6))
 }
 
 ///|
@@ -72,9 +72,9 @@ fn step_6() -> Unit raise {
     @tactics.mp_tac(@simp.rewrite_rule(@list.List([@arith.mult_eq_1()]))(t15))
   })
   let t20 = @simp.asm_rewrite_tac(@list.List([@arith.mult_assoc(), @arith.eq_mult_rcancel()]))
-  let t21 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(b = m*m'*b) = (1*b = m*m'*b)"))]))
+  let t21 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((b : Num) == (m : Num) * ((m' : Num) * b)) == (1 * b == m * (m' * b))"))]))
   let t22 = @simp.asm_rewrite_tac(@list.List([]))
-  let t23 = @class.asm_cases_tac(@parser.parse_term("b=0"))
+  let t23 = @class.asm_cases_tac(@term_syntax.parse_term("(b : Num) == 0"))
   let t24 = @tactics.first_x_assum(fn(x7 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x7
     let t12 = @simp.rewrite_tac(@list.List([th]))
@@ -85,8 +85,8 @@ fn step_6() -> Unit raise {
       }
     }), t12)
   })
-  let t25 = @list.List([div_tac(@parser.parse_term("1")), t24, t23, t22, @int.arith_tac, t21, t20, t19, t18])
-  divide_eq_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b. (((a || b) /\\ (b || a)) ==> (a = b))"), t25))
+  let t25 = @list.List([div_tac(@term_syntax.parse_term("1")), t24, t23, t22, @int.arith_tac, t21, t20, t19, t18])
+  divide_eq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, DIVIDE(a, b) && DIVIDE(b, a) → a == b"), t25))
 }
 
 ///|
@@ -102,8 +102,8 @@ pub fn divide_eq() -> @kernel.Thm {
 /// DIVIDE_SUM
 fn step_7() -> Unit raise {
   let t26 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith(), @arith.right_add_distrib()]))
-  let t27 = @list.List([div_tac(@parser.parse_term("m+m'")), t26])
-  divide_sum_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h || a) /\\ (h||b)) ==> (h || (a+b)))"), t27))
+  let t27 = @list.List([div_tac(@term_syntax.parse_term("(m : Num) + (m' : Num)")), t26])
+  divide_sum_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ h : Num, DIVIDE(h, a) && DIVIDE(h, b) → DIVIDE(h, a + b)"), t27))
 }
 
 ///|
@@ -123,8 +123,8 @@ fn step_8() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.gsym(th)]))
   }))
   let t31 = @simp.rewrite_tac(@list.List([@arith.right_sub_distrib()]))
-  let t32 = @list.List([div_tac(@parser.parse_term("m'-m")), t31, t30, @int.arith_tac])
-  divide_summand_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h|| b) /\\ (h || (a+b))) ==> (h|| a))"), t32))
+  let t32 = @list.List([div_tac(@term_syntax.parse_term("(m' : Num) - (m : Num)")), t31, t30, @int.arith_tac])
+  divide_summand_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ h : Num, DIVIDE(h, b) && DIVIDE(h, a + b) → DIVIDE(h, a)"), t32))
 }
 
 ///|
@@ -140,8 +140,8 @@ pub fn divide_summand() -> @kernel.Thm {
 /// DIVIDE_PROD
 fn step_9() -> Unit raise {
   let t33 = @simp.asm_rewrite_tac(@list.List([@arith.mult_assoc()]))
-  let t34 = @list.List([div_tac(@parser.parse_term("b*m")), t33])
-  divide_prod_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h|| a) ==> (h || (b*a))))"), t34))
+  let t34 = @list.List([div_tac(@term_syntax.parse_term("(b : Num) * (m : Num)")), t33])
+  divide_prod_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ h : Num, DIVIDE(h, a) → DIVIDE(h, b * a)"), t34))
 }
 
 ///|
@@ -157,8 +157,8 @@ pub fn divide_prod() -> @kernel.Thm {
 /// DIVIDE_PROD2
 fn step_10() -> Unit raise {
   let t35 = @simp.asm_rewrite_tac(@list.List([@arith.mult_ac()]))
-  let t36 = @list.List([div_tac(@parser.parse_term("b*m")), t35])
-  divide_prod2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b h. (((h|| a) ==> (h || (a*b))))"), t36))
+  let t36 = @list.List([div_tac(@term_syntax.parse_term("(b : Num) * (m : Num)")), t35])
+  divide_prod2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ h : Num, DIVIDE(h, a) → DIVIDE(h, a * b)"), t36))
 }
 
 ///|
@@ -173,7 +173,7 @@ pub fn divide_prod2() -> @kernel.Thm {
 ///|
 /// GCD
 fn step_11() -> Unit raise {
-  gcd_c.set(@pair.new_definition(@parser.parse_term("GCD a b = @g.\n        ((g || a) /\\ (g || b) /\\\n        (forall h. (((h || a) /\\ (h || b)) ==> (h || g))))")))
+  gcd_c.set(@pair.new_definition(@term_syntax.parse_term("(GCD : (Num, Num) -> Num)((a : Num), (b : Num)) == select((g : Num) => DIVIDE(g, a) && DIVIDE(g, b) && (∀ h : Num, DIVIDE(h, a) && DIVIDE(h, b) → DIVIDE(h, g)))")))
 }
 
 ///|
@@ -195,15 +195,15 @@ fn step_12() -> Unit raise {
   let ygbranch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(divide_eq())), @tactics.conj_tac)
   let t40 = @tactics.asm_tac(@meson.meson_tac)(@list.List([divide_summand()]))
   let t41 = @list.List([@tactics.asm_tac(@meson.meson_tac)(@list.List([divide_sum(), divide_prod()])), t40])
-  let ydivg_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.thenl(@tactics_ext.subgoal_tac(@parser.parse_term(" (y || (r*a + s*b))/\\ (y || (r'*a +s'*b))")), t41)
+  let ydivg_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.thenl(@tactics_ext.subgoal_tac(@term_syntax.parse_term("DIVIDE((y : Num), (r : Num) * (a : Num) + (s : Num) * (b : Num)) && DIVIDE(y, (r' : Num) * a + (s' : Num) * b)")), t41)
   let t45 = @tactics.asm_tac(@meson.meson_tac)(@list.List([]))
   let t44 = @simp.rewrite_tac(@list.List([divide()]))
   let t43 = @tactics.pop_assum(@tactics.match_mp_tac)
-  let t42 = @tactics_ext.taut_tac(@parser.parse_term(" (A ==> B) ==> ((C /\\ D/\\ A)==> B)"))
-  let gdivy_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("(y||a) /\\ (y ||b) /\\ (forall h. (((h||a)/\\(h||b))==> (h||y)))")), t42), @tactics.disch_tac), t43), t44), @tactics.conj_tac), t45)
+  let t42 = @tactics_ext.taut_tac(@term_syntax.parse_term("((A : Bool) → (B : Bool)) → (C : Bool) && (D : Bool) && A → B"))
+  let gdivy_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@term_syntax.parse_term("DIVIDE((y : Num), (a : Num)) && DIVIDE(y, (b : Num)) && (∀ h : Num, DIVIDE(h, a) && DIVIDE(h, b) → DIVIDE(h, y))")), t42), @tactics.disch_tac), t43), t44), @tactics.conj_tac), t45)
   let t51 = @tactics.asm_tac(@meson.meson_tac)(@list.List([divide_summand()]))
   let t52 = @list.List([@tactics.asm_tac(@meson.meson_tac)(@list.List([divide_sum(), divide_prod()])), t51])
-  let t50 = @tactics_ext.subgoal_tac(@parser.parse_term(" (h || (r*a + s*b))/\\ (h || (r'*a+s'*b))"))
+  let t50 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("DIVIDE((h : Num), (r : Num) * (a : Num) + (s : Num) * (b : Num)) && DIVIDE(h, (r' : Num) * a + (s' : Num) * b)"))
   let t49 = @list.List([@tactics.asm_tac(@meson.meson_tac)(@list.List([divide()])), @tactics.all_tac])
   let t48 = @list.List([@tactics.asm_tac(@meson.meson_tac)(@list.List([divide()])), @tactics.all_tac])
   let x : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise = fn(x46 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -212,7 +212,7 @@ fn step_12() -> Unit raise {
   }
   let yghyp_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.pop_assum(x)), @tactics.conj_tac), t48), @tactics.conj_tac), t49), @tactics.gen_tac), @tactics.disch_tac), t50), t52)
   let t53 = @tactics.thenl(tac1, @list.List([@tactics.thenl(ygbranch, @list.List([ydivg_branch, gdivy_branch])), yghyp_branch]))
-  gcd_certificate_c.set(@tactics_refine.prove(@parser.parse_term("forall a b g. ((? r s r' s' a' b'.\n        ((a = a'*g) /\\ (b = b'*g) /\\ (g +r'*a+s'*b= r*a + s*b)))\n        ==> (GCD a b = g))"), t53))
+  gcd_certificate_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ a : Num, ∀ b : Num, ∀ g : Num, (∃ r : Num, ∃ s : Num, ∃ r' : Num, ∃ s' : Num, ∃ a' : Num, ∃ b' : Num, a == a' * g && b == b' * g && g + (r' * a + s' * b) == r * a + s * b) → GCD(a, b) == g"), t53))
 }
 
 ///|

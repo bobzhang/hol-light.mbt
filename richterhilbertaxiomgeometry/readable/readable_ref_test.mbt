@@ -5605,7 +5605,7 @@ test "RichterHilbertAxiomGeometry/readable matches RichterHilbertAxiomGeometry/r
       #|Translating certificate to HOL inferences
       #|0..0..1..2..solved at 6
       #|RichterHilbertAxiomGeometry/readable quotations (8):
-      #|  (forall n. binom(n,0) = 1) /\\\n  (forall k. binom(0,SUC(k)) = 0) /\\\n  (forall n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))
+      #|  (\226\136\128 n : Num, (binom : ((Num, Num)) -> Num)((n, 0)) == 1) && (\226\136\128 k : Num, binom((0, SUC(k))) == 0) && (\226\136\128 n : Num, \226\136\128 k : Num, binom((SUC(n), SUC(k))) == binom((n, SUC(k))) + binom((n, k)))
       #|  :P
       #|  :P
       #|  :P

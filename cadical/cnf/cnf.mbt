@@ -18,7 +18,7 @@ pub fn exploit_conjunctive_structure() -> Ref[Bool] {
 ///|
 /// GCONJUNCTS
 fn step_2() -> Unit raise {
-  let t3 = @parser.parse_term("(~(p ==> q) ==> p) /\\\n     (~(p ==> q) ==> ~q) /\\\n     (~(p \\/ q) ==> ~p) /\\\n     (~(p \\/ q) ==> ~q) /\\\n     (p /\\ q ==> p) /\\\n     (p /\\ q ==> q) /\\\n     (~ ~p ==> p)")
+  let t3 = @term_syntax.parse_term("(!((p : Bool) → (q : Bool)) → p) && (!(p → q) → !q) && (!(p || q) → !p) && (!(p || q) → !q) && (p && q → p) && (p && q → q) && (!!p → p)")
   gconjuncts_c.set(match (fn(x2 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     ((x1 : @list.List[@kernel.Thm]) => @lib.map(@bool.undisch_all, x1))(@bool.conjuncts_rule(x2))
   })(@class.taut(t3)) {
@@ -193,7 +193,7 @@ pub fn is_strictcnf(x24 : @kernel.Term) -> Bool raise {
 ///|
 /// definitionalize
 fn step_3() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("(p ==> q) <=> ~p \\/ q"))
+  let pth = @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))
   let ptm = @kernel.rand(@kernel.concl(pth))
   let p_tm = @kernel.rand(@equal.lhand(ptm))
   let q_tm = @kernel.rand(ptm)
@@ -203,7 +203,7 @@ fn step_3() -> Unit raise {
     let p = @kernel.rand(ip)
     @kernel.eq_mp(@kernel.inst_rule(@list.List([(p, p_tm), (q, q_tm)]), pth), th)
   }
-  let pth_1 = @bool.undisch(@class.taut(@parser.parse_term("(p <=> q) ==> (p \\/ ~q)")))
+  let pth_1 = @bool.undisch(@class.taut(@term_syntax.parse_term("(p : Bool) == (q : Bool) → p || !q")))
   let ptm_1 = @kernel.concl(pth_1)
   let p_tm_1 = @equal.lhand(ptm_1)
   let q_tm_1 = @kernel.rand(@kernel.rand(ptm_1))
@@ -213,7 +213,7 @@ fn step_3() -> Unit raise {
     let p_1 = @kernel.rand(ip_1)
     @bool.prove_hyp(th_1, @kernel.inst_rule(@list.List([(p_1, p_tm_1), (q_1, q_tm_1)]), pth_1))
   }
-  let pth_2 = @bool.undisch(@class.taut(@parser.parse_term("(p <=> q) ==> (~p \\/ q)")))
+  let pth_2 = @bool.undisch(@class.taut(@term_syntax.parse_term("(p : Bool) == (q : Bool) → !p || q")))
   let ptm_2 = @kernel.concl(pth_2)
   let p_tm_2 = @kernel.rand(@equal.lhand(ptm_2))
   let q_tm_2 = @kernel.rand(ptm_2)

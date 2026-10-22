@@ -5639,34 +5639,34 @@ test "Examples/bondy matches Examples/bondy.ml" {
       #|0..0..2..4..solved at 8
       #|0..0..solved at 2
       #|Examples/bondy quotations (28):
-      #|  CARD {s INTER X DELETE (a:A) | s IN f}
-      #|  a IN X ==> (d = X DELETE a <=> ~(a IN d) /\\ a INSERT d = X)
-      #|  d = X DELETE (a:A)
-      #|  a:A
-      #|  1 <= n ==> ~(n - 1 = n)
-      #|  (d:A->bool) PSUBSET X
-      #|  d:A->bool
-      #|  u:A->bool
-      #|  t:A->bool
-      #|  x = m + 1 ==> x < y ==> SUC m + 1 <= y
-      #|  (e:A) INSERT d
-      #|  ?e:A. e IN X /\\ ~(e IN t <=> e IN u)
-      #|  u:A->bool
-      #|  t:A->bool
-      #|  SUC m <= n - 1 ==> ~(m + 1 = n)
-      #|  f:(A->bool)->bool
-      #|  \\s:A->bool. s INTER d
-      #|  CARD {s INTER d:A->bool | s IN f}
-      #|  (a:A) INSERT d
-      #|  a:A
-      #|  SUC m <= n - 1 ==> ~(m = n)
-      #|  (d:A->bool) PSUBSET X
-      #|  m + 1 <= n ==> SUC m + 1 <= n \\/ n = m + 1
-      #|  d:A->bool
-      #|  m:num
-      #|  n - 1
-      #|  forall m. m <= n - 1\n        ==> ?d:A->bool. d HAS_SIZE m /\\ d SUBSET X /\\\n                        CARD {s INTER d | s IN f} >= m + 1
-      #|  forall(X:A->bool) f n.\n        1 <= n /\\ X HAS_SIZE n /\\ f HAS_SIZE n /\\ (forall s. s IN f ==> s SUBSET X)\n        ==> ?x. x IN X /\\ {s DIFF {x} | s IN f} HAS_SIZE n
+      #|  CARD({INTER((s : (A) -> Bool), DELETE((X : (A) -> Bool), (a : A))) | IN(s, (f : ((A) -> Bool) -> Bool))})
+      #|  IN((a : _), (X : (_) -> Bool)) \226\134\146 ((d : (_) -> Bool) == DELETE(X, a)) == (!IN(a, d) && INSERT(a, d) == X)
+      #|  (d : (A) -> Bool) == DELETE((X : (A) -> Bool), (a : A))
+      #|  (a : A)
+      #|  1 <= (n : Num) \226\134\146 !(n - 1 == n)
+      #|  PSUBSET((d : (A) -> Bool), (X : (A) -> Bool))
+      #|  (d : (A) -> Bool)
+      #|  (u : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  (x : Num) == (m : Num) + 1 \226\134\146 x < (y : Num) \226\134\146 SUC(m) + 1 <= y
+      #|  INSERT((e : A), (d : (A) -> Bool))
+      #|  \226\136\131 e : A, IN(e, (X : (A) -> Bool)) && !(IN(e, (t : (A) -> Bool)) == IN(e, (u : (A) -> Bool)))
+      #|  (u : (A) -> Bool)
+      #|  (t : (A) -> Bool)
+      #|  SUC((m : Num)) <= (n : Num) - 1 \226\134\146 !(m + 1 == n)
+      #|  (f : ((A) -> Bool) -> Bool)
+      #|  (s : (A) -> Bool) => INTER(s, (d : (A) -> Bool))
+      #|  CARD({INTER((s : (A) -> Bool), (d : (A) -> Bool)) | IN(s, (f : ((A) -> Bool) -> Bool))})
+      #|  INSERT((a : A), (d : (A) -> Bool))
+      #|  (a : A)
+      #|  SUC((m : Num)) <= (n : Num) - 1 \226\134\146 !(m == n)
+      #|  PSUBSET((d : (A) -> Bool), (X : (A) -> Bool))
+      #|  (m : Num) + 1 <= (n : Num) \226\134\146 SUC(m) + 1 <= n || n == m + 1
+      #|  (d : (A) -> Bool)
+      #|  (m : Num)
+      #|  (n : Num) - 1
+      #|  \226\136\128 m : Num, m <= (n : Num) - 1 \226\134\146 (\226\136\131 d : (A) -> Bool, HAS_SIZE(d, m) && SUBSET(d, (X : (A) -> Bool)) && CARD({INTER((s : (A) -> Bool), d) | IN(s, (f : ((A) -> Bool) -> Bool))}) >= m + 1)
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 f : ((A) -> Bool) -> Bool, \226\136\128 n : Num, 1 <= n && HAS_SIZE(X, n) && HAS_SIZE(f, n) && (\226\136\128 s : (A) -> Bool, IN(s, f) \226\134\146 SUBSET(s, X)) \226\134\146 (\226\136\131 x : A, IN(x, X) && HAS_SIZE({DIFF((s : (A) -> Bool), {x}) | IN(s, f)}, n))
       #|BONDY =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\X:fun('A,bool). (#forall:fun(fun(fun(fun('A,bool),bool),bool),bool) (\f:fun(fun('A,bool),bool). (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun('A,bool),fun(num,bool)) X:fun('A,bool)) n:num)) ((#/\:fun(bool,fun(bool,bool)) ((#HAS_SIZE:fun(fun(fun('A,bool),bool),fun(num,bool)) f:fun(fun('A,bool),bool)) n:num)) (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) s:fun('A,bool)) f:fun(fun('A,bool),bool))) ((#SUBSET:fun(fun('A,bool),fun(fun('A,bool),bool)) s:fun('A,bool)) X:fun('A,bool))))))))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) X:fun('A,bool))) ((#HAS_SIZE:fun(fun(fun('A,bool),bool),fun(num,bool)) (#GSPEC:fun(fun(fun('A,bool),bool),fun(fun('A,bool),bool)) (\GEN%PVAR%1:fun('A,bool). (#?:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). (((#SETSPEC:fun(fun('A,bool),fun(bool,fun(fun('A,bool),bool))) GEN%PVAR%1:fun('A,bool)) ((#IN:fun(fun('A,bool),fun(fun(fun('A,bool),bool),bool)) s:fun('A,bool)) f:fun(fun('A,bool),bool))) ((#DIFF:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) s:fun('A,bool)) ((#INSERT:fun('A,fun(fun('A,bool),fun('A,bool))) x:'A) #EMPTY:fun('A,bool))))))))) n:num)))))))))))
       #|types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
       #|constants = superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =

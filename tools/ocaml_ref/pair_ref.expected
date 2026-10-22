@@ -233,84 +233,84 @@ Warning: inventing type variables
 0..0..solved at 2
 Warning: inventing type variables
 pair quotations (78):
-  LET (f:A->B) x = f x
-  LET_END (t:A) = t
-  GABS (P:A->bool) = (@) P
-  GEQ a b = (a:A = b)
+  (LET : ((A) -> B, A) -> B)((f : (A) -> B), (x : A)) == f(x)
+  (LET_END : (A) -> A)((t : A)) == t
+  (GABS : ((A) -> Bool) -> A)((P : (A) -> Bool)) == select(P)
+  (GEQ : (A, A) -> Bool)((a : A), (b : A)) == (a == b)
   _SEQPATTERN = \\(r:A->B->bool) s x. if ?y. r x y then r x else s x
-  _UNGUARDED_PATTERN = \\p r. p /\\ r
-  _GUARDED_PATTERN = \\p g r. p /\\ g /\\ r
+  (_UNGUARDED_PATTERN : (Bool, Bool) -> Bool) == ((p : Bool) => (r : Bool) => p && r)
+  (_GUARDED_PATTERN : (Bool, Bool, Bool) -> Bool) == ((p : Bool) => (g : Bool) => (r : Bool) => p && g && r)
   _MATCH =  \\e (r:A->B->bool). if (?!) (r e) then (@) (r e) else @z. F
   _FUNCTION = \\(r:A->B->bool) x. if (?!) (r x) then (@) (r x) else @z. F
-  mk_pair (x:A) (y:B) = \\a b. (a = x) /\\ (b = y)
-  ?x. ?(a:A) (b:B). x = mk_pair a b
+  (mk_pair : (A, B, A, B) -> Bool)((x : A), (y : B)) == ((a : A) => (b : B) => a == x && b == y)
+  \226\136\131 x : (A, B) -> Bool, \226\136\131 a : A, \226\136\131 b : B, x == mk_pair(a, b)
   forall(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y
-  (x:A),(y:B) = ABS_prod(mk_pair x y)
-  FST (p:A#B) = @x. ?y. p = x,y
-  SND (p:A#B) = @y. ?x. p = x,y
-  REP_prod:A#B->A->B->bool
+  (op_comma : (A, B) -> (A, B))((x : A), (y : B)) == ABS_prod(mk_pair(x, y))
+  (FST : ((A, B)) -> A)((p : (A, B))) == select((x : A) => \226\136\131 y : B, p == (x, y))
+  (SND : ((A, B)) -> B)((p : (A, B))) == select((y : B) => \226\136\131 x : A, p == (x, y))
+  (REP_prod : ((A, B), A, B) -> Bool)
   forall(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\\ (y = b)
-  b:B
-  a:A
-  ABS_prod:(A->B->bool)->A#B
-  b:B
-  a:A
-  REP_prod p :A->B->bool
-  forall p:A#B. ?x y. p = x,y
-  y:B
-  forall(x:A) (y:B). FST(x,y) = x
-  x:A
-  forall(x:A) (y:B). SND(x,y) = y
-  x:A#B
-  b:B
-  a:A
-  forall x:A#B. FST x,SND x = x
-  forall P:A#B->bool. (forall x y. P (x,y)) ==> forall p. P p
-  \\p. (PAIR':A->B->C) (FST p) (SND p)
+  (b : B)
+  (a : A)
+  (ABS_prod : ((A, B) -> Bool) -> (A, B))
+  (b : B)
+  (a : A)
+  REP_prod((p : (A, B)))
+  \226\136\128 p : (A, B), \226\136\131 x : A, \226\136\131 y : B, p == (x, y)
+  (y : B)
+  \226\136\128 x : A, \226\136\128 y : B, FST((x, y)) == x
+  (x : A)
+  \226\136\128 x : A, \226\136\128 y : B, SND((x, y)) == y
+  (x : (A, B))
+  (b : B)
+  (a : A)
+  \226\136\128 x : (A, B), (FST(x), SND(x)) == x
+  \226\136\128 P : ((A, B)) -> Bool, (\226\136\128 x : A, \226\136\128 y : B, P((x, y))) \226\134\146 (\226\136\128 p : (A, B), P(p))
+  (p : (A, B)) => (PAIR' : (A, B) -> C)(FST(p), SND(p))
   forall PAIR'. ?fn:A#B->C. forall a0 a1. fn (a0,a1) = PAIR' a0 a1
-  CURRY(f:A#B->C) x y = f(x,y)
-  forall f x y. UNCURRY(f:A->B->C)(x,y) = f x y
+  (CURRY : (((A, B)) -> C, A, B) -> C)((f : ((A, B)) -> C), (x : A), (y : B)) == f((x, y))
+  \226\136\128 f : (A, B) -> C, \226\136\128 x : A, \226\136\128 y : B, (UNCURRY : ((A, B) -> C, (A, B)) -> C)(f, (x, y)) == f(x, y)
   forall f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)
-  (?) P ==> P (GABS P)
-  GABS (\\a. b) c
-  forall P:A#B->bool. (forall p. P p) <=> (forall p1 p2. P(p1,p2))
-  forall P:A#B->bool. (?p. P p) <=> ?p1 p2. P(p1,p2)
-  forall t:A#B->C. (\\p. t p) = (\\(x,y). t(x,y))
+  op_q((P : (_) -> Bool)) \226\134\146 P(GABS(P))
+  GABS((a : (_) -> _) => (b : Bool), (c : _))
+  \226\136\128 P : ((A, B)) -> Bool, (\226\136\128 p : (A, B), P(p)) == (\226\136\128 p1 : A, \226\136\128 p2 : B, P((p1, p2)))
+  \226\136\128 P : ((A, B)) -> Bool, (\226\136\131 p : (A, B), P(p)) == (\226\136\131 p1 : A, \226\136\131 p2 : B, P((p1, p2)))
+  \226\136\128 t : ((A, B)) -> C, ((p : (A, B)) => t(p)) == GABS((f : ((A, B)) -> C) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), t((x, y))))
   forall f:A->B->C. (\\(x,y). f x y) = (\\p. f (FST p) (SND p))
-  forall f:A#B#C->D. (\\t. f t) = (\\(x,y,z). f(x,y,z))
+  \226\136\128 f : ((A, B, C)) -> D, ((t : (A, B, C)) => f(t)) == GABS((f' : ((A, B, C)) -> D) => \226\136\128 x : A, \226\136\128 y : B, \226\136\128 z : C, GEQ(f'((x, y, z)), f((x, y, z))))
   forall f:A->B->C->D.\n   (\\(x,y,z). f x y z) = (\\t. f (FST t) (FST(SND t)) (SND(SND t)))
   (forall f:A#B->C. (\\(x,y). f (x,y)) = f) /\\\n   (forall f:A#B#C->D. (\\(x,y,z). f (x,y,z)) = f) /\\\n   (forall f:A#B#C#D->E. (\\(w,x,y,z). f (w,x,y,z)) = f)
   \\(a,b). (f:A->B->C) a b
-  f:A->B->C
-  forall P. (forall f:A->B->C. P f) <=> (forall f. P (\\a b. f(a,b)))
-  (?x. P x) <=> ~(forall x. ~P x)
-  forall P. (?f:A->B->C. P f) <=> (?f. P (\\a b. f(a,b)))
+  (f : (A, B) -> C)
+  \226\136\128 P : ((A, B) -> C) -> Bool, (\226\136\128 f : (A, B) -> C, P(f)) == (\226\136\128 f : ((A, B)) -> C, P((a : A) => (b : B) => f((a, b))))
+  (\226\136\131 x : _, (P : (_) -> Bool)(x)) == !(\226\136\128 x : _, !P(x))
+  \226\136\128 P : ((A, B) -> C) -> Bool, (\226\136\131 f : (A, B) -> C, P(f)) == (\226\136\131 f : ((A, B)) -> C, P((a : A) => (b : B) => f((a, b))))
   forall P:(A#B->C)->bool. (?f. P f) <=> (?f. P (\\(a,b). f a b))
   forall P:(A#B->C)->bool. (forall f. P f) <=> (forall f. P (\\(a,b). f a b))
   forall P:A->B->bool. (forall x y. P x y) <=> forall z. P (FST z) (SND z)
   forall P:A->B->bool. (?x y. P x y) <=> ?z. P (FST z) (SND z)
-  forall P. (forall f:A->B#C. P f) <=> (forall g h. P(\\a. g a,h a))
-  (?x. P x) <=> ~(forall x. ~P x)
-  forall P. (?f:A->B#C. P f) <=> (?g h. P(\\a. g a,h a))
+  \226\136\128 P : ((A) -> (B, C)) -> Bool, (\226\136\128 f : (A) -> (B, C), P(f)) == (\226\136\128 g : (A) -> B, \226\136\128 h : (A) -> C, P((a : A) => (g(a), h(a))))
+  (\226\136\131 x : _, (P : (_) -> Bool)(x)) == !(\226\136\128 x : _, !P(x))
+  \226\136\128 P : ((A) -> (B, C)) -> Bool, (\226\136\131 f : (A) -> (B, C), P(f)) == (\226\136\131 g : (A) -> B, \226\136\131 h : (A) -> C, P((a : A) => (g(a), h(a))))
   forall P:(A->B)->(A->C)->bool. (forall f g. P f g) <=> (forall h. P (FST o h) (SND o h))
   forall P:(A->B)->(A->C)->bool. (?f g. P f g) <=> (?h. P (FST o h) (SND o h))
-  \\b a. (f:B->A->C) a b
-  f:B->A->C
-  \\b a. (f:A->B->C) a b
-  f:A->B->C
+  (b : A) => (a : B) => (f : (B, A) -> C)(a, b)
+  (f : (B, A) -> C)
+  (b : B) => (a : A) => (f : (A, B) -> C)(a, b)
+  (f : (A, B) -> C)
   forall P:(A->B->C)->bool. (?f. P f) <=> (?f. P (\\a b. f b a))
-  forall P:A->B->bool. (forall(x,y). P x y) <=> (forall x y. P x y)
-  (~p <=> ~q) ==> (p <=> q)
-  forall P:A->B->bool. (?(x,y). P x y) <=> (?x y. P x y)
+  \226\136\128 P : (A, B) -> Bool, forall(GABS((f : ((A, B)) -> Bool) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), P(x, y)))) == (\226\136\128 x : A, \226\136\128 y : B, P(x, y))
+  !(p : Bool) == !(q : Bool) \226\134\146 p == q
+  \226\136\128 P : (A, B) -> Bool, op_q(GABS((f : ((A, B)) -> Bool) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), P(x, y)))) == (\226\136\131 x : A, \226\136\131 y : B, P(x, y))
   forall P:A->B->C->bool. (forall(x,y,z). P x y z) <=> (forall x y z. P x y z)
-  (~p <=> ~q) ==> (p <=> q)
+  !(p : Bool) == !(q : Bool) \226\134\146 p == q
   forall P:A->B->C->bool. (?(x,y,z). P x y z) <=> (?x y z. P x y z)
-  forall P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))
-  (\\ (x:A,y:B). P x y:bool) = (\\p. P (FST p) (SND p))
+  \226\136\128 P : (A, B) -> Bool, select(GABS((f : ((A, B)) -> Bool) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), P(x, y)))) == select((p : (A, B)) => P(FST(p), SND(p)))
+  GABS((f : ((A, B)) -> Bool) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), (P : (A, B) -> Bool)(x, y))) == ((p : (A, B)) => P(FST(p), SND(p)))
   forall P Q. (?x:A y:B. P x y) /\\ (forall x y. P x y ==> Q(x,y)) ==> Q (@(x,y). P x y)
-  ((x,y) = a) <=> (x = FST a) /\\ (y = SND a)
-  a /\\ T <=> a
-  (x = x) <=> T
+  (((x : _), (y : _)) == (a : (_, _))) == (x == FST(a) && y == SND(a))
+  ((a : Bool) && true) == a
+  ((x : _) == x) == true
 LET_DEF =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) ((#LET:fun(fun('A,'B),fun('A,'B)) f:fun('A,'B)) x:'A)) (f:fun('A,'B) x:'A))))))
 LET_END_DEF =  |- (#forall:fun(fun('A,bool),bool) (\t:'A. ((#=:fun('A,fun('A,bool)) (#LET_END:fun('A,'A) t:'A)) t:'A)))
 GABS_DEF =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun('A,fun('A,bool)) (#GABS:fun(fun('A,bool),'A) P:fun('A,bool))) (#@:fun(fun('A,bool),'A) P:fun('A,bool)))))

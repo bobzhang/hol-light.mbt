@@ -6051,966 +6051,966 @@ Searching with limit 4
 0..0..1..4..13..solved at 24
 0..0..1..2..5..11..solved at 24
 Jordan/tactics_ext2 quotations (960):
-  (\\ (x:A) .T) (@(x:A). T)
-  A /\\ (A ==>B) ==> (A /\\ B)
-  (~A ==> F) ==> A
-  (x:num)+1=2
-  x:bool
-  n:num
-  \\m. (X:num->bool) m /\\ (forall n. X n ==> m <=| n)
-  y:A
-  P:(A->bool)
-  (?)
-  forall(P:A->bool) Q. (?y. P y) /\\ (forall t. (P t ==> Q t)) ==> Q ((@) P)
-  forall(P:A->bool) Q. (((?y. P y) ==> (forall t. (P t ==> Q t))) /\\ ((~(?y. P y)) ==>\n     (forall t. Q t))) ==> Q ((@) P)
-  forall(P:A->bool) (Q:A->bool). (Q ((@) P)) <=> (\\t. Q t) ((@) P)
-  y:num = y
-  y:A
-  forall y. y:num = y
-  forall x:B. x=x
-  (&.0 * x = &.0) /\\ (x + &.0 = x) /\\\n              (&.0 + x = x)
-  (a*b +. d*b = (a+d)*b) /\\\n             (a*b + b = (a+ &.1)*b ) /\\ ( b + a*b = (a+ &.1)*b) /\\\n             (a*b +. d*b +e = (a+d)*b + e) /\\\n             (a*b + b + e= (a+. &.1)* b +e ) /\\\n             ( b + a*b + e = (a + &.1)*b +e) 
-  -- x = (x*(-- &.1))
-  (x*.(-- y) = -- (x*. y)) /\\ (--. (--. x) = x) /\\\n       ((--. x)*.y = --.(x*.y))
-  (x -. (--y) = x + y) /\\ (x - y = x + (-- y)) /\\\n               (--(x + y) = --x + (--y)) /\\ (--(x - y) = --x + y)
-  forall x y . (x + (&.2)*y)*(x- (&.2)*y) = (x*x -. (&.4)*y*y)
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( *. )
-  ( *. )
-  forall A B C. (A+B = C) ==> ((&.0 <. B) ==> (A <. C)  )
-  forall A B C. (A+B = C) ==> ((&.0 <=. B) ==> (A <=. C))
-  forall B1 B2 C. ((&.0 <. (B1+B2)) ==> C) ==>\n         ((&.0 <. B2) ==> ((&.0 <=. B1) ==> C))
-  forall B1 B2 C. ((&.0 <=. (B1+B2)) ==> C) ==>\n         ((&.0 <=. B2) ==> ((&.0 <=. B1) ==> C))
-  forall A B C. ((&.0 <= A) ==> (&.0 <= B) ==> C) =\n       ((&.0 <=. B) ==> (&.0 <= A) ==> C)
-  forall A B C. ((&.0 < A) ==> (&.0 <= B) ==> C) =\n       ((&.0 <=. B) ==> (&.0 < A) ==> C)
-  forall A B C. ((&.0 < A) ==> (&.0 < B) ==> C) =\n       ((&.0 <. B) ==> (&.0 < A)  ==> C)
-  forall B1 B2 C. (&.0 < B1*B2 ==> C) ==>\n              ((&.0 <. B1) ==> (&.0 <. B2) ==> C)
-  forall B1 B2 C. (&.0 <= B1*B2 ==> C) ==>\n              ((&.0 <=. B1) ==> (&.0 <=. B2) ==> C)
-  x * y + x pow 2 + &2 * (&.0 + x * y) + &2 * &2 = x * x + &3 * x * y + &4
-  (&.0 < x ==> &.0 <= x) /\\ (&.0 + x = x) /\\\n          (a <= b ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 <= b - a) /\\\n          (~(b < a) ==> &.0 <= b - a) /\\\n          (~(b <= a) ==> &.0 <= b - a) /\\\n          (a < b ==> &.0 < b - a) /\\\n          (~(b <= a) ==> &.0 < b - a)
-  (A ==> B==>C) ==> (A /\\ B ==> C)
-  forall x y z. (&.0 <= x*y) /\\ (&.0 <. z) ==>\n             (x*y)  <. x*x + (&.3)*x*y + &.4 
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( *. )
-  ( *. )
-  ( +. )
-  ( *. )
-  ( ==> )
-  ( <. ) 
-  ( *. )
-  ( ==> )
-  ( <. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  ( ==> )
-  ( <=. ) 
-  ( *. )
-  TAGB (x:bool) = x
-  forall P. ~(TAGB(forall x. P x)) <=> (?x:A. ~(P x))
-  forall P. (?y. TAGB (forall(x:A). P x ((y:A->B) x))) <=>\n     ( (forall(x:A). ?y. P x ((y:B))))
-  forall P. (forall x:A. TAGB(?y:B. P x y)) <=> (?y. forall x. P x (y x))
-  forall P:A->B->bool. (forall x. TAGB(forall y. P x y)) <=> (forall y x. P x y)
-  forall P:A->B->bool. (?x. TAGB (?y. P x y)) <=> (?y x. P x y)
-  forall P Q. (TAGB (forall x. P x) /\\ TAGB (forall x. Q x) <=>\n   (forall x. P x /\\ Q x))
-  forall P Q. (TAGB (forall x. P x) /\\  Q) <=>\n   (forall x. P x /\\ Q )
-  forall P Q. P /\\ TAGB (forall x. Q x) <=>\n   (forall x. P  /\\ Q x)
-  forall P Q. TAGB (forall x:A. P) \\/ TAGB (forall x:A. Q) <=> (forall x:A. P \\/ Q)
-  forall P Q. (P ==> TAGB (forall x:A. Q x)) <=> (forall x. P ==> Q x)
-  forall P Q. TAGB (?x. P x) \\/ TAGB (?x. Q x) <=> (?x:A. P x \\/ Q x)
-  forall P Q. TAGB (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)
-  forall P Q. P \\/ TAGB (?x. Q x) <=> (?x:A. P \\/ Q x)
-  forall P Q. TAGB (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)
-  forall P Q. P /\\ TAGB (?x:A. Q x) <=> (?x:A. P /\\ Q x)
-  forall P Q. TAGB (?x:A. P) /\\ TAGB (?x:A. Q) <=> (?x:A. P /\\ Q)
-  forall P Q. (TAGB (?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)
-  forall P Q. (TAGB (?x:A. P) ==> TAGB (forall x:A. Q)) <=> (forall x:A. P ==> Q) 
-  forall P Q. (TAGB(forall x:A. P) ==> TAGB (?x:A. Q)) <=> (?x:A. P ==> Q) 
-  forall P. ~(TAGB(?x:A. P x)) <=> (forall x. ~(P x))
-  forall P Q. TAGB(forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)
-  forall P Q. P \\/ TAGB(forall x:A. Q x) <=> (forall x. P \\/ Q x)
-  forall P Q. (TAGB(forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)
-  forall P Q. (P ==> TAGB(?x:A. Q x)) <=> (?x:A. P ==> Q x)
-  forall P. ~(TAGB(forall x. P x)) <=> (?x:A. ~(P x))
-  forall P. (?y. TAGB (forall(x:A). P x ((y:A->B) x))) <=>\n     ( (forall(x:A). ?y. P x ((y:B))))
-  forall P. (forall x:A. TAGB(?y:B. P x y)) <=> (?y. forall x. P x (y x))
-  forall P:A->B->bool. (forall x. TAGB(forall y. P x y)) <=> (forall y x. P x y)
-  forall P:A->B->bool. (?x. TAGB (?y. P x y)) <=> (?y x. P x y)
-  forall P Q. (TAGB (forall x. P x) /\\ TAGB (forall x. Q x) <=>\n   (forall x. P x /\\ Q x))
-  forall P Q. (TAGB (forall x. P x) /\\  Q) <=>\n   (forall x. P x /\\ Q )
-  forall P Q. P /\\ TAGB (forall x. Q x) <=>\n   (forall x. P  /\\ Q x)
-  forall P Q. TAGB (forall x:A. P) \\/ TAGB (forall x:A. Q) <=> (forall x:A. P \\/ Q)
-  forall P Q. (P ==> TAGB (forall x:A. Q x)) <=> (forall x. P ==> Q x)
-  forall P Q. TAGB (?x. P x) \\/ TAGB (?x. Q x) <=> (?x:A. P x \\/ Q x)
-  forall P Q. TAGB (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)
-  forall P Q. P \\/ TAGB (?x. Q x) <=> (?x:A. P \\/ Q x)
-  forall P Q. TAGB (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)
-  forall P Q. P /\\ TAGB (?x:A. Q x) <=> (?x:A. P /\\ Q x)
-  forall P Q. TAGB (?x:A. P) /\\ TAGB (?x:A. Q) <=> (?x:A. P /\\ Q)
-  forall P Q. (TAGB (?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)
-  forall P Q. (TAGB (?x:A. P) ==> TAGB (forall x:A. Q)) <=> (forall x:A. P ==> Q) 
-  forall P Q. (TAGB(forall x:A. P) ==> TAGB (?x:A. Q)) <=> (?x:A. P ==> Q) 
-  forall P. ~(TAGB(?x:A. P x)) <=> (forall x. ~(P x))
-  forall P Q. TAGB(forall x:A. P x) \\/ Q <=> (forall x. P x \\/ Q)
-  forall P Q. P \\/ TAGB(forall x:A. Q x) <=> (forall x. P \\/ Q x)
-  forall P Q. (TAGB(forall x:A. P x) ==> Q) <=> (?x. P x ==> Q)
-  forall P Q. (P ==> TAGB(?x:A. Q x)) <=> (?x:A. P ==> Q x)
-  forall P. TAGB(?x:A. ~(P x)) <=> ~((forall x. P x))
-  forall P. ( TAGB(forall(x:A). ?y. P x ((y:B)))) <=>\n   (?y.  (forall(x:A). P x ((y:A->B) x)))
-  forall P. TAGB(?y. forall x. P x (y x)) <=> (forall x:A. (?y:B. P x y))
-  forall P:A->B->bool.  TAGB(forall y x. P x y) <=> (forall x. (forall y. P x y))
-  forall P:A->B->bool.  TAGB (?y x. P x y) <=> (?x. (?y. P x y))
-  forall P Q. TAGB(forall x. P x /\\ Q x) <=>\n   ((forall x. P x) /\\ (forall x. Q x))
-  forall P Q.\n   TAGB(forall x. P x /\\ Q ) <=> ((forall x. P x) /\\  Q)
-  forall P Q.\n   TAGB(forall x. P  /\\ Q x) <=> P /\\  (forall x. Q x)
-  forall P Q.   TAGB(forall x:A. P \\/ Q) <=>(forall x:A. P) \\/  (forall x:A. Q)
-  forall P Q. TAGB (forall x. P ==> Q x) <=> (P ==>  (forall x:A. Q x)) 
-  forall P Q.  TAGB(?x:A. P x \\/ Q x) <=> (?x. P x) \\/ (?x. Q x) 
-  forall P Q. TAGB (?x:A. P x \\/ Q) <=>  (?x. P x) \\/ Q 
-  forall P Q.TAGB (?x:A. P \\/ Q x) <=>  P \\/ (?x. Q x)
-  forall P Q.TAGB (?x:A. P x /\\ Q) <=>  (?x:A. P x) /\\ Q
-  forall P Q. TAGB (?x:A. P /\\ Q x) <=>  P /\\ (?x:A. Q x) 
-  forall P Q. TAGB(?x:A. P /\\ Q) <=>  (?x:A. P) /\\  (?x:A. Q) 
-  forall P Q. TAGB(forall x. P x ==> Q) <=> ( (?x:A. P x) ==> Q) 
-  forall P Q. TAGB(forall x:A. P ==> Q)  <=> ( (?x:A. P) ==>  (forall x:A. Q)) 
-  forall P Q. TAGB(?x:A. P ==> Q)  <=> ((forall x:A. P) ==>  (?x:A. Q)) 
-  forall P. TAGB(forall x. ~(P x)) <=> ~((?x:A. P x)) 
-  forall P Q. TAGB(forall x. P x \\/ Q) <=> (forall x:A. P x) \\/ Q 
-  forall P Q. TAGB(forall x. P \\/ Q x) <=> P \\/ (forall x:A. Q x) 
-  forall P Q. TAGB(?x. P x ==> Q) <=> ((forall x:A. P x) ==> Q) 
-  forall P Q. TAGB(?x:A. P ==> Q x) <=> (P ==> (?x:A. Q x)) 
-  mark_term (u:A) = u
-  forall A u t B. (A ==> (mark_term (u:A) = t) ==> B) <=>\n         ((mark_term (u:A) = t) ==> A ==> B)
-  forall u t C D. (((mark_term (u:A) = t) /\\ C) ==> D) <=>\n        ((mark_term (u:A) = t) ==> C ==> D)
-  forall A u t. A /\\ (mark_term (u:A) = t)  <=>\n        (mark_term u = t) /\\ A 
-  forall u t A C. A /\\ (mark_term (u:A) = t) /\\ C <=>\n        (mark_term u = t) /\\ A /\\ C
-  forall u a b B. (mark_term (u:A) = a) /\\ (mark_term u = b) /\\ B <=> (mark_term u = a) /\\ (a = b) /\\ B
-  forall u a b. (mark_term (u:A) = a) /\\ (mark_term u = b) <=> (mark_term u = a) /\\ (a = b)
-  forall u t. (t = mark_term (u:A)) <=> (mark_term u = t)
-  forall u. (mark_term (u:A) = mark_term u) <=> T
-  forall A B C. (A /\\ B) /\\ C <=> A /\\ B /\\ C
-  forall C u t. ((mark_term u = t) /\\ C (mark_term u)) <=>\n         ((mark_term u = t) /\\ C (t:A))
-  forall C u t. ((mark_term u = t) ==> C (mark_term u)) <=>\n       ((mark_term u = t) ==> C (t:A))
-  forall t. ?(u:A). (u = t)
-  forall P Q R . (?(u:B). (?(x:A). (u = P x) /\\ (Q x)) /\\ (R u))
+  ((x : A) => true)(select((x : A) => true))
+  (A : Bool) && (A \226\134\146 (B : Bool)) \226\134\146 A && B
+  (!(A : Bool) \226\134\146 false) \226\134\146 A
+  (x : Num) + 1 == 2
+  (x : Bool)
+  (n : Num)
+  (m : Num) => (X : (Num) -> Bool)(m) && (\226\136\128 n : Num, X(n) \226\134\146 m <= n)
+  (y : A)
+  (P : (A) -> Bool)
+  (op_q : ((_) -> Bool) -> Bool)
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, (\226\136\131 y : A, P(y)) && (\226\136\128 t : A, P(t) \226\134\146 Q(t)) \226\134\146 Q(select(P))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, ((\226\136\131 y : A, P(y)) \226\134\146 (\226\136\128 t : A, P(t) \226\134\146 Q(t))) && (!(\226\136\131 y : A, P(y)) \226\134\146 (\226\136\128 t : A, Q(t))) \226\134\146 Q(select(P))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, Q(select(P)) == ((t : A) => Q(t))(select(P))
+  (y : Num) == y
+  (y : A)
+  \226\136\128 y : Num, y == y
+  \226\136\128 x : B, x == x
+  real_of_num(0) * (x : Real) == real_of_num(0) && x + real_of_num(0) == x && real_of_num(0) + x == x
+  (a : Real) * (b : Real) + (d : Real) * b == (a + d) * b && a * b + b == (a + real_of_num(1)) * b && b + a * b == (a + real_of_num(1)) * b && a * b + (d * b + (e : Real)) == (a + d) * b + e && a * b + (b + e) == (a + real_of_num(1)) * b + e && b + (a * b + e) == (a + real_of_num(1)) * b + e
+  -(x : Real) == x * -real_of_num(1)
+  (x : Real) * -(y : Real) == -(x * y) && --x == x && -x * y == -(x * y)
+  (x : Real) - -(y : Real) == x + y && x - y == x + -y && -(x + y) == -x + -y && -(x - y) == -x + y
+  \226\136\128 x : Real, \226\136\128 y : Real, (x + real_of_num(2) * y) * (x - real_of_num(2) * y) == x * x - real_of_num(4) * (y * y)
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_mul
+  real_mul
+  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Real, A + B == C \226\134\146 real_of_num(0) < B \226\134\146 A < C
+  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Real, A + B == C \226\134\146 real_of_num(0) <= B \226\134\146 A <= C
+  \226\136\128 B1 : Real, \226\136\128 B2 : Real, \226\136\128 C : Bool, (real_of_num(0) < B1 + B2 \226\134\146 C) \226\134\146 real_of_num(0) < B2 \226\134\146 real_of_num(0) <= B1 \226\134\146 C
+  \226\136\128 B1 : Real, \226\136\128 B2 : Real, \226\136\128 C : Bool, (real_of_num(0) <= B1 + B2 \226\134\146 C) \226\134\146 real_of_num(0) <= B2 \226\134\146 real_of_num(0) <= B1 \226\134\146 C
+  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Bool, (real_of_num(0) <= A \226\134\146 real_of_num(0) <= B \226\134\146 C) == (real_of_num(0) <= B \226\134\146 real_of_num(0) <= A \226\134\146 C)
+  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Bool, (real_of_num(0) < A \226\134\146 real_of_num(0) <= B \226\134\146 C) == (real_of_num(0) <= B \226\134\146 real_of_num(0) < A \226\134\146 C)
+  \226\136\128 A : Real, \226\136\128 B : Real, \226\136\128 C : Bool, (real_of_num(0) < A \226\134\146 real_of_num(0) < B \226\134\146 C) == (real_of_num(0) < B \226\134\146 real_of_num(0) < A \226\134\146 C)
+  \226\136\128 B1 : Real, \226\136\128 B2 : Real, \226\136\128 C : Bool, (real_of_num(0) < B1 * B2 \226\134\146 C) \226\134\146 real_of_num(0) < B1 \226\134\146 real_of_num(0) < B2 \226\134\146 C
+  \226\136\128 B1 : Real, \226\136\128 B2 : Real, \226\136\128 C : Bool, (real_of_num(0) <= B1 * B2 \226\134\146 C) \226\134\146 real_of_num(0) <= B1 \226\134\146 real_of_num(0) <= B2 \226\134\146 C
+  (x : Real) * (y : Real) + (pow(x, 2) + (real_of_num(2) * (real_of_num(0) + x * y) + real_of_num(2) * real_of_num(2))) == x * x + (real_of_num(3) * (x * y) + real_of_num(4))
+  (real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x) && real_of_num(0) + x == x && ((a : Real) <= (b : Real) \226\134\146 real_of_num(0) <= b - a) && (a < b \226\134\146 real_of_num(0) <= b - a) && (!(b < a) \226\134\146 real_of_num(0) <= b - a) && (!(b <= a) \226\134\146 real_of_num(0) <= b - a) && (a < b \226\134\146 real_of_num(0) < b - a) && (!(b <= a) \226\134\146 real_of_num(0) < b - a)
+  ((A : Bool) \226\134\146 (B : Bool) \226\134\146 (C : Bool)) \226\134\146 A && B \226\134\146 C
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, real_of_num(0) <= x * y && real_of_num(0) < z \226\134\146 x * y < x * x + (real_of_num(3) * (x * y) + real_of_num(4))
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_add
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_mul
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_mul
+  real_mul
+  real_add
+  real_mul
+  op_eq_eq_gt
+  real_lt
+  real_mul
+  op_eq_eq_gt
+  real_lt
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  op_eq_eq_gt
+  real_le
+  real_mul
+  (TAGB : (Bool) -> Bool)((x : Bool)) == x
+  \226\136\128 P : (A) -> Bool, !TAGB(\226\136\128 x : A, P(x)) == (\226\136\131 x : A, !P(x))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\131 y : (A) -> B, TAGB(\226\136\128 x : A, P(x, y(x)))) == (\226\136\128 x : A, \226\136\131 y : B, P(x, y))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\128 x : A, TAGB(\226\136\131 y : B, P(x, y))) == (\226\136\131 y : (A) -> B, \226\136\128 x : A, P(x, y(x)))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\128 x : A, TAGB(\226\136\128 y : B, P(x, y))) == (\226\136\128 y : B, \226\136\128 x : A, P(x, y))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\131 x : A, TAGB(\226\136\131 y : B, P(x, y))) == (\226\136\131 y : B, \226\136\131 x : A, P(x, y))
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : (_) -> Bool, (TAGB(\226\136\128 x : _, P(x)) && TAGB(\226\136\128 x : _, Q(x))) == (\226\136\128 x : _, P(x) && Q(x))
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : _, P(x)) && Q) == (\226\136\128 x : _, P(x) && Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (_) -> Bool, (P && TAGB(\226\136\128 x : _, Q(x))) == (\226\136\128 x : _, P && Q(x))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P) || TAGB(\226\136\128 x : A, Q)) == (\226\136\128 x : A, P || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P \226\134\146 TAGB(\226\136\128 x : A, Q(x))) == (\226\136\128 x : A, P \226\134\146 Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, (TAGB(\226\136\131 x : A, P(x)) || TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P(x) || Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P(x)) || Q) == (\226\136\131 x : A, P(x) || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P || TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P || Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P(x)) && Q) == (\226\136\131 x : A, P(x) && Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P && TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P && Q(x))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P) && TAGB(\226\136\131 x : A, Q)) == (\226\136\131 x : A, P && Q)
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P(x)) \226\134\146 Q) == (\226\136\128 x : A, P(x) \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P) \226\134\146 TAGB(\226\136\128 x : A, Q)) == (\226\136\128 x : A, P \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P) \226\134\146 TAGB(\226\136\131 x : A, Q)) == (\226\136\131 x : A, P \226\134\146 Q)
+  \226\136\128 P : (A) -> Bool, !TAGB(\226\136\131 x : A, P(x)) == (\226\136\128 x : A, !P(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P(x)) || Q) == (\226\136\128 x : A, P(x) || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P || TAGB(\226\136\128 x : A, Q(x))) == (\226\136\128 x : A, P || Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P(x)) \226\134\146 Q) == (\226\136\131 x : A, P(x) \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P \226\134\146 TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P \226\134\146 Q(x))
+  \226\136\128 P : (A) -> Bool, !TAGB(\226\136\128 x : A, P(x)) == (\226\136\131 x : A, !P(x))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\131 y : (A) -> B, TAGB(\226\136\128 x : A, P(x, y(x)))) == (\226\136\128 x : A, \226\136\131 y : B, P(x, y))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\128 x : A, TAGB(\226\136\131 y : B, P(x, y))) == (\226\136\131 y : (A) -> B, \226\136\128 x : A, P(x, y(x)))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\128 x : A, TAGB(\226\136\128 y : B, P(x, y))) == (\226\136\128 y : B, \226\136\128 x : A, P(x, y))
+  \226\136\128 P : (A, B) -> Bool, (\226\136\131 x : A, TAGB(\226\136\131 y : B, P(x, y))) == (\226\136\131 y : B, \226\136\131 x : A, P(x, y))
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : (_) -> Bool, (TAGB(\226\136\128 x : _, P(x)) && TAGB(\226\136\128 x : _, Q(x))) == (\226\136\128 x : _, P(x) && Q(x))
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : _, P(x)) && Q) == (\226\136\128 x : _, P(x) && Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (_) -> Bool, (P && TAGB(\226\136\128 x : _, Q(x))) == (\226\136\128 x : _, P && Q(x))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P) || TAGB(\226\136\128 x : A, Q)) == (\226\136\128 x : A, P || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P \226\134\146 TAGB(\226\136\128 x : A, Q(x))) == (\226\136\128 x : A, P \226\134\146 Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, (TAGB(\226\136\131 x : A, P(x)) || TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P(x) || Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P(x)) || Q) == (\226\136\131 x : A, P(x) || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P || TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P || Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P(x)) && Q) == (\226\136\131 x : A, P(x) && Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P && TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P && Q(x))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P) && TAGB(\226\136\131 x : A, Q)) == (\226\136\131 x : A, P && Q)
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P(x)) \226\134\146 Q) == (\226\136\128 x : A, P(x) \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\131 x : A, P) \226\134\146 TAGB(\226\136\128 x : A, Q)) == (\226\136\128 x : A, P \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P) \226\134\146 TAGB(\226\136\131 x : A, Q)) == (\226\136\131 x : A, P \226\134\146 Q)
+  \226\136\128 P : (A) -> Bool, !TAGB(\226\136\131 x : A, P(x)) == (\226\136\128 x : A, !P(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P(x)) || Q) == (\226\136\128 x : A, P(x) || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P || TAGB(\226\136\128 x : A, Q(x))) == (\226\136\128 x : A, P || Q(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, (TAGB(\226\136\128 x : A, P(x)) \226\134\146 Q) == (\226\136\131 x : A, P(x) \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, (P \226\134\146 TAGB(\226\136\131 x : A, Q(x))) == (\226\136\131 x : A, P \226\134\146 Q(x))
+  \226\136\128 P : (A) -> Bool, TAGB(\226\136\131 x : A, !P(x)) == !(\226\136\128 x : A, P(x))
+  \226\136\128 P : (A, B) -> Bool, TAGB(\226\136\128 x : A, \226\136\131 y : B, P(x, y)) == (\226\136\131 y : (A) -> B, \226\136\128 x : A, P(x, y(x)))
+  \226\136\128 P : (A, B) -> Bool, TAGB(\226\136\131 y : (A) -> B, \226\136\128 x : A, P(x, y(x))) == (\226\136\128 x : A, \226\136\131 y : B, P(x, y))
+  \226\136\128 P : (A, B) -> Bool, TAGB(\226\136\128 y : B, \226\136\128 x : A, P(x, y)) == (\226\136\128 x : A, \226\136\128 y : B, P(x, y))
+  \226\136\128 P : (A, B) -> Bool, TAGB(\226\136\131 y : B, \226\136\131 x : A, P(x, y)) == (\226\136\131 x : A, \226\136\131 y : B, P(x, y))
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : (_) -> Bool, TAGB(\226\136\128 x : _, P(x) && Q(x)) == ((\226\136\128 x : _, P(x)) && (\226\136\128 x : _, Q(x)))
+  \226\136\128 P : (_) -> Bool, \226\136\128 Q : Bool, TAGB(\226\136\128 x : _, P(x) && Q) == ((\226\136\128 x : _, P(x)) && Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (_) -> Bool, TAGB(\226\136\128 x : _, P && Q(x)) == (P && (\226\136\128 x : _, Q(x)))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, TAGB(\226\136\128 x : A, P || Q) == ((\226\136\128 x : A, P) || (\226\136\128 x : A, Q))
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, TAGB(\226\136\128 x : A, P \226\134\146 Q(x)) == (P \226\134\146 (\226\136\128 x : A, Q(x)))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, TAGB(\226\136\131 x : A, P(x) || Q(x)) == ((\226\136\131 x : A, P(x)) || (\226\136\131 x : A, Q(x)))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, TAGB(\226\136\131 x : A, P(x) || Q) == ((\226\136\131 x : A, P(x)) || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, TAGB(\226\136\131 x : A, P || Q(x)) == (P || (\226\136\131 x : A, Q(x)))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, TAGB(\226\136\131 x : A, P(x) && Q) == ((\226\136\131 x : A, P(x)) && Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, TAGB(\226\136\131 x : A, P && Q(x)) == (P && (\226\136\131 x : A, Q(x)))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, TAGB(\226\136\131 x : A, P && Q) == ((\226\136\131 x : A, P) && (\226\136\131 x : A, Q))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, TAGB(\226\136\128 x : A, P(x) \226\134\146 Q) == ((\226\136\131 x : A, P(x)) \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, TAGB(\226\136\128 x : A, P \226\134\146 Q) == ((\226\136\131 x : A, P) \226\134\146 (\226\136\128 x : A, Q))
+  \226\136\128 P : Bool, \226\136\128 Q : Bool, TAGB(\226\136\131 x : A, P \226\134\146 Q) == ((\226\136\128 x : A, P) \226\134\146 (\226\136\131 x : A, Q))
+  \226\136\128 P : (A) -> Bool, TAGB(\226\136\128 x : A, !P(x)) == !(\226\136\131 x : A, P(x))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, TAGB(\226\136\128 x : A, P(x) || Q) == ((\226\136\128 x : A, P(x)) || Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, TAGB(\226\136\128 x : A, P || Q(x)) == (P || (\226\136\128 x : A, Q(x)))
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : Bool, TAGB(\226\136\131 x : A, P(x) \226\134\146 Q) == ((\226\136\128 x : A, P(x)) \226\134\146 Q)
+  \226\136\128 P : Bool, \226\136\128 Q : (A) -> Bool, TAGB(\226\136\131 x : A, P \226\134\146 Q(x)) == (P \226\134\146 (\226\136\131 x : A, Q(x)))
+  (mark_term : (A) -> A)((u : A)) == u
+  \226\136\128 A : Bool, \226\136\128 u : A, \226\136\128 t : A, \226\136\128 B : Bool, (A \226\134\146 mark_term(u) == t \226\134\146 B) == (mark_term(u) == t \226\134\146 A \226\134\146 B)
+  \226\136\128 u : A, \226\136\128 t : A, \226\136\128 C : Bool, \226\136\128 D : Bool, (mark_term(u) == t && C \226\134\146 D) == (mark_term(u) == t \226\134\146 C \226\134\146 D)
+  \226\136\128 A : Bool, \226\136\128 u : A, \226\136\128 t : A, (A && mark_term(u) == t) == (mark_term(u) == t && A)
+  \226\136\128 u : A, \226\136\128 t : A, \226\136\128 A : Bool, \226\136\128 C : Bool, (A && mark_term(u) == t && C) == (mark_term(u) == t && A && C)
+  \226\136\128 u : A, \226\136\128 a : A, \226\136\128 b : A, \226\136\128 B : Bool, (mark_term(u) == a && mark_term(u) == b && B) == (mark_term(u) == a && a == b && B)
+  \226\136\128 u : A, \226\136\128 a : A, \226\136\128 b : A, (mark_term(u) == a && mark_term(u) == b) == (mark_term(u) == a && a == b)
+  \226\136\128 u : A, \226\136\128 t : A, (t == mark_term(u)) == (mark_term(u) == t)
+  \226\136\128 u : A, (mark_term(u) == mark_term(u)) == true
+  \226\136\128 A : Bool, \226\136\128 B : Bool, \226\136\128 C : Bool, ((A && B) && C) == (A && B && C)
+  \226\136\128 C : (A) -> Bool, \226\136\128 u : A, \226\136\128 t : A, (mark_term(u) == t && C(mark_term(u))) == (mark_term(u) == t && C(t))
+  \226\136\128 C : (A) -> Bool, \226\136\128 u : A, \226\136\128 t : A, (mark_term(u) == t \226\134\146 C(mark_term(u))) == (mark_term(u) == t \226\134\146 C(t))
+  \226\136\128 t : A, \226\136\131 u : A, u == t
+  \226\136\128 P : (A) -> B, \226\136\128 Q : (A) -> Bool, \226\136\128 R : (B) -> Bool, \226\136\131 u : B, (\226\136\131 x : A, u == P(x) && Q(x)) && R(u)
   TAGB
   TAGB
   TAGB
   TAGB
   TAGB
   TAGB
-  mark_term:A->A
-  mark_term:A->A
+  (mark_term : (A) -> A)
+  (mark_term : (A) -> A)
   TAGB
   TAGB
   TAGB
-  forall P Q R. (forall(t:B). (?(x:A). P x /\\ (t = Q x)) ==> R t)
+  \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> B, \226\136\128 R : (B) -> Bool, \226\136\128 t : B, (\226\136\131 x : A, P(x) && t == Q(x)) \226\134\146 R(t)
   TAGB
   TAGB
   TAGB
   TAGB
   TAGB
   TAGB
-  mark_term:A->A
-  mark_term:A->A
+  (mark_term : (A) -> A)
+  (mark_term : (A) -> A)
   TAGB
   TAGB
   TAGB
-  ?u v.\n     ((t * (a + &1) + (&1 - t) *a = u) /\\\n      (t * (b + &0) + (&1 - t) * b = v)) /\\\n     a < u /\\\n     u < r /\\\n     (v = b)
+  \226\136\131 u : Real, \226\136\131 v : Real, ((t : Real) * ((a : Real) + real_of_num(1)) + (real_of_num(1) - t) * a == u && t * ((b : Real) + real_of_num(0)) + (real_of_num(1) - t) * b == v) && a < u && u < (r : Real) && v == b
   TAGB
   TAGB
-  mark_term:A->A
-  mark_term:A->A
-  mark_term:A->A
+  (mark_term : (A) -> A)
+  (mark_term : (A) -> A)
+  (mark_term : (A) -> A)
   TAGB
   TAGB
   TAGB
-  (~q ==> ~p) ==> (p ==> q)
-  (a -. b=c) <=> (a  = b+.c)
-  &.(SUC x) - &.x = &.1
-  SUC b -| b = 1
-  SUC b -| 1 = b
-  0 <| 1
-  (i<=| j) /\\ (j <=| i) <=> (i = j)
-  0 -| i = 0
-  (j -| i = 0) <=> (j <=| i)
-  (0 = j -| i) <=> (j <=| i)
-  (0 = m +|n) <=> (m = 0)/\\ (n=0)
-  0+| m  = m
-  ((--. (&.1))*  x <= --. y <=> y <= x)
-  ((--. (&.1))*  x < --. y <=> y < x)
-  (--. x = --. y) <=> (x = y)
-  (--(&.n) < --.(&.m) + &.r) <=> ( (&.m) < &.n + (&.r))
-  (--. x = --. y) <=> (x = y)
-  ((&.n) < --.(&.m) + &.r) <=> ((&.n) + (&.m) < (&.r))
-  ((&.n) = --.(&.m)) <=> ((&.n) + (&.m) = (&.0))
-  ((&.n) <= --.(&.m)) <=> ((&.n) + (&.m) <=. (&.0))
-  ((&.n) < --.(&.m)) <=> ((&.n) + (&.m) <. (&.0))
-  (--. (&.n) = (&.m)) <=> ((&.n) + (&.m) = (&.0))
-  (--. (&.n) <= (&.m)) <=> (&.0 <= (&.n) + (&.m))
-  (--. (&.n) < (&.m)) <=> (&.0 < (&.n) + (&.m))
-  forall(a:real) b. (a - b + b) = a
-  forall(x:real). (--x = x) <=>  (x = &.0)
-  (y:real)pow 2
-   (x:real) pow 2
-  forall x y. (&.0 <= x) /\\ (&.0 <= y) /\\ (x pow 2 <=. y pow 2) ==> (x <=. y)
-  (y:real)pow 2
-   (x:real) pow 2
-  forall x y. (&.0 <= x) /\\ (&.0 <= y) /\\ (x pow 2 <. y pow 2) ==> (x <. y)
-   (a ==> b ==> C) ==> ( a /\\ b ==> C)
-  forall C a b v A R TX U SS. (A v /\\ (a = v) /\\  (C:num->num->bool) a b /\\ R a ==>\n    ?v v'. TX v' /\\ U v v' /\\  C v' v /\\ SS v)
-  T
-  (?x y. ((x:num) = y))
-  2 = 0+2
-  forall A B C D E. (A /\\ (A ==> B) /\\ (C ==>D) /\\ C) ==> (E \\/ C \\/ B)
+  (!(q : Bool) \226\134\146 !(p : Bool)) \226\134\146 p \226\134\146 q
+  ((a : Real) - (b : Real) == (c : Real)) == (a == b + c)
+  real_of_num(SUC((x : Num))) - real_of_num(x) == real_of_num(1)
+  SUC((b : Num)) - b == 1
+  SUC((b : Num)) - 1 == b
+  0 < 1
+  ((i : Num) <= (j : Num) && j <= i) == (i == j)
+  0 - (i : Num) == 0
+  ((j : Num) - (i : Num) == 0) == (j <= i)
+  (0 == (j : Num) - (i : Num)) == (j <= i)
+  (0 == (m : Num) + (n : Num)) == (m == 0 && n == 0)
+  0 + (m : Num) == m
+  (-real_of_num(1) * (x : Real) <= -(y : Real)) == (y <= x)
+  (-real_of_num(1) * (x : Real) < -(y : Real)) == (y < x)
+  (-(x : Real) == -(y : Real)) == (x == y)
+  (-real_of_num((n : Num)) < -real_of_num((m : Num)) + real_of_num((r : Num))) == (real_of_num(m) < real_of_num(n) + real_of_num(r))
+  (-(x : Real) == -(y : Real)) == (x == y)
+  (real_of_num((n : Num)) < -real_of_num((m : Num)) + real_of_num((r : Num))) == (real_of_num(n) + real_of_num(m) < real_of_num(r))
+  (real_of_num((n : Num)) == -real_of_num((m : Num))) == (real_of_num(n) + real_of_num(m) == real_of_num(0))
+  (real_of_num((n : Num)) <= -real_of_num((m : Num))) == (real_of_num(n) + real_of_num(m) <= real_of_num(0))
+  (real_of_num((n : Num)) < -real_of_num((m : Num))) == (real_of_num(n) + real_of_num(m) < real_of_num(0))
+  (-real_of_num((n : Num)) == real_of_num((m : Num))) == (real_of_num(n) + real_of_num(m) == real_of_num(0))
+  (-real_of_num((n : Num)) <= real_of_num((m : Num))) == (real_of_num(0) <= real_of_num(n) + real_of_num(m))
+  (-real_of_num((n : Num)) < real_of_num((m : Num))) == (real_of_num(0) < real_of_num(n) + real_of_num(m))
+  \226\136\128 a : Real, \226\136\128 b : Real, a - b + b == a
+  \226\136\128 x : Real, (-x == x) == (x == real_of_num(0))
+  pow((y : Real), 2)
+  pow((x : Real), 2)
+  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && pow(x, 2) <= pow(y, 2) \226\134\146 x <= y
+  pow((y : Real), 2)
+  pow((x : Real), 2)
+  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y && pow(x, 2) < pow(y, 2) \226\134\146 x < y
+  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (C : Bool)) \226\134\146 a && b \226\134\146 C
+  \226\136\128 C : (Num, Num) -> Bool, \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 v : Num, \226\136\128 A : (Num) -> Bool, \226\136\128 R : (Num) -> Bool, \226\136\128 TX : (Num) -> Bool, \226\136\128 U : (Num, Num) -> Bool, \226\136\128 SS : (Num) -> Bool, A(v) && a == v && C(a, b) && R(a) \226\134\146 (\226\136\131 v : Num, \226\136\131 v' : Num, TX(v') && U(v, v') && C(v', v) && SS(v))
+  true
+  \226\136\131 x : Num, \226\136\131 y : Num, x == y
+  2 == 0 + 2
+  \226\136\128 A : Bool, \226\136\128 B : Bool, \226\136\128 C : Bool, \226\136\128 D : Bool, \226\136\128 E : Bool, A && (A \226\134\146 B) && (C \226\134\146 D) && C \226\134\146 E || C || B
 pthm =  |- ((\x:'A. #T:bool) (#@:fun(fun('A,bool),'A) (\x:'A. #T:bool)))
 SELECT_EXIST =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A)))) (#forall:fun(fun('A,bool),bool) (\t:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) t:'A)) (Q:fun('A,bool) t:'A)))))) (Q:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool))))))))
 SELECT_THM =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\Q:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A)))) (#forall:fun(fun('A,bool),bool) (\t:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) t:'A)) (Q:fun('A,bool) t:'A)))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))) (#forall:fun(fun('A,bool),bool) (\t:'A. (Q:fun('A,bool) t:'A)))))) (Q:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool))))))))

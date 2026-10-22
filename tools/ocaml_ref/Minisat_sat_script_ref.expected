@@ -5518,17 +5518,17 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..0..solved at 3
 Minisat/sat_script quotations (11):
-  forall a b c. a /\\ b ==> c <=> a ==> b ==> c
-  forall a b c. a /\\ b ==> c <=> (a<=>T) ==> b ==> c
-  forall a b c. ~a /\\ b ==> c <=> (a<=>F) ==> b ==> c
-  forall a. (~a /\\ a) <=> F
-  forall a. a ==> ~a ==> F
-  (~(a \\/ b) ==> F) = (~a ==> ~b ==> F)
-  (~(a \\/ b) ==> F) = ((a==>F) ==> ~b ==> F)
-  (~(~a \\/ b) ==> F) = (a ==> ~b ==> F)
-  (~a ==> F) ==> (a==>F) ==> F
-  (~a ==> F) <=> a
-  forall t. (t ==> F) <=> (t <=> F)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, \226\136\128 c : Bool, (a && b \226\134\146 c) == (a \226\134\146 b \226\134\146 c)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, \226\136\128 c : Bool, (a && b \226\134\146 c) == (a == true \226\134\146 b \226\134\146 c)
+  \226\136\128 a : Bool, \226\136\128 b : Bool, \226\136\128 c : Bool, (!a && b \226\134\146 c) == (a == false \226\134\146 b \226\134\146 c)
+  \226\136\128 a : Bool, (!a && a) == false
+  \226\136\128 a : Bool, a \226\134\146 !a \226\134\146 false
+  (!((a : Bool) || (b : Bool)) \226\134\146 false) == (!a \226\134\146 !b \226\134\146 false)
+  (!((a : Bool) || (b : Bool)) \226\134\146 false) == ((a \226\134\146 false) \226\134\146 !b \226\134\146 false)
+  (!(!(a : Bool) || (b : Bool)) \226\134\146 false) == (a \226\134\146 !b \226\134\146 false)
+  (!(a : Bool) \226\134\146 false) \226\134\146 (a \226\134\146 false) \226\134\146 false
+  (!(a : Bool) \226\134\146 false) == a
+  \226\136\128 t : Bool, (t \226\134\146 false) == (t == false)
 AND_IMP =  |- (#forall:fun(fun(bool,bool),bool) (\a:bool. (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun(bool,bool),bool) (\c:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#==>:fun(bool,fun(bool,bool)) a:bool) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool)))))))))
 AND_IMP2 =  |- (#forall:fun(fun(bool,bool),bool) (\a:bool. (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun(bool,bool),bool) (\c:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) #T:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool)))))))))
 AND_IMP3 =  |- (#forall:fun(fun(bool,bool),bool) (\a:bool. (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun(bool,bool),bool) (\c:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) a:bool)) b:bool)) c:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) #F:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool)))))))))
