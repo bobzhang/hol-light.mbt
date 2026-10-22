@@ -3,84 +3,84 @@ Formal_ineqs/arith/arith_num quotations (82):
   NUMERAL
   BIT0
   BIT1
-  _0 + n = n
-  n + _0 = n
-  _0 = 0
-  n * _0 = 0
+  _0 + (n : Num) == n
+  (n : Num) + _0 == n
+  _0 == 0
+  (n : Num) * _0 == 0
   MOD
-  0 = _0
-  SUC _0
-  n = _0
+  0 == _0
+  SUC(_0)
+  (n : Num) == _0
   _0
-  n = _0
+  (n : Num) == _0
   _0
-  _0 = _0 <=> T
-  a + b = 0 <=> a = 0 /\\ b = 0
-  PRE _0 = _0
+  (_0 == _0) == true
+  ((a : Num) + (b : Num) == 0) == (a == 0 && b == 0)
+  PRE(_0) == _0
   _0
   _0
   PRE
   _0
-  n:num
+  (n : Num)
   PRE
-  n = _0 <=> T
-  PRE n
-  n:num
+  ((n : Num) == _0) == true
+  PRE((n : Num))
+  (n : Num)
   PRE
-  n = 0 <=> F
-  ((n = 0) <=> F) ==> (SUC m = n <=> PRE n = m)
+  ((n : Num) == 0) == false
+  ((n : Num) == 0) == false \226\134\146 (SUC((m : Num)) == n) == (PRE(n) == m)
   _0
-  0 < NUMERAL n <=> _0 < n
-  _0 < _0 <=> F
-  0 < n
+  (0 < NUMERAL((n : Num))) == (_0 < n)
+  (_0 < _0) == false
+  0 < (n : Num)
   0
-  NUMERAL m = NUMERAL n <=> m = n
-  m * b + i = n * b + j:num
-  i DIV b = 0 /\\ j DIV b = 0
-  \\x. x DIV b
-  ~(b = 0)
-  b * m + i = b * n + j <=> m * b + i = n * b + j:num
-  i < b /\\ j < b /\\ ~(i = j) ==> ~(b * m + i = b * n + j:num)
-  SUC m = SUC n <=> m = n
-  0 = n <=> n = 0
-  NUMERAL m < NUMERAL n <=> m < n
-  NUMERAL m <= NUMERAL n <=> m <= n
-  _0 = 0
-  n < _0 <=> F
-  _0 = 0
-  _0 <= n <=> T
-  SUC m < SUC n <=> m < n
-  SUC m <= SUC n <=> m <= n
-  0 < n
-  n <= 0
-  NUMERAL m + NUMERAL n = NUMERAL (m + n)
-  SUC (_0 + n) = SUC n
-  SUC (n + _0) = SUC n
-  SUC(m + n) = m + SUC n
-  n + t = m ==> m - n = t:num
-  m + t = n ==> m - n = 0
-  n + t = m ==> n <= m:num
-  _0 * n = _0
-  m * SUC(n) = m * n + m
-  m = q * n + r <=> q * n + r = m:num
-  a < b <=> (a < b:num <=> T)
+  (NUMERAL((m : Num)) == NUMERAL((n : Num))) == (m == n)
+  (m : Num) * (b : Num) + (i : Num) == (n : Num) * b + (j : Num)
+  DIV((i : Num), (b : Num)) == 0 && DIV((j : Num), b) == 0
+  (x : Num) => DIV(x, (b : Num))
+  !((b : Num) == 0)
+  ((b : Num) * (m : Num) + (i : Num) == b * (n : Num) + (j : Num)) == (m * b + i == n * b + j)
+  (i : Num) < (b : Num) && (j : Num) < b && !(i == j) \226\134\146 !(b * (m : Num) + i == b * (n : Num) + j)
+  (SUC((m : Num)) == SUC((n : Num))) == (m == n)
+  (0 == (n : Num)) == (n == 0)
+  (NUMERAL((m : Num)) < NUMERAL((n : Num))) == (m < n)
+  (NUMERAL((m : Num)) <= NUMERAL((n : Num))) == (m <= n)
+  _0 == 0
+  ((n : Num) < _0) == false
+  _0 == 0
+  (_0 <= (n : Num)) == true
+  (SUC((m : Num)) < SUC((n : Num))) == (m < n)
+  (SUC((m : Num)) <= SUC((n : Num))) == (m <= n)
+  0 < (n : Num)
+  (n : Num) <= 0
+  NUMERAL((m : Num)) + NUMERAL((n : Num)) == NUMERAL(m + n)
+  SUC(_0 + (n : Num)) == SUC(n)
+  SUC((n : Num) + _0) == SUC(n)
+  SUC((m : Num) + (n : Num)) == m + SUC(n)
+  (n : Num) + (t : Num) == (m : Num) \226\134\146 m - n == t
+  (m : Num) + (t : Num) == (n : Num) \226\134\146 m - n == 0
+  (n : Num) + (t : Num) == (m : Num) \226\134\146 n <= m
+  _0 * (n : Num) == _0
+  (m : Num) * SUC((n : Num)) == m * n + m
+  ((m : Num) == (q : Num) * (n : Num) + (r : Num)) == (q * n + r == m)
+  ((a : Num) < (b : Num)) == ((a < b) == true)
   EVEN
   ODD
-  <=>
-  EVEN (NUMERAL n) <=> EVEN n
-  ODD (NUMERAL n) <=> ODD n
-  EVEN _0 <=> T
-  ODD _0 <=> F
-  T
-  n:num
+  (op_eq : (Bool, Bool) -> Bool)
+  EVEN(NUMERAL((n : Num))) == EVEN(n)
+  ODD(NUMERAL((n : Num))) == ODD(n)
+  EVEN(_0) == true
+  ODD(_0) == false
+  true
+  (n : Num)
   EVEN
-  F
-  n:num
+  false
+  (n : Num)
   ODD
-  (EVEN (SUC n) <=> T) <=> (EVEN n <=> F)
-  (EVEN (SUC n) <=> F) <=> (EVEN n <=> T)
-  (ODD (SUC n) <=> T) <=> (ODD n <=> F)
-  (ODD (SUC n) <=> F) <=> (ODD n <=> T)
+  (EVEN(SUC((n : Num))) == true) == (EVEN(n) == false)
+  (EVEN(SUC((n : Num))) == false) == (EVEN(n) == true)
+  (ODD(SUC((n : Num))) == true) == (ODD(n) == false)
+  (ODD(SUC((n : Num))) == false) == (ODD(n) == true)
 Arith_num.num_def =  |- ((#=:fun(fun(num,num),fun(fun(num,num),bool)) #NUM200:fun(num,num)) #NUMERAL:fun(num,num))
 Arith_num.NUM_THM =  |- ((#=:fun(num,fun(num,bool)) (#NUM200:fun(num,num) n:num)) n:num)
 types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
