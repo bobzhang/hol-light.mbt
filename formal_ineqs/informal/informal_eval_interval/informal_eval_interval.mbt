@@ -432,7 +432,7 @@ pub fn eval_constants(x : Int64) -> ((IntervalFun) -> IntervalFun raise) raise {
 ///|
 /// build_interval_fun
 fn step_6() -> Unit raise {
-  let amp_op_real = @parser.parse_term("(&):num -> real")
+  let amp_op_real = @term_syntax.parse_term("real_of_num")
   fn rec_build(x62 : @kernel.Term) -> IntervalFun raise {
     let expr_tm = x62
     if @kernel.is_const(expr_tm) {
