@@ -114467,8 +114467,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|61 basis elements and 0 critical pairs
       #|Generating HOL version of proof
       #|WZ/examples quotations (33048):
-      #|  n:num
-      #|  sum (0..n) (\\k. &(binom (n,k)) / &2 spow &n)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) / spow(real_of_num(2), real_of_num(n)))
       #|  :real
       #|  :real
       #|  :real
@@ -114697,8 +114697,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 / &(binom (2 * n,n)))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) / real_of_num(binom((2 * n, n))))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -115137,9 +115137,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) * &(binom (m,k + p)) /\n              &(binom (n + m,n + p)))
-      #|  &p <= &m
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(binom(((m : Num), k + (p : Num)))) / real_of_num(binom((n + m, n + p)))))
+      #|  real_of_num((p : Num)) <= real_of_num((m : Num))
       #|  :real
       #|  :real
       #|  :real
@@ -115499,8 +115499,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n + 1)\n         (\\k. &(binom (n + 1,k + 1)) * (&k + &1) * (&k + &1) *\n              &(FACT k) / (&n + &1) spow (&k + &1))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(binom((n + 1, k + 1))) * ((real_of_num(k) + real_of_num(1)) * ((real_of_num(k) + real_of_num(1)) * (real_of_num(FACT(k)) / spow(real_of_num(n) + real_of_num(1), real_of_num(k) + real_of_num(1))))))
       #|  :real
       #|  (/):real->real->real
       #|  (-):real->real->real
@@ -115833,8 +115833,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (-- &1 spow &k * &(binom (n,k)) *\n               &(binom (2 * k,k)) * &4 spow &n / &4 spow &k) /\n              &(binom (2 * n,n)))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((2 * k, k))) * (spow(real_of_num(4), real_of_num(n)) / spow(real_of_num(4), real_of_num(k))))) / real_of_num(binom((2 * n, n))))
       #|  :real
       #|  (pow):real->num->real
       #|  ( * ):real->real->real
@@ -116442,8 +116442,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n + 1) (\\k. -- &1 spow &k * &(binom (n + 1,k)))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * real_of_num(binom((n + 1, k))))
       #|  :real
       #|  :real
       #|  (+):real->real->real
@@ -116638,8 +116638,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n + k,k)) pow 2 * &(binom (n,k)) pow 2)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n + k, k))), 2) * pow(real_of_num(binom((n, k))), 2))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -117441,8 +117441,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..2 * n)\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) pow 3) /\n              (-- &1 spow &n * &(FACT (3 * n)) / &(FACT n) pow 3))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, 2 * (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * pow(real_of_num(binom((2 * n, k))), 3) / (spow(-real_of_num(1), real_of_num(n)) * (real_of_num(FACT(3 * n)) / pow(real_of_num(FACT(n)), 3))))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -119145,8 +119145,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n) (\\k. &(binom (n,k)) pow 3)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 3))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -119955,8 +119955,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (&1 - &2 * &n) *\n              (-- &1 spow &k * &(binom (n,k)) * &4 spow &k) /\n              &(binom (2 * k,k)))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(1) - real_of_num(2) * real_of_num(n)) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * spow(real_of_num(4), real_of_num(k))) / real_of_num(binom((2 * k, k)))))
       #|  :real
       #|  (/):real->real->real
       #|  (-):real->real->real
@@ -120354,8 +120354,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (n,k)) / &(FACT k))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) / real_of_num(FACT(k))))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -120773,8 +120773,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum UNIV\n         (\\k. -- &1 spow &k *\n              (&(binom (a + n,a + k)) * &(binom (a + c,c + k)) *\n               &(binom (n + c,n + k))) /\n              (&(FACT (a + n + c)) /\n               (&(FACT a) * &(FACT n) * &(FACT c))))
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom(((a : Num) + (n : Num), a + k))) * (real_of_num(binom((a + (c : Num), c + k))) * real_of_num(binom((n + c, n + k)))) / (real_of_num(FACT(a + (n + c))) / (real_of_num(FACT(a)) * (real_of_num(FACT(n)) * real_of_num(FACT(c)))))))
       #|  :real
       #|  :real
       #|  (+):real->real->real
@@ -121386,8 +121386,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum UNIV\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) pow 2) /\n              (-- &1 spow &n * &(binom (2 * n,n))))
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * pow(real_of_num(binom((2 * (n : Num), k))), 2) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((2 * n, n)))))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -122141,8 +122141,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n + 1)\n         (\\k. &k * &(binom (n + 1,k)) /\n              ((&n + &1) * &2 spow &n))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(k) * (real_of_num(binom((n + 1, k))) / ((real_of_num(n) + real_of_num(1)) * spow(real_of_num(2), real_of_num(n)))))
       #|  :real
       #|  (-):real->real->real
       #|  :real
@@ -122556,8 +122556,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n + 1)\n         (\\k. &(binom (n + 1 + k,2 * k)) * &(binom (2 * k,k)) *\n              -- &1 spow &k / (&k + &1))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(binom((n + (1 + k), 2 * k))) * (real_of_num(binom((2 * k, k))) * (spow(-real_of_num(1), real_of_num(k)) / (real_of_num(k) + real_of_num(1)))))
       #|  :real
       #|  :real
       #|  (+):real->real->real
@@ -123078,8 +123078,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum UNIV\n         (\\k. ((&n + &2) / (&2 * &k + &1)) *\n              &(binom (n,2 * k)) * &2 spow (&n - &2 * &k - &1) *\n              &(binom (2 * k + 1,k)) / &(binom (2 * n + 1,n)))
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => (real_of_num((n : Num)) + real_of_num(2)) / (real_of_num(2) * real_of_num(k) + real_of_num(1)) * (real_of_num(binom((n, 2 * k))) * (spow(real_of_num(2), real_of_num(n) - real_of_num(2) * real_of_num(k) - real_of_num(1)) * (real_of_num(binom((2 * k + 1, k))) / real_of_num(binom((2 * n + 1, n)))))))
       #|  :real
       #|  :real
       #|  (+):real->real->real
@@ -124266,8 +124266,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum UNIV\n         (\\k. &(binom (2 * n + 1,2 * k)) *\n              &3 spow &k / &2 spow &n)
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => real_of_num(binom((2 * (n : Num) + 1, 2 * k))) * (spow(real_of_num(3), real_of_num(k)) / spow(real_of_num(2), real_of_num(n))))
       #|  :real
       #|  :real
       #|  ( * ):real->real->real
@@ -125702,8 +125702,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 * &(binom (2 * k,n)))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * real_of_num(binom((2 * k, n))))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -126507,9 +126507,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (n,k)) *\n              &(binom (n + x,n)) * &x / (&k + &x))
-      #|  ~(&x = &0)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((n + (x : Num), n))) * (real_of_num(x) / (real_of_num(k) + real_of_num(x))))))
+      #|  !(real_of_num((x : Num)) == real_of_num(0))
       #|  :real
       #|  :real
       #|  :real
@@ -126849,8 +126849,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) * &(FACT k) * &(FACT k))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(FACT(k)) * real_of_num(FACT(k))))
       #|  :real
       #|  (+):real->real->real
       #|  :real
@@ -127236,9 +127236,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) * x spow &k / (x + &1) spow &n)
-      #|  ~(x + &1 = &0)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (spow((x : Real), real_of_num(k)) / spow(x + real_of_num(1), real_of_num(n))))
+      #|  !((x : Real) + real_of_num(1) == real_of_num(0))
       #|  :real
       #|  :real
       #|  :real
@@ -127488,9 +127488,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n) (\\k. &(binom (n,2 * k)) * &2 / &2 spow &n)
-      #|  ~(n = 0)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, 2 * k))) * (real_of_num(2) / spow(real_of_num(2), real_of_num(n))))
+      #|  !((n : Num) == 0)
       #|  :real
       #|  :real
       #|  ( * ):real->real->real
@@ -127853,8 +127853,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k + 1)) /\n              &2 spow (&2 * &n + &1))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k + 1))) / spow(real_of_num(2), real_of_num(2) * real_of_num(n) + real_of_num(1)))
       #|  :real
       #|  :real
       #|  ( * ):real->real->real
@@ -128741,8 +128741,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (&(binom (n,2 * k)) * &(binom (2 * k,k)) *\n               &2 spow &n) /\n              (&4 spow &k * &(binom (2 * n,n))))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, 2 * k))) * (real_of_num(binom((2 * k, k))) * spow(real_of_num(2), real_of_num(n))) / (spow(real_of_num(4), real_of_num(k)) * real_of_num(binom((2 * n, n)))))
       #|  :real
       #|  (pow):real->num->real
       #|  ( * ):real->real->real
@@ -129418,9 +129418,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 * &(binom (p + k,2 * n)) /\n              &(binom (p,n)) pow 2)
-      #|  n:num < p
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * (real_of_num(binom(((p : Num) + k, 2 * n))) / pow(real_of_num(binom((p, n))), 2)))
+      #|  (n : Num) < (p : Num)
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -130191,8 +130191,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n) (\\k. &(binom (n,k)) pow 4)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 4))
       #|  :real
       #|  (pow):real->num->real
       #|  :real
@@ -132186,8 +132186,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. ((&2 * &n + &1) / &4 spow &n) *\n              &(binom (2 * n,n)) * -- &1 spow &k *\n              &(binom (n,k)) * &2 spow &k / (&2 * &k + &1))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(2) * real_of_num(n) + real_of_num(1)) / spow(real_of_num(4), real_of_num(n)) * (real_of_num(binom((2 * n, n))) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (spow(real_of_num(2), real_of_num(k)) / (real_of_num(2) * real_of_num(k) + real_of_num(1)))))))
       #|  :real
       #|  :real
       #|  ( * ):real->real->real
@@ -133260,8 +133260,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (&n + &m + &1) * &(binom (n + m,m)) *\n              -- &1 spow &k * &(binom (n,k)) / (&m + &k + &1))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(n) + (real_of_num((m : Num)) + real_of_num(1))) * (real_of_num(binom((n + m, m))) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) / (real_of_num(m) + (real_of_num(k) + real_of_num(1)))))))
       #|  :real
       #|  :real
       #|  :real
@@ -133277,8117 +133277,6 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (+):real->real->real
       #|  :real
       #|  (+):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  real_of_num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (&(binom (2 * n + 1,2 * k)) *\n               &(binom (2 * k,k)) / &4 spow &k) /\n              (&(binom (4 * n + 1,2 * n)) / &4 spow &n))
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (n,k)) * &(binom (k,j)) /\n              (&(binom (n,j)) * &2 spow (&n - &j)))
-      #|  j:num <= n
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  real_of_num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (-- &1 spow (&n - &k) * &4 spow &k *\n               &(binom (n + k + 1,2 * k + 1))) / (&n + &1))
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. -- &1 spow (&k + &d) * &(binom (d,k)) *\n              &(binom (n + k,p + k)) / &(binom (n,p + d)))
-      #|  p + d:num <= n
-      #|  :real
-      #|  :real
-      #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  real_of_num
-      #|  :num
-      #|  real_of_num
-      #|  :real
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum UNIV\n         (\\k. &(binom (p,k)) * &(binom (q,k)) *\n              &(binom (n + k,p + q)) /\n              (&(binom (n,p)) * &(binom (n,q))))
-      #|  q:num <= n
-      #|  p:num <= n
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  real_of_num
-      #|  :num
-      #|  real_of_num
-      #|  :real
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k)) *\n              &(binom (m + k,2 * n)) /\n              &(binom (2 * m + 1,2 * n)))
-      #|  n:num < m
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  real_of_num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum UNIV\n         (\\k. -- &1 spow (&k + &1) *\n              &(binom (n,k + 1)) / (&k + &1))
-      #|  ~(&n = &0)
-      #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (/):real->real->real
-      #|  :real
-      #|  (+):real->real->real
-      #|  :real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (2 * n + 1,2 * k)))
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (pow):real->num->real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k + 1)) * &k /\n              ((&2 * &n - &1) * &4 spow (&n - &1)))
-      #|  :real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  :real
-      #|  (/):real->real->real
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  :num
-      #|  :real
-      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  Im z
-      #|  Re z
-      #|  z:complex
-      #|  :real
-      #|  ~ratty e (n,k)
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  real_inv
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &0
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  &55
-      #|  &0
-      #|  &3 / &4
-      #|  -- &99 / &12
-      #|  &7 / &44
-      #|  &1 / &12345
-      #|  n:num
-      #|  sum (:num)\n         (\\k. (-- &1 spow &k * &(binom (x,k)) *\n               rbinom (&x,&2 * &n - &k)) /\n              (-- &1 spow &n * &(binom (x,n))))
-      #|  n:num < x
-      #|  :real
-      #|  :real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
       #|  (/):real->real->real
       #|  :num
       #|  :real
@@ -141750,6 +133639,8117 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  real_inv
       #|  real_inv
       #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k))) * (real_of_num(binom((2 * k, k))) / spow(real_of_num(4), real_of_num(k))) / (real_of_num(binom((4 * n + 1, 2 * n))) / spow(real_of_num(4), real_of_num(n))))
+      #|  :real
+      #|  (pow):real->num->real
+      #|  :real
+      #|  (pow):real->num->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(binom((k, (j : Num)))) / (real_of_num(binom((n, j))) * spow(real_of_num(2), real_of_num(n) - real_of_num(j)))))
+      #|  (j : Num) <= (n : Num)
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  real_of_num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(n) - real_of_num(k)) * (spow(real_of_num(4), real_of_num(k)) * real_of_num(binom((n + (k + 1), 2 * k + 1)))) / (real_of_num(n) + real_of_num(1)))
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  (+):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k) + real_of_num((d : Num))) * (real_of_num(binom((d, k))) * (real_of_num(binom((n + k, (p : Num) + k))) / real_of_num(binom((n, p + d))))))
+      #|  (p : Num) + (d : Num) <= (n : Num)
+      #|  :real
+      #|  :real
+      #|  :real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  (+):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (-):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  real_of_num
+      #|  :num
+      #|  real_of_num
+      #|  :real
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => real_of_num(binom(((p : Num), k))) * (real_of_num(binom(((q : Num), k))) * (real_of_num(binom(((n : Num) + k, p + q))) / (real_of_num(binom((n, p))) * real_of_num(binom((n, q)))))))
+      #|  (q : Num) <= (n : Num)
+      #|  (p : Num) <= (n : Num)
+      #|  :real
+      #|  (pow):real->num->real
+      #|  :real
+      #|  (+):real->real->real
+      #|  (pow):real->num->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  real_of_num
+      #|  :num
+      #|  real_of_num
+      #|  :real
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k))) * (real_of_num(binom(((m : Num) + k, 2 * n))) / real_of_num(binom((2 * m + 1, 2 * n)))))
+      #|  (n : Num) < (m : Num)
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  (-):real->real->real
+      #|  :real
+      #|  (-):real->real->real
+      #|  :real
+      #|  (pow):real->num->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  (+):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (-):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  real_of_num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k) + real_of_num(1)) * (real_of_num(binom(((n : Num), k + 1))) / (real_of_num(k) + real_of_num(1))))
+      #|  !(real_of_num((n : Num)) == real_of_num(0))
+      #|  :real
+      #|  (+):real->real->real
+      #|  (pow):real->num->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (/):real->real->real
+      #|  :real
+      #|  (+):real->real->real
+      #|  :real
+      #|  (+):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * real_of_num(binom((2 * n + 1, 2 * k))))
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  (pow):real->num->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  (pow):real->num->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  (+):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (pow):real->num->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k + 1))) * (real_of_num(k) / ((real_of_num(2) * real_of_num(n) - real_of_num(1)) * spow(real_of_num(4), real_of_num(n) - real_of_num(1)))))
+      #|  :real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  (pow):real->num->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :real
+      #|  (/):real->real->real
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &0
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  (n : Num)
+      #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom(((x : Num), k))) * rbinom((real_of_num(x), real_of_num(2) * real_of_num((n : Num)) - real_of_num(k)))) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((x, n)))))
+      #|  (n : Num) < (x : Num)
+      #|  :real
+      #|  :real
+      #|  (+):real->real->real
+      #|  :real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  (-):real->real->real
+      #|  :real
+      #|  (+):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  ( * ):real->real->real
+      #|  :real
+      #|  (-):real->real->real
+      #|  (+):real->real->real
+      #|  :real
+      #|  :real
+      #|  (-):real->real->real
+      #|  ( * ):real->real->real
+      #|  ( * ):real->real->real
+      #|  (/):real->real->real
+      #|  (/):real->real->real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  :real
+      #|  :num
+      #|  real_of_num
+      #|  :real
+      #|  ~(m = n) <=> m + 1 <= n \\/ n + 1 <= m
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  Im z
+      #|  Re z
+      #|  z:complex
+      #|  :real
+      #|  ~ratty e (n,k)
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  &55
+      #|  &0
+      #|  &3 / &4
+      #|  -- &99 / &12
+      #|  &7 / &44
+      #|  &1 / &12345
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
+      #|  real_inv
       #|  real_inv
       #|  real_inv
       #|  real_inv
@@ -142040,9 +142040,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (&n * -- &1 spow &k * &(binom (n,k)) *\n               &(binom (n + k,k)) * &4 spow &k) /\n              (-- &1 spow &n * &(binom (2 * k,k)) *\n               (&n + &k)))
-      #|  0 < n
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(n) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((n + k, k))) * spow(real_of_num(4), real_of_num(k))))) / (spow(-real_of_num(1), real_of_num(n)) * (real_of_num(binom((2 * k, k))) * (real_of_num(n) + real_of_num(k)))))
+      #|  0 < (n : Num)
       #|  :real
       #|  :real
       #|  ( * ):real->real->real
@@ -142683,8 +142683,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..2 * n)\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) *\n               &(binom (2 * n + 2 * k,n + k)) *\n               &2 spow (&2 * &n - &k)) /\n              &(binom (2 * n,n)))
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, 2 * (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((2 * n, k))) * (real_of_num(binom((2 * n + 2 * k, n + k))) * spow(real_of_num(2), real_of_num(2) * real_of_num(n) - real_of_num(k)))) / real_of_num(binom((2 * n, n))))
       #|  :real
       #|  :real
       #|  (+):real->real->real
@@ -145724,9 +145724,9 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (-- &1 spow &k * &(binom (n,k)) *\n               &(binom (x + k,r + k))) /\n              (-- &1 spow &n * &(binom (x,n + r))))
-      #|  n + r:num < x
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * real_of_num(binom(((x : Num) + k, (r : Num) + k)))) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((x, n + r)))))
+      #|  (n : Num) + (r : Num) < (x : Num)
       #|  :real
       #|  :real
       #|  :real
@@ -146188,8 +146188,8 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  -- &99 / &12
       #|  &7 / &44
       #|  &1 / &12345
-      #|  n:num
-      #|  sum (0..n)\n         (\\k. (&(binom (n,k)) pow 2 *\n               &(binom (3 * n + k,2 * n))) /\n              &(binom (3 * n,n)) pow 2)
+      #|  (n : Num)
+      #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * real_of_num(binom((3 * n + k, 2 * n))) / pow(real_of_num(binom((3 * n, n))), 2))
       #|  :real
       #|  (pow):real->num->real
       #|  :real

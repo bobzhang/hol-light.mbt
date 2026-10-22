@@ -3,7 +3,7 @@
 ///|
 /// neq
 fn step_1() -> Unit raise {
-  neq_c.set(@parser.parse_term("(=):num->num->bool"))
+  neq_c.set(@term_syntax.parse_term("(op_eq : (Num, Num) -> Bool)"))
 }
 
 ///|
@@ -108,7 +108,7 @@ pub fn np() -> @kernel.Term {
 ///|
 /// nzero
 fn step_8() -> Unit raise {
-  nzero_c.set(@parser.parse_term("0"))
+  nzero_c.set(@term_syntax.parse_term("0"))
 }
 
 ///|
@@ -123,7 +123,7 @@ pub fn nzero() -> @kernel.Term {
 ///|
 /// even_tm
 fn step_9() -> Unit raise {
-  even_tm_v1_c.set(@parser.parse_term("EVEN"))
+  even_tm_v1_c.set(@term_syntax.parse_term("EVEN"))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn even_tm_v1() -> @kernel.Term {
 ///|
 /// odd_tm
 fn step_10() -> Unit raise {
-  odd_tm_v1_c.set(@parser.parse_term("ODD"))
+  odd_tm_v1_c.set(@term_syntax.parse_term("ODD"))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn odd_tm_v1() -> @kernel.Term {
 ///|
 /// nmax
 fn step_11() -> Unit raise {
-  nmax_c.set(@pair.new_definition(@parser.parse_term("nmax (n:num) m = if n <= m then m else n")))
+  nmax_c.set(@pair.new_definition(@term_syntax.parse_term("(nmax : (Num, Num) -> Num)((n : Num), (m : Num)) == (if n <= m { m } else { n })")))
 }
 
 ///|
@@ -168,7 +168,7 @@ pub fn nmax() -> @kernel.Thm {
 ///|
 /// SUC_1
 fn step_12() -> Unit raise {
-  suc_1_c.set(@tactics.prove(@parser.parse_term("1 + x = SUC x"), @int.arith_tac))
+  suc_1_c.set(@tactics.prove(@term_syntax.parse_term("1 + (x : Num) == SUC(x)"), @int.arith_tac))
 }
 
 ///|
@@ -183,7 +183,7 @@ pub fn suc_1() -> @kernel.Thm {
 ///|
 /// even_tm
 fn step_13() -> Unit raise {
-  even_tm_c.set(@parser.parse_term("EVEN"))
+  even_tm_c.set(@term_syntax.parse_term("EVEN"))
 }
 
 ///|
@@ -198,7 +198,7 @@ pub fn even_tm() -> @kernel.Term {
 ///|
 /// odd_tm
 fn step_14() -> Unit raise {
-  odd_tm_c.set(@parser.parse_term("ODD"))
+  odd_tm_c.set(@term_syntax.parse_term("ODD"))
 }
 
 ///|

@@ -15958,33 +15958,33 @@ test "Tutorial/Vectors matches Tutorial/Vectors.ml" {
       #|0..0..5..10..30..71..153..266..420..622..990..1428..2454..3934..6403..9940..17611..solved at 25572
       #|0..0..6..12..solved at 28
       #|Tutorial/Vectors quotations (27):
-      #|  orthogonal (A - B) (C - B)\n   ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2
-      #|  forall x y:real^N. x dot y <= norm x * norm y
-      #|  1 <= i /\\ i <= 3 <=> (i = 1) \\/ (i = 2) \\/ (i = 3)
-      #|  (forall i. 1 <= i /\\ i <= 3 ==> P i) <=> P 1 /\\ P 2 /\\ P 3
+      #|  orthogonal((A : Cart[Real, _]) - (B : Cart[Real, _]), (C : Cart[Real, _]) - B) \226\134\146 pow(norm(C - A), 2) == pow(norm(B - A), 2) + pow(norm(C - B), 2)
+      #|  \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], dot(x, y) <= norm(x) * norm(y)
+      #|  (1 <= (i : Num) && i <= 3) == (i == 1 || i == 2 || i == 3)
+      #|  (\226\136\128 i : Num, 1 <= i && i <= 3 \226\134\146 (P : (Num) -> Bool)(i)) == (P(1) && P(2) && P(3))
       #|  2
       #|  3
-      #|  forall t. sum(1..3) t = t(1) + t(2) + t(3)
+      #|  \226\136\128 t : (Num) -> Real, sum(op_dot_dot(1, 3), t) == t(1) + (t(2) + t(3))
       #|  1
       #|  2
-      #|  (vector [x;y;z] :real^3)$1 = x /\\\n   (vector [x;y;z] :real^3)$2 = y /\\\n   (vector [x;y;z] :real^3)$3 = z
-      #|  (vector [x1;y1;z1] :real^3) dot (vector [x2;y2;z2]) =\n       x1 * x2 + y1 * y2 + z1 * z2
-      #|  (vector [x;y;z] :real^3 = vec 0) <=> x = &0 /\\ y = &0 /\\ z = &0
-      #|  orthogonal (vector [x1;y1;z1] :real^3) (vector [x2;y2;z2]) =\n        (x1 * x2 + y1 * y2 + z1 * z2 = &0)
-      #|  (a:real^3) cross (b:real^3) =\n    vector [a$2 * b$3 - a$3 * b$2;\n            a$3 * b$1 - a$1 * b$3;\n            a$1 * b$2 - a$2 * b$1] :real^3
-      #|  forall x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n        orthogonal x (x cross y) /\\ orthogonal y (x cross y)
-      #|  ~(basis 1 :real^3 = vec 0) /\\\n  ~(basis 2 :real^3 = vec 0) /\\\n  ~(basis 3 :real^3 = vec 0)
-      #|  forall u v. u dot (u cross v) = &0
-      #|  forall u v. v dot (u cross v) = &0
-      #|  forall u:real^3. vec 0 dot u = &0
-      #|  forall u:real^3. u dot vec 0 = &0
-      #|  forall x. x cross x = vec 0
-      #|  forall u. ~(u = vec 0)\n      ==> ~(u cross basis 1 = vec 0) \\/\n          ~(u cross basis 2 = vec 0) \\/\n          ~(u cross basis 3 = vec 0)
-      #|  forall u v w. (u cross v = vec 0) ==> (u dot (v cross w) = &0)
-      #|  u cross v = vec 0
-      #|  v:real^3 = vec 0
-      #|  u:real^3 = vec 0
-      #|  forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w
+      #|  (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x : Real), (y : Real), (z : Real)]), 1) == x && (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([x, y, z]), 2) == y && (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([x, y, z]), 3) == z
+      #|  (dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (y1 : Real), (z1 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x2 : Real), (y2 : Real), (z2 : Real)])) == x1 * x2 + (y1 * y2 + z1 * z2)
+      #|  ((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x : Real), (y : Real), (z : Real)]) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) == (x == real_of_num(0) && y == real_of_num(0) && z == real_of_num(0))
+      #|  (orthogonal : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (y1 : Real), (z1 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x2 : Real), (y2 : Real), (z2 : Real)])) == (x1 * x2 + (y1 * y2 + z1 * z2) == real_of_num(0))
+      #|  (cross : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]])) == vector([op_dollar(a, 2) * op_dollar(b, 3) - op_dollar(a, 3) * op_dollar(b, 2), op_dollar(a, 3) * op_dollar(b, 1) - op_dollar(a, 1) * op_dollar(b, 3), op_dollar(a, 1) * op_dollar(b, 2) - op_dollar(a, 2) * op_dollar(b, 1)])
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], \226\136\128 y : Cart[Real, Tybit1[Unit]], orthogonal(cross(x, y), x) && orthogonal(cross(x, y), y) && orthogonal(x, cross(x, y)) && orthogonal(y, cross(x, y))
+      #|  !((basis : (Num) -> Cart[Real, Tybit1[Unit]])(1) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) && !((basis : (Num) -> Cart[Real, Tybit1[Unit]])(2) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) && !((basis : (Num) -> Cart[Real, Tybit1[Unit]])(3) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0))
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], dot(u, cross(u, v)) == real_of_num(0)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], dot(v, cross(u, v)) == real_of_num(0)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], dot(vec(0), u) == real_of_num(0)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], dot(u, vec(0)) == real_of_num(0)
+      #|  \226\136\128 x : Cart[Real, Tybit1[Unit]], cross(x, x) == vec(0)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], !(u == vec(0)) \226\134\146 !(cross(u, basis(1)) == vec(0)) || !(cross(u, basis(2)) == vec(0)) || !(cross(u, basis(3)) == vec(0))
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\128 w : Cart[Real, Tybit1[Unit]], cross(u, v) == vec(0) \226\134\146 dot(u, cross(v, w)) == real_of_num(0)
+      #|  cross((u : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]])) == vec(0)
+      #|  (v : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  (u : Cart[Real, Tybit1[Unit]]) == vec(0)
+      #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\131 w : Cart[Real, Tybit1[Unit]], !(w == vec(0)) && orthogonal(u, w) && orthogonal(v, w)
       #|FORALL_3 =  |- ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|SUM_3 =  |- (#forall:fun(fun(fun(num,real),bool),bool) (\t:fun(num,real). ((#=:fun(real,fun(real,bool)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) t:fun(num,real))) ((#real_add:fun(real,fun(real,real)) (t:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_add:fun(real,fun(real,real)) (t:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (t:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
       #|VECTOR_3 =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) (#vector:fun(list(real),cart(real,tybit1(1))) ((#CONS:fun(real,fun(list(real),list(real))) x:real) ((#CONS:fun(real,fun(list(real),list(real))) y:real) ((#CONS:fun(real,fun(list(real),list(real))) z:real) #NIL:list(real)))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) x:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) (#vector:fun(list(real),cart(real,tybit1(1))) ((#CONS:fun(real,fun(list(real),list(real))) x:real) ((#CONS:fun(real,fun(list(real),list(real))) y:real) ((#CONS:fun(real,fun(list(real),list(real))) z:real) #NIL:list(real)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) y:real)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,tybit1(1)),fun(num,real)) (#vector:fun(list(real),cart(real,tybit1(1))) ((#CONS:fun(real,fun(list(real),list(real))) x:real) ((#CONS:fun(real,fun(list(real),list(real))) y:real) ((#CONS:fun(real,fun(list(real),list(real))) z:real) #NIL:list(real)))))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) z:real)))

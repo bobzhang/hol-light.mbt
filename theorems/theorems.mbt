@@ -4,7 +4,7 @@
 /// EQ_REFL
 fn step_1() -> Unit raise {
   let t1 = @tactics.then_tac(@tactics.gen_tac, @tactics.refl_tac)
-  eq_refl_c.set(@tactics.prove(@parser.parse_term("forall x:A. x = x"), t1))
+  eq_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : A, x == x"), t1))
 }
 
 ///|
@@ -24,7 +24,7 @@ fn step_2() -> Unit raise {
     @tactics.match_accept_tac(@bool.eqt_intro(@bool.spec_all(eq_refl()))),
   )
   refl_clause_c.set(
-    @tactics.prove(@parser.parse_term("forall x:A. (x = x) <=> T"), t2),
+    @tactics.prove(@term_syntax.parse_term("∀ x : A, (x == x) == true"), t2),
   )
 }
 
@@ -110,7 +110,7 @@ fn step_3() -> Unit raise {
   })
   let t8 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t7)
   eq_sym_c.set(
-    @tactics.prove(@parser.parse_term("forall(x:A) y. (x = y) ==> (y = x)"), t8),
+    @tactics.prove(@term_syntax.parse_term("∀ x : A, ∀ y : A, x == y → y == x"), t8),
   )
 }
 
@@ -132,7 +132,7 @@ fn step_4() -> Unit raise {
     t9,
   )
   eq_sym_eq_c.set(
-    @tactics.prove(@parser.parse_term("forall(x:A) y. (x = y) <=> (y = x)"), t10),
+    @tactics.prove(@term_syntax.parse_term("∀ x : A, ∀ y : A, (x == y) == (y == x)"), t10),
   )
 }
 
@@ -155,7 +155,7 @@ fn step_5() -> Unit raise {
   )
   eq_trans_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)"),
+      @term_syntax.parse_term("∀ x : A, ∀ y : A, ∀ z : A, x == y && y == z → x == z"),
       t12,
     ),
   )
@@ -187,7 +187,7 @@ fn step_6() -> Unit raise {
   )
   beta_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(f:A->B) y. (\\x. (f:A->B) x) y = f y"),
+      @term_syntax.parse_term("∀ f : (A) -> B, ∀ y : A, ((x : A) => f(x))(y) == f(y)"),
       t17,
     ),
   )
@@ -208,7 +208,7 @@ fn step_7() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([beta_thm(), refl_clause()]))
   let t19 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t18)
   abs_simp_c.set(
-    @tactics.prove(@parser.parse_term("forall(t1:A) (t2:B). (\\x. t1) t2 = t1"), t19),
+    @tactics.prove(@term_syntax.parse_term("∀ t1 : A, ∀ t2 : B, ((x : B) => t1)(t2) == t1"), t19),
   )
 }
 
@@ -226,7 +226,7 @@ pub fn abs_simp() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   conj_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3"),
+      @term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t1 && t2 && t3) == ((t1 && t2) && t3)"),
       @itab.itaut_tac,
     ),
   )
@@ -246,7 +246,7 @@ pub fn conj_assoc() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   conj_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t1 t2. t1 /\\ t2 <=> t2 /\\ t1"),
+      @term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 && t2) == (t2 && t1)"),
       @itab.itaut_tac,
     ),
   )
@@ -288,7 +288,7 @@ pub fn conj_aci() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   disj_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3"),
+      @term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, ∀ t3 : Bool, (t1 || t2 || t3) == ((t1 || t2) || t3)"),
       @itab.itaut_tac,
     ),
   )
@@ -308,7 +308,7 @@ pub fn disj_assoc() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   disj_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t1 t2. t1 \\/ t2 <=> t2 \\/ t1"),
+      @term_syntax.parse_term("∀ t1 : Bool, ∀ t2 : Bool, (t1 || t2) == (t2 || t1)"),
       @itab.itaut_tac,
     ),
   )
@@ -350,7 +350,7 @@ pub fn disj_aci() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   imp_conj_c.set(
     @tactics.prove(
-      @parser.parse_term("p /\\ q ==> r <=> p ==> q ==> r"),
+      @term_syntax.parse_term("((p : Bool) && (q : Bool) → (r : Bool)) == (p → q → r)"),
       @itab.itaut_tac,
     ),
   )
@@ -385,7 +385,7 @@ pub fn imp_imp() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   imp_conj_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("p /\\ q ==> r <=> q ==> p ==> r"),
+      @term_syntax.parse_term("((p : Bool) && (q : Bool) → (r : Bool)) == (q → p → r)"),
       @itab.itaut_tac,
     ),
   )
@@ -405,7 +405,7 @@ pub fn imp_conj_alt() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   left_or_distrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r"),
+      @term_syntax.parse_term("∀ p : Bool, ∀ q : Bool, ∀ r : Bool, (p && (q || r)) == (p && q || p && r)"),
       @itab.itaut_tac,
     ),
   )
@@ -427,7 +427,7 @@ pub fn left_or_distrib() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   right_or_distrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r"),
+      @term_syntax.parse_term("∀ p : Bool, ∀ q : Bool, ∀ r : Bool, ((p || q) && r) == (p && r || q && r)"),
       @itab.itaut_tac,
     ),
   )
@@ -448,7 +448,7 @@ pub fn right_or_distrib() -> @kernel.Thm {
 /// FORALL_SIMP
 fn step_19() -> Unit raise {
   forall_simp_c.set(
-    @tactics.prove(@parser.parse_term("forall t. (forall x:A. t) = t"), @itab.itaut_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ t : Bool, (∀ x : A, t) == t"), @itab.itaut_tac),
   )
 }
 
@@ -465,7 +465,7 @@ pub fn forall_simp() -> @kernel.Thm {
 /// EXISTS_SIMP
 fn step_20() -> Unit raise {
   exists_simp_c.set(
-    @tactics.prove(@parser.parse_term("forall t. (?x:A. t) = t"), @itab.itaut_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ t : Bool, (∃ x : A, t) == t"), @itab.itaut_tac),
   )
 }
 
@@ -481,7 +481,7 @@ pub fn exists_simp() -> @kernel.Thm {
 ///|
 /// EQ_IMP
 fn step_21() -> Unit raise {
-  eq_imp_c.set(@itab.itaut(@parser.parse_term("(a <=> b) ==> a ==> b")))
+  eq_imp_c.set(@itab.itaut(@term_syntax.parse_term("(a : Bool) == (b : Bool) → a → b")))
 }
 
 ///|
@@ -520,7 +520,7 @@ pub fn eq_clauses() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   not_clauses_weak_c.set(
     @tactics.prove(
-      @parser.parse_term("(~T <=> F) /\\ (~F <=> T)"),
+      @term_syntax.parse_term("!true == false && !false == true"),
       @itab.itaut_tac,
     ),
   )
@@ -610,7 +610,7 @@ fn step_27() -> Unit raise {
     @list.List([@bool.eqt_intro(@bool.spec_all(eq_refl())), imp_clauses()]),
   )
   let imp_eq_clause = @tactics.prove(
-    @parser.parse_term("((x = x) ==> p) <=> p"),
+    @term_syntax.parse_term("((x : _) == x → (p : Bool)) == p"),
     t20,
   )
   @simp.extend_basic_rewrites(
@@ -677,11 +677,11 @@ fn step_30() -> Unit raise {
   let t22 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.gen_tac,
-      @tactics.exists_tac(@parser.parse_term("a:A")),
+      @tactics.exists_tac(@term_syntax.parse_term("(a : A)")),
     ),
     @tactics.refl_tac,
   )
-  exists_refl_c.set(@tactics.prove(@parser.parse_term("forall a:A. ?x. x = a"), t22))
+  exists_refl_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : A, ∃ x : A, x == a"), t22))
 }
 
 ///|
@@ -697,7 +697,7 @@ pub fn exists_refl() -> @kernel.Thm {
 /// EXISTS_UNIQUE_REFL
 fn step_31() -> Unit raise {
   let t24 = @simp.asm_rewrite_tac(@list.List([]))
-  let t25 = @list.List([@tactics.exists_tac(@parser.parse_term("a:A")), t24])
+  let t25 = @list.List([@tactics.exists_tac(@term_syntax.parse_term("(a : A)")), t24])
   let t23 = @tactics.repeat_tac(
     @tactics.orelse_tac(@tactics.eq_tac, @tactics.strip_tac),
   )
@@ -715,7 +715,7 @@ fn step_31() -> Unit raise {
     @tactics.refl_tac,
   )
   exists_unique_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall a:A. ?!x. x = a"), t26),
+    @tactics.prove(@term_syntax.parse_term("∀ a : A, existsunique((x : A) => x == a)"), t26),
   )
 }
 
@@ -786,7 +786,7 @@ fn step_32() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.disch_tac,
-          @tactics.exists_tac(@parser.parse_term("a:A")),
+          @tactics.exists_tac(@term_syntax.parse_term("(a : A)")),
         ),
         @tactics.conj_tac,
       ),
@@ -901,7 +901,7 @@ fn step_32() -> Unit raise {
   )
   unwind_thm1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (a:A). (?x. a = x /\\ P x) <=> P a"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ a : A, (∃ x : A, a == x && P(x)) == P(a)"),
       t39,
     ),
   )
@@ -929,7 +929,7 @@ fn step_33() -> Unit raise {
   )
   unwind_thm2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (a:A). (?x. x = a /\\ P x) <=> P a"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ a : A, (∃ x : A, x == a && P(x)) == P(a)"),
       t42,
     ),
   )
@@ -1002,7 +1002,7 @@ fn step_34() -> Unit raise {
     t54,
   )
   let t49 = @simp.rewrite_tac(@list.List([]))
-  let t46 = @parser.parse_term("a:A")
+  let t46 = @term_syntax.parse_term("(a : A)")
   let t56 = @list.List([
     @tactics.then_tac(
       @tactics.disch_then(fn(
@@ -1083,7 +1083,7 @@ fn step_34() -> Unit raise {
   )
   forall_unwind_thm2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (a:A). (forall x. x = a ==> P x) <=> P a"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ a : A, (∀ x : A, x == a → P(x)) == P(a)"),
       t57,
     ),
   )
@@ -1113,7 +1113,7 @@ fn step_35() -> Unit raise {
   )
   forall_unwind_thm1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (a:A). (forall x. a = x ==> P x) <=> P a"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ a : A, (∀ x : A, a == x → P(x)) == P(a)"),
       t60,
     ),
   )
@@ -1135,7 +1135,7 @@ pub fn forall_unwind_thm1() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   swap_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->B->bool. (forall x y. P x y) <=> (forall y x. P x y)"),
+      @term_syntax.parse_term("∀ P : (A, B) -> Bool, (∀ x : A, ∀ y : B, P(x, y)) == (∀ y : B, ∀ x : A, P(x, y))"),
       @itab.itaut_tac,
     ),
   )
@@ -1157,7 +1157,7 @@ pub fn swap_forall_thm() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   swap_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)"),
+      @term_syntax.parse_term("∀ P : (A, B) -> Bool, (∃ x : A, ∃ y : B, P(x, y)) == (∃ y : B, ∃ x : A, P(x, y))"),
       @itab.itaut_tac,
     ),
   )
@@ -1223,7 +1223,7 @@ pub fn and_forall_thm() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   left_and_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (forall x:A. P x) /\\ Q <=> (forall x:A. P x /\\ Q)"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ Q : Bool, ((∀ x : A, P(x)) && Q) == (∀ x : A, P(x) && Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1245,7 +1245,7 @@ pub fn left_and_forall_thm() -> @kernel.Thm {
 fn step_41() -> Unit raise {
   right_and_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. P /\\ (forall x:A. Q x) <=> (forall x. P /\\ Q x)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : (A) -> Bool, (P && (∀ x : A, Q(x))) == (∀ x : A, P && Q(x))"),
       @itab.itaut_tac,
     ),
   )
@@ -1311,7 +1311,7 @@ pub fn or_exists_thm() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   left_or_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ Q : Bool, ((∃ x : A, P(x)) || Q) == (∃ x : A, P(x) || Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1333,7 +1333,7 @@ pub fn left_or_exists_thm() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   right_or_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. P \\/ (?x. Q x) <=> (?x:A. P \\/ Q x)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : (A) -> Bool, (P || (∃ x : A, Q(x))) == (∃ x : A, P || Q(x))"),
       @itab.itaut_tac,
     ),
   )
@@ -1355,7 +1355,7 @@ pub fn right_or_exists_thm() -> @kernel.Thm {
 fn step_46() -> Unit raise {
   left_exists_and_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x:A. P x /\\ Q) <=> (?x:A. P x) /\\ Q"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ Q : Bool, (∃ x : A, P(x) && Q) == ((∃ x : A, P(x)) && Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1377,7 +1377,7 @@ pub fn left_exists_and_thm() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   right_exists_and_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x:A. P /\\ Q x) <=> P /\\ (?x:A. Q x)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : (A) -> Bool, (∃ x : A, P && Q(x)) == (P && (∃ x : A, Q(x)))"),
       @itab.itaut_tac,
     ),
   )
@@ -1399,7 +1399,7 @@ pub fn right_exists_and_thm() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   triv_exists_and_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x:A. P /\\ Q) <=> (?x:A. P) /\\ (?x:A. Q)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, (∃ x : A, P && Q) == ((∃ x : A, P) && (∃ x : A, Q))"),
       @itab.itaut_tac,
     ),
   )
@@ -1421,7 +1421,7 @@ pub fn triv_exists_and_thm() -> @kernel.Thm {
 fn step_49() -> Unit raise {
   left_and_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ Q : Bool, ((∃ x : A, P(x)) && Q) == (∃ x : A, P(x) && Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1443,7 +1443,7 @@ pub fn left_and_exists_thm() -> @kernel.Thm {
 fn step_50() -> Unit raise {
   right_and_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. P /\\ (?x:A. Q x) <=> (?x:A. P /\\ Q x)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : (A) -> Bool, (P && (∃ x : A, Q(x))) == (∃ x : A, P && Q(x))"),
       @itab.itaut_tac,
     ),
   )
@@ -1465,7 +1465,7 @@ pub fn right_and_exists_thm() -> @kernel.Thm {
 fn step_51() -> Unit raise {
   triv_and_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x:A. P) /\\ (?x:A. Q) <=> (?x:A. P /\\ Q)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, ((∃ x : A, P) && (∃ x : A, Q)) == (∃ x : A, P && Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1487,7 +1487,7 @@ pub fn triv_and_exists_thm() -> @kernel.Thm {
 fn step_52() -> Unit raise {
   triv_forall_or_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (forall x:A. P \\/ Q) <=> (forall x:A. P) \\/ (forall x:A. Q)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, (∀ x : A, P || Q) == ((∀ x : A, P) || (∀ x : A, Q))"),
       @itab.itaut_tac,
     ),
   )
@@ -1509,7 +1509,7 @@ pub fn triv_forall_or_thm() -> @kernel.Thm {
 fn step_53() -> Unit raise {
   triv_or_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (forall x:A. P) \\/ (forall x:A. Q) <=> (forall x:A. P \\/ Q)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, ((∀ x : A, P) || (∀ x : A, Q)) == (∀ x : A, P || Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1531,7 +1531,7 @@ pub fn triv_or_forall_thm() -> @kernel.Thm {
 fn step_54() -> Unit raise {
   right_imp_forall_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (P ==> forall x:A. Q x) <=> (forall x. P ==> Q x)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : (A) -> Bool, (P → (∀ x : A, Q(x))) == (∀ x : A, P → Q(x))"),
       @itab.itaut_tac,
     ),
   )
@@ -1553,7 +1553,7 @@ pub fn right_imp_forall_thm() -> @kernel.Thm {
 fn step_55() -> Unit raise {
   right_forall_imp_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (forall x. P ==> Q x) <=> (P ==> forall x:A. Q x)"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : (A) -> Bool, (∀ x : A, P → Q(x)) == (P → (∀ x : A, Q(x)))"),
       @itab.itaut_tac,
     ),
   )
@@ -1575,7 +1575,7 @@ pub fn right_forall_imp_thm() -> @kernel.Thm {
 fn step_56() -> Unit raise {
   left_imp_exists_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. ((?x:A. P x) ==> Q) <=> (forall x. P x ==> Q)"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ Q : Bool, ((∃ x : A, P(x)) → Q) == (∀ x : A, P(x) → Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1597,7 +1597,7 @@ pub fn left_imp_exists_thm() -> @kernel.Thm {
 fn step_57() -> Unit raise {
   left_forall_imp_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (forall x. P x ==> Q) <=> ((?x:A. P x) ==> Q)"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ Q : Bool, (∀ x : A, P(x) → Q) == ((∃ x : A, P(x)) → Q)"),
       @itab.itaut_tac,
     ),
   )
@@ -1619,7 +1619,7 @@ pub fn left_forall_imp_thm() -> @kernel.Thm {
 fn step_58() -> Unit raise {
   triv_forall_imp_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (forall x:A. P ==> Q) <=> ((?x:A. P) ==> (forall x:A. Q))"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, (∀ x : A, P → Q) == ((∃ x : A, P) → (∀ x : A, Q))"),
       @itab.itaut_tac,
     ),
   )
@@ -1641,7 +1641,7 @@ pub fn triv_forall_imp_thm() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   triv_exists_imp_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P Q. (?x:A. P ==> Q) <=> ((forall x:A. P) ==> (?x:A. Q))"),
+      @term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, (∃ x : A, P → Q) == ((∀ x : A, P) → (∃ x : A, Q))"),
       @itab.itaut_tac,
     ),
   )
@@ -1663,7 +1663,7 @@ pub fn triv_exists_imp_thm() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   mono_and_c.set(
     @itab.itaut(
-      @parser.parse_term("(A ==> B) /\\ (C ==> D) ==> (A /\\ C ==> B /\\ D)"),
+      @term_syntax.parse_term("((A : Bool) → (B : Bool)) && ((C : Bool) → (D : Bool)) → A && C → B && D"),
     ),
   )
 }
@@ -1682,7 +1682,7 @@ pub fn mono_and() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   mono_or_c.set(
     @itab.itaut(
-      @parser.parse_term("(A ==> B) /\\ (C ==> D) ==> (A \\/ C ==> B \\/ D)"),
+      @term_syntax.parse_term("((A : Bool) → (B : Bool)) && ((C : Bool) → (D : Bool)) → A || C → B || D"),
     ),
   )
 }
@@ -1720,7 +1720,7 @@ pub fn mono_imp() -> @kernel.Thm {
 ///|
 /// MONO_NOT
 fn step_63() -> Unit raise {
-  mono_not_c.set(@itab.itaut(@parser.parse_term("(B ==> A) ==> (~A ==> ~B)")))
+  mono_not_c.set(@itab.itaut(@term_syntax.parse_term("((B : Bool) → (A : Bool)) → !A → !B")))
 }
 
 ///|
@@ -1743,7 +1743,7 @@ fn step_64() -> Unit raise {
   )
   mono_forall_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall x:A. P x ==> Q x) ==> ((forall x. P x) ==> (forall x. Q x))"),
+      @term_syntax.parse_term("(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → (∀ x : A, P(x)) → (∀ x : A, Q(x))"),
       t63,
     ),
   )
@@ -1763,8 +1763,8 @@ pub fn mono_forall() -> @kernel.Thm {
 fn step_65() -> Unit raise {
   let t68 = @simp.asm_rewrite_tac(@list.List([]))
   let t67 = @tactics.first_assum(@tactics.match_mp_tac)
-  let t66 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t64 = @parser.parse_term("x:A")
+  let t66 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
+  let t64 = @term_syntax.parse_term("(x : A)")
   let t69 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1782,7 +1782,7 @@ fn step_65() -> Unit raise {
   )
   mono_exists_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall x:A. P x ==> Q x) ==> ((?x. P x) ==> (?x. Q x))"),
+      @term_syntax.parse_term("(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → (∃ x : A, P(x)) → (∃ x : A, Q(x))"),
       t69,
     ),
   )
@@ -2052,7 +2052,7 @@ fn step_67() -> Unit raise {
   )
   let t103 = @tactics.repeat_tac(@tactics.gen_tac)
   let t102 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(exists_refl())]))
-  let t100 = @parser.parse_term("x:A")
+  let t100 = @term_syntax.parse_term("(x : A)")
   let t109 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2196,8 +2196,8 @@ fn step_67() -> Unit raise {
     ),
     t98,
   ])
-  let t88 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t83 = @parser.parse_term("x:A")
+  let t88 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
+  let t83 = @term_syntax.parse_term("(x : A)")
   let t110 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -2278,7 +2278,7 @@ fn step_67() -> Unit raise {
   )
   exists_unique_alt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->bool. (?!x. P x) <=> (?x. forall y. P y <=> (x = y))"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, existsunique((x : A) => P(x)) == (∃ x : A, ∀ y : A, P(y) == (x == y))"),
       t111,
     ),
   )
@@ -2343,7 +2343,7 @@ fn step_68() -> Unit raise {
       )
     },
     @list.List([
-      @itab.itaut(@parser.parse_term("(a <=> b) <=> (a ==> b) /\\ (b ==> a)")),
+      @itab.itaut(@term_syntax.parse_term("((a : Bool) == (b : Bool)) == ((a → b) && (b → a))")),
     ]),
   )
   let t132 = @tactics.then_tac(

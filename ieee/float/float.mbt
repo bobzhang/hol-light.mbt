@@ -3,7 +3,7 @@
 ///|
 /// is_valid_flformat
 fn step_1() -> Unit raise {
-  is_valid_flformat_c.set(@define.define_(@parser.parse_term("is_valid_flformat (r:num, p:num) = (1 < r /\\ (EVEN r) /\\ (1 < p))")))
+  is_valid_flformat_c.set(@define.define_(@term_syntax.parse_term("(is_valid_flformat : ((Num, Num)) -> Bool)(((r : Num), (p : Num))) == (1 < r && EVEN(r) && 1 < p)")))
 }
 
 ///|
@@ -19,8 +19,8 @@ pub fn is_valid_flformat() -> @kernel.Thm {
 /// flformat_typbij
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([is_valid_flformat()]))
-  let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("(2:num, 2:num)")), t1), @int.arith_tac)
-  flformat_typbij_c.set(@class.new_type_definition("flformat", ("mk_flformat", "dest_flformat"), @tactics.prove(@parser.parse_term("?(fmt:num#num). is_valid_flformat fmt"), t2)))
+  let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(2, 2)")), t1), @int.arith_tac)
+  flformat_typbij_c.set(@class.new_type_definition("flformat", ("mk_flformat", "dest_flformat"), @tactics.prove(@term_syntax.parse_term("∃ fmt : (Num, Num), is_valid_flformat(fmt)"), t2)))
 }
 
 ///|
@@ -35,7 +35,7 @@ pub fn flformat_typbij() -> @kernel.Thm {
 ///|
 /// flr
 fn step_3() -> Unit raise {
-  flr_c.set(@define.define_(@parser.parse_term("flr (fmt:flformat) = (FST (dest_flformat fmt))")))
+  flr_c.set(@define.define_(@term_syntax.parse_term("(flr : (Flformat) -> Num)((fmt : Flformat)) == FST(dest_flformat(fmt))")))
 }
 
 ///|
@@ -50,7 +50,7 @@ pub fn flr() -> @kernel.Thm {
 ///|
 /// flp
 fn step_4() -> Unit raise {
-  flp_c.set(@define.define_(@parser.parse_term("flp (fmt:flformat) = (SND (dest_flformat fmt))")))
+  flp_c.set(@define.define_(@term_syntax.parse_term("(flp : (Flformat) -> Num)((fmt : Flformat)) == SND(dest_flformat(fmt))")))
 }
 
 ///|
@@ -65,7 +65,7 @@ pub fn flp() -> @kernel.Thm {
 ///|
 /// is_frac_and_exp
 fn step_5() -> Unit raise {
-  is_frac_and_exp_c.set(@define.define_(@parser.parse_term("is_frac_and_exp (fmt:flformat) (x:real) (f:num) (e:int) =\n  (0 < f /\\\n   f < (flr fmt) EXP (flp fmt) /\\\n   abs(x) = &f * &(flr fmt) ipow (e - &(flp fmt) + &1))")))
+  is_frac_and_exp_c.set(@define.define_(@term_syntax.parse_term("(is_frac_and_exp : (Flformat, Real, Num, Int) -> Bool)((fmt : Flformat), (x : Real), (f : Num), (e : Int)) == (0 < f && f < EXP(flr(fmt), flp(fmt)) && abs(x) == real_of_num(f) * ipow(real_of_num(flr(fmt)), e - int_of_num(flp(fmt)) + int_of_num(1)))")))
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn is_frac_and_exp() -> @kernel.Thm {
 ///|
 /// is_float
 fn step_6() -> Unit raise {
-  is_float_c.set(@define.define_(@parser.parse_term("is_float (fmt:flformat) (x:real) =\n  (?(f:num) (e:int) . is_frac_and_exp(fmt) x f e)")))
+  is_float_c.set(@define.define_(@term_syntax.parse_term("(is_float : (Flformat, Real) -> Bool)((fmt : Flformat), (x : Real)) == (∃ f : Num, ∃ e : Int, is_frac_and_exp(fmt, x, f, e))")))
 }
 
 ///|
@@ -95,7 +95,7 @@ pub fn is_float() -> @kernel.Thm {
 ///|
 /// to_fformat
 fn step_7() -> Unit raise {
-  to_fformat_c.set(@define.define_(@parser.parse_term("to_fformat (fmt:flformat) (e:int) = (mk_fformat ((flr fmt), (flp fmt), e))")))
+  to_fformat_c.set(@define.define_(@term_syntax.parse_term("(to_fformat : (Flformat, Int) -> Fformat)((fmt : Flformat), (e : Int)) == mk_fformat((flr(fmt), flp(fmt), e))")))
 }
 
 ///|
@@ -110,7 +110,7 @@ pub fn to_fformat() -> @kernel.Thm {
 ///|
 /// greatest_e
 fn step_8() -> Unit raise {
-  greatest_e_c.set(@define.define_(@parser.parse_term("greatest_e (fmt:flformat) (x:real) =\n  sup_int({ (z:int) | &(flr fmt) ipow z <= abs(x) })")))
+  greatest_e_c.set(@define.define_(@term_syntax.parse_term("(greatest_e : (Flformat, Real) -> Int)((fmt : Flformat), (x : Real)) == sup_int({(z : Int) | ipow(real_of_num(flr(fmt)), z) <= abs(x)})")))
 }
 
 ///|
@@ -125,7 +125,7 @@ pub fn greatest_e() -> @kernel.Thm {
 ///|
 /// greatest_m
 fn step_9() -> Unit raise {
-  greatest_m_c.set(@define.define_(@parser.parse_term("greatest_m (fmt:flformat) (x:real) =\n  sup_num({ (m:num) | &m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) })")))
+  greatest_m_c.set(@define.define_(@term_syntax.parse_term("(greatest_m : (Flformat, Real) -> Num)((fmt : Flformat), (x : Real)) == sup_num({(m : Num) | real_of_num(m) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) <= abs(x)})")))
 }
 
 ///|
@@ -140,7 +140,7 @@ pub fn greatest_m() -> @kernel.Thm {
 ///|
 /// greatest_r
 fn step_10() -> Unit raise {
-  greatest_r_c.set(@define.define_(@parser.parse_term("greatest_r (fmt:flformat) (x:real) =\n  (if (&0 <= x)\n   then\n     (x - &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x))\n   else\n     (x + &(greatest_m(fmt) x) * &(flr fmt) ipow (greatest_e(fmt) x)))")))
+  greatest_r_c.set(@define.define_(@term_syntax.parse_term("(greatest_r : (Flformat, Real) -> Real)((fmt : Flformat), (x : Real)) == (if real_of_num(0) <= x { x - real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) } else { x + real_of_num(greatest_m(fmt, x)) * ipow(real_of_num(flr(fmt)), greatest_e(fmt, x)) })")))
 }
 
 ///|
@@ -155,7 +155,7 @@ pub fn greatest_r() -> @kernel.Thm {
 ///|
 /// flround
 fn step_11() -> Unit raise {
-  flround_c.set(@define.define_(@parser.parse_term("flround (fmt:flformat) (mode:roundmode) (x:real) =\n  (let m = (greatest_m(fmt) x)\n   and e = (greatest_e(fmt) x)\n   and y = (greatest_r(fmt) x)\n   in\n     (if (&0 <= x)\n      then\n        (&m * &(flr fmt) ipow e +\n           (fround(to_fformat fmt e) mode y))\n      else\n        (-- (&m * &(flr fmt) ipow e) +\n           (fround(to_fformat fmt e) mode y))))")))
+  flround_c.set(@define.define_(@term_syntax.parse_term("(flround : (Flformat, Roundmode, Real) -> Real)((fmt : Flformat), (mode : Roundmode), (x : Real)) == LET((m : Num) => (e : Int) => (y : Real) => LET_END(if real_of_num(0) <= x { real_of_num(m) * ipow(real_of_num(flr(fmt)), e) + fround(to_fformat(fmt, e), mode, y) } else { -(real_of_num(m) * ipow(real_of_num(flr(fmt)), e)) + fround(to_fformat(fmt, e), mode, y) }), greatest_m(fmt, x), greatest_e(fmt, x), greatest_r(fmt, x))")))
 }
 
 ///|
@@ -170,7 +170,7 @@ pub fn flround() -> @kernel.Thm {
 ///|
 /// fl_eps
 fn step_12() -> Unit raise {
-  fl_eps_c.set(@define.define_(@parser.parse_term("fl_eps (fmt:flformat) = (&(flr fmt) ipow (&1 - &(flp fmt))) / &2")))
+  fl_eps_c.set(@define.define_(@term_syntax.parse_term("(fl_eps : (Flformat) -> Real)((fmt : Flformat)) == ipow(real_of_num(flr(fmt)), int_of_num(1) - int_of_num(flp(fmt))) / real_of_num(2)")))
 }
 
 ///|

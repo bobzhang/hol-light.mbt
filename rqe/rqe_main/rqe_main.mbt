@@ -324,7 +324,7 @@ pub fn swap_head_col(x62 : Int64, x63 : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// LENGTH_CONV
 fn step_1() -> Unit raise {
-  let alength_tm = @parser.parse_term("LENGTH:(A list) -> num")
+  let alength_tm = @term_syntax.parse_term("(LENGTH : (List[A]) -> Num)")
   length_conv_c.set(fn(x64 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x64
     try {
@@ -359,7 +359,7 @@ pub fn length_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// LAST_NZ_CONV
 fn step_2() -> Unit raise {
-  let alast_tm = @parser.parse_term("LAST:(A list) -> A")
+  let alast_tm = @term_syntax.parse_term("(LAST : (List[A]) -> A)")
   last_nz_conv_c.set(fn(x65 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let nz_thm = x65
     fn(x66 : @kernel.Term) -> @kernel.Thm raise {
@@ -436,7 +436,7 @@ pub fn normal_list_conv(x71 : @kernel.Thm, x72 : @kernel.Term) -> @kernel.Thm ra
 ///|
 /// pdiff_tm
 fn step_3() -> Unit raise {
-  pdiff_tm_c.set(@parser.parse_term("poly_diff"))
+  pdiff_tm_c.set(@term_syntax.parse_term("poly_diff"))
 }
 
 ///|
@@ -491,7 +491,7 @@ fn step_4() -> Unit raise {
 ///|
 /// REPLACE_POL
 fn step_5() -> Unit raise {
-  let imat_tm = @parser.parse_term("interpmat")
+  let imat_tm = @term_syntax.parse_term("interpmat")
   replace_pol_v1_c.set(fn(x78 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let peq = x78
     fn(x79 : @kernel.Thm) -> @kernel.Thm raise {

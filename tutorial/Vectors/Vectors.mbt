@@ -3,7 +3,7 @@
 ///|
 /// Tutorial/Vectors.ml:5
 fn step_1() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("orthogonal (A - B) (C - B)\n   ==> norm(C - A) pow 2 = norm(B - A) pow 2 + norm(C - B) pow 2")))
+  ignore(@tactics.g(@term_syntax.parse_term("orthogonal((A : Cart[Real, _]) - (B : Cart[Real, _]), (C : Cart[Real, _]) - B) → pow(norm(C - A), 2) == pow(norm(B - A), 2) + pow(norm(C - B), 2)")))
 }
 
 ///|
@@ -21,7 +21,7 @@ fn step_3() -> Unit raise {
 ///|
 /// Tutorial/Vectors.ml:11
 fn step_4() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("forall x y:real^N. x dot y <= norm x * norm y")))
+  ignore(@tactics.g(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ y : Cart[Real, N], dot(x, y) <= norm(x) * norm(y)")))
 }
 
 ///|
@@ -33,8 +33,8 @@ fn step_5() -> Unit raise {
 ///|
 /// FORALL_3
 fn step_6() -> Unit raise {
-  let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("1 <= i /\\ i <= 3 <=> (i = 1) \\/ (i = 2) \\/ (i = 3)"))]))
-  forall_3_c.set(@tactics.prove(@parser.parse_term("(forall i. 1 <= i /\\ i <= 3 ==> P i) <=> P 1 /\\ P 2 /\\ P 3"), t1))
+  let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(1 <= (i : Num) && i <= 3) == (i == 1 || i == 2 || i == 3)"))]))
+  forall_3_c.set(@tactics.prove(@term_syntax.parse_term("(∀ i : Num, 1 <= i && i <= 3 → (P : (Num) -> Bool)(i)) == (P(1) && P(2) && P(3))"), t1))
 }
 
 ///|
@@ -50,9 +50,9 @@ pub fn forall_3() -> @kernel.Thm {
 /// SUM_3
 fn step_7() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@iterate.sum_sing_numseg(), @calc_num.arith(), @realax.real_add_assoc()]))
-  let t2 = @calc_num.num_conv(@parser.parse_term("2"))
-  let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("3")), t2, @iterate.sum_clauses_numseg()])), t3)
-  sum_3_c.set(@tactics.prove(@parser.parse_term("forall t. sum(1..3) t = t(1) + t(2) + t(3)"), t4))
+  let t2 = @calc_num.num_conv(@term_syntax.parse_term("2"))
+  let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_num.num_conv(@term_syntax.parse_term("3")), t2, @iterate.sum_clauses_numseg()])), t3)
+  sum_3_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : (Num) -> Real, sum(op_dot_dot(1, 3), t) == t(1) + (t(2) + t(3))"), t4))
 }
 
 ///|
@@ -67,10 +67,10 @@ pub fn sum_3() -> @kernel.Thm {
 ///|
 /// VECTOR_3
 fn step_8() -> Unit raise {
-  let t5 = @calc_num.num_conv(@parser.parse_term("1"))
-  let t6 = @simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("2")), t5, @lists.el(), @lists.hd(), @lists.tl()]))
+  let t5 = @calc_num.num_conv(@term_syntax.parse_term("1"))
+  let t6 = @simp.rewrite_tac(@list.List([@calc_num.num_conv(@term_syntax.parse_term("2")), t5, @lists.el(), @lists.hd(), @lists.tl()]))
   let t7 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.vector(), @cart.lambda_beta(), @cart.dimindex_3(), @lists.length(), @calc_num.arith()])), t6)
-  vector_3_c.set(@tactics.prove(@parser.parse_term("(vector [x;y;z] :real^3)$1 = x /\\\n   (vector [x;y;z] :real^3)$2 = y /\\\n   (vector [x;y;z] :real^3)$3 = z"), t7))
+  vector_3_c.set(@tactics.prove(@term_syntax.parse_term("(op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x : Real), (y : Real), (z : Real)]), 1) == x && (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([x, y, z]), 2) == y && (op_dollar : (Cart[Real, Tybit1[Unit]], Num) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([x, y, z]), 3) == z"), t7))
 }
 
 ///|
@@ -86,7 +86,7 @@ pub fn vector_3() -> @kernel.Thm {
 /// DOT_VECTOR
 fn step_9() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@vectors.dot(), @cart.dimindex_3(), sum_3(), vector_3()]))
-  dot_vector_c.set(@tactics.prove(@parser.parse_term("(vector [x1;y1;z1] :real^3) dot (vector [x2;y2;z2]) =\n       x1 * x2 + y1 * y2 + z1 * z2"), t8))
+  dot_vector_c.set(@tactics.prove(@term_syntax.parse_term("(dot : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Real)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (y1 : Real), (z1 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x2 : Real), (y2 : Real), (z2 : Real)])) == x1 * x2 + (y1 * y2 + z1 * z2)"), t8))
 }
 
 ///|
@@ -102,7 +102,7 @@ pub fn dot_vector() -> @kernel.Thm {
 /// VECTOR_ZERO
 fn step_10() -> Unit raise {
   let t9 = @simp.simp_tac(@list.List([@cart.cart_eq(), @cart.dimindex_3(), forall_3(), @vectors.vec_component(), vector_3(), @calc_num.arith()]))
-  vector_zero_c.set(@tactics.prove(@parser.parse_term("(vector [x;y;z] :real^3 = vec 0) <=> x = &0 /\\ y = &0 /\\ z = &0"), t9))
+  vector_zero_c.set(@tactics.prove(@term_syntax.parse_term("((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x : Real), (y : Real), (z : Real)]) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) == (x == real_of_num(0) && y == real_of_num(0) && z == real_of_num(0))"), t9))
 }
 
 ///|
@@ -118,7 +118,7 @@ pub fn vector_zero() -> @kernel.Thm {
 /// ORTHOGONAL_VECTOR
 fn step_11() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([@vectors.orthogonal(), dot_vector()]))
-  orthogonal_vector_c.set(@tactics.prove(@parser.parse_term("orthogonal (vector [x1;y1;z1] :real^3) (vector [x2;y2;z2]) =\n        (x1 * x2 + y1 * y2 + z1 * z2 = &0)"), t10))
+  orthogonal_vector_c.set(@tactics.prove(@term_syntax.parse_term("(orthogonal : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Bool)((vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x1 : Real), (y1 : Real), (z1 : Real)]), (vector : (List[Real]) -> Cart[Real, Tybit1[Unit]])([(x2 : Real), (y2 : Real), (z2 : Real)])) == (x1 * x2 + (y1 * y2 + z1 * z2) == real_of_num(0))"), t10))
 }
 
 ///|
@@ -139,7 +139,7 @@ fn step_12() -> Unit raise {
 ///|
 /// cross
 fn step_13() -> Unit raise {
-  cross_c.set(@pair.new_definition(@parser.parse_term("(a:real^3) cross (b:real^3) =\n    vector [a$2 * b$3 - a$3 * b$2;\n            a$3 * b$1 - a$1 * b$3;\n            a$1 * b$2 - a$2 * b$1] :real^3")))
+  cross_c.set(@pair.new_definition(@term_syntax.parse_term("(cross : (Cart[Real, Tybit1[Unit]], Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])((a : Cart[Real, Tybit1[Unit]]), (b : Cart[Real, Tybit1[Unit]])) == vector([op_dollar(a, 2) * op_dollar(b, 3) - op_dollar(a, 3) * op_dollar(b, 2), op_dollar(a, 3) * op_dollar(b, 1) - op_dollar(a, 1) * op_dollar(b, 3), op_dollar(a, 1) * op_dollar(b, 2) - op_dollar(a, 2) * op_dollar(b, 1)])")))
 }
 
 ///|
@@ -177,7 +177,7 @@ pub fn vec3_rule(x12 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// ORTHOGONAL_CROSS
 fn step_15() -> Unit raise {
-  orthogonal_cross_c.set(vec3_rule(@parser.parse_term("forall x y. orthogonal (x cross y) x /\\ orthogonal (x cross y) y /\\\n        orthogonal x (x cross y) /\\ orthogonal y (x cross y)")))
+  orthogonal_cross_c.set(vec3_rule(@term_syntax.parse_term("∀ x : Cart[Real, Tybit1[Unit]], ∀ y : Cart[Real, Tybit1[Unit]], orthogonal(cross(x, y), x) && orthogonal(cross(x, y), y) && orthogonal(x, cross(x, y)) && orthogonal(y, cross(x, y))")))
 }
 
 ///|
@@ -192,7 +192,7 @@ pub fn orthogonal_cross() -> @kernel.Thm {
 ///|
 /// LEMMA_0
 fn step_16() -> Unit raise {
-  lemma_0_c.set(vec3_rule(@parser.parse_term("~(basis 1 :real^3 = vec 0) /\\\n  ~(basis 2 :real^3 = vec 0) /\\\n  ~(basis 3 :real^3 = vec 0)")))
+  lemma_0_c.set(vec3_rule(@term_syntax.parse_term("!((basis : (Num) -> Cart[Real, Tybit1[Unit]])(1) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) && !((basis : (Num) -> Cart[Real, Tybit1[Unit]])(2) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0)) && !((basis : (Num) -> Cart[Real, Tybit1[Unit]])(3) == (vec : (Num) -> Cart[Real, Tybit1[Unit]])(0))")))
 }
 
 ///|
@@ -207,7 +207,7 @@ pub fn lemma_0() -> @kernel.Thm {
 ///|
 /// LEMMA_1
 fn step_17() -> Unit raise {
-  lemma_1_c.set(vec3_rule(@parser.parse_term("forall u v. u dot (u cross v) = &0")))
+  lemma_1_c.set(vec3_rule(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], ∀ v : Cart[Real, Tybit1[Unit]], dot(u, cross(u, v)) == real_of_num(0)")))
 }
 
 ///|
@@ -222,7 +222,7 @@ pub fn lemma_1() -> @kernel.Thm {
 ///|
 /// LEMMA_2
 fn step_18() -> Unit raise {
-  lemma_2_c.set(vec3_rule(@parser.parse_term("forall u v. v dot (u cross v) = &0")))
+  lemma_2_c.set(vec3_rule(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], ∀ v : Cart[Real, Tybit1[Unit]], dot(v, cross(u, v)) == real_of_num(0)")))
 }
 
 ///|
@@ -237,7 +237,7 @@ pub fn lemma_2() -> @kernel.Thm {
 ///|
 /// LEMMA_3
 fn step_19() -> Unit raise {
-  lemma_3_c.set(vec3_rule(@parser.parse_term("forall u:real^3. vec 0 dot u = &0")))
+  lemma_3_c.set(vec3_rule(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], dot(vec(0), u) == real_of_num(0)")))
 }
 
 ///|
@@ -252,7 +252,7 @@ pub fn lemma_3() -> @kernel.Thm {
 ///|
 /// LEMMA_4
 fn step_20() -> Unit raise {
-  lemma_4_c.set(vec3_rule(@parser.parse_term("forall u:real^3. u dot vec 0 = &0")))
+  lemma_4_c.set(vec3_rule(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], dot(u, vec(0)) == real_of_num(0)")))
 }
 
 ///|
@@ -267,7 +267,7 @@ pub fn lemma_4() -> @kernel.Thm {
 ///|
 /// LEMMA_5
 fn step_21() -> Unit raise {
-  lemma_5_c.set(vec3_rule(@parser.parse_term("forall x. x cross x = vec 0")))
+  lemma_5_c.set(vec3_rule(@term_syntax.parse_term("∀ x : Cart[Real, Tybit1[Unit]], cross(x, x) == vec(0)")))
 }
 
 ///|
@@ -282,7 +282,7 @@ pub fn lemma_5() -> @kernel.Thm {
 ///|
 /// LEMMA_6
 fn step_22() -> Unit raise {
-  lemma_6_c.set(vec3_rule(@parser.parse_term("forall u. ~(u = vec 0)\n      ==> ~(u cross basis 1 = vec 0) \\/\n          ~(u cross basis 2 = vec 0) \\/\n          ~(u cross basis 3 = vec 0)")))
+  lemma_6_c.set(vec3_rule(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], !(u == vec(0)) → !(cross(u, basis(1)) == vec(0)) || !(cross(u, basis(2)) == vec(0)) || !(cross(u, basis(3)) == vec(0))")))
 }
 
 ///|
@@ -297,7 +297,7 @@ pub fn lemma_6() -> @kernel.Thm {
 ///|
 /// LEMMA_7
 fn step_23() -> Unit raise {
-  lemma_7_c.set(vec3_rule(@parser.parse_term("forall u v w. (u cross v = vec 0) ==> (u dot (v cross w) = &0)")))
+  lemma_7_c.set(vec3_rule(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], ∀ v : Cart[Real, Tybit1[Unit]], ∀ w : Cart[Real, Tybit1[Unit]], cross(u, v) == vec(0) → dot(u, cross(v, w)) == real_of_num(0)")))
 }
 
 ///|
@@ -314,11 +314,11 @@ pub fn lemma_7() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t17 = @meson.asm_meson_tac(@list.List([lemma_0(), lemma_1(), lemma_2(), lemma_3(), lemma_4(), lemma_5(), lemma_6(), lemma_7()]))
   let t16 = @simp.asm_rewrite_tac(@list.List([@vectors.orthogonal()]))
-  let t13 = @parser.parse_term("u cross v = vec 0")
-  let t14 = @parser.parse_term("v:real^3 = vec 0")
-  let t15 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("u:real^3 = vec 0"), t14, t13]))
+  let t13 = @term_syntax.parse_term("cross((u : Cart[Real, Tybit1[Unit]]), (v : Cart[Real, Tybit1[Unit]])) == vec(0)")
+  let t14 = @term_syntax.parse_term("(v : Cart[Real, Tybit1[Unit]]) == vec(0)")
+  let t15 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("(u : Cart[Real, Tybit1[Unit]]) == vec(0)"), t14, t13]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t15), t16), t17)
-  normal_exists_c.set(@tactics.prove(@parser.parse_term("forall u v:real^3. ?w. ~(w = vec 0) /\\ orthogonal u w /\\ orthogonal v w"), t18))
+  normal_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], ∀ v : Cart[Real, Tybit1[Unit]], ∃ w : Cart[Real, Tybit1[Unit]], !(w == vec(0)) && orthogonal(u, w) && orthogonal(v, w)"), t18))
 }
 
 ///|

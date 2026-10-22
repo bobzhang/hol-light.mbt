@@ -156,11 +156,11 @@ pub fn inferpsign_v1(x18 : @list.List[@kernel.Term], x19 : @list.List[@kernel.Th
 ///|
 /// MK_REP
 fn step_1() -> Unit raise {
-  let rep_tm = @parser.parse_term("REPLICATE:num -> sign -> sign list")
-  let len_tm = @parser.parse_term("LENGTH:real list -> num")
-  let one = @parser.parse_term("1")
-  let two = @parser.parse_term("2")
-  let unknown = @parser.parse_term("Unknown")
+  let rep_tm = @term_syntax.parse_term("(REPLICATE : (Num, Sign) -> List[Sign])")
+  let len_tm = @term_syntax.parse_term("(LENGTH : (List[Real]) -> Num)")
+  let one = @term_syntax.parse_term("1")
+  let two = @term_syntax.parse_term("2")
+  let unknown = @term_syntax.parse_term("Unknown")
   mk_rep_c.set(fn(x23 : @kernel.Term) -> @kernel.Thm raise {
     let pts = x23
     let num = @basics.mk_binop(@rqe_num.np(), @basics.mk_binop(@rqe_num.nm(), two, @kernel.mk_comb(len_tm, pts)), one)
@@ -247,21 +247,21 @@ pub fn prove_nonzero(x32 : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// INFERPT
 fn step_2() -> Unit raise {
-  let unknown = @parser.parse_term("Unknown")
-  let zero = @parser.parse_term("Zero")
-  let pos = @parser.parse_term("Pos")
-  let neg = @parser.parse_term("Neg")
-  let pow = @parser.parse_term("(pow)")
-  let even_tm = @parser.parse_term("(EVEN)")
-  let odd_tm = @parser.parse_term("(ODD)")
+  let unknown = @term_syntax.parse_term("Unknown")
+  let zero = @term_syntax.parse_term("Zero")
+  let pos = @term_syntax.parse_term("Pos")
+  let neg = @term_syntax.parse_term("Neg")
+  let pow = @term_syntax.parse_term("real_pow")
+  let even_tm = @term_syntax.parse_term("EVEN")
+  let odd_tm = @term_syntax.parse_term("ODD")
   let rr_ty = @parser.parse_type("real -> real")
   let sl_ty = @parser.parse_type("sign list")
   let s_ty = @parser.parse_type("sign")
-  let imat = @parser.parse_term("interpmat")
+  let imat = @term_syntax.parse_term("interpmat")
   let rr_length = @kernel.mk_const("LENGTH", @list.List([(rr_ty, @kernel.aty)]))
   let s_length = @kernel.mk_const("LENGTH", @list.List([(s_ty, @kernel.aty)]))
   let sl_length = @kernel.mk_const("LENGTH", @list.List([(sl_ty, @kernel.aty)]))
-  let imat_1 = @parser.parse_term("interpmat")
+  let imat_1 = @term_syntax.parse_term("interpmat")
   inferpt_c.set(fn(x33 : @list.List[@kernel.Term]) -> ((@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> ((@list.List[@kernel.Thm]) -> ((Int64) -> @kernel.Thm raise) raise) raise) raise) raise {
     let vars = x33
     fn(x34 : @list.List[@kernel.Thm]) -> ((@kernel.Thm) -> ((@list.List[@kernel.Thm]) -> ((Int64) -> @kernel.Thm raise) raise) raise) raise {

@@ -31,16 +31,16 @@ test "Formal_ineqs/trig/cos_bounds_eval matches Formal_ineqs/trig/cos_bounds_eva
     @testkit.normalize_times(log.contents()),
     content=(
       #|Formal_ineqs/trig/cos_bounds_eval quotations (21302):
-      #|  cos x <= &1
-      #|  -- &1 <= cos x
-      #|  m * b:real
-      #|  p1 - x * p2:real
-      #|  a - n:real
-      #|  forall c x p1 p2 a b m n r. c <= p1 - x * p2 ==>\n\t\t\t\t\tinterval_arith p1 (&0, a) /\\\n\t\t\t\t\tinterval_arith b (&0, p2) /\\\n\t\t\t\t\tinterval_arith m (&0, x) /\\\n\t\t\t\t\tn <= m * b /\\\n\t\t\t\t\ta - n <= r\n\t\t\t\t\t==> c <= r
-      #|  m * b:real
-      #|  p1 - x * p2:real
-      #|  a - n:real
-      #|  forall c x p1 p2 a b m n r. p1 - x * p2 <= c ==>\n\t\t\t\t       interval_arith a (&0, p1) /\\\n\t\t\t\t       interval_arith p2 (&0, b) /\\\n\t\t\t\t       interval_arith x (&0, m) /\\\n\t\t\t\t       m * b <= n /\\\n\t\t\t\t       r <= a - n\n\t\t\t\t       ==> r <= c
+      #|  cos((x : Real)) <= real_of_num(1)
+      #|  -real_of_num(1) <= cos((x : Real))
+      #|  (m : Real) * (b : Real)
+      #|  (p1 : Real) - (x : Real) * (p2 : Real)
+      #|  (a : Real) - (n : Real)
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 p1 : Real, \226\136\128 p2 : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, \226\136\128 n : Real, \226\136\128 r : Real, c <= p1 - x * p2 \226\134\146 interval_arith(p1, (real_of_num(0), a)) && interval_arith(b, (real_of_num(0), p2)) && interval_arith(m, (real_of_num(0), x)) && n <= m * b && a - n <= r \226\134\146 c <= r
+      #|  (m : Real) * (b : Real)
+      #|  (p1 : Real) - (x : Real) * (p2 : Real)
+      #|  (a : Real) - (n : Real)
+      #|  \226\136\128 c : Real, \226\136\128 x : Real, \226\136\128 p1 : Real, \226\136\128 p2 : Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 m : Real, \226\136\128 n : Real, \226\136\128 r : Real, p1 - x * p2 <= c \226\134\146 interval_arith(a, (real_of_num(0), p1)) && interval_arith(p2, (real_of_num(0), b)) && interval_arith(x, (real_of_num(0), m)) && m * b <= n && r <= a - n \226\134\146 r <= c
       #|  poly_f
       #|  (21291 more times)
       #|types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

@@ -3,7 +3,7 @@
 ///|
 /// prove_nonconstant
 fn step_1() -> Unit raise {
-  let nonconstant_tm = @parser.parse_term("nonconstant")
+  let nonconstant_tm = @term_syntax.parse_term("nonconstant")
   prove_nonconstant_c.set(fn(x1 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let pdiff_thm = x1
     fn(x2 : @kernel.Thm) -> @kernel.Thm raise {
@@ -69,8 +69,8 @@ pub fn remove_infinities_v1(x8 : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// get_dirs
 fn step_2() -> Unit raise {
-  let pos = @parser.parse_term("Pos")
-  let neg = @parser.parse_term("Neg")
+  let pos = @term_syntax.parse_term("Pos")
+  let neg = @term_syntax.parse_term("Neg")
   get_dirs_c.set(fn(x10 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let lb_deriv = x10
     fn(x11 : @kernel.Term) -> @kernel.Thm raise {
@@ -108,8 +108,8 @@ pub fn get_dirs(x : @kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
 ///|
 /// get_sing_dirs
 fn step_3() -> Unit raise {
-  let pos = @parser.parse_term("Pos")
-  let neg = @parser.parse_term("Neg")
+  let pos = @term_syntax.parse_term("Pos")
+  let neg = @term_syntax.parse_term("Neg")
   get_sing_dirs_c.set(fn(x12 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let lb_deriv = x12
     fn(x13 : @kernel.Term) -> @kernel.Thm raise {
@@ -196,11 +196,11 @@ fn step_4() -> Unit raise {
 ///|
 /// ADD_INFINITIES
 fn step_5() -> Unit raise {
-  let real_app = @parser.parse_term("APPEND:real list -> real list -> real list")
-  let sign_app = @parser.parse_term("APPEND:(sign list) list -> (sign list) list -> (sign list) list")
-  let imat = @parser.parse_term("interpmat")
-  let pos = @parser.parse_term("Pos")
-  let neg = @parser.parse_term("Neg")
+  let real_app = @term_syntax.parse_term("(APPEND : (List[Real], List[Real]) -> List[Real])")
+  let sign_app = @term_syntax.parse_term("(APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])")
+  let imat = @term_syntax.parse_term("interpmat")
+  let pos = @term_syntax.parse_term("Pos")
+  let neg = @term_syntax.parse_term("Neg")
   let sl_ty = @parser.parse_type("sign list")
   let real_ty = @parser.parse_type("real")
   add_infinities_v1_c.set(fn(x17 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Thm) -> ((@kernel.Thm) -> (@kernel.Thm, (@kernel.Term, @kernel.Thm), (@kernel.Term, @kernel.Thm)) raise) raise) raise) raise {

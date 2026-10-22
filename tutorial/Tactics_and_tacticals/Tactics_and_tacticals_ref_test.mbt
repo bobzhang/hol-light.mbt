@@ -5570,21 +5570,21 @@ test "Tutorial/Tactics_and_tacticals matches Tutorial/Tactics_and_tacticals.ml" 
       #|Warning: Free variables in goal: f, n
       #|Warning: Free variables in goal: f, n
       #|Tutorial/Tactics_and_tacticals quotations (15):
-      #|  2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7
-      #|  2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7
-      #|  2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7
-      #|  2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7
-      #|  --y
-      #|  x:real
-      #|  y:real
-      #|  --x
-      #|  forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)
-      #|  y:real
-      #|  --x
-      #|  forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)
-      #|  forall n. nsum(1..n) (\\i. i) = (n * (n + 1)) DIV 2
-      #|  forall n. nsum(1..n) (\\i. i * i) = (n * (n + 1) * (2 * n + 1)) DIV 6
-      #|  forall n. nsum(1..n) (\\i. i*i*i) = (n * n * (n + 1) * (n + 1)) DIV 4
+      #|  2 <= (n : Num) && n <= 2 \226\134\146 (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7
+      #|  2 <= (n : Num) && n <= 2 \226\134\146 (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7
+      #|  2 <= (n : Num) && n <= 2 \226\134\146 (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7
+      #|  2 <= (n : Num) && n <= 2 \226\134\146 (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7
+      #|  -(y : Real)
+      #|  (x : Real)
+      #|  (y : Real)
+      #|  -(x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x * y \226\134\146 (real_of_num(0) < x) == (real_of_num(0) < y)
+      #|  (y : Real)
+      #|  -(x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x * y \226\134\146 (real_of_num(0) < x) == (real_of_num(0) < y)
+      #|  \226\136\128 n : Num, nsum(op_dot_dot(1, n), (i : Num) => i) == DIV(n * (n + 1), 2)
+      #|  \226\136\128 n : Num, nsum(op_dot_dot(1, n), (i : Num) => i * i) == DIV(n * ((n + 1) * (2 * n + 1)), 6)
+      #|  \226\136\128 n : Num, nsum(op_dot_dot(1, n), (i : Num) => i * (i * i)) == DIV(n * (n * ((n + 1) * (n + 1))), 4)
       #|trivial =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#real_mul:fun(real,fun(real,real)) x:real) y:real))) ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real)))))))
       #|SUM_OF_NUMBERS =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. i:num))) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))
       #|SUM_OF_SQUARES =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#nsum:fun(fun(num,bool),fun(fun(num,num),num)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) (\i:num. ((#*:fun(num,fun(num,num)) i:num) i:num)))) ((#DIV:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) n:num) ((#*:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) n:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))

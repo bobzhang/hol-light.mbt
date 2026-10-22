@@ -48,7 +48,7 @@ pub fn case_rule(x : @kernel.Thm) -> @kernel.Thm raise {
 /// cos_high_trivial
 fn step_4() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([@transcendentals.cos_bounds()]))
-  let t8 = (@parser.parse_term("cos x <= &1"), t7)
+  let t8 = (@term_syntax.parse_term("cos((x : Real)) <= real_of_num(1)"), t7)
   cos_high_trivial_c.set(case_rule((fn(x6 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x6.0, x6.1)
   })(t8)))
@@ -67,7 +67,7 @@ pub fn cos_high_trivial() -> @kernel.Thm {
 /// cos_low_trivial
 fn step_5() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([@transcendentals.cos_bounds()]))
-  let t11 = (@parser.parse_term("-- &1 <= cos x"), t10)
+  let t11 = (@term_syntax.parse_term("-real_of_num(1) <= cos((x : Real))"), t10)
   cos_low_trivial_c.set(case_rule((fn(x9 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x9.0, x9.1)
   })(t11)))
@@ -88,20 +88,20 @@ fn step_6() -> Unit raise {
   let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t24 = @simp.asm_rewrite_tac(@list.List([]))
-  let t23 = @tactics.exists_tac(@parser.parse_term("m * b:real"))
+  let t23 = @tactics.exists_tac(@term_syntax.parse_term("(m : Real) * (b : Real)"))
   let t22 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t21 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
   let t20 = @tactics.match_mp_tac(@real.real_le_add2())
   let t19 = @simp.rewrite_tac(@list.List([@realax.real_sub()]))
   let t18 = @simp.asm_rewrite_tac(@list.List([]))
-  let t17 = @tactics.exists_tac(@parser.parse_term("p1 - x * p2:real"))
+  let t17 = @tactics.exists_tac(@term_syntax.parse_term("(p1 : Real) - (x : Real) * (p2 : Real)"))
   let t16 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t15 = @simp.asm_rewrite_tac(@list.List([]))
-  let t14 = @tactics.exists_tac(@parser.parse_term("a - n:real"))
+  let t14 = @tactics.exists_tac(@term_syntax.parse_term("(a : Real) - (n : Real)"))
   let t13 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), t12), t13), t14), t15), t16), t17), t18), t19), t20), t21), t22), t23), t24), t25), t26)
-  bound_high_transformation_c.set(@tactics.prove(@parser.parse_term("forall c x p1 p2 a b m n r. c <= p1 - x * p2 ==>\n\t\t\t\t\tinterval_arith p1 (&0, a) /\\\n\t\t\t\t\tinterval_arith b (&0, p2) /\\\n\t\t\t\t\tinterval_arith m (&0, x) /\\\n\t\t\t\t\tn <= m * b /\\\n\t\t\t\t\ta - n <= r\n\t\t\t\t\t==> c <= r"), t27))
+  bound_high_transformation_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, ∀ x : Real, ∀ p1 : Real, ∀ p2 : Real, ∀ a : Real, ∀ b : Real, ∀ m : Real, ∀ n : Real, ∀ r : Real, c <= p1 - x * p2 → interval_arith(p1, (real_of_num(0), a)) && interval_arith(b, (real_of_num(0), p2)) && interval_arith(m, (real_of_num(0), x)) && n <= m * b && a - n <= r → c <= r"), t27))
 }
 
 ///|
@@ -119,20 +119,20 @@ fn step_7() -> Unit raise {
   let t42 = @simp.asm_rewrite_tac(@list.List([]))
   let t41 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t40 = @simp.asm_rewrite_tac(@list.List([]))
-  let t39 = @tactics.exists_tac(@parser.parse_term("m * b:real"))
+  let t39 = @tactics.exists_tac(@term_syntax.parse_term("(m : Real) * (b : Real)"))
   let t38 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t37 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
   let t36 = @tactics.match_mp_tac(@real.real_le_add2())
   let t35 = @simp.rewrite_tac(@list.List([@realax.real_sub()]))
   let t34 = @simp.asm_rewrite_tac(@list.List([]))
-  let t33 = @tactics.exists_tac(@parser.parse_term("p1 - x * p2:real"))
+  let t33 = @tactics.exists_tac(@term_syntax.parse_term("(p1 : Real) - (x : Real) * (p2 : Real)"))
   let t32 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t31 = @simp.asm_rewrite_tac(@list.List([]))
-  let t30 = @tactics.exists_tac(@parser.parse_term("a - n:real"))
+  let t30 = @tactics.exists_tac(@term_syntax.parse_term("(a : Real) - (n : Real)"))
   let t29 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t28 = @tactics.repeat_tac(@tactics.strip_tac)
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), t28), t29), t30), t31), t32), t33), t34), t35), t36), t37), t38), t39), t40), t41), t42)
-  bound_low_transformation_c.set(@tactics.prove(@parser.parse_term("forall c x p1 p2 a b m n r. p1 - x * p2 <= c ==>\n\t\t\t\t       interval_arith a (&0, p1) /\\\n\t\t\t\t       interval_arith p2 (&0, b) /\\\n\t\t\t\t       interval_arith x (&0, m) /\\\n\t\t\t\t       m * b <= n /\\\n\t\t\t\t       r <= a - n\n\t\t\t\t       ==> r <= c"), t43))
+  bound_low_transformation_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, ∀ x : Real, ∀ p1 : Real, ∀ p2 : Real, ∀ a : Real, ∀ b : Real, ∀ m : Real, ∀ n : Real, ∀ r : Real, p1 - x * p2 <= c → interval_arith(a, (real_of_num(0), p1)) && interval_arith(p2, (real_of_num(0), b)) && interval_arith(x, (real_of_num(0), m)) && m * b <= n && r <= a - n → r <= c"), t43))
 }
 
 ///|
@@ -161,7 +161,7 @@ pub fn mk_cos_bound_tables(x44 : @kernel.Thm) -> ((Int64) -> ((Int64) -> (@kerne
     })(((x54 : @kernel.Term) => @basics.find_terms(fn(x52 : @kernel.Term) -> Bool raise {
       let tm = x52
       try {
-        let t53 = @parser.parse_term("poly_f")
+        let t53 = @term_syntax.parse_term("poly_f")
         (@kernel.rator(@kernel.rator(tm)) == t53)
       } catch {
         Failure(_) => false

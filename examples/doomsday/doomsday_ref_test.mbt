@@ -5765,7 +5765,7 @@ test "Examples/doomsday matches Examples/doomsday.ml" {
       #|  (dayname : (Num) -> Day)((n : Num)) == (if n == 0 { Sunday } else { if n == 1 { Monday } else { if n == 2 { Tuesday } else { if n == 3 { Wednesday } else { if n == 4 { Thursday } else { if n == 5 { Friday } else { Saturday } } } } } })
       #|  (doomsday_day : (Num, Num, Num) -> Day)((y : Num), (m : Num), (d : Num)) == dayname(doomsday_algorithm(y, m, d))
       #|  \226\136\128 y : Num, \226\136\128 m : Num, \226\136\128 d : Num, valid_date((y, m, d)) \226\134\146 doomsday_day(y, m, d) == dayname(day_of_week(y, m, d))
-      #|  COND: bool -> A -> A -> A
+      #|  (COND : (Bool, A, A) -> A)
       #|  (COND : (Bool, Num, Num) -> Num)
       #|  (COND : (Bool, Day, Day) -> Day)
       #|  doomsday_day(1776, 7, 4) == Thursday

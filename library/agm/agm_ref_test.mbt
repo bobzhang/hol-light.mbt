@@ -5713,50 +5713,50 @@ test "Library/agm matches Library/agm.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..2..4..6..8..11..14..17..solved at 27
       #|Library/agm quotations (46):
-      #|  1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2
-      #|  forall P. (forall i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2
-      #|  1..2 = {1,2}
+      #|  (1 <= (i : Num) && i <= 2) == (i == 1 || i == 2)
+      #|  \226\136\128 P : (Num) -> Bool, (\226\136\128 i : Num, 1 <= i && i <= 2 \226\134\146 P(i)) == (P(1) && P(2))
+      #|  op_dot_dot(1, 2) == {1, 2}
       #|  x * y <= ((x + y) / &2) pow 2 <=> &0 <= (x - y) * (x - y)
-      #|  forall x y. x * y <= ((x + y) / &2) pow 2
-      #|  1 <= n + 1
-      #|  sum(1..2*n) f = sum(1..n) f + sum(n+1..2*n) f
-      #|  1 <= n + 1
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x * y <= pow((x + y) / real_of_num(2), 2)
+      #|  1 <= (n : Num) + 1
+      #|  sum(op_dot_dot(1, 2 * (n : Num)), (f : (Num) -> Real)) == sum(op_dot_dot(1, n), f) + sum(op_dot_dot(n + 1, 2 * n), f)
+      #|  1 <= (n : Num) + 1
       #|  product(1..2*n) f = product(1..n) f * product(n+1..2*n) f
-      #|  SUC(2 * m) + 1 = 2 * (m + 1)
-      #|  SUC(2 * m) = 1 \\/ m + 1 < SUC(2 * m)
-      #|  2 * n = 0 \\/ n < 2 * n
-      #|  EVEN n
-      #|  1 = 0 + 1 /\\ 2 = 1 + 1
-      #|  P(0) /\\ P(1)
-      #|  n:num
+      #|  SUC(2 * (m : Num)) + 1 == 2 * (m + 1)
+      #|  SUC(2 * (m : Num)) == 1 || m + 1 < SUC(2 * m)
+      #|  2 * (n : Num) == 0 || n < 2 * n
+      #|  EVEN((n : Num))
+      #|  1 == 0 + 1 && 2 == 1 + 1
+      #|  (P : (Num) -> Bool)(0) && P(1)
+      #|  (n : Num)
       #|  forall P. P 2 /\\ (forall n. P n ==> P(2 * n)) /\\ (forall n. P(n + 1) ==> P n) ==> forall n. P n
-      #|  1 <= SUC n
-      #|  1 + n = SUC n
-      #|  n:num
-      #|  n:num
+      #|  1 <= SUC((n : Num))
+      #|  1 + (n : Num) == SUC(n)
+      #|  (n : Num)
+      #|  (n : Num)
       #|  1
-      #|  a:num->real
-      #|  1 <= n ==> ~(n = 0)
-      #|  A = &0
-      #|  &0 < A
-      #|  &1 <= &n ==> (s + s / &n) / (&n + &1) = s / &n
-      #|  1 <= n
-      #|  1 <= SUC n /\\ ~(SUC n <= n)
-      #|  A = sum(1..n) a / &n
-      #|  1 <= n + 1
-      #|  \\i. if i <= n then a(i) else sum(1..n) a / &n
-      #|  a:num->real
+      #|  (a : (Num) -> Real)
+      #|  1 <= (n : Num) \226\134\146 !(n == 0)
+      #|  (A : Real) == real_of_num(0)
+      #|  real_of_num(0) < (A : Real)
+      #|  real_of_num(1) <= real_of_num((n : Num)) \226\134\146 ((s : Real) + s / real_of_num(n)) / (real_of_num(n) + real_of_num(1)) == s / real_of_num(n)
+      #|  1 <= (n : Num)
+      #|  1 <= SUC((n : Num)) && !(SUC(n) <= n)
+      #|  (A : Real) == sum(op_dot_dot(1, (n : Num)), (a : (Num) -> Real)) / real_of_num(n)
+      #|  1 <= (n : Num) + 1
+      #|  (i : Num) => if i <= (n : Num) { (a : (Num) -> Real)(i) } else { sum(op_dot_dot(1, n), a) / real_of_num(n) }
+      #|  (a : (Num) -> Real)
       #|  n:num
-      #|  (x + y) * (a * b) = (x * a + y * a) * b
-      #|  &2 * &n = &n * &2
-      #|  1 <= 2 * n ==> 1 <= n
+      #|  ((x : Real) + (y : Real)) * ((a : Real) * (b : Real)) == (x * a + y * a) * b
+      #|  real_of_num(2) * real_of_num((n : Num)) == real_of_num(n) * real_of_num(2)
+      #|  1 <= 2 * (n : Num) \226\134\146 1 <= n
       #|  1 <= i /\\ i <= n ==> 1 <= i + n /\\ i + n <= 2 * n
-      #|  n + 1 <= i ==> 1 <= i
-      #|  1 <= 2 * n ==> 1 <= n
-      #|  i <= n ==> i <= 2 * n
-      #|  i <= n ==> i <= 2 * n
+      #|  (n : Num) + 1 <= (i : Num) \226\134\146 1 <= i
+      #|  1 <= 2 * (n : Num) \226\134\146 1 <= n
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= 2 * n
+      #|  (i : Num) <= (n : Num) \226\134\146 i <= 2 * n
       #|  (sum(1..n) a / &n) pow n * (sum(n+1..2*n) a / &n) pow n
-      #|  a:num->real
+      #|  (a : (Num) -> Real)
       #|  n:num
       #|  forall n a. 1 <= n /\\ (forall i. 1 <= i /\\ i <= n ==> &0 <= a(i))\n         ==> product(1..n) a <= (sum(1..n) a / &n) pow n
       #|FORALL_2 =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (P:fun(num,bool) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (P:fun(num,bool) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))

@@ -26,11 +26,11 @@ fn step_1() -> Unit raise {
 ///|
 /// maxima_ops
 fn step_2() -> Unit raise {
-  let t2 = ("^", @parser.parse_term("(pow)"))
-  let t3 = ("/", @parser.parse_term("(/)"))
-  let t4 = ("*", @parser.parse_term("( * )"))
-  let t5 = ("-", @parser.parse_term("(-)"))
-  maxima_ops_c.set(@list.List([("+", @parser.parse_term("(+)")), t5, t4, t3, t2]))
+  let t2 = ("^", @term_syntax.parse_term("real_pow"))
+  let t3 = ("/", @term_syntax.parse_term("op_slash"))
+  let t4 = ("*", @term_syntax.parse_term("real_mul"))
+  let t5 = ("-", @term_syntax.parse_term("real_sub"))
+  maxima_ops_c.set(@list.List([("+", @term_syntax.parse_term("real_add")), t5, t4, t3, t2]))
 }
 
 ///|
@@ -45,8 +45,8 @@ pub fn maxima_ops() -> @list.List[(String, @kernel.Term)] {
 ///|
 /// maxima_funs
 fn step_3() -> Unit raise {
-  let t6 = ("cos", @parser.parse_term("cos"))
-  maxima_funs_c.set(@list.List([("sin", @parser.parse_term("sin")), t6]))
+  let t6 = ("cos", @term_syntax.parse_term("cos"))
+  maxima_funs_c.set(@list.List([("sin", @term_syntax.parse_term("sin")), t6]))
 }
 
 ///|
@@ -61,7 +61,7 @@ pub fn maxima_funs() -> @list.List[(String, @kernel.Term)] {
 ///|
 /// mk_uneg
 fn step_4() -> Unit raise {
-  let t8 = @parser.parse_term("(--)")
+  let t8 = @term_syntax.parse_term("real_neg")
   mk_uneg_c.set((x9 : @kernel.Term) => @lib.curry(fn(x7 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
     @kernel.mk_comb(x7.0, x7.1)
   }, t8, x9))
@@ -79,7 +79,7 @@ pub fn mk_uneg(x : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// dest_uneg
 fn step_5() -> Unit raise {
-  let ntm = @parser.parse_term("(--)")
+  let ntm = @term_syntax.parse_term("real_neg")
   dest_uneg_c.set(fn(x10 : @kernel.Term) -> @kernel.Term raise {
     let tm = x10
     let (op, t) = @kernel.dest_comb(tm)
@@ -103,7 +103,7 @@ pub fn dest_uneg(x : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// mk_pow
 fn step_6() -> Unit raise {
-  let t11 = @parser.parse_term("(pow)")
+  let t11 = @term_syntax.parse_term("real_pow")
   let f : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x14 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x15 : @kernel.Term) -> @kernel.Term raise {
       ((x12 : @kernel.Term, x13 : @kernel.Term) => @basics.mk_binop(t11, x12, x13))(x14, x15)
@@ -185,7 +185,7 @@ pub fn string_of_hol(x20 : @kernel.Term) -> String raise {
 ///|
 /// Tutorial/Linking_external_tools.ml:38
 fn step_8() -> Unit raise {
-  ignore(string_of_hol(@parser.parse_term("(x + sin(-- &2 * x)) pow 2 - cos(x - &22 / &7)")))
+  ignore(string_of_hol(@term_syntax.parse_term("pow((x : Real) + sin(-real_of_num(2) * x), 2) - cos(x - real_of_num(22) / real_of_num(7))")))
 }
 
 ///|
@@ -369,19 +369,19 @@ pub fn factor_conv(x67 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Tutorial/Linking_external_tools.ml:86
 fn step_11() -> Unit raise {
-  ignore(factor_conv(@parser.parse_term("&1234567890")))
+  ignore(factor_conv(@term_syntax.parse_term("real_of_num(1234567890)")))
 }
 
 ///|
 /// Tutorial/Linking_external_tools.ml:88
 fn step_12() -> Unit raise {
-  ignore(factor_conv(@parser.parse_term("x pow 6 - &1")))
+  ignore(factor_conv(@term_syntax.parse_term("pow((x : Real), 6) - real_of_num(1)")))
 }
 
 ///|
 /// Tutorial/Linking_external_tools.ml:90
 fn step_13() -> Unit raise {
-  ignore(factor_conv(@parser.parse_term("r * (r * x * (&1 - x)) * (&1 - r * x * (&1 - x)) - x")))
+  ignore(factor_conv(@term_syntax.parse_term("(r : Real) * (r * ((x : Real) * (real_of_num(1) - x)) * (real_of_num(1) - r * (x * (real_of_num(1) - x)))) - x")))
 }
 
 ///|
@@ -406,13 +406,13 @@ pub fn antideriv_conv_v1(x68 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Tutorial/Linking_external_tools.ml:101
 fn step_14() -> Unit raise {
-  ignore(antideriv_conv_v1(@parser.parse_term("\\x. (x + &5) pow 2 + &77 * x")))
+  ignore(antideriv_conv_v1(@term_syntax.parse_term("(x : Real) => pow(x + real_of_num(5), 2) + real_of_num(77) * x")))
 }
 
 ///|
 /// Tutorial/Linking_external_tools.ml:103
 fn step_15() -> Unit raise {
-  ignore(antideriv_conv_v1(@parser.parse_term("\\x. sin(x) + x pow 11")))
+  ignore(antideriv_conv_v1(@term_syntax.parse_term("(x : Real) => sin(x) + pow(x, 11)")))
 }
 
 ///|
@@ -423,7 +423,7 @@ fn step_16() -> Unit raise {
   let t75 = @simp.rewrite_tac(@list.List([@arith.add1(), @equal.gsym(@realax.real_of_num_add())]))
   let t74 = @simp.rewrite_tac(@list.List([@nums.numeral(), @arith.bit0(), @arith.bit1()]))
   let t78 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@real.real_mul_2(), @realarith.real_pow_2()])), t74), t75), t76), t77)
-  sin_n_clauses_c.set(@tactics.prove(@parser.parse_term("(sin(&(NUMERAL(BIT0 n)) * x) =\n    &2 * sin(&(NUMERAL n) * x) * cos(&(NUMERAL n) * x)) /\\\n   (sin(&(NUMERAL(BIT1 n)) * x) =\n        sin(&(NUMERAL(BIT0 n)) * x) * cos(x) +\n        sin(x) * cos(&(NUMERAL(BIT0 n)) * x)) /\\\n   (cos(&(NUMERAL(BIT0 n)) * x) =\n        cos(&(NUMERAL n) * x) pow 2 - sin(&(NUMERAL n) * x) pow 2) /\\\n   (cos(&(NUMERAL(BIT1 n)) * x) =\n        cos(&(NUMERAL(BIT0 n)) * x) * cos(x) -\n        sin(x) * sin(&(NUMERAL(BIT0 n)) * x))"), t78))
+  sin_n_clauses_c.set(@tactics.prove(@term_syntax.parse_term("sin(real_of_num(NUMERAL(BIT0((n : Num)))) * (x : Real)) == real_of_num(2) * (sin(real_of_num(NUMERAL(n)) * x) * cos(real_of_num(NUMERAL(n)) * x)) && sin(real_of_num(NUMERAL(BIT1(n))) * x) == sin(real_of_num(NUMERAL(BIT0(n))) * x) * cos(x) + sin(x) * cos(real_of_num(NUMERAL(BIT0(n))) * x) && cos(real_of_num(NUMERAL(BIT0(n))) * x) == pow(cos(real_of_num(NUMERAL(n)) * x), 2) - pow(sin(real_of_num(NUMERAL(n)) * x), 2) && cos(real_of_num(NUMERAL(BIT1(n))) * x) == cos(real_of_num(NUMERAL(BIT0(n))) * x) * cos(x) - sin(x) * sin(real_of_num(NUMERAL(BIT0(n))) * x)"), t78))
 }
 
 ///|
@@ -468,20 +468,20 @@ pub fn antideriv_conv(x84 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Tutorial/Linking_external_tools.ml:140
 fn step_17() -> Unit raise {
-  ignore(@lib.time(antideriv_conv, @parser.parse_term("\\x. sin(x) pow 3")))
+  ignore(@lib.time(antideriv_conv, @term_syntax.parse_term("(x : Real) => pow(sin(x), 3)")))
 }
 
 ///|
 /// Tutorial/Linking_external_tools.ml:142
 fn step_18() -> Unit raise {
-  ignore(@lib.time(antideriv_conv, @parser.parse_term("\\x. sin(x) * sin(x) pow 5 * cos(x) pow 4 + cos(x)")))
+  ignore(@lib.time(antideriv_conv, @term_syntax.parse_term("(x : Real) => sin(x) * (pow(sin(x), 5) * pow(cos(x), 4)) + cos(x)")))
 }
 
 ///|
 /// FCT1_WEAK
 fn step_19() -> Unit raise {
   let t91 = @meson.meson_tac(@list.List([@transc.ftc1()]))
-  fct1_weak_c.set(@tactics.prove(@parser.parse_term("(forall x. (f diffl f'(x)) x) ==> forall x. &0 <= x ==> defint(&0,x) f' (f x - f(&0))"), t91))
+  fct1_weak_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Real, diffl((f : (Real) -> Real), (f' : (Real) -> Real)(x), x)) → (∀ x : Real, real_of_num(0) <= x → defint((real_of_num(0), x), f', f(x) - f(real_of_num(0))))"), t91))
 }
 
 ///|
@@ -510,7 +510,7 @@ pub fn integral_conv(x92 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Tutorial/Linking_external_tools.ml:154
 fn step_20() -> Unit raise {
-  ignore(integral_conv(@parser.parse_term("\\x. sin(x) pow 13")))
+  ignore(integral_conv(@term_syntax.parse_term("(x : Real) => pow(sin(x), 13)")))
 }
 
 ///|

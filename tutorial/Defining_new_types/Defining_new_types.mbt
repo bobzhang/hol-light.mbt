@@ -3,7 +3,7 @@
 ///|
 /// direction_tybij
 fn step_1() -> Unit raise {
-  direction_tybij_c.set(@class.new_type_definition("direction", ("mk_dir", "dest_dir"), @meson.meson(@list.List([@Vectors.lemma_0()]), @parser.parse_term("?x:real^3. ~(x = vec 0)"))))
+  direction_tybij_c.set(@class.new_type_definition("direction", ("mk_dir", "dest_dir"), @meson.meson(@list.List([@Vectors.lemma_0()]), @term_syntax.parse_term("∃ x : Cart[Real, Tybit1[Unit]], !(x == vec(0))"))))
 }
 
 ///|
@@ -30,7 +30,7 @@ fn step_3() -> Unit raise {
 ///|
 /// perpdir
 fn step_4() -> Unit raise {
-  perpdir_c.set(@pair.new_definition(@parser.parse_term("x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)")))
+  perpdir_c.set(@pair.new_definition(@term_syntax.parse_term("(op_us_bar_us : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == orthogonal(dest_dir(x), dest_dir(y))")))
 }
 
 ///|
@@ -45,7 +45,7 @@ pub fn perpdir() -> @kernel.Thm {
 ///|
 /// pardir
 fn step_5() -> Unit raise {
-  pardir_c.set(@pair.new_definition(@parser.parse_term("x || y <=> (dest_dir x) cross (dest_dir y) = vec 0")))
+  pardir_c.set(@pair.new_definition(@term_syntax.parse_term("(op_bar_bar : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == (cross(dest_dir(x), dest_dir(y)) == vec(0))")))
 }
 
 ///|
@@ -61,7 +61,7 @@ pub fn pardir() -> @kernel.Thm {
 /// DIRECTION_CLAUSES
 fn step_6() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([direction_tybij()]))
-  direction_clauses_c.set(@tactics.prove(@parser.parse_term("((forall x. P(dest_dir x)) <=> (forall x. ~(x = vec 0) ==> P x)) /\\\n   ((?x. P(dest_dir x)) <=> (?x. ~(x = vec 0) /\\ P x))"), t1))
+  direction_clauses_c.set(@tactics.prove(@term_syntax.parse_term("(∀ x : Direction, (P : (Cart[Real, Tybit1[Unit]]) -> Bool)(dest_dir(x))) == (∀ x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) → P(x)) && (∃ x : Direction, P(dest_dir(x))) == (∃ x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && P(x))"), t1))
 }
 
 ///|
@@ -104,7 +104,7 @@ pub fn pardir_trans() -> @kernel.Thm {
 /// PARDIR_REFL, PARDIR_SYM, PARDIR_TRANS
 fn step_7() -> Unit raise {
   let t3 = @tactics.then_tac(@simp.rewrite_tac(@list.List([pardir(), direction_clauses()])), @Vectors.vec3_tac)
-  let t4 = (@parser.parse_term("(forall x. x || x) /\\\n   (forall x y. x || y <=> y || x) /\\\n   (forall x y z. x || y /\\ y || z ==> x || z)"), t3)
+  let t4 = (@term_syntax.parse_term("(∀ x : Direction, op_bar_bar(x, x)) && (∀ x : Direction, ∀ y : Direction, op_bar_bar(x, y) == op_bar_bar(y, x)) && (∀ x : Direction, ∀ y : Direction, ∀ z : Direction, op_bar_bar(x, y) && op_bar_bar(y, z) → op_bar_bar(x, z))"), t3)
   match @bool.conjuncts_rule((fn(x2 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x2.0, x2.1)
   })(t4)) {
@@ -130,11 +130,11 @@ fn step_8() -> Unit raise {
     })(((x12 : @list.List[@kernel.Thm]) => @lib.end_itlist(@bool.conj, x12))(x13))
   })
   let t8 = @tactics.match_mp_tac(@theorems.mono_exists())
-  let t6 = @parser.parse_term("p':real^3")
-  let t7 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("p:real^3"), t6]), @Vectors.normal_exists()))
+  let t6 = @term_syntax.parse_term("(p' : Cart[Real, Tybit1[Unit]])")
+  let t7 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(p : Cart[Real, Tybit1[Unit]])"), t6]), @Vectors.normal_exists()))
   let t5 = @tactics.repeat_tac(@tactics.strip_tac)
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([perpdir(), pardir(), direction_clauses()])), t5), t7), t8), t14), @Vectors.vec3_tac)
-  direction_axiom_1_c.set(@tactics.prove(@parser.parse_term("forall p p'. ~(p || p') ==> ?l. p _|_ l /\\ p' _|_ l /\\\n                             forall l'. p _|_ l' /\\ p' _|_ l' ==> l' || l"), t15))
+  direction_axiom_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Direction, ∀ p' : Direction, !op_bar_bar(p, p') → (∃ l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && (∀ l' : Direction, op_us_bar_us(p, l') && op_us_bar_us(p', l') → op_bar_bar(l', l)))"), t15))
 }
 
 ///|
@@ -151,7 +151,7 @@ pub fn direction_axiom_1() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t16 = @meson.meson_tac(@list.List([@Vectors.normal_exists(), @vectors.orthogonal_sym()]))
   let t17 = @tactics.then_tac(@simp.rewrite_tac(@list.List([perpdir(), direction_clauses()])), t16)
-  direction_axiom_2_c.set(@tactics.prove(@parser.parse_term("forall l l'. ?p. p _|_ l /\\ p _|_ l'"), t17))
+  direction_axiom_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Direction, ∀ l' : Direction, ∃ p : Direction, op_us_bar_us(p, l) && op_us_bar_us(p, l')"), t17))
 }
 
 ///|
@@ -166,15 +166,15 @@ pub fn direction_axiom_2() -> @kernel.Thm {
 ///|
 /// DIRECTION_AXIOM_3
 fn step_10() -> Unit raise {
-  let t21 = @parser.parse_term("basis 3 :real^3")
-  let t22 = @parser.parse_term("basis 2 : real^3")
+  let t21 = @term_syntax.parse_term("(basis : (Num) -> Cart[Real, Tybit1[Unit]])(3)")
+  let t22 = @term_syntax.parse_term("(basis : (Num) -> Cart[Real, Tybit1[Unit]])(2)")
   let t23 = @tactics.map_every(fn(x18 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x18
     let t20 = @simp.rewrite_tac(@list.List([@Vectors.lemma_0()]))
     @tactics.then_tac(@rqe_tactics_ext.exists_tac(t), t20)
-  }, @list.List([@parser.parse_term("basis 1 :real^3"), t22, t21]))
+  }, @list.List([@term_syntax.parse_term("(basis : (Num) -> Cart[Real, Tybit1[Unit]])(1)"), t22, t21]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([perpdir(), pardir(), direction_clauses()])), t23), @Vectors.vec3_tac)
-  direction_axiom_3_c.set(@tactics.prove(@parser.parse_term("?p p' p''.\n        ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n        ~(?l. p _|_ l /\\ p' _|_ l /\\ p'' _|_ l)"), t24))
+  direction_axiom_3_c.set(@tactics.prove(@term_syntax.parse_term("∃ p : Direction, ∃ p' : Direction, ∃ p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && !(∃ l : Direction, op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l))"), t24))
 }
 
 ///|
@@ -189,7 +189,7 @@ pub fn direction_axiom_3() -> @kernel.Thm {
 ///|
 /// CROSS_0
 fn step_11() -> Unit raise {
-  cross_0_c.set(@Vectors.vec3_rule(@parser.parse_term("x cross vec 0 = vec 0 /\\ vec 0 cross x = vec 0")))
+  cross_0_c.set(@Vectors.vec3_rule(@term_syntax.parse_term("cross((x : Cart[Real, Tybit1[Unit]]), vec(0)) == vec(0) && cross(vec(0), x) == vec(0)")))
 }
 
 ///|
@@ -211,7 +211,7 @@ fn step_12() -> Unit raise {
       s31(x32)
     }
   }), @Vectors.vec3_tac), t33])
-  let t29 = @tactics.subgoal_then(@parser.parse_term("orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 2) l /\\\n    ~((l cross basis 1) cross (l cross basis 2) = vec 0) \\/\n    orthogonal (l cross basis 1) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 1) cross (l cross basis 3) = vec 0) \\/\n    orthogonal (l cross basis 2) l /\\ orthogonal (l cross basis 3) l /\\\n    ~((l cross basis 2) cross (l cross basis 3) = vec 0)"), fn(x26 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t29 = @tactics.subgoal_then(@term_syntax.parse_term("orthogonal(cross((l : Cart[Real, Tybit1[Unit]]), basis(1)), l) && orthogonal(cross(l, basis(2)), l) && !(cross(cross(l, basis(1)), cross(l, basis(2))) == vec(0)) || orthogonal(cross(l, basis(1)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(1)), cross(l, basis(3))) == vec(0)) || orthogonal(cross(l, basis(2)), l) && orthogonal(cross(l, basis(3)), l) && !(cross(cross(l, basis(2)), cross(l, basis(3))) == vec(0))"), fn(x26 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s27 = @tactics.mp_tac(x26)
     fn(x28 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s27(x28)
@@ -219,7 +219,7 @@ fn step_12() -> Unit raise {
   })
   let t25 = @tactics.repeat_tac(@tactics.strip_tac)
   let t35 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([direction_clauses(), pardir(), perpdir()])), t25), t29), t34)
-  direction_axiom_4_weak_c.set(@tactics.prove(@parser.parse_term("forall l. ?p p'. ~(p || p') /\\ p _|_ l /\\ p' _|_ l"), t35))
+  direction_axiom_4_weak_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Direction, ∃ p : Direction, ∃ p' : Direction, !op_bar_bar(p, p') && op_us_bar_us(p, l) && op_us_bar_us(p', l)"), t35))
 }
 
 ///|
@@ -242,10 +242,10 @@ fn step_13() -> Unit raise {
       }
     })(((x41 : @list.List[@kernel.Thm]) => @lib.end_itlist(@bool.conj, x41))(x42))
   })
-  let t37 = @rqe_tactics_ext.exists_tac(@parser.parse_term("a + b:real^3"))
+  let t37 = @rqe_tactics_ext.exists_tac(@term_syntax.parse_term("(a : Cart[Real, Tybit1[Unit]]) + (b : Cart[Real, Tybit1[Unit]])"))
   let t36 = @tactics.repeat_tac(@tactics.strip_tac)
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([direction_clauses(), pardir(), perpdir()])), t36), t37), t43), @Vectors.vec3_tac)
-  orthogonal_combine_c.set(@tactics.prove(@parser.parse_term("forall x a b. a _|_ x /\\ b _|_ x /\\ ~(a || b)\n           ==> ?c. c _|_ x /\\ ~(a || c) /\\ ~(b || c)"), t44))
+  orthogonal_combine_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Direction, ∀ a : Direction, ∀ b : Direction, op_us_bar_us(a, x) && op_us_bar_us(b, x) && !op_bar_bar(a, b) → (∃ c : Direction, op_us_bar_us(c, x) && !op_bar_bar(a, c) && !op_bar_bar(b, c))"), t44))
 }
 
 ///|
@@ -261,7 +261,7 @@ pub fn orthogonal_combine() -> @kernel.Thm {
 /// DIRECTION_AXIOM_4
 fn step_14() -> Unit raise {
   let t45 = @meson.meson_tac(@list.List([direction_axiom_4_weak(), orthogonal_combine()]))
-  direction_axiom_4_c.set(@tactics.prove(@parser.parse_term("forall l. ?p p' p''. ~(p || p') /\\ ~(p' || p'') /\\ ~(p || p'') /\\\n                  p _|_ l /\\ p' _|_ l /\\ p'' _|_ l"), t45))
+  direction_axiom_4_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Direction, ∃ p : Direction, ∃ p' : Direction, ∃ p'' : Direction, !op_bar_bar(p, p') && !op_bar_bar(p', p'') && !op_bar_bar(p, p'') && op_us_bar_us(p, l) && op_us_bar_us(p', l) && op_us_bar_us(p'', l)"), t45))
 }
 
 ///|
@@ -276,7 +276,7 @@ pub fn direction_axiom_4() -> @kernel.Thm {
 ///|
 /// line_tybij
 fn step_15() -> Unit raise {
-  line_tybij_c.set(@quot.define_quotient_type("line", ("mk_line", "dest_line"), @parser.parse_term("(||)")))
+  line_tybij_c.set(@quot.define_quotient_type("line", ("mk_line", "dest_line"), @term_syntax.parse_term("op_bar_bar")))
 }
 
 ///|
@@ -292,7 +292,7 @@ pub fn line_tybij() -> (@kernel.Thm, @kernel.Thm) {
 /// PERPDIR_WELLDEF
 fn step_16() -> Unit raise {
   let t46 = @tactics.then_tac(@simp.rewrite_tac(@list.List([perpdir(), pardir(), direction_clauses()])), @Vectors.vec3_tac)
-  perpdir_welldef_c.set(@tactics.prove(@parser.parse_term("forall x y x' y'. x || x' /\\ y || y' ==> (x _|_ y <=> x' _|_ y')"), t46))
+  perpdir_welldef_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Direction, ∀ y : Direction, ∀ x' : Direction, ∀ y' : Direction, op_bar_bar(x, x') && op_bar_bar(y, y') → op_us_bar_us(x, y) == op_us_bar_us(x', y')"), t46))
 }
 
 ///|
@@ -409,7 +409,7 @@ pub fn line_axiom_4() -> @kernel.Thm {
 /// point_tybij
 fn step_23() -> Unit raise {
   let t47 = @simp.rewrite_tac(@list.List([]))
-  point_tybij_c.set(@class.new_type_definition("point", ("mk_point", "dest_point"), @tactics.prove(@parser.parse_term("?x:line. T"), t47)))
+  point_tybij_c.set(@class.new_type_definition("point", ("mk_point", "dest_point"), @tactics.prove(@term_syntax.parse_term("∃ x : Line, true"), t47)))
 }
 
 ///|
@@ -430,7 +430,7 @@ fn step_24() -> Unit raise {
 ///|
 /// on
 fn step_25() -> Unit raise {
-  on_c.set(@pair.new_definition(@parser.parse_term("p on l <=> perpl (dest_point p) l")))
+  on_c.set(@pair.new_definition(@term_syntax.parse_term("(on : (Point, Line) -> Bool)((p : Point), (l : Line)) == perpl(dest_point(p), l)")))
 }
 
 ///|
@@ -446,7 +446,7 @@ pub fn on() -> @kernel.Thm {
 /// POINT_CLAUSES
 fn step_26() -> Unit raise {
   let t48 = @meson.meson_tac(@list.List([point_tybij()]))
-  point_clauses_c.set(@tactics.prove(@parser.parse_term("((p = p') <=> (dest_point p = dest_point p')) /\\\n   ((forall p. P (dest_point p)) <=> (forall l. P l)) /\\\n   ((?p. P (dest_point p)) <=> (?l. P l))"), t48))
+  point_clauses_c.set(@tactics.prove(@term_syntax.parse_term("((p : Point) == (p' : Point)) == (dest_point(p) == dest_point(p')) && (∀ p : Point, (P : (Line) -> Bool)(dest_point(p))) == (∀ l : Line, P(l)) && (∃ p : Point, P(dest_point(p))) == (∃ l : Line, P(l))"), t48))
 }
 
 ///|
@@ -470,7 +470,7 @@ pub fn point_tac(x49 : @kernel.Thm) -> @tactics.Tactic raise {
 /// AXIOM_1
 fn step_27() -> Unit raise {
   let t52 = point_tac(line_axiom_1())
-  axiom_1_c.set(@tactics.prove(@parser.parse_term("forall p p'. ~(p = p') ==> ?l. p on l /\\ p' on l /\\\n          forall l'. p on l' /\\ p' on l' ==> (l' = l)"), t52))
+  axiom_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Point, ∀ p' : Point, !(p == p') → (∃ l : Line, on(p, l) && on(p', l) && (∀ l' : Line, on(p, l') && on(p', l') → l' == l))"), t52))
 }
 
 ///|
@@ -486,7 +486,7 @@ pub fn axiom_1() -> @kernel.Thm {
 /// AXIOM_2
 fn step_28() -> Unit raise {
   let t53 = point_tac(line_axiom_2())
-  axiom_2_c.set(@tactics.prove(@parser.parse_term("forall l l'. ?p. p on l /\\ p on l'"), t53))
+  axiom_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Line, ∀ l' : Line, ∃ p : Point, on(p, l) && on(p, l')"), t53))
 }
 
 ///|
@@ -502,7 +502,7 @@ pub fn axiom_2() -> @kernel.Thm {
 /// AXIOM_3
 fn step_29() -> Unit raise {
   let t54 = point_tac(line_axiom_3())
-  axiom_3_c.set(@tactics.prove(@parser.parse_term("?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    ~(?l. p on l /\\ p' on l /\\ p'' on l)"), t54))
+  axiom_3_c.set(@tactics.prove(@term_syntax.parse_term("∃ p : Point, ∃ p' : Point, ∃ p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && !(∃ l : Line, on(p, l) && on(p', l) && on(p'', l))"), t54))
 }
 
 ///|
@@ -518,7 +518,7 @@ pub fn axiom_3() -> @kernel.Thm {
 /// AXIOM_4
 fn step_30() -> Unit raise {
   let t55 = point_tac(line_axiom_4())
-  axiom_4_c.set(@tactics.prove(@parser.parse_term("forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n    p on l /\\ p' on l /\\ p'' on l"), t55))
+  axiom_4_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : Line, ∃ p : Point, ∃ p' : Point, ∃ p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && on(p, l) && on(p', l) && on(p'', l)"), t55))
 }
 
 ///|

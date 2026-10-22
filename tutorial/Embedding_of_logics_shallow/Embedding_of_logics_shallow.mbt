@@ -33,7 +33,7 @@ fn step_5() -> Unit raise {
 ///|
 /// false_def
 fn step_6() -> Unit raise {
-  false_def_c.set(@define.define_(@parser.parse_term("False = \\t:num. F")))
+  false_def_c.set(@define.define_(@term_syntax.parse_term("(False : (Num) -> Bool) == ((t : Num) => false)")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn false_def() -> @kernel.Thm {
 ///|
 /// true_def
 fn step_7() -> Unit raise {
-  true_def_c.set(@define.define_(@parser.parse_term("True = \\t:num. T")))
+  true_def_c.set(@define.define_(@term_syntax.parse_term("(True : (Num) -> Bool) == ((t : Num) => true)")))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn true_def() -> @kernel.Thm {
 ///|
 /// not_def
 fn step_8() -> Unit raise {
-  not_def_c.set(@define.define_(@parser.parse_term("Not p = \\t:num. ~(p t)")))
+  not_def_c.set(@define.define_(@term_syntax.parse_term("(Not : ((Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool)) == ((t : Num) => !p(t))")))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn not_def() -> @kernel.Thm {
 ///|
 /// and_def
 fn step_9() -> Unit raise {
-  and_def_c.set(@define.define_(@parser.parse_term("p && q = \\t:num. p t /\\ q t")))
+  and_def_c.set(@define.define_(@term_syntax.parse_term("(op_amp_amp : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool), (q : (Num) -> Bool)) == ((t : Num) => p(t) && q(t))")))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn and_def() -> @kernel.Thm {
 ///|
 /// or_def
 fn step_10() -> Unit raise {
-  or_def_c.set(@define.define_(@parser.parse_term("p || q = \\t:num. p t \\/ q t")))
+  or_def_c.set(@define.define_(@term_syntax.parse_term("(op_bar_bar : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool), (q : (Num) -> Bool)) == ((t : Num) => p(t) || q(t))")))
 }
 
 ///|
@@ -108,7 +108,7 @@ pub fn or_def() -> @kernel.Thm {
 ///|
 /// imp_def
 fn step_11() -> Unit raise {
-  imp_def_c.set(@define.define_(@parser.parse_term("p --> q = \\t:num. p t ==> q t")))
+  imp_def_c.set(@define.define_(@term_syntax.parse_term("(op_minus_minus_gt : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool), (q : (Num) -> Bool)) == ((t : Num) => p(t) → q(t))")))
 }
 
 ///|
@@ -123,7 +123,7 @@ pub fn imp_def() -> @kernel.Thm {
 ///|
 /// iff_def
 fn step_12() -> Unit raise {
-  iff_def_c.set(@define.define_(@parser.parse_term("p <-> q = \\t:num. p t <=> q t")))
+  iff_def_c.set(@define.define_(@term_syntax.parse_term("(op_lt_minus_gt : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool), (q : (Num) -> Bool)) == ((t : Num) => p(t) == q(t))")))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn iff_def() -> @kernel.Thm {
 ///|
 /// forever
 fn step_13() -> Unit raise {
-  forever_c.set(@define.define_(@parser.parse_term("forever p = \\t:num. forall t'. t <= t' ==> p t'")))
+  forever_c.set(@define.define_(@term_syntax.parse_term("(forever : ((Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool)) == ((t : Num) => ∀ t' : Num, t <= t' → p(t'))")))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn forever() -> @kernel.Thm {
 ///|
 /// sometime
 fn step_14() -> Unit raise {
-  sometime_c.set(@define.define_(@parser.parse_term("sometime p = \\t:num. ?t'. t <= t' /\\ p t'")))
+  sometime_c.set(@define.define_(@term_syntax.parse_term("(sometime : ((Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool)) == ((t : Num) => ∃ t' : Num, t <= t' && p(t'))")))
 }
 
 ///|
@@ -168,7 +168,7 @@ pub fn sometime() -> @kernel.Thm {
 ///|
 /// next
 fn step_15() -> Unit raise {
-  next_c.set(@define.define_(@parser.parse_term("next p = \\t:num. p(t + 1)")))
+  next_c.set(@define.define_(@term_syntax.parse_term("(next : ((Num) -> _, Num) -> _)((p : (Num) -> _)) == ((t : Num) => p(t + 1))")))
 }
 
 ///|
@@ -189,7 +189,7 @@ fn step_16() -> Unit raise {
 ///|
 /// until
 fn step_17() -> Unit raise {
-  until_c.set(@define.define_(@parser.parse_term("p until q =\n    \\t:num. ?t'. t <= t' /\\ (forall t''. t <= t'' /\\ t'' < t' ==> p t'') /\\ q t'")))
+  until_c.set(@define.define_(@term_syntax.parse_term("(until : ((Num) -> Bool, (Num) -> Bool, Num) -> Bool)((p : (Num) -> Bool), (q : (Num) -> Bool)) == ((t : Num) => ∃ t' : Num, t <= t' && (∀ t'' : Num, t <= t'' && t'' < t' → p(t'')) && q(t'))")))
 }
 
 ///|

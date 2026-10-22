@@ -4,7 +4,7 @@
 /// LET_DEF
 fn step_1() -> Unit raise {
   let_def_c.set(
-    @drule.new_definition(@parser.parse_term("LET (f:A->B) x = f x")),
+    @drule.new_definition(@term_syntax.parse_term("(LET : ((A) -> B, A) -> B)((f : (A) -> B), (x : A)) == f(x)")),
   )
 }
 
@@ -21,7 +21,7 @@ pub fn let_def() -> @kernel.Thm {
 /// LET_END_DEF
 fn step_2() -> Unit raise {
   let_end_def_c.set(
-    @drule.new_definition(@parser.parse_term("LET_END (t:A) = t")),
+    @drule.new_definition(@term_syntax.parse_term("(LET_END : (A) -> A)((t : A)) == t")),
   )
 }
 
@@ -38,7 +38,7 @@ pub fn let_end_def() -> @kernel.Thm {
 /// GABS_DEF
 fn step_3() -> Unit raise {
   gabs_def_c.set(
-    @drule.new_definition(@parser.parse_term("GABS (P:A->bool) = (@) P")),
+    @drule.new_definition(@term_syntax.parse_term("(GABS : ((A) -> Bool) -> A)((P : (A) -> Bool)) == select(P)")),
   )
 }
 
@@ -55,7 +55,7 @@ pub fn gabs_def() -> @kernel.Thm {
 /// GEQ_DEF
 fn step_4() -> Unit raise {
   geq_def_c.set(
-    @drule.new_definition(@parser.parse_term("GEQ a b = (a:A = b)")),
+    @drule.new_definition(@term_syntax.parse_term("(GEQ : (A, A) -> Bool)((a : A), (b : A)) == (a == b)")),
   )
 }
 
@@ -94,7 +94,7 @@ pub fn _seqpattern() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   _unguarded_pattern_c.set(
     @drule.new_definition(
-      @parser.parse_term("_UNGUARDED_PATTERN = \\p r. p /\\ r"),
+      @term_syntax.parse_term("(_UNGUARDED_PATTERN : (Bool, Bool) -> Bool) == ((p : Bool) => (r : Bool) => p && r)"),
     ),
   )
 }
@@ -115,7 +115,7 @@ pub fn _unguarded_pattern() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   _guarded_pattern_c.set(
     @drule.new_definition(
-      @parser.parse_term("_GUARDED_PATTERN = \\p g r. p /\\ g /\\ r"),
+      @term_syntax.parse_term("(_GUARDED_PATTERN : (Bool, Bool, Bool) -> Bool) == ((p : Bool) => (g : Bool) => (r : Bool) => p && g && r)"),
     ),
   )
 }
@@ -178,7 +178,7 @@ pub fn _function() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   mk_pair_def_c.set(
     @drule.new_definition(
-      @parser.parse_term("mk_pair (x:A) (y:B) = \\a b. (a = x) /\\ (b = y)"),
+      @term_syntax.parse_term("(mk_pair : (A, B, A, B) -> Bool)((x : A), (y : B)) == ((a : A) => (b : B) => a == x && b == y)"),
     ),
   )
 }
@@ -197,7 +197,7 @@ pub fn mk_pair_def() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
   pair_exists_thm_c.set(
-    @tactics.prove(@parser.parse_term("?x. ?(a:A) (b:B). x = mk_pair a b"), t1),
+    @tactics.prove(@term_syntax.parse_term("∃ x : (A, B) -> Bool, ∃ a : A, ∃ b : B, x == mk_pair(a, b)"), t1),
   )
 }
 
@@ -267,7 +267,7 @@ fn step_14() -> Unit raise {
 fn step_15() -> Unit raise {
   comma_def_c.set(
     @drule.new_definition(
-      @parser.parse_term("(x:A),(y:B) = ABS_prod(mk_pair x y)"),
+      @term_syntax.parse_term("(op_comma : (A, B) -> (A, B))((x : A), (y : B)) == ABS_prod(mk_pair(x, y))"),
     ),
   )
 }
@@ -285,7 +285,7 @@ pub fn comma_def() -> @kernel.Thm {
 /// FST_DEF
 fn step_16() -> Unit raise {
   fst_def_c.set(
-    @drule.new_definition(@parser.parse_term("FST (p:A#B) = @x. ?y. p = x,y")),
+    @drule.new_definition(@term_syntax.parse_term("(FST : ((A, B)) -> A)((p : (A, B))) == select((x : A) => ∃ y : B, p == (x, y))")),
   )
 }
 
@@ -302,7 +302,7 @@ pub fn fst_def() -> @kernel.Thm {
 /// SND_DEF
 fn step_17() -> Unit raise {
   snd_def_c.set(
-    @drule.new_definition(@parser.parse_term("SND (p:A#B) = @y. ?x. p = x,y")),
+    @drule.new_definition(@term_syntax.parse_term("(SND : ((A, B)) -> B)((p : (A, B))) == select((y : B) => ∃ x : A, p == (x, y))")),
   )
 }
 
@@ -321,7 +321,7 @@ fn step_18() -> Unit raise {
   let t13 = @meson.meson_tac(@list.List([]))
   let t11 = @simp.rewrite_tac(@list.List([mk_pair_def(), @class.fun_eq_thm()]))
   let t10 = @simp.rewrite_tac(@list.List([rep_abs_pair()]))
-  let t6 = @parser.parse_term("REP_prod:A#B->A->B->bool")
+  let t6 = @term_syntax.parse_term("(REP_prod : ((A, B), A, B) -> Bool)")
   let t9 = @tactics.disch_then(fn(
     x8 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -429,7 +429,7 @@ pub fn pair_eq() -> @kernel.Thm {
 ///|
 /// PAIR_SURJECTIVE
 fn step_19() -> Unit raise {
-  let t38 = @parser.parse_term("b:B")
+  let t38 = @term_syntax.parse_term("(b : B)")
   let t39 = @tactics.map_every(
     fn(
       x35 : @kernel.Term,
@@ -477,7 +477,7 @@ fn step_19() -> Unit raise {
         s36(x37)
       }
     },
-    @list.List([@parser.parse_term("a:A"), t38]),
+    @list.List([@term_syntax.parse_term("(a : A)"), t38]),
   )
   let t34 = @tactics.disch_then(fn(
     x31 : @kernel.Thm,
@@ -526,7 +526,7 @@ fn step_19() -> Unit raise {
     }
   })
   let t30 = @simp.rewrite_tac(@list.List([@bool.conjunct1(prod_tybij())]))
-  let t26 = @parser.parse_term("ABS_prod:(A->B->bool)->A#B")
+  let t26 = @term_syntax.parse_term("(ABS_prod : ((A, B) -> Bool) -> (A, B))")
   let t29 = @tactics.disch_then(fn(
     x28 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -595,7 +595,7 @@ fn step_19() -> Unit raise {
       }
     })(((x27 : @kernel.Thm) => @equal.ap_term(t26, x27))(x28))
   })
-  let t21 = @tactics.x_choose_then(@parser.parse_term("b:B"))(fn(
+  let t21 = @tactics.x_choose_then(@term_syntax.parse_term("(b : B)"))(fn(
     x18 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -642,12 +642,12 @@ fn step_19() -> Unit raise {
     }
   })
   let t22 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("a:A"))(t21),
+    @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(t21),
   )
   let t17 = @simp.rewrite_tac(@list.List([@bool.conjunct1(prod_tybij())]))
   let t15 = @bool.conjunct2(prod_tybij())
   let t16 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("REP_prod p :A->B->bool"), t15),
+    @bool.spec(@term_syntax.parse_term("REP_prod((p : (A, B)))"), t15),
   )
   let t40 = @tactics.then_tac(
     @tactics.then_tac(
@@ -678,7 +678,7 @@ fn step_19() -> Unit raise {
     @tactics.refl_tac,
   )
   pair_surjective_c.set(
-    @tactics.prove(@parser.parse_term("forall p:A#B. ?x y. p = x,y"), t40),
+    @tactics.prove(@term_syntax.parse_term("∀ p : (A, B), ∃ x : A, ∃ y : B, p == (x, y)"), t40),
   )
 }
 
@@ -697,7 +697,7 @@ pub fn pair_surjective() -> @kernel.Thm {
 /// FST
 fn step_20() -> Unit raise {
   let t46 = @simp.asm_rewrite_tac(@list.List([]))
-  let t45 = @tactics.exists_tac(@parser.parse_term("y:B"))
+  let t45 = @tactics.exists_tac(@term_syntax.parse_term("(y : B)"))
   let t44 = @simp.asm_rewrite_tac(@list.List([]))
   let t43 = @simp.rewrite_tac(@list.List([pair_eq()]))
   let t42 = @tactics.match_mp_tac(@class.select_unique())
@@ -734,7 +734,7 @@ fn step_20() -> Unit raise {
     t46,
   )
   fst_c.set(
-    @tactics.prove(@parser.parse_term("forall(x:A) (y:B). FST(x,y) = x"), t47),
+    @tactics.prove(@term_syntax.parse_term("∀ x : A, ∀ y : B, FST((x, y)) == x"), t47),
   )
 }
 
@@ -751,7 +751,7 @@ pub fn fst() -> @kernel.Thm {
 /// SND
 fn step_21() -> Unit raise {
   let t53 = @simp.asm_rewrite_tac(@list.List([]))
-  let t52 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t52 = @tactics.exists_tac(@term_syntax.parse_term("(x : A)"))
   let t51 = @simp.asm_rewrite_tac(@list.List([]))
   let t50 = @simp.rewrite_tac(@list.List([pair_eq()]))
   let t49 = @tactics.match_mp_tac(@class.select_unique())
@@ -788,7 +788,7 @@ fn step_21() -> Unit raise {
     t53,
   )
   snd_c.set(
-    @tactics.prove(@parser.parse_term("forall(x:A) (y:B). SND(x,y) = y"), t54),
+    @tactics.prove(@term_syntax.parse_term("∀ x : A, ∀ y : B, SND((x, y)) == y"), t54),
   )
 }
 
@@ -805,8 +805,8 @@ pub fn snd() -> @kernel.Thm {
 /// PAIR
 fn step_22() -> Unit raise {
   let t60 = @simp.rewrite_tac(@list.List([fst(), snd()]))
-  let t58 = @bool.spec(@parser.parse_term("x:A#B"), pair_surjective())
-  let t59 = @tactics.x_choose_then(@parser.parse_term("b:B"))(fn(
+  let t58 = @bool.spec(@term_syntax.parse_term("(x : (A, B))"), pair_surjective())
+  let t59 = @tactics.x_choose_then(@term_syntax.parse_term("(b : B)"))(fn(
     x55 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -855,11 +855,11 @@ fn step_22() -> Unit raise {
   let t61 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.gen_tac,
-      @tactics.x_choose_then(@parser.parse_term("a:A"))(t59)(t58),
+      @tactics.x_choose_then(@term_syntax.parse_term("(a : A)"))(t59)(t58),
     ),
     t60,
   )
-  pair_c.set(@tactics.prove(@parser.parse_term("forall x:A#B. FST x,SND x = x"), t61))
+  pair_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : (A, B), (FST(x), SND(x)) == x"), t61))
 }
 
 ///|
@@ -935,7 +935,7 @@ fn step_23() -> Unit raise {
   )
   pair_induct_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A#B->bool. (forall x y. P (x,y)) ==> forall p. P p"),
+      @term_syntax.parse_term("∀ P : ((A, B)) -> Bool, (∀ x : A, ∀ y : B, P((x, y))) → (∀ p : (A, B), P(p))"),
       t70,
     ),
   )
@@ -958,7 +958,7 @@ fn step_24() -> Unit raise {
     @tactics.then_tac(
       @tactics.gen_tac,
       @tactics.exists_tac(
-        @parser.parse_term("\\p. (PAIR':A->B->C) (FST p) (SND p)"),
+        @term_syntax.parse_term("(p : (A, B)) => (PAIR' : (A, B) -> C)(FST(p), SND(p))"),
       ),
     ),
     t71,
@@ -1212,7 +1212,7 @@ pub fn new_definition(x : @kernel.Term) -> @kernel.Thm raise {
 /// CURRY_DEF
 fn step_31() -> Unit raise {
   curry_def_c.set(
-    new_definition(@parser.parse_term("CURRY(f:A#B->C) x y = f(x,y)")),
+    new_definition(@term_syntax.parse_term("(CURRY : (((A, B)) -> C, A, B) -> C)((f : ((A, B)) -> C), (x : A), (y : B)) == f((x, y))")),
   )
 }
 
@@ -1230,7 +1230,7 @@ pub fn curry_def() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   uncurry_def_c.set(
     new_definition(
-      @parser.parse_term("forall f x y. UNCURRY(f:A->B->C)(x,y) = f x y"),
+      @term_syntax.parse_term("∀ f : (A, B) -> C, ∀ x : A, ∀ y : B, (UNCURRY : ((A, B) -> C, (A, B)) -> C)(f, (x, y)) == f(x, y)"),
     ),
   )
 }
@@ -1483,7 +1483,7 @@ fn step_34() -> Unit raise {
   let t131 = @simp.simp_tac(
     @list.List([gabs_def(), @class.select_ax(), @class.eta_ax()]),
   )
-  let pth = @tactics.prove(@parser.parse_term("(?) P ==> P (GABS P)"), t131)
+  let pth = @tactics.prove(@term_syntax.parse_term("op_q((P : (_) -> Bool)) → P(GABS(P))"), t131)
   let gabs_rule : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth)
   fn create_iterated_projections(
     x132 : @kernel.Term,
@@ -1595,7 +1595,7 @@ pub fn gen_beta_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_35() -> Unit raise {
   @simp.extend_basic_convs(
     "GEN_BETA_CONV",
-    (@parser.parse_term("GABS (\\a. b) c"), gen_beta_conv),
+    (@term_syntax.parse_term("GABS((a : (_) -> _) => (b : Bool), (c : _))"), gen_beta_conv),
   )
 }
 
@@ -1614,7 +1614,7 @@ fn step_37() -> Unit raise {
   let t144 = @meson.meson_tac(@list.List([pair()]))
   forall_pair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A#B->bool. (forall p. P p) <=> (forall p1 p2. P(p1,p2))"),
+      @term_syntax.parse_term("∀ P : ((A, B)) -> Bool, (∀ p : (A, B), P(p)) == (∀ p1 : A, ∀ p2 : B, P((p1, p2)))"),
       t144,
     ),
   )
@@ -1637,7 +1637,7 @@ fn step_38() -> Unit raise {
   let t145 = @meson.meson_tac(@list.List([pair()]))
   exists_pair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A#B->bool. (?p. P p) <=> ?p1 p2. P(p1,p2)"),
+      @term_syntax.parse_term("∀ P : ((A, B)) -> Bool, (∃ p : (A, B), P(p)) == (∃ p1 : A, ∃ p2 : B, P((p1, p2)))"),
       t145,
     ),
   )
@@ -1662,7 +1662,7 @@ fn step_39() -> Unit raise {
   )
   lambda_pair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall t:A#B->C. (\\p. t p) = (\\(x,y). t(x,y))"),
+      @term_syntax.parse_term("∀ t : ((A, B)) -> C, ((p : (A, B)) => t(p)) == GABS((f : ((A, B)) -> C) => ∀ x : A, ∀ y : B, GEQ(f((x, y)), t((x, y))))"),
       t146,
     ),
   )
@@ -1710,7 +1710,7 @@ fn step_41() -> Unit raise {
   )
   lambda_triple_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A#B#C->D. (\\t. f t) = (\\(x,y,z). f(x,y,z))"),
+      @term_syntax.parse_term("∀ f : ((A, B, C)) -> D, ((t : (A, B, C)) => f(t)) == GABS((f' : ((A, B, C)) -> D) => ∀ x : A, ∀ y : B, ∀ z : C, GEQ(f'((x, y, z)), f((x, y, z))))"),
       t148,
     ),
   )
@@ -1849,7 +1849,7 @@ fn step_44() -> Unit raise {
       }
     })(((x158 : @kernel.Thm) => @bool.spec(t157, x158))(x159))
   })
-  let t153 = @tactics.x_gen_tac(@parser.parse_term("f:A->B->C"))
+  let t153 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : (A, B) -> C)"))
   let t152 = @simp.simp_tac(@list.List([]))
   let t162 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1869,7 +1869,7 @@ fn step_44() -> Unit raise {
   )
   forall_uncurry_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (forall f:A->B->C. P f) <=> (forall f. P (\\a b. f(a,b)))"),
+      @term_syntax.parse_term("∀ P : ((A, B) -> C) -> Bool, (∀ f : (A, B) -> C, P(f)) == (∀ f : ((A, B)) -> C, P((a : A) => (b : B) => f((a, b))))"),
       t162,
     ),
   )
@@ -1893,7 +1893,7 @@ fn step_45() -> Unit raise {
       @list.List([
         @meson.meson(
           @list.List([]),
-          @parser.parse_term("(?x. P x) <=> ~(forall x. ~P x)"),
+          @term_syntax.parse_term("(∃ x : _, (P : (_) -> Bool)(x)) == !(∀ x : _, !P(x))"),
         ),
       ]),
     ),
@@ -1901,7 +1901,7 @@ fn step_45() -> Unit raise {
   )
   exists_uncurry_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (?f:A->B->C. P f) <=> (?f. P (\\a b. f(a,b)))"),
+      @term_syntax.parse_term("∀ P : ((A, B) -> C) -> Bool, (∃ f : (A, B) -> C, P(f)) == (∃ f : ((A, B)) -> C, P((a : A) => (b : B) => f((a, b))))"),
       t164,
     ),
   )
@@ -2064,7 +2064,7 @@ fn step_50() -> Unit raise {
   )
   forall_pair_fun_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (forall f:A->B#C. P f) <=> (forall g h. P(\\a. g a,h a))"),
+      @term_syntax.parse_term("∀ P : ((A) -> (B, C)) -> Bool, (∀ f : (A) -> (B, C), P(f)) == (∀ g : (A) -> B, ∀ h : (A) -> C, P((a : A) => (g(a), h(a))))"),
       t181,
     ),
   )
@@ -2090,7 +2090,7 @@ fn step_51() -> Unit raise {
       @list.List([
         @meson.meson(
           @list.List([]),
-          @parser.parse_term("(?x. P x) <=> ~(forall x. ~P x)"),
+          @term_syntax.parse_term("(∃ x : _, (P : (_) -> Bool)(x)) == !(∀ x : _, !P(x))"),
         ),
       ]),
     ),
@@ -2098,7 +2098,7 @@ fn step_51() -> Unit raise {
   )
   exists_pair_fun_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (?f:A->B#C. P f) <=> (?g h. P(\\a. g a,h a))"),
+      @term_syntax.parse_term("∀ P : ((A) -> (B, C)) -> Bool, (∃ f : (A) -> (B, C), P(f)) == (∃ g : (A) -> B, ∃ h : (A) -> C, P((a : A) => (g(a), h(a))))"),
       t183,
     ),
   )
@@ -2173,16 +2173,16 @@ pub fn exists_unpair_fun_thm() -> @kernel.Thm {
 /// EXISTS_SWAP_FUN_THM
 fn step_54() -> Unit raise {
   let t194 = @simp.asm_rewrite_tac(@list.List([@class.eta_ax()]))
-  let t191 = @tactics.exists_tac(@parser.parse_term("\\b a. (f:B->A->C) a b"))
-  let t189 = @parser.parse_term("f:B->A->C")
+  let t191 = @tactics.exists_tac(@term_syntax.parse_term("(b : A) => (a : B) => (f : (B, A) -> C)(a, b)"))
+  let t189 = @term_syntax.parse_term("(f : (B, A) -> C)")
   let t192 = @tactics.then_tac(
     @tactics.disch_then((x190 : @kernel.Thm) => {
       @tactics.x_choose_tac(t189, x190)
     }),
     t191,
   )
-  let t188 = @tactics.exists_tac(@parser.parse_term("\\b a. (f:A->B->C) a b"))
-  let t186 = @parser.parse_term("f:A->B->C")
+  let t188 = @tactics.exists_tac(@term_syntax.parse_term("(b : B) => (a : A) => (f : (A, B) -> C)(a, b)"))
+  let t186 = @term_syntax.parse_term("(f : (A, B) -> C)")
   let t193 = @list.List([
     @tactics.then_tac(
       @tactics.disch_then((x187 : @kernel.Thm) => {
@@ -2254,7 +2254,7 @@ fn step_55() -> Unit raise {
   )
   forall_paired_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->B->bool. (forall(x,y). P x y) <=> (forall x y. P x y)"),
+      @term_syntax.parse_term("∀ P : (A, B) -> Bool, forall(GABS((f : ((A, B)) -> Bool) => ∀ x : A, ∀ y : B, GEQ(f((x, y)), P(x, y)))) == (∀ x : A, ∀ y : B, P(x, y))"),
       t204,
     ),
   )
@@ -2284,14 +2284,14 @@ fn step_56() -> Unit raise {
     @tactics.then_tac(
       @tactics.gen_tac,
       @tactics.match_mp_tac(
-        @class.taut(@parser.parse_term("(~p <=> ~q) ==> (p <=> q)")),
+        @class.taut(@term_syntax.parse_term("!(p : Bool) == !(q : Bool) → p == q")),
       ),
     ),
     t205,
   )
   exists_paired_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P:A->B->bool. (?(x,y). P x y) <=> (?x y. P x y)"),
+      @term_syntax.parse_term("∀ P : (A, B) -> Bool, op_q(GABS((f : ((A, B)) -> Bool) => ∀ x : A, ∀ y : B, GEQ(f((x, y)), P(x, y)))) == (∃ x : A, ∃ y : B, P(x, y))"),
       t206,
     ),
   )
@@ -2374,7 +2374,7 @@ fn step_58() -> Unit raise {
     @tactics.then_tac(
       @tactics.gen_tac,
       @tactics.match_mp_tac(
-        @class.taut(@parser.parse_term("(~p <=> ~q) ==> (p <=> q)")),
+        @class.taut(@term_syntax.parse_term("!(p : Bool) == !(q : Bool) → p == q")),
       ),
     ),
     t216,
@@ -2406,7 +2406,7 @@ fn step_59() -> Unit raise {
   let t218 = @simp.rewrite_tac(@list.List([lambda_pair()]))
   choice_unpair_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))"),
+      @term_syntax.parse_term("∀ P : (A, B) -> Bool, select(GABS((f : ((A, B)) -> Bool) => ∀ x : A, ∀ y : B, GEQ(f((x, y)), P(x, y)))) == select((p : (A, B)) => P(FST(p), SND(p)))"),
       t218,
     ),
   )
@@ -2437,7 +2437,7 @@ fn step_60() -> Unit raise {
     @canon.select_elim_tac,
   ])
   let t222 = @tactics.subgoal_then(
-    @parser.parse_term("(\\ (x:A,y:B). P x y:bool) = (\\p. P (FST p) (SND p))"),
+    @term_syntax.parse_term("GABS((f : ((A, B)) -> Bool) => ∀ x : A, ∀ y : B, GEQ(f((x, y)), (P : (A, B) -> Bool)(x, y))) == ((p : (A, B)) => P(FST(p), SND(p)))"),
     fn(
       x219 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2616,7 +2616,7 @@ fn step_62() -> Unit raise {
   }
   let t241 = @meson.meson_tac(@list.List([pair(), pair_eq()]))
   let pth = @tactics.prove(
-    @parser.parse_term("((x,y) = a) <=> (x = FST a) /\\ (y = SND a)"),
+    @term_syntax.parse_term("(((x : _), (y : _)) == (a : (_, _))) == (x == FST(a) && y == SND(a))"),
     t241,
   )
   let rewr1_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
@@ -2628,7 +2628,7 @@ fn step_62() -> Unit raise {
     },
     @list.List([pth]),
   )
-  let t252 = @class.taut(@parser.parse_term("a /\\ T <=> a"))
+  let t252 = @class.taut(@term_syntax.parse_term("((a : Bool) && true) == a"))
   let rewr2_rule : (@kernel.Thm) -> @kernel.Thm raise = @simp.gen_rewrite_rule(
     fn(
       x251 : (@kernel.Term) -> @kernel.Thm raise,
@@ -2647,7 +2647,7 @@ fn step_62() -> Unit raise {
         })(x251),
       )
     },
-    @list.List([@class.taut(@parser.parse_term("(x = x) <=> T")), t252]),
+    @list.List([@class.taut(@term_syntax.parse_term("((x : _) == x) == true")), t252]),
   )
   let prove_depairing_exists : (@kernel.Term) -> @kernel.Thm raise = fn(
     x253 : @kernel.Term,
