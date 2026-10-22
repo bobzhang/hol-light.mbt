@@ -39,7 +39,7 @@ pub fn list_induct_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// HD
 fn step_2() -> Unit raise {
-  let t3 = @parser.parse_term("HD(CONS (h:A) t) = h")
+  let t3 = @term_syntax.parse_term("(HD : (List[A]) -> A)(CONS((h : A), (t : List[A]))) == h")
   hd_c.set(@recursion.new_recursive_definition(@ind_types.list_recursion())(t3))
 }
 
@@ -55,7 +55,7 @@ pub fn hd() -> @kernel.Thm {
 ///|
 /// TL
 fn step_3() -> Unit raise {
-  let t4 = @parser.parse_term("TL(CONS (h:A) t) = t")
+  let t4 = @term_syntax.parse_term("(TL : (List[A]) -> List[A])(CONS((h : A), (t : List[A]))) == t")
   tl_c.set(@recursion.new_recursive_definition(@ind_types.list_recursion())(t4))
 }
 
@@ -605,7 +605,7 @@ pub fn list_of_seq() -> @kernel.Thm {
 fn step_30() -> Unit raise {
   let t31 = @simp.rewrite_tac(@list.List([@ind_types.distinctness("list")]))
   not_cons_nil_c.set(
-    @tactics.prove(@parser.parse_term("forall(h:A) t. ~(CONS h t = [])"), t31),
+    @tactics.prove(@term_syntax.parse_term("∀ h : A, ∀ t : List[A], !(CONS(h, t) == NIL)"), t31),
   )
 }
 
@@ -649,7 +649,7 @@ fn step_32() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([append()])),
   )
   append_nil_c.set(
-    @tactics.prove(@parser.parse_term("forall l:A list. APPEND l [] = l"), t33),
+    @tactics.prove(@term_syntax.parse_term("∀ l : List[A], APPEND(l, NIL) == l"), t33),
   )
 }
 
@@ -724,7 +724,7 @@ fn step_35() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([reverse(), reverse_append(), append()])),
   )
   reverse_reverse_c.set(
-    @tactics.prove(@parser.parse_term("forall l:A list. REVERSE(REVERSE l) = l"), t36),
+    @tactics.prove(@term_syntax.parse_term("∀ l : List[A], REVERSE(REVERSE(l)) == l"), t36),
   )
 }
 
@@ -745,7 +745,7 @@ fn step_36() -> Unit raise {
   let t37 = @meson.meson_tac(@list.List([reverse_reverse(), reverse()]))
   reverse_eq_empty_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. REVERSE l = [] <=> l = []"),
+      @term_syntax.parse_term("∀ l : List[A], (REVERSE(l) == NIL) == (l == NIL)"),
       t37,
     ),
   )
@@ -798,7 +798,7 @@ fn step_38() -> Unit raise {
   )
   list_cases_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:(A)list. (l = []) \\/ ?h t. l = CONS h t"),
+      @term_syntax.parse_term("∀ l : List[A], l == NIL || (∃ h : A, ∃ t : List[A], l == CONS(h, t))"),
       t40,
     ),
   )
@@ -847,7 +847,7 @@ fn step_39() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([@nums.num_cases()]),
-        @parser.parse_term("(forall n. P n) <=> P 0 /\\ (forall n. P(SUC n))"),
+        @term_syntax.parse_term("(∀ n : Num, (P : (Num) -> Bool)(n)) == (P(0) && (∀ n : Num, P(SUC(n))))"),
       ),
     ]),
   )
@@ -954,7 +954,7 @@ fn step_42() -> Unit raise {
   )
   length_map_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l. forall f:A->B. LENGTH (MAP f l) = LENGTH l"),
+      @term_syntax.parse_term("∀ l : List[A], ∀ f : (A) -> B, LENGTH(MAP(f, l)) == LENGTH(l)"),
       t56,
     ),
   )
@@ -978,7 +978,7 @@ fn step_43() -> Unit raise {
   )
   length_eq_nil_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. (LENGTH l = 0) <=> (l = [])"),
+      @term_syntax.parse_term("∀ l : List[A], (LENGTH(l) == 0) == (l == NIL)"),
       t57,
     ),
   )
@@ -1044,7 +1044,7 @@ fn step_45() -> Unit raise {
   )
   length_reverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. LENGTH(REVERSE l) = LENGTH l"),
+      @term_syntax.parse_term("∀ l : List[A], LENGTH(REVERSE(l)) == LENGTH(l)"),
       t62,
     ),
   )
@@ -1169,7 +1169,7 @@ fn step_49() -> Unit raise {
   )
   not_ex_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P l:A list. ~(EX P l) <=> ALL (\\x. ~(P x)) l"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ l : List[A], !EX(P, l) == ALL((x : A) => !P(x), l)"),
       t72,
     ),
   )
@@ -1196,7 +1196,7 @@ fn step_50() -> Unit raise {
   )
   not_all_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P l:A list. ~(ALL P l) <=> EX (\\x. ~(P x)) l"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ l : List[A], !ALL(P, l) == EX((x : A) => !P(x), l)"),
       t74,
     ),
   )
@@ -1224,7 +1224,7 @@ fn step_51() -> Unit raise {
   )
   all_map_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (f:A->B) l. ALL P (MAP f l) <=> ALL (P o f) l"),
+      @term_syntax.parse_term("∀ P : (B) -> Bool, ∀ f : (A) -> B, ∀ l : List[A], ALL(P, MAP(f, l)) == ALL(o(P, f), l)"),
       t76,
     ),
   )
@@ -1287,7 +1287,7 @@ fn step_53() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([all()])),
   )
   all_t_c.set(
-    @tactics.prove(@parser.parse_term("forall l:A list. ALL (\\x. T) l"), t80),
+    @tactics.prove(@term_syntax.parse_term("∀ l : List[A], ALL((x : A) => true, l)"), t80),
   )
 }
 
@@ -1386,7 +1386,7 @@ fn step_56() -> Unit raise {
   )
   map_eq_degen_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l (f:A->A). ALL (\\x. f(x) = x) l ==> (MAP f l = l)"),
+      @term_syntax.parse_term("∀ l : List[A], ∀ f : (A) -> A, ALL((x : A) => f(x) == x, l) → MAP(f, l) == l"),
       t90,
     ),
   )
@@ -1603,7 +1603,7 @@ fn step_63() -> Unit raise {
   )
   all_mem_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (l:A list). (forall x. MEM x l ==> P x) <=> ALL P l"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ l : List[A], (∀ x : A, MEM(x, l) → P(x)) == ALL(P, l)"),
       t107,
     ),
   )
@@ -1627,7 +1627,7 @@ fn step_64() -> Unit raise {
   )
   length_replicate_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x:A. LENGTH(REPLICATE n x) = n"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : A, LENGTH(REPLICATE(n, x)) == n"),
       t108,
     ),
   )
@@ -1687,7 +1687,7 @@ fn step_66() -> Unit raise {
   )
   ex_map_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (f:A->B) l. EX P (MAP f l) <=> EX (P o f) l"),
+      @term_syntax.parse_term("∀ P : (B) -> Bool, ∀ f : (A) -> B, ∀ l : List[A], EX(P, MAP(f, l)) == EX(o(P, f), l)"),
       t112,
     ),
   )
@@ -1927,7 +1927,7 @@ fn step_73() -> Unit raise {
   )
   mem_filter_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P l (x:A). MEM x (FILTER P l) <=> P x /\\ MEM x l"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ l : List[A], ∀ x : A, MEM(x, FILTER(P, l)) == (P(x) && MEM(x, l))"),
       t133,
     ),
   )
@@ -1963,7 +1963,7 @@ fn step_74() -> Unit raise {
   )
   length_filter_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P l:A list. LENGTH(FILTER P l) <= LENGTH l"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ l : List[A], LENGTH(FILTER(P, l)) <= LENGTH(l)"),
       t137,
     ),
   )
@@ -1992,7 +1992,7 @@ fn step_75() -> Unit raise {
   )
   ex_mem_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (l:A list). (?x. P x /\\ MEM x l) <=> EX P l"),
+      @term_syntax.parse_term("∀ P : (A) -> Bool, ∀ l : List[A], (∃ x : A, P(x) && MEM(x, l)) == EX(P, l)"),
       t140,
     ),
   )
@@ -2195,7 +2195,7 @@ fn step_81() -> Unit raise {
   )
   mem_el_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(l:A list) n. n < LENGTH l ==> MEM (EL n l) l"),
+      @term_syntax.parse_term("∀ l : List[A], ∀ n : Num, n < LENGTH(l) → MEM(EL(n, l), l)"),
       t153,
     ),
   )
@@ -2226,7 +2226,7 @@ fn step_82() -> Unit raise {
     @list.List([
       @meson.meson(
         @list.List([@nums.num_cases()]),
-        @parser.parse_term("(?i. P i) <=> P 0 \\/ (?i. P(SUC i))"),
+        @term_syntax.parse_term("(∃ i : Num, (P : (Num) -> Bool)(i)) == (P(0) || (∃ i : Num, P(SUC(i))))"),
       ),
     ]),
   )
@@ -2501,7 +2501,7 @@ fn step_90() -> Unit raise {
   )
   all2_all_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P (l:A list). ALL2 P l l <=> ALL (\\x. P x x) l"),
+      @term_syntax.parse_term("∀ P : (A, A) -> Bool, ∀ l : List[A], ALL2(P, l, l) == ALL((x : A) => P(x, x), l)"),
       t181,
     ),
   )
@@ -2580,7 +2580,7 @@ fn step_93() -> Unit raise {
       @list.List([
         @meson.meson(
           @list.List([reverse_reverse()]),
-          @parser.parse_term("l = l' <=> REVERSE l = REVERSE l'"),
+          @term_syntax.parse_term("((l : List[_]) == (l' : List[_])) == (REVERSE(l) == REVERSE(l'))"),
         ),
       ]),
     ),
@@ -2694,7 +2694,7 @@ fn step_96() -> Unit raise {
   )
   map_eq_nil_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(f:A->B) l. MAP f l = [] <=> l = []"),
+      @term_syntax.parse_term("∀ f : (A) -> B, ∀ l : List[A], (MAP(f, l) == NIL) == (l == NIL)"),
       t192,
     ),
   )
@@ -2719,8 +2719,8 @@ fn step_97() -> Unit raise {
     t204,
   )
   let t202 = @simp.asm_rewrite_tac(@list.List([map(), cons_11()]))
-  let t197 = @parser.parse_term("[y:A]")
-  let t198 = @list.List([@parser.parse_term("[x:A]"), t197])
+  let t197 = @term_syntax.parse_term("[(y : A)]")
+  let t198 = @list.List([@term_syntax.parse_term("[(x : A)]"), t197])
   let t201 = @tactics.first_x_assum(fn(
     x200 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2789,14 +2789,14 @@ fn step_97() -> Unit raise {
       }
     })(((x199 : @kernel.Thm) => @bool.specl(t198, x199))(x200))
   })
-  let t193 = @parser.parse_term("y:A")
+  let t193 = @term_syntax.parse_term("(y : A)")
   let t206 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.map_every(
             @tactics.x_gen_tac,
-            @list.List([@parser.parse_term("x:A"), t193]),
+            @list.List([@term_syntax.parse_term("(x : A)"), t193]),
           ),
           @tactics.disch_tac,
         ),
@@ -2841,7 +2841,7 @@ fn step_98() -> Unit raise {
     @list.List([map(), cons_11(), not_cons_nil(), map_eq_nil()]),
   )
   let t215 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
-  let t211 = @parser.parse_term("[y:B]")
+  let t211 = @term_syntax.parse_term("[(y : B)]")
   let t214 = @tactics.first_x_assum(fn(
     x213 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2914,7 +2914,7 @@ fn step_98() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("y:B")), t214),
+          @tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(y : B)")), t214),
           t215,
         ),
         list_induct_tac,
@@ -2935,7 +2935,7 @@ fn step_98() -> Unit raise {
   )
   surjective_map_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A->B. (forall m. ?l. MAP f l = m) <=> (forall y. ?x. f x = y)"),
+      @term_syntax.parse_term("∀ f : (A) -> B, (∀ m : List[B], ∃ l : List[A], MAP(f, l) == m) == (∀ y : B, ∃ x : A, f(x) == y)"),
       t220,
     ),
   )
@@ -2958,7 +2958,7 @@ fn step_99() -> Unit raise {
     @simp.asm_rewrite_tac(@list.List([map()])),
   )
   map_id_c.set(
-    @tactics.prove(@parser.parse_term("forall l. MAP (\\x:A. x) l = l"), t221),
+    @tactics.prove(@term_syntax.parse_term("∀ l : List[A], MAP((x : A) => x, l) == l"), t221),
   )
 }
 
@@ -2977,7 +2977,7 @@ fn step_100() -> Unit raise {
   let t222 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), @trivia.i_def(), map_id()]),
   )
-  map_i_c.set(@tactics.prove(@parser.parse_term("MAP (I:A->A) = I"), t222))
+  map_i_c.set(@tactics.prove(@term_syntax.parse_term("(MAP : ((A) -> A, List[A]) -> List[A])((I : (A) -> A)) == (I : (List[A]) -> List[A])"), t222))
 }
 
 ///|
@@ -3028,7 +3028,7 @@ fn step_102() -> Unit raise {
           append_nil(),
           @meson.meson(
             @list.List([]),
-            @parser.parse_term("(if p then T else q) <=> ~p ==> q"),
+            @term_syntax.parse_term("(if (p : Bool) { true } else { (q : Bool) }) == (!p → q)"),
           ),
         ]),
       ),
@@ -3131,7 +3131,7 @@ fn step_105() -> Unit raise {
   )
   length_tl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. ~(l = []) ==> LENGTH(TL l) = LENGTH l - 1"),
+      @term_syntax.parse_term("∀ l : List[A], !(l == NIL) → LENGTH(TL(l)) == LENGTH(l) - 1"),
       t230,
     ),
   )
@@ -3157,7 +3157,7 @@ fn step_106() -> Unit raise {
   )
   last_reverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. ~(l = []) ==> LAST(REVERSE l) = HD l"),
+      @term_syntax.parse_term("∀ l : List[A], !(l == NIL) → LAST(REVERSE(l)) == HD(l)"),
       t231,
     ),
   )
@@ -3180,7 +3180,7 @@ fn step_107() -> Unit raise {
   )
   hd_reverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. ~(l = []) ==> HD(REVERSE l) = LAST l"),
+      @term_syntax.parse_term("∀ l : List[A], !(l == NIL) → HD(REVERSE(l)) == LAST(l)"),
       t232,
     ),
   )
@@ -3249,7 +3249,7 @@ pub fn el_append() -> @kernel.Thm {
 fn step_109() -> Unit raise {
   let t236 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.add1()), el()]))
   el_tl_c.set(
-    @tactics.prove(@parser.parse_term("forall n. EL n (TL l):A = EL (n + 1) l"), t236),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, EL(n, TL((l : List[A]))) == EL(n + 1, l)"), t236),
   )
 }
 
@@ -3363,7 +3363,7 @@ fn step_113() -> Unit raise {
   )
   cons_hd_tl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. ~(l = []) ==> l = CONS (HD l) (TL l)"),
+      @term_syntax.parse_term("∀ l : List[A], !(l == NIL) → l == CONS(HD(l), TL(l))"),
       t241,
     ),
   )
@@ -3429,7 +3429,7 @@ fn step_115() -> Unit raise {
   )
   map_reverse_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(f:A->B) l. REVERSE(MAP f l) = MAP f (REVERSE l)"),
+      @term_syntax.parse_term("∀ f : (A) -> B, ∀ l : List[A], REVERSE(MAP(f, l)) == MAP(f, REVERSE(l))"),
       t245,
     ),
   )
@@ -3487,7 +3487,7 @@ fn step_117() -> Unit raise {
   let t249 = @simp.rewrite_tac(@list.List([append()]))
   append_sing_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(h:A) t. APPEND [h] t = CONS h t"),
+      @term_syntax.parse_term("∀ h : A, ∀ t : List[A], APPEND([h], t) == CONS(h, t)"),
       t249,
     ),
   )
@@ -3506,15 +3506,15 @@ pub fn append_sing() -> @kernel.Thm {
 /// MEM_APPEND_DECOMPOSE_LEFT
 fn step_118() -> Unit raise {
   let t257 = @meson.asm_meson_tac(@list.List([mem(), append()]))
-  let t256 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
-  let t254 = @parser.parse_term("l:A list")
+  let t256 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (y : A)"))
+  let t254 = @term_syntax.parse_term("(l : List[A])")
   let t255 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("y:A"), t254]),
+    @list.List([@term_syntax.parse_term("(y : A)"), t254]),
   )
   let t253 = @simp.rewrite_tac(@list.List([mem()]))
   let t252 = @tactics.match_mp_tac(@ind_types.list_induct())
-  let t251 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t251 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : A)"))
   let t250 = @simp.simp_tac(
     @list.List([@theorems.left_imp_exists_thm(), mem_append(), mem()]),
   )
@@ -3583,7 +3583,7 @@ fn step_119() -> Unit raise {
         @simp.rewrite_tac(
           @list.List([
             @class.taut(
-              @parser.parse_term("(p <=> q) <=> (p ==> q) /\\ (q ==> p)"),
+              @term_syntax.parse_term("((p : Bool) == (q : Bool)) == ((p → q) && (q → p))"),
             ),
           ]),
         ),
@@ -3787,7 +3787,7 @@ fn step_124() -> Unit raise {
   )
   length_list_of_seq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s:num->A n. LENGTH(list_of_seq s n) = n"),
+      @term_syntax.parse_term("∀ s : (Num) -> A, ∀ n : Num, LENGTH(list_of_seq(s, n)) == n"),
       t278,
     ),
   )
@@ -3857,7 +3857,7 @@ fn step_126() -> Unit raise {
   )
   list_of_seq_eq_nil_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s:num->A n. list_of_seq s n = [] <=> n = 0"),
+      @term_syntax.parse_term("∀ s : (Num) -> A, ∀ n : Num, (list_of_seq(s, n) == NIL) == (n == 0)"),
       t283,
     ),
   )
@@ -3882,7 +3882,7 @@ fn step_127() -> Unit raise {
   )
   list_of_seq_eq_self_c.set(
     @tactics.prove(
-      @parser.parse_term("forall l:A list. list_of_seq (\\i. EL i l) (LENGTH l) = l"),
+      @term_syntax.parse_term("∀ l : List[A], list_of_seq((i : Num) => EL(i, l), LENGTH(l)) == l"),
       t284,
     ),
   )
@@ -4070,13 +4070,13 @@ pub fn mk_flist(x299 : @list.List[@kernel.Term]) -> @kernel.Term raise {
 fn step_131() -> Unit raise {
   let t302 = @meson.asm_meson_tac(@list.List([]))
   let t301 = @simp.asm_rewrite_tac(@list.List([all()]))
-  let t300 = @parser.parse_term("l:A list")
+  let t300 = @term_syntax.parse_term("(l : List[A])")
   let t303 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.disch_tac,
-          @tactics.spec_tac(@parser.parse_term("l:A list"), t300),
+          @tactics.spec_tac(@term_syntax.parse_term("(l : List[A])"), t300),
         ),
         list_induct_tac,
       ),
@@ -4086,7 +4086,7 @@ fn step_131() -> Unit raise {
   )
   mono_all_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall x:A. P x ==> Q x) ==> ALL P l ==> ALL Q l"),
+      @term_syntax.parse_term("(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → ALL(P, (l : List[A])) → ALL(Q, l)"),
       t303,
     ),
   )
@@ -4107,9 +4107,9 @@ fn step_132() -> Unit raise {
   let t309 = @meson.asm_meson_tac(@list.List([]))
   let t308 = @simp.rewrite_tac(@list.List([]))
   let t307 = @simp.rewrite_tac(@list.List([all2_def()]))
-  let t305 = @parser.parse_term("l:A list")
-  let t306 = @tactics.spec_tac(@parser.parse_term("l:A list"), t305)
-  let t304 = @parser.parse_term("l':B list")
+  let t305 = @term_syntax.parse_term("(l : List[A])")
+  let t306 = @tactics.spec_tac(@term_syntax.parse_term("(l : List[A])"), t305)
+  let t304 = @term_syntax.parse_term("(l' : List[B])")
   let t310 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -4119,7 +4119,7 @@ fn step_132() -> Unit raise {
               @tactics.then_tac(
                 @tactics.then_tac(
                   @tactics.disch_tac,
-                  @tactics.spec_tac(@parser.parse_term("l':B list"), t304),
+                  @tactics.spec_tac(@term_syntax.parse_term("(l' : List[B])"), t304),
                 ),
                 t306,
               ),
@@ -4797,15 +4797,15 @@ fn step_140() -> Unit raise {
     x371 : Bool,
   ) -> @kernel.Term raise {
     let b_1 = x371
-    let t372 = @parser.parse_term("F")
-    let (true_tm, false_tm) = (@parser.parse_term("T"), t372)
+    let t372 = @term_syntax.parse_term("false")
+    let (true_tm, false_tm) = (@term_syntax.parse_term("true"), t372)
     if b_1 {
       true_tm
     } else {
       false_tm
     }
   }
-  let ascii_tm = @parser.parse_term("ASCII")
+  let ascii_tm = @term_syntax.parse_term("ASCII")
   let mk_code : (Int64) -> @kernel.Term raise = fn(
     x373 : Int64,
   ) -> @kernel.Term raise {
@@ -4859,14 +4859,14 @@ fn step_140() -> Unit raise {
     let t382 = @parser.parse_type("char")
     mk_list(@lib.map(mk_code_1, ns), t382)
   }
-  let t395 = @parser.parse_term("c7:bool")
-  let t396 = @parser.parse_term("c6:bool")
-  let t397 = @parser.parse_term("c5:bool")
-  let t398 = @parser.parse_term("c4:bool")
-  let t399 = @parser.parse_term("c3:bool")
-  let t400 = @parser.parse_term("c2:bool")
+  let t395 = @term_syntax.parse_term("(c7 : Bool)")
+  let t396 = @term_syntax.parse_term("(c6 : Bool)")
+  let t397 = @term_syntax.parse_term("(c5 : Bool)")
+  let t398 = @term_syntax.parse_term("(c4 : Bool)")
+  let t399 = @term_syntax.parse_term("(c3 : Bool)")
+  let t400 = @term_syntax.parse_term("(c2 : Bool)")
   let t401 = @list.List([
-    @parser.parse_term("c1:bool"),
+    @term_syntax.parse_term("(c1 : Bool)"),
     t400,
     t399,
     t398,
@@ -4874,14 +4874,14 @@ fn step_140() -> Unit raise {
     t396,
     t395,
   ])
-  let t389 = @parser.parse_term("b7:bool")
-  let t390 = @parser.parse_term("b6:bool")
-  let t391 = @parser.parse_term("b5:bool")
-  let t392 = @parser.parse_term("b4:bool")
-  let t393 = @parser.parse_term("b3:bool")
-  let t394 = @parser.parse_term("b2:bool")
+  let t389 = @term_syntax.parse_term("(b7 : Bool)")
+  let t390 = @term_syntax.parse_term("(b6 : Bool)")
+  let t391 = @term_syntax.parse_term("(b5 : Bool)")
+  let t392 = @term_syntax.parse_term("(b4 : Bool)")
+  let t393 = @term_syntax.parse_term("(b3 : Bool)")
+  let t394 = @term_syntax.parse_term("(b2 : Bool)")
   let t402 = @list.List([
-    @parser.parse_term("b1:bool"),
+    @term_syntax.parse_term("(b1 : Bool)"),
     t394,
     t393,
     t392,
@@ -4889,15 +4889,15 @@ fn step_140() -> Unit raise {
     t390,
     t389,
   ])
-  let t383 = @parser.parse_term("a6:bool")
-  let t384 = @parser.parse_term("a5:bool")
-  let t385 = @parser.parse_term("a4:bool")
-  let t386 = @parser.parse_term("a3:bool")
-  let t387 = @parser.parse_term("a2:bool")
-  let t388 = @parser.parse_term("a1:bool")
+  let t383 = @term_syntax.parse_term("(a6 : Bool)")
+  let t384 = @term_syntax.parse_term("(a5 : Bool)")
+  let t385 = @term_syntax.parse_term("(a4 : Bool)")
+  let t386 = @term_syntax.parse_term("(a3 : Bool)")
+  let t387 = @term_syntax.parse_term("(a2 : Bool)")
+  let t388 = @term_syntax.parse_term("(a1 : Bool)")
   let (avars, bvars, cvars) = (
     @list.List([
-      @parser.parse_term("a0:bool"),
+      @term_syntax.parse_term("(a0 : Bool)"),
       t388,
       t387,
       t386,
@@ -5007,11 +5007,11 @@ fn step_140() -> Unit raise {
       @kernel.inst_rule(@lib.zip(p, pp).concat(t423), t424)
     }
   }
-  let t425 = @parser.parse_term("xs:string")
-  let (xtm, xstm) = (@parser.parse_term("x:char"), t425)
-  let t426 = @parser.parse_term("ys:string")
-  let (ytm, ystm) = (@parser.parse_term("y:char"), t426)
-  let niltm = @parser.parse_term("[]:string")
+  let t425 = @term_syntax.parse_term("(xs : List[Char])")
+  let (xtm, xstm) = (@term_syntax.parse_term("(x : Char)"), t425)
+  let t426 = @term_syntax.parse_term("(ys : List[Char])")
+  let (ytm, ystm) = (@term_syntax.parse_term("(y : Char)"), t426)
+  let niltm = @term_syntax.parse_term("(NIL : List[Char])")
   let nil_eq_thm = @bool.eqt_intro(@kernel.refl(niltm))
   let t428 = @meson.meson_tac(@list.List([]))
   let t429 = @tactics.then_tac(@simp.rewrite_tac(@list.List([cons_11()])), t428)
