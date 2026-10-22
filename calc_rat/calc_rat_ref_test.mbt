@@ -1215,10 +1215,10 @@ test "calc_rat matches calc_rat.ml" {
       #|  (x : Real) >= (y : Real)
       #|  (x : Real) < (y : Real)
       #|  (x : Real) <= (y : Real)
-      #|  COND: bool -> A -> A -> A
       #|  (COND : (Bool, A, A) -> A)
-      #|  p:num
-      #|  q:num
+      #|  (COND : (Bool, A, A) -> A)
+      #|  (p : Num)
+      #|  (q : Num)
       #|  0
       #|  1
       #|  op_minus_minus
