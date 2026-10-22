@@ -78107,11 +78107,11 @@ test "EC/xzprojective matches EC/xzprojective.ml" {
       #|8 basis elements and 0 critical pairs
       #|Generating HOL version of scaled proof
       #|EC/xzprojective quotations (508):
-      #|  (montgomery_xz (f:A ring) NONE (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(X = ring_0 f) /\\ Z = ring_0 f) /\\\n  (montgomery_xz f (SOME(x,y:A)) (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\ ring_div f X Z = x)
-      #|  forall P X Z.\n        montgomery_xz f P (X,Z)\n        ==> X IN ring_carrier f /\\ Z IN ring_carrier f
-      #|  montgomery_xzdouble (f,a:A,b:A) (X,Z) =\n        ring_pow f (ring_sub f (ring_pow f X 2) (ring_pow f Z 2)) 2,\n        ring_mul f (ring_mul f (ring_of_num f 4) (ring_mul f X Z))\n                   (ring_add f (ring_pow f X 2)\n                   (ring_add f (ring_mul f a\n                         (ring_mul f X Z)) (ring_pow f Z 2)))
-      #|  montgomery_xzdiffadd (f:A ring,a:A,b:A) (X,Z) (Xm,Zm) (Xn,Zn) =\n        ring_mul f (ring_mul f (ring_of_num f 4) Z)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Xn)\n                                           (ring_mul f Zm Zn)) 2),\n        ring_mul f (ring_mul f (ring_of_num f 4) X)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Zn)\n                                           (ring_mul f Xn Zm)) 2)
-      #|  forall f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_xz f p q\n        ==> montgomery_xz f (montgomery_add(f,a,b) p p)\n                            (montgomery_xzdouble(f,a,b) q)
+      #|  (montgomery_xz : (Ring[A], Option[(A, A)], (A, A)) -> Bool)((f : Ring[A]), NONE, ((X : A), (Z : A))) == (IN(X, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(X == ring_0(f)) && Z == ring_0(f)) && montgomery_xz(f, SOME(((x : A), (y : A))), (X, Z)) == (IN(X, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_div(f, X, Z) == x)
+      #|  \226\136\128 P : Option[(_, _)], \226\136\128 X : _, \226\136\128 Z : _, montgomery_xz((f : Ring[_]), P, (X, Z)) \226\134\146 IN(X, ring_carrier(f)) && IN(Z, ring_carrier(f))
+      #|  (montgomery_xzdouble : ((Ring[A], A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (b : A)), ((X : A), (Z : A))) == (ring_pow(f, ring_sub(f, ring_pow(f, X, 2), ring_pow(f, Z, 2)), 2), ring_mul(f, ring_mul(f, ring_of_num(f, 4), ring_mul(f, X, Z)), ring_add(f, ring_pow(f, X, 2), ring_add(f, ring_mul(f, a, ring_mul(f, X, Z)), ring_pow(f, Z, 2)))))
+      #|  (montgomery_xzdiffadd : ((Ring[A], A, A), (A, A), (A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (b : A)), ((X : A), (Z : A)), ((Xm : A), (Zm : A)), ((Xn : A), (Zn : A))) == (ring_mul(f, ring_mul(f, ring_of_num(f, 4), Z), ring_pow(f, ring_sub(f, ring_mul(f, Xm, Xn), ring_mul(f, Zm, Zn)), 2)), ring_mul(f, ring_mul(f, ring_of_num(f, 4), X), ring_pow(f, ring_sub(f, ring_mul(f, Xm, Zn), ring_mul(f, Xn, Zm)), 2)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], \226\136\128 q : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && montgomery_curve((f, a, b), p) && montgomery_xz(f, p, q) \226\134\146 montgomery_xz(f, montgomery_add((f, a, b), p, p), montgomery_xzdouble((f, a, b), q))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -78182,8 +78182,8 @@ test "EC/xzprojective matches EC/xzprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  p = montgomery_add (f,a:A,b) pm (montgomery_neg (f,a,b) pn)
-      #|  forall f (a:A) b p q pm qm pn qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) pm /\\\n        montgomery_curve(f,a,b) pn /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f pm qm /\\\n        montgomery_xz f pn qn /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        montgomery_add (f,a,b) pm (montgomery_neg (f,a,b) pn) = p\n        ==> montgomery_xz f (montgomery_add(f,a,b) pm pn)\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)
+      #|  (p : Option[(A, A)]) == montgomery_add(((f : Ring[A]), (a : A), (b : A)), (pm : Option[(A, A)]), montgomery_neg((f, a, b), (pn : Option[(A, A)])))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], \226\136\128 q : (A, A), \226\136\128 pm : Option[(A, A)], \226\136\128 qm : (A, A), \226\136\128 pn : Option[(A, A)], \226\136\128 qn : (A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && montgomery_curve((f, a, b), p) && montgomery_curve((f, a, b), pm) && montgomery_curve((f, a, b), pn) && montgomery_xz(f, p, q) && montgomery_xz(f, pm, qm) && montgomery_xz(f, pn, qn) && !(FST(q) == ring_0(f)) && !(SND(q) == ring_0(f)) && montgomery_add((f, a, b), pm, montgomery_neg((f, a, b), pn)) == p \226\134\146 montgomery_xz(f, montgomery_add((f, a, b), pm, pn), montgomery_xzdiffadd((f, a, b), q, qm, qn))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -78202,27 +78202,6 @@ test "EC/xzprojective matches EC/xzprojective.ml" {
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
       #|  :A
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  :A
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
@@ -78303,10 +78282,6 @@ test "EC/xzprojective matches EC/xzprojective.ml" {
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
       #|  :A
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
@@ -78552,29 +78527,6 @@ test "EC/xzprojective matches EC/xzprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  n:num
-      #|  forall f (a:A) b p n q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) q\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n))\n                            (montgomery_xzdouble(f,a,b) q)
-      #|  group_mul G (group_mul G x y) (group_inv G y) = x
-      #|  n + 1 = 1 + n
-      #|  group_carrier G x <=> x IN group_carrier G
-      #|  b:A
-      #|  a:A
-      #|  f:A ring
-      #|  p:(A#A)option
-      #|  b:A
-      #|  a:A
-      #|  f:A ring
-      #|  2 * n + 1 = SUC n + n
-      #|  forall f (a:A) b p n q qm qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (n + 1)) qm /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) qn\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n + 1))\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)
-      #|  montgomery_xmap (f:A ring) NONE = ring_0 f /\\\n  montgomery_xmap f (SOME(x:A,y:A)) = x
-      #|  forall(f:A ring) P X.\n        field f /\\ X IN ring_carrier f /\\ ~(X = ring_0 f)\n        ==> (montgomery_xz f P (X,ring_1 f) <=> montgomery_xmap f P = X)
-      #|  x:A = ring_0 f
-      #|  y:A
-      #|  x:A
-      #|  b:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall(f:A ring) a b P.\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular (f,a,b) /\\\n      P IN group_carrier(montgomery_group(f,a,b))\n      ==> (montgomery_xmap f P = ring_0 f <=>\n           P = NONE \\/ P = SOME(ring_0 f,ring_0 f))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -78584,11 +78536,59 @@ test "EC/xzprojective matches EC/xzprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  b:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b) /\\\n        P IN group_carrier(montgomery_group(f,a,b)) /\\\n        montgomery_xmap f P = ring_0 f\n        ==> montgomery_xmap f (group_pow (montgomery_group(f,a,b)) P n) =\n            ring_0 f
-      #|  forall f a (b:A) x y x1 y1 x2 y2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x,y)) /\\ ~(y = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x1,y1)) /\\\n        montgomery_add(f,a,b) (SOME(x,y)) (SOME(x1,y1)) = SOME(x2,y2)\n        ==> y1 = ring_div f\n                  (ring_sub f\n                   (ring_sub f\n                    (ring_mul f (ring_add f (ring_mul f x1 x) (ring_1 f))\n                    (ring_add f x1\n                      (ring_add f x (ring_mul f (ring_of_num f 2) a))))\n                      (ring_mul f (ring_of_num f 2) a))\n                     (ring_mul f (ring_pow f (ring_sub f x1 x) 2) x2))\n                  (ring_mul f (ring_of_num f 2) (ring_mul f b y))
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  (n : Num)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], \226\136\128 n : Num, \226\136\128 q : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && IN(p, group_carrier(montgomery_group((f, a, b)))) && montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, n), q) \226\134\146 montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, 2 * n), montgomery_xzdouble((f, a, b), q))
+      #|  group_mul((G : Group[_]), group_mul(G, (x : _), (y : _)), group_inv(G, y)) == x
+      #|  (n : Num) + 1 == 1 + n
+      #|  group_carrier((G : Group[_]), (x : _)) == IN(x, group_carrier(G))
+      #|  (b : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (p : Option[(A, A)])
+      #|  (b : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  2 * (n : Num) + 1 == SUC(n) + n
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], \226\136\128 n : Num, \226\136\128 q : (A, A), \226\136\128 qm : (A, A), \226\136\128 qn : (A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && !(FST(q) == ring_0(f)) && !(SND(q) == ring_0(f)) && IN(p, group_carrier(montgomery_group((f, a, b)))) && montgomery_xz(f, p, q) && montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, n + 1), qm) && montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, n), qn) \226\134\146 montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, 2 * n + 1), montgomery_xzdiffadd((f, a, b), q, qm, qn))
+      #|  (montgomery_xmap : (Ring[A], Option[(A, A)]) -> A)((f : Ring[A]), NONE) == ring_0(f) && montgomery_xmap(f, SOME(((x : A), (y : A)))) == x
+      #|  \226\136\128 f : Ring[A], \226\136\128 P : Option[(A, A)], \226\136\128 X : A, field(f) && IN(X, ring_carrier(f)) && !(X == ring_0(f)) \226\134\146 montgomery_xz(f, P, (X, ring_1(f))) == (montgomery_xmap(f, P) == X)
+      #|  (x : A) == ring_0((f : Ring[A]))
+      #|  (y : A)
+      #|  (x : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 P : Option[(A, A)], field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && IN(P, group_carrier(montgomery_group((f, a, b)))) \226\134\146 (montgomery_xmap(f, P) == ring_0(f)) == (P == NONE || P == SOME((ring_0(f), ring_0(f))))
+      #|  :A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 P : Option[(A, A)], \226\136\128 n : Num, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && IN(P, group_carrier(montgomery_group((f, a, b)))) && montgomery_xmap(f, P) == ring_0(f) \226\134\146 montgomery_xmap(f, group_pow(montgomery_group((f, a, b)), P, n)) == ring_0(f)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 x : A, \226\136\128 y : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 x2 : A, \226\136\128 y2 : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && !(b == ring_0(f)) && montgomery_curve((f, a, b), SOME((x, y))) && !(y == ring_0(f)) && montgomery_curve((f, a, b), SOME((x1, y1))) && montgomery_add((f, a, b), SOME((x, y)), SOME((x1, y1))) == SOME((x2, y2)) \226\134\146 y1 == ring_div(f, ring_sub(f, ring_sub(f, ring_mul(f, ring_add(f, ring_mul(f, x1, x), ring_1(f)), ring_add(f, x1, ring_add(f, x, ring_mul(f, ring_of_num(f, 2), a)))), ring_mul(f, ring_of_num(f, 2), a)), ring_mul(f, ring_pow(f, ring_sub(f, x1, x), 2), x2)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, b, y)))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
