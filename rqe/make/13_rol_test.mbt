@@ -6729,44 +6729,44 @@ test "Rqe/rol matches Rqe/rol.ml" {
       #|0..0..solved at 2
       #|0..0..2..5..22..51..135..307..766..solved at 1050
       #|Rqe/rol quotations (38):
-      #|  (real_ordered_list [] <=> T) /\\\n   (real_ordered_list (CONS h t) <=>\n      real_ordered_list t /\\\n      ((t = []) \\/ (h < HD t)))
-      #|  forall x. real_ordered_list [x]
-      #|  forall l. ~(l = []) /\\ real_ordered_list l ==> real_ordered_list (TL l)
-      #|  forall l h n. EL n t = EL (SUC n) (CONS h t)
+      #|  (real_ordered_list : (List[Real]) -> Bool)(NIL) == true && real_ordered_list(CONS((h : Real), (t : List[Real]))) == (real_ordered_list(t) && (t == NIL || h < HD(t)))
+      #|  \226\136\128 x : Real, real_ordered_list([x])
+      #|  \226\136\128 l : List[Real], !(l == NIL) && real_ordered_list(l) \226\134\146 real_ordered_list(TL(l))
+      #|  \226\136\128 l : _, \226\136\128 h : _, \226\136\128 n : Num, EL(n, (t : List[_])) == EL(SUC(n), CONS(h, t))
       #|  0
-      #|  SUC n
-      #|  forall l. ~(real_ordered_list l) ==> ?n. EL n l >= EL (SUC n) l
-      #|  forall h t. real_ordered_list (CONS h t) ==> real_ordered_list t
-      #|  forall h t. real_ordered_list (CONS h1 (CONS h2 t)) <=>\n     real_ordered_list (CONS h2 t) /\\ h1 < h2
-      #|  t = []
-      #|  real_ordered_list t /\\ real_ordered_list l2
-      #|  real_ordered_list (APPEND t l2)
-      #|  forall l1 l2. real_ordered_list (APPEND l1 l2) ==>\n    real_ordered_list l1 /\\ real_ordered_list l2
-      #|  forall h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==> h1 < h2
-      #|  (p ==> q ==> r) <=> (p /\\ q ==> r)
-      #|  real_ordered_list (APPEND t (CONS x l2))
-      #|  t = []
-      #|  forall x l1 l2.\n    real_ordered_list l1 /\\ real_ordered_list l2 /\\\n    ~(l1 = []) /\\ ~(l2 = []) /\\ LAST l1 < x /\\ x < HD l2 ==>\n      real_ordered_list (APPEND l1 (CONS x l2))
-      #|  forall x l. real_ordered_list l /\\ ~(l = []) /\\ x < HD l ==>\n    real_ordered_list (CONS x l)
-      #|  forall h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==>\n     real_ordered_list (CONS h1 t)
-      #|  t = []
-      #|  forall x t h. real_ordered_list (CONS h t) /\\ LAST (CONS h t) < x ==> h < x
-      #|  t = []
-      #|  forall x l. real_ordered_list l /\\ ~(l = []) /\\ LAST l < x ==>\n    real_ordered_list (APPEND l [x])
-      #|  real_ordered_list [&1; &2; &3; &4]
-      #|  forall e x l. e < x /\\ (LAST l = e) ==> LAST l < x
-      #|  forall x. ?y. y = x
-      #|  ?x:real. T
-      #|  x + &1
-      #|  x - &1
-      #|  forall x. (?y. y < x) /\\ (?y. y = x) /\\ (?y. x < y)
-      #|  real_ordered_list []
-      #|  forall x y. x < y ==> real_ordered_list [x; y]
-      #|  forall x y. x < y ==> real_ordered_list (CONS y t) ==>\n     real_ordered_list (CONS x (CONS y t))
-      #|  []:real list
-      #|  real_ordered_list ([]:real list)
-      #|  forall y x. x < y \\/ (x = y) \\/ y < x
-      #|  forall x y z. y < z ==> (y < x <=> (y < x /\\ x < z) \\/ (x = z) \\/ z < x)
+      #|  SUC((n : Num))
+      #|  \226\136\128 l : List[Real], !real_ordered_list(l) \226\134\146 (\226\136\131 n : Num, EL(n, l) >= EL(SUC(n), l))
+      #|  \226\136\128 h : Real, \226\136\128 t : List[Real], real_ordered_list(CONS(h, t)) \226\134\146 real_ordered_list(t)
+      #|  \226\136\128 h : _, \226\136\128 t : List[Real], real_ordered_list(CONS((h1 : Real), CONS((h2 : Real), t))) == (real_ordered_list(CONS(h2, t)) && h1 < h2)
+      #|  (t : List[_]) == NIL
+      #|  real_ordered_list((t : List[Real])) && real_ordered_list((l2 : List[Real]))
+      #|  real_ordered_list(APPEND((t : List[Real]), (l2 : List[Real])))
+      #|  \226\136\128 l1 : List[Real], \226\136\128 l2 : List[Real], real_ordered_list(APPEND(l1, l2)) \226\134\146 real_ordered_list(l1) && real_ordered_list(l2)
+      #|  \226\136\128 h1 : Real, \226\136\128 h2 : Real, \226\136\128 t : List[Real], real_ordered_list(CONS(h1, CONS(h2, t))) \226\134\146 h1 < h2
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (p && q \226\134\146 r)
+      #|  real_ordered_list(APPEND((t : List[Real]), CONS((x : Real), (l2 : List[Real]))))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 x : Real, \226\136\128 l1 : List[Real], \226\136\128 l2 : List[Real], real_ordered_list(l1) && real_ordered_list(l2) && !(l1 == NIL) && !(l2 == NIL) && LAST(l1) < x && x < HD(l2) \226\134\146 real_ordered_list(APPEND(l1, CONS(x, l2)))
+      #|  \226\136\128 x : Real, \226\136\128 l : List[Real], real_ordered_list(l) && !(l == NIL) && x < HD(l) \226\134\146 real_ordered_list(CONS(x, l))
+      #|  \226\136\128 h1 : Real, \226\136\128 h2 : Real, \226\136\128 t : List[Real], real_ordered_list(CONS(h1, CONS(h2, t))) \226\134\146 real_ordered_list(CONS(h1, t))
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 x : Real, \226\136\128 t : List[Real], \226\136\128 h : Real, real_ordered_list(CONS(h, t)) && LAST(CONS(h, t)) < x \226\134\146 h < x
+      #|  (t : List[_]) == NIL
+      #|  \226\136\128 x : Real, \226\136\128 l : List[Real], real_ordered_list(l) && !(l == NIL) && LAST(l) < x \226\134\146 real_ordered_list(APPEND(l, [x]))
+      #|  real_ordered_list([real_of_num(1), real_of_num(2), real_of_num(3), real_of_num(4)])
+      #|  \226\136\128 e : Real, \226\136\128 x : Real, \226\136\128 l : List[Real], e < x && LAST(l) == e \226\134\146 LAST(l) < x
+      #|  \226\136\128 x : _, \226\136\131 y : _, y == x
+      #|  \226\136\131 x : Real, true
+      #|  (x : Real) + real_of_num(1)
+      #|  (x : Real) - real_of_num(1)
+      #|  \226\136\128 x : Real, (\226\136\131 y : Real, y < x) && (\226\136\131 y : Real, y == x) && (\226\136\131 y : Real, x < y)
+      #|  real_ordered_list(NIL)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 real_ordered_list([x, y])
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 real_ordered_list(CONS(y, (t : List[Real]))) \226\134\146 real_ordered_list(CONS(x, CONS(y, t)))
+      #|  (NIL : List[Real])
+      #|  real_ordered_list(NIL)
+      #|  \226\136\128 y : Real, \226\136\128 x : Real, x < y || x == y || y < x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, y < z \226\134\146 (y < x) == (y < x && x < z || x == z || z < x)
       #|real_ordered_list =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#real_ordered_list:fun(list(real),bool) #NIL:list(real))) #T:bool)) ((#=:fun(bool,fun(bool,bool)) (#real_ordered_list:fun(list(real),bool) ((#CONS:fun(real,fun(list(real),list(real))) h:real) t:list(real)))) ((#/\:fun(bool,fun(bool,bool)) (#real_ordered_list:fun(list(real),bool) t:list(real))) ((#\/:fun(bool,fun(bool,bool)) ((#=:fun(list(real),fun(list(real),bool)) t:list(real)) #NIL:list(real))) ((#real_lt:fun(real,fun(real,bool)) h:real) (#HD:fun(list(real),real) t:list(real)))))))
       #|ROL_EMPTY =  |- (#real_ordered_list:fun(list(real),bool) #NIL:list(real))
       #|ROL_SING =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#real_ordered_list:fun(list(real),bool) ((#CONS:fun(real,fun(list(real),list(real))) x:real) #NIL:list(real)))))
