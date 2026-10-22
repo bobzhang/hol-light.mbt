@@ -51,7 +51,7 @@ pub fn reachable_cases() -> @kernel.Thm {
 ///|
 /// reachable_RULES, reachable_INDUCT, reachable_CASES
 fn step_3() -> Unit raise {
-  let (reachable_rules, reachable_induct, reachable_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall p. reachable p p) /\\\n   (forall p q r. move p q /\\ reachable q r ==> reachable p r)"))
+  let (reachable_rules, reachable_induct, reachable_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ p : ((Real, Real), (Real, Real), Real, Real), (reachable : (((Real, Real), (Real, Real), Real, Real), ((Real, Real), (Real, Real), Real, Real)) -> Bool)(p, p)) && (∀ p : ((Real, Real), (Real, Real), Real, Real), ∀ q : ((Real, Real), (Real, Real), Real, Real), ∀ r : ((Real, Real), (Real, Real), Real, Real), op_move(p, q) && reachable(q, r) → reachable(p, r))"))
   reachable_rules_c.set(reachable_rules)
   reachable_induct_c.set(reachable_induct)
   reachable_cases_c.set(reachable_cases)
@@ -60,7 +60,7 @@ fn step_3() -> Unit raise {
 ///|
 /// oriented_area
 fn step_4() -> Unit raise {
-  oriented_area_c.set(@pair.new_definition(@parser.parse_term("oriented_area ((ax,ay),(bx,by),(cx,cy)) =\n      ((bx - ax) * (cy - ay) - (cx - ax) * (by - ay)) / &2")))
+  oriented_area_c.set(@pair.new_definition(@term_syntax.parse_term("(oriented_area : (((Real, Real), (Real, Real), Real, Real)) -> Real)((((ax : Real), (ay : Real)), ((bx : Real), (by : Real)), (cx : Real), (cy : Real))) == ((bx - ax) * (cy - ay) - (cx - ax) * (by - ay)) / real_of_num(2)")))
 }
 
 ///|
@@ -77,7 +77,7 @@ pub fn oriented_area() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_rat.real_ring)
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), move_(), oriented_area()])), t1)
-  move_invariant_c.set(@tactics.prove(@parser.parse_term("forall p p'. move p p' ==> oriented_area p = oriented_area p'"), t2))
+  move_invariant_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Real, Real), (Real, Real), Real, Real), ∀ p' : ((Real, Real), (Real, Real), Real, Real), op_move(p, p') → oriented_area(p) == oriented_area(p')"), t2))
 }
 
 ///|
@@ -94,7 +94,7 @@ pub fn move_invariant() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([move_invariant()]))
   let t4 = @tactics.then_tac(@tactics.match_mp_tac(reachable_induct()), t3)
-  reachable_invariant_c.set(@tactics.prove(@parser.parse_term("forall p p'. reachable p p' ==> oriented_area p = oriented_area p'"), t4))
+  reachable_invariant_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Real, Real), (Real, Real), Real, Real), ∀ p' : ((Real, Real), (Real, Real), Real, Real), reachable(p, p') → oriented_area(p) == oriented_area(p')"), t4))
 }
 
 ///|
@@ -119,7 +119,7 @@ fn step_7() -> Unit raise {
       }
     })(t8(x9))
   })), t10), @calc_rat.real_arith_tac)
-  impossibility_b_c.set(@tactics.prove(@parser.parse_term("~(reachable ((&0,&0),(&3,&0),(&0,&3)) ((&1,&2),(&2,&5),(-- &2,&3)) \\/\n     reachable ((&0,&0),(&3,&0),(&0,&3)) ((&1,&2),(-- &2,&3),(&2,&5)) \\/\n     reachable ((&0,&0),(&3,&0),(&0,&3)) ((&2,&5),(&1,&2),(-- &2,&3)) \\/\n     reachable ((&0,&0),(&3,&0),(&0,&3)) ((&2,&5),(-- &2,&3),(&1,&2)) \\/\n     reachable ((&0,&0),(&3,&0),(&0,&3)) ((-- &2,&3),(&1,&2),(&2,&5)) \\/\n     reachable ((&0,&0),(&3,&0),(&0,&3)) ((-- &2,&3),(&2,&5),(&1,&2)))"), t11))
+  impossibility_b_c.set(@tactics.prove(@term_syntax.parse_term("!(reachable(((real_of_num(0), real_of_num(0)), (real_of_num(3), real_of_num(0)), real_of_num(0), real_of_num(3)), ((real_of_num(1), real_of_num(2)), (real_of_num(2), real_of_num(5)), -real_of_num(2), real_of_num(3))) || reachable(((real_of_num(0), real_of_num(0)), (real_of_num(3), real_of_num(0)), real_of_num(0), real_of_num(3)), ((real_of_num(1), real_of_num(2)), (-real_of_num(2), real_of_num(3)), real_of_num(2), real_of_num(5))) || reachable(((real_of_num(0), real_of_num(0)), (real_of_num(3), real_of_num(0)), real_of_num(0), real_of_num(3)), ((real_of_num(2), real_of_num(5)), (real_of_num(1), real_of_num(2)), -real_of_num(2), real_of_num(3))) || reachable(((real_of_num(0), real_of_num(0)), (real_of_num(3), real_of_num(0)), real_of_num(0), real_of_num(3)), ((real_of_num(2), real_of_num(5)), (-real_of_num(2), real_of_num(3)), real_of_num(1), real_of_num(2))) || reachable(((real_of_num(0), real_of_num(0)), (real_of_num(3), real_of_num(0)), real_of_num(0), real_of_num(3)), ((-real_of_num(2), real_of_num(3)), (real_of_num(1), real_of_num(2)), real_of_num(2), real_of_num(5))) || reachable(((real_of_num(0), real_of_num(0)), (real_of_num(3), real_of_num(0)), real_of_num(0), real_of_num(3)), ((-real_of_num(2), real_of_num(3)), (real_of_num(2), real_of_num(5)), real_of_num(1), real_of_num(2))))"), t11))
 }
 
 ///|
@@ -134,7 +134,7 @@ pub fn impossibility_b() -> @kernel.Thm {
 ///|
 /// init
 fn step_8() -> Unit raise {
-  init__c.set(@pair.new_definition(@parser.parse_term("init (x,y,pc1,pc2,sem) <=>\n        pc1 = 10 /\\ pc2 = 10 /\\ x = 0 /\\ y = 0 /\\ sem = 1")))
+  init__c.set(@pair.new_definition(@term_syntax.parse_term("(init : ((Num, Num, Num, Num, Num)) -> Bool)(((x : Num), (y : Num), (pc1 : Num), (pc2 : Num), (sem : Num))) == (pc1 == 10 && pc2 == 10 && x == 0 && y == 0 && sem == 1)")))
 }
 
 ///|
@@ -149,7 +149,7 @@ pub fn init_() -> @kernel.Thm {
 ///|
 /// trans
 fn step_9() -> Unit raise {
-  trans_c.set(@pair.new_definition(@parser.parse_term("trans (x,y,pc1,pc2,sem) (x',y',pc1',pc2',sem') <=>\n        pc1 = 10 /\\ sem > 0 /\\ pc1' = 20 /\\ sem' = sem - 1 /\\\n                   (x',y',pc2') = (x,y,pc2) \\/\n        pc2 = 10 /\\ sem > 0 /\\ pc2' = 20 /\\ sem' = sem - 1 /\\\n                   (x',y',pc1') = (x,y,pc1) \\/\n        pc1 = 20 /\\ pc1' = 30 /\\ x' = x + 1 /\\\n                   (y',pc2',sem') = (y,pc2,sem) \\/\n        pc2 = 20 /\\ pc2' = 30 /\\ y' = y + 1 /\\ x' = x /\\\n                   pc1' = pc1 /\\ sem' = sem \\/\n        pc1 = 30 /\\ pc1' = 10 /\\ sem' = sem + 1 /\\\n                   (x',y',pc2') = (x,y,pc2) \\/\n        pc2 = 30 /\\ pc2' = 10 /\\ sem' = sem + 1 /\\\n                   (x',y',pc1') = (x,y,pc1)")))
+  trans_c.set(@pair.new_definition(@term_syntax.parse_term("(trans : ((Num, Num, Num, Num, Num), (Num, Num, Num, Num, Num)) -> Bool)(((x : Num), (y : Num), (pc1 : Num), (pc2 : Num), (sem : Num)), ((x' : Num), (y' : Num), (pc1' : Num), (pc2' : Num), (sem' : Num))) == (pc1 == 10 && sem > 0 && pc1' == 20 && sem' == sem - 1 && (x', y', pc2') == (x, y, pc2) || pc2 == 10 && sem > 0 && pc2' == 20 && sem' == sem - 1 && (x', y', pc1') == (x, y, pc1) || pc1 == 20 && pc1' == 30 && x' == x + 1 && (y', pc2', sem') == (y, pc2, sem) || pc2 == 20 && pc2' == 30 && y' == y + 1 && x' == x && pc1' == pc1 && sem' == sem || pc1 == 30 && pc1' == 10 && sem' == sem + 1 && (x', y', pc2') == (x, y, pc2) || pc2 == 30 && pc2' == 10 && sem' == sem + 1 && (x', y', pc1') == (x, y, pc1))")))
 }
 
 ///|
@@ -164,7 +164,7 @@ pub fn trans() -> @kernel.Thm {
 ///|
 /// mutex
 fn step_10() -> Unit raise {
-  mutex_c.set(@pair.new_definition(@parser.parse_term("mutex (x,y,pc1,pc2,sem) <=> pc1 = 10 \\/ pc2 = 10")))
+  mutex_c.set(@pair.new_definition(@term_syntax.parse_term("(mutex : ((_, _, Num, Num, _)) -> Bool)(((x : _), (y : _), (pc1 : Num), (pc2 : Num), (sem : _))) == (pc1 == 10 || pc2 == 10)")))
 }
 
 ///|
@@ -179,7 +179,7 @@ pub fn mutex() -> @kernel.Thm {
 ///|
 /// indinv
 fn step_11() -> Unit raise {
-  indinv_c.set(@pair.new_definition(@parser.parse_term("indinv (x:num,y:num,pc1,pc2,sem) <=>\n        sem + (if pc1 = 10 then 0 else 1) + (if pc2 = 10 then 0 else 1) = 1")))
+  indinv_c.set(@pair.new_definition(@term_syntax.parse_term("(indinv : ((Num, Num, Num, Num, Num)) -> Bool)(((x : Num), (y : Num), (pc1 : Num), (pc2 : Num), (sem : Num))) == (sem + ((if pc1 == 10 { 0 } else { 1 }) + (if pc2 == 10 { 0 } else { 1 })) == 1)")))
 }
 
 ///|
@@ -195,8 +195,8 @@ pub fn indinv() -> @kernel.Thm {
 /// INDUCTIVE_INVARIANT
 fn step_12() -> Unit raise {
   let t14 = @meson.meson_tac(@list.List([]))
-  let t12 = @parser.parse_term("\\s s':A. invariant s ==> invariant s'")
-  let t13 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("transition:A->A->bool"), t12]), @rstc.rtc_induct()))
+  let t12 = @term_syntax.parse_term("(s : A) => (s' : A) => (invariant : (A) -> Bool)(s) → invariant(s')")
+  let t13 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(transition : (A, A) -> Bool)"), t12]), @rstc.rtc_induct()))
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t14)
   inductive_invariant_c.set(@tactics.prove(@parser.parse_term("forall init invariant transition P.\n        (forall s. init s ==> invariant s) /\\\n        (forall s s'. invariant s /\\ transition s s' ==> invariant s') /\\\n        (forall s. invariant s ==> P s)\n        ==> forall s s':A. init s /\\ RTC transition s s' ==> P s'"), t15))
 }
@@ -214,9 +214,9 @@ pub fn inductive_invariant() -> @kernel.Thm {
 /// MUTEX
 fn step_13() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([init_(), trans(), indinv(), mutex(), @pair.forall_pair_thm(), @pair.pair_eq()]))
-  let t16 = @tactics.exists_tac(@parser.parse_term("indinv"))
+  let t16 = @tactics.exists_tac(@term_syntax.parse_term("indinv"))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(inductive_invariant()), t16), t17), @int.arith_tac)
-  mutex_v1_c.set(@tactics.prove(@parser.parse_term("forall s s'. init s /\\ RTC trans s s' ==> mutex s'"), t18))
+  mutex_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Num, Num, Num, Num, Num), ∀ s' : (Num, Num, Num, Num, Num), init(s) && RTC(trans, s, s') → mutex(s')"), t18))
 }
 
 ///|
