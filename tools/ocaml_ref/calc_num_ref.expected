@@ -766,7 +766,7 @@ calc_num quotations (189):
   FACT(NUMERAL((n : Num)))
   PRE(NUMERAL((n : Num)))
   SUC(NUMERAL((n : Num)))
-  COND: bool -> A -> A -> A
+  (COND : (Bool, A, A) -> A)
   (COND : (Bool, A, A) -> A)
   SUC
   (\226\136\128 n : Num, n < 0 \226\134\146 (P : (Num) -> Bool)(n)) == true
