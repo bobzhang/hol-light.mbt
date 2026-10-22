@@ -1,13 +1,13 @@
 Formal_ineqs/lib/ssreflect/ssreflect quotations (9):
-  forall v P. ssreflect_eq (v:A) (P:bool) = P
-  (A /\\ B ==> C) ==> (A ==> B ==> C)
-  F
-  (A ==> B ==> C) ==> (A /\\ B ==> C)
-  ((T ==> A) <=> A) /\\ ((T /\\ A) = A) /\\ ((A /\\ T) = A)
-  l:(A)list
-  forall P. P [] /\\ (forall(h:A) t. P (CONS h t)) ==> (forall l. P l)
-  m:num
-  forall P. P 0 /\\ (forall n. P (SUC n)) ==> (forall m. P m)
+  \226\136\128 v : A, \226\136\128 P : Bool, (ssreflect_eq : (A, Bool) -> Bool)(v, P) == P
+  ((A : Bool) && (B : Bool) \226\134\146 (C : Bool)) \226\134\146 A \226\134\146 B \226\134\146 C
+  false
+  ((A : Bool) \226\134\146 (B : Bool) \226\134\146 (C : Bool)) \226\134\146 A && B \226\134\146 C
+  (true \226\134\146 (A : Bool)) == A && (true && A) == A && (A && true) == A
+  (l : List[A])
+  \226\136\128 P : (List[A]) -> Bool, P(NIL) && (\226\136\128 h : A, \226\136\128 t : List[A], P(CONS(h, t))) \226\134\146 (\226\136\128 l : List[A], P(l))
+  (m : Num)
+  \226\136\128 P : (Num) -> Bool, P(0) && (\226\136\128 n : Num, P(SUC(n))) \226\134\146 (\226\136\128 m : Num, P(m))
 Ssreflect.ssreflect_eq_def =  |- (#forall:fun(fun('A,bool),bool) (\v:'A. (#forall:fun(fun(bool,bool),bool) (\P:bool. ((#=:fun(bool,fun(bool,bool)) ((#ssreflect_eq:fun('A,fun(bool,bool)) v:'A) P:bool)) P:bool)))))
 Ssreflect.bool_cases =  |- (#forall:fun(fun(fun(bool,bool),bool),bool) (\P:fun(bool,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(bool,bool) #T:bool)) (P:fun(bool,bool) #F:bool))) (#forall:fun(fun(bool,bool),bool) (\x:bool. (P:fun(bool,bool) x:bool))))))
 Ssreflect.list_cases =  |- (#forall:fun(fun(fun(list('A),bool),bool),bool) (\P:fun(list('A),bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(list('A),bool) #NIL:list('A))) (#forall:fun(fun('A,bool),bool) (\h:'A. (#forall:fun(fun(list('A),bool),bool) (\t:list('A). (P:fun(list('A),bool) ((#CONS:fun('A,fun(list('A),list('A))) h:'A) t:list('A))))))))) (#forall:fun(fun(list('A),bool),bool) (\l:list('A). (P:fun(list('A),bool) l:list('A)))))))
