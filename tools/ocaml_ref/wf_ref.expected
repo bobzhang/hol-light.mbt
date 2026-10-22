@@ -541,114 +541,114 @@ Warning: inventing type variables
 wf quotations (110):
   WF(<<) <=> forall P:A->bool. (?x. P(x)) ==> (?x. P(x) /\\ forall y. y << x ==> ~P(y))
   WF(<<) <=> forall P:A->bool. (?x. P(x)) <=> (?x. P(x) /\\ forall y. y << x ==> ~P(y))
-  \\x:A. ~P(x)
+  (x : A) => !(P : (A) -> Bool)(x)
   WF(<<) <=> forall P:A->bool. (forall x. (forall y. y << x ==> P(y)) ==> P(x)) ==> forall x. P(x)
-  \\y:A. ?n:num. y = s(n)
-  forall n. P(s n) /\\ s(SUC n):A << s(n)
-  s:num->A
-  (s(0) = a:A) /\\ (forall n. s(SUC n) = f(s n))
-  f:A->A
-  forall x:A. ?y. P(x) ==> P(y) /\\ y << x
-  a:A
-  (a <=> ~b) <=> (~a <=> b)
-  WF(<<) <=> ~(?s:num->A. forall n. s(SUC n) << s(n))
-  s:num->A
+  (y : A) => \226\136\131 n : Num, y == (s : (Num) -> A)(n)
+  \226\136\128 n : Num, (P : (A) -> Bool)((s : (Num) -> A)(n)) && (op_lt_lt : (A, A) -> Bool)(s(SUC(n)), s(n))
+  (s : (Num) -> A)
+  (s : (Num) -> A)(0) == (a : A) && (\226\136\128 n : Num, s(SUC(n)) == (f : (A) -> A)(s(n)))
+  (f : (A) -> A)
+  \226\136\128 x : A, \226\136\131 y : A, (P : (A) -> Bool)(x) \226\134\146 P(y) && (op_lt_lt : (A, A) -> Bool)(y, x)
+  (a : A)
+  ((a : Bool) == !(b : Bool)) == (!a == b)
+  WF((op_lt_lt : (A, A) -> Bool)) == !(\226\136\131 s : (Num) -> A, \226\136\128 n : Num, op_lt_lt(s(SUC(n)), s(n)))
+  (s : (Num) -> A)
   forall(<<):A->A->bool.\n        (forall x y z. x << y /\\ y << z ==> x << z)\n        ==> (WF(<<) <=> ~(?s:num->A. forall i j. i < j ==> s j << s i))
   WF(<<) ==>\n       forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> forall(f:A->B) g. (forall x. f x = H f x) /\\ (forall x. g x = H g x)\n                              ==> (f = g)
-  \\x:A. T
-  P:A->bool
-  \\f x. P(x:A) \\/ forall z:A. z << x ==> f(z)
+  (x : A) => true
+  (P : (A) -> Bool)
+  (f : (A) -> Bool) => (x : A) => (P : (A) -> Bool)(x) || (\226\136\128 z : A, (op_lt_lt : (A, A) -> Bool)(z, x) \226\134\146 f(z))
   (forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n        ==> forall(f:A->bool) g. (forall x. f x = H f x) /\\ (forall x. g x = H g x)\n                          ==> (f = g))\n   ==> WF(<<)
-  forall f:A->B x. (forall z. z << x ==> R z (f z)) ==> R x (H f x)
-  forall x:A y:B. R x y ==> S x y
-  forall x:A. ?!y:B. R x y
-  R:A->B->bool
+  \226\136\128 f : (A) -> B, \226\136\128 x : A, (\226\136\128 z : A, (op_lt_lt : (A, A) -> Bool)(z, x) \226\134\146 (R : (A, B) -> Bool)(z, f(z))) \226\134\146 R(x, (H : ((A) -> B, A) -> B)(f, x))
+  \226\136\128 x : A, \226\136\128 y : B, (R : (A, B) -> Bool)(x, y) \226\134\146 (S : (A, B) -> Bool)(x, y)
+  \226\136\128 x : A, existsunique((y : B) => (R : (A, B) -> Bool)(x, y))
+  (R : (A, B) -> Bool)
   WF(<<)\n   ==> forall H S. (forall f g x. (forall z. z << x ==> (f z = g z) /\\ S z (f z))\n                      ==> (H f x = H g x) /\\ S x (H f x))\n             ==> ?f:A->B. forall x. (f x = H f x)
-  \\x:A y:B. T
+  (x : A) => (y : B) => true
   WF(<<)\n   ==> forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n           ==> ?f:A->B. forall x. f x = H f x
-  \\n:num. ?i:num. n = f(x(i):A)
-  @m:num. x(m):A << x(n)
-  forall n:num. ?k. f(x(k):A) < f(x(n))
-  forall n. ?p. (x:num->A) n = x p
-  (x:num->A) n
-  n:num
-  f:A->num
-  p:num
+  (n : Num) => \226\136\131 i : Num, n == (f : (A) -> Num)((x : (Num) -> A)(i))
+  select((m : Num) => (op_lt_lt : (A, A) -> Bool)((x : (Num) -> A)(m), x((n : Num))))
+  \226\136\128 n : Num, \226\136\131 k : Num, (f : (A) -> Num)((x : (Num) -> A)(k)) < f(x(n))
+  \226\136\128 n : Num, \226\136\131 p : Num, (x : (Num) -> A)(n) == x(p)
+  (x : (Num) -> A)((n : Num))
+  (n : Num)
+  (f : (A) -> Num)
+  (p : Num)
   \\f:A->num. \\y:A. if ?p:num. y = x(p)\n                     then SUC(f(x(@m. x(m) << y)))\n                     else 0
-  forall n. (x:num->A)(@m. x(m) << x(n)) << x(n)
-  x:num->A
+  \226\136\128 n : Num, (op_lt_lt : (A, A) -> Bool)((x : (Num) -> A)(select((m : Num) => op_lt_lt(x(m), x(n)))), x(n))
+  (x : (Num) -> A)
   (forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n                 ==> ?f:A->num. forall x. f x = H f x)\n   ==> WF(<<)
   WF(<<) ==>\n       forall H. (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x))\n            ==> ?!f:A->B. forall x. f x = H f x
-  f:A->B
-  ?f:A->B. forall x. f x = @y. P f x y
+  (f : (A) -> B)
+  \226\136\131 f : (A) -> B, \226\136\128 x : A, f(x) == select((y : B) => (P : ((A) -> B, A, B) -> Bool)(f, x, y))
   WF((<<):A->A->bool)\n   ==> forall P. (forall f g x y. (forall z. z << x ==> f z = g z) ==> (P f x y <=> P g x y)) /\\\n           (forall f x. (forall z. z << x ==> P f z (f z)) ==> ?y. P f x y)\n           ==> ?f:A->B. forall x. P f x (f x)
-  forall(x:A) (y:A). x << y ==> x <<< y
+  \226\136\128 x : A, \226\136\128 y : A, (op_lt_lt : (A, A) -> Bool)(x, y) \226\134\146 (op_lt_lt_lt : (A, A) -> Bool)(x, y)
   forall(<<) (<<<). (forall(x:A) y. x << y ==> x <<< y) /\\ WF(<<<) ==> WF(<<)
   forall(<<) P:A->bool. WF(<<) ==> WF(\\x y. P x /\\ P y /\\ x << y)
-  forall x. (forall y. (m:A->B) y << m x ==> P y) ==> P x
-  \\y:B. forall x:A. (m(x) = y) ==> P x
+  \226\136\128 x : A, (\226\136\128 y : A, (op_lt_lt : (B, B) -> Bool)((m : (A) -> B)(y), m(x)) \226\134\146 (P : (A) -> Bool)(y)) \226\134\146 P(x)
+  (y : B) => \226\136\128 x : A, (m : (A) -> B)(x) == y \226\134\146 (P : (A) -> Bool)(x)
   forall(<<) (m:A->B). WF(<<) ==> WF(\\x x'. m x << m x')
-  (a:A,b:B)
-  b:B
-  b1:B
-  \\b. (P:A#B->bool) (a,b)
-  a:A
-  b1:B
-  a:A
-  b0:B
-  a0:A
-  \\a:A. ?b:B. P(a,b)
-  b0:B
-  a0:A
-  P:A#B->bool
+  ((a : A), (b : B))
+  (b : B)
+  (b1 : B)
+  (b : B) => (P : ((A, B)) -> Bool)(((a : A), b))
+  (a : A)
+  (b1 : B)
+  (a : A)
+  (b0 : B)
+  (a0 : A)
+  (a : A) => \226\136\131 b : B, (P : ((A, B)) -> Bool)((a, b))
+  (b0 : B)
+  (a0 : A)
+  (P : ((A, B)) -> Bool)
   forall R:A->A->bool S:A->B->B->bool. WF(R) /\\ (forall a. WF(S a))\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S r1 s1 s2)
   forall R:A->A->bool S:B->B->bool. WF(R) /\\ WF(S)\n         ==> WF(\\(r1,s1) (r2,s2). R r1 r2 \\/ (r1 = r2) /\\ S s1 s2)
   \\(x1,y1) (x2,y2). x1 << x2 \\/ (x1:A = x2) /\\ (y1:B) <<< (y2:B)
   WF((<<) :A->A->bool) /\\ WF((<<<) :B->B->bool)\n   ==> WF(\\(x1,y1) (x2,y2). x1 << x2 /\\ y1 <<< y2)
-  WF(<)
+  WF(op_lt)
   forall H. (forall f g n. (forall m. m < n ==> (f m = g m)) ==> (H f n = H g n))\n        ==> ?f:num->A. forall n. f n = H f n
-  MEASURE (m:A->num) = \\x y. m(x) < m(y)
-  forall m:A->num. WF(MEASURE m)
+  (MEASURE : ((A) -> Num, A, A) -> Bool)((m : (A) -> Num)) == ((x : A) => (y : A) => m(x) < m(y))
+  \226\136\128 m : (A) -> Num, WF(MEASURE(m))
   forall m:A->num. (forall y. MEASURE m y a ==> MEASURE m y b) <=> m(a) <= m(b)
-  \\z:A. z = x \\/ z = y
+  (z : A) => z == (x : A) || z == (y : A)
   forall(<<) x y:A. WF(<<) ==> ~(x << y /\\ y << x)
-  forall x:A. WF(<<) ==> ~(x << x)
-  WF(\\x y:A. F)
-  n:num
-  n:num
-  \\x:num->A. x n
-  (<<):A->A->bool
+  \226\136\128 x : A, WF((op_lt_lt : (A, A) -> Bool)) \226\134\146 !op_lt_lt(x, x)
+  WF((x : A) => (y : A) => false)
+  (n : Num)
+  (n : Num)
+  (x : (Num) -> A) => x((n : Num))
+  (op_lt_lt : (A, A) -> Bool)
   (?a. (?y. P y /\\ Q y /\\ f y = a) /\\ (forall z. A z ==> ~B a z)) <=>\n     ?y. (P y /\\ Q y) /\\ (forall z. B (f y) z ==> ~A z)
-  n:num
-  x:num->A
+  (n : Num)
+  (x : (Num) -> A)
   ?x:num->A. forall n. (?y. bad y /\\ (forall k. k < n ==> y k = x k) /\\ y n = x n) /\\\n                   forall z. bad z /\\ (forall k. k < n ==> z k = x k) ==> ~(z n << x n)
   forall(<<) (bad:(num->A)->bool).\n        WF(<<) /\\\n        (forall x. ~bad x ==> ?n. forall y. (forall k. k < n ==> y k = x k) ==> ~bad y) /\\\n        (?x. bad x)\n         ==> ?y. bad y /\\\n                 forall z n. bad z /\\ (forall k. k < n ==> z k = y k) ==> ~(z n << y n)
-  ~(P 0) ==> ((?n. P(SUC n)) <=> (?n. P(n)))
+  !(P : (Num) -> Bool)(0) \226\134\146 (\226\136\131 n : Num, P(SUC(n))) == (\226\136\131 n : Num, P(n))
   (P 0) ==> ((forall m. m < n ==> P(SUC m)) <=> (forall m. m < SUC n ==> P(m)))
-  y:A
-  (P:A->bool) x
-  forall x:A n. s x (SUC n) :A = g (s x n)
-  forall n x:A. s (g x) n :A = s x (SUC n)
-  x:A
+  (y : A)
+  (P : (A) -> Bool)((x : A))
+  \226\136\128 x : A, \226\136\128 n : Num, (s : (A, Num) -> A)(x, SUC(n)) == (g : (A) -> A)(s(x, n))
+  \226\136\128 n : Num, \226\136\128 x : A, (s : (A, Num) -> A)((g : (A) -> A)(x), n) == s(x, SUC(n))
+  (x : A)
   \\x:A. if ?n:num. ~P(s x n)\n                    then (h:A->B)(@y. ?n. (y = s x n) /\\ ~P(s x n) /\\\n                                          forall m. m < n ==> P(s x m))\n                    else something_arbitrary:B
-  s:A->num->A
-  \\y:A n:num. g(y):A
-  x:A
-  x:A
+  (s : (A, Num) -> A)
+  (y : A) => (n : Num) => (g : (A) -> A)(y)
+  (x : A)
+  (x : A)
   forall P g h. ?f:A->B. forall x. f x = if P(x) then f(g x) else h x
-  P (f:A->B) (x:A) :bool
-  x:A
+  (P : ((A) -> B, A) -> Bool)((f : (A) -> B), (x : A))
+  (x : A)
   forall f:A->B. (forall x:A y:A. P f x /\\ y << G f x ==> y << x)\n         ==> forall x. terminates f x ==> forall y. y << while f x ==> y << x
   forall x:A. terminates (f:A->B) x /\\\n              (forall y:A. (forall z:A. z << y ==> z << x)\n                     ==> (P f y <=> P g y) /\\ (G f y :A = G g y))\n              ==> (while f x :A = while g x)
-  a ==> b ==> c <=> b ==> a ==> c
+  ((a : Bool) \226\134\146 (b : Bool) \226\134\146 (c : Bool)) == (b \226\134\146 a \226\134\146 c)
   forall f g x.\n           (forall x y. P f x /\\ y << G (f:A->B) x ==> y << x) /\\\n           (forall y:A. (forall z:A. z << y ==> z << x)\n                  ==> (P f y = P g y) /\\ (G f y = G g y))\n               ==> terminates f x ==> terminates g x
   (a = b) /\\ (a /\\ b ==> (x = y) /\\ (f x = g x))\n      ==> ((if a then f x else d) = (if b then g y else d))
   ?f:A->B. forall x. f x = if terminates f x then H f (while f x :A) else anything
   ?while. forall f:A->B x:A. while f x = if P f x then while f (G f x) else x
   (forall x:A. ~(P f x) ==> terminates f x) /\\\n      (forall x. P (f:A->B) x /\\ terminates f (G f x) ==> terminates f x)
   forall P G H. WF(<<) /\\\n           (forall f g x. (forall z. z << x ==> (f z = g z))\n                    ==> (P f x <=> P g x) /\\ G f x = G g x /\\ H f x = H g x) /\\\n           (forall f g x. (forall z. z << x ==> (f z = g z)) ==> (H f x = H g x)) /\\\n           (forall f x y. P f x /\\ y << G f x ==> y << x)\n           ==> ?f:A->B. forall x. f x = if P f x then f(G f x) else H f x
-  (forall x. P x ==> forall y. Q x y) <=> forall y x. P x ==> Q x y
-  (forall m. P m ==> (m = e) ==> Q) <=> (P e ==> Q)
+  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (\226\136\128 y : _, (Q : (_, _) -> Bool)(x, y))) == (\226\136\128 y : _, \226\136\128 x : _, P(x) \226\134\146 Q(x, y))
+  (\226\136\128 m : _, (P : (_) -> Bool)(m) \226\134\146 m == (e : _) \226\134\146 (Q : Bool)) == (P(e) \226\134\146 Q)
 WF =  |- (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\<<:fun('A,fun('A,bool)). ((#=:fun(bool,fun(bool,bool)) (#WF:fun(fun('A,fun('A,bool)),bool) <<:fun('A,fun('A,bool)))) (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun('A,fun('A,bool)) y:'A) x:'A)) (#~:fun(bool,bool) (P:fun('A,bool) y:'A))))))))))))))
 WF_EQ =  |- ((#=:fun(bool,fun(bool,bool)) (#WF:fun(fun('A,fun('A,bool)),bool) <<:fun('A,fun('A,bool)))) (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun('A,fun('A,bool)) y:'A) x:'A)) (#~:fun(bool,bool) (P:fun('A,bool) y:'A))))))))))))
 WF_IND =  |- ((#=:fun(bool,fun(bool,bool)) (#WF:fun(fun('A,fun('A,bool)),bool) <<:fun('A,fun('A,bool)))) (#forall:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((<<:fun('A,fun('A,bool)) y:'A) x:'A)) (P:fun('A,bool) y:'A))))) (P:fun('A,bool) x:'A))))) (#forall:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))))))
