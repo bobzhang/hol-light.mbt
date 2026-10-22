@@ -3294,8 +3294,8 @@ test "int matches int.ml" {
       #|  int_abs(int_neg(int_of_num((x : Num)))) == int_of_num(x) && int_abs(int_of_num(x)) == int_of_num(x)
       #|  (forall x y z. x + (y + z) = (x + y) + z) /\\\n     (forall x y. x + y = y + x) /\\\n     (forall x. &0 + x = x) /\\\n     (forall x y z. x * (y * z) = (x * y) * z) /\\\n     (forall x y. x * y = y * x) /\\\n     (forall x. &1 * x = x) /\\\n     (forall x. &0 * x = &0) /\\\n     (forall x y z. x * (y + z) = x * y + x * z) /\\\n     (forall x. x pow 0 = &1) /\\\n     (forall x n. x pow (SUC n) = x * x pow n)
       #|  (forall x. --x = --(&1) * x) /\\\n     (forall x y. x - y = x + --(&1) * y)
-      #|  p:num
-      #|  q:num
+      #|  (p : Num)
+      #|  (q : Num)
       #|  0
       #|  1
       #|  (forall x. &0 * x = &0) /\\\n     (forall x y z. (x + y = x + z) <=> (y = z)) /\\\n     (forall w x y z. (w * y + x * z = w * z + x * y) <=> (w = x) \\/ (y = z))
@@ -3503,7 +3503,7 @@ test "int matches int.ml" {
       #|  (x : Int) >= (y : Int)
       #|  (x : Int) < (y : Int)
       #|  (x : Int) <= (y : Int)
-      #|  COND: bool -> A -> A -> A
+      #|  (COND : (Bool, A, A) -> A)
       #|  (COND : (Bool, A, A) -> A)
       #|  (n : Int)
       #|  (m : Int)
