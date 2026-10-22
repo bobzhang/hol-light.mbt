@@ -74368,8 +74368,8 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  (n : Num)
       #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], x + (y + z) == x + y + z) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x + y == y + x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], Cx(real_of_num(0)) + x == x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_mul(x, complex_mul(y, z)) == complex_mul(complex_mul(x, y), z)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], complex_mul(x, y) == complex_mul(y, x)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], complex_mul(Cx(real_of_num(1)), x) == x) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], complex_mul(Cx(real_of_num(0)), x) == Cx(real_of_num(0))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_mul(x, y + z) == complex_mul(x, y) + complex_mul(x, z)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], complex_pow(x, 0) == Cx(real_of_num(1))) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, complex_pow(x, SUC(n)) == complex_mul(x, complex_pow(x, n)))
       #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], -x == complex_mul(Cx(-real_of_num(1)), x)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 y : Cart[Real, Tybit0[Unit]], x - y == x + complex_mul(Cx(-real_of_num(1)), y))
-      #|  p:num
-      #|  q:num
+      #|  (p : Num)
+      #|  (q : Num)
       #|  0
       #|  1
       #|  (op_minus_minus : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
