@@ -5664,9 +5664,9 @@ test "Library/isum matches Library/isum.ml" {
       #|0..0..2..4..8..26..55..85..141..solved at 150
       #|Warning: inventing type variables
       #|Library/isum quotations (29):
-      #|  forall f s. isum (support (+) f s) f = isum s f
-      #|  s:A->bool
-      #|  support(+) (f:A->int) s
+      #|  \226\136\128 f : (_) -> Int, \226\136\128 s : (_) -> Bool, isum(support(op_plus, f, s), f) == isum(s, f)
+      #|  (s : (A) -> Bool)
+      #|  support(op_plus, (f : (A) -> Int), (s : (A) -> Bool))
       #|  support(+) (\\x:A. real_of_int(f x)) s = support(+) f s
       #|  forall f:A->int s. real_of_int(isum s f) = sum s (\\x. real_of_int(f x))
       #|  real_of_int
@@ -5679,19 +5679,19 @@ test "Library/isum matches Library/isum.ml" {
       #|  forall x n. 1 <= n ==> &1 - x pow n = (&1 - x) * isum (0..n - 1) (\\i. x pow i)
       #|  forall x n. 1 <= n ==> x pow n - &1 = (x - &1) * isum (0..n - 1) (\\i. x pow i)
       #|  forall f:A->int s. support (+) f (:A) SUBSET s ==> isum s f = isum (:A) f
-      #|  P:int->bool
+      #|  (P : (Int) -> Bool)
       #|  forall P f:A->int s.\n        P(&0) /\\ (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(isum s f)
-      #|  R:int->int->bool
+      #|  (R : (Int, Int) -> Bool)
       #|  forall R (f:A->int) g s.\n        R (&0) (&0) /\\\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)
-      #|  P:int->bool
+      #|  (P : (Int) -> Bool)
       #|  forall P f:A->int s.\n        FINITE s /\\ ~(s = {}) /\\\n        (forall x y. P x /\\ P y ==> P(x + y)) /\\ (forall a. a IN s ==> P(f a))\n        ==> P(isum s f)
-      #|  R:int->int->bool
+      #|  (R : (Int, Int) -> Bool)
       #|  forall R (f:A->int) g s.\n        (forall m n m' n'. R m n /\\ R m' n' ==> R (m + m') (n + n')) /\\\n        FINITE s /\\ ~(s = {}) /\\ (forall x. x IN s ==> R (f x) (g x))\n        ==> R (isum s f) (isum s g)
       #|  (n < m ==> isum(m..n) f = &0) /\\\n     isum(m..m) f = f m /\\\n     (m <= n ==> isum (m..n) f = f m + isum (m + 1..n) f)
-      #|  ..
-      #|  f:num->int
-      #|  m:num
-      #|  n:num
+      #|  op_dot_dot
+      #|  (f : (Num) -> Int)
+      #|  (m : Num)
+      #|  (n : Num)
       #|  (forall f g s.   (forall x. x IN s ==> f(x) = g(x))\n              ==> isum s (\\i. f(i)) = isum s g) /\\\n   (forall f g a b. (forall i. a <= i /\\ i <= b ==> f(i) = g(i))\n              ==> isum(a..b) (\\i. f(i)) = isum(a..b) g) /\\\n   (forall f g p.   (forall x. p x ==> f x = g x)\n              ==> isum {y | p y} (\\i. f(i)) = isum {y | p y} g)
       #|ISUM_SUPPORT =  |- (#forall:fun(fun(fun('?1,int),bool),bool) (\f:fun('?1,int). (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#=:fun(int,fun(int,bool)) ((#isum:fun(fun('?1,bool),fun(fun('?1,int),int)) (((#support:fun(fun(int,fun(int,int)),fun(fun('?1,int),fun(fun('?1,bool),fun('?1,bool)))) #int_add:fun(int,fun(int,int))) f:fun('?1,int)) s:fun('?1,bool))) f:fun('?1,int))) ((#isum:fun(fun('?1,bool),fun(fun('?1,int),int)) s:fun('?1,bool)) f:fun('?1,int)))))))
       #|int_isum =  |- (#forall:fun(fun(fun('A,int),bool),bool) (\f:fun('A,int). (#forall:fun(fun(fun('A,bool),bool),bool) (\s:fun('A,bool). ((#=:fun(real,fun(real,bool)) (#real_of_int:fun(int,real) ((#isum:fun(fun('A,bool),fun(fun('A,int),int)) s:fun('A,bool)) f:fun('A,int)))) ((#sum:fun(fun('A,bool),fun(fun('A,real),real)) s:fun('A,bool)) (\x:'A. (#real_of_int:fun(int,real) (f:fun('A,int) x:'A)))))))))
