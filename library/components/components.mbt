@@ -196,7 +196,7 @@ pub fn add_component_orthogonality_thms(
 /// component_tybij
 fn step_8() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([]))
-  let th = @tactics.prove(@parser.parse_term("?rw:(S->V)#(V->S->S). T"), t7)
+  let th = @tactics.prove(@term_syntax.parse_term("∃ rw : ((S) -> V, (V, S) -> S), true"), t7)
   let t8 = @class.new_type_definition(
     "component",
     ("component", "dest_component"),
@@ -222,7 +222,7 @@ fn step_9() -> Unit raise {
   let t9 = @meson.meson_tac(@list.List([component_tybij()]))
   component_inj_c.set(
     @tactics.prove(
-      @parser.parse_term("forall rw rw'. component rw = component rw' <=> rw = rw'"),
+      @term_syntax.parse_term("∀ rw : ((_) -> _, (_, _) -> _), ∀ rw' : ((_) -> _, (_, _) -> _), (component(rw) == component(rw')) == (rw == rw')"),
       t9,
     ),
   )
@@ -243,7 +243,7 @@ fn step_10() -> Unit raise {
   let t10 = @meson.meson_tac(@list.List([component_tybij(), @pair.pair()]))
   forall_component_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall c:(S,V)component. P c) <=> forall r w. P(component(r,w))"),
+      @term_syntax.parse_term("(∀ c : Component[S, V], (P : (Component[S, V]) -> Bool)(c)) == (∀ r : (S) -> V, ∀ w : (V, S) -> S, P(component((r, w))))"),
       t10,
     ),
   )
@@ -266,7 +266,7 @@ fn step_11() -> Unit raise {
   let t11 = @meson.meson_tac(@list.List([component_tybij(), @pair.pair()]))
   exists_component_c.set(
     @tactics.prove(
-      @parser.parse_term("(?c:(S,V)component. P c) <=> ?r w. P(component(r,w))"),
+      @term_syntax.parse_term("(∃ c : Component[S, V], (P : (Component[S, V]) -> Bool)(c)) == (∃ r : (S) -> V, ∃ w : (V, S) -> S, P(component((r, w))))"),
       t11,
     ),
   )
@@ -288,7 +288,7 @@ pub fn exists_component() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   read_def_c.set(
     @pair.new_definition(
-      @parser.parse_term("read (c:(S,V)component) = FST(dest_component c)"),
+      @term_syntax.parse_term("(read : (Component[S, V], S) -> V)((c : Component[S, V])) == FST(dest_component(c))"),
     ),
   )
 }
@@ -307,7 +307,7 @@ pub fn read_def() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   write_def_c.set(
     @pair.new_definition(
-      @parser.parse_term("write (c:(S,V)component) = SND(dest_component c)"),
+      @term_syntax.parse_term("(write : (Component[S, V], V, S) -> S)((c : Component[S, V])) == SND(dest_component(c))"),
     ),
   )
 }
@@ -327,7 +327,7 @@ fn step_14() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([read_def(), component_tybij()]))
   read_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(r:S->V) w. read(component(r,w)) = r"),
+      @term_syntax.parse_term("∀ r : (S) -> V, ∀ w : (V, S) -> S, read(component((r, w))) == r"),
       t12,
     ),
   )
@@ -348,7 +348,7 @@ fn step_15() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([write_def(), component_tybij()]))
   write_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(r:S->V) w. write(component(r,w)) = w"),
+      @term_syntax.parse_term("∀ r : (S) -> V, ∀ w : (V, S) -> S, write(component((r, w))) == w"),
       t13,
     ),
   )
@@ -399,7 +399,7 @@ pub fn component_eq() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   entirety_c.set(
     @pair.new_definition(
-      @parser.parse_term("entirety = component((\\s:S. s),(\\x:S s:S. x))"),
+      @term_syntax.parse_term("(entirety : Component[S, S]) == component(((s : S) => s, (x : S) => (s : S) => x))"),
     ),
   )
 }
@@ -421,7 +421,7 @@ fn step_18() -> Unit raise {
   )
   read_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("read entirety = I /\\ (forall s. read entirety s = s)"),
+      @term_syntax.parse_term("(read : (Component[_, _], _) -> _)((entirety : Component[_, _])) == (I : (_) -> _) && (∀ s : _, read(entirety, s) == s)"),
       t15,
     ),
   )
@@ -469,7 +469,7 @@ fn step_20() -> Unit raise {
   )
   read_write_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("forall y s. read entirety (write entirety y s) = y"),
+      @term_syntax.parse_term("∀ y : _, ∀ s : _, read(entirety, write(entirety, y, s)) == y"),
       t17,
     ),
   )
@@ -632,7 +632,7 @@ fn step_27() -> Unit raise {
   )
   compose_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("(forall c. c :> entirety = c) /\\ (forall c. entirety :> c = c)"),
+      @term_syntax.parse_term("(∀ c : Component[_, _], op_colon_gt(c, entirety) == c) && (∀ c : Component[_, _], op_colon_gt(entirety, c) == c)"),
       t21,
     ),
   )
@@ -838,7 +838,7 @@ fn step_35() -> Unit raise {
     ]),
   )
   valid_component_entirety_c.set(
-    @tactics.prove(@parser.parse_term("valid_component entirety"), t26),
+    @tactics.prove(@term_syntax.parse_term("(valid_component : (Component[_, _]) -> Bool)((entirety : Component[_, _]))"), t26),
   )
 }
 
@@ -886,7 +886,7 @@ pub fn weakly_valid_component() -> @kernel.Thm {
 /// VALID_IMP_WEAKLY_VALID_COMPONENT
 fn step_38() -> Unit raise {
   let t30 = @simp.asm_rewrite_tac(@list.List([]))
-  let t29 = @tactics.exists_tac(@parser.parse_term("\\x:V. x"))
+  let t29 = @tactics.exists_tac(@term_syntax.parse_term("(x : V) => x"))
   let t28 = @simp.asm_rewrite_tac(@list.List([]))
   let t27 = @tactics.repeat_tac(@tactics.strip_tac)
   let t31 = @tactics.then_tac(
@@ -932,7 +932,7 @@ fn step_39() -> Unit raise {
     @list.List([valid_imp_weakly_valid_component(), valid_component_entirety()]),
   )
   weakly_valid_component_entirety_c.set(
-    @tactics.prove(@parser.parse_term("weakly_valid_component entirety"), t32),
+    @tactics.prove(@term_syntax.parse_term("(weakly_valid_component : (Component[_, _]) -> Bool)((entirety : Component[_, _]))"), t32),
   )
 }
 
@@ -1047,7 +1047,7 @@ fn step_44() -> Unit raise {
     @list.List([strongly_valid_component(), read_entirety(), write_entirety()]),
   )
   strongly_valid_component_entirety_c.set(
-    @tactics.prove(@parser.parse_term("strongly_valid_component entirety"), t37),
+    @tactics.prove(@term_syntax.parse_term("(strongly_valid_component : (Component[_, _]) -> Bool)((entirety : Component[_, _]))"), t37),
   )
 }
 
@@ -1097,7 +1097,7 @@ pub fn extensionally_valid_component() -> @kernel.Thm {
 /// STRONGLY_VALID_IMP_EXTENSIONALLY_VALID_COMPONENT
 fn step_47() -> Unit raise {
   let t41 = @simp.asm_rewrite_tac(@list.List([]))
-  let t40 = @tactics.exists_tac(@parser.parse_term("\\x:V. x"))
+  let t40 = @tactics.exists_tac(@term_syntax.parse_term("(x : V) => x"))
   let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @tactics.repeat_tac(@tactics.strip_tac)
   let t42 = @tactics.then_tac(
@@ -1150,7 +1150,7 @@ fn step_48() -> Unit raise {
   )
   extensionally_valid_component_entirety_c.set(
     @tactics.prove(
-      @parser.parse_term("extensionally_valid_component entirety"),
+      @term_syntax.parse_term("(extensionally_valid_component : (Component[_, _]) -> Bool)((entirety : Component[_, _]))"),
       t43,
     ),
   )
