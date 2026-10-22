@@ -9474,7 +9474,7 @@ test "Library/words matches Library/words.ml" {
       #|  (iword : (Int) -> Word[N])((i : Int))
       #|  (word_saturate : (Num) -> Word[N])(NUMERAL((n : Num)))
       #|  (word : (Num) -> Word[N])(NUMERAL((n : Num)))
-      #|  COND: bool -> A -> A -> A
+      #|  (COND : (Bool, A, A) -> A)
       #|  (COND : (Bool, A, A) -> A)
       #|  word(NUMERAL n):N word = iword(ival(word(NUMERAL n):N word))
       #|  op_plus
