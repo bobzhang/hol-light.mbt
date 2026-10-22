@@ -957,68 +957,68 @@ test "calc_int matches calc_int.ml" {
       #|0..0..3..solved at 9
       #|calc_int quotations (63):
       #|  real_of_num
-      #|  (--)
-      #|  (/)
+      #|  op_minus_minus
+      #|  op_slash
       #|  (m + n = n + m) /\\\n   ((m + n) + p = m + (n + p)) /\\\n   (m + (n + p) = n + (m + p))
-      #|  forall x. x + --x = &0
-      #|  (+) (--x)
-      #|  forall x y z. (x + y = x + z) <=> (y = z)
-      #|  forall x y z. (x + z = y + z) <=> (x = y)
-      #|  forall x. x * &0 = &0
-      #|  forall x. &0 * x = &0
-      #|  forall x. --(--x) = x
-      #|  forall x y. x * (--y) = -- (x * y)
-      #|  forall x y. (--x) * y = -- (x * y)
-      #|  (a + b) + (c + d) = (a + c) + (b + d)
-      #|  x + y
-      #|  forall x y. --(x + y) = --x + --y
-      #|  forall x. x + &0 = x
-      #|  --(&0) = &0
-      #|  --x
-      #|  x:real
-      #|  forall x y. --x <= y <=> &0 <= x + y
-      #|  forall x y. --x <= --y <=> y <= x
-      #|  forall x y. x <= --y <=> x + y <= &0
-      #|  forall x n. (&x) pow n = &(x EXP n)
-      #|  EVEN n
+      #|  \226\136\128 x : Real, x + -x == real_of_num(0)
+      #|  op_plus(-(x : Real))
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + y == x + z) == (y == z)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 z : Real, (x + z == y + z) == (x == y)
+      #|  \226\136\128 x : Real, x * real_of_num(0) == real_of_num(0)
+      #|  \226\136\128 x : Real, real_of_num(0) * x == real_of_num(0)
+      #|  \226\136\128 x : Real, --x == x
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x * -y == -(x * y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -x * y == -(x * y)
+      #|  (a : Real) + (b : Real) + ((c : Real) + (d : Real)) == a + c + (b + d)
+      #|  (x : Real) + (y : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, -(x + y) == -x + -y
+      #|  \226\136\128 x : Real, x + real_of_num(0) == x
+      #|  -real_of_num(0) == real_of_num(0)
+      #|  -(x : Real)
+      #|  (x : Real)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x <= y) == (real_of_num(0) <= x + y)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (-x <= -y) == (y <= x)
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, (x <= -y) == (x + y <= real_of_num(0))
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, pow(real_of_num(x), n) == real_of_num(EXP(x, n))
+      #|  EVEN((n : Num))
       #|  forall x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)
-      #|  forall n. abs(&n) = &n
-      #|  forall x. abs(--x) = abs x
+      #|  \226\136\128 n : Num, abs(real_of_num(n)) == real_of_num(n)
+      #|  \226\136\128 x : Real, abs(-x) == abs(x)
       #|  (F /\\ F <=> F) /\\ (F /\\ T <=> F) /\\\n          (T /\\ F <=> F) /\\ (T /\\ T <=> T)
-      #|  (~T <=> F) /\\ (~F <=> T)
+      #|  !true == false && !false == true
       #|  (--(&m) <= &n <=> T) /\\\n     (&m <= &n <=> m <= n) /\\\n     (--(&m) <= --(&n) <=> n <= m) /\\\n     (&m <= --(&n) <=> (m = 0) /\\ (n = 0))
       #|  (&m < --(&n) <=> F) /\\\n     (&m < &n <=> m < n) /\\\n     (--(&m) < --(&n) <=> n < m) /\\\n     (--(&m) < &n <=> ~((m = 0) /\\ (n = 0)))
       #|  (&m >= --(&n) <=> T) /\\\n     (&m >= &n <=> n <= m) /\\\n     (--(&m) >= --(&n) <=> m <= n) /\\\n     (--(&m) >= &n <=> (m = 0) /\\ (n = 0))
       #|  (--(&m) > &n <=> F) /\\\n     (&m > &n <=> n < m) /\\\n     (--(&m) > --(&n) <=> m < n) /\\\n     (&m > --(&n) <=> ~((m = 0) /\\ (n = 0)))
       #|  ((&m = &n) <=> (m = n)) /\\\n     ((--(&m) = --(&n)) <=> (m = n)) /\\\n     ((--(&m) = &n) <=> (m = 0) /\\ (n = 0)) /\\\n     ((&m = --(&n)) <=> (m = 0) /\\ (n = 0))
-      #|  (--(&0) = &0) /\\\n     (--(--(&x)) = &x)
+      #|  -real_of_num(0) == real_of_num(0) && --real_of_num((x : Num)) == real_of_num(x)
       #|  (&0 * &x = &0) /\\\n     (&0 * --(&x) = &0) /\\\n     (&x * &0 = &0) /\\\n     (--(&x) * &0 = &0)
       #|  ((&m * &n = &(m * n)) /\\\n      (--(&m) * --(&n) = &(m * n))) /\\\n     ((--(&m) * &n = --(&(m * n))) /\\\n      (&m * --(&n) = --(&(m * n))))
-      #|  (--)
-      #|  &
-      #|  (+)
-      #|  (+)
-      #|  m:num
-      #|  n:num
-      #|  (--(&m) + &m = &0) /\\\n     (&m + --(&m) = &0)
+      #|  op_minus_minus
+      #|  real_of_num
+      #|  real_add
+      #|  real_add
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  -real_of_num((m : Num)) + real_of_num(m) == real_of_num(0) && real_of_num(m) + -real_of_num(m) == real_of_num(0)
       #|  (--(&m) + --(&n) = --(&(m + n))) /\\\n     (--(&m) + &(m + n) = &n) /\\\n     (--(&(m + n)) + &m = --(&n)) /\\\n     (&(m + n) + --(&m) = &n) /\\\n     (&m + --(&(m + n)) = --(&n)) /\\\n     (&m + &n = &(m + n))
       #|  (&x pow n = &(x EXP n)) /\\\n     ((--(&x)) pow n = if EVEN n then &(x EXP n) else --(&(x EXP n)))
       #|  ((if T then x:real else y) = x) /\\ ((if F then x:real else y) = y)
-      #|  (--)
-      #|  (abs(--(&x)) = &x) /\\\n     (abs(&x) = &x)
-      #|  x pow n
-      #|  x * y
-      #|  x - y
-      #|  x + y
-      #|  abs(x)
-      #|  --x
-      #|  x:real = y
-      #|  x > y
-      #|  x >= y
-      #|  x < y
-      #|  x <= y
-      #|  COND: bool -> A -> A -> A
-      #|  COND: bool -> A -> A -> A
+      #|  op_minus_minus
+      #|  abs(-real_of_num((x : Num))) == real_of_num(x) && abs(real_of_num(x)) == real_of_num(x)
+      #|  pow((x : Real), (n : Num))
+      #|  (x : Real) * (y : Real)
+      #|  (x : Real) - (y : Real)
+      #|  (x : Real) + (y : Real)
+      #|  abs((x : Real))
+      #|  -(x : Real)
+      #|  (x : Real) == (y : Real)
+      #|  (x : Real) > (y : Real)
+      #|  (x : Real) >= (y : Real)
+      #|  (x : Real) < (y : Real)
+      #|  (x : Real) <= (y : Real)
+      #|  (COND : (Bool, A, A) -> A)
+      #|  (COND : (Bool, A, A) -> A)
       #|REAL_ADD_AC =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) m:real) n:real)) ((#real_add:fun(real,fun(real,real)) n:real) m:real))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) m:real) n:real)) p:real)) ((#real_add:fun(real,fun(real,real)) m:real) ((#real_add:fun(real,fun(real,real)) n:real) p:real)))) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) m:real) ((#real_add:fun(real,fun(real,real)) n:real) p:real))) ((#real_add:fun(real,fun(real,real)) n:real) ((#real_add:fun(real,fun(real,real)) m:real) p:real)))))
       #|REAL_ADD_RINV =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) x:real) (#real_neg:fun(real,real) x:real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
       #|REAL_EQ_ADD_LCANCEL =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. (#forall:fun(fun(real,bool),bool) (\z:real. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) x:real) y:real)) ((#real_add:fun(real,fun(real,real)) x:real) z:real))) ((#=:fun(real,fun(real,bool)) y:real) z:real))))))))
