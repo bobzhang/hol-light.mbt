@@ -5702,7 +5702,7 @@ test "Rqe/rqe_num matches Rqe/rqe_num.ml" {
       #|0..0..0..solved at 3
       #|Warning: inventing type variables
       #|Rqe/rqe_num quotations (14):
-      #|  (=):num->num->bool
+      #|  (op_eq : (Num, Num) -> Bool)
       #|  (<):num->num->bool
       #|  (>):num->num->bool
       #|  (<=):num->num->bool
@@ -5712,8 +5712,8 @@ test "Rqe/rqe_num matches Rqe/rqe_num.ml" {
       #|  0
       #|  EVEN
       #|  ODD
-      #|  nmax (n:num) m = if n <= m then m else n
-      #|  1 + x = SUC x
+      #|  (nmax : (Num, Num) -> Num)((n : Num), (m : Num)) == (if n <= m { m } else { n })
+      #|  1 + (x : Num) == SUC(x)
       #|  EVEN
       #|  ODD
       #|nmax =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) ((#nmax:fun(num,fun(num,num)) n:num) m:num)) (((#COND:fun(bool,fun(num,fun(num,num))) ((#<=:fun(num,fun(num,bool)) n:num) m:num)) m:num) n:num))))))
