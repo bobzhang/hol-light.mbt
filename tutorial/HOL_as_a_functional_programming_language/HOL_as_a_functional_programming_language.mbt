@@ -120,7 +120,7 @@ fn step_1() -> Unit raise {
 ///|
 /// eth
 fn step_2() -> Unit raise {
-  eth_c.set(@define.prove_general_recursive_function_exists(@parser.parse_term("?norm. (norm False = False) /\\\n         (norm True = True) /\\\n         (forall i. norm (Atomic i) = Atomic i) /\\\n         (forall y z. norm (Ite False y z) = norm z) /\\\n         (forall y z. norm (Ite True y z) = norm y) /\\\n         (forall i y z. norm (Ite (Atomic i) y z) =\n                    Ite (Atomic i) (norm y) (norm z)) /\\\n         (forall u v w y z. norm (Ite (Ite u v w) y z) =\n                        norm (Ite u (Ite v y z) (Ite w y z)))")))
+  eth_c.set(@define.prove_general_recursive_function_exists(@term_syntax.parse_term("∃ norm : (Ite) -> Ite, norm(False) == False && norm(True) == True && (∀ i : Num, norm(Atomic(i)) == Atomic(i)) && (∀ y : Ite, ∀ z : Ite, norm(Ite(False, y, z)) == norm(z)) && (∀ y : Ite, ∀ z : Ite, norm(Ite(True, y, z)) == norm(y)) && (∀ i : Num, ∀ y : Ite, ∀ z : Ite, norm(Ite(Atomic(i), y, z)) == Ite(Atomic(i), norm(y), norm(z))) && (∀ u : Ite, ∀ v : Ite, ∀ w : Ite, ∀ y : Ite, ∀ z : Ite, norm(Ite(Ite(u, v, w), y, z)) == norm(Ite(u, Ite(v, y, z), Ite(w, y, z))))")))
 }
 
 ///|
@@ -135,7 +135,7 @@ pub fn eth() -> @kernel.Thm {
 ///|
 /// sizeof
 fn step_3() -> Unit raise {
-  sizeof__c.set(@define.define_(@parser.parse_term("(sizeof False = 1) /\\\n  (sizeof True = 1) /\\\n  (sizeof(Atomic i) = 1) /\\\n  (sizeof(Ite x y z) = sizeof x * (1 + sizeof y + sizeof z))")))
+  sizeof__c.set(@define.define_(@term_syntax.parse_term("(sizeof : (Ite) -> Num)(False) == 1 && sizeof(True) == 1 && sizeof(Atomic((i : Num))) == 1 && sizeof(Ite((x : Ite), (y : Ite), (z : Ite))) == sizeof(x) * (1 + (sizeof(y) + sizeof(z)))")))
 }
 
 ///|
@@ -151,7 +151,7 @@ pub fn sizeof_() -> @kernel.Thm {
 /// eth'
 fn step_4() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([@wf.wf_measure(), @wf.measure_le(), @wf.measure(), sizeof_()]))
-  let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("MEASURE sizeof")), t5), @int.arith_tac)
+  let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("MEASURE(sizeof)")), t5), @int.arith_tac)
   let th = @tactics.prove(@lib.hd(@kernel.hyp(eth())), t6)
   eth_p_c.set(@bool.prove_hyp(th, eth()))
 }
@@ -183,7 +183,7 @@ pub fn norm() -> @kernel.Thm {
 ///|
 /// SIZEOF_INDUCT
 fn step_6() -> Unit raise {
-  let t7 = @bool.ispec(@parser.parse_term("sizeof"), @wf.wf_measure())
+  let t7 = @bool.ispec(@term_syntax.parse_term("sizeof"), @wf.wf_measure())
   sizeof_induct_c.set(@simp.rewrite_rule(@list.List([@wf.wf_ind(), @wf.measure()]))(t7))
 }
 
@@ -201,7 +201,7 @@ pub fn sizeof_induct() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t8 = @simp.simp_tac(@list.List([sizeof_(), @arith.add_eq_0(), @arith.mult_eq_0(), @calc_num.arith()]))
   let t9 = @tactics.then_tac(@tactics.match_mp_tac(ite_induct()), t8)
-  sizeof_nz_c.set(@tactics.prove(@parser.parse_term("forall e. ~(sizeof e = 0)"), t9))
+  sizeof_nz_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Ite, !(sizeof(e) == 0)"), t9))
 }
 
 ///|
@@ -217,7 +217,7 @@ pub fn sizeof_nz() -> @kernel.Thm {
 /// ITE_INDUCT
 fn step_8() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([@arith.mult_eq_0(), sizeof_nz()]))
-  let t27 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("~(b = 0) /\\ ~(c = 0) ==> a < (b + a) + c")))
+  let t27 = @tactics.match_mp_tac(@int.arith_rule(@term_syntax.parse_term("!((b : Num) == 0) && !((c : Num) == 0) → (a : Num) < b + a + c")))
   let t26 = @simp.rewrite_tac(@list.List([@arith.add_assoc(), @arith.lt_add_rcancel()]))
   let t25 = @simp.rewrite_tac(@list.List([@arith.mult_ac(), @arith.add_ac(), @arith.lt_add_lcancel()]))
   let t24 = @simp.rewrite_tac(@list.List([@arith.left_add_distrib(), @arith.right_add_distrib(), @arith.mult_clauses()]))
@@ -238,7 +238,7 @@ fn step_8() -> Unit raise {
   let t11 = @tactics.match_mp_tac(ite_induct())
   let t10 = @tactics.match_mp_tac(sizeof_induct())
   let t29 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t10), t11), t12), t13), t17), t18), t19), t21), t22), t23), t24), t25), t26), t27), t28)
-  ite_induct_v1_c.set(@tactics.prove(@parser.parse_term("forall P. P False /\\\n       P True /\\\n       (forall i. P(Atomic i)) /\\\n       (forall y z. P z ==> P(Ite False y z)) /\\\n       (forall y z. P y ==> P(Ite True y z)) /\\\n       (forall i y z. P y /\\ P z ==> P (Ite (Atomic i) y z)) /\\\n       (forall u v w x y z. P(Ite u (Ite v y z) (Ite w y z))\n                      ==> P(Ite (Ite u v w) y z))\n       ==> forall e. P e"), t29))
+  ite_induct_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Ite) -> Bool, P(False) && P(True) && (∀ i : Num, P(Atomic(i))) && (∀ y : Ite, ∀ z : Ite, P(z) → P(Ite(False, y, z))) && (∀ y : Ite, ∀ z : Ite, P(y) → P(Ite(True, y, z))) && (∀ i : Num, ∀ y : Ite, ∀ z : Ite, P(y) && P(z) → P(Ite(Atomic(i), y, z))) && (∀ u : Ite, ∀ v : Ite, ∀ w : Ite, ∀ x : _, ∀ y : Ite, ∀ z : Ite, P(Ite(u, Ite(v, y, z), Ite(w, y, z))) → P(Ite(Ite(u, v, w), y, z))) → (∀ e : Ite, P(e))"), t29))
 }
 
 ///|
@@ -253,7 +253,7 @@ pub fn ite_induct_v1() -> @kernel.Thm {
 ///|
 /// normalized
 fn step_9() -> Unit raise {
-  normalized_c.set(@define.define_(@parser.parse_term("(normalized False <=> T) /\\\n  (normalized True <=> T) /\\\n  (normalized(Atomic a) <=> T) /\\\n  (normalized(Ite False x y) <=> F) /\\\n  (normalized(Ite True x y) <=> F) /\\\n  (normalized(Ite (Atomic a) x y) <=> normalized x /\\ normalized y) /\\\n  (normalized(Ite (Ite u v w) x y) <=> F)")))
+  normalized_c.set(@define.define_(@term_syntax.parse_term("(normalized : (Ite) -> Bool)(False) == true && normalized(True) == true && normalized(Atomic((a : Num))) == true && normalized(Ite(False, (x : Ite), (y : Ite))) == false && normalized(Ite(True, x, y)) == false && normalized(Ite(Atomic(a), x, y)) == (normalized(x) && normalized(y)) && normalized(Ite(Ite((u : Ite), (v : Ite), (w : Ite)), x, y)) == false")))
 }
 
 ///|
@@ -270,7 +270,7 @@ pub fn normalized() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t30 = @simp.rewrite_tac(@list.List([norm(), normalized()]))
   let t31 = @tactics.then_tac(@tactics.match_mp_tac(ite_induct_v1()), t30)
-  normalized_norm_c.set(@tactics.prove(@parser.parse_term("forall e. normalized(norm e)"), t31))
+  normalized_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Ite, normalized(norm(e))"), t31))
 }
 
 ///|
@@ -289,7 +289,7 @@ fn step_11() -> Unit raise {
   let t33 = @tactics.match_mp_tac(ite_induct())
   let t32 = @simp.asm_rewrite_tac(@list.List([normalized()]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.match_mp_tac(ite_induct())), t32), t33), t34)
-  normalized_induct_c.set(@tactics.prove(@parser.parse_term("P False /\\\n   P True /\\\n   (forall i. P (Atomic i)) /\\\n   (forall i x y. P x /\\ P y ==> P (Ite (Atomic i) x y))\n   ==> forall e. normalized e ==> P e"), t35))
+  normalized_induct_c.set(@tactics.prove(@term_syntax.parse_term("(P : (Ite) -> Bool)(False) && P(True) && (∀ i : Num, P(Atomic(i))) && (∀ i : Num, ∀ x : Ite, ∀ y : Ite, P(x) && P(y) → P(Ite(Atomic(i), x, y))) → (∀ e : Ite, normalized(e) → P(e))"), t35))
 }
 
 ///|
@@ -304,7 +304,7 @@ pub fn normalized_induct() -> @kernel.Thm {
 ///|
 /// holds
 fn step_12() -> Unit raise {
-  holds_c.set(@define.define_(@parser.parse_term("(holds v False <=> F) /\\\n  (holds v True <=> T) /\\\n  (holds v (Atomic i) <=> v(i)) /\\\n  (holds v (Ite b x y) <=> if holds v b then holds v x else holds v y)")))
+  holds_c.set(@define.define_(@term_syntax.parse_term("(holds : ((Num) -> Bool, Ite) -> Bool)((v : (Num) -> Bool), False) == false && holds(v, True) == true && holds(v, Atomic((i : Num))) == v(i) && holds(v, Ite((b : Ite), (x : Ite), (y : Ite))) == (if holds(v, b) { holds(v, x) } else { holds(v, y) })")))
 }
 
 ///|
@@ -323,7 +323,7 @@ fn step_13() -> Unit raise {
   let t37 = @tactics.repeat_tac(@tactics.strip_tac)
   let t36 = @simp.simp_tac(@list.List([holds(), norm()]))
   let t39 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(ite_induct_v1()), t36), t37), t38)
-  holds_norm_c.set(@tactics.prove(@parser.parse_term("forall e v. holds v (norm e) <=> holds v e"), t39))
+  holds_norm_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Ite, ∀ v : (Num) -> Bool, holds(v, norm(e)) == holds(v, e)"), t39))
 }
 
 ///|
@@ -338,7 +338,7 @@ pub fn holds_norm() -> @kernel.Thm {
 ///|
 /// taut
 fn step_14() -> Unit raise {
-  taut_c.set(@define.define_(@parser.parse_term("(taut (t,f) False <=> F) /\\\n  (taut (t,f) True <=> T) /\\\n  (taut (t,f) (Atomic i) <=> MEM i t) /\\\n  (taut (t,f) (Ite (Atomic i) x y) <=>\n      if MEM i t then taut (t,f) x\n      else if MEM i f then taut (t,f) y\n      else taut (CONS i t,f) x /\\ taut (t,CONS i f) y)")))
+  taut_c.set(@define.define_(@term_syntax.parse_term("(taut : ((List[Num], List[Num]), Ite) -> Bool)(((t : List[Num]), (f : List[Num])), False) == false && taut((t, f), True) == true && taut((t, f), Atomic((i : Num))) == MEM(i, t) && taut((t, f), Ite(Atomic(i), (x : Ite), (y : Ite))) == (if MEM(i, t) { taut((t, f), x) } else { if MEM(i, f) { taut((t, f), y) } else { taut((CONS(i, t), f), x) && taut((t, CONS(i, f)), y) } })")))
 }
 
 ///|
@@ -353,7 +353,7 @@ pub fn taut() -> @kernel.Thm {
 ///|
 /// tautology
 fn step_15() -> Unit raise {
-  tautology_c.set(@define.define_(@parser.parse_term("tautology e = taut([],[]) (norm e)")))
+  tautology_c.set(@define.define_(@term_syntax.parse_term("(tautology : (Ite) -> Bool)((e : Ite)) == taut((NIL, NIL), norm(e))")))
 }
 
 ///|
@@ -370,21 +370,21 @@ pub fn tautology() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t54 = @meson.meson_tac(@list.List([]))
   let t53 = @simp.asm_rewrite_tac(@list.List([@theorems.and_forall_thm()]))
-  let t51 = @meson.meson(@list.List([]), @parser.parse_term("(forall a. ~(a = i /\\ MEM a f)) <=> ~(MEM i f)"))
-  let t52 = @simp.asm_simp_tac(@list.List([@lists.mem(), @theorems.right_or_distrib(), @theorems.left_or_distrib(), @meson.meson(@list.List([]), @parser.parse_term("(forall a. ~(MEM a t /\\ a = i)) <=> ~(MEM i t)")), t51]))
+  let t51 = @meson.meson(@list.List([]), @term_syntax.parse_term("(∀ a : _, !(a == (i : _) && MEM(a, (f : List[_])))) == !MEM(i, f)"))
+  let t52 = @simp.asm_simp_tac(@list.List([@lists.mem(), @theorems.right_or_distrib(), @theorems.left_or_distrib(), @meson.meson(@list.List([]), @term_syntax.parse_term("(∀ a : _, !(MEM(a, (t : List[_])) && a == (i : _))) == !MEM(i, t)")), t51]))
   let t47 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_simp_tac(@list.List([]))))
   let t48 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t47)
   let t46 = @meson.asm_meson_tac(@list.List([]))
   let t45 = @list.List([@tactics.all_tac, @tactics.disch_then(@tactics.match_mp_tac)])
   let t49 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t45), t46)
   let t44 = @meson.asm_meson_tac(@list.List([]))
-  let t43 = @tactics.exists_tac(@parser.parse_term("\\a:num. MEM a t"))
+  let t43 = @tactics.exists_tac(@term_syntax.parse_term("(a : Num) => MEM(a, (t : List[Num]))"))
   let t50 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t43), t44), t49, t48])
   let t42 = @tactics.repeat_tac(@tactics.conj_tac)
   let t41 = @simp.rewrite_tac(@list.List([@class.not_forall_thm()]))
   let t40 = @simp.rewrite_tac(@list.List([holds(), taut()]))
   let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(normalized_induct()), t40), t41), t42), t50), t52), t53), @tactics.ap_term_tac), @tactics.abs_tac), t54)
-  normalized_taut_c.set(@tactics.prove(@parser.parse_term("forall e. normalized e\n       ==> forall f t. (forall a. ~(MEM a t /\\ MEM a f))\n                 ==> (taut (t,f) e <=>\n                      forall v. (forall a. MEM a t ==> v(a)) /\\ (forall a. MEM a f ==> ~v(a))\n                          ==> holds v e)"), t55))
+  normalized_taut_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Ite, normalized(e) → (∀ f : List[Num], ∀ t : List[Num], (∀ a : Num, !(MEM(a, t) && MEM(a, f))) → taut((t, f), e) == (∀ v : (Num) -> Bool, (∀ a : Num, MEM(a, t) → v(a)) && (∀ a : Num, MEM(a, f) → !v(a)) → holds(v, e)))"), t55))
 }
 
 ///|
@@ -400,7 +400,7 @@ pub fn normalized_taut() -> @kernel.Thm {
 /// TAUTOLOGY
 fn step_17() -> Unit raise {
   let t56 = @meson.meson_tac(@list.List([tautology(), holds_norm(), normalized_taut(), @lists.mem(), normalized_norm()]))
-  tautology_v1_c.set(@tactics.prove(@parser.parse_term("forall e. tautology e <=> forall v. holds v e"), t56))
+  tautology_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ e : Ite, tautology(e) == (∀ v : (Num) -> Bool, holds(v, e))"), t56))
 }
 
 ///|
@@ -417,7 +417,7 @@ pub fn tautology_v1() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t57 = @tactics.conv_tac(@class.taut)
   let t58 = @tactics.then_tac(@simp.rewrite_tac(@list.List([holds()])), t57)
-  holds_back_c.set(@tactics.prove(@parser.parse_term("forall v. (F <=> holds v False) /\\\n       (T <=> holds v True) /\\\n       (forall i. v i <=> holds v (Atomic i)) /\\\n       (forall p. ~holds v p <=> holds v (Ite p False True)) /\\\n       (forall p q. (holds v p /\\ holds v q) <=> holds v (Ite p q False)) /\\\n       (forall p q. (holds v p \\/ holds v q) <=> holds v (Ite p True q)) /\\\n       (forall p q. (holds v p <=> holds v q) <=>\n                   holds v (Ite p q (Ite q False True))) /\\\n       (forall p q. holds v p ==> holds v q <=> holds v (Ite p q True))"), t58))
+  holds_back_c.set(@tactics.prove(@term_syntax.parse_term("∀ v : (Num) -> Bool, false == holds(v, False) && true == holds(v, True) && (∀ i : Num, v(i) == holds(v, Atomic(i))) && (∀ p : Ite, !holds(v, p) == holds(v, Ite(p, False, True))) && (∀ p : Ite, ∀ q : Ite, (holds(v, p) && holds(v, q)) == holds(v, Ite(p, q, False))) && (∀ p : Ite, ∀ q : Ite, (holds(v, p) || holds(v, q)) == holds(v, Ite(p, True, q))) && (∀ p : Ite, ∀ q : Ite, (holds(v, p) == holds(v, q)) == holds(v, Ite(p, q, Ite(q, False, True)))) && (∀ p : Ite, ∀ q : Ite, (holds(v, p) → holds(v, q)) == holds(v, Ite(p, q, True)))"), t58))
 }
 
 ///|
@@ -451,7 +451,7 @@ pub fn cond_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_20() -> Unit raise {
   and_conv_c.set(@simp.gen_rewrite_conv(fn(x60 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x60
-  }, @list.List([@class.taut(@parser.parse_term("(F /\\ a <=> F) /\\ (T /\\ a <=> a)"))])))
+  }, @list.List([@class.taut(@term_syntax.parse_term("(false && (a : Bool)) == false && (true && a) == a"))])))
 }
 
 ///|
@@ -468,7 +468,7 @@ pub fn and_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_21() -> Unit raise {
   or_conv_c.set(@simp.gen_rewrite_conv(fn(x61 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x61
-  }, @list.List([@class.taut(@parser.parse_term("(F \\/ a <=> a) /\\ (T \\/ a <=> T)"))])))
+  }, @list.List([@class.taut(@term_syntax.parse_term("(false || (a : Bool)) == a && (true || a) == true"))])))
 }
 
 ///|
@@ -504,15 +504,15 @@ pub fn compute_depth_conv(x62 : (@kernel.Term) -> @kernel.Thm raise, x63 : @kern
 ///|
 /// Tutorial/HOL_as_a_functional_programming_language.ml:168
 fn step_22() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("forall v. v 1 \\/ v 2 \\/ v 3 \\/ v 4 \\/ v 5 \\/ v 6 \\/\n       ~v 1 \\/ ~v 2 \\/ ~v 3 \\/ ~v 4 \\/ ~v 5 \\/ ~v 6")))
+  ignore(@tactics.g(@term_syntax.parse_term("∀ v : (Num) -> Bool, v(1) || v(2) || v(3) || v(4) || v(5) || v(6) || !v(1) || !v(2) || !v(3) || !v(4) || !v(5) || !v(6)")))
 }
 
 ///|
 /// Tutorial/HOL_as_a_functional_programming_language.ml:171
 fn step_23() -> Unit raise {
   let t79 = @simp.rewrite_tac(@list.List([@equal.gsym(tautology_v1()), tautology()]))
-  let t77 = @parser.parse_term("v:num->bool")
-  let t78 = @tactics.spec_tac(@parser.parse_term("v:num->bool"), t77)
+  let t77 = @term_syntax.parse_term("(v : (Num) -> Bool)")
+  let t78 = @tactics.spec_tac(@term_syntax.parse_term("(v : (Num) -> Bool)"), t77)
   let t76 = @tactics.disch_then(fn(x74 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x74
     @simp.rewrite_tac(@list.List([th]))

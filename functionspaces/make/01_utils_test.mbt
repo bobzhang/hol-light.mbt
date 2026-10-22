@@ -79067,9 +79067,9 @@ test "Functionspaces/utils matches Functionspaces/utils.ml" {
       #|0..0..1..solved at 5
       #|0..0..solved at 2
       #|Functionspaces/utils quotations (3):
-      #|  forall P Q. (P <=> Q) <=> (P ==> Q) /\\ (Q==>P)
-      #|  forall P Q.(~P <=> ~Q) <=> (P <=> Q)
-      #|  (/\\)
+      #|  \226\136\128 P : Bool, \226\136\128 Q : Bool, (P == Q) == ((P \226\134\146 Q) && (Q \226\134\146 P))
+      #|  \226\136\128 P : Bool, \226\136\128 Q : Bool, (!P == !Q) == (P == Q)
+      #|  op_slash_bslash
       #|EQ_TO_IMP =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) P:bool) Q:bool)) ((#==>:fun(bool,fun(bool,bool)) Q:bool) P:bool)))))))
       #|EQ_NOT =  |- (#forall:fun(fun(bool,bool),bool) (\P:bool. (#forall:fun(fun(bool,bool),bool) (\Q:bool. ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) P:bool)) (#~:fun(bool,bool) Q:bool))) ((#=:fun(bool,fun(bool,bool)) P:bool) Q:bool))))))
       #|LET_DEFS =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) ((#LET:fun(fun('A,'B),fun('A,'B)) f:fun('A,'B)) x:'A)) (f:fun('A,'B) x:'A))))))) (#forall:fun(fun('A,bool),bool) (\t:'A. ((#=:fun('A,fun('A,bool)) (#LET_END:fun('A,'A) t:'A)) t:'A))))

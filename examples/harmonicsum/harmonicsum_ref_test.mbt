@@ -13098,60 +13098,60 @@ test "Examples/harmonicsum matches Examples/harmonicsum.ml" {
       #|1 basis elements and 0 critical pairs
       #|Translating certificate to HOL inferences
       #|Examples/harmonicsum quotations (54):
-      #|  q:num
-      #|  p:num
-      #|  forall p. m <= e * q /\\ e * (q + 1) <= e * p /\\ e * p <= n\n         ==> m <= e * (q + 1) /\\ e * (q + 1) <= n
-      #|  n * 1 + k <= n <=> k = 0
-      #|  2 EXP index 2 k * (p + 1)
-      #|  2 EXP index 2 k * (q + 1)
-      #|  ~(l:num = k) ==> l < k \\/ k < l
-      #|  q:num
-      #|  p:num
-      #|  l = 0
-      #|  k = 0
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  \226\136\128 p : Num, (m : Num) <= (e : Num) * (q : Num) && e * (q + 1) <= e * p && e * p <= (n : Num) \226\134\146 m <= e * (q + 1) && e * (q + 1) <= n
+      #|  ((n : Num) * 1 + (k : Num) <= n) == (k == 0)
+      #|  EXP(2, index(2, (k : Num))) * ((p : Num) + 1)
+      #|  EXP(2, index(2, (k : Num))) * ((q : Num) + 1)
+      #|  !((l : Num) == (k : Num)) \226\134\146 l < k || k < l
+      #|  (q : Num)
+      #|  (p : Num)
+      #|  (l : Num) == 0
+      #|  (k : Num) == 0
       #|  2
-      #|  k:num
+      #|  (k : Num)
       #|  2
-      #|  l:num
-      #|  l:num
-      #|  k:num
-      #|  p /\\ (q ==> r) ==> (p <=> q) ==> r
-      #|  \\x. x IN IMAGE (index 2) (m..n)
-      #|  forall m n. 1 <= m /\\ m <= n\n         ==> ?k. k IN m..n /\\\n                 forall l. l IN m..n /\\ ~(l = k) ==> index 2 l < index 2 k
-      #|  k:num
-      #|  m..n
-      #|  \\i. &i
-      #|  ~(x = &0) /\\ ~(z = &0) /\\ x * y = z\n      ==> inv x = y * inv z
-      #|  k:num
-      #|  forall m n. 1 <= m\n           ==> sum(m..n) (\\k. inv(&k)) =\n               (sum(m..n) (\\k. product ((m..n) DELETE k) (\\i. &i))) /\n               product(m..n) (\\i. &i)
-      #|  l:num
-      #|  index 2
-      #|  k:num
-      #|  m..n
-      #|  \\i:num. i
-      #|  l:num
-      #|  m..n
-      #|  \\i:num. i
-      #|  index 2
-      #|  k:num
-      #|  m..n
-      #|  \\i:num. i
-      #|  l:num
-      #|  2 EXP (i + 1)
-      #|  forall p. p divides r /\\ p divides n /\\ ~(p divides m)\n       ==> ~(r divides (m + n))
-      #|  i = index 2 (nproduct ((m..n) DELETE k) (\\j. j))
-      #|  k:num
-      #|  m..n
-      #|  \\i. nproduct((m..n) DELETE i) (\\j. j)
-      #|  k:num
-      #|  n:num
-      #|  m:num
-      #|  inv x = &1 / x
-      #|  n:num = m
-      #|  forall m n. 1 <= m /\\ 1 < n /\\ m <= n ==> ~(integer (sum(m..n) (\\k. inv(&k))))
-      #|  n:num
-      #|  n:num
-      #|  m:num
+      #|  (l : Num)
+      #|  (l : Num)
+      #|  (k : Num)
+      #|  (p : Bool) && ((q : Bool) \226\134\146 (r : Bool)) \226\134\146 p == q \226\134\146 r
+      #|  (x : Num) => IN(x, IMAGE(index(2), op_dot_dot((m : Num), (n : Num))))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 1 <= m && m <= n \226\134\146 (\226\136\131 k : Num, IN(k, op_dot_dot(m, n)) && (\226\136\128 l : Num, IN(l, op_dot_dot(m, n)) && !(l == k) \226\134\146 index(2, l) < index(2, k)))
+      #|  (k : Num)
+      #|  op_dot_dot((m : Num), (n : Num))
+      #|  (i : Num) => real_of_num(i)
+      #|  !((x : Real) == real_of_num(0)) && !((z : Real) == real_of_num(0)) && x * (y : Real) == z \226\134\146 inv(x) == y * inv(z)
+      #|  (k : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 1 <= m \226\134\146 sum(op_dot_dot(m, n), (k : Num) => inv(real_of_num(k))) == sum(op_dot_dot(m, n), (k : Num) => product(DELETE(op_dot_dot(m, n), k), (i : Num) => real_of_num(i))) / product(op_dot_dot(m, n), (i : Num) => real_of_num(i))
+      #|  (l : Num)
+      #|  index(2)
+      #|  (k : Num)
+      #|  op_dot_dot((m : Num), (n : Num))
+      #|  (i : Num) => i
+      #|  (l : Num)
+      #|  op_dot_dot((m : Num), (n : Num))
+      #|  (i : Num) => i
+      #|  index(2)
+      #|  (k : Num)
+      #|  op_dot_dot((m : Num), (n : Num))
+      #|  (i : Num) => i
+      #|  (l : Num)
+      #|  EXP(2, (i : Num) + 1)
+      #|  \226\136\128 p : Num, divides(p, (r : Num)) && divides(p, (n : Num)) && !divides(p, (m : Num)) \226\134\146 !divides(r, m + n)
+      #|  (i : Num) == index(2, nproduct(DELETE(op_dot_dot((m : Num), (n : Num)), (k : Num)), (j : Num) => j))
+      #|  (k : Num)
+      #|  op_dot_dot((m : Num), (n : Num))
+      #|  (i : Num) => nproduct(DELETE(op_dot_dot((m : Num), (n : Num)), i), (j : Num) => j)
+      #|  (k : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  inv((x : Real)) == real_of_num(1) / x
+      #|  (n : Num) == (m : Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, 1 <= m && 1 < n && m <= n \226\134\146 !integer(sum(op_dot_dot(m, n), (k : Num) => inv(real_of_num(k))))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (m : Num)
       #|NUMSEG_MAXIMAL_INDEX_2 =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num))) (#?:fun(fun(num,bool),bool) (\k:num. ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) k:num) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num))) (#forall:fun(fun(num,bool),bool) (\l:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) l:num) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) l:num) k:num)))) ((#<:fun(num,fun(num,bool)) ((#index:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) l:num)) ((#index:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) k:num)))))))))))))
       #|NONINTEGER_HARMONIC =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) m:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) n:num)) ((#<=:fun(num,fun(num,bool)) m:num) n:num)))) (#~:fun(bool,bool) (#integer:fun(real,bool) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) m:num) n:num)) (\k:num. (#real_inv:fun(real,real) (#real_of_num:fun(num,real) k:num)))))))))))
       #|types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

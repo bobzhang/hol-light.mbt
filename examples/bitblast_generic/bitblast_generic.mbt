@@ -3,259 +3,259 @@
 ///|
 /// Examples/bitblast_generic.ml:11
 fn step_1() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(z:(N)word) (c:(N)word).\n    word_and c (word 1) = word 0\n    ==> word_xor (word_and z c) (word_or c (word 1)) =\n        word_neg (word_or z (word_not c))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ z : Word[N], ∀ c : Word[N], word_and(c, word(1)) == word(0) → word_xor(word_and(z, c), word_or(c, word(1))) == word_neg(word_or(z, word_not(c)))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:17
 fn step_2() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(z:(N)word) (c:(N)word).\n        word_xor (word_and z c) (word_or c (word 1)) =\n        word_neg (word_or z (word_not c)) <=>\n        word_and c (word 1) = word 0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ z : Word[N], ∀ c : Word[N], (word_xor(word_and(z, c), word_or(c, word(1))) == word_neg(word_or(z, word_not(c)))) == (word_and(c, word(1)) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:23
 fn step_3() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(z:(N)word) (c:(N)word).\n    (word_add (word_xor (word_or z (word_not c)) c) (word 1)) =\n    (word_neg (word_and z c))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ z : Word[N], ∀ c : Word[N], word_add(word_xor(word_or(z, word_not(c)), c), word(1)) == word_neg(word_and(z, c))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:28
 fn step_4() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(z:(N)word) (c:(N)word).\n    word_add (word_xor (word_and z c) c) (word 1) =\n    word_neg (word_or z (word_not c))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ z : Word[N], ∀ c : Word[N], word_add(word_xor(word_and(z, c), c), word(1)) == word_neg(word_or(z, word_not(c)))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:33
 fn step_5() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(x:(N)word) (y:(N)word).\n    word_add (word_add x (word 1)) (word_not y) =\n    word_sub x y")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_add(word_add(x, word(1)), word_not(y)) == word_sub(x, y)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:38
 fn step_6() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(x:(N) word) (y:(N)word).\n    word_add (word_not x) (word_not y) =\n    word_sub (word_sub (word 0) (word 2)) (word_add x y)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_add(word_not(x), word_not(y)) == word_sub(word_sub(word(0), word(2)), word_add(x, y))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:43
 fn step_7() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(x:(N)word) (c1:(N)word) (c2:(N)word).\n  (c2 = (word_neg c1))\n  ==> (word_add (word_or x (c2)) (c1)) = (word_xor (word_or x (c2)) (c2))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ c1 : Word[N], ∀ c2 : Word[N], c2 == word_neg(c1) → word_add(word_or(x, c2), c1) == word_xor(word_or(x, c2), c2)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:48
 fn step_8() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall(x:N word) c1 c2.\n    word_and c2 (word_sub c2 (word 1)) = word 0 /\\\n    word_and c1 (word_sub c2 (word 1)) = word 0 /\\\n    ~(word_and c1 c2 = word 0)\n    ==> word_and (word_add x c1) c2 = word_xor (word_and x c2) c2")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ c1 : Word[N], ∀ c2 : Word[N], word_and(c2, word_sub(c2, word(1))) == word(0) && word_and(c1, word_sub(c2, word(1))) == word(0) && !(word_and(c1, c2) == word(0)) → word_and(word_add(x, c1), c2) == word_xor(word_and(x, c2), c2)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:55
 fn step_9() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word.\n     word_and (word_not x) (word_sub x (word 1)) =\n     word_not (word_or x (word_neg x))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_and(word_not(x), word_sub(x, word(1))) == word_not(word_or(x, word_neg(x)))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:60
 fn step_10() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_and x (word_not(word 1)) = word 0 <=>\n             x = word 0 \\/ x = word 1")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], (word_and(x, word_not(word(1))) == word(0)) == (x == word(0) || x == word(1))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:64
 fn step_11() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("word_xor x y:S word  = word_sub (word_or x y) (word_and x y)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("word_xor((x : Word[S]), (y : Word[S])) == word_sub(word_or(x, y), word_and(x, y))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:67
 fn step_12() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("word_add x y:M word = word_sub (word_shl (word_or x y) 1) (word_xor x y)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("word_add((x : Word[M]), (y : Word[M])) == word_sub(word_shl(word_or(x, y), 1), word_xor(x, y))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:70
 fn step_13() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:R word. word_and x (word_sub x (word 1)) = word 0 /\\\n              word_and x (word_not(word 1)) = word 0\n              <=> x = word 0 \\/ x = word 1")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[R], (word_and(x, word_sub(x, word(1))) == word(0) && word_and(x, word_not(word(1))) == word(0)) == (x == word(0) || x == word(1))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:79
 fn step_14() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall b x:N word. ~(b = word 0) /\\ word_shl b 1 = word 0\n                ==> (~(x = word 0) <=>\n                     word_and b (word_or x (word_neg x)) = b)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ b : Word[N], ∀ x : Word[N], !(b == word(0)) && word_shl(b, 1) == word(0) → !(x == word(0)) == (word_and(b, word_or(x, word_neg(x))) == b)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:84
 fn step_15() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall b x:N word. ~(b = word 0) /\\ word_shl b 1 = word 0\n                ==> (x = word 0 <=>\n                     word_and b (word_or x (word_neg x)) = word 0)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ b : Word[N], ∀ x : Word[N], !(b == word(0)) && word_shl(b, 1) == word(0) → (x == word(0)) == (word_and(b, word_or(x, word_neg(x))) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:89
 fn step_16() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall b c:N word. ~(b = word 0) /\\ word_shl b 1 = word 0 /\\\n               word_add c (word 1) = word_not c /\\ ~(c = word_not(word 0))\n               ==> b = word_not c")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ b : Word[N], ∀ c : Word[N], !(b == word(0)) && word_shl(b, 1) == word(0) && word_add(c, word(1)) == word_not(c) && !(c == word_not(word(0))) → b == word_not(c)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:98
 fn step_17() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall m x:N word. m = word_neg(word_and b (word 1))\n               ==> word_sub (word_xor x m) m = word_xor (word_add x m) m")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ m : Word[N], ∀ x : Word[N], m == word_neg(word_and((b : Word[N]), word(1))) → word_sub(word_xor(x, m), m) == word_xor(word_add(x, m), m)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:106
 fn step_18() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_and (word 3) (word_shl x 2) = word 0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_and(word(3), word_shl(x, 2)) == word(0)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:113
 fn step_19() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_and (word 3) (word_mul (word 5) x) =\n              word_and x (word 3)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_and(word(3), word_mul(word(5), x)) == word_and(x, word(3))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:121
 fn step_20() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:R word. word_xor x (word_ushr x 1) = word_xor y (word_ushr y 1) <=>\n               x = y")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[R], ∀ y : Word[R], (word_xor(x, word_ushr(x, 1)) == word_xor(y, word_ushr(y, 1))) == (x == y)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:125
 fn step_21() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:M word. word_and (word_xor (word_add (word_ushr x 2) (word_ushr x 2))\n                                (word_ushr x 1))\n                      (word_not(word 1)) = word 0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[M], word_and(word_xor(word_add(word_ushr(x, 2), word_ushr(x, 2)), word_ushr(x, 1)), word_not(word(1))) == word(0)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:134
 fn step_22() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word. word_add (word_and x y) (word_ushr (word_xor x y) 1) =\n               word_add (word_add (word_ushr x 1) (word_ushr y 1))\n                        (word_and (word 1) (word_and x y))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_add(word_and(x, y), word_ushr(word_xor(x, y), 1)) == word_add(word_add(word_ushr(x, 1), word_ushr(y, 1)), word_and(word(1), word_and(x, y)))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:143
 fn step_23() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y z:N word.\n        word_ule x y /\\ word_ule y z ==> word_ule x z")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], ∀ z : Word[N], word_ule(x, y) && word_ule(y, z) → word_ule(x, z)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:147
 fn step_24() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y z:N word.\n        word_ule x y /\\ word_ult y z ==> word_ugt z x")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], ∀ z : Word[N], word_ule(x, y) && word_ult(y, z) → word_ugt(z, x)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:151
 fn step_25() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y z:N word.\n        word_ile x y /\\ word_ile y z ==> word_ile x z")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], ∀ z : Word[N], word_ile(x, y) && word_ile(y, z) → word_ile(x, z)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:155
 fn step_26() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y z:N word.\n        word_ile x y /\\ word_ilt y z ==> word_igt z x")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], ∀ z : Word[N], word_ile(x, y) && word_ilt(y, z) → word_igt(z, x)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:159
 fn step_27() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word.\n        word_ushr (word_shl x 1) 1 = x /\\\n        word_ushr (word_shl y 1) 1 = y\n        ==> (word_ule x y <=> word_ile x y)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_ushr(word_shl(x, 1), 1) == x && word_ushr(word_shl(y, 1), 1) == y → word_ule(x, y) == word_ile(x, y)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:165
 fn step_28() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word. word_ule (word_and x y) x")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_ule(word_and(x, y), x)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:168
 fn step_29() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word. word_ule (word_xor x y) (word_or x y)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_ule(word_xor(x, y), word_or(x, y))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:175
 fn step_30() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_not(word_or x (word_neg x)) =\n             word_sub (word_and x (word_neg x)) (word 1)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_not(word_or(x, word_neg(x))) == word_sub(word_and(x, word_neg(x)), word(1))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:179
 fn step_31() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_and (word_add (word_or x (word_sub x (word 1))) (word 1)) x =\n             word_and (word_add (word_and x (word_neg x)) x) x")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_and(word_add(word_or(x, word_sub(x, word(1))), word(1)), x) == word_and(word_add(word_and(x, word_neg(x)), x), x)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:183
 fn step_32() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_not(word_add x y) = word_sub (word_not x) y")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_not(word_add(x, (y : Word[N]))) == word_sub(word_not(x), y)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:186
 fn step_33() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word. word_or x y = word_add (word_and x (word_not y)) y")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_or(x, y) == word_add(word_and(x, word_not(y)), y)")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:189
 fn step_34() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word. word_sub x y =\n               word_sub (word_mul (word 2) (word_and x (word_not y)))\n                        (word_xor x y)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_sub(x, y) == word_sub(word_mul(word(2), word_and(x, word_not(y))), word_xor(x, y))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:194
 fn step_35() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word.\n        word_ilt x y <=>\n        ~(word_and word_INT_MIN\n           (word_sub (word_sub (word_ishr x 1) (word_ishr y 1))\n                     (word_and (word_and (word_not x) y) (word 1))) =\n          word 0)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_ilt(x, y) == !(word_and(word_INT_MIN, word_sub(word_sub(word_ishr(x, 1), word_ishr(y, 1)), word_and(word_and(word_not(x), y), word(1)))) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:202
 fn step_36() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word.\n        word_ult x y <=>\n        ~(word_and word_INT_MIN\n           (word_sub (word_sub (word_ushr x 1) (word_ushr y 1))\n                     (word_and (word_and (word_not x) y) (word 1))) =\n          word 0)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], word_ult(x, y) == !(word_and(word_INT_MIN, word_sub(word_sub(word_ushr(x, 1), word_ushr(y, 1)), word_and(word_and(word_not(x), y), word(1)))) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:210
 fn step_37() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. ~(x = word 0) <=> ival(word_or x (word_neg x)) < &0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], !(x == word(0)) == (ival(word_or(x, word_neg(x))) < int_of_num(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:213
 fn step_38() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x y:N word. x = y <=> ival(word_or (word_sub x y) (word_sub y x)) >= &0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], ∀ y : Word[N], (x == y) == (ival(word_or(word_sub(x, y), word_sub(y, x))) >= int_of_num(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:216
 fn step_39() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_igt x (word 0) <=>\n             ival (word_sub (word_ishr x 1) x) < &0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_igt(x, word(0)) == (ival(word_sub(word_ishr(x, 1), x)) < int_of_num(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:220
 fn step_40() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall x:N word. word_igt x (word 0) <=>\n             ival (word_and (word_neg x) (word_not x)) < &0")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ x : Word[N], word_igt(x, word(0)) == (ival(word_and(word_neg(x), word_not(x))) < int_of_num(0))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:228
 fn step_41() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall a b x:N word.\n        word_ile a b\n        ==> (word_ile a x /\\ word_ile x b <=>\n             word_ule (word_sub x a) (word_sub b a))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ a : Word[N], ∀ b : Word[N], ∀ x : Word[N], word_ile(a, b) → (word_ile(a, x) && word_ile(x, b)) == word_ule(word_sub(x, a), word_sub(b, a))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:234
 fn step_42() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("forall a b x:N word.\n        word_ile a b\n        ==> (word_ile a x /\\ word_ilt x b <=>\n             word_ult (word_sub x a) (word_sub b a))")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("∀ a : Word[N], ∀ b : Word[N], ∀ x : Word[N], word_ile(a, b) → (word_ile(a, x) && word_ilt(x, b)) == word_ult(word_sub(x, a), word_sub(b, a))")))
 }
 
 ///|
 /// Examples/bitblast_generic.ml:244
 fn step_43() -> Unit raise {
-  ignore(@lib.time(@word_automata.word_auto_rule, @parser.parse_term("val(x:N word) < val(word 64:N word)\n   ==> word_sub (word 63) x = word_xor x (word 63)")))
+  ignore(@lib.time(@word_automata.word_auto_rule, @term_syntax.parse_term("(val : (Word[N]) -> Num)((x : Word[N])) < (val : (Word[N]) -> Num)((word : (Num) -> Word[N])(64)) → (word_sub : (Word[N], Word[N]) -> Word[N])((word : (Num) -> Word[N])(63), x) == (word_xor : (Word[N], Word[N]) -> Word[N])(x, (word : (Num) -> Word[N])(63))")))
 }
 
 ///|

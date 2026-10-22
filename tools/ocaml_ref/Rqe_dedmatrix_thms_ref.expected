@@ -6909,20 +6909,20 @@ Warning: inventing type variables
 0..0..0..2..6..solved at 11
 0..0..0..2..6..solved at 11
 Rqe/dedmatrix_thms quotations (14):
-  (forall y. y <= Y ==> P y) ==>\n  (forall y. y < Y ==> P y) /\\\n  (forall y. (y = Y) ==> P y)
-  (forall y. y < Y ==> P y) ==> X < Y ==>\n  (forall y. X < y /\\ y < Y ==> P y)
-  (forall y. Y <= y ==> P y) ==>\n  (forall y. Y < y ==> P y) /\\\n  (forall y. (y = Y) ==> P y)
-  (forall y. Y < y ==> P y) ==> Y < X ==>\n  (forall y. Y < y /\\ y < X ==> P y)
-  Y < X ==> (forall x. x < X ==> P x) ==> (forall x. x < Y ==> P x)
-  X < Y ==> (forall x. X < x ==> P x) ==> (forall x. Y < x ==> P x)
-  Y < X ==> (forall x. x < X ==> P x) ==> (forall x. (x = Y) ==> P x)
-  X < Y ==> (forall x. X < x ==> P x) ==> (forall x. (x = Y) ==> P x)
-  Y < X ==> (forall x. x < X ==> P x) ==> (forall x. Y < x /\\ x < X ==> P x)
-  X < Y ==> (forall x. X < x ==> P x) ==> (forall x. X < x /\\ x < Y ==> P x)
-  s:sign
-  forall P Q p s. interpsign P p s  /\\ Q SUBSET P ==> interpsign Q p s
-  forall P Q ps ss. interpsigns ps P ss  /\\ Q SUBSET P ==> interpsigns ps Q ss
-  forall pl sl. interpsigns pl (\\x. T) sl  ==>\n   (interpsigns pl (\\x. x < &0) sl  /\\\n    interpsigns pl (\\x. x = &0) sl  /\\\n    interpsigns pl (\\x. &0 < x) sl)
+  (\226\136\128 y : Real, y <= (Y : Real) \226\134\146 (P : (Real) -> Bool)(y)) \226\134\146 (\226\136\128 y : Real, y < Y \226\134\146 P(y)) && (\226\136\128 y : Real, y == Y \226\134\146 P(y))
+  (\226\136\128 y : Real, y < (Y : Real) \226\134\146 (P : (Real) -> Bool)(y)) \226\134\146 (X : Real) < Y \226\134\146 (\226\136\128 y : Real, X < y && y < Y \226\134\146 P(y))
+  (\226\136\128 y : Real, (Y : Real) <= y \226\134\146 (P : (Real) -> Bool)(y)) \226\134\146 (\226\136\128 y : Real, Y < y \226\134\146 P(y)) && (\226\136\128 y : Real, y == Y \226\134\146 P(y))
+  (\226\136\128 y : Real, (Y : Real) < y \226\134\146 (P : (Real) -> Bool)(y)) \226\134\146 Y < (X : Real) \226\134\146 (\226\136\128 y : Real, Y < y && y < X \226\134\146 P(y))
+  (Y : Real) < (X : Real) \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, x < Y \226\134\146 P(x))
+  (X : Real) < (Y : Real) \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, Y < x \226\134\146 P(x))
+  (Y : Real) < (X : Real) \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, x == Y \226\134\146 P(x))
+  (X : Real) < (Y : Real) \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, x == Y \226\134\146 P(x))
+  (Y : Real) < (X : Real) \226\134\146 (\226\136\128 x : Real, x < X \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, Y < x && x < X \226\134\146 P(x))
+  (X : Real) < (Y : Real) \226\134\146 (\226\136\128 x : Real, X < x \226\134\146 (P : (Real) -> Bool)(x)) \226\134\146 (\226\136\128 x : Real, X < x && x < Y \226\134\146 P(x))
+  (s : Sign)
+  \226\136\128 P : (Real) -> Bool, \226\136\128 Q : (Real) -> Bool, \226\136\128 p : (Real) -> Real, \226\136\128 s : Sign, interpsign(P, p, s) && SUBSET(Q, P) \226\134\146 interpsign(Q, p, s)
+  \226\136\128 P : (Real) -> Bool, \226\136\128 Q : (Real) -> Bool, \226\136\128 ps : List[(Real) -> Real], \226\136\128 ss : List[Sign], interpsigns(ps, P, ss) && SUBSET(Q, P) \226\134\146 interpsigns(ps, Q, ss)
+  \226\136\128 pl : List[(Real) -> Real], \226\136\128 sl : List[Sign], interpsigns(pl, (x : Real) => true, sl) \226\134\146 interpsigns(pl, (x : Real) => x < real_of_num(0), sl) && interpsigns(pl, (x : Real) => x == real_of_num(0), sl) && interpsigns(pl, (x : Real) => real_of_num(0) < x, sl)
 le_lem =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))))
 lt_int_lem =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) X:real) Y:real)) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) X:real) y:real)) ((#real_lt:fun(real,fun(real,bool)) y:real) Y:real))) (P:fun(real,bool) y:real))))))
 ge_lem =  |- ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) Y:real) y:real)) (P:fun(real,bool) y:real))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) Y:real) y:real)) (P:fun(real,bool) y:real))))) (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) y:real) Y:real)) (P:fun(real,bool) y:real))))))

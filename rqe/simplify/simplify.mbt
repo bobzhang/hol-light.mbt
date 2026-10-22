@@ -3,10 +3,10 @@
 ///|
 /// PSIMPLIFY1_CONV
 fn step_1() -> Unit raise {
-  let nt = @parser.parse_term("~T")
-  let t = @parser.parse_term("T")
-  let f = @parser.parse_term("F")
-  let nf = @parser.parse_term("~F")
+  let nt = @term_syntax.parse_term("!true")
+  let t = @term_syntax.parse_term("true")
+  let f = @term_syntax.parse_term("false")
+  let nf = @term_syntax.parse_term("!false")
   psimplify1_conv_c.set(fn(x1 : @kernel.Term) -> @kernel.Thm raise {
     let fm = x1
     try {
@@ -141,8 +141,8 @@ pub fn simplify_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// SIMPLIFY_CONV
 fn step_2() -> Unit raise {
-  let not_tm = @parser.parse_term("(~)")
-  let ex_tm = @parser.parse_term("(?)")
+  let not_tm = @term_syntax.parse_term("op_tilde")
+  let ex_tm = @term_syntax.parse_term("(op_q : ((_) -> Bool) -> Bool)")
   fn simplify_conv_rec(x4 : @kernel.Term) -> @kernel.Thm raise {
     let fm = x4
     if @basics.is_neg(fm) {

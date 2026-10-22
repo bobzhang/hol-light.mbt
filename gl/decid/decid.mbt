@@ -5,7 +5,7 @@
 fn step_1() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@modal.holds()])), t1)
-  holds_nnfc_unfold_c.set(@tactics.prove(@parser.parse_term("(forall V w:W. ~holds (W,R) V False w) /\\\n   (forall V w. holds (W,R) V True w) /\\\n   (forall V s w. holds (W,R) V (Atom s) w <=> V s w) /\\\n   (forall V p w. holds (W,R) V (Not p) w <=> ~holds (W,R) V p w) /\\\n   (forall p V q w.\n      holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p --> q) w <=>\n      ~holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n   (forall p V q w.\n      holds (W,R) V (p <-> q) w <=>\n      (holds (W,R) V p w \\/ ~holds (W,R) V q w) /\\\n      (~holds (W,R) V p w \\/ holds (W,R) V q w))"), t2))
+  holds_nnfc_unfold_c.set(@tactics.prove(@term_syntax.parse_term("(∀ V : (List[Char], W) -> Bool, ∀ w : W, !holds(((W : (W) -> Bool), (R : (W, W) -> Bool)), V, False, w)) && (∀ V : (List[Char], W) -> Bool, ∀ w : W, holds((W, R), V, True, w)) && (∀ V : (List[Char], W) -> Bool, ∀ s : List[Char], ∀ w : W, holds((W, R), V, Atom(s), w) == V(s, w)) && (∀ V : (List[Char], W) -> Bool, ∀ p : Form, ∀ w : W, holds((W, R), V, Not(p), w) == !holds((W, R), V, p, w)) && (∀ p : Form, ∀ V : (List[Char], W) -> Bool, ∀ q : Form, ∀ w : W, holds((W, R), V, op_amp_amp(p, q), w) == (holds((W, R), V, p, w) && holds((W, R), V, q, w))) && (∀ p : Form, ∀ V : (List[Char], W) -> Bool, ∀ q : Form, ∀ w : W, holds((W, R), V, op_bar_bar(p, q), w) == (holds((W, R), V, p, w) || holds((W, R), V, q, w))) && (∀ p : Form, ∀ V : (List[Char], W) -> Bool, ∀ q : Form, ∀ w : W, holds((W, R), V, op_minus_minus_gt(p, q), w) == (!holds((W, R), V, p, w) || holds((W, R), V, q, w))) && (∀ p : Form, ∀ V : (List[Char], W) -> Bool, ∀ q : Form, ∀ w : W, holds((W, R), V, op_lt_minus_gt(p, q), w) == ((holds((W, R), V, p, w) || !holds((W, R), V, q, w)) && (!holds((W, R), V, p, w) || holds((W, R), V, q, w))))"), t2))
 }
 
 ///|
@@ -26,16 +26,16 @@ fn step_2() -> Unit raise {
   let t15 = @meson.asm_meson_tac(@list.List([]))
   let t14 = @simp.asm_rewrite_tac(@list.List([]))
   let t13 = @theorems.hyp_tac("tnt", @simp.rewrite_rule(@list.List([@modal.transnt()])))
-  let t12 = @tactics.exists_tac(@parser.parse_term("w:A"))
+  let t12 = @tactics.exists_tac(@term_syntax.parse_term("(w : A)"))
   let t11 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@modal.holds_in(), @modal.holds(), @theorems.right_imp_forall_thm(), @theorems.imp_imp()]))(@gl.transnt_imp_lob()))
   let t10 = @tactics.repeat_tac(@tactics.strip_tac)
   let t8 = @simp.asm_rewrite_tac(@list.List([]))
   let t9 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@gl.itf_nt()), t8), @tactics.all_tac])
-  let t7 = @theorems.claim_tac("tnt", @parser.parse_term("TRANSNT(W:A->bool,R)"))
+  let t7 = @theorems.claim_tac("tnt", @term_syntax.parse_term("TRANSNT(((W : (A) -> Bool), (R : (A, A) -> Bool)))"))
   let t6 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t5 = @simp.rewrite_tac(@list.List([@modal.holds()]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall W R p w; WR w"), t5), @tactics.eq_tac), t6), t7), t9), t10), t11), t12), t13), t14), t15)
-  let holds_box_eq = @tactics.prove(@parser.parse_term("forall W R p w:A.\n       ITF (W,R) /\\ w IN W\n       ==> (holds (W,R) V (Box p) w <=>\n            (forall y. y IN W /\\ R w y ==> holds (W,R) V (Box p --> p) y))"), t16)
+  let holds_box_eq = @tactics.prove(@term_syntax.parse_term("∀ W : (A) -> Bool, ∀ R : (A, A) -> Bool, ∀ p : Form, ∀ w : A, ITF((W, R)) && IN(w, W) → holds((W, R), (V : (List[Char], A) -> Bool), Box(p), w) == (∀ y : A, IN(y, W) && R(w, y) → holds((W, R), V, op_minus_minus_gt(Box(p), p), y))"), t16)
   let t36 = @meson.asm_meson_tac(@list.List([@gl.itf()]))
   let t35 = @simp.once_rewrite_tac(@list.List([@modal.holds()]))
   let t33 = @meson.meson_tac(@list.List([]))
@@ -49,7 +49,7 @@ fn step_2() -> Unit raise {
   let t27 = @simp.once_rewrite_tac(@list.List([@modal.holds()]))
   let t26 = @simp.asm_simp_tac(@list.List([holds_box_eq]))
   let t29 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t26), t27), t28), @tactics.all_tac])
-  let t25 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("P /\\ (P ==> Q) ==> P /\\ Q")))
+  let t25 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @term_syntax.parse_term("(P : Bool) && (P → (Q : Bool)) → P && Q")))
   let t24 = @list.List([@meson.asm_meson_tac(@list.List([@gl.itf()])), @tactics.all_tac])
   let t23 = @simp.asm_rewrite_tac(@list.List([]))
   let t22 = @tactics.first_x_assum(@tactics.match_mp_tac)
@@ -59,7 +59,7 @@ fn step_2() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([@modal.valid(), @pair.forall_pair_thm(), @modal.holds_in()]))
   let t17 = @tactics.match_mp_tac(completeness_theorem_num)
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@theorems.imp_imp()]))), @tactics.disch_tac), t17), t18), t19), t20), t21), t22), t23), @tactics.conj_tac), t24), t25), @tactics.conj_tac), t29), @tactics.disch_tac), @tactics.conj_tac), t34), t35), t36)
-  completeness_num_c.set(@tactics.prove(@parser.parse_term("forall p. (forall W R V w:num.\n          (forall x y z:num. R y z ==> R x y ==> R x z) /\\\n          (forall p w. w IN W /\\\n                 (forall y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                      ==> holds (W,R) V p y)\n                 ==> holds (W,R) V (Box p) w) /\\\n          (forall Q p w. w IN W /\\\n                   (forall y. y IN W /\\ R w y /\\ holds (W,R) V (Box p) y\n                        ==> holds (W,R) V p y \\/ Q)\n                   ==> holds (W,R) V (Box p) w \\/ Q) /\\\n          (forall w w'. R w w'\n                  ==> forall p. holds (W,R) V (Box p) w ==> holds (W,R) V p w') /\\\n          (forall p w. holds (W,R) V (Box p) w\n                 ==> forall w'. R w w' ==> holds (W,R) V p w') /\\\n          w IN W\n          ==> holds (W,R) V p w)\n       ==> |-- p"), t37))
+  completeness_num_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, (∀ W : (Num) -> Bool, ∀ R : (Num, Num) -> Bool, ∀ V : (List[Char], Num) -> Bool, ∀ w : Num, (∀ x : Num, ∀ y : Num, ∀ z : Num, R(y, z) → R(x, y) → R(x, z)) && (∀ p : Form, ∀ w : Num, IN(w, W) && (∀ y : Num, IN(y, W) && R(w, y) && holds((W, R), V, Box(p), y) → holds((W, R), V, p, y)) → holds((W, R), V, Box(p), w)) && (∀ Q : Bool, ∀ p : Form, ∀ w : Num, IN(w, W) && (∀ y : Num, IN(y, W) && R(w, y) && holds((W, R), V, Box(p), y) → holds((W, R), V, p, y) || Q) → holds((W, R), V, Box(p), w) || Q) && (∀ w : Num, ∀ w' : Num, R(w, w') → (∀ p : Form, holds((W, R), V, Box(p), w) → holds((W, R), V, p, w'))) && (∀ p : Form, ∀ w : Num, holds((W, R), V, Box(p), w) → (∀ w' : Num, R(w, w') → holds((W, R), V, p, w'))) && IN(w, W) → holds((W, R), V, p, w)) → op_bar_minus_minus(p)"), t37))
 }
 
 ///|
@@ -109,7 +109,7 @@ pub fn discard_tac(x : @kernel.Thm) -> @tactics.Tactic raise {
 /// `NEG_RIGHT_TAC`
 pub fn neg_right_tac(x42 : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> @tactics.Tactic raise {
   let _ as k = x42
-  let pth = @meson.meson(@list.List([]), @parser.parse_term("((~P \\/ Q) <=> (P ==> Q)) /\\\n       (~P <=> (P ==> F))"))
+  let pth = @meson.meson(@list.List([]), @term_syntax.parse_term("(!(P : Bool) || (Q : Bool)) == (P → Q) && !P == (P → false)"))
   let t45 = @tactics.disch_then(k)
   @tactics.then_tac(@simp.gen_rewrite_tac(fn(x44 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x44
@@ -119,7 +119,7 @@ pub fn neg_right_tac(x42 : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)]
 ///|
 /// NEG_CONTR_TAC
 fn step_4() -> Unit raise {
-  let pth = @meson.meson(@list.List([]), @parser.parse_term("~P ==> P ==> Q"))
+  let pth = @meson.meson(@list.List([]), @term_syntax.parse_term("!(P : Bool) → P → (Q : Bool)"))
   neg_contr_tac_c.set(fn(x46 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x46
     let t51 = @tactics.first_x_assum(fn(x48 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -144,7 +144,7 @@ pub fn neg_contr_tac(x : @kernel.Thm) -> @tactics.Tactic raise {
 ///|
 /// NEG_LEFT_TAC
 fn step_5() -> Unit raise {
-  let pth = @meson.meson(@list.List([]), @parser.parse_term("~P ==> (P \\/ Q) ==> Q"))
+  let pth = @meson.meson(@list.List([]), @term_syntax.parse_term("!(P : Bool) → P || (Q : Bool) → Q"))
   let t52 = @drule.match_mp(pth)
   neg_left_tac_c.set(fn(x53 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t52(x53))
@@ -233,7 +233,7 @@ pub fn strip_holds_tcl(x : @tactics.ThmTactic) -> @tactics.ThmTactic raise {
 fn step_8() -> Unit raise {
   let rewr_tac : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise = fn(x75 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x75
-    let pth = @meson.meson(@list.List([]), @parser.parse_term("(T \\/ p <=> T) /\\ (p \\/ T <=> T) /\\\n         (F \\/ p <=> p) /\\ (p \\/ F <=> p)"))
+    let pth = @meson.meson(@list.List([]), @term_syntax.parse_term("(true || (p : Bool)) == true && (p || true) == true && (false || p) == p && (p || false) == p"))
     @simp.gen_rewrite_tac(fn(x77 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s78 = @equal.depth_conv(x77)
       fn(x79 : @kernel.Term) -> @kernel.Thm raise {
@@ -562,7 +562,7 @@ pub fn inner_gl_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// the_gl_countermodel
 fn step_16() -> Unit raise {
-  the_gl_countermodel_c.set(Ref::{ val: @parser.parse_term("F") })
+  the_gl_countermodel_c.set(Ref::{ val: @term_syntax.parse_term("false") })
 }
 
 ///|
@@ -644,7 +644,7 @@ pub fn gl_rule(x169 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// GL_second_incompleteness_theorem
 fn step_19() -> Unit raise {
-  gl_second_incompleteness_theorem_c.set(@lib.time(gl_rule, @parser.parse_term("|-- (Not (Box False) --> Not (Box (Diam True)))")))
+  gl_second_incompleteness_theorem_c.set(@lib.time(gl_rule, @term_syntax.parse_term("op_bar_minus_minus(op_minus_minus_gt(Not(Box(False)), Not(Box(Diam(True)))))")))
 }
 
 ///|
@@ -659,7 +659,7 @@ pub fn gl_second_incompleteness_theorem() -> @kernel.Thm {
 ///|
 /// GL_PA_ignorance
 fn step_20() -> Unit raise {
-  gl_pa_ignorance_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ((Box False) <-> Box (Diam p))")))
+  gl_pa_ignorance_c.set(@lib.time(gl_rule, @term_syntax.parse_term("∀ p : Form, op_bar_minus_minus(op_lt_minus_gt(Box(False), Box(Diam(p))))")))
 }
 
 ///|
@@ -674,7 +674,7 @@ pub fn gl_pa_ignorance() -> @kernel.Thm {
 ///|
 /// GL_PA_undecidability_of_consistency
 fn step_21() -> Unit raise {
-  gl_pa_undecidability_of_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("|-- ( Not (Box (Box False))\n         --> Not (Box (Not (Box False))) &&\n             Not (Box (Not (Not (Box False)))) )")))
+  gl_pa_undecidability_of_consistency_c.set(@lib.time(gl_rule, @term_syntax.parse_term("op_bar_minus_minus(op_minus_minus_gt(Not(Box(Box(False))), op_amp_amp(Not(Box(Not(Box(False)))), Not(Box(Not(Not(Box(False))))))))")))
 }
 
 ///|
@@ -689,7 +689,7 @@ pub fn gl_pa_undecidability_of_consistency() -> @kernel.Thm {
 ///|
 /// GL_undecidability_of_Godels_formula
 fn step_22() -> Unit raise {
-  gl_undecidability_of_godels_formula_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ( Box (p <-> Not (Box p)) && Not (Box (Box False))\n             --> Not (Box p) && Not (Box (Not p)) )")))
+  gl_undecidability_of_godels_formula_c.set(@lib.time(gl_rule, @term_syntax.parse_term("∀ p : Form, op_bar_minus_minus(op_minus_minus_gt(op_amp_amp(Box(op_lt_minus_gt(p, Not(Box(p)))), Not(Box(Box(False)))), op_amp_amp(Not(Box(p)), Not(Box(Not(p))))))")))
 }
 
 ///|
@@ -704,7 +704,7 @@ pub fn gl_undecidability_of_godels_formula() -> @kernel.Thm {
 ///|
 /// GL_reflection_and_iterated_consistency
 fn step_23() -> Unit raise {
-  gl_reflection_and_iterated_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ( Box ((Box p --> p) --> Diam (Diam True))\n             --> (Diam (Diam True) --> (Box p --> p)) )")))
+  gl_reflection_and_iterated_consistency_c.set(@lib.time(gl_rule, @term_syntax.parse_term("∀ p : Form, op_bar_minus_minus(op_minus_minus_gt(Box(op_minus_minus_gt(op_minus_minus_gt(Box(p), p), Diam(Diam(True)))), op_minus_minus_gt(Diam(Diam(True)), op_minus_minus_gt(Box(p), p))))")))
 }
 
 ///|
@@ -719,7 +719,7 @@ pub fn gl_reflection_and_iterated_consistency() -> @kernel.Thm {
 ///|
 /// GL_Godel_sentence_equiconsistent_consistency
 fn step_24() -> Unit raise {
-  gl_godel_sentence_equiconsistent_consistency_c.set(@lib.time(gl_rule, @parser.parse_term("forall p. |-- ( Box (p <-> Not (Box p)) <-> Box (p <-> Not (Box False)) )")))
+  gl_godel_sentence_equiconsistent_consistency_c.set(@lib.time(gl_rule, @term_syntax.parse_term("∀ p : Form, op_bar_minus_minus(op_lt_minus_gt(Box(op_lt_minus_gt(p, Not(Box(p)))), Box(op_lt_minus_gt(p, Not(Box(False))))))")))
 }
 
 ///|
@@ -734,7 +734,7 @@ pub fn gl_godel_sentence_equiconsistent_consistency() -> @kernel.Thm {
 ///|
 /// GL_arithmetical_fixpoint
 fn step_25() -> Unit raise {
-  gl_arithmetical_fixpoint_c.set(@lib.time(gl_rule, @parser.parse_term("forall p q. |-- ( Dotbox (p <-> Not (Box (q --> p))) <->\n               Dotbox (p <-> Diam q) )")))
+  gl_arithmetical_fixpoint_c.set(@lib.time(gl_rule, @term_syntax.parse_term("∀ p : Form, ∀ q : Form, op_bar_minus_minus(op_lt_minus_gt(Dotbox(op_lt_minus_gt(p, Not(Box(op_minus_minus_gt(q, p))))), Dotbox(op_lt_minus_gt(p, Diam(q)))))")))
 }
 
 ///|

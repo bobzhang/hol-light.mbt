@@ -1,128 +1,128 @@
 Formal_ineqs/trig/sin_cos quotations (124):
-  a - (b + a) = --b:real
-  forall x. cos (x + pi / &2) = --sin x
-  x + (a + &1) * t = (x + a * t) + t
-  (&1 + &0) * --a = --a
-  forall x n. ((\\x. cos (x + &n * pi / &2)) \n\t\t\t\t      has_real_derivative cos (x + &(n + 1) * pi / &2)) (atreal x)
-  i:num
-  cos (&i * pi / &2) = &0
-  (&2 * a) * b / &2 = a * b
-  (2 * m) DIV 2 = m
-  EVEN i
-  forall i. cos (&i * pi / &2) * x pow i / &(FACT i) = if EVEN i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0
-  x:real
-  &0
-  &1
-  (:real)
-  n:num
-  (\\i x. cos (x + &i * pi / &2))
-  forall x n. \n   abs (cos x - sum (0..n) (\\k. if (EVEN k) then ((-- &1) pow (k DIV 2) * x pow k) / &(FACT k) else &0)) \n\t\t\t\t<=  abs x pow (n + 1) / &(FACT (n + 1))
-  2 * 0 = 0
-  n:num
+  (a : Real) - ((b : Real) + a) == -b
+  \226\136\128 x : Real, cos(x + pi / real_of_num(2)) == -sin(x)
+  (x : Real) + ((a : Real) + real_of_num(1)) * (t : Real) == x + a * t + t
+  (real_of_num(1) + real_of_num(0)) * -(a : Real) == -a
+  \226\136\128 x : Real, \226\136\128 n : Num, has_real_derivative((x : Real) => cos(x + real_of_num(n) * (pi / real_of_num(2))), cos(x + real_of_num(n + 1) * (pi / real_of_num(2))), atreal(x))
+  (i : Num)
+  cos(real_of_num((i : Num)) * (pi / real_of_num(2))) == real_of_num(0)
+  real_of_num(2) * (a : Real) * ((b : Real) / real_of_num(2)) == a * b
+  DIV(2 * (m : Num), 2) == m
+  EVEN((i : Num))
+  \226\136\128 i : Num, cos(real_of_num(i) * (pi / real_of_num(2))) * (pow((x : Real), i) / real_of_num(FACT(i))) == (if EVEN(i) { pow(-real_of_num(1), DIV(i, 2)) * pow(x, i) / real_of_num(FACT(i)) } else { real_of_num(0) })
+  (x : Real)
+  real_of_num(0)
+  real_of_num(1)
+  (UNIV : (Real) -> Bool)
+  (n : Num)
+  (i : Num) => (x : Real) => cos(x + real_of_num(i) * (pi / real_of_num(2)))
+  \226\136\128 x : Real, \226\136\128 n : Num, abs(cos(x) - sum(op_dot_dot(0, n), (k : Num) => if EVEN(k) { pow(-real_of_num(1), DIV(k, 2)) * pow(x, k) / real_of_num(FACT(k)) } else { real_of_num(0) })) <= pow(abs(x), n + 1) / real_of_num(FACT(n + 1))
+  2 * 0 == 0
+  (n : Num)
   0
-  f:num->real
-  forall f n. sum (0..2 * n + 1) f = sum(0..n) (\\i. f (2 * i) + f (2 * i + 1))
-  (a * b) / c = (a / c) * b:real
-  forall i. (2 * i) DIV 2 = i
-  forall i. ~(EVEN (2 * i + 1))
-  (2 * n + 1) + 1 = 2 *n + 2
-  2 * n + 1
-  x:real
-  forall x n. abs (cos x - \n\t\tsum (0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i))) \n\t\t       <= abs x pow (2*n + 2) / &(FACT (2*n + 2))
-  abs x pow (2 * n) = x pow (2 * n)
-  &1 / a * b = b / a
-  ~(n = 0) ==> 2 * (n - 1) + 2 = 2 * n
-  -- &1 pow n = &1
-  n - 1
-  x:real
-  0 <= n
-  ~(n = 0) ==> 0 < n
-  n = 0
-  forall x n. EVEN n ==>\n\t\tcos x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i))
-  abs x pow (2 * n) = x pow (2 * n)
-  -- &1 / a * b = -- b / a
-  ~(n = 0) ==> 2 * (n - 1) + 2 = 2 * n
-  -- &1 pow n = -- &1
-  n - 1
-  x:real
-  0 <= n
-  ~(n = 0) ==> 0 < n
-  ~EVEN n
-  n = 0
-  forall x n. ODD n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i))) * x pow (2 * i)) <= cos x
-  a - (b + a) = --b:real
-  forall x. sin (x + pi / &2) = cos x
-  x + (a + &1) * t = (x + a * t) + t
-  (&1 + &0) * a = a
-  forall x n. ((\\x. sin (x + &n * pi / &2)) \n\t\t\t\t      has_real_derivative sin (x + &(n + 1) * pi / &2)) (atreal x)
-  i:num
-  sin (&i * pi / &2) = &0
-  (&2 * a + &1) * b / &2 = a * b + b / &2
+  (f : (Num) -> Real)
+  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, sum(op_dot_dot(0, 2 * n + 1), f) == sum(op_dot_dot(0, n), (i : Num) => f(2 * i) + f(2 * i + 1))
+  (a : Real) * (b : Real) / (c : Real) == a / c * b
+  \226\136\128 i : Num, DIV(2 * i, 2) == i
+  \226\136\128 i : Num, !EVEN(2 * i + 1)
+  2 * (n : Num) + 1 + 1 == 2 * n + 2
+  2 * (n : Num) + 1
+  (x : Real)
+  \226\136\128 x : Real, \226\136\128 n : Num, abs(cos(x) - sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i)) * pow(x, 2 * i))) <= pow(abs(x), 2 * n + 2) / real_of_num(FACT(2 * n + 2))
+  pow(abs((x : Real)), 2 * (n : Num)) == pow(x, 2 * n)
+  real_of_num(1) / (a : Real) * (b : Real) == b / a
+  !((n : Num) == 0) \226\134\146 2 * (n - 1) + 2 == 2 * n
+  pow(-real_of_num(1), (n : Num)) == real_of_num(1)
+  (n : Num) - 1
+  (x : Real)
+  0 <= (n : Num)
+  !((n : Num) == 0) \226\134\146 0 < n
+  (n : Num) == 0
+  \226\136\128 x : Real, \226\136\128 n : Num, EVEN(n) \226\134\146 cos(x) <= sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i)) * pow(x, 2 * i))
+  pow(abs((x : Real)), 2 * (n : Num)) == pow(x, 2 * n)
+  -real_of_num(1) / (a : Real) * (b : Real) == -b / a
+  !((n : Num) == 0) \226\134\146 2 * (n - 1) + 2 == 2 * n
+  pow(-real_of_num(1), (n : Num)) == -real_of_num(1)
+  (n : Num) - 1
+  (x : Real)
+  0 <= (n : Num)
+  !((n : Num) == 0) \226\134\146 0 < n
+  !EVEN((n : Num))
+  (n : Num) == 0
+  \226\136\128 x : Real, \226\136\128 n : Num, ODD(n) \226\134\146 sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i)) * pow(x, 2 * i)) <= cos(x)
+  (a : Real) - ((b : Real) + a) == -b
+  \226\136\128 x : Real, sin(x + pi / real_of_num(2)) == cos(x)
+  (x : Real) + ((a : Real) + real_of_num(1)) * (t : Real) == x + a * t + t
+  (real_of_num(1) + real_of_num(0)) * (a : Real) == a
+  \226\136\128 x : Real, \226\136\128 n : Num, has_real_derivative((x : Real) => sin(x + real_of_num(n) * (pi / real_of_num(2))), sin(x + real_of_num(n + 1) * (pi / real_of_num(2))), atreal(x))
+  (i : Num)
+  sin(real_of_num((i : Num)) * (pi / real_of_num(2))) == real_of_num(0)
+  (real_of_num(2) * (a : Real) + real_of_num(1)) * ((b : Real) / real_of_num(2)) == a * b + b / real_of_num(2)
   1 < 2
-  ~(2 = 0)
-  2 * m = m * 2
-  (SUC (2 * m)) DIV 2 = m
-  ODD i
-  forall i. sin (&i * pi / &2) * x pow i / &(FACT i) = if ODD i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0
-  x:real
-  &0
-  &1
-  (:real)
-  n:num
-  (\\i x. sin (x + &i * pi / &2))
-  forall x n. \n   abs (sin x - sum (0..n) (\\k. if (ODD k) then ((-- &1) pow (k DIV 2) * x pow k) / &(FACT k) else &0)) \n\t\t\t\t<=  abs x pow (n + 1) / &(FACT (n + 1))
-  (2 * n + 2) + 1 = 2 * n + 3
-  (a * b) / c = (a / c) * b:real
+  !(2 == 0)
+  2 * (m : Num) == m * 2
+  DIV(SUC(2 * (m : Num)), 2) == m
+  ODD((i : Num))
+  \226\136\128 i : Num, sin(real_of_num(i) * (pi / real_of_num(2))) * (pow((x : Real), i) / real_of_num(FACT(i))) == (if ODD(i) { pow(-real_of_num(1), DIV(i, 2)) * pow(x, i) / real_of_num(FACT(i)) } else { real_of_num(0) })
+  (x : Real)
+  real_of_num(0)
+  real_of_num(1)
+  (UNIV : (Real) -> Bool)
+  (n : Num)
+  (i : Num) => (x : Real) => sin(x + real_of_num(i) * (pi / real_of_num(2)))
+  \226\136\128 x : Real, \226\136\128 n : Num, abs(sin(x) - sum(op_dot_dot(0, n), (k : Num) => if ODD(k) { pow(-real_of_num(1), DIV(k, 2)) * pow(x, k) / real_of_num(FACT(k)) } else { real_of_num(0) })) <= pow(abs(x), n + 1) / real_of_num(FACT(n + 1))
+  2 * (n : Num) + 2 + 1 == 2 * n + 3
+  (a : Real) * (b : Real) / (c : Real) == a / c * b
   1 < 2
-  ~(2 = 0)
-  2 * m = m * 2
-  forall i. SUC (2 * i) DIV 2 = i
-  forall i. ~(ODD (2 * i))
-  2 * i + 1 = SUC (2 * i)
-  n:num
-  ~(ODD (SUC (2 * n + 1)))
-  0 <= SUC k
-  a + 2 = SUC (a + 1)
-  forall f. sum (0..2 * n + 2) (\\k. if ODD k then f k else &0) = sum (0..2 * n + 1) (\\k. if ODD k then f k else &0)
-  2 * n + 2
-  x:real
-  forall x n. abs (sin x - \n\t\tsum (0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))) \n\t\t       <= abs x pow (2 * n + 3) / &(FACT (2 * n + 3))
-  abs x pow (2 * n + 1) = x pow (2 * n + 1)
-  &1 / a * b = b / a
-  ~(n = 0) ==> 2 * (n - 1) + 3 = 2 * n + 1
-  -- &1 pow n = &1
-  n - 1
-  x:real
-  0 <= n
-  ~(n = 0) ==> 0 < n
-  &0 <= x
+  !(2 == 0)
+  2 * (m : Num) == m * 2
+  \226\136\128 i : Num, DIV(SUC(2 * i), 2) == i
+  \226\136\128 i : Num, !ODD(2 * i)
+  2 * (i : Num) + 1 == SUC(2 * i)
+  (n : Num)
+  !ODD(SUC(2 * (n : Num) + 1))
+  0 <= SUC((k : Num))
+  (a : Num) + 2 == SUC(a + 1)
+  \226\136\128 f : (Num) -> Real, sum(op_dot_dot(0, 2 * (n : Num) + 2), (k : Num) => if ODD(k) { f(k) } else { real_of_num(0) }) == sum(op_dot_dot(0, 2 * n + 1), (k : Num) => if ODD(k) { f(k) } else { real_of_num(0) })
+  2 * (n : Num) + 2
+  (x : Real)
+  \226\136\128 x : Real, \226\136\128 n : Num, abs(sin(x) - sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i + 1)) * pow(x, 2 * i + 1))) <= pow(abs(x), 2 * n + 3) / real_of_num(FACT(2 * n + 3))
+  pow(abs((x : Real)), 2 * (n : Num) + 1) == pow(x, 2 * n + 1)
+  real_of_num(1) / (a : Real) * (b : Real) == b / a
+  !((n : Num) == 0) \226\134\146 2 * (n - 1) + 3 == 2 * n + 1
+  pow(-real_of_num(1), (n : Num)) == real_of_num(1)
+  (n : Num) - 1
+  (x : Real)
+  0 <= (n : Num)
+  !((n : Num) == 0) \226\134\146 0 < n
+  real_of_num(0) <= (x : Real)
   0
-  x:real
-  n = 0
-  forall x n. &0 <= x /\\ EVEN n ==>\n\t\tsin x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))
-  abs x pow (2 * n + 1) = x pow (2 * n + 1)
-  -- &1 / a * b = -- b / a
-  ~(n = 0) ==> 2 * (n - 1) + 3 = 2 * n + 1
-  -- &1 pow n = -- &1
-  n - 1
-  x:real
-  0 <= n
-  ~(n = 0) ==> 0 < n
-  ~EVEN n
-  n = 0
-  forall x n. &0 <= x /\\ ODD n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1)) <= sin x
-  a * (--b) = --(a * b)
-  forall x i. --x pow (2 * i + 1) = --(x pow (2 * i + 1))
-  n:num
-  --x
-  &0 <= --x
-  forall x n. x <= &0 /\\ ODD n ==>\n\t\tsin x <= sum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1))
-  a * (--b) = --(a * b)
-  forall x i. --x pow (2 * i + 1) = --(x pow (2 * i + 1))
-  n:num
-  --x
-  &0 <= --x
-  forall x n. x <= &0 /\\ EVEN n ==>\n\t\tsum(0..n) (\\i. ((-- &1) pow i / &(FACT (2 * i + 1))) * x pow (2 * i + 1)) <= sin x
+  (x : Real)
+  (n : Num) == 0
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && EVEN(n) \226\134\146 sin(x) <= sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i + 1)) * pow(x, 2 * i + 1))
+  pow(abs((x : Real)), 2 * (n : Num) + 1) == pow(x, 2 * n + 1)
+  -real_of_num(1) / (a : Real) * (b : Real) == -b / a
+  !((n : Num) == 0) \226\134\146 2 * (n - 1) + 3 == 2 * n + 1
+  pow(-real_of_num(1), (n : Num)) == -real_of_num(1)
+  (n : Num) - 1
+  (x : Real)
+  0 <= (n : Num)
+  !((n : Num) == 0) \226\134\146 0 < n
+  !EVEN((n : Num))
+  (n : Num) == 0
+  \226\136\128 x : Real, \226\136\128 n : Num, real_of_num(0) <= x && ODD(n) \226\134\146 sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i + 1)) * pow(x, 2 * i + 1)) <= sin(x)
+  (a : Real) * -(b : Real) == -(a * b)
+  \226\136\128 x : Real, \226\136\128 i : Num, pow(-x, 2 * i + 1) == -pow(x, 2 * i + 1)
+  (n : Num)
+  -(x : Real)
+  real_of_num(0) <= -(x : Real)
+  \226\136\128 x : Real, \226\136\128 n : Num, x <= real_of_num(0) && ODD(n) \226\134\146 sin(x) <= sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i + 1)) * pow(x, 2 * i + 1))
+  (a : Real) * -(b : Real) == -(a * b)
+  \226\136\128 x : Real, \226\136\128 i : Num, pow(-x, 2 * i + 1) == -pow(x, 2 * i + 1)
+  (n : Num)
+  -(x : Real)
+  real_of_num(0) <= -(x : Real)
+  \226\136\128 x : Real, \226\136\128 n : Num, x <= real_of_num(0) && EVEN(n) \226\134\146 sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(FACT(2 * i + 1)) * pow(x, 2 * i + 1)) <= sin(x)
 Sin_cos.cos_pi_2 =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (#cos:fun(real,real) ((#real_add:fun(real,fun(real,real)) x:real) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) (#real_neg:fun(real,real) (#sin:fun(real,real) x:real)))))
 Sin_cos.cos_derivatives =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\n:num. (((#has_real_derivative:fun(fun(real,real),fun(real,fun(net(real),bool))) (\x:real. (#cos:fun(real,real) ((#real_add:fun(real,fun(real,real)) x:real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))) (#cos:fun(real,real) ((#real_add:fun(real,fun(real,real)) x:real) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_div:fun(real,fun(real,real)) #pi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) (#atreal:fun(real,net(real)) x:real))))))
 Sin_cos.taylor_cos_raw =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(num,bool),bool) (\n:num. ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) ((#real_sub:fun(real,fun(real,real)) (#cos:fun(real,real) x:real)) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) #_0:num)) n:num)) (\k:num. (((#COND:fun(bool,fun(real,fun(real,real))) (#EVEN:fun(num,bool) k:num)) ((#real_div:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#DIV:fun(num,fun(num,num)) k:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#real_pow:fun(real,fun(num,real)) x:real) k:num))) (#real_of_num:fun(num,real) (#FACT:fun(num,num) k:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))) ((#real_div:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_abs:fun(real,real) x:real)) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#FACT:fun(num,num) ((#+:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))

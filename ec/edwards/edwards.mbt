@@ -3,7 +3,7 @@
 ///|
 /// edwards_point
 fn step_1() -> Unit raise {
-  edwards_point_c.set(@define.define_(@parser.parse_term("edwards_point f (x:A,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f")))
+  edwards_point_c.set(@define.define_(@term_syntax.parse_term("(edwards_point : (Ring[A], (A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn edwards_point() -> @kernel.Thm {
 ///|
 /// edwards_curve
 fn step_2() -> Unit raise {
-  edwards_curve_c.set(@define.define_(@parser.parse_term("edwards_curve(f:A ring,a:A,d:A) (x,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_add f (ring_mul f a (ring_pow f x 2)) (ring_pow f y 2) =\n        ring_add f (ring_1 f)\n          (ring_mul f d (ring_mul f (ring_pow f x 2) (ring_pow f y 2)))")))
+  edwards_curve_c.set(@define.define_(@term_syntax.parse_term("(edwards_curve : ((Ring[A], A, A), (A, A)) -> Bool)(((f : Ring[A]), (a : A), (d : A)), ((x : A), (y : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && ring_add(f, ring_mul(f, a, ring_pow(f, x, 2)), ring_pow(f, y, 2)) == ring_add(f, ring_1(f), ring_mul(f, d, ring_mul(f, ring_pow(f, x, 2), ring_pow(f, y, 2)))))")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn edwards_curve() -> @kernel.Thm {
 ///|
 /// edwards_nonsingular
 fn step_3() -> Unit raise {
-  edwards_nonsingular_c.set(@define.define_(@parser.parse_term("edwards_nonsingular (f:A ring,a:A,d:A) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        (d = ring_0 f \\/ ~(?c. c IN ring_carrier f /\\ ring_pow f c 2 = d))")))
+  edwards_nonsingular_c.set(@define.define_(@term_syntax.parse_term("(edwards_nonsingular : ((Ring[A], A, A)) -> Bool)(((f : Ring[A]), (a : A), (d : A))) == ((∃ b : A, IN(b, ring_carrier(f)) && ring_pow(f, b, 2) == a) && (d == ring_0(f) || !(∃ c : A, IN(c, ring_carrier(f)) && ring_pow(f, c, 2) == d)))")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn edwards_nonsingular() -> @kernel.Thm {
 ///|
 /// edwards_0
 fn step_4() -> Unit raise {
-  edwards_0_c.set(@define.define_(@parser.parse_term("edwards_0 (f:A ring,a:A,d:A) = (ring_0 f,ring_1 f)")))
+  edwards_0_c.set(@define.define_(@term_syntax.parse_term("(edwards_0 : ((Ring[A], A, A)) -> (A, A))(((f : Ring[A]), (a : A), (d : A))) == (ring_0(f), ring_1(f))")))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn edwards_0() -> @kernel.Thm {
 ///|
 /// edwards_neg
 fn step_5() -> Unit raise {
-  edwards_neg_c.set(@define.define_(@parser.parse_term("edwards_neg (f:A ring,a:A,d:A) (x,y:A) = (ring_neg f x,y)")))
+  edwards_neg_c.set(@define.define_(@term_syntax.parse_term("(edwards_neg : ((Ring[A], A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (d : A)), ((x : A), (y : A))) == (ring_neg(f, x), y)")))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn edwards_neg() -> @kernel.Thm {
 ///|
 /// edwards_add
 fn step_6() -> Unit raise {
-  edwards_add_c.set(@define.define_(@parser.parse_term("edwards_add (f:A ring,a:A,d:A) (x1,y1) (x2,y2) =\n   ring_div f (ring_add f (ring_mul f x1 y2) (ring_mul f y1 x2))\n   (ring_add f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2))))),\n   ring_div f\n   (ring_sub f (ring_mul f y1 y2) (ring_mul f a (ring_mul f x1 x2)))\n   (ring_sub f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))))")))
+  edwards_add_c.set(@define.define_(@term_syntax.parse_term("(edwards_add : ((Ring[A], A, A), (A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (d : A)), ((x1 : A), (y1 : A)), ((x2 : A), (y2 : A))) == (ring_div(f, ring_add(f, ring_mul(f, x1, y2), ring_mul(f, y1, x2)), ring_add(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2)))))), ring_div(f, ring_sub(f, ring_mul(f, y1, y2), ring_mul(f, a, ring_mul(f, x1, x2))), ring_sub(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2)))))))")))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn edwards_add() -> @kernel.Thm {
 ///|
 /// edwards_group
 fn step_7() -> Unit raise {
-  edwards_group_c.set(@define.define_(@parser.parse_term("edwards_group (f:A ring,a:A,d:A) =\n        group(edwards_curve(f,a,d),\n              edwards_0(f,a,d),\n              edwards_neg(f,a,d),\n              edwards_add(f,a,d))")))
+  edwards_group_c.set(@define.define_(@term_syntax.parse_term("(edwards_group : ((Ring[A], A, A)) -> Group[(A, A)])(((f : Ring[A]), (a : A), (d : A))) == group((edwards_curve((f, a, d)), edwards_0((f, a, d)), edwards_neg((f, a, d)), edwards_add((f, a, d))))")))
 }
 
 ///|
@@ -111,10 +111,10 @@ fn step_8() -> Unit raise {
   let t5 = @simp.asm_rewrite_tac(@list.List([]))
   let t4 = @list.List([@ringtheory.field_tac, @tactics.then_tac(@tactics.then_tac(@tactics.ap_term_tac, @tactics.ap_term_tac), @tactics.abs_tac)])
   let t3 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2 = @class.asm_cases_tac(@parser.parse_term("d:A = ring_0 f"))
+  let t2 = @class.asm_cases_tac(@term_syntax.parse_term("(d : A) == ring_0((f : Ring[A]))"))
   let t1 = @simp.rewrite_tac(@list.List([edwards_nonsingular()]))
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), @tactics.ap_term_tac), t2), t3), t4), @tactics.eq_tac), @tactics.strip_tac), t5), @ringtheory.field_tac)
-  edwards_nonsingular_alt_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A).\n    field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f\n    ==> (edwards_nonsingular (f,a,d) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        ~(?c. c IN ring_carrier f /\\ ~(c = ring_0 f) /\\ ring_pow f c 2 = d))"), t6))
+  edwards_nonsingular_alt_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) → edwards_nonsingular((f, a, d)) == ((∃ b : A, IN(b, ring_carrier(f)) && ring_pow(f, b, 2) == a) && !(∃ c : A, IN(c, ring_carrier(f)) && !(c == ring_0(f)) && ring_pow(f, c, 2) == d))"), t6))
 }
 
 ///|
@@ -132,10 +132,10 @@ fn step_9() -> Unit raise {
   let t11 = @simp.simp_tac(@list.List([edwards_curve(), @sets.in_()]))
   let t10 = @simp.rewrite_tac(@list.List([edwards_curve(), @sets.subset(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm()]))
   let t9 = @simp.asm_simp_tac(@list.List([@sets.finite_product()]))
-  let t8 = @tactics.exists_tac(@parser.parse_term("{(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f}"))
+  let t8 = @tactics.exists_tac(@term_syntax.parse_term("{((x : A), (y : A)) | IN(x, ring_carrier((f : Ring[A]))) && IN(y, ring_carrier(f))}"))
   let t7 = @tactics.match_mp_tac(@sets.finite_subset())
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7), t8), t9), t10), t11)
-  finite_edwards_curve_c.set(@tactics.prove(@parser.parse_term("forall f a d:A. field f /\\ FINITE(ring_carrier f)\n             ==> FINITE(edwards_curve(f,a,d))"), t12))
+  finite_edwards_curve_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, field(f) && FINITE(ring_carrier(f)) → FINITE(edwards_curve((f, a, d)))"), t12))
 }
 
 ///|
@@ -151,7 +151,7 @@ pub fn finite_edwards_curve() -> @kernel.Thm {
 /// CARD_BOUND_EDWARDS_CURVE
 fn step_10() -> Unit raise {
   let t47 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_inv_v1()]))
-  let t42 = @parser.parse_term("ring_inv f x:A")
+  let t42 = @term_syntax.parse_term("ring_inv((f : Ring[A]), (x : A))")
   let t46 = @tactics.disch_then(fn(x45 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x44 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x39 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -192,14 +192,14 @@ fn step_10() -> Unit raise {
       s20(x21)
     }
   }, @list.List([@sets.in_()]))
-  let t17 = @parser.parse_term("y:A")
-  let t18 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t17]))
+  let t17 = @term_syntax.parse_term("(y : A)")
+  let t18 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t17]))
   let t16 = @simp.rewrite_tac(@list.List([@sets.subset(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm()]))
   let t15 = @simp.asm_simp_tac(@list.List([@misc.finite_quadratic_curve(), @ringtheory.field_imp_integral_domain()]))
-  let t14 = @tactics.exists_tac(@parser.parse_term("{(x,y) | (x:A) IN ring_carrier f /\\ y IN ring_carrier f /\\\n             ring_pow f y 2 =\n             ring_div f (ring_sub f (ring_1 f)\n                            (ring_mul f a (ring_pow f x 2)))\n                        (ring_sub f (ring_1 f)\n                            (ring_mul f d (ring_pow f x 2)))}"))
-  let t13 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.finite_subset(), @sets.card_subset(), @arith.le_trans()]), @parser.parse_term("forall s. t SUBSET s /\\ FINITE s /\\ CARD s <= n ==> CARD t <= n")))
+  let t14 = @tactics.exists_tac(@term_syntax.parse_term("{((x : A), (y : A)) | IN(x, ring_carrier((f : Ring[A]))) && IN(y, ring_carrier(f)) && ring_pow(f, y, 2) == ring_div(f, ring_sub(f, ring_1(f), ring_mul(f, (a : A), ring_pow(f, x, 2))), ring_sub(f, ring_1(f), ring_mul(f, (d : A), ring_pow(f, x, 2))))}"))
+  let t13 = @tactics.match_mp_tac(@meson.meson(@list.List([@sets.finite_subset(), @sets.card_subset(), @arith.le_trans()]), @term_syntax.parse_term("∀ s : (_) -> Bool, SUBSET((t : (_) -> Bool), s) && FINITE(s) && CARD(s) <= (n : Num) → CARD(t) <= n")))
   let t48 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t13), t14), t15), t16), t18), t22), t23), @tactics.strip_tac), t24), t30), t37), t38), t46), t47), @ringtheory.field_tac)
-  card_bound_edwards_curve_c.set(@tactics.prove(@parser.parse_term("forall f a d:A. field f /\\ FINITE(ring_carrier f) /\\\n             a IN ring_carrier f /\\ d IN ring_carrier f /\\\n             edwards_nonsingular(f,a,d)\n             ==> CARD(edwards_curve(f,a,d)) <= 2 * CARD(ring_carrier f)"), t48))
+  card_bound_edwards_curve_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, field(f) && FINITE(ring_carrier(f)) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) → CARD(edwards_curve((f, a, d))) <= 2 * CARD(ring_carrier(f))"), t48))
 }
 
 ///|
@@ -215,9 +215,9 @@ pub fn card_bound_edwards_curve() -> @kernel.Thm {
 /// EDWARDS_NONSINGULAR_DENOMINATORS
 fn step_11() -> Unit raise {
   let t69 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_inv_v1(), @ringtheory.ring_mul_v1()]))
-  let t68 = @tactics.exists_tac(@parser.parse_term("ring_inv f (ring_mul f e (ring_mul f x1 x2)):A"))
-  let t67 = @tactics.exists_tac(@parser.parse_term("ring_inv f (ring_mul f x1 y2):A"))
-  let t66 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("forall a b. P a \\/ P b ==> ?x. P x")))
+  let t68 = @tactics.exists_tac(@term_syntax.parse_term("ring_inv((f : Ring[A]), ring_mul(f, (e : A), ring_mul(f, (x1 : A), (x2 : A))))"))
+  let t67 = @tactics.exists_tac(@term_syntax.parse_term("ring_inv((f : Ring[A]), ring_mul(f, (x1 : A), (y2 : A)))"))
+  let t66 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @term_syntax.parse_term("∀ a : _, ∀ b : _, (P : (_) -> Bool)(a) || P(b) → (∃ x : _, P(x))")))
   let t65 = @tactics.disch_then(@tactics.conjuncts_then2(fn(x58 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s59 = @tactics.assume_tac(x58)
     fn(x60 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -231,10 +231,10 @@ fn step_11() -> Unit raise {
       }
     })(@equal.sym(x64))
   }))
-  let t57 = @tactics.x_gen_tac(@parser.parse_term("e:A"))
-  let t56 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("~(p /\\ ~q) <=> p ==> q")), @theorems.left_imp_exists_thm()]))
+  let t57 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : A)"))
+  let t56 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("!((p : Bool) && !(q : Bool)) == (p → q)")), @theorems.left_imp_exists_thm()]))
   let t55 = @simp.asm_simp_tac(@list.List([edwards_nonsingular_alt()]))
-  let t54 = @tactics.undisch_tac(@parser.parse_term("edwards_nonsingular(f,a:A,d)"))
+  let t54 = @tactics.undisch_tac(@term_syntax.parse_term("edwards_nonsingular(((f : Ring[A]), (a : A), (d : A)))"))
   let t53 = @tactics.disch_then(@tactics.repeat_tcl(@tactics.conjuncts_then)(fn(x50 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s51 = @tactics.assume_tac(x50)
     fn(x52 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -243,7 +243,7 @@ fn step_11() -> Unit raise {
   }))
   let t49 = @simp.rewrite_tac(@list.List([edwards_curve(), @equal.gsym(@class.de_morgan_thm())]))
   let t70 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t49), t53), @tactics.disch_tac), t54), t55), t56), t57), t65), t66), t67), t68), t69), @ringtheory.field_tac)
-  edwards_nonsingular_denominators_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) x1 y1 x2 y2.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2)\n        ==> ~(ring_add f (ring_1 f)\n              (ring_mul f d\n                 (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))) =\n              ring_0 f) /\\\n            ~(ring_sub f (ring_1 f)\n              (ring_mul f d\n                 (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))) =\n              ring_0 f)"), t70))
+  edwards_nonsingular_denominators_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ x1 : A, ∀ y1 : A, ∀ x2 : A, ∀ y2 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && edwards_curve((f, a, d), (x2, y2)) → !(ring_add(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2))))) == ring_0(f)) && !(ring_sub(f, ring_1(f), ring_mul(f, d, ring_mul(f, x1, ring_mul(f, y1, ring_mul(f, x2, y2))))) == ring_0(f))"), t70))
 }
 
 ///|
@@ -286,7 +286,7 @@ pub fn edwards_nonsingular_denominators_points() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t80 = @simp.simp_tac(@list.List([edwards_curve(), edwards_point()]))
   let t81 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm()])), t80)
-  edwards_curve_imp_point_c.set(@tactics.prove(@parser.parse_term("forall f a d p. edwards_curve(f,a,d) p ==> edwards_point f p"), t81))
+  edwards_curve_imp_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[_], ∀ a : _, ∀ d : _, ∀ p : (_, _), edwards_curve((f, a, d), p) → edwards_point(f, p)"), t81))
 }
 
 ///|
@@ -303,7 +303,7 @@ pub fn edwards_curve_imp_point() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t82 = @simp.simp_tac(@list.List([edwards_neg(), edwards_point(), @ringtheory.ring_neg_v1()]))
   let t83 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm()])), t82)
-  edwards_point_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d p.\n        edwards_point f p\n        ==> edwards_point f (edwards_neg (f,a,d) p)"), t83))
+  edwards_point_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), edwards_point(f, p) → edwards_point(f, edwards_neg((f, a, d), p))"), t83))
 }
 
 ///|
@@ -323,7 +323,7 @@ fn step_15() -> Unit raise {
   let t85 = @tactics.repeat_tac(@tactics.strip_tac)
   let t84 = @simp.simp_tac(@list.List([edwards_add(), edwards_point(), @pair.let_def(), @pair.let_end_def()]))
   let t88 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm()])), t84), t85), t86), t87), @ringtheory.ring_carrier_tac)
-  edwards_point_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a d p q.\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_point f p /\\ edwards_point f q\n        ==> edwards_point f (edwards_add (f,a,d) p q)"), t88))
+  edwards_point_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), ∀ q : (A, A), IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_point(f, p) && edwards_point(f, q) → edwards_point(f, edwards_add((f, a, d), p, q))"), t88))
 }
 
 ///|
@@ -341,7 +341,7 @@ fn step_16() -> Unit raise {
   let t90 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t89 = @tactics.repeat_tac(@tactics.strip_tac)
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([edwards_curve(), edwards_0()])), t89), t90), @ringtheory.ring_tac)
-  edwards_curve_0_c.set(@tactics.prove(@parser.parse_term("forall f a d:A.\n        a IN ring_carrier f /\\ d IN ring_carrier f\n        ==> edwards_curve(f,a,d) (edwards_0(f,a,d))"), t91))
+  edwards_curve_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) → edwards_curve((f, a, d), edwards_0((f, a, d)))"), t91))
 }
 
 ///|
@@ -359,7 +359,7 @@ fn step_17() -> Unit raise {
   let t93 = @tactics.conv_tac(@ringtheory.integral_domain_rule)
   let t92 = @tactics.repeat_tac(@tactics.gen_tac)
   let t94 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@pair.forall_pair_thm(), @ringtheory.ring_neg_v1(), edwards_curve(), edwards_neg()])), t92), t93)
-  edwards_curve_neg_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) p.\n        integral_domain f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_curve(f,a,d) (edwards_neg (f,a,d) p)"), t94))
+  edwards_curve_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), integral_domain(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_curve((f, a, d), p) → edwards_curve((f, a, d), edwards_neg((f, a, d), p))"), t94))
 }
 
 ///|
@@ -385,24 +385,24 @@ fn step_18() -> Unit raise {
     })(t112(x113))
   })
   let t109 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
-  let t102 = @parser.parse_term("y2:A")
-  let t103 = @parser.parse_term("x2:A")
-  let t104 = @parser.parse_term("y1:A")
-  let t105 = @parser.parse_term("x1:A")
-  let t106 = @parser.parse_term("d:A")
-  let t107 = @parser.parse_term("a:A")
-  let t108 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t107, t106, t105, t104, t103, t102]), edwards_nonsingular_denominators()))
-  let t95 = @parser.parse_term("y2:A")
-  let t96 = @parser.parse_term("x2:A")
-  let t97 = @parser.parse_term("y1:A")
-  let t98 = @parser.parse_term("x1:A")
-  let t99 = @parser.parse_term("d:A")
-  let t100 = @parser.parse_term("a:A")
-  let t101 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t100, t99, t98, t97, t96, t95]))
+  let t102 = @term_syntax.parse_term("(y2 : A)")
+  let t103 = @term_syntax.parse_term("(x2 : A)")
+  let t104 = @term_syntax.parse_term("(y1 : A)")
+  let t105 = @term_syntax.parse_term("(x1 : A)")
+  let t106 = @term_syntax.parse_term("(d : A)")
+  let t107 = @term_syntax.parse_term("(a : A)")
+  let t108 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t107, t106, t105, t104, t103, t102]), edwards_nonsingular_denominators()))
+  let t95 = @term_syntax.parse_term("(y2 : A)")
+  let t96 = @term_syntax.parse_term("(x2 : A)")
+  let t97 = @term_syntax.parse_term("(y1 : A)")
+  let t98 = @term_syntax.parse_term("(x1 : A)")
+  let t99 = @term_syntax.parse_term("(d : A)")
+  let t100 = @term_syntax.parse_term("(a : A)")
+  let t101 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t100, t99, t98, t97, t96, t95]))
   let t118 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), edwards_curve(), edwards_add(), @pair.pair_eq()])), t101), @tactics.strip_tac), t108), t109), t114), t115), t116), fn(x117 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x117.0, x117.1)
   }), @ringtheory.ring_tac)
-  edwards_curve_add_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q\n        ==> edwards_curve(f,a,d) (edwards_add (f,a,d) p q)"), t118))
+  edwards_curve_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), ∀ q : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) && edwards_curve((f, a, d), q) → edwards_curve((f, a, d), edwards_add((f, a, d), p, q))"), t118))
 }
 
 ///|
@@ -420,7 +420,7 @@ fn step_19() -> Unit raise {
   let t120 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t119 = @tactics.repeat_tac(@tactics.strip_tac)
   let t121 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), edwards_curve(), edwards_add(), edwards_0(), @pair.pair_eq()])), t119), t120), @ringtheory.field_tac)
-  edwards_add_lid_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_add(f,a,d) (edwards_0 (f,a,d)) p = p"), t121))
+  edwards_add_lid_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_curve((f, a, d), p) → edwards_add((f, a, d), edwards_0((f, a, d)), p) == p"), t121))
 }
 
 ///|
@@ -446,18 +446,18 @@ fn step_20() -> Unit raise {
     })(t135(x136))
   })
   let t132 = @simp.asm_rewrite_tac(@list.List([edwards_curve(), edwards_neg()]))
-  let t127 = @parser.parse_term("(x,y):A#A")
-  let t128 = @parser.parse_term("edwards_neg (f,a,d) (x,y):A#A")
-  let t129 = @parser.parse_term("d:A")
-  let t130 = @parser.parse_term("a:A")
-  let t131 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t130, t129, t128, t127]), edwards_nonsingular_denominators_points()))
-  let t122 = @parser.parse_term("y:A")
-  let t123 = @parser.parse_term("x:A")
-  let t124 = @parser.parse_term("d:A")
-  let t125 = @parser.parse_term("a:A")
-  let t126 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t125, t124, t123, t122]))
+  let t127 = @term_syntax.parse_term("((x : A), (y : A))")
+  let t128 = @term_syntax.parse_term("edwards_neg(((f : Ring[A]), (a : A), (d : A)), ((x : A), (y : A)))")
+  let t129 = @term_syntax.parse_term("(d : A)")
+  let t130 = @term_syntax.parse_term("(a : A)")
+  let t131 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t130, t129, t128, t127]), edwards_nonsingular_denominators_points()))
+  let t122 = @term_syntax.parse_term("(y : A)")
+  let t123 = @term_syntax.parse_term("(x : A)")
+  let t124 = @term_syntax.parse_term("(d : A)")
+  let t125 = @term_syntax.parse_term("(a : A)")
+  let t126 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t125, t124, t123, t122]))
   let t140 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), edwards_curve(), edwards_add(), edwards_neg(), edwards_0(), @pair.pair_eq()])), t126), @tactics.strip_tac), t131), t132), t137), @tactics.ants_tac), t138), t139), @ringtheory.field_tac)
-  edwards_add_lneg_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) p.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p\n        ==> edwards_add(f,a,d) (edwards_neg (f,a,d) p) p = edwards_0(f,a,d)"), t140))
+  edwards_add_lneg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) → edwards_add((f, a, d), edwards_neg((f, a, d), p), p) == edwards_0((f, a, d))"), t140))
 }
 
 ///|
@@ -483,31 +483,31 @@ fn step_21() -> Unit raise {
     })(t165(x166))
   })
   let t162 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
-  let t155 = @parser.parse_term("y1:A")
-  let t156 = @parser.parse_term("x1:A")
-  let t157 = @parser.parse_term("y2:A")
-  let t158 = @parser.parse_term("x2:A")
-  let t159 = @parser.parse_term("d:A")
-  let t160 = @parser.parse_term("a:A")
-  let t161 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t160, t159, t158, t157, t156, t155]), edwards_nonsingular_denominators()))
-  let t148 = @parser.parse_term("y2:A")
-  let t149 = @parser.parse_term("x2:A")
-  let t150 = @parser.parse_term("y1:A")
-  let t151 = @parser.parse_term("x1:A")
-  let t152 = @parser.parse_term("d:A")
-  let t153 = @parser.parse_term("a:A")
-  let t154 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t153, t152, t151, t150, t149, t148]), edwards_nonsingular_denominators()))
-  let t141 = @parser.parse_term("y2:A")
-  let t142 = @parser.parse_term("x2:A")
-  let t143 = @parser.parse_term("y1:A")
-  let t144 = @parser.parse_term("x1:A")
-  let t145 = @parser.parse_term("d:A")
-  let t146 = @parser.parse_term("a:A")
-  let t147 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t146, t145, t144, t143, t142, t141]))
+  let t155 = @term_syntax.parse_term("(y1 : A)")
+  let t156 = @term_syntax.parse_term("(x1 : A)")
+  let t157 = @term_syntax.parse_term("(y2 : A)")
+  let t158 = @term_syntax.parse_term("(x2 : A)")
+  let t159 = @term_syntax.parse_term("(d : A)")
+  let t160 = @term_syntax.parse_term("(a : A)")
+  let t161 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t160, t159, t158, t157, t156, t155]), edwards_nonsingular_denominators()))
+  let t148 = @term_syntax.parse_term("(y2 : A)")
+  let t149 = @term_syntax.parse_term("(x2 : A)")
+  let t150 = @term_syntax.parse_term("(y1 : A)")
+  let t151 = @term_syntax.parse_term("(x1 : A)")
+  let t152 = @term_syntax.parse_term("(d : A)")
+  let t153 = @term_syntax.parse_term("(a : A)")
+  let t154 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t153, t152, t151, t150, t149, t148]), edwards_nonsingular_denominators()))
+  let t141 = @term_syntax.parse_term("(y2 : A)")
+  let t142 = @term_syntax.parse_term("(x2 : A)")
+  let t143 = @term_syntax.parse_term("(y1 : A)")
+  let t144 = @term_syntax.parse_term("(x1 : A)")
+  let t145 = @term_syntax.parse_term("(d : A)")
+  let t146 = @term_syntax.parse_term("(a : A)")
+  let t147 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t146, t145, t144, t143, t142, t141]))
   let t171 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), edwards_curve(), edwards_add(), @pair.pair_eq()])), t147), @tactics.strip_tac), t154), t161), t162), t167), t168), t169), fn(x170 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x170.0, x170.1)
   }), @ringtheory.ring_tac)
-  edwards_add_sym_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) p q.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q\n        ==> edwards_add (f,a,d) p q = edwards_add (f,a,d) q p"), t171))
+  edwards_add_sym_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), ∀ q : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) && edwards_curve((f, a, d), q) → edwards_add((f, a, d), p, q) == edwards_add((f, a, d), q, p)"), t171))
 }
 
 ///|
@@ -522,18 +522,18 @@ pub fn edwards_add_sym() -> @kernel.Thm {
 ///|
 /// EDWARDS_ADD_ASSOC
 fn step_22() -> Unit raise {
-  let lemma = @tactics.prove(@parser.parse_term("field f /\\\n     x1 IN ring_carrier f /\\ y1 IN ring_carrier f /\\\n     x2 IN ring_carrier f /\\ y2 IN ring_carrier f /\\\n     ~(y1 = ring_0 f \\/ y2 = ring_0 f) /\\\n     ring_mul f x1 y2 = ring_mul f x2 y1\n     ==> ring_div f x1 y1 = ring_div f x2 y2"), @ringtheory.field_tac)
+  let lemma = @tactics.prove(@term_syntax.parse_term("field((f : Ring[_])) && IN((x1 : _), ring_carrier(f)) && IN((y1 : _), ring_carrier(f)) && IN((x2 : _), ring_carrier(f)) && IN((y2 : _), ring_carrier(f)) && !(y1 == ring_0(f) || y2 == ring_0(f)) && ring_mul(f, x1, y2) == ring_mul(f, x2, y1) → ring_div(f, x1, y1) == ring_div(f, x2, y2)"), @ringtheory.field_tac)
   let t236 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
-  let t231 = @parser.parse_term("(x3,y3):A#A")
-  let t232 = @parser.parse_term("(x2,y2):A#A")
-  let t233 = @parser.parse_term("d:A")
-  let t234 = @parser.parse_term("a:A")
-  let t235 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t234, t233, t232, t231]), edwards_nonsingular_denominators_points()))
-  let t226 = @parser.parse_term("(x2,y2):A#A")
-  let t227 = @parser.parse_term("(x1,y1):A#A")
-  let t228 = @parser.parse_term("d:A")
-  let t229 = @parser.parse_term("a:A")
-  let t230 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t229, t228, t227, t226]), edwards_nonsingular_denominators_points()))
+  let t231 = @term_syntax.parse_term("((x3 : A), (y3 : A))")
+  let t232 = @term_syntax.parse_term("((x2 : A), (y2 : A))")
+  let t233 = @term_syntax.parse_term("(d : A)")
+  let t234 = @term_syntax.parse_term("(a : A)")
+  let t235 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t234, t233, t232, t231]), edwards_nonsingular_denominators_points()))
+  let t226 = @term_syntax.parse_term("((x2 : A), (y2 : A))")
+  let t227 = @term_syntax.parse_term("((x1 : A), (y1 : A))")
+  let t228 = @term_syntax.parse_term("(d : A)")
+  let t229 = @term_syntax.parse_term("(a : A)")
+  let t230 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t229, t228, t227, t226]), edwards_nonsingular_denominators_points()))
   let t223 = @meson.asm_meson_tac(@list.List([@prime.divides_refl()]))
   let t222 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
   let t221 = @tactics.try_tac(@tactics.match_mp_tac(edwards_curve_add()))
@@ -599,19 +599,19 @@ fn step_22() -> Unit raise {
   let t183 = @tactics.replicate_tac(4, @tactics.thenl(@tactics.conj_tac, @list.List([@ringtheory.ring_carrier_tac, @tactics.all_tac])))
   let t182 = @simp.asm_rewrite_tac(@list.List([]))
   let t181 = @tactics.match_mp_tac(lemma)
-  let t172 = @parser.parse_term("y3:A")
-  let t173 = @parser.parse_term("x3:A")
-  let t174 = @parser.parse_term("y2:A")
-  let t175 = @parser.parse_term("x2:A")
-  let t176 = @parser.parse_term("y1:A")
-  let t177 = @parser.parse_term("x1:A")
-  let t178 = @parser.parse_term("d:A")
-  let t179 = @parser.parse_term("a:A")
-  let t180 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t179, t178, t177, t176, t175, t174, t173, t172]))
+  let t172 = @term_syntax.parse_term("(y3 : A)")
+  let t173 = @term_syntax.parse_term("(x3 : A)")
+  let t174 = @term_syntax.parse_term("(y2 : A)")
+  let t175 = @term_syntax.parse_term("(x2 : A)")
+  let t176 = @term_syntax.parse_term("(y1 : A)")
+  let t177 = @term_syntax.parse_term("(x1 : A)")
+  let t178 = @term_syntax.parse_term("(d : A)")
+  let t179 = @term_syntax.parse_term("(a : A)")
+  let t180 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t179, t178, t177, t176, t175, t174, t173, t172]))
   let t238 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), edwards_curve(), edwards_add(), @pair.pair_eq()])), t180), @tactics.strip_tac), @tactics.conj_tac), t181), t182), t183), @tactics.conj_tac), t225), t230), t235), t236), @tactics.strip_tac), @tactics.strip_tac), fn(x237 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     @ringtheory.ring_pull_div_tac(x237.0, x237.1)
   }), @ringtheory.ring_tac)
-  edwards_add_assoc_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A) p q r.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        edwards_curve(f,a,d) p /\\ edwards_curve(f,a,d) q /\\\n        edwards_curve(f,a,d) r\n        ==> edwards_add (f,a,d) p (edwards_add (f,a,d) q r) =\n            edwards_add (f,a,d) (edwards_add (f,a,d) p q) r"), t238))
+  edwards_add_assoc_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), ∀ q : (A, A), ∀ r : (A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), p) && edwards_curve((f, a, d), q) && edwards_curve((f, a, d), r) → edwards_add((f, a, d), p, edwards_add((f, a, d), q, r)) == edwards_add((f, a, d), edwards_add((f, a, d), p, q), r)"), t238))
 }
 
 ///|
@@ -643,7 +643,7 @@ fn step_23() -> Unit raise {
   let t240 = @simp.rewrite_tac(@list.List([edwards_group(), @equal.gsym(@bool.conjunct2(@grouptheory.group_tybij()))]))
   let t239 = @simp.rewrite_tac(@list.List([@grouptheory.group_carrier(), @grouptheory.group_id(), @grouptheory.group_inv(), @grouptheory.group_mul(), @equal.gsym(@pair.pair_eq())]))
   let t255 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t239), t240), t241), t254)
-  edwards_group_v1_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A).\n      field f /\\\n      a IN ring_carrier f /\\ d IN ring_carrier f /\\\n      edwards_nonsingular(f,a,d)\n      ==> group_carrier(edwards_group(f,a,d)) = edwards_curve(f,a,d) /\\\n          group_id(edwards_group(f,a,d)) = edwards_0(f,a,d) /\\\n          group_inv(edwards_group(f,a,d)) = edwards_neg(f,a,d) /\\\n          group_mul(edwards_group(f,a,d)) = edwards_add(f,a,d)"), t255))
+  edwards_group_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) → group_carrier(edwards_group((f, a, d))) == edwards_curve((f, a, d)) && group_id(edwards_group((f, a, d))) == edwards_0((f, a, d)) && group_inv(edwards_group((f, a, d))) == edwards_neg((f, a, d)) && group_mul(edwards_group((f, a, d))) == edwards_add((f, a, d))"), t255))
 }
 
 ///|
@@ -662,7 +662,7 @@ fn step_24() -> Unit raise {
   let t257 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t256 = @simp.asm_simp_tac(@list.List([@grouptheory.abelian_group(), edwards_group_v1()]))
   let t259 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t256), t257), t258)
-  abelian_edwards_group_c.set(@tactics.prove(@parser.parse_term("forall f a (d:A).\n      field f /\\\n      a IN ring_carrier f /\\ d IN ring_carrier f /\\\n      edwards_nonsingular(f,a,d)\n      ==> abelian_group(edwards_group(f,a,d))"), t259))
+  abelian_edwards_group_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) → abelian_group(edwards_group((f, a, d)))"), t259))
 }
 
 ///|
@@ -685,7 +685,7 @@ fn step_25() -> Unit raise {
   let t261 = @simp.rewrite_tac(@list.List([@theorems.imp_conj(), @theorems.right_forall_imp_thm()]))
   let t260 = @simp.rewrite_tac(@list.List([@misc.field_char_not2()]))
   let t267 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.replicate_tac(3, @tactics.gen_tac), t260), t261), t262), t263), t264), t265), t266), @ringtheory.field_tac)
-  edwards_group_element_order_eq_2_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        p IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) p = 2 <=>\n             p = (ring_0 f,ring_neg f (ring_1 f)))"), t267))
+  edwards_group_element_order_eq_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ p : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && IN(p, group_carrier(edwards_group((f, a, d)))) → (group_element_order(edwards_group((f, a, d)), p) == 2) == (p == (ring_0(f), ring_neg(f, ring_1(f))))"), t267))
 }
 
 ///|
@@ -701,15 +701,15 @@ pub fn edwards_group_element_order_eq_2() -> @kernel.Thm {
 /// EDWARDS_GROUP_ELEMENT_ORDER_EQ_4_EQUIV
 fn step_26() -> Unit raise {
   let t287 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
-  let t280 = @parser.parse_term("y:A")
-  let t281 = @parser.parse_term("x:A")
-  let t282 = @parser.parse_term("y:A")
-  let t283 = @parser.parse_term("x:A")
-  let t284 = @parser.parse_term("d:A")
-  let t285 = @parser.parse_term("a:A")
-  let t286 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t285, t284, t283, t282, t281, t280]), edwards_nonsingular_denominators()))
-  let t278 = @parser.parse_term("y:A")
-  let t279 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t278]))
+  let t280 = @term_syntax.parse_term("(y : A)")
+  let t281 = @term_syntax.parse_term("(x : A)")
+  let t282 = @term_syntax.parse_term("(y : A)")
+  let t283 = @term_syntax.parse_term("(x : A)")
+  let t284 = @term_syntax.parse_term("(d : A)")
+  let t285 = @term_syntax.parse_term("(a : A)")
+  let t286 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t285, t284, t283, t282, t281, t280]), edwards_nonsingular_denominators()))
+  let t278 = @term_syntax.parse_term("(y : A)")
+  let t279 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t278]))
   let t277 = @simp.rewrite_tac(@list.List([edwards_curve(), edwards_add(), @pair.pair_eq()]))
   let t276 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t275 = @simp.asm_simp_tac(@list.List([edwards_group_v1()]))
@@ -720,8 +720,8 @@ fn step_26() -> Unit raise {
   let t270 = @tactics.replicate_tac(3, @tactics.gen_tac)
   let t269 = @simp.simp_tac(@list.List([edwards_group_element_order_eq_2(), @grouptheory.group_pow_v1()]))
   let t268 = @simp.simp_tac(@list.List([@grouptheory.group_element_order_eq_mul(), @prime.divides_2(), @calc_num.arith_eq(), @calc_num.arith_even()]))
-  let t288 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("4 = 2 * 2"))])), t268), t269), t270), t271), t272), t273), t274), t275), t276), t277), t279), @tactics.strip_tac), t286), t287), @ringtheory.field_tac)
-  edwards_group_element_order_eq_4_equiv_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d x y.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        (x,y) IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) (x,y) = 4 <=>\n             ring_mul f a (ring_pow f x 2) = ring_1 f /\\ y = ring_0 f)"), t288))
+  let t288 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("4 == 2 * 2"))])), t268), t269), t270), t271), t272), t273), t274), t275), t276), t277), t279), @tactics.strip_tac), t286), t287), @ringtheory.field_tac)
+  edwards_group_element_order_eq_4_equiv_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ x : A, ∀ y : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && IN((x, y), group_carrier(edwards_group((f, a, d)))) → (group_element_order(edwards_group((f, a, d)), (x, y)) == 4) == (ring_mul(f, a, ring_pow(f, x, 2)) == ring_1(f) && y == ring_0(f))"), t288))
 }
 
 ///|
@@ -737,15 +737,15 @@ pub fn edwards_group_element_order_eq_4_equiv() -> @kernel.Thm {
 /// EDWARDS_GROUP_ELEMENT_ORDER_EQ_4
 fn step_27() -> Unit raise {
   let t308 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
-  let t301 = @parser.parse_term("y:A")
-  let t302 = @parser.parse_term("x:A")
-  let t303 = @parser.parse_term("y:A")
-  let t304 = @parser.parse_term("x:A")
-  let t305 = @parser.parse_term("d:A")
-  let t306 = @parser.parse_term("a:A")
-  let t307 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t306, t305, t304, t303, t302, t301]), edwards_nonsingular_denominators()))
-  let t299 = @parser.parse_term("y:A")
-  let t300 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t299]))
+  let t301 = @term_syntax.parse_term("(y : A)")
+  let t302 = @term_syntax.parse_term("(x : A)")
+  let t303 = @term_syntax.parse_term("(y : A)")
+  let t304 = @term_syntax.parse_term("(x : A)")
+  let t305 = @term_syntax.parse_term("(d : A)")
+  let t306 = @term_syntax.parse_term("(a : A)")
+  let t307 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t306, t305, t304, t303, t302, t301]), edwards_nonsingular_denominators()))
+  let t299 = @term_syntax.parse_term("(y : A)")
+  let t300 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t299]))
   let t298 = @simp.rewrite_tac(@list.List([edwards_curve(), edwards_add(), @pair.pair_eq()]))
   let t297 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t296 = @simp.asm_simp_tac(@list.List([edwards_group_v1()]))
@@ -756,8 +756,8 @@ fn step_27() -> Unit raise {
   let t291 = @tactics.replicate_tac(4, @tactics.gen_tac)
   let t290 = @simp.simp_tac(@list.List([edwards_group_element_order_eq_2(), @grouptheory.group_pow_v1()]))
   let t289 = @simp.simp_tac(@list.List([@grouptheory.group_element_order_eq_mul(), @prime.divides_2(), @calc_num.arith_eq(), @calc_num.arith_even()]))
-  let t309 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("4 = 2 * 2"))])), t289), t290), t291), t292), t293), t294), t295), t296), t297), t298), t300), @tactics.strip_tac), t307), t308), @ringtheory.field_tac)
-  edwards_group_element_order_eq_4_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d a' p.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        a' IN ring_carrier f /\\ ring_mul f a (ring_pow f a' 2) = ring_1 f /\\\n        edwards_nonsingular (f,a,d) /\\\n        p IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) p = 4 <=>\n             p = (a',ring_0 f) \\/ p = (ring_neg f a',ring_0 f))"), t309))
+  let t309 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("4 == 2 * 2"))])), t289), t290), t291), t292), t293), t294), t295), t296), t297), t298), t300), @tactics.strip_tac), t307), t308), @ringtheory.field_tac)
+  edwards_group_element_order_eq_4_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ a' : A, ∀ p : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && IN(a', ring_carrier(f)) && ring_mul(f, a, ring_pow(f, a', 2)) == ring_1(f) && edwards_nonsingular((f, a, d)) && IN(p, group_carrier(edwards_group((f, a, d)))) → (group_element_order(edwards_group((f, a, d)), p) == 4) == (p == (a', ring_0(f)) || p == (ring_neg(f, a'), ring_0(f)))"), t309))
 }
 
 ///|
@@ -773,15 +773,15 @@ pub fn edwards_group_element_order_eq_4() -> @kernel.Thm {
 /// EDWARDS_GROUP_ELEMENT_ORDER_EQ_8_EQUIV
 fn step_28() -> Unit raise {
   let t334 = @simp.asm_rewrite_tac(@list.List([edwards_curve()]))
-  let t327 = @parser.parse_term("y:A")
-  let t328 = @parser.parse_term("x:A")
-  let t329 = @parser.parse_term("y:A")
-  let t330 = @parser.parse_term("x:A")
-  let t331 = @parser.parse_term("d:A")
-  let t332 = @parser.parse_term("a:A")
-  let t333 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t332, t331, t330, t329, t328, t327]), edwards_nonsingular_denominators()))
-  let t325 = @parser.parse_term("y:A")
-  let t326 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t325]))
+  let t327 = @term_syntax.parse_term("(y : A)")
+  let t328 = @term_syntax.parse_term("(x : A)")
+  let t329 = @term_syntax.parse_term("(y : A)")
+  let t330 = @term_syntax.parse_term("(x : A)")
+  let t331 = @term_syntax.parse_term("(d : A)")
+  let t332 = @term_syntax.parse_term("(a : A)")
+  let t333 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t332, t331, t330, t329, t328, t327]), edwards_nonsingular_denominators()))
+  let t325 = @term_syntax.parse_term("(y : A)")
+  let t326 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : A)"), t325]))
   let t324 = @simp.rewrite_tac(@list.List([edwards_curve(), edwards_add(), @pair.pair_eq()]))
   let t323 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t322 = @simp.asm_simp_tac(@list.List([edwards_group_v1()]))
@@ -798,8 +798,8 @@ fn step_28() -> Unit raise {
   }, x314), @list.List([@pair.forall_unpair_thm()]))(edwards_group_element_order_eq_4_equiv())
   let t316 = @simp.simp_tac(@list.List([@grouptheory.group_pow_v1(), @simp.rewrite_rule(@list.List([@pair.pair()]))(t315)]))
   let t310 = @simp.simp_tac(@list.List([@grouptheory.group_element_order_eq_mul(), @prime.divides_2(), @calc_num.arith_eq(), @calc_num.arith_even()]))
-  let t335 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("8 = 2 * 4"))])), t310), t316), t317), t318), t319), t320), t321), t322), t323), t324), t326), @tactics.strip_tac), t333), t334), @ringtheory.field_tac)
-  edwards_group_element_order_eq_8_equiv_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) d x y.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular (f,a,d) /\\\n        (x,y) IN group_carrier (edwards_group(f,a,d))\n        ==> (group_element_order (edwards_group(f,a,d)) (x,y) = 8 <=>\n             ring_mul f a (ring_pow f x 2) = ring_pow f y 2 /\\\n             ring_mul f (ring_of_num f 4)\n                        (ring_mul f (ring_pow f a 2) (ring_pow f x 4)) =\n             ring_pow f (ring_add f (ring_1 f)\n                          (ring_mul f a (ring_mul f d (ring_pow f x 4)))) 2)"), t335))
+  let t335 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("8 == 2 * 4"))])), t310), t316), t317), t318), t319), t320), t321), t322), t323), t324), t326), @tactics.strip_tac), t333), t334), @ringtheory.field_tac)
+  edwards_group_element_order_eq_8_equiv_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ d : A, ∀ x : A, ∀ y : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && IN((x, y), group_carrier(edwards_group((f, a, d)))) → (group_element_order(edwards_group((f, a, d)), (x, y)) == 8) == (ring_mul(f, a, ring_pow(f, x, 2)) == ring_pow(f, y, 2) && ring_mul(f, ring_of_num(f, 4), ring_mul(f, ring_pow(f, a, 2), ring_pow(f, x, 4))) == ring_pow(f, ring_add(f, ring_1(f), ring_mul(f, a, ring_mul(f, d, ring_pow(f, x, 4)))), 2))"), t335))
 }
 
 ///|

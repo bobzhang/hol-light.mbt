@@ -64,9 +64,9 @@ pub fn subst_conv(x17 : @list.List[(@kernel.Thm, @kernel.Term)], x18 : @kernel.T
 ///|
 /// CONTRAPOS
 fn step_1() -> Unit raise {
-  let a = @parser.parse_term("a:bool")
-  let b = @parser.parse_term("b:bool")
-  let pth = @itab.itaut(@parser.parse_term("(a ==> b) ==> (~b ==> ~a)"))
+  let a = @term_syntax.parse_term("(a : Bool)")
+  let b = @term_syntax.parse_term("(b : Bool)")
+  let pth = @itab.itaut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) → !b → !a"))
   contrapos_c.set(fn(x25 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x25
     try {
@@ -91,9 +91,9 @@ pub fn contrapos(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// NOT_EQ_SYM
 fn step_2() -> Unit raise {
-  let t27 = contrapos(@bool.disch_all(@equal.sym(@kernel.assume_rule(@parser.parse_term("a:A = b")))))
-  let t26 = @parser.parse_term("b:A")
-  let pth = @bool.genl(@list.List([@parser.parse_term("a:A"), t26]), t27)
+  let t27 = contrapos(@bool.disch_all(@equal.sym(@kernel.assume_rule(@term_syntax.parse_term("(a : A) == (b : A)")))))
+  let t26 = @term_syntax.parse_term("(b : A)")
+  let pth = @bool.genl(@list.List([@term_syntax.parse_term("(a : A)"), t26]), t27)
   let aty = @parser.parse_type("A")
   not_eq_sym_c.set(fn(x28 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x28
@@ -217,7 +217,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] distinct(x57 : @list.List[TA]) -> B
 ///|
 /// is_T
 fn step_3() -> Unit raise {
-  let t = @parser.parse_term("T")
+  let t = @term_syntax.parse_term("true")
   is_t_c.set(fn(x59 : @kernel.Term) -> Bool raise {
     let tm = x59
     (tm == t)
@@ -236,7 +236,7 @@ pub fn is_t(x : @kernel.Term) -> Bool raise {
 ///|
 /// is_F
 fn step_4() -> Unit raise {
-  let f = @parser.parse_term("F")
+  let f = @term_syntax.parse_term("false")
   is_f_c.set(fn(x60 : @kernel.Term) -> Bool raise {
     let tm_1 = x60
     (tm_1 == f)

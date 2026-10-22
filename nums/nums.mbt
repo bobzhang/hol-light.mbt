@@ -31,7 +31,7 @@ pub fn one_one() -> @kernel.Thm {
 /// ONTO
 fn step_3() -> Unit raise {
   onto_c.set(
-    @pair.new_definition(@parser.parse_term("ONTO(f:A->B) = forall y. ?x. y = f x")),
+    @pair.new_definition(@term_syntax.parse_term("(ONTO : ((A) -> B) -> Bool)((f : (A) -> B)) == (∀ y : B, ∃ x : A, y == f(x))")),
   )
 }
 
@@ -49,7 +49,7 @@ pub fn onto() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   infinity_ax_c.set(
     @kernel.new_axiom(
-      @parser.parse_term("?f:ind->ind. ONE_ONE f /\\ ~(ONTO f)"),
+      @term_syntax.parse_term("∃ f : (Ind) -> Ind, ONE_ONE(f) && !ONTO(f)"),
     ),
   )
 }
@@ -114,12 +114,12 @@ fn step_5() -> Unit raise {
       s3(x4)
     }
   })
-  let t1 = @tactics.exists_tac(@parser.parse_term("f:ind->ind"))
+  let t1 = @tactics.exists_tac(@term_syntax.parse_term("(f : (Ind) -> Ind)"))
   let t8 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.x_choose_tac(@parser.parse_term("f:ind->ind"), infinity_ax()),
+          @tactics.x_choose_tac(@term_syntax.parse_term("(f : (Ind) -> Ind)"), infinity_ax()),
           t1,
         ),
         t5,
@@ -270,7 +270,7 @@ pub fn num_tydef() -> (@kernel.Thm, @kernel.Thm) {
 ///|
 /// ZERO_DEF
 fn step_10() -> Unit raise {
-  zero_def_c.set(@pair.new_definition(@parser.parse_term("_0 = mk_num IND_0")))
+  zero_def_c.set(@pair.new_definition(@term_syntax.parse_term("(_0 : Num) == mk_num(IND_0)")))
 }
 
 ///|
@@ -287,7 +287,7 @@ pub fn zero_def() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   suc_def_c.set(
     @pair.new_definition(
-      @parser.parse_term("SUC n = mk_num(IND_SUC(dest_num n))"),
+      @term_syntax.parse_term("(SUC : (Num) -> Num)((n : Num)) == mk_num(IND_SUC(dest_num(n)))"),
     ),
   )
 }
@@ -311,7 +311,7 @@ fn step_12() -> Unit raise {
     @simp.rewrite_tac(@list.List([suc_def(), zero_def()])),
     t11,
   )
-  not_suc_v1_c.set(@tactics.prove(@parser.parse_term("forall n. ~(SUC n = _0)"), t12))
+  not_suc_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, !(SUC(n) == _0)"), t12))
 }
 
 ///|
@@ -327,7 +327,7 @@ pub fn not_suc_v1() -> @kernel.Thm {
 /// SUC_INJ
 fn step_13() -> Unit raise {
   let t36 = @simp.rewrite_tac(@list.List([num_tydef().0]))
-  let t32 = @parser.parse_term("mk_num")
+  let t32 = @term_syntax.parse_term("mk_num")
   let t35 = @tactics.disch_then(fn(
     x34 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -406,7 +406,7 @@ fn step_13() -> Unit raise {
     @tactics.all_tac,
   ])
   let t25 = @tactics.subgoal_then(
-    @parser.parse_term("forall p. NUM_REP (IND_SUC (dest_num p))"),
+    @term_syntax.parse_term("∀ p : Num, NUM_REP(IND_SUC(dest_num(p)))"),
     fn(
       x22 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -454,7 +454,7 @@ fn step_13() -> Unit raise {
       }
     },
   )
-  let t18 = @parser.parse_term("dest_num")
+  let t18 = @term_syntax.parse_term("dest_num")
   let t21 = @tactics.pop_assum(fn(
     x20 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -563,7 +563,7 @@ fn step_13() -> Unit raise {
     t36,
   )
   suc_inj_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. SUC m = SUC n <=> m = n"), t37),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, (SUC(m) == SUC(n)) == (m == n)"), t37),
   )
 }
 
@@ -580,7 +580,7 @@ pub fn suc_inj() -> @kernel.Thm {
 /// num_INDUCTION
 fn step_14() -> Unit raise {
   let t77 = @simp.rewrite_tac(@list.List([num_tydef().0, num_tydef().1]))
-  let t74 = @parser.parse_term("dest_num n")
+  let t74 = @term_syntax.parse_term("dest_num((n : Num))")
   let t78 = @tactics.then_tac(
     @tactics.disch_then(fn(
       x76 : @kernel.Thm,
@@ -763,7 +763,7 @@ fn step_14() -> Unit raise {
   ])
   let t69 = @tactics.thenl(
     @tactics.subgoal_then(
-      @parser.parse_term("mk_num(IND_SUC i) = SUC(mk_num i)"),
+      @term_syntax.parse_term("mk_num(IND_SUC((i : Ind))) == SUC(mk_num(i))"),
       fn(
         x53 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -830,7 +830,7 @@ fn step_14() -> Unit raise {
   )
   let t38 = @tactics.mp_tac(
     @bool.spec(
-      @parser.parse_term("\\i. NUM_REP i /\\ P(mk_num i):bool"),
+      @term_syntax.parse_term("(i : Ind) => NUM_REP(i) && (P : (Num) -> Bool)(mk_num(i))"),
       num_rep_induct(),
     ),
   )
@@ -1076,7 +1076,7 @@ fn step_14() -> Unit raise {
   )
   num_induction_v1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. P(_0) /\\ (forall n. P(n) ==> P(SUC n)) ==> forall n. P n"),
+      @term_syntax.parse_term("∀ P : (Num) -> Bool, P(_0) && (∀ n : Num, P(n) → P(SUC(n))) → (∀ n : Num, P(n))"),
       t80,
     ),
   )
@@ -1268,7 +1268,7 @@ fn step_15() -> Unit raise {
     @tactics.then_tac(@tactics.ap_thm_tac, @tactics.ap_term_tac),
     t128,
   )
-  let t127 = @parser.parse_term("y:A")
+  let t127 = @term_syntax.parse_term("(y : A)")
   let t130 = @list.List([
     @tactics.map_every(
       fn(
@@ -1317,13 +1317,13 @@ fn step_15() -> Unit raise {
           s125(x126)
         }
       },
-      @list.List([@parser.parse_term("(f:A->num->A) y n"), t127]),
+      @list.List([@term_syntax.parse_term("(f : (A, Num) -> A)((y : A), (n : Num))"), t127]),
     ),
     t129,
   ])
   let t123 = @simp.asm_rewrite_tac(@list.List([]))
   let t122 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t116 = @parser.parse_term("y:A")
+  let t116 = @term_syntax.parse_term("(y : A)")
   let t121 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       (x117 : @kernel.Thm) => @tactics.x_choose_tac(t116, x117),
@@ -1376,7 +1376,7 @@ fn step_15() -> Unit raise {
     ),
   )
   let t115 = @simp.rewrite_tac(@list.List([@theorems.exists_unique_thm()]))
-  let t114 = @tactics.undisch_tac(@parser.parse_term("?!y. PRG (n:num) (y:A)"))
+  let t114 = @tactics.undisch_tac(@term_syntax.parse_term("existsunique((y : A) => (PRG : (Num, A) -> Bool)((n : Num), y))"))
   let t113 = @simp.rewrite_tac(@list.List([@theorems.unwind_thm1()]))
   let t112 = @simp.rewrite_tac(
     @list.List([
@@ -1457,7 +1457,7 @@ fn step_15() -> Unit raise {
     t145,
   ])
   let t104 = @tactics.subgoal_then(
-    @parser.parse_term("forall n:num. ?!y:A. PRG n y"),
+    @term_syntax.parse_term("∀ n : Num, existsunique((y : A) => (PRG : (Num, A) -> Bool)(n, y))"),
     fn(
       x101 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1864,7 +1864,7 @@ pub fn num_axiom() -> @kernel.Thm {
 /// NOT_SUC, num_INDUCTION, num_Axiom
 fn step_17() -> Unit raise {
   let t155 = @simp.rewrite_tac(@list.List([numeral()]))
-  let th = @tactics.prove(@parser.parse_term("_0 = 0"), t155)
+  let th = @tactics.prove(@term_syntax.parse_term("_0 == 0"), t155)
   match
     @lib.map(
       @simp.gen_rewrite_rule(
@@ -1938,7 +1938,7 @@ pub fn num_recursion() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let t160 = @tactics.then_tac(induct_tac, @meson.meson_tac(@list.List([])))
   num_cases_c.set(
-    @tactics.prove(@parser.parse_term("forall m. (m = 0) \\/ (?n. m = SUC n)"), t160),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, m == 0 || (∃ n : Num, m == SUC(n))"), t160),
   )
 }
 
@@ -1973,9 +1973,9 @@ fn step_22() -> Unit raise {
       @parser.parse_term("@fn. fn 0 = 0 /\\ (forall n. fn (SUC n) = SUC (SUC(fn n)))"),
     ),
   )
-  let t161 = @parser.parse_term("\\m n:num. SUC(SUC m)")
+  let t161 = @term_syntax.parse_term("(m : Num) => (n : Num) => SUC(SUC(m))")
   let th = @equal.beta_rule(
-    @bool.ispecl(@list.List([@parser.parse_term("0"), t161]), num_recursion()),
+    @bool.ispecl(@list.List([@term_syntax.parse_term("0"), t161]), num_recursion()),
   )
   let t162 = @class.select_rule(th)
   bit0_def_c.set(@simp.rewrite_rule(@list.List([@equal.gsym(def)]))(t162))
@@ -1999,7 +1999,7 @@ fn step_23() -> Unit raise {
   let num_ty = @basics.dest_fun_ty(funn_ty).1
   let n_tm = @kernel.mk_var("n", num_ty)
   let bit1_tm = @kernel.mk_var("BIT1", funn_ty)
-  let t163 = @parser.parse_term("SUC (BIT0 n)")
+  let t163 = @term_syntax.parse_term("SUC(BIT0((n : Num)))")
   bit1_def_c.set(
     @pair.new_definition(@basics.mk_eq(@kernel.mk_comb(bit1_tm, n_tm), t163)),
   )

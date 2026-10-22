@@ -3,7 +3,7 @@
 ///|
 /// hashek_def
 fn step_1() -> Unit raise {
-  hashek_def_c.set(@drule.new_definition(@parser.parse_term("hashek = T")))
+  hashek_def_c.set(@drule.new_definition(@term_syntax.parse_term("(hashek : Bool) == true")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn hashek_def() -> @kernel.Thm {
 ///|
 /// hashek_tm
 fn step_2() -> Unit raise {
-  hashek_tm_c.set(@parser.parse_term("hashek"))
+  hashek_tm_c.set(@term_syntax.parse_term("hashek"))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn hashek_tm() -> @kernel.Term {
 /// hashek_thm
 fn step_3() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([hashek_def()]))
-  hashek_thm_c.set(@tactics.prove(@parser.parse_term("hashek"), t1))
+  hashek_thm_c.set(@tactics.prove(@term_syntax.parse_term("hashek"), t1))
 }
 
 ///|
@@ -52,7 +52,7 @@ fn step_4() -> Unit raise {
   let t2 = @simp.simp_tac(@list.List([hashek_def()]))
   hashek_prop_c.set(
     @tactics.prove(
-      @parser.parse_term("((x /\\ hashek) ==> (y /\\ hashek)) ==> (x ==> y)"),
+      @term_syntax.parse_term("((x : Bool) && hashek → (y : Bool) && hashek) → x → y"),
       t2,
     ),
   )
@@ -71,7 +71,7 @@ pub fn hashek_prop() -> @kernel.Thm {
 /// hashek_eq
 fn step_5() -> Unit raise {
   let t3 = @simp.simp_tac(@list.List([hashek_def()]))
-  hashek_eq_c.set(@tactics.prove(@parser.parse_term("~ hashek <=> F"), t3))
+  hashek_eq_c.set(@tactics.prove(@term_syntax.parse_term("!hashek == false"), t3))
 }
 
 ///|
@@ -523,7 +523,7 @@ pub fn mark_concl(x4 : String) -> @tactics.Tactic raise {
 ///|
 /// MARK_ASSUMS
 fn step_6() -> Unit raise {
-  let t37 = @parser.parse_term("hashek")
+  let t37 = @term_syntax.parse_term("hashek")
   mark_assums_c.set(
     @tactics.rule_assum_tac((x38 : @kernel.Thm) => @bool.disch(t37, x38)),
   )
@@ -2497,7 +2497,7 @@ pub fn[TA] strategy(
 fn step_12() -> Unit raise {
   let t356 = @tactics.conv_tac(@class.taut)
   let t355 = @simp.asm_rewrite_tac(@list.List([]))
-  let t354 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
+  let t354 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (y : A)"))
   let t357 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@simp.rewrite_tac(@list.List([])), t354),
@@ -2540,10 +2540,10 @@ fn step_12() -> Unit raise {
     })(t358),
   )
   let imp_elim_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(
-    @class.taut(@parser.parse_term("(a ==> b) <=> ~a \\/ b")),
+    @class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) == (!a || b)")),
   )
   let eq_elim_rule : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(
-    @class.taut(@parser.parse_term("(a <=> b) ==> b \\/ ~a")),
+    @class.taut(@term_syntax.parse_term("(a : Bool) == (b : Bool) → b || !a")),
   )
   let veq_tm = @kernel.rator(@kernel.rator(@kernel.concl(@lib.hd(eq_thms))))
   fn tm_consts(
@@ -8457,18 +8457,18 @@ pub fn disj_cases_list(
 ///|
 /// thecops.ml:1256
 fn step_18() -> Unit raise {
-  let t967 = @parser.parse_term("c \\/ b \\/ a")
+  let t967 = @term_syntax.parse_term("(c : Bool) || (b : Bool) || (a : Bool)")
   let t963 = @lib.op_bar_gt(
-    @class.taut(@parser.parse_term("c ==> c \\/ b \\/ a")),
+    @class.taut(@term_syntax.parse_term("(c : Bool) → c || (b : Bool) || (a : Bool)")),
     @bool.undisch,
   )
   let t964 = @lib.op_bar_gt(
-    @class.taut(@parser.parse_term("b ==> c \\/ b \\/ a")),
+    @class.taut(@term_syntax.parse_term("(b : Bool) → (c : Bool) || b || (a : Bool)")),
     @bool.undisch,
   )
   let t965 = @list.List([
     @lib.op_bar_gt(
-      @class.taut(@parser.parse_term("a ==> c \\/ b \\/ a")),
+      @class.taut(@term_syntax.parse_term("(a : Bool) → (c : Bool) || (b : Bool) || a")),
       @bool.undisch,
     ),
     t964,
@@ -8476,7 +8476,7 @@ fn step_18() -> Unit raise {
   ])
   if @lib.op_bar_gt(
       disj_cases_list(
-        @kernel.assume_rule(@parser.parse_term("a \\/ b \\/ c")),
+        @kernel.assume_rule(@term_syntax.parse_term("(a : Bool) || (b : Bool) || (c : Bool)")),
         t965,
       ),
       fn(x966 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x966) },
@@ -8519,10 +8519,10 @@ pub fn contradiction(
 ///|
 /// thecops.ml:1269
 fn step_19() -> Unit raise {
-  let t974 = @parser.parse_term("F")
-  let t973 = @kernel.assume_rule(@parser.parse_term("p:bool"))
+  let t974 = @term_syntax.parse_term("false")
+  let t973 = @kernel.assume_rule(@term_syntax.parse_term("(p : Bool)"))
   if @kernel.concl(
-      contradiction(@kernel.assume_rule(@parser.parse_term("~p")), t973),
+      contradiction(@kernel.assume_rule(@term_syntax.parse_term("!(p : Bool)")), t973),
     ) ==
     t974 {
     ()
@@ -8534,10 +8534,10 @@ fn step_19() -> Unit raise {
 ///|
 /// thecops.ml:1270
 fn step_20() -> Unit raise {
-  let t976 = @parser.parse_term("F")
-  let t975 = @kernel.assume_rule(@parser.parse_term("~p"))
+  let t976 = @term_syntax.parse_term("false")
+  let t975 = @kernel.assume_rule(@term_syntax.parse_term("!(p : Bool)"))
   if @kernel.concl(
-      contradiction(@kernel.assume_rule(@parser.parse_term("p:bool")), t975),
+      contradiction(@kernel.assume_rule(@term_syntax.parse_term("(p : Bool)")), t975),
     ) ==
     t976 {
     ()

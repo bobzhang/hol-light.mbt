@@ -3,13 +3,13 @@
 ///|
 /// wz_maxima_binops
 fn step_1() -> Unit raise {
-  let t1 = (@parser.parse_term("(spow):real->real->real"), "^")
-  let t2 = (@parser.parse_term("(pow):real->num->real"), "^")
-  let t3 = (@parser.parse_term("(EXP):num->num->num"), "^")
-  let t4 = (@parser.parse_term("(/):real->real->real"), "/")
-  let t5 = (@parser.parse_term("( * ):real->real->real"), "*")
-  let t6 = (@parser.parse_term("(-):real->real->real"), "-")
-  let t7 = (@parser.parse_term("(+):real->real->real"), "+")
+  let t1 = (@term_syntax.parse_term("spow"), "^")
+  let t2 = (@term_syntax.parse_term("real_pow"), "^")
+  let t3 = (@term_syntax.parse_term("EXP"), "^")
+  let t4 = (@term_syntax.parse_term("real_div"), "/")
+  let t5 = (@term_syntax.parse_term("real_mul"), "*")
+  let t6 = (@term_syntax.parse_term("real_sub"), "-")
+  let t7 = (@term_syntax.parse_term("real_add"), "+")
   let t8 = (@parser.parse_term("( * ):num->num->num"), "*")
   let t9 = (@parser.parse_term("(-):num->num->num"), "-")
   wz_maxima_binops_c.set(@list.List([(@parser.parse_term("(+):num->num->num"), "+"), t9, t8, t7, t6, t5, t4, t3, t2, t1]))
@@ -27,7 +27,7 @@ pub fn wz_maxima_binops() -> @list.List[(@kernel.Term, String)] {
 ///|
 /// wz_maxima_real_of_num
 fn step_2() -> Unit raise {
-  wz_maxima_real_of_num_c.set(@parser.parse_term("(&):num->real"))
+  wz_maxima_real_of_num_c.set(@term_syntax.parse_term("real_of_num"))
 }
 
 ///|
@@ -42,7 +42,7 @@ pub fn wz_maxima_real_of_num() -> @kernel.Term {
 ///|
 /// wz_maxima_neg
 fn step_3() -> Unit raise {
-  wz_maxima_neg_c.set(@parser.parse_term("(--) :real->real"))
+  wz_maxima_neg_c.set(@term_syntax.parse_term("real_neg"))
 }
 
 ///|
@@ -57,7 +57,7 @@ pub fn wz_maxima_neg() -> @kernel.Term {
 ///|
 /// wz_maxima_binom
 fn step_4() -> Unit raise {
-  wz_maxima_binom_c.set(@parser.parse_term("binom:num#num->num"))
+  wz_maxima_binom_c.set(@term_syntax.parse_term("binom"))
 }
 
 ///|
@@ -72,7 +72,7 @@ pub fn wz_maxima_binom() -> @kernel.Term {
 ///|
 /// wz_maxima_rbinom
 fn step_5() -> Unit raise {
-  wz_maxima_rbinom_c.set(@parser.parse_term("rbinom:real#real->real"))
+  wz_maxima_rbinom_c.set(@term_syntax.parse_term("rbinom"))
 }
 
 ///|
@@ -87,7 +87,7 @@ pub fn wz_maxima_rbinom() -> @kernel.Term {
 ///|
 /// wz_maxima_fact
 fn step_6() -> Unit raise {
-  wz_maxima_fact_c.set(@parser.parse_term("FACT:num->num"))
+  wz_maxima_fact_c.set(@term_syntax.parse_term("FACT"))
 }
 
 ///|

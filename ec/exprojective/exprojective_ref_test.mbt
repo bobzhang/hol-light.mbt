@@ -59822,8 +59822,8 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|Translating certificate to HOL inferences
       #|Warning: inventing type variables
       #|EC/exprojective quotations (552):
-      #|  exprojective (f:A ring) (x,y) (X,Y,Z,W) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n        W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\\n        ring_div f X Z = x /\\\n        ring_div f Y Z = y /\\\n        ring_div f W Z = ring_mul f x y
-      #|  forall f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y /\\\n             ring_mul f W Z = ring_mul f X Y)
+      #|  (exprojective : (Ring[A], (A, A), (A, A, A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A)), ((X : A), (Y : A), (Z : A), (W : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(X, ring_carrier(f)) && IN(Y, ring_carrier(f)) && IN(W, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_div(f, X, Z) == x && ring_div(f, Y, Z) == y && ring_div(f, W, Z) == ring_mul(f, x, y))
+      #|  \226\136\128 f : Ring[A], \226\136\128 x : A, \226\136\128 y : A, \226\136\128 X : A, \226\136\128 Y : A, \226\136\128 Z : A, \226\136\128 W : A, field(f) \226\134\146 exprojective(f, (x, y), (X, Y, Z, W)) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(X, ring_carrier(f)) && IN(Y, ring_carrier(f)) && IN(W, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_mul(f, x, Z) == X && ring_mul(f, y, Z) == Y && ring_mul(f, W, Z) == ring_mul(f, X, Y))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -59902,8 +59902,8 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  projective (f:A ring) (x,y) (X,Y,Z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        X IN ring_carrier f /\\ Y IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\\n        ring_div f X Z = x /\\\n        ring_div f Y Z = y
-      #|  forall f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y)
+      #|  (projective : (Ring[A], (A, A), (A, A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A)), ((X : A), (Y : A), (Z : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(X, ring_carrier(f)) && IN(Y, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_div(f, X, Z) == x && ring_div(f, Y, Z) == y)
+      #|  \226\136\128 f : Ring[A], \226\136\128 x : A, \226\136\128 y : A, \226\136\128 X : A, \226\136\128 Y : A, \226\136\128 Z : A, field(f) \226\134\146 projective(f, (x, y), (X, Y, Z)) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(X, ring_carrier(f)) && IN(Y, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_mul(f, x, Z) == X && ring_mul(f, y, Z) == Y)
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -59948,7 +59948,7 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  forall f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             exprojective f (x,y)\n              (X,Y,Z,ring_div f (ring_mul f X Y) Z))
+      #|  \226\136\128 f : Ring[A], \226\136\128 x : A, \226\136\128 y : A, \226\136\128 X : A, \226\136\128 Y : A, \226\136\128 Z : A, field(f) \226\134\146 projective(f, (x, y), (X, Y, Z)) == exprojective(f, (x, y), (X, Y, Z, ring_div(f, ring_mul(f, X, Y), Z)))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -59960,34 +59960,7 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  forall f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             ring_div f (ring_mul f X Y) Z = W)
-      #|  :A
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  :A
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  forall f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             W IN ring_carrier f /\\\n             ring_mul f X Y = ring_mul f W Z)
+      #|  \226\136\128 f : Ring[A], \226\136\128 x : A, \226\136\128 y : A, \226\136\128 X : A, \226\136\128 Y : A, \226\136\128 Z : A, \226\136\128 W : A, field(f) \226\134\146 exprojective(f, (x, y), (X, Y, Z, W)) == (projective(f, (x, y), (X, Y, Z)) && ring_div(f, ring_mul(f, X, Y), Z) == W)
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -60014,8 +59987,35 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  edwards_excurve (f,a,d) (X,Y,Z,W) <=>\n     X IN ring_carrier f /\\\n     Y IN ring_carrier f /\\\n     Z IN ring_carrier f /\\\n     W IN ring_carrier f /\\\n     ~(Z = ring_0 f) /\\\n     ring_add f (ring_mul f a (ring_pow f X 2)) (ring_pow f Y 2) =\n     ring_add f (ring_pow f Z 2) (ring_mul f d (ring_pow f W 2))
-      #|  forall f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        exprojective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_excurve (f,a,d) Q)
+      #|  \226\136\128 f : Ring[A], \226\136\128 x : A, \226\136\128 y : A, \226\136\128 X : A, \226\136\128 Y : A, \226\136\128 Z : A, \226\136\128 W : A, field(f) \226\134\146 exprojective(f, (x, y), (X, Y, Z, W)) == (projective(f, (x, y), (X, Y, Z)) && IN(W, ring_carrier(f)) && ring_mul(f, X, Y) == ring_mul(f, W, Z))
+      #|  :A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  :A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  (edwards_excurve : ((Ring[_], _, _), (_, _, _, _)) -> Bool)(((f : Ring[_]), (a : _), (d : _)), ((X : _), (Y : _), (Z : _), (W : _))) == (IN(X, ring_carrier(f)) && IN(Y, ring_carrier(f)) && IN(Z, ring_carrier(f)) && IN(W, ring_carrier(f)) && !(Z == ring_0(f)) && ring_add(f, ring_mul(f, a, ring_pow(f, X, 2)), ring_pow(f, Y, 2)) == ring_add(f, ring_pow(f, Z, 2), ring_mul(f, d, ring_pow(f, W, 2))))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), \226\136\128 Q : (A, A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && exprojective(f, p, Q) \226\134\146 edwards_curve((f, a, d), p) == edwards_excurve((f, a, d), Q)
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -60033,8 +60033,8 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  edwards_pcurve (f,a,d) (X,Y,Z) <=>\n     X IN ring_carrier f /\\\n     Y IN ring_carrier f /\\\n     Z IN ring_carrier f /\\\n     ~(Z = ring_0 f) /\\\n     ring_mul f (ring_pow f Z 2)\n                (ring_add f (ring_mul f a (ring_pow f X 2)) (ring_pow f Y 2)) =\n     ring_add f (ring_pow f Z 4)\n     (ring_mul f d (ring_mul f (ring_pow f X 2) (ring_pow f Y 2)))
-      #|  forall f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        projective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_pcurve (f,a,d) Q)
+      #|  (edwards_pcurve : ((Ring[_], _, _), (_, _, _)) -> Bool)(((f : Ring[_]), (a : _), (d : _)), ((X : _), (Y : _), (Z : _))) == (IN(X, ring_carrier(f)) && IN(Y, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_mul(f, ring_pow(f, Z, 2), ring_add(f, ring_mul(f, a, ring_pow(f, X, 2)), ring_pow(f, Y, 2))) == ring_add(f, ring_pow(f, Z, 4), ring_mul(f, d, ring_mul(f, ring_pow(f, X, 2), ring_pow(f, Y, 2)))))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 p : (A, A), \226\136\128 Q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && projective(f, p, Q) \226\134\146 edwards_curve((f, a, d), p) == edwards_pcurve((f, a, d), Q)
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -60050,15 +60050,15 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  edwards_exprojadd (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n  ring_mul f (ring_add f (ring_mul f X1 Y2) (ring_mul f Y1 X2))\n   (ring_sub f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Y1 Y2) (ring_mul f a (ring_mul f X1 X2)))\n   (ring_add f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2)))\n   (ring_add f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Y1 Y2) (ring_mul f a (ring_mul f X1 X2)))\n   (ring_add f (ring_mul f X1 Y2) (ring_mul f Y1 X2))
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojadd (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))
+      #|  (edwards_exprojadd : ((Ring[A], A, A), (A, A, A, A), (A, A, A, A)) -> (A, A, A, A))(((f : Ring[A]), (a : A), (d : A)), ((X1 : A), (Y1 : A), (Z1 : A), (T1 : A)), ((X2 : A), (Y2 : A), (Z2 : A), (T2 : A))) == (ring_mul(f, ring_add(f, ring_mul(f, X1, Y2), ring_mul(f, Y1, X2)), ring_sub(f, ring_mul(f, Z1, Z2), ring_mul(f, d, ring_mul(f, T1, T2)))), ring_mul(f, ring_sub(f, ring_mul(f, Y1, Y2), ring_mul(f, a, ring_mul(f, X1, X2))), ring_add(f, ring_mul(f, Z1, Z2), ring_mul(f, d, ring_mul(f, T1, T2)))), ring_mul(f, ring_sub(f, ring_mul(f, Z1, Z2), ring_mul(f, d, ring_mul(f, T1, T2))), ring_add(f, ring_mul(f, Z1, Z2), ring_mul(f, d, ring_mul(f, T1, T2)))), ring_mul(f, ring_sub(f, ring_mul(f, Y1, Y2), ring_mul(f, a, ring_mul(f, X1, X2))), ring_add(f, ring_mul(f, X1, Y2), ring_mul(f, Y1, X2))))
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, \226\136\128 T1 : A, \226\136\128 x2 : A, \226\136\128 y2 : A, \226\136\128 X2 : A, \226\136\128 Y2 : A, \226\136\128 Z2 : A, \226\136\128 T2 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && edwards_curve((f, a, d), (x2, y2)) && exprojective(f, (x1, y1), (X1, Y1, Z1, T1)) && exprojective(f, (x2, y2), (X2, Y2, Z2, T2)) \226\134\146 exprojective(f, edwards_add((f, a, d), (x1, y1), (x2, y2)), edwards_exprojadd((f, a, d), (X1, Y1, Z1, T1), (X2, Y2, Z2, T2)))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -60144,14 +60144,14 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
       #|  edwards_exprojadd4 (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n    let X3,Y3,Z3,T3 = edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X2,Y2,Z2,T2) in\n    (ring_mul f (ring_of_num f 4) X3,\n     ring_mul f (ring_of_num f 4) Y3,\n     ring_mul f (ring_of_num f 4) Z3,\n     ring_mul f (ring_of_num f 4) T3)
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojadd4 (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, \226\136\128 T1 : A, \226\136\128 x2 : A, \226\136\128 y2 : A, \226\136\128 X2 : A, \226\136\128 Y2 : A, \226\136\128 Z2 : A, \226\136\128 T2 : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && edwards_curve((f, a, d), (x2, y2)) && exprojective(f, (x1, y1), (X1, Y1, Z1, T1)) && exprojective(f, (x2, y2), (X2, Y2, Z2, T2)) \226\134\146 exprojective(f, edwards_add((f, a, d), (x1, y1), (x2, y2)), edwards_exprojadd4((f, a, d), (X1, Y1, Z1, T1), (X2, Y2, Z2, T2)))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -60237,14 +60237,14 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
       #|  edwards_exprojaddn (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n    let X3,Y3,Z3,T3 = edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X2,Y2,Z2,T2) in\n    (ring_neg f X3,\n     ring_neg f Y3,\n     ring_neg f Z3,\n     ring_neg f T3)
-      #|  y2:A
-      #|  x2:A
-      #|  y1:A
-      #|  x1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1 x2 y2 X2 Y2 Z2 T2.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\ edwards_curve(f,a,d) (x2,y2) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1) /\\\n        exprojective f (x2,y2) (X2,Y2,Z2,T2)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x2,y2))\n                           (edwards_exprojaddn (f,a,d)\n                             (X1,Y1,Z1,T1) (X2,Y2,Z2,T2))
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, \226\136\128 T1 : A, \226\136\128 x2 : A, \226\136\128 y2 : A, \226\136\128 X2 : A, \226\136\128 Y2 : A, \226\136\128 Z2 : A, \226\136\128 T2 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && edwards_curve((f, a, d), (x2, y2)) && exprojective(f, (x1, y1), (X1, Y1, Z1, T1)) && exprojective(f, (x2, y2), (X2, Y2, Z2, T2)) \226\134\146 exprojective(f, edwards_add((f, a, d), (x1, y1), (x2, y2)), edwards_exprojaddn((f, a, d), (X1, Y1, Z1, T1), (X2, Y2, Z2, T2)))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -60329,51 +60329,51 @@ test "EC/exprojective matches EC/exprojective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  edwards_prexprojdouble (f,a:A,d:A) (X1,Y1,Z1) =\n     (ring_mul f (ring_of_num f 2)\n         (ring_mul f X1\n         (ring_mul f Y1\n         (ring_sub f\n          (ring_sub f (ring_mul f (ring_of_num f 2) (ring_pow f Z1 2))\n          (ring_pow f Y1 2))\n         (ring_mul f a (ring_pow f X1 2))))),\n      ring_mul f\n         (ring_add f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2)))\n         (ring_sub f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2))),\n      ring_mul f\n         (ring_add f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2)))\n         (ring_sub f\n          (ring_sub f (ring_mul f (ring_of_num f 2) (ring_pow f Z1 2))\n          (ring_pow f Y1 2))\n         (ring_mul f a (ring_pow f X1 2))),\n      ring_mul f (ring_of_num f 2)\n         (ring_mul f X1\n         (ring_mul f Y1\n         (ring_sub f (ring_pow f Y1 2)\n                     (ring_mul f a (ring_pow f X1 2))))))
-      #|  forall f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) =\n         edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)
+      #|  (edwards_prexprojdouble : ((Ring[A], A, A), (A, A, A)) -> (A, A, A, A))(((f : Ring[A]), (a : A), (d : A)), ((X1 : A), (Y1 : A), (Z1 : A))) == (ring_mul(f, ring_of_num(f, 2), ring_mul(f, X1, ring_mul(f, Y1, ring_sub(f, ring_sub(f, ring_mul(f, ring_of_num(f, 2), ring_pow(f, Z1, 2)), ring_pow(f, Y1, 2)), ring_mul(f, a, ring_pow(f, X1, 2)))))), ring_mul(f, ring_add(f, ring_pow(f, Y1, 2), ring_mul(f, a, ring_pow(f, X1, 2))), ring_sub(f, ring_pow(f, Y1, 2), ring_mul(f, a, ring_pow(f, X1, 2)))), ring_mul(f, ring_add(f, ring_pow(f, Y1, 2), ring_mul(f, a, ring_pow(f, X1, 2))), ring_sub(f, ring_sub(f, ring_mul(f, ring_of_num(f, 2), ring_pow(f, Z1, 2)), ring_pow(f, Y1, 2)), ring_mul(f, a, ring_pow(f, X1, 2)))), ring_mul(f, ring_of_num(f, 2), ring_mul(f, X1, ring_mul(f, Y1, ring_sub(f, ring_pow(f, Y1, 2), ring_mul(f, a, ring_pow(f, X1, 2)))))))
+      #|  \226\136\128 f : Ring[_], \226\136\128 a : _, \226\136\128 d : _, \226\136\128 X1 : _, \226\136\128 Y1 : _, \226\136\128 Z1 : _, \226\136\128 T1 : _, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_excurve((f, a, d), (X1, Y1, Z1, T1)) \226\134\146 edwards_prexprojdouble((f, a, d), (X1, Y1, Z1)) == edwards_exprojadd((f, a, d), (X1, Y1, Z1, T1), (X1, Y1, Z1, T1))
       #|  :A
       #|  :A
       #|  :A
       #|  :A
-      #|  (X1:A,Y1:A,Z1:A,T1:A)
-      #|  (x1:A,y1:A)
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  T1:A
-      #|  Z1:A
-      #|  Y1:A
-      #|  X1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  T1:A = ring_div f (ring_mul f X1 Y1) Z1
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_prexprojdouble (f,a,d) (X1,Y1,Z1))
-      #|  edwards_exprojdouble (f,a:A,d) (X1,Y1,Z1,T1:A) =\n    edwards_prexprojdouble (f,a,d) (X1,Y1,Z1)
-      #|  forall f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_exprojdouble (f,a,d) (X1,Y1,Z1,T1) =\n         edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)
+      #|  ((X1 : A), (Y1 : A), (Z1 : A), (T1 : A))
+      #|  ((x1 : A), (y1 : A))
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (T1 : A)
+      #|  (Z1 : A)
+      #|  (Y1 : A)
+      #|  (X1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (T1 : A) == ring_div((f : Ring[A]), ring_mul(f, (X1 : A), (Y1 : A)), (Z1 : A))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && projective(f, (x1, y1), (X1, Y1, Z1)) \226\134\146 exprojective(f, edwards_add((f, a, d), (x1, y1), (x1, y1)), edwards_prexprojdouble((f, a, d), (X1, Y1, Z1)))
+      #|  (edwards_exprojdouble : ((Ring[A], A, A), (A, A, A, A)) -> (A, A, A, A))(((f : Ring[A]), (a : A), (d : A)), ((X1 : A), (Y1 : A), (Z1 : A), (T1 : A))) == edwards_prexprojdouble((f, a, d), (X1, Y1, Z1))
+      #|  \226\136\128 f : Ring[_], \226\136\128 a : _, \226\136\128 d : _, \226\136\128 X1 : _, \226\136\128 Y1 : _, \226\136\128 Z1 : _, \226\136\128 T1 : _, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_excurve((f, a, d), (X1, Y1, Z1, T1)) \226\134\146 edwards_exprojdouble((f, a, d), (X1, Y1, Z1, T1)) == edwards_exprojadd((f, a, d), (X1, Y1, Z1, T1), (X1, Y1, Z1, T1))
       #|  :A
       #|  :A
       #|  :A
       #|  :A
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1 T1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        exprojective f (x1,y1) (X1,Y1,Z1,T1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_exprojdouble (f,a,d) (X1,Y1,Z1,T1))
-      #|  edwards_projdouble (f,a:A,d) (X1,Y1,Z1) =\n    let X2,Y2,Z2,T2 = edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) in\n    (X2,Y2,Z2)
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> projective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                         (edwards_projdouble (f,a,d) (X1,Y1,Z1))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, \226\136\128 T1 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && exprojective(f, (x1, y1), (X1, Y1, Z1, T1)) \226\134\146 exprojective(f, edwards_add((f, a, d), (x1, y1), (x1, y1)), edwards_exprojdouble((f, a, d), (X1, Y1, Z1, T1)))
+      #|  (edwards_projdouble : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (d : A)), ((X1 : A), (Y1 : A), (Z1 : A))) == LET(GABS((f : ((A, A, A, A)) -> (A, A, A)) => \226\136\128 X2 : A, \226\136\128 Y2 : A, \226\136\128 Z2 : A, \226\136\128 T2 : A, GEQ(f((X2, Y2, Z2, T2)), LET_END((X2, Y2, Z2)))), edwards_prexprojdouble((f, a, d), (X1, Y1, Z1)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && projective(f, (x1, y1), (X1, Y1, Z1)) \226\134\146 projective(f, edwards_add((f, a, d), (x1, y1), (x1, y1)), edwards_projdouble((f, a, d), (X1, Y1, Z1)))
       #|  edwards_prexprojdoublen (f,a:A,d:A) (X1,Y1,Z1) =\n    let X3,Y3,Z3,T3 = edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) in\n    (ring_neg f X3,\n     ring_neg f Y3,\n     ring_neg f Z3,\n     ring_neg f T3)
-      #|  forall f a d X1 Y1 Z1 T1.\n     field f /\\\n     a IN ring_carrier f /\\ d IN ring_carrier f /\\\n     edwards_excurve (f,a,d) (X1,Y1,Z1,T1)\n     ==> edwards_prexprojdoublen (f,a,d) (X1,Y1,Z1) =\n         edwards_exprojaddn (f,a,d) (X1,Y1,Z1,T1) (X1,Y1,Z1,T1)
-      #|  (X1:A,Y1:A,Z1:A,T1:A)
-      #|  (x1:A,y1:A)
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  T1:A
-      #|  Z1:A
-      #|  Y1:A
-      #|  X1:A
-      #|  d:A
-      #|  a:A
-      #|  f:A ring
-      #|  T1:A = ring_div f (ring_mul f X1 Y1) Z1
-      #|  forall(f:A ring) a d x1 y1 X1 Y1 Z1.\n        field f /\\\n        a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        edwards_nonsingular(f,a,d) /\\\n        edwards_curve(f,a,d) (x1,y1) /\\\n        projective f (x1,y1) (X1,Y1,Z1)\n        ==> exprojective f (edwards_add (f,a,d) (x1,y1) (x1,y1))\n                           (edwards_prexprojdoublen (f,a,d) (X1,Y1,Z1))
+      #|  \226\136\128 f : Ring[_], \226\136\128 a : _, \226\136\128 d : _, \226\136\128 X1 : _, \226\136\128 Y1 : _, \226\136\128 Z1 : _, \226\136\128 T1 : _, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_excurve((f, a, d), (X1, Y1, Z1, T1)) \226\134\146 edwards_prexprojdoublen((f, a, d), (X1, Y1, Z1)) == edwards_exprojaddn((f, a, d), (X1, Y1, Z1, T1), (X1, Y1, Z1, T1))
+      #|  ((X1 : A), (Y1 : A), (Z1 : A), (T1 : A))
+      #|  ((x1 : A), (y1 : A))
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (T1 : A)
+      #|  (Z1 : A)
+      #|  (Y1 : A)
+      #|  (X1 : A)
+      #|  (d : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  (T1 : A) == ring_div((f : Ring[A]), ring_mul(f, (X1 : A), (Y1 : A)), (Z1 : A))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 d : A, \226\136\128 x1 : A, \226\136\128 y1 : A, \226\136\128 X1 : A, \226\136\128 Y1 : A, \226\136\128 Z1 : A, field(f) && IN(a, ring_carrier(f)) && IN(d, ring_carrier(f)) && edwards_nonsingular((f, a, d)) && edwards_curve((f, a, d), (x1, y1)) && projective(f, (x1, y1), (X1, Y1, Z1)) \226\134\146 exprojective(f, edwards_add((f, a, d), (x1, y1), (x1, y1)), edwards_prexprojdoublen((f, a, d), (X1, Y1, Z1)))
       #|exprojective =  |- ((#=:fun(bool,fun(bool,bool)) (((#exprojective:fun(ring('A),fun(prod('A,'A),fun(prod('A,prod('A,prod('A,'A))),bool))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)) ((#,:fun('A,fun(prod('A,prod('A,'A)),prod('A,prod('A,prod('A,'A))))) X:'A) ((#,:fun('A,fun(prod('A,'A),prod('A,prod('A,'A)))) Y:'A) ((#,:fun('A,fun('A,prod('A,'A))) Z:'A) W:'A))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) X:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) W:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Z:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) Z:'A) (#ring_0:fun(ring('A),'A) f:ring('A))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X:'A) Z:'A)) x:'A)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) Y:'A) Z:'A)) y:'A)) ((#=:fun('A,fun('A,bool)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) W:'A) Z:'A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) y:'A))))))))))))
       #|EXPROJECTIVE_ALT =  |- (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\X:'A. (#forall:fun(fun('A,bool),bool) (\Y:'A. (#forall:fun(fun('A,bool),bool) (\Z:'A. (#forall:fun(fun('A,bool),bool) (\W:'A. ((#==>:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#=:fun(bool,fun(bool,bool)) (((#exprojective:fun(ring('A),fun(prod('A,'A),fun(prod('A,prod('A,prod('A,'A))),bool))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)) ((#,:fun('A,fun(prod('A,prod('A,'A)),prod('A,prod('A,prod('A,'A))))) X:'A) ((#,:fun('A,fun(prod('A,'A),prod('A,prod('A,'A)))) Y:'A) ((#,:fun('A,fun('A,prod('A,'A))) Z:'A) W:'A))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) X:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) W:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Z:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) Z:'A) (#ring_0:fun(ring('A),'A) f:ring('A))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) Z:'A)) X:'A)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) y:'A) Z:'A)) Y:'A)) ((#=:fun('A,fun('A,bool)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) W:'A) Z:'A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X:'A) Y:'A)))))))))))))))))))))))))))
       #|projective =  |- ((#=:fun(bool,fun(bool,bool)) (((#projective:fun(ring('A),fun(prod('A,'A),fun(prod('A,prod('A,'A)),bool))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)) ((#,:fun('A,fun(prod('A,'A),prod('A,prod('A,'A)))) X:'A) ((#,:fun('A,fun('A,prod('A,'A))) Y:'A) Z:'A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) X:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) Z:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) Z:'A) (#ring_0:fun(ring('A),'A) f:ring('A))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) X:'A) Z:'A)) x:'A)) ((#=:fun('A,fun('A,bool)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) Y:'A) Z:'A)) y:'A)))))))))

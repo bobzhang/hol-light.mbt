@@ -21,7 +21,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_256k1
 fn step_4() -> Unit raise {
-  p_256k1_c.set(@define.define_(@parser.parse_term("p_256k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")))
+  p_256k1_c.set(@define.define_(@term_syntax.parse_term("(p_256k1 : Num) == 115792089237316195423570985008687907853269984665640564039457584007908834671663")))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn p_256k1() -> @kernel.Thm {
 ///|
 /// n_256k1
 fn step_5() -> Unit raise {
-  n_256k1_c.set(@define.define_(@parser.parse_term("n_256k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")))
+  n_256k1_c.set(@define.define_(@term_syntax.parse_term("(n_256k1 : Num) == 115792089237316195423570985008687907852837564279074904382605163141518161494337")))
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn n_256k1() -> @kernel.Thm {
 ///|
 /// G_256K1
 fn step_6() -> Unit raise {
-  g_256k1_c.set(@define.define_(@parser.parse_term("G_256K1 = SOME(&0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798:int,&0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8:int)")))
+  g_256k1_c.set(@define.define_(@term_syntax.parse_term("(G_256K1 : Option[(Int, Int)]) == SOME((int_of_num(55066263022277343669578718895168534326250603453777594175500187360389116729240), int_of_num(32670510020758816978083085130507043184471273380659243275938904335757337482424)))")))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn g_256k1() -> @kernel.Thm {
 ///|
 /// secp256k1
 fn step_7() -> Unit raise {
-  secp256k1_c.set(@define.define_(@parser.parse_term("secp256k1 = (integer_mod_ring p_256k1,&0:int,&7:int)")))
+  secp256k1_c.set(@define.define_(@term_syntax.parse_term("(secp256k1 : (Ring[Int], Int, Int)) == (integer_mod_ring(p_256k1), int_of_num(0), int_of_num(7))")))
 }
 
 ///|
@@ -81,7 +81,7 @@ pub fn secp256k1() -> @kernel.Thm {
 ///|
 /// p256k1_beta
 fn step_8() -> Unit raise {
-  p256k1_beta_c.set(@define.define_(@parser.parse_term("p256k1_beta = 0x7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee")))
+  p256k1_beta_c.set(@define.define_(@term_syntax.parse_term("(p256k1_beta : Num) == 55594575648329892869085402983802832744385952214688224221778511981742606582254")))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn p256k1_beta() -> @kernel.Thm {
 ///|
 /// p256k1_lambda
 fn step_9() -> Unit raise {
-  p256k1_lambda_c.set(@define.define_(@parser.parse_term("p256k1_lambda = 0x5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72")))
+  p256k1_lambda_c.set(@define.define_(@term_syntax.parse_term("(p256k1_lambda : Num) == 37718080363155996902926221483475020450927657555482586988616620542887997980018")))
 }
 
 ///|
@@ -113,7 +113,7 @@ pub fn p256k1_lambda() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t1 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([p_256k1()])), t1)
-  p_256k1_v1_c.set(@tactics.prove(@parser.parse_term("p_256k1 = 2 EXP 256 - 2 EXP 32 - 977"), t2))
+  p_256k1_v1_c.set(@tactics.prove(@term_syntax.parse_term("p_256k1 == EXP(2, 256) - EXP(2, 32) - 977"), t2))
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn p_256k1_v1() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t3 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([p_256k1()])), t3)
-  p_256k1_alt_c.set(@tactics.prove(@parser.parse_term("p_256k1 =\n   2 EXP 256 - 2 EXP 32 - 2 EXP 9 - 2 EXP 8 - 2 EXP 7 - 2 EXP 6 - 2 EXP 4 - 1"), t4))
+  p_256k1_alt_c.set(@tactics.prove(@term_syntax.parse_term("p_256k1 == EXP(2, 256) - EXP(2, 32) - EXP(2, 9) - EXP(2, 8) - EXP(2, 7) - EXP(2, 6) - EXP(2, 4) - 1"), t4))
 }
 
 ///|
@@ -155,7 +155,7 @@ fn step_12() -> Unit raise {
   let t11 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p_256k1()])), t6), t10)
   prime_p256k1_c.set(@lib.time(fn(x5 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x5.0, x5.1)
-  }, (@parser.parse_term("prime p_256k1"), t11)))
+  }, (@term_syntax.parse_term("prime(p_256k1)"), t11)))
 }
 
 ///|
@@ -180,7 +180,7 @@ fn step_13() -> Unit raise {
   let t18 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([n_256k1()])), t13), t17)
   prime_n256k1_c.set(@lib.time(fn(x12 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x12.0, x12.1)
-  }, (@parser.parse_term("prime n_256k1"), t18)))
+  }, (@term_syntax.parse_term("prime(n_256k1)"), t18)))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn prime_n256k1() -> @kernel.Thm {
 ///|
 /// p256k1_group
 fn step_14() -> Unit raise {
-  p256k1_group_c.set(@define.define_(@parser.parse_term("p256k1_group = weierstrass_group(integer_mod_ring p_256k1,&0,&7)")))
+  p256k1_group_c.set(@define.define_(@term_syntax.parse_term("(p256k1_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_256k1), int_of_num(0), int_of_num(7)))")))
 }
 
 ///|
@@ -216,7 +216,7 @@ fn step_15() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@ringtheory.field_integer_mod_ring(), @ringtheory.integer_mod_ring_char(), prime_p256k1()]))
   let t19 = @tactics.match_mp_tac(@weierstrass.weierstrass_group_v1())
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p256k1_group()])), t19), t20), t21), t22), t23)
-  p256k1_group_v1_c.set(@tactics.prove(@parser.parse_term("group_carrier p256k1_group =\n     weierstrass_curve(integer_mod_ring p_256k1,&0,&7) /\\\n   group_id p256k1_group =\n     NONE /\\\n   group_inv p256k1_group =\n     weierstrass_neg(integer_mod_ring p_256k1,&0,&7) /\\\n   group_mul p256k1_group =\n     weierstrass_add(integer_mod_ring p_256k1,&0,&7)"), t24))
+  p256k1_group_v1_c.set(@tactics.prove(@term_syntax.parse_term("group_carrier(p256k1_group) == weierstrass_curve((integer_mod_ring(p_256k1), int_of_num(0), int_of_num(7))) && group_id(p256k1_group) == NONE && group_inv(p256k1_group) == weierstrass_neg((integer_mod_ring(p_256k1), int_of_num(0), int_of_num(7))) && group_mul(p256k1_group) == weierstrass_add((integer_mod_ring(p_256k1), int_of_num(0), int_of_num(7)))"), t24))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_16() -> Unit raise {
 /// NO_ROOTS_256K1
 fn step_17() -> Unit raise {
   let t25 = @excluderoots.exclude_modular_cubic_roots_tac(prime_p256k1(), @list.List([p_256k1()]))
-  no_roots_256k1_c.set(@tactics.prove(@parser.parse_term("forall x:int. ~((x pow 3 + &7 == &0) (mod &p_256k1))"), t25))
+  no_roots_256k1_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Int, !op_eq_eq(pow(x, 3) + int_of_num(7), int_of_num(0), mod(int_of_num(p_256k1)))"), t25))
 }
 
 ///|
@@ -255,7 +255,7 @@ pub fn no_roots_256k1() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let t26 = @tactics.conv_tac(@computegroup.ecgroup_carrier_conv)
   let t27 = @tactics.then_tac(@simp.rewrite_tac(@list.List([g_256k1()])), t26)
-  generator_in_group_carrier_256k1_c.set(@tactics.prove(@parser.parse_term("G_256K1 IN group_carrier p256k1_group"), t27))
+  generator_in_group_carrier_256k1_c.set(@tactics.prove(@term_syntax.parse_term("IN(G_256K1, group_carrier(p256k1_group))"), t27))
 }
 
 ///|
@@ -274,7 +274,7 @@ fn step_19() -> Unit raise {
   let t29 = @simp.rewrite_tac(@list.List([n_256k1()]))
   let t28 = @simp.rewrite_tac(@list.List([g_256k1(), @lib.el(1, @bool.conjuncts_rule(p256k1_group_v1())), @ind_types.option_distinct()]))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@grouptheory.group_element_order_unique_prime(), generator_in_group_carrier_256k1(), prime_n256k1()])), t28), t29), t30), @tactics.refl_tac)
-  group_element_order_g256k1_c.set(@tactics.prove(@parser.parse_term("group_element_order p256k1_group G_256K1 = n_256k1"), t31))
+  group_element_order_g256k1_c.set(@tactics.prove(@term_syntax.parse_term("group_element_order(p256k1_group, G_256K1) == n_256k1"), t31))
 }
 
 ///|
@@ -294,7 +294,7 @@ fn step_20() -> Unit raise {
   let t33 = @simp.rewrite_tac(@list.List([@ringtheory.finite_integer_mod_ring(), @ringtheory.field_integer_mod_ring(), prime_p256k1()]))
   let t32 = @tactics.match_mp_tac(@weierstrass.finite_weierstrass_curve())
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p256k1_group_v1()])), t32), t33), t34), t35)
-  finite_group_carrier_p256k1_c.set(@tactics.prove(@parser.parse_term("FINITE(group_carrier p256k1_group)"), t36))
+  finite_group_carrier_p256k1_c.set(@tactics.prove(@term_syntax.parse_term("FINITE(group_carrier(p256k1_group))"), t36))
 }
 
 ///|
@@ -319,7 +319,7 @@ fn step_21() -> Unit raise {
     })(t96(x97))
   })
   let t92 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.num_coprime()), @calc_num.arith(), @prime.coprime_2()]))
-  let t89 = @drule.match_mp(@int.integer_rule(@parser.parse_term("p divides (a * b:int) ==> coprime(a,p) ==> p divides b")))
+  let t89 = @drule.match_mp(@int.integer_rule(@term_syntax.parse_term("divides((p : Int), (a : Int) * (b : Int)) → coprime((a, p)) → divides(p, b)")))
   let t91 = @tactics.disch_then(fn(x90 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x86 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s87 = @tactics.mp_tac(x86)
@@ -328,9 +328,9 @@ fn step_21() -> Unit raise {
       }
     })(t89(x90))
   })
-  let t85 = @simp.rewrite_tac(@list.List([@int.int_rem_eq(), @int.integer_rule(@parser.parse_term("(--y:int == y) (mod p) <=> p divides (&2 * y)"))]))
+  let t85 = @simp.rewrite_tac(@list.List([@int.int_rem_eq(), @int.integer_rule(@term_syntax.parse_term("op_eq_eq(-(y : Int), y, mod((p : Int))) == divides(p, int_of_num(2) * y)"))]))
   let t84 = @list.List([@simp.asm_simp_tac(@list.List([@int.int_rem_lt()])), @tactics.all_tac])
-  let t82 = @drule.match_mp(@int.int_arith(@parser.parse_term("--y rem p = y ==> y rem p = y ==> (--y rem p = y rem p)")))
+  let t82 = @drule.match_mp(@int.int_arith(@term_syntax.parse_term("rem(-(y : Int), (p : Int)) == y → rem(y, p) == y → rem(-y, p) == rem(y, p)")))
   let t99 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.first_x_assum(fn(x83 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x79 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s80 = @tactics.mp_tac(x79)
@@ -341,7 +341,7 @@ fn step_21() -> Unit raise {
   })), @tactics.ants_tac), t84), t85), t91), t92), t98), @int.asm_int_arith_tac)
   let t78 = @simp.rewrite_tac(@list.List([@equal.gsym(@int.int_rem_eq()), p_256k1(), @int.int_rem_zero()]))
   let t77 = @simp.rewrite_tac(@list.List([@int.int_mul_lzero(), @int.int_add_lid()]))
-  let t76 = @tactics.mp_tac(@bool.spec(@parser.parse_term("x:int"), no_roots_256k1()))
+  let t76 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x : Int)"), no_roots_256k1()))
   let t75 = @tactics.conv_tac(@int.int_rem_down_conv)
   let t74 = @tactics.disch_then(@tactics.conjuncts_then2(@tactics.strip_assume_tac, fn(x73 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x70 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -353,14 +353,14 @@ fn step_21() -> Unit raise {
   }))
   let t69 = @tactics.conv_tac(@int.int_reduce_conv)
   let t100 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t69), t74), t75), t76), t77), t78), t99])
-  let t68 = @class.asm_cases_tac(@parser.parse_term("y:int = &0"))
+  let t68 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Int) == int_of_num(0)"))
   let t65 = @tactics.conv_tac(@int.int_reduce_conv)
   let t64 = @simp.rewrite_tac(@list.List([p_256k1(), @pair.pair_eq()]))
   let t63 = @tactics.conv_tac(@int.int_rem_down_conv)
   let t62 = @simp.rewrite_tac(@list.List([@ringtheory.in_integer_mod_ring_carrier(), @ringtheory.integer_mod_ring_clauses()]))
   let t61 = @simp.rewrite_tac(@list.List([@ind_types.option_inj()]))
-  let t59 = @parser.parse_term("y:int")
-  let t60 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:int"), t59]))
+  let t59 = @term_syntax.parse_term("(y : Int)")
+  let t60 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Int)"), t59]))
   let t58 = @simp.rewrite_tac(@list.List([@weierstrass.weierstrass_curve(), @weierstrass.weierstrass_neg(), @ind_types.option_distinct()]))
   let t66 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @sets.in_(), @pair.forall_pair_thm()])), t58), t60), t61), t62), t63), t64), t65)
   let t57 = @tactics.conv_tac(@calc_num.num_reduce_conv)
@@ -392,9 +392,9 @@ fn step_21() -> Unit raise {
   }, t50), t51), @tactics.ants_tac), t54), t55), t56), t57), t66])
   let t39 = @simp.rewrite_tac(@list.List([p256k1_group_v1()]))
   let t38 = @simp.rewrite_tac(@list.List([generator_in_group_carrier_256k1(), group_element_order_g256k1(), finite_group_carrier_p256k1()]))
-  let t37 = @tactics.exists_tac(@parser.parse_term("G_256K1:(int#int)option"))
+  let t37 = @tactics.exists_tac(@term_syntax.parse_term("G_256K1"))
   let t101 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.group_adhoc_order_unique_lemma()), t37), t38), t39), @tactics.conj_tac), t67), t68), t100)
-  size_p256k1_group_c.set(@tactics.prove(@parser.parse_term("group_carrier p256k1_group HAS_SIZE n_256k1"), t101))
+  size_p256k1_group_c.set(@tactics.prove(@term_syntax.parse_term("HAS_SIZE(group_carrier(p256k1_group), n_256k1)"), t101))
 }
 
 ///|
@@ -410,7 +410,7 @@ pub fn size_p256k1_group() -> @kernel.Thm {
 /// P256K1_GROUP_ORDER
 fn step_22() -> Unit raise {
   let t102 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@sets.has_size()]))(size_p256k1_group())]))
-  p256k1_group_order_c.set(@tactics.prove(@parser.parse_term("CARD(group_carrier p256k1_group) = n_256k1"), t102))
+  p256k1_group_order_c.set(@tactics.prove(@term_syntax.parse_term("CARD(group_carrier(p256k1_group)) == n_256k1"), t102))
 }
 
 ///|
@@ -426,7 +426,7 @@ pub fn p256k1_group_order() -> @kernel.Thm {
 /// P256K1_GROUP_ELEMENT_ORDER
 fn step_23() -> Unit raise {
   let t103 = @meson.meson_tac(@list.List([size_p256k1_group(), @sets.has_size(), @grouptheory.group_element_order_prime(), prime_n256k1()]))
-  p256k1_group_element_order_c.set(@tactics.prove(@parser.parse_term("forall P. P IN group_carrier p256k1_group\n       ==> group_element_order p256k1_group P =\n           if P = group_id p256k1_group then 1 else n_256k1"), t103))
+  p256k1_group_element_order_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : Option[(Int, Int)], IN(P, group_carrier(p256k1_group)) → group_element_order(p256k1_group, P) == (if P == group_id(p256k1_group) { 1 } else { n_256k1 })"), t103))
 }
 
 ///|
@@ -443,7 +443,7 @@ pub fn p256k1_group_element_order() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t104 = @simp.rewrite_tac(@list.List([group_element_order_g256k1(), @simp.rewrite_rule(@list.List([@sets.has_size()]))(size_p256k1_group())]))
   let t105 = @tactics.then_tac(@simp.simp_tac(@list.List([@grouptheory.subgroup_generated_element_order(), generator_in_group_carrier_256k1(), finite_group_carrier_p256k1()])), t104)
-  generated_p256k1_group_c.set(@tactics.prove(@parser.parse_term("subgroup_generated p256k1_group {G_256K1} = p256k1_group"), t105))
+  generated_p256k1_group_c.set(@tactics.prove(@term_syntax.parse_term("subgroup_generated(p256k1_group, {G_256K1}) == p256k1_group"), t105))
 }
 
 ///|
@@ -459,7 +459,7 @@ pub fn generated_p256k1_group() -> @kernel.Thm {
 /// CYCLIC_P256K1_GROUP
 fn step_25() -> Unit raise {
   let t106 = @meson.meson_tac(@list.List([@grouptheory.cyclic_group_alt(), generated_p256k1_group()]))
-  cyclic_p256k1_group_c.set(@tactics.prove(@parser.parse_term("cyclic_group p256k1_group"), t106))
+  cyclic_p256k1_group_c.set(@tactics.prove(@term_syntax.parse_term("cyclic_group(p256k1_group)"), t106))
 }
 
 ///|
@@ -475,7 +475,7 @@ pub fn cyclic_p256k1_group() -> @kernel.Thm {
 /// ABELIAN_P256K1_GROUP
 fn step_26() -> Unit raise {
   let t107 = @meson.meson_tac(@list.List([cyclic_p256k1_group(), @grouptheory.cyclic_imp_abelian_group()]))
-  abelian_p256k1_group_c.set(@tactics.prove(@parser.parse_term("abelian_group p256k1_group"), t107))
+  abelian_p256k1_group_c.set(@tactics.prove(@term_syntax.parse_term("abelian_group(p256k1_group)"), t107))
 }
 
 ///|
@@ -495,7 +495,7 @@ fn step_27() -> Unit raise {
   let t109 = @simp.simp_tac(@list.List([@ringtheory.integer_mod_ring_v1(), @ringtheory.integer_mod_ring_char(), @ringtheory.integer_mod_ring_pow(), p_256k1(), @sets.in_insert(), @ringtheory.field_integer_mod_ring(), @calc_num.arith(), p256k1_beta(), @sets.in_elim_thm(), @weierstrass.weierstrass_nonsingular(), @ringtheory.integer_mod_ring_of_num()]))
   let t108 = @tactics.match_mp_tac(@weierstrass.group_endomorphism_triplex())
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([p256k1_group()])), t108), t109), t110), t111)
-  group_endomorphism_triplex_beta_c.set(@tactics.prove(@parser.parse_term("group_endomorphism p256k1_group\n        (weierstrass_triplex (integer_mod_ring p_256k1) (&p256k1_beta))"), t112))
+  group_endomorphism_triplex_beta_c.set(@tactics.prove(@term_syntax.parse_term("group_endomorphism(p256k1_group, weierstrass_triplex(integer_mod_ring(p_256k1), int_of_num(p256k1_beta)))"), t112))
 }
 
 ///|
@@ -519,7 +519,7 @@ fn step_28() -> Unit raise {
   let t128 = @simp.rewrite_tac(@list.List([group_endomorphism_triplex_beta(), @class.eta_ax()]))
   let t127 = @simp.rewrite_tac(@list.List([@equal.gsym(@grouptheory.group_endomorphism())]))
   let t126 = @simp.simp_tac(@list.List([@grouptheory.abelian_group_homomorphism_powering(), abelian_p256k1_group()]))
-  let t125 = @tactics.exists_tac(@parser.parse_term("p256k1_group"))
+  let t125 = @tactics.exists_tac(@term_syntax.parse_term("p256k1_group"))
   let t124 = @tactics.match_mp_tac(@grouptheory.group_homomorphisms_eq_on_generators())
   let t135 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x123 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x119 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -541,7 +541,7 @@ fn step_28() -> Unit raise {
       }
     })(x123))
   }, @list.List([@equal.gsym(generated_p256k1_group())])), t124), t125), t126), t127), t128), t129), @tactics.disch_tac), t130), t131), t132), t133), t134)
-  p256k1_triplex_beta_c.set(@tactics.prove(@parser.parse_term("forall x. x IN group_carrier p256k1_group\n       ==> weierstrass_triplex (integer_mod_ring p_256k1) (&p256k1_beta) x =\n           group_pow p256k1_group x p256k1_lambda"), t135))
+  p256k1_triplex_beta_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Option[(Int, Int)], IN(x, group_carrier(p256k1_group)) → weierstrass_triplex(integer_mod_ring(p_256k1), int_of_num(p256k1_beta), x) == group_pow(p256k1_group, x, p256k1_lambda)"), t135))
 }
 
 ///|

@@ -3,7 +3,7 @@
 ///|
 /// is_valid_ieee_format
 fn step_1() -> Unit raise {
-  is_valid_ieee_format_c.set(@define.define_(@parser.parse_term("is_valid_ieee_format (r:num, p:num, emin:int, emax:int) =\n  (1 < r /\\ (EVEN r) /\\ (1 < p) /\\ (emin <= emax))")))
+  is_valid_ieee_format_c.set(@define.define_(@term_syntax.parse_term("(is_valid_ieee_format : ((Num, Num, Int, Int)) -> Bool)(((r : Num), (p : Num), (emin : Int), (emax : Int))) == (1 < r && EVEN(r) && 1 < p && emin <= emax)")))
 }
 
 ///|
@@ -19,8 +19,8 @@ pub fn is_valid_ieee_format() -> @kernel.Thm {
 /// ieee_format_typbij
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([is_valid_ieee_format()]))
-  let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("(2:num, 2:num, (&0):int, (&0):int)")), t1), @int.arith_tac)
-  ieee_format_typbij_c.set(@class.new_type_definition("ieee_format", ("mk_ieee_format", "dest_ieee_format"), @tactics.prove(@parser.parse_term("?(fmt:num#num#int#int). is_valid_ieee_format fmt"), t2)))
+  let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(2, 2, int_of_num(0), int_of_num(0))")), t1), @int.arith_tac)
+  ieee_format_typbij_c.set(@class.new_type_definition("ieee_format", ("mk_ieee_format", "dest_ieee_format"), @tactics.prove(@term_syntax.parse_term("∃ fmt : (Num, Num, Int, Int), is_valid_ieee_format(fmt)"), t2)))
 }
 
 ///|
@@ -35,7 +35,7 @@ pub fn ieee_format_typbij() -> @kernel.Thm {
 ///|
 /// ieee_r
 fn step_3() -> Unit raise {
-  ieee_r_c.set(@define.define_(@parser.parse_term("ieee_r (fmt:ieee_format) = (FST (dest_ieee_format fmt))")))
+  ieee_r_c.set(@define.define_(@term_syntax.parse_term("(ieee_r : (Ieee_format) -> Num)((fmt : Ieee_format)) == FST(dest_ieee_format(fmt))")))
 }
 
 ///|
@@ -50,7 +50,7 @@ pub fn ieee_r() -> @kernel.Thm {
 ///|
 /// ieee_p
 fn step_4() -> Unit raise {
-  ieee_p_c.set(@define.define_(@parser.parse_term("ieee_p (fmt:ieee_format) = (FST (SND (dest_ieee_format fmt)))")))
+  ieee_p_c.set(@define.define_(@term_syntax.parse_term("(ieee_p : (Ieee_format) -> Num)((fmt : Ieee_format)) == FST(SND(dest_ieee_format(fmt)))")))
 }
 
 ///|
@@ -65,7 +65,7 @@ pub fn ieee_p() -> @kernel.Thm {
 ///|
 /// ieee_emin
 fn step_5() -> Unit raise {
-  ieee_emin_c.set(@define.define_(@parser.parse_term("ieee_emin (fmt:ieee_format) = (FST (SND (SND (dest_ieee_format fmt))))")))
+  ieee_emin_c.set(@define.define_(@term_syntax.parse_term("(ieee_emin : (Ieee_format) -> Int)((fmt : Ieee_format)) == FST(SND(SND(dest_ieee_format(fmt))))")))
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn ieee_emin() -> @kernel.Thm {
 ///|
 /// ieee_emax
 fn step_6() -> Unit raise {
-  ieee_emax_c.set(@define.define_(@parser.parse_term("ieee_emax (fmt:ieee_format) = (SND (SND (SND (dest_ieee_format fmt))))")))
+  ieee_emax_c.set(@define.define_(@term_syntax.parse_term("(ieee_emax : (Ieee_format) -> Int)((fmt : Ieee_format)) == SND(SND(SND(dest_ieee_format(fmt))))")))
 }
 
 ///|
@@ -95,7 +95,7 @@ pub fn ieee_emax() -> @kernel.Thm {
 ///|
 /// ieee_to_fformat
 fn step_7() -> Unit raise {
-  ieee_to_fformat_c.set(@define.define_(@parser.parse_term("ieee_to_fformat (fmt:ieee_format) =\n  (mk_fformat ((ieee_r fmt), (ieee_p fmt), (ieee_emin fmt)))")))
+  ieee_to_fformat_c.set(@define.define_(@term_syntax.parse_term("(ieee_to_fformat : (Ieee_format) -> Fformat)((fmt : Ieee_format)) == mk_fformat((ieee_r(fmt), ieee_p(fmt), ieee_emin(fmt)))")))
 }
 
 ///|
@@ -110,7 +110,7 @@ pub fn ieee_to_fformat() -> @kernel.Thm {
 ///|
 /// ieee_to_flformat
 fn step_8() -> Unit raise {
-  ieee_to_flformat_c.set(@define.define_(@parser.parse_term("ieee_to_flformat (fmt:ieee_format) =\n  (mk_flformat ((ieee_r fmt), (ieee_p fmt)))")))
+  ieee_to_flformat_c.set(@define.define_(@term_syntax.parse_term("(ieee_to_flformat : (Ieee_format) -> Flformat)((fmt : Ieee_format)) == mk_flformat((ieee_r(fmt), ieee_p(fmt)))")))
 }
 
 ///|
@@ -125,7 +125,7 @@ pub fn ieee_to_flformat() -> @kernel.Thm {
 ///|
 /// max_ieee
 fn step_9() -> Unit raise {
-  max_ieee_c.set(@define.define_(@parser.parse_term("max_ieee (fmt:ieee_format) =\n  (&(((ieee_r fmt) EXP (ieee_p fmt)) - 1) *\n   &(ieee_r fmt) ipow ((ieee_emax fmt) - &(ieee_p fmt) + &1))")))
+  max_ieee_c.set(@define.define_(@term_syntax.parse_term("(max_ieee : (Ieee_format) -> Real)((fmt : Ieee_format)) == real_of_num(EXP(ieee_r(fmt), ieee_p(fmt)) - 1) * ipow(real_of_num(ieee_r(fmt)), ieee_emax(fmt) - int_of_num(ieee_p(fmt)) + int_of_num(1))")))
 }
 
 ///|
@@ -140,7 +140,7 @@ pub fn max_ieee() -> @kernel.Thm {
 ///|
 /// ieee_threshold
 fn step_10() -> Unit raise {
-  ieee_threshold_c.set(@define.define_(@parser.parse_term("ieee_threshold (fmt:ieee_format) =\n  (max_ieee(fmt) +\n   &(ieee_r fmt) ipow ((ieee_emax fmt) - &(ieee_p fmt) + &1))")))
+  ieee_threshold_c.set(@define.define_(@term_syntax.parse_term("(ieee_threshold : (Ieee_format) -> Real)((fmt : Ieee_format)) == max_ieee(fmt) + ipow(real_of_num(ieee_r(fmt)), ieee_emax(fmt) - int_of_num(ieee_p(fmt)) + int_of_num(1))")))
 }
 
 ///|
@@ -155,7 +155,7 @@ pub fn ieee_threshold() -> @kernel.Thm {
 ///|
 /// is_ieee_pinf
 fn step_11() -> Unit raise {
-  is_ieee_pinf_c.set(@define.define_(@parser.parse_term("is_ieee_pinf (fmt:ieee_format) (x:real) = ((ieee_threshold fmt) <= x)")))
+  is_ieee_pinf_c.set(@define.define_(@term_syntax.parse_term("(is_ieee_pinf : (Ieee_format, Real) -> Bool)((fmt : Ieee_format), (x : Real)) == (ieee_threshold(fmt) <= x)")))
 }
 
 ///|
@@ -170,7 +170,7 @@ pub fn is_ieee_pinf() -> @kernel.Thm {
 ///|
 /// is_ieee_ninf
 fn step_12() -> Unit raise {
-  is_ieee_ninf_c.set(@define.define_(@parser.parse_term("is_ieee_ninf (fmt:ieee_format) (x:real) = (x <= (-- (ieee_threshold fmt)))")))
+  is_ieee_ninf_c.set(@define.define_(@term_syntax.parse_term("(is_ieee_ninf : (Ieee_format, Real) -> Bool)((fmt : Ieee_format), (x : Real)) == (x <= -ieee_threshold(fmt))")))
 }
 
 ///|
@@ -185,7 +185,7 @@ pub fn is_ieee_ninf() -> @kernel.Thm {
 ///|
 /// is_ieee
 fn step_13() -> Unit raise {
-  is_ieee_c.set(@define.define_(@parser.parse_term("is_ieee (fmt:ieee_format) (x:real) =\n  (is_fixed(ieee_to_fformat fmt) x \\/\n     (is_float(ieee_to_flformat fmt) x /\\\n        (ieee_emin fmt) <= (greatest_e(ieee_to_flformat fmt) x) /\\\n        (greatest_e(ieee_to_flformat fmt) x) <= (ieee_emax fmt)) \\/\n     is_ieee_pinf(fmt) x \\/\n     is_ieee_ninf(fmt) x)")))
+  is_ieee_c.set(@define.define_(@term_syntax.parse_term("(is_ieee : (Ieee_format, Real) -> Bool)((fmt : Ieee_format), (x : Real)) == (is_fixed(ieee_to_fformat(fmt), x) || is_float(ieee_to_flformat(fmt), x) && ieee_emin(fmt) <= greatest_e(ieee_to_flformat(fmt), x) && greatest_e(ieee_to_flformat(fmt), x) <= ieee_emax(fmt) || is_ieee_pinf(fmt, x) || is_ieee_ninf(fmt, x))")))
 }
 
 ///|
@@ -200,7 +200,7 @@ pub fn is_ieee() -> @kernel.Thm {
 ///|
 /// ieee_exp
 fn step_14() -> Unit raise {
-  ieee_exp_c.set(@define.define_(@parser.parse_term("ieee_exp (fmt:ieee_format) (x:real) =\n  (if abs(x) <= (finf(ieee_to_fformat fmt))\n   then\n     (ieee_emin fmt)\n   else\n     (greatest_e(ieee_to_flformat fmt) x))")))
+  ieee_exp_c.set(@define.define_(@term_syntax.parse_term("(ieee_exp : (Ieee_format, Real) -> Int)((fmt : Ieee_format), (x : Real)) == (if abs(x) <= finf(ieee_to_fformat(fmt)) { ieee_emin(fmt) } else { greatest_e(ieee_to_flformat(fmt), x) })")))
 }
 
 ///|
@@ -215,7 +215,7 @@ pub fn ieee_exp() -> @kernel.Thm {
 ///|
 /// ieee_round
 fn step_15() -> Unit raise {
-  ieee_round_c.set(@define.define_(@parser.parse_term("((ieee_round (fmt:ieee_format) (To_near) (x:real) =\n       (if (abs(x) <= (finf (ieee_to_fformat fmt)))\n        then\n          (fround(ieee_to_fformat fmt) To_near x)\n        else if (abs(x) <= (ieee_threshold fmt))\n        then\n          (flround(ieee_to_flformat fmt) To_near x)\n        else\n          x))                                        /\\\n\n   (ieee_round (fmt:ieee_format) (To_zero) (x:real) =\n       (if (abs(x) <= (finf (ieee_to_fformat fmt)))\n        then\n          (fround(ieee_to_fformat fmt) To_zero x)\n        else if (abs(x) <= (ieee_threshold fmt))\n        then\n          (flround(ieee_to_flformat fmt) To_zero x)\n        else if (x > (ieee_threshold fmt))\n        then\n          (max_ieee fmt)\n        else\n          (-- (max_ieee fmt))))                        /\\\n\n   (ieee_round (fmt:ieee_format) (To_pinf) (x:real) =\n       (if (abs(x) <= (finf (ieee_to_fformat fmt)))\n        then\n          (fround(ieee_to_fformat fmt) To_pinf x)\n        else if x <= (-- (max_ieee fmt))\n        then\n          (-- (max_ieee fmt))\n        else\n          (flround(ieee_to_flformat fmt) To_pinf x))) /\\\n\n   (ieee_round (fmt:ieee_format) (To_ninf) (x:real) =\n       (if (abs(x) <= (finf (ieee_to_fformat fmt)))\n        then\n          (fround(ieee_to_fformat fmt) To_ninf x)\n        else if (max_ieee fmt) <= x\n        then\n          (max_ieee fmt)\n        else\n          (flround(ieee_to_flformat fmt) To_ninf x))))")))
+  ieee_round_c.set(@define.define_(@term_syntax.parse_term("(ieee_round : (Ieee_format, Roundmode, Real) -> Real)((fmt : Ieee_format), To_near, (x : Real)) == (if abs(x) <= finf(ieee_to_fformat(fmt)) { fround(ieee_to_fformat(fmt), To_near, x) } else { if abs(x) <= ieee_threshold(fmt) { flround(ieee_to_flformat(fmt), To_near, x) } else { x } }) && ieee_round(fmt, To_zero, x) == (if abs(x) <= finf(ieee_to_fformat(fmt)) { fround(ieee_to_fformat(fmt), To_zero, x) } else { if abs(x) <= ieee_threshold(fmt) { flround(ieee_to_flformat(fmt), To_zero, x) } else { if x > ieee_threshold(fmt) { max_ieee(fmt) } else { -max_ieee(fmt) } } }) && ieee_round(fmt, To_pinf, x) == (if abs(x) <= finf(ieee_to_fformat(fmt)) { fround(ieee_to_fformat(fmt), To_pinf, x) } else { if x <= -max_ieee(fmt) { -max_ieee(fmt) } else { flround(ieee_to_flformat(fmt), To_pinf, x) } }) && ieee_round(fmt, To_ninf, x) == (if abs(x) <= finf(ieee_to_fformat(fmt)) { fround(ieee_to_fformat(fmt), To_ninf, x) } else { if max_ieee(fmt) <= x { max_ieee(fmt) } else { flround(ieee_to_flformat(fmt), To_ninf, x) } })")))
 }
 
 ///|
@@ -230,7 +230,7 @@ pub fn ieee_round() -> @kernel.Thm {
 ///|
 /// ieee_eps
 fn step_16() -> Unit raise {
-  ieee_eps_c.set(@define.define_(@parser.parse_term("ieee_eps (fmt:ieee_format) = (fl_eps (ieee_to_flformat fmt))")))
+  ieee_eps_c.set(@define.define_(@term_syntax.parse_term("(ieee_eps : (Ieee_format) -> Real)((fmt : Ieee_format)) == fl_eps(ieee_to_flformat(fmt))")))
 }
 
 ///|

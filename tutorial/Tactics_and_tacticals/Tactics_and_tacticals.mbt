@@ -3,7 +3,7 @@
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:1
 fn step_1() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7")))
+  ignore(@tactics.g(@term_syntax.parse_term("2 <= (n : Num) && n <= 2 → (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7")))
 }
 
 ///|
@@ -72,7 +72,7 @@ pub fn trivial_v1() -> @kernel.Thm {
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:12
 fn step_11() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7")))
+  ignore(@tactics.g(@term_syntax.parse_term("2 <= (n : Num) && n <= 2 → (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7")))
 }
 
 ///|
@@ -129,7 +129,7 @@ pub fn trivial_v2() -> @kernel.Thm {
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:21
 fn step_19() -> Unit raise {
-  ignore(@tactics.g(@parser.parse_term("2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7")))
+  ignore(@tactics.g(@term_syntax.parse_term("2 <= (n : Num) && n <= 2 → (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7")))
 }
 
 ///|
@@ -165,7 +165,7 @@ fn step_22() -> Unit raise {
   let t6 = @simp.once_rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
   let t5 = @simp.simp_tac(@list.List([]))
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conv_tac(@simp.rewrite_conv(@list.List([@arith.le_antisym()]))), t5), t6), @tactics.disch_tac), t7), t8)
-  trivial_v4_c.set(@tactics.prove(@parser.parse_term("2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7"), t9))
+  trivial_v4_c.set(@tactics.prove(@term_syntax.parse_term("2 <= (n : Num) && n <= 2 → (f : ((Num, Num)) -> Num)((2, 2)) + n < f((n, n)) + 7"), t9))
 }
 
 ///|
@@ -180,12 +180,12 @@ pub fn trivial_v4() -> @kernel.Thm {
 ///|
 /// trivial
 fn step_23() -> Unit raise {
-  let t12 = @parser.parse_term("--y")
-  let t13 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("x:real"), t12]), @realax.real_le_mul()))
-  let t10 = @parser.parse_term("y:real")
-  let t11 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("--x"), t10]), @realax.real_le_mul()))
+  let t12 = @term_syntax.parse_term("-(y : Real)")
+  let t13 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(x : Real)"), t12]), @realax.real_le_mul()))
+  let t10 = @term_syntax.parse_term("(y : Real)")
+  let t11 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("-(x : Real)"), t10]), @realax.real_le_mul()))
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t11), t13), @calc_rat.real_arith_tac)
-  trivial_v5_c.set(@tactics.prove(@parser.parse_term("forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)"), t14))
+  trivial_v5_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x * y → (real_of_num(0) < x) == (real_of_num(0) < y)"), t14))
 }
 
 ///|
@@ -200,11 +200,11 @@ pub fn trivial_v5() -> @kernel.Thm {
 ///|
 /// trivial
 fn step_24() -> Unit raise {
-  let t16 = @parser.parse_term("y:real")
-  let t17 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("--x"), t16]), @realax.real_le_mul()))
+  let t16 = @term_syntax.parse_term("(y : Real)")
+  let t17 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("-(x : Real)"), t16]), @realax.real_le_mul()))
   let t15 = @tactics.repeat_tac(@tactics.gen_tac)
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@real.real_wlog_le()), @tactics.conj_tac), t15), t17), @calc_rat.real_arith_tac)
-  trivial_c.set(@tactics.prove(@parser.parse_term("forall x y:real. &0 < x * y ==> (&0 < x <=> &0 < y)"), t18))
+  trivial_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x * y → (real_of_num(0) < x) == (real_of_num(0) < y)"), t18))
 }
 
 ///|
@@ -220,7 +220,7 @@ pub fn trivial() -> @kernel.Thm {
 /// SUM_OF_NUMBERS
 fn step_25() -> Unit raise {
   let t19 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  sum_of_numbers_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i) = (n * (n + 1)) DIV 2"), t19))
+  sum_of_numbers_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, nsum(op_dot_dot(1, n), (i : Num) => i) == DIV(n * (n + 1), 2)"), t19))
 }
 
 ///|
@@ -236,7 +236,7 @@ pub fn sum_of_numbers() -> @kernel.Thm {
 /// SUM_OF_SQUARES
 fn step_26() -> Unit raise {
   let t20 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  sum_of_squares_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i * i) = (n * (n + 1) * (2 * n + 1)) DIV 6"), t20))
+  sum_of_squares_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, nsum(op_dot_dot(1, n), (i : Num) => i * i) == DIV(n * ((n + 1) * (2 * n + 1)), 6)"), t20))
 }
 
 ///|
@@ -252,7 +252,7 @@ pub fn sum_of_squares() -> @kernel.Thm {
 /// SUM_OF_CUBES
 fn step_27() -> Unit raise {
   let t21 = @tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.asm_rewrite_tac(@list.List([@iterate.nsum_clauses_numseg()]))), @int.arith_tac)
-  sum_of_cubes_c.set(@tactics.prove(@parser.parse_term("forall n. nsum(1..n) (\\i. i*i*i) = (n * n * (n + 1) * (n + 1)) DIV 4"), t21))
+  sum_of_cubes_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, nsum(op_dot_dot(1, n), (i : Num) => i * (i * i)) == DIV(n * (n * ((n + 1) * (n + 1))), 4)"), t21))
 }
 
 ///|

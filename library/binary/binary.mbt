@@ -11,7 +11,7 @@ fn step_1() -> Unit raise {
       @arith.le_0(),
     ]),
   )
-  let t2 = @tactics.exists_tac(@parser.parse_term("0..n"))
+  let t2 = @tactics.exists_tac(@term_syntax.parse_term("op_dot_dot(0, (n : Num))"))
   let t1 = @tactics.match_mp_tac(@sets.finite_subset())
   let t4 = @tactics.then_tac(
     @tactics.then_tac(
@@ -22,7 +22,7 @@ fn step_1() -> Unit raise {
   )
   bounded_finite_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s. (forall x:num. x IN s ==> x <= n) ==> FINITE s"),
+      @term_syntax.parse_term("∀ s : (Num) -> Bool, (∀ x : Num, IN(x, s) → x <= (n : Num)) → FINITE(s)"),
       t4,
     ),
   )
@@ -77,7 +77,7 @@ pub fn even_nsum() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   bitset_c.set(
     @pair.new_definition(
-      @parser.parse_term("bitset n = {i | ODD(n DIV (2 EXP i))}"),
+      @term_syntax.parse_term("(bitset : (Num, Num) -> Bool)((n : Num)) == {(i : Num) | ODD(DIV(n, EXP(2, i)))}"),
     ),
   )
 }
@@ -96,7 +96,7 @@ pub fn bitset() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   binarysum_c.set(
     @pair.new_definition(
-      @parser.parse_term("binarysum s = nsum s (\\i. 2 EXP i)"),
+      @term_syntax.parse_term("(binarysum : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == nsum(s, (i : Num) => EXP(2, i))"),
     ),
   )
 }
@@ -122,7 +122,7 @@ fn step_5() -> Unit raise {
   )
   bitset_bound_lemma_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n i. i IN (bitset n) ==> 2 EXP i <= n"),
+      @term_syntax.parse_term("∀ n : Num, ∀ i : Num, IN(i, bitset(n)) → EXP(2, i) <= n"),
       t9,
     ),
   )
@@ -146,7 +146,7 @@ fn step_6() -> Unit raise {
     @list.List([bitset_bound_lemma(), @arith.lt_pow2_refl(), @arith.lte_trans()]),
   )
   bitset_bound_weak_c.set(
-    @tactics.prove(@parser.parse_term("forall n i. i IN (bitset n) ==> i < n"), t10),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ i : Num, IN(i, bitset(n)) → i < n"), t10),
   )
 }
 
@@ -175,7 +175,7 @@ fn step_7() -> Unit raise {
       @sets.subset(),
     ]),
   )
-  let t11 = @tactics.exists_tac(@parser.parse_term("0..n"))
+  let t11 = @tactics.exists_tac(@term_syntax.parse_term("op_dot_dot(0, (n : Num))"))
   let t14 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -190,7 +190,7 @@ fn step_7() -> Unit raise {
     t13,
   )
   finite_bitset_c.set(
-    @tactics.prove(@parser.parse_term("forall n. FINITE(bitset n)"), t14),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, FINITE(bitset(n))"), t14),
   )
 }
 
@@ -220,7 +220,7 @@ fn step_8() -> Unit raise {
     ),
     t15,
   )
-  bitset_0_c.set(@tactics.prove(@parser.parse_term("bitset 0 = {}"), t16))
+  bitset_0_c.set(@tactics.prove(@term_syntax.parse_term("bitset(0) == {}"), t16))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_9() -> Unit raise {
   let t27 = @simp.rewrite_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("(2 * n + 1) DIV 2 = n /\\ (2 * n) DIV 2 = n"),
+        @term_syntax.parse_term("DIV(2 * (n : Num) + 1, 2) == n && DIV(2 * n, 2) == n"),
       ),
     ]),
   )
@@ -335,7 +335,7 @@ fn step_9() -> Unit raise {
                       @tactics.then_tac(
                         @tactics.match_mp_tac(
                           @class.taut(
-                            @parser.parse_term("a /\\ (a ==> b) ==> a /\\ b"),
+                            @term_syntax.parse_term("(a : Bool) && (a → (b : Bool)) → a && b"),
                           ),
                         ),
                         @tactics.conj_tac,
@@ -382,11 +382,11 @@ pub fn bitset_step() -> @kernel.Thm {
 ///|
 /// BINARYSUM_BITSET
 fn step_10() -> Unit raise {
-  let t34 = @int.arith_rule(@parser.parse_term("m < SUC(2 * m)"))
+  let t34 = @int.arith_rule(@term_syntax.parse_term("(m : Num) < SUC(2 * m)"))
   let t35 = @meson.asm_meson_tac(
     @list.List([
       @arith.add_sym(),
-      @int.arith_rule(@parser.parse_term("~(2 * m = 0) ==> m < 2 * m")),
+      @int.arith_rule(@term_syntax.parse_term("!(2 * (m : Num) == 0) → m < 2 * m")),
       t34,
     ]),
   )
@@ -404,7 +404,7 @@ fn step_10() -> Unit raise {
       @iterate.nsum_clauses(),
       @sets.finite_image(),
       @sets.in_image(),
-      @int.arith_rule(@parser.parse_term("~(0 = x + 1)")),
+      @int.arith_rule(@term_syntax.parse_term("!(0 == (x : Num) + 1)")),
     ]),
   )
   let t31 = @simp.rewrite_tac(@list.List([bitset_0(), @iterate.nsum_clauses()]))
@@ -430,7 +430,7 @@ fn step_10() -> Unit raise {
     t35,
   )
   binarysum_bitset_c.set(
-    @tactics.prove(@parser.parse_term("forall n. binarysum (bitset n) = n"), t36),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, binarysum(bitset(n)) == n"), t36),
   )
 }
 
@@ -451,7 +451,7 @@ fn step_11() -> Unit raise {
   let t37 = @meson.meson_tac(@list.List([binarysum_bitset()]))
   bitset_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. bitset m = bitset n <=> m = n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, (bitset(m) == bitset(n)) == (m == n)"),
       t37,
     ),
   )
@@ -471,7 +471,7 @@ pub fn bitset_eq() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t38 = @meson.meson_tac(@list.List([bitset_eq(), bitset_0()]))
   bitset_eq_empty_c.set(
-    @tactics.prove(@parser.parse_term("forall n. bitset n = {} <=> n = 0"), t38),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, (bitset(n) == {}) == (n == 0)"), t38),
   )
 }
 
@@ -494,7 +494,7 @@ fn step_13() -> Unit raise {
   let t48 = @simp.rewrite_tac(
     @list.List([
       @arith.exp(),
-      @int.arith_rule(@parser.parse_term("a + b < 2 * a <=> b < a ")),
+      @int.arith_rule(@term_syntax.parse_term("((a : Num) + (b : Num) < 2 * a) == (b < a)")),
     ]),
   )
   let t50 = @tactics.then_tac(
@@ -518,14 +518,14 @@ fn step_13() -> Unit raise {
     t50,
   ])
   let t46 = @tactics.exists_tac(
-    @parser.parse_term("nsum (k INSERT (s DELETE k)) (\\i. 2 EXP i)"),
+    @term_syntax.parse_term("nsum(INSERT((k : Num), DELETE((s : (Num) -> Bool), k)), (i : Num) => EXP(2, i))"),
   )
   let t45 = @tactics.match_mp_tac(@arith.let_trans())
   let t44 = @list.List([
     @meson.asm_meson_tac(@list.List([bounded_finite(), @arith.le_lt()])),
     @tactics.all_tac,
   ])
-  let t43 = @tactics.subgoal_then(@parser.parse_term("FINITE(s:num->bool)"), fn(
+  let t43 = @tactics.subgoal_then(@term_syntax.parse_term("FINITE((s : (Num) -> Bool))"), fn(
     x40 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -632,7 +632,7 @@ pub fn binarysum_bound_lemma() -> @kernel.Thm {
 ///|
 /// BINARYSUM_DIV_DIVISIBLE
 fn step_14() -> Unit raise {
-  let t57 = @int.arith_rule(@parser.parse_term("i <= k:num ==> i + k - i = k"))
+  let t57 = @int.arith_rule(@term_syntax.parse_term("(i : Num) <= (k : Num) → i + (k - i) == k"))
   let t58 = @simp.simp_tac(@list.List([@equal.gsym(@arith.exp_add()), t57]))
   let t56 = @simp.simp_tac(
     @list.List([
@@ -694,7 +694,7 @@ fn step_15() -> Unit raise {
   let t90 = @simp.simp_tac(
     @list.List([
       @sets.in_elim_thm(),
-      @int.arith_rule(@parser.parse_term("k <= j:num ==> ~(j < k)")),
+      @int.arith_rule(@term_syntax.parse_term("(k : Num) <= (j : Num) → !(j < k)")),
     ]),
   )
   let t89 = @tactics.match_mp_tac(@iterate.nsum_eq())
@@ -709,7 +709,7 @@ fn step_15() -> Unit raise {
   let t87 = @simp.rewrite_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("(if p then 0 else q) = 0 <=> ~p ==> q = 0"),
+        @term_syntax.parse_term("((if (p : Bool) { 0 } else { (q : Num) }) == 0) == (!p → q == 0)"),
       ),
     ]),
   )
@@ -744,7 +744,7 @@ fn step_15() -> Unit raise {
   let t78 = @simp.asm_simp_tac(
     @list.List([@sets.subset(), @sets.in_elim_thm()]),
   )
-  let t77 = @tactics.exists_tac(@parser.parse_term("s:num->bool"))
+  let t77 = @tactics.exists_tac(@term_syntax.parse_term("(s : (Num) -> Bool)"))
   let t76 = @tactics.match_mp_tac(@sets.finite_subset())
   let t75 = @simp.simp_tac(@list.List([@sets.in_elim_thm()]))
   let t79 = @list.List([
@@ -771,19 +771,19 @@ fn step_15() -> Unit raise {
   let t73 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t72 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("a + x:num = y + a <=> x = y")),
+      @int.arith_rule(@term_syntax.parse_term("((a : Num) + (x : Num) == (y : Num) + a) == (x == y)")),
     ]),
   )
   let t71 = @simp.simp_tac(
     @list.List([binarysum_bound_lemma(), @sets.in_elim_thm()]),
   )
   let t70 = @tactics.exists_tac(
-    @parser.parse_term("nsum {i | i < k /\\ i IN s} (\\j. 2 EXP j)"),
+    @term_syntax.parse_term("nsum({(i : Num) | i < (k : Num) && IN(i, (s : (Num) -> Bool))}, (j : Num) => EXP(2, j))"),
   )
   let t69 = @tactics.match_mp_tac(@arith.div_uniq())
   let t67 = @simp.asm_rewrite_tac(@list.List([]))
-  let t66 = @class.asm_cases_tac(@parser.parse_term("(i:num) IN s"))
-  let t65 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
+  let t66 = @class.asm_cases_tac(@term_syntax.parse_term("IN((i : Num), (s : (Num) -> Bool))"))
+  let t65 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)"))
   let t64 = @simp.asm_simp_tac(
     @list.List([
       @sets.extension(),
@@ -941,7 +941,7 @@ fn step_16() -> Unit raise {
     ]),
   )
   let t100 = @drule.match_mp(
-    @sets.set_rule(@parser.parse_term("i IN s ==> s = i INSERT (s DELETE i)")),
+    @sets.set_rule(@term_syntax.parse_term("IN((i : _), (s : (_) -> Bool)) → s == INSERT(i, DELETE(s, i))")),
   )
   let t104 = @list.List([
     @tactics.then_tac(
@@ -1021,9 +1021,9 @@ fn step_16() -> Unit raise {
     @tactics.all_tac,
   ])
   let t96 = @simp.asm_rewrite_tac(@list.List([]))
-  let t95 = @class.asm_cases_tac(@parser.parse_term("(i:num) IN s"))
+  let t95 = @class.asm_cases_tac(@term_syntax.parse_term("IN((i : Num), (s : (Num) -> Bool))"))
   let t94 = @simp.asm_simp_tac(@list.List([binarysum_div()]))
-  let t93 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
+  let t93 = @tactics.x_gen_tac(@term_syntax.parse_term("(i : Num)"))
   let t92 = @simp.rewrite_tac(
     @list.List([bitset(), binarysum(), @sets.extension(), @sets.in_elim_thm()]),
   )
@@ -1074,7 +1074,7 @@ fn step_16() -> Unit raise {
   )
   bitset_binarysum_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s. FINITE s ==> bitset (binarysum s) = s"),
+      @term_syntax.parse_term("∀ s : (Num) -> Bool, FINITE(s) → bitset(binarysum(s)) == s"),
       t112,
     ),
   )
@@ -1126,7 +1126,7 @@ fn step_18() -> Unit raise {
     @meson.asm_meson_tac(@list.List([bitset_bound_lemma(), @arith.let_trans()])),
     t118,
   ])
-  let t117 = @tactics.subgoal_then(@parser.parse_term("2 EXP i < 2 EXP k"), fn(
+  let t117 = @tactics.subgoal_then(@term_syntax.parse_term("EXP(2, (i : Num)) < EXP(2, (k : Num))"), fn(
     x114 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -1178,7 +1178,7 @@ fn step_18() -> Unit raise {
   )
   bitset_bound_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n i k. n < 2 EXP k /\\ i IN bitset n ==> i < k"),
+      @term_syntax.parse_term("∀ n : Num, ∀ i : Num, ∀ k : Num, n < EXP(2, k) && IN(i, bitset(n)) → i < k"),
       t120,
     ),
   )
@@ -1201,7 +1201,7 @@ fn step_19() -> Unit raise {
   )
   bitset_bound_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n k. n < 2 EXP k <=> (forall i. i IN bitset n ==> i < k)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ k : Num, (n < EXP(2, k)) == (∀ i : Num, IN(i, bitset(n)) → i < k)"),
       t121,
     ),
   )

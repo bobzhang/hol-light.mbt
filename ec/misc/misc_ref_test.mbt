@@ -35061,12 +35061,12 @@ test "EC/misc matches EC/misc.ml" {
       #|0..0..2..6..19..39..solved at 51
       #|0..0..1..6..17..35..129..331..1214..4872..21242..solved at 21291
       #|EC/misc quotations (57):
-      #|  forall x y:A. integral_domain r\n    ==> (ring_pow r x 2 = ring_pow r y 2 <=> x = y \\/ x = ring_neg r y)
-      #|  ~(n <= 2) <=> 3 <= n
-      #|  p /\\ q <=> p /\\ ~(p ==> ~q)
-      #|  x:A
+      #|  \226\136\128 x : A, \226\136\128 y : A, integral_domain((r : Ring[A])) \226\134\146 (ring_pow(r, x, 2) == ring_pow(r, y, 2)) == (x == y || x == ring_neg(r, y))
+      #|  !((n : Num) <= 2) == (3 <= n)
+      #|  ((p : Bool) && (q : Bool)) == (p && !(p \226\134\146 !q))
+      #|  (x : A)
       #|  UNIONS {{x,y | y | y IN ring_carrier r /\\ ring_pow r y 2 = h x} |x|\n            (x:A) IN ring_carrier r}
-      #|  forall(r:A ring) h.\n        integral_domain r /\\ FINITE(ring_carrier r)\n        ==> FINITE {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                          ring_pow r y 2 = h x} /\\\n            CARD {x,y | x IN ring_carrier r /\\ y IN ring_carrier r /\\\n                        ring_pow r y 2 = h x}\n            <= 2 * CARD(ring_carrier r)
+      #|  \226\136\128 r : Ring[A], \226\136\128 h : (A) -> A, integral_domain(r) && FINITE(ring_carrier(r)) \226\134\146 FINITE({((x : A), (y : A)) | IN(x, ring_carrier(r)) && IN(y, ring_carrier(r)) && ring_pow(r, y, 2) == h(x)}) && CARD({((x : A), (y : A)) | IN(x, ring_carrier(r)) && IN(y, ring_carrier(r)) && ring_pow(r, y, 2) == h(x)}) <= 2 * CARD(ring_carrier(r))
       #|  ~
       #|  \\/
       #|  ~
@@ -35076,48 +35076,48 @@ test "EC/misc matches EC/misc.ml" {
       #|  \\/
       #|  F
       #|  ( * ):num->num->num
-      #|  ~(ring_char r divides NUMERAL n)
-      #|  forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ P
-      #|  prime 3
-      #|  forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 3) /\\ P
-      #|  prime 3
-      #|  forall(f:A ring) P.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\ P <=>\n        field f /\\ ~(ring_char f divides 2) /\\ ~(ring_char f divides 3) /\\ P
-      #|  forall G:A group.\n        FINITE(group_carrier G) /\\ EVEN(CARD(group_carrier G))\n        ==> ?x. x IN group_carrier G /\\ group_element_order G x = 2
-      #|  ~p ==> p ==> q
-      #|  CARD(group_carrier(G:A group)) < 3 * p
-      #|  x:A
-      #|  G:A group
-      #|  d = 2
-      #|  d = 1
-      #|  d = 0
-      #|  d:num
-      #|  a:A
-      #|  G:A group
-      #|  forall G (a:A) p.\n      FINITE(group_carrier G) /\\ CARD(group_carrier G) < 3 * p /\\\n      (forall x. x IN group_carrier G /\\ group_inv G x = x ==> x = group_id G) /\\\n      a IN group_carrier G /\\ group_element_order G a = p\n      ==> (group_carrier G) HAS_SIZE p
-      #|  (eq:A->A->bool) ((add:A->A->A) y z) x
-      #|  (eq:A->A->bool) ((add:A->A->A) x y) z
-      #|  (eq:A->A->bool) x z
-      #|  (eq:A->A->bool) y z
-      #|  (eq:A->A->bool) x y
-      #|  forall P eq add.\n     (forall x y. P x /\\ P y /\\ eq x y ==> eq y x) /\\\n     (forall x y. P x /\\ P y ==> P(add x y)) /\\\n     (forall x y. P x /\\ P y ==> add x y = add y x) /\\\n     (forall x y z. P x /\\ P y /\\ P z /\\ (eq x y \\/ eq (add x y) z)\n              ==> add x (add y z) = add (add x y) z) /\\\n     (forall x y z. P x /\\ P y /\\ P z /\\\n              ~(eq x y) /\\ ~(eq y z) /\\ ~(eq x z) /\\\n              ~(eq (add x y) z) /\\ ~(eq (add y z) x)\n              ==> add x (add y z) = add (add x y) z)\n     ==> forall x y z:A. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z
-      #|  forall x y:A. P x /\\ P y ==> add y (add x x) = add (add y x) x
-      #|  add (add (neg x) (add x y)) (add x y):A
-      #|  add (x:A) (add (neg x) (add (add x y) (add x y)))
-      #|  (add:A->A->A) x (neg x)
-      #|  id:A
-      #|  z:A = id
-      #|  y:A = id
-      #|  x:A = id
-      #|  z:A
-      #|  y:A
-      #|  x:A
-      #|  \\x y. y:A = x \\/ y = neg x
-      #|  p ==> q ==> r /\\ s ==> t <=> r ==> s ==> p /\\ q ==> t
-      #|  forall P add neg (id:A).\n        P id /\\\n        (forall x. P x ==> P(neg x)) /\\\n        (forall x y. P x /\\ P y ==> P(add x y)) /\\\n        (forall x. P x ==> add id x = x) /\\\n        (forall x. P x ==> add (neg x) x = id) /\\\n        (forall x y. P x /\\ P y ==> add x y = add y x) /\\\n        (forall x. P x ==> neg(neg x) = x) /\\\n        (forall x y. P x /\\ P y ==> neg(add x y) = add (neg x) (neg y)) /\\\n        (forall x y. P x /\\ P y ==> add x (add x y) = add (add x x) y) /\\\n        (forall x y. P x /\\ P y ==> add (neg x) (add x y) = y) /\\\n        (forall x y z u v.\n            P x /\\ P y /\\ P z /\\ P u /\\ P v\n            ==> ~(x = id) /\\ ~(y = id) /\\ ~(z = id) /\\\n                ~(u = id) /\\ ~(v = id) /\\\n                ~(y = x \\/ y = neg x) /\\\n                ~(z = y \\/ z = neg y) /\\\n                ~(z = x \\/ z = neg x) /\\\n                ~(z = u \\/ z = neg u) /\\\n                ~(x = v \\/ x = neg v)\n                ==> add x y = u /\\ add y z = v\n                    ==> add x v = add u z)\n     ==> forall x y z. P x /\\ P y /\\ P z ==> add x (add y z) = add (add x y) z
-      #|  abs b:int
-      #|  b:int
-      #|  n = 0
-      #|  forall n a k. (?b. b IN ring_carrier (integer_mod_ring n) /\\\n                ring_pow (integer_mod_ring n) b k = &a) <=>\n           (n = 0 \\/ a < n) /\\\n           (?b. (b EXP k == a) (mod n))
+      #|  !divides(ring_char((r : Ring[_])), NUMERAL((n : Num)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 P : Bool, (field(f) && !(ring_char(f) == 2) && P) == (field(f) && !divides(ring_char(f), 2) && P)
+      #|  prime(3)
+      #|  \226\136\128 f : Ring[A], \226\136\128 P : Bool, (field(f) && !(ring_char(f) == 3) && P) == (field(f) && !divides(ring_char(f), 3) && P)
+      #|  prime(3)
+      #|  \226\136\128 f : Ring[A], \226\136\128 P : Bool, (field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && P) == (field(f) && !divides(ring_char(f), 2) && !divides(ring_char(f), 3) && P)
+      #|  \226\136\128 G : Group[A], FINITE(group_carrier(G)) && EVEN(CARD(group_carrier(G))) \226\134\146 (\226\136\131 x : A, IN(x, group_carrier(G)) && group_element_order(G, x) == 2)
+      #|  !(p : Bool) \226\134\146 p \226\134\146 (q : Bool)
+      #|  CARD(group_carrier((G : Group[A]))) < 3 * (p : Num)
+      #|  (x : A)
+      #|  (G : Group[A])
+      #|  (d : Num) == 2
+      #|  (d : Num) == 1
+      #|  (d : Num) == 0
+      #|  (d : Num)
+      #|  (a : A)
+      #|  (G : Group[A])
+      #|  \226\136\128 G : Group[A], \226\136\128 a : A, \226\136\128 p : Num, FINITE(group_carrier(G)) && CARD(group_carrier(G)) < 3 * p && (\226\136\128 x : A, IN(x, group_carrier(G)) && group_inv(G, x) == x \226\134\146 x == group_id(G)) && IN(a, group_carrier(G)) && group_element_order(G, a) == p \226\134\146 HAS_SIZE(group_carrier(G), p)
+      #|  (eq : (A, A) -> Bool)((add : (A, A) -> A)((y : A), (z : A)), (x : A))
+      #|  (eq : (A, A) -> Bool)((add : (A, A) -> A)((x : A), (y : A)), (z : A))
+      #|  (eq : (A, A) -> Bool)((x : A), (z : A))
+      #|  (eq : (A, A) -> Bool)((y : A), (z : A))
+      #|  (eq : (A, A) -> Bool)((x : A), (y : A))
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 eq : (A, A) -> Bool, \226\136\128 add : (A, A) -> A, (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) && eq(x, y) \226\134\146 eq(y, x)) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 P(add(x, y))) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 add(x, y) == add(y, x)) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, P(x) && P(y) && P(z) && (eq(x, y) || eq(add(x, y), z)) \226\134\146 add(x, add(y, z)) == add(add(x, y), z)) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, P(x) && P(y) && P(z) && !eq(x, y) && !eq(y, z) && !eq(x, z) && !eq(add(x, y), z) && !eq(add(y, z), x) \226\134\146 add(x, add(y, z)) == add(add(x, y), z)) \226\134\146 (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, P(x) && P(y) && P(z) \226\134\146 add(x, add(y, z)) == add(add(x, y), z))
+      #|  \226\136\128 x : A, \226\136\128 y : A, (P : (A) -> Bool)(x) && P(y) \226\134\146 (add : (A, A) -> A)(y, add(x, x)) == add(add(y, x), x)
+      #|  (add : (A, A) -> A)(add((neg : (A) -> A)((x : A)), add(x, (y : A))), add(x, y))
+      #|  (add : (A, A) -> A)((x : A), add((neg : (A) -> A)(x), add(add(x, (y : A)), add(x, y))))
+      #|  (add : (A, A) -> A)((x : A), (neg : (A) -> A)(x))
+      #|  (id : A)
+      #|  (z : A) == (id : A)
+      #|  (y : A) == (id : A)
+      #|  (x : A) == (id : A)
+      #|  (z : A)
+      #|  (y : A)
+      #|  (x : A)
+      #|  (x : A) => (y : A) => y == x || y == (neg : (A) -> A)(x)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool) && (s : Bool) \226\134\146 (t : Bool)) == (r \226\134\146 s \226\134\146 p && q \226\134\146 t)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 add : (A, A) -> A, \226\136\128 neg : (A) -> A, \226\136\128 id : A, P(id) && (\226\136\128 x : A, P(x) \226\134\146 P(neg(x))) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 P(add(x, y))) && (\226\136\128 x : A, P(x) \226\134\146 add(id, x) == x) && (\226\136\128 x : A, P(x) \226\134\146 add(neg(x), x) == id) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 add(x, y) == add(y, x)) && (\226\136\128 x : A, P(x) \226\134\146 neg(neg(x)) == x) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 neg(add(x, y)) == add(neg(x), neg(y))) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 add(x, add(x, y)) == add(add(x, x), y)) && (\226\136\128 x : A, \226\136\128 y : A, P(x) && P(y) \226\134\146 add(neg(x), add(x, y)) == y) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, \226\136\128 u : A, \226\136\128 v : A, P(x) && P(y) && P(z) && P(u) && P(v) \226\134\146 !(x == id) && !(y == id) && !(z == id) && !(u == id) && !(v == id) && !(y == x || y == neg(x)) && !(z == y || z == neg(y)) && !(z == x || z == neg(x)) && !(z == u || z == neg(u)) && !(x == v || x == neg(v)) \226\134\146 add(x, y) == u && add(y, z) == v \226\134\146 add(x, v) == add(u, z)) \226\134\146 (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, P(x) && P(y) && P(z) \226\134\146 add(x, add(y, z)) == add(add(x, y), z))
+      #|  abs((b : Int))
+      #|  (b : Int)
+      #|  (n : Num) == 0
+      #|  \226\136\128 n : Num, \226\136\128 a : Num, \226\136\128 k : Num, (\226\136\131 b : Int, IN(b, ring_carrier(integer_mod_ring(n))) && ring_pow(integer_mod_ring(n), b, k) == int_of_num(a)) == ((n == 0 || a < n) && (\226\136\131 b : Num, op_eq_eq(EXP(b, k), a, mod(n))))
       #|FINITE_QUADRATIC_CURVE =  |- (#forall:fun(fun(ring('A),bool),bool) (\r:ring('A). (#forall:fun(fun(fun('A,'A),bool),bool) (\h:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#integral_domain:fun(ring('A),bool) r:ring('A))) (#FINITE:fun(fun('A,bool),bool) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A))))) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun(prod('A,'A),bool),bool) (#GSPEC:fun(fun(prod('A,'A),bool),fun(prod('A,'A),bool)) (\GEN%PVAR%1:prod('A,'A). (#?:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. (((#SETSPEC:fun(prod('A,'A),fun(bool,fun(prod('A,'A),bool))) GEN%PVAR%1:prod('A,'A)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) r:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (h:fun('A,'A) x:'A))))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)))))))))) ((#<=:fun(num,fun(num,bool)) (#CARD:fun(fun(prod('A,'A),bool),num) (#GSPEC:fun(fun(prod('A,'A),bool),fun(prod('A,'A),bool)) (\GEN%PVAR%2:prod('A,'A). (#?:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. (((#SETSPEC:fun(prod('A,'A),fun(bool,fun(prod('A,'A),bool))) GEN%PVAR%2:prod('A,'A)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) r:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (h:fun('A,'A) x:'A))))) ((#,:fun('A,fun('A,prod('A,'A))) x:'A) y:'A)))))))))) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#CARD:fun(fun('A,bool),num) (#ring_carrier:fun(ring('A),fun('A,bool)) r:ring('A)))))))))))
       #|FIELD_CHAR_NOT2 =  |- (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun(bool,bool),bool) (\P:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool))) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#num_divides:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool)))))))
       #|FIELD_CHAR_NOT3 =  |- (#forall:fun(fun(ring('A),bool),bool) (\f:ring('A). (#forall:fun(fun(bool,bool),bool) (\P:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool))) ((#/\:fun(bool,fun(bool,bool)) (#field:fun(ring('A),bool) f:ring('A))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#num_divides:fun(num,fun(num,bool)) (#ring_char:fun(ring('A),num) f:ring('A))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) P:bool)))))))

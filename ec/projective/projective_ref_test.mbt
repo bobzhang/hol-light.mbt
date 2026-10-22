@@ -67634,28 +67634,28 @@ test "EC/projective matches EC/projective.ml" {
       #|119 basis elements and 0 critical pairs
       #|Generating HOL version of scaled proof
       #|EC/projective quotations (801):
-      #|  projective_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f
-      #|  projective_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_mul f (ring_pow f y 2) z =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 2)))\n                               (ring_mul f b (ring_pow f z 3)))
-      #|  weierstrass_of_projective (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x z,ring_div f y z)
-      #|  projective_of_weierstrass (f:A ring) NONE = (ring_0 f,ring_1 f,ring_0 f) /\\\n  projective_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)
-      #|  projective_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x z' = ring_mul f x' z /\\\n        ring_mul f y z' = ring_mul f y' z
-      #|  projective_0 (f:A ring,a:A,b:A) = (ring_0 f,ring_1 f,ring_0 f)
-      #|  projective_neg (f,a:A,b:A) (x,y,z) = (x:A,ring_neg f y:A,z:A)
-      #|  projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2) =\n    if z1 = ring_0 f then (x2,y2,z2)\n    else if z2 = ring_0 f then (x1,y1,z1)\n    else if projective_eq f (x1,y1,z1) (x2,y2,z2) then\n      let t =\n          ring_add f (ring_mul f a (ring_pow f z1 2))\n          (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n      and u = ring_mul f y1 z1 in\n      let v = ring_mul f u (ring_mul f x1 y1) in\n      let w = ring_sub f (ring_pow f t 2) (ring_mul f (ring_of_num f 8) v) in\n      (ring_mul f (ring_of_num f 2) (ring_mul f u w),\n       ring_sub f (ring_mul f t (ring_sub f (ring_mul f (ring_of_num f 4) v) w))\n       (ring_mul f (ring_of_num f 8)\n       (ring_mul f (ring_pow f y1 2) (ring_pow f u 2))),\n       ring_mul f (ring_of_num f 8) (ring_pow f u 3))\n    else if projective_eq f (projective_neg (f,a,b) (x1,y1,z1)) (x2,y2,z2) then\n      projective_0 (f,a,b)\n    else\n      let u = ring_sub f (ring_mul f y2 z1) (ring_mul f y1 z2)\n      and v = ring_sub f (ring_mul f x2 z1) (ring_mul f x1 z2) in\n      let w =\n          ring_sub f\n          (ring_sub f (ring_mul f (ring_pow f u 2) (ring_mul f z1 z2))\n          (ring_pow f v 3))\n          (ring_mul f (ring_of_num f 2)\n          (ring_mul f (ring_pow f v 2) (ring_mul f x1 z2))) in\n      (ring_mul f v w,\n       ring_sub f\n       (ring_mul f u\n       (ring_sub f (ring_mul f (ring_pow f v 2) (ring_mul f x1 z2)) w))\n       (ring_mul f (ring_pow f v 3) (ring_mul f y1 z2)),\n       ring_mul f (ring_pow f v 3) (ring_mul f z1 z2))
-      #|  forall f a b p. projective_curve(f,a,b) p ==> projective_point f p
-      #|  forall(f:A ring) p.\n        projective_point f (projective_of_weierstrass f p) <=>\n        weierstrass_point f p
-      #|  forall(f:A ring) p.\n        weierstrass_point f p\n        ==> projective_point f (projective_of_weierstrass f p)
-      #|  forall(f:A ring) p.\n        projective_point f p\n        ==> weierstrass_point f (weierstrass_of_projective f p)
-      #|  forall(f:A ring) p q.\n        field f\n        ==> (projective_of_weierstrass f p = projective_of_weierstrass f q <=>\n             p = q)
-      #|  forall(f:A ring) p q.\n        field f /\\ projective_point f p /\\ projective_point f q\n        ==> (weierstrass_of_projective f p = weierstrass_of_projective f q <=>\n             projective_eq f p q)
-      #|  forall(f:A ring) p.\n        field f /\\ weierstrass_point f p\n        ==> weierstrass_of_projective f (projective_of_weierstrass f p) = p
-      #|  forall(f:A ring) p.\n        field f /\\ projective_point f p\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_of_projective f p)) p
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> (projective_curve (f,a,b) (projective_of_weierstrass f p) <=>\n             weierstrass_curve (f,a,b) p)
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve (f,a,b) p\n        ==> projective_curve (f,a,b) (projective_of_weierstrass f p)
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p\n        ==> weierstrass_curve (f,a,b) (weierstrass_of_projective f p)
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p\n        ==> projective_point f (projective_neg (f,a,b) p)
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p\n        ==> projective_curve (f,a,b) (projective_neg (f,a,b) p)
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p\n        ==> weierstrass_of_projective f (projective_neg (f,a,b) p) =\n            weierstrass_neg (f,a,b) (weierstrass_of_projective f p)
+      #|  (projective_point : (Ring[_], (_, _, _)) -> Bool)((f : Ring[_]), ((x : _), (y : _), (z : _))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(z, ring_carrier(f)))
+      #|  (projective_curve : ((Ring[A], A, A), (A, A, A)) -> Bool)(((f : Ring[A]), (a : A), (b : A)), ((x : A), (y : A), (z : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(z, ring_carrier(f)) && ring_mul(f, ring_pow(f, y, 2), z) == ring_add(f, ring_pow(f, x, 3), ring_add(f, ring_mul(f, a, ring_mul(f, x, ring_pow(f, z, 2))), ring_mul(f, b, ring_pow(f, z, 3)))))
+      #|  (weierstrass_of_projective : (Ring[A], (A, A, A)) -> Option[(A, A)])((f : Ring[A]), ((x : A), (y : A), (z : A))) == (if z == ring_0(f) { NONE } else { SOME((ring_div(f, x, z), ring_div(f, y, z))) })
+      #|  (projective_of_weierstrass : (Ring[A], Option[(A, A)]) -> (A, A, A))((f : Ring[A]), NONE) == (ring_0(f), ring_1(f), ring_0(f)) && projective_of_weierstrass(f, SOME(((x : A), (y : A)))) == (x, y, ring_1(f))
+      #|  (projective_eq : (Ring[A], (A, A, A), (A, A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A), (z : A)), ((x' : A), (y' : A), (z' : A))) == ((z == ring_0(f)) == (z' == ring_0(f)) && ring_mul(f, x, z') == ring_mul(f, x', z) && ring_mul(f, y, z') == ring_mul(f, y', z))
+      #|  (projective_0 : ((Ring[A], A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A))) == (ring_0(f), ring_1(f), ring_0(f))
+      #|  (projective_neg : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x : A), (y : A), (z : A))) == (x, ring_neg(f, y), z)
+      #|  (projective_add : ((Ring[_], _, _), (_, _, _), (_, _, _)) -> (_, _, _))(((f : Ring[_]), (a : _), (b : _)), ((x1 : _), (y1 : _), (z1 : _)), ((x2 : _), (y2 : _), (z2 : _))) == (if z1 == ring_0(f) { (x2, y2, z2) } else { if z2 == ring_0(f) { (x1, y1, z1) } else { if projective_eq(f, (x1, y1, z1), (x2, y2, z2)) { LET((t : _) => (u : _) => LET_END(LET((v : _) => LET_END(LET((w : _) => LET_END((ring_mul(f, ring_of_num(f, 2), ring_mul(f, u, w)), ring_sub(f, ring_mul(f, t, ring_sub(f, ring_mul(f, ring_of_num(f, 4), v), w)), ring_mul(f, ring_of_num(f, 8), ring_mul(f, ring_pow(f, y1, 2), ring_pow(f, u, 2)))), ring_mul(f, ring_of_num(f, 8), ring_pow(f, u, 3)))), ring_sub(f, ring_pow(f, t, 2), ring_mul(f, ring_of_num(f, 8), v)))), ring_mul(f, u, ring_mul(f, x1, y1)))), ring_add(f, ring_mul(f, a, ring_pow(f, z1, 2)), ring_mul(f, ring_of_num(f, 3), ring_pow(f, x1, 2))), ring_mul(f, y1, z1)) } else { if projective_eq(f, projective_neg((f, a, b), (x1, y1, z1)), (x2, y2, z2)) { projective_0((f, a, b)) } else { LET((u : _) => (v : _) => LET_END(LET((w : _) => LET_END((ring_mul(f, v, w), ring_sub(f, ring_mul(f, u, ring_sub(f, ring_mul(f, ring_pow(f, v, 2), ring_mul(f, x1, z2)), w)), ring_mul(f, ring_pow(f, v, 3), ring_mul(f, y1, z2))), ring_mul(f, ring_pow(f, v, 3), ring_mul(f, z1, z2)))), ring_sub(f, ring_sub(f, ring_mul(f, ring_pow(f, u, 2), ring_mul(f, z1, z2)), ring_pow(f, v, 3)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, ring_pow(f, v, 2), ring_mul(f, x1, z2)))))), ring_sub(f, ring_mul(f, y2, z1), ring_mul(f, y1, z2)), ring_sub(f, ring_mul(f, x2, z1), ring_mul(f, x1, z2))) } } } })
+      #|  \226\136\128 f : Ring[_], \226\136\128 a : _, \226\136\128 b : _, \226\136\128 p : (_, _, _), projective_curve((f, a, b), p) \226\134\146 projective_point(f, p)
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : Option[(A, A)], projective_point(f, projective_of_weierstrass(f, p)) == weierstrass_point(f, p)
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : Option[(A, A)], weierstrass_point(f, p) \226\134\146 projective_point(f, projective_of_weierstrass(f, p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : (A, A, A), projective_point(f, p) \226\134\146 weierstrass_point(f, weierstrass_of_projective(f, p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : Option[(A, A)], \226\136\128 q : Option[(A, A)], field(f) \226\134\146 (projective_of_weierstrass(f, p) == projective_of_weierstrass(f, q)) == (p == q)
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : (A, A, A), \226\136\128 q : (A, A, A), field(f) && projective_point(f, p) && projective_point(f, q) \226\134\146 (weierstrass_of_projective(f, p) == weierstrass_of_projective(f, q)) == projective_eq(f, p, q)
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : Option[(A, A)], field(f) && weierstrass_point(f, p) \226\134\146 weierstrass_of_projective(f, projective_of_weierstrass(f, p)) == p
+      #|  \226\136\128 f : Ring[A], \226\136\128 p : (A, A, A), field(f) && projective_point(f, p) \226\134\146 projective_eq(f, projective_of_weierstrass(f, weierstrass_of_projective(f, p)), p)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) \226\134\146 projective_curve((f, a, b), projective_of_weierstrass(f, p)) == weierstrass_curve((f, a, b), p)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) \226\134\146 projective_curve((f, a, b), projective_of_weierstrass(f, p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_curve((f, a, b), p) \226\134\146 weierstrass_curve((f, a, b), weierstrass_of_projective(f, p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) \226\134\146 projective_point(f, projective_neg((f, a, b), p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_curve((f, a, b), p) \226\134\146 projective_curve((f, a, b), projective_neg((f, a, b), p))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) \226\134\146 weierstrass_of_projective(f, projective_neg((f, a, b), p)) == weierstrass_neg((f, a, b), weierstrass_of_projective(f, p))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -67667,40 +67667,23 @@ test "EC/projective matches EC/projective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  forall(f:A ring) a b p p'.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f p' /\\ projective_eq f p p'\n        ==> projective_eq f\n              (projective_neg (f,a,b) p) (projective_neg (f,a,b) p')
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> weierstrass_of_projective f\n             (projective_neg (f,a,b) (projective_of_weierstrass f p)) =\n            weierstrass_neg (f,a,b) p
-      #|  forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_neg (f,a,b) p))\n             (projective_neg (f,a,b) (projective_of_weierstrass f p))
-      #|  forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f q\n        ==> projective_point f (projective_add (f,a,b) p q)
-      #|  forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p /\\ projective_curve (f,a,b) q\n        ==> projective_curve (f,a,b) (projective_add (f,a,b) p q)
-      #|  z2:A = ring_0 f
-      #|  z1:A = ring_0 f
-      #|  z2:A
-      #|  y2:A
-      #|  x2:A
-      #|  z1:A
-      #|  y1:A
-      #|  x1:A
-      #|  b:A
-      #|  a:A
-      #|  f:A ring
-      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f q\n        ==> weierstrass_of_projective f (projective_add (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_projective f p)\n             (weierstrass_of_projective f q)
-      #|  :A
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
-      #|  IN((x : A), ring_carrier((f : Ring[A])))
-      #|  (x : A)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), \226\136\128 p' : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, p') && projective_eq(f, p, p') \226\134\146 projective_eq(f, projective_neg((f, a, b), p), projective_neg((f, a, b), p'))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) \226\134\146 weierstrass_of_projective(f, projective_neg((f, a, b), projective_of_weierstrass(f, p))) == weierstrass_neg((f, a, b), p)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) \226\134\146 projective_eq(f, projective_of_weierstrass(f, weierstrass_neg((f, a, b), p)), projective_neg((f, a, b), projective_of_weierstrass(f, p)))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), \226\136\128 q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, q) \226\134\146 projective_point(f, projective_add((f, a, b), p, q))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), \226\136\128 q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_curve((f, a, b), p) && projective_curve((f, a, b), q) \226\134\146 projective_curve((f, a, b), projective_add((f, a, b), p, q))
+      #|  (z2 : A) == ring_0((f : Ring[A]))
+      #|  (z1 : A) == ring_0((f : Ring[A]))
+      #|  (z2 : A)
+      #|  (y2 : A)
+      #|  (x2 : A)
+      #|  (z1 : A)
+      #|  (y1 : A)
+      #|  (x1 : A)
+      #|  (b : A)
+      #|  (a : A)
+      #|  (f : Ring[A])
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), \226\136\128 q : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, q) \226\134\146 weierstrass_of_projective(f, projective_add((f, a, b), p, q)) == weierstrass_add((f, a, b), weierstrass_of_projective(f, p), weierstrass_of_projective(f, q))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
@@ -68432,9 +68415,26 @@ test "EC/projective matches EC/projective.ml" {
       #|  (x : A)
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
-      #|  forall(f:A ring) a b p p' q q'.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f p' /\\\n        projective_point f q /\\ projective_point f q' /\\\n        projective_eq f p p' /\\ projective_eq f q q'\n        ==> projective_eq f\n              (projective_add (f,a,b) p q) (projective_add (f,a,b) p' q')
-      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_of_projective f\n             (projective_add (f,a,b)\n               (projective_of_weierstrass f p)\n               (projective_of_weierstrass f q)) =\n            weierstrass_add (f,a,b) p q
-      #|  forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_add (f,a,b) p q))\n             (projective_add (f,a,b)\n               (projective_of_weierstrass f p)\n               (projective_of_weierstrass f q))
+      #|  :A
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  IN((x : A), ring_carrier((f : Ring[A])))
+      #|  (x : A)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : (A, A, A), \226\136\128 p' : (A, A, A), \226\136\128 q : (A, A, A), \226\136\128 q' : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, p') && projective_point(f, q) && projective_point(f, q') && projective_eq(f, p, p') && projective_eq(f, q, q') \226\134\146 projective_eq(f, projective_add((f, a, b), p, q), projective_add((f, a, b), p', q'))
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], \226\136\128 q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) \226\134\146 weierstrass_of_projective(f, projective_add((f, a, b), projective_of_weierstrass(f, p), projective_of_weierstrass(f, q))) == weierstrass_add((f, a, b), p, q)
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 p : Option[(A, A)], \226\136\128 q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) \226\134\146 projective_eq(f, projective_of_weierstrass(f, weierstrass_add((f, a, b), p, q)), projective_add((f, a, b), projective_of_weierstrass(f, p), projective_of_weierstrass(f, q)))
       #|projective_point =  |- ((#=:fun(bool,fun(bool,bool)) ((#projective_point:fun(ring('?1),fun(prod('?1,prod('?1,'?1)),bool)) f:ring('?1)) ((#,:fun('?1,fun(prod('?1,'?1),prod('?1,prod('?1,'?1)))) x:'?1) ((#,:fun('?1,fun('?1,prod('?1,'?1))) y:'?1) z:'?1)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) x:'?1) (#ring_carrier:fun(ring('?1),fun('?1,bool)) f:ring('?1)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) y:'?1) (#ring_carrier:fun(ring('?1),fun('?1,bool)) f:ring('?1)))) ((#IN:fun('?1,fun(fun('?1,bool),bool)) z:'?1) (#ring_carrier:fun(ring('?1),fun('?1,bool)) f:ring('?1))))))
       #|projective_curve =  |- ((#=:fun(bool,fun(bool,bool)) ((#projective_curve:fun(prod(ring('A),prod('A,'A)),fun(prod('A,prod('A,'A)),bool)) ((#,:fun(ring('A),fun(prod('A,'A),prod(ring('A),prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun('A,prod('A,'A))) a:'A) b:'A))) ((#,:fun('A,fun(prod('A,'A),prod('A,prod('A,'A)))) x:'A) ((#,:fun('A,fun('A,prod('A,'A))) y:'A) z:'A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) z:'A) (#ring_carrier:fun(ring('A),fun('A,bool)) f:ring('A)))) ((#=:fun('A,fun('A,bool)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) y:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) z:'A)) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) x:'A) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#ring_add:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) a:'A) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) z:'A) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (((#ring_mul:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) b:'A) (((#ring_pow:fun(ring('A),fun('A,fun(num,'A))) f:ring('A)) z:'A) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))
       #|weierstrass_of_projective =  |- ((#=:fun(option(prod('A,'A)),fun(option(prod('A,'A)),bool)) ((#weierstrass_of_projective:fun(ring('A),fun(prod('A,prod('A,'A)),option(prod('A,'A)))) f:ring('A)) ((#,:fun('A,fun(prod('A,'A),prod('A,prod('A,'A)))) x:'A) ((#,:fun('A,fun('A,prod('A,'A))) y:'A) z:'A)))) (((#COND:fun(bool,fun(option(prod('A,'A)),fun(option(prod('A,'A)),option(prod('A,'A))))) ((#=:fun('A,fun('A,bool)) z:'A) (#ring_0:fun(ring('A),'A) f:ring('A)))) #NONE:option(prod('A,'A))) (#SOME:fun(prod('A,'A),option(prod('A,'A))) ((#,:fun('A,fun('A,prod('A,'A))) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) x:'A) z:'A)) (((#ring_div:fun(ring('A),fun('A,fun('A,'A))) f:ring('A)) y:'A) z:'A)))))

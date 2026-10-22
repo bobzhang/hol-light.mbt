@@ -563,7 +563,7 @@ pub fn hol_of_const(x : Int64) -> @kernel.Term raise {
 ///|
 /// reset_consts, fol_of_const, hol_of_const
 fn step_11() -> Unit raise {
-  let false_tm = @parser.parse_term("F")
+  let false_tm = @term_syntax.parse_term("false")
   let cstore = Ref::{ val: @list.List([]), }
   let ccounter = Ref::{ val: 2L, }
   let reset_consts : (Unit) -> Unit raise = fn(x13 : Unit) -> Unit raise {
@@ -2512,9 +2512,9 @@ fn step_14() -> Unit raise {
     @theorems.disj_aci(),
   )
   let imp_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(
-    @class.taut(@parser.parse_term("a \\/ b <=> ~b ==> a")),
+    @class.taut(@term_syntax.parse_term("((a : Bool) || (b : Bool)) == (!b → a)")),
   )
-  let t199 = @class.taut(@parser.parse_term("~(~a) <=> a"))
+  let t199 = @class.taut(@term_syntax.parse_term("!!(a : Bool) == a"))
   let push_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
     fn(
       x196 : (@kernel.Term) -> @kernel.Thm raise,
@@ -2523,7 +2523,7 @@ fn step_14() -> Unit raise {
       fn(x198 : @kernel.Term) -> @kernel.Thm raise { s197(x198) }
     },
     @list.List([
-      @class.taut(@parser.parse_term("~(a \\/ b) <=> ~a /\\ ~b")),
+      @class.taut(@term_syntax.parse_term("!((a : Bool) || (b : Bool)) == (!a && !b)")),
       t199,
     ]),
   )
@@ -2534,10 +2534,10 @@ fn step_14() -> Unit raise {
       let s201 = @equal.depth_conv(x200)
       fn(x202 : @kernel.Term) -> @kernel.Thm raise { s201(x202) }
     },
-    @list.List([@class.taut(@parser.parse_term("~a \\/ ~b <=> ~(a /\\ b)"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("(!(a : Bool) || !(b : Bool)) == !(a && b)"))]),
   )
   let imf_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(
-    @class.taut(@parser.parse_term("~p <=> p ==> F")),
+    @class.taut(@term_syntax.parse_term("!(p : Bool) == (p → false)")),
   )
   let memory = Ref::{ val: @list.List([]), }
   let clear_contrapos_cache : (Unit) -> Unit raise = fn(
@@ -2594,7 +2594,7 @@ fn step_14() -> Unit raise {
 ///|
 /// finish_RULE
 fn step_15() -> Unit raise {
-  let t207 = @class.taut(@parser.parse_term("(p ==> ~p) <=> ~p"))
+  let t207 = @class.taut(@term_syntax.parse_term("((p : Bool) → !p) == !p"))
   finish_rule_c.set(
     @simp.gen_rewrite_rule(
       fn(
@@ -2602,7 +2602,7 @@ fn step_15() -> Unit raise {
       ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
         x206
       },
-      @list.List([@class.taut(@parser.parse_term("(~p ==> p) <=> p")), t207]),
+      @list.List([@class.taut(@term_syntax.parse_term("(!(p : Bool) → p) == p")), t207]),
     ),
   )
 }
@@ -2708,7 +2708,7 @@ pub fn meson_to_hol(
 fn step_17() -> Unit raise {
   let t224 = @tactics.conv_tac(@class.taut)
   let t223 = @simp.asm_rewrite_tac(@list.List([]))
-  let t222 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
+  let t222 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == (y : A)"))
   let t225 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@simp.rewrite_tac(@list.List([])), t222),
@@ -2751,10 +2751,10 @@ fn step_17() -> Unit raise {
     })(t226),
   )
   let imp_elim_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(
-    @class.taut(@parser.parse_term("(a ==> b) <=> ~a \\/ b")),
+    @class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) == (!a || b)")),
   )
   let eq_elim_rule : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(
-    @class.taut(@parser.parse_term("(a <=> b) ==> b \\/ ~a")),
+    @class.taut(@term_syntax.parse_term("(a : Bool) == (b : Bool) → b || !a")),
   )
   let veq_tm = @kernel.rator(@kernel.rator(@kernel.concl(@lib.hd(eq_thms))))
   fn tm_consts(
@@ -3038,7 +3038,7 @@ fn step_18() -> Unit raise {
     x275 : @list.List[@kernel.Term],
   ) => subterms_refl_l(x273, x274, x275)
   let t278 = @simp.rewr_conv(
-    @class.taut(@parser.parse_term("a ==> b <=> ~a \\/ b")),
+    @class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) == (!a || b)")),
   )
   let clausify : (@kernel.Thm) -> @kernel.Thm raise = (x279 : @kernel.Thm) => {
     @equal.conv_rule(t278, x279)
