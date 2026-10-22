@@ -29841,8 +29841,8 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall r. ring_carrier r = (:A)\n          ==> (forall x y z. ring_add r x (ring_add r y z) =\n                       ring_add r (ring_add r x y) z) /\\\n              (forall x y. ring_add r x y = ring_add r y x) /\\\n              (forall x. ring_add r (ring_of_int r (&0)) x = x) /\\\n              (forall x y z. ring_mul r x (ring_mul r y z) =\n                       ring_mul r (ring_mul r x y) z) /\\\n              (forall x y. ring_mul r x y = ring_mul r y x) /\\\n              (forall x. ring_mul r (ring_of_int r (&1)) x = x) /\\\n              (forall x. ring_mul r (ring_of_int r (&0)) x = ring_of_int r (&0)) /\\\n              (forall x y z. ring_mul r x (ring_add r y z) =\n                       ring_add r (ring_mul r x y) (ring_mul r x z)) /\\\n              (forall x. ring_pow r x 0 = ring_of_int r (&1)) /\\\n              (forall x n. ring_pow r x (SUC n) = ring_mul r x (ring_pow r x n))
       #|  forall r. ring_carrier r = (:A)\n          ==> (forall x. ring_neg r x = ring_mul r (ring_of_int r (-- &1)) x) /\\\n              (forall x y. ring_sub r x y =\n                     ring_add r x (ring_mul r (ring_of_int r (-- &1)) y))
       #|  ring_0 r = ring_of_int r (&0) /\\\n     ring_1 r = ring_of_int r (&1)
-      #|  p:num
-      #|  q:num
+      #|  (p : Num)
+      #|  (q : Num)
       #|  0
       #|  1
       #|  (r : Ring[A])
