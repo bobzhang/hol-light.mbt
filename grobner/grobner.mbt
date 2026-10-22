@@ -831,10 +831,10 @@ fn step_1() -> Unit raise {
   let t202 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(@class.contrapos_thm())]),
   )
-  let t195 = @parser.parse_term("c:A")
-  let t196 = @parser.parse_term("d:A")
-  let t197 = @parser.parse_term("n:A")
-  let t198 = @list.List([@parser.parse_term("n0:A"), t197, t196, t195])
+  let t195 = @term_syntax.parse_term("(c : A)")
+  let t196 = @term_syntax.parse_term("(d : A)")
+  let t197 = @term_syntax.parse_term("(n : A)")
+  let t198 = @list.List([@term_syntax.parse_term("(n0 : A)"), t197, t196, t195])
   let t201 = @tactics.first_x_assum(fn(
     x200 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -939,9 +939,9 @@ fn step_1() -> Unit raise {
     t204,
   )
   let final_rule : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(
-    @class.taut(@parser.parse_term("(p ==> F) ==> (~q = p) ==> q")),
+    @class.taut(@term_syntax.parse_term("((p : Bool) → false) → !(q : Bool) == p → q")),
   )
-  let false_tm = @parser.parse_term("F")
+  let false_tm = @term_syntax.parse_term("false")
   fn refute_disj(
     x205 : (@kernel.Term) -> @kernel.Thm raise,
     x206 : @kernel.Term,
@@ -2602,22 +2602,22 @@ pub fn ideal_cofactors(
 ///|
 /// NUM_SIMPLIFY_CONV
 fn step_2() -> Unit raise {
-  let pre_tm = @parser.parse_term("PRE")
-  let div_tm = @parser.parse_term("(DIV):num->num->num")
-  let mod_tm = @parser.parse_term("(MOD):num->num->num")
-  let p_tm = @parser.parse_term("P:num->bool")
-  let n_tm = @parser.parse_term("n:num")
-  let m_tm = @parser.parse_term("m:num")
-  let q_tm = @parser.parse_term("P:num->num->bool")
-  let a_tm = @parser.parse_term("a:num")
-  let b_tm = @parser.parse_term("b:num")
+  let pre_tm = @term_syntax.parse_term("PRE")
+  let div_tm = @term_syntax.parse_term("DIV")
+  let mod_tm = @term_syntax.parse_term("MOD")
+  let p_tm = @term_syntax.parse_term("(P : (Num) -> Bool)")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
+  let m_tm = @term_syntax.parse_term("(m : Num)")
+  let q_tm = @term_syntax.parse_term("(P : (Num, Num) -> Bool)")
+  let a_tm = @term_syntax.parse_term("(a : Num)")
+  let b_tm = @term_syntax.parse_term("(b : Num)")
   let is_pre : (@kernel.Term) -> Bool raise = fn(
     x375 : @kernel.Term,
   ) -> Bool raise {
     let tm = x375
     @kernel.is_comb(tm) && @kernel.rator(tm) == pre_tm
   }
-  let t376 = @parser.parse_term("(-):num->num->num")
+  let t376 = @term_syntax.parse_term("op_minus")
   let is_sub : (@kernel.Term) -> Bool raise = fn(
     x378 : @kernel.Term,
   ) -> Bool raise {
@@ -2882,7 +2882,7 @@ fn step_3() -> Unit raise {
       @arith.mult_eq_0(),
     ]),
   )
-  let t419 = @parser.parse_term("a + b + c + d + e = a + c + e + b + d")
+  let t419 = @term_syntax.parse_term("(a : Num) + ((b : Num) + ((c : Num) + ((d : Num) + (e : Num)))) == a + (c + (e + (b + d)))")
   let t420 = @simp.once_rewrite_tac(
     @list.List([@theorems.ac(@arith.add_ac())(t419)]),
   )
@@ -3007,17 +3007,17 @@ fn step_3() -> Unit raise {
       t432(t431(x433))
     }),
   )
-  let t426 = @parser.parse_term("z:num")
+  let t426 = @term_syntax.parse_term("(z : Num)")
   let t427 = @tactics.disj_cases_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("y:num"), t426]),
+      @list.List([@term_syntax.parse_term("(y : Num)"), t426]),
       @arith.le_cases(),
     ),
   )
-  let t424 = @parser.parse_term("x:num")
+  let t424 = @term_syntax.parse_term("(x : Num)")
   let t425 = @tactics.disj_cases_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("w:num"), t424]),
+      @list.List([@term_syntax.parse_term("(w : Num)"), t424]),
       @arith.le_cases(),
     ),
   )
@@ -3046,12 +3046,12 @@ fn step_3() -> Unit raise {
     ),
     t436,
   )
-  let t437 = @parser.parse_term("(EXP):num->num->num")
+  let t437 = @term_syntax.parse_term("EXP")
   let t438 = @basics.genvar(@kernel.bool_ty)
-  let t439 = @parser.parse_term("(*):num->num->num")
+  let t439 = @term_syntax.parse_term("op_star")
   let t440 = @basics.genvar(@kernel.bool_ty)
   let t441 = @basics.genvar(@kernel.bool_ty)
-  let t442 = @parser.parse_term("(+):num->num->num")
+  let t442 = @term_syntax.parse_term("op_plus")
   let rawring : (@kernel.Term) -> @kernel.Thm raise = ring(
     (
       @basics.dest_numeral,
@@ -3081,7 +3081,7 @@ fn step_3() -> Unit raise {
       @list.List([@arith.add1()]),
     ),
   )
-  let t_tm = @parser.parse_term("T")
+  let t_tm = @term_syntax.parse_term("true")
   num_ring_c.set(fn(x446 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x446
     let th_1 = initconv(tm)

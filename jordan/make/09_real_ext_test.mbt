@@ -5969,14 +5969,14 @@ test "Jordan/real_ext matches Jordan/real_ext.ml" {
       #|  (<=):num->num->bool
       #|  (>):num->num->bool
       #|  (>=):num->num->bool
-      #|  forall x a b. (x*.a = x*.b) ==> (~(x=(&.0))) ==> (a =b)
-      #|  forall x a b. (a*.x = b*.x) ==> (~(x=(&.0))) ==> (a =b)
-      #|  forall x a b. (x*.a <=. x*.b) ==> (&.0 < x) ==> (a <=. b)
-      #|  forall x a b. (a*.x <=. b*.x) ==> (&.0 < x) ==> (a <=. b)
-      #|  forall x y. x<. y ==> x <= y
-      #|  forall x y. &.0 <. x /\\ (&.0) <=. y*.x ==> ((&.0) <=. y)
-      #|  forall x y. &.0 <. x /\\ (&.0) <=. x*.y ==> ((&.0) <=. y)
-      #|  forall x. (~(x = (&.0))) ==> (~(abs(x) = (&.0)))
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, x * a == x * b \226\134\146 !(x == real_of_num(0)) \226\134\146 a == b
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, a * x == b * x \226\134\146 !(x == real_of_num(0)) \226\134\146 a == b
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, x * a <= x * b \226\134\146 real_of_num(0) < x \226\134\146 a <= b
+      #|  \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, a * x <= b * x \226\134\146 real_of_num(0) < x \226\134\146 a <= b
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 x <= y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x && real_of_num(0) <= y * x \226\134\146 real_of_num(0) <= y
+      #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) < x && real_of_num(0) <= x * y \226\134\146 real_of_num(0) <= y
+      #|  \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 !(abs(x) == real_of_num(0))
       #|REAL_MUL_LTIMES =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) x:real) a:real)) ((#real_mul:fun(real,fun(real,real)) x:real) b:real))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) a:real) b:real)))))))))
       #|REAL_MUL_RTIMES =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) a:real) x:real)) ((#real_mul:fun(real,fun(real,real)) b:real) x:real))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) a:real) b:real)))))))))
       #|REAL_PROP_EQ_LMUL =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(real,bool),bool) (\b:real. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) x:real) a:real)) ((#real_mul:fun(real,fun(real,real)) x:real) b:real))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(real,fun(real,bool)) a:real) b:real)))))))))

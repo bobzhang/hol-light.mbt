@@ -3,7 +3,7 @@
 ///|
 /// Tutorial/HOL_basics.ml:1
 fn step_1() -> Unit raise {
-  ignore(@int.arith_rule(@parser.parse_term("(a * x + b * y + a * y) EXP 3 + (b * x) EXP 3 +\n  (a * x + b * y + b * x) EXP 3 + (a * y) EXP 3 =\n  (a * x + a * y + b * x) EXP 3 + (b * y) EXP 3 +\n  (a * y + b * y + b * x) EXP 3 + (a * x) EXP 3")))
+  ignore(@int.arith_rule(@term_syntax.parse_term("EXP((a : Num) * (x : Num) + ((b : Num) * (y : Num) + a * y), 3) + (EXP(b * x, 3) + (EXP(a * x + (b * y + b * x), 3) + EXP(a * y, 3))) == EXP(a * x + (a * y + b * x), 3) + (EXP(b * y, 3) + (EXP(a * y + (b * y + b * x), 3) + EXP(a * x, 3)))")))
 }
 
 ///|

@@ -3,7 +3,7 @@
 ///|
 /// montgomery_xz
 fn step_1() -> Unit raise {
-  montgomery_xz_c.set(@define.define_(@parser.parse_term("(montgomery_xz (f:A ring) NONE (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(X = ring_0 f) /\\ Z = ring_0 f) /\\\n  (montgomery_xz f (SOME(x,y:A)) (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\ ring_div f X Z = x)")))
+  montgomery_xz_c.set(@define.define_(@term_syntax.parse_term("(montgomery_xz : (Ring[A], Option[(A, A)], (A, A)) -> Bool)((f : Ring[A]), NONE, ((X : A), (Z : A))) == (IN(X, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(X == ring_0(f)) && Z == ring_0(f)) && montgomery_xz(f, SOME(((x : A), (y : A))), (X, Z)) == (IN(X, ring_carrier(f)) && IN(Z, ring_carrier(f)) && !(Z == ring_0(f)) && ring_div(f, X, Z) == x)")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn montgomery_xz() -> @kernel.Thm {
 /// MONTGOMERY_XZ_IN_CARRIER
 fn step_2() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), montgomery_xz()]))
-  montgomery_xz_in_carrier_c.set(@tactics.prove(@parser.parse_term("forall P X Z.\n        montgomery_xz f P (X,Z)\n        ==> X IN ring_carrier f /\\ Z IN ring_carrier f"), t1))
+  montgomery_xz_in_carrier_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : Option[(_, _)], ∀ X : _, ∀ Z : _, montgomery_xz((f : Ring[_]), P, (X, Z)) → IN(X, ring_carrier(f)) && IN(Z, ring_carrier(f))"), t1))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn montgomery_xz_in_carrier() -> @kernel.Thm {
 ///|
 /// montgomery_xzdouble
 fn step_3() -> Unit raise {
-  montgomery_xzdouble_c.set(@define.define_(@parser.parse_term("montgomery_xzdouble (f,a:A,b:A) (X,Z) =\n        ring_pow f (ring_sub f (ring_pow f X 2) (ring_pow f Z 2)) 2,\n        ring_mul f (ring_mul f (ring_of_num f 4) (ring_mul f X Z))\n                   (ring_add f (ring_pow f X 2)\n                   (ring_add f (ring_mul f a\n                         (ring_mul f X Z)) (ring_pow f Z 2)))")))
+  montgomery_xzdouble_c.set(@define.define_(@term_syntax.parse_term("(montgomery_xzdouble : ((Ring[A], A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (b : A)), ((X : A), (Z : A))) == (ring_pow(f, ring_sub(f, ring_pow(f, X, 2), ring_pow(f, Z, 2)), 2), ring_mul(f, ring_mul(f, ring_of_num(f, 4), ring_mul(f, X, Z)), ring_add(f, ring_pow(f, X, 2), ring_add(f, ring_mul(f, a, ring_mul(f, X, Z)), ring_pow(f, Z, 2)))))")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn montgomery_xzdouble() -> @kernel.Thm {
 ///|
 /// montgomery_xzdiffadd
 fn step_4() -> Unit raise {
-  montgomery_xzdiffadd_c.set(@define.define_(@parser.parse_term("montgomery_xzdiffadd (f:A ring,a:A,b:A) (X,Z) (Xm,Zm) (Xn,Zn) =\n        ring_mul f (ring_mul f (ring_of_num f 4) Z)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Xn)\n                                           (ring_mul f Zm Zn)) 2),\n        ring_mul f (ring_mul f (ring_of_num f 4) X)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Zn)\n                                           (ring_mul f Xn Zm)) 2)")))
+  montgomery_xzdiffadd_c.set(@define.define_(@term_syntax.parse_term("(montgomery_xzdiffadd : ((Ring[A], A, A), (A, A), (A, A), (A, A)) -> (A, A))(((f : Ring[A]), (a : A), (b : A)), ((X : A), (Z : A)), ((Xm : A), (Zm : A)), ((Xn : A), (Zn : A))) == (ring_mul(f, ring_mul(f, ring_of_num(f, 4), Z), ring_pow(f, ring_sub(f, ring_mul(f, Xm, Xn), ring_mul(f, Zm, Zn)), 2)), ring_mul(f, ring_mul(f, ring_of_num(f, 4), X), ring_pow(f, ring_sub(f, ring_mul(f, Xm, Zn), ring_mul(f, Xn, Zm)), 2)))")))
 }
 
 ///|
@@ -73,7 +73,7 @@ fn step_5() -> Unit raise {
   let t3 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), @montgomery.montgomery_add(), montgomery_xz(), @equal.gsym(@class.de_morgan_thm()), montgomery_xzdouble(), @montgomery.montgomery_nonsingular()]))
   let t2 = @simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t2), t3), t4), t5), t6), t7), t8), t9), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_xzdouble_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_xz f p q\n        ==> montgomery_xz f (montgomery_add(f,a,b) p p)\n                            (montgomery_xzdouble(f,a,b) q)"), t10))
+  montgomery_xzdouble_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && montgomery_curve((f, a, b), p) && montgomery_xz(f, p, q) → montgomery_xz(f, montgomery_add((f, a, b), p, p), montgomery_xzdouble((f, a, b), q))"), t10))
 }
 
 ///|
@@ -99,7 +99,7 @@ fn step_6() -> Unit raise {
     @tactics.all_tac
   })
   let t13 = @simp.asm_rewrite_tac(@list.List([]))
-  let t12 = @class.asm_cases_tac(@parser.parse_term("p = montgomery_add (f,a:A,b) pm (montgomery_neg (f,a,b) pn)"))
+  let t12 = @class.asm_cases_tac(@term_syntax.parse_term("(p : Option[(A, A)]) == montgomery_add(((f : Ring[A]), (a : A), (b : A)), (pm : Option[(A, A)]), montgomery_neg((f, a, b), (pn : Option[(A, A)])))"))
   let t11 = @tactics.repeat_tac(@tactics.gen_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23()])), t11), t12), t13), t15), fn(x20 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     (fn(x16 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -110,7 +110,7 @@ fn step_6() -> Unit raise {
       }, @kernel.frees(w))
     })(x20)(x20)
   }), t21), t22), t23), t24), t25), t26), t27), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_xzdiffadd_v1_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p q pm qm pn qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        montgomery_curve(f,a,b) p /\\\n        montgomery_curve(f,a,b) pm /\\\n        montgomery_curve(f,a,b) pn /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f pm qm /\\\n        montgomery_xz f pn qn /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        montgomery_add (f,a,b) pm (montgomery_neg (f,a,b) pn) = p\n        ==> montgomery_xz f (montgomery_add(f,a,b) pm pn)\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)"), t28))
+  montgomery_xzdiffadd_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : (A, A), ∀ pm : Option[(A, A)], ∀ qm : (A, A), ∀ pn : Option[(A, A)], ∀ qn : (A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && montgomery_curve((f, a, b), p) && montgomery_curve((f, a, b), pm) && montgomery_curve((f, a, b), pn) && montgomery_xz(f, p, q) && montgomery_xz(f, pm, qm) && montgomery_xz(f, pn, qn) && !(FST(q) == ring_0(f)) && !(SND(q) == ring_0(f)) && montgomery_add((f, a, b), pm, montgomery_neg((f, a, b), pn)) == p → montgomery_xz(f, montgomery_add((f, a, b), pm, pn), montgomery_xzdiffadd((f, a, b), q, qm, qn))"), t28))
 }
 
 ///|
@@ -128,7 +128,7 @@ fn step_7() -> Unit raise {
   let t43 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t42 = @simp.asm_simp_tac(@list.List([@montgomery.montgomery_group_v1()]))
   let t39 = @drule.match_mp(@grouptheory.group_pow_v1())
-  let t36 = @parser.parse_term("n:num")
+  let t36 = @term_syntax.parse_term("(n : Num)")
   let t41 = @tactics.first_assum(fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x38 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x33 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -144,7 +144,7 @@ fn step_7() -> Unit raise {
   let t30 = @simp.asm_simp_tac(@list.List([@montgomery.montgomery_group_v1()]))
   let t29 = @simp.asm_simp_tac(@list.List([@arith.mult_2(), @grouptheory.group_pow_add()]))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t29), t30), t31), t32), t41), t42), t43)
-  montgomery_xzdouble_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p n q.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) q\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n))\n                            (montgomery_xzdouble(f,a,b) q)"), t44))
+  montgomery_xzdouble_group_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ n : Num, ∀ q : (A, A), field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && IN(p, group_carrier(montgomery_group((f, a, b)))) && montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, n), q) → montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, 2 * n), montgomery_xzdouble((f, a, b), q))"), t44))
 }
 
 ///|
@@ -160,20 +160,20 @@ pub fn montgomery_xzdouble_group() -> @kernel.Thm {
 /// MONTGOMERY_XZDIFFADD_GROUP
 fn step_8() -> Unit raise {
   let t71 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow_v1()]))
-  let t70 = @tactics.match_mp_tac(@grouptheory.group_rule(@parser.parse_term("group_mul G (group_mul G x y) (group_inv G y) = x")))
+  let t70 = @tactics.match_mp_tac(@grouptheory.group_rule(@term_syntax.parse_term("group_mul((G : Group[_]), group_mul(G, (x : _), (y : _)), group_inv(G, y)) == x")))
   let t69 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow_v1(), @grouptheory.group_pow_add(), @grouptheory.group_pow_1()]))
-  let t68 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("n + 1 = 1 + n"))]))
-  let t67 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("group_carrier G x <=> x IN group_carrier G"))]))
+  let t68 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) + 1 == 1 + n"))]))
+  let t67 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("group_carrier((G : Group[_]), (x : _)) == IN(x, group_carrier(G))"))]))
   let t66 = @tactics.disch_then(fn(x64 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x64
     @simp.rewrite_tac(@list.List([@equal.gsym(th)]))
   })
   let t63 = @simp.asm_rewrite_tac(@list.List([]))
-  let t60 = @parser.parse_term("b:A")
-  let t61 = @parser.parse_term("a:A")
-  let t62 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t61, t60]), @montgomery.montgomery_group_v1()))
+  let t60 = @term_syntax.parse_term("(b : A)")
+  let t61 = @term_syntax.parse_term("(a : A)")
+  let t62 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t61, t60]), @montgomery.montgomery_group_v1()))
   let t59 = @simp.asm_rewrite_tac(@list.List([@arith.add1()]))
-  let t58 = @tactics.exists_tac(@parser.parse_term("p:(A#A)option"))
+  let t58 = @tactics.exists_tac(@term_syntax.parse_term("(p : Option[(A, A)])"))
   let t57 = @tactics.match_mp_tac(montgomery_xzdiffadd_v1())
   let t56 = @tactics.disch_then(fn(x55 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x54 : @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -186,13 +186,13 @@ fn step_8() -> Unit raise {
     })(@bool.conjuncts_rule(x55))
   })
   let t50 = @simp.asm_rewrite_tac(@list.List([]))
-  let t47 = @parser.parse_term("b:A")
-  let t48 = @parser.parse_term("a:A")
-  let t49 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t48, t47]), @montgomery.montgomery_group_v1()))
+  let t47 = @term_syntax.parse_term("(b : A)")
+  let t48 = @term_syntax.parse_term("(a : A)")
+  let t49 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t48, t47]), @montgomery.montgomery_group_v1()))
   let t46 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow_add()]))
-  let t45 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("2 * n + 1 = SUC n + n"))]))
+  let t45 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("2 * (n : Num) + 1 == SUC(n) + n"))]))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t45), t46), t49), t50), t56), t57), t58), t59), t62), t63), t66), t67), t68), t69), t70), t71)
-  montgomery_xzdiffadd_group_c.set(@tactics.prove(@parser.parse_term("forall f (a:A) b p n q qm qn.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular(f,a,b) /\\\n        ~(FST q = ring_0 f) /\\ ~(SND q = ring_0 f) /\\\n        p IN group_carrier (montgomery_group(f,a,b)) /\\\n        montgomery_xz f p q /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (n + 1)) qm /\\\n        montgomery_xz f (group_pow (montgomery_group(f,a,b)) p n) qn\n        ==> montgomery_xz f (group_pow (montgomery_group(f,a,b)) p (2 * n + 1))\n                            (montgomery_xzdiffadd(f,a,b) q qm qn)"), t72))
+  montgomery_xzdiffadd_group_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ n : Num, ∀ q : (A, A), ∀ qm : (A, A), ∀ qn : (A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && !(FST(q) == ring_0(f)) && !(SND(q) == ring_0(f)) && IN(p, group_carrier(montgomery_group((f, a, b)))) && montgomery_xz(f, p, q) && montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, n + 1), qm) && montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, n), qn) → montgomery_xz(f, group_pow(montgomery_group((f, a, b)), p, 2 * n + 1), montgomery_xzdiffadd((f, a, b), q, qm, qn))"), t72))
 }
 
 ///|
@@ -207,7 +207,7 @@ pub fn montgomery_xzdiffadd_group() -> @kernel.Thm {
 ///|
 /// montgomery_xmap
 fn step_9() -> Unit raise {
-  montgomery_xmap_c.set(@define.define_(@parser.parse_term("montgomery_xmap (f:A ring) NONE = ring_0 f /\\\n  montgomery_xmap f (SOME(x:A,y:A)) = x")))
+  montgomery_xmap_c.set(@define.define_(@term_syntax.parse_term("(montgomery_xmap : (Ring[A], Option[(A, A)]) -> A)((f : Ring[A]), NONE) == ring_0(f) && montgomery_xmap(f, SOME(((x : A), (y : A)))) == x")))
 }
 
 ///|
@@ -226,7 +226,7 @@ fn step_10() -> Unit raise {
   let t74 = @simp.simp_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_1(), @ringtheory.ring_mul_rid()]))
   let t73 = @simp.simp_tac(@list.List([montgomery_xz(), montgomery_xmap(), @ringtheory.field_nontrivial(), @ringtheory.ring_1_v1()]))
   let t76 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t73), t74), t75)
-  montgomery_xz_xmap_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) P X.\n        field f /\\ X IN ring_carrier f /\\ ~(X = ring_0 f)\n        ==> (montgomery_xz f P (X,ring_1 f) <=> montgomery_xmap f P = X)"), t76))
+  montgomery_xz_xmap_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ P : Option[(A, A)], ∀ X : A, field(f) && IN(X, ring_carrier(f)) && !(X == ring_0(f)) → montgomery_xz(f, P, (X, ring_1(f))) == (montgomery_xmap(f, P) == X)"), t76))
 }
 
 ///|
@@ -279,18 +279,18 @@ fn step_11() -> Unit raise {
   })))
   let t88 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve()]))
   let t87 = @simp.asm_rewrite_tac(@list.List([]))
-  let t86 = @class.asm_cases_tac(@parser.parse_term("x:A = ring_0 f"))
+  let t86 = @class.asm_cases_tac(@term_syntax.parse_term("(x : A) == ring_0((f : Ring[A]))"))
   let t85 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t84 = @tactics.replicate_tac(5, @tactics.disch_tac)
-  let t79 = @parser.parse_term("y:A")
-  let t80 = @parser.parse_term("x:A")
-  let t81 = @parser.parse_term("b:A")
-  let t82 = @parser.parse_term("a:A")
-  let t83 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t82, t81, t80, t79]))
+  let t79 = @term_syntax.parse_term("(y : A)")
+  let t80 = @term_syntax.parse_term("(x : A)")
+  let t81 = @term_syntax.parse_term("(b : A)")
+  let t82 = @term_syntax.parse_term("(a : A)")
+  let t83 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t82, t81, t80, t79]))
   let t78 = @simp.simp_tac(@list.List([@theorems.imp_conj(), @montgomery.montgomery_group_v1()]))
   let t77 = @simp.rewrite_tac(@list.List([@ind_types.option_distinct(), @ind_types.option_inj(), @pair.pair_eq()]))
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), montgomery_xmap()])), t77), t78), t83), t84), t85), t86), t87), t88), t95), t103), t104), t111), @ringtheory.field_tac)
-  montgomery_xmap_eq_0_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b P.\n      field f /\\ ~(ring_char f = 2) /\\\n      a IN ring_carrier f /\\ b IN ring_carrier f /\\\n      montgomery_nonsingular (f,a,b) /\\\n      P IN group_carrier(montgomery_group(f,a,b))\n      ==> (montgomery_xmap f P = ring_0 f <=>\n           P = NONE \\/ P = SOME(ring_0 f,ring_0 f))"), t112))
+  montgomery_xmap_eq_0_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ P : Option[(A, A)], field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && IN(P, group_carrier(montgomery_group((f, a, b)))) → (montgomery_xmap(f, P) == ring_0(f)) == (P == NONE || P == SOME((ring_0(f), ring_0(f))))"), t112))
 }
 
 ///|
@@ -318,9 +318,9 @@ fn step_12() -> Unit raise {
     @tactics.all_tac
   })
   let t123 = @simp.asm_simp_tac(@list.List([@grouptheory.group_pow_v1()]))
-  let t120 = @parser.parse_term("b:A")
-  let t121 = @parser.parse_term("a:A")
-  let t122 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t121, t120]), montgomery_xmap_eq_0()))
+  let t120 = @term_syntax.parse_term("(b : A)")
+  let t121 = @term_syntax.parse_term("(a : A)")
+  let t122 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : Ring[A])"), t121, t120]), montgomery_xmap_eq_0()))
   let t119 = @tactics.repeat_tac(@tactics.disch_then(@tactics.conjuncts_then2(fn(x113 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s114 = @tactics.assume_tac(x113)
     fn(x115 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -352,7 +352,7 @@ fn step_12() -> Unit raise {
       })(x140))
     })(x141)(x141)
   }), t142)
-  montgomery_xmap_eq_0_pow_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b P n.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        montgomery_nonsingular (f,a,b) /\\\n        P IN group_carrier(montgomery_group(f,a,b)) /\\\n        montgomery_xmap f P = ring_0 f\n        ==> montgomery_xmap f (group_pow (montgomery_group(f,a,b)) P n) =\n            ring_0 f"), t143))
+  montgomery_xmap_eq_0_pow_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ P : Option[(A, A)], ∀ n : Num, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && montgomery_nonsingular((f, a, b)) && IN(P, group_carrier(montgomery_group((f, a, b)))) && montgomery_xmap(f, P) == ring_0(f) → montgomery_xmap(f, group_pow(montgomery_group((f, a, b)), P, n)) == ring_0(f)"), t143))
 }
 
 ///|
@@ -382,7 +382,7 @@ fn step_13() -> Unit raise {
   let t145 = @tactics.repeat_tac(@tactics.gen_tac)
   let t144 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_nonsingular()]))
   let t155 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not2()])), t144), t145), t146), t147), t148), t149), t154), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  montgomery_add_yrecovery_c.set(@tactics.prove(@parser.parse_term("forall f a (b:A) x y x1 y1 x2 y2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x,y)) /\\ ~(y = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x1,y1)) /\\\n        montgomery_add(f,a,b) (SOME(x,y)) (SOME(x1,y1)) = SOME(x2,y2)\n        ==> y1 = ring_div f\n                  (ring_sub f\n                   (ring_sub f\n                    (ring_mul f (ring_add f (ring_mul f x1 x) (ring_1 f))\n                    (ring_add f x1\n                      (ring_add f x (ring_mul f (ring_of_num f 2) a))))\n                      (ring_mul f (ring_of_num f 2) a))\n                     (ring_mul f (ring_pow f (ring_sub f x1 x) 2) x2))\n                  (ring_mul f (ring_of_num f 2) (ring_mul f b y))"), t155))
+  montgomery_add_yrecovery_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ x : A, ∀ y : A, ∀ x1 : A, ∀ y1 : A, ∀ x2 : A, ∀ y2 : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && !(b == ring_0(f)) && montgomery_curve((f, a, b), SOME((x, y))) && !(y == ring_0(f)) && montgomery_curve((f, a, b), SOME((x1, y1))) && montgomery_add((f, a, b), SOME((x, y)), SOME((x1, y1))) == SOME((x2, y2)) → y1 == ring_div(f, ring_sub(f, ring_sub(f, ring_mul(f, ring_add(f, ring_mul(f, x1, x), ring_1(f)), ring_add(f, x1, ring_add(f, x, ring_mul(f, ring_of_num(f, 2), a)))), ring_mul(f, ring_of_num(f, 2), a)), ring_mul(f, ring_pow(f, ring_sub(f, x1, x), 2), x2)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, b, y)))"), t155))
 }
 
 ///|

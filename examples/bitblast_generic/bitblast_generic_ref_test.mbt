@@ -7396,55 +7396,12 @@ test "Examples/bitblast_generic matches Examples/bitblast_generic.ml" {
       #|Fixpoint reached after 9 iterations
       #|CPU time (user): <t>
       #|Examples/bitblast_generic quotations (277):
-      #|  forall(z:(N)word) (c:(N)word).\n    word_and c (word 1) = word 0\n    ==> word_xor (word_and z c) (word_or c (word 1)) =\n        word_neg (word_or z (word_not c))
+      #|  \226\136\128 z : Word[N], \226\136\128 c : Word[N], word_and(c, word(1)) == word(0) \226\134\146 word_xor(word_and(z, c), word_or(c, word(1))) == word_neg(word_or(z, word_not(c)))
       #|  T
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(z:(N)word) (c:(N)word).\n        word_xor (word_and z c) (word_or c (word 1)) =\n        word_neg (word_or z (word_not c)) <=>\n        word_and c (word 1) = word 0
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(z:(N)word) (c:(N)word).\n    (word_add (word_xor (word_or z (word_not c)) c) (word 1)) =\n    (word_neg (word_and z c))
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(z:(N)word) (c:(N)word).\n    word_add (word_xor (word_and z c) c) (word 1) =\n    word_neg (word_or z (word_not c))
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(x:(N)word) (y:(N)word).\n    word_add (word_add x (word 1)) (word_not y) =\n    word_sub x y
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(x:(N) word) (y:(N)word).\n    word_add (word_not x) (word_not y) =\n    word_sub (word_sub (word 0) (word 2)) (word_add x y)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(x:(N)word) (c1:(N)word) (c2:(N)word).\n  (c2 = (word_neg c1))\n  ==> (word_add (word_or x (c2)) (c1)) = (word_xor (word_or x (c2)) (c2))
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall(x:N word) c1 c2.\n    word_and c2 (word_sub c2 (word 1)) = word 0 /\\\n    word_and c1 (word_sub c2 (word 1)) = word 0 /\\\n    ~(word_and c1 c2 = word 0)\n    ==> word_and (word_add x c1) c2 = word_xor (word_and x c2) c2
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word.\n     word_and (word_not x) (word_sub x (word 1)) =\n     word_not (word_or x (word_neg x))
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_and x (word_not(word 1)) = word 0 <=>\n             x = word 0 \\/ x = word 1
+      #|  \226\136\128 z : Word[N], \226\136\128 c : Word[N], (word_xor(word_and(z, c), word_or(c, word(1))) == word_neg(word_or(z, word_not(c)))) == (word_and(c, word(1)) == word(0))
       #|  T
       #|  0
       #|  T
@@ -7452,20 +7409,42 @@ test "Examples/bitblast_generic matches Examples/bitblast_generic.ml" {
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  word_xor x y:S word  = word_sub (word_or x y) (word_and x y)
+      #|  \226\136\128 z : Word[N], \226\136\128 c : Word[N], word_add(word_xor(word_or(z, word_not(c)), c), word(1)) == word_neg(word_and(z, c))
       #|  T
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  word_add x y:M word = word_sub (word_shl (word_or x y) 1) (word_xor x y)
+      #|  \226\136\128 z : Word[N], \226\136\128 c : Word[N], word_add(word_xor(word_and(z, c), c), word(1)) == word_neg(word_or(z, word_not(c)))
       #|  T
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:R word. word_and x (word_sub x (word 1)) = word 0 /\\\n              word_and x (word_not(word 1)) = word 0\n              <=> x = word 0 \\/ x = word 1
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_add(word_add(x, word(1)), word_not(y)) == word_sub(x, y)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_add(word_not(x), word_not(y)) == word_sub(word_sub(word(0), word(2)), word_add(x, y))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 c1 : Word[N], \226\136\128 c2 : Word[N], c2 == word_neg(c1) \226\134\146 word_add(word_or(x, c2), c1) == word_xor(word_or(x, c2), c2)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 c1 : Word[N], \226\136\128 c2 : Word[N], word_and(c2, word_sub(c2, word(1))) == word(0) && word_and(c1, word_sub(c2, word(1))) == word(0) && !(word_and(c1, c2) == word(0)) \226\134\146 word_and(word_add(x, c1), c2) == word_xor(word_and(x, c2), c2)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_and(word_not(x), word_sub(x, word(1))) == word_not(word_or(x, word_neg(x)))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], (word_and(x, word_not(word(1))) == word(0)) == (x == word(0) || x == word(1))
       #|  T
       #|  0
       #|  T
@@ -7476,177 +7455,17 @@ test "Examples/bitblast_generic matches Examples/bitblast_generic.ml" {
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall b x:N word. ~(b = word 0) /\\ word_shl b 1 = word 0\n                ==> (~(x = word 0) <=>\n                     word_and b (word_or x (word_neg x)) = b)
+      #|  word_xor((x : Word[S]), (y : Word[S])) == word_sub(word_or(x, y), word_and(x, y))
       #|  T
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall b x:N word. ~(b = word 0) /\\ word_shl b 1 = word 0\n                ==> (x = word 0 <=>\n                     word_and b (word_or x (word_neg x)) = word 0)
+      #|  word_add((x : Word[M]), (y : Word[M])) == word_sub(word_shl(word_or(x, y), 1), word_xor(x, y))
       #|  T
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall b c:N word. ~(b = word 0) /\\ word_shl b 1 = word 0 /\\\n               word_add c (word 1) = word_not c /\\ ~(c = word_not(word 0))\n               ==> b = word_not c
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall m x:N word. m = word_neg(word_and b (word 1))\n               ==> word_sub (word_xor x m) m = word_xor (word_add x m) m
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_and (word 3) (word_shl x 2) = word 0
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_and (word 3) (word_mul (word 5) x) =\n              word_and x (word 3)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:R word. word_xor x (word_ushr x 1) = word_xor y (word_ushr y 1) <=>\n               x = y
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:M word. word_and (word_xor (word_add (word_ushr x 2) (word_ushr x 2))\n                                (word_ushr x 1))\n                      (word_not(word 1)) = word 0
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word. word_add (word_and x y) (word_ushr (word_xor x y) 1) =\n               word_add (word_add (word_ushr x 1) (word_ushr y 1))\n                        (word_and (word 1) (word_and x y))
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y z:N word.\n        word_ule x y /\\ word_ule y z ==> word_ule x z
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y z:N word.\n        word_ule x y /\\ word_ult y z ==> word_ugt z x
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y z:N word.\n        word_ile x y /\\ word_ile y z ==> word_ile x z
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y z:N word.\n        word_ile x y /\\ word_ilt y z ==> word_igt z x
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word.\n        word_ushr (word_shl x 1) 1 = x /\\\n        word_ushr (word_shl y 1) 1 = y\n        ==> (word_ule x y <=> word_ile x y)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word. word_ule (word_and x y) x
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word. word_ule (word_xor x y) (word_or x y)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_not(word_or x (word_neg x)) =\n             word_sub (word_and x (word_neg x)) (word 1)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_and (word_add (word_or x (word_sub x (word 1))) (word 1)) x =\n             word_and (word_add (word_and x (word_neg x)) x) x
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_not(word_add x y) = word_sub (word_not x) y
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word. word_or x y = word_add (word_and x (word_not y)) y
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word. word_sub x y =\n               word_sub (word_mul (word 2) (word_and x (word_not y)))\n                        (word_xor x y)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word.\n        word_ilt x y <=>\n        ~(word_and word_INT_MIN\n           (word_sub (word_sub (word_ishr x 1) (word_ishr y 1))\n                     (word_and (word_and (word_not x) y) (word 1))) =\n          word 0)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word.\n        word_ult x y <=>\n        ~(word_and word_INT_MIN\n           (word_sub (word_sub (word_ushr x 1) (word_ushr y 1))\n                     (word_and (word_and (word_not x) y) (word 1))) =\n          word 0)
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. ~(x = word 0) <=> ival(word_or x (word_neg x)) < &0
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x y:N word. x = y <=> ival(word_or (word_sub x y) (word_sub y x)) >= &0
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_igt x (word 0) <=>\n             ival (word_sub (word_ishr x 1) x) < &0
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall x:N word. word_igt x (word 0) <=>\n             ival (word_and (word_neg x) (word_not x)) < &0
-      #|  T
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  0
-      #|  T
-      #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall a b x:N word.\n        word_ile a b\n        ==> (word_ile a x /\\ word_ile x b <=>\n             word_ule (word_sub x a) (word_sub b a))
+      #|  \226\136\128 x : Word[R], (word_and(x, word_sub(x, word(1))) == word(0) && word_and(x, word_not(word(1))) == word(0)) == (x == word(0) || x == word(1))
       #|  T
       #|  0
       #|  T
@@ -7657,7 +7476,177 @@ test "Examples/bitblast_generic matches Examples/bitblast_generic.ml" {
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  forall a b x:N word.\n        word_ile a b\n        ==> (word_ile a x /\\ word_ilt x b <=>\n             word_ult (word_sub x a) (word_sub b a))
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 b : Word[N], \226\136\128 x : Word[N], !(b == word(0)) && word_shl(b, 1) == word(0) \226\134\146 !(x == word(0)) == (word_and(b, word_or(x, word_neg(x))) == b)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 b : Word[N], \226\136\128 x : Word[N], !(b == word(0)) && word_shl(b, 1) == word(0) \226\134\146 (x == word(0)) == (word_and(b, word_or(x, word_neg(x))) == word(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 b : Word[N], \226\136\128 c : Word[N], !(b == word(0)) && word_shl(b, 1) == word(0) && word_add(c, word(1)) == word_not(c) && !(c == word_not(word(0))) \226\134\146 b == word_not(c)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 m : Word[N], \226\136\128 x : Word[N], m == word_neg(word_and((b : Word[N]), word(1))) \226\134\146 word_sub(word_xor(x, m), m) == word_xor(word_add(x, m), m)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_and(word(3), word_shl(x, 2)) == word(0)
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_and(word(3), word_mul(word(5), x)) == word_and(x, word(3))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[R], \226\136\128 y : Word[R], (word_xor(x, word_ushr(x, 1)) == word_xor(y, word_ushr(y, 1))) == (x == y)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[M], word_and(word_xor(word_add(word_ushr(x, 2), word_ushr(x, 2)), word_ushr(x, 1)), word_not(word(1))) == word(0)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_add(word_and(x, y), word_ushr(word_xor(x, y), 1)) == word_add(word_add(word_ushr(x, 1), word_ushr(y, 1)), word_and(word(1), word_and(x, y)))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], \226\136\128 z : Word[N], word_ule(x, y) && word_ule(y, z) \226\134\146 word_ule(x, z)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], \226\136\128 z : Word[N], word_ule(x, y) && word_ult(y, z) \226\134\146 word_ugt(z, x)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], \226\136\128 z : Word[N], word_ile(x, y) && word_ile(y, z) \226\134\146 word_ile(x, z)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], \226\136\128 z : Word[N], word_ile(x, y) && word_ilt(y, z) \226\134\146 word_igt(z, x)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_ushr(word_shl(x, 1), 1) == x && word_ushr(word_shl(y, 1), 1) == y \226\134\146 word_ule(x, y) == word_ile(x, y)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_ule(word_and(x, y), x)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_ule(word_xor(x, y), word_or(x, y))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_not(word_or(x, word_neg(x))) == word_sub(word_and(x, word_neg(x)), word(1))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_and(word_add(word_or(x, word_sub(x, word(1))), word(1)), x) == word_and(word_add(word_and(x, word_neg(x)), x), x)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_not(word_add(x, (y : Word[N]))) == word_sub(word_not(x), y)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_or(x, y) == word_add(word_and(x, word_not(y)), y)
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_sub(x, y) == word_sub(word_mul(word(2), word_and(x, word_not(y))), word_xor(x, y))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_ilt(x, y) == !(word_and(word_INT_MIN, word_sub(word_sub(word_ishr(x, 1), word_ishr(y, 1)), word_and(word_and(word_not(x), y), word(1)))) == word(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], word_ult(x, y) == !(word_and(word_INT_MIN, word_sub(word_sub(word_ushr(x, 1), word_ushr(y, 1)), word_and(word_and(word_not(x), y), word(1)))) == word(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], !(x == word(0)) == (ival(word_or(x, word_neg(x))) < int_of_num(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], \226\136\128 y : Word[N], (x == y) == (ival(word_or(word_sub(x, y), word_sub(y, x))) >= int_of_num(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_igt(x, word(0)) == (ival(word_sub(word_ishr(x, 1), x)) < int_of_num(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 x : Word[N], word_igt(x, word(0)) == (ival(word_and(word_neg(x), word_not(x))) < int_of_num(0))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  \226\136\128 a : Word[N], \226\136\128 b : Word[N], \226\136\128 x : Word[N], word_ile(a, b) \226\134\146 (word_ile(a, x) && word_ile(x, b)) == word_ule(word_sub(x, a), word_sub(b, a))
       #|  T
       #|  0
       #|  T
@@ -7668,7 +7657,18 @@ test "Examples/bitblast_generic matches Examples/bitblast_generic.ml" {
       #|  0
       #|  T
       #|  (p \\/ q <=> r) ==> q ==> r
-      #|  val(x:N word) < val(word 64:N word)\n   ==> word_sub (word 63) x = word_xor x (word 63)
+      #|  \226\136\128 a : Word[N], \226\136\128 b : Word[N], \226\136\128 x : Word[N], word_ile(a, b) \226\134\146 (word_ile(a, x) && word_ilt(x, b)) == word_ult(word_sub(x, a), word_sub(b, a))
+      #|  T
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  0
+      #|  T
+      #|  (p \\/ q <=> r) ==> q ==> r
+      #|  (val : (Word[N]) -> Num)((x : Word[N])) < (val : (Word[N]) -> Num)((word : (Num) -> Word[N])(64)) \226\134\146 (word_sub : (Word[N], Word[N]) -> Word[N])((word : (Num) -> Word[N])(63), x) == (word_xor : (Word[N], Word[N]) -> Word[N])(x, (word : (Num) -> Word[N])(63))
       #|  T
       #|  0
       #|  T

@@ -5615,55 +5615,55 @@ test "Examples/cong matches Examples/cong.ml" {
       #|0..0..1..3..5..7..14..solved at 21
       #|0..0..1..5..solved at 16
       #|Examples/cong quotations (49):
-      #|  (x == y) (mod n) <=> ?q. x - y = q * n
-      #|  (x == y) (mod (&0)) <=> (x = y)
-      #|  (x == y) (mod (&1))
-      #|  forall n x. (x == x) (mod n)
-      #|  forall n x y. (x == y) (mod n) ==> (y == x) (mod n)
-      #|  forall n x y z. (x == y) (mod n) /\\ (y == z) (mod n) ==> (x == z) (mod n)
-      #|  forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 + y1 == x2 + y2) (mod n)
-      #|  forall n x1 x2. (x1 == x2) (mod n) ==> (--x1 == --x2) (mod n)
-      #|  forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 - y1 == x2 - y2) (mod n)
-      #|  forall n x1 x2 y1 y2.\n    (x1 == x2) (mod n) /\\ (y1 == y2) (mod n) ==> (x1 * y1 == x2 * y2) (mod n)
-      #|  forall x y n. (x == y) (mod (--n)) <=> (x == y) (mod n)
-      #|  forall x y n. (x == y) (mod (abs n)) <=> (x == y) (mod n)
-      #|  forall m n. (m * n == &0) (mod n)
-      #|  forall n. (n == &0) (mod n)
-      #|  forall n. (abs(n) == &0) (mod n)
-      #|  (x == y) (mod &1)
-      #|  (x - y = z) <=> (x = z + y)
-      #|  &(k DIV n)
-      #|  &(k MOD n)
-      #|  n:num
-      #|  n:int
-      #|  abs n
-      #|  (n = &0) <=> (abs n = &0)
-      #|  n:int
-      #|  k:num
-      #|  n:int
-      #|  forall n x. &0 <= x /\\ ~(n = &0)\n         ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)
-      #|  x + --y = x - y
-      #|  abs n
-      #|  &0 <= y /\\ ~(y = &0) ==> abs(n) - y < abs(n)
-      #|  y < abs(n) ==> &0 <= abs(n) - y
-      #|  abs(n) - y
-      #|  y:int
-      #|  y = &0
-      #|  y:int
-      #|  --x
-      #|  n:int
-      #|  &0 <= x \\/ &0 <= --x
-      #|  forall n x. ~(n = &0) ==> ?y. &0 <= y /\\ y < abs(n) /\\ (x == y) (mod n)
-      #|  x - &0 = x
-      #|  (x == y) (mod n)
-      #|  n:int
-      #|  y - abs(n)
-      #|  &0 <= y /\\ y < abs n\n    ==> --(abs n) <= &2 * y /\\ &2 * y < abs(n) \\/\n        --(abs n) <= &2 * (y - abs(n)) /\\ &2 * (y - abs(n)) < abs(n)
-      #|  x:int
-      #|  y:int
-      #|  forall n x. ~(n = &0)\n         ==> ?y. --(abs n) <= &2 * y /\\ &2 * y < abs n /\\ (x == y) (mod n)
-      #|  x:int
-      #|  forall n x. ~(n = &0) ==> ?y. &2 * abs(y) <= abs(n) /\\ (x == y) (mod n)
+      #|  op_eq_eq((x : Int), (y : Int), mod((n : Int))) == (\226\136\131 q : Int, x - y == q * n)
+      #|  op_eq_eq((x : Int), (y : Int), mod(int_of_num(0))) == (x == y)
+      #|  op_eq_eq((x : Int), (y : Int), mod(int_of_num(1)))
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, op_eq_eq(x, x, mod(n))
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, \226\136\128 y : Int, op_eq_eq(x, y, mod(n)) \226\134\146 op_eq_eq(y, x, mod(n))
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 z : Int, op_eq_eq(x, y, mod(n)) && op_eq_eq(y, z, mod(n)) \226\134\146 op_eq_eq(x, z, mod(n))
+      #|  \226\136\128 n : Int, \226\136\128 x1 : Int, \226\136\128 x2 : Int, \226\136\128 y1 : Int, \226\136\128 y2 : Int, op_eq_eq(x1, x2, mod(n)) && op_eq_eq(y1, y2, mod(n)) \226\134\146 op_eq_eq(x1 + y1, x2 + y2, mod(n))
+      #|  \226\136\128 n : Int, \226\136\128 x1 : Int, \226\136\128 x2 : Int, op_eq_eq(x1, x2, mod(n)) \226\134\146 op_eq_eq(-x1, -x2, mod(n))
+      #|  \226\136\128 n : Int, \226\136\128 x1 : Int, \226\136\128 x2 : Int, \226\136\128 y1 : Int, \226\136\128 y2 : Int, op_eq_eq(x1, x2, mod(n)) && op_eq_eq(y1, y2, mod(n)) \226\134\146 op_eq_eq(x1 - y1, x2 - y2, mod(n))
+      #|  \226\136\128 n : Int, \226\136\128 x1 : Int, \226\136\128 x2 : Int, \226\136\128 y1 : Int, \226\136\128 y2 : Int, op_eq_eq(x1, x2, mod(n)) && op_eq_eq(y1, y2, mod(n)) \226\134\146 op_eq_eq(x1 * y1, x2 * y2, mod(n))
+      #|  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 n : Int, op_eq_eq(x, y, mod(-n)) == op_eq_eq(x, y, mod(n))
+      #|  \226\136\128 x : Int, \226\136\128 y : Int, \226\136\128 n : Int, op_eq_eq(x, y, mod(abs(n))) == op_eq_eq(x, y, mod(n))
+      #|  \226\136\128 m : Int, \226\136\128 n : Int, op_eq_eq(m * n, int_of_num(0), mod(n))
+      #|  \226\136\128 n : Int, op_eq_eq(n, int_of_num(0), mod(n))
+      #|  \226\136\128 n : Int, op_eq_eq(abs(n), int_of_num(0), mod(n))
+      #|  op_eq_eq((x : Int), (y : Int), mod(int_of_num(1)))
+      #|  ((x : Int) - (y : Int) == (z : Int)) == (x == z + y)
+      #|  int_of_num(DIV((k : Num), (n : Num)))
+      #|  int_of_num(MOD((k : Num), (n : Num)))
+      #|  (n : Num)
+      #|  (n : Int)
+      #|  abs((n : Int))
+      #|  ((n : Int) == int_of_num(0)) == (abs(n) == int_of_num(0))
+      #|  (n : Int)
+      #|  (k : Num)
+      #|  (n : Int)
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, int_of_num(0) <= x && !(n == int_of_num(0)) \226\134\146 (\226\136\131 y : Int, int_of_num(0) <= y && y < abs(n) && op_eq_eq(x, y, mod(n)))
+      #|  (x : Int) + -(y : Int) == x - y
+      #|  abs((n : Int))
+      #|  int_of_num(0) <= (y : Int) && !(y == int_of_num(0)) \226\134\146 abs((n : Int)) - y < abs(n)
+      #|  (y : Int) < abs((n : Int)) \226\134\146 int_of_num(0) <= abs(n) - y
+      #|  abs((n : Int)) - (y : Int)
+      #|  (y : Int)
+      #|  (y : Int) == int_of_num(0)
+      #|  (y : Int)
+      #|  -(x : Int)
+      #|  (n : Int)
+      #|  int_of_num(0) <= (x : Int) || int_of_num(0) <= -x
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, !(n == int_of_num(0)) \226\134\146 (\226\136\131 y : Int, int_of_num(0) <= y && y < abs(n) && op_eq_eq(x, y, mod(n)))
+      #|  (x : Int) - int_of_num(0) == x
+      #|  op_eq_eq((x : Int), (y : Int), mod((n : Int)))
+      #|  (n : Int)
+      #|  (y : Int) - abs((n : Int))
+      #|  int_of_num(0) <= (y : Int) && y < abs((n : Int)) \226\134\146 -abs(n) <= int_of_num(2) * y && int_of_num(2) * y < abs(n) || -abs(n) <= int_of_num(2) * (y - abs(n)) && int_of_num(2) * (y - abs(n)) < abs(n)
+      #|  (x : Int)
+      #|  (y : Int)
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, !(n == int_of_num(0)) \226\134\146 (\226\136\131 y : Int, -abs(n) <= int_of_num(2) * y && int_of_num(2) * y < abs(n) && op_eq_eq(x, y, mod(n)))
+      #|  (x : Int)
+      #|  \226\136\128 n : Int, \226\136\128 x : Int, !(n == int_of_num(0)) \226\134\146 (\226\136\131 y : Int, int_of_num(2) * abs(y) <= abs(n) && op_eq_eq(x, y, mod(n)))
       #|CONG =  |- ((#=:fun(bool,fun(bool,bool)) (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) x:int) y:int) (#int_mod:fun(int,fun(int,fun(int,bool))) n:int))) (#?:fun(fun(int,bool),bool) (\q:int. ((#=:fun(int,fun(int,bool)) ((#int_sub:fun(int,fun(int,int)) x:int) y:int)) ((#int_mul:fun(int,fun(int,int)) q:int) n:int)))))
       #|CONG_MOD_0 =  |- ((#=:fun(bool,fun(bool,bool)) (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) x:int) y:int) (#int_mod:fun(int,fun(int,fun(int,bool))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))))) ((#=:fun(int,fun(int,bool)) x:int) y:int))
       #|CONG_REFL =  |- (#forall:fun(fun(int,bool),bool) (\n:int. (#forall:fun(fun(int,bool),bool) (\x:int. (((#==:fun(int,fun(int,fun(fun(int,fun(int,bool)),bool))) x:int) x:int) (#int_mod:fun(int,fun(int,fun(int,bool))) n:int))))))

@@ -254,12 +254,12 @@ test "metis matches metis.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|metis quotations (6):
-      #|  forall a. a ==> ~a ==> F
-      #|  forall a b. a \\/ b ==> ~a ==> b
-      #|  forall a c. a ==> ~a \\/ c ==> c
-      #|  forall a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c
-      #|  forall a b. ~a ==> b <=>  a \\/ b
-      #|  forall a b.  a ==> b <=> ~a \\/ b
+      #|  \226\136\128 a : Bool, a \226\134\146 !a \226\134\146 false
+      #|  \226\136\128 a : Bool, \226\136\128 b : Bool, a || b \226\134\146 !a \226\134\146 b
+      #|  \226\136\128 a : Bool, \226\136\128 c : Bool, a \226\134\146 !a || c \226\134\146 c
+      #|  \226\136\128 a : Bool, \226\136\128 b : Bool, \226\136\128 c : Bool, a || b \226\134\146 !a || c \226\134\146 b || c
+      #|  \226\136\128 a : Bool, \226\136\128 b : Bool, (!a \226\134\146 b) == (a || b)
+      #|  \226\136\128 a : Bool, \226\136\128 b : Bool, (a \226\134\146 b) == (!a || b)
       #|refl =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x:'A))))
       #|drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#forall:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
       #|trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((R:fun('A,fun('A,bool)) x:'A) x:'A))))

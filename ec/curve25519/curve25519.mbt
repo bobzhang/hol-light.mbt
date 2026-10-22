@@ -21,7 +21,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_25519
 fn step_4() -> Unit raise {
-  p_25519_c.set(@define.define_(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
+  p_25519_c.set(@define.define_(@term_syntax.parse_term("(p_25519 : Num) == 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn p_25519() -> @kernel.Thm {
 ///|
 /// n_25519
 fn step_5() -> Unit raise {
-  n_25519_c.set(@define.define_(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
+  n_25519_c.set(@define.define_(@term_syntax.parse_term("(n_25519 : Num) == 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn n_25519() -> @kernel.Thm {
 ///|
 /// A_25519
 fn step_6() -> Unit raise {
-  a_25519_c.set(@define.define_(@parser.parse_term("A_25519 = 486662")))
+  a_25519_c.set(@define.define_(@term_syntax.parse_term("(A_25519 : Num) == 486662")))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn a_25519() -> @kernel.Thm {
 ///|
 /// B_25519
 fn step_7() -> Unit raise {
-  b_25519_c.set(@define.define_(@parser.parse_term("B_25519 = 1")))
+  b_25519_c.set(@define.define_(@term_syntax.parse_term("(B_25519 : Num) == 1")))
 }
 
 ///|
@@ -81,7 +81,7 @@ pub fn b_25519() -> @kernel.Thm {
 ///|
 /// C_25519
 fn step_8() -> Unit raise {
-  c_25519_c.set(@define.define_(@parser.parse_term("C_25519 = SOME(&0x09:int,&0x20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9:int)")))
+  c_25519_c.set(@define.define_(@term_syntax.parse_term("(C_25519 : Option[(Int, Int)]) == SOME((int_of_num(9), int_of_num(14781619447589544791020593568409986887264606134616475288964881837755586237401)))")))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn c_25519() -> @kernel.Thm {
 ///|
 /// CC_25519
 fn step_9() -> Unit raise {
-  cc_25519_c.set(@define.define_(@parser.parse_term("CC_25519 = SOME(&6911272784993971428141625084124731891523734454433518466500745240824540625972:int,&35197529511187359173101698576797651179158701633820552795916138355302448607023:int)")))
+  cc_25519_c.set(@define.define_(@term_syntax.parse_term("(CC_25519 : Option[(Int, Int)]) == SOME((int_of_num(6911272784993971428141625084124731891523734454433518466500745240824540625972), int_of_num(35197529511187359173101698576797651179158701633820552795916138355302448607023)))")))
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn cc_25519() -> @kernel.Thm {
 ///|
 /// curve25519
 fn step_10() -> Unit raise {
-  curve25519_c.set(@define.define_(@parser.parse_term("curve25519 = (integer_mod_ring p_25519,&A_25519:int,&1:int)")))
+  curve25519_c.set(@define.define_(@term_syntax.parse_term("(curve25519 : (Ring[Int], Int, Int)) == (integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))")))
 }
 
 ///|
@@ -127,7 +127,7 @@ pub fn curve25519() -> @kernel.Thm {
 /// P_25519
 fn step_11() -> Unit raise {
   let t1 = @tactics.then_tac(@simp.rewrite_tac(@list.List([p_25519()])), @int.arith_tac)
-  p_25519_v1_c.set(@tactics.prove(@parser.parse_term("p_25519 = 2 EXP 255 - 19"), t1))
+  p_25519_v1_c.set(@tactics.prove(@term_syntax.parse_term("p_25519 == EXP(2, 255) - 19"), t1))
 }
 
 ///|
@@ -143,7 +143,7 @@ pub fn p_25519_v1() -> @kernel.Thm {
 /// N_25519
 fn step_12() -> Unit raise {
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([n_25519()])), @int.arith_tac)
-  n_25519_v1_c.set(@tactics.prove(@parser.parse_term("n_25519 = 2 EXP 252 + 27742317777372353535851937790883648493"), t2))
+  n_25519_v1_c.set(@tactics.prove(@term_syntax.parse_term("n_25519 == EXP(2, 252) + 27742317777372353535851937790883648493"), t2))
 }
 
 ///|
@@ -165,7 +165,7 @@ fn step_13() -> Unit raise {
     }
   })(@pocklington.prime_rule(@list.List(["2", "3", "5", "7", "11", "13", "17", "19", "23", "29", "31", "37", "41", "43", "47", "53", "59", "83", "97", "103", "107", "127", "131", "173", "223", "239", "353", "419", "479", "487", "991", "1723", "2437", "3727", "4153", "9463", "32573", "37853", "57467", "65147", "75707", "132049", "430751", "569003", "1923133", "8574133", "2773320623", "72106336199", "1919519569386763", "31757755568855353", "75445702479781427272750846543864801", "74058212732561358302231226437062788676166966415465897661863160754340907", "57896044618658097711785492504343953926634992332820282019728792003956564819949"])))
   let t7 = @tactics.then_tac(@simp.rewrite_tac(@list.List([p_25519()])), t6)
-  prime_p25519_c.set(@tactics.prove(@parser.parse_term("prime p_25519"), t7))
+  prime_p25519_c.set(@tactics.prove(@term_syntax.parse_term("prime(p_25519)"), t7))
 }
 
 ///|
@@ -187,7 +187,7 @@ fn step_14() -> Unit raise {
     }
   })(@pocklington.prime_rule(@list.List(["2", "3", "5", "7", "11", "13", "17", "19", "23", "41", "43", "47", "67", "73", "79", "113", "269", "307", "1361", "1723", "2551", "2851", "2939", "3797", "5879", "17231", "22111", "30703", "34123", "41081", "82163", "132667", "137849", "409477", "531581", "1224481", "14741173", "58964693", "292386187", "213441916511", "1257559732178653", "4434155615661930479", "3044861653679985063343", "172054593956031949258510691", "198211423230930754013084525763697", "19757330305831588566944191468367130476339", "276602624281642239937218680557139826668747", "7237005577332262213973186563042994240857116359379907606001950938285454250989"])))
   let t12 = @tactics.then_tac(@simp.rewrite_tac(@list.List([n_25519()])), t11)
-  prime_n25519_c.set(@tactics.prove(@parser.parse_term("prime n_25519"), t12))
+  prime_n25519_c.set(@tactics.prove(@term_syntax.parse_term("prime(n_25519)"), t12))
 }
 
 ///|
@@ -213,7 +213,7 @@ fn step_15() -> Unit raise {
   let t14 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t13 = @simp.rewrite_tac(@list.List([a_25519(), p_25519()]))
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@montgomery.montgomery_strongly_nonsingular(), curve25519()])), t13), t14), t15), t16), t17), t18), t19), t20), t21), t22)
-  montgomery_strongly_nonsingular_curve25519_c.set(@tactics.prove(@parser.parse_term("montgomery_strongly_nonsingular curve25519"), t23))
+  montgomery_strongly_nonsingular_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("montgomery_strongly_nonsingular(curve25519)"), t23))
 }
 
 ///|
@@ -231,7 +231,7 @@ fn step_16() -> Unit raise {
   let t25 = @tactics.conv_tac(@equal.depth_conv(@equal.orelsec(@ringtheory.integer_mod_ring_red_conv, @int.int_red_conv)))
   let t24 = @simp.rewrite_tac(@list.List([a_25519(), p_25519(), @ringtheory.in_integer_mod_ring_carrier()]))
   let t26 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@montgomery.montgomery_nonsingular(), curve25519(), p_25519()])), t24), t25)
-  montgomery_nonsingular_curve25519_c.set(@tactics.prove(@parser.parse_term("montgomery_nonsingular curve25519"), t26))
+  montgomery_nonsingular_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("montgomery_nonsingular(curve25519)"), t26))
 }
 
 ///|
@@ -246,7 +246,7 @@ pub fn montgomery_nonsingular_curve25519() -> @kernel.Thm {
 ///|
 /// curve25519_group
 fn step_17() -> Unit raise {
-  curve25519_group_c.set(@define.define_(@parser.parse_term("curve25519_group =\n    montgomery_group(integer_mod_ring p_25519,&A_25519,&1)")))
+  curve25519_group_c.set(@define.define_(@term_syntax.parse_term("(curve25519_group : Group[Option[(Int, Int)]]) == montgomery_group((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1)))")))
 }
 
 ///|
@@ -267,7 +267,7 @@ fn step_18() -> Unit raise {
   let t28 = @simp.rewrite_tac(@list.List([@ringtheory.field_integer_mod_ring(), @ringtheory.integer_mod_ring_char(), prime_p25519()]))
   let t27 = @tactics.match_mp_tac(@montgomery.montgomery_group_v1())
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([curve25519_group()])), t27), t28), t29), t30), t31)
-  curve25519_group_v1_c.set(@tactics.prove(@parser.parse_term("group_carrier curve25519_group =\n     montgomery_curve(integer_mod_ring p_25519,&A_25519,&1) /\\\n   group_id curve25519_group =\n     NONE /\\\n   group_inv curve25519_group =\n     montgomery_neg(integer_mod_ring p_25519,&A_25519,&1) /\\\n   group_mul curve25519_group =\n     montgomery_add(integer_mod_ring p_25519,&A_25519,&1)"), t32))
+  curve25519_group_v1_c.set(@tactics.prove(@term_syntax.parse_term("group_carrier(curve25519_group) == montgomery_curve((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))) && group_id(curve25519_group) == NONE && group_inv(curve25519_group) == montgomery_neg((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))) && group_mul(curve25519_group) == montgomery_add((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1)))"), t32))
 }
 
 ///|
@@ -293,7 +293,7 @@ fn step_20() -> Unit raise {
   let t34 = @simp.rewrite_tac(@list.List([@ringtheory.finite_integer_mod_ring(), @ringtheory.field_integer_mod_ring(), prime_p25519()]))
   let t33 = @tactics.match_mp_tac(@montgomery.finite_montgomery_curve())
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([curve25519_group_v1()])), t33), t34), t35), t36)
-  finite_group_carrier_curve25519_c.set(@tactics.prove(@parser.parse_term("FINITE(group_carrier curve25519_group)"), t37))
+  finite_group_carrier_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("FINITE(group_carrier(curve25519_group))"), t37))
 }
 
 ///|
@@ -310,7 +310,7 @@ pub fn finite_group_carrier_curve25519() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   let t38 = @tactics.conv_tac(@computegroup.ecgroup_carrier_conv)
   let t39 = @tactics.then_tac(@simp.rewrite_tac(@list.List([c_25519()])), t38)
-  generator_in_group_carrier_curve25519_c.set(@tactics.prove(@parser.parse_term("C_25519 IN group_carrier curve25519_group"), t39))
+  generator_in_group_carrier_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("IN(C_25519, group_carrier(curve25519_group))"), t39))
 }
 
 ///|
@@ -329,7 +329,7 @@ fn step_22() -> Unit raise {
   let t41 = @simp.rewrite_tac(@list.List([n_25519()]))
   let t40 = @simp.rewrite_tac(@list.List([c_25519(), @lib.el(1, @bool.conjuncts_rule(curve25519_group_v1())), @ind_types.option_distinct()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@grouptheory.group_element_order_unique_prime(), generator_in_group_carrier_curve25519(), prime_n25519()])), t40), t41), t42), @tactics.refl_tac)
-  group_element_order_curve25519_c25519_c.set(@tactics.prove(@parser.parse_term("group_element_order curve25519_group C_25519 = n_25519"), t43))
+  group_element_order_curve25519_c25519_c.set(@tactics.prove(@term_syntax.parse_term("group_element_order(curve25519_group, C_25519) == n_25519"), t43))
 }
 
 ///|
@@ -346,7 +346,7 @@ pub fn group_element_order_curve25519_c25519() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let t44 = @tactics.conv_tac(@computegroup.ecgroup_carrier_conv)
   let t45 = @tactics.then_tac(@simp.rewrite_tac(@list.List([cc_25519()])), t44)
-  fullgenerator_in_group_carrier_curve25519_c.set(@tactics.prove(@parser.parse_term("CC_25519 IN group_carrier curve25519_group"), t45))
+  fullgenerator_in_group_carrier_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("IN(CC_25519, group_carrier(curve25519_group))"), t45))
 }
 
 ///|
@@ -375,7 +375,7 @@ fn step_24() -> Unit raise {
   let t64 = @tactics.conv_tac(@equal.rand_conv(@computegroup.ecgroup_mul_conv))
   let t63 = @simp.rewrite_tac(@list.List([c_25519(), cc_25519()]))
   let t65 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("h"), t63), t64), @tactics.refl_tac), @tactics.all_tac])
-  let t62 = @tactics.subgoal_then(@parser.parse_term("CC_25519 = group_mul curve25519_group h C_25519"), fn(x59 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t62 = @tactics.subgoal_then(@term_syntax.parse_term("CC_25519 == group_mul(curve25519_group, (h : Option[(Int, Int)]), C_25519)"), fn(x59 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s60 = @tactics.subst1_tac(x59)
     fn(x61 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s60(x61)
@@ -391,10 +391,10 @@ fn step_24() -> Unit raise {
   let t50 = @simp.rewrite_tac(@list.List([curve25519_group_v1()]))
   let t48 = @simp.simp_tac(@list.List([@grouptheory.group_element_order_unique_alt(), @calc_num.arith()]))
   let t49 = @list.List([@tactics.conv_tac(@computegroup.ecgroup_carrier_conv), t48])
-  let t47 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("p /\\ (p ==> q) ==> p /\\ q")))
+  let t47 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(p : Bool) && (p → (q : Bool)) → p && q")))
   let t58 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.expand_tac("h"), t47), @tactics.conj_tac), t49), @tactics.disch_tac), t50), @tactics.conj_tac), t51), t52), t53), t54), t55), t56), t57), @tactics.all_tac])
-  let t46 = @tactics.subgoal_then(@parser.parse_term("h IN group_carrier curve25519_group /\\\n    group_element_order curve25519_group h = 8"), @tactics.strip_assume_tac)
-  let t84 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.abbrev_tac(@parser.parse_term("h = SOME\n     (&39382357235489614581723060781553021112529911719440698176882885853963445705823,\n      &10506421237558716435988711236408671798265365380393424752549290025458740468278)\n    :(int#int)option")), t46), t58), t62), t65), fn(x75 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
+  let t46 = @tactics.subgoal_then(@term_syntax.parse_term("IN((h : Option[(Int, Int)]), group_carrier(curve25519_group)) && group_element_order(curve25519_group, h) == 8"), @tactics.strip_assume_tac)
+  let t84 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.abbrev_tac(@term_syntax.parse_term("(h : Option[(Int, Int)]) == SOME((int_of_num(39382357235489614581723060781553021112529911719440698176882885853963445705823), int_of_num(10506421237558716435988711236408671798265365380393424752549290025458740468278)))")), t46), t58), t62), t65), fn(x75 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     (fn(x74 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x72 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         (fn(x71 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -410,7 +410,7 @@ fn step_24() -> Unit raise {
       })(x74))
     })(x75)(x75)
   }), t76), t77), t78), @tactics.conj_tac), t83)
-  group_element_order_curve25519_cc25519_c.set(@tactics.prove(@parser.parse_term("group_element_order curve25519_group CC_25519 = 8 * n_25519"), t84))
+  group_element_order_curve25519_cc25519_c.set(@tactics.prove(@term_syntax.parse_term("group_element_order(curve25519_group, CC_25519) == 8 * n_25519"), t84))
 }
 
 ///|
@@ -432,20 +432,20 @@ fn step_25() -> Unit raise {
   }, @montgomery.card_bound_montgomery_curve())
   let t98 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(n_25519()), curve25519_group_v1()]))
   let t97 = @simp.rewrite_tac(@list.List([@arith.le_mult_rcancel(), n_25519(), @calc_num.arith_eq()]))
-  let t96 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("s < 16 * n /\\ 2 * n <= d * n ==> s = (8 * n) * d ==> x = 8 * n")))
+  let t96 = @tactics.match_mp_tac(@int.arith_rule(@term_syntax.parse_term("(s : Num) < 16 * (n : Num) && 2 * n <= (d : Num) * n → s == 8 * n * d → (x : Num) == 8 * n")))
   let t95 = @simp.asm_simp_tac(@list.List([@sets.card_eq_0(), finite_group_carrier_curve25519(), @arith.mult_clauses(), @grouptheory.group_carrier_nonempty()]))
-  let t93 = @int.arith_rule(@parser.parse_term("d = 0 \\/ d = 1 \\/ 2 <= d"))
+  let t93 = @int.arith_rule(@term_syntax.parse_term("(d : Num) == 0 || d == 1 || 2 <= d"))
   let t94 = @tactics.repeat_tcl(@tactics.disj_cases_then)(fn(x90 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s91 = @tactics.assume_tac(x90)
     fn(x92 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s91(x92)
     }
   })(t93)
-  let t89 = @tactics.x_gen_tac(@parser.parse_term("d:num"))
+  let t89 = @tactics.x_gen_tac(@term_syntax.parse_term("(d : Num)"))
   let t88 = @simp.rewrite_tac(@list.List([@int.divides(), @theorems.left_imp_exists_thm(), group_element_order_curve25519_cc25519()]))
   let t87 = @simp.rewrite_tac(@list.List([finite_group_carrier_curve25519(), fullgenerator_in_group_carrier_curve25519()]))
-  let t85 = @parser.parse_term("CC_25519")
-  let t86 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("curve25519_group"), t85]), @grouptheory.group_element_order_divides_group_order()))
+  let t85 = @term_syntax.parse_term("CC_25519")
+  let t86 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("curve25519_group"), t85]), @grouptheory.group_element_order_divides_group_order()))
   let t111 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.has_size(), finite_group_carrier_curve25519()])), t86), t87), t88), t89), t94), t95), t96), t97), t98), fn(x108 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     (fn(x107 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       (fn(x105 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -462,7 +462,7 @@ fn step_25() -> Unit raise {
       })(x107))
     })(x108)(x108)
   }), t109), t110), @int.arith_tac)
-  size_curve25519_group_c.set(@tactics.prove(@parser.parse_term("group_carrier curve25519_group HAS_SIZE (8 * n_25519)"), t111))
+  size_curve25519_group_c.set(@tactics.prove(@term_syntax.parse_term("HAS_SIZE(group_carrier(curve25519_group), 8 * n_25519)"), t111))
 }
 
 ///|
@@ -479,7 +479,7 @@ pub fn size_curve25519_group() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let t112 = @simp.rewrite_tac(@list.List([group_element_order_curve25519_cc25519(), @simp.rewrite_rule(@list.List([@sets.has_size()]))(size_curve25519_group())]))
   let t113 = @tactics.then_tac(@simp.simp_tac(@list.List([@grouptheory.subgroup_generated_element_order(), fullgenerator_in_group_carrier_curve25519(), finite_group_carrier_curve25519()])), t112)
-  generated_curve25519_group_c.set(@tactics.prove(@parser.parse_term("subgroup_generated curve25519_group {CC_25519} = curve25519_group"), t113))
+  generated_curve25519_group_c.set(@tactics.prove(@term_syntax.parse_term("subgroup_generated(curve25519_group, {CC_25519}) == curve25519_group"), t113))
 }
 
 ///|
@@ -495,7 +495,7 @@ pub fn generated_curve25519_group() -> @kernel.Thm {
 /// CYCLIC_CURVE25519_GROUP
 fn step_27() -> Unit raise {
   let t114 = @meson.meson_tac(@list.List([@grouptheory.cyclic_group_alt(), generated_curve25519_group()]))
-  cyclic_curve25519_group_c.set(@tactics.prove(@parser.parse_term("cyclic_group curve25519_group"), t114))
+  cyclic_curve25519_group_c.set(@tactics.prove(@term_syntax.parse_term("cyclic_group(curve25519_group)"), t114))
 }
 
 ///|
@@ -511,7 +511,7 @@ pub fn cyclic_curve25519_group() -> @kernel.Thm {
 /// ABELIAN_CURVE25519_GROUP
 fn step_28() -> Unit raise {
   let t115 = @meson.meson_tac(@list.List([cyclic_curve25519_group(), @grouptheory.cyclic_imp_abelian_group()]))
-  abelian_curve25519_group_c.set(@tactics.prove(@parser.parse_term("abelian_group curve25519_group"), t115))
+  abelian_curve25519_group_c.set(@tactics.prove(@term_syntax.parse_term("abelian_group(curve25519_group)"), t115))
 }
 
 ///|

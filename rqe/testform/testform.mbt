@@ -265,9 +265,9 @@ pub fn tfm() -> Ref[@kernel.Term] {
 ///|
 /// tvar, tmat, tfm
 fn step_1() -> Unit raise {
-  let t13 = Ref::{ val: @parser.parse_term("T") }
+  let t13 = Ref::{ val: @term_syntax.parse_term("true") }
   let t14 = Ref::{ val: @bool.truth() }
-  let (tvar, tmat, tfm) = (Ref::{ val: @parser.parse_term("T") }, t14, t13)
+  let (tvar, tmat, tfm) = (Ref::{ val: @term_syntax.parse_term("true") }, t14, t13)
   tvar_c.set(tvar)
   tmat_c.set(tmat)
   tfm_c.set(tfm)
@@ -276,9 +276,9 @@ fn step_1() -> Unit raise {
 ///|
 /// COMBINE_TESTFORMS
 fn step_2() -> Unit raise {
-  let lem1 = @class.taut(@parser.parse_term("(T ==> a) <=> a"))
-  let lem2 = @class.taut(@parser.parse_term("(T /\\ x) <=> x"))
-  let imat_tm = @parser.parse_term("interpmat")
+  let lem1 = @class.taut(@term_syntax.parse_term("(true → (a : Bool)) == a"))
+  let lem2 = @class.taut(@term_syntax.parse_term("(true && (x : Bool)) == x"))
+  let imat_tm = @term_syntax.parse_term("interpmat")
   combine_testforms_v1_c.set(fn(x15 : @kernel.Term) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise {
     let var_ = x15
     fn(x16 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {

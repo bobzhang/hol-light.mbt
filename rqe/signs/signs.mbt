@@ -21,14 +21,14 @@ pub fn xterm_lt(x1 : @kernel.Term, x2 : @kernel.Term) -> Bool raise {
 ///|
 /// FINDSIGN
 fn step_1() -> Unit raise {
-  let p_tm = @parser.parse_term("p:real")
-  let c_tm = @parser.parse_term("c:real")
+  let p_tm = @term_syntax.parse_term("(p : Real)")
+  let c_tm = @term_syntax.parse_term("(c : Real)")
   let t5 = @simp.asm_rewrite_tac(@list.List([@realax.real_mul_assoc(), @realax.real_mul_lid()]))
   let t6 = @tactics.then_tac(@tactics.disch_then(fn(x3 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x3
     @tactics.then_tac(@tactics.disch_tac, @tactics.mp_tac(th))
   }), t5)
-  let fth = @tactics.prove(@parser.parse_term("r (a * b * p) (&0) ==> (a * b = &1) ==> r p (&0)"), t6)
+  let fth = @tactics.prove(@term_syntax.parse_term("(r : (Real, Real) -> Bool)((a : Real) * ((b : Real) * (p : Real)), real_of_num(0)) → a * b == real_of_num(1) → r(p, real_of_num(0))"), t6)
   fn findsign_1(x7 : @list.List[@kernel.Term], x8 : @list.List[@kernel.Thm], x9 : @kernel.Term) -> @kernel.Thm raise {
     let vars = x7
     let sgns = x8

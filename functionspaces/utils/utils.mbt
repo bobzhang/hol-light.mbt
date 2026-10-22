@@ -3,7 +3,7 @@
 ///|
 /// EQ_TO_IMP
 fn step_1() -> Unit raise {
-  eq_to_imp_c.set(@class.taut(@parser.parse_term("forall P Q. (P <=> Q) <=> (P ==> Q) /\\ (Q==>P)")))
+  eq_to_imp_c.set(@class.taut(@term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, (P == Q) == ((P → Q) && (Q → P))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn eq_to_imp() -> @kernel.Thm {
 ///|
 /// EQ_NOT
 fn step_2() -> Unit raise {
-  eq_not_c.set(@class.taut(@parser.parse_term("forall P Q.(~P <=> ~Q) <=> (P <=> Q)")))
+  eq_not_c.set(@class.taut(@term_syntax.parse_term("∀ P : Bool, ∀ Q : Bool, (!P == !Q) == (P == Q)")))
 }
 
 ///|
@@ -410,7 +410,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] simp_horn_conv_rec_l(x73 : @list.List[(
 ///|
 /// horns_of_term
 fn step_9() -> Unit raise {
-  let t88 = @parser.parse_term("(/\\)")
+  let t88 = @term_syntax.parse_term("op_slash_bslash")
   let strip_conj : (@kernel.Term) -> @list.List[@kernel.Term] raise = fn(x90 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     ((x89 : @kernel.Term) => @basics.binops(t88, x89))(x90)
   }

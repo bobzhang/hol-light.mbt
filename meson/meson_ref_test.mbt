@@ -252,19 +252,19 @@ test "meson matches meson.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|meson quotations (13):
-      #|  F
-      #|  a \\/ b <=> ~b ==> a
-      #|  ~(~a) <=> a
-      #|  ~(a \\/ b) <=> ~a /\\ ~b
-      #|  ~a \\/ ~b <=> ~(a /\\ b)
-      #|  ~p <=> p ==> F
-      #|  (p ==> ~p) <=> ~p
-      #|  (~p ==> p) <=> p
-      #|  x:A = y
+      #|  false
+      #|  ((a : Bool) || (b : Bool)) == (!b \226\134\146 a)
+      #|  !!(a : Bool) == a
+      #|  !((a : Bool) || (b : Bool)) == (!a && !b)
+      #|  (!(a : Bool) || !(b : Bool)) == !(a && b)
+      #|  !(p : Bool) == (p \226\134\146 false)
+      #|  ((p : Bool) \226\134\146 !p) == !p
+      #|  (!(p : Bool) \226\134\146 p) == p
+      #|  (x : A) == (y : A)
       #|  (x:A = x) /\\\n       (~(x:A = y) \\/ ~(x = z) \\/ (y = z))
-      #|  (a ==> b) <=> ~a \\/ b
-      #|  (a <=> b) ==> b \\/ ~a
-      #|  a ==> b <=> ~a \\/ b
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
+      #|  (a : Bool) == (b : Bool) \226\134\146 b || !a
+      #|  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
       #|0..0..1..solved at 4
       #|mp =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) (P:fun('A,bool) a:'A))) (Q:fun('A,bool) a:'A))
       #|0..0..solved at 2

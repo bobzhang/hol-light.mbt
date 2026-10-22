@@ -9,10 +9,10 @@ pub(all) suberror Isign {
 ///|
 /// get_mp
 fn step_1() -> Unit raise {
-  let unknown = @parser.parse_term("Unknown")
-  let pos = @parser.parse_term("Pos")
-  let zero = @parser.parse_term("Zero")
-  let neg = @parser.parse_term("Neg")
+  let unknown = @term_syntax.parse_term("Unknown")
+  let pos = @term_syntax.parse_term("Pos")
+  let zero = @term_syntax.parse_term("Zero")
+  let neg = @term_syntax.parse_term("Neg")
   get_mp_c.set(fn(x1 : @kernel.Term) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise {
     let upper_sign = x1
     fn(x2 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -167,21 +167,21 @@ pub fn inferisign_v1(x : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kerne
 ///|
 /// INFERISIGN
 fn step_3() -> Unit raise {
-  let real_app = @parser.parse_term("APPEND:real list -> real list -> real list")
-  let sign_app = @parser.parse_term("APPEND:(sign list) list -> (sign list) list -> (sign list) list")
-  let real_len = @parser.parse_term("LENGTH:real list -> num")
-  let sign_len = @parser.parse_term("LENGTH:(sign list) list -> num")
-  let unknown = @parser.parse_term("Unknown")
-  let pos = @parser.parse_term("Pos")
-  let zero = @parser.parse_term("Zero")
-  let neg = @parser.parse_term("Neg")
+  let real_app = @term_syntax.parse_term("(APPEND : (List[Real], List[Real]) -> List[Real])")
+  let sign_app = @term_syntax.parse_term("(APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])")
+  let real_len = @term_syntax.parse_term("(LENGTH : (List[Real]) -> Num)")
+  let sign_len = @term_syntax.parse_term("(LENGTH : (List[List[Sign]]) -> Num)")
+  let unknown = @term_syntax.parse_term("Unknown")
+  let pos = @term_syntax.parse_term("Pos")
+  let zero = @term_syntax.parse_term("Zero")
+  let neg = @term_syntax.parse_term("Neg")
   let num_mul = @parser.parse_term("( * ):num -> num -> num")
   let num_add = @parser.parse_term("( + ):num -> num -> num")
   let real_ty = @parser.parse_type("real")
-  let one = @parser.parse_term("1")
-  let two = @parser.parse_term("2")
-  let f = @parser.parse_term("F")
-  let imat = @parser.parse_term("interpmat")
+  let one = @term_syntax.parse_term("1")
+  let two = @term_syntax.parse_term("2")
+  let f = @term_syntax.parse_term("false")
+  let imat = @term_syntax.parse_term("interpmat")
   let sl_ty = @parser.parse_type("sign list")
   fn inferisign_rec(x7 : @list.List[@kernel.Term], x8 : @kernel.Thm, x9 : @kernel.Thm, x10 : @list.List[(@kernel.Term, @kernel.Thm)]) -> ((@kernel.Thm, @list.List[(@kernel.Term, @kernel.Thm)])) raise {
     let vars = x7

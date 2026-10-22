@@ -27,8 +27,8 @@ pub fn th_rule(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// cos_pi2_eq_sin
 fn step_3() -> Unit raise {
-  let t3 = @simp.rewrite_tac(@list.List([@transcendentals.sin_cos(), @calc_rat.real_arith(@parser.parse_term("pi / &2 - x = --(x - pi / &2)")), @transcendentals.cos_neg()]))
-  cos_pi2_eq_sin_c.set(@tactics.prove(@parser.parse_term("cos (x - pi / &2) = sin x"), t3))
+  let t3 = @simp.rewrite_tac(@list.List([@transcendentals.sin_cos(), @calc_rat.real_arith(@term_syntax.parse_term("pi / real_of_num(2) - (x : Real) == -(x - pi / real_of_num(2))")), @transcendentals.cos_neg()]))
+  cos_pi2_eq_sin_c.set(@tactics.prove(@term_syntax.parse_term("cos((x : Real) - pi / real_of_num(2)) == sin(x)"), t3))
 }
 
 ///|
@@ -44,7 +44,7 @@ pub fn cos_pi2_eq_sin() -> @kernel.Thm {
 /// sin_reduce_th
 fn step_4() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([cos_pi2_eq_sin()]))
-  let t6 = (@parser.parse_term("interval_arith (cos (x - pi / &2)) (low, high)\n\t\t\t\t      ==> interval_arith (sin x) (low, high)"), t5)
+  let t6 = (@term_syntax.parse_term("interval_arith(cos((x : Real) - pi / real_of_num(2)), ((low : Real), (high : Real))) → interval_arith(sin(x), (low, high))"), t5)
   sin_reduce_th_c.set(th_rule((fn(x4 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x4.0, x4.1)
   })(t6)))
@@ -63,7 +63,7 @@ pub fn sin_reduce_th() -> @kernel.Thm {
 /// translate_interval_const
 fn step_5() -> Unit raise {
   let t8 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@interval_arith.interval_arith()])), @calc_rat.real_arith_tac)
-  let t9 = (@parser.parse_term("interval_arith x (a, b) /\\\n\t\t\t\t\t\t   interval_arith c (lo, hi) /\\\n\t\t\t\t\t\t   a1 <= a - hi /\\ b - lo <= b1\n\t\t\t\t\t\t   ==> interval_arith (x - c) (a1, b1)"), t8)
+  let t9 = (@term_syntax.parse_term("interval_arith((x : Real), ((a : Real), (b : Real))) && interval_arith((c : Real), ((lo : Real), (hi : Real))) && (a1 : Real) <= a - hi && b - lo <= (b1 : Real) → interval_arith(x - c, (a1, b1))"), t8)
   translate_interval_const_c.set(th_rule((fn(x7 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x7.0, x7.1)
   })(t9)))
@@ -81,7 +81,7 @@ pub fn translate_interval_const() -> @kernel.Thm {
 ///|
 /// translate_pi2
 fn step_6() -> Unit raise {
-  let c_tm = @parser.parse_term("pi / &2")
+  let c_tm = @term_syntax.parse_term("pi / real_of_num(2)")
   translate_pi2_c.set(fn(x10 : Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let pp = x10
     fn(x11 : @kernel.Thm) -> @kernel.Thm raise {
