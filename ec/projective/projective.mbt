@@ -3,7 +3,7 @@
 ///|
 /// projective_point
 fn step_1() -> Unit raise {
-  projective_point_c.set(@define.define_(@parser.parse_term("projective_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f")))
+  projective_point_c.set(@define.define_(@term_syntax.parse_term("(projective_point : (Ring[_], (_, _, _)) -> Bool)((f : Ring[_]), ((x : _), (y : _), (z : _))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(z, ring_carrier(f)))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn projective_point() -> @kernel.Thm {
 ///|
 /// projective_curve
 fn step_2() -> Unit raise {
-  projective_curve_c.set(@define.define_(@parser.parse_term("projective_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_mul f (ring_pow f y 2) z =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 2)))\n                               (ring_mul f b (ring_pow f z 3)))")))
+  projective_curve_c.set(@define.define_(@term_syntax.parse_term("(projective_curve : ((Ring[A], A, A), (A, A, A)) -> Bool)(((f : Ring[A]), (a : A), (b : A)), ((x : A), (y : A), (z : A))) == (IN(x, ring_carrier(f)) && IN(y, ring_carrier(f)) && IN(z, ring_carrier(f)) && ring_mul(f, ring_pow(f, y, 2), z) == ring_add(f, ring_pow(f, x, 3), ring_add(f, ring_mul(f, a, ring_mul(f, x, ring_pow(f, z, 2))), ring_mul(f, b, ring_pow(f, z, 3)))))")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn projective_curve() -> @kernel.Thm {
 ///|
 /// weierstrass_of_projective
 fn step_3() -> Unit raise {
-  weierstrass_of_projective_c.set(@define.define_(@parser.parse_term("weierstrass_of_projective (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x z,ring_div f y z)")))
+  weierstrass_of_projective_c.set(@define.define_(@term_syntax.parse_term("(weierstrass_of_projective : (Ring[A], (A, A, A)) -> Option[(A, A)])((f : Ring[A]), ((x : A), (y : A), (z : A))) == (if z == ring_0(f) { NONE } else { SOME((ring_div(f, x, z), ring_div(f, y, z))) })")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn weierstrass_of_projective() -> @kernel.Thm {
 ///|
 /// projective_of_weierstrass
 fn step_4() -> Unit raise {
-  projective_of_weierstrass_c.set(@define.define_(@parser.parse_term("projective_of_weierstrass (f:A ring) NONE = (ring_0 f,ring_1 f,ring_0 f) /\\\n  projective_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)")))
+  projective_of_weierstrass_c.set(@define.define_(@term_syntax.parse_term("(projective_of_weierstrass : (Ring[A], Option[(A, A)]) -> (A, A, A))((f : Ring[A]), NONE) == (ring_0(f), ring_1(f), ring_0(f)) && projective_of_weierstrass(f, SOME(((x : A), (y : A)))) == (x, y, ring_1(f))")))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn projective_of_weierstrass() -> @kernel.Thm {
 ///|
 /// projective_eq
 fn step_5() -> Unit raise {
-  projective_eq_c.set(@define.define_(@parser.parse_term("projective_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x z' = ring_mul f x' z /\\\n        ring_mul f y z' = ring_mul f y' z")))
+  projective_eq_c.set(@define.define_(@term_syntax.parse_term("(projective_eq : (Ring[A], (A, A, A), (A, A, A)) -> Bool)((f : Ring[A]), ((x : A), (y : A), (z : A)), ((x' : A), (y' : A), (z' : A))) == ((z == ring_0(f)) == (z' == ring_0(f)) && ring_mul(f, x, z') == ring_mul(f, x', z) && ring_mul(f, y, z') == ring_mul(f, y', z))")))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn projective_eq() -> @kernel.Thm {
 ///|
 /// projective_0
 fn step_6() -> Unit raise {
-  projective_0_c.set(@pair.new_definition(@parser.parse_term("projective_0 (f:A ring,a:A,b:A) = (ring_0 f,ring_1 f,ring_0 f)")))
+  projective_0_c.set(@pair.new_definition(@term_syntax.parse_term("(projective_0 : ((Ring[A], A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A))) == (ring_0(f), ring_1(f), ring_0(f))")))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn projective_0() -> @kernel.Thm {
 ///|
 /// projective_neg
 fn step_7() -> Unit raise {
-  projective_neg_c.set(@pair.new_definition(@parser.parse_term("projective_neg (f,a:A,b:A) (x,y,z) = (x:A,ring_neg f y:A,z:A)")))
+  projective_neg_c.set(@pair.new_definition(@term_syntax.parse_term("(projective_neg : ((Ring[A], A, A), (A, A, A)) -> (A, A, A))(((f : Ring[A]), (a : A), (b : A)), ((x : A), (y : A), (z : A))) == (x, ring_neg(f, y), z)")))
 }
 
 ///|
@@ -108,7 +108,7 @@ pub fn projective_neg() -> @kernel.Thm {
 ///|
 /// projective_add
 fn step_8() -> Unit raise {
-  projective_add_c.set(@pair.new_definition(@parser.parse_term("projective_add (f,a,b) (x1,y1,z1) (x2,y2,z2) =\n    if z1 = ring_0 f then (x2,y2,z2)\n    else if z2 = ring_0 f then (x1,y1,z1)\n    else if projective_eq f (x1,y1,z1) (x2,y2,z2) then\n      let t =\n          ring_add f (ring_mul f a (ring_pow f z1 2))\n          (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n      and u = ring_mul f y1 z1 in\n      let v = ring_mul f u (ring_mul f x1 y1) in\n      let w = ring_sub f (ring_pow f t 2) (ring_mul f (ring_of_num f 8) v) in\n      (ring_mul f (ring_of_num f 2) (ring_mul f u w),\n       ring_sub f (ring_mul f t (ring_sub f (ring_mul f (ring_of_num f 4) v) w))\n       (ring_mul f (ring_of_num f 8)\n       (ring_mul f (ring_pow f y1 2) (ring_pow f u 2))),\n       ring_mul f (ring_of_num f 8) (ring_pow f u 3))\n    else if projective_eq f (projective_neg (f,a,b) (x1,y1,z1)) (x2,y2,z2) then\n      projective_0 (f,a,b)\n    else\n      let u = ring_sub f (ring_mul f y2 z1) (ring_mul f y1 z2)\n      and v = ring_sub f (ring_mul f x2 z1) (ring_mul f x1 z2) in\n      let w =\n          ring_sub f\n          (ring_sub f (ring_mul f (ring_pow f u 2) (ring_mul f z1 z2))\n          (ring_pow f v 3))\n          (ring_mul f (ring_of_num f 2)\n          (ring_mul f (ring_pow f v 2) (ring_mul f x1 z2))) in\n      (ring_mul f v w,\n       ring_sub f\n       (ring_mul f u\n       (ring_sub f (ring_mul f (ring_pow f v 2) (ring_mul f x1 z2)) w))\n       (ring_mul f (ring_pow f v 3) (ring_mul f y1 z2)),\n       ring_mul f (ring_pow f v 3) (ring_mul f z1 z2))")))
+  projective_add_c.set(@pair.new_definition(@term_syntax.parse_term("(projective_add : ((Ring[_], _, _), (_, _, _), (_, _, _)) -> (_, _, _))(((f : Ring[_]), (a : _), (b : _)), ((x1 : _), (y1 : _), (z1 : _)), ((x2 : _), (y2 : _), (z2 : _))) == (if z1 == ring_0(f) { (x2, y2, z2) } else { if z2 == ring_0(f) { (x1, y1, z1) } else { if projective_eq(f, (x1, y1, z1), (x2, y2, z2)) { LET((t : _) => (u : _) => LET_END(LET((v : _) => LET_END(LET((w : _) => LET_END((ring_mul(f, ring_of_num(f, 2), ring_mul(f, u, w)), ring_sub(f, ring_mul(f, t, ring_sub(f, ring_mul(f, ring_of_num(f, 4), v), w)), ring_mul(f, ring_of_num(f, 8), ring_mul(f, ring_pow(f, y1, 2), ring_pow(f, u, 2)))), ring_mul(f, ring_of_num(f, 8), ring_pow(f, u, 3)))), ring_sub(f, ring_pow(f, t, 2), ring_mul(f, ring_of_num(f, 8), v)))), ring_mul(f, u, ring_mul(f, x1, y1)))), ring_add(f, ring_mul(f, a, ring_pow(f, z1, 2)), ring_mul(f, ring_of_num(f, 3), ring_pow(f, x1, 2))), ring_mul(f, y1, z1)) } else { if projective_eq(f, projective_neg((f, a, b), (x1, y1, z1)), (x2, y2, z2)) { projective_0((f, a, b)) } else { LET((u : _) => (v : _) => LET_END(LET((w : _) => LET_END((ring_mul(f, v, w), ring_sub(f, ring_mul(f, u, ring_sub(f, ring_mul(f, ring_pow(f, v, 2), ring_mul(f, x1, z2)), w)), ring_mul(f, ring_pow(f, v, 3), ring_mul(f, y1, z2))), ring_mul(f, ring_pow(f, v, 3), ring_mul(f, z1, z2)))), ring_sub(f, ring_sub(f, ring_mul(f, ring_pow(f, u, 2), ring_mul(f, z1, z2)), ring_pow(f, v, 3)), ring_mul(f, ring_of_num(f, 2), ring_mul(f, ring_pow(f, v, 2), ring_mul(f, x1, z2)))))), ring_sub(f, ring_mul(f, y2, z1), ring_mul(f, y1, z2)), ring_sub(f, ring_mul(f, x2, z1), ring_mul(f, x1, z2))) } } } })")))
 }
 
 ///|
@@ -125,7 +125,7 @@ pub fn projective_add() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t1 = @simp.simp_tac(@list.List([projective_curve(), projective_point()]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t1)
-  projective_curve_imp_point_c.set(@tactics.prove(@parser.parse_term("forall f a b p. projective_curve(f,a,b) p ==> projective_point f p"), t2))
+  projective_curve_imp_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[_], ∀ a : _, ∀ b : _, ∀ p : (_, _, _), projective_curve((f, a, b), p) → projective_point(f, p)"), t2))
 }
 
 ///|
@@ -143,7 +143,7 @@ fn step_10() -> Unit raise {
   let t4 = @simp.simp_tac(@list.List([projective_point(), @ringtheory.ring_0_v1(), @ringtheory.ring_1_v1()]))
   let t3 = @simp.rewrite_tac(@list.List([@weierstrass.weierstrass_point(), projective_of_weierstrass()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t3), t4)
-  projective_of_weierstrass_point_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        projective_point f (projective_of_weierstrass f p) <=>\n        weierstrass_point f p"), t5))
+  projective_of_weierstrass_point_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], projective_point(f, projective_of_weierstrass(f, p)) == weierstrass_point(f, p)"), t5))
 }
 
 ///|
@@ -159,7 +159,7 @@ pub fn projective_of_weierstrass_point_eq() -> @kernel.Thm {
 /// PROJECTIVE_OF_WEIERSTRASS_POINT
 fn step_11() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([projective_of_weierstrass_point_eq()]))
-  projective_of_weierstrass_point_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        weierstrass_point f p\n        ==> projective_point f (projective_of_weierstrass f p)"), t6))
+  projective_of_weierstrass_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], weierstrass_point(f, p) → projective_point(f, projective_of_weierstrass(f, p))"), t6))
 }
 
 ///|
@@ -177,7 +177,7 @@ fn step_12() -> Unit raise {
   let t8 = @simp.asm_simp_tac(@list.List([@weierstrass.weierstrass_point(), @ringtheory.ring_div_v1()]))
   let t7 = @tactics.repeat_tac(@tactics.gen_tac)
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@pair.forall_pair_thm(), weierstrass_of_projective(), projective_point()])), t7), @class.cond_cases_tac), t8)
-  weierstrass_of_projective_point_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        projective_point f p\n        ==> weierstrass_point f (weierstrass_of_projective f p)"), t9))
+  weierstrass_of_projective_point_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : (A, A, A), projective_point(f, p) → weierstrass_point(f, weierstrass_of_projective(f, p))"), t9))
 }
 
 ///|
@@ -195,7 +195,7 @@ fn step_13() -> Unit raise {
   let t11 = @simp.simp_tac(@list.List([@pair.pair_eq()]))
   let t10 = @simp.rewrite_tac(@list.List([projective_of_weierstrass(), @ind_types.option_distinct(), @ind_types.option_inj()]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.field()])), t10), t11)
-  projective_of_weierstrass_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p q.\n        field f\n        ==> (projective_of_weierstrass f p = projective_of_weierstrass f q <=>\n             p = q)"), t12))
+  projective_of_weierstrass_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) → (projective_of_weierstrass(f, p) == projective_of_weierstrass(f, q)) == (p == q)"), t12))
 }
 
 ///|
@@ -235,7 +235,7 @@ fn step_14() -> Unit raise {
       })(x27))
     })(x28)(x28)
   }), t29)
-  weierstrass_of_projective_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p q.\n        field f /\\ projective_point f p /\\ projective_point f q\n        ==> (weierstrass_of_projective f p = weierstrass_of_projective f q <=>\n             projective_eq f p q)"), t30))
+  weierstrass_of_projective_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && projective_point(f, p) && projective_point(f, q) → (weierstrass_of_projective(f, p) == weierstrass_of_projective(f, q)) == projective_eq(f, p, q)"), t30))
 }
 
 ///|
@@ -252,7 +252,7 @@ pub fn weierstrass_of_projective_eq() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t31 = @simp.simp_tac(@list.List([weierstrass_of_projective(), projective_of_weierstrass(), @weierstrass.weierstrass_point(), @ringtheory.ring_div_1()]))
   let t32 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm(), @ringtheory.field()])), t31)
-  weierstrass_of_projective_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        field f /\\ weierstrass_point f p\n        ==> weierstrass_of_projective f (projective_of_weierstrass f p) = p"), t32))
+  weierstrass_of_projective_of_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : Option[(A, A)], field(f) && weierstrass_point(f, p) → weierstrass_of_projective(f, projective_of_weierstrass(f, p)) == p"), t32))
 }
 
 ///|
@@ -268,7 +268,7 @@ pub fn weierstrass_of_projective_of_weierstrass() -> @kernel.Thm {
 /// PROJECTIVE_OF_WEIERSTRASS_OF_PROJECTIVE
 fn step_16() -> Unit raise {
   let t33 = @simp.simp_tac(@list.List([@equal.gsym(weierstrass_of_projective_eq()), weierstrass_of_projective_of_weierstrass(), projective_of_weierstrass_point_eq(), weierstrass_of_projective_point()]))
-  projective_of_weierstrass_of_projective_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) p.\n        field f /\\ projective_point f p\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_of_projective f p)) p"), t33))
+  projective_of_weierstrass_of_projective_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ p : (A, A, A), field(f) && projective_point(f, p) → projective_eq(f, projective_of_weierstrass(f, weierstrass_of_projective(f, p)), p)"), t33))
 }
 
 ///|
@@ -304,7 +304,7 @@ fn step_17() -> Unit raise {
       })(x44))
     })(x45)(x45)
   }), t46)
-  projective_of_weierstrass_curve_eq_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> (projective_curve (f,a,b) (projective_of_weierstrass f p) <=>\n             weierstrass_curve (f,a,b) p)"), t47))
+  projective_of_weierstrass_curve_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) → projective_curve((f, a, b), projective_of_weierstrass(f, p)) == weierstrass_curve((f, a, b), p)"), t47))
 }
 
 ///|
@@ -320,7 +320,7 @@ pub fn projective_of_weierstrass_curve_eq() -> @kernel.Thm {
 /// PROJECTIVE_OF_WEIERSTRASS_CURVE
 fn step_18() -> Unit raise {
   let t48 = @meson.meson_tac(@list.List([projective_of_weierstrass_curve_eq(), @weierstrass.weierstrass_curve_imp_point()]))
-  projective_of_weierstrass_curve_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_curve (f,a,b) p\n        ==> projective_curve (f,a,b) (projective_of_weierstrass f p)"), t48))
+  projective_of_weierstrass_curve_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_curve((f, a, b), p) → projective_curve((f, a, b), projective_of_weierstrass(f, p))"), t48))
 }
 
 ///|
@@ -366,7 +366,7 @@ fn step_19() -> Unit raise {
       })(x66))
     })(x67)(x67)
   }), t68)
-  weierstrass_of_projective_curve_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p\n        ==> weierstrass_curve (f,a,b) (weierstrass_of_projective f p)"), t69))
+  weierstrass_of_projective_curve_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_curve((f, a, b), p) → weierstrass_curve((f, a, b), weierstrass_of_projective(f, p))"), t69))
 }
 
 ///|
@@ -401,7 +401,7 @@ fn step_20() -> Unit raise {
       })(x79))
     })(x80)(x80)
   }), t81)
-  projective_point_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p\n        ==> projective_point f (projective_neg (f,a,b) p)"), t82))
+  projective_point_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) → projective_point(f, projective_neg((f, a, b), p))"), t82))
 }
 
 ///|
@@ -436,7 +436,7 @@ fn step_21() -> Unit raise {
       })(x92))
     })(x93)(x93)
   }), t94)
-  projective_curve_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p\n        ==> projective_curve (f,a,b) (projective_neg (f,a,b) p)"), t95))
+  projective_curve_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_curve((f, a, b), p) → projective_curve((f, a, b), projective_neg((f, a, b), p))"), t95))
 }
 
 ///|
@@ -454,7 +454,7 @@ fn step_22() -> Unit raise {
   let t97 = @simp.asm_rewrite_tac(@list.List([@weierstrass.weierstrass_neg(), @ind_types.option_inj(), @pair.pair_eq()]))
   let t96 = @tactics.repeat_tac(@tactics.strip_tac)
   let t98 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), projective_neg(), weierstrass_of_projective(), projective_point()])), t96), @class.cond_cases_tac), t97), @ringtheory.field_tac)
-  weierstrass_of_projective_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p\n        ==> weierstrass_of_projective f (projective_neg (f,a,b) p) =\n            weierstrass_neg (f,a,b) (weierstrass_of_projective f p)"), t98))
+  weierstrass_of_projective_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) → weierstrass_of_projective(f, projective_neg((f, a, b), p)) == weierstrass_neg((f, a, b), weierstrass_of_projective(f, p))"), t98))
 }
 
 ///|
@@ -483,7 +483,7 @@ fn step_23() -> Unit raise {
     }
   })))
   let t108 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t105), t106), t107)
-  projective_eq_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p p'.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f p' /\\ projective_eq f p p'\n        ==> projective_eq f\n              (projective_neg (f,a,b) p) (projective_neg (f,a,b) p')"), t108))
+  projective_eq_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ p' : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, p') && projective_eq(f, p, p') → projective_eq(f, projective_neg((f, a, b), p), projective_neg((f, a, b), p'))"), t108))
 }
 
 ///|
@@ -499,7 +499,7 @@ pub fn projective_eq_neg() -> @kernel.Thm {
 /// WEIERSTRASS_OF_PROJECTIVE_NEG_OF_WEIERSTRASS
 fn step_24() -> Unit raise {
   let t109 = @simp.simp_tac(@list.List([weierstrass_of_projective_neg(), projective_of_weierstrass_point(), weierstrass_of_projective_of_weierstrass()]))
-  weierstrass_of_projective_neg_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> weierstrass_of_projective f\n             (projective_neg (f,a,b) (projective_of_weierstrass f p)) =\n            weierstrass_neg (f,a,b) p"), t109))
+  weierstrass_of_projective_neg_of_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) → weierstrass_of_projective(f, projective_neg((f, a, b), projective_of_weierstrass(f, p))) == weierstrass_neg((f, a, b), p)"), t109))
 }
 
 ///|
@@ -515,7 +515,7 @@ pub fn weierstrass_of_projective_neg_of_weierstrass() -> @kernel.Thm {
 /// PROJECTIVE_OF_WEIERSTRASS_NEG
 fn step_25() -> Unit raise {
   let t110 = @simp.simp_tac(@list.List([@equal.gsym(weierstrass_of_projective_eq()), projective_of_weierstrass_point(), projective_point_neg(), @weierstrass.weierstrass_point_neg(), weierstrass_of_projective_neg(), weierstrass_of_projective_of_weierstrass()]))
-  projective_of_weierstrass_neg_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_neg (f,a,b) p))\n             (projective_neg (f,a,b) (projective_of_weierstrass f p))"), t110))
+  projective_of_weierstrass_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) → projective_eq(f, projective_of_weierstrass(f, weierstrass_neg((f, a, b), p)), projective_neg((f, a, b), projective_of_weierstrass(f, p)))"), t110))
 }
 
 ///|
@@ -535,7 +535,7 @@ fn step_26() -> Unit raise {
   let t112 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t111 = @tactics.repeat_tac(@tactics.strip_tac)
   let t115 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), projective_add(), projective_point(), projective_0(), projective_eq(), @pair.let_def(), @pair.let_end_def()])), t111), t112), t113), t114), @ringtheory.ring_carrier_tac)
-  projective_point_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f q\n        ==> projective_point f (projective_add (f,a,b) p q)"), t115))
+  projective_point_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, q) → projective_point(f, projective_add((f, a, b), p, q))"), t115))
 }
 
 ///|
@@ -573,7 +573,7 @@ fn step_27() -> Unit raise {
       })(x128))
     })(x129)(x129)
   }), t130)
-  projective_curve_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_curve (f,a,b) p /\\ projective_curve (f,a,b) q\n        ==> projective_curve (f,a,b) (projective_add (f,a,b) p q)"), t131))
+  projective_curve_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_curve((f, a, b), p) && projective_curve((f, a, b), q) → projective_curve((f, a, b), projective_add((f, a, b), p, q))"), t131))
 }
 
 ///|
@@ -604,20 +604,20 @@ fn step_28() -> Unit raise {
   let t146 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t145 = @simp.asm_rewrite_tac(@list.List([projective_eq(), projective_neg(), projective_0()]))
   let t144 = @simp.asm_rewrite_tac(@list.List([weierstrass_of_projective(), @weierstrass.weierstrass_add()]))
-  let t142 = @parser.parse_term("z2:A = ring_0 f")
-  let t143 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("z1:A = ring_0 f"), t142]))
+  let t142 = @term_syntax.parse_term("(z2 : A) == ring_0((f : Ring[A]))")
+  let t143 = @tactics.map_every(@class.asm_cases_tac, @list.List([@term_syntax.parse_term("(z1 : A) == ring_0((f : Ring[A]))"), t142]))
   let t141 = @simp.rewrite_tac(@list.List([weierstrass_of_projective(), projective_add()]))
-  let t132 = @parser.parse_term("z2:A")
-  let t133 = @parser.parse_term("y2:A")
-  let t134 = @parser.parse_term("x2:A")
-  let t135 = @parser.parse_term("z1:A")
-  let t136 = @parser.parse_term("y1:A")
-  let t137 = @parser.parse_term("x1:A")
-  let t138 = @parser.parse_term("b:A")
-  let t139 = @parser.parse_term("a:A")
-  let t140 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("f:A ring"), t139, t138, t137, t136, t135, t134, t133, t132]))
+  let t132 = @term_syntax.parse_term("(z2 : A)")
+  let t133 = @term_syntax.parse_term("(y2 : A)")
+  let t134 = @term_syntax.parse_term("(x2 : A)")
+  let t135 = @term_syntax.parse_term("(z1 : A)")
+  let t136 = @term_syntax.parse_term("(y1 : A)")
+  let t137 = @term_syntax.parse_term("(x1 : A)")
+  let t138 = @term_syntax.parse_term("(b : A)")
+  let t139 = @term_syntax.parse_term("(a : A)")
+  let t140 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(f : Ring[A])"), t139, t138, t137, t136, t135, t134, t133, t132]))
   let t158 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23(), @pair.forall_pair_thm(), projective_point()])), t140), @tactics.strip_tac), t141), t143), t144), t145), t146), t147), t148), t149), t150), t151), t152), t157), @ringtheory.field_tac), @misc.not_ring_char_divides_tac)
-  weierstrass_of_projective_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f q\n        ==> weierstrass_of_projective f (projective_add (f,a,b) p q) =\n            weierstrass_add (f,a,b)\n             (weierstrass_of_projective f p)\n             (weierstrass_of_projective f q)"), t158))
+  weierstrass_of_projective_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ q : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, q) → weierstrass_of_projective(f, projective_add((f, a, b), p, q)) == weierstrass_add((f, a, b), weierstrass_of_projective(f, p), weierstrass_of_projective(f, q))"), t158))
 }
 
 ///|
@@ -646,7 +646,7 @@ fn step_29() -> Unit raise {
     }
   })))
   let t168 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t165), t166), t167)
-  projective_eq_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p p' q q'.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        projective_point f p /\\ projective_point f p' /\\\n        projective_point f q /\\ projective_point f q' /\\\n        projective_eq f p p' /\\ projective_eq f q q'\n        ==> projective_eq f\n              (projective_add (f,a,b) p q) (projective_add (f,a,b) p' q')"), t168))
+  projective_eq_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : (A, A, A), ∀ p' : (A, A, A), ∀ q : (A, A, A), ∀ q' : (A, A, A), field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && projective_point(f, p) && projective_point(f, p') && projective_point(f, q) && projective_point(f, q') && projective_eq(f, p, p') && projective_eq(f, q, q') → projective_eq(f, projective_add((f, a, b), p, q), projective_add((f, a, b), p', q'))"), t168))
 }
 
 ///|
@@ -662,7 +662,7 @@ pub fn projective_eq_add() -> @kernel.Thm {
 /// WEIERSTRASS_OF_PROJECTIVE_ADD_OF_WEIERSTRASS
 fn step_30() -> Unit raise {
   let t169 = @simp.simp_tac(@list.List([weierstrass_of_projective_add(), projective_of_weierstrass_point(), weierstrass_of_projective_of_weierstrass()]))
-  weierstrass_of_projective_add_of_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> weierstrass_of_projective f\n             (projective_add (f,a,b)\n               (projective_of_weierstrass f p)\n               (projective_of_weierstrass f q)) =\n            weierstrass_add (f,a,b) p q"), t169))
+  weierstrass_of_projective_add_of_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) → weierstrass_of_projective(f, projective_add((f, a, b), projective_of_weierstrass(f, p), projective_of_weierstrass(f, q))) == weierstrass_add((f, a, b), p, q)"), t169))
 }
 
 ///|
@@ -678,7 +678,7 @@ pub fn weierstrass_of_projective_add_of_weierstrass() -> @kernel.Thm {
 /// PROJECTIVE_OF_WEIERSTRASS_ADD
 fn step_31() -> Unit raise {
   let t170 = @simp.simp_tac(@list.List([@equal.gsym(weierstrass_of_projective_eq()), projective_of_weierstrass_point(), projective_point_add(), @weierstrass.weierstrass_point_add(), weierstrass_of_projective_add(), weierstrass_of_projective_of_weierstrass()]))
-  projective_of_weierstrass_add_c.set(@tactics.prove(@parser.parse_term("forall(f:A ring) a b p q.\n        field f /\\ ~(ring_char f = 2) /\\ ~(ring_char f = 3) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\\n        weierstrass_point f p /\\ weierstrass_point f q\n        ==> projective_eq f\n             (projective_of_weierstrass f (weierstrass_add (f,a,b) p q))\n             (projective_add (f,a,b)\n               (projective_of_weierstrass f p)\n               (projective_of_weierstrass f q))"), t170))
+  projective_of_weierstrass_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : Ring[A], ∀ a : A, ∀ b : A, ∀ p : Option[(A, A)], ∀ q : Option[(A, A)], field(f) && !(ring_char(f) == 2) && !(ring_char(f) == 3) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && weierstrass_point(f, p) && weierstrass_point(f, q) → projective_eq(f, projective_of_weierstrass(f, weierstrass_add((f, a, b), p, q)), projective_add((f, a, b), projective_of_weierstrass(f, p), projective_of_weierstrass(f, q)))"), t170))
 }
 
 ///|

@@ -3,7 +3,7 @@
 ///|
 /// ROWINSERT
 fn step_1() -> Unit raise {
-  let lxt = @parser.parse_term("\\x:real. T")
+  let lxt = @term_syntax.parse_term("(x : Real) => true")
   rowinsert_c.set(fn(x1 : Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
     let i = x1
     fn(x2 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -70,8 +70,8 @@ pub fn mk_suc(x : Int64) -> @kernel.Term raise {
 ///|
 /// mk_suc
 fn step_2() -> Unit raise {
-  let zero = @parser.parse_term("0")
-  let suc = @parser.parse_term("SUC")
+  let zero = @term_syntax.parse_term("0")
+  let suc = @term_syntax.parse_term("SUC")
   fn mk_suc_rec(x9 : Int64) -> @kernel.Term raise {
     let n = x9
     match n {
@@ -125,8 +125,8 @@ fn step_3() -> Unit raise {
 ///|
 /// PL_LENGTH
 fn step_4() -> Unit raise {
-  let pl_tm = @parser.parse_term("partition_line")
-  let len_tm = @parser.parse_term("LENGTH:(real -> bool) list -> num")
+  let pl_tm = @term_syntax.parse_term("partition_line")
+  let len_tm = @term_syntax.parse_term("(LENGTH : (List[(Real) -> Bool]) -> Num)")
   pl_length_c.set(fn(x18 : @kernel.Term) -> @kernel.Thm raise {
     let pts = x18
     let lpts = @kernel.mk_comb(len_tm, @kernel.mk_comb(pl_tm, pts))

@@ -5561,9 +5561,9 @@ test "Minisat/sat_tools matches Minisat/sat_tools.ml" {
       #|Warning: inventing type variables
       #|0..0..0..solved at 3
       #|Minisat/sat_tools quotations (3):
-      #|  forall b. b ==> (b<=>T)
-      #|  forall b. (~b) ==> (b<=>F)
-      #|  forall b. (b<=>T) ==> b
+      #|  \226\136\128 b : Bool, b \226\134\146 b == true
+      #|  \226\136\128 b : Bool, !b \226\134\146 b == false
+      #|  \226\136\128 b : Bool, b == true \226\134\146 b
       #|EQT_Imp1 =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. ((#==>:fun(bool,fun(bool,bool)) b:bool) ((#=:fun(bool,fun(bool,bool)) b:bool) #T:bool))))
       #|EQF_Imp1 =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) b:bool)) ((#=:fun(bool,fun(bool,bool)) b:bool) #F:bool))))
       #|EQT_Imp2 =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) b:bool) #T:bool)) b:bool)))

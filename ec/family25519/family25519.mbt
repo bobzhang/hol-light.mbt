@@ -3,7 +3,7 @@
 ///|
 /// c_25519
 fn step_1() -> Unit raise {
-  c_25519_c.set(@define.define_(@parser.parse_term("c_25519 = 51042569399160536130206135233146329284152202253034631822681833788666877215207")))
+  c_25519_c.set(@define.define_(@term_syntax.parse_term("(c_25519 : Num) == 51042569399160536130206135233146329284152202253034631822681833788666877215207")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn c_25519() -> @kernel.Thm {
 ///|
 /// curve25519_of_edwards25519
 fn step_2() -> Unit raise {
-  curve25519_of_edwards25519_c.set(@define.define_(@parser.parse_term("curve25519_of_edwards25519 =\n        montgomery_of_edwards (integer_mod_ring p_25519) (&c_25519)")))
+  curve25519_of_edwards25519_c.set(@define.define_(@term_syntax.parse_term("(curve25519_of_edwards25519 : ((Int, Int)) -> Option[(Int, Int)]) == montgomery_of_edwards(integer_mod_ring(p_25519), int_of_num(c_25519))")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn curve25519_of_edwards25519() -> @kernel.Thm {
 ///|
 /// edwards25519_of_curve25519
 fn step_3() -> Unit raise {
-  edwards25519_of_curve25519_c.set(@define.define_(@parser.parse_term("edwards25519_of_curve25519 =\n        edwards_of_montgomery (integer_mod_ring p_25519) (&c_25519)")))
+  edwards25519_of_curve25519_c.set(@define.define_(@term_syntax.parse_term("(edwards25519_of_curve25519 : (Option[(Int, Int)]) -> (Int, Int)) == edwards_of_montgomery(integer_mod_ring(p_25519), int_of_num(c_25519))")))
 }
 
 ///|
@@ -52,7 +52,7 @@ fn step_4() -> Unit raise {
   let t2 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t1 = @simp.rewrite_tac(@list.List([@wei25519.p_25519(), @curve25519.a_25519(), @edwards25519.e_25519(), @edwards25519.d_25519(), c_25519()]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@edmont.mcurve_of_ecurve(), @pair.pair_eq()])), t1), t2), t3)
-  mcurve_of_ecurve_25519_c.set(@tactics.prove(@parser.parse_term("mcurve_of_ecurve (integer_mod_ring p_25519,&e_25519,&d_25519) (&c_25519) =\n   (integer_mod_ring p_25519,&A_25519,&1)"), t4))
+  mcurve_of_ecurve_25519_c.set(@tactics.prove(@term_syntax.parse_term("mcurve_of_ecurve((integer_mod_ring(p_25519), int_of_num(e_25519), int_of_num(d_25519)), int_of_num(c_25519)) == (integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))"), t4))
 }
 
 ///|
@@ -78,11 +78,11 @@ fn step_5() -> Unit raise {
   let t9 = @equal.gsym(@curve25519.curve25519_group())
   let t10 = @equal.gsym(edwards25519_of_curve25519())
   let t11 = @simp.rewrite_tac(@list.List([@equal.gsym(curve25519_of_edwards25519()), t10, t9, t8, mcurve_of_ecurve_25519()]))
-  let t5 = @parser.parse_term("&c_25519:int")
-  let t6 = @parser.parse_term("&d_25519:int")
-  let t7 = @parser.parse_term("&e_25519:int")
-  let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("integer_mod_ring p_25519"), t7, t6, t5]), @edmont.group_isomorphisms_edwards_montgomery_group())), t11), t12), t13), t14), t15), t16), t17), t18)
-  group_isomorphisms_edwards25519_curve25519_c.set(@tactics.prove(@parser.parse_term("group_isomorphisms\n      (edwards25519_group,curve25519_group)\n      (curve25519_of_edwards25519,edwards25519_of_curve25519)"), t19))
+  let t5 = @term_syntax.parse_term("int_of_num(c_25519)")
+  let t6 = @term_syntax.parse_term("int_of_num(d_25519)")
+  let t7 = @term_syntax.parse_term("int_of_num(e_25519)")
+  let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("integer_mod_ring(p_25519)"), t7, t6, t5]), @edmont.group_isomorphisms_edwards_montgomery_group())), t11), t12), t13), t14), t15), t16), t17), t18)
+  group_isomorphisms_edwards25519_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("group_isomorphisms((edwards25519_group, curve25519_group), (curve25519_of_edwards25519, edwards25519_of_curve25519))"), t19))
 }
 
 ///|
@@ -99,7 +99,7 @@ pub fn group_isomorphisms_edwards25519_curve25519() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t20 = @meson.meson_tac(@list.List([@grouptheory.isomorphic_group(), @grouptheory.group_isomorphisms_imp_isomorphism()]))
   let t21 = @tactics.then_tac(@tactics.mp_tac(group_isomorphisms_edwards25519_curve25519()), t20)
-  isomorphic_groups_edwards25519_curve25519_c.set(@tactics.prove(@parser.parse_term("edwards25519_group isomorphic_group curve25519_group"), t21))
+  isomorphic_groups_edwards25519_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("isomorphic_group(edwards25519_group, curve25519_group)"), t21))
 }
 
 ///|
@@ -116,7 +116,7 @@ pub fn isomorphic_groups_edwards25519_curve25519() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([isomorphic_groups_edwards25519_curve25519()]))
   let t23 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@grouptheory.isomorphic_group_sym()])), t22)
-  isomorphic_groups_curve25519_edwards25519_c.set(@tactics.prove(@parser.parse_term("curve25519_group isomorphic_group edwards25519_group"), t23))
+  isomorphic_groups_curve25519_edwards25519_c.set(@tactics.prove(@term_syntax.parse_term("isomorphic_group(curve25519_group, edwards25519_group)"), t23))
 }
 
 ///|
@@ -134,7 +134,7 @@ fn step_8() -> Unit raise {
   let t25 = @tactics.conv_tac(@int.int_reduce_conv)
   let t24 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t26 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([curve25519_of_edwards25519(), @edmont.montgomery_of_edwards(), @curve25519.c_25519(), @edwards25519.e_25519_v1(), @pair.pair_eq(), @wei25519.p_25519(), @edwards25519.e_25519(), @edwards25519.d_25519(), c_25519()])), t24), t25)
-  curve25519_of_edwards25519_e25519_c.set(@tactics.prove(@parser.parse_term("curve25519_of_edwards25519 E_25519 = C_25519"), t26))
+  curve25519_of_edwards25519_e25519_c.set(@tactics.prove(@term_syntax.parse_term("curve25519_of_edwards25519(E_25519) == C_25519"), t26))
 }
 
 ///|
@@ -152,7 +152,7 @@ fn step_9() -> Unit raise {
   let t28 = @tactics.conv_tac(@int.int_reduce_conv)
   let t27 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t29 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([curve25519_of_edwards25519(), @edmont.montgomery_of_edwards(), @curve25519.cc_25519(), @edwards25519.ee_25519(), @pair.pair_eq(), @wei25519.p_25519(), @edwards25519.e_25519(), @edwards25519.d_25519(), c_25519()])), t27), t28)
-  curve25519_of_edwards25519_ee25519_c.set(@tactics.prove(@parser.parse_term("curve25519_of_edwards25519 EE_25519 = CC_25519"), t29))
+  curve25519_of_edwards25519_ee25519_c.set(@tactics.prove(@term_syntax.parse_term("curve25519_of_edwards25519(EE_25519) == CC_25519"), t29))
 }
 
 ///|
@@ -170,7 +170,7 @@ fn step_10() -> Unit raise {
   let t31 = @tactics.conv_tac(@int.int_reduce_conv)
   let t30 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t32 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([edwards25519_of_curve25519(), @edmont.edwards_of_montgomery(), @curve25519.c_25519(), @edwards25519.e_25519_v1(), @pair.pair_eq(), @wei25519.p_25519(), @edwards25519.e_25519(), @edwards25519.d_25519(), c_25519()])), t30), t31)
-  edwards25519_of_curve25519_c25519_c.set(@tactics.prove(@parser.parse_term("edwards25519_of_curve25519 C_25519 = E_25519"), t32))
+  edwards25519_of_curve25519_c25519_c.set(@tactics.prove(@term_syntax.parse_term("edwards25519_of_curve25519(C_25519) == E_25519"), t32))
 }
 
 ///|
@@ -188,7 +188,7 @@ fn step_11() -> Unit raise {
   let t34 = @tactics.conv_tac(@int.int_reduce_conv)
   let t33 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t35 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([edwards25519_of_curve25519(), @edmont.edwards_of_montgomery(), @curve25519.cc_25519(), @edwards25519.ee_25519(), @pair.pair_eq(), @wei25519.p_25519(), @edwards25519.e_25519(), @edwards25519.d_25519(), c_25519()])), t33), t34)
-  edwards25519_of_curve25519_cc25519_c.set(@tactics.prove(@parser.parse_term("edwards25519_of_curve25519 CC_25519 = EE_25519"), t35))
+  edwards25519_of_curve25519_cc25519_c.set(@tactics.prove(@term_syntax.parse_term("edwards25519_of_curve25519(CC_25519) == EE_25519"), t35))
 }
 
 ///|
@@ -203,7 +203,7 @@ pub fn edwards25519_of_curve25519_cc25519() -> @kernel.Thm {
 ///|
 /// wei25519_of_curve25519
 fn step_12() -> Unit raise {
-  wei25519_of_curve25519_c.set(@define.define_(@parser.parse_term("wei25519_of_curve25519 =\n        weierstrass_of_montgomery (integer_mod_ring p_25519,&A_25519,&1)")))
+  wei25519_of_curve25519_c.set(@define.define_(@term_syntax.parse_term("(wei25519_of_curve25519 : (Option[(Int, Int)]) -> Option[(Int, Int)]) == weierstrass_of_montgomery((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1)))")))
 }
 
 ///|
@@ -218,7 +218,7 @@ pub fn wei25519_of_curve25519() -> @kernel.Thm {
 ///|
 /// curve25519_of_wei25519
 fn step_13() -> Unit raise {
-  curve25519_of_wei25519_c.set(@define.define_(@parser.parse_term("curve25519_of_wei25519 =\n        montgomery_of_weierstrass (integer_mod_ring p_25519,&A_25519,&1)")))
+  curve25519_of_wei25519_c.set(@define.define_(@term_syntax.parse_term("(curve25519_of_wei25519 : (Option[(Int, Int)]) -> Option[(Int, Int)]) == montgomery_of_weierstrass((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1)))")))
 }
 
 ///|
@@ -236,7 +236,7 @@ fn step_14() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([]))
   let t36 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t38 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@montwe.wcurve_of_mcurve(), @wei25519.p_25519(), @pair.pair_eq(), @wei25519.a_25519(), @wei25519.b_25519(), @curve25519.a_25519()])), t36), t37)
-  wcurve_of_mcurve_25519_c.set(@tactics.prove(@parser.parse_term("wcurve_of_mcurve(integer_mod_ring p_25519,&A_25519,&1) =\n   (integer_mod_ring p_25519,&a_25519,&b_25519)"), t38))
+  wcurve_of_mcurve_25519_c.set(@tactics.prove(@term_syntax.parse_term("wcurve_of_mcurve((integer_mod_ring(p_25519), int_of_num(A_25519), int_of_num(1))) == (integer_mod_ring(p_25519), int_of_num(a_25519), int_of_num(b_25519))"), t38))
 }
 
 ///|
@@ -262,10 +262,10 @@ fn step_15() -> Unit raise {
   let t42 = @equal.gsym(@wei25519.wei25519_group())
   let t43 = @equal.gsym(curve25519_of_wei25519())
   let t44 = @simp.rewrite_tac(@list.List([@equal.gsym(wei25519_of_curve25519()), t43, t42, t41, wcurve_of_mcurve_25519()]))
-  let t39 = @parser.parse_term("&1:int")
-  let t40 = @parser.parse_term("&A_25519:int")
-  let t52 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("integer_mod_ring p_25519"), t40, t39]), @montwe.group_isomorphisms_montgomery_weierstrass_group())), t44), t45), t46), t47), t48), t49), t50), t51)
-  group_isomorphisms_curve25519_wei25519_c.set(@tactics.prove(@parser.parse_term("group_isomorphisms\n      (curve25519_group,wei25519_group)\n      (wei25519_of_curve25519,curve25519_of_wei25519)"), t52))
+  let t39 = @term_syntax.parse_term("int_of_num(1)")
+  let t40 = @term_syntax.parse_term("int_of_num(A_25519)")
+  let t52 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("integer_mod_ring(p_25519)"), t40, t39]), @montwe.group_isomorphisms_montgomery_weierstrass_group())), t44), t45), t46), t47), t48), t49), t50), t51)
+  group_isomorphisms_curve25519_wei25519_c.set(@tactics.prove(@term_syntax.parse_term("group_isomorphisms((curve25519_group, wei25519_group), (wei25519_of_curve25519, curve25519_of_wei25519))"), t52))
 }
 
 ///|
@@ -282,7 +282,7 @@ pub fn group_isomorphisms_curve25519_wei25519() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t53 = @meson.meson_tac(@list.List([@grouptheory.isomorphic_group(), @grouptheory.group_isomorphisms_imp_isomorphism()]))
   let t54 = @tactics.then_tac(@tactics.mp_tac(group_isomorphisms_curve25519_wei25519()), t53)
-  isomorphic_groups_curve25519_wei25519_c.set(@tactics.prove(@parser.parse_term("curve25519_group isomorphic_group wei25519_group"), t54))
+  isomorphic_groups_curve25519_wei25519_c.set(@tactics.prove(@term_syntax.parse_term("isomorphic_group(curve25519_group, wei25519_group)"), t54))
 }
 
 ///|
@@ -299,7 +299,7 @@ pub fn isomorphic_groups_curve25519_wei25519() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t55 = @simp.rewrite_tac(@list.List([isomorphic_groups_curve25519_wei25519()]))
   let t56 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([@grouptheory.isomorphic_group_sym()])), t55)
-  isomorphic_groups_wei25519_curve25519_c.set(@tactics.prove(@parser.parse_term("wei25519_group isomorphic_group curve25519_group"), t56))
+  isomorphic_groups_wei25519_curve25519_c.set(@tactics.prove(@term_syntax.parse_term("isomorphic_group(wei25519_group, curve25519_group)"), t56))
 }
 
 ///|
@@ -317,7 +317,7 @@ fn step_18() -> Unit raise {
   let t58 = @tactics.conv_tac(@int.int_reduce_conv)
   let t57 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t59 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([wei25519_of_curve25519(), @montwe.weierstrass_of_montgomery(), @curve25519.c_25519(), @wei25519.g_25519(), @pair.pair_eq(), @wei25519.p_25519(), @curve25519.a_25519()])), t57), t58)
-  wei25519_of_curve25519_c25519_c.set(@tactics.prove(@parser.parse_term("wei25519_of_curve25519 C_25519 = G_25519"), t59))
+  wei25519_of_curve25519_c25519_c.set(@tactics.prove(@term_syntax.parse_term("wei25519_of_curve25519(C_25519) == G_25519"), t59))
 }
 
 ///|
@@ -335,7 +335,7 @@ fn step_19() -> Unit raise {
   let t61 = @tactics.conv_tac(@int.int_reduce_conv)
   let t60 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t62 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([wei25519_of_curve25519(), @montwe.weierstrass_of_montgomery(), @curve25519.cc_25519(), @wei25519.gg_25519(), @pair.pair_eq(), @wei25519.p_25519(), @curve25519.a_25519()])), t60), t61)
-  wei25519_of_curve25519_cc25519_c.set(@tactics.prove(@parser.parse_term("wei25519_of_curve25519 CC_25519 = GG_25519"), t62))
+  wei25519_of_curve25519_cc25519_c.set(@tactics.prove(@term_syntax.parse_term("wei25519_of_curve25519(CC_25519) == GG_25519"), t62))
 }
 
 ///|
@@ -353,7 +353,7 @@ fn step_20() -> Unit raise {
   let t64 = @tactics.conv_tac(@int.int_reduce_conv)
   let t63 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t65 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([curve25519_of_wei25519(), @montwe.montgomery_of_weierstrass(), @curve25519.c_25519(), @wei25519.g_25519(), @pair.pair_eq(), @wei25519.p_25519(), @curve25519.a_25519()])), t63), t64)
-  curve25519_of_wei25519_g25519_c.set(@tactics.prove(@parser.parse_term("curve25519_of_wei25519 G_25519 = C_25519"), t65))
+  curve25519_of_wei25519_g25519_c.set(@tactics.prove(@term_syntax.parse_term("curve25519_of_wei25519(G_25519) == C_25519"), t65))
 }
 
 ///|
@@ -371,7 +371,7 @@ fn step_21() -> Unit raise {
   let t67 = @tactics.conv_tac(@int.int_reduce_conv)
   let t66 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t68 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([curve25519_of_wei25519(), @montwe.montgomery_of_weierstrass(), @curve25519.cc_25519(), @wei25519.gg_25519(), @pair.pair_eq(), @wei25519.p_25519(), @curve25519.a_25519()])), t66), t67)
-  curve25519_of_wei25519_gg25519_c.set(@tactics.prove(@parser.parse_term("curve25519_of_wei25519 GG_25519 = CC_25519"), t68))
+  curve25519_of_wei25519_gg25519_c.set(@tactics.prove(@term_syntax.parse_term("curve25519_of_wei25519(GG_25519) == CC_25519"), t68))
 }
 
 ///|

@@ -18,7 +18,7 @@ pub fn sat_debugging() -> Ref[Bool] {
 ///|
 /// GCONJUNCTS
 fn step_2() -> Unit raise {
-  let t3 = @parser.parse_term("(~(p ==> q) ==> p) /\\\n     (~(p ==> q) ==> ~q) /\\\n     (~(p \\/ q) ==> ~p) /\\\n     (~(p \\/ q) ==> ~q) /\\\n     (p /\\ q ==> p) /\\\n     (p /\\ q ==> q) /\\\n     (~ ~p ==> p)")
+  let t3 = @term_syntax.parse_term("(!((p : Bool) → (q : Bool)) → p) && (!(p → q) → !q) && (!(p || q) → !p) && (!(p || q) → !q) && (p && q → p) && (p && q → q) && (!!p → p)")
   gconjuncts_c.set(match (fn(x2 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
     ((x1 : @list.List[@kernel.Thm]) => @lib.map(@bool.undisch_all, x1))(@bool.conjuncts_rule(x2))
   })(@class.taut(t3)) {
@@ -182,7 +182,7 @@ pub fn is_clausal(x22 : @kernel.Term) -> Bool raise {
 ///|
 /// definitionalize
 fn step_4() -> Unit raise {
-  let pth = @class.taut(@parser.parse_term("(p ==> q) <=> ~p \\/ q"))
+  let pth = @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool)) == (!p || q)"))
   let ptm = @kernel.rand(@kernel.concl(pth))
   let p_tm = @kernel.rand(@equal.lhand(ptm))
   let q_tm = @kernel.rand(ptm)
@@ -192,7 +192,7 @@ fn step_4() -> Unit raise {
     let p = @kernel.rand(ip)
     @kernel.eq_mp(@kernel.inst_rule(@list.List([(p, p_tm), (q, q_tm)]), pth), th)
   }
-  let pth_1 = @bool.undisch(@class.taut(@parser.parse_term("(p <=> q) ==> (p \\/ ~q)")))
+  let pth_1 = @bool.undisch(@class.taut(@term_syntax.parse_term("(p : Bool) == (q : Bool) → p || !q")))
   let ptm_1 = @kernel.concl(pth_1)
   let p_tm_1 = @equal.lhand(ptm_1)
   let q_tm_1 = @kernel.rand(@kernel.rand(ptm_1))
@@ -202,7 +202,7 @@ fn step_4() -> Unit raise {
     let p_1 = @kernel.rand(ip_1)
     @bool.prove_hyp(th_1, @kernel.inst_rule(@list.List([(p_1, p_tm_1), (q_1, q_tm_1)]), pth_1))
   }
-  let pth_2 = @bool.undisch(@class.taut(@parser.parse_term("(p <=> q) ==> (~p \\/ q)")))
+  let pth_2 = @bool.undisch(@class.taut(@term_syntax.parse_term("(p : Bool) == (q : Bool) → !p || q")))
   let ptm_2 = @kernel.concl(pth_2)
   let p_tm_2 = @kernel.rand(@equal.lhand(ptm_2))
   let q_tm_2 = @kernel.rand(ptm_2)
@@ -303,17 +303,17 @@ pub fn cleanup(x32 : String, x33 : String) -> Unit raise {
 pub fn gen_sat_prove(x35 : @sat_solvers.SatSolver, x36 : String) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
   let solver = x35
   let solvername = x36
-  let false_tm = @parser.parse_term("F")
+  let false_tm = @term_syntax.parse_term("false")
   let presimp_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x38 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s39 = @equal.depth_conv(x38)
     fn(x40 : @kernel.Term) -> @kernel.Thm raise {
       s39(x40)
     }
   }, @list.List([@class.not_clauses(), @theorems.and_clauses(), @theorems.or_clauses(), @theorems.imp_clauses(), @theorems.eq_clauses()]))
-  let p_tm = @parser.parse_term("p:bool")
-  let q_tm = @parser.parse_term("q:bool")
-  let pth_triv = @class.taut(@parser.parse_term("(~p <=> F) <=> p"))
-  let pth_main = @bool.undisch_all(@class.taut(@parser.parse_term("(~p <=> q) ==> (q ==> F) ==> p")))
+  let p_tm = @term_syntax.parse_term("(p : Bool)")
+  let q_tm = @term_syntax.parse_term("(q : Bool)")
+  let pth_triv = @class.taut(@term_syntax.parse_term("(!(p : Bool) == false) == p"))
+  let pth_main = @bool.undisch_all(@class.taut(@term_syntax.parse_term("!(p : Bool) == (q : Bool) → (q → false) → p")))
   let triv_rule : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(x41 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     let p = x41
     fn(x42 : @kernel.Thm) -> @kernel.Thm raise {

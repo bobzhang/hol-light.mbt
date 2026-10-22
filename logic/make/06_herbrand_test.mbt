@@ -7706,41 +7706,41 @@ test "Logic/herbrand matches Logic/herbrand.ml" {
       #|0..0..0..0..2..solved at 7
       #|0..0..1..4..9..19..37..66..108..162..238..395..641..986..solved at 1180
       #|Logic/herbrand quotations (35):
-      #|  (~(?c. (c,0) IN fns) ==> herbase fns (V 0)) /\\\n   (forall f l. (f,LENGTH l) IN fns /\\ ALL (herbase fns) l\n          ==> herbase fns (Fn f l))
-      #|  herbrand (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = herbase (FST L)) /\\\n       (forall f. Fun(M) f = Fn f)
-      #|  forall L M. herbrand L M ==> interpretation L M
-      #|  forall fns t. t IN herbase fns ==> (functions_term t) SUBSET fns
-      #|  forall fns. ?t. t IN herbase fns
-      #|  forall L M. herbrand L M ==> ~(Dom M = {})
-      #|  herbrand_of_prop (L:((num#num)->bool)#((num#num)->bool)) (d:form->bool) =\n   herbase(FST L),Fn,\\p l. d(Atom p l)
-      #|  t:term
-      #|  h:term
-      #|  l:term list
-      #|  l:term list
-      #|  forall p l. prop_of_model (herbrand_of_prop L d) V (Atom p l) = d (Atom p l)
-      #|  p:form
-      #|  p:form
-      #|  forall p. qfree p ==> (holds (herbrand_of_prop L d) V p <=> pholds d p)
-      #|  p:form
-      #|  p:form
-      #|  qfree p ==> (holds (herbrand_of_prop L d) v p <=> pholds d (formsubst v p))
-      #|  forall d. herbrand L (herbrand_of_prop L d)
-      #|  forall L d. interpretation L (herbrand_of_prop L d)
-      #|  t:term
-      #|  (v:num->term) x
-      #|  holds (herbrand_of_prop L d) V (formsubst v p) <=>\n                holds (herbrand_of_prop L d)\n                      (termval (herbrand_of_prop L d) V o v)\n                      p
-      #|  holds (herbrand_of_prop L d) V (formsubst v p)
-      #|  p:form
-      #|  v:num->term
-      #|  formsubst v p
-      #|  (forall p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (forall x. v x IN herbase(FST L)) /\\ p IN s}\n   ==> (herbrand_of_prop L d) satisfies s
-      #|  forall M s t. s SUBSET t /\\ M satisfies t ==> M satisfies s
-      #|  forall t. t IN herbase fns ==> t IN terms fns
-      #|  herbrand_of_prop (language s) d
-      #|  s:form->bool
-      #|  prop_of_model M (v:num->term)
-      #|  v:num->term
-      #|  forall s. (forall p. p IN s ==> qfree p)\n       ==> ((?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n                 interpretation (language s) M /\\ ~(Dom M = {}) /\\\n                 M satisfies s) <=>\n            (?d. d psatisfies\n                 {formsubst v p | (forall x. v x IN herbase(functions s)) /\\\n                                  p IN s}))
+      #|  (!(\226\136\131 c : Num, IN((c, 0), (fns : ((Num, Num)) -> Bool))) \226\134\146 (herbase : (((Num, Num)) -> Bool, Term) -> Bool)(fns, V(0))) && (\226\136\128 f : Num, \226\136\128 l : List[Term], IN((f, LENGTH(l)), fns) && ALL(herbase(fns), l) \226\134\146 herbase(fns, Fn(f, l)))
+      #|  (herbrand : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) -> Bool)((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))) == (Dom(M) == herbase(FST(L)) && (\226\136\128 f : Num, Fun(M, f) == Fn(f)))
+      #|  \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), \226\136\128 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), herbrand(L, M) \226\134\146 interpretation(L, M)
+      #|  \226\136\128 fns : ((Num, Num)) -> Bool, \226\136\128 t : Term, IN(t, herbase(fns)) \226\134\146 SUBSET(functions_term(t), fns)
+      #|  \226\136\128 fns : ((Num, Num)) -> Bool, \226\136\131 t : Term, IN(t, herbase(fns))
+      #|  \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), \226\136\128 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), herbrand(L, M) \226\134\146 !(Dom(M) == {})
+      #|  (herbrand_of_prop : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), (Form) -> Bool) -> ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)) == (herbase(FST(L)), Fn, (p : Num) => (l : List[Term]) => d(Atom(p, l)))
+      #|  (t : Term)
+      #|  (h : Term)
+      #|  (l : List[Term])
+      #|  (l : List[Term])
+      #|  \226\136\128 p : Num, \226\136\128 l : List[Term], prop_of_model(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, Atom(p, l)) == d(Atom(p, l))
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  \226\136\128 p : Form, qfree(p) \226\134\146 holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, p) == pholds(d, p)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  qfree((p : Form)) \226\134\146 holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), (v : (Num) -> Term), p) == pholds(d, formsubst(v, p))
+      #|  \226\136\128 d : (Form) -> Bool, herbrand((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), herbrand_of_prop(L, d))
+      #|  \226\136\128 L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), \226\136\128 d : (Form) -> Bool, interpretation(L, herbrand_of_prop(L, d))
+      #|  (t : Term)
+      #|  (v : (Num) -> Term)((x : Num))
+      #|  holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, formsubst((v : (Num) -> Term), (p : Form))) == holds(herbrand_of_prop(L, d), o(termval(herbrand_of_prop(L, d), V), v), p)
+      #|  holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, formsubst((v : (Num) -> Term), (p : Form)))
+      #|  (p : Form)
+      #|  (v : (Num) -> Term)
+      #|  formsubst((v : (Num) -> Term), (p : Form))
+      #|  (\226\136\128 p : Form, IN(p, (s : (Form) -> Bool)) \226\134\146 qfree(p)) && psatisfies((d : (Form) -> Bool), {formsubst((v : (Num) -> Term), (p : Form)) | (\226\136\128 x : Num, IN(v(x), herbase(FST((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)))))) && IN(p, s)}) \226\134\146 satisfies(herbrand_of_prop(L, d), s)
+      #|  \226\136\128 M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), \226\136\128 s : (Form) -> Bool, \226\136\128 t : (Form) -> Bool, SUBSET(s, t) && satisfies(M, t) \226\134\146 satisfies(M, s)
+      #|  \226\136\128 t : Term, IN(t, herbase((fns : ((Num, Num)) -> Bool))) \226\134\146 IN(t, terms(fns))
+      #|  herbrand_of_prop(language((s : (Form) -> Bool)), (d : (Form) -> Bool))
+      #|  (s : (Form) -> Bool)
+      #|  prop_of_model((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term))
+      #|  (v : (Num) -> Term)
+      #|  \226\136\128 s : (Form) -> Bool, (\226\136\128 p : Form, IN(p, s) \226\134\146 qfree(p)) \226\134\146 (\226\136\131 M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(s), M) && !(Dom(M) == {}) && satisfies(M, s)) == (\226\136\131 d : (Form) -> Bool, psatisfies(d, {formsubst((v : (Num) -> Term), (p : Form)) | (\226\136\128 x : Num, IN(v(x), herbase(functions(s)))) && IN(p, s)}))
       #|herbase_RULES =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#?:fun(fun(num,bool),bool) (\c:num. ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) c:num) (#NUMERAL:fun(num,num) #_0:num))) fns:fun(prod(num,num),bool)))))) ((#herbase:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))))) (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#herbase:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term)))) ((#herbase:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))))
       #|herbase_INDUCT =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#forall:fun(fun(fun(term,bool),bool),bool) (\herbase':fun(term,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (#?:fun(fun(num,bool),bool) (\c:num. ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) c:num) (#NUMERAL:fun(num,num) #_0:num))) fns:fun(prod(num,num),bool)))))) (herbase':fun(term,bool) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))))) (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) herbase':fun(term,bool)) l:list(term)))) (herbase':fun(term,bool) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))) (#forall:fun(fun(term,bool),bool) (\a:term. ((#==>:fun(bool,fun(bool,bool)) ((#herbase:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) (herbase':fun(term,bool) a:term)))))))))
       #|herbase_CASES =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#forall:fun(fun(term,bool),bool) (\a:term. ((#=:fun(bool,fun(bool,bool)) ((#herbase:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a:term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))) (#~:fun(bool,bool) (#?:fun(fun(num,bool),bool) (\c:num. ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) c:num) (#NUMERAL:fun(num,num) #_0:num))) fns:fun(prod(num,num),bool))))))) (#?:fun(fun(num,bool),bool) (\f:num. (#?:fun(fun(list(term),bool),bool) (\l:list(term). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a:term) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#herbase:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term))))))))))))))

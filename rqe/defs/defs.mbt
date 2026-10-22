@@ -31,7 +31,7 @@ fn step_1() -> Unit raise {
 fn step_2() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([]))
   let t2 = @list.List([@tactics.match_mp_tac(sign_induct()), t1])
-  sign_cases_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)"), t2))
+  sign_cases_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ s : Sign, s == Pos || s == Neg || s == Zero || s == Nonzero || s == Unknown"), t2))
 }
 
 ///|
@@ -91,11 +91,11 @@ pub fn sunk_tm() -> @kernel.Term {
 ///|
 /// szero_tm, spos_tm, sneg_tm, snonz_tm, sunk_tm
 fn step_3() -> Unit raise {
-  let t3 = @parser.parse_term("Unknown")
-  let t4 = @parser.parse_term("Nonzero")
-  let t5 = @parser.parse_term("Neg")
-  let t6 = @parser.parse_term("Pos")
-  let (szero_tm, spos_tm, sneg_tm, snonz_tm, sunk_tm) = (@parser.parse_term("Zero"), t6, t5, t4, t3)
+  let t3 = @term_syntax.parse_term("Unknown")
+  let t4 = @term_syntax.parse_term("Nonzero")
+  let t5 = @term_syntax.parse_term("Neg")
+  let t6 = @term_syntax.parse_term("Pos")
+  let (szero_tm, spos_tm, sneg_tm, snonz_tm, sunk_tm) = (@term_syntax.parse_term("Zero"), t6, t5, t4, t3)
   szero_tm_c.set(szero_tm)
   spos_tm_c.set(spos_tm)
   sneg_tm_c.set(sneg_tm)
@@ -106,7 +106,7 @@ fn step_3() -> Unit raise {
 ///|
 /// interpsign
 fn step_4() -> Unit raise {
-  let t7 = @parser.parse_term("(interpsign set ply Zero = (forall x:real. set x ==> (ply x = &0))) /\\\n   (interpsign set ply Pos  = (forall x. set x ==> (ply x > &0))) /\\\n   (interpsign set ply Neg  = (forall x. set x ==> (ply x < &0))) /\\\n   (interpsign set ply Nonzero  = (forall x. set x ==> (ply x <> &0))) /\\\n   (interpsign set ply Unknown = (forall x. set x ==> (ply x = ply x)))")
+  let t7 = @term_syntax.parse_term("(interpsign : ((Real) -> Bool, (Real) -> Real, Sign) -> Bool)((set : (Real) -> Bool), (ply : (Real) -> Real), Zero) == (∀ x : Real, set(x) → ply(x) == real_of_num(0)) && interpsign(set, ply, Pos) == (∀ x : Real, set(x) → ply(x) > real_of_num(0)) && interpsign(set, ply, Neg) == (∀ x : Real, set(x) → ply(x) < real_of_num(0)) && interpsign(set, ply, Nonzero) == (∀ x : Real, set(x) → op_lt_gt(ply(x), real_of_num(0))) && interpsign(set, ply, Unknown) == (∀ x : Real, set(x) → ply(x) == ply(x))")
   interpsign_c.set(@recursion.new_recursive_definition(sign_recursion())(t7))
 }
 
@@ -122,7 +122,7 @@ pub fn interpsign() -> @kernel.Thm {
 ///|
 /// interpsign_tm
 fn step_5() -> Unit raise {
-  interpsign_tm_c.set(@parser.parse_term("interpsign"))
+  interpsign_tm_c.set(@term_syntax.parse_term("interpsign"))
 }
 
 ///|
@@ -154,7 +154,7 @@ pub fn dest_interpsign(x8 : @kernel.Thm) -> ((@kernel.Term, @kernel.Term, @kerne
 ///|
 /// interpsigns
 fn step_6() -> Unit raise {
-  interpsigns_c.set(@pair.new_definition(@parser.parse_term("interpsigns polyl set signl = ALL2 (interpsign set) polyl signl")))
+  interpsigns_c.set(@pair.new_definition(@term_syntax.parse_term("(interpsigns : (List[(Real) -> Real], (Real) -> Bool, List[Sign]) -> Bool)((polyl : List[(Real) -> Real]), (set : (Real) -> Bool), (signl : List[Sign])) == ALL2(interpsign(set), polyl, signl)")))
 }
 
 ///|
@@ -169,7 +169,7 @@ pub fn interpsigns() -> @kernel.Thm {
 ///|
 /// t0
 fn step_7() -> Unit raise {
-  t0_c.set(@class.taut(@parser.parse_term("a /\\ T <=> a")))
+  t0_c.set(@class.taut(@term_syntax.parse_term("((a : Bool) && true) == a")))
 }
 
 ///|
@@ -199,7 +199,7 @@ pub fn interpsigns_thms2(x11 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
 ///|
 /// interpsigns_tm
 fn step_8() -> Unit raise {
-  interpsigns_tm_c.set(@parser.parse_term("interpsigns"))
+  interpsigns_tm_c.set(@term_syntax.parse_term("interpsigns"))
 }
 
 ///|
@@ -232,7 +232,7 @@ pub fn dest_interpsigns(x12 : @kernel.Thm) -> ((@kernel.Term, @kernel.Term, @ker
 /// interp_sing
 fn step_9() -> Unit raise {
   let t14 = @simp.rewrite_tac(@list.List([interpsigns(), @lists.all2()]))
-  interp_sing_c.set(@tactics.prove(@parser.parse_term("interpsign set p s = interpsigns [p] set [s]"), t14))
+  interp_sing_c.set(@tactics.prove(@term_syntax.parse_term("interpsign((set : (Real) -> Bool), (p : (Real) -> Real), (s : Sign)) == interpsigns([p], set, [s])"), t14))
 }
 
 ///|
@@ -248,7 +248,7 @@ pub fn interp_sing() -> @kernel.Thm {
 /// interp_doub
 fn step_10() -> Unit raise {
   let t15 = @meson.asm_meson_tac(@list.List([interpsigns(), @lists.all2()]))
-  interp_doub_c.set(@tactics.prove(@parser.parse_term("interpsigns [p1] set [s1] ==> interpsigns pl set sl ==>\n     interpsigns (CONS p1 pl) set (CONS s1 sl)"), t15))
+  interp_doub_c.set(@tactics.prove(@term_syntax.parse_term("interpsigns([(p1 : (Real) -> Real)], (set : (Real) -> Bool), [(s1 : Sign)]) → interpsigns((pl : List[(Real) -> Real]), set, (sl : List[Sign])) → interpsigns(CONS(p1, pl), set, CONS(s1, sl))"), t15))
 }
 
 ///|
@@ -275,7 +275,7 @@ pub fn mk_interpsigns(x16 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
 ///|
 /// partition_line
 fn step_11() -> Unit raise {
-  let t19 = @parser.parse_term("(partition_line [] = [(\\x. T)]) /\\\n   (partition_line (CONS h t) =\n      if t = [] then [(\\x. x < h); (\\x. x = h); (\\x. h < x)] else\n        APPEND [(\\x. x < h); (\\x. x = h); (\\x. h < x /\\ x < HD t)]\n                (TL (partition_line t)))")
+  let t19 = @term_syntax.parse_term("(partition_line : (List[Real]) -> List[(Real) -> Bool])(NIL) == [(x : Real) => true] && partition_line(CONS((h : Real), (t : List[Real]))) == (if t == NIL { [(x : Real) => x < h, (x : Real) => x == h, (x : Real) => h < x] } else { APPEND([(x : Real) => x < h, (x : Real) => x == h, (x : Real) => h < x && x < HD(t)], TL(partition_line(t))) })")
   partition_line_c.set(@recursion.new_recursive_definition(@ind_types.list_recursion())(t19))
 }
 
@@ -291,16 +291,16 @@ pub fn partition_line() -> @kernel.Thm {
 ///|
 /// make_partition_list
 fn step_12() -> Unit raise {
-  let lxt = @parser.parse_term("\\x:real. T")
-  let htm = @parser.parse_term("h:real")
-  let h1tm = @parser.parse_term("h1:real")
-  let h2tm = @parser.parse_term("h2:real")
-  let x_lt_h = @parser.parse_term("(\\x. x < h)")
-  let x_eq_h = @parser.parse_term("(\\x:real. x = h)")
-  let h_lt_x = @parser.parse_term("(\\x. h < x)")
-  let x_lt_h1 = @parser.parse_term("(\\x. x < h1)")
-  let x_eq_h1 = @parser.parse_term("(\\x:real. x = h1)")
-  let x_h1_h2 = @parser.parse_term("(\\x. h1 < x /\\ x < h2)")
+  let lxt = @term_syntax.parse_term("(x : Real) => true")
+  let htm = @term_syntax.parse_term("(h : Real)")
+  let h1tm = @term_syntax.parse_term("(h1 : Real)")
+  let h2tm = @term_syntax.parse_term("(h2 : Real)")
+  let x_lt_h = @term_syntax.parse_term("(x : Real) => x < (h : Real)")
+  let x_eq_h = @term_syntax.parse_term("(x : Real) => x == (h : Real)")
+  let h_lt_x = @term_syntax.parse_term("(x : Real) => (h : Real) < x")
+  let x_lt_h1 = @term_syntax.parse_term("(x : Real) => x < (h1 : Real)")
+  let x_eq_h1 = @term_syntax.parse_term("(x : Real) => x == (h1 : Real)")
+  let x_h1_h2 = @term_syntax.parse_term("(x : Real) => (h1 : Real) < x && x < (h2 : Real)")
   fn make_partition_list_1(x20 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
     let ps = x20
     match ps {
@@ -327,7 +327,7 @@ pub fn make_partition_list(x : @list.List[@kernel.Term]) -> @list.List[@kernel.T
 ///|
 /// part_line_tm
 fn step_13() -> Unit raise {
-  part_line_tm_c.set(@parser.parse_term("partition_line"))
+  part_line_tm_c.set(@term_syntax.parse_term("partition_line"))
 }
 
 ///|
@@ -367,7 +367,7 @@ pub fn partition_line_conv(x24 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// interpmat
 fn step_15() -> Unit raise {
-  interpmat_c.set(@pair.new_definition(@parser.parse_term("interpmat ptl polyl signll <=>\n    real_ordered_list ptl /\\\n    ALL2 (interpsigns polyl) (partition_line ptl) signll")))
+  interpmat_c.set(@pair.new_definition(@term_syntax.parse_term("(interpmat : (List[Real], List[(Real) -> Real], List[List[Sign]]) -> Bool)((ptl : List[Real]), (polyl : List[(Real) -> Real]), (signll : List[List[Sign]])) == (real_ordered_list(ptl) && ALL2(interpsigns(polyl), partition_line(ptl), signll))")))
 }
 
 ///|
@@ -382,7 +382,7 @@ pub fn interpmat() -> @kernel.Thm {
 ///|
 /// interpmat_tm
 fn step_16() -> Unit raise {
-  interpmat_tm_c.set(@parser.parse_term("interpmat"))
+  interpmat_tm_c.set(@term_syntax.parse_term("interpmat"))
 }
 
 ///|

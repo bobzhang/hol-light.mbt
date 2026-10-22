@@ -87343,499 +87343,499 @@ test "Examples/misiurewicz matches Examples/misiurewicz.ml" {
       #|0..0..2..4..solved at 8
       #|0..0..1..2..solved at 9
       #|Examples/misiurewicz quotations (493):
-      #|  forall f z. (f has_complex_derivative f') (at z)\n         ==> ((\\w. cexp(f w)) has_complex_derivative (f' * cexp(f z))) (at z)
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], has_complex_derivative(f, (f' : Cart[Real, Tybit0[Unit]]), at(z)) \226\134\146 has_complex_derivative((w : Cart[Real, Tybit0[Unit]]) => cexp(f(w)), f' * cexp(f(z)), at(z))
       #|  has_complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (f' : Cart[Real, Tybit0[Unit]]), (net : Net[Cart[Real, Tybit0[Unit]]]))
-      #|  forall f z. f complex_differentiable at z\n         ==> (\\w. cexp(f w)) complex_differentiable at z
-      #|  forall f z. f complex_differentiable at z\n         ==> complex_derivative (\\w. cexp(f w)) z =\n             complex_derivative f z * cexp(f z)
-      #|  forall n z. (ITER n cexp) complex_differentiable at z
-      #|  forall n z. (ITER n cexp) continuous at z
-      #|  forall n s. (ITER n cexp) holomorphic_on s
-      #|  forall n s. (ITER n cexp) continuous_on s
-      #|  w:complex
-      #|  ITER n cexp z
-      #|  abs(Im(ITER n cexp z)) * norm(cexp (ITER n cexp z))
-      #|  n = 0
-      #|  z:complex
-      #|  forall n z. 1 <= n\n         ==> abs(Im(ITER n cexp z)) <= norm(complex_derivative(ITER n cexp) z)
-      #|  (x + l) + &1 - l <= (e * &2) / &2 <=> &1 + x <= e
-      #|  z - l:real = x ==> z = x + l
-      #|  x = Re z - log(&2)
-      #|  abs(Im z)
-      #|  pi / &3
-      #|  exp(Re z) / &2
-      #|  forall z. abs(Im z) <= pi / &3 ==> Re(cexp z) >= Re z + (&1 - log(&2))
-      #|  m * a <= b ==> c >= &2 * b  ==> (&2 * m) * a <= c
-      #|  m:num
-      #|  d:num
-      #|  p < x ==> x <= a ==> a <= p ==> F
-      #|  N + d:num
-      #|  d:num
-      #|  pi / &3 / abs(Im (ITER N cexp z))
-      #|  &2
-      #|  forall n. abs(Im(ITER n cexp z)) <= pi / &3
-      #|  z + m * l <= n ==> s >= n + l ==> z + (m + &1) * l <= s
-      #|  m:num
-      #|  n:num
-      #|  Re z + &n * (&1 - log(&2))
-      #|  Re z + &N * (&1 - log(&2))
-      #|  &0 < &5
-      #|  &5 * b <= u * v ==> x >= (&2 / &5 * u) * v ==> x >= &2 * b
-      #|  n:num
-      #|  n:num
-      #|  N:num
-      #|  log(&5) - Re z
-      #|  &1 - log(&2)
-      #|  ?N. forall n. N <= n\n            ==> abs(Im(ITER (n + 1) cexp z)) >= &2 * abs(Im(ITER n cexp z))
-      #|  n:num
-      #|  forall n. &0 < abs(Im(ITER n cexp z))
-      #|  (&16 / &5) pow 2
-      #|  (pi / &3) pow 2 <= a <=> pi pow 2 <= &9 * a
-      #|  (pi / &3) pow 2
-      #|  x pow 3 / &2 <= a * x <=> x * x pow 2 <= x * &2 * a
-      #|  e <= (&1 - a) * x ==> abs(sin x - x / &1) <= e ==> a * x <= sin x
-      #|  Cx x
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(f, at(z)) \226\134\146 complex_differentiable((w : Cart[Real, Tybit0[Unit]]) => cexp(f(w)), at(z))
+      #|  \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(f, at(z)) \226\134\146 complex_derivative((w : Cart[Real, Tybit0[Unit]]) => cexp(f(w)), z) == complex_derivative(f, z) * cexp(f(z))
+      #|  \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], complex_differentiable(ITER(n, cexp), at(z))
+      #|  \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], continuous(ITER(n, cexp), at(z))
+      #|  \226\136\128 n : Num, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, holomorphic_on(ITER(n, cexp), s)
+      #|  \226\136\128 n : Num, \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, continuous_on(ITER(n, cexp), s)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  ITER((n : Num), cexp, (z : Cart[Real, Tybit0[Unit]]))
+      #|  abs(Im(ITER((n : Num), cexp, (z : Cart[Real, Tybit0[Unit]])))) * norm(cexp(ITER(n, cexp, z)))
+      #|  (n : Num) == 0
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], 1 <= n \226\134\146 abs(Im(ITER(n, cexp, z))) <= norm(complex_derivative(ITER(n, cexp), z))
+      #|  ((x : Real) + (l : Real) + (real_of_num(1) - l) <= (e : Real) * real_of_num(2) / real_of_num(2)) == (real_of_num(1) + x <= e)
+      #|  (z : Real) - (l : Real) == (x : Real) \226\134\146 z == x + l
+      #|  (x : Real) == Re((z : Cart[Real, Tybit0[Unit]])) - log(real_of_num(2))
+      #|  abs(Im((z : Cart[Real, Tybit0[Unit]])))
+      #|  pi / real_of_num(3)
+      #|  exp(Re((z : Cart[Real, Tybit0[Unit]]))) / real_of_num(2)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], abs(Im(z)) <= pi / real_of_num(3) \226\134\146 Re(cexp(z)) >= Re(z) + (real_of_num(1) - log(real_of_num(2)))
+      #|  (m : Real) * (a : Real) <= (b : Real) \226\134\146 (c : Real) >= real_of_num(2) * b \226\134\146 real_of_num(2) * m * a <= c
+      #|  (m : Num)
+      #|  (d : Num)
+      #|  (p : Real) < (x : Real) \226\134\146 x <= (a : Real) \226\134\146 a <= p \226\134\146 false
+      #|  (N : Num) + (d : Num)
+      #|  (d : Num)
+      #|  pi / real_of_num(3) / abs(Im(ITER((N : Num), cexp, (z : Cart[Real, Tybit0[Unit]]))))
+      #|  real_of_num(2)
+      #|  \226\136\128 n : Num, abs(Im(ITER(n, cexp, (z : Cart[Real, Tybit0[Unit]])))) <= pi / real_of_num(3)
+      #|  (z : Real) + (m : Real) * (l : Real) <= (n : Real) \226\134\146 (s : Real) >= n + l \226\134\146 z + (m + real_of_num(1)) * l <= s
+      #|  (m : Num)
+      #|  (n : Num)
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) + real_of_num((n : Num)) * (real_of_num(1) - log(real_of_num(2)))
+      #|  Re((z : Cart[Real, Tybit0[Unit]])) + real_of_num((N : Num)) * (real_of_num(1) - log(real_of_num(2)))
+      #|  real_of_num(0) < real_of_num(5)
+      #|  real_of_num(5) * (b : Real) <= (u : Real) * (v : Real) \226\134\146 (x : Real) >= real_of_num(2) / real_of_num(5) * u * v \226\134\146 x >= real_of_num(2) * b
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  log(real_of_num(5)) - Re((z : Cart[Real, Tybit0[Unit]]))
+      #|  real_of_num(1) - log(real_of_num(2))
+      #|  \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 abs(Im(ITER(n + 1, cexp, (z : Cart[Real, Tybit0[Unit]])))) >= real_of_num(2) * abs(Im(ITER(n, cexp, z)))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, real_of_num(0) < abs(Im(ITER(n, cexp, (z : Cart[Real, Tybit0[Unit]]))))
+      #|  pow(real_of_num(16) / real_of_num(5), 2)
+      #|  (pow(pi / real_of_num(3), 2) <= (a : Real)) == (pow(pi, 2) <= real_of_num(9) * a)
+      #|  pow(pi / real_of_num(3), 2)
+      #|  (pow((x : Real), 3) / real_of_num(2) <= (a : Real) * x) == (x * pow(x, 2) <= x * (real_of_num(2) * a))
+      #|  (e : Real) <= (real_of_num(1) - (a : Real)) * (x : Real) \226\134\146 abs(sin(x) - x / real_of_num(1)) <= e \226\134\146 a * x <= sin(x)
+      #|  Cx((x : Real))
       #|  0
-      #|  &0 <= x /\\ x <= pi / &3 ==> x <= pi
-      #|  (forall x. P(--x) <=> P x) /\\ (forall x. &0 <= x ==> P x) ==> forall x. P x
-      #|  x:real
-      #|  Im(ITER n cexp z)
-      #|  n:num
-      #|  e * x >= (y * e) * z <=> e * y * z <= e * x
-      #|  forall n. abs(Im(ITER (n + 1) cexp z)) >=\n        (&2 / &5 * exp(Re(ITER n cexp z))) * abs(Im(ITER n cexp z))
-      #|  (?n. P n) <=> (forall n. ~P n) ==> F
-      #|  forall z. ~(real z) ==> ?n. abs(Im(ITER n cexp z)) > pi / &3
-      #|  a * b = Cx(&1) ==> ~(a = Cx(&0))
-      #|  n * r / s:real = (r * n) / s
-      #|  norm(complex_derivative f z)
-      #|  z:complex
-      #|  t SUBSET IMAGE f s\n    ==> (forall x. x IN s ==> P(f x)) ==> forall x. x IN t ==> P x
-      #|  t / s * r:real = r / s * t
-      #|  s <= t ==> norm(w - b) <= s ==> dist(b,w) <= t
+      #|  real_of_num(0) <= (x : Real) && x <= pi / real_of_num(3) \226\134\146 x <= pi
+      #|  (\226\136\128 x : Real, (P : (Real) -> Bool)(-x) == P(x)) && (\226\136\128 x : Real, real_of_num(0) <= x \226\134\146 P(x)) \226\134\146 (\226\136\128 x : Real, P(x))
+      #|  (x : Real)
+      #|  Im(ITER((n : Num), cexp, (z : Cart[Real, Tybit0[Unit]])))
+      #|  (n : Num)
+      #|  ((e : Real) * (x : Real) >= (y : Real) * e * (z : Real)) == (e * (y * z) <= e * x)
+      #|  \226\136\128 n : Num, abs(Im(ITER(n + 1, cexp, (z : Cart[Real, Tybit0[Unit]])))) >= real_of_num(2) / real_of_num(5) * exp(Re(ITER(n, cexp, z))) * abs(Im(ITER(n, cexp, z)))
+      #|  (\226\136\131 n : _, (P : (_) -> Bool)(n)) == ((\226\136\128 n : _, !P(n)) \226\134\146 false)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], !real(z) \226\134\146 (\226\136\131 n : Num, abs(Im(ITER(n, cexp, z))) > pi / real_of_num(3))
+      #|  (a : Cart[Real, Tybit0[Unit]]) * (b : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(1)) \226\134\146 !(a == Cx(real_of_num(0)))
+      #|  (n : Real) * ((r : Real) / (s : Real)) == r * n / s
+      #|  norm(complex_derivative((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (z : Cart[Real, Tybit0[Unit]])))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUBSET((t : (_) -> Bool), IMAGE((f : (_) -> _), (s : (_) -> Bool))) \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 (P : (_) -> Bool)(f(x))) \226\134\146 (\226\136\128 x : _, IN(x, t) \226\134\146 P(x))
+      #|  (t : Real) / (s : Real) * (r : Real) == r / s * t
+      #|  (s : Real) <= (t : Real) \226\134\146 norm((w : Cart[Real, Tybit0[Unit]]) - (b : Cart[Real, Tybit0[Unit]])) <= s \226\134\146 distance((b, w)) <= t
       #|  :real
-      #|  (f:complex->complex) w
-      #|  (f:complex->complex) b
-      #|  r / s:real
-      #|  ball((f:complex->complex) b,t)
-      #|  complex_derivative g
-      #|  g:complex->complex
-      #|  w:complex
-      #|  (z:num->complex) nn
-      #|  nn:num
-      #|  forall n:num. z n IN ball(b:complex,r)
-      #|  forall n:num. (f:complex->complex) (z n) IN ball (f b,t)
-      #|  x IN s ==> s SUBSET t ==> x IN t
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]]))
+      #|  (r : Real) / (s : Real)
+      #|  ball(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]])), (t : Real)))
+      #|  complex_derivative((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (z : (Num) -> Cart[Real, Tybit0[Unit]])((nn : Num))
+      #|  (nn : Num)
+      #|  \226\136\128 n : Num, IN((z : (Num) -> Cart[Real, Tybit0[Unit]])(n), ball(((b : Cart[Real, Tybit0[Unit]]), (r : Real))))
+      #|  \226\136\128 n : Num, IN((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((z : (Num) -> Cart[Real, Tybit0[Unit]])(n)), ball((f((b : Cart[Real, Tybit0[Unit]])), (t : Real))))
+      #|  IN((x : _), (s : (_) -> Bool)) \226\134\146 SUBSET(s, (t : (_) -> Bool)) \226\134\146 IN(x, t)
       #|  sequentially
-      #|  f:complex->complex
-      #|  (f:complex->complex) o z o (r:num->num)
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  o((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), o((z : (Num) -> Cart[Real, Tybit0[Unit]]), (r : (Num) -> Num)))
       #|  sequentially
-      #|  w:complex
-      #|  r:num->num
-      #|  w:complex
-      #|  z:num->complex
-      #|  cball(b:complex,t / s * r)
-      #|  forall n. (z:num->complex) n IN cball(b,t / s * r)
-      #|  z:num->complex
-      #|  s SUBSET t ==> t INTER s = s
-      #|  c IN closure(IMAGE (f:complex->complex) (ball (b,r)) INTER\n                 ball(f b,t))
-      #|  ~(y IN IMAGE f s) ==> x IN s ==> ~(f x = y)
-      #|  &0 < t
-      #|  F ==> p
-      #|  s:real <= t
-      #|  t = dist((f:complex->complex) b,c)
-      #|  IMAGE (f:complex->complex) (cball(b,r))
-      #|  bounded:(complex->bool)->bool
-      #|  UNIV DIFF s = {} <=> s = UNIV
-      #|  (f:complex->complex) b
-      #|  (:complex) DIFF IMAGE f (ball(b:complex,r))
-      #|  c = closest_point ((:complex) DIFF IMAGE f (ball(b:complex,r))) (f b)
-      #|  g:complex->complex
-      #|  ball(b:complex,r)
-      #|  f:complex->complex
-      #|  f:complex->complex
-      #|  ITER n cexp
-      #|  n:num
-      #|  s <= &0 \\/ &0 < s
-      #|  forall n b r s.\n        &0 < r /\\\n        (forall w z. w IN ball(b,r) /\\ z IN ball(b,r) /\\\n               ITER n cexp w = ITER n cexp z\n               ==> w = z) /\\\n        (forall z. z IN ball(b,r)\n             ==> s <= r * norm(complex_derivative (ITER n cexp) z))\n        ==> ball(ITER n cexp b,s) SUBSET IMAGE (ITER n cexp) (ball(b,r))
-      #|  b:complex
-      #|  a:complex
-      #|  b:complex
-      #|  a:complex
-      #|  dist(w,w + x) = norm x /\\ dist(w,w - x) = norm x
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (r : (Num) -> Num)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (z : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  cball(((b : Cart[Real, Tybit0[Unit]]), (t : Real) / (s : Real) * (r : Real)))
+      #|  \226\136\128 n : Num, IN((z : (Num) -> Cart[Real, Tybit0[Unit]])(n), cball(((b : Cart[Real, Tybit0[Unit]]), (t : Real) / (s : Real) * (r : Real))))
+      #|  (z : (Num) -> Cart[Real, Tybit0[Unit]])
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, s) == s
+      #|  IN((c : Cart[Real, Tybit0[Unit]]), closure(INTER(IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball(((b : Cart[Real, Tybit0[Unit]]), (r : Real)))), ball((f(b), (t : Real))))))
+      #|  !IN((y : _), IMAGE((f : (_) -> _), (s : (_) -> Bool))) \226\134\146 IN((x : _), s) \226\134\146 !(f(x) == y)
+      #|  real_of_num(0) < (t : Real)
+      #|  false \226\134\146 (p : Bool)
+      #|  (s : Real) <= (t : Real)
+      #|  (t : Real) == distance(((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]])), (c : Cart[Real, Tybit0[Unit]])))
+      #|  IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), cball(((b : Cart[Real, Tybit0[Unit]]), (r : Real))))
+      #|  (bounded : ((Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)
+      #|  (DIFF(UNIV, (s : (_) -> Bool)) == {}) == (s == UNIV)
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((b : Cart[Real, Tybit0[Unit]]))
+      #|  DIFF(UNIV, IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball(((b : Cart[Real, Tybit0[Unit]]), (r : Real)))))
+      #|  (c : Cart[Real, Tybit0[Unit]]) == closest_point(DIFF(UNIV, IMAGE((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), ball(((b : Cart[Real, Tybit0[Unit]]), (r : Real))))), f(b))
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  ball(((b : Cart[Real, Tybit0[Unit]]), (r : Real)))
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  ITER((n : Num), cexp)
+      #|  (n : Num)
+      #|  (s : Real) <= real_of_num(0) || real_of_num(0) < s
+      #|  \226\136\128 n : Num, \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 r : Real, \226\136\128 s : Real, real_of_num(0) < r && (\226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(w, ball((b, r))) && IN(z, ball((b, r))) && ITER(n, cexp, w) == ITER(n, cexp, z) \226\134\146 w == z) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, ball((b, r))) \226\134\146 s <= r * norm(complex_derivative(ITER(n, cexp), z))) \226\134\146 SUBSET(ball((ITER(n, cexp, b), s)), IMAGE(ITER(n, cexp), ball((b, r))))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  distance(((w : Cart[Real, Tybit0[Unit]]), w + (x : Cart[Real, Tybit0[Unit]]))) == norm(x) && distance((w, w - x)) == norm(x)
       #|  :real
       #|  :real
       #|  :real
       #|  :real
-      #|  &0 < pi ==> abs(pi / &2) * &1 < pi
-      #|  w = ITER (r(n:num)) cexp z
-      #|  pi < x ==> x <= y ==> pi <= y
-      #|  w:complex
+      #|  real_of_num(0) < pi \226\134\146 abs(pi / real_of_num(2)) * real_of_num(1) < pi
+      #|  (w : Cart[Real, Tybit0[Unit]]) == ITER((r : (Num) -> Num)((n : Num)), cexp, (z : Cart[Real, Tybit0[Unit]]))
+      #|  pi < (x : Real) \226\134\146 x <= (y : Real) \226\134\146 pi <= y
+      #|  (w : Cart[Real, Tybit0[Unit]])
       #|  pi
-      #|  r:real
-      #|  z:complex
-      #|  (r:num->num) n
-      #|  (r:num->num) n
-      #|  n:num
-      #|  pi / r
-      #|  pi / &3
-      #|  r:real
-      #|  z:complex
-      #|  z:complex
-      #|  SUC n
-      #|  DISJOINT (IMAGE f s) t ==> forall P. (forall z. ~(z IN t) ==> P z)\n         ==> forall z. z IN s ==> P(f z)
-      #|  z:complex
-      #|  z:complex
-      #|  (z:complex) IN v
-      #|  m < n ==> 1 <= n - m
-      #|  &0 < x / &3 <=> &0 < x
-      #|  ITER (r (SUC n)) cexp = ITER (r(SUC n) - r n) cexp o ITER (r n) cexp
+      #|  (r : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (r : (Num) -> Num)((n : Num))
+      #|  (r : (Num) -> Num)((n : Num))
+      #|  (n : Num)
+      #|  pi / (r : Real)
+      #|  pi / real_of_num(3)
+      #|  (r : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  SUC((n : Num))
+      #|  DISJOINT(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 (\226\136\128 P : (_) -> Bool, (\226\136\128 z : _, !IN(z, t) \226\134\146 P(z)) \226\134\146 (\226\136\128 z : _, IN(z, s) \226\134\146 P(f(z))))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (m : Num) < (n : Num) \226\134\146 1 <= n - m
+      #|  (real_of_num(0) < (x : Real) / real_of_num(3)) == (real_of_num(0) < x)
+      #|  ITER((r : (Num) -> Num)(SUC((n : Num))), cexp) == o(ITER(r(SUC(n)) - r(n), cexp), ITER(r(n), cexp))
       #|  0
-      #|  DISJOINT (IMAGE f s) t ==> (forall z. ~(z IN t) ==> P z)\n         ==> forall z. z IN s ==> P(f z)
-      #|  z:complex
-      #|  z:complex
-      #|  (z:complex) IN v
-      #|  abs(Im(ITER (r 0) cexp z))
-      #|  z:complex
-      #|  forall n z. z IN v\n          ==> (pi / &3) pow n <= norm(complex_derivative (ITER (r n) cexp) z)
-      #|  forall m n. m < n ==> (r:num->num) m < r n
-      #|  m < n ==> 0 < n
-      #|  ?r. ((forall n. 0 < r n) /\\\n         (forall n. DISJOINT (IMAGE (ITER (r n) cexp) v)\n              {z | abs (Im z) <= pi / &3})) /\\\n        (forall n. r n < r(SUC n))
-      #|  &1 <= x ==> &1 <= &2 * x
-      #|  pi <= &2 * x * pi <=> pi * &1 <= pi * &2 * x
-      #|  i = &0
-      #|  i:real
-      #|  z:complex
-      #|  w:complex
-      #|  z:complex
-      #|  w:complex
-      #|  (p ==> r) ==> (~p ==> q ==> r) ==> (q ==> r)
-      #|  forall n w z. w IN v /\\ z IN v /\\ ITER n cexp w = ITER n cexp z ==> w = z
-      #|  ~(pi = &0) ==> (x * pi) / pi = x
-      #|  y:complex
-      #|  x + &1 <= y /\\ y < floor y + &1 ==> x <= floor y
-      #|  &0 < &2
+      #|  DISJOINT(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 (\226\136\128 z : _, !IN(z, t) \226\134\146 (P : (_) -> Bool)(z)) \226\134\146 (\226\136\128 z : _, IN(z, s) \226\134\146 P(f(z)))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  IN((z : Cart[Real, Tybit0[Unit]]), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  abs(Im(ITER((r : (Num) -> Num)(0), cexp, (z : Cart[Real, Tybit0[Unit]]))))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, (v : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 pow(pi / real_of_num(3), n) <= norm(complex_derivative(ITER((r : (Num) -> Num)(n), cexp), z))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (r : (Num) -> Num)(m) < r(n)
+      #|  (m : Num) < (n : Num) \226\134\146 0 < n
+      #|  \226\136\131 r : (Num) -> Num, ((\226\136\128 n : Num, 0 < r(n)) && (\226\136\128 n : Num, DISJOINT(IMAGE(ITER(r(n), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)}))) && (\226\136\128 n : Num, r(n) < r(SUC(n)))
+      #|  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(1) <= real_of_num(2) * x
+      #|  (pi <= real_of_num(2) * ((x : Real) * pi)) == (pi * real_of_num(1) <= pi * (real_of_num(2) * x))
+      #|  (i : Real) == real_of_num(0)
+      #|  (i : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  ((p : Bool) \226\134\146 (r : Bool)) \226\134\146 (!p \226\134\146 (q : Bool) \226\134\146 r) \226\134\146 q \226\134\146 r
+      #|  \226\136\128 n : Num, \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(w, (v : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(z, v) && ITER(n, cexp, w) == ITER(n, cexp, z) \226\134\146 w == z
+      #|  !(pi == real_of_num(0)) \226\134\146 (x : Real) * pi / pi == x
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real) + real_of_num(1) <= (y : Real) && y < floor(y) + real_of_num(1) \226\134\146 x <= floor(y)
+      #|  real_of_num(0) < real_of_num(2)
       #|  2
-      #|  floor(Im(ITER n cexp w) / pi) * pi
-      #|  ITER n cexp w
-      #|  ITER n cexp z
-      #|  IMAGE (ITER n cexp) v
-      #|  z:complex
-      #|  w:complex
-      #|  \\w z. Im(ITER n cexp z) <= Im(ITER n cexp w)
-      #|  n:num
-      #|  ?n w z. w IN v /\\ z IN v /\\\n            pi <= abs(Im(ITER n cexp w) - Im(ITER n cexp z))
-      #|  (forall x. real x ==> x IN t) /\\ z IN s\n        ==> real(f z) ==> ~DISJOINT (IMAGE f s) t
-      #|  d:num
-      #|  d:num
-      #|  q:num
-      #|  forall d. real(ITER (n + SUC d) cexp z)
-      #|  n:num
-      #|  ?n z:complex. z IN v /\\ integer(Im(ITER n cexp z) / pi)
-      #|  0..N
-      #|  (~p ==> p) ==> p
-      #|  ?N. forall n. N < n\n            ==> ~DISJOINT (IMAGE (ITER n cexp) v) {z | abs(Im z) <= pi / &3}
-      #|  forall v. ~(v = {}) /\\ open v /\\ connected v\n        ==> FINITE {n | DISJOINT (IMAGE (ITER n cexp) v)\n                                 {z | abs(Im z) <= pi / &3}}
-      #|  n:num
-      #|  w + pi / &2 % basis 2:complex
-      #|  w - pi / &2 % basis 2:complex
-      #|  ~p /\\ r ==> (~p /\\ ~q ==> ~r) ==> q
-      #|  s DIFF t = {} <=> s SUBSET t
-      #|  s:complex->bool
-      #|  IMAGE (ITER (SUC(n + m)) cexp) v
-      #|  u SUBSET w INTER h INTER s ==> (forall x. x IN h /\\ x IN s ==> f x IN h)\n         ==> IMAGE f u SUBSET h
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  p /\\ (p ==> q) ==> p /\\ q
-      #|  forall m. IMAGE (ITER (n + m) cexp) v SUBSET (w INTER h INTER s)
-      #|  m:num
-      #|  x > y <=> ~(x <= y)
-      #|  z:complex
-      #|  ?z. z IN IMAGE (ITER n cexp) v
-      #|  ?m. ~(IMAGE (ITER (n + m) cexp) v SUBSET s)
-      #|  s DIFF t = {} <=> s SUBSET t
-      #|  s:complex->bool
-      #|  IMAGE (ITER n cexp) v
-      #|  ~(m:num <= n) ==> n <= m
-      #|  n:num
-      #|  {n | IMAGE (ITER n cexp) v SUBSET h} DIFF\n                {n |  ~(IMAGE (ITER n cexp) v SUBSET w)}
-      #|  ~({n | IMAGE (ITER n cexp) v SUBSET w INTER h} SUBSET 0..N)
-      #|  N + 1 <= n <=> ~(n <= N)
-      #|  N:num
-      #|  {n | ~(IMAGE (ITER n cexp) v SUBSET w)} UNION\n       {n | DISJOINT (IMAGE (ITER n cexp) v) s}
-      #|  \\n:num. n
-      #|  ?N. (forall n. N <= n ==> ~(IMAGE (ITER n cexp) v INTER s = {})) /\\\n        (forall n. N <= n ==> IMAGE (ITER n cexp) v SUBSET w)
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  (~(s INTER (UNIV DIFF t) = {}) /\\ ~(s DIFF (UNIV DIFF t) = {}) ==> F)\n      ==> ~(s SUBSET t) ==> DISJOINT s t
-      #|  n:num
-      #|  FINITE {n | ~(IMAGE (ITER n cexp) v SUBSET w)}
-      #|  (forall z. Q z ==> P z) ==> DISJOINT t {z | P(cexp z)}\n             ==> DISJOINT (IMAGE cexp t) {z | Q z}
-      #|  (forall x. x IN s ==> x IN t) ==> DISJOINT u t ==> DISJOINT u s
-      #|  n:num
-      #|  s SUBSET s' /\\ t SUBSET t'\n          ==> (s UNION t) SUBSET (s' UNION t')
-      #|  ~(~(s INTER (UNIV DIFF t) = {}) /\\ ~(s DIFF (UNIV DIFF t) = {}))\n          ==> s SUBSET t \\/ DISJOINT s t
-      #|  ((forall n. f n SUBSET s \\/ DISJOINT (f n) s) /\\\n         (forall n. f n SUBSET t \\/ DISJOINT (f n) t))/\\\n        {n | DISJOINT (f n) s} UNION {n | DISJOINT (f n) t} SUBSET u\n        ==> {n | DISJOINT (f n) (s INTER t)} SUBSET u
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  IMAGE (\\n. n - 1)\n                        {n | DISJOINT (IMAGE (ITER n cexp) v)\n                                      {z | abs (Im z) <= pi / &3}}
-      #|  n = (n + 1) - 1
-      #|  {n | DISJOINT (IMAGE (ITER n cexp) v)\n                              {z | abs(Im z) <= pi / &3}} UNION\n                {n | DISJOINT (IMAGE (ITER (n + 1) cexp) v)\n                              {z | abs(Im z) <= pi / &3}}
-      #|  FINITE {n | DISJOINT (IMAGE (ITER n cexp) v) w}
-      #|  IMAGE f s SUBSET t /\\ IMAGE f u SUBSET v\n      ==> IMAGE f (s INTER u) SUBSET t INTER v
-      #|  UNIV DIFF {x | P x} = {x | ~P x}
-      #|  IMAGE f u SUBSET t\n      ==> IMAGE f s INTER t = {} ==> s INTER u = {}
-      #|  SUC n
-      #|  n:num
-      #|  forall n. IMAGE (ITER n cexp) v INTER frontier {z | abs(Im(cexp z)) <= &2 * pi} =\n        {}
-      #|  abs x = a ==> x = a \\/ x = --a
-      #|  (forall x. x IN t ==> real(f x))\n      ==> IMAGE f s INTER real = {} ==> s INTER t = {}
-      #|  SUC n
-      #|  n:num
-      #|  forall n. IMAGE (ITER n cexp) v INTER frontier {z | abs (Im z) <= &2 * pi} = {}
-      #|  exp(&4 * &1)
-      #|  a <= x /\\ x * &1 <= x * s ==> a <= x * s
-      #|  pi < &4 /\\ &2 pow 4 <= x * y ==> &2 * pi < x * y / &2
-      #|  abs x = a ==> x = a \\/ x = --a
-      #|  abs(sin(Im z)) = sqrt(&3) / &2
-      #|  z:complex
-      #|  (forall x. x IN s /\\ x IN u ==> ~(x IN t)) ==> DISJOINT s (t INTER u)
-      #|  DISJOINT (frontier s) (w INTER h:complex->bool)
-      #|  w = {z | abs(Im z) <= &2 * pi /\\ abs(Im(cexp z)) <= &2 * pi}
-      #|  s = {z | abs(Im z) <= pi / &3}
-      #|  h = {z | Re z > &4}
-      #|  forall v. ~(v = {}) /\\ open v /\\ connected v /\\\n       INFINITE {n | IMAGE (ITER n cexp) v SUBSET {z | Re z > &4}}\n       ==> ?n. ~(IMAGE (ITER n cexp) v INTER real = {})
-      #|  N + 1
-      #|  IMAGE f s INTER t = {}\n      ==> (forall x. ~(x IN u) ==> f x IN t)\n      ==> s SUBSET u
-      #|  n:num
-      #|  n:num
-      #|  0 INSERT (IMAGE (\\n. n + 1)\n                      {n | IMAGE (ITER n cexp) v SUBSET {z | Re z > &4}})
-      #|  v:complex->bool
-      #|  forall v. ~(v = {}) /\\ open v /\\ connected v /\\\n         (forall n. IMAGE (ITER n cexp) v INTER real = {})\n         ==> FINITE {n | IMAGE (ITER n cexp) v INTER\n                         cball(Cx(&0),exp(&4)) = {}}
-      #|  y:complex
-      #|  n:num
-      #|  DISJOINT s t <=> forall x. x IN s ==> x IN (UNIV DIFF t)
-      #|  IMAGE (\\n. r n + (k:num)) ((:num) DIFF (0..N))
-      #|  ball(w:complex,min b c)
-      #|  ball(w:complex,min b c) SUBSET ball(w,c)
-      #|  ball(w:complex,min b c)
-      #|  c:real
-      #|  w:complex
-      #|  N:num
-      #|  b:real
-      #|  d:real
-      #|  d:real
-      #|  e:real
-      #|  (g:complex->complex) w
-      #|  (:complex)
-      #|  k:num
-      #|  e:real
-      #|  ITER n f x IN s\n      ==> open s ==> ?e. &0 < e /\\ ball(ITER n f x,e) SUBSET s
-      #|  g + n <= Re x /\\ &1 + Re x <= Re(cexp x)\n        ==> g + n + &1 <= Re(cexp x)
-      #|  n:num
-      #|  n:num
-      #|  real(ITER n cexp (g(w:complex)))
-      #|  forall p. p /\\ q ==> q
-      #|  x + n <= y ==> &5 - x <= n ==> y > &4
-      #|  n:num
-      #|  &5 - Re(g(w:complex))
-      #|  real(g(w:complex))
-      #|  ?k. ITER k cexp (g(w:complex)) IN h UNION ((:complex) DIFF s)
-      #|  w:complex
-      #|  w:complex
-      #|  dist(y,x) < e / &2 ==> norm(z - y) < e / &2 ==> norm(z - x) < e
+      #|  floor(Im(ITER((n : Num), cexp, (w : Cart[Real, Tybit0[Unit]]))) / pi) * pi
+      #|  ITER((n : Num), cexp, (w : Cart[Real, Tybit0[Unit]]))
+      #|  ITER((n : Num), cexp, (z : Cart[Real, Tybit0[Unit]]))
+      #|  IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]]) => (z : Cart[Real, Tybit0[Unit]]) => Im(ITER((n : Num), cexp, z)) <= Im(ITER(n, cexp, w))
+      #|  (n : Num)
+      #|  \226\136\131 n : Num, \226\136\131 w : Cart[Real, Tybit0[Unit]], \226\136\131 z : Cart[Real, Tybit0[Unit]], IN(w, (v : (Cart[Real, Tybit0[Unit]]) -> Bool)) && IN(z, v) && pi <= abs(Im(ITER(n, cexp, w)) - Im(ITER(n, cexp, z)))
+      #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], real(x) \226\134\146 IN(x, (t : (Cart[Real, Tybit0[Unit]]) -> Bool))) && IN((z : _), (s : (_) -> Bool)) \226\134\146 real((f : (_) -> Cart[Real, Tybit0[Unit]])(z)) \226\134\146 !DISJOINT(IMAGE(f, s), t)
+      #|  (d : Num)
+      #|  (d : Num)
+      #|  (q : Num)
+      #|  \226\136\128 d : Num, real(ITER((n : Num) + SUC(d), cexp, (z : Cart[Real, Tybit0[Unit]])))
+      #|  (n : Num)
+      #|  \226\136\131 n : Num, \226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, (v : (Cart[Real, Tybit0[Unit]]) -> Bool)) && integer(Im(ITER(n, cexp, z)) / pi)
+      #|  op_dot_dot(0, (N : Num))
+      #|  (!(p : Bool) \226\134\146 p) \226\134\146 p
+      #|  \226\136\131 N : Num, \226\136\128 n : Num, N < n \226\134\146 !DISJOINT(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)})
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, !(v == {}) && open(v) && connected(v) \226\134\146 FINITE({(n : Num) | DISJOINT(IMAGE(ITER(n, cexp), v), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)})})
+      #|  (n : Num)
+      #|  (w : Cart[Real, Tybit0[Unit]]) + op_pct(pi / real_of_num(2), basis(2))
+      #|  (w : Cart[Real, Tybit0[Unit]]) - op_pct(pi / real_of_num(2), basis(2))
+      #|  !(p : Bool) && (r : Bool) \226\134\146 (!p && !(q : Bool) \226\134\146 !r) \226\134\146 q
+      #|  (DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == SUBSET(s, t)
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  IMAGE(ITER(SUC((n : Num) + (m : Num)), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  SUBSET((u : (_) -> Bool), INTER((w : (_) -> Bool), INTER((h : (_) -> Bool), (s : (_) -> Bool)))) \226\134\146 (\226\136\128 x : _, IN(x, h) && IN(x, s) \226\134\146 IN((f : (_) -> _)(x), h)) \226\134\146 SUBSET(IMAGE(f, u), h)
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+      #|  \226\136\128 m : Num, SUBSET(IMAGE(ITER((n : Num) + m, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), INTER((w : (Cart[Real, Tybit0[Unit]]) -> Bool), INTER((h : (Cart[Real, Tybit0[Unit]]) -> Bool), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))))
+      #|  (m : Num)
+      #|  ((x : Real) > (y : Real)) == !(x <= y)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+      #|  \226\136\131 m : Num, !SUBSET(IMAGE(ITER((n : Num) + m, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (DIFF((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == SUBSET(s, t)
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  !((m : Num) <= (n : Num)) \226\134\146 n <= m
+      #|  (n : Num)
+      #|  DIFF({(n : Num) | SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (h : (Cart[Real, Tybit0[Unit]]) -> Bool))}, {(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), v), (w : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  !SUBSET({(n : Num) | SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), INTER((w : (Cart[Real, Tybit0[Unit]]) -> Bool), (h : (Cart[Real, Tybit0[Unit]]) -> Bool)))}, op_dot_dot(0, (N : Num)))
+      #|  ((N : Num) + 1 <= (n : Num)) == !(n <= N)
+      #|  (N : Num)
+      #|  UNION({(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (w : (Cart[Real, Tybit0[Unit]]) -> Bool))}, {(n : Num) | DISJOINT(IMAGE(ITER(n, cexp), v), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  (n : Num) => n
+      #|  \226\136\131 N : Num, (\226\136\128 n : Num, N <= n \226\134\146 !(INTER(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) == {})) && (\226\136\128 n : Num, N <= n \226\134\146 SUBSET(IMAGE(ITER(n, cexp), v), (w : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  (!(INTER((s : (_) -> Bool), DIFF(UNIV, (t : (_) -> Bool))) == {}) && !(DIFF(s, DIFF(UNIV, t)) == {}) \226\134\146 false) \226\134\146 !SUBSET(s, t) \226\134\146 DISJOINT(s, t)
+      #|  (n : Num)
+      #|  FINITE({(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (w : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  (\226\136\128 z : Cart[Real, Tybit0[Unit]], (Q : (Cart[Real, Tybit0[Unit]]) -> Bool)(z) \226\134\146 (P : (Cart[Real, Tybit0[Unit]]) -> Bool)(z)) \226\134\146 DISJOINT((t : (Cart[Real, Tybit0[Unit]]) -> Bool), {(z : Cart[Real, Tybit0[Unit]]) | P(cexp(z))}) \226\134\146 DISJOINT(IMAGE(cexp, t), {(z : Cart[Real, Tybit0[Unit]]) | Q(z)})
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 IN(x, (t : (_) -> Bool))) \226\134\146 DISJOINT((u : (_) -> Bool), t) \226\134\146 DISJOINT(u, s)
+      #|  (n : Num)
+      #|  SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) && SUBSET((t : (_) -> Bool), (t' : (_) -> Bool)) \226\134\146 SUBSET(UNION(s, t), UNION(s', t'))
+      #|  !(!(INTER((s : (_) -> Bool), DIFF(UNIV, (t : (_) -> Bool))) == {}) && !(DIFF(s, DIFF(UNIV, t)) == {})) \226\134\146 SUBSET(s, t) || DISJOINT(s, t)
+      #|  ((\226\136\128 n : _, SUBSET((f : (_, _) -> Bool)(n), (s : (_) -> Bool)) || DISJOINT(f(n), s)) && (\226\136\128 n : _, SUBSET(f(n), (t : (_) -> Bool)) || DISJOINT(f(n), t))) && SUBSET(UNION({(n : _) | DISJOINT(f(n), s)}, {(n : _) | DISJOINT(f(n), t)}), (u : (_) -> Bool)) \226\134\146 SUBSET({(n : _) | DISJOINT(f(n), INTER(s, t))}, u)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  IMAGE((n : Num) => n - 1, {(n : Num) | DISJOINT(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)})})
+      #|  (n : Num) == n + 1 - 1
+      #|  UNION({(n : Num) | DISJOINT(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)})}, {(n : Num) | DISJOINT(IMAGE(ITER(n + 1, cexp), v), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)})})
+      #|  FINITE({(n : Num) | DISJOINT(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (w : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) && SUBSET(IMAGE(f, (u : (_) -> Bool)), (v : (_) -> Bool)) \226\134\146 SUBSET(IMAGE(f, INTER(s, u)), INTER(t, v))
+      #|  DIFF(UNIV, {(x : _) | (P : (_) -> Bool)(x)}) == {(x : _) | !P(x)}
+      #|  SUBSET(IMAGE((f : (_) -> _), (u : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 INTER(IMAGE(f, (s : (_) -> Bool)), t) == {} \226\134\146 INTER(s, u) == {}
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, INTER(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), frontier({(z : Cart[Real, Tybit0[Unit]]) | abs(Im(cexp(z))) <= real_of_num(2) * pi})) == {}
+      #|  abs((x : Real)) == (a : Real) \226\134\146 x == a || x == -a
+      #|  (\226\136\128 x : _, IN(x, (t : (_) -> Bool)) \226\134\146 real((f : (_) -> Cart[Real, Tybit0[Unit]])(x))) \226\134\146 INTER(IMAGE(f, (s : (_) -> Bool)), real) == {} \226\134\146 INTER(s, t) == {}
+      #|  SUC((n : Num))
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, INTER(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), frontier({(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= real_of_num(2) * pi})) == {}
+      #|  exp(real_of_num(4) * real_of_num(1))
+      #|  (a : Real) <= (x : Real) && x * real_of_num(1) <= x * (s : Real) \226\134\146 a <= x * s
+      #|  pi < real_of_num(4) && pow(real_of_num(2), 4) <= (x : Real) * (y : Real) \226\134\146 real_of_num(2) * pi < x * (y / real_of_num(2))
+      #|  abs((x : Real)) == (a : Real) \226\134\146 x == a || x == -a
+      #|  abs(sin(Im((z : Cart[Real, Tybit0[Unit]])))) == sqrt(real_of_num(3)) / real_of_num(2)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) && IN(x, (u : (_) -> Bool)) \226\134\146 !IN(x, (t : (_) -> Bool))) \226\134\146 DISJOINT(s, INTER(t, u))
+      #|  DISJOINT(frontier((s : (Cart[Real, Tybit0[Unit]]) -> Bool)), INTER((w : (Cart[Real, Tybit0[Unit]]) -> Bool), (h : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+      #|  (w : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= real_of_num(2) * pi && abs(Im(cexp(z))) <= real_of_num(2) * pi}
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)}
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | Re(z) > real_of_num(4)}
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, !(v == {}) && open(v) && connected(v) && INFINITE({(n : Num) | SUBSET(IMAGE(ITER(n, cexp), v), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) > real_of_num(4)})}) \226\134\146 (\226\136\131 n : Num, !(INTER(IMAGE(ITER(n, cexp), v), real) == {}))
+      #|  (N : Num) + 1
+      #|  INTER(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) == {} \226\134\146 (\226\136\128 x : _, !IN(x, (u : (_) -> Bool)) \226\134\146 IN(f(x), t)) \226\134\146 SUBSET(s, u)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  INSERT(0, IMAGE((n : Num) => n + 1, {(n : Num) | SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(z : Cart[Real, Tybit0[Unit]]) | Re(z) > real_of_num(4)})}))
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, !(v == {}) && open(v) && connected(v) && (\226\136\128 n : Num, INTER(IMAGE(ITER(n, cexp), v), real) == {}) \226\134\146 FINITE({(n : Num) | INTER(IMAGE(ITER(n, cexp), v), cball((Cx(real_of_num(0)), exp(real_of_num(4))))) == {}})
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, IN(x, s) \226\134\146 IN(x, DIFF(UNIV, t)))
+      #|  IMAGE((n : Num) => (r : (Num) -> Num)(n) + (k : Num), DIFF(UNIV, op_dot_dot(0, (N : Num))))
+      #|  ball(((w : Cart[Real, Tybit0[Unit]]), min((b : Real), (c : Real))))
+      #|  SUBSET(ball(((w : Cart[Real, Tybit0[Unit]]), min((b : Real), (c : Real)))), ball((w, c)))
+      #|  ball(((w : Cart[Real, Tybit0[Unit]]), min((b : Real), (c : Real))))
+      #|  (c : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (N : Num)
+      #|  (b : Real)
+      #|  (d : Real)
+      #|  (d : Real)
+      #|  (e : Real)
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))
+      #|  (UNIV : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  (k : Num)
+      #|  (e : Real)
+      #|  IN(ITER((n : Num), (f : (Cart[Real, _]) -> Cart[Real, _]), (x : Cart[Real, _])), (s : (Cart[Real, _]) -> Bool)) \226\134\146 open(s) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && SUBSET(ball((ITER(n, f, x), e)), s))
+      #|  (g : Real) + (n : Real) <= Re((x : Cart[Real, Tybit0[Unit]])) && real_of_num(1) + Re(x) <= Re(cexp(x)) \226\134\146 g + (n + real_of_num(1)) <= Re(cexp(x))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  real(ITER((n : Num), cexp, (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))))
+      #|  \226\136\128 p : Bool, p && (q : Bool) \226\134\146 q
+      #|  (x : Real) + (n : Real) <= (y : Real) \226\134\146 real_of_num(5) - x <= n \226\134\146 y > real_of_num(4)
+      #|  (n : Num)
+      #|  real_of_num(5) - Re((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]])))
+      #|  real((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]])))
+      #|  \226\136\131 k : Num, IN(ITER(k, cexp, (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))), UNION((h : (Cart[Real, Tybit0[Unit]]) -> Bool), DIFF(UNIV, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  distance(((y : Cart[Real, Tybit0[Unit]]), (x : Cart[Real, Tybit0[Unit]]))) < (e : Real) / real_of_num(2) \226\134\146 norm((z : Cart[Real, Tybit0[Unit]]) - y) < e / real_of_num(2) \226\134\146 norm(z - x) < e
       #|  :real
       #|  :real
-      #|  y:complex
-      #|  n:num
-      #|  N:num
-      #|  e / &2
-      #|  cball(w:complex,b)
-      #|  min b (d / &2)
-      #|  b:real
-      #|  w:complex
-      #|  d:real
-      #|  e / &2
-      #|  (g:complex->complex) continuous at w
-      #|  e:real
-      #|  w:complex
-      #|  g:complex->complex
-      #|  ~((p /\\ q) /\\ r) <=> p ==> q ==> ~r
-      #|  y:complex
-      #|  M + N + 1 >= N /\\\n          (M + N + 1 <= r(M + N + 1) ==> ~(r(M + N + 1) <= M))
-      #|  M:num
-      #|  \\n:num. n
-      #|  b:real
-      #|  w:complex
-      #|  ball(w:complex,b)
-      #|  N:num
-      #|  exp(&4)
-      #|  cball(w:complex,b)
-      #|  b:real
-      #|  w:complex
-      #|  w:complex
-      #|  ~q ==> p /\\ q ==> r
-      #|  r:num->num
-      #|  P a /\\ P b ==> IMAGE f s INTER P = {}\n          ==> forall x. x IN s ==> ~(f x = a) /\\ ~(f x = b)
-      #|  n:num
-      #|  n:num
-      #|  Cx(&1)
-      #|  Cx(&0)
-      #|  v:complex->bool
-      #|  {ITER n cexp | n IN (:num)}
-      #|  \\n. ITER n cexp
-      #|  ?g r:num->num.\n        g holomorphic_on v /\\\n        (forall m n. m < n ==> r m < r n) /\\\n        (forall x. x IN v ==> ((\\n. ITER (r n) cexp x) --> g x) sequentially) /\\\n        (forall x e. x IN v /\\ &0 < e\n               ==> ?d N. &0 < d /\\\n                         forall n y. N <= n /\\ y IN cball(x,d)\n                               ==> norm(ITER (r n) cexp y - g x) < e)
-      #|  s = {z | abs(Im z) <= pi / &3}
-      #|  h = {z | Re z > &4}
-      #|  d = cball(Cx(&0),exp(&4))
-      #|  forall v. ~(v = {}) /\\ open v /\\ connected v\n       ==> ?n. ~(IMAGE (ITER n cexp) v INTER real = {})
-      #|  r(M + N + 1):num
-      #|  M + N + 1
-      #|  x * -- &1 <= &0 <=> &0 <= x
-      #|  N < n ==> N <= SUC(SUC n)
-      #|  IMAGE f s INTER t = {} <=> forall x. x IN s ==> ~(f x IN t)
-      #|  N:num
-      #|  &1
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (e : Real) / real_of_num(2)
+      #|  cball(((w : Cart[Real, Tybit0[Unit]]), (b : Real)))
+      #|  min((b : Real), (d : Real) / real_of_num(2))
+      #|  (b : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (d : Real)
+      #|  (e : Real) / real_of_num(2)
+      #|  continuous((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), at((w : Cart[Real, Tybit0[Unit]])))
+      #|  (e : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
+      #|  !(((p : Bool) && (q : Bool)) && (r : Bool)) == (p \226\134\146 q \226\134\146 !r)
+      #|  (y : Cart[Real, Tybit0[Unit]])
+      #|  (M : Num) + ((N : Num) + 1) >= N && (M + (N + 1) <= (r : (Num) -> Num)(M + (N + 1)) \226\134\146 !(r(M + (N + 1)) <= M))
+      #|  (M : Num)
+      #|  (n : Num) => n
+      #|  (b : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  ball(((w : Cart[Real, Tybit0[Unit]]), (b : Real)))
+      #|  (N : Num)
+      #|  exp(real_of_num(4))
+      #|  cball(((w : Cart[Real, Tybit0[Unit]]), (b : Real)))
+      #|  (b : Real)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  !(q : Bool) \226\134\146 (p : Bool) && q \226\134\146 (r : Bool)
+      #|  (r : (Num) -> Num)
+      #|  (P : (_) -> Bool)((a : _)) && P((b : _)) \226\134\146 INTER(IMAGE((f : (_) -> _), (s : (_) -> Bool)), P) == {} \226\134\146 (\226\136\128 x : _, IN(x, s) \226\134\146 !(f(x) == a) && !(f(x) == b))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  Cx(real_of_num(1))
+      #|  Cx(real_of_num(0))
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  {ITER((n : Num), cexp) | IN(n, UNIV)}
+      #|  (n : Num) => ITER(n, cexp)
+      #|  \226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\131 r : (Num) -> Num, holomorphic_on(g, (v : (Cart[Real, Tybit0[Unit]]) -> Bool)) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, v) \226\134\146 op_minus_minus_gt((n : Num) => ITER(r(n), cexp, x), g(x), sequentially)) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], \226\136\128 e : Real, IN(x, v) && real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, \226\136\131 N : Num, real_of_num(0) < d && (\226\136\128 n : Num, \226\136\128 y : Cart[Real, Tybit0[Unit]], N <= n && IN(y, cball((x, d))) \226\134\146 norm(ITER(r(n), cexp, y) - g(x)) < e)))
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)}
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | Re(z) > real_of_num(4)}
+      #|  (d : (Cart[Real, Tybit0[Unit]]) -> Bool) == cball((Cx(real_of_num(0)), exp(real_of_num(4))))
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, !(v == {}) && open(v) && connected(v) \226\134\146 (\226\136\131 n : Num, !(INTER(IMAGE(ITER(n, cexp), v), real) == {}))
+      #|  (r : (Num) -> Num)((M : Num) + ((N : Num) + 1))
+      #|  (M : Num) + ((N : Num) + 1)
+      #|  ((x : Real) * -real_of_num(1) <= real_of_num(0)) == (real_of_num(0) <= x)
+      #|  (N : Num) < (n : Num) \226\134\146 N <= SUC(SUC(n))
+      #|  (INTER(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) == {}) == (\226\136\128 x : _, IN(x, s) \226\134\146 !IN(f(x), t))
+      #|  (N : Num)
+      #|  real_of_num(1)
       #|  1
       #|  pi
-      #|  (lift o abs o Im) b
-      #|  (lift o abs o Im) a
-      #|  IMAGE (lift o abs o Im) (IMAGE (ITER n cexp) v)
-      #|  a:complex
-      #|  b:complex
-      #|  x IN real <=> real x
-      #|  n:num
-      #|  INFINITE {n | ~(IMAGE (ITER n cexp) v INTER {x | abs(Im x) = pi} = {})}
-      #|  n:num
-      #|  {x | P x /\\ Q x} = {x | P x} INTER {x | Q x}
-      #|  INFINITE {n | ~(IMAGE (ITER n cexp) v SUBSET w)}
-      #|  {x | P x /\\ ~Q x} = {x | P x} DIFF {x | Q x}
-      #|  INFINITE {n | ~(IMAGE (ITER n cexp) v SUBSET {z | abs(Im z) <= &2 * pi}) /\\\n                  ~DISJOINT (IMAGE (ITER n cexp) v) real}
-      #|  exp(&4 * &1)
-      #|  a <= x /\\ x * &1 <= x * s ==> a <= x * s
-      #|  pi < &4 /\\ &2 pow 4 <= x * y ==> &2 * pi < x * y / &2
-      #|  abs x = a ==> x = a \\/ x = --a
-      #|  abs(sin(Im z)) = sqrt(&3) / &2
-      #|  z:complex
-      #|  (forall x. x IN s /\\ x IN u ==> ~(x IN t)) ==> DISJOINT s (t INTER u)
-      #|  DISJOINT (frontier s) (w INTER h:complex->bool)
-      #|  ~(DISJOINT s real) ==> {x | real x} SUBSET t\n        ==> ~(s INTER t = {})
-      #|  s:complex->bool
-      #|  IMAGE (ITER n cexp) v
-      #|  n:num
-      #|  INFINITE {n | ~(IMAGE (ITER n cexp) v SUBSET w)}
-      #|  ~(n + N + 1 <= N)
-      #|  n + N + 1:num
-      #|  n:num
-      #|  IMAGE (ITER n cexp) v
-      #|  (\\z. c):complex->complex
-      #|  x:complex
+      #|  o(lift, o(abs, Im), (b : Cart[Real, Tybit0[Unit]]))
+      #|  o(lift, o(abs, Im), (a : Cart[Real, Tybit0[Unit]]))
+      #|  IMAGE(o(lift, o(abs, Im)), IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  IN((x : Cart[Real, Tybit0[Unit]]), real) == real(x)
+      #|  (n : Num)
+      #|  INFINITE({(n : Num) | !(INTER(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(x : Cart[Real, Tybit0[Unit]]) | abs(Im(x)) == pi}) == {})})
+      #|  (n : Num)
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  INFINITE({(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (w : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  {(x : _) | (P : (_) -> Bool)(x) && !(Q : (_) -> Bool)(x)} == DIFF({(x : _) | P(x)}, {(x : _) | Q(x)})
+      #|  INFINITE({(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= real_of_num(2) * pi}) && !DISJOINT(IMAGE(ITER(n, cexp), v), real)})
+      #|  exp(real_of_num(4) * real_of_num(1))
+      #|  (a : Real) <= (x : Real) && x * real_of_num(1) <= x * (s : Real) \226\134\146 a <= x * s
+      #|  pi < real_of_num(4) && pow(real_of_num(2), 4) <= (x : Real) * (y : Real) \226\134\146 real_of_num(2) * pi < x * (y / real_of_num(2))
+      #|  abs((x : Real)) == (a : Real) \226\134\146 x == a || x == -a
+      #|  abs(sin(Im((z : Cart[Real, Tybit0[Unit]])))) == sqrt(real_of_num(3)) / real_of_num(2)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) && IN(x, (u : (_) -> Bool)) \226\134\146 !IN(x, (t : (_) -> Bool))) \226\134\146 DISJOINT(s, INTER(t, u))
+      #|  DISJOINT(frontier((s : (Cart[Real, Tybit0[Unit]]) -> Bool)), INTER((w : (Cart[Real, Tybit0[Unit]]) -> Bool), (h : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+      #|  !DISJOINT((s : (Cart[Real, Tybit0[Unit]]) -> Bool), real) \226\134\146 SUBSET({(x : Cart[Real, Tybit0[Unit]]) | real(x)}, (t : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 !(INTER(s, t) == {})
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (n : Num)
+      #|  INFINITE({(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (w : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  !((n : Num) + ((N : Num) + 1) <= N)
+      #|  (n : Num) + ((N : Num) + 1)
+      #|  (n : Num)
+      #|  IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (z : Cart[Real, Tybit0[Unit]]) => (c : Cart[Real, Tybit0[Unit]])
+      #|  (x : Cart[Real, Tybit0[Unit]])
       #|  cexp
-      #|  x:complex
-      #|  ?x. x IN IMAGE (ITER n cexp) v
-      #|  c:complex
-      #|  IMAGE (ITER n cexp) v
-      #|  n:num
-      #|  N + 1
-      #|  interior(IMAGE f s) = IMAGE f s /\\ ~(s = {})\n        ==> ~(interior(IMAGE f s) SUBSET {})
-      #|  ~(s SUBSET t) ==> ?z. z IN s /\\ ~t z
-      #|  ?z. z IN IMAGE (ITER (N + 1) cexp) v /\\ ~(real z)
-      #|  N:num
-      #|  \\n:num. n
-      #|  {x | P x /\\ Q x /\\ R x} =\n      {x | R x} DIFF ({x | ~P x} UNION {x | ~Q x})
-      #|  INFINITE {n | IMAGE (ITER n cexp) v SUBSET h /\\\n                   ~(DISJOINT (IMAGE (ITER n cexp) v) real) /\\\n                   ~(IMAGE (ITER n cexp) v SUBSET s)}
-      #|  (forall x. real x ==> real(cexp x))\n      ==> ~(s INTER real = {}) ==> ~(IMAGE cexp s INTER real = {})
-      #|  d:num
-      #|  (forall d:num. ~P (N + d)) ==> (forall n. P n ==> n <= N)
-      #|  ~(n:num <= N) ==> n = N + (n - N)
-      #|  0..N
-      #|  N:num
-      #|  v:complex->bool
-      #|  FINITE {n | DISJOINT (IMAGE (ITER n cexp) v) real}
-      #|  N < n ==> SUC n >= N
-      #|  w:complex
-      #|  n + 1
-      #|  w:complex
-      #|  n:num
-      #|  0..N
-      #|  N:num
-      #|  exp(&4)
-      #|  FINITE {n | ~(IMAGE (ITER n cexp) v SUBSET h)}
-      #|  w = {z | abs(Im z) <= &2 * pi /\\ abs(Im(cexp z)) <= &2 * pi}
-      #|  s = {z | abs(Im z) <= pi / &3}
-      #|  h = {z | Re z > &4}
-      #|  d + y <= x /\\ &1 + x <= exp x ==> (d + &1) + y <= exp(x) * &1
-      #|  forall d. real(ITER (n + d) cexp w) /\\\n            &d + x <= Re(ITER (n + d) cexp w)
-      #|  d:num
-      #|  m + d:num
-      #|  (m + n) + d:num = n + (m + d)
-      #|  (&m + &d) + x:real
-      #|  d:num
-      #|  m + n <= (r:num->num) (m + n)
-      #|  m:num
-      #|  N + M:num
-      #|  (&N + &M) + x:real
-      #|  g + &1 - x <= m ==> m + x <= f ==> &1 <= abs(f - g)
-      #|  norm(x) < &1 ==> abs(x$1) < &1
-      #|  N + M + n:num
-      #|  M:num
-      #|  Re(g(w:complex)) + &1 - x
-      #|  N:num
-      #|  &1
-      #|  w:complex
-      #|  w:complex
-      #|  x:real
-      #|  n:num
-      #|  P /\\ x IN real <=> real x /\\ P
-      #|  v:complex->bool
-      #|  n:num
-      #|  n:num
-      #|  ball(z:complex,d)
-      #|  c:real
-      #|  cball(z:complex,d / &2)
-      #|  forall n:num. ?x. x IN IMAGE (ITER (r n) cexp) (ball(z,d / &2)) /\\ norm x <= c
-      #|  forall m n. m < n ==> (r:num->num) m < r n
-      #|  r n = (q:num->num) (p(n:num))
-      #|  p:num->num
-      #|  q:num->num
-      #|  forall m n. m < n ==> (q:num->num) m < q n
-      #|  n >= N + 1 ==> N < n
-      #|  ?q. (forall n. ?x. x IN IMAGE (ITER (q n) cexp) (ball(z,d / &2)) /\\\n                   norm(x) <= c) /\\\n          (forall n. q n < q(SUC n))
-      #|  c:real
-      #|  ball(z:complex,d / &2)
-      #|  d:real
-      #|  z:complex
-      #|  z:complex
-      #|  v:complex->bool
-      #|  forall v. ~(open v /\\ connected v /\\ bounded v /\\ ~(v = {}) /\\\n          (forall c. ?N. forall n x. n >= N /\\ x IN v ==> c < norm(ITER n cexp x)))
-      #|  forall v. open v /\\ connected v /\\ ~(v = {})\n       ==> ?q. (forall m n. m < n ==> (q:num->num) m < q n) /\\\n               forall r. (forall m n. m < n ==> r m < r n) /\\\n                   ((forall x. x IN v\n                         ==> ((\\n. inv (ITER (q(r n)) cexp x)) --> Cx (&0))\n                             sequentially) /\\\n                    (forall k c.\n                         compact k /\\ k SUBSET v\n                         ==> (?N. forall n x. n >= N /\\ x IN k\n                                        ==> c < norm(ITER (q(r n)) cexp x))) \\/\n                    (?g. g holomorphic_on v /\\\n                         (forall x. x IN v\n                              ==> ((\\n. ITER (q(r n)) cexp x) --> g x)\n                                  sequentially) /\\\n                         (forall k e.\n                              compact k /\\ k SUBSET v /\\ &0 < e\n                              ==> (?N. forall n x.\n                                           n >= N /\\ x IN k\n                                           ==> norm(ITER (q(r n)) cexp x - g x)\n                                                < e)))) ==> F
-      #|  SUC k
-      #|  k:num
-      #|  k:num
-      #|  x:complex
-      #|  SUC(SUC n)
-      #|  x:complex
-      #|  n:num
-      #|  p ==> q /\\ r <=> (p ==> q) /\\ (p ==> r)
-      #|  a:complex
-      #|  Cx(&0)
-      #|  v:complex->bool
-      #|  {ITER n cexp | n IN (:num)}
-      #|  \\n:num. ITER (q n) cexp
-      #|  q:num->num
-      #|  v:complex->bool
-      #|  ((forall x. ~P x) ==> F) ==> ?x. P x
-      #|  ball(b:complex,r)
-      #|  s SUBSET t ==> a IN IMAGE f s ==> a IN IMAGE f t
-      #|  a:complex
-      #|  ball(b:complex,min r (min (norm b) (dist(b,a))))
-      #|  r:real
-      #|  b:complex
-      #|  b:complex
-      #|  ~(u SUBSET {Cx(&0),a})
-      #|  forall v a. open v /\\ ~(v = {}) /\\ connected v /\\ ~(Cx(&0) IN v) /\\ ~(a = Cx(&0))\n         ==> ?n. a IN IMAGE (ITER n cexp) v
-      #|  forall u a. open u /\\ ~(u = {}) /\\ ~(a = Cx(&0))\n         ==> ?n. a IN IMAGE (ITER n cexp) u
-      #|  b:complex
-      #|  u:complex->bool
-      #|  b:complex
-      #|  ~(s SUBSET {z}) ==> ?a. a IN s /\\ ~(a = z)
-      #|  ~(v SUBSET {Cx(&0)})
-      #|  forall u v. open u /\\ ~(u = {}) /\\ open v /\\ ~(v = {})\n         ==> ?n. ~(IMAGE (ITER n cexp) u INTER v = {})
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  \226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)))
+      #|  (c : Cart[Real, Tybit0[Unit]])
+      #|  IMAGE(ITER((n : Num), cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (n : Num)
+      #|  (N : Num) + 1
+      #|  interior(IMAGE((f : (_) -> Cart[Real, _]), (s : (_) -> Bool))) == IMAGE(f, s) && !(s == {}) \226\134\146 !SUBSET(interior(IMAGE(f, s)), {})
+      #|  !SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (\226\136\131 z : _, IN(z, s) && !t(z))
+      #|  \226\136\131 z : Cart[Real, Tybit0[Unit]], IN(z, IMAGE(ITER((N : Num) + 1, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool))) && !real(z)
+      #|  (N : Num)
+      #|  (n : Num) => n
+      #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)} == DIFF({(x : _) | R(x)}, UNION({(x : _) | !P(x)}, {(x : _) | !Q(x)}))
+      #|  INFINITE({(n : Num) | SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (h : (Cart[Real, Tybit0[Unit]]) -> Bool)) && !DISJOINT(IMAGE(ITER(n, cexp), v), real) && !SUBSET(IMAGE(ITER(n, cexp), v), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  (\226\136\128 x : Cart[Real, Tybit0[Unit]], real(x) \226\134\146 real(cexp(x))) \226\134\146 !(INTER((s : (Cart[Real, Tybit0[Unit]]) -> Bool), real) == {}) \226\134\146 !(INTER(IMAGE(cexp, s), real) == {})
+      #|  (d : Num)
+      #|  (\226\136\128 d : Num, !(P : (Num) -> Bool)((N : Num) + d)) \226\134\146 (\226\136\128 n : Num, P(n) \226\134\146 n <= N)
+      #|  !((n : Num) <= (N : Num)) \226\134\146 n == N + (n - N)
+      #|  op_dot_dot(0, (N : Num))
+      #|  (N : Num)
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  FINITE({(n : Num) | DISJOINT(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), real)})
+      #|  (N : Num) < (n : Num) \226\134\146 SUC(n) >= N
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num) + 1
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  op_dot_dot(0, (N : Num))
+      #|  (N : Num)
+      #|  exp(real_of_num(4))
+      #|  FINITE({(n : Num) | !SUBSET(IMAGE(ITER(n, cexp), (v : (Cart[Real, Tybit0[Unit]]) -> Bool)), (h : (Cart[Real, Tybit0[Unit]]) -> Bool))})
+      #|  (w : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= real_of_num(2) * pi && abs(Im(cexp(z))) <= real_of_num(2) * pi}
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | abs(Im(z)) <= pi / real_of_num(3)}
+      #|  (h : (Cart[Real, Tybit0[Unit]]) -> Bool) == {(z : Cart[Real, Tybit0[Unit]]) | Re(z) > real_of_num(4)}
+      #|  (d : Real) + (y : Real) <= (x : Real) && real_of_num(1) + x <= exp(x) \226\134\146 d + real_of_num(1) + y <= exp(x) * real_of_num(1)
+      #|  \226\136\128 d : Num, real(ITER((n : Num) + d, cexp, (w : Cart[Real, Tybit0[Unit]]))) && real_of_num(d) + (x : Real) <= Re(ITER(n + d, cexp, w))
+      #|  (d : Num)
+      #|  (m : Num) + (d : Num)
+      #|  (m : Num) + (n : Num) + (d : Num) == n + (m + d)
+      #|  real_of_num((m : Num)) + real_of_num((d : Num)) + (x : Real)
+      #|  (d : Num)
+      #|  (m : Num) + (n : Num) <= (r : (Num) -> Num)(m + n)
+      #|  (m : Num)
+      #|  (N : Num) + (M : Num)
+      #|  real_of_num((N : Num)) + real_of_num((M : Num)) + (x : Real)
+      #|  (g : Real) + (real_of_num(1) - (x : Real)) <= (m : Real) \226\134\146 m + x <= (f : Real) \226\134\146 real_of_num(1) <= abs(f - g)
+      #|  norm((x : Cart[Real, _])) < real_of_num(1) \226\134\146 abs(op_dollar(x, 1)) < real_of_num(1)
+      #|  (N : Num) + ((M : Num) + (n : Num))
+      #|  (M : Num)
+      #|  Re((g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((w : Cart[Real, Tybit0[Unit]]))) + (real_of_num(1) - (x : Real))
+      #|  (N : Num)
+      #|  real_of_num(1)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (x : Real)
+      #|  (n : Num)
+      #|  ((P : Bool) && IN((x : Cart[Real, Tybit0[Unit]]), real)) == (real(x) && P)
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real)))
+      #|  (c : Real)
+      #|  cball(((z : Cart[Real, Tybit0[Unit]]), (d : Real) / real_of_num(2)))
+      #|  \226\136\128 n : Num, \226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, IMAGE(ITER((r : (Num) -> Num)(n), cexp), ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real) / real_of_num(2))))) && norm(x) <= (c : Real)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (r : (Num) -> Num)(m) < r(n)
+      #|  (r : (Num) -> Num)((n : Num)) == (q : (Num) -> Num)((p : (Num) -> Num)(n))
+      #|  (p : (Num) -> Num)
+      #|  (q : (Num) -> Num)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 (q : (Num) -> Num)(m) < q(n)
+      #|  (n : Num) >= (N : Num) + 1 \226\134\146 N < n
+      #|  \226\136\131 q : (Num) -> Num, (\226\136\128 n : Num, \226\136\131 x : Cart[Real, Tybit0[Unit]], IN(x, IMAGE(ITER(q(n), cexp), ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real) / real_of_num(2))))) && norm(x) <= (c : Real)) && (\226\136\128 n : Num, q(n) < q(SUC(n)))
+      #|  (c : Real)
+      #|  ball(((z : Cart[Real, Tybit0[Unit]]), (d : Real) / real_of_num(2)))
+      #|  (d : Real)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, !(open(v) && connected(v) && bounded(v) && !(v == {}) && (\226\136\128 c : Real, \226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, Tybit0[Unit]], n >= N && IN(x, v) \226\134\146 c < norm(ITER(n, cexp, x))))
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, open(v) && connected(v) && !(v == {}) \226\134\146 (\226\136\131 q : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 q(m) < q(n)) && (\226\136\128 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && ((\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, v) \226\134\146 op_minus_minus_gt((n : Num) => inv(ITER(q(r(n)), cexp, x)), Cx(real_of_num(0)), sequentially)) && (\226\136\128 k : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 c : Real, compact(k) && SUBSET(k, v) \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, Tybit0[Unit]], n >= N && IN(x, k) \226\134\146 c < norm(ITER(q(r(n)), cexp, x)))) || (\226\136\131 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(g, v) && (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, v) \226\134\146 op_minus_minus_gt((n : Num) => ITER(q(r(n)), cexp, x), g(x), sequentially)) && (\226\136\128 k : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 e : Real, compact(k) && SUBSET(k, v) && real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, Tybit0[Unit]], n >= N && IN(x, k) \226\134\146 norm(ITER(q(r(n)), cexp, x) - g(x)) < e)))) \226\134\146 false))
+      #|  SUC((k : Num))
+      #|  (k : Num)
+      #|  (k : Num)
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  SUC(SUC((n : Num)))
+      #|  (x : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  Cx(real_of_num(0))
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  {ITER((n : Num), cexp) | IN(n, UNIV)}
+      #|  (n : Num) => ITER((q : (Num) -> Num)(n), cexp)
+      #|  (q : (Num) -> Num)
+      #|  (v : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  ((\226\136\128 x : _, !(P : (_) -> Bool)(x)) \226\134\146 false) \226\134\146 (\226\136\131 x : _, P(x))
+      #|  ball(((b : Cart[Real, Tybit0[Unit]]), (r : Real)))
+      #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((a : _), IMAGE((f : (_) -> _), s)) \226\134\146 IN(a, IMAGE(f, t))
+      #|  (a : Cart[Real, Tybit0[Unit]])
+      #|  ball(((b : Cart[Real, Tybit0[Unit]]), min((r : Real), min(norm(b), distance((b, (a : Cart[Real, Tybit0[Unit]])))))))
+      #|  (r : Real)
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  !SUBSET((u : (Cart[Real, Tybit0[Unit]]) -> Bool), {Cx(real_of_num(0)), (a : Cart[Real, Tybit0[Unit]])})
+      #|  \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], open(v) && !(v == {}) && connected(v) && !IN(Cx(real_of_num(0)), v) && !(a == Cx(real_of_num(0))) \226\134\146 (\226\136\131 n : Num, IN(a, IMAGE(ITER(n, cexp), v)))
+      #|  \226\136\128 u : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 a : Cart[Real, Tybit0[Unit]], open(u) && !(u == {}) && !(a == Cx(real_of_num(0))) \226\134\146 (\226\136\131 n : Num, IN(a, IMAGE(ITER(n, cexp), u)))
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  (u : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  (b : Cart[Real, Tybit0[Unit]])
+      #|  !SUBSET((s : (_) -> Bool), {(z : _)}) \226\134\146 (\226\136\131 a : _, IN(a, s) && !(a == z))
+      #|  !SUBSET((v : (Cart[Real, Tybit0[Unit]]) -> Bool), {Cx(real_of_num(0))})
+      #|  \226\136\128 u : (Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 v : (Cart[Real, Tybit0[Unit]]) -> Bool, open(u) && !(u == {}) && open(v) && !(v == {}) \226\134\146 (\226\136\131 n : Num, !(INTER(IMAGE(ITER(n, cexp), u), v) == {}))
       #|HAS_COMPLEX_DERIVATIVE_CEXP_COMPOSE =  |- (#forall:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) (((#has_complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(net(cart(real,tybit0(1))),bool))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f':cart(real,tybit0(1))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) (((#has_complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(net(cart(real,tybit0(1))),bool))) (\w:cart(real,tybit0(1)). (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) w:cart(real,tybit0(1)))))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f':cart(real,tybit0(1))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) z:cart(real,tybit0(1)))))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1)))))))))
       #|COMPLEX_DIFFERENTIABLE_CEXP_COMPOSE =  |- (#forall:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) (\w:cart(real,tybit0(1)). (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) w:cart(real,tybit0(1)))))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1)))))))))
       #|COMPLEX_DERIVATIVE_CEXP_COMPOSE =  |- (#forall:fun(fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool),bool) (\f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))). (#forall:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). ((#==>:fun(bool,fun(bool,bool)) ((#complex_differentiable:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(net(cart(real,tybit0(1))),bool)) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (#at:fun(cart(real,tybit0(1)),net(cart(real,tybit0(1)))) z:cart(real,tybit0(1))))) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) ((#complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) (\w:cart(real,tybit0(1)). (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) w:cart(real,tybit0(1)))))) z:cart(real,tybit0(1)))) ((#complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) ((#complex_derivative:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) f:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) z:cart(real,tybit0(1)))) (#cexp:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) (f:fun(cart(real,tybit0(1)),cart(real,tybit0(1))) z:cart(real,tybit0(1)))))))))))

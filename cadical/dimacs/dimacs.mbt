@@ -224,7 +224,7 @@ pub fn term_of_literal(x50 : (Int64) -> @kernel.Term raise, x51 : Int64) -> @ker
 ///|
 /// term_of_clause
 fn step_3() -> Unit raise {
-  let false_tm = @parser.parse_term("F")
+  let false_tm = @term_syntax.parse_term("false")
   term_of_clause_c.set(fn(x52 : (Int64) -> @kernel.Term raise) -> ((@list.List[Int64]) -> @kernel.Term raise) raise {
     let amap = x52
     fn aux(x54 : @kernel.Term, x55 : @list.List[Int64]) -> @kernel.Term raise {
@@ -257,7 +257,7 @@ pub fn term_of_clause(x : (Int64) -> @kernel.Term raise) -> ((@list.List[Int64])
 ///|
 /// term_of_clauses
 fn step_4() -> Unit raise {
-  let true_tm = @parser.parse_term("T")
+  let true_tm = @term_syntax.parse_term("true")
   term_of_clauses_c.set(fn(x57 : (Int64) -> @kernel.Term raise) -> ((@list.List[@list.List[Int64]]) -> @kernel.Term raise) raise {
     let amap = x57
     fn aux(x59 : @kernel.Term, x60 : @list.List[@list.List[Int64]]) -> @kernel.Term raise {

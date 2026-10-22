@@ -282,9 +282,9 @@ test "quot matches quot.ml" {
       #|0..0..1..solved at 4
       #|0..0..solved at 2
       #|quot quotations (6):
-      #|  forall x:A. (@y. x = y) = x
-      #|  dest(mk((R:Repty->Repty->bool) x):Absty) = R x
-      #|  x:Repty
+      #|  \226\136\128 x : A, select((y : A) => x == y) == x
+      #|  (dest : (Absty, Repty) -> Bool)((mk : ((Repty) -> Bool) -> Absty)((R : (Repty, Repty) -> Bool)((x : Repty)))) == R(x)
+      #|  (x : Repty)
       #|  (a /\\ b /\\ c) /\\ (b ==> a ==> d)\n                       ==> a /\\ b /\\ c /\\ d
       #|  forall x y. (mk((R:Repty->Repty->bool) x):Absty = mk(R y)) <=> (R x = R y)
       #|  (forall x:Repty. R x x) /\\\n     (forall x y. R x y <=> R y x) /\\\n     (forall x y z. R x y /\\ R y z ==> R x z) /\\\n     (forall a. mk(dest a) = a) /\\\n     (forall r. (?x. r = R x) <=> (dest(mk r) = r))\n     ==> (forall x y. R x y <=> (mk(R x) = mk(R y))) /\\\n         (forall P. (forall x. P(mk(R x))) <=> (forall x. P x)) /\\\n         (forall P. (?x. P(mk(R x))) <=> (?x. P x)) /\\\n         (forall x:Absty. mk(R((@)(dest x))) = x)

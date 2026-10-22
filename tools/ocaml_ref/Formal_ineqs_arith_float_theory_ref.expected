@@ -1,31 +1,31 @@
 Formal_ineqs/arith/float_theory quotations (27):
-  min_exp:num
-  float_num s n e = (if s then (-- &1) else &1) * &(num_exp n e) / &(num_exp 1 min_exp)
-  arith_base:num
-  ~(arith_base = 0)
-  (&n * b) / c = &n * (b / c)
-  forall s n e. float_num s n e = (if s then -- &1 else &1) * &n *\n      if (min_exp <= e) then &arith_base pow (e - min_exp) else inv (&arith_base pow (min_exp - e))
-  &0
+  (min_exp : Num)
+  (float_num : (Bool, Num, Num) -> Real)((s : Bool), (n : Num), (e : Num)) == (if s { -real_of_num(1) } else { real_of_num(1) }) * (real_of_num(num_exp(n, e)) / real_of_num(num_exp(1, min_exp)))
+  (arith_base : Num)
+  !(arith_base == 0)
+  real_of_num((n : Num)) * (b : Real) / (c : Real) == real_of_num(n) * (b / c)
+  \226\136\128 s : Bool, \226\136\128 n : Num, \226\136\128 e : Num, float_num(s, n, e) == (if s { -real_of_num(1) } else { real_of_num(1) }) * (real_of_num(n) * (if min_exp <= e { pow(real_of_num(arith_base), e - min_exp) } else { inv(pow(real_of_num(arith_base), min_exp - e)) }))
+  real_of_num(0)
   min_exp
   EXP
-  &
-  (~)
-  &n = float_num F n min_exp
-  forall s n e. --float_num s n e = float_num (~s) n e
-  T
-  F
-  forall n e. &0 <= float_num F n e
-  -- &1 * a * b <= &0 <=> &0 <= a * b
-  forall n e. float_num T n e <= &0
-  forall s n e. float_num s n e = &0 <=> n = 0
-  num_exp n1 e1 <= num_exp n2 e2\n                                      ==> float_num F n1 e1 <= float_num F n2 e2
-  num_exp n1 e1 <= num_exp n2 e2\n                                        ==> float_num T n2 e2 <= float_num T n1 e1
-  float_num F n1 e1
-  float_num T n2 e2
-  interval_arith x (float_num F n1 e1, float_num T n2 e2) ==> x = &0
-  forall s e. float_num s 0 e = &0
-  s:bool
-  abs (float_num s n e) = float_num F n e
+  real_of_num
+  op_tilde
+  real_of_num((n : Num)) == float_num(false, n, min_exp)
+  \226\136\128 s : Bool, \226\136\128 n : Num, \226\136\128 e : Num, -float_num(s, n, e) == float_num(!s, n, e)
+  true
+  false
+  \226\136\128 n : Num, \226\136\128 e : Num, real_of_num(0) <= float_num(false, n, e)
+  (-real_of_num(1) * ((a : Real) * (b : Real)) <= real_of_num(0)) == (real_of_num(0) <= a * b)
+  \226\136\128 n : Num, \226\136\128 e : Num, float_num(true, n, e) <= real_of_num(0)
+  \226\136\128 s : Bool, \226\136\128 n : Num, \226\136\128 e : Num, (float_num(s, n, e) == real_of_num(0)) == (n == 0)
+  num_exp((n1 : Num), (e1 : Num)) <= num_exp((n2 : Num), (e2 : Num)) \226\134\146 float_num(false, n1, e1) <= float_num(false, n2, e2)
+  num_exp((n1 : Num), (e1 : Num)) <= num_exp((n2 : Num), (e2 : Num)) \226\134\146 float_num(true, n2, e2) <= float_num(true, n1, e1)
+  float_num(false, (n1 : Num), (e1 : Num))
+  float_num(true, (n2 : Num), (e2 : Num))
+  interval_arith((x : Real), (float_num(false, (n1 : Num), (e1 : Num)), float_num(true, (n2 : Num), (e2 : Num)))) \226\134\146 x == real_of_num(0)
+  \226\136\128 s : Bool, \226\136\128 e : Num, float_num(s, 0, e) == real_of_num(0)
+  (s : Bool)
+  abs(float_num((s : Bool), (n : Num), (e : Num))) == float_num(false, n, e)
 Float_theory.min_exp_def =  |- ((#=:fun(num,fun(num,bool)) #min_exp:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
 Float_theory.float =  |- (#forall:fun(fun(bool,bool),bool) (\s:bool. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\e:num. ((#=:fun(real,fun(real,bool)) (((#float_num:fun(bool,fun(num,fun(num,real))) s:bool) n:num) e:num)) ((#real_mul:fun(real,fun(real,real)) (((#COND:fun(bool,fun(real,fun(real,real))) s:bool) (#real_neg:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) ((#num_exp:fun(num,fun(num,num)) n:num) e:num))) (#real_of_num:fun(num,real) ((#num_exp:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #min_exp:num)))))))))))
 Float_theory.arith_base_def =  |- ((#=:fun(num,fun(num,bool)) #arith_base:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))

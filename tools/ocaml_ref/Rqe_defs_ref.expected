@@ -6673,33 +6673,33 @@ Warning: inventing type variables
 0..0..solved at 2
 0..0..11..35..72..124..190..270..solved at 290
 Rqe/defs quotations (28):
-  forall s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)
+  \226\136\128 s : Sign, s == Pos || s == Neg || s == Zero || s == Nonzero || s == Unknown
   Unknown
   Nonzero
   Neg
   Pos
   Zero
-  (interpsign set ply Zero = (forall x:real. set x ==> (ply x = &0))) /\\\n   (interpsign set ply Pos  = (forall x. set x ==> (ply x > &0))) /\\\n   (interpsign set ply Neg  = (forall x. set x ==> (ply x < &0))) /\\\n   (interpsign set ply Nonzero  = (forall x. set x ==> (ply x <> &0))) /\\\n   (interpsign set ply Unknown = (forall x. set x ==> (ply x = ply x)))
+  (interpsign : ((Real) -> Bool, (Real) -> Real, Sign) -> Bool)((set : (Real) -> Bool), (ply : (Real) -> Real), Zero) == (\226\136\128 x : Real, set(x) \226\134\146 ply(x) == real_of_num(0)) && interpsign(set, ply, Pos) == (\226\136\128 x : Real, set(x) \226\134\146 ply(x) > real_of_num(0)) && interpsign(set, ply, Neg) == (\226\136\128 x : Real, set(x) \226\134\146 ply(x) < real_of_num(0)) && interpsign(set, ply, Nonzero) == (\226\136\128 x : Real, set(x) \226\134\146 op_lt_gt(ply(x), real_of_num(0))) && interpsign(set, ply, Unknown) == (\226\136\128 x : Real, set(x) \226\134\146 ply(x) == ply(x))
   interpsign
-  interpsigns polyl set signl = ALL2 (interpsign set) polyl signl
-  a /\\ T <=> a
+  (interpsigns : (List[(Real) -> Real], (Real) -> Bool, List[Sign]) -> Bool)((polyl : List[(Real) -> Real]), (set : (Real) -> Bool), (signl : List[Sign])) == ALL2(interpsign(set), polyl, signl)
+  ((a : Bool) && true) == a
   interpsigns
-  interpsign set p s = interpsigns [p] set [s]
-  interpsigns [p1] set [s1] ==> interpsigns pl set sl ==>\n     interpsigns (CONS p1 pl) set (CONS s1 sl)
-  (partition_line [] = [(\\x. T)]) /\\\n   (partition_line (CONS h t) =\n      if t = [] then [(\\x. x < h); (\\x. x = h); (\\x. h < x)] else\n        APPEND [(\\x. x < h); (\\x. x = h); (\\x. h < x /\\ x < HD t)]\n                (TL (partition_line t)))
-  \\x:real. T
-  h:real
-  h1:real
-  h2:real
-  (\\x. x < h)
-  (\\x:real. x = h)
-  (\\x. h < x)
-  (\\x. x < h1)
-  (\\x:real. x = h1)
-  (\\x. h1 < x /\\ x < h2)
+  interpsign((set : (Real) -> Bool), (p : (Real) -> Real), (s : Sign)) == interpsigns([p], set, [s])
+  interpsigns([(p1 : (Real) -> Real)], (set : (Real) -> Bool), [(s1 : Sign)]) \226\134\146 interpsigns((pl : List[(Real) -> Real]), set, (sl : List[Sign])) \226\134\146 interpsigns(CONS(p1, pl), set, CONS(s1, sl))
+  (partition_line : (List[Real]) -> List[(Real) -> Bool])(NIL) == [(x : Real) => true] && partition_line(CONS((h : Real), (t : List[Real]))) == (if t == NIL { [(x : Real) => x < h, (x : Real) => x == h, (x : Real) => h < x] } else { APPEND([(x : Real) => x < h, (x : Real) => x == h, (x : Real) => h < x && x < HD(t)], TL(partition_line(t))) })
+  (x : Real) => true
+  (h : Real)
+  (h1 : Real)
+  (h2 : Real)
+  (x : Real) => x < (h : Real)
+  (x : Real) => x == (h : Real)
+  (x : Real) => (h : Real) < x
+  (x : Real) => x < (h1 : Real)
+  (x : Real) => x == (h1 : Real)
+  (x : Real) => (h1 : Real) < x && x < (h2 : Real)
   partition_line
   :real->bool
-  interpmat ptl polyl signll <=>\n    real_ordered_list ptl /\\\n    ALL2 (interpsigns polyl) (partition_line ptl) signll
+  (interpmat : (List[Real], List[(Real) -> Real], List[List[Sign]]) -> Bool)((ptl : List[Real]), (polyl : List[(Real) -> Real]), (signll : List[List[Sign]])) == (real_ordered_list(ptl) && ALL2(interpsigns(polyl), partition_line(ptl), signll))
   interpmat
 sign_INDUCT =  |- (#forall:fun(fun(fun(sign,bool),bool),bool) (\P:fun(sign,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(sign,bool) #Zero:sign)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(sign,bool) #Pos:sign)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(sign,bool) #Neg:sign)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(sign,bool) #Nonzero:sign)) (P:fun(sign,bool) #Unknown:sign)))))) (#forall:fun(fun(sign,bool),bool) (\x:sign. (P:fun(sign,bool) x:sign))))))
 sign_RECURSION =  |- (#forall:fun(fun('Z,bool),bool) (\f0:'Z. (#forall:fun(fun('Z,bool),bool) (\f1:'Z. (#forall:fun(fun('Z,bool),bool) (\f2:'Z. (#forall:fun(fun('Z,bool),bool) (\f3:'Z. (#forall:fun(fun('Z,bool),bool) (\f4:'Z. (#?:fun(fun(fun(sign,'Z),bool),bool) (\fn:fun(sign,'Z). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(sign,'Z) #Zero:sign)) f0:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(sign,'Z) #Pos:sign)) f1:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(sign,'Z) #Neg:sign)) f2:'Z)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(sign,'Z) #Nonzero:sign)) f3:'Z)) ((#=:fun('Z,fun('Z,bool)) (fn:fun(sign,'Z) #Unknown:sign)) f4:'Z)))))))))))))))))

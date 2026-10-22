@@ -244,26 +244,26 @@ test "trivia matches trivia.ml" {
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|trivia quotations (20):
-      #|  (o) (f:B->C) g = \\x:A. f(g(x))
-      #|  I = \\x:A. x
-      #|  forall f:B->C. forall g:A->B. forall x:A. (f o g) x = f(g(x))
-      #|  forall f:C->D. forall g:B->C. forall h:A->B. f o (g o h) = (f o g) o h
-      #|  forall x:A. I x = x
-      #|  forall f:A->B. (I o f = f) /\\ (f o I = f)
-      #|  T
-      #|  ?b:bool. b
-      #|  one = @x:1. T
-      #|  one_REP a
-      #|  forall v:1. v = one
-      #|  forall f g. f = (g:A->1)
-      #|  forall P. P one ==> forall x. P x
-      #|  \\x:1. e:A
+      #|  (o : ((B) -> C, (A) -> B, A) -> C)((f : (B) -> C), (g : (A) -> B)) == ((x : A) => f(g(x)))
+      #|  (I : (A) -> A) == ((x : A) => x)
+      #|  \226\136\128 f : (B) -> C, \226\136\128 g : (A) -> B, \226\136\128 x : A, o(f, g, x) == f(g(x))
+      #|  \226\136\128 f : (C) -> D, \226\136\128 g : (B) -> C, \226\136\128 h : (A) -> B, o(f, o(g, h)) == o(o(f, g), h)
+      #|  \226\136\128 x : A, I(x) == x
+      #|  \226\136\128 f : (A) -> B, o(I, f) == f && o(f, I) == f
+      #|  true
+      #|  \226\136\131 b : Bool, b
+      #|  (one : Unit) == select((x : Unit) => true)
+      #|  one_REP((a : Unit))
+      #|  \226\136\128 v : Unit, v == one
+      #|  \226\136\128 f : (A) -> Unit, \226\136\128 g : (A) -> Unit, f == g
+      #|  \226\136\128 P : (Unit) -> Bool, P(one) \226\134\146 (\226\136\128 x : Unit, P(x))
+      #|  (x : Unit) => (e : A)
       #|  forall e:A. ?fn. fn one = e
       #|  forall e:A. ?!fn. fn one = e
-      #|  (forall x. P x) <=> P one
-      #|  (p <=> q) <=> (~p <=> ~q)
-      #|  (?x. P x) <=> P one
-      #|  forall f:1->A. (\\x. f one) = f
+      #|  (\226\136\128 x : Unit, (P : (Unit) -> Bool)(x)) == P(one)
+      #|  ((p : Bool) == (q : Bool)) == (!p == !q)
+      #|  (\226\136\131 x : Unit, (P : (Unit) -> Bool)(x)) == P(one)
+      #|  \226\136\128 f : (Unit) -> A, ((x : Unit) => f(one)) == f
       #|o_DEF =  |- (#forall:fun(fun(fun('B,'C),bool),bool) (\f:fun('B,'C). (#forall:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#=:fun(fun('A,'C),fun(fun('A,'C),bool)) ((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) f:fun('B,'C)) g:fun('A,'B))) (\x:'A. (f:fun('B,'C) (g:fun('A,'B) x:'A))))))))
       #|I_DEF =  |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #I:fun('A,'A)) (\x:'A. x:'A))
       #|o_THM =  |- (#forall:fun(fun(fun('B,'C),bool),bool) (\f:fun('B,'C). (#forall:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('C,fun('C,bool)) (((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) f:fun('B,'C)) g:fun('A,'B)) x:'A)) (f:fun('B,'C) (g:fun('A,'B) x:'A)))))))))

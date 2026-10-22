@@ -5834,28 +5834,28 @@ test "Jordan/num_ext_gcd matches Jordan/num_ext_gcd.ml" {
       #|  (<=):num->num->bool
       #|  (>):num->num->bool
       #|  (>=):num->num->bool
-      #|  DIVIDE a b = ?m. (b = m*a )
-      #|  DIVIDE:num->num->bool
-      #|  m'*m
-      #|  forall a b c. (((a || b) /\\ (b || c)) ==> (a || c))
-      #|  (b = m*m'*b) = (1*b = m*m'*b)
-      #|  b=0
+      #|  (DIVIDE : (Num, Num) -> Bool)((a : Num), (b : Num)) == (\226\136\131 m : Num, b == m * a)
+      #|  DIVIDE
+      #|  (m' : Num) * (m : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, DIVIDE(a, b) && DIVIDE(b, c) \226\134\146 DIVIDE(a, c)
+      #|  ((b : Num) == (m : Num) * ((m' : Num) * b)) == (1 * b == m * (m' * b))
+      #|  (b : Num) == 0
       #|  1
-      #|  forall a b. (((a || b) /\\ (b || a)) ==> (a = b))
-      #|  m+m'
-      #|  forall a b h. (((h || a) /\\ (h||b)) ==> (h || (a+b)))
-      #|  m'-m
-      #|  forall a b h. (((h|| b) /\\ (h || (a+b))) ==> (h|| a))
-      #|  b*m
-      #|  forall a b h. (((h|| a) ==> (h || (b*a))))
-      #|  b*m
-      #|  forall a b h. (((h|| a) ==> (h || (a*b))))
-      #|  GCD a b = @g.\n        ((g || a) /\\ (g || b) /\\\n        (forall h. (((h || a) /\\ (h || b)) ==> (h || g))))
-      #|   (y || (r*a + s*b))/\\ (y || (r'*a +s'*b))
-      #|   (A ==> B) ==> ((C /\\ D/\\ A)==> B)
-      #|  (y||a) /\\ (y ||b) /\\ (forall h. (((h||a)/\\(h||b))==> (h||y)))
-      #|   (h || (r*a + s*b))/\\ (h || (r'*a+s'*b))
-      #|  forall a b g. ((? r s r' s' a' b'.\n        ((a = a'*g) /\\ (b = b'*g) /\\ (g +r'*a+s'*b= r*a + s*b)))\n        ==> (GCD a b = g))
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, DIVIDE(a, b) && DIVIDE(b, a) \226\134\146 a == b
+      #|  (m : Num) + (m' : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 h : Num, DIVIDE(h, a) && DIVIDE(h, b) \226\134\146 DIVIDE(h, a + b)
+      #|  (m' : Num) - (m : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 h : Num, DIVIDE(h, b) && DIVIDE(h, a + b) \226\134\146 DIVIDE(h, a)
+      #|  (b : Num) * (m : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 h : Num, DIVIDE(h, a) \226\134\146 DIVIDE(h, b * a)
+      #|  (b : Num) * (m : Num)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 h : Num, DIVIDE(h, a) \226\134\146 DIVIDE(h, a * b)
+      #|  (GCD : (Num, Num) -> Num)((a : Num), (b : Num)) == select((g : Num) => DIVIDE(g, a) && DIVIDE(g, b) && (\226\136\128 h : Num, DIVIDE(h, a) && DIVIDE(h, b) \226\134\146 DIVIDE(h, g)))
+      #|  DIVIDE((y : Num), (r : Num) * (a : Num) + (s : Num) * (b : Num)) && DIVIDE(y, (r' : Num) * a + (s' : Num) * b)
+      #|  ((A : Bool) \226\134\146 (B : Bool)) \226\134\146 (C : Bool) && (D : Bool) && A \226\134\146 B
+      #|  DIVIDE((y : Num), (a : Num)) && DIVIDE(y, (b : Num)) && (\226\136\128 h : Num, DIVIDE(h, a) && DIVIDE(h, b) \226\134\146 DIVIDE(h, y))
+      #|  DIVIDE((h : Num), (r : Num) * (a : Num) + (s : Num) * (b : Num)) && DIVIDE(h, (r' : Num) * a + (s' : Num) * b)
+      #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 g : Num, (\226\136\131 r : Num, \226\136\131 s : Num, \226\136\131 r' : Num, \226\136\131 s' : Num, \226\136\131 a' : Num, \226\136\131 b' : Num, a == a' * g && b == b' * g && g + (r' * a + s' * b) == r * a + s * b) \226\134\146 GCD(a, b) == g
       #|  GCD 0 0 = 0
       #|  GCD 0 0=0
       #|  GCD 0 1 = 1

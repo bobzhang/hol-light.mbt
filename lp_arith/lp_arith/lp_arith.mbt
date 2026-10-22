@@ -18,10 +18,10 @@ pub fn cddwrapper() -> String {
 ///|
 /// lin_of_hol
 fn step_2() -> Unit raise {
-  let one_tm = @parser.parse_term("&1:real")
-  let zero_tm = @parser.parse_term("&0:real")
-  let add_tm = @parser.parse_term("(+):real->real->real")
-  let mul_tm = @parser.parse_term("(*):real->real->real")
+  let one_tm = @term_syntax.parse_term("real_of_num(1)")
+  let zero_tm = @term_syntax.parse_term("real_of_num(0)")
+  let add_tm = @term_syntax.parse_term("real_add")
+  let mul_tm = @term_syntax.parse_term("real_mul")
   let lin_add : (@lib.Func[@kernel.Term, @num.Num]) -> ((@lib.Func[@kernel.Term, @num.Num]) -> @lib.Func[@kernel.Term, @num.Num] raise) raise = fn(x6 : @lib.Func[@kernel.Term, @num.Num]) -> ((@lib.Func[@kernel.Term, @num.Num]) -> @lib.Func[@kernel.Term, @num.Num] raise) raise {
     fn(x7 : @lib.Func[@kernel.Term, @num.Num]) -> @lib.Func[@kernel.Term, @num.Num] raise {
       ((x4 : @lib.Func[@kernel.Term, @num.Num], x5 : @lib.Func[@kernel.Term, @num.Num]) => @lib.combine(fn(x1 : @num.Num, x2 : @num.Num) -> @num.Num raise {
@@ -301,7 +301,7 @@ fn step_3() -> Unit raise {
       _ => false
     }
   }
-  let n_tm = @parser.parse_term("n:num")
+  let n_tm = @term_syntax.parse_term("(n : Num)")
   let t67 = @bool.spec(n_tm, @realarith.real_pos())
   let pth = @simp.rewrite_rule(@list.List([@equal.gsym(@realax.real_ge())]))(t67)
   lp_prover_v1_c.set(fn(x68 : ((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((@realarith.Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise {

@@ -5607,27 +5607,27 @@ test "Examples/ste matches Examples/ste.ml" {
       #|0..0..1..3..8..15..34..solved at 50
       #|0..0..1..5..11..17..39..61..85..145..212..solved at 229
       #|Examples/ste quotations (21):
-      #|  eval (Propform p) v = p v
-      #|  x <<= y <=> x = X \\/ y = TOP \\/ x = y
-      #|  x && y = if x <<= y then y else if y <<= x then x else TOP
-      #|  forall x. x <<= x
-      #|  forall x y z. x <<= y /\\ y <<= z ==> x <<= z
-      #|  forall x y z. x && y <<= z <=> x <<= z /\\ y <<= z
-      #|  forall x y. x <<= x && y /\\ y <<= x && y
-      #|  b >-> x = if b then x else X
-      #|  (b >-> x) <<= y <=> b ==> x <<= y
-      #|  (tholds (Is_0 nd) seq v <=> ZERO <<= seq 0 nd v) /\\\n   (tholds (Is_1 nd) seq v <=> ONE <<= seq 0 nd v) /\\\n   (tholds (Andj tf1 tf2) seq v <=> tholds tf1 seq v /\\ tholds tf2 seq v) /\\\n   (tholds (When tf1 p) seq v <=> eval p v ==> tholds tf1 seq v) /\\\n   (tholds (Next(tf1)) seq v <=> tholds tf1 (\\t. seq(t + 1)) v)
-      #|  (defseq (Is_0 n) t nd v = ((n = nd) /\\ (t = 0)) >-> ZERO) /\\\n   (defseq (Is_1 n) t nd v = ((n = nd) /\\ (t = 0)) >-> ONE) /\\\n   (defseq (Andj tf1 tf2) t nd v = defseq tf1 t nd v && defseq tf2 t nd v) /\\\n   (defseq (When tf1 p) t nd v =  eval p v >-> defseq tf1 t nd v) /\\\n   (defseq (Next(tf1)) t nd v = ~(t = 0) >-> defseq tf1 (t - 1) nd v)
-      #|  (forall t. P t) <=> P 0 /\\ forall t. P(SUC t)
-      #|  forall tf seq v. tholds tf seq v <=> forall t nd. defseq tf t nd v <<= seq t nd v
-      #|  trajectory next seq v <=> forall t nd. next(seq t) nd v <<= seq (t + 1) nd v
-      #|  (deftraj step tf 0 nd v = defseq tf 0 nd v) /\\\n   (deftraj step tf (SUC t) nd v =\n        defseq tf (SUC t) nd v && step(deftraj step tf t) nd v)
-      #|  forall tf t nd v. defseq tf t nd v <<= deftraj step tf t nd v
-      #|  forall step tf v. trajectory step (deftraj step tf) v
-      #|  monotonic next v <=>\n   forall s1 s2. (forall nd. s1 nd v <<= s2 nd v) ==> forall nd. next s1 nd v <<= next s2 nd v
-      #|  forall step v.\n      monotonic step v\n      ==> forall tf seq. trajectory step seq v\n                   ==> (tholds tf seq v <=>\n                        forall t nd. deftraj step tf t nd v <<= seq t nd v)
-      #|  (A >~~> C) ckt v <=>\n      forall seq. trajectory ckt seq v /\\ tholds A seq v ==> tholds C seq v
-      #|  monotonic ckt v\n   ==> ((A >~~> C) ckt v <=> forall t nd. defseq C t nd v <<= deftraj ckt A t nd v)
+      #|  (eval : (Propform, (Num) -> Bool) -> Bool)(Propform((p : ((Num) -> Bool) -> Bool)), (v : (Num) -> Bool)) == p(v)
+      #|  (op_lt_lt_eq : (Quat, Quat) -> Bool)((x : Quat), (y : Quat)) == (x == X || y == TOP || x == y)
+      #|  (op_amp_amp : (Quat, Quat) -> Quat)((x : Quat), (y : Quat)) == (if op_lt_lt_eq(x, y) { y } else { if op_lt_lt_eq(y, x) { x } else { TOP } })
+      #|  \226\136\128 x : Quat, op_lt_lt_eq(x, x)
+      #|  \226\136\128 x : Quat, \226\136\128 y : Quat, \226\136\128 z : Quat, op_lt_lt_eq(x, y) && op_lt_lt_eq(y, z) \226\134\146 op_lt_lt_eq(x, z)
+      #|  \226\136\128 x : Quat, \226\136\128 y : Quat, \226\136\128 z : Quat, op_lt_lt_eq(op_amp_amp(x, y), z) == (op_lt_lt_eq(x, z) && op_lt_lt_eq(y, z))
+      #|  \226\136\128 x : Quat, \226\136\128 y : Quat, op_lt_lt_eq(x, op_amp_amp(x, y)) && op_lt_lt_eq(y, op_amp_amp(x, y))
+      #|  (op_gt_minus_gt : (Bool, Quat) -> Quat)((b : Bool), (x : Quat)) == (if b { x } else { X })
+      #|  op_lt_lt_eq(op_gt_minus_gt((b : Bool), (x : Quat)), (y : Quat)) == (b \226\134\146 op_lt_lt_eq(x, y))
+      #|  (tholds : (Trajform, (Num, Node, (Num) -> Bool) -> Quat, (Num) -> Bool) -> Bool)(Is_0((nd : Node)), (seq : (Num, Node, (Num) -> Bool) -> Quat), (v : (Num) -> Bool)) == op_lt_lt_eq(ZERO, seq(0, nd, v)) && tholds(Is_1(nd), seq, v) == op_lt_lt_eq(ONE, seq(0, nd, v)) && tholds(Andj((tf1 : Trajform), (tf2 : Trajform)), seq, v) == (tholds(tf1, seq, v) && tholds(tf2, seq, v)) && tholds(When(tf1, (p : Propform)), seq, v) == (eval(p, v) \226\134\146 tholds(tf1, seq, v)) && tholds(Next(tf1), seq, v) == tholds(tf1, (t : Num) => seq(t + 1), v)
+      #|  (defseq : (Trajform, Num, Node, (Num) -> Bool) -> Quat)(Is_0((n : Node)), (t : Num), (nd : Node), (v : (Num) -> Bool)) == op_gt_minus_gt(n == nd && t == 0, ZERO) && defseq(Is_1(n), t, nd, v) == op_gt_minus_gt(n == nd && t == 0, ONE) && defseq(Andj((tf1 : Trajform), (tf2 : Trajform)), t, nd, v) == op_amp_amp(defseq(tf1, t, nd, v), defseq(tf2, t, nd, v)) && defseq(When(tf1, (p : Propform)), t, nd, v) == op_gt_minus_gt(eval(p, v), defseq(tf1, t, nd, v)) && defseq(Next(tf1), t, nd, v) == op_gt_minus_gt(!(t == 0), defseq(tf1, t - 1, nd, v))
+      #|  (\226\136\128 t : Num, (P : (Num) -> Bool)(t)) == (P(0) && (\226\136\128 t : Num, P(SUC(t))))
+      #|  \226\136\128 tf : Trajform, \226\136\128 seq : (Num, Node, (Num) -> Bool) -> Quat, \226\136\128 v : (Num) -> Bool, tholds(tf, seq, v) == (\226\136\128 t : Num, \226\136\128 nd : Node, op_lt_lt_eq(defseq(tf, t, nd, v), seq(t, nd, v)))
+      #|  (trajectory : (((_, _) -> Quat, _, _) -> Quat, (Num, _, _) -> Quat, _) -> Bool)((next : ((_, _) -> Quat, _, _) -> Quat), (seq : (Num, _, _) -> Quat), (v : _)) == (\226\136\128 t : Num, \226\136\128 nd : _, op_lt_lt_eq(next(seq(t), nd, v), seq(t + 1, nd, v)))
+      #|  (deftraj : (((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat, Trajform, Num, Node, (Num) -> Bool) -> Quat)((step : ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat), (tf : Trajform), 0, (nd : Node), (v : (Num) -> Bool)) == defseq(tf, 0, nd, v) && deftraj(step, tf, SUC((t : Num)), nd, v) == op_amp_amp(defseq(tf, SUC(t), nd, v), step(deftraj(step, tf, t), nd, v))
+      #|  \226\136\128 tf : Trajform, \226\136\128 t : Num, \226\136\128 nd : Node, \226\136\128 v : (Num) -> Bool, op_lt_lt_eq(defseq(tf, t, nd, v), deftraj((step : ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat), tf, t, nd, v))
+      #|  \226\136\128 step : ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat, \226\136\128 tf : Trajform, \226\136\128 v : (Num) -> Bool, trajectory(step, deftraj(step, tf), v)
+      #|  (monotonic : (((_, _) -> Quat, _, _) -> Quat, _) -> Bool)((next : ((_, _) -> Quat, _, _) -> Quat), (v : _)) == (\226\136\128 s1 : (_, _) -> Quat, \226\136\128 s2 : (_, _) -> Quat, (\226\136\128 nd : _, op_lt_lt_eq(s1(nd, v), s2(nd, v))) \226\134\146 (\226\136\128 nd : _, op_lt_lt_eq(next(s1, nd, v), next(s2, nd, v))))
+      #|  \226\136\128 step : ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat, \226\136\128 v : (Num) -> Bool, monotonic(step, v) \226\134\146 (\226\136\128 tf : Trajform, \226\136\128 seq : (Num, Node, (Num) -> Bool) -> Quat, trajectory(step, seq, v) \226\134\146 tholds(tf, seq, v) == (\226\136\128 t : Num, \226\136\128 nd : Node, op_lt_lt_eq(deftraj(step, tf, t, nd, v), seq(t, nd, v))))
+      #|  (op_gt_tilde_tilde_gt : (Trajform, Trajform, ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat, (Num) -> Bool) -> Bool)((A : Trajform), (C : Trajform), (ckt : ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat), (v : (Num) -> Bool)) == (\226\136\128 seq : (Num, Node, (Num) -> Bool) -> Quat, trajectory(ckt, seq, v) && tholds(A, seq, v) \226\134\146 tholds(C, seq, v))
+      #|  monotonic((ckt : ((Node, (Num) -> Bool) -> Quat, Node, (Num) -> Bool) -> Quat), (v : (Num) -> Bool)) \226\134\146 op_gt_tilde_tilde_gt((A : Trajform), (C : Trajform), ckt, v) == (\226\136\128 t : Num, \226\136\128 nd : Node, op_lt_lt_eq(defseq(C, t, nd, v), deftraj(ckt, A, t, nd, v)))
       #|node_INDUCT =  |- (#forall:fun(fun(fun(node,bool),bool),bool) (\P:fun(node,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(node,bool) (#Node:fun(num,node) a:num))))) (#forall:fun(fun(node,bool),bool) (\x:node. (P:fun(node,bool) x:node))))))
       #|node_RECURSION =  |- (#forall:fun(fun(fun(num,'Z),bool),bool) (\f:fun(num,'Z). (#?:fun(fun(fun(node,'Z),bool),bool) (\fn:fun(node,'Z). (#forall:fun(fun(num,bool),bool) (\a:num. ((#=:fun('Z,fun('Z,bool)) (fn:fun(node,'Z) (#Node:fun(num,node) a:num))) (f:fun(num,'Z) a:num))))))))
       #|propform_INDUCT =  |- (#forall:fun(fun(fun(propform,bool),bool),bool) (\P:fun(propform,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun(fun(num,bool),bool),bool),bool) (\a:fun(fun(num,bool),bool). (P:fun(propform,bool) (#Propform:fun(fun(fun(num,bool),bool),propform) a:fun(fun(num,bool),bool)))))) (#forall:fun(fun(propform,bool),bool) (\x:propform. (P:fun(propform,bool) x:propform))))))

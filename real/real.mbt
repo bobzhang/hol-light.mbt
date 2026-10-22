@@ -11,7 +11,7 @@ fn step_1() -> Unit raise {
     ]),
   )
   real_of_num_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m < &n <=> m < n"), t1),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, (real_of_num(m) < real_of_num(n)) == (m < n)"), t1),
   )
 }
 
@@ -31,7 +31,7 @@ fn step_2() -> Unit raise {
     @list.List([@arith.ge(), @realax.real_ge(), @realax.real_of_num_le()]),
   )
   real_of_num_ge_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m >= &n <=> m >= n"), t2),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, (real_of_num(m) >= real_of_num(n)) == (m >= n)"), t2),
   )
 }
 
@@ -51,7 +51,7 @@ fn step_3() -> Unit raise {
     @list.List([@arith.gt(), @realax.real_gt(), real_of_num_lt()]),
   )
   real_of_num_gt_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. &m > &n <=> m > n"), t3),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, (real_of_num(m) > real_of_num(n)) == (m > n)"), t3),
   )
 }
 
@@ -76,7 +76,7 @@ fn step_4() -> Unit raise {
     ]),
   )
   real_of_num_max_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. max (&m) (&n) = &(MAX m n)"), t4),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, max(real_of_num(m), real_of_num(n)) == real_of_num(MAX(m, n))"), t4),
   )
 }
 
@@ -103,7 +103,7 @@ fn step_5() -> Unit raise {
     ]),
   )
   real_of_num_min_c.set(
-    @tactics.prove(@parser.parse_term("forall m n. min (&m) (&n) = &(MIN m n)"), t5),
+    @tactics.prove(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, min(real_of_num(m), real_of_num(n)) == real_of_num(MIN(m, n))"), t5),
   )
 }
 
@@ -125,7 +125,7 @@ fn step_6() -> Unit raise {
     @list.List([@arith.add1(), @realax.real_of_num_add()]),
   )
   real_of_num_suc_c.set(
-    @tactics.prove(@parser.parse_term("forall n. &n + &1 = &(SUC n)"), t6),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, real_of_num(n) + real_of_num(1) == real_of_num(SUC(n))"), t6),
   )
 }
 
@@ -180,7 +180,7 @@ fn step_7() -> Unit raise {
   )
   real_of_num_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. m <= n ==> (&n - &m = &(n - m))"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, m <= n → real_of_num(n) - real_of_num(m) == real_of_num(n - m)"),
       t13,
     ),
   )
@@ -336,7 +336,7 @@ fn step_11() -> Unit raise {
   )
   real_add_rdistrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) * z = x * z + y * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + y) * z == x * z + y * z"),
       t25,
     ),
   )
@@ -363,7 +363,7 @@ fn step_12() -> Unit raise {
       @realax.real_add_lid(),
     ]),
   )
-  let t37 = @parser.parse_term("--x")
+  let t37 = @term_syntax.parse_term("-(x : Real)")
   let t40 = @tactics.disch_then(fn(
     x39 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -517,7 +517,7 @@ fn step_12() -> Unit raise {
     t41,
   )
   real_lt_ladd_imp_c.set(
-    @tactics.prove(@parser.parse_term("forall x y z. y < z ==> x + y < x + z"), t42),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, y < z → x + y < x + z"), t42),
   )
 }
 
@@ -558,7 +558,7 @@ fn step_13() -> Unit raise {
   )
   real_lt_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ &0 < y ==> &0 < x * y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && real_of_num(0) < y → real_of_num(0) < x * y"),
       t48,
     ),
   )
@@ -595,7 +595,7 @@ pub fn real_arith_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 fn step_15() -> Unit raise {
   real_eq_add_lcancel_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x + y = x) <=> (y = &0)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x + y == x) == (y == real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -617,7 +617,7 @@ pub fn real_eq_add_lcancel_0() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   real_eq_add_rcancel_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x + y = y) <=> (x = &0)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x + y == y) == (x == real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -639,7 +639,7 @@ pub fn real_eq_add_rcancel_0() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   real_lneg_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x + y = &0) <=> (x = --y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x + y == real_of_num(0)) == (x == -y)"),
       real_arith_tac,
     ),
   )
@@ -659,7 +659,7 @@ pub fn real_lneg_uniq() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   real_rneg_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x + y = &0) <=> (y = --x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x + y == real_of_num(0)) == (y == -x)"),
       real_arith_tac,
     ),
   )
@@ -679,7 +679,7 @@ pub fn real_rneg_uniq() -> @kernel.Thm {
 fn step_19() -> Unit raise {
   real_neg_lmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. --(x * y) = (--x) * y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, -(x * y) == -x * y"),
       real_arith_tac,
     ),
   )
@@ -699,7 +699,7 @@ pub fn real_neg_lmul() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   real_neg_rmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. --(x * y) = x * (--y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, -(x * y) == x * -y"),
       real_arith_tac,
     ),
   )
@@ -719,7 +719,7 @@ pub fn real_neg_rmul() -> @kernel.Thm {
 fn step_21() -> Unit raise {
   real_neg_mul2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (--x) * (--y) = x * y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, -x * -y == x * y"),
       real_arith_tac,
     ),
   )
@@ -739,7 +739,7 @@ pub fn real_neg_mul2() -> @kernel.Thm {
 fn step_22() -> Unit raise {
   real_lt_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) < (x + z) <=> y < z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + y < x + z) == (y < z)"),
       real_arith_tac,
     ),
   )
@@ -759,7 +759,7 @@ pub fn real_lt_ladd() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   real_lt_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + z) < (y + z) <=> x < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + z < y + z) == (x < y)"),
       real_arith_tac,
     ),
   )
@@ -779,7 +779,7 @@ pub fn real_lt_radd() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   real_lt_antisym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. ~(x < y /\\ y < x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(x < y && y < x)"),
       real_arith_tac,
     ),
   )
@@ -801,7 +801,7 @@ pub fn real_lt_antisym() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   real_lt_gt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x < y ==> ~(y < x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y → !(y < x)"),
       real_arith_tac,
     ),
   )
@@ -821,7 +821,7 @@ pub fn real_lt_gt() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   real_not_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. ~(x = y) <=> x < y \\/ y < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(x == y) == (x < y || y < x)"),
       real_arith_tac,
     ),
   )
@@ -841,7 +841,7 @@ pub fn real_not_eq() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   real_not_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. ~(x <= y) <=> y < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(x <= y) == (y < x)"),
       real_arith_tac,
     ),
   )
@@ -861,7 +861,7 @@ pub fn real_not_le() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   real_let_antisym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. ~(x <= y /\\ y < x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(x <= y && y < x)"),
       real_arith_tac,
     ),
   )
@@ -883,7 +883,7 @@ pub fn real_let_antisym() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   real_neg_lt0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (--x) < &0 <=> &0 < x"),
+      @term_syntax.parse_term("∀ x : Real, (-x < real_of_num(0)) == (real_of_num(0) < x)"),
       real_arith_tac,
     ),
   )
@@ -903,7 +903,7 @@ pub fn real_neg_lt0() -> @kernel.Thm {
 fn step_30() -> Unit raise {
   real_neg_gt0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < (--x) <=> x < &0"),
+      @term_syntax.parse_term("∀ x : Real, (real_of_num(0) < -x) == (x < real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -923,7 +923,7 @@ pub fn real_neg_gt0() -> @kernel.Thm {
 fn step_31() -> Unit raise {
   real_neg_le0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (--x) <= &0 <=> &0 <= x"),
+      @term_syntax.parse_term("∀ x : Real, (-x <= real_of_num(0)) == (real_of_num(0) <= x)"),
       real_arith_tac,
     ),
   )
@@ -943,7 +943,7 @@ pub fn real_neg_le0() -> @kernel.Thm {
 fn step_32() -> Unit raise {
   real_neg_ge0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= (--x) <=> x <= &0"),
+      @term_syntax.parse_term("∀ x : Real, (real_of_num(0) <= -x) == (x <= real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -963,7 +963,7 @@ pub fn real_neg_ge0() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   real_lt_total_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x = y) \\/ x < y \\/ y < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x == y || x < y || y < x"),
       real_arith_tac,
     ),
   )
@@ -983,7 +983,7 @@ pub fn real_lt_total() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   real_lt_negtotal_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (x = &0) \\/ (&0 < x) \\/ (&0 < --x)"),
+      @term_syntax.parse_term("∀ x : Real, x == real_of_num(0) || real_of_num(0) < x || real_of_num(0) < -x"),
       real_arith_tac,
     ),
   )
@@ -1004,7 +1004,7 @@ pub fn real_lt_negtotal() -> @kernel.Thm {
 /// REAL_LE_01
 fn step_35() -> Unit raise {
   real_le_01_c.set(
-    @tactics.prove(@parser.parse_term("&0 <= &1"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("real_of_num(0) <= real_of_num(1)"), real_arith_tac),
   )
 }
 
@@ -1021,7 +1021,7 @@ pub fn real_le_01() -> @kernel.Thm {
 /// REAL_LT_01
 fn step_36() -> Unit raise {
   real_lt_01_c.set(
-    @tactics.prove(@parser.parse_term("&0 < &1"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("real_of_num(0) < real_of_num(1)"), real_arith_tac),
   )
 }
 
@@ -1039,7 +1039,7 @@ pub fn real_lt_01() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   real_le_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) <= (x + z) <=> y <= z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + y <= x + z) == (y <= z)"),
       real_arith_tac,
     ),
   )
@@ -1059,7 +1059,7 @@ pub fn real_le_ladd() -> @kernel.Thm {
 fn step_38() -> Unit raise {
   real_le_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + z) <= (y + z) <=> x <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + z <= y + z) == (x <= y)"),
       real_arith_tac,
     ),
   )
@@ -1079,7 +1079,7 @@ pub fn real_le_radd() -> @kernel.Thm {
 fn step_39() -> Unit raise {
   real_lt_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall w x y z. w < x /\\ y < z ==> (w + y) < (x + z)"),
+      @term_syntax.parse_term("∀ w : Real, ∀ x : Real, ∀ y : Real, ∀ z : Real, w < x && y < z → w + y < x + z"),
       real_arith_tac,
     ),
   )
@@ -1099,7 +1099,7 @@ pub fn real_lt_add2() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   real_le_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall w x y z. w <= x /\\ y <= z ==> (w + y) <= (x + z)"),
+      @term_syntax.parse_term("∀ w : Real, ∀ x : Real, ∀ y : Real, ∀ z : Real, w <= x && y <= z → w + y <= x + z"),
       real_arith_tac,
     ),
   )
@@ -1125,7 +1125,7 @@ fn step_41() -> Unit raise {
     ]),
   )
   real_lt_lneg_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. --x < y <=> &0 < x + y"), t49),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, (-x < y) == (real_of_num(0) < x + y)"), t49),
   )
 }
 
@@ -1149,7 +1149,7 @@ fn step_42() -> Unit raise {
     ]),
   )
   real_lt_rneg_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x < --y <=> x + y < &0"), t50),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x < -y) == (x + y < real_of_num(0))"), t50),
   )
 }
 
@@ -1167,7 +1167,7 @@ pub fn real_lt_rneg() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   real_lt_addneg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. y < (x + (--z)) <=> (y + z) < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (y < x + -z) == (y + z < x)"),
       real_arith_tac,
     ),
   )
@@ -1187,7 +1187,7 @@ pub fn real_lt_addneg() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   real_lt_addneg2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + (--y)) < z <=> x < (z + y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + -y < z) == (x < z + y)"),
       real_arith_tac,
     ),
   )
@@ -1209,7 +1209,7 @@ pub fn real_lt_addneg2() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   real_lt_add1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x <= y ==> x < (y + &1)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x <= y → x < y + real_of_num(1)"),
       real_arith_tac,
     ),
   )
@@ -1228,7 +1228,7 @@ pub fn real_lt_add1() -> @kernel.Thm {
 /// REAL_SUB_ADD
 fn step_46() -> Unit raise {
   real_sub_add_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x - y) + y = x"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, x - y + y == x"), real_arith_tac),
   )
 }
 
@@ -1245,7 +1245,7 @@ pub fn real_sub_add() -> @kernel.Thm {
 /// REAL_SUB_ADD2
 fn step_47() -> Unit raise {
   real_sub_add2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. y + (x - y) = x"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, y + (x - y) == x"), real_arith_tac),
   )
 }
 
@@ -1262,7 +1262,7 @@ pub fn real_sub_add2() -> @kernel.Thm {
 /// REAL_SUB_REFL
 fn step_48() -> Unit raise {
   real_sub_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x - x = &0"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, x - x == real_of_num(0)"), real_arith_tac),
   )
 }
 
@@ -1280,7 +1280,7 @@ pub fn real_sub_refl() -> @kernel.Thm {
 fn step_49() -> Unit raise {
   real_le_double_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x + x <=> &0 <= x"),
+      @term_syntax.parse_term("∀ x : Real, (real_of_num(0) <= x + x) == (real_of_num(0) <= x)"),
       real_arith_tac,
     ),
   )
@@ -1300,7 +1300,7 @@ pub fn real_le_double() -> @kernel.Thm {
 fn step_50() -> Unit raise {
   real_le_negl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (--x <= x) <=> (&0 <= x)"),
+      @term_syntax.parse_term("∀ x : Real, (-x <= x) == (real_of_num(0) <= x)"),
       real_arith_tac,
     ),
   )
@@ -1320,7 +1320,7 @@ pub fn real_le_negl() -> @kernel.Thm {
 fn step_51() -> Unit raise {
   real_le_negr_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (x <= --x) <=> (x <= &0)"),
+      @term_syntax.parse_term("∀ x : Real, (x <= -x) == (x <= real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -1340,7 +1340,7 @@ pub fn real_le_negr() -> @kernel.Thm {
 fn step_52() -> Unit raise {
   real_neg_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (--x = &0) <=> (x = &0)"),
+      @term_syntax.parse_term("∀ x : Real, (-x == real_of_num(0)) == (x == real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -1359,7 +1359,7 @@ pub fn real_neg_eq_0() -> @kernel.Thm {
 /// REAL_ADD_SUB
 fn step_53() -> Unit raise {
   real_add_sub_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. (x + y) - x = y"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, x + y - x == y"), real_arith_tac),
   )
 }
 
@@ -1377,7 +1377,7 @@ pub fn real_add_sub() -> @kernel.Thm {
 fn step_54() -> Unit raise {
   real_neg_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (--x = y) <=> (x = --y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (-x == y) == (x == -y)"),
       real_arith_tac,
     ),
   )
@@ -1396,7 +1396,7 @@ pub fn real_neg_eq() -> @kernel.Thm {
 /// REAL_NEG_MINUS1
 fn step_55() -> Unit raise {
   real_neg_minus1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. --x = (--(&1)) * x"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, -x == -real_of_num(1) * x"), real_arith_tac),
   )
 }
 
@@ -1416,7 +1416,7 @@ pub fn real_neg_minus1() -> @kernel.Thm {
 fn step_56() -> Unit raise {
   real_lt_imp_ne_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x < y ==> ~(x = y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y → !(x == y)"),
       real_arith_tac,
     ),
   )
@@ -1436,7 +1436,7 @@ pub fn real_lt_imp_ne() -> @kernel.Thm {
 fn step_57() -> Unit raise {
   real_le_addr_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x <= x + y <=> &0 <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x <= x + y) == (real_of_num(0) <= y)"),
       real_arith_tac,
     ),
   )
@@ -1456,7 +1456,7 @@ pub fn real_le_addr() -> @kernel.Thm {
 fn step_58() -> Unit raise {
   real_le_addl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. y <= x + y <=> &0 <= x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (y <= x + y) == (real_of_num(0) <= x)"),
       real_arith_tac,
     ),
   )
@@ -1476,7 +1476,7 @@ pub fn real_le_addl() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   real_lt_addr_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x < x + y <=> &0 < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x < x + y) == (real_of_num(0) < y)"),
       real_arith_tac,
     ),
   )
@@ -1496,7 +1496,7 @@ pub fn real_lt_addr() -> @kernel.Thm {
 fn step_60() -> Unit raise {
   real_lt_addl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. y < x + y <=> &0 < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (y < x + y) == (real_of_num(0) < x)"),
       real_arith_tac,
     ),
   )
@@ -1516,7 +1516,7 @@ pub fn real_lt_addl() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   real_sub_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x - y) - x = --y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x - y - x == -y"),
       real_arith_tac,
     ),
   )
@@ -1536,7 +1536,7 @@ pub fn real_sub_sub() -> @kernel.Thm {
 fn step_62() -> Unit raise {
   real_lt_add_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x + y) < z <=> x < (z - y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x + y < z) == (x < z - y)"),
       real_arith_tac,
     ),
   )
@@ -1558,7 +1558,7 @@ pub fn real_lt_add_sub() -> @kernel.Thm {
 fn step_63() -> Unit raise {
   real_lt_sub_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y) < z <=> x < z + y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x - y < z) == (x < z + y)"),
       real_arith_tac,
     ),
   )
@@ -1580,7 +1580,7 @@ pub fn real_lt_sub_radd() -> @kernel.Thm {
 fn step_64() -> Unit raise {
   real_lt_sub_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < (y - z) <=> (x + z) < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x < y - z) == (x + z < y)"),
       real_arith_tac,
     ),
   )
@@ -1602,7 +1602,7 @@ pub fn real_lt_sub_ladd() -> @kernel.Thm {
 fn step_65() -> Unit raise {
   real_le_sub_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x <= (y - z) <=> (x + z) <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x <= y - z) == (x + z <= y)"),
       real_arith_tac,
     ),
   )
@@ -1624,7 +1624,7 @@ pub fn real_le_sub_ladd() -> @kernel.Thm {
 fn step_66() -> Unit raise {
   real_le_sub_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y) <= z <=> x <= z + y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x - y <= z) == (x <= z + y)"),
       real_arith_tac,
     ),
   )
@@ -1646,7 +1646,7 @@ pub fn real_le_sub_radd() -> @kernel.Thm {
 fn step_67() -> Unit raise {
   real_add2_sub2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b c d. (a + b) - (c + d) = (a - c) + (b - d)"),
+      @term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∀ c : Real, ∀ d : Real, a + b - (c + d) == a - c + (b - d)"),
       real_arith_tac,
     ),
   )
@@ -1665,7 +1665,7 @@ pub fn real_add2_sub2() -> @kernel.Thm {
 /// REAL_SUB_LZERO
 fn step_68() -> Unit raise {
   real_sub_lzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 - x = --x"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) - x == -x"), real_arith_tac),
   )
 }
 
@@ -1682,7 +1682,7 @@ pub fn real_sub_lzero() -> @kernel.Thm {
 /// REAL_SUB_RZERO
 fn step_69() -> Unit raise {
   real_sub_rzero_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x - &0 = x"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, x - real_of_num(0) == x"), real_arith_tac),
   )
 }
 
@@ -1700,7 +1700,7 @@ pub fn real_sub_rzero() -> @kernel.Thm {
 fn step_70() -> Unit raise {
   real_let_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall w x y z. w <= x /\\ y < z ==> (w + y) < (x + z)"),
+      @term_syntax.parse_term("∀ w : Real, ∀ x : Real, ∀ y : Real, ∀ z : Real, w <= x && y < z → w + y < x + z"),
       real_arith_tac,
     ),
   )
@@ -1720,7 +1720,7 @@ pub fn real_let_add2() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   real_lte_add2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall w x y z. w < x /\\ y <= z ==> w + y < x + z"),
+      @term_syntax.parse_term("∀ w : Real, ∀ x : Real, ∀ y : Real, ∀ z : Real, w < x && y <= z → w + y < x + z"),
       real_arith_tac,
     ),
   )
@@ -1740,7 +1740,7 @@ pub fn real_lte_add2() -> @kernel.Thm {
 fn step_72() -> Unit raise {
   real_sub_lneg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (--x) - y = --(x + y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, -x - y == -(x + y)"),
       real_arith_tac,
     ),
   )
@@ -1760,7 +1760,7 @@ pub fn real_sub_lneg() -> @kernel.Thm {
 fn step_73() -> Unit raise {
   real_sub_rneg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x - (--y) = x + y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x - -y == x + y"),
       real_arith_tac,
     ),
   )
@@ -1780,7 +1780,7 @@ pub fn real_sub_rneg() -> @kernel.Thm {
 fn step_74() -> Unit raise {
   real_sub_neg2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (--x) - (--y) = y - x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, -x - -y == y - x"),
       real_arith_tac,
     ),
   )
@@ -1800,7 +1800,7 @@ pub fn real_sub_neg2() -> @kernel.Thm {
 fn step_75() -> Unit raise {
   real_sub_triangle_c.set(
     @tactics.prove(
-      @parser.parse_term("forall a b c. (a - b) + (b - c) = a - c"),
+      @term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∀ c : Real, a - b + (b - c) == a - c"),
       real_arith_tac,
     ),
   )
@@ -1822,7 +1822,7 @@ pub fn real_sub_triangle() -> @kernel.Thm {
 fn step_76() -> Unit raise {
   real_eq_sub_ladd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x = y - z) <=> (x + z = y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x == y - z) == (x + z == y)"),
       real_arith_tac,
     ),
   )
@@ -1844,7 +1844,7 @@ pub fn real_eq_sub_ladd() -> @kernel.Thm {
 fn step_77() -> Unit raise {
   real_eq_sub_radd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y = z) <=> (x = z + y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x - y == z) == (x == z + y)"),
       real_arith_tac,
     ),
   )
@@ -1865,7 +1865,7 @@ pub fn real_eq_sub_radd() -> @kernel.Thm {
 /// REAL_SUB_SUB2
 fn step_78() -> Unit raise {
   real_sub_sub2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. x - (x - y) = y"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, x - (x - y) == y"), real_arith_tac),
   )
 }
 
@@ -1883,7 +1883,7 @@ pub fn real_sub_sub2() -> @kernel.Thm {
 fn step_79() -> Unit raise {
   real_add_sub2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x - (x + y) = --y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x - (x + y) == -y"),
       real_arith_tac,
     ),
   )
@@ -1903,7 +1903,7 @@ pub fn real_add_sub2() -> @kernel.Thm {
 fn step_80() -> Unit raise {
   real_eq_imp_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x = y) ==> x <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x == y → x <= y"),
       real_arith_tac,
     ),
   )
@@ -1923,7 +1923,7 @@ pub fn real_eq_imp_le() -> @kernel.Thm {
 fn step_81() -> Unit raise {
   real_lt_imp_nz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < x ==> ~(x = &0)"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) < x → !(x == real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -1943,7 +1943,7 @@ pub fn real_lt_imp_nz() -> @kernel.Thm {
 fn step_82() -> Unit raise {
   real_diffsq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x + y) * (x - y) = (x * x) - (y * y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x + y) * (x - y) == x * x - y * y"),
       real_arith_tac,
     ),
   )
@@ -1963,7 +1963,7 @@ pub fn real_diffsq() -> @kernel.Thm {
 fn step_83() -> Unit raise {
   real_eq_neg2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (--x = --y) <=> (x = y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (-x == -y) == (x == y)"),
       real_arith_tac,
     ),
   )
@@ -1983,7 +1983,7 @@ pub fn real_eq_neg2() -> @kernel.Thm {
 fn step_84() -> Unit raise {
   real_lt_neg2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. --x < --y <=> y < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (-x < -y) == (y < x)"),
       real_arith_tac,
     ),
   )
@@ -2003,7 +2003,7 @@ pub fn real_lt_neg2() -> @kernel.Thm {
 fn step_85() -> Unit raise {
   real_sub_ldistrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x * (y - z) = x * y - x * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, x * (y - z) == x * y - x * z"),
       real_arith_tac,
     ),
   )
@@ -2025,7 +2025,7 @@ pub fn real_sub_ldistrib() -> @kernel.Thm {
 fn step_86() -> Unit raise {
   real_sub_rdistrib_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x - y) * z = x * z - y * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x - y) * z == x * z - y * z"),
       real_arith_tac,
     ),
   )
@@ -2047,7 +2047,7 @@ pub fn real_sub_rdistrib() -> @kernel.Thm {
 fn step_87() -> Unit raise {
   real_abs_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (abs(x) = &0) <=> (x = &0)"),
+      @term_syntax.parse_term("∀ x : Real, (abs(x) == real_of_num(0)) == (x == real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -2066,7 +2066,7 @@ pub fn real_abs_zero() -> @kernel.Thm {
 /// REAL_ABS_0
 fn step_88() -> Unit raise {
   real_abs_0_c.set(
-    @tactics.prove(@parser.parse_term("abs(&0) = &0"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("abs(real_of_num(0)) == real_of_num(0)"), real_arith_tac),
   )
 }
 
@@ -2083,7 +2083,7 @@ pub fn real_abs_0() -> @kernel.Thm {
 /// REAL_ABS_1
 fn step_89() -> Unit raise {
   real_abs_1_c.set(
-    @tactics.prove(@parser.parse_term("abs(&1) = &1"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("abs(real_of_num(1)) == real_of_num(1)"), real_arith_tac),
   )
 }
 
@@ -2101,7 +2101,7 @@ pub fn real_abs_1() -> @kernel.Thm {
 fn step_90() -> Unit raise {
   real_abs_triangle_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x + y) <= abs(x) + abs(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x + y) <= abs(x) + abs(y)"),
       real_arith_tac,
     ),
   )
@@ -2123,7 +2123,7 @@ pub fn real_abs_triangle() -> @kernel.Thm {
 fn step_91() -> Unit raise {
   real_abs_triangle_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z.abs(x) + abs(y - x) <= z ==> abs(y) <= z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, abs(x) + abs(y - x) <= z → abs(y) <= z"),
       real_arith_tac,
     ),
   )
@@ -2145,7 +2145,7 @@ pub fn real_abs_triangle_le() -> @kernel.Thm {
 fn step_92() -> Unit raise {
   real_abs_triangle_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z.abs(x) + abs(y - x) < z ==> abs(y) < z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, abs(x) + abs(y - x) < z → abs(y) < z"),
       real_arith_tac,
     ),
   )
@@ -2166,7 +2166,7 @@ pub fn real_abs_triangle_lt() -> @kernel.Thm {
 /// REAL_ABS_POS
 fn step_93() -> Unit raise {
   real_abs_pos_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= abs(x)"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) <= abs(x)"), real_arith_tac),
   )
 }
 
@@ -2184,7 +2184,7 @@ pub fn real_abs_pos() -> @kernel.Thm {
 fn step_94() -> Unit raise {
   real_abs_sub_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x - y) = abs(y - x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x - y) == abs(y - x)"),
       real_arith_tac,
     ),
   )
@@ -2204,7 +2204,7 @@ pub fn real_abs_sub() -> @kernel.Thm {
 fn step_95() -> Unit raise {
   real_abs_nz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ~(x = &0) <=> &0 < abs(x)"),
+      @term_syntax.parse_term("∀ x : Real, !(x == real_of_num(0)) == (real_of_num(0) < abs(x))"),
       real_arith_tac,
     ),
   )
@@ -2224,7 +2224,7 @@ pub fn real_abs_nz() -> @kernel.Thm {
 fn step_96() -> Unit raise {
   real_abs_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. abs(abs(x)) = abs(x)"),
+      @term_syntax.parse_term("∀ x : Real, abs(abs(x)) == abs(x)"),
       real_arith_tac,
     ),
   )
@@ -2243,7 +2243,7 @@ pub fn real_abs_abs() -> @kernel.Thm {
 /// REAL_ABS_LE
 fn step_97() -> Unit raise {
   real_abs_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x. x <= abs(x)"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, x <= abs(x)"), real_arith_tac),
   )
 }
 
@@ -2261,7 +2261,7 @@ pub fn real_abs_le() -> @kernel.Thm {
 fn step_98() -> Unit raise {
   real_abs_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (abs(x) = x) <=> &0 <= x"),
+      @term_syntax.parse_term("∀ x : Real, (abs(x) == x) == (real_of_num(0) <= x)"),
       real_arith_tac,
     ),
   )
@@ -2305,7 +2305,7 @@ pub fn real_abs_between() -> @kernel.Thm {
 fn step_100() -> Unit raise {
   real_abs_bound_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y d. abs(x - y) < d ==> y < (x + d)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ d : Real, abs(x - y) < d → y < x + d"),
       real_arith_tac,
     ),
   )
@@ -2325,7 +2325,7 @@ pub fn real_abs_bound() -> @kernel.Thm {
 fn step_101() -> Unit raise {
   real_abs_stillnz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x - y) < abs(y) ==> ~(x = &0)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x - y) < abs(y) → !(x == real_of_num(0))"),
       real_arith_tac,
     ),
   )
@@ -2347,7 +2347,7 @@ pub fn real_abs_stillnz() -> @kernel.Thm {
 fn step_102() -> Unit raise {
   real_abs_cases_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. (x = &0) \\/ &0 < abs(x)"),
+      @term_syntax.parse_term("∀ x : Real, x == real_of_num(0) || real_of_num(0) < abs(x)"),
       real_arith_tac,
     ),
   )
@@ -2367,7 +2367,7 @@ pub fn real_abs_cases() -> @kernel.Thm {
 fn step_103() -> Unit raise {
   real_abs_between1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < z /\\ (abs(y - x)) < (z - x) ==> y < z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, x < z && abs(y - x) < z - x → y < z"),
       real_arith_tac,
     ),
   )
@@ -2389,7 +2389,7 @@ pub fn real_abs_between1() -> @kernel.Thm {
 fn step_104() -> Unit raise {
   real_abs_sign_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x - y) < y ==> &0 < x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x - y) < y → real_of_num(0) < x"),
       real_arith_tac,
     ),
   )
@@ -2409,7 +2409,7 @@ pub fn real_abs_sign() -> @kernel.Thm {
 fn step_105() -> Unit raise {
   real_abs_sign2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x - y) < --y ==> x < &0"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x - y) < -y → x < real_of_num(0)"),
       real_arith_tac,
     ),
   )
@@ -2453,7 +2453,7 @@ pub fn real_abs_circle() -> @kernel.Thm {
 fn step_107() -> Unit raise {
   real_sub_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (abs(x) - abs(y)) <= abs(x - y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x) - abs(y) <= abs(x - y)"),
       real_arith_tac,
     ),
   )
@@ -2473,7 +2473,7 @@ pub fn real_sub_abs() -> @kernel.Thm {
 fn step_108() -> Unit raise {
   real_abs_sub_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(abs(x) - abs(y)) <= abs(x - y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(abs(x) - abs(y)) <= abs(x - y)"),
       real_arith_tac,
     ),
   )
@@ -2519,7 +2519,7 @@ pub fn real_abs_between2() -> @kernel.Thm {
 fn step_110() -> Unit raise {
   real_abs_bounds_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x k. abs(x) <= k <=> --k <= x /\\ x <= k"),
+      @term_syntax.parse_term("∀ x : Real, ∀ k : Real, (abs(x) <= k) == (-k <= x && x <= k)"),
       real_arith_tac,
     ),
   )
@@ -2541,7 +2541,7 @@ pub fn real_abs_bounds() -> @kernel.Thm {
 fn step_111() -> Unit raise {
   real_bounds_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x k. --k <= x /\\ x <= k <=> abs(x) <= k"),
+      @term_syntax.parse_term("∀ x : Real, ∀ k : Real, (-k <= x && x <= k) == (abs(x) <= k)"),
       real_arith_tac,
     ),
   )
@@ -2561,7 +2561,7 @@ pub fn real_bounds_le() -> @kernel.Thm {
 fn step_112() -> Unit raise {
   real_bounds_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x k. --k < x /\\ x < k <=> abs(x) < k"),
+      @term_syntax.parse_term("∀ x : Real, ∀ k : Real, (-k < x && x < k) == (abs(x) < k)"),
       real_arith_tac,
     ),
   )
@@ -2581,7 +2581,7 @@ pub fn real_bounds_lt() -> @kernel.Thm {
 fn step_113() -> Unit raise {
   real_min_max_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. min x y = --(max (--x) (--y))"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, min(x, y) == -max(-x, -y)"),
       real_arith_tac,
     ),
   )
@@ -2601,7 +2601,7 @@ pub fn real_min_max() -> @kernel.Thm {
 fn step_114() -> Unit raise {
   real_max_min_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. max x y = --(min (--x) (--y))"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, max(x, y) == -min(-x, -y)"),
       real_arith_tac,
     ),
   )
@@ -2621,7 +2621,7 @@ pub fn real_max_min() -> @kernel.Thm {
 fn step_115() -> Unit raise {
   real_max_max_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x <= max x y /\\ y <= max x y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x <= max(x, y) && y <= max(x, y)"),
       real_arith_tac,
     ),
   )
@@ -2641,7 +2641,7 @@ pub fn real_max_max() -> @kernel.Thm {
 fn step_116() -> Unit raise {
   real_min_min_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. min x y <= x /\\ min x y <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, min(x, y) <= x && min(x, y) <= y"),
       real_arith_tac,
     ),
   )
@@ -2661,7 +2661,7 @@ pub fn real_min_min() -> @kernel.Thm {
 fn step_117() -> Unit raise {
   real_max_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. max x y = max y x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, max(x, y) == max(y, x)"),
       real_arith_tac,
     ),
   )
@@ -2681,7 +2681,7 @@ pub fn real_max_sym() -> @kernel.Thm {
 fn step_118() -> Unit raise {
   real_min_sym_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. min x y = min y x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, min(x, y) == min(y, x)"),
       real_arith_tac,
     ),
   )
@@ -2701,7 +2701,7 @@ pub fn real_min_sym() -> @kernel.Thm {
 fn step_119() -> Unit raise {
   real_le_max_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. z <= max x y <=> z <= x \\/ z <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (z <= max(x, y)) == (z <= x || z <= y)"),
       real_arith_tac,
     ),
   )
@@ -2721,7 +2721,7 @@ pub fn real_le_max() -> @kernel.Thm {
 fn step_120() -> Unit raise {
   real_le_min_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. z <= min x y <=> z <= x /\\ z <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (z <= min(x, y)) == (z <= x && z <= y)"),
       real_arith_tac,
     ),
   )
@@ -2741,7 +2741,7 @@ pub fn real_le_min() -> @kernel.Thm {
 fn step_121() -> Unit raise {
   real_lt_max_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. z < max x y <=> z < x \\/ z < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (z < max(x, y)) == (z < x || z < y)"),
       real_arith_tac,
     ),
   )
@@ -2761,7 +2761,7 @@ pub fn real_lt_max() -> @kernel.Thm {
 fn step_122() -> Unit raise {
   real_lt_min_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. z < min x y <=> z < x /\\ z < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (z < min(x, y)) == (z < x && z < y)"),
       real_arith_tac,
     ),
   )
@@ -2781,7 +2781,7 @@ pub fn real_lt_min() -> @kernel.Thm {
 fn step_123() -> Unit raise {
   real_max_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. max x y <= z <=> x <= z /\\ y <= z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (max(x, y) <= z) == (x <= z && y <= z)"),
       real_arith_tac,
     ),
   )
@@ -2801,7 +2801,7 @@ pub fn real_max_le() -> @kernel.Thm {
 fn step_124() -> Unit raise {
   real_min_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. min x y <= z <=> x <= z \\/ y <= z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (min(x, y) <= z) == (x <= z || y <= z)"),
       real_arith_tac,
     ),
   )
@@ -2821,7 +2821,7 @@ pub fn real_min_le() -> @kernel.Thm {
 fn step_125() -> Unit raise {
   real_max_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. max x y < z <=> x < z /\\ y < z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (max(x, y) < z) == (x < z && y < z)"),
       real_arith_tac,
     ),
   )
@@ -2841,7 +2841,7 @@ pub fn real_max_lt() -> @kernel.Thm {
 fn step_126() -> Unit raise {
   real_min_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. min x y < z <=> x < z \\/ y < z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (min(x, y) < z) == (x < z || y < z)"),
       real_arith_tac,
     ),
   )
@@ -2861,7 +2861,7 @@ pub fn real_min_lt() -> @kernel.Thm {
 fn step_127() -> Unit raise {
   real_max_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. max x (max y z) = max (max x y) z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, max(x, max(y, z)) == max(max(x, y), z)"),
       real_arith_tac,
     ),
   )
@@ -2881,7 +2881,7 @@ pub fn real_max_assoc() -> @kernel.Thm {
 fn step_128() -> Unit raise {
   real_min_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. min x (min y z) = min (min x y) z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, min(x, min(y, z)) == min(min(x, y), z)"),
       real_arith_tac,
     ),
   )
@@ -3175,7 +3175,7 @@ fn step_133() -> Unit raise {
   ])
   let t72 = @tactics.thenl(
     @tactics.disj_cases_tac(
-      @bool.spec(@parser.parse_term("y:real"), @realarith.real_le_negtotal()),
+      @bool.spec(@term_syntax.parse_term("(y : Real)"), @realarith.real_le_negtotal()),
     ),
     t71,
   )
@@ -3203,7 +3203,7 @@ fn step_133() -> Unit raise {
     ),
   ])
   let t55 = @tactics.disj_cases_tac(
-    @bool.spec(@parser.parse_term("x:real"), @realarith.real_le_negtotal()),
+    @bool.spec(@term_syntax.parse_term("(x : Real)"), @realarith.real_le_negtotal()),
   )
   let t93 = @tactics.then_tac(
     @tactics.thenl(
@@ -3229,7 +3229,7 @@ fn step_133() -> Unit raise {
   )
   real_abs_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x * y) = abs(x) * abs(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x * y) == abs(x) * abs(y)"),
       t93,
     ),
   )
@@ -3252,8 +3252,8 @@ fn step_134() -> Unit raise {
   let t96 = @simp.rewrite_tac(
     @list.List([@realax.real_pow(), @realarith.real_pos()]),
   )
-  let t94 = @parser.parse_term("n:num")
-  let t95 = @tactics.spec_tac(@parser.parse_term("n:num"), t94)
+  let t94 = @term_syntax.parse_term("(n : Num)")
+  let t95 = @tactics.spec_tac(@term_syntax.parse_term("(n : Num)"), t94)
   let t99 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3268,7 +3268,7 @@ fn step_134() -> Unit raise {
     t98,
   )
   real_pow_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x n. &0 <= x ==> &0 <= x pow n"), t99),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ n : Num, real_of_num(0) <= x → real_of_num(0) <= pow(x, n)"), t99),
   )
 }
 
@@ -3287,8 +3287,8 @@ fn step_135() -> Unit raise {
   let t104 = @simp.asm_rewrite_tac(@list.List([]))
   let t103 = @tactics.match_mp_tac(real_lt_mul())
   let t102 = @simp.rewrite_tac(@list.List([@realax.real_pow(), real_lt_01()]))
-  let t100 = @parser.parse_term("n:num")
-  let t101 = @tactics.spec_tac(@parser.parse_term("n:num"), t100)
+  let t100 = @term_syntax.parse_term("(n : Num)")
+  let t101 = @tactics.spec_tac(@term_syntax.parse_term("(n : Num)"), t100)
   let t105 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3303,7 +3303,7 @@ fn step_135() -> Unit raise {
     t104,
   )
   real_pow_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall x n. &0 < x ==> &0 < x pow n"), t105),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ n : Num, real_of_num(0) < x → real_of_num(0) < pow(x, n)"), t105),
   )
 }
 
@@ -3328,7 +3328,7 @@ fn step_136() -> Unit raise {
   )
   real_abs_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. abs(x pow n) = abs(x) pow n"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, abs(pow(x, n)) == pow(abs(x), n)"),
       t107,
     ),
   )
@@ -3356,14 +3356,14 @@ fn step_137() -> Unit raise {
   let t109 = @tactics.then_tac(
     @simp.once_rewrite_tac(
       @list.List([
-        @realarith.real_arith(@parser.parse_term("x <= y <=> &0 <= y - x")),
+        @realarith.real_arith(@term_syntax.parse_term("((x : Real) <= (y : Real)) == (real_of_num(0) <= y - x)")),
       ]),
     ),
     t108,
   )
   real_le_lmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 <= x /\\ y <= z ==> x * y <= x * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) <= x && y <= z → x * y <= x * z"),
       t109,
     ),
   )
@@ -3386,7 +3386,7 @@ fn step_138() -> Unit raise {
   )
   real_le_rmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x <= y /\\ &0 <= z ==> x * z <= y * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, x <= y && real_of_num(0) <= z → x * z <= y * z"),
       t110,
     ),
   )
@@ -3414,14 +3414,14 @@ fn step_139() -> Unit raise {
   let t112 = @tactics.then_tac(
     @simp.once_rewrite_tac(
       @list.List([
-        @realarith.real_arith(@parser.parse_term("x < y <=> &0 < y - x")),
+        @realarith.real_arith(@term_syntax.parse_term("((x : Real) < (y : Real)) == (real_of_num(0) < y - x)")),
       ]),
     ),
     t111,
   )
   real_lt_lmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x /\\ y < z ==> x * y < x * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < x && y < z → x * y < x * z"),
       t112,
     ),
   )
@@ -3444,7 +3444,7 @@ fn step_140() -> Unit raise {
   )
   real_lt_rmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. x < y /\\ &0 < z ==> x * z < y * z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, x < y && real_of_num(0) < z → x * z < y * z"),
       t113,
     ),
   )
@@ -3471,7 +3471,7 @@ fn step_141() -> Unit raise {
   )
   let t114 = @simp.once_rewrite_tac(
     @list.List([
-      @realarith.real_arith(@parser.parse_term("(x = y) <=> (x - y = &0)")),
+      @realarith.real_arith(@term_syntax.parse_term("((x : Real) == (y : Real)) == (x - y == real_of_num(0))")),
     ]),
   )
   let t116 = @tactics.then_tac(
@@ -3480,7 +3480,7 @@ fn step_141() -> Unit raise {
   )
   real_eq_mul_lcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x * y = x * z) <=> (x = &0) \\/ (y = z)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x * y == x * z) == (x == real_of_num(0) || y == z)"),
       t116,
     ),
   )
@@ -3511,7 +3511,7 @@ fn step_142() -> Unit raise {
   )
   real_eq_mul_rcancel_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. (x * z = y * z) <=> (x = y) \\/ (z = &0)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, (x * z == y * z) == (x == y || z == real_of_num(0))"),
       t119,
     ),
   )
@@ -3698,7 +3698,7 @@ fn step_143() -> Unit raise {
       @calc_num.arith_eq(),
     ]),
   )
-  let t120 = @class.asm_cases_tac(@parser.parse_term("y = &0"))
+  let t120 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Real) == real_of_num(0)"))
   let t135 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3714,7 +3714,7 @@ fn step_143() -> Unit raise {
   )
   real_mul_linv_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x * y = &1) ==> (inv(y) = x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x * y == real_of_num(1) → inv(y) == x"),
       t135,
     ),
   )
@@ -3741,7 +3741,7 @@ fn step_144() -> Unit raise {
   )
   real_mul_rinv_uniq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. (x * y = &1) ==> (inv(x) = y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x * y == real_of_num(1) → inv(x) == y"),
       t137,
     ),
   )
@@ -3771,7 +3771,7 @@ fn step_145() -> Unit raise {
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.gen_tac,
-            @class.asm_cases_tac(@parser.parse_term("x = &0")),
+            @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)")),
           ),
           t138,
         ),
@@ -3782,7 +3782,7 @@ fn step_145() -> Unit raise {
     t141,
   )
   real_inv_inv_c.set(
-    @tactics.prove(@parser.parse_term("forall x. inv(inv x) = x"), t142),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, inv(inv(x)) == x"), t142),
   )
 }
 
@@ -3800,7 +3800,7 @@ pub fn real_inv_inv() -> @kernel.Thm {
 fn step_146() -> Unit raise {
   let t143 = @meson.meson_tac(@list.List([real_inv_inv()]))
   real_eq_inv2_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. inv(x) = inv(y) <=> x = y"), t143),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, (inv(x) == inv(y)) == (x == y)"), t143),
   )
 }
 
@@ -3833,7 +3833,7 @@ fn step_147() -> Unit raise {
     t146,
   )
   real_inv_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. inv(x) = &0 <=> x = &0"), t147),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (inv(x) == real_of_num(0)) == (x == real_of_num(0))"), t147),
   )
 }
 
@@ -3857,7 +3857,7 @@ fn step_148() -> Unit raise {
       @calc_num.arith(),
     ]),
   )
-  let t166 = @tactics.undisch_tac(@parser.parse_term("&0 < x"))
+  let t166 = @tactics.undisch_tac(@term_syntax.parse_term("real_of_num(0) < (x : Real)"))
   let t168 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@realax.real_mul_linv()), t166),
@@ -3865,7 +3865,7 @@ fn step_148() -> Unit raise {
     ),
     t167,
   ])
-  let t165 = @tactics.subgoal_then(@parser.parse_term("inv(x) * x = &1"), fn(
+  let t165 = @tactics.subgoal_then(@term_syntax.parse_term("inv((x : Real)) * x == real_of_num(1)"), fn(
     x162 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -3920,7 +3920,7 @@ fn step_148() -> Unit raise {
   let t160 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.disch_tac,
-      @tactics.subgoal_then(@parser.parse_term("&0 < --(inv x) * x"), fn(
+      @tactics.subgoal_then(@term_syntax.parse_term("real_of_num(0) < -inv((x : Real)) * x"), fn(
         x154 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
@@ -3978,7 +3978,7 @@ fn step_148() -> Unit raise {
     t160,
   ])
   let t152 = @simp.asm_rewrite_tac(@list.List([]))
-  let t151 = @bool.spec(@parser.parse_term("inv(x)"), real_lt_negtotal())
+  let t151 = @bool.spec(@term_syntax.parse_term("inv((x : Real))"), real_lt_negtotal())
   let t169 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.thenl(
@@ -4041,7 +4041,7 @@ fn step_148() -> Unit raise {
     t168,
   )
   real_lt_inv_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < x ==> &0 < inv(x)"), t169),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) < x → real_of_num(0) < inv(x)"), t169),
   )
 }
 
@@ -4085,7 +4085,7 @@ fn step_149() -> Unit raise {
     t176,
   )
   real_lt_inv_eq_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < inv x <=> &0 < x"), t177),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) < inv(x)) == (real_of_num(0) < x)"), t177),
   )
 }
 
@@ -4121,7 +4121,7 @@ fn step_150() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.gen_tac,
-              @class.asm_cases_tac(@parser.parse_term("x = &0")),
+              @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)")),
             ),
             t178,
           ),
@@ -4134,7 +4134,7 @@ fn step_150() -> Unit raise {
     t182,
   )
   real_inv_neg_c.set(
-    @tactics.prove(@parser.parse_term("forall x. inv(--x) = --(inv x)"), t183),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, inv(-x) == -inv(x)"), t183),
   )
 }
 
@@ -4158,7 +4158,7 @@ fn step_151() -> Unit raise {
     t184,
   )
   real_le_inv_eq_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= inv x <=> &0 <= x"), t185),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) <= inv(x)) == (real_of_num(0) <= x)"), t185),
   )
 }
 
@@ -4176,7 +4176,7 @@ pub fn real_le_inv_eq() -> @kernel.Thm {
 fn step_152() -> Unit raise {
   let t186 = @simp.rewrite_tac(@list.List([real_le_inv_eq()]))
   real_le_inv_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x ==> &0 <= inv(x)"), t186),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) <= x → real_of_num(0) <= inv(x)"), t186),
   )
 }
 
@@ -4199,7 +4199,7 @@ fn step_153() -> Unit raise {
   )
   real_mul_rinv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. ~(x = &0) ==> (x * inv(x) = &1)"),
+      @term_syntax.parse_term("∀ x : Real, !(x == real_of_num(0)) → x * inv(x) == real_of_num(1)"),
       t188,
     ),
   )
@@ -4222,7 +4222,7 @@ fn step_154() -> Unit raise {
     @tactics.match_mp_tac(real_mul_rinv_uniq()),
     t189,
   )
-  real_inv_1_c.set(@tactics.prove(@parser.parse_term("inv(&1) = &1"), t190))
+  real_inv_1_c.set(@tactics.prove(@term_syntax.parse_term("inv(real_of_num(1)) == real_of_num(1)"), t190))
 }
 
 ///|
@@ -4239,7 +4239,7 @@ pub fn real_inv_1() -> @kernel.Thm {
 fn step_155() -> Unit raise {
   let t191 = @meson.meson_tac(@list.List([real_inv_inv(), real_inv_1()]))
   real_inv_eq_1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. inv(x) = &1 <=> x = &1"), t191),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (inv(x) == real_of_num(1)) == (x == real_of_num(1))"), t191),
   )
 }
 
@@ -4258,7 +4258,7 @@ fn step_156() -> Unit raise {
   let t192 = @simp.rewrite_tac(
     @list.List([@realax.real_div(), real_inv_1(), @realarith.real_mul_rid()]),
   )
-  real_div_1_c.set(@tactics.prove(@parser.parse_term("forall x. x / &1 = x"), t192))
+  real_div_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, x / real_of_num(1) == x"), t192))
 }
 
 ///|
@@ -4278,7 +4278,7 @@ fn step_157() -> Unit raise {
     @simp.rewrite_tac(@list.List([@realax.real_div(), real_mul_rinv()])),
   )
   real_div_refl_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ~(x = &0) ==> (x / x = &1)"), t193),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, !(x == real_of_num(0)) → x / x == real_of_num(1)"), t193),
   )
 }
 
@@ -4304,7 +4304,7 @@ fn step_158() -> Unit raise {
   )
   real_div_rmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. ~(y = &0) ==> ((x / y) * y = x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(y == real_of_num(0)) → x / y * y == x"),
       t194,
     ),
   )
@@ -4329,7 +4329,7 @@ fn step_159() -> Unit raise {
   )
   real_div_lmul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. ~(y = &0) ==> (y * (x / y) = x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, !(y == real_of_num(0)) → y * (x / y) == x"),
       t196,
     ),
   )
@@ -4350,7 +4350,7 @@ fn step_160() -> Unit raise {
   let t211 = @simp.asm_simp_tac(
     @list.List([real_div_lmul(), @realarith.real_mul_rid()]),
   )
-  let t207 = @parser.parse_term("( * ) (y:real)")
+  let t207 = @term_syntax.parse_term("op_star((y : Real))")
   let t210 = @tactics.disch_then(fn(
     x209 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4428,9 +4428,9 @@ fn step_160() -> Unit raise {
   let t201 = @simp.asm_rewrite_tac(
     @list.List([@realax.real_inv_0(), @calc_int.real_mul_rzero()]),
   )
-  let t200 = @class.asm_cases_tac(@parser.parse_term("y = &0"))
+  let t200 = @class.asm_cases_tac(@term_syntax.parse_term("(y : Real) == real_of_num(0)"))
   let t199 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_mul_lzero()]))
-  let t198 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
+  let t198 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)"))
   let t197 = @simp.rewrite_tac(@list.List([@realax.real_div()]))
   let t212 = @tactics.then_tac(
     @tactics.then_tac(
@@ -4560,7 +4560,7 @@ fn step_161() -> Unit raise {
   let t214 = @simp.asm_rewrite_tac(
     @list.List([@realax.real_inv_0(), real_abs_0()]),
   )
-  let t213 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
+  let t213 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)"))
   let t224 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -4584,7 +4584,7 @@ fn step_161() -> Unit raise {
     t223,
   )
   real_abs_inv_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(inv x) = inv(abs x)"), t224),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, abs(inv(x)) == inv(abs(x))"), t224),
   )
 }
 
@@ -4605,7 +4605,7 @@ fn step_162() -> Unit raise {
   )
   real_abs_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x / y) = abs(x) / abs(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(x / y) == abs(x) / abs(y)"),
       t225,
     ),
   )
@@ -4693,7 +4693,7 @@ fn step_163() -> Unit raise {
       }
     })(t235(x236))
   })
-  let t230 = @parser.parse_term("(a * b) * (c * d) = (a * c) * (b * d)")
+  let t230 = @term_syntax.parse_term("(a : Real) * (b : Real) * ((c : Real) * (d : Real)) == a * c * (b * d)")
   let t231 = @simp.once_rewrite_tac(
     @list.List([@theorems.ac(real_mul_ac())(t230)]),
   )
@@ -4705,10 +4705,10 @@ fn step_163() -> Unit raise {
       @calc_int.real_mul_rzero(),
     ]),
   )
-  let t226 = @parser.parse_term("y = &0")
+  let t226 = @term_syntax.parse_term("(y : Real) == real_of_num(0)")
   let t227 = @tactics.map_every(
     @class.asm_cases_tac,
-    @list.List([@parser.parse_term("x = &0"), t226]),
+    @list.List([@term_syntax.parse_term("(x : Real) == real_of_num(0)"), t226]),
   )
   let t239 = @tactics.then_tac(
     @tactics.then_tac(
@@ -4728,7 +4728,7 @@ fn step_163() -> Unit raise {
   )
   real_inv_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. inv(x * y) = inv(x) * inv(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, inv(x * y) == inv(x) * inv(y)"),
       t239,
     ),
   )
@@ -4754,7 +4754,7 @@ fn step_164() -> Unit raise {
     t240,
   )
   real_inv_div_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. inv(x / y) = y / x"), t241),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, inv(x / y) == y / x"), t241),
   )
 }
 
@@ -4782,7 +4782,7 @@ fn step_165() -> Unit raise {
   )
   real_pow_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y n. (x * y) pow n = (x pow n) * (y pow n)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ n : Num, pow(x * y, n) == pow(x, n) * pow(y, n)"),
       t243,
     ),
   )
@@ -4809,7 +4809,7 @@ fn step_166() -> Unit raise {
   )
   real_pow_inv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. (inv x) pow n = inv(x pow n)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, pow(inv(x), n) == inv(pow(x, n))"),
       t245,
     ),
   )
@@ -4830,7 +4830,7 @@ fn step_167() -> Unit raise {
   let t246 = @simp.rewrite_tac(@list.List([real_pow_inv()]))
   real_inv_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. inv(x pow n) = (inv x) pow n"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, inv(pow(x, n)) == pow(inv(x), n)"),
       t246,
     ),
   )
@@ -4853,7 +4853,7 @@ fn step_168() -> Unit raise {
   )
   real_pow_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y n. (x / y) pow n = (x pow n) / (y pow n)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ n : Num, pow(x / y, n) == pow(x, n) / pow(y, n)"),
       t247,
     ),
   )
@@ -4876,7 +4876,7 @@ fn step_169() -> Unit raise {
   )
   real_div_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x / y = &0 <=> x = &0 \\/ y = &0"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (x / y == real_of_num(0)) == (x == real_of_num(0) || y == real_of_num(0))"),
       t248,
     ),
   )
@@ -4908,7 +4908,7 @@ fn step_170() -> Unit raise {
   )
   real_pow_add_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x m n. x pow (m + n) = x pow m * x pow n"),
+      @term_syntax.parse_term("∀ x : Real, ∀ m : Num, ∀ n : Num, pow(x, m + n) == pow(x, m) * pow(x, n)"),
       t250,
     ),
   )
@@ -4939,7 +4939,7 @@ fn step_171() -> Unit raise {
   )
   real_pow_nz_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. ~(x = &0) ==> ~(x pow n = &0)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, !(x == real_of_num(0)) → !(pow(x, n) == real_of_num(0))"),
       t253,
     ),
   )
@@ -5518,7 +5518,7 @@ fn step_173() -> Unit raise {
   )
   real_lt_lcancel_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x /\\ x * y < x * z ==> y < z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < x && x * y < x * z → y < z"),
       t311,
     ),
   )
@@ -5545,7 +5545,7 @@ fn step_174() -> Unit raise {
   )
   real_lt_rcancel_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z /\\ x * z < y * z ==> x < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z && x * z < y * z → x < y"),
       t313,
     ),
   )
@@ -5566,11 +5566,11 @@ pub fn real_lt_rcancel_imp() -> @kernel.Thm {
 /// REAL_LE_LCANCEL_IMP
 fn step_175() -> Unit raise {
   let t320 = @simp.asm_rewrite_tac(@list.List([]))
-  let t319 = @tactics.exists_tac(@parser.parse_term("x:real"))
+  let t319 = @tactics.exists_tac(@term_syntax.parse_term("(x : Real)"))
   let t318 = @tactics.match_mp_tac(real_lt_lcancel_imp())
   let t317 = @simp.asm_rewrite_tac(@list.List([]))
   let t316 = @simp.asm_rewrite_tac(@list.List([@realarith.real_lt_refl()]))
-  let t315 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
+  let t315 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)"))
   let t314 = @simp.rewrite_tac(
     @list.List([@realarith.real_le_lt(), real_eq_mul_lcancel()]),
   )
@@ -5601,7 +5601,7 @@ fn step_175() -> Unit raise {
   )
   real_le_lcancel_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < x /\\ x * y <= x * z ==> y <= z"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < x && x * y <= x * z → y <= z"),
       t321,
     ),
   )
@@ -5628,7 +5628,7 @@ fn step_176() -> Unit raise {
   )
   real_le_rcancel_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z /\\ x * z <= y * z ==> x <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z && x * z <= y * z → x <= y"),
       t323,
     ),
   )
@@ -5657,7 +5657,7 @@ fn step_177() -> Unit raise {
   )
   real_le_rmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x * z <= y * z <=> x <= y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x * z <= y * z) == (x <= y)"),
       t324,
     ),
   )
@@ -5682,7 +5682,7 @@ fn step_178() -> Unit raise {
   )
   real_le_lmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (z * x <= z * y <=> x <= y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (z * x <= z * y) == (x <= y)"),
       t325,
     ),
   )
@@ -5707,7 +5707,7 @@ fn step_179() -> Unit raise {
   )
   real_lt_rmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x * z < y * z <=> x < y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x * z < y * z) == (x < y)"),
       t326,
     ),
   )
@@ -5732,7 +5732,7 @@ fn step_180() -> Unit raise {
   )
   real_lt_lmul_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (z * x < z * y <=> x < y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (z * x < z * y) == (x < y)"),
       t327,
     ),
   )
@@ -5963,10 +5963,10 @@ fn step_183() -> Unit raise {
     ]),
   )
   let t331 = @tactics.strip_assume_tac(
-    @bool.spec(@parser.parse_term("y:real"), real_lt_negtotal()),
+    @bool.spec(@term_syntax.parse_term("(y : Real)"), real_lt_negtotal()),
   )
   let t330 = @tactics.strip_assume_tac(
-    @bool.spec(@parser.parse_term("x:real"), real_lt_negtotal()),
+    @bool.spec(@term_syntax.parse_term("(x : Real)"), real_lt_negtotal()),
   )
   let t345 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6016,7 +6016,7 @@ fn step_184() -> Unit raise {
       @simp.rewrite_tac(
         @list.List([
           @realarith.real_arith(
-            @parser.parse_term("&0 <= x <=> x = &0 \\/ &0 < x"),
+            @term_syntax.parse_term("(real_of_num(0) <= (x : Real)) == (x == real_of_num(0) || real_of_num(0) < x)"),
           ),
         ]),
       ),
@@ -6095,7 +6095,7 @@ fn step_185() -> Unit raise {
   )
   real_le_rdiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x <= y / z <=> x * z <= y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x <= y / z) == (x * z <= y)"),
       t355,
     ),
   )
@@ -6162,7 +6162,7 @@ fn step_186() -> Unit raise {
   )
   real_le_ldiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x / z <= y <=> x <= y * z)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x / z <= y) == (x <= y * z)"),
       t363,
     ),
   )
@@ -6187,7 +6187,7 @@ fn step_187() -> Unit raise {
   )
   real_lt_rdiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x < y / z <=> x * z < y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x < y / z) == (x * z < y)"),
       t364,
     ),
   )
@@ -6212,7 +6212,7 @@ fn step_188() -> Unit raise {
   )
   real_lt_ldiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x / z < y <=> x < y * z)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x / z < y) == (x < y * z)"),
       t365,
     ),
   )
@@ -6239,7 +6239,7 @@ fn step_189() -> Unit raise {
   )
   real_eq_rdiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> ((x = y / z) <=> (x * z = y))"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x == y / z) == (x * z == y)"),
       t367,
     ),
   )
@@ -6266,7 +6266,7 @@ fn step_190() -> Unit raise {
   )
   real_eq_ldiv_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> ((x / z = y) <=> (x = y * z))"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x / z == y) == (x == y * z)"),
       t369,
     ),
   )
@@ -6291,7 +6291,7 @@ fn step_191() -> Unit raise {
   )
   real_lt_div2_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x / z < y / z <=> x < y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x / z < y / z) == (x < y)"),
       t370,
     ),
   )
@@ -6316,7 +6316,7 @@ fn step_192() -> Unit raise {
   )
   real_le_div2_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. &0 < z ==> (x / z <= y / z <=> x <= y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, real_of_num(0) < z → (x / z <= y / z) == (x <= y)"),
       t371,
     ),
   )
@@ -6337,7 +6337,7 @@ pub fn real_le_div2_eq() -> @kernel.Thm {
 /// REAL_MUL_2
 fn step_193() -> Unit raise {
   real_mul_2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &2 * x = x + x"), real_arith_tac),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(2) * x == x + x"), real_arith_tac),
   )
 }
 
@@ -6366,7 +6366,7 @@ fn step_194() -> Unit raise {
   )
   real_pow_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. (x pow n = &0) <=> (x = &0) /\\ ~(n = 0)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, (pow(x, n) == real_of_num(0)) == (x == real_of_num(0) && !(n == 0))"),
       t374,
     ),
   )
@@ -6385,12 +6385,12 @@ pub fn real_pow_eq_0() -> @kernel.Thm {
 /// REAL_LE_MUL2
 fn step_195() -> Unit raise {
   let t382 = @simp.asm_rewrite_tac(@list.List([]))
-  let t381 = @tactics.exists_tac(@parser.parse_term("y:real"))
+  let t381 = @tactics.exists_tac(@term_syntax.parse_term("(y : Real)"))
   let t380 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t379 = @simp.asm_rewrite_tac(@list.List([]))
   let t377 = @tactics.match_mp_tac(real_le_rmul())
   let t378 = @list.List([@tactics.match_mp_tac(real_le_lmul()), t377])
-  let t376 = @tactics.exists_tac(@parser.parse_term("w * z"))
+  let t376 = @tactics.exists_tac(@term_syntax.parse_term("(w : Real) * (z : Real)"))
   let t375 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t383 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6437,7 +6437,7 @@ pub fn real_le_mul2() -> @kernel.Thm {
 /// REAL_LT_MUL2
 fn step_196() -> Unit raise {
   let t391 = @simp.asm_rewrite_tac(@list.List([]))
-  let t390 = @tactics.exists_tac(@parser.parse_term("y:real"))
+  let t390 = @tactics.exists_tac(@term_syntax.parse_term("(y : Real)"))
   let t392 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@realarith.real_let_trans()), t390),
     t391,
@@ -6450,7 +6450,7 @@ fn step_196() -> Unit raise {
   let t388 = @simp.asm_rewrite_tac(@list.List([]))
   let t386 = @tactics.match_mp_tac(real_lt_rmul())
   let t387 = @list.List([@tactics.match_mp_tac(real_le_lmul()), t386])
-  let t385 = @tactics.exists_tac(@parser.parse_term("w * z"))
+  let t385 = @tactics.exists_tac(@term_syntax.parse_term("(w : Real) * (z : Real)"))
   let t384 = @tactics.match_mp_tac(@realarith.real_let_trans())
   let t394 = @tactics.thenl(
     @tactics.then_tac(
@@ -6524,7 +6524,7 @@ fn step_197() -> Unit raise {
     t403,
   )
   real_lt_square_c.set(
-    @tactics.prove(@parser.parse_term("forall x. (&0 < x * x) <=> ~(x = &0)"), t404),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) < x * x) == !(x == real_of_num(0))"), t404),
   )
 }
 
@@ -6544,10 +6544,10 @@ fn step_198() -> Unit raise {
     @list.List([@realax.real_pow(), @realarith.real_mul_rid()]),
   )
   let t406 = @tactics.then_tac(
-    @simp.rewrite_tac(@list.List([@calc_num.num_conv(@parser.parse_term("1"))])),
+    @simp.rewrite_tac(@list.List([@calc_num.num_conv(@term_syntax.parse_term("1"))])),
     t405,
   )
-  real_pow_1_c.set(@tactics.prove(@parser.parse_term("forall x. x pow 1 = x"), t406))
+  real_pow_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, pow(x, 1) == x"), t406))
 }
 
 ///|
@@ -6569,7 +6569,7 @@ fn step_199() -> Unit raise {
     ),
   )
   real_pow_one_c.set(
-    @tactics.prove(@parser.parse_term("forall n. &1 pow n = &1"), t407),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, pow(real_of_num(1), n) == real_of_num(1)"), t407),
   )
 }
 
@@ -6707,7 +6707,7 @@ fn step_200() -> Unit raise {
   ])
   let t436 = @tactics.thenl(
     @tactics.subgoal_then(
-      @parser.parse_term("(inv x * x = &1) /\\ (inv y * y = &1)"),
+      @term_syntax.parse_term("inv((x : Real)) * x == real_of_num(1) && inv((y : Real)) * y == real_of_num(1)"),
       fn(
         x416 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6836,7 +6836,7 @@ fn step_200() -> Unit raise {
     ),
     t436,
   ])
-  let t409 = @tactics.exists_tac(@parser.parse_term("x * y"))
+  let t409 = @tactics.exists_tac(@term_syntax.parse_term("(x : Real) * (y : Real)"))
   let t408 = @tactics.match_mp_tac(real_lt_rcancel_imp())
   let t438 = @tactics.thenl(
     @tactics.then_tac(
@@ -6850,7 +6850,7 @@ fn step_200() -> Unit raise {
   )
   real_lt_inv2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ x < y ==> inv(y) < inv(x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && x < y → inv(y) < inv(x)"),
       t438,
     ),
   )
@@ -6871,7 +6871,7 @@ fn step_201() -> Unit raise {
   let t443 = @simp.asm_rewrite_tac(@list.List([]))
   let t442 = @tactics.match_mp_tac(real_lt_inv2())
   let t441 = @simp.asm_rewrite_tac(@list.List([]))
-  let t440 = @class.asm_cases_tac(@parser.parse_term("x:real = y"))
+  let t440 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == (y : Real)"))
   let t439 = @simp.rewrite_tac(@list.List([@realarith.real_le_lt()]))
   let t444 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6894,7 +6894,7 @@ fn step_201() -> Unit raise {
   )
   real_le_inv2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ x <= y ==> inv(y) <= inv(x)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && x <= y → inv(y) <= inv(x)"),
       t444,
     ),
   )
@@ -6913,16 +6913,16 @@ pub fn real_le_inv2() -> @kernel.Thm {
 /// REAL_LT_LINV
 fn step_202() -> Unit raise {
   let t449 = @simp.asm_rewrite_tac(@list.List([real_inv_inv()]))
-  let t447 = @parser.parse_term("x:real")
+  let t447 = @term_syntax.parse_term("(x : Real)")
   let t448 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("(inv y:real)"), t447]),
+      @list.List([@term_syntax.parse_term("inv((y : Real))"), t447]),
       real_lt_inv2(),
     ),
   )
   let t446 = @simp.asm_rewrite_tac(@list.List([]))
   let t445 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("y:real"), real_lt_inv()),
+    @bool.spec(@term_syntax.parse_term("(y : Real)"), real_lt_inv()),
   )
   let t450 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6939,7 +6939,7 @@ fn step_202() -> Unit raise {
   )
   real_lt_linv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < y /\\ inv y < x ==> inv x < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < y && inv(y) < x → inv(x) < y"),
       t450,
     ),
   )
@@ -6958,16 +6958,16 @@ pub fn real_lt_linv() -> @kernel.Thm {
 /// REAL_LT_RINV
 fn step_203() -> Unit raise {
   let t455 = @simp.asm_rewrite_tac(@list.List([real_inv_inv()]))
-  let t453 = @parser.parse_term("inv y:real")
+  let t453 = @term_syntax.parse_term("inv((y : Real))")
   let t454 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("x:real"), t453]),
+      @list.List([@term_syntax.parse_term("(x : Real)"), t453]),
       real_lt_inv2(),
     ),
   )
   let t452 = @simp.asm_rewrite_tac(@list.List([]))
   let t451 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("x:real"), real_lt_inv()),
+    @bool.spec(@term_syntax.parse_term("(x : Real)"), real_lt_inv()),
   )
   let t456 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6984,7 +6984,7 @@ fn step_203() -> Unit raise {
   )
   real_lt_rinv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ x < inv y ==> y < inv x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && x < inv(y) → y < inv(x)"),
       t456,
     ),
   )
@@ -7003,16 +7003,16 @@ pub fn real_lt_rinv() -> @kernel.Thm {
 /// REAL_LE_LINV
 fn step_204() -> Unit raise {
   let t461 = @simp.asm_rewrite_tac(@list.List([real_inv_inv()]))
-  let t459 = @parser.parse_term("x:real")
+  let t459 = @term_syntax.parse_term("(x : Real)")
   let t460 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("(inv y:real)"), t459]),
+      @list.List([@term_syntax.parse_term("inv((y : Real))"), t459]),
       real_le_inv2(),
     ),
   )
   let t458 = @simp.asm_rewrite_tac(@list.List([]))
   let t457 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("y:real"), real_lt_inv()),
+    @bool.spec(@term_syntax.parse_term("(y : Real)"), real_lt_inv()),
   )
   let t462 = @tactics.then_tac(
     @tactics.then_tac(
@@ -7029,7 +7029,7 @@ fn step_204() -> Unit raise {
   )
   real_le_linv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < y /\\ inv y <= x ==> inv x <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < y && inv(y) <= x → inv(x) <= y"),
       t462,
     ),
   )
@@ -7048,16 +7048,16 @@ pub fn real_le_linv() -> @kernel.Thm {
 /// REAL_LE_RINV
 fn step_205() -> Unit raise {
   let t467 = @simp.asm_rewrite_tac(@list.List([real_inv_inv()]))
-  let t465 = @parser.parse_term("inv y:real")
+  let t465 = @term_syntax.parse_term("inv((y : Real))")
   let t466 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("x:real"), t465]),
+      @list.List([@term_syntax.parse_term("(x : Real)"), t465]),
       real_le_inv2(),
     ),
   )
   let t464 = @simp.asm_rewrite_tac(@list.List([]))
   let t463 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("x:real"), real_lt_inv()),
+    @bool.spec(@term_syntax.parse_term("(x : Real)"), real_lt_inv()),
   )
   let t468 = @tactics.then_tac(
     @tactics.then_tac(
@@ -7074,7 +7074,7 @@ fn step_205() -> Unit raise {
   )
   real_le_rinv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ x <= inv y ==> y <= inv x"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && x <= inv(y) → y <= inv(x)"),
       t468,
     ),
   )
@@ -7103,7 +7103,7 @@ fn step_206() -> Unit raise {
     t471,
   )
   real_inv_le_1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &1 <= x ==> inv(x) <= &1"), t472),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(1) <= x → inv(x) <= real_of_num(1)"), t472),
   )
 }
 
@@ -7131,7 +7131,7 @@ fn step_207() -> Unit raise {
   )
   real_inv_1_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < x /\\ x <= &1 ==> &1 <= inv(x)"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) < x && x <= real_of_num(1) → real_of_num(1) <= inv(x)"),
       t476,
     ),
   )
@@ -7160,7 +7160,7 @@ fn step_208() -> Unit raise {
     t479,
   )
   real_inv_lt_1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &1 < x ==> inv(x) < &1"), t480),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(1) < x → inv(x) < real_of_num(1)"), t480),
   )
 }
 
@@ -7188,7 +7188,7 @@ fn step_209() -> Unit raise {
   )
   real_inv_1_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < x /\\ x < &1 ==> &1 < inv(x)"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) < x && x < real_of_num(1) → real_of_num(1) < inv(x)"),
       t484,
     ),
   )
@@ -7255,7 +7255,7 @@ pub fn real_sub_inv() -> @kernel.Thm {
 ///|
 /// REAL_DOWN
 fn step_211() -> Unit raise {
-  let t497 = @tactics.undisch_tac(@parser.parse_term("&0 < d"))
+  let t497 = @tactics.undisch_tac(@term_syntax.parse_term("real_of_num(0) < (d : Real)"))
   let t496 = @simp.asm_rewrite_tac(
     @list.List([
       @realax.real_div(),
@@ -7263,14 +7263,14 @@ fn step_211() -> Unit raise {
       @realarith.real_mul_rid(),
     ]),
   )
-  let t495 = @tactics.exists_tac(@parser.parse_term("&2"))
+  let t495 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(2)"))
   let t494 = @tactics.match_mp_tac(real_lt_rcancel_imp())
-  let t492 = @realarith.real_arith(@parser.parse_term("~(&2 = &0)"))
+  let t492 = @realarith.real_arith(@term_syntax.parse_term("!(real_of_num(2) == real_of_num(0))"))
   let t493 = @tactics.assume_tac(@drule.match_mp(@realax.real_mul_linv())(t492))
   let t491 = @tactics.assume_tac(
-    @realarith.real_arith(@parser.parse_term("&0 < &2")),
+    @realarith.real_arith(@term_syntax.parse_term("real_of_num(0) < real_of_num(2)")),
   )
-  let t490 = @tactics.exists_tac(@parser.parse_term("d / &2"))
+  let t490 = @tactics.exists_tac(@term_syntax.parse_term("(d : Real) / real_of_num(2)"))
   let t498 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7301,7 +7301,7 @@ fn step_211() -> Unit raise {
   )
   real_down_c.set(
     @tactics.prove(
-      @parser.parse_term("forall d. &0 < d ==> ?e. &0 < e /\\ e < d"),
+      @term_syntax.parse_term("∀ d : Real, real_of_num(0) < d → (∃ e : Real, real_of_num(0) < e && e < d)"),
       t498,
     ),
   )
@@ -7391,24 +7391,24 @@ fn step_212() -> Unit raise {
       ),
     )
   })
-  let t505 = @tactics.exists_tac(@parser.parse_term("e:real"))
+  let t505 = @tactics.exists_tac(@term_syntax.parse_term("(e : Real)"))
   let t504 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("e:real"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(e : Real)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t503 = @simp.asm_rewrite_tac(@list.List([]))
   let t501 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("d2:real"), real_down()),
+    @bool.spec(@term_syntax.parse_term("(d2 : Real)"), real_down()),
   )
   let t502 = @list.List([
-    @tactics.mp_tac(@bool.spec(@parser.parse_term("d1:real"), real_down())),
+    @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(d1 : Real)"), real_down())),
     t501,
   ])
-  let t499 = @parser.parse_term("d2:real")
+  let t499 = @term_syntax.parse_term("(d2 : Real)")
   let t500 = @tactics.disj_cases_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("d1:real"), t499]),
+      @list.List([@term_syntax.parse_term("(d1 : Real)"), t499]),
       @realax.real_le_total(),
     ),
   )
@@ -7495,7 +7495,7 @@ fn step_213() -> Unit raise {
   )
   real_pow_le2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. &0 <= x /\\ x <= y ==> x pow n <= y pow n"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, real_of_num(0) <= x && x <= y → pow(x, n) <= pow(y, n)"),
       t520,
     ),
   )
@@ -7516,11 +7516,11 @@ fn step_214() -> Unit raise {
   let t524 = @simp.asm_rewrite_tac(
     @list.List([real_pow_one(), @realarith.real_pos()]),
   )
-  let t521 = @parser.parse_term("x:real")
-  let t522 = @parser.parse_term("&1")
+  let t521 = @term_syntax.parse_term("(x : Real)")
+  let t522 = @term_syntax.parse_term("real_of_num(1)")
   let t523 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("n:num"), t522, t521]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t522, t521]),
       real_pow_le2(),
     ),
   )
@@ -7529,7 +7529,7 @@ fn step_214() -> Unit raise {
     t524,
   )
   real_pow_le_1_c.set(
-    @tactics.prove(@parser.parse_term("forall n x. &1 <= x ==> &1 <= x pow n"), t525),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ x : Real, real_of_num(1) <= x → real_of_num(1) <= pow(x, n)"), t525),
   )
 }
 
@@ -7546,11 +7546,11 @@ pub fn real_pow_le_1() -> @kernel.Thm {
 /// REAL_POW_1_LE
 fn step_215() -> Unit raise {
   let t529 = @simp.asm_rewrite_tac(@list.List([real_pow_one()]))
-  let t526 = @parser.parse_term("&1")
-  let t527 = @parser.parse_term("x:real")
+  let t526 = @term_syntax.parse_term("real_of_num(1)")
+  let t527 = @term_syntax.parse_term("(x : Real)")
   let t528 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("n:num"), t527, t526]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t527, t526]),
       real_pow_le2(),
     ),
   )
@@ -7560,7 +7560,7 @@ fn step_215() -> Unit raise {
   )
   real_pow_1_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x. &0 <= x /\\ x <= &1 ==> x pow n <= &1"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, real_of_num(0) <= x && x <= real_of_num(1) → pow(x, n) <= real_of_num(1)"),
       t530,
     ),
   )
@@ -7585,7 +7585,7 @@ fn step_216() -> Unit raise {
   let t550 = @simp.rewrite_tac(
     @list.List([@realax.real_of_num_le(), @calc_num.arith()]),
   )
-  let t549 = @tactics.exists_tac(@parser.parse_term("&1"))
+  let t549 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(1)"))
   let t555 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -7614,7 +7614,7 @@ fn step_216() -> Unit raise {
   )
   let t543 = @simp.rewrite_tac(@list.List([real_pow_add()]))
   let t542 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("d:num"))(fn(
+    @tactics.x_choose_then(@term_syntax.parse_term("(d : Num)"))(fn(
       x539 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -7782,7 +7782,7 @@ fn step_216() -> Unit raise {
   )
   real_pow_mono_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n x. &1 <= x /\\ m <= n ==> x pow m <= x pow n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ x : Real, real_of_num(1) <= x && m <= n → pow(x, m) <= pow(x, n)"),
       t556,
     ),
   )
@@ -7815,7 +7815,7 @@ fn step_217() -> Unit raise {
   let t559 = @simp.asm_rewrite_tac(
     @list.List([@realax.real_pow(), @realarith.real_mul_rid()]),
   )
-  let t558 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t558 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t557 = @tactics.repeat_tac(@tactics.strip_tac)
   let t566 = @tactics.thenl(
     @tactics.then_tac(
@@ -7869,11 +7869,11 @@ fn step_218() -> Unit raise {
   let t570 = @simp.asm_rewrite_tac(
     @list.List([real_pow_one(), @realarith.real_pos()]),
   )
-  let t567 = @parser.parse_term("x:real")
-  let t568 = @parser.parse_term("&1")
+  let t567 = @term_syntax.parse_term("(x : Real)")
+  let t568 = @term_syntax.parse_term("real_of_num(1)")
   let t569 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("n:num"), t568, t567]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t568, t567]),
       real_pow_lt2(),
     ),
   )
@@ -7883,7 +7883,7 @@ fn step_218() -> Unit raise {
   )
   real_pow_lt_1_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x. ~(n = 0) /\\ &1 < x ==> &1 < x pow n"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, !(n == 0) && real_of_num(1) < x → real_of_num(1) < pow(x, n)"),
       t571,
     ),
   )
@@ -7902,11 +7902,11 @@ pub fn real_pow_lt_1() -> @kernel.Thm {
 /// REAL_POW_1_LT
 fn step_219() -> Unit raise {
   let t575 = @simp.asm_rewrite_tac(@list.List([real_pow_one()]))
-  let t572 = @parser.parse_term("&1")
-  let t573 = @parser.parse_term("x:real")
+  let t572 = @term_syntax.parse_term("real_of_num(1)")
+  let t573 = @term_syntax.parse_term("(x : Real)")
   let t574 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("n:num"), t573, t572]),
+      @list.List([@term_syntax.parse_term("(n : Num)"), t573, t572]),
       real_pow_lt2(),
     ),
   )
@@ -7956,14 +7956,14 @@ fn step_220() -> Unit raise {
     @tactics.all_tac,
   ])
   let t599 = @simp.once_rewrite_tac(@list.List([@realax.real_pow()]))
-  let t598 = @parser.parse_term("d:num")
+  let t598 = @term_syntax.parse_term("(d : Num)")
   let t607 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.thenl(
           @tactics.then_tac(
             @tactics.then_tac(
-              @tactics.spec_tac(@parser.parse_term("d:num"), t598),
+              @tactics.spec_tac(@term_syntax.parse_term("(d : Num)"), t598),
               @nums.induct_tac,
             ),
             t599,
@@ -7979,7 +7979,7 @@ fn step_220() -> Unit raise {
   let t597 = @simp.asm_rewrite_tac(
     @list.List([real_of_num_lt(), @calc_num.arith()]),
   )
-  let t596 = @tactics.exists_tac(@parser.parse_term("&1"))
+  let t596 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(1)"))
   let t595 = @tactics.match_mp_tac(@realarith.real_lt_trans())
   let t608 = @list.List([
     @tactics.then_tac(
@@ -8171,7 +8171,7 @@ fn step_220() -> Unit raise {
   )
   real_pow_mono_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n x. &1 < x /\\ m < n ==> x pow m < x pow n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ x : Real, real_of_num(1) < x && m < n → pow(x, m) < pow(x, n)"),
       t609,
     ),
   )
@@ -8203,7 +8203,7 @@ fn step_221() -> Unit raise {
   )
   real_pow_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x m n. (x pow m) pow n = x pow (m * n)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ m : Num, ∀ n : Num, pow(pow(x, m), n) == pow(x, m * n)"),
       t611,
     ),
   )
@@ -8241,7 +8241,7 @@ fn step_222() -> Unit raise {
   )
   real_eq_rcancel_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. ~(z = &0) /\\ (x * z = y * z) ==> (x = y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, !(z == real_of_num(0)) && x * z == y * z → x == y"),
       t615,
     ),
   )
@@ -8268,7 +8268,7 @@ fn step_223() -> Unit raise {
   )
   real_eq_lcancel_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y z. ~(z = &0) /\\ (z * x = z * y) ==> (x = y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, ∀ z : Real, !(z == real_of_num(0)) && z * x == z * y → x == y"),
       t617,
     ),
   )
@@ -8293,7 +8293,7 @@ fn step_224() -> Unit raise {
   )
   real_lt_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < x /\\ &0 < y ==> &0 < x / y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && real_of_num(0) < y → real_of_num(0) < x / y"),
       t618,
     ),
   )
@@ -8316,7 +8316,7 @@ fn step_225() -> Unit raise {
   )
   real_le_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= x /\\ &0 <= y ==> &0 <= x / y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) <= x && real_of_num(0) <= y → real_of_num(0) <= x / y"),
       t619,
     ),
   )
@@ -8405,7 +8405,7 @@ fn step_226() -> Unit raise {
     })(t632(x633))
   })
   let t628 = @simp.rewrite_tac(@list.List([@arith.not_le()]))
-  let t627 = @tactics.undisch_tac(@parser.parse_term("~(n:num <= m)"))
+  let t627 = @tactics.undisch_tac(@term_syntax.parse_term("!((n : Num) <= (m : Num))"))
   let t626 = @simp.rewrite_tac(@list.List([real_inv_div()]))
   let t625 = @simp.gen_rewrite_tac(
     fn(
@@ -8472,7 +8472,7 @@ pub fn real_div_pow2() -> @kernel.Thm {
 /// REAL_DIV_POW2_ALT
 fn step_227() -> Unit raise {
   let t644 = @simp.asm_rewrite_tac(@list.List([real_inv_inv()]))
-  let t643 = @class.asm_cases_tac(@parser.parse_term("m <= n:num"))
+  let t643 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) <= (n : Num)"))
   let t642 = @simp.asm_simp_tac(
     @list.List([@equal.gsym(@arith.not_le()), real_div_pow2()]),
   )
@@ -8527,7 +8527,7 @@ fn step_228() -> Unit raise {
     @list.List([real_pow_lt(), real_of_num_lt(), @calc_num.arith()]),
   )
   real_lt_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall n. &0 < &2 pow n"), t646),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, real_of_num(0) < pow(real_of_num(2), n)"), t646),
   )
 }
 
@@ -8554,7 +8554,7 @@ fn step_229() -> Unit raise {
       @calc_num.arith(),
     ]),
   )
-  let t647 = @tactics.exists_tac(@parser.parse_term("&2 pow 0"))
+  let t647 = @tactics.exists_tac(@term_syntax.parse_term("pow(real_of_num(2), 0)"))
   let t650 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -8569,7 +8569,7 @@ fn step_229() -> Unit raise {
     t649,
   )
   real_le_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall n. &1 <= &2 pow n"), t650),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, real_of_num(1) <= pow(real_of_num(2), n)"), t650),
   )
 }
 
@@ -8599,7 +8599,7 @@ fn step_230() -> Unit raise {
     t651,
   )
   real_pow2_abs_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(x) pow 2 = x pow 2"), t652),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, pow(abs(x), 2) == pow(x, 2)"), t652),
   )
 }
 
@@ -8619,7 +8619,7 @@ fn step_231() -> Unit raise {
     @list.List([
       real_pow_le2(),
       real_abs_pos(),
-      @calc_num.num_eq_conv(@parser.parse_term("2 = 0")),
+      @calc_num.num_eq_conv(@term_syntax.parse_term("2 == 0")),
       real_pow_lt2(),
       real_not_le(),
     ]),
@@ -8631,7 +8631,7 @@ fn step_231() -> Unit raise {
   )
   real_le_square_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x) <= abs(y) <=> x pow 2 <= y pow 2"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (abs(x) <= abs(y)) == (pow(x, 2) <= pow(y, 2))"),
       t655,
     ),
   )
@@ -8656,7 +8656,7 @@ fn step_232() -> Unit raise {
   )
   real_lt_square_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(x) < abs(y) <=> x pow 2 < y pow 2"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (abs(x) < abs(y)) == (pow(x, 2) < pow(y, 2))"),
       t656,
     ),
   )
@@ -8681,7 +8681,7 @@ fn step_233() -> Unit raise {
   )
   real_eq_square_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs x = abs y <=> x pow 2 = y pow 2"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (abs(x) == abs(y)) == (pow(x, 2) == pow(y, 2))"),
       t657,
     ),
   )
@@ -8705,7 +8705,7 @@ fn step_234() -> Unit raise {
     @list.List([@realarith.real_pow_2(), @realarith.real_le_square()]),
   )
   real_le_pow_2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x pow 2"), t658),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) <= pow(x, 2)"), t658),
   )
 }
 
@@ -8727,14 +8727,14 @@ fn step_235() -> Unit raise {
       @list.List([
         real_le_pow_2(),
         @realarith.real_arith(
-          @parser.parse_term("&0 < x <=> &0 <= x /\\ ~(x = &0)"),
+          @term_syntax.parse_term("(real_of_num(0) < (x : Real)) == (real_of_num(0) <= x && !(x == real_of_num(0)))"),
         ),
       ]),
     ),
     t659,
   )
   real_lt_pow_2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < x pow 2 <=> ~(x = &0)"), t660),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) < pow(x, 2)) == !(x == real_of_num(0))"), t660),
   )
 }
 
@@ -8850,7 +8850,7 @@ fn step_236() -> Unit raise {
   )
   real_sos_eq_0_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x pow 2 + y pow 2 = &0 <=> x = &0 /\\ y = &0"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (pow(x, 2) + pow(y, 2) == real_of_num(0)) == (x == real_of_num(0) && y == real_of_num(0))"),
       t669,
     ),
   )
@@ -8880,7 +8880,7 @@ fn step_237() -> Unit raise {
   )
   real_pow_zero_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. &0 pow n = if n = 0 then &1 else &0"),
+      @term_syntax.parse_term("∀ n : Num, pow(real_of_num(0), n) == (if n == 0 { real_of_num(1) } else { real_of_num(0) })"),
       t670,
     ),
   )
@@ -8937,7 +8937,7 @@ fn step_238() -> Unit raise {
     t685,
   )
   let t674 = @simp.asm_rewrite_tac(@list.List([@arith.le()]))
-  let t673 = @tactics.undisch_tac(@parser.parse_term("n:num <= m"))
+  let t673 = @tactics.undisch_tac(@term_syntax.parse_term("(n : Num) <= (m : Num)"))
   let t672 = @tactics.repeat_tac(
     @tactics.then_tac(
       @class.cond_cases_tac,
@@ -8959,7 +8959,7 @@ fn step_238() -> Unit raise {
     ),
     t686,
   ])
-  let t671 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
+  let t671 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)"))
   let t688 = @tactics.thenl(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t671),
     t687,
@@ -9016,7 +9016,7 @@ fn step_240() -> Unit raise {
   let t690 = @meson.meson_tac(@list.List([real_pow_le2(), real_not_le()]))
   real_pow_lt2_rev_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. &0 <= y /\\ x pow n < y pow n ==> x < y"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, real_of_num(0) <= y && pow(x, n) < pow(y, n) → x < y"),
       t690,
     ),
   )
@@ -9066,7 +9066,7 @@ fn step_242() -> Unit raise {
   let t695 = @simp.asm_rewrite_tac(
     @list.List([real_abs_pos(), @equal.gsym(real_abs_pow())]),
   )
-  let t694 = @tactics.exists_tac(@parser.parse_term("n:num"))
+  let t694 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num)"))
   let t693 = @tactics.match_mp_tac(real_pow_eq())
   let t696 = @tactics.then_tac(
     @tactics.then_tac(
@@ -9100,7 +9100,7 @@ pub fn real_pow_eq_abs() -> @kernel.Thm {
 /// REAL_POW_EQ_1_IMP
 fn step_243() -> Unit raise {
   let t703 = @simp.asm_rewrite_tac(@list.List([real_pow_one()]))
-  let t702 = @tactics.exists_tac(@parser.parse_term("n:num"))
+  let t702 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num)"))
   let t701 = @tactics.match_mp_tac(real_pow_eq_abs())
   let t700 = @simp.gen_rewrite_tac(
     fn(
@@ -9123,7 +9123,7 @@ fn step_243() -> Unit raise {
   )
   real_pow_eq_1_imp_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. ~(n = 0) /\\ x pow n = &1 ==> abs(x) = &1"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, !(n == 0) && pow(x, n) == real_of_num(1) → abs(x) == real_of_num(1)"),
       t704,
     ),
   )
@@ -9149,7 +9149,7 @@ fn step_244() -> Unit raise {
     @list.List([@calc_int.real_pow_neg(), real_pow_one()]),
   )
   let t713 = @drule.match_mp(
-    @realarith.real_arith(@parser.parse_term("abs x = a ==> x = a \\/ x = --a")),
+    @realarith.real_arith(@term_syntax.parse_term("abs((x : Real)) == (a : Real) → x == a || x == -a")),
   )
   let t714 = @tactics.disj_cases_then(fn(
     x710 : @kernel.Thm,
@@ -9225,9 +9225,9 @@ fn step_244() -> Unit raise {
     @tactics.all_tac,
     @meson.asm_meson_tac(@list.List([real_pow_eq_1_imp()])),
   ])
-  let t707 = @class.asm_cases_tac(@parser.parse_term("abs(x) = &1"))
+  let t707 = @class.asm_cases_tac(@term_syntax.parse_term("abs((x : Real)) == real_of_num(1)"))
   let t706 = @simp.asm_rewrite_tac(@list.List([@realax.real_pow()]))
-  let t705 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t705 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t720 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9340,7 +9340,7 @@ fn step_245() -> Unit raise {
   let t741 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.thenl(
-        @tactics.subgoal_then(@parser.parse_term("--y pow n < --x pow n"), fn(
+        @tactics.subgoal_then(@term_syntax.parse_term("pow(-(y : Real), (n : Num)) < pow(-(x : Real), n)"), fn(
           x731 : @kernel.Thm,
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
@@ -9403,7 +9403,7 @@ fn step_245() -> Unit raise {
     t729,
   ])
   let t728 = @tactics.subgoal_then(
-    @parser.parse_term("&0 < --x pow n /\\ &0 <= y pow n"),
+    @term_syntax.parse_term("real_of_num(0) < pow(-(x : Real), (n : Num)) && real_of_num(0) <= pow((y : Real), n)"),
     fn(
       x725 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -9457,7 +9457,7 @@ fn step_245() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.disj_cases_tac(
-            @realarith.real_arith(@parser.parse_term("&0 <= x \\/ &0 < --x")),
+            @realarith.real_arith(@term_syntax.parse_term("real_of_num(0) <= (x : Real) || real_of_num(0) < -x")),
           ),
           t724,
         ),
@@ -9468,10 +9468,10 @@ fn step_245() -> Unit raise {
     t741,
   ])
   let t723 = @tactics.disj_cases_tac(
-    @bool.spec(@parser.parse_term("y:real"), @realarith.real_le_negtotal()),
+    @bool.spec(@term_syntax.parse_term("(y : Real)"), @realarith.real_le_negtotal()),
   )
   let t722 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith()]))
-  let t721 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t721 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t743 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9487,7 +9487,7 @@ fn step_245() -> Unit raise {
   )
   real_pow_lt2_odd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. x < y /\\ ODD n ==> x pow n < y pow n"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, x < y && ODD(n) → pow(x, n) < pow(y, n)"),
       t743,
     ),
   )
@@ -9518,7 +9518,7 @@ fn step_246() -> Unit raise {
   )
   real_pow_le2_odd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. x <= y /\\ ODD n ==> x pow n <= y pow n"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, x <= y && ODD(n) → pow(x, n) <= pow(y, n)"),
       t746,
     ),
   )
@@ -9543,7 +9543,7 @@ fn step_247() -> Unit raise {
   )
   real_pow_lt2_odd_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. ODD n ==> (x pow n < y pow n <=> x < y)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, ODD(n) → (pow(x, n) < pow(y, n)) == (x < y)"),
       t747,
     ),
   )
@@ -9568,7 +9568,7 @@ fn step_248() -> Unit raise {
   )
   real_pow_le2_odd_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. ODD n ==> (x pow n <= y pow n <=> x <= y)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, ODD(n) → (pow(x, n) <= pow(y, n)) == (x <= y)"),
       t748,
     ),
   )
@@ -9593,7 +9593,7 @@ fn step_249() -> Unit raise {
   )
   real_pow_eq_odd_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. ODD n ==> (x pow n = y pow n <=> x = y)"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, ODD(n) → (pow(x, n) == pow(y, n)) == (x == y)"),
       t749,
     ),
   )
@@ -9616,7 +9616,7 @@ fn step_250() -> Unit raise {
   let t750 = @meson.meson_tac(@list.List([real_pow_eq_odd_eq()]))
   real_pow_eq_odd_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n x y. ODD n /\\ x pow n = y pow n ==> x = y"),
+      @term_syntax.parse_term("∀ n : Num, ∀ x : Real, ∀ y : Real, ODD(n) && pow(x, n) == pow(y, n) → x == y"),
       t750,
     ),
   )
@@ -9638,7 +9638,7 @@ pub fn real_pow_eq_odd() -> @kernel.Thm {
 fn step_251() -> Unit raise {
   let t763 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(real_pow_pow())]))
   let t759 = @simp.rewrite_rule(@list.List([@arith.even_exists()]))
-  let t760 = @tactics.x_choose_then(@parser.parse_term("m:num"))(fn(
+  let t760 = @tactics.x_choose_then(@term_syntax.parse_term("(m : Num)"))(fn(
     x756 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -9718,7 +9718,7 @@ fn step_251() -> Unit raise {
   let t752 = @simp.asm_rewrite_tac(
     @list.List([@realax.real_pow(), @calc_num.arith()]),
   )
-  let t751 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t751 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t764 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9775,7 +9775,7 @@ fn step_252() -> Unit raise {
   let t765 = @simp.simp_tac(@list.List([real_pow_eq_eq(), real_abs_abs()]))
   real_evenpow_abs_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. EVEN n ==> abs x pow n = x pow n"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, EVEN(n) → pow(abs(x), n) == pow(x, n)"),
       t765,
     ),
   )
@@ -9809,7 +9809,7 @@ fn step_253() -> Unit raise {
   )
   real_of_num_mod_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. &(m MOD n):real = &m - &(m DIV n) * &n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, real_of_num(MOD(m, n)) == real_of_num(m) - real_of_num(DIV(m, n)) * real_of_num(n)"),
       t769,
     ),
   )
@@ -9833,7 +9833,7 @@ fn step_254() -> Unit raise {
   let t772 = @simp.asm_simp_tac(
     @list.List([real_sub_ldistrib(), real_div_lmul(), @realax.real_of_num_eq()]),
   )
-  let t771 = @tactics.exists_tac(@parser.parse_term("&n:real"))
+  let t771 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num((n : Num))"))
   let t774 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -9856,14 +9856,14 @@ fn step_254() -> Unit raise {
     ),
     t774,
   ])
-  let t770 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t770 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t776 = @tactics.thenl(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t770),
     t775,
   )
   real_of_num_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall m n. &(m DIV n):real = &m / &n - &(m MOD n) / &n"),
+      @term_syntax.parse_term("∀ m : Num, ∀ n : Num, real_of_num(DIV(m, n)) == real_of_num(m) / real_of_num(n) - real_of_num(MOD(m, n)) / real_of_num(n)"),
       t776,
     ),
   )
@@ -9950,7 +9950,7 @@ fn step_255() -> Unit raise {
     ),
     t781,
   ])
-  let t777 = @class.asm_cases_tac(@parser.parse_term("u = &0"))
+  let t777 = @class.asm_cases_tac(@term_syntax.parse_term("(u : Real) == real_of_num(0)"))
   let t788 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -10080,7 +10080,7 @@ fn step_257() -> Unit raise {
       real_convex_bound2_lt(),
       @meson.meson(
         @list.List([@realax.real_mul_lid(), real_add_rdistrib()]),
-        @parser.parse_term("u + v = &1 ==> u * a + v * a = a"),
+        @term_syntax.parse_term("(u : Real) + (v : Real) == real_of_num(1) → u * (a : Real) + v * a == a"),
       ),
     ]),
   )
@@ -10113,7 +10113,7 @@ fn step_258() -> Unit raise {
       real_convex_bound2_le(),
       @meson.meson(
         @list.List([@realax.real_mul_lid(), real_add_rdistrib()]),
-        @parser.parse_term("u + v = &1 ==> u * a + v * a = a"),
+        @term_syntax.parse_term("(u : Real) + (v : Real) == real_of_num(1) → u * (a : Real) + v * a == a"),
       ),
     ]),
   )
@@ -10146,7 +10146,7 @@ fn step_259() -> Unit raise {
       real_convex_bound2_lt(),
       @meson.meson(
         @list.List([@realax.real_mul_lid(), real_add_rdistrib()]),
-        @parser.parse_term("u + v = &1 ==> u * a + v * a = a"),
+        @term_syntax.parse_term("(u : Real) + (v : Real) == real_of_num(1) → u * (a : Real) + v * a == a"),
       ),
     ]),
   )
@@ -10179,7 +10179,7 @@ fn step_260() -> Unit raise {
       real_convex_bound2_le(),
       @meson.meson(
         @list.List([@realax.real_mul_lid(), real_add_rdistrib()]),
-        @parser.parse_term("u + v = &1 ==> u * a + v * a = a"),
+        @term_syntax.parse_term("(u : Real) + (v : Real) == real_of_num(1) → u * (a : Real) + v * a == a"),
       ),
     ]),
   )
@@ -10212,7 +10212,7 @@ fn step_261() -> Unit raise {
       real_convex_bound2_le(),
       @meson.meson(
         @list.List([@realax.real_mul_lid(), real_add_rdistrib()]),
-        @parser.parse_term("u + v = &1 ==> u * a + v * a = a"),
+        @term_syntax.parse_term("(u : Real) + (v : Real) == real_of_num(1) → u * (a : Real) + v * a == a"),
       ),
     ]),
   )
@@ -10245,7 +10245,7 @@ fn step_262() -> Unit raise {
       real_convex_bound2_lt(),
       @meson.meson(
         @list.List([@realax.real_mul_lid(), real_add_rdistrib()]),
-        @parser.parse_term("u + v = &1 ==> u * a + v * a = a"),
+        @term_syntax.parse_term("(u : Real) + (v : Real) == real_of_num(1) → u * (a : Real) + v * a == a"),
       ),
     ]),
   )
@@ -10275,7 +10275,7 @@ pub fn real_convex_bounds_lt() -> @kernel.Thm {
 fn step_263() -> Unit raise {
   let t802 = @meson.meson_tac(@list.List([]))
   let lemma = @tactics.prove(
-    @parser.parse_term("(forall x. (?n. x = &n) ==> P x) <=> forall n. P(&n)"),
+    @term_syntax.parse_term("(∀ x : Real, (∃ n : Num, x == real_of_num(n)) → (P : (Real) -> Bool)(x)) == (∀ n : Num, P(real_of_num(n)))"),
     t802,
   )
   let t804 = @meson.meson_tac(
@@ -10283,7 +10283,7 @@ fn step_263() -> Unit raise {
       real_le_sub_ladd(),
       @realax.real_of_num_add(),
       @realax.real_le_total(),
-      @realarith.real_arith(@parser.parse_term("~(M <= M - &1)")),
+      @realarith.real_arith(@term_syntax.parse_term("!((M : Real) <= M - real_of_num(1))")),
     ]),
   )
   let t803 = @simp.rewrite_tac(@list.List([lemma]))
@@ -10291,7 +10291,7 @@ fn step_263() -> Unit raise {
     @tactics.then_tac(
       @tactics.mp_tac(
         @bool.spec(
-          @parser.parse_term("\\y. ?n. y = &n"),
+          @term_syntax.parse_term("(y : Real) => ∃ n : Num, y == real_of_num(n)"),
           @realax.real_complete(),
         ),
       ),
@@ -10300,7 +10300,7 @@ fn step_263() -> Unit raise {
     t804,
   )
   real_arch_simple_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ?n. x <= &n"), t805),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∃ n : Num, x <= real_of_num(n)"), t805),
   )
 }
 
@@ -10322,10 +10322,10 @@ fn step_264() -> Unit raise {
     @list.List([
       real_arch_simple(),
       @realax.real_of_num_add(),
-      @realarith.real_arith(@parser.parse_term("x <= n ==> x < n + &1")),
+      @realarith.real_arith(@term_syntax.parse_term("(x : Real) <= (n : Real) → x < n + real_of_num(1)")),
     ]),
   )
-  real_arch_lt_c.set(@tactics.prove(@parser.parse_term("forall x. ?n. x < &n"), t806))
+  real_arch_lt_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∃ n : Num, x < real_of_num(n)"), t806))
 }
 
 ///|
@@ -10343,7 +10343,7 @@ fn step_265() -> Unit raise {
   let t807 = @meson.meson_tac(@list.List([real_arch_lt(), real_lt_ldiv_eq()]))
   real_arch_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 < x ==> forall y. ?n. y < &n * x"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) < x → (∀ y : Real, ∃ n : Num, y < real_of_num(n) * x)"),
       t807,
     ),
   )
@@ -10372,7 +10372,7 @@ fn step_266() -> Unit raise {
   )
   let t810 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t809 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("inv(e)"), real_arch_lt()),
+    @bool.spec(@term_syntax.parse_term("inv((e : Real))"), real_arch_lt()),
   )
   let t808 = @list.List([
     @tactics.all_tac,
@@ -10430,10 +10430,10 @@ fn step_267() -> Unit raise {
   let t817 = @simp.asm_simp_tac(
     @list.List([
       real_le_lmul(),
-      @realarith.real_arith(@parser.parse_term("&0 <= x ==> &0 <= &1 + x")),
+      @realarith.real_arith(@term_syntax.parse_term("real_of_num(0) <= (x : Real) → real_of_num(0) <= real_of_num(1) + x")),
     ]),
   )
-  let t816 = @tactics.exists_tac(@parser.parse_term("(&1 + x) * (&1 + &n * x)"))
+  let t816 = @tactics.exists_tac(@term_syntax.parse_term("(real_of_num(1) + (x : Real)) * (real_of_num(1) + real_of_num((n : Num)) * x)"))
   let t815 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t814 = @simp.rewrite_tac(@list.List([@equal.gsym(real_of_num_suc())]))
   let t813 = @simp.rewrite_tac(
@@ -10476,7 +10476,7 @@ fn step_267() -> Unit raise {
   )
   real_pow_lbound_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. &0 <= x ==> &1 + &n * x <= (&1 + x) pow n"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, real_of_num(0) <= x → real_of_num(1) + real_of_num(n) * x <= pow(real_of_num(1) + x, n)"),
       t819,
     ),
   )
@@ -10500,19 +10500,19 @@ fn step_268() -> Unit raise {
     @list.List([
       real_pow_lbound(),
       real_sub_add2(),
-      @realarith.real_arith(@parser.parse_term("&1 < x ==> &0 <= x - &1")),
+      @realarith.real_arith(@term_syntax.parse_term("real_of_num(1) < (x : Real) → real_of_num(0) <= x - real_of_num(1)")),
     ]),
   )
   let t833 = @simp.asm_simp_tac(
     @list.List([
-      @realarith.real_arith(@parser.parse_term("x < y ==> x < &1 + y")),
+      @realarith.real_arith(@term_syntax.parse_term("(x : Real) < (y : Real) → x < real_of_num(1) + y")),
     ]),
   )
-  let t832 = @tactics.exists_tac(@parser.parse_term("&1 + &n * (x - &1)"))
+  let t832 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(1) + real_of_num((n : Num)) * ((x : Real) - real_of_num(1))"))
   let t831 = @tactics.match_mp_tac(@realarith.real_lte_trans())
-  let t830 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t830 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t829 = @tactics.match_mp_tac(@theorems.mono_exists())
-  let t825 = @parser.parse_term("y:real")
+  let t825 = @term_syntax.parse_term("(y : Real)")
   let t828 = @tactics.disch_then(fn(
     x827 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10583,7 +10583,7 @@ fn step_268() -> Unit raise {
   })
   let t821 = @simp.asm_rewrite_tac(@list.List([@realarith.real_sub_lt()]))
   let t820 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("x - &1"), real_arch()),
+    @bool.spec(@term_syntax.parse_term("(x : Real) - real_of_num(1)"), real_arch()),
   )
   let t835 = @tactics.then_tac(
     @tactics.then_tac(
@@ -10617,7 +10617,7 @@ fn step_268() -> Unit raise {
     t834,
   )
   real_arch_pow_c.set(
-    @tactics.prove(@parser.parse_term("forall x y. &1 < x ==> ?n. y < x pow n"), t835),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(1) < x → (∃ n : Num, y < pow(x, n))"), t835),
   )
 }
 
@@ -10637,7 +10637,7 @@ fn step_269() -> Unit raise {
     @list.List([real_arch_pow(), real_of_num_lt(), @calc_num.arith()]),
   )
   real_arch_pow2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. ?n. x < &2 pow n"), t836),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, ∃ n : Num, x < pow(real_of_num(2), n)"), t836),
   )
 }
 
@@ -10667,7 +10667,7 @@ fn step_270() -> Unit raise {
   )
   let t854 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t851 = @drule.match_mp(real_arch_pow())
-  let t848 = @parser.parse_term("inv(y)")
+  let t848 = @term_syntax.parse_term("inv((y : Real))")
   let t853 = @tactics.disch_then(fn(
     x852 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10760,7 +10760,7 @@ fn step_270() -> Unit raise {
   })
   let t843 = @simp.rewrite_tac(@list.List([real_inv_1()]))
   let t844 = @list.List([@simp.asm_simp_tac(@list.List([real_lt_inv2()])), t843])
-  let t842 = @tactics.subgoal_then(@parser.parse_term("inv(&1) < inv(x)"), fn(
+  let t842 = @tactics.subgoal_then(@term_syntax.parse_term("inv(real_of_num(1)) < inv((x : Real))"), fn(
     x839 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -10816,7 +10816,7 @@ fn step_270() -> Unit raise {
       ]),
     ),
   ])
-  let t837 = @class.asm_cases_tac(@parser.parse_term("&0 < x"))
+  let t837 = @class.asm_cases_tac(@term_syntax.parse_term("real_of_num(0) < (x : Real)"))
   let t860 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -10850,7 +10850,7 @@ fn step_270() -> Unit raise {
   )
   real_arch_pow_inv_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 < y /\\ x < &1 ==> ?n. x pow n < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < y && x < real_of_num(1) → (∃ n : Num, pow(x, n) < y)"),
       t860,
     ),
   )
@@ -10896,7 +10896,7 @@ fn step_272() -> Unit raise {
     real_arith_tac,
   )
   real_sgn_0_c.set(
-    @tactics.prove(@parser.parse_term("real_sgn(&0) = &0"), t861),
+    @tactics.prove(@term_syntax.parse_term("real_sgn(real_of_num(0)) == real_of_num(0)"), t861),
   )
 }
 
@@ -10918,7 +10918,7 @@ fn step_273() -> Unit raise {
   )
   real_sgn_neg_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. real_sgn(--x) = --(real_sgn x)"),
+      @term_syntax.parse_term("∀ x : Real, real_sgn(-x) == -real_sgn(x)"),
       t862,
     ),
   )
@@ -10941,7 +10941,7 @@ fn step_274() -> Unit raise {
     real_arith_tac,
   )
   real_sgn_abs_c.set(
-    @tactics.prove(@parser.parse_term("forall x. real_sgn(x) * abs(x) = x"), t863),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_sgn(x) * abs(x) == x"), t863),
   )
 }
 
@@ -10965,7 +10965,7 @@ fn step_275() -> Unit raise {
     real_arith_tac,
   )
   real_sgn_abs_alt_c.set(
-    @tactics.prove(@parser.parse_term("forall x. real_sgn x * x = abs x"), t864),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_sgn(x) * x == abs(x)"), t864),
   )
 }
 
@@ -11014,7 +11014,7 @@ fn step_277() -> Unit raise {
   )
   real_abs_sgn_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. abs(real_sgn x) = real_sgn(abs x)"),
+      @term_syntax.parse_term("∀ x : Real, abs(real_sgn(x)) == real_sgn(abs(x))"),
       t866,
     ),
   )
@@ -11073,12 +11073,12 @@ fn step_278() -> Unit raise {
   let t877 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.gen_tac,
-      @class.asm_cases_tac(@parser.parse_term("x = &0")),
+      @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)")),
     ),
     t876,
   )
   real_sgn_v1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. real_sgn x = x / abs x"), t877),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_sgn(x) == x / abs(x)"), t877),
   )
 }
 
@@ -11107,7 +11107,7 @@ fn step_279() -> Unit raise {
   )
   real_sgn_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. real_sgn(x * y) = real_sgn(x) * real_sgn(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_sgn(x * y) == real_sgn(x) * real_sgn(y)"),
       t878,
     ),
   )
@@ -11125,12 +11125,12 @@ pub fn real_sgn_mul() -> @kernel.Thm {
 ///|
 /// REAL_SGN_INV
 fn step_280() -> Unit raise {
-  let t879 = @realarith.real_arith(@parser.parse_term("x < &0 <=> &0 < --x"))
+  let t879 = @realarith.real_arith(@term_syntax.parse_term("((x : Real) < real_of_num(0)) == (real_of_num(0) < -x)"))
   let t880 = @simp.rewrite_tac(
     @list.List([real_sgn(), real_lt_inv_eq(), @equal.gsym(real_inv_neg()), t879]),
   )
   real_sgn_inv_c.set(
-    @tactics.prove(@parser.parse_term("forall x. real_sgn(inv x) = real_sgn x"), t880),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_sgn(inv(x)) == real_sgn(x)"), t880),
   )
 }
 
@@ -11158,7 +11158,7 @@ fn step_281() -> Unit raise {
   )
   real_sgn_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. real_sgn(x / y) = real_sgn(x) / real_sgn(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_sgn(x / y) == real_sgn(x) / real_sgn(y)"),
       t882,
     ),
   )
@@ -11268,7 +11268,7 @@ fn step_285() -> Unit raise {
   )
   real_sgn_pow_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x n. real_sgn(x pow n) = real_sgn(x) pow n"),
+      @term_syntax.parse_term("∀ x : Real, ∀ n : Num, real_sgn(pow(x, n)) == pow(real_sgn(x), n)"),
       t889,
     ),
   )
@@ -11290,7 +11290,7 @@ fn step_286() -> Unit raise {
     @list.List([real_pow_eq_0(), real_abs_zero(), @calc_num.arith()]),
   )
   let t890 = @realarith.real_arith(
-    @parser.parse_term("&0 <= x ==> (x <= &0 <=> x = &0)"),
+    @term_syntax.parse_term("real_of_num(0) <= (x : Real) → (x <= real_of_num(0)) == (x == real_of_num(0))"),
   )
   let t891 = @simp.simp_tac(
     @list.List([
@@ -11306,7 +11306,7 @@ fn step_286() -> Unit raise {
   )
   real_sgn_pow_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. real_sgn(x pow 2) = real_sgn(abs x)"),
+      @term_syntax.parse_term("∀ x : Real, real_sgn(pow(x, 2)) == real_sgn(abs(x))"),
       t893,
     ),
   )
@@ -11330,7 +11330,7 @@ fn step_287() -> Unit raise {
   )
   real_sgn_real_sgn_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. real_sgn(real_sgn x) = real_sgn x"),
+      @term_syntax.parse_term("∀ x : Real, real_sgn(real_sgn(x)) == real_sgn(x)"),
       t894,
     ),
   )
@@ -11366,7 +11366,7 @@ fn step_288() -> Unit raise {
   )
   real_inv_sgn_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. real_inv(real_sgn x) = real_sgn x"),
+      @term_syntax.parse_term("∀ x : Real, inv(real_sgn(x)) == real_sgn(x)"),
       t897,
     ),
   )
@@ -11610,12 +11610,12 @@ fn step_296() -> Unit raise {
       @realarith.real_entire(),
       @realarith.real_sub_0(),
       @realarith.real_arith(
-        @parser.parse_term("x pow 2 = y pow 2 <=> (x - y) * (x - --y) = &0"),
+        @term_syntax.parse_term("(pow((x : Real), 2) == pow((y : Real), 2)) == ((x - y) * (x - -y) == real_of_num(0))"),
       ),
     ]),
   )
   let t913 = @simp.asm_rewrite_tac(@list.List([@realax.real_abs()]))
-  let t912 = @tactics.x_gen_tac(@parser.parse_term("z:real"))
+  let t912 = @tactics.x_gen_tac(@term_syntax.parse_term("(z : Real)"))
   let t911 = @simp.rewrite_tac(@list.List([real_sgn_pow_2(), real_abs_pow()]))
   let t910 = @tactics.first_x_assum(fn(
     x909 : @kernel.Thm,
@@ -11720,7 +11720,7 @@ fn step_296() -> Unit raise {
   )
   sqrt_unique_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= y /\\ y pow 2 = x ==> sqrt(x) = y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) <= y && pow(y, 2) == x → sqrt(x) == y"),
       t920,
     ),
   )
@@ -11741,7 +11741,7 @@ fn step_297() -> Unit raise {
   let t921 = @meson.meson_tac(@list.List([sqrt_unique()]))
   pow_2_sqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x ==> sqrt(x pow 2) = x"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) <= x → sqrt(pow(x, 2)) == x"),
       t921,
     ),
   )
@@ -11767,7 +11767,7 @@ fn step_298() -> Unit raise {
       @realarith.real_pos(),
     ]),
   )
-  sqrt_0_c.set(@tactics.prove(@parser.parse_term("sqrt(&0) = &0"), t922))
+  sqrt_0_c.set(@tactics.prove(@term_syntax.parse_term("sqrt(real_of_num(0)) == real_of_num(0)"), t922))
 }
 
 ///|
@@ -11790,7 +11790,7 @@ fn step_299() -> Unit raise {
       @realarith.real_pos(),
     ]),
   )
-  sqrt_1_c.set(@tactics.prove(@parser.parse_term("sqrt(&1) = &1"), t923))
+  sqrt_1_c.set(@tactics.prove(@term_syntax.parse_term("sqrt(real_of_num(1)) == real_of_num(1)"), t923))
 }
 
 ///|
@@ -11823,7 +11823,7 @@ fn step_300() -> Unit raise {
     t925,
   )
   pow_2_sqrt_abs_c.set(
-    @tactics.prove(@parser.parse_term("forall x. sqrt(x pow 2) = abs(x)"), t926),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, sqrt(pow(x, 2)) == abs(x)"), t926),
   )
 }
 
@@ -11850,7 +11850,7 @@ fn step_301() -> Unit raise {
           @list.List([
             @realax.real_div(),
             @realarith.real_arith(
-              @parser.parse_term("(a * inv b) * c = (a * c) * inv b"),
+              @term_syntax.parse_term("(a : Real) * inv((b : Real)) * (c : Real) == a * c * inv(b)"),
             ),
           ]),
         ),
@@ -11903,7 +11903,7 @@ fn step_301() -> Unit raise {
   let t930 = @simp.rewrite_tac(
     @list.List([
       @realarith.real_arith(
-        @parser.parse_term("(x + e) pow 2 = e * (&2 * x + e) + x pow 2"),
+        @term_syntax.parse_term("pow((x : Real) + (e : Real), 2) == e * (real_of_num(2) * x + e) + pow(x, 2)"),
       ),
     ]),
   )
@@ -11912,17 +11912,17 @@ fn step_301() -> Unit raise {
       real_lt_div(),
       @realarith.real_sub_lt(),
       @realarith.real_arith(
-        @parser.parse_term("&0 < y ==> x < abs x + min (&1) y"),
+        @term_syntax.parse_term("real_of_num(0) < (y : Real) → (x : Real) < abs(x) + min(real_of_num(1), y)"),
       ),
     ]),
   )
   let t928 = @tactics.assume_tac(
     @realarith.real_arith(
-      @parser.parse_term("&0 < &2 * abs x + &1 /\\ &0 < &2 * abs x + &2"),
+      @term_syntax.parse_term("real_of_num(0) < real_of_num(2) * abs((x : Real)) + real_of_num(1) && real_of_num(0) < real_of_num(2) * abs(x) + real_of_num(2)"),
     ),
   )
   let t927 = @tactics.exists_tac(
-    @parser.parse_term("abs x + min (&1) ((y - x pow 2) / (&2 * abs x + &2))"),
+    @term_syntax.parse_term("abs((x : Real)) + min(real_of_num(1), ((y : Real) - pow(x, 2)) / (real_of_num(2) * abs(x) + real_of_num(2)))"),
   )
   let t941 = @tactics.thenl(
     @tactics.then_tac(
@@ -11947,7 +11947,7 @@ fn step_301() -> Unit raise {
     t940,
   )
   let lemma = @tactics.prove(
-    @parser.parse_term("forall x y. x pow 2 < y ==> ?x'. x < x' /\\ x' pow 2 < y"),
+    @term_syntax.parse_term("∀ x : Real, ∀ y : Real, pow(x, 2) < y → (∃ x' : Real, x < x' && pow(x', 2) < y)"),
     t941,
   )
   let t971 = @tactics.repeat_tac(
@@ -12142,9 +12142,9 @@ fn step_301() -> Unit raise {
   ])
   let t949 = @simp.rewrite_tac(@list.List([real_lt_inv_eq()]))
   let t948 = @simp.rewrite_tac(@list.List([real_pow_inv()]))
-  let t947 = @tactics.exists_tac(@parser.parse_term("inv x':real"))
+  let t947 = @tactics.exists_tac(@term_syntax.parse_term("inv((x' : Real))"))
   let t946 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("x':real"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(x' : Real)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -12152,10 +12152,10 @@ fn step_301() -> Unit raise {
   let t944 = @simp.asm_simp_tac(
     @list.List([real_pow_inv(), real_pow2_abs(), real_lt_inv2()]),
   )
-  let t942 = @parser.parse_term("inv y:real")
+  let t942 = @term_syntax.parse_term("inv((y : Real))")
   let t943 = @tactics.mp_tac(
     @bool.ispecl(
-      @list.List([@parser.parse_term("inv(abs x):real"), t942]),
+      @list.List([@term_syntax.parse_term("inv(abs((x : Real)))"), t942]),
       lemma,
     ),
   )
@@ -12213,7 +12213,7 @@ fn step_301() -> Unit raise {
   )
   let t1057 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t1056 = @tactics.match_mp_tac(
-    @realarith.real_arith(@parser.parse_term("abs z <= s ==> s < z ==> F")),
+    @realarith.real_arith(@term_syntax.parse_term("abs((z : Real)) <= (s : Real) → s < z → false")),
   )
   let t1054 = @tactics.conjuncts_then2(
     fn(
@@ -12310,10 +12310,10 @@ fn step_301() -> Unit raise {
     },
   )
   let t1055 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("z:real"))(t1054),
+    @tactics.x_choose_then(@term_syntax.parse_term("(z : Real)"))(t1054),
   )
   let t1047 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1046 = @parser.parse_term("y:real")
+  let t1046 = @term_syntax.parse_term("(y : Real)")
   let t1059 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -12321,7 +12321,7 @@ fn step_301() -> Unit raise {
           @tactics.then_tac(
             @tactics.mp_tac(
               @bool.ispecl(
-                @list.List([@parser.parse_term("s:real"), t1046]),
+                @list.List([@term_syntax.parse_term("(s : Real)"), t1046]),
                 lemma,
               ),
             ),
@@ -12386,7 +12386,7 @@ fn step_301() -> Unit raise {
   let t1039 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(real_le_square_abs())]),
   )
-  let t1037 = @parser.parse_term("(z:real) pow 2")
+  let t1037 = @term_syntax.parse_term("pow((z : Real), 2)")
   let t1038 = @tactics.trans_tac(@realarith.real_lte_trans())(t1037)
   let t1036 = @simp.rewrite_tac(@list.List([real_not_le()]))
   let t1035 = @simp.gen_rewrite_tac(
@@ -12493,7 +12493,7 @@ fn step_301() -> Unit raise {
       },
     ),
   )
-  let t1026 = @tactics.x_gen_tac(@parser.parse_term("x:real"))
+  let t1026 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Real)"))
   let t1025 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t1024 = @simp.rewrite_tac(@list.List([@realarith.real_not_lt()]))
   let t1023 = @tactics.conjuncts_then2(
@@ -12557,7 +12557,7 @@ fn step_301() -> Unit raise {
                     @tactics.then_tac(
                       @tactics.then_tac(
                         @tactics.disch_then(
-                          @tactics.x_choose_then(@parser.parse_term("z:real"))(
+                          @tactics.x_choose_then(@term_syntax.parse_term("(z : Real)"))(
                             t1023,
                           ),
                         ),
@@ -12583,13 +12583,13 @@ fn step_301() -> Unit raise {
     ),
     real_arith_tac,
   )
-  let t1019 = @tactics.undisch_tac(@parser.parse_term("&0 < y"))
+  let t1019 = @tactics.undisch_tac(@term_syntax.parse_term("real_of_num(0) < (y : Real)"))
   let t1018 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t1017 = @simp.asm_rewrite_tac(@list.List([real_not_le()]))
   let t1016 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t1015 = @simp.rewrite_tac(@list.List([real_pow_zero()]))
   let t1014 = @simp.asm_rewrite_tac(@list.List([@realarith.real_lt_le()]))
-  let t1013 = @class.asm_cases_tac(@parser.parse_term("s = &0"))
+  let t1013 = @class.asm_cases_tac(@term_syntax.parse_term("(s : Real) == real_of_num(0)"))
   let t1045 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -12601,7 +12601,7 @@ fn step_301() -> Unit raise {
                   @tactics.then_tac(
                     @tactics.then_tac(
                       @tactics.undisch_tac(
-                        @parser.parse_term("y:real < s pow 2"),
+                        @term_syntax.parse_term("(y : Real) < pow((s : Real), 2)"),
                       ),
                       t1013,
                     ),
@@ -12624,14 +12624,14 @@ fn step_301() -> Unit raise {
     t1044,
   ])
   let t1012 = @simp.asm_rewrite_tac(@list.List([@class.not_imp()]))
-  let t1011 = @parser.parse_term("y:real")
+  let t1011 = @term_syntax.parse_term("(y : Real)")
   let t1060 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.mp_tac(
             @bool.ispecl(
-              @list.List([@parser.parse_term("s:real"), t1011]),
+              @list.List([@term_syntax.parse_term("(s : Real)"), t1011]),
               lemma_p,
             ),
           ),
@@ -12648,7 +12648,7 @@ fn step_301() -> Unit raise {
   let t1009 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@realax.real_le_antisym()), t1008]),
   )
-  let t1005 = @tactics.x_gen_tac(@parser.parse_term("s:real"))
+  let t1005 = @tactics.x_gen_tac(@term_syntax.parse_term("(s : Real)"))
   let t1006 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t1005),
     @tactics.strip_tac,
@@ -12702,12 +12702,12 @@ fn step_301() -> Unit raise {
     }),
   )
   let t999 = @realarith.real_arith(
-    @parser.parse_term("&0 < y /\\ &0 < y pow 2 ==> y <= (y + &1) pow 2"),
+    @term_syntax.parse_term("real_of_num(0) < (y : Real) && real_of_num(0) < pow(y, 2) → y <= pow(y + real_of_num(1), 2)"),
   )
   let t1000 = @simp.asm_simp_tac(
     @list.List([@equal.gsym(real_lt_square_abs()), real_pow_lt(), t999]),
   )
-  let t997 = @parser.parse_term("(y + &1) pow 2")
+  let t997 = @term_syntax.parse_term("pow((y : Real) + real_of_num(1), 2)")
   let t998 = @tactics.trans_tac(@realarith.real_let_trans())(t997)
   let t996 = @simp.rewrite_tac(@list.List([real_not_le()]))
   let t995 = @simp.gen_rewrite_tac(
@@ -12814,8 +12814,8 @@ fn step_301() -> Unit raise {
       },
     ),
   )
-  let t986 = @tactics.x_gen_tac(@parser.parse_term("x:real"))
-  let t985 = @tactics.exists_tac(@parser.parse_term("y + &1"))
+  let t986 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Real)"))
+  let t985 = @tactics.exists_tac(@term_syntax.parse_term("(y : Real) + real_of_num(1)"))
   let t984 = @tactics.repeat_tac(
     @tactics.pop_assum(fn(
       x981 : @kernel.Thm,
@@ -12880,7 +12880,7 @@ fn step_301() -> Unit raise {
                           @list.List([
                             @tactics.then_tac(
                               @tactics.then_tac(
-                                @tactics.exists_tac(@parser.parse_term("&0")),
+                                @tactics.exists_tac(@term_syntax.parse_term("real_of_num(0)")),
                                 t984,
                               ),
                               real_arith_tac,
@@ -12913,7 +12913,7 @@ fn step_301() -> Unit raise {
   let t980 = @simp.rewrite_tac(@list.List([]))
   let t979 = @tactics.mp_tac(
     @bool.ispec(
-      @parser.parse_term("\\x. &0 <= x /\\ x pow 2 <= y"),
+      @term_syntax.parse_term("(x : Real) => real_of_num(0) <= x && pow(x, 2) <= (y : Real)"),
       @realax.real_complete(),
     ),
   )
@@ -13009,7 +13009,7 @@ fn step_301() -> Unit raise {
     t1060,
   )
   let main_lemma = @tactics.prove(
-    @parser.parse_term("forall y. &0 < y ==> ?x. x pow 2 = y"),
+    @term_syntax.parse_term("∀ y : Real, real_of_num(0) < y → (∃ x : Real, pow(x, 2) == y)"),
     t1061,
   )
   let t1095 = @simp.rewrite_tac(
@@ -13018,7 +13018,7 @@ fn step_301() -> Unit raise {
   let t1094 = @simp.asm_simp_tac(
     @list.List([
       real_sgn(),
-      @realarith.real_arith(@parser.parse_term("&0 < abs x <=> ~(x = &0)")),
+      @realarith.real_arith(@term_syntax.parse_term("(real_of_num(0) < abs((x : Real))) == !(x == real_of_num(0))")),
     ]),
   )
   let t1093 = @simp.rewrite_tac(
@@ -13027,14 +13027,14 @@ fn step_301() -> Unit raise {
   let t1092 = @simp.asm_rewrite_tac(
     @list.List([real_pow_mul(), @equal.gsym(real_sgn_pow()), real_sgn_pow_2()]),
   )
-  let t1091 = @tactics.exists_tac(@parser.parse_term("real_sgn x * y"))
+  let t1091 = @tactics.exists_tac(@term_syntax.parse_term("real_sgn((x : Real)) * (y : Real)"))
   let t1090 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("y:real"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(y : Real)"))(
       @tactics.strip_assume_tac,
     ),
   )
   let t1089 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(real_abs_nz())]))
-  let t1085 = @parser.parse_term("abs x")
+  let t1085 = @term_syntax.parse_term("abs((x : Real))")
   let t1088 = @tactics.first_x_assum(fn(
     x1087 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13119,7 +13119,7 @@ fn step_301() -> Unit raise {
                 @tactics.then_tac(
                   @tactics.then_tac(
                     @tactics.then_tac(
-                      @class.asm_cases_tac(@parser.parse_term("x = &0")),
+                      @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)")),
                       t1080,
                     ),
                     t1081,
@@ -13237,13 +13237,13 @@ fn step_301() -> Unit raise {
   let t1071 = @simp.asm_rewrite_tac(
     @list.List([real_pow2_abs(), @equal.gsym(real_abs_nz())]),
   )
-  let t1070 = @tactics.exists_tac(@parser.parse_term("abs y:real"))
-  let t1069 = @tactics.x_gen_tac(@parser.parse_term("y:real"))
+  let t1070 = @tactics.exists_tac(@term_syntax.parse_term("abs((y : Real))"))
+  let t1069 = @tactics.x_gen_tac(@term_syntax.parse_term("(y : Real)"))
   let t1068 = @simp.asm_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
   let t1067 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("x:real"), main_lemma),
+    @bool.spec(@term_syntax.parse_term("(x : Real)"), main_lemma),
   )
   let t1097 = @list.List([
     @tactics.then_tac(
@@ -13277,7 +13277,7 @@ fn step_301() -> Unit raise {
     t1096,
   ])
   let t1066 = @tactics.subgoal_then(
-    @parser.parse_term("forall x. &0 < x ==> ?y. &0 < y /\\ y pow 2 = x"),
+    @term_syntax.parse_term("∀ x : Real, real_of_num(0) < x → (∃ y : Real, real_of_num(0) < y && pow(y, 2) == x)"),
     fn(
       x1063 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -13363,7 +13363,7 @@ pub fn sqrt_works_gen() -> @kernel.Thm {
 fn step_302() -> Unit raise {
   let t1105 = @simp.simp_tac(
     @list.List([
-      @realarith.real_arith(@parser.parse_term("--x = x <=> x = &0")),
+      @realarith.real_arith(@term_syntax.parse_term("(-(x : Real) == x) == (x == real_of_num(0))")),
       real_sgn_eq(),
       @calc_int.real_neg_0(),
       sqrt_0(),
@@ -13406,7 +13406,7 @@ fn step_302() -> Unit raise {
     ]),
   )
   let t1099 = @tactics.mp_tac(
-    @equal.gsym(@bool.spec(@parser.parse_term("x:real"), sqrt_works_gen())),
+    @equal.gsym(@bool.spec(@term_syntax.parse_term("(x : Real)"), sqrt_works_gen())),
   )
   let t1106 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13471,7 +13471,7 @@ fn step_303() -> Unit raise {
     t1108,
   )
   sqrt_neg_c.set(
-    @tactics.prove(@parser.parse_term("forall x. sqrt(--x) = --sqrt(x)"), t1109),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, sqrt(-x) == -sqrt(x)"), t1109),
   )
 }
 
@@ -13490,7 +13490,7 @@ fn step_304() -> Unit raise {
   let t1110 = @simp.rewrite_tac(@list.List([sqrt_works_gen()]))
   real_sgn_sqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. real_sgn(sqrt x) = real_sgn x"),
+      @term_syntax.parse_term("∀ x : Real, real_sgn(sqrt(x)) == real_sgn(x)"),
       t1110,
     ),
   )
@@ -13558,7 +13558,7 @@ fn step_305() -> Unit raise {
   )
   let t1112 = @simp.rewrite_tac(@list.List([real_sgn()]))
   let t1111 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("x:real"), sqrt_works_gen()),
+    @bool.spec(@term_syntax.parse_term("(x : Real)"), sqrt_works_gen()),
   )
   let t1117 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13572,7 +13572,7 @@ fn step_305() -> Unit raise {
   )
   sqrt_works_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x ==> &0 <= sqrt(x) /\\ sqrt(x) pow 2 = x"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) <= x → real_of_num(0) <= sqrt(x) && pow(sqrt(x), 2) == x"),
       t1117,
     ),
   )
@@ -13592,7 +13592,7 @@ pub fn sqrt_works() -> @kernel.Thm {
 fn step_306() -> Unit raise {
   let t1118 = @meson.meson_tac(@list.List([real_le_pow_2(), sqrt_works()]))
   real_pos_eq_square_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x <=> ?y. y pow 2 = x"), t1118),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) <= x) == (∃ y : Real, pow(y, 2) == x)"), t1118),
   )
 }
 
@@ -13612,7 +13612,7 @@ pub fn real_pos_eq_square() -> @kernel.Thm {
 fn step_307() -> Unit raise {
   let t1119 = @meson.meson_tac(@list.List([sqrt_works()]))
   sqrt_pos_le_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= x ==> &0 <= sqrt(x)"), t1119),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) <= x → real_of_num(0) <= sqrt(x)"), t1119),
   )
 }
 
@@ -13631,7 +13631,7 @@ fn step_308() -> Unit raise {
   let t1120 = @meson.meson_tac(@list.List([sqrt_works()]))
   sqrt_pow_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x ==> sqrt(x) pow 2 = x"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) <= x → pow(sqrt(x), 2) == x"),
       t1120,
     ),
   )
@@ -13658,7 +13658,7 @@ fn step_309() -> Unit raise {
   )
   sqrt_pow2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. sqrt(x) pow 2 = x <=> &0 <= x"),
+      @term_syntax.parse_term("∀ x : Real, (pow(sqrt(x), 2) == x) == (real_of_num(0) <= x)"),
       t1121,
     ),
   )
@@ -13691,7 +13691,7 @@ fn step_310() -> Unit raise {
   )
   sqrt_mul_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sqrt(x * y) = sqrt x * sqrt y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, sqrt(x * y) == sqrt(x) * sqrt(y)"),
       t1124,
     ),
   )
@@ -13725,7 +13725,7 @@ fn step_311() -> Unit raise {
     t1125,
   )
   sqrt_inv_c.set(
-    @tactics.prove(@parser.parse_term("forall x. sqrt (inv x) = inv(sqrt x)"), t1126),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, sqrt(inv(x)) == inv(sqrt(x))"), t1126),
   )
 }
 
@@ -13746,7 +13746,7 @@ fn step_312() -> Unit raise {
   )
   sqrt_div_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sqrt (x / y) = sqrt x / sqrt y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, sqrt(x / y) == sqrt(x) / sqrt(y)"),
       t1127,
     ),
   )
@@ -13769,7 +13769,7 @@ fn step_313() -> Unit raise {
     @list.List([@equal.gsym(@realax.real_gt()), t1128, real_sgn_sqrt()]),
   )
   sqrt_lt_0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < sqrt x <=> &0 < x"), t1129),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) < sqrt(x)) == (real_of_num(0) < x)"), t1129),
   )
 }
 
@@ -13791,7 +13791,7 @@ fn step_314() -> Unit raise {
     t1130,
   )
   sqrt_eq_0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. sqrt x = &0 <=> x = &0"), t1131),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (sqrt(x) == real_of_num(0)) == (x == real_of_num(0))"), t1131),
   )
 }
 
@@ -13812,14 +13812,14 @@ fn step_315() -> Unit raise {
     @simp.rewrite_tac(
       @list.List([
         @realarith.real_arith(
-          @parser.parse_term("&0 <= x <=> &0 < x \\/ x = &0"),
+          @term_syntax.parse_term("(real_of_num(0) <= (x : Real)) == (real_of_num(0) < x || x == real_of_num(0))"),
         ),
       ]),
     ),
     t1132,
   )
   sqrt_le_0_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 <= sqrt x <=> &0 <= x"), t1133),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (real_of_num(0) <= sqrt(x)) == (real_of_num(0) <= x)"), t1133),
   )
 }
 
@@ -13847,7 +13847,7 @@ fn step_316() -> Unit raise {
     t1134,
   )
   real_abs_sqrt_c.set(
-    @tactics.prove(@parser.parse_term("forall x. abs(sqrt x) = sqrt(abs x)"), t1135),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, abs(sqrt(x)) == sqrt(abs(x))"), t1135),
   )
 }
 
@@ -13912,8 +13912,8 @@ fn step_317() -> Unit raise {
     }),
   )
   let t1158 = @simp.rewrite_tac(@list.List([sqrt_neg()]))
-  let t1154 = @parser.parse_term("--x:real")
-  let t1155 = @list.List([@parser.parse_term("--y:real"), t1154])
+  let t1154 = @term_syntax.parse_term("-(x : Real)")
+  let t1155 = @list.List([@term_syntax.parse_term("-(y : Real)"), t1154])
   let t1163 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -13994,7 +13994,7 @@ fn step_317() -> Unit raise {
   let t1150 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(real_not_le()), sqrt_le_0()]),
   )
-  let t1149 = @tactics.exists_tac(@parser.parse_term("&0"))
+  let t1149 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(0)"))
   let t1164 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14005,9 +14005,9 @@ fn step_317() -> Unit raise {
     ),
     t1163,
   ])
-  let t1148 = @class.asm_cases_tac(@parser.parse_term("&0 <= y"))
+  let t1148 = @class.asm_cases_tac(@term_syntax.parse_term("real_of_num(0) <= (y : Real)"))
   let t1147 = @simp.asm_simp_tac(@list.List([]))
-  let t1146 = @class.asm_cases_tac(@parser.parse_term("&0 <= x"))
+  let t1146 = @class.asm_cases_tac(@term_syntax.parse_term("real_of_num(0) <= (x : Real)"))
   let t1165 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14067,7 +14067,7 @@ fn step_317() -> Unit raise {
     }),
   )
   let t1141 = @simp.asm_rewrite_tac(@list.List([sqrt_works_gen(), sqrt_le_0()]))
-  let t1140 = @tactics.exists_tac(@parser.parse_term("2"))
+  let t1140 = @tactics.exists_tac(@term_syntax.parse_term("2"))
   let t1139 = @tactics.match_mp_tac(real_pow_lt2_rev())
   let t1166 = @list.List([
     @tactics.then_tac(
@@ -14087,7 +14087,7 @@ fn step_317() -> Unit raise {
   ])
   let t1167 = @tactics.thenl(
     @tactics.subgoal_then(
-      @parser.parse_term("forall x y. &0 <= x /\\ x < y ==> sqrt x < sqrt y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) <= x && x < y → sqrt(x) < sqrt(y)"),
       fn(
         x1136 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -14139,7 +14139,7 @@ fn step_317() -> Unit raise {
   )
   sqrt_mono_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x < y ==> sqrt(x) < sqrt(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y → sqrt(x) < sqrt(y)"),
       t1167,
     ),
   )
@@ -14162,7 +14162,7 @@ fn step_318() -> Unit raise {
   )
   sqrt_mono_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x <= y ==> sqrt(x) <= sqrt(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x <= y → sqrt(x) <= sqrt(y)"),
       t1168,
     ),
   )
@@ -14185,7 +14185,7 @@ fn step_319() -> Unit raise {
   )
   sqrt_mono_lt_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sqrt(x) < sqrt(y) <=> x < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (sqrt(x) < sqrt(y)) == (x < y)"),
       t1169,
     ),
   )
@@ -14210,7 +14210,7 @@ fn step_320() -> Unit raise {
   )
   sqrt_mono_le_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sqrt(x) <= sqrt(y) <=> x <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (sqrt(x) <= sqrt(y)) == (x <= y)"),
       t1170,
     ),
   )
@@ -14235,7 +14235,7 @@ fn step_321() -> Unit raise {
   )
   sqrt_inj_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sqrt(x) = sqrt(y) <=> x = y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, (sqrt(x) == sqrt(y)) == (x == y)"),
       t1171,
     ),
   )
@@ -14255,7 +14255,7 @@ pub fn sqrt_inj() -> @kernel.Thm {
 fn step_322() -> Unit raise {
   let t1172 = @meson.meson_tac(@list.List([sqrt_inj(), sqrt_1()]))
   sqrt_eq_1_c.set(
-    @tactics.prove(@parser.parse_term("forall x. sqrt x = &1 <=> x = &1"), t1172),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, (sqrt(x) == real_of_num(1)) == (x == real_of_num(1))"), t1172),
   )
 }
 
@@ -14275,7 +14275,7 @@ fn step_323() -> Unit raise {
     @list.List([@realarith.real_lt_le(), sqrt_pos_le(), sqrt_eq_0()]),
   )
   sqrt_pos_lt_c.set(
-    @tactics.prove(@parser.parse_term("forall x. &0 < x ==> &0 < sqrt(x)"), t1173),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, real_of_num(0) < x → real_of_num(0) < sqrt(x)"), t1173),
   )
 }
 
@@ -14296,7 +14296,7 @@ fn step_324() -> Unit raise {
   )
   real_le_lsqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= y /\\ x <= y pow 2 ==> sqrt(x) <= y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) <= y && x <= pow(y, 2) → sqrt(x) <= y"),
       t1174,
     ),
   )
@@ -14327,7 +14327,7 @@ fn step_325() -> Unit raise {
   )
   real_le_rsqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x pow 2 <= y ==> x <= sqrt(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, pow(x, 2) <= y → x <= sqrt(y)"),
       t1175,
     ),
   )
@@ -14350,7 +14350,7 @@ fn step_326() -> Unit raise {
   )
   real_lt_lsqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= y /\\ x < y pow 2 ==> sqrt x < y"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) <= y && x < pow(y, 2) → sqrt(x) < y"),
       t1176,
     ),
   )
@@ -14374,7 +14374,7 @@ fn step_327() -> Unit raise {
   let t1179 = @tactics.match_mp_tac(sqrt_mono_lt())
   let t1178 = @simp.rewrite_tac(@list.List([@equal.gsym(pow_2_sqrt_abs())]))
   let t1177 = @tactics.match_mp_tac(
-    @realarith.real_arith(@parser.parse_term("abs x < a ==> x < a")),
+    @realarith.real_arith(@term_syntax.parse_term("abs((x : Real)) < (a : Real) → x < a")),
   )
   let t1181 = @tactics.then_tac(
     @tactics.then_tac(
@@ -14388,7 +14388,7 @@ fn step_327() -> Unit raise {
   )
   real_lt_rsqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x pow 2 < y ==> x < sqrt(y)"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, pow(x, 2) < y → x < sqrt(y)"),
       t1181,
     ),
   )
@@ -14428,7 +14428,7 @@ fn step_328() -> Unit raise {
   )
   sqrt_even_pow2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. EVEN n ==> (sqrt(&2 pow n) = &2 pow (n DIV 2))"),
+      @term_syntax.parse_term("∀ n : Num, EVEN(n) → sqrt(pow(real_of_num(2), n)) == pow(real_of_num(2), DIV(n, 2))"),
       t1183,
     ),
   )
@@ -14478,7 +14478,7 @@ fn step_329() -> Unit raise {
   )
   real_div_sqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x. &0 <= x ==> x / sqrt(x) = sqrt(x)"),
+      @term_syntax.parse_term("∀ x : Real, real_of_num(0) <= x → x / sqrt(x) == sqrt(x)"),
       t1188,
     ),
   )
@@ -14529,7 +14529,7 @@ fn step_331() -> Unit raise {
   )
   real_lsqrt_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. &0 <= x /\\ sqrt x <= y ==> x <= y pow 2"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) <= x && sqrt(x) <= y → x <= pow(y, 2)"),
       t1190,
     ),
   )
@@ -14549,7 +14549,7 @@ pub fn real_lsqrt_le() -> @kernel.Thm {
 fn step_332() -> Unit raise {
   let t1191 = @simp.rewrite_tac(@list.List([sqrt_works_gen()]))
   real_sqrt_pow_2_c.set(
-    @tactics.prove(@parser.parse_term("forall x. sqrt x pow 2 = abs x"), t1191),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Real, pow(sqrt(x), 2) == abs(x)"), t1191),
   )
 }
 
@@ -14571,7 +14571,7 @@ fn step_333() -> Unit raise {
     @list.List([sqrt_pow_2(), @realax.real_le_refl()]),
   )
   let t1199 = @realarith.real_arith(
-    @parser.parse_term("(x - y:real) * (x + y) = x pow 2 - y pow 2"),
+    @term_syntax.parse_term("((x : Real) - (y : Real)) * (x + y) == pow(x, 2) - pow(y, 2)"),
   )
   let t1201 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@equal.gsym(real_abs_mul()), t1199])),
@@ -14580,7 +14580,7 @@ fn step_333() -> Unit raise {
   let t1198 = @simp.asm_simp_tac(@list.List([sqrt_pos_le()]))
   let t1197 = @tactics.match_mp_tac(
     @realarith.real_arith(
-      @parser.parse_term("&0 <= x /\\ &0 <= y ==> abs(x - y) <= abs(x + y)"),
+      @term_syntax.parse_term("real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) → abs(x - y) <= abs(x + y)"),
     ),
   )
   let t1196 = @simp.rewrite_tac(@list.List([real_abs_pos()]))
@@ -14594,7 +14594,7 @@ fn step_333() -> Unit raise {
     ),
     t1201,
   ])
-  let t1194 = @parser.parse_term("abs(sqrt x - sqrt y) * abs(sqrt x + sqrt y)")
+  let t1194 = @term_syntax.parse_term("abs(sqrt((x : Real)) - sqrt((y : Real))) * abs(sqrt(x) + sqrt(y))")
   let t1195 = @tactics.trans_tac(@realax.real_le_trans())(t1194)
   let t1193 = @simp.rewrite_tac(@list.List([@realarith.real_pow_2()]))
   let t1192 = @tactics.match_mp_tac(real_le_rsqrt())
@@ -14697,14 +14697,14 @@ fn step_334() -> Unit raise {
     ]),
   )
   let t1229 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("sqrt(--x) - sqrt y"), real_le_pow_2()),
+    @bool.spec(@term_syntax.parse_term("sqrt(-(x : Real)) - sqrt((y : Real))"), real_le_pow_2()),
   )
   let t1228 = @tactics.match_mp_tac(real_le_rsqrt())
   let t1227 = @simp.asm_simp_tac(
     @list.List([
       sqrt_le_0(),
       @realarith.real_arith(
-        @parser.parse_term("~(&0 <= x) /\\ &0 <= y ==> abs(x - y) = y - x"),
+        @term_syntax.parse_term("!(real_of_num(0) <= (x : Real)) && real_of_num(0) <= (y : Real) → abs(x - y) == y - x"),
       ),
     ]),
   )
@@ -14760,10 +14760,10 @@ fn step_334() -> Unit raise {
   let t1220 = @simp.rewrite_tac(
     @list.List([
       sqrt_mono_le_eq(),
-      @realarith.real_arith(@parser.parse_term("abs x <= &2 * abs x")),
+      @realarith.real_arith(@term_syntax.parse_term("abs((x : Real)) <= real_of_num(2) * abs(x)")),
     ]),
   )
-  let t1218 = @parser.parse_term("sqrt(abs(--x - --y))")
+  let t1218 = @term_syntax.parse_term("sqrt(abs(-(x : Real) - -(y : Real)))")
   let t1219 = @tactics.trans_tac(@realax.real_le_trans())(t1218)
   let t1217 = @simp.rewrite_tac(@list.List([@equal.gsym(sqrt_neg())]))
   let t1226 = @list.List([
@@ -14777,7 +14777,7 @@ fn step_334() -> Unit raise {
                 @simp.once_rewrite_tac(
                   @list.List([
                     @realarith.real_arith(
-                      @parser.parse_term("abs(x - y) = abs(--x - --y)"),
+                      @term_syntax.parse_term("abs((x : Real) - (y : Real)) == abs(-x - -y)"),
                     ),
                   ]),
                 ),
@@ -14794,7 +14794,7 @@ fn step_334() -> Unit raise {
       real_arith_tac,
     ),
   ])
-  let t1216 = @class.asm_cases_tac(@parser.parse_term("&0 <= y"))
+  let t1216 = @class.asm_cases_tac(@term_syntax.parse_term("real_of_num(0) <= (y : Real)"))
   let t1214 = @tactics.repeat_tac(
     @tactics.pop_assum(fn(
       x1211 : @kernel.Thm,
@@ -14847,10 +14847,10 @@ fn step_334() -> Unit raise {
   let t1209 = @simp.rewrite_tac(
     @list.List([
       sqrt_mono_le_eq(),
-      @realarith.real_arith(@parser.parse_term("abs x <= &2 * abs x")),
+      @realarith.real_arith(@term_syntax.parse_term("abs((x : Real)) <= real_of_num(2) * abs(x)")),
     ]),
   )
-  let t1208 = @parser.parse_term("sqrt(abs(x - y))")
+  let t1208 = @term_syntax.parse_term("sqrt(abs((x : Real) - (y : Real)))")
   let t1215 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -14867,11 +14867,11 @@ fn step_334() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t1207 = @class.asm_cases_tac(@parser.parse_term("&0 <= x"))
-  let t1205 = @parser.parse_term("y:real")
+  let t1207 = @class.asm_cases_tac(@term_syntax.parse_term("real_of_num(0) <= (x : Real)"))
+  let t1205 = @term_syntax.parse_term("(y : Real)")
   let t1206 = @tactics.map_every(
     @tactics.x_gen_tac,
-    @list.List([@parser.parse_term("x:real"), t1205]),
+    @list.List([@term_syntax.parse_term("(x : Real)"), t1205]),
   )
   let t1204 = @list.List([
     @simp.rewrite_tac(@list.List([real_abs_sub()])),
@@ -14928,7 +14928,7 @@ fn step_334() -> Unit raise {
   )
   real_abs_le_sqrt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. abs(sqrt x - sqrt y) <= sqrt(&2 * abs(x - y))"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, abs(sqrt(x) - sqrt(y)) <= sqrt(real_of_num(2) * abs(x - y))"),
       t1237,
     ),
   )

@@ -14,117 +14,117 @@ Generating HOL version of proof
 3 basis elements and 0 critical pairs
 Generating HOL version of proof
 Formal_ineqs/trig/atn quotations (111):
-  halfatn x = x / (sqrt (&1 + x pow 2) + &1)
-  halfatn4 = halfatn o halfatn o halfatn o halfatn
-  &0 < a ==> abs a = a
-  &0 <= a ==> &0 < &1 + a
-  forall x. &0 < &1 + x pow 2
-  &0 <= a ==> &0 < a + &1
-  forall x. &0 < sqrt (&1 + x pow 2) + &1
-  x:real
-  sqrt (&1 + x pow 2) pow 2 = &1 + x pow 2
-  forall x. &1 - halfatn x pow 2 = &2 / (sqrt (&1 + x pow 2) + &1)
-  x < y ==> x < &1 * (y + &1)
-  forall x. abs (halfatn x) < &1
-  x:real
-  t * (&1 + &1) <= t * a ==> t <= t * (a / &2)
-  t / &2 * a = t * (a / &2)
-  t:real
-  forall x t. abs x < t ==> abs (halfatn x) < t / &2
-  x:real
-  abs (halfatn x * halfatn x) < &1
-  forall x. atn x = &2 * atn (halfatn x)
-  &0 < y2 ==> ~(y2 = &0)
-  (x2 / y2 * y1) * y2 = x2 * y1 * (y2 / y2)
-  y2:real
-  x2 / y2 * y1
-  x1:real
-  forall x1 y1 x2 y2. &0 < y1 /\\ &0 < y2 ==> (x1 / y1 < x2 / y2 <=> x1 * y2 < x2 * y1)
-  --(a / b) = --a / b
-  forall x. halfatn (--x) = --halfatn x
-  (forall x. &0 < x ==> real_sgn x = &1) /\\\n    (forall x. x < &0 ==> real_sgn x = -- &1) /\\\n    (forall x. x = &0 ==> real_sgn x = &0)
-  forall a b. (real_sgn a = real_sgn b) ==> (&0 <= a <=> &0 <= b)
-  forall a b. (real_sgn a = real_sgn b) ==> (&0 < a <=> &0 < b)
-  forall x. real_sgn (halfatn x) = real_sgn x
-  forall x. &0 <= halfatn x <=> &0 <= x
-  forall x. &0 < halfatn x <=> &0 < x
-  forall x. &0 <= x ==> &0 <= halfatn x
-  --(a / b) = --a / b
-  a < &0 <=> &0 < --a
-  forall x. x < &0 ==> halfatn x < &0
-  forall x. &0 <= x ==> &0 <= halfatn4 x
-  forall x. &0 <= halfatn4 x <=> &0 <= x
-  forall x. &0 < halfatn4 x <=> &0 < x
-  ~(y < &0) ==> &0 <= y
-  &0
-  x < &0
-  a < b <=> --b < --a
-  y < &0
-  abs y = y /\\ abs x = x
-  forall a. sqrt (&1 + a pow 2) = abs (sqrt (&1 + a pow 2))
-  forall x y. &0 <= x /\\ x < y ==> halfatn x < halfatn y
-  forall x y. x < y ==> halfatn x < halfatn y
-  forall x y. x <= y ==> halfatn x <= halfatn y
-  &16 * x = &2 * &2 * &2 * &2 * x
-  forall x. atn x = &16 * atn(halfatn4 x)
-  inv (&8) = &1 / &2 / &2 / &2
-  forall x. abs (halfatn4 x) < inv (&8)
+  (halfatn : (Real) -> Real)((x : Real)) == x / (sqrt(real_of_num(1) + pow(x, 2)) + real_of_num(1))
+  (halfatn4 : (Real) -> Real) == o(halfatn, o(halfatn, o(halfatn, halfatn)))
+  real_of_num(0) < (a : Real) \226\134\146 abs(a) == a
+  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) < real_of_num(1) + a
+  \226\136\128 x : Real, real_of_num(0) < real_of_num(1) + pow(x, 2)
+  real_of_num(0) <= (a : Real) \226\134\146 real_of_num(0) < a + real_of_num(1)
+  \226\136\128 x : Real, real_of_num(0) < sqrt(real_of_num(1) + pow(x, 2)) + real_of_num(1)
+  (x : Real)
+  pow(sqrt(real_of_num(1) + pow((x : Real), 2)), 2) == real_of_num(1) + pow(x, 2)
+  \226\136\128 x : Real, real_of_num(1) - pow(halfatn(x), 2) == real_of_num(2) / (sqrt(real_of_num(1) + pow(x, 2)) + real_of_num(1))
+  (x : Real) < (y : Real) \226\134\146 x < real_of_num(1) * (y + real_of_num(1))
+  \226\136\128 x : Real, abs(halfatn(x)) < real_of_num(1)
+  (x : Real)
+  (t : Real) * (real_of_num(1) + real_of_num(1)) <= t * (a : Real) \226\134\146 t <= t * (a / real_of_num(2))
+  (t : Real) / real_of_num(2) * (a : Real) == t * (a / real_of_num(2))
+  (t : Real)
+  \226\136\128 x : Real, \226\136\128 t : Real, abs(x) < t \226\134\146 abs(halfatn(x)) < t / real_of_num(2)
+  (x : Real)
+  abs(halfatn((x : Real)) * halfatn(x)) < real_of_num(1)
+  \226\136\128 x : Real, atn(x) == real_of_num(2) * atn(halfatn(x))
+  real_of_num(0) < (y2 : Real) \226\134\146 !(y2 == real_of_num(0))
+  (x2 : Real) / (y2 : Real) * (y1 : Real) * y2 == x2 * (y1 * (y2 / y2))
+  (y2 : Real)
+  (x2 : Real) / (y2 : Real) * (y1 : Real)
+  (x1 : Real)
+  \226\136\128 x1 : Real, \226\136\128 y1 : Real, \226\136\128 x2 : Real, \226\136\128 y2 : Real, real_of_num(0) < y1 && real_of_num(0) < y2 \226\134\146 (x1 / y1 < x2 / y2) == (x1 * y2 < x2 * y1)
+  -((a : Real) / (b : Real)) == -a / b
+  \226\136\128 x : Real, halfatn(-x) == -halfatn(x)
+  (\226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_sgn(x) == real_of_num(1)) && (\226\136\128 x : Real, x < real_of_num(0) \226\134\146 real_sgn(x) == -real_of_num(1)) && (\226\136\128 x : Real, x == real_of_num(0) \226\134\146 real_sgn(x) == real_of_num(0))
+  \226\136\128 a : Real, \226\136\128 b : Real, real_sgn(a) == real_sgn(b) \226\134\146 (real_of_num(0) <= a) == (real_of_num(0) <= b)
+  \226\136\128 a : Real, \226\136\128 b : Real, real_sgn(a) == real_sgn(b) \226\134\146 (real_of_num(0) < a) == (real_of_num(0) < b)
+  \226\136\128 x : Real, real_sgn(halfatn(x)) == real_sgn(x)
+  \226\136\128 x : Real, (real_of_num(0) <= halfatn(x)) == (real_of_num(0) <= x)
+  \226\136\128 x : Real, (real_of_num(0) < halfatn(x)) == (real_of_num(0) < x)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 real_of_num(0) <= halfatn(x)
+  -((a : Real) / (b : Real)) == -a / b
+  ((a : Real) < real_of_num(0)) == (real_of_num(0) < -a)
+  \226\136\128 x : Real, x < real_of_num(0) \226\134\146 halfatn(x) < real_of_num(0)
+  \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 real_of_num(0) <= halfatn4(x)
+  \226\136\128 x : Real, (real_of_num(0) <= halfatn4(x)) == (real_of_num(0) <= x)
+  \226\136\128 x : Real, (real_of_num(0) < halfatn4(x)) == (real_of_num(0) < x)
+  !((y : Real) < real_of_num(0)) \226\134\146 real_of_num(0) <= y
+  real_of_num(0)
+  (x : Real) < real_of_num(0)
+  ((a : Real) < (b : Real)) == (-b < -a)
+  (y : Real) < real_of_num(0)
+  abs((y : Real)) == y && abs((x : Real)) == x
+  \226\136\128 a : Real, sqrt(real_of_num(1) + pow(a, 2)) == abs(sqrt(real_of_num(1) + pow(a, 2)))
+  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x < y \226\134\146 halfatn(x) < halfatn(y)
+  \226\136\128 x : Real, \226\136\128 y : Real, x < y \226\134\146 halfatn(x) < halfatn(y)
+  \226\136\128 x : Real, \226\136\128 y : Real, x <= y \226\134\146 halfatn(x) <= halfatn(y)
+  real_of_num(16) * (x : Real) == real_of_num(2) * (real_of_num(2) * (real_of_num(2) * (real_of_num(2) * x)))
+  \226\136\128 x : Real, atn(x) == real_of_num(16) * atn(halfatn4(x))
+  inv(real_of_num(8)) == real_of_num(1) / real_of_num(2) / real_of_num(2) / real_of_num(2)
+  \226\136\128 x : Real, abs(halfatn4(x)) < inv(real_of_num(8))
   0
-  atn x
-  -- &1 * x <= &0 <=> &0 <= x
-  -- &1 pow 2 = &1
-  (2 * n + 3) + 2 * n + 1 = (2 * n + 2) * 2
-  (n + 1) + n = 2 * n + 1
-  ((a / b) * c) * (d / e) * f = (a * d) * (c * f) / b / e
-  forall n. &0 < &(2 * n + 3) /\\ &0 < &(2 * n + 1)
-  &1 / a * b = b / a
-  2 * (n + 1) + 1 = 2 * n + 3
-  forall x. abs x < &1 ==>\n     let f = (\\i. (-- &1) pow i / &(2 * i + 1) * x pow (2 * i + 1)) in\n       (forall n. abs (f (n + 1)) <= abs (f n) /\\ f (n + 1) * f n <= &0) /\\\n\t ((f ---> &0) sequentially)
-  &1 / a * b = b / a
-  2 * (n + 1) + 1 = 2 * n + 3
-  (n + 1) - 1 = n
-  n + 1
+  atn((x : Real))
+  (-real_of_num(1) * (x : Real) <= real_of_num(0)) == (real_of_num(0) <= x)
+  pow(-real_of_num(1), 2) == real_of_num(1)
+  2 * (n : Num) + 3 + (2 * n + 1) == (2 * n + 2) * 2
+  (n : Num) + 1 + n == 2 * n + 1
+  (a : Real) / (b : Real) * (c : Real) * ((d : Real) / (e : Real) * (f : Real)) == a * d * (c * f / b / e)
+  \226\136\128 n : Num, real_of_num(0) < real_of_num(2 * n + 3) && real_of_num(0) < real_of_num(2 * n + 1)
+  real_of_num(1) / (a : Real) * (b : Real) == b / a
+  2 * ((n : Num) + 1) + 1 == 2 * n + 3
+  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 LET((f : (Num) -> Real) => LET_END((\226\136\128 n : Num, abs(f(n + 1)) <= abs(f(n)) && f(n + 1) * f(n) <= real_of_num(0)) && op_minus_minus_minus_gt(f, real_of_num(0), sequentially)), (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow(x, 2 * i + 1))
+  real_of_num(1) / (a : Real) * (b : Real) == b / a
+  2 * ((n : Num) + 1) + 1 == 2 * n + 3
+  (n : Num) + 1 - 1 == n
+  (n : Num) + 1
   0
-  \\i. (-- &1) pow i / &(2 * i + 1) * x pow (2 * i + 1)
-  forall n x. abs x < &1\n     ==> abs (atn x - sum (0..n) (\\i. (-- &1 pow i / &(2 * i + 1)) * x pow (2 * i + 1)))\n           <= abs x pow (2 * n + 3) / &(2 * n + 3)
-  ~(n = 0) ==> 2 * (n - 1) + 3 = 2 * n + 1
-  &0 <= x ==> abs x = x
-  -- &1 pow n / &(2 * n + 1) * x pow (2 * n + 1) = abs x pow (2 * (n - 1) + 3) / &(2 * (n - 1) + 3)
-  0 <= n
-  ~(n = 0) ==> 0 < n
-  x:real
-  n - 1
-  &0 <= x ==> abs x = x
-  &1 / &1 * x = x
-  2 * 0 + 1 = 1
+  (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow((x : Real), 2 * i + 1)
+  \226\136\128 n : Num, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 abs(atn(x) - sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow(x, 2 * i + 1))) <= pow(abs(x), 2 * n + 3) / real_of_num(2 * n + 3)
+  !((n : Num) == 0) \226\134\146 2 * (n - 1) + 3 == 2 * n + 1
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  pow(-real_of_num(1), (n : Num)) / real_of_num(2 * n + 1) * pow((x : Real), 2 * n + 1) == pow(abs(x), 2 * (n - 1) + 3) / real_of_num(2 * (n - 1) + 3)
+  0 <= (n : Num)
+  !((n : Num) == 0) \226\134\146 0 < n
+  (x : Real)
+  (n : Num) - 1
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  real_of_num(1) / real_of_num(1) * (x : Real) == x
+  2 * 0 + 1 == 1
   0
-  \\i. (-- &1) pow i / &(2 * i + 1) * x pow (2 * i + 1)
-  n = 0
-  abs x < &1
-  forall x n. EVEN n /\\ &0 <= x /\\ x < &1\n     ==> atn x <= sum (0..n) (\\i. ((-- &1) pow i / &(2 * i + 1)) * x pow (2 * i + 1))
-  ~(n = 0) ==> 2 * (n - 1) + 3 = 2 * n + 1
-  &0 <= x ==> abs x = x
-  -- &1 pow n / &(2 * n + 1) * x pow (2 * n + 1) = --(abs x pow (2 * (n - 1) + 3) / &(2 * (n - 1) + 3))
-  0 <= n
-  ~(n = 0) ==> 0 < n
-  x:real
-  n - 1
-  ODD n
-  n = 0
-  abs x < &1
-  forall x n. ODD n /\\ &0 <= x /\\ x < &1\n     ==> sum (0..n) (\\i. ((-- &1) pow i / &(2 * i + 1)) * x pow (2 * i + 1)) <= atn x
-  abs x < inv (&8) ==> x < &1
-  forall x n. EVEN n /\\ &0 <= x\n     ==> atn (halfatn4 x) \n          <= sum (0..n) (\\i. ((-- &1) pow i / &(2 * i + 1)) * (halfatn4 x) pow (2 * i + 1))
-  abs x < inv (&8) ==> x < &1
-  forall x n. ODD n /\\ &0 <= x\n     ==> sum (0..n) (\\i. ((-- &1) pow i / &(2 * i + 1)) * (halfatn4 x) pow (2 * i + 1))\n            <= atn (halfatn4 x)
-  a * b / c = a / c * b
-  y:real
-  n:num
-  abs y < &1
-  abs y pow (2 * n + 3) / &(2 * n + 3)
-  abs y < inv (&8)
-  y = halfatn4 x
-  forall n x. abs (atn(halfatn4 x) - \n\t\t sum (0..n) (\\j. (-- &1 pow j) * halfatn4 x pow (2 * j + 1) / &(2 * j+ 1))) \n   <= inv (&8 pow (2 * n + 3) * &(2 * n + 3))
+  (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow((x : Real), 2 * i + 1)
+  (n : Num) == 0
+  abs((x : Real)) < real_of_num(1)
+  \226\136\128 x : Real, \226\136\128 n : Num, EVEN(n) && real_of_num(0) <= x && x < real_of_num(1) \226\134\146 atn(x) <= sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow(x, 2 * i + 1))
+  !((n : Num) == 0) \226\134\146 2 * (n - 1) + 3 == 2 * n + 1
+  real_of_num(0) <= (x : Real) \226\134\146 abs(x) == x
+  pow(-real_of_num(1), (n : Num)) / real_of_num(2 * n + 1) * pow((x : Real), 2 * n + 1) == -(pow(abs(x), 2 * (n - 1) + 3) / real_of_num(2 * (n - 1) + 3))
+  0 <= (n : Num)
+  !((n : Num) == 0) \226\134\146 0 < n
+  (x : Real)
+  (n : Num) - 1
+  ODD((n : Num))
+  (n : Num) == 0
+  abs((x : Real)) < real_of_num(1)
+  \226\136\128 x : Real, \226\136\128 n : Num, ODD(n) && real_of_num(0) <= x && x < real_of_num(1) \226\134\146 sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow(x, 2 * i + 1)) <= atn(x)
+  abs((x : Real)) < inv(real_of_num(8)) \226\134\146 x < real_of_num(1)
+  \226\136\128 x : Real, \226\136\128 n : Num, EVEN(n) && real_of_num(0) <= x \226\134\146 atn(halfatn4(x)) <= sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow(halfatn4(x), 2 * i + 1))
+  abs((x : Real)) < inv(real_of_num(8)) \226\134\146 x < real_of_num(1)
+  \226\136\128 x : Real, \226\136\128 n : Num, ODD(n) && real_of_num(0) <= x \226\134\146 sum(op_dot_dot(0, n), (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 1) * pow(halfatn4(x), 2 * i + 1)) <= atn(halfatn4(x))
+  (a : Real) * ((b : Real) / (c : Real)) == a / c * b
+  (y : Real)
+  (n : Num)
+  abs((y : Real)) < real_of_num(1)
+  pow(abs((y : Real)), 2 * (n : Num) + 3) / real_of_num(2 * n + 3)
+  abs((y : Real)) < inv(real_of_num(8))
+  (y : Real) == halfatn4((x : Real))
+  \226\136\128 n : Num, \226\136\128 x : Real, abs(atn(halfatn4(x)) - sum(op_dot_dot(0, n), (j : Num) => pow(-real_of_num(1), j) * (pow(halfatn4(x), 2 * j + 1) / real_of_num(2 * j + 1)))) <= inv(pow(real_of_num(8), 2 * n + 3) * real_of_num(2 * n + 3))
 Atn.halfatn =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (#halfatn:fun(real,real) x:real)) ((#real_div:fun(real,fun(real,real)) x:real) ((#real_add:fun(real,fun(real,real)) (#sqrt:fun(real,real) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#real_pow:fun(real,fun(num,real)) x:real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
 Atn.halfatn4 =  |- ((#=:fun(fun(real,real),fun(fun(real,real),bool)) #halfatn4:fun(real,real)) ((#o:fun(fun(real,real),fun(fun(real,real),fun(real,real))) #halfatn:fun(real,real)) ((#o:fun(fun(real,real),fun(fun(real,real),fun(real,real))) #halfatn:fun(real,real)) ((#o:fun(fun(real,real),fun(fun(real,real),fun(real,real))) #halfatn:fun(real,real)) #halfatn:fun(real,real)))))
 Atn.abs_lemma =  |- ((#==>:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) a:real)) ((#=:fun(real,fun(real,bool)) (#real_abs:fun(real,real) a:real)) a:real))

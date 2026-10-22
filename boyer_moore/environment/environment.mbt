@@ -221,10 +221,10 @@ pub fn system_rewrites() -> Ref[@list.List[(@kernel.Thm, @kernel.Thm)]] {
 /// CONJ_IMP_IMP_IMP
 fn step_6() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([]))
-  let t26 = @class.bool_cases_tac(@parser.parse_term("z:bool"))
-  let t25 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
-  let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t25), t26), t27)
-  conj_imp_imp_imp_c.set(@tactics.prove(@parser.parse_term("((x /\\ y) ==> z) = (x ==> (y ==> z))"), t28))
+  let t26 = @class.bool_cases_tac(@term_syntax.parse_term("(z : Bool)"))
+  let t25 = @class.bool_cases_tac(@term_syntax.parse_term("(y : Bool)"))
+  let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t25), t26), t27)
+  conj_imp_imp_imp_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) && (y : Bool) → (z : Bool)) == (x → y → z)"), t28))
 }
 
 ///|
