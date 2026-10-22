@@ -944,7 +944,7 @@ calc_int quotations (63):
   (x : Real) >= (y : Real)
   (x : Real) < (y : Real)
   (x : Real) <= (y : Real)
-  COND: bool -> A -> A -> A
+  (COND : (Bool, A, A) -> A)
   (COND : (Bool, A, A) -> A)
 REAL_ADD_AC =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) m:real) n:real)) ((#real_add:fun(real,fun(real,real)) n:real) m:real))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) m:real) n:real)) p:real)) ((#real_add:fun(real,fun(real,real)) m:real) ((#real_add:fun(real,fun(real,real)) n:real) p:real)))) ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) m:real) ((#real_add:fun(real,fun(real,real)) n:real) p:real))) ((#real_add:fun(real,fun(real,real)) n:real) ((#real_add:fun(real,fun(real,real)) m:real) p:real)))))
 REAL_ADD_RINV =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) x:real) (#real_neg:fun(real,real) x:real))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))
