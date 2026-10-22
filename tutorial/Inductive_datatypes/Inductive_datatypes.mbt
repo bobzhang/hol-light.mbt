@@ -84,7 +84,7 @@ pub fn fano_line(x2 : Int64) -> @kernel.Term raise {
 ///|
 /// p
 fn step_4() -> Unit raise {
-  p_c.set(@parser.parse_term("p:point"))
+  p_c.set(@term_syntax.parse_term("(p : Point)"))
 }
 
 ///|
@@ -99,7 +99,7 @@ pub fn p() -> @kernel.Term {
 ///|
 /// l
 fn step_5() -> Unit raise {
-  l_c.set(@parser.parse_term("l:line"))
+  l_c.set(@term_syntax.parse_term("(l : Line)"))
 }
 
 ///|
@@ -131,7 +131,7 @@ fn step_7() -> Unit raise {
   let t7 = @bool.list_mk_disj(@lib.map(fn(x6 : (Int64, Int64)) -> @kernel.Term raise {
     fano_clause(x6.0, x6.1)
   }, fano_incidence()))
-  on_c.set(@pair.new_definition(@basics.mk_eq(@parser.parse_term("((ON):point->line->bool) p l"), t7)))
+  on_c.set(@pair.new_definition(@basics.mk_eq(@term_syntax.parse_term("(ON : (Point, Line) -> Bool)((p : Point), (l : Line))"), t7)))
 }
 
 ///|
@@ -153,13 +153,13 @@ fn step_8() -> Unit raise {
     let i = x8
     let j = x9
     let t12 = if @lib.mem((i, j), fano_incidence()) {
-      @parser.parse_term("T")
+      @term_syntax.parse_term("true")
     } else {
-      @parser.parse_term("F")
+      @term_syntax.parse_term("false")
     }
     let t11 = fano_line(j)
     let t10 = fano_point(i)
-    @basics.mk_eq(@kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(ON)"), t10), t11), t12)
+    @basics.mk_eq(@kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("ON"), t10), t11), t12)
   }, @lib.range(1L, 7L), t13)), t15))
 }
 
@@ -177,7 +177,7 @@ pub fn on_clauses() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let t16 = @simp.rewrite_tac(@list.List([point_induct()]))
   let t17 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.List([])), t16]))
-  forall_point_c.set(@tactics.prove(@parser.parse_term("(forall p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t17))
+  forall_point_c.set(@tactics.prove(@term_syntax.parse_term("(∀ p : Point, (P : (Point) -> Bool)(p)) == (P(Point_1) && P(Point_2) && P(Point_3) && P(Point_4) && P(Point_5) && P(Point_6) && P(Point_7))"), t17))
 }
 
 ///|
@@ -194,7 +194,7 @@ pub fn forall_point() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([line_induct()]))
   let t19 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.List([])), t18]))
-  forall_line_c.set(@tactics.prove(@parser.parse_term("(forall p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t19))
+  forall_line_c.set(@tactics.prove(@term_syntax.parse_term("(∀ p : Line, (P : (Line) -> Bool)(p)) == (P(Line_1) && P(Line_2) && P(Line_3) && P(Line_4) && P(Line_5) && P(Line_6) && P(Line_7))"), t19))
 }
 
 ///|
@@ -210,8 +210,8 @@ pub fn forall_line() -> @kernel.Thm {
 /// EXISTS_POINT
 fn step_11() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm(), @class.not_exists_thm(), forall_point()]))
-  let t21 = @tactics.then_tac(@tactics.match_mp_tac(@class.taut(@parser.parse_term("(~p <=> ~q) ==> (p <=> q)"))), t20)
-  exists_point_c.set(@tactics.prove(@parser.parse_term("(?p. P p) <=> P Point_1 \\/ P Point_2 \\/ P Point_3 \\/ P Point_4 \\/\n                 P Point_5 \\/ P Point_6 \\/ P Point_7"), t21))
+  let t21 = @tactics.then_tac(@tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("!(p : Bool) == !(q : Bool) → p == q"))), t20)
+  exists_point_c.set(@tactics.prove(@term_syntax.parse_term("(∃ p : Point, (P : (Point) -> Bool)(p)) == (P(Point_1) || P(Point_2) || P(Point_3) || P(Point_4) || P(Point_5) || P(Point_6) || P(Point_7))"), t21))
 }
 
 ///|
@@ -227,8 +227,8 @@ pub fn exists_point() -> @kernel.Thm {
 /// EXISTS_LINE
 fn step_12() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm(), @class.not_exists_thm(), forall_line()]))
-  let t23 = @tactics.then_tac(@tactics.match_mp_tac(@class.taut(@parser.parse_term("(~p <=> ~q) ==> (p <=> q)"))), t22)
-  exists_line_c.set(@tactics.prove(@parser.parse_term("(?p. P p) <=> P Line_1 \\/ P Line_2 \\/ P Line_3 \\/ P Line_4 \\/\n                 P Line_5 \\/ P Line_6 \\/ P Line_7"), t23))
+  let t23 = @tactics.then_tac(@tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("!(p : Bool) == !(q : Bool) → p == q"))), t22)
+  exists_line_c.set(@tactics.prove(@term_syntax.parse_term("(∃ p : Line, (P : (Line) -> Bool)(p)) == (P(Line_1) || P(Line_2) || P(Line_3) || P(Line_4) || P(Line_5) || P(Line_6) || P(Line_7))"), t23))
 }
 
 ///|
@@ -278,7 +278,7 @@ pub fn fano_rule(x33 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// AXIOM_1
 fn step_14() -> Unit raise {
-  axiom_1_c.set(fano_rule(@parser.parse_term("forall p p'. ~(p = p') ==> ?l. p ON l /\\ p' ON l /\\\n                          forall l'. p ON l' /\\ p' ON l' ==> l' = l")))
+  axiom_1_c.set(fano_rule(@term_syntax.parse_term("∀ p : Point, ∀ p' : Point, !(p == p') → (∃ l : Line, ON(p, l) && ON(p', l) && (∀ l' : Line, ON(p, l') && ON(p', l') → l' == l))")))
 }
 
 ///|
@@ -293,7 +293,7 @@ pub fn axiom_1() -> @kernel.Thm {
 ///|
 /// AXIOM_2
 fn step_15() -> Unit raise {
-  axiom_2_c.set(fano_rule(@parser.parse_term("forall l l'. ?p. p ON l /\\ p ON l'")))
+  axiom_2_c.set(fano_rule(@term_syntax.parse_term("∀ l : Line, ∀ l' : Line, ∃ p : Point, ON(p, l) && ON(p, l')")))
 }
 
 ///|
@@ -308,7 +308,7 @@ pub fn axiom_2() -> @kernel.Thm {
 ///|
 /// AXIOM_3
 fn step_16() -> Unit raise {
-  axiom_3_c.set(fano_rule(@parser.parse_term("?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n             ~(?l. p ON l /\\ p' ON l /\\ p'' ON l)")))
+  axiom_3_c.set(fano_rule(@term_syntax.parse_term("∃ p : Point, ∃ p' : Point, ∃ p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && !(∃ l : Line, ON(p, l) && ON(p', l) && ON(p'', l))")))
 }
 
 ///|
@@ -323,7 +323,7 @@ pub fn axiom_3() -> @kernel.Thm {
 ///|
 /// AXIOM_4
 fn step_17() -> Unit raise {
-  axiom_4_c.set(fano_rule(@parser.parse_term("forall l. ?p p' p''. ~(p = p') /\\ ~(p' = p'') /\\ ~(p = p'') /\\\n                  p ON l /\\ p' ON l /\\ p'' ON l")))
+  axiom_4_c.set(fano_rule(@term_syntax.parse_term("∀ l : Line, ∃ p : Point, ∃ p' : Point, ∃ p'' : Point, !(p == p') && !(p' == p'') && !(p == p'') && ON(p, l) && ON(p', l) && ON(p'', l)")))
 }
 
 ///|

@@ -5703,13 +5703,13 @@ test "Rqe/basic matches Rqe/basic.ml" {
       #|0..0..0..solved at 3
       #|Warning: inventing type variables
       #|Rqe/basic quotations (7):
-      #|  (<=>)
-      #|  T
-      #|  F
-      #|  x <> y <=> ~(x = y)
-      #|  (<>):A -> A -> bool
-      #|  (p ==> q ==> r) <=> (p /\\ q ==> r)
-      #|  (p /\\ q ==> r) <=> (p ==> q ==> r)
+      #|  (op_eq : (Bool, Bool) -> Bool)
+      #|  true
+      #|  false
+      #|  (op_lt_gt : (_, _) -> Bool)((x : _), (y : _)) == !(x == y)
+      #|  (op_lt_gt : (A, A) -> Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (p && q \226\134\146 r)
+      #|  ((p : Bool) && (q : Bool) \226\134\146 (r : Bool)) == (p \226\134\146 q \226\134\146 r)
       #|NEQ =  |- (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#forall:fun(fun('?1,bool),bool) (\y:'?1. ((#=:fun(bool,fun(bool,bool)) ((#<>:fun('?1,fun('?1,bool)) x:'?1) y:'?1)) (#~:fun(bool,bool) ((#=:fun('?1,fun('?1,bool)) x:'?1) y:'?1)))))))
       #|IMP_AND_THM =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool))
       #|AND_IMP_THM =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) r:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool)))

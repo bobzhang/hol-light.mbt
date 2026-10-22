@@ -9,7 +9,7 @@ fn step_1() -> Unit raise {
 ///|
 /// interval_arith
 fn step_2() -> Unit raise {
-  interval_arith_c.set(@pair.new_definition(@parser.parse_term("interval_arith (x:real) (lo, hi) <=> lo <= x /\\ x <= hi")))
+  interval_arith_c.set(@pair.new_definition(@term_syntax.parse_term("(interval_arith : (Real, (Real, Real)) -> Bool)((x : Real), ((lo : Real), (hi : Real))) == (lo <= x && x <= hi)")))
 }
 
 ///|
@@ -24,7 +24,7 @@ pub fn interval_arith() -> @kernel.Thm {
 ///|
 /// bounded_on
 fn step_3() -> Unit raise {
-  bounded_on_c.set(@pair.new_definition(@parser.parse_term("bounded_on f s f_bounds <=>\n\tforall x. x IN s ==> interval_arith (f x) f_bounds")))
+  bounded_on_c.set(@pair.new_definition(@term_syntax.parse_term("(bounded_on : ((_) -> Real, (_) -> Bool, (Real, Real)) -> Bool)((f : (_) -> Real), (s : (_) -> Bool), (f_bounds : (Real, Real))) == (∀ x : _, IN(x, s) → interval_arith(f(x), f_bounds))")))
 }
 
 ///|
@@ -39,7 +39,7 @@ pub fn bounded_on() -> @kernel.Thm {
 ///|
 /// bounded_on_int
 fn step_4() -> Unit raise {
-  bounded_on_int_c.set(@pair.new_definition(@parser.parse_term("bounded_on_int f int f_bounds <=>\n\tforall x. interval_arith x int ==> interval_arith (f x) f_bounds")))
+  bounded_on_int_c.set(@pair.new_definition(@term_syntax.parse_term("(bounded_on_int : ((Real) -> Real, (Real, Real), (Real, Real)) -> Bool)((f : (Real) -> Real), (int : (Real, Real)), (f_bounds : (Real, Real))) == (∀ x : Real, interval_arith(x, int) → interval_arith(f(x), f_bounds))")))
 }
 
 ///|
@@ -54,7 +54,7 @@ pub fn bounded_on_int() -> @kernel.Thm {
 ///|
 /// iabs
 fn step_5() -> Unit raise {
-  iabs_c.set(@pair.new_definition(@parser.parse_term("iabs (x_lo, x_hi) = max x_hi (-- x_lo)")))
+  iabs_c.set(@pair.new_definition(@term_syntax.parse_term("(iabs : ((Real, Real)) -> Real)(((x_lo : Real), (x_hi : Real))) == max(x_hi, -x_lo)")))
 }
 
 ///|
@@ -69,7 +69,7 @@ pub fn iabs() -> @kernel.Thm {
 ///|
 /// interval_not_zero
 fn step_6() -> Unit raise {
-  interval_not_zero_c.set(@pair.new_definition(@parser.parse_term("interval_not_zero (lo, hi) <=> &0 < lo \\/ hi < &0")))
+  interval_not_zero_c.set(@pair.new_definition(@term_syntax.parse_term("(interval_not_zero : ((Real, Real)) -> Bool)(((lo : Real), (hi : Real))) == (real_of_num(0) < lo || hi < real_of_num(0))")))
 }
 
 ///|
@@ -84,7 +84,7 @@ pub fn interval_not_zero() -> @kernel.Thm {
 ///|
 /// interval_pos
 fn step_7() -> Unit raise {
-  interval_pos_c.set(@pair.new_definition(@parser.parse_term("interval_pos (lo, hi) <=> &0 < lo")))
+  interval_pos_c.set(@pair.new_definition(@term_syntax.parse_term("(interval_pos : ((Real, _)) -> Bool)(((lo : Real), (hi : _))) == (real_of_num(0) < lo)")))
 }
 
 ///|
@@ -99,7 +99,7 @@ pub fn interval_pos() -> @kernel.Thm {
 ///|
 /// interval_neg
 fn step_8() -> Unit raise {
-  interval_neg_c.set(@pair.new_definition(@parser.parse_term("interval_neg (lo, hi) <=> hi < &0")))
+  interval_neg_c.set(@pair.new_definition(@term_syntax.parse_term("(interval_neg : ((_, Real)) -> Bool)(((lo : _), (hi : Real))) == (hi < real_of_num(0))")))
 }
 
 ///|
@@ -114,7 +114,7 @@ pub fn interval_neg() -> @kernel.Thm {
 ///|
 /// interval_gt
 fn step_9() -> Unit raise {
-  interval_gt_c.set(@pair.new_definition(@parser.parse_term("interval_gt f (lo, hi) <=> f < lo")))
+  interval_gt_c.set(@pair.new_definition(@term_syntax.parse_term("(interval_gt : (Real, (Real, _)) -> Bool)((f : Real), ((lo : Real), (hi : _))) == (f < lo)")))
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn interval_gt() -> @kernel.Thm {
 /// CONST_INTERVAL
 fn step_10() -> Unit raise {
   let t1 = @simp.rewrite_tac(@list.List([interval_arith(), @realax.real_le_refl()]))
-  const_interval_c.set(@tactics.prove(@parser.parse_term("forall x. interval_arith x (x,x)"), t1))
+  const_interval_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, interval_arith(x, (x, x))"), t1))
 }
 
 ///|
@@ -146,7 +146,7 @@ pub fn const_interval() -> @kernel.Thm {
 /// APPROX_INTERVAL
 fn step_11() -> Unit raise {
   let t3 = @tactics.then_tac(@simp.rewrite_tac(@list.List([interval_arith()])), @calc_rat.real_arith_tac)
-  let t4 = (@parser.parse_term("(a <= lo /\\ hi <= b) /\\ interval_arith x (lo, hi)\n                              ==> interval_arith x (a,b)"), t3)
+  let t4 = (@term_syntax.parse_term("((a : Real) <= (lo : Real) && (hi : Real) <= (b : Real)) && interval_arith((x : Real), (lo, hi)) → interval_arith(x, (a, b))"), t3)
   approx_interval_c.set(@bool.gen_all((fn(x2 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x2.0, x2.1)
   })(t4)))
@@ -165,7 +165,7 @@ pub fn approx_interval() -> @kernel.Thm {
 /// INTERVAL_NEG
 fn step_12() -> Unit raise {
   let t6 = @tactics.then_tac(@simp.rewrite_tac(@list.List([interval_arith()])), @calc_rat.real_arith_tac)
-  let t7 = (@parser.parse_term("interval_arith x (a, b) ==>\n                           interval_arith (--x) (--b, --a)"), t6)
+  let t7 = (@term_syntax.parse_term("interval_arith((x : Real), ((a : Real), (b : Real))) → interval_arith(-x, (-b, -a))"), t6)
   interval_neg_v1_c.set(@bool.gen_all((fn(x5 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x5.0, x5.1)
   })(t7)))
@@ -184,7 +184,7 @@ pub fn interval_neg_v1() -> @kernel.Thm {
 /// INTERVAL_NEG_EQ
 fn step_13() -> Unit raise {
   let t8 = @tactics.then_tac(@simp.rewrite_tac(@list.List([interval_arith()])), @calc_rat.real_arith_tac)
-  interval_neg_eq_c.set(@tactics.prove(@parser.parse_term("forall x a b. interval_arith (--x) (--b, --a) <=>\n\t\t\t      interval_arith x (a, b)"), t8))
+  interval_neg_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, interval_arith(-x, (-b, -a)) == interval_arith(x, (a, b))"), t8))
 }
 
 ///|
@@ -199,7 +199,7 @@ pub fn interval_neg_eq() -> @kernel.Thm {
 ///|
 /// interval_tm
 fn step_14() -> Unit raise {
-  interval_tm_c.set(@parser.parse_term("interval_arith"))
+  interval_tm_c.set(@term_syntax.parse_term("interval_arith"))
 }
 
 ///|

@@ -5631,7 +5631,7 @@ test "Tutorial/Embedding_of_logics_deep matches Tutorial/Embedding_of_logics_dee
       #|0..0..2..12..30..56..93..157..253..373..522..703..solved at 745
       #|0..0..1..6..15..28..46..75..114..163..224..301..solved at 325
       #|Tutorial/Embedding_of_logics_deep quotations (73):
-      #|  (holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        forall w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')
+      #|  (holds : (((_) -> Bool, (_, _) -> Bool), (List[Char], _) -> Bool, Form, _) -> Bool)(((W : (_) -> Bool), (R : (_, _) -> Bool)), (V : (List[Char], _) -> Bool), False, (w : _)) == false && holds((W, R), V, True, w) == true && holds((W, R), V, Atom((a : List[Char])), w) == V(a, w) && holds((W, R), V, Not((p : Form)), w) == !holds((W, R), V, p, w) && holds((W, R), V, op_amp_amp(p, (q : Form)), w) == (holds((W, R), V, p, w) && holds((W, R), V, q, w)) && holds((W, R), V, op_bar_bar(p, q), w) == (holds((W, R), V, p, w) || holds((W, R), V, q, w)) && holds((W, R), V, op_minus_minus_gt(p, q), w) == (holds((W, R), V, p, w) \226\134\146 holds((W, R), V, q, w)) && holds((W, R), V, op_lt_minus_gt(p, q), w) == (holds((W, R), V, p, w) == holds((W, R), V, q, w)) && holds((W, R), V, Box(p), w) == (\226\136\128 w' : _, IN(w', W) && R(w, w') \226\134\146 holds((W, R), V, p, w')) && holds((W, R), V, Diamond(p), w) == (\226\136\131 w' : _, IN(w', W) && R(w, w') && holds((W, R), V, p, w'))
       #|  :P
       #|  :P
       #|  :P
@@ -5678,32 +5678,32 @@ test "Tutorial/Embedding_of_logics_deep matches Tutorial/Embedding_of_logics_dee
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \\n. n + 1
-      #|  holds_in (W,R) p = forall V w. w IN W ==> holds (W,R) V p w
-      #|  L |= p <=> forall f. L f ==> holds_in f p
-      #|  S4(W,R) <=> ~(W = {}) /\\ (forall x y. R x y ==> x IN W /\\ y IN W) /\\\n              (forall x. x IN W ==> R x x) /\\\n              (forall x y z. R x y /\\ R y z ==> R x z)
-      #|  LTL(W,R) <=> (W = UNIV) /\\ forall x y:num. R x y <=> x <= y
-      #|  GL(W,R) <=> ~(W = {}) /\\ (forall x y. R x y ==> x IN W /\\ y IN W) /\\\n              WF(\\x y. R y x) /\\ (forall x y z:num. R x y /\\ R y z ==> R x z)
-      #|  L |= Box True
-      #|  L |= Box(A --> B) --> Box A --> Box B
-      #|  L |= Diamond(A --> B) --> Box A --> Diamond B
-      #|  L |= Box(A --> B) --> Diamond A --> Diamond B
-      #|  L |= Box(A && B) --> Box A && Box B
-      #|  L |= Diamond(A || B) --> Diamond A || Diamond B
-      #|  \\a:string. (p:W->bool)
-      #|  Atom a
-      #|  forall W R P. (forall A V. P(holds (W,R) V A)) <=> (forall p:W->bool. P p)
-      #|  forall W R. (forall w:W. w IN W ==> R w w) <=> forall A. holds_in (W,R) (Box A --> A)
-      #|  forall W R. (forall w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                       R w w' /\\ R w' w'' ==> R w w'') <=>\n         (forall A. holds_in (W,R) (Box A --> Box(Box A)))
-      #|  forall W R. (forall w:W. w IN W ==> ?w'. w' IN W /\\ R w w') <=>\n         (forall A. holds_in (W,R) (Box A --> Diamond A))
-      #|  w:W
-      #|  \\v:W. v = w
-      #|  forall W R. (forall w w':W. w IN W /\\ w' IN W /\\ R w w' ==> R w' w) <=>\n         (forall A. holds_in (W,R) (A --> Box(Diamond A)))
-      #|  \\x:W. forall w:W. x IN W /\\ R w x ==> P x
-      #|  P:W->bool
-      #|  w:W
-      #|  \\v:W. v IN W /\\ R w v /\\ forall w''. w'' IN W /\\ R v w'' ==> R w w''
-      #|  w:W
-      #|  forall W R. (forall x y z:W. x IN W /\\ y IN W /\\ z IN W /\\ R x y /\\ R y z ==> R x z) /\\\n         WF(\\x y. x IN W /\\ y IN W /\\ R y x) <=>\n         (forall A. holds_in (W,R) (Box(Box A --> A) --> Box A))
+      #|  (holds_in : (((_) -> Bool, (_, _) -> Bool), Form) -> Bool)(((W : (_) -> Bool), (R : (_, _) -> Bool)), (p : Form)) == (\226\136\128 V : (List[Char], _) -> Bool, \226\136\128 w : _, IN(w, W) \226\134\146 holds((W, R), V, p, w))
+      #|  (op_bar_eq : ((((_) -> Bool, (_, _) -> Bool)) -> Bool, Form) -> Bool)((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), (p : Form)) == (\226\136\128 f : ((_) -> Bool, (_, _) -> Bool), L(f) \226\134\146 holds_in(f, p))
+      #|  (S4 : (((_) -> Bool, (_, _) -> Bool)) -> Bool)(((W : (_) -> Bool), (R : (_, _) -> Bool))) == (!(W == {}) && (\226\136\128 x : _, \226\136\128 y : _, R(x, y) \226\134\146 IN(x, W) && IN(y, W)) && (\226\136\128 x : _, IN(x, W) \226\134\146 R(x, x)) && (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, R(x, y) && R(y, z) \226\134\146 R(x, z)))
+      #|  (LTL : (((_) -> Bool, (Num, Num) -> Bool)) -> Bool)(((W : (_) -> Bool), (R : (Num, Num) -> Bool))) == (W == UNIV && (\226\136\128 x : Num, \226\136\128 y : Num, R(x, y) == (x <= y)))
+      #|  (GL : (((Num) -> Bool, (Num, Num) -> Bool)) -> Bool)(((W : (Num) -> Bool), (R : (Num, Num) -> Bool))) == (!(W == {}) && (\226\136\128 x : Num, \226\136\128 y : Num, R(x, y) \226\134\146 IN(x, W) && IN(y, W)) && WF((x : Num) => (y : Num) => R(y, x)) && (\226\136\128 x : Num, \226\136\128 y : Num, \226\136\128 z : Num, R(x, y) && R(y, z) \226\134\146 R(x, z)))
+      #|  op_bar_eq((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), Box(True))
+      #|  op_bar_eq((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), op_minus_minus_gt(Box(op_minus_minus_gt((A : Form), (B : Form))), op_minus_minus_gt(Box(A), Box(B))))
+      #|  op_bar_eq((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), op_minus_minus_gt(Diamond(op_minus_minus_gt((A : Form), (B : Form))), op_minus_minus_gt(Box(A), Diamond(B))))
+      #|  op_bar_eq((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), op_minus_minus_gt(Box(op_minus_minus_gt((A : Form), (B : Form))), op_minus_minus_gt(Diamond(A), Diamond(B))))
+      #|  op_bar_eq((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), op_minus_minus_gt(Box(op_amp_amp((A : Form), (B : Form))), op_amp_amp(Box(A), Box(B))))
+      #|  op_bar_eq((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), op_minus_minus_gt(Diamond(op_bar_bar((A : Form), (B : Form))), op_bar_bar(Diamond(A), Diamond(B))))
+      #|  (a : List[Char]) => (p : (W) -> Bool)
+      #|  Atom((a : List[Char]))
+      #|  \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, \226\136\128 P : ((W) -> Bool) -> Bool, (\226\136\128 A : Form, \226\136\128 V : (List[Char], W) -> Bool, P(holds((W, R), V, A))) == (\226\136\128 p : (W) -> Bool, P(p))
+      #|  \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, (\226\136\128 w : W, IN(w, W) \226\134\146 R(w, w)) == (\226\136\128 A : Form, holds_in((W, R), op_minus_minus_gt(Box(A), A)))
+      #|  \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, (\226\136\128 w : W, \226\136\128 w' : W, \226\136\128 w'' : W, IN(w, W) && IN(w', W) && IN(w'', W) && R(w, w') && R(w', w'') \226\134\146 R(w, w'')) == (\226\136\128 A : Form, holds_in((W, R), op_minus_minus_gt(Box(A), Box(Box(A)))))
+      #|  \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, (\226\136\128 w : W, IN(w, W) \226\134\146 (\226\136\131 w' : W, IN(w', W) && R(w, w'))) == (\226\136\128 A : Form, holds_in((W, R), op_minus_minus_gt(Box(A), Diamond(A))))
+      #|  (w : W)
+      #|  (v : W) => v == (w : W)
+      #|  \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, (\226\136\128 w : W, \226\136\128 w' : W, IN(w, W) && IN(w', W) && R(w, w') \226\134\146 R(w', w)) == (\226\136\128 A : Form, holds_in((W, R), op_minus_minus_gt(A, Box(Diamond(A)))))
+      #|  (x : W) => \226\136\128 w : W, IN(x, (W : (W) -> Bool)) && (R : (W, W) -> Bool)(w, x) \226\134\146 (P : (W) -> Bool)(x)
+      #|  (P : (W) -> Bool)
+      #|  (w : W)
+      #|  (v : W) => IN(v, (W : (W) -> Bool)) && (R : (W, W) -> Bool)((w : W), v) && (\226\136\128 w'' : W, IN(w'', W) && R(v, w'') \226\134\146 R(w, w''))
+      #|  (w : W)
+      #|  \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, ((\226\136\128 x : W, \226\136\128 y : W, \226\136\128 z : W, IN(x, W) && IN(y, W) && IN(z, W) && R(x, y) && R(y, z) \226\134\146 R(x, z)) && WF((x : W) => (y : W) => IN(x, W) && IN(y, W) && R(y, x))) == (\226\136\128 A : Form, holds_in((W, R), op_minus_minus_gt(Box(op_minus_minus_gt(Box(A), A)), Box(A))))
       #|string_INDUCT =  |- (#forall:fun(fun(fun(string,bool),bool),bool) (\P:fun(string,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(string,bool) (#String:fun(num,string) a:num))))) (#forall:fun(fun(string,bool),bool) (\x:string. (P:fun(string,bool) x:string))))))
       #|string_RECURSION =  |- (#forall:fun(fun(fun(num,'Z),bool),bool) (\f:fun(num,'Z). (#?:fun(fun(fun(string,'Z),bool),bool) (\fn:fun(string,'Z). (#forall:fun(fun(num,bool),bool) (\a:num. ((#=:fun('Z,fun('Z,bool)) (fn:fun(string,'Z) (#String:fun(num,string) a:num))) (f:fun(num,'Z) a:num))))))))
       #|form_INDUCT =  |- (#forall:fun(fun(fun(form,bool),bool),bool) (\P:fun(form,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) #False:form)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) #True:form)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(form,bool) (#Atom:fun(list(char),form) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Not:fun(form,form) a:form)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\a0:form. (#forall:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#&&:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\a0:form. (#forall:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#||:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\a0:form. (#forall:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#-->:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\a0:form. (#forall:fun(fun(form,bool),bool) (\a1:form. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(form,bool) a0:form)) (P:fun(form,bool) a1:form))) (P:fun(form,bool) ((#<->:fun(form,fun(form,form)) a0:form) a1:form)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Box:fun(form,form) a:form)))))) (#forall:fun(fun(form,bool),bool) (\a:form. ((#==>:fun(bool,fun(bool,bool)) (P:fun(form,bool) a:form)) (P:fun(form,bool) (#Diamond:fun(form,form) a:form))))))))))))))) (#forall:fun(fun(form,bool),bool) (\x:form. (P:fun(form,bool) x:form))))))

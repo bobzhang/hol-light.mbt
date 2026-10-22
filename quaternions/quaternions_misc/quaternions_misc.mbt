@@ -72,7 +72,7 @@ pub fn mp_list_tac(x : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// VECTOR_EQ_1
 fn step_3() -> Unit raise {
   let t24 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_1(), @vectors.forall_1()]))
-  vector_eq_1_c.set(@tactics.prove(@parser.parse_term("forall u v:real^1. u = v <=> u$1 = v$1"), t24))
+  vector_eq_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, Unit], ∀ v : Cart[Real, Unit], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1))"), t24))
 }
 
 ///|
@@ -88,7 +88,7 @@ pub fn vector_eq_1() -> @kernel.Thm {
 /// VECTOR_EQ_2
 fn step_4() -> Unit raise {
   let t25 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_2(), @vectors.forall_2()]))
-  vector_eq_2_c.set(@tactics.prove(@parser.parse_term("forall u v:real^2. u = v <=> u$1 = v$1 /\\ u$2 = v$2"), t25))
+  vector_eq_2_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, Tybit0[Unit]], ∀ v : Cart[Real, Tybit0[Unit]], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1) && op_dollar(u, 2) == op_dollar(v, 2))"), t25))
 }
 
 ///|
@@ -104,7 +104,7 @@ pub fn vector_eq_2() -> @kernel.Thm {
 /// VECTOR_EQ_3
 fn step_5() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_3(), @vectors.forall_3()]))
-  vector_eq_3_c.set(@tactics.prove(@parser.parse_term("forall u v:real^3. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3"), t26))
+  vector_eq_3_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, Tybit1[Unit]], ∀ v : Cart[Real, Tybit1[Unit]], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1) && op_dollar(u, 2) == op_dollar(v, 2) && op_dollar(u, 3) == op_dollar(v, 3))"), t26))
 }
 
 ///|
@@ -120,7 +120,7 @@ pub fn vector_eq_3() -> @kernel.Thm {
 /// VECTOR_EQ_4
 fn step_6() -> Unit raise {
   let t27 = @simp.rewrite_tac(@list.List([@cart.cart_eq(), @cart.dimindex_4(), @vectors.forall_4()]))
-  vector_eq_4_c.set(@tactics.prove(@parser.parse_term("forall u v:real^4. u = v <=> u$1 = v$1 /\\ u$2 = v$2 /\\ u$3 = v$3 /\\ u$4 = v$4"), t27))
+  vector_eq_4_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : Cart[Real, Tybit0[Tybit0[Unit]]], ∀ v : Cart[Real, Tybit0[Tybit0[Unit]]], (u == v) == (op_dollar(u, 1) == op_dollar(v, 1) && op_dollar(u, 2) == op_dollar(v, 2) && op_dollar(u, 3) == op_dollar(v, 3) && op_dollar(u, 4) == op_dollar(v, 4))"), t27))
 }
 
 ///|
@@ -138,15 +138,15 @@ fn step_7() -> Unit raise {
   let t37 = @simp.asm_simp_tac(@list.List([@vectors.basis_component(), @calc_int.real_mul_lzero()]))
   let t36 = @theorems.intro_tac("jhp neq")
   let t35 = @simp.rewrite_tac(@list.List([@sets.in_sing()]))
-  let t34 = @tactics.x_gen_tac(@parser.parse_term("j:num"))
+  let t34 = @tactics.x_gen_tac(@term_syntax.parse_term("(j : Num)"))
   let t33 = @simp.asm_rewrite_tac(@list.List([@sets.sing_subset(), @iterate.in_numseg()]))
   let t32 = @tactics.match_mp_tac(@iterate.sum_superset())
   let t31 = @list.List([@tactics.all_tac, @simp.asm_simp_tac(@list.List([@iterate.sum_sing(), @vectors.basis_component(), @realax.real_mul_lid()]))])
-  let t29 = @parser.parse_term("sum {i} (\\j. (basis i:real^N)$j * (x:real^N)$j)")
+  let t29 = @term_syntax.parse_term("(sum : ((Num) -> Bool, (Num) -> Real) -> Real)({(i : Num)}, (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)((basis : (Num) -> Cart[Real, N])(i), j) * (op_dollar : (Cart[Real, N], Num) -> Real)((x : Cart[Real, N]), j))")
   let t30 = @tactics.trans_tac(@theorems.eq_trans())(t29)
   let t28 = @simp.rewrite_tac(@list.List([@vectors.dot()]))
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@theorems.intro_tac("forall i x; ihp"), t28), t30), @tactics.conj_tac), t31), t32), t33), t34), t35), t36), t37)
-  dot_lbasis_c.set(@tactics.prove(@parser.parse_term("forall i x:real^N. 1 <= i /\\ i <= dimindex(:N) ==> basis i dot x = x$i"), t38))
+  dot_lbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ i : Num, ∀ x : Cart[Real, N], 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) → (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((basis : (Num) -> Cart[Real, N])(i), x) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)"), t38))
 }
 
 ///|
@@ -162,7 +162,7 @@ pub fn dot_lbasis() -> @kernel.Thm {
 /// DOT_RBASIS
 fn step_8() -> Unit raise {
   let t39 = @meson.meson_tac(@list.List([@vectors.dot_sym(), dot_lbasis()]))
-  dot_rbasis_c.set(@tactics.prove(@parser.parse_term("forall x:real^N i. 1 <= i /\\ i <= dimindex(:N) ==> x dot basis i = x$i"), t39))
+  dot_rbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], ∀ i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) → (dot : (Cart[Real, N], Cart[Real, N]) -> Real)(x, (basis : (Num) -> Cart[Real, N])(i)) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)"), t39))
 }
 
 ///|
@@ -178,10 +178,10 @@ pub fn dot_rbasis() -> @kernel.Thm {
 /// VECTOR_NORM_SQNORM_UNIT
 fn step_9() -> Unit raise {
   let t42 = @tactics.conv_tac(@vectors.norm_arith)
-  let t41 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a pow 2 = &1 <=> (a - &1) * (a + &1) = &0")), @realarith.real_entire()]))
+  let t41 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(pow((a : Real), 2) == real_of_num(1)) == ((a - real_of_num(1)) * (a + real_of_num(1)) == real_of_num(0))")), @realarith.real_entire()]))
   let t40 = @simp.simp_tac(@list.List([@real.real_pow_one()]))
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t40), t41), t42)
-  vector_norm_sqnorm_unit_c.set(@tactics.prove(@parser.parse_term("forall x:real^N. norm x pow 2 = &1 <=> norm x = &1"), t43))
+  vector_norm_sqnorm_unit_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, N], (pow(norm(x), 2) == real_of_num(1)) == (norm(x) == real_of_num(1))"), t43))
 }
 
 ///|

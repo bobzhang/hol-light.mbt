@@ -467,18 +467,18 @@ fn step_1() -> Unit raise {
       @bool.disch(p_1, f(th_3))
     }
   }
-  let t9 = @parser.parse_term("(/\\)")
+  let t9 = @term_syntax.parse_term("op_slash_bslash")
   let strip_conj : (@kernel.Term) -> @list.List[@kernel.Term] raise = fn(
     x11 : @kernel.Term,
   ) -> @list.List[@kernel.Term] raise {
     ((x10 : @kernel.Term) => @basics.binops(t9, x10))(x11)
   }
-  let a_ = @parser.parse_term("A:bool")
-  let b_ = @parser.parse_term("B:bool")
-  let c_ = @parser.parse_term("C:bool")
-  let d_ = @parser.parse_term("D:bool")
-  let t_ = @parser.parse_term("T:bool")
-  let lem = @class.taut(@parser.parse_term("A ==> A"))
+  let a_ = @term_syntax.parse_term("(A : Bool)")
+  let b_ = @term_syntax.parse_term("(B : Bool)")
+  let c_ = @term_syntax.parse_term("(C : Bool)")
+  let d_ = @term_syntax.parse_term("(D : Bool)")
+  let t_ = @term_syntax.parse_term("true")
+  let lem = @class.taut(@term_syntax.parse_term("(A : Bool) → A"))
   let imp_refl : (@kernel.Term) -> @kernel.Thm raise = fn(
     x24 : @kernel.Term,
   ) -> @kernel.Thm raise {
@@ -608,7 +608,7 @@ fn step_1() -> Unit raise {
     })(map_forall_body(x56))
   }
   let imply_and_rdistrib = @class.taut(
-    @parser.parse_term("(x ==> y /\\ z) <=> (x==>y) /\\(x==>z)"),
+    @term_syntax.parse_term("((x : Bool) → (y : Bool) && (z : Bool)) == ((x → y) && (x → z))"),
   )
   let t57 = @equal.gsym(@theorems.conj_assoc())
   let imply_and : (@kernel.Thm) -> @kernel.Thm raise = @simp.pure_rewrite_rule(
@@ -648,7 +648,7 @@ fn step_1() -> Unit raise {
     }
   }
   let t64 = @simp.rewr_conv(
-    @class.taut(@parser.parse_term("(p==>q==>r) <=> (q==>p==>r)")),
+    @class.taut(@term_syntax.parse_term("((p : Bool) → (q : Bool) → (r : Bool)) == (q → p → r)")),
   )
   let swap : (@kernel.Thm) -> @kernel.Thm raise = (x65 : @kernel.Thm) => {
     @equal.conv_rule(t64, x65)
@@ -1424,7 +1424,7 @@ fn step_1() -> Unit raise {
     }
   }
   let lem_4 = @class.taut(
-    @parser.parse_term("((A ==> B) ==> C) ==> (A <=> B) ==> C /\\ (B ==> A)"),
+    @term_syntax.parse_term("(((A : Bool) → (B : Bool)) → (C : Bool)) → A == B → C && (B → A)"),
   )
   let mkimpl_contra_iff : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x211 : @kernel.Thm,
@@ -1438,7 +1438,7 @@ fn step_1() -> Unit raise {
     )
   }
   let lem_5 = @class.taut(
-    @parser.parse_term("((B ==> A) ==> D) ==> (A <=> B) ==> (A ==> B) /\\ D"),
+    @term_syntax.parse_term("(((B : Bool) → (A : Bool)) → (D : Bool)) → A == B → (A → B) && D"),
   )
   let mkimpr_contra_iff : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x212 : @kernel.Thm,
@@ -1476,7 +1476,7 @@ fn step_1() -> Unit raise {
     }
   }
   let lem_7 = @class.taut(
-    @parser.parse_term("(C ==> A ==> B) ==> C /\\ (B ==> A) ==> (A <=> B)"),
+    @term_syntax.parse_term("((C : Bool) → (A : Bool) → (B : Bool)) → C && (B → A) → A == B"),
   )
   let mkimpl_co_iff : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x216 : @kernel.Thm,
@@ -1490,7 +1490,7 @@ fn step_1() -> Unit raise {
     )
   }
   let lem_8 = @class.taut(
-    @parser.parse_term("(D ==> B ==> A) ==> (A ==> B) /\\ D ==> (A <=> B)"),
+    @term_syntax.parse_term("((D : Bool) → (B : Bool) → (A : Bool)) → (A → B) && D → A == B"),
   )
   let mkimpr_co_iff : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x217 : @kernel.Thm,
@@ -1644,7 +1644,7 @@ fn step_1() -> Unit raise {
     @theorems.mono_exists(),
   )
   let lem_13 = @class.taut(
-    @parser.parse_term("(B==>A) /\\ (A==>B==>C==>D) ==> (A==>C) ==> (B==>D)"),
+    @term_syntax.parse_term("((B : Bool) → (A : Bool)) && (A → B → (C : Bool) → (D : Bool)) → (A → C) → B → D"),
   )
   let mkimp_imp_contra_ctxt : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x240 : @kernel.Thm,
@@ -1666,7 +1666,7 @@ fn step_1() -> Unit raise {
     }
   }
   let lem_14 = @class.taut(
-    @parser.parse_term("(A==>B) /\\ (A==>B==>D==>C) ==> (B==>D) ==> (A==>C)"),
+    @term_syntax.parse_term("((A : Bool) → (B : Bool)) && (A → B → (D : Bool) → (C : Bool)) → (B → D) → A → C"),
   )
   let mkimp_imp_co_ctxt : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x243 : @kernel.Thm,
@@ -1688,7 +1688,7 @@ fn step_1() -> Unit raise {
     }
   }
   let lem_15 = @class.taut(
-    @parser.parse_term("(A==>C==>D) ==> (A==>C) ==> (A==>D)"),
+    @term_syntax.parse_term("((A : Bool) → (C : Bool) → (D : Bool)) → (A → C) → A → D"),
   )
   let mkimpr_imp_ctxt : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x246 : @kernel.Thm,
@@ -1705,7 +1705,7 @@ fn step_1() -> Unit raise {
     )
   }
   let lem_16 = @class.taut(
-    @parser.parse_term("(C==>A==>B) /\\ (A==>B==>C==>D) ==> (A/\\C==>B/\\D)"),
+    @term_syntax.parse_term("((C : Bool) → (A : Bool) → (B : Bool)) && (A → B → C → (D : Bool)) → A && C → B && D"),
   )
   let mkimp_conj_contra_ctxt : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x247 : @kernel.Thm,
@@ -1727,7 +1727,7 @@ fn step_1() -> Unit raise {
     }
   }
   let lem_17 = @class.taut(
-    @parser.parse_term("(C==>A==>B) ==> (A/\\C==>B/\\C)"),
+    @term_syntax.parse_term("((C : Bool) → (A : Bool) → (B : Bool)) → A && C → B && C"),
   )
   let mkimpl_conj_contra_ctxt : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x250 : @kernel.Thm,
@@ -1744,7 +1744,7 @@ fn step_1() -> Unit raise {
     )
   }
   let lem_18 = @class.taut(
-    @parser.parse_term("(A==>C==>D) ==> (A/\\C==>A/\\D)"),
+    @term_syntax.parse_term("((A : Bool) → (C : Bool) → (D : Bool)) → A && C → A && D"),
   )
   let mkimpr_conj_contra_ctxt : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x251 : @kernel.Thm,
@@ -1761,7 +1761,7 @@ fn step_1() -> Unit raise {
     )
   }
   let lem_19 = @class.taut(
-    @parser.parse_term("(B==>A) /\\ (B==>D==>C) ==> (B/\\D==>A/\\C)"),
+    @term_syntax.parse_term("((B : Bool) → (A : Bool)) && (B → (D : Bool) → (C : Bool)) → B && D → A && C"),
   )
   let mkimp_conj_co_ctxt : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x252 : @kernel.Thm,
@@ -1783,7 +1783,7 @@ fn step_1() -> Unit raise {
       )
     }
   }
-  let lem_20 = @class.taut(@parser.parse_term("(B==>A) ==> (B/\\C==>A/\\C)"))
+  let lem_20 = @class.taut(@term_syntax.parse_term("((B : Bool) → (A : Bool)) → B && (C : Bool) → A && C"))
   let mkimpl_conj_co_ctxt : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
     x255 : @kernel.Thm,
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -1801,7 +1801,7 @@ fn step_1() -> Unit raise {
     }
   }
   let lem_21 = @class.taut(
-    @parser.parse_term("(C==>B==>A) ==> (B/\\C==>A/\\C)"),
+    @term_syntax.parse_term("((C : Bool) → (B : Bool) → (A : Bool)) → B && C → A && C"),
   )
   let mkimpl_conj_co2_ctxt : (@kernel.Thm) -> @kernel.Thm raise = fn(
     x258 : @kernel.Thm,
@@ -3778,7 +3778,7 @@ fn step_1() -> Unit raise {
     )
   }
   let imp_sym : (@kernel.Thm) -> @kernel.Thm raise = rewr_rule(
-    @class.taut(@parser.parse_term("A==>B==>C <=> B==>A==>C")),
+    @class.taut(@term_syntax.parse_term("((A : Bool) → (B : Bool) → (C : Bool)) == (B → A → C)")),
   )
   let imp_exist = @equal.gsym(@theorems.left_imp_exists_thm())
   let try_gen : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
@@ -4050,10 +4050,10 @@ fn step_1() -> Unit raise {
     @drule.match_mp(@class.taut(th_51))
   }
   let mp_lem1 : (@kernel.Thm) -> @kernel.Thm raise = mp_taut(
-    @parser.parse_term("(~P ==> Q = R) ==> (Q <=> (~P ==> R) /\\ (P ==> Q))"),
+    @term_syntax.parse_term("(!(P : Bool) → (Q : Bool) == (R : Bool)) → Q == ((!P → R) && (P → Q))"),
   )
   let mp_lem2 : (@kernel.Thm) -> @kernel.Thm raise = mp_taut(
-    @parser.parse_term("(P ==> Q = R) ==> (Q <=> (P ==> R) /\\ (~P ==> Q))"),
+    @term_syntax.parse_term("((P : Bool) → (Q : Bool) == (R : Bool)) → Q == ((P → R) && (!P → Q))"),
   )
   fn case_rewr_impconv_of_conv(
     x655 : ImpconvWithContext[(ImpconvAtomic) -> ImpconvAnnotConv raise],
@@ -5020,7 +5020,7 @@ fn step_1() -> Unit raise {
     )
   }
   let imp_sym_1 : (@kernel.Thm) -> @kernel.Thm raise = rewr_rule(
-    @class.taut(@parser.parse_term("A==>B==>C <=> B==>A==>C")),
+    @class.taut(@term_syntax.parse_term("((A : Bool) → (B : Bool) → (C : Bool)) == (B → A → C)")),
   )
   let imp_exist_1 = @equal.gsym(@theorems.left_imp_exists_thm())
   let try_gen_1 : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(

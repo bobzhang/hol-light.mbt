@@ -5,24 +5,24 @@
 fn step_1() -> Unit raise {
   let t10 = @tactics.match_mp_tac(@arith.le_mult2())
   let t9 = @tactics.match_mp_tac(
-    @int.arith_rule(@parser.parse_term("2 * 2 <= p ==> ~(p = 2)")),
+    @int.arith_rule(@term_syntax.parse_term("2 * 2 <= (p : Num) → !(p == 2)")),
   )
   let t8 = @simp.asm_rewrite_tac(
     @list.List([@arith.mult_clauses(), @calc_num.arith()]),
   )
-  let t7 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t7 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t6 = @simp.asm_rewrite_tac(
     @list.List([@arith.mult_clauses(), @calc_num.arith()]),
   )
-  let t5 = @class.asm_cases_tac(@parser.parse_term("m = 1"))
+  let t5 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 1"))
   let t4 = @simp.asm_rewrite_tac(
     @list.List([@arith.mult_clauses(), @calc_num.arith()]),
   )
-  let t3 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t3 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t2 = @simp.asm_rewrite_tac(
     @list.List([@arith.mult_clauses(), @calc_num.arith()]),
   )
-  let t1 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
+  let t1 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 0"))
   let t11 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -102,7 +102,7 @@ pub fn modmul_group() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t36 = @meson.meson_tac(@list.List([@prime.coprime_sym()]))
   let t35 = @simp.asm_simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("2 <= n ==> 1 < n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → 1 < n"))]),
   )
   let t37 = @tactics.then_tac(
     @tactics.then_tac(
@@ -137,7 +137,7 @@ fn step_3() -> Unit raise {
   let t30 = @simp.asm_simp_tac(
     @list.List([
       @arith.mod_lt_eq(),
-      @int.arith_rule(@parser.parse_term("2 <= n ==> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → !(n == 0)")),
     ]),
   )
   let t40 = @tactics.then_tac(
@@ -146,10 +146,10 @@ fn step_3() -> Unit raise {
   )
   let t29 = @meson.asm_meson_tac(@list.List([@prime.coprime_sym()]))
   let t28 = @simp.rewrite_tac(@list.List([@pocklington.inverse_mod_lmul_eq()]))
-  let t27 = @tactics.exists_tac(@parser.parse_term("m:num"))
+  let t27 = @tactics.exists_tac(@term_syntax.parse_term("(m : Num)"))
   let t26 = @tactics.match_mp_tac(
     @int.number_rule(
-      @parser.parse_term("forall m. (a * m == 1) (mod n) ==> coprime(a,n)"),
+      @term_syntax.parse_term("∀ m : Num, op_eq_eq((a : Num) * m, 1, mod((n : Num))) → coprime((a, n))"),
     ),
   )
   let t25 = @simp.asm_rewrite_tac(
@@ -162,7 +162,7 @@ fn step_3() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.then_tac(
-                @tactics.x_gen_tac(@parser.parse_term("m:num")),
+                @tactics.x_gen_tac(@term_syntax.parse_term("(m : Num)")),
                 @tactics.strip_tac,
               ),
               t25,
@@ -183,14 +183,14 @@ fn step_3() -> Unit raise {
   let t24 = @tactics.repeat_tac(@tactics.conj_tac)
   let t23 = @simp.rewrite_tac(
     @list.List([
-      @int.number_rule(@parser.parse_term("coprime(1,n)")),
+      @int.number_rule(@term_syntax.parse_term("coprime((1, (n : Num)))")),
       @pair.pair_eq(),
     ]),
   )
   let t22 = @simp.asm_rewrite_tac(
     @list.List([
       @sets.in_elim_thm(),
-      @int.arith_rule(@parser.parse_term("1 < n <=> 2 <= n")),
+      @int.arith_rule(@term_syntax.parse_term("(1 < (n : Num)) == (2 <= n)")),
     ]),
   )
   let t20 = @equal.gsym(@bool.conjunct2(@grouptheory.group_tybij()))
@@ -205,7 +205,7 @@ fn step_3() -> Unit raise {
   )
   let t17 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(
-      @list.List([@int.arith_rule(@parser.parse_term("~(n <= 1) <=> 2 <= n"))]),
+      @list.List([@int.arith_rule(@term_syntax.parse_term("!((n : Num) <= 1) == (2 <= n)"))]),
     ),
   )
   let t16 = @simp.asm_rewrite_tac(
@@ -219,9 +219,9 @@ fn step_3() -> Unit raise {
     t17,
   ])
   let t15 = @simp.asm_rewrite_tac(@list.List([]))
-  let t14 = @class.asm_cases_tac(@parser.parse_term("n <= 1"))
+  let t14 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) <= 1"))
   let t13 = @simp.rewrite_tac(@list.List([modmul_group()]))
-  let t12 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t12 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t42 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -288,7 +288,7 @@ fn step_4() -> Unit raise {
       @iterate.in_numseg(),
     ]),
   )
-  let t45 = @tactics.exists_tac(@parser.parse_term("0..n"))
+  let t45 = @tactics.exists_tac(@term_syntax.parse_term("op_dot_dot(0, (n : Num))"))
   let t44 = @tactics.match_mp_tac(@sets.finite_subset())
   let t43 = @simp.asm_rewrite_tac(@list.List([@sets.finite_sing()]))
   let t47 = @tactics.then_tac(
@@ -315,7 +315,7 @@ fn step_4() -> Unit raise {
   )
   finite_modmul_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. FINITE(group_carrier(modmul_group n))"),
+      @term_syntax.parse_term("∀ n : Num, FINITE(group_carrier(modmul_group(n)))"),
       t47,
     ),
   )
@@ -339,13 +339,13 @@ fn step_5() -> Unit raise {
   let t52 = @simp.once_rewrite_tac(@list.List([@theorems.conj_sym()]))
   let t51 = @simp.asm_rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n <= 1 <=> n = 0 \\/ n = 1")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) <= 1) == (n == 0 || n == 1)")),
     ]),
   )
   let t50 = @simp.asm_rewrite_tac(
     @list.List([@arith.le_refl(), @pocklington.phi_1(), @sets.card_sing()]),
   )
-  let t49 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t49 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t48 = @simp.asm_rewrite_tac(
     @list.List([modmul_group_v1(), @arith.le_0(), @sets.card_sing()]),
   )
@@ -443,7 +443,7 @@ fn step_7() -> Unit raise {
     t59,
   )
   abelian_modmul_group_c.set(
-    @tactics.prove(@parser.parse_term("forall n. abelian_group(modmul_group n)"), t60),
+    @tactics.prove(@term_syntax.parse_term("∀ n : Num, abelian_group(modmul_group(n))"), t60),
   )
 }
 
@@ -467,17 +467,17 @@ fn step_8() -> Unit raise {
   ])
   let t68 = @tactics.match_mp_tac(
     @int.arith_rule(
-      @parser.parse_term("~(n <= 2) /\\ 2 <= p ==> (p = 1 <=> n <= 2)"),
+      @term_syntax.parse_term("!((n : Num) <= 2) && 2 <= (p : Num) → (p == 1) == (n <= 2)"),
     ),
   )
   let t67 = @simp.asm_rewrite_tac(
     @list.List([@pocklington.phi_2(), @calc_num.arith()]),
   )
-  let t66 = @class.asm_cases_tac(@parser.parse_term("n = 2"))
+  let t66 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 2"))
   let t65 = @simp.asm_rewrite_tac(
     @list.List([@pocklington.phi_1(), @calc_num.arith()]),
   )
-  let t64 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t64 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t63 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith()]))
   let t62 = @simp.rewrite_tac(@list.List([order_modmul_group()]))
   let t61 = @simp.rewrite_tac(@list.List([finite_modmul_group()]))
@@ -528,7 +528,7 @@ fn step_8() -> Unit raise {
   )
   trivial_modmul_group_c.set(
     @tactics.prove(
-      @parser.parse_term("forall n. trivial_group(modmul_group n) <=> n <= 2"),
+      @term_syntax.parse_term("∀ n : Num, trivial_group(modmul_group(n)) == (n <= 2)"),
       t70,
     ),
   )
@@ -564,12 +564,12 @@ fn step_9() -> Unit raise {
       @arith.mod_lt_eq(),
       @int.coprime_lmod(),
       @pair.pair_eq(),
-      @int.arith_rule(@parser.parse_term("2 <= n ==> ~(n = 0) /\\ ~(n = 1)")),
+      @int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → !(n == 0) && !(n == 1)")),
     ]),
   )
   let t74 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("n <= 1 <=> n = 0 \\/ n = 1")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) <= 1) == (n == 0 || n == 1)")),
     ]),
   )
   let t73 = @simp.rewrite_tac(@list.List([modmul_group_v1()]))
@@ -640,7 +640,7 @@ fn step_10() -> Unit raise {
     ]),
   )
   let t102 = @simp.asm_rewrite_tac(@list.List([]))
-  let t101 = @tactics.exists_tac(@parser.parse_term("m * n:num"))
+  let t101 = @tactics.exists_tac(@term_syntax.parse_term("(m : Num) * (n : Num)"))
   let t100 = @tactics.match_mp_tac(@pocklington.cong_imp_eq())
   let t99 = @tactics.repeat_tac(@tactics.strip_tac)
   let t98 = @simp.rewrite_tac(
@@ -651,14 +651,14 @@ fn step_10() -> Unit raise {
     ]),
   )
   let t96 = @int.arith_rule(
-    @parser.parse_term("2 <= n ==> ~(n = 0) /\\ ~(n = 1)"),
+    @term_syntax.parse_term("2 <= (n : Num) → !(n == 0) && !(n == 1)"),
   )
   let t97 = @simp.asm_simp_tac(
     @list.List([
       modmul_group_v1(),
       @arith.mult_eq_0(),
       @arith.mult_eq_1(),
-      @int.arith_rule(@parser.parse_term("n <= 1 <=> n = 0 \\/ n = 1")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) <= 1) == (n == 0 || n == 1)")),
       t96,
     ]),
   )
@@ -712,7 +712,7 @@ fn step_10() -> Unit raise {
       s91(x92)
     }
   })
-  let t88 = @int.arith_rule(@parser.parse_term("2 <= n ==> ~(n = 0)"))
+  let t88 = @int.arith_rule(@term_syntax.parse_term("2 <= (n : Num) → !(n == 0)"))
   let t89 = @simp.asm_simp_tac(
     @list.List([
       order_modmul_group(),
@@ -969,7 +969,7 @@ pub fn group_isomorphism_prod_modmul_group() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t128 = @simp.asm_rewrite_tac(@list.List([]))
   let t127 = @tactics.match_mp_tac(group_isomorphism_prod_modmul_group())
-  let t126 = @tactics.exists_tac(@parser.parse_term("\\a. (a MOD m),(a MOD n)"))
+  let t126 = @tactics.exists_tac(@term_syntax.parse_term("(a : Num) => (MOD(a, (m : Num)), MOD(a, (n : Num)))"))
   let t125 = @simp.rewrite_tac(@list.List([@grouptheory.isomorphic_group()]))
   let t124 = @simp.once_rewrite_tac(
     @list.List([@grouptheory.isomorphic_group_sym()]),
@@ -1007,7 +1007,7 @@ fn step_11() -> Unit raise {
   let t119 = @simp.asm_rewrite_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("n <= 2 <=> n = 0 \\/ n = 1 \\/ n = 2"),
+        @term_syntax.parse_term("((n : Num) <= 2) == (n == 0 || n == 1 || n == 2)"),
       ),
     ]),
   )
@@ -1019,7 +1019,7 @@ fn step_11() -> Unit raise {
       @calc_num.arith(),
     ]),
   )
-  let t117 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
+  let t117 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 1"))
   let t116 = @simp.asm_simp_tac(
     @list.List([
       @arith.mult_clauses(),
@@ -1028,15 +1028,15 @@ fn step_11() -> Unit raise {
       @calc_num.arith(),
     ]),
   )
-  let t115 = @class.asm_cases_tac(@parser.parse_term("m = 1"))
+  let t115 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 1"))
   let t114 = @simp.asm_simp_tac(
     @list.List([@prime.coprime_0(), @calc_num.arith()]),
   )
-  let t113 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
+  let t113 = @class.asm_cases_tac(@term_syntax.parse_term("(n : Num) == 0"))
   let t112 = @simp.asm_simp_tac(
     @list.List([@prime.coprime_0(), @calc_num.arith()]),
   )
-  let t111 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
+  let t111 = @class.asm_cases_tac(@term_syntax.parse_term("(m : Num) == 0"))
   let t110 = @tactics.pop_assum(fn(
     x107 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1324,7 +1324,7 @@ fn step_13() -> Unit raise {
       s140(x141)
     }
   })
-  let t138 = @tactics.x_gen_tac(@parser.parse_term("k:num"))
+  let t138 = @tactics.x_gen_tac(@term_syntax.parse_term("(k : Num)"))
   let t137 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@pocklington.order_divides())]),
   )
@@ -1464,7 +1464,7 @@ fn step_14() -> Unit raise {
   let t179 = @simp.asm_simp_tac(
     @list.List([
       @pocklington.phi_eq_0(),
-      @int.arith_rule(@parser.parse_term("2 < n ==> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("2 < (n : Num) → !(n == 0)")),
     ]),
   )
   let t178 = @simp.gen_rewrite_tac(
@@ -1492,17 +1492,17 @@ fn step_14() -> Unit raise {
   )
   let t169 = @simp.once_rewrite_tac(@list.List([@prime.coprime_sym()]))
   let t168 = @tactics.match_mp_tac(
-    @class.taut(@parser.parse_term("(~p ==> ~q) /\\ q ==> p /\\ q")),
+    @class.taut(@term_syntax.parse_term("(!(p : Bool) → !(q : Bool)) && q → p && q")),
   )
   let t167 = @simp.asm_simp_tac(
     @list.List([
       @arith.mod_lt_eq(),
-      @int.arith_rule(@parser.parse_term("2 < n ==> ~(n = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("2 < (n : Num) → !(n == 0)")),
     ]),
   )
-  let t166 = @tactics.exists_tac(@parser.parse_term("k MOD n"))
+  let t166 = @tactics.exists_tac(@term_syntax.parse_term("MOD((k : Num), (n : Num))"))
   let t165 = @tactics.disch_then(
-    @tactics.x_choose_then(@parser.parse_term("k:num"))(
+    @tactics.x_choose_then(@term_syntax.parse_term("(k : Num)"))(
       @tactics.strip_assume_tac,
     ),
   )
@@ -1584,16 +1584,16 @@ fn step_14() -> Unit raise {
       finite_modmul_group(),
       modmul_group_v1(),
       @int.arith_rule(
-        @parser.parse_term("2 < n ==> ~(n = 0) /\\ ~(n = 1) /\\ ~(n <= 1)"),
+        @term_syntax.parse_term("2 < (n : Num) → !(n == 0) && !(n == 1) && !(n <= 1)"),
       ),
     ]),
   )
   let t156 = @tactics.mp_tac(
-    @bool.spec(@parser.parse_term("n:num"), @primitive.primitive_root_exists()),
+    @bool.spec(@term_syntax.parse_term("(n : Num)"), @primitive.primitive_root_exists()),
   )
   let t155 = @simp.simp_tac(@list.List([group_element_order_modmul_group()]))
   let t154 = @simp.once_rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("p /\\ q <=> ~(p ==> ~q)"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) && (q : Bool)) == !(p → !q)"))]),
   )
   let t153 = @simp.simp_tac(
     @list.List([
@@ -1640,7 +1640,7 @@ fn step_14() -> Unit raise {
                                             @tactics.then_tac(
                                               @tactics.gen_tac,
                                               @class.asm_cases_tac(
-                                                @parser.parse_term("n <= 2"),
+                                                @term_syntax.parse_term("(n : Num) <= 2"),
                                               ),
                                             ),
                                             t152,

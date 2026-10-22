@@ -16,7 +16,7 @@ fn step_2() -> Unit raise {
 /// REAL_MUL_LTIMES
 fn step_3() -> Unit raise {
   let t1 = @meson.meson_tac(@list.List([@real.real_eq_mul_lcancel()]))
-  real_mul_ltimes_c.set(@tactics_refine.prove(@parser.parse_term("forall x a b. (x*.a = x*.b) ==> (~(x=(&.0))) ==> (a =b)"), t1))
+  real_mul_ltimes_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, x * a == x * b → !(x == real_of_num(0)) → a == b"), t1))
 }
 
 ///|
@@ -32,7 +32,7 @@ pub fn real_mul_ltimes() -> @kernel.Thm {
 /// REAL_MUL_RTIMES
 fn step_4() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([@real.real_eq_mul_rcancel()]))
-  real_mul_rtimes_c.set(@tactics_refine.prove(@parser.parse_term("forall x a b. (a*.x = b*.x) ==> (~(x=(&.0))) ==> (a =b)"), t2))
+  real_mul_rtimes_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, a * x == b * x → !(x == real_of_num(0)) → a == b"), t2))
 }
 
 ///|
@@ -138,7 +138,7 @@ pub fn real_mk_le_square() -> @kernel.Thm {
 /// REAL_MUL_LTIMES_LE
 fn step_11() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([@real.real_le_lmul_eq()]))
-  real_mul_ltimes_le_c.set(@tactics_refine.prove(@parser.parse_term("forall x a b. (x*.a <=. x*.b) ==> (&.0 < x) ==> (a <=. b)"), t3))
+  real_mul_ltimes_le_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, x * a <= x * b → real_of_num(0) < x → a <= b"), t3))
 }
 
 ///|
@@ -154,7 +154,7 @@ pub fn real_mul_ltimes_le() -> @kernel.Thm {
 /// REAL_MUL_RTIMES_LE
 fn step_12() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([@analysis.real_le_rmul_eq()]))
-  real_mul_rtimes_le_c.set(@tactics_refine.prove(@parser.parse_term("forall x a b. (a*.x <=. b*.x) ==> (&.0 < x) ==> (a <=. b)"), t4))
+  real_mul_rtimes_le_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, a * x <= b * x → real_of_num(0) < x → a <= b"), t4))
 }
 
 ///|
@@ -410,7 +410,7 @@ pub fn real_mk_nn_abs() -> @kernel.Thm {
 /// REAL_PROP_NN_POS
 fn step_29() -> Unit raise {
   let t5 = @meson.meson_tac(@list.List([@analysis.real_lt_le()]))
-  real_prop_nn_pos_c.set(@tactics_refine.prove(@parser.parse_term("forall x y. x<. y ==> x <= y"), t5))
+  real_prop_nn_pos_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y → x <= y"), t5))
 }
 
 ///|
@@ -456,7 +456,7 @@ pub fn real_prop_nn_double() -> @kernel.Thm {
 /// REAL_PROP_NN_RCANCEL
 fn step_32() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([real_prop_le_rcancel(), @analysis.real_mul_lzero()]))
-  real_prop_nn_rcancel_c.set(@tactics_refine.prove(@parser.parse_term("forall x y. &.0 <. x /\\ (&.0) <=. y*.x ==> ((&.0) <=. y)"), t6))
+  real_prop_nn_rcancel_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && real_of_num(0) <= y * x → real_of_num(0) <= y"), t6))
 }
 
 ///|
@@ -472,7 +472,7 @@ pub fn real_prop_nn_rcancel() -> @kernel.Thm {
 /// REAL_PROP_NN_LCANCEL
 fn step_33() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([real_prop_le_lcancel(), @analysis.real_mul_rzero()]))
-  real_prop_nn_lcancel_c.set(@tactics_refine.prove(@parser.parse_term("forall x y. &.0 <. x /\\ (&.0) <=. x*.y ==> ((&.0) <=. y)"), t7))
+  real_prop_nn_lcancel_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, real_of_num(0) < x && real_of_num(0) <= x * y → real_of_num(0) <= y"), t7))
 }
 
 ///|
@@ -863,7 +863,7 @@ pub fn real_mk_nz_exp() -> @kernel.Thm {
 /// REAL_PROP_NZ_ABS
 fn step_59() -> Unit raise {
   let t8 = @simp.rewrite_tac(@list.List([@analysis.abs_zero()]))
-  real_prop_nz_abs_c.set(@tactics_refine.prove(@parser.parse_term("forall x. (~(x = (&.0))) ==> (~(abs(x) = (&.0)))"), t8))
+  real_prop_nz_abs_c.set(@tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, !(x == real_of_num(0)) → !(abs(x) == real_of_num(0))"), t8))
 }
 
 ///|

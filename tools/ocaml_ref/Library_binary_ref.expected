@@ -5546,49 +5546,49 @@ Warning: inventing type variables
 0..0..1..2..5..11..18..30..45..62..solved at 79
 0..0..1..4..10..solved at 15
 Library/binary quotations (44):
-  0..n
-  forall s. (forall x:num. x IN s ==> x <= n) ==> FINITE s
+  op_dot_dot(0, (n : Num))
+  \226\136\128 s : (Num) -> Bool, (\226\136\128 x : Num, IN(x, s) \226\134\146 x <= (n : Num)) \226\134\146 FINITE(s)
   forall s. FINITE s /\\ (forall i. i IN s ==> EVEN(f i)) ==> EVEN(nsum s f)
-  bitset n = {i | ODD(n DIV (2 EXP i))}
-  binarysum s = nsum s (\\i. 2 EXP i)
-  forall n i. i IN (bitset n) ==> 2 EXP i <= n
-  forall n i. i IN (bitset n) ==> i < n
-  0..n
-  forall n. FINITE(bitset n)
-  bitset 0 = {}
-  (2 * n + 1) DIV 2 = n /\\ (2 * n) DIV 2 = n
-  a /\\ (a ==> b) ==> a /\\ b
+  (bitset : (Num, Num) -> Bool)((n : Num)) == {(i : Num) | ODD(DIV(n, EXP(2, i)))}
+  (binarysum : ((Num) -> Bool) -> Num)((s : (Num) -> Bool)) == nsum(s, (i : Num) => EXP(2, i))
+  \226\136\128 n : Num, \226\136\128 i : Num, IN(i, bitset(n)) \226\134\146 EXP(2, i) <= n
+  \226\136\128 n : Num, \226\136\128 i : Num, IN(i, bitset(n)) \226\134\146 i < n
+  op_dot_dot(0, (n : Num))
+  \226\136\128 n : Num, FINITE(bitset(n))
+  bitset(0) == {}
+  DIV(2 * (n : Num) + 1, 2) == n && DIV(2 * n, 2) == n
+  (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 a && b
   (forall n. bitset(2 * n) = IMAGE SUC (bitset n)) /\\\n   (forall n. bitset(2 * n + 1) = 0 INSERT (IMAGE SUC (bitset n)))
-  m < SUC(2 * m)
-  ~(2 * m = 0) ==> m < 2 * m
-  ~(0 = x + 1)
-  forall n. binarysum (bitset n) = n
-  forall m n. bitset m = bitset n <=> m = n
-  forall n. bitset n = {} <=> n = 0
-  a + b < 2 * a <=> b < a 
-  nsum (k INSERT (s DELETE k)) (\\i. 2 EXP i)
-  FINITE(s:num->bool)
+  (m : Num) < SUC(2 * m)
+  !(2 * (m : Num) == 0) \226\134\146 m < 2 * m
+  !(0 == (x : Num) + 1)
+  \226\136\128 n : Num, binarysum(bitset(n)) == n
+  \226\136\128 m : Num, \226\136\128 n : Num, (bitset(m) == bitset(n)) == (m == n)
+  \226\136\128 n : Num, (bitset(n) == {}) == (n == 0)
+  ((a : Num) + (b : Num) < 2 * a) == (b < a)
+  nsum(INSERT((k : Num), DELETE((s : (Num) -> Bool), k)), (i : Num) => EXP(2, i))
+  FINITE((s : (Num) -> Bool))
   forall k s. (forall i. i IN s ==> i < k) ==> nsum s (\\i. 2 EXP i) < 2 EXP k
-  i <= k:num ==> i + k - i = k
+  (i : Num) <= (k : Num) \226\134\146 i + (k - i) == k
   forall s k. FINITE s /\\ (forall i. i IN s ==> k <= i)\n         ==> nsum s (\\i. 2 EXP i) = 2 EXP k * nsum s (\\i. 2 EXP (i - k))
-  k <= j:num ==> ~(j < k)
-  (if p then 0 else q) = 0 <=> ~p ==> q = 0
-  s:num->bool
+  (k : Num) <= (j : Num) \226\134\146 !(j < k)
+  ((if (p : Bool) { 0 } else { (q : Num) }) == 0) == (!p \226\134\146 q == 0)
+  (s : (Num) -> Bool)
   2 EXP k * nsum {i | k <= i /\\ i IN s} (\\i. 2 EXP (i - k))
-  a + x:num = y + a <=> x = y
-  nsum {i | i < k /\\ i IN s} (\\j. 2 EXP j)
-  (i:num) IN s
-  i:num
+  ((a : Num) + (x : Num) == (y : Num) + a) == (x == y)
+  nsum({(i : Num) | i < (k : Num) && IN(i, (s : (Num) -> Bool))}, (j : Num) => EXP(2, j))
+  IN((i : Num), (s : (Num) -> Bool))
+  (i : Num)
   (nsum {i | i < k /\\ i IN s} (\\j. 2 EXP j) +\n               nsum {i | k <= i /\\ i IN s} (\\j. 2 EXP j)) DIV (2 EXP k)
   forall k s. FINITE s\n         ==> (nsum s (\\j. 2 EXP j)) DIV (2 EXP k) =\n             nsum s (\\j. if j < k then 0 else 2 EXP (j - k))
-  i IN s ==> s = i INSERT (s DELETE i)
-  (i:num) IN s
-  i:num
-  forall s. FINITE s ==> bitset (binarysum s) = s
+  IN((i : _), (s : (_) -> Bool)) \226\134\146 s == INSERT(i, DELETE(s, i))
+  IN((i : Num), (s : (Num) -> Bool))
+  (i : Num)
+  \226\136\128 s : (Num) -> Bool, FINITE(s) \226\134\146 bitset(binarysum(s)) == s
   forall k s. (forall i. i IN s ==> i < k) ==> binarysum s < 2 EXP k
-  2 EXP i < 2 EXP k
-  forall n i k. n < 2 EXP k /\\ i IN bitset n ==> i < k
-  forall n k. n < 2 EXP k <=> (forall i. i IN bitset n ==> i < k)
+  EXP(2, (i : Num)) < EXP(2, (k : Num))
+  \226\136\128 n : Num, \226\136\128 i : Num, \226\136\128 k : Num, n < EXP(2, k) && IN(i, bitset(n)) \226\134\146 i < k
+  \226\136\128 n : Num, \226\136\128 k : Num, (n < EXP(2, k)) == (\226\136\128 i : Num, IN(i, bitset(n)) \226\134\146 i < k)
   forall s k. FINITE s ==> (binarysum s < 2 EXP k <=> (forall i. i IN s ==> i < k))
 BOUNDED_FINITE =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\s:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) x:num) s:fun(num,bool))) ((#<=:fun(num,fun(num,bool)) x:num) n:num))))) (#FINITE:fun(fun(num,bool),bool) s:fun(num,bool)))))
 EVEN_NSUM =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('?1,bool),bool) s:fun('?1,bool))) (#forall:fun(fun('?1,bool),bool) (\i:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('?1,fun(fun('?1,bool),bool)) i:'?1) s:fun('?1,bool))) (#EVEN:fun(num,bool) (f:fun('?1,num) i:'?1))))))) (#EVEN:fun(num,bool) ((#nsum:fun(fun('?1,bool),fun(fun('?1,num),num)) s:fun('?1,bool)) f:fun('?1,num))))))

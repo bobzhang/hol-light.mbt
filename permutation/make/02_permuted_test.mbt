@@ -5725,38 +5725,38 @@ test "Permutation/permuted matches Permutation/permuted.ml" {
       #|Warning: inventing type variables
       #|0..0..1..4..12..30..68..solved at 157
       #|Permutation/permuted quotations (32):
-      #|  [] PERMUTED [] /\\\n   (forall h t1 t2. t1 PERMUTED t2 ==> h :: t1 PERMUTED h :: t2) /\\\n   (forall l1 l2 l3. l1 PERMUTED l2 /\\ l2 PERMUTED l3 ==> l1 PERMUTED l3) /\\\n   (forall x y t. x :: y :: t PERMUTED y :: x :: t)
-      #|  forall l. l PERMUTED l
-      #|  forall(xs:A list) l2. xs PERMUTED l2 ==> l2 PERMUTED xs
-      #|  forall(xs:A list) l2. xs PERMUTED l2 <=> l2 PERMUTED xs
-      #|  forall xs l2 l3. xs PERMUTED l2 /\\ l2 PERMUTED l3 ==> xs PERMUTED l3
-      #|  forall h t1 t2. t1 PERMUTED t2 ==> h :: t1 PERMUTED h :: t2
-      #|  forall f l1 l2. l1 PERMUTED l2 ==>  MAP f l1 PERMUTED MAP f l2
-      #|  forall l1 l2. l1 PERMUTED l2 ==> LENGTH l1 = LENGTH l2
-      #|  forall a b l. a :: b :: l PERMUTED b :: a :: l
-      #|  forall(a:A) l1 l2. l1 PERMUTED l2 ==> (MEM a l1 <=> MEM a l2)
-      #|  forall P xs ys. xs PERMUTED ys ==> (ALL P xs <=> ALL P ys)
-      #|  forall l:A list. [] PERMUTED l <=> l = []
-      #|  (forall l:A list. [] PERMUTED l <=> l = []) /\\\n    (forall l:A list. l PERMUTED [] <=> l = [])
-      #|  forall l1 l2. l1 PERMUTED l2 ==> LENGTH l1 = LENGTH l2 /\\\n                                 (forall x. l1 = [x:A] <=> l2 = [x])
-      #|  (forall(x:A) l. [x] PERMUTED l <=> l = [x]) /\\\n    (forall(x:A) l. l PERMUTED [x] <=> l = [x])
-      #|  forall(a:A) l. MEM a l ==> l PERMUTED a :: DELETE1 a l
-      #|  (p <=> q) <=> (p ==> q) /\\ (q ==> p)
-      #|  x:A
-      #|  (h:A) :: t PERMUTED h :: DELETE1 h l2
-      #|  h:A
-      #|  MEM (h:A) l2
-      #|  forall l1 l2. l1 PERMUTED l2 <=> (forall x:A. COUNT x l1 = COUNT x l2)
-      #|  forall x t1 t2. x :: t1 PERMUTED x :: t2 <=> t1 PERMUTED t2
-      #|  forall(h:A) t l. h :: t PERMUTED l <=> MEM h l /\\ t PERMUTED DELETE1 h l
-      #|  forall(h:A) t l. l PERMUTED h :: t <=> MEM h l /\\ DELETE1 h l PERMUTED t
-      #|  forall xs ys. xs PERMUTED ys ==> (LIST_UNIQ xs <=> LIST_UNIQ ys)
-      #|  forall(P:A->A->bool) l l'.\n        (forall x y. P x y ==> P y x) /\\ l PERMUTED l' /\\ PAIRWISE P l\n        ==> PAIRWISE P l'
+      #|  (PERMUTED : (List[_], List[_]) -> Bool)(NIL, NIL) && (\226\136\128 h : _, \226\136\128 t1 : List[_], \226\136\128 t2 : List[_], PERMUTED(t1, t2) \226\134\146 PERMUTED(CONS(h, t1), CONS(h, t2))) && (\226\136\128 l1 : List[_], \226\136\128 l2 : List[_], \226\136\128 l3 : List[_], PERMUTED(l1, l2) && PERMUTED(l2, l3) \226\134\146 PERMUTED(l1, l3)) && (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 t : List[_], PERMUTED(CONS(x, CONS(y, t)), CONS(y, CONS(x, t))))
+      #|  \226\136\128 l : List[_], PERMUTED(l, l)
+      #|  \226\136\128 xs : List[A], \226\136\128 l2 : List[A], PERMUTED(xs, l2) \226\134\146 PERMUTED(l2, xs)
+      #|  \226\136\128 xs : List[A], \226\136\128 l2 : List[A], PERMUTED(xs, l2) == PERMUTED(l2, xs)
+      #|  \226\136\128 xs : List[_], \226\136\128 l2 : List[_], \226\136\128 l3 : List[_], PERMUTED(xs, l2) && PERMUTED(l2, l3) \226\134\146 PERMUTED(xs, l3)
+      #|  \226\136\128 h : _, \226\136\128 t1 : List[_], \226\136\128 t2 : List[_], PERMUTED(t1, t2) \226\134\146 PERMUTED(CONS(h, t1), CONS(h, t2))
+      #|  \226\136\128 f : (_) -> _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], PERMUTED(l1, l2) \226\134\146 PERMUTED(MAP(f, l1), MAP(f, l2))
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], PERMUTED(l1, l2) \226\134\146 LENGTH(l1) == LENGTH(l2)
+      #|  \226\136\128 a : _, \226\136\128 b : _, \226\136\128 l : List[_], PERMUTED(CONS(a, CONS(b, l)), CONS(b, CONS(a, l)))
+      #|  \226\136\128 a : A, \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], PERMUTED(l1, l2) \226\134\146 MEM(a, l1) == MEM(a, l2)
+      #|  \226\136\128 P : (_) -> Bool, \226\136\128 xs : List[_], \226\136\128 ys : List[_], PERMUTED(xs, ys) \226\134\146 ALL(P, xs) == ALL(P, ys)
+      #|  \226\136\128 l : List[A], PERMUTED(NIL, l) == (l == NIL)
+      #|  (\226\136\128 l : List[A], PERMUTED(NIL, l) == (l == NIL)) && (\226\136\128 l : List[A], PERMUTED(l, NIL) == (l == NIL))
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], PERMUTED(l1, l2) \226\134\146 LENGTH(l1) == LENGTH(l2) && (\226\136\128 x : A, (l1 == [x]) == (l2 == [x]))
+      #|  (\226\136\128 x : A, \226\136\128 l : List[A], PERMUTED([x], l) == (l == [x])) && (\226\136\128 x : A, \226\136\128 l : List[A], PERMUTED(l, [x]) == (l == [x]))
+      #|  \226\136\128 a : A, \226\136\128 l : List[A], MEM(a, l) \226\134\146 PERMUTED(l, CONS(a, DELETE1(a, l)))
+      #|  ((p : Bool) == (q : Bool)) == ((p \226\134\146 q) && (q \226\134\146 p))
+      #|  (x : A)
+      #|  PERMUTED(CONS((h : A), (t : List[A])), CONS(h, DELETE1(h, (l2 : List[A]))))
+      #|  (h : A)
+      #|  MEM((h : A), (l2 : List[A]))
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], PERMUTED(l1, l2) == (\226\136\128 x : A, COUNT(x, l1) == COUNT(x, l2))
+      #|  \226\136\128 x : _, \226\136\128 t1 : List[_], \226\136\128 t2 : List[_], PERMUTED(CONS(x, t1), CONS(x, t2)) == PERMUTED(t1, t2)
+      #|  \226\136\128 h : A, \226\136\128 t : List[A], \226\136\128 l : List[A], PERMUTED(CONS(h, t), l) == (MEM(h, l) && PERMUTED(t, DELETE1(h, l)))
+      #|  \226\136\128 h : A, \226\136\128 t : List[A], \226\136\128 l : List[A], PERMUTED(l, CONS(h, t)) == (MEM(h, l) && PERMUTED(DELETE1(h, l), t))
+      #|  \226\136\128 xs : List[_], \226\136\128 ys : List[_], PERMUTED(xs, ys) \226\134\146 LIST_UNIQ(xs) == LIST_UNIQ(ys)
+      #|  \226\136\128 P : (A, A) -> Bool, \226\136\128 l : List[A], \226\136\128 l' : List[A], (\226\136\128 x : A, \226\136\128 y : A, P(x, y) \226\134\146 P(y, x)) && PERMUTED(l, l') && PAIRWISE(P, l) \226\134\146 PAIRWISE(P, l')
       #|  forall(P:A->A->bool) l l.\n        (forall x y. P x y ==> P y x) /\\ l PERMUTED l'\n        ==> (PAIRWISE P l <=> PAIRWISE P l')
-      #|  forall l1 l2. (APPEND l1 l2) PERMUTED (APPEND l2 l1)
-      #|  forall l1 l2 l3:A list.\n        (APPEND l1 l2) PERMUTED (APPEND l1 l3) <=> l2 PERMUTED l3
-      #|  forall l1 l2 l3:A list.\n        (APPEND l1 l3) PERMUTED (APPEND l2 l3) <=> l1 PERMUTED l2
-      #|  forall l1 l1' l2 l2'.\n        l1 PERMUTED l1' /\\ l2 PERMUTED l2'\n        ==> (APPEND l1 l2) PERMUTED (APPEND l1' l2')
+      #|  \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], PERMUTED(APPEND(l1, l2), APPEND(l2, l1))
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], \226\136\128 l3 : List[A], PERMUTED(APPEND(l1, l2), APPEND(l1, l3)) == PERMUTED(l2, l3)
+      #|  \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], \226\136\128 l3 : List[A], PERMUTED(APPEND(l1, l3), APPEND(l2, l3)) == PERMUTED(l1, l2)
+      #|  \226\136\128 l1 : List[_], \226\136\128 l1' : List[_], \226\136\128 l2 : List[_], \226\136\128 l2' : List[_], PERMUTED(l1, l1') && PERMUTED(l2, l2') \226\134\146 PERMUTED(APPEND(l1, l2), APPEND(l1', l2'))
       #|PERMUTED_RULES =  |- ((#/\:fun(bool,fun(bool,bool)) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) #NIL:list('?1)) #NIL:list('?1))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('?1,bool),bool) (\h:'?1. (#forall:fun(fun(list('?1),bool),bool) (\t1:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\t2:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) t1:list('?1)) t2:list('?1))) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t1:list('?1))) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t2:list('?1))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list('?1),bool),bool) (\l1:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\l2:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\l3:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) l1:list('?1)) l2:list('?1))) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) l2:list('?1)) l3:list('?1)))) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) l1:list('?1)) l3:list('?1)))))))))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#forall:fun(fun('?1,bool),bool) (\y:'?1. (#forall:fun(fun(list('?1),bool),bool) (\t:list('?1). ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) ((#CONS:fun('?1,fun(list('?1),list('?1))) x:'?1) ((#CONS:fun('?1,fun(list('?1),list('?1))) y:'?1) t:list('?1)))) ((#CONS:fun('?1,fun(list('?1),list('?1))) y:'?1) ((#CONS:fun('?1,fun(list('?1),list('?1))) x:'?1) t:list('?1)))))))))))))
       #|PERMUTED_INDUCT =  |- (#forall:fun(fun(fun(list('?1),fun(list('?1),bool)),bool),bool) (\PERMUTED':fun(list('?1),fun(list('?1),bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) #NIL:list('?1)) #NIL:list('?1))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('?1,bool),bool) (\h:'?1. (#forall:fun(fun(list('?1),bool),bool) (\t1:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\t2:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) t1:list('?1)) t2:list('?1))) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t1:list('?1))) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t2:list('?1))))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list('?1),bool),bool) (\l1:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\l2:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\l3:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) l1:list('?1)) l2:list('?1))) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) l2:list('?1)) l3:list('?1)))) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) l1:list('?1)) l3:list('?1)))))))))) (#forall:fun(fun('?1,bool),bool) (\x:'?1. (#forall:fun(fun('?1,bool),bool) (\y:'?1. (#forall:fun(fun(list('?1),bool),bool) (\t:list('?1). ((PERMUTED':fun(list('?1),fun(list('?1),bool)) ((#CONS:fun('?1,fun(list('?1),list('?1))) x:'?1) ((#CONS:fun('?1,fun(list('?1),list('?1))) y:'?1) t:list('?1)))) ((#CONS:fun('?1,fun(list('?1),list('?1))) y:'?1) ((#CONS:fun('?1,fun(list('?1),list('?1))) x:'?1) t:list('?1)))))))))))))) (#forall:fun(fun(list('?1),bool),bool) (\a0:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\a1:list('?1). ((#==>:fun(bool,fun(bool,bool)) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) a0:list('?1)) a1:list('?1))) ((PERMUTED':fun(list('?1),fun(list('?1),bool)) a0:list('?1)) a1:list('?1))))))))))
       #|PERMUTED_CASES =  |- (#forall:fun(fun(list('?1),bool),bool) (\a0:list('?1). (#forall:fun(fun(list('?1),bool),bool) (\a1:list('?1). ((#=:fun(bool,fun(bool,bool)) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) a0:list('?1)) a1:list('?1))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) a0:list('?1)) #NIL:list('?1))) ((#=:fun(list('?1),fun(list('?1),bool)) a1:list('?1)) #NIL:list('?1)))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun('?1,bool),bool) (\h:'?1. (#?:fun(fun(list('?1),bool),bool) (\t1:list('?1). (#?:fun(fun(list('?1),bool),bool) (\t2:list('?1). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) a0:list('?1)) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t1:list('?1)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) a1:list('?1)) ((#CONS:fun('?1,fun(list('?1),list('?1))) h:'?1) t2:list('?1)))) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) t1:list('?1)) t2:list('?1))))))))))) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(list('?1),bool),bool) (\l2:list('?1). ((#/\:fun(bool,fun(bool,bool)) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) a0:list('?1)) l2:list('?1))) ((#PERMUTED:fun(list('?1),fun(list('?1),bool)) l2:list('?1)) a1:list('?1)))))) (#?:fun(fun('?1,bool),bool) (\x:'?1. (#?:fun(fun('?1,bool),bool) (\y:'?1. (#?:fun(fun(list('?1),bool),bool) (\t:list('?1). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list('?1),fun(list('?1),bool)) a0:list('?1)) ((#CONS:fun('?1,fun(list('?1),list('?1))) x:'?1) ((#CONS:fun('?1,fun(list('?1),list('?1))) y:'?1) t:list('?1))))) ((#=:fun(list('?1),fun(list('?1),bool)) a1:list('?1)) ((#CONS:fun('?1,fun(list('?1),list('?1))) y:'?1) ((#CONS:fun('?1,fun(list('?1),list('?1))) x:'?1) t:list('?1)))))))))))))))))))

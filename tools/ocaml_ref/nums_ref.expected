@@ -240,40 +240,40 @@ Warning: inventing type variables
 0..0..solved at 2
 nums quotations (35):
   ONE_ONE(f:A->B) = forall x1 x2. (f x1 = f x2) ==> (x1 = x2)
-  ONTO(f:A->B) = forall y. ?x. y = f x
-  ?f:ind->ind. ONE_ONE f /\\ ~(ONTO f)
-  f:ind->ind
-  f:ind->ind
+  (ONTO : ((A) -> B) -> Bool)((f : (A) -> B)) == (\226\136\128 y : B, \226\136\131 x : A, y == f(x))
+  \226\136\131 f : (Ind) -> Ind, ONE_ONE(f) && !ONTO(f)
+  (f : (Ind) -> Ind)
+  (f : (Ind) -> Ind)
   ?(f:ind->ind) z. (forall x1 x2. (f x1 = f x2) = (x1 = x2)) /\\ (forall x. ~(f x = z))
   IND_SUC = @f:ind->ind. ?z. (forall x1 x2. (f x1 = f x2) = (x1 = x2)) /\\\n                                (forall x. ~(f x = z))
   IND_0 = @z:ind. (forall x1 x2. IND_SUC x1 = IND_SUC x2 <=> x1 = x2) /\\\n                    (forall x. ~(IND_SUC x = z))
   NUM_REP IND_0 /\\\n    (forall i. NUM_REP i ==> NUM_REP (IND_SUC i))
-  _0 = mk_num IND_0
-  SUC n = mk_num(IND_SUC(dest_num n))
-  forall n. ~(SUC n = _0)
+  (_0 : Num) == mk_num(IND_0)
+  (SUC : (Num) -> Num)((n : Num)) == mk_num(IND_SUC(dest_num(n)))
+  \226\136\128 n : Num, !(SUC(n) == _0)
   mk_num
-  forall p. NUM_REP (IND_SUC (dest_num p))
+  \226\136\128 p : Num, NUM_REP(IND_SUC(dest_num(p)))
   dest_num
-  forall m n. SUC m = SUC n <=> m = n
-  dest_num n
-  mk_num(IND_SUC i) = SUC(mk_num i)
-  \\i. NUM_REP i /\\ P(mk_num i):bool
-  forall P. P(_0) /\\ (forall n. P(n) ==> P(SUC n)) ==> forall n. P n
+  \226\136\128 m : Num, \226\136\128 n : Num, (SUC(m) == SUC(n)) == (m == n)
+  dest_num((n : Num))
+  mk_num(IND_SUC((i : Ind))) == SUC(mk_num(i))
+  (i : Ind) => NUM_REP(i) && (P : (Num) -> Bool)(mk_num(i))
+  \226\136\128 P : (Num) -> Bool, P(_0) && (\226\136\128 n : Num, P(n) \226\134\146 P(SUC(n))) \226\134\146 (\226\136\128 n : Num, P(n))
   fn:num->A
   fn:num->A
-  y:A
-  (f:A->num->A) y n
-  y:A
-  ?!y. PRG (n:num) (y:A)
-  forall n:num. ?!y:A. PRG n y
+  (y : A)
+  (f : (A, Num) -> A)((y : A), (n : Num))
+  (y : A)
+  existsunique((y : A) => (PRG : (Num, A) -> Bool)((n : Num), y))
+  \226\136\128 n : Num, existsunique((y : A) => (PRG : (Num, A) -> Bool)(n, y))
   PRG _0 e /\\ (forall b:A n:num. PRG n b ==> PRG (SUC n) (f b n))
   forall(e:A) f. ?!fn. (fn _0 = e) /\\\n                   (forall n. fn (SUC n) = f (fn n) n)
-  _0 = 0
-  forall m. (m = 0) \\/ (?n. m = SUC n)
+  _0 == 0
+  \226\136\128 m : Num, m == 0 || (\226\136\131 n : Num, m == SUC(n))
   @fn. fn 0 = 0 /\\ (forall n. fn (SUC n) = SUC (SUC(fn n)))
-  \\m n:num. SUC(SUC m)
+  (m : Num) => (n : Num) => SUC(SUC(m))
   0
-  SUC (BIT0 n)
+  SUC(BIT0((n : Num)))
 ONE_ONE =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). ((#=:fun(bool,fun(bool,bool)) (#ONE_ONE:fun(fun('A,'B),bool) f:fun('A,'B))) (#forall:fun(fun('A,bool),bool) (\x1:'A. (#forall:fun(fun('A,bool),bool) (\x2:'A. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x1:'A)) (f:fun('A,'B) x2:'A))) ((#=:fun('A,fun('A,bool)) x1:'A) x2:'A)))))))))
 ONTO =  |- (#forall:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). ((#=:fun(bool,fun(bool,bool)) (#ONTO:fun(fun('A,'B),bool) f:fun('A,'B))) (#forall:fun(fun('B,bool),bool) (\y:'B. (#?:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) y:'B) (f:fun('A,'B) x:'A)))))))))
 INFINITY_AX =  |- (#?:fun(fun(fun(ind,ind),bool),bool) (\f:fun(ind,ind). ((#/\:fun(bool,fun(bool,bool)) (#ONE_ONE:fun(fun(ind,ind),bool) f:fun(ind,ind))) (#~:fun(bool,bool) (#ONTO:fun(fun(ind,ind),bool) f:fun(ind,ind))))))

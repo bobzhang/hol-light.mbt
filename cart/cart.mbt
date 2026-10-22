@@ -42,7 +42,7 @@ fn step_2() -> Unit raise {
     t2,
   )
   dimindex_nonzero_c.set(
-    @tactics.prove(@parser.parse_term("forall s:A->bool. ~(dimindex(s) = 0)"), t3),
+    @tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, !(dimindex(s) == 0)"), t3),
   )
 }
 
@@ -62,12 +62,12 @@ pub fn dimindex_nonzero() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t4 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("1 <= x <=> ~(x = 0)")),
+      @int.arith_rule(@term_syntax.parse_term("(1 <= (x : Num)) == !(x == 0)")),
       dimindex_nonzero(),
     ]),
   )
   dimindex_ge_1_c.set(
-    @tactics.prove(@parser.parse_term("forall s:A->bool. 1 <= dimindex(s)"), t4),
+    @tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, 1 <= dimindex(s)"), t4),
   )
 }
 
@@ -86,7 +86,7 @@ fn step_4() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([dimindex()]))
   dimindex_univ_c.set(
     @tactics.prove(
-      @parser.parse_term("forall s. dimindex(s:A->bool) = dimindex(:A)"),
+      @term_syntax.parse_term("∀ s : (A) -> Bool, (dimindex : ((A) -> Bool) -> Num)(s) == (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))"),
       t5,
     ),
   )
@@ -107,7 +107,7 @@ fn step_5() -> Unit raise {
   let t6 = @meson.meson_tac(@list.List([dimindex(), @sets.has_size()]))
   dimindex_unique_c.set(
     @tactics.prove(
-      @parser.parse_term("(:A) HAS_SIZE n ==> dimindex(:A) = n"),
+      @term_syntax.parse_term("(HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool), (n : Num)) → (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) == n"),
       t6,
     ),
   )
@@ -130,7 +130,7 @@ fn step_6() -> Unit raise {
   let t7 = @meson.meson_tac(@list.List([@sets.has_size(), dimindex()]))
   univ_has_size_dimindex_c.set(
     @tactics.prove(
-      @parser.parse_term("(:N) HAS_SIZE dimindex (:N) <=> FINITE(:N)"),
+      @term_syntax.parse_term("(HAS_SIZE : ((N) -> Bool, Num) -> Bool)((UNIV : (N) -> Bool), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == (FINITE : ((N) -> Bool) -> Bool)((UNIV : (N) -> Bool))"),
       t7,
     ),
   )
@@ -170,7 +170,7 @@ fn step_7() -> Unit raise {
     t12,
   ])
   let t14 = @tactics.thenl(
-    @tactics.subgoal_then(@parser.parse_term("(:1) = {one}"), fn(
+    @tactics.subgoal_then(@term_syntax.parse_term("UNIV == {one}"), fn(
       x8 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
@@ -218,7 +218,7 @@ fn step_7() -> Unit raise {
     }),
     t13,
   )
-  has_size_1_c.set(@tactics.prove(@parser.parse_term("(:1) HAS_SIZE 1"), t14))
+  has_size_1_c.set(@tactics.prove(@term_syntax.parse_term("(HAS_SIZE : ((Unit) -> Bool, Num) -> Bool)((UNIV : (Unit) -> Bool), 1)"), t14))
 }
 
 ///|
@@ -238,7 +238,7 @@ fn step_8() -> Unit raise {
   )
   numseg_lt_dimindex_c.set(
     @tactics.prove(
-      @parser.parse_term("{i | i < dimindex(:N)} = 0..dimindex(:N)-1"),
+      @term_syntax.parse_term("{(i : Num) | i < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))} == op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1)"),
       t15,
     ),
   )
@@ -276,12 +276,12 @@ fn step_10() -> Unit raise {
   let t16 = @simp.rewrite_tac(
     @list.List([@iterate.in_numseg(), @arith.le_refl(), dimindex_ge_1()]),
   )
-  let t17 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("1")), t16)
+  let t17 = @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("1")), t16)
   finite_image_tybij_c.set(
     @class.new_type_definition(
       "finite_image",
       ("finite_index", "dest_finite_image"),
-      @tactics.prove(@parser.parse_term("?x. x IN 1..dimindex(:A)"), t17),
+      @tactics.prove(@term_syntax.parse_term("∃ x : Num, IN(x, op_dot_dot(1, (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))))"), t17),
     ),
   )
 }
@@ -407,7 +407,7 @@ fn step_14() -> Unit raise {
   )
   finite_finite_image_c.set(
     @tactics.prove(
-      @parser.parse_term("FINITE(UNIV:(A)finite_image->bool)"),
+      @term_syntax.parse_term("(FINITE : ((Finite_image[A]) -> Bool) -> Bool)((UNIV : (Finite_image[A]) -> Bool))"),
       t26,
     ),
   )
@@ -431,7 +431,7 @@ fn step_15() -> Unit raise {
     @list.List([finite_finite_image(), @sets.has_size()]),
   )
   let t31 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("t:A->bool"), has_size_finite_image()),
+    @bool.ispec(@term_syntax.parse_term("(t : (A) -> Bool)"), has_size_finite_image()),
   )
   let t30 = @simp.gen_rewrite_tac(
     fn(
@@ -559,7 +559,7 @@ fn step_19() -> Unit raise {
     @class.new_type_definition(
       "cart",
       ("mk_cart", "dest_cart"),
-      @tactics.prove(@parser.parse_term("?f:(B)finite_image->A. T"), t38),
+      @tactics.prove(@term_syntax.parse_term("∃ f : (Finite_image[B]) -> A, true"), t38),
     ),
   )
 }
@@ -584,7 +584,7 @@ fn step_20() -> Unit raise {
 fn step_21() -> Unit raise {
   finite_index_c.set(
     @pair.new_definition(
-      @parser.parse_term("(x:A^N)$i = dest_cart x (finite_index i)"),
+      @term_syntax.parse_term("(op_dollar : (Cart[A, N], Num) -> A)((x : Cart[A, N]), (i : Num)) == dest_cart(x, finite_index(i))"),
     ),
   )
 }
@@ -758,7 +758,7 @@ pub fn lambda_unique() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t53 = @simp.rewrite_tac(@list.List([cart_eq(), lambda_beta()]))
   lambda_eta_c.set(
-    @tactics.prove(@parser.parse_term("forall g. (lambda i. g$i):A^B = g"), t53),
+    @tactics.prove(@term_syntax.parse_term("∀ g : Cart[A, B], lambda((i : Num) => op_dollar(g, i)) == g"), t53),
   )
 }
 
@@ -842,7 +842,7 @@ fn step_30() -> Unit raise {
     t59,
   )
   cart_eq_full_c.set(
-    @tactics.prove(@parser.parse_term("forall x y:A^N. x = y <=> forall i. x$i = y$i"), t60),
+    @tactics.prove(@term_syntax.parse_term("∀ x : Cart[A, N], ∀ y : Cart[A, N], (x == y) == (∀ i : Num, op_dollar(x, i) == op_dollar(y, i))"), t60),
   )
 }
 
@@ -863,12 +863,12 @@ fn step_31() -> Unit raise {
       @iterate.in_numseg(),
       @arith.le_refl(),
       dimindex_ge_1(),
-      @int.arith_rule(@parser.parse_term("1 <= a ==> 1 <= a + b")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= (a : Num) → 1 <= a + (b : Num)")),
     ]),
   )
-  let t62 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("1")), t61)
+  let t62 = @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("1")), t61)
   let th = @tactics.prove(
-    @parser.parse_term("?x. x IN 1..(dimindex(:A) + dimindex(:B))"),
+    @term_syntax.parse_term("∃ x : Num, IN(x, op_dot_dot(1, (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) + (dimindex : ((B) -> Bool) -> Num)((UNIV : (B) -> Bool))))"),
     t62,
   )
   finite_sum_tybij_c.set(
@@ -917,7 +917,7 @@ pub fn pastecart() -> @kernel.Thm {
 fn step_33() -> Unit raise {
   fstcart_c.set(
     @pair.new_definition(
-      @parser.parse_term("(fstcart:A^(M,N)finite_sum->A^M) f = lambda i. f$i"),
+      @term_syntax.parse_term("(fstcart : (Cart[A, Finite_sum[M, N]]) -> Cart[A, M])((f : Cart[A, Finite_sum[M, N]])) == lambda((i : Num) => op_dollar(f, i))"),
     ),
   )
 }
@@ -1074,12 +1074,12 @@ fn step_38() -> Unit raise {
       cart_eq(),
       lambda_beta(),
       dimindex_finite_sum(),
-      @int.arith_rule(@parser.parse_term("a <= b ==> a <= b + c")),
+      @int.arith_rule(@term_syntax.parse_term("(a : Num) <= (b : Num) → a <= b + (c : Num)")),
     ]),
   )
   fstcart_pastecart_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. fstcart(pastecart (x:A^M) (y:A^N)) = x"),
+      @term_syntax.parse_term("∀ x : Cart[A, M], ∀ y : Cart[A, N], fstcart(pastecart(x, y)) == x"),
       t75,
     ),
   )
@@ -1102,7 +1102,7 @@ fn step_39() -> Unit raise {
   let t88 = @simp.asm_simp_tac(
     @list.List([
       @arith.add_sub(),
-      @int.arith_rule(@parser.parse_term("1 <= i ==> ~(i + a <= a)")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= (i : Num) → !(i + (a : Num) <= a)")),
     ]),
   )
   let t87 = @simp.rewrite_tac(@list.List([]))
@@ -1161,7 +1161,7 @@ fn step_39() -> Unit raise {
   let t83 = @simp.asm_rewrite_tac(@list.List([]))
   let t82 = @tactics.match_mp_tac(
     @int.arith_rule(
-      @parser.parse_term("1 <= i /\\ i <= b ==> 1 <= i + a /\\ i + a <= a + b"),
+      @term_syntax.parse_term("1 <= (i : Num) && i <= (b : Num) → 1 <= i + (a : Num) && i + a <= a + b"),
     ),
   )
   let t90 = @list.List([
@@ -1245,7 +1245,7 @@ fn step_39() -> Unit raise {
   )
   sndcart_pastecart_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. sndcart(pastecart (x:A^M) (y:A^N)) = y"),
+      @term_syntax.parse_term("∀ x : Cart[A, M], ∀ y : Cart[A, N], sndcart(pastecart(x, y)) == y"),
       t91,
     ),
   )
@@ -1266,14 +1266,14 @@ pub fn sndcart_pastecart() -> @kernel.Thm {
 /// PASTECART_FST_SND
 fn step_40() -> Unit raise {
   let t94 = @int.arith_rule(
-    @parser.parse_term("~(i <= a) ==> ((i - a) + a = i)"),
+    @term_syntax.parse_term("!((i : Num) <= (a : Num)) → i - a + a == i"),
   )
-  let t95 = @int.arith_rule(@parser.parse_term("~(i <= a) ==> 1 <= i - a"))
+  let t95 = @int.arith_rule(@term_syntax.parse_term("!((i : Num) <= (a : Num)) → 1 <= i - a"))
   let t96 = @simp.asm_simp_tac(
     @list.List([
       dimindex_finite_sum(),
       lambda_beta(),
-      @int.arith_rule(@parser.parse_term("i <= a + b ==> i - a <= b")),
+      @int.arith_rule(@term_syntax.parse_term("(i : Num) <= (a : Num) + (b : Num) → i - a <= b")),
       t95,
       t94,
     ]),
@@ -1486,7 +1486,7 @@ fn step_47() -> Unit raise {
             lambda_beta(),
             dimindex_finite_sum(),
             @int.arith_rule(
-              @parser.parse_term("dimindex(:M) + 1 <= i ==> 1 <= i"),
+              @term_syntax.parse_term("(dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 <= (i : Num) → 1 <= i"),
             ),
           ]),
         ),
@@ -1501,7 +1501,7 @@ fn step_47() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.subgoal_then(
-          @parser.parse_term("i <= dimindex(:(M,N)finite_sum)"),
+          @term_syntax.parse_term("(i : Num) <= (dimindex : ((Finite_sum[M, N]) -> Bool) -> Num)((UNIV : (Finite_sum[M, N]) -> Bool))"),
           fn(
             x105 : @kernel.Thm,
           ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1573,7 +1573,7 @@ pub fn pastecart_component() -> @kernel.Thm {
 fn step_48() -> Unit raise {
   let t112 = @simp.rewrite_tac(@list.List([@iterate.in_numseg()]))
   let t113 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("1")), t112),
+    @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("1")), t112),
     @int.arith_tac,
   )
   let th = @tactics.prove(
@@ -1727,11 +1727,11 @@ fn step_52() -> Unit raise {
     @list.List([@iterate.in_numseg(), @arith.le_refl()]),
   )
   let t128 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("1")), t126),
+    @tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("1")), t126),
     t127,
   )
   let th = @tactics.prove(
-    @parser.parse_term("?x. x IN 1..(dimindex(:A) * dimindex(:B))"),
+    @term_syntax.parse_term("∃ x : Num, IN(x, op_dot_dot(1, (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) * (dimindex : ((B) -> Bool) -> Num)((UNIV : (B) -> Bool))))"),
     t128,
   )
   finite_prod_tybij_c.set(
@@ -2100,7 +2100,7 @@ fn step_58() -> Unit raise {
   ])
   let t160 = @tactics.thenl(
     @tactics.subgoal_then(
-      @parser.parse_term("(:(A)tybit0) = IMAGE mktybit0 (:(A,A)finite_sum)"),
+      @term_syntax.parse_term("(UNIV : (Tybit0[A]) -> Bool) == (IMAGE : ((Finite_sum[A, A]) -> Tybit0[A], (Finite_sum[A, A]) -> Bool, Tybit0[A]) -> Bool)((mktybit0 : (Finite_sum[A, A]) -> Tybit0[A]), (UNIV : (Finite_sum[A, A]) -> Bool))"),
       fn(
         x141 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2152,7 +2152,7 @@ fn step_58() -> Unit raise {
   )
   has_size_tybit0_c.set(
     @tactics.prove(
-      @parser.parse_term("(:(A)tybit0) HAS_SIZE 2 * dimindex(:A)"),
+      @term_syntax.parse_term("(HAS_SIZE : ((Tybit0[A]) -> Bool, Num) -> Bool)((UNIV : (Tybit0[A]) -> Bool), 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)))"),
       t160,
     ),
   )
@@ -2398,7 +2398,7 @@ fn step_59() -> Unit raise {
   )
   has_size_tybit1_c.set(
     @tactics.prove(
-      @parser.parse_term("(:(A)tybit1) HAS_SIZE 2 * dimindex(:A) + 1"),
+      @term_syntax.parse_term("(HAS_SIZE : ((Tybit1[A]) -> Bool, Num) -> Bool)((UNIV : (Tybit1[A]) -> Bool), 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) + 1)"),
       t180,
     ),
   )
@@ -2422,7 +2422,7 @@ fn step_60() -> Unit raise {
   let t182 = @tactics.then_tac(@tactics.match_mp_tac(dimindex_unique()), t181)
   dimindex_tybit0_c.set(
     @tactics.prove(
-      @parser.parse_term("dimindex(:(A)tybit0) = 2 * dimindex(:A)"),
+      @term_syntax.parse_term("(dimindex : ((Tybit0[A]) -> Bool) -> Num)((UNIV : (Tybit0[A]) -> Bool)) == 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool))"),
       t182,
     ),
   )
@@ -2446,7 +2446,7 @@ fn step_61() -> Unit raise {
   let t184 = @tactics.then_tac(@tactics.match_mp_tac(dimindex_unique()), t183)
   dimindex_tybit1_c.set(
     @tactics.prove(
-      @parser.parse_term("dimindex(:(A)tybit1) = 2 * dimindex(:A) + 1"),
+      @term_syntax.parse_term("(dimindex : ((Tybit1[A]) -> Bool) -> Num)((UNIV : (Tybit1[A]) -> Bool)) == 2 * (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) + 1"),
       t184,
     ),
   )
@@ -2505,7 +2505,7 @@ pub fn dimindex_clauses() -> @kernel.Thm {
 /// FINITE_1
 fn step_63() -> Unit raise {
   let t188 = @meson.meson_tac(@list.List([has_size_1(), @sets.has_size()]))
-  finite_1_c.set(@tactics.prove(@parser.parse_term("FINITE (:1)"), t188))
+  finite_1_c.set(@tactics.prove(@term_syntax.parse_term("(FINITE : ((Unit) -> Bool) -> Bool)((UNIV : (Unit) -> Bool))"), t188))
 }
 
 ///|
@@ -2522,7 +2522,7 @@ pub fn finite_1() -> @kernel.Thm {
 fn step_64() -> Unit raise {
   let t189 = @meson.meson_tac(@list.List([has_size_tybit0(), @sets.has_size()]))
   finite_tybit0_c.set(
-    @tactics.prove(@parser.parse_term("FINITE (:A tybit0)"), t189),
+    @tactics.prove(@term_syntax.parse_term("(FINITE : ((Tybit0[A]) -> Bool) -> Bool)((UNIV : (Tybit0[A]) -> Bool))"), t189),
   )
 }
 
@@ -2540,7 +2540,7 @@ pub fn finite_tybit0() -> @kernel.Thm {
 fn step_65() -> Unit raise {
   let t190 = @meson.meson_tac(@list.List([has_size_tybit1(), @sets.has_size()]))
   finite_tybit1_c.set(
-    @tactics.prove(@parser.parse_term("FINITE (:A tybit1)"), t190),
+    @tactics.prove(@term_syntax.parse_term("(FINITE : ((Tybit1[A]) -> Bool) -> Bool)((UNIV : (Tybit1[A]) -> Bool))"), t190),
   )
 }
 
@@ -2639,7 +2639,7 @@ fn step_67() -> Unit raise {
         pth_num,
         tail=More(pth0, tail=More(pth1, tail=More(pth_one, tail=Empty)))
       ) => {
-        let nvar = @parser.parse_term("n:num")
+        let nvar = @term_syntax.parse_term("(n : Num)")
         fn calc_dimindex(x197 : @kernel.HolType) -> @kernel.Thm raise {
           let ty = x197
           match ty {
@@ -2712,10 +2712,10 @@ fn step_68() -> Unit raise {
     @list.List([univ_has_size_dimindex(), @sets.has_size()]),
   )
   let pth = @tactics.prove(
-    @parser.parse_term("(:A) HAS_SIZE n <=> FINITE(:A) /\\ dimindex(:A) = n"),
+    @term_syntax.parse_term("(HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool), (n : Num)) == ((FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) && (dimindex : ((A) -> Bool) -> Num)((UNIV : (A) -> Bool)) == n)"),
     t199,
   )
-  let htm = @parser.parse_term("(HAS_SIZE) (:A)")
+  let htm = @term_syntax.parse_term("(HAS_SIZE : ((A) -> Bool, Num) -> Bool)((UNIV : (A) -> Bool))")
   let conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
     fn(
       x200 : (@kernel.Term) -> @kernel.Thm raise,
@@ -2787,7 +2787,7 @@ pub fn dimindex_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 fn step_70() -> Unit raise {
   let t208 = @tactics.then_tac(dimindex_tac, @tactics.refl_tac)
   dimindex_2_c.set(
-    @tactics.prove(@parser.parse_term("dimindex (:2) = 2"), t208),
+    @tactics.prove(@term_syntax.parse_term("(dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool)) == 2"), t208),
   )
 }
 
@@ -2805,7 +2805,7 @@ pub fn dimindex_2() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   let t209 = @tactics.then_tac(dimindex_tac, @tactics.refl_tac)
   dimindex_3_c.set(
-    @tactics.prove(@parser.parse_term("dimindex (:3) = 3"), t209),
+    @tactics.prove(@term_syntax.parse_term("(dimindex : ((Tybit1[Unit]) -> Bool) -> Num)((UNIV : (Tybit1[Unit]) -> Bool)) == 3"), t209),
   )
 }
 
@@ -2823,7 +2823,7 @@ pub fn dimindex_3() -> @kernel.Thm {
 fn step_72() -> Unit raise {
   let t210 = @tactics.then_tac(dimindex_tac, @tactics.refl_tac)
   dimindex_4_c.set(
-    @tactics.prove(@parser.parse_term("dimindex (:4) = 4"), t210),
+    @tactics.prove(@term_syntax.parse_term("(dimindex : ((Tybit0[Tybit0[Unit]]) -> Bool) -> Num)((UNIV : (Tybit0[Tybit0[Unit]]) -> Bool)) == 4"), t210),
   )
 }
 
@@ -2885,12 +2885,12 @@ pub fn has_size_4() -> @kernel.Thm {
 /// FINITE_CART
 fn step_76() -> Unit raise {
   let t236 = @int.arith_rule(
-    @parser.parse_term("n < i /\\ ~(i = SUC n) ==> SUC n < i"),
+    @term_syntax.parse_term("(n : Num) < (i : Num) && !(i == SUC(n)) → SUC(n) < i"),
   )
   let t237 = @meson.asm_meson_tac(
     @list.List([
       @arith.le(),
-      @int.arith_rule(@parser.parse_term("1 <= SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))")),
       t236,
     ]),
   )
@@ -2898,15 +2898,15 @@ fn step_76() -> Unit raise {
     @list.List([
       cart_eq(),
       lambda_beta(),
-      @int.arith_rule(@parser.parse_term("i <= n ==> ~(i = SUC n)")),
+      @int.arith_rule(@term_syntax.parse_term("(i : Num) <= (n : Num) → !(i == SUC(n))")),
     ]),
   )
   let t234 = @tactics.exists_tac(
-    @parser.parse_term("(lambda i. if i = SUC n then @x. F else (v:A^N)$i):A^N"),
+    @term_syntax.parse_term("(lambda : ((Num) -> A) -> Cart[A, N])((i : Num) => if i == SUC((n : Num)) { (select : ((A) -> Bool) -> A)((x : A) => false) } else { (op_dollar : (Cart[A, N], Num) -> A)((v : Cart[A, N]), i) })"),
   )
-  let t233 = @tactics.exists_tac(@parser.parse_term("(v:A^N)$(SUC n)"))
+  let t233 = @tactics.exists_tac(@term_syntax.parse_term("op_dollar((v : Cart[A, N]), SUC((n : Num)))"))
   let t232 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
-  let t231 = @tactics.x_gen_tac(@parser.parse_term("v:A^N"))
+  let t231 = @tactics.x_gen_tac(@term_syntax.parse_term("(v : Cart[A, N])"))
   let t230 = @simp.rewrite_tac(
     @list.List([
       @sets.subset(),
@@ -2915,11 +2915,11 @@ fn step_76() -> Unit raise {
       @pair.exists_pair_thm(),
     ]),
   )
-  let t227 = @int.arith_rule(@parser.parse_term("SUC n <= m ==> n <= m"))
+  let t227 = @int.arith_rule(@term_syntax.parse_term("SUC((n : Num)) <= (m : Num) → n <= m"))
   let t228 = @simp.asm_simp_tac(
     @list.List([
       @sets.finite_product(),
-      @int.arith_rule(@parser.parse_term("1 <= SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))")),
       t227,
     ]),
   )
@@ -2974,7 +2974,7 @@ fn step_76() -> Unit raise {
   let t219 = @simp.simp_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("1 <= i /\\ i <= n /\\ 0 < i <=> 1 <= i /\\ i <= n"),
+        @term_syntax.parse_term("(1 <= (i : Num) && i <= (n : Num) && 0 < i) == (1 <= i && i <= n)"),
       ),
     ]),
   )
@@ -2985,7 +2985,7 @@ fn step_76() -> Unit raise {
           @simp.rewrite_tac(
             @list.List([
               @int.arith_rule(
-                @parser.parse_term("1 <= i /\\ i <= n /\\ i <= 0 <=> F"),
+                @term_syntax.parse_term("(1 <= (i : Num) && i <= (n : Num) && i <= 0) == false"),
               ),
             ]),
           ),
@@ -3000,7 +3000,7 @@ fn step_76() -> Unit raise {
   let t218 = @simp.rewrite_tac(
     @list.List([@arith.le_refl(), @arith.let_antisym()]),
   )
-  let t214 = @parser.parse_term("dimindex(:N)")
+  let t214 = @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))")
   let t217 = @tactics.subgoal_then(
     @parser.parse_term(
       "forall n. n <= dimindex(:N)\n        ==> FINITE {v:A^N | (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ i <= n\n                                 ==> P i (v$i)) /\\\n                            (forall i. 1 <= i /\\ i <= dimindex(:N) /\\ n < i\n                                 ==> v$i = @x. F)}",
@@ -3161,7 +3161,7 @@ fn step_77() -> Unit raise {
       @sets.has_size_image_inj(),
     ),
   )
-  let t246 = @parser.parse_term("mk_cart:((N)finite_image->A)->A^N")
+  let t246 = @term_syntax.parse_term("(mk_cart : ((Finite_image[N]) -> A) -> Cart[A, N])")
   let t257 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3296,7 +3296,7 @@ fn step_77() -> Unit raise {
     t257,
   ])
   let t242 = @tactics.subgoal_then(
-    @parser.parse_term("(:(N)finite_image->A) HAS_SIZE m EXP (dimindex(:N))"),
+    @term_syntax.parse_term("(HAS_SIZE : (((Finite_image[N]) -> A) -> Bool, Num) -> Bool)((UNIV : ((Finite_image[N]) -> A) -> Bool), EXP((m : Num), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))"),
     fn(
       x239 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3401,7 +3401,7 @@ fn step_79() -> Unit raise {
     @list.List([has_size_cart_univ(), @sets.has_size()]),
   )
   finite_cart_univ_c.set(
-    @tactics.prove(@parser.parse_term("FINITE(:A) ==> FINITE(:A^N)"), t261),
+    @tactics.prove(@term_syntax.parse_term("(FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) → (FINITE : ((Cart[A, N]) -> Bool) -> Bool)((UNIV : (Cart[A, N]) -> Bool))"), t261),
   )
 }
 
@@ -3421,7 +3421,7 @@ pub fn finite_cart_univ() -> @kernel.Thm {
 fn step_80() -> Unit raise {
   vector_c.set(
     @pair.new_definition(
-      @parser.parse_term("(vector l):A^N = lambda i. EL (i - 1) l"),
+      @term_syntax.parse_term("(vector : (List[A]) -> Cart[A, N])((l : List[A])) == lambda((i : Num) => EL(i - 1, l))"),
     ),
   )
 }
@@ -3638,7 +3638,7 @@ fn step_89() -> Unit raise {
   )
   pcross_sing_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(x:A^M) (y:A^N). {x} PCROSS {y} = {pastecart x y}"),
+      @term_syntax.parse_term("∀ x : Cart[A, M], ∀ y : Cart[A, N], PCROSS({x}, {y}) == {pastecart(x, y)}"),
       t270,
     ),
   )
@@ -3755,7 +3755,7 @@ fn step_93() -> Unit raise {
   )
   univ_pcross_univ_c.set(
     @tactics.prove(
-      @parser.parse_term("(:A^M) PCROSS (:A^N) = (:A^(M,N)finite_sum)"),
+      @term_syntax.parse_term("(PCROSS : ((Cart[A, M]) -> Bool, (Cart[A, N]) -> Bool, Cart[A, Finite_sum[M, N]]) -> Bool)((UNIV : (Cart[A, M]) -> Bool), (UNIV : (Cart[A, N]) -> Bool)) == (UNIV : (Cart[A, Finite_sum[M, N]]) -> Bool)"),
       t276,
     ),
   )
@@ -3785,14 +3785,14 @@ fn step_94() -> Unit raise {
     @list.List([@sets.forall_in_gspec(), pastecart_in_pcross()]),
   )
   let t288 = @tactics.exists_tac(
-    @parser.parse_term("\\z:A^(M,N)finite_sum. fstcart z,sndcart z"),
+    @term_syntax.parse_term("(z : Cart[A, Finite_sum[M, N]]) => (fstcart(z), sndcart(z))"),
   )
   let t287 = @tactics.exists_tac(
-    @parser.parse_term("\\(x:A^M,y:A^N). pastecart x y"),
+    @term_syntax.parse_term("GABS((f : ((Cart[A, M], Cart[A, N])) -> Cart[A, Finite_sum[M, N]]) => ∀ x : Cart[A, M], ∀ y : Cart[A, N], GEQ(f((x, y)), pastecart(x, y)))"),
   )
   let t286 = @tactics.match_mp_tac(@sets.bijections_has_size_eq())
-  let t284 = @parser.parse_term("k:num")
-  let t285 = @tactics.spec_tac(@parser.parse_term("m * n:num"), t284)
+  let t284 = @term_syntax.parse_term("(k : Num)")
+  let t285 = @tactics.spec_tac(@term_syntax.parse_term("(m : Num) * (n : Num)"), t284)
   let t283 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t280 = @drule.match_mp(@sets.has_size_product())
   let t282 = @tactics.first_assum(fn(
@@ -3958,11 +3958,11 @@ fn step_96() -> Unit raise {
     ]),
   )
   let t300 = @tactics.exists_tac(
-    @parser.parse_term("IMAGE sndcart ((s PCROSS t):A^(M,N)finite_sum->bool)"),
+    @term_syntax.parse_term("IMAGE(sndcart, PCROSS((s : (Cart[A, M]) -> Bool), (t : (Cart[A, N]) -> Bool)))"),
   )
   let t301 = @list.List([
     @tactics.exists_tac(
-      @parser.parse_term("IMAGE fstcart ((s PCROSS t):A^(M,N)finite_sum->bool)"),
+      @term_syntax.parse_term("IMAGE(fstcart, PCROSS((s : (Cart[A, M]) -> Bool), (t : (Cart[A, N]) -> Bool)))"),
     ),
     t300,
   ])
@@ -3972,10 +3972,10 @@ fn step_96() -> Unit raise {
   let t296 = @simp.asm_rewrite_tac(
     @list.List([pcross_empty(), @sets.finite_empty()]),
   )
-  let t294 = @parser.parse_term("t:A^N->bool = {}")
+  let t294 = @term_syntax.parse_term("(t : (Cart[A, N]) -> Bool) == {}")
   let t295 = @tactics.map_every(
     @class.asm_cases_tac,
-    @list.List([@parser.parse_term("s:A^M->bool = {}"), t294]),
+    @list.List([@term_syntax.parse_term("(s : (Cart[A, M]) -> Bool) == {}"), t294]),
   )
   let t305 = @tactics.then_tac(
     @tactics.then_tac(

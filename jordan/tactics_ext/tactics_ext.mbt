@@ -134,7 +134,7 @@ pub fn subgoal_tac(x16 : @kernel.Term) -> @tactics.Tactic raise {
 ///|
 /// DISCH_ALL_TAC
 fn step_4() -> Unit raise {
-  let tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = taut_tac(@parser.parse_term("(b ==> a==> c) ==> (a /\\ b ==> c)"))
+  let tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = taut_tac(@term_syntax.parse_term("((b : Bool) → (a : Bool) → (c : Bool)) → a && b → c"))
   disch_all_tac_c.set(@tactics.then_tac(rep_gen_tac, @tactics.then_tac(@tactics.repeat_tac(@tactics.then_tac(@tactics.repeat_tac(tac), @tactics.disch_tac)), @tactics_refine.label_all_tac)))
 }
 

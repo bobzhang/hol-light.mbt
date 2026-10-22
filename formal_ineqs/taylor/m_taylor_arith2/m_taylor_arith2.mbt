@@ -41,7 +41,7 @@ pub fn gen_taylor_arith_thm(x13 : @kernel.Thm, x14 : (@kernel.Thm) -> @kernel.Th
   let arith_th = x13
   let final_rule = x14
   let n = x15
-  let t18 = @parser.parse_term("1")
+  let t18 = @term_syntax.parse_term("1")
   let t16 = @simp.rewrite_rule(@list.List([@arith_num.num_thm()]))
   let num1_th = (fn(x17 : @kernel.Thm) -> @kernel.Thm raise {
     @equal.sym(t16(x17))
@@ -192,7 +192,7 @@ pub fn gen_exp_thm(x : Int64) -> @kernel.Thm raise {
 ///|
 /// gen_log_thm
 fn step_8() -> Unit raise {
-  let t48 = @parser.parse_term("x pow 2")
+  let t48 = @term_syntax.parse_term("pow((x : Real), 2)")
   let t49 = @simp.rewrite_conv(@list.List([@equal.sym(@more_float.num2_eq())]))
   let pow2_th = @equal.sym(t49(t48))
   let t50 = @simp.rewrite_rule(@list.List([pow2_th]))
@@ -211,7 +211,7 @@ pub fn gen_log_thm(x : Int64) -> @kernel.Thm raise {
 ///|
 /// gen_atn_thm
 fn step_9() -> Unit raise {
-  let t52 = @parser.parse_term("x pow 2")
+  let t52 = @term_syntax.parse_term("pow((x : Real), 2)")
   let t53 = @simp.rewrite_conv(@list.List([@equal.sym(@more_float.num2_eq())]))
   let pow2_th = @equal.sym(t53(t52))
   let t54 = @simp.rewrite_rule(@list.List([@more_float.float2_eq(), @more_float.float1_eq(), pow2_th]))
@@ -260,9 +260,9 @@ pub fn gen_sin_thm(x : Int64) -> @kernel.Thm raise {
 ///|
 /// gen_acs_thm
 fn step_12() -> Unit raise {
-  let t60 = @parser.parse_term("iabs f_bounds < &1")
+  let t60 = @term_syntax.parse_term("iabs((f_bounds : (Real, Real))) < real_of_num(1)")
   let iabs_lemma = @simp.rewrite_conv(@list.List([@equal.sym(@more_float.float1_eq())]))(t60)
-  let t61 = @parser.parse_term("x pow 3")
+  let t61 = @term_syntax.parse_term("pow((x : Real), 3)")
   let t62 = @simp.rewrite_conv(@list.List([@equal.sym(@more_float.num3_eq())]))
   let pow3_lemma = @equal.sym(t62(t61))
   let t63 = @simp.rewrite_rule(@list.List([@more_float.float1_eq(), pow3_lemma]))
@@ -284,9 +284,9 @@ pub fn gen_acs_thm(x : Int64) -> @kernel.Thm raise {
 ///|
 /// gen_asn_thm
 fn step_13() -> Unit raise {
-  let t67 = @parser.parse_term("iabs f_bounds < &1")
+  let t67 = @term_syntax.parse_term("iabs((f_bounds : (Real, Real))) < real_of_num(1)")
   let iabs_lemma = @simp.rewrite_conv(@list.List([@equal.sym(@more_float.float1_eq())]))(t67)
-  let t68 = @parser.parse_term("x pow 3")
+  let t68 = @term_syntax.parse_term("pow((x : Real), 3)")
   let t69 = @simp.rewrite_conv(@list.List([@equal.sym(@more_float.num3_eq())]))
   let pow3_lemma = @equal.sym(t69(t68))
   let t70 = @simp.rewrite_rule(@list.List([@more_float.float1_eq(), pow3_lemma]))

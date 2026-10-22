@@ -35880,11 +35880,11 @@ pub fn front(
 ///|
 /// RESOLVE_N
 fn step_231() -> Unit raise {
-  let resolve_1 = @class.taut(@parser.parse_term("forall a. a ==> ~a ==> F"))
-  let resolve_2l = @class.taut(@parser.parse_term("forall a b. a \\/ b ==> ~a ==> b"))
-  let resolve_2r = @class.taut(@parser.parse_term("forall a c. a ==> ~a \\/ c ==> c"))
+  let resolve_1 = @class.taut(@term_syntax.parse_term("∀ a : Bool, a → !a → false"))
+  let resolve_2l = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, a || b → !a → b"))
+  let resolve_2r = @class.taut(@term_syntax.parse_term("∀ a : Bool, ∀ c : Bool, a → !a || c → c"))
   let resolve_3 = @class.taut(
-    @parser.parse_term("forall a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c"),
+    @term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, ∀ c : Bool, a || b → !a || c → b || c"),
   )
   resolve_n_c.set(fn(
     x5055 : @kernel.Term,
@@ -35949,10 +35949,10 @@ pub fn resolve_v2(
 /// DISCH_DISJ
 fn step_232() -> Unit raise {
   let impl_not_l = @class.taut(
-    @parser.parse_term("forall a b. ~a ==> b <=>  a \\/ b"),
+    @term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, (!a → b) == (a || b)"),
   )
   let impl_not_r = @class.taut(
-    @parser.parse_term("forall a b.  a ==> b <=> ~a \\/ b"),
+    @term_syntax.parse_term("∀ a : Bool, ∀ b : Bool, (a → b) == (!a || b)"),
   )
   disch_disj_c.set(fn(
     x5061 : @kernel.Term,

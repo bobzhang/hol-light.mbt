@@ -28,13 +28,13 @@ fn step_1() -> Unit raise {
     let tm = x9
     (@kernel.type_of(tm) == boolty)
   }, x10)
-  let t13 = @bool.conjuncts_rule(@bool.spec(@parser.parse_term("b:bool"), @theorems.eq_clauses()))
-  let t11 = @parser.parse_term("b:bool")
+  let t13 = @bool.conjuncts_rule(@bool.spec(@term_syntax.parse_term("(b : Bool)"), @theorems.eq_clauses()))
+  let t11 = @term_syntax.parse_term("(b : Bool)")
   let clist = @lib.map((x12 : @kernel.Thm) => @bool.gen(t11, x12), t13)
   let tb = @lib.hd(clist)
   let bt = @lib.hd(@lib.tl(clist))
-  let t = @parser.parse_term("T")
-  let f = @parser.parse_term("F")
+  let t = @term_syntax.parse_term("true")
+  let f = @term_syntax.parse_term("false")
   bool_eq_conv_c.set(fn(x14 : @kernel.Term) -> @kernel.Thm raise {
     let tm_1 = x14
     try {
@@ -170,7 +170,7 @@ fn step_2() -> Unit raise {
 /// COND_LEFT
 fn step_3() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([]))
-  let t31 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
+  let t31 = @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)"))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t31), t32)
   cond_left_c.set(@tactics.prove(@parser.parse_term("forall b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))"), t33))
 }
@@ -188,7 +188,7 @@ pub fn cond_left() -> @kernel.Thm {
 /// COND_RIGHT
 fn step_4() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([]))
-  let t34 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
+  let t34 = @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)"))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t34), t35)
   cond_right_c.set(@tactics.prove(@parser.parse_term("forall b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))"), t36))
 }
@@ -206,8 +206,8 @@ pub fn cond_right() -> @kernel.Thm {
 /// COND_RIGHT_F
 fn step_5() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([]))
-  let t38 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("b:bool")), t37)
-  cond_right_f_c.set(@tactics.prove(@parser.parse_term("(if b then b else F) = b"), t38))
+  let t38 = @tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)")), t37)
+  cond_right_f_c.set(@tactics.prove(@term_syntax.parse_term("(if (b : Bool) { b } else { false }) == b"), t38))
 }
 
 ///|
@@ -223,8 +223,8 @@ pub fn cond_right_f() -> @kernel.Thm {
 /// COND_T_F
 fn step_6() -> Unit raise {
   let t39 = @simp.rewrite_tac(@list.List([]))
-  let t40 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("b:bool")), t39)
-  cond_t_f_c.set(@tactics.prove(@parser.parse_term("(if b then  T else F) = b"), t40))
+  let t40 = @tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)")), t39)
+  cond_t_f_c.set(@tactics.prove(@term_syntax.parse_term("(if (b : Bool) { true } else { false }) == b"), t40))
 }
 
 ///|
@@ -279,8 +279,8 @@ pub fn rewrite_conditional(x41 : (@list.List[@kernel.Term]) -> ((@kernel.Term) -
 /// EQ_T
 fn step_7() -> Unit raise {
   let t49 = @simp.rewrite_tac(@list.List([]))
-  let t50 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t49)
-  eq_t_c.set(@tactics.prove(@parser.parse_term("(x = T) = x"), t50))
+  let t50 = @tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t49)
+  eq_t_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) == true) == x"), t50))
 }
 
 ///|
@@ -297,7 +297,7 @@ pub fn eq_t() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t52 = @simp.rewrite_tac(@list.List([]))
   let t51 = @class.bool_cases_tac(@parser.parse_term("(y:'a) = z"))
-  let t53 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t51), t52)
+  let t53 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t51), t52)
   eq_eq_c.set(@tactics.prove(@parser.parse_term("(x = ((y:'a) = z)) = (if (y = z) then (x = T) else (x = F))"), t53))
 }
 
@@ -314,8 +314,8 @@ pub fn eq_eq() -> @kernel.Thm {
 /// EQ_F
 fn step_9() -> Unit raise {
   let t54 = @simp.rewrite_tac(@list.List([]))
-  let t55 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t54)
-  eq_f_c.set(@tactics.prove(@parser.parse_term("(x = F) = (if x then F else T)"), t55))
+  let t55 = @tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t54)
+  eq_f_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) == false) == (if x { false } else { true })"), t55))
 }
 
 ///|
@@ -582,8 +582,8 @@ pub fn move_cond_up_conv(x94 : @kernel.Term) -> @kernel.Thm raise {
 /// COND_OR
 fn step_10() -> Unit raise {
   let t99 = @simp.rewrite_tac(@list.List([]))
-  let t100 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("b:bool")), t99)
-  cond_or_c.set(@tactics.prove(@parser.parse_term("(if b then x else y) \\/ z <=> ((~b \\/ x \\/ z) /\\ (b \\/ y \\/ z))"), t100))
+  let t100 = @tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)")), t99)
+  cond_or_c.set(@tactics.prove(@term_syntax.parse_term("((if (b : Bool) { (x : Bool) } else { (y : Bool) }) || (z : Bool)) == ((!b || x || z) && (b || y || z))"), t100))
 }
 
 ///|
@@ -886,7 +886,7 @@ pub fn hl_simplify_heuristic(x158 : @list.List[@kernel.Thm], x159 : (@kernel.Ter
 fn step_11() -> Unit raise {
   let t162 = @lib.el(1, @bool.conjuncts_rule(@class.not_clauses()))
   let t161 = @bool.spec_all(@theorems.refl_clause())
-  not_eq_f_c.set(@bool.gen_all(@kernel.trans(@equal.ap_term(@parser.parse_term("(~)"), t161), t162)))
+  not_eq_f_c.set(@bool.gen_all(@kernel.trans(@equal.ap_term(@term_syntax.parse_term("op_tilde"), t161), t162)))
 }
 
 ///|

@@ -1175,14 +1175,14 @@ pub fn print_poly(x278 : @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) ->
 ///|
 /// poly_of_term
 fn step_9() -> Unit raise {
-  let neg_tm = @parser.parse_term("(--):real->real")
-  let add_tm = @parser.parse_term("(+):real->real->real")
-  let sub_tm = @parser.parse_term("(-):real->real->real")
-  let mul_tm = @parser.parse_term("(*):real->real->real")
-  let inv_tm = @parser.parse_term("(inv):real->real")
-  let div_tm = @parser.parse_term("(/):real->real->real")
-  let pow_tm = @parser.parse_term("(pow):real->num->real")
-  let zero_tm = @parser.parse_term("&0:real")
+  let neg_tm = @term_syntax.parse_term("real_neg")
+  let add_tm = @term_syntax.parse_term("real_add")
+  let sub_tm = @term_syntax.parse_term("real_sub")
+  let mul_tm = @term_syntax.parse_term("real_mul")
+  let inv_tm = @term_syntax.parse_term("inv")
+  let div_tm = @term_syntax.parse_term("op_slash")
+  let pow_tm = @term_syntax.parse_term("real_pow")
+  let zero_tm = @term_syntax.parse_term("real_of_num(0)")
   let real_ty = @parser.parse_type("real")
   fn poly_of_term_1(x279 : @kernel.Term) -> Poly raise {
     let tm = x279
@@ -3159,7 +3159,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] dest_poly(x846 : @lib.Func[@lib.Fun
 ///|
 /// term_of_varpow
 fn step_23() -> Unit raise {
-  let pow_tm = @parser.parse_term("(pow):real->num->real")
+  let pow_tm = @term_syntax.parse_term("real_pow")
   term_of_varpow_c.set(fn(x850 : @kernel.Term) -> ((Int64) -> @kernel.Term raise) raise {
     let x = x850
     fn(x851 : Int64) -> @kernel.Term raise {
@@ -3186,8 +3186,8 @@ pub fn term_of_varpow(x : @kernel.Term) -> ((Int64) -> @kernel.Term raise) raise
 ///|
 /// term_of_monomial
 fn step_24() -> Unit raise {
-  let one_tm = @parser.parse_term("&1:real")
-  let mul_tm = @parser.parse_term("(*):real->real->real")
+  let one_tm = @term_syntax.parse_term("real_of_num(1)")
+  let mul_tm = @term_syntax.parse_term("real_mul")
   term_of_monomial_c.set(fn(x853 : @lib.Func[@kernel.Term, Int64]) -> @kernel.Term raise {
     let m = x853
     if (m == monomial_1()) {
@@ -3220,7 +3220,7 @@ pub fn term_of_monomial(x : Monomial) -> @kernel.Term raise {
 ///|
 /// term_of_cmonomial
 fn step_25() -> Unit raise {
-  let mul_tm = @parser.parse_term("(*):real->real->real")
+  let mul_tm = @term_syntax.parse_term("real_mul")
   term_of_cmonomial_c.set(fn(x858 : (@lib.Func[@kernel.Term, Int64], @num.Num)) -> @kernel.Term raise {
     let (m, c) = x858
     if (m == monomial_1()) {
@@ -3248,8 +3248,8 @@ pub fn term_of_cmonomial(x : (Monomial, @num.Num)) -> @kernel.Term raise {
 ///|
 /// term_of_poly
 fn step_26() -> Unit raise {
-  let zero_tm = @parser.parse_term("&0:real")
-  let add_tm = @parser.parse_term("(+):real->real->real")
+  let zero_tm = @term_syntax.parse_term("real_of_num(0)")
+  let add_tm = @term_syntax.parse_term("real_add")
   term_of_poly_c.set(fn(x860 : @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @kernel.Term raise {
     let p = x860
     if (p == poly_0()) {
@@ -3431,11 +3431,11 @@ pub fn real_nonlinear_prover(x873 : ((@list.List[@kernel.Thm], @list.List[@kerne
 ///|
 /// REAL_NONLINEAR_SUBST_PROVER
 fn step_27() -> Unit raise {
-  let zero = @parser.parse_term("&0:real")
-  let mul_tm = @parser.parse_term("( * ):real->real->real")
-  let t906 = @simp.rewr_conv(@calc_rat.real_arith(@parser.parse_term("a + x = (y:real) <=> x = y - a")))
+  let zero = @term_syntax.parse_term("real_of_num(0)")
+  let mul_tm = @term_syntax.parse_term("real_mul")
+  let t906 = @simp.rewr_conv(@calc_rat.real_arith(@term_syntax.parse_term("((a : Real) + (x : Real) == (y : Real)) == (x == y - a)")))
   let shuffle1 : (@kernel.Thm) -> @kernel.Thm raise = (x907 : @kernel.Thm) => @equal.conv_rule(t906, x907)
-  let t908 = @simp.rewr_conv(@calc_rat.real_arith(@parser.parse_term("x + a = (y:real) <=> x = y - a")))
+  let t908 = @simp.rewr_conv(@calc_rat.real_arith(@term_syntax.parse_term("((x : Real) + (a : Real) == (y : Real)) == (x == y - a)")))
   let shuffle2 : (@kernel.Thm) -> @kernel.Thm raise = (x909 : @kernel.Thm) => @equal.conv_rule(t908, x909)
   let substitutable_monomial = (x910 : @list.List[@kernel.Term], x911 : @kernel.Term) => substitutable_monomial_l(shuffle2, shuffle1, x910, x911)
   let isolate_variable = (x912 : @kernel.Term, x913 : @kernel.Thm) => isolate_variable_l(shuffle2, shuffle1, x912, x913)
@@ -3544,8 +3544,8 @@ pub fn real_sos(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// REAL_SOSFIELD
 fn step_29() -> Unit raise {
-  let inv_tm = @parser.parse_term("inv:real->real")
-  let t933 = @equal.depth_binop_conv(@parser.parse_term("(/\\)"), @canon.conds_celim_conv)
+  let inv_tm = @term_syntax.parse_term("inv")
+  let t933 = @equal.depth_binop_conv(@term_syntax.parse_term("op_slash_bslash"), @canon.conds_celim_conv)
   let t932 = @simp.pure_rewrite_conv(@list.List([@theorems.forall_simp(), @theorems.exists_simp(), @realax.real_div(), @real.real_inv_inv(), @real.real_inv_mul(), @equal.gsym(@real.real_pow_inv())]))
   let prenex_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@equal.thenc(@equal.thenc(@equal.thenc(@equal.top_depth_conv(@equal.beta_conv), t932), @canon.nnfc_conv), t933), @canon.prenex_conv)
   let setup_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@equal.thenc(@canon.nnf_conv, @canon.weak_cnf_conv), @canon.conj_canon_conv)
@@ -3565,7 +3565,7 @@ fn step_29() -> Unit raise {
       e => raise e
     }
   }
-  let t935 = @parser.parse_term("(/):real->real->real")
+  let t935 = @term_syntax.parse_term("op_slash")
   let is_div : (@kernel.Term) -> Bool raise = fn(x937 : @kernel.Term) -> Bool raise {
     ((x936 : @kernel.Term) => @basics.is_binop(t935, x936))(x937)
   }
@@ -3639,7 +3639,7 @@ pub fn real_sosfield(x : @kernel.Term) -> @kernel.Thm raise {
 /// INT_SOS
 fn step_30() -> Unit raise {
   let t957 = @simp.rewrite_tac(@list.List([@int.int_not_le(), @int.int_not_lt(), @int.int_not_eq(), @int.int_lt_discrete()]))
-  let pth = @tactics.prove(@parser.parse_term("(~(x <= y) <=> y + &1 <= x:int) /\\\n        (~(x < y) <=> y <= x) /\\\n        (~(x = y) <=> x + &1 <= y \\/ y + &1 <= x) /\\\n        (x < y <=> x + &1 <= y)"), t957)
+  let pth = @tactics.prove(@term_syntax.parse_term("!((x : Int) <= (y : Int)) == (y + int_of_num(1) <= x) && !(x < y) == (y <= x) && !(x == y) == (x + int_of_num(1) <= y || y + int_of_num(1) <= x) && (x < y) == (x + int_of_num(1) <= y)"), t957)
   let atom_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(fn(x958 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x958
   }, @list.List([pth]))
@@ -3667,8 +3667,8 @@ fn step_30() -> Unit raise {
       s965(x966)
     }
   }, @list.List([@theorems.forall_simp(), @theorems.exists_simp()])), t970), @canon.conds_elim_conv), nnf_norm_conv)
-  let p_tm = @parser.parse_term("p:bool")
-  let not_tm = @parser.parse_term("(~)")
+  let p_tm = @term_syntax.parse_term("(p : Bool)")
+  let not_tm = @term_syntax.parse_term("op_tilde")
   let pth_1 = @class.taut(@basics.mk_eq(@bool.mk_neg(@bool.mk_neg(p_tm)), p_tm))
   int_sos_c.set(fn(x971 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x971
@@ -4190,19 +4190,19 @@ pub fn sumofsquares(x : Poly) -> ((@num.Num, @list.List[(@num.Num, @lib.Func[Mon
 ///|
 /// SOS_CONV
 fn step_33() -> Unit raise {
-  let pow_tm = @parser.parse_term("(pow)")
-  let two_tm = @parser.parse_term("2")
+  let pow_tm = @term_syntax.parse_term("real_pow")
+  let two_tm = @term_syntax.parse_term("2")
   let mk_square : (@kernel.Term) -> @kernel.Term raise = fn(x1123 : @kernel.Term) -> @kernel.Term raise {
     let tm = x1123
     @kernel.mk_comb(@kernel.mk_comb(pow_tm, tm), two_tm)
   }
-  let t1124 = @parser.parse_term("(*)")
+  let t1124 = @term_syntax.parse_term("real_mul")
   let mk_prod : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x1127 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x1128 : @kernel.Term) -> @kernel.Term raise {
       ((x1125 : @kernel.Term, x1126 : @kernel.Term) => @basics.mk_binop(t1124, x1125, x1126))(x1127, x1128)
     }
   }
-  let t1129 = @parser.parse_term("(+)")
+  let t1129 = @term_syntax.parse_term("real_add")
   let mk_sum : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(x1132 : @kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise {
     fn(x1133 : @kernel.Term) -> @kernel.Term raise {
       ((x1130 : @kernel.Term, x1131 : @kernel.Term) => @basics.mk_binop(t1129, x1130, x1131))(x1132, x1133)

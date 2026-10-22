@@ -18,11 +18,11 @@ pub fn problem_dir() -> Ref[String] {
 ///|
 /// LRAT_PROVE_GEN
 fn step_2() -> Unit raise {
-  let ptm = @parser.parse_term("p:bool")
-  let qtm = @parser.parse_term("q:bool")
+  let ptm = @term_syntax.parse_term("(p : Bool)")
+  let qtm = @term_syntax.parse_term("(q : Bool)")
   let orth = @kernel.refl(@kernel.rator(@kernel.rator(@bool.mk_disj(ptm, ptm))))
   let number_clauses : ((@list.List[@list.List[Int64]], @kernel.Thm)) -> @lib.Func[Int64, (@list.List[Int64], @kernel.Thm)] raise = (x5 : (@list.List[@list.List[Int64]], @kernel.Thm)) => aux_l(@lib.undefined(), 1L, x5)
-  let pth = @bool.spec(ptm, @class.taut(@parser.parse_term("forall p. (~p ==> F) <=> p")))
+  let pth = @bool.spec(ptm, @class.taut(@term_syntax.parse_term("∀ p : Bool, (!p → false) == p")))
   let dedrup_rule : (@kernel.Thm) -> @kernel.Thm raise = fn(x6 : @kernel.Thm) -> @kernel.Thm raise {
     let th_1 = x6
     @kernel.eq_mp(@kernel.inst_rule(@list.List([(@kernel.rand(@equal.lhand(@kernel.concl(th_1))), ptm)]), pth), th_1)
@@ -35,8 +35,8 @@ fn step_2() -> Unit raise {
       @lib.update(@lib.neg63(c_2), t9, uths)
     }
   }
-  let nth = @bool.spec(ptm, @class.taut(@parser.parse_term("forall p. ~p <=> (p <=> F)")))
-  let pth_1 = @bool.spec(ptm, @class.taut(@parser.parse_term("forall p. p <=> (~p <=> F)")))
+  let nth = @bool.spec(ptm, @class.taut(@term_syntax.parse_term("∀ p : Bool, !p == (p == false)")))
+  let pth_1 = @bool.spec(ptm, @class.taut(@term_syntax.parse_term("∀ p : Bool, p == (!p == false)")))
   let equify : ((Int64, @kernel.Thm)) -> ((@lib.Func[Int64, (@kernel.Thm, @kernel.Thm)]) -> @lib.Func[Int64, (@kernel.Thm, @kernel.Thm)] raise) raise = fn(x10 : (Int64, @kernel.Thm)) -> ((@lib.Func[Int64, (@kernel.Thm, @kernel.Thm)]) -> @lib.Func[Int64, (@kernel.Thm, @kernel.Thm)] raise) raise {
     let (c_3, th_3) = x10
     fn(x11 : @lib.Func[Int64, (@kernel.Thm, @kernel.Thm)]) -> @lib.Func[Int64, (@kernel.Thm, @kernel.Thm)] raise {
@@ -51,9 +51,9 @@ fn step_2() -> Unit raise {
       @lib.update(@lib.neg63(c_3), (th_p, th_p_p), uths_1)
     }
   }
-  let upth_l = @bool.spec(ptm, @class.taut(@parser.parse_term("forall p. F \\/ p <=> p")))
-  let upth_r = @bool.spec(ptm, @class.taut(@parser.parse_term("forall p. p \\/ F <=> p")))
-  let upth_b = @class.taut(@parser.parse_term("F \\/ F <=> F"))
+  let upth_l = @bool.spec(ptm, @class.taut(@term_syntax.parse_term("∀ p : Bool, (false || p) == p")))
+  let upth_r = @bool.spec(ptm, @class.taut(@term_syntax.parse_term("∀ p : Bool, (p || false) == p")))
+  let upth_b = @class.taut(@term_syntax.parse_term("(false || false) == false"))
   lrat_prove_gen_c.set(fn(x12 : (Int64) -> @kernel.Term raise) -> ((String) -> ((String) -> @kernel.Thm raise) raise) raise {
     let amap = x12
     fn(x13 : String) -> ((String) -> @kernel.Thm raise) raise {

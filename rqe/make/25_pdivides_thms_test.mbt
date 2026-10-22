@@ -6959,22 +6959,22 @@ test "Rqe/pdivides_thms matches Rqe/pdivides_thms.ml" {
       #|0..0..2..solved at 5
       #|Warning: inventing type variables
       #|Rqe/pdivides_thms quotations (16):
-      #|  (-- x = -- y) <=> (x = y)
-      #|  -- x * y = -- (x * y)
-      #|  n:num
-      #|  a:real
-      #|  ?n'. n = SUC n'
-      #|  ~(n = 0)
-      #|  n:num
-      #|  a:real
-      #|  a < &0 \\/ (a = &0) \\/ a > &0
-      #|  -- a pow n = -- (a pow n)
-      #|  -- x + -- y = -- (x + y)
-      #|  -- x * y = -- (x * y)
-      #|  forall a n p c q d.\n     (a pow n * p x = c x * q x + d x) ==>\n     ODD n ==>\n       ((-- a) pow n * p x = (-- c x) * q x + (-- d x))
-      #|  a * x + a *  y = a *  (x + y)
-      #|  (a * x) * y = a * (x * y)
-      #|  forall a n p c q d.\n     (a pow n * p x = c x * q x + d x) ==>\n     ODD n ==>\n       ((a * a pow n) * p x = (a * c x) * q x + (a * d x))
+      #|  (-(x : Real) == -(y : Real)) == (x == y)
+      #|  -(x : Real) * (y : Real) == -(x * y)
+      #|  (n : Num)
+      #|  (a : Real)
+      #|  \226\136\131 n' : Num, (n : Num) == SUC(n')
+      #|  !((n : Num) == 0)
+      #|  (n : Num)
+      #|  (a : Real)
+      #|  (a : Real) < real_of_num(0) || a == real_of_num(0) || a > real_of_num(0)
+      #|  pow(-(a : Real), (n : Num)) == -pow(a, n)
+      #|  -(x : Real) + -(y : Real) == -(x + y)
+      #|  -(x : Real) * (y : Real) == -(x * y)
+      #|  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (_) -> Real, \226\136\128 c : (_) -> Real, \226\136\128 q : (_) -> Real, \226\136\128 d : (_) -> Real, pow(a, n) * p((x : _)) == c(x) * q(x) + d(x) \226\134\146 ODD(n) \226\134\146 pow(-a, n) * p(x) == -c(x) * q(x) + -d(x)
+      #|  (a : Real) * (x : Real) + a * (y : Real) == a * (x + y)
+      #|  (a : Real) * (x : Real) * (y : Real) == a * (x * y)
+      #|  \226\136\128 a : Real, \226\136\128 n : Num, \226\136\128 p : (_) -> Real, \226\136\128 c : (_) -> Real, \226\136\128 q : (_) -> Real, \226\136\128 d : (_) -> Real, pow(a, n) * p((x : _)) == c(x) * q(x) + d(x) \226\134\146 ODD(n) \226\134\146 a * pow(a, n) * p(x) == a * c(x) * q(x) + a * d(x)
       #|neg_odd_lem =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun('?1,real),bool),bool) (\p:fun('?1,real). (#forall:fun(fun(fun('?1,real),bool),bool) (\c:fun('?1,real). (#forall:fun(fun(fun('?1,real),bool),bool) (\q:fun('?1,real). (#forall:fun(fun(fun('?1,real),bool),bool) (\d:fun('?1,real). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) a:real) n:num)) (p:fun('?1,real) x:'?1))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (c:fun('?1,real) x:'?1)) (q:fun('?1,real) x:'?1))) (d:fun('?1,real) x:'?1)))) ((#==>:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (#real_neg:fun(real,real) a:real)) n:num)) (p:fun('?1,real) x:'?1))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (#real_neg:fun(real,real) (c:fun('?1,real) x:'?1))) (q:fun('?1,real) x:'?1))) (#real_neg:fun(real,real) (d:fun('?1,real) x:'?1))))))))))))))))))
       #|mul_odd_lem =  |- (#forall:fun(fun(real,bool),bool) (\a:real. (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(fun('?2,real),bool),bool) (\p:fun('?2,real). (#forall:fun(fun(fun('?2,real),bool),bool) (\c:fun('?2,real). (#forall:fun(fun(fun('?2,real),bool),bool) (\q:fun('?2,real). (#forall:fun(fun(fun('?2,real),bool),bool) (\d:fun('?2,real). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) a:real) n:num)) (p:fun('?2,real) x:'?2))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) (c:fun('?2,real) x:'?2)) (q:fun('?2,real) x:'?2))) (d:fun('?2,real) x:'?2)))) ((#==>:fun(bool,fun(bool,bool)) (#ODD:fun(num,bool) n:num)) ((#=:fun(real,fun(real,bool)) ((#real_mul:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) a:real) ((#real_pow:fun(real,fun(num,real)) a:real) n:num))) (p:fun('?2,real) x:'?2))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) a:real) (c:fun('?2,real) x:'?2))) (q:fun('?2,real) x:'?2))) ((#real_mul:fun(real,fun(real,real)) a:real) (d:fun('?2,real) x:'?2))))))))))))))))))
       #|types = sign/0 metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

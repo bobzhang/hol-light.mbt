@@ -8,7 +8,7 @@ fn step_1() -> Unit raise {
   )
   isum_support_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f s. isum (support (+) f s) f = isum s f"),
+      @term_syntax.parse_term("∀ f : (_) -> Int, ∀ s : (_) -> Bool, isum(support(op_plus, f, s), f) == isum(s, f)"),
       t1,
     ),
   )
@@ -42,9 +42,9 @@ fn step_2() -> Unit raise {
     ]),
   )
   let t18 = @tactics.match_mp_tac(@sets.finite_induct_strong())
-  let t16 = @parser.parse_term("s:A->bool")
+  let t16 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t17 = @tactics.spec_tac(
-    @parser.parse_term("support(+) (f:A->int) s"),
+    @term_syntax.parse_term("support(op_plus, (f : (A) -> Int), (s : (A) -> Bool))"),
     t16,
   )
   let t15 = @tactics.pop_assum(fn(
@@ -226,7 +226,7 @@ pub fn int_isum() -> @kernel.Thm {
 ///|
 /// INT_OF_REAL_THM
 fn step_3() -> Unit raise {
-  let dest = @parser.parse_term("real_of_int")
+  let dest = @term_syntax.parse_term("real_of_int")
   let real_ty = @parser.parse_type("real")
   let int_ty = @parser.parse_type("int")
   let t22 = @tactics.then_tac(
@@ -1838,7 +1838,7 @@ fn step_91() -> Unit raise {
   let t57 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_int_add(), @equal.gsym(@iterate.isum())]),
   )
-  let t53 = @parser.parse_term("P:int->bool")
+  let t53 = @term_syntax.parse_term("(P : (Int) -> Bool)")
   let t56 = @tactics.disch_then(fn(
     x55 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1947,7 +1947,7 @@ fn step_92() -> Unit raise {
     @iterate.monoidal_int_add(),
   )
   let t61 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:int->int->bool"), t60),
+    @bool.ispec(@term_syntax.parse_term("(R : (Int, Int) -> Bool)"), t60),
   )
   let t59 = @tactics.repeat_tac(@tactics.disch_tac)
   let t64 = @tactics.then_tac(
@@ -1996,7 +1996,7 @@ fn step_93() -> Unit raise {
   let t73 = @simp.asm_simp_tac(
     @list.List([@iterate.neutral_int_add(), @equal.gsym(@iterate.isum())]),
   )
-  let t69 = @parser.parse_term("P:int->bool")
+  let t69 = @term_syntax.parse_term("(P : (Int) -> Bool)")
   let t72 = @tactics.disch_then(fn(
     x71 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2109,7 +2109,7 @@ fn step_94() -> Unit raise {
     @iterate.monoidal_int_add(),
   )
   let t77 = @tactics.mp_tac(
-    @bool.ispec(@parser.parse_term("R:int->int->bool"), t76),
+    @bool.ispec(@term_syntax.parse_term("(R : (Int, Int) -> Bool)"), t76),
   )
   let t75 = @tactics.repeat_tac(@tactics.disch_tac)
   let t80 = @tactics.then_tac(
@@ -2197,10 +2197,10 @@ fn step_95() -> Unit raise {
         })(t83),
       ) {
       More(pth_0, tail=More(pth_1, tail=More(pth_2, tail=Empty))) => {
-        let ns_tm = @parser.parse_term("..")
-        let f_tm = @parser.parse_term("f:num->int")
-        let m_tm = @parser.parse_term("m:num")
-        let n_tm = @parser.parse_term("n:num")
+        let ns_tm = @term_syntax.parse_term("op_dot_dot")
+        let f_tm = @term_syntax.parse_term("(f : (Num) -> Int)")
+        let m_tm = @term_syntax.parse_term("(m : Num)")
+        let n_tm = @term_syntax.parse_term("(n : Num)")
         fn conv(x84 : @kernel.Term) -> @kernel.Thm raise {
           let tm = x84
           let (smn, ftm) = @kernel.dest_comb(tm)

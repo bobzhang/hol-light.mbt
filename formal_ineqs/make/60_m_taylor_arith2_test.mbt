@@ -31,12 +31,12 @@ test "Formal_ineqs/taylor/m_taylor_arith2 matches Formal_ineqs/taylor/m_taylor_a
     @testkit.normalize_times(log.contents()),
     content=(
       #|Formal_ineqs/taylor/m_taylor_arith2 quotations (230):
-      #|  x pow 2
-      #|  x pow 2
-      #|  iabs f_bounds < &1
-      #|  x pow 3
-      #|  iabs f_bounds < &1
-      #|  x pow 3
+      #|  pow((x : Real), 2)
+      #|  pow((x : Real), 2)
+      #|  iabs((f_bounds : (Real, Real))) < real_of_num(1)
+      #|  pow((x : Real), 3)
+      #|  iabs((f_bounds : (Real, Real))) < real_of_num(1)
+      #|  pow((x : Real), 3)
       #|  1
       #|  :real#real
       #|  1
