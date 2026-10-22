@@ -5815,29 +5815,29 @@ Jordan/num_ext_nabs quotations (55):
   real_neg:real->real
   real_of_num:num->real
   real_abs:real->real
-  u:num
-  forall u. (integer (real_of_num u))
-  forall u. (real_of_int (int_of_num u) = real_of_num u)
-  forall(a:int). (integer (real_of_int a))
-  n:num
-  forall a n. ((real_of_int a = (real_of_num n)) =\n                (a = int_of_num n))
-  n:num
+  (u : Num)
+  \226\136\128 u : Num, integer(real_of_num(u))
+  \226\136\128 u : Num, real_of_int(int_of_num(u)) == real_of_num(u)
+  \226\136\128 a : Int, integer(real_of_int(a))
+  (n : Num)
+  \226\136\128 a : Int, \226\136\128 n : Num, (real_of_int(a) == real_of_num(n)) == (a == int_of_num(n))
+  (n : Num)
   0
   0
-  n:num
-  a:int
-  forall a. ?n m. (a = (int_of_num n) - (int_of_num m))
-  n:num
-  n:num
-  a:int
-  forall a. ?n. ((a = (&: n)) \\/ (a = (--: (&: n))))
-  nabs n = @u. ((n = int_of_num u) \\/ (n =\n        int_neg (int_of_num u)))
-  forall u y.(((real_of_num u) = --(real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
-   ((A==>C)/\\ (B==>C)) ==> (A\\/B ==>C) 
-  forall u. (nabs (int_of_num u)) = u
-  forall u y.((--(real_of_num u) = (real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))
-   ((A==>C)/\\ (B==>C)) ==> (A\\/B ==>C) 
-  forall n. (nabs (-- (int_of_num n))) = n
+  (n : Num)
+  (a : Int)
+  \226\136\128 a : Int, \226\136\131 n : Num, \226\136\131 m : Num, a == int_of_num(n) - int_of_num(m)
+  (n : Num)
+  (n : Num)
+  (a : Int)
+  \226\136\128 a : Int, \226\136\131 n : Num, a == int_of_num(n) || a == -int_of_num(n)
+  (nabs : (Int) -> Num)((n : Int)) == select((u : Num) => n == int_of_num(u) || n == -int_of_num(u))
+  \226\136\128 u : Num, \226\136\128 y : Num, (real_of_num(u) == -real_of_num(y)) == (real_of_num(u) + real_of_num(y) == real_of_num(0))
+  ((A : Bool) \226\134\146 (C : Bool)) && ((B : Bool) \226\134\146 C) \226\134\146 A || B \226\134\146 C
+  \226\136\128 u : Num, nabs(int_of_num(u)) == u
+  \226\136\128 u : Num, \226\136\128 y : Num, (-real_of_num(u) == real_of_num(y)) == (real_of_num(u) + real_of_num(y) == real_of_num(0))
+  ((A : Bool) \226\134\146 (C : Bool)) && ((B : Bool) \226\134\146 C) \226\134\146 A || B \226\134\146 C
+  \226\136\128 n : Num, nabs(-int_of_num(n)) == n
 INT_NUM =  |- (#forall:fun(fun(num,bool),bool) (\u:num. (#integer:fun(real,bool) (#real_of_num:fun(num,real) u:num))))
 INT_NUM_REAL =  |- (#forall:fun(fun(num,bool),bool) (\u:num. ((#=:fun(real,fun(real,bool)) (#real_of_int:fun(int,real) (#int_of_num:fun(num,int) u:num))) (#real_of_num:fun(num,real) u:num))))
 INT_IS_INT =  |- (#forall:fun(fun(int,bool),bool) (\a:int. (#integer:fun(real,bool) (#real_of_int:fun(int,real) a:int))))

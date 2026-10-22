@@ -9877,7 +9877,7 @@ pub fn closed() -> @kernel.Thm {
 ///|
 /// euclidean
 fn step_478() -> Unit raise {
-  euclidean_c.set(@pair.new_definition(@parser.parse_term("euclidean = mk_topology (UNIV, open)")))
+  euclidean_c.set(@pair.new_definition(@term_syntax.parse_term("(euclidean : Topology[Cart[Real, _]]) == mk_topology((UNIV, open))")))
 }
 
 ///|
@@ -10677,7 +10677,7 @@ pub fn closed_unions() -> @kernel.Thm {
 ///|
 /// ball
 fn step_530() -> Unit raise {
-  ball_c.set(@pair.new_definition(@parser.parse_term("ball(x,e) = {y | dist(x,y) < e}")))
+  ball_c.set(@pair.new_definition(@term_syntax.parse_term("(ball : ((Cart[Real, _], Real), Cart[Real, _]) -> Bool)(((x : Cart[Real, _]), (e : Real))) == {(y : Cart[Real, _]) | distance((x, y)) < e}")))
 }
 
 ///|
@@ -10692,7 +10692,7 @@ pub fn ball() -> @kernel.Thm {
 ///|
 /// cball
 fn step_531() -> Unit raise {
-  cball_c.set(@pair.new_definition(@parser.parse_term("cball(x,e) = {y | dist(x,y) <= e}")))
+  cball_c.set(@pair.new_definition(@term_syntax.parse_term("(cball : ((Cart[Real, _], Real), Cart[Real, _]) -> Bool)(((x : Cart[Real, _]), (e : Real))) == {(y : Cart[Real, _]) | distance((x, y)) <= e}")))
 }
 
 ///|

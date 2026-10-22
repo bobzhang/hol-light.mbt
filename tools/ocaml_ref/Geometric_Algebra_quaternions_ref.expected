@@ -76423,20 +76423,20 @@ Generating HOL version of proof
 0..0..solved at 3
 Geometric_Algebra/quaternions quotations (56):
   dimindex(:('0,'1,'0)geomalg) = dimindex(:2)
-  {s | s SUBSET {1}} = {{}, {1}}
+  {(s : (Num) -> Bool) | SUBSET(s, {1})} == {{}, {1}}
   forall x y:real^('0,'1,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}
   mbasis{1}:real^('0,'1,'0)geomalg * mbasis{1} = --mbasis{}
   mbasis{1,2}:real^('2,'0,'0)geomalg * mbasis{1,2} = --mbasis{}
   dimindex(:('0,'2,'0)geomalg) = dimindex(:4)
-  forall a b:num. (forall x. (x=a) <=> (x=a) \\/ (x=b)) <=> (a=b)
-  forall a b:num. (forall x. (x=a) <=> (x=b)) <=> (a=b)
-  {}:num->bool
-  {1}:num->bool
-  {}:num->bool
-  {}:num->bool
-  p1 = q1 /\\ p2 = q2 ==> (p1 \\/ p2) = (q1 \\/q2)
-  p1 = q1 /\\ p2 = q2 ==> (p1 \\/ p2) = (q1 \\/q2)
-  {s | s SUBSET {2,1}} = {{}, {1}, {2}, {1,2}}
+  \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 x : Num, (x == a) == (x == a || x == b)) == (a == b)
+  \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 x : Num, (x == a) == (x == b)) == (a == b)
+  ({} : (Num) -> Bool)
+  {1}
+  ({} : (Num) -> Bool)
+  ({} : (Num) -> Bool)
+  (p1 : Bool) == (q1 : Bool) && (p2 : Bool) == (q2 : Bool) \226\134\146 (p1 || p2) == (q1 || q2)
+  (p1 : Bool) == (q1 : Bool) && (p2 : Bool) == (q2 : Bool) \226\134\146 (p1 || p2) == (q1 || q2)
+  {(s : (Num) -> Bool) | SUBSET(s, {2, 1})} == {{}, {1}, {2}, {1, 2}}
   forall x y:real^('0,'2,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}
   (mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{1} = --mbasis{}
   (mbasis{2}:real^('0,'2,'0)geomalg)* mbasis{2} = --mbasis {}
@@ -76449,11 +76449,11 @@ Geometric_Algebra/quaternions quotations (56):
   (mbasis{1,2}:real^('0,'2,'0)geomalg)* mbasis{1} = --(mbasis{1} * mbasis{1,2})
   (mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{2} * mbasis{1,2} = --mbasis{}
   geomalg_300_quat (q:quat) =\n  (Re q) % mbasis{} +\n  (Im1 q) % mbasis{2,3} +\n  (Im2 q) % mbasis{1,2} +\n  (Im3 q) % (--(mbasis{1,3}:real^('3,'0,'0)geomalg))
-  4..3
-  4..3
-  4..3
-  4..3
-  forall q:quat. conjugation (geomalg_300_quat q) = geomalg_300_quat (cnj q)
+  op_dot_dot(4, 3)
+  op_dot_dot(4, 3)
+  op_dot_dot(4, 3)
+  op_dot_dot(4, 3)
+  \226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], conjugation(geomalg_300_quat(q)) == geomalg_300_quat(cnj(q))
   (mbasis{2,3}:real^('3,'0,'0)geomalg)* mbasis{2,3} = --mbasis{}
   (mbasis{1,2}:real^('3,'0,'0)geomalg)* mbasis{1,2} = --mbasis{}
   (--mbasis{1,3}:real^('3,'0,'0)geomalg)*(--mbasis{1,3}) = --mbasis{}

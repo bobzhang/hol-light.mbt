@@ -138,7 +138,7 @@ pub fn satoracle(x13 : @sat_solvers.SatSolver, x14 : @kernel.Term) -> @kernel.Th
 ///|
 /// EQT_Imp1
 fn step_3() -> Unit raise {
-  eqt_imp1_c.set(@class.taut(@parser.parse_term("forall b. b ==> (b<=>T)")))
+  eqt_imp1_c.set(@class.taut(@term_syntax.parse_term("∀ b : Bool, b → b == true")))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn eqt_imp1() -> @kernel.Thm {
 ///|
 /// EQF_Imp1
 fn step_4() -> Unit raise {
-  eqf_imp1_c.set(@class.taut(@parser.parse_term("forall b. (~b) ==> (b<=>F)")))
+  eqf_imp1_c.set(@class.taut(@term_syntax.parse_term("∀ b : Bool, !b → b == false")))
 }
 
 ///|
@@ -168,7 +168,7 @@ pub fn eqf_imp1() -> @kernel.Thm {
 ///|
 /// EQT_Imp2
 fn step_5() -> Unit raise {
-  eqt_imp2_c.set(@class.taut(@parser.parse_term("forall b. (b<=>T) ==> b")))
+  eqt_imp2_c.set(@class.taut(@term_syntax.parse_term("∀ b : Bool, b == true → b")))
 }
 
 ///|

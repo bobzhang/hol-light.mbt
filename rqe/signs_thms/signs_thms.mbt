@@ -68,10 +68,10 @@ fn step_1() -> Unit raise {
   })
   let t5 = @tactics.repeat_tac(@tactics.conj_tac)
   let t4 = @simp.rewrite_tac(@list.List([@theorems.imp_imp()]))
-  let t2 = @calc_rat.real_arith(@parser.parse_term("~(p = &0) <=> p < &0 \\/ p > &0"))
-  let t3 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(x > &0 <=> &0 < x) /\\ (x < &0 <=> &0 < --x)")), t2]))
+  let t2 = @calc_rat.real_arith(@term_syntax.parse_term("!((p : Real) == real_of_num(0)) == (p < real_of_num(0) || p > real_of_num(0))"))
+  let t3 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("((x : Real) > real_of_num(0)) == (real_of_num(0) < x) && (x < real_of_num(0)) == (real_of_num(0) < -x)")), t2]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@analysis.real_mul_rzero()])), t3), t4), t5), t11), @calc_rat.real_arith_tac)
-  let t13 = (@parser.parse_term("((p = &0) ==> c > &0 ==> (c * p = &0)) /\\\n     ((p = &0) ==> c < &0 ==> (c * p = &0)) /\\\n     (p > &0 ==> c > &0 ==> c * p > &0) /\\\n     (p > &0 ==> c < &0 ==> c * p < &0) /\\\n     (p < &0 ==> c > &0 ==> c * p < &0) /\\\n     (p < &0 ==> c < &0 ==> c * p > &0)"), t12)
+  let t13 = (@term_syntax.parse_term("((p : Real) == real_of_num(0) → (c : Real) > real_of_num(0) → c * p == real_of_num(0)) && (p == real_of_num(0) → c < real_of_num(0) → c * p == real_of_num(0)) && (p > real_of_num(0) → c > real_of_num(0) → c * p > real_of_num(0)) && (p > real_of_num(0) → c < real_of_num(0) → c * p < real_of_num(0)) && (p < real_of_num(0) → c > real_of_num(0) → c * p < real_of_num(0)) && (p < real_of_num(0) → c < real_of_num(0) → c * p > real_of_num(0))"), t12)
   match @bool.conjuncts_rule((fn(x1 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x1.0, x1.1)
   })(t13)) {
@@ -92,7 +92,7 @@ fn step_1() -> Unit raise {
 /// pth_nzg
 fn step_2() -> Unit raise {
   let t14 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq(), @realarith.real_entire()])), @calc_rat.real_arith_tac)])
-  pth_nzg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("p <> &0 ==> c > &0 ==> c * p <> &0"), t14))
+  pth_nzg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("op_lt_gt((p : Real), real_of_num(0)) → (c : Real) > real_of_num(0) → op_lt_gt(c * p, real_of_num(0))"), t14))
 }
 
 ///|
@@ -108,7 +108,7 @@ pub fn pth_nzg() -> @kernel.Thm {
 /// pth_nzl
 fn step_3() -> Unit raise {
   let t15 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq(), @realarith.real_entire()])), @calc_rat.real_arith_tac)])
-  pth_nzl_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("p <> &0 ==> c < &0 ==> c * p <> &0"), t15))
+  pth_nzl_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("op_lt_gt((p : Real), real_of_num(0)) → (c : Real) < real_of_num(0) → op_lt_gt(c * p, real_of_num(0))"), t15))
 }
 
 ///|
@@ -124,7 +124,7 @@ pub fn pth_nzl() -> @kernel.Thm {
 /// signs_lem01
 fn step_4() -> Unit raise {
   let t16 = @list.List([@meson.asm_meson_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt()]))])
-  signs_lem01_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c < &0 ==> p < &0 ==> (c * p = p') ==> p' > &0"), t16))
+  signs_lem01_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) < real_of_num(0) → (p : Real) < real_of_num(0) → c * p == (p' : Real) → p' > real_of_num(0)"), t16))
 }
 
 ///|
@@ -140,7 +140,7 @@ pub fn signs_lem01() -> @kernel.Thm {
 /// signs_lem02
 fn step_5() -> Unit raise {
   let t17 = @list.List([@meson.asm_meson_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt()]))])
-  signs_lem02_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c > &0 ==> p < &0 ==> (c * p = p') ==> p' < &0"), t17))
+  signs_lem02_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) > real_of_num(0) → (p : Real) < real_of_num(0) → c * p == (p' : Real) → p' < real_of_num(0)"), t17))
 }
 
 ///|
@@ -156,7 +156,7 @@ pub fn signs_lem02() -> @kernel.Thm {
 /// signs_lem03
 fn step_6() -> Unit raise {
   let t18 = @list.List([@meson.asm_meson_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt()]))])
-  signs_lem03_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c < &0 ==> p > &0 ==> (c * p = p') ==> p' < &0"), t18))
+  signs_lem03_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) < real_of_num(0) → (p : Real) > real_of_num(0) → c * p == (p' : Real) → p' < real_of_num(0)"), t18))
 }
 
 ///|
@@ -172,7 +172,7 @@ pub fn signs_lem03() -> @kernel.Thm {
 /// signs_lem04
 fn step_7() -> Unit raise {
   let t19 = @list.List([@meson.asm_meson_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt()]))])
-  signs_lem04_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c > &0 ==> p > &0 ==> (c * p = p') ==> p' > &0"), t19))
+  signs_lem04_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) > real_of_num(0) → (p : Real) > real_of_num(0) → c * p == (p' : Real) → p' > real_of_num(0)"), t19))
 }
 
 ///|
@@ -188,7 +188,7 @@ pub fn signs_lem04() -> @kernel.Thm {
 /// signs_lem05
 fn step_8() -> Unit raise {
   let t20 = @list.List([@meson.asm_meson_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt(), @analysis.real_mul_rzero()]))])
-  signs_lem05_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c < &0 ==> (p = &0) ==> (c * p = p') ==> (p' = &0)"), t20))
+  signs_lem05_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) < real_of_num(0) → (p : Real) == real_of_num(0) → c * p == (p' : Real) → p' == real_of_num(0)"), t20))
 }
 
 ///|
@@ -204,7 +204,7 @@ pub fn signs_lem05() -> @kernel.Thm {
 /// signs_lem06
 fn step_9() -> Unit raise {
   let t21 = @list.List([@meson.asm_meson_tac(@list.List([@rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt(), @analysis.real_mul_rzero()]))])
-  signs_lem06_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c > &0 ==> (p = &0) ==> (c * p = p') ==> (p' = &0)"), t21))
+  signs_lem06_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) > real_of_num(0) → (p : Real) == real_of_num(0) → c * p == (p' : Real) → p' == real_of_num(0)"), t21))
 }
 
 ///|
@@ -220,7 +220,7 @@ pub fn signs_lem06() -> @kernel.Thm {
 /// signs_lem07
 fn step_10() -> Unit raise {
   let t22 = @list.List([@meson.asm_meson_tac(@list.List([@basic.neq(), @rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt(), @analysis.real_mul_rzero(), @realarith.real_entire(), @rqe_real.real_gt_imp_nz()]))])
-  signs_lem07_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c < &0 ==> p <> &0 ==> (c * p = p') ==> p' <> &0"), t22))
+  signs_lem07_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) < real_of_num(0) → op_lt_gt((p : Real), real_of_num(0)) → c * p == (p' : Real) → op_lt_gt(p', real_of_num(0))"), t22))
 }
 
 ///|
@@ -236,7 +236,7 @@ pub fn signs_lem07() -> @kernel.Thm {
 /// signs_lem08
 fn step_11() -> Unit raise {
   let t23 = @list.List([@meson.asm_meson_tac(@list.List([@basic.neq(), @rqe_real.real_mul_lt(), @rqe_real.real_mul_gt(), @realax.real_gt(), @analysis.real_mul_rzero(), @realarith.real_entire(), @analysis.real_lt_imp_nz()]))])
-  signs_lem08_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("c > &0 ==> p <> &0 ==> (c * p = p') ==> p' <> &0"), t23))
+  signs_lem08_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("(c : Real) > real_of_num(0) → op_lt_gt((p : Real), real_of_num(0)) → c * p == (p' : Real) → op_lt_gt(p', real_of_num(0))"), t23))
 }
 
 ///|
@@ -252,7 +252,7 @@ pub fn signs_lem08() -> @kernel.Thm {
 /// signs_lem002
 fn step_12() -> Unit raise {
   let t24 = @list.List([@meson.meson_tac(@list.List([@basic.neq()]))])
-  signs_lem002_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall p. (p = &0) \\/ (p <> &0)"), t24))
+  signs_lem002_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ p : Real, p == real_of_num(0) || op_lt_gt(p, real_of_num(0))"), t24))
 }
 
 ///|
@@ -267,7 +267,7 @@ pub fn signs_lem002() -> @kernel.Thm {
 ///|
 /// signs_lem003
 fn step_13() -> Unit raise {
-  signs_lem003_c.set(@class.taut(@parser.parse_term("a \\/ b ==> (a ==> x) ==> (b ==> y) ==> (a /\\ x \\/ b /\\ y)")))
+  signs_lem003_c.set(@class.taut(@term_syntax.parse_term("(a : Bool) || (b : Bool) → (a → (x : Bool)) → (b → (y : Bool)) → a && x || b && y")))
 }
 
 ///|
@@ -313,13 +313,13 @@ pub fn sz_nz_thm() -> Ref[@kernel.Thm] {
 /// PULL_CASES_THM
 fn step_16() -> Unit raise {
   let t30 = @simp.asm_rewrite_tac(@list.List([]))
-  let t26 = @parser.parse_term("p2:bool")
-  let t27 = @parser.parse_term("p1:bool")
-  let t28 = @parser.parse_term("p0:bool")
-  let t29 = @tactics.map_every(@class.bool_cases_tac, @list.List([@parser.parse_term("p:bool"), t28, t27, t26]))
+  let t26 = @term_syntax.parse_term("(p2 : Bool)")
+  let t27 = @term_syntax.parse_term("(p1 : Bool)")
+  let t28 = @term_syntax.parse_term("(p0 : Bool)")
+  let t29 = @tactics.map_every(@class.bool_cases_tac, @list.List([@term_syntax.parse_term("(p : Bool)"), t28, t27, t26]))
   let t25 = @simp.rewrite_tac(@list.List([@basic.neq()]))
   let t31 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t25), t29), t30), @calc_rat.real_arith_tac)
-  pull_cases_thm_c.set(@tactics.prove(@parser.parse_term("forall a p p0 p1.\n((a = &0) /\\ (p <=> p0) \\/ (a <> &0) /\\ (p <=> p1)) <=> ((p <=> (a = &0) /\\ p0 \\/ a <> &0 /\\ p1 ))"), t31))
+  pull_cases_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Real, ∀ p : Bool, ∀ p0 : Bool, ∀ p1 : Bool, (a == real_of_num(0) && p == p0 || op_lt_gt(a, real_of_num(0)) && p == p1) == (p == (a == real_of_num(0) && p0 || op_lt_gt(a, real_of_num(0)) && p1))"), t31))
 }
 
 ///|
@@ -335,7 +335,7 @@ pub fn pull_cases_thm() -> @kernel.Thm {
 /// signs_lem0002
 fn step_17() -> Unit raise {
   let t32 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq()])), @calc_rat.real_arith_tac)
-  signs_lem0002_c.set(@tactics.prove(@parser.parse_term("forall p. p <> &0 ==> (p > &0) \\/ (p < &0)"), t32))
+  signs_lem0002_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Real, op_lt_gt(p, real_of_num(0)) → p > real_of_num(0) || p < real_of_num(0)"), t32))
 }
 
 ///|
@@ -350,7 +350,7 @@ pub fn signs_lem0002() -> @kernel.Thm {
 ///|
 /// signs_lem0003
 fn step_18() -> Unit raise {
-  signs_lem0003_c.set(@class.taut(@parser.parse_term("a \\/ b ==> (a ==> x) ==> (b ==> y) ==> (a /\\ x \\/ b /\\ y)")))
+  signs_lem0003_c.set(@class.taut(@term_syntax.parse_term("(a : Bool) || (b : Bool) → (a → (x : Bool)) → (b → (y : Bool)) → a && x || b && y")))
 }
 
 ///|
@@ -372,14 +372,14 @@ fn step_19() -> Unit raise {
     }
   }), @calc_rat.real_arith_tac))
   let t39 = @simp.asm_rewrite_tac(@list.List([]))
-  let t35 = @parser.parse_term("p2:bool")
-  let t36 = @parser.parse_term("p1:bool")
-  let t37 = @parser.parse_term("p0:bool")
-  let t38 = @tactics.map_every(@class.bool_cases_tac, @list.List([@parser.parse_term("p:bool"), t37, t36, t35]))
+  let t35 = @term_syntax.parse_term("(p2 : Bool)")
+  let t36 = @term_syntax.parse_term("(p1 : Bool)")
+  let t37 = @term_syntax.parse_term("(p0 : Bool)")
+  let t38 = @tactics.map_every(@class.bool_cases_tac, @list.List([@term_syntax.parse_term("(p : Bool)"), t37, t36, t35]))
   let t34 = @simp.rewrite_tac(@list.List([@basic.neq()]))
   let t33 = @tactics.repeat_tac(@tactics.strip_tac)
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@basic.neq()])), t33), t34), t38), t39), t43)
-  pull_cases_thm_nz_c.set(@tactics.prove(@parser.parse_term("forall a p p1 p2.\n  (a <> &0) ==> ((a > &0 /\\ (p <=> p1) \\/ a < &0 /\\ (p <=> p2)) <=>\n   ((p <=> a > &0 /\\ p1 \\/ a < &0 /\\ p2)))"), t44))
+  pull_cases_thm_nz_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Real, ∀ p : Bool, ∀ p1 : Bool, ∀ p2 : Bool, op_lt_gt(a, real_of_num(0)) → (a > real_of_num(0) && p == p1 || a < real_of_num(0) && p == p2) == (p == (a > real_of_num(0) && p1 || a < real_of_num(0) && p2))"), t44))
 }
 
 ///|

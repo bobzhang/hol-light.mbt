@@ -5575,35 +5575,35 @@ test "Boyer_Moore/clausal_form matches Boyer_Moore/clausal_form.ml" {
       #|Searching with limit 2
       #|Searching with limit 3
       #|Boyer_Moore/clausal_form quotations (29):
-      #|  forall t1 t2. t1 ==> t2 <=> ~t1 \\/ t2
-      #|  forall t1 t2 t3. t2 /\\ t3 \\/ t1 <=> (t2 \\/ t1) /\\ (t3 \\/ t1)
-      #|  forall t1 t2 t3. t1 \\/ t2 /\\ t3 <=> (t1 \\/ t2) /\\ (t1 \\/ t3)
-      #|  y:bool
-      #|  x:bool
-      #|  (x = y) = ((~x \\/ y) /\\ (~y \\/ x))
-      #|  x:bool
-      #|  y:bool
-      #|  z:bool
-      #|  y:bool
-      #|  x:bool
-      #|  (if x then y else z) = ((~x \\/ y) /\\ (x \\/ z))
-      #|  x:bool
-      #|  x:bool
-      #|  y:bool
-      #|  x:bool
-      #|  y:bool
-      #|  x:bool
-      #|  y:bool
-      #|  z:bool
-      #|  z:bool
-      #|  x:bool
-      #|  y:bool
-      #|  x:bool
-      #|  y:bool
-      #|  z:bool
-      #|  x:bool
-      #|  y:bool
-      #|  z:bool
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, (t1 \226\134\146 t2) == (!t1 || t2)
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t2 && t3 || t1) == ((t2 || t1) && (t3 || t1))
+      #|  \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 || t2 && t3) == ((t1 || t2) && (t1 || t3))
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  ((x : Bool) == (y : Bool)) == ((!x || y) && (!y || x))
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (z : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  (if (x : Bool) { (y : Bool) } else { (z : Bool) }) == ((!x || y) && (x || z))
+      #|  (x : Bool)
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (z : Bool)
+      #|  (z : Bool)
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (z : Bool)
+      #|  (x : Bool)
+      #|  (y : Bool)
+      #|  (z : Bool)
       #|IMP_DISJ_THM =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t1:bool)) t2:bool))))))
       #|RIGHT_OR_OVER_AND =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool)) t1:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t1:bool)) ((#\/:fun(bool,fun(bool,bool)) t3:bool) t1:bool)))))))))
       #|LEFT_OR_OVER_AND =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) ((#/\:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t2:bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) t3:bool)))))))))

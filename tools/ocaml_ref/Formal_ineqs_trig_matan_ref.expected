@@ -178,232 +178,232 @@ Generating HOL version of proof
 2 basis elements and 0 critical pairs
 Generating HOL version of proof
 Formal_ineqs/trig/matan quotations (226):
-  matan x = \n  if (x = &0) then &1\n  else if (x > &0) then atn (sqrt x) / (sqrt x) \n  else  (log ((&1 + sqrt( -- x))/(&1 - sqrt( -- x)))) / (&2 * sqrt (-- x))
-  dmatan = real_derivative matan
-  ddmatan = real_derivative (real_derivative matan)
-  f (&0) = &0
-  x:real
-  abs (-- &1) = &1
-  t:real pow 2
+  (matan : (Real) -> Real)((x : Real)) == (if x == real_of_num(0) { real_of_num(1) } else { if x > real_of_num(0) { atn(sqrt(x)) / sqrt(x) } else { log((real_of_num(1) + sqrt(-x)) / (real_of_num(1) - sqrt(-x))) / (real_of_num(2) * sqrt(-x)) } })
+  (dmatan : (Real) -> Real) == real_derivative(matan)
+  (ddmatan : (Real) -> Real) == real_derivative(real_derivative(matan))
+  (f : (Real) -> Real)(real_of_num(0)) == real_of_num(0)
+  (x : Real)
+  abs(-real_of_num(1)) == real_of_num(1)
+  pow((t : Real), 2)
   0
-  abs t < &1 ==> ~(&1 - t = &0)
-  t:real
-  &1
-  (:num)
-  \\i. if EVEN i then &1 else &0
-  \\x:real. inv (&1 - x pow 2)
-  f:real->real
-  f = \\x:real. log ((&1 + x) / (&1 - x)) / &2
-  (a * x) / b * inv x = (x * inv x) * a / b:real
-  k:num
-  \\k. x pow (2 * k + 1) / &(2 * k + 1) * inv x
-  forall x. abs x < &1 /\\ ~(x = &0)\n\t\t\t       ==> ((\\k. x pow (2 * k) / &(2 * k + 1))\n\t\t\t\t      real_sums log ((&1 + x) / (&1 - x)) / (&2 * x)) (:num)
-  ~(x > &0) ==> abs (--x) = --x
-  &1 = abs(&1)
-  sqrt (--x:real)
-  sqrt x pow 2 = x
-  &0 < x <=> x > &0
-  sqrt x
-  y > &0 ==> ~(y = &0)
-  k:num
-  \\k. (-- &1 pow k / &(2 * k + 1) * y pow (2 * k + 1)) * inv y
-  forall y. y > &0 /\\ y < &1 ==> ((\\k. -- &1 pow k / &(2 * k + 1) * (y pow 2) pow k) real_sums atn y / y) (:num)
-  x > &0
-  \\i:num. &0
+  abs((t : Real)) < real_of_num(1) \226\134\146 !(real_of_num(1) - t == real_of_num(0))
+  (t : Real)
+  real_of_num(1)
+  (UNIV : (Num) -> Bool)
+  (i : Num) => if EVEN(i) { real_of_num(1) } else { real_of_num(0) }
+  (x : Real) => inv(real_of_num(1) - pow(x, 2))
+  (f : (Real) -> Real)
+  (f : (Real) -> Real) == ((x : Real) => log((real_of_num(1) + x) / (real_of_num(1) - x)) / real_of_num(2))
+  (a : Real) * (x : Real) / (b : Real) * inv(x) == x * inv(x) * (a / b)
+  (k : Num)
+  (k : Num) => pow((x : Real), 2 * k + 1) / real_of_num(2 * k + 1) * inv(x)
+  \226\136\128 x : Real, abs(x) < real_of_num(1) && !(x == real_of_num(0)) \226\134\146 real_sums((k : Num) => pow(x, 2 * k) / real_of_num(2 * k + 1), log((real_of_num(1) + x) / (real_of_num(1) - x)) / (real_of_num(2) * x), UNIV)
+  !((x : Real) > real_of_num(0)) \226\134\146 abs(-x) == -x
+  real_of_num(1) == abs(real_of_num(1))
+  sqrt(-(x : Real))
+  pow(sqrt((x : Real)), 2) == x
+  (real_of_num(0) < (x : Real)) == (x > real_of_num(0))
+  sqrt((x : Real))
+  (y : Real) > real_of_num(0) \226\134\146 !(y == real_of_num(0))
+  (k : Num)
+  (k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1) * pow((y : Real), 2 * k + 1) * inv(y)
+  \226\136\128 y : Real, y > real_of_num(0) && y < real_of_num(1) \226\134\146 real_sums((k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1) * pow(pow(y, 2), k), atn(y) / y, UNIV)
+  (x : Real) > real_of_num(0)
+  (i : Num) => real_of_num(0)
   0 < 1
-  &1 = &0 + sum(0..1 - 1) h
-  ~(1 <= 0)
-  1 <= i ==> ~(i = 0)
-  h 0 = &1 /\\ (forall i. 1 <= i ==> h i = &0)
-  h = \\k. -- &1 pow k / &(2 * k + 1) * &0 pow k
-  x = &0
-  forall x. abs x < &1\n\t\t\t       ==> ((\\k. ((-- &1) pow k / &(2 * k + 1)) * x pow k)\n\t\t\t\t      real_sums matan x) (:num)
-  2 * SUC m + 1 = 2 * m + 3
-  abs (-- &1) = &1
-  0 < SUC m
-  SUC m
+  real_of_num(1) == real_of_num(0) + sum(op_dot_dot(0, 1 - 1), (h : (Num) -> Real))
+  !(1 <= 0)
+  1 <= (i : Num) \226\134\146 !(i == 0)
+  (h : (Num) -> Real)(0) == real_of_num(1) && (\226\136\128 i : Num, 1 <= i \226\134\146 h(i) == real_of_num(0))
+  (h : (Num) -> Real) == ((k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1) * pow(real_of_num(0), k))
+  (x : Real) == real_of_num(0)
+  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_sums((k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1) * pow(x, k), matan(x), UNIV)
+  2 * SUC((m : Num)) + 1 == 2 * m + 3
+  abs(-real_of_num(1)) == real_of_num(1)
+  0 < SUC((m : Num))
+  SUC((m : Num))
   0
-  x:real
-  matan x
-  \\k. -- &1 pow k / &(2 * k + 1)
-  2 * SUC m + 1 = 2 * m + 3
-  abs (-- &1) = &1
-  inv (&(2 * m + 3)) = abs ((\\k. ((-- &1) pow k / &(2 * k + 1))) (SUC m))
-  SUC m - 1 = m
-  forall f. sum (0..m) f = sum (0..SUC m - 1) f
-  a * inv(c) * b = inv(c) * (a * b)
-  forall m x. abs x < &1 ==>\n\t\t       abs (matan x - sum (0..m) (\\k. ((-- &1) pow k / &(2 * k + 1)) * x pow k))\n\t\t\t     <= abs x pow (SUC m) / (&(2 * m + 3) * (&1 - abs x))
-  &0 < x ==> &0 <= x
-  &0 < x ==> ~(x = &0)
-  ~(sqrt x = &0)
-  ~(x' = &0) /\\ x' > &0
-  x:real
-  \\x. atn(sqrt(x)) / sqrt(x)
-  forall x. &0 < x ==>\n       (matan has_real_derivative (inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))))\n       (atreal x)
-  forall x. &0 < x ==>\n\treal_derivative matan x = inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))
-  a * b / c = b * a / c
-  2 * i + 3 = 2 * SUC i + 1
-  real_derivative matan x = f' x
-  (f':real->real) x
-  x:real
-  forall x. abs x < &1 ==>\n\tmatan real_differentiable atreal x\n\t/\\ ((\\i. ((-- &1) pow (SUC i) * &(SUC i) / &(2 * i + 3)) * x pow i) \n\t      real_sums (real_derivative matan x)) (from 0)
-  inv (&2) * (&2 * a + b) = a + inv(&2) * b
-  &0 < abs (&(2 * i + 3))
-  abs (-- &1) = &1 /\\ abs (&1) = &1
-  0 < SUC m
-  SUC m - 1 = m
-  forall f. sum (0..m) f = sum (0..SUC m - 1) f
-  a * inv(&2) * b = inv(&2) * (a * b)
-  forall x m. abs x < &1 ==>\n\tabs (real_derivative matan x \n\t     - sum (0..m) (\\i. ((-- &1) pow (SUC i) * &(SUC i) / &(2 * i + 3)) * x pow i))\n\t<= abs x pow (SUC m) / (&2 * (&1 - abs x))
-  &0 < x ==> &0 <= x
-  s * (x * inv t + s) = s * x * inv t + s pow 2
-  sqrt x
-  x * inv (&2 * sqrt x) + sqrt x = (&3 / &2) * x / sqrt x
-  &0 < x ==> &0 <= x
-  ~(sqrt x = &0)
-  &0 < x ==> ~(x = &0)
-  forall x. &0 < x ==>\n       ((\\x. inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))) has_real_derivative \n\t  (&3 / &4) * (atn(sqrt(x)) / (x pow 2 * sqrt(x))) \n\t- (&3 / &4) * inv(x pow 2 * (x + &1))\n\t- (&1 / &2) * inv(x * (x + &1) pow 2)) (atreal x)
-  &0 < x'
-  x:real
-  \\x. inv (&2 * x * (x + &1)) - atn(sqrt(x)) / (&2 * x * sqrt(x))
-  forall x. &0 < x ==>\n\treal_derivative (real_derivative matan) x =\n\t\t\t\t\t    (&3 / &4) * (atn(sqrt(x)) / (x pow 2 * sqrt(x))) \n\t\t\t\t\t    - (&3 / &4) * inv(x pow 2 * (x + &1))\n\t\t\t\t\t    - (&1 / &2) * inv(x * (x + &1) pow 2)
-  a * (b * d) / c = b * a * d / c
-  i + 2 = SUC (SUC i) /\\ 2 * i + 5 = 2 * SUC i + 3 /\\ i + 1 = SUC i
-  real_derivative (real_derivative matan) x = f' x
-  (f':real->real) x
-  x:real
-  x':real
-  &1
-  \\i. -- &1 pow SUC i * &(SUC i) / &(2 * i + 3)
-  real_derivative matan
-  forall x. abs x < &1 ==>\n\t(real_derivative matan) real_differentiable atreal x\n\t/\\ ((\\i. ((-- &1) pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i)\n\t      real_sums (real_derivative (real_derivative matan) x)) (from 0)
-  &1 / a <= &1 <=> inv a <= inv (&1)
-  a <= b <=> a <= &1 * b
+  (x : Real)
+  matan((x : Real))
+  (k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1)
+  2 * SUC((m : Num)) + 1 == 2 * m + 3
+  abs(-real_of_num(1)) == real_of_num(1)
+  inv(real_of_num(2 * (m : Num) + 3)) == abs(((k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1))(SUC(m)))
+  SUC((m : Num)) - 1 == m
+  \226\136\128 f : (Num) -> Real, sum(op_dot_dot(0, (m : Num)), f) == sum(op_dot_dot(0, SUC(m) - 1), f)
+  (a : Real) * (inv((c : Real)) * (b : Real)) == inv(c) * (a * b)
+  \226\136\128 m : Num, \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 abs(matan(x) - sum(op_dot_dot(0, m), (k : Num) => pow(-real_of_num(1), k) / real_of_num(2 * k + 1) * pow(x, k))) <= pow(abs(x), SUC(m)) / (real_of_num(2 * m + 3) * (real_of_num(1) - abs(x)))
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  !(sqrt((x : Real)) == real_of_num(0))
+  !((x' : Real) == real_of_num(0)) && x' > real_of_num(0)
+  (x : Real)
+  (x : Real) => atn(sqrt(x)) / sqrt(x)
+  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_derivative(matan, inv(real_of_num(2) * (x * (x + real_of_num(1)))) - atn(sqrt(x)) / (real_of_num(2) * (x * sqrt(x))), atreal(x))
+  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_derivative(matan, x) == inv(real_of_num(2) * (x * (x + real_of_num(1)))) - atn(sqrt(x)) / (real_of_num(2) * (x * sqrt(x)))
+  (a : Real) * ((b : Real) / (c : Real)) == b * (a / c)
+  2 * (i : Num) + 3 == 2 * SUC(i) + 1
+  real_derivative(matan, (x : Real)) == (f' : (Real) -> Real)(x)
+  (f' : (Real) -> Real)((x : Real))
+  (x : Real)
+  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_differentiable(matan, atreal(x)) && real_sums((i : Num) => pow(-real_of_num(1), SUC(i)) * (real_of_num(SUC(i)) / real_of_num(2 * i + 3)) * pow(x, i), real_derivative(matan, x), from(0))
+  inv(real_of_num(2)) * (real_of_num(2) * (a : Real) + (b : Real)) == a + inv(real_of_num(2)) * b
+  real_of_num(0) < abs(real_of_num(2 * (i : Num) + 3))
+  abs(-real_of_num(1)) == real_of_num(1) && abs(real_of_num(1)) == real_of_num(1)
+  0 < SUC((m : Num))
+  SUC((m : Num)) - 1 == m
+  \226\136\128 f : (Num) -> Real, sum(op_dot_dot(0, (m : Num)), f) == sum(op_dot_dot(0, SUC(m) - 1), f)
+  (a : Real) * (inv(real_of_num(2)) * (b : Real)) == inv(real_of_num(2)) * (a * b)
+  \226\136\128 x : Real, \226\136\128 m : Num, abs(x) < real_of_num(1) \226\134\146 abs(real_derivative(matan, x) - sum(op_dot_dot(0, m), (i : Num) => pow(-real_of_num(1), SUC(i)) * (real_of_num(SUC(i)) / real_of_num(2 * i + 3)) * pow(x, i))) <= pow(abs(x), SUC(m)) / (real_of_num(2) * (real_of_num(1) - abs(x)))
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  (s : Real) * ((x : Real) * inv((t : Real)) + s) == s * (x * inv(t)) + pow(s, 2)
+  sqrt((x : Real))
+  (x : Real) * inv(real_of_num(2) * sqrt(x)) + sqrt(x) == real_of_num(3) / real_of_num(2) * (x / sqrt(x))
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) <= x
+  !(sqrt((x : Real)) == real_of_num(0))
+  real_of_num(0) < (x : Real) \226\134\146 !(x == real_of_num(0))
+  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 has_real_derivative((x : Real) => inv(real_of_num(2) * (x * (x + real_of_num(1)))) - atn(sqrt(x)) / (real_of_num(2) * (x * sqrt(x))), real_of_num(3) / real_of_num(4) * (atn(sqrt(x)) / (pow(x, 2) * sqrt(x))) - real_of_num(3) / real_of_num(4) * inv(pow(x, 2) * (x + real_of_num(1))) - real_of_num(1) / real_of_num(2) * inv(x * pow(x + real_of_num(1), 2)), atreal(x))
+  real_of_num(0) < (x' : Real)
+  (x : Real)
+  (x : Real) => inv(real_of_num(2) * (x * (x + real_of_num(1)))) - atn(sqrt(x)) / (real_of_num(2) * (x * sqrt(x)))
+  \226\136\128 x : Real, real_of_num(0) < x \226\134\146 real_derivative(real_derivative(matan), x) == real_of_num(3) / real_of_num(4) * (atn(sqrt(x)) / (pow(x, 2) * sqrt(x))) - real_of_num(3) / real_of_num(4) * inv(pow(x, 2) * (x + real_of_num(1))) - real_of_num(1) / real_of_num(2) * inv(x * pow(x + real_of_num(1), 2))
+  (a : Real) * ((b : Real) * (d : Real) / (c : Real)) == b * (a * (d / c))
+  (i : Num) + 2 == SUC(SUC(i)) && 2 * i + 5 == 2 * SUC(i) + 3 && i + 1 == SUC(i)
+  real_derivative(real_derivative(matan), (x : Real)) == (f' : (Real) -> Real)(x)
+  (f' : (Real) -> Real)((x : Real))
+  (x : Real)
+  (x' : Real)
+  real_of_num(1)
+  (i : Num) => pow(-real_of_num(1), SUC(i)) * (real_of_num(SUC(i)) / real_of_num(2 * i + 3))
+  real_derivative(matan)
+  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_differentiable(real_derivative(matan), atreal(x)) && real_sums((i : Num) => pow(-real_of_num(1), i + 2) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5)) * pow(x, i), real_derivative(real_derivative(matan), x), from(0))
+  (real_of_num(1) / (a : Real) <= real_of_num(1)) == (inv(a) <= inv(real_of_num(1)))
+  ((a : Real) <= (b : Real)) == (a <= real_of_num(1) * b)
   0
-  \\i. abs x pow i
-  --(x / (&1 + x) pow 2)
-  &1 / (&1 + x)
-  real_summable (:num) f /\\ real_summable (:num) g /\\ real_summable (:num) h
-  x:real
-  x:real
-  forall i. -- &1 pow i / &(2 * i + 5) * x pow i = h i
-  forall i. (-- &1 pow i * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i = &1 / &4 * f i + &1 / &2 * g i + &3 / &4 * h i
-  h = \\i. (-- &1 pow i * (&1 / &(2 * i + 5))) * x pow i
-  g = \\i. (-- &1 pow i * &i) * x pow i
-  f = \\i. -- &1 pow i * x pow i
-  abs x < &1 ==> (&1 - x) / (&4 * (&1 + x) pow 2) = (&1 / &4) * (&1 / (&1 + x)) - (&1 / &2) * (x / (&1 + x) pow 2)
-  -- &1 pow 2 = &1
-  forall i. -- &1 pow (i + 2) = -- &1 pow i
-  forall x. abs x < &1 ==>\n\treal_derivative (real_derivative matan) x = (&1 - x) / (&4 * (&1 + x) pow 2)\n\t\t\t+ (&3 / &4) * real_infsum (:num) (\\i. ((-- &1) pow i / &(2 * i + 5)) * x pow i)\n\t\t\t/\\ real_summable (:num) (\\i. ((-- &1) pow i / &(2 * i + 5)) * x pow i)
-  pi / &4
-  &1 <= &5 * x <=> (&1 / &5) <= x
-  &1 <= t /\\ &0 <= (t - &1) pow 2 ==> t <= t pow 2 + &1
-  &1 <= t
-  &0 < t pow 2 + &1
-  &1
-  inv (t pow 5) * t pow 6 = t
-  a * b * c = (a * c) * b:real
-  &0 < a ==> ~(a = &0)
-  t pow 6
-  &1 <= t ==> &0 < t
-  forall n. &0 < t pow n
-  &0 <= a - b <=> b <= a
-  t:real
-  inv x' pow 5 * x' pow 10 = x' pow 5
-  inv x' pow 6 * x' pow 10 = x' pow 4
-  (&5 * a * p6 - ip5 * t) * p10 = &5 * a * (p6 * p10) - (ip5 * p10) * t
-  x' pow 10
-  &1 <= x'
-  forall n. ~(x' pow n = &0)
-  5 - 1 = 4 /\\ 5 * 2 = 10
-  &1 <= x' ==> ~(x' = &0)
-  real_interval [&1, y]
-  \\y. &5 * atn(y) / y pow 6 - inv(y pow 5 * (y pow 2 + &1))
-  forall x. --(atn x / x pow 5) = f x
-  f = \\y. --(atn y / y pow 5)
-  atn (&1) / (&1 pow 5)
-  &1 <= y
-  #0.65 = (&3 / &4) * (#0.65 * &4 / &3)
-  &1 <= x ==> &0 <= x
-  x:real
-  x pow 2 * y = y pow 5
-  y = sqrt x
-  a - b - c <= a <=> &0 <= b + c
-  (&3 / &4) * atn(sqrt x) / (x pow 2 * sqrt x)
-  &1 <= x ==> &0 < x
-  forall x. &1 <= x ==>\n\t\t      real_derivative (real_derivative matan) x <= #0.65
-  &1 <= x ==> &0 <= x
-  &1 <= x ==> &0 <= x
-  --(&3 / &4) * a - b <= c - (&3 / &4) * a - b <=> &0 <= c
-  &2 = &2 * &1
-  &2 = &1 * &2
-  &0 < &2
-  &3 * inv(&2) + &2 * inv(&2)
-  -- #0.65 <= --(&3 / &4) * a - (&1 / &2) * b <=>  &3 * a + &2 * b <= #2.6
-  -- (&3 / &4) * inv (x pow 2 * (x + &1)) - (&1 / &2) * inv (x * (x + &1) pow 2)
-  &1 <= x ==> &0 < x
-  forall x. &1 <= x ==>\n\t\t      -- #0.65 <= real_derivative (real_derivative matan) x
-  &0 <= x /\\ x < &1
-  inv (&n) = inv (&n) * &1
+  (i : Num) => pow(abs((x : Real)), i)
+  -((x : Real) / pow(real_of_num(1) + x, 2))
+  real_of_num(1) / (real_of_num(1) + (x : Real))
+  real_summable(UNIV, (f : (Num) -> Real)) && real_summable(UNIV, (g : (Num) -> Real)) && real_summable(UNIV, (h : (Num) -> Real))
+  (x : Real)
+  (x : Real)
+  \226\136\128 i : Num, pow(-real_of_num(1), i) / real_of_num(2 * i + 5) * pow((x : Real), i) == (h : (Num) -> Real)(i)
+  \226\136\128 i : Num, pow(-real_of_num(1), i) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5)) * pow((x : Real), i) == real_of_num(1) / real_of_num(4) * (f : (Num) -> Real)(i) + (real_of_num(1) / real_of_num(2) * (g : (Num) -> Real)(i) + real_of_num(3) / real_of_num(4) * (h : (Num) -> Real)(i))
+  (h : (Num) -> Real) == ((i : Num) => pow(-real_of_num(1), i) * (real_of_num(1) / real_of_num(2 * i + 5)) * pow((x : Real), i))
+  (g : (Num) -> Real) == ((i : Num) => pow(-real_of_num(1), i) * real_of_num(i) * pow((x : Real), i))
+  (f : (Num) -> Real) == ((i : Num) => pow(-real_of_num(1), i) * pow((x : Real), i))
+  abs((x : Real)) < real_of_num(1) \226\134\146 (real_of_num(1) - x) / (real_of_num(4) * pow(real_of_num(1) + x, 2)) == real_of_num(1) / real_of_num(4) * (real_of_num(1) / (real_of_num(1) + x)) - real_of_num(1) / real_of_num(2) * (x / pow(real_of_num(1) + x, 2))
+  pow(-real_of_num(1), 2) == real_of_num(1)
+  \226\136\128 i : Num, pow(-real_of_num(1), i + 2) == pow(-real_of_num(1), i)
+  \226\136\128 x : Real, abs(x) < real_of_num(1) \226\134\146 real_derivative(real_derivative(matan), x) == (real_of_num(1) - x) / (real_of_num(4) * pow(real_of_num(1) + x, 2)) + real_of_num(3) / real_of_num(4) * real_infsum(UNIV, (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 5) * pow(x, i)) && real_summable(UNIV, (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 5) * pow(x, i))
+  pi / real_of_num(4)
+  (real_of_num(1) <= real_of_num(5) * (x : Real)) == (real_of_num(1) / real_of_num(5) <= x)
+  real_of_num(1) <= (t : Real) && real_of_num(0) <= pow(t - real_of_num(1), 2) \226\134\146 t <= pow(t, 2) + real_of_num(1)
+  real_of_num(1) <= (t : Real)
+  real_of_num(0) < pow((t : Real), 2) + real_of_num(1)
+  real_of_num(1)
+  inv(pow((t : Real), 5)) * pow(t, 6) == t
+  (a : Real) * ((b : Real) * (c : Real)) == a * c * b
+  real_of_num(0) < (a : Real) \226\134\146 !(a == real_of_num(0))
+  pow((t : Real), 6)
+  real_of_num(1) <= (t : Real) \226\134\146 real_of_num(0) < t
+  \226\136\128 n : Num, real_of_num(0) < pow((t : Real), n)
+  (real_of_num(0) <= (a : Real) - (b : Real)) == (b <= a)
+  (t : Real)
+  pow(inv((x' : Real)), 5) * pow(x', 10) == pow(x', 5)
+  pow(inv((x' : Real)), 6) * pow(x', 10) == pow(x', 4)
+  (real_of_num(5) * ((a : Real) * (p6 : Real)) - (ip5 : Real) * (t : Real)) * (p10 : Real) == real_of_num(5) * (a * (p6 * p10)) - ip5 * p10 * t
+  pow((x' : Real), 10)
+  real_of_num(1) <= (x' : Real)
+  \226\136\128 n : Num, !(pow((x' : Real), n) == real_of_num(0))
+  5 - 1 == 4 && 5 * 2 == 10
+  real_of_num(1) <= (x' : Real) \226\134\146 !(x' == real_of_num(0))
+  real_interval([(real_of_num(1), (y : Real))])
+  (y : Real) => real_of_num(5) * (atn(y) / pow(y, 6)) - inv(pow(y, 5) * (pow(y, 2) + real_of_num(1)))
+  \226\136\128 x : Real, -(atn(x) / pow(x, 5)) == (f : (Real) -> Real)(x)
+  (f : (Real) -> Real) == ((y : Real) => -(atn(y) / pow(y, 5)))
+  atn(real_of_num(1)) / pow(real_of_num(1), 5)
+  real_of_num(1) <= (y : Real)
+  DECIMAL(65, 100) == real_of_num(3) / real_of_num(4) * (DECIMAL(65, 100) * (real_of_num(4) / real_of_num(3)))
+  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) <= x
+  (x : Real)
+  pow((x : Real), 2) * (y : Real) == pow(y, 5)
+  (y : Real) == sqrt((x : Real))
+  ((a : Real) - (b : Real) - (c : Real) <= a) == (real_of_num(0) <= b + c)
+  real_of_num(3) / real_of_num(4) * (atn(sqrt((x : Real))) / (pow(x, 2) * sqrt(x)))
+  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) < x
+  \226\136\128 x : Real, real_of_num(1) <= x \226\134\146 real_derivative(real_derivative(matan), x) <= DECIMAL(65, 100)
+  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) <= x
+  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) <= x
+  (-(real_of_num(3) / real_of_num(4)) * (a : Real) - (b : Real) <= (c : Real) - real_of_num(3) / real_of_num(4) * a - b) == (real_of_num(0) <= c)
+  real_of_num(2) == real_of_num(2) * real_of_num(1)
+  real_of_num(2) == real_of_num(1) * real_of_num(2)
+  real_of_num(0) < real_of_num(2)
+  real_of_num(3) * inv(real_of_num(2)) + real_of_num(2) * inv(real_of_num(2))
+  (-DECIMAL(65, 100) <= -(real_of_num(3) / real_of_num(4)) * (a : Real) - real_of_num(1) / real_of_num(2) * (b : Real)) == (real_of_num(3) * a + real_of_num(2) * b <= DECIMAL(26, 10))
+  -(real_of_num(3) / real_of_num(4)) * inv(pow((x : Real), 2) * (x + real_of_num(1))) - real_of_num(1) / real_of_num(2) * inv(x * pow(x + real_of_num(1), 2))
+  real_of_num(1) <= (x : Real) \226\134\146 real_of_num(0) < x
+  \226\136\128 x : Real, real_of_num(1) <= x \226\134\146 -DECIMAL(65, 100) <= real_derivative(real_derivative(matan), x)
+  real_of_num(0) <= (x : Real) && x < real_of_num(1)
+  inv(real_of_num((n : Num))) == inv(real_of_num(n)) * real_of_num(1)
   1
-  \\n. inv (&n)
-  SUC ((n + 1) + n) = 2 * (n + 1)
-  a * b <= &0 <=> &0 <= (-- &1 * a) * b
-  ((a * b) * c) * (d * e) * f = (a * d) * ((c * f) * b * e)
-  &0 <= x /\\ x < &1
-  x * y <= y <=> x * y <= &1 * y
-  &1 / &5 = abs ((\\i. -- &1 pow i / &(2 * i + 5) * x pow i) 0)
-  &3 / &20 = abs (&3 / &4) * (&1 / &5)
-  &1 <= a ==> &1 <= abs a
-  &0 <= x /\\ x < &1
-  &1
-  &0 <= x /\\ x < &1
-  &0 < x ==> &0 < abs x
-  &0 < &4 /\\ &0 < &4 * abs ((&1 + x) pow 2)
-  abs f + abs (&3 / &4 * r)
-  r = real_infsum (:num) (\\i. -- &1 pow i / &(2 * i + 5) * x pow i)
-  f = (&1 - x) / (&4 * (&1 + x) pow 2)
-  &1 / &4 + &3 / &20
-  x:real
-  forall x. &0 <= x /\\ x < &1 ==>\n\tabs (real_derivative (real_derivative matan) x) <= #0.65
-  (i + 2) + i = 2 * (i + 1)
-  -- &1 * --x = x
-  x pow i = (-- &1) pow i * (--x) pow i
-  (a * b) * x pow i = (a * x pow i) * b
-  from 0
-  \\i. (-- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i
-  x:real
-  forall x. -- &1 < x /\\ x < &0 ==>\n\t\t\t\t     &0 <= real_derivative (real_derivative matan) x
-  2 * 1 + 5 = 7
+  (n : Num) => inv(real_of_num(n))
+  SUC((n : Num) + 1 + n) == 2 * (n + 1)
+  ((a : Real) * (b : Real) <= real_of_num(0)) == (real_of_num(0) <= -real_of_num(1) * a * b)
+  (a : Real) * (b : Real) * (c : Real) * ((d : Real) * (e : Real) * (f : Real)) == a * d * (c * f * (b * e))
+  real_of_num(0) <= (x : Real) && x < real_of_num(1)
+  ((x : Real) * (y : Real) <= y) == (x * y <= real_of_num(1) * y)
+  real_of_num(1) / real_of_num(5) == abs(((i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 5) * pow((x : Real), i))(0))
+  real_of_num(3) / real_of_num(20) == abs(real_of_num(3) / real_of_num(4)) * (real_of_num(1) / real_of_num(5))
+  real_of_num(1) <= (a : Real) \226\134\146 real_of_num(1) <= abs(a)
+  real_of_num(0) <= (x : Real) && x < real_of_num(1)
+  real_of_num(1)
+  real_of_num(0) <= (x : Real) && x < real_of_num(1)
+  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
+  real_of_num(0) < real_of_num(4) && real_of_num(0) < real_of_num(4) * abs(pow(real_of_num(1) + (x : Real), 2))
+  abs((f : Real)) + abs(real_of_num(3) / real_of_num(4) * (r : Real))
+  (r : Real) == real_infsum(UNIV, (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 5) * pow((x : Real), i))
+  (f : Real) == (real_of_num(1) - (x : Real)) / (real_of_num(4) * pow(real_of_num(1) + x, 2))
+  real_of_num(1) / real_of_num(4) + real_of_num(3) / real_of_num(20)
+  (x : Real)
+  \226\136\128 x : Real, real_of_num(0) <= x && x < real_of_num(1) \226\134\146 abs(real_derivative(real_derivative(matan), x)) <= DECIMAL(65, 100)
+  (i : Num) + 2 + i == 2 * (i + 1)
+  -real_of_num(1) * -(x : Real) == x
+  pow((x : Real), (i : Num)) == pow(-real_of_num(1), i) * pow(-x, i)
+  (a : Real) * (b : Real) * pow((x : Real), (i : Num)) == a * pow(x, i) * b
+  from(0)
+  (i : Num) => pow(-real_of_num(1), i + 2) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5)) * pow((x : Real), i)
+  (x : Real)
+  \226\136\128 x : Real, -real_of_num(1) < x && x < real_of_num(0) \226\134\146 real_of_num(0) <= real_derivative(real_derivative(matan), x)
+  2 * 1 + 5 == 7
   0
   1
-  -- #0.2
-  \\i. -- &1 pow i / &(2 * i + 5)
+  -DECIMAL(2, 10)
+  (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 5)
   0 < 1
-  \\i. -- &1 pow i / &(2 * i + 5) * -- #0.2 pow i
+  (i : Num) => pow(-real_of_num(1), i) / real_of_num(2 * i + 5) * pow(-DECIMAL(2, 10), i)
   1
   0
-  a <= &15 / &32 /\\ b <= (&1 / &5 + &1 / &28) ==> a + (&3 / &4) * b <= #0.65
-  -- #0.2
-  -- &1 * y = --y
-  -- &1 pow 2 = &1
-  forall y. -- &1 pow (i + 2) * y pow i = (-- y) pow i
-  (a * b) * x pow i = (a * x pow i) * b
-  abs (-- #0.2) < &1
-  -- #0.2 <= x /\\ x < &0 ==> abs x < &1
-  from 0
-  \\i. (-- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * (-- #0.2) pow i
-  \\i. (-- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)) * x pow i
-  real_derivative (real_derivative matan) (-- #0.2)
-  forall x. -- #0.2 <= x /\\ x < &0 ==>\n\t\t\t\t     real_derivative (real_derivative matan) x <= #0.65
-  x:real
-  x:real
-  x:real
-  x < &1
-  x:real
-  x:real
-  x < &0
-  forall x. -- #0.2 <= x ==>\n\t\t\t     abs (real_derivative (real_derivative matan) x) <= #0.65
+  (a : Real) <= real_of_num(15) / real_of_num(32) && (b : Real) <= real_of_num(1) / real_of_num(5) + real_of_num(1) / real_of_num(28) \226\134\146 a + real_of_num(3) / real_of_num(4) * b <= DECIMAL(65, 100)
+  -DECIMAL(2, 10)
+  -real_of_num(1) * (y : Real) == -y
+  pow(-real_of_num(1), 2) == real_of_num(1)
+  \226\136\128 y : Real, pow(-real_of_num(1), (i : Num) + 2) * pow(y, i) == pow(-y, i)
+  (a : Real) * (b : Real) * pow((x : Real), (i : Num)) == a * pow(x, i) * b
+  abs(-DECIMAL(2, 10)) < real_of_num(1)
+  -DECIMAL(2, 10) <= (x : Real) && x < real_of_num(0) \226\134\146 abs(x) < real_of_num(1)
+  from(0)
+  (i : Num) => pow(-real_of_num(1), i + 2) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5)) * pow(-DECIMAL(2, 10), i)
+  (i : Num) => pow(-real_of_num(1), i + 2) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5)) * pow((x : Real), i)
+  real_derivative(real_derivative(matan), -DECIMAL(2, 10))
+  \226\136\128 x : Real, -DECIMAL(2, 10) <= x && x < real_of_num(0) \226\134\146 real_derivative(real_derivative(matan), x) <= DECIMAL(65, 100)
+  (x : Real)
+  (x : Real)
+  (x : Real)
+  (x : Real) < real_of_num(1)
+  (x : Real)
+  (x : Real)
+  (x : Real) < real_of_num(0)
+  \226\136\128 x : Real, -DECIMAL(2, 10) <= x \226\134\146 abs(real_derivative(real_derivative(matan), x)) <= DECIMAL(65, 100)
 Matan.matan =  |- (#forall:fun(fun(real,bool),bool) (\x:real. ((#=:fun(real,fun(real,bool)) (#matan:fun(real,real) x:real)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#=:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (((#COND:fun(bool,fun(real,fun(real,real))) ((#real_gt:fun(real,fun(real,bool)) x:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#real_div:fun(real,fun(real,real)) (#atn:fun(real,real) (#sqrt:fun(real,real) x:real))) (#sqrt:fun(real,real) x:real))) ((#real_div:fun(real,fun(real,real)) (#log:fun(real,real) ((#real_div:fun(real,fun(real,real)) ((#real_add:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) x:real)))) ((#real_sub:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) x:real)))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#sqrt:fun(real,real) (#real_neg:fun(real,real) x:real)))))))))
 Matan.dmatan =  |- ((#=:fun(fun(real,real),fun(fun(real,real),bool)) #dmatan:fun(real,real)) (#real_derivative:fun(fun(real,real),fun(real,real)) #matan:fun(real,real)))
 Matan.ddmatan =  |- ((#=:fun(fun(real,real),fun(fun(real,real),bool)) #ddmatan:fun(real,real)) (#real_derivative:fun(fun(real,real),fun(real,real)) (#real_derivative:fun(fun(real,real),fun(real,real)) #matan:fun(real,real))))

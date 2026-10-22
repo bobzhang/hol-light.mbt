@@ -197,27 +197,27 @@ Warning: inventing type variables
 Warning: inventing type variables
 Warning: inventing type variables
 thecops quotations (21):
-  hashek = T
+  (hashek : Bool) == true
   hashek
   hashek
-  ((x /\\ hashek) ==> (y /\\ hashek)) ==> (x ==> y)
-  ~ hashek <=> F
+  ((x : Bool) && hashek \226\134\146 (y : Bool) && hashek) \226\134\146 x \226\134\146 y
+  !hashek == false
   hashek
-  x:A = y
+  (x : A) == (y : A)
   (x:A = x) /\\ (~(x = y) \\/ y = x) /\\\n     (~(x:A = y) \\/ ~(x = z) \\/ (y = z))
-  (a ==> b) <=> ~a \\/ b
-  (a <=> b) ==> b \\/ ~a
-  c \\/ b \\/ a
-  c ==> c \\/ b \\/ a
-  b ==> c \\/ b \\/ a
-  a ==> c \\/ b \\/ a
-  a \\/ b \\/ c
-  F
-  p:bool
-  ~p
-  F
-  ~p
-  p:bool
+  ((a : Bool) \226\134\146 (b : Bool)) == (!a || b)
+  (a : Bool) == (b : Bool) \226\134\146 b || !a
+  (c : Bool) || (b : Bool) || (a : Bool)
+  (c : Bool) \226\134\146 c || (b : Bool) || (a : Bool)
+  (b : Bool) \226\134\146 (c : Bool) || b || (a : Bool)
+  (a : Bool) \226\134\146 (c : Bool) || (b : Bool) || a
+  (a : Bool) || (b : Bool) || (c : Bool)
+  false
+  (p : Bool)
+  !(p : Bool)
+  false
+  !(p : Bool)
+  (p : Bool)
 lean_refl =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x:'A))))
 lean_drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#forall:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
 lean_trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) (#forall:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((R:fun('A,fun('A,bool)) x:'A) x:'A))))

@@ -25,7 +25,7 @@ pub fn vec2_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// oriented_area
 fn step_3() -> Unit raise {
-  oriented_area_c.set(@pair.new_definition(@parser.parse_term("oriented_area (a:real^2,b:real^2,c:real^2) =\n  ((b$1 - a$1) * (c$2 - a$2) - (c$1 - a$1) * (b$2 - a$2)) / &2")))
+  oriented_area_c.set(@pair.new_definition(@term_syntax.parse_term("(oriented_area : ((Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])) -> Real)(((a : Cart[Real, Tybit0[Unit]]), (b : Cart[Real, Tybit0[Unit]]), (c : Cart[Real, Tybit0[Unit]]))) == ((op_dollar(b, 1) - op_dollar(a, 1)) * (op_dollar(c, 2) - op_dollar(a, 2)) - (op_dollar(c, 1) - op_dollar(a, 1)) * (op_dollar(b, 2) - op_dollar(a, 2))) / real_of_num(2)")))
 }
 
 ///|

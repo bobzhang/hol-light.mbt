@@ -25,7 +25,7 @@ pub fn my_rule_float(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// list_sum
 fn step_2() -> Unit raise {
-  list_sum_c.set(@pair.new_definition(@parser.parse_term("list_sum list f = ITLIST (\\t1 t2. f t1 + t2) list (&0)")))
+  list_sum_c.set(@pair.new_definition(@term_syntax.parse_term("(list_sum : (List[_], (_) -> Real) -> Real)((list : List[_]), (f : (_) -> Real)) == ITLIST((t1 : _) => (t2 : Real) => f(t1) + t2, list, real_of_num(0))")))
 }
 
 ///|
@@ -40,7 +40,7 @@ pub fn list_sum() -> @kernel.Thm {
 ///|
 /// list_sum2
 fn step_3() -> Unit raise {
-  list_sum2_c.set(@pair.new_definition(@parser.parse_term("list_sum2 f l1 l2 = ITLIST2 (\\a b c. f a b + c) l1 l2 (&0)")))
+  list_sum2_c.set(@pair.new_definition(@term_syntax.parse_term("(list_sum2 : ((_, _) -> Real, List[_], List[_]) -> Real)((f : (_, _) -> Real), (l1 : List[_]), (l2 : List[_])) == ITLIST2((a : _) => (b : _) => (c : Real) => f(a, b) + c, l1, l2, real_of_num(0))")))
 }
 
 ///|
@@ -55,7 +55,7 @@ pub fn list_sum2() -> @kernel.Thm {
 ///|
 /// error_mul_f2
 fn step_4() -> Unit raise {
-  error_mul_f2_c.set(@pair.new_definition(@parser.parse_term("error_mul_f2 a int = a * iabs int")))
+  error_mul_f2_c.set(@pair.new_definition(@term_syntax.parse_term("(error_mul_f2 : (Real, (Real, Real)) -> Real)((a : Real), (int : (Real, Real))) == a * iabs(int)")))
 }
 
 ///|
@@ -70,7 +70,7 @@ pub fn error_mul_f2() -> @kernel.Thm {
 ///|
 /// error_mul_f1
 fn step_5() -> Unit raise {
-  error_mul_f1_c.set(@pair.new_definition(@parser.parse_term("error_mul_f1 w x list = x * list_sum2 error_mul_f2 w list")))
+  error_mul_f1_c.set(@pair.new_definition(@term_syntax.parse_term("(error_mul_f1 : (List[Real], Real, List[(Real, Real)]) -> Real)((w : List[Real]), (x : Real), (list : List[(Real, Real)])) == x * list_sum2(error_mul_f2, w, list)")))
 }
 
 ///|
@@ -86,7 +86,7 @@ pub fn error_mul_f1() -> @kernel.Thm {
 /// LIST_SUM_A_EMPTY
 fn step_6() -> Unit raise {
   let t5 = @simp.rewrite_tac(@list.List([list_sum(), @lists.itlist()]))
-  list_sum_a_empty_c.set(@tactics.prove(@parser.parse_term("list_sum [] (f:A->real) = &0"), t5))
+  list_sum_a_empty_c.set(@tactics.prove(@term_syntax.parse_term("list_sum(NIL, (f : (A) -> Real)) == real_of_num(0)"), t5))
 }
 
 ///|
@@ -102,7 +102,7 @@ pub fn list_sum_a_empty() -> @kernel.Thm {
 /// LIST_SUM_A_H
 fn step_7() -> Unit raise {
   let t6 = @simp.rewrite_tac(@list.List([list_sum(), @lists.itlist(), @calc_int.real_add_rid()]))
-  list_sum_a_h_c.set(@tactics.prove(@parser.parse_term("list_sum [h:A] f = f h"), t6))
+  list_sum_a_h_c.set(@tactics.prove(@term_syntax.parse_term("list_sum([(h : A)], (f : (A) -> Real)) == f(h)"), t6))
 }
 
 ///|
@@ -118,7 +118,7 @@ pub fn list_sum_a_h() -> @kernel.Thm {
 /// LIST_SUM_A_CONS
 fn step_8() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([list_sum(), @lists.itlist()]))
-  list_sum_a_cons_c.set(@tactics.prove(@parser.parse_term("list_sum (CONS (h:A) t) f = f h + list_sum t f"), t7))
+  list_sum_a_cons_c.set(@tactics.prove(@term_syntax.parse_term("list_sum(CONS((h : A), (t : List[A])), (f : (A) -> Real)) == f(h) + list_sum(t, f)"), t7))
 }
 
 ///|
@@ -184,7 +184,7 @@ pub fn list_sum_conv(x8 : (@kernel.Term) -> @kernel.Thm raise, x9 : @kernel.Term
 /// LIST_SUM2_0_LE'
 fn step_9() -> Unit raise {
   let t19 = @simp.rewrite_tac(@list.List([list_sum2(), @lists.itlist2(), @realax.real_le_refl()]))
-  let t20 = (@parser.parse_term("list_sum2 (f:A->B->real) [] [] <= &0"), t19)
+  let t20 = (@term_syntax.parse_term("list_sum2((f : (A, B) -> Real), NIL, NIL) <= real_of_num(0)"), t19)
   list_sum2_0_le_p_c.set(my_rule_float((fn(x18 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x18.0, x18.1)
   })(t20)))
@@ -203,7 +203,7 @@ pub fn list_sum2_0_le_p() -> @kernel.Thm {
 /// LIST_SUM2_1_LE'
 fn step_10() -> Unit raise {
   let t22 = @simp.rewrite_tac(@list.List([list_sum2(), @lists.itlist2(), @calc_int.real_add_rid()]))
-  let t23 = (@parser.parse_term("f h1 h2 <= x ==> list_sum2 (f:A->B->real) [h1] [h2] <= x"), t22)
+  let t23 = (@term_syntax.parse_term("(f : (A, B) -> Real)((h1 : A), (h2 : B)) <= (x : Real) → list_sum2(f, [h1], [h2]) <= x"), t22)
   list_sum2_1_le_p_c.set(my_rule_float((fn(x21 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x21.0, x21.1)
   })(t23)))
@@ -222,10 +222,10 @@ pub fn list_sum2_1_le_p() -> @kernel.Thm {
 /// LIST_SUM2_LE'
 fn step_11() -> Unit raise {
   let t27 = @simp.asm_simp_tac(@list.List([@real.real_le_add2()]))
-  let t26 = @tactics.exists_tac(@parser.parse_term("x + y:real"))
+  let t26 = @tactics.exists_tac(@term_syntax.parse_term("(x : Real) + (y : Real)"))
   let t25 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([list_sum2(), @lists.itlist2()])), @tactics.strip_tac), t25), t26), t27)
-  let t29 = (@parser.parse_term("f h1 h2 <= x /\\ list_sum2 f t1 t2 <= y /\\ x + y <= z ==>\n\t\t\t\t\tlist_sum2 (f:A->B->real) (CONS h1 t1) (CONS h2 t2) <= z"), t28)
+  let t29 = (@term_syntax.parse_term("(f : (A, B) -> Real)((h1 : A), (h2 : B)) <= (x : Real) && list_sum2(f, (t1 : List[A]), (t2 : List[B])) <= (y : Real) && x + y <= (z : Real) → list_sum2(f, CONS(h1, t1), CONS(h2, t2)) <= z"), t28)
   list_sum2_le_p_c.set(my_rule_float((fn(x24 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x24.0, x24.1)
   })(t29)))
@@ -369,7 +369,7 @@ pub fn error_mul_f2_le_conv(x61 : Int64, x62 : @kernel.Term, x63 : @kernel.Term)
 fn step_13() -> Unit raise {
   let t67 = @simp.asm_rewrite_tac(@list.List([]))
   let t68 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([error_mul_f2()])), @tactics.strip_tac), t67)
-  let t69 = (@parser.parse_term("iabs int = x /\\ a * x <= y ==> error_mul_f2 a int <= y"), t68)
+  let t69 = (@term_syntax.parse_term("iabs((int : (Real, Real))) == (x : Real) && (a : Real) * x <= (y : Real) → error_mul_f2(a, int) <= y"), t68)
   error_mul_f2_lemma_p_c.set(my_rule_float((fn(x66 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x66.0, x66.1)
   })(t69)))
@@ -407,7 +407,7 @@ pub fn error_mul_f2_le_conv2(x70 : Int64, x71 : @kernel.Term, x72 : @kernel.Term
 /// ERROR_MUL_F1_LEMMA'
 fn step_14() -> Unit raise {
   let t80 = @simp.rewrite_tac(@list.List([error_mul_f1()]))
-  let t81 = (@parser.parse_term("x * list_sum2 error_mul_f2 w list <= z ==>\n\t\t\t\t\t   error_mul_f1 w x list <= z"), t80)
+  let t81 = (@term_syntax.parse_term("(x : Real) * list_sum2(error_mul_f2, (w : List[Real]), (list : List[(Real, Real)])) <= (z : Real) → error_mul_f1(w, x, list) <= z"), t80)
   error_mul_f1_lemma_p_c.set(my_rule_float((fn(x79 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x79.0, x79.1)
   })(t81)))
@@ -425,7 +425,7 @@ pub fn error_mul_f1_lemma_p() -> @kernel.Thm {
 ///|
 /// list_sum2_error2_const
 fn step_15() -> Unit raise {
-  list_sum2_error2_const_c.set(@parser.parse_term("list_sum2 error_mul_f2"))
+  list_sum2_error2_const_c.set(@term_syntax.parse_term("list_sum2(error_mul_f2)"))
 }
 
 ///|
@@ -440,7 +440,7 @@ pub fn list_sum2_error2_const() -> @kernel.Term {
 ///|
 /// w_var_list
 fn step_16() -> Unit raise {
-  w_var_list_c.set(@parser.parse_term("w:(real)list"))
+  w_var_list_c.set(@term_syntax.parse_term("(w : List[Real])"))
 }
 
 ///|
@@ -455,7 +455,7 @@ pub fn w_var_list() -> @kernel.Term {
 ///|
 /// list_var
 fn step_17() -> Unit raise {
-  list_var_c.set(@parser.parse_term("list:(real#real)list"))
+  list_var_c.set(@term_syntax.parse_term("(list : List[(Real, Real)])"))
 }
 
 ///|

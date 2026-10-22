@@ -9940,10 +9940,10 @@ test "Rqe/inferisign matches Rqe/inferisign.ml" {
       #|  Pos
       #|  Zero
       #|  Neg
-      #|  APPEND:real list -> real list -> real list
-      #|  APPEND:(sign list) list -> (sign list) list -> (sign list) list
-      #|  LENGTH:real list -> num
-      #|  LENGTH:(sign list) list -> num
+      #|  (APPEND : (List[Real], List[Real]) -> List[Real])
+      #|  (APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])
+      #|  (LENGTH : (List[Real]) -> Num)
+      #|  (LENGTH : (List[List[Sign]]) -> Num)
       #|  Unknown
       #|  Pos
       #|  Zero
@@ -9953,7 +9953,7 @@ test "Rqe/inferisign matches Rqe/inferisign.ml" {
       #|  :real
       #|  1
       #|  2
-      #|  F
+      #|  false
       #|  interpmat
       #|  :sign list
       #|types = sign/0 metric/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2

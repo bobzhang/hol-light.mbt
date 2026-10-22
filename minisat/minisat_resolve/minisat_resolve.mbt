@@ -74,8 +74,8 @@ pub fn[TA] get_var_num(x7 : TA, x8 : @kernel.Term) -> Int64 raise {
 ///|
 /// dualise
 fn step_2() -> Unit raise {
-  let pth_and = @class.taut(@parser.parse_term("F \\/ F <=> F"))
-  let pth_not = @class.taut(@parser.parse_term("~T <=> F"))
+  let pth_and = @class.taut(@term_syntax.parse_term("(false || false) == false"))
+  let pth_not = @class.taut(@term_syntax.parse_term("!true == false"))
   fn refute_disj(x9 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x9
     match tm {
@@ -175,7 +175,7 @@ pub fn getclause(x25 : @lib.Func[@kernel.Term, @kernel.Term], x26 : @omap.T[@ker
 ///|
 /// resolve
 fn step_3() -> Unit raise {
-  let pth = @bool.undisch(@class.taut(@parser.parse_term("F ==> p")))
+  let pth = @bool.undisch(@class.taut(@term_syntax.parse_term("false → (p : Bool)")))
   let p = @kernel.concl(pth)
   let f_tm = @lib.hd(@kernel.hyp(pth))
   resolve_c.set(fn(x29 : @kernel.Term) -> ((Bool) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise {

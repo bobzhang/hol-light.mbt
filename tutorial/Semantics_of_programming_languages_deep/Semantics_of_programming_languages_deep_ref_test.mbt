@@ -5654,7 +5654,7 @@ test "Tutorial/Semantics_of_programming_languages_deep matches Tutorial/Semantic
       #|  Assign
       #|  Plus
       #|  Times
-      #|  (value (Literal n) s = n) /\\\n  (value (Variable x) s = s(x)) /\\\n  (value (e1 + e2) s = value e1 s + value e2 s) /\\\n  (value (e1 * e2) s = value e1 s * value e2 s)
+      #|  (value : (Expression, (List[Char]) -> Num) -> Num)(Literal((n : Num)), (s : (List[Char]) -> Num)) == n && value(Variable((x : List[Char])), s) == s(x) && value((e1 : Expression) + (e2 : Expression), s) == value(e1, s) + value(e2, s) && value(e1 * e2, s) == value(e1, s) * value(e2, s)
       #|  :P
       #|  :P
       #|  :P
@@ -5670,19 +5670,19 @@ test "Tutorial/Semantics_of_programming_languages_deep matches Tutorial/Semantic
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \\n. n + 1
-      #|  (forall x e s s'. s'(x) = value e s /\\ (forall y. ~(y = x) ==> s'(y) = s(y))\n               ==> sem (x := e) s s') /\\\n   (forall c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s'' ==> sem(c1 ;; c2) s s'') /\\\n   (forall e c1 c2 s s'. ~(value e s = 0) /\\ sem(c1) s s' ==> sem(If e c1 c2) s s') /\\\n   (forall e c1 c2 s s'. value e s = 0 /\\ sem(c2) s s' ==> sem(If e c1 c2) s s') /\\\n   (forall e c s. value e s = 0 ==> sem(While e c) s s) /\\\n   (forall e c s s' s''. ~(value e s = 0) /\\ sem(c) s s' /\\ sem(While e c) s' s''\n                   ==> sem(While e c) s s'')
-      #|  forall c s s' s''. sem c s s' /\\ sem c s s'' ==> (s' = s'')
-      #|  wlp c q s <=> forall s'. sem c s s' ==> q s'
-      #|  terminates c s <=> ?s'. sem c s s'
-      #|  wp c q s <=> terminates c s /\\ wlp c q s
-      #|  forall c. (wp c EMPTY = EMPTY)
-      #|  q SUBSET r ==> wp c q SUBSET wp c r
-      #|  (wp c p) UNION (wp c q) = wp c (p UNION q)
-      #|  forall c1 c2 q. wp (c1 ;; c2) = wp c1 o wp c2
-      #|  correct p c q <=> p SUBSET (wp c q)
-      #|  forall p p' c q. p SUBSET p' /\\ correct p' c q ==> correct p c q
-      #|  forall p c q q'. correct p c q' /\\ q' SUBSET q ==> correct p c q
-      #|  forall p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 ;; c2) q
+      #|  (\226\136\128 x : List[Char], \226\136\128 e : Expression, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, s'(x) == value(e, s) && (\226\136\128 y : List[Char], !(y == x) \226\134\146 s'(y) == s(y)) \226\134\146 (sem : (Command, (List[Char]) -> Num, (List[Char]) -> Num) -> Bool)(Assign(x, e), s, s')) && (\226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, \226\136\128 s'' : (List[Char]) -> Num, sem(c1, s, s') && sem(c2, s', s'') \226\134\146 sem(Sequence(c1, c2), s, s'')) && (\226\136\128 e : Expression, \226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, !(value(e, s) == 0) && sem(c1, s, s') \226\134\146 sem(If(e, c1, c2), s, s')) && (\226\136\128 e : Expression, \226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, value(e, s) == 0 && sem(c2, s, s') \226\134\146 sem(If(e, c1, c2), s, s')) && (\226\136\128 e : Expression, \226\136\128 c : Command, \226\136\128 s : (List[Char]) -> Num, value(e, s) == 0 \226\134\146 sem(While(e, c), s, s)) && (\226\136\128 e : Expression, \226\136\128 c : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, \226\136\128 s'' : (List[Char]) -> Num, !(value(e, s) == 0) && sem(c, s, s') && sem(While(e, c), s', s'') \226\134\146 sem(While(e, c), s, s''))
+      #|  \226\136\128 c : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, \226\136\128 s'' : (List[Char]) -> Num, sem(c, s, s') && sem(c, s, s'') \226\134\146 s' == s''
+      #|  (wlp : (Command, ((List[Char]) -> Num) -> Bool, (List[Char]) -> Num) -> Bool)((c : Command), (q : ((List[Char]) -> Num) -> Bool), (s : (List[Char]) -> Num)) == (\226\136\128 s' : (List[Char]) -> Num, sem(c, s, s') \226\134\146 q(s'))
+      #|  (terminates : (Command, (List[Char]) -> Num) -> Bool)((c : Command), (s : (List[Char]) -> Num)) == (\226\136\131 s' : (List[Char]) -> Num, sem(c, s, s'))
+      #|  (wp : (Command, ((List[Char]) -> Num) -> Bool, (List[Char]) -> Num) -> Bool)((c : Command), (q : ((List[Char]) -> Num) -> Bool), (s : (List[Char]) -> Num)) == (terminates(c, s) && wlp(c, q, s))
+      #|  \226\136\128 c : Command, wp(c, {}) == {}
+      #|  SUBSET((q : ((List[Char]) -> Num) -> Bool), (r : ((List[Char]) -> Num) -> Bool)) \226\134\146 SUBSET(wp((c : Command), q), wp(c, r))
+      #|  UNION(wp((c : Command), (p : ((List[Char]) -> Num) -> Bool)), wp(c, (q : ((List[Char]) -> Num) -> Bool))) == wp(c, UNION(p, q))
+      #|  \226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 q : _, wp(Sequence(c1, c2)) == o(wp(c1), wp(c2))
+      #|  (correct : (((List[Char]) -> Num) -> Bool, Command, ((List[Char]) -> Num) -> Bool) -> Bool)((p : ((List[Char]) -> Num) -> Bool), (c : Command), (q : ((List[Char]) -> Num) -> Bool)) == SUBSET(p, wp(c, q))
+      #|  \226\136\128 p : ((List[Char]) -> Num) -> Bool, \226\136\128 p' : ((List[Char]) -> Num) -> Bool, \226\136\128 c : Command, \226\136\128 q : ((List[Char]) -> Num) -> Bool, SUBSET(p, p') && correct(p', c, q) \226\134\146 correct(p, c, q)
+      #|  \226\136\128 p : ((List[Char]) -> Num) -> Bool, \226\136\128 c : Command, \226\136\128 q : ((List[Char]) -> Num) -> Bool, \226\136\128 q' : ((List[Char]) -> Num) -> Bool, correct(p, c, q') && SUBSET(q', q) \226\134\146 correct(p, c, q)
+      #|  \226\136\128 p : ((List[Char]) -> Num) -> Bool, \226\136\128 q : ((List[Char]) -> Num) -> Bool, \226\136\128 r : ((List[Char]) -> Num) -> Bool, \226\136\128 c1 : Command, \226\136\128 c2 : Command, correct(p, c1, r) && correct(r, c2, q) \226\134\146 correct(p, Sequence(c1, c2), q)
       #|string_INDUCT =  |- (#forall:fun(fun(fun(string,bool),bool),bool) (\P:fun(string,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(int),bool),bool) (\a:list(int). (P:fun(string,bool) (#String:fun(list(int),string) a:list(int)))))) (#forall:fun(fun(string,bool),bool) (\x:string. (P:fun(string,bool) x:string))))))
       #|string_RECURSION =  |- (#forall:fun(fun(fun(list(int),'Z),bool),bool) (\f:fun(list(int),'Z). (#?:fun(fun(fun(string,'Z),bool),bool) (\fn:fun(string,'Z). (#forall:fun(fun(list(int),bool),bool) (\a:list(int). ((#=:fun('Z,fun('Z,bool)) (fn:fun(string,'Z) (#String:fun(list(int),string) a:list(int)))) (f:fun(list(int),'Z) a:list(int)))))))))
       #|expression_INDUCT =  |- (#forall:fun(fun(fun(expression,bool),bool),bool) (\P:fun(expression,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. (P:fun(expression,bool) (#Literal:fun(num,expression) a:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(list(char),bool),bool) (\a:list(char). (P:fun(expression,bool) (#Variable:fun(list(char),expression) a:list(char)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(expression,bool),bool) (\a0:expression. (#forall:fun(fun(expression,bool),bool) (\a1:expression. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(expression,bool) a0:expression)) (P:fun(expression,bool) a1:expression))) (P:fun(expression,bool) ((#Plus:fun(expression,fun(expression,expression)) a0:expression) a1:expression)))))))) (#forall:fun(fun(expression,bool),bool) (\a0:expression. (#forall:fun(fun(expression,bool),bool) (\a1:expression. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(expression,bool) a0:expression)) (P:fun(expression,bool) a1:expression))) (P:fun(expression,bool) ((#Times:fun(expression,fun(expression,expression)) a0:expression) a1:expression))))))))))) (#forall:fun(fun(expression,bool),bool) (\x:expression. (P:fun(expression,bool) x:expression))))))

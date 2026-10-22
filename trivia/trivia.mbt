@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 /// o_DEF
 fn step_2() -> Unit raise {
   o_def_c.set(
-    @drule.new_definition(@parser.parse_term("(o) (f:B->C) g = \\x:A. f(g(x))")),
+    @drule.new_definition(@term_syntax.parse_term("(o : ((B) -> C, (A) -> B, A) -> C)((f : (B) -> C), (g : (A) -> B)) == ((x : A) => f(g(x)))")),
   )
 }
 
@@ -26,7 +26,7 @@ pub fn o_def() -> @kernel.Thm {
 ///|
 /// I_DEF
 fn step_3() -> Unit raise {
-  i_def_c.set(@drule.new_definition(@parser.parse_term("I = \\x:A. x")))
+  i_def_c.set(@drule.new_definition(@term_syntax.parse_term("(I : (A) -> A) == ((x : A) => x)")))
 }
 
 ///|
@@ -52,7 +52,7 @@ fn step_4() -> Unit raise {
   )
   o_thm_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:B->C. forall g:A->B. forall x:A. (f o g) x = f(g(x))"),
+      @term_syntax.parse_term("∀ f : (B) -> C, ∀ g : (A) -> B, ∀ x : A, o(f, g, x) == f(g(x))"),
       t3,
     ),
   )
@@ -81,7 +81,7 @@ fn step_5() -> Unit raise {
   )
   o_assoc_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:C->D. forall g:B->C. forall h:A->B. f o (g o h) = (f o g) o h"),
+      @term_syntax.parse_term("∀ f : (C) -> D, ∀ g : (B) -> C, ∀ h : (A) -> B, o(f, o(g, h)) == o(o(f, g), h)"),
       t6,
     ),
   )
@@ -100,7 +100,7 @@ pub fn o_assoc() -> @kernel.Thm {
 /// I_THM
 fn step_6() -> Unit raise {
   let t7 = @simp.rewrite_tac(@list.List([i_def()]))
-  i_thm_c.set(@tactics.prove(@parser.parse_term("forall x:A. I x = x"), t7))
+  i_thm_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : A, I(x) == x"), t7))
 }
 
 ///|
@@ -121,7 +121,7 @@ fn step_7() -> Unit raise {
   let t9 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8)
   i_o_id_c.set(
     @tactics.prove(
-      @parser.parse_term("forall f:A->B. (I o f = f) /\\ (f o I = f)"),
+      @term_syntax.parse_term("∀ f : (A) -> B, o(I, f) == f && o(f, I) == f"),
       t9,
     ),
   )
@@ -142,12 +142,12 @@ fn step_8() -> Unit raise {
   let t10 = @tactics.accept_tac(@bool.truth())
   let t11 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("T")),
+      @tactics.exists_tac(@term_syntax.parse_term("true")),
       @tactics.beta_tac,
     ),
     t10,
   )
-  exists_one_rep_c.set(@tactics.prove(@parser.parse_term("?b:bool. b"), t11))
+  exists_one_rep_c.set(@tactics.prove(@term_syntax.parse_term("∃ b : Bool, b"), t11))
 }
 
 ///|
@@ -179,7 +179,7 @@ pub fn one_tydef() -> @kernel.Thm {
 ///|
 /// one_DEF
 fn step_10() -> Unit raise {
-  one_def_c.set(@drule.new_definition(@parser.parse_term("one = @x:1. T")))
+  one_def_c.set(@drule.new_definition(@term_syntax.parse_term("(one : Unit) == select((x : Unit) => true)")))
 }
 
 ///|
@@ -205,7 +205,7 @@ fn step_11() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.mp_tac(
-            @bool.gen_all(@bool.spec(@parser.parse_term("one_REP a"), t12)),
+            @bool.gen_all(@bool.spec(@term_syntax.parse_term("one_REP((a : Unit))"), t12)),
           ),
           t13,
         ),
@@ -215,7 +215,7 @@ fn step_11() -> Unit raise {
     ),
     t15,
   )
-  one_c.set(@tactics.prove(@parser.parse_term("forall v:1. v = one"), t16))
+  one_c.set(@tactics.prove(@term_syntax.parse_term("∀ v : Unit, v == one"), t16))
 }
 
 ///|
@@ -242,7 +242,7 @@ fn step_12() -> Unit raise {
     ),
     @tactics.refl_tac,
   )
-  one_axiom_c.set(@tactics.prove(@parser.parse_term("forall f g. f = (g:A->1)"), t19))
+  one_axiom_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> Unit, ∀ g : (A) -> Unit, f == g"), t19))
 }
 
 ///|
@@ -260,7 +260,7 @@ fn step_13() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([]))
   let t21 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([one()])), t20)
   one_induct_c.set(
-    @tactics.prove(@parser.parse_term("forall P. P one ==> forall x. P x"), t21),
+    @tactics.prove(@term_syntax.parse_term("∀ P : (Unit) -> Bool, P(one) → (∀ x : Unit, P(x))"), t21),
   )
 }
 
@@ -280,7 +280,7 @@ fn step_14() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.gen_tac,
-        @tactics.exists_tac(@parser.parse_term("\\x:1. e:A")),
+        @tactics.exists_tac(@term_syntax.parse_term("(x : Unit) => (e : A)")),
       ),
       @tactics.beta_tac,
     ),
@@ -396,7 +396,7 @@ fn step_16() -> Unit raise {
     t31,
   )
   forall_one_thm_c.set(
-    @tactics.prove(@parser.parse_term("(forall x. P x) <=> P one"), t32),
+    @tactics.prove(@term_syntax.parse_term("(∀ x : Unit, (P : (Unit) -> Bool)(x)) == P(one)"), t32),
   )
 }
 
@@ -422,12 +422,12 @@ fn step_17() -> Unit raise {
       ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
         x33
       },
-      @list.List([@class.taut(@parser.parse_term("(p <=> q) <=> (~p <=> ~q)"))]),
+      @list.List([@class.taut(@term_syntax.parse_term("((p : Bool) == (q : Bool)) == (!p == !q)"))]),
     ),
     t34,
   )
   exists_one_thm_c.set(
-    @tactics.prove(@parser.parse_term("(?x. P x) <=> P one"), t35),
+    @tactics.prove(@term_syntax.parse_term("(∃ x : Unit, (P : (Unit) -> Bool)(x)) == P(one)"), t35),
   )
 }
 
@@ -456,7 +456,7 @@ fn step_18() -> Unit raise {
     @tactics.refl_tac,
   )
   eta_one_c.set(
-    @tactics.prove(@parser.parse_term("forall f:1->A. (\\x. f one) = f"), t38),
+    @tactics.prove(@term_syntax.parse_term("∀ f : (Unit) -> A, ((x : Unit) => f(one)) == f"), t38),
   )
 }
 

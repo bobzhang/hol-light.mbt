@@ -1166,32 +1166,32 @@ test "realax matches realax.ml" {
       #|  :A->A->A
       #|  :A->A->A
       #|  :num->A
-      #|  (>=):num->num->bool
-      #|  (>):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<):num->num->bool
-      #|  (*):num->num->num
-      #|  (-):num->num->num
-      #|  (+):num->num->num
-      #|  dist(m,n) = (m - n) + (n - m)
-      #|  forall n. dist(n,n) = 0
-      #|  forall n. dist(0,n) = n
-      #|  forall n. dist(n,0) = n
-      #|  forall m n. dist(m,n) = dist(n,m)
-      #|  forall m p n. dist(m + n,m + p) = dist(n,p)
-      #|  forall m p n. dist(m + p,n + p) = dist(m,n)
-      #|  forall m n. dist(m + n,m) = n
-      #|  forall m n. dist(m,m + n) = n
-      #|  forall m n p. m * dist(n,p) = dist(m * n,m * p)
-      #|  forall m n p. dist(m,n) * p = dist(m * p,n * p)
-      #|  forall m n. (dist(m,n) = 0) <=> (m = n)
-      #|  e = 0
-      #|  e:num
-      #|  y:num
-      #|  x:num
+      #|  op_gt_eq
+      #|  op_gt
+      #|  op_lt_eq
+      #|  op_lt
+      #|  op_star
+      #|  op_minus
+      #|  op_plus
+      #|  (dist : ((Num, Num)) -> Num)(((m : Num), (n : Num))) == m - n + (n - m)
+      #|  \226\136\128 n : Num, dist((n, n)) == 0
+      #|  \226\136\128 n : Num, dist((0, n)) == n
+      #|  \226\136\128 n : Num, dist((n, 0)) == n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, dist((m, n)) == dist((n, m))
+      #|  \226\136\128 m : Num, \226\136\128 p : Num, \226\136\128 n : Num, dist((m + n, m + p)) == dist((n, p))
+      #|  \226\136\128 m : Num, \226\136\128 p : Num, \226\136\128 n : Num, dist((m + p, n + p)) == dist((m, n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, dist((m + n, m)) == n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, dist((m, m + n)) == n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, m * dist((n, p)) == dist((m * n, m * p))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 p : Num, dist((m, n)) * p == dist((m * p, n * p))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (dist((m, n)) == 0) == (m == n)
+      #|  (e : Num) == 0
+      #|  (e : Num)
+      #|  (y : Num)
+      #|  (x : Num)
       #|  P(dist(x,y)) <=> forall d. ((x = y + d) ==> P(d)) /\\ ((y = x + d) ==> P(d))
       #|  forall m n p. dist(m,n) <= p <=> (m <= n + p) /\\ (n <= m + p)
-      #|  forall m n. dist(m,n) <= m + n
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, dist((m, n)) <= m + n
       #|  (forall m n p. dist(m,p) <= dist(m,n) + dist(n,p)) /\\\n     (forall m n p q. dist(m + n,p + q) <= dist(m,p) + dist(n,q)) /\\\n     (forall m n p q. dist(m,p) <= dist(m + n,p + q) + dist(n,q))
       #|  (+)
       #|  (+)
@@ -1241,678 +1241,678 @@ test "realax matches realax.ml" {
       #|  (+)
       #|  (+)
       #|  (+)
-      #|  dist(m,n) + dist(n,p)
+      #|  dist(((m : Num), (n : Num))) + dist((n, (p : Num)))
       #|  forall m n p q. dist(m,n) + dist(n,p) <= q ==> dist(m,p) <= q
-      #|  q:num
-      #|  n:num
+      #|  (q : Num)
+      #|  (n : Num)
       #|  forall m n p q r s.\n        dist(m,n) <= r /\\ dist(p,q) <= s ==> dist(m,p) <= dist(n,q) + r + s
-      #|  SUC C
-      #|  forall A B C. (forall n. A * n <= B * n + C) <=> A <= B
-      #|  B:num
+      #|  SUC((C : Num))
+      #|  \226\136\128 A : Num, \226\136\128 B : Num, \226\136\128 C : Num, (\226\136\128 n : Num, A * n <= B * n + C) == (A <= B)
+      #|  (B : Num)
       #|  0
-      #|  A:num
-      #|  forall A B. (forall n. A * n <= B) <=> (A = 0)
-      #|  n:num
-      #|  n:num
-      #|  ~(n = 0)
-      #|  B * n
-      #|  A * n + B
-      #|  n = 0
-      #|  P(0) + A + B
-      #|  (P:num->num) n
-      #|  n:num
-      #|  P(0) + A + B
+      #|  (A : Num)
+      #|  \226\136\128 A : Num, \226\136\128 B : Num, (\226\136\128 n : Num, A * n <= B) == (A == 0)
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  !((n : Num) == 0)
+      #|  (B : Num) * (n : Num)
+      #|  (A : Num) * (n : Num) + (B : Num)
+      #|  (n : Num) == 0
+      #|  (P : (Num) -> Num)(0) + ((A : Num) + (B : Num))
+      #|  (P : (Num) -> Num)((n : Num))
+      #|  (n : Num)
+      #|  (P : (Num) -> Num)(0) + ((A : Num) + (B : Num))
       #|  0
-      #|  B:num
+      #|  (B : Num)
       #|  forall P. (?B. forall n. P(n) <= B) <=>\n       (?A B. forall n. n * P(n) <= A * n + B)
-      #|  p:num
-      #|  m + n
-      #|  ~(m + n = 0)
-      #|  A * (m + n) + B
-      #|  m + n = 0
-      #|  A + B
+      #|  (p : Num)
+      #|  (m : Num) + (n : Num)
+      #|  !((m : Num) + (n : Num) == 0)
+      #|  (A : Num) * ((m : Num) + (n : Num)) + (B : Num)
+      #|  (m : Num) + (n : Num) == 0
+      #|  (A : Num) + (B : Num)
       #|  forall P A B. (P 0 0 = 0) /\\ (forall m n. P m n <= A * (m + n) + B) ==>\n       (?B. forall m n. P m n <= B * (m + n))
-      #|  ~(SUC N <= i)
-      #|  Q(i:num) + B
-      #|  SUC N <= i
-      #|  i:num
-      #|  B + P(N:num)
-      #|  B:num
-      #|  N:num
-      #|  N:num
-      #|  B:num
-      #|  B:num
-      #|  B:num
+      #|  !(SUC((N : Num)) <= (i : Num))
+      #|  (Q : (Num) -> Num)((i : Num)) + (B : Num)
+      #|  SUC((N : Num)) <= (i : Num)
+      #|  (i : Num)
+      #|  (B : Num) + (P : (Num) -> Num)((N : Num))
+      #|  (B : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  (B : Num)
       #|  forall P Q. (?B. forall i. P(i) <= Q(i) + B) <=>\n         (?B N. forall i. N <= i ==> P(i) <= Q(i) + B)
       #|  is_nadd x <=> (?B. forall m n. dist(m * x(n),n * x(m)) <= B * (m + n))
-      #|  is_nadd (\\n. 0)
+      #|  is_nadd((n : Num) => 0)
       #|  dest_nadd
       #|  mk_nadd
       #|  forall x. ?B. forall m n. dist(m * fn x n,n * fn x m) <= B * (m + n)
       #|  1
-      #|  n:num
-      #|  B:num
-      #|  B + fn x 1
-      #|  x:nadd
-      #|  B:num
-      #|  forall x. ?A B. forall n. fn x n <= A * n + B
-      #|  (~a ==> b) <=> a \\/ b
-      #|  ~(n = 0)
-      #|  n = 0
-      #|  B + fn x 0
-      #|  x:nadd
-      #|  B:num
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  (B : Num) + dest_nadd((x : Nadd), 1)
+      #|  (x : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\131 A : Num, \226\136\131 B : Num, \226\136\128 n : Num, dest_nadd(x, n) <= A * n + B
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) == (a || b)
+      #|  !((n : Num) == 0)
+      #|  (n : Num) == 0
+      #|  (B : Num) + dest_nadd((x : Nadd), 0)
+      #|  (x : Nadd)
+      #|  (B : Num)
       #|  forall x. ?B. forall m n. dist(fn x (m * n),m * fn x n) <= B * m + B
       #|  (+)
       #|  (+)
       #|  (+)
       #|  (+)
-      #|  1 + 1 + 1
-      #|  (m + n) * 3 * B = B * (m + m + n) + B * (n + m + n)
-      #|  (~a ==> b) <=> a \\/ b
-      #|  ~(m + n = 0)
-      #|  3 * B
-      #|  m + n = 0
-      #|  3 * B + fn x 0
-      #|  x:nadd
-      #|  B:num
+      #|  1 + (1 + 1)
+      #|  ((m : Num) + (n : Num)) * (3 * (B : Num)) == B * (m + (m + n)) + B * (n + (m + n))
+      #|  (!(a : Bool) \226\134\146 (b : Bool)) == (a || b)
+      #|  !((m : Num) + (n : Num) == 0)
+      #|  3 * (B : Num)
+      #|  (m : Num) + (n : Num) == 0
+      #|  3 * (B : Num) + dest_nadd((x : Nadd), 0)
+      #|  (x : Nadd)
+      #|  (B : Num)
       #|  forall x. ?B. forall m n. dist(fn x (m + n),fn x m + fn x n) <= B
       #|  (+)
       #|  (+)
-      #|  fn x n + fn x 1
-      #|  B + fn x 1
-      #|  x:nadd
-      #|  B:num
-      #|  forall x. ?B. forall n. dist(fn x (SUC n),fn x n) <= B
-      #|  fn x (m + n)
-      #|  B:num
-      #|  x:nadd
-      #|  B:num
-      #|  forall x. ?B. forall m n. dist(fn x (m + n),fn x m) <= B * n
-      #|  n:num
-      #|  m:num
-      #|  B:num
-      #|  x:nadd
-      #|  B:num
-      #|  forall x. ?B. forall m n. dist(fn x m,fn x n) <= B * dist(m,n)
-      #|  B * (n + fn y n)
-      #|  B * L
-      #|  B * (1 + M)
-      #|  L:num
-      #|  M:num
-      #|  y:nadd
-      #|  x:nadd
-      #|  B:num
+      #|  dest_nadd((x : Nadd), (n : Num)) + dest_nadd(x, 1)
+      #|  (B : Num) + dest_nadd((x : Nadd), 1)
+      #|  (x : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\131 B : Num, \226\136\128 n : Num, dist((dest_nadd(x, SUC(n)), dest_nadd(x, n))) <= B
+      #|  dest_nadd((x : Nadd), (m : Num) + (n : Num))
+      #|  (B : Num)
+      #|  (x : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\131 B : Num, \226\136\128 m : Num, \226\136\128 n : Num, dist((dest_nadd(x, m + n), dest_nadd(x, m))) <= B * n
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (B : Num)
+      #|  (x : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\131 B : Num, \226\136\128 m : Num, \226\136\128 n : Num, dist((dest_nadd(x, m), dest_nadd(x, n))) <= B * dist((m, n))
+      #|  (B : Num) * ((n : Num) + dest_nadd((y : Nadd), n))
+      #|  (B : Num) * (L : Num)
+      #|  (B : Num) * (1 + (M : Num))
+      #|  (L : Num)
+      #|  (M : Num)
+      #|  (y : Nadd)
+      #|  (x : Nadd)
+      #|  (B : Num)
       #|  forall x y. ?A B. forall n. dist(n * fn x (fn y n),fn x n * fn y n) <= A * n + B
-      #|  (nadd_eq):nadd->nadd->bool
-      #|  x === y <=> ?B. forall n. dist(fn x n,fn y n) <= B
-      #|  forall x. x === x
-      #|  forall x y. x === y <=> y === x
-      #|  fn y n
-      #|  n:num
-      #|  B1 + B2
-      #|  B2:num
-      #|  B1:num
-      #|  forall x y z. x === y /\\ y === z ==> x === z
-      #|  nadd_of_num:num->nadd
-      #|  &k = afn(\\n. k * n)
-      #|  forall k. fn(&k) = \\n. k * n
-      #|  forall m n. (m = n) ==> &m === &n
-      #|  forall m n. (&m === &n) <=> (m = n)
-      #|  nadd_le:nadd->nadd->bool
-      #|  x <<= y <=> ?B. forall n. fn x n <= fn y n + B
-      #|  n:num
-      #|  (B2 + B) + B1
-      #|  B:num
-      #|  B2:num
-      #|  B1:num
+      #|  (nadd_eq : (Nadd, Nadd) -> Bool)
+      #|  (nadd_eq : (Nadd, Nadd) -> Bool)((x : Nadd), (y : Nadd)) == (\226\136\131 B : Num, \226\136\128 n : Num, dist((dest_nadd(x, n), dest_nadd(y, n))) <= B)
+      #|  \226\136\128 x : Nadd, nadd_eq(x, x)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_eq(x, y) == nadd_eq(y, x)
+      #|  dest_nadd((y : Nadd), (n : Num))
+      #|  (n : Num)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (B2 : Num)
+      #|  (B1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_eq(x, y) && nadd_eq(y, z) \226\134\146 nadd_eq(x, z)
+      #|  (nadd_of_num : (Num) -> Nadd)
+      #|  (nadd_of_num : (Num) -> Nadd)((k : Num)) == mk_nadd((n : Num) => k * n)
+      #|  \226\136\128 k : Num, dest_nadd(nadd_of_num(k)) == ((n : Num) => k * n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m == n \226\134\146 nadd_eq(nadd_of_num(m), nadd_of_num(n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, nadd_eq(nadd_of_num(m), nadd_of_num(n)) == (m == n)
+      #|  (nadd_le : (Nadd, Nadd) -> Bool)
+      #|  (nadd_le : (Nadd, Nadd) -> Bool)((x : Nadd), (y : Nadd)) == (\226\136\131 B : Num, \226\136\128 n : Num, dest_nadd(x, n) <= dest_nadd(y, n) + B)
+      #|  (n : Num)
+      #|  (B2 : Num) + (B : Num) + (B1 : Num)
+      #|  (B : Num)
+      #|  (B2 : Num)
+      #|  (B1 : Num)
       #|  forall x x' y y'. x === x' /\\ y === y' /\\ x <<= y ==> x' <<= y'
-      #|  y':nadd
-      #|  x':nadd
-      #|  y:nadd
-      #|  x:nadd
+      #|  (y' : Nadd)
+      #|  (x' : Nadd)
+      #|  (y : Nadd)
+      #|  (x : Nadd)
       #|  forall x x' y y'. x === x' /\\ y === y' ==> (x <<= y <=> x' <<= y')
-      #|  forall x. x <<= x
-      #|  B2 + B1
-      #|  B2:num
-      #|  B1:num
-      #|  forall x y z. x <<= y /\\ y <<= z ==> x <<= z
-      #|  B:num
-      #|  B:num
-      #|  B1 + B2
-      #|  B2:num
-      #|  B1:num
-      #|  forall x y. x <<= y /\\ y <<= x <=> (x === y)
-      #|  n = 0
-      #|  n:num
-      #|  B + fn x 0
-      #|  n:num
+      #|  \226\136\128 x : Nadd, nadd_le(x, x)
+      #|  (B2 : Num) + (B1 : Num)
+      #|  (B2 : Num)
+      #|  (B1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_le(x, y) && nadd_le(y, z) \226\134\146 nadd_le(x, z)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (B2 : Num)
+      #|  (B1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, (nadd_le(x, y) && nadd_le(y, x)) == nadd_eq(x, y)
+      #|  (n : Num) == 0
+      #|  (n : Num)
+      #|  (B : Num) + dest_nadd((x : Nadd), 0)
+      #|  (n : Num)
       #|  forall x y. ~(x <<= y) ==> forall B. ?n. ~(n = 0) /\\ fn y n + B < fn x n
       #|  (a + b + c) + (d + e + f) = (d + b + e) + (a + c + f)
       #|  (~a /\\ b) /\\ (~c /\\ d) ==> ~(c \\/ ~b) /\\ ~(a \\/ ~d)
-      #|  n:num
-      #|  m:num
-      #|  B1 + B2
-      #|  y:nadd
-      #|  B2:num
-      #|  x:nadd
-      #|  B1:num
-      #|  a <=> ~ ~ a
-      #|  forall x y. x <<= y \\/ y <<= x
-      #|  forall x. ?n. x <<= &n
-      #|  forall m n. (&m <<= &n) <=> m <= n
-      #|  nadd_add:nadd->nadd->nadd
-      #|  x ++ y = afn(\\n. fn x n + fn y n)
-      #|  n:num
-      #|  m:num
-      #|  B1 + B2
-      #|  y:nadd
-      #|  B2:num
-      #|  x:nadd
-      #|  B1:num
-      #|  forall x y. fn(x ++ y) = \\n. fn x n + fn y n
-      #|  n:num
-      #|  B1 + B2
-      #|  B2:num
-      #|  B1:num
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (y : Nadd)
+      #|  (B2 : Num)
+      #|  (x : Nadd)
+      #|  (B1 : Num)
+      #|  (a : Bool) == !!a
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_le(x, y) || nadd_le(y, x)
+      #|  \226\136\128 x : Nadd, \226\136\131 n : Num, nadd_le(x, nadd_of_num(n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, nadd_le(nadd_of_num(m), nadd_of_num(n)) == (m <= n)
+      #|  (nadd_add : (Nadd, Nadd) -> Nadd)
+      #|  (nadd_add : (Nadd, Nadd) -> Nadd)((x : Nadd), (y : Nadd)) == mk_nadd((n : Num) => dest_nadd(x, n) + dest_nadd(y, n))
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (y : Nadd)
+      #|  (B2 : Num)
+      #|  (x : Nadd)
+      #|  (B1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, dest_nadd(nadd_add(x, y)) == ((n : Num) => dest_nadd(x, n) + dest_nadd(y, n))
+      #|  (n : Num)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (B2 : Num)
+      #|  (B1 : Num)
       #|  forall x x' y y'. x === x' /\\ y === y' ==> (x ++ y === x' ++ y')
-      #|  forall x y. (x ++ y) === (y ++ x)
-      #|  forall x y z. (x ++ (y ++ z)) === ((x ++ y) ++ z)
-      #|  forall x. (&0 ++ x) === x
-      #|  forall x y z. (x ++ y) === (x ++ z) ==> y === z
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_eq(nadd_add(x, y), nadd_add(y, x))
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_eq(nadd_add(x, nadd_add(y, z)), nadd_add(nadd_add(x, y), z))
+      #|  \226\136\128 x : Nadd, nadd_eq(nadd_add(nadd_of_num(0), x), x)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_eq(nadd_add(x, y), nadd_add(x, z)) \226\134\146 nadd_eq(y, z)
       #|  0
-      #|  forall x y. x <<= (x ++ y)
-      #|  n * fn x m
-      #|  m * fn x n
-      #|  B1 + (B2 + B)
-      #|  y:nadd
-      #|  B2:num
-      #|  x:nadd
-      #|  B1:num
-      #|  fn(afn d) = d
-      #|  n:num
-      #|  B:num
-      #|  afn d
-      #|  d:num->num
-      #|  B:num
-      #|  forall x y. x <<= y ==> ?d. y === x ++ d
-      #|  forall m n. &m ++ &n === &(m + n)
-      #|  nadd_mul:nadd->nadd->nadd
-      #|  x ** y = afn(\\n. fn x (fn y n))
-      #|  C * dist(m * fn y n,n * fn y m)
-      #|  fn x (n * fn y m)
-      #|  fn x (m * fn y n)
-      #|  (D * m + D) + (D * n + D) + C * B * (m + n)
-      #|  D + D
-      #|  D + C * B
-      #|  x:nadd
-      #|  D:num
-      #|  x:nadd
-      #|  C:num
-      #|  y:nadd
-      #|  B:num
-      #|  forall x y. fn(x ** y) = \\n. fn x (fn y n)
-      #|  fn x n * fn y n
-      #|  (a + b) + (c + d) = (a + c) + (b + d)
-      #|  B1 + B2
-      #|  A1 + A2
-      #|  B2:num
-      #|  x:nadd
-      #|  y:nadd
-      #|  A2:num
-      #|  B1:num
-      #|  y:nadd
-      #|  x:nadd
-      #|  A1:num
-      #|  forall x y. (x ** y) === (y ** x)
-      #|  forall x y z. (x ** (y ** z)) === ((x ** y) ** z)
-      #|  forall x. (&1 ** x) === x
-      #|  B:num
-      #|  x:nadd
-      #|  B:num
-      #|  forall x y z. x ** (y ++ z) === (x ** y) ++ (x ** z)
-      #|  B2 * dist(fn y n,fn y' n)
-      #|  n:num
-      #|  B2 * B1
-      #|  x:nadd
-      #|  B2:num
-      #|  B1:num
-      #|  forall x y y'. y === y' ==> (x ** y) === (x ** y')
-      #|  y ** x
-      #|  y ** x'
-      #|  x' ** y
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_le(x, nadd_add(x, y))
+      #|  (n : Num) * dest_nadd((x : Nadd), (m : Num))
+      #|  (m : Num) * dest_nadd((x : Nadd), (n : Num))
+      #|  (B1 : Num) + ((B2 : Num) + (B : Num))
+      #|  (y : Nadd)
+      #|  (B2 : Num)
+      #|  (x : Nadd)
+      #|  (B1 : Num)
+      #|  dest_nadd(mk_nadd((d : (Num) -> Num))) == d
+      #|  (n : Num)
+      #|  (B : Num)
+      #|  mk_nadd((d : (Num) -> Num))
+      #|  (d : (Num) -> Num)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_le(x, y) \226\134\146 (\226\136\131 d : Nadd, nadd_eq(y, nadd_add(x, d)))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, nadd_eq(nadd_add(nadd_of_num(m), nadd_of_num(n)), nadd_of_num(m + n))
+      #|  (nadd_mul : (Nadd, Nadd) -> Nadd)
+      #|  (nadd_mul : (Nadd, Nadd) -> Nadd)((x : Nadd), (y : Nadd)) == mk_nadd((n : Num) => dest_nadd(x, dest_nadd(y, n)))
+      #|  (C : Num) * dist(((m : Num) * dest_nadd((y : Nadd), (n : Num)), n * dest_nadd(y, m)))
+      #|  dest_nadd((x : Nadd), (n : Num) * dest_nadd((y : Nadd), (m : Num)))
+      #|  dest_nadd((x : Nadd), (m : Num) * dest_nadd((y : Nadd), (n : Num)))
+      #|  (D : Num) * (m : Num) + D + (D * (n : Num) + D + (C : Num) * ((B : Num) * (m + n)))
+      #|  (D : Num) + D
+      #|  (D : Num) + (C : Num) * (B : Num)
+      #|  (x : Nadd)
+      #|  (D : Num)
+      #|  (x : Nadd)
+      #|  (C : Num)
+      #|  (y : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, dest_nadd(nadd_mul(x, y)) == ((n : Num) => dest_nadd(x, dest_nadd(y, n)))
+      #|  dest_nadd((x : Nadd), (n : Num)) * dest_nadd((y : Nadd), n)
+      #|  (a : Num) + (b : Num) + ((c : Num) + (d : Num)) == a + c + (b + d)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (A1 : Num) + (A2 : Num)
+      #|  (B2 : Num)
+      #|  (x : Nadd)
+      #|  (y : Nadd)
+      #|  (A2 : Num)
+      #|  (B1 : Num)
+      #|  (y : Nadd)
+      #|  (x : Nadd)
+      #|  (A1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_eq(nadd_mul(x, y), nadd_mul(y, x))
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_eq(nadd_mul(x, nadd_mul(y, z)), nadd_mul(nadd_mul(x, y), z))
+      #|  \226\136\128 x : Nadd, nadd_eq(nadd_mul(nadd_of_num(1), x), x)
+      #|  (B : Num)
+      #|  (x : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_eq(nadd_mul(x, nadd_add(y, z)), nadd_add(nadd_mul(x, y), nadd_mul(x, z)))
+      #|  (B2 : Num) * dist((dest_nadd((y : Nadd), (n : Num)), dest_nadd((y' : Nadd), n)))
+      #|  (n : Num)
+      #|  (B2 : Num) * (B1 : Num)
+      #|  (x : Nadd)
+      #|  (B2 : Num)
+      #|  (B1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 y' : Nadd, nadd_eq(y, y') \226\134\146 nadd_eq(nadd_mul(x, y), nadd_mul(x, y'))
+      #|  nadd_mul((y : Nadd), (x : Nadd))
+      #|  nadd_mul((y : Nadd), (x' : Nadd))
+      #|  nadd_mul((x' : Nadd), (y : Nadd))
       #|  forall x x' y y'. x === x' /\\ y === y'\n               ==> (x ** y) === (x' ** y')
-      #|  forall m n. &m ** &n === &(m * n)
-      #|  forall x. &0 <<= x
-      #|  B:num
-      #|  B:num
-      #|  forall x y. x === y ==> x <<= y
-      #|  x ** (y ++ d)
-      #|  x ** y ++ x ** d
-      #|  d:nadd
-      #|  forall x y z. y <<= z ==> (x ** y) <<= (x ** z)
-      #|  forall x y z. x <<= y ==> (x ** z) <<= (y ** z)
-      #|  forall x y z. x ++ z <<= y ++ z <=> x <<= y
-      #|  forall x y z. x ++ y <<= x ++ z <=> y <<= z
-      #|  forall x y z. (x ++ y) ** z === x ** z ++ y ** z
-      #|  i * fn x N
-      #|  B * i
-      #|  i:num
-      #|  B * N
-      #|  N:num
-      #|  N:num
-      #|  B + k
-      #|  x:nadd
-      #|  B:num
-      #|  forall x k. ~(x === &0) ==> ?N. &k <<= &N ** x
-      #|  (&1 ++ &N) ** x
-      #|  &1 ** x ++ &N ** x
-      #|  &(N + 1) ** x === x ++ &N ** x
-      #|  k:nadd
-      #|  &N ** x
-      #|  ~(x === &0)
-      #|  N + 1
-      #|  p:num
-      #|  N:num
-      #|  k:nadd
-      #|  p:num
-      #|  forall x k. (forall n. &n ** x <<= k) ==> (x === &0)
-      #|  z:nadd
-      #|  y ++ &0
-      #|  y ++ d
-      #|  d:nadd
-      #|  y:nadd
-      #|  x:nadd
-      #|  forall x y z. (forall n. &n ** x <<= &n ** y ++ z) ==> x <<= y
-      #|  &n ** x
-      #|  n:num
-      #|  x:nadd
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, nadd_eq(nadd_mul(nadd_of_num(m), nadd_of_num(n)), nadd_of_num(m * n))
+      #|  \226\136\128 x : Nadd, nadd_le(nadd_of_num(0), x)
+      #|  (B : Num)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_eq(x, y) \226\134\146 nadd_le(x, y)
+      #|  nadd_mul((x : Nadd), nadd_add((y : Nadd), (d : Nadd)))
+      #|  nadd_add(nadd_mul((x : Nadd), (y : Nadd)), nadd_mul(x, (d : Nadd)))
+      #|  (d : Nadd)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_le(y, z) \226\134\146 nadd_le(nadd_mul(x, y), nadd_mul(x, z))
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_le(x, y) \226\134\146 nadd_le(nadd_mul(x, z), nadd_mul(y, z))
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_le(nadd_add(x, z), nadd_add(y, z)) == nadd_le(x, y)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_le(nadd_add(x, y), nadd_add(x, z)) == nadd_le(y, z)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, nadd_eq(nadd_mul(nadd_add(x, y), z), nadd_add(nadd_mul(x, z), nadd_mul(y, z)))
+      #|  (i : Num) * dest_nadd((x : Nadd), (N : Num))
+      #|  (B : Num) * (i : Num)
+      #|  (i : Num)
+      #|  (B : Num) * (N : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (B : Num) + (k : Num)
+      #|  (x : Nadd)
+      #|  (B : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 k : Num, !nadd_eq(x, nadd_of_num(0)) \226\134\146 (\226\136\131 N : Num, nadd_le(nadd_of_num(k), nadd_mul(nadd_of_num(N), x)))
+      #|  nadd_mul(nadd_add(nadd_of_num(1), nadd_of_num((N : Num))), (x : Nadd))
+      #|  nadd_add(nadd_mul(nadd_of_num(1), (x : Nadd)), nadd_mul(nadd_of_num((N : Num)), x))
+      #|  nadd_eq(nadd_mul(nadd_of_num((N : Num) + 1), (x : Nadd)), nadd_add(x, nadd_mul(nadd_of_num(N), x)))
+      #|  (k : Nadd)
+      #|  nadd_mul(nadd_of_num((N : Num)), (x : Nadd))
+      #|  !nadd_eq((x : Nadd), nadd_of_num(0))
+      #|  (N : Num) + 1
+      #|  (p : Num)
+      #|  (N : Num)
+      #|  (k : Nadd)
+      #|  (p : Num)
+      #|  \226\136\128 x : Nadd, \226\136\128 k : Nadd, (\226\136\128 n : Num, nadd_le(nadd_mul(nadd_of_num(n), x), k)) \226\134\146 nadd_eq(x, nadd_of_num(0))
+      #|  (z : Nadd)
+      #|  nadd_add((y : Nadd), nadd_of_num(0))
+      #|  nadd_add((y : Nadd), (d : Nadd))
+      #|  (d : Nadd)
+      #|  (y : Nadd)
+      #|  (x : Nadd)
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, \226\136\128 z : Nadd, (\226\136\128 n : Num, nadd_le(nadd_mul(nadd_of_num(n), x), nadd_add(nadd_mul(nadd_of_num(n), y), z))) \226\134\146 nadd_le(x, y)
+      #|  nadd_mul(nadd_of_num((n : Num)), (x : Nadd))
+      #|  (n : Num)
+      #|  (x : Nadd)
       #|  0
-      #|  &(r(n:num)) ++ &1
-      #|  n:num
-      #|  &1
-      #|  z:nadd
-      #|  n * r(i:num) + n
-      #|  i:num
-      #|  n:num
+      #|  nadd_add(nadd_of_num((r : (Num) -> Num)((n : Num))), nadd_of_num(1))
+      #|  (n : Num)
+      #|  nadd_of_num(1)
+      #|  (z : Nadd)
+      #|  (n : Num) * (r : (Num) -> Num)((i : Num)) + n
+      #|  (i : Num)
+      #|  (n : Num)
       #|  0
-      #|  &(SUC(r(n:num)))
-      #|  n:num
-      #|  &2
-      #|  x:nadd
-      #|  n * r(i:num) + n
-      #|  n:num
-      #|  i:num
+      #|  nadd_of_num(SUC((r : (Num) -> Num)((n : Num))))
+      #|  (n : Num)
+      #|  nadd_of_num(2)
+      #|  (x : Nadd)
+      #|  (n : Num) * (r : (Num) -> Num)((i : Num)) + n
+      #|  (n : Num)
+      #|  (i : Num)
       #|  1
-      #|  fn(afn r) = r
-      #|  afn r
-      #|  (&n ** &i) ** x
-      #|  (&i ** &n) ** x
-      #|  &n ** &i ** x
-      #|  &n ** &(SUC(r(i:num)))
-      #|  &i ** &(r(n:num))
-      #|  &i ** &n ** x
-      #|  n:num
-      #|  x:nadd
-      #|  forall n i. i * r(n) <= n * r(i) + n
-      #|  &(SUC(r(n:num)))
-      #|  &n ** x
-      #|  (a \\/ b) /\\ ~(c /\\ b) ==> c ==> a
-      #|  x:nadd
-      #|  n:num
-      #|  SUC(r(n:num))
-      #|  n:num
-      #|  n:num
-      #|  r:num->num
-      #|  m:nadd
-      #|  &n ** &N
-      #|  &n ** w
-      #|  w:nadd
-      #|  p:num
-      #|  n * N
-      #|  m:nadd
-      #|  N:num
-      #|  a:nadd
+      #|  dest_nadd(mk_nadd((r : (Num) -> Num))) == r
+      #|  mk_nadd((r : (Num) -> Num))
+      #|  nadd_mul(nadd_mul(nadd_of_num((n : Num)), nadd_of_num((i : Num))), (x : Nadd))
+      #|  nadd_mul(nadd_mul(nadd_of_num((i : Num)), nadd_of_num((n : Num))), (x : Nadd))
+      #|  nadd_mul(nadd_of_num((n : Num)), nadd_mul(nadd_of_num((i : Num)), (x : Nadd)))
+      #|  nadd_mul(nadd_of_num((n : Num)), nadd_of_num(SUC((r : (Num) -> Num)((i : Num)))))
+      #|  nadd_mul(nadd_of_num((i : Num)), nadd_of_num((r : (Num) -> Num)((n : Num))))
+      #|  nadd_mul(nadd_of_num((i : Num)), nadd_mul(nadd_of_num((n : Num)), (x : Nadd)))
+      #|  (n : Num)
+      #|  (x : Nadd)
+      #|  \226\136\128 n : Num, \226\136\128 i : Num, i * (r : (Num) -> Num)(n) <= n * r(i) + n
+      #|  nadd_of_num(SUC((r : (Num) -> Num)((n : Num))))
+      #|  nadd_mul(nadd_of_num((n : Num)), (x : Nadd))
+      #|  ((a : Bool) || (b : Bool)) && !((c : Bool) && b) \226\134\146 c \226\134\146 a
+      #|  (x : Nadd)
+      #|  (n : Num)
+      #|  SUC((r : (Num) -> Num)((n : Num)))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (r : (Num) -> Num)
+      #|  (m : Nadd)
+      #|  nadd_mul(nadd_of_num((n : Num)), nadd_of_num((N : Num)))
+      #|  nadd_mul(nadd_of_num((n : Num)), (w : Nadd))
+      #|  (w : Nadd)
+      #|  (p : Num)
+      #|  (n : Num) * (N : Num)
+      #|  (m : Nadd)
+      #|  (N : Num)
+      #|  (a : Nadd)
       #|  0
       #|  forall n. ?r. (?x. P x /\\ &r <<= &n ** x) /\\\n             forall r'. (?x. P x /\\ &r' <<= &n ** x) ==> r' <= r
-      #|  m:nadd
-      #|  a:nadd
+      #|  (m : Nadd)
+      #|  (a : Nadd)
       #|  forall P. (?x. P x) /\\ (?M. forall x. P x ==> x <<= M) ==>\n       ?M. (forall x. P x ==> x <<= M) /\\\n           forall M'. (forall x. P x ==> x <<= M') ==> M <<= M'
-      #|  n:num
-      #|  n:num
-      #|  A1 * n + A2
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (A1 : Num) * (n : Num) + (A2 : Num)
       #|  1
-      #|  A1 + A2
-      #|  x:nadd
-      #|  A2:num
-      #|  A1:num
-      #|  forall x. ?B N. forall n. N <= n ==> fn x n <= B * n
-      #|  n:num
-      #|  n:num
-      #|  A2 + 1
-      #|  A2:num
-      #|  A1:num
+      #|  (A1 : Num) + (A2 : Num)
+      #|  (x : Nadd)
+      #|  (A2 : Num)
+      #|  (A1 : Num)
+      #|  \226\136\128 x : Nadd, \226\136\131 B : Num, \226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 dest_nadd(x, n) <= B * n
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (A2 : Num) + 1
+      #|  (A2 : Num)
+      #|  (A1 : Num)
       #|  1
-      #|  forall x. ~(x === &0) ==> ?N. forall n. N <= n ==> ~(fn x n = 0)
-      #|  SUC 0
-      #|  A1 * fn x n + A2
-      #|  N:num
-      #|  A1 + A2
-      #|  A2:num
-      #|  A1:num
+      #|  \226\136\128 x : Nadd, !nadd_eq(x, nadd_of_num(0)) \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 !(dest_nadd(x, n) == 0))
+      #|  SUC(0)
+      #|  (A1 : Num) * dest_nadd((x : Nadd), (n : Num)) + (A2 : Num)
+      #|  (N : Num)
+      #|  (A1 : Num) + (A2 : Num)
+      #|  (A2 : Num)
+      #|  (A1 : Num)
       #|  1
-      #|  N:num
+      #|  (N : Num)
       #|  forall x. ~(x === &0) ==> ?A N. forall n. N <= n ==> n <= A * fn x n
-      #|  nadd_rinv(x) = \\n. (n * n) DIV (fn x n)
-      #|  fn x n = 0
-      #|  SUC N
-      #|  nadd_rinv x n * A * fn x n
-      #|  n = 0
-      #|  SUC N <= n
-      #|  n:num
-      #|  A * n
-      #|  nadd_rinv x n
-      #|  SUC N
+      #|  (nadd_rinv : (Nadd, Num) -> Num)((x : Nadd)) == ((n : Num) => DIV(n * n, dest_nadd(x, n)))
+      #|  dest_nadd((x : Nadd), (n : Num)) == 0
+      #|  SUC((N : Num))
+      #|  nadd_rinv((x : Nadd), (n : Num)) * ((A : Num) * dest_nadd(x, n))
+      #|  (n : Num) == 0
+      #|  SUC((N : Num)) <= (n : Num)
+      #|  (n : Num)
+      #|  (A : Num) * (n : Num)
+      #|  nadd_rinv((x : Nadd), (n : Num))
+      #|  SUC((N : Num))
       #|  0
-      #|  A:num
-      #|  N:num
-      #|  A:num
+      #|  (A : Num)
+      #|  (N : Num)
+      #|  (A : Num)
       #|  forall x. ~(x === &0) ==> ?A B. forall n. nadd_rinv x n <= A * n + B
-      #|  n * n
+      #|  (n : Num) * n
       #|  forall x n. ~(fn x n = 0) ==> dist(fn x n * nadd_rinv(x) n, n * n) <= fn x n
-      #|  N:num
-      #|  N:num
+      #|  (N : Num)
+      #|  (N : Num)
       #|  forall x. ~(x === &0) ==> ?N. forall n. N <= n ==>\n         dist(fn x n * nadd_rinv(x) n, n * n) <= fn x n
-      #|  N:num
-      #|  N:num
+      #|  (N : Num)
+      #|  (N : Num)
       #|  forall x. ~(x === &0) ==> ?N. forall m n. N <= n ==>\n        dist(m * fn x m * fn x n * nadd_rinv(x) n,\n             m * fn x m * n * n) <= m * fn x m * fn x n
-      #|  N <= m
-      #|  n:num
-      #|  N <= n
-      #|  m:num
-      #|  N:num
-      #|  N:num
+      #|  (N : Num) <= (m : Num)
+      #|  (n : Num)
+      #|  (N : Num) <= (n : Num)
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  (N : Num)
       #|  forall x. ~(x === &0) ==> ?N. forall m n. N <= m /\\ N <= n ==>\n        (fn x m * fn x n) * dist(m * nadd_rinv(x) n,n * nadd_rinv(x) m) <=\n          (m * n) * dist(m * fn x n,n * fn x m) + (fn x m * fn x n) * (m + n)
-      #|  N1 + N2
+      #|  (N1 : Num) + (N2 : Num)
       #|  (a * b) * (c * d) * e = ((a * c) * (b * d)) * e
-      #|  N1 + N2
+      #|  (N1 : Num) + (N2 : Num)
       #|  (m * n) * dist(m * fn x n,n * fn x m) +\n              (fn x m * fn x n) * (m + n)
-      #|  N1 + N2
-      #|  B1 + B2 * B2
-      #|  x:nadd
-      #|  N2:num
-      #|  B2:num
-      #|  x:nadd
-      #|  B1:num
-      #|  N1:num
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (B1 : Num) + (B2 : Num) * B2
+      #|  (x : Nadd)
+      #|  (N2 : Num)
+      #|  (B2 : Num)
+      #|  (x : Nadd)
+      #|  (B1 : Num)
+      #|  (N1 : Num)
       #|  forall x. ~(x === &0) ==> ?B N. forall m n. N <= m /\\ N <= n ==>\n        (fn x m * fn x n) * dist(m * nadd_rinv(x) n,n * nadd_rinv(x) m) <=\n        B * (m * n) * (m + n)
-      #|  N1 + N2
+      #|  (N1 : Num) + (N2 : Num)
       #|  (a * b * c) * (d * e) * f = (b * c) * (a * (d * e) * f)
-      #|  ((a * b) * c) * d = (a * c) * (b * d)
+      #|  (a : Num) * (b : Num) * (c : Num) * (d : Num) == a * c * (b * d)
       #|  (B2 * B2) * (fn x m * fn x n) *\n              dist (m * nadd_rinv x n,n * nadd_rinv x m)
-      #|  N1 + N2
-      #|  B1 * B2 * B2
-      #|  N2:num
-      #|  B2:num
-      #|  N1:num
-      #|  B1:num
+      #|  (N1 : Num) + (N2 : Num)
+      #|  (B1 : Num) * ((B2 : Num) * B2)
+      #|  (N2 : Num)
+      #|  (B2 : Num)
+      #|  (N1 : Num)
+      #|  (B1 : Num)
       #|  forall x. ~(x === &0) ==> ?B N. forall m n. N <= m /\\ N <= n ==>\n        (m * n) * dist(m * nadd_rinv(x) n,n * nadd_rinv(x) m) <=\n        B * (m * n) * (m + n)
-      #|  N + 1
-      #|  SUC 0 = 1 * 1
-      #|  a * b * c = b * a * c
-      #|  N + 1
-      #|  N <= m /\\ N <= n
-      #|  n:num
-      #|  m:num
-      #|  N + 1
-      #|  B:num
-      #|  N:num
-      #|  B:num
+      #|  (N : Num) + 1
+      #|  SUC(0) == 1 * 1
+      #|  (a : Num) * ((b : Num) * (c : Num)) == b * (a * c)
+      #|  (N : Num) + 1
+      #|  (N : Num) <= (m : Num) && N <= (n : Num)
+      #|  (n : Num)
+      #|  (m : Num)
+      #|  (N : Num) + 1
+      #|  (B : Num)
+      #|  (N : Num)
+      #|  (B : Num)
       #|  forall x. ~(x === &0) ==> ?B N. forall m n. N <= m /\\ N <= n ==>\n        dist(m * nadd_rinv(x) n,n * nadd_rinv(x) m) <= B * (m + n)
-      #|  A * n + B
-      #|  (a + b + c) + d + e = (c + d) + (b + a + e)
-      #|  SUC N * nadd_rinv x n + n * nadd_rinv x (SUC N)
-      #|  SUC N * B0 + B
-      #|  A + (nadd_rinv(x)(SUC N) + SUC N * A0)
-      #|  B:num
-      #|  A:num
+      #|  (A : Num) * (n : Num) + (B : Num)
+      #|  (a : Num) + ((b : Num) + (c : Num)) + ((d : Num) + (e : Num)) == c + d + (b + (a + e))
+      #|  SUC((N : Num)) * nadd_rinv((x : Nadd), (n : Num)) + n * nadd_rinv(x, SUC(N))
+      #|  SUC((N : Num)) * (B0 : Num) + (B : Num)
+      #|  (A : Num) + (nadd_rinv((x : Nadd), SUC((N : Num))) + SUC(N) * (A0 : Num))
+      #|  (B : Num)
+      #|  (A : Num)
       #|  0
-      #|  nadd_rinv x 0
-      #|  B0:num
-      #|  A0:num
+      #|  nadd_rinv((x : Nadd), 0)
+      #|  (B0 : Num)
+      #|  (A0 : Num)
       #|  forall x. ~(x === &0) ==> forall N. ?A B. forall m n. m <= N ==>\n        dist(m * nadd_rinv(x) n,n * nadd_rinv(x) m) <= A * n + B
-      #|  A * n + B
-      #|  A * m + B
-      #|  B0 * (m + n)
-      #|  n:num
-      #|  N:num
-      #|  m:num
-      #|  N:num
-      #|  B:num
-      #|  A + B0
-      #|  B:num
-      #|  A:num
-      #|  N:num
-      #|  N:num
-      #|  B0:num
+      #|  (A : Num) * (n : Num) + (B : Num)
+      #|  (A : Num) * (m : Num) + (B : Num)
+      #|  (B0 : Num) * ((m : Num) + (n : Num))
+      #|  (n : Num)
+      #|  (N : Num)
+      #|  (m : Num)
+      #|  (N : Num)
+      #|  (B : Num)
+      #|  (A : Num) + (B0 : Num)
+      #|  (B : Num)
+      #|  (A : Num)
+      #|  (N : Num)
+      #|  (N : Num)
+      #|  (B0 : Num)
       #|  forall x. ~(x === &0) ==>\n        ?B. forall m n. dist(m * nadd_rinv(x) n,n * nadd_rinv(x) m) <= B * (m + n)
       #|  nadd_inv(x) = if x === &0 then &0 else afn(nadd_rinv x)
-      #|  nadd_inv:nadd->nadd
-      #|  x === &0
+      #|  nadd_inv
+      #|  nadd_eq((x : Nadd), nadd_of_num(0))
       #|  forall x. fn(nadd_inv x) = if x === &0 then (\\n. 0) else nadd_rinv x
-      #|  (a + b) + c + d = (a + c) + (b + d)
-      #|  fn (inv x) n * fn x n
-      #|  B1 + B2
-      #|  A1 + A2
-      #|  fn x n
-      #|  N:num
-      #|  B':num
-      #|  A':num
+      #|  (a : Num) + (b : Num) + ((c : Num) + (d : Num)) == a + c + (b + d)
+      #|  dest_nadd(inv((x : Nadd)), (n : Num)) * dest_nadd(x, n)
+      #|  (B1 : Num) + (B2 : Num)
+      #|  (A1 : Num) + (A2 : Num)
+      #|  dest_nadd((x : Nadd), (n : Num))
+      #|  (N : Num)
+      #|  (B' : Num)
+      #|  (A' : Num)
       #|  ?A2 B2. forall n. dist(fn x n * nadd_rinv x n,n * n) <= A2 * n + B2
-      #|  x:nadd
-      #|  B':num
-      #|  A':num
-      #|  N:num
-      #|  x:nadd
-      #|  inv(x)
-      #|  B1:num
-      #|  A1:num
-      #|  forall x. ~(x === &0) ==> inv(x) ** x === &1
-      #|  inv(&0) === &0
-      #|  (inv(y) ** y) ** inv(x)
-      #|  inv(y) ** (inv(x) ** y)
-      #|  inv(y) ** (inv(x) ** x)
-      #|  inv(y) ** &1
-      #|  ~(y === &0)
-      #|  y === &0
-      #|  x === &0
-      #|  forall x y. x === y ==> inv(x) === inv(y)
-      #|  (===)
-      #|  hreal_le:hreal->hreal->bool
-      #|  hreal_mul:hreal->hreal->hreal
-      #|  hreal_add:hreal->hreal->hreal
-      #|  hreal_inv:hreal->hreal
-      #|  hreal_of_num:num->hreal
-      #|  (P:nadd->bool) = (\\x. Q(mk_hreal((===) x)))
-      #|  x:nadd
-      #|  \\x. Q(mk_hreal((===) x)):bool
-      #|  P:hreal->bool
-      #|  forall m n. m <= n <=> ?d. n = m + d
-      #|  forall m n p. (m + n = m + p) <=> (n = p)
-      #|  forall m n p. (m + p = n + p) <=> (m = n)
-      #|  forall m n p. (m + n <= m + p) <=> (n <= p)
-      #|  forall m n p. (m + p <= n + p) <=> (m <= n)
-      #|  forall n. n + &0 = n
-      #|  forall m n p. (m + n) * p = m * p + n * p
-      #|  m:hreal
-      #|  &1
-      #|  &0
-      #|  forall m. &0 * m = &0
-      #|  forall m. m * &0 = &0
+      #|  (x : Nadd)
+      #|  (B' : Num)
+      #|  (A' : Num)
+      #|  (N : Num)
+      #|  (x : Nadd)
+      #|  inv((x : Nadd))
+      #|  (B1 : Num)
+      #|  (A1 : Num)
+      #|  \226\136\128 x : Nadd, !nadd_eq(x, nadd_of_num(0)) \226\134\146 nadd_eq(nadd_mul(inv(x), x), nadd_of_num(1))
+      #|  nadd_eq(inv(nadd_of_num(0)), nadd_of_num(0))
+      #|  nadd_mul(nadd_mul(inv((y : Nadd)), y), inv((x : Nadd)))
+      #|  nadd_mul(inv((y : Nadd)), nadd_mul(inv((x : Nadd)), y))
+      #|  nadd_mul(inv((y : Nadd)), nadd_mul(inv((x : Nadd)), x))
+      #|  nadd_mul(inv((y : Nadd)), nadd_of_num(1))
+      #|  !nadd_eq((y : Nadd), nadd_of_num(0))
+      #|  nadd_eq((y : Nadd), nadd_of_num(0))
+      #|  nadd_eq((x : Nadd), nadd_of_num(0))
+      #|  \226\136\128 x : Nadd, \226\136\128 y : Nadd, nadd_eq(x, y) \226\134\146 nadd_eq(inv(x), inv(y))
+      #|  nadd_eq
+      #|  (hreal_le : (Hreal, Hreal) -> Bool)
+      #|  (hreal_mul : (Hreal, Hreal) -> Hreal)
+      #|  (hreal_add : (Hreal, Hreal) -> Hreal)
+      #|  (hreal_inv : (Hreal) -> Hreal)
+      #|  (hreal_of_num : (Num) -> Hreal)
+      #|  (P : (Nadd) -> Bool) == ((x : Nadd) => (Q : (Hreal) -> Bool)(mk_hreal(nadd_eq(x))))
+      #|  (x : Nadd)
+      #|  (x : Nadd) => (Q : (Hreal) -> Bool)(mk_hreal(nadd_eq(x)))
+      #|  (P : (Hreal) -> Bool)
+      #|  \226\136\128 m : Hreal, \226\136\128 n : Hreal, (m <= n) == (\226\136\131 d : Hreal, n == m + d)
+      #|  \226\136\128 m : Hreal, \226\136\128 n : Hreal, \226\136\128 p : Hreal, (m + n == m + p) == (n == p)
+      #|  \226\136\128 m : Hreal, \226\136\128 n : Hreal, \226\136\128 p : Hreal, (m + p == n + p) == (m == n)
+      #|  \226\136\128 m : Hreal, \226\136\128 n : Hreal, \226\136\128 p : Hreal, (m + n <= m + p) == (n <= p)
+      #|  \226\136\128 m : Hreal, \226\136\128 n : Hreal, \226\136\128 p : Hreal, (m + p <= n + p) == (m <= n)
+      #|  \226\136\128 n : Hreal, n + hreal_of_num(0) == n
+      #|  \226\136\128 m : Hreal, \226\136\128 n : Hreal, \226\136\128 p : Hreal, (m + n) * p == m * p + n * p
+      #|  (m : Hreal)
+      #|  hreal_of_num(1)
+      #|  hreal_of_num(0)
+      #|  \226\136\128 m : Hreal, hreal_of_num(0) * m == hreal_of_num(0)
+      #|  \226\136\128 m : Hreal, m * hreal_of_num(0) == hreal_of_num(0)
       #|  (m + n = n + m) /\\\n   ((m + n) + p = m + (n + p)) /\\\n   (m + (n + p) = n + (m + p))
-      #|  d1 + d2
-      #|  d2:hreal
-      #|  d1:hreal
-      #|  forall a b c d. a <= b /\\ c <= d ==> a + c <= b + d
-      #|  d * c
-      #|  d:hreal
-      #|  forall a b c. a <= b ==> a * c <= b * c
-      #|  treal_of_num n = (&n, &0)
-      #|  treal_neg ((x:hreal),(y:hreal)) = (y,x)
-      #|  (x1,y1) treal_add (x2,y2) = (x1 + x2, y1 + y2)
+      #|  (d1 : Hreal) + (d2 : Hreal)
+      #|  (d2 : Hreal)
+      #|  (d1 : Hreal)
+      #|  \226\136\128 a : Hreal, \226\136\128 b : Hreal, \226\136\128 c : Hreal, \226\136\128 d : Hreal, a <= b && c <= d \226\134\146 a + c <= b + d
+      #|  (d : Hreal) * (c : Hreal)
+      #|  (d : Hreal)
+      #|  \226\136\128 a : Hreal, \226\136\128 b : Hreal, \226\136\128 c : Hreal, a <= b \226\134\146 a * c <= b * c
+      #|  (treal_of_num : (Num) -> (Hreal, Hreal))((n : Num)) == (hreal_of_num(n), hreal_of_num(0))
+      #|  (treal_neg : ((Hreal, Hreal)) -> (Hreal, Hreal))(((x : Hreal), (y : Hreal))) == (y, x)
+      #|  (treal_add : ((Hreal, Hreal), (Hreal, Hreal)) -> (Hreal, Hreal))(((x1 : Hreal), (y1 : Hreal)), ((x2 : Hreal), (y2 : Hreal))) == (x1 + x2, y1 + y2)
       #|  (x1,y1) treal_mul (x2,y2) = ((x1 * x2) + (y1 * y2),(x1 * y2) + (y1 * x2))
-      #|  (x1,y1) treal_le (x2,y2) <=> x1 + y2 <= x2 + y1
+      #|  (treal_le : ((Hreal, Hreal), (Hreal, Hreal)) -> Bool)(((x1 : Hreal), (y1 : Hreal)), ((x2 : Hreal), (y2 : Hreal))) == (x1 + y2 <= x2 + y1)
       #|  treal_inv(x,y) = if x = y then (&0, &0)\n                    else if y <= x then (inv(@d. x = y + d), &0)\n                    else (&0, inv(@d. y = x + d))
-      #|  (x1,y1) treal_eq (x2,y2) <=> (x1 + y2 = x2 + y1)
-      #|  forall x. x treal_eq x
-      #|  forall x y. x treal_eq y <=> y treal_eq x
-      #|  (+)
+      #|  (treal_eq : ((Hreal, Hreal), (Hreal, Hreal)) -> Bool)(((x1 : Hreal), (y1 : Hreal)), ((x2 : Hreal), (y2 : Hreal))) == (x1 + y2 == x2 + y1)
+      #|  \226\136\128 x : (Hreal, Hreal), treal_eq(x, x)
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_eq(x, y) == treal_eq(y, x)
+      #|  hreal_add
       #|  forall x y z. x treal_eq y /\\ y treal_eq z ==> x treal_eq z
-      #|  forall x y. (x = y) ==> x treal_eq y
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), x == y \226\134\146 treal_eq(x, y)
       #|  forall m n. (treal_of_num m treal_eq treal_of_num n) <=> (m = n)
       #|  forall m n. (treal_of_num m treal_le treal_of_num n) <=> m <= n
       #|  forall m n. (treal_of_num m treal_add treal_of_num n) treal_eq\n         (treal_of_num(m + n))
       #|  forall m n. (treal_of_num m treal_mul treal_of_num n) treal_eq\n         (treal_of_num(m * n))
-      #|  forall x y. x treal_add y = y treal_add x
-      #|  forall x y. x treal_mul y = y treal_mul x
-      #|  forall x y. (x treal_add y) treal_eq (y treal_add x)
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_add(x, y) == treal_add(y, x)
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_mul(x, y) == treal_mul(y, x)
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_eq(treal_add(x, y), treal_add(y, x))
       #|  forall x y z. (x treal_add (y treal_add z)) treal_eq\n           ((x treal_add y) treal_add z)
-      #|  forall x. ((treal_of_num 0) treal_add x) treal_eq x
+      #|  \226\136\128 x : (Hreal, Hreal), treal_eq(treal_add(treal_of_num(0), x), x)
       #|  forall x. ((treal_neg x) treal_add x) treal_eq (treal_of_num 0)
-      #|  forall x y. (x treal_mul y) treal_eq (y treal_mul x)
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_eq(treal_mul(x, y), treal_mul(y, x))
       #|  forall x y z. (x treal_mul (y treal_mul z)) treal_eq\n           ((x treal_mul y) treal_mul z)
-      #|  forall x. ((treal_of_num 1) treal_mul x) treal_eq x
+      #|  \226\136\128 x : (Hreal, Hreal), treal_eq(treal_mul(treal_of_num(1), x), x)
       #|  forall x y z. (x treal_mul (y treal_add z)) treal_eq\n           ((x treal_mul y) treal_add (x treal_mul z))
-      #|  forall x. x treal_le x
+      #|  \226\136\128 x : (Hreal, Hreal), treal_le(x, x)
       #|  forall x y. x treal_le y /\\ y treal_le x <=> (x treal_eq y)
       #|  forall x y z. x treal_le y /\\ y treal_le z ==> x treal_le z
-      #|  forall x y. x treal_le y \\/ y treal_le x
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_le(x, y) || treal_le(y, x)
       #|  forall x y z. (y treal_le z) ==> (x treal_add y) treal_le (x treal_add z)
       #|  forall x y. (treal_of_num 0) treal_le x /\\ (treal_of_num 0) treal_le y\n         ==> (treal_of_num 0) treal_le (x treal_mul y)
-      #|  treal_inv (treal_of_num 0) treal_eq (treal_of_num 0)
-      #|  y:hreal
-      #|  x:hreal
-      #|  y:hreal
-      #|  x:hreal
+      #|  treal_eq(treal_inv(treal_of_num(0)), treal_of_num(0))
+      #|  (y : Hreal)
+      #|  (x : Hreal)
+      #|  (y : Hreal)
+      #|  (x : Hreal)
       #|  forall x. ~(x treal_eq treal_of_num 0) ==>\n        (treal_inv(x) treal_mul x) treal_eq (treal_of_num 1)
       #|  forall m n. (m = n) ==> (treal_of_num m) treal_eq (treal_of_num n)
       #|  forall x1 x2. x1 treal_eq x2 ==> (treal_neg x1) treal_eq (treal_neg x2)
       #|  forall x1 x2 y. x1 treal_eq x2 ==> (x1 treal_add y) treal_eq (x2 treal_add y)
-      #|  x1 treal_add y2
+      #|  treal_add((x1 : (Hreal, Hreal)), (y2 : (Hreal, Hreal)))
       #|  forall x1 x2 y1 y2. x1 treal_eq x2 /\\ y1 treal_eq y2 ==>\n     (x1 treal_add y1) treal_eq (x2 treal_add y2)
-      #|  (a + b) + (c + d) = (a + d) + (b + c)
+      #|  (a : Hreal) + (b : Hreal) + ((c : Hreal) + (d : Hreal)) == a + d + (b + c)
       #|  forall x1 x2 y. x1 treal_eq x2 ==> (x1 treal_mul y) treal_eq (x2 treal_mul y)
-      #|  x1 treal_mul y2
+      #|  treal_mul((x1 : (Hreal, Hreal)), (y2 : (Hreal, Hreal)))
       #|  forall x1 x2 y1 y2. x1 treal_eq x2 /\\ y1 treal_eq y2 ==>\n     (x1 treal_mul y1) treal_eq (x2 treal_mul y2)
-      #|  forall x y. x treal_eq y ==> x treal_le y
-      #|  x2:hreal#hreal
-      #|  y2:hreal#hreal
-      #|  x1:hreal#hreal
-      #|  y1:hreal#hreal
+      #|  \226\136\128 x : (Hreal, Hreal), \226\136\128 y : (Hreal, Hreal), treal_eq(x, y) \226\134\146 treal_le(x, y)
+      #|  (x2 : (Hreal, Hreal))
+      #|  (y2 : (Hreal, Hreal))
+      #|  (x1 : (Hreal, Hreal))
+      #|  (y1 : (Hreal, Hreal))
       #|  forall x1 x2 y1 y2. x1 treal_eq x2 /\\ y1 treal_eq y2 ==>\n     (x1 treal_le y1 <=> x2 treal_le y2)
-      #|  (@d. x = x + d) = &0
-      #|  x1 + &0 = x2
-      #|  (@d. x2 = x1 + d) = &0
-      #|  (@d. x2 = x1 + d) + y1 <= y1:hreal
-      #|  x1 + y2 = x2 + y1
-      #|  x2:hreal
-      #|  x1:hreal
-      #|  x1 + y2 = x2 + y1
-      #|  x2 <= x1
-      #|  y1 :hreal = y2
-      #|  x1 :hreal = x2
-      #|  y2:hreal
-      #|  y1:hreal
-      #|  x2:hreal
-      #|  x1:hreal
+      #|  select((d : Hreal) => (x : Hreal) == x + d) == hreal_of_num(0)
+      #|  (x1 : Hreal) + hreal_of_num(0) == (x2 : Hreal)
+      #|  select((d : Hreal) => (x2 : Hreal) == (x1 : Hreal) + d) == hreal_of_num(0)
+      #|  select((d : Hreal) => (x2 : Hreal) == (x1 : Hreal) + d) + (y1 : Hreal) <= y1
+      #|  (x1 : Hreal) + (y2 : Hreal) == (x2 : Hreal) + (y1 : Hreal)
+      #|  (x2 : Hreal)
+      #|  (x1 : Hreal)
+      #|  (x1 : Hreal) + (y2 : Hreal) == (x2 : Hreal) + (y1 : Hreal)
+      #|  (x2 : Hreal) <= (x1 : Hreal)
+      #|  (y1 : Hreal) == (y2 : Hreal)
+      #|  (x1 : Hreal) == (x2 : Hreal)
+      #|  (y2 : Hreal)
+      #|  (y1 : Hreal)
+      #|  (x2 : Hreal)
+      #|  (x1 : Hreal)
       #|  forall x y. x treal_eq y ==> (treal_inv x) treal_eq (treal_inv y)
-      #|  (treal_eq)
-      #|  real_of_num:num->real
-      #|  real_min:real->real->real
-      #|  real_max:real->real->real
-      #|  real_abs:real->real
-      #|  real_inv:real->real
-      #|  real_pow:real->num->real
-      #|  real_neg:real->real
-      #|  real_ge:real->real->bool
-      #|  real_gt:real->real->bool
-      #|  real_le:real->real->bool
-      #|  real_lt:real->real->bool
-      #|  real_div:real->real->real
-      #|  real_mul:real->real->real
-      #|  real_sub:real->real->real
-      #|  real_add:real->real->real
-      #|  x - y = x + --y
-      #|  x < y <=> ~(y <= x)
-      #|  x >= y <=> y <= x
-      #|  x > y <=> y < x
-      #|  abs(x) = if &0 <= x then x else --x
+      #|  treal_eq
+      #|  real_of_num
+      #|  (real_min : (Real, Real) -> Real)
+      #|  (real_max : (Real, Real) -> Real)
+      #|  (real_abs : (Real) -> Real)
+      #|  real_inv
+      #|  (real_pow : (Real, Num) -> Real)
+      #|  real_neg
+      #|  (real_ge : (Real, Real) -> Bool)
+      #|  (real_gt : (Real, Real) -> Bool)
+      #|  real_le
+      #|  (real_lt : (Real, Real) -> Bool)
+      #|  (real_div : (Real, Real) -> Real)
+      #|  real_mul
+      #|  (real_sub : (Real, Real) -> Real)
+      #|  real_add
+      #|  (real_sub : (Real, Real) -> Real)((x : Real), (y : Real)) == x + -y
+      #|  (real_lt : (Real, Real) -> Bool)((x : Real), (y : Real)) == !(y <= x)
+      #|  (real_ge : (Real, Real) -> Bool)((x : Real), (y : Real)) == (y <= x)
+      #|  (real_gt : (Real, Real) -> Bool)((x : Real), (y : Real)) == real_lt(y, x)
+      #|  (real_abs : (Real) -> Real)((x : Real)) == (if real_of_num(0) <= x { x } else { -x })
       #|  (x pow 0 = &1) /\\\n   (forall n. x pow (SUC n) = x * (x pow n))
-      #|  x / y = x * inv(y)
-      #|  real_max m n = if m <= n then n else m
-      #|  real_min m n = if m <= n then m else n
-      #|  q:hreal#hreal
-      #|  q:hreal#hreal
-      #|  d:hreal
-      #|  d:hreal
-      #|  p:hreal#hreal
+      #|  (real_div : (Real, Real) -> Real)((x : Real), (y : Real)) == x * inv(y)
+      #|  (real_max : (Real, Real) -> Real)((m : Real), (n : Real)) == (if m <= n { n } else { m })
+      #|  (real_min : (Real, Real) -> Real)((m : Real), (n : Real)) == (if m <= n { m } else { n })
+      #|  (q : (Hreal, Hreal))
+      #|  (q : (Hreal, Hreal))
+      #|  (d : Hreal)
+      #|  (d : Hreal)
+      #|  (p : (Hreal, Hreal))
       #|  mk_real
-      #|  p:hreal#hreal
-      #|  r:hreal#hreal->bool
+      #|  (p : (Hreal, Hreal))
+      #|  (r : ((Hreal, Hreal)) -> Bool)
       #|  dest_real x
-      #|  \\y. mk_real((treal_eq)(y,hreal_of_num 0))
+      #|  (y : Hreal) => mk_real(treal_eq((y, hreal_of_num(0))))
       #|  ?r:hreal->real.\n       (forall x. &0 <= x <=> ?y. x = r y) /\\\n       (forall y z. y <= z <=> r y <= r z)
-      #|  forall y z. ((r:hreal->real) y = r z) <=> (y = z)
-      #|  r:hreal->real
-      #|  \\x:real. @y:hreal. x = r y
+      #|  \226\136\128 y : Hreal, \226\136\128 z : Hreal, ((r : (Hreal) -> Real)(y) == r(z)) == (y == z)
+      #|  (r : (Hreal) -> Real)
+      #|  (x : Real) => select((y : Hreal) => x == (r : (Hreal) -> Real)(y))
       #|  ?h r. (forall x:hreal. h(r x) = x) /\\\n         (forall x. &0 <= x ==> (r(h x) = x)) /\\\n         (forall x:hreal. &0 <= r x) /\\\n         (forall x y. x <= y <=> r x <= r y)
-      #|  x:real
-      #|  (r:hreal->real)(h C) = C
-      #|  B:hreal <= (h(C:real))
-      #|  C:real
-      #|  &0
-      #|  (b <=> a) ==> a ==> b
-      #|  (P:real->bool) z
-      #|  &0 <= z
-      #|  z:real
-      #|  &0
-      #|  z:real
-      #|  (r:hreal->real) B
-      #|  B:hreal
-      #|  (b ==> c) ==> a ==> (a ==> b) ==> c
-      #|  x:real
-      #|  (b <=> a) ==> a ==> b
-      #|  y:hreal
-      #|  (h:real->hreal) M
-      #|  (b <=> a) ==> a ==> b
-      #|  (P:real->bool) x
-      #|  (h:real->hreal) x
-      #|  \\y:hreal. (P:real->bool)(r y)
+      #|  (x : Real)
+      #|  (r : (Hreal) -> Real)((h : (Real) -> Hreal)((C : Real))) == C
+      #|  (B : Hreal) <= (h : (Real) -> Hreal)((C : Real))
+      #|  (C : Real)
+      #|  real_of_num(0)
+      #|  (b : Bool) == (a : Bool) \226\134\146 a \226\134\146 b
+      #|  (P : (Real) -> Bool)((z : Real))
+      #|  real_of_num(0) <= (z : Real)
+      #|  (z : Real)
+      #|  real_of_num(0)
+      #|  (z : Real)
+      #|  (r : (Hreal) -> Real)((B : Hreal))
+      #|  (B : Hreal)
+      #|  ((b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a : Bool) \226\134\146 (a \226\134\146 b) \226\134\146 c
+      #|  (x : Real)
+      #|  (b : Bool) == (a : Bool) \226\134\146 a \226\134\146 b
+      #|  (y : Hreal)
+      #|  (h : (Real) -> Hreal)((M : Real))
+      #|  (b : Bool) == (a : Bool) \226\134\146 a \226\134\146 b
+      #|  (P : (Real) -> Bool)((x : Real))
+      #|  (h : (Real) -> Hreal)((x : Real))
+      #|  (y : Hreal) => (P : (Real) -> Bool)((r : (Hreal) -> Real)(y))
       #|  forall P. (?x. P x /\\ &0 <= x) /\\\n       (?M. forall x. P x ==> x <= M)\n       ==> ?M. (forall x. P x ==> x <= M) /\\\n               forall M'. (forall x. P x ==> x <= M') ==> M <= M'
-      #|  y = (y - x) + x
-      #|  x:real
-      #|  --x
-      #|  z + x <= M'
-      #|  z:real
-      #|  B <= M' - x
-      #|  x:real
-      #|  B + x
-      #|  B:real
-      #|  (b ==> c) ==> a ==> (a ==> b) ==> c
-      #|  --x
-      #|  M + --x
-      #|  &0
-      #|  \\y. P(y + x) :bool
-      #|  --x
-      #|  M:real
-      #|  x:real
-      #|  x:real
-      #|  &0
+      #|  (y : Real) == real_sub(y, (x : Real)) + x
+      #|  (x : Real)
+      #|  -(x : Real)
+      #|  (z : Real) + (x : Real) <= (M' : Real)
+      #|  (z : Real)
+      #|  (B : Real) <= real_sub((M' : Real), (x : Real))
+      #|  (x : Real)
+      #|  (B : Real) + (x : Real)
+      #|  (B : Real)
+      #|  ((b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a : Bool) \226\134\146 (a \226\134\146 b) \226\134\146 c
+      #|  -(x : Real)
+      #|  (M : Real) + -(x : Real)
+      #|  real_of_num(0)
+      #|  (y : Real) => (P : (Real) -> Bool)(y + (x : Real))
+      #|  -(x : Real)
+      #|  (M : Real)
+      #|  (x : Real)
+      #|  (x : Real)
+      #|  real_of_num(0)
       #|  forall P. (?x. P x) /\\\n       (?M. forall x. P x ==> x <= M)\n       ==> ?M. (forall x. P x ==> x <= M) /\\\n               forall M'. (forall x. P x ==> x <= M') ==> M <= M'
-      #|  hreal_inv:hreal->hreal
-      #|  hreal_le:hreal->hreal->bool
-      #|  hreal_mul:hreal->hreal->hreal
-      #|  hreal_add:hreal->hreal->hreal
+      #|  hreal_inv
+      #|  hreal_le
+      #|  hreal_mul
+      #|  hreal_add
       #|dist =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\m:num. ((#=:fun(num,fun(num,bool)) (#dist:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))) ((#+:fun(num,fun(num,num)) ((#-:fun(num,fun(num,num)) m:num) n:num)) ((#-:fun(num,fun(num,num)) n:num) m:num)))))))
       #|DIST_REFL =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#dist:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) n:num) n:num))) (#NUMERAL:fun(num,num) #_0:num))))
       #|DIST_LZERO =  |- (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#dist:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) (#NUMERAL:fun(num,num) #_0:num)) n:num))) n:num)))

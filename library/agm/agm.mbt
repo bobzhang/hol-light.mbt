@@ -12,13 +12,13 @@ fn step_2() -> Unit raise {
   let t1 = @meson.meson_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2"),
+        @term_syntax.parse_term("(1 <= (i : Num) && i <= 2) == (i == 1 || i == 2)"),
       ),
     ]),
   )
   forall_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall P. (forall i. 1 <= i /\\ i <= 2 ==> P i) <=> P 1 /\\ P 2"),
+      @term_syntax.parse_term("∀ P : (Num) -> Bool, (∀ i : Num, 1 <= i && i <= 2 → P(i)) == (P(1) && P(2))"),
       t1,
     ),
   )
@@ -47,7 +47,7 @@ fn step_3() -> Unit raise {
     ),
     @int.arith_tac,
   )
-  numseg_2_c.set(@tactics.prove(@parser.parse_term("1..2 = {1,2}"), t2))
+  numseg_2_c.set(@tactics.prove(@term_syntax.parse_term("op_dot_dot(1, 2) == {1, 2}"), t2))
 }
 
 ///|
@@ -74,7 +74,7 @@ fn step_4() -> Unit raise {
   )
   agm_2_c.set(
     @tactics.prove(
-      @parser.parse_term("forall x y. x * y <= ((x + y) / &2) pow 2"),
+      @term_syntax.parse_term("∀ x : Real, ∀ y : Real, x * y <= pow((x + y) / real_of_num(2), 2)"),
       t3,
     ),
   )
@@ -95,13 +95,13 @@ fn step_5() -> Unit raise {
   let t4 = @simp.simp_tac(
     @list.List([
       @arith.mult_2(),
-      @int.arith_rule(@parser.parse_term("1 <= n + 1")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= (n : Num) + 1")),
       @iterate.sum_add_split(),
     ]),
   )
   sum_split_2_c.set(
     @tactics.prove(
-      @parser.parse_term("sum(1..2*n) f = sum(1..n) f + sum(n+1..2*n) f"),
+      @term_syntax.parse_term("sum(op_dot_dot(1, 2 * (n : Num)), (f : (Num) -> Real)) == sum(op_dot_dot(1, n), f) + sum(op_dot_dot(n + 1, 2 * n), f)"),
       t4,
     ),
   )
@@ -122,7 +122,7 @@ fn step_6() -> Unit raise {
   let t5 = @simp.simp_tac(
     @list.List([
       @arith.mult_2(),
-      @int.arith_rule(@parser.parse_term("1 <= n + 1")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= (n : Num) + 1")),
       @products.product_add_split(),
     ]),
   )
@@ -150,11 +150,11 @@ pub fn product_split_2() -> @kernel.Thm {
 ///|
 /// CAUCHY_INDUCT
 fn step_7() -> Unit raise {
-  let t27 = @int.arith_rule(@parser.parse_term("SUC(2 * m) + 1 = 2 * (m + 1)"))
+  let t27 = @int.arith_rule(@term_syntax.parse_term("SUC(2 * (m : Num)) + 1 == 2 * (m + 1)"))
   let t28 = @meson.asm_meson_tac(
     @list.List([
       @int.arith_rule(
-        @parser.parse_term("SUC(2 * m) = 1 \\/ m + 1 < SUC(2 * m)"),
+        @term_syntax.parse_term("SUC(2 * (m : Num)) == 1 || m + 1 < SUC(2 * m)"),
       ),
       t27,
     ]),
@@ -239,7 +239,7 @@ fn step_7() -> Unit raise {
     })(t23(x24))
   })
   let t17 = @meson.asm_meson_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("2 * n = 0 \\/ n < 2 * n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("2 * (n : Num) == 0 || n < 2 * n"))]),
   )
   let t15 = @simp.gen_rewrite_rule(
     fn(
@@ -323,20 +323,20 @@ fn step_7() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t10 = @class.asm_cases_tac(@parser.parse_term("EVEN n"))
+  let t10 = @class.asm_cases_tac(@term_syntax.parse_term("EVEN((n : Num))"))
   let t9 = @list.List([
     @meson.asm_meson_tac(
       @list.List([
-        @int.arith_rule(@parser.parse_term("1 = 0 + 1 /\\ 2 = 1 + 1")),
+        @int.arith_rule(@term_syntax.parse_term("1 == 0 + 1 && 2 == 1 + 1")),
       ]),
     ),
     @tactics.all_tac,
   ])
   let t8 = @tactics.subgoal_then(
-    @parser.parse_term("P(0) /\\ P(1)"),
+    @term_syntax.parse_term("(P : (Num) -> Bool)(0) && P(1)"),
     @tactics.strip_assume_tac,
   )
-  let t7 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
+  let t7 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t6 = @tactics.match_mp_tac(@arith.num_wf())
   let t29 = @tactics.then_tac(
     @tactics.then_tac(
@@ -393,7 +393,7 @@ pub fn cauchy_induct() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let t141 = @simp.rewrite_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("1 <= SUC n")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num))")),
       @calc_int.real_mul_rzero(),
       @realax.real_le_refl(),
     ]),
@@ -454,7 +454,7 @@ fn step_8() -> Unit raise {
     }),
   )
   let t135 = @simp.rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("1 + n = SUC n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("1 + (n : Num) == SUC(n)"))]),
   )
   let t132 = @simp.gen_rewrite_rule(
     fn(
@@ -533,7 +533,7 @@ fn step_8() -> Unit raise {
     })(t132(x133))
   })
   let t127 = @simp.asm_rewrite_tac(@list.List([@arith.le_refl()]))
-  let t123 = @parser.parse_term("n:num")
+  let t123 = @term_syntax.parse_term("(n : Num)")
   let t126 = @tactics.disch_then(fn(
     x125 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -603,11 +603,11 @@ fn step_8() -> Unit raise {
     })(((x124 : @kernel.Thm) => @bool.spec(t123, x124))(x125))
   })
   let t119 = @simp.asm_simp_tac(@list.List([]))
-  let t116 = @parser.parse_term("n:num")
-  let t117 = @parser.parse_term("1")
+  let t116 = @term_syntax.parse_term("(n : Num)")
+  let t117 = @term_syntax.parse_term("1")
   let t118 = @tactics.mp_tac(
     @bool.specl(
-      @list.List([@parser.parse_term("a:num->real"), t117, t116]),
+      @list.List([@term_syntax.parse_term("(a : (Num) -> Real)"), t117, t116]),
       @iterate.sum_pos_eq_0_numseg(),
     ),
   )
@@ -635,7 +635,7 @@ fn step_8() -> Unit raise {
     @tactics.all_tac
   })
   let t113 = @simp.asm_simp_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("1 <= n ==> ~(n = 0)"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("1 <= (n : Num) → !(n == 0)"))]),
   )
   let t112 = @simp.rewrite_tac(
     @list.List([
@@ -679,7 +679,7 @@ fn step_8() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t103 = @tactics.subgoal_then(@parser.parse_term("A = &0"), fn(
+  let t103 = @tactics.subgoal_then(@term_syntax.parse_term("(A : Real) == real_of_num(0)"), fn(
     x100 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
@@ -726,16 +726,16 @@ fn step_8() -> Unit raise {
     }
   })
   let t99 = @simp.asm_simp_tac(@list.List([@real.real_le_lmul_eq()]))
-  let t98 = @class.asm_cases_tac(@parser.parse_term("&0 < A"))
+  let t98 = @class.asm_cases_tac(@term_syntax.parse_term("real_of_num(0) < (A : Real)"))
   let t97 = @simp.asm_rewrite_tac(@list.List([@realax.real_pow()]))
   let t96 = @simp.once_rewrite_tac(@list.List([@realax.real_mul_sym()]))
   let t94 = @calc_rat.real_field(
-    @parser.parse_term("&1 <= &n ==> (s + s / &n) / (&n + &1) = s / &n"),
+    @term_syntax.parse_term("real_of_num(1) <= real_of_num((n : Num)) → ((s : Real) + s / real_of_num(n)) / (real_of_num(n) + real_of_num(1)) == s / real_of_num(n)"),
   )
   let t95 = @simp.simp_tac(
     @list.List([
       @realax.real_of_num_le(),
-      @kernel.assume_rule(@parser.parse_term("1 <= n")),
+      @kernel.assume_rule(@term_syntax.parse_term("1 <= (n : Num)")),
       t94,
     ]),
   )
@@ -745,7 +745,7 @@ fn step_8() -> Unit raise {
   )
   let t91 = @simp.simp_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("1 <= SUC n /\\ ~(SUC n <= n)")),
+      @int.arith_rule(@term_syntax.parse_term("1 <= SUC((n : Num)) && !(SUC(n) <= n)")),
     ]),
   )
   let t90 = @simp.simp_tac(
@@ -755,7 +755,7 @@ fn step_8() -> Unit raise {
       @iterate.sum_clauses_numseg(),
     ]),
   )
-  let t89 = @simp.abbrev_tac(@parser.parse_term("A = sum(1..n) a / &n"))
+  let t89 = @simp.abbrev_tac(@term_syntax.parse_term("(A : Real) == sum(op_dot_dot(1, (n : Num)), (a : (Num) -> Real)) / real_of_num(n)"))
   let t87 = @simp.asm_simp_tac(
     @list.List([
       @iterate.sum_pos_le(),
@@ -786,9 +786,9 @@ fn step_8() -> Unit raise {
     @tactics.all_tac,
   ])
   let t83 = @simp.rewrite_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("1 <= n + 1"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("1 <= (n : Num) + 1"))]),
   )
-  let t79 = @parser.parse_term("\\i. if i <= n then a(i) else sum(1..n) a / &n")
+  let t79 = @term_syntax.parse_term("(i : Num) => if i <= (n : Num) { (a : (Num) -> Real)(i) } else { sum(op_dot_dot(1, n), a) / real_of_num(n) }")
   let t82 = @tactics.first_x_assum(fn(
     x81 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -857,7 +857,7 @@ fn step_8() -> Unit raise {
       }
     })(((x80 : @kernel.Thm) => @bool.spec(t79, x80))(x81))
   })
-  let t75 = @tactics.x_gen_tac(@parser.parse_term("a:num->real"))
+  let t75 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : (Num) -> Real)"))
   let t142 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1050,7 +1050,7 @@ fn step_8() -> Unit raise {
   let t60 = @simp.rewrite_tac(
     @list.List([
       @calc_rat.real_arith(
-        @parser.parse_term("(x + y) * (a * b) = (x * a + y * a) * b"),
+        @term_syntax.parse_term("((x : Real) + (y : Real)) * ((a : Real) * (b : Real)) == (x * a + y * a) * b"),
       ),
     ]),
   )
@@ -1058,7 +1058,7 @@ fn step_8() -> Unit raise {
     @list.List([@realax.real_div(), @real.real_inv_mul()]),
   )
   let t58 = @tactics.subst1_tac(
-    @calc_rat.real_arith(@parser.parse_term("&2 * &n = &n * &2")),
+    @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(2) * real_of_num((n : Num)) == real_of_num(n) * real_of_num(2)")),
   )
   let t57 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@realax.real_of_num_mul())]),
@@ -1068,7 +1068,7 @@ fn step_8() -> Unit raise {
   let t55 = @simp.rewrite_tac(
     @list.List([@equal.gsym(@real.real_pow_mul()), t54]),
   )
-  let t47 = @int.arith_rule(@parser.parse_term("1 <= 2 * n ==> 1 <= n"))
+  let t47 = @int.arith_rule(@term_syntax.parse_term("1 <= 2 * (n : Num) → 1 <= n"))
   let t48 = @meson.asm_meson_tac(
     @list.List([
       @int.arith_rule(
@@ -1098,7 +1098,7 @@ fn step_8() -> Unit raise {
     t48,
   )
   let t43 = @meson.asm_meson_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("n + 1 <= i ==> 1 <= i"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) + 1 <= (i : Num) → 1 <= i"))]),
   )
   let t42 = @simp.rewrite_tac(
     @list.List([@iterate.finite_numseg(), @iterate.in_numseg()]),
@@ -1107,10 +1107,10 @@ fn step_8() -> Unit raise {
     @tactics.then_tac(@tactics.match_mp_tac(@products.product_pos_le()), t42),
     t43,
   )
-  let t40 = @int.arith_rule(@parser.parse_term("1 <= 2 * n ==> 1 <= n"))
+  let t40 = @int.arith_rule(@term_syntax.parse_term("1 <= 2 * (n : Num) → 1 <= n"))
   let t41 = @meson.asm_meson_tac(
     @list.List([
-      @int.arith_rule(@parser.parse_term("i <= n ==> i <= 2 * n")),
+      @int.arith_rule(@term_syntax.parse_term("(i : Num) <= (n : Num) → i <= 2 * n")),
       t40,
     ]),
   )
@@ -1119,7 +1119,7 @@ fn step_8() -> Unit raise {
     t41,
   )
   let t39 = @meson.asm_meson_tac(
-    @list.List([@int.arith_rule(@parser.parse_term("i <= n ==> i <= 2 * n"))]),
+    @list.List([@int.arith_rule(@term_syntax.parse_term("(i : Num) <= (n : Num) → i <= 2 * n"))]),
   )
   let t38 = @simp.rewrite_tac(
     @list.List([@iterate.finite_numseg(), @iterate.in_numseg()]),
@@ -1148,7 +1148,7 @@ fn step_8() -> Unit raise {
   )
   let t35 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t34 = @simp.rewrite_tac(@list.List([sum_split_2(), product_split_2()]))
-  let t33 = @tactics.x_gen_tac(@parser.parse_term("a:num->real"))
+  let t33 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : (Num) -> Real)"))
   let t143 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(

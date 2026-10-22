@@ -15507,56 +15507,56 @@ test "Tutorial/Number_theory matches Tutorial/Number_theory.ml" {
       #|0..0..2..6..12..19..32..55..80..119..204..295..450..705..1029..1496..2305..3279..solved at 3641
       #|0..0..2..6..12..19..32..55..80..119..204..295..450..705..1029..1496..2305..3279..solved at 3624
       #|Tutorial/Number_theory quotations (50):
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
       #|  [641, 1; 6700417, 1]
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
       #|  [274177, 1; 67280421310721, 1]
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
       #|  [59649589127497217, 1; 5704689200685129054721, 1]
-      #|  prime(2 EXP (2 EXP x) + 1)
-      #|  x:num
+      #|  prime(EXP(2, EXP(2, (x : Num))) + 1)
+      #|  (x : Num)
       #|  [1238926361552897, 1; 93461639715357977769163558199606896584051237541638188580280321, 1]
-      #|  forall x y. n divides x /\\ n divides y ==> (x == y) (mod n)
-      #|  (9 EXP 8 == 9) (mod 3)
-      #|  (9 EXP 3 == 9) (mod 3)
-      #|  (10 EXP 7 == 10) (mod 7)
-      #|  (2 EXP 7 == 2) (mod 7)
-      #|  (777 EXP 13 == 777) (mod 13)
-      #|  ~(p <= n) /\\ p <= SUC n ==> p = SUC n
-      #|  forall p. prime p ==> forall n. p divides (FACT n) <=> p <= n
-      #|  0 < n /\\ n < p ==> p - n < p
-      #|  n:num
-      #|  p - n
-      #|  (divides) p
-      #|  forall n p. prime p /\\ 0 < n /\\ n < p ==> p divides binom(p,n)
-      #|  forall m n. (forall i. m <= i /\\ i <= n ==> p divides f(i)) ==> p divides nsum(m..n) f
-      #|  0 < p /\\ 1 <= i /\\ i <= p - 1 ==> 0 < i /\\ i < p
-      #|  a + b = (b + 0) + a
-      #|  1 <= p /\\ 0 < p
-      #|  forall p a b. prime p ==> ((a + b) EXP p == a EXP p + b EXP p) (mod p)
-      #|  forall p a. prime p ==> (a EXP p == a) (mod p)
-      #|  ~(p = 0) ==> SUC(p - 1) = p
-      #|  a:num
-      #|  forall p a. prime p /\\ coprime(a,p) ==> (a EXP (p - 1) == 1) (mod p)
-      #|  a = a * 1
-      #|  a:num
-      #|  forall p a. prime p ==> (a EXP (1 + m * (p - 1)) == a) (mod p)
-      #|  p - 1 = 1 <=> p = 2
-      #|  (plaintext == plaintext EXP (e * d)) (mod (p * q))
-      #|  prime p /\\ prime q /\\ ~(p = q) /\\\n   (d * e == 1) (mod ((p - 1) * (q - 1))) /\\\n   plaintext < p * q /\\ (ciphertext = (plaintext EXP e) MOD (p * q))\n   ==> (plaintext = (ciphertext EXP d) MOD (p * q))
+      #|  \226\136\128 x : Num, \226\136\128 y : Num, divides((n : Num), x) && divides(n, y) \226\134\146 op_eq_eq(x, y, mod(n))
+      #|  op_eq_eq(EXP(9, 8), 9, mod(3))
+      #|  op_eq_eq(EXP(9, 3), 9, mod(3))
+      #|  op_eq_eq(EXP(10, 7), 10, mod(7))
+      #|  op_eq_eq(EXP(2, 7), 2, mod(7))
+      #|  op_eq_eq(EXP(777, 13), 777, mod(13))
+      #|  !((p : Num) <= (n : Num)) && p <= SUC(n) \226\134\146 p == SUC(n)
+      #|  \226\136\128 p : Num, prime(p) \226\134\146 (\226\136\128 n : Num, divides(p, FACT(n)) == (p <= n))
+      #|  0 < (n : Num) && n < (p : Num) \226\134\146 p - n < p
+      #|  (n : Num)
+      #|  (p : Num) - (n : Num)
+      #|  divides((p : Num))
+      #|  \226\136\128 n : Num, \226\136\128 p : Num, prime(p) && 0 < n && n < p \226\134\146 divides(p, binom((p, n)))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, (\226\136\128 i : Num, m <= i && i <= n \226\134\146 divides((p : Num), (f : (Num) -> Num)(i))) \226\134\146 divides(p, nsum(op_dot_dot(m, n), f))
+      #|  0 < (p : Num) && 1 <= (i : Num) && i <= p - 1 \226\134\146 0 < i && i < p
+      #|  (a : Num) + (b : Num) == b + 0 + a
+      #|  1 <= (p : Num) && 0 < p
+      #|  \226\136\128 p : Num, \226\136\128 a : Num, \226\136\128 b : Num, prime(p) \226\134\146 op_eq_eq(EXP(a + b, p), EXP(a, p) + EXP(b, p), mod(p))
+      #|  \226\136\128 p : Num, \226\136\128 a : Num, prime(p) \226\134\146 op_eq_eq(EXP(a, p), a, mod(p))
+      #|  !((p : Num) == 0) \226\134\146 SUC(p - 1) == p
+      #|  (a : Num)
+      #|  \226\136\128 p : Num, \226\136\128 a : Num, prime(p) && coprime((a, p)) \226\134\146 op_eq_eq(EXP(a, p - 1), 1, mod(p))
+      #|  (a : Num) == a * 1
+      #|  (a : Num)
+      #|  \226\136\128 p : Num, \226\136\128 a : Num, prime(p) \226\134\146 op_eq_eq(EXP(a, 1 + (m : Num) * (p - 1)), a, mod(p))
+      #|  ((p : Num) - 1 == 1) == (p == 2)
+      #|  op_eq_eq((plaintext : Num), EXP(plaintext, (e : Num) * (d : Num)), mod((p : Num) * (q : Num)))
+      #|  prime((p : Num)) && prime((q : Num)) && !(p == q) && op_eq_eq((d : Num) * (e : Num), 1, mod((p - 1) * (q - 1))) && (plaintext : Num) < p * q && (ciphertext : Num) == MOD(EXP(plaintext, e), p * q) \226\134\146 plaintext == MOD(EXP(ciphertext, d), p * q)
       #|CONG_TRIVIAL =  |- (#forall:fun(fun(num,bool),bool) (\x:num. (#forall:fun(fun(num,bool),bool) (\y:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) n:num) x:num)) ((#num_divides:fun(num,fun(num,bool)) n:num) y:num))) (((#==:fun(num,fun(num,fun(fun(num,fun(num,bool)),bool))) x:num) y:num) (#num_mod:fun(num,fun(num,fun(num,bool))) n:num)))))))
       #|DIVIDES_FACT_PRIME =  |- (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(bool,fun(bool,bool)) ((#num_divides:fun(num,fun(num,bool)) p:num) (#FACT:fun(num,num) n:num))) ((#<=:fun(num,fun(num,bool)) p:num) n:num)))))))
       #|DIVIDES_BINOM_PRIME =  |- (#forall:fun(fun(num,bool),bool) (\n:num. (#forall:fun(fun(num,bool),bool) (\p:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) n:num)) ((#<:fun(num,fun(num,bool)) n:num) p:num)))) ((#num_divides:fun(num,fun(num,bool)) p:num) (#binom:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) p:num) n:num))))))))

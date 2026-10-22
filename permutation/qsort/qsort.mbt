@@ -30,7 +30,7 @@ pub fn ordered_cases() -> @kernel.Thm {
 ///|
 /// ORDERED_RULES, ORDERED_INDUCT, ORDERED_CASES
 fn step_1() -> Unit raise {
-  let (ordered_rules, ordered_induct, ordered_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall le. ORDERED le []) /\\\n   (forall le h t. ORDERED le t /\\ ALL (le h) t ==> ORDERED le (CONS h t))"))
+  let (ordered_rules, ordered_induct, ordered_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ le : (_, _) -> Bool, (ORDERED : ((_, _) -> Bool, List[_]) -> Bool)(le, NIL)) && (∀ le : (_, _) -> Bool, ∀ h : _, ∀ t : List[_], ORDERED(le, t) && ALL(le(h), t) → ORDERED(le, CONS(h, t)))"))
   ordered_rules_c.set(ordered_rules)
   ordered_induct_c.set(ordered_induct)
   ordered_cases_c.set(ordered_cases)
@@ -51,11 +51,11 @@ fn step_2() -> Unit raise {
     })(t7(x8))
   })
   let t3 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("forall le (h:A) t. ORDERED le (h :: t) ==> (ORDERED le t /\\ ALL (le h) t)"), fn(x1 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@term_syntax.parse_term("∀ le : (A, A) -> Bool, ∀ h : A, ∀ t : List[A], ORDERED(le, CONS(h, t)) → ORDERED(le, t) && ALL(le(h), t)"), fn(x1 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1
     @meson.meson_tac(@list.List([th, ordered_rules()]))
   }), t3), t9), t10), t11)
-  ordered_cons_c.set(@tactics.prove(@parser.parse_term("forall le (h:A) t. ORDERED le (h :: t) <=> (ORDERED le t /\\ ALL (le h) t)"), t12))
+  ordered_cons_c.set(@tactics.prove(@term_syntax.parse_term("∀ le : (A, A) -> Bool, ∀ h : A, ∀ t : List[A], ORDERED(le, CONS(h, t)) == (ORDERED(le, t) && ALL(le(h), t))"), t12))
 }
 
 ///|
@@ -73,11 +73,11 @@ fn step_3() -> Unit raise {
   let t17 = @meson.asm_meson_tac(@list.List([@lists.all_append()]))
   let t16 = @simp.asm_simp_tac(@list.List([ordered_cons(), @lists.all_append()]))
   let t15 = @simp.rewrite_tac(@list.List([@lists.append(), @lists.all(), ordered_rules(), ordered_cons()]))
-  let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("(forall l1 l2:A list.\n        ORDERED le (APPEND l1 l2)\n        ==> ORDERED le l1 /\\ ORDERED le l2 /\\ ALL (\\x. ALL (le x) l2) l1) /\\\n     (forall l1 l2. ORDERED le l1 /\\ ORDERED le l2 /\\ ALL (\\x. ALL (le x) l2) l1\n              ==> ORDERED le (APPEND l1 l2))"), fn(x13 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@term_syntax.parse_term("(∀ l1 : List[A], ∀ l2 : List[A], ORDERED((le : (A, A) -> Bool), APPEND(l1, l2)) → ORDERED(le, l1) && ORDERED(le, l2) && ALL((x : A) => ALL(le(x), l2), l1)) && (∀ l1 : List[A], ∀ l2 : List[A], ORDERED(le, l1) && ORDERED(le, l2) && ALL((x : A) => ALL(le(x), l2), l1) → ORDERED(le, APPEND(l1, l2)))"), fn(x13 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x13
     @meson.meson_tac(@list.List([th]))
   }), @tactics.conj_tac), @lists.list_induct_tac), t15), t16), t17)
-  ordered_append_c.set(@tactics.prove(@parser.parse_term("forall l1 l2:A list.\n      ORDERED le (APPEND l1 l2) <=>\n      ORDERED le l1 /\\ ORDERED le l2 /\\ ALL (\\x. ALL (le x) l2) l1"), t18))
+  ordered_append_c.set(@tactics.prove(@term_syntax.parse_term("∀ l1 : List[A], ∀ l2 : List[A], ORDERED((le : (A, A) -> Bool), APPEND(l1, l2)) == (ORDERED(le, l1) && ORDERED(le, l2) && ALL((x : A) => ALL(le(x), l2), l1))"), t18))
 }
 
 ///|
@@ -97,7 +97,7 @@ fn step_4() -> Unit raise {
   let t20 = @simp.rewrite_tac(@list.List([@lists.pairwise(), ordered_rules()]))
   let t19 = @tactics.match_mp_tac(@ind_types.list_induct())
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm()])), @tactics.gen_tac), t19), t20), t21), t22)
-  ordered_pairwise_c.set(@tactics.prove(@parser.parse_term("ORDERED = PAIRWISE"), t23))
+  ordered_pairwise_c.set(@tactics.prove(@term_syntax.parse_term("(ORDERED : ((_, _) -> Bool, List[_]) -> Bool) == (PAIRWISE : ((_, _) -> Bool, List[_]) -> Bool)"), t23))
 }
 
 ///|
@@ -119,9 +119,9 @@ fn step_5() -> Unit raise {
   }
   let t27 = @simp.rewrite_tac(@list.List([@arith.lt_suc_le(), @morelist.length_filter_le()]))
   let t26 = @simp.rewrite_tac(@list.List([@wf.wf_measure(), @wf.measure(), @lists.length(), @lists.filter()]))
-  let t25 = @tactics.exists_tac(@parser.parse_term("MEASURE (LENGTH:A list -> num)"))
+  let t25 = @tactics.exists_tac(@term_syntax.parse_term("(MEASURE : ((List[A]) -> Num, List[A], List[A]) -> Bool)((LENGTH : (List[A]) -> Num))"))
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@class.skolem_thm()), @theorems.and_forall_thm()])), @tactics.gen_tac), prove_recursive_function_exists_tac), t25), t26), t27)
-  let t29 = @tactics.prove(@parser.parse_term("?f. (forall le. f le [] = [] : A list) /\\\n        (forall le h t. f le (CONS h t) =\n                  APPEND (f le (FILTER (\\x. ~le h x) t))\n                  (CONS h (f le (FILTER (\\x. le h x) t))))"), t28)
+  let t29 = @tactics.prove(@term_syntax.parse_term("∃ f : ((A, A) -> Bool, List[A]) -> List[A], (∀ le : (A, A) -> Bool, f(le, NIL) == NIL) && (∀ le : (A, A) -> Bool, ∀ h : A, ∀ t : List[A], f(le, CONS(h, t)) == APPEND(f(le, FILTER((x : A) => !le(h, x), t)), CONS(h, f(le, FILTER((x : A) => le(h, x), t)))))"), t28)
   qsort_c.set(@nums.new_specification(@list.List(["QSORT"]))(t29))
 }
 
@@ -144,7 +144,7 @@ fn step_6() -> Unit raise {
   let t31 = @simp.rewrite_tac(@list.List([qsort(), @morelist.count(), @lists.length(), @arith.lt_suc_le(), @morelist.count_append()]))
   let t30 = @tactics.match_mp_tac(@morelist.list_wf())
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t30), @lists.list_induct_tac), t31), @tactics.disch_tac), t32), t33), t34), t35)
-  count_qsort_c.set(@tactics.prove(@parser.parse_term("forall le x l. COUNT x (QSORT le l) = COUNT x l"), t36))
+  count_qsort_c.set(@tactics.prove(@term_syntax.parse_term("∀ le : (_, _) -> Bool, ∀ x : _, ∀ l : List[_], COUNT(x, QSORT(le, l)) == COUNT(x, l)"), t36))
 }
 
 ///|
@@ -160,7 +160,7 @@ pub fn count_qsort() -> @kernel.Thm {
 /// QSORT_PERMUTED
 fn step_7() -> Unit raise {
   let t37 = @simp.rewrite_tac(@list.List([@permuted.permuted_count(), count_qsort()]))
-  qsort_permuted_c.set(@tactics.prove(@parser.parse_term("forall le (l:A list). QSORT le l PERMUTED l"), t37))
+  qsort_permuted_c.set(@tactics.prove(@term_syntax.parse_term("∀ le : (A, A) -> Bool, ∀ l : List[A], PERMUTED(QSORT(le, l), l)"), t37))
 }
 
 ///|
@@ -176,7 +176,7 @@ pub fn qsort_permuted() -> @kernel.Thm {
 /// ALL_QSORT
 fn step_8() -> Unit raise {
   let t38 = @meson.meson_tac(@list.List([qsort_permuted(), @permuted.permuted_all()]))
-  all_qsort_c.set(@tactics.prove(@parser.parse_term("forall P le l. ALL P (QSORT le l) <=> ALL P l"), t38))
+  all_qsort_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (_) -> Bool, ∀ le : (_, _) -> Bool, ∀ l : List[_], ALL(P, QSORT(le, l)) == ALL(P, l)"), t38))
 }
 
 ///|
@@ -192,7 +192,7 @@ pub fn all_qsort() -> @kernel.Thm {
 /// LENGTH_QSORT
 fn step_9() -> Unit raise {
   let t39 = @meson.meson_tac(@list.List([qsort_permuted(), @permuted.permuted_length()]))
-  length_qsort_c.set(@tactics.prove(@parser.parse_term("forall le l. LENGTH (QSORT le l) =  LENGTH l"), t39))
+  length_qsort_c.set(@tactics.prove(@term_syntax.parse_term("∀ le : (_, _) -> Bool, ∀ l : List[_], LENGTH(QSORT(le, l)) == LENGTH(l)"), t39))
 }
 
 ///|
@@ -208,7 +208,7 @@ pub fn length_qsort() -> @kernel.Thm {
 /// MEM_QSORT
 fn step_10() -> Unit raise {
   let t40 = @meson.meson_tac(@list.List([qsort_permuted(), @permuted.permuted_mem()]))
-  mem_qsort_c.set(@tactics.prove(@parser.parse_term("forall le l x. MEM x (QSORT le l) <=> MEM x l"), t40))
+  mem_qsort_c.set(@tactics.prove(@term_syntax.parse_term("∀ le : (_, _) -> Bool, ∀ l : List[_], ∀ x : _, MEM(x, QSORT(le, l)) == MEM(x, l)"), t40))
 }
 
 ///|
@@ -230,7 +230,7 @@ fn step_11() -> Unit raise {
   let t42 = @simp.rewrite_tac(@list.List([qsort(), @lists.length(), ordered_rules(), @arith.lt_suc_le()]))
   let t41 = @tactics.match_mp_tac(@morelist.list_wf())
   let t47 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@theorems.right_imp_forall_thm())])), @tactics.gen_tac), @tactics.strip_tac), t41), @morelist.list_cases_tac), t42), @tactics.disch_tac), t43), t44), t45), t46)
-  ordered_qsort_c.set(@tactics.prove(@parser.parse_term("forall le (l:A list).\n     (forall x y. le x y \\/ le y x) /\\ (forall x y z. le x y \\/ le y z ==> le x z)\n     ==> ORDERED le (QSORT le l)"), t47))
+  ordered_qsort_c.set(@tactics.prove(@term_syntax.parse_term("∀ le : (A, A) -> Bool, ∀ l : List[A], (∀ x : A, ∀ y : A, le(x, y) || le(y, x)) && (∀ x : A, ∀ y : A, ∀ z : A, le(x, y) || le(y, z) → le(x, z)) → ORDERED(le, QSORT(le, l))"), t47))
 }
 
 ///|

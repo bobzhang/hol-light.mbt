@@ -77036,41 +77036,41 @@ test "Examples/complexpolygon matches Examples/complexpolygon.ml" {
       #|0..0..1..2..3..7..solved at 14
       #|0..0..1..2..solved at 6
       #|Examples/complexpolygon quotations (35):
-      #|  circle_group = group({z| norm z = &1},Cx(&1),complex_inv,complex_mul)
-      #|  z = Cx(&0)
-      #|  z:complex
-      #|  group_carrier circle_group = {z | norm z = &1} /\\\n   group_id circle_group = Cx(&1) /\\\n   group_inv circle_group = complex_inv /\\\n   group_mul circle_group = complex_mul
-      #|  abelian_group circle_group
-      #|  forall z n. group_pow circle_group z n = z pow n
-      #|  z:complex
-      #|  subgroup_generated circle_group s
-      #|  n:num
-      #|  n:num
-      #|  w:complex
-      #|  subgroup_generated circle_group s
-      #|  w:complex
-      #|  n:num
-      #|  z:complex
-      #|  subgroup_generated circle_group s
-      #|  n:num
-      #|  n = group_element_order (subgroup_generated circle_group s) z
-      #|  z:complex
-      #|  subgroup_generated circle_group s
-      #|  forall s:complex->bool.\n        FINITE s /\\ s subgroup_of circle_group\n        ==> ?n. 1 <= n /\\ s = {z | z pow n = Cx(&1)}
-      #|  z:complex
-      #|  w:complex
-      #|  s:complex->bool
-      #|  s:complex->bool
+      #|  (circle_group : Group[Cart[Real, Tybit0[Unit]]]) == group(({(z : Cart[Real, Tybit0[Unit]]) | norm(z) == real_of_num(1)}, Cx(real_of_num(1)), inv, op_star))
+      #|  (z : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  group_carrier(circle_group) == {(z : Cart[Real, Tybit0[Unit]]) | norm(z) == real_of_num(1)} && group_id(circle_group) == Cx(real_of_num(1)) && group_inv(circle_group) == inv && group_mul(circle_group) == op_star
+      #|  abelian_group(circle_group)
+      #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, group_pow(circle_group, z, n) == pow(z, n)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  subgroup_generated(circle_group, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (n : Num)
+      #|  (n : Num)
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  subgroup_generated(circle_group, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (n : Num)
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  subgroup_generated(circle_group, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  (n : Num)
+      #|  (n : Num) == group_element_order(subgroup_generated(circle_group, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)), (z : Cart[Real, Tybit0[Unit]]))
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  subgroup_generated(circle_group, (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(s) && subgroup_of(s, circle_group) \226\134\146 (\226\136\131 n : Num, 1 <= n && s == {(z : Cart[Real, Tybit0[Unit]]) | pow(z, n) == Cx(real_of_num(1))})
+      #|  (z : Cart[Real, Tybit0[Unit]])
+      #|  (w : Cart[Real, Tybit0[Unit]])
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  complex_mul
-      #|  ~q ==> (~p ==> q) ==> p
-      #|  w * z:complex
-      #|  s:complex->bool
-      #|  Cx(&0)
-      #|  forall s:complex->bool.\n      (forall z. z IN s ==> norm z = &1)\n      ==> ((forall w z. w IN convex hull s /\\ z IN convex hull s\n                  ==> w * z IN convex hull s) <=>\n           (forall w z. w IN s /\\ z IN s ==> w * z IN s))
-      #|  s:complex->bool
+      #|  !(q : Bool) \226\134\146 (!(p : Bool) \226\134\146 q) \226\134\146 p
+      #|  (w : Cart[Real, Tybit0[Unit]]) * (z : Cart[Real, Tybit0[Unit]])
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
+      #|  Cx(real_of_num(0))
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 norm(z) == real_of_num(1)) \226\134\146 (\226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(w, hull(convex, s)) && IN(z, hull(convex, s)) \226\134\146 IN(w * z, hull(convex, s))) == (\226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(w, s) && IN(z, s) \226\134\146 IN(w * z, s))
+      #|  (s : (Cart[Real, Tybit0[Unit]]) -> Bool)
       #|  circle_group
-      #|  forall s:complex->bool.\n        FINITE s /\\ ~(s = {}) /\\ (forall z. z IN s ==> norm z = &1)\n        ==> ((forall w z. w IN s /\\ z IN s ==> w * z IN s) <=>\n             s subgroup_of circle_group)
-      #|  forall s:complex->bool.\n      FINITE s /\\ ~(s = {}) /\\ (forall z. z IN s ==> norm z = &1)\n      ==> ((forall w z. w IN convex hull s /\\ z IN convex hull s\n                  ==> w * z IN convex hull s) <=>\n           ?n. 1 <= n /\\ s = {z | z pow n = Cx(&1)})
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(s) && !(s == {}) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 norm(z) == real_of_num(1)) \226\134\146 (\226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(w, s) && IN(z, s) \226\134\146 IN(w * z, s)) == subgroup_of(s, circle_group)
+      #|  \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, FINITE(s) && !(s == {}) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 norm(z) == real_of_num(1)) \226\134\146 (\226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(w, hull(convex, s)) && IN(z, hull(convex, s)) \226\134\146 IN(w * z, hull(convex, s))) == (\226\136\131 n : Num, 1 <= n && s == {(z : Cart[Real, Tybit0[Unit]]) | pow(z, n) == Cx(real_of_num(1))})
       #|circle_group =  |- ((#=:fun(group(cart(real,tybit0(1))),fun(group(cart(real,tybit0(1))),bool)) #circle_group:group(cart(real,tybit0(1)))) (#group:fun(prod(fun(cart(real,tybit0(1)),bool),prod(cart(real,tybit0(1)),prod(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))))),group(cart(real,tybit0(1)))) ((#,:fun(fun(cart(real,tybit0(1)),bool),fun(prod(cart(real,tybit0(1)),prod(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))))),prod(fun(cart(real,tybit0(1)),bool),prod(cart(real,tybit0(1)),prod(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))))))) (#GSPEC:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (\GEN%PVAR%1:cart(real,tybit0(1)). (#?:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). (((#SETSPEC:fun(cart(real,tybit0(1)),fun(bool,fun(cart(real,tybit0(1)),bool))) GEN%PVAR%1:cart(real,tybit0(1))) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) z:cart(real,tybit0(1)))))))) ((#,:fun(cart(real,tybit0(1)),fun(prod(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))),prod(cart(real,tybit0(1)),prod(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))))))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#,:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))),prod(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))))) #complex_inv:fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) #complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))))))))
       #|CIRCLE_GROUP =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun(cart(real,tybit0(1)),bool),fun(fun(cart(real,tybit0(1)),bool),bool)) (#group_carrier:fun(group(cart(real,tybit0(1))),fun(cart(real,tybit0(1)),bool)) #circle_group:group(cart(real,tybit0(1))))) (#GSPEC:fun(fun(cart(real,tybit0(1)),bool),fun(cart(real,tybit0(1)),bool)) (\GEN%PVAR%2:cart(real,tybit0(1)). (#?:fun(fun(cart(real,tybit0(1)),bool),bool) (\z:cart(real,tybit0(1)). (((#SETSPEC:fun(cart(real,tybit0(1)),fun(bool,fun(cart(real,tybit0(1)),bool))) GEN%PVAR%2:cart(real,tybit0(1))) ((#=:fun(real,fun(real,bool)) (#vector_norm:fun(cart(real,tybit0(1)),real) z:cart(real,tybit0(1)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) z:cart(real,tybit0(1))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),bool)) (#group_id:fun(group(cart(real,tybit0(1))),cart(real,tybit0(1))) #circle_group:group(cart(real,tybit0(1))))) (#Cx:fun(real,cart(real,tybit0(1))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),fun(fun(cart(real,tybit0(1)),cart(real,tybit0(1))),bool)) (#group_inv:fun(group(cart(real,tybit0(1))),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))) #circle_group:group(cart(real,tybit0(1))))) #complex_inv:fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) ((#=:fun(fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))),fun(fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1)))),bool)) (#group_mul:fun(group(cart(real,tybit0(1))),fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))) #circle_group:group(cart(real,tybit0(1))))) #complex_mul:fun(cart(real,tybit0(1)),fun(cart(real,tybit0(1)),cart(real,tybit0(1))))))))
       #|ABELIAN_CIRCLE_GROUP =  |- (#abelian_group:fun(group(cart(real,tybit0(1))),bool) #circle_group:group(cart(real,tybit0(1))))

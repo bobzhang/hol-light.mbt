@@ -12,361 +12,361 @@ pub fn bitblast(x1 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Examples/bitblast.ml:54
 fn step_1() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_xor x y:int64  = word_sub (word_or x y) (word_and x y)")))
+  ignore(bitblast(@term_syntax.parse_term("word_xor((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), (y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) == word_sub(word_or(x, y), word_and(x, y))")))
 }
 
 ///|
 /// Examples/bitblast.ml:56
 fn step_2() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_add x y:int64 = word_sub (word_shl (word_or x y) 1) (word_xor x y)")))
+  ignore(bitblast(@term_syntax.parse_term("word_add((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), (y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) == word_sub(word_shl(word_or(x, y), 1), word_xor(x, y))")))
 }
 
 ///|
 /// Examples/bitblast.ml:59
 fn step_3() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_and (word_not x) (word_sub x (word 1)):int64 =\n   word_not (word_or x (word_neg x))")))
+  ignore(bitblast(@term_syntax.parse_term("word_and(word_not((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), word_sub(x, word(1))) == word_not(word_or(x, word_neg(x)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:63
 fn step_4() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_not (word_or x (word_neg x)):int64 =\n  word_sub (word_and x (word_neg x)) (word 1)")))
+  ignore(bitblast(@term_syntax.parse_term("word_not(word_or((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), word_neg(x))) == word_sub(word_and(x, word_neg(x)), word(1))")))
 }
 
 ///|
 /// Examples/bitblast.ml:71
 fn step_5() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    val(word_add x y) < val x <=> ~(val(word_add x y) = val(x) + val(y))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (val(word_add(x, y)) < val(x)) == !(val(word_add(x, y)) == val(x) + val(y))")))
 }
 
 ///|
 /// Examples/bitblast.ml:75
 fn step_6() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    val(word_add x y) >= val y <=> val(word_add x y) = val(x) + val(y)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (val(word_add(x, y)) >= val(y)) == (val(word_add(x, y)) == val(x) + val(y))")))
 }
 
 ///|
 /// Examples/bitblast.ml:83
 fn step_7() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_sub (word_xor ((word_zx:int32->int64) x) (word 0x80000000))\n           (word 0x80000000) =\n  word_sx x")))
+  ignore(bitblast(@term_syntax.parse_term("(word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(2147483648)), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(2147483648)) == (word_sx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x)")))
 }
 
 ///|
 /// Examples/bitblast.ml:92
 fn step_8() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let m:int64 = word_neg(word(bitval b)) in\n  word_sub (word_xor x m) m = word_xor (word_add x m) m")))
+  ignore(bitblast(@term_syntax.parse_term("LET((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_sub(word_xor((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), m), m) == word_xor(word_add(x, m), m)), word_neg(word(bitval((b : Bool)))))")))
 }
 
 ///|
 /// Examples/bitblast.ml:100
 fn step_9() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n     (word_ushr (word_or (word_neg x) x) 63 = word 1 <=> ~(x = word 0)) /\\\n     (word_ushr (word_or (word_neg x) x) 63 = word 0 <=> x = word 0)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr(word_or(word_neg(x), x), 63) == word(1)) == !(x == word(0)) && (word_ushr(word_or(word_neg(x), x), 63) == word(0)) == (x == word(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:105
 fn step_10() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n     (word_ishr (word_or (word_neg x) x) 63 = word 0xFFFFFFFFFFFFFFFF <=>\n      ~(x = word 0)) /\\\n     (word_ishr (word_or (word_neg x) x) 63 = word 0 <=> x = word 0)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ishr(word_or(word_neg(x), x), 63) == word(18446744073709551615)) == !(x == word(0)) && (word_ishr(word_or(word_neg(x), x), 63) == word(0)) == (x == word(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:115
 fn step_11() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n   let x2  = word_sub x (word_ushr (word_and x (word 0xAAAAAAAAAAAAAAAA)) 1) in\n   let x4  = word_add (word_and x2 (word 0x3333333333333333))\n                      (word_ushr (word_and x2 (word 0xCCCCCCCCCCCCCCCC)) 2) in\n   let x8  = word_and (word_add x4 (word_ushr x4 4))\n                      (word 0x0F0F0F0F0F0F0F0F) in\n   let x64 = word_mul x8 (word 0x101010101010101) in\n   let y = word_ushr x64 56 in\n   y = word(word_popcount x)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x64 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(y == word(word_popcount(x))), word_ushr(x64, 56))), word_mul(x8, word(72340172838076673)))), word_and(word_add(x4, word_ushr(x4, 4)), word(1085102592571150095)))), word_add(word_and(x2, word(3689348814741910323)), word_ushr(word_and(x2, word(14757395258967641292)), 2)))), word_sub(x, word_ushr(word_and(x, word(12297829382473034410)), 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:126
 fn step_12() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:15 word.\n        let u:int64 = word_mul (word_zx x) (word 0x0002000400080010) in\n        let v = word_and u (word 0x1111111111111111) in\n        let w = word_mul v (word 0x1111111111111111) in\n        let y = word_ushr w 60 in\n        y = word(word_popcount x)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit1[Tybit1[Tybit1[Unit]]]], LET((u : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((v : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(y == word(word_popcount(x))), word_ushr(w, 60))), word_mul(v, word(1229782938247303441)))), word_and(u, word(1229782938247303441)))), word_mul(word_zx(x), word(562967133814800)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:138
 fn step_13() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:nybble y:nybble. val x * val y = 13 ==> val x = 1 \\/ val y = 1")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Unit]]], ∀ y : Word[Tybit0[Tybit0[Unit]]], val(x) * val(y) == 13 → val(x) == 1 || val(y) == 1")))
 }
 
 ///|
 /// Examples/bitblast.ml:141
 fn step_14() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:byte y:byte. val x * val y = 241 ==> val x = 1 \\/ val y = 1")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Unit]]]], val(x) * val(y) == 241 → val(x) == 1 || val(y) == 1")))
 }
 
 ///|
 /// Examples/bitblast.ml:148
 fn step_15() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_xor x1 (word_ushr x1 2) in\n        let x4 = word_xor x2 (word_ushr x2 4) in\n        let x8 = word_xor x4 (word_ushr x4 8) in\n        let x16 = word_xor x8 (word_ushr x8 16) in\n        let x32 = word_xor x16 (word_ushr x16 32) in\n        let y = word_and x32 (word 1) in\n        y = word(bitval(word_oddparity x))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(y == word(bitval(word_oddparity(x)))), word_and(x32, word(1)))), word_xor(x16, word_ushr(x16, 32)))), word_xor(x8, word_ushr(x8, 16)))), word_xor(x4, word_ushr(x4, 8)))), word_xor(x2, word_ushr(x2, 4)))), word_xor(x1, word_ushr(x1, 2)))), word_xor(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:159
 fn step_16() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_and (word_xor x1 (word_ushr x1 2)) (word 0x11111111) in\n        let x4 = word_mul x2 (word 0x11111111) in\n        let y = word_and (word_ushr x4 28) (word 1) in\n        y = word(bitval(word_oddparity x))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(y == word(bitval(word_oddparity(x)))), word_and(word_ushr(x4, 28), word(1)))), word_mul(x2, word(286331153)))), word_and(word_xor(x1, word_ushr(x1, 2)), word(286331153)))), word_xor(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:167
 fn step_17() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32.\n        let x1 = word_xor x (word_ushr x 1) in\n        let x2 = word_and (word_xor x1 (word_ushr x1 2)) (word 0x11111111) in\n        let x4 = word_mul x2 (word 0x88888888) in\n        let y = word_ushr x4 31 in\n        y = word(bitval(word_oddparity x))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(y == word(bitval(word_oddparity(x)))), word_ushr(x4, 31))), word_mul(x2, word(2290649224)))), word_and(word_xor(x1, word_ushr(x1, 2)), word(286331153)))), word_xor(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:179
 fn step_18() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :65 word =\n        word_zx (word_add (word_and x y) (word_ushr (word_xor x y) 1))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y)), 1) == (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:184
 fn step_19() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :int128 =\n        word_zx (word_add (word_and x y) (word_ushr (word_xor x y) 1))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])(x), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])(y)), 1) == (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:189
 fn step_20() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n        word_ushr (word_add (word_zx x) (word_zx y)) 1 :65 word =\n        word_zx (word_add (word_add (word_ushr x 1) (word_ushr y 1))\n                          (word_and (word_and x y) (word 1)))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y)), 1) == (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, 1), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y, 1)), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1))))")))
 }
 
 ///|
 /// Examples/bitblast.ml:199
 fn step_21() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64. let x' = word_not x in\n            word_and x' (word_neg x') =\n            word_and (word_xor x (word_add x (word 1))) (word_not x)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x' : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_and(x', word_neg(x')) == word_and(word_xor(x, word_add(x, word(1))), word_not(x))), word_not(x))")))
 }
 
 ///|
 /// Examples/bitblast.ml:208
 fn step_22() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:int64. word_xor x (word_ushr x 1) in\n        gray x = gray y ==> x = y")))
+  ignore(bitblast(@term_syntax.parse_term("LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) == gray((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) → x == y), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:216
 fn step_23() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:int64. word_xor x (word_ushr x 1) in\n        word(bitval(word_oddparity(gray x))):byte =\n        word(bitval(bit 0 x))")))
+  ignore(bitblast(@term_syntax.parse_term("(LET : (((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(bitval((word_oddparity : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]))))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(bitval((bit : (Num, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)(0, x)))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:225
 fn step_24() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_and x (word_sub x (word 1)):int64 = word 0 <=>\n  word_and (word(word_popcount x):byte) (word_not(word 1)) = word 0")))
+  ignore(bitblast(@term_syntax.parse_term("((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(0)) == ((word_and : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)(x)), (word_not : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(1))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:229
 fn step_25() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("word_and x (word_sub x (word 1)):int64 = word 0 <=>\n  word_popcount x = 0 \\/ word_popcount x = 1")))
+  ignore(bitblast(@term_syntax.parse_term("(word_and((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), word_sub(x, word(1))) == word(0)) == (word_popcount(x) == 0 || word_popcount(x) == 1)")))
 }
 
 ///|
 /// Examples/bitblast.ml:237
 fn step_26() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:int64. word_xor x (word_ushr x 1)\n  and pow2orzero = \\x:int64. word_and x (word_sub x (word 1)) = word 0 in\n  pow2orzero(word_xor (gray x) (gray (word_add x (word 1))))")))
+  ignore(bitblast(@term_syntax.parse_term("LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (pow2orzero : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool) => LET_END(pow2orzero(word_xor(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), gray(word_add(x, word(1)))))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_and(x, word_sub(x, word(1))) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:242
 fn step_27() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:int64. word_xor x (word_ushr x 1)\n  and pow2 = \\x:int64. word_and x (word_sub x (word 1)) = word 0 /\\\n                       ~(x = word 0) in\n  pow2(word_xor (gray x) (gray (word_add x (word 1))))")))
+  ignore(bitblast(@term_syntax.parse_term("LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (pow2 : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool) => LET_END(pow2(word_xor(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), gray(word_add(x, word(1)))))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_and(x, word_sub(x, word(1))) == word(0) && !(x == word(0)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:248
 fn step_28() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:int64. word_xor x (word_ushr x 1) in\n  word(word_popcount(word_xor (gray x) (gray (word_add x (word 1))))):byte =\n  word 1")))
+  ignore(bitblast(@term_syntax.parse_term("(LET : (((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), gray((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1)))))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(1)), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:257
 fn step_29() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:int64. word_xor x (word_ushr x 1) in\n  gray(gray x) = word_xor x (word_ushr x 2)")))
+  ignore(bitblast(@term_syntax.parse_term("LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(gray(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]))) == word_xor(x, word_ushr(x, 2))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:261
 fn step_30() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let gray = \\x:byte. word_xor x (word_ushr x 1) in\n  gray(gray(gray(gray(gray(gray(gray(gray x))))))) = x")))
+  ignore(bitblast(@term_syntax.parse_term("LET((gray : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]]) => LET_END(gray(gray(gray(gray(gray(gray(gray(gray((x : Word[Tybit0[Tybit0[Tybit0[Unit]]]]))))))))) == x), (x : Word[Tybit0[Tybit0[Tybit0[Unit]]]]) => word_xor(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:269
 fn step_31() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64. word_clz(word_or x y) <= word_clz x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], word_clz(word_or(x, y)) <= word_clz(x)")))
 }
 
 ///|
 /// Examples/bitblast.ml:272
 fn step_32() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32. word_popcount(word_add x (word 1)) = 1\n            ==> word_ctz x = 0 \\/ word_ctz x = 32")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], word_popcount(word_add(x, word(1))) == 1 → word_ctz(x) == 0 || word_ctz(x) == 32")))
 }
 
 ///|
 /// Examples/bitblast.ml:276
 fn step_33() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32. ~(x = word 0)\n            ==> word_popcount(word_sub x (word 1)) + 1 =\n                word_popcount x + word_ctz x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], !(x == word(0)) → word_popcount(word_sub(x, word(1))) + 1 == word_popcount(x) + word_ctz(x)")))
 }
 
 ///|
 /// Examples/bitblast.ml:281
 fn step_34() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32. word_clz x + word_popcount x + word_ctz x = 32 <=>\n           ~(x = word 0) /\\\n           word_and (word_add (word_or x (word_sub x (word 1))) (word 1)) x =\n           word 0")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word_clz(x) + (word_popcount(x) + word_ctz(x)) == 32) == (!(x == word(0)) && word_and(word_add(word_or(x, word_sub(x, word(1))), word(1)), x) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:287
 fn step_35() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32. word_popcount x = 0 \\/ word_popcount x = 1 <=>\n            word_and x (word_sub x (word 1)) = word 0")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word_popcount(x) == 0 || word_popcount(x) == 1) == (word_and(x, word_sub(x, word(1))) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:291
 fn step_36() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32. word_popcount x = 1 <=>\n            word_or (word_not(word_ishr (word_or x (word_neg x)) 31))\n                    (word_and x (word_sub x (word 1))) =\n            word 0")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word_popcount(x) == 1) == (word_or(word_not(word_ishr(word_or(x, word_neg(x)), 31)), word_and(x, word_sub(x, word(1)))) == word(0))")))
 }
 
 ///|
 /// Examples/bitblast.ml:305
 fn step_37() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int32. word(word_ctz x):byte =\n            word(word_popcount(word_sub (word_and x (word_neg x)) (word 1)))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_ctz : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Num)(x)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Num)((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(x, (word_neg : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(x)), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(1))))")))
 }
 
 ///|
 /// Examples/bitblast.ml:309
 fn step_38() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64. word(word_ctz x):byte =\n            word(word_popcount(word_sub (word_and x (word_neg x)) (word 1)))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_ctz : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)(x)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_neg : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x)), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1))))")))
 }
 
 ///|
 /// Examples/bitblast.ml:317
 fn step_39() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n        word_clz x = word_clz y <=> val(word_xor x y) <= val(word_and x y)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_clz(x) == word_clz(y)) == (val(word_xor(x, y)) <= val(word_and(x, y)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:321
 fn step_40() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n        word_clz x < word_clz y <=> val(word_and x (word_not y)) > val y")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_clz(x) < word_clz(y)) == (val(word_and(x, word_not(y))) > val(y))")))
 }
 
 ///|
 /// Examples/bitblast.ml:325
 fn step_41() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n        word_clz x <= word_clz y <=> val(word_and (word_not x) y) <= val x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_clz(x) <= word_clz(y)) == (val(word_and(word_not(x), y)) <= val(x))")))
 }
 
 ///|
 /// Examples/bitblast.ml:336
 fn step_42() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    let h = word 0x8080808080808080\n    and l = word 0x0101010101010101 in\n    let s = word_add (word_and x (word_not h)) (word_and y (word_not h))\n    and t = word_and (word_xor x y) h in\n    let z = word_xor s t in\n    forall i. i < 8 ==> word_subword z (8*i,8) :byte =\n                  word_add (word_subword x (8*i,8)) (word_subword y (8*i,8))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (l : Word[_]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (t : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(∀ i : Num, i < 8 → (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word_add : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)), (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(s, t))), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h)), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), h))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144), (word : (Num) -> Word[_])(72340172838076673))")))
 }
 
 ///|
 /// Examples/bitblast.ml:348
 fn step_43() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    let h = word 0x8080808080808080\n    and l = word 0x0101010101010101 in\n    let s = word_sub (word_or x h) (word_and y (word_not h))\n    and t = word_and (word_xor x (word_not y)) h in\n    let z = word_xor s t in\n    forall i. i < 8 ==> word_subword z (8*i,8) :byte =\n                  word_sub (word_subword x (8*i,8)) (word_subword y (8*i,8))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (l : Word[_]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (t : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(∀ i : Num, i < 8 → (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word_sub : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)), (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(s, t))), (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, h), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y)), h))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144), (word : (Num) -> Word[_])(72340172838076673))")))
 }
 
 ///|
 /// Examples/bitblast.ml:360
 fn step_44() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    let l = word 0x0101010101010101 in\n    let z = word_add (word_and x y)\n                     (word_ushr (word_and (word_xor x y) (word_not l)) 1) in\n    forall i. i < 8\n        ==> word_zx (word_subword z (8*i,8) :byte):9 word =\n            word_ushr (word_add (word_zx (word_subword x (8*i,8) :byte))\n                                (word_zx (word_subword y (8*i,8) :byte))) 1")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(∀ i : Num, i < 8 → (word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8))) == (word_ushr : (Word[Tybit1[Tybit0[Tybit0[Unit]]]], Num) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_add : (Word[Tybit1[Tybit0[Tybit0[Unit]]]], Word[Tybit1[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8))), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), 1)), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(l)), 1)))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(72340172838076673))")))
 }
 
 ///|
 /// Examples/bitblast.ml:375
 fn step_45() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    let m = word 0x7F7F7F7F7F7F7F7F in\n    let d = word_xor x y in\n    let w = word_add (word_and d m) m in\n    let z = word_not (word_or (word_or d m) w) in\n    forall i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8))) /\\\n            (word_subword z (8*i,8) :byte = word 0x80 <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((d : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(∀ i : Num, i < 8 → ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)) == !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8))) && ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(128)) == ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, m), w)))), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, m), m))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9187201950435737471))")))
 }
 
 ///|
 /// Examples/bitblast.ml:387
 fn step_46() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    let h = word 0x8080808080808080 in\n    let d = word_xor x y in\n    let w = word_and (word_sub (word_or (word_ushr d 1) h) d) h in\n    let z = word_sub (word_shl w 1) (word_ushr w 7) in\n    forall i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8))) /\\\n            (word_subword z (8*i,8) :byte = word 0xFF <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((d : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(∀ i : Num, i < 8 → ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)) == !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8))) && ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(255)) == ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_shl : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(w, 1), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(w, 7)))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, 1), h), d), h))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144))")))
 }
 
 ///|
 /// Examples/bitblast.ml:399
 fn step_47() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x y:int64.\n    let h = word 0x8080808080808080 in\n    let m = word_not h in\n    let d = word_xor x y in\n    let w = word_add (word_and d m) m in\n    let z = word_and (word_or w d) h in\n   forall i. i < 8\n        ==> (word_subword z (8*i,8) :byte = word 0 <=>\n             word_subword x (8*i,8):byte = word_subword y (8*i,8)) /\\\n            (word_subword z (8*i,8) :byte = word 0x80 <=>\n             ~(word_subword x (8*i,8):byte = word_subword y (8*i,8)))")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((d : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(∀ i : Num, i < 8 → ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)) == ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8))) && ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(128)) == !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(w, d), h))), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, m), m))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y))), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144))")))
 }
 
 ///|
 /// Examples/bitblast.ml:416
 fn step_48() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("let h = word 0x8080808080808080\n  and l = word 0x0101010101010101 in\n  word_and h (word_and (word_sub x l) (word_not x)):int64 = word 0 <=>\n  forall i. i < 8\n      ==> ~(word_subword x (8*i,8) :byte = word 0)")))
+  ignore(bitblast(@term_syntax.parse_term("(LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h, (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), l), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(0)) == (∀ i : Num, i < 8 → !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(72340172838076673))")))
 }
 
 ///|
 /// Examples/bitblast.ml:428
 fn step_49() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall a:int32.\n        let w = word_xor (word_add a (word 0x06666666)) a in\n        let z = word_and w (word 0x11111110) in\n        ((forall i. i < 7\n              ==> val(word_subword a (4*i,4):nybble) < 10)\n         <=> z = word 0)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ a : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((∀ i : Num, i < 7 → (val : (Word[Tybit0[Tybit0[Unit]]]) -> Num)((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Unit]]])(a, (4 * i, 4))) < 10) == (z == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(0))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(w, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(286331152)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(a, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(107374182)), a))")))
 }
 
 ///|
 /// Examples/bitblast.ml:438
 fn step_50() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall a:int32.\n        let a' = word_ushr a 1 in\n        let w = word_xor (word_add a' (word 0x33333333)) a' in\n        let z = word_and w (word 0x88888888) in\n        ((forall i. i < 8\n              ==> val(word_subword a (4*i,4):nybble) < 10)\n         <=> z = word 0)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ a : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((a' : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((∀ i : Num, i < 8 → (val : (Word[Tybit0[Tybit0[Unit]]]) -> Num)((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Unit]]])(a, (4 * i, 4))) < 10) == (z == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(0))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(w, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(2290649224)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(a', (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(858993459)), a'))), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(a, 1))")))
 }
 
 ///|
 /// Examples/bitblast.ml:451
 fn step_51() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall a:5 word.\n        let x = word_xor (word_sub a (word_shl a 2)) (word 2) in\n        bit 0 a ==> word_mul a x = word_neg(word 1)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ a : Word[Tybit1[Tybit0[Unit]]], LET((x : Word[Tybit1[Tybit0[Unit]]]) => LET_END(bit(0, a) → word_mul(a, x) == word_neg(word(1))), word_xor(word_sub(a, word_shl(a, 2)), word(2)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:456
 fn step_52() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall a:4 word.\n   let x = word_sub (word_shl (word_and (word_sub (word 1) a) (word 4)) 1) a in\n   bit 0 a ==> word_mul a x = word_neg(word 1)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ a : Word[Tybit0[Tybit0[Unit]]], LET((x : Word[Tybit0[Tybit0[Unit]]]) => LET_END(bit(0, a) → word_mul(a, x) == word_neg(word(1))), word_sub(word_shl(word_and(word_sub(word(1), a), word(4)), 1), a))")))
 }
 
 ///|
 /// Examples/bitblast.ml:465
 fn step_53() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n        let x1 = word_or x (word_ushr x 1) in\n        let x2 = word_or x1 (word_ushr x1 2) in\n        let x4 = word_or x2 (word_ushr x2 4) in\n        let x8 = word_or x4 (word_ushr x4 8) in\n        let x16 = word_or x8 (word_ushr x8 16) in\n        let x32 = word_or x16 (word_ushr x16 32) in\n        word_popcount(word_not x32) = word_clz x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_popcount(word_not(x32)) == word_clz(x)), word_or(x16, word_ushr(x16, 32)))), word_or(x8, word_ushr(x8, 16)))), word_or(x4, word_ushr(x4, 8)))), word_or(x2, word_ushr(x2, 4)))), word_or(x1, word_ushr(x1, 2)))), word_or(x, word_ushr(x, 1)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:475
 fn step_54() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n        let x1 = word_or x (word_ushr x 32) in\n        let x2 = word_or x1 (word_ushr x1 16) in\n        let x4 = word_or x2 (word_ushr x2 8) in\n        let x8 = word_or x4 (word_ushr x4 4) in\n        let x16 = word_or x8 (word_ushr x8 2) in\n        let x32 = word_or x16 (word_ushr x16 1) in\n        word_popcount(word_not x32) = word_clz x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_popcount(word_not(x32)) == word_clz(x)), word_or(x16, word_ushr(x16, 1)))), word_or(x8, word_ushr(x8, 2)))), word_or(x4, word_ushr(x4, 4)))), word_or(x2, word_ushr(x2, 8)))), word_or(x1, word_ushr(x1, 16)))), word_or(x, word_ushr(x, 32)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:485
 fn step_55() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n   (if x = word 0 then word 64 else\n    let n = word 0 in\n    let x0,n0 = if val x <= 0x00000000FFFFFFFF\n                then word_shl x 32,word_add n (word 32) else x,n in\n    let x1,n1 = if val x0 <= 0x0000FFFFFFFFFFFF\n                then word_shl x0 16,word_add n0 (word 16) else x0,n0 in\n    let x2,n2 = if val x1 <= 0x00FFFFFFFFFFFFFF\n                then word_shl x1 8,word_add n1 (word 8) else x1,n1 in\n    let x3,n3 = if val x2 <= 0x0FFFFFFFFFFFFFFF\n                then word_shl x2 4,word_add n2 (word 4) else x2,n2 in\n    let x4,n4 = if val x3 <= 0x3FFFFFFFFFFFFFFF\n                then word_shl x3 2,word_add n3 (word 2) else x3,n3 in\n    if val x4 <= 0x7FFFFFFFFFFFFFFF then word_add n4 (word 1) else n4):int64 =\n   word(word_clz x)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (if x == word(0) { word(64) } else { LET((n : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => ∀ x0 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ n0 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x0, n0)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => ∀ x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ n1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x1, n1)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => ∀ x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ n2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x2, n2)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => ∀ x3 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ n3 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x3, n3)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => ∀ x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], ∀ n4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x4, n4)), LET_END(if val(x4) <= 9223372036854775807 { word_add(n4, word(1)) } else { n4 }))), if val(x3) <= 4611686018427387903 { (word_shl(x3, 2), word_add(n3, word(2))) } else { (x3, n3) })))), if val(x2) <= 1152921504606846975 { (word_shl(x2, 4), word_add(n2, word(4))) } else { (x2, n2) })))), if val(x1) <= 72057594037927935 { (word_shl(x1, 8), word_add(n1, word(8))) } else { (x1, n1) })))), if val(x0) <= 281474976710655 { (word_shl(x0, 16), word_add(n0, word(16))) } else { (x0, n0) })))), if val(x) <= 4294967295 { (word_shl(x, 32), word_add(n, word(32))) } else { (x, n) })), word(0)) }) == word(word_clz(x))")))
 }
 
 ///|
 /// Examples/bitblast.ml:502
 fn step_56() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:int64.\n        let MASK32 = word 0xFFFFFFFF00000000\n        and MASK16 = word 0xFFFF0000FFFF0000\n        and MASK8 = word 0xFF00FF00FF00FF00\n        and MASK4 = word 0xF0F0F0F0F0F0F0F0\n        and MASK2 = word 0xCCCCCCCCCCCCCCCC\n        and MASK1 = word 0xAAAAAAAAAAAAAAAA in\n        (if x = word 0 then 64 else\n         (if val(word_and x MASK32) < val(word_and x (word_not MASK32))\n          then 32 else 0) +\n         (if val(word_and x MASK16) < val(word_and x (word_not MASK16))\n          then 16 else 0) +\n         (if val(word_and x MASK8) < val(word_and x (word_not MASK8))\n          then 8 else 0) +\n         (if val(word_and x MASK4) < val(word_and x (word_not MASK4))\n          then 4 else 0) +\n         (if val(word_and x MASK2) < val(word_and x (word_not MASK2))\n          then 2 else 0) +\n         (if val(word_and x MASK1) < val(word_and x (word_not MASK1))\n          then 1 else 0)) =\n    word_clz x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((MASK32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END((if x == word(0) { 64 } else { (if val(word_and(x, MASK32)) < val(word_and(x, word_not(MASK32))) { 32 } else { 0 }) + ((if val(word_and(x, MASK16)) < val(word_and(x, word_not(MASK16))) { 16 } else { 0 }) + ((if val(word_and(x, MASK8)) < val(word_and(x, word_not(MASK8))) { 8 } else { 0 }) + ((if val(word_and(x, MASK4)) < val(word_and(x, word_not(MASK4))) { 4 } else { 0 }) + ((if val(word_and(x, MASK2)) < val(word_and(x, word_not(MASK2))) { 2 } else { 0 }) + (if val(word_and(x, MASK1)) < val(word_and(x, word_not(MASK1))) { 1 } else { 0 }))))) }) == word_clz(x)), word(18446744069414584320), word(18446462603027742720), word(18374966859414961920), word(17361641481138401520), word(14757395258967641292), word(12297829382473034410))")))
 }
 
 ///|
 /// Examples/bitblast.ml:530
 fn step_57() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:byte.\n     let f = word_mul (word_zx x) (word 0x80200802:int64) in\n     let s = word_and f (word 0x0884422110) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_ushr m 32 in\n     word_zx l = word_reversefields 1 x")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], LET((f : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_zx(l) == word_reversefields(1, x)), word_ushr(m, 32))), word_mul(s, word(4311810305)))), word_and(f, word(36578664720)))), word_mul(word_zx(x), word(2149582850)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:538
 fn step_58() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:byte.\n     let f = word_mul (word_zx x) (word 0x80200802:int64) in\n     let s = word_and f (word 0x0884422110) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_and (word_ushr m 32) (word 0xFF) in\n     l = word_zx(word_reversefields 1 x)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], LET((f : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(l == word_zx(word_reversefields(1, x))), word_and(word_ushr(m, 32), word(255)))), word_mul(s, word(4311810305)))), word_and(f, word(36578664720)))), word_mul(word_zx(x), word(2149582850)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:551
 fn step_59() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall x:byte.\n     let f = word_mul (word_zx x) (word 0x40100401:int64) in\n     let s = word_and f (word 0x884422011) in\n     let m = word_mul s (word 0x0101010101) in\n     let l = word_ushr m 32 in\n     word_zx l =\n     word_or (word_and x (word 1))\n        (word_shl\n          (word_zx(word_reversefields 1 (word_zx (word_ushr x 1):7 word))) 1)")))
+  ignore(bitblast(@term_syntax.parse_term("∀ x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((f : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(l) == (word_or : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(1)), (word_shl : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_zx : (Word[Tybit1[Tybit1[Unit]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_reversefields : (Num, Word[Tybit1[Tybit1[Unit]]]) -> Word[Tybit1[Tybit1[Unit]]])(1, (word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit1[Unit]]])((word_ushr : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, 1)))), 1))), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(m, 32))), (word_mul : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(s, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(4311810305)))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(f, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(36578664465)))), (word_mul : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1074791425)))")))
 }
 
 ///|
 /// Examples/bitblast.ml:568
 fn step_60() -> Unit raise {
-  ignore(bitblast(@parser.parse_term("forall a:int32.\n    let ML_DSA_Q = &8380417 in\n    let t = word_ishr (word_add a (word_shl (word 1) 22)) 23 in\n    let r = word_sub a (word_mul t (iword ML_DSA_Q)) in\n    ival(a) < &0x7fc00000\n    ==> ival(a) - ML_DSA_Q * ival t = ival r /\\\n        --(&6283009) <= ival r /\\ ival r <= &6283008")))
+  ignore(bitblast(@term_syntax.parse_term("∀ a : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], LET((ML_DSA_Q : Int) => LET_END(LET((t : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((r : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(ival(a) < int_of_num(2143289344) → ival(a) - ML_DSA_Q * ival(t) == ival(r) && -int_of_num(6283009) <= ival(r) && ival(r) <= int_of_num(6283008)), word_sub(a, word_mul(t, iword(ML_DSA_Q))))), word_ishr(word_add(a, word_shl(word(1), 22)), 23))), int_of_num(8380417))")))
 }
 
 ///|

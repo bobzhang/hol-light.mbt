@@ -7969,56 +7969,56 @@ test "GL/misc matches GL/misc.ml" {
       #|0..0..1..2..5..8..13..18..25..32..43..54..69..84..103..122..solved at 138
       #|0..0..1..solved at 4
       #|GL/misc quotations (50):
-      #|  (forall f:A->B list. FLATMAP f [] = []) /\\\n   (forall f:A->B list h t. FLATMAP f (CONS h t) = APPEND (f h) (FLATMAP f t))
-      #|  forall x f:A->B list l. MEM x (FLATMAP f l) <=> ?y. MEM y l /\\ MEM x (f y)
-      #|  LISTDIFF l m = FILTER (\\x:A. ~MEM x m) l
-      #|  forall x:A l m. MEM x (LISTDIFF l m) <=> MEM x l /\\ ~MEM x m
-      #|  l SUBLIST m <=> (forall x:A. MEM x l ==> MEM x m)
-      #|  l:A list
-      #|  forall l:A list. l = [] <=> forall x. ~(MEM x l)
-      #|  forall l:A list. l SUBLIST [] <=> l = []
-      #|  forall l:A list. [] SUBLIST l
-      #|  forall l:A list. l SUBLIST l
-      #|  forall h:A t l. CONS h t SUBLIST l <=> MEM h l /\\ t SUBLIST l
-      #|  forall l m n. l SUBLIST m /\\ m SUBLIST n ==> l SUBLIST n
-      #|  forall l m:A list.  LISTDIFF m l SUBLIST m
-      #|  NOREPETITION l <=> PAIRWISE (\\x y:A. ~(x = y)) l
-      #|  NOREPETITION [] /\\\n   (forall h:A t. NOREPETITION (CONS h t) <=> ~MEM h t /\\ NOREPETITION t)
-      #|  forall s:A->bool. FINITE s ==> NOREPETITION (list_of_set s)
-      #|  list_of_set (set_of_list l):A list
-      #|  forall l:A list. ?m. NOREPETITION m /\\ l SUBLIST m /\\ m SUBLIST l
-      #|  forall P l:A list. NOREPETITION l ==> NOREPETITION (FILTER P l)
-      #|  ~(CARD (s:A->bool) = 0)
-      #|  FINITE (s:A->bool)
-      #|  forall s a:A n. s DELETE a HAS_SIZE n <=>\n             a IN s /\\ s HAS_SIZE SUC n \\/\n             ~(a IN s) /\\ s HAS_SIZE n
-      #|  l:A list
-      #|  {l | LENGTH l = SUC n /\\ (forall x:A. MEM x l ==> x IN s)} =\n     IMAGE (UNCURRY CONS)\n           (s CROSS {l | LENGTH l = n /\\ (forall x. MEM x l ==> x IN s)})
-      #|  m EXP SUC n = m * m EXP n
-      #|  {}:A list->bool
-      #|  []:A list
-      #|  m EXP 0 = SUC 0
-      #|  forall s m n.\n     s HAS_SIZE m\n     ==> {l | LENGTH l = n /\\ forall x:A. MEM x l ==> x IN s} HAS_SIZE m EXP n
-      #|  forall s n. FINITE s ==> FINITE {l | LENGTH l = n /\\ forall x:A. MEM x l ==> x IN s}
-      #|  UNIONS (IMAGE (\\k. {l | LENGTH l = k /\\ forall x:A. MEM x l ==> x IN s})\n                   (0..n))
-      #|  forall s n. FINITE s ==> FINITE {l | LENGTH l <= n /\\ forall x:A. MEM x l ==> x IN s}
-      #|  s DELETE h:A
-      #|  forall n l s. s HAS_SIZE n /\\ (forall x:A. MEM x l ==> x IN s) /\\ NOREPETITION l\n           ==> LENGTH l <= n
-      #|  {l | LENGTH l <= CARD s /\\ forall x:A. MEM x l ==> x IN s}
-      #|  forall s n. FINITE s ==> FINITE {l | NOREPETITION l /\\ forall x:A. MEM x l ==> x IN s}
-      #|  b0:bool,b1:bool,b2:bool,b3:bool,b4:bool,b5:bool,b6:bool,b7:bool
-      #|  c:char
-      #|  c:char
-      #|  (:char) =\n     IMAGE (\\(b0,b1,b2,b3,b4,b5,b6,b7). ASCII b0 b1 b2 b3 b4 b5 b6 b7)\n           UNIV
-      #|  FINITE (:char)
-      #|  2*2*2*2*2*2*2*2
-      #|  b0:bool,b1:bool,b2:bool,b3:bool,b4:bool,b5:bool,b6:bool,b7:bool
-      #|  c:char
-      #|  c:char
-      #|  (:char) =\n     IMAGE (\\(b0,b1,b2,b3,b4,b5,b6,b7). ASCII b0 b1 b2 b3 b4 b5 b6 b7)\n           UNIV
-      #|  (:char) HAS_SIZE 256
-      #|  FINITE (:char)
-      #|  COUNTABLE (:char)
-      #|  COUNTABLE (:string)
+      #|  (\226\136\128 f : (A) -> List[B], (FLATMAP : ((A) -> List[B], List[A]) -> List[B])(f, NIL) == NIL) && (\226\136\128 f : (A) -> List[B], \226\136\128 h : A, \226\136\128 t : List[A], FLATMAP(f, CONS(h, t)) == APPEND(f(h), FLATMAP(f, t)))
+      #|  \226\136\128 x : B, \226\136\128 f : (A) -> List[B], \226\136\128 l : List[A], MEM(x, FLATMAP(f, l)) == (\226\136\131 y : A, MEM(y, l) && MEM(x, f(y)))
+      #|  (LISTDIFF : (List[A], List[A]) -> List[A])((l : List[A]), (m : List[A])) == FILTER((x : A) => !MEM(x, m), l)
+      #|  \226\136\128 x : A, \226\136\128 l : List[A], \226\136\128 m : List[A], MEM(x, LISTDIFF(l, m)) == (MEM(x, l) && !MEM(x, m))
+      #|  (SUBLIST : (List[A], List[A]) -> Bool)((l : List[A]), (m : List[A])) == (\226\136\128 x : A, MEM(x, l) \226\134\146 MEM(x, m))
+      #|  (l : List[A])
+      #|  \226\136\128 l : List[A], (l == NIL) == (\226\136\128 x : A, !MEM(x, l))
+      #|  \226\136\128 l : List[A], SUBLIST(l, NIL) == (l == NIL)
+      #|  \226\136\128 l : List[A], SUBLIST(NIL, l)
+      #|  \226\136\128 l : List[A], SUBLIST(l, l)
+      #|  \226\136\128 h : A, \226\136\128 t : List[A], \226\136\128 l : List[A], SUBLIST(CONS(h, t), l) == (MEM(h, l) && SUBLIST(t, l))
+      #|  \226\136\128 l : List[_], \226\136\128 m : List[_], \226\136\128 n : List[_], SUBLIST(l, m) && SUBLIST(m, n) \226\134\146 SUBLIST(l, n)
+      #|  \226\136\128 l : List[A], \226\136\128 m : List[A], SUBLIST(LISTDIFF(m, l), m)
+      #|  (NOREPETITION : (List[A]) -> Bool)((l : List[A])) == PAIRWISE((x : A) => (y : A) => !(x == y), l)
+      #|  (NOREPETITION : (List[_]) -> Bool)((NIL : List[_])) && (\226\136\128 h : A, \226\136\128 t : List[A], NOREPETITION(CONS(h, t)) == (!MEM(h, t) && NOREPETITION(t)))
+      #|  \226\136\128 s : (A) -> Bool, FINITE(s) \226\134\146 NOREPETITION(list_of_set(s))
+      #|  list_of_set(set_of_list((l : List[A])))
+      #|  \226\136\128 l : List[A], \226\136\131 m : List[A], NOREPETITION(m) && SUBLIST(l, m) && SUBLIST(m, l)
+      #|  \226\136\128 P : (A) -> Bool, \226\136\128 l : List[A], NOREPETITION(l) \226\134\146 NOREPETITION(FILTER(P, l))
+      #|  !(CARD((s : (A) -> Bool)) == 0)
+      #|  FINITE((s : (A) -> Bool))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 a : A, \226\136\128 n : Num, HAS_SIZE(DELETE(s, a), n) == (IN(a, s) && HAS_SIZE(s, SUC(n)) || !IN(a, s) && HAS_SIZE(s, n))
+      #|  (l : List[A])
+      #|  {(l : List[A]) | LENGTH(l) == SUC((n : Num)) && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, (s : (A) -> Bool)))} == IMAGE(UNCURRY(CONS), CROSS(s, {(l : List[A]) | LENGTH(l) == n && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s))}))
+      #|  EXP((m : Num), SUC((n : Num))) == m * EXP(m, n)
+      #|  ({} : (List[A]) -> Bool)
+      #|  (NIL : List[A])
+      #|  EXP((m : Num), 0) == SUC(0)
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, HAS_SIZE(s, m) \226\134\146 HAS_SIZE({(l : List[A]) | LENGTH(l) == n && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s))}, EXP(m, n))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, FINITE(s) \226\134\146 FINITE({(l : List[A]) | LENGTH(l) == n && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s))})
+      #|  UNIONS(IMAGE((k : Num) => {(l : List[A]) | LENGTH(l) == k && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, (s : (A) -> Bool)))}, op_dot_dot(0, (n : Num))))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 n : Num, FINITE(s) \226\134\146 FINITE({(l : List[A]) | LENGTH(l) <= n && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s))})
+      #|  DELETE((s : (A) -> Bool), (h : A))
+      #|  \226\136\128 n : Num, \226\136\128 l : List[A], \226\136\128 s : (A) -> Bool, HAS_SIZE(s, n) && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s)) && NOREPETITION(l) \226\134\146 LENGTH(l) <= n
+      #|  {(l : List[A]) | LENGTH(l) <= CARD((s : (A) -> Bool)) && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s))}
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 n : _, FINITE(s) \226\134\146 FINITE({(l : List[A]) | NOREPETITION(l) && (\226\136\128 x : A, MEM(x, l) \226\134\146 IN(x, s))})
+      #|  ((b0 : Bool), (b1 : Bool), (b2 : Bool), (b3 : Bool), (b4 : Bool), (b5 : Bool), (b6 : Bool), (b7 : Bool))
+      #|  (c : Char)
+      #|  (c : Char)
+      #|  UNIV == IMAGE(GABS((f : ((Bool, Bool, Bool, Bool, Bool, Bool, Bool, Bool)) -> Char) => \226\136\128 b0 : Bool, \226\136\128 b1 : Bool, \226\136\128 b2 : Bool, \226\136\128 b3 : Bool, \226\136\128 b4 : Bool, \226\136\128 b5 : Bool, \226\136\128 b6 : Bool, \226\136\128 b7 : Bool, GEQ(f((b0, b1, b2, b3, b4, b5, b6, b7)), ASCII(b0, b1, b2, b3, b4, b5, b6, b7))), UNIV)
+      #|  (FINITE : ((Char) -> Bool) -> Bool)((UNIV : (Char) -> Bool))
+      #|  2 * (2 * (2 * (2 * (2 * (2 * (2 * 2))))))
+      #|  ((b0 : Bool), (b1 : Bool), (b2 : Bool), (b3 : Bool), (b4 : Bool), (b5 : Bool), (b6 : Bool), (b7 : Bool))
+      #|  (c : Char)
+      #|  (c : Char)
+      #|  UNIV == IMAGE(GABS((f : ((Bool, Bool, Bool, Bool, Bool, Bool, Bool, Bool)) -> Char) => \226\136\128 b0 : Bool, \226\136\128 b1 : Bool, \226\136\128 b2 : Bool, \226\136\128 b3 : Bool, \226\136\128 b4 : Bool, \226\136\128 b5 : Bool, \226\136\128 b6 : Bool, \226\136\128 b7 : Bool, GEQ(f((b0, b1, b2, b3, b4, b5, b6, b7)), ASCII(b0, b1, b2, b3, b4, b5, b6, b7))), UNIV)
+      #|  (HAS_SIZE : ((Char) -> Bool, Num) -> Bool)((UNIV : (Char) -> Bool), 256)
+      #|  (FINITE : ((Char) -> Bool) -> Bool)((UNIV : (Char) -> Bool))
+      #|  (COUNTABLE : ((Char) -> Bool) -> Bool)((UNIV : (Char) -> Bool))
+      #|  (COUNTABLE : ((List[Char]) -> Bool) -> Bool)((UNIV : (List[Char]) -> Bool))
       #|FLATMAP =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,list('B)),bool),bool) (\f:fun('A,list('B)). ((#=:fun(list('B),fun(list('B),bool)) ((#FLATMAP:fun(fun('A,list('B)),fun(list('A),list('B))) f:fun('A,list('B))) #NIL:list('A))) #NIL:list('B))))) (#forall:fun(fun(fun('A,list('B)),bool),bool) (\f:fun('A,list('B)). (#forall:fun(fun('A,bool),bool) (\h:'A. (#forall:fun(fun(list('A),bool),bool) (\t:list('A). ((#=:fun(list('B),fun(list('B),bool)) ((#FLATMAP:fun(fun('A,list('B)),fun(list('A),list('B))) f:fun('A,list('B))) ((#CONS:fun('A,fun(list('A),list('A))) h:'A) t:list('A)))) ((#APPEND:fun(list('B),fun(list('B),list('B))) (f:fun('A,list('B)) h:'A)) ((#FLATMAP:fun(fun('A,list('B)),fun(list('A),list('B))) f:fun('A,list('B))) t:list('A)))))))))))
       #|MEM_FLATMAP =  |- (#forall:fun(fun('B,bool),bool) (\x:'B. (#forall:fun(fun(fun('A,list('B)),bool),bool) (\f:fun('A,list('B)). (#forall:fun(fun(list('A),bool),bool) (\l:list('A). ((#=:fun(bool,fun(bool,bool)) ((#MEM:fun('B,fun(list('B),bool)) x:'B) ((#FLATMAP:fun(fun('A,list('B)),fun(list('A),list('B))) f:fun('A,list('B))) l:list('A)))) (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun('A,fun(list('A),bool)) y:'A) l:list('A))) ((#MEM:fun('B,fun(list('B),bool)) x:'B) (f:fun('A,list('B)) y:'A))))))))))))
       #|LISTDIFF =  |- (#forall:fun(fun(list('A),bool),bool) (\m:list('A). (#forall:fun(fun(list('A),bool),bool) (\l:list('A). ((#=:fun(list('A),fun(list('A),bool)) ((#LISTDIFF:fun(list('A),fun(list('A),list('A))) l:list('A)) m:list('A))) ((#FILTER:fun(fun('A,bool),fun(list('A),list('A))) (\x:'A. (#~:fun(bool,bool) ((#MEM:fun('A,fun(list('A),bool)) x:'A) m:list('A))))) l:list('A)))))))

@@ -3,19 +3,19 @@
 ///|
 /// Tutorial/Abstractions_and_quantifiers.ml:1
 fn step_1() -> Unit raise {
-  ignore(@meson.meson(@list.List([]), @parser.parse_term("((?x. forall y. P(x) <=> P(y)) <=> ((?x. Q(x)) <=> (forall y. Q(y)))) <=>\n  ((?x. forall y. Q(x) <=> Q(y)) <=> ((?x. P(x)) <=> (forall y. P(y))))")))
+  ignore(@meson.meson(@list.List([]), @term_syntax.parse_term("((∃ x : _, ∀ y : _, (P : (_) -> Bool)(x) == P(y)) == ((∃ x : _, (Q : (_) -> Bool)(x)) == (∀ y : _, Q(y)))) == ((∃ x : _, ∀ y : _, Q(x) == Q(y)) == ((∃ x : _, P(x)) == (∀ y : _, P(y))))")))
 }
 
 ///|
 /// Tutorial/Abstractions_and_quantifiers.ml:5
 fn step_2() -> Unit raise {
-  ignore(@meson.meson(@list.List([]), @parser.parse_term("(forall x y z. P x y /\\ P y z ==> P x z) /\\\n (forall x y z. Q x y /\\ Q y z ==> Q x z) /\\\n (forall x y. P x y ==> P y x) /\\\n (forall x y. P x y \\/ Q x y)\n ==> (forall x y. P x y) \\/ (forall x y. Q x y)")))
+  ignore(@meson.meson(@list.List([]), @term_syntax.parse_term("(∀ x : _, ∀ y : _, ∀ z : _, (P : (_, _) -> Bool)(x, y) && P(y, z) → P(x, z)) && (∀ x : _, ∀ y : _, ∀ z : _, (Q : (_, _) -> Bool)(x, y) && Q(y, z) → Q(x, z)) && (∀ x : _, ∀ y : _, P(x, y) → P(y, x)) && (∀ x : _, ∀ y : _, P(x, y) || Q(x, y)) → (∀ x : _, ∀ y : _, P(x, y)) || (∀ x : _, ∀ y : _, Q(x, y))")))
 }
 
 ///|
 /// ewd1062
 fn step_3() -> Unit raise {
-  ewd1062_v1_c.set(@meson.meson(@list.List([]), @parser.parse_term("(forall x. x <= x) /\\\n  (forall x y z. x <= y /\\ y <= z ==> x <= z) /\\\n  (forall x y. f(x) <= y <=> x <= g(y))\n  ==> (forall x y. x <= y ==> f(x) <= f(y)) /\\\n      (forall x y. x <= y ==> g(x) <= g(y))")))
+  ewd1062_v1_c.set(@meson.meson(@list.List([]), @term_syntax.parse_term("(∀ x : Num, x <= x) && (∀ x : Num, ∀ y : Num, ∀ z : Num, x <= y && y <= z → x <= z) && (∀ x : Num, ∀ y : Num, ((f : (Num) -> Num)(x) <= y) == (x <= (g : (Num) -> Num)(y))) → (∀ x : Num, ∀ y : Num, x <= y → f(x) <= f(y)) && (∀ x : Num, ∀ y : Num, x <= y → g(x) <= g(y))")))
 }
 
 ///|
@@ -30,7 +30,7 @@ pub fn ewd1062_v1() -> @kernel.Thm {
 ///|
 /// ewd1062
 fn step_4() -> Unit raise {
-  ewd1062_c.set(@meson.meson(@list.List([]), @parser.parse_term("(forall x. R x x) /\\\n  (forall x y z. R x y /\\ R y z ==> R x z) /\\\n  (forall x y. R (f x) y <=> R x (g y))\n  ==> (forall x y. R x y ==> R (f x) (f y)) /\\\n      (forall x y. R x y ==> R (g x) (g y))")))
+  ewd1062_c.set(@meson.meson(@list.List([]), @term_syntax.parse_term("(∀ x : _, (R : (_, _) -> Bool)(x, x)) && (∀ x : _, ∀ y : _, ∀ z : _, R(x, y) && R(y, z) → R(x, z)) && (∀ x : _, ∀ y : _, R((f : (_) -> _)(x), y) == R(x, (g : (_) -> _)(y))) → (∀ x : _, ∀ y : _, R(x, y) → R(f(x), f(y))) && (∀ x : _, ∀ y : _, R(x, y) → R(g(x), g(y)))")))
 }
 
 ///|
@@ -45,13 +45,13 @@ pub fn ewd1062() -> @kernel.Thm {
 ///|
 /// Tutorial/Abstractions_and_quantifiers.ml:26
 fn step_5() -> Unit raise {
-  ignore(@meson.meson(@list.List([]), @parser.parse_term("(?!x. g(f x) = x) <=> (?!y. f(g y) = y)")))
+  ignore(@meson.meson(@list.List([]), @term_syntax.parse_term("existsunique((x : _) => (g : (_) -> _)((f : (_) -> _)(x)) == x) == existsunique((y : _) => f(g(y)) == y)")))
 }
 
 ///|
 /// Tutorial/Abstractions_and_quantifiers.ml:28
 fn step_6() -> Unit raise {
-  ignore(@meson.meson(@list.List([@arith.add_assoc(), @arith.add_sym()]), @parser.parse_term("m + (n + p) = n + (m + p)")))
+  ignore(@meson.meson(@list.List([@arith.add_assoc(), @arith.add_sym()]), @term_syntax.parse_term("(m : Num) + ((n : Num) + (p : Num)) == n + (m + p)")))
 }
 
 ///|

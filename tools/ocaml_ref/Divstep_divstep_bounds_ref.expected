@@ -16258,35 +16258,35 @@ Generating HOL version of proof
 0..0..0..2..4..9..16..33..57..solved at 80
 0..0..1..2..7..15..29..66..118..230..solved at 300
 Divstep/divstep_bounds quotations (29):
-  (&1 + x) - &1 / &2 = &1 + (x - &1 / &2)
-  &1 - x - &1 / &2 = --(x - &1 / &2)
-  t:real#int#int
-  ITER n divstep (&1 / &2,f,g)
-  forall f g n. integer(FST(ITER n divstep (&1 / &2,f,g)) - &1 / &2)
-  forall f g n.\n        f rem &2 = &1\n        ==> FST(SND(ITER n divstep (&1 / &2,f,g))) rem &2 = &1
-  x = y / &2 <=> &2 * x = y
-  g:int
-  delta - &1 / &2 < &0 <=> ~(delta > &0)
-  g:int
-  f:int
-  delta:real
-  t:real#int#int
-  ITER m divstep (&1 / &2,f,g)
-  m:num
-  g:int
-  f:int
-  m:num
-  g:int
-  f:int
-  m:num
-  n:num
-  b:num
-  \\n. real_of_int(SND (SND(ITER n divstep (&1 / &2,f,g))))
-  \\n. real_of_int(FST (SND(ITER n divstep (&1 / &2,f,g))))
-  \\n. int_of_real(FST (ITER n divstep (&1 / &2,f,g)) - &1 / &2)
-  forall f g b n.\n        &0 <= g /\\ g <= f /\\ f <= &2 pow b /\\ f rem &2 = &1 /\\\n        9437 * b + 1 <= 4096 * n\n        ==> SND(SND(ITER n divstep (&1 / &2,f,g))) = &0
-  p /\\ (p ==> q) ==> p /\\ q
-  forall f g b n.\n        &0 <= g /\\ g <= f /\\ f <= &2 pow b /\\ f rem &2 = &1 /\\\n        9437 * b + 1 <= 4096 * n\n        ==> divstep_g n (&1,f,g) = &0 /\\\n            abs(divstep_f n (&1,f,g)) = gcd(f,g)
+  real_of_num(1) + (x : Real) - real_of_num(1) / real_of_num(2) == real_of_num(1) + (x - real_of_num(1) / real_of_num(2))
+  real_of_num(1) - (x : Real) - real_of_num(1) / real_of_num(2) == -(x - real_of_num(1) / real_of_num(2))
+  (t : (Real, Int, Int))
+  ITER((n : Num), divstep, (real_of_num(1) / real_of_num(2), (f : Int), (g : Int)))
+  \226\136\128 f : Int, \226\136\128 g : Int, \226\136\128 n : Num, integer(FST(ITER(n, divstep, (real_of_num(1) / real_of_num(2), f, g))) - real_of_num(1) / real_of_num(2))
+  \226\136\128 f : Int, \226\136\128 g : Int, \226\136\128 n : Num, rem(f, int_of_num(2)) == int_of_num(1) \226\134\146 rem(FST(SND(ITER(n, divstep, (real_of_num(1) / real_of_num(2), f, g)))), int_of_num(2)) == int_of_num(1)
+  ((x : Real) == (y : Real) / real_of_num(2)) == (real_of_num(2) * x == y)
+  (g : Int)
+  ((delta : Real) - real_of_num(1) / real_of_num(2) < real_of_num(0)) == !(delta > real_of_num(0))
+  (g : Int)
+  (f : Int)
+  (delta : Real)
+  (t : (Real, Int, Int))
+  ITER((m : Num), divstep, (real_of_num(1) / real_of_num(2), (f : Int), (g : Int)))
+  (m : Num)
+  (g : Int)
+  (f : Int)
+  (m : Num)
+  (g : Int)
+  (f : Int)
+  (m : Num)
+  (n : Num)
+  (b : Num)
+  (n : Num) => real_of_int(SND(SND(ITER(n, divstep, (real_of_num(1) / real_of_num(2), (f : Int), (g : Int))))))
+  (n : Num) => real_of_int(FST(SND(ITER(n, divstep, (real_of_num(1) / real_of_num(2), (f : Int), (g : Int))))))
+  (n : Num) => int_of_real(FST(ITER(n, divstep, (real_of_num(1) / real_of_num(2), (f : Int), (g : Int)))) - real_of_num(1) / real_of_num(2))
+  \226\136\128 f : Int, \226\136\128 g : Int, \226\136\128 b : Num, \226\136\128 n : Num, int_of_num(0) <= g && g <= f && f <= pow(int_of_num(2), b) && rem(f, int_of_num(2)) == int_of_num(1) && 9437 * b + 1 <= 4096 * n \226\134\146 SND(SND(ITER(n, divstep, (real_of_num(1) / real_of_num(2), f, g)))) == int_of_num(0)
+  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
+  \226\136\128 f : Int, \226\136\128 g : Int, \226\136\128 b : Num, \226\136\128 n : Num, int_of_num(0) <= g && g <= f && f <= pow(int_of_num(2), b) && rem(f, int_of_num(2)) == int_of_num(1) && 9437 * b + 1 <= 4096 * n \226\134\146 divstep_g(n, (int_of_num(1), f, g)) == int_of_num(0) && abs(divstep_f(n, (int_of_num(1), f, g))) == gcd((f, g))
 INTEGER_DIVSTEP_DELTA =  |- (#forall:fun(fun(int,bool),bool) (\f:int. (#forall:fun(fun(int,bool),bool) (\g:int. (#forall:fun(fun(num,bool),bool) (\n:num. (#integer:fun(real,bool) ((#real_sub:fun(real,fun(real,real)) (#FST:fun(prod(real,prod(int,int)),real) (((#ITER:fun(num,fun(fun(prod(real,prod(int,int)),prod(real,prod(int,int))),fun(prod(real,prod(int,int)),prod(real,prod(int,int))))) n:num) #divstep:fun(prod(real,prod(int,int)),prod(real,prod(int,int)))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int))))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))
 ITER_DIVSTEP_ODD_ALT =  |- (#forall:fun(fun(int,bool),bool) (\f:int. (#forall:fun(fun(int,bool),bool) (\g:int. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#rem:fun(int,fun(int,int)) f:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#=:fun(int,fun(int,bool)) ((#rem:fun(int,fun(int,int)) (#FST:fun(prod(int,int),int) (#SND:fun(prod(real,prod(int,int)),prod(int,int)) (((#ITER:fun(num,fun(fun(prod(real,prod(int,int)),prod(real,prod(int,int))),fun(prod(real,prod(int,int)),prod(real,prod(int,int))))) n:num) #divstep:fun(prod(real,prod(int,int)),prod(real,prod(int,int)))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))
 DIVSTEP_ENDTOEND_BITS_SIMPLE =  |- (#forall:fun(fun(int,bool),bool) (\f:int. (#forall:fun(fun(int,bool),bool) (\g:int. (#forall:fun(fun(num,bool),bool) (\b:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))) g:int)) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) g:int) f:int)) ((#/\:fun(bool,fun(bool,bool)) ((#int_le:fun(int,fun(int,bool)) f:int) ((#int_pow:fun(int,fun(num,int)) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) b:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(int,fun(int,bool)) ((#rem:fun(int,fun(int,int)) f:int) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#<=:fun(num,fun(num,bool)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))) b:num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))))))))) n:num))))))) ((#=:fun(int,fun(int,bool)) (#SND:fun(prod(int,int),int) (#SND:fun(prod(real,prod(int,int)),prod(int,int)) (((#ITER:fun(num,fun(fun(prod(real,prod(int,int)),prod(real,prod(int,int))),fun(prod(real,prod(int,int)),prod(real,prod(int,int))))) n:num) #divstep:fun(prod(real,prod(int,int)),prod(real,prod(int,int)))) ((#,:fun(real,fun(prod(int,int),prod(real,prod(int,int)))) ((#real_div:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#,:fun(int,fun(int,prod(int,int))) f:int) g:int)))))) (#int_of_num:fun(num,int) (#NUMERAL:fun(num,num) #_0:num))))))))))))

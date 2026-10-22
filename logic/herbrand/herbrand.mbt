@@ -30,7 +30,7 @@ pub fn herbase_cases() -> @kernel.Thm {
 ///|
 /// herbase_RULES, herbase_INDUCT, herbase_CASES
 fn step_1() -> Unit raise {
-  let (herbase_rules, herbase_induct, herbase_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(~(?c. (c,0) IN fns) ==> herbase fns (V 0)) /\\\n   (forall f l. (f,LENGTH l) IN fns /\\ ALL (herbase fns) l\n          ==> herbase fns (Fn f l))"))
+  let (herbase_rules, herbase_induct, herbase_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(!(∃ c : Num, IN((c, 0), (fns : ((Num, Num)) -> Bool))) → (herbase : (((Num, Num)) -> Bool, Term) -> Bool)(fns, V(0))) && (∀ f : Num, ∀ l : List[Term], IN((f, LENGTH(l)), fns) && ALL(herbase(fns), l) → herbase(fns, Fn(f, l)))"))
   herbase_rules_c.set(herbase_rules)
   herbase_induct_c.set(herbase_induct)
   herbase_cases_c.set(herbase_cases)
@@ -39,7 +39,7 @@ fn step_1() -> Unit raise {
 ///|
 /// herbrand
 fn step_2() -> Unit raise {
-  herbrand_c.set(@pair.new_definition(@parser.parse_term("herbrand (L:(num#num->bool)#(num#num->bool)) M <=>\n       (Dom M = herbase (FST L)) /\\\n       (forall f. Fun(M) f = Fn f)")))
+  herbrand_c.set(@pair.new_definition(@term_syntax.parse_term("(herbrand : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) -> Bool)((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))) == (Dom(M) == herbase(FST(L)) && (∀ f : Num, Fun(M, f) == Fn(f)))")))
 }
 
 ///|
@@ -74,7 +74,7 @@ fn step_3() -> Unit raise {
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x1 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x1
   }, @list.List([@pair.forall_pair_thm()])), t2), t3), @tactics.strip_tac), t4), t11), t12), t13), t14)
-  herbrand_interpretation_c.set(@tactics.prove(@parser.parse_term("forall L M. herbrand L M ==> interpretation L M"), t15))
+  herbrand_interpretation_c.set(@tactics.prove(@term_syntax.parse_term("∀ L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ∀ M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), herbrand(L, M) → interpretation(L, M)"), t15))
 }
 
 ///|
@@ -95,7 +95,7 @@ fn step_4() -> Unit raise {
   let t17 = @simp.rewrite_tac(@list.List([@fol.functions_term(), @sets.empty_subset()]))
   let t16 = @tactics.match_mp_tac(herbase_induct())
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), t16), t17), t19), t20)
-  herbase_functions_c.set(@tactics.prove(@parser.parse_term("forall fns t. t IN herbase fns ==> (functions_term t) SUBSET fns"), t21))
+  herbase_functions_c.set(@tactics.prove(@term_syntax.parse_term("∀ fns : ((Num, Num)) -> Bool, ∀ t : Term, IN(t, herbase(fns)) → SUBSET(functions_term(t), fns)"), t21))
 }
 
 ///|
@@ -113,7 +113,7 @@ fn step_5() -> Unit raise {
   let t23 = @meson.meson_tac(@list.List([@lists.all(), @lists.length()]))
   let t22 = @simp.once_rewrite_tac(@list.List([herbase_cases()]))
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@sets.in_()]))), t22), t23)
-  herbase_nonempty_c.set(@tactics.prove(@parser.parse_term("forall fns. ?t. t IN herbase fns"), t24))
+  herbase_nonempty_c.set(@tactics.prove(@term_syntax.parse_term("∀ fns : ((Num, Num)) -> Bool, ∃ t : Term, IN(t, herbase(fns))"), t24))
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn herbase_nonempty() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t25 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), herbase_nonempty()]))
   let t26 = @tactics.then_tac(@simp.simp_tac(@list.List([herbrand(), @fol.dom_def(), @sets.extension(), @sets.not_in_empty()])), t25)
-  herbrand_nonempty_c.set(@tactics.prove(@parser.parse_term("forall L M. herbrand L M ==> ~(Dom M = {})"), t26))
+  herbrand_nonempty_c.set(@tactics.prove(@term_syntax.parse_term("∀ L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ∀ M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), herbrand(L, M) → !(Dom(M) == {})"), t26))
 }
 
 ///|
@@ -145,7 +145,7 @@ pub fn herbrand_nonempty() -> @kernel.Thm {
 ///|
 /// herbrand_of_prop
 fn step_7() -> Unit raise {
-  herbrand_of_prop_c.set(@pair.new_definition(@parser.parse_term("herbrand_of_prop (L:((num#num)->bool)#((num#num)->bool)) (d:form->bool) =\n   herbase(FST L),Fn,\\p l. d(Atom p l)")))
+  herbrand_of_prop_c.set(@pair.new_definition(@term_syntax.parse_term("(herbrand_of_prop : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), (Form) -> Bool) -> ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)) == (herbase(FST(L)), Fn, (p : Num) => (l : List[Term]) => d(Atom(p, l)))")))
 }
 
 ///|
@@ -165,16 +165,16 @@ fn step_8() -> Unit raise {
   let t37 = @tactics.repeat_tac(@tactics.strip_tac)
   let t36 = @simp.rewrite_tac(@list.List([@fol.termval(), @fol.fun_def()]))
   let t35 = @tactics.match_mp_tac(@fol.term_induct())
-  let t33 = @parser.parse_term("t:term")
-  let t34 = @tactics.spec_tac(@parser.parse_term("h:term"), t33)
+  let t33 = @term_syntax.parse_term("(t : Term)")
+  let t34 = @tactics.spec_tac(@term_syntax.parse_term("(h : Term)"), t33)
   let t32 = @simp.asm_rewrite_tac(@list.List([@lists.all()]))
-  let t30 = @parser.parse_term("l:term list")
-  let t31 = @tactics.spec_tac(@parser.parse_term("l:term list"), t30)
+  let t30 = @term_syntax.parse_term("(l : List[Term])")
+  let t31 = @tactics.spec_tac(@term_syntax.parse_term("(l : List[Term])"), t30)
   let t29 = @tactics.match_mp_tac(@lists.map_eq_degen())
   let t28 = @tactics.repeat_tac(@tactics.ap_term_tac)
   let t27 = @tactics.repeat_tac(@tactics.gen_tac)
   let t40 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@logic_canon.prop_of_model(), herbrand_of_prop(), @fol.holds(), @fol.pred_def()])), t27), t28), t29), t31), @lists.list_induct_tac), t32), t34), t35), t36), t37), @tactics.ap_term_tac), t38), t39)
-  prop_of_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall p l. prop_of_model (herbrand_of_prop L d) V (Atom p l) = d (Atom p l)"), t40))
+  prop_of_herbrand_of_prop_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Num, ∀ l : List[Term], prop_of_model(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, Atom(p, l)) == d(Atom(p, l))"), t40))
 }
 
 ///|
@@ -198,14 +198,14 @@ fn step_9() -> Unit raise {
   let t48 = @tactics.repeat_tac(@tactics.gen_tac)
   let t47 = @simp.rewrite_tac(@list.List([@fol_prop.pholds(), @prenex.qfree(), prop_of_herbrand_of_prop()]))
   let t46 = @tactics.match_mp_tac(@fol.form_induction())
-  let t44 = @parser.parse_term("p:form")
-  let t45 = @tactics.spec_tac(@parser.parse_term("p:form"), t44)
+  let t44 = @term_syntax.parse_term("(p : Form)")
+  let t45 = @tactics.spec_tac(@term_syntax.parse_term("(p : Form)"), t44)
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_then(fn(x41 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x41
     let t43 = @simp.rewrite_tac(@list.List([@equal.gsym(@drule.match_mp(@logic_canon.pholds_prop_of_model())(th))]))
     @tactics.then_tac(@tactics.mp_tac(th), t43)
   })), t45), t46), t47), t48), @tactics.strip_tac), t52), @tactics.refl_tac)
-  holds_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall p. qfree p ==> (holds (herbrand_of_prop L d) V p <=> pholds d p)"), t53))
+  holds_herbrand_of_prop_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, qfree(p) → holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, p) == pholds(d, p)"), t53))
 }
 
 ///|
@@ -235,14 +235,14 @@ fn step_10() -> Unit raise {
   let t61 = @tactics.repeat_tac(@tactics.gen_tac)
   let t60 = @simp.rewrite_tac(@list.List([@fol.formsubst(), @fol_prop.pholds(), @prenex.qfree(), prop_of_herbrand_of_prop()]))
   let t59 = @tactics.match_mp_tac(@fol.form_induction())
-  let t57 = @parser.parse_term("p:form")
-  let t58 = @tactics.spec_tac(@parser.parse_term("p:form"), t57)
+  let t57 = @term_syntax.parse_term("(p : Form)")
+  let t58 = @tactics.spec_tac(@term_syntax.parse_term("(p : Form)"), t57)
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(fn(x54 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x54
     let t56 = @simp.rewrite_tac(@list.List([@equal.gsym(@drule.match_mp(@logic_canon.pholds_prop_of_model())(th))]))
     @tactics.then_tac(@tactics.mp_tac(th), t56)
   }), t58), t59), t60), t61), @tactics.strip_tac), t66), t67), t68), t69), @tactics.ap_term_tac), @tactics.ap_term_tac), @tactics.ap_thm_tac), @tactics.ap_term_tac), t70), t71)
-  holds_herbrand_of_prop_general_c.set(@tactics.prove(@parser.parse_term("qfree p ==> (holds (herbrand_of_prop L d) v p <=> pholds d (formsubst v p))"), t72))
+  holds_herbrand_of_prop_general_c.set(@tactics.prove(@term_syntax.parse_term("qfree((p : Form)) → holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), (v : (Num) -> Term), p) == pholds(d, formsubst(v, p))"), t72))
 }
 
 ///|
@@ -258,7 +258,7 @@ pub fn holds_herbrand_of_prop_general() -> @kernel.Thm {
 /// HERBRAND_HERBRAND_OF_PROP
 fn step_11() -> Unit raise {
   let t73 = @simp.rewrite_tac(@list.List([herbrand(), herbrand_of_prop(), @fol.dom_def(), @fol.fun_def(), @class.fun_eq_thm()]))
-  herbrand_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall d. herbrand L (herbrand_of_prop L d)"), t73))
+  herbrand_herbrand_of_prop_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : (Form) -> Bool, herbrand((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), herbrand_of_prop(L, d))"), t73))
 }
 
 ///|
@@ -275,7 +275,7 @@ pub fn herbrand_herbrand_of_prop() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([herbase_rules(), @sets.in_()]))
   let t75 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @fol.interpretation(), herbrand_of_prop(), @fol.fun_def(), @fol.dom_def(), @sets.in_(), @class.eta_ax()])), t74)
-  interpretation_herbrand_of_prop_c.set(@tactics.prove(@parser.parse_term("forall L d. interpretation L (herbrand_of_prop L d)"), t75))
+  interpretation_herbrand_of_prop_c.set(@tactics.prove(@term_syntax.parse_term("∀ L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ∀ d : (Form) -> Bool, interpretation(L, herbrand_of_prop(L, d))"), t75))
 }
 
 ///|
@@ -292,29 +292,29 @@ pub fn interpretation_herbrand_of_prop() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let t109 = @simp.rewrite_tac(@list.List([herbrand_of_prop(), @fol.fun_def()]))
   let t108 = @tactics.match_mp_tac(@fol.termval_triv())
-  let t106 = @parser.parse_term("t:term")
-  let t107 = @tactics.spec_tac(@parser.parse_term("(v:num->term) x"), t106)
+  let t106 = @term_syntax.parse_term("(t : Term)")
+  let t107 = @tactics.spec_tac(@term_syntax.parse_term("(v : (Num) -> Term)((x : Num))"), t106)
   let t105 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_thm()]))
   let t110 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_imp()), @tactics.ap_thm_tac), @tactics.ap_term_tac), t105), @tactics.gen_tac), t107), t108), t109)
   let t104 = @meson.asm_meson_tac(@list.List([@sets.inter_empty(), @prenex.qfree_bv_empty()]))
   let t111 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.holds_formsubst()])), t104), t110])
-  let t103 = @tactics.subgoal_then(@parser.parse_term("holds (herbrand_of_prop L d) V (formsubst v p) <=>\n                holds (herbrand_of_prop L d)\n                      (termval (herbrand_of_prop L d) V o v)\n                      p"), fn(x100 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t103 = @tactics.subgoal_then(@term_syntax.parse_term("holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, formsubst((v : (Num) -> Term), (p : Form))) == holds(herbrand_of_prop(L, d), o(termval(herbrand_of_prop(L, d), V), v), p)"), fn(x100 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s101 = @tactics.subst1_tac(x100)
     fn(x102 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s101(x102)
     }
   })
   let t99 = @list.List([@meson.asm_meson_tac(@list.List([holds_herbrand_of_prop(), @prenex.qfree_formsubst()])), @tactics.all_tac])
-  let t98 = @tactics.subgoal_then(@parser.parse_term("holds (herbrand_of_prop L d) V (formsubst v p)"), fn(x95 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t98 = @tactics.subgoal_then(@term_syntax.parse_term("holds(herbrand_of_prop((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)), V, formsubst((v : (Num) -> Term), (p : Form)))"), fn(x95 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s96 = @tactics.mp_tac(x95)
     fn(x97 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s96(x97)
     }
   })
   let t94 = @simp.asm_rewrite_tac(@list.List([]))
-  let t88 = @parser.parse_term("p:form")
-  let t89 = @parser.parse_term("v:num->term")
-  let t90 = @list.List([@parser.parse_term("formsubst v p"), t89, t88])
+  let t88 = @term_syntax.parse_term("(p : Form)")
+  let t89 = @term_syntax.parse_term("(v : (Num) -> Term)")
+  let t90 = @list.List([@term_syntax.parse_term("formsubst((v : (Num) -> Term), (p : Form))"), t89, t88])
   let t93 = @tactics.first_x_assum(fn(x92 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x85 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s86 = @tactics.mp_tac(x85)
@@ -338,7 +338,7 @@ fn step_13() -> Unit raise {
   }, @list.List([herbrand_of_prop(), @fol.dom_def(), @fol.valuation()]))
   let t76 = @tactics.repeat_tac(@tactics.gen_tac)
   let t112 = @tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfies(), @fol_prop.psatisfies(), @sets.in_elim_thm(), @theorems.left_imp_exists_thm()])), @tactics.strip_tac), t76), t84), @tactics.strip_tac), t93), t94), @tactics.disch_tac), t98), t99), t103), t111)
-  psatisfies_herbrand_instances_c.set(@tactics.prove(@parser.parse_term("(forall p. p IN s ==> qfree p) /\\\n   d psatisfies {formsubst v p | (forall x. v x IN herbase(FST L)) /\\ p IN s}\n   ==> (herbrand_of_prop L d) satisfies s"), t112))
+  psatisfies_herbrand_instances_c.set(@tactics.prove(@term_syntax.parse_term("(∀ p : Form, IN(p, (s : (Form) -> Bool)) → qfree(p)) && psatisfies((d : (Form) -> Bool), {formsubst((v : (Num) -> Term), (p : Form)) | (∀ x : Num, IN(v(x), herbase(FST((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)))))) && IN(p, s)}) → satisfies(herbrand_of_prop(L, d), s)"), t112))
 }
 
 ///|
@@ -355,7 +355,7 @@ pub fn psatisfies_herbrand_instances() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let t113 = @meson.meson_tac(@list.List([]))
   let t114 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfies(), @sets.subset()])), t113)
-  satisfies_subset_c.set(@tactics.prove(@parser.parse_term("forall M s t. s SUBSET t /\\ M satisfies t ==> M satisfies s"), t114))
+  satisfies_subset_c.set(@tactics.prove(@term_syntax.parse_term("∀ M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), ∀ s : (Form) -> Bool, ∀ t : (Form) -> Bool, SUBSET(s, t) && satisfies(M, t) → satisfies(M, s)"), t114))
 }
 
 ///|
@@ -374,7 +374,7 @@ fn step_15() -> Unit raise {
   let t116 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t115 = @tactics.match_mp_tac(herbase_induct())
   let t118 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_()])), t115), t116), t117)
-  herbase_subset_terms_c.set(@tactics.prove(@parser.parse_term("forall t. t IN herbase fns ==> t IN terms fns"), t118))
+  herbase_subset_terms_c.set(@tactics.prove(@term_syntax.parse_term("∀ t : Term, IN(t, herbase((fns : ((Num, Num)) -> Bool))) → IN(t, terms(fns))"), t118))
 }
 
 ///|
@@ -395,12 +395,12 @@ fn step_16() -> Unit raise {
   let t148 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([herbrand_of_prop(), @fol.dom_def(), @fol.language(), @sets.extension(), @sets.not_in_empty()])), t145), t146)
   let t149 = @list.List([@simp.rewrite_tac(@list.List([interpretation_herbrand_of_prop()])), t148, t147])
   let t144 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t150 = @tactics.thenl(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("herbrand_of_prop (language s) d")), t144), t149)
+  let t150 = @tactics.thenl(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("herbrand_of_prop(language((s : (Form) -> Bool)), (d : (Form) -> Bool))")), t144), t149)
   let t141 = @meson.meson_tac(@list.List([herbase_subset_terms(), @sets.subset()]))
   let t140 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), @fol.language()]))
   let t139 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(satisfies_subset()))
   let t138 = @simp.asm_rewrite_tac(@list.List([]))
-  let t134 = @parser.parse_term("s:form->bool")
+  let t134 = @term_syntax.parse_term("(s : (Form) -> Bool)")
   let t137 = @tactics.disch_then(fn(x136 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x131 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s132 = @tactics.mp_tac(x131)
@@ -421,14 +421,14 @@ fn step_16() -> Unit raise {
   let t143 = @list.List([@simp.asm_simp_tac(@list.List([@sets.in_elim_thm(), @theorems.left_imp_exists_thm(), @prenex.qfree_formsubst()])), t142])
   let t125 = @simp.asm_rewrite_tac(@list.List([]))
   let t124 = @tactics.match_mp_tac(@logic_canon.satisfies_psatisfies())
-  let t123 = @tactics.exists_tac(@parser.parse_term("prop_of_model M (v:num->term)"))
+  let t123 = @tactics.exists_tac(@term_syntax.parse_term("prop_of_model((M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)), (v : (Num) -> Term))"))
   let t121 = @drule.match_mp(@logic_canon.valuation_exists())
-  let t119 = @parser.parse_term("v:num->term")
+  let t119 = @term_syntax.parse_term("(v : (Num) -> Term)")
   let t151 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.first_assum(fn(x122 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x120 : @kernel.Thm) => @tactics.x_choose_tac(t119, x120))(t121(x122))
   }), t123), t124), t125), @tactics.conj_tac), t143), t150])
   let t152 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @tactics.eq_tac), @tactics.strip_tac), t151)
-  herbrand_theorem_c.set(@tactics.prove(@parser.parse_term("forall s. (forall p. p IN s ==> qfree p)\n       ==> ((?M:(term->bool)#(num->term list->term)#(num->term list->bool).\n                 interpretation (language s) M /\\ ~(Dom M = {}) /\\\n                 M satisfies s) <=>\n            (?d. d psatisfies\n                 {formsubst v p | (forall x. v x IN herbase(functions s)) /\\\n                                  p IN s}))"), t152))
+  herbrand_theorem_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Form) -> Bool, (∀ p : Form, IN(p, s) → qfree(p)) → (∃ M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), interpretation(language(s), M) && !(Dom(M) == {}) && satisfies(M, s)) == (∃ d : (Form) -> Bool, psatisfies(d, {formsubst((v : (Num) -> Term), (p : Form)) | (∀ x : Num, IN(v(x), herbase(functions(s)))) && IN(p, s)}))"), t152))
 }
 
 ///|

@@ -3,7 +3,7 @@
 ///|
 /// oapp
 fn step_1() -> Unit raise {
-  oapp_c.set(@define.define_(@parser.parse_term("forall f x y. oapp f x (SOME y) = f y /\\ oapp f x NONE = x")))
+  oapp_c.set(@define.define_(@term_syntax.parse_term("∀ f : (_) -> _, ∀ x : _, ∀ y : _, (oapp : ((_) -> _, _, Option[_]) -> _)(f, x, SOME(y)) == f(y) && oapp(f, x, NONE) == x")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn oapp() -> @kernel.Thm {
 ///|
 /// odflt
 fn step_2() -> Unit raise {
-  odflt_c.set(@pair.new_definition(@parser.parse_term("odflt = oapp I")))
+  odflt_c.set(@pair.new_definition(@term_syntax.parse_term("(odflt : (_, Option[_]) -> _) == oapp(I)")))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn odflt() -> @kernel.Thm {
 ///|
 /// obind
 fn step_3() -> Unit raise {
-  obind_c.set(@pair.new_definition(@parser.parse_term("obind f = oapp f NONE")))
+  obind_c.set(@pair.new_definition(@term_syntax.parse_term("(obind : ((_) -> Option[_], Option[_]) -> Option[_])((f : (_) -> Option[_])) == oapp(f, NONE)")))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn obind() -> @kernel.Thm {
 ///|
 /// omap
 fn step_4() -> Unit raise {
-  omap_c.set(@pair.new_definition(@parser.parse_term("omap f = obind (\\x. SOME (f x))")))
+  omap_c.set(@pair.new_definition(@term_syntax.parse_term("(omap : ((_) -> _, Option[_]) -> Option[_])((f : (_) -> _)) == obind((x : _) => SOME(f(x)))")))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn omap() -> @kernel.Thm {
 ///|
 /// pcomp
 fn step_5() -> Unit raise {
-  pcomp_c.set(@pair.new_definition(@parser.parse_term("pcomp f g x = obind f (g x)")))
+  pcomp_c.set(@pair.new_definition(@term_syntax.parse_term("(pcomp : ((_) -> Option[_], (_) -> Option[_], _) -> Option[_])((f : (_) -> Option[_]), (g : (_) -> Option[_]), (x : _)) == obind(f, g(x))")))
 }
 
 ///|
@@ -95,7 +95,7 @@ fn step_6() -> Unit raise {
     }
   })
   let t20 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x6 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("odflt", @list.List([odflt()])), t5, x6), t13), (x19 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("I_THM", @list.List([@trivia.i_thm()])), t18, x19)), @ssreflect.done_tac)])
-  odflt_alt_c.set(@sections.section_proof(@list.List(["x"]), @parser.parse_term("(forall y. odflt x (SOME y) = y) /\\ odflt x NONE = x"), t20))
+  odflt_alt_c.set(@sections.section_proof(@list.List(["x"]), @term_syntax.parse_term("(∀ y : _, odflt((x : _), SOME(y)) == y) && odflt(x, NONE) == x"), t20))
 }
 
 ///|
@@ -122,7 +122,7 @@ fn step_7() -> Unit raise {
     }
   })
   let t34 = @list.List([@tactics.then_tac(@tactics.then_tac((x26 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("obind", @list.List([obind()])), t25, x26), t33), @ssreflect.done_tac)])
-  obind_alt_c.set(@sections.section_proof(@list.List(["f"]), @parser.parse_term("obind f NONE = NONE /\\ (forall x. obind f (SOME x) = f x)"), t34))
+  obind_alt_c.set(@sections.section_proof(@list.List(["f"]), @term_syntax.parse_term("obind((f : (_) -> Option[_]), NONE) == NONE && (∀ x : _, obind(f, SOME(x)) == f(x))"), t34))
 }
 
 ///|
@@ -154,7 +154,7 @@ fn step_8() -> Unit raise {
     }
   })
   let t54 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x40 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("omap", @list.List([omap()])), t39, x40), (x46 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("obind", @list.List([obind()])), t45, x46)), t53), @ssreflect.done_tac)])
-  omap_alt_c.set(@sections.section_proof(@list.List(["f"]), @parser.parse_term("omap f NONE = NONE /\\ (forall x. omap f (SOME x) = SOME (f x))"), t54))
+  omap_alt_c.set(@sections.section_proof(@list.List(["f"]), @term_syntax.parse_term("omap((f : (_) -> _), NONE) == NONE && (∀ x : _, omap(f, SOME(x)) == SOME(f(x)))"), t54))
 }
 
 ///|
@@ -179,7 +179,7 @@ fn step_9() -> Unit raise {
       ((x58 : @kernel.Thm, x59 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x58, x59))(x60, x61)
     }
   }))), @ssreflect.done_tac)])
-  eq_sym_c.set(@sections.section_proof(@list.List(["x", "y"]), @parser.parse_term("x = y ==> y = x"), t62))
+  eq_sym_c.set(@sections.section_proof(@list.List(["x", "y"]), @term_syntax.parse_term("(x : _) == (y : _) → y == x"), t62))
 }
 
 ///|
@@ -214,7 +214,7 @@ fn step_10() -> Unit raise {
       ((x66 : @kernel.Thm, x67 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x66, x67))(x68, x69)
     }
   }))), t77), @ssreflect.done_tac)])
-  eq_trans_c.set(@sections.section_proof(@list.List(["x", "y", "z"]), @parser.parse_term("x = y ==> y = z ==> x = z"), t78))
+  eq_trans_c.set(@sections.section_proof(@list.List(["x", "y", "z"]), @term_syntax.parse_term("(x : _) == (y : _) → y == (z : _) → x == z"), t78))
 }
 
 ///|
@@ -239,7 +239,7 @@ fn step_11() -> Unit raise {
       ((x82 : @kernel.Thm, x83 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x82, x83))(x84, x85)
     }
   }))), @ssreflect.done_tac)])
-  f_equal_c.set(@sections.section_proof(@list.List(["f", "x", "y"]), @parser.parse_term("x = y ==> f x = f y"), t86))
+  f_equal_c.set(@sections.section_proof(@list.List(["f", "x", "y"]), @term_syntax.parse_term("(x : _) == (y : _) → (f : (_) -> _)(x) == f(y)"), t86))
 }
 
 ///|
@@ -274,7 +274,7 @@ fn step_12() -> Unit raise {
       ((x90 : @kernel.Thm, x91 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.new_rewrite(@list.List([]), @list.List([]), x90, x91))(x92, x93)
     }
   }))), t101), @ssreflect.done_tac)])
-  f_equal2_c.set(@sections.section_proof(@list.List(["f", "x1", "y1", "x2", "y2"]), @parser.parse_term("x1 = y1 ==> x2 = y2 ==> f x1 x2 = f y1 y2"), t102))
+  f_equal2_c.set(@sections.section_proof(@list.List(["f", "x1", "y1", "x2", "y2"]), @term_syntax.parse_term("(x1 : _) == (y1 : _) → (x2 : _) == (y2 : _) → (f : (_, _) -> _)(x1, x2) == f(y1, y2)"), t102))
 }
 
 ///|
@@ -384,7 +384,7 @@ fn step_18() -> Unit raise {
     }, x108))
     (x110 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("EQ_EXT", @list.List([@class.eq_ext()])), t109, x110)
   }), t118])), @ssreflect.done_tac)])
-  eq_ext_c.set(@sections.section_proof(@list.List(["f", "g"]), @parser.parse_term("(forall x. f x = g x) <=> f = g"), t119))
+  eq_ext_c.set(@sections.section_proof(@list.List(["f", "g"]), @term_syntax.parse_term("(∀ x : _, (f : (_) -> _)(x) == (g : (_) -> _)(x)) == (f == g)"), t119))
 }
 
 ///|
@@ -411,7 +411,7 @@ fn step_20() -> Unit raise {
 ///|
 /// injective
 fn step_21() -> Unit raise {
-  injective_c.set(@pair.new_definition(@parser.parse_term("injective f <=> (forall x1 x2. f x1 = f x2 ==> x1 = x2)")))
+  injective_c.set(@pair.new_definition(@term_syntax.parse_term("(injective : ((_) -> _) -> Bool)((f : (_) -> _)) == (∀ x1 : _, ∀ x2 : _, f(x1) == f(x2) → x1 == x2)")))
 }
 
 ///|
@@ -426,7 +426,7 @@ pub fn injective() -> @kernel.Thm {
 ///|
 /// cancel
 fn step_22() -> Unit raise {
-  cancel_c.set(@pair.new_definition(@parser.parse_term("cancel f g <=> forall x. g (f x) = x")))
+  cancel_c.set(@pair.new_definition(@term_syntax.parse_term("(cancel : ((_) -> _, (_) -> _) -> Bool)((f : (_) -> _), (g : (_) -> _)) == (∀ x : _, g(f(x)) == x)")))
 }
 
 ///|
@@ -441,7 +441,7 @@ pub fn cancel() -> @kernel.Thm {
 ///|
 /// pcancel
 fn step_23() -> Unit raise {
-  pcancel_c.set(@pair.new_definition(@parser.parse_term("pcancel f g <=> forall x. g (f x) = SOME x")))
+  pcancel_c.set(@pair.new_definition(@term_syntax.parse_term("(pcancel : ((_) -> _, (_) -> Option[_]) -> Bool)((f : (_) -> _), (g : (_) -> Option[_])) == (∀ x : _, g(f(x)) == SOME(x))")))
 }
 
 ///|
@@ -456,7 +456,7 @@ pub fn pcancel() -> @kernel.Thm {
 ///|
 /// ocancel
 fn step_24() -> Unit raise {
-  ocancel_c.set(@pair.new_definition(@parser.parse_term("ocancel g h <=> forall x. oapp h x (g x) = x")))
+  ocancel_c.set(@pair.new_definition(@term_syntax.parse_term("(ocancel : ((_) -> Option[_], (_) -> _) -> Bool)((g : (_) -> Option[_]), (h : (_) -> _)) == (∀ x : _, oapp(h, x, g(x)) == x)")))
 }
 
 ///|
@@ -482,7 +482,7 @@ fn step_25() -> Unit raise {
     }
   })
   let t132 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x125 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t124, x125), (x131 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("pcancel", @list.List([pcancel()])), t130, x131)), @ssreflect.simp_tac), @ssreflect.done_tac)])
-  can_pcan_c.set(@sections.section_proof(@list.List(["g"]), @parser.parse_term("cancel f g ==> pcancel f (\\y. SOME (g y))"), t132))
+  can_pcan_c.set(@sections.section_proof(@list.List(["g"]), @term_syntax.parse_term("cancel((f : (_) -> _), (g : (_) -> _)) → pcancel(f, (y : _) => SOME(g(y)))"), t132))
 }
 
 ///|
@@ -556,7 +556,7 @@ fn step_26() -> Unit raise {
     }
   })
   let t193 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x138 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("pcancel", @list.List([pcancel()])), t137, x138), (x144 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t143, x144)), t145), t146), t147), t148), t192])
-  pcan_inj_c.set(@sections.section_proof(@list.List(["g"]), @parser.parse_term("pcancel f g ==> injective f"), t193))
+  pcan_inj_c.set(@sections.section_proof(@list.List(["g"]), @term_syntax.parse_term("pcancel((f : (_) -> _), (g : (_) -> Option[_])) → injective(f)"), t193))
 }
 
 ///|
@@ -621,7 +621,7 @@ fn step_27() -> Unit raise {
     }
   })
   let t248 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x199 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t198, x199), (x205 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t204, x205)), t206), t207), t208), t209), t247])
-  can_inj_c.set(@sections.section_proof(@list.List(["g"]), @parser.parse_term("cancel f g ==> injective f"), t248))
+  can_inj_c.set(@sections.section_proof(@list.List(["g"]), @term_syntax.parse_term("cancel((f : (_) -> _), (g : (_) -> _)) → injective(f)"), t248))
 }
 
 ///|
@@ -653,7 +653,7 @@ fn step_28() -> Unit raise {
     }
   })
   let t264 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x254 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t253, x254), t255), t263), @ssreflect.done_tac)])
-  canlr_c.set(@sections.section_proof(@list.List(["g", "x", "y"]), @parser.parse_term("cancel f g ==> x = f y ==> g x = y"), t264))
+  canlr_c.set(@sections.section_proof(@list.List(["g", "x", "y"]), @term_syntax.parse_term("cancel((f : (_) -> _), (g : (_) -> _)) → (x : _) == f((y : _)) → g(x) == y"), t264))
 }
 
 ///|
@@ -686,7 +686,7 @@ fn step_29() -> Unit raise {
     }
   })
   let t282 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x270 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t269, x270), t271), t281), @ssreflect.done_tac)])
-  canrl_c.set(@sections.section_proof(@list.List(["g", "x", "y"]), @parser.parse_term("cancel f g ==> f x = y ==> x = g y"), t282))
+  canrl_c.set(@sections.section_proof(@list.List(["g", "x", "y"]), @term_syntax.parse_term("cancel((f : (_) -> _), (g : (_) -> _)) → f((x : _)) == (y : _) → x == g(y)"), t282))
 }
 
 ///|
@@ -796,7 +796,7 @@ fn step_36() -> Unit raise {
     }
   })
   let t296 = @list.List([@tactics.then_tac(@tactics.then_tac((x288 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t287, x288), t295), @ssreflect.done_tac)])
-  some_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("injective SOME"), t296))
+  some_inj_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(injective : ((_) -> Option[_]) -> Bool)((SOME : (_) -> Option[_]))"), t296))
 }
 
 ///|
@@ -842,7 +842,7 @@ fn step_40() -> Unit raise {
     }
   })
   let t310 = @list.List([@tactics.then_tac(@tactics.then_tac((x302 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t301, x302), t309), @ssreflect.done_tac)])
-  inj_id_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("injective I"), t310))
+  inj_id_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("(injective : ((_) -> _) -> Bool)((I : (_) -> _))"), t310))
 }
 
 ///|
@@ -882,7 +882,7 @@ fn step_41() -> Unit raise {
     }
   })
   let t338 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(2L, 0L, (x316 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t315, x316)), (x322 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t321, x322)), t323), t324), t325), t337])
-  inj_can_sym_c.set(@sections.section_proof(@list.List(["f'"]), @parser.parse_term("cancel f f' ==> injective f' ==> cancel f' f"), t338))
+  inj_can_sym_c.set(@sections.section_proof(@list.List(["f'"]), @term_syntax.parse_term("cancel((f : (_) -> _), (f' : (_) -> _)) → injective(f') → cancel(f', f)"), t338))
 }
 
 ///|
@@ -933,7 +933,7 @@ fn step_42() -> Unit raise {
     }
   })
   let t374 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(3L, 0L, (x344 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t343, x344)), t351), t352), t353), t354), t355), t373])
-  inj_comp_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("injective f ==> injective h ==> injective (f o h)"), t374))
+  inj_comp_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("injective((f : (_) -> _)) → injective((h : (_) -> _)) → injective(o(f, h))"), t374))
 }
 
 ///|
@@ -963,7 +963,7 @@ fn step_43() -> Unit raise {
     }
   })
   let t391 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(3L, 0L, (x380 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t379, x380)), t387), t388), t389), t390), @ssreflect.done_tac)])
-  can_comp_c.set(@sections.section_proof(@list.List(["f'", "h'"]), @parser.parse_term("cancel f f' ==> cancel h h' ==> cancel (f o h) (h' o f')"), t391))
+  can_comp_c.set(@sections.section_proof(@list.List(["f'", "h'"]), @term_syntax.parse_term("cancel((f : (_) -> _), (f' : (_) -> _)) → cancel((h : (_) -> _), (h' : (_) -> _)) → cancel(o(f, h), o(h', f'))"), t391))
 }
 
 ///|
@@ -1015,7 +1015,7 @@ fn step_44() -> Unit raise {
     }
   })
   let t431 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(3L, 0L, (x397 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("pcancel", @list.List([pcancel()])), t396, x397)), (x403 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("pcomp", @list.List([pcomp()])), t402, x403)), (x409 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("o_THM", @list.List([@trivia.o_thm()])), t408, x409)), t417), t430), @ssreflect.done_tac)])
-  pcan_pcomp_c.set(@sections.section_proof(@list.List(["f'", "h'"]), @parser.parse_term("pcancel f f' ==> pcancel h h' ==> pcancel (f o h) (pcomp h' f')"), t431))
+  pcan_pcomp_c.set(@sections.section_proof(@list.List(["f'", "h'"]), @term_syntax.parse_term("pcancel((f : (_) -> _), (f' : (_) -> Option[_])) → pcancel((h : (_) -> _), (h' : (_) -> Option[_])) → pcancel(o(f, h), pcomp(h', f'))"), t431))
 }
 
 ///|
@@ -1048,7 +1048,7 @@ fn step_45() -> Unit raise {
     }
   })
   let t449 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x437 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eq_ext", @list.List([eq_ext()])), t436, x437), t438), t448), @ssreflect.done_tac)])
-  eq_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("injective f ==> (forall x. f x = g x) ==> injective g"), t449))
+  eq_inj_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("injective((f : (_) -> _)) → (∀ x : _, f(x) == (g : (_) -> _)(x)) → injective(g)"), t449))
 }
 
 ///|
@@ -1092,7 +1092,7 @@ fn step_46() -> Unit raise {
     }
   })
   let t477 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(1L, 9L, (x455 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eq_ext", @list.List([eq_ext()])), t454, x455)), t456), t466), t476), @ssreflect.done_tac)])
-  eq_can_c.set(@sections.section_proof(@list.List(["f'", "g'"]), @parser.parse_term("cancel f f' ==> (forall x. f x = g x) ==> (forall x. f' x = g' x) ==> cancel g g'"), t477))
+  eq_can_c.set(@sections.section_proof(@list.List(["f'", "g'"]), @term_syntax.parse_term("cancel((f : (_) -> _), (f' : (_) -> _)) → (∀ x : _, f(x) == (g : (_) -> _)(x)) → (∀ x : _, f'(x) == (g' : (_) -> _)(x)) → cancel(g, g')"), t477))
 }
 
 ///|
@@ -1134,7 +1134,7 @@ fn step_47() -> Unit raise {
     }
   })
   let t508 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(2L, 0L, (x483 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("cancel", @list.List([cancel()])), t482, x483)), (x489 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("injective", @list.List([injective()])), t488, x489)), t490), t491), t492), t501), t507])
-  inj_can_eq_c.set(@sections.section_proof(@list.List(["f'"]), @parser.parse_term("cancel f f' ==> injective f' ==> cancel g f' ==> f = g"), t508))
+  inj_can_eq_c.set(@sections.section_proof(@list.List(["f'"]), @term_syntax.parse_term("cancel((f : (_) -> _), (f' : (_) -> _)) → injective(f') → cancel((g : (_) -> _), f') → f == g"), t508))
 }
 
 ///|
@@ -1287,7 +1287,7 @@ fn step_58() -> Unit raise {
 ///|
 /// bijective
 fn step_59() -> Unit raise {
-  bijective_c.set(@pair.new_definition(@parser.parse_term("bijective f <=> ?g. cancel f g /\\ cancel g f")))
+  bijective_c.set(@pair.new_definition(@term_syntax.parse_term("(bijective : ((_) -> _) -> Bool)((f : (_) -> _)) == (∃ g : (_) -> _, cancel(f, g) && cancel(g, f))")))
 }
 
 ///|
@@ -1302,7 +1302,7 @@ pub fn bijective() -> @kernel.Thm {
 ///|
 /// Formal_ineqs/lib/ssrfun.hl:215
 fn step_60() -> Unit raise {
-  @sections.add_section_hyp("bijf", @parser.parse_term("bijective f"))
+  @sections.add_section_hyp("bijf", @term_syntax.parse_term("bijective((f : (_) -> _))"))
 }
 
 ///|
@@ -1336,7 +1336,7 @@ fn step_61() -> Unit raise {
   })
   let t535 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x516 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bijective", @list.List([bijective()])), t515, x516), @tactics.all_tac), t517), t534)
   let t536 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x510 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bijf", @list.List([])), (x509 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x509), x510), @ssreflect.clear_assumption("bijf")), @tactics.beta_tac), t535), @ssreflect.done_tac)])
-  bij_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("injective f"), t536))
+  bij_inj_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("injective((f : (_) -> _))"), t536))
 }
 
 ///|
@@ -1421,7 +1421,7 @@ fn step_62() -> Unit raise {
     (x544 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("inj_can_sym", @list.List([inj_can_sym_v1()])), t543, x544)
   }), @tactics.beta_tac), t559), @ssreflect.done_tac)
   let t606 = @list.List([@ssreflect.thenl_first(@ssreflect.split_tac)(t560), t605, t604])
-  bij_can_sym_c.set(@sections.section_proof(@list.List(["f'"]), @parser.parse_term("cancel f' f <=> cancel f f'"), t606))
+  bij_can_sym_c.set(@sections.section_proof(@list.List(["f'"]), @term_syntax.parse_term("cancel((f' : (_) -> _), (f : (_) -> _)) == cancel(f, f')"), t606))
 }
 
 ///|
@@ -1486,7 +1486,7 @@ fn step_63() -> Unit raise {
       }, x614)
     }, x615)
   })((x621 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t620, x621)), (x628 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bij_can_sym", @list.List([bij_can_sym()])), (x627 : @ssreflect.ArgType) => @ssreflect.gsym_then_v1(t626, x627), x628)), t629), t630), t657])
-  bij_can_eq_c.set(@sections.section_proof(@list.List(["f'", "f''"]), @parser.parse_term("cancel f f' ==> cancel f f'' ==> f' = f''"), t658))
+  bij_can_eq_c.set(@sections.section_proof(@list.List(["f'", "f''"]), @term_syntax.parse_term("cancel((f : (_) -> _), (f' : (_) -> _)) → cancel(f, (f'' : (_) -> _)) → f' == f''"), t658))
 }
 
 ///|
@@ -1589,7 +1589,7 @@ fn step_71() -> Unit raise {
     }
   })
   let t677 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x664 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("eq_ext", @list.List([eq_ext()])), t663, x664), t665), t666), t676), @ssreflect.done_tac)])
-  eq_bij_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("bijective f ==> forall g. (forall x. f x = g x) ==> bijective g"), t677))
+  eq_bij_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("bijective((f : (_) -> _)) → (∀ g : (_) -> _, (∀ x : _, f(x) == g(x)) → bijective(g))"), t677))
 }
 
 ///|
@@ -1730,7 +1730,7 @@ fn step_72() -> Unit raise {
   })((x727 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x727)), @tactics.beta_tac)
   let t800 = @tactics.then_tac((fn(x690 : (@ssreflect.ArgType) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let arg_tac = x690
-    arg_tac(@ssreflect.ArgType::Arg_term(@parser.parse_term("r o g")))
+    arg_tac(@ssreflect.ArgType::Arg_term(@term_syntax.parse_term("o((r : (_) -> _), (g : (_) -> _))")))
   })(@ssreflect.term_tac(fn(x692 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x693 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @ssreflect.exists_tac(x692, x693)
@@ -1748,7 +1748,7 @@ fn step_72() -> Unit raise {
     }
   })
   let t801 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@ssreflect.repeat_tactic(3L, 0L, (x683 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bijective", @list.List([bijective()])), t682, x683)), @tactics.all_tac), t684), t686), t689), t800, t799, t798, t797, t796])
-  bij_comp_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("bijective f ==> bijective h ==> bijective (f o h)"), t801))
+  bij_comp_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("bijective((f : (_) -> _)) → bijective((h : (_) -> _)) → bijective(o(f, h))"), t801))
 }
 
 ///|
@@ -1792,7 +1792,7 @@ fn step_73() -> Unit raise {
     }, x807))
     (x809 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bij_can_sym", @list.List([bij_can_sym_v1()])), t808, x809)
   }), @tactics.beta_tac), t810), t811), t812), (x818 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bijective", @list.List([bijective()])), t817, x818)), t829])
-  bij_can_bij_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("bijective f ==> forall f'. cancel f f' ==> bijective f'"), t830))
+  bij_can_bij_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("bijective((f : (_) -> _)) → (∀ f' : (_) -> _, cancel(f, f') → bijective(f'))"), t830))
 }
 
 ///|
@@ -1870,7 +1870,7 @@ fn step_79() -> Unit raise {
 ///|
 /// involutive
 fn step_80() -> Unit raise {
-  involutive_c.set(@pair.new_definition(@parser.parse_term("involutive f <=> cancel f f")))
+  involutive_c.set(@pair.new_definition(@term_syntax.parse_term("(involutive : ((_) -> _) -> Bool)((f : (_) -> _)) == cancel(f, f)")))
 }
 
 ///|
@@ -1885,7 +1885,7 @@ pub fn involutive() -> @kernel.Thm {
 ///|
 /// Formal_ineqs/lib/ssrfun.hl:289
 fn step_81() -> Unit raise {
-  @sections.add_section_hyp("Hf", @parser.parse_term("involutive f"))
+  @sections.add_section_hyp("Hf", @term_syntax.parse_term("involutive((f : (_) -> _))"))
 }
 
 ///|
@@ -1908,7 +1908,7 @@ fn step_82() -> Unit raise {
   })
   let t848 = @tactics.then_tac((x838 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("involutive", @list.List([involutive()])), t837, x838), t847)
   let t849 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x832 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("Hf", @list.List([])), (x831 : @ssreflect.ArgType) => @ssreflect.disch_tac(@list.List([]), x831), x832), @ssreflect.clear_assumption("Hf")), @tactics.beta_tac), t848), @ssreflect.done_tac)])
-  inv_inj_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("injective f"), t849))
+  inv_inj_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("injective((f : (_) -> _))"), t849))
 }
 
 ///|
@@ -1940,7 +1940,7 @@ fn step_83() -> Unit raise {
     }
   })
   let t869 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x855 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("bijective", @list.List([bijective()])), t854, x855), (x859 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("f", @list.List([])), t858, x859)), t862), (x868 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @ssreflect.use_arg_then2(("involutive", @list.List([involutive()])), t867, x868)), @ssreflect.done_tac)])
-  inv_bij_c.set(@sections.section_proof(@list.List([]), @parser.parse_term("bijective f"), t869))
+  inv_bij_c.set(@sections.section_proof(@list.List([]), @term_syntax.parse_term("bijective((f : (_) -> _))"), t869))
 }
 
 ///|
@@ -2003,7 +2003,7 @@ fn step_88() -> Unit raise {
 ///|
 /// left_inverse
 fn step_89() -> Unit raise {
-  left_inverse_c.set(@pair.new_definition(@parser.parse_term("left_inverse e inv op = forall x. op (inv x) x = e")))
+  left_inverse_c.set(@pair.new_definition(@term_syntax.parse_term("(left_inverse : (_, (Real) -> Real, (Real, Real) -> _) -> Bool)((e : _), inv, (op : (Real, Real) -> _)) == (∀ x : Real, op(inv(x), x) == e)")))
 }
 
 ///|
@@ -2018,7 +2018,7 @@ pub fn left_inverse() -> @kernel.Thm {
 ///|
 /// right_inverse
 fn step_90() -> Unit raise {
-  right_inverse_c.set(@pair.new_definition(@parser.parse_term("right_inverse e inv op = forall x. op x (inv x) = e")))
+  right_inverse_c.set(@pair.new_definition(@term_syntax.parse_term("(right_inverse : (_, (Real) -> Real, (Real, Real) -> _) -> Bool)((e : _), inv, (op : (Real, Real) -> _)) == (∀ x : Real, op(x, inv(x)) == e)")))
 }
 
 ///|
@@ -2033,7 +2033,7 @@ pub fn right_inverse() -> @kernel.Thm {
 ///|
 /// left_injective
 fn step_91() -> Unit raise {
-  left_injective_c.set(@pair.new_definition(@parser.parse_term("left_injective op = forall x. injective (\\y. op y x)")))
+  left_injective_c.set(@pair.new_definition(@term_syntax.parse_term("(left_injective : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ x : _, injective((y : _) => op(y, x)))")))
 }
 
 ///|
@@ -2048,7 +2048,7 @@ pub fn left_injective() -> @kernel.Thm {
 ///|
 /// right_injective
 fn step_92() -> Unit raise {
-  right_injective_c.set(@pair.new_definition(@parser.parse_term("right_injective op = forall y. injective (op y)")))
+  right_injective_c.set(@pair.new_definition(@term_syntax.parse_term("(right_injective : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ y : _, injective(op(y)))")))
 }
 
 ///|
@@ -2075,7 +2075,7 @@ fn step_94() -> Unit raise {
 ///|
 /// right_id
 fn step_95() -> Unit raise {
-  right_id_c.set(@pair.new_definition(@parser.parse_term("right_id e op = forall x. op x e = x")))
+  right_id_c.set(@pair.new_definition(@term_syntax.parse_term("(right_id : (_, (_, _) -> _) -> Bool)((e : _), (op : (_, _) -> _)) == (∀ x : _, op(x, e) == x)")))
 }
 
 ///|
@@ -2090,7 +2090,7 @@ pub fn right_id() -> @kernel.Thm {
 ///|
 /// left_zero
 fn step_96() -> Unit raise {
-  left_zero_c.set(@pair.new_definition(@parser.parse_term("left_zero z op = forall x. op z x = z")))
+  left_zero_c.set(@pair.new_definition(@term_syntax.parse_term("(left_zero : (_, (_, _) -> _) -> Bool)((z : _), (op : (_, _) -> _)) == (∀ x : _, op(z, x) == z)")))
 }
 
 ///|
@@ -2105,7 +2105,7 @@ pub fn left_zero() -> @kernel.Thm {
 ///|
 /// right_commutative
 fn step_97() -> Unit raise {
-  right_commutative_c.set(@pair.new_definition(@parser.parse_term("right_commutative op = forall x y z. op (op x y) z = op (op x z) y")))
+  right_commutative_c.set(@pair.new_definition(@term_syntax.parse_term("(right_commutative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ x : _, ∀ y : _, ∀ z : _, op(op(x, y), z) == op(op(x, z), y))")))
 }
 
 ///|
@@ -2120,7 +2120,7 @@ pub fn right_commutative() -> @kernel.Thm {
 ///|
 /// left_distributive
 fn step_98() -> Unit raise {
-  left_distributive_c.set(@pair.new_definition(@parser.parse_term("left_distributive op add = forall x y z. op (add x y) z = add (op x z) (op y z)")))
+  left_distributive_c.set(@pair.new_definition(@term_syntax.parse_term("(left_distributive : ((_, _) -> _, (_, _) -> _) -> Bool)((op : (_, _) -> _), (add : (_, _) -> _)) == (∀ x : _, ∀ y : _, ∀ z : _, op(add(x, y), z) == add(op(x, z), op(y, z)))")))
 }
 
 ///|
@@ -2135,7 +2135,7 @@ pub fn left_distributive() -> @kernel.Thm {
 ///|
 /// right_loop
 fn step_99() -> Unit raise {
-  right_loop_c.set(@pair.new_definition(@parser.parse_term("right_loop inv op = forall y. cancel (\\x. op x y) (\\x. op x (inv y))")))
+  right_loop_c.set(@pair.new_definition(@term_syntax.parse_term("(right_loop : ((Real) -> Real, (_, Real) -> _) -> Bool)(inv, (op : (_, Real) -> _)) == (∀ y : Real, cancel((x : _) => op(x, y), (x : _) => op(x, inv(y))))")))
 }
 
 ///|
@@ -2150,7 +2150,7 @@ pub fn right_loop() -> @kernel.Thm {
 ///|
 /// rev_right_loop
 fn step_100() -> Unit raise {
-  rev_right_loop_c.set(@pair.new_definition(@parser.parse_term("rev_right_loop inv op = forall y. cancel (\\x. op x (inv y)) (\\x. op x y)")))
+  rev_right_loop_c.set(@pair.new_definition(@term_syntax.parse_term("(rev_right_loop : ((Real) -> Real, (_, Real) -> _) -> Bool)(inv, (op : (_, Real) -> _)) == (∀ y : Real, cancel((x : _) => op(x, inv(y)), (x : _) => op(x, y)))")))
 }
 
 ///|
@@ -2177,7 +2177,7 @@ fn step_102() -> Unit raise {
 ///|
 /// left_id
 fn step_103() -> Unit raise {
-  left_id_c.set(@pair.new_definition(@parser.parse_term("left_id e op = forall x. op e x = x")))
+  left_id_c.set(@pair.new_definition(@term_syntax.parse_term("(left_id : (_, (_, _) -> _) -> Bool)((e : _), (op : (_, _) -> _)) == (∀ x : _, op(e, x) == x)")))
 }
 
 ///|
@@ -2192,7 +2192,7 @@ pub fn left_id() -> @kernel.Thm {
 ///|
 /// right_zero
 fn step_104() -> Unit raise {
-  right_zero_c.set(@pair.new_definition(@parser.parse_term("right_zero z op = forall x. op x z = z")))
+  right_zero_c.set(@pair.new_definition(@term_syntax.parse_term("(right_zero : (_, (_, _) -> _) -> Bool)((z : _), (op : (_, _) -> _)) == (∀ x : _, op(x, z) == z)")))
 }
 
 ///|
@@ -2207,7 +2207,7 @@ pub fn right_zero() -> @kernel.Thm {
 ///|
 /// left_commutative
 fn step_105() -> Unit raise {
-  left_commutative_c.set(@pair.new_definition(@parser.parse_term("left_commutative op = forall x y z. op x (op y z) = op y (op x z)")))
+  left_commutative_c.set(@pair.new_definition(@term_syntax.parse_term("(left_commutative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ x : _, ∀ y : _, ∀ z : _, op(x, op(y, z)) == op(y, op(x, z)))")))
 }
 
 ///|
@@ -2222,7 +2222,7 @@ pub fn left_commutative() -> @kernel.Thm {
 ///|
 /// right_distributive
 fn step_106() -> Unit raise {
-  right_distributive_c.set(@pair.new_definition(@parser.parse_term("right_distributive op add = forall x y z. op x (add y z) = add (op x y) (op x z)")))
+  right_distributive_c.set(@pair.new_definition(@term_syntax.parse_term("(right_distributive : ((_, _) -> _, (_, _) -> _) -> Bool)((op : (_, _) -> _), (add : (_, _) -> _)) == (∀ x : _, ∀ y : _, ∀ z : _, op(x, add(y, z)) == add(op(x, y), op(x, z)))")))
 }
 
 ///|
@@ -2237,7 +2237,7 @@ pub fn right_distributive() -> @kernel.Thm {
 ///|
 /// left_loop
 fn step_107() -> Unit raise {
-  left_loop_c.set(@pair.new_definition(@parser.parse_term("left_loop inv op = forall x. cancel (op x) (op (inv x))")))
+  left_loop_c.set(@pair.new_definition(@term_syntax.parse_term("(left_loop : ((Real) -> Real, (Real, _) -> _) -> Bool)(inv, (op : (Real, _) -> _)) == (∀ x : Real, cancel(op(x), op(inv(x))))")))
 }
 
 ///|
@@ -2252,7 +2252,7 @@ pub fn left_loop() -> @kernel.Thm {
 ///|
 /// rev_left_loop
 fn step_108() -> Unit raise {
-  rev_left_loop_c.set(@pair.new_definition(@parser.parse_term("rev_left_loop inv op = forall x. cancel (op (inv x)) (op x)")))
+  rev_left_loop_c.set(@pair.new_definition(@term_syntax.parse_term("(rev_left_loop : ((Real) -> Real, (Real, _) -> _) -> Bool)(inv, (op : (Real, _) -> _)) == (∀ x : Real, cancel(op(inv(x)), op(x)))")))
 }
 
 ///|
@@ -2279,7 +2279,7 @@ fn step_110() -> Unit raise {
 ///|
 /// self_inverse
 fn step_111() -> Unit raise {
-  self_inverse_c.set(@pair.new_definition(@parser.parse_term("self_inverse e op = forall x. op x x = e")))
+  self_inverse_c.set(@pair.new_definition(@term_syntax.parse_term("(self_inverse : (_, (_, _) -> _) -> Bool)((e : _), (op : (_, _) -> _)) == (∀ x : _, op(x, x) == e)")))
 }
 
 ///|
@@ -2294,7 +2294,7 @@ pub fn self_inverse() -> @kernel.Thm {
 ///|
 /// commutative
 fn step_112() -> Unit raise {
-  commutative_c.set(@pair.new_definition(@parser.parse_term("commutative op = forall x y. op x y = op y x")))
+  commutative_c.set(@pair.new_definition(@term_syntax.parse_term("(commutative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ x : _, ∀ y : _, op(x, y) == op(y, x))")))
 }
 
 ///|
@@ -2321,7 +2321,7 @@ fn step_114() -> Unit raise {
 ///|
 /// idempotent
 fn step_115() -> Unit raise {
-  idempotent_c.set(@pair.new_definition(@parser.parse_term("idempotent op = forall x. op x x = x")))
+  idempotent_c.set(@pair.new_definition(@term_syntax.parse_term("(idempotent : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ x : _, op(x, x) == x)")))
 }
 
 ///|
@@ -2336,7 +2336,7 @@ pub fn idempotent() -> @kernel.Thm {
 ///|
 /// associative
 fn step_116() -> Unit raise {
-  associative_c.set(@pair.new_definition(@parser.parse_term("associative op = forall x y z. op x (op y z) = op (op x y) z")))
+  associative_c.set(@pair.new_definition(@term_syntax.parse_term("(associative : ((_, _) -> _) -> Bool)((op : (_, _) -> _)) == (∀ x : _, ∀ y : _, ∀ z : _, op(x, op(y, z)) == op(op(x, y), z))")))
 }
 
 ///|

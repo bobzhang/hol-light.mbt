@@ -3,7 +3,7 @@
 ///|
 /// safety
 fn step_1() -> Unit raise {
-  safety_c.set(@pair.new_definition(@parser.parse_term("safety (p:(num->S)->bool) <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m <= n ==> s(m) = s'(m)) ==> ~(p s')")))
+  safety_c.set(@pair.new_definition(@term_syntax.parse_term("(safety : (((Num) -> S) -> Bool) -> Bool)((p : ((Num) -> S) -> Bool)) == (∀ s : (Num) -> S, !p(s) → (∃ n : Num, ∀ s' : (Num) -> S, (∀ m : Num, m <= n → s(m) == s'(m)) → !p(s')))")))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn safety() -> @kernel.Thm {
 ///|
 /// liveness
 fn step_2() -> Unit raise {
-  liveness_c.set(@pair.new_definition(@parser.parse_term("liveness (p:(num->S)->bool) <=>\n        forall s n. ?s'. (forall m. m <= n ==> s(m) = s'(m)) /\\ p s'")))
+  liveness_c.set(@pair.new_definition(@term_syntax.parse_term("(liveness : (((Num) -> S) -> Bool) -> Bool)((p : ((Num) -> S) -> Bool)) == (∀ s : (Num) -> S, ∀ n : Num, ∃ s' : (Num) -> S, (∀ m : Num, m <= n → s(m) == s'(m)) && p(s'))")))
 }
 
 ///|
@@ -33,9 +33,9 @@ pub fn liveness() -> @kernel.Thm {
 ///|
 /// SAFETY
 fn step_3() -> Unit raise {
-  let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("m < n ==> m < SUC n"))]))
+  let t1 = @meson.meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(m : Num) < (n : Num) → m < SUC(n)"))]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([safety(), @equal.gsym(@arith.lt_suc_le())]))), t1)
-  safety_v1_c.set(@tactics.prove(@parser.parse_term("forall p:(num->S)->bool.\n        safety p <=>\n        forall s. ~(p s) ==> ?n. forall s'. (forall m. m < n ==> s(m) = s'(m)) ==> ~(p s')"), t2))
+  safety_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Num) -> S) -> Bool, safety(p) == (∀ s : (Num) -> S, !p(s) → (∃ n : Num, ∀ s' : (Num) -> S, (∀ m : Num, m < n → s(m) == s'(m)) → !p(s')))"), t2))
 }
 
 ///|
@@ -50,9 +50,9 @@ pub fn safety_v1() -> @kernel.Thm {
 ///|
 /// LIVENESS
 fn step_4() -> Unit raise {
-  let t3 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("m < n ==> m < SUC n"))]))
+  let t3 = @meson.meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(m : Num) < (n : Num) → m < SUC(n)"))]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([liveness(), @equal.gsym(@arith.lt_suc_le())]))), t3)
-  liveness_v1_c.set(@tactics.prove(@parser.parse_term("forall p:(num->S)->bool.\n        liveness p <=>\n        forall s n. ?s'. (forall m. m < n ==> s(m) = s'(m)) /\\ p s'"), t4))
+  liveness_v1_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Num) -> S) -> Bool, liveness(p) == (∀ s : (Num) -> S, ∀ n : Num, ∃ s' : (Num) -> S, (∀ m : Num, m < n → s(m) == s'(m)) && p(s'))"), t4))
 }
 
 ///|
@@ -76,16 +76,16 @@ fn step_5() -> Unit raise {
   let t12 = @simp.rewrite_tac(@list.List([safety(), liveness()]))
   let t14 = @list.List([@tactics.then_tac(@simp.expand_tac("Q"), t12), t13])
   let t11 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))
-  let t9 = @parser.parse_term("\\s:num->S. P s \\/ ~Q s")
+  let t9 = @term_syntax.parse_term("(s : (Num) -> S) => (P : ((Num) -> S) -> Bool)(s) || !(Q : ((Num) -> S) -> Bool)(s)")
   let t10 = @tactics.map_every(fn(x6 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7 = @tactics.exists_tac(x6)
     fn(x8 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7(x8)
     }
-  }, @list.List([@parser.parse_term("\\s:num->S. P s \\/ Q s"), t9]))
-  let t5 = @simp.abbrev_tac(@parser.parse_term("Q = \\s:num->S. forall i. ?b. (forall j. j <= i ==> b j = s j) /\\ P b"))
+  }, @list.List([@term_syntax.parse_term("(s : (Num) -> S) => (P : ((Num) -> S) -> Bool)(s) || (Q : ((Num) -> S) -> Bool)(s)"), t9]))
+  let t5 = @simp.abbrev_tac(@term_syntax.parse_term("(Q : ((Num) -> S) -> Bool) == ((s : (Num) -> S) => ∀ i : Num, ∃ b : (Num) -> S, (∀ j : Num, j <= i → b(j) == s(j)) && (P : ((Num) -> S) -> Bool)(b))"))
   let t20 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5), t10), t11), @tactics.conj_tac), t14), t15), @tactics.conj_tac), t19)
-  safety_liveness_decomposition_c.set(@tactics.prove(@parser.parse_term("forall P:(num->S)->bool.\n      ?S L. safety S /\\ liveness L /\\ (forall x. S x /\\ L x <=> P x)"), t20))
+  safety_liveness_decomposition_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : ((Num) -> S) -> Bool, ∃ S : ((Num) -> S) -> Bool, ∃ L : ((Num) -> S) -> Bool, safety(S) && liveness(L) && (∀ x : (Num) -> S, (S(x) && L(x)) == P(x))"), t20))
 }
 
 ///|
