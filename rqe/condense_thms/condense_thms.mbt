@@ -3,7 +3,7 @@
 ///|
 /// real_cases
 fn step_1() -> Unit raise {
-  real_cases_c.set(@tactics.prove(@parser.parse_term("forall x y. x < y \\/ (x = y) \\/ y < x"), @calc_rat.real_arith_tac))
+  real_cases_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ∀ y : Real, x < y || x == y || y < x"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -18,7 +18,7 @@ pub fn real_cases() -> @kernel.Thm {
 ///|
 /// gt_aux
 fn step_2() -> Unit raise {
-  gt_aux_c.set(@tactics.prove(@parser.parse_term("forall x. (x1 < x2 /\\ x2 < x3) /\\ ((x1 < x /\\ x < x2) \\/ (x = x2) \\/ (x2 < x /\\ x < x3)) ==> x1 < x /\\ x < x3"), @calc_rat.real_arith_tac))
+  gt_aux_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Real, ((x1 : Real) < (x2 : Real) && x2 < (x3 : Real)) && (x1 < x && x < x2 || x == x2 || x2 < x && x < x3) → x1 < x && x < x3"), @calc_rat.real_arith_tac))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn gt_aux() -> @kernel.Thm {
 /// gen_thm
 fn step_3() -> Unit raise {
   let t1 = @list.List([@meson.meson_tac(@list.List([real_cases(), gt_aux(), @class.de_morgan_thm(), @analysis.real_not_lt(), @analysis.real_le_lt()]))])
-  gen_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall P x1 x2 x3.\n      (x1 < x3) ==>\n      (forall x. x1 < x /\\ x < x2 ==> P x) ==>\n      (forall x. (x = x2) ==> P x) ==>\n      (forall x. x2 < x /\\ x < x3 ==> P x) ==>\n        (forall x. x1 < x /\\ x < x3 ==> P x)"), t1))
+  gen_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ P : (Real) -> Bool, ∀ x1 : Real, ∀ x2 : Real, ∀ x3 : Real, x1 < x3 → (∀ x : Real, x1 < x && x < x2 → P(x)) → (∀ x : Real, x == x2 → P(x)) → (∀ x : Real, x2 < x && x < x3 → P(x)) → (∀ x : Real, x1 < x && x < x3 → P(x))"), t1))
 }
 
 ///|
@@ -50,7 +50,7 @@ pub fn gen_thm() -> @kernel.Thm {
 /// gen_thm_noleft
 fn step_4() -> Unit raise {
   let t2 = @meson.meson_tac(@list.List([real_cases(), gt_aux()]))
-  gen_thm_noleft_c.set(@tactics.prove(@parser.parse_term("forall P x2 x3.\n      (x2 < x3) ==>\n      (forall x. x < x2 ==> P x) ==>\n      (forall x. (x = x2) ==> P x) ==>\n      (forall x. x2 < x /\\ x < x3 ==> P x) ==>\n        (forall x. x < x3 ==> P x)"), t2))
+  gen_thm_noleft_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Real) -> Bool, ∀ x2 : Real, ∀ x3 : Real, x2 < x3 → (∀ x : Real, x < x2 → P(x)) → (∀ x : Real, x == x2 → P(x)) → (∀ x : Real, x2 < x && x < x3 → P(x)) → (∀ x : Real, x < x3 → P(x))"), t2))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn gen_thm_noleft() -> @kernel.Thm {
 /// gen_thm_noright
 fn step_5() -> Unit raise {
   let t3 = @meson.meson_tac(@list.List([real_cases(), gt_aux()]))
-  gen_thm_noright_c.set(@tactics.prove(@parser.parse_term("forall P x1 x2.\n      (x1 < x2) ==>\n      (forall x. x1 < x /\\ x < x2 ==> P x) ==>\n      (forall x. (x = x2) ==> P x) ==>\n      (forall x. x2 < x ==> P x) ==>\n        (forall x. x1 < x ==> P x)"), t3))
+  gen_thm_noright_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Real) -> Bool, ∀ x1 : Real, ∀ x2 : Real, x1 < x2 → (∀ x : Real, x1 < x && x < x2 → P(x)) → (∀ x : Real, x == x2 → P(x)) → (∀ x : Real, x2 < x → P(x)) → (∀ x : Real, x1 < x → P(x))"), t3))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn gen_thm_noright() -> @kernel.Thm {
 /// gen_thm_noboth
 fn step_6() -> Unit raise {
   let t4 = @meson.meson_tac(@list.List([real_cases(), gt_aux()]))
-  gen_thm_noboth_c.set(@tactics.prove(@parser.parse_term("forall P Q x2.\n       Q ==>\n      (forall x. x < x2 ==> P x) ==>\n      (forall x. (x = x2) ==> P x) ==>\n      (forall x. x2 < x ==> P x) ==>\n        (forall x. T ==> P x)"), t4))
+  gen_thm_noboth_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (Real) -> Bool, ∀ Q : Bool, ∀ x2 : Real, Q → (∀ x : Real, x < x2 → P(x)) → (∀ x : Real, x == x2 → P(x)) → (∀ x : Real, x2 < x → P(x)) → (∀ x : Real, true → P(x))"), t4))
 }
 
 ///|
