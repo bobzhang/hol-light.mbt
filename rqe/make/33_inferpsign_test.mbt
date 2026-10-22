@@ -9937,8 +9937,8 @@ test "Rqe/inferpsign matches Rqe/inferpsign.ml" {
       #|0..0..2..4..8..17..27..solved at 42
       #|0..0..1..2..5..8..11..solved at 19
       #|Rqe/inferpsign quotations (17):
-      #|  REPLICATE:num -> sign -> sign list
-      #|  LENGTH:real list -> num
+      #|  (REPLICATE : (Num, Sign) -> List[Sign])
+      #|  (LENGTH : (List[Real]) -> Num)
       #|  1
       #|  2
       #|  Unknown
@@ -9946,9 +9946,9 @@ test "Rqe/inferpsign matches Rqe/inferpsign.ml" {
       #|  Zero
       #|  Pos
       #|  Neg
-      #|  (pow)
-      #|  (EVEN)
-      #|  (ODD)
+      #|  real_pow
+      #|  EVEN
+      #|  ODD
       #|  :real -> real
       #|  :sign list
       #|  :sign
