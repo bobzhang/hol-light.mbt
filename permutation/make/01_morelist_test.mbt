@@ -5657,15 +5657,15 @@ test "Permutation/morelist matches Permutation/morelist.ml" {
       #|0..0..1..solved at 5
       #|Warning: inventing type variables
       #|Permutation/morelist quotations (65):
-      #|  CONS
-      #|  forall P. P [] /\\ (forall h t. P (h :: t)) ==> forall l. P l
-      #|  forall l. NULL l <=> l = []
-      #|  forall l. NULL l <=> LENGTH l = 0
-      #|  n<=m ==> n<= SUC m
-      #|  forall f l:A list. LENGTH (FILTER f l) <= LENGTH l
-      #|  LENGTH:A list->num
-      #|  forall P. (forall l. (forall l'. LENGTH l' < LENGTH l ==> P l') ==> P l)\n        ==> (forall l:A list. P l)
-      #|  (forall x. DELETE1 x [] = []) /\\\n   (forall x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)
+      #|  (CONS : (_, List[_]) -> List[_])
+      #|  \226\136\128 P : (List[_]) -> Bool, P(NIL) && (\226\136\128 h : _, \226\136\128 t : List[_], P(CONS(h, t))) \226\134\146 (\226\136\128 l : List[_], P(l))
+      #|  \226\136\128 l : List[_], NULL(l) == (l == NIL)
+      #|  \226\136\128 l : List[_], NULL(l) == (LENGTH(l) == 0)
+      #|  (n : Num) <= (m : Num) \226\134\146 n <= SUC(m)
+      #|  \226\136\128 f : (A) -> Bool, \226\136\128 l : List[A], LENGTH(FILTER(f, l)) <= LENGTH(l)
+      #|  (LENGTH : (List[A]) -> Num)
+      #|  \226\136\128 P : (List[A]) -> Bool, (\226\136\128 l : List[A], (\226\136\128 l' : List[A], LENGTH(l') < LENGTH(l) \226\134\146 P(l')) \226\134\146 P(l)) \226\134\146 (\226\136\128 l : List[A], P(l))
+      #|  (\226\136\128 x : _, (DELETE1 : (_, List[_]) -> List[_])(x, NIL) == NIL) && (\226\136\128 x : _, \226\136\128 h : _, \226\136\128 t : List[_], DELETE1(x, CONS(h, t)) == (if x == h { t } else { CONS(h, DELETE1(x, t)) }))
       #|  :P
       #|  :P
       #|  :P
@@ -5674,16 +5674,16 @@ test "Permutation/morelist matches Permutation/morelist.ml" {
       #|  \\n. n + 1
       #|  (+):num->num->num
       #|  (+):num->num->num
-      #|  forall x l. ~MEM x l ==> DELETE1 x l = l
-      #|  forall x l1 l2. DELETE1 x (APPEND l1 l2) =\n              if MEM x l1 then APPEND (DELETE1 x l1) l2\n                          else APPEND l1 (DELETE1 x l2)
-      #|  forall P x l. FILTER P (DELETE1 x l) =\n            if P x then DELETE1 x (FILTER P l) else FILTER P l
-      #|  SUC (PRE n)=n <=> ~(n=0)
-      #|  forall l x:A. LENGTH (DELETE1 x l) =\n            if MEM x l then PRE (LENGTH l) else LENGTH l
-      #|  forall h t x. MEM x (DELETE1 h t) ==> MEM x t
-      #|  forall t h x. ~MEM x t ==> ~MEM x (DELETE1 h t)
-      #|  forall l x y:A. MEM x l /\\ ~(x = y) ==> MEM x (DELETE1 y l)
-      #|  forall P x l. P x /\\ ALL P (DELETE1 x l) ==> ALL P l
-      #|  (forall x. COUNT x [] = 0) /\\\n   (forall x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)
+      #|  \226\136\128 x : _, \226\136\128 l : List[_], !MEM(x, l) \226\134\146 DELETE1(x, l) == l
+      #|  \226\136\128 x : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], DELETE1(x, APPEND(l1, l2)) == (if MEM(x, l1) { APPEND(DELETE1(x, l1), l2) } else { APPEND(l1, DELETE1(x, l2)) })
+      #|  \226\136\128 P : (_) -> Bool, \226\136\128 x : _, \226\136\128 l : List[_], FILTER(P, DELETE1(x, l)) == (if P(x) { DELETE1(x, FILTER(P, l)) } else { FILTER(P, l) })
+      #|  (SUC(PRE((n : Num))) == n) == !(n == 0)
+      #|  \226\136\128 l : List[A], \226\136\128 x : A, LENGTH(DELETE1(x, l)) == (if MEM(x, l) { PRE(LENGTH(l)) } else { LENGTH(l) })
+      #|  \226\136\128 h : _, \226\136\128 t : List[_], \226\136\128 x : _, MEM(x, DELETE1(h, t)) \226\134\146 MEM(x, t)
+      #|  \226\136\128 t : List[_], \226\136\128 h : _, \226\136\128 x : _, !MEM(x, t) \226\134\146 !MEM(x, DELETE1(h, t))
+      #|  \226\136\128 l : List[A], \226\136\128 x : A, \226\136\128 y : A, MEM(x, l) && !(x == y) \226\134\146 MEM(x, DELETE1(y, l))
+      #|  \226\136\128 P : (_) -> Bool, \226\136\128 x : _, \226\136\128 l : List[_], P(x) && ALL(P, DELETE1(x, l)) \226\134\146 ALL(P, l)
+      #|  (\226\136\128 x : _, (COUNT : (_, List[_]) -> Num)(x, NIL) == 0) && (\226\136\128 x : _, \226\136\128 h : _, \226\136\128 t : List[_], COUNT(x, CONS(h, t)) == (if x == h { SUC(COUNT(x, t)) } else { COUNT(x, t) }))
       #|  :P
       #|  :P
       #|  :P
@@ -5697,31 +5697,31 @@ test "Permutation/morelist matches Permutation/morelist.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \\n. n + 1
-      #|  forall x l. COUNT x l = LENGTH (FILTER ((=) x) l)
-      #|  forall P x l. COUNT x (FILTER P l) =\n            if P x then COUNT x l else 0
-      #|  forall x l1 l2. COUNT x (APPEND l1 l2) = COUNT x l1 + COUNT x l2
-      #|  n<=m ==> n <= SUC m
-      #|  forall x l. COUNT x l <= LENGTH l
-      #|  forall x l. COUNT x l = 0 <=> ~MEM x l
-      #|  forall x l. MEM x l <=> ~(COUNT x l = 0)
-      #|  forall y x l. COUNT y (DELETE1 (x:A) l) =\n            if y=x /\\ MEM x l then PRE (COUNT y l) else COUNT y l
-      #|  LIST_UNIQ [] /\\\n   (forall x xs. LIST_UNIQ xs /\\ ~MEM x xs ==> LIST_UNIQ (x :: xs))
-      #|  h :: t
-      #|  LIST_UNIQ [] /\\\n   (forall x. LIST_UNIQ [x]) /\\\n   (forall x xs. LIST_UNIQ (x :: xs) <=> ~MEM x xs /\\ LIST_UNIQ xs)
-      #|  LIST_UNIQ = PAIRWISE (\\x y. ~(x = y))
-      #|  (p <=> q) <=> (p ==> q) /\\ (q ==> p)
-      #|  x:A
-      #|  h:A
-      #|  forall l. LIST_UNIQ l <=> (forall x:A. COUNT x l = if MEM x l then 1 else 0)
-      #|  forall l x. LIST_UNIQ l ==> LIST_UNIQ (DELETE1 x l)
-      #|  x:A
-      #|  forall l x:A. ~MEM x (DELETE1 x l) /\\ LIST_UNIQ (DELETE1 x l)\n            ==> LIST_UNIQ l
-      #|  forall l m. LIST_UNIQ (APPEND l m) <=>\n         LIST_UNIQ l /\\ LIST_UNIQ m /\\\n         forall x. ~(MEM x l /\\ MEM x m)
-      #|  LENGTH (t:A list)
-      #|  forall l:A list. CARD (set_of_list l) <= LENGTH l
-      #|  t:A list
-      #|  forall l:A list. LIST_UNIQ l <=> CARD (set_of_list l) = LENGTH l
-      #|  forall s. FINITE s ==> LIST_UNIQ(list_of_set s)
+      #|  \226\136\128 x : _, \226\136\128 l : List[_], COUNT(x, l) == LENGTH(FILTER(op_eq(x), l))
+      #|  \226\136\128 P : (_) -> Bool, \226\136\128 x : _, \226\136\128 l : List[_], COUNT(x, FILTER(P, l)) == (if P(x) { COUNT(x, l) } else { 0 })
+      #|  \226\136\128 x : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], COUNT(x, APPEND(l1, l2)) == COUNT(x, l1) + COUNT(x, l2)
+      #|  (n : Num) <= (m : Num) \226\134\146 n <= SUC(m)
+      #|  \226\136\128 x : _, \226\136\128 l : List[_], COUNT(x, l) <= LENGTH(l)
+      #|  \226\136\128 x : _, \226\136\128 l : List[_], (COUNT(x, l) == 0) == !MEM(x, l)
+      #|  \226\136\128 x : _, \226\136\128 l : List[_], MEM(x, l) == !(COUNT(x, l) == 0)
+      #|  \226\136\128 y : A, \226\136\128 x : A, \226\136\128 l : List[A], COUNT(y, DELETE1(x, l)) == (if y == x && MEM(x, l) { PRE(COUNT(y, l)) } else { COUNT(y, l) })
+      #|  (LIST_UNIQ : (List[_]) -> Bool)(NIL) && (\226\136\128 x : _, \226\136\128 xs : List[_], LIST_UNIQ(xs) && !MEM(x, xs) \226\134\146 LIST_UNIQ(CONS(x, xs)))
+      #|  CONS((h : _), (t : List[_]))
+      #|  (LIST_UNIQ : (List[_]) -> Bool)((NIL : List[_])) && (\226\136\128 x : _, LIST_UNIQ([x])) && (\226\136\128 x : _, \226\136\128 xs : List[_], LIST_UNIQ(CONS(x, xs)) == (!MEM(x, xs) && LIST_UNIQ(xs)))
+      #|  LIST_UNIQ == PAIRWISE((x : _) => (y : _) => !(x == y))
+      #|  ((p : Bool) == (q : Bool)) == ((p \226\134\146 q) && (q \226\134\146 p))
+      #|  (x : A)
+      #|  (h : A)
+      #|  \226\136\128 l : List[A], LIST_UNIQ(l) == (\226\136\128 x : A, COUNT(x, l) == (if MEM(x, l) { 1 } else { 0 }))
+      #|  \226\136\128 l : List[_], \226\136\128 x : _, LIST_UNIQ(l) \226\134\146 LIST_UNIQ(DELETE1(x, l))
+      #|  (x : A)
+      #|  \226\136\128 l : List[A], \226\136\128 x : A, !MEM(x, DELETE1(x, l)) && LIST_UNIQ(DELETE1(x, l)) \226\134\146 LIST_UNIQ(l)
+      #|  \226\136\128 l : List[_], \226\136\128 m : List[_], LIST_UNIQ(APPEND(l, m)) == (LIST_UNIQ(l) && LIST_UNIQ(m) && (\226\136\128 x : _, !(MEM(x, l) && MEM(x, m))))
+      #|  LENGTH((t : List[A]))
+      #|  \226\136\128 l : List[A], CARD(set_of_list(l)) <= LENGTH(l)
+      #|  (t : List[A])
+      #|  \226\136\128 l : List[A], LIST_UNIQ(l) == (CARD(set_of_list(l)) == LENGTH(l))
+      #|  \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 LIST_UNIQ(list_of_set(s))
       #|NULL_EQ_NIL =  |- (#forall:fun(fun(list('?1),bool),bool) (\l:list('?1). ((#=:fun(bool,fun(bool,bool)) (#NULL:fun(list('?1),bool) l:list('?1))) ((#=:fun(list('?1),fun(list('?1),bool)) l:list('?1)) #NIL:list('?1)))))
       #|NULL_LENGTH =  |- (#forall:fun(fun(list('?2),bool),bool) (\l:list('?2). ((#=:fun(bool,fun(bool,bool)) (#NULL:fun(list('?2),bool) l:list('?2))) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('?2),num) l:list('?2))) (#NUMERAL:fun(num,num) #_0:num)))))
       #|LENGTH_FILTER_LE =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\f:fun('A,bool). (#forall:fun(fun(list('A),bool),bool) (\l:list('A). ((#<=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) ((#FILTER:fun(fun('A,bool),fun(list('A),list('A))) f:fun('A,bool)) l:list('A)))) (#LENGTH:fun(list('A),num) l:list('A)))))))
