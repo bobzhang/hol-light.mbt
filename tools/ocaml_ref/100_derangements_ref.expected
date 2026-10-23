@@ -6845,7 +6845,7 @@ Warning: inventing type variables
   GABS((f : ((_, _)) -> _) => \226\136\128 x : _, \226\136\128 y : _, GEQ(f((x, y)), (P : (_, _) -> _)(x, y)), ((a : _), (b : _)))
   (domain : (((_, _)) -> Bool, _) -> Bool)((r : ((_, _)) -> Bool)) == {(x : _) | \226\136\131 y : _, r((x, y))}
   (range : (((_, _)) -> Bool, _) -> Bool)((r : ((_, _)) -> Bool)) == {(y : _) | \226\136\131 x : _, r((x, y))}
-  (r % s) (x,y) <=> ?z. r(x,z) /\\ s(z,y)
+  (op_pct : (((_, _)) -> Bool, ((_, _)) -> Bool, (_, _)) -> Bool)((r : ((_, _)) -> Bool), (s : ((_, _)) -> Bool), ((x : _), (y : _))) == (\226\136\131 z : _, r((x, z)) && s((z, y)))
   (id : ((_) -> Bool, (_, _)) -> Bool)((s : (_) -> Bool), ((x : _), (y : _))) == (IN(x, s) && x == y)
   (converse : (((_, _)) -> _, (_, _)) -> _)((r : ((_, _)) -> _), ((x : _), (y : _))) == r((y, x))
   (swap : ((_, _), (_, _)) -> Bool)(((a : _), (b : _)), ((x : _), (y : _))) == (x == a && y == b || x == b && y == a)
@@ -6875,7 +6875,7 @@ Warning: inventing type variables
   \226\136\131 y : B, IN(y, (t : (B) -> Bool)) && (p : ((A, B)) -> Bool)(((x : A), y))
   IN((x : _), (s : (_) -> Bool)) \226\134\146 INSERT(x, s) == s
   \226\136\128 x : A, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, \226\136\128 p : ((A, B)) -> Bool, pairsup(p, (INSERT(x, s), t)) == (if IN(x, s) { pairsup(p, (s, t)) } else { \226\136\131 y : B, \226\136\131 q : ((A, B)) -> Bool, IN(y, t) && p == INSERT((x, y), q) && pairsup(q, (s, DELETE(t, y))) })
-  {p | ?y. y IN t /\\ A y p} = UNIONS {{p | A y p} | y IN t} /\\\n     {p | ?q. p = (a,y) INSERT q /\\ A y q} =\n           IMAGE (\\q. (a,y) INSERT q) {q | A y q}
+  {(p : ((_, _)) -> Bool) | \226\136\131 y : _, IN(y, (t : (_) -> Bool)) && (A : (_, ((_, _)) -> Bool) -> Bool)(y, p)} == UNIONS({{(p : ((_, _)) -> Bool) | A((y : _), p)} | IN(y, t)}) && {(p : ((_, _)) -> Bool) | \226\136\131 q : ((_, _)) -> Bool, p == INSERT(((a : _), (y : _)), q) && A(y, q)} == IMAGE((q : ((_, _)) -> Bool) => INSERT((a, y), q), {(q : ((_, _)) -> Bool) | A(y, q)})
   {(x : _) | x == (a : _)} == {a}
   \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, HAS_SIZE(s, n) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE({(p : ((A, B)) -> Bool) | pairsup(p, (s, t))}, FACT(n))
   \226\136\128 s : (_) -> Bool, \226\136\128 n : Num, HAS_SIZE(s, n) \226\134\146 HAS_SIZE({(p : ((_, _)) -> Bool) | permutes(p, s)}, FACT(n))
