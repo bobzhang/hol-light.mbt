@@ -63122,7 +63122,7 @@ Multivariate/degree quotations (2718):
   (i : Num)
   CARD(op_dot_dot((n : Num) + 1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
   (x : Cart[Real, N])
-  dimension(UNIONS\n         {{x:real^N |\n             {i | i IN 1..dimindex (:N) /\\ rational (x$i)} HAS_SIZE m} |\n          m IN (dimindex(:N)-n)..dimindex(:N)-1})
+  (dimension : ((Cart[Real, N]) -> Bool) -> Int)((UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({{(x : Cart[Real, N]) | (HAS_SIZE : ((Num) -> Bool, Num) -> Bool)({(i : Num) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}, (m : Num))} | (IN : (Num, (Num) -> Bool) -> Bool)(m, op_dot_dot((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - (n : Num), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1))}))
   \226\136\128 n : Num, n <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (dimension : ((Cart[Real, N]) -> Bool) -> Int)((DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((span : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((IMAGE : ((Num) -> Cart[Real, N], (Num) -> Bool, Cart[Real, N]) -> Bool)((basis : (Num) -> Cart[Real, N]), op_dot_dot(1, n))), {(x : Cart[Real, N]) | \226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))})) < int_of_num(n)
   (g : (Cart[Real, N]) -> Cart[Real, N])
   (f : (Cart[Real, N]) -> Cart[Real, N])
