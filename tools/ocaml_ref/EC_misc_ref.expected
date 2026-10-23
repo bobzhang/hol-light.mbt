@@ -35004,7 +35004,7 @@ EC/misc quotations (57):
   !((n : Num) <= 2) == (3 <= n)
   ((p : Bool) && (q : Bool)) == (p && !(p \226\134\146 !q))
   (x : A)
-  UNIONS {{x,y | y | y IN ring_carrier r /\\ ring_pow r y 2 = h x} |x|\n            (x:A) IN ring_carrier r}
+  UNIONS({{(x, y) | y : A | IN(y, ring_carrier((r : Ring[A]))) && ring_pow(r, y, 2) == (h : (A) -> A)(x)} | x : A | IN(x, ring_carrier(r))})
   \226\136\128 r : Ring[A], \226\136\128 h : (A) -> A, integral_domain(r) && FINITE(ring_carrier(r)) \226\134\146 FINITE({((x : A), (y : A)) | IN(x, ring_carrier(r)) && IN(y, ring_carrier(r)) && ring_pow(r, y, 2) == h(x)}) && CARD({((x : A), (y : A)) | IN(x, ring_carrier(r)) && IN(y, ring_carrier(r)) && ring_pow(r, y, 2) == h(x)}) <= 2 * CARD(ring_carrier(r))
   ~
   \\/

@@ -30,7 +30,7 @@ fn step_1() -> Unit raise {
   let t6 = @tactics.then_tac(@tactics.match_mp_tac(@sets.finite_card_le_unions()), t5)
   let t4 = @sets.set_tac(@list.List([]))
   let t7 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.unions_gspec(), @sets.subset(), @pair.forall_pair_thm(), @sets.in_elim_pair_thm()])), t4), t6])
-  let t3 = @tactics.exists_tac(@parser.parse_term("UNIONS {{x,y | y | y IN ring_carrier r /\\ ring_pow r y 2 = h x} |x|\n            (x:A) IN ring_carrier r}"))
+  let t3 = @tactics.exists_tac(@term_syntax.parse_term("UNIONS({{(x, y) | y : A | IN(y, ring_carrier((r : Ring[A]))) && ring_pow(r, y, 2) == (h : (A) -> A)(x)} | x : A | IN(x, ring_carrier(r))})"))
   let t2 = @tactics.match_mp_tac(@sets.finite_card_le_subset())
   let t1 = @simp.once_rewrite_tac(@list.List([@arith.mult_sym()]))
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.strip_tac), t1), t2), t3), @tactics.conj_tac), t7), t8), @tactics.disch_tac), t9), t10), t11), t12), t13), t14), t18), t22), t23), t24), t25), t26)
