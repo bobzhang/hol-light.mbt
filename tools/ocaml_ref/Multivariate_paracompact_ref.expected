@@ -22118,7 +22118,7 @@ Multivariate/paracompact quotations (1856):
   (n : Num)
   (f : (Num, A) -> Bool)((n : Num))
   (n : Num)
-  forall top:A topology f.\n        (forall n. open_in top (f n)) /\\\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> locally_finite_in top\n              {f n DIFF UNIONS {f k | k < n} | n IN (:num)}
+  \226\136\128 top : Topology[A], \226\136\128 f : (Num, A) -> Bool, (\226\136\128 n : Num, open_in(top, f(n))) && UNIONS({f((n : Num)) | IN(n, UNIV)}) == topspace(top) \226\134\146 locally_finite_in(top, {DIFF(f((n : Num)), UNIONS({f((k : Num)) | k < n})) | IN(n, UNIV)})
   (m : Num)
   DIFF((f : (Num, A) -> Bool)((m : Num)), UNIONS({f((k : Num)) | k < m}))
   (p : Num) => IN((x : A), (f : (Num, A) -> Bool)(p))
@@ -22131,7 +22131,7 @@ Multivariate/paracompact quotations (1856):
   (n : Num)
   (s : (A) -> Bool)
   (x : A)
-  forall top:A topology f.\n        UNIONS {f n | n IN (:num)} = topspace top\n        ==> UNIONS {f n DIFF UNIONS {f k | k < n} | n IN (:num)} =\n            topspace top
+  \226\136\128 top : Topology[A], \226\136\128 f : (Num, A) -> Bool, UNIONS({f((n : Num)) | IN(n, UNIV)}) == topspace(top) \226\134\146 UNIONS({DIFF(f((n : Num)), UNIONS({f((k : Num)) | k < n})) | IN(n, UNIV)}) == topspace(top)
   SUBSET(INTERS(IMAGE((Wfn : (Num, A) -> Bool), (N0 : (Num) -> Bool))), Wfn((n0 : Num)))
   (s : (A) -> Bool)
   (n0 : Num)
@@ -22284,7 +22284,7 @@ Multivariate/paracompact quotations (1856):
   (u0 : (A) -> Bool)
   (t : (A) -> Bool)
   (x : A)
-  UNIONS {UNIONS {v:A->bool | v IN V /\\\n                (f:(A->bool)->(A->bool)) v = u} | u IN S} =\n       UNIONS {v:A->bool | v IN V /\\ (f:(A->bool)->(A->bool)) v IN S}
+  UNIONS({UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && (f : ((A) -> Bool, A) -> Bool)(v) == (u : (A) -> Bool)}) | IN(u, (S : ((A) -> Bool) -> Bool))}) == UNIONS({(v : (A) -> Bool) | IN(v, V) && IN(f(v), S)})
   (S : ((A) -> Bool) -> Bool)
   (v : (A) -> Bool)
   (f : ((A) -> Bool, A) -> Bool)((v : (A) -> Bool))
@@ -22435,7 +22435,7 @@ Multivariate/paracompact quotations (1856):
   (nn : Num)
   (F' : ((A) -> Bool) -> Bool)
   (r : (A) -> Bool)
-  UNIONS {{(EE:num->(A->bool)->(A->bool)) n w | w IN W} |\n               n IN (:num)}
+  UNIONS({{(EE : (Num, (A) -> Bool, A) -> Bool)((n : Num), (w : (A) -> Bool)) | IN(w, (W : ((A) -> Bool) -> Bool))} | IN(n, UNIV)})
   (EE : (Num, (A) -> Bool, A) -> Bool)
   (w : (A) -> Bool) => (cc : ((A) -> Bool, A) -> Bool)((VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), w))
   (w : (A) -> Bool) => (VV : (Num, (A) -> Bool, A) -> Bool)(SUC((nn : Num)), w)
@@ -22529,7 +22529,7 @@ Multivariate/paracompact quotations (1856):
   SUBSET((C : (Num, (A) -> Bool, A) -> Bool)(SUC((n : Num)), (w1 : (A) -> Bool)), DIFF(w1, UNIONS({C(n, (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w1) && !(v == w1)})))
   \226\136\128 n : Num, \226\136\128 w1 : (A) -> Bool, \226\136\128 w2 : (A) -> Bool, IN(w1, (W : ((A) -> Bool) -> Bool)) && IN(w2, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(w2, w1) && !(w2 == w1) \226\134\146 INTER((C : (Num, (A) -> Bool, A) -> Bool)(SUC(n), w1), C(n, w2)) == {}
   (a : A)
-  UNIONS {UNIONS {v:A->bool | v IN V2 /\\\n             (g2:(A->bool)->(A->bool)) v = w'} |\n            w' | (w':A->bool) IN ss} =\n           UNIONS {v:A->bool | v IN V2 /\\ g2 v IN ss}
+  UNIONS({UNIONS({(v : (A) -> Bool) | IN(v, (V2 : ((A) -> Bool) -> Bool)) && (g2 : ((A) -> Bool, A) -> Bool)(v) == w'}) | w' : (A) -> Bool | IN(w', (ss : ((A) -> Bool) -> Bool))}) == UNIONS({(v : (A) -> Bool) | IN(v, V2) && IN(g2(v), ss)})
   (ss : ((A) -> Bool) -> Bool)
   (v : (A) -> Bool)
   (g2 : ((A) -> Bool, A) -> Bool)((v : (A) -> Bool))
@@ -22570,7 +22570,7 @@ Multivariate/paracompact quotations (1856):
   (w' : (A) -> Bool)
   {(v : (A) -> Bool) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, (w' : (A) -> Bool)) && !(v == w')}
   (w' : (A) -> Bool)
-  {w' DIFF UNIONS\n           {(C:num->(A->bool)->(A->bool)) n v | v |\n            v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w' /\\\n            ~(v = w')} |\n          w' | (w':A->bool) IN W}
+  {DIFF(w', UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w') && !(v == w')})) | w' : (A) -> Bool | IN(w', W)}
   \226\136\131 c' : ((A) -> Bool, A) -> Bool, (\226\136\128 w' : (A) -> Bool, IN(w', (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c'(w'))) && (\226\136\128 w' : (A) -> Bool, IN(w', W) \226\134\146 SUBSET(c'(w'), DIFF(w', UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w') && !(v == w')})))) && UNIONS({c'((w' : (A) -> Bool)) | IN(w', W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({c'((w' : (A) -> Bool)) | IN(w', ss)})))
   (n : Num)
   \226\136\128 n : Num, \226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 SUBSET((C : (Num, (A) -> Bool, A) -> Bool)(SUC(n), w), DIFF(w, UNIONS({C(n, (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))
@@ -22588,7 +22588,7 @@ Multivariate/paracompact quotations (1856):
   (y : A)
   (vv : (A) -> Bool)
   (ww : (A) -> Bool)
-  UNIONS {UNIONS {v:A->bool | v IN V /\\\n                 (g:(A->bool)->(A->bool)) v = w} |\n                 (w:A->bool) IN ss} =\n               UNIONS {v:A->bool | v IN V /\\ g v IN ss}
+  UNIONS({UNIONS({(v : (A) -> Bool) | IN(v, (V : ((A) -> Bool) -> Bool)) && (g : ((A) -> Bool, A) -> Bool)(v) == (w : (A) -> Bool)}) | IN(w, (ss : ((A) -> Bool) -> Bool))}) == UNIONS({(v : (A) -> Bool) | IN(v, V) && IN(g(v), ss)})
   (ss : ((A) -> Bool) -> Bool)
   (v : (A) -> Bool)
   (v : (A) -> Bool)
@@ -22612,7 +22612,7 @@ Multivariate/paracompact quotations (1856):
   (g : ((A) -> Bool, A) -> Bool)
   \226\136\131 g : ((A) -> Bool, A) -> Bool, \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 IN(g(v), (W : ((A) -> Bool) -> Bool)) && SUBSET(v, DIFF(g(v), UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (u : (A) -> Bool)) | IN(u, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(u, g(v)) && !(u == g(v))})))
   (V : ((A) -> Bool) -> Bool)
-  {w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\\n                (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)} |\n              w | (w:A->bool) IN W}
+  {DIFF(w, UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})) | w : (A) -> Bool | IN(w, W)}
   \226\136\131 c' : ((A) -> Bool, A) -> Bool, (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), c'(w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(c'(w), DIFF(w, UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))) && UNIONS({c'((w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({c'((w : (A) -> Bool)) | IN(w, ss)})))
   woset((ord : ((A) -> Bool, (A) -> Bool) -> Bool))
   (vv : (A) -> Bool)
@@ -22629,7 +22629,7 @@ Multivariate/paracompact quotations (1856):
   (ww : (A) -> Bool)
   {(v : (A) -> Bool) | IN(v, (W : ((A) -> Bool) -> Bool)) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, (w : (A) -> Bool)) && !(v == w)}
   (w : (A) -> Bool)
-  (forall w:A->bool. w IN W ==>\n             open_in top (w DIFF UNIONS\n               {(C:num->(A->bool)->(A->bool)) n v | v |\n                v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n                ~(v = w)})) /\\\n           UNIONS {w DIFF UNIONS\n             {(C:num->(A->bool)->(A->bool)) n v | v |\n              v IN W /\\ (ord:(A->bool)->(A->bool)->bool) v w /\\\n              ~(v = w)} | w | w IN W} = topspace top
+  (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 open_in((top : Topology[A]), DIFF(w, UNIONS({(C : (Num, (A) -> Bool, A) -> Bool)((n : Num), (v : (A) -> Bool)) | IN(v, W) && (ord : ((A) -> Bool, (A) -> Bool) -> Bool)(v, w) && !(v == w)})))) && UNIONS({DIFF(w, UNIONS({C(n, (v : (A) -> Bool)) | IN(v, W) && ord(v, w) && !(v == w)})) | w : (A) -> Bool | IN(w, W)}) == topspace(top)
   \226\136\128 n : Num, (\226\136\128 w : (A) -> Bool, IN(w, (W : ((A) -> Bool) -> Bool)) \226\134\146 closed_in((top : Topology[A]), (C : (Num, (A) -> Bool, A) -> Bool)(n, w))) && (\226\136\128 w : (A) -> Bool, IN(w, W) \226\134\146 SUBSET(C(n, w), w)) && UNIONS({C(n, (w : (A) -> Bool)) | IN(w, W)}) == topspace(top) && (\226\136\128 ss : ((A) -> Bool) -> Bool, SUBSET(ss, W) \226\134\146 closed_in(top, UNIONS({C(n, (w : (A) -> Bool)) | IN(w, ss)})))
   (C : (Num, (A) -> Bool, A) -> Bool)
   (c : ((A) -> Bool, A) -> Bool) => (n : Num) => (nxt : (((A) -> Bool, A) -> Bool, (A) -> Bool, A) -> Bool)(c)
@@ -22724,7 +22724,7 @@ Multivariate/paracompact quotations (1856):
   (u0 : (B) -> Bool)
   (u0' : (B) -> Bool)
   (u0' : (B) -> Bool)
-  ?preimg:(A->bool).\n             preimg IN\n             {{x | x IN topspace top /\\ (f:A->B) x IN u} |\n              (u:B->bool) IN U} /\\\n             (k0:A->bool) SUBSET preimg
+  \226\136\131 preimg : (A) -> Bool, IN(preimg, {{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (u : (B) -> Bool))} | IN(u, (U : ((B) -> Bool) -> Bool))}) && SUBSET((k0 : (A) -> Bool), preimg)
   \226\136\131 u0 : (B) -> Bool, IN(u0, (U : ((B) -> Bool) -> Bool)) && SUBSET((k0 : (A) -> Bool), {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), u0)})
   (k0 : (A) -> Bool)
   IMAGE((f : (A) -> B), (k : (A) -> Bool))
@@ -22746,7 +22746,7 @@ Multivariate/paracompact quotations (1856):
   (x : A)
   (top' : Topology[B])
   (u : (B) -> Bool)
-  {({x | x IN topspace top /\\ (f:A->B) x IN u}) | u IN U}
+  {{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (u : (B) -> Bool))} | IN(u, (U : ((B) -> Bool) -> Bool))}
   (U : ((B) -> Bool) -> Bool)
   \226\136\128 U : ((B) -> Bool) -> Bool, (\226\136\128 u : (B) -> Bool, IN(u, U) \226\134\146 open_in((top' : Topology[B]), u)) && UNIONS(U) == topspace(top') \226\134\146 (\226\136\131 V : ((B) -> Bool) -> Bool, (\226\136\128 v : (B) -> Bool, IN(v, V) \226\134\146 closed_in(top', v)) && UNIONS(V) == topspace(top') && (\226\136\128 v : (B) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (B) -> Bool, IN(u, U) && SUBSET(v, u))) && (\226\136\128 W : ((B) -> Bool) -> Bool, SUBSET(W, V) \226\134\146 closed_in(top', UNIONS(W))))
   regular_space((top : Topology[A]))
