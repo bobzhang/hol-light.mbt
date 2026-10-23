@@ -37,8 +37,9 @@ def run(script, original):
 
 
 def type_variable(name):
-    """A type variable called `name` in structural output (`'name`)."""
-    return re.compile(f"(?<![{NAME}])'" + re.escape(name) + f"(?![{NAME}])")
+    """A type variable called `name` in structural output (`'name`; a term
+    variable is followed by its type, `'name:bool`)."""
+    return re.compile(f"(?<![{NAME}])'" + re.escape(name) + f"(?![{NAME}:])")
 
 
 def word(name):
@@ -52,7 +53,7 @@ def substituted(output, renames):
     printer writes a type variable, as its name after a quote. A term
     variable with an old name keeps it."""
     structural = re.compile(f"(?<![{NAME}])'(" + '|'.join(
-        map(re.escape, sorted(renames, key=len, reverse=True))) + f")(?![{NAME}])")
+        map(re.escape, sorted(renames, key=len, reverse=True))) + f")(?![{NAME}:])")
     out, trace = [], False
     for line in output.splitlines(keepends=True):
         if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
