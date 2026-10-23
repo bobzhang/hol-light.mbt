@@ -234,6 +234,15 @@ test "nested set comprehensions number GEN%PVAR as HOL's parser does" {
       #|({{(x : Num) | x < n} | n : Num | n < 3}, GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x)))
     ),
   )
+  // a comprehension with no binders has only one form
+  inspect(
+    exact(
+      "{({0 | {{{0 | T} | T} | T} = {{{0}}}}, { {x | x < m} | m | m < n}) | n | n < 3}",
+    ),
+    content=(
+      #|{({0 | {{{0 | true} | true} | true} == {{{0}}}}, {{(x : Num) | x < m} | m : Num | m < n}) | n : Num | n < 3}
+    ),
+  )
   // the forms are read off the numbering, however many comprehensions
   let nine = Array::make(9, "{ {x | x < n} | n | n < 3}")
   let spelled = exact("[" + nine.join("; ") + "]")

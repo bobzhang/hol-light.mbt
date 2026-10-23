@@ -602,13 +602,15 @@ fn implicit_binders(
 ///|
 /// A comprehension the printer writes in set notation, with a GEN%PVAR
 /// binder: (its number, its binder's name, e, p, whether {e | p} binds
-/// its binders), as the printer finds it (with no binder in scope renamed).
+/// its binders, whether it has binders to list), as the printer finds it
+/// (with no binder in scope renamed).
 priv struct Notation {
   number : Int
   name : String
   e : @kernel.Term
   p : @kernel.Term
   implicit : Bool
+  listable : Bool
 }
 
 ///|
@@ -639,7 +641,7 @@ fn notation(t : @kernel.Term) -> Notation? {
   if scoped.is_empty() && !binds.is_empty() {
     return None
   }
-  Some({ number, name, e, p, implicit: binds == xs })
+  Some({ number, name, e, p, implicit: binds == xs, listable: !xs.is_empty() })
 }
 
 ///|
@@ -723,7 +725,12 @@ fn read_comprehension(n : Notation, start : Int, listed : Array[String]) -> Bool
     return false
   }
   let before = listed.length()
-  for k in (if n.implicit { [1, 2] } else { [2] }) {
+  let forms = match (n.implicit, n.listable) {
+    (true, true) => [1, 2]
+    (true, false) => [1]
+    (false, _) => [2]
+  }
+  for k in forms {
     if e_end > start && (e_end - start) % (k + 1) == 0 {
       let size = (e_end - start) / (k + 1)
       if read_names(n.e, e_end - size, e_end, listed) {
