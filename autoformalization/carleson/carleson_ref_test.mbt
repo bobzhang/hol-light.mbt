@@ -85794,7 +85794,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (i : A)
       #|  (i : A)
       #|  (i0 : A)
-      #|  forall(g:A->real->real) t j x.\n     j SUBSET t /\\ ~(j = {}) /\\\n     (?B. forall i. i IN t ==> g i x <= B) /\\\n     (forall a. rational a\n          ==> UNIONS {{y | (g:A->real->real) i y > a} | i IN j} =\n              UNIONS {{y | g i y > a} | i IN t})\n     ==> sup {g i x | i IN t} = sup {g i x | i IN j}
+      #|  \226\136\128 g : (A, Real) -> Real, \226\136\128 t : (A) -> Bool, \226\136\128 j : (A) -> Bool, \226\136\128 x : Real, SUBSET(j, t) && !(j == {}) && (\226\136\131 B : Real, \226\136\128 i : A, IN(i, t) \226\134\146 g(i, x) <= B) && (\226\136\128 a : Real, rational(a) \226\134\146 UNIONS({{(y : Real) | g((i : A), y) > a} | IN(i, j)}) == UNIONS({{(y : Real) | g((i : A), y) > a} | IN(i, t)})) \226\134\146 sup({g((i : A), x) | IN(i, t)}) == sup({g((i : A), x) | IN(i, j)})
       #|  (a : Real)
       #|  (J : (Real, A) -> Bool)((a : Real))
       #|  (i : A)
@@ -85822,7 +85822,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (t : (A) -> Bool)
       #|  (i : A) => {(x : Real) | (g : (A, Real) -> Real)(i, x) > (a : Real)}
       #|  (a : Real)
-      #|  forall a:real. ?ja. ja SUBSET t /\\ COUNTABLE ja /\\\n        UNIONS {{y | (g:A->real->real) i y > a} | i IN ja} =\n        UNIONS {{y | g i y > a} | i IN t}
+      #|  \226\136\128 a : Real, \226\136\131 ja : (A) -> Bool, SUBSET(ja, (t : (A) -> Bool)) && COUNTABLE(ja) && UNIONS({{(y : Real) | (g : (A, Real) -> Real)((i : A), y) > a} | IN(i, ja)}) == UNIONS({{(y : Real) | g((i : A), y) > a} | IN(i, t)})
       #|  \226\136\128 g : (A, Real) -> Real, \226\136\128 t : (A) -> Bool, (\226\136\128 i : A, IN(i, t) \226\134\146 (\226\136\128 x : Real, real_continuous(g(i), atreal(x)))) && (\226\136\128 x : Real, \226\136\131 B : Real, \226\136\128 i : A, IN(i, t) \226\134\146 g(i, x) <= B) && !(t == {}) \226\134\146 (\226\136\131 j : (A) -> Bool, SUBSET(j, t) && COUNTABLE(j) && !(j == {}) && (\226\136\128 x : Real, sup({g((i : A), x) | IN(i, t)}) == sup({g((i : A), x) | IN(i, j)})))
       #|  (cfourier_coeff : ((Real) -> Cart[Real, Tybit0[Unit]], Int) -> Cart[Real, Tybit0[Unit]])((g : (Real) -> Cart[Real, Tybit0[Unit]]), (n : Int)) == Cx(inv(real_of_num(2) * pi)) * integral(IMAGE(lift, real_interval([(-pi, pi)])), (t : Cart[Real, Unit]) => g(drop(t)) * cexp(-(ii * (Cx(real_of_int(n)) * Cx(drop(t))))))
       #|  (cfourier_partial : ((Real) -> Cart[Real, Tybit0[Unit]], Num, Real) -> Cart[Real, Tybit0[Unit]])((g : (Real) -> Cart[Real, Tybit0[Unit]]), (N : Num), (t : Real)) == vsum({(n : Int) | abs(n) <= int_of_num(N)}, (n : Int) => cfourier_coeff(g, n) * cexp(ii * (Cx(real_of_int(n)) * Cx(t))))
@@ -88445,8 +88445,8 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (S : ((Int, Int, Int)) -> Bool)
       #|  FINITE((S : ((Int, Int, Int)) -> Bool))
       #|  \226\136\128 R : ((Int, Int, Int), (Int, Int, Int)) -> Bool, \226\136\128 S : ((Int, Int, Int)) -> Bool, FINITE(S) && (\226\136\128 x : (Int, Int, Int), R(x, x)) && (\226\136\128 x : (Int, Int, Int), \226\136\128 y : (Int, Int, Int), \226\136\128 z : (Int, Int, Int), R(x, y) && R(y, z) \226\134\146 R(x, z)) \226\134\146 (\226\136\128 s : (Int, Int, Int), IN(s, S) \226\134\146 (\226\136\131 m : (Int, Int, Int), IN(m, S) && R(s, m) && (\226\136\128 n : (Int, Int, Int), IN(n, S) && R(m, n) \226\134\146 R(n, m))))
-      #|  mass_Eh (E:real->bool) (h:real->real) (P:(int#int#int)->bool) =\n    sup { real_integral {x | x IN E /\\ h x IN tile_J t} (cw_tile t)\n          | s,t | s IN P /\\ tile_le s t }
-      #|  energy_f (f:real->complex) (P:(int#int#int)->bool) =\n    sup { sqrt(&2 zpow (tile_k t)) *\n          sqrt(sum {s | s IN P /\\ tile_ler s t} (\\s. norm(carleson_ip f s) pow\n            2))\n          | t IN (:int#int#int) }
+      #|  (mass_Eh : ((Real) -> Bool, (Real) -> Real, ((Int, Int, Int)) -> Bool) -> Real)((E : (Real) -> Bool), (h : (Real) -> Real), (P : ((Int, Int, Int)) -> Bool)) == sup({real_integral({(x : Real) | IN(x, E) && IN(h(x), tile_J(t))}, cw_tile(t)) | s : (Int, Int, Int), t : (Int, Int, Int) | IN(s, P) && tile_le(s, t)})
+      #|  (energy_f : ((Real) -> Cart[Real, Tybit0[Unit]], ((Int, Int, Int)) -> Bool) -> Real)((f : (Real) -> Cart[Real, Tybit0[Unit]]), (P : ((Int, Int, Int)) -> Bool)) == sup({sqrt(zpow(real_of_num(2), tile_k((t : (Int, Int, Int))))) * sqrt(sum({(s : (Int, Int, Int)) | IN(s, P) && tile_ler(s, t)}, (s : (Int, Int, Int)) => pow(norm(carleson_ip(f, s)), 2))) | IN(t, UNIV)})
       #|  (x : Real)
       #|  (s : (Int, Int, Int))
       #|  (UNIV : (Real) -> Bool)
@@ -88488,7 +88488,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (sigma : (Int, Int, Int))
       #|  real_integral({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_J((sigma : (Int, Int, Int))))}, cw_tile(sigma))
       #|  (c : Real)
-      #|  { real_integral {x | x IN E /\\ h x IN tile_J t} (cw_tile t)\n       | s,t | s IN {sigma:int#int#int} /\\ tile_le s t }
+      #|  {real_integral({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_J(t))}, cw_tile(t)) | s : (Int, Int, Int), t : (Int, Int, Int) | IN(s, {(sigma : (Int, Int, Int))}) && tile_le(s, t)}
       #|  \226\136\128 E : (Real) -> Bool, \226\136\128 h : (Real) -> Real, \226\136\128 sigma : (Int, Int, Int), \226\136\128 c : Real, (\226\136\128 t : (Int, Int, Int), real_integrable_on(cw_tile(t), {(x : Real) | IN(x, E) && IN(h(x), tile_J(t))})) && c < mass_Eh(E, h, {sigma}) \226\134\146 (\226\136\131 t : (Int, Int, Int), tile_le(sigma, t) && c < real_integral({(x : Real) | IN(x, E) && IN(h(x), tile_J(t))}, cw_tile(t)))
       #|  (t : (Int, Int, Int))
       #|  (s : (Int, Int, Int))
@@ -88641,7 +88641,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (ARB : (Int, Int, Int))
       #|  sqrt(zpow(real_of_num(2), tile_k(ARB))) * sqrt(sum({(s : (Int, Int, Int)) | IN(s, (P : ((Int, Int, Int)) -> Bool)) && tile_ler(s, ARB)}, (s : (Int, Int, Int)) => pow(norm(carleson_ip((f : (Real) -> Cart[Real, Tybit0[Unit]]), s)), 2)))
       #|  (c : Real)
-      #|  {sqrt (&2 zpow tile_k t) *\n      sqrt (sum {s | s IN P /\\ tile_ler s t} (\\s. norm(carleson_ip\n        (f:real->complex) s) pow 2))\n      | t IN (:int#int#int)}
+      #|  {sqrt(zpow(real_of_num(2), tile_k((t : (Int, Int, Int))))) * sqrt(sum({(s : (Int, Int, Int)) | IN(s, (P : ((Int, Int, Int)) -> Bool)) && tile_ler(s, t)}, (s : (Int, Int, Int)) => pow(norm(carleson_ip((f : (Real) -> Cart[Real, Tybit0[Unit]]), s)), 2))) | IN(t, UNIV)}
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 P : ((Int, Int, Int)) -> Bool, \226\136\128 c : Real, FINITE(P) && real_of_num(0) <= c && c < energy_f(f, P) \226\134\146 (\226\136\131 t : (Int, Int, Int), pow(c, 2) < zpow(real_of_num(2), tile_k(t)) * delta_f(f, tile_tree(P, t)))
       #|  (t : (Int, Int, Int))
       #|  (P : ((Int, Int, Int)) -> Bool)
@@ -89584,7 +89584,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (A : (Real) -> Bool)
       #|  (G : (Num, Real) -> Real)
       #|  \226\136\128 m : Num, real_measurable(INTER((A : (Real) -> Bool), {(y : Real) | (c : Real) < (G : (Num, Real) -> Real)(m, y)})) && real_measure(INTER(A, {(y : Real) | c < G(m, y)})) <= (D : Real) / c
-      #|  forall(G:num->real->real) A D c.\n     real_measurable A /\\ &0 < c /\\ &0 <= D /\\\n     (forall m. (G m) real_measurable_on (:real) /\\ (G m) real_integrable_on A /\\\n          (forall x. x IN A ==> &0 <= G m x) /\\ real_integral A (G m) <= D) /\\\n     (forall m x. x IN A ==> G m x <= G (SUC m) x)\n     ==> real_measurable (UNIONS { A INTER {y | c < G m y} | m IN (:num) }) /\\\n         real_measure (UNIONS { A INTER {y | c < G m y} | m IN (:num) }) <= D /\n           c
+      #|  \226\136\128 G : (Num, Real) -> Real, \226\136\128 A : (Real) -> Bool, \226\136\128 D : Real, \226\136\128 c : Real, real_measurable(A) && real_of_num(0) < c && real_of_num(0) <= D && (\226\136\128 m : Num, real_measurable_on(G(m), UNIV) && real_integrable_on(G(m), A) && (\226\136\128 x : Real, IN(x, A) \226\134\146 real_of_num(0) <= G(m, x)) && real_integral(A, G(m)) <= D) && (\226\136\128 m : Num, \226\136\128 x : Real, IN(x, A) \226\134\146 G(m, x) <= G(SUC(m), x)) \226\134\146 real_measurable(UNIONS({INTER(A, {(y : Real) | c < G((m : Num), y)}) | IN(m, UNIV)})) && real_measure(UNIONS({INTER(A, {(y : Real) | c < G((m : Num), y)}) | IN(m, UNIV)})) <= D / c
       #|  (m : Num)
       #|  (t : (Real) -> Bool)
       #|  (k : Num)
@@ -89598,7 +89598,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (k : Num)
       #|  (k : Num)
       #|  (y : Real)
-      #|  forall(G:num->real->real) A.\n     {y | y IN A /\\ forall k. ?m. &k + &1 < (G:num->real->real) m y} =\n     INTERS { UNIONS { A INTER {y | &k + &1 < G m y} | m IN (:num) } | k IN\n       (:num) }
+      #|  \226\136\128 G : (Num, Real) -> Real, \226\136\128 A : (Real) -> Bool, {(y : Real) | IN(y, A) && (\226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < G(m, y))} == INTERS({UNIONS({INTER(A, {(y : Real) | real_of_num((k : Num)) + real_of_num(1) < G((m : Num), y)}) | IN(m, UNIV)}) | IN(k, UNIV)})
       #|  (y : Real)
       #|  (y : Real)
       #|  (y : Real)
@@ -89613,11 +89613,11 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  \226\136\128 s : Real, \226\136\128 D : Real, real_of_num(0) <= s && real_of_num(0) <= D && (\226\136\128 k : Num, s <= D / (real_of_num(k) + real_of_num(1))) \226\134\146 s == real_of_num(0)
       #|  (k : Num)
       #|  (\226\136\131 k : Num, (u : (_) -> Bool) == (f : (Num, _) -> Bool)(k)) \226\134\146 SUBSET(INTERS({f((k : Num)) | IN(k, UNIV)}), u)
-      #|  real_measure (UNIONS { A INTER {y | &k + &1 < (G:num->real->real)\n    m y} | m IN (:num) })
+      #|  real_measure(UNIONS({INTER((A : (Real) -> Bool), {(y : Real) | real_of_num((k : Num)) + real_of_num(1) < (G : (Num, Real) -> Real)((m : Num), y)}) | IN(m, UNIV)}))
       #|  (k : Num)
       #|  (D : Real)
-      #|  real_measurable (INTERS { UNIONS { A INTER {y | &k + &1 <\n     (G:num->real->real) m y} | m IN (:num) } | k IN (:num) })
-      #|  forall k. real_measurable (UNIONS { A INTER {y | &k + &1 < (G:num->real->real) m\n     y} | m IN (:num) }) /\\\n        real_measure (UNIONS { A INTER {y | &k + &1 < (G:num->real->real) m y}\n          | m IN (:num) })\n          <= D / (&k + &1)
+      #|  real_measurable(INTERS({UNIONS({INTER((A : (Real) -> Bool), {(y : Real) | real_of_num((k : Num)) + real_of_num(1) < (G : (Num, Real) -> Real)((m : Num), y)}) | IN(m, UNIV)}) | IN(k, UNIV)}))
+      #|  \226\136\128 k : Num, real_measurable(UNIONS({INTER((A : (Real) -> Bool), {(y : Real) | real_of_num(k) + real_of_num(1) < (G : (Num, Real) -> Real)((m : Num), y)}) | IN(m, UNIV)})) && real_measure(UNIONS({INTER(A, {(y : Real) | real_of_num(k) + real_of_num(1) < G((m : Num), y)}) | IN(m, UNIV)})) <= (D : Real) / (real_of_num(k) + real_of_num(1))
       #|  \226\136\128 G : (Num, Real) -> Real, \226\136\128 A : (Real) -> Bool, \226\136\128 D : Real, real_measurable(A) && real_of_num(0) <= D && (\226\136\128 m : Num, real_measurable_on(G(m), UNIV) && real_integrable_on(G(m), A) && (\226\136\128 x : Real, IN(x, A) \226\134\146 real_of_num(0) <= G(m, x)) && real_integral(A, G(m)) <= D) && (\226\136\128 m : Num, \226\136\128 x : Real, IN(x, A) \226\134\146 G(m, x) <= G(SUC(m), x)) \226\134\146 real_negligible({(y : Real) | IN(y, A) && (\226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < G(m, y))})
       #|  (s : B)
       #|  (A : (B) -> Bool)
@@ -97318,7 +97318,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (a : Real)
       #|  (x : Real)
       #|  (Ff : (Num, Real) -> Real)
-      #|  forall(Ff:num->real->real) a x.\n     (?B. forall n. Ff n x <= B)\n     ==> (sup {Ff n x | n IN (:num)} > a <=>\n          x IN UNIONS {{x | Ff n x > a} | n IN (:num)})
+      #|  \226\136\128 Ff : (Num, Real) -> Real, \226\136\128 a : Real, \226\136\128 x : Real, (\226\136\131 B : Real, \226\136\128 n : Num, Ff(n, x) <= B) \226\134\146 (sup({Ff((n : Num), x) | IN(n, UNIV)}) > a) == IN(x, UNIONS({{(x : Real) | Ff((n : Num), x) > a} | IN(n, UNIV)}))
       #|  (a : Real)
       #|  (n : Num)
       #|  (n : Num)
@@ -97326,7 +97326,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (a : Real)
       #|  (Ff : (Num, Real) -> Real)
       #|  (x : Real)
-      #|  {x | sup {(Ff:num->real->real) n x | n IN (:num)} > a} =\n    UNIONS {{x | Ff n x > a} | n IN (:num)}
+      #|  {(x : Real) | sup({(Ff : (Num, Real) -> Real)((n : Num), x) | IN(n, UNIV)}) > (a : Real)} == UNIONS({{(x : Real) | Ff((n : Num), x) > a} | IN(n, UNIV)})
       #|  (a : Real)
       #|  \226\136\128 Ff : (Num, Real) -> Real, (\226\136\128 n : Num, real_measurable_on(Ff(n), UNIV)) && (\226\136\128 x : Real, \226\136\131 B : Real, \226\136\128 n : Num, Ff(n, x) <= B) \226\134\146 real_measurable_on((x : Real) => sup({Ff((n : Num), x) | IN(n, UNIV)}), UNIV)
       #|  (B : Real)
@@ -97341,7 +97341,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (a : Real)
       #|  (x : Cart[Real, M])
       #|  (x : Cart[Real, M])
-      #|  {x:real^M | sup {(Ff:num->real^M->real) n x | n IN (:num)} > a} =\n    UNIONS {{x | Ff n x > a} | n IN (:num)}
+      #|  {(x : Cart[Real, M]) | sup({(Ff : (Num, Cart[Real, M]) -> Real)((n : Num), x) | IN(n, UNIV)}) > (a : Real)} == UNIONS({{(x : Cart[Real, M]) | Ff((n : Num), x) > a} | IN(n, UNIV)})
       #|  1 <= (k : Num)
       #|  (k : Num) <= (dimindex : ((Unit) -> Bool) -> Num)((UNIV : (Unit) -> Bool))
       #|  (k : Num) == 1
@@ -97376,7 +97376,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (t : (A) -> Bool)
       #|  (g : (A, Real) -> Real)
       #|  (x : Real)
-      #|  {x | sup {(g:A->real->real) i x | i IN t} > a} =\n    UNIONS {{y | g i y > a} | i IN t}
+      #|  {(x : Real) | sup({(g : (A, Real) -> Real)((i : A), x) | IN(i, (t : (A) -> Bool))}) > (a : Real)} == UNIONS({{(y : Real) | g((i : A), y) > a} | IN(i, t)})
       #|  (a : Real)
       #|  \226\136\128 g : (A, Real) -> Real, \226\136\128 t : (A) -> Bool, (\226\136\128 i : A, IN(i, t) \226\134\146 (\226\136\128 x : Real, real_continuous(g(i), atreal(x)))) && (\226\136\128 x : Real, \226\136\131 B : Real, \226\136\128 i : A, IN(i, t) \226\134\146 g(i, x) <= B) && !(t == {}) \226\134\146 real_measurable_on((x : Real) => sup({g((i : A), x) | IN(i, t)}), UNIV)
       #|  (carleson_Ahat : ((Real) -> Cart[Real, Tybit0[Unit]], Real) -> Real)((f : (Real) -> Cart[Real, Tybit0[Unit]]), (y : Real)) == sup({inv(sqrt(real_of_num(2) * pi)) * norm(integral(IMAGE(lift, real_interval([((a : Real), (b : Real))])), (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))) | a <= b})
@@ -97647,7 +97647,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (a : Real) => (b : Real) => -(n : Real) <= a && a <= b && b <= n
       #|  (a : Real) => (b : Real) => inv(sqrt(real_of_num(2) * pi)) * norm(integral(IMAGE(lift, real_interval([(a, b)])), (x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x))))
       #|  (y : Real)
-      #|  {y | sup { inv(sqrt(&2 * pi)) *\n               norm(integral (IMAGE lift (real_interval[a,b]))\n                      (\\x. cexp(--(ii * Cx y * Cx(drop x))) *\n                        (f:real->complex)(drop x)))\n             | a,b | --n <= a /\\ a <= b /\\ b <= n } > c} =\n    UNIONS { {y | inv(sqrt(&2 * pi)) *\n               norm(integral (IMAGE lift (real_interval[a,b]))\n                      (\\x. cexp(--(ii * Cx y * Cx(drop x))) *\n                        (f:real->complex)(drop x))) > c}\n           | a,b | --n <= a /\\ a <= b /\\ b <= n }
+      #|  {(y : Real) | sup({inv(sqrt(real_of_num(2) * pi)) * norm(integral(IMAGE(lift, real_interval([((a : Real), (b : Real))])), (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(x)))) | -(n : Real) <= a && a <= b && b <= n}) > (c : Real)} == UNIONS({{(y : Real) | inv(sqrt(real_of_num(2) * pi)) * norm(integral(IMAGE(lift, real_interval([(a, b)])), (x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * f(drop(x)))) > c} | a : Real, b : Real | -n <= a && a <= b && b <= n})
       #|  (c : Real)
       #|  absolutely_integrable_on((z : Cart[Real, Unit]) => (f : (Real) -> Cart[Real, Tybit0[Unit]])(drop(z)), IMAGE(lift, real_interval([(-(n : Real), n)])))
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Real, real_of_num(0) <= n && IN((z : Cart[Real, Unit]) => f(drop(z)), lspace(UNIV, real_of_num(2))) \226\134\146 real_measurable_on((y : Real) => carleson_Ahat_trunc(f, n, y), UNIV)
@@ -99744,7 +99744,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  op_dollar((p : Cart[Real, Tybit1[Unit]]), 1)
       #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
       #|  (p : Cart[Real, Tybit1[Unit]])
-      #|  {x:real^3 | (if x$1 > &0 then carleson_amd h (x$1) (x$2) (x$3) else &0) >\n       c} =\n      UNIONS { {p:real^3 | p$1 > &0 /\\\n               &2 * pi * norm(fourier(\\w. fourier (carleson_modulate (p$2)\n                 (carleson_dilate (p$1) h)) w *\n                      Cx(carleson_theta zeta w))(--(p$3 / p$1))) > c}\n             | zeta IN (:real) }
+      #|  {(x : Cart[Real, Tybit1[Unit]]) | (if op_dollar(x, 1) > real_of_num(0) { carleson_amd((h : (Real) -> Cart[Real, Tybit0[Unit]]), op_dollar(x, 1), op_dollar(x, 2), op_dollar(x, 3)) } else { real_of_num(0) }) > (c : Real)} == UNIONS({{(p : Cart[Real, Tybit1[Unit]]) | op_dollar(p, 1) > real_of_num(0) && real_of_num(2) * (pi * norm(fourier((w : Real) => fourier(carleson_modulate(op_dollar(p, 2), carleson_dilate(op_dollar(p, 1), h)), w) * Cx(carleson_theta((zeta : Real), w)), -(op_dollar(p, 3) / op_dollar(p, 1))))) > c} | IN(zeta, UNIV)})
       #|  real_of_num(0)
       #|  (p : Cart[Real, Tybit1[Unit]])
       #|  {(x : Cart[Real, Tybit1[Unit]]) | (if op_dollar(x, 1) > real_of_num(0) { carleson_amd((h : (Real) -> Cart[Real, Tybit0[Unit]]), op_dollar(x, 1), op_dollar(x, 2), op_dollar(x, 3)) } else { real_of_num(0) }) > (c : Real)} == UNIV
@@ -99832,7 +99832,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (a : Real)
       #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
       #|  (t : Cart[Real, Unit])
-      #|  {x:real^1 | carleson_amd h a (drop x) xf > c} =\n      UNIONS { {t:real^1 |\n               &2 * pi * norm(fourier(\\w. fourier (carleson_modulate (drop t)\n                 (carleson_dilate a h)) w *\n                      Cx(carleson_theta zeta w))(--(xf/a))) > c}\n             | zeta IN (:real) }
+      #|  {(x : Cart[Real, Unit]) | carleson_amd((h : (Real) -> Cart[Real, Tybit0[Unit]]), (a : Real), drop(x), (xf : Real)) > (c : Real)} == UNIONS({{(t : Cart[Real, Unit]) | real_of_num(2) * (pi * norm(fourier((w : Real) => fourier(carleson_modulate(drop(t), carleson_dilate(a, h)), w) * Cx(carleson_theta((zeta : Real), w)), -(xf / a)))) > c} | IN(zeta, UNIV)})
       #|  real_of_num(0)
       #|  (t : Cart[Real, Unit])
       #|  {(x : Cart[Real, Unit]) | carleson_amd((h : (Real) -> Cart[Real, Tybit0[Unit]]), (a : Real), drop(x), (xf : Real)) > (c : Real)} == UNIV
@@ -99871,7 +99871,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  drop(fstcart((ab : Cart[Real, Finite_sum[Unit, Unit]])))
       #|  (h : (Real) -> Cart[Real, Tybit0[Unit]])
       #|  (ab : Cart[Real, Finite_sum[Unit, Unit]])
-      #|  {ab:real^(1,1)finite_sum | (if drop(fstcart ab) > &0\n         then carleson_amd h (drop(fstcart ab)) (drop(sndcart ab)) xf else &0)\n           > c} =\n      UNIONS { {ab:real^(1,1)finite_sum | drop(fstcart ab) > &0 /\\\n               &2 * pi * norm(fourier(\\w. fourier (carleson_modulate\n                 (drop(sndcart ab)) (carleson_dilate (drop(fstcart ab)) h)) w *\n                      Cx(carleson_theta zeta w))(--(xf/(drop(fstcart ab))))) >\n                        c}\n             | zeta IN (:real) }
+      #|  {(ab : Cart[Real, Finite_sum[Unit, Unit]]) | (if drop(fstcart(ab)) > real_of_num(0) { carleson_amd((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(fstcart(ab)), drop(sndcart(ab)), (xf : Real)) } else { real_of_num(0) }) > (c : Real)} == UNIONS({{(ab : Cart[Real, Finite_sum[Unit, Unit]]) | drop(fstcart(ab)) > real_of_num(0) && real_of_num(2) * (pi * norm(fourier((w : Real) => fourier(carleson_modulate(drop(sndcart(ab)), carleson_dilate(drop(fstcart(ab)), h)), w) * Cx(carleson_theta((zeta : Real), w)), -(xf / drop(fstcart(ab)))))) > c} | IN(zeta, UNIV)})
       #|  real_of_num(0)
       #|  (ab : Cart[Real, Finite_sum[Unit, Unit]])
       #|  {(ab : Cart[Real, Finite_sum[Unit, Unit]]) | (if drop(fstcart(ab)) > real_of_num(0) { carleson_amd((h : (Real) -> Cart[Real, Tybit0[Unit]]), drop(fstcart(ab)), drop(sndcart(ab)), (xf : Real)) } else { real_of_num(0) }) > (c : Real)} == UNIV
@@ -101246,7 +101246,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 n : Num, \226\136\128 C10 : Real, real_of_num(0) <= C10 && IN((z : Cart[Real, Unit]) => f(drop(z)), lspace(UNIV, real_of_num(2))) && (\226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 GG : (Real) -> Bool, schwartz(h) && real_measurable(GG) \226\134\146 real_integral(GG, carleson_Ahat(h)) <= C10 * (lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => h(drop(z))) * sqrt(real_measure(GG)))) \226\134\146 real_negligible({(y : Real) | \226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < carleson_Ahat_trunc((t : Real) => if abs(t) <= real_of_num(n) { Cx(real_of_num(0)) } else { f(t) }, real_of_num(m), y)})
       #|  (C10 : Real)
       #|  (n : Num)
-      #|  forall(f:real->complex) C10.\n     &0 <= C10 /\\ (\\z. f(drop z)) IN lspace (:real^1) (&2) /\\\n     (forall(h:real->complex) GG.\n        schwartz h /\\ real_measurable GG\n        ==> real_integral GG (carleson_Ahat h)\n            <= C10 * lnorm (:real^1) (&2) (\\z. h(drop z)) * sqrt(real_measure\n              GG))\n     ==> real_negligible\n           (UNIONS { {y | forall k:num. ?m:num. &k + &1 <\n                     carleson_Ahat_trunc (\\t. if abs t <= &n then Cx(&0) else f\n                       t) (&m) y}\n                   | n IN (:num) })
+      #|  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 C10 : Real, real_of_num(0) <= C10 && IN((z : Cart[Real, Unit]) => f(drop(z)), lspace(UNIV, real_of_num(2))) && (\226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 GG : (Real) -> Bool, schwartz(h) && real_measurable(GG) \226\134\146 real_integral(GG, carleson_Ahat(h)) <= C10 * (lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => h(drop(z))) * sqrt(real_measure(GG)))) \226\134\146 real_negligible(UNIONS({{(y : Real) | \226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < carleson_Ahat_trunc((t : Real) => if abs(t) <= real_of_num((n : Num)) { Cx(real_of_num(0)) } else { f(t) }, real_of_num(m), y)} | IN(n, UNIV)}))
       #|  (m : Num)
       #|  (m : Num)
       #|  real_of_num(0) < inv(real_of_num((k : Num)) + real_of_num(1))
@@ -101264,7 +101264,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (e : Real)
       #|  (e : Real)
       #|  (y : Real)
-      #|  forall(G:real->num->real).\n     {y:real | ~(forall e. &0 < e ==> ?m:num. G y m <= e)}\n   = UNIONS { {y:real | forall m:num. inv(&k + &1) <= G y m} | k IN (:num) }
+      #|  \226\136\128 G : (Real, Num) -> Real, {(y : Real) | !(\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 m : Num, G(y, m) <= e))} == UNIONS({{(y : Real) | \226\136\128 m : Num, inv(real_of_num((k : Num)) + real_of_num(1)) <= G(y, m)} | IN(k, UNIV)})
       #|  (y : Real)
       #|  (t : Real) => if abs(t) <= real_of_num((n : Num)) { Cx(real_of_num(0)) } else { (f : (Real) -> Cart[Real, Tybit0[Unit]])(t) }
       #|  real_of_num((n : Num))
@@ -101277,7 +101277,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (n : Num)
       #|  {(y : Real) | \226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < carleson_Ahat_trunc((t : Real) => if abs(t) <= real_of_num((n : Num)) { Cx(real_of_num(0)) } else { (f : (Real) -> Cart[Real, Tybit0[Unit]])(t) }, real_of_num(m), y)}
       #|  (y : Real)
-      #|  forall y. ~(y IN UNIONS { {y | forall k:num. ?m:num. &k + &1 <\n              carleson_Ahat_trunc (\\t. if abs t <= &n then Cx(&0) else\n                (f:real->complex) t) (&m) y}\n            | n IN (:num) })\n          ==> ?K. forall m:num. carleson_Ahat_trunc (\\t. if abs t <= &n then Cx(&0)\n            else f t) (&m) y <= K
+      #|  \226\136\128 y : Real, !IN(y, UNIONS({{(y : Real) | \226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < carleson_Ahat_trunc((t : Real) => if abs(t) <= real_of_num((n : Num)) { Cx(real_of_num(0)) } else { (f : (Real) -> Cart[Real, Tybit0[Unit]])(t) }, real_of_num(m), y)} | IN(n, UNIV)})) \226\134\146 (\226\136\131 K : Real, \226\136\128 m : Num, carleson_Ahat_trunc((t : Real) => if abs(t) <= real_of_num((n : Num)) { Cx(real_of_num(0)) } else { f(t) }, real_of_num(m), y) <= K)
       #|  real_measure(real_interval([(-real_of_num((M : Num)), real_of_num(M))])) == real_of_num(2) * real_of_num(M)
       #|  (C10 : Real)
       #|  real_interval([(-real_of_num((M : Num)), real_of_num(M))])
@@ -101288,7 +101288,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  ((n : Num) => (C10 : Real) * (lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => ((x : Real) => if abs(x) <= real_of_num(n) { Cx(real_of_num(0)) } else { (f : (Real) -> Cart[Real, Tybit0[Unit]])(x) })(drop(z))) * sqrt(real_of_num(2) * real_of_num((M : Num))))) == ((n : Num) => C10 * lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => ((x : Real) => if abs(x) <= real_of_num(n) { Cx(real_of_num(0)) } else { f(x) })(drop(z))) * sqrt(real_of_num(2) * real_of_num(M)))
       #|  (C10 : Real)
       #|  (n : Num) => (C10 : Real) * (lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => ((x : Real) => if abs(x) <= real_of_num(n) { Cx(real_of_num(0)) } else { (f : (Real) -> Cart[Real, Tybit0[Unit]])(x) })(drop(z))) * sqrt(real_of_num(2) * real_of_num((M : Num))))
-      #|  UNIONS { {y | forall k:num. ?m:num. &k + &1 <\n              carleson_Ahat_trunc (\\t. if abs t <= &n then Cx(&0) else f t)\n                (&m) y}\n            | n IN (:num) }
+      #|  UNIONS({{(y : Real) | \226\136\128 k : Num, \226\136\131 m : Num, real_of_num(k) + real_of_num(1) < carleson_Ahat_trunc((t : Real) => if abs(t) <= real_of_num((n : Num)) { Cx(real_of_num(0)) } else { (f : (Real) -> Cart[Real, Tybit0[Unit]])(t) }, real_of_num(m), y)} | IN(n, UNIV)})
       #|  (M : Num)
       #|  (k : Num)
       #|  (y : Real) => (m : Num) => carleson_gamma((f : (Real) -> Cart[Real, Tybit0[Unit]]), real_of_num(m), y)
