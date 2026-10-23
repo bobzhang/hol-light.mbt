@@ -226,7 +226,7 @@ pub fn indep_events_prob_one() -> @kernel.Thm {
 ///|
 /// limsup_events
 fn step_9() -> Unit raise {
-  limsup_events_c.set(@pair.new_definition(@parser.parse_term("limsup_events (A:num->A->bool) =\n   INTERS {UNIONS {A n | n >= m} | m IN (:num)}")))
+  limsup_events_c.set(@pair.new_definition(@term_syntax.parse_term("(limsup_events : ((Num, A) -> Bool, A) -> Bool)((A : (Num, A) -> Bool)) == INTERS({UNIONS({A((n : Num)) | n >= (m : Num)}) | IN(m, UNIV)})")))
 }
 
 ///|
