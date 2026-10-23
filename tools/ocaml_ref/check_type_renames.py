@@ -90,10 +90,14 @@ def check(script):
         sys.exit(f'{script}: the renames together are not injective')
     original, renamed = run(script, True), run(script, False)
     problems = []
-    annotations = ' '.join(line[k + 1:annotation_extent(line, k + 1)]
-                           for line in trace_lines(original) for k in annotation_colons(line))
+    # type variables are local to a term: one quotation in the original's
+    # trace naming both an old and its new name would merge them
+    annotations = [' '.join(line[k + 1:annotation_extent(line, k + 1)] for k in annotation_colons(line))
+                   for line in trace_lines(original)]
     for old, new in renames.items():
-        if type_variable(new).search(original) or word(new).search(annotations):
+        if type_variable(new).search(original) or any(
+                word(new).search(a) and (word(old).search(a) or type_variable(old).search(a))
+                for a in annotations):
             problems.append(f'{new} is already a type variable in the original output')
         if type_variable(old).search(renamed) or (old.startswith("'") and word(old).search(renamed)):
             problems.append(f'{old} is left in the renamed output')
