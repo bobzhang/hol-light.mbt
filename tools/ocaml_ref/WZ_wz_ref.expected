@@ -88467,7 +88467,7 @@ WZ/wz quotations (310):
   \226\136\128 p : (Real, Real) -> Real, \226\136\128 q : (Real, Real) -> Real, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) && ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), q(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k) * q(n, k))))
   \226\136\128 p : (Real, Real) -> Real, \226\136\128 r : Num, \226\136\128 s : (Real) -> Bool, ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), p(n, k)))) \226\134\146 ratpolyfun(s, GABS((f : ((Real, Real)) -> Real) => \226\136\128 n : Real, \226\136\128 k : Real, GEQ(f((n, k)), pow(p(n, k), r))))
   (ratty : ((Real) -> Bool, (Real, Real)) -> Bool)((s : (Real) -> Bool), (t : (Real, Real))) == (\226\136\131 p : ((Real, Real)) -> Real, ratpolyfun(s, p) && p(t) == real_of_num(0) && !(\226\136\128 w : (Real, Real), p(w) == real_of_num(0)))
-  magical_set s =\n        INTERS { {z | ~((FST p)(FST(SND p) + Re z,SND(SND p) + Im z) = &0)} |\n                 p IN (ratpolyfun s DELETE (\\x. &0)) CROSS\n                      (integer CROSS integer)}
+  (magical_set : ((Real) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)((s : (Real) -> Bool)) == INTERS({{(z : Cart[Real, Tybit0[Unit]]) | !(FST((p : (((Real, Real)) -> Real, Real, Real)), (FST(SND(p)) + Re(z), SND(SND(p)) + Im(z))) == real_of_num(0))} | IN(p, CROSS(DELETE(ratpolyfun(s), (x : (Real, Real)) => real_of_num(0)), CROSS(integer, integer)))})
   (k : Real)
   real_of_num((n : Num))
   (p : ((Real, Real)) -> Real)
