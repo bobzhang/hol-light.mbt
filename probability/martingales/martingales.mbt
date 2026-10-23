@@ -284,7 +284,7 @@ pub fn simple_adapted() -> @kernel.Thm {
 ///|
 /// natural_filtration
 fn step_17() -> Unit raise {
-  natural_filtration_c.set(@pair.new_definition(@parser.parse_term("natural_filtration (p:A prob_space) (X:num->A->real) (n:num) =\n   sigma_generated (prob_carrier p)\n     (UNIONS (IMAGE (\\k. {{x | x IN prob_carrier p /\\ X k x <= v} | v IN (:real)}) (0..n)))")))
+  natural_filtration_c.set(@pair.new_definition(@term_syntax.parse_term("(natural_filtration : (Prob_space[A], (Num, A) -> Real, Num, (A) -> Bool) -> Bool)((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num)) == sigma_generated(prob_carrier(p), UNIONS(IMAGE((k : Num) => {{(x : A) | IN(x, prob_carrier(p)) && X(k, x) <= (v : Real)} | IN(v, UNIV)}, op_dot_dot(0, n))))")))
 }
 
 ///|
