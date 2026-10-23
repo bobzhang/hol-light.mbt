@@ -83747,7 +83747,7 @@ Multivariate/flyspeck quotations (2071):
   norm((x : Cart[Real, N]))
   (x : Cart[Real, N]) == vec(0)
   (x : Cart[Real, N])
-  (vec 0:real^N) INSERT\n              UNIONS { {x | x IN ((:real^N) DIFF ball(vec 0,inv(&n + &1))) /\\\n                            Cx(vector_angle c x) = Cx k} |\n                       n IN (:num)  }
+  INSERT(vec(0), UNIONS({{(x : Cart[Real, N]) | IN(x, DIFF(UNIV, ball((vec(0), inv(real_of_num((n : Num)) + real_of_num(1)))))) && Cx(vector_angle((c : Cart[Real, N]), x)) == Cx((k : Real))} | IN(n, UNIV)}))
   \226\136\128 c : Cart[Real, N], \226\136\128 k : Real, !(c == vec(0)) && !(k == real_of_num(0)) && !(k == pi) \226\134\146 negligible({(x : Cart[Real, N]) | vector_angle(c, x) == k})
   ((p : Real) - (x : Real) == p) == (x == real_of_num(0))
   {(x : Cart[Real, N]) | vector_angle((b : Cart[Real, N]), x) == pi - vector_angle((c : Cart[Real, N]), b)}
