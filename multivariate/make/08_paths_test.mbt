@@ -60824,7 +60824,7 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  SUBSET(interval([((a : Cart[Real, Unit]), (c : Cart[Real, Unit]))]), interval([(a, (b : Cart[Real, Unit]))])) || SUBSET(interval([(a, c)]), interval([(b, c)]))
       #|  interval([((a : Cart[Real, Unit]), (c : Cart[Real, Unit]))]) == {}
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 c : Cart[Real, Unit], \226\136\128 l : Real, (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(a, b)])) && IN(y, interval([(a, b)])) \226\134\146 norm(f(x) - f(y)) <= l * norm(x - y)) && (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(b, c)])) && IN(y, interval([(b, c)])) \226\134\146 norm(f(x) - f(y)) <= l * norm(x - y)) \226\134\146 (\226\136\128 x : Cart[Real, Unit], \226\136\128 y : Cart[Real, Unit], IN(x, interval([(a, c)])) && IN(y, interval([(a, c)])) \226\134\146 norm(f(x) - f(y)) <= l * norm(x - y))
-      #|  {x | x IN s /\\ forall y. P x y} =\n     s INTER INTERS {{x | x IN s /\\ P x y} | y IN UNIV}
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (\226\136\128 y : _, (P : (_, _) -> Bool)(x, y))} == INTER(s, INTERS({{(x : _) | IN(x, s) && P(x, (y : _))} | IN(y, UNIV)}))
       #|  (w : Cart[Real, M])
       #|  (s : (Cart[Real, _]) -> Bool) == (t : (Cart[Real, _]) -> Bool) \226\134\146 closed_in(subtopology(euclidean, t), s)
       #|  ((a : Real) == (b : Real) && (c : Real) == (d : Real)) == (a == b && d - c == real_of_num(0))
@@ -62564,7 +62564,7 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  (m : Num)
       #|  (N : Num) + 1
       #|  (N : Num)
-      #|  UNIONS {{i | (f:real^M->real^N)(p i) = f(p(r m:num))}\n                | m |\n                 m IN {m:num | m < n}}
+      #|  UNIONS({{(i : Num) | (f : (Cart[Real, M]) -> Cart[Real, N])((p : (Num) -> Cart[Real, M])(i)) == f(p((r : (Num) -> Num)(m)))} | m : Num | IN(m, {(m : Num) | m < (n : Num)})})
       #|  (i : Num) => i
       #|  (((p : Bool) \226\134\146 (q : Bool)) && (p \226\134\146 (r : Bool))) == (p \226\134\146 q && r)
       #|  (n : Num)
@@ -62662,7 +62662,7 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(t) && (\226\136\128 y : Cart[Real, N], closed_in(subtopology(euclidean, s), {(x : Cart[Real, M]) | IN(x, s) && f(x) == y})) && (\226\136\128 c : (Cart[Real, M]) -> Bool, closed_in(subtopology(euclidean, s), c) \226\134\146 closed_in(subtopology(euclidean, t), IMAGE(f, c))) \226\134\146 continuous_on(f, s)
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, compact(t) && (\226\136\128 y : Cart[Real, N], connected({(x : Cart[Real, M]) | IN(x, s) && f(x) == y})) && (\226\136\128 c : (Cart[Real, M]) -> Bool, closed_in(subtopology(euclidean, s), c) \226\134\146 closed_in(subtopology(euclidean, t), IMAGE(f, c))) && (\226\136\128 c : (Cart[Real, M]) -> Bool, SUBSET(c, s) && connected(c) \226\134\146 connected(IMAGE(f, c))) \226\134\146 continuous_on(f, s)
-      #|  {n | f n IN UNIONS a} = UNIONS {{n | f n IN s} | s IN a}
+      #|  {(n : _) | IN((f : (_) -> _)(n), UNIONS((a : ((_) -> Bool) -> Bool)))} == UNIONS({{(n : _) | IN(f(n), (s : (_) -> Bool))} | IN(s, a)})
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])((p : Cart[Real, M]))
       #|  (c : (Cart[Real, N]) -> Bool)
       #|  (t : (Cart[Real, N]) -> Bool)
@@ -64281,7 +64281,7 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  \226\136\128 i : Num, (1 <= i && i <= (n : Num)) == ((1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && i <= n)
       #|  !((u : (Cart[Real, N]) -> Bool) == {})
       #|  open((u : (Cart[Real, N]) -> Bool))
-      #|  u = INTERS {{y:real^N | y$i < (f:real^N->real^N)(z)$i} |i,z|\n                  i IN 1..n /\\ z IN {z | z IN s' /\\ (x:real^N)$i < z$i}} INTER\n          INTERS {{y:real^N | y$i > (f:real^N->real^N)(z)$i} |i,z|\n                  i IN 1..n /\\ z IN {z | z IN s' /\\ (x:real^N)$i > z$i}}
+      #|  (u : (Cart[Real, N]) -> Bool) == INTER(INTERS({{(y : Cart[Real, N]) | op_dollar(y, i) < op_dollar((f : (Cart[Real, N]) -> Cart[Real, N])(z), i)} | i : Num, z : Cart[Real, N] | IN(i, op_dot_dot(1, (n : Num))) && IN(z, {(z : Cart[Real, N]) | IN(z, (s' : (Cart[Real, N]) -> Bool)) && op_dollar((x : Cart[Real, N]), i) < op_dollar(z, i)})}), INTERS({{(y : Cart[Real, N]) | op_dollar(y, i) > op_dollar(f(z), i)} | i : Num, z : Cart[Real, N] | IN(i, op_dot_dot(1, n)) && IN(z, {(z : Cart[Real, N]) | IN(z, s') && op_dollar(x, i) > op_dollar(z, i)})}))
       #|  (q : Bool) == (p : Bool) && p \226\134\146 p && q
       #|  (x : Cart[Real, N])
       #|  (t' : (Cart[Real, N]) -> Bool)
@@ -66739,7 +66739,7 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  (k : (Num) -> Bool)
       #|  (k : (Num) -> Bool) == {(i : Num) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && rational((op_dollar : (Cart[Real, N], Num) -> Real)((x : Cart[Real, N]), i))}
       #|  (x : Cart[Real, N])
-      #|  s =\n    UNIONS {s INTER h |\n            h IN  { INTERS {{x:real^N | x$i = q$i} | i IN k} |\n       k IN {l | l SUBSET 1..dimindex(:N) /\\ l HAS_SIZE n} /\\\n       q IN {y:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(y$i)}}}
+      #|  (s : (Cart[Real, N]) -> Bool) == (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({(INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, (h : (Cart[Real, N]) -> Bool)) | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(h, {(INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({{(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, (i : Num)) == (op_dollar : (Cart[Real, N], Num) -> Real)((q : Cart[Real, N]), i)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, (k : (Num) -> Bool))}) | (IN : ((Num) -> Bool, ((Num) -> Bool) -> Bool) -> Bool)(k, {(l : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(l, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (HAS_SIZE : ((Num) -> Bool, Num) -> Bool)(l, (n : Num))}) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(q, {(y : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(y, i))})})})
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  (\226\136\128 x : (Cart[Real, _]) -> Bool, (t : (Cart[Real, _]) -> Bool) == x \226\134\146 dimension(x) <= int_of_num(0)) \226\134\146 dimension(t) <= int_of_num(0)
       #|  \226\136\128 n : Num, (dimension : ((Cart[Real, N]) -> Bool) -> Int)({(x : Cart[Real, N]) | (HAS_SIZE : ((Num) -> Bool, Num) -> Bool)({(i : Num) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}, n)}) <= int_of_num(0)
@@ -67543,8 +67543,8 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  (s : (Cart[Real, P]) -> Bool)
       #|  {(x : _) | IN(x, (v : (_) -> Bool)) && (P : (_) -> Bool)(x)} == INTER(v, {(x : _) | P(x)})
       #|  INTER((t : (Cart[Real, P]) -> Bool), (t' : (Cart[Real, P]) -> Bool))
-      #|  {{x | x IN v /\\ (p':real^N->real^P) x IN u} | v IN vv'}
-      #|  {{x | x IN v /\\ (p:real^M->real^P) x IN u} | v IN vv}
+      #|  {{(x : Cart[Real, N]) | IN(x, (v : (Cart[Real, N]) -> Bool)) && IN((p' : (Cart[Real, N]) -> Cart[Real, P])(x), (u : (Cart[Real, P]) -> Bool))} | IN(v, (vv' : ((Cart[Real, N]) -> Bool) -> Bool))}
+      #|  {{(x : Cart[Real, M]) | IN(x, (v : (Cart[Real, M]) -> Bool)) && IN((p : (Cart[Real, M]) -> Cart[Real, P])(x), (u : (Cart[Real, P]) -> Bool))} | IN(v, (vv : ((Cart[Real, M]) -> Bool) -> Bool))}
       #|  (u : (Cart[Real, P]) -> Bool)
       #|  SUBSET((u : (Cart[Real, P]) -> Bool), INTER((t : (Cart[Real, P]) -> Bool), (t' : (Cart[Real, P]) -> Bool)))
       #|  (u : (Cart[Real, P]) -> Bool) == connected_component(INTER((t : (Cart[Real, P]) -> Bool), (t' : (Cart[Real, P]) -> Bool)), (p' : (Cart[Real, N]) -> Cart[Real, P])((z : Cart[Real, N])))
