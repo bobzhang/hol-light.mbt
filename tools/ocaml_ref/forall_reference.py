@@ -69,6 +69,11 @@ def adapt_output(lines):
 # annotations (rename_type_variables).
 TYPE_RENAMES = {
     '100/friendship.ml': {'person': 'Person'},
+    'Unity/mk_state_logic.ml': {"'a": 'A', "'b": 'B', "'c": 'C'},
+    'Unity/mk_unless.ml': {"'a": 'A'},
+    'Unity/mk_ensures.ml': {"'a": 'A'},
+    'Unity/mk_leadsto.ml': {"'a": 'A'},
+    'Unity/mk_comp_unity.ml': {"'a": 'A'},
 }
 
 
@@ -134,20 +139,59 @@ def rename_in_quotation(q, renames):
     return ''.join(out)
 
 
+def ocaml_segments(text):
+    """`text` cut into (kind, piece): 'comment' (nested `(* *)`), 'string',
+    'quotation' (backquoted) and 'code'."""
+    out, i, start = [], 0, 0
+    def emit(kind, j):
+        nonlocal start
+        if j > start:
+            out.append((kind, text[start:j]))
+        start = j
+    while i < len(text):
+        if text.startswith('(*', i):
+            emit('code', i)
+            depth = 0
+            while i < len(text):
+                if text.startswith('(*', i):
+                    depth, i = depth + 1, i + 2
+                elif text.startswith('*)', i):
+                    depth, i = depth - 1, i + 2
+                    if depth == 0:
+                        break
+                else:
+                    i += 1
+            emit('comment', i)
+        elif text[i] in '"`':
+            emit('code', i)
+            close, i = text[i], i + 1
+            while i < len(text) and text[i] != close:
+                i += 2 if close == '"' and text[i] == '\\' else 1
+            i += 1
+            emit('string' if close == '"' else 'quotation', i)
+        else:
+            i += 1
+    emit('code', len(text))
+    return out
+
+
 def rename_type_variables(text, renames):
     """`text` (OCaml) with the type variables `renames` maps renamed in the
-    type annotations of its quotations. Any other occurrence of an old name,
-    in a quotation's term or in OCaml code (`mk_vartype "'a"`), fails: those
-    need adapting by hand."""
-    def occurs(name, text):
-        return re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", text)
+    type annotations of its quotations. Any other occurrence of an old name
+    outside comments, in a quotation's term or in OCaml code or strings
+    (`mk_vartype "'a"`), fails: those need adapting by hand."""
+    def occurs(name, pieces):
+        return any(re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", piece)
+                   for kind, piece in pieces if kind != 'comment')
+    segments = ocaml_segments(text)
     for new in renames.values():
         # a new name already in use would merge two type variables
-        assert not occurs(new, text), f'{new} is already used'
-    text = re.sub(r'`[^`]*`', lambda m: rename_in_quotation(m[0], renames), text)
+        assert not occurs(new, segments), f'{new} is already used'
+    segments = [(kind, rename_in_quotation(piece, renames) if kind == 'quotation' else piece)
+                for kind, piece in segments]
     for old in renames:
-        assert not occurs(old, text), f'{old} occurs outside a type annotation'
-    return text
+        assert not occurs(old, segments), f'{old} occurs outside a type annotation'
+    return ''.join(piece for kind, piece in segments)
 
 
 def prepare():
