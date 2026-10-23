@@ -82739,7 +82739,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (c : (Cart[Real, M]) -> Bool)
       #|  (e : (Cart[Real, M]) -> Bool)
       #|  (d : (Cart[Real, M]) -> Bool)
-      #|  UNIONS {{d:real^M->bool | d face_of c} | c IN m}
+      #|  UNIONS({{(d : (Cart[Real, M]) -> Bool) | face_of(d, (c : (Cart[Real, M]) -> Bool))} | IN(c, (m : ((Cart[Real, M]) -> Bool) -> Bool))})
       #|  (INTER((d : (_) -> Bool), (e : (_) -> Bool)) == d) == SUBSET(d, e)
       #|  (c : (Cart[Real, M]) -> Bool)
       #|  face_of(INTER((d : (Cart[Real, _]) -> Bool), (e : (Cart[Real, _]) -> Bool)), d) && face_of(INTER(d, e), e) \226\134\146 face_of(INTER(d, e), d)
@@ -82850,7 +82850,7 @@ test "Multivariate/moretop matches Multivariate/moretop.ml" {
       #|  (d : (Cart[Real, M]) -> Bool)
       #|  \226\136\128 d : (Cart[Real, M]) -> Bool, IN(d, (m : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 a : Cart[Real, M], \226\136\131 g : (Cart[Real, M]) -> Cart[Real, N], !IN(a, UNIONS((n : ((Cart[Real, M]) -> Bool) -> Bool))) && continuous_on(g, DELETE(d, a)) && SUBSET(IMAGE(g, DELETE(d, a)), relative_frontier((t : (Cart[Real, N]) -> Bool))) && (\226\136\128 x : Cart[Real, M], IN(x, INTER(d, UNIONS(UNION(n, {(d : (Cart[Real, M]) -> Bool) | \226\136\131 c : (Cart[Real, M]) -> Bool, (IN(c, m) && !IN(c, n)) && face_of(d, c) && aff_dim(d) < aff_dim(t)})))) \226\134\146 g(x) == (h : (Cart[Real, M]) -> Cart[Real, N])(x)))
       #|  (h : (Cart[Real, M]) -> Cart[Real, N])
-      #|  UNIONS {{d:real^M->bool | d face_of c} | c IN m}
+      #|  UNIONS({{(d : (Cart[Real, M]) -> Bool) | face_of(d, (c : (Cart[Real, M]) -> Bool))} | IN(c, (m : ((Cart[Real, M]) -> Bool) -> Bool))})
       #|  DIFF(UNION((n : (_) -> Bool), (m : (_) -> Bool)), n) == DIFF(m, n)
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  (n : ((Cart[Real, M]) -> Bool) -> Bool)
