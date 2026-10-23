@@ -86,6 +86,36 @@ fn binder_rename(
 }
 
 ///|
+/// How many GEN%PVAR names HOL's parser takes reading the quotation `t`
+/// stands for (a preterm with set marks). Reading `{e | p}`, it first tries
+/// `{a, b, ...}`, which reads `e` and fails at `|`, so it reads `e` twice;
+/// reading `{e | vs | p}`, it also tries `{e | p}` first, reading `e` three
+/// times (and `vs`, binders here, twice). Its readings are not undone, so
+/// each takes the names of the comprehensions in it; the last is kept.
+/// The term syntax skips the names of the readings before the last, so
+/// that the two syntaxes number GEN%PVAR alike.
+fn pgen_cost(t : @preterm.Preterm) -> Int {
+  match t {
+    Combp(Combp(Varp(m, _), e), p) if m == @grammar.set_abs_mark =>
+      2 * pgen_cost(e) + pgen_cost(p) + 1
+    Combp(Varp(m, _), binders) if m == @grammar.set_compr_mark => {
+      let mut b = binders
+      while b is Absp(_, body) {
+        b = body
+      }
+      match b {
+        Combp(Combp(Varp(_, _), e), p) => 3 * pgen_cost(e) + pgen_cost(p) + 1
+        _ => 0
+      }
+    }
+    Combp(f, x) => pgen_cost(f) + pgen_cost(x)
+    Absp(v, b) => pgen_cost(v) + pgen_cost(b)
+    Typing(x, _) => pgen_cost(x)
+    Varp(_, _) | Constp(_, _) => 0
+  }
+}
+
+///|
 /// Resolve names: a constant the syntax stands for (`true`, `&&`, ...)
 /// drops its mark; an identifier a binder in scope binds is that variable;
 /// any other identifier is read through the spellings of symbolic constants
@@ -99,8 +129,10 @@ fn resolve_names(
   match t {
     // a set comprehension is elaborated as HOL's parser does (GEN%PVAR
     // binder, the variables it binds), which needs the names resolved
-    Combp(Combp(Varp(m, _), e), p) if m == @grammar.set_abs_mark =>
+    Combp(Combp(Varp(m, _), e), p) if m == @grammar.set_abs_mark => {
+      @parser.skip_pgenvars(pgen_cost(e))
       @parser.pmk_setabs(resolve_names(e, bound), resolve_names(p, bound))
+    }
     Combp(Varp(m, _), binders) if m == @grammar.set_compr_mark => {
       let vs = []
       let mut b = binders
@@ -115,6 +147,7 @@ fn resolve_names(
       guard b is Combp(Combp(Varp(_, _), e), p) else {
         raise Failure("term syntax: malformed set comprehension")
       }
+      @parser.skip_pgenvars(2 * pgen_cost(e))
       @parser.pmk_setcompr(
         resolve_names(e, bound),
         @list.List(vs),

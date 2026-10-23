@@ -191,6 +191,14 @@ priv struct Printer {
   names : Array[String]
   // write sets as {a, b} and {e | p} (else as INSERT, GSPEC, ...)
   sets : Bool
+  // the GEN%PVAR binders of the comprehensions written with their binders
+  // listed ({e | x : A | p}) where {e | p} would do, as a quotation may:
+  // HOL's parser reads the element of the two forms a different number of
+  // times (pgen_cost), numbering the comprehensions in it differently
+  listed : Array[String]
+  // write a comprehension whose binder is not a GEN%PVAR name as GSPEC(...):
+  // set notation reads with a GEN%PVAR binder, renaming it
+  exact : Bool
   // bindings of a set comprehension's implicit binders ({e | p}), each the
   // variable and the depth of its binding in the scope: printed with their
   // type where they first occur
@@ -468,9 +476,10 @@ fn Printer::comb(
       "{" + items.map(x => self.term(x, EXPR, bound)).join(", ") + "}"
     // with no binders to list, only the implicit form can write it
     (Const("GSPEC", _), [Abs(g, body)]) if self.sets &&
+      !(self.exact && !(g is Var(n, _) && pvar_number(n) is Some(_))) &&
       comprehension(g, body) is Some((scoped, p, e)) &&
       (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) =>
-      self.comprehension(scoped, p, e, bound)
+      self.comprehension(g, scoped, p, e, bound)
     (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
           l => Some(l)
         })
@@ -591,10 +600,159 @@ fn implicit_binders(
 }
 
 ///|
+/// A comprehension the printer writes in set notation, with a GEN%PVAR
+/// binder: (its number, its binder's name, e, p, whether {e | p} binds
+/// its binders, whether it has binders to list), as the printer finds it
+/// (with no binder in scope renamed).
+priv struct Notation {
+  number : Int
+  name : String
+  e : @kernel.Term
+  p : @kernel.Term
+  implicit : Bool
+  listable : Bool
+}
+
+///|
+/// n for a GEN%PVAR name `GEN%PVAR%n`.
+fn pvar_number(name : String) -> Int? {
+  guard name.strip_prefix("GEN%PVAR%") is Some(digits) &&
+    !digits.is_empty() &&
+    digits.iter().all(c => c is ('0'..='9')) else {
+    return None
+  }
+  let mut number = 0
+  for c in digits {
+    number = number * 10 + (c.to_int() - '0'.to_int())
+  }
+  Some(number)
+}
+
+///|
+fn notation(t : @kernel.Term) -> Notation? {
+  guard t is Comb(Const("GSPEC", _), Abs(Var(name, _) as g, body)) &&
+    pvar_number(name) is Some(number) else {
+    return None
+  }
+  guard comprehension(g, body) is Some((scoped, p, e)) else { return None }
+  let xs = scoped.map(x => x.0)
+  let binds = implicit_binders(e, p, @list.List([]))
+  // with no binders to list, only {e | p} can write it, else GSPEC(...)
+  if scoped.is_empty() && !binds.is_empty() {
+    return None
+  }
+  Some({ number, name, e, p, implicit: binds == xs, listable: !xs.is_empty() })
+}
+
+///|
+/// The comprehensions in set notation in `t` not inside another, in the
+/// order of their numbers (the order a reading takes their names in).
+fn outermost_notations(t : @kernel.Term) -> Array[Notation] {
+  let found = []
+  fn go(t : @kernel.Term) {
+    match notation(t) {
+      Some(n) => found.push(n)
+      None =>
+        match t {
+          Comb(f, x) => {
+            go(f)
+            go(x)
+          }
+          Abs(_, b) => go(b)
+          _ => ()
+        }
+    }
+  }
+  go(t)
+  found.sort_by_key(n => n.number)
+  found
+}
+
+///|
+/// The comprehensions to write with their binders listed, where {e | p}
+/// would do, so that reading the printed `t` numbers its GEN%PVAR names as
+/// the quotation's reading did, taking `taken` names: None when none does.
+///
+/// A reading takes its names in order and a comprehension takes its own
+/// last, so the comprehensions of a reading are read from where the one
+/// before ends. {e | p} reads e twice and {e | vs | p} three times
+/// (pgen_cost), the last reading of e ending where p's begins, so for k
+/// earlier readings of e from `start`, start + (k + 1) * f(e) is where the
+/// last ends.
+fn listed_comprehensions(t : @kernel.Term, taken : Int) -> Array[String]? {
+  let outer = outermost_notations(t)
+  if outer.is_empty() {
+    return Some([])
+  }
+  let end = outer[outer.length() - 1].number + 1
+  let listed = []
+  if read_names(t, end - taken, end, listed) {
+    Some(listed)
+  } else {
+    None
+  }
+}
+
+///|
+/// Whether a reading of `t` from `start` to `end` (exclusive) numbers its
+/// comprehensions as they are, adding to `listed` those to list.
+fn read_names(
+  t : @kernel.Term,
+  start : Int,
+  end : Int,
+  listed : Array[String],
+) -> Bool {
+  let mut at = start
+  for n in outermost_notations(t) {
+    if !read_comprehension(n, at, listed) {
+      return false
+    }
+    at = n.number + 1
+  }
+  at == end
+}
+
+///|
+/// Whether the comprehension `n`, read from `start`, is numbered as it is.
+fn read_comprehension(n : Notation, start : Int, listed : Array[String]) -> Bool {
+  let inner = outermost_notations(n.e)
+  if inner.is_empty() {
+    // e takes no names: both forms read p from the start
+    return read_names(n.p, start, n.number, listed)
+  }
+  let e_end = inner[inner.length() - 1].number + 1
+  if !read_names(n.p, e_end, n.number, listed) {
+    return false
+  }
+  let before = listed.length()
+  let forms = match (n.implicit, n.listable) {
+    (true, true) => [1, 2]
+    (true, false) => [1]
+    (false, _) => [2]
+  }
+  for k in forms {
+    if e_end > start && (e_end - start) % (k + 1) == 0 {
+      let size = (e_end - start) / (k + 1)
+      if read_names(n.e, e_end - size, e_end, listed) {
+        if k == 2 && n.implicit {
+          listed.push(n.name)
+        }
+        return true
+      }
+      while listed.length() > before {
+        listed.pop() |> ignore
+      }
+    }
+  }
+  false
+}
+
+///|
 /// `{e | p}` when HOL's rule binds exactly `xs` (in order), else
 /// `{e | x : A, y : B | p}`.
 fn Printer::comprehension(
   self : Printer,
+  g : @kernel.Term,
   scoped : Array[(@kernel.Term, @kernel.Term)],
   p : @kernel.Term,
   e : @kernel.Term,
@@ -612,7 +770,9 @@ fn Printer::comprehension(
     binders.push(b)
     inner = next
   }
-  if !renamed && implicit_binders(e, p, inner) == xs {
+  if !renamed &&
+    implicit_binders(e, p, inner) == xs &&
+    !(g is Var(n, _) && self.listed.contains(n)) {
     // each binder is written with its type where it first occurs in e
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
     let typed_before = self.typed_free.length()
@@ -662,7 +822,12 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 }
 
 ///|
-fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
+fn print_term_with(
+  t : @kernel.Term,
+  sets~ : Bool,
+  listed? : Array[String] = [],
+  exact? : Bool = false,
+) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
@@ -672,7 +837,17 @@ fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
   fn print(overloads : Bool, all_constants : Bool) -> String raise Unprintable {
     let names = vars.map(v => if v is Var(n, _) { n } else { "" })
     with_fixed_interface(() => {
-      { typed_free: [], fixed, all_constants, overloads, names, sets, untyped: [] }.term(
+      {
+        typed_free: [],
+        fixed,
+        all_constants,
+        overloads,
+        names,
+        sets,
+        listed,
+        exact,
+        untyped: [],
+      }.term(
         t,
         EXPR,
         @list.List([]),
@@ -755,15 +930,29 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 /// theorems of a migrated package print as before.
 pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintable {
   // set notation, else the sets as written (GSPEC(...)), which an old
-  // quotation may spell out
+  // quotation may spell out. A comprehension whose element has one may be
+  // written either way, numbering the GEN%PVAR names in it differently:
+  // the forms the quotation's numbering shows are tried too.
   let mut error = Unprintable("term")
-  for sets in [true, false] {
-    let s = print_term_with(t, sets~) catch {
+  let forms = [(true, [])]
+  let taken = try @parser.reread_term(old).1 catch { _ => -1 }
+  if listed_comprehensions(t, taken) is Some(listed) && !listed.is_empty() {
+    forms.push((true, listed))
+  }
+  forms.push((false, []))
+  let tried = []
+  for form in forms {
+    let (sets, listed) = form
+    let s = print_term_with(t, sets~, listed~, exact=true) catch {
       e => {
         error = e
         continue
       }
     }
+    if tried.contains(s) {
+      continue
+    }
+    tried.push(s)
     check_spelling(old, s) catch {
       e => {
         error = e
