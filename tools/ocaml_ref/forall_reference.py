@@ -178,9 +178,10 @@ def rename_in_quotation(q, renames):
 
 def annotation_extent(q, i):
     """A generous end for the type annotation at q[i]: up to the first
-    character no type has, outside parentheses and HOL comments (`//` to
-    the end of the line). It may stop late, never early, so the
-    already-used check sees every type name."""
+    character that ends one, outside parentheses and HOL comments (`//` to
+    the end of the line). Symbols such as `<` can name type variables, so
+    they do not end it. It may stop late, never early, so the already-used
+    check sees every type name."""
     depth, j = 0, i
     while j < len(q):
         if q.startswith('//', j):
@@ -193,7 +194,7 @@ def annotation_extent(q, i):
             if depth == 0:
                 return j
             depth -= 1
-        elif depth == 0 and q[j] in '.|=;,]}\\/<~!?@:`':
+        elif depth == 0 and q[j] in '.|=;,]}:`':
             return j
         j += 1
     return len(q)

@@ -20,7 +20,7 @@ import re
 import subprocess
 import sys
 
-from forall_reference import TYPE_RENAMES, rename_in_quotation
+from forall_reference import TYPE_RENAMES, annotation_colons, annotation_extent, rename_in_quotation
 
 REF = os.path.dirname(os.path.abspath(__file__))
 NAME = "A-Za-z0-9_'"
@@ -44,6 +44,17 @@ def type_variable(name):
 
 def word(name):
     return re.compile(f"(?<![{NAME}])" + re.escape(name) + f"(?![{NAME}])")
+
+
+def trace_lines(output):
+    trace = False
+    for line in output.splitlines():
+        if re.match(r'.* quotations \(\d+\):$', line):
+            trace = True
+        elif trace and line.startswith('  '):
+            yield line
+        else:
+            trace = False
 
 
 def substituted(output, renames):
@@ -79,8 +90,10 @@ def check(script):
         sys.exit(f'{script}: the renames together are not injective')
     original, renamed = run(script, True), run(script, False)
     problems = []
+    annotations = ' '.join(line[k + 1:annotation_extent(line, k + 1)]
+                           for line in trace_lines(original) for k in annotation_colons(line))
     for old, new in renames.items():
-        if type_variable(new).search(original):
+        if type_variable(new).search(original) or word(new).search(annotations):
             problems.append(f'{new} is already a type variable in the original output')
         if type_variable(old).search(renamed) or (old.startswith("'") and word(old).search(renamed)):
             problems.append(f'{old} is left in the renamed output')
