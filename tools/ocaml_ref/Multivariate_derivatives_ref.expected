@@ -64467,8 +64467,8 @@ Multivariate/derivatives quotations (1746):
   real_of_num(0)
   cball(((x : Cart[Real, N]), (r' : Real)))
   !({(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == {}) == (\226\136\131 x : _, P(x))
-  {sup { norm((f:real^N->real^N) z - b) | z IN k} |\n           compact k /\\ connected k /\\\n           z1 IN k /\\ z2 IN k /\\ k SUBSET cball(x,r)}
-  e = inf { sup { norm((f:real^N->real^N) z - b) | z IN k} |\n              compact k /\\ connected k /\\\n              z1 IN k /\\ z2 IN k /\\ k SUBSET cball(x,r)}
+  {sup({norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N])) | IN(z, (k : (Cart[Real, N]) -> Bool))}) | compact(k) && connected(k) && IN((z1 : Cart[Real, N]), k) && IN((z2 : Cart[Real, N]), k) && SUBSET(k, cball(((x : Cart[Real, N]), (r : Real))))}
+  (e : Real) == inf({sup({norm((f : (Cart[Real, N]) -> Cart[Real, N])((z : Cart[Real, N])) - (b : Cart[Real, N])) | IN(z, (k : (Cart[Real, N]) -> Bool))}) | compact(k) && connected(k) && IN((z1 : Cart[Real, N]), k) && IN((z2 : Cart[Real, N]), k) && SUBSET(k, cball(((x : Cart[Real, N]), (r : Real))))})
   SUBSET(cball(((x : Cart[Real, N]), (r' : Real))), (s : (Cart[Real, N]) -> Bool))
   (z1 : Cart[Real, N]) == (z2 : Cart[Real, N])
   (b : Cart[Real, N]) == (f : (Cart[Real, N]) -> Cart[Real, N])((z2 : Cart[Real, N]))
