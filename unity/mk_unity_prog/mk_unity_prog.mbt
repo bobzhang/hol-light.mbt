@@ -34,7 +34,7 @@ pub fn bool() -> @kernel.HolType {
 /// `VAR_TP`
 pub fn var_tp(x1 : String) -> @kernel.HolType raise {
   let s = x1
-  @kernel.mk_vartype(("'" + s))
+  @kernel.mk_vartype(s)
 }
 
 ///|
@@ -70,7 +70,7 @@ pub fn fnc(x7 : (@kernel.HolType, @list.List[@kernel.HolType])) -> @kernel.HolTy
 ///|
 /// LOC
 fn step_3() -> Unit raise {
-  loc_c.set(var_tp("loc"))
+  loc_c.set(var_tp("Loc"))
 }
 
 ///|
@@ -85,7 +85,7 @@ pub fn loc() -> @kernel.HolType {
 ///|
 /// VAL
 fn step_4() -> Unit raise {
-  val_c.set(var_tp("val"))
+  val_c.set(var_tp("Val"))
 }
 
 ///|
@@ -199,7 +199,7 @@ pub fn seq() -> @kernel.HolType {
 ///|
 /// t
 fn step_10() -> Unit raise {
-  t_c.set(@kernel.mk_vartype("'t"))
+  t_c.set(@kernel.mk_vartype("T"))
 }
 
 ///|
@@ -229,31 +229,31 @@ pub fn v() -> @kernel.Term {
 ///|
 /// Unity/mk_unity_prog.ml:255
 fn step_12() -> Unit raise {
-  @preterm.new_type_abbrev("stype", @parser.parse_type("'loc->'val"))
+  @preterm.new_type_abbrev("stype", @parser.parse_type("Loc->Val"))
 }
 
 ///|
 /// Unity/mk_unity_prog.ml:257
 fn step_13() -> Unit raise {
-  @preterm.new_type_abbrev("vtype", @parser.parse_type("(stype->'t)#((stype->'t)->stype->stype->stype)"))
+  @preterm.new_type_abbrev("vtype", @parser.parse_type("(stype->T)#((stype->T)->stype->stype->stype)"))
 }
 
 ///|
 /// Unity/mk_unity_prog.ml:259
 fn step_14() -> Unit raise {
-  @preterm.new_type_abbrev("vindex_type", @parser.parse_type("(stype->'i->'t)#((stype->'i->'t)->stype->stype->stype)"))
+  @preterm.new_type_abbrev("vindex_type", @parser.parse_type("(stype->I->T)#((stype->I->T)->stype->stype->stype)"))
 }
 
 ///|
 /// Unity/mk_unity_prog.ml:261
 fn step_15() -> Unit raise {
-  @preterm.new_type_abbrev("vpair_type", @parser.parse_type("(stype->'a#'b)#((stype->'a#'b)->stype->stype->stype)"))
+  @preterm.new_type_abbrev("vpair_type", @parser.parse_type("(stype->A#B)#((stype->A#B)->stype->stype->stype)"))
 }
 
 ///|
 /// Unity/mk_unity_prog.ml:263
 fn step_16() -> Unit raise {
-  @preterm.new_type_abbrev("seq_type", @parser.parse_type("'loc->(num->'val)->('val->num)->num->(stype->stype)list#num"))
+  @preterm.new_type_abbrev("seq_type", @parser.parse_type("Loc->(num->Val)->(Val->num)->num->(stype->stype)list#num"))
 }
 
 ///|
@@ -379,7 +379,7 @@ pub fn e() -> @kernel.Term {
 ///|
 /// LOC_EXP
 fn step_25() -> Unit raise {
-  loc_exp_c.set(@pair.new_definition(@parser.parse_term("LOC_EXP loc (ds:'val->'t) (s:stype) = ds (s loc)")))
+  loc_exp_c.set(@pair.new_definition(@parser.parse_term("LOC_EXP loc (ds:Val->T) (s:stype) = ds (s loc)")))
 }
 
 ///|
@@ -394,7 +394,7 @@ pub fn loc_exp() -> @kernel.Thm {
 ///|
 /// LOC_ASG
 fn step_26() -> Unit raise {
-  loc_asg_c.set(@pair.new_definition(@parser.parse_term("LOC_ASG loc (mk:'t->'val) (e:stype->'t)\n                             (s0:stype) (s:stype) l =\n      (if (l = loc) then (mk (e s0)) else (s l))")))
+  loc_asg_c.set(@pair.new_definition(@parser.parse_term("LOC_ASG loc (mk:T->Val) (e:stype->T)\n                             (s0:stype) (s:stype) l =\n      (if (l = loc) then (mk (e s0)) else (s l))")))
 }
 
 ///|
@@ -409,7 +409,7 @@ pub fn loc_asg() -> @kernel.Thm {
 ///|
 /// LOC_VAR
 fn step_27() -> Unit raise {
-  loc_var_c.set(@pair.new_definition(@parser.parse_term("LOC_VAR (loc:'loc) (mk:'t->'val) (ds:'val->'t) =\n       (LOC_EXP loc ds, LOC_ASG loc mk)")))
+  loc_var_c.set(@pair.new_definition(@parser.parse_term("LOC_VAR (loc:Loc) (mk:T->Val) (ds:Val->T) =\n       (LOC_EXP loc ds, LOC_ASG loc mk)")))
 }
 
 ///|
@@ -424,7 +424,7 @@ pub fn loc_var() -> @kernel.Thm {
 ///|
 /// INDEX_EXP
 fn step_28() -> Unit raise {
-  index_exp_c.set(@pair.new_definition(@parser.parse_term("(INDEX_EXP (a:stype->('i->'t)) (i:stype->'i) (s:stype) =\n          (a s) (i s))")))
+  index_exp_c.set(@pair.new_definition(@parser.parse_term("(INDEX_EXP (a:stype->(I->T)) (i:stype->I) (s:stype) =\n          (a s) (i s))")))
 }
 
 ///|
@@ -439,7 +439,7 @@ pub fn index_exp() -> @kernel.Thm {
 ///|
 /// UPD_INDEX
 fn step_29() -> Unit raise {
-  upd_index_c.set(@pair.new_definition(@parser.parse_term("(UPD_INDEX (i:'i) (c:'t) (a:'i->'t) j = (if (j = i) then c else (a j)))")))
+  upd_index_c.set(@pair.new_definition(@parser.parse_term("(UPD_INDEX (i:I) (c:T) (a:I->T) j = (if (j = i) then c else (a j)))")))
 }
 
 ///|
@@ -454,7 +454,7 @@ pub fn upd_index() -> @kernel.Thm {
 ///|
 /// UPD_INDEX_EXP
 fn step_30() -> Unit raise {
-  upd_index_exp_c.set(@pair.new_definition(@parser.parse_term("(UPD_INDEX_EXP (i:'i) (c:'t) (a:stype->'i->'t) (s:stype) =\n       UPD_INDEX i c (a s))")))
+  upd_index_exp_c.set(@pair.new_definition(@parser.parse_term("(UPD_INDEX_EXP (i:I) (c:T) (a:stype->I->T) (s:stype) =\n       UPD_INDEX i c (a s))")))
 }
 
 ///|
@@ -469,7 +469,7 @@ pub fn upd_index_exp() -> @kernel.Thm {
 ///|
 /// VAR_INDEX_ASG
 fn step_31() -> Unit raise {
-  var_index_asg_c.set(@pair.new_definition(@parser.parse_term("VAR_INDEX_ASG\n     (i:stype->'i) (v:vindex_type)\n     (e:stype->'t) (s0:stype) (s:stype) =\n         VAR_ASG v (UPD_INDEX_EXP (i s0) (e s0) (VAR_EXP v)) s0 s")))
+  var_index_asg_c.set(@pair.new_definition(@parser.parse_term("VAR_INDEX_ASG\n     (i:stype->I) (v:vindex_type)\n     (e:stype->T) (s0:stype) (s:stype) =\n         VAR_ASG v (UPD_INDEX_EXP (i s0) (e s0) (VAR_EXP v)) s0 s")))
 }
 
 ///|
@@ -484,7 +484,7 @@ pub fn var_index_asg() -> @kernel.Thm {
 ///|
 /// VAR_INDEX_EXP
 fn step_32() -> Unit raise {
-  var_index_exp_c.set(@pair.new_definition(@parser.parse_term("VAR_INDEX_EXP\n     (i:stype->'i) (v:vindex_type) (s:stype) =\n        (VAR_EXP v s) (i s)")))
+  var_index_exp_c.set(@pair.new_definition(@parser.parse_term("VAR_INDEX_EXP\n     (i:stype->I) (v:vindex_type) (s:stype) =\n        (VAR_EXP v s) (i s)")))
 }
 
 ///|
@@ -499,7 +499,7 @@ pub fn var_index_exp() -> @kernel.Thm {
 ///|
 /// VAR_INDEXVAR
 fn step_33() -> Unit raise {
-  var_indexvar_c.set(@pair.new_definition(@parser.parse_term("VAR_INDEXVAR (i:stype->'i) (v:vindex_type) =\n         (VAR_INDEX_EXP i v, VAR_INDEX_ASG i v)")))
+  var_indexvar_c.set(@pair.new_definition(@parser.parse_term("VAR_INDEXVAR (i:stype->I) (v:vindex_type) =\n         (VAR_INDEX_EXP i v, VAR_INDEX_ASG i v)")))
 }
 
 ///|
@@ -514,7 +514,7 @@ pub fn var_indexvar() -> @kernel.Thm {
 ///|
 /// LIST_EXP_term
 fn step_34() -> Unit raise {
-  list_exp_term_c.set(@parser.parse_term("(LIST_EXP [] (s:stype)               = []) /\\\n    (LIST_EXP (CONS (e:stype->'t) t) s = (CONS (e s) (LIST_EXP t s)))"))
+  list_exp_term_c.set(@parser.parse_term("(LIST_EXP [] (s:stype)               = []) /\\\n    (LIST_EXP (CONS (e:stype->T) t) s = (CONS (e s) (LIST_EXP t s)))"))
 }
 
 ///|
@@ -544,7 +544,7 @@ pub fn list_exp() -> @kernel.Thm {
 ///|
 /// s_FST
 fn step_36() -> Unit raise {
-  s_fst_c.set(@pair.new_definition(@parser.parse_term("s_FST (e:'sta->('a # 'b)) s = FST (e s)")))
+  s_fst_c.set(@pair.new_definition(@parser.parse_term("s_FST (e:Sta->(A # B)) s = FST (e s)")))
 }
 
 ///|
@@ -559,7 +559,7 @@ pub fn s_fst() -> @kernel.Thm {
 ///|
 /// s_SND
 fn step_37() -> Unit raise {
-  s_snd_c.set(@pair.new_definition(@parser.parse_term("s_SND (e:'sta->('a # 'b)) s = SND (e s)")))
+  s_snd_c.set(@pair.new_definition(@parser.parse_term("s_SND (e:Sta->(A # B)) s = SND (e s)")))
 }
 
 ///|
@@ -574,7 +574,7 @@ pub fn s_snd() -> @kernel.Thm {
 ///|
 /// UPD_FST
 fn step_38() -> Unit raise {
-  upd_fst_c.set(@pair.new_definition(@parser.parse_term("UPD_FST (c:'a) (p:'sta->('a#'b)) s = (c, SND(p s))")))
+  upd_fst_c.set(@pair.new_definition(@parser.parse_term("UPD_FST (c:A) (p:Sta->(A#B)) s = (c, SND(p s))")))
 }
 
 ///|
@@ -589,7 +589,7 @@ pub fn upd_fst() -> @kernel.Thm {
 ///|
 /// UPD_SND
 fn step_39() -> Unit raise {
-  upd_snd_c.set(@pair.new_definition(@parser.parse_term("UPD_SND (c:'b) (p:'sta->('a#'b)) s = (FST(p s),c)")))
+  upd_snd_c.set(@pair.new_definition(@parser.parse_term("UPD_SND (c:B) (p:Sta->(A#B)) s = (FST(p s),c)")))
 }
 
 ///|
@@ -604,7 +604,7 @@ pub fn upd_snd() -> @kernel.Thm {
 ///|
 /// VAR_FST_ASG
 fn step_40() -> Unit raise {
-  var_fst_asg_c.set(@pair.new_definition(@parser.parse_term("VAR_FST_ASG (v:vpair_type) (e:stype->'a) (s0:stype) (s:stype) =\n         VAR_ASG v (UPD_FST (e s0) (VAR_EXP v)) s0 s")))
+  var_fst_asg_c.set(@pair.new_definition(@parser.parse_term("VAR_FST_ASG (v:vpair_type) (e:stype->A) (s0:stype) (s:stype) =\n         VAR_ASG v (UPD_FST (e s0) (VAR_EXP v)) s0 s")))
 }
 
 ///|
@@ -619,7 +619,7 @@ pub fn var_fst_asg() -> @kernel.Thm {
 ///|
 /// VAR_SND_ASG
 fn step_41() -> Unit raise {
-  var_snd_asg_c.set(@pair.new_definition(@parser.parse_term("VAR_SND_ASG (v:vpair_type) (e:stype->'b) (s0:stype) (s:stype) =\n         VAR_ASG v (UPD_SND (e s0) (VAR_EXP v)) s0 s")))
+  var_snd_asg_c.set(@pair.new_definition(@parser.parse_term("VAR_SND_ASG (v:vpair_type) (e:stype->B) (s0:stype) (s:stype) =\n         VAR_ASG v (UPD_SND (e s0) (VAR_EXP v)) s0 s")))
 }
 
 ///|
@@ -829,7 +829,7 @@ pub fn k_def() -> @kernel.Thm {
 ///|
 /// ASG_ACT
 fn step_55() -> Unit raise {
-  asg_act_c.set(@pair.new_definition(@parser.parse_term("ASG_ACT (par:stype->stype->stype)\n            (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n          PAR_ATOM\n           (WHEN_PAR (LIST_PAR [par; LOC_ASG pc mk (K (SUC l0))])\n                     (LOC_EXP pc ds =* (K l0)))")))
+  asg_act_c.set(@pair.new_definition(@parser.parse_term("ASG_ACT (par:stype->stype->stype)\n            (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n          PAR_ATOM\n           (WHEN_PAR (LIST_PAR [par; LOC_ASG pc mk (K (SUC l0))])\n                     (LOC_EXP pc ds =* (K l0)))")))
 }
 
 ///|
@@ -844,7 +844,7 @@ pub fn asg_act() -> @kernel.Thm {
 ///|
 /// TST_ACT
 fn step_56() -> Unit raise {
-  tst_act_c.set(@pair.new_definition(@parser.parse_term("TST_ACT (g:stype->bool)\n            (l:num) (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n     (PAR_ATOM (WHEN_PAR (LOC_ASG pc mk ((g =>* K(SUC l0)) (K l)))\n                    (LOC_EXP pc ds =* K l0)))")))
+  tst_act_c.set(@pair.new_definition(@parser.parse_term("TST_ACT (g:stype->bool)\n            (l:num) (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n     (PAR_ATOM (WHEN_PAR (LOC_ASG pc mk ((g =>* K(SUC l0)) (K l)))\n                    (LOC_EXP pc ds =* K l0)))")))
 }
 
 ///|
@@ -859,7 +859,7 @@ pub fn tst_act() -> @kernel.Thm {
 ///|
 /// GTO_ACT
 fn step_57() -> Unit raise {
-  gto_act_c.set(@pair.new_definition(@parser.parse_term("GTO_ACT (l:num) (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n        PAR_ATOM (WHEN_PAR (LOC_ASG pc mk (K l))\n                           (LOC_EXP pc ds =* K l0))")))
+  gto_act_c.set(@pair.new_definition(@parser.parse_term("GTO_ACT (l:num) (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n        PAR_ATOM (WHEN_PAR (LOC_ASG pc mk (K l))\n                           (LOC_EXP pc ds =* K l0))")))
 }
 
 ///|
@@ -874,7 +874,7 @@ pub fn gto_act() -> @kernel.Thm {
 ///|
 /// PAR_SEQ
 fn step_58() -> Unit raise {
-  par_seq_c.set(@pair.new_definition(@parser.parse_term("PAR_SEQ (par:stype->stype->stype)\n            (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n            ([ASG_ACT par pc mk ds l0], SUC l0)")))
+  par_seq_c.set(@pair.new_definition(@parser.parse_term("PAR_SEQ (par:stype->stype->stype)\n            (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n            ([ASG_ACT par pc mk ds l0], SUC l0)")))
 }
 
 ///|
@@ -889,7 +889,7 @@ pub fn par_seq() -> @kernel.Thm {
 ///|
 /// ID_SEQ
 fn step_59() -> Unit raise {
-  id_seq_c.set(@pair.new_definition(@parser.parse_term("ID_SEQ (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n      ([], l0)")))
+  id_seq_c.set(@pair.new_definition(@parser.parse_term("ID_SEQ (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n      ([], l0)")))
 }
 
 ///|
@@ -904,7 +904,7 @@ pub fn id_seq() -> @kernel.Thm {
 ///|
 /// SEQ_SEQ
 fn step_60() -> Unit raise {
-  seq_seq_c.set(@pair.new_definition(@parser.parse_term("SEQ_SEQ (s1:seq_type) (s2:seq_type)\n            (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n      let b1 = s1 pc mk ds l0 in\n      let b2 = s2 pc mk ds (SND b1) in\n        (APPEND (FST b1) (FST b2), (SND b2))")))
+  seq_seq_c.set(@pair.new_definition(@parser.parse_term("SEQ_SEQ (s1:seq_type) (s2:seq_type)\n            (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n      let b1 = s1 pc mk ds l0 in\n      let b2 = s2 pc mk ds (SND b1) in\n        (APPEND (FST b1) (FST b2), (SND b2))")))
 }
 
 ///|
@@ -964,7 +964,7 @@ pub fn iter_seq() -> @kernel.Thm {
 ///|
 /// LIST_SEQ_term
 fn step_64() -> Unit raise {
-  list_seq_term_c.set(@parser.parse_term("(LIST_SEQ [] (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) = ([], l0)) /\\\n    (LIST_SEQ (CONS (sa:seq_type) sas) pc mk ds l0 =\n       let b1 = sa pc mk ds l0 in\n       let bs = LIST_SEQ sas pc mk ds (SND b1) in\n          (APPEND (FST b1) (FST bs), (SND bs)))"))
+  list_seq_term_c.set(@parser.parse_term("(LIST_SEQ [] (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) = ([], l0)) /\\\n    (LIST_SEQ (CONS (sa:seq_type) sas) pc mk ds l0 =\n       let b1 = sa pc mk ds l0 in\n       let bs = LIST_SEQ sas pc mk ds (SND b1) in\n          (APPEND (FST b1) (FST bs), (SND bs)))"))
 }
 
 ///|
@@ -994,7 +994,7 @@ pub fn list_seq() -> @kernel.Thm {
 ///|
 /// IF1_SEQ
 fn step_66() -> Unit raise {
-  if1_seq_c.set(@pair.new_definition(@parser.parse_term("(IF1_SEQ (g:stype->bool)\n             (sa:seq_type) (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n       let b1 = sa pc mk ds (SUC l0) in\n       let a1 = TST_ACT g (SND b1) pc mk ds l0 in\n         (CONS a1 (FST b1), (SND b1)))")))
+  if1_seq_c.set(@pair.new_definition(@parser.parse_term("(IF1_SEQ (g:stype->bool)\n             (sa:seq_type) (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n       let b1 = sa pc mk ds (SUC l0) in\n       let a1 = TST_ACT g (SND b1) pc mk ds l0 in\n         (CONS a1 (FST b1), (SND b1)))")))
 }
 
 ///|
@@ -1009,7 +1009,7 @@ pub fn if1_seq() -> @kernel.Thm {
 ///|
 /// IF2_SEQ
 fn step_67() -> Unit raise {
-  if2_seq_c.set(@pair.new_definition(@parser.parse_term("(IF2_SEQ (g:stype->bool) (sa1:seq_type) (sa2:seq_type)\n             (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n       let b1 = sa1 pc mk ds (SUC l0)                in\n       let b2 = sa2 pc mk ds (SUC (SND b1))          in\n       let a1 = TST_ACT g (SUC (SND b1)) pc mk ds l0 in\n       let a2 = GTO_ACT (SND b2) pc mk ds (SND b1)   in\n          (APPEND (CONS a1 (FST b1))\n                  (CONS a2 (FST b2)), (SND b2)))")))
+  if2_seq_c.set(@pair.new_definition(@parser.parse_term("(IF2_SEQ (g:stype->bool) (sa1:seq_type) (sa2:seq_type)\n             (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n       let b1 = sa1 pc mk ds (SUC l0)                in\n       let b2 = sa2 pc mk ds (SUC (SND b1))          in\n       let a1 = TST_ACT g (SUC (SND b1)) pc mk ds l0 in\n       let a2 = GTO_ACT (SND b2) pc mk ds (SND b1)   in\n          (APPEND (CONS a1 (FST b1))\n                  (CONS a2 (FST b2)), (SND b2)))")))
 }
 
 ///|
@@ -1024,7 +1024,7 @@ pub fn if2_seq() -> @kernel.Thm {
 ///|
 /// WHL_SEQ
 fn step_68() -> Unit raise {
-  whl_seq_c.set(@pair.new_definition(@parser.parse_term("(WHL_SEQ (g:stype->bool) (sa:seq_type)\n            (pc:'loc) (mk:num->'val) (ds:'val->num) (l0:num) =\n      let b1 = sa pc mk ds (SUC l0)                 in\n      let a1 = TST_ACT g (SUC (SND b1)) pc mk ds l0 in\n      let a2 = GTO_ACT l0 pc mk ds (SND b1)         in\n         (APPEND (CONS a1 (FST b1)) [a2], (SUC(SND b1))))")))
+  whl_seq_c.set(@pair.new_definition(@parser.parse_term("(WHL_SEQ (g:stype->bool) (sa:seq_type)\n            (pc:Loc) (mk:num->Val) (ds:Val->num) (l0:num) =\n      let b1 = sa pc mk ds (SUC l0)                 in\n      let a1 = TST_ACT g (SUC (SND b1)) pc mk ds l0 in\n      let a2 = GTO_ACT l0 pc mk ds (SND b1)         in\n         (APPEND (CONS a1 (FST b1)) [a2], (SUC(SND b1))))")))
 }
 
 ///|
@@ -1384,7 +1384,7 @@ pub fn follow_rel() -> @kernel.Thm {
 ///|
 /// RESTRICTED_UNLESS_STMT
 fn step_92() -> Unit raise {
-  restricted_unless_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_UNLESS_STMT v p q st =\n       (forall s:'state. p s /\\ v s /\\ ~(q s) ==> p (st s) \\/ q (st s))")))
+  restricted_unless_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_UNLESS_STMT v p q st =\n       (forall s:State. p s /\\ v s /\\ ~(q s) ==> p (st s) \\/ q (st s))")))
 }
 
 ///|
@@ -1399,7 +1399,7 @@ pub fn restricted_unless_stmt() -> @kernel.Thm {
 ///|
 /// RESTRICTED_UNLESS_term
 fn step_93() -> Unit raise {
-  restricted_unless_term_c.set(@parser.parse_term("(RESTRICTED_UNLESS (v:'state->bool) p q []           = T) /\\\n   (RESTRICTED_UNLESS (v:'state->bool) p q (CONS st Pr) =\n     (RESTRICTED_UNLESS_STMT v p q st /\\ RESTRICTED_UNLESS v p q Pr))"))
+  restricted_unless_term_c.set(@parser.parse_term("(RESTRICTED_UNLESS (v:State->bool) p q []           = T) /\\\n   (RESTRICTED_UNLESS (v:State->bool) p q (CONS st Pr) =\n     (RESTRICTED_UNLESS_STMT v p q st /\\ RESTRICTED_UNLESS v p q Pr))"))
 }
 
 ///|
@@ -1429,7 +1429,7 @@ pub fn restricted_unless() -> @kernel.Thm {
 ///|
 /// RESTRICTED_STABLE_STMT
 fn step_95() -> Unit raise {
-  restricted_stable_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_STABLE_STMT v p st =\n       (forall s:'state. p s /\\ v s ==> p (st s))")))
+  restricted_stable_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_STABLE_STMT v p st =\n       (forall s:State. p s /\\ v s ==> p (st s))")))
 }
 
 ///|
@@ -1444,7 +1444,7 @@ pub fn restricted_stable_stmt() -> @kernel.Thm {
 ///|
 /// RESTRICTED_STABLE_term
 fn step_96() -> Unit raise {
-  restricted_stable_term_c.set(@parser.parse_term("(RESTRICTED_STABLE (v:'state->bool) p [] = T) /\\\n   (RESTRICTED_STABLE (v:'state->bool) p (CONS st Pr) =\n     (RESTRICTED_STABLE_STMT v p st /\\ RESTRICTED_STABLE      v p Pr))"))
+  restricted_stable_term_c.set(@parser.parse_term("(RESTRICTED_STABLE (v:State->bool) p [] = T) /\\\n   (RESTRICTED_STABLE (v:State->bool) p (CONS st Pr) =\n     (RESTRICTED_STABLE_STMT v p st /\\ RESTRICTED_STABLE      v p Pr))"))
 }
 
 ///|
@@ -1474,7 +1474,7 @@ pub fn restricted_stable() -> @kernel.Thm {
 ///|
 /// RESTRICTED_EXISTS_TRANSITION_STMT
 fn step_98() -> Unit raise {
-  restricted_exists_transition_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_EXISTS_TRANSITION_STMT v p q st =\n       (forall s:'state. p s /\\ v s /\\ ~(q s) ==> q (st s))")))
+  restricted_exists_transition_stmt_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_EXISTS_TRANSITION_STMT v p q st =\n       (forall s:State. p s /\\ v s /\\ ~(q s) ==> q (st s))")))
 }
 
 ///|
@@ -1489,7 +1489,7 @@ pub fn restricted_exists_transition_stmt() -> @kernel.Thm {
 ///|
 /// RESTRICTED_EXISTS_TRANSITION_term
 fn step_99() -> Unit raise {
-  restricted_exists_transition_term_c.set(@parser.parse_term("(RESTRICTED_EXISTS_TRANSITION (v:'state->bool) p q [] = F) /\\\n   (RESTRICTED_EXISTS_TRANSITION (v:'state->bool) p q (CONS st Pr) =\n      (RESTRICTED_EXISTS_TRANSITION_STMT v p q st \\/\n       RESTRICTED_EXISTS_TRANSITION      v p q Pr))"))
+  restricted_exists_transition_term_c.set(@parser.parse_term("(RESTRICTED_EXISTS_TRANSITION (v:State->bool) p q [] = F) /\\\n   (RESTRICTED_EXISTS_TRANSITION (v:State->bool) p q (CONS st Pr) =\n      (RESTRICTED_EXISTS_TRANSITION_STMT v p q st \\/\n       RESTRICTED_EXISTS_TRANSITION      v p q Pr))"))
 }
 
 ///|
@@ -1519,7 +1519,7 @@ pub fn restricted_exists_transition() -> @kernel.Thm {
 ///|
 /// RESTRICTED_ENSURES
 fn step_101() -> Unit raise {
-  restricted_ensures_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_ENSURES (v:'state->bool) p q Pr =\n      (RESTRICTED_UNLESS            v p q Pr /\\\n       RESTRICTED_EXISTS_TRANSITION v p q Pr)")))
+  restricted_ensures_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_ENSURES (v:State->bool) p q Pr =\n      (RESTRICTED_UNLESS            v p q Pr /\\\n       RESTRICTED_EXISTS_TRANSITION v p q Pr)")))
 }
 
 ///|
@@ -1534,7 +1534,7 @@ pub fn restricted_ensures() -> @kernel.Thm {
 ///|
 /// RESTRICTED_LEADSTO
 fn step_102() -> Unit raise {
-  restricted_leadsto_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_LEADSTO (v:'state->bool) p q Pr =\n        (((p /\\* v) LEADSTO q) Pr)")))
+  restricted_leadsto_c.set(@pair.new_definition(@parser.parse_term("RESTRICTED_LEADSTO (v:State->bool) p q Pr =\n        (((p /\\* v) LEADSTO q) Pr)")))
 }
 
 ///|
@@ -1549,7 +1549,7 @@ pub fn restricted_leadsto() -> @kernel.Thm {
 ///|
 /// VALID
 fn step_103() -> Unit raise {
-  valid_c.set(@pair.new_definition(@parser.parse_term("VALID (p:'state->bool) = forall s. p s")))
+  valid_c.set(@pair.new_definition(@parser.parse_term("VALID (p:State->bool) = forall s. p s")))
 }
 
 ///|
@@ -1564,7 +1564,7 @@ pub fn valid() -> @kernel.Thm {
 ///|
 /// TRIPLE_term
 fn step_104() -> Unit raise {
-  triple_term_c.set(@parser.parse_term("(TRIPLE (p:'state->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:'state->'state) Pr) =\n     ((forall s. p s ==> q(st s)) /\\ TRIPLE p q Pr))"))
+  triple_term_c.set(@parser.parse_term("(TRIPLE (p:State->bool) q [] = T) /\\\n   (TRIPLE p q (CONS (st:State->State) Pr) =\n     ((forall s. p s ==> q(st s)) /\\ TRIPLE p q Pr))"))
 }
 
 ///|
@@ -1639,7 +1639,7 @@ pub fn summa() -> @kernel.Thm {
 ///|
 /// SUMMA_S
 fn step_109() -> Unit raise {
-  summa_s_c.set(@pair.new_definition(@parser.parse_term("SUMMA_S lwb upb f b (s:'state) =\n          SUMMA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
+  summa_s_c.set(@pair.new_definition(@parser.parse_term("SUMMA_S lwb upb f b (s:State) =\n          SUMMA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
 }
 
 ///|
@@ -1699,7 +1699,7 @@ pub fn multa() -> @kernel.Thm {
 ///|
 /// MULTA_S
 fn step_113() -> Unit raise {
-  multa_s_c.set(@pair.new_definition(@parser.parse_term("MULTA_S lwb upb f b (s:'state) =\n          MULTA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
+  multa_s_c.set(@pair.new_definition(@parser.parse_term("MULTA_S lwb upb f b (s:State) =\n          MULTA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
 }
 
 ///|
@@ -1759,7 +1759,7 @@ pub fn conja() -> @kernel.Thm {
 ///|
 /// CONJA_S
 fn step_117() -> Unit raise {
-  conja_s_c.set(@pair.new_definition(@parser.parse_term("CONJA_S lwb upb f b (s:'state) =\n          CONJA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
+  conja_s_c.set(@pair.new_definition(@parser.parse_term("CONJA_S lwb upb f b (s:State) =\n          CONJA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
 }
 
 ///|
@@ -1819,7 +1819,7 @@ pub fn disja() -> @kernel.Thm {
 ///|
 /// DISJA_S
 fn step_121() -> Unit raise {
-  disja_s_c.set(@pair.new_definition(@parser.parse_term("DISJA_S lwb upb f b (s:'state) =\n          DISJA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
+  disja_s_c.set(@pair.new_definition(@parser.parse_term("DISJA_S lwb upb f b (s:State) =\n          DISJA (lwb s) (upb s) (\\i. f i s) (\\i. b i s)")))
 }
 
 ///|
@@ -1834,7 +1834,7 @@ pub fn disja_s() -> @kernel.Thm {
 ///|
 /// MEMBER_term
 fn step_122() -> Unit raise {
-  member_term_c.set(@parser.parse_term("(MEMBER (x:'a) []    = F) /\\\n   (MEMBER x (CONS h t) = ((x=h) \\/ (MEMBER x t)))"))
+  member_term_c.set(@parser.parse_term("(MEMBER (x:A) []    = F) /\\\n   (MEMBER x (CONS h t) = ((x=h) \\/ (MEMBER x t)))"))
 }
 
 ///|
@@ -1864,7 +1864,7 @@ pub fn member_() -> @kernel.Thm {
 ///|
 /// UNIQUE_term
 fn step_124() -> Unit raise {
-  unique_term_c.set(@parser.parse_term("(UNIQUE []              = T) /\\\n   (UNIQUE (CONS (h:'a) t) = ((~(MEMBER h t)) /\\ UNIQUE t))"))
+  unique_term_c.set(@parser.parse_term("(UNIQUE []              = T) /\\\n   (UNIQUE (CONS (h:A) t) = ((~(MEMBER h t)) /\\ UNIQUE t))"))
 }
 
 ///|

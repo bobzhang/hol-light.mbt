@@ -74,6 +74,17 @@ TYPE_RENAMES = {
     'Unity/mk_ensures.ml': {"'a": 'A'},
     'Unity/mk_leadsto.ml': {"'a": 'A'},
     'Unity/mk_comp_unity.ml': {"'a": 'A'},
+    'Unity/mk_unity_prog.ml': {"'a": 'A', "'b": 'B', "'i": 'I', "'loc": 'Loc', "'sta": 'Sta',
+                               "'state": 'State', "'t": 'T', "'val": 'Val'},
+}
+# Type variables a file builds in code, adapted by hand before the rename.
+TYPE_PATCHES = {
+    'Unity/mk_unity_prog.ml': [
+        ('let VAR_TP  = (fun s -> mk_vartype("\'"^s));;', 'let VAR_TP  = mk_vartype;;'),
+        ('let LOC = VAR_TP"loc";;', 'let LOC = VAR_TP"Loc";;'),
+        ('let VAL = VAR_TP"val";;', 'let VAL = VAR_TP"Val";;'),
+        ('let t   = mk_vartype"\'t";;', 'let t   = mk_vartype"T";;'),
+    ],
 }
 
 
@@ -128,13 +139,20 @@ def type_annotation_end(q, i):
             return i
 
 
-def rename_in_quotation(q, renames):
-    out, i = [], 0
+def annotation_spans(q):
+    i = 0
     while (k := q.find(':', i)) >= 0:
         end = type_annotation_end(q, k + 1)
-        out.append(q[i:k + 1])
-        out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[k + 1:end]))
-        i = end if end > k + 1 else k + 1
+        yield k + 1, end
+        i = max(end, k + 1)
+
+
+def rename_in_quotation(q, renames):
+    out, i = [], 0
+    for start, end in annotation_spans(q):
+        out.append(q[i:start])
+        out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[start:end]))
+        i = end
     out.append(q[i:])
     return ''.join(out)
 
@@ -196,18 +214,28 @@ def ocaml_segments(text):
     return out
 
 
-def rename_type_variables(text, renames):
+def rename_type_variables(text, renames, patches=()):
     """`text` (OCaml) with the type variables `renames` maps renamed in the
     type annotations of its quotations. Any other occurrence of an old name
     outside comments, in a quotation's term or in OCaml code or strings
-    (`mk_vartype "'a"`), fails: those need adapting by hand."""
+    (`mk_vartype "'a"`), fails: those need adapting by hand, in `patches`
+    (pairs of an upstream text, which must occur once, and its replacement),
+    applied after checking that the new names are unused."""
     def occurs(name, pieces):
         return any(re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", piece)
                    for kind, piece in pieces if kind != 'comment')
     segments = ocaml_segments(text)
+    types = [(kind, piece) for kind, piece in segments if kind in ('code', 'string')] + [
+        ('annotation', piece[start:end]) for kind, piece in segments if kind == 'quotation'
+        for start, end in annotation_spans(piece)]
     for new in renames.values():
-        # a new name already in use would merge two type variables
-        assert not occurs(new, segments), f'{new} is already used'
+        # a new name already used for a type would merge two type variables
+        # (terms have names of their own: T, truth, is no type)
+        assert not occurs(new, types), f'{new} is already used'
+    for old, new in patches:
+        assert text.count(old) == 1, f'patch target changed: {old}'
+        text = text.replace(old, new)
+    segments = ocaml_segments(text)
     segments = [(kind, rename_in_quotation(piece, renames) if kind == 'quotation' else piece)
                 for kind, piece in segments]
     for old in renames:
@@ -251,7 +279,7 @@ def prepare():
         copy = ref / renamed_copy(path)
         copy.parent.mkdir(parents=True, exist_ok=True)
         copy.write_text(rename_type_variables(
-            (root / '.repos/hol-light' / path).read_text(), renames))
+            (root / '.repos/hol-light' / path).read_text(), renames, TYPE_PATCHES.get(path, ())))
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))
