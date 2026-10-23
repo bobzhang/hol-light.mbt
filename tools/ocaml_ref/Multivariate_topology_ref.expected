@@ -45962,7 +45962,7 @@ Multivariate/topology quotations (10460):
   (open : ((Cart[Real, N]) -> Bool) -> Bool)((UNIV : (Cart[Real, N]) -> Bool))
   \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, open(s) && open(t) \226\134\146 open(INTER(s, t))
   (\226\136\128 s : (Cart[Real, _]) -> Bool, IN(s, (f : ((Cart[Real, _]) -> Bool) -> Bool)) \226\134\146 open(s)) \226\134\146 open(UNIONS(f))
-  open(UNIONS {{x | Q (a:A) (x:real^N)} | P a})
+  open(UNIONS({{(x : Cart[Real, N]) | (Q : (A, Cart[Real, N]) -> Bool)((a : A), x)} | (P : (A) -> Bool)(a)}))
   \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A, Cart[Real, N]) -> Bool, (\226\136\128 a : A, P(a) \226\134\146 open({(x : Cart[Real, N]) | Q(a, x)})) \226\134\146 open({(x : Cart[Real, N]) | \226\136\131 a : A, P(a) && Q(a, x)})
   (x : A) => true
   \226\136\128 Q : (A, Cart[Real, N]) -> Bool, (\226\136\128 a : A, open({(x : Cart[Real, N]) | Q(a, x)})) \226\134\146 open({(x : Cart[Real, N]) | \226\136\131 a : A, Q(a, x)})
@@ -45985,7 +45985,7 @@ Multivariate/topology quotations (10460):
   \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 t : (Cart[Real, _]) -> Bool, closed(s) && closed(t) \226\134\146 closed(INTER(s, t))
   (f : ((Cart[Real, N]) -> Bool) -> Bool) == {}
   \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 closed(s)) \226\134\146 closed(INTERS(f))
-  closed(INTERS {{x | Q (a:A) (x:real^N)} | P a})
+  closed(INTERS({{(x : Cart[Real, N]) | (Q : (A, Cart[Real, N]) -> Bool)((a : A), x)} | (P : (A) -> Bool)(a)}))
   \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A, Cart[Real, N]) -> Bool, (\226\136\128 a : A, P(a) \226\134\146 closed({(x : Cart[Real, N]) | Q(a, x)})) \226\134\146 closed({(x : Cart[Real, N]) | \226\136\128 a : A, P(a) \226\134\146 Q(a, x)})
   (x : A) => true
   \226\136\128 Q : (A, Cart[Real, N]) -> Bool, (\226\136\128 a : A, closed({(x : Cart[Real, N]) | Q(a, x)})) \226\134\146 closed({(x : Cart[Real, N]) | \226\136\128 a : A, Q(a, x)})
@@ -46677,9 +46677,9 @@ Multivariate/topology quotations (10460):
   \226\136\128 q : Bool, (p : Bool) && q \226\134\146 p
   \226\136\128 s : (Cart[Real, N]) -> Bool, connected(frontier(s)) \226\134\146 connected(closure(s))
   (at : (Cart[Real, _]) -> Net[Cart[Real, _]])((a : Cart[Real, _])) == atpointof(euclidean, a)
-  at_infinity = mk_net({{x | b <= norm x} | b IN (:real)},{})
-  at_posinfinity = mk_net({{x | a <= x} | a IN (:real)},{})
-  at_neginfinity = mk_net({{x | x <= a} | a IN (:real)},{})
+  (at_infinity : Net[Cart[Real, _]]) == mk_net(({{(x : Cart[Real, _]) | (b : Real) <= norm(x)} | IN(b, UNIV)}, {}))
+  (at_posinfinity : Net[Real]) == mk_net(({{(x : Real) | (a : Real) <= x} | IN(a, UNIV)}, {}))
+  (at_neginfinity : Net[Real]) == mk_net(({{(x : Real) | x <= (a : Real)} | IN(a, UNIV)}, {}))
   (in_direction : (Cart[Real, _], Cart[Real, _]) -> Net[Cart[Real, _]])((a : Cart[Real, _]), (v : Cart[Real, _])) == within(at(a), {(b : Cart[Real, _]) | \226\136\131 c : Real, real_of_num(0) <= c && b - a == op_pct(c, v)})
   \226\136\128 a : Cart[Real, N], netfilter(at(a)) == {(u : (Cart[Real, N]) -> Bool) | open(u) && IN(a, u)}
   \226\136\128 a : Cart[Real, _], netlimit(at(a)) == a
@@ -46687,15 +46687,15 @@ Multivariate/topology quotations (10460):
   max((b1 : Real), (b2 : Real))
   (b2 : Real)
   (b1 : Real)
-  netfilter at_infinity = {{x:real^N | b <= norm x} | b IN (:real)} /\\\n   netlimits at_infinity = ({}:real^N->bool)
+  (netfilter : (Net[Cart[Real, N]], (Cart[Real, N]) -> Bool) -> Bool)((at_infinity : Net[Cart[Real, N]])) == {{(x : Cart[Real, N]) | (b : Real) <= (norm : (Cart[Real, N]) -> Real)(x)} | (IN : (Real, (Real) -> Bool) -> Bool)(b, (UNIV : (Real) -> Bool))} && (netlimits : (Net[Cart[Real, N]], Cart[Real, N]) -> Bool)((at_infinity : Net[Cart[Real, N]])) == ({} : (Cart[Real, N]) -> Bool)
   max((b1 : Real), (b2 : Real))
   (b2 : Real)
   (b1 : Real)
-  netfilter at_posinfinity = {{x | a <= x} | a IN (:real)} /\\\n   netlimits at_posinfinity = {}
+  netfilter(at_posinfinity) == {{(x : Real) | (a : Real) <= x} | IN(a, UNIV)} && netlimits(at_posinfinity) == {}
   min((b1 : Real), (b2 : Real))
   (b2 : Real)
   (b1 : Real)
-  netfilter at_neginfinity = {{x | x <= a} | a IN (:real)} /\\\n   netlimits at_neginfinity = {}
+  netfilter(at_neginfinity) == {{(x : Real) | x <= (a : Real)} | IN(a, UNIV)} && netlimits(at_neginfinity) == {}
   \226\136\128 x : Cart[Real, N], within(at(x), UNIV) == at(x)
   \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 p : (Cart[Real, M]) -> Bool, eventually(p, within(at(a), s)) == (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 x : Cart[Real, M], IN(x, s) && real_of_num(0) < distance((x, a)) && distance((x, a)) < d \226\134\146 p(x)))
   ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (c \226\134\146 a && b \226\134\146 d)
@@ -48429,9 +48429,9 @@ Multivariate/topology quotations (10460):
   (x : Cart[Real, N])
   (c : Real)
   \226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 open({op_pct((c : Real), (x : Cart[Real, N])) | real_of_num(0) < c && IN(x, s)})
-  {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> x$i < b$i} =\n    INTERS{{x | x$i < (b:real^N)$i} | i IN 1..dimindex(:N)}
+  {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) < (op_dollar : (Cart[Real, N], Num) -> Real)((b : Cart[Real, N]), i)} == (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({{(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, (i : Num)) < (op_dollar : (Cart[Real, N], Num) -> Real)(b, i)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})
   \226\136\128 b : Cart[Real, N], (open : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(b, i)})
-  {x:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> a$i < x$i} =\n    INTERS{{x | (a:real^N)$i < x$i} | i IN 1..dimindex(:N)}
+  {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i) < (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)} == (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({{(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(a, (i : Num)) < (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})
   \226\136\128 a : Cart[Real, N], (open : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)})
   (vec : (Num) -> Cart[Real, N])(0)
   (open : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 real_of_num(0) < (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)})
@@ -48747,7 +48747,7 @@ Multivariate/topology quotations (10460):
   (a : Cart[Real, N])
   (a : Cart[Real, N])
   (x : Cart[Real, M])
-  open_in (subtopology euclidean s)\n      (INTERS {{x | x IN s /\\\n          ~((f:real^M->real^N->bool) x INTER t INTER ball(a,e / &2) = {})} |\n     a IN c})
+  open_in(subtopology(euclidean, (s : (Cart[Real, M]) -> Bool)), INTERS({{(x : Cart[Real, M]) | IN(x, s) && !(INTER((f : (Cart[Real, M], Cart[Real, N]) -> Bool)(x), INTER((t : (Cart[Real, N]) -> Bool), ball(((a : Cart[Real, N]), (e : Real) / real_of_num(2))))) == {})} | IN(a, (c : (Cart[Real, N]) -> Bool))}))
   SUBSET(closure((s : (Cart[Real, _]) -> Bool)), (t : (Cart[Real, _]) -> Bool)) \226\134\146 SUBSET(s, t)
   (c : (Cart[Real, N]) -> Bool)
   ((p : Bool) && (q : Bool) && (r : Bool)) == (q && p && r)
@@ -48907,11 +48907,11 @@ Multivariate/topology quotations (10460):
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], compact(s) \226\134\146 compact(connected_component(s, a))
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 c : (Cart[Real, N]) -> Bool, compact(s) && IN(c, components(s)) \226\134\146 compact(c)
   (s : (Cart[Real, M]) -> Bool)
-  {x | x IN s /\\ (f:real^M->real^N) x IN t} =\n    UNIONS {{x | x IN c /\\ f x IN t} | c IN components s}
+  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (t : (Cart[Real, N]) -> Bool))} == UNIONS({{(x : Cart[Real, M]) | IN(x, (c : (Cart[Real, M]) -> Bool)) && IN(f(x), t)} | IN(c, components(s))})
   (t : (Cart[Real, N]) -> Bool)
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 open_in(subtopology(euclidean, s), c) && continuous_on(f, c)) \226\134\146 continuous_on(f, s)
   (s : (Cart[Real, M]) -> Bool)
-  {x | x IN s /\\ (f:real^M->real^N) x IN t} =\n    UNIONS {{x | x IN c /\\ f x IN t} | c IN components s}
+  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (t : (Cart[Real, N]) -> Bool))} == UNIONS({{(x : Cart[Real, M]) | IN(x, (c : (Cart[Real, M]) -> Bool)) && IN(f(x), t)} | IN(c, components(s))})
   (t : (Cart[Real, N]) -> Bool)
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, FINITE(components(s)) && (\226\136\128 c : (Cart[Real, M]) -> Bool, IN(c, components(s)) \226\134\146 continuous_on(f, c)) \226\134\146 continuous_on(f, s)
   \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 c : (Cart[Real, _]) -> Bool, \226\136\128 c' : (Cart[Real, _]) -> Bool, IN(c, components(s)) && IN(c', components(s)) \226\134\146 (INTER(c, c') == {}) == !(c == c')
@@ -50793,7 +50793,7 @@ Multivariate/topology quotations (10460):
   (d : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
   \226\136\128 d : Num, (subspace : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, d < i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == real_of_num(0)})
   \226\136\128 i : Num, (d : Num) < i \226\134\146 1 <= i
-  {x:real^N | forall i. d < i /\\ i <= dimindex(:N) ==> x$i = &0} =\n    INTERS {{x | basis i dot x = &0} | d < i /\\ i <= dimindex(:N)}
+  {(x : Cart[Real, N]) | \226\136\128 i : Num, (d : Num) < i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == real_of_num(0)} == (INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({{(x : Cart[Real, N]) | (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((basis : (Num) -> Cart[Real, N])((i : Num)), x) == real_of_num(0)} | d < i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))})
   \226\136\128 d : Num, (closed : ((Cart[Real, N]) -> Bool) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, d < i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) == real_of_num(0)})
   1 <= SUC((d : Num))
   (x : Cart[Real, N]) == x - op_pct(op_dollar(x, SUC((d : Num))), basis(SUC(d))) + op_pct(op_dollar(x, SUC(d)), basis(SUC(d)))
@@ -53386,7 +53386,7 @@ Multivariate/topology quotations (10460):
   !(INTER((s : (_) -> Bool), (t : (_) -> Bool)) == {}) == (\226\136\131 x : _, IN(x, t) && IN(x, s))
   {(x : Cart[Real, N]) | IN(x, (k : (Cart[Real, N]) -> Bool)) && !(INTER(ball((x, (e : Real) / real_of_num(4))), (t : (Cart[Real, N]) -> Bool)) == {})}
   (t : (Cart[Real, N]) -> Bool)
-  {s INTER {x + y:real^N | x IN c /\\ y IN ball(vec 0,e / &4)} | c SUBSET k}\n    DELETE {}
+  DELETE({INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (c : (Cart[Real, N]) -> Bool)) && IN(y, ball((vec(0), (e : Real) / real_of_num(4))))}) | SUBSET(c, (k : (Cart[Real, N]) -> Bool))}, {})
   (k : (Cart[Real, N]) -> Bool)
   (real_of_num(0) < (e : Real) / real_of_num(4)) == (real_of_num(0) < e)
   (e : Real) / real_of_num(4)
@@ -53419,7 +53419,7 @@ Multivariate/topology quotations (10460):
   (p : Num)
   (u : (Cart[Real, N]) -> Bool)
   op_dot_dot(0, (m : Num))
-  INFINITE\n        (UNIONS\n          {{i | hausdist (f m,f i) < inv(&2 pow n) /\\ m < i /\\\n                 hausdist((f:num->(real^N->bool)) i,u) < inv(&2 pow (n + 2))}\n           | u IN k})
+  INFINITE(UNIONS({{(i : Num) | hausdist(((f : (Num, Cart[Real, N]) -> Bool)((m : Num)), f(i))) < inv(pow(real_of_num(2), (n : Num))) && m < i && hausdist((f(i), (u : (Cart[Real, N]) -> Bool))) < inv(pow(real_of_num(2), n + 2))} | IN(u, (k : ((Cart[Real, N]) -> Bool) -> Bool))}))
   (k : ((Cart[Real, N]) -> Bool) -> Bool)
   inv(pow(real_of_num(2), (n : Num) + 2))
   (c : (Cart[Real, N]) -> Bool)
@@ -53429,7 +53429,7 @@ Multivariate/topology quotations (10460):
   (n : Num)
   (u : (Cart[Real, N]) -> Bool)
   (s : (Num) -> Bool) == UNIV \226\134\146 !FINITE(s)
-  UNIONS\n         {{i | hausdist((f:num->(real^N->bool)) i,u) < &1 / &2} | u IN k} =\n        (:num)
+  UNIONS({{(i : Num) | hausdist(((f : (Num, Cart[Real, N]) -> Bool)(i), (u : (Cart[Real, N]) -> Bool))) < real_of_num(1) / real_of_num(2)} | IN(u, (k : ((Cart[Real, N]) -> Bool) -> Bool))}) == UNIV
   (k : ((Cart[Real, N]) -> Bool) -> Bool)
   real_of_num(1) / real_of_num(2)
   (c : (Cart[Real, N]) -> Bool)
@@ -54708,7 +54708,7 @@ Multivariate/topology quotations (10460):
   inv(real_of_num((n : Num)) + real_of_num(1))
   (n : Num)
   (a : Cart[Real, M])
-  {a | ?l. ((f:real^M->real^N) --> l) (at a within s)} =\n    INTERS {UNIONS {u | open u /\\\n                        ?b. forall x y. x IN (s INTER u) DELETE b /\\\n                                  y IN (s INTER u) DELETE b\n                                  ==> dist(f x,f y) < inv(&n + &1)} |\n            n IN (:num)}
+  {(a : Cart[Real, M]) | \226\136\131 l : Cart[Real, N], op_minus_minus_gt((f : (Cart[Real, M]) -> Cart[Real, N]), l, within(at(a), (s : (Cart[Real, M]) -> Bool)))} == INTERS({UNIONS({(u : (Cart[Real, M]) -> Bool) | open(u) && (\226\136\131 b : Cart[Real, M], \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, DELETE(INTER(s, u), b)) && IN(y, DELETE(INTER(s, u), b)) \226\134\146 distance((f(x), f(y))) < inv(real_of_num((n : Num)) + real_of_num(1)))}) | IN(n, UNIV)})
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, gdelta({(x : Cart[Real, M]) | \226\136\131 l : Cart[Real, N], op_minus_minus_gt(f, l, within(at(x), s))})
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], gdelta({(x : Cart[Real, M]) | \226\136\131 l : Cart[Real, N], op_minus_minus_gt(f, l, at(x))})
   (x : Cart[Real, M])
@@ -54722,7 +54722,7 @@ Multivariate/topology quotations (10460):
   (e : Real)
   IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
   (x : Cart[Real, M])
-  INTERS {UNIONS {u | open u /\\\n                        forall x y. x IN s INTER u /\\ y IN s INTER u\n                              ==> norm((f:real^M->real^N) x - f y)\n                                  < inv(&n + &1)} |\n            n IN (:num)}
+  INTERS({UNIONS({(u : (Cart[Real, M]) -> Bool) | open(u) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, INTER((s : (Cart[Real, M]) -> Bool), u)) && IN(y, INTER(s, u)) \226\134\146 norm((f : (Cart[Real, M]) -> Cart[Real, N])(x) - f(y)) < inv(real_of_num((n : Num)) + real_of_num(1)))}) | IN(n, UNIV)})
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\131 t : (Cart[Real, M]) -> Bool, gdelta(t) && {(x : Cart[Real, M]) | IN(x, s) && continuous(f, within(at(x), s))} == INTER(s, t)
   (z : Cart[Real, M])
   (z : Cart[Real, M])
@@ -54862,7 +54862,7 @@ Multivariate/topology quotations (10460):
   \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 closed(s) || open(s)) && (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, IN(s, f) && IN(t, f) \226\134\146 SUBSET(s, t) || SUBSET(t, s)) \226\134\146 fsigma(UNIONS(f))
   (g : ((Cart[Real, N]) -> Bool) -> Bool)
   \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 closed(s) || open(s)) && (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, IN(s, f) && IN(t, f) \226\134\146 SUBSET(s, t) || SUBSET(t, s)) \226\134\146 gdelta(INTERS(f))
-  {x,y | ?l. l IN p /\\ l x y} = UNIONS {{x,y | l x y} | l IN p}
+  {((x : _), (y : _)) | \226\136\131 l : (_, _) -> Bool, IN(l, (p : ((_, _) -> Bool) -> Bool)) && l(x, y)} == UNIONS({{((x : _), (y : _)) | (l : (_, _) -> Bool)(x, y)} | IN(l, p)})
   woset((w : (A, A) -> Bool))
   (c : A)
   (a : A)
@@ -54931,7 +54931,7 @@ Multivariate/topology quotations (10460):
   \226\136\128 s : (Cart[Real, N]) -> Bool, locally(compact, s) \226\134\146 borel(s)
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, t), s) && borel(t) \226\134\146 borel(s)
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, closed_in(subtopology(euclidean, t), s) && borel(t) \226\134\146 borel(s)
-  {x | x IN s /\\ f x IN UNIONS u} =\n     UNIONS {{x | x IN s /\\ f x IN t} | t IN u}
+  {(x : _) | IN(x, (s : (_) -> Bool)) && IN((f : (_) -> _)(x), UNIONS((u : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN(x, s) && IN(f(x), (t : (_) -> Bool))} | IN(t, u)})
   {(x : _) | IN(x, (s : (_) -> Bool)) && IN((f : (_) -> _)(x), DIFF(UNIV, (t : (_) -> Bool)))} == DIFF(s, {(x : _) | IN(x, s) && IN(f(x), t)})
   (s : (Cart[Real, M]) -> Bool)
   (t : (Cart[Real, N]) -> Bool)
@@ -55342,7 +55342,7 @@ Multivariate/topology quotations (10460):
   SUC(SUC((n : Num))) == SUC(n) + 1
   (e : Real)
   (N : Num)
-  UNIONS {INTERS {c n e | N <= n} |\n             N IN (:num) /\\\n             e IN {r | r IN rational /\\ &0 < r}}:real^M->bool
+  UNIONS({INTERS({(c : (Num, Real, Cart[Real, M]) -> Bool)((n : Num), (e : Real)) | (N : Num) <= n}) | IN(N, UNIV) && IN(e, {(r : Real) | IN(r, rational) && real_of_num(0) < r})})
   (c : (Num, Real, Cart[Real, M]) -> Bool)
   o(baire((k : Num), UNIV), indicator, DIFF(UNIV, (s : (Cart[Real, N]) -> Bool))) == o(baire(k, UNIV), indicator, s)
   (\226\136\131 s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(DIFF(UNIV, s))) == (\226\136\131 s : (_) -> Bool, P(s))
@@ -55648,7 +55648,7 @@ Multivariate/topology quotations (10460):
   (n : Num) + 1 <= SUC(n) + 1
   (o : (((Cart[Real, M]) -> Cart[Real, Unit]) -> Bool, ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Cart[Real, Unit], (Cart[Real, M]) -> Bool) -> Bool)((baire : (Num, (Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, Unit]) -> Bool)((n : Num) + 1, (UNIV : (Cart[Real, M]) -> Bool)), (indicator : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Cart[Real, Unit]))
   (m : Num)
-  INTERS (IMAGE u (:num)) INTER\n        (UNIONS {INTERS\n         {INTERS {(v:real->num->num->real^M->bool) q m n | x <= m}\n           | n | x <= n} |  x IN (:num)})
+  INTER(INTERS(IMAGE((u : (Num, Cart[Real, M]) -> Bool), UNIV)), UNIONS({INTERS({INTERS({(v : (Real, Num, Num, Cart[Real, M]) -> Bool)((q : Real), (m : Num), n) | (x : Num) <= m}) | n : Num | x <= n}) | IN(x, UNIV)}))
   \226\136\128 y : (_) -> Bool, INTERSECTION_OF(COUNTABLE, (P : ((_) -> Bool) -> Bool), y) && (x : (_) -> Bool) == y \226\134\146 INTERSECTION_OF(COUNTABLE, P, x)
   (v : (Real, Num, Num, Cart[Real, M]) -> Bool)
   (cball : ((Cart[Real, N], Real), Cart[Real, N]) -> Bool)(((vec : (Num) -> Cart[Real, N])(0), (q : Real)))
@@ -55679,7 +55679,7 @@ Multivariate/topology quotations (10460):
   \226\136\128 n : Num, IN((x : Cart[Real, M]), (u : (Num, Cart[Real, M]) -> Bool)(n))
   (x : Cart[Real, M])
   norm((x : Cart[Real, N]) - (y : Cart[Real, N])) == distance((x, y))
-  v = INTERS\n           {UNIONS {INTERS {\n                  INTERS {{x:real^M | x IN INTERS {u n | n IN (:num)} /\\\n                                 h m x - h n x IN cball(vec 0:real^N,e)} |m|\n                                     N <= m} |n|\n                             N <= n} |\n                    N IN (:num)} |\n            e IN {q | q IN rational /\\ &0 < q}}
+  (v : (Cart[Real, M]) -> Bool) == INTERS({UNIONS({INTERS({INTERS({{(x : Cart[Real, M]) | IN(x, INTERS({(u : (Num, Cart[Real, M]) -> Bool)((n : Num)) | IN(n, UNIV)})) && IN((h : (Num, Cart[Real, M]) -> Cart[Real, N])(m, x) - h(n, x), cball((vec(0), (e : Real))))} | m : Num | (N : Num) <= m}) | n : Num | N <= n}) | IN(N, UNIV)}) | IN(e, {(q : Real) | IN(q, rational) && real_of_num(0) < q})})
   (v : (Cart[Real, M]) -> Bool)
   (v : (Cart[Real, M]) -> Bool) == {(x : Cart[Real, M]) | IN(x, INTERS({(u : (Num, Cart[Real, M]) -> Bool)((n : Num)) | IN(n, UNIV)})) && (\226\136\131 l : Cart[Real, N], op_minus_minus_gt((n : Num) => (h : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x), l, sequentially))}
   (h : (Num, Cart[Real, M]) -> Cart[Real, N])
@@ -55772,7 +55772,7 @@ Multivariate/topology quotations (10460):
   indicator({(x : Cart[Real, N]) | IN(x, (v : (Cart[Real, N]) -> Bool)) && IN((g' : (Cart[Real, N]) -> Cart[Real, M])(x), (c : (Cart[Real, M]) -> Bool))}) == ((x : Cart[Real, N]) => if IN(x, v) { indicator({(x : Cart[Real, N]) | IN(x, v) && IN(g'(x), c)}, x) } else { vec(0) })
   (c : (Cart[Real, M]) -> Bool)
   gdelta((v : (Cart[Real, N]) -> Bool))
-  {x | x IN v /\\ (g':real^N->real^M) x IN INTERS ss} =\n      v INTER INTERS {{x | x IN v /\\ (g':real^N->real^M) x IN w} | w IN ss}
+  {(x : Cart[Real, N]) | IN(x, (v : (Cart[Real, N]) -> Bool)) && IN((g' : (Cart[Real, N]) -> Cart[Real, M])(x), INTERS((ss : ((Cart[Real, M]) -> Bool) -> Bool)))} == INTER(v, INTERS({{(x : Cart[Real, N]) | IN(x, v) && IN(g'(x), (w : (Cart[Real, M]) -> Bool))} | IN(w, ss)}))
   (ss : ((Cart[Real, M]) -> Bool) -> Bool)
   (t : (Cart[Real, N]) -> Bool) == {(x : Cart[Real, N]) | IN(x, (v : (Cart[Real, N]) -> Bool)) && IN((g' : (Cart[Real, N]) -> Cart[Real, M])(x), (s : (Cart[Real, M]) -> Bool))}
   (g' : (Cart[Real, N]) -> Cart[Real, M])
@@ -55944,10 +55944,10 @@ Multivariate/topology quotations (10460):
   (s : (Cart[Real, M]) -> Bool)
   (u : (Cart[Real, N]) -> Bool)
   ((p : Bool) \226\134\146 (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (q \226\134\146 p && r \226\134\146 s)
-  {x | x IN s /\\ (f:real^M->real^N) x IN INTERS u} =\n        INTERS {{x | x IN s /\\ f x IN t} | t IN u}
+  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), INTERS((u : ((Cart[Real, N]) -> Bool) -> Bool)))} == INTERS({{(x : Cart[Real, M]) | IN(x, s) && IN(f(x), (t : (Cart[Real, N]) -> Bool))} | IN(t, u)})
   {(x : _) | IN(x, (s : (_) -> Bool)) && IN((f : (_) -> _)(x), UNIV)} == s
   (u : ((Cart[Real, N]) -> Bool) -> Bool) == {}
-  {x | x IN s /\\ (f:real^M->real^N) x IN UNIONS u} =\n        UNIONS {{x | x IN s /\\ f x IN t} | t IN u}
+  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), UNIONS((u : ((Cart[Real, N]) -> Bool) -> Bool)))} == UNIONS({{(x : Cart[Real, M]) | IN(x, s) && IN(f(x), (t : (Cart[Real, N]) -> Bool))} | IN(t, u)})
   (u : ((Cart[Real, N]) -> Bool) -> Bool)
   (u : (Cart[Real, N]) -> Bool)
   ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (r \226\134\146 p && q \226\134\146 s)
@@ -56031,7 +56031,7 @@ Multivariate/topology quotations (10460):
   \226\136\128 n : Num, IN((x : Cart[Real, M]), (u : (Num, Cart[Real, M]) -> Bool)(n))
   (x : Cart[Real, M])
   norm((x : Cart[Real, N]) - (y : Cart[Real, N])) == distance((x, y))
-  v = INTERS\n             {UNIONS {INTERS {\n                    INTERS {{x:real^M | x IN INTERS {u n | n IN (:num)} /\\\n                                   h m x - h n x IN ball(vec 0:real^N,e)} |m|\n                                       N <= m} |n|\n                               N <= n} |\n                      N IN (:num)} |\n              e IN {q | q IN rational /\\ &0 < q}}
+  (v : (Cart[Real, M]) -> Bool) == INTERS({UNIONS({INTERS({INTERS({{(x : Cart[Real, M]) | IN(x, INTERS({(u : (Num, Cart[Real, M]) -> Bool)((n : Num)) | IN(n, UNIV)})) && IN((h : (Num, Cart[Real, M]) -> Cart[Real, N])(m, x) - h(n, x), ball((vec(0), (e : Real))))} | m : Num | (N : Num) <= m}) | n : Num | N <= n}) | IN(N, UNIV)}) | IN(e, {(q : Real) | IN(q, rational) && real_of_num(0) < q})})
   (v : (Cart[Real, M]) -> Bool)
   (v : (Cart[Real, M]) -> Bool) == {(x : Cart[Real, M]) | IN(x, INTERS({(u : (Num, Cart[Real, M]) -> Bool)((n : Num)) | IN(n, UNIV)})) && (\226\136\131 l : Cart[Real, N], op_minus_minus_gt((n : Num) => (h : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x), l, sequentially))}
   (h : (Num, Cart[Real, M]) -> Cart[Real, N])
@@ -56236,7 +56236,7 @@ Multivariate/topology quotations (10460):
   (n : Num) == 0
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 n : Num, continuous_on(f, s) && fsigma(s) \226\134\146 borel({(y : Cart[Real, N]) | HAS_SIZE({(x : Cart[Real, M]) | IN(x, s) && f(x) == y}, n)})
   !((n : Num) == 0) \226\134\146 ((x : Num) == n) == (x <= n && !(x <= n - 1))
-  {y | FINITE {x | x IN s /\\ (f:real^M->real^N) x = y}} =\n    UNIONS {{y | {x | x IN s /\\ f x = y} HAS_SIZE n} | n IN (:num)}
+  {(y : Cart[Real, N]) | FINITE({(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == y})} == UNIONS({{(y : Cart[Real, N]) | HAS_SIZE({(x : Cart[Real, M]) | IN(x, s) && f(x) == y}, (n : Num))} | IN(n, UNIV)})
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, continuous_on(f, s) && fsigma(s) \226\134\146 borel({(y : Cart[Real, N]) | FINITE({(x : Cart[Real, M]) | IN(x, s) && f(x) == y})})
   {(x : _) | !(P : (_) -> Bool)(x)} == DIFF(UNIV, {(x : _) | P(x)})
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, continuous_on(f, s) && fsigma(s) \226\134\146 borel({(y : Cart[Real, N]) | INFINITE({(x : Cart[Real, M]) | IN(x, s) && f(x) == y})})
@@ -56328,7 +56328,7 @@ Multivariate/topology quotations (10460):
   (y : Cart[Real, M])
   IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
   (x : Cart[Real, M])
-  {x | x IN s /\\\n         forall y. y IN s /\\ (f:real^M->real^N) x = f y\n             ==> x = y \\/\n                 ?k. 1 <= k /\\ k <= dimindex(:M) /\\\n                     (forall i. 1 <= i /\\ i < k\n                          ==> x$i <= y$i) /\\\n                     x$k < y$k} =\n    s DIFF\n    UNIONS {{x | ?t. t IN s /\\\n                     pastecart t x IN\n                     ({z | z IN s PCROSS s /\\\n                           (f(fstcart z) - f(sndcart z)) IN {vec 0}} INTER\n                      UNIONS {{z | z IN s PCROSS s /\\\n                                   (sndcart z - fstcart z) IN\n                                   ({a | a$k >= inv(&n + &1)} INTER\n                                    INTERS {{a | a$i >= &0} | i IN 1..k-1})} |\n                              k IN 1..dimindex(:M)})} |\n            n IN (:num)}
+  {(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) && (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == f(y) \226\134\146 x == y || (\226\136\131 k : Num, 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && (\226\136\128 i : Num, 1 <= i && i < k \226\134\146 (op_dollar : (Cart[Real, M], Num) -> Real)(x, i) <= (op_dollar : (Cart[Real, M], Num) -> Real)(y, i)) && (op_dollar : (Cart[Real, M], Num) -> Real)(x, k) < (op_dollar : (Cart[Real, M], Num) -> Real)(y, k)))} == (DIFF : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(s, (UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | \226\136\131 t : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(t, s) && (IN : (Cart[Real, Finite_sum[M, M]], (Cart[Real, Finite_sum[M, M]]) -> Bool) -> Bool)((pastecart : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, Finite_sum[M, M]])(t, x), (INTER : ((Cart[Real, Finite_sum[M, M]]) -> Bool, (Cart[Real, Finite_sum[M, M]]) -> Bool, Cart[Real, Finite_sum[M, M]]) -> Bool)({(z : Cart[Real, Finite_sum[M, M]]) | (IN : (Cart[Real, Finite_sum[M, M]], (Cart[Real, Finite_sum[M, M]]) -> Bool) -> Bool)(z, (PCROSS : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[M, M]]) -> Bool)(s, s)) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f((fstcart : (Cart[Real, Finite_sum[M, M]]) -> Cart[Real, M])(z)) - f((sndcart : (Cart[Real, Finite_sum[M, M]]) -> Cart[Real, M])(z)), {(vec : (Num) -> Cart[Real, N])(0)})}, (UNIONS : (((Cart[Real, Finite_sum[M, M]]) -> Bool) -> Bool, Cart[Real, Finite_sum[M, M]]) -> Bool)({{(z : Cart[Real, Finite_sum[M, M]]) | (IN : (Cart[Real, Finite_sum[M, M]], (Cart[Real, Finite_sum[M, M]]) -> Bool) -> Bool)(z, (PCROSS : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[M, M]]) -> Bool)(s, s)) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)((sndcart : (Cart[Real, Finite_sum[M, M]]) -> Cart[Real, M])(z) - (fstcart : (Cart[Real, Finite_sum[M, M]]) -> Cart[Real, M])(z), (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)({(a : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(a, (k : Num)) >= inv(real_of_num((n : Num)) + real_of_num(1))}, (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(a : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(a, (i : Num)) >= real_of_num(0)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, k - 1))})))} | (IN : (Num, (Num) -> Bool) -> Bool)(k, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))))})))} | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))}))
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (continuous_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, s) && (compact : ((Cart[Real, M]) -> Bool) -> Bool)(s) \226\134\146 (gdelta : ((Cart[Real, M]) -> Bool) -> Bool)({(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) && f(x) == f(y) \226\134\146 x == y || (\226\136\131 k : Num, 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && (\226\136\128 i : Num, 1 <= i && i < k \226\134\146 (op_dollar : (Cart[Real, M], Num) -> Real)(x, i) <= (op_dollar : (Cart[Real, M], Num) -> Real)(y, i)) && (op_dollar : (Cart[Real, M], Num) -> Real)(x, k) < (op_dollar : (Cart[Real, M], Num) -> Real)(y, k)))})
   !((i : Num) == (j : Num)) \226\134\146 i < j || j < i
   (i : Num) == (j : Num)
@@ -56353,7 +56353,7 @@ Multivariate/topology quotations (10460):
   (x : Cart[Real, M])
   (y : Cart[Real, M])
   IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))
-  {x | x IN s /\\ (f:real^M->real^N) x IN {f z}} INTER\n       INTERS {{x | x$i = (y:real^M)$i} | i IN 1..m}
+  INTER({(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), {f((z : Cart[Real, M]))})}, INTERS({{(x : Cart[Real, M]) | op_dollar(x, (i : Num)) == op_dollar((y : Cart[Real, M]), i)} | IN(i, op_dot_dot(1, (m : Num)))}))
   (x : Cart[Real, M]) => op_dollar(x, SUC((m : Num)))
   (y : Cart[Real, M])
   SUC((n : Num)) <= (m : Num) \226\134\146 n <= m && n < m
@@ -56371,7 +56371,7 @@ Multivariate/topology quotations (10460):
   IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), UNIONS(IMAGE((d : (Num, Cart[Real, M]) -> Bool), UNIV)))
   (m : Num)
   (n : Num)
-  UNIONS {d n DIFF\n            UNIONS(IMAGE (\\m.\n               {x | x IN d n /\\ f(x) IN IMAGE (f:real^M->real^N) (d m)})\n               {m | m < n}) | n IN (:num)}
+  UNIONS({DIFF((d : (Num, Cart[Real, M]) -> Bool)((n : Num)), UNIONS(IMAGE((m : Num) => {(x : Cart[Real, M]) | IN(x, d(n)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), IMAGE(f, d(m)))}, {(m : Num) | m < n}))) | IN(n, UNIV)})
   (d : (Num, Cart[Real, M]) -> Bool)
   \226\136\128 n : Num, \226\136\131 t : (Cart[Real, M]) -> Bool, gdelta(t) && SUBSET(t, (c : (Num, Cart[Real, M]) -> Bool)(n)) && IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), t) == IMAGE(f, c(n)) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, t) && IN(y, t) && f(x) == f(y) \226\134\146 x == y)
   (c : (Num, Cart[Real, M]) -> Bool)
