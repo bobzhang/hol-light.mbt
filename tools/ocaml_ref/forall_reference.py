@@ -63,11 +63,91 @@ def adapt_output(lines):
         yield line
 
 
+# Type variables the port names differently from upstream: type variables are
+# capitalized, as MoonBit's type parameters are (issue #140). Each file listed
+# is loaded from a copy with these names replaced in its quotations' type
+# annotations (rename_type_variables).
+TYPE_RENAMES = {
+    '100/friendship.ml': {'person': 'Person'},
+}
+
+
+def renamed_copy(path):
+    return '_build/renamed/' + path
+
+
 def reference_source(source):
     """Route core loads to the temporary copies without editing upstream."""
+    for path in TYPE_RENAMES:
+        source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
     return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
         '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
         '#use "parser.ml"', '#use "_build/parser_forall.ml"')
+
+
+HOL_NAME = re.compile(r"[A-Za-z0-9_']+")
+
+
+def type_annotation_end(q, i):
+    """End of the type annotation starting at q[i] (just after a `:`): atoms,
+    parenthesized lists and postfix constructors, joined by `->`, `#`, `+`
+    or `^`. It may stop early, never late, so a name it misses fails the
+    copy rather than being renamed in a term."""
+    while True:
+        while i < len(q) and q[i] == ' ':
+            i += 1
+        if q.startswith('(', i):
+            depth = 0
+            for j in range(i, len(q)):
+                depth += {'(': 1, ')': -1}.get(q[j], 0)
+                if depth == 0:
+                    break
+            else:
+                return i
+            i = j + 1
+        else:
+            m = HOL_NAME.match(q, i)
+            if not m:
+                return i
+            i = m.end()
+        while m := HOL_NAME.match(q, i):  # postfix constructors: (A)list
+            i = m.end()
+        j = i
+        while j < len(q) and q[j] == ' ':
+            j += 1
+        for op in ('->', '#', '+', '^'):
+            if q.startswith(op, j):
+                i = j + len(op)
+                break
+        else:
+            return i
+
+
+def rename_in_quotation(q, renames):
+    out, i = [], 0
+    while (k := q.find(':', i)) >= 0:
+        end = type_annotation_end(q, k + 1)
+        out.append(q[i:k + 1])
+        out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[k + 1:end]))
+        i = end if end > k + 1 else k + 1
+    out.append(q[i:])
+    return ''.join(out)
+
+
+def rename_type_variables(text, renames):
+    """`text` (OCaml) with the type variables `renames` maps renamed in the
+    type annotations of its quotations. Any other occurrence of an old name,
+    in a quotation's term or in OCaml code (`mk_vartype "'a"`), fails: those
+    need adapting by hand."""
+    def occurs(name, text):
+        return re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", text)
+    for new in renames.values():
+        # a new name already in use would merge two type variables
+        assert not occurs(new, text), f'{new} is already used'
+    text = re.sub(r'`[^`]*`', lambda m: rename_in_quotation(m[0], renames), text)
+    for old in renames:
+        assert not occurs(old, text), f'{old} occurs outside a type annotation'
+    return text
 
 
 def prepare():
@@ -102,6 +182,11 @@ def prepare():
     alias = '  override_interface("forall",`(!):(A->bool)->bool`);\n'
     assert boolean.count(alias) == 1, 'upstream forall alias changed'
     (ref / '_build/bool_forall.ml').write_text(boolean.replace(alias, ''))
+    for path, renames in TYPE_RENAMES.items():
+        copy = ref / renamed_copy(path)
+        copy.parent.mkdir(parents=True, exist_ok=True)
+        copy.write_text(rename_type_variables(
+            (root / '.repos/hol-light' / path).read_text(), renames))
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))
