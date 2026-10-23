@@ -108,7 +108,7 @@ def reference_source(source):
 HOL_NAME = re.compile(r"[A-Za-z0-9_']+")
 
 
-def type_annotation_end(q, i):
+def type_annotation_end(q, i, variables=()):
     """End of the type annotation starting at q[i] (just after a `:`): atoms,
     parenthesized lists and postfix constructors, joined by `->`, `#`, `+`
     or `^`. It may stop early, never late, so a name it misses fails the
@@ -130,7 +130,9 @@ def type_annotation_end(q, i):
             if not m:
                 return i
             i = m.end()
-        while m := HOL_NAME.match(q, i):  # postfix constructors: (A)list
+        # postfix constructors, (A)list; a type variable is none, so one of
+        # `variables` there is a term (\x:(bool)'a. x binds 'a)
+        while (m := HOL_NAME.match(q, i)) and m[0] not in variables:
             i = m.end()
         j = i
         while j < len(q) and q[j] == ' ':
@@ -148,14 +150,15 @@ HOL_SYMBOL = "\\!@#$%^&*-+|<=>/?~.:"
 
 def annotation_colons(q):
     """Positions of the colons in quotation q that start a type annotation:
-    not inside a HOL string, nor part of a longer symbol such as `::`."""
+    not inside a HOL string, nor part of a longer symbol such as `::` or of
+    an identifier with an underscore tail (`_:`)."""
     i = 0
     while i < len(q):
         if q[i] == '"':
             i += 1
             while i < len(q) and q[i] != '"':
                 i += 2 if q[i] == '\\' else 1
-        elif q[i] == ':' and q[i - 1] not in HOL_SYMBOL and q[i + 1:i + 2] not in tuple(HOL_SYMBOL):
+        elif q[i] == ':' and q[i - 1] not in HOL_SYMBOL + '_' and q[i + 1:i + 2] not in tuple(HOL_SYMBOL):
             yield i
         i += 1
 
@@ -165,7 +168,7 @@ def rename_in_quotation(q, renames):
     for k in annotation_colons(q):
         if k < i:
             continue
-        end = type_annotation_end(q, k + 1)
+        end = type_annotation_end(q, k + 1, renames)
         out.append(q[i:k + 1])
         out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[k + 1:end]))
         i = end
