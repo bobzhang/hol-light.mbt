@@ -63,11 +63,34 @@ def adapt_output(lines):
         yield line
 
 
+# Type variables the port names differently from upstream: type variables are
+# capitalized, as MoonBit's type parameters are (issue #140). Each file listed
+# is loaded from a copy with these names replaced. They occur there only in
+# type positions, after `:` or `->`; any other occurrence fails the copy.
+TYPE_RENAMES = {
+    '100/friendship.ml': {'person': 'Person'},
+}
+
+
+def renamed_copy(path):
+    return '_build/renamed/' + path
+
+
 def reference_source(source):
     """Route core loads to the temporary copies without editing upstream."""
+    for path in TYPE_RENAMES:
+        source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
     return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
         '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
         '#use "parser.ml"', '#use "_build/parser_forall.ml"')
+
+
+def rename_type_variables(text, renames):
+    for old, new in renames.items():
+        text = re.sub(r'(->|:)(\s*)' + re.escape(old) + r'\b', r'\1\2' + new, text)
+        assert not re.search(r'\b' + re.escape(old) + r'\b', text), \
+            f'{old} occurs outside a type position'
+    return text
 
 
 def prepare():
@@ -102,6 +125,11 @@ def prepare():
     alias = '  override_interface("forall",`(!):(A->bool)->bool`);\n'
     assert boolean.count(alias) == 1, 'upstream forall alias changed'
     (ref / '_build/bool_forall.ml').write_text(boolean.replace(alias, ''))
+    for path, renames in TYPE_RENAMES.items():
+        copy = ref / renamed_copy(path)
+        copy.parent.mkdir(parents=True, exist_ok=True)
+        copy.write_text(rename_type_variables(
+            (root / '.repos/hol-light' / path).read_text(), renames))
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))

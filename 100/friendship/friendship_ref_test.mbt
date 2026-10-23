@@ -15755,14 +15755,14 @@ test "100/friendship matches 100/friendship.ml" {
       #|  (p : Num) == 0
       #|  forall r p x. FINITE(:A) /\\ prime p /\\ (forall x. ~(r x x))\n           ==> p divides CARD {x:num->A | cycle r p x}
       #|  (p : Num) - 2
-      #|  friend:person->person->bool
+      #|  friend:Person->Person->bool
       #|  (m : Num)
       #|  (N : Num)
       #|  3 <= (p : Num)
       #|  (N : Num)
       #|  (p : Num) == p - 2 + 2
       #|  (p : Num)
-      #|  friend:person->person->bool
+      #|  friend:Person->Person->bool
       #|  !((m : Num) == 0) \226\134\146 m - 1 + 1 == m
       #|  !((m : Num) == 0)
       #|  (m : Num) - 1
@@ -15770,9 +15770,9 @@ test "100/friendship matches 100/friendship.ml" {
       #|  divides(2, 1)
       #|  2 <= (p : Num) && !(p == 2) \226\134\146 3 <= p
       #|  3 <= (p : Num)
-      #|  CARD {x:num->person | path friend (p-2) x /\\ ~(x (p-2) = x 0)}
-      #|  CARD {x:num->person | path friend (p-2) x /\\ x (p-2) = x 0}
-      #|  CARD {x:num->person | cycle friend p x}
+      #|  CARD {x:num->Person | path friend (p-2) x /\\ ~(x (p-2) = x 0)}
+      #|  CARD {x:num->Person | path friend (p-2) x /\\ x (p-2) = x 0}
+      #|  CARD {x:num->Person | cycle friend p x}
       #|  (m : Num) - 1
       #|  \226\136\128 q : Num, \226\136\128 c : Num, \226\136\128 K1 : Num, \226\136\128 K2 : Num, divides((p : Num), q) && divides(p, c) && c == (q + 1) * K1 + K2 && K1 + K2 == ((q + 1) * q + 1) * (nep2 : Num) \226\134\146 divides(p, nep2)
       #|  (p : Num) - 2
@@ -15783,82 +15783,82 @@ test "100/friendship matches 100/friendship.ml" {
       #|  (p : Num)
       #|  !((m : Num) == 2)
       #|  (m : Num) - 1
-      #|  forall x:person. x = a \\/ x = b \\/ x = c
-      #|  z:person
-      #|  y:person
-      #|  x:person
-      #|  a:person
-      #|  forall p:person. {q:person | friend p q} HAS_SIZE 2
-      #|  a:person
-      #|  forall u:person. ?v:person. ~(v = u) /\\ ~friend u v
-      #|  c:person
-      #|  b:person
-      #|  a:person
-      #|  (:person) HAS_SIZE 3
+      #|  forall x:Person. x = a \\/ x = b \\/ x = c
+      #|  z:Person
+      #|  y:Person
+      #|  x:Person
+      #|  a:Person
+      #|  forall p:Person. {q:Person | friend p q} HAS_SIZE 2
+      #|  a:Person
+      #|  forall u:Person. ?v:Person. ~(v = u) /\\ ~friend u v
+      #|  c:Person
+      #|  b:Person
+      #|  a:Person
+      #|  (:Person) HAS_SIZE 3
       #|  !((m : Num) == 2)
       #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
       #|  (m : Num) - 1 - 1 == m - 2
-      #|  {q:person | friend q (b:person)} = {q | friend b q}
-      #|  x:person
-      #|  (mutualfriend:person->person->person) a b
-      #|  b:person
-      #|  a:person
-      #|  x:person
-      #|  u (b:person) =\n        {q:person | friend q b} DELETE a DELETE (mutualfriend a b)
-      #|  (b:person) IN t
-      #|  UNIONS {u b :person->bool | (b:person) IN t} HAS_SIZE m * (m - 2)
-      #|  m + 1 = CARD((a:person) INSERT t)
+      #|  {q:Person | friend q (b:Person)} = {q | friend b q}
+      #|  x:Person
+      #|  (mutualfriend:Person->Person->Person) a b
+      #|  b:Person
+      #|  a:Person
+      #|  x:Person
+      #|  u (b:Person) =\n        {q:Person | friend q b} DELETE a DELETE (mutualfriend a b)
+      #|  (b:Person) IN t
+      #|  UNIONS {u b :Person->bool | (b:Person) IN t} HAS_SIZE m * (m - 2)
+      #|  m + 1 = CARD((a:Person) INSERT t)
       #|  !((m : Num) == 1)
       #|  !((m : Num) == 0)
       #|  (m : Num) == 1
       #|  EVEN((m : Num))
       #|  ((a : Num) + 1 == (m : Num) + 1 + m * (c : Num)) == (a == m * (1 + c))
       #|  (m : Num) * (m - 1) + 1 == m + 1 + m * (m - 2)
-      #|  mutualfriend (a:person) (x:person) :person
+      #|  mutualfriend (a:Person) (x:Person) :Person
       #|  (((a : Bool) && (b : Bool)) && (c : Bool)) == (b && a && c)
       #|  (!(a : Bool) && !(b : Bool) \226\134\146 (c : Bool)) \226\134\146 (a || b) || c
-      #|  x:person
-      #|  (:person) = (a INSERT t) UNION UNIONS {u(b) | b IN t}
-      #|  u = \\b:person. {c:person | friend b c /\\ ~(c IN (a INSERT t))}
-      #|  FINITE(t:person->bool) /\\ CARD t = m
-      #|  t = {q:person | friend (a:person) q}
+      #|  x:Person
+      #|  (:Person) = (a INSERT t) UNION UNIONS {u(b) | b IN t}
+      #|  u = \\b:Person. {c:Person | friend b c /\\ ~(c IN (a INSERT t))}
+      #|  FINITE(t:Person->bool) /\\ CARD t = m
+      #|  t = {q:Person | friend (a:Person) q}
       #|  (N : Num) == (m : Num) * (m - 1) + 1
-      #|  N = CARD(:person)
-      #|  \\x y:person. friend a x /\\ friend a y /\\ friend x y
-      #|  a:person
-      #|  forall x:person. degree x = (m:num)
+      #|  N = CARD(:Person)
+      #|  \\x y:Person. friend a x /\\ friend a y /\\ friend x y
+      #|  a:Person
+      #|  forall x:Person. degree x = (m:num)
       #|  EVEN((m : Num))
-      #|  forall p:person. {q:person | friend p q} HAS_SIZE m
+      #|  forall p:Person. {q:Person | friend p q} HAS_SIZE m
       #|  !((m : Num) == 0)
-      #|  forall p:person. {q:person | friend p q} HAS_SIZE m
-      #|  forall x:person. ~(x = c) ==> degree x = (k:num)
-      #|  (degree:person->num)(b) = k /\\ ~(friend a b) /\\\n                  friend a c /\\ friend b c
+      #|  forall p:Person. {q:Person | friend p q} HAS_SIZE m
+      #|  forall x:Person. ~(x = c) ==> degree x = (k:num)
+      #|  (degree:Person->num)(b) = k /\\ ~(friend a b) /\\\n                  friend a c /\\ friend b c
       #|  (k : Num)
-      #|  k = (degree:person->num) a
-      #|  c = (mutualfriend:person->person->person) a b
-      #|  a:person
-      #|  b:person
-      #|  ?m:num. forall x:person. degree(x) = m
+      #|  k = (degree:Person->num) a
+      #|  c = (mutualfriend:Person->Person->Person) a b
+      #|  a:Person
+      #|  b:Person
+      #|  ?m:num. forall x:Person. degree(x) = m
       #|  (p : Bool) == !!p
-      #|  forall x y:person. ~(friend x y) ==> degree x:num = degree y
-      #|  u2:person
-      #|  u1:person
-      #|  (mutualfriend:person->person->person) u1 y
-      #|  x:person
-      #|  u2:person
-      #|  u1:person
-      #|  CARD(IMAGE (\\u. (mutualfriend:person->person->person) u y)\n                           {q | friend (x:person) q})
-      #|  x:person = y
-      #|  forall x y:person. ~(friend x y) ==> degree(x):num <= degree(y)
-      #|  degree = \\p:person. CARD {q:person | friend p q}
-      #|  forall s:person->bool. FINITE s
-      #|  mutualfriend:person->person->person
+      #|  forall x y:Person. ~(friend x y) ==> degree x:num = degree y
+      #|  u2:Person
+      #|  u1:Person
+      #|  (mutualfriend:Person->Person->Person) u1 y
+      #|  x:Person
+      #|  u2:Person
+      #|  u1:Person
+      #|  CARD(IMAGE (\\u. (mutualfriend:Person->Person->Person) u y)\n                           {q | friend (x:Person) q})
+      #|  x:Person = y
+      #|  forall x y:Person. ~(friend x y) ==> degree(x):num <= degree(y)
+      #|  degree = \\p:Person. CARD {q:Person | friend p q}
+      #|  forall s:Person->bool. FINITE s
+      #|  mutualfriend:Person->Person->Person
       #|  ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
-      #|  forall x y:person. ~(x = y) ==> ?!z:person. friend x z /\\ friend y z
-      #|  forall friend:person->person->bool.\n      FINITE(:person) /\\\n      (forall x. ~(friend x x)) /\\\n      (forall x y. friend x y ==> friend y x) /\\\n      (forall x y. ~(x = y) ==> ?!z. friend x z /\\ friend y z)\n      ==> ?u. forall v. ~(v = u) ==> friend u v
-      #|  z:person
-      #|  y:person
-      #|  x:person
+      #|  forall x y:Person. ~(x = y) ==> ?!z:Person. friend x z /\\ friend y z
+      #|  forall friend:Person->Person->bool.\n      FINITE(:Person) /\\\n      (forall x. ~(friend x x)) /\\\n      (forall x y. friend x y ==> friend y x) /\\\n      (forall x y. ~(x = y) ==> ?!z. friend x z /\\ friend y z)\n      ==> ?u. forall v. ~(v = u) ==> friend u v
+      #|  z:Person
+      #|  y:Person
+      #|  x:Person
       #|GCD_INDUCT =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) m:num)) (P:fun(num,bool) ((#+:fun(num,fun(num,num)) m:num) n:num)))) (P:fun(num,bool) n:num))))))) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) m:num)) (P:fun(num,bool) n:num))) (P:fun(num,bool) (#num_gcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num)))))))))))
       #|LOOP_GCD =  |- (#forall:fun(fun(fun(num,'?1),bool),bool) (\x:fun(num,'?1). (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?1,fun('?1,bool)) (x:fun(num,'?1) ((#+:fun(num,fun(num,num)) i:num) m:num))) (x:fun(num,'?1) i:num))))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?1,fun('?1,bool)) (x:fun(num,'?1) ((#+:fun(num,fun(num,num)) i:num) n:num))) (x:fun(num,'?1) i:num)))))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?1,fun('?1,bool)) (x:fun(num,'?1) ((#+:fun(num,fun(num,num)) i:num) (#num_gcd:fun(prod(num,num),num) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))))) (x:fun(num,'?1) i:num)))))))))))
       #|LOOP_COPRIME =  |- (#forall:fun(fun(fun(num,'?2),bool),bool) (\x:fun(num,'?2). (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?2,fun('?2,bool)) (x:fun(num,'?2) ((#+:fun(num,fun(num,num)) i:num) m:num))) (x:fun(num,'?2) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?2,fun('?2,bool)) (x:fun(num,'?2) ((#+:fun(num,fun(num,num)) i:num) n:num))) (x:fun(num,'?2) i:num))))) (#num_coprime:fun(prod(num,num),bool) ((#,:fun(num,fun(num,prod(num,num))) m:num) n:num))))) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?2,fun('?2,bool)) (x:fun(num,'?2) i:num)) (x:fun(num,'?2) (#NUMERAL:fun(num,num) #_0:num))))))))))))
@@ -15881,7 +15881,7 @@ test "100/friendship matches 100/friendship.ml" {
       #|SHIFTABLE_LOCAL =  |- (#forall:fun(fun(fun(num,'?9),bool),bool) (\x:fun(num,'?9). (#forall:fun(fun(fun(num,'?9),bool),bool) (\y:fun(num,'?9). (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(fun('?9,fun('?9,bool)),bool),bool) (\r:fun('?9,fun('?9,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#cycle:fun(fun('?9,fun('?9,bool)),fun(num,fun(fun(num,'?9),bool))) r:fun('?9,fun('?9,bool))) p:num) x:fun(num,'?9))) ((#/\:fun(bool,fun(bool,bool)) (((#cycle:fun(fun('?9,fun('?9,bool)),fun(num,fun(fun(num,'?9),bool))) r:fun('?9,fun('?9,bool))) p:num) y:fun(num,'?9))) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))))) ((#=:fun(bool,fun(bool,bool)) ((#shiftable:fun(fun(num,'?9),fun(fun(num,'?9),bool)) x:fun(num,'?9)) y:fun(num,'?9))) (#?:fun(fun(num,bool),bool) (\k:num. ((#/\:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) k:num) p:num)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun('?9,fun('?9,bool)) (x:fun(num,'?9) i:num)) (y:fun(num,'?9) ((#+:fun(num,fun(num,num)) i:num) k:num))))))))))))))))))
       #|SHIFTABLE_SYM =  |- (#forall:fun(fun(fun(num,'?10),bool),bool) (\x:fun(num,'?10). (#forall:fun(fun(fun(num,'?10),bool),bool) (\y:fun(num,'?10). (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(fun('?10,fun('?10,bool)),bool),bool) (\r:fun('?10,fun('?10,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#cycle:fun(fun('?10,fun('?10,bool)),fun(num,fun(fun(num,'?10),bool))) r:fun('?10,fun('?10,bool))) p:num) x:fun(num,'?10))) ((#/\:fun(bool,fun(bool,bool)) (((#cycle:fun(fun('?10,fun('?10,bool)),fun(num,fun(fun(num,'?10),bool))) r:fun('?10,fun('?10,bool))) p:num) y:fun(num,'?10))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) p:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#shiftable:fun(fun(num,'?10),fun(fun(num,'?10),bool)) x:fun(num,'?10)) y:fun(num,'?10)))))) ((#shiftable:fun(fun(num,'?10),fun(fun(num,'?10),bool)) y:fun(num,'?10)) x:fun(num,'?10)))))))))))
       #|CYCLES_PRIME_LEMMA =  |- (#forall:fun(fun(fun('A,fun('A,bool)),bool),bool) (\r:fun('A,fun('A,bool)). (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun('?11,bool),bool) (\x:'?11. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('A,bool),bool) #UNIV:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#prime:fun(num,bool) p:num)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#~:fun(bool,bool) ((r:fun('A,fun('A,bool)) x:'A) x:'A))))))) ((#num_divides:fun(num,fun(num,bool)) p:num) (#CARD:fun(fun(fun(num,'A),bool),num) (#GSPEC:fun(fun(fun(num,'A),bool),fun(fun(num,'A),bool)) (\GEN%PVAR%15:fun(num,'A). (#?:fun(fun(fun(num,'A),bool),bool) (\x:fun(num,'A). (((#SETSPEC:fun(fun(num,'A),fun(bool,fun(fun(num,'A),bool))) GEN%PVAR%15:fun(num,'A)) (((#cycle:fun(fun('A,fun('A,bool)),fun(num,fun(fun(num,'A),bool))) r:fun('A,fun('A,bool))) p:num) x:fun(num,'A))) x:fun(num,'A)))))))))))))))
-      #|FRIENDSHIP =  |- (#forall:fun(fun(fun('person,fun('person,bool)),bool),bool) (\friend:fun('person,fun('person,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('person,bool),bool) #UNIV:fun('person,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('person,bool),bool) (\x:'person. (#~:fun(bool,bool) ((friend:fun('person,fun('person,bool)) x:'person) x:'person))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('person,bool),bool) (\x:'person. (#forall:fun(fun('person,bool),bool) (\y:'person. ((#==>:fun(bool,fun(bool,bool)) ((friend:fun('person,fun('person,bool)) x:'person) y:'person)) ((friend:fun('person,fun('person,bool)) y:'person) x:'person))))))) (#forall:fun(fun('person,bool),bool) (\x:'person. (#forall:fun(fun('person,bool),bool) (\y:'person. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('person,fun('person,bool)) x:'person) y:'person))) (#?!:fun(fun('person,bool),bool) (\z:'person. ((#/\:fun(bool,fun(bool,bool)) ((friend:fun('person,fun('person,bool)) x:'person) z:'person)) ((friend:fun('person,fun('person,bool)) y:'person) z:'person))))))))))))) (#?:fun(fun('person,bool),bool) (\u:'person. (#forall:fun(fun('person,bool),bool) (\v:'person. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('person,fun('person,bool)) v:'person) u:'person))) ((friend:fun('person,fun('person,bool)) u:'person) v:'person)))))))))
+      #|FRIENDSHIP =  |- (#forall:fun(fun(fun('Person,fun('Person,bool)),bool),bool) (\friend:fun('Person,fun('Person,bool)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#FINITE:fun(fun('Person,bool),bool) #UNIV:fun('Person,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('Person,bool),bool) (\x:'Person. (#~:fun(bool,bool) ((friend:fun('Person,fun('Person,bool)) x:'Person) x:'Person))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('Person,bool),bool) (\x:'Person. (#forall:fun(fun('Person,bool),bool) (\y:'Person. ((#==>:fun(bool,fun(bool,bool)) ((friend:fun('Person,fun('Person,bool)) x:'Person) y:'Person)) ((friend:fun('Person,fun('Person,bool)) y:'Person) x:'Person))))))) (#forall:fun(fun('Person,bool),bool) (\x:'Person. (#forall:fun(fun('Person,bool),bool) (\y:'Person. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('Person,fun('Person,bool)) x:'Person) y:'Person))) (#?!:fun(fun('Person,bool),bool) (\z:'Person. ((#/\:fun(bool,fun(bool,bool)) ((friend:fun('Person,fun('Person,bool)) x:'Person) z:'Person)) ((friend:fun('Person,fun('Person,bool)) y:'Person) z:'Person))))))))))))) (#?:fun(fun('Person,bool),bool) (\u:'Person. (#forall:fun(fun('Person,bool),bool) (\v:'Person. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('Person,fun('Person,bool)) v:'Person) u:'Person))) ((friend:fun('Person,fun('Person,bool)) u:'Person) v:'Person)))))))))
       #|types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
       #|constants = shiftable path cycle primefact order phi squarefree inverse_mod ITER index superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 273
