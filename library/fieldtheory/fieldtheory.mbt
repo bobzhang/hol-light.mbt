@@ -30756,7 +30756,7 @@ fn step_217() -> Unit raise {
   )
   let t2822 = @list.List([@tactics.all_tac, @sets.set_tac(@list.List([]))])
   let t2821 = @tactics.exists_tac(
-    @parser.parse_term("UNIONS {{m | m one = i} | i IN {i:num | i <= n}}"),
+    @term_syntax.parse_term("UNIONS({{(m : (Unit) -> Num) | m(one) == (i : Num)} | IN(i, {(i : Num) | i <= (n : Num)})})"),
   )
   let t2820 = @tactics.match_mp_tac(@sets.finite_subset())
   let t2819 = @list.List([
