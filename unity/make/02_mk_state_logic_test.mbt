@@ -5869,178 +5869,178 @@ test "Unity/mk_state_logic matches Unity/mk_state_logic.ml" {
       #|Searching with limit 2
       #|Searching with limit 3
       #|Unity/mk_state_logic quotations (172):
-      #|  (False:A->bool)  = \\s:A. F
-      #|  (True:A->bool)   = \\s:A. T
-      #|  Not (p:A->bool) = \\s. ~p s
-      #|  ~* (p:A->bool)  = \\s. ~p s
-      #|  /\\* (p:A->bool) (q:A->bool) = \\s. (p s) /\\ (q s)
-      #|  \\/* (p:A->bool) (q:A->bool) = \\s. (p s) \\/ (q s)
-      #|  !* (P:B->(A->bool)) = (\\s. (forall x. ((P x)s)))
-      #|  ?* (P:B->(A->bool)) = (\\s. (?x. ((P x)s)))
-      #|  @* P = (\\s:A. (@x:B. ((P x)s)))
-      #|  ==>* (p:A->bool) (q:A->bool) = \\s. (p s) ==> (q s)
-      #|  <* (p:A->num) (q:A->num) = \\s. (p s) < (q s)
-      #|  >* (p:A->num) (q:A->num) = \\s. (p s) > (q s)
-      #|  <=* (p:A->num) (q:A->num) = \\s. (p s) <= (q s)
-      #|  >=* (p:A->num) (q:A->num) = \\s. (p s) >= (q s)
-      #|  =* (p:A->B) (q:A->B) = \\s. (p s) = (q s)
-      #|  <>* (p:A->B) (q:A->B) = \\s. ~((p s) = (q s))
-      #|  =>* (p:A->bool) (r1:A->B) (r2:A->B) =\n                        \\s. if (p s) then r1 s else r2 s
-      #|  +* (p:A->num) (q:A->num) = \\s. (p s) + (q s)
-      #|  -* (p:A->num) (q:A->num) = \\s. (p s) - (q s)
-      #|  (**) (p:A->num) (q:A->num) = \\s. ((p s) * (q s))
-      #|  Suc (p:A->num) = \\s. SUC (p s)
-      #|  Pre (p:A->num) = \\s. PRE (p s)
-      #|  %* (p:A->num) (q:A->num) = \\s. (p s) MOD (q s)
-      #|  /* (p:A->num) (q:A->num) = \\s. (p s) DIV (q s)
-      #|  *** (p:A->num) (q:A->num) = \\s. (p s) EXP (q s)
-      #|  Ind (a:A->(B->C)) (i:A->B) = \\s. (a s) (i s)
-      #|  !<=* (P:num->(A->bool)) m = (\\s:A. (forall i. i <= m ==> ((P i)s)))
-      #|  ?<=* (P:num->(A->bool)) m = (\\s:A. (?i. i <= m /\\ ((P i)s)))
-      #|  ?<* (P:num->(A->bool)) m = (\\s:A. (?i. i < m /\\ ((P i)s)))
-      #|  (forall P. /<=\\* P 0       = (P:num->(A->bool)) 0) /\\\n     (forall P. /<=\\* P (SUC i) = ((/<=\\* P i) /\\* (P (SUC i))))
-      #|  (forall P. \\<=/* P 0       = (P:num->(A->bool)) 0) /\\\n     (forall P. (\\<=/* P (SUC i)) = ((\\<=/* P i) \\/* (P (SUC i))))
-      #|  (forall P. /<\\* P 0       = (False:A->bool)) /\\\n     (forall P. /<\\* P (SUC i) = ((/<\\* P i) /\\* (P i)))
-      #|  (forall P. \\</* P 0       = (False:A->bool)) /\\\n     (forall P. \\</* P (SUC i) = ((\\</* P i) \\/* (P i)))
-      #|  s:A
-      #|  p:A->bool
-      #|  q:A->bool
-      #|  r:A->bool
+      #|  (False : (A) -> Bool) == ((s : A) => false)
+      #|  (True : (A) -> Bool) == ((s : A) => true)
+      #|  (Not : ((A) -> Bool, A) -> Bool)((p : (A) -> Bool)) == ((s : A) => !p(s))
+      #|  (op_tilde_star : ((A) -> Bool, A) -> Bool)((p : (A) -> Bool)) == ((s : A) => !p(s))
+      #|  (op_slash_bslash_star : ((A) -> Bool, (A) -> Bool, A) -> Bool)((p : (A) -> Bool), (q : (A) -> Bool)) == ((s : A) => p(s) && q(s))
+      #|  (op_bslash_slash_star : ((A) -> Bool, (A) -> Bool, A) -> Bool)((p : (A) -> Bool), (q : (A) -> Bool)) == ((s : A) => p(s) || q(s))
+      #|  (op_bang_star : ((B, A) -> Bool, A) -> Bool)((P : (B, A) -> Bool)) == ((s : A) => \226\136\128 x : B, P(x, s))
+      #|  (op_q_star : ((B, A) -> Bool, A) -> Bool)((P : (B, A) -> Bool)) == ((s : A) => \226\136\131 x : B, P(x, s))
+      #|  (op_at_star : ((B, A) -> Bool, A) -> B)((P : (B, A) -> Bool)) == ((s : A) => select((x : B) => P(x, s)))
+      #|  (op_eq_eq_gt_star : ((A) -> Bool, (A) -> Bool, A) -> Bool)((p : (A) -> Bool), (q : (A) -> Bool)) == ((s : A) => p(s) \226\134\146 q(s))
+      #|  (op_lt_star : ((A) -> Num, (A) -> Num, A) -> Bool)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) < q(s))
+      #|  (op_gt_star : ((A) -> Num, (A) -> Num, A) -> Bool)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) > q(s))
+      #|  (op_lt_eq_star : ((A) -> Num, (A) -> Num, A) -> Bool)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) <= q(s))
+      #|  (op_gt_eq_star : ((A) -> Num, (A) -> Num, A) -> Bool)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) >= q(s))
+      #|  (op_eq_star : ((A) -> B, (A) -> B, A) -> Bool)((p : (A) -> B), (q : (A) -> B)) == ((s : A) => p(s) == q(s))
+      #|  (op_lt_gt_star : ((A) -> B, (A) -> B, A) -> Bool)((p : (A) -> B), (q : (A) -> B)) == ((s : A) => !(p(s) == q(s)))
+      #|  (op_eq_gt_star : ((A) -> Bool, (A) -> B, (A) -> B, A) -> B)((p : (A) -> Bool), (r1 : (A) -> B), (r2 : (A) -> B)) == ((s : A) => if p(s) { r1(s) } else { r2(s) })
+      #|  (op_plus_star : ((A) -> Num, (A) -> Num, A) -> Num)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) + q(s))
+      #|  (op_minus_star : ((A) -> Num, (A) -> Num, A) -> Num)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) - q(s))
+      #|  (op_star_star : ((A) -> Num, (A) -> Num, A) -> Num)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => p(s) * q(s))
+      #|  (Suc : ((A) -> Num, A) -> Num)((p : (A) -> Num)) == ((s : A) => SUC(p(s)))
+      #|  (Pre : ((A) -> Num, A) -> Num)((p : (A) -> Num)) == ((s : A) => PRE(p(s)))
+      #|  (op_pct_star : ((A) -> Num, (A) -> Num, A) -> Num)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => MOD(p(s), q(s)))
+      #|  (op_slash_star : ((A) -> Num, (A) -> Num, A) -> Num)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => DIV(p(s), q(s)))
+      #|  (op_star_star_star : ((A) -> Num, (A) -> Num, A) -> Num)((p : (A) -> Num), (q : (A) -> Num)) == ((s : A) => EXP(p(s), q(s)))
+      #|  (Ind : ((A, B) -> C, (A) -> B, A) -> C)((a : (A, B) -> C), (i : (A) -> B)) == ((s : A) => a(s, i(s)))
+      #|  (op_bang_lt_eq_star : ((Num, A) -> Bool, Num, A) -> Bool)((P : (Num, A) -> Bool), (m : Num)) == ((s : A) => \226\136\128 i : Num, i <= m \226\134\146 P(i, s))
+      #|  (op_q_lt_eq_star : ((Num, A) -> Bool, Num, A) -> Bool)((P : (Num, A) -> Bool), (m : Num)) == ((s : A) => \226\136\131 i : Num, i <= m && P(i, s))
+      #|  (op_q_lt_star : ((Num, A) -> Bool, Num, A) -> Bool)((P : (Num, A) -> Bool), (m : Num)) == ((s : A) => \226\136\131 i : Num, i < m && P(i, s))
+      #|  (\226\136\128 P : (Num, A) -> Bool, (op_slash_lt_eq_bslash_star : ((Num, A) -> Bool, Num, A) -> Bool)(P, 0) == P(0)) && (\226\136\128 P : (Num, A) -> Bool, op_slash_lt_eq_bslash_star(P, SUC((i : Num))) == op_slash_bslash_star(op_slash_lt_eq_bslash_star(P, i), P(SUC(i))))
+      #|  (\226\136\128 P : (Num, A) -> Bool, (op_bslash_lt_eq_slash_star : ((Num, A) -> Bool, Num, A) -> Bool)(P, 0) == P(0)) && (\226\136\128 P : (Num, A) -> Bool, op_bslash_lt_eq_slash_star(P, SUC((i : Num))) == op_bslash_slash_star(op_bslash_lt_eq_slash_star(P, i), P(SUC(i))))
+      #|  (\226\136\128 P : (Num, A) -> Bool, (op_slash_lt_bslash_star : ((Num, A) -> Bool, Num, A) -> Bool)(P, 0) == False) && (\226\136\128 P : (Num, A) -> Bool, op_slash_lt_bslash_star(P, SUC((i : Num))) == op_slash_bslash_star(op_slash_lt_bslash_star(P, i), P(i)))
+      #|  (\226\136\128 P : (Num, A) -> Bool, (op_bslash_lt_slash_star : ((Num, A) -> Bool, Num, A) -> Bool)(P, 0) == False) && (\226\136\128 P : (Num, A) -> Bool, op_bslash_lt_slash_star(P, SUC((i : Num))) == op_bslash_slash_star(op_bslash_lt_slash_star(P, i), P(i)))
+      #|  (s : A)
+      #|  (p : (A) -> Bool)
+      #|  (q : (A) -> Bool)
+      #|  (r : (A) -> Bool)
       #|  (i : Num)
-      #|  P:num->(A->bool)
-      #|  forall p q p' q' (s:A).\n         ( (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')) s ) ==> ((q \\/* q') s)
-      #|  forall p q p' q' (s:A).\n         ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))s\n       ==>\n         (q \\/* q')s
-      #|  forall p q r (s:A).\n         ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))s\n       ==>\n         r s
-      #|  forall p q p' q' r r' (s:A).\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))s\n      ==>\n        ((p /\\* q) \\/* r \\/* r')s
-      #|  forall p q r (s:A).\n        ((p /\\* r) \\/* (((p \\/* q) /\\* (q \\/* r)) \\/* r)) s\n      ==>\n        (q \\/* r) s
-      #|  forall p q b r (s:A).\n        ((r /\\* q) \\/* (p /\\* b) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s
-      #|  forall p q b r (s:A).\n        (((r /\\* q) \\/* ((r /\\* p) /\\* b)) \\/* (b /\\* q)) s\n      ==>\n        ((q /\\* r) \\/* b) s
-      #|  forall p q r (s:A).\n           (r s /\\ q s) \\/ p s\n         ==>\n\t   (q s /\\ r s) \\/ p s
-      #|  forall p q r (s:A).\n         (q s /\\ r s) \\/ p s\n       ==>\n         (r s /\\ q s) \\/ p s
-      #|  forall p q r (s:A).\n         (r s /\\ q s) \\/ p s\n       <=> (q s /\\ r s) \\/ p s
-      #|  forall(p:A->bool) q r. ((r /\\* q) \\/* p) = ((q /\\* r) \\/* p)
-      #|  forall p q r (s:A).\n         (p s /\\ (r s \\/ q s))\n       ==>\n         (p s /\\ (q s \\/ r s))
-      #|  forall p q r (s:A).\n         (p s /\\ (q s \\/ r s))\n        ==>\n         (p s /\\ (r s \\/ q s))
-      #|  forall p q r (s:A).\n         (p s /\\ (r s \\/ q s))\n       = (p s /\\ (q s \\/ r s))
-      #|  forall(p:A->bool) q r.\n        p /\\* (r \\/* q)\n      = p /\\* (q \\/* r)
-      #|  forall p q r (s:A).\n         (r s \\/ q s) /\\ p s\n       ==>\n         (q s \\/ r s) /\\ p s
-      #|  forall p q r (s:A).\n         (q s \\/ r s) /\\ p s\n       ==>\n         (r s \\/ q s) /\\ p s
-      #|  forall p q r (s:A).\n         (r s \\/ q s) /\\ p s\n       <=> (q s \\/ r s) /\\ p s
-      #|  forall(p:A->bool) q r.\n        (r \\/* q) /\\* p\n      = (q \\/* r) /\\* p
-      #|  forall p q r (s:A).\n         (r s \\/ q s) \\/ p s\n       ==>\n         (q s \\/ r s) \\/ p s
-      #|  forall p q r (s:A).\n         (q s \\/ r s) \\/ p s\n       ==>\n         (r s \\/ q s) \\/ p s
-      #|  forall(p:A->bool) q r s. (r s \\/ q s) \\/ p s <=> (q s \\/ r s) \\/ p s
-      #|  forall(p:A->bool) q r. (r \\/* q) \\/* p = (q \\/* r) \\/* p
-      #|  forall p q r (s:A). p s \\/ (r s \\/ q s) ==> p s \\/ (q s \\/ r s)
-      #|  forall p q r (s:A). p s \\/ (q s \\/ r s) ==> p s \\/ (r s \\/ q s)
-      #|  forall p q r (s:A). p s \\/ (r s \\/ q s) <=> p s \\/ (q s \\/ r s) 
-      #|  forall(p:A->bool) q r. p \\/* (r \\/* q) = p \\/* (q \\/* r)
-      #|  forall p q r (s:A). (r s /\\ q s) /\\ p s ==> (q s /\\ r s) /\\ p s
-      #|  forall p q r (s:A). (q s /\\ r s) /\\ p s ==> (r s /\\ q s) /\\ p s
-      #|  forall p q r (s:A). (r s /\\ q s) /\\ p s <=> (q s /\\ r s) /\\ p s
-      #|  forall(p:A->bool) q r. (r /\\* q) /\\* p = (q /\\* r) /\\* p
-      #|  forall p q r (s:A). p s /\\ (r s /\\ q s) ==> p s /\\ (q s /\\ r s)
-      #|  forall p q r (s:A). p s /\\ (q s /\\ r s) ==> p s /\\ (r s /\\ q s)
-      #|  forall p q r (s:A). p s /\\ (r s /\\ q s) <=> p s /\\ (q s /\\ r s) 
-      #|  forall(p:A->bool) q r. p /\\* (r /\\* q) = p /\\* (q /\\* r)
-      #|  forall p q r (s:A). p s \\/ (r s /\\ q s) ==> p s \\/ (q s /\\ r s)
-      #|  forall p q r (s:A). p s \\/ (q s /\\ r s) ==> p s \\/ (r s /\\ q s)
-      #|  forall p q r (s:A). p s \\/ (r s /\\ q s) <=> p s \\/ (q s /\\ r s)
-      #|  forall(p:A->bool) q r. p \\/* (r /\\* q) = p \\/* (q /\\* r)
-      #|  forall(p:A->bool). (Not (Not p)) = p
-      #|  (q (s:A)):bool
-      #|  (p (s:A)):bool
-      #|  forall p q (s:A). p s \\/ q s <=> q s \\/ p s
-      #|  forall(p:A->bool) q s. p s \\/ q s <=> q s \\/ p s
-      #|  forall(p:A->bool) q. (p \\/* q) = (q \\/* p)
-      #|  forall p:A->bool. p \\/* p = p
-      #|  forall p q  r (s:A). ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))
-      #|  forall p q r (s:A).\n                    ((p s \\/ q s) \\/ r s) <=> (p s \\/ (q s \\/ r s))
-      #|  forall(p:A->bool) q r. (p \\/* q) \\/* r = p \\/* (q \\/* r)
-      #|  forall p q (s:A). p s /\\ q s ==> q s
-      #|  forall p q (s:A). (p /\\* q) s ==> q s
-      #|  forall p q (s:A). p s /\\ q s ==> p s
-      #|  forall p q (s:A). (p /\\* q) s ==> p s
-      #|  forall p q (s:A). p s ==> (p \\/* q) s
-      #|  forall p q (s:A). p s ==> (q \\/* p) s
-      #|  forall(p:A->bool) q r.\n        (forall s. p s ==> q s)\n      ==>\n        (forall s. (p /\\* r) s ==> (q /\\* r) s)
-      #|  forall(p:A->bool) q r.\n        (forall s. p s ==> q s)\n      ==>\n        (forall s. (p \\/* r) s ==> (q \\/* r) s)
-      #|  forall p:A->bool. p /\\* p = p
-      #|  (q:A->bool) s
-      #|  (p:A->bool) s
-      #|  forall p q (s:A). (p s /\\ q s) <=> (q s /\\ p s)
-      #|  forall p q (s:A). p s /\\ q s <=> q s /\\ p s
-      #|  forall(p:A->bool) q. (p /\\* q) = (q /\\* p)
-      #|  forall p q r (s:A). ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))
-      #|  forall p q  r (s:A).\n                 ((p s /\\ q s) /\\ r s) <=> (p s /\\ (q s /\\ r s))
-      #|  forall(p:A->bool) q r. (p /\\* q) /\\* r = p /\\* (q /\\* r)
-      #|  Not (True:A->bool) = False
-      #|  Not (False:A->bool) = True
-      #|  forall p:A->bool. p /\\* True = p
-      #|  forall p:A->bool. p \\/* True = True
-      #|  forall p:A->bool. p /\\* False = False
-      #|  forall p:A->bool. p \\/* False = p
-      #|  forall p:A->bool. p \\/* (Not p) = True
-      #|  forall p:A->bool. p /\\* (Not p) = False
+      #|  (P : (Num, A) -> Bool)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 p' : (A) -> Bool, \226\136\128 q' : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_bslash_slash_star(op_slash_bslash_star(p, q'), op_slash_bslash_star(p', q)), op_slash_bslash_star(q, q'), s) \226\134\146 op_bslash_slash_star(q, q', s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 p' : (A) -> Bool, \226\136\128 q' : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_bslash_slash_star(op_slash_bslash_star(Not(p), q'), op_slash_bslash_star(Not(p'), q)), op_slash_bslash_star(q, q'), s) \226\134\146 op_bslash_slash_star(q, q', s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_bslash_slash_star(op_slash_bslash_star(Not(p), r), op_slash_bslash_star(Not(q), q)), op_slash_bslash_star(q, r), s) \226\134\146 r(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 p' : (A) -> Bool, \226\136\128 q' : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 r' : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_bslash_slash_star(op_slash_bslash_star(Not(op_bslash_slash_star(p, p')), op_bslash_slash_star(p, r')), op_slash_bslash_star(Not(op_bslash_slash_star(q, q')), op_bslash_slash_star(q, r))), op_slash_bslash_star(op_bslash_slash_star(q, r), op_bslash_slash_star(p, r')), s) \226\134\146 op_bslash_slash_star(op_slash_bslash_star(p, q), op_bslash_slash_star(r, r'), s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_slash_bslash_star(p, r), op_bslash_slash_star(op_slash_bslash_star(op_bslash_slash_star(p, q), op_bslash_slash_star(q, r)), r), s) \226\134\146 op_bslash_slash_star(q, r, s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 b : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_slash_bslash_star(r, q), op_bslash_slash_star(op_slash_bslash_star(p, b), op_slash_bslash_star(b, q)), s) \226\134\146 op_bslash_slash_star(op_slash_bslash_star(q, r), b, s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 b : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, op_bslash_slash_star(op_bslash_slash_star(op_slash_bslash_star(r, q), op_slash_bslash_star(op_slash_bslash_star(r, p), b)), op_slash_bslash_star(b, q), s) \226\134\146 op_bslash_slash_star(op_slash_bslash_star(q, r), b, s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, r(s) && q(s) || p(s) \226\134\146 q(s) && r(s) || p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, q(s) && r(s) || p(s) \226\134\146 r(s) && q(s) || p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (r(s) && q(s) || p(s)) == (q(s) && r(s) || p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_bslash_slash_star(op_slash_bslash_star(r, q), p) == op_bslash_slash_star(op_slash_bslash_star(q, r), p)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) && (r(s) || q(s)) \226\134\146 p(s) && (q(s) || r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) && (q(s) || r(s)) \226\134\146 p(s) && (r(s) || q(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) && (r(s) || q(s))) == (p(s) && (q(s) || r(s)))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_slash_bslash_star(p, op_bslash_slash_star(r, q)) == op_slash_bslash_star(p, op_bslash_slash_star(q, r))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (r(s) || q(s)) && p(s) \226\134\146 (q(s) || r(s)) && p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (q(s) || r(s)) && p(s) \226\134\146 (r(s) || q(s)) && p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((r(s) || q(s)) && p(s)) == ((q(s) || r(s)) && p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_slash_bslash_star(op_bslash_slash_star(r, q), p) == op_slash_bslash_star(op_bslash_slash_star(q, r), p)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (r(s) || q(s)) || p(s) \226\134\146 (q(s) || r(s)) || p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (q(s) || r(s)) || p(s) \226\134\146 (r(s) || q(s)) || p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((r(s) || q(s)) || p(s)) == ((q(s) || r(s)) || p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_bslash_slash_star(op_bslash_slash_star(r, q), p) == op_bslash_slash_star(op_bslash_slash_star(q, r), p)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) || r(s) || q(s) \226\134\146 p(s) || q(s) || r(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) || q(s) || r(s) \226\134\146 p(s) || r(s) || q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) || r(s) || q(s)) == (p(s) || q(s) || r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_bslash_slash_star(p, op_bslash_slash_star(r, q)) == op_bslash_slash_star(p, op_bslash_slash_star(q, r))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (r(s) && q(s)) && p(s) \226\134\146 (q(s) && r(s)) && p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (q(s) && r(s)) && p(s) \226\134\146 (r(s) && q(s)) && p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((r(s) && q(s)) && p(s)) == ((q(s) && r(s)) && p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_slash_bslash_star(op_slash_bslash_star(r, q), p) == op_slash_bslash_star(op_slash_bslash_star(q, r), p)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) && r(s) && q(s) \226\134\146 p(s) && q(s) && r(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) && q(s) && r(s) \226\134\146 p(s) && r(s) && q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) && r(s) && q(s)) == (p(s) && q(s) && r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_slash_bslash_star(p, op_slash_bslash_star(r, q)) == op_slash_bslash_star(p, op_slash_bslash_star(q, r))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) || r(s) && q(s) \226\134\146 p(s) || q(s) && r(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) || q(s) && r(s) \226\134\146 p(s) || r(s) && q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) || r(s) && q(s)) == (p(s) || q(s) && r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_bslash_slash_star(p, op_slash_bslash_star(r, q)) == op_bslash_slash_star(p, op_slash_bslash_star(q, r))
+      #|  \226\136\128 p : (A) -> Bool, Not(Not(p)) == p
+      #|  (q : (A) -> Bool)((s : A))
+      #|  (p : (A) -> Bool)((s : A))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) || q(s)) == (q(s) || p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) || q(s)) == (q(s) || p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_bslash_slash_star(p, q) == op_bslash_slash_star(q, p)
+      #|  \226\136\128 p : (A) -> Bool, op_bslash_slash_star(p, p) == p
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((p(s) || q(s)) || r(s)) == (p(s) || q(s) || r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((p(s) || q(s)) || r(s)) == (p(s) || q(s) || r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_bslash_slash_star(op_bslash_slash_star(p, q), r) == op_bslash_slash_star(p, op_bslash_slash_star(q, r))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) && q(s) \226\134\146 q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, op_slash_bslash_star(p, q, s) \226\134\146 q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) && q(s) \226\134\146 p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, op_slash_bslash_star(p, q, s) \226\134\146 p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) \226\134\146 op_bslash_slash_star(p, q, s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) \226\134\146 op_bslash_slash_star(q, p, s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, (\226\136\128 s : A, p(s) \226\134\146 q(s)) \226\134\146 (\226\136\128 s : A, op_slash_bslash_star(p, r, s) \226\134\146 op_slash_bslash_star(q, r, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, (\226\136\128 s : A, p(s) \226\134\146 q(s)) \226\134\146 (\226\136\128 s : A, op_bslash_slash_star(p, r, s) \226\134\146 op_bslash_slash_star(q, r, s))
+      #|  \226\136\128 p : (A) -> Bool, op_slash_bslash_star(p, p) == p
+      #|  (q : (A) -> Bool)((s : A))
+      #|  (p : (A) -> Bool)((s : A))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) && q(s)) == (q(s) && p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) && q(s)) == (q(s) && p(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_slash_bslash_star(p, q) == op_slash_bslash_star(q, p)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((p(s) && q(s)) && r(s)) == (p(s) && q(s) && r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, ((p(s) && q(s)) && r(s)) == (p(s) && q(s) && r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_slash_bslash_star(op_slash_bslash_star(p, q), r) == op_slash_bslash_star(p, op_slash_bslash_star(q, r))
+      #|  (Not : ((A) -> Bool, A) -> Bool)((True : (A) -> Bool)) == (False : (A) -> Bool)
+      #|  (Not : ((A) -> Bool, A) -> Bool)((False : (A) -> Bool)) == (True : (A) -> Bool)
+      #|  \226\136\128 p : (A) -> Bool, op_slash_bslash_star(p, True) == p
+      #|  \226\136\128 p : (A) -> Bool, op_bslash_slash_star(p, True) == True
+      #|  \226\136\128 p : (A) -> Bool, op_slash_bslash_star(p, False) == False
+      #|  \226\136\128 p : (A) -> Bool, op_bslash_slash_star(p, False) == p
+      #|  \226\136\128 p : (A) -> Bool, op_bslash_slash_star(p, Not(p)) == True
+      #|  \226\136\128 p : (A) -> Bool, op_slash_bslash_star(p, Not(p)) == False
       #|  \226\136\128 p : Bool, \226\136\128 q : Bool, p && !q || p && q \226\134\146 p
       #|  \226\136\128 p : Bool, \226\136\128 q : Bool, p \226\134\146 p && !q || p && q
       #|  \226\136\128 p : Bool, \226\136\128 q : Bool, (p && !q || p && q) == p
-      #|  forall(p:A->bool) q. ((p /\\* (Not q)) \\/* (p /\\* q)) = p
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_bslash_slash_star(op_slash_bslash_star(p, Not(q)), op_slash_bslash_star(p, q)) == p
       #|  \226\136\128 p : Bool, \226\136\128 q : Bool, (p || q) && !q \226\134\146 p && !q
       #|  \226\136\128 p : Bool, \226\136\128 q : Bool, p && !q \226\134\146 (p || q) && !q
       #|  \226\136\128 p : Bool, \226\136\128 q : Bool, ((p || q) && !q) == (p && !q)
-      #|  forall(p:A->bool) q. ((p \\/* q) /\\* (Not q)) = p /\\* (Not q)
-      #|  forall(p:A->bool) q s. (p s /\\ q s) \\/ q s ==> q s
-      #|  forall(p:A->bool) q s. q s ==> (p s /\\ q s) \\/ q s
-      #|  forall(p:A->bool) q s. (p s /\\ q s) \\/ q s <=> q s
-      #|  forall(p:A->bool) q. (p /\\* q) \\/* q = q
-      #|  forall(p:A->bool) q s. (p s \\/ q s) /\\ q s ==> q s
-      #|  forall(p:A->bool) q s. q s ==> (p s \\/ q s) /\\ q s
-      #|  forall(p:A->bool) q s. (p s \\/ q s) /\\ q s <=> q s
-      #|  forall(p:A->bool) q. (p \\/* q) /\\* q = q
-      #|  forall(p:A->bool) q. Not (p \\/* q) = (Not p) /\\* (Not q)
-      #|  forall(p:A->bool) q. Not (p /\\* q) = (Not p) \\/* (Not q)
-      #|  forall(p:A->bool) q.\n        (forall s. (Not p)s ==> q s)\n      = (forall s. (p \\/* q)s)
-      #|  forall(p:A->bool) q. (forall s. p s ==> q s) = (forall s. ((Not p) \\/* q)s)
-      #|  forall(p:A->bool) q. (forall s. (p \\/* q)s) = (forall s. (Not p)s ==> q s)
-      #|  forall(p:A->bool) q. (forall s. ((Not p) \\/* q)s) = (forall s. p s ==> q s)
-      #|  forall p q r (s:A).\n         (p s \\/ q s /\\ r s)\n       ==>\n         ((p s \\/ q s) /\\ (p s \\/ r s))
-      #|  forall(p:A->bool) q r s.\n             ((p s \\/ q s) /\\ (p s \\/ r s)) ==> (p s \\/ q s /\\ r s)
-      #|  forall(p:A->bool) q r s.\n            (p s \\/ q s /\\ r s) <=> ((p s \\/ q s) /\\ (p s \\/ r s))
-      #|  forall(p:A->bool) q r. p \\/* (q /\\* r) = (p \\/* q) /\\* (p \\/* r)
-      #|  forall(p:A->bool) q r s.\n            (p s /\\ (q s \\/ r s)) ==> (p s /\\ q s \\/ p s /\\ r s)
-      #|  forall(p:A->bool) q r s.\n            (p s /\\ q s \\/ p s /\\ r s) ==> (p s /\\ (q s \\/ r s))
-      #|  forall(p:A->bool) q r s.\n            (p s /\\ (q s \\/ r s)) <=> (p s /\\ q s \\/ p s /\\ r s)
-      #|  forall(p:A->bool) q r. p /\\* (q \\/* r) = (p /\\* q) \\/* (p /\\* r)
-      #|  forall(p:A->bool). (forall s. (Not p)s) ==> (forall s. p s = False s)
-      #|  (\\s:A. p s) = (\\s. False s)
-      #|  forall(p:A->bool). (forall s. (Not p)s) ==> (p = False)
-      #|  forall(p:A->bool) q. (forall s. (Not (p /\\* q))s) <=> (forall s. p s ==> Not q s)
-      #|  forall(p:A->bool) q. (forall s. (Not (p /\\* q))s) ==> (forall s. p s ==> Not q s)
-      #|  forall(p:A->bool) q. (forall s. (Not (p /\\* q))s) ==> (forall s. q s ==> Not p s)
-      #|  forall(p:A->bool) q s. p s /\\ (p s \\/ q s) ==> p s
-      #|  forall(p:A->bool) q s. p s ==> p s /\\ (p s \\/ q s)
-      #|  forall(p:A->bool) q s. p s /\\ (p s \\/ q s) <=> p s
-      #|  forall(p:A->bool) q.  (\\s. p s /\\ (p s \\/ q s)) = p
-      #|  forall(p:A->bool) q. p /\\* (p \\/* q) = p
-      #|  forall(p:A->bool) q. p /\\* (q \\/* p) = p /\\* (p \\/* q)
-      #|  forall(p:A->bool) q. (forall s. p s) ==> (forall s. (p \\/* q) s)
-      #|  forall(p:A->bool) q s. p s ==> (p \\/* q) s
-      #|  forall(P:num->(A->bool)) i s. (forall i. P i s) <=> (P i s /\\ (forall i. P i s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_slash_bslash_star(op_bslash_slash_star(p, q), Not(q)) == op_slash_bslash_star(p, Not(q))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) && q(s) || q(s) \226\134\146 q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, q(s) \226\134\146 p(s) && q(s) || q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) && q(s) || q(s)) == q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_bslash_slash_star(op_slash_bslash_star(p, q), q) == q
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) || q(s)) && q(s) \226\134\146 q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, q(s) \226\134\146 (p(s) || q(s)) && q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, ((p(s) || q(s)) && q(s)) == q(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_slash_bslash_star(op_bslash_slash_star(p, q), q) == q
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, Not(op_bslash_slash_star(p, q)) == op_slash_bslash_star(Not(p), Not(q))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, Not(op_slash_bslash_star(p, q)) == op_bslash_slash_star(Not(p), Not(q))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, Not(p, s) \226\134\146 q(s)) == (\226\136\128 s : A, op_bslash_slash_star(p, q, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, p(s) \226\134\146 q(s)) == (\226\136\128 s : A, op_bslash_slash_star(Not(p), q, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, op_bslash_slash_star(p, q, s)) == (\226\136\128 s : A, Not(p, s) \226\134\146 q(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, op_bslash_slash_star(Not(p), q, s)) == (\226\136\128 s : A, p(s) \226\134\146 q(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) || q(s) && r(s) \226\134\146 (p(s) || q(s)) && (p(s) || r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) || q(s)) && (p(s) || r(s)) \226\134\146 p(s) || q(s) && r(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) || q(s) && r(s)) == ((p(s) || q(s)) && (p(s) || r(s)))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_bslash_slash_star(p, op_slash_bslash_star(q, r)) == op_slash_bslash_star(op_bslash_slash_star(p, q), op_bslash_slash_star(p, r))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) && (q(s) || r(s)) \226\134\146 p(s) && q(s) || p(s) && r(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, p(s) && q(s) || p(s) && r(s) \226\134\146 p(s) && (q(s) || r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, \226\136\128 s : A, (p(s) && (q(s) || r(s))) == (p(s) && q(s) || p(s) && r(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 r : (A) -> Bool, op_slash_bslash_star(p, op_bslash_slash_star(q, r)) == op_bslash_slash_star(op_slash_bslash_star(p, q), op_slash_bslash_star(p, r))
+      #|  \226\136\128 p : (A) -> Bool, (\226\136\128 s : A, Not(p, s)) \226\134\146 (\226\136\128 s : A, p(s) == False(s))
+      #|  ((s : A) => (p : (A) -> Bool)(s)) == ((s : A) => False(s))
+      #|  \226\136\128 p : (A) -> Bool, (\226\136\128 s : A, Not(p, s)) \226\134\146 p == False
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, Not(op_slash_bslash_star(p, q), s)) == (\226\136\128 s : A, p(s) \226\134\146 Not(q, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, Not(op_slash_bslash_star(p, q), s)) \226\134\146 (\226\136\128 s : A, p(s) \226\134\146 Not(q, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, Not(op_slash_bslash_star(p, q), s)) \226\134\146 (\226\136\128 s : A, q(s) \226\134\146 Not(p, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) && (p(s) || q(s)) \226\134\146 p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) \226\134\146 p(s) && (p(s) || q(s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, (p(s) && (p(s) || q(s))) == p(s)
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, ((s : A) => p(s) && (p(s) || q(s))) == p
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_slash_bslash_star(p, op_bslash_slash_star(p, q)) == p
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, op_slash_bslash_star(p, op_bslash_slash_star(q, p)) == op_slash_bslash_star(p, op_bslash_slash_star(p, q))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, (\226\136\128 s : A, p(s)) \226\134\146 (\226\136\128 s : A, op_bslash_slash_star(p, q, s))
+      #|  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 s : A, p(s) \226\134\146 op_bslash_slash_star(p, q, s)
+      #|  \226\136\128 P : (Num, A) -> Bool, \226\136\128 i : Num, \226\136\128 s : A, (\226\136\128 i : Num, P(i, s)) == (P(i, s) && (\226\136\128 i : Num, P(i, s)))
       #|  (i : Num)
       #|  (i : Num)
       #|  (i' : Num)
-      #|  forall(P:num->(A->bool)) i s. (?i. P i s) <=> (P i s \\/ (?i. P i s))
-      #|  forall(P:num->(A->bool)) i. (((?*) P) = ((P i) \\/* ((?*) P)))
+      #|  \226\136\128 P : (Num, A) -> Bool, \226\136\128 i : Num, \226\136\128 s : A, (\226\136\131 i : Num, P(i, s)) == (P(i, s) || (\226\136\131 i : Num, P(i, s)))
+      #|  \226\136\128 P : (Num, A) -> Bool, \226\136\128 i : Num, op_q_star(P) == op_bslash_slash_star(P(i), op_q_star(P))
       #|  SUC((i : Num))
       #|  0
-      #|  (P (i:num) (s:A)):bool
+      #|  (P : (Num, A) -> Bool)((i : Num), (s : A))
       #|  SUC((i : Num))
       #|  (i' : Num)
       #|  0
-      #|  \\<=/* (P:num->(A->bool)) i s
-      #|  forall P (s:A). (?i. \\<=/* P i s) = (?i. P i s)
-      #|  forall P. ((\\s:A. ?i. \\<=/* P i s) = ((?*) P))
+      #|  op_bslash_lt_eq_slash_star((P : (Num, A) -> Bool), (i : Num), (s : A))
+      #|  \226\136\128 P : (Num, A) -> Bool, \226\136\128 s : A, (\226\136\131 i : Num, op_bslash_lt_eq_slash_star(P, i, s)) == (\226\136\131 i : Num, P(i, s))
+      #|  \226\136\128 P : (Num, A) -> Bool, ((s : A) => \226\136\131 i : Num, op_bslash_lt_eq_slash_star(P, i, s)) == op_q_star(P)
       #|FALSE_def =  |- ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) #False:fun('A,bool)) (\s:'A. #F:bool))
       #|TRUE_def =  |- ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) #True:fun('A,bool)) (\s:'A. #T:bool))
       #|NOT_def1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool))) (\s:'A. (#~:fun(bool,bool) (p:fun('A,bool) s:'A))))))
