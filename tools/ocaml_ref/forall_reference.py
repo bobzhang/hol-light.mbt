@@ -238,6 +238,10 @@ def rename_type_variables(text, renames):
     for new in renames.values():
         # a new name already in use would merge two type variables
         assert not occurs(new, segments), f'{new} is already used'
+    for kind, piece in segments:
+        # the scan does not read HOL comments, whose brackets would mislead it
+        assert not (kind == 'quotation' and '//' in piece and any(occurs(old, [(kind, piece)]) for old in renames)), \
+            f'a HOL comment in a quotation naming a renamed type variable: {piece[:60]}'
     segments = [(kind, rename_in_quotation(piece, renames) if kind == 'quotation' else piece)
                 for kind, piece in segments]
     for old in renames:

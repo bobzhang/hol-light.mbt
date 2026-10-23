@@ -7,8 +7,8 @@ Runs each reference script (by default, every one that loads a file
 TYPE_RENAMES lists) twice with run.sh: on upstream's own sources and on the
 renamed copies (forall_reference.py). It requires the renamed run's output
 to be exactly the original's with each renamed type variable's name
-replaced, `''a` by `'A` where the structural printer adds its quote: the
-renames change no proof step, hypothesis order or counter. It also
+replaced (type variables only: a term variable called person keeps its
+name): the renames change no proof step, hypothesis order or counter. It also
 requires that no old name is left in the renamed run's output (the rename
 is complete) and that no new name is already in the original's (no two
 type variables merge). These hold whatever the source scan in
@@ -20,7 +20,7 @@ import re
 import subprocess
 import sys
 
-from forall_reference import TYPE_RENAMES
+from forall_reference import TYPE_RENAMES, rename_in_quotation
 
 REF = os.path.dirname(os.path.abspath(__file__))
 NAME = "A-Za-z0-9_'"
@@ -45,6 +45,27 @@ def word(name):
     return re.compile(f"(?<![{NAME}])" + re.escape(name) + f"(?![{NAME}])")
 
 
+def substituted(output, renames):
+    """`output` with the type variables renamed, and nothing else: in the
+    quotation traces, in the quotations' type annotations (as
+    forall_reference.py renames them); elsewhere, where the structural
+    printer writes a type variable, as its name after a quote. A term
+    variable with an old name keeps it."""
+    structural = re.compile(f"(?<![{NAME}])'(" + '|'.join(
+        map(re.escape, sorted(renames, key=len, reverse=True))) + f")(?![{NAME}])")
+    out, trace = [], False
+    for line in output.splitlines(keepends=True):
+        if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
+            trace = True
+        elif trace and line.startswith('  '):
+            out.append(rename_in_quotation(line, renames))
+            continue
+        else:
+            trace = False
+        out.append(structural.sub(lambda m: "'" + renames[m[1]], line))
+    return ''.join(out)
+
+
 def check(script):
     text = open(os.path.join(REF, script)).read()
     loaded = [p for p in TYPE_RENAMES if f'#use "{p}"' in text]
@@ -62,10 +83,7 @@ def check(script):
             problems.append(f'{new} is already a type variable in the original output')
         if type_variable(old).search(renamed) or (old.startswith("'") and word(old).search(renamed)):
             problems.append(f'{old} is left in the renamed output')
-    # a name, or the structural printer's quote and a name
-    pattern = re.compile(f"(?<![{NAME}])('?)(" + '|'.join(map(re.escape, sorted(renames, key=len, reverse=True)))
-                         + f")(?![{NAME}])")
-    if pattern.sub(lambda m: m[1] + renames[m[2]], original) != renamed:
+    if substituted(original, renames) != renamed:
         problems.append('the renamed output is not the original with the names replaced')
     for p in problems:
         print(f'{script}: {p}')
