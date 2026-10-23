@@ -3900,7 +3900,7 @@ fn step_71() -> Unit raise {
   })
   let t2384 = @simp.rewrite_tac(@list.List([]))
   let t2422 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2384), t2387), t2389), t2390), t2391), t2392), t2393), @tactics.disch_tac), t2394), t2395), t2421)
-  bounded_sum_over_dirichlet_characters_c.set(@tactics.prove(@parser.parse_term("forall d l. 1 <= d /\\ coprime(l,d)\n         ==> bounded { vsum {c | dirichlet_character d c}\n                            (\\c. c(l) *\n                                 vsum(1..x) (\\n. c n * Cx (mangoldt n / &n))) -\n                       Cx(log(&x)) | x IN (:num)}"), t2422))
+  bounded_sum_over_dirichlet_characters_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : Num, ∀ l : Num, 1 <= d && coprime((l, d)) → bounded({vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(l) * vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n)))) - Cx(log(real_of_num(x))) | IN(x, UNIV)})"), t2422))
 }
 
 ///|
@@ -3975,7 +3975,7 @@ fn step_72() -> Unit raise {
       })(x2445))
     })(x2446)(x2446)
   }), t2447), t2451), t2452), t2453), @tactics.disch_tac), t2454), t2455), t2456), t2458), t2459), t2460), t2464), t2467)
-  dirichlet_mangoldt_c.set(@tactics.prove(@parser.parse_term("forall d k. 1 <= d /\\ coprime(k,d)\n         ==> bounded { Cx(&(phi d)) * vsum {n | n IN 1..x /\\ (n == k) (mod d)}\n                                           (\\n. Cx(mangoldt n / &n)) -\n                       Cx(log(&x)) | x IN (:num)}"), t2468))
+  dirichlet_mangoldt_c.set(@tactics.prove(@term_syntax.parse_term("∀ d : Num, ∀ k : Num, 1 <= d && coprime((k, d)) → bounded({Cx(real_of_num(phi(d))) * vsum({(n : Num) | IN(n, op_dot_dot(1, (x : Num))) && op_eq_eq(n, k, mod(d))}, (n : Num) => Cx(mangoldt(n) / real_of_num(n))) - Cx(log(real_of_num(x))) | IN(x, UNIV)})"), t2468))
 }
 
 ///|
