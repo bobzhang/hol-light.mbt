@@ -75,6 +75,17 @@ TYPE_RENAMES = {
     'Unity/mk_ensures.ml': {"'a": 'A'},
     'Unity/mk_leadsto.ml': {"'a": 'A'},
     'Unity/mk_comp_unity.ml': {"'a": 'A'},
+    'Unity/mk_unity_prog.ml': {"'a": 'A', "'b": 'B', "'i": 'I', "'loc": 'Loc', "'sta": 'Sta',
+                               "'state": 'State', "'t": 'T', "'val": 'Val'},
+}
+# Type variables a file builds in code, adapted by hand before the rename.
+TYPE_PATCHES = {
+    'Unity/mk_unity_prog.ml': [
+        ('let VAR_TP  = (fun s -> mk_vartype("\'"^s));;', 'let VAR_TP  = mk_vartype;;'),
+        ('let LOC = VAR_TP"loc";;', 'let LOC = VAR_TP"Loc";;'),
+        ('let VAL = VAR_TP"val";;', 'let VAL = VAR_TP"Val";;'),
+        ('let t   = mk_vartype"\'t";;', 'let t   = mk_vartype"T";;'),
+    ],
 }
 
 
@@ -165,6 +176,30 @@ def rename_in_quotation(q, renames):
     return ''.join(out)
 
 
+def annotation_extent(q, i):
+    """A generous end for the type annotation at q[i]: up to the first
+    character that ends one, outside parentheses and HOL comments (`//` to
+    the end of the line). Symbols such as `<` can name type variables, so
+    they do not end it. It may stop late, never early, so the already-used
+    check sees every type name."""
+    depth, j = 0, i
+    while j < len(q):
+        if q.startswith('//', j):
+            j = q.find('\n', j)
+            if j < 0:
+                return len(q)
+        elif q[j] == '(':
+            depth += 1
+        elif q[j] == ')':
+            if depth == 0:
+                return j
+            depth -= 1
+        elif depth == 0 and q[j] in '.|=;,]}:`':
+            return j
+        j += 1
+    return len(q)
+
+
 def literal_end(text, i):
     """End of the OCaml string, quoted string (`{id|...|id}`) or character
     literal starting at text[i], or None. The lexer reads these inside
@@ -222,25 +257,39 @@ def ocaml_segments(text):
     return out
 
 
-def rename_type_variables(text, renames):
+def checked_segments(text):
+    # a quotation ending in a colon is a string (pa_j), and string escapes
+    # are read as OCaml reads them ("\039a" is 'a)
+    segments = [('string', piece) if kind == 'quotation' and piece.endswith(':`') else (kind, piece)
+                for kind, piece in ocaml_segments(text)]
+    return [(kind, piece + '\0' + ocaml_unescaped(piece)) if kind == 'string' else (kind, piece)
+            for kind, piece in segments]
+
+
+def rename_type_variables(text, renames, patches=()):
     """`text` (OCaml) with the type variables `renames` maps renamed in the
     type annotations of its quotations. Any other occurrence of an old name
     outside comments, in a quotation's term or in OCaml code or strings
-    (`mk_vartype "'a"`), fails: those need adapting by hand."""
+    (`mk_vartype "'a"`), fails: those need adapting by hand, in `patches`
+    (pairs of an upstream text, which must occur once, and its replacement),
+    applied after checking that the new names are unused."""
     assert len(set(renames.values())) == len(renames) and not set(renames.values()) & set(renames), \
         'the renaming is not injective'
     def occurs(name, pieces):
         return any(re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", piece)
                    for kind, piece in pieces if kind != 'comment')
-    # a quotation ending in a colon is a string (pa_j), and string escapes
-    # are read as OCaml reads them ("\039a" is 'a)
-    segments = [('string', piece) if kind == 'quotation' and piece.endswith(':`') else (kind, piece)
-                for kind, piece in ocaml_segments(text)]
-    segments = [(kind, piece + '\0' + ocaml_unescaped(piece)) if kind == 'string' else (kind, piece)
-                for kind, piece in segments]
+    segments = checked_segments(text)
+    types = [(kind, piece) for kind, piece in segments if kind in ('code', 'string')] + [
+        ('annotation', piece[k + 1:annotation_extent(piece, k + 1)])
+        for kind, piece in segments if kind == 'quotation' for k in annotation_colons(piece)]
     for new in renames.values():
-        # a new name already in use would merge two type variables
-        assert not occurs(new, segments), f'{new} is already used'
+        # a new name already used for a type would merge two type variables
+        # (terms have names of their own: T, truth, is no type)
+        assert not occurs(new, types), f'{new} is already used'
+    for old, new in patches:
+        assert text.count(old) == 1, f'patch target changed: {old}'
+        text = text.replace(old, new)
+    segments = checked_segments(text)
     for kind, piece in segments:
         # the scan does not read HOL comments, whose brackets would mislead it
         assert not (kind == 'quotation' and '//' in piece and any(occurs(old, [(kind, piece)]) for old in renames)), \
@@ -293,7 +342,7 @@ def prepare():
         copy = ref / renamed_copy(path)
         copy.parent.mkdir(parents=True, exist_ok=True)
         copy.write_text(rename_type_variables(
-            (root / '.repos/hol-light' / path).read_text(), renames))
+            (root / '.repos/hol-light' / path).read_text(), renames, TYPE_PATCHES.get(path, ())))
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))
