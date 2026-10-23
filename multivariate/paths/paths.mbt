@@ -9367,7 +9367,7 @@ pub fn lipschitz_on_combine() -> @kernel.Thm {
 fn step_314() -> Unit raise {
   let t4095 = @sets.set_tac(@list.List([]))
   let t4096 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.inters_gspec()])), t4095)
-  let lemma = @tactics.prove(@parser.parse_term("{x | x IN s /\\ forall y. P x y} =\n     s INTER INTERS {{x | x IN s /\\ P x y} | y IN UNIV}"), t4096)
+  let lemma = @tactics.prove(@term_syntax.parse_term("{(x : _) | IN(x, (s : (_) -> Bool)) && (∀ y : _, (P : (_, _) -> Bool)(x, y))} == INTER(s, INTERS({{(x : _) | IN(x, s) && P(x, (y : _))} | IN(y, UNIV)}))"), t4096)
   let t4337 = @meson.asm_meson_tac(@list.List([@vectors.between_trans(), @topology.between_in_segment(), @vectors.between_sym()]))
   let t4334 = @drule.match_mp(@simp.rewrite_rule(@list.List([@sets.subset()]))(@topology.segment_open_subset_closed()))
   let t4336 = @tactics.disch_then(fn(x4335 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -19683,7 +19683,7 @@ fn step_460() -> Unit raise {
   let t10730 = @simp.asm_simp_tac(@list.List([@sets.finite_image(), @sets.simple_image(), @sets.finite_numseg_lt()]))
   let t10729 = @simp.asm_rewrite_tac(@list.List([@sets.finite_unions(), @sets.forall_in_gspec()]))
   let t10728 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@class.not_exists_thm(), @sets.infinite()])))
-  let t10726 = @parser.parse_term("UNIONS {{i | (f:real^M->real^N)(p i) = f(p(r m:num))}\n                | m |\n                 m IN {m:num | m < n}}")
+  let t10726 = @term_syntax.parse_term("UNIONS({{(i : Num) | (f : (Cart[Real, M]) -> Cart[Real, N])((p : (Num) -> Cart[Real, M])(i)) == f(p((r : (Num) -> Num)(m)))} | m : Num | IN(m, {(m : Num) | m < (n : Num)})})")
   let t10727 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(i : Num) => i"), t10726]), @misc.upper_bound_finite_set()))
   let t10725 = @tactics.conv_tac(@class.select_conv)
   let t10724 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(((p : Bool) → (q : Bool)) && (p → (r : Bool))) == (p → q && r)"))]))
@@ -20381,7 +20381,7 @@ pub fn closed_connected_preimages_imp_continuous_on() -> @kernel.Thm {
 fn step_471() -> Unit raise {
   let t11187 = @sets.set_tac(@list.List([]))
   let t11188 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.unions_gspec()])), t11187)
-  let lemma = @tactics.prove(@parser.parse_term("{n | f n IN UNIONS a} = UNIONS {{n | f n IN s} | s IN a}"), t11188)
+  let lemma = @tactics.prove(@term_syntax.parse_term("{(n : _) | IN((f : (_) -> _)(n), UNIONS((a : ((_) -> Bool) -> Bool)))} == UNIONS({{(n : _) | IN(f(n), (s : (_) -> Bool))} | IN(s, a)})"), t11188)
   let t11309 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t11306 = @term_syntax.parse_term("(f : (Cart[Real, M]) -> Cart[Real, N])((p : Cart[Real, M]))")
   let t11307 = @term_syntax.parse_term("(c : (Cart[Real, N]) -> Bool)")
@@ -30258,7 +30258,7 @@ fn step_625() -> Unit raise {
       s17547(x17548)
     }
   })
-  let t17545 = @simp.abbrev_tac(@parser.parse_term("u = INTERS {{y:real^N | y$i < (f:real^N->real^N)(z)$i} |i,z|\n                  i IN 1..n /\\ z IN {z | z IN s' /\\ (x:real^N)$i < z$i}} INTER\n          INTERS {{y:real^N | y$i > (f:real^N->real^N)(z)$i} |i,z|\n                  i IN 1..n /\\ z IN {z | z IN s' /\\ (x:real^N)$i > z$i}}"))
+  let t17545 = @simp.abbrev_tac(@term_syntax.parse_term("(u : (Cart[Real, N]) -> Bool) == INTER(INTERS({{(y : Cart[Real, N]) | op_dollar(y, i) < op_dollar((f : (Cart[Real, N]) -> Cart[Real, N])(z), i)} | i : Num, z : Cart[Real, N] | IN(i, op_dot_dot(1, (n : Num))) && IN(z, {(z : Cart[Real, N]) | IN(z, (s' : (Cart[Real, N]) -> Bool)) && op_dollar((x : Cart[Real, N]), i) < op_dollar(z, i)})}), INTERS({{(y : Cart[Real, N]) | op_dollar(y, i) > op_dollar(f(z), i)} | i : Num, z : Cart[Real, N] | IN(i, op_dot_dot(1, n)) && IN(z, {(z : Cart[Real, N]) | IN(z, s') && op_dollar(x, i) > op_dollar(z, i)})}))"))
   let t17543 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_diff()])), @tactics.strip_tac)
   let t17542 = @simp.rewrite_tac(@list.List([@theorems.conj_aci()]))
   let t17544 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.eq_sym_eq()])), t17542), t17543])
@@ -47735,7 +47735,7 @@ fn step_975() -> Unit raise {
   }, @list.List([@sets.extension()]))
   let t27419 = @simp.expand_tac("s")
   let t27434 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.unions_gspec(), @sets.inters_gspec(), @sets.exists_in_gspec()])), t27419), t27421), t27422), t27423), t27424), @tactics.eq_tac), @tactics.strip_tac), t27425), t27426), t27427), t27428), t27429), t27430), t27431), t27432), t27433), @tactics.all_tac])
-  let t27418 = @tactics.subgoal_then(@parser.parse_term("s =\n    UNIONS {s INTER h |\n            h IN  { INTERS {{x:real^N | x$i = q$i} | i IN k} |\n       k IN {l | l SUBSET 1..dimindex(:N) /\\ l HAS_SIZE n} /\\\n       q IN {y:real^N | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(y$i)}}}"), fn(x27415 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t27418 = @tactics.subgoal_then(@term_syntax.parse_term("(s : (Cart[Real, N]) -> Bool) == (UNIONS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({(INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, (h : (Cart[Real, N]) -> Bool)) | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(h, {(INTERS : (((Cart[Real, N]) -> Bool) -> Bool, Cart[Real, N]) -> Bool)({{(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, (i : Num)) == (op_dollar : (Cart[Real, N], Num) -> Real)((q : Cart[Real, N]), i)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, (k : (Num) -> Bool))}) | (IN : ((Num) -> Bool, ((Num) -> Bool) -> Bool) -> Bool)(k, {(l : (Num) -> Bool) | (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(l, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) && (HAS_SIZE : ((Num) -> Bool, Num) -> Bool)(l, (n : Num))}) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(q, {(y : Cart[Real, N]) | ∀ i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) → rational((op_dollar : (Cart[Real, N], Num) -> Real)(y, i))})})})"), fn(x27415 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s27416 = @tactics.subst1_tac(x27415)
     fn(x27417 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s27416(x27417)
@@ -53683,8 +53683,8 @@ fn step_1037() -> Unit raise {
   let t31642 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@metric.open_in_trans()), t31541), t31542), t31543), t31544), t31545)
   let t31643 = @list.List([@meson.asm_meson_tac(@list.List([@topology.connected_connected_component()])), t31642, t31641, t31640, t31639, t31638, t31637, t31636, t31635, t31634, t31633])
   let t31540 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t31537 = @parser.parse_term("{{x | x IN v /\\ (p':real^N->real^P) x IN u} | v IN vv'}")
-  let t31538 = @parser.parse_term("{{x | x IN v /\\ (p:real^M->real^P) x IN u} | v IN vv}")
+  let t31537 = @term_syntax.parse_term("{{(x : Cart[Real, N]) | IN(x, (v : (Cart[Real, N]) -> Bool)) && IN((p' : (Cart[Real, N]) -> Cart[Real, P])(x), (u : (Cart[Real, P]) -> Bool))} | IN(v, (vv' : ((Cart[Real, N]) -> Bool) -> Bool))}")
+  let t31538 = @term_syntax.parse_term("{{(x : Cart[Real, M]) | IN(x, (v : (Cart[Real, M]) -> Bool)) && IN((p : (Cart[Real, M]) -> Cart[Real, P])(x), (u : (Cart[Real, P]) -> Bool))} | IN(v, (vv : ((Cart[Real, M]) -> Bool) -> Bool))}")
   let t31539 = @tactics.map_every(fn(x31534 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s31535 = @tactics.exists_tac(x31534)
     fn(x31536 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
