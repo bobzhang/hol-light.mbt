@@ -286,6 +286,10 @@ def rename_type_variables(text, renames, patches=()):
         assert text.count(old) == 1, f'patch target changed: {old}'
         text = text.replace(old, new)
     segments = checked_segments(text)
+    for kind, piece in segments:
+        # the scan does not read HOL comments, whose brackets would mislead it
+        assert not (kind == 'quotation' and '//' in piece and any(occurs(old, [(kind, piece)]) for old in renames)), \
+            f'a HOL comment in a quotation naming a renamed type variable: {piece[:60]}'
     segments = [(kind, rename_in_quotation(piece, renames) if kind == 'quotation' else piece)
                 for kind, piece in segments]
     for old in renames:
