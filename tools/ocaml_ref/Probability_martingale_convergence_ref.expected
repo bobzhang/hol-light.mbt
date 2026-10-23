@@ -82532,7 +82532,7 @@ Probability/martingale_convergence quotations (5725):
   adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
   filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
   \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
-  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b M.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n     ==> forall k. 0 < k ==>\n         prob p (UNIONS {\n           {x | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n         | n IN (:num)}) <= (M + abs(a)) / ((b - a) * &k)
+  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 M : Real, simple_submartingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 (\226\136\128 k : Num, 0 < k \226\134\146 prob(p, UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)})) <= (M + abs(a)) / ((b - a) * real_of_num(k)))
   !((n : Num) == 0) \226\134\146 0 < n
   (c : Real) < real_of_num((n : Num)) * (x : Real)
   SUC((n : Num) - 1) == n
@@ -82564,12 +82564,12 @@ Probability/martingale_convergence quotations (5725):
   ((M : Real) + abs((a : Real))) / ((b : Real) - a) / real_of_num(SUC((j : Num))) == (M + abs(a)) / ((b - a) * real_of_num(SUC(j)))
   (FF : (Num, (A) -> Bool) -> Bool)
   (FF : (Num, (A) -> Bool) -> Bool)
-  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   ((M : Real) + abs((a : Real))) / ((b : Real) - a)
   (FF : (Num, (A) -> Bool) -> Bool)
-  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
   filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
   \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
@@ -82718,7 +82718,7 @@ Probability/martingale_convergence quotations (5725):
   (k : Num)
   \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
   (x : A)
-  INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
+  INTERS({{(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} | IN(k, UNIV)})
   {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
   (M : Real)
   (FF : (Num, (A) -> Bool) -> Bool)
@@ -83106,7 +83106,7 @@ Probability/martingale_convergence quotations (5725):
   adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
   filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
   \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
-  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n     simple_submartingale p FF X /\\ a < b /\\\n     (forall n. simple_expectation p (\\x. abs(X n x)) <= C)\n     ==> forall k. 0 < k ==>\n         prob p (UNIONS {\n           {x | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n         | n IN (:num)}) <= (C + abs(a)) / ((b - a) * &k)
+  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, simple_submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, simple_expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 (\226\136\128 k : Num, 0 < k \226\134\146 prob(p, UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)})) <= (C + abs(a)) / ((b - a) * real_of_num(k)))
   (nn : Num)
   (nn : Num)
   (k : Num)
@@ -83122,12 +83122,12 @@ Probability/martingale_convergence quotations (5725):
   ((C : Real) + abs((a : Real))) / ((b : Real) - a) / real_of_num(SUC((j : Num))) == (C + abs(a)) / ((b - a) * real_of_num(SUC(j)))
   (FF : (Num, (A) -> Bool) -> Bool)
   (FF : (Num, (A) -> Bool) -> Bool)
-  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   ((C : Real) + abs((a : Real))) / ((b : Real) - a)
   (FF : (Num, (A) -> Bool) -> Bool)
-  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_upcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   adapted((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
   filtration((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool))
   \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
@@ -83232,7 +83232,7 @@ Probability/martingale_convergence quotations (5725):
   \226\136\128 X : (Num, A) -> Real, \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 x : A, m <= n \226\134\146 X(m, x) <= running_max(X, n, x)
   (v : Real)
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 v : Real, simple_rv(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= v}, prob_events(p))
-  forall p (A:num->num->(A->bool)).\n    (forall k:num n:num. A k n IN prob_events p)\n    ==> INTERS {UNIONS {A k n | n IN (:num)} | k IN (:num)}\n        IN prob_events p
+  \226\136\128 p : Prob_space[A], \226\136\128 A : (Num, Num, A) -> Bool, (\226\136\128 k : Num, \226\136\128 n : Num, IN(A(k, n), prob_events(p))) \226\134\146 IN(INTERS({UNIONS({A((k : Num), (n : Num)) | IN(n, UNIV)}) | IN(k, UNIV)}), prob_events(p))
   !((c : Real) <= real_of_num(0))
   !((c : Real) <= real_of_num(0))
   IN((x : A), prob_carrier((p : Prob_space[A])))
@@ -83373,7 +83373,7 @@ Probability/martingale_convergence quotations (5725):
   (K0 : Num)
   (M0 : Real)
   (x : A)
-  (INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}) INTER\n     {x:A | ?M. forall n. pos_part((X:num->A->real) n x) <= M} INTER\n     {x:A | ?K:num. forall N:num. ?n. N <= n /\\ X n x > --(&K)}
+  INTER(INTERS({{(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} | IN(k, UNIV)}), INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part(X(n, x)) <= M}, {(x : A) | \226\136\131 K : Num, \226\136\128 N : Num, \226\136\131 n : Num, N <= n && X(n, x) > -real_of_num(K)}))
   (N0 : Num)
   (N0 : Num)
   (N0 : Num)
@@ -83403,13 +83403,13 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) <= -real_of_num(SUC(k))}
   (p : Prob_space[A])
-  prob (p:A prob_space) (UNIONS {\n           {x:A | x IN prob_carrier p /\\\n                  running_max (\\m x. max (--((X:num->A->real) m x)) (&0)) n x\n                  >= &(SUC k)}\n           | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}))
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) <= -real_of_num(SUC(k))}
   (p : Prob_space[A])
   real_of_num(2) * (C : Real)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) <= -real_of_num(SUC(k))}
   (p : Prob_space[A])
-  INTERS\n     {UNIONS {{x:A | x IN prob_carrier p /\\\n                     (X:num->A->real) n x <= --(&(SUC k))}\n              | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) <= -real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 K : Num, \226\136\128 N : Num, \226\136\131 n : Num, N <= n && (X : (Num, A) -> Real)(n, x) > -real_of_num(K)})
   ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))((nn : Num), (x : A))
   (nn : Num)
@@ -83435,7 +83435,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  prob (p:A prob_space) (UNIONS {\n        {x:A | x IN prob_carrier p /\\\n               running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n               >= &(SUC j)} | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), x) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
@@ -83444,9 +83444,9 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  INTERS {UNIONS {\n     {x:A | x IN prob_carrier p /\\\n            running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n            >= &(SUC k)}\n   | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), x) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, x)) <= M})
-  almost_surely (p:A prob_space)\n       (INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)})
+  almost_surely((p : Prob_space[A]), INTERS({{(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} | IN(k, UNIV)}))
   {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
   (C : Real)
   (FF : (Num, (A) -> Bool) -> Bool)
@@ -83709,7 +83709,7 @@ Probability/martingale_convergence quotations (5725):
   (nn : Num)
   simple_backward_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
   \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
-  forall(p:A prob_space) (FF:num->(A->bool)->bool) (X:num->A->real) a b M.\n    simple_backward_martingale p FF X /\\ a < b /\\\n    (forall m x. x IN prob_carrier p ==> abs(X m x) <= M)\n    ==> forall k. 0 < k ==>\n      prob p (UNIONS {\n        {x | x IN prob_carrier p /\\ &(num_downcrossings X a b n x) >= &k}\n      | n IN (:num)}) <= (M + abs a + (b - a)) / ((b - a) * &k)
+  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 M : Real, simple_backward_martingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 (\226\136\128 k : Num, 0 < k \226\134\146 prob(p, UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings(X, a, b, (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)})) <= (M + (abs(a) + (b - a))) / ((b - a) * real_of_num(k)))
   (nn : Num)
   (nn : Num)
   (k : Num)
@@ -83723,10 +83723,10 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (p : Prob_space[A])
   ((M : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a) / real_of_num(SUC((j : Num))) == (M + (abs(a) + (b - a))) / ((b - a) * real_of_num(SUC(j)))
-  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   ((M : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a)
-  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   simple_backward_martingale((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool), (X : (Num, A) -> Real))
   \226\136\128 m : Num, simple_rv((p : Prob_space[A]), (X : (Num, A) -> Real)(m))
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 M : Real, simple_backward_martingale(p, FF, X) && a < b && (\226\136\128 m : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(X(m, x)) <= M) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings(X, a, b, n, x) <= B})
@@ -83760,7 +83760,7 @@ Probability/martingale_convergence quotations (5725):
   (k : Num)
   \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
   (x : A)
-  INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
+  INTERS({{(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} | IN(k, UNIV)})
   {(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} == UNIV
   (M : Real)
   (FF : (Num, (A) -> Bool) -> Bool)
@@ -84373,7 +84373,7 @@ Probability/martingale_convergence quotations (5725):
   IN((x : A), prob_carrier((p : Prob_space[A])))
   {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && !IN(x, {(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) <= gen_cond_exp(p, G, (Y : (A) -> Real), x)})} == {(x : A) | IN(x, prob_carrier(p)) && gen_cond_exp(p, G, Y, x) < gen_cond_exp(p, G, X, x)}
   \226\136\128 p : Prob_space[A], \226\136\128 G : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, sub_sigma_algebra(p, G) && integrable(p, X) && integrable(p, Y) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(x) <= Y(x)) \226\134\146 almost_surely(p, {(x : A) | gen_cond_exp(p, G, X, x) <= gen_cond_exp(p, G, Y, x)})
-  INTERS {{x:A | gen_cond_exp p G ((X:num->A->real) n) x <= gen_cond_exp p G (X (SUC n)) x /\\\n                    gen_cond_exp p G (X n) x <= gen_cond_exp p G (L:A->real) x} | n IN (:num)}
+  INTERS({{(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)((n : Num)), x) <= gen_cond_exp(p, G, X(SUC(n)), x) && gen_cond_exp(p, G, X(n), x) <= gen_cond_exp(p, G, (L : (A) -> Real), x)} | IN(n, UNIV)})
   INTER({(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)((n : Num)), x) <= gen_cond_exp(p, G, X(SUC(n)), x)}, {(x : A) | gen_cond_exp(p, G, X(n), x) <= gen_cond_exp(p, G, (L : (A) -> Real), x)})
   (L : (A) -> Real)
   (X : (Num, A) -> Real)((n : Num))
@@ -84548,7 +84548,7 @@ Probability/martingale_convergence quotations (5725):
   (N0 : (A) -> Bool)
   INTER({(x : A) | real_of_num(0) <= (g : (Num, A) -> Real)((n : Num), x)}, {(x : A) | g(SUC(n), x) <= g(n, x)})
   (n : Num)
-  INTERS {{x:A | &0 <= (g:num->A->real) n x /\\ g (SUC n) x <= g n x} |\n             n IN (:num)}
+  INTERS({{(x : A) | real_of_num(0) <= (g : (Num, A) -> Real)((n : Num), x) && g(SUC(n), x) <= g(n, x)} | IN(n, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | (\226\136\128 n : Num, real_of_num(0) <= (g : (Num, A) -> Real)(n, x)) && (\226\136\128 n : Num, g(SUC(n), x) <= g(n, x))})
   \226\136\128 n : Num, integrable((p : Prob_space[A]), (g : (Num, A) -> Real)(n))
   (g : (Num, A) -> Real) == ((n : Num) => (x : A) => gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x))
@@ -84565,7 +84565,7 @@ Probability/martingale_convergence quotations (5725):
   (p : Prob_space[A])
   ((w : A) => (L : (A) -> Real)(w) - (X : (Num, A) -> Real)((n : Num), w)) == (D : (Num, A) -> Real)(n)
   (n : Num)
-  INTERS {{x:A | gen_cond_exp p G ((D:num->A->real) n) x =\n                     gen_cond_exp p G L x - gen_cond_exp p G (X n) x} |\n              n IN (:num)}
+  INTERS({{(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)((n : Num)), x) == gen_cond_exp(p, G, (L : (A) -> Real), x) - gen_cond_exp(p, G, (X : (Num, A) -> Real)(n), x)} | IN(n, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (D : (Num, A) -> Real)(n), x) == gen_cond_exp(p, G, (L : (A) -> Real), x) - gen_cond_exp(p, G, (X : (Num, A) -> Real)(n), x)})
   op_minus_minus_minus_gt((n : Num) => (L : (A) -> Real)((x : A)) - (X : (Num, A) -> Real)(n, x), L(x) - L(x), sequentially)
   (x : A)
@@ -84664,11 +84664,11 @@ Probability/martingale_convergence quotations (5725):
   (x : A)
   INTER({(x : A) | \226\136\128 n : Num, gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x) == gen_cond_exp(p, G, X(n), x) - gen_cond_exp(p, G, Z, x)}, INTER({(x : A) | \226\136\128 n : Num, abs(gen_cond_exp(p, G, (w : A) => X(n, w) - Z(w), x)) <= gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x)}, {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)}))
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, abs(gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (X : (Num, A) -> Real)(n), x) - gen_cond_exp(p, G, (Z : (A) -> Real), x)) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)})
-  INTERS {{x:A | gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x\n                     <= gen_cond_exp p G ((W:num->A->real) n) x} | n IN (:num)}
+  INTERS({{(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => abs((X : (Num, A) -> Real)((n : Num), w) - (Z : (A) -> Real)(w)), x) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)} | IN(n, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => abs((X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w)), x) <= gen_cond_exp(p, G, (W : (Num, A) -> Real)(n), x)})
-  INTERS {{x:A | abs(gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x)\n                     <= gen_cond_exp p G (\\w. abs((X:num->A->real) n w - Z w)) x} |\n              n IN (:num)}
+  INTERS({{(x : A) | abs(gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)((n : Num), w) - (Z : (A) -> Real)(w), x)) <= gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x)} | IN(n, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, abs(gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x)) <= gen_cond_exp(p, G, (w : A) => abs(X(n, w) - Z(w)), x)})
-  INTERS {{x:A | gen_cond_exp p G (\\w. (X:num->A->real) n w - Z w) x =\n                     gen_cond_exp p G (X n) x - gen_cond_exp p G Z x} | n IN (:num)}
+  INTERS({{(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)((n : Num), w) - (Z : (A) -> Real)(w), x) == gen_cond_exp(p, G, X(n), x) - gen_cond_exp(p, G, Z, x)} | IN(n, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 n : Num, gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (X : (Num, A) -> Real)(n, w) - (Z : (A) -> Real)(w), x) == gen_cond_exp(p, G, X(n), x) - gen_cond_exp(p, G, Z, x)})
   (x : A)
   (W : (Num, A) -> Real)((n : Num))
@@ -85317,16 +85317,16 @@ Probability/martingale_convergence quotations (5725):
   (x : A)
   (nn : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
-  prob (p:A prob_space) (UNIONS {\n        {x:A | x IN prob_carrier p /\\\n               &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n        | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   ((C : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a) / real_of_num(SUC((j : Num))) == (C + (abs(a) + (b - a))) / ((b - a) * real_of_num(SUC(j)))
   (FF : (Num, (A) -> Bool) -> Bool)
   (FF : (Num, (A) -> Bool) -> Bool)
-  prob (p:A prob_space) (UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC j)}\n       | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   ((C : Real) + (abs((a : Real)) + ((b : Real) - a))) / (b - a)
   (FF : (Num, (A) -> Bool) -> Bool)
-  INTERS {UNIONS {\n       {x:A | x IN prob_carrier p /\\\n              &(num_downcrossings (X:num->A->real) a b n x) >= &(SUC k)}\n     | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_downcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, backward_martingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings(X, a, b, n, x) <= B})
   \226\136\128 f : (Num, A) -> Real, \226\136\128 N : Num, \226\136\128 x : A, \226\136\128 C : Real, (\226\136\128 m : Num, m <= N \226\134\146 f(m, x) <= C) \226\134\146 running_max(f, N, x) <= C
   (g : (Num, A) -> Real)((m : Num), (x : A)) == ((m : Num) => g((N : Num) - m))(N - m, x)
@@ -85427,7 +85427,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n                >= &(SUC j)} | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
@@ -85436,7 +85436,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))((nn : Num), (x : A))
   (nn : Num)
   (nn : Num)
@@ -85461,7 +85461,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n                >= &(SUC j)} | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), x) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
@@ -85470,7 +85470,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), x) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, x)) <= M}, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, max(-X(n, x), real_of_num(0)) <= M})
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, backward_martingale(p, FF, X) && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs(X(n, x)) <= M})
   (n : Num)
@@ -85492,7 +85492,7 @@ Probability/martingale_convergence quotations (5725):
   \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
   (M : Real)
   (x : A)
-  {x:A | ?M. forall n. abs((X:num->A->real) n x) <= M} INTER\n     INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_downcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
+  INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs((X : (Num, A) -> Real)(n, x)) <= M}, INTERS({{(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_downcrossings(X, g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} | IN(k, UNIV)}))
   (C : Real)
   (X : (Num, A) -> Real)
   (FF : (Num, (A) -> Bool) -> Bool)
@@ -85563,7 +85563,7 @@ Probability/martingale_convergence quotations (5725):
   real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (m : Num), (x : A)))
   (x : A)
   (FF : (Num, (A) -> Bool) -> Bool)
-  forall p:A prob_space (FF:num->(A->bool)->bool) (X:num->A->real) a b C.\n     submartingale p FF X /\\ a < b /\\\n     (forall n. expectation p (\\x. abs(X n x)) <= C)\n     ==> forall k. 0 < k ==>\n         prob p (UNIONS {\n           {x | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n         | n IN (:num)}) <= (C + abs(a)) / ((b - a) * &k)
+  \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 (\226\136\128 k : Num, 0 < k \226\134\146 prob(p, UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings(X, a, b, (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)})) <= (C + abs(a)) / ((b - a) * real_of_num(k)))
   real_of_num((N : Num)) * ((d : Real) * (x : Real)) == real_of_num(N) * (d * x) && x * (d * real_of_num(SUC(N))) == real_of_num(SUC(N)) * (d * x)
   real_of_num((N : Num)) * ((d : Real) * (x : Real))
   (c : Real) / ((d : Real) * (x : Real)) < real_of_num((N : Num))
@@ -85582,21 +85582,21 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (p : Prob_space[A])
   (k : Num)
-  UNIONS {{x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &k} | n IN (:num)}
+  UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))} | IN(n, UNIV)})
   (x : A)
-  prob (p:A prob_space) (UNIONS {{x:A | x IN prob_carrier p /\\\n     &(num_upcrossings X a b n x) >= &k} | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))} | IN(n, UNIV)}))
   (b : Real) - (a : Real)
   (C : Real) + abs((a : Real))
   real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
   1
-  UNIONS {{x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &1} | n IN (:num)}
+  UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(1)} | IN(n, UNIV)})
   (kk : Num)
   (kk : Num)
   (s : (A) -> Bool)
-  IMAGE (\\k. UNIONS {{x:A | x IN prob_carrier p /\\\n      &(num_upcrossings X a b n x) >= &k} | n IN (:num)}) (:num)
+  IMAGE((k : Num) => UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)}), UNIV)
   (kk : Num)
   (s : (A) -> Bool)
-  INTERS {UNIONS {{x:A | x IN prob_carrier p /\\\n    &(num_upcrossings X a b n x) >= &k} | n IN (:num)} | 0 < k}\n    IN prob_events p
+  IN(INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))} | IN(n, UNIV)}) | 0 < k}), prob_events(p))
   (nn : Num)
   (nn : Num)
   (s : (A) -> Bool)
@@ -85604,7 +85604,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (nn : Num)
   (s : (A) -> Bool)
-  forall k. 0 < k ==> UNIONS {{x:A | x IN prob_carrier p /\\\n    &(num_upcrossings X a b n x) >= &k} | n IN (:num)} IN prob_events p
+  \226\136\128 k : Num, 0 < k \226\134\146 IN(UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)}), prob_events(p))
   (n : Num)
   {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num((k : Num))}
   (n : Num)
@@ -85613,7 +85613,7 @@ Probability/martingale_convergence quotations (5725):
   (t : (A) -> Bool)
   (x : A)
   (c : Bool) && (c \226\134\146 (a : Bool) && (b : Bool)) \226\134\146 (a && b) && c
-  INTERS {UNIONS {\n    {x:A | x IN prob_carrier p /\\ &(num_upcrossings X a b n x) >= &k}\n  | n IN (:num)} | k | 0 < k}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_of_num(num_upcrossings((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), x)) >= real_of_num(k)} | IN(n, UNIV)}) | k : Num | 0 < k})
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 C : Real, submartingale(p, FF, X) && a < b && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings(X, a, b, n, x) <= B})
   \226\136\128 n : Num, max(-(X : (Num, A) -> Real)(n, (x : A)), real_of_num(0)) <= (M2 : Real)
   (n : Num)
@@ -85647,7 +85647,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n                >= &(SUC j)} | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
@@ -85656,7 +85656,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. max (--(X:num->A->real) m x) (&0)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => max(-(X : (Num, A) -> Real)(m, x), real_of_num(0)), (n : Num), x) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   ((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)))((nn : Num), (x : A))
   (nn : Num)
   (nn : Num)
@@ -85681,7 +85681,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  prob (p:A prob_space) (UNIONS {\n         {x:A | x IN prob_carrier p /\\\n                running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n                >= &(SUC j)} | n IN (:num)})
+  prob((p : Prob_space[A]), UNIONS({{(x : A) | IN(x, prob_carrier(p)) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), x) >= real_of_num(SUC((j : Num)))} | IN(n, UNIV)}))
   (j : Num)
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
@@ -85690,7 +85690,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (k : Num) => (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), n, x) >= real_of_num(SUC(k))}
   (p : Prob_space[A])
-  INTERS {UNIONS {\n      {x:A | x IN prob_carrier p /\\\n             running_max (\\m x. pos_part ((X:num->A->real) m x)) n x\n             >= &(SUC k)}\n    | n IN (:num)} | k IN (:num)}
+  INTERS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && running_max((m : Num) => (x : A) => pos_part((X : (Num, A) -> Real)(m, x)), (n : Num), x) >= real_of_num(SUC((k : Num)))} | IN(n, UNIV)}) | IN(k, UNIV)})
   INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, pos_part((X : (Num, A) -> Real)(n, x)) <= M}, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, max(-X(n, x), real_of_num(0)) <= M})
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 X : (Num, A) -> Real, \226\136\128 C : Real, submartingale(p, FF, X) && (\226\136\128 n : Num, expectation(p, (x : A) => abs(X(n, x))) <= C) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs(X(n, x)) <= M})
   (n : Num)
@@ -85712,7 +85712,7 @@ Probability/martingale_convergence quotations (5725):
   \226\136\128 k : Num, (g : (Num) -> Real)(NUMFST(k)) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings((X : (Num, A) -> Real), g(NUMFST(k)), g(NUMSND(k)), n, (x : A)) <= B)
   (M : Real)
   (x : A)
-  {x:A | ?M. forall n. abs((X:num->A->real) n x) <= M} INTER\n     INTERS {{x:A | (g:num->real)(NUMFST k) < g(NUMSND k) ==>\n              (?B. forall n. num_upcrossings (X:num->A->real)\n                         (g(NUMFST k)) (g(NUMSND k)) n x <= B)}\n             | k IN (:num)}
+  INTER({(x : A) | \226\136\131 M : Real, \226\136\128 n : Num, abs((X : (Num, A) -> Real)(n, x)) <= M}, INTERS({{(x : A) | (g : (Num) -> Real)(NUMFST((k : Num))) < g(NUMSND(k)) \226\134\146 (\226\136\131 B : Num, \226\136\128 n : Num, num_upcrossings(X, g(NUMFST(k)), g(NUMSND(k)), n, x) <= B)} | IN(k, UNIV)}))
   (C : Real)
   (X : (Num, A) -> Real)
   (FF : (Num, (A) -> Bool) -> Bool)
@@ -86175,7 +86175,7 @@ Probability/martingale_convergence quotations (5725):
   (x : A)
   (n : Num) => {(x : A) | gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), (y : A) => sum(op_dot_dot(0, SUC(n)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)), x) - sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)) == gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x)}
   (p : Prob_space[A])
-  INTERS\n    {({x:A | gen_cond_exp p ((FF:num->(A->bool)->bool) n)\n        (\\y. sum (0..SUC n) (\\k. indicator_fn ((B:num->A->bool) k) y))\n        x - sum (0..n) (\\k. indicator_fn (B k) x) =\n        gen_cond_exp p (FF n) (\\y. indicator_fn (B (SUC n)) y) x})\n     | n IN (:num)}
+  INTERS({{(x : A) | gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((n : Num)), (y : A) => sum(op_dot_dot(0, SUC(n)), (k : Num) => indicator_fn((B : (Num, A) -> Bool)(k), y)), x) - sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)) == gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x)} | IN(n, UNIV)})
   (p : Prob_space[A])
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | \226\136\128 n : Num, gen_doob_compensator(p, FF, (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => indicator_fn(B(k), x)), SUC(n), x) == sum(op_dot_dot(0, n), (k : Num) => gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x))})
   !(real_of_num(1) + sum(op_dot_dot(0, (x : Num)), (v : (Num) -> Real)) == real_of_num(0))
@@ -86454,7 +86454,7 @@ Probability/martingale_convergence quotations (5725):
   (n : Num) => (Yn : (Num, A) -> Real)(n, (x : A)) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x)
   sequentially
   (x : A)
-  (prob_carrier (p:A prob_space)) INTER\n     (INTERS {{x:A | gen_cond_exp p G (\\w. (Yn:num->A->real) n w * X w) x =\n                     Yn n x * gen_cond_exp p G X x} | n IN (:num)}) INTER\n     {x:A | ((\\n. gen_cond_exp p G (\\w. (Yn:num->A->real) n w * X w) x) --->\n             gen_cond_exp p G (\\w. Y w * X w) x) sequentially}
+  INTER(prob_carrier((p : Prob_space[A])), INTER(INTERS({{(x : A) | gen_cond_exp(p, (G : ((A) -> Bool) -> Bool), (w : A) => (Yn : (Num, A) -> Real)((n : Num), w) * (X : (A) -> Real)(w), x) == Yn(n, x) * gen_cond_exp(p, G, X, x)} | IN(n, UNIV)}), {(x : A) | op_minus_minus_minus_gt((n : Num) => gen_cond_exp(p, G, (w : A) => Yn(n, w) * X(w), x), gen_cond_exp(p, G, (w : A) => (Y : (A) -> Real)(w) * X(w), x), sequentially)}))
   (x : A)
   prob_carrier((p : Prob_space[A]))
   (x : A)
@@ -87572,7 +87572,7 @@ Probability/martingale_convergence quotations (5725):
   (FF : (Num, (A) -> Bool) -> Bool)
   (p : Prob_space[A])
   {(x : A) | real_of_num(0) <= (v : (Num, A) -> Real)((n : Num), x) && v(n, x) <= real_of_num(1)} == {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(n)), y), x) && gen_cond_exp(p, FF(n), (y : A) => indicator_fn(B(SUC(n)), y), x) <= real_of_num(1)}
-  INTERS {(\\k. {x:A | &0 <= (v:num->A->real) k x /\\\n     v k x <= &1}) n | n IN (:num)}
+  INTERS({((k : Num) => {(x : A) | real_of_num(0) <= (v : (Num, A) -> Real)(k, x) && v(k, x) <= real_of_num(1)})((n : Num)) | IN(n, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 k : Num, (v : (Num, A) -> Real)(k, x) == (v' : (Num, A) -> Real)(k, x)})
   (FF : (Num, (A) -> Bool) -> Bool)((k : Num))
   ((x : A) => (v : (Num, A) -> Real)((k : Num), x)) == gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y))
@@ -87605,10 +87605,10 @@ Probability/martingale_convergence quotations (5725):
   {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)}
   \226\136\128 k : Num, real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), (x : A))
   (x : A)
-  (INTERS {{x:A | &0 <=\n      gen_cond_exp p (FF k)\n        (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} |\n      k IN (:num)}) INTER\n    {x | ?L. ((\\n. sum(0..n)\n      (\\k. (indicator_fn (B (SUC k)) x -\n            gen_cond_exp p (FF k)\n              (\\y. indicator_fn (B (SUC k)) y) x) /\n           max (&1 + sum(0..k)\n             (\\j. gen_cond_exp p (FF j)\n               (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))\n      ---> L) sequentially}
-  almost_surely p\n     ((INTERS {{x:A | &0 <=\n       gen_cond_exp p (FF k)\n         (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} |\n       k IN (:num)}) INTER\n      {x | ?L. ((\\n. sum(0..n)\n        (\\k. (indicator_fn (B (SUC k)) x -\n              gen_cond_exp p (FF k)\n                (\\y. indicator_fn (B (SUC k)) y) x) /\n             max (&1 + sum(0..k)\n               (\\j. gen_cond_exp p (FF j)\n                 (\\y. indicator_fn (B (SUC j)) y) x)) (&1)))\n        ---> L) sequentially})
+  INTER(INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)} | IN(k, UNIV)}), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))), L, sequentially)})
+  almost_surely((p : Prob_space[A]), INTER(INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)} | IN(k, UNIV)}), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))), L, sequentially)}))
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / max(real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)), real_of_num(1))), L, sequentially)})
-  almost_surely p\n     (INTERS {{x:A | &0 <=\n       gen_cond_exp p (FF k)\n         (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} |\n       k IN (:num)})
+  almost_surely((p : Prob_space[A]), INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)} | IN(k, UNIV)}))
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)))), L, sequentially)})
   indicator_fn((B : (Num, A) -> Bool)(0), (x : A))
   (a : (Num) -> Real)
@@ -87646,9 +87646,9 @@ Probability/martingale_convergence quotations (5725):
   \226\136\128 k : Num, real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), (x : A))
   (L : Real)
   (x : A)
-  (INTERS {{x:A | &0 <= gen_cond_exp p (FF k)\n     (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} | k IN (:num)})\n    INTER\n    {x | ?L. ((\\n. sum(0..n)\n      (\\k. (indicator_fn (B (SUC k)) x -\n            gen_cond_exp p (FF k)\n              (\\y. indicator_fn (B (SUC k)) y) x) /\n           (&1 + sum(0..k)\n             (\\j. gen_cond_exp p (FF j)\n               (\\y. indicator_fn (B (SUC j)) y) x))))\n      ---> L) sequentially}
+  INTER(INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)} | IN(k, UNIV)}), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn(B(SUC(k)), x) - gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)))), L, sequentially)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => (indicator_fn((B : (Num, A) -> Bool)(SUC(k)), x) - gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)(k), (y : A) => indicator_fn(B(SUC(k)), y), x)) / (real_of_num(1) + sum(op_dot_dot(0, k), (j : Num) => gen_cond_exp(p, FF(j), (y : A) => indicator_fn(B(SUC(j)), y), x)))), L, sequentially)})
-  almost_surely p\n     (INTERS {{x:A | &0 <= gen_cond_exp p (FF k)\n       (\\y. indicator_fn ((B:num->A->bool) (SUC k)) y) x} | k IN (:num)})
+  almost_surely((p : Prob_space[A]), INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp(p, (FF : (Num, (A) -> Bool) -> Bool)((k : Num)), (y : A) => indicator_fn((B : (Num, A) -> Bool)(SUC(k)), y), x)} | IN(k, UNIV)}))
   \226\136\128 p : Prob_space[A], \226\136\128 FF : (Num, (A) -> Bool) -> Bool, \226\136\128 B : (Num, A) -> Bool, filtration(p, FF) && (\226\136\128 n : Num, IN(B(n), prob_events(p))) && (\226\136\128 n : Num, SUBSET(B(n), prob_carrier(p))) && (\226\136\128 n : Num, IN(B(n), FF(n))) \226\134\146 almost_surely(p, {(x : A) | IN(x, limsup_events(B)) == (\226\136\128 M : Num, \226\136\131 N : Num, real_of_num(M) <= sum(op_dot_dot(0, N), (k : Num) => gen_cond_exp(p, FF(k), (y : A) => indicator_fn(B(SUC(k)), y), x)))})
   sequentially
   sequentially
