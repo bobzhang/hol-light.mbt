@@ -26401,7 +26401,7 @@ fn step_1106() -> Unit raise {
   let t8773 = @simp.rewrite_tac(@list.List([@equal.gsym(has_real_measure_0())]))
   let t8772 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t8804 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(real_negligible_countable_unions()), t8772), t8773), t8774), t8775), t8776), @tactics.conj_tac), t8790), t8803])
-  let t8771 = @tactics.exists_tac(@parser.parse_term("UNIONS {{x:real | x IN s /\\ abs(f x) >= &1 / (&n + &1)} |\n            n IN (:num)}"))
+  let t8771 = @tactics.exists_tac(@term_syntax.parse_term("UNIONS({{(x : Real) | IN(x, (s : (Real) -> Bool)) && abs((f : (Real) -> Real)(x)) >= real_of_num(1) / (real_of_num((n : Num)) + real_of_num(1))} | IN(n, UNIV)})"))
   let t8770 = @tactics.match_mp_tac(real_negligible_subset())
   let t8768 = @meson.meson_tac(@list.List([]))
   let t8767 = @simp.asm_rewrite_tac(@list.List([@sets.in_diff(), @sets.in_elim_thm()]))

@@ -85488,7 +85488,7 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  (x : Real)
       #|  (x : Real) => if IN(x, (s : (Real) -> Bool)) { (real_of_num((n : Num)) + real_of_num(1)) * (f : (Real) -> Real)(x) } else { real_of_num(0) }
       #|  (n : Num)
-      #|  UNIONS {{x:real | x IN s /\\ abs(f x) >= &1 / (&n + &1)} |\n            n IN (:num)}
+      #|  UNIONS({{(x : Real) | IN(x, (s : (Real) -> Bool)) && abs((f : (Real) -> Real)(x)) >= real_of_num(1) / (real_of_num((n : Num)) + real_of_num(1))} | IN(n, UNIV)})
       #|  {(x : Real) | IN(x, (s : (Real) -> Bool)) && !((f : (Real) -> Real)(x) == real_of_num(0))}
       #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 x : Real, IN(x, s) \226\134\146 real_of_num(0) <= f(x)) \226\134\146 has_real_integral(f, real_of_num(0), s) == real_negligible({(x : Real) | IN(x, s) && !(f(x) == real_of_num(0))})
       #|  (lambda : ((Num) -> Real) -> Cart[Real, Finite_sum[Unit, Unit]])((i : Num) => (op_dollar : (Cart[Real, Tybit0[Unit]], Num) -> Real)((z : Cart[Real, Tybit0[Unit]]), i))
