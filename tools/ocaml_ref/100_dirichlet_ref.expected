@@ -81786,7 +81786,7 @@ Translating certificate to HOL inferences
   (c : (Num) -> Cart[Real, Tybit0[Unit]]) == chi_0((d : Num))
   (c : (Num) -> Cart[Real, Tybit0[Unit]])
   \226\136\128 x : Num, Cx(log(real_of_num(x))) == vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character((d : Num), c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => if c == chi_0(d) { Cx(log(real_of_num(x))) } else { Cx(real_of_num(0)) })
-  forall d l. 1 <= d /\\ coprime(l,d)\n         ==> bounded { vsum {c | dirichlet_character d c}\n                            (\\c. c(l) *\n                                 vsum(1..x) (\\n. c n * Cx (mangoldt n / &n))) -\n                       Cx(log(&x)) | x IN (:num)}
+  \226\136\128 d : Num, \226\136\128 l : Num, 1 <= d && coprime((l, d)) \226\134\146 bounded({vsum({(c : (Num) -> Cart[Real, Tybit0[Unit]]) | dirichlet_character(d, c)}, (c : (Num) -> Cart[Real, Tybit0[Unit]]) => c(l) * vsum(op_dot_dot(1, (x : Num)), (n : Num) => c(n) * Cx(mangoldt(n) / real_of_num(n)))) - Cx(log(real_of_num(x))) | IN(x, UNIV)})
   op_eq_eq((k : Num) * (l : Num), 1, mod((d : Num)))
   op_eq_eq((l : Num) * (n : Num), 1, mod((d : Num))) == op_eq_eq(n, (k : Num), mod(d))
   (d : Num)
@@ -81797,7 +81797,7 @@ Translating certificate to HOL inferences
   (l : Num)
   (d : Num)
   \226\136\131 l : Num, op_eq_eq((k : Num) * l, 1, mod((d : Num)))
-  forall d k. 1 <= d /\\ coprime(k,d)\n         ==> bounded { Cx(&(phi d)) * vsum {n | n IN 1..x /\\ (n == k) (mod d)}\n                                           (\\n. Cx(mangoldt n / &n)) -\n                       Cx(log(&x)) | x IN (:num)}
+  \226\136\128 d : Num, \226\136\128 k : Num, 1 <= d && coprime((k, d)) \226\134\146 bounded({Cx(real_of_num(phi(d))) * vsum({(n : Num) | IN(n, op_dot_dot(1, (x : Num))) && op_eq_eq(n, k, mod(d))}, (n : Num) => Cx(mangoldt(n) / real_of_num(n))) - Cx(log(real_of_num(x))) | IN(x, UNIV)})
   (n : Num)
   (B : Real) / real_of_num(phi((d : Num)))
   (B : Real)
