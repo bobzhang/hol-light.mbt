@@ -5,6 +5,7 @@ printer copies normalize the spelling at their boundaries. The Boolean theory
 copy omits the now-redundant forall alias. Serialized terms
 are compared modulo the explicit constant rename; all other structure is kept.
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -69,6 +70,11 @@ def adapt_output(lines):
 # annotations (rename_type_variables).
 TYPE_RENAMES = {
     '100/friendship.ml': {'person': 'Person'},
+    'Unity/mk_state_logic.ml': {"'a": 'A', "'b": 'B', "'c": 'C'},
+    'Unity/mk_unless.ml': {"'a": 'A'},
+    'Unity/mk_ensures.ml': {"'a": 'A'},
+    'Unity/mk_leadsto.ml': {"'a": 'A'},
+    'Unity/mk_comp_unity.ml': {"'a": 'A'},
 }
 
 
@@ -77,9 +83,12 @@ def renamed_copy(path):
 
 
 def reference_source(source):
-    """Route core loads to the temporary copies without editing upstream."""
-    for path in TYPE_RENAMES:
-        source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
+    """Route core loads to the temporary copies without editing upstream.
+    With HOL_REF_ORIGINAL_TYPE_NAMES set, the files TYPE_RENAMES lists load
+    as they are (check_type_renames.py compares the two runs)."""
+    if not os.environ.get('HOL_REF_ORIGINAL_TYPE_NAMES'):
+        for path in TYPE_RENAMES:
+            source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
     return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
         '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
         '#use "parser.ml"', '#use "_build/parser_forall.ml"')
@@ -88,7 +97,7 @@ def reference_source(source):
 HOL_NAME = re.compile(r"[A-Za-z0-9_']+")
 
 
-def type_annotation_end(q, i):
+def type_annotation_end(q, i, variables=()):
     """End of the type annotation starting at q[i] (just after a `:`): atoms,
     parenthesized lists and postfix constructors, joined by `->`, `#`, `+`
     or `^`. It may stop early, never late, so a name it misses fails the
@@ -110,7 +119,9 @@ def type_annotation_end(q, i):
             if not m:
                 return i
             i = m.end()
-        while m := HOL_NAME.match(q, i):  # postfix constructors: (A)list
+        # postfix constructors, (A)list; a type variable is none, so one of
+        # `variables` there is a term (\x:(bool)'a. x binds 'a)
+        while (m := HOL_NAME.match(q, i)) and m[0] not in variables:
             i = m.end()
         j = i
         while j < len(q) and q[j] == ' ':
@@ -123,31 +134,127 @@ def type_annotation_end(q, i):
             return i
 
 
+HOL_SYMBOL = "\\!@#$%^&*-+|<=>/?~.:"
+
+
+def annotation_colons(q):
+    """Positions of the colons in quotation q that start a type annotation:
+    not inside a HOL string, nor part of a longer symbol such as `::` or of
+    an identifier with an underscore tail (`_:`)."""
+    i = 0
+    while i < len(q):
+        if q[i] == '"':
+            i += 1
+            while i < len(q) and q[i] != '"':
+                i += 2 if q[i] == '\\' else 1
+        elif q[i] == ':' and q[i - 1] not in HOL_SYMBOL + '_' and q[i + 1:i + 2] not in tuple(HOL_SYMBOL):
+            yield i
+        i += 1
+
+
 def rename_in_quotation(q, renames):
     out, i = [], 0
-    while (k := q.find(':', i)) >= 0:
-        end = type_annotation_end(q, k + 1)
+    for k in annotation_colons(q):
+        if k < i:
+            continue
+        end = type_annotation_end(q, k + 1, renames)
         out.append(q[i:k + 1])
         out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[k + 1:end]))
-        i = end if end > k + 1 else k + 1
+        i = end
     out.append(q[i:])
     return ''.join(out)
 
 
+def literal_end(text, i):
+    """End of the OCaml string, quoted string (`{id|...|id}`) or character
+    literal starting at text[i], or None. The lexer reads these inside
+    comments too, so a `(*` or `*)` in one neither opens nor closes one."""
+    if text[i] == '"':
+        i += 1
+        while i < len(text) and text[i] != '"':
+            i += 2 if text[i] == '\\' else 1
+        return i + 1
+    if text[i] == '{' and (m := re.match(r'\{([a-z_]*)\|', text[i:])):
+        end = text.find('|' + m[1] + '}', i + m.end())
+        return len(text) if end < 0 else end + len(m[1]) + 2
+    if text[i] == "'":
+        if (m := re.match(r"'(?:[^\\']|\\(?:[\\'\"ntbr ]|[0-9]{3}|x[0-9a-fA-F]{2}|o[0-3][0-7]{2}))'", text[i:])):
+            return i + m.end()
+    return None
+
+
+def ocaml_segments(text):
+    """`text` cut into (kind, piece): 'comment' (nested `(* *)`), 'string'
+    (string, quoted string or character literals), 'quotation' (backquoted)
+    and 'code'."""
+    out, i, start = [], 0, 0
+    def emit(kind, j):
+        nonlocal start
+        if j > start:
+            out.append((kind, text[start:j]))
+        start = j
+    while i < len(text):
+        if text.startswith('(*', i):
+            emit('code', i)
+            depth = 0
+            while i < len(text):
+                if text.startswith('(*', i):
+                    depth, i = depth + 1, i + 2
+                elif text.startswith('*)', i):
+                    depth, i = depth - 1, i + 2
+                    if depth == 0:
+                        break
+                else:
+                    i = literal_end(text, i) or i + 1
+            emit('comment', i)
+        elif text[i] == '`':
+            emit('code', i)
+            end = text.find('`', i + 1)
+            i = len(text) if end < 0 else end + 1
+            emit('quotation', i)
+        elif (end := literal_end(text, i)) is not None:
+            emit('code', i)
+            i = end
+            emit('string', i)
+        else:
+            i += 1
+    emit('code', len(text))
+    return out
+
+
 def rename_type_variables(text, renames):
     """`text` (OCaml) with the type variables `renames` maps renamed in the
-    type annotations of its quotations. Any other occurrence of an old name,
-    in a quotation's term or in OCaml code (`mk_vartype "'a"`), fails: those
-    need adapting by hand."""
-    def occurs(name, text):
-        return re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", text)
+    type annotations of its quotations. Any other occurrence of an old name
+    outside comments, in a quotation's term or in OCaml code or strings
+    (`mk_vartype "'a"`), fails: those need adapting by hand."""
+    assert len(set(renames.values())) == len(renames) and not set(renames.values()) & set(renames), \
+        'the renaming is not injective'
+    def occurs(name, pieces):
+        return any(re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", piece)
+                   for kind, piece in pieces if kind != 'comment')
+    # a quotation ending in a colon is a string (pa_j), and string escapes
+    # are read as OCaml reads them ("\039a" is 'a)
+    segments = [('string', piece) if kind == 'quotation' and piece.endswith(':`') else (kind, piece)
+                for kind, piece in ocaml_segments(text)]
+    segments = [(kind, piece + '\0' + ocaml_unescaped(piece)) if kind == 'string' else (kind, piece)
+                for kind, piece in segments]
     for new in renames.values():
         # a new name already in use would merge two type variables
-        assert not occurs(new, text), f'{new} is already used'
-    text = re.sub(r'`[^`]*`', lambda m: rename_in_quotation(m[0], renames), text)
+        assert not occurs(new, segments), f'{new} is already used'
+    for kind, piece in segments:
+        # the scan does not read HOL comments, whose brackets would mislead it
+        assert not (kind == 'quotation' and '//' in piece and any(occurs(old, [(kind, piece)]) for old in renames)), \
+            f'a HOL comment in a quotation naming a renamed type variable: {piece[:60]}'
+    segments = [(kind, rename_in_quotation(piece, renames) if kind == 'quotation' else piece)
+                for kind, piece in segments]
     for old in renames:
-        assert not occurs(old, text), f'{old} occurs outside a type annotation'
-    return text
+        assert not occurs(old, segments), f'{old} occurs outside a type annotation'
+    return ''.join(piece.split('\0')[0] if kind == 'string' else piece for kind, piece in segments)
+
+
+def ocaml_unescaped(s):
+    return re.sub(r'\\(?:([0-9]{3})|x([0-9a-fA-F]{2})|o([0-3][0-7]{2}))',
+                  lambda m: chr(int(m[1]) if m[1] else int(m[2], 16) if m[2] else int(m[3], 8)), s)
 
 
 def prepare():

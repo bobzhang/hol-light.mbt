@@ -5665,363 +5665,363 @@ Searching with limit 3
 Warning: inventing type variables
 0..0..3..6..9..solved at 14
 Unity/mk_unless quotations (298):
-  UNLESS_STMT (p:'a->bool) q st =\n      \\s:'a. (p s /\\ ~q s) ==> (p (st s) \\/ q (st s))
-  (forall p q. UNLESS p q  []                   <=> T) /\\\n    (forall p q. UNLESS p q (CONS (st:'a->'a) Pr) <=>\n     ((forall s:'a. (p UNLESS_STMT q) st s) /\\ (UNLESS p q Pr)))
-  STABLE_STMT (p:'a->bool) st = \\s:'a. p s ==> p (st s)
-  STABLE (p:'a->bool) Pr = (p UNLESS False) Pr
-  INVARIANT p (p0, Pr) = ((forall s:'a. p0 s ==> p s) /\\ (p STABLE Pr))
-  s:'a
-  p:'a->bool
-  q:'a->bool
-  r:'a->bool
-  P:num->'a->bool
+  UNLESS_STMT (p:A->bool) q st =\n      \\s:A. (p s /\\ ~q s) ==> (p (st s) \\/ q (st s))
+  (forall p q. UNLESS p q  []                   <=> T) /\\\n    (forall p q. UNLESS p q (CONS (st:A->A) Pr) <=>\n     ((forall s:A. (p UNLESS_STMT q) st s) /\\ (UNLESS p q Pr)))
+  STABLE_STMT (p:A->bool) st = \\s:A. p s ==> p (st s)
+  STABLE (p:A->bool) Pr = (p UNLESS False) Pr
+  INVARIANT p (p0, Pr) = ((forall s:A. p0 s ==> p s) /\\ (p STABLE Pr))
+  s:A
+  p:A->bool
+  q:A->bool
+  r:A->bool
+  P:num->A->bool
   forall p q ps qs p' q' p's q's.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p's \\/ q's) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p's \\/ ps /\\ q's \\/ p's /\\ qs \\/ qs /\\ q's)
   \226\136\128 t1 : Bool, \226\136\128 t2 : Bool, \226\136\128 t3 : Bool, (t1 || t2 || t3) == (!(!t1 && !t2) || t3)
   \226\136\128 p : Bool, \226\136\128 p' : Bool, \226\136\128 q : Bool, \226\136\128 q' : Bool, ((p || p') && (p || !q') && (p' || !q) && (!q || !q')) == (p && !q || p' && !q')
-  (\\s:'a. p s /\\ ~(p s) ==> p (st s))s
-  forall p st (s:'a). (p UNLESS_STMT p)st s
-  forall s:'a. q s ==> r s
-  (st:'a->'a) s
-  (q:'a->bool) ((st:'a->'a) s)
-  forall s:'a. p s /\\ ~q s ==> p (st s) \\/ q (st s)
-  s:'a
-  ~q (s:'a)
-  (p:'a->bool) s
-  forall s:'a. q s ==> r s
-  s:'a
-  ~r (s:'a)
-  forall(p:'a->bool) q r st.\n      ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (q s) ==> (r s))) ==>\n       (forall s. (p UNLESS_STMT r) st s)
-  forall p q p' q' (st:'a->'a).\n    ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n     (forall s. ((p \\/* p') UNLESS_STMT (q \\/* q')) st s)
-  (p:'a->bool) s
-  (q:'a->bool) s
-  (p:'a->bool) ((st:'a->'a) s)
-  (q:'a->bool) ((st:'a->'a) s)
-  (p':'a->bool) s
-  (q':'a->bool) s
-  (p':'a->bool) ((st:'a->'a) s)
-  (q':'a->bool) ((st:'a->'a) s)
-  (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
-  (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s))
-  (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
-  (forall s. p s /\\ ~q s ==> p ((st:'a->'a) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:'a->'a) s) \\/ q'(st s))
-  forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)
-  forall p q p' q' (st:'a->'a).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)
+  (\\s:A. p s /\\ ~(p s) ==> p (st s))s
+  forall p st (s:A). (p UNLESS_STMT p)st s
+  forall s:A. q s ==> r s
+  (st:A->A) s
+  (q:A->bool) ((st:A->A) s)
+  forall s:A. p s /\\ ~q s ==> p (st s) \\/ q (st s)
+  s:A
+  ~q (s:A)
+  (p:A->bool) s
+  forall s:A. q s ==> r s
+  s:A
+  ~r (s:A)
+  forall(p:A->bool) q r st.\n      ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (q s) ==> (r s))) ==>\n       (forall s. (p UNLESS_STMT r) st s)
+  forall p q p' q' (st:A->A).\n    ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n     (forall s. ((p \\/* p') UNLESS_STMT (q \\/* q')) st s)
+  (p:A->bool) s
+  (q:A->bool) s
+  (p:A->bool) ((st:A->A) s)
+  (q:A->bool) ((st:A->A) s)
+  (p':A->bool) s
+  (q':A->bool) s
+  (p':A->bool) ((st:A->A) s)
+  (q':A->bool) ((st:A->A) s)
+  (forall s. p' s /\\ ~q' s ==> p'((st:A->A) s) \\/ q'(st s))
+  (forall s. p s /\\ ~q s ==> p ((st:A->A) s) \\/ q (st s))
+  (forall s. p s /\\ ~q s ==> p ((st:A->A) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:A->A) s) \\/ q'(st s))
+  (forall s. p s /\\ ~q s ==> p ((st:A->A) s) \\/ q (st s)) /\\\n           (forall s. p' s /\\ ~q' s ==> p'((st:A->A) s) \\/ q'(st s))
+  forall p q p' q' (st:A->A).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p /\\* p') UNLESS_STMT\n           (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) st s)
+  forall p q p' q' (st:A->A).\n     ((forall s. (p UNLESS_STMT q) st s) /\\ (forall s. (p' UNLESS_STMT q') st s)) ==>\n      (forall s. ((p \\/* p') UNLESS_STMT\n            ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n           st s)
   \226\136\128 p : Bool, \226\136\128 q : Bool, \226\136\128 r : Bool, (p \226\134\146 q) \226\134\146 p || r \226\134\146 q || r
   (n : Num)
   (n : Num)
   (n : Num)
-  forall(P:num->('a->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)
+  forall(P:num->(A->bool)) q s. ((?n. P n s) \\/ q s) = (?n. P n s \\/ q s)
   (n : Num)
-  forall(P:num->('a->bool)) q st.\n          (forall m. (forall s. ((P m) UNLESS_STMT q)st s)) ==>\n               (forall s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)
-  forall(p:'a->bool) q r (st:'a->'a).\n      (forall s. (p UNLESS_STMT q) st s) ==>\n         (forall s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)
-  forall(p:'a->bool) Pr. (p UNLESS p) Pr
-  forall(p:'a->bool) Pr. (p UNLESS (Not p)) Pr
-  forall(p:'a->bool) q r Pr.\n      (((p UNLESS q) Pr) /\\ (forall s. (q s) ==> (r s))) ==> ((p UNLESS r) Pr)
-  forall(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n        (((p /\\* p') UNLESS\n         (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) Pr)
-  forall(p:'a->bool) q p' q' Pr.\n        (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr))\n      ==>\n        (((p \\/* p') UNLESS\n\t  ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))) Pr)
-  Pr:('a->'a)list
-  (q:'a->bool) \\/* q'
-  ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))
-  (p:'a->bool) /\\* p'
-  forall s. ((((p:'a->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))s ==>\n                (q \\/* q')s
-  (((p:'a->bool) /\\* p') UNLESS\n\t     (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')))Pr
-  q':'a->bool
-  p':'a->bool
-  q:'a->bool
-  p:'a->bool
-  ((p':'a->bool) UNLESS q')Pr
-  ((p:'a->bool) UNLESS q)Pr
-  forall(p:'a->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n         (((p /\\* p') UNLESS (q \\/* q')) Pr)
-  Pr:('a->'a)list
-  (q:'a->bool) \\/* q'
-  (((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')
-  (p:'a->bool) \\/* p'
-  forall s. ((((Not (p:'a->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/*\n                    (q /\\* q'))s ==> (q \\/* q')s
-  (((p:'a->bool) \\/* p') UNLESS\n               ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n               Pr
-  q':'a->bool
-  p':'a->bool
-  q:'a->bool
-  p:'a->bool
-  ((p':'a->bool) UNLESS q')Pr
-  ((p:'a->bool) UNLESS q)Pr
-  forall(p:'a->bool) q p' q' Pr.\n         (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n             (((p \\/* p') UNLESS (q \\/* q')) Pr)
-  r:'a->bool
-  ((((Not (p:'a->bool)) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n               (q /\\* r))
-  ((p:'a->bool) \\/* q)
-  forall s:'a. ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n                      (q /\\* r))s ==> r s
-  (((p:'a->bool) \\/* q) UNLESS\n           ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))) Pr
-  r:'a->bool
-  q:'a->bool
-  p:'a->bool
-  r:'a->bool
-  q:'a->bool
-  q:'a->bool
-  p:'a->bool
-  ((q:'a->bool) UNLESS r)Pr
-  ((p:'a->bool) UNLESS q)Pr
-  forall(p:'a->bool) q r Pr.\n     (((p UNLESS q) Pr) /\\ ((q UNLESS r) Pr)) ==>\n     (((p \\/* q) UNLESS r) Pr)
-  Pr:('a->'a)list
-  q:'a->bool
-  p:'a->bool
-  p:'a->bool
-  forall s:'a. p s ==> q s
-  ((p:'a->bool) UNLESS p)Pr
-  forall(p:'a->bool) q Pr. (forall s. p s ==> q s) ==> ((p UNLESS q) Pr)
-  Pr:('a->'a)list
-  q:'a->bool
-  Not (p:'a->bool)
-  p:'a->bool
-  forall s:'a. (Not p) s ==> q s
-  ((p:'a->bool) UNLESS (Not p))Pr
-  forall(p:'a->bool) q Pr. (forall s. (Not p)s ==> q s) ==> ((p UNLESS q) Pr)
-  q:'a->bool
-  (q:'a->bool) \\/* r
-  (((p:'a->bool) /\\* (Not q)) UNLESS\n                    ((q \\/* r) \\/* q))Pr
-  Pr:('a->'a)list
-  q:'a->bool
-  (Not (q:'a->bool))
-  ((q:'a->bool) \\/* r)
-  p:'a->bool
-  ((Not (q:'a->bool)) UNLESS q)Pr
-  ((p:'a->bool) UNLESS (q \\/* r))Pr
-  ((Not (q:'a->bool)) UNLESS (Not(Not q)))Pr
-  Pr:('a->'a)list
-  Not (q:'a->bool)
-  forall(p:'a->bool) q r Pr.\n          (p UNLESS (q \\/* r)) Pr ==>\n          ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr
-  ((((p:'a->bool) /\\* (Not q)) \\/* (p /\\* q)) UNLESS\n        ((q \\/* r) \\/* q))Pr
-  Pr:('a->'a)list
-  q:'a->bool
-  ((p:'a->bool) /\\* q)
-  ((q:'a->bool) \\/* r)
-  ((p:'a->bool) /\\* (Not q))
-  (((p:'a->bool) /\\* q) UNLESS q)Pr
-  (((p:'a->bool) /\\* (Not q)) UNLESS (q \\/* r))Pr
-  Pr:('a->'a)list
-  q:'a->bool
-  (p:'a->bool) /\\* q
-  (p:'a->bool) /\\* q
-  forall s:'a. (p /\\* q)s ==> q s
-  (((p:'a->bool) /\\* q) UNLESS (p /\\* q))Pr
-  q:'a->bool
-  p:'a->bool
-  Pr:('a->'a)list
-  (p:'a->bool) /\\* q
-  forall(p:'a->bool) q r Pr.\n      ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr ==> (p UNLESS (q \\/* r)) Pr
-  forall(p:'a->bool) q r Pr.\n         ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr = (p UNLESS (q \\/* r)) Pr
-  q:'a->bool
-  r:'a->bool
-  q:'a->bool
-  r:'a->bool
-  ((((p:'a->bool) \\/* q) /\\* (Not q)) UNLESS\n                    (r \\/* q))Pr
-  q:'a->bool
-  (Not (q:'a->bool))
-  r:'a->bool
-  ((p:'a->bool) \\/* q)
-  ((Not (q:'a->bool)) UNLESS q)Pr
-  (((p:'a->bool) \\/* q) UNLESS r)Pr
-  ((Not (q:'a->bool)) UNLESS (Not(Not q)))Pr
-  Not (q:'a->bool)
-  forall(p:'a->bool) q r Pr.\n               ((p \\/* q) UNLESS r) Pr ==> (p UNLESS (q \\/* r)) Pr
-  (((p:'a->bool) /\\* p) UNLESS (p \\/* (Not p)))Pr
-  (Not (p:'a->bool))
-  p:'a->bool
-  p:'a->bool
-  p:'a->bool
-  ((p:'a->bool) UNLESS (Not p))Pr
-  ((p:'a->bool) UNLESS p)Pr
-  forall(p:'a->bool) Pr. (p UNLESS True) Pr
-  (((Not (p:'a->bool)) \\/* p) UNLESS (p \\/* p))Pr
-  p:'a->bool
-  p:'a->bool
-  p:'a->bool
-  (Not (p:'a->bool))
-  ((p:'a->bool) UNLESS p)Pr
-  ((Not (p:'a->bool)) UNLESS p)Pr
-  ((Not (p:'a->bool)) UNLESS (Not(Not p)))Pr
-  (Not (p:'a->bool))
-  forall(p:'a->bool) Pr. (True UNLESS p) Pr
-  (((Not (p:'a->bool)) /\\* p) UNLESS (p \\/* p))Pr
-  p:'a->bool
-  p:'a->bool
-  p:'a->bool
-  (Not (p:'a->bool))
-  ((p:'a->bool) UNLESS p)Pr
-  ((Not (p:'a->bool)) UNLESS p)Pr
-  ((Not (p:'a->bool)) UNLESS (Not(Not p)))Pr
-  (Not (p:'a->bool))
-  forall(p:'a->bool) Pr. (False UNLESS p) Pr
-  forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s ==> p' s /\\ ~q s)
-  forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p' s /\\ ~q s ==> p s /\\ ~q s)
-  forall(p:'a->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s <=> p' s /\\ ~q s)
-  forall(p:'a->bool) q p' Pr.\n       (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s)\n            ==> (((p  /\\* (Not q)) UNLESS q) Pr =\n                 ((p' /\\* (Not q)) UNLESS q) Pr)
-  ((((p:'a->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n                ((p /\\* q) \\/* (r \\/* r')))Pr
-  (((p:'a->bool) /\\* q) \\/* (r \\/* r'))
-  ((((Not((p:'a->bool) \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n          ((q \\/* r) /\\* (p \\/* r')))
-  (((p:'a->bool) \\/* p') \\/* (q \\/* q'))
-  forall s:'a. ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n              ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n              ((q \\/* r) /\\* (p \\/* r'))) s ==>\n                  ((p /\\* q) \\/* (r \\/* r'))s
-  ((((p:'a->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))) Pr
-  r':'a->bool
-  r:'a->bool
-  q':'a->bool
-  p':'a->bool
-  q:'a->bool
-  p:'a->bool
-  Pr:('a->'a)list
-  ((p:'a->bool) \\/* r')
-  ((q:'a->bool) \\/* q')
-  ((q:'a->bool) \\/* r)
-  ((p:'a->bool) \\/* p')
-  forall(p:'a->bool) q p' q' r r' Pr.\n     ((p \\/* p') UNLESS (q \\/* r)) Pr /\\ ((q \\/* q') UNLESS (p \\/* r')) Pr ==>\n            ((p \\/* p' \\/* q \\/* q') UNLESS ((p /\\* q) \\/* r \\/* r')) Pr
-  ((p:'a->bool) UNLESS (q \\/* False))Pr
-  Pr:('a->'a)list
-  False:'a->bool
-  q:'a->bool
-  p:'a->bool
-  forall(p:'a->bool) q Pr. (p \\/* q) STABLE Pr ==> (p UNLESS q) Pr
-  forall s:'a. Not (p:'a->bool) s
-  s:'a
-  forall(p:'a->bool) Pr. (forall s. (Not p)s) ==> p STABLE Pr
-  forall(p:'a->bool) Pr. (forall s. (Not p)s) ==> (Not p) STABLE Pr
-  ((((q:'a->bool) \\/* p) \\/* (p /\\* q)) UNLESS False)Pr
-  Pr:('a->'a)list
-  False:'a->bool
-  ((p:'a->bool) /\\* q)
-  ((q:'a->bool) \\/* p)
-  (((p:'a->bool) /\\* q) UNLESS False)Pr
-  (((q:'a->bool) \\/* p) UNLESS (p /\\* q))Pr
-  (((p:'a->bool) \\/* q) UNLESS\n                    ((((Not p) /\\* p) \\/* ((Not q) /\\* q)) \\/* (q /\\* p))\n                   ) Pr
-  Pr:('a->'a)list
-  (p:'a->bool)
-  (q:'a->bool)
-  (q:'a->bool)
-  (p:'a->bool)
-  ((q:'a->bool) UNLESS p)Pr
-  ((p:'a->bool) UNLESS q)Pr
-  ((p:'a->bool) /\\* q) STABLE Pr
-  Pr:('a->'a)list
-  ((p:'a->bool) /\\* q)
-  forall(p:'a->bool) q Pr.\n        (p UNLESS q) Pr /\\ (q UNLESS p) Pr /\\ (forall s. Not (p /\\* q) s) ==>\n                (p \\/* q) STABLE Pr
-  ((((p:'a->bool) /\\* q) \\/* (p /\\* (Not q))) UNLESS\n                 ((((Not(p /\\* q)) /\\* (p /\\* (Not q))) \\/*\n                   ((Not(p /\\* (Not q))) /\\* False)) \\/*\n                    (False /\\* (p /\\* (Not q)))))Pr
-  Pr:('a->'a)list
-  (p:'a->bool) /\\* (Not q)
-  (p:'a->bool) /\\* (Not q)
-  False:'a->bool
-  (p:'a->bool) /\\* q
-  (((p:'a->bool) /\\* (Not q)) UNLESS (p /\\* (Not q)))Pr
-  (((p:'a->bool) /\\* q) UNLESS False)Pr
-  Pr:('a->'a)list
-  (p:'a->bool) /\\* (Not q)
-  (((p:'a->bool) /\\* q) UNLESS\n                     (((p /\\* False) \\/* (q /\\* (Not q))) \\/*\n                      ((Not q) /\\* False)))Pr
-  Pr:('a->'a)list
-  False:'a->bool
-  q:'a->bool
-  Not (q:'a->bool)
-  p:'a->bool
-  forall(p:'a->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr
+  forall(P:num->(A->bool)) q st.\n          (forall m. (forall s. ((P m) UNLESS_STMT q)st s)) ==>\n               (forall s. ((\\s. ?n. P n s) UNLESS_STMT q)st s)
+  forall(p:A->bool) q r (st:A->A).\n      (forall s. (p UNLESS_STMT q) st s) ==>\n         (forall s. ((p \\/* r) UNLESS_STMT (q \\/* r)) st s)
+  forall(p:A->bool) Pr. (p UNLESS p) Pr
+  forall(p:A->bool) Pr. (p UNLESS (Not p)) Pr
+  forall(p:A->bool) q r Pr.\n      (((p UNLESS q) Pr) /\\ (forall s. (q s) ==> (r s))) ==> ((p UNLESS r) Pr)
+  forall(p:A->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n        (((p /\\* p') UNLESS\n         (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))) Pr)
+  forall(p:A->bool) q p' q' Pr.\n        (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr))\n      ==>\n        (((p \\/* p') UNLESS\n\t  ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q'))) Pr)
+  Pr:(A->A)list
+  (q:A->bool) \\/* q'
+  ((((p:A->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))
+  (p:A->bool) /\\* p'
+  forall s. ((((p:A->bool) /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q'))s ==>\n                (q \\/* q')s
+  (((p:A->bool) /\\* p') UNLESS\n\t     (((p /\\* q') \\/* (p' /\\* q)) \\/* (q /\\* q')))Pr
+  q':A->bool
+  p':A->bool
+  q:A->bool
+  p:A->bool
+  ((p':A->bool) UNLESS q')Pr
+  ((p:A->bool) UNLESS q)Pr
+  forall(p:A->bool) q p' q' Pr.\n      (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n         (((p /\\* p') UNLESS (q \\/* q')) Pr)
+  Pr:(A->A)list
+  (q:A->bool) \\/* q'
+  (((Not (p:A->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')
+  (p:A->bool) \\/* p'
+  forall s. ((((Not (p:A->bool)) /\\* q') \\/* ((Not p') /\\* q)) \\/*\n                    (q /\\* q'))s ==> (q \\/* q')s
+  (((p:A->bool) \\/* p') UNLESS\n               ((((Not p) /\\* q') \\/* ((Not p') /\\* q)) \\/* (q /\\* q')))\n               Pr
+  q':A->bool
+  p':A->bool
+  q:A->bool
+  p:A->bool
+  ((p':A->bool) UNLESS q')Pr
+  ((p:A->bool) UNLESS q)Pr
+  forall(p:A->bool) q p' q' Pr.\n         (((p UNLESS q) Pr) /\\ ((p' UNLESS q') Pr)) ==>\n             (((p \\/* p') UNLESS (q \\/* q')) Pr)
+  r:A->bool
+  ((((Not (p:A->bool)) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n               (q /\\* r))
+  ((p:A->bool) \\/* q)
+  forall s:A. ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/*\n                      (q /\\* r))s ==> r s
+  (((p:A->bool) \\/* q) UNLESS\n           ((((Not p) /\\* r) \\/* ((Not q) /\\* q)) \\/* (q /\\* r))) Pr
+  r:A->bool
+  q:A->bool
+  p:A->bool
+  r:A->bool
+  q:A->bool
+  q:A->bool
+  p:A->bool
+  ((q:A->bool) UNLESS r)Pr
+  ((p:A->bool) UNLESS q)Pr
+  forall(p:A->bool) q r Pr.\n     (((p UNLESS q) Pr) /\\ ((q UNLESS r) Pr)) ==>\n     (((p \\/* q) UNLESS r) Pr)
+  Pr:(A->A)list
+  q:A->bool
+  p:A->bool
+  p:A->bool
+  forall s:A. p s ==> q s
+  ((p:A->bool) UNLESS p)Pr
+  forall(p:A->bool) q Pr. (forall s. p s ==> q s) ==> ((p UNLESS q) Pr)
+  Pr:(A->A)list
+  q:A->bool
+  Not (p:A->bool)
+  p:A->bool
+  forall s:A. (Not p) s ==> q s
+  ((p:A->bool) UNLESS (Not p))Pr
+  forall(p:A->bool) q Pr. (forall s. (Not p)s ==> q s) ==> ((p UNLESS q) Pr)
+  q:A->bool
+  (q:A->bool) \\/* r
+  (((p:A->bool) /\\* (Not q)) UNLESS\n                    ((q \\/* r) \\/* q))Pr
+  Pr:(A->A)list
+  q:A->bool
+  (Not (q:A->bool))
+  ((q:A->bool) \\/* r)
+  p:A->bool
+  ((Not (q:A->bool)) UNLESS q)Pr
+  ((p:A->bool) UNLESS (q \\/* r))Pr
+  ((Not (q:A->bool)) UNLESS (Not(Not q)))Pr
+  Pr:(A->A)list
+  Not (q:A->bool)
+  forall(p:A->bool) q r Pr.\n          (p UNLESS (q \\/* r)) Pr ==>\n          ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr
+  ((((p:A->bool) /\\* (Not q)) \\/* (p /\\* q)) UNLESS\n        ((q \\/* r) \\/* q))Pr
+  Pr:(A->A)list
+  q:A->bool
+  ((p:A->bool) /\\* q)
+  ((q:A->bool) \\/* r)
+  ((p:A->bool) /\\* (Not q))
+  (((p:A->bool) /\\* q) UNLESS q)Pr
+  (((p:A->bool) /\\* (Not q)) UNLESS (q \\/* r))Pr
+  Pr:(A->A)list
+  q:A->bool
+  (p:A->bool) /\\* q
+  (p:A->bool) /\\* q
+  forall s:A. (p /\\* q)s ==> q s
+  (((p:A->bool) /\\* q) UNLESS (p /\\* q))Pr
+  q:A->bool
+  p:A->bool
+  Pr:(A->A)list
+  (p:A->bool) /\\* q
+  forall(p:A->bool) q r Pr.\n      ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr ==> (p UNLESS (q \\/* r)) Pr
+  forall(p:A->bool) q r Pr.\n         ((p /\\* (Not q)) UNLESS (q \\/* r)) Pr = (p UNLESS (q \\/* r)) Pr
+  q:A->bool
+  r:A->bool
+  q:A->bool
+  r:A->bool
+  ((((p:A->bool) \\/* q) /\\* (Not q)) UNLESS\n                    (r \\/* q))Pr
+  q:A->bool
+  (Not (q:A->bool))
+  r:A->bool
+  ((p:A->bool) \\/* q)
+  ((Not (q:A->bool)) UNLESS q)Pr
+  (((p:A->bool) \\/* q) UNLESS r)Pr
+  ((Not (q:A->bool)) UNLESS (Not(Not q)))Pr
+  Not (q:A->bool)
+  forall(p:A->bool) q r Pr.\n               ((p \\/* q) UNLESS r) Pr ==> (p UNLESS (q \\/* r)) Pr
+  (((p:A->bool) /\\* p) UNLESS (p \\/* (Not p)))Pr
+  (Not (p:A->bool))
+  p:A->bool
+  p:A->bool
+  p:A->bool
+  ((p:A->bool) UNLESS (Not p))Pr
+  ((p:A->bool) UNLESS p)Pr
+  forall(p:A->bool) Pr. (p UNLESS True) Pr
+  (((Not (p:A->bool)) \\/* p) UNLESS (p \\/* p))Pr
+  p:A->bool
+  p:A->bool
+  p:A->bool
+  (Not (p:A->bool))
+  ((p:A->bool) UNLESS p)Pr
+  ((Not (p:A->bool)) UNLESS p)Pr
+  ((Not (p:A->bool)) UNLESS (Not(Not p)))Pr
+  (Not (p:A->bool))
+  forall(p:A->bool) Pr. (True UNLESS p) Pr
+  (((Not (p:A->bool)) /\\* p) UNLESS (p \\/* p))Pr
+  p:A->bool
+  p:A->bool
+  p:A->bool
+  (Not (p:A->bool))
+  ((p:A->bool) UNLESS p)Pr
+  ((Not (p:A->bool)) UNLESS p)Pr
+  ((Not (p:A->bool)) UNLESS (Not(Not p)))Pr
+  (Not (p:A->bool))
+  forall(p:A->bool) Pr. (False UNLESS p) Pr
+  forall(p:A->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s ==> p' s /\\ ~q s)
+  forall(p:A->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p' s /\\ ~q s ==> p s /\\ ~q s)
+  forall(p:A->bool) q p'.\n     (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s) ==>\n         (forall s. p s /\\ ~q s <=> p' s /\\ ~q s)
+  forall(p:A->bool) q p' Pr.\n       (forall s. p s /\\ ~q s) ==> (forall s. p' s) ==> (forall s. p s \\/ q s)\n            ==> (((p  /\\* (Not q)) UNLESS q) Pr =\n                 ((p' /\\* (Not q)) UNLESS q) Pr)
+  ((((p:A->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n                ((p /\\* q) \\/* (r \\/* r')))Pr
+  (((p:A->bool) /\\* q) \\/* (r \\/* r'))
+  ((((Not((p:A->bool) \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n          ((q \\/* r) /\\* (p \\/* r')))
+  (((p:A->bool) \\/* p') \\/* (q \\/* q'))
+  forall s:A. ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n              ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n              ((q \\/* r) /\\* (p \\/* r'))) s ==>\n                  ((p /\\* q) \\/* (r \\/* r'))s
+  ((((p:A->bool) \\/* p') \\/* (q \\/* q')) UNLESS\n        ((((Not(p \\/* p')) /\\* (p \\/* r')) \\/*\n          ((Not(q \\/* q')) /\\* (q \\/* r))) \\/*\n         ((q \\/* r) /\\* (p \\/* r')))) Pr
+  r':A->bool
+  r:A->bool
+  q':A->bool
+  p':A->bool
+  q:A->bool
+  p:A->bool
+  Pr:(A->A)list
+  ((p:A->bool) \\/* r')
+  ((q:A->bool) \\/* q')
+  ((q:A->bool) \\/* r)
+  ((p:A->bool) \\/* p')
+  forall(p:A->bool) q p' q' r r' Pr.\n     ((p \\/* p') UNLESS (q \\/* r)) Pr /\\ ((q \\/* q') UNLESS (p \\/* r')) Pr ==>\n            ((p \\/* p' \\/* q \\/* q') UNLESS ((p /\\* q) \\/* r \\/* r')) Pr
+  ((p:A->bool) UNLESS (q \\/* False))Pr
+  Pr:(A->A)list
+  False:A->bool
+  q:A->bool
+  p:A->bool
+  forall(p:A->bool) q Pr. (p \\/* q) STABLE Pr ==> (p UNLESS q) Pr
+  forall s:A. Not (p:A->bool) s
+  s:A
+  forall(p:A->bool) Pr. (forall s. (Not p)s) ==> p STABLE Pr
+  forall(p:A->bool) Pr. (forall s. (Not p)s) ==> (Not p) STABLE Pr
+  ((((q:A->bool) \\/* p) \\/* (p /\\* q)) UNLESS False)Pr
+  Pr:(A->A)list
+  False:A->bool
+  ((p:A->bool) /\\* q)
+  ((q:A->bool) \\/* p)
+  (((p:A->bool) /\\* q) UNLESS False)Pr
+  (((q:A->bool) \\/* p) UNLESS (p /\\* q))Pr
+  (((p:A->bool) \\/* q) UNLESS\n                    ((((Not p) /\\* p) \\/* ((Not q) /\\* q)) \\/* (q /\\* p))\n                   ) Pr
+  Pr:(A->A)list
+  (p:A->bool)
+  (q:A->bool)
+  (q:A->bool)
+  (p:A->bool)
+  ((q:A->bool) UNLESS p)Pr
+  ((p:A->bool) UNLESS q)Pr
+  ((p:A->bool) /\\* q) STABLE Pr
+  Pr:(A->A)list
+  ((p:A->bool) /\\* q)
+  forall(p:A->bool) q Pr.\n        (p UNLESS q) Pr /\\ (q UNLESS p) Pr /\\ (forall s. Not (p /\\* q) s) ==>\n                (p \\/* q) STABLE Pr
+  ((((p:A->bool) /\\* q) \\/* (p /\\* (Not q))) UNLESS\n                 ((((Not(p /\\* q)) /\\* (p /\\* (Not q))) \\/*\n                   ((Not(p /\\* (Not q))) /\\* False)) \\/*\n                    (False /\\* (p /\\* (Not q)))))Pr
+  Pr:(A->A)list
+  (p:A->bool) /\\* (Not q)
+  (p:A->bool) /\\* (Not q)
+  False:A->bool
+  (p:A->bool) /\\* q
+  (((p:A->bool) /\\* (Not q)) UNLESS (p /\\* (Not q)))Pr
+  (((p:A->bool) /\\* q) UNLESS False)Pr
+  Pr:(A->A)list
+  (p:A->bool) /\\* (Not q)
+  (((p:A->bool) /\\* q) UNLESS\n                     (((p /\\* False) \\/* (q /\\* (Not q))) \\/*\n                      ((Not q) /\\* False)))Pr
+  Pr:(A->A)list
+  False:A->bool
+  q:A->bool
+  Not (q:A->bool)
+  p:A->bool
+  forall(p:A->bool) q Pr. (p UNLESS (Not q)) Pr /\\ q STABLE Pr ==>\n                               (p UNLESS (p /\\* (Not q))) Pr
   \226\136\128 p : Bool, \226\136\128 q : Bool, (p && (!p || !q)) == (p && !q)
   \226\136\128 p : Bool, \226\136\128 q : Bool, (p || p && q) == p
   \226\136\128 P : (Num) -> Bool, \226\136\128 Q : (Num) -> Bool, (\226\136\128 i : Num, P(i) && Q(i)) == ((\226\136\128 i : Num, P(i)) && (\226\136\128 i : Num, Q(i)))
-  forall(P:num->('a->bool)) Q st.\n            (forall i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (forall s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)
-  forall i:num. (forall s:'a. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t
-  forall(P:num->('a->bool)) Q Pr.\n       (forall i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr
-  Pr:('a->'a)list
-  (Q:num->('a->bool))(SUC i)
-  (P:num->('a->bool))(SUC i)
-  \\<=/* (Q:num->('a->bool)) i
-  /<=\\* (P:num->('a->bool)) i
-  forall i. (((P:num->('a->bool)) i) UNLESS (Q i))Pr
+  forall(P:num->(A->bool)) Q st.\n            (forall i s. (P i UNLESS_STMT P i /\\* Q i) st s) ==>\n               (forall s. ((!*) P UNLESS_STMT (!*) P /\\* (?*) Q) st s)
+  forall i:num. (forall s:A. (P i UNLESS_STMT P i /\\* Q i) h s) /\\\n                  (P i UNLESS P i /\\* Q i) t
+  forall(P:num->(A->bool)) Q Pr.\n       (forall i. ((P i) UNLESS ((P i) /\\* (Q i))) Pr) ==>\n           (((!*) P) UNLESS (((!*) P) /\\* ((?*) Q))) Pr
+  Pr:(A->A)list
+  (Q:num->(A->bool))(SUC i)
+  (P:num->(A->bool))(SUC i)
+  \\<=/* (Q:num->(A->bool)) i
+  /<=\\* (P:num->(A->bool)) i
+  forall i. (((P:num->(A->bool)) i) UNLESS (Q i))Pr
   SUC((i : Num))
-  forall(P:num->('a->bool)) Q Pr.\n    (forall i. ((P i) UNLESS (Q i))Pr) ==>\n      (forall i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)
-  Pr:('a->'a)list
-  q:'a->bool
-  (P:num->('a->bool))(SUC i)
-  q:'a->bool
-  /<=\\* (P:num->('a->bool)) i
-  forall i. (((P:num->('a->bool)) i) UNLESS q)Pr
+  forall(P:num->(A->bool)) Q Pr.\n    (forall i. ((P i) UNLESS (Q i))Pr) ==>\n      (forall i. ((/<=\\* P i) UNLESS (\\<=/* Q i))Pr)
+  Pr:(A->A)list
+  q:A->bool
+  (P:num->(A->bool))(SUC i)
+  q:A->bool
+  /<=\\* (P:num->(A->bool)) i
+  forall i. (((P:num->(A->bool)) i) UNLESS q)Pr
   SUC((i : Num))
-  forall(P:num->('a->bool)) q Pr.\n       (forall i. ((P i) UNLESS q)Pr) ==> (forall i. ((/<=\\* P i) UNLESS q)Pr)
-  forall(P:num->('a->bool)) Q st.\n         (forall i s. ((P i) UNLESS_STMT q) st s) ==>\n            (forall s. (((?*) P) UNLESS_STMT q) st s)
-  forall m:num. (forall s:'a. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t
-  forall(P:num->('a->bool)) q Pr.\n        (forall m. ((P m) UNLESS q) Pr) ==> (((?*) P) UNLESS q) Pr
-  forall Pr. (False:'a->bool) STABLE Pr
-  Pr:('a->'a)list
-  False:'a->bool
-  q:'a->bool
-  False:'a->bool
-  p:'a->bool
-  forall(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p /\\* q) STABLE Pr)
-  Pr:('a->'a)list
-  False:'a->bool
-  q:'a->bool
-  False:'a->bool
-  p:'a->bool
-  forall(p:'a->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p \\/* q) STABLE Pr)
-  Pr:('a->'a)list
-  False:'a->bool
-  r:'a->bool
-  q:'a->bool
-  p:'a->bool
-  forall(p:'a->bool) q r Pr.\n          (p UNLESS q) Pr /\\ (r STABLE Pr) ==>\n          ((p /\\* r) UNLESS (q /\\* r))Pr
-  forall(p:'a->bool) q r Pr.\n         ((p UNLESS q) Pr) ==> ((p \\/* r) UNLESS (q \\/* r)) Pr
-UNLESS_STMT =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) (((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a))) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) (st:fun(''a,''a) s:''a))) (q:fun(''a,bool) (st:fun(''a,''a) s:''a))))))))))))
-UNLESS =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) #NIL:list(fun(''a,''a)))) #T:bool)))))) (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) ((#CONS:fun(fun(''a,''a),fun(list(fun(''a,''a)),list(fun(''a,''a)))) st:fun(''a,''a)) Pr:list(fun(''a,''a))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
-STABLE_STMT =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) ((#STABLE_STMT:fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool))) p:fun(''a,bool)) st:fun(''a,''a))) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (p:fun(''a,bool) (st:fun(''a,''a) s:''a)))))))))
-STABLE =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#=:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) #False:fun(''a,bool)) Pr:list(fun(''a,''a))))))))
-INVARIANT =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p0:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#=:fun(bool,fun(bool,bool)) ((#INVARIANT:fun(fun(''a,bool),fun(prod(fun(''a,bool),list(fun(''a,''a))),bool)) p:fun(''a,bool)) ((#,:fun(fun(''a,bool),fun(list(fun(''a,''a)),prod(fun(''a,bool),list(fun(''a,''a))))) p0:fun(''a,bool)) Pr:list(fun(''a,''a))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) (p0:fun(''a,bool) s:''a)) (p:fun(''a,bool) s:''a))))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))))))))))
+  forall(P:num->(A->bool)) q Pr.\n       (forall i. ((P i) UNLESS q)Pr) ==> (forall i. ((/<=\\* P i) UNLESS q)Pr)
+  forall(P:num->(A->bool)) Q st.\n         (forall i s. ((P i) UNLESS_STMT q) st s) ==>\n            (forall s. (((?*) P) UNLESS_STMT q) st s)
+  forall m:num. (forall s:A. (P m UNLESS_STMT q) h s) /\\ (P m UNLESS q) t
+  forall(P:num->(A->bool)) q Pr.\n        (forall m. ((P m) UNLESS q) Pr) ==> (((?*) P) UNLESS q) Pr
+  forall Pr. (False:A->bool) STABLE Pr
+  Pr:(A->A)list
+  False:A->bool
+  q:A->bool
+  False:A->bool
+  p:A->bool
+  forall(p:A->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p /\\* q) STABLE Pr)
+  Pr:(A->A)list
+  False:A->bool
+  q:A->bool
+  False:A->bool
+  p:A->bool
+  forall(p:A->bool) q Pr.\n        (p STABLE Pr) /\\ (q STABLE Pr) ==> ((p \\/* q) STABLE Pr)
+  Pr:(A->A)list
+  False:A->bool
+  r:A->bool
+  q:A->bool
+  p:A->bool
+  forall(p:A->bool) q r Pr.\n          (p UNLESS q) Pr /\\ (r STABLE Pr) ==>\n          ((p /\\* r) UNLESS (q /\\* r))Pr
+  forall(p:A->bool) q r Pr.\n         ((p UNLESS q) Pr) ==> ((p \\/* r) UNLESS (q \\/* r)) Pr
+UNLESS_STMT =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A))) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))) ((#\/:fun(bool,fun(bool,bool)) (p:fun('A,bool) (st:fun('A,'A) s:'A))) (q:fun('A,bool) (st:fun('A,'A) s:'A))))))))))))
+UNLESS =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) #NIL:list(fun('A,'A)))) #T:bool)))))) (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) ((#CONS:fun(fun('A,'A),fun(list(fun('A,'A)),list(fun('A,'A)))) st:fun('A,'A)) Pr:list(fun('A,'A))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))))))))
+STABLE_STMT =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) ((#STABLE_STMT:fun(fun('A,bool),fun(fun('A,'A),fun('A,bool))) p:fun('A,bool)) st:fun('A,'A))) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (p:fun('A,bool) (st:fun('A,'A) s:'A)))))))))
+STABLE =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#=:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) #False:fun('A,bool)) Pr:list(fun('A,'A))))))))
+INVARIANT =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p0:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#=:fun(bool,fun(bool,bool)) ((#INVARIANT:fun(fun('A,bool),fun(prod(fun('A,bool),list(fun('A,'A))),bool)) p:fun('A,bool)) ((#,:fun(fun('A,bool),fun(list(fun('A,'A)),prod(fun('A,bool),list(fun('A,'A))))) p0:fun('A,bool)) Pr:list(fun('A,'A))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) (p0:fun('A,bool) s:'A)) (p:fun('A,bool) s:'A))))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))))))))))
 IMP_IMP_CONJIMP_lemma =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. (#forall:fun(fun(bool,bool),bool) (\ps:bool. (#forall:fun(fun(bool,bool),bool) (\qs:bool. (#forall:fun(fun(bool,bool),bool) (\p':bool. (#forall:fun(fun(bool,bool),bool) (\q':bool. (#forall:fun(fun(bool,bool),bool) (\p's:bool. (#forall:fun(fun(bool,bool),bool) (\q's:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) (#~:fun(bool,bool) q:bool))) ((#\/:fun(bool,fun(bool,bool)) ps:bool) qs:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p':bool) (#~:fun(bool,bool) q':bool))) ((#\/:fun(bool,fun(bool,bool)) p's:bool) q's:bool))) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) p':bool) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p:bool)) (#~:fun(bool,bool) q':bool))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p':bool)) (#~:fun(bool,bool) q:bool))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) q:bool)) (#~:fun(bool,bool) q':bool))))))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ps:bool) p's:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ps:bool) q's:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p's:bool) qs:bool)) ((#/\:fun(bool,fun(bool,bool)) qs:bool) q's:bool)))))))))))))))))))))))
 NOT_NOT_OR_lemma =  |- (#forall:fun(fun(bool,bool),bool) (\t1:bool. (#forall:fun(fun(bool,bool),bool) (\t2:bool. (#forall:fun(fun(bool,bool),bool) (\t3:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) t1:bool) ((#\/:fun(bool,fun(bool,bool)) t2:bool) t3:bool))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) t1:bool)) (#~:fun(bool,bool) t2:bool)))) t3:bool))))))))
 CONJ_IMPLY_THM =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\p':bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. (#forall:fun(fun(bool,bool),bool) (\q':bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) p':bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) (#~:fun(bool,bool) q':bool))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p':bool) (#~:fun(bool,bool) q:bool))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) q:bool)) (#~:fun(bool,bool) q':bool)))))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) (#~:fun(bool,bool) q:bool))) ((#/\:fun(bool,fun(bool,bool)) p':bool) (#~:fun(bool,bool) q':bool))))))))))))
-UNLESS_STMT_thm0 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) p:fun(''a,bool)) st:fun(''a,''a)) s:''a)))))))
-UNLESS_STMT_thm1 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) (q:fun(''a,bool) s:''a)) (r:fun(''a,bool) s:''a)))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) r:fun(''a,bool)) st:fun(''a,''a)) s:''a))))))))))))
-UNLESS_STMT_thm2 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p':fun(''a,bool)) q':fun(''a,bool)) st:fun(''a,''a)) s:''a))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool))) st:fun(''a,''a)) s:''a))))))))))))))
-UNLESS_STMT_thm3 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p':fun(''a,bool)) q':fun(''a,bool)) st:fun(''a,''a)) s:''a))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q':fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p':fun(''a,bool)) q:fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool)))) st:fun(''a,''a)) s:''a))))))))))))))
-UNLESS_STMT_thm4 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p':fun(''a,bool)) q':fun(''a,bool)) st:fun(''a,''a)) s:''a))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool))) q':fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (#Not:fun(fun(''a,bool),fun(''a,bool)) p':fun(''a,bool))) q:fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool)))) st:fun(''a,''a)) s:''a))))))))))))))
+UNLESS_STMT_thm0 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) p:fun('A,bool)) st:fun('A,'A)) s:'A)))))))
+UNLESS_STMT_thm1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) (q:fun('A,bool) s:'A)) (r:fun('A,bool) s:'A)))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) r:fun('A,bool)) st:fun('A,'A)) s:'A))))))))))))
+UNLESS_STMT_thm2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p':fun('A,bool)) q':fun('A,bool)) st:fun('A,'A)) s:'A))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool))) st:fun('A,'A)) s:'A))))))))))))))
+UNLESS_STMT_thm3 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p':fun('A,bool)) q':fun('A,bool)) st:fun('A,'A)) s:'A))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q':fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p':fun('A,bool)) q:fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool)))) st:fun('A,'A)) s:'A))))))))))))))
+UNLESS_STMT_thm4 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p':fun('A,bool)) q':fun('A,bool)) st:fun('A,'A)) s:'A))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool))) q':fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#Not:fun(fun('A,bool),fun('A,bool)) p':fun('A,bool))) q:fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool)))) st:fun('A,'A)) s:'A))))))))))))))
 UNLESS_STMT_thm5_lemma1 =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. (#forall:fun(fun(bool,bool),bool) (\r:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) r:bool)) ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool)))))))))
-UNLESS_STMT_thm5_lemma2 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun(''a,bool)) n:num) s:''a)))) (q:fun(''a,bool) s:''a))) (#?:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((P:fun(num,fun(''a,bool)) n:num) s:''a)) (q:fun(''a,bool) s:''a)))))))))))
-UNLESS_STMT_thm5 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) (P:fun(num,fun(''a,bool)) m:num)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) (\s:''a. (#?:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun(''a,bool)) n:num) s:''a))))) q:fun(''a,bool)) st:fun(''a,''a)) s:''a))))))))))
-UNLESS_STMT_thm6 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) p:fun(''a,bool)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) r:fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) st:fun(''a,''a)) s:''a))))))))))))
-UNLESS_thm1 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))))))
-UNLESS_thm2 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool))) Pr:list(fun(''a,''a)))))))
-UNLESS_thm3 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) (q:fun(''a,bool) s:''a)) (r:fun(''a,bool) s:''a)))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) r:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))))
-UNLESS_thm4 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p':fun(''a,bool)) q':fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q':fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p':fun(''a,bool)) q:fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool)))) Pr:list(fun(''a,''a))))))))))))))
-UNLESS_thm5 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p':fun(''a,bool)) q':fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool))) q':fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (#Not:fun(fun(''a,bool),fun(''a,bool)) p':fun(''a,bool))) q:fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool)))) Pr:list(fun(''a,''a))))))))))))))
-UNLESS_thm6 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p':fun(''a,bool)) q':fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))))
-UNLESS_thm7 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p':fun(''a,bool)) q':fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))))
-UNLESS_thm8 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) q:fun(''a,bool)) r:fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) r:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor1 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (q:fun(''a,bool) s:''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor2 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool)) s:''a)) (q:fun(''a,bool) s:''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor3a =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool)))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor3b =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool)))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor3 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool)))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor4 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) r:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor5 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) #True:fun(''a,bool)) Pr:list(fun(''a,''a)))))))
-UNLESS_cor6 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) #True:fun(''a,bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))))))
-UNLESS_cor7 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) #False:fun(''a,bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))))))
-HeJiFeng_lemma1 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. (p':fun(''a,bool) s:''a)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (q:fun(''a,bool) s:''a))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) ((#/\:fun(bool,fun(bool,bool)) (p':fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))))))))))))
-HeJiFeng_lemma2 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. (p':fun(''a,bool) s:''a)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (q:fun(''a,bool) s:''a))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p':fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))))))))))))
-HeJiFeng_lemma =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. (p':fun(''a,bool) s:''a)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (q:fun(''a,bool) s:''a))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))) ((#/\:fun(bool,fun(bool,bool)) (p':fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))))))))))))
-HeJiFeng_lemma_f = (#forall:fun(fun(''a,bool),bool) (\s:''a. (p':fun(''a,bool) s:''a))), (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a))))), (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (q:fun(''a,bool) s:''a)))) |- ((#=:fun(fun(''a,bool),fun(fun(''a,bool),bool)) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a))))) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p':fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))
-UNLESS_cor8 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#/\:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (#~:fun(bool,bool) (q:fun(''a,bool) s:''a)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. (p':fun(''a,bool) s:''a)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#\/:fun(bool,fun(bool,bool)) (p:fun(''a,bool) s:''a)) (q:fun(''a,bool) s:''a))))) ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool)))) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p':fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool)))) q:fun(''a,bool)) Pr:list(fun(''a,''a)))))))))))))))
-UNLESS_cor9 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\p':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q':fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r':fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) p':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) r':fun(''a,bool))) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p':fun(''a,bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) q':fun(''a,bool))))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) r:fun(''a,bool)) r':fun(''a,bool)))) Pr:list(fun(''a,''a))))))))))))))))))
-UNLESS_cor10 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor11 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool)) s:''a)))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a))))))))
-UNLESS_cor12 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool)) s:''a)))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) p:fun(''a,bool))) Pr:list(fun(''a,''a))))))))
-UNLESS_cor13 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) q:fun(''a,bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((#Not:fun(fun(''a,bool),fun(''a,bool)) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) s:''a)))))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor14 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool))) Pr:list(fun(''a,''a)))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) (#Not:fun(fun(''a,bool),fun(''a,bool)) q:fun(''a,bool)))) Pr:list(fun(''a,''a))))))))))
+UNLESS_STMT_thm5_lemma2 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun('A,bool),bool) (\s:'A. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun('A,bool)) n:num) s:'A)))) (q:fun('A,bool) s:'A))) (#?:fun(fun(num,bool),bool) (\n:num. ((#\/:fun(bool,fun(bool,bool)) ((P:fun(num,fun('A,bool)) n:num) s:'A)) (q:fun('A,bool) s:'A)))))))))))
+UNLESS_STMT_thm5 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) (P:fun(num,fun('A,bool)) m:num)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) (\s:'A. (#?:fun(fun(num,bool),bool) (\n:num. ((P:fun(num,fun('A,bool)) n:num) s:'A))))) q:fun('A,bool)) st:fun('A,'A)) s:'A))))))))))
+UNLESS_STMT_thm6 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) p:fun('A,bool)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) r:fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) st:fun('A,'A)) s:'A))))))))))))
+UNLESS_thm1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))))))
+UNLESS_thm2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool))) Pr:list(fun('A,'A)))))))
+UNLESS_thm3 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) (q:fun('A,bool) s:'A)) (r:fun('A,bool) s:'A)))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) r:fun('A,bool)) Pr:list(fun('A,'A))))))))))))
+UNLESS_thm4 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p':fun('A,bool)) q':fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q':fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p':fun('A,bool)) q:fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool)))) Pr:list(fun('A,'A))))))))))))))
+UNLESS_thm5 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p':fun('A,bool)) q':fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool))) q':fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#Not:fun(fun('A,bool),fun('A,bool)) p':fun('A,bool))) q:fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool)))) Pr:list(fun('A,'A))))))))))))))
+UNLESS_thm6 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p':fun('A,bool)) q':fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool))) Pr:list(fun('A,'A))))))))))))))
+UNLESS_thm7 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p':fun('A,bool)) q':fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool))) Pr:list(fun('A,'A))))))))))))))
+UNLESS_thm8 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) q:fun('A,bool)) r:fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) r:fun('A,bool)) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (q:fun('A,bool) s:'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))))))))
+UNLESS_cor2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) ((#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool)) s:'A)) (q:fun('A,bool) s:'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))))))))
+UNLESS_cor3a =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool)))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor3b =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool)))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor3 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool)))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor4 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) r:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor5 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) #True:fun('A,bool)) Pr:list(fun('A,'A)))))))
+UNLESS_cor6 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) #True:fun('A,bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))))))
+UNLESS_cor7 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) #False:fun('A,bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))))))
+HeJiFeng_lemma1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. (p':fun('A,bool) s:'A)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#\/:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (q:fun('A,bool) s:'A))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))) ((#/\:fun(bool,fun(bool,bool)) (p':fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))))))))))))
+HeJiFeng_lemma2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. (p':fun('A,bool) s:'A)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#\/:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (q:fun('A,bool) s:'A))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p':fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))) ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))))))))))))
+HeJiFeng_lemma =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. (p':fun('A,bool) s:'A)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#\/:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (q:fun('A,bool) s:'A))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))) ((#/\:fun(bool,fun(bool,bool)) (p':fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))))))))))))
+HeJiFeng_lemma_f = (#forall:fun(fun('A,bool),bool) (\s:'A. (p':fun('A,bool) s:'A))), (#forall:fun(fun('A,bool),bool) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A))))), (#forall:fun(fun('A,bool),bool) (\s:'A. ((#\/:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (q:fun('A,bool) s:'A)))) |- ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A))))) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p':fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))
+UNLESS_cor8 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#/\:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (#~:fun(bool,bool) (q:fun('A,bool) s:'A)))))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. (p':fun('A,bool) s:'A)))) ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#\/:fun(bool,fun(bool,bool)) (p:fun('A,bool) s:'A)) (q:fun('A,bool) s:'A))))) ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool)))) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p':fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool)))) q:fun('A,bool)) Pr:list(fun('A,'A)))))))))))))))
+UNLESS_cor9 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\p':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q':fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r':fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) p':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) r':fun('A,bool))) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p':fun('A,bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) q':fun('A,bool))))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) r:fun('A,bool)) r':fun('A,bool)))) Pr:list(fun('A,'A))))))))))))))))))
+UNLESS_cor10 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))))))))
+UNLESS_cor11 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool)) s:'A)))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) p:fun('A,bool)) Pr:list(fun('A,'A))))))))
+UNLESS_cor12 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool)) s:'A)))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) (#Not:fun(fun('A,bool),fun('A,bool)) p:fun('A,bool))) Pr:list(fun('A,'A))))))))
+UNLESS_cor13 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) q:fun('A,bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((#Not:fun(fun('A,bool),fun('A,bool)) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) s:'A)))))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) Pr:list(fun('A,'A))))))))))
+UNLESS_cor14 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool))) Pr:list(fun('A,'A)))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) (#Not:fun(fun('A,bool),fun('A,bool)) q:fun('A,bool)))) Pr:list(fun('A,'A))))))))))
 UNLESS_cor15_lem1 =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p:bool)) (#~:fun(bool,bool) q:bool)))) ((#/\:fun(bool,fun(bool,bool)) p:bool) (#~:fun(bool,bool) q:bool)))))))
 UNLESS_cor15_lem2 =  |- (#forall:fun(fun(bool,bool),bool) (\p:bool. (#forall:fun(fun(bool,bool),bool) (\q:bool. ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool))) p:bool)))))
 UNLESS_cor15_lem3 =  |- (#forall:fun(fun(fun(num,bool),bool),bool) (\P:fun(num,bool). (#forall:fun(fun(fun(num,bool),bool),bool) (\Q:fun(num,bool). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#/\:fun(bool,fun(bool,bool)) (P:fun(num,bool) i:num)) (Q:fun(num,bool) i:num))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (P:fun(num,bool) i:num)))) (#forall:fun(fun(num,bool),bool) (\i:num. (Q:fun(num,bool) i:num)))))))))
-UNLESS_STMT_cor15 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\Q:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) (P:fun(num,fun(''a,bool)) i:num)) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (P:fun(num,fun(''a,bool)) i:num)) (Q:fun(num,fun(''a,bool)) i:num))) st:fun(''a,''a)) s:''a)))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) (#!*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) P:fun(num,fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (#!*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) P:fun(num,fun(''a,bool)))) (#?*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) Q:fun(num,fun(''a,bool))))) st:fun(''a,''a)) s:''a))))))))))
-UNLESS_cor15 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\Q:fun(num,fun(''a,bool)). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) (P:fun(num,fun(''a,bool)) i:num)) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (P:fun(num,fun(''a,bool)) i:num)) (Q:fun(num,fun(''a,bool)) i:num))) Pr:list(fun(''a,''a)))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) (#!*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) P:fun(num,fun(''a,bool)))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) (#!*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) P:fun(num,fun(''a,bool)))) (#?*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) Q:fun(num,fun(''a,bool))))) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor16 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\Q:fun(num,fun(''a,bool)). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) (P:fun(num,fun(''a,bool)) i:num)) (Q:fun(num,fun(''a,bool)) i:num)) Pr:list(fun(''a,''a)))))) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/<=\*:fun(fun(num,fun(''a,bool)),fun(num,fun(''a,bool))) P:fun(num,fun(''a,bool))) i:num)) ((#\<=/*:fun(fun(num,fun(''a,bool)),fun(num,fun(''a,bool))) Q:fun(num,fun(''a,bool))) i:num)) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor17 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) (P:fun(num,fun(''a,bool)) i:num)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))))) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/<=\*:fun(fun(num,fun(''a,bool)),fun(num,fun(''a,bool))) P:fun(num,fun(''a,bool))) i:num)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))))
-UNLESS_STMT_cor18 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun('?1,bool),bool) (\Q:'?1. (#forall:fun(fun(fun(''a,''a),bool),bool) (\st:fun(''a,''a). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) (P:fun(num,fun(''a,bool)) i:num)) q:fun(''a,bool)) st:fun(''a,''a)) s:''a)))))) (#forall:fun(fun(''a,bool),bool) (\s:''a. ((((#UNLESS_STMT:fun(fun(''a,bool),fun(fun(''a,bool),fun(fun(''a,''a),fun(''a,bool)))) (#?*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) P:fun(num,fun(''a,bool)))) q:fun(''a,bool)) st:fun(''a,''a)) s:''a))))))))))
-UNLESS_cor18 =  |- (#forall:fun(fun(fun(num,fun(''a,bool)),bool),bool) (\P:fun(num,fun(''a,bool)). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) (P:fun(num,fun(''a,bool)) m:num)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) (#?*:fun(fun(num,fun(''a,bool)),fun(''a,bool)) P:fun(num,fun(''a,bool)))) q:fun(''a,bool)) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor19 =  |- (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) #False:fun(''a,bool)) Pr:list(fun(''a,''a)))))
-UNLESS_cor20 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor21 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) p:fun(''a,bool)) Pr:list(fun(''a,''a)))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a))))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) q:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))
-UNLESS_cor22 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) ((#STABLE:fun(fun(''a,bool),fun(list(fun(''a,''a)),bool)) r:fun(''a,bool)) Pr:list(fun(''a,''a))))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) r:fun(''a,bool))) ((#/\*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))
-UNLESS_cor23 =  |- (#forall:fun(fun(fun(''a,bool),bool),bool) (\p:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\q:fun(''a,bool). (#forall:fun(fun(fun(''a,bool),bool),bool) (\r:fun(''a,bool). (#forall:fun(fun(list(fun(''a,''a)),bool),bool) (\Pr:list(fun(''a,''a)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) p:fun(''a,bool)) q:fun(''a,bool)) Pr:list(fun(''a,''a)))) (((#UNLESS:fun(fun(''a,bool),fun(fun(''a,bool),fun(list(fun(''a,''a)),bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) p:fun(''a,bool)) r:fun(''a,bool))) ((#\/*:fun(fun(''a,bool),fun(fun(''a,bool),fun(''a,bool))) q:fun(''a,bool)) r:fun(''a,bool))) Pr:list(fun(''a,''a))))))))))))
+UNLESS_STMT_cor15 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\Q:fun(num,fun('A,bool)). (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) (P:fun(num,fun('A,bool)) i:num)) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (P:fun(num,fun('A,bool)) i:num)) (Q:fun(num,fun('A,bool)) i:num))) st:fun('A,'A)) s:'A)))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) (#!*:fun(fun(num,fun('A,bool)),fun('A,bool)) P:fun(num,fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#!*:fun(fun(num,fun('A,bool)),fun('A,bool)) P:fun(num,fun('A,bool)))) (#?*:fun(fun(num,fun('A,bool)),fun('A,bool)) Q:fun(num,fun('A,bool))))) st:fun('A,'A)) s:'A))))))))))
+UNLESS_cor15 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\Q:fun(num,fun('A,bool)). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) (P:fun(num,fun('A,bool)) i:num)) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (P:fun(num,fun('A,bool)) i:num)) (Q:fun(num,fun('A,bool)) i:num))) Pr:list(fun('A,'A)))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) (#!*:fun(fun(num,fun('A,bool)),fun('A,bool)) P:fun(num,fun('A,bool)))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) (#!*:fun(fun(num,fun('A,bool)),fun('A,bool)) P:fun(num,fun('A,bool)))) (#?*:fun(fun(num,fun('A,bool)),fun('A,bool)) Q:fun(num,fun('A,bool))))) Pr:list(fun('A,'A))))))))))
+UNLESS_cor16 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\Q:fun(num,fun('A,bool)). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) (P:fun(num,fun('A,bool)) i:num)) (Q:fun(num,fun('A,bool)) i:num)) Pr:list(fun('A,'A)))))) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/<=\*:fun(fun(num,fun('A,bool)),fun(num,fun('A,bool))) P:fun(num,fun('A,bool))) i:num)) ((#\<=/*:fun(fun(num,fun('A,bool)),fun(num,fun('A,bool))) Q:fun(num,fun('A,bool))) i:num)) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor17 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) (P:fun(num,fun('A,bool)) i:num)) q:fun('A,bool)) Pr:list(fun('A,'A)))))) (#forall:fun(fun(num,bool),bool) (\i:num. (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/<=\*:fun(fun(num,fun('A,bool)),fun(num,fun('A,bool))) P:fun(num,fun('A,bool))) i:num)) q:fun('A,bool)) Pr:list(fun('A,'A))))))))))))
+UNLESS_STMT_cor18 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun('?1,bool),bool) (\Q:'?1. (#forall:fun(fun(fun('A,'A),bool),bool) (\st:fun('A,'A). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) (P:fun(num,fun('A,bool)) i:num)) q:fun('A,bool)) st:fun('A,'A)) s:'A)))))) (#forall:fun(fun('A,bool),bool) (\s:'A. ((((#UNLESS_STMT:fun(fun('A,bool),fun(fun('A,bool),fun(fun('A,'A),fun('A,bool)))) (#?*:fun(fun(num,fun('A,bool)),fun('A,bool)) P:fun(num,fun('A,bool)))) q:fun('A,bool)) st:fun('A,'A)) s:'A))))))))))
+UNLESS_cor18 =  |- (#forall:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\m:num. (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) (P:fun(num,fun('A,bool)) m:num)) q:fun('A,bool)) Pr:list(fun('A,'A)))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) (#?*:fun(fun(num,fun('A,bool)),fun('A,bool)) P:fun(num,fun('A,bool)))) q:fun('A,bool)) Pr:list(fun('A,'A))))))))))
+UNLESS_cor19 =  |- (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) #False:fun('A,bool)) Pr:list(fun('A,'A)))))
+UNLESS_cor20 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) Pr:list(fun('A,'A))))))))))
+UNLESS_cor21 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) p:fun('A,bool)) Pr:list(fun('A,'A)))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) q:fun('A,bool)) Pr:list(fun('A,'A))))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) q:fun('A,bool))) Pr:list(fun('A,'A))))))))))
+UNLESS_cor22 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) ((#STABLE:fun(fun('A,bool),fun(list(fun('A,'A)),bool)) r:fun('A,bool)) Pr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) r:fun('A,bool))) ((#/\*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A))))))))))))
+UNLESS_cor23 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\r:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\Pr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) Pr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) p:fun('A,bool)) r:fun('A,bool))) ((#\/*:fun(fun('A,bool),fun(fun('A,bool),fun('A,bool))) q:fun('A,bool)) r:fun('A,bool))) Pr:list(fun('A,'A))))))))))))
 types = tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
 constants = INVARIANT STABLE STABLE_STMT UNLESS UNLESS_STMT \</* /<\* \<=/* /<=\* ?<* ?<=* !<=* Ind *** /* %* Pre Suc ** -* +* =>* <>* =* >=* <=* >* <* ==>* @* ?* !* \/* /\* ~* Not True False superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
 definitions = 301
