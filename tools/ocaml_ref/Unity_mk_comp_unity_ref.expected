@@ -5731,94 +5731,94 @@ Warning: inventing type variables
 0..0..4..8..solved at 13
 0..0..solved at 2
 Unity/mk_comp_unity quotations (88):
-  FPr:(A->A)list
-  FPr:(A->A)list
-  GPr:(A->A)list
-  GPr:(A->A)list
-  forall(p:A->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) ==> (p UNLESS q) FPr /\\ (p UNLESS q) GPr
-  FPr:(A->A)list
-  FPr:(A->A)list
-  GPr:(A->A)list
-  GPr:(A->A)list
-  forall(p:A->bool) q FPr GPr.\n     (p UNLESS q) FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)
-  forall(p:A->bool) q FPr GPr.\n      (p UNLESS q) (APPEND FPr GPr) <=> (p UNLESS q) FPr /\\ (p UNLESS q) GPr
-  ((p:A->bool) ENSURES q) GPr
-  ((p:A->bool) ENSURES q) t
-  APPEND (t:(A->A)list) GPr
-  p:A->bool
-  q:A->bool
-  ((p:A->bool) UNLESS  q)(APPEND t GPr) /\\\n                       (p EXIST_TRANSITION q)(APPEND t GPr)
-  ((p:A->bool) EXIST_TRANSITION q)(APPEND t GPr)
-  ((p:A->bool) UNLESS q)(APPEND t GPr)
-  FPr:(A->A)list
-  FPr:(A->A)list
-  GPr:(A->A)list
-  GPr:(A->A)list
-  forall(p:A->bool) q FPr GPr.\n    (p ENSURES q) (APPEND FPr GPr) ==> (p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n                                       (p ENSURES q) GPr /\\ (p UNLESS q) FPr
-  t:(A->A)list
-  GPr:(A->A)list
-  q:A->bool
-  p:A->bool
-  GPr:(A->A)list
-  t:(A->A)list
-  q:A->bool
-  p:A->bool
-  forall(p:A->bool) q FPr GPr.\n    ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n     (p ENSURES q) GPr /\\ (p UNLESS q) FPr)\n           ==> (p ENSURES q) (APPEND FPr GPr)
-  forall(p:A->bool) q FPr GPr.\n      (p ENSURES q) (APPEND FPr GPr) <=>\n         ((p ENSURES q) FPr /\\ (p UNLESS q) GPr \\/\n          (p ENSURES q) GPr /\\ (p UNLESS q) FPr)
-  ((p:A->bool) UNLESS q)GPr
-  ((p:A->bool) ENSURES q)FPr
-  forall(p:A->bool) q FPr GPr.\n      (p ENSURES q) FPr /\\ (p UNLESS q) GPr\n         ==> (p ENSURES q) (APPEND FPr GPr)
-  ((p:A->bool) UNLESS q)FPr
-  ((p:A->bool) ENSURES q)GPr
-  forall(p:A->bool) q FPr GPr.\n      (p ENSURES q) GPr /\\ (p UNLESS q) FPr\n         ==> (p ENSURES q) (APPEND FPr GPr)
-  forall(p0:A->bool) p FPr GPr.\n       (p INVARIANT (p0, APPEND FPr GPr)) =\n          (p INVARIANT (p0,FPr) /\\ p INVARIANT (p0,GPr))
-  forall(p:A->bool) FPr GPr.\n           (p STABLE (APPEND FPr GPr)) = (p STABLE FPr /\\ p STABLE GPr)
-  ~(False:A->bool) s ==> (p:A->bool)(h s) \\/ False(h s)
-  GPr:(A->A)list
-  GPr:(A->A)list
-  ((p:A->bool) UNLESS False)GPr
-  forall(p:A->bool) q FPr GPr.\n         (p UNLESS q) FPr /\\ p STABLE GPr ==>(p UNLESS q) (APPEND FPr GPr)
-  forall(p0:A->bool) p FPr GPr.\n       p INVARIANT (p0, FPr) /\\ p STABLE GPr ==>\n                    p INVARIANT (p0, (APPEND FPr GPr))
-  FPr:(A->A)list
-  FPr:(A->A)list
-  ((p:A->bool) EXIST_TRANSITION q)FPr
-  ((p:A->bool) ENSURES q)FPr
-  GPr:(A->A)list
-  FPr:(A->A)list
-  q:A->bool
-  p:A->bool
-  (p:A->bool) STABLE GPr
-  ((p:A->bool) UNLESS q)FPr
-  FPr:(A->A)list
-  q:A->bool
-  p:A->bool
-  forall(p:A->bool) q FPr GPr.\n        (p ENSURES q) FPr /\\ p STABLE GPr ==> (p ENSURES q) (APPEND FPr GPr)
-  forall(p:A->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) GPr
-  forall(p:A->bool) q FPr GPr. (p UNLESS q)(APPEND FPr GPr) ==> (p UNLESS q) FPr
-  forall(p:A->bool) q st FPr. (p UNLESS q)(CONS st FPr) ==> (p UNLESS q) FPr
-  GPr:(A->A)list
-  t:(A->A)list
-  Not (p:A->bool)
-  p:A->bool
-  forall(p:A->bool) FPr GPr.\n        (p ENSURES (Not p)) FPr ==> (p ENSURES (Not p)) (APPEND FPr GPr)
-  ~(False:A->bool) s ==> (p:A->bool)(h s) \\/ False(h s)
-  FPr:(A->A)list
-  FPr:(A->A)list
-  ((p:A->bool) UNLESS False)FPr
-  forall(p:A->bool) q FPr GPr.\n         p STABLE FPr /\\ (p UNLESS q) GPr ==> (p UNLESS q) (APPEND FPr GPr)
-  forall(p:A->bool) q FPr GPr.\n         (p UNLESS q) (APPEND FPr GPr) = (p UNLESS q) (APPEND GPr FPr)
-  forall(p:A->bool) q FPr GPr.\n         (p ENSURES q) (APPEND FPr GPr) = (p ENSURES q) (APPEND GPr FPr)
-  APPEND (Pr1:(A->A)list) Pr2
-  q:A->bool
-  p:A->bool
-  \\(p:A->bool) q. (p LEADSTO q)(APPEND Pr2 Pr1)
-  ((p':A->bool) ENSURES q')(APPEND Pr1 Pr2)
-  forall(p':A->bool) q' Pr1 Pr2.\n      (p' ENSURES q')(APPEND Pr1 Pr2) ==> (p' LEADSTO q')(APPEND Pr2 Pr1)
-  forall(p':A->bool) q' Pr1 Pr2.\n     (forall r.\n       (p' LEADSTO r)(APPEND Pr1 Pr2) /\\ (p' LEADSTO r)(APPEND Pr2 Pr1) /\\\n       (r LEADSTO q')(APPEND Pr1 Pr2) /\\ (r LEADSTO q')(APPEND Pr2 Pr1)\n          ==> (p' LEADSTO q')(APPEND Pr2 Pr1))
-  forall(p':A->bool) q' Pr1 Pr2.\n     (forall P:(A->bool)->bool.\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr1 Pr2)) /\\\n       (forall p''. p'' In P ==> (p'' LEADSTO q')(APPEND Pr2 Pr1))\n            ==> ((LUB P) LEADSTO q')(APPEND Pr2 Pr1))
-  forall(p:A->bool) q Pr1 Pr2.\n       (p LEADSTO q)(APPEND Pr1 Pr2) = (p LEADSTO q)(APPEND Pr2 Pr1)
-  forall(p:A->bool) FPr GPr.\n      (p STABLE (APPEND FPr GPr)) = (p STABLE (APPEND GPr FPr))
-  forall(p0:A->bool) p FPr GPr.\n      (p INVARIANT (p0, (APPEND FPr GPr)))\n    =\n      (p INVARIANT (p0, (APPEND GPr FPr)))
+  (FPr : List[(A) -> A])
+  (FPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, APPEND(FPr, GPr)) \226\134\146 UNLESS(p, q, FPr) && UNLESS(p, q, GPr)
+  (FPr : List[(A) -> A])
+  (FPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, FPr) && UNLESS(p, q, GPr) \226\134\146 UNLESS(p, q, APPEND(FPr, GPr))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, APPEND(FPr, GPr)) == (UNLESS(p, q, FPr) && UNLESS(p, q, GPr))
+  ENSURES((p : (A) -> Bool), (q : (A) -> Bool), (GPr : List[(A) -> A]))
+  ENSURES((p : (A) -> Bool), (q : (A) -> Bool), (t : List[(A) -> A]))
+  APPEND((t : List[(A) -> A]), (GPr : List[(A) -> A]))
+  (p : (A) -> Bool)
+  (q : (A) -> Bool)
+  UNLESS((p : (A) -> Bool), (q : (A) -> Bool), APPEND((t : List[(A) -> A]), (GPr : List[(A) -> A]))) && EXIST_TRANSITION(p, q, APPEND(t, GPr))
+  EXIST_TRANSITION((p : (A) -> Bool), (q : (A) -> Bool), APPEND((t : List[(A) -> A]), (GPr : List[(A) -> A])))
+  UNLESS((p : (A) -> Bool), (q : (A) -> Bool), APPEND((t : List[(A) -> A]), (GPr : List[(A) -> A])))
+  (FPr : List[(A) -> A])
+  (FPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, APPEND(FPr, GPr)) \226\134\146 ENSURES(p, q, FPr) && UNLESS(p, q, GPr) || ENSURES(p, q, GPr) && UNLESS(p, q, FPr)
+  (t : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  (q : (A) -> Bool)
+  (p : (A) -> Bool)
+  (GPr : List[(A) -> A])
+  (t : List[(A) -> A])
+  (q : (A) -> Bool)
+  (p : (A) -> Bool)
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, FPr) && UNLESS(p, q, GPr) || ENSURES(p, q, GPr) && UNLESS(p, q, FPr) \226\134\146 ENSURES(p, q, APPEND(FPr, GPr))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, APPEND(FPr, GPr)) == (ENSURES(p, q, FPr) && UNLESS(p, q, GPr) || ENSURES(p, q, GPr) && UNLESS(p, q, FPr))
+  UNLESS((p : (A) -> Bool), (q : (A) -> Bool), (GPr : List[(A) -> A]))
+  ENSURES((p : (A) -> Bool), (q : (A) -> Bool), (FPr : List[(A) -> A]))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, FPr) && UNLESS(p, q, GPr) \226\134\146 ENSURES(p, q, APPEND(FPr, GPr))
+  UNLESS((p : (A) -> Bool), (q : (A) -> Bool), (FPr : List[(A) -> A]))
+  ENSURES((p : (A) -> Bool), (q : (A) -> Bool), (GPr : List[(A) -> A]))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, GPr) && UNLESS(p, q, FPr) \226\134\146 ENSURES(p, q, APPEND(FPr, GPr))
+  \226\136\128 p0 : (A) -> Bool, \226\136\128 p : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], INVARIANT(p, (p0, APPEND(FPr, GPr))) == (INVARIANT(p, (p0, FPr)) && INVARIANT(p, (p0, GPr)))
+  \226\136\128 p : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], STABLE(p, APPEND(FPr, GPr)) == (STABLE(p, FPr) && STABLE(p, GPr))
+  !False((s : A)) \226\134\146 (p : (A) -> Bool)((h : (A) -> A)(s)) || False(h(s))
+  (GPr : List[(A) -> A])
+  (GPr : List[(A) -> A])
+  UNLESS((p : (A) -> Bool), False, (GPr : List[(A) -> A]))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, FPr) && STABLE(p, GPr) \226\134\146 UNLESS(p, q, APPEND(FPr, GPr))
+  \226\136\128 p0 : (A) -> Bool, \226\136\128 p : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], INVARIANT(p, (p0, FPr)) && STABLE(p, GPr) \226\134\146 INVARIANT(p, (p0, APPEND(FPr, GPr)))
+  (FPr : List[(A) -> A])
+  (FPr : List[(A) -> A])
+  EXIST_TRANSITION((p : (A) -> Bool), (q : (A) -> Bool), (FPr : List[(A) -> A]))
+  ENSURES((p : (A) -> Bool), (q : (A) -> Bool), (FPr : List[(A) -> A]))
+  (GPr : List[(A) -> A])
+  (FPr : List[(A) -> A])
+  (q : (A) -> Bool)
+  (p : (A) -> Bool)
+  STABLE((p : (A) -> Bool), (GPr : List[(A) -> A]))
+  UNLESS((p : (A) -> Bool), (q : (A) -> Bool), (FPr : List[(A) -> A]))
+  (FPr : List[(A) -> A])
+  (q : (A) -> Bool)
+  (p : (A) -> Bool)
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, FPr) && STABLE(p, GPr) \226\134\146 ENSURES(p, q, APPEND(FPr, GPr))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, APPEND(FPr, GPr)) \226\134\146 UNLESS(p, q, GPr)
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, APPEND(FPr, GPr)) \226\134\146 UNLESS(p, q, FPr)
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 st : (A) -> A, \226\136\128 FPr : List[(A) -> A], UNLESS(p, q, CONS(st, FPr)) \226\134\146 UNLESS(p, q, FPr)
+  (GPr : List[(A) -> A])
+  (t : List[(A) -> A])
+  Not((p : (A) -> Bool))
+  (p : (A) -> Bool)
+  \226\136\128 p : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, Not(p), FPr) \226\134\146 ENSURES(p, Not(p), APPEND(FPr, GPr))
+  !False((s : A)) \226\134\146 (p : (A) -> Bool)((h : (A) -> A)(s)) || False(h(s))
+  (FPr : List[(A) -> A])
+  (FPr : List[(A) -> A])
+  UNLESS((p : (A) -> Bool), False, (FPr : List[(A) -> A]))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], STABLE(p, FPr) && UNLESS(p, q, GPr) \226\134\146 UNLESS(p, q, APPEND(FPr, GPr))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], UNLESS(p, q, APPEND(FPr, GPr)) == UNLESS(p, q, APPEND(GPr, FPr))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], ENSURES(p, q, APPEND(FPr, GPr)) == ENSURES(p, q, APPEND(GPr, FPr))
+  APPEND((Pr1 : List[(A) -> A]), (Pr2 : List[(A) -> A]))
+  (q : (A) -> Bool)
+  (p : (A) -> Bool)
+  (p : (A) -> Bool) => (q : (A) -> Bool) => LEADSTO(p, q, APPEND((Pr2 : List[(A) -> A]), (Pr1 : List[(A) -> A])))
+  ENSURES((p' : (A) -> Bool), (q' : (A) -> Bool), APPEND((Pr1 : List[(A) -> A]), (Pr2 : List[(A) -> A])))
+  \226\136\128 p' : (A) -> Bool, \226\136\128 q' : (A) -> Bool, \226\136\128 Pr1 : List[(A) -> A], \226\136\128 Pr2 : List[(A) -> A], ENSURES(p', q', APPEND(Pr1, Pr2)) \226\134\146 LEADSTO(p', q', APPEND(Pr2, Pr1))
+  \226\136\128 p' : (A) -> Bool, \226\136\128 q' : (A) -> Bool, \226\136\128 Pr1 : List[(A) -> A], \226\136\128 Pr2 : List[(A) -> A], \226\136\128 r : (A) -> Bool, LEADSTO(p', r, APPEND(Pr1, Pr2)) && LEADSTO(p', r, APPEND(Pr2, Pr1)) && LEADSTO(r, q', APPEND(Pr1, Pr2)) && LEADSTO(r, q', APPEND(Pr2, Pr1)) \226\134\146 LEADSTO(p', q', APPEND(Pr2, Pr1))
+  \226\136\128 p' : (A) -> Bool, \226\136\128 q' : (A) -> Bool, \226\136\128 Pr1 : List[(A) -> A], \226\136\128 Pr2 : List[(A) -> A], \226\136\128 P : ((A) -> Bool) -> Bool, (\226\136\128 p'' : (A) -> Bool, In(p'', P) \226\134\146 LEADSTO(p'', q', APPEND(Pr1, Pr2))) && (\226\136\128 p'' : (A) -> Bool, In(p'', P) \226\134\146 LEADSTO(p'', q', APPEND(Pr2, Pr1))) \226\134\146 LEADSTO(LUB(P), q', APPEND(Pr2, Pr1))
+  \226\136\128 p : (A) -> Bool, \226\136\128 q : (A) -> Bool, \226\136\128 Pr1 : List[(A) -> A], \226\136\128 Pr2 : List[(A) -> A], LEADSTO(p, q, APPEND(Pr1, Pr2)) == LEADSTO(p, q, APPEND(Pr2, Pr1))
+  \226\136\128 p : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], STABLE(p, APPEND(FPr, GPr)) == STABLE(p, APPEND(GPr, FPr))
+  \226\136\128 p0 : (A) -> Bool, \226\136\128 p : (A) -> Bool, \226\136\128 FPr : List[(A) -> A], \226\136\128 GPr : List[(A) -> A], INVARIANT(p, (p0, APPEND(FPr, GPr))) == INVARIANT(p, (p0, APPEND(GPr, FPr)))
 COMP_UNLESS_thm1_lemma_1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\FPr:list(fun('A,'A)). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\GPr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) ((#APPEND:fun(list(fun('A,'A)),fun(list(fun('A,'A)),list(fun('A,'A)))) FPr:list(fun('A,'A))) GPr:list(fun('A,'A))))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) FPr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) GPr:list(fun('A,'A)))))))))))))
 COMP_UNLESS_thm1_lemma_2 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\FPr:list(fun('A,'A)). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\GPr:list(fun('A,'A)). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) FPr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) GPr:list(fun('A,'A))))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) ((#APPEND:fun(list(fun('A,'A)),fun(list(fun('A,'A)),list(fun('A,'A)))) FPr:list(fun('A,'A))) GPr:list(fun('A,'A)))))))))))))
 COMP_UNLESS_thm1 =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\p:fun('A,bool). (#forall:fun(fun(fun('A,bool),bool),bool) (\q:fun('A,bool). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\FPr:list(fun('A,'A)). (#forall:fun(fun(list(fun('A,'A)),bool),bool) (\GPr:list(fun('A,'A)). ((#=:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) ((#APPEND:fun(list(fun('A,'A)),fun(list(fun('A,'A)),list(fun('A,'A)))) FPr:list(fun('A,'A))) GPr:list(fun('A,'A))))) ((#/\:fun(bool,fun(bool,bool)) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) FPr:list(fun('A,'A)))) (((#UNLESS:fun(fun('A,bool),fun(fun('A,bool),fun(list(fun('A,'A)),bool))) p:fun('A,bool)) q:fun('A,bool)) GPr:list(fun('A,'A)))))))))))))
