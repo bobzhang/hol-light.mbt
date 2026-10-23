@@ -191,11 +191,11 @@ priv struct Printer {
   names : Array[String]
   // write sets as {a, b} and {e | p} (else as INSERT, GSPEC, ...)
   sets : Bool
-  // list the binders of a comprehension whose element has a comprehension
-  // ({e | x : A | p}), as a quotation may: HOL's parser reads the element
-  // of the two forms a different number of times (pgen_cost), numbering
-  // the GEN%PVAR names in it differently
-  listed : Bool
+  // the GEN%PVAR binders of the comprehensions written with their binders
+  // listed ({e | x : A | p}) where {e | p} would do, as a quotation may:
+  // HOL's parser reads the element of the two forms a different number of
+  // times (pgen_cost), numbering the comprehensions in it differently
+  listed : Array[String]
   // bindings of a set comprehension's implicit binders ({e | p}), each the
   // variable and the depth of its binding in the scope: printed with their
   // type where they first occur
@@ -475,7 +475,7 @@ fn Printer::comb(
     (Const("GSPEC", _), [Abs(g, body)]) if self.sets &&
       comprehension(g, body) is Some((scoped, p, e)) &&
       (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) =>
-      self.comprehension(scoped, p, e, bound)
+      self.comprehension(g, scoped, p, e, bound)
     (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
           l => Some(l)
         })
@@ -607,10 +607,67 @@ fn has_comprehension(t : @kernel.Term) -> Bool {
 }
 
 ///|
+/// The GEN%PVAR binders of the comprehensions in `t` whose element has a
+/// comprehension: those whose form (binders listed or not) numbers it.
+fn nesting_comprehensions(t : @kernel.Term) -> Array[String] {
+  let found = []
+  fn go(t : @kernel.Term) {
+    match t {
+      Comb(Const("GSPEC", _), Abs(Var(n, _) as g, body)) => {
+        if comprehension(g, body) is Some((_, _, e)) &&
+          has_comprehension(e) &&
+          !found.contains(n) {
+          found.push(n)
+        }
+        go(body)
+      }
+      Comb(f, x) => {
+        go(f)
+        go(x)
+      }
+      Abs(_, b) => go(b)
+      _ => ()
+    }
+  }
+  go(t)
+  found
+}
+
+///|
+/// How many GEN%PVAR names reading `t` printed in set notation takes, with
+/// the comprehensions `listed` names written with their binders listed (as
+/// are those whose binders {e | p} does not bind): pgen_cost, read off the
+/// term.
+fn comprehension_cost(t : @kernel.Term, listed : Array[String]) -> Int {
+  match t {
+    Comb(Const("GSPEC", _), Abs(Var(n, _) as g, body)) =>
+      match comprehension(g, body) {
+        Some((scoped, p, e)) => {
+          let xs = scoped.map(x => x.0)
+          let readings = if listed.contains(n) ||
+            implicit_binders(e, p, @list.List([])) != xs {
+            3
+          } else {
+            2
+          }
+          readings * comprehension_cost(e, listed) +
+          comprehension_cost(p, listed) +
+          1
+        }
+        None => comprehension_cost(body, listed)
+      }
+    Comb(f, x) => comprehension_cost(f, listed) + comprehension_cost(x, listed)
+    Abs(_, b) => comprehension_cost(b, listed)
+    _ => 0
+  }
+}
+
+///|
 /// `{e | p}` when HOL's rule binds exactly `xs` (in order), else
 /// `{e | x : A, y : B | p}`.
 fn Printer::comprehension(
   self : Printer,
+  g : @kernel.Term,
   scoped : Array[(@kernel.Term, @kernel.Term)],
   p : @kernel.Term,
   e : @kernel.Term,
@@ -630,7 +687,7 @@ fn Printer::comprehension(
   }
   if !renamed &&
     implicit_binders(e, p, inner) == xs &&
-    !(self.listed && has_comprehension(e)) {
+    !(g is Var(n, _) && self.listed.contains(n)) {
     // each binder is written with its type where it first occurs in e
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
     let typed_before = self.typed_free.length()
@@ -683,7 +740,7 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 fn print_term_with(
   t : @kernel.Term,
   sets~ : Bool,
-  listed? : Bool = false,
+  listed? : Array[String] = [],
 ) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
@@ -785,12 +842,27 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 /// differ in name. tools/migrate.mbtx migrates only such quotations, so the
 /// theorems of a migrated package print as before.
 pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintable {
-  // set notation, comprehensions with elements that have comprehensions
-  // also with their binders listed, else the sets as written (GSPEC(...)),
-  // which an old quotation may spell out
+  // set notation, else the sets as written (GSPEC(...)), which an old
+  // quotation may spell out. A comprehension whose element has one may be
+  // written either way, numbering the GEN%PVAR names in it differently:
+  // those choices that take as many names as the quotation are tried.
   let mut error = Unprintable("term")
+  let nesting = nesting_comprehensions(t)
+  let forms = [(true, [])]
+  if !nesting.is_empty() {
+    let taken = try @parser.reread_term(old).1 catch { _ => -1 }
+    // at most 2^8 choices, each costed on the term before it is printed
+    let n = nesting.length().min(8)
+    for mask in 1..<(1 << n) {
+      let listed = [for i in 0..<n if (mask >> i) % 2 == 1 => nesting[i]]
+      if comprehension_cost(t, listed) == taken {
+        forms.push((true, listed))
+      }
+    }
+  }
+  forms.push((false, []))
   let tried = []
-  for form in [(true, false), (true, true), (false, false)] {
+  for form in forms {
     let (sets, listed) = form
     let s = print_term_with(t, sets~, listed~) catch {
       e => {

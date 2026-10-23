@@ -216,6 +216,11 @@ test "nested set comprehensions number GEN%PVAR as HOL's parser does" {
   inspect(exact("{ {x | x < n} | n IN {m | m < 3}}"), content=(
     #|{{(x : Num) | x < (n : Num)} | IN(n, {(m : Num) | m < 3})}
   ))
+  // each comprehension takes its own form: here the outer one lists its
+  // binders and the middle one does not
+  inspect(exact("{{{x | x < n + m} | m < 3} | n | n < 3}"), content=(
+    #|{{{(x : Num) | x < n + (m : Num)} | m < 3} | n : Num | n < 3}
+  ))
   // a set of one comprehension reads it once
   inspect(exact("{ {x | x < 3} }"), content=(
     #|{{(x : Num) | x < 3}}
