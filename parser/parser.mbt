@@ -943,6 +943,14 @@ pub fn[T] with_pgen_counter_restored(f : () -> T raise) -> T raise {
 }
 
 ///|
+/// Take `n` GEN%PVAR names unused: the names HOL's parser takes reading a
+/// set comprehension's element in the alternatives it tries first (the
+/// term syntax reads it once).
+pub fn skip_pgenvars(n : Int) -> Unit {
+  pgen_counter.val = pgen_counter.val + n
+}
+
+///|
 /// The GEN%PVAR counter.
 pub fn pgen_count() -> Int {
   pgen_counter.val

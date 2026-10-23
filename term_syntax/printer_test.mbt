@@ -175,10 +175,6 @@ test "set notation" {
   inspect(exact("{x + y | x | x < 2}"), content=(
     #|{(x : Num) + (y : Num) | x < 2}
   ))
-  inspect(exact("{ {x | x < n} | n < 3}"), content=(
-    #|unprintable: term whose bound variables the syntax renames
-
-  ))
   inspect(exact("{t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)"), content=(
     #|HAS_SIZE({(t : (_) -> Bool) | SUBSET(t, (s : (_) -> Bool)) && HAS_SIZE(t, (m : Num))}, (binom : ((_, Num)) -> Num)(((n : _), m)))
   ))
@@ -196,6 +192,65 @@ test "set notation reads as HOL's" {
     let b = @parser.parse_term(q.1)
     assert_true(@term_syntax.same_term(a, b), msg=q.0)
   }
+}
+
+///|
+test "nested set comprehensions number GEN%PVAR as HOL's parser does" {
+  let exact = fn(q : String) -> String raise {
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    }
+  }
+  // HOL reads the element of {e | p} twice and of {e | vs | p} three
+  // times, so the two forms number the comprehensions in e differently
+  inspect(exact("{ {x | x < n} | n < 3}"), content=(
+    #|{{(x : Num) | x < (n : Num)} | n < 3}
+  ))
+  inspect(exact("{ {x | x < n} | n | n < 3}"), content=(
+    #|{{(x : Num) | x < n} | n : Num | n < 3}
+  ))
+  inspect(exact("{ { {x | x < m + n} | m < n} | n < 3}"), content=(
+    #|{{{(x : Num) | x < (m : Num) + (n : Num)} | m < n} | (n : Num) < 3}
+  ))
+  inspect(exact("{ {x | x < n} | n IN {m | m < 3}}"), content=(
+    #|{{(x : Num) | x < (n : Num)} | IN(n, {(m : Num) | m < 3})}
+  ))
+  // each comprehension takes its own form: here the outer one lists its
+  // binders and the middle one does not
+  inspect(exact("{{{x | x < n + m} | m < 3} | n | n < 3}"), content=(
+    #|{{{(x : Num) | x < n + (m : Num)} | m < 3} | n : Num | n < 3}
+  ))
+  // a comprehension spelt GSPEC takes no name
+  inspect(
+    exact("({ {x | x < n} | n | n < 3}, GSPEC (\\g:num. SETSPEC g T (x:num)))"),
+    content=(
+      #|({{(x : Num) | x < n} | n : Num | n < 3}, GSPEC((g : Num) => SETSPEC(g, true, (x : Num))))
+    ),
+  )
+  inspect(
+    exact("({ {x | x < n} | n | n < 3}, GSPEC (\\g:num. ?x:num. SETSPEC g T x))"),
+    content=(
+      #|({{(x : Num) | x < n} | n : Num | n < 3}, GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x)))
+    ),
+  )
+  // a comprehension with no binders has only one form
+  inspect(
+    exact(
+      "{({0 | {{{0 | T} | T} | T} = {{{0}}}}, { {x | x < m} | m | m < n}) | n | n < 3}",
+    ),
+    content=(
+      #|{({0 | {{{0 | true} | true} | true} == {{{0}}}}, {{(x : Num) | x < m} | m : Num | m < n}) | n : Num | n < 3}
+    ),
+  )
+  // the forms are read off the numbering, however many comprehensions
+  let nine = Array::make(9, "{ {x | x < n} | n | n < 3}")
+  let spelled = exact("[" + nine.join("; ") + "]")
+  inspect(spelled.contains("unprintable"), content="false")
+  // a set of one comprehension reads it once
+  inspect(exact("{ {x | x < 3} }"), content=(
+    #|{{(x : Num) | x < 3}}
+  ))
 }
 
 ///|
