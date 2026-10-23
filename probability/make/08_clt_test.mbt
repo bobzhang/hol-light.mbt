@@ -84658,7 +84658,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  (b : Real) - (Y : (A) -> Real)((x : A))
       #|  (a : Real) - (X : (A) -> Real)((x : A))
       #|  real_of_num(0) < real_of_num(1) / real_of_num(SUC((n : Num)))
-      #|  UNIONS {{x:A | x IN prob_carrier p /\\ (X:A->real) x <=\n          a - &1 / &(SUC n) /\\ (Y:A->real) x <= b - &1 / &(SUC n)} |\n          n IN (:num)} =\n        {x | x IN prob_carrier p /\\ X x < a /\\ Y x < b}
+      #|  UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) <= (a : Real) - real_of_num(1) / real_of_num(SUC((n : Num))) && (Y : (A) -> Real)(x) <= (b : Real) - real_of_num(1) / real_of_num(SUC(n))} | IN(n, UNIV)}) == {(x : A) | IN(x, prob_carrier(p)) && X(x) < a && Y(x) < b}
       #|  ((a : Real) - (x : Real) <= a - (y : Real)) == (y <= x)
       #|  (b : Real) - real_of_num(1) / real_of_num(SUC((n : Num)))
       #|  (a : Real) - real_of_num(1) / real_of_num(SUC((n : Num)))
@@ -86197,7 +86197,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  (b : Num)
       #|  (n : Num) => (x : A) => min((X : (Num, A) -> Real)(n, x), real_of_num(SUC(n))) - expectation((p : Prob_space[A]), (y : A) => min(X(n, y), real_of_num(SUC(n))))
       #|  (p : Prob_space[A])
-      #|  INTERS\n        {(\\b:num. {x:A |\n           ((\\k. inv(&(gseq b k)) *\n             sum(0..gseq b k - 1)\n               (\\i. min ((X:num->A->real) i x) (&(SUC i)) -\n                 expectation p (\\y. min (X i y) (&(SUC i)))))\n             ---> &0) sequentially}) b | b IN (:num)}
+      #|  INTERS({((b : Num) => {(x : A) | op_minus_minus_minus_gt((k : Num) => inv(real_of_num(gseq(b, k))) * sum(op_dot_dot(0, gseq(b, k) - 1), (i : Num) => min((X : (Num, A) -> Real)(i, x), real_of_num(SUC(i))) - expectation((p : Prob_space[A]), (y : A) => min(X(i, y), real_of_num(SUC(i))))), real_of_num(0), sequentially)})((b : Num)) | IN(b, UNIV)})
       #|  ((a : Real) - (b : Real) <= a) == (real_of_num(0) <= b)
       #|  (x : A) => min((X : (Num, A) -> Real)((n : Num), x), real_of_num(SUC(n)))
       #|  (p : Prob_space[A])
@@ -86371,8 +86371,8 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  (x : Real) / real_of_num(2)
       #|  real_of_num(0) <= (x : Real) && !(real_of_num(0) < x) \226\134\146 x == real_of_num(0)
       #|  \226\136\128 x : Real, real_of_num(0) <= x && (\226\136\128 d : Real, real_of_num(0) < d \226\134\146 x <= d) \226\134\146 x == real_of_num(0)
-      #|  INTERS {UNIONS {(D:num->num->A->bool) a N |\n     N IN (:num)} | a IN (:num)}
-      #|  INTERS {UNIONS {(D:num->num->A->bool) a N |\n     N IN (:num)} | a IN (:num)} IN prob_events p
+      #|  INTERS({UNIONS({(D : (Num, Num, A) -> Bool)((a : Num), (N : Num)) | IN(N, UNIV)}) | IN(a, UNIV)})
+      #|  IN(INTERS({UNIONS({(D : (Num, Num, A) -> Bool)((a : Num), (N : Num)) | IN(N, UNIV)}) | IN(a, UNIV)}), prob_events((p : Prob_space[A])))
       #|  \226\136\128 a : Num, IN(UNIONS({(D : (Num, Num, A) -> Bool)(a, (N : Num)) | IN(N, UNIV)}), prob_events((p : Prob_space[A])))
       #|  (P : Bool) == (Q : Bool) \226\134\146 P \226\134\146 Q
       #|  (eps : Real)
@@ -86393,7 +86393,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  real_of_num(0) < (eps : Real)
       #|  (eps : Real) == inv(real_of_num(SUC((m : Num))))
       #|  (m : Num)
-      #|  INTERS {(\\m:num. {x:A |\n    ?a. forall k. abs(sum(a..a+k) (\\i. (X:num->A->real) i x)) <\n      inv(&(SUC m))}) m | m IN (:num)}
+      #|  INTERS({((m : Num) => {(x : A) | \226\136\131 a : Num, \226\136\128 k : Num, abs(sum(op_dot_dot(a, a + k), (i : Num) => (X : (Num, A) -> Real)(i, x))) < inv(real_of_num(SUC(m)))})((m : Num)) | IN(m, UNIV)})
       #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 a : Num, \226\136\128 N : Num, sum(op_dot_dot(a, a + N), (n : Num) => variance((p : Prob_space[A]), (X : (Num, A) -> Real)(n))) < e)
       #|  expectation((p : Prob_space[A]), (X : (Num, A) -> Real)((n : Num))) == real_of_num(0)
       #|  \226\136\128 n : Num, real_of_num(0) <= variance((p : Prob_space[A]), (X : (Num, A) -> Real)(n))
@@ -86632,7 +86632,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && pow(sum(op_dot_dot(0, (m : Num)), (i : Num) => (Z : (Num, A) -> Real)(i, x)), 2) > real_of_num((K : Num))}
       #|  (m : Num)
       #|  (y : A)
-      #|  {x:A | x IN prob_carrier p /\\\n      ?n:num. sum(0..n) (\\i. (Z:num->A->real) i x) pow 2 > &K} =\n     UNIONS {(\\n. {x | x IN prob_carrier p /\\\n       sum(0..n) (\\i. Z i x) pow 2 > &K}) n | n IN (:num)}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, pow(sum(op_dot_dot(0, n), (i : Num) => (Z : (Num, A) -> Real)(i, x)), 2) > real_of_num((K : Num)))} == UNIONS({((n : Num) => {(x : A) | IN(x, prob_carrier(p)) && pow(sum(op_dot_dot(0, n), (i : Num) => Z(i, x)), 2) > real_of_num(K)})((n : Num)) | IN(n, UNIV)})
       #|  \226\136\128 n : Num, \226\136\128 t : Real, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && pow(sum(op_dot_dot(0, n), (i : Num) => (Z : (Num, A) -> Real)(i, x)), 2) > t}, prob_events(p))
       #|  \226\136\128 p : Prob_space[A], \226\136\128 Z : (Num, A) -> Real, \226\136\128 K : Num, (\226\136\128 n : Num, integrable(p, (x : A) => pow(sum(op_dot_dot(0, n), (i : Num) => Z(i, x)), 2))) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && (\226\136\131 n : Num, pow(sum(op_dot_dot(0, n), (i : Num) => Z(i, x)), 2) > real_of_num(K))}, prob_events(p))
       #|  pow(sum(op_dot_dot(0, (m : Num)), (i : Num) => (Z : (Num, A) -> Real)(i, (y : A))), 2) > real_of_num((K : Num) * K + 1)
@@ -86651,12 +86651,12 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n' : Num, pow(sum(op_dot_dot(0, n'), (i : Num) => (Z : (Num, A) -> Real)(i, x)), 2) > real_of_num(0))}
       #|  IN((y : A), prob_carrier((p : Prob_space[A])))
       #|  (y : A)
-      #|  forall p:A prob_space (Z:num->A->real) ne.\n    (forall n. integrable p (\\x. sum(0..n) (\\i. Z i x) pow 2)) /\\\n    null_event p ne /\\\n    {x | x IN prob_carrier p /\\\n      ~(x IN {x | ?L. ((\\n. sum(0..n) (\\i. Z i x)) ---> L) sequentially})}\n      SUBSET ne /\\\n    (forall K. {x | x IN prob_carrier p /\\\n         ?n:num. sum(0..n) (\\i. Z i x) pow 2 > &K} IN prob_events p)\n    ==> INTERS {{x | x IN prob_carrier p /\\\n          ?n':num. sum(0..n') (\\i. Z i x) pow 2 > &n} |\n          n IN (:num)} SUBSET ne
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 Z : (Num, A) -> Real, \226\136\128 ne : (A) -> Bool, (\226\136\128 n : Num, integrable(p, (x : A) => pow(sum(op_dot_dot(0, n), (i : Num) => Z(i, x)), 2))) && null_event(p, ne) && SUBSET({(x : A) | IN(x, prob_carrier(p)) && !IN(x, {(x : A) | \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (i : Num) => Z(i, x)), L, sequentially)})}, ne) && (\226\136\128 K : Num, IN({(x : A) | IN(x, prob_carrier(p)) && (\226\136\131 n : Num, pow(sum(op_dot_dot(0, n), (i : Num) => Z(i, x)), 2) > real_of_num(K))}, prob_events(p))) \226\134\146 SUBSET(INTERS({{(x : A) | IN(x, prob_carrier(p)) && (\226\136\131 n' : Num, pow(sum(op_dot_dot(0, n'), (i : Num) => Z(i, x)), 2) > real_of_num((n : Num)))} | IN(n, UNIV)}), ne)
       #|  null_event((p : Prob_space[A]), (ne : (A) -> Bool))
       #|  null_event((p : Prob_space[A]), (ne : (A) -> Bool))
       #|  prob((p : Prob_space[A]), (ne : (A) -> Bool))
       #|  real_of_num(0) <= (x : Real) && x <= real_of_num(0) \226\134\146 x == real_of_num(0)
-      #|  prob (p:A prob_space)\n    (INTERS {{x:A | x IN prob_carrier p /\\\n      ?n':num. sum(0..n') (\\i. (Z:num->A->real) i x) pow 2 > &n} |\n      n IN (:num)}) = &0
+      #|  prob((p : Prob_space[A]), INTERS({{(x : A) | IN(x, prob_carrier(p)) && (\226\136\131 n' : Num, pow(sum(op_dot_dot(0, n'), (i : Num) => (Z : (Num, A) -> Real)(i, x)), 2) > real_of_num((n : Num)))} | IN(n, UNIV)})) == real_of_num(0)
       #|  (K : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, pow(sum(op_dot_dot(0, n), (i : Num) => (Z : (Num, A) -> Real)(i, x)), 2) > real_of_num(K))}
       #|  (p : Prob_space[A])
       #|  pow(sum(op_dot_dot(0, (n : Num)), (i : Num) => (Z : (Num, A) -> Real)(i, (y : A))), 2) > real_of_num(SUC((K : Num)))
@@ -87564,7 +87564,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  \226\136\131 m : Num, !(m == 0) && real_of_num(0) < inv(real_of_num(m)) && inv(real_of_num(m)) < (X : (A) -> Real)((a : A)) - (x : Real)
       #|  0
       #|  (a : A)
-      #|  INTERS {{a:A | a IN prob_carrier p /\\ (X:A->real) a <= x + inv(&(SUC n))} |\n      n IN (:num)} = {a | a IN prob_carrier p /\\ X a <= x}
+      #|  INTERS({{(a : A) | IN(a, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(a) <= (x : Real) + inv(real_of_num(SUC((n : Num))))} | IN(n, UNIV)}) == {(a : A) | IN(a, prob_carrier(p)) && X(a) <= x}
       #|  op_minus_minus_minus_gt((n : Num) => cdf((p : Prob_space[A]), (X : (A) -> Real), (x : Real) + inv(real_of_num(SUC(n)))), cdf(p, X, x), sequentially)
       #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 x : Real, \226\136\128 e : Real, random_variable(p, X) && real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 y : Real, x <= y && y < x + d \226\134\146 abs(cdf(p, X, y) - cdf(p, X, x)) < e))
       #|  abs((f : (Real) -> Real)((c : Real)) - f((x : Real))) < (eps : Real)
@@ -89004,7 +89004,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  (t : (A) -> Bool)
       #|  \226\136\128 m : Num, \226\136\128 x : A, IN(x, (Am : (Num, A) -> Bool)(m)) \226\134\146 IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, abs(sum(op_dot_dot(0, n), (i : Num) => (Y : (Num, A) -> Real)(i, x))) >= real_of_num(m))
       #|  \226\136\128 m : Num, IN((Am : (Num, A) -> Bool)(m), prob_events((p : Prob_space[A])))
-      #|  Am = \\m. UNIONS {(\\n.\n    {x | x IN prob_carrier p /\\\n     abs(sum(0..n) (\\i. (Y:num->A->real) i x)) >= &m}) n | n IN (:num)}
+      #|  (Am : (Num, A) -> Bool) == ((m : Num) => UNIONS({((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs(sum(op_dot_dot(0, n), (i : Num) => (Y : (Num, A) -> Real)(i, x))) >= real_of_num(m)})((n : Num)) | IN(n, UNIV)}))
       #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && -sum(op_dot_dot(0, (n : Num)), (i : Num) => (Y : (Num, A) -> Real)(i, x)) >= real_of_num((m : Num))} == {(x : A) | IN(x, prob_carrier(p)) && ((x : A) => -sum(op_dot_dot(0, n), (i : Num) => Y(i, x)))(x) >= real_of_num(m)}
       #|  IN((x : A), prob_carrier((p : Prob_space[A])))
       #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs(sum(op_dot_dot(0, (n : Num)), (i : Num) => (Y : (Num, A) -> Real)(i, x))) >= real_of_num((m : Num))} == UNION({(x : A) | IN(x, prob_carrier(p)) && sum(op_dot_dot(0, n), (i : Num) => Y(i, x)) >= real_of_num(m)}, {(x : A) | IN(x, prob_carrier(p)) && -sum(op_dot_dot(0, n), (i : Num) => Y(i, x)) >= real_of_num(m)})
@@ -89294,7 +89294,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  (i : Num)
       #|  (n : Num)
       #|  (x : A)
-      #|  UNIONS {INTERS (IMAGE (\\i. {x:A | x IN prob_carrier p /\\\n       (Z:num->A->real) i x <= (a:num->real) i - &1 / &(SUC n)}) S) |\n       n IN (:num)} =\n     INTERS (IMAGE (\\i. {x | x IN prob_carrier p /\\ Z i x < a i}) S)
+      #|  UNIONS({INTERS(IMAGE((i : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Z : (Num, A) -> Real)(i, x) <= (a : (Num) -> Real)(i) - real_of_num(1) / real_of_num(SUC((n : Num)))}, (S : (Num) -> Bool))) | IN(n, UNIV)}) == INTERS(IMAGE((i : Num) => {(x : A) | IN(x, prob_carrier(p)) && Z(i, x) < a(i)}, S))
       #|  ((a : Real) - (x : Real) + (y : Real) <= a) == (y <= x)
       #|  (a : (Num) -> Real)((i : Num)) - real_of_num(1) / real_of_num(SUC((n : Num)))
       #|  (i : Num)
@@ -89985,7 +89985,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  \226\136\128 K : Num, IN((C_K : (Num, A) -> Bool)(K), prob_events((p : Prob_space[A])))
       #|  ((x : A) => sum(op_dot_dot((K : Num) + (a : Num), K + (a + (b : Num))), (i : Num) => (Y : (Num, A) -> Real)(i, x))) == ((x : A) => sum(op_dot_dot(0, b), (i : Num) => Y(K + (a + i), x)))
       #|  \226\136\128 K : Num, \226\136\128 a : Num, \226\136\128 b : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs(sum(op_dot_dot(K + a, K + (a + b)), (i : Num) => (Y : (Num, A) -> Real)(i, x))) >= (eps : Real) / real_of_num(2)}, prob_events(p))
-      #|  C_K = \\K:num. UNIONS {UNIONS\n     {{(x:A) | x IN prob_carrier p /\\\n       abs(sum(K + a..K + a + b) (\\i. (Y:num->A->real) i x)) >=\n         eps / &2} | b IN (:num)} | a IN (:num)}
+      #|  (C_K : (Num, A) -> Bool) == ((K : Num) => UNIONS({UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs(sum(op_dot_dot(K + (a : Num), K + (a + (b : Num))), (i : Num) => (Y : (Num, A) -> Real)(i, x))) >= (eps : Real) / real_of_num(2)} | IN(b, UNIV)}) | IN(a, UNIV)}))
       #|  mutually_indep_rv_seq((p : Prob_space[A]), (Z : (Num, A) -> Real))
       #|  ((x : A) => (Z : (Num, A) -> Real)((j : Num), x)) == Z(j)
       #|  ((x : A) => (Z : (Num, A) -> Real)((i : Num), x)) == Z(i)
