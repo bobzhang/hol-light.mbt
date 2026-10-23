@@ -65,8 +65,8 @@ def adapt_output(lines):
 
 # Type variables the port names differently from upstream: type variables are
 # capitalized, as MoonBit's type parameters are (issue #140). Each file listed
-# is loaded from a copy with these names replaced. They occur there only in
-# type positions, after `:` or `->`; any other occurrence fails the copy.
+# is loaded from a copy with these names replaced in its quotations' type
+# annotations (rename_type_variables).
 TYPE_RENAMES = {
     '100/friendship.ml': {'person': 'Person'},
 }
@@ -85,11 +85,68 @@ def reference_source(source):
         '#use "parser.ml"', '#use "_build/parser_forall.ml"')
 
 
+HOL_NAME = re.compile(r"[A-Za-z0-9_']+")
+
+
+def type_annotation_end(q, i):
+    """End of the type annotation starting at q[i] (just after a `:`): atoms,
+    parenthesized lists and postfix constructors, joined by `->`, `#`, `+`
+    or `^`. It may stop early, never late, so a name it misses fails the
+    copy rather than being renamed in a term."""
+    while True:
+        while i < len(q) and q[i] == ' ':
+            i += 1
+        if q.startswith('(', i):
+            depth = 0
+            for j in range(i, len(q)):
+                depth += {'(': 1, ')': -1}.get(q[j], 0)
+                if depth == 0:
+                    break
+            else:
+                return i
+            i = j + 1
+        else:
+            m = HOL_NAME.match(q, i)
+            if not m:
+                return i
+            i = m.end()
+        while m := HOL_NAME.match(q, i):  # postfix constructors: (A)list
+            i = m.end()
+        j = i
+        while j < len(q) and q[j] == ' ':
+            j += 1
+        for op in ('->', '#', '+', '^'):
+            if q.startswith(op, j):
+                i = j + len(op)
+                break
+        else:
+            return i
+
+
+def rename_in_quotation(q, renames):
+    out, i = [], 0
+    while (k := q.find(':', i)) >= 0:
+        end = type_annotation_end(q, k + 1)
+        out.append(q[i:k + 1])
+        out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[k + 1:end]))
+        i = end if end > k + 1 else k + 1
+    out.append(q[i:])
+    return ''.join(out)
+
+
 def rename_type_variables(text, renames):
-    for old, new in renames.items():
-        text = re.sub(r'(->|:)(\s*)' + re.escape(old) + r'\b', r'\1\2' + new, text)
-        assert not re.search(r'\b' + re.escape(old) + r'\b', text), \
-            f'{old} occurs outside a type position'
+    """`text` (OCaml) with the type variables `renames` maps renamed in the
+    type annotations of its quotations. Any other occurrence of an old name,
+    in a quotation's term or in OCaml code (`mk_vartype "'a"`), fails: those
+    need adapting by hand."""
+    def occurs(name, text):
+        return re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", text)
+    for new in renames.values():
+        # a new name already in use would merge two type variables
+        assert not occurs(new, text), f'{new} is already used'
+    text = re.sub(r'`[^`]*`', lambda m: rename_in_quotation(m[0], renames), text)
+    for old in renames:
+        assert not occurs(old, text), f'{old} occurs outside a type annotation'
     return text
 
 
