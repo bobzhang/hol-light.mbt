@@ -1584,7 +1584,7 @@ pub fn ratty() -> @kernel.Thm {
 ///|
 /// magical_set
 fn step_44() -> Unit raise {
-  magical_set_c.set(@pair.new_definition(@parser.parse_term("magical_set s =\n        INTERS { {z | ~((FST p)(FST(SND p) + Re z,SND(SND p) + Im z) = &0)} |\n                 p IN (ratpolyfun s DELETE (\\x. &0)) CROSS\n                      (integer CROSS integer)}")))
+  magical_set_c.set(@pair.new_definition(@term_syntax.parse_term("(magical_set : ((Real) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)((s : (Real) -> Bool)) == INTERS({{(z : Cart[Real, Tybit0[Unit]]) | !(FST((p : (((Real, Real)) -> Real, Real, Real)), (FST(SND(p)) + Re(z), SND(SND(p)) + Im(z))) == real_of_num(0))} | IN(p, CROSS(DELETE(ratpolyfun(s), (x : (Real, Real)) => real_of_num(0)), CROSS(integer, integer)))})")))
 }
 
 ///|
