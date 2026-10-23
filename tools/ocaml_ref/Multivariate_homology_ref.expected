@@ -34329,7 +34329,7 @@ Multivariate/homology quotations (3125):
   euclideanreal
   (i : Num)
   !({(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == {}) == (\226\136\131 x : _, P(x))
-  standard_simplex p =\n    INTERS { {x | x IN topspace top /\\ x i IN real_interval[&0,&1]} |\n             i IN (:num)} INTER\n    INTERS { {x | x IN topspace top /\\ x i IN {&0}} | p < i} INTER\n    {x | x IN topspace top /\\ sum(0..p) x IN {&1}}
+  standard_simplex((p : Num)) == INTER(INTERS({{(x : (Num) -> Real) | IN(x, topspace((top : Topology[(Num) -> Real]))) && IN(x((i : Num)), real_interval([(real_of_num(0), real_of_num(1))]))} | IN(i, UNIV)}), INTER(INTERS({{(x : (Num) -> Real) | IN(x, topspace(top)) && IN(x((i : Num)), {real_of_num(0)})} | p < i}), {(x : (Num) -> Real) | IN(x, topspace(top)) && IN(sum(op_dot_dot(0, p), x), {real_of_num(1)})}))
   (top : Topology[(Num) -> Real]) == product_topology(UNIV, (i : Num) => euclideanreal)
   \226\136\128 p : Num, closed_in(product_topology(UNIV, (i : Num) => euclideanreal), standard_simplex(p))
   cartesian_product(UNIV, (i : Num) => real_interval([(real_of_num(0), real_of_num(1))]))
