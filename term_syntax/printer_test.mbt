@@ -175,10 +175,6 @@ test "set notation" {
   inspect(exact("{x + y | x | x < 2}"), content=(
     #|{(x : Num) + (y : Num) | x < 2}
   ))
-  inspect(exact("{ {x | x < n} | n < 3}"), content=(
-    #|unprintable: term whose bound variables the syntax renames
-
-  ))
   inspect(exact("{t | t SUBSET s /\\ t HAS_SIZE m} HAS_SIZE binom(n,m)"), content=(
     #|HAS_SIZE({(t : (_) -> Bool) | SUBSET(t, (s : (_) -> Bool)) && HAS_SIZE(t, (m : Num))}, (binom : ((_, Num)) -> Num)(((n : _), m)))
   ))
@@ -196,6 +192,34 @@ test "set notation reads as HOL's" {
     let b = @parser.parse_term(q.1)
     assert_true(@term_syntax.same_term(a, b), msg=q.0)
   }
+}
+
+///|
+test "nested set comprehensions number GEN%PVAR as HOL's parser does" {
+  let exact = fn(q : String) -> String raise {
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    }
+  }
+  // HOL reads the element of {e | p} twice and of {e | vs | p} three
+  // times, so the two forms number the comprehensions in e differently
+  inspect(exact("{ {x | x < n} | n < 3}"), content=(
+    #|{{(x : Num) | x < (n : Num)} | n < 3}
+  ))
+  inspect(exact("{ {x | x < n} | n | n < 3}"), content=(
+    #|{{(x : Num) | x < n} | n : Num | n < 3}
+  ))
+  inspect(exact("{ { {x | x < m + n} | m < n} | n < 3}"), content=(
+    #|{{{(x : Num) | x < (m : Num) + (n : Num)} | m < n} | (n : Num) < 3}
+  ))
+  inspect(exact("{ {x | x < n} | n IN {m | m < 3}}"), content=(
+    #|{{(x : Num) | x < (n : Num)} | IN(n, {(m : Num) | m < 3})}
+  ))
+  // a set of one comprehension reads it once
+  inspect(exact("{ {x | x < 3} }"), content=(
+    #|{{(x : Num) | x < 3}}
+  ))
 }
 
 ///|

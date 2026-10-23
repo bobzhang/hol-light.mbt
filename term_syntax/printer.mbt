@@ -191,6 +191,11 @@ priv struct Printer {
   names : Array[String]
   // write sets as {a, b} and {e | p} (else as INSERT, GSPEC, ...)
   sets : Bool
+  // list the binders of a comprehension whose element has a comprehension
+  // ({e | x : A | p}), as a quotation may: HOL's parser reads the element
+  // of the two forms a different number of times (pgen_cost), numbering
+  // the GEN%PVAR names in it differently
+  listed : Bool
   // bindings of a set comprehension's implicit binders ({e | p}), each the
   // variable and the depth of its binding in the scope: printed with their
   // type where they first occur
@@ -591,6 +596,17 @@ fn implicit_binders(
 }
 
 ///|
+/// Whether `t` has a set comprehension (GSPEC).
+fn has_comprehension(t : @kernel.Term) -> Bool {
+  match t {
+    Const("GSPEC", _) => true
+    Comb(f, x) => has_comprehension(f) || has_comprehension(x)
+    Abs(_, b) => has_comprehension(b)
+    _ => false
+  }
+}
+
+///|
 /// `{e | p}` when HOL's rule binds exactly `xs` (in order), else
 /// `{e | x : A, y : B | p}`.
 fn Printer::comprehension(
@@ -612,7 +628,9 @@ fn Printer::comprehension(
     binders.push(b)
     inner = next
   }
-  if !renamed && implicit_binders(e, p, inner) == xs {
+  if !renamed &&
+    implicit_binders(e, p, inner) == xs &&
+    !(self.listed && has_comprehension(e)) {
     // each binder is written with its type where it first occurs in e
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
     let typed_before = self.typed_free.length()
@@ -662,7 +680,11 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 }
 
 ///|
-fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
+fn print_term_with(
+  t : @kernel.Term,
+  sets~ : Bool,
+  listed? : Bool = false,
+) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
@@ -672,7 +694,16 @@ fn print_term_with(t : @kernel.Term, sets~ : Bool) -> String raise Unprintable {
   fn print(overloads : Bool, all_constants : Bool) -> String raise Unprintable {
     let names = vars.map(v => if v is Var(n, _) { n } else { "" })
     with_fixed_interface(() => {
-      { typed_free: [], fixed, all_constants, overloads, names, sets, untyped: [] }.term(
+      {
+        typed_free: [],
+        fixed,
+        all_constants,
+        overloads,
+        names,
+        sets,
+        listed,
+        untyped: [],
+      }.term(
         t,
         EXPR,
         @list.List([]),
@@ -754,16 +785,23 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 /// differ in name. tools/migrate.mbtx migrates only such quotations, so the
 /// theorems of a migrated package print as before.
 pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintable {
-  // set notation, else the sets as written (GSPEC(...)), which an old
-  // quotation may spell out
+  // set notation, comprehensions with elements that have comprehensions
+  // also with their binders listed, else the sets as written (GSPEC(...)),
+  // which an old quotation may spell out
   let mut error = Unprintable("term")
-  for sets in [true, false] {
-    let s = print_term_with(t, sets~) catch {
+  let tried = []
+  for form in [(true, false), (true, true), (false, false)] {
+    let (sets, listed) = form
+    let s = print_term_with(t, sets~, listed~) catch {
       e => {
         error = e
         continue
       }
     }
+    if tried.contains(s) {
+      continue
+    }
+    tried.push(s)
     check_spelling(old, s) catch {
       e => {
         error = e
