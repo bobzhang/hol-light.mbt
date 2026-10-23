@@ -139,9 +139,28 @@ def rename_in_quotation(q, renames):
     return ''.join(out)
 
 
+def literal_end(text, i):
+    """End of the OCaml string, quoted string (`{id|...|id}`) or character
+    literal starting at text[i], or None. The lexer reads these inside
+    comments too, so a `(*` or `*)` in one neither opens nor closes one."""
+    if text[i] == '"':
+        i += 1
+        while i < len(text) and text[i] != '"':
+            i += 2 if text[i] == '\\' else 1
+        return i + 1
+    if text[i] == '{' and (m := re.match(r'\{([a-z_]*)\|', text[i:])):
+        end = text.find('|' + m[1] + '}', i + m.end())
+        return len(text) if end < 0 else end + len(m[1]) + 2
+    if text[i] == "'":
+        if (m := re.match(r"'(?:[^\\']|\\(?:[\\'\"ntbr ]|[0-9]{3}|x[0-9a-fA-F]{2}|o[0-3][0-7]{2}))'", text[i:])):
+            return i + m.end()
+    return None
+
+
 def ocaml_segments(text):
-    """`text` cut into (kind, piece): 'comment' (nested `(* *)`), 'string',
-    'quotation' (backquoted) and 'code'."""
+    """`text` cut into (kind, piece): 'comment' (nested `(* *)`), 'string'
+    (string, quoted string or character literals), 'quotation' (backquoted)
+    and 'code'."""
     out, i, start = [], 0, 0
     def emit(kind, j):
         nonlocal start
@@ -160,15 +179,17 @@ def ocaml_segments(text):
                     if depth == 0:
                         break
                 else:
-                    i += 1
+                    i = literal_end(text, i) or i + 1
             emit('comment', i)
-        elif text[i] in '"`':
+        elif text[i] == '`':
             emit('code', i)
-            close, i = text[i], i + 1
-            while i < len(text) and text[i] != close:
-                i += 2 if close == '"' and text[i] == '\\' else 1
-            i += 1
-            emit('string' if close == '"' else 'quotation', i)
+            end = text.find('`', i + 1)
+            i = len(text) if end < 0 else end + 1
+            emit('quotation', i)
+        elif (end := literal_end(text, i)) is not None:
+            emit('code', i)
+            i = end
+            emit('string', i)
         else:
             i += 1
     emit('code', len(text))
