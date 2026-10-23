@@ -80958,7 +80958,7 @@ Probability/expectation quotations (6640):
   (v : Real)
   (X : (A) -> Real)
   (y : A)
-  forall X:A->real v carrier.\n      {x | x IN carrier /\\ X x < v} =\n      UNIONS {({x | x IN carrier /\\ X x <= v - inv(&n + &1)}) | n IN (:num)}
+  \226\136\128 X : (A) -> Real, \226\136\128 v : Real, \226\136\128 carrier : (A) -> Bool, {(x : A) | IN(x, carrier) && X(x) < v} == UNIONS({{(x : A) | IN(x, carrier) && X(x) <= v - inv(real_of_num((n : Num)) + real_of_num(1))} | IN(n, UNIV)})
   \226\136\128 x : Real, \226\136\128 v : Real, (x == v) == (x <= v && !(x < v))
   {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) == (v : Real)} == DIFF({(x : A) | IN(x, prob_carrier(p)) && X(x) <= v}, {(x : A) | IN(x, prob_carrier(p)) && X(x) < v})
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 v : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) == v}, prob_events(p))
@@ -80977,7 +80977,7 @@ Probability/expectation quotations (6640):
   (r : Real) => {(q : Real) | rational(q)}
   {(q : Real) | rational(q)}
   (r : Real) => (s : Real) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && r < (X : (A) -> Real)(x) && X(x) < s}
-  {({x:A | x IN prob_carrier p /\\ r < X x /\\ X x < s}:A->bool) |\n                 r IN {q:real | rational q} /\\ s IN {q:real | rational q}}
+  {{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (r : Real) < (X : (A) -> Real)(x) && X(x) < (s : Real)} | IN(r, {(q : Real) | rational(q)}) && IN(s, {(q : Real) | rational(q)})}
   (s : Real)
   (r : Real)
   (t : (A) -> Bool)
@@ -80993,7 +80993,7 @@ Probability/expectation quotations (6640):
   (eps : Real)
   (X : (A) -> Real)((z : A))
   (z : A)
-  {x:A | x IN prob_carrier p /\\ X x IN U} =\n      UNIONS {{x | x IN prob_carrier p /\\ r < X x /\\ X x < s} |\n              r,s | rational r /\\ rational s /\\ (forall t. r < t /\\ t < s ==> t IN U)}
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), (U : (Real) -> Bool))} == UNIONS({{(x : A) | IN(x, prob_carrier(p)) && r < X(x) && X(x) < s} | r : Real, s : Real | rational(r) && rational(s) && (\226\136\128 t : Real, r < t && t < s \226\134\146 IN(t, U))})
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 U : (Real) -> Bool, random_variable(p, X) && real_open(U) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && IN(X(x), U)}, prob_events(p))
   abs((y : Real) - (x : Real)) == abs(x - y)
   \226\136\128 f : (Real) -> Real, continuous_map((euclideanreal, euclideanreal), f) == real_continuous_on(f, UNIV)
@@ -81072,12 +81072,12 @@ Probability/expectation quotations (6640):
   (a : Real) - (Y : (A) -> Real)((z : A))
   (X : (A) -> Real)((z : A))
   (z : A)
-  forall(X:A->real) Y a carrier.\n      {x | x IN carrier /\\ X x + Y x < a} =\n      UNIONS {{x | x IN carrier /\\ X x < r} INTER {x | x IN carrier /\\ Y x < a - r} |\n              rational r}
+  \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 carrier : (A) -> Bool, {(x : A) | IN(x, carrier) && X(x) + Y(x) < a} == UNIONS({INTER({(x : A) | IN(x, carrier) && X(x) < (r : Real)}, {(x : A) | IN(x, carrier) && Y(x) < a - r}) | rational(r)})
   {(x : Real) | rational(x)} == rational
   \226\136\128 f : (Real, A) -> Bool, COUNTABLE({f((r : Real)) | rational(r)})
   (r : Real)
   (s : (A) -> Bool)
-  {x:A | x IN prob_carrier p /\\ X x + Y x < a + inv(&n + &1)} =\n      UNIONS {{x | x IN prob_carrier p /\\ X x < r} INTER\n              {x | x IN prob_carrier p /\\ Y x < (a + inv(&n + &1)) - r} | rational r}
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) + (Y : (A) -> Real)(x) < (a : Real) + inv(real_of_num((n : Num)) + real_of_num(1))} == UNIONS({INTER({(x : A) | IN(x, prob_carrier(p)) && X(x) < (r : Real)}, {(x : A) | IN(x, prob_carrier(p)) && Y(x) < a + inv(real_of_num(n) + real_of_num(1)) - r}) | rational(r)})
   (n : Num)
   (n : Num)
   {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) + (Y : (A) -> Real)(x) < (a : Real) + inv(real_of_num((n : Num)) + real_of_num(1))}
@@ -81090,7 +81090,7 @@ Probability/expectation quotations (6640):
   (n : Num)
   (s : (A) -> Bool)
   (z : A)
-  {x:A | x IN prob_carrier p /\\ X x + Y x <= a} =\n      INTERS {{x | x IN prob_carrier p /\\ X x + Y x < a + inv(&n + &1)} | n IN (:num)}
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(x) + (Y : (A) -> Real)(x) <= (a : Real)} == INTERS({{(x : A) | IN(x, prob_carrier(p)) && X(x) + Y(x) < a + inv(real_of_num((n : Num)) + real_of_num(1))} | IN(n, UNIV)})
   (a : Real)
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, random_variable(p, X) && random_variable(p, Y) \226\134\146 random_variable(p, (x : A) => X(x) + Y(x))
   \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, random_variable(p, X) && random_variable(p, Y) \226\134\146 random_variable(p, (x : A) => X(x) - Y(x))
@@ -81230,7 +81230,7 @@ Probability/expectation quotations (6640):
   (n : (A) -> Bool)
   (n : (A) -> Bool)
   \226\136\128 p : Prob_space[A], \226\136\128 P : (A) -> Bool, \226\136\128 Q : (A) -> Bool, almost_surely(p, P) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 IN(x, P) == IN(x, Q)) \226\134\146 almost_surely(p, Q)
-  liminf_events (A:num->A->bool) =\n   UNIONS {INTERS {A n | n >= m} | m IN (:num)}
+  (liminf_events : ((Num, A) -> Bool, A) -> Bool)((A : (Num, A) -> Bool)) == UNIONS({INTERS({A((n : Num)) | n >= (m : Num)}) | IN(m, UNIV)})
   (n : Num)
   (s : (A) -> Bool)
   (m : Num)
@@ -81829,7 +81829,7 @@ Probability/expectation quotations (6640):
   (k : Num)
   (n : Num)
   \226\136\128 k : Num, \226\136\128 n : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((Y : (Num, A) -> Real)(n, x) - (c : Real)) >= inv(real_of_num(SUC(k)))}, prob_events(p))
-  UNIONS {limsup_events\n    (\\n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))})\n    | k IN (:num)}
+  UNIONS({limsup_events((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((Y : (Num, A) -> Real)(n, x) - (c : Real)) >= inv(real_of_num(SUC((k : Num))))}) | IN(k, UNIV)})
   \226\136\128 p : Prob_space[A], \226\136\128 Y : (Num, A) -> Real, \226\136\128 c : Real, (\226\136\128 n : Num, simple_rv(p, Y(n))) && (\226\136\128 eps : Real, real_of_num(0) < eps \226\134\146 real_summable(from(0), (n : Num) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && abs(Y(n, x) - c) >= eps}))) \226\134\146 almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => Y(n, x), c, sequentially)})
   (a : Real) == (b : Real) \226\134\146 a <= b
   (n : Num) + 1 - 0 == SUC(n)
@@ -83338,7 +83338,7 @@ Probability/expectation quotations (6640):
   (k : Num)
   (k : Num)
   \226\136\128 k : Num, \226\136\128 n : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((Y : (Num, A) -> Real)(n, x) - (c : Real)) >= inv(real_of_num(SUC(k)))}, prob_events(p))
-  UNIONS {limsup_events\n    (\\n. {x:A | x IN prob_carrier p /\\ abs((Y:num->A->real) n x - c) >= inv(&(SUC k))})\n    | k IN (:num)}
+  UNIONS({limsup_events((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((Y : (Num, A) -> Real)(n, x) - (c : Real)) >= inv(real_of_num(SUC((k : Num))))}) | IN(k, UNIV)})
   \226\136\128 p : Prob_space[A], \226\136\128 Y : (Num, A) -> Real, \226\136\128 c : Real, (\226\136\128 n : Num, random_variable(p, Y(n))) && (\226\136\128 eps : Real, real_of_num(0) < eps \226\134\146 real_summable(from(0), (n : Num) => prob(p, {(x : A) | IN(x, prob_carrier(p)) && abs(Y(n, x) - c) >= eps}))) \226\134\146 almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => Y(n, x), c, sequentially)})
   variance((p : Prob_space[A]), (x : A) => inv(real_of_num((nn : Num))) * sum(op_dot_dot(0, (k : Num) * k), (i : Num) => (X : (Num, A) -> Real)(i, x))) / pow((eps : Real), 2)
   (eps : Real)
@@ -83440,7 +83440,7 @@ Probability/expectation quotations (6640):
   (m : Num)
   (c : Real) - (Z : (A) -> Real)((x : A))
   real_of_num(0) < real_of_num(1) / real_of_num(SUC((n : Num)))
-  UNIONS {{x:A | x IN prob_carrier p /\\ (Z:A->real) x <= c - &1 / &(SUC n)} |\n              n IN (:num)} =\n      {x | x IN prob_carrier p /\\ Z x < c}
+  UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (Z : (A) -> Real)(x) <= (c : Real) - real_of_num(1) / real_of_num(SUC((n : Num)))} | IN(n, UNIV)}) == {(x : A) | IN(x, prob_carrier(p)) && Z(x) < c}
   ((a : Real) - (x : Real) <= a - (y : Real)) == (y <= x)
   (c : Real) - real_of_num(1) / real_of_num(SUC((n : Num)))
   (c : Real) - real_of_num(1) / real_of_num(SUC((n : Num)))
@@ -83672,7 +83672,7 @@ Probability/expectation quotations (6640):
   sequentially
   \226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 (X : (Num, A) -> Real)(n, x) <= (f : (A) -> Real)(x)
   \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 f : (A) -> Real, (\226\136\128 n : Num, random_variable(p, X(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= X(SUC(n), x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => X(n, x), f(x), sequentially)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && integrable(p, f) \226\134\146 op_minus_minus_minus_gt((n : Num) => nn_expectation(p, X(n)), nn_expectation(p, f), sequentially)
-  real_liminf (f:num->real) =\n   sup {inf {f k | k >= n} | n IN (:num)}
+  (real_liminf : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == sup({inf({f((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)})
   (n : Num)
   (b : Real)
   (f : (Num) -> Real)((n : Num))
@@ -83806,16 +83806,16 @@ Probability/expectation quotations (6640):
   op_minus_minus_minus_gt((n : Num) => nn_expectation((p : Prob_space[A]), (gn : (Num, A) -> Real)(n)), nn_expectation(p, (x : A) => real_liminf((n : Num) => (X : (Num, A) -> Real)(n, x))), sequentially)
   0
   (gn : (Num, A) -> Real)(0, (x : A))
-  {inf {(X:num->A->real) k x | k >= n} | n IN (:num)} =\n                 {(gn:num->A->real) n x | n IN (:num)}
+  {inf({(X : (Num, A) -> Real)((k : Num), (x : A)) | k >= (n : Num)}) | IN(n, UNIV)} == {(gn : (Num, A) -> Real)((n : Num), x) | IN(n, UNIV)}
   \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_liminf((n : Num) => (X : (Num, A) -> Real)(n, x)) <= (B : Real)
   0
   (gn : (Num, A) -> Real)(0, (x : A))
   (B : Real)
-  {inf {(X:num->A->real) k x | k >= n} | n IN (:num)} =\n                 {(gn:num->A->real) n x | n IN (:num)}
+  {inf({(X : (Num, A) -> Real)((k : Num), (x : A)) | k >= (n : Num)}) | IN(n, UNIV)} == {(gn : (Num, A) -> Real)((n : Num), x) | IN(n, UNIV)}
   \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 real_of_num(0) <= real_liminf((n : Num) => (X : (Num, A) -> Real)(n, x))
   (B : Real)
   real_of_num(0)
-  {inf {(X:num->A->real) k x | k >= n} | n IN (:num)} =\n                 {(gn:num->A->real) n x | n IN (:num)}
+  {inf({(X : (Num, A) -> Real)((k : Num), (x : A)) | k >= (n : Num)}) | IN(n, UNIV)} == {(gn : (Num, A) -> Real)((n : Num), x) | IN(n, UNIV)}
   \226\136\128 x : A, IN(x, prob_carrier((p : Prob_space[A]))) \226\134\146 op_minus_minus_minus_gt((n : Num) => (gn : (Num, A) -> Real)(n, x), real_liminf((n : Num) => (X : (Num, A) -> Real)(n, x)), sequentially)
   (n : Num)
   real_of_num(0)
@@ -83835,7 +83835,7 @@ Probability/expectation quotations (6640):
   \226\136\128 n : Num, random_variable((p : Prob_space[A]), (gn : (Num, A) -> Real)(n))
   (gn : (Num, A) -> Real) == ((n : Num) => (x : A) => inf({(X : (Num, A) -> Real)((k : Num), x) | k >= n}))
   \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 B : Real, (\226\136\128 n : Num, random_variable(p, X(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(n, x)) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 X(n, x) <= B) \226\134\146 nn_expectation(p, (x : A) => real_liminf((n : Num) => X(n, x))) <= real_liminf((n : Num) => nn_expectation(p, X(n)))
-  real_limsup (f:num->real) =\n   inf {sup {f k | k >= n} | n IN (:num)}
+  (real_limsup : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == inf({sup({f((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)})
   (n : Num)
   (b : Real)
   inf({(f : (Num) -> Real)((k : Num)) | k >= (N : Num)})
@@ -83852,7 +83852,7 @@ Probability/expectation quotations (6640):
   0
   inf({(f : (Num) -> Real)((k : Num)) | k >= 0})
   (L : Real) - (e : Real)
-  {inf {(f:num->real) k | k >= n} | n IN (:num)}
+  {inf({(f : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   (L : Real) - (e : Real) < real_liminf((f : (Num) -> Real))
   \226\136\128 f : (Num) -> Real, \226\136\128 b : Real, \226\136\128 B : Real, \226\136\128 L : Real, (\226\136\128 n : Num, b <= f(n)) && (\226\136\128 n : Num, f(n) <= B) && L <= real_liminf(f) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 L - e < f(n)))
   (n : Num)
@@ -84077,7 +84077,7 @@ Probability/expectation quotations (6640):
   \226\136\128 p : Prob_space[A], \226\136\128 mu : ((A) -> Bool) -> Real, \226\136\128 P : ((A) -> Bool) -> Bool, signed_measure(p, mu) && mu(prob_carrier(p)) == real_of_num(1) && pi_system(P) && UNIONS(P) == prob_carrier(p) && SUBSET(P, prob_events(p)) && (\226\136\128 c : (A) -> Bool, IN(c, P) \226\134\146 mu(c) == prob(p, c)) \226\134\146 (\226\136\128 c : (A) -> Bool, IN(c, sigma_generated(prob_carrier(p), P)) \226\134\146 mu(c) == prob(p, c))
   (C2 : ((A) -> Bool) -> Bool)
   \226\136\128 U : (A) -> Bool, \226\136\128 C1 : ((A) -> Bool) -> Bool, \226\136\128 C2 : ((A) -> Bool) -> Bool, SUBSET(C1, C2) && (\226\136\128 a : (A) -> Bool, IN(a, C2) \226\134\146 SUBSET(a, U)) \226\134\146 SUBSET(sigma_generated(U, C1), sigma_generated(U, C2))
-  real_halflines = {{x:real | x <= a} | a IN (:real)}
+  (real_halflines : ((Real) -> Bool) -> Bool) == {{(x : Real) | x <= (a : Real)} | IN(a, UNIV)}
   \226\136\128 s : (Real) -> Bool, IN(s, real_halflines) \226\134\146 SUBSET(s, UNIV)
   sigma_algebra(sigma_generated(UNIV, real_halflines))
   UNIONS(sigma_generated(UNIV, real_halflines)) == UNIV
@@ -84086,7 +84086,7 @@ Probability/expectation quotations (6640):
   (UNIV : (Real) -> Bool)
   (b : Real)
   (x : Real) => x
-  {x:real | x < b} = UNIONS {{x:real | x <= b - inv(&n + &1)} | n IN (:num)}
+  {(x : Real) | x < (b : Real)} == UNIONS({{(x : Real) | x <= b - inv(real_of_num((n : Num)) + real_of_num(1))} | IN(n, UNIV)})
   \226\136\128 b : Real, IN({(x : Real) | x < b}, sigma_generated(UNIV, real_halflines))
   real_interval(((a : Real), (b : Real))) == DIFF({(x : Real) | x < b}, {(x : Real) | x <= a})
   \226\136\128 a : Real, \226\136\128 b : Real, IN(real_interval((a, b)), sigma_generated(UNIV, real_halflines))
@@ -84217,7 +84217,7 @@ Probability/expectation quotations (6640):
   real_of_num(1)
   prob((p : Prob_space[A]), (A : (Num, A) -> Bool)((n' : Num)))
   real_of_num(0)
-  {sup {prob p ((A:num->A->bool) k) | k >= n} |\n      n IN (:num)}
+  {sup({prob((p : Prob_space[A]), (A : (Num, A) -> Bool)((k : Num))) | k >= (n : Num)}) | IN(n, UNIV)}
   sup({prob((p : Prob_space[A]), (A : (Num, A) -> Bool)((k : Num))) | k >= (n : Num)})
   0
   (m : Num) => prob((p : Prob_space[A]), (D : (Num, A) -> Bool)(m))
@@ -84261,7 +84261,7 @@ Probability/expectation quotations (6640):
   0
   sup({(f : (Num) -> Real)((k : Num)) | k >= 0})
   (L : Real) + (e : Real)
-  {sup {(f:num->real) k | k >= n} | n IN (:num)}
+  {sup({(f : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   real_limsup((f : (Num) -> Real)) < (L : Real) + (e : Real)
   \226\136\128 f : (Num) -> Real, \226\136\128 b : Real, \226\136\128 B : Real, \226\136\128 L : Real, (\226\136\128 n : Num, b <= f(n)) && (\226\136\128 n : Num, f(n) <= B) && real_limsup(f) <= L \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 f(n) < L + e))
   (f : (Num) -> Real)((m : Num)) < (L : Real) + (e : Real)
@@ -84332,7 +84332,7 @@ Probability/expectation quotations (6640):
   0
   sup({(f : (Num) -> Real)((k : Num)) | k >= 0})
   (c : Real) - (bprime2 : Real)
-  {sup {(f:num->real) k | k >= n} | n IN (:num)}
+  {sup({(f : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   \226\136\131 p : Num, sup({(f : (Num) -> Real)((k : Num)) | k >= p}) < (c : Real) - (bprime2 : Real)
   (bprime2 : Real)
   (p : Num)
@@ -84974,7 +84974,7 @@ Probability/expectation quotations (6640):
   abs((Z : (A) -> Real)((x : A)))
   IN((x : A), prob_carrier((p : Prob_space[A])))
   (x : A)
-  INTERS {{x:A | x IN prob_carrier p /\\ abs((Z:A->real) x) >= &n + &1} | n IN (:num)} =\n    ({}:A->bool)
+  INTERS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((Z : (A) -> Real)(x)) >= real_of_num((n : Num)) + real_of_num(1)} | IN(n, UNIV)}) == {}
   (x : A)
   (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((Z : (A) -> Real)(x)) >= real_of_num(n) + real_of_num(1)}
   (p : Prob_space[A])
@@ -85674,7 +85674,7 @@ Probability/expectation quotations (6640):
   (x : A)
   INTER({(x : A) | op_minus_minus_minus_gt((k : Num) => inv(real_of_num(SUC(k * k))) * sum(op_dot_dot(0, k * k), (i : Num) => (X : (Num, A) -> Real)(i, x)), (mu : Real), sequentially)}, {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => X(i, x) - mu)) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})
   almost_surely((p : Prob_space[A]), INTER({(x : A) | op_minus_minus_minus_gt((k : Num) => inv(real_of_num(SUC(k * k))) * sum(op_dot_dot(0, k * k), (i : Num) => (X : (Num, A) -> Real)(i, x)), (mu : Real), sequentially)}, {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => X(i, x) - mu)) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))}))
-  INTERS {(\\m. {x:A | ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (X:num->A->real) i x - mu)) <\n          &(SUC(k * k)) * inv(&(SUC m))}) m | m IN (:num)}
+  INTERS({((m : Num) => {(x : A) | \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => (X : (Num, A) -> Real)(i, x) - (mu : Real))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})((m : Num)) | IN(m, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => (X : (Num, A) -> Real)(i, x) - (mu : Real))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})
   (sigma_sq : Real)
   \226\136\128 m : Num, almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => (X : (Num, A) -> Real)(i, x) - (mu : Real))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})
@@ -85859,7 +85859,7 @@ Probability/expectation quotations (6640):
   (x : A)
   INTER({(x : A) | op_minus_minus_minus_gt((k : Num) => inv(real_of_num(SUC(k * k))) * sum(op_dot_dot(0, k * k), (i : Num) => (Y : (Num, A) -> Real)(i, x)), real_of_num(0), sequentially)}, {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => Y(i, x))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})
   almost_surely((p : Prob_space[A]), INTER({(x : A) | op_minus_minus_minus_gt((k : Num) => inv(real_of_num(SUC(k * k))) * sum(op_dot_dot(0, k * k), (i : Num) => (Y : (Num, A) -> Real)(i, x)), real_of_num(0), sequentially)}, {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => Y(i, x))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))}))
-  INTERS {(\\m. {x:A | ?N:num. forall k. N <= k ==>\n        forall n. k * k < n /\\ n <= (k + 1) * (k + 1) ==>\n          abs(sum(k * k + 1..n) (\\i. (Y:num->A->real) i x)) <\n          &(SUC(k * k)) * inv(&(SUC m))}) m | m IN (:num)}
+  INTERS({((m : Num) => {(x : A) | \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => (Y : (Num, A) -> Real)(i, x))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})((m : Num)) | IN(m, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => (Y : (Num, A) -> Real)(i, x))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})
   (C : Real)
   \226\136\128 m : Num, almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 (\226\136\128 n : Num, k * k < n && n <= (k + 1) * (k + 1) \226\134\146 abs(sum(op_dot_dot(k * k + 1, n), (i : Num) => (Y : (Num, A) -> Real)(i, x))) < real_of_num(SUC(k * k)) * inv(real_of_num(SUC(m))))})
@@ -86295,7 +86295,7 @@ Probability/expectation quotations (6640):
   (e : Real)
   (x : A)
   INTER({(x : A) | op_minus_minus_minus_gt((j : Num) => inv(real_of_num(EXP(2, j))) * sum(op_dot_dot(0, EXP(2, j) - 1), (i : Num) => (Y : (Num, A) -> Real)(i, x)), real_of_num(0), sequentially)}, {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 j : Num, N <= j \226\134\146 (\226\136\128 nn : Num, EXP(2, j) <= nn && nn < EXP(2, SUC(j)) \226\134\146 abs(sum(op_dot_dot(EXP(2, j), nn), (i : Num) => Y(i, x))) < real_of_num(EXP(2, j)) * inv(real_of_num(SUC(m))))})
-  INTERS {(\\m. {x:A | ?N. forall j. N <= j ==>\n     forall nn. 2 EXP j <= nn /\\ nn < 2 EXP SUC j ==>\n       abs(sum(2 EXP j..nn) (\\i. (Y:num->A->real) i x)) <\n       &(2 EXP j) * inv(&(SUC m))}) m | m IN (:num)}
+  INTERS({((m : Num) => {(x : A) | \226\136\131 N : Num, \226\136\128 j : Num, N <= j \226\134\146 (\226\136\128 nn : Num, EXP(2, j) <= nn && nn < EXP(2, SUC(j)) \226\134\146 abs(sum(op_dot_dot(EXP(2, j), nn), (i : Num) => (Y : (Num, A) -> Real)(i, x))) < real_of_num(EXP(2, j)) * inv(real_of_num(SUC(m))))})((m : Num)) | IN(m, UNIV)})
   almost_surely((p : Prob_space[A]), {(x : A) | \226\136\128 m : Num, \226\136\131 N : Num, \226\136\128 j : Num, N <= j \226\134\146 (\226\136\128 nn : Num, EXP(2, j) <= nn && nn < EXP(2, SUC(j)) \226\134\146 abs(sum(op_dot_dot(EXP(2, j), nn), (i : Num) => (Y : (Num, A) -> Real)(i, x))) < real_of_num(EXP(2, j)) * inv(real_of_num(SUC(m))))})
   \226\136\128 m : Num, almost_surely((p : Prob_space[A]), {(x : A) | \226\136\131 N : Num, \226\136\128 j : Num, N <= j \226\134\146 (\226\136\128 nn : Num, EXP(2, j) <= nn && nn < EXP(2, SUC(j)) \226\134\146 abs(sum(op_dot_dot(EXP(2, j), nn), (i : Num) => (Y : (Num, A) -> Real)(i, x))) < real_of_num(EXP(2, j)) * inv(real_of_num(SUC(m))))})
   (n : Num) => variance((p : Prob_space[A]), (X : (Num, A) -> Real)(n)) / pow(real_of_num(SUC(n)), 2)
@@ -86766,7 +86766,7 @@ Probability/expectation quotations (6640):
   (b : Num)
   (n : Num) => (x : A) => (X : (Num, A) -> Real)(n, x) - (mu : Real)
   (p : Prob_space[A])
-  INTERS\n      {(\\b:num. {x:A |\n         ((\\k. inv(&(gseq b k)) *\n           sum(0..gseq b k - 1) (\\i. (X:num->A->real) i x - mu))\n           ---> &0) sequentially}) b | b IN (:num)}
+  INTERS({((b : Num) => {(x : A) | op_minus_minus_minus_gt((k : Num) => inv(real_of_num(gseq(b, k))) * sum(op_dot_dot(0, gseq(b, k) - 1), (i : Num) => (X : (Num, A) -> Real)(i, x) - (mu : Real)), real_of_num(0), sequentially)})((b : Num)) | IN(b, UNIV)})
   (mu : Real) == expectation((p : Prob_space[A]), (X : (Num, A) -> Real)(0))
   real_of_num(0) <= (mu : Real)
   \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 mu : Real, (\226\136\128 n : Num, integrable(p, X(n))) && (\226\136\128 n : Num, integrable(p, (x : A) => pow(X(n, x), 2))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= X(n, x)) && (\226\136\128 n : Num, expectation(p, X(n)) == mu) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 covariance(p, X(i), X(j)) == real_of_num(0)) && real_summable(from(0), (n : Num) => variance(p, X(n)) / pow(real_of_num(SUC(n)), 2)) \226\134\146 almost_surely(p, {(x : A) | op_minus_minus_minus_gt((n : Num) => inv(real_of_num(SUC(n))) * sum(op_dot_dot(0, n), (i : Num) => X(i, x)), mu, sequentially)})
