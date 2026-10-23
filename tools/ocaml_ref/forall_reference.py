@@ -5,6 +5,7 @@ printer copies normalize the spelling at their boundaries. The Boolean theory
 copy omits the now-redundant forall alias. Serialized terms
 are compared modulo the explicit constant rename; all other structure is kept.
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -82,9 +83,12 @@ def renamed_copy(path):
 
 
 def reference_source(source):
-    """Route core loads to the temporary copies without editing upstream."""
-    for path in TYPE_RENAMES:
-        source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
+    """Route core loads to the temporary copies without editing upstream.
+    With HOL_REF_ORIGINAL_TYPE_NAMES set, the files TYPE_RENAMES lists load
+    as they are (check_type_renames.py compares the two runs)."""
+    if not os.environ.get('HOL_REF_ORIGINAL_TYPE_NAMES'):
+        for path in TYPE_RENAMES:
+            source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
     return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
         '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
         '#use "parser.ml"', '#use "_build/parser_forall.ml"')
@@ -128,13 +132,32 @@ def type_annotation_end(q, i):
             return i
 
 
+HOL_SYMBOL = "\\!@#$%^&*-+|<=>/?~.:"
+
+
+def annotation_colons(q):
+    """Positions of the colons in quotation q that start a type annotation:
+    not inside a HOL string, nor part of a longer symbol such as `::`."""
+    i = 0
+    while i < len(q):
+        if q[i] == '"':
+            i += 1
+            while i < len(q) and q[i] != '"':
+                i += 2 if q[i] == '\\' else 1
+        elif q[i] == ':' and q[i - 1] not in HOL_SYMBOL and q[i + 1:i + 2] not in tuple(HOL_SYMBOL):
+            yield i
+        i += 1
+
+
 def rename_in_quotation(q, renames):
     out, i = [], 0
-    while (k := q.find(':', i)) >= 0:
+    for k in annotation_colons(q):
+        if k < i:
+            continue
         end = type_annotation_end(q, k + 1)
         out.append(q[i:k + 1])
         out.append(HOL_NAME.sub(lambda m: renames.get(m[0], m[0]), q[k + 1:end]))
-        i = end if end > k + 1 else k + 1
+        i = end
     out.append(q[i:])
     return ''.join(out)
 
@@ -201,10 +224,17 @@ def rename_type_variables(text, renames):
     type annotations of its quotations. Any other occurrence of an old name
     outside comments, in a quotation's term or in OCaml code or strings
     (`mk_vartype "'a"`), fails: those need adapting by hand."""
+    assert len(set(renames.values())) == len(renames) and not set(renames.values()) & set(renames), \
+        'the renaming is not injective'
     def occurs(name, pieces):
         return any(re.search(r"(?<![A-Za-z0-9_'])" + re.escape(name) + r"(?![A-Za-z0-9_'])", piece)
                    for kind, piece in pieces if kind != 'comment')
-    segments = ocaml_segments(text)
+    # a quotation ending in a colon is a string (pa_j), and string escapes
+    # are read as OCaml reads them ("\039a" is 'a)
+    segments = [('string', piece) if kind == 'quotation' and piece.endswith(':`') else (kind, piece)
+                for kind, piece in ocaml_segments(text)]
+    segments = [(kind, piece + '\0' + ocaml_unescaped(piece)) if kind == 'string' else (kind, piece)
+                for kind, piece in segments]
     for new in renames.values():
         # a new name already in use would merge two type variables
         assert not occurs(new, segments), f'{new} is already used'
@@ -212,7 +242,12 @@ def rename_type_variables(text, renames):
                 for kind, piece in segments]
     for old in renames:
         assert not occurs(old, segments), f'{old} occurs outside a type annotation'
-    return ''.join(piece for kind, piece in segments)
+    return ''.join(piece.split('\0')[0] if kind == 'string' else piece for kind, piece in segments)
+
+
+def ocaml_unescaped(s):
+    return re.sub(r'\\(?:([0-9]{3})|x([0-9a-fA-F]{2})|o([0-3][0-7]{2}))',
+                  lambda m: chr(int(m[1]) if m[1] else int(m[2], 16) if m[2] else int(m[3], 8)), s)
 
 
 def prepare():
