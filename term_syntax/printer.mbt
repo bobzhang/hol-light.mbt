@@ -196,6 +196,9 @@ priv struct Printer {
   // HOL's parser reads the element of the two forms a different number of
   // times (pgen_cost), numbering the comprehensions in it differently
   listed : Array[String]
+  // write a comprehension whose binder is not a GEN%PVAR name as GSPEC(...):
+  // set notation reads with a GEN%PVAR binder, renaming it
+  exact : Bool
   // bindings of a set comprehension's implicit binders ({e | p}), each the
   // variable and the depth of its binding in the scope: printed with their
   // type where they first occur
@@ -473,6 +476,7 @@ fn Printer::comb(
       "{" + items.map(x => self.term(x, EXPR, bound)).join(", ") + "}"
     // with no binders to list, only the implicit form can write it
     (Const("GSPEC", _), [Abs(g, body)]) if self.sets &&
+      !(self.exact && !(g is Var(n, _) && pvar_number(n) is Some(_))) &&
       comprehension(g, body) is Some((scoped, p, e)) &&
       (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) =>
       self.comprehension(g, scoped, p, e, bound)
@@ -608,11 +612,24 @@ priv struct Notation {
 }
 
 ///|
-fn notation(t : @kernel.Term) -> Notation? {
-  guard t is Comb(Const("GSPEC", _), Abs(Var(name, _) as g, body)) &&
-    name.strip_prefix("GEN%PVAR%") is Some(digits) &&
+/// n for a GEN%PVAR name `GEN%PVAR%n`.
+fn pvar_number(name : String) -> Int? {
+  guard name.strip_prefix("GEN%PVAR%") is Some(digits) &&
     !digits.is_empty() &&
     digits.iter().all(c => c is ('0'..='9')) else {
+    return None
+  }
+  let mut number = 0
+  for c in digits {
+    number = number * 10 + (c.to_int() - '0'.to_int())
+  }
+  Some(number)
+}
+
+///|
+fn notation(t : @kernel.Term) -> Notation? {
+  guard t is Comb(Const("GSPEC", _), Abs(Var(name, _) as g, body)) &&
+    pvar_number(name) is Some(number) else {
     return None
   }
   guard comprehension(g, body) is Some((scoped, p, e)) else { return None }
@@ -621,10 +638,6 @@ fn notation(t : @kernel.Term) -> Notation? {
   // with no binders to list, only {e | p} can write it, else GSPEC(...)
   if scoped.is_empty() && !binds.is_empty() {
     return None
-  }
-  let mut number = 0
-  for c in digits {
-    number = number * 10 + (c.to_int() - '0'.to_int())
   }
   Some({ number, name, e, p, implicit: binds == xs })
 }
@@ -806,6 +819,7 @@ fn print_term_with(
   t : @kernel.Term,
   sets~ : Bool,
   listed? : Array[String] = [],
+  exact? : Bool = false,
 ) -> String raise Unprintable {
   let vars = @basics.variables(t).to_array()
   let fixed = vars
@@ -824,6 +838,7 @@ fn print_term_with(
         names,
         sets,
         listed,
+        exact,
         untyped: [],
       }.term(
         t,
@@ -921,7 +936,7 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
   let tried = []
   for form in forms {
     let (sets, listed) = form
-    let s = print_term_with(t, sets~, listed~) catch {
+    let s = print_term_with(t, sets~, listed~, exact=true) catch {
       e => {
         error = e
         continue
