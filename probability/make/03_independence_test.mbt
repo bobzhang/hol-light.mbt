@@ -80285,7 +80285,7 @@ test "Probability/independence matches Probability/independence.ml" {
       #|  (p : Prob_space[A])
       #|  prob((p : Prob_space[A]), DIFF((b : (A) -> Bool), (a : (A) -> Bool))) == real_of_num(0)
       #|  \226\136\128 p : Prob_space[A], \226\136\128 a : (A) -> Bool, \226\136\128 b : (A) -> Bool, IN(a, prob_events(p)) && IN(b, prob_events(p)) && prob(p, a) == real_of_num(1) \226\134\146 indep_events(p, a, b)
-      #|  limsup_events (A:num->A->bool) =\n   INTERS {UNIONS {A n | n >= m} | m IN (:num)}
+      #|  (limsup_events : ((Num, A) -> Bool, A) -> Bool)((A : (Num, A) -> Bool)) == INTERS({UNIONS({A((n : Num)) | n >= (m : Num)}) | IN(m, UNIV)})
       #|  (m : Num)
       #|  (t : (A) -> Bool)
       #|  UNIONS({(A : (Num, A) -> Bool)((n : Num)) | n >= (m : Num)})
