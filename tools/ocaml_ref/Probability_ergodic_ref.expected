@@ -84691,7 +84691,7 @@ Probability/ergodic quotations (2129):
   (x : A) => (f : (A) -> Real)(x) * indicator_fn((Ainf : (A) -> Bool), x)
   (n : Num) => (x : A) => (f : (A) -> Real)(x) * indicator_fn({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && ergodic_maxsum(f, (tt : (A) -> A), n, x) > real_of_num(0)}, x)
   (p : Prob_space[A])
-  Ainf = UNIONS {({x:A | x IN prob_carrier p /\\ ergodic_maxsum (f:A->real) tt n x > &0}) | n IN (:num)}
+  (Ainf : (A) -> Bool) == UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && ergodic_maxsum((f : (A) -> Real), (tt : (A) -> A), (n : Num), x) > real_of_num(0)} | IN(n, UNIV)})
   IN((Ainf : (A) -> Bool), prob_events((p : Prob_space[A])))
   (Ainf : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, ergodic_maxsum((f : (A) -> Real), (tt : (A) -> A), n, x) > real_of_num(0))}
   \226\136\128 p : Prob_space[A], \226\136\128 tt : (A) -> A, \226\136\128 f : (A) -> Real, measure_preserving(p, tt) && integrable(p, f) \226\134\146 real_of_num(0) <= expectation(p, (x : A) => f(x) * indicator_fn({(x : A) | IN(x, prob_carrier(p)) && (\226\136\131 n : Num, ergodic_maxsum(f, tt, n, x) > real_of_num(0))}, x))
@@ -84753,7 +84753,7 @@ Probability/ergodic quotations (2129):
   inf({(s : (Num) -> Real)((k : Num)) | k >= 0})
   (B : Real)
   (a : Real)
-  {inf {(s:num->real) k | k >= n} | n IN (:num)}
+  {inf({(s : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   ((p : Bool) \226\134\146 (q : Bool)) == (!q \226\134\146 !p)
   ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
   \226\136\128 s : (Num) -> Real, \226\136\128 a : Real, \226\136\128 c : Real, \226\136\128 B : Real, (\226\136\128 n : Num, c <= s(n)) && (\226\136\128 n : Num, s(n) <= B) && real_liminf(s) < a \226\134\146 (\226\136\131 n : Num, s(n) < a)
@@ -84911,9 +84911,9 @@ Probability/ergodic quotations (2129):
   (y : Real)
   (ub : Real)
   inf({(s : (Num) -> Real)((k : Num)) | k >= (N : Num) + (N0 : Num)})
-  {inf {(s:num->real) k | k >= n} | n | T}
+  {inf({(s : (Num) -> Real)((k : Num)) | k >= n}) | n : Num | true}
   (N : Num) + (N0 : Num)
-  inf {(s:num->real) k | k >= N + N0} IN\n     {inf {s k | k >= n} | n | T}
+  IN(inf({(s : (Num) -> Real)((k : Num)) | k >= (N : Num) + (N0 : Num)}), {inf({s((k : Num)) | k >= n}) | n : Num | true})
   (ub : Real)
   (lb : Real)
   (ub : Real)
@@ -84922,7 +84922,7 @@ Probability/ergodic quotations (2129):
   (z : Real)
   (eps : Real)
   (w : Real)
-  sup {inf {(s:num->real) k | k >= n} | n | T}
+  sup({inf({(s : (Num) -> Real)((k : Num)) | k >= n}) | n : Num | true})
   (p : Real)
   inf({(t : (Num) -> Real)((k : Num)) | k >= (N : Num)})
   (v : Real)
@@ -84981,8 +84981,8 @@ Probability/ergodic quotations (2129):
   (m : Num)
   (y : Real)
   (lb : Real)
-  inf {sup {(t:num->real) k | k >= n} | n IN (:num)} + eps / &2
-  {sup {(t:num->real) k | k >= n} | n IN (:num)}
+  inf({sup({(t : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}) + (eps : Real) / real_of_num(2)
+  {sup({(t : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   (N1 : Num)
   \226\136\131 N1 : Num, sup({(t : (Num) -> Real)((k : Num)) | k >= N1}) < real_limsup(t) + (eps : Real) / real_of_num(2)
   (ub : Real)
@@ -85292,9 +85292,9 @@ Probability/ergodic quotations (2129):
   0
   inf({(s : (Num) -> Real)((k : Num)) | k >= 0})
   (L : Real) == real_liminf((s : (Num) -> Real))
-  sup {inf {(s:num->real) k | k >= n} | n IN (:num)} = L
+  sup({inf({(s : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}) == (L : Real)
   (L : Real) - (e : Real)
-  {inf {(s:num->real) k | k >= n} | n IN (:num)}
+  {inf({(s : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   \226\136\131 N2 : Num, (L : Real) - (e : Real) < inf({(s : (Num) -> Real)((k : Num)) | k >= N2})
   (p : Num)
   \226\136\128 n : Num, abs((s : (Num) -> Real)(n)) <= (C : Real)
@@ -85308,9 +85308,9 @@ Probability/ergodic quotations (2129):
   -(C : Real)
   0
   sup({(s : (Num) -> Real)((k : Num)) | k >= 0})
-  inf {sup {(s:num->real) k | k >= n} | n IN (:num)} = L
+  inf({sup({(s : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}) == (L : Real)
   (L : Real) + (e : Real)
-  {sup {(s:num->real) k | k >= n} | n IN (:num)}
+  {sup({(s : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   \226\136\131 N1 : Num, sup({(s : (Num) -> Real)((k : Num)) | k >= N1}) < (L : Real) + (e : Real)
   \226\136\128 n : Num, abs((s : (Num) -> Real)(n)) <= (C : Real)
   (k : Num)
@@ -85396,7 +85396,7 @@ Probability/ergodic quotations (2129):
   (tt : (A) -> A)
   (p : Prob_space[A])
   (C : Real)
-  UNIONS {(\\n. {x:A | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) < FST((g:num->real#real) n) /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. f(ITER k tt x))) > SND(g n)}) n | n IN (:num)}
+  UNIONS({((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_liminf((m : Num) => inv(real_of_num(SUC(m))) * sum(op_dot_dot(0, m), (k : Num) => (f : (A) -> Real)(ITER(k, (tt : (A) -> A), x)))) < FST((g : (Num) -> (Real, Real))(n)) && real_limsup((m : Num) => inv(real_of_num(SUC(m))) * sum(op_dot_dot(0, m), (k : Num) => f(ITER(k, tt, x)))) > SND(g(n))})((n : Num)) | IN(n, UNIV)})
   (p' : (Real, Real))
   (g : (Num) -> (Real, Real))((n : Num))
   {((a : Real), (b : Real)) | rational(a) && rational(b) && a < b} == IMAGE((g : (Num) -> (Real, Real)), UNIV)
@@ -85432,7 +85432,7 @@ Probability/ergodic quotations (2129):
   (tt : (A) -> A)
   (p : Prob_space[A])
   real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => ((f : (A) -> Real)(x) - (lam : Real)) * indicator_fn((A : (A) -> Bool), x))
-  {x:A | x IN prob_carrier p /\\\n     (?n. ergodic_maxsum (\\x. (f:A->real) x - lam) tt n x > &0)} =\n     UNIONS {({x:A | x IN prob_carrier p /\\\n       ergodic_maxsum (\\x. f x - lam) tt n x > &0}) | n IN (:num)}
+  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, ergodic_maxsum((x : A) => (f : (A) -> Real)(x) - (lam : Real), (tt : (A) -> A), n, x) > real_of_num(0))} == UNIONS({{(x : A) | IN(x, prob_carrier(p)) && ergodic_maxsum((x : A) => f(x) - lam, tt, (n : Num), x) > real_of_num(0)} | IN(n, UNIV)})
   IN((A : (A) -> Bool), prob_events((p : Prob_space[A])))
   (A : (A) -> Bool) == {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, ergodic_maxsum((x : A) => (f : (A) -> Real)(x) - (lam : Real), (tt : (A) -> A), n, x) > real_of_num(0))}
   integrable((p : Prob_space[A]), (x : A) => (f : (A) -> Real)(x) - (lam : Real))
@@ -85535,7 +85535,7 @@ Probability/ergodic quotations (2129):
   (k : Num)
   (n : Num) => inv(real_of_num(SUC(n))) * sum(op_dot_dot(0, n), (j : Num) => (f : (A) -> Real)(ITER(j, (tt : (A) -> A), (x : A))))
   (x : A)
-  UNIONS {INTERS (IMAGE (\\M:num. (NM:num->A->bool) M UNION\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &M) (min (&M) (f x))) -\n        inv(&(4 * SUC k))) tt n x > &0)}) (:num)) | k IN (:num)}
+  UNIONS({INTERS(IMAGE((M : Num) => UNION((NM : (Num, A) -> Bool)(M), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, ergodic_maxsum((x : A) => abs((f : (A) -> Real)(x) - max(-real_of_num(M), min(real_of_num(M), f(x)))) - inv(real_of_num(4 * SUC((k : Num)))), (tt : (A) -> A), n, x) > real_of_num(0))}), UNIV)) | IN(k, UNIV)})
   abs(expectation((p : Prob_space[A]), (x : A) => abs((f : (A) -> Real)(x) - max(-real_of_num((M0 : Num)), min(real_of_num(M0), f(x))))) - real_of_num(0)) < (e : Real) / real_of_num(4 * SUC((k : Num)))
   real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => abs((f : (A) -> Real)(x) - max(-real_of_num((M0 : Num)), min(real_of_num(M0), f(x)))))
   !((c : Real) == real_of_num(0)) \226\134\146 (e : Real) == c * (e / c)
@@ -85709,7 +85709,7 @@ Probability/ergodic quotations (2129):
   ergodic((p : Prob_space[A]), (tt : (A) -> A))
   measure_preserving((p : Prob_space[A]), (tt : (A) -> A))
   \226\136\128 p : Prob_space[A], \226\136\128 tt : (A) -> A, \226\136\128 f : (A) -> Real, \226\136\128 C : Real, \226\136\128 c : Real, ergodic(p, tt) && integrable(p, f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 abs(f(x)) <= C) && c > expectation(p, f) \226\134\146 prob(p, {(x : A) | IN(x, prob_carrier(p)) && real_limsup((n : Num) => inv(real_of_num(SUC(n))) * sum(op_dot_dot(0, n), (k : Num) => f(ITER(k, tt, x)))) > c}) == real_of_num(0)
-  --sup {inf {(f:num->real) k | k >= n} | n IN (:num)}
+  -sup({inf({(f : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)})
   (p : Num)
   \226\136\128 n : Num, abs((f : (Num) -> Real)(n)) <= (C : Real)
   (q : Num)
@@ -85723,7 +85723,7 @@ Probability/ergodic quotations (2129):
   (q : Num)
   (z : Real)
   (C : Real)
-  inf {(f:num->real) k | k >= p} <=\n     sup {inf {f k | k >= n} | n IN (:num)}
+  inf({(f : (Num) -> Real)((k : Num)) | k >= (p : Num)}) <= sup({inf({f((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)})
   (p : Num)
   (y : Real)
   \226\136\128 a : Real, \226\136\128 c : Real, c <= -a \226\134\146 a <= -c
@@ -85737,7 +85737,7 @@ Probability/ergodic quotations (2129):
   (c : Real)
   (m : Num)
   (m : Num)
-  {sup {--((f:num->real) k) | k >= n} | n IN (:num)} =\n     {--(inf {f k | k >= n}) | n IN (:num)}
+  {sup({-(f : (Num) -> Real)((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)} == {-inf({f((k : Num)) | k >= (n : Num)}) | IN(n, UNIV)}
   -inf({(f : (Num) -> Real)((k : Num)) | k >= (m : Num)})
   (j : Num)
   (p : Num)
@@ -85822,7 +85822,7 @@ Probability/ergodic quotations (2129):
   (p : Prob_space[A])
   \226\136\128 m : Num, abs(inv(real_of_num(SUC(m))) * sum(op_dot_dot(0, m), (k : Num) => (f : (A) -> Real)(ITER(k, (tt : (A) -> A), (x : A))))) <= (C : Real)
   (x : A)
-  UNIONS {(\\n. {x:A | x IN prob_carrier p /\\\n    real_limsup (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) >\n      E + inv(&(SUC n))}) n | n IN (:num)}\n    UNION\n    UNIONS {(\\n. {x:A | x IN prob_carrier p /\\\n    real_liminf (\\m. inv(&(SUC m)) * sum(0..m) (\\k. (f:A->real)(ITER k tt x))) <\n      E - inv(&(SUC n))}) n | n IN (:num)}
+  UNION(UNIONS({((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && real_limsup((m : Num) => inv(real_of_num(SUC(m))) * sum(op_dot_dot(0, m), (k : Num) => (f : (A) -> Real)(ITER(k, (tt : (A) -> A), x)))) > (E : Real) + inv(real_of_num(SUC(n)))})((n : Num)) | IN(n, UNIV)}), UNIONS({((n : Num) => {(x : A) | IN(x, prob_carrier(p)) && real_liminf((m : Num) => inv(real_of_num(SUC(m))) * sum(op_dot_dot(0, m), (k : Num) => f(ITER(k, tt, x)))) < E - inv(real_of_num(SUC(n)))})((n : Num)) | IN(n, UNIV)}))
   real_of_num(0) < (i : Real) \226\134\146 (e : Real) - i < e
   (C : Real)
   \226\136\128 n : Num, null_event((p : Prob_space[A]), {(x : A) | IN(x, prob_carrier(p)) && real_liminf((m : Num) => inv(real_of_num(SUC(m))) * sum(op_dot_dot(0, m), (k : Num) => (f : (A) -> Real)(ITER(k, (tt : (A) -> A), x)))) < (E : Real) - inv(real_of_num(SUC(n)))})
@@ -85925,7 +85925,7 @@ Probability/ergodic quotations (2129):
   (L : Real)
   \226\136\131 L : Real, op_minus_minus_minus_gt((n : Num) => inv(real_of_num(SUC(n))) * sum(op_dot_dot(0, n), (k : Num) => (f : (A) -> Real)(ITER(k, (tt : (A) -> A), (x : A)))), L, sequentially)
   (x : A)
-  (N_f:A->bool) UNION UNIONS {INTERS (IMAGE (\\j:num.\n    (NM:num->A->bool) (j + M0 k) UNION\n    {x:A | x IN prob_carrier p /\\\n      (?n. ergodic_maxsum (\\x. abs((f:A->real) x - max (-- &(j + M0 k))\n        (min (&(j + M0 k)) (f x))) - inv(&(2 * SUC k))) tt n x > &0)})\n    (:num)) | k IN (:num)}
+  UNION((N_f : (A) -> Bool), UNIONS({INTERS(IMAGE((j : Num) => UNION((NM : (Num, A) -> Bool)(j + (M0 : (Num) -> Num)((k : Num))), {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (\226\136\131 n : Num, ergodic_maxsum((x : A) => abs((f : (A) -> Real)(x) - max(-real_of_num(j + M0(k)), min(real_of_num(j + M0(k)), f(x)))) - inv(real_of_num(2 * SUC(k))), (tt : (A) -> A), n, x) > real_of_num(0))}), UNIV)) | IN(k, UNIV)}))
   abs(expectation((p : Prob_space[A]), (x : A) => abs((f : (A) -> Real)(x) - max(-real_of_num((M1 : Num) + (M0 : (Num) -> Num)((k : Num))), min(real_of_num(M1 + M0(k)), f(x))))) - real_of_num(0)) < (e : Real) / real_of_num(2 * SUC(k))
   real_of_num(0) <= expectation((p : Prob_space[A]), (x : A) => abs((f : (A) -> Real)(x) - max(-real_of_num((M1 : Num) + (M0 : (Num) -> Num)((k : Num))), min(real_of_num(M1 + M0(k)), f(x)))))
   !((c : Real) == real_of_num(0)) \226\134\146 (e : Real) == c * (e / c)
