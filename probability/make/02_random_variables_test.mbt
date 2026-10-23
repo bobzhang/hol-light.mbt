@@ -80175,7 +80175,7 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  (n : Num)
       #|  (a : Real) - (X : (A) -> Real)((y : A))
       #|  (y : A)
-      #|  forall p (X:A->real) a.\n     {x | x IN prob_carrier p /\\ X x < a} =\n     UNIONS {{x | x IN prob_carrier p /\\ X x <= a - inv(&n + &1)} | n IN (:num)}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, {(x : A) | IN(x, prob_carrier(p)) && X(x) < a} == UNIONS({{(x : A) | IN(x, prob_carrier(p)) && X(x) <= a - inv(real_of_num((n : Num)) + real_of_num(1))} | IN(n, UNIV)})
       #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) <= a}, prob_events(p))
       #|  (a : Real) - inv(real_of_num((n : Num)) + real_of_num(1))
       #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 a : Real, random_variable(p, X) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && X(x) < a}, prob_events(p))
@@ -80246,9 +80246,9 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  \226\136\131 j : Num, !(j == 0) && real_of_num(0) < inv(real_of_num(j)) && inv(real_of_num(j)) < (L : (A) -> Real)((y : A)) - (a : Real)
       #|  (y : A)
       #|  (y : A)
-      #|  forall p (X:num->A->real) L a.\n     (forall x. x IN prob_carrier p ==> ((\\n. X n x) ---> L x) sequentially)\n     ==> {x | x IN prob_carrier p /\\ L x > a} =\n         UNIONS {INTERS {{x | x IN prob_carrier p /\\ X n x >= a + inv(&j + &1)}\n                         | n IN from N} | j,N | T}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, \226\136\128 a : Real, (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)) \226\134\146 {(x : A) | IN(x, prob_carrier(p)) && L(x) > a} == UNIONS({INTERS({{(x : A) | IN(x, prob_carrier(p)) && X((n : Num), x) >= a + inv(real_of_num(j) + real_of_num(1))} | IN(n, from(N))}) | j : Num, N : Num | true})
       #|  ((j : Num), (N : Num))
-      #|  IMAGE (\\(j,N). INTERS {{x:A | x IN prob_carrier p /\\\n                 X n x >= a + inv(&j + &1)} | n IN from N}) (:num#num)
+      #|  IMAGE(GABS((f : ((Num, Num), A) -> Bool) => \226\136\128 j : Num, \226\136\128 N : Num, GEQ(f((j, N)), INTERS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), x) >= (a : Real) + inv(real_of_num(j) + real_of_num(1))} | IN(n, from(N))}))), UNIV)
       #|  (N : Num)
       #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((N : Num), x) >= (a : Real) + inv(real_of_num((j : Num)) + real_of_num(1))}
       #|  IMAGE((n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)(n, x) >= (a : Real) + inv(real_of_num((j : Num)) + real_of_num(1))}, UNIV)
@@ -80358,7 +80358,7 @@ test "Probability/random_variables matches Probability/random_variables.ml" {
       #|  (i : Num)
       #|  (n : Num) => {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), (B : (Num, Real) -> Bool)(n))}
       #|  (p : Prob_space[A])
-      #|  {x:A | x IN prob_carrier p /\\ X x IN UNIONS {(B:num->real->bool) n | n IN (:num)}} =\n     UNIONS {{x:A | x IN prob_carrier p /\\ X x IN B n} | n IN (:num)}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && IN((X : (A) -> Real)(x), UNIONS({(B : (Num, Real) -> Bool)((n : Num)) | IN(n, UNIV)}))} == UNIONS({{(x : A) | IN(x, prob_carrier(p)) && IN(X(x), B((n : Num)))} | IN(n, UNIV)})
       #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 B : (Num, Real) -> Bool, random_variable(p, X) && (\226\136\128 n : Num, borel_in(euclideanreal, B(n))) && (\226\136\128 i : Num, \226\136\128 j : Num, !(i == j) \226\134\146 DISJOINT(B(i), B(j))) \226\134\146 real_sums((n : Num) => distribution(p, X, B(n)), distribution(p, X, UNIONS({B((n : Num)) | IN(n, UNIV)})), from(0))
       #|  {(w : A) | IN(w, prob_carrier((p : Prob_space[A]))) && (X : (A) -> Real)(w) <= (a : Real) && (Y : (A) -> Real)(w) <= (b : Real)} == INTER({(w : A) | IN(w, prob_carrier(p)) && X(w) <= a}, {(w : A) | IN(w, prob_carrier(p)) && Y(w) <= b})
       #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (A) -> Real, \226\136\128 Y : (A) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, random_variable(p, X) && random_variable(p, Y) \226\134\146 IN({(w : A) | IN(w, prob_carrier(p)) && X(w) <= a && Y(w) <= b}, prob_events(p))
