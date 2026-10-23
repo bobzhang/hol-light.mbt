@@ -62197,7 +62197,7 @@ Multivariate/polytope quotations (2976):
   (s : (Cart[Real, N]) -> Bool)
   (h : (Cart[Real, N]) -> Bool)
   (\226\136\128 x : _, (P : (_) -> Bool)(x) == (Q : (_) -> Bool)(x)) \226\134\146 {(f : (_) -> _)((x : _)) | P(x)} == {f((x : _)) | Q(x)}
-  {s INTER {x | a(h:real^N->bool) dot x = b h} |h|\n     h IN f /\\ c SUBSET (s INTER {x:real^N | a h dot x = b h})} =\n    {s INTER {x | a(h:real^N->bool) dot x = b h} |h|\n     h IN f /\\ z IN s INTER {x:real^N | a h dot x = b h}}
+  {INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}) | h : (Cart[Real, N]) -> Bool | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((c : (Cart[Real, N]) -> Bool), INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)}))} == {INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)}) | h : (Cart[Real, N]) -> Bool | IN(h, f) && IN((z : Cart[Real, N]), INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)}))}
   (b : ((Cart[Real, N]) -> Bool) -> Real)
   (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
   (f : ((Cart[Real, N]) -> Bool) -> Bool)
@@ -62211,7 +62211,7 @@ Multivariate/polytope quotations (2976):
   (x : Cart[Real, N])
   \226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 face_of(INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}), s)
   polyhedron((s : (Cart[Real, N]) -> Bool))
-  forall s:real^N->bool f a b.\n        FINITE f /\\\n        s = affine hull s INTER INTERS f /\\\n        (forall h. h IN f ==> ~(a h = vec 0) /\\ h = {x | a h dot x <= b h}) /\\\n        (forall f'. f' PSUBSET f ==> s PSUBSET affine hull s INTER INTERS f')\n        ==> forall c. c face_of s /\\ ~(c = {}) /\\ ~(c = s)\n                ==> c = INTERS {s INTER {x | a h dot x = b h} |h|\n                                h IN f /\\\n                                c SUBSET (s INTER {x | a h dot x = b h})}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N], \226\136\128 b : ((Cart[Real, N]) -> Bool) -> Real, FINITE(f) && s == INTER(hull(affine, s), INTERS(f)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, f) \226\134\146 !(a(h) == vec(0)) && h == {(x : Cart[Real, N]) | dot(a(h), x) <= b(h)}) && (\226\136\128 f' : ((Cart[Real, N]) -> Bool) -> Bool, PSUBSET(f', f) \226\134\146 PSUBSET(s, INTER(hull(affine, s), INTERS(f')))) \226\134\146 (\226\136\128 c : (Cart[Real, N]) -> Bool, face_of(c, s) && !(c == {}) && !(c == s) \226\134\146 c == INTERS({INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)}) | h : (Cart[Real, N]) -> Bool | IN(h, f) && SUBSET(c, INTER(s, {(x : Cart[Real, N]) | dot(a(h), x) == b(h)}))}))
   IN((t : (_) -> Bool), (f : ((_) -> Bool) -> Bool)) \226\134\146 SUBSET(INTERS(f), t)
   SUBSET((t : (_) -> Bool), (u : (_) -> Bool)) \226\134\146 SUBSET(INTER((s : (_) -> Bool), t), u)
   (b : ((Cart[Real, N]) -> Bool) -> Real)((i : (Cart[Real, N]) -> Bool))
@@ -62270,7 +62270,7 @@ Multivariate/polytope quotations (2976):
   (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
   (f : ((Cart[Real, N]) -> Bool) -> Bool)
   (s : (Cart[Real, N]) -> Bool)
-  {INTERS {s INTER {x:real^N | a(h:real^N->bool) dot x = b h} | h | h IN f'}\n    |f'| f' SUBSET f}
+  {INTERS({INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == (b : ((Cart[Real, N]) -> Bool) -> Real)(h)}) | h : (Cart[Real, N]) -> Bool | IN(h, f')}) | f' : ((Cart[Real, N]) -> Bool) -> Bool | SUBSET(f', (f : ((Cart[Real, N]) -> Bool) -> Bool))}
   (s : (Cart[Real, N]) -> Bool)
   ({} : (Cart[Real, N]) -> Bool)
   \226\136\128 a : _, \226\136\128 b : _, FINITE(DELETE(DELETE((s : (_) -> Bool), a), b)) \226\134\146 FINITE(s)
@@ -62393,7 +62393,7 @@ Multivariate/polytope quotations (2976):
   (!(p : Bool) \226\134\146 false) \226\134\146 p
   (p : Cart[Real, N])
   SUBSET((s : (_) -> Bool), INTERS((f : ((_) -> Bool) -> Bool))) == (\226\136\128 h : (_) -> Bool, IN(h, f) \226\134\146 SUBSET(s, h))
-  s = affine hull s INTER\n        INTERS {{x:real^N | a(h:real^N->bool) dot x <= b h} | h IN f}
+  (s : (Cart[Real, N]) -> Bool) == INTER(hull(affine, s), INTERS({{(x : Cart[Real, N]) | dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h)} | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool))}))
   (b : ((Cart[Real, N]) -> Bool) -> Real)
   (a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
   ((a : Bool) \226\134\146 (b : Bool) && (c : Bool)) == ((a \226\134\146 b) && (a \226\134\146 c))
@@ -62414,7 +62414,7 @@ Multivariate/polytope quotations (2976):
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x) == f(y) \226\134\146 x == y) && (\226\136\128 y : Cart[Real, N], \226\136\131 x : Cart[Real, M], f(x) == y) \226\134\146 polyhedron(IMAGE(f, s)) == polyhedron(s)
   (-(x : Cart[Real, N]) == (y : Cart[Real, N])) == (x == -y)
   \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) \226\134\146 polyhedron(IMAGE(op_minus_minus, s))
-  {x | f x IN INTERS s} = INTERS {{x | f x IN c} | c IN s}
+  {(x : _) | IN((f : (_) -> _)(x), INTERS((s : ((_) -> Bool) -> Bool)))} == INTERS({{(x : _) | IN(f(x), (c : (_) -> Bool))} | IN(c, s)})
   (h : (Cart[Real, N]) -> Bool)
   (h : (Cart[Real, N]) -> Bool)
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, N]) -> Bool, linear(f) && polyhedron(s) \226\134\146 polyhedron({(x : Cart[Real, M]) | IN(f(x), s)})
@@ -62547,7 +62547,7 @@ Multivariate/polytope quotations (2976):
   \226\136\131 p : (Cart[Real, N]) -> Bool, polytope(p) && IN(vec(0), interior(p))
   \226\136\128 s : (Cart[Real, N]) -> Bool, polyhedron(s) && conic(s) && !(s == {}) \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, FINITE(c) && s == hull(convex_cone, c))
   exposed_face_of((k : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool)) == IN(k, {(f : (Cart[Real, _]) -> Bool) | exposed_face_of(f, s)})
-  { {x + y:real^N | x IN k /\\ y IN l} |\n                  k exposed_face_of s /\\ l exposed_face_of t}
+  {{(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (k : (Cart[Real, N]) -> Bool)) && IN(y, (l : (Cart[Real, N]) -> Bool))} | exposed_face_of(k, (s : (Cart[Real, N]) -> Bool)) && exposed_face_of(l, (t : (Cart[Real, N]) -> Bool))}
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, polyhedron(s) && polytope(t) \226\134\146 polyhedron({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
   real_of_num(1)
   ((x : Cart[Real, N]) == op_pct((c : Real), x)) == (op_pct(c - real_of_num(1), x) == vec(0))
@@ -62585,7 +62585,7 @@ Multivariate/polytope quotations (2976):
   real_of_num(0)
   (pastecart : (Cart[Real, N], Cart[Real, Unit]) -> Cart[Real, Finite_sum[N, Unit]])((vec : (Num) -> Cart[Real, N])(0), -vec(1))
   ((x : Real) - (y : Real) <= real_of_num(0)) == (x <= y)
-  { x:real^(N,1)finite_sum |\n            pastecart (vec 0) (--vec 1) dot x <= &0} INSERT\n          { {x | pastecart (a h) (--lift(b h)) dot x <= &0} |\n            (h:real^N->bool) IN f}
+  INSERT({(x : Cart[Real, Finite_sum[N, Unit]]) | dot(pastecart(vec(0), -vec(1)), x) <= real_of_num(0)}, {{(x : Cart[Real, Finite_sum[N, Unit]]) | dot(pastecart((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), -lift((b : ((Cart[Real, N]) -> Bool) -> Real)(h))), x) <= real_of_num(0)} | IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool))})
   (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool)
   \226\136\131 t : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, \226\136\131 u : (Cart[Real, Finite_sum[N, Unit]]) -> Bool, FINITE(t) && FINITE(u) && (\226\136\128 y : Cart[Real, Finite_sum[N, Unit]], IN(y, t) \226\134\146 drop(sndcart(y)) == real_of_num(0)) && (\226\136\128 y : Cart[Real, Finite_sum[N, Unit]], IN(y, u) \226\134\146 drop(sndcart(y)) == real_of_num(1)) && (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == hull(convex_cone, UNION(t, u))
   (s' : (Cart[Real, Finite_sum[N, Unit]]) -> Bool) == {(x : Cart[Real, Finite_sum[N, Unit]]) | real_of_num(0) <= drop(sndcart(x)) && (\226\136\128 h : (Cart[Real, N]) -> Bool, IN(h, (f : ((Cart[Real, N]) -> Bool) -> Bool)) \226\134\146 dot((a : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), fstcart(x)) <= (b : ((Cart[Real, N]) -> Bool) -> Real)(h) * drop(sndcart(x)))}
@@ -63147,7 +63147,7 @@ Multivariate/polytope quotations (2976):
   closure((u : (Cart[Real, N]) -> Bool))
   (z : Cart[Real, N])
   \226\136\128 t : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 z : Cart[Real, N], convex(u) && bounded(u) && IN(z, interior(u)) && triangulation(t) && SUBSET(UNIONS(t), frontier(u)) \226\134\146 (\226\136\128 c : (Cart[Real, N]) -> Bool, IN(c, t) \226\134\146 !IN(z, hull(affine, c)))
-  UNIONS {{f:real^N->bool | f face_of c} | c IN tr}
+  UNIONS({{(f : (Cart[Real, N]) -> Bool) | face_of(f, (c : (Cart[Real, N]) -> Bool))} | IN(c, (tr : ((Cart[Real, N]) -> Bool) -> Bool))})
   \226\136\128 tr : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 tr' : ((Cart[Real, N]) -> Bool) -> Bool, triangulation(tr) && (\226\136\128 c' : (Cart[Real, N]) -> Bool, IN(c', tr') \226\134\146 (\226\136\131 c : (Cart[Real, N]) -> Bool, IN(c, tr) && face_of(c', c))) \226\134\146 triangulation(tr')
   real_of_num(0) < (x : Real) \226\134\146 abs(x) == x
   (a : Real) < abs((x : Real) - (y : Real)) \226\134\146 real_of_num(0) < a \226\134\146 (\226\136\131 n : Real, integer(n) && (x < n * a && n * a < y || y < n * a && n * a < x))
@@ -63164,7 +63164,7 @@ Multivariate/polytope quotations (2976):
   (x : Cart[Real, N])
   (c : (Cart[Real, N]) -> Bool)
   (\226\136\128 x : _, IN(x, (s : (_) -> Bool))) \226\134\146 INTER((t : (_) -> Bool), s) == t
-  {c INTER {x:real^N | a dot x <= b} | c IN n} UNION\n                {c INTER {x:real^N | a dot x >= b} | c IN n}
+  UNION({INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((a : Cart[Real, N]), x) <= (b : Real)}) | IN(c, (n : ((Cart[Real, N]) -> Bool) -> Bool))}, {INTER((c : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot(a, x) >= b}) | IN(c, n)})
   (n : ((Cart[Real, N]) -> Bool) -> Bool)
   (i : ((Cart[Real, N], Real)) -> Bool)
   (b : Real)
@@ -63391,7 +63391,7 @@ Multivariate/polytope quotations (2976):
   (m : ((Cart[Real, N]) -> Bool) -> Bool)
   ((q : Bool) \226\134\146 (p : Bool)) && q \226\134\146 p && q
   (t : ((Cart[Real, N]) -> Bool) -> Bool)
-  UNIONS {{f:real^N->bool | f face_of c} | c IN m}
+  UNIONS({{(f : (Cart[Real, N]) -> Bool) | face_of(f, (c : (Cart[Real, N]) -> Bool))} | IN(c, (m : ((Cart[Real, N]) -> Bool) -> Bool))})
   (n : Num)
   (n : Num)
   int_of_num(0) <= (d : Int)
