@@ -221,6 +221,17 @@ test "nested set comprehensions number GEN%PVAR as HOL's parser does" {
   inspect(exact("{{{x | x < n + m} | m < 3} | n | n < 3}"), content=(
     #|{{{(x : Num) | x < n + (m : Num)} | m < 3} | n : Num | n < 3}
   ))
+  // a comprehension spelt GSPEC takes no name
+  inspect(
+    exact("({ {x | x < n} | n | n < 3}, GSPEC (\\g:num. SETSPEC g T (x:num)))"),
+    content=(
+      #|({{(x : Num) | x < n} | n : Num | n < 3}, GSPEC((g : Num) => SETSPEC(g, true, (x : Num))))
+    ),
+  )
+  // the forms are read off the numbering, however many comprehensions
+  let nine = Array::make(9, "{ {x | x < n} | n | n < 3}")
+  let spelled = exact("[" + nine.join("; ") + "]")
+  inspect(spelled.contains("unprintable"), content="false")
   // a set of one comprehension reads it once
   inspect(exact("{ {x | x < 3} }"), content=(
     #|{{(x : Num) | x < 3}}

@@ -596,70 +596,135 @@ fn implicit_binders(
 }
 
 ///|
-/// Whether `t` has a set comprehension (GSPEC).
-fn has_comprehension(t : @kernel.Term) -> Bool {
-  match t {
-    Const("GSPEC", _) => true
-    Comb(f, x) => has_comprehension(f) || has_comprehension(x)
-    Abs(_, b) => has_comprehension(b)
-    _ => false
-  }
+/// A comprehension the printer writes in set notation, with a GEN%PVAR
+/// binder: (its number, its binder's name, e, p, whether {e | p} binds
+/// its binders), as the printer finds it (with no binder in scope renamed).
+priv struct Notation {
+  number : Int
+  name : String
+  e : @kernel.Term
+  p : @kernel.Term
+  implicit : Bool
 }
 
 ///|
-/// The GEN%PVAR binders of the comprehensions in `t` whose element has a
-/// comprehension: those whose form (binders listed or not) numbers it.
-fn nesting_comprehensions(t : @kernel.Term) -> Array[String] {
+fn notation(t : @kernel.Term) -> Notation? {
+  guard t is Comb(Const("GSPEC", _), Abs(Var(name, _) as g, body)) &&
+    name.strip_prefix("GEN%PVAR%") is Some(digits) &&
+    !digits.is_empty() &&
+    digits.iter().all(c => c is ('0'..='9')) else {
+    return None
+  }
+  guard comprehension(g, body) is Some((scoped, p, e)) else { return None }
+  let xs = scoped.map(x => x.0)
+  let binds = implicit_binders(e, p, @list.List([]))
+  // with no binders to list, only {e | p} can write it, else GSPEC(...)
+  if scoped.is_empty() && !binds.is_empty() {
+    return None
+  }
+  let mut number = 0
+  for c in digits {
+    number = number * 10 + (c.to_int() - '0'.to_int())
+  }
+  Some({ number, name, e, p, implicit: binds == xs })
+}
+
+///|
+/// The comprehensions in set notation in `t` not inside another, in the
+/// order of their numbers (the order a reading takes their names in).
+fn outermost_notations(t : @kernel.Term) -> Array[Notation] {
   let found = []
   fn go(t : @kernel.Term) {
-    match t {
-      Comb(Const("GSPEC", _), Abs(Var(n, _) as g, body)) => {
-        if comprehension(g, body) is Some((_, _, e)) &&
-          has_comprehension(e) &&
-          !found.contains(n) {
-          found.push(n)
+    match notation(t) {
+      Some(n) => found.push(n)
+      None =>
+        match t {
+          Comb(f, x) => {
+            go(f)
+            go(x)
+          }
+          Abs(_, b) => go(b)
+          _ => ()
         }
-        go(body)
-      }
-      Comb(f, x) => {
-        go(f)
-        go(x)
-      }
-      Abs(_, b) => go(b)
-      _ => ()
     }
   }
   go(t)
+  found.sort_by_key(n => n.number)
   found
 }
 
 ///|
-/// How many GEN%PVAR names reading `t` printed in set notation takes, with
-/// the comprehensions `listed` names written with their binders listed (as
-/// are those whose binders {e | p} does not bind): pgen_cost, read off the
-/// term.
-fn comprehension_cost(t : @kernel.Term, listed : Array[String]) -> Int {
-  match t {
-    Comb(Const("GSPEC", _), Abs(Var(n, _) as g, body)) =>
-      match comprehension(g, body) {
-        Some((scoped, p, e)) => {
-          let xs = scoped.map(x => x.0)
-          let readings = if listed.contains(n) ||
-            implicit_binders(e, p, @list.List([])) != xs {
-            3
-          } else {
-            2
-          }
-          readings * comprehension_cost(e, listed) +
-          comprehension_cost(p, listed) +
-          1
-        }
-        None => comprehension_cost(body, listed)
-      }
-    Comb(f, x) => comprehension_cost(f, listed) + comprehension_cost(x, listed)
-    Abs(_, b) => comprehension_cost(b, listed)
-    _ => 0
+/// The comprehensions to write with their binders listed, where {e | p}
+/// would do, so that reading the printed `t` numbers its GEN%PVAR names as
+/// the quotation's reading did, taking `taken` names: None when none does.
+///
+/// A reading takes its names in order and a comprehension takes its own
+/// last, so the comprehensions of a reading are read from where the one
+/// before ends. {e | p} reads e twice and {e | vs | p} three times
+/// (pgen_cost), the last reading of e ending where p's begins, so for k
+/// earlier readings of e from `start`, start + (k + 1) * f(e) is where the
+/// last ends.
+fn listed_comprehensions(t : @kernel.Term, taken : Int) -> Array[String]? {
+  let outer = outermost_notations(t)
+  if outer.is_empty() {
+    return Some([])
   }
+  let end = outer[outer.length() - 1].number + 1
+  let listed = []
+  if read_names(t, end - taken, end, listed) {
+    Some(listed)
+  } else {
+    None
+  }
+}
+
+///|
+/// Whether a reading of `t` from `start` to `end` (exclusive) numbers its
+/// comprehensions as they are, adding to `listed` those to list.
+fn read_names(
+  t : @kernel.Term,
+  start : Int,
+  end : Int,
+  listed : Array[String],
+) -> Bool {
+  let mut at = start
+  for n in outermost_notations(t) {
+    if !read_comprehension(n, at, listed) {
+      return false
+    }
+    at = n.number + 1
+  }
+  at == end
+}
+
+///|
+/// Whether the comprehension `n`, read from `start`, is numbered as it is.
+fn read_comprehension(n : Notation, start : Int, listed : Array[String]) -> Bool {
+  let inner = outermost_notations(n.e)
+  if inner.is_empty() {
+    // e takes no names: both forms read p from the start
+    return read_names(n.p, start, n.number, listed)
+  }
+  let e_end = inner[inner.length() - 1].number + 1
+  if !read_names(n.p, e_end, n.number, listed) {
+    return false
+  }
+  let before = listed.length()
+  for k in (if n.implicit { [1, 2] } else { [2] }) {
+    if e_end > start && (e_end - start) % (k + 1) == 0 {
+      let size = (e_end - start) / (k + 1)
+      if read_names(n.e, e_end - size, e_end, listed) {
+        if k == 2 && n.implicit {
+          listed.push(n.name)
+        }
+        return true
+      }
+      while listed.length() > before {
+        listed.pop() |> ignore
+      }
+    }
+  }
+  false
 }
 
 ///|
@@ -845,20 +910,12 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
   // set notation, else the sets as written (GSPEC(...)), which an old
   // quotation may spell out. A comprehension whose element has one may be
   // written either way, numbering the GEN%PVAR names in it differently:
-  // those choices that take as many names as the quotation are tried.
+  // the forms the quotation's numbering shows are tried too.
   let mut error = Unprintable("term")
-  let nesting = nesting_comprehensions(t)
   let forms = [(true, [])]
-  if !nesting.is_empty() {
-    let taken = try @parser.reread_term(old).1 catch { _ => -1 }
-    // at most 2^8 choices, each costed on the term before it is printed
-    let n = nesting.length().min(8)
-    for mask in 1..<(1 << n) {
-      let listed = [for i in 0..<n if (mask >> i) % 2 == 1 => nesting[i]]
-      if comprehension_cost(t, listed) == taken {
-        forms.push((true, listed))
-      }
-    }
+  let taken = try @parser.reread_term(old).1 catch { _ => -1 }
+  if listed_comprehensions(t, taken) is Some(listed) && !listed.is_empty() {
+    forms.push((true, listed))
   }
   forms.push((false, []))
   let tried = []
