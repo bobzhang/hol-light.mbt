@@ -147,6 +147,23 @@ def annotation_spans(q):
         i = max(end, k + 1)
 
 
+def annotation_extent(q, i):
+    """A generous end for the type annotation at q[i]: up to the first
+    character no type has, outside parentheses. It may stop late, never
+    early, so the already-used check sees every type name."""
+    depth = 0
+    for j in range(i, len(q)):
+        if q[j] == '(':
+            depth += 1
+        elif q[j] == ')':
+            if depth == 0:
+                return j
+            depth -= 1
+        elif depth == 0 and q[j] in '.|=;,]}\\/<~!?@:`':
+            return j
+    return len(q)
+
+
 def rename_in_quotation(q, renames):
     out, i = [], 0
     for start, end in annotation_spans(q):
@@ -226,8 +243,9 @@ def rename_type_variables(text, renames, patches=()):
                    for kind, piece in pieces if kind != 'comment')
     segments = ocaml_segments(text)
     types = [(kind, piece) for kind, piece in segments if kind in ('code', 'string')] + [
-        ('annotation', piece[start:end]) for kind, piece in segments if kind == 'quotation'
-        for start, end in annotation_spans(piece)]
+        ('annotation', piece[k + 1:annotation_extent(piece, k + 1)])
+        for kind, piece in segments if kind == 'quotation'
+        for k in [m.start() for m in re.finditer(':', piece)]]
     for new in renames.values():
         # a new name already used for a type would merge two type variables
         # (terms have names of their own: T, truth, is no type)
