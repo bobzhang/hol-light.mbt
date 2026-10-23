@@ -85934,7 +85934,7 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), (w : A))
       #|  (w : A)
       #|  (s : (A) -> Bool)
-      #|  {(a:(A->bool)) INTER\n       {y:A | y IN prob_carrier p /\\ (X:num->A->real) n y = v} |\n       a,v |\n       a IN {rv_sigma_atom p X n z | z | z IN prob_carrier p} /\\\n       v IN {X n z | z | z IN prob_carrier p}}
+      #|  {INTER(a, {(y : A) | IN(y, prob_carrier((p : Prob_space[A]))) && (X : (Num, A) -> Real)((n : Num), y) == v}) | a : (A) -> Bool, v : Real | IN(a, {rv_sigma_atom(p, X, n, z) | z : A | IN(z, prob_carrier(p))}) && IN(v, {X(n, (z : A)) | IN(z, prob_carrier(p))})}
       #|  (n : Num)
       #|  FINITE({(X : (Num, A) -> Real)((n : Num), (x : A)) | IN(x, prob_carrier((p : Prob_space[A])))})
       #|  FINITE({rv_sigma_atom((p : Prob_space[A]), (X : (Num, A) -> Real), (n : Num), x) | x : A | IN(x, prob_carrier(p))})
@@ -87176,7 +87176,7 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, (w : A)), (L : (A) -> Real)(w), sequentially)
       #|  (k : Num)
       #|  (w : A)
-      #|  {x:A | x IN prob_carrier p /\\\n       ((\\n. (X:num->A->real) n x) ---> (L:A->real) x) sequentially} =\n     INTERS {liminf_events\n       (\\n. {x:A | x IN prob_carrier p /\\\n         abs (X n x - L x) < inv(&k + &1)}) | k IN (:num)}
+      #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && op_minus_minus_minus_gt((n : Num) => (X : (Num, A) -> Real)(n, x), (L : (A) -> Real)(x), sequentially)} == INTERS({liminf_events((n : Num) => {(x : A) | IN(x, prob_carrier(p)) && abs(X(n, x) - L(x)) < inv(real_of_num((k : Num)) + real_of_num(1))}) | IN(k, UNIV)})
       #|  {(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)((n : Num), x) - (L : (A) -> Real)(x)) < inv(real_of_num((k : Num)) + real_of_num(1))} == {(x : A) | IN(x, prob_carrier(p)) && -inv(real_of_num(k) + real_of_num(1)) < X(n, x) - L(x) && X(n, x) - L(x) < inv(real_of_num(k) + real_of_num(1))}
       #|  \226\136\128 n : Num, \226\136\128 k : Num, IN({(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)(n, x) - (L : (A) -> Real)(x)) < inv(real_of_num(k) + real_of_num(1))}, prob_events(p))
       #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, (\226\136\128 n : Num, random_variable(p, X(n))) && random_variable(p, L) \226\134\146 IN({(x : A) | IN(x, prob_carrier(p)) && op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)}, prob_events(p))
@@ -87218,15 +87218,15 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  (m : Num)
       #|  (t : (A) -> Bool)
       #|  (N : Num)
-      #|  UNIONS {{x:A | x IN prob_carrier (p:A prob_space) /\\\n       abs ((X:num->A->real) n' x - (L:A->real) x) >= e} | n' >= N}
+      #|  UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)((n' : Num), x) - (L : (A) -> Real)(x)) >= (e : Real)} | n' >= (N : Num)})
       #|  (N : Num)
       #|  (e : Real)
       #|  (k : Num)
       #|  (t : (A) -> Bool)
       #|  0
-      #|  UNIONS {{x:A | x IN prob_carrier (p:A prob_space) /\\\n      abs ((X:num->A->real) n' x - (L:A->real) x) >= e} | n' >= 0}
+      #|  UNIONS({{(x : A) | IN(x, prob_carrier((p : Prob_space[A]))) && abs((X : (Num, A) -> Real)((n' : Num), x) - (L : (A) -> Real)(x)) >= (e : Real)} | n' >= 0})
       #|  (w : A)
-      #|  forall p:A prob_space (X:num->A->real) (L:A->real) (e:real).\n     &0 < e /\\\n     (forall n. {x:A | x IN prob_carrier p /\\\n       abs (X n x - L x) >= e} IN prob_events p)\n     ==>\n     INTERS {UNIONS {{x:A | x IN prob_carrier p /\\\n       abs (X n' x - L x) >= e} | n' >= n} | n IN (:num)}\n     SUBSET\n     prob_carrier p DIFF\n       {x:A | x IN prob_carrier p /\\\n         ((\\n. X n x) ---> L x) sequentially}
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 L : (A) -> Real, \226\136\128 e : Real, real_of_num(0) < e && (\226\136\128 n : Num, IN({(x : A) | IN(x, prob_carrier(p)) && abs(X(n, x) - L(x)) >= e}, prob_events(p))) \226\134\146 SUBSET(INTERS({UNIONS({{(x : A) | IN(x, prob_carrier(p)) && abs(X((n' : Num), x) - L(x)) >= e} | n' >= (n : Num)}) | IN(n, UNIV)}), DIFF(prob_carrier(p), {(x : A) | IN(x, prob_carrier(p)) && op_minus_minus_minus_gt((n : Num) => X(n, x), L(x), sequentially)}))
       #|  (r : (Num) -> Num)
       #|  (l : Real)
       #|  (l : Real)
