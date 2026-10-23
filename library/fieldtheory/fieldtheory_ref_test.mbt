@@ -27873,7 +27873,7 @@ test "Library/fieldtheory matches Library/fieldtheory.ml" {
       #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  {(v : Unit) => (i : Num)}
       #|  (i : Num)
-      #|  UNIONS {{m | m one = i} | i IN {i:num | i <= n}}
+      #|  UNIONS({{(m : (Unit) -> Num) | m(one) == (i : Num)} | IN(i, {(i : Num) | i <= (n : Num)})})
       #|  (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
       #|  (p : ((Unit) -> Num) -> A)
       #|  p = \\m. if m one <= n then (c:num->A) (m one) else ring_0 k
