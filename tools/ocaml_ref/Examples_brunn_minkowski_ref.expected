@@ -79713,8 +79713,8 @@ Examples/brunn_minkowski quotations (466):
   {(f : (_) -> _)(x) | x : _ | IN(x, (s : (_) -> Bool)) && !(f(x) == (a : _))} == {(t : _) | IN(t, IMAGE(f, s)) && !(t == a)}
   measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})) && IN(y, INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}))}) + measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, INTER(s, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)})) && IN(y, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))})
   measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}))}) + measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))})
-  dr = {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d1 DELETE i /\\ ~(l INTER {x | x$k >= &0} = {})}
-  dl = {l INTER {x:real^N | x$k <= &0} |l|\n                    l IN d1 DELETE j /\\ ~(l INTER {x | x$k <= &0} = {})}
+  (dr : ((Cart[Real, N]) -> Bool) -> Bool) == {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, DELETE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (i : (Cart[Real, N]) -> Bool))) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
+  (dl : ((Cart[Real, N]) -> Bool) -> Bool) == {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, DELETE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (j : (Cart[Real, N]) -> Bool))) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}) == {})}
   FINITE((d1 : ((Cart[Real, N]) -> Bool) -> Bool)) && FINITE((d2 : ((Cart[Real, N]) -> Bool) -> Bool))
   real_of_num(0) < measure((s : (Cart[Real, N]) -> Bool)) && real_of_num(0) < measure((t : (Cart[Real, N]) -> Bool))
   measurable({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, (t : (Cart[Real, N]) -> Bool))})
@@ -79839,127 +79839,127 @@ Examples/brunn_minkowski quotations (466):
   interval([((u : Cart[Real, N]), (v : Cart[Real, N]))])
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})
   UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}
   (dr : ((Cart[Real, N]) -> Bool) -> Bool)
   INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})
   UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))
-  {l INTER {x:real^N | x$k <= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k <= &0} = {})}
+  {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}) == {})}
   (dl : ((Cart[Real, N]) -> Bool) -> Bool)
   measurable({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((D : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, UNIONS((E : ((Cart[Real, N]) -> Bool) -> Bool)))})
   (s1 : Real) <= (r1 : Real) && (s2 : Real) <= (r2 : Real) && (rs : Real) <= (s : Real) \226\134\146 rs >= r1 + r2 \226\134\146 s1 + s2 <= s
@@ -80012,7 +80012,7 @@ Examples/brunn_minkowski quotations (466):
   (s : (Cart[Real, N]) -> Bool)
   IN((x : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
   (x : Cart[Real, N])
-  forall s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s
+  \226\136\128 s : (Cart[Real, N]) -> Bool, closed(s) \226\134\146 INTERS({{(x : Cart[Real, N]) + (d : Cart[Real, N]) | IN(x, s) && IN(d, ball((vec(0), inv(real_of_num((n : Num)) + real_of_num(1)))))} | IN(n, UNIV)}) == s
   SUBSET((t' : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) \226\134\146 SUBSET({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, (s : (Cart[Real, N]) -> Bool)) && IN(y, t')}, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)})
   (vec : (Num) -> Cart[Real, N])(0)
   (x : Cart[Real, N])

@@ -533,11 +533,11 @@ fn step_2() -> Unit raise {
     let th_6 = x735
     let t740 = @term_syntax.parse_term("INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)})")
     let t741 = @term_syntax.parse_term("UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))")
-    let t742 = @parser.parse_term("{l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k >= &0} = {})}")
+    let t742 = @term_syntax.parse_term("{INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}")
     let t743 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(dr : ((Cart[Real, N]) -> Bool) -> Bool)"), t742, t741, t740]), th_6))
     let t737 = @term_syntax.parse_term("INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)})")
     let t738 = @term_syntax.parse_term("UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))")
-    let t739 = @parser.parse_term("{l INTER {x:real^N | x$k <= &0} |l|\n                    l IN d2 /\\ ~(l INTER {x | x$k <= &0} = {})}")
+    let t739 = @term_syntax.parse_term("{INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, (d2 : ((Cart[Real, N]) -> Bool) -> Bool)) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}) == {})}")
     @tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(dl : ((Cart[Real, N]) -> Bool) -> Bool)"), t739, t738, t737]), th_6)), t743)
   })
   let t733 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
@@ -672,8 +672,8 @@ fn step_2() -> Unit raise {
   }), @tactics.ants_tac), t708), t709), t710), t723)])
   let t629 = @tactics.exists_tac(@term_syntax.parse_term("measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dl : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER((t : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}))}) + measure({(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, UNIONS((dr : ((Cart[Real, N]) -> Bool) -> Bool))) && IN(y, INTER(t, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}))})"))
   let t628 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t627 = @simp.abbrev_tac(@parser.parse_term("dr = {l INTER {x:real^N | x$k >= &0} |l|\n                    l IN d1 DELETE i /\\ ~(l INTER {x | x$k >= &0} = {})}"))
-  let t626 = @simp.abbrev_tac(@parser.parse_term("dl = {l INTER {x:real^N | x$k <= &0} |l|\n                    l IN d1 DELETE j /\\ ~(l INTER {x | x$k <= &0} = {})}"))
+  let t627 = @simp.abbrev_tac(@term_syntax.parse_term("(dr : ((Cart[Real, N]) -> Bool) -> Bool) == {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) >= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, DELETE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (i : (Cart[Real, N]) -> Bool))) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) >= real_of_num(0)}) == {})}"))
+  let t626 = @simp.abbrev_tac(@term_syntax.parse_term("(dl : ((Cart[Real, N]) -> Bool) -> Bool) == {INTER(l, {(x : Cart[Real, N]) | op_dollar(x, (k : Num)) <= real_of_num(0)}) | l : (Cart[Real, N]) -> Bool | IN(l, DELETE((d1 : ((Cart[Real, N]) -> Bool) -> Bool), (j : (Cart[Real, N]) -> Bool))) && !(INTER(l, {(x : Cart[Real, N]) | op_dollar(x, k) <= real_of_num(0)}) == {})}"))
   let t625 = @tactics.disch_then(fn(x622 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s623 = @tactics.subst1_tac(x622)
     fn(x624 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1572,7 +1572,7 @@ fn step_5() -> Unit raise {
     x1196
   }, @list.List([@sets.extension()]))
   let t1254 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1197), t1198), t1199), @tactics.eq_tac), t1253)
-  inters_sums_closed_ball_sequential_c.set(@tactics.prove(@parser.parse_term("forall s:real^N->bool.\n        closed s\n        ==> INTERS {{x + d | x IN s /\\ d IN ball(vec 0,inv(&n + &1))} |\n                    n IN (:num)} = s"), t1254))
+  inters_sums_closed_ball_sequential_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (Cart[Real, N]) -> Bool, closed(s) → INTERS({{(x : Cart[Real, N]) + (d : Cart[Real, N]) | IN(x, s) && IN(d, ball((vec(0), inv(real_of_num((n : Num)) + real_of_num(1)))))} | IN(n, UNIV)}) == s"), t1254))
 }
 
 ///|
