@@ -75121,13 +75121,13 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  measure(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
       #|  (b : Cart[Real, N])
       #|  (a : Cart[Real, N])
-      #|  UNIONS { s(n):real^N->bool | n IN (:num) } =\n    UNIONS { UNIONS {s(m) | m IN 0..n} | n IN (:num)}
+      #|  UNIONS({(s : (Num, Cart[Real, N]) -> Bool)((n : Num)) | IN(n, UNIV)}) == UNIONS({UNIONS({s((m : Num)) | IN(m, op_dot_dot(0, (n : Num)))}) | IN(n, UNIV)})
       #|  \226\136\128 s : (Num, Cart[Real, N]) -> Bool, (\226\136\128 n : Num, measurable(s(n))) && bounded(UNIONS({s((n : Num)) | IN(n, UNIV)})) \226\134\146 measurable(UNIONS({s((n : Num)) | IN(n, UNIV)}))
       #|  (n : Num)
       #|  0
       #|  (n : Num) => lift(measure(UNIONS({(d : (Num, Cart[Real, N]) -> Bool)((k : Num)) | IN(k, op_dot_dot(0, n))})))
       #|  sequentially
-      #|  UNIONS {UNIONS {d k | k IN (0..n)} | n IN (:num)} =\n                UNIONS {d n:real^N->bool | n IN (:num)}
+      #|  UNIONS({UNIONS({(d : (Num, Cart[Real, N]) -> Bool)((k : Num)) | IN(k, op_dot_dot(0, (n : Num)))}) | IN(n, UNIV)}) == UNIONS({d((n : Num)) | IN(n, UNIV)})
       #|  (B : Real)
       #|  (n : Num) => UNIONS({(d : (Num, Cart[Real, N]) -> Bool)((k : Num)) | IN(k, op_dot_dot(0, n))})
       #|  \226\136\128 d : (Num, Cart[Real, N]) -> Bool, \226\136\128 B : Real, (\226\136\128 n : Num, measurable(d(n))) && (\226\136\128 n : Num, measure(UNIONS({d((k : Num)) | k <= n})) <= B) \226\134\146 measurable(UNIONS({d((n : Num)) | IN(n, UNIV)})) && measure(UNIONS({d((n : Num)) | IN(n, UNIV)})) <= B
@@ -75157,7 +75157,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (n : Num)
       #|  (n : Num)
       #|  (e : Real)
-      #|  UNIONS {UNIONS (IMAGE d {k | k <= n}) | n IN (:num)}:real^N->bool =\n      UNIONS (IMAGE d (:num))
+      #|  UNIONS({UNIONS(IMAGE((d : (Num, Cart[Real, N]) -> Bool), {(k : Num) | k <= (n : Num)})) | IN(n, UNIV)}) == UNIONS(IMAGE(d, UNIV))
       #|  (B : Real)
       #|  (n : Num) => UNIONS(IMAGE((d : (Num, Cart[Real, N]) -> Bool), {(k : Num) | k <= n}))
       #|  (d : (Num, Cart[Real, N]) -> Bool)
@@ -75179,7 +75179,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  \226\136\128 s : (Num, Cart[Real, N]) -> Bool, (\226\136\128 n : Num, measurable(s(n))) && (\226\136\128 n : Num, SUBSET(s(SUC(n)), s(n))) \226\134\146 measurable(INTERS({s((n : Num)) | IN(n, UNIV)})) && op_minus_minus_gt((n : Num) => lift(measure(s(n))), lift(measure(INTERS({s((n : Num)) | IN(n, UNIV)}))), sequentially)
       #|  (d : (Cart[Real, M]) -> Bool)
       #|  (d : (Cart[Real, M]) -> Bool)
-      #|  UNIONS {{x | x IN d /\\ ~((f:real^M->real^N) x = vec 0)} |\n                      d IN D}
+      #|  UNIONS({{(x : Cart[Real, M]) | IN(x, (d : (Cart[Real, M]) -> Bool)) && !((f : (Cart[Real, M]) -> Cart[Real, N])(x) == vec(0))} | IN(d, (D : ((Cart[Real, M]) -> Bool) -> Bool))})
       #|  (D : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  (UNIV : (Cart[Real, M]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (\226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], has_integral(f, vec(0), interval([(a, b)]))) \226\134\146 negligible({(x : Cart[Real, M]) | !(f(x) == vec(0))})
@@ -76559,7 +76559,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (k : Num)
       #|  (e : Real)
       #|  (y : Cart[Real, M])
-      #|  UNIONS {{x | forall d. &0 < d\n                     ==> ?h. &0 < h /\\ h < d /\\\n                             inv(&k + &1) <= dist(i h x,(f:real^M->real^N) x)}\n            |  k IN (:num)}
+      #|  UNIONS({{(x : Cart[Real, M]) | \226\136\128 d : Real, real_of_num(0) < d \226\134\146 (\226\136\131 h : Real, real_of_num(0) < h && h < d && inv(real_of_num((k : Num)) + real_of_num(1)) <= distance(((i : (Real, Cart[Real, M]) -> Cart[Real, N])(h, x), (f : (Cart[Real, M]) -> Cart[Real, N])(x))))} | IN(k, UNIV)})
       #|  {(x : Cart[Real, M]) | !(\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 h : Real, real_of_num(0) < h && h < d \226\134\146 norm((i : (Real, Cart[Real, M]) -> Cart[Real, N])(h, x) - (f : (Cart[Real, M]) -> Cart[Real, N])(x)) < e)))}
       #|  \226\136\131 k : (Cart[Real, M]) -> Bool, negligible(k) && (\226\136\128 x : Cart[Real, M], \226\136\128 e : Real, !IN(x, k) && real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 h : Real, real_of_num(0) < h && h < d \226\134\146 norm((i : (Real, Cart[Real, M]) -> Cart[Real, N])(h, x) - (f : (Cart[Real, M]) -> Cart[Real, N])(x)) < e)))
       #|  (i : (Real, Cart[Real, M]) -> Cart[Real, N]) == ((h : Real) => (x : Cart[Real, M]) => op_pct(inv(content((box : (Real, Cart[Real, M], Cart[Real, M]) -> Bool)(h, x))), integral(box(h, x), (f : (Cart[Real, M]) -> Cart[Real, N]))))
@@ -76662,7 +76662,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (k : Num)
       #|  (e : Real)
       #|  (y : Cart[Real, M])
-      #|  UNIONS {{x | forall d. &0 < d\n                     ==> ?h. &0 < h /\\ h < d /\\\n                             inv(&k + &1) <= dist(i h x,(f:real^M->real^N) x)}\n            |  k IN (:num)}
+      #|  UNIONS({{(x : Cart[Real, M]) | \226\136\128 d : Real, real_of_num(0) < d \226\134\146 (\226\136\131 h : Real, real_of_num(0) < h && h < d && inv(real_of_num((k : Num)) + real_of_num(1)) <= distance(((i : (Real, Cart[Real, M]) -> Cart[Real, N])(h, x), (f : (Cart[Real, M]) -> Cart[Real, N])(x))))} | IN(k, UNIV)})
       #|  {(x : Cart[Real, M]) | !(\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 h : Real, real_of_num(0) < h && h < d \226\134\146 norm((i : (Real, Cart[Real, M]) -> Cart[Real, N])(h, x) - (f : (Cart[Real, M]) -> Cart[Real, N])(x)) < e)))}
       #|  \226\136\131 k : (Cart[Real, M]) -> Bool, negligible(k) && (\226\136\128 x : Cart[Real, M], \226\136\128 e : Real, !IN(x, k) && real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, real_of_num(0) < d && (\226\136\128 h : Real, real_of_num(0) < h && h < d \226\134\146 norm((i : (Real, Cart[Real, M]) -> Cart[Real, N])(h, x) - (f : (Cart[Real, M]) -> Cart[Real, N])(x)) < e)))
       #|  (i : (Real, Cart[Real, M]) -> Cart[Real, N]) == ((h : Real) => (x : Cart[Real, M]) => op_pct(inv(content((box : (Real, Cart[Real, M], Cart[Real, M]) -> Bool)(h, x))), integral(box(h, x), (f : (Cart[Real, M]) -> Cart[Real, N]))))
@@ -77281,7 +77281,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (x : Cart[Real, M])
       #|  IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  s = UNIONS\n    {{x | x IN s /\\ norm(x:real^M) <= &n /\\\n          ?t. open t /\\ x IN t /\\\n              forall y. y IN s INTER t\n                  ==> norm(f y - f x:real^N) <= (&n + &1) * norm(y - x)} |\n     n IN (:num)}
+      #|  (s : (Cart[Real, M]) -> Bool) == UNIONS({{(x : Cart[Real, M]) | IN(x, s) && norm(x) <= real_of_num((n : Num)) && (\226\136\131 t : (Cart[Real, M]) -> Bool, open(t) && IN(x, t) && (\226\136\128 y : Cart[Real, M], IN(y, INTER(s, t)) \226\134\146 norm((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x)) <= (real_of_num(n) + real_of_num(1)) * norm(y - x)))} | IN(n, UNIV)})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (negligible : ((Cart[Real, M]) -> Bool) -> Bool)(s) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) \226\134\146 (\226\136\131 t : (Cart[Real, M]) -> Bool, \226\136\131 b : Real, (open : ((Cart[Real, M]) -> Bool) -> Bool)(t) && (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, t) && (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(s, t)) \226\134\146 (norm : (Cart[Real, N]) -> Real)(f(y) - f(x)) <= b * (norm : (Cart[Real, M]) -> Real)(y - x)))) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool, Cart[Real, N]) -> Bool)(f, s))
       #|  (b : Real)
       #|  (PCROSS : ((Cart[Real, Unit]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, Finite_sum[Unit, M]]) -> Bool)((UNIV : (Cart[Real, Unit]) -> Bool), (u : (Cart[Real, M]) -> Bool))
@@ -77421,7 +77421,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (n : Num)
       #|  IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  s = UNIONS\n    {{x | x IN s /\\ norm(x:real^M) <= &n /\\\n          onorm((f':real^M->real^M->real^N) x) <= &n} |\n     n IN (:num)}
+      #|  (s : (Cart[Real, M]) -> Bool) == UNIONS({{(x : Cart[Real, M]) | IN(x, s) && norm(x) <= real_of_num((n : Num)) && onorm((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N])(x)) <= real_of_num(n)} | IN(n, UNIV)})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) \226\134\146 (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f'(x), (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && (rank : (Cart[Cart[Real, M], N]) -> Num)((matrix : ((Cart[Real, M]) -> Cart[Real, N]) -> Cart[Cart[Real, M], N])(f'(x))) < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool, Cart[Real, N]) -> Bool)(f, s))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) \226\134\146 (\226\136\131 f' : (Cart[Real, M]) -> Cart[Real, N], (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f', (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && (rank : (Cart[Cart[Real, M], N]) -> Num)((matrix : ((Cart[Real, M]) -> Cart[Real, N]) -> Cart[Cart[Real, M], N])(f')) < (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (negligible : ((Cart[Real, N]) -> Bool) -> Bool)((IMAGE : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool, Cart[Real, N]) -> Bool)(f, s))
       #|  (f' : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
@@ -77662,23 +77662,23 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  {(x : _) | !(P : (_) -> Bool)(x)} == DIFF(UNIV, {(x : _) | P(x)})
       #|  ((x : Real) <= (a : Real)) == !(x > a)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (measurable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (UNIV : (Cart[Real, M]) -> Bool)) == (\226\136\128 a : Real, \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (lebesgue_measurable : ((Cart[Real, M]) -> Bool) -> Bool)({(x : Cart[Real, M]) | (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k) <= a}))
-      #|  {x | f x IN UNIONS D} = UNIONS {{x | f(x) IN s} | s IN D}
+      #|  {(x : _) | IN((f : (_) -> _)(x), UNIONS((D : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN(f(x), (s : (_) -> Bool))} | IN(s, D)})
       #|  {(x : Cart[Real, M]) | op_dollar((f : (Cart[Real, M]) -> Cart[Real, N])(x), (k : Num)) < (a : Real)} == {(x : Cart[Real, M]) | IN(f(x), {(y : Cart[Real, N]) | op_dollar(y, k) < a})}
       #|  (i : (Cart[Real, N]) -> Bool)
       #|  (i : (Cart[Real, N]) -> Bool)
       #|  (D : ((Cart[Real, N]) -> Bool) -> Bool)
-      #|  {x | (f:real^M->real^N) x IN interval(a,b)} =\n        INTERS {{x | a$k < f(x)$k} | k IN 1..dimindex(:N)} INTER\n        INTERS {{x | (--b)$k < --(f(x))$k} | k IN 1..dimindex(:N)}
+      #|  {(x : Cart[Real, M]) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)((f : (Cart[Real, M]) -> Cart[Real, N])(x), (interval : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool)(((a : Cart[Real, N]), (b : Cart[Real, N]))))} == (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (op_dollar : (Cart[Real, N], Num) -> Real)(a, (k : Num)) < (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)} | (IN : (Num, (Num) -> Bool) -> Bool)(k, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}), (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (op_dollar : (Cart[Real, N], Num) -> Real)(-b, (k : Num)) < (op_dollar : (Cart[Real, N], Num) -> Real)(-f(x), k)} | (IN : (Num, (Num) -> Bool) -> Bool)(k, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))}))
       #|  (\226\136\128 f : _, (P : (_) -> Bool)(f) \226\134\146 (Q : (_) -> Bool)(f)) && (\226\136\128 f : _, Q(f) \226\134\146 (R : (_) -> Bool)(f)) && (\226\136\128 f : _, R(f) \226\134\146 P(f)) \226\134\146 (\226\136\128 f : _, P(f) == Q(f)) && (\226\136\128 f : _, P(f) == R(f))
       #|  (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) == (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], lebesgue_measurable({(x : Cart[Real, M]) | IN(f(x), interval((a, b)))}))) && (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) == (\226\136\128 t : (Cart[Real, N]) -> Bool, open(t) \226\134\146 lebesgue_measurable({(x : Cart[Real, M]) | IN(f(x), t)})))
       #|  (\226\136\128 s : (_) -> Bool, (P : ((_) -> Bool) -> Bool)(DIFF(UNIV, s))) == (\226\136\128 s : (_) -> Bool, P(s))
       #|  DIFF(UNIV, {(x : _) | IN((f : (_) -> _)(x), (t : (_) -> Bool))}) == {(x : _) | IN(f(x), DIFF(UNIV, t))}
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) == (\226\136\128 t : (Cart[Real, N]) -> Bool, closed(t) \226\134\146 lebesgue_measurable({(x : Cart[Real, M]) | IN(f(x), t)}))
-      #|  {x | f x IN UNIONS D} = UNIONS {{x | f(x) IN s} | s IN D}
+      #|  {(x : _) | IN((f : (_) -> _)(x), UNIONS((D : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN(f(x), (s : (_) -> Bool))} | IN(s, D)})
       #|  (i : (Cart[Real, N]) -> Bool)
       #|  (i : (Cart[Real, N]) -> Bool)
       #|  (D : ((Cart[Real, N]) -> Bool) -> Bool)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) == (\226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], lebesgue_measurable({(x : Cart[Real, M]) | IN(f(x), interval([(a, b)]))}))
-      #|  {x | f x IN UNIONS u} = UNIONS {{x | f x IN t} | t IN u}
+      #|  {(x : _) | IN((f : (_) -> _)(x), UNIONS((u : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN(f(x), (t : (_) -> Bool))} | IN(t, u)})
       #|  {(x : _) | IN((f : (_) -> _)(x), DIFF(UNIV, (t : (_) -> Bool)))} == DIFF(UNIV, {(x : _) | IN(f(x), t)})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) == (\226\136\128 t : (Cart[Real, N]) -> Bool, borel(t) \226\134\146 lebesgue_measurable({(x : Cart[Real, M]) | IN(f(x), t)}))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 t : (Cart[Real, N]) -> Bool, measurable_on(f, UNIV) && open(t) \226\134\146 lebesgue_measurable({(x : Cart[Real, M]) | IN(f(x), t)})
@@ -77689,7 +77689,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (y : Cart[Real, N])
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
       #|  (x : Cart[Real, M])
-      #|  {x | (f:real^M->real^N) x$k <= a} =\n      UNIONS\n       {{x | forall j. 1 <= j /\\ j <= dimindex(:N) ==>\n                 f x$j <= ((lambda i. if i = k then a else &n):real^N)$j} |\n        n IN (:num)}
+      #|  {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), (k : Num)) <= (a : Real)} == (UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | \226\136\128 j : Num, 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), j) <= (op_dollar : (Cart[Real, N], Num) -> Real)((lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == k { a } else { real_of_num((n : Num)) }), j)} | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})
       #|  (k : Num)
       #|  (a : Real)
       #|  {(x : _) | \226\136\128 k : Num, (P : (Num) -> Bool)(k) \226\134\146 op_dollar((f : (_) -> Cart[Real, _])(x), k) <= (a : (Num) -> Real)(k)} == {(x : _) | IN(f(x), {(y : Cart[Real, _]) | \226\136\128 k : Num, P(k) \226\134\146 op_dollar(y, k) <= a(k)})}
@@ -77704,7 +77704,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (y : Cart[Real, N])
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
       #|  (x : Cart[Real, M])
-      #|  {x | (f:real^M->real^N) x$k < a} =\n      UNIONS\n       {{x | forall j. 1 <= j /\\ j <= dimindex(:N) ==>\n                 f x$j < ((lambda i. if i = k then a else &n):real^N)$j} |\n        n IN (:num)}
+      #|  {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), (k : Num)) < (a : Real)} == (UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | \226\136\128 j : Num, 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), j) < (op_dollar : (Cart[Real, N], Num) -> Real)((lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == k { a } else { real_of_num((n : Num)) }), j)} | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})
       #|  (k : Num)
       #|  (a : Real)
       #|  {(x : _) | \226\136\128 k : Num, (P : (Num) -> Bool)(k) \226\134\146 op_dollar((f : (_) -> Cart[Real, _])(x), k) < (a : (Num) -> Real)(k)} == {(x : _) | IN(f(x), {(y : Cart[Real, _]) | \226\136\128 k : Num, P(k) \226\134\146 op_dollar(y, k) < a(k)})}
@@ -77927,7 +77927,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (i : Real) < (f : Real) - (a : Real) \226\134\146 (\226\136\128 j : Real, j <= i && a < (t : Real) && t < a + j \226\134\146 real_of_num(0) < f - t)
       #|  (n : Num)
       #|  (x : Cart[Real, M])
-      #|  {x | (f:real^M->real^N) x$k <= a} =\n    INTERS {{x | (f x)$k <= t n} | n IN (:num)}
+      #|  {(x : Cart[Real, M]) | op_dollar((f : (Cart[Real, M]) -> Cart[Real, N])(x), (k : Num)) <= (a : Real)} == INTERS({{(x : Cart[Real, M]) | op_dollar(f(x), k) <= (t : (Num) -> Real)((n : Num))} | IN(n, UNIV)})
       #|  (t : (Num) -> Real)
       #|  inv(real_of_num((n : Num)) + real_of_num(1)) / real_of_num(2)
       #|  lift((a : Real) + inv(real_of_num((n : Num)) + real_of_num(1)) / real_of_num(2))
@@ -77955,7 +77955,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  1 <= (k : Num) && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  (k : Num)
       #|  (x : Cart[Real, M])
-      #|  {x | (f:real^M->real^N) x IN interval[a,b]} =\n    INTERS {{x | f x IN interval[u n,v n]} | n IN (:num)}
+      #|  {(x : Cart[Real, M]) | IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))} == INTERS({{(x : Cart[Real, M]) | IN(f(x), interval([((u : (Num) -> Cart[Real, N])((n : Num)), (v : (Num) -> Cart[Real, N])(n))]))} | IN(n, UNIV)})
       #|  (v : (Num) -> Cart[Real, N])
       #|  (u : (Num) -> Cart[Real, N])
       #|  ((b : Real) < b + (i : Real)) == (real_of_num(0) < i)
@@ -77974,7 +77974,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (y : Cart[Real, N])
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
       #|  (x : Cart[Real, M])
-      #|  {x | (f:real^M->real^N) x IN interval(a,b)} =\n    UNIONS {{x | f x IN interval(u n,v n)} | n IN (:num)}
+      #|  {(x : Cart[Real, M]) | IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), interval(((a : Cart[Real, N]), (b : Cart[Real, N]))))} == UNIONS({{(x : Cart[Real, M]) | IN(f(x), interval(((u : (Num) -> Cart[Real, N])((n : Num)), (v : (Num) -> Cart[Real, N])(n))))} | IN(n, UNIV)})
       #|  (v : (Num) -> Cart[Real, N])
       #|  (u : (Num) -> Cart[Real, N])
       #|  ((b : Real) < b + (i : Real)) == (real_of_num(0) < i)
@@ -77992,7 +77992,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  1 <= (k : Num) && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  (k : Num)
       #|  (x : Cart[Real, M])
-      #|  {x | forall i. 1 <= i /\\ i <= dimindex(:N)\n             ==> (f:real^M->real^N) x$i <= (a:real^N)$i} =\n    INTERS {{x | forall i. 1 <= i /\\ i <= dimindex(:N)\n                      ==> (f:real^M->real^N) x$i <= (u n:real^N)$i} |\n            n IN (:num)}
+      #|  {(x : Cart[Real, M]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i)} == (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)((u : (Num) -> Cart[Real, N])((n : Num)), i)} | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})
       #|  (u : (Num) -> Cart[Real, N])
       #|  ((b : Real) < b + (i : Real)) == (real_of_num(0) < i)
       #|  !(INTER(interior((s : (Cart[Real, _]) -> Bool)), (t : (Cart[Real, _]) -> Bool)) == {}) && SUBSET(interior(s), s) \226\134\146 (\226\136\131 x : Cart[Real, _], IN(x, t) && IN(x, s))
@@ -78012,7 +78012,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (y : Cart[Real, N])
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
       #|  (x : Cart[Real, M])
-      #|  {x | forall i. 1 <= i /\\ i <= dimindex(:N)\n             ==> (f:real^M->real^N) x$i < (a:real^N)$i} =\n    UNIONS {{x | forall i. 1 <= i /\\ i <= dimindex(:N)\n                      ==> (f:real^M->real^N) x$i < (u n:real^N)$i} |\n            n IN (:num)}
+      #|  {(x : Cart[Real, M]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), i) < (op_dollar : (Cart[Real, N], Num) -> Real)((a : Cart[Real, N]), i)} == (UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i) < (op_dollar : (Cart[Real, N], Num) -> Real)((u : (Num) -> Cart[Real, N])((n : Num)), i)} | (IN : (Num, (Num) -> Bool) -> Bool)(n, (UNIV : (Num) -> Bool))})
       #|  (u : (Num) -> Cart[Real, N])
       #|  ((b : Real) - (i : Real) < b) == (real_of_num(0) < i)
       #|  !(INTER(interior((s : (Cart[Real, _]) -> Bool)), (t : (Cart[Real, _]) -> Bool)) == {}) && SUBSET(interior(s), s) \226\134\146 (\226\136\131 x : Cart[Real, _], IN(x, t) && IN(x, s))
@@ -78093,7 +78093,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (l : List[Num]) == NIL
       #|  (l : List[Num])
       #|  \226\136\128 l : List[Num], SUBSET((f : (List[Num], Cart[Real, N]) -> Bool)(l), (e : (List[Num], Cart[Real, N]) -> Bool)(l))
-      #|  f = \\l. UNIONS { INTERS { (e:num list->real^N->bool)(list_of_seq s n) |\n                              1 <= n} |\n                     list_of_seq s (LENGTH l) = l}
+      #|  (f : (List[Num], Cart[Real, N]) -> Bool) == ((l : List[Num]) => UNIONS({INTERS({(e : (List[Num], Cart[Real, N]) -> Bool)(list_of_seq((s : (Num) -> Num), (n : Num))) | 1 <= n}) | list_of_seq(s, LENGTH(l)) == l}))
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (f : (_) -> _)(x) == (g : (_) -> _)(x)) \226\134\146 {f((x : _)) | P(x)} == {g((x : _)) | P(x)}
       #|  (l : List[Num]) => if l == NIL { UNIV } else { (e : (List[Num], Cart[Real, N]) -> Bool)(l) }
@@ -78390,7 +78390,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  real_of_num(0)
       #|  (e : Real)
       #|  (x : Cart[Real, M])
-      #|  s = INTERS {UNIONS {INTERS\n           {{x | dist((g:num->real^M->real^N) m x,g n x) <= e} |\n            m IN {p | N <= p} /\\ n IN {p | N <= p}} | N IN (:num)} |\n           e IN {q | q IN rational /\\ &0 < q}}
+      #|  (s : (Cart[Real, M]) -> Bool) == INTERS({UNIONS({INTERS({{(x : Cart[Real, M]) | distance(((g : (Num, Cart[Real, M]) -> Cart[Real, N])((m : Num), x), g((n : Num), x))) <= (e : Real)} | IN(m, {(p : Num) | (N : Num) <= p}) && IN(n, {(p : Num) | N <= p})}) | IN(N, UNIV)}) | IN(e, {(q : Real) | IN(q, rational) && real_of_num(0) < q})})
       #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])
       #|  SUC(0)
       #|  2
@@ -78799,7 +78799,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (\226\136\128 n : Num, (P : (Num) -> Bool)(n) \226\134\146 (Q : (Num) -> Bool)(n)) && (\226\136\128 n : Num, Q(n + 1) \226\134\146 P(n)) \226\134\146 (\226\136\128 n : Num, P(n)) == (\226\136\128 n : Num, Q(n))
       #|  IN((z : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (z : Cart[Real, M])
-      #|  INTERS\n     { UNIONS\n        { {z | (z:real^M) IN s /\\\n               z IN INTERS\n                { {z | &0 < dist (x,g z) /\\ dist(x,g z) < inv(&n + &1) /\\\n                       &0 < dist (y,g z) /\\ dist(y,g z) < inv(&n + &1)\n                       ==> dist((f:real^M->real^N->real^P) z x,f z y)\n                           <= inv(&m + &1) }\n                  | x IN UNIV /\\ y IN UNIV}}\n          | n IN (:num) }\n       | m IN (:num) }
+      #|  INTERS({UNIONS({{(z : Cart[Real, M]) | IN(z, (s : (Cart[Real, M]) -> Bool)) && IN(z, INTERS({{(z : Cart[Real, M]) | real_of_num(0) < distance(((x : Cart[Real, N]), (g : (Cart[Real, M]) -> Cart[Real, N])(z))) && distance((x, g(z))) < inv(real_of_num((n : Num)) + real_of_num(1)) && real_of_num(0) < distance(((y : Cart[Real, N]), g(z))) && distance((y, g(z))) < inv(real_of_num(n) + real_of_num(1)) \226\134\146 distance(((f : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P])(z, x), f(z, y))) <= inv(real_of_num((m : Num)) + real_of_num(1))} | IN(x, UNIV) && IN(y, UNIV)}))} | IN(n, UNIV)}) | IN(m, UNIV)})
       #|  \226\136\128 t : (Cart[Real, _]) -> Bool, (s : (Cart[Real, _]) -> Bool) == t && lebesgue_measurable(t) \226\134\146 lebesgue_measurable(s)
       #|  \226\136\128 f : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, lebesgue_measurable(s) && (\226\136\128 y : Cart[Real, N], continuous_on((x : Cart[Real, M]) => f(x, y), s)) && continuous_on(g, s) \226\134\146 lebesgue_measurable({(x : Cart[Real, M]) | IN(x, s) && (\226\136\131 l : Cart[Real, P], op_minus_minus_gt(f(x), l, at(g(x))))})
       #|  real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) * (real_of_num((dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))) * ((e : Real) / real_of_num(2) / real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) / real_of_num((dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))))
@@ -78911,7 +78911,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  IN((x : Real), rational) == rational(x)
       #|  (x : Cart[Real, M])
       #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) && (\226\136\128 x : _, Q(x) \226\134\146 P(x) == IN(x, (s : (_) -> Bool))) \226\134\146 {(x : _) | P(x)} == INTER({(x : _) | Q(x)}, s)
-      #|  {x | (f:real^M->real^N) differentiable at x} =\n    {x | f continuous at x} INTER\n    INTERS\n        { UNIONS\n           { UNIONS\n              { {x | f continuous at x} INTER\n                INTERS {{x | f continuous at x /\\\n                             (norm(y - x) < d\n                              ==> norm(f y - f x - A ** (y - x)) <=\n                                  e * norm(y - x))}\n                        |y| y IN UNIV}\n                |d| d IN {d | d IN rational /\\ &0 < d}}\n             |A| A IN {A | forall i j. 1 <= i /\\ i <= dimindex(:N) /\\\n                                 1 <= j /\\ j <= dimindex(:M)\n                                 ==> rational (A$i$j)}}\n        |e| e IN {e | e IN rational /\\ &0 < e}}
+      #|  {(x : Cart[Real, M]) | (differentiable : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)((f : (Cart[Real, M]) -> Cart[Real, N]), (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x))} == (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)({(x : Cart[Real, M]) | (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x))}, (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)({(x : Cart[Real, M]) | (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x))}, (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x)) && ((norm : (Cart[Real, M]) -> Real)(y - x) < d \226\134\146 (norm : (Cart[Real, N]) -> Real)(f(y) - f(x) - (matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])(A, y - x)) <= e * (norm : (Cart[Real, M]) -> Real)(y - x))} | y : Cart[Real, M] | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, (UNIV : (Cart[Real, M]) -> Bool))})) | d : Real | (IN : (Real, (Real) -> Bool) -> Bool)(d, {(d : Real) | (IN : (Real, (Real) -> Bool) -> Bool)(d, rational) && real_of_num(0) < d})}) | A : Cart[Cart[Real, M], N] | (IN : (Cart[Cart[Real, M], N], (Cart[Cart[Real, M], N]) -> Bool) -> Bool)(A, {(A : Cart[Cart[Real, M], N]) | \226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, i), j))})}) | e : Real | (IN : (Real, (Real) -> Bool) -> Bool)(e, {(e : Real) | (IN : (Real, (Real) -> Bool) -> Bool)(e, rational) && real_of_num(0) < e})}))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], borel({(x : Cart[Real, M]) | differentiable(f, at(x))})
       #|  (a : Real) <= inv((c : Real)) && (b : Real) <= inv(c) \226\134\146 a + b <= real_of_num(2) / c
       #|  ((a : Real) - (b : Real) <= real_of_num(0)) == (a <= b)
@@ -79112,7 +79112,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  continuous((f : (Cart[Real, M]) -> Cart[Real, N]), within(at((x : Cart[Real, M])), (s : (Cart[Real, M]) -> Bool)))
       #|  IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  {x | x IN s /\\ (f:real^M->real^N) continuous (at x within s)} INTER\n      INTERS\n          { UNIONS\n             { UNIONS\n                { {x | x IN s /\\ f continuous (at x within s)} INTER\n                  INTERS {{x | x IN s /\\ f continuous (at x within s) /\\\n                               (norm(y - x) < d\n                                ==> norm(f y - f x - A ** (y - x)) <=\n                                    e * norm(y - x))}\n                          |y| y IN s}\n                  |d| d IN {d | d IN rational /\\ &0 < d}}\n               |A| A IN {A | forall i j.   1 <= i /\\\n                                 i <= dimindex(:N) /\\\n                                 1 <= j /\\\n                                 j <= dimindex(:M)\n                                 ==> rational (A$i$j)}}\n          |e| e IN {e | e IN rational /\\ &0 < e}}
+      #|  (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)({(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) && (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)((f : (Cart[Real, M]) -> Cart[Real, N]), (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s))}, (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)({(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s))}, (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && ((norm : (Cart[Real, M]) -> Real)(y - x) < d \226\134\146 (norm : (Cart[Real, N]) -> Real)(f(y) - f(x) - (matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])(A, y - x)) <= e * (norm : (Cart[Real, M]) -> Real)(y - x))} | y : Cart[Real, M] | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s)})) | d : Real | (IN : (Real, (Real) -> Bool) -> Bool)(d, {(d : Real) | (IN : (Real, (Real) -> Bool) -> Bool)(d, rational) && real_of_num(0) < d})}) | A : Cart[Cart[Real, M], N] | (IN : (Cart[Cart[Real, M], N], (Cart[Cart[Real, M], N]) -> Bool) -> Bool)(A, {(A : Cart[Cart[Real, M], N]) | \226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, i), j))})}) | e : Real | (IN : (Real, (Real) -> Bool) -> Bool)(e, {(e : Real) | (IN : (Real, (Real) -> Bool) -> Bool)(e, rational) && real_of_num(0) < e})}))
       #|  \226\136\128 s : (Cart[Real, _]) -> Bool, (t : (Cart[Real, _]) -> Bool) == s && lebesgue_measurable(s) \226\134\146 lebesgue_measurable(t)
       #|  (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)({(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) && (continuous : ((Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)((f : (Cart[Real, M]) -> Cart[Real, N]), (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s))}, {(x : Cart[Real, M]) | \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, \226\136\131 A : Cart[Cart[Real, M], N], real_of_num(0) < d && (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, i), j))) && (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) && (norm : (Cart[Real, M]) -> Real)(y - x) < d \226\134\146 (norm : (Cart[Real, N]) -> Real)(f(y) - f(x) - (matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])(A, y - x)) <= e * (norm : (Cart[Real, M]) -> Real)(y - x)))})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, lebesgue_measurable(s) \226\134\146 lebesgue_measurable({(x : Cart[Real, M]) | IN(x, s) && differentiable(f, within(at(x), s))})
@@ -79333,7 +79333,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  IN((x : Real), rational) == rational(x)
       #|  IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  s INTER\n        INTERS\n          { UNIONS\n             { UNIONS\n                { s INTER\n                  INTERS {{x | x IN s /\\\n                               (norm(y - x) < d\n                                ==> norm((f:real^M->real^N) y - f x -\n                                         A ** (y - x)) <=\n                                    e * norm(y - x))}\n                          |y| y IN s}\n                  |d| d IN {d | d IN rational /\\ &0 < d}}\n               |A| A IN {A | A$m$n < b /\\\n                             forall i j. 1 <= i /\\\n                                   i <= dimindex(:N) /\\\n                                   1 <= j /\\\n                                   j <= dimindex(:M)\n                                   ==> rational (A$i$j)}}\n          |e| e IN {e | e IN rational /\\ &0 < e}}
+      #|  (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((s : (Cart[Real, M]) -> Bool), (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({(INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(s, (INTERS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && ((norm : (Cart[Real, M]) -> Real)(y - x) < d \226\134\146 (norm : (Cart[Real, N]) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x) - (matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])(A, y - x)) <= e * (norm : (Cart[Real, M]) -> Real)(y - x))} | y : Cart[Real, M] | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s)})) | d : Real | (IN : (Real, (Real) -> Bool) -> Bool)(d, {(d : Real) | (IN : (Real, (Real) -> Bool) -> Bool)(d, rational) && real_of_num(0) < d})}) | A : Cart[Cart[Real, M], N] | (IN : (Cart[Cart[Real, M], N], (Cart[Cart[Real, M], N]) -> Bool) -> Bool)(A, {(A : Cart[Cart[Real, M], N]) | (op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, (m : Num)), (n : Num)) < (b : Real) && (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, i), j)))})}) | e : Real | (IN : (Real, (Real) -> Bool) -> Bool)(e, {(e : Real) | (IN : (Real, (Real) -> Bool) -> Bool)(e, rational) && real_of_num(0) < e})}))
       #|  \226\136\128 s : (Cart[Real, _]) -> Bool, (t : (Cart[Real, _]) -> Bool) == s && lebesgue_measurable(s) \226\134\146 lebesgue_measurable(t)
       #|  {(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (s : (Cart[Real, M]) -> Bool)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : Real, \226\136\131 A : Cart[Cart[Real, M], N], real_of_num(0) < d && (op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, (m : Num)), (n : Num)) < (b : Real) && (\226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, M], Num) -> Real)((op_dollar : (Cart[Cart[Real, M], N], Num) -> Cart[Real, M])(A, i), j))) && (\226\136\128 y : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(y, s) && (norm : (Cart[Real, M]) -> Real)(y - x) < d \226\134\146 (norm : (Cart[Real, N]) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x) - (matrix_vector_mul : (Cart[Cart[Real, M], N], Cart[Real, M]) -> Cart[Real, N])(A, y - x)) <= e * (norm : (Cart[Real, M]) -> Real)(y - x))))}
       #|  (b : Real)
@@ -79430,7 +79430,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (e : Real)
       #|  !({(f : (_) -> _)((x : _)) | IN(x, UNIV)} == {})
       #|  (n : Num)
-      #|  s DIFF UNIONS {INTERS {k m | n <= m} | n IN (:num)}:real^M->bool
+      #|  DIFF((s : (Cart[Real, M]) -> Bool), UNIONS({INTERS({(k : (Num, Cart[Real, M]) -> Bool)((m : Num)) | (n : Num) <= m}) | IN(n, UNIV)}))
       #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])
       #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])
       #|  (k : (Num, Cart[Real, M]) -> Bool)
@@ -79539,9 +79539,9 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 FINITE(t) && CARD(t) <= (n : Num) \226\134\146 FINITE(s) && CARD(s) <= n
       #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET((c : (Num, Cart[Real, M]) -> Bool)(m), c(n))
       #|  (k : Num)
-      #|  INTERS {{y | FINITE {x | x IN c k /\\ (f:real^M->real^N) x = y} /\\\n                 CARD {x | x IN c k /\\ (f:real^M->real^N) x = y} <= n} |\n            k IN (:num)}
+      #|  INTERS({{(y : Cart[Real, N]) | FINITE({(x : Cart[Real, M]) | IN(x, (c : (Num, Cart[Real, M]) -> Bool)((k : Num))) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == y}) && CARD({(x : Cart[Real, M]) | IN(x, c(k)) && f(x) == y}) <= (n : Num)} | IN(k, UNIV)})
       #|  \226\136\128 s : (Cart[Real, M]) -> Bool, lebesgue_measurable(s) && s == (t : (Cart[Real, M]) -> Bool) \226\134\146 lebesgue_measurable(t)
-      #|  {y | FINITE(UNIONS {{x | x IN c k /\\ f x = (y:real^N)} | k IN (:num)}) /\\\n     CARD(UNIONS {{x:real^M | x IN c k /\\ f x = y} | k IN (:num)}) <= n}
+      #|  {(y : Cart[Real, N]) | FINITE(UNIONS({{(x : Cart[Real, M]) | IN(x, (c : (Num, Cart[Real, M]) -> Bool)((k : Num))) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == y} | IN(k, UNIV)})) && CARD(UNIONS({{(x : Cart[Real, M]) | IN(x, c((k : Num))) && f(x) == y} | IN(k, UNIV)})) <= (n : Num)}
       #|  (c : (Num, Cart[Real, M]) -> Bool)
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
@@ -79619,7 +79619,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, \226\136\128 e : Real, measurable_on(f, s) && lebesgue_measurable(s) && real_of_num(0) < e && SUBSET(IMAGE(f, s), u) && measurable(u) && (\226\136\128 t : (Cart[Real, M]) -> Bool, SUBSET(t, s) && negligible(t) \226\134\146 negligible(IMAGE(f, t))) \226\134\146 (\226\136\131 t : (Cart[Real, M]) -> Bool, SUBSET(t, s) && gdelta(t) && bounded(t) && measurable(t) && measurable(IMAGE(f, t)) && measure(DIFF(IMAGE(f, s), IMAGE(f, t))) < e && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, t) && IN(y, t) && f(x) == f(y) \226\134\146 x == y))
-      #|  UNIONS {{x | x IN c k /\\ (f:real^M->real^N) x = y} |\n                          (k:real^M->bool) IN u}
+      #|  UNIONS({{(x : Cart[Real, M]) | IN(x, (c : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((k : (Cart[Real, M]) -> Bool))) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == (y : Cart[Real, N])} | IN(k, (u : ((Cart[Real, M]) -> Bool) -> Bool))})
       #|  (y : Cart[Real, N])
       #|  IMAGE((f : (_) -> _), (u : (_) -> Bool)) == IMAGE(f, (t : (_) -> Bool)) \226\134\146 SUBSET(DIFF(IMAGE(f, (s : (_) -> Bool)), IMAGE(f, u)), IMAGE(f, DIFF(s, t)))
       #|  IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), DIFF((s : (Cart[Real, M]) -> Bool), UNIONS((u : ((Cart[Real, M]) -> Bool) -> Bool))))
@@ -79649,7 +79649,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  measure(UNION((t : (Cart[Real, M]) -> Bool), (u : (Cart[Real, M]) -> Bool))) <= (m : Real)
       #|  DIFF(IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool)), IMAGE(f, (h : (Num, Cart[Real, M]) -> Bool)(0)))
       #|  negligible(DIFF(IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool)), IMAGE(f, (t : (Cart[Real, M]) -> Bool))))
-      #|  UNIONS {{x | x IN h n /\\ (f:real^M->real^N) x = y} | n IN (:num)}
+      #|  UNIONS({{(x : Cart[Real, M]) | IN(x, (h : (Num, Cart[Real, M]) -> Bool)((n : Num))) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == (y : Cart[Real, N])} | IN(n, UNIV)})
       #|  \226\136\128 y : Cart[Real, N], COUNTABLE({(x : Cart[Real, M]) | IN(x, (t : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == y})
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  measurable((t : (Cart[Real, M]) -> Bool)) && measurable((u : (Cart[Real, M]) -> Bool)) && (\226\136\128 n : Num, measurable((h : (Num, Cart[Real, M]) -> Bool)(n)))
@@ -79668,7 +79668,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  compact((k : (Cart[Real, M]) -> Bool)) && continuous_on((f : (Cart[Real, M]) -> Cart[Real, N]), k) && (\226\136\128 t : (Cart[Real, M]) -> Bool, SUBSET(t, k) && negligible(t) \226\134\146 negligible(IMAGE(f, t)))
-      #|  UNIONS {{x | x IN k /\\ (f:real^M->real^N) x = y} | k IN u}
+      #|  UNIONS({{(x : Cart[Real, M]) | IN(x, (k : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == (y : Cart[Real, N])} | IN(k, (u : ((Cart[Real, M]) -> Bool) -> Bool))})
       #|  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == (y : Cart[Real, N])} == {(x : Cart[Real, M]) | IN(x, UNIONS((u : ((Cart[Real, M]) -> Bool) -> Bool))) && f(x) == y}
       #|  !COUNTABLE({(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == (y : Cart[Real, N])})
       #|  (\226\136\131 x : _, (P : (_) -> Bool)(x) && !(Q : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) \226\134\146 Q(x))
@@ -79677,7 +79677,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  !COUNTABLE((s : (_) -> Bool)) \226\134\146 !(s == {})
       #|  (y : Cart[Real, N])
       #|  (k : (Cart[Real, M]) -> Bool)
-      #|  UNIONS{{y | ~COUNTABLE {x | x IN k /\\ f x = y}} | k IN u}\n    UNION IMAGE (f:real^M->real^N) (s DIFF UNIONS u)
+      #|  UNION(UNIONS({{(y : Cart[Real, N]) | !COUNTABLE({(x : Cart[Real, M]) | IN(x, (k : (Cart[Real, M]) -> Bool)) && (f : (Cart[Real, M]) -> Cart[Real, N])(x) == y})} | IN(k, (u : ((Cart[Real, M]) -> Bool) -> Bool))}), IMAGE(f, DIFF((s : (Cart[Real, M]) -> Bool), UNIONS(u))))
       #|  (u : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
@@ -79775,8 +79775,8 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (n : Num)
       #|  (SUC((n : Num)) <= (k : Num)) == (n <= k && !(n == k))
       #|  (n : Num) => UNIONS({IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (t : (Num, Cart[Real, M]) -> Bool)((k : Num))) | n <= k})
-      #|  d = INTERS\n        {UNIONS {IMAGE (f:real^M->real^N) (t k) | n <= k} | n IN (:num)}
-      #|  c:real^M->bool = INTERS {UNIONS {t k | n <= k} | n IN (:num)}
+      #|  (d : (Cart[Real, N]) -> Bool) == INTERS({UNIONS({IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (t : (Num, Cart[Real, M]) -> Bool)((k : Num))) | (n : Num) <= k}) | IN(n, UNIV)})
+      #|  (c : (Cart[Real, M]) -> Bool) == INTERS({UNIONS({(t : (Num, Cart[Real, M]) -> Bool)((k : Num)) | (n : Num) <= k}) | IN(n, UNIV)})
       #|  (u : (Cart[Real, N]) -> Bool)
       #|  (n : Num)
       #|  \226\136\128 n : Num, measurable(IMAGE((f : (Cart[Real, M]) -> Cart[Real, N]), (t : (Num, Cart[Real, M]) -> Bool)(n)))
@@ -80079,11 +80079,11 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (v : (Cart[Real, M]) -> Bool) == INTER({(x : Cart[Real, M]) | IN(x, (u : (Num, Cart[Real, M]) -> Bool)((n : Num))) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (t : (Cart[Real, N]) -> Bool))}, ball(((a : Cart[Real, M]), inv(real_of_num(n) + real_of_num(1)) / real_of_num(2))))
       #|  (a : Cart[Real, M])
       #|  (n : Num)
-      #|  UNIONS {{x | x IN u n /\\ (f:real^M->real^N) x IN t} | n IN (:num)}
+      #|  UNIONS({{(x : Cart[Real, M]) | IN(x, (u : (Num, Cart[Real, M]) -> Bool)((n : Num))) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (t : (Cart[Real, N]) -> Bool))} | IN(n, UNIV)})
       #|  (u : (Num, Cart[Real, M]) -> Bool) == ((n : Num) => {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && (\226\136\128 y : Cart[Real, M], IN(y, s) && norm(y - x) < inv(real_of_num(n) + real_of_num(1)) \226\134\146 norm(y - x) <= (real_of_num(n) + real_of_num(1)) * norm((f : (Cart[Real, M]) -> Cart[Real, N])(y) - f(x)))})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) \226\134\146 (has_derivative : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Cart[Real, N], Net[Cart[Real, M]]) -> Bool)(f, f'(x), (within : (Net[Cart[Real, M]], (Cart[Real, M]) -> Bool) -> Net[Cart[Real, M]])((at : (Cart[Real, M]) -> Net[Cart[Real, M]])(x), s)) && (rank : (Cart[Cart[Real, M], N]) -> Num)((matrix : ((Cart[Real, M]) -> Cart[Real, N]) -> Cart[Cart[Real, M], N])(f'(x))) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (negligible : ((Cart[Real, N]) -> Bool) -> Bool)(t) \226\134\146 (negligible : ((Cart[Real, M]) -> Bool) -> Bool)({(x : Cart[Real, M]) | (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, s) && (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(f(x), t)})
       #|  :real
-      #|  forall a:real. {x | x IN s /\\ f x <= a} =\n              UNIONS {{x | x IN s /\\ f x = b} |b| b IN IMAGE f s /\\ b <= a}
+      #|  \226\136\128 a : Real, {(x : _) | IN(x, (s : (_) -> Bool)) && (f : (_) -> Real)(x) <= a} == UNIONS({{(x : _) | IN(x, s) && f(x) == b} | b : Real | IN(b, IMAGE(f, s)) && b <= a})
       #|  (k : Num) => integral(IMAGE((g : (Cart[Real, N]) -> Cart[Real, N]), (s : (Cart[Real, N]) -> Bool)), (h : (Num, Cart[Real, N]) -> Cart[Real, Unit])(k))
       #|  sequentially
       #|  (n : Num)
@@ -81685,7 +81685,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  :real
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  \226\136\128 m : Num, \226\136\128 n : Num, measurable((e : (Num, Num, Cart[Real, M]) -> Bool)(n, m))
-      #|  e = \\n m. UNIONS{{x | x IN s /\\\n                                    dist((f:num->real^M->real^N) k x,g x)\n                                      >= inv(&m + &1)} | n <= k}
+      #|  (e : (Num, Num, Cart[Real, M]) -> Bool) == ((n : Num) => (m : Num) => UNIONS({{(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && distance(((f : (Num, Cart[Real, M]) -> Cart[Real, N])((k : Num), x), (g : (Cart[Real, M]) -> Cart[Real, N])(x))) >= inv(real_of_num(m) + real_of_num(1))} | n <= k}))
       #|  measurable_on((g : (Cart[Real, M]) -> Cart[Real, N]), (s : (Cart[Real, M]) -> Bool))
       #|  \226\136\128 f : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, measurable(s) && negligible(t) && (\226\136\128 n : Num, measurable_on(f(n), s)) && (\226\136\128 x : Cart[Real, M], IN(x, DIFF(s, t)) \226\134\146 op_minus_minus_gt((n : Num) => f(n, x), g(x), sequentially)) \226\134\146 (\226\136\128 d : Real, real_of_num(0) < d \226\134\146 (\226\136\131 k : (Cart[Real, M]) -> Bool, SUBSET(k, s) && measurable(k) && measure(k) < d && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 N : Num, \226\136\128 n : Num, \226\136\128 x : Cart[Real, M], N <= n && IN(x, DIFF(s, k)) \226\134\146 distance((f(n, x), g(x))) < e))))
       #|  (k : Real) / real_of_num(6)
@@ -81862,7 +81862,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (x : Cart[Real, Unit])
       #|  SUBSET((s : (_) -> Bool), IMAGE((f : (_) -> _), (t : (_) -> Bool))) \226\134\146 (\226\136\128 x : _, IN(x, t) \226\134\146 (P : (_) -> Bool)(f(x))) \226\134\146 (\226\136\128 y : _, IN(y, s) \226\134\146 P(y))
       #|  \226\136\128 i : (Cart[Real, Unit]) -> Bool, IN(i, (d : ((Cart[Real, Unit]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 j : (Cart[Real, Unit]) -> Bool, IN(j, (D : ((Cart[Real, Unit]) -> Bool) -> Bool)) && SUBSET(i, j))
-      #|  UNIONS d =\n      UNIONS {UNIONS {i:real^1->bool | i IN d /\\ i SUBSET j} | j IN D}
+      #|  UNIONS((d : ((Cart[Real, Unit]) -> Bool) -> Bool)) == UNIONS({UNIONS({(i : (Cart[Real, Unit]) -> Bool) | IN(i, d) && SUBSET(i, (j : (Cart[Real, Unit]) -> Bool))}) | IN(j, (D : ((Cart[Real, Unit]) -> Bool) -> Bool))})
       #|  (e : Real) < (m : Real) \226\134\146 (a : Real) < e / real_of_num(3) \226\134\146 a >= m / pow(real_of_num(3), 1) \226\134\146 false
       #|  (d : ((Cart[Real, Unit]) -> Bool) -> Bool)
       #|  IMAGE((x : Cart[Real, Unit]) => interval([((u : (Cart[Real, Unit]) -> Cart[Real, Unit])(x), (v : (Cart[Real, Unit]) -> Cart[Real, Unit])(x))]), (p : (Cart[Real, Unit]) -> Bool))
@@ -82071,7 +82071,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (a : Cart[Real, Unit])
       #|  (x : Cart[Real, Unit]) => (f : (Cart[Real, Unit]) -> Cart[Real, Unit])(x) - op_pct((q : Real), x)
       #|  (q : Real)
-      #|  u UNION\n      UNIONS\n       {{x | x IN interval[a,b] /\\\n             forall n. ?u v.  u IN ball(x,inv(&n + &1)) /\\ u IN interval[a,b] /\\\n                        v IN ball(x,inv(&n + &1)) /\\ v IN interval[a,b] /\\\n                        ~(u = x) /\\ ~(v = x) /\\\n                        k / &3 <= (drop(f v) - drop(f x)) /\n                                  (drop v - drop x) - q /\\\n                        (drop(f u) - drop(f x)) / (drop u - drop x) - q\n                        <= --(k / &3)} |\n        q IN rational}
+      #|  UNION((u : (Cart[Real, Unit]) -> Bool), UNIONS({{(x : Cart[Real, Unit]) | IN(x, interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) && (\226\136\128 n : Num, \226\136\131 u : Cart[Real, Unit], \226\136\131 v : Cart[Real, Unit], IN(u, ball((x, inv(real_of_num(n) + real_of_num(1))))) && IN(u, interval([(a, b)])) && IN(v, ball((x, inv(real_of_num(n) + real_of_num(1))))) && IN(v, interval([(a, b)])) && !(u == x) && !(v == x) && (k : Real) / real_of_num(3) <= (drop((f : (Cart[Real, Unit]) -> Cart[Real, Unit])(v)) - drop(f(x))) / (drop(v) - drop(x)) - (q : Real) && (drop(f(u)) - drop(f(x))) / (drop(u) - drop(x)) - q <= -(k / real_of_num(3)))} | IN(q, rational)}))
       #|  (u : (Cart[Real, Unit]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Unit], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 k : Real, has_bounded_variation_on(f, interval([(a, b)])) && drop(a) < drop(b) && real_of_num(0) < k \226\134\146 negligible({(x : Cart[Real, Unit]) | IN(x, interval([(a, b)])) && (\226\136\128 n : Num, \226\136\131 u : Cart[Real, Unit], \226\136\131 v : Cart[Real, Unit], IN(u, ball((x, inv(real_of_num(n) + real_of_num(1))))) && IN(u, interval([(a, b)])) && IN(v, ball((x, inv(real_of_num(n) + real_of_num(1))))) && IN(v, interval([(a, b)])) && !(u == x) && !(v == x) && k <= (drop(f(v)) - drop(f(x))) / (drop(v) - drop(x)) - (drop(f(u)) - drop(f(x))) / (drop(u) - drop(x)))})
       #|  SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
@@ -82101,7 +82101,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (n : Num)
       #|  (n : Num)
       #|  (x : Cart[Real, Unit])
-      #|  UNIONS {{x | x IN interval[a,b] /\\\n                  forall n. ?u v. u IN ball(x,inv(&n + &1)) /\\ u IN interval[a,b] /\\\n                            v IN ball(x,inv(&n + &1)) /\\ v IN interval[a,b] /\\\n                            ~(u = x) /\\ ~(v = x) /\\\n                            inv(&m + &1)\n                            <= abs((drop(f v) - drop(f x)) /\n                                   (drop v - drop x) -\n                                   (drop(f u) - drop(f x)) /\n                                   (drop u - drop x))}\n              | m IN (:num)}
+      #|  UNIONS({{(x : Cart[Real, Unit]) | IN(x, interval([((a : Cart[Real, Unit]), (b : Cart[Real, Unit]))])) && (\226\136\128 n : Num, \226\136\131 u : Cart[Real, Unit], \226\136\131 v : Cart[Real, Unit], IN(u, ball((x, inv(real_of_num(n) + real_of_num(1))))) && IN(u, interval([(a, b)])) && IN(v, ball((x, inv(real_of_num(n) + real_of_num(1))))) && IN(v, interval([(a, b)])) && !(u == x) && !(v == x) && inv(real_of_num((m : Num)) + real_of_num(1)) <= abs((drop((f : (Cart[Real, Unit]) -> Cart[Real, Unit])(v)) - drop(f(x))) / (drop(v) - drop(x)) - (drop(f(u)) - drop(f(x))) / (drop(u) - drop(x))))} | IN(m, UNIV)})
       #|  !((x' : Real) == (x : Real)) \226\134\146 inv(x' - x) * (h : Real) * (x' - x) == h
       #|  op_pct((a : Real), (x : Cart[Real, Unit])) == op_pct(a, lift(drop(x)))
       #|  op_pct((a : Real), (y : Cart[Real, N]) - ((x : Cart[Real, N]) + (d : Cart[Real, N]))) == op_pct(a, y - x) - op_pct(a, d)
@@ -83006,7 +83006,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (e : Real) / real_of_num(2)
       #|  inv(real_of_num(2))
       #|  (e : Real)
-      #|  s INTER\n       INTERS {UNIONS {(t:num->real^M->bool) k | n <= k} | n IN (:num)}
+      #|  INTER((s : (Cart[Real, M]) -> Bool), INTERS({UNIONS({(t : (Num, Cart[Real, M]) -> Bool)((k : Num)) | (n : Num) <= k}) | IN(n, UNIV)}))
       #|  (t : (Num, Cart[Real, M]) -> Bool)
       #|  (r : (Num) -> Num)
       #|  (p : Num) < (m : Num) + (p + 1)
@@ -83109,7 +83109,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (c : Cart[Real, N])
       #|  (a : Cart[Real, M])
       #|  \226\136\128 a : Cart[Real, Finite_sum[M, N]], \226\136\128 b : Cart[Real, Finite_sum[M, N]], (\226\136\128 x : Cart[Real, M], measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), interval([(a, b)]))})) && has_integral((x : Cart[Real, M]) => lift(measure({(y : Cart[Real, N]) | IN(pastecart(x, y), interval([(a, b)]))})), lift(measure(interval([(a, b)]))), UNIV)
-      #|  {x | f x IN UNIONS s} = UNIONS {{x | f x IN d} | d IN s}
+      #|  {(x : _) | IN((f : (_) -> _)(x), UNIONS((s : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN(f(x), (d : (_) -> Bool))} | IN(d, s)})
       #|  ((a : Bool) \226\134\146 (c : Bool) \226\134\146 !(b : Bool)) \226\134\146 a \226\134\146 b \226\134\146 c \226\134\146 (d : Bool)
       #|  (!(a : Bool) || (b : Bool)) == (a \226\134\146 b)
       #|  ((p : Bool) || (q : Bool) \226\134\146 (r : Bool)) == ((p \226\134\146 r) && (q \226\134\146 r))
@@ -83121,7 +83121,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (k : (Cart[Real, Finite_sum[M, N]]) -> Bool)
       #|  (l : (Cart[Real, Finite_sum[M, N]]) -> Bool)
       #|  (k : (Cart[Real, Finite_sum[M, N]]) -> Bool)
-      #|  UNIONS { {x | (x:real^M)$i =\n                    fstcart(interval_lowerbound k:real^(M,N)finite_sum)$i} |\n               i IN 1..dimindex(:M) /\\ k IN d} UNION\n      UNIONS { {x | x$i = fstcart(interval_upperbound k)$i} |\n               i IN 1..dimindex(:M) /\\ k IN d}
+      #|  (UNION : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, (i : Num)) == (op_dollar : (Cart[Real, M], Num) -> Real)((fstcart : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, M])((interval_lowerbound : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Cart[Real, Finite_sum[M, N]])((k : (Cart[Real, Finite_sum[M, N]]) -> Bool))), i)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) && (IN : ((Cart[Real, Finite_sum[M, N]]) -> Bool, ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool) -> Bool)(k, (d : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool))}), (UNIONS : (((Cart[Real, M]) -> Bool) -> Bool, Cart[Real, M]) -> Bool)({{(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, (i : Num)) == (op_dollar : (Cart[Real, M], Num) -> Real)((fstcart : (Cart[Real, Finite_sum[M, N]]) -> Cart[Real, M])((interval_upperbound : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Cart[Real, Finite_sum[M, N]])((k : (Cart[Real, Finite_sum[M, N]]) -> Bool))), i)} | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) && (IN : ((Cart[Real, Finite_sum[M, N]]) -> Bool, ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool) -> Bool)(k, d)}))
       #|  \226\136\128 t : (Cart[Real, _]) -> Bool, negligible(t) && (a : Cart[Real, _]) == (b : Cart[Real, _]) && (\226\136\128 x : Cart[Real, _], IN(x, DIFF((s : (Cart[Real, _]) -> Bool), t)) \226\134\146 (g : (Cart[Real, _]) -> Cart[Real, _])(x) == (f : (Cart[Real, _]) -> Cart[Real, _])(x)) \226\134\146 has_integral(f, a, s) \226\134\146 has_integral(g, b, s)
       #|  \226\136\131 a : Cart[Real, Finite_sum[M, N]], \226\136\131 b : Cart[Real, Finite_sum[M, N]], (k : (Cart[Real, Finite_sum[M, N]]) -> Bool) == interval([(a, b)])
       #|  (k : (Cart[Real, Finite_sum[M, N]]) -> Bool)
@@ -83135,7 +83135,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (l : (Cart[Real, Finite_sum[M, N]]) -> Bool)
       #|  (k : (Cart[Real, Finite_sum[M, N]]) -> Bool)
       #|  (l : (Cart[Real, Finite_sum[M, N]]) -> Bool)
-      #|  UNIONS {{y | pastecart x y IN g n} | n IN (:num)} =\n       {y | pastecart x y IN UNIONS {g n | n IN (:num)}}
+      #|  UNIONS({{(y : Cart[_, _]) | IN(pastecart((x : Cart[_, _]), y), (g : (Num, Cart[_, Finite_sum[_, _]]) -> Bool)((n : Num)))} | IN(n, UNIV)}) == {(y : Cart[_, _]) | IN(pastecart(x, y), UNIONS({g((n : Num)) | IN(n, UNIV)}))}
       #|  measure((s : (Cart[Real, Finite_sum[M, N]]) -> Bool))
       #|  (g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)
       #|  (k : Num) => lift(measure((g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(k)))
@@ -83205,7 +83205,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (e : Real)
       #|  \226\136\128 x : Cart[Real, M], !IN(x, (t : (Cart[Real, M]) -> Bool)) \226\134\146 measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), (s : (Cart[Real, Finite_sum[M, N]]) -> Bool))})
       #|  (x : Cart[Real, M])
-      #|  {x | ~((if x IN\n         UNIONS {{x | ~measurable {y | pastecart x y IN g n}} | n | T} UNION k\n                then vec 0 else (h:real^M->real^1) x) = vec 0)} UNION\n        UNIONS {{x | ~measurable {y | pastecart x y IN\n                     (g:num->real^(M,N)finite_sum->bool) n}} | n | T} UNION\n        k
+      #|  UNION({(x : Cart[Real, M]) | !((if IN(x, UNION(UNIONS({{(x : Cart[Real, M]) | !measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), (g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(n))})} | n : Num | true}), (k : (Cart[Real, M]) -> Bool))) { vec(0) } else { (h : (Cart[Real, M]) -> Cart[Real, Unit])(x) }) == vec(0))}, UNION(UNIONS({{(x : Cart[Real, M]) | !measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), g(n))})} | n : Num | true}), k))
       #|  inv(real_of_num((N : Num)))
       #|  inv(real_of_num((n : Num)) + real_of_num(1))
       #|  measure((s : (Cart[Real, Finite_sum[M, N]]) -> Bool))
@@ -83216,14 +83216,14 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (e : Real)
       #|  (k : Num) => lift(measure((g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(k))) - lift(measure((f : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(k)))
       #|  sequentially
-      #|  UNIONS{ {x | ~measurable {y | pastecart x y IN\n                                 (g:num->real^(M,N)finite_sum->bool) n}}\n                           |  n IN (:num)} UNION k
+      #|  UNION(UNIONS({{(x : Cart[Real, M]) | !measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), (g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)((n : Num)))})} | IN(n, UNIV)}), (k : (Cart[Real, M]) -> Bool))
       #|  (h : (Cart[Real, M]) -> Cart[Real, Unit])
       #|  (n : Num)
       #|  (k : Num) => lift(measure({(y : Cart[Real, N]) | IN(pastecart((x : Cart[Real, M]), y), (g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(k))})) - lift(measure({(y : Cart[Real, N]) | IN(pastecart(x, y), (f : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(k))}))
       #|  sequentially
       #|  (x : Cart[Real, M])
       #|  (UNIV : (Cart[Real, M]) -> Bool)
-      #|  \\x. if x IN UNIONS{ {x | ~measurable {y:real^N | pastecart x y IN g n}}\n                           |  n IN (:num)} UNION k\n           then vec 0 else (h:real^M->real^1) x
+      #|  (x : Cart[Real, M]) => if IN(x, UNION(UNIONS({{(x : Cart[Real, M]) | !measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), (g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)((n : Num)))})} | IN(n, UNIV)}), (k : (Cart[Real, M]) -> Bool))) { vec(0) } else { (h : (Cart[Real, M]) -> Cart[Real, Unit])(x) }
       #|  \226\136\131 t : (Cart[Real, M]) -> Bool, negligible(t) && (\226\136\128 n : Num, \226\136\128 x : Cart[Real, M], !IN(x, t) \226\134\146 measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), (g : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(n))})) && (\226\136\128 x : Cart[Real, M], !IN(x, t) \226\134\146 op_minus_minus_gt((k : Num) => lift(measure({(y : Cart[Real, N]) | IN(pastecart(x, y), g(k))})) - lift(measure({(y : Cart[Real, N]) | IN(pastecart(x, y), (f : (Num, Cart[Real, Finite_sum[M, N]]) -> Bool)(k))})), vec(0), sequentially)) && (\226\136\128 x : Cart[Real, M], !IN(x, t) \226\134\146 (h : (Cart[Real, M]) -> Cart[Real, Unit])(x) == vec(0))
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (h : (Cart[Real, M]) -> Cart[Real, Unit])
@@ -83277,14 +83277,14 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (z : Cart[Real, Finite_sum[M, N]]) => pastecart(sndcart(z), fstcart(z))
       #|  IMAGE((z : Cart[Real, Finite_sum[M, N]]) => pastecart(sndcart(z), fstcart(z)), (s : (Cart[Real, Finite_sum[M, N]]) -> Bool))
       #|  \226\136\128 s : (Cart[Real, Finite_sum[M, N]]) -> Bool, measurable(s) \226\134\146 negligible({(y : Cart[Real, N]) | !measurable({(x : Cart[Real, M]) | IN(pastecart(x, y), s)})}) && has_integral((y : Cart[Real, N]) => lift(measure({(x : Cart[Real, M]) | IN(pastecart(x, y), s)})), lift(measure(s)), UNIV)
-      #|  {x | ?n. P n x} = UNIONS {{x | P n x} | n IN (:num)}
+      #|  {(x : _) | \226\136\131 n : Num, (P : (Num, _) -> Bool)(n, x)} == UNIONS({{(x : _) | P((n : Num), x)} | IN(n, UNIV)})
       #|  IN((x : Cart[Real, M]), interval([(-vec((m : Num)), vec(m))]))
       #|  (x : Cart[Real, M])
       #|  INTER((s : (Cart[Real, Finite_sum[M, N]]) -> Bool), PCROSS(interval([(-vec((m : Num)), vec(m))]), interval([(-vec((n : Num)), vec(n))])))
       #|  (n : Num)
       #|  (m : Num)
       #|  \226\136\128 s : (Cart[Real, Finite_sum[M, N]]) -> Bool, lebesgue_measurable(s) \226\134\146 negligible({(x : Cart[Real, M]) | !lebesgue_measurable({(y : Cart[Real, N]) | IN(pastecart(x, y), s)})})
-      #|  {x | ?n. P n x} = UNIONS {{x | P n x} | n IN (:num)}
+      #|  {(x : _) | \226\136\131 n : Num, (P : (Num, _) -> Bool)(n, x)} == UNIONS({{(x : _) | P((n : Num), x)} | IN(n, UNIV)})
       #|  IN((y : Cart[Real, N]), interval([(-vec((n : Num)), vec(n))]))
       #|  (y : Cart[Real, N])
       #|  INTER((s : (Cart[Real, Finite_sum[M, N]]) -> Bool), PCROSS(interval([(-vec((m : Num)), vec(m))]), interval([(-vec((n : Num)), vec(n))])))
@@ -83408,7 +83408,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  {(f : (_, _) -> _)(x, y) | x : _, y : _ | (P : (_) -> Bool)(x)} == {f((x : _), (y : _)) | IN(x, {(x : _) | P(x)}) && IN(y, UNIV)}
       #|  (q : Real)
       #|  {(f : (_, _) -> _)((x : _), (y : _)) | (P : (_, _) -> Bool)(x, y) \226\134\146 (Q : (_, _) -> Bool)(x, y)} == UNION({f((x : _), (y : _)) | Q(x, y)}, {f((x : _), (y : _)) | !P(x, y)})
-      #|  {pastecart (x:real^M) (y:real^N) | y$k <= (f x:real^N)$k} =\n    INTERS {{pastecart x y | (f x)$k < q ==> y$k < q} | q IN rational}
+      #|  {pastecart((x : Cart[Real, M]), (y : Cart[Real, N])) | op_dollar(y, (k : Num)) <= op_dollar((f : (Cart[Real, M]) -> Cart[Real, N])(x), k)} == INTERS({{pastecart((x : Cart[Real, M]), (y : Cart[Real, N])) | op_dollar(f(x), k) < (q : Real) \226\134\146 op_dollar(y, k) < q} | IN(q, rational)})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 k : Num, measurable_on(f, UNIV) \226\134\146 lebesgue_measurable({pastecart((x : Cart[Real, M]), (y : Cart[Real, N])) | op_dollar(y, k) <= op_dollar(f(x), k)})
       #|  (DIFF(UNIV, (s : (_) -> Bool)) == (t : (_) -> Bool)) == (s == DIFF(UNIV, t))
       #|  (z : Cart[Real, Finite_sum[M, N]]) => pastecart(fstcart(z), -sndcart(z))
@@ -83420,14 +83420,14 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  {(x : _) | !(P : (_) -> Bool)(x)} == DIFF(UNIV, {(x : _) | P(x)})
       #|  {(y : Cart[Real, N]) | (lebesgue_measurable : ((Cart[Real, M]) -> Bool) -> Bool)({(x : Cart[Real, M]) | \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) <= (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), k)})}
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
-      #|  { pastecart x y |\n        forall k. 1 <= k /\\ k <= dimindex(:N)\n            ==> (y:real^N)$k <= (f:real^M->real^N) x$k } =\n      INTERS {{ pastecart x y | (y:real^N)$k <= (f:real^M->real^N) x$k} |\n                k IN 1..dimindex(:N)}
+      #|  {(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) <= (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), k)} == (INTERS : (((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool, Cart[Real, Finite_sum[M, N]]) -> Bool)({{(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (op_dollar : (Cart[Real, N], Num) -> Real)(y, (k : Num)) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)} | (IN : (Num, (Num) -> Bool) -> Bool)(k, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})
       #|  ((p : Bool) \226\134\146 (q : Bool)) && (q \226\134\146 (r : Bool)) && (r \226\134\146 p) \226\134\146 p == q && p == r
       #|  (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (measurable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (UNIV : (Cart[Real, M]) -> Bool)) == (\226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (lebesgue_measurable : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool)({(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)}))) && (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (measurable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (UNIV : (Cart[Real, M]) -> Bool)) == (lebesgue_measurable : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool)({(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)}))
       #|  ((s : (_) -> Bool) == UNIV) == (DIFF(UNIV, s) == {})
       #|  {(x : _) | !(P : (_) -> Bool)(x)} == DIFF(UNIV, {(x : _) | P(x)})
       #|  {(y : Cart[Real, N]) | (lebesgue_measurable : ((Cart[Real, M]) -> Bool) -> Bool)({(x : Cart[Real, M]) | \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) < (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), k)})}
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
-      #|  { pastecart x y |\n        forall k. 1 <= k /\\ k <= dimindex(:N)\n            ==> (y:real^N)$k < (f:real^M->real^N) x$k } =\n      INTERS {{ pastecart x y | (y:real^N)$k < (f:real^M->real^N) x$k} |\n                k IN 1..dimindex(:N)}
+      #|  {(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) < (op_dollar : (Cart[Real, N], Num) -> Real)((f : (Cart[Real, M]) -> Cart[Real, N])(x), k)} == (INTERS : (((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool, Cart[Real, Finite_sum[M, N]]) -> Bool)({{(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (op_dollar : (Cart[Real, N], Num) -> Real)(y, (k : Num)) < (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)} | (IN : (Num, (Num) -> Bool) -> Bool)(k, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})
       #|  ((p : Bool) \226\134\146 (q : Bool)) && (q \226\134\146 (r : Bool)) && (r \226\134\146 p) \226\134\146 p == q && p == r
       #|  (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (measurable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (UNIV : (Cart[Real, M]) -> Bool)) == (\226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (lebesgue_measurable : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool)({(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) < (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)}))) && (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (measurable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (UNIV : (Cart[Real, M]) -> Bool)) == (lebesgue_measurable : ((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool)({(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(y, k) < (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), k)}))
       #|  !((a : Cart[Real, N]) == (b : Cart[Real, N]))
@@ -83444,7 +83444,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  \226\136\128 a : _, \226\136\128 b : _, IN(a, (s : (_) -> Bool)) && IN(b, s) && !(a == b) \226\134\146 !(\226\136\131 a : _, s == {a})
       #|  {(f : (_, _) -> _)((a : _), (x : _)) | IN(x, (s : (_) -> Bool))} == {f((w : _), (x : _)) | IN(w, {a}) && IN(x, s)}
       #|  (k : Num)
-      #|  {pastecart x y | (f:real^M->real^N) x = y} =\n      INTERS {{pastecart x y | y$i <= (f x)$i} DIFF\n              {pastecart x y | y$i < (f x)$i} | i IN 1..dimindex(:N)}
+      #|  {(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (f : (Cart[Real, M]) -> Cart[Real, N])(x) == y} == (INTERS : (((Cart[Real, Finite_sum[M, N]]) -> Bool) -> Bool, Cart[Real, Finite_sum[M, N]]) -> Bool)({(DIFF : ((Cart[Real, Finite_sum[M, N]]) -> Bool, (Cart[Real, Finite_sum[M, N]]) -> Bool, Cart[Real, Finite_sum[M, N]]) -> Bool)({(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (op_dollar : (Cart[Real, N], Num) -> Real)(y, (i : Num)) <= (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)}, {(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((x : Cart[Real, M]), (y : Cart[Real, N])) | (op_dollar : (Cart[Real, N], Num) -> Real)(y, i) < (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i)}) | (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))})
       #|  (vec : (Num) -> Cart[Real, Finite_sum[M, N]])(0)
       #|  {(pastecart : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, Finite_sum[M, N]])((vec : (Num) -> Cart[Real, M])(0), (x : Cart[Real, N])) | (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (UNIV : (Cart[Real, N]) -> Bool))}
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) \226\134\146 negligible({pastecart((x : Cart[Real, M]), (y : Cart[Real, N])) | f(x) == y})
@@ -83471,7 +83471,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (UNIV : (Cart[Real, Finite_sum[M, M]]) -> Bool)
       #|  ((z : Cart[Real, Finite_sum[M, M]]) => (f : (Cart[Real, M]) -> Cart[Real, N])(fstcart(z) - sndcart(z))) == o((z : Cart[Real, Finite_sum[M, M]]) => f(fstcart(z)), (z : Cart[Real, Finite_sum[M, M]]) => pastecart(fstcart(z) - sndcart(z), sndcart(z)))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) \226\134\146 measurable_on((z : Cart[Real, Finite_sum[M, M]]) => f(fstcart(z) - sndcart(z)), UNIV)
-      #|  {x | ~(forall i. i IN k ==> P i x)} = UNIONS {{x | ~P i x} | i IN k}
+      #|  {(x : _) | !(\226\136\128 i : _, IN(i, (k : (_) -> Bool)) \226\134\146 (P : (_, _) -> Bool)(i, x))} == UNIONS({{(x : _) | !P((i : _), x)} | IN(i, k)})
       #|  (m : Real)
       #|  {pastecart((x : Cart[Real, Finite_sum[M, N]]), (y : Cart[Real, P])) | (P : (Cart[Real, Finite_sum[M, N]], Cart[Real, P]) -> Bool)(x, y)}
       #|  (z : Cart[Real, Finite_sum[Finite_sum[M, N], P]]) => pastecart(fstcart(fstcart(z)), pastecart(sndcart(fstcart(z)), sndcart(z)))
@@ -84030,7 +84030,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], measurable_on(f, UNIV) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x + y) == f(x) + f(y)) \226\134\146 linear(f)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, UNIV) && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], f(x + y) == f(x) + f(y)) \226\134\146 linear(f)
       #|  {(x : _) | !(\226\136\128 i : _, IN(i, (s : (_) -> Bool)) \226\134\146 (P : (_, _) -> Bool)(i, x))} == UNIONS(IMAGE((i : _) => {(x : _) | !P(i, x)}, s))
-      #|  {x | forall i. P i ==> R i x} = INTERS {{x | R i x} | P i}
+      #|  {(x : _) | \226\136\128 i : _, (P : (_) -> Bool)(i) \226\134\146 (R : (_, _) -> Bool)(i, x)} == INTERS({{(x : _) | R((i : _), x)} | P(i)})
       #|  (s : Real)
       #|  (r : Real)
       #|  (p : Real)
@@ -84074,7 +84074,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  real_of_num(0) < (e : Real)
       #|  IN((x : Cart[Real, M]), (dd : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  UNIONS\n       { {x | ~(x IN dd) /\\\n              forall t. ~(t = vec 0) /\\ norm(t) < inv(&n + &1)\n                      ==> (drop(f(x + drop t % v)) - drop(f x)) / drop t >= r /\\\n                          (drop(f(x + drop t % w)) - drop(f x)) / drop t >= s /\\\n                          (drop(f(x + drop t % (v + w:real^M))) - drop(f x))\n                          / drop t <= p} | n IN (:num)}
+      #|  UNIONS({{(x : Cart[Real, M]) | !IN(x, (dd : (Cart[Real, M]) -> Bool)) && (\226\136\128 t : Cart[Real, Unit], !(t == vec(0)) && norm(t) < inv(real_of_num((n : Num)) + real_of_num(1)) \226\134\146 (drop((f : (Cart[Real, M]) -> Cart[Real, Unit])(x + op_pct(drop(t), (v : Cart[Real, M])))) - drop(f(x))) / drop(t) >= (r : Real) && (drop(f(x + op_pct(drop(t), (w : Cart[Real, M])))) - drop(f(x))) / drop(t) >= (s : Real) && (drop(f(x + op_pct(drop(t), v + w))) - drop(f(x))) / drop(t) <= (p : Real))} | IN(n, UNIV)})
       #|  \226\136\128 e : Real, real_of_num(0) < e \226\134\146 negligible({(x : Cart[Real, M]) | !IN(x, (dd : (Cart[Real, M]) -> Bool)) && (\226\136\128 t : Cart[Real, Unit], !(t == vec(0)) && norm(t) < e \226\134\146 (drop((f : (Cart[Real, M]) -> Cart[Real, Unit])(x + op_pct(drop(t), (v : Cart[Real, M])))) - drop(f(x))) / drop(t) >= (r : Real) && (drop(f(x + op_pct(drop(t), (w : Cart[Real, M])))) - drop(f(x))) / drop(t) >= (s : Real) && (drop(f(x + op_pct(drop(t), v + w))) - drop(f(x))) / drop(t) <= (p : Real))})
       #|  (e : Real)
       #|  (v : Cart[Real, M]) + (w : Cart[Real, M])
@@ -84132,7 +84132,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (v : Cart[Real, M])
       #|  (u : Cart[Real, M])
       #|  (x : Cart[Real, M])
-      #|  UNIONS\n       { UNIONS\n          {UNIONS {{x | ~(x IN dd) /\\\n                      drop((f':real^M->real^M->real^1) x v) >= r + e /\\\n                      drop(f' x w) >= s + e /\\\n                      drop(f' x (v + w)) <= p - e}\n                 |r,s| r IN rational /\\\n                       s IN {s | s IN rational /\\ p < r + s}}\n           |e,p| e IN {e | e IN rational /\\ &0 < e} /\\ p IN rational}\n        | v IN qq UNION IMAGE (--) qq /\\\n          w IN qq UNION IMAGE (--) qq}
+      #|  UNIONS({UNIONS({UNIONS({{(x : Cart[Real, M]) | !IN(x, (dd : (Cart[Real, M]) -> Bool)) && drop((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, Unit])(x, (v : Cart[Real, M]))) >= r + e && drop(f'(x, (w : Cart[Real, M]))) >= s + e && drop(f'(x, v + w)) <= p - e} | r : Real, s : Real | IN(r, rational) && IN(s, {(s : Real) | IN(s, rational) && p < r + s})}) | e : Real, p : Real | IN(e, {(e : Real) | IN(e, rational) && real_of_num(0) < e}) && IN(p, rational)}) | IN(v, UNION((qq : (Cart[Real, M]) -> Bool), IMAGE(op_minus_minus, qq))) && IN(w, UNION(qq, IMAGE(op_minus_minus, qq)))})
       #|  \226\136\128 v : Cart[Real, M], \226\136\128 w : Cart[Real, M], \226\136\128 r : Real, \226\136\128 s : Real, \226\136\128 p : Real, \226\136\128 e : Real, p < r + s && real_of_num(0) < e \226\134\146 negligible({(x : Cart[Real, M]) | !IN(x, (dd : (Cart[Real, M]) -> Bool)) && drop((f' : (Cart[Real, M], Cart[Real, M]) -> Cart[Real, Unit])(x, v)) >= r + e && drop(f'(x, w)) >= s + e && drop(f'(x, v + w)) <= p - e})
       #|  drop((x : Cart[Real, Unit])) * (y : Real) == y * drop(x)
       #|  (vec : (Num) -> Cart[Real, Unit])(0) == (op_pct : (Real, Cart[Real, Unit]) -> Cart[Real, Unit])((c : Real), (vec : (Num) -> Cart[Real, Unit])(0))
@@ -84189,7 +84189,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (v : Cart[Real, M])
       #|  (e : Real)
       #|  \226\136\128 x : Cart[Real, M], \226\136\128 v : Cart[Real, M], !IN(x, (dd : (Cart[Real, M]) -> Bool)) \226\134\146 (\226\136\131 l : Cart[Real, Unit], op_minus_minus_gt((t : Cart[Real, Unit]) => op_pct(inv(drop(t)), (f : (Cart[Real, M]) -> Cart[Real, Unit])(x + op_pct(drop(t), v)) - f(x)), l, at(vec(0))))
-      #|  dd = UNIONS { {x | ~(?l. ((\\t. inv(drop t) %\n                                   ((f:real^M->real^1)(x + drop t % v) - f x))\n                              --> l) (at (vec 0)))}\n                 | v IN qq}
+      #|  (dd : (Cart[Real, M]) -> Bool) == UNIONS({{(x : Cart[Real, M]) | !(\226\136\131 l : Cart[Real, Unit], op_minus_minus_gt((t : Cart[Real, Unit]) => op_pct(inv(drop(t)), (f : (Cart[Real, M]) -> Cart[Real, Unit])(x + op_pct(drop(t), (v : Cart[Real, M]))) - f(x)), l, at(vec(0))))} | IN(v, (qq : (Cart[Real, M]) -> Bool))})
       #|  (qq : (Cart[Real, M]) -> Bool)
       #|  SUBSET(UNIV, (s : (_) -> Bool)) == (s == UNIV)
       #|  (UNIV : (Cart[Real, M]) -> Bool)
@@ -84231,7 +84231,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, open(s) && (\226\136\131 B : Real, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y)) \226\134\146 negligible({(x : Cart[Real, M]) | IN(x, s) && !differentiable(f, at(x))})
       #|  UNION(frontier((s : (Cart[Real, M]) -> Bool)), {(x : Cart[Real, M]) | IN(x, interior(s)) && !differentiable((f : (Cart[Real, M]) -> Cart[Real, N]), at(x))})
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, negligible(frontier(s)) && (\226\136\131 B : Real, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) \226\134\146 norm(f(x) - f(y)) <= B * norm(x - y)) \226\134\146 negligible({(x : Cart[Real, M]) | IN(x, s) && !differentiable(f, at(x))})
-      #|  {x | x IN s /\\ P x /\\ ?i. i IN k /\\ R i x} =\n     UNIONS {{x | x IN s /\\ P x /\\ R i x} | i IN k}
+      #|  {(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x) && (\226\136\131 i : _, IN(i, (k : (_) -> Bool)) && (R : (_, _) -> Bool)(i, x))} == UNIONS({{(x : _) | IN(x, s) && P(x) && R((i : _), x)} | IN(i, k)})
       #|  drop((f : (Cart[Real, M]) -> Cart[Real, Unit])((x : Cart[Real, M])))
       #|  (x : Cart[Real, M])
       #|  (d : Real)
@@ -84271,7 +84271,7 @@ test "Multivariate/measure matches Multivariate/measure.ml" {
       #|  (x : Cart[Real, M])
       #|  negligible({(x : Cart[Real, _]) | IN(x, INTER((b : (Cart[Real, _]) -> Bool), (s : (Cart[Real, _]) -> Bool))) && (P : (Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)(x, INTER(b, s))}) && {(x : Cart[Real, _]) | IN(x, INTER(b, s)) && P(x, INTER(b, s))} == {(x : Cart[Real, _]) | IN(x, INTER(b, s)) && P(x, s)} \226\134\146 negligible({(x : Cart[Real, _]) | IN(x, INTER(b, s)) && P(x, s)})
       #|  (i : Num)
-      #|  UNIONS {{x | x IN b i INTER s /\\\n                 ~((u i:real^M->real^1) differentiable (at x within s))} UNION\n            {x | x IN b i INTER s /\\\n                 ~((v i:real^M->real^1) differentiable (at x within s))}\n            | i IN (:num)} UNION\n   {x | x IN s /\\\n        ~(((\\e. lift(measure(s INTER ball(x,drop e)) /\n                     measure(ball(x,drop e)))) --> vec 1)\n           (at (vec 0) within {t | &0 < drop t}))}
+      #|  UNION(UNIONS({UNION({(x : Cart[Real, M]) | IN(x, INTER((b : (Num, Cart[Real, M]) -> Bool)((i : Num)), (s : (Cart[Real, M]) -> Bool))) && !differentiable((u : (Num, Cart[Real, M]) -> Cart[Real, Unit])(i), within(at(x), s))}, {(x : Cart[Real, M]) | IN(x, INTER(b(i), s)) && !differentiable((v : (Num, Cart[Real, M]) -> Cart[Real, Unit])(i), within(at(x), s))}) | IN(i, UNIV)}), {(x : Cart[Real, M]) | IN(x, s) && !op_minus_minus_gt((e : Cart[Real, Unit]) => lift(measure(INTER(s, ball((x, drop(e))))) / measure(ball((x, drop(e))))), vec(1), within(at(vec(0)), {(t : Cart[Real, Unit]) | real_of_num(0) < drop(t)}))})
       #|  (B : (Cart[Real, M]) -> Real)((x : Cart[Real, M]))
       #|  real_of_num((M : Num))
       #|  (y : Cart[Real, M]) == (x : Cart[Real, M])
