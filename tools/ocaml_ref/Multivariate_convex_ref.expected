@@ -49706,7 +49706,7 @@ Multivariate/convex quotations (6096):
   dot((x : Cart[Real, N]) + (y : Cart[Real, N]), x + y) == dot(x, x) + dot(y, y) + real_of_num(2) * dot(x, y)
   op_pct(real_of_num(1) - (u : Real), (x : Cart[Real, N])) + op_pct(u, (y : Cart[Real, N])) - (a : Cart[Real, N]) == op_pct(real_of_num(1) - u, x - a) + op_pct(u, y - a)
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], (\226\136\128 x : Cart[Real, N], IN(x, s) \226\134\146 distance((x, a)) == distance((x, b))) \226\134\146 (\226\136\128 x : Cart[Real, N], IN(x, hull(affine, s)) \226\134\146 distance((x, a)) == distance((x, b)))
-  {x | forall y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
+  {(x : _) | \226\136\128 y : _, IN(y, (k : (_) -> Bool)) \226\134\146 (P : (_, _) -> Bool)(x, y)} == INTERS({{(x : _) | P(x, (y : _))} | IN(y, k)})
   \226\136\128 f : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, N], bilinear(f) && IN(x, hull(affine, s)) && IN(y, hull(affine, t)) \226\134\146 IN(f(x, y), hull(affine, {f((a : Cart[Real, M]), (b : Cart[Real, N])) | IN(a, s) && IN(b, t)}))
   (a : Cart[Real, N]) + op_pct((d : Real), (x : Cart[Real, N])) == op_pct(real_of_num(1) - d, a) + op_pct(d, a + x)
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 x : Cart[Real, N], \226\136\128 d : Real, affine(s) && IN(a, s) && IN(a + x, s) \226\134\146 IN(a + op_pct(d, x), s)
@@ -50839,7 +50839,7 @@ Multivariate/convex quotations (6096):
   (x : Cart[Real, N])
   \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hull(affine, {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, s) && IN(y, t)}) == {(x : Cart[Real, N]) + (y : Cart[Real, N]) | IN(x, hull(affine, s)) && IN(y, hull(affine, t))}
   \226\136\128 u : Real, \226\136\128 v : Real, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], \226\136\128 z : Cart[Real, N], u + v == real_of_num(1) \226\134\146 pastecart(z, op_pct(u, x) + op_pct(v, y)) == op_pct(u, pastecart(z, x)) + op_pct(v, pastecart(z, y)) && pastecart(op_pct(u, x) + op_pct(v, y), z) == op_pct(u, pastecart(x, z)) + op_pct(v, pastecart(y, z))
-  INTERS {{x | pastecart x y IN u} | y IN t} =\n     {x | forall y. y IN t ==> pastecart x y IN u}
+  INTERS({{(x : Cart[_, _]) | IN(pastecart(x, (y : Cart[_, _])), (u : (Cart[_, Finite_sum[_, _]]) -> Bool))} | IN(y, (t : (Cart[_, _]) -> Bool))}) == {(x : Cart[_, _]) | \226\136\128 y : Cart[_, _], IN(y, t) \226\134\146 IN(pastecart(x, y), u)}
   IN(pastecart((x : Cart[Real, M]), (y : Cart[Real, N])), PCROSS((s : (Cart[Real, M]) -> Bool), (t : (Cart[Real, N]) -> Bool)))
   (y : Cart[Real, N])
   (x : Cart[Real, M])
@@ -50847,7 +50847,7 @@ Multivariate/convex quotations (6096):
   (y : Cart[Real, N])
   (x : Cart[Real, M])
   (\226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hull(affine, PCROSS(s, t)) == PCROSS(hull(affine, s), hull(affine, t))) && (\226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hull(convex, PCROSS(s, t)) == PCROSS(hull(convex, s), hull(convex, t)))
-  {x | forall y. y IN k ==> P x y} = INTERS {{x | P x y} | y IN k}
+  {(x : _) | \226\136\128 y : _, IN(y, (k : (_) -> Bool)) \226\134\146 (P : (_, _) -> Bool)(x, y)} == INTERS({{(x : _) | P(x, (y : _))} | IN(y, k)})
   \226\136\128 f : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, N], bilinear(f) && IN(x, hull(convex, s)) && IN(y, hull(convex, t)) \226\134\146 IN(f(x, y), hull(convex, {f((a : Cart[Real, M]), (b : Cart[Real, N])) | IN(a, s) && IN(b, t)}))
   \226\136\128 s : (Cart[Real, _]) -> Bool, subspace(s) \226\134\146 affine(s)
   \226\136\128 s : (Cart[Real, _]) -> Bool, affine(s) \226\134\146 convex(s)
@@ -51669,7 +51669,7 @@ Multivariate/convex quotations (6096):
   subtopology(euclidean, (s : (Cart[Real, N]) -> Bool))
   SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) && !SUBSET(s, t) \226\134\146 PSUBSET(t, s)
   (s : (Cart[Real, N]) -> Bool) == {}
-  forall s:real^N->bool k.\n          affine s /\\ &2 <= aff_dim s /\\ COUNTABLE k /\\\n          (forall a. a IN k ==> ~(s SUBSET {x | orthogonal a x}))\n          ==> UNIONS {{x | x IN s /\\ orthogonal a x} | a IN k} UNION\n              UNIONS {{x | x IN s /\\ x IN span {a}} | a IN k} PSUBSET s
+  \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 k : (Cart[Real, N]) -> Bool, affine(s) && int_of_num(2) <= aff_dim(s) && COUNTABLE(k) && (\226\136\128 a : Cart[Real, N], IN(a, k) \226\134\146 !SUBSET(s, {(x : Cart[Real, N]) | orthogonal(a, x)})) \226\134\146 PSUBSET(UNION(UNIONS({{(x : Cart[Real, N]) | IN(x, s) && orthogonal((a : Cart[Real, N]), x)} | IN(a, k)}), UNIONS({{(x : Cart[Real, N]) | IN(x, s) && IN(x, span({(a : Cart[Real, N])}))} | IN(a, k)})), s)
   1 <= SUC((n : Num))
   !(dot((h : (Cart[Real, N]) -> Cart[Real, N])(op_pct(inv(norm((a : Cart[Real, N]))), a)), h((x : Cart[Real, N]))) == real_of_num(0))
   (j : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
@@ -52235,7 +52235,7 @@ Multivariate/convex quotations (6096):
   (x : Cart[Real, N])
   \226\136\128 s : (Cart[Real, N]) -> Bool, closed(s) && convex(s) \226\134\146 s == INTERS({(h : (Cart[Real, N]) -> Bool) | SUBSET(s, h) && (\226\136\131 a : Cart[Real, N], \226\136\131 b : Real, h == {(x : Cart[Real, N]) | dot(a, x) <= b})})
   (polar_dual : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((s : (Cart[Real, N]) -> Bool)) == {(x : Cart[Real, N]) | \226\136\128 u : Cart[Real, N], IN(u, s) \226\134\146 dot(u, x) >= -real_of_num(1)}
-  forall s:real^N->bool.\n        polar_dual s = INTERS {{x | u dot x >= -- &1} | u IN s}
+  \226\136\128 s : (Cart[Real, N]) -> Bool, polar_dual(s) == INTERS({{(x : Cart[Real, N]) | dot((u : Cart[Real, N]), x) >= -real_of_num(1)} | IN(u, s)})
   \226\136\128 s : (Cart[Real, N]) -> Bool, closed(polar_dual(s))
   \226\136\128 s : (Cart[Real, N]) -> Bool, convex(polar_dual(s))
   \226\136\128 s : (Cart[Real, N]) -> Bool, IN(vec(0), polar_dual(s))
@@ -52666,7 +52666,7 @@ Multivariate/convex quotations (6096):
   (r : Cart[Real, Unit])
   ((p : Bool) \226\134\146 (q : Bool) && (r : Bool)) == ((p \226\134\146 q) && (p \226\134\146 r))
   (a : Cart[Real, N])
-  { p INTER\n         {z | abs(norm(b - fstcart z:real^N) - drop(sndcart z) * c) <= e} INTER\n         {z | u dot (fstcart z) - k <= e} | &0 < e}
+  {INTER((p : (Cart[Real, Finite_sum[N, Unit]]) -> Bool), INTER({(z : Cart[Real, Finite_sum[N, Unit]]) | abs(norm((b : Cart[Real, N]) - fstcart(z)) - drop(sndcart(z)) * (c : Real)) <= (e : Real)}, {(z : Cart[Real, Finite_sum[N, Unit]]) | dot((u : Cart[Real, N]), fstcart(z)) - (k : Real) <= e})) | real_of_num(0) < e}
   (k : Real)
   (u : Cart[Real, N])
   (UNIV : (Cart[Real, Unit]) -> Bool)
