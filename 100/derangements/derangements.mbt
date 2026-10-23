@@ -54,7 +54,7 @@ fn step_4() -> Unit raise {
 ///|
 /// compose
 fn step_5() -> Unit raise {
-  compose_c.set(@pair.new_definition(@parser.parse_term("(r % s) (x,y) <=> ?z. r(x,z) /\\ s(z,y)")))
+  compose_c.set(@pair.new_definition(@term_syntax.parse_term("(op_pct : (((_, _)) -> Bool, ((_, _)) -> Bool, (_, _)) -> Bool)((r : ((_, _)) -> Bool), (s : ((_, _)) -> Bool), ((x : _), (y : _))) == (∃ z : _, r((x, z)) && s((z, y)))")))
 }
 
 ///|
@@ -569,7 +569,7 @@ fn step_35() -> Unit raise {
   let t61 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conj_tac, @simp.gen_rewrite_tac(fn(x58 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x58
   }, @list.List([@sets.extension()]))), t59), t60)
-  let lemma = @tactics.prove(@parser.parse_term("{p | ?y. y IN t /\\ A y p} = UNIONS {{p | A y p} | y IN t} /\\\n     {p | ?q. p = (a,y) INSERT q /\\ A y q} =\n           IMAGE (\\q. (a,y) INSERT q) {q | A y q}"), t61)
+  let lemma = @tactics.prove(@term_syntax.parse_term("{(p : ((_, _)) -> Bool) | ∃ y : _, IN(y, (t : (_) -> Bool)) && (A : (_, ((_, _)) -> Bool) -> Bool)(y, p)} == UNIONS({{(p : ((_, _)) -> Bool) | A((y : _), p)} | IN(y, t)}) && {(p : ((_, _)) -> Bool) | ∃ q : ((_, _)) -> Bool, p == INSERT(((a : _), (y : _)), q) && A(y, q)} == IMAGE((q : ((_, _)) -> Bool) => INSERT((a, y), q), {(q : ((_, _)) -> Bool) | A(y, q)})"), t61)
   let t96 = @tactics.repeat_tac(@tactics.pop_assum(fn(x93 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s94 = @tactics.mp_tac(x93)
     fn(x95 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
