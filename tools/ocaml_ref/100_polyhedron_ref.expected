@@ -61862,12 +61862,12 @@ Warning: inventing type variables
   (a : Bool) \226\134\146 (a && (b : Bool)) == b
   IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
   (y : Cart[Real, N])
-  INTERS {{x | fa(h:real^N->bool) dot x <= &0} | h IN J} INTER\n        INTERS {{x:real^N | fa h dot x = &0} | h IN H DIFF J} =\n        INTERS {s INTER {x | fa h dot x = &0} | h IN H DIFF J}
+  INTER(INTERS({{(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) <= real_of_num(0)} | IN(h, (J : ((Cart[Real, N]) -> Bool) -> Bool))}), INTERS({{(x : Cart[Real, N]) | dot(fa((h : (Cart[Real, N]) -> Bool)), x) == real_of_num(0)} | IN(h, DIFF((H : ((Cart[Real, N]) -> Bool) -> Bool), J))})) == INTERS({INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot(fa((h : (Cart[Real, N]) -> Bool)), x) == real_of_num(0)}) | IN(h, DIFF(H, J))})
   (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 s == {f((x : _)) | IN(x, s)}
   {(f : (_) -> _)(x) | x : _ | false} == {}
   (J : ((Cart[Real, N]) -> Bool) -> Bool) == (H : ((Cart[Real, N]) -> Bool) -> Bool)
-  closure (INTERS {{x | fa h dot x = &0} | h IN H DIFF J}) =\n       INTERS {{x | (fa:(real^N->bool)->real^N) h dot x = &0} | h IN H DIFF J}
-  IMAGE closure {{x | fa h dot x < &0} | h IN J} =\n        {{x | (fa:(real^N->bool)->real^N) h dot x <= &0} | h IN J}
+  closure(INTERS({{(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) == real_of_num(0)} | IN(h, DIFF((H : ((Cart[Real, N]) -> Bool) -> Bool), (J : ((Cart[Real, N]) -> Bool) -> Bool)))})) == INTERS({{(x : Cart[Real, N]) | dot(fa((h : (Cart[Real, N]) -> Bool)), x) == real_of_num(0)} | IN(h, DIFF(H, J))})
+  IMAGE(closure, {{(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) < real_of_num(0)} | IN(h, (J : ((Cart[Real, N]) -> Bool) -> Bool))}) == {{(x : Cart[Real, N]) | dot(fa((h : (Cart[Real, N]) -> Bool)), x) <= real_of_num(0)} | IN(h, J)}
   SUBSET((s : (_) -> Bool), topspace((tp : Topology[_]))) && (t : (_) -> Bool) == s \226\134\146 open_in(subtopology(tp, t), s)
   (h : (Cart[Real, N]) -> Bool)
   (h : (Cart[Real, N]) -> Bool)
@@ -61883,7 +61883,7 @@ Warning: inventing type variables
   SUBSET({(x : _) | IN(x, (s : (_) -> Bool)) && (P : (_) -> Bool)(x)}, s)
   {(h : (Cart[Real, N]) -> Bool) | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && real_sgn(dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), (z : Cart[Real, N]))) == -real_of_num(1)}
   (z : Cart[Real, N])
-  ?J. J SUBSET H /\\\n            c = INTERS {{x | (fa(h:real^N->bool)) dot x < &0} | h IN J} INTER\n                INTERS {{x:real^N | (fa h) dot x = &0} | h IN (H DIFF J)}
+  \226\136\131 J : ((Cart[Real, N]) -> Bool) -> Bool, SUBSET(J, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && (c : (Cart[Real, N]) -> Bool) == INTER(INTERS({{(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) < real_of_num(0)} | IN(h, J)}), INTERS({{(x : Cart[Real, N]) | dot(fa((h : (Cart[Real, N]) -> Bool)), x) == real_of_num(0)} | IN(h, DIFF(H, J))}))
   relative_interior((c : (Cart[Real, N]) -> Bool))
   (c : (Cart[Real, N]) -> Bool)
   IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
@@ -61911,7 +61911,7 @@ Warning: inventing type variables
   IN((h : (Cart[Real, N]) -> Bool), (H : ((Cart[Real, N]) -> Bool) -> Bool))
   (h : (Cart[Real, N]) -> Bool)
   (x : Cart[Real, N])
-  relative_interior f =\n          INTERS {(if (h:real^N->bool) IN J then {x | fa h dot x < &0}\n                   else if h IN K then {x:real^N | fa h dot x = &0}\n                   else if relative_interior f SUBSET {x | fa h dot x = &0}\n                   then {x | fa h dot x = &0}\n                   else {x | fa h dot x < &0}) | h IN H}
+  relative_interior((f : (Cart[Real, N]) -> Bool)) == INTERS({if IN((h : (Cart[Real, N]) -> Bool), (J : ((Cart[Real, N]) -> Bool) -> Bool)) { {(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) < real_of_num(0)} } else { if IN(h, (K : ((Cart[Real, N]) -> Bool) -> Bool)) { {(x : Cart[Real, N]) | dot(fa(h), x) == real_of_num(0)} } else { if SUBSET(relative_interior(f), {(x : Cart[Real, N]) | dot(fa(h), x) == real_of_num(0)}) { {(x : Cart[Real, N]) | dot(fa(h), x) == real_of_num(0)} } else { {(x : Cart[Real, N]) | dot(fa(h), x) < real_of_num(0)} } } } | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool))})
   !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
   DISJOINT((J : ((Cart[Real, N]) -> Bool) -> Bool), (K : ((Cart[Real, N]) -> Bool) -> Bool))
   !(relative_interior((f : (Cart[Real, N]) -> Bool)) == {})
@@ -61964,7 +61964,7 @@ Warning: inventing type variables
   (y : Cart[Real, N])
   {(h : (Cart[Real, N]) -> Bool) | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && SUBSET((f : (Cart[Real, N]) -> Bool), INTER((s : (Cart[Real, N]) -> Bool), {(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), x) == real_of_num(0)}))} == {}
   (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (f : (_) -> _)(x) == x) \226\134\146 {f((x : _)) | IN(x, s)} == s
-  INTERS {{x:real^N | fa(h:real^N->bool) dot x <= &0} | h IN H} = s
+  INTERS({{(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) <= real_of_num(0)} | IN(h, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) == (s : (Cart[Real, N]) -> Bool)
   (f : (Cart[Real, N]) -> Bool)
   (h : (Cart[Real, N]) -> Bool) => real_of_num(0)
   (fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])
@@ -61976,7 +61976,7 @@ Warning: inventing type variables
   {(f : (_) -> _)(x) | x : _ | false} == {}
   ({} : ((Cart[Real, N]) -> Bool) -> Bool)
   (f : (Cart[Real, N]) -> Bool) == (s : (Cart[Real, N]) -> Bool)
-  ?J. J SUBSET H /\\\n            f = INTERS {{x:real^N | fa h dot x <= &0} | h IN H} INTER\n                INTERS {{x | fa(h:real^N->bool) dot x = &0} | h IN J}
+  \226\136\131 J : ((Cart[Real, N]) -> Bool) -> Bool, SUBSET(J, (H : ((Cart[Real, N]) -> Bool) -> Bool)) && (f : (Cart[Real, N]) -> Bool) == INTER(INTERS({{(x : Cart[Real, N]) | dot((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])((h : (Cart[Real, N]) -> Bool)), x) <= real_of_num(0)} | IN(h, H)}), INTERS({{(x : Cart[Real, N]) | dot(fa((h : (Cart[Real, N]) -> Bool)), x) == real_of_num(0)} | IN(h, J)}))
   !((f : (Cart[Real, N]) -> Bool) == {})
   closure((f : (Cart[Real, N]) -> Bool))
   closure(relative_interior((f : (Cart[Real, N]) -> Bool))) == f
