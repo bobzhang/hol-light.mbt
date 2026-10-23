@@ -21026,7 +21026,7 @@ Multivariate/metric quotations (14748):
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, s) == s
   \226\136\128 top : Topology[_], \226\136\128 top' : Topology[_], \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, continuous_map((subtopology(top, t), top'), f) && SUBSET(s, t) \226\134\146 continuous_map((subtopology(top, s), top'), f)
   \226\136\128 f : (A) -> B, \226\136\128 top : Topology[B], \226\136\128 u : (A) -> Bool, continuous_map((discrete_topology(u), top), f) == SUBSET(IMAGE(f, u), topspace(top))
-  {x | x IN topspace top /\\ g x IN u} =\n    UNIONS {{x | x IN (t i) /\\ ((f:K->A->B) i x) IN u} |\n            i IN k}
+  {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((g : (A) -> B)(x), (u : (B) -> Bool))} == UNIONS({{(x : A) | IN(x, (t : (K, A) -> Bool)((i : K))) && IN((f : (K, A) -> B)(i, x), u)} | IN(i, (k : (K) -> Bool))})
   (u : (B) -> Bool)
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, s) == s
   \226\136\128 i : K, IN(i, (k : (K) -> Bool)) \226\134\146 SUBSET((t : (K, A) -> Bool)(i), topspace((top : Topology[A])))
@@ -21039,7 +21039,7 @@ Multivariate/metric quotations (14748):
   (v : (A) -> Bool)
   (x : A)
   {(y : _) | IN(y, {(f : (_) -> _)((x : _)) | IN(x, (s : (_) -> Bool))}) && (P : (_) -> Bool)(y)} == IMAGE(f, {(x : _) | IN(x, s) && P(f(x))})
-  {x | x IN topspace top /\\ g x IN u} =\n    UNIONS {{x | x IN (t i) /\\ ((f:K->A->B) i x) IN u} |\n            i IN k}
+  {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((g : (A) -> B)(x), (u : (B) -> Bool))} == UNIONS({{(x : A) | IN(x, (t : (K, A) -> Bool)((i : K))) && IN((f : (K, A) -> B)(i, x), u)} | IN(i, (k : (K) -> Bool))})
   (u : (B) -> Bool)
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 INTER(t, s) == s
   \226\136\128 i : K, IN(i, (k : (K) -> Bool)) \226\134\146 SUBSET((t : (K, A) -> Bool)(i), topspace((top : Topology[A])))
@@ -21394,11 +21394,11 @@ Multivariate/metric quotations (14748):
   (v : (B) -> Bool)
   CROSS((u : (A) -> Bool), topspace((top2 : Topology[B])))
   (u : (A) -> Bool)
-  product_topology t (tops:K->A topology) =\n        topology\n          (ARBITRARY UNION_OF\n             ((FINITE INTERSECTION_OF\n              { {x:K->A | x k IN u} | k,u | k IN t /\\ open_in (tops k) u})\n              relative_to {x | EXTENSIONAL t x /\\\n                               forall k. k IN t ==> x k IN topspace(tops k)}))
+  (product_topology : ((K) -> Bool, (K) -> Topology[A]) -> Topology[(K) -> A])((t : (K) -> Bool), (tops : (K) -> Topology[A])) == topology(UNION_OF(ARBITRARY, relative_to(INTERSECTION_OF(FINITE, {{(x : (K) -> A) | IN(x(k), u)} | k : K, u : (A) -> Bool | IN(k, t) && open_in(tops(k), u)}), {(x : (K) -> A) | EXTENSIONAL(t, x) && (\226\136\128 k : K, IN(k, t) \226\134\146 IN(x(k), topspace(tops(k))))})))
   \226\136\128 tops : (K) -> Topology[A], \226\136\128 t : (K) -> Bool, topspace(product_topology(t, tops)) == cartesian_product(t, o(topspace, tops))
   \226\136\128 tops : (K) -> Topology[A], \226\136\128 t : (K) -> Bool, topspace(product_topology(t, tops)) == {(x : (K) -> A) | EXTENSIONAL(t, x) && (\226\136\128 k : K, IN(k, t) \226\134\146 IN(x(k), topspace(tops(k))))}
   \226\136\128 tops : (K) -> Topology[A], product_topology({}, tops) == discrete_topology({(x : K) => ARB})
-  forall(tops:K->A topology) t.\n        open_in (product_topology t tops) =\n        ARBITRARY UNION_OF\n          ((FINITE INTERSECTION_OF\n           { {x:K->A | x k IN u} | k,u | k IN t /\\ open_in (tops k) u})\n           relative_to topspace (product_topology t tops))
+  \226\136\128 tops : (K) -> Topology[A], \226\136\128 t : (K) -> Bool, open_in(product_topology(t, tops)) == UNION_OF(ARBITRARY, relative_to(INTERSECTION_OF(FINITE, {{(x : (K) -> A) | IN(x(k), u)} | k : K, u : (A) -> Bool | IN(k, t) && open_in(tops(k), u)}), topspace(product_topology(t, tops))))
   (u : (A) -> Bool)
   (i : K)
   (u : (A) -> Bool)
@@ -21412,7 +21412,7 @@ Multivariate/metric quotations (14748):
   (w : (((K) -> A) -> Bool) -> Bool)
   ((p : Bool) && (q : Bool) && (r : Bool)) == (r && p && q)
   (s : ((K) -> A) -> Bool)
-  forall tops:K->A topology.\n        ((FINITE INTERSECTION_OF\n          { {x | x k IN u} | k,u | k IN t /\\ open_in (tops k) u})\n         relative_to topspace (product_topology t tops)) =\n        ((FINITE INTERSECTION_OF\n         { {x | x k IN u} | k,u |\n           k IN t /\\ open_in (tops k) u /\\ u PSUBSET topspace (tops k)})\n         relative_to topspace (product_topology t tops))
+  \226\136\128 tops : (K) -> Topology[A], relative_to(INTERSECTION_OF(FINITE, {{(x : (K) -> A) | IN(x(k), u)} | k : K, u : (A) -> Bool | IN(k, (t : (K) -> Bool)) && open_in(tops(k), u)}), topspace(product_topology(t, tops))) == relative_to(INTERSECTION_OF(FINITE, {{(x : (K) -> A) | IN(x(k), u)} | k : K, u : (A) -> Bool | IN(k, t) && open_in(tops(k), u) && PSUBSET(u, topspace(tops(k)))}), topspace(product_topology(t, tops)))
   (u : (K, A) -> Bool)((i : K))
   (i : K)
   (i : K)
@@ -21431,12 +21431,12 @@ Multivariate/metric quotations (14748):
   (v : ((K) -> A) -> Bool)
   (i : K) => topspace((tops : (K) -> Topology[A])(i))
   ((p : Bool) == (q : Bool)) == ((p \226\134\146 q) && (q \226\134\146 p))
-  forall(tops:K->A topology) k.\n        FINITE INTERSECTION_OF {{x | x i IN u} | i IN k /\\ open_in (tops i) u}\n        relative_to topspace(product_topology k tops) =\n        { cartesian_product k u | u |\n          FINITE {i | i IN k /\\ ~(u i = topspace(tops i))} /\\\n          forall i. i IN k ==> open_in (tops i) (u i)}
+  \226\136\128 tops : (K) -> Topology[A], \226\136\128 k : (K) -> Bool, relative_to(INTERSECTION_OF(FINITE, {{(x : (K) -> A) | IN(x((i : K)), (u : (A) -> Bool))} | IN(i, k) && open_in(tops(i), u)}), topspace(product_topology(k, tops))) == {cartesian_product(k, u) | u : (K, A) -> Bool | FINITE({(i : K) | IN(i, k) && !(u(i) == topspace(tops(i)))}) && (\226\136\128 i : K, IN(i, k) \226\134\146 open_in(tops(i), u(i)))}
   \226\136\128 k : (K) -> Bool, \226\136\128 tops : (K) -> Topology[A], \226\136\128 s : ((K) -> A) -> Bool, open_in(product_topology(k, tops), s) == (\226\136\128 x : (K) -> A, IN(x, s) \226\134\146 (\226\136\131 u : (K, A) -> Bool, FINITE({(i : K) | IN(i, k) && !(u(i) == topspace(tops(i)))}) && (\226\136\128 i : K, IN(i, k) \226\134\146 open_in(tops(i), u(i))) && IN(x, cartesian_product(k, u)) && SUBSET(cartesian_product(k, u), s)))
   IN((x : (K) -> A), (s : ((K) -> A) -> Bool))
   (x : (K) -> A)
   \226\136\128 k : (K) -> Bool, \226\136\128 tops : (K) -> Topology[A], \226\136\128 s : ((K) -> A) -> Bool, open_in(product_topology(k, tops), s) == (SUBSET(s, topspace(product_topology(k, tops))) && (\226\136\128 x : (K) -> A, IN(x, s) \226\134\146 (\226\136\131 u : (K, A) -> Bool, FINITE({(i : K) | IN(i, k) && !(u(i) == topspace(tops(i)))}) && (\226\136\128 i : K, IN(i, k) \226\134\146 open_in(tops(i), u(i)) && IN(x(i), u(i))) && SUBSET(cartesian_product(k, u), s))))
-  {x | x IN s /\\ f x IN UNIONS v} =\n     UNIONS {{x | x IN s /\\ f x IN u} | u IN v} /\\\n     {x | x IN s /\\ f x IN INTERS v} =\n     s INTER INTERS {{x | x IN s /\\ f x IN u} | u IN v}
+  {(x : _) | IN(x, (s : (_) -> Bool)) && IN((f : (_) -> _)(x), UNIONS((v : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN(x, s) && IN(f(x), (u : (_) -> Bool))} | IN(u, v)}) && {(x : _) | IN(x, s) && IN(f(x), INTERS(v))} == INTER(s, INTERS({{(x : _) | IN(x, s) && IN(f(x), (u : (_) -> Bool))} | IN(u, v)}))
   (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, IN(x, Q) \226\134\146 (R : (_) -> Bool)(x)) \226\134\146 (\226\136\128 x : _, P(x) \226\134\146 R(x))
   {(f : (_) -> _)(x) | x : _ | false} == {}
   (w : (((K) -> B) -> Bool) -> Bool) == {}
@@ -21611,7 +21611,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 tops : (K) -> Topology[A], \226\136\128 k : (K) -> Bool, discrete_space(product_topology(k, tops)) == (topspace(product_topology(k, tops)) == {} || FINITE({(i : K) | IN(i, k) && !(\226\136\131 a : A, SUBSET(topspace(tops(i)), {a}))}) && (\226\136\128 i : K, IN(i, k) \226\134\146 discrete_space(tops(i))))
   (i : K)
   (sum_topology : ((K) -> Bool, (K) -> Topology[A]) -> Topology[(K, A)])((k : (K) -> Bool), (top : (K) -> Topology[A])) == topology({(u : ((K, A)) -> Bool) | SUBSET(u, disjoint_union(k, o(topspace, top))) && (\226\136\128 i : K, IN(i, k) \226\134\146 open_in(top(i), {(x : A) | IN((i, x), u)}))})
-  {x | i,x IN UNIONS v} = UNIONS {{x | i,x IN k} | k IN v}
+  {(x : _) | IN(((i : _), x), UNIONS((v : (((_, _)) -> Bool) -> Bool)))} == UNIONS({{(x : _) | IN((i, x), (k : ((_, _)) -> Bool))} | IN(k, v)})
   (v : (((K, A)) -> Bool) -> Bool)
   {(x : _) | IN(((i : _), x), INTER((s : ((_, _)) -> Bool), (t : ((_, _)) -> Bool)))} == INTER({(x : _) | IN((i, x), s)}, {(x : _) | IN((i, x), t)})
   \226\136\128 k : (K) -> Bool, \226\136\128 top : (K) -> Topology[A], \226\136\128 u : ((K, A)) -> Bool, open_in(sum_topology(k, top), u) == (SUBSET(u, disjoint_union(k, o(topspace, top))) && (\226\136\128 i : K, IN(i, k) \226\134\146 open_in(top(i), {(x : A) | IN((i, x), u)})))
@@ -21998,7 +21998,7 @@ Multivariate/metric quotations (14748):
   \226\136\131 u : ((A) -> Bool, B) -> Bool, \226\136\128 v : (A) -> Bool, IN(v, (V : ((A) -> Bool) -> Bool)) \226\134\146 IN(u(v), (U : ((B) -> Bool) -> Bool)) && v == {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), u(v))}
   {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (t : (B) -> Bool))}
   (f : (A) -> B)((x : A))
-  {{x | x | x IN topspace top /\\ (f:A->B) x IN u} | u | u IN U}
+  {{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), u)} | u : (B) -> Bool | IN(u, (U : ((B) -> Bool) -> Bool))}
   IMAGE((f : (A) -> B), topspace((top : Topology[A])))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, compact_in(top, s) && continuous_map((top, top'), f) \226\134\146 compact_in(top', IMAGE(f, s))
   topspace((top : Topology[A])) == IMAGE((g : (B) -> A), topspace((top' : Topology[B])))
@@ -22117,7 +22117,7 @@ Multivariate/metric quotations (14748):
   (k : K)
   (\226\136\131 s : (_) -> Bool, IN(s, (f : ((_) -> Bool) -> Bool)) && SUBSET((x : (_) -> Bool), s)) \226\134\146 SUBSET(x, UNIONS(f))
   topspace(product_topology((t : (K) -> Bool), (tops : (K) -> Topology[A])))
-  {{x:K->A | x k IN u} | k IN t /\\ open_in (tops k) u}
+  {{(x : (K) -> A) | IN(x((k : K)), (u : (A) -> Bool))} | IN(k, (t : (K) -> Bool)) && open_in((tops : (K) -> Topology[A])(k), u)}
   (t : (K) -> Bool) == {}
   (i : K) => if i == (k : K) { (a : A) } else { if IN(i, (t : (K) -> Bool)) { (z : (K) -> A)(i) } else { ARB } }
   (a : A)
@@ -22179,7 +22179,7 @@ Multivariate/metric quotations (14748):
   (u : (B, A) -> Bool)
   \226\136\128 y : B, IN(y, (l : (B) -> Bool)) \226\134\146 (\226\136\131 u : (A) -> Bool, \226\136\131 v : (B) -> Bool, open_in((top : Topology[A]), u) && open_in((top' : Topology[B]), v) && SUBSET((k : (A) -> Bool), u) && IN(y, v) && SUBSET(CROSS(u, v), (w : ((A, B)) -> Bool)))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 w : ((A, B)) -> Bool, \226\136\128 k : (A) -> Bool, \226\136\128 l : (B) -> Bool, compact_in(top, k) && compact_in(top', l) && open_in(prod_topology(top, top'), w) && SUBSET(CROSS(k, l), w) \226\134\146 (\226\136\131 u : (A) -> Bool, \226\136\131 v : (B) -> Bool, open_in(top, u) && open_in(top', v) && SUBSET(k, u) && SUBSET(l, v) && SUBSET(CROSS(u, v), w))
-  {} INSERT\n     UNIONS {{c | c IN u /\\ ~(c INTER (t:A->A->bool) a = {})} | a IN k}
+  INSERT({}, UNIONS({{(c : (A) -> Bool) | IN(c, (u : ((A) -> Bool) -> Bool)) && !(INTER(c, (t : (A, A) -> Bool)((a : A))) == {})} | IN(a, (k : (A) -> Bool))}))
   (k : (A) -> Bool)
   ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
   IMAGE((t : (A, A) -> Bool), topspace((top : Topology[A])))
@@ -22844,7 +22844,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, lindelof_space(top) && continuous_map((top, top'), f) && IMAGE(f, topspace(top)) == topspace(top') \226\134\146 lindelof_space(top')
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 q : (A) -> B, quotient_map((top, top'), q) && lindelof_space(top) \226\134\146 lindelof_space(top')
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 r : (A) -> B, retraction_map((top, top'), r) && lindelof_space(top) \226\134\146 lindelof_space(top')
-  {} INSERT\n     UNIONS {{c | c IN u /\\ ~(c INTER (t:A->A->bool) a = {})} | a IN k}
+  INSERT({}, UNIONS({{(c : (A) -> Bool) | IN(c, (u : ((A) -> Bool) -> Bool)) && !(INTER(c, (t : (A, A) -> Bool)((a : A))) == {})} | IN(a, (k : (A) -> Bool))}))
   (k : (A) -> Bool)
   ((p : Bool) && (q : Bool) && (r : Bool) \226\134\146 (s : Bool)) == (p && q \226\134\146 r \226\134\146 s)
   IMAGE((t : (A, A) -> Bool), topspace((top : Topology[A])))
@@ -23481,7 +23481,7 @@ Multivariate/metric quotations (14748):
   IN((x : A), mspace((m : Metric[A])))
   (n : Num)
   (x : A)
-  s:A->bool =\n    INTERS\n     {{x | x IN mspace m /\\\n           ?y. y IN s /\\ mdist m (x,y) < inv(&n + &1)} | n IN (:num)}
+  (s : (A) -> Bool) == INTERS({{(x : A) | IN(x, mspace((m : Metric[A]))) && (\226\136\131 y : A, IN(y, s) && mdist(m, (x, y)) < inv(real_of_num((n : Num)) + real_of_num(1)))} | IN(n, UNIV)})
   (s : (A) -> Bool) == {}
   \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, metrizable_space(top) && closed_in(top, s) \226\134\146 gdelta_in(top, s)
   \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, metrizable_space(top) && open_in(top, s) \226\134\146 fsigma_in(top, s)
@@ -24946,7 +24946,7 @@ Multivariate/metric quotations (14748):
   (t : ((Real) -> Bool) -> Bool) == {}
   (t : ((Real) -> Bool) -> Bool)
   (s : (Real) -> Bool)
-  forall u. topology\n        (ARBITRARY UNION_OF\n          (FINITE INTERSECTION_OF\n            ({{x | x > a} | a IN (:real)} UNION {{x | x < a} | a IN (:real)})\n           relative_to u)) =\n       subtopology euclideanreal u
+  \226\136\128 u : (Real) -> Bool, topology(UNION_OF(ARBITRARY, relative_to(INTERSECTION_OF(FINITE, UNION({{(x : Real) | x > (a : Real)} | IN(a, UNIV)}, {{(x : Real) | x < (a : Real)} | IN(a, UNIV)})), u))) == subtopology(euclideanreal, u)
   \226\136\128 a : Real, closure_of(euclideanreal, {(x : Real) | x >= a}) == {(x : Real) | x >= a}
   \226\136\128 a : Real, closure_of(euclideanreal, {(x : Real) | x <= a}) == {(x : Real) | x <= a}
   (b : Real) + (e : Real) / real_of_num(2)
@@ -25078,7 +25078,7 @@ Multivariate/metric quotations (14748):
   (a : Real) > a - real_of_num(1)
   (\226\136\128 x : _, IN(x, (s : (_) -> Bool))) \226\134\146 SUBSET((t : (_) -> Bool), UNION(s, (v : (_) -> Bool)))
   real_interval([((a : Real), (b : Real))])
-  {{x | x > a} | a IN (:real)} UNION {{x | x < a} | a IN (:real)}
+  UNION({{(x : Real) | x > (a : Real)} | IN(a, UNIV)}, {{(x : Real) | x < (a : Real)} | IN(a, UNIV)})
   real_interval([((a : Real), (b : Real))]) == {}
   \226\136\128 a : Real, \226\136\128 b : Real, compact_in(euclideanreal, real_interval([(a, b)]))
   (x : Real)
@@ -25483,7 +25483,7 @@ Multivariate/metric quotations (14748):
   0
   IN((x : A), mspace((m : Metric[A])))
   (x : A)
-  forall m (s:A->bool).\n       closed_in (mtopology m) s\n       ==> INTERS {{z | z IN mspace m /\\\n                        ?y. y IN s /\\ mdist m (z,y) < inv(&n + &1)}\n                   | n IN (:num)} = s
+  \226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, closed_in(mtopology(m), s) \226\134\146 INTERS({{(z : A) | IN(z, mspace(m)) && (\226\136\131 y : A, IN(y, s) && mdist(m, (z, y)) < inv(real_of_num((n : Num)) + real_of_num(1)))} | IN(n, UNIV)}) == s
   real_of_num(0) < real_of_num((n : Num)) + real_of_num(1) \226\134\146 inv(real_of_num(2) * (real_of_num(n) + real_of_num(1))) + inv(real_of_num(2) * (real_of_num(n) + real_of_num(1))) == inv(real_of_num(n) + real_of_num(1))
   real_of_num(2 * (n : Num) + 1) + real_of_num(1) == real_of_num(2) * (real_of_num(n) + real_of_num(1))
   inv(real_of_num(2 * (n : Num) + 1) + real_of_num(1)) + inv(real_of_num(2 * n + 1) + real_of_num(1)) == inv(real_of_num(n) + real_of_num(1))
@@ -25518,7 +25518,7 @@ Multivariate/metric quotations (14748):
   (x : A)
   (n : Num)
   (x : A)
-  forall(m:B metric) (f:num->A->B) g (C:B->bool) dom.\n       closed_in (mtopology m) C /\\\n       (forall x. x IN dom ==> limit (mtopology m) (\\k. f k x) (g x) sequentially)\n       ==> {x | x IN dom /\\ g x IN C} =\n           INTERS {{x | x IN dom /\\\n                        ?N. forall k. N <= k ==>\n                                f k x IN {z | z IN mspace m /\\\n                                ?y. y IN C /\\ mdist m (z,y) < inv(&n + &1)}}\n                   | n IN (:num)}
+  \226\136\128 m : Metric[B], \226\136\128 f : (Num, A) -> B, \226\136\128 g : (A) -> B, \226\136\128 C : (B) -> Bool, \226\136\128 dom : (A) -> Bool, closed_in(mtopology(m), C) && (\226\136\128 x : A, IN(x, dom) \226\134\146 limit(mtopology(m), (k : Num) => f(k, x), g(x), sequentially)) \226\134\146 {(x : A) | IN(x, dom) && IN(g(x), C)} == INTERS({{(x : A) | IN(x, dom) && (\226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 IN(f(k, x), {(z : B) | IN(z, mspace(m)) && (\226\136\131 y : B, IN(y, C) && mdist(m, (z, y)) < inv(real_of_num((n : Num)) + real_of_num(1)))}))} | IN(n, UNIV)})
   (k : Num)
   (N : Num)
   {(x : A) | IN(x, topspace((top1 : Topology[A]))) && IN((f : (Num, A) -> B)((N : Num), x), (u : (B) -> Bool))}
@@ -25530,7 +25530,7 @@ Multivariate/metric quotations (14748):
   (N : Num)
   (N : Num)
   (x : A)
-  {x | x IN topspace top1 /\\ ?N. forall k. N <= k ==> (f:num->A->B) k x IN u} =\n       UNIONS {INTERS {{x | x IN topspace top1 /\\ f k x IN u} | k IN from N}\n               | N IN (:num)}
+  {(x : A) | IN(x, topspace((top1 : Topology[A]))) && (\226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 IN((f : (Num, A) -> B)(k, x), (u : (B) -> Bool)))} == UNIONS({INTERS({{(x : A) | IN(x, topspace(top1)) && IN(f((k : Num), x), u)} | IN(k, from((N : Num)))}) | IN(N, UNIV)})
   \226\136\128 top1 : Topology[A], \226\136\128 m : Metric[B], \226\136\128 f : (Num, A) -> B, \226\136\128 u : (B) -> Bool, (\226\136\128 n : Num, borel_measurable_map((top1, mtopology(m)), f(n))) && open_in(mtopology(m), u) \226\134\146 borel_in(top1, {(x : A) | IN(x, topspace(top1)) && (\226\136\131 N : Num, \226\136\128 k : Num, N <= k \226\134\146 IN(f(k, x), u))})
   {(z : B) | IN(z, mspace((m : Metric[B]))) && (\226\136\131 y : B, IN(y, (C : (B) -> Bool)) && mdist(m, (z, y)) < inv(real_of_num((n : Num)) + real_of_num(1)))}
   (f : (Num, A) -> B)
@@ -25786,7 +25786,7 @@ Multivariate/metric quotations (14748):
   0
   (r : (Num) -> Num)
   (z : A)
-  (:num) SUBSET UNIONS {{i | x i IN mball m (z,inv(&d + &1) / &2)} |\n                           (z:A) IN k}
+  SUBSET(UNIV, UNIONS({{(i : Num) | IN((x : (Num) -> A)(i), mball((m : Metric[A]), ((z : A), inv(real_of_num((d : Num)) + real_of_num(1)) / real_of_num(2))))} | IN(z, (k : (A) -> Bool))}))
   (k : (A) -> Bool)
   real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
   inv(real_of_num((d : Num)) + real_of_num(1)) / real_of_num(2)
@@ -26088,10 +26088,10 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, continuous_map((top, top'), f) == (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 limit(top', f, f(x), atpointof(top, x)))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 a : A, \226\136\128 b : B, continuous_map((top, top'), f) && IN(a, topspace(top)) && f(a) == b \226\134\146 limit(top', f, b, atpointof(top, a))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 a : A, \226\136\128 b : B, continuous_map((subtopology(top, (s : (A) -> Bool)), top'), f) && IN(a, s) && IN(a, topspace(top)) && f(a) == b \226\134\146 limit(top', f, b, within(atpointof(top, a), s))
-  {x | P x /\\ f x IN UNIONS u} =\n     UNIONS {{x | P x /\\ f x IN b} | b IN u}
+  {(x : _) | (P : (_) -> Bool)(x) && IN((f : (_) -> _)(x), UNIONS((u : ((_) -> Bool) -> Bool)))} == UNIONS({{(x : _) | P(x) && IN(f(x), (b : (_) -> Bool))} | IN(b, u)})
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 b : ((B) -> Bool) -> Bool, \226\136\128 f : (A) -> B, open_in(top') == UNION_OF(ARBITRARY, b) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 IN(f(x), topspace(top'))) && (\226\136\128 u : (B) -> Bool, IN(u, b) \226\134\146 open_in(top, {(x : A) | IN(x, topspace(top)) && IN(f(x), u)})) \226\134\146 continuous_map((top, top'), f)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 b : ((B) -> Bool) -> Bool, \226\136\128 f : (A) -> B, open_in(top') == UNION_OF(ARBITRARY, b) \226\134\146 continuous_map((top, top'), f) == ((\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 IN(f(x), topspace(top'))) && (\226\136\128 u : (B) -> Bool, IN(u, b) \226\134\146 open_in(top, {(x : A) | IN(x, topspace(top)) && IN(f(x), u)})))
-  {x | P x /\\ f x IN INTERS(a INSERT u)} =\n     INTERS {{x | P x /\\ f x IN b} | b IN (a INSERT u)}
+  {(x : _) | (P : (_) -> Bool)(x) && IN((f : (_) -> _)(x), INTERS(INSERT((a : (_) -> Bool), (u : ((_) -> Bool) -> Bool))))} == INTERS({{(x : _) | P(x) && IN(f(x), (b : (_) -> Bool))} | IN(b, INSERT(a, u))})
   (\226\136\128 x : _, IN(x, (s : (_) -> Bool)) \226\134\146 (Q : (_) -> Bool)(x)) \226\134\146 {(x : _) | IN(x, s) && Q(x)} == s
   (topspace : (Topology[B], B) -> Bool)
   relative_to(INTERSECTION_OF(FINITE, (b : ((B) -> Bool) -> Bool)), (u : (B) -> Bool))
@@ -26775,8 +26775,8 @@ Multivariate/metric quotations (14748):
   (m : Num)
   (n : Num)
   (x : A)
-  UNIONS {(v:num->A->bool) n DIFF UNIONS {top closure_of (u m) | m <= n} |\n             n IN (:num)}
-  UNIONS {(u:num->A->bool) n DIFF UNIONS {top closure_of (v m) | m <= n} |\n             n IN (:num)}
+  UNIONS({DIFF((v : (Num, A) -> Bool)((n : Num)), UNIONS({closure_of((top : Topology[A]), (u : (Num, A) -> Bool)((m : Num))) | m <= n})) | IN(n, UNIV)})
+  UNIONS({DIFF((u : (Num, A) -> Bool)((n : Num)), UNIONS({closure_of((top : Topology[A]), (v : (Num, A) -> Bool)((m : Num))) | m <= n})) | IN(n, UNIV)})
   (v' : (Num, A) -> Bool)
   (v : (Num, A) -> Bool)
   (u' : (Num, A) -> Bool)
@@ -29217,8 +29217,8 @@ Multivariate/metric quotations (14748):
   (e : Real)
   IN((a : A), topspace((top : Topology[A])))
   (a : A)
-  topspace top INTER\n      INTERS {UNIONS {u | open_in top u /\\\n                          ?b. b IN topspace top /\\\n                              forall x y. x IN (s INTER u) DELETE b /\\\n                                    y IN (s INTER u) DELETE b\n                                    ==> mdist m ((f:A->B) x,f y) < inv(&n + &1)}\n              | n IN (:num)}
-  topspace top INTER\n      INTERS {UNIONS {u | open_in top u /\\\n                          forall x y. x IN (s INTER u) /\\\n                                y IN (s INTER u)\n                                ==> mdist m ((f:A->B) x,f y) < inv(&n + &1)}\n              | n IN (:num)}
+  INTER(topspace((top : Topology[A])), INTERS({UNIONS({(u : (A) -> Bool) | open_in(top, u) && (\226\136\131 b : A, IN(b, topspace(top)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, DELETE(INTER((s : (A) -> Bool), u), b)) && IN(y, DELETE(INTER(s, u), b)) \226\134\146 mdist((m : Metric[B]), ((f : (A) -> B)(x), f(y))) < inv(real_of_num((n : Num)) + real_of_num(1))))}) | IN(n, UNIV)}))
+  INTER(topspace((top : Topology[A])), INTERS({UNIONS({(u : (A) -> Bool) | open_in(top, u) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, INTER((s : (A) -> Bool), u)) && IN(y, INTER(s, u)) \226\134\146 mdist((m : Metric[B]), ((f : (A) -> B)(x), f(y))) < inv(real_of_num((n : Num)) + real_of_num(1)))}) | IN(n, UNIV)}))
   \226\136\128 s : (_) -> Bool, gdelta_in((top : Topology[_]), s) && (t : (_) -> Bool) == s \226\134\146 gdelta_in(top, t)
   mspace((m : Metric[B])) == {}
   ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
@@ -30436,7 +30436,7 @@ Multivariate/metric quotations (14748):
   mspace(submetric((m : Metric[A]), (K : (A) -> Bool))) == K
   SUBSET((K : (A) -> Bool), (t : (A) -> Bool)) \226\134\146 INTER(t, K) == K
   subtopology(mtopology((m : Metric[A])), (K : (A) -> Bool)) == mtopology(submetric(m, K))
-  INTERS {UNIONS {mtopology m closure_of (c:num->num->A->bool) n i | i |\n                      i <= N n} | n IN (:num)} = K
+  INTERS({UNIONS({closure_of(mtopology((m : Metric[A])), (c : (Num, Num, A) -> Bool)((n : Num), i)) | i : Num | i <= (N : (Num) -> Num)(n)}) | IN(n, UNIV)}) == (K : (A) -> Bool)
   mdiameter((m : Metric[A]), closure_of(mtopology(m), (c : (Num, Num, A) -> Bool)((nn : Num), (i : Num))))
   inv(real_of_num((nn : Num) + 1))
   IN((rep : (Num) -> A)((i : Num)), mspace((m : Metric[A]))) && IN((x : A), mspace(m))
@@ -30501,7 +30501,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 n : Num, \226\136\128 i : Num, SUBSET(closure_of(mtopology((m : Metric[A])), (c : (Num, Num, A) -> Bool)(n, i)), mspace(m))
   (K : (A) -> Bool) == INTERS({(KK : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
   (KK : (Num, A) -> Bool) == ((n : Num) => UNIONS({closure_of(mtopology((m : Metric[A])), (c : (Num, Num, A) -> Bool)(n, i)) | i : Num | i <= (N : (Num) -> Num)(n)}))
-  forall m:A metric (c:num->num->A->bool) (N:num->num).\n        mcomplete m /\\\n        (forall n i. i <= N n ==> c n i SUBSET mspace m) /\\\n        (forall n i. i <= N n ==> forall x y. x IN c n i /\\ y IN c n i\n                         ==> mdist m (x:A,y) < inv(&(n + 1)))\n        ==> compact_in (mtopology m)\n              (INTERS {UNIONS {mtopology m closure_of c n i | i |\n                                i <= N n} | n IN (:num)})
+  \226\136\128 m : Metric[A], \226\136\128 c : (Num, Num, A) -> Bool, \226\136\128 N : (Num) -> Num, mcomplete(m) && (\226\136\128 n : Num, \226\136\128 i : Num, i <= N(n) \226\134\146 SUBSET(c(n, i), mspace(m))) && (\226\136\128 n : Num, \226\136\128 i : Num, i <= N(n) \226\134\146 (\226\136\128 x : A, \226\136\128 y : A, IN(x, c(n, i)) && IN(y, c(n, i)) \226\134\146 mdist(m, (x, y)) < inv(real_of_num(n + 1)))) \226\134\146 compact_in(mtopology(m), INTERS({UNIONS({closure_of(mtopology(m), c((n : Num), i)) | i : Num | i <= N(n)}) | IN(n, UNIV)}))
   (d : Real) + d
   mdist((m : Metric[A]), ((y : A), (x : A))) + mdist(m, (x, (z : A)))
   IN((y : A), mball((m : Metric[A]), ((x : A), (d : Real)))) && IN((z : A), mball(m, (x, d)))
@@ -31252,7 +31252,7 @@ Multivariate/metric quotations (14748):
   (i : K)
   real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
   (n : Num)
-  UNIONS {{i | i IN l /\\\n                             ~((q:K->K->A) i IN mball m (p,inv(&n + &1)))} |\n                        n IN (:num)}
+  UNIONS({{(i : K) | IN(i, (l : (K) -> Bool)) && !IN((q : (K, K) -> A)(i), mball((m : Metric[(K) -> A]), ((p : (K) -> A), inv(real_of_num((n : Num)) + real_of_num(1)))))} | IN(n, UNIV)})
   (m : Metric[(K) -> A])
   IN((p : (K) -> A), cartesian_product((k : (K) -> Bool), (v : (K, A) -> Bool)))
   ((l : Bool) \226\134\146 (k : Bool)) && (k && l \226\134\146 (p : Bool) \226\134\146 (q : Bool)) \226\134\146 l && !q \226\134\146 k && !p
@@ -31529,7 +31529,7 @@ Multivariate/metric quotations (14748):
   euclideanreal
   0
   !({(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == {}) == (\226\136\131 x : _, P(x))
-  topspace(euclidean_space n) =\n    INTERS {{x | x IN topspace(product_topology (:num) (\\i. euclideanreal)) /\\\n                 x i IN {&0}}\n            | ~(i IN 1..n)}
+  topspace(euclidean_space((n : Num))) == INTERS({{(x : (Num) -> Real) | IN(x, topspace(product_topology(UNIV, (i : Num) => euclideanreal))) && IN(x((i : Num)), {real_of_num(0)})} | !IN(i, op_dot_dot(1, n))})
   \226\136\128 n : Num, closed_in(product_topology(UNIV, (i : Num) => euclideanreal), topspace(euclidean_space(n)))
   \226\136\128 n : Num, completely_metrizable_space(euclidean_space(n))
   \226\136\128 n : Num, metrizable_space(euclidean_space(n))
@@ -32044,7 +32044,7 @@ Multivariate/metric quotations (14748):
   real_interval([(real_of_num(0), real_of_num(1))])
   (x : A)
   SUBSET(DELETE((s : (_) -> Bool), (a : _)), s)
-  {{x | x IN topspace(subtopology euclideanreal (real_interval[&0,&1])) /\\\n          (g:real->A) x IN {a}} |\n     a IN topspace top} DELETE {}
+  DELETE({{(x : Real) | IN(x, topspace(subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))])))) && IN((g : (Real) -> A)(x), {(a : A)})} | IN(a, topspace((top : Topology[A])))}, {})
   real_of_num(1)
   real_of_num(0)
   (g : (Real) -> A)
@@ -32096,7 +32096,7 @@ Multivariate/metric quotations (14748):
   (\226\136\128 a : _, IN(a, (s : (_) -> Bool)) \226\134\146 IN(a, (f : (_, _) -> Bool)(a))) \226\134\146 SUBSET(s, UNIONS(IMAGE(f, s)))
   euclideanreal
   (a : A)
-  {{x | x IN topspace top /\\ (g:A->A->real) a x IN {t | t < &1 / &2}} |\n      a IN t}
+  {{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((g : (A, A) -> Real)((a : A), x), {(t : Real) | t < real_of_num(1) / real_of_num(2)})} | IN(a, (t : (A) -> Bool))}
   (g : (A, A) -> Real)
   \226\136\128 a : A, IN(a, (t : (A) -> Bool)) \226\134\146 (\226\136\131 f : (A) -> Real, continuous_map(((top : Topology[A]), subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))]))), f) && f(a) == real_of_num(0) && (\226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 f(x) == real_of_num(1)))
   (x : A) => real_of_num(1)
@@ -32292,9 +32292,9 @@ Multivariate/metric quotations (14748):
   (w : (A) -> Bool)
   (s : (B) -> A)((y : B))
   (y : B)
-  {{y | y IN topspace top' /\\ (s:B->A) y IN v} | v IN V}
+  {{(y : B) | IN(y, topspace((top' : Topology[B]))) && IN((s : (B) -> A)(y), (v : (A) -> Bool))} | IN(v, (V : ((A) -> Bool) -> Bool))}
   (V : ((A) -> Bool) -> Bool)
-  {{x | x IN topspace top /\\ (r:A->B) x IN u} | u IN U}
+  {{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((r : (A) -> B)(x), (u : (B) -> Bool))} | IN(u, (U : ((B) -> Bool) -> Bool))}
   (U : ((B) -> Bool) -> Bool)
   (s : (B) -> A)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 r : (A) -> B, retraction_map((top, top'), r) && paracompact_space(top) \226\134\146 paracompact_space(top')
@@ -32453,7 +32453,7 @@ Multivariate/metric quotations (14748):
   (m : Num)
   (c : (A) -> Bool)
   IMAGE((k : Num) => {(c : (A) -> Bool) | IN(c, (Cn : (Num, (A) -> Bool) -> Bool)(k)) && !(INTER((N : (A) -> Bool), c) == {})}, {(k : Num) | k <= (n0 : Num)})
-  UNIONS {{c:A->bool | c IN (Cn:num->(A->bool)->bool) k /\\\n                         ~((N:A->bool) INTER c = {})} | k <= n0}
+  UNIONS({{(c : (A) -> Bool) | IN(c, (Cn : (Num, (A) -> Bool) -> Bool)((k : Num))) && !(INTER((N : (A) -> Bool), c) == {})} | k <= (n0 : Num)})
   (k : Num)
   !(INTER((N : (A) -> Bool), (c : (A) -> Bool)) == {})
   (b : (A) -> Bool)
@@ -32614,7 +32614,7 @@ Multivariate/metric quotations (14748):
   (b : (A) -> Bool)
   (b : (A) -> Bool)
   (w : (A) -> Bool)
-  IMAGE (\\b:A->bool. (Eb:(A->bool)->(A->bool)) b INTER\n                                  (Fb:(A->bool)->(A->bool)) b)\n     (UNIONS {{b:A->bool | b IN B /\\ ~(b INTER c = {})} | c IN S'})
+  IMAGE((b : (A) -> Bool) => INTER((Eb : ((A) -> Bool, A) -> Bool)(b), (Fb : ((A) -> Bool, A) -> Bool)(b)), UNIONS({{(b : (A) -> Bool) | IN(b, (B : ((A) -> Bool) -> Bool)) && !(INTER(b, (c : (A) -> Bool)) == {})} | IN(c, (S' : ((A) -> Bool) -> Bool))}))
   SUBSET((c : (A) -> Bool), (N : (A) -> Bool))
   !(INTER((b' : (A) -> Bool), (c : (A) -> Bool)) == {})
   (b' : (A) -> Bool)
@@ -32813,7 +32813,7 @@ Multivariate/metric quotations (14748):
   (n : Num)
   (B : ((A) -> Bool) -> Bool)
   (v : (A) -> Bool)
-  UNIONS {{w INTER (s:A->bool) |w|\n             w IN (W:num->(A->bool)->bool) n /\\\n             ~(w SUBSET topspace top DIFF (c:num->A->bool) n)} |\n            n IN (:num)}
+  UNIONS({{INTER((w : (A) -> Bool), (s : (A) -> Bool)) | IN(w, (W : (Num, (A) -> Bool) -> Bool)((n : Num))) && !SUBSET(w, DIFF(topspace((top : Topology[A])), (c : (Num, A) -> Bool)(n)))} | IN(n, UNIV)})
   (W : (Num, (A) -> Bool) -> Bool)
   !IN((x : A), (s : (A) -> Bool))
   UNIONS({(c : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == (s : (A) -> Bool)
@@ -33094,13 +33094,13 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], second_countable(top) && regular_space(top) \226\134\146 paracompact_space(top)
   (u1 : (A) -> Bool)
   (w1 : (B) -> Bool)
-  {u INTER {x:A | x IN topspace top /\\ (f:A->B) x IN w1} |\n          u | u IN (FF:B->((A->bool)->bool))((yw:(B->bool)->B) w1)}
+  {INTER(u, {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (w1 : (B) -> Bool))}) | u : (A) -> Bool | IN(u, (FF : (B, (A) -> Bool) -> Bool)((yw : ((B) -> Bool) -> B)(w1)))}
   (u1 : (A) -> Bool)
   (w1 : (B) -> Bool)
   (s : (A) -> Bool)
   (yw : ((B) -> Bool) -> B)((w1 : (B) -> Bool))
   (w1 : (B) -> Bool)
-  UNIONS (IMAGE\n        (\\w. {u INTER {x:A | x IN topspace top /\\ (f:A->B) x IN w} |\n              u | u IN (FF:B->((A->bool)->bool))((yw:(B->bool)->B) w)})\n        {w:B->bool | w IN W /\\ ~(w INTER (N:B->bool) = {})})
+  UNIONS(IMAGE((w : (B) -> Bool) => {INTER(u, {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), w)}) | u : (A) -> Bool | IN(u, (FF : (B, (A) -> Bool) -> Bool)((yw : ((B) -> Bool) -> B)(w)))}, {(w : (B) -> Bool) | IN(w, (W : ((B) -> Bool) -> Bool)) && !(INTER(w, (N : (B) -> Bool)) == {})}))
   (top' : Topology[B])
   {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (N : (B) -> Bool))}
   (N : (B) -> Bool)
@@ -33126,7 +33126,7 @@ Multivariate/metric quotations (14748):
   (yw : ((B) -> Bool) -> B)((w : (B) -> Bool))
   (u : (A) -> Bool)
   (w : (B) -> Bool)
-  {u INTER {x:A | x IN topspace top /\\ (f:A->B) x IN w} |\n      w,u | w IN (W:(B->bool)->bool) /\\\n            u IN (FF:B->((A->bool)->bool))((yw:(B->bool)->B) w)}
+  {INTER(u, {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), w)}) | w : (B) -> Bool, u : (A) -> Bool | IN(w, (W : ((B) -> Bool) -> Bool)) && IN(u, (FF : (B, (A) -> Bool) -> Bool)((yw : ((B) -> Bool) -> B)(w)))}
   (w : (B) -> Bool)
   (w : (B) -> Bool)
   (yw : ((B) -> Bool) -> B)
@@ -33211,7 +33211,7 @@ Multivariate/metric quotations (14748):
   (t : (A) -> Bool)
   IN((c : (A) -> Bool), (CW : ((A) -> Bool) -> Bool))
   (c : (A) -> Bool)
-  IMAGE (\\b:A->bool.\n         topspace top DIFF UNIONS {c:A->bool | c IN C /\\ c INTER b = {}})\n         (UNIONS {{b:A->bool | b IN B /\\ ~(b INTER c = {})} |\n                  c IN CW})
+  IMAGE((b : (A) -> Bool) => DIFF(topspace((top : Topology[A])), UNIONS({(c : (A) -> Bool) | IN(c, (C : ((A) -> Bool) -> Bool)) && INTER(c, b) == {}})), UNIONS({{(b : (A) -> Bool) | IN(b, (B : ((A) -> Bool) -> Bool)) && !(INTER(b, (c : (A) -> Bool)) == {})} | IN(c, (CW : ((A) -> Bool) -> Bool))}))
   FINITE((CW : ((A) -> Bool) -> Bool))
   (CW : ((A) -> Bool) -> Bool) == {(c : (A) -> Bool) | IN(c, (C : ((A) -> Bool) -> Bool)) && !(INTER(c, (W : (A) -> Bool)) == {})}
   (W : (A) -> Bool)
