@@ -1616,7 +1616,17 @@ async fn main {
           }
       }
       if kind != "migrated" {
-        left.push(kind + ": " + old)
+        // why the printer gave up, for an unprintable site
+        let why = match rec.runs.get(site) {
+          Some(runs) =>
+            runs
+            .iter()
+            .find_first(r => r.1.has_prefix(unprintable))
+            .map(r => " [" + r.1[unprintable.length():].to_owned() + "]")
+            .unwrap_or("")
+          None => ""
+        }
+        left.push((kind, why, old))
       }
       site += 1
     }
@@ -1661,16 +1671,18 @@ async fn main {
   }
   let counts : Map[String, Int] = Map::new()
   for l in left {
-    let k = l.split(":").next().unwrap().to_owned()
-    counts[k] = counts.get(k).unwrap_or(0) + 1
+    counts[l.0] = counts.get(l.0).unwrap_or(0) + 1
   }
   println(
     "\{pkg}: \{migrated} migrated, \{left.length()} left (" +
     counts.to_array().map(p => "\{p.1} \{p.0}").join(", ") +
     ")",
   )
-  for l in left[:min(20, left.length())] {
-    println("  left " + l[:min(120, l.length())].to_owned())
+  // every leftover, one line each: its kind, the printer's reason and the
+  // start of the quotation
+  for l in left {
+    let old = l.2.replace_all(old="\n", new=" ")
+    println("  left \{l.0}\{l.1}: " + old[:min(120, old.length())].to_owned())
   }
   if migrated == 0 {
     restore_others(keep)
