@@ -490,7 +490,7 @@ fn step_20() -> Unit raise {
   let t233 = @tactics_ext2.and_(2L)
   let t234 = @tactics_ext2.cho(2L)
   let t235 = @tactics_ext2.cho(2L)
-  let t207 = @parser.parse_term("(\\ (u,v) . (f u,f' v))")
+  let t207 = @term_syntax.parse_term("fn { (u, v) => ((f : (_) -> _)(u), (f' : (_) -> _)(v)) }")
   let t236 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t237 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.num2_countable(), @sets.subset(), @sets.in_image()]))
   let t202 = @term_syntax.parse_term("{((m : Num), (n : Num)) | true}")
@@ -6436,7 +6436,7 @@ fn step_208() -> Unit raise {
   let t3449 = @simp.rewrite_tac(@list.List([@sets.subset_refl()]))
   let t3450 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("SUBSET((X : (A) -> Bool), X) && (cond : (((A) -> Bool, Num), Num) -> Bool)((X, 0), 0)"))
   let t3451 = @simp.abbrev_tac(@term_syntax.parse_term("(R : Real) == real_of_num(2) * (r' : Real)"))
-  let t3452 = @simp.abbrev_tac(@parser.parse_term("cond = (\\ ((C:A->bool),(s:num)) n. ~FINITE{j| C (f j)} /\\ (C(f s)) /\\ (forall x y. (C x /\\ C y) ==> d x y <. (&.2*.r')*. twopow(--: (&:n))))"))
+  let t3452 = @simp.abbrev_tac(@term_syntax.parse_term("(cond : (((A) -> Bool, Num), Num) -> Bool) == fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C((f : (Num) -> A)(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → (d : (A, A) -> Real)(x, y) < real_of_num(2) * (r' : Real) * twopow(-int_of_num(n))) }"))
   let t3453 = @simp.asm_rewrite_tac(@list.List([]))
   let t3454 = @tactics_ext2.use_(0L, @drule.match_mp(ball_dist()))
   let t3455 = @tactics_ext2.join(0L, 8L)
@@ -7427,7 +7427,7 @@ fn step_221() -> Unit raise {
   let t4342 = @simp.rewrite_tac(@list.List([@sets.subset_refl()]))
   let t4343 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("SUBSET((X : (A) -> Bool), X) && (cond : (((A) -> Bool, Num), Num) -> Bool)((X, 0), 0)"))
   let t4344 = @simp.abbrev_tac(@term_syntax.parse_term("(R : Real) == real_of_num(2) * (r' : Real)"))
-  let t4345 = @simp.abbrev_tac(@parser.parse_term("cond = (\\ ((C:A->bool),(s:num)) n. ~FINITE{j| C (f j)} /\\ (C(f s)) /\\ (forall x y. (C x /\\ C y) ==> d x y <. (&.2*.r')*. twopow(--: (&:n))))"))
+  let t4345 = @simp.abbrev_tac(@term_syntax.parse_term("(cond : (((A) -> Bool, Num), Num) -> Bool) == fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C((f : (Num) -> A)(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → (d : (A, A) -> Real)(x, y) < real_of_num(2) * (r' : Real) * twopow(-int_of_num(n))) }"))
   let t4346 = @simp.asm_rewrite_tac(@list.List([]))
   let t4347 = @tactics_ext2.use_(0L, @drule.match_mp(ball_dist()))
   let t4348 = @tactics_ext2.join(0L, 8L)
@@ -7476,7 +7476,7 @@ fn step_221() -> Unit raise {
       s4261(x4262)
     }
   }, x4264), t4265])
-  cauchy_subseq_sublemma_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall(X:A->bool) d f. ((metric_space(X,d))/\\(totally_bounded(X,d)) /\\\n        (sequence X f)) ==>\n    (?R Cn sn cond.\n       (&0 < R) /\\\n       (forall x y. X x /\\ X y ==> d x y < R) /\\\n       (cond (X,0) 0) /\\\n       (sn 0 = 0) /\\ (Cn 0 = X) /\\\n       (forall n. Cn n SUBSET X /\\ cond (Cn n,sn n) n) /\\\n       (forall n. Cn (SUC n) SUBSET Cn n /\\ sn n <| sn (SUC n)) /\\\n       (((\\ (C,s). \\n.\n            (~FINITE {j | C (f j)}) /\\\n            (C (f s)) /\\\n           (forall x y. (C x /\\ C y) ==> d x y < R * (twopow (--: (&:n))))) =\n       cond)\n    ))"), t4370))
+  cauchy_subseq_sublemma_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_sequence(X, f) → (∃ R : Real, ∃ Cn : (Num, A) -> Bool, ∃ sn : (Num) -> Num, ∃ cond : (((A) -> Bool, Num), Num) -> Bool, real_of_num(0) < R && (∀ x : A, ∀ y : A, X(x) && X(y) → d(x, y) < R) && cond((X, 0), 0) && sn(0) == 0 && Cn(0) == X && (∀ n : Num, SUBSET(Cn(n), X) && cond((Cn(n), sn(n)), n)) && (∀ n : Num, SUBSET(Cn(SUC(n)), Cn(n)) && sn(n) < sn(SUC(n))) && fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C(f(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → d(x, y) < R * twopow(-int_of_num(n))) } == cond)"), t4370))
 }
 
 ///|
