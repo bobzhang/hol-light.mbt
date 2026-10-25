@@ -984,6 +984,56 @@ pub fn check_spelling(old : String, s : String) -> Unit raise Unprintable {
 }
 
 ///|
+/// A type, briefly, for a diagnostic.
+fn brief_type(ty : @kernel.HolType) -> String {
+  match ty {
+    Tyvar(n) => n
+    Tyapp(c, @list.Empty) => c
+    Tyapp(c, args) => c + "(" + args.iter().map(brief_type).join(",") + ")"
+  }
+}
+
+///|
+/// Where the reading `b` of a spelling first departs from the quotation's
+/// reading `a`, for a diagnostic.
+fn difference(a : @kernel.Term, b : @kernel.Term) -> String {
+  match (a, b) {
+    (Var(n, s), Var(m, t)) =>
+      if n != m {
+        "variable \{n} read as \{m}"
+      } else {
+        "variable \{n} : \{brief_type(s)} read with type \{brief_type(t)}"
+      }
+    (Const(n, s), Const(m, t)) =>
+      if n != m {
+        "constant \{n} read as \{m}"
+      } else {
+        "constant \{n} : \{brief_type(s)} read with type \{brief_type(t)}"
+      }
+    (Comb(f, x), Comb(g, y)) => if f != g { difference(f, g) } else { difference(x, y) }
+    (Abs(Var(v, s), x), Abs(Var(w, t), y)) =>
+      if v != w {
+        "bound variable \{v} read as \{w}"
+      } else if s != t {
+        "bound variable \{v} : \{brief_type(s)} read with type \{brief_type(t)}"
+      } else {
+        difference(x, y)
+      }
+    _ => "\{shape(a)} read as \{shape(b)}"
+  }
+}
+
+///|
+fn shape(t : @kernel.Term) -> String {
+  match t {
+    Var(n, _) => "variable " + n
+    Const(n, _) => "constant " + n
+    Comb(_, _) => "application"
+    Abs(_, _) => "abstraction"
+  }
+}
+
+///|
 fn check_spelling_once(old : String, s : String) -> Unit raise Unprintable {
   let from = @preterm.type_var_counter()
   let (a, na) = @parser.reread_term(old) catch {
@@ -992,8 +1042,10 @@ fn check_spelling_once(old : String, s : String) -> Unit raise Unprintable {
   let (b, nb) = reread(s) catch {
     _ => raise Unprintable("term that does not read back")
   }
-  if canonical_invented(b, from~) != canonical_invented(a, from~) {
-    raise Unprintable("term whose bound variables the syntax renames")
+  let ca = canonical_invented(a, from~)
+  let cb = canonical_invented(b, from~)
+  if cb != ca {
+    raise Unprintable("term that reads back differently: " + difference(ca, cb))
   }
   if na != nb {
     raise Unprintable(
