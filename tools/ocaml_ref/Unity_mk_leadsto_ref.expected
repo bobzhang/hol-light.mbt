@@ -6003,7 +6003,7 @@ Unity/mk_leadsto quotations (977):
   (Pr : List[(A) -> A])
   CONS((st : (A) -> A), (Pr : List[(A) -> A]))
   \226\136\128 r : (A) -> Bool, (\226\136\128 s : A, Not(r, s)) \226\134\146 (\226\136\128 s : A, r(s) == False(s))
-  forall p:A->bool.\n    (p' = (\\s:A->A. ?p. P p /\\ p s)) ==> (forall s. p' s = ?p. P p /\\ p s)
+  \226\136\128 p : (A) -> Bool, (p' : ((A) -> A) -> Bool) == ((s : (A) -> A) => \226\136\131 p : ((A) -> A) -> Bool, (P : (((A) -> A) -> Bool) -> Bool)(p) && p(s)) \226\134\146 (\226\136\128 s : (A) -> A, p'(s) == (\226\136\131 p : ((A) -> A) -> Bool, P(p) && p(s)))
   (p' : (A) -> Bool)((s : A))
   \226\136\128 p'' : (A) -> Bool, (P : ((A) -> Bool) -> Bool)(p'') \226\134\146 (q' : (A) -> Bool) == ((s : A) => false) \226\134\146 (\226\136\128 s : A, !p''(s))
   (q' : (A) -> Bool) == ((s : A) => false)

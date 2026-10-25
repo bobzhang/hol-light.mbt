@@ -134,6 +134,25 @@ test "exact printing keeps bound variable names" {
     }
   }
   inspect(exact("forall n. n + 0 = n"), content="∀ n : Num, n + 0 == n")
+  // an inner binder shadowing an outer one of another type keeps its name
+  // when its body does not mention the outer variable
+  inspect(
+    exact("forall z i. (\\i. z + i) 0 = z"),
+    content="∀ z : Num, ∀ i : _, ((i : Num) => z + i)(0) == z",
+  )
+  // and is renamed when it does: \\i:bool. \\i:num. if (i:bool) then i else 0
+  guard @parser.parse_term("\\(i:bool) (j:num). if i then j else 0")
+    is Abs(ib, Abs(j, body)) else {
+    fail("unexpected reading")
+  }
+  let inum = @kernel.mk_var("i", @kernel.mk_type("num", @list.List([])))
+  let t = @kernel.mk_abs(
+    ib,
+    @kernel.mk_abs(inum, @kernel.vsubst(@list.List([(inum, j)]), body)),
+  )
+  let s = @term_syntax.print_term(t)
+  assert_true(@basics.aconv(@term_syntax.parse_term(s), t))
+  inspect(s, content="(i : Bool) => (i' : Num) => if i { i' } else { 0 }")
 }
 
 ///|

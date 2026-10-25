@@ -54,7 +54,7 @@ fn step_4() -> Unit raise {
 ///|
 /// perpdir
 fn step_5() -> Unit raise {
-  perpdir_c.set(@pair.new_definition(@parser.parse_term("x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)")))
+  perpdir_c.set(@pair.new_definition(@term_syntax.parse_term("(op_us_bar_us : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == orthogonal(dest_dir(x), dest_dir(y))")))
 }
 
 ///|
@@ -69,7 +69,7 @@ pub fn perpdir() -> @kernel.Thm {
 ///|
 /// pardir
 fn step_6() -> Unit raise {
-  pardir_c.set(@pair.new_definition(@parser.parse_term("x || y <=> (dest_dir x) cross (dest_dir y) = vec 0")))
+  pardir_c.set(@pair.new_definition(@term_syntax.parse_term("(op_bar_bar : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == (cross(dest_dir(x), dest_dir(y)) == vec(0))")))
 }
 
 ///|
@@ -1144,7 +1144,7 @@ fn step_56() -> Unit raise {
   })
   let t211 = @simp.rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (f : Bool) && (g : Bool) && (h : Bool) → (p : Bool)) == (a && b && c && d && e && f && g → h → p)"))]))
   let t247 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t211), t217), t218), t219), t220), @tactics.conj_tac), t223), t224), t231), t232), t233), t234), t235), t236), t237), t238), t239), t244), t245), t246)
-  pascal_direct_c.set(@tactics.prove(@parser.parse_term("forall con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x2,x5,x7} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x4,x6} /\\\n        ~COLLINEAR {x3,x4,x5} /\\\n        ~COLLINEAR {x1,x5,x7} /\\\n        ~COLLINEAR {x2,x5,x9} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x3,x6,x8} /\\\n        ~COLLINEAR {x2,x4,x5} /\\\n        ~COLLINEAR {x2,x4,x7} /\\\n        ~COLLINEAR {x2,x6,x8} /\\\n        ~COLLINEAR {x3,x4,x6} /\\\n        ~COLLINEAR {x3,x5,x8} /\\\n        ~COLLINEAR {x1,x3,x5}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}"), t247))
+  pascal_direct_c.set(@tactics.prove(@term_syntax.parse_term("∀ con : (Point) -> Bool, ∀ x1 : Point, ∀ x2 : Point, ∀ x3 : Point, ∀ x4 : Point, ∀ x5 : Point, ∀ x6 : _, ∀ x6 : Point, ∀ x8 : Point, ∀ x9 : Point, !COLLINEAR({x2, x5, (x7 : Point)}) && !COLLINEAR({x1, x2, x5}) && !COLLINEAR({x1, x3, x6}) && !COLLINEAR({x2, x4, x6}) && !COLLINEAR({x3, x4, x5}) && !COLLINEAR({x1, x5, x7}) && !COLLINEAR({x2, x5, x9}) && !COLLINEAR({x1, x2, x6}) && !COLLINEAR({x3, x6, x8}) && !COLLINEAR({x2, x4, x5}) && !COLLINEAR({x2, x4, x7}) && !COLLINEAR({x2, x6, x8}) && !COLLINEAR({x3, x4, x6}) && !COLLINEAR({x3, x5, x8}) && !COLLINEAR({x1, x3, x5}) → projective_conic(con) && IN(x1, con) && IN(x2, con) && IN(x3, con) && IN(x4, con) && IN(x5, con) && IN(x6, con) && COLLINEAR({x1, x9, x5}) && COLLINEAR({x1, x8, x6}) && COLLINEAR({x2, x9, x4}) && COLLINEAR({x2, x7, x6}) && COLLINEAR({x3, x8, x4}) && COLLINEAR({x3, x7, x5}) → COLLINEAR({x7, x8, x9})"), t247))
 }
 
 ///|
@@ -1176,7 +1176,7 @@ fn step_57() -> Unit raise {
     @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("(!(p : Bool) → p) → p"))), @tactics.disch_tac), t250), t251), t252)
   })
   let t261 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac), t253), t254), t258), t259), t260)
-  pascal_c.set(@tactics.prove(@parser.parse_term("forall con x1 x2 x3 x4 x5 x6 x6 x8 x9.\n        ~COLLINEAR {x1,x2,x4} /\\\n        ~COLLINEAR {x1,x2,x5} /\\\n        ~COLLINEAR {x1,x2,x6} /\\\n        ~COLLINEAR {x1,x3,x4} /\\\n        ~COLLINEAR {x1,x3,x5} /\\\n        ~COLLINEAR {x1,x3,x6} /\\\n        ~COLLINEAR {x2,x3,x4} /\\\n        ~COLLINEAR {x2,x3,x5} /\\\n        ~COLLINEAR {x2,x3,x6} /\\\n        ~COLLINEAR {x4,x5,x1} /\\\n        ~COLLINEAR {x4,x5,x2} /\\\n        ~COLLINEAR {x4,x5,x3} /\\\n        ~COLLINEAR {x4,x6,x1} /\\\n        ~COLLINEAR {x4,x6,x2} /\\\n        ~COLLINEAR {x4,x6,x3} /\\\n        ~COLLINEAR {x5,x6,x1} /\\\n        ~COLLINEAR {x5,x6,x2} /\\\n        ~COLLINEAR {x5,x6,x3}\n        ==> projective_conic con /\\\n            x1 IN con /\\ x2 IN con /\\ x3 IN con /\\\n            x4 IN con /\\ x5 IN con /\\ x6 IN con /\\\n            COLLINEAR {x1,x9,x5} /\\\n            COLLINEAR {x1,x8,x6} /\\\n            COLLINEAR {x2,x9,x4} /\\\n            COLLINEAR {x2,x7,x6} /\\\n            COLLINEAR {x3,x8,x4} /\\\n            COLLINEAR {x3,x7,x5}\n            ==> COLLINEAR {x7,x8,x9}"), t261))
+  pascal_c.set(@tactics.prove(@term_syntax.parse_term("∀ con : (Point) -> Bool, ∀ x1 : Point, ∀ x2 : Point, ∀ x3 : Point, ∀ x4 : Point, ∀ x5 : Point, ∀ x6 : _, ∀ x6 : Point, ∀ x8 : Point, ∀ x9 : Point, !COLLINEAR({x1, x2, x4}) && !COLLINEAR({x1, x2, x5}) && !COLLINEAR({x1, x2, x6}) && !COLLINEAR({x1, x3, x4}) && !COLLINEAR({x1, x3, x5}) && !COLLINEAR({x1, x3, x6}) && !COLLINEAR({x2, x3, x4}) && !COLLINEAR({x2, x3, x5}) && !COLLINEAR({x2, x3, x6}) && !COLLINEAR({x4, x5, x1}) && !COLLINEAR({x4, x5, x2}) && !COLLINEAR({x4, x5, x3}) && !COLLINEAR({x4, x6, x1}) && !COLLINEAR({x4, x6, x2}) && !COLLINEAR({x4, x6, x3}) && !COLLINEAR({x5, x6, x1}) && !COLLINEAR({x5, x6, x2}) && !COLLINEAR({x5, x6, x3}) → projective_conic(con) && IN(x1, con) && IN(x2, con) && IN(x3, con) && IN(x4, con) && IN(x5, con) && IN(x6, con) && COLLINEAR({x1, x9, x5}) && COLLINEAR({x1, x8, x6}) && COLLINEAR({x2, x9, x4}) && COLLINEAR({x2, (x7 : Point), x6}) && COLLINEAR({x3, x8, x4}) && COLLINEAR({x3, x7, x5}) → COLLINEAR({x7, x8, x9})"), t261))
 }
 
 ///|

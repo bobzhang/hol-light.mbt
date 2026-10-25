@@ -1412,7 +1412,7 @@ pub fn leadsto_thm30_lemma02() -> @kernel.Thm {
 fn step_68() -> Unit raise {
   let t440 = @simp.once_asm_rewrite_tac(@list.List([]))
   let t441 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @tactics.gen_tac), t440), @tactics.beta_tac), @tactics.refl_tac)
-  leadsto_thm30_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p:A->bool.\n    (p' = (\\s:A->A. ?p. P p /\\ p s)) ==> (forall s. p' s = ?p. P p /\\ p s)")), t441))
+  leadsto_thm30_lemma03_c.set(@tactics.tac_proof((@list.List([]), @term_syntax.parse_term("∀ p : (A) -> Bool, (p' : ((A) -> A) -> Bool) == ((s : (A) -> A) => ∃ p : ((A) -> A) -> Bool, (P : (((A) -> A) -> Bool) -> Bool)(p) && p(s)) → (∀ s : (A) -> A, p'(s) == (∃ p : ((A) -> A) -> Bool, P(p) && p(s)))")), t441))
 }
 
 ///|

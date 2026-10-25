@@ -106653,8 +106653,8 @@ test "100/desargues matches 100/desargues.ml" {
       #|  INSERT((u : Cart[Real, Tybit1[Unit]]), INSERT((v : Cart[Real, Tybit1[Unit]]), EMPTY))
       #|  \226\136\128 u : Cart[Real, Tybit1[Unit]], \226\136\128 v : Cart[Real, Tybit1[Unit]], \226\136\131 w : Cart[Real, Tybit1[Unit]], !(w == vec(0)) && orthogonal(u, w) && orthogonal(v, w)
       #|  \226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0))
-      #|  x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)
-      #|  x || y <=> (dest_dir x) cross (dest_dir y) = vec 0
+      #|  (op_us_bar_us : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == orthogonal(dest_dir(x), dest_dir(y))
+      #|  (op_bar_bar : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == (cross(dest_dir(x), dest_dir(y)) == vec(0))
       #|  (\226\136\128 x : Direction, (P : (Cart[Real, Tybit1[Unit]]) -> Bool)(dest_dir(x))) == (\226\136\128 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) \226\134\146 P(x)) && (\226\136\131 x : Direction, P(dest_dir(x))) == (\226\136\131 x : Cart[Real, Tybit1[Unit]], !(x == vec(0)) && P(x))
       #|  (\226\136\128 x : Direction, op_bar_bar(x, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, op_bar_bar(x, y) == op_bar_bar(y, x)) && (\226\136\128 x : Direction, \226\136\128 y : Direction, \226\136\128 z : Direction, op_bar_bar(x, y) && op_bar_bar(y, z) \226\134\146 op_bar_bar(x, z))
       #|  \226\136\128 x : Direction, \226\136\128 y : Direction, (op_bar_bar(x) == op_bar_bar(y)) == op_bar_bar(x, y)
