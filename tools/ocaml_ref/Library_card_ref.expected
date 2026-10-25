@@ -8367,7 +8367,7 @@ Library/card quotations (969):
   \\(g:C->A,h:C->B) x. if x IN u then (g x,h x) else @x. F
   \\f:C->A#B. (\\x. if x IN u then FST(f x) else @x. F),\n                (\\x. if x IN u then SND(f x) else @x. F)
   forall s:A->bool t:B->bool u:C->bool.\n        (s *_c t) ^_c u =_c (s ^_c u) *_c (t ^_c u)
-  \\x:A y:B. if y = b then x else @y. F
+  (x : A) => (y : B) => if y == (b : B) { x } else { select((y : A) => false) }
   (f : (B) -> A) => f((b : B))
   \226\136\128 s : (A) -> Bool, \226\136\128 b : B, op_eq_us_c(op_caret_us_c(s, {b}), s)
   (g : (C) -> A) => (z : C) => if IN(z, (t : (C) -> Bool)) { (f : (A) -> B)(g(z)) } else { select((x : B) => false) }
@@ -8442,7 +8442,7 @@ Library/card quotations (969):
   (k : (A) -> Bool) == {}
   (k : (A) -> Bool)
   {{}} UNION\n      {k:A->bool | k SUBSET s /\\ ~(k = {}) /\\ k <=_c (t:B->bool)}
-  \\y. if y IN t then (f:B->A) y else @y. F
+  (y : B) => if IN(y, (t : (B) -> Bool)) { (f : (B) -> A)(y) } else { select((y : A) => false) }
   (f : (B) -> A)
   (k : (A) -> Bool)
   (f : (B) -> A) => IMAGE(f, (t : (B) -> Bool))
