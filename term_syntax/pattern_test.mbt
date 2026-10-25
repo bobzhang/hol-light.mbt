@@ -117,3 +117,36 @@ test "functions by cases with one arm" {
     #|fn { m if m > 0 => m }
   ))
 }
+
+///|
+/// Whether the term syntax `s` reads as the HOL quotation `q`.
+fn reads_like(s : String, q : String) -> Bool raise {
+  @term_syntax.same_term(@term_syntax.parse_term(s), @parser.parse_term(q))
+}
+
+///|
+test "pattern variables are scoped as HOL scopes them" {
+  // a lambda inside a pattern binds its own variable, which the arm's body
+  // does not see
+  assert_true(
+    reads_like(
+      "match (f : (A) -> A) { (select => select) => select }",
+      "match (f:A->A) with (\\select. select) -> (@)",
+    ),
+  )
+  // a pattern variable spelt as a symbolic name shadows an enclosing
+  // binder of that spelling
+  assert_true(
+    reads_like(
+      "(op_dollar_dollar : Bool) => match true { op_dollar_dollar => op_dollar_dollar }",
+      "\\($$):bool. match T with ($$) -> ($$)",
+    ),
+  )
+  // a lambda binds a name or a pattern, not a constant alone
+  let r = try @term_syntax.parse_term("fn { true => true }") catch {
+    _ => "error"
+  } noraise {
+    _ => "read"
+  }
+  inspect(r, content="error")
+}

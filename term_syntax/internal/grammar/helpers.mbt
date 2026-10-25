@@ -323,7 +323,14 @@ fn function(arms : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
   match arms {
     More(Combp(Combp(Combp(Varp(m, _), pat), Varp(g, _)), body), tail=Empty) if m ==
       clause_mark &&
-      g == no_guard_mark => @preterm.Absp(pat, body)
+      g == no_guard_mark => {
+      // a lambda binds a name or a pattern, not a constant alone
+      if pat is Varp(n, _) &&
+        (n.has_prefix(generated_mark) || n.iter().all(c => c is ('0'..='9'))) {
+        reject("fn { p => e } with a constant p binds no variable")
+      }
+      @preterm.Absp(pat, body)
+    }
     _ => apply(pconst("_FUNCTION"), seq_patterns(arms))
   }
 }

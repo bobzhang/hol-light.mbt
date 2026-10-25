@@ -125,35 +125,48 @@ fn pgen_cost(t : @preterm.Preterm) -> Int {
 }
 
 ///|
-/// The variables a resolved pattern binds: its identifiers that name no
-/// constant, numeral or interface name (the free variables HOL's parser
-/// gives a pattern, pfrees).
-fn pattern_variables(p : @preterm.Preterm) -> Array[String] {
-  let vs = []
-  fn go(t : @preterm.Preterm) {
+/// The variables a pattern binds, each as written and as HOL's name: the
+/// identifiers free in it that name no constant, numeral or interface name
+/// (the free variables HOL's parser gives a pattern, pfrees: those a
+/// lambda inside the pattern binds are not).
+fn pattern_bindings(pat : @preterm.Preterm) -> Array[(String, String)] {
+  fn go(t : @preterm.Preterm) -> Array[(String, String)] {
     match t {
-      Varp(n, _) =>
-        if n != "" &&
-          !names_constant(n) &&
-          !n.iter().all(c => c is ('0'..='9')) &&
-          !vs.contains(n) {
-          vs.push(n)
+      Varp(n, _) => {
+        // as the pattern resolves, with nothing in scope
+        if n.has_prefix(@grammar.generated_mark) {
+          return []
         }
-      Constp(_, _) => ()
+        let r = if @printer.the_interface.val.iter().any(e => e.0 == n) {
+          n
+        } else {
+          @grammar.unescape(n)
+        }
+        if r == "" || names_constant(r) || r.iter().all(c => c is ('0'..='9')) {
+          []
+        } else {
+          [(n, r)]
+        }
+      }
+      Constp(_, _) => []
       Combp(f, x) => {
-        go(f)
-        go(x)
+        let vs = go(f)
+        for v in go(x) {
+          if !vs.contains(v) {
+            vs.push(v)
+          }
+        }
+        vs
       }
       Absp(v, b) => {
-        go(v)
-        go(b)
+        let bound = go(v)
+        go(b).filter(x => !bound.contains(x))
       }
       Typing(x, _) => go(x)
     }
   }
 
-  go(p)
-  vs
+  go(pat)
 }
 
 ///|
@@ -164,8 +177,10 @@ fn resolve_pattern(
   pat : @preterm.Preterm,
   bound : @list.List[(String, String)],
 ) -> (@preterm.Preterm, @list.List[(String, String)]) raise {
-  let p = resolve_names(pat, @list.List([]))
-  (p, pattern_variables(p).fold(init=bound, (b, v) => b.prepend((v, v))))
+  (
+    resolve_names(pat, @list.List([])),
+    pattern_bindings(pat).fold(init=bound, (b, v) => b.prepend(v)),
+  )
 }
 
 ///|
