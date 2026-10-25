@@ -548,7 +548,7 @@ pub fn reachablensymmetry() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let t116 = @tactics.conv_tac(@calc_rat.real_ring)
   let t117 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.collinear_3_2d(), oriented_area()])), t116)
-  oriented_area_collinear_cong_c.set(@tactics.prove(@parser.parse_term("forall A B C A' B' C.\n        oriented_area (A,B,C) = oriented_area (A',B',C')\n        ==> (collinear {A,B,C} <=> collinear {A',B',C'})"), t117))
+  oriented_area_collinear_cong_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : Cart[Real, Tybit0[Unit]], ∀ B : Cart[Real, Tybit0[Unit]], ∀ C : _, ∀ A' : Cart[Real, Tybit0[Unit]], ∀ B' : Cart[Real, Tybit0[Unit]], ∀ C : Cart[Real, Tybit0[Unit]], oriented_area((A, B, C)) == oriented_area((A', B', (C' : Cart[Real, Tybit0[Unit]]))) → collinear({A, B, C}) == collinear({A', B', C'})"), t117))
 }
 
 ///|
