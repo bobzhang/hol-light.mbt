@@ -1460,7 +1460,7 @@ fn step_70() -> Unit raise {
     @tactics.then_tac(@tactics.mp_tac(th), t364)
   })
   let t370 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t365), t366), t367), t368), t369)
-  linear_eq_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(P,Q,R)geomalg->real^N g b s.\n        linear f /\\ linear g /\\\n        (forall s. s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g"), t370))
+  linear_eq_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, N], ∀ g : (Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, N], ∀ b : _, ∀ s : _, (linear : ((Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, N]) -> Bool)(f) && (linear : ((Cart[Real, Geomalg[P, Q, R]]) -> Cart[Real, N]) -> Bool)(g) && (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) → f((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s)) == g((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s))) → f == g"), t370))
 }
 
 ///|
@@ -1486,7 +1486,7 @@ fn step_71() -> Unit raise {
     @tactics.then_tac(@tactics.mp_tac(th), t373)
   })
   let t380 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t374), t375), t376), t377), t378), t379)
-  bilinear_eq_mvbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(P,Q,R)geomalg->real^(P',Q',R')geomalg->real^N g b s.\n        bilinear f /\\ bilinear g /\\\n        (forall s t.  s SUBSET 1..pdimindex(:P) + pdimindex(:Q) + pdimindex(:R) /\\\n                t SUBSET 1..pdimindex(:P') + pdimindex(:Q') + pdimindex(:R')\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g"), t380))
+  bilinear_eq_mvbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P', Q', R']]) -> Cart[Real, N], ∀ g : (Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P', Q', R']]) -> Cart[Real, N], ∀ b : _, ∀ s : _, (bilinear : ((Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P', Q', R']]) -> Cart[Real, N]) -> Bool)(f) && (bilinear : ((Cart[Real, Geomalg[P, Q, R]], Cart[Real, Geomalg[P', Q', R']]) -> Cart[Real, N]) -> Bool)(g) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (pdimindex : ((P) -> Bool) -> Num)((UNIV : (P) -> Bool)) + ((pdimindex : ((Q) -> Bool) -> Num)((UNIV : (Q) -> Bool)) + (pdimindex : ((R) -> Bool) -> Num)((UNIV : (R) -> Bool))))) && (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (pdimindex : ((P') -> Bool) -> Num)((UNIV : (P') -> Bool)) + ((pdimindex : ((Q') -> Bool) -> Num)((UNIV : (Q') -> Bool)) + (pdimindex : ((R') -> Bool) -> Num)((UNIV : (R') -> Bool))))) → f((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P', Q', R']])(t)) == g((mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P, Q, R]])(s), (mvbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[P', Q', R']])(t))) → f == g"), t380))
 }
 
 ///|
