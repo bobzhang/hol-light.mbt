@@ -758,7 +758,7 @@ fn step_12() -> Unit raise {
   let t46 = @meson.asm_meson_tac(@list.List([]))
   let t45 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t44 = @tactics.exists_tac(
-    @parser.parse_term("\\(x:A,y:B). x IN s /\\ y IN t /\\ (y = f x)"),
+    @term_syntax.parse_term("fn { (x, y) => IN(x, (s : (A) -> Bool)) && IN(y, (t : (B) -> Bool)) && y == (f : (A) -> B)(x) }"),
   )
   let t71 = @list.List([
     @tactics.then_tac(
@@ -4826,7 +4826,7 @@ fn step_83() -> Unit raise {
     @list.List([@pair.forall_pair_thm(), @sets.in_elim_thm()]),
   )
   let t521 = @tactics.exists_tac(
-    @parser.parse_term("\\(x,y). (f:A->B) x,(g:C->D) y"),
+    @term_syntax.parse_term("fn { (x, y) => ((f : (A) -> B)(x), (g : (C) -> D)(y)) }"),
   )
   let t519 = @tactics.x_choose_then(@term_syntax.parse_term("(g : (C) -> D)"))(
     @tactics.strip_assume_tac,
@@ -5058,7 +5058,7 @@ fn step_89() -> Unit raise {
   let t544 = @simp.rewrite_tac(@list.List([@sets.in_univ()]))
   let t543 = @tactics.exists_tac(@term_syntax.parse_term("(g : ((A, B)) -> C) => (x : A) => (y : B) => g((x, y))"))
   let t542 = @tactics.exists_tac(
-    @parser.parse_term("\\(f:A->B->C) (x,y). f x y"),
+    @term_syntax.parse_term("(f : (A, B) -> C) => fn { (x, y) => f(x, y) }"),
   )
   let t546 = @tactics.then_tac(
     @tactics.then_tac(
@@ -5245,7 +5245,7 @@ fn step_94() -> Unit raise {
   let t566 = @simp.once_rewrite_tac(@list.List([@sets.simple_image()]))
   let t565 = @simp.rewrite_tac(@list.List([add_c(), @sets.image_union()]))
   let t564 = @tactics.exists_tac(
-    @parser.parse_term("function INL x -> (x:A) | INR x -> x"),
+    @term_syntax.parse_term("fn { (INL : (A) -> Sum[A, A])((x : A)) => x; (INR : (A) -> Sum[A, A])((x : A)) => x }"),
   )
   let t563 = @tactics.match_mp_tac(card_le_image_gen())
   let t569 = @tactics.then_tac(
@@ -12666,7 +12666,7 @@ fn step_139() -> Unit raise {
     ]),
   )
   let t1373 = @tactics.exists_tac(
-    @parser.parse_term("\\(u,y). (f:(A->bool)->B->A) u y"),
+    @term_syntax.parse_term("fn { (u, y) => (f : ((A) -> Bool, B) -> A)(u, y) }"),
   )
   let t1372 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : ((A) -> Bool, B) -> A)"))
   let t1371 = @simp.rewrite_tac(
@@ -30138,7 +30138,7 @@ fn step_290() -> Unit raise {
     @list.List([@pair.forall_pair_thm(), @sets.in_cross(), @pair.pair_eq()]),
   )
   let t3374 = @tactics.exists_tac(
-    @parser.parse_term("\\((f:K->A),g) x. if x IN k then f x else g x"),
+    @term_syntax.parse_term("fn { ((f : (K) -> A), (g : (K) -> A)) => (x : K) => if (IN : (K, (K) -> Bool) -> Bool)(x, (k : (K) -> Bool)) { f(x) } else { g(x) } }"),
   )
   let t3373 = @tactics.exists_tac(
     @term_syntax.parse_term("(f : (K) -> A) => (RESTRICTION((k : (K) -> Bool), f), RESTRICTION((l : (K) -> Bool), f))"),
