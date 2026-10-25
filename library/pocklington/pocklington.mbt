@@ -5954,7 +5954,7 @@ fn step_77() -> Unit raise {
     ]),
   )
   let t591 = @tactics.exists_tac(
-    @parser.parse_term("\\(m,n). (f:num->num->num) m n"),
+    @term_syntax.parse_term("fn { (m, n) => (f : (Num, Num) -> Num)(m, n) }"),
   )
   let t590 = @tactics.match_mp_tac(
     @meson.meson(
