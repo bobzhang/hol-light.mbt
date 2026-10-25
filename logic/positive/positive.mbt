@@ -2223,7 +2223,7 @@ fn step_51() -> Unit raise {
   let t1101 = @tactics.first_assum(@tactics.match_mp_tac)
   let t1100 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1107 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([@equal.gsym(qfree_holds_pholds()), @prenex.qfree_formsubst(), @fol.holds_formsubst()])), t1100), t1101), t1102), t1103), t1104), t1105), t1106)
-  lifting_falsify_c.set(@tactics.prove(@parser.parse_term("forall p M w. qfree(p) /\\\n           (forall v. valuation M v ==> holds M v p) /\\\n           (forall x f l. (f,LENGTH l) IN functions_term(i x) /\\\n                    ALL (\\a. a IN Dom(M)) l\n                    ==> Fun M f l IN Dom(M))\n           ==> forall w. valuation M w ==> pholds (holds M w) (formsubst i p)"), t1107))
+  lifting_falsify_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), ∀ w : _, qfree(p) && (∀ v : (Num) -> _, valuation(M, v) → holds(M, v, p)) && (∀ x : Num, ∀ f : Num, ∀ l : List[_], IN((f, LENGTH(l)), functions_term((i : (Num) -> Term)(x))) && ALL((a : _) => IN(a, Dom(M)), l) → IN(Fun(M, f, l), Dom(M))) → (∀ w : (Num) -> _, valuation(M, w) → pholds(holds(M, w), formsubst(i, p)))"), t1107))
 }
 
 ///|
@@ -2838,7 +2838,7 @@ fn step_60() -> Unit raise {
   let t1583 = @simp.rewrite_tac(@list.List([]))
   let t1587 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @fol.expand_tac("i'")), t1583), @class.cond_cases_tac), t1584), t1585), t1586), @tactics.all_tac])
   let t1582 = @tactics.exists_tac(@term_syntax.parse_term("(i' : (Num) -> Term)"))
-  let t1581 = @simp.abbrev_tac(@parser.parse_term("i' = \\x:num. if i(x) IN herbase (functions (IMAGE interp hyps))\n                 then i(x)\n                 else @x. x IN herbase (functions (IMAGE interp hyps))"))
+  let t1581 = @simp.abbrev_tac(@term_syntax.parse_term("(i' : (Num) -> Term) == ((x : Num) => if IN((i : (Num) -> Term)(x), herbase(functions(IMAGE(interp, (hyps : ((Form) -> Bool) -> Bool))))) { i(x) } else { select((x : Term) => IN(x, herbase(functions(IMAGE(interp, hyps))))) })"))
   let t1580 = @simp.abbrev_tac(@term_syntax.parse_term("(D : (Form) -> Bool) == IMAGE(formsubst(mgu(UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))), UNION(DIFF((A : (Form) -> Bool), A1), DIFF((C : (Form) -> Bool), B1)))"))
   let t1577 = @term_syntax.parse_term("(i : (Num) -> Term)")
   let t1579 = @tactics.disch_then((x1578 : @kernel.Thm) => @tactics.x_choose_tac(t1577, x1578))

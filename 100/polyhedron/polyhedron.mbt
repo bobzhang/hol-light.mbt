@@ -2047,7 +2047,7 @@ fn step_55() -> Unit raise {
   let t2291 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.ap_term_tac, @simp.gen_rewrite_tac(fn(x2281 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x2281
   }, @list.List([@sets.extension()]))), t2282), t2283), t2284), t2285), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t2286), t2288), t2289), t2290), @tactics.all_tac])
-  let t2280 = @tactics.exists_tac(@parser.parse_term("CARD {t | t SUBSET {(:real^N) DIFF t | t IN H} /\\\n                          t HAS_SIZE n}"))
+  let t2280 = @tactics.exists_tac(@term_syntax.parse_term("CARD({(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) && HAS_SIZE(t, (n : Num))})"))
   let t2279 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t2278 = @simp.gen_rewrite_tac(fn(x2275 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s2276 = @equal.land_conv(x2275)
@@ -2065,7 +2065,7 @@ fn step_55() -> Unit raise {
   let t2268 = @simp.rewrite_tac(@list.List([@sets.simple_image()]))
   let t2267 = @tactics.match_mp_tac(@sets.finite_powerset())
   let t2266 = @list.List([@tactics.all_tac, @sets.set_tac(@list.List([]))])
-  let t2265 = @tactics.exists_tac(@parser.parse_term("{t |  t SUBSET {(:real^N) DIFF t | t IN H}}"))
+  let t2265 = @tactics.exists_tac(@term_syntax.parse_term("{(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))})}"))
   let t2274 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t2265), @tactics.conj_tac), t2266), t2267), t2268), t2269), t2273])
   let t2259 = @drule.part_match(fn(x2258 : @kernel.Term) -> @kernel.Term raise {
     @equal.lhs(@kernel.rand(x2258))
@@ -2123,10 +2123,10 @@ fn step_55() -> Unit raise {
   let t2225 = @simp.rewrite_tac(@list.List([@sets.simple_image()]))
   let t2224 = @tactics.match_mp_tac(@sets.finite_powerset())
   let t2223 = @list.List([@tactics.all_tac, @sets.set_tac(@list.List([]))])
-  let t2222 = @tactics.exists_tac(@parser.parse_term("{t |  t SUBSET {(:real^N) DIFF t | t IN H}}"))
+  let t2222 = @tactics.exists_tac(@term_syntax.parse_term("{(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))})}"))
   let t2249 = @list.List([@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@sets.finite_subset()), t2222), @tactics.conj_tac), t2223), t2224), t2225), t2226), t2242])), t2248])
   let t2218 = @term_syntax.parse_term("op_dot_dot(1, CARD((H : ((Cart[Real, N]) -> Bool) -> Bool)))")
-  let t2219 = @parser.parse_term("{t |  t SUBSET\n                     {(:real^N) DIFF t | t IN H} /\\ ~(t = {})}")
+  let t2219 = @term_syntax.parse_term("{(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) && !(t == {})}")
   let t2220 = @term_syntax.parse_term("(t : ((Cart[Real, N]) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(t) + 1)")
   let t2221 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(t : ((Cart[Real, N]) -> Bool) -> Bool) => CARD(t)"), t2220, t2219, t2218]), @iterate.sum_group()))
   let t2217 = @tactics.match_mp_tac(@calc_rat.real_ring(@term_syntax.parse_term("(s : Real) == real_of_num(1) → s * (t : Real) == t")))
@@ -2319,7 +2319,7 @@ fn step_55() -> Unit raise {
   let t2073 = @simp.rewrite_tac(@list.List([@sets.simple_image(), @theorems.imp_conj(), @sets.forall_subset_image()]))
   let t2072 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec()]))
   let t2215 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@iterate.sum_eq()), t2072), t2073), t2074), @tactics.disch_tac), t2075), @tactics.disch_tac), @tactics.ap_term_tac), t2076), t2080), t2081), t2085), t2121), t2125), t2196), t2197), t2198), @tactics.conj_tac), t2204), t2205), @tactics.ap_term_tac), t2206), t2207), t2208), t2209), @tactics.conj_tac), t2211), t2212), t2213), t2214), @tactics.all_tac])
-  let t2071 = @tactics.exists_tac(@parser.parse_term("sum {t | t SUBSET {(:real^N) DIFF t | t IN H} /\\ ~(t = {})}\n             (\\t. -- &1 pow (CARD t + 1) * (--(&1)) pow (dimindex(:N)))"))
+  let t2071 = @tactics.exists_tac(@term_syntax.parse_term("(sum : ((((Cart[Real, N]) -> Bool) -> Bool) -> Bool, (((Cart[Real, N]) -> Bool) -> Bool) -> Real) -> Real)({(t : ((Cart[Real, N]) -> Bool) -> Bool) | (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(t, {(DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) && !(t == ({} : ((Cart[Real, N]) -> Bool) -> Bool))}, (t : ((Cart[Real, N]) -> Bool) -> Bool) => pow(-real_of_num(1), (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(t) + 1) * pow(-real_of_num(1), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))"))
   let t2070 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t2068 = @tactics.disch_then(fn(x2065 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2066 = @tactics.subst1_tac(x2065)
