@@ -87619,16 +87619,16 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  (n : Num)
       #|  IN((q : Real), rational)
       #|  (n : Num)
-      #|  ?n. q = (enum_:num->real) n
+      #|  \226\136\131 n : Num, (q : Real) == (enum_ : (Num) -> Real)(n)
       #|  (q : Real)
       #|  (x : A)
-      #|  {x:A | &0 <= gen_cond_exp p G (\\w. Y w pow 2) x} INTER\n     INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum_:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum_:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
-      #|  INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum_:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum_:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
+      #|  INTER({(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((Y : (A) -> Real)(w), 2), x)}, INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp(p, G, (w : A) => pow((X : (A) -> Real)(w), 2), x) - real_of_num(2) * ((enum_ : (Num) -> Real)((n : Num)) * gen_cond_exp(p, G, (w : A) => X(w) * Y(w), x)) + pow(enum_(n), 2) * gen_cond_exp(p, G, (w : A) => pow(Y(w), 2), x)} | IN(n, UNIV)}))
+      #|  INTERS({{(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((X : (A) -> Real)(w), 2), x) - real_of_num(2) * ((enum_ : (Num) -> Real)((n : Num)) * gen_cond_exp(p, G, (w : A) => X(w) * (Y : (A) -> Real)(w), x)) + pow(enum_(n), 2) * gen_cond_exp(p, G, (w : A) => pow(Y(w), 2), x)} | IN(n, UNIV)})
       #|  {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((Y : (A) -> Real)(w), 2), x)}
       #|  (p : Prob_space[A])
-      #|  \\n. {x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum_:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum_:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x}
+      #|  (n : Num) => {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((X : (A) -> Real)(w), 2), x) - real_of_num(2) * ((enum_ : (Num) -> Real)(n) * gen_cond_exp(p, G, (w : A) => X(w) * (Y : (A) -> Real)(w), x)) + pow(enum_(n), 2) * gen_cond_exp(p, G, (w : A) => pow(Y(w), 2), x)}
       #|  (p : Prob_space[A])
-      #|  enum_:num->real
+      #|  (enum_ : (Num) -> Real)
       #|  real_of_num(0)
       #|  rational
       #|  (w : A) => pow((Y : (A) -> Real)(w), 2)
@@ -87767,16 +87767,16 @@ test "Probability/martingale_convergence matches Probability/martingale_converge
       #|  (n : Num)
       #|  IN((q : Real), rational)
       #|  (n : Num)
-      #|  ?n. q = (enum_:num->real) n
+      #|  \226\136\131 n : Num, (q : Real) == (enum_ : (Num) -> Real)(n)
       #|  (q : Real)
       #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (f : (Real) -> Real)((X : (A) -> Real)(w)), (x : A))
       #|  gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A))
       #|  (sl : (Real) -> Real)
       #|  (f : (Real) -> Real)
       #|  (x : A)
-      #|  \\n. {x:A | (sl:real->real)((enum_:num->real) n) * gen_cond_exp p G X x +\n                (f(enum_ n) - sl(enum_ n) * (enum_ n)) <=\n                gen_cond_exp p G (\\w. f(X w)) x}
+      #|  (n : Num) => {(x : A) | (sl : (Real) -> Real)((enum_ : (Num) -> Real)(n)) * gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), x) + ((f : (Real) -> Real)(enum_(n)) - sl(enum_(n)) * enum_(n)) <= gen_cond_exp(p, G, (w : A) => f(X(w)), x)}
       #|  (p : Prob_space[A])
-      #|  enum_:num->real
+      #|  (enum_ : (Num) -> Real)
       #|  real_of_num(0)
       #|  rational
       #|  {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (sl : (Real) -> Real)((q : Real)) * (X : (A) -> Real)(w) + ((f : (Real) -> Real)(q) - sl(q) * q), x) <= gen_cond_exp(p, G, (w : A) => f(X(w)), x)}
