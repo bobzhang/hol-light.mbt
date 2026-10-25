@@ -6038,7 +6038,7 @@ Generating HOL version of proof
 5 basis elements and 0 critical pairs
 Generating HOL version of proof
 100/ballot quotations (88):
-  (s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}
+  (op_minus_minus_gt : ((A) -> Bool, (B) -> Bool, (A) -> B) -> Bool)((s : (A) -> Bool), (t : (B) -> Bool)) == {(f : (A) -> B) | (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), t)) && (\226\136\128 x : A, !IN(x, s) \226\134\146 f(x) == select((y : B) => true))}
   op_minus_minus_gt({}, (t : (_) -> Bool)) == {(x : _) => select((y : _) => true)}
   (u : A) == (x : A)
   (u : A)
