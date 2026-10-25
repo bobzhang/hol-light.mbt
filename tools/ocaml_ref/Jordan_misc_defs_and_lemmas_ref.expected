@@ -6343,7 +6343,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   \226\136\128 n : Num, real_of_num(0) < pow(real_of_num(2), n)
   \226\136\128 R : Real, \226\136\128 e : Real, \226\136\131 n : Num, real_of_num(0) < R && real_of_num(0) < e \226\134\146 R * twopow(-int_of_num(n)) < e
   TAGB
-  \\(n,m) f. (sm:num->num->(num->real)->real) n m f
+  GABS((f : ((Num, Num), (Num) -> Real) -> Real) => \226\136\128 n : Num, \226\136\128 m : Num, GEQ(f((n, m)), (f : (Num) -> Real) => (sm : (Num, Num, (Num) -> Real) -> Real)(n, m, f)))
   (\226\136\128 f : (Num) -> Real, \226\136\128 n : Num, (sm : (Num, Num, (Num) -> Real) -> Real)(n, 0, f) == real_of_num(1)) && (\226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sm(n, SUC(m), f) == sm(n, m, f) * f(n + m))
   \226\136\131 prod : ((Num, Num), (Num) -> Real) -> Real, (\226\136\128 f : (Num) -> Real, \226\136\128 n : Num, prod((n, 0), f) == real_of_num(1)) && (\226\136\128 f : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, prod((n, SUC(m)), f) == prod((n, m), f) * f(n + m))
   \226\136\128 n : Num, \226\136\128 m : Num, prod((n, 0), (f : (Num) -> Real)) == real_of_num(1) && prod((n, SUC(m)), f) == prod((n, m), f) * f(n + m)
@@ -6727,7 +6727,7 @@ Jordan/misc_defs_and_lemmas quotations (605):
   (dot : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == LET((n : Num) => LET_END(sum((0, n), (i : Num) => f(i) * g(i))), min_num((m : Num) => op_euclid_prime_euclid(m, f) && op_euclid_prime_euclid(m, g)))
   norm f = sqrt(dot f f)
   (d_euclid : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == op_euclid_prime_norm(f - g)
-  \\(n,m) f. (sm:num->num->(num->(num->real))->(num->real)) n m f
+  GABS((f : ((Num, Num), (Num, Num) -> Real, Num) -> Real) => \226\136\128 n : Num, \226\136\128 m : Num, GEQ(f((n, m)), (f : (Num, Num) -> Real) => (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, m, f)))
   (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, 0, f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sm(n, SUC(m), f) == sm(n, m, f) + f(n + m))
   \226\136\131 sum_vector : ((Num, Num), (Num, Num) -> Real, Num) -> Real, (\226\136\128 f : (Num, Num) -> Real, \226\136\128 n : Num, sum_vector((n, 0), f) == ((n : Num) => real_of_num(0))) && (\226\136\128 f : (Num, Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, sum_vector((n, SUC(m)), f) == sum_vector((n, m), f) + f(n + m))
   (mk_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | \226\136\131 a : Real, real_of_num(0) <= a && a <= real_of_num(1) && u == op_euclid_prime_euclid_us_scale(a, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - a, y)}
