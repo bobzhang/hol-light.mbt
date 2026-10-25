@@ -478,7 +478,7 @@ pub fn finite_subsets_restrict() -> @kernel.Thm {
 /// CARD_ADJUST_LEMMA
 fn step_10() -> Unit raise {
   let t266 = @meson.meson_tac(@list.List([@sets.card_image_inj()]))
-  card_adjust_lemma_c.set(@tactics.prove(@parser.parse_term("forall f:A->B s x y.\n        FINITE s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        x = y + CARD (IMAGE f s)\n        ==> x = y + CARD s"), t266))
+  card_adjust_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (A) -> B, ∀ s : (A) -> Bool, ∀ x : Num, ∀ y : Num, FINITE(s) && (∀ x : A, ∀ y : A, IN(x, s) && IN(y, s) && f(x) == f(y) → x == y) && x == y + CARD(IMAGE(f, s)) → x == y + CARD(s)"), t266))
 }
 
 ///|
