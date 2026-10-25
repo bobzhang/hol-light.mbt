@@ -15683,7 +15683,7 @@ Translating certificate to HOL inferences
   (x : (Num) -> A)
   (shiftable : ((Num) -> A, (Num) -> A) -> Bool)
   (p : Num) == 0
-  forall r p x. FINITE(:A) /\\ prime p /\\ (forall x. ~(r x x))\n           ==> p divides CARD {x:num->A | cycle r p x}
+  \226\136\128 r : (A, A) -> Bool, \226\136\128 p : Num, \226\136\128 x : _, (FINITE : ((A) -> Bool) -> Bool)((UNIV : (A) -> Bool)) && prime(p) && (\226\136\128 x : A, !r(x, x)) \226\134\146 divides(p, (CARD : (((Num) -> A) -> Bool) -> Num)({(x : (Num) -> A) | (cycle : ((A, A) -> Bool, Num, (Num) -> A) -> Bool)(r, p, x)}))
   (p : Num) - 2
   (friend : (Person, Person) -> Bool)
   (m : Num)

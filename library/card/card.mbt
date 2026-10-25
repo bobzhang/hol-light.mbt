@@ -23248,7 +23248,7 @@ pub fn card_mul_exp() -> @kernel.Thm {
 fn step_250() -> Unit raise {
   let t2544 = @meson.meson_tac(@list.List([]))
   let t2543 = @simp.simp_tac(@list.List([@class.fun_eq_thm()]))
-  let t2541 = @parser.parse_term("\\x:A y:B. if y = b then x else @y. F")
+  let t2541 = @term_syntax.parse_term("(x : A) => (y : B) => if y == (b : B) { x } else { select((y : A) => false) }")
   let t2542 = @tactics.map_every(
     fn(
       x2538 : @kernel.Term,
@@ -25227,7 +25227,7 @@ fn step_262() -> Unit raise {
   let t2805 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t2804 = @simp.asm_simp_tac(@list.List([exp_c(), @sets.in_elim_thm()]))
   let t2803 = @tactics.exists_tac(
-    @parser.parse_term("\\y. if y IN t then (f:B->A) y else @y. F"),
+    @term_syntax.parse_term("(y : B) => if IN(y, (t : (B) -> Bool)) { (f : (B) -> A)(y) } else { select((y : A) => false) }"),
   )
   let t2802 = @tactics.disch_then(
     @tactics.x_choose_then(@term_syntax.parse_term("(f : (B) -> A)"))(fn(

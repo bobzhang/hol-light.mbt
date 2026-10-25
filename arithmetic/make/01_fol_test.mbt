@@ -13205,7 +13205,7 @@ test "Arithmetic/fol matches Arithmetic/fol.ml" {
       #|  (qsubst : ((Num, Term), Form) -> Form)(((x : Num), (t : Term)), (p : Form)) == op_q_q(x, op_amp_amp(op_eq_eq_eq(V(x), t), p))
       #|  \226\136\128 x : Num, \226\136\128 n : _, \226\136\128 p : Form, FV(qsubst((x, (t : Term)), p)) == DELETE(UNION(FV(p), FVT(t)), x)
       #|  \226\136\128 v : (Num) -> Num, \226\136\128 z : Num, termval(op_bar_minus_gt((x : Num), z, v), (t : Term)) == termval(v, t)
-      #|  forall v t p v. ~(x IN FVT(t))\n             ==> (holds v (qsubst (x,t) p) <=>\n                  holds ((x |-> termval v t) v) p)
+      #|  \226\136\128 v : _, \226\136\128 t : Term, \226\136\128 p : Form, \226\136\128 v : (Num) -> Num, !IN((x : Num), FVT(t)) \226\134\146 holds(v, qsubst((x, t), p)) == holds(op_bar_minus_gt(x, termval(v, t), v), p)
       #|  (numeral : (Num) -> Term)(0) == Z && (\226\136\128 n : Num, numeral(SUC(n)) == Suc(numeral(n)))
       #|  \226\136\128 v : (Num) -> Num, \226\136\128 n : Num, termval(v, numeral(n)) == n
       #|  \226\136\128 n : Num, FVT(numeral(n)) == {}
