@@ -172,7 +172,10 @@ test "pattern variables are scoped as HOL scopes them" {
     reads_like("fn { ((T : Bool) : Bool) => (true : Bool) }", "\\x:bool. T"),
   )
   // a lambda binds a name or a pattern, not a constant alone
-  for s in ["fn { true => true }", "fn { (true : Bool) => true }", "fn { 0 => 1 }"] {
+  for s in [
+    "fn { true => true }", "fn { (true : Bool) => true }", "fn { 0 => 1 }", "∀ (true) : Bool, true",
+    "∃ (false) : Bool, false",
+  ] {
     let r = try @term_syntax.parse_term(s) catch {
       _ => "error"
     } noraise {
