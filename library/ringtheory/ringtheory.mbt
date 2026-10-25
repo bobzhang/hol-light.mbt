@@ -57292,7 +57292,7 @@ fn step_864() -> Unit raise {
     t5272,
   ])
   let t5265 = @tactics.exists_tac(
-    @parser.parse_term("\\((f:K->A),g) x. if x IN k then f x else g x"),
+    @term_syntax.parse_term("fn { ((f : (K) -> A), (g : (K) -> A)) => (x : K) => if (IN : (K, (K) -> Bool) -> Bool)(x, (k : (K) -> Bool)) { f(x) } else { g(x) } }"),
   )
   let t5264 = @tactics.exists_tac(
     @term_syntax.parse_term("(f : (K) -> A) => (RESTRICTION((k : (K) -> Bool), f), RESTRICTION((l : (K) -> Bool), f))"),
