@@ -1006,7 +1006,7 @@ pub fn lambda_pair_ab() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t186 = qed(@list.List([@pair.pair_surjective()]))
   let t187 = @tactics.then_tac(rw(@list.List([@pair.forall_paired_thm()])), t186)
-  injective_pair_rewrite_c.set(@tactics.prove(@parser.parse_term("\n  forall f:A#B->L.\n  (forall(a,b) (c,d). f (a,b) = f (c,d) ==> (a,b) = (c,d)) ==>\n  forall x y. f x = f y ==> x = y\n"), t187))
+  injective_pair_rewrite_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : ((A, B)) -> L, (∀ (a, b) : (A, B), (∀ (c, d) : (A, B), f((a, b)) == f((c, d)) → (a, b) == (c, d))) → (∀ x : (A, B), ∀ y : (A, B), f(x) == f(y) → x == y)"), t187))
 }
 
 ///|
@@ -1027,11 +1027,11 @@ fn step_48() -> Unit raise {
   let t194 = @list.List([simp(@list.List([])), t193])
   let t195 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, witness(@term_syntax.parse_term("((a : A), (b : B))"))), conjunction), t194)
   let t190 = simp(@list.List([]))
-  let t189 = have(@parser.parse_term("(x:C) = (\\((a:A),(b:B)). f a b) (a,b)"), @list.List([]))
+  let t189 = have(@term_syntax.parse_term("(x : C) == fn { (a, b) => (f : (A, B) -> C)(a, b) }(((a : A), (b : B)))"), @list.List([]))
   let t188 = witness(@term_syntax.parse_term("(b : B)"))
   let t196 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, witness(@term_syntax.parse_term("(a : A)"))), t188), t189), t190), t195])
   let t197 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(rw(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_image()])), intro), splitiff), t196)
-  image_pair_c.set(@tactics.prove(@parser.parse_term("\n  forall P f:A->B->C.\n  IMAGE (\\(a,b). f a b) {a,b | P a b}\n  = {f a b | P a b}\n"), t197))
+  image_pair_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (A, B) -> Bool, ∀ f : (A, B) -> C, IMAGE(fn { (a, b) => f(a, b) }, {((a : A), (b : B)) | P(a, b)}) == {f((a : A), (b : B)) | P(a, b)}"), t197))
 }
 
 ///|
@@ -1191,7 +1191,7 @@ fn step_57() -> Unit raise {
   let t214 = rw(@list.List([@theorems.beta_thm(), @sets.in_cross()]))
   let t221 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(intro, witness(@term_syntax.parse_term("((x : (X) -> Y)((i : X)), (a : X) => if a == i { ARB } else { x(a) })"))), t214), intro), t218), t220])
   let t222 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(rw(@list.List([functions(), @sets.extension(), @sets.in_elim_thm(), in_image_vw()])), intro), splitiff), t221)
-  functions_insert_c.set(@tactics.prove(@parser.parse_term("\n  forall A:X->bool B:Y->bool i:X.\n  ~(i IN A) ==>\n  functions (i INSERT A) B\n  = IMAGE\n      (\\((b:Y),(f:X->Y)) (a:X). if a = i then b else f a)\n      (B CROSS (functions A B))\n"), t222))
+  functions_insert_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (X) -> Bool, ∀ B : (Y) -> Bool, ∀ i : X, !IN(i, A) → functions(INSERT(i, A), B) == IMAGE(fn { (b, f) => (a : X) => if a == i { b } else { f(a) } }, CROSS(B, functions(A, B)))"), t222))
 }
 
 ///|
@@ -1209,7 +1209,7 @@ fn step_58() -> Unit raise {
   let t224 = qed(@list.List([]))
   let t223 = rw(@list.List([functions(), @sets.in_elim_thm()]))
   let t225 = @tactics.then_tac(@tactics.then_tac(rw(@list.List([@pair.forall_pair_thm(), @sets.in_cross(), @pair.pair_eq(), @class.fun_eq_thm()])), t223), t224)
-  functions_insert_injective_c.set(@tactics.prove(@parser.parse_term("\n  forall A:X->bool B:Y->bool i:X v w.\n  ~(i IN A) ==>\n  v IN B CROSS functions A B ==>\n  w IN B CROSS functions A B ==>\n  (\\((b:Y),(f:X->Y)) (a:X). if a = i then b else f a) v\n  = (\\((b:Y),(f:X->Y)) (a:X). if a = i then b else f a) w ==>\n  v = w\n"), t225))
+  functions_insert_injective_c.set(@tactics.prove(@term_syntax.parse_term("∀ A : (X) -> Bool, ∀ B : (Y) -> Bool, ∀ i : X, ∀ v : (Y, (X) -> Y), ∀ w : (Y, (X) -> Y), !IN(i, A) → IN(v, CROSS(B, functions(A, B))) → IN(w, CROSS(B, functions(A, B))) → fn { (b, f) => (a : X) => if a == i { b } else { f(a) } }(v) == fn { (b, f) => (a : X) => if a == i { b } else { f(a) } }(w) → v == w"), t225))
 }
 
 ///|
@@ -2277,7 +2277,7 @@ pub fn ring_sum_image_injective() -> @kernel.Thm {
 fn step_113() -> Unit raise {
   let t467 = qed(@list.List([ring_sum_image_injective()]))
   let t468 = @tactics.then_tac(@tactics.then_tac(intro, have(@term_syntax.parse_term("∀ x : (A, B), ∀ y : (A, B), (f : ((A, B)) -> L)(x) == f(y) → x == y"), @list.List([injective_pair_rewrite()]))), t467)
-  ring_sum_image_injective_pair_c.set(@tactics.prove(@parser.parse_term("\n  forall r (f:A#B->L) (g:L->X) s.\n  (forall(a,b) (c,d). f (a,b) = f (c,d) ==> (a,b) = (c,d))\n  ==> ring_sum r (IMAGE f s) g = ring_sum r s (g o f)\n"), t468))
+  ring_sum_image_injective_pair_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Ring[X], ∀ f : ((A, B)) -> L, ∀ g : (L) -> X, ∀ s : ((A, B)) -> Bool, (∀ (a, b) : (A, B), (∀ (c, d) : (A, B), f((a, b)) == f((c, d)) → (a, b) == (c, d))) → ring_sum(r, IMAGE(f, s), g) == ring_sum(r, s, o(g, f))"), t468))
 }
 
 ///|
@@ -3044,7 +3044,7 @@ fn step_148() -> Unit raise {
   let t708 = simp(@list.List([@ringtheory.ring_sum_sum_product(), @ringtheory.ring_sum_v1(), @ringtheory.ring_mul_v1()]))
   let t707 = simp(@list.List([@equal.gsym(@ringtheory.ring_sum_lmul()), @ringtheory.ring_sum_v1()]))
   let t710 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(intro, simp(@list.List([@equal.gsym(@ringtheory.ring_sum_rmul()), @ringtheory.ring_sum_v1()]))), t707), t708), t709)
-  ring_sum_cross_mul_c.set(@tactics.prove(@parser.parse_term("\n  forall(r:R ring) P Q (f:X->R) (g:Y->R).\n  FINITE P ==>\n  FINITE Q ==>\n  (forall x:X. x IN P ==> f x IN ring_carrier r) ==>\n  (forall y:Y. y IN Q ==> g y IN ring_carrier r) ==>\n  ring_sum r (P CROSS Q) (\\(x,y). ring_mul r (f x) (g y))\n  = ring_mul r (ring_sum r P f) (ring_sum r Q g)\n"), t710))
+  ring_sum_cross_mul_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Ring[R], ∀ P : (X) -> Bool, ∀ Q : (Y) -> Bool, ∀ f : (X) -> R, ∀ g : (Y) -> R, FINITE(P) → FINITE(Q) → (∀ x : X, IN(x, P) → IN(f(x), ring_carrier(r))) → (∀ y : Y, IN(y, Q) → IN(g(y), ring_carrier(r))) → ring_sum(r, CROSS(P, Q), fn { (x, y) => ring_mul(r, f(x), g(y)) }) == ring_mul(r, ring_sum(r, P, f), ring_sum(r, Q, g))"), t710))
 }
 
 ///|
@@ -3122,14 +3122,14 @@ fn step_150() -> Unit raise {
   let t761 = specialize(@list.List([@term_syntax.parse_term("(P : (X) -> Bool)"), t760, t759]))(functions_insert_injective())
   let t756 = @term_syntax.parse_term("CROSS((Q : (Y) -> Bool), functions((P : (X) -> Bool), Q))")
   let t757 = @term_syntax.parse_term("(a : (X) -> Y) => ring_mul((r : Ring[R]), (f : (X, Y) -> R)((x : X), a(x)), ring_product(r, (P : (X) -> Bool), (p : X) => f(p, a(p))))")
-  let t758 = @parser.parse_term("(\\(b,f) a:X. if a = x then b else f a:Y)")
+  let t758 = @term_syntax.parse_term("fn { ((b : Y), (f : (X) -> Y)) => (a : X) => if a == (x : X) { b } else { f(a) } }")
   let t763 = @list.List([@tactics.then_tac(@tactics.then_tac(specialize_assuming(@list.List([@term_syntax.parse_term("(r : Ring[R])"), t758, t757, t756]), @ringtheory.ring_sum_image()), t761), t762), pass])
-  let t755 = subgoal(@parser.parse_term("ring_sum(r:R ring) (IMAGE (\\(b,f) a:X. if a = x then b else f a:Y) (Q CROSS functions P Q)) (\\a. ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p)))) = ring_sum r (Q CROSS functions P Q) ((\\a. ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p)))) o (\\(b,f) a. if a = x then b else f a))"))
+  let t755 = subgoal(@term_syntax.parse_term("ring_sum((r : Ring[R]), IMAGE(fn { (b, f) => (a : X) => if a == (x : X) { b } else { f(a) } }, CROSS((Q : (Y) -> Bool), functions((P : (X) -> Bool), Q))), (a : (X) -> Y) => ring_mul(r, (f : (X, Y) -> R)(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p))))) == ring_sum(r, CROSS(Q, functions(P, Q)), o((a : (X) -> Y) => ring_mul(r, f(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p)))), fn { (b, f) => (a : X) => if a == x { b } else { f(a) } }))"))
   let t753 = qed(@list.List([]))
   let t752 = have(@term_syntax.parse_term("IN((a : (X) -> Y)((x : X)), (Q : (Y) -> Bool))"), @list.List([]))
   let t751 = rw(@list.List([@theorems.beta_thm(), in_image_vw(), @pair.exists_pair_thm(), @sets.in_cross(), functions(), @sets.in_elim_thm(), @sets.subset()]))
   let t754 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(sufficesby(@ringtheory.ring_sum_eq()), t751), intro), t752), t753), pass])
-  let t750 = subgoal(@parser.parse_term("ring_sum(r:R ring) (IMAGE (\\(b,f) a:X. if a = x then b else f a:Y) (Q CROSS functions P Q)) (\\a. if ~(f x (a x) IN ring_carrier r) then ring_product r P (\\p. f p (a p)) else ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p)))) = ring_sum r (IMAGE (\\(b,f) a. if a = x then b else f a) (Q CROSS functions P Q)) (\\a.  ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p))))"))
+  let t750 = subgoal(@term_syntax.parse_term("ring_sum((r : Ring[R]), IMAGE(fn { (b, f) => (a : X) => if a == (x : X) { b } else { f(a) } }, CROSS((Q : (Y) -> Bool), functions((P : (X) -> Bool), Q))), (a : (X) -> Y) => if !IN((f : (X, Y) -> R)(x, a(x)), ring_carrier(r)) { ring_product(r, P, (p : X) => f(p, a(p))) } else { ring_mul(r, f(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p)))) }) == ring_sum(r, IMAGE(fn { (b, f) => (a : X) => if a == x { b } else { f(a) } }, CROSS(Q, functions(P, Q))), (a : (X) -> Y) => ring_mul(r, f(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p)))))"))
   let t749 = simp(@list.List([@ringtheory.ring_product_clauses(), @ringtheory.ring_sum_v1()]))
   let t748 = simp(@list.List([functions_insert()]))
   let t747 = set_fact(@term_syntax.parse_term("∀ p : X, IN(p, (P : (X) -> Bool)) → IN(p, INSERT((x : X), P))"))
@@ -4823,12 +4823,12 @@ fn step_228() -> Unit raise {
   let t1296 = qed(@list.List([]))
   let t1292 = @term_syntax.parse_term("{((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}")
   let t1293 = @term_syntax.parse_term("GABS((f : (((V) -> Num, (V) -> Num)) -> R) => ∀ m1 : (V) -> Num, ∀ m2 : (V) -> Num, GEQ(f((m1, m2)), ring_mul((r : Ring[R]), (p : ((V) -> Num) -> R)(m1), (q : ((V) -> Num) -> R)(m2))))")
-  let t1294 = @parser.parse_term("(\\(m1,m2). (m1:V->num) o (f:V->V),(m2:V->num) o (f:V->V))")
+  let t1294 = @term_syntax.parse_term("fn { ((m1 : (V) -> Num), (m2 : (V) -> Num)) => ((o : ((V) -> Num, (V) -> V, V) -> Num)(m1, (f : (V) -> V)), (o : ((V) -> Num, (V) -> V, V) -> Num)(m2, f)) }")
   let t1295 = specialize(@list.List([@term_syntax.parse_term("(r : Ring[R])"), t1294, t1293, t1292]))(@ringtheory.ring_sum_image())
   let t1290 = qed(@list.List([o_permutes_cancel()]))
   let t1291 = @list.List([@tactics.then_tac(rw(@list.List([@pair.forall_pair_thm(), @sets.in_elim_pair_thm(), @pair.pair_eq()])), t1290), pass])
-  let t1297 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(subgoal(@parser.parse_term("forall x y. x IN {m1,m2 | monomial_mul m1 m2 = m:V->num} ==> y IN {m1,m2 | monomial_mul m1 m2 = m} ==> (\\(m1,m2). m1 o (f:V->V),m2 o f) x = (\\(m1,m2). m1 o f,m2 o f) y ==> x = y")), t1291), t1295), t1296), pass])
-  let t1289 = subgoal(@parser.parse_term("ring_sum(r:R ring) (IMAGE (\\(m1,m2). m1 o (f:V->V),m2 o f) {m1,m2 | monomial_mul m1 m2 = m:V->num}) (\\(m1,m2). ring_mul r (p m1) (q m2)) = ring_sum r {m1,m2 | monomial_mul m1 m2 = m} ((\\(m1,m2). ring_mul r (p m1) (q m2)) o (\\(m1,m2). m1 o f,m2 o f))"))
+  let t1297 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(subgoal(@term_syntax.parse_term("∀ x : ((V) -> Num, (V) -> Num), ∀ y : ((V) -> Num, (V) -> Num), IN(x, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}) → IN(y, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == m}) → fn { (m1, m2) => (o(m1, (f : (V) -> V)), o(m2, f)) }(x) == fn { (m1, m2) => (o(m1, f), o(m2, f)) }(y) → x == y")), t1291), t1295), t1296), pass])
+  let t1289 = subgoal(@term_syntax.parse_term("ring_sum((r : Ring[R]), IMAGE(fn { (m1, m2) => (o(m1, (f : (V) -> V)), o(m2, f)) }, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}), fn { (m1, m2) => ring_mul(r, (p : ((V) -> Num) -> R)(m1), (q : ((V) -> Num) -> R)(m2)) }) == ring_sum(r, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == m}, o(fn { (m1, m2) => ring_mul(r, p(m1), q(m2)) }, fn { (m1, m2) => (o(m1, f), o(m2, f)) }))"))
   let t1285 = qed(@list.List([]))
   let t1284 = rw(@list.List([@class.fun_eq_thm()]))
   let t1286 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(intro, simp(@list.List([@trivia.o_def()]))), t1284), t1285)
@@ -4849,7 +4849,7 @@ fn step_228() -> Unit raise {
   let t1287 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(intro, witness(@term_syntax.parse_term("o((p1 : (V) -> Num), inverse((f : (V) -> V)))"))), t1270), intro), t1283), t1286])
   let t1269 = rw(@list.List([@ringtheory.monomial_mul()]))
   let t1288 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(rw(@list.List([@sets.extension(), @sets.in_image(), @pair.forall_pair_thm(), @pair.exists_pair_thm(), @sets.in_elim_pair_thm(), @pair.pair_eq()])), t1269), intro), splitiff), t1287), pass])
-  let t1268 = subgoal(@parser.parse_term("{m1,m2 | monomial_mul m1 m2 = m o f} = IMAGE (\\(m1,m2). ((m1:V->num) o (f:V->V)),(m2 o f)) {m1,m2 | monomial_mul m1 m2 = m}"))
+  let t1268 = subgoal(@term_syntax.parse_term("{((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == o((m : (V) -> Num), (f : (V) -> V))} == IMAGE(fn { (m1, m2) => (o(m1, f), o(m2, f)) }, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == m})"))
   let t1302 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(rw(@list.List([@ringtheory.poly_mul()])), intro), t1268), t1288), t1289), t1297), t1298), t1299), t1300), intro), t1301)
   poly_mul_o_permutes_c.set(@tactics.prove(@term_syntax.parse_term("∀ r : Ring[R], ∀ p : ((V) -> Num) -> R, ∀ q : ((V) -> Num) -> R, ∀ S : (V) -> Bool, ∀ f : (V) -> V, ∀ m : (V) -> Num, permutes(f, S) → poly_mul(r, p, q, o(m, f)) == poly_mul(r, (m : (V) -> Num) => p(o(m, f)), (m : (V) -> Num) => q(o(m, f)), m)"), t1302))
 }

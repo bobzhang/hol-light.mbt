@@ -7786,7 +7786,7 @@ Jordan/metric_spaces quotations (1950):
   ((x' : _), (x'' : _))
   (b : _)
   (a : _)
-  (\\ (u,v) . (f u,f' v))
+  fn { (u, v) => ((f : (_) -> _)(u), (f' : (_) -> _)(v)) }
   {((m : Num), (n : Num)) | true}
   :A
   :num#num
@@ -8815,7 +8815,7 @@ Jordan/metric_spaces quotations (1950):
   \226\136\128 x : Num, (X : (A) -> Bool)((f : (Num) -> A)(x))
   SUBSET((X : (A) -> Bool), X) && (cond : (((A) -> Bool, Num), Num) -> Bool)((X, 0), 0)
   (R : Real) == real_of_num(2) * (r' : Real)
-  cond = (\\ ((C:A->bool),(s:num)) n. ~FINITE{j| C (f j)} /\\ (C(f s)) /\\ (forall x y. (C x /\\ C y) ==> d x y <. (&.2*.r')*. twopow(--: (&:n))))
+  (cond : (((A) -> Bool, Num), Num) -> Bool) == fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C((f : (Num) -> A)(j))}) && C(f(s)) && (\226\136\128 x : A, \226\136\128 y : A, C(x) && C(y) \226\134\146 (d : (A, A) -> Real)(x, y) < real_of_num(2) * (r' : Real) * twopow(-int_of_num(n))) }
   (y : A)
   (x : A)
   \226\136\128 x : A, \226\136\128 y : A, (X : (A) -> Bool)(x) && X(y) \226\134\146 (d : (A, A) -> Real)(x, y) < real_of_num(2) * (r' : Real)
@@ -8990,7 +8990,7 @@ Jordan/metric_spaces quotations (1950):
   \226\136\128 x : Num, (X : (A) -> Bool)((f : (Num) -> A)(x))
   SUBSET((X : (A) -> Bool), X) && (cond : (((A) -> Bool, Num), Num) -> Bool)((X, 0), 0)
   (R : Real) == real_of_num(2) * (r' : Real)
-  cond = (\\ ((C:A->bool),(s:num)) n. ~FINITE{j| C (f j)} /\\ (C(f s)) /\\ (forall x y. (C x /\\ C y) ==> d x y <. (&.2*.r')*. twopow(--: (&:n))))
+  (cond : (((A) -> Bool, Num), Num) -> Bool) == fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C((f : (Num) -> A)(j))}) && C(f(s)) && (\226\136\128 x : A, \226\136\128 y : A, C(x) && C(y) \226\134\146 (d : (A, A) -> Real)(x, y) < real_of_num(2) * (r' : Real) * twopow(-int_of_num(n))) }
   (y : A)
   (x : A)
   \226\136\128 x : A, \226\136\128 y : A, (X : (A) -> Bool)(x) && X(y) \226\134\146 (d : (A, A) -> Real)(x, y) < real_of_num(2) * (r' : Real)
@@ -8998,7 +8998,7 @@ Jordan/metric_spaces quotations (1950):
   (r' : Real) == real_of_num(1) + abs((r : Real))
   real_of_num(0) < real_of_num(1) + abs((r : Real))
   (r : Real) < real_of_num(1) + abs(r)
-  forall(X:A->bool) d f. ((metric_space(X,d))/\\(totally_bounded(X,d)) /\\\n        (sequence X f)) ==>\n    (?R Cn sn cond.\n       (&0 < R) /\\\n       (forall x y. X x /\\ X y ==> d x y < R) /\\\n       (cond (X,0) 0) /\\\n       (sn 0 = 0) /\\ (Cn 0 = X) /\\\n       (forall n. Cn n SUBSET X /\\ cond (Cn n,sn n) n) /\\\n       (forall n. Cn (SUC n) SUBSET Cn n /\\ sn n <| sn (SUC n)) /\\\n       (((\\ (C,s). \\n.\n            (~FINITE {j | C (f j)}) /\\\n            (C (f s)) /\\\n           (forall x y. (C x /\\ C y) ==> d x y < R * (twopow (--: (&:n))))) =\n       cond)\n    ))
+  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, \226\136\128 f : (Num) -> A, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_sequence(X, f) \226\134\146 (\226\136\131 R : Real, \226\136\131 Cn : (Num, A) -> Bool, \226\136\131 sn : (Num) -> Num, \226\136\131 cond : (((A) -> Bool, Num), Num) -> Bool, real_of_num(0) < R && (\226\136\128 x : A, \226\136\128 y : A, X(x) && X(y) \226\134\146 d(x, y) < R) && cond((X, 0), 0) && sn(0) == 0 && Cn(0) == X && (\226\136\128 n : Num, SUBSET(Cn(n), X) && cond((Cn(n), sn(n)), n)) && (\226\136\128 n : Num, SUBSET(Cn(SUC(n)), Cn(n)) && sn(n) < sn(SUC(n))) && fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C(f(j))}) && C(f(s)) && (\226\136\128 x : A, \226\136\128 y : A, C(x) && C(y) \226\134\146 d(x, y) < R * twopow(-int_of_num(n))) } == cond)
   TAGB
   TAGB
   (c : _) == (d : (_, _) -> _)((x : _), (f : (_) -> _)((i : _)))
