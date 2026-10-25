@@ -24,6 +24,7 @@ from hol_notation import IDENT
 
 # upstream file -> {old stem: new stem}
 TERM_RENAMES = {
+    'Logic/linear.ml': {'final': 'final_'},
 }
 # upstream file -> [(text, replacement)], each text occurring once, applied
 # before the rename (for a name built in code)
