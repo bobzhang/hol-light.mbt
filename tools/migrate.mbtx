@@ -1622,7 +1622,10 @@ async fn main {
             runs
             .iter()
             .find_first(r => r.1.has_prefix(unprintable))
-            .map(r => " [" + r.1[unprintable.length():].to_owned() + "]")
+            .map(r => {
+              let why = r.1[unprintable.length():].to_owned()
+              " [" + (if why.has_prefix(": ") { why[2:].to_owned() } else { why }) + "]"
+            })
             .unwrap_or("")
           None => ""
         }
