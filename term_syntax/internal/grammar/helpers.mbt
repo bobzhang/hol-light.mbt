@@ -277,7 +277,22 @@ fn quantify_pattern(
   ty : @preterm.Pretype,
   body : @preterm.Preterm,
 ) -> @preterm.Preterm {
+  check_binds(pat)
   apply(pconst(q), @preterm.Absp(typed(pat, ty), body))
+}
+
+///|
+/// Reject a lambda's or quantifier's pattern that is a constant alone
+/// (`true`, `0`, any annotated): it would bind nothing.
+fn check_binds(pat : @preterm.Preterm) -> Unit {
+  let mut bare = pat
+  while bare is Typing(x, _) {
+    bare = x
+  }
+  if bare is Varp(n, _) &&
+    (n.has_prefix(generated_mark) || n.iter().all(c => c is ('0'..='9'))) {
+    reject("a lambda or quantifier over a constant alone binds no variable")
+  }
 }
 
 ///|
@@ -324,15 +339,7 @@ fn function(arms : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
     More(Combp(Combp(Combp(Varp(m, _), pat), Varp(g, _)), body), tail=Empty) if m ==
       clause_mark &&
       g == no_guard_mark => {
-      // a lambda binds a name or a pattern, not a constant alone
-      let mut bare = pat
-      while bare is Typing(x, _) {
-        bare = x
-      }
-      if bare is Varp(n, _) &&
-        (n.has_prefix(generated_mark) || n.iter().all(c => c is ('0'..='9'))) {
-        reject("fn { p => e } with a constant p binds no variable")
-      }
+      check_binds(pat)
       @preterm.Absp(pat, body)
     }
     _ => apply(pconst("_FUNCTION"), seq_patterns(arms))

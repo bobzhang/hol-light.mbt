@@ -34,7 +34,7 @@ fn describe(e : @grammar.ParseError) -> String {
 fn binder_name(v : @preterm.Preterm) -> String {
   match v {
     Varp(n, _) => n
-    Typing(Varp(n, _), _) => n
+    Typing(x, _) => binder_name(x)
     _ => ""
   }
 }
@@ -43,8 +43,19 @@ fn binder_name(v : @preterm.Preterm) -> String {
 fn rename_binder(v : @preterm.Preterm, n : String) -> @preterm.Preterm {
   match v {
     Varp(_, ty) => Varp(n, ty)
-    Typing(Varp(_, ty), pty) => Typing(Varp(n, ty), pty)
+    Typing(x, pty) => Typing(rename_binder(x, n), pty)
     _ => v
+  }
+}
+
+///|
+/// Whether a binder is a variable (with any type annotations), not a
+/// pattern.
+fn is_variable_binder(v : @preterm.Preterm) -> Bool {
+  match v {
+    Varp(_, _) => true
+    Typing(x, _) => is_variable_binder(x)
+    _ => false
   }
 }
 
@@ -131,11 +142,14 @@ fn pgen_cost(t : @preterm.Preterm) -> Int {
 /// pattern read with nothing in scope, which name no constant (a lambda
 /// inside the pattern binds its own). Each is bound under every spelling
 /// the pattern writes it with (op_dollar_dollar for $$). Any other name in
-/// the pattern, such as a constant's that an enclosing binder renamed, is
-/// read in `bound`, as HOL's elaboration reads it.
+/// the pattern, such as a constant's, is read as HOL's elaboration reads
+/// it: in a match's clause, in `bound` (an enclosing binder renamed from T
+/// to T' binds T); in a lambda or quantifier over a pattern, with nothing
+/// in scope (T is the constant).
 fn resolve_pattern(
   pat : @preterm.Preterm,
   bound : @list.List[(String, String)],
+  enclosing~ : Bool,
 ) -> (
   @preterm.Preterm,
   @list.List[@preterm.Preterm],
@@ -146,7 +160,7 @@ fn resolve_pattern(
     @parser.pfrees(resolve_names(pat, @list.List([])))
   })
   let names = frees.map(v => if v is Varp(n, _) { n } else { "" })
-  let inner = Ref::new(bound)
+  let own = []
   fn go(t : @preterm.Preterm) {
     match t {
       Varp(n, _) =>
@@ -156,8 +170,8 @@ fn resolve_pattern(
           } else {
             @grammar.unescape(n)
           }
-          if names.contains(r) && !inner.val.iter().any(b => b == (n, r)) {
-            inner.val = inner.val.prepend((n, r))
+          if names.contains(r) && !own.contains((n, r)) {
+            own.push((n, r))
           }
         }
       Constp(_, _) => ()
@@ -174,7 +188,12 @@ fn resolve_pattern(
   }
 
   go(pat)
-  (resolve_names(pat, inner.val), frees, inner.val)
+  fn with_own(b : @list.List[(String, String)]) {
+    own.fold(init=b, (b, v) => b.prepend(v))
+  }
+
+  let scope = if enclosing { bound } else { @list.List([]) }
+  (resolve_names(pat, with_own(scope)), frees, with_own(bound))
 }
 
 ///|
@@ -221,7 +240,7 @@ fn resolve_names(
     // HOL's parser reads them, then the clause's GEN%PVAR names
     Combp(Combp(Combp(Varp(m, _), pat), when_), body) if m ==
       @grammar.clause_mark => {
-      let (p, vs, inner) = resolve_pattern(pat, bound)
+      let (p, vs, inner) = resolve_pattern(pat, bound, enclosing=true)
       let tests = match when_ {
         Varp(g, _) if g == @grammar.no_guard_mark => @list.List([])
         _ => @list.singleton(resolve_names(when_, inner))
@@ -252,8 +271,8 @@ fn resolve_names(
     Combp(f, x) => Combp(resolve_names(f, bound), resolve_names(x, bound))
     // a lambda or quantifier over a pattern: elaboration makes it HOL's
     // generalized abstraction (GABS)
-    Absp(v, b) if !(v is (Varp(_, _) | Typing(Varp(_, _), _))) => {
-      let (p, _, inner) = resolve_pattern(v, bound)
+    Absp(v, b) if !is_variable_binder(v) => {
+      let (p, _, inner) = resolve_pattern(v, bound, enclosing=false)
       Absp(p, resolve_names(b, inner))
     }
     Absp(v, b) => {
