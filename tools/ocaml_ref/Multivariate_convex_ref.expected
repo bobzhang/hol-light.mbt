@@ -51938,7 +51938,7 @@ Multivariate/convex quotations (6096):
   \226\136\128 s : (Cart[Real, N]) -> Bool, subspace(s) \226\134\146 adjoint(closest_point(s)) == closest_point(s)
   (s : (Cart[Real, N]) -> Bool) == {}
   \226\136\128 s : (Cart[Real, N]) -> Bool, closed(s) \226\134\146 o(closest_point(s), closest_point(s)) == closest_point(s)
-  (forall A:real^M^N. A ** matrix_inv A =\n                 matrix(closest_point (IMAGE (\\x. A ** x) UNIV))) /\\\n   (forall A:real^M^N x. (A ** matrix_inv A) ** x =\n                  closest_point (IMAGE (\\x. A ** x) UNIV) x)
+  (\226\136\128 A : Cart[Cart[Real, M], N], matrix_mul(A, matrix_inv(A)) == matrix(closest_point(IMAGE((x : Cart[Real, M]) => matrix_vector_mul(A, x), UNIV)))) && (\226\136\128 A : Cart[Cart[Real, M], N], \226\136\128 x : Cart[Real, N], matrix_vector_mul(matrix_mul(A, matrix_inv(A)), x) == closest_point(IMAGE((x : Cart[Real, M]) => matrix_vector_mul(A, x), UNIV), x))
   (x : Cart[Real, N])
   (v : Cart[Real, N])
   (u : Cart[Real, N])
