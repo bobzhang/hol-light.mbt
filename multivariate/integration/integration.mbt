@@ -3920,7 +3920,7 @@ fn step_118() -> Unit raise {
 ///|
 /// has_integral_compact_interval
 fn step_119() -> Unit raise {
-  has_integral_compact_interval_c.set(@pair.new_definition(@parser.parse_term("(f has_integral_compact_interval y) i <=>\n        forall e. &0 < e\n            ==> ?d. gauge d /\\\n                    forall p. p tagged_division_of i /\\ d fine p\n                        ==> norm(vsum p (\\(x,k). content(k) % f(x)) - y) < e")))
+  has_integral_compact_interval_c.set(@pair.new_definition(@term_syntax.parse_term("(has_integral_compact_interval : ((Cart[Real, _]) -> Cart[Real, _], Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), (i : (Cart[Real, _]) -> Bool)) == (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, _], Cart[Real, _]) -> Bool, gauge(d) && (∀ p : ((Cart[Real, _], (Cart[Real, _]) -> Bool)) -> Bool, tagged_division_of(p, i) && fine(d, p) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - y) < e)))")))
 }
 
 ///|
@@ -3952,7 +3952,7 @@ pub fn has_integral_def() -> @kernel.Thm {
 fn step_121() -> Unit raise {
   let t1818 = @meson.meson_tac(@list.List([]))
   let t1819 = @tactics.then_tac(@simp.rewrite_tac(@list.List([has_integral_def(), has_integral_compact_interval()])), t1818)
-  has_integral_c.set(@tactics.prove(@parser.parse_term("(f has_integral y) (interval[a,b]) <=>\n        forall e. &0 < e\n            ==> ?d. gauge d /\\\n                    forall p. p tagged_division_of interval[a,b] /\\ d fine p\n                        ==> norm(vsum p (\\(x,k). content(k) % f(x)) - y) < e"), t1819))
+  has_integral_c.set(@tactics.prove(@term_syntax.parse_term("has_integral((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), interval([((a : Cart[Real, _]), (b : Cart[Real, _]))])) == (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, _], Cart[Real, _]) -> Bool, gauge(d) && (∀ p : ((Cart[Real, _], (Cart[Real, _]) -> Bool)) -> Bool, tagged_division_of(p, interval([(a, b)])) && fine(d, p) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - y) < e)))"), t1819))
 }
 
 ///|
@@ -4117,7 +4117,7 @@ fn step_128() -> Unit raise {
   let t1839 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t1838 = @tactics.match_mp_tac(@vectors.vsum_eq_0())
   let t1865 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1838), t1839), t1841), @tactics.disch_tac), t1842), @tactics.disj1_tac), t1849), t1855), t1863), t1864)
-  vsum_content_null_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b p.\n        content(interval[a,b]) = &0 /\\\n        p tagged_division_of interval[a,b]\n        ==> vsum p (\\(x,k). content k % f x) = vec 0"), t1865))
+  vsum_content_null_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, content(interval([(a, b)])) == real_of_num(0) && tagged_division_of(p, interval([(a, b)])) → vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) == vec(0)"), t1865))
 }
 
 ///|
@@ -5858,7 +5858,7 @@ fn step_177() -> Unit raise {
   let t2797 = @tactics.exists_tac(@term_syntax.parse_term("inv(real_of_num((N1 : Num) + (N2 : Num)) + real_of_num(1))"))
   let t2796 = @tactics.match_mp_tac(@realarith.real_lte_trans())
   let t2808 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.dist()])), t2796), t2797), @tactics.conj_tac), t2799), t2800), t2801), t2802), t2803), t2804), @int.asm_arith_tac), t2807])
-  let t2795 = @tactics.exists_tac(@parser.parse_term("vsum (p(N1+N2:num))\n                  (\\(x,k:real^M->bool). content k % (f:real^M->real^N) x)"))
+  let t2795 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : (Num, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)((N1 : Num) + (N2 : Num)), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) })"))
   let t2794 = @tactics.match_mp_tac(@vectors.dist_triangle_half_l())
   let t2793 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.dist())]))
   let t2792 = @tactics.x_gen_tac(@term_syntax.parse_term("(q : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)"))
@@ -5914,7 +5914,7 @@ fn step_177() -> Unit raise {
   })
   let t2745 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)"))
   let t2770 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@topology.cauchy()])), t2745), @tactics.disch_tac), t2752), t2753), t2754), @tactics.strip_tac), t2755), @tactics.conj_tac), t2756), t2758), t2759), t2760), t2761), t2762), @tactics.conj_tac), t2764), t2765), t2766), t2767), t2768), t2769), @int.asm_arith_tac), @tactics.all_tac])
-  let t2744 = @tactics.subgoal_then(@parser.parse_term("cauchy (\\n. vsum (p n)\n                   (\\(x,k:real^M->bool). content k % (f:real^M->real^N) x))"), fn(x2741 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t2744 = @tactics.subgoal_then(@term_syntax.parse_term("cauchy((n : Num) => vsum((p : (Num, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)(n), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }))"), fn(x2741 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2742 = @tactics.mp_tac(x2741)
     fn(x2743 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2742(x2743)
@@ -5975,7 +5975,7 @@ fn step_177() -> Unit raise {
   let t2709 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)")), @tactics.disch_tac), t2703), t2704), t2705), t2706), t2707), t2708), @tactics.all_tac])
   let t2696 = @simp.rewrite_tac(@list.List([integrable_on(), has_integral()]))
   let t2809 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t2696), @tactics.eq_tac), @tactics.disch_tac), t2709), t2719), t2720), t2724), t2725), t2733), t2737), t2738), t2739), t2740), t2744), t2770), t2771), t2772), t2773), t2774), @tactics.strip_tac), t2775), @tactics.disch_tac), t2776), t2777), t2778), t2785), t2786), t2789), t2790), t2791), t2792), @tactics.strip_tac), t2793), t2794), t2795), @tactics.conj_tac), t2808)
-  integrable_cauchy_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b.\n    f integrable_on interval[a,b] <=>\n        forall e. &0 < e\n            ==> ?d. gauge d /\\\n                    forall p1 p2. p1 tagged_division_of interval[a,b] /\\ d fine p1 /\\\n                            p2 tagged_division_of interval[a,b] /\\ d fine p2\n                            ==> norm(vsum p1 (\\(x,k). content k % f x) -\n                                     vsum p2 (\\(x,k). content k % f x)) < e"), t2809))
+  integrable_cauchy_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], integrable_on(f, interval([(a, b)])) == (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (∀ p1 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ∀ p2 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p1, interval([(a, b)])) && fine(d, p1) && tagged_division_of(p2, interval([(a, b)])) && fine(d, p2) → norm(vsum(p1, fn { (x, k) => op_pct(content(k), f(x)) }) - vsum(p2, fn { (x, k) => op_pct(content(k), f(x)) })) < e)))"), t2809))
 }
 
 ///|
@@ -6310,7 +6310,7 @@ fn step_184() -> Unit raise {
   let t2986 = @simp.rewrite_tac(@list.List([@pair.exists_pair_thm(), @pair.pair_eq()]))
   let t2985 = @simp.rewrite_tac(@list.List([@sets.subset(), @pair.forall_pair_thm(), lemma1, @sets.in_image()]))
   let t2984 = @simp.asm_simp_tac(@list.List([@sets.finite_image()]))
-  let t2983 = @tactics.exists_tac(@parser.parse_term("IMAGE (\\(x:A,k:B). x,(f k:B)) s"))
+  let t2983 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE(fn { (x, k) => (x, (f : (B) -> B)(k)) }, (s : ((A, B)) -> Bool))"))
   let t2982 = @tactics.match_mp_tac(@sets.finite_subset())
   let t2988 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2982), t2983), t2984), t2985), t2986), t2987)
   let lemma2 = @tactics.prove(@term_syntax.parse_term("∀ f : (B) -> B, ∀ s : ((A, B)) -> Bool, FINITE(s) → FINITE({((x : A), f((k : B))) | IN((x, k), s) && (P : (A, B) -> Bool)(x, k)})"), t2988)
@@ -6322,9 +6322,9 @@ fn step_184() -> Unit raise {
   let t2990 = @tactics.match_mp_tac(@vectors.vsum_superset())
   let t2989 = @tactics.conv_tac(@equal.sym_conv)
   let t2996 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t2989), t2990), t2991), t2992), t2993), t2994), t2995)
-  let lemma3 = @tactics.prove(@parser.parse_term("forall f:real^M->real^N g:(real^M->bool)->(real^M->bool) p.\n     FINITE p\n     ==> vsum {x,g k |x,k| (x,k) IN p /\\ ~(g k = {})}\n              (\\(x,k). content k % f x) =\n         vsum (IMAGE (\\(x,k). x,g k) p) (\\(x,k). content k % f x)"), t2996)
+  let lemma3 = @tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ g : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool, ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, FINITE(p) → vsum({(x, g(k)) | x : Cart[Real, M], k : (Cart[Real, M]) -> Bool | IN((x, k), p) && !(g(k) == {})}, fn { (x, k) => op_pct(content(k), f(x)) }) == vsum(IMAGE(fn { (x, k) => (x, g(k)) }, p), fn { (x, k) => op_pct(content(k), f(x)) })"), t2996)
   let t2997 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_thm(), @pair.forall_pair_thm()]))
-  let lemma4 = @tactics.prove(@parser.parse_term("(\\(x,l). content (g l) % f x) =\n     (\\(x,l). content l % f x) o (\\(x,l). x,g l)"), t2997)
+  let lemma4 = @tactics.prove(@term_syntax.parse_term("fn { (x, l) => op_pct(content((g : (_, Cart[Real, _]) -> Bool)(l)), (f : (_) -> Cart[Real, _])(x)) } == o(fn { (x, l) => op_pct(content(l), f(x)) }, fn { (x, l) => (x, g(l)) })"), t2997)
   let t3246 = @meson.asm_meson_tac(@list.List([tagged_division_split_left_inj(), @vectors.vector_mul_lzero(), tagged_division_split_right_inj()]))
   let t3245 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t3244 = @simp.asm_rewrite_tac(@list.List([@pair.forall_pair_thm()]))
@@ -6375,7 +6375,7 @@ fn step_184() -> Unit raise {
   let t3211 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @equal.gsym(@vectors.vector_add_rdistrib())]))
   let t3210 = @tactics.match_mp_tac(@vectors.vsum_eq())
   let t3234 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.vsum_add())])), t3210), t3211), t3213), @tactics.disch_tac), @tactics.ap_thm_tac), @tactics.ap_term_tac), t3220), t3231), t3232), @tactics.strip_tac), t3233)])
-  let t3209 = @tactics.exists_tac(@parser.parse_term("vsum p (\\(x,l). content (l INTER {x:real^M | x$k <= c}) %\n                     (f:real^M->real^N) x) +\n    vsum p (\\(x,l). content (l INTER {x:real^M | x$k >= c}) %\n                     (f:real^M->real^N) x)"))
+  let t3209 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, (k : Num)) <= (c : Real)})), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) + vsum(p, fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, k) >= c})), f(x)) })"))
   let t3208 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t3205 = @drule.match_mp(tagged_division_of_finite())
   let t3207 = @tactics.first_assum(fn(x3206 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -6740,7 +6740,7 @@ fn step_186() -> Unit raise {
   let t3287 = @tactics.match_mp_tac(@vectors.vsum_union_nonzero())
   let t3286 = @tactics.conv_tac(@equal.sym_conv)
   let t3285 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([tagged_division_union_interval(), fine_union()]))])
-  let t3284 = @tactics.subgoal_then(@parser.parse_term("vsum p1 (\\(x,k). content k % f x) + vsum p2 (\\(x,k). content k % f x) =\n    vsum (p1 UNION p2) (\\(x,k:real^M->bool). content k % (f:real^M->real^N) x)"), fn(x3281 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t3284 = @tactics.subgoal_then(@term_syntax.parse_term("vsum((p1 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) + vsum((p2 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), f(x)) }) == vsum(UNION(p1, p2), fn { (x, k) => op_pct(content(k), f(x)) })"), fn(x3281 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s3282 = @tactics.subst1_tac(x3281)
     fn(x3283 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s3282(x3283)
@@ -6762,7 +6762,7 @@ fn step_186() -> Unit raise {
   }, @tactics.strip_assume_tac))
   let t3268 = @tactics.repeat_tac(@tactics.gen_tac)
   let t3318 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([has_integral()])), t3268), t3272), t3273), t3274), t3275), t3276), t3277), t3278), @tactics.strip_tac), t3279), t3280), t3284), t3285), t3286), t3287), t3291), t3292), t3294), t3295), @tactics.strip_tac), @tactics.disj1_tac), t3299), t3300), t3304), t3305), t3306), t3312), t3313), t3314), t3315), t3316), t3317), @calc_rat.real_arith_tac)
-  has_integral_separate_sides_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N i a b k.\n        (f has_integral i) (interval[a,b]) /\\\n        1 <= k /\\ k <= dimindex(:M)\n        ==> forall e. &0 < e\n                ==> ?d. gauge d /\\\n                        forall p1 p2. p1 tagged_division_of\n                                     (interval[a,b] INTER {x | x$k <= c}) /\\\n                                d fine p1 /\\\n                                p2 tagged_division_of\n                                     (interval[a,b] INTER {x | x$k >= c}) /\\\n                                d fine p2\n                                ==> norm((vsum p1 (\\(x,k). content k % f x) +\n                                          vsum p2 (\\(x,k). content k % f x)) -\n                                         i) < e"), t3318))
+  has_integral_separate_sides_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ i : Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ k : Num, (has_integral : ((Cart[Real, M]) -> Cart[Real, N], Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, i, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) → (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, M], Cart[Real, M]) -> Bool, (gauge : ((Cart[Real, M], Cart[Real, M]) -> Bool) -> Bool)(d) && (∀ p1 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ∀ p2 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p1, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]), {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, k) <= (c : Real)})) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p1) && (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p2, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]), {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, k) >= c})) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p2) → (norm : (Cart[Real, N]) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p1, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }) + (vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p2, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }) - i) < e)))"), t3318))
 }
 
 ///|
@@ -7803,7 +7803,7 @@ pub fn operative_division() -> @kernel.Thm {
 /// OPERATIVE_TAGGED_DIVISION
 fn step_205() -> Unit raise {
   let t3910 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_thm(), @pair.forall_pair_thm()]))
-  let lemma = @tactics.prove(@parser.parse_term("(\\(x,l). f l) = (f o SND)"), t3910)
+  let lemma = @tactics.prove(@term_syntax.parse_term("fn { (x, l) => (f : (_) -> _)(l) } == o(f, SND)"), t3910)
   let t3941 = @meson.asm_meson_tac(@list.List([content_eq_0_interior(), operative_trivial(), tagged_division_of_v1()]))
   let t3940 = @simp.asm_simp_tac(@list.List([@sets.inter_aci()]))
   let t3939 = @tactics.disch_then(fn(x3937 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -7847,7 +7847,7 @@ fn step_205() -> Unit raise {
   let t3912 = @tactics.exists_tac(@term_syntax.parse_term("iterate((op : (A, A) -> A), IMAGE(SND, (d : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)), (f : ((Cart[Real, N]) -> Bool) -> A))"))
   let t3911 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t3942 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t3911), t3912), @tactics.conj_tac), t3913), t3914), t3915), t3916), t3917), @tactics.conj_tac), t3918), t3925), t3934), t3935), t3936), t3939), t3940), t3941)
-  operative_tagged_division_c.set(@tactics.prove(@parser.parse_term("forall op d a b f:(real^N->bool)->A.\n    monoidal op /\\ operative op f /\\ d tagged_division_of interval[a,b]\n    ==> iterate(op) d (\\(x,l). f l) = f(interval[a,b])"), t3942))
+  operative_tagged_division_c.set(@tactics.prove(@term_syntax.parse_term("∀ op : (A, A) -> A, ∀ d : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool, ∀ a : Cart[Real, N], ∀ b : Cart[Real, N], ∀ f : ((Cart[Real, N]) -> Bool) -> A, monoidal(op) && operative(op, f) && tagged_division_of(d, interval([(a, b)])) → iterate(op, d, fn { (x, l) => f(l) }) == f(interval([(a, b)]))"), t3942))
 }
 
 ///|
@@ -8137,7 +8137,7 @@ fn step_214() -> Unit raise {
       })(x4044))
     })(x4045)(x4045)
   }), t4046), t4047), t4048), t4049), t4050), @tactics.conj_tac), t4063)
-  rsum_bound_c.set(@tactics.prove(@parser.parse_term("forall p a b f:real^M->real^N e.\n       p tagged_division_of interval[a,b] /\\\n       (forall x. x IN interval[a,b] ==> norm(f x) <= e)\n       ==> norm(vsum p (\\(x,k). content k % f x))\n            <= e * content(interval[a,b])"), t4064))
+  rsum_bound_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ e : Real, tagged_division_of(p, interval([(a, b)])) && (∀ x : Cart[Real, M], IN(x, interval([(a, b)])) → norm(f(x)) <= e) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) })) <= e * content(interval([(a, b)]))"), t4064))
 }
 
 ///|
@@ -8155,7 +8155,7 @@ fn step_215() -> Unit raise {
   let t4074 = @simp.asm_simp_tac(@list.List([rsum_bound()]))
   let t4073 = @simp.rewrite_tac(@list.List([@pair.lambda_pair_thm(), @realax.real_le_refl()]))
   let t4075 = @list.List([@tactics.then_tac(@simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.vsum_sub()), @vectors.vector_sub_ldistrib()])), t4073), t4074])
-  let t4072 = @tactics.exists_tac(@parser.parse_term("norm(vsum p (\\(x,k).\n      content(k:real^M->bool) % ((f:real^M->real^N) x - g x)))"))
+  let t4072 = @tactics.exists_tac(@term_syntax.parse_term("norm(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (g : (Cart[Real, M]) -> Cart[Real, N])(x)) }))"))
   let t4071 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t4068 = @drule.match_mp(tagged_division_of_finite())
   let t4070 = @tactics.first_assum(fn(x4069 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -8167,7 +8167,7 @@ fn step_215() -> Unit raise {
     })(t4068(x4069))
   })
   let t4076 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4070), t4071), t4072), @tactics.conj_tac), t4075)
-  rsum_diff_bound_c.set(@tactics.prove(@parser.parse_term("forall p a b f g:real^M->real^N.\n       p tagged_division_of interval[a,b] /\\\n       (forall x. x IN interval[a,b] ==> norm(f x - g x) <= e)\n       ==> norm(vsum p (\\(x,k). content k % f x) -\n                vsum p (\\(x,k). content k % g x))\n           <= e * content(interval[a,b])"), t4076))
+  rsum_diff_bound_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ g : (Cart[Real, M]) -> Cart[Real, N], tagged_division_of(p, interval([(a, b)])) && (∀ x : Cart[Real, M], IN(x, interval([(a, b)])) → norm(f(x) - g(x)) <= (e : Real)) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - vsum(p, fn { (x, k) => op_pct(content(k), g(x)) })) <= e * content(interval([(a, b)]))"), t4076))
 }
 
 ///|
@@ -8276,7 +8276,7 @@ fn step_217() -> Unit raise {
   let t4119 = @tactics.match_mp_tac(@iterate.sum_le())
   let t4118 = @simp.asm_simp_tac(@list.List([@vectors.vsum_component()]))
   let t4137 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4118), t4119), t4120), t4126), t4127), t4128), t4135), t4136)
-  rsum_component_le_c.set(@tactics.prove(@parser.parse_term("forall p a b f:real^M->real^N g:real^M->real^N.\n       p tagged_division_of interval[a,b] /\\ 1 <= i /\\ i <= dimindex(:N) /\\\n       (forall x. x IN interval[a,b] ==> (f x)$i <= (g x)$i)\n       ==> vsum p (\\(x,k). content k % f x)$i <=\n           vsum p (\\(x,k). content k % g x)$i"), t4137))
+  rsum_component_le_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ g : (Cart[Real, M]) -> Cart[Real, N], (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && 1 <= (i : Num) && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (∀ x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) → (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(g(x), i)) → (op_dollar : (Cart[Real, N], Num) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), g(x)) }), i)"), t4137))
 }
 
 ///|
@@ -8358,11 +8358,11 @@ fn step_218() -> Unit raise {
   let t4190 = @term_syntax.parse_term("(gs : Real)")
   let t4191 = @tactics.spec_tac(@term_syntax.parse_term("op_dollar(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), GABS((f : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) => ∀ x : Cart[Real, M], ∀ l : (Cart[Real, M]) -> Bool, GEQ(f((x, l)), op_pct(content(l), (g : (Cart[Real, M]) -> Cart[Real, N])(x))))), (k : Num))"), t4190)
   let t4188 = @term_syntax.parse_term("(fs : Real)")
-  let t4189 = @tactics.spec_tac(@parser.parse_term("vsum p (\\(x:real^M,l:real^M->bool).\n                                content l % (f x):real^N)$k"), t4188)
+  let t4189 = @tactics.spec_tac(@term_syntax.parse_term("op_dollar(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(l), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }), (k : Num))"), t4188)
   let t4192 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@term_syntax.parse_term("real_of_num(0) < op_dollar((i : Cart[Real, N]), (k : Num)) - op_dollar((j : Cart[Real, N]), k)")), t4189), t4191), @calc_rat.real_arith_tac)
   let t4187 = @meson.asm_meson_tac(@list.List([]))
   let t4193 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(rsum_component_le()), t4187), t4192])
-  let t4186 = @tactics.subgoal_then(@parser.parse_term("vsum p (\\(x,l:real^M->bool). content l % (f:real^M->real^N) x)$k <=\n      vsum p (\\(x,l). content l % (g:real^M->real^N) x)$k"), fn(x4183 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t4186 = @tactics.subgoal_then(@term_syntax.parse_term("op_dollar(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(l), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }), (k : Num)) <= op_dollar(vsum(p, fn { (x, l) => op_pct(content(l), (g : (Cart[Real, M]) -> Cart[Real, N])(x)) }), k)"), fn(x4183 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s4184 = @tactics.mp_tac(x4183)
     fn(x4185 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s4184(x4185)
@@ -9840,7 +9840,7 @@ fn step_240() -> Unit raise {
   let t5066 = @tactics.disch_then((x5065 : @kernel.Thm) => @tactics.x_choose_tac(t5064, x5065))
   let t5063 = @simp.rewrite_tac(@list.List([@sets.forall_in_image(), @pair.forall_pair_thm()]))
   let t5062 = @simp.asm_simp_tac(@list.List([@sets.real_sup_le_finite(), @sets.finite_image(), @sets.image_eq_empty()]))
-  let t5061 = @tactics.mp_tac(@bool.spec(@parser.parse_term("sup(IMAGE (\\(x,k:real^M->bool). norm((f:real^M->real^N) x)) p)"), @real.real_arch_simple()))
+  let t5061 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("sup(IMAGE(fn { (x, k) => norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)) }, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)))"), @real.real_arch_simple()))
   let t5060 = @simp.asm_rewrite_tac(@list.List([@vectors.vsum_clauses(), @vectors.norm_0()]))
   let t5059 = @class.asm_cases_tac(@term_syntax.parse_term("(p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) == {}"))
   let t5056 = @drule.match_mp(tagged_division_of_finite())
@@ -11125,7 +11125,7 @@ fn step_279() -> Unit raise {
   let t5677 = @term_syntax.parse_term("(p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)")
   let t5678 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(op_plus : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])"), t5677, t5676, t5675, t5674]), operative_tagged_division()))
   let t5710 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5678), t5679), @tactics.ants_tac), t5693), t5694), t5699), t5705), t5706), t5707), t5708), t5709)
-  additive_tagged_division_1_c.set(@tactics.prove(@parser.parse_term("forall f:real^1->real^N p a b.\n        drop a <= drop b /\\\n        p tagged_division_of interval[a,b]\n        ==> vsum p\n             (\\(x,k). f(interval_upperbound k) - f(interval_lowerbound k)) =\n            f b - f a"), t5710))
+  additive_tagged_division_1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Unit]) -> Cart[Real, N], ∀ p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool, ∀ a : Cart[Real, Unit], ∀ b : Cart[Real, Unit], drop(a) <= drop(b) && tagged_division_of(p, interval([(a, b)])) → vsum(p, fn { (x, k) => f(interval_upperbound(k)) - f(interval_lowerbound(k)) }) == f(b) - f(a)"), t5710))
 }
 
 ///|
@@ -11173,7 +11173,7 @@ fn step_280() -> Unit raise {
   let t5717 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(f : (Cart[Real, M]) -> Cart[Real, N])"), t5713, t5712]), vsum_content_null())), t5714), @tactics.disch_tac), t5715), t5716), @tactics.all_tac])
   let t5711 = @class.asm_cases_tac(@term_syntax.parse_term("content(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])) == real_of_num(0)"))
   let t5739 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t5711), t5717), t5718), @tactics.eq_tac), @tactics.disch_tac), t5719), @tactics.disch_tac), t5728), t5735), t5736), t5737), t5738)
-  has_integral_factor_content_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N i a b.\n      (f has_integral i) (interval[a,b]) <=>\n      (forall e. &0 < e\n           ==> ?d. gauge d /\\\n                   (forall p. p tagged_division_of interval[a,b] /\\ d fine p\n                        ==> norm (vsum p (\\(x,k). content k % f x) - i)\n                            <= e * content(interval[a,b])))"), t5739))
+  has_integral_factor_content_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ i : Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], has_integral(f, i, interval([(a, b)])) == (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, interval([(a, b)])) && fine(d, p) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - i) <= e * content(interval([(a, b)])))))"), t5739))
 }
 
 ///|
@@ -12523,12 +12523,12 @@ pub fn integrable_cases() -> @kernel.Thm {
 fn step_317() -> Unit raise {
   let t6388 = @meson.meson_tac(@list.List([]))
   let t6389 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_image(), @pair.exists_pair_thm(), @pair.pair_eq()])), t6388)
-  let lemma0 = @tactics.prove(@parser.parse_term("(forall x k. (x,k) IN IMAGE (\\(x,k). f x,g k) p ==> P x k) <=>\n     (forall x k. (x,k) IN p ==> P (f x) (g k))"), t6389)
+  let lemma0 = @tactics.prove(@term_syntax.parse_term("(∀ x : _, ∀ k : _, IN((x, k), IMAGE(fn { (x, k) => ((f : (_) -> _)(x), (g : (_) -> _)(k)) }, (p : ((_, _)) -> Bool))) → (P : (_, _) -> Bool)(x, k)) == (∀ x : _, ∀ k : _, IN((x, k), p) → P(f(x), g(k)))"), t6389)
   let t6390 = @meson.meson_tac(@list.List([]))
   let t6391 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @pair.exists_pair_thm(), @sets.in_image(), @sets.in_elim_thm()])), t6390)
   let lemma1 = @tactics.prove(@term_syntax.parse_term("{(k : _) | ∃ x : _, IN((x, k), (p : ((_, _)) -> Bool))} == IMAGE(SND, p)"), t6391)
   let t6392 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @pair.forall_pair_thm(), @trivia.o_def()]))
-  let lemma2 = @tactics.prove(@parser.parse_term("SND o (\\(x,k). f x,g k) = g o SND"), t6392)
+  let lemma2 = @tactics.prove(@term_syntax.parse_term("o(SND, fn { (x, k) => ((f : (_) -> _)(x), (g : (_) -> _)(k)) }) == o(g, SND)"), t6392)
   let t6577 = @meson.asm_meson_tac(@list.List([tagged_division_of_v1()]))
   let t6576 = @tactics.repeat_tac(@tactics.strip_tac)
   let t6575 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @vectors.vector_mul_assoc()]))
@@ -16182,7 +16182,7 @@ fn step_387() -> Unit raise {
   let t8548 = @meson.asm_meson_tac(@list.List([has_integral_unique()]))
   let t8547 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t8552 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@vectors.vsum_eq()), t8547), t8548), t8551])
-  let t8546 = @tactics.exists_tac(@parser.parse_term("vsum p (\\(x:real^M,k:real^M->bool). integral k f:real^N)"))
+  let t8546 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => integral(k, (f : (Cart[Real, M]) -> Cart[Real, N])) })"))
   let t8545 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t8544 = @tactics.conv_tac(@equal.sym_conv)
   let t8543 = @tactics.match_mp_tac(@theorems.eq_imp())
@@ -16222,7 +16222,7 @@ fn step_388() -> Unit raise {
   let t8555 = @tactics.match_mp_tac(has_integral_combine_tagged_division())
   let t8554 = @tactics.match_mp_tac(integral_unique())
   let t8557 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8554), t8555), t8556)
-  integral_combine_tagged_division_bottomup_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N p a b.\n        p tagged_division_of interval[a,b] /\\\n        (forall x k. (x,k) IN p ==> f integrable_on k)\n        ==> integral (interval[a,b]) f = vsum p (\\(x,k). integral k f)"), t8557))
+  integral_combine_tagged_division_bottomup_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], tagged_division_of(p, interval([(a, b)])) && (∀ x : Cart[Real, M], ∀ k : (Cart[Real, M]) -> Bool, IN((x, k), p) → integrable_on(f, k)) → integral(interval([(a, b)]), f) == vsum(p, fn { (x, k) => integral(k, f) })"), t8557))
 }
 
 ///|
@@ -16241,7 +16241,7 @@ fn step_389() -> Unit raise {
   let t8559 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(has_integral_integral())]))
   let t8558 = @tactics.match_mp_tac(has_integral_combine_tagged_division())
   let t8561 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8558), t8559), t8560)
-  has_integral_combine_tagged_division_topdown_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b p.\n        f integrable_on interval[a,b] /\\ p tagged_division_of interval[a,b]\n        ==> (f has_integral (vsum p (\\(x,k). integral k f))) (interval[a,b])"), t8561))
+  has_integral_combine_tagged_division_topdown_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, integrable_on(f, interval([(a, b)])) && tagged_division_of(p, interval([(a, b)])) → has_integral(f, vsum(p, fn { (x, k) => integral(k, f) }), interval([(a, b)]))"), t8561))
 }
 
 ///|
@@ -16260,7 +16260,7 @@ fn step_390() -> Unit raise {
   let t8563 = @tactics.match_mp_tac(has_integral_combine_tagged_division_topdown())
   let t8562 = @tactics.match_mp_tac(integral_unique())
   let t8565 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8562), t8563), t8564)
-  integral_combine_tagged_division_topdown_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b p.\n        f integrable_on interval[a,b] /\\ p tagged_division_of interval[a,b]\n        ==> integral (interval[a,b]) f = vsum p (\\(x,k). integral k f)"), t8565))
+  integral_combine_tagged_division_topdown_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, integrable_on(f, interval([(a, b)])) && tagged_division_of(p, interval([(a, b)])) → integral(interval([(a, b)]), f) == vsum(p, fn { (x, k) => integral(k, f) })"), t8565))
 }
 
 ///|
@@ -16382,7 +16382,7 @@ fn step_391() -> Unit raise {
   let t8925 = @tactics.match_mp_tac(@vectors.vsum_image_nonzero())
   let t8924 = @tactics.conv_tac(@equal.sym_conv)
   let t8923 = @list.List([@simp.simp_tac(@list.List([@trivia.o_thm(), @class.fun_eq_thm(), @pair.forall_pair_thm()])), @tactics.all_tac])
-  let t8922 = @tactics.subgoal_then(@parser.parse_term("(\\(x:real^M,k). integral k (f:real^M->real^N)) =\n                  (\\k. integral k f) o SND"), fn(x8919 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8922 = @tactics.subgoal_then(@term_syntax.parse_term("fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])(k, (f : (Cart[Real, M]) -> Cart[Real, N])) } == (o : (((Cart[Real, M]) -> Bool) -> Cart[Real, N], ((Cart[Real, M], (Cart[Real, M]) -> Bool), Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N])((k : (Cart[Real, M]) -> Bool) => (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])(k, f), (SND : ((Cart[Real, M], (Cart[Real, M]) -> Bool), Cart[Real, M]) -> Bool))"), fn(x8919 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8920 = @tactics.subst1_tac(x8919)
     fn(x8921 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8920(x8921)
@@ -16399,7 +16399,7 @@ fn step_391() -> Unit raise {
   let t8911 = @tactics.exists_tac(@term_syntax.parse_term("vsum((r : ((Cart[Real, M]) -> Bool) -> Bool), (k : (Cart[Real, M]) -> Bool) => integral(k, (f : (Cart[Real, M]) -> Cart[Real, N])))"))
   let t8910 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("∀ ir : Cart[Real, _], (ip : Cart[Real, _]) + ir == (i : Cart[Real, _]) && norm((cr : Cart[Real, _]) - ir) < (k : Real) → norm((cp : Cart[Real, _]) + cr - i) < (e : Real) → norm(cp - ip) <= e + k")))
   let t8909 = @list.List([@simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.vsum_sub()), @pair.lambda_pair_thm()])), @tactics.all_tac])
-  let t8908 = @tactics.subgoal_then(@parser.parse_term("vsum p (\\(x,k). content k % (f:real^M->real^N) x - integral k f) =\n    vsum p (\\(x,k). content k % f x) - vsum p (\\(x,k). integral k f)"), fn(x8905 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8908 = @tactics.subgoal_then(@term_syntax.parse_term("vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) - integral(k, f) }) == vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - vsum(p, fn { (x, k) => integral(k, f) })"), fn(x8905 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8906 = @tactics.subst1_tac(x8905)
     fn(x8907 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8906(x8907)
@@ -16568,7 +16568,7 @@ fn step_391() -> Unit raise {
   let t8752 = @simp.once_rewrite_tac(@list.List([@sets.simple_image()]))
   let t8751 = @simp.asm_rewrite_tac(@list.List([]))
   let t8811 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@vectors.vsum_union_nonzero()), t8751), t8752), t8753), @tactics.conj_tac), t8754), t8755), t8756), t8757), t8758), t8759), @tactics.disch_tac), t8761), @tactics.disch_tac), t8765), t8766), @tactics.disch_tac), t8773), t8784), @tactics.ants_tac), t8801), t8802), t8809), t8810), @tactics.all_tac])
-  let t8750 = @tactics.subgoal_then(@parser.parse_term("vsum (p UNION UNIONS {q i | i IN r}) (\\(x,k). content k % f x) =\n    vsum p (\\(x:real^M,k:real^M->bool). content k % f x:real^N) +\n    vsum (UNIONS {q i | (i:real^M->bool) IN r}) (\\(x,k). content k % f x)"), fn(x8747 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8750 = @tactics.subgoal_then(@term_syntax.parse_term("vsum(UNION((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), UNIONS({(q : ((Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)((i : (Cart[Real, M]) -> Bool)) | IN(i, (r : ((Cart[Real, M]) -> Bool) -> Bool))})), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) == vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) + vsum(UNIONS({q((i : (Cart[Real, M]) -> Bool)) | IN(i, r)}), fn { (x, k) => op_pct(content(k), f(x)) })"), fn(x8747 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8748 = @tactics.subst1_tac(x8747)
     fn(x8749 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8748(x8749)
@@ -16750,7 +16750,7 @@ fn step_391() -> Unit raise {
     }
   })
   let t8676 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(i : (Cart[Real, M]) -> Bool)")), @tactics.disch_tac), t8618), t8619), t8624), t8625), t8629), t8630), t8636), t8637), t8644), t8645), t8649), t8656), t8658), t8659), t8665), t8673), t8674), t8675), @tactics.all_tac])
-  let t8614 = @tactics.subgoal_then(@parser.parse_term("forall i. i IN r\n        ==> ?p. p tagged_division_of i /\\ d fine p /\\\n                norm(vsum p (\\(x,j). content j % f x) -\n                     integral i (f:real^M->real^N))\n                < k / (&(CARD(r:(real^M->bool)->bool)) + &1)"), fn(x8611 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t8614 = @tactics.subgoal_then(@term_syntax.parse_term("∀ i : (Cart[Real, M]) -> Bool, IN(i, (r : ((Cart[Real, M]) -> Bool) -> Bool)) → (∃ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, i) && fine((d : (Cart[Real, M], Cart[Real, M]) -> Bool), p) && norm(vsum(p, fn { (x, j) => op_pct(content(j), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) - integral(i, f)) < (k : Real) / (real_of_num(CARD(r)) + real_of_num(1)))"), fn(x8611 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s8612 = @tactics.mp_tac(x8611)
     fn(x8613 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s8612(x8613)
@@ -16852,7 +16852,7 @@ fn step_391() -> Unit raise {
       })(x8883))
     })(x8884)(x8884)
   }), t8885), @tactics.ants_tac), t8900), t8904), t8908), t8909), t8910), t8911), @tactics.conj_tac), t8986), t8987), t8988), t8989), @tactics.conj_tac), t8998)
-  henstock_lemma_part1_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b d e.\n        f integrable_on interval[a,b] /\\\n        &0 < e /\\ gauge d /\\\n        (forall p. p tagged_division_of interval[a,b] /\\ d fine p\n             ==> norm (vsum p (\\(x,k). content k % f x) -\n                       integral(interval[a,b]) f) < e)\n        ==> forall p. p tagged_partial_division_of interval[a,b] /\\ d fine p\n                            ==> norm(vsum p (\\(x,k). content k % f x -\n                                                     integral k f)) <= e"), t8999))
+  henstock_lemma_part1_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ d : (Cart[Real, M], Cart[Real, M]) -> Bool, ∀ e : Real, integrable_on(f, interval([(a, b)])) && real_of_num(0) < e && gauge(d) && (∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, interval([(a, b)])) && fine(d, p) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - integral(interval([(a, b)]), f)) < e) → (∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_partial_division_of(p, interval([(a, b)])) && fine(d, p) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) - integral(k, f) })) <= e)"), t8999))
 }
 
 ///|
@@ -16884,7 +16884,7 @@ fn step_392() -> Unit raise {
   let t9001 = @tactics.match_mp_tac(@vectors.vsum_norm_allsubsets_bound())
   let t9000 = @simp.rewrite_tac(@list.List([@pair.lambda_pair()]))
   let t9014 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t9000), t9001), t9002), @tactics.conj_tac), t9003), t9004), @tactics.disch_tac), t9005), t9011), t9012), t9013)
-  henstock_lemma_part2_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b d e.\n        f integrable_on interval[a,b] /\\\n        &0 < e /\\ gauge d /\\\n        (forall p. p tagged_division_of interval[a,b] /\\ d fine p\n             ==> norm (vsum p (\\(x,k). content k % f x) -\n                       integral(interval[a,b]) f) < e)\n        ==> forall p. p tagged_partial_division_of interval[a,b] /\\ d fine p\n                            ==> sum p (\\(x,k). norm(content k % f x -\n                                                    integral k f))\n                                <= &2 * &(dimindex(:N)) * e"), t9014))
+  henstock_lemma_part2_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], ∀ d : (Cart[Real, M], Cart[Real, M]) -> Bool, ∀ e : Real, (integrable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && real_of_num(0) < e && (gauge : ((Cart[Real, M], Cart[Real, M]) -> Bool) -> Bool)(d) && (∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p) → (norm : (Cart[Real, N]) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }) - (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]), f)) < e) → (∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (tagged_partial_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p) → (sum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Real) -> Real)(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) - (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])(k, f)) }) <= real_of_num(2) * (real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) * e))"), t9014))
 }
 
 ///|
@@ -16957,7 +16957,7 @@ fn step_393() -> Unit raise {
   })
   let t9015 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_forall()), @tactics.gen_tac))
   let t9061 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(henstock_lemma_part2()), t9015), t9019), t9025), t9029), t9036), t9037), t9038), t9046), t9047), t9051), t9052), t9053), @tactics.gen_tac), t9054), t9055), t9056), t9057), t9059), t9060), @calc_rat.real_arith_tac)
-  henstock_lemma_c.set(@tactics.prove(@parser.parse_term("forall f:real^M->real^N a b.\n        f integrable_on interval[a,b]\n        ==> forall e. &0 < e\n                ==> ?d. gauge d /\\\n                        forall p. p tagged_partial_division_of interval[a,b] /\\\n                            d fine p\n                            ==> sum p (\\(x,k). norm(content k % f x -\n                                                    integral k f)) < e"), t9061))
+  henstock_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ a : Cart[Real, M], ∀ b : Cart[Real, M], integrable_on(f, interval([(a, b)])) → (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_partial_division_of(p, interval([(a, b)])) && fine(d, p) → sum(p, fn { (x, k) => norm(op_pct(content(k), f(x)) - integral(k, f)) }) < e)))"), t9061))
 }
 
 ///|
@@ -17057,7 +17057,7 @@ fn step_394() -> Unit raise {
   let t9309 = @simp.simp_tac(@list.List([@pair.forall_pair_thm(), @sets.in_elim_pair_thm()]))
   let t9308 = @tactics.match_mp_tac(@vectors.vsum_eq())
   let t9310 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@real.real_eq_imp_le()), @tactics.ap_term_tac), t9308), t9309), @tactics.all_tac])
-  let t9307 = @tactics.exists_tac(@parser.parse_term("norm(vsum {x:real^N,k:real^N->bool | x,k IN p /\\ m x:num = t}\n                  (\\(x,k). content k % f t x - integral k (f t)):real^1)"))
+  let t9307 = @tactics.exists_tac(@term_syntax.parse_term("norm(vsum({((x : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool)) | IN((x, k), (p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)) && (m : (Cart[Real, N]) -> Num)(x) == (t : Num)}, fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])(t, x)) - integral(k, f(t)) }))"))
   let t9306 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t9305 = @simp.rewrite_tac(@list.List([@iterate.in_numseg(), @arith.le_0()]))
   let t9304 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : Num)"))
@@ -17082,7 +17082,7 @@ fn step_394() -> Unit raise {
   let t9284 = @tactics.match_mp_tac(@equal.gsym(@vectors.vsum_group()))
   let t9283 = @simp.rewrite_tac(@list.List([lemma]))
   let t9287 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@real.real_eq_imp_le()), t9283), @tactics.ap_term_tac), t9284), t9285), t9286), @tactics.all_tac])
-  let t9282 = @tactics.exists_tac(@parser.parse_term("norm(vsum (0..s)\n               (\\j. vsum {(x:real^N,k:real^N->bool) | (x,k) IN p /\\ m(x) = j}\n                         (\\(x,k). content k % f (m x) x :real^1 -\n                                  integral k (f (m x)))))"))
+  let t9282 = @tactics.exists_tac(@term_syntax.parse_term("norm(vsum(op_dot_dot(0, (s : Num)), (j : Num) => vsum({((x : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool)) | IN((x, k), (p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)) && (m : (Cart[Real, N]) -> Num)(x) == j}, fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])(m(x), x)) - integral(k, f(m(x))) })))"))
   let t9281 = @tactics.match_mp_tac(@realarith.real_let_trans())
   let t9280 = @simp.rewrite_tac(@list.List([@pair.lambda_pair_thm()]))
   let t9370 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.vsum_sub())])), t9280), t9281), t9282), @tactics.conj_tac), t9287), t9288), t9289), @tactics.conj_tac), t9301), t9302), t9303), t9304), t9305), @tactics.disch_tac), t9306), t9307), @tactics.conj_tac), t9310), t9311), t9317), t9318), t9319), @tactics.conj_tac), t9323), t9330), t9331), t9332), t9333)
@@ -17155,8 +17155,8 @@ fn step_394() -> Unit raise {
       }
     })(t9228(x9229))
   })
-  let t9224 = @tactics.exists_tac(@parser.parse_term("vsum p (\\(x:real^N,k:real^N->bool).\n                  integral k ((f:num->real^N->real^1) (m x)))"))
-  let t9223 = @tactics.exists_tac(@parser.parse_term("vsum p (\\(x:real^N,k:real^N->bool).\n                  content k % (f:num->real^N->real^1) (m x) x)"))
+  let t9224 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool), fn { (x, k) => integral(k, (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])((m : (Cart[Real, N]) -> Num)(x))) })"))
+  let t9223 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])((m : (Cart[Real, N]) -> Num)(x), x)) })"))
   let t9222 = @tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("∀ b : Cart[Real, _], ∀ c : Cart[Real, _], norm((a : Cart[Real, _]) - b) <= (e : Real) / real_of_num(4) && norm(b - c) < e / real_of_num(2) && norm(c - (d : Cart[Real, _])) < e / real_of_num(4) → norm(a - d) < e")))
   let t9221 = @tactics.x_gen_tac(@term_syntax.parse_term("(p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)"))
   let t9219 = @simp.simp_tac(@list.List([]))
@@ -21753,7 +21753,7 @@ fn step_497() -> Unit raise {
   let t12133 = @list.List([@sets.set_tac(@list.List([])), @tactics.all_tac])
   let t12132 = @tactics.match_mp_tac(@iterate.sum_superset())
   let t12144 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.conv_tac(@equal.sym_conv), t12132), @tactics.conj_tac), t12133), t12134), t12136), t12137), t12138), t12139), t12140), t12141), t12142), t12143), @tactics.all_tac])
-  let t12131 = @tactics.exists_tac(@parser.parse_term("sum {x,i INTER l | (x,l) IN p /\\ i IN d}\n                  (\\(x,k:real^M->bool).\n                      abs(content k) * norm((f:real^M->real^N) x))"))
+  let t12131 = @tactics.exists_tac(@term_syntax.parse_term("sum({((x : Cart[Real, M]), INTER((i : (Cart[Real, M]) -> Bool), (l : (Cart[Real, M]) -> Bool))) | IN((x, l), (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)) && IN(i, (d : ((Cart[Real, M]) -> Bool) -> Bool))}, fn { (x, k) => abs(content(k)) * norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)) })"))
   let t12130 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t12129 = @tactics.remove_then("p'", fn(x12126 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s12127 = @tactics.subst_all_tac(x12126)
@@ -22635,7 +22635,7 @@ fn step_498() -> Unit raise {
   let t12572 = @simp.asm_rewrite_tac(@list.List([]))
   let t12571 = @tactics.exists_tac(@term_syntax.parse_term("interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])"))
   let t12574 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(sum_over_tagged_division_lemma()), t12571), t12572), t12573), @tactics.all_tac])
-  let t12570 = @tactics.subgoal_then(@parser.parse_term("sum p (\\(x:real^M,k). norm(integral k f)) =\n    sum (IMAGE SND p) (\\k. norm(integral k (f:real^M->real^N)))"), fn(x12567 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t12570 = @tactics.subgoal_then(@term_syntax.parse_term("sum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => norm(integral(k, (f : (Cart[Real, M]) -> Cart[Real, N]))) }) == sum(IMAGE(SND, p), (k : (Cart[Real, M]) -> Bool) => norm(integral(k, f)))"), fn(x12567 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s12568 = @tactics.subst1_tac(x12567)
     fn(x12569 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s12568(x12569)
@@ -22996,7 +22996,7 @@ fn step_501() -> Unit raise {
   let t12731 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(fn(x12723 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t12722(x12723))
   }), t12724), t12725), t12726), t12727), t12728), t12729), t12730), @tactics.all_tac])
-  let t12721 = @tactics.subgoal_then(@parser.parse_term("abs(sum p (\\(x,k). content k * norm((f:real^M->real^N) x)) -\n          sum p (\\(x,k:real^M->bool). norm(integral k f))) < e / &2"), fn(x12718 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t12721 = @tactics.subgoal_then(@term_syntax.parse_term("abs(sum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => content(k) * norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) - sum(p, fn { (x, k) => norm(integral(k, f)) })) < (e : Real) / real_of_num(2)"), fn(x12718 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s12719 = @tactics.mp_tac(x12718)
     fn(x12720 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s12719(x12720)
@@ -27709,7 +27709,7 @@ fn step_559() -> Unit raise {
       })(x15604))
     })(x15605)(x15605)
   }), @tactics.ants_tac), t15614), t15615), t15619), t15620), @tactics.conj_tac), t15655), t15659), t15660), t15664), t15665), t15672), t15673), t15683), t15684), t15685), t15686), @tactics.conj_tac), t15792)
-  fundamental_theorem_of_calculus_bartle_c.set(@tactics.prove(@parser.parse_term("forall f:real^1->real^N f' s a b.\n      negligible s /\\ drop a <= drop b /\\\n      (forall x. x IN interval[a,b] DIFF s\n           ==> (f has_vector_derivative f'(x)) (at x within interval[a,b])) /\\\n      (forall e. &0 < e\n           ==> ?g. gauge g /\\\n                   forall p. p tagged_partial_division_of interval[a,b] /\\\n                       g fine p /\\ IMAGE FST p SUBSET s\n                       ==> norm (vsum p (\\(x,k). f(interval_upperbound k) -\n                                                 f(interval_lowerbound k)))\n                           < e)\n      ==> (f' has_integral (f(b) - f(a))) (interval[a,b])"), t15793))
+  fundamental_theorem_of_calculus_bartle_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Unit]) -> Cart[Real, N], ∀ f' : (Cart[Real, Unit]) -> Cart[Real, N], ∀ s : (Cart[Real, Unit]) -> Bool, ∀ a : Cart[Real, Unit], ∀ b : Cart[Real, Unit], negligible(s) && drop(a) <= drop(b) && (∀ x : Cart[Real, Unit], IN(x, DIFF(interval([(a, b)]), s)) → has_vector_derivative(f, f'(x), within(at(x), interval([(a, b)])))) && (∀ e : Real, real_of_num(0) < e → (∃ g : (Cart[Real, Unit], Cart[Real, Unit]) -> Bool, gauge(g) && (∀ p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool, tagged_partial_division_of(p, interval([(a, b)])) && fine(g, p) && SUBSET(IMAGE(FST, p), s) → norm(vsum(p, fn { (x, k) => f(interval_upperbound(k)) - f(interval_lowerbound(k)) })) < e))) → has_integral(f', f(b) - f(a), interval([(a, b)]))"), t15793))
 }
 
 ///|
@@ -27958,7 +27958,7 @@ fn step_560() -> Unit raise {
   let t15898 = @tactics.match_mp_tac(@vectors.vsum_eq_superset())
   let t15897 = @simp.rewrite_tac(@list.List([@equal.gsym(@vectors.vsum_neg())]))
   let t15933 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@vectors.norm_arith(@term_syntax.parse_term("-(x : Cart[Real, N]) == (y : Cart[Real, N]) → norm(x) <= norm(y)"))), t15897), t15898), t15899), @tactics.conj_tac), t15901), t15902), t15904), @tactics.disch_tac), t15905), t15906), t15907), t15914), t15920), t15921), @tactics.disch_tac), t15922), t15923), t15930), t15931), t15932), @tactics.all_tac])
-  let t15896 = @tactics.exists_tac(@parser.parse_term("norm(vsum {(x,k) | (x,k) IN p /\\ x IN IMAGE (r:num->real^1) t /\\\n                       ~(content k = &0)}\n              (\\(x,k). --(f(interval_upperbound k) -\n                          (f:real^1->real^N)(interval_lowerbound k))))"))
+  let t15896 = @tactics.exists_tac(@term_syntax.parse_term("norm(vsum({((x : Cart[Real, Unit]), (k : (Cart[Real, Unit]) -> Bool)) | IN((x, k), (p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)) && IN(x, IMAGE((r : (Num) -> Cart[Real, Unit]), (t : (Num) -> Bool))) && !(content(k) == real_of_num(0))}, fn { (x, k) => -((f : (Cart[Real, Unit]) -> Cart[Real, N])(interval_upperbound(k)) - f(interval_lowerbound(k))) }))"))
   let t15895 = @tactics.match_mp_tac(@realarith.real_let_trans())
   let t15893 = @simp.asm_simp_tac(@list.List([@sets.subset(), @sets.forall_in_gspec()]))
   let t15892 = @tactics.exists_tac(@term_syntax.parse_term("(p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)"))
@@ -28660,7 +28660,7 @@ fn step_572() -> Unit raise {
 ///|
 /// equiintegrable_on
 fn step_573() -> Unit raise {
-  equiintegrable_on_c.set(@pair.new_definition(@parser.parse_term("fs equiintegrable_on i <=>\n        (forall f:real^M->real^N. f IN fs ==> f integrable_on i) /\\\n        (forall e. &0 < e\n             ==> ?d. gauge d /\\\n                    forall f p. f IN fs /\\ p tagged_division_of i /\\ d fine p\n                        ==> norm(vsum p (\\(x,k). content(k) % f(x)) -\n                                 integral i f) < e)")))
+  equiintegrable_on_c.set(@pair.new_definition(@term_syntax.parse_term("(equiintegrable_on : (((Cart[Real, M]) -> Cart[Real, N]) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)((fs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool), (i : (Cart[Real, M]) -> Bool)) == ((∀ f : (Cart[Real, M]) -> Cart[Real, N], IN(f, fs) → integrable_on(f, i)) && (∀ e : Real, real_of_num(0) < e → (∃ d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, IN(f, fs) && tagged_division_of(p, i) && fine(d, p) → norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - integral(i, f)) < e))))")))
 }
 
 ///|
@@ -28738,7 +28738,7 @@ fn step_576() -> Unit raise {
   let t16423 = @simp.rewrite_tac(@list.List([@pair.exists_pair_thm(), @pair.pair_eq()]))
   let t16422 = @simp.rewrite_tac(@list.List([@sets.subset(), @pair.forall_pair_thm(), lemma1, @sets.in_image()]))
   let t16421 = @simp.asm_simp_tac(@list.List([@sets.finite_image()]))
-  let t16420 = @tactics.exists_tac(@parser.parse_term("IMAGE (\\(x:A,k:B). x,(f k:B)) s"))
+  let t16420 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE(fn { (x, k) => (x, (f : (B) -> B)(k)) }, (s : ((A, B)) -> Bool))"))
   let t16419 = @tactics.match_mp_tac(@sets.finite_subset())
   let t16425 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t16419), t16420), t16421), t16422), t16423), t16424)
   let lemma2 = @tactics.prove(@term_syntax.parse_term("∀ f : (B) -> B, ∀ s : ((A, B)) -> Bool, FINITE(s) → FINITE({((x : A), f((k : B))) | IN((x, k), s) && (P : (A, B) -> Bool)(x, k)})"), t16425)
@@ -28750,9 +28750,9 @@ fn step_576() -> Unit raise {
   let t16427 = @tactics.match_mp_tac(@vectors.vsum_superset())
   let t16426 = @tactics.conv_tac(@equal.sym_conv)
   let t16433 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t16426), t16427), t16428), t16429), t16430), t16431), t16432)
-  let lemma3 = @tactics.prove(@parser.parse_term("forall f:real^M->real^N g:(real^M->bool)->(real^M->bool) p.\n     FINITE p\n     ==> vsum {x,g k |x,k| (x,k) IN p /\\ ~(g k = {})}\n              (\\(x,k). content k % f x) =\n         vsum (IMAGE (\\(x,k). x,g k) p) (\\(x,k). content k % f x)"), t16433)
+  let lemma3 = @tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, M]) -> Cart[Real, N], ∀ g : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool, ∀ p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, FINITE(p) → vsum({(x, g(k)) | x : Cart[Real, M], k : (Cart[Real, M]) -> Bool | IN((x, k), p) && !(g(k) == {})}, fn { (x, k) => op_pct(content(k), f(x)) }) == vsum(IMAGE(fn { (x, k) => (x, g(k)) }, p), fn { (x, k) => op_pct(content(k), f(x)) })"), t16433)
   let t16434 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_thm(), @pair.forall_pair_thm()]))
-  let lemma4 = @tactics.prove(@parser.parse_term("(\\(x,l). content (g l) % f x) =\n     (\\(x,l). content l % f x) o (\\(x,l). x,g l)"), t16434)
+  let lemma4 = @tactics.prove(@term_syntax.parse_term("fn { (x, l) => op_pct(content((g : (_, Cart[Real, _]) -> Bool)(l)), (f : (_) -> Cart[Real, _])(x)) } == o(fn { (x, l) => op_pct(content(l), f(x)) }, fn { (x, l) => (x, g(l)) })"), t16434)
   let t16703 = @meson.asm_meson_tac(@list.List([tagged_division_split_left_inj(), @vectors.vector_mul_lzero(), tagged_division_split_right_inj()]))
   let t16702 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t16701 = @simp.asm_rewrite_tac(@list.List([@pair.forall_pair_thm()]))
@@ -28803,7 +28803,7 @@ fn step_576() -> Unit raise {
   let t16668 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @equal.gsym(@vectors.vector_add_rdistrib())]))
   let t16667 = @tactics.match_mp_tac(@vectors.vsum_eq())
   let t16691 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.vsum_add())])), t16667), t16668), t16670), @tactics.disch_tac), @tactics.ap_thm_tac), @tactics.ap_term_tac), t16677), t16688), t16689), @tactics.strip_tac), t16690)])
-  let t16666 = @tactics.exists_tac(@parser.parse_term("vsum p (\\(x,l). content (l INTER {x:real^M | x$k <= c}) %\n                     (f:real^M->real^N) x) +\n    vsum p (\\(x,l). content (l INTER {x:real^M | x$k >= c}) %\n                     (f:real^M->real^N) x)"))
+  let t16666 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, (k : Num)) <= (c : Real)})), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) + vsum(p, fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, k) >= c})), f(x)) })"))
   let t16665 = @tactics.match_mp_tac(@theorems.eq_trans())
   let t16662 = @drule.match_mp(tagged_division_of_finite())
   let t16664 = @tactics.first_assum(fn(x16663 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -29250,7 +29250,7 @@ fn step_578() -> Unit raise {
   let t16941 = @term_syntax.parse_term("(k : (Cart[Real, M]) -> Bool)")
   let t16942 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Cart[Real, M])"), t16941]))
   let t16940 = @simp.asm_rewrite_tac(@list.List([]))
-  let t16936 = @parser.parse_term("\\(x:real^M,k:real^M->bool) (n:num).\n                content k % (f n x:real^N)")
+  let t16936 = @term_syntax.parse_term("fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (n : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }")
   let t16937 = @bool.ispecl(@list.List([@term_syntax.parse_term("sequentially"), t16936]), @topology.lim_vsum())
   let t16938 = @simp.rewrite_rule(@list.List([@pair.forall_pair_thm()]))(t16937)
   let t16939 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@pair.lambda_pair_thm()]))(t16938))
@@ -29267,7 +29267,7 @@ fn step_578() -> Unit raise {
   let t16928 = @tactics.match_mp_tac(@topology.lim_sub())
   let t16927 = @simp.rewrite_tac(@list.List([@metric.eventually_true()]))
   let t16926 = @simp.asm_simp_tac(@list.List([@metric.trivial_limit_sequentially(), @realarith.real_lt_imp_le()]))
-  let t16925 = @tactics.exists_tac(@parser.parse_term("\\n:num. vsum p (\\(x,k:real^M->bool). content k % f n x) -\n                       integral (interval [a,b]) (f n :real^M->real^N)"))
+  let t16925 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) => vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }) - integral(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), f(n))"))
   let t16924 = @tactics.match_mp_tac(@bool.ispec(@term_syntax.parse_term("sequentially"), @topology.lim_norm_ubound()))
   let t16923 = @simp.asm_rewrite_tac(@list.List([]))
   let t16922 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < (e : Real) && (x : Real) <= e / real_of_num(2) → x < e")))
@@ -29346,13 +29346,13 @@ fn step_578() -> Unit raise {
   let t16860 = @term_syntax.parse_term("(k : (Cart[Real, M]) -> Bool)")
   let t16861 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Cart[Real, M])"), t16860]))
   let t16859 = @simp.asm_rewrite_tac(@list.List([]))
-  let t16855 = @parser.parse_term("\\(x:real^M,k:real^M->bool) (n:num).\n                  content k % (f n x:real^N)")
+  let t16855 = @term_syntax.parse_term("fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (n : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }")
   let t16856 = @bool.ispecl(@list.List([@term_syntax.parse_term("sequentially"), t16855]), @topology.lim_vsum())
   let t16857 = @simp.rewrite_rule(@list.List([@pair.forall_pair_thm()]))(t16856)
   let t16858 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@pair.lambda_pair_thm()]))(t16857))
   let t16854 = @tactics.exists_tac(@term_syntax.parse_term("vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), GABS((f : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) => ∀ x : Cart[Real, M], ∀ k : (Cart[Real, M]) -> Bool, GEQ(f((x, k)), op_pct(content(k), (g : (Cart[Real, M]) -> Cart[Real, N])(x)))))"))
   let t16892 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@topology.convergent_imp_cauchy()), t16854), t16858), t16859), t16861), @tactics.disch_tac), t16862), t16863), t16870), t16871), t16872), t16891])
-  let t16853 = @tactics.subgoal_then(@parser.parse_term("cauchy (\\n. vsum p (\\(x,k:real^M->bool).\n               content k % (f:num->real^M->real^N) n x))"), fn(x16850 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t16853 = @tactics.subgoal_then(@term_syntax.parse_term("cauchy((n : Num) => vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }))"), fn(x16850 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s16851 = @tactics.mp_tac(x16850)
     fn(x16852 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s16851(x16852)
@@ -29870,7 +29870,7 @@ fn step_586() -> Unit raise {
   let t17315 = @simp.asm_simp_tac(@list.List([@equal.gsym(@vectors.vsum_lmul()), t17314]))
   let t17312 = @simp.asm_simp_tac(@list.List([]))
   let t17313 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(integral_combine_tagged_division_topdown()), t17312), @tactics.all_tac])
-  let t17311 = @tactics.subgoal_then(@parser.parse_term("integral (interval[a,b]) ((f:A->real^M->real^N) i) =\n    vsum p (\\(x:real^M,k). integral (k:real^M->bool) (f i))"), fn(x17308 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t17311 = @tactics.subgoal_then(@term_syntax.parse_term("integral(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), (f : (A, Cart[Real, M]) -> Cart[Real, N])((i : A))) == vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => integral(k, f(i)) })"), fn(x17308 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s17309 = @tactics.subst1_tac(x17308)
     fn(x17310 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s17309(x17310)
@@ -29951,7 +29951,7 @@ fn step_586() -> Unit raise {
       })(x17259))
     })(x17260)(x17260)
   }), t17261), t17265), t17266), t17267), t17268), @tactics.all_tac])
-  let t17250 = @tactics.subgoal_then(@parser.parse_term("vsum p (\\(x,k:real^M->bool). content k % vsum t (\\i. c i % f i x)) =\n    vsum t (\\i. c i %\n                vsum p (\\(x,k). content k % (f:A->real^M->real^N) i x))"), fn(x17247 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t17250 = @tactics.subgoal_then(@term_syntax.parse_term("vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), vsum((t : (A) -> Bool), (i : A) => op_pct((c : (A) -> Real)(i), (f : (A, Cart[Real, M]) -> Cart[Real, N])(i, x)))) }) == vsum(t, (i : A) => op_pct(c(i), vsum(p, fn { (x, k) => op_pct(content(k), f(i, x)) })))"), fn(x17247 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s17248 = @tactics.subst1_tac(x17247)
     fn(x17249 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s17248(x17249)
@@ -29969,7 +29969,7 @@ fn step_586() -> Unit raise {
   let t17239 = @simp.asm_simp_tac(@list.List([integrable_cmul(), @class.eta_ax()]))
   let t17238 = @tactics.match_mp_tac(integral_combine_tagged_division_topdown())
   let t17240 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17238), t17239), @tactics.all_tac])
-  let t17237 = @tactics.subgoal_then(@parser.parse_term("forall i:A. i IN t\n          ==> integral (interval[a,b]) (\\x:real^M. c i % f i x:real^N) =\n              vsum p (\\(x:real^M,k).\n                       integral (k:real^M->bool) (\\x:real^M. c i % f i x))"), fn(x17235 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t17237 = @tactics.subgoal_then(@term_syntax.parse_term("∀ i : A, IN(i, (t : (A) -> Bool)) → integral(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), (x : Cart[Real, M]) => op_pct((c : (A) -> Real)(i), (f : (A, Cart[Real, M]) -> Cart[Real, N])(i, x))) == vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => integral(k, (x : Cart[Real, M]) => op_pct(c(i), f(i, x))) })"), fn(x17235 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x17235
     @simp.simp_tac(@list.List([th]))
   })
@@ -30118,11 +30118,11 @@ fn step_587() -> Unit raise {
   let t17419 = @term_syntax.parse_term("(k : (Cart[Real, M]) -> Bool)")
   let t17420 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(x : Cart[Real, M])"), t17419]))
   let t17418 = @simp.asm_rewrite_tac(@list.List([]))
-  let t17415 = @parser.parse_term("\\(x:real^M,k:real^M->bool) (n:num).\n                  content k % (f n x:real^N)")
+  let t17415 = @term_syntax.parse_term("fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (n : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }")
   let t17416 = @bool.ispecl(@list.List([@term_syntax.parse_term("sequentially"), t17415]), @topology.lim_vsum())
   let t17417 = @simp.rewrite_rule(@list.List([@pair.forall_pair_thm()]))(t17416)
   let t17432 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@pair.lambda_pair_thm()]))(t17417)), t17418), t17420), @tactics.disch_tac), t17421), t17422), t17429), t17430), t17431), @tactics.all_tac])
-  let t17414 = @tactics.subgoal_then(@parser.parse_term("((\\n. vsum p (\\(x,k:real^M->bool).\n                    content k % (f:num->real^M->real^N) n x)) -->\n     vsum p (\\(x,k). content k % g x)) sequentially"), fn(x17411 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t17414 = @tactics.subgoal_then(@term_syntax.parse_term("op_minus_minus_gt((n : Num) => vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }), vsum(p, fn { (x, k) => op_pct(content(k), (g : (Cart[Real, M]) -> Cart[Real, N])(x)) }), sequentially)"), fn(x17411 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s17412 = ((x17410 : @kernel.Thm) => @tactics.label_tac("+", x17410))(x17411)
     fn(x17413 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s17412(x17413)
@@ -30249,7 +30249,7 @@ pub fn equiintegrable_uniform_limit() -> @kernel.Thm {
 fn step_588() -> Unit raise {
   let t17497 = @sets.set_tac(@list.List([]))
   let t17498 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_image(), @pair.pair_eq(), @pair.exists_pair_thm()])), t17497)
-  let lemma_1 = @tactics.prove(@parser.parse_term("(forall x k. (x,k) IN IMAGE (\\(x,k). f x k,g x k) s ==> Q x k) <=>\n     (forall x k. (x,k) IN s ==> Q (f x k) (g x k))"), t17498)
+  let lemma_1 = @tactics.prove(@term_syntax.parse_term("(∀ x : _, ∀ k : _, IN((x, k), IMAGE(fn { (x, k) => ((f : (_, _) -> _)(x, k), (g : (_, _) -> _)(x, k)) }, (s : ((_, _)) -> Bool))) → (Q : (_, _) -> Bool)(x, k)) == (∀ x : _, ∀ k : _, IN((x, k), s) → Q(f(x, k), g(x, k)))"), t17498)
   let t17673 = @simp.rewrite_tac(@list.List([@real.real_pow_one(), @realax.real_mul_lid(), @calc_int.real_abs_num()]))
   let t17672 = @simp.rewrite_tac(@list.List([content_image_affinity_interval(), @calc_int.real_abs_neg()]))
   let t17671 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm()])), @vectors.vector_arith_tac), @tactics.all_tac])
@@ -31534,7 +31534,7 @@ pub fn bounded_equiintegral_over_thin_tagged_partial_division() -> @kernel.Thm {
 fn step_591() -> Unit raise {
   let t18473 = @sets.set_tac(@list.List([]))
   let t18474 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_image(), @pair.pair_eq(), @pair.exists_pair_thm()])), t18473)
-  let lemma_1 = @tactics.prove(@parser.parse_term("(forall x k. (x,k) IN IMAGE (\\(x,k). f x k,g x k) s ==> Q x k) <=>\n     (forall x k. (x,k) IN s ==> Q (f x k) (g x k))"), t18474)
+  let lemma_1 = @tactics.prove(@term_syntax.parse_term("(∀ x : _, ∀ k : _, IN((x, k), IMAGE(fn { (x, k) => ((f : (_, _) -> _)(x, k), (g : (_, _) -> _)(x, k)) }, (s : ((_, _)) -> Bool))) → (Q : (_, _) -> Bool)(x, k)) == (∀ x : _, ∀ k : _, IN((x, k), s) → Q(f(x, k), g(x, k)))"), t18474)
   let t19096 = @simp.rewrite_tac(@list.List([@sets.inter_subset()]))
   let t19095 = @tactics.match_mp_tac(@topology.subset_interior())
   let t19094 = @tactics.match_mp_tac(@sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) && SUBSET((t : (_) -> Bool), (t' : (_) -> Bool)) → INTER(s', t') == {} → INTER(s, t) == {}")))

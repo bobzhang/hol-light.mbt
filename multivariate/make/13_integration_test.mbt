@@ -70550,9 +70550,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 d : (_, _) -> Bool, \226\136\128 p1 : ((_, (_) -> Bool)) -> Bool, \226\136\128 p2 : ((_, (_) -> Bool)) -> Bool, fine(d, p1) && fine(d, p2) \226\134\146 fine(d, UNION(p1, p2))
       #|  \226\136\128 d : (_, _) -> Bool, \226\136\128 ps : (((_, (_) -> Bool)) -> Bool) -> Bool, (\226\136\128 p : ((_, (_) -> Bool)) -> Bool, IN(p, ps) \226\134\146 fine(d, p)) \226\134\146 fine(d, UNIONS(ps))
       #|  \226\136\128 d : (_, _) -> Bool, \226\136\128 p : ((_, (_) -> Bool)) -> Bool, \226\136\128 q : ((_, (_) -> Bool)) -> Bool, SUBSET(p, q) && fine(d, q) \226\134\146 fine(d, p)
-      #|  (f has_integral_compact_interval y) i <=>\n        forall e. &0 < e\n            ==> ?d. gauge d /\\\n                    forall p. p tagged_division_of i /\\ d fine p\n                        ==> norm(vsum p (\\(x,k). content(k) % f(x)) - y) < e
+      #|  (has_integral_compact_interval : ((Cart[Real, _]) -> Cart[Real, _], Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), (i : (Cart[Real, _]) -> Bool)) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, _], Cart[Real, _]) -> Bool, gauge(d) && (\226\136\128 p : ((Cart[Real, _], (Cart[Real, _]) -> Bool)) -> Bool, tagged_division_of(p, i) && fine(d, p) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - y) < e)))
       #|  (has_integral : ((Cart[Real, _]) -> Cart[Real, _], Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), (i : (Cart[Real, _]) -> Bool)) == (if (\226\136\131 a : Cart[Real, _], \226\136\131 b : Cart[Real, _], i == interval([(a, b)])) { has_integral_compact_interval(f, y, i) } else { \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], SUBSET(ball((vec(0), B)), interval([(a, b)])) \226\134\146 (\226\136\131 z : Cart[Real, _], has_integral_compact_interval((x : Cart[Real, _]) => if IN(x, i) { f(x) } else { vec(0) }, z, interval([(a, b)])) && norm(z - y) < e))) })
-      #|  (f has_integral y) (interval[a,b]) <=>\n        forall e. &0 < e\n            ==> ?d. gauge d /\\\n                    forall p. p tagged_division_of interval[a,b] /\\ d fine p\n                        ==> norm(vsum p (\\(x,k). content(k) % f(x)) - y) < e
+      #|  has_integral((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), interval([((a : Cart[Real, _]), (b : Cart[Real, _]))])) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, _], Cart[Real, _]) -> Bool, gauge(d) && (\226\136\128 p : ((Cart[Real, _], (Cart[Real, _]) -> Bool)) -> Bool, tagged_division_of(p, interval([(a, b)])) && fine(d, p) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - y) < e)))
       #|  has_integral((f : (Cart[Real, _]) -> Cart[Real, _]), (y : Cart[Real, _]), (i : (Cart[Real, _]) -> Bool)) == (if (\226\136\131 a : Cart[Real, _], \226\136\131 b : Cart[Real, _], i == interval([(a, b)])) { has_integral(f, y, i) } else { \226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 B : Real, real_of_num(0) < B && (\226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], SUBSET(ball((vec(0), B)), interval([(a, b)])) \226\134\146 (\226\136\131 z : Cart[Real, _], has_integral((x : Cart[Real, _]) => if IN(x, i) { f(x) } else { vec(0) }, z, interval([(a, b)])) && norm(z - y) < e))) })
       #|  (integrable_on : ((Cart[Real, _]) -> Cart[Real, _], (Cart[Real, _]) -> Bool) -> Bool)((f : (Cart[Real, _]) -> Cart[Real, _]), (i : (Cart[Real, _]) -> Bool)) == (\226\136\131 y : Cart[Real, _], has_integral(f, y, i))
       #|  (integral : ((Cart[Real, _]) -> Bool, (Cart[Real, _]) -> Cart[Real, _]) -> Cart[Real, _])((i : (Cart[Real, _]) -> Bool), (f : (Cart[Real, _]) -> Cart[Real, _])) == select((y : Cart[Real, _]) => has_integral(f, y, i))
@@ -70564,7 +70564,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (p : Cart[Real, M])
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (p : Cart[Real, M])
-      #|  forall f:real^M->real^N a b p.\n        content(interval[a,b]) = &0 /\\\n        p tagged_division_of interval[a,b]\n        ==> vsum p (\\(x,k). content k % f x) = vec 0
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, content(interval([(a, b)])) == real_of_num(0) && tagged_division_of(p, interval([(a, b)])) \226\134\146 vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) == vec(0)
       #|  UNIONS(IMAGE((p : ((Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), (iset : ((Cart[Real, M]) -> Bool) -> Bool)))
       #|  \226\136\128 d : (Cart[Real, M], Cart[Real, M]) -> Bool, \226\136\128 iset : ((Cart[Real, M]) -> Bool) -> Bool, \226\136\128 i : (Cart[Real, M]) -> Bool, FINITE(iset) && (\226\136\128 i : (Cart[Real, M]) -> Bool, IN(i, iset) \226\134\146 (\226\136\131 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, i) && fine(d, p))) && (\226\136\128 i1 : (Cart[Real, M]) -> Bool, \226\136\128 i2 : (Cart[Real, M]) -> Bool, IN(i1, iset) && IN(i2, iset) && !(i1 == i2) \226\134\146 INTER(interior(i1), interior(i2)) == {}) && UNIONS(iset) == i \226\134\146 (\226\136\131 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, i) && fine(d, p))
       #|  \226\136\128 s : ((Cart[Real, _]) -> Bool) -> Bool, \226\136\128 i : (Cart[Real, _]) -> Bool, division_of(s, i) \226\134\146 closed(i)
@@ -70776,7 +70776,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 a : Cart[Real, _], integral(interval([(a, a)]), f) == vec(0)
       #|  inv(real_of_num((N1 : Num)))
       #|  inv(real_of_num((N1 : Num) + (N2 : Num)) + real_of_num(1))
-      #|  vsum (p(N1+N2:num))\n                  (\\(x,k:real^M->bool). content k % (f:real^M->real^N) x)
+      #|  vsum((p : (Num, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)((N1 : Num) + (N2 : Num)), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) })
       #|  (q : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (d : (Num, Cart[Real, M], Cart[Real, M]) -> Bool)((N1 : Num) + (N2 : Num))
       #|  (N2 : Num)
@@ -70791,7 +70791,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (m : Num)
       #|  (N : Num)
       #|  (e : Real)
-      #|  cauchy (\\n. vsum (p n)\n                   (\\(x,k:real^M->bool). content k % (f:real^M->real^N) x))
+      #|  cauchy((n : Num) => vsum((p : (Num, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)(n), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }))
       #|  (p : (Num, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (b : Cart[Real, M])
       #|  (a : Cart[Real, M])
@@ -70805,7 +70805,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (e : Real) / real_of_num(2)
       #|  (y : Cart[Real, N])
       #|  (e : Real)
-      #|  forall f:real^M->real^N a b.\n    f integrable_on interval[a,b] <=>\n        forall e. &0 < e\n            ==> ?d. gauge d /\\\n                    forall p1 p2. p1 tagged_division_of interval[a,b] /\\ d fine p1 /\\\n                            p2 tagged_division_of interval[a,b] /\\ d fine p2\n                            ==> norm(vsum p1 (\\(x,k). content k % f x) -\n                                     vsum p2 (\\(x,k). content k % f x)) < e
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], integrable_on(f, interval([(a, b)])) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (\226\136\128 p1 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 p2 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p1, interval([(a, b)])) && fine(d, p1) && tagged_division_of(p2, interval([(a, b)])) && fine(d, p2) \226\134\146 norm(vsum(p1, fn { (x, k) => op_pct(content(k), f(x)) }) - vsum(p2, fn { (x, k) => op_pct(content(k), f(x)) })) < e)))
       #|  ((c : Bool) \226\134\146 (b : Bool)) && (c \226\134\146 (a : Bool)) && (a && b \226\134\146 c) \226\134\146 (a && b) == c
       #|  (y : Cart[Real, N])
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Real, \226\136\128 k : Num, 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]), {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= c}) == (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == k { min((op_dollar : (Cart[Real, N], Num) -> Real)(b, k), c) } else { (op_dollar : (Cart[Real, N], Num) -> Real)(b, i) }))]) && (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]), {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= c}) == (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([((lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == k { max((op_dollar : (Cart[Real, N], Num) -> Real)(a, k), c) } else { (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) }), b)])
@@ -70841,15 +70841,15 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (\226\136\128 x : _, IN(x, {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)}) \226\134\146 (Q : (_) -> Bool)(x)) == (\226\136\128 x : _, P(x) \226\134\146 Q(f(x)))
       #|  \226\136\128 p : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 k : Num, \226\136\128 c : Real, (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(p, s) && 1 <= k && k <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)({(INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(l, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= c}) | l : (Cart[Real, N]) -> Bool | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(l, p) && !((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(l, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= c}) == ({} : (Cart[Real, N]) -> Bool))}, (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) <= c})) && (division_of : (((Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)({(INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(l, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= c}) | l : (Cart[Real, N]) -> Bool | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(l, p) && !((INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(l, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= c}) == ({} : (Cart[Real, N]) -> Bool))}, (INTER : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)(s, {(x : Cart[Real, N]) | (op_dollar : (Cart[Real, N], Num) -> Real)(x, k) >= c}))
       #|  (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), {((x : _), (f : (_) -> _)((k : _))) | (P : (_, _) -> Bool)(x, k)}) \226\134\146 (Q : (_, _) -> Bool)(x, k)) == (\226\136\128 x : _, \226\136\128 k : _, P(x, k) \226\134\146 Q(x, f(k)))
-      #|  IMAGE (\\(x:A,k:B). x,(f k:B)) s
+      #|  IMAGE(fn { (x, k) => (x, (f : (B) -> B)(k)) }, (s : ((A, B)) -> Bool))
       #|  \226\136\128 f : (B) -> B, \226\136\128 s : ((A, B)) -> Bool, FINITE(s) \226\134\146 FINITE({((x : A), f((k : B))) | IN((x, k), s) && (P : (A, B) -> Bool)(x, k)})
-      #|  forall f:real^M->real^N g:(real^M->bool)->(real^M->bool) p.\n     FINITE p\n     ==> vsum {x,g k |x,k| (x,k) IN p /\\ ~(g k = {})}\n              (\\(x,k). content k % f x) =\n         vsum (IMAGE (\\(x,k). x,g k) p) (\\(x,k). content k % f x)
-      #|  (\\(x,l). content (g l) % f x) =\n     (\\(x,l). content l % f x) o (\\(x,l). x,g l)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool, \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, FINITE(p) \226\134\146 vsum({(x, g(k)) | x : Cart[Real, M], k : (Cart[Real, M]) -> Bool | IN((x, k), p) && !(g(k) == {})}, fn { (x, k) => op_pct(content(k), f(x)) }) == vsum(IMAGE(fn { (x, k) => (x, g(k)) }, p), fn { (x, k) => op_pct(content(k), f(x)) })
+      #|  fn { (x, l) => op_pct(content((g : (_, Cart[Real, _]) -> Bool)(l)), (f : (_) -> Cart[Real, _])(x)) } == o(fn { (x, l) => op_pct(content(l), f(x)) }, fn { (x, l) => (x, g(l)) })
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  vsum p (\\(x,l). content (l INTER {x:real^M | x$k <= c}) %\n                     (f:real^M->real^N) x) +\n    vsum p (\\(x,l). content (l INTER {x:real^M | x$k >= c}) %\n                     (f:real^M->real^N) x)
+      #|  vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, (k : Num)) <= (c : Real)})), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) + vsum(p, fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, k) >= c})), f(x)) })
       #|  ((a : Cart[Real, N]) - (i : Cart[Real, N]) + ((b : Cart[Real, N]) - (j : Cart[Real, N])) == (c : Cart[Real, N]) - (i + j)) == (a + b == c)
       #|  (x : Real) < (e : Real) / real_of_num(2) && (y : Real) < e / real_of_num(2) \226\134\146 x + y < e
       #|  (kk : (Cart[Real, M]) -> Bool)
@@ -70888,11 +70888,11 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (\226\136\131 a : Cart[Real, M], \226\136\131 b : Cart[Real, M], (l : (Cart[Real, M]) -> Bool) == interval([(a, b)])) && SUBSET(l, INTER(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), {(x : Cart[Real, M]) | op_dollar(x, (k : Num)) <= (c : Real)})) && SUBSET(l, INTER(interval([(a, b)]), {(x : Cart[Real, M]) | op_dollar(x, k) >= c}))
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  vsum p1 (\\(x,k). content k % f x) + vsum p2 (\\(x,k). content k % f x) =\n    vsum (p1 UNION p2) (\\(x,k:real^M->bool). content k % (f:real^M->real^N) x)
+      #|  vsum((p1 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) + vsum((p2 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), f(x)) }) == vsum(UNION(p1, p2), fn { (x, k) => op_pct(content(k), f(x)) })
       #|  (d : (Cart[Real, M], Cart[Real, M]) -> Bool)
       #|  real_of_num(0) < (e : Real)
       #|  (e : Real)
-      #|  forall f:real^M->real^N i a b k.\n        (f has_integral i) (interval[a,b]) /\\\n        1 <= k /\\ k <= dimindex(:M)\n        ==> forall e. &0 < e\n                ==> ?d. gauge d /\\\n                        forall p1 p2. p1 tagged_division_of\n                                     (interval[a,b] INTER {x | x$k <= c}) /\\\n                                d fine p1 /\\\n                                p2 tagged_division_of\n                                     (interval[a,b] INTER {x | x$k >= c}) /\\\n                                d fine p2\n                                ==> norm((vsum p1 (\\(x,k). content k % f x) +\n                                          vsum p2 (\\(x,k). content k % f x)) -\n                                         i) < e
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 i : Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 k : Num, (has_integral : ((Cart[Real, M]) -> Cart[Real, N], Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, i, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && 1 <= k && k <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, M], Cart[Real, M]) -> Bool, (gauge : ((Cart[Real, M], Cart[Real, M]) -> Bool) -> Bool)(d) && (\226\136\128 p1 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 p2 : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p1, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]), {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, k) <= (c : Real)})) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p1) && (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p2, (INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]), {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, k) >= c})) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p2) \226\134\146 (norm : (Cart[Real, N]) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p1, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }) + (vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p2, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }) - i) < e)))
       #|  (vec : (Num) -> Cart[Real, N])(0)
       #|  (b : Cart[Real, N]) - (a : Cart[Real, N]) == (c : Cart[Real, N]) \226\134\146 norm(a) < (e : Real) / real_of_num(2) \226\134\146 norm(b) < e / real_of_num(2) \226\134\146 norm(c) < e
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
@@ -71051,9 +71051,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (d1 : ((Cart[Real, N]) -> Bool) -> Bool)
       #|  (cb : Cart[Real, N])
       #|  (a : Cart[Real, N])
-      #|  (\\(x,l). f l) = (f o SND)
+      #|  fn { (x, l) => (f : (_) -> _)(l) } == o(f, SND)
       #|  iterate((op : (A, A) -> A), IMAGE(SND, (d : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)), (f : ((Cart[Real, N]) -> Bool) -> A))
-      #|  forall op d a b f:(real^N->bool)->A.\n    monoidal op /\\ operative op f /\\ d tagged_division_of interval[a,b]\n    ==> iterate(op) d (\\(x,l). f l) = f(interval[a,b])
+      #|  \226\136\128 op : (A, A) -> A, \226\136\128 d : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 f : ((Cart[Real, N]) -> Bool) -> A, monoidal(op) && operative(op, f) && tagged_division_of(d, interval([(a, b)])) \226\134\146 iterate(op, d, fn { (x, l) => f(l) }) == f(interval([(a, b)]))
       #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
       #|  \226\136\128 d : ((Cart[Real, N]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], division_of(d, interval([(a, b)])) \226\134\146 sum(d, content) == content(interval([(a, b)]))
       #|  ((a : Bool) && (b : Bool) && (c : Bool) \226\134\146 (d : Bool)) == (a && b \226\134\146 c \226\134\146 d)
@@ -71079,9 +71079,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (x : Cart[Real, M])
       #|  sum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), GABS((f : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Real) => \226\136\128 x : Cart[Real, M], \226\136\128 k : (Cart[Real, M]) -> Bool, GEQ(f((x, k)), content(k) * (e : Real))))
       #|  (y : Real) <= (e : Real) \226\134\146 (x : Real) <= y \226\134\146 x <= e
-      #|  forall p a b f:real^M->real^N e.\n       p tagged_division_of interval[a,b] /\\\n       (forall x. x IN interval[a,b] ==> norm(f x) <= e)\n       ==> norm(vsum p (\\(x,k). content k % f x))\n            <= e * content(interval[a,b])
-      #|  norm(vsum p (\\(x,k).\n      content(k:real^M->bool) % ((f:real^M->real^N) x - g x)))
-      #|  forall p a b f g:real^M->real^N.\n       p tagged_division_of interval[a,b] /\\\n       (forall x. x IN interval[a,b] ==> norm(f x - g x) <= e)\n       ==> norm(vsum p (\\(x,k). content k % f x) -\n                vsum p (\\(x,k). content k % g x))\n           <= e * content(interval[a,b])
+      #|  \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 e : Real, tagged_division_of(p, interval([(a, b)])) && (\226\136\128 x : Cart[Real, M], IN(x, interval([(a, b)])) \226\134\146 norm(f(x)) <= e) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) })) <= e * content(interval([(a, b)]))
+      #|  norm(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (g : (Cart[Real, M]) -> Cart[Real, N])(x)) }))
+      #|  \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], tagged_division_of(p, interval([(a, b)])) && (\226\136\128 x : Cart[Real, M], IN(x, interval([(a, b)])) \226\134\146 norm(f(x) - g(x)) <= (e : Real)) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - vsum(p, fn { (x, k) => op_pct(content(k), g(x)) })) <= e * content(interval([(a, b)]))
       #|  (n1 : Real) <= (n : Real) + (n2 : Real) \226\134\146 n <= (B : Real) \226\134\146 !(n2 < n1 - B)
       #|  norm((s : Cart[Real, _])) <= (B : Real) \226\134\146 !(norm(s - (i : Cart[Real, _])) < norm(i) - B)
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
@@ -71094,7 +71094,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (i : Cart[Real, N]) == vec(0)
       #|  real_of_num(0) < content(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 i : Cart[Real, N], \226\136\128 B : Real, real_of_num(0) <= B && has_integral(f, i, interval([(a, b)])) && (\226\136\128 x : Cart[Real, M], IN(x, interval([(a, b)])) \226\134\146 norm(f(x)) <= B) \226\134\146 norm(i) <= B * content(interval([(a, b)]))
-      #|  forall p a b f:real^M->real^N g:real^M->real^N.\n       p tagged_division_of interval[a,b] /\\ 1 <= i /\\ i <= dimindex(:N) /\\\n       (forall x. x IN interval[a,b] ==> (f x)$i <= (g x)$i)\n       ==> vsum p (\\(x,k). content k % f x)$i <=\n           vsum p (\\(x,k). content k % g x)$i
+      #|  \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && 1 <= (i : Num) && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && (\226\136\128 x : Cart[Real, M], (IN : (Cart[Real, M], (Cart[Real, M]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(f(x), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(g(x), i)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }), i) <= (op_dollar : (Cart[Real, N], Num) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), g(x)) }), i)
       #|  (k : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  1 <= (k : Num)
       #|  (k : Num)
@@ -71117,9 +71117,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (gs : Real)
       #|  op_dollar(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), GABS((f : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, M], \226\136\128 l : (Cart[Real, M]) -> Bool, GEQ(f((x, l)), op_pct(content(l), (g : (Cart[Real, M]) -> Cart[Real, N])(x))))), (k : Num))
       #|  (fs : Real)
-      #|  vsum p (\\(x:real^M,l:real^M->bool).\n                                content l % (f x):real^N)$k
+      #|  op_dollar(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(l), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }), (k : Num))
       #|  real_of_num(0) < op_dollar((i : Cart[Real, N]), (k : Num)) - op_dollar((j : Cart[Real, N]), k)
-      #|  vsum p (\\(x,l:real^M->bool). content l % (f:real^M->real^N) x)$k <=\n      vsum p (\\(x,l). content l % (g:real^M->real^N) x)$k
+      #|  op_dollar(vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(l), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }), (k : Num)) <= op_dollar(vsum(p, fn { (x, l) => op_pct(content(l), (g : (Cart[Real, M]) -> Cart[Real, N])(x)) }), k)
       #|  (k : Num)
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  \226\136\131 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])) && fine((d1 : (Cart[Real, M], Cart[Real, M]) -> Bool), p) && fine((d2 : (Cart[Real, M], Cart[Real, M]) -> Bool), p)
@@ -71365,7 +71365,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (i : Num)
       #|  (N : Num)
-      #|  sup(IMAGE (\\(x,k:real^M->bool). norm((f:real^M->real^N) x)) p)
+      #|  sup(IMAGE(fn { (x, k) => norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)) }, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)))
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) == {}
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (x : Cart[Real, M]) => (d : (Num, Cart[Real, M], Cart[Real, M]) -> Bool)(num_of_int(int_of_real(floor(norm((f : (Cart[Real, M]) -> Cart[Real, N])(x))))), x)
@@ -71517,7 +71517,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (a : Cart[Real, Unit])
       #|  (p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)
       #|  (op_plus : (Cart[Real, N], Cart[Real, N]) -> Cart[Real, N])
-      #|  forall f:real^1->real^N p a b.\n        drop a <= drop b /\\\n        p tagged_division_of interval[a,b]\n        ==> vsum p\n             (\\(x,k). f(interval_upperbound k) - f(interval_lowerbound k)) =\n            f b - f a
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool, \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], drop(a) <= drop(b) && tagged_division_of(p, interval([(a, b)])) \226\134\146 vsum(p, fn { (x, k) => f(interval_upperbound(k)) - f(interval_lowerbound(k)) }) == f(b) - f(a)
       #|  real_of_num(0) < (e : Real) && (x : Real) <= e / real_of_num(2) \226\134\146 x < e
       #|  (e : Real) / real_of_num(2) / content(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
       #|  (e : Real) * content(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
@@ -71526,7 +71526,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (a : Cart[Real, M])
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
       #|  content(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])) == real_of_num(0)
-      #|  forall f:real^M->real^N i a b.\n      (f has_integral i) (interval[a,b]) <=>\n      (forall e. &0 < e\n           ==> ?d. gauge d /\\\n                   (forall p. p tagged_division_of interval[a,b] /\\ d fine p\n                        ==> norm (vsum p (\\(x,k). content k % f x) - i)\n                            <= e * content(interval[a,b])))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 i : Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], has_integral(f, i, interval([(a, b)])) == (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (\226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, interval([(a, b)])) && fine(d, p) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - i) <= e * content(interval([(a, b)])))))
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))
       #|  (x : Cart[Real, M])
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], (\226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 open({(x : Cart[Real, M]) | IN(f(x), s)})) \226\134\146 (\226\136\128 d : (Cart[Real, N], Cart[Real, N]) -> Bool, gauge(d) \226\134\146 gauge((x : Cart[Real, M]) => (y : Cart[Real, M]) => d(f(x), f(y))))
@@ -71706,9 +71706,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 y : Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, negligible(frontier(s)) \226\134\146 has_integral(f, y, closure(s)) == has_integral(f, y, s)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, integrable_on(f, {(x : Cart[Real, M]) | IN(x, s) && (P : (Cart[Real, M]) -> Bool)(x)}) && integrable_on(g, {(x : Cart[Real, M]) | IN(x, s) && !P(x)}) \226\134\146 integrable_on((x : Cart[Real, M]) => if P(x) { f(x) } else { g(x) }, s)
-      #|  (forall x k. (x,k) IN IMAGE (\\(x,k). f x,g k) p ==> P x k) <=>\n     (forall x k. (x,k) IN p ==> P (f x) (g k))
+      #|  (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), IMAGE(fn { (x, k) => ((f : (_) -> _)(x), (g : (_) -> _)(k)) }, (p : ((_, _)) -> Bool))) \226\134\146 (P : (_, _) -> Bool)(x, k)) == (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), p) \226\134\146 P(f(x), g(k)))
       #|  {(k : _) | \226\136\131 x : _, IN((x, k), (p : ((_, _)) -> Bool))} == IMAGE(SND, p)
-      #|  SND o (\\(x,k). f x,g k) = g o SND
+      #|  o(SND, fn { (x, k) => ((f : (_) -> _)(x), (g : (_) -> _)(k)) }) == o(g, SND)
       #|  (x : Real) < (a : Real) * (b : Real) \226\134\146 x == (y : Real) \226\134\146 y < b * a
       #|  real_of_num(0) < (x : Real) \226\134\146 real_of_num(0) < abs(x)
       #|  abs((r : Real))
@@ -72301,13 +72301,13 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (d : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 d : ((Cart[Real, M]) -> Bool) -> Bool, \226\136\128 i : (Cart[Real, M]) -> Bool, division_of(d, i) && integrable_on(f, s) && SUBSET(i, s) \226\134\146 integrable_on(f, i)
       #|  (s : (Cart[Real, M]) -> Bool)
-      #|  vsum p (\\(x:real^M,k:real^M->bool). integral k f:real^N)
+      #|  vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => integral(k, (f : (Cart[Real, M]) -> Cart[Real, N])) })
       #|  has_integral((f : (Cart[Real, M]) -> Cart[Real, N]), vsum(IMAGE(SND, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)), (k : (Cart[Real, M]) -> Bool) => integral(k, f)), (s : (Cart[Real, M]) -> Bool))
       #|  \226\136\128 x : Cart[Real, M], \226\136\128 k : (Cart[Real, M]) -> Bool, IN((x, k), (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)) \226\134\146 has_integral((f : (Cart[Real, M]) -> Cart[Real, N]), integral(k, f), k)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 i : ((Cart[Real, M]) -> Bool) -> Cart[Real, N], tagged_division_of(p, s) && (\226\136\128 x : Cart[Real, M], \226\136\128 k : (Cart[Real, M]) -> Bool, IN((x, k), p) \226\134\146 has_integral(f, i(k), k)) \226\134\146 has_integral(f, vsum(p, GABS((f : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, M], \226\136\128 k : (Cart[Real, M]) -> Bool, GEQ(f((x, k)), i(k)))), s)
-      #|  forall f:real^M->real^N p a b.\n        p tagged_division_of interval[a,b] /\\\n        (forall x k. (x,k) IN p ==> f integrable_on k)\n        ==> integral (interval[a,b]) f = vsum p (\\(x,k). integral k f)
-      #|  forall f:real^M->real^N a b p.\n        f integrable_on interval[a,b] /\\ p tagged_division_of interval[a,b]\n        ==> (f has_integral (vsum p (\\(x,k). integral k f))) (interval[a,b])
-      #|  forall f:real^M->real^N a b p.\n        f integrable_on interval[a,b] /\\ p tagged_division_of interval[a,b]\n        ==> integral (interval[a,b]) f = vsum p (\\(x,k). integral k f)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], tagged_division_of(p, interval([(a, b)])) && (\226\136\128 x : Cart[Real, M], \226\136\128 k : (Cart[Real, M]) -> Bool, IN((x, k), p) \226\134\146 integrable_on(f, k)) \226\134\146 integral(interval([(a, b)]), f) == vsum(p, fn { (x, k) => integral(k, f) })
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, integrable_on(f, interval([(a, b)])) && tagged_division_of(p, interval([(a, b)])) \226\134\146 has_integral(f, vsum(p, fn { (x, k) => integral(k, f) }), interval([(a, b)]))
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, integrable_on(f, interval([(a, b)])) && tagged_division_of(p, interval([(a, b)])) \226\134\146 integral(interval([(a, b)]), f) == vsum(p, fn { (x, k) => integral(k, f) })
       #|  ((x : Real) - (e : Real)) / real_of_num(2)
       #|  (\226\136\128 k : Real, real_of_num(0) < k \226\134\146 (x : Real) <= (e : Real) + k) \226\134\146 x <= e
       #|  ((a : Real) * (k : Real) < k * (b : Real)) == (real_of_num(0) < k * (b - a))
@@ -72323,7 +72323,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (y : Cart[Real, M])
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  (\\(x:real^M,k). integral k (f:real^M->real^N)) =\n                  (\\k. integral k f) o SND
+      #|  fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])(k, (f : (Cart[Real, M]) -> Cart[Real, N])) } == (o : (((Cart[Real, M]) -> Bool) -> Cart[Real, N], ((Cart[Real, M], (Cart[Real, M]) -> Bool), Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N])((k : (Cart[Real, M]) -> Bool) => (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])(k, f), (SND : ((Cart[Real, M], (Cart[Real, M]) -> Bool), Cart[Real, M]) -> Bool))
       #|  vsum(IMAGE(SND, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)), (k : (Cart[Real, M]) -> Bool) => integral(k, (f : (Cart[Real, M]) -> Cart[Real, N]))) + vsum((r : ((Cart[Real, M]) -> Bool) -> Bool), (k : (Cart[Real, M]) -> Bool) => integral(k, f))
       #|  vsum(UNION(IMAGE(SND, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)), (r : ((Cart[Real, M]) -> Bool) -> Bool)), (k : (Cart[Real, M]) -> Bool) => integral(k, (f : (Cart[Real, M]) -> Cart[Real, N])))
       #|  vsum((r : ((Cart[Real, M]) -> Bool) -> Bool), (k : (Cart[Real, M]) -> Bool) => integral(k, (f : (Cart[Real, M]) -> Cart[Real, N])))
@@ -72331,7 +72331,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  vsum p (\\(x,k). content k % (f:real^M->real^N) x - integral k f) =\n    vsum p (\\(x,k). content k % f x) - vsum p (\\(x,k). integral k f)
+      #|  vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) - integral(k, f) }) == vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - vsum(p, fn { (x, k) => integral(k, f) })
       #|  \226\136\128 i : (Cart[Real, M]) -> Bool, IN(i, (r : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 tagged_division_of((q : ((Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)(i), i)
       #|  (m : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
@@ -72354,7 +72354,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
       #|  (k : (Cart[Real, M]) -> Bool)
-      #|  vsum (p UNION UNIONS {q i | i IN r}) (\\(x,k). content k % f x) =\n    vsum p (\\(x:real^M,k:real^M->bool). content k % f x:real^N) +\n    vsum (UNIONS {q i | (i:real^M->bool) IN r}) (\\(x,k). content k % f x)
+      #|  vsum(UNION((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), UNIONS({(q : ((Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)((i : (Cart[Real, M]) -> Bool)) | IN(i, (r : ((Cart[Real, M]) -> Bool) -> Bool))})), fn { (x, k) => op_pct(content(k), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) == vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) + vsum(UNIONS({q((i : (Cart[Real, M]) -> Bool)) | IN(i, r)}), fn { (x, k) => op_pct(content(k), f(x)) })
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  UNION((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), UNIONS({(q : ((Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)((i : (Cart[Real, M]) -> Bool)) | IN(i, (r : ((Cart[Real, M]) -> Bool) -> Bool))}))
       #|  (q : ((Cart[Real, M]) -> Bool, (Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
@@ -72370,7 +72370,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\131 u : Cart[Real, M], \226\136\131 v : Cart[Real, M], (i : (Cart[Real, M]) -> Bool) == interval([(u, v)])
       #|  SUBSET((i : (Cart[Real, M]) -> Bool), interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
       #|  (i : (Cart[Real, M]) -> Bool)
-      #|  forall i. i IN r\n        ==> ?p. p tagged_division_of i /\\ d fine p /\\\n                norm(vsum p (\\(x,j). content j % f x) -\n                     integral i (f:real^M->real^N))\n                < k / (&(CARD(r:(real^M->bool)->bool)) + &1)
+      #|  \226\136\128 i : (Cart[Real, M]) -> Bool, IN(i, (r : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 (\226\136\131 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, i) && fine((d : (Cart[Real, M], Cart[Real, M]) -> Bool), p) && norm(vsum(p, fn { (x, j) => op_pct(content(j), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) - integral(i, f)) < (k : Real) / (real_of_num(CARD(r)) + real_of_num(1)))
       #|  FINITE((r : ((Cart[Real, M]) -> Bool) -> Bool))
       #|  INTER(IMAGE(SND, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)), (r : ((Cart[Real, M]) -> Bool) -> Bool)) == {}
       #|  (r : ((Cart[Real, M]) -> Bool) -> Bool) == DIFF((q : ((Cart[Real, M]) -> Bool) -> Bool), IMAGE(SND, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)))
@@ -72381,14 +72381,14 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (a : Cart[Real, M])
       #|  IMAGE(SND, (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool))
       #|  (k : Real)
-      #|  forall f:real^M->real^N a b d e.\n        f integrable_on interval[a,b] /\\\n        &0 < e /\\ gauge d /\\\n        (forall p. p tagged_division_of interval[a,b] /\\ d fine p\n             ==> norm (vsum p (\\(x,k). content k % f x) -\n                       integral(interval[a,b]) f) < e)\n        ==> forall p. p tagged_partial_division_of interval[a,b] /\\ d fine p\n                            ==> norm(vsum p (\\(x,k). content k % f x -\n                                                     integral k f)) <= e
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 d : (Cart[Real, M], Cart[Real, M]) -> Bool, \226\136\128 e : Real, integrable_on(f, interval([(a, b)])) && real_of_num(0) < e && gauge(d) && (\226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_division_of(p, interval([(a, b)])) && fine(d, p) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - integral(interval([(a, b)]), f)) < e) \226\134\146 (\226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_partial_division_of(p, interval([(a, b)])) && fine(d, p) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) - integral(k, f) })) <= e)
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (d : (Cart[Real, M], Cart[Real, M]) -> Bool)
       #|  (b : Cart[Real, M])
       #|  (a : Cart[Real, M])
       #|  (q : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
-      #|  forall f:real^M->real^N a b d e.\n        f integrable_on interval[a,b] /\\\n        &0 < e /\\ gauge d /\\\n        (forall p. p tagged_division_of interval[a,b] /\\ d fine p\n             ==> norm (vsum p (\\(x,k). content k % f x) -\n                       integral(interval[a,b]) f) < e)\n        ==> forall p. p tagged_partial_division_of interval[a,b] /\\ d fine p\n                            ==> sum p (\\(x,k). norm(content k % f x -\n                                                    integral k f))\n                                <= &2 * &(dimindex(:N)) * e
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 d : (Cart[Real, M], Cart[Real, M]) -> Bool, \226\136\128 e : Real, (integrable_on : ((Cart[Real, M]) -> Cart[Real, N], (Cart[Real, M]) -> Bool) -> Bool)(f, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && real_of_num(0) < e && (gauge : ((Cart[Real, M], Cart[Real, M]) -> Bool) -> Bool)(d) && (\226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (tagged_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p) \226\134\146 (norm : (Cart[Real, N]) -> Real)((vsum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) -> Cart[Real, N])(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) }) - (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]), f)) < e) \226\134\146 (\226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (tagged_partial_division_of : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && (fine : ((Cart[Real, M], Cart[Real, M]) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool) -> Bool)(d, p) \226\134\146 (sum : (((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Real) -> Real)(p, fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), f(x)) - (integral : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Cart[Real, N]) -> Cart[Real, N])(k, f)) }) <= real_of_num(2) * (real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) * e))
       #|  real_of_num(0) < (e : Real)
       #|  real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
       #|  (d : Real) < (e : Real) \226\134\146 (x : Real) <= d \226\134\146 x < e
@@ -72398,7 +72398,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (d : (Cart[Real, M], Cart[Real, M]) -> Bool)
       #|  real_of_num(0) < real_of_num(2) * (real_of_num((n : Num)) + real_of_num(1))
       #|  (e : Real) / (real_of_num(2) * (real_of_num((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) + real_of_num(1)))
-      #|  forall f:real^M->real^N a b.\n        f integrable_on interval[a,b]\n        ==> forall e. &0 < e\n                ==> ?d. gauge d /\\\n                        forall p. p tagged_partial_division_of interval[a,b] /\\\n                            d fine p\n                            ==> sum p (\\(x,k). norm(content k % f x -\n                                                    integral k f)) < e
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], integrable_on(f, interval([(a, b)])) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (\226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, tagged_partial_division_of(p, interval([(a, b)])) && fine(d, p) \226\134\146 sum(p, fn { (x, k) => norm(op_pct(content(k), f(x)) - integral(k, f)) }) < e)))
       #|  (e : Real)
       #|  (d : (Cart[Real, M], Cart[Real, M]) -> Bool)
       #|  {((x : _), (y : _)) | (P : (_, _) -> Bool)(x, y)} == {(p : (_, _)) | P(FST(p), SND(p))}
@@ -72421,11 +72421,11 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (b : (Num, Cart[Real, N], Cart[Real, N]) -> Bool)((t : Num))
       #|  (b : Cart[Real, N])
       #|  (a : Cart[Real, N])
-      #|  norm(vsum {x:real^N,k:real^N->bool | x,k IN p /\\ m x:num = t}\n                  (\\(x,k). content k % f t x - integral k (f t)):real^1)
+      #|  norm(vsum({((x : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool)) | IN((x, k), (p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)) && (m : (Cart[Real, N]) -> Num)(x) == (t : Num)}, fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])(t, x)) - integral(k, f(t)) }))
       #|  (t : Num)
       #|  real_of_num(0) < (x : Real) * (y : Real) \226\134\146 (real_of_num(1) - x) * y < y
       #|  sum(op_dot_dot(0, (s : Num)), (i : Num) => (e : Real) / pow(real_of_num(2), i + 2))
-      #|  norm(vsum (0..s)\n               (\\j. vsum {(x:real^N,k:real^N->bool) | (x,k) IN p /\\ m(x) = j}\n                         (\\(x,k). content k % f (m x) x :real^1 -\n                                  integral k (f (m x)))))
+      #|  norm(vsum(op_dot_dot(0, (s : Num)), (j : Num) => vsum({((x : Cart[Real, N]), (k : (Cart[Real, N]) -> Bool)) | IN((x, k), (p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)) && (m : (Cart[Real, N]) -> Num)(x) == j}, fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])(m(x), x)) - integral(k, f(m(x))) })))
       #|  real_of_num(0) < content(interval([((a : Cart[Real, N]), (b : Cart[Real, N]))]))
       #|  real_of_num(0) <= (g : Real) - (f : Real) && g - f < (e : Real) \226\134\146 abs(g - f) <= e
       #|  (abs((x : Real)) <= x) == (real_of_num(0) <= x)
@@ -72435,8 +72435,8 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (y : Real) <= (e : Real) \226\134\146 (x : Real) <= y \226\134\146 x <= e
       #|  (s : Num)
       #|  \226\136\131 s : Num, \226\136\128 t : (Cart[Real, N], (Cart[Real, N]) -> Bool), IN(t, (p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool)) \226\134\146 (m : (Cart[Real, N]) -> Num)(FST(t)) <= s
-      #|  vsum p (\\(x:real^N,k:real^N->bool).\n                  integral k ((f:num->real^N->real^1) (m x)))
-      #|  vsum p (\\(x:real^N,k:real^N->bool).\n                  content k % (f:num->real^N->real^1) (m x) x)
+      #|  vsum((p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool), fn { (x, k) => integral(k, (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])((m : (Cart[Real, N]) -> Num)(x))) })
+      #|  vsum((p : ((Cart[Real, N], (Cart[Real, N]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, N]) -> Cart[Real, Unit])((m : (Cart[Real, N]) -> Num)(x), x)) })
       #|  \226\136\128 b : Cart[Real, _], \226\136\128 c : Cart[Real, _], norm((a : Cart[Real, _]) - b) <= (e : Real) / real_of_num(4) && norm(b - c) < e / real_of_num(2) && norm(c - (d : Cart[Real, _])) < e / real_of_num(4) \226\134\146 norm(a - d) < e
       #|  :real
       #|  :real
@@ -73044,7 +73044,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (i : (Cart[Real, M]) -> Bool) == {}
       #|  (i : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  sum {x,i INTER l | (x,l) IN p /\\ i IN d}\n                  (\\(x,k:real^M->bool).\n                      abs(content k) * norm((f:real^M->real^N) x))
+      #|  sum({((x : Cart[Real, M]), INTER((i : (Cart[Real, M]) -> Bool), (l : (Cart[Real, M]) -> Bool))) | IN((x, l), (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)) && IN(i, (d : ((Cart[Real, M]) -> Bool) -> Bool))}, fn { (x, k) => abs(content(k)) * norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)) })
       #|  norm(vsum((d' : ((Cart[Real, M]) -> Bool) -> Bool), (i : (Cart[Real, M]) -> Bool) => integral(i, (f : (Cart[Real, M]) -> Cart[Real, N]))))
       #|  interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])
       #|  division_of((d' : ((Cart[Real, M]) -> Bool) -> Bool), interval([((u : Cart[Real, M]), (v : Cart[Real, M]))]))
@@ -73174,7 +73174,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], integrable_on(f, interval([(a, b)])) && has_bounded_setvariation_on((k : (Cart[Real, M]) -> Bool) => integral(k, f), interval([(a, b)])) \226\134\146 absolutely_integrable_on(f, interval([(a, b)]))
       #|  interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])
       #|  interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])
-      #|  sum p (\\(x:real^M,k). norm(integral k f)) =\n    sum (IMAGE SND p) (\\k. norm(integral k (f:real^M->real^N)))
+      #|  sum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => norm(integral(k, (f : (Cart[Real, M]) -> Cart[Real, N]))) }) == sum(IMAGE(SND, p), (k : (Cart[Real, M]) -> Bool) => norm(integral(k, f)))
       #|  (sf' : Real) == (sf : Real) && (si : Real) <= (i : Real) \226\134\146 abs(sf - si) < (e : Real) / real_of_num(2) \226\134\146 abs(sf' - (di : Real)) < e / real_of_num(2) \226\134\146 di < i + e
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
@@ -73238,7 +73238,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  abs(sum p (\\(x,k). content k * norm((f:real^M->real^N) x)) -\n          sum p (\\(x,k:real^M->bool). norm(integral k f))) < e / &2
+      #|  abs(sum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => content(k) * norm((f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) - sum(p, fn { (x, k) => norm(integral(k, f)) })) < (e : Real) / real_of_num(2)
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (b : Cart[Real, M])
       #|  (a : Cart[Real, M])
@@ -73940,7 +73940,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (x : Cart[Real, Unit]) => if IN(x, (s : (Cart[Real, Unit]) -> Bool)) { vec(0) } else { (f' : (Cart[Real, Unit]) -> Cart[Real, N])(x) }
       #|  drop((a : Cart[Real, Unit])) < drop((b : Cart[Real, Unit]))
       #|  (b : Cart[Real, Unit]) == (a : Cart[Real, Unit])
-      #|  forall f:real^1->real^N f' s a b.\n      negligible s /\\ drop a <= drop b /\\\n      (forall x. x IN interval[a,b] DIFF s\n           ==> (f has_vector_derivative f'(x)) (at x within interval[a,b])) /\\\n      (forall e. &0 < e\n           ==> ?g. gauge g /\\\n                   forall p. p tagged_partial_division_of interval[a,b] /\\\n                       g fine p /\\ IMAGE FST p SUBSET s\n                       ==> norm (vsum p (\\(x,k). f(interval_upperbound k) -\n                                                 f(interval_lowerbound k)))\n                           < e)\n      ==> (f' has_integral (f(b) - f(a))) (interval[a,b])
+      #|  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, Unit]) -> Bool, \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], negligible(s) && drop(a) <= drop(b) && (\226\136\128 x : Cart[Real, Unit], IN(x, DIFF(interval([(a, b)]), s)) \226\134\146 has_vector_derivative(f, f'(x), within(at(x), interval([(a, b)])))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 g : (Cart[Real, Unit], Cart[Real, Unit]) -> Bool, gauge(g) && (\226\136\128 p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool, tagged_partial_division_of(p, interval([(a, b)])) && fine(g, p) && SUBSET(IMAGE(FST, p), s) \226\134\146 norm(vsum(p, fn { (x, k) => f(interval_upperbound(k)) - f(interval_lowerbound(k)) })) < e))) \226\134\146 has_integral(f', f(b) - f(a), interval([(a, b)]))
       #|  (v : Cart[Real, Unit])
       #|  (u : Cart[Real, Unit])
       #|  (v : Cart[Real, Unit])
@@ -73978,7 +73978,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  -(x : Cart[Real, N]) == (y : Cart[Real, N]) \226\134\146 norm(x) <= norm(y)
       #|  :real
       #|  :real
-      #|  norm(vsum {(x,k) | (x,k) IN p /\\ x IN IMAGE (r:num->real^1) t /\\\n                       ~(content k = &0)}\n              (\\(x,k). --(f(interval_upperbound k) -\n                          (f:real^1->real^N)(interval_lowerbound k))))
+      #|  norm(vsum({((x : Cart[Real, Unit]), (k : (Cart[Real, Unit]) -> Bool)) | IN((x, k), (p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)) && IN(x, IMAGE((r : (Num) -> Cart[Real, Unit]), (t : (Num) -> Bool))) && !(content(k) == real_of_num(0))}, fn { (x, k) => -((f : (Cart[Real, Unit]) -> Cart[Real, N])(interval_upperbound(k)) - f(interval_lowerbound(k))) }))
       #|  (p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)
       #|  (\226\136\128 P : (Cart[Real, Unit], (Cart[Real, Unit]) -> Bool) -> Bool, FINITE({((x : Cart[Real, Unit]), (k : (Cart[Real, Unit]) -> Bool)) | IN((x, k), (p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)) && P(x, k)})) && (\226\136\128 P : (Cart[Real, Unit], (Cart[Real, Unit]) -> Bool) -> Bool, \226\136\128 x : Cart[Real, Unit], FINITE({(x, k) | k : (Cart[Real, Unit]) -> Bool | IN((x, k), p) && P(x, k)}))
       #|  (p : ((Cart[Real, Unit], (Cart[Real, Unit]) -> Bool)) -> Bool)
@@ -74072,22 +74072,22 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  bilinear((bop : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P]))
       #|  (x : Cart[Real, N]) => (y : Cart[Real, M]) => (bop : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P])(y, x)
       #|  \226\136\128 bop : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 f' : (Cart[Real, Unit]) -> Cart[Real, M], \226\136\128 g' : (Cart[Real, Unit]) -> Cart[Real, N], \226\136\128 a : Cart[Real, Unit], \226\136\128 b : Cart[Real, Unit], \226\136\128 c : (Cart[Real, Unit]) -> Bool, bilinear(bop) && COUNTABLE(c) && continuous_on((x : Cart[Real, Unit]) => bop(f(x), g(x)), interval([(a, b)])) && (\226\136\128 x : Cart[Real, Unit], IN(x, DIFF(interval((a, b)), c)) \226\134\146 has_vector_derivative(f, f'(x), at(x)) && has_vector_derivative(g, g'(x), at(x))) \226\134\146 integrable_on((x : Cart[Real, Unit]) => bop(f(x), g'(x)), interval([(a, b)])) == integrable_on((x : Cart[Real, Unit]) => bop(f'(x), g(x)), interval([(a, b)]))
-      #|  fs equiintegrable_on i <=>\n        (forall f:real^M->real^N. f IN fs ==> f integrable_on i) /\\\n        (forall e. &0 < e\n             ==> ?d. gauge d /\\\n                    forall f p. f IN fs /\\ p tagged_division_of i /\\ d fine p\n                        ==> norm(vsum p (\\(x,k). content(k) % f(x)) -\n                                 integral i f) < e)
+      #|  (equiintegrable_on : (((Cart[Real, M]) -> Cart[Real, N]) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)((fs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool), (i : (Cart[Real, M]) -> Bool)) == ((\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], IN(f, fs) \226\134\146 integrable_on(f, i)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 d : (Cart[Real, M], Cart[Real, M]) -> Bool, gauge(d) && (\226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, IN(f, fs) && tagged_division_of(p, i) && fine(d, p) \226\134\146 norm(vsum(p, fn { (x, k) => op_pct(content(k), f(x)) }) - integral(i, f)) < e))))
       #|  integrable_on((f : (Cart[Real, M]) -> Cart[Real, N]), interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], equiintegrable_on({f}, interval([(a, b)])) == integrable_on(f, interval([(a, b)]))
       #|  (x : Cart[Real, M]) => ball((x, real_of_num(1)))
       #|  (e : Real)
       #|  \226\136\128 fs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], content(interval([(a, b)])) == real_of_num(0) \226\134\146 equiintegrable_on(fs, interval([(a, b)]))
       #|  (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), {((x : _), (f : (_) -> _)((k : _))) | (P : (_, _) -> Bool)(x, k)}) \226\134\146 (Q : (_, _) -> Bool)(x, k)) == (\226\136\128 x : _, \226\136\128 k : _, P(x, k) \226\134\146 Q(x, f(k)))
-      #|  IMAGE (\\(x:A,k:B). x,(f k:B)) s
+      #|  IMAGE(fn { (x, k) => (x, (f : (B) -> B)(k)) }, (s : ((A, B)) -> Bool))
       #|  \226\136\128 f : (B) -> B, \226\136\128 s : ((A, B)) -> Bool, FINITE(s) \226\134\146 FINITE({((x : A), f((k : B))) | IN((x, k), s) && (P : (A, B) -> Bool)(x, k)})
-      #|  forall f:real^M->real^N g:(real^M->bool)->(real^M->bool) p.\n     FINITE p\n     ==> vsum {x,g k |x,k| (x,k) IN p /\\ ~(g k = {})}\n              (\\(x,k). content k % f x) =\n         vsum (IMAGE (\\(x,k). x,g k) p) (\\(x,k). content k % f x)
-      #|  (\\(x,l). content (g l) % f x) =\n     (\\(x,l). content l % f x) o (\\(x,l). x,g l)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : ((Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool, \226\136\128 p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool, FINITE(p) \226\134\146 vsum({(x, g(k)) | x : Cart[Real, M], k : (Cart[Real, M]) -> Bool | IN((x, k), p) && !(g(k) == {})}, fn { (x, k) => op_pct(content(k), f(x)) }) == vsum(IMAGE(fn { (x, k) => (x, g(k)) }, p), fn { (x, k) => op_pct(content(k), f(x)) })
+      #|  fn { (x, l) => op_pct(content((g : (_, Cart[Real, _]) -> Bool)(l)), (f : (_) -> Cart[Real, _])(x)) } == o(fn { (x, l) => op_pct(content(l), f(x)) }, fn { (x, l) => (x, g(l)) })
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
       #|  (l : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  vsum p (\\(x,l). content (l INTER {x:real^M | x$k <= c}) %\n                     (f:real^M->real^N) x) +\n    vsum p (\\(x,l). content (l INTER {x:real^M | x$k >= c}) %\n                     (f:real^M->real^N) x)
+      #|  vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, (k : Num)) <= (c : Real)})), (f : (Cart[Real, M]) -> Cart[Real, N])(x)) }) + vsum(p, fn { (x, l) => op_pct(content(INTER(l, {(x : Cart[Real, M]) | op_dollar(x, k) >= c})), f(x)) })
       #|  ((a : Cart[Real, N]) - (i : Cart[Real, N]) + ((b : Cart[Real, N]) - (j : Cart[Real, N])) == (c : Cart[Real, N]) - (i + j)) == (a + b == c)
       #|  (x : Real) < (e : Real) / real_of_num(2) && (y : Real) < e / real_of_num(2) \226\134\146 x + y < e
       #|  (kk : (Cart[Real, M]) -> Bool)
@@ -74151,9 +74151,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 fs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool, \226\136\128 d : ((Cart[Real, M]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], division_of(d, interval([(a, b)])) \226\134\146 equiintegrable_on(fs, interval([(a, b)])) == (\226\136\128 i : (Cart[Real, M]) -> Bool, IN(i, d) \226\134\146 equiintegrable_on(fs, i))
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  \\(x:real^M,k:real^M->bool) (n:num).\n                content k % (f n x:real^N)
+      #|  fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (n : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }
       #|  sequentially
-      #|  \\n:num. vsum p (\\(x,k:real^M->bool). content k % f n x) -\n                       integral (interval [a,b]) (f n :real^M->real^N)
+      #|  (n : Num) => vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }) - integral(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), f(n))
       #|  sequentially
       #|  real_of_num(0) < (e : Real) && (x : Real) <= e / real_of_num(2) \226\134\146 x < e
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
@@ -74173,10 +74173,10 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (e : Real) / real_of_num(3)
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  \\(x:real^M,k:real^M->bool) (n:num).\n                  content k % (f n x:real^N)
+      #|  fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (n : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }
       #|  sequentially
       #|  vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), GABS((f : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Cart[Real, N]) => \226\136\128 x : Cart[Real, M], \226\136\128 k : (Cart[Real, M]) -> Bool, GEQ(f((x, k)), op_pct(content(k), (g : (Cart[Real, M]) -> Cart[Real, N])(x)))))
-      #|  cauchy (\\n. vsum p (\\(x,k:real^M->bool).\n               content k % (f:num->real^M->real^N) n x))
+      #|  cauchy((n : Num) => vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }))
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (n : Num)
       #|  (n : Num)
@@ -74256,15 +74256,15 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  \226\136\128 fs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool, \226\136\128 gs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool, \226\136\128 s : (Cart[Real, M]) -> Bool, equiintegrable_on(fs, s) && equiintegrable_on(gs, s) \226\134\146 equiintegrable_on({(x : Cart[Real, M]) => (f : (Cart[Real, M]) -> Cart[Real, N])(x) - (g : (Cart[Real, M]) -> Cart[Real, N])(x) | IN(f, fs) && IN(g, gs)}, s)
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  integral (interval[a,b]) ((f:A->real^M->real^N) i) =\n    vsum p (\\(x:real^M,k). integral (k:real^M->bool) (f i))
+      #|  integral(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), (f : (A, Cart[Real, M]) -> Cart[Real, N])((i : A))) == vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => integral(k, f(i)) })
       #|  (x : Real) == (y : Real) \226\134\146 x <= (a : Real) \226\134\146 y <= a
       #|  abs((c : (A) -> Real)((i : A)))
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (f : (A, Cart[Real, M]) -> Cart[Real, N])((i : A))
       #|  (i : A)
       #|  sum((t : (A) -> Bool), (i : A) => (c : (A) -> Real)(i) * ((e : Real) / real_of_num(2)))
-      #|  vsum p (\\(x,k:real^M->bool). content k % vsum t (\\i. c i % f i x)) =\n    vsum t (\\i. c i %\n                vsum p (\\(x,k). content k % (f:A->real^M->real^N) i x))
-      #|  forall i:A. i IN t\n          ==> integral (interval[a,b]) (\\x:real^M. c i % f i x:real^N) =\n              vsum p (\\(x:real^M,k).\n                       integral (k:real^M->bool) (\\x:real^M. c i % f i x))
+      #|  vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), vsum((t : (A) -> Bool), (i : A) => op_pct((c : (A) -> Real)(i), (f : (A, Cart[Real, M]) -> Cart[Real, N])(i, x)))) }) == vsum(t, (i : A) => op_pct(c(i), vsum(p, fn { (x, k) => op_pct(content(k), f(i, x)) })))
+      #|  \226\136\128 i : A, IN(i, (t : (A) -> Bool)) \226\134\146 integral(interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]), (x : Cart[Real, M]) => op_pct((c : (A) -> Real)(i), (f : (A, Cart[Real, M]) -> Cart[Real, N])(i, x))) == vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => integral(k, (x : Cart[Real, M]) => op_pct(c(i), f(i, x))) })
       #|  (p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool)
       #|  (f : (A, Cart[Real, M]) -> Cart[Real, N])
       #|  (c : (A) -> Real)
@@ -74285,9 +74285,9 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (e : Real) / real_of_num(4)
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
-      #|  \\(x:real^M,k:real^M->bool) (n:num).\n                  content k % (f n x:real^N)
+      #|  fn { ((x : Cart[Real, M]), (k : (Cart[Real, M]) -> Bool)) => (n : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((content : ((Cart[Real, M]) -> Bool) -> Real)(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }
       #|  sequentially
-      #|  ((\\n. vsum p (\\(x,k:real^M->bool).\n                    content k % (f:num->real^M->real^N) n x)) -->\n     vsum p (\\(x,k). content k % g x)) sequentially
+      #|  op_minus_minus_gt((n : Num) => vsum((p : ((Cart[Real, M], (Cart[Real, M]) -> Bool)) -> Bool), fn { (x, k) => op_pct(content(k), (f : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)) }), vsum(p, fn { (x, k) => op_pct(content(k), (g : (Cart[Real, M]) -> Cart[Real, N])(x)) }), sequentially)
       #|  (fs : ((Cart[Real, M]) -> Cart[Real, N]) -> Bool)
       #|  (b : Cart[Real, M])
       #|  (a : Cart[Real, M])
@@ -74318,7 +74318,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (forall x k. (x,k) IN IMAGE (\\(x,k). f x k,g x k) s ==> Q x k) <=>\n     (forall x k. (x,k) IN s ==> Q (f x k) (g x k))
+      #|  (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), IMAGE(fn { (x, k) => ((f : (_, _) -> _)(x, k), (g : (_, _) -> _)(x, k)) }, (s : ((_, _)) -> Bool))) \226\134\146 (Q : (_, _) -> Bool)(x, k)) == (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), s) \226\134\146 Q(f(x, k), g(x, k)))
       #|  op_minus_minus == ((x : Cart[Real, M]) => op_pct(-real_of_num(1), x) + vec(0))
       #|  \226\136\131 u : Cart[Real, M], \226\136\131 v : Cart[Real, M], (k : (Cart[Real, M]) -> Bool) == interval([(u, v)])
       #|  (k : (Cart[Real, M]) -> Bool)
@@ -74541,7 +74541,7 @@ test "Multivariate/integration matches Multivariate/integration.ml" {
       #|  (u : Cart[Real, M])
       #|  (v : Cart[Real, M])
       #|  :real
-      #|  (forall x k. (x,k) IN IMAGE (\\(x,k). f x k,g x k) s ==> Q x k) <=>\n     (forall x k. (x,k) IN s ==> Q (f x k) (g x k))
+      #|  (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), IMAGE(fn { (x, k) => ((f : (_, _) -> _)(x, k), (g : (_, _) -> _)(x, k)) }, (s : ((_, _)) -> Bool))) \226\134\146 (Q : (_, _) -> Bool)(x, k)) == (\226\136\128 x : _, \226\136\128 k : _, IN((x, k), s) \226\134\146 Q(f(x, k), g(x, k)))
       #|  SUBSET((s : (_) -> Bool), (s' : (_) -> Bool)) && SUBSET((t : (_) -> Bool), (t' : (_) -> Bool)) \226\134\146 INTER(s', t') == {} \226\134\146 INTER(s, t) == {}
       #|  (k : (Cart[Real, M]) -> Bool)
       #|  (x : Cart[Real, M])
