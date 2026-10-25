@@ -83317,7 +83317,7 @@ Multivariate/flyspeck quotations (2071):
   IN((x : _), {(a : _)}) == (a == x)
   UNION({(a : _)}, {(b : _), (c : _)}) == {a, b, c}
   \226\136\128 v1 : _, \226\136\128 v2 : Cart[Real, N], real_of_num(0) < (t1 : Real) && !(v2 == vec(0)) \226\134\146 aff_gt({vec(0)}, {op_pct(t1, basis(1)), v2}) == {op_pct((a : Real), basis(1)) + op_pct((b : Real), v2) | real_of_num(0) < a && real_of_num(0) < b}
-  forall a x:real^3. (?a. x = a % basis 3) <=> dropout 3 x:real^2 = vec 0
+  \226\136\128 a : _, \226\136\128 x : Cart[Real, Tybit1[Unit]], (\226\136\131 a : Real, x == (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(a, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))) == ((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, x) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))
   real_of_num(0) < (z : Real) \226\134\146 (w : Real) / z * ((b : Real) * z) == b * w
   (pi / real_of_num(2) - (x : Real) < pi / real_of_num(2) - (y : Real)) == (y < x)
   real_of_num(0) < Im((z : Cart[Real, Tybit0[Unit]]))

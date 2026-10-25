@@ -5770,7 +5770,7 @@ test "100/inclusion_exclusion matches 100/inclusion_exclusion.ml" {
       #|  \226\136\128 s : ((A) -> Bool) -> Bool, FINITE(s) && (\226\136\128 k : (A) -> Bool, IN(k, s) \226\134\146 FINITE(k)) \226\134\146 real_of_num(CARD(UNIONS(s))) == sum(op_dot_dot(1, CARD(s)), (n : Num) => pow(-real_of_num(1), n + 1) * sum({(t : ((A) -> Bool) -> Bool) | SUBSET(t, s) && HAS_SIZE(t, n)}, (t : ((A) -> Bool) -> Bool) => real_of_num(CARD(INTERS(t)))))
       #|  {(t : (A) -> Bool) | SUBSET(t, (s : (A) -> Bool))}
       #|  \226\136\128 s : (A) -> Bool, \226\136\128 p : ((A) -> Bool) -> Bool, FINITE(s) \226\134\146 FINITE({(t : (A) -> Bool) | SUBSET(t, s) && p(t)})
-      #|  forall f:A->B s x y.\n        FINITE s /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        x = y + CARD (IMAGE f s)\n        ==> x = y + CARD s
+      #|  \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 x : Num, \226\136\128 y : Num, FINITE(s) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) && x == y + CARD(IMAGE(f, s)) \226\134\146 x == y + CARD(s)
       #|  SUBSET((v : (A) -> Bool), (s : (A) -> Bool))
       #|  (t : (A) -> Bool) == INSERT((x : A), (v : (A) -> Bool))
       #|  (v : (A) -> Bool)
