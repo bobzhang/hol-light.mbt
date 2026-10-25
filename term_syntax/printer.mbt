@@ -939,7 +939,8 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
   // quotation may spell out. A comprehension whose element has one may be
   // written either way, numbering the GEN%PVAR names in it differently:
   // the forms the quotation's numbering shows are tried too.
-  let mut error = Unprintable("term")
+  // the first form's failure says most (later forms are fallbacks)
+  let mut error : Unprintable? = None
   let forms = [(true, [])]
   let taken = try @parser.reread_term(old).1 catch { _ => -1 }
   if listed_comprehensions(t, taken) is Some(listed) && !listed.is_empty() {
@@ -951,7 +952,7 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
     let (sets, listed) = form
     let s = print_term_with(t, sets~, listed~, exact=true) catch {
       e => {
-        error = e
+        if error is None { error = Some(e) }
         continue
       }
     }
@@ -961,13 +962,13 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
     tried.push(s)
     check_spelling(old, s) catch {
       e => {
-        error = e
+        if error is None { error = Some(e) }
         continue
       }
     }
     return s
   }
-  raise error
+  raise error.unwrap_or(Unprintable("term"))
 }
 
 ///|
@@ -990,6 +991,56 @@ pub fn check_spelling(old : String, s : String) -> Unit raise Unprintable {
 }
 
 ///|
+/// A type, briefly, for a diagnostic (a type variable after a quote).
+fn brief_type(ty : @kernel.HolType) -> String {
+  match ty {
+    Tyvar(n) => "'" + n
+    Tyapp(c, @list.Empty) => c
+    Tyapp(c, args) => c + "(" + args.iter().map(brief_type).join(",") + ")"
+  }
+}
+
+///|
+/// Where the reading `b` of a spelling first departs from the quotation's
+/// reading `a`, for a diagnostic.
+fn difference(a : @kernel.Term, b : @kernel.Term) -> String {
+  match (a, b) {
+    (Var(n, s), Var(m, t)) =>
+      if n != m {
+        "variable \{n} read as \{m}"
+      } else {
+        "variable \{n} : \{brief_type(s)} read with type \{brief_type(t)}"
+      }
+    (Const(n, s), Const(m, t)) =>
+      if n != m {
+        "constant \{n} read as \{m}"
+      } else {
+        "constant \{n} : \{brief_type(s)} read with type \{brief_type(t)}"
+      }
+    (Comb(f, x), Comb(g, y)) => if f != g { difference(f, g) } else { difference(x, y) }
+    (Abs(Var(v, s), x), Abs(Var(w, t), y)) =>
+      if v != w {
+        "bound variable \{v} read as \{w}"
+      } else if s != t {
+        "bound variable \{v} : \{brief_type(s)} read with type \{brief_type(t)}"
+      } else {
+        difference(x, y)
+      }
+    _ => "\{shape(a)} read as \{shape(b)}"
+  }
+}
+
+///|
+fn shape(t : @kernel.Term) -> String {
+  match t {
+    Var(n, _) => "variable " + n
+    Const(n, _) => "constant " + n
+    Comb(_, _) => "application"
+    Abs(_, _) => "abstraction"
+  }
+}
+
+///|
 fn check_spelling_once(old : String, s : String) -> Unit raise Unprintable {
   let from = @preterm.type_var_counter()
   let (a, na) = @parser.reread_term(old) catch {
@@ -998,8 +1049,10 @@ fn check_spelling_once(old : String, s : String) -> Unit raise Unprintable {
   let (b, nb) = reread(s) catch {
     _ => raise Unprintable("term that does not read back")
   }
-  if canonical_invented(b, from~) != canonical_invented(a, from~) {
-    raise Unprintable("term whose bound variables the syntax renames")
+  let ca = canonical_invented(a, from~)
+  let cb = canonical_invented(b, from~)
+  if cb != ca {
+    raise Unprintable("term that reads back differently: " + difference(ca, cb))
   }
   if na != nb {
     raise Unprintable(
