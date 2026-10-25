@@ -86620,7 +86620,7 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  (u : Cart[Real, Unit]) => lift(real_integral(real_interval([(real_of_num(0), (B : Real))]), (x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(x, 2))))))
       #|  o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop))
       #|  (u : Cart[Real, Unit])
-      #|  forall u:real^1. u IN interval[lift(&0),lift(&1)] ==>\n     (lift o (\\u. inv(&1 + u pow 2) *\n       (&1 - exp(--((&1 + u pow 2) * B pow 2)))) o drop) u =\n     lift(real_integral (real_interval[&0,B])\n       (\\x. &2 * x * exp(--((&1 + drop u pow 2) * x pow 2))))
+      #|  \226\136\128 u : Cart[Real, Unit], IN(u, interval([(lift(real_of_num(0)), lift(real_of_num(1)))])) \226\134\146 o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop), u) == lift(real_integral(real_interval([(real_of_num(0), B)]), (x : Real) => real_of_num(2) * (x * exp(-((real_of_num(1) + pow(drop(u), 2)) * pow(x, 2))))))
       #|  integrable_on(o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop)), interval([(lift(real_of_num(0)), lift(real_of_num(1)))]))
       #|  (B : Real)
       #|  integrable_on(o(lift, o((u : Real) => inv(real_of_num(1) + pow(u, 2)) * (real_of_num(1) - exp(-((real_of_num(1) + pow(u, 2)) * pow((B : Real), 2)))), drop)), interval([(lift(real_of_num(0)), lift(real_of_num(1)))]))
@@ -87759,7 +87759,7 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  real_integral(UNIV, (y : Real) => (g_low : (Real) -> Real)(y) * std_normal_density(y))
       #|  (g_low : (Real) -> Real) == ((y : Real) => max(real_of_num(0), min(real_of_num(1), real_of_num(1) - (y - ((x : Real) - (h : Real))) / h)))
       #|  (h : Real)
-      #|  forall p:A prob_space (X:num->A->real) x l.\n     (forall n. simple_rv p (X n)) /\\\n     (?C. &0 < C /\\ forall n. simple_expectation p (\\x. X n x pow 2) <= C) /\\\n     (forall t. ((\\n. simple_char_fn_re p (X n) t) ---> exp(--(t pow 2 / &2)))\n          sequentially) /\\\n     (forall t. ((\\n. simple_char_fn_im p (X n) t) ---> &0) sequentially) /\\\n     ((\\n. simple_cdf p (X n) x) ---> l) sequentially\n     ==> l = std_normal_cdf x
+      #|  \226\136\128 p : Prob_space[A], \226\136\128 X : (Num, A) -> Real, \226\136\128 x : Real, \226\136\128 l : Real, (\226\136\128 n : Num, simple_rv(p, X(n))) && (\226\136\131 C : Real, real_of_num(0) < C && (\226\136\128 n : Num, simple_expectation(p, (x : A) => pow(X(n, x), 2)) <= C)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_re(p, X(n), t), exp(-(pow(t, 2) / real_of_num(2))), sequentially)) && (\226\136\128 t : Real, op_minus_minus_minus_gt((n : Num) => simple_char_fn_im(p, X(n), t), real_of_num(0), sequentially)) && op_minus_minus_minus_gt((n : Num) => simple_cdf(p, X(n), x), l, sequentially) \226\134\146 l == std_normal_cdf(x)
       #|  (k : Num) => (r : (Num) -> Num)((s : (Num) -> Num)(k))
       #|  real_of_num(0)
       #|  (n : Num) => simple_char_fn_im((p : Prob_space[A]), (X : (Num, A) -> Real)(n), (t : Real))

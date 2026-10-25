@@ -10808,9 +10808,9 @@ Rqe/work_thms quotations (1221):
   LENGTH((psgns : List[_])) == LENGTH((sgns : List[_]))
   LENGTH((psgns : List[Sign])) == LENGTH((sgns : List[_]))
   \226\136\128 pts : List[Real], \226\136\128 p : (Real) -> Real, \226\136\128 pols : List[(Real) -> Real], \226\136\128 n : Num, \226\136\128 psgns : List[Sign], \226\136\128 sgns : List[List[Sign]], interpmat(pts, pols, sgns) \226\134\146 ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, p, y), partition_line(pts), psgns) \226\134\146 n <= LENGTH(pols) \226\134\146 interpmat(pts, INSERTAT(n, p, pols), MAP2(INSERTAT(n), psgns, sgns))
-  forall c l. c > &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Pos)
-  forall c l. c < &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Neg)
-  forall c l. (c = &0) ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Zero)
+  \226\136\128 c : Real, \226\136\128 l : List[(Real) -> Bool], c > real_of_num(0) \226\134\146 ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, (x : Real) => c, y), l, REPLICATE(LENGTH(l), Pos))
+  \226\136\128 c : Real, \226\136\128 l : List[(Real) -> Bool], c < real_of_num(0) \226\134\146 ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, (x : Real) => c, y), l, REPLICATE(LENGTH(l), Neg))
+  \226\136\128 c : Real, \226\136\128 l : List[(Real) -> Bool], c == real_of_num(0) \226\134\146 ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, (x : Real) => c, y), l, REPLICATE(LENGTH(l), Zero))
   (i : _)
   \226\136\128 n : Num, \226\136\128 x : _, \226\136\128 i : Num, i < n \226\134\146 EL(i, REPLICATE(n, x)) == x
   \226\136\128 p : (Real) -> Real, \226\136\128 pts : List[Real], ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, p, y), partition_line(pts), REPLICATE(LENGTH(partition_line(pts)), Unknown))

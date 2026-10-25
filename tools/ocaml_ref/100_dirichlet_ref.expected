@@ -81575,7 +81575,7 @@ Translating certificate to HOL inferences
   \226\136\128 d : Num, 1 <= d \226\134\146 bounded({vsum(op_dot_dot(1, (x : Num)), (n : Num) => chi_0(d, n) * Cx(mangoldt(n) / real_of_num(n))) - Cx(log(real_of_num(x))) | IN(x, UNIV)})
   \226\136\128 n : Num, nsum(op_dot_dot(0, n), (i : Num) => i) == DIV(n * (n + 1), 2)
   \226\136\128 s : (_) -> Bool, FINITE(s) \226\134\146 product(s, (i : _) => pow((z : Real), (f : (_) -> Num)(i))) == pow(z, nsum(s, f))
-  forall z i. product (0..n) (\\i. z pow i) = z pow ((n * (n + 1)) DIV 2)
+  \226\136\128 z : Real, \226\136\128 i : _, product(op_dot_dot(0, (n : Num)), (i : Num) => pow(z, i)) == pow(z, DIV(n * (n + 1), 2))
   real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)
   EVEN((n : Num) * (n + 1))
   2 * DIV((n : Num) * (n + 1), 2) == n * (n + 1)
