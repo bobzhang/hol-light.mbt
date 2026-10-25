@@ -71863,11 +71863,11 @@ Multivariate/integration quotations (7844):
   \226\136\128 k : (Cart[Real, M]) -> Bool, \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) \226\134\146 (content : ((Cart[Real, M]) -> Bool) -> Real)(k) / ((op_dollar : (Cart[Real, M], Num) -> Real)((interval_upperbound : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(k), i) - (op_dollar : (Cart[Real, M], Num) -> Real)((interval_lowerbound : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(k), i)) == (if (content : ((Cart[Real, M]) -> Bool) -> Real)(k) == real_of_num(0) { real_of_num(0) } else { (product : ((Num) -> Bool, (Num) -> Real) -> Real)((DELETE : ((Num) -> Bool, Num, Num) -> Bool)(op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))), i), (j : Num) => (op_dollar : (Cart[Real, M], Num) -> Real)((interval_upperbound : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(k), j) - (op_dollar : (Cart[Real, M], Num) -> Real)((interval_lowerbound : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(k), j)) })
   (v : Cart[Real, M])
   (u : Cart[Real, M])
-  UNIONS (IMAGE (extend:(real^M->bool)->(real^M->bool)) d)
+  UNIONS (IMAGE (extend_:(real^M->bool)->(real^M->bool)) d)
   (x : Real) == (y : Real) \226\134\146 (ab : Real) * ((uv : Real) * x) == ab * y * uv
   IN((x : _), (s : (_) -> Bool)) \226\134\146 s == INSERT(x, DELETE(s, x))
   op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))) == INSERT((i : Num), DELETE(op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool))), i))
-  ~((extend:(real^M->bool)->(real^M->bool)) (interval[u,v]) = {})
+  ~((extend_:(real^M->bool)->(real^M->bool)) (interval[u,v]) = {})
   content(interval([((u : Cart[Real, M]), (v : Cart[Real, M]))])) == real_of_num(0)
   (v : Cart[Real, M])
   (u : Cart[Real, M])
@@ -71875,7 +71875,7 @@ Multivariate/integration quotations (7844):
   (k1 : (Cart[Real, M]) -> Bool)
   (k2 : (Cart[Real, M]) -> Bool)
   (k1 : (Cart[Real, M]) -> Bool)
-  sum (IMAGE (extend:(real^M->bool)->(real^M->bool)) d) content
+  sum (IMAGE (extend_:(real^M->bool)->(real^M->bool)) d) content
   (i : Num)
   !(interval([((u : Cart[Real, M]), (v : Cart[Real, M]))]) == {}) && !(interval([((w : Cart[Real, M]), (z : Cart[Real, M]))]) == {})
   SUBSET(interval([((u : Cart[Real, M]), (v : Cart[Real, M]))]), interval([((a : Cart[Real, M]), (b : Cart[Real, M]))])) && SUBSET(interval([((w : Cart[Real, M]), (z : Cart[Real, M]))]), interval([(a, b)]))
@@ -71897,15 +71897,15 @@ Multivariate/integration quotations (7844):
   (w : Cart[Real, M])
   (v : Cart[Real, M])
   (u : Cart[Real, M])
-  forall k1 k2. k1 IN d /\\ k2 IN d /\\ ~(k1 = k2)\n              ==> interior((extend:(real^M->bool)->(real^M->bool)) k1) INTER\n                  interior(extend k2) = {}
+  forall k1 k2. k1 IN d /\\ k2 IN d /\\ ~(k1 = k2)\n              ==> interior((extend_:(real^M->bool)->(real^M->bool)) k1) INTER\n                  interior(extend_ k2) = {}
   !(interval([((u : Cart[Real, M]), (v : Cart[Real, M]))]) == {})
   SUBSET(interval([((u : Cart[Real, M]), (v : Cart[Real, M]))]), interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
   (v : Cart[Real, M])
   (u : Cart[Real, M])
-  (forall k. k IN d ==> ~((extend:(real^M->bool)->(real^M->bool)) k = {})) /\\\n      (forall k. k IN d ==> extend k SUBSET interval[a,b])
+  (forall k. k IN d ==> ~((extend_:(real^M->bool)->(real^M->bool)) k = {})) /\\\n      (forall k. k IN d ==> extend_ k SUBSET interval[a,b])
   \226\136\128 k : (Cart[Real, M]) -> Bool, IN(k, (d : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 !(k == {})
   \226\136\128 k : (Cart[Real, M]) -> Bool, IN(k, (d : ((Cart[Real, M]) -> Bool) -> Bool)) \226\134\146 SUBSET(k, interval([((a : Cart[Real, M]), (b : Cart[Real, M]))]))
-  extend =\n      \\k:real^M->bool. interval\n           [(lambda j. if j = i then (a:real^M)$i\n                       else interval_lowerbound k$j):real^M,\n            (lambda j. if j = i then (b:real^M)$i\n                       else interval_upperbound k$j)]
+  extend_ =\n      \\k:real^M->bool. interval\n           [(lambda j. if j = i then (a:real^M)$i\n                       else interval_lowerbound k$j):real^M,\n            (lambda j. if j = i then (b:real^M)$i\n                       else interval_upperbound k$j)]
   \226\136\128 d : ((Cart[Real, M]) -> Bool) -> Bool, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, M], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 i : Num, (division_of : (((Cart[Real, M]) -> Bool) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(d, s) && (SUBSET : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)(s, (interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)])) && 1 <= i && i <= (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) && ((\226\136\128 k : (Cart[Real, M]) -> Bool, (IN : ((Cart[Real, M]) -> Bool, ((Cart[Real, M]) -> Bool) -> Bool) -> Bool)(k, d) \226\134\146 !((content : ((Cart[Real, M]) -> Bool) -> Real)(k) == real_of_num(0)) && !((INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(k, {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, i) == (op_dollar : (Cart[Real, M], Num) -> Real)(a, i)}) == ({} : (Cart[Real, M]) -> Bool))) || (\226\136\128 k : (Cart[Real, M]) -> Bool, (IN : ((Cart[Real, M]) -> Bool, ((Cart[Real, M]) -> Bool) -> Bool) -> Bool)(k, d) \226\134\146 !((content : ((Cart[Real, M]) -> Bool) -> Real)(k) == real_of_num(0)) && !((INTER : ((Cart[Real, M]) -> Bool, (Cart[Real, M]) -> Bool, Cart[Real, M]) -> Bool)(k, {(x : Cart[Real, M]) | (op_dollar : (Cart[Real, M], Num) -> Real)(x, i) == (op_dollar : (Cart[Real, M], Num) -> Real)(b, i)}) == ({} : (Cart[Real, M]) -> Bool)))) \226\134\146 ((op_dollar : (Cart[Real, M], Num) -> Real)(b, i) - (op_dollar : (Cart[Real, M], Num) -> Real)(a, i)) * (sum : (((Cart[Real, M]) -> Bool) -> Bool, ((Cart[Real, M]) -> Bool) -> Real) -> Real)(d, (k : (Cart[Real, M]) -> Bool) => (content : ((Cart[Real, M]) -> Bool) -> Real)(k) / ((op_dollar : (Cart[Real, M], Num) -> Real)((interval_upperbound : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(k), i) - (op_dollar : (Cart[Real, M], Num) -> Real)((interval_lowerbound : ((Cart[Real, M]) -> Bool) -> Cart[Real, M])(k), i))) <= (content : ((Cart[Real, M]) -> Bool) -> Real)((interval : (List[(Cart[Real, M], Cart[Real, M])], Cart[Real, M]) -> Bool)([(a, b)]))
   interval([((w : Cart[Real, M]), (z : Cart[Real, M]))])
   interval([((u : Cart[Real, M]), (v : Cart[Real, M]))])

@@ -6432,7 +6432,7 @@ fn step_161() -> Unit raise {
   let t3424 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.disjoint(), @sets.inter_unions(), @sets.empty_unions(), @sets.forall_in_gspec()])), t3418), t3419)
   let t3425 = @list.List([@sets.set_tac(@list.List([])), t3424, t3423, t3422])
   let t3417 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t3416 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("f1 SUBSET f /\\ DISJOINT f f0 /\\ fn = {} /\\ f0 = e\n      ==>  e = (fn UNION f0 UNION f1) DIFF f")))
+  let t3416 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("f1 SUBSET f /\\ DISJOINT f f0 /\\ fn_ = {} /\\ f0 = e\n      ==>  e = (fn_ UNION f0 UNION f1) DIFF f")))
   let t3415 = @simp.rewrite_tac(@list.List([@sets.unions_union(), @theorems.left_or_distrib(), @sets.set_rule(@term_syntax.parse_term("{(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)} == UNION({f((x : _)) | P(x)}, {f((x : _)) | Q(x)})"))]))
   let t3414 = @simp.asm_simp_tac(@list.List([@convex.aff_dim_ge(), @int.int_arith(@term_syntax.parse_term("-int_of_num(1) <= (f : Int) && int_of_num(1) <= (s : Int) && s <= int_of_num(2) → (f < s) == (f == -int_of_num(1) && int_of_num(0) <= s || f == int_of_num(0) || f == int_of_num(1) && s == int_of_num(2))"))]))
   let t3447 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@equal.gsym(relative_frontier_facial_partition())])), t3414), t3415), t3416), t3417), t3425), t3446])
@@ -11323,7 +11323,7 @@ fn step_257() -> Unit raise {
   let t6410 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_inters(), @sets.forall_in_gspec()]))
   let t6419 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@misc.hull_mono()), t6410), t6411), t6418, @tactics.all_tac])
   let t6409 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t6408 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("ae SUBSET as /\\ ae SUBSET hs /\\\n    b INTER hs SUBSET fs\n    ==> (b INTER ae) SUBSET (as INTER fs) INTER hs")))
+  let t6408 = @tactics.match_mp_tac(@sets.set_rule(@parser.parse_term("ae SUBSET as_ /\\ ae SUBSET hs /\\\n    b INTER hs SUBSET fs\n    ==> (b INTER ae) SUBSET (as_ INTER fs) INTER hs")))
   let t6407 = @tactics.first_assum(fn(x6398 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x6398
     @simp.gen_rewrite_tac(fn(x6406 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {

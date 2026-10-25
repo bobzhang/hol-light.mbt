@@ -88680,7 +88680,7 @@ test "Multivariate/gamma matches Multivariate/gamma.ml" {
       #|  (z : Cart[Real, Tybit0[Unit]]) + Cx(real_of_num(1)) + (w : Cart[Real, Tybit0[Unit]]) == z + (w + Cx(real_of_num(1)))
       #|  (z : Cart[Real, Tybit0[Unit]]) => z + Cx(real_of_num(1))
       #|  at(-Cx(real_of_num(SUC((n : Num)))))
-      #|  (--Cx(&1) * p) * is * i = (p * i) * --is
+      #|  (--Cx(&1) * p) * is_ * i = (p * i) * --is_
       #|  continuous((z : Cart[Real, Tybit0[Unit]]) => cgamma(z + Cx(real_of_num(1))), at(Cx(real_of_num(0))))
       #|  Cx(real_of_num(1))
       #|  (z : Cart[Real, Tybit0[Unit]]) => cgamma(z + Cx(real_of_num(1)))

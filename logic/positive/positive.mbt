@@ -2579,7 +2579,7 @@ fn step_59() -> Unit raise {
   })
   let t1283 = @meson.asm_meson_tac(@list.List([]))
   let t1282 = @simp.asm_rewrite_tac(@list.List([@sets.in_union(), @sets.in_elim_thm()]))
-  let t1281 = @tactics.x_gen_tac(@parser.parse_term("fn:num#num"))
+  let t1281 = @tactics.x_gen_tac(@parser.parse_term("fn_:num#num"))
   let t1280 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t1279 = @simp.rewrite_tac(@list.List([@class.not_forall_thm(), @class.not_imp()]))
   let t1278 = @simp.rewrite_tac(@list.List([@sets.subset()]))
@@ -2630,7 +2630,7 @@ fn step_60() -> Unit raise {
   }))
   let t1740 = @simp.rewrite_tac(@list.List([@sets.in_union(), @sets.in_elim_thm()]))
   let t1739 = @simp.rewrite_tac(@list.List([@fol.formsubst_functions_form()]))
-  let t1738 = @tactics.undisch_tac(@parser.parse_term("fn IN functions_form (formsubst vv s)"))
+  let t1738 = @tactics.undisch_tac(@parser.parse_term("fn_ IN functions_form (formsubst vv s)"))
   let t1736 = @tactics.conjuncts_then2(fn(x1730 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1731 = @tactics.subst_all_tac(x1730)
     fn(x1732 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -2679,7 +2679,7 @@ fn step_60() -> Unit raise {
       }
     })(x1713))
   }, @list.List([@fol.functions()]))
-  let t1706 = @tactics.undisch_tac(@parser.parse_term("fn IN functions (IMAGE (formsubst vv) c)"))
+  let t1706 = @tactics.undisch_tac(@parser.parse_term("fn_ IN functions (IMAGE (formsubst vv) c)"))
   let t1705 = @tactics.disch_then(@tactics.conjuncts_then2(@tactics.strip_assume_tac, fn(x1702 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1703 = @tactics.subst_all_tac(x1702)
     fn(x1704 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -2723,7 +2723,7 @@ fn step_60() -> Unit raise {
       s1681(x1682)
     }
   })))
-  let t1676 = @tactics.x_gen_tac(@parser.parse_term("fn:num#num"))
+  let t1676 = @tactics.x_gen_tac(@parser.parse_term("fn_:num#num"))
   let t1675 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_unions(), @sets.in_elim_thm()]))
   let t1673 = @simp.asm_simp_tac(@list.List([@sets.finite_image(), clause_finite()]))
   let t1672 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -2847,7 +2847,7 @@ fn step_60() -> Unit raise {
   let t1573 = @simp.asm_rewrite_tac(@list.List([]))
   let t1572 = @tactics.match_mp_tac(@herbrand.herbase_functions())
   let t1571 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset())]))
-  let t1569 = @parser.parse_term("fn:num#num")
+  let t1569 = @parser.parse_term("fn_:num#num")
   let t1570 = @tactics.spec_tac(@term_syntax.parse_term("((f : Num), LENGTH((l : List[A])))"), t1569)
   let t1567 = @tactics.undisch_tac(@term_syntax.parse_term("IN(((f : Num), LENGTH((l : List[A]))), functions_term((k1 : (Num) -> Term)((x : Num))))"))
   let t1568 = @list.List([@tactics.undisch_tac(@term_syntax.parse_term("IN(((f : Num), LENGTH((l : List[A]))), functions_term((k2 : (Num) -> Term)((x : Num))))")), t1567])

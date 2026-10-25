@@ -34349,7 +34349,7 @@ fn step_1255() -> Unit raise {
   let t13524 = @term_syntax.parse_term("(f : (Num, Real) -> Real)(SUC(2 * (p : Num) + 1) + 1)")
   let t13525 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : (Num, Real) -> Real)(SUC(2 * (p : Num) + 1))"), t13524, t13523, t13522, t13521]), step))
   let t13520 = @simp.rewrite_tac(@list.List([@realax.real_of_num_eq(), @arith.fact_nz()]))
-  let t13519 = @tactics.match_mp_tac(@calc_rat.real_field(@parser.parse_term("~(t = &0) /\\\n    i2 = &0 - (&2 * &p + &3) * i1\n    ==> (b * (fn - fm) - i1) / (&2 * &p + &2) / t =\n        b / (((&2 * &p + &1) + &1) * t) * (fn - fm) +\n        i2 / ((((&2 * &p + &1) + &1) + &1) * ((&2 * &p + &1) + &1) * t)")))
+  let t13519 = @tactics.match_mp_tac(@calc_rat.real_field(@parser.parse_term("~(t = &0) /\\\n    i2 = &0 - (&2 * &p + &3) * i1\n    ==> (b * (fn_ - fm) - i1) / (&2 * &p + &2) / t =\n        b / (((&2 * &p + &1) + &1) * t) * (fn_ - fm) +\n        i2 / ((((&2 * &p + &1) + &1) + &1) * ((&2 * &p + &1) + &1) * t)")))
   let t13516 = @equal.gsym(@real.real_of_num_suc())
   let t13517 = @equal.gsym(@realax.real_of_num_add())
   let t13518 = @simp.rewrite_tac(@list.List([@arith.fact(), @equal.gsym(@realax.real_of_num_mul()), t13517, t13516]))

@@ -25,6 +25,24 @@ from hol_notation import IDENT
 # upstream file -> {old stem: new stem}
 TERM_RENAMES = {
     'Logic/linear.ml': {'final': 'final_'},
+    '100/fourier.ml': {'is': 'is_'},
+    'Autoformalization/carleson.ml': {'enum': 'enum_', 'fn': 'fn_'},
+    'Autoformalization/fourier_transform.ml': {'fn': 'fn_'},
+    'Examples/solovay.ml': {'as': 'as_'},
+    'Logic/canon.ml': {'as': 'as_', 'is': 'is_'},
+    'Logic/lpo.ml': {'fn': 'fn_'},
+    'Logic/positive.ml': {'fn': 'fn_'},
+    'Multivariate/gamma.ml': {'is': 'is_'},
+    'Multivariate/integration.ml': {'extend': 'extend_'},
+    'Multivariate/metric.ml': {'fn': 'fn_'},
+    'Multivariate/paracompact.ml': {'fn': 'fn_'},
+    'Multivariate/polytope.ml': {'as': 'as_', 'fn': 'fn_'},
+    'Multivariate/realanalysis.ml': {'fn': 'fn_'},
+    'Multivariate/transcendentals.ml': {'is': 'is_'},
+    'Probability/characteristic_functions.ml': {'fn': 'fn_'},
+    'Probability/ergodic.ml': {'fn': 'fn_', 'is': 'is_'},
+    'Probability/expectation.ml': {'fn': 'fn_'},
+    'Probability/martingale_convergence.ml': {'enum': 'enum_'},
 }
 # upstream file -> [(text, replacement)], each text occurring once, applied
 # before the rename (for a name built in code)
