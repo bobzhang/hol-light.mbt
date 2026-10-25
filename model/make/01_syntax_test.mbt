@@ -8010,7 +8010,7 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  (+):num->num->num
       #|  (+):num->num->num
       #|  \226\136\128 env : List[(Term, Term)], \226\136\128 p : (Term, Term), RACONV(env, p) \226\134\146 (\226\136\128 x : List[Char], \226\136\128 ty : Type, (VFREE_IN(Var(x, ty), FST(p)) && !(\226\136\131 y : Term, MEM((Var(x, ty), y), env))) == (VFREE_IN(Var(x, ty), SND(p)) && !(\226\136\131 y : Term, MEM((y, Var(x, ty)), env))))
-      #|  forall s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)
+      #|  \226\136\128 s : Term, \226\136\128 t : _, \226\136\128 x : List[Char], \226\136\128 t : Term, ACONV(s, t) \226\134\146 VFREE_IN(Var(x, (ty : Type)), s) == VFREE_IN(Var(x, ty), t)
       #|  (REV_ASSOCD : (_, List[(_, _)], _) -> _)((a : _), NIL, (d : _)) == d && REV_ASSOCD(a, CONS(((x : _), (y : _)), (t : List[(_, _)])), d) == (if y == a { x } else { REV_ASSOCD(a, t, d) })
       #|  :P
       #|  :P
@@ -8113,7 +8113,7 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  (ty : Type)
       #|  (x : List[Char])
       #|  \226\136\128 tm : Term, \226\136\128 ty : Type, \226\136\128 ilist : List[(Term, Term)], has_type(tm, ty) && (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))) \226\134\146 has_type(VSUBST(ilist, tm), ty)
-      #|  forall tm ty ilist.\n        welltyped tm /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)
+      #|  \226\136\128 tm : Term, \226\136\128 ty : _, \226\136\128 ilist : List[(Term, Term)], welltyped(tm) && (\226\136\128 s : Term, \226\136\128 s' : Term, MEM((s', s), ilist) \226\134\146 (\226\136\131 x : List[Char], \226\136\131 ty : Type, s == Var(x, ty) && has_type(s', ty))) \226\134\146 welltyped(VSUBST(ilist, tm))
       #|  (P : (A) -> Bool)((x : A))
       #|  (l : List[(B, A)])
       #|  (x : A)
