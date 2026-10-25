@@ -414,7 +414,7 @@ pub fn permuted_imp_pairwise() -> @kernel.Thm {
 /// PERMUTED_PAIRWISE
 fn step_22() -> Unit raise {
   let t74 = @meson.meson_tac(@list.List([permuted_imp_pairwise(), permuted_sym()]))
-  permuted_pairwise_c.set(@tactics.prove(@parser.parse_term("forall(P:A->A->bool) l l.\n        (forall x y. P x y ==> P y x) /\\ l PERMUTED l'\n        ==> (PAIRWISE P l <=> PAIRWISE P l')"), t74))
+  permuted_pairwise_c.set(@tactics.prove(@term_syntax.parse_term("∀ P : (A, A) -> Bool, ∀ l : _, ∀ l : List[A], (∀ x : A, ∀ y : A, P(x, y) → P(y, x)) && PERMUTED(l, (l' : List[A])) → PAIRWISE(P, l) == PAIRWISE(P, l')"), t74))
 }
 
 ///|
