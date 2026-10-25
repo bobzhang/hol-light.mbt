@@ -107497,14 +107497,14 @@ Generating HOL version of proof
   \226\136\128 d : Y, \226\136\128 s : (X) -> Bool, \226\136\128 f : (X) -> Y, IN(d, IMAGE(f, s)) == (\226\136\131 c : X, d == f(c) && IN(c, s))
   \226\136\128 w : Y, \226\136\128 s : (X) -> Bool, \226\136\128 f : (X) -> Y, IN(w, IMAGE(f, s)) == (\226\136\131 v : X, w == f(v) && IN(v, s))
   \226\136\128 f : ((A, B)) -> C, ((ab : (A, B)) => f(ab)) == GABS((f' : ((A, B)) -> C) => \226\136\128 a : A, \226\136\128 b : B, GEQ(f'((a, b)), f((a, b))))
-  \n  forall f:A#B->L.\n  (forall(a,b) (c,d). f (a,b) = f (c,d) ==> (a,b) = (c,d)) ==>\n  forall x y. f x = f y ==> x = y\n
+  \226\136\128 f : ((A, B)) -> L, (\226\136\128 (a, b) : (A, B), (\226\136\128 (c, d) : (A, B), f((a, b)) == f((c, d)) \226\134\146 (a, b) == (c, d))) \226\134\146 (\226\136\128 x : (A, B), \226\136\128 y : (A, B), f(x) == f(y) \226\134\146 x == y)
   (b : B)
   (a : A)
   ((a : A), (b : B))
-  (x:C) = (\\((a:A),(b:B)). f a b) (a,b)
+  (x : C) == fn { (a, b) => (f : (A, B) -> C)(a, b) }(((a : A), (b : B)))
   (b : B)
   (a : A)
-  \n  forall P f:A->B->C.\n  IMAGE (\\(a,b). f a b) {a,b | P a b}\n  = {f a b | P a b}\n
+  \226\136\128 P : (A, B) -> Bool, \226\136\128 f : (A, B) -> C, IMAGE(fn { (a, b) => f(a, b) }, {((a : A), (b : B)) | P(a, b)}) == {f((a : A), (b : B)) | P(a, b)}
   (functions : ((X) -> Bool, (Y) -> Bool, (X) -> Y) -> Bool)((A : (X) -> Bool), (B : (Y) -> Bool)) == {(f : (X) -> Y) | SUBSET(IMAGE(f, A), B) && (\226\136\128 z : X, !IN(z, A) \226\134\146 f(z) == ARB)}
   \226\136\128 A : (X) -> Bool, \226\136\128 B : (Y) -> Bool, \226\136\128 f : (X) -> Y, IN(f, functions(A, B)) == (SUBSET(IMAGE(f, A), B) && (\226\136\128 z : X, !IN(z, A) \226\134\146 f(z) == ARB))
   \226\136\128 f : (X) -> Y, \226\136\128 g : (X) -> Y, (f == g) == (\226\136\128 e : X, f(e) == g(e))
@@ -107518,8 +107518,8 @@ Generating HOL version of proof
   \226\136\128 A : (X) -> Bool, \226\136\128 B : (Y) -> Bool, FINITE(A) \226\134\146 FINITE(B) \226\134\146 FINITE(functions(A, B))
   \226\136\128 B : (Y) -> Bool, functions({}, B) == {(x : X) => ARB}
   ((x : (X) -> Y)((i : X)), (a : X) => if a == i { ARB } else { x(a) })
-  \n  forall A:X->bool B:Y->bool i:X.\n  ~(i IN A) ==>\n  functions (i INSERT A) B\n  = IMAGE\n      (\\((b:Y),(f:X->Y)) (a:X). if a = i then b else f a)\n      (B CROSS (functions A B))\n
-  \n  forall A:X->bool B:Y->bool i:X v w.\n  ~(i IN A) ==>\n  v IN B CROSS functions A B ==>\n  w IN B CROSS functions A B ==>\n  (\\((b:Y),(f:X->Y)) (a:X). if a = i then b else f a) v\n  = (\\((b:Y),(f:X->Y)) (a:X). if a = i then b else f a) w ==>\n  v = w\n
+  \226\136\128 A : (X) -> Bool, \226\136\128 B : (Y) -> Bool, \226\136\128 i : X, !IN(i, A) \226\134\146 functions(INSERT(i, A), B) == IMAGE(fn { (b, f) => (a : X) => if a == i { b } else { f(a) } }, CROSS(B, functions(A, B)))
+  \226\136\128 A : (X) -> Bool, \226\136\128 B : (Y) -> Bool, \226\136\128 i : X, \226\136\128 v : (Y, (X) -> Y), \226\136\128 w : (Y, (X) -> Y), !IN(i, A) \226\134\146 IN(v, CROSS(B, functions(A, B))) \226\134\146 IN(w, CROSS(B, functions(A, B))) \226\134\146 fn { (b, f) => (a : X) => if a == i { b } else { f(a) } }(v) == fn { (b, f) => (a : X) => if a == i { b } else { f(a) } }(w) \226\134\146 v == w
   (perm : ((X) -> Bool, (X) -> X) -> Bool)((S : (X) -> Bool), (f : (X) -> X)) == permutes(f, S)
   \226\136\128 S : (X) -> Bool, \226\136\128 f : (X) -> X, perm(S, f) == IN(f, {(p : (X) -> X) | permutes(p, S)})
   \226\136\128 S : (X) -> Bool, perm(S) == {(p : (X) -> X) | permutes(p, S)}
@@ -107677,7 +107677,7 @@ Generating HOL version of proof
   \226\136\128 r : Ring[R], \226\136\128 a : R, \226\136\128 b : R, IN(a, ring_carrier(r)) \226\134\146 IN(b, ring_carrier(r)) \226\134\146 ring_add(r, a, ring_sub(r, b, a)) == b
   \226\136\128 r : Ring[A], \226\136\128 f : (K) -> L, \226\136\128 g : (L) -> A, \226\136\128 s : (K) -> Bool, (\226\136\128 x : K, \226\136\128 y : K, f(x) == f(y) \226\134\146 x == y) \226\134\146 ring_sum(r, IMAGE(f, s), g) == ring_sum(r, s, o(g, f))
   \226\136\128 x : (A, B), \226\136\128 y : (A, B), (f : ((A, B)) -> L)(x) == f(y) \226\134\146 x == y
-  \n  forall r (f:A#B->L) (g:L->X) s.\n  (forall(a,b) (c,d). f (a,b) = f (c,d) ==> (a,b) = (c,d))\n  ==> ring_sum r (IMAGE f s) g = ring_sum r s (g o f)\n
+  \226\136\128 r : Ring[X], \226\136\128 f : ((A, B)) -> L, \226\136\128 g : (L) -> X, \226\136\128 s : ((A, B)) -> Bool, (\226\136\128 (a, b) : (A, B), (\226\136\128 (c, d) : (A, B), f((a, b)) == f((c, d)) \226\134\146 (a, b) == (c, d))) \226\134\146 ring_sum(r, IMAGE(f, s), g) == ring_sum(r, s, o(g, f))
   IN(ring_sum((r : Ring[R]), (S : (X) -> Bool), (f : (X) -> R)), ring_carrier(r))
   \226\136\128 r : Ring[R], \226\136\128 S : (X) -> Bool, \226\136\128 f : (X) -> R, \226\136\128 s : X, FINITE(S) \226\134\146 IN(s, S) \226\134\146 IN(f(s), ring_carrier(r)) \226\134\146 ring_sum(r, S, f) == ring_add(r, f(s), ring_sum(r, DELETE(S, s), f))
   DELETE(op_dot_dot(0, (n : Num) + 1), 0) == op_dot_dot(0 + 1, n + 1)
@@ -107867,7 +107867,7 @@ Generating HOL version of proof
   ring_mul((r : Ring[R]), ring_neg(r, ring_1(r)), ring_neg(r, ring_1(r))) == ring_1(r)
   \226\136\128 r : Ring[R], \226\136\128 n : Num, ring_mul(r, ring_pow(r, ring_neg(r, ring_1(r)), n), ring_pow(r, ring_neg(r, ring_1(r)), n)) == ring_1(r)
   \226\136\128 r : Ring[R], \226\136\128 n : Num, ring_pow(r, ring_neg(r, ring_1(r)), n + 1) == ring_neg(r, ring_pow(r, ring_neg(r, ring_1(r)), n))
-  \n  forall(r:R ring) P Q (f:X->R) (g:Y->R).\n  FINITE P ==>\n  FINITE Q ==>\n  (forall x:X. x IN P ==> f x IN ring_carrier r) ==>\n  (forall y:Y. y IN Q ==> g y IN ring_carrier r) ==>\n  ring_sum r (P CROSS Q) (\\(x,y). ring_mul r (f x) (g y))\n  = ring_mul r (ring_sum r P f) (ring_sum r Q g)\n
+  \226\136\128 r : Ring[R], \226\136\128 P : (X) -> Bool, \226\136\128 Q : (Y) -> Bool, \226\136\128 f : (X) -> R, \226\136\128 g : (Y) -> R, FINITE(P) \226\134\146 FINITE(Q) \226\134\146 (\226\136\128 x : X, IN(x, P) \226\134\146 IN(f(x), ring_carrier(r))) \226\134\146 (\226\136\128 y : Y, IN(y, Q) \226\134\146 IN(g(y), ring_carrier(r))) \226\134\146 ring_sum(r, CROSS(P, Q), fn { (x, y) => ring_mul(r, f(x), g(y)) }) == ring_mul(r, ring_sum(r, P, f), ring_sum(r, Q, g))
   {(A : (X) -> Bool) | SUBSET(A, (S : (X) -> Bool))}
   (c : (X) -> R)((x : X))
   (A : (X) -> Bool) => ring_product((r : Ring[R]), A, (c : (X) -> R))
@@ -107897,11 +107897,11 @@ Generating HOL version of proof
   (P : (X) -> Bool)
   CROSS((Q : (Y) -> Bool), functions((P : (X) -> Bool), Q))
   (a : (X) -> Y) => ring_mul((r : Ring[R]), (f : (X, Y) -> R)((x : X), a(x)), ring_product(r, (P : (X) -> Bool), (p : X) => f(p, a(p))))
-  (\\(b,f) a:X. if a = x then b else f a:Y)
+  fn { ((b : Y), (f : (X) -> Y)) => (a : X) => if a == (x : X) { b } else { f(a) } }
   (r : Ring[R])
-  ring_sum(r:R ring) (IMAGE (\\(b,f) a:X. if a = x then b else f a:Y) (Q CROSS functions P Q)) (\\a. ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p)))) = ring_sum r (Q CROSS functions P Q) ((\\a. ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p)))) o (\\(b,f) a. if a = x then b else f a))
+  ring_sum((r : Ring[R]), IMAGE(fn { (b, f) => (a : X) => if a == (x : X) { b } else { f(a) } }, CROSS((Q : (Y) -> Bool), functions((P : (X) -> Bool), Q))), (a : (X) -> Y) => ring_mul(r, (f : (X, Y) -> R)(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p))))) == ring_sum(r, CROSS(Q, functions(P, Q)), o((a : (X) -> Y) => ring_mul(r, f(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p)))), fn { (b, f) => (a : X) => if a == x { b } else { f(a) } }))
   IN((a : (X) -> Y)((x : X)), (Q : (Y) -> Bool))
-  ring_sum(r:R ring) (IMAGE (\\(b,f) a:X. if a = x then b else f a:Y) (Q CROSS functions P Q)) (\\a. if ~(f x (a x) IN ring_carrier r) then ring_product r P (\\p. f p (a p)) else ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p)))) = ring_sum r (IMAGE (\\(b,f) a. if a = x then b else f a) (Q CROSS functions P Q)) (\\a.  ring_mul r (f x (a x)) (ring_product r P (\\p. f p (a p))))
+  ring_sum((r : Ring[R]), IMAGE(fn { (b, f) => (a : X) => if a == (x : X) { b } else { f(a) } }, CROSS((Q : (Y) -> Bool), functions((P : (X) -> Bool), Q))), (a : (X) -> Y) => if !IN((f : (X, Y) -> R)(x, a(x)), ring_carrier(r)) { ring_product(r, P, (p : X) => f(p, a(p))) } else { ring_mul(r, f(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p)))) }) == ring_sum(r, IMAGE(fn { (b, f) => (a : X) => if a == x { b } else { f(a) } }, CROSS(Q, functions(P, Q))), (a : (X) -> Y) => ring_mul(r, f(x, a(x)), ring_product(r, P, (p : X) => f(p, a(p)))))
   \226\136\128 p : X, IN(p, (P : (X) -> Bool)) \226\134\146 IN(p, INSERT((x : X), P))
   IN((x : X), INSERT(x, (P : (X) -> Bool)))
   \226\136\128 r : Ring[R], \226\136\128 f : (X, Y) -> R, \226\136\128 Q : (Y) -> Bool, \226\136\128 P : (X) -> Bool, FINITE(P) \226\134\146 FINITE(Q) \226\134\146 (\226\136\128 p : X, \226\136\128 q : Y, IN(p, P) \226\134\146 IN(q, Q) \226\134\146 IN(f(p, q), ring_carrier(r))) \226\134\146 ring_product(r, P, (p : X) => ring_sum(r, Q, (q : Y) => f(p, q))) == ring_sum(r, functions(P, Q), (g : (X) -> Y) => ring_product(r, P, (p : X) => f(p, g(p))))
@@ -108240,10 +108240,10 @@ Generating HOL version of proof
   \226\136\128 r : Ring[R], \226\136\128 p : ((V) -> Num) -> R, \226\136\128 q : ((V) -> Num) -> R, \226\136\128 f : (V) -> W, \226\136\128 m : (W) -> Num, poly_sub(r, p, q, o(m, f)) == poly_sub(r, (m : (W) -> Num) => p(o(m, f)), (m : (W) -> Num) => q(o(m, f)), m)
   {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}
   GABS((f : (((V) -> Num, (V) -> Num)) -> R) => \226\136\128 m1 : (V) -> Num, \226\136\128 m2 : (V) -> Num, GEQ(f((m1, m2)), ring_mul((r : Ring[R]), (p : ((V) -> Num) -> R)(m1), (q : ((V) -> Num) -> R)(m2))))
-  (\\(m1,m2). (m1:V->num) o (f:V->V),(m2:V->num) o (f:V->V))
+  fn { ((m1 : (V) -> Num), (m2 : (V) -> Num)) => ((o : ((V) -> Num, (V) -> V, V) -> Num)(m1, (f : (V) -> V)), (o : ((V) -> Num, (V) -> V, V) -> Num)(m2, f)) }
   (r : Ring[R])
-  forall x y. x IN {m1,m2 | monomial_mul m1 m2 = m:V->num} ==> y IN {m1,m2 | monomial_mul m1 m2 = m} ==> (\\(m1,m2). m1 o (f:V->V),m2 o f) x = (\\(m1,m2). m1 o f,m2 o f) y ==> x = y
-  ring_sum(r:R ring) (IMAGE (\\(m1,m2). m1 o (f:V->V),m2 o f) {m1,m2 | monomial_mul m1 m2 = m:V->num}) (\\(m1,m2). ring_mul r (p m1) (q m2)) = ring_sum r {m1,m2 | monomial_mul m1 m2 = m} ((\\(m1,m2). ring_mul r (p m1) (q m2)) o (\\(m1,m2). m1 o f,m2 o f))
+  \226\136\128 x : ((V) -> Num, (V) -> Num), \226\136\128 y : ((V) -> Num, (V) -> Num), IN(x, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}) \226\134\146 IN(y, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == m}) \226\134\146 fn { (m1, m2) => (o(m1, (f : (V) -> V)), o(m2, f)) }(x) == fn { (m1, m2) => (o(m1, f), o(m2, f)) }(y) \226\134\146 x == y
+  ring_sum((r : Ring[R]), IMAGE(fn { (m1, m2) => (o(m1, (f : (V) -> V)), o(m2, f)) }, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == (m : (V) -> Num)}), fn { (m1, m2) => ring_mul(r, (p : ((V) -> Num) -> R)(m1), (q : ((V) -> Num) -> R)(m2)) }) == ring_sum(r, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == m}, o(fn { (m1, m2) => ring_mul(r, p(m1), q(m2)) }, fn { (m1, m2) => (o(m1, f), o(m2, f)) }))
   inverse((f : (V) -> V), f(inverse(f, (x : V)))) == inverse(f, x)
   (x : V) == (f : (V) -> V)(inverse(f, x))
   (S : (V) -> Bool)
@@ -108252,7 +108252,7 @@ Generating HOL version of proof
   (f : (V) -> V)
   o((p2 : (V) -> Num), inverse((f : (V) -> V)))
   o((p1 : (V) -> Num), inverse((f : (V) -> V)))
-  {m1,m2 | monomial_mul m1 m2 = m o f} = IMAGE (\\(m1,m2). ((m1:V->num) o (f:V->V)),(m2 o f)) {m1,m2 | monomial_mul m1 m2 = m}
+  {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == o((m : (V) -> Num), (f : (V) -> V))} == IMAGE(fn { (m1, m2) => (o(m1, f), o(m2, f)) }, {((m1 : (V) -> Num), (m2 : (V) -> Num)) | monomial_mul(m1, m2) == m})
   \226\136\128 r : Ring[R], \226\136\128 p : ((V) -> Num) -> R, \226\136\128 q : ((V) -> Num) -> R, \226\136\128 S : (V) -> Bool, \226\136\128 f : (V) -> V, \226\136\128 m : (V) -> Num, permutes(f, S) \226\134\146 poly_mul(r, p, q, o(m, f)) == poly_mul(r, (m : (V) -> Num) => p(o(m, f)), (m : (V) -> Num) => q(o(m, f)), m)
   \226\136\128 f : (V) -> V, \226\136\128 S : (V) -> Bool, permutes(f, S) \226\134\146 o(monomial_1, f) == monomial_1
   o((m : (V) -> Num), o((f : (V) -> V), inverse(f))) == monomial_1
