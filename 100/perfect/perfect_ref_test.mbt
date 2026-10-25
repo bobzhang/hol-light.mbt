@@ -12709,7 +12709,7 @@ test "100/perfect matches 100/perfect.ml" {
       #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 x : Num, \226\136\128 y : Num, a * b == x * y && coprime((a, x)) \226\134\146 (\226\136\131 d : Num, y == a * d && b == x * d)
       #|  ODD((n : Num))
       #|  \226\136\128 k : Num, \226\136\128 n : Num, ODD(n) \226\134\146 coprime((EXP(2, k), n))
-      #|  forall s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))
+      #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && FINITE(t) \226\134\146 nsum(s, (f : (A) -> Num)) * nsum(t, (g : (B) -> Num)) == nsum({((x : A), (y : B)) | IN(x, s) && IN(y, t)}, fn { (x, y) => f(x) * g(y) })
       #|  sigma(0) == 0
       #|  {(d : Num) | d == 1} == {1}
       #|  sigma(1) == 1

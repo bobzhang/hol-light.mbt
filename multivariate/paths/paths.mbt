@@ -10520,7 +10520,7 @@ fn step_341() -> Unit raise {
   })
   let t4688 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @class.fun_eq_thm(), @trivia.o_thm()]))
   let t4686 = @term_syntax.parse_term("GABS((f : ((Num, Num)) -> Real) => ∀ m : Num, ∀ n : Num, GEQ(f((m, n)), real_of_num(m) / pow(real_of_num(2), n)))")
-  let t4687 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("\\(m,n). (f:num->num->A) m n"), t4686]), @sets.function_factors_left()))
+  let t4687 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("fn { (m, n) => (f : (Num, Num) -> A)(m, n) }"), t4686]), @sets.function_factors_left()))
   let t4685 = @simp.once_rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
   let t4705 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4685), t4687), t4688), t4693), t4694), t4695), t4696), t4697), t4698), t4699), t4700), t4701), @nums.induct_tac), t4702), t4703), t4704)
   let function_on_dyadic_rationals = @tactics.prove(@term_syntax.parse_term("∀ f : (Num, Num) -> A, (∀ m : Num, ∀ n : Num, f(2 * m, n + 1) == f(m, n)) → (∃ g : (Real) -> A, ∀ m : Num, ∀ n : Num, g(real_of_num(m) / pow(real_of_num(2), n)) == f(m, n))"), t4705)
@@ -54338,7 +54338,7 @@ fn step_1039() -> Unit raise {
   let t31996 = @tactics.repeat_tac(@tactics.disch_tac)
   let t31995 = @tactics.x_gen_tac(@term_syntax.parse_term("(g : (Cart[Real, Unit]) -> Cart[Real, M])"))
   let t31994 = @simp.rewrite_tac(@list.List([fundamental_group(), @theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec(), @sets.in_elim_pair_thm()]))
-  let t31992 = @parser.parse_term("\\(g,b:real^M). homotopic_paths (c:real^M->bool) ((@) g ++ f b)")
+  let t31992 = @term_syntax.parse_term("fn { (g, b) => homotopic_paths((c : (Cart[Real, M]) -> Bool), op_plus_plus(select(g), (f : (Cart[Real, M], Cart[Real, Unit]) -> Cart[Real, M])(b))) }")
   let t31993 = @tactics.map_every(fn(x31989 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s31990 = @tactics.exists_tac(x31989)
     fn(x31991 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
