@@ -82382,7 +82382,7 @@ test "Autoformalization/fourier_transform matches Autoformalization/fourier_tran
       #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h) \226\134\146 lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => fourier(h, drop(z))) == lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => h(drop(z)))
       #|  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : Real, schwartz(h) \226\134\146 integrable_on((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * h(drop(x)), UNIV)
       #|  fourier((x : Real) => -Cx(real_of_num(1)) * (h2 : (Real) -> Cart[Real, Tybit0[Unit]])(x), (y : Real)) == -Cx(real_of_num(1)) * fourier(h2, y)
-      #|  (\\x. cexp(--(ii * Cx y * Cx(drop x))) * (\\x. --Cx(&1) * h2 x)(drop x))\n         =\n        (\\x. --Cx(&1) * (\\x. cexp(--(ii * Cx y * Cx(drop x))) * h2(drop x)) x)
+      #|  ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx((y : Real)) * Cx(drop(x))))) * ((x : Real) => -Cx(real_of_num(1)) * (h2 : (Real) -> Cart[Real, Tybit0[Unit]])(x))(drop(x))) == ((x : Cart[Real, Unit]) => -Cx(real_of_num(1)) * ((x : Cart[Real, Unit]) => cexp(-(ii * (Cx(y) * Cx(drop(x))))) * h2(drop(x)))(x))
       #|  ((x : Real) => (h1 : (Real) -> Cart[Real, Tybit0[Unit]])(x) - (h2 : (Real) -> Cart[Real, Tybit0[Unit]])(x)) == ((x : Real) => h1(x) + ((x : Real) => -Cx(real_of_num(1)) * h2(x))(x))
       #|  \226\136\128 h1 : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 h2 : (Real) -> Cart[Real, Tybit0[Unit]], schwartz(h1) && schwartz(h2) \226\134\146 (\226\136\128 y : Real, fourier((x : Real) => h1(x) - h2(x), y) == fourier(h1, y) - fourier(h2, y))
       #|  real_of_num(0) <= real_of_num(2)
