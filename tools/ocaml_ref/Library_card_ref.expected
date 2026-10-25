@@ -7632,7 +7632,7 @@ Library/card quotations (969):
   (y : B) => select((x : A) => IN(x, (s : (A) -> Bool)) && (f : (A) -> B)(x) == y)
   (f : (A) -> B)
   forall s:A->bool t:B->bool.\n        s =_c t <=> ?f g. (forall x. x IN s ==> f x IN t /\\ g(f x) = x) /\\\n                          (forall y. y IN t ==> g y IN s /\\ f(g y) = y)
-  \\(x:A,y:B). x IN s /\\ y IN t /\\ (y = f x)
+  fn { (x, y) => IN(x, (s : (A) -> Bool)) && IN(y, (t : (B) -> Bool)) && y == (f : (A) -> B)(x) }
   (f : (A) -> B)
   s =_c t <=>\n   ?R:A#B->bool. (forall x y. R(x,y) ==> x IN s /\\ y IN t) /\\\n                 (forall x. x IN s ==> ?!y. y IN t /\\ R(x,y)) /\\\n                 (forall y. y IN t ==> ?!x. x IN s /\\ R(x,y))
   GABS((f : ((A, B)) -> Bool) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), (R : ((A, B)) -> Bool)((x, y)) && IN(x, (s : (A) -> Bool)) && IN(y, (t : (B) -> Bool))))
@@ -7793,7 +7793,7 @@ Library/card quotations (969):
   (g : (C) -> D)
   (f : (A) -> B)
   forall s:A->bool s':B->bool t:C->bool t':D->bool.\n      s <=_c s' /\\ t <=_c t' ==> s +_c t <=_c s' +_c t'
-  \\(x,y). (f:A->B) x,(g:C->D) y
+  fn { (x, y) => ((f : (A) -> B)(x), (g : (C) -> D)(y)) }
   (g : (C) -> D)
   (f : (A) -> B)
   forall s:A->bool s':B->bool t:C->bool t':D->bool.\n      s <=_c s' /\\ t <=_c t' ==> s *_c t <=_c s' *_c t'
@@ -7807,7 +7807,7 @@ Library/card quotations (969):
   (:A) =_c (:A') /\\ (:B) =_c (:B') ==> (:A->B) =_c (:A'->B')
   (op_star_us_c : ((A) -> Bool, (B) -> Bool, (A, B)) -> Bool)((UNIV : (A) -> Bool), (UNIV : (B) -> Bool)) == (UNIV : ((A, B)) -> Bool)
   (g : ((A, B)) -> C) => (x : A) => (y : B) => g((x, y))
-  \\(f:A->B->C) (x,y). f x y
+  (f : (A, B) -> C) => fn { (x, y) => f(x, y) }
   (op_eq_us_c : (((A, B) -> C) -> Bool, (((A, B)) -> C) -> Bool) -> Bool)((UNIV : ((A, B) -> C) -> Bool), (UNIV : (((A, B)) -> C) -> Bool))
   (forall x. INL(x) IN (s +_c t) <=> x IN s) /\\\n   (forall y. INR(y) IN (s +_c t) <=> y IN t)
   \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, \226\136\128 x : _, \226\136\128 y : _, IN((x, y), op_star_us_c(s, t)) == (IN(x, s) && IN(y, t))
@@ -7815,7 +7815,7 @@ Library/card quotations (969):
   \226\136\128 s : (A) -> Bool, op_lt_eq_us_c(s, op_star_us_c(s, s))
   GABS((f : ((Num, Num)) -> Num) => \226\136\128 x : Num, \226\136\128 y : Num, GEQ(f((x, y)), NUMPAIR(x, y)))
   (UNIV:num->bool) *_c (UNIV:num->bool) =_c (UNIV:num->bool)
-  function INL x -> (x:A) | INR x -> x
+  fn { (INL : (A) -> Sum[A, A])((x : A)) => x; (INR : (A) -> Sum[A, A])((x : A)) => x }
   \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, op_lt_eq_us_c(UNION(s, t), op_plus_us_c(s, t))
   IMAGE f s INTER IMAGE g t = {} <=>\n                        forall x y. x IN s /\\ y IN t ==> ~(f x = g y)
   forall s t. FINITE s /\\ FINITE t ==> CARD(s +_c t) = CARD s + CARD t
@@ -7979,7 +7979,7 @@ Library/card quotations (969):
   (f : (B, A) -> Bool)
   forall u:((A->bool)->bool) k:B->bool l:C->bool.\n     u <=_c k /\\ (forall s. s IN u ==> s <=_c l) ==> UNIONS u <=_c k *_c l
   forall k:B->bool u:(A->bool)->bool.\n        INFINITE k /\\ u <=_c k /\\ (forall s. s IN u ==> s <=_c k)\n        ==> UNIONS u <=_c k
-  \\(u,y). (f:(A->bool)->B->A) u y
+  fn { (u, y) => (f : ((A) -> Bool, B) -> A)(u, y) }
   (f : ((A) -> Bool, B) -> A)
   DISJOINT((s : (_) -> Bool), (t : (_) -> Bool)) == (\226\136\128 x : _, !(IN(x, s) && IN(x, t)))
   forall(s:(A->bool)->bool) (t:B->bool).\n        pairwise DISJOINT s /\\ (forall u. u IN s ==> t <=_c u)\n        ==> s *_c t <=_c UNIONS s
@@ -8582,7 +8582,7 @@ Library/card quotations (969):
   \226\136\131 a : A, SUBSET((s : (A) -> Bool), {a})
   (t : (B) -> Bool) == {}
   forall(s:A->bool) (t:B->bool).\n        FINITE(s ^_c t) <=>\n        (?a. s SUBSET {a}) \\/ t = {} \\/ FINITE s /\\ FINITE t
-  \\((f:K->A),g) x. if x IN k then f x else g x
+  fn { ((f : (K) -> A), (g : (K) -> A)) => (x : K) => if (IN : (K, (K) -> Bool) -> Bool)(x, (k : (K) -> Bool)) { f(x) } else { g(x) } }
   (f : (K) -> A) => (RESTRICTION((k : (K) -> Bool), f), RESTRICTION((l : (K) -> Bool), f))
   forall(f:K->A->bool) k l.\n        DISJOINT k l\n        ==> cartesian_product (k UNION l) f =_c\n            cartesian_product k f CROSS cartesian_product l f
 sum_DISTINCT =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun('B,bool),bool) (\a':'B. (#~:fun(bool,bool) ((#=:fun(sum('A,'B),fun(sum('A,'B),bool)) (#INL:fun('A,sum('A,'B)) a:'A)) (#INR:fun('B,sum('A,'B)) a':'B)))))))
