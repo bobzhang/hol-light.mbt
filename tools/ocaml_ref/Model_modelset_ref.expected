@@ -8119,7 +8119,7 @@ Model/modelset quotations (165):
   abstract s t f =\n        (cartproduct s t) suchthat (\\z. forall x y. (pair x y = z) ==> (y = f x))
   \226\136\128 x : V, \226\136\128 s : V, \226\136\128 t : V, op_lt_colon(x, s) && op_lt_colon((f : (V) -> V)(x), t) \226\134\146 apply(op_abstract(s, t, f), x) == f(x)
   \226\136\128 f : V, \226\136\128 x : V, \226\136\128 s : V, \226\136\128 t : V, op_lt_colon(x, s) && op_lt_colon(f, funspace(s, t)) \226\134\146 op_lt_colon(apply(f, x), t)
-  forall f x s t. (forall x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t
+  \226\136\128 f : (V) -> V, \226\136\128 x : _, \226\136\128 s : V, \226\136\128 t : V, (\226\136\128 x : V, op_lt_colon(x, s) \226\134\146 op_lt_colon(f(x), t)) \226\134\146 op_lt_colon(op_abstract(s, t, f), funspace(s, t))
   op_abstract((s : V), (t : V), (x : V) => select((y : V) => op_lt_colon(y, t)))
   \226\136\128 s : V, \226\136\128 t : V, ((\226\136\131 x : V, op_lt_colon(x, s)) \226\134\146 (\226\136\131 y : V, op_lt_colon(y, t))) \226\134\146 (\226\136\131 f : V, op_lt_colon(f, funspace(s, t)))
   (((a : Bool) && (b : Bool) && (c : Bool)) && (d : Bool)) == !(a \226\134\146 b && c \226\134\146 !d)
