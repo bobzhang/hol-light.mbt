@@ -46,6 +46,9 @@ assert rename_moonbit(src, R) == ('let a = @parser.parse_term("!fn_. fn_ = \\"fn
                                   '@simp.expand_tac("fn_") @tactics.label_tac("fn", th)\n')
 assert refused(rename_moonbit, '@term_syntax.parse_term("fn_ + 1")', R)
 assert refused(rename_moonbit, 'foo("fn")', R)
+# the term syntax's own fn { ... } is no variable
+assert rename_moonbit('@term_syntax.parse_term("IMAGE(fn { (x, y) => x }, s)")', R) == \
+    '@term_syntax.parse_term("IMAGE(fn { (x, y) => x }, s)")'
 
 # output: the target's trace and structural variables, not constants or
 # type variables, nor lines before the target's trace

@@ -210,7 +210,8 @@ def rename_moonbit(text, renames):
             assert not uses(names, renames, new=True), f'a new name is already used: {body[:60]!r}'
             new = mbt_escape(rename_in_hol(body, renames))
         elif callee == '@term_syntax.parse_term':
-            names = re.findall(r"[A-Za-z_][A-Za-z0-9_]*'*", body)
+            # fn { pattern => ... } is the term syntax's own keyword
+            names = re.findall(r"[A-Za-z_][A-Za-z0-9_]*'*", re.sub(r'\bfn(?=\s*\{)', ' ', body))
             assert not uses(names, renames) and not uses(names, renames, new=True), \
                 f'a term-syntax quotation names a renamed variable: {body[:60]!r}'
             continue
