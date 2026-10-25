@@ -15,7 +15,7 @@ fn step_2() -> Unit raise {
 ///|
 /// funspace
 fn step_3() -> Unit raise {
-  funspace_c.set(@pair.new_definition(@parser.parse_term("(s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}")))
+  funspace_c.set(@pair.new_definition(@term_syntax.parse_term("(op_minus_minus_gt : ((A) -> Bool, (B) -> Bool, (A) -> B) -> Bool)((s : (A) -> Bool), (t : (B) -> Bool)) == {(f : (A) -> B) | (∀ x : A, IN(x, s) → IN(f(x), t)) && (∀ x : A, !IN(x, s) → f(x) == select((y : B) => true))}")))
 }
 
 ///|
