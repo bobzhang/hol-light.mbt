@@ -370,8 +370,9 @@ type Bound = @list.List[(@kernel.Term, String)]
 
 ///|
 /// The name `v` is printed under where it is bound over `body`: its own,
-/// unless that would capture another variable of the same name, which a
-/// fresh name with primes avoids.
+/// unless that would capture another variable occurring in `body`, printed
+/// under the same name, which a fresh name with primes avoids. Shadowing a
+/// binder whose variable `body` does not mention captures nothing.
 fn Printer::bind(
   self : Printer,
   v : @kernel.Term,
@@ -379,10 +380,15 @@ fn Printer::bind(
   bound : Bound,
 ) -> (String, Bound) raise Unprintable {
   guard v is Var(name, ty) else { raise Unprintable("binder is not a variable") }
+  // the names the other variables free in body are printed under
   let clash = @kernel.frees(body).iter().any(u => {
-    u is Var(n, _) && n == name && u != v
-  }) ||
-    bound.iter().any(b => b.1 == name && b.0 != v)
+    u != v &&
+    (match bound.iter().find_first(b => b.0 == u) {
+      Some((_, printed)) => printed
+      None => if u is Var(n, _) { n } else { "" }
+    }) ==
+    name
+  })
   // a binder named like a constant would be read as that constant
   // (its occurrences are read as it, by name, whatever they spell)
   let plain = is_ident(name) && !is_constant_name(name)
