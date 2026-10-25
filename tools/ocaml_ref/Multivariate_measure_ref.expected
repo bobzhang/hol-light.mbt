@@ -76512,7 +76512,7 @@ Multivariate/measure quotations (9652):
   \226\136\128 n : Num, !(FINITE((s : (_) -> Bool)) \226\134\146 n <= CARD(s)) \226\134\146 FINITE(s)
   (n : Num)
   (m : Num)
-  UNIONS\n     (IMAGE (\\(m,n).\n        {s | s IN f /\\\n           inv(&m + &1) < measure(s INTER interval[--vec n:real^N,vec n])})\n     ((:num) CROSS (:num)))
+  UNIONS(IMAGE(fn { (m, n) => {(s : (Cart[Real, N]) -> Bool) | IN(s, (f : ((Cart[Real, N]) -> Bool) -> Bool)) && inv(real_of_num(m) + real_of_num(1)) < measure(INTER(s, interval([(-vec(n), vec(n))])))} }, CROSS(UNIV, UNIV)))
   \226\136\128 f : ((Cart[Real, N]) -> Bool) -> Bool, pairwise((s : (Cart[Real, N]) -> Bool) => (t : (Cart[Real, N]) -> Bool) => negligible(INTER(s, t)), f) && (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, f) \226\134\146 lebesgue_measurable(s) && !negligible(s)) \226\134\146 COUNTABLE(f)
   INSERT((n : A), (c : (A) -> Bool))
   (c : (A) -> Bool)
