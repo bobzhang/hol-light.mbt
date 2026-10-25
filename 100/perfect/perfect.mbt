@@ -186,7 +186,7 @@ pub fn coprime_odd_pow2() -> @kernel.Thm {
 /// MULT_NSUM
 fn step_9() -> Unit raise {
   let t66 = @simp.simp_tac(@list.List([@equal.gsym(@iterate.nsum_nsum_product()), @iterate.nsum_lmul(), @iterate.nsum_rmul()]))
-  mult_nsum_c.set(@tactics.prove(@parser.parse_term("forall s t. FINITE s /\\ FINITE t\n         ==> nsum s f * nsum t g =\n             nsum {(x:A,y:B) | x IN s /\\ y IN t} (\\(x,y). f(x) * g(y))"), t66))
+  mult_nsum_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : (A) -> Bool, ∀ t : (B) -> Bool, FINITE(s) && FINITE(t) → nsum(s, (f : (A) -> Num)) * nsum(t, (g : (B) -> Num)) == nsum({((x : A), (y : B)) | IN(x, s) && IN(y, t)}, fn { (x, y) => f(x) * g(y) })"), t66))
 }
 
 ///|
