@@ -2705,7 +2705,7 @@ pub fn pastecart_eq_cvector_zero() -> @kernel.Thm {
 /// PASTECART_CVECTOR_ADD
 fn step_145() -> Unit raise {
   let t365 = pastecart_tac(@list.List([fstcart_sndcart_cvector_add()]))
-  pastecart_cvector_add_c.set(@tactics.prove(@parser.parse_term("forall x1 y2 x2:complex^N y2:complex^M.\n  pastecart x1 y1 + pastecart x2 y2 = pastecart (x1 + x2) (y1 + y2)"), t365))
+  pastecart_cvector_add_c.set(@tactics.prove(@term_syntax.parse_term("∀ x1 : Cart[Cart[Real, Tybit0[Unit]], N], ∀ y2 : _, ∀ x2 : Cart[Cart[Real, Tybit0[Unit]], N], ∀ y2 : Cart[Cart[Real, Tybit0[Unit]], M], pastecart(x1, (y1 : Cart[Cart[Real, Tybit0[Unit]], M])) + pastecart(x2, y2) == pastecart(x1 + x2, y1 + y2)"), t365))
 }
 
 ///|
@@ -4014,7 +4014,7 @@ fn step_223() -> Unit raise {
   let t527 = @bool.spec(@term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))"), t526)
   let t528 = @simp.rewrite_tac(@list.List([@drule.match_mp(@equal.gsym(@complexes.vsum_complex_lmul()))(t527)]))
   let t530 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([cdot()])), t528), t529)
-  cdot_rmul_c.set(@tactics.prove(@parser.parse_term("forall c:complex x:complex^N x y. x cdot (c % y) = cnj c * (x cdot y)"), t530))
+  cdot_rmul_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Cart[Real, Tybit0[Unit]], ∀ x : Cart[Cart[Real, Tybit0[Unit]], N], ∀ x : Cart[Cart[Real, Tybit0[Unit]], _], ∀ y : Cart[Cart[Real, Tybit0[Unit]], _], cdot(x, cvector_mul(c, y)) == cnj(c) * cdot(x, y)"), t530))
 }
 
 ///|

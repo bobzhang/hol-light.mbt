@@ -1376,7 +1376,7 @@ fn step_81() -> Unit raise {
     }
   })
   let t216 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t212), t215)
-  holds_qsubst_c.set(@tactics.prove(@parser.parse_term("forall v t p v. ~(x IN FVT(t))\n             ==> (holds v (qsubst (x,t) p) <=>\n                  holds ((x |-> termval v t) v) p)"), t216))
+  holds_qsubst_c.set(@tactics.prove(@term_syntax.parse_term("∀ v : _, ∀ t : Term, ∀ p : Form, ∀ v : (Num) -> Num, !IN((x : Num), FVT(t)) → holds(v, qsubst((x, t), p)) == holds(op_bar_minus_gt(x, termval(v, t), v), p)"), t216))
 }
 
 ///|
