@@ -697,7 +697,7 @@ fn step_39() -> Unit raise {
     @tactics.then_tac(@tactics.mp_tac(th), t128)
   })
   let t134 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t129), t130), t131), t132), t133)
-  linear_eq_mbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(M)multivector->real^N g s.\n        linear f /\\ linear g /\\\n        (forall s. s SUBSET 1..dimindex(:M) ==> f(mbasis s) = g(mbasis s))\n        ==> f = g"), t134))
+  linear_eq_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Multivector[M]]) -> Cart[Real, N], ∀ g : (Cart[Real, Multivector[M]]) -> Cart[Real, N], ∀ s : _, (linear : ((Cart[Real, Multivector[M]]) -> Cart[Real, N]) -> Bool)(f) && (linear : ((Cart[Real, Multivector[M]]) -> Cart[Real, N]) -> Bool)(g) && (∀ s : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) → f((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])(s)) == g((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])(s))) → f == g"), t134))
 }
 
 ///|
@@ -723,7 +723,7 @@ fn step_40() -> Unit raise {
     @tactics.then_tac(@tactics.mp_tac(th), t137)
   })
   let t144 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t138), t139), t140), t141), t142), t143)
-  bilinear_eq_mbasis_c.set(@tactics.prove(@parser.parse_term("forall f:real^(M)multivector->real^(N)multivector->real^P g s.\n        bilinear f /\\ bilinear g /\\\n        (forall s t.  s SUBSET 1..dimindex(:M) /\\ t SUBSET 1..dimindex(:N)\n                ==> f (mbasis s) (mbasis t) = g (mbasis s) (mbasis t))\n        ==> f = g"), t144))
+  bilinear_eq_mbasis_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P], ∀ g : (Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P], ∀ s : _, (bilinear : ((Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P]) -> Bool)(f) && (bilinear : ((Cart[Real, Multivector[M]], Cart[Real, Multivector[N]]) -> Cart[Real, P]) -> Bool)(g) && (∀ s : (Num) -> Bool, ∀ t : (Num) -> Bool, (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(s, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) && (SUBSET : ((Num) -> Bool, (Num) -> Bool) -> Bool)(t, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) → f((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t)) == g((mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[M]])(s), (mbasis : ((Num) -> Bool) -> Cart[Real, Multivector[N]])(t))) → f == g"), t144))
 }
 
 ///|
