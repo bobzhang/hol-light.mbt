@@ -24686,7 +24686,7 @@ pub fn netlimit() -> @kernel.Thm {
 fn step_877() -> Unit raise {
   let t9563 = @meson.meson_tac(@list.List([net_tybij()]))
   let t9564 = @tactics.then_tac(@simp.rewrite_tac(@list.List([netfilter()])), t9563)
-  net_c.set(@tactics.prove(@parser.parse_term("forall n s t. forall s t. s IN netfilter n /\\ t IN netfilter n\n                 ==> (s INTER t) IN netfilter n"), t9564))
+  net_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Net[_], ∀ s : _, ∀ t : _, ∀ s : (_) -> Bool, ∀ t : (_) -> Bool, IN(s, netfilter(n)) && IN(t, netfilter(n)) → IN(INTER(s, t), netfilter(n))"), t9564))
 }
 
 ///|
@@ -25285,7 +25285,7 @@ fn step_905() -> Unit raise {
   let t9693 = @simp.rewrite_tac(@list.List([netfilter(), netlimits(), @equal.gsym(@pair.pair_eq())]))
   let t9692 = @tactics.repeat_tac(@tactics.gen_tac)
   let t9702 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm()])), t9692), t9693), t9694), t9695), t9696), t9698), t9699), t9700), t9701), @int.arith_tac)
-  let t9703 = (@parser.parse_term("(forall n. netfilter sequentially = {from n | n IN (:num)}) /\\\n   (netlimits sequentially = {})"), t9702)
+  let t9703 = (@term_syntax.parse_term("(∀ n : _, netfilter(sequentially) == {from((n : Num)) | IN(n, UNIV)}) && netlimits(sequentially) == {}"), t9702)
   let (sequentially_1, netlimits_sequentially) = @bool.conj_pair((fn(x9691 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x9691.0, x9691.1)
   })(t9703))
@@ -47359,7 +47359,7 @@ fn step_1573() -> Unit raise {
   let t19411 = @simp.asm_rewrite_tac(@list.List([]))
   let t19410 = @simp.rewrite_tac(@list.List([cauchy_in(), @trivia.o_def()]))
   let t19426 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t19410), @tactics.strip_tac), t19411), t19412), @tactics.disch_tac), t19419), t19420), t19421), t19422), t19423), t19424), t19425)
-  cauchy_in_subsequence_c.set(@tactics.prove(@parser.parse_term("forall m (x:num->A) r.\n        (forall m n. m < n ==> r m < r n) /\\ cauchy_in m x\n        ==> cauchy_in m (x o r)"), t19426))
+  cauchy_in_subsequence_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], ∀ x : (Num) -> A, ∀ r : (Num) -> Num, (∀ m : Num, ∀ n : Num, m < n → r(m) < r(n)) && cauchy_in(m, x) → cauchy_in(m, o(x, r))"), t19426))
 }
 
 ///|
@@ -47488,7 +47488,7 @@ fn step_1575() -> Unit raise {
   })
   let t19452 = @simp.rewrite_tac(@list.List([limit_metric()]))
   let t19505 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t19452), t19459), @tactics.strip_tac), t19460), t19461), @tactics.disch_tac), t19468), t19478), t19485), t19486), t19487), t19488), @tactics.disch_tac), t19489), @tactics.disch_tac), t19490), t19491), t19492), @tactics.strip_tac), t19500), @tactics.ants_tac), t19501), t19502), t19503), t19504)
-  cauchy_in_convergent_subsequence_c.set(@tactics.prove(@parser.parse_term("forall m r a x:num->A.\n        cauchy_in m x /\\\n        (forall m n. m < n ==> r m < r n) /\\\n        limit (mtopology m) (x o r) a sequentially\n        ==> limit (mtopology m) x a sequentially"), t19505))
+  cauchy_in_convergent_subsequence_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], ∀ r : (Num) -> Num, ∀ a : A, ∀ x : (Num) -> A, cauchy_in(m, x) && (∀ m : Num, ∀ n : Num, m < n → r(m) < r(n)) && limit(mtopology(m), o(x, r), a, sequentially) → limit(mtopology(m), x, a, sequentially)"), t19505))
 }
 
 ///|
@@ -47904,7 +47904,7 @@ fn step_1580() -> Unit raise {
   })
   let t19799 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(c : (Num, A) -> Bool)")), @tactics.strip_tac), t19680), t19682), t19683), @tactics.disch_tac), t19690), @tactics.ants_tac), t19731), t19798])
   let t19800 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([mcomplete()]))), @tactics.eq_tac), @tactics.disch_tac), t19799)
-  mcomplete_nest_c.set(@tactics.prove(@parser.parse_term("forall m:A metric.\n      mcomplete m <=>\n      forall c. (forall n. closed_in (mtopology m) (c n)) /\\\n          (forall n. ~(c n = {})) /\\\n          (forall m n. m <= n ==> c n SUBSET c m) /\\\n          (forall e. &0 < e ==> ?n a. c n SUBSET mcball m (a,e))\n          ==> ~(INTERS {c n | n IN (:num)} = {})"), t19800))
+  mcomplete_nest_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], mcomplete(m) == (∀ c : (Num, A) -> Bool, (∀ n : Num, closed_in(mtopology(m), c(n))) && (∀ n : Num, !(c(n) == {})) && (∀ m : Num, ∀ n : Num, m <= n → SUBSET(c(n), c(m))) && (∀ e : Real, real_of_num(0) < e → (∃ n : Num, ∃ a : A, SUBSET(c(n), mcball(m, (a, e))))) → !(INTERS({c((n : Num)) | IN(n, UNIV)}) == {}))"), t19800))
 }
 
 ///|
@@ -47968,7 +47968,7 @@ fn step_1581() -> Unit raise {
   let t19802 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (Num, A) -> Bool)"))
   let t19801 = @tactics.match_mp_tac(@theorems.mono_forall())
   let t19843 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([mcomplete_nest()]))), @tactics.eq_tac), t19801), t19802), t19805), t19806), t19807), t19808), t19809), @tactics.strip_tac), t19810), t19814), t19818), t19819), t19820), t19821), t19822), t19829), @tactics.ants_tac), t19831), t19833), t19834), t19838), t19839), @tactics.conj_tac), t19840), t19841), t19842)
-  mcomplete_nest_sing_c.set(@tactics.prove(@parser.parse_term("forall m:A metric.\n      mcomplete m <=>\n      forall c. (forall n. closed_in (mtopology m) (c n)) /\\\n          (forall n. ~(c n = {})) /\\\n          (forall m n. m <= n ==> c n SUBSET c m) /\\\n          (forall e. &0 < e ==> ?n a. c n SUBSET mcball m (a,e))\n          ==> ?l. l IN mspace m /\\ INTERS {c n | n IN (:num)} = {l}"), t19843))
+  mcomplete_nest_sing_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], mcomplete(m) == (∀ c : (Num, A) -> Bool, (∀ n : Num, closed_in(mtopology(m), c(n))) && (∀ n : Num, !(c(n) == {})) && (∀ m : Num, ∀ n : Num, m <= n → SUBSET(c(n), c(m))) && (∀ e : Real, real_of_num(0) < e → (∃ n : Num, ∃ a : A, SUBSET(c(n), mcball(m, (a, e))))) → (∃ l : A, IN(l, mspace(m)) && INTERS({c((n : Num)) | IN(n, UNIV)}) == {l}))"), t19843))
 }
 
 ///|
@@ -48754,7 +48754,7 @@ fn step_1593() -> Unit raise {
   let t20183 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t20182])
   let t20181 = @class.asm_cases_tac(@term_syntax.parse_term("SUBSET((s : (A) -> Bool), mspace((m : Metric[A])))"))
   let t20354 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t20181), t20183), t20184), t20185), t20239), t20240), t20241), @tactics.ants_tac), t20256), @tactics.conj_tac), t20270), t20272), t20273), t20282), t20289), t20290), t20292), t20294), t20295), t20302), t20303), t20304), t20305), @tactics.strip_tac), t20309), t20311), t20317), t20318), t20319), t20320), t20321), t20322), @tactics.strip_tac), t20328), t20329), t20330), @tactics.strip_tac), t20331), t20332), t20334), t20336), t20342), t20346), t20347), t20351), t20353)
-  totally_bounded_in_sequentially_c.set(@tactics.prove(@parser.parse_term("forall m s:A->bool.\n        totally_bounded_in m s <=>\n        s SUBSET mspace m /\\\n        forall x:num->A. (forall n. x n IN s)\n                   ==> ?r. (forall m n. m < n ==> r m < r n) /\\\n                           cauchy_in m (x o r)"), t20354))
+  totally_bounded_in_sequentially_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], ∀ s : (A) -> Bool, totally_bounded_in(m, s) == (SUBSET(s, mspace(m)) && (∀ x : (Num) -> A, (∀ n : Num, IN(x(n), s)) → (∃ r : (Num) -> Num, (∀ m : Num, ∀ n : Num, m < n → r(m) < r(n)) && cauchy_in(m, o(x, r)))))"), t20354))
 }
 
 ///|
@@ -49451,7 +49451,7 @@ fn step_1606() -> Unit raise {
   })
   let t20678 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.x_gen_tac(@term_syntax.parse_term("(t : (A) -> Bool)"))), @tactics.strip_tac), t20629), t20630), t20631), @tactics.strip_tac), t20638), @tactics.ants_tac), t20640), t20641), t20642), t20643), t20644), t20651), t20652), @tactics.strip_tac), t20653), t20654), @tactics.disch_tac), t20661), t20662), t20666), t20667), t20668), t20669), t20674), t20676), t20677), @tactics.all_tac])
   let t20767 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t20678), t20679), t20680), @tactics.disch_tac), t20681), @tactics.disch_tac), t20682), t20766)
-  bolzano_weierstrass_property_c.set(@tactics.prove(@parser.parse_term("forall m u s:A->bool.\n      s SUBSET u /\\ s SUBSET mspace m\n      ==> ((forall x. (forall n:num. x n IN s)\n                ==> ?l r. l IN u /\\ (forall m n. m < n ==> r m < r n) /\\\n                          limit (mtopology m) (x o r) l sequentially) <=>\n           (forall t. t SUBSET s /\\ INFINITE t\n                ==> ~(u INTER (mtopology m) derived_set_of t = {})))"), t20767))
+  bolzano_weierstrass_property_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], ∀ u : (A) -> Bool, ∀ s : (A) -> Bool, SUBSET(s, u) && SUBSET(s, mspace(m)) → (∀ x : (Num) -> A, (∀ n : Num, IN(x(n), s)) → (∃ l : A, ∃ r : (Num) -> Num, IN(l, u) && (∀ m : Num, ∀ n : Num, m < n → r(m) < r(n)) && limit(mtopology(m), o(x, r), l, sequentially))) == (∀ t : (A) -> Bool, SUBSET(t, s) && INFINITE(t) → !(INTER(u, derived_set_of(mtopology(m), t)) == {}))"), t20767))
 }
 
 ///|
@@ -49724,7 +49724,7 @@ fn step_1607() -> Unit raise {
   let t20769 = @term_syntax.parse_term("(s : (A) -> Bool)")
   let t20770 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(m : Metric[A])"), t20769]))
   let t20946 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.and_forall_thm()])), t20770), t20771), t20773), t20774), t20775), t20776), t20777), t20945)
-  let t20947 = (@parser.parse_term("(forall m s:A->bool.\n        compact_in (mtopology m) s <=>\n        s SUBSET mspace m /\\\n        forall t. t SUBSET s /\\ INFINITE t\n            ==> ~(s INTER (mtopology m) derived_set_of t = {})) /\\\n   (forall m s:A->bool.\n        compact_in (mtopology m) s <=>\n        s SUBSET mspace m /\\\n        forall x. (forall n:num. x n IN s)\n            ==> ?l r. l IN s /\\ (forall m n. m < n ==> r m < r n) /\\\n                      limit (mtopology m) (x o r) l sequentially) /\\\n   (forall m (s:A->bool) e.\n        compact_in (mtopology m) s /\\ &0 < e\n        ==> ?k. FINITE k /\\ k SUBSET s /\\\n                s SUBSET UNIONS { mball m (x,e) | x IN k}) /\\\n   (forall m (s:A->bool) U.\n        compact_in (mtopology m) s /\\\n        (forall u. u IN U ==> open_in (mtopology m) u) /\\ s SUBSET UNIONS U\n        ==> ?e. &0 < e /\\\n                forall x. x IN s ==> ?u. u IN U /\\ mball m (x,e) SUBSET u)"), t20946)
+  let t20947 = (@term_syntax.parse_term("(∀ m : Metric[A], ∀ s : (A) -> Bool, compact_in(mtopology(m), s) == (SUBSET(s, mspace(m)) && (∀ t : (A) -> Bool, SUBSET(t, s) && INFINITE(t) → !(INTER(s, derived_set_of(mtopology(m), t)) == {})))) && (∀ m : Metric[A], ∀ s : (A) -> Bool, compact_in(mtopology(m), s) == (SUBSET(s, mspace(m)) && (∀ x : (Num) -> A, (∀ n : Num, IN(x(n), s)) → (∃ l : A, ∃ r : (Num) -> Num, IN(l, s) && (∀ m : Num, ∀ n : Num, m < n → r(m) < r(n)) && limit(mtopology(m), o(x, r), l, sequentially))))) && (∀ m : Metric[A], ∀ s : (A) -> Bool, ∀ e : Real, compact_in(mtopology(m), s) && real_of_num(0) < e → (∃ k : (A) -> Bool, FINITE(k) && SUBSET(k, s) && SUBSET(s, UNIONS({mball(m, ((x : A), e)) | IN(x, k)})))) && (∀ m : Metric[A], ∀ s : (A) -> Bool, ∀ U : ((A) -> Bool) -> Bool, compact_in(mtopology(m), s) && (∀ u : (A) -> Bool, IN(u, U) → open_in(mtopology(m), u)) && SUBSET(s, UNIONS(U)) → (∃ e : Real, real_of_num(0) < e && (∀ x : A, IN(x, s) → (∃ u : (A) -> Bool, IN(u, U) && SUBSET(mball(m, (x, e)), u)))))"), t20946)
   match @bool.conjuncts_rule((fn(x20768 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
     @tactics.prove(x20768.0, x20768.1)
   })(t20947)) {
@@ -49743,7 +49743,7 @@ fn step_1607() -> Unit raise {
 /// COMPACT_SPACE_SEQUENTIALLY
 fn step_1608() -> Unit raise {
   let t20948 = @simp.rewrite_tac(@list.List([compact_space(), compact_in_sequentially(), @sets.subset_refl(), topspace_mtopology()]))
-  compact_space_sequentially_c.set(@tactics.prove(@parser.parse_term("forall m:A metric.\n        compact_space(mtopology m) <=>\n        forall x. (forall n:num. x n IN mspace m)\n            ==> ?l r. l IN mspace m /\\\n                      (forall m n. m < n ==> r m < r n) /\\\n                      limit (mtopology m) (x o r) l sequentially"), t20948))
+  compact_space_sequentially_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], compact_space(mtopology(m)) == (∀ x : (Num) -> A, (∀ n : Num, IN(x(n), mspace(m))) → (∃ l : A, ∃ r : (Num) -> Num, IN(l, mspace(m)) && (∀ m : Num, ∀ n : Num, m < n → r(m) < r(n)) && limit(mtopology(m), o(x, r), l, sequentially)))"), t20948))
 }
 
 ///|
@@ -49877,7 +49877,7 @@ fn step_1610() -> Unit raise {
   let t20954 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (Num, A) -> Bool)"))
   let t21036 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([compact_space_fip()])), @tactics.disch_tac), t20954), @tactics.strip_tac), t20961), t20962), t20963), t20964), t20965), t20974), t20975), t20976), @tactics.disch_tac), t20977), t20978), t20979), t21035])
   let t21037 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t21036)
-  compact_space_nest_c.set(@tactics.prove(@parser.parse_term("forall m:A metric.\n        compact_space(mtopology m) <=>\n        forall c. (forall n. closed_in (mtopology m) (c n)) /\\\n            (forall n. ~(c n = {})) /\\\n            (forall m n. m <= n ==> c n SUBSET c m)\n            ==> ~(INTERS {c n | n IN (:num)} = {})"), t21037))
+  compact_space_nest_c.set(@tactics.prove(@term_syntax.parse_term("∀ m : Metric[A], compact_space(mtopology(m)) == (∀ c : (Num, A) -> Bool, (∀ n : Num, closed_in(mtopology(m), c(n))) && (∀ n : Num, !(c(n) == {})) && (∀ m : Num, ∀ n : Num, m <= n → SUBSET(c(n), c(m))) → !(INTERS({c((n : Num)) | IN(n, UNIV)}) == {}))"), t21037))
 }
 
 ///|
@@ -58358,13 +58358,13 @@ fn step_1851() -> Unit raise {
   let t25154 = @tactics.exists_tac(@term_syntax.parse_term("euclideanreal"))
   let t25162 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conj_tac, @tactics.match_mp_tac(open_in_continuous_map_preimage())), t25154), t25155), t25156), t25161])
   let t25153 = @simp.once_rewrite_tac(@list.List([@theorems.conj_assoc()]))
-  let t25151 = @parser.parse_term("{x:A | x IN topspace top /\\ f x IN {x | x > &1 / &2}}")
+  let t25151 = @term_syntax.parse_term("{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> Real)(x), {(x : Real) | x > real_of_num(1) / real_of_num(2)})}")
   let t25152 = @tactics.map_every(fn(x25148 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s25149 = @tactics.exists_tac(x25148)
     fn(x25150 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s25149(x25150)
     }
-  }, @list.List([@parser.parse_term("{x:A | x IN topspace top /\\ f x IN {x | x < &1 / &2}}"), t25151]))
+  }, @list.List([@term_syntax.parse_term("{(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> Real)(x), {(x : Real) | x < real_of_num(1) / real_of_num(2)})}"), t25151]))
   let t25147 = @tactics.x_gen_tac(@term_syntax.parse_term("(f : (A) -> Real)"))
   let t25146 = @simp.asm_rewrite_tac(@list.List([@theorems.left_imp_exists_thm(), continuous_map_in_subtopology()]))
   let t25145 = @tactics.disch_then(fn(x25143 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -67658,7 +67658,7 @@ fn step_2100() -> Unit raise {
   let t29749 = @simp.rewrite_tac(@list.List([homotopic_with(), @theorems.left_imp_exists_thm()]))
   let t29748 = @simp.rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t29771 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t29748), t29749), t29750), @tactics.strip_tac), t29751), t29752), @tactics.strip_tac), t29753), t29754), t29755), t29756), t29757), t29758), @tactics.conj_tac), t29762), t29763), t29765), t29766), t29767), t29768), t29769), t29770)
-  homotopic_with_prod_topology_c.set(@tactics.prove(@parser.parse_term("forall p q r top1 top1' top2 top2' (f:A->B) (g:C->D) f' g'.\n      homotopic_with p (top1,top1') f f' /\\\n      homotopic_with q (top2,top2') g g' /\\\n      (forall i j. p i /\\ q j ==> r(\\(x,y). i x,j y))\n      ==> homotopic_with r (prod_topology top1 top2,prod_topology top1' top2')\n                           (\\z. f(FST z),g(SND z)) (\\z. f'(FST z),g'(SND z))"), t29771))
+  homotopic_with_prod_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ p : ((A) -> B) -> Bool, ∀ q : ((C) -> D) -> Bool, ∀ r : (((A, C)) -> (B, D)) -> Bool, ∀ top1 : Topology[A], ∀ top1' : Topology[B], ∀ top2 : Topology[C], ∀ top2' : Topology[D], ∀ f : (A) -> B, ∀ g : (C) -> D, ∀ f' : (A) -> B, ∀ g' : (C) -> D, homotopic_with(p, (top1, top1'), f, f') && homotopic_with(q, (top2, top2'), g, g') && (∀ i : (A) -> B, ∀ j : (C) -> D, p(i) && q(j) → r(GABS((f : ((A, C)) -> (B, D)) => ∀ x : A, ∀ y : C, GEQ(f((x, y)), (i(x), j(y)))))) → homotopic_with(r, (prod_topology(top1, top2), prod_topology(top1', top2')), (z : (A, C)) => (f(FST(z)), g(SND(z))), (z : (A, C)) => (f'(FST(z)), g'(SND(z))))"), t29771))
 }
 
 ///|
@@ -85440,7 +85440,7 @@ fn step_2382() -> Unit raise {
   let t40770 = @term_syntax.parse_term("(m : Num)")
   let t40801 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(n : Num)"), t40770])), t40778), t40783), t40784), t40800])
   let t40769 = @simp.rewrite_tac(@list.List([]))
-  let t40768 = @tactics.exists_tac(@parser.parse_term("\\(n:num,m:num). @f. continuous_map ((top:A topology), subtopology\n        euclideanreal (real_interval[&0,&1])) f /\\\n         (open_in top ((b:num->A->bool) m) /\\ top closure_of (b n) SUBSET (b m)\n          ==> (forall x. x IN topspace top /\\ x IN (b n) ==> f x = &1) /\\\n              (forall x. x IN topspace top DIFF (b m) ==> f x = &0))"))
+  let t40768 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Num, Num), A) -> Real) => ∀ n : Num, ∀ m : Num, GEQ(f((n, m)), select((f : (A) -> Real) => continuous_map(((top : Topology[A]), subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))]))), f) && (open_in(top, (b : (Num, A) -> Bool)(m)) && SUBSET(closure_of(top, b(n)), b(m)) → (∀ x : A, IN(x, topspace(top)) && IN(x, b(n)) → f(x) == real_of_num(1)) && (∀ x : A, IN(x, DIFF(topspace(top), b(m))) → f(x) == real_of_num(0))))))"))
   let t40763 = @simp.asm_rewrite_tac(@list.List([]))
   let t40764 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([continuous_map_const(), topspace_subtopology(), @sets.in_inter(), @misc.in_real_interval(), topspace_euclideanreal(), @sets.in_univ()])), @calc_rat.real_arith_tac), t40763])
   let t40765 = @tactics.thenl(@tactics.then_tac(@tactics.exists_tac(@term_syntax.parse_term("(x : A) => real_of_num(1) / real_of_num(2)")), @tactics.conj_tac), t40764)

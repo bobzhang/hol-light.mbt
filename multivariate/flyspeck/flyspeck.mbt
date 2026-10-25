@@ -8454,7 +8454,7 @@ pub fn aff_gt_lemma() -> @kernel.Thm {
 fn step_252() -> Unit raise {
   let t3878 = @meson.meson_tac(@list.List([]))
   let t3879 = @tactics.then_tac(@simp.simp_tac(@list.List([@cart.cart_eq(), @vectors.forall_2(), @vectors.forall_3(), @cart.dimindex_2(), @cart.dimindex_3(), @vectors.dropout(), @cart.lambda_beta(), @vectors.basis_component(), @calc_num.arith(), @realarith.real_mul_rid(), @vectors.vector_mul_component(), @vectors.vec_component(), @calc_int.real_mul_rzero(), @theorems.unwind_thm1()])), t3878)
-  let lemma = @tactics.prove(@parser.parse_term("forall a x:real^3. (?a. x = a % basis 3) <=> dropout 3 x:real^2 = vec 0"), t3879)
+  let lemma = @tactics.prove(@term_syntax.parse_term("∀ a : _, ∀ x : Cart[Real, Tybit1[Unit]], (∃ a : Real, x == (op_pct : (Real, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit1[Unit]])(a, (basis : (Num) -> Cart[Real, Tybit1[Unit]])(3))) == ((dropout : (Num, Cart[Real, Tybit1[Unit]]) -> Cart[Real, Tybit0[Unit]])(3, x) == (vec : (Num) -> Cart[Real, Tybit0[Unit]])(0))"), t3879)
   let t4111 = @simp.asm_simp_tac(@list.List([@calc_rat.real_field(@term_syntax.parse_term("real_of_num(0) < (z : Real) → (w : Real) / z * ((b : Real) * z) == b * w"))]))
   let t4110 = @simp.asm_simp_tac(@list.List([@real.real_lt_rdiv_eq(), @real.real_lt_mul()]))
   let t4109 = @simp.rewrite_tac(@list.List([@transcendentals.atn_mono_lt_eq()]))
