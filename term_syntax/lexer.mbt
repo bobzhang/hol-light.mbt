@@ -30,6 +30,8 @@ fn keyword(name : String) -> @grammar.Token raise {
     "false" => FALSE
     "if" => IF
     "else" => ELSE
+    "fn" => FN
+    "match" => MATCH
     _ =>
       if moonbit_keywords.contains(name) {
         raise Failure("term syntax: " + name + " is a MoonBit keyword")
@@ -154,6 +156,10 @@ fn tokens(s : String) -> Array[(@grammar.Token, Int, Int)] raise {
       }
       (re"^:", after=rest) => {
         toks.push((COLON, at(input), at(rest)))
+        continue rest
+      }
+      (re"^;", after=rest) => {
+        toks.push((SEMI, at(input), at(rest)))
         continue rest
       }
       (re"^_", after=rest) => {

@@ -26,7 +26,11 @@ pub fn parse_term_at(Int, String) -> @kernel.Term raise
 
 pub fn parse_type(String) -> @kernel.HolType raise
 
+pub fn pfrees(@preterm.Preterm) -> @list.List[@preterm.Preterm] raise
+
 pub fn pgen_count() -> Int
+
+pub fn pmk_pattern_binding(((@preterm.Preterm, @list.List[@preterm.Preterm]), @preterm.Preterm), () -> @list.List[@preterm.Preterm] raise) -> @preterm.Preterm raise
 
 pub fn pmk_setabs(@preterm.Preterm, @preterm.Preterm) -> @preterm.Preterm raise
 

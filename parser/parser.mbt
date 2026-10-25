@@ -223,7 +223,7 @@ fn pairwise(
 ///|
 /// Free "variables" of a preterm (identifiers that are not constants,
 /// numerals or interface names).
-fn pfrees(ptm : Preterm) -> List[Preterm] raise {
+pub fn pfrees(ptm : Preterm) -> List[Preterm] raise {
   match ptm {
     @preterm.Varp(v, pty) =>
       if v == "" && pty == dpty {
@@ -413,10 +413,21 @@ fn pmk_geq(s : Preterm, t : Preterm) -> Preterm {
 
 ///|
 fn pmk_pattern(pgr : ((Preterm, List[Preterm]), Preterm)) -> Preterm raise {
+  pmk_pattern_binding(pgr, () => pfrees(pgr.0.0))
+}
+
+///|
+/// `pmk_pattern`, the clause binding the variables `vs` gives (the
+/// pattern's free variables, as `pmk_pattern` computes them, where the
+/// pattern is read differently from the names it binds: the term syntax).
+pub fn pmk_pattern_binding(
+  pgr : ((Preterm, List[Preterm]), Preterm),
+  vs : () -> List[Preterm] raise,
+) -> Preterm raise {
   let ((pat, guards), res) = pgr
   let x = pgenvar()
   let y = pgenvar()
-  let vs = pfrees(pat)
+  let vs = vs()
   let bod = if guards.is_empty() {
     @preterm.Combp(
       @preterm.Combp(pv("_UNGUARDED_PATTERN"), pmk_geq(pat, x)),

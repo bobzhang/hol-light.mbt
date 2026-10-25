@@ -267,3 +267,90 @@ fn set_compr(
     .fold(init=inner, (b, v) => @preterm.Absp(typed(pvar(v.0), v.1), b)),
   )
 }
+
+///|
+/// `∀ p : A, e` for a pattern `p` such as `(a, b)`: HOL's quantifier over a
+/// generalized abstraction (forall (a,b). e), which elaboration builds.
+fn quantify_pattern(
+  q : String,
+  pat : @preterm.Preterm,
+  ty : @preterm.Pretype,
+  body : @preterm.Preterm,
+) -> @preterm.Preterm {
+  check_binds(pat)
+  apply(pconst(q), @preterm.Absp(typed(pat, ty), body))
+}
+
+///|
+/// Reject a lambda's or quantifier's pattern that is a constant alone
+/// (`true`, `0`, any annotated): it would bind nothing.
+fn check_binds(pat : @preterm.Preterm) -> Unit {
+  let mut bare = pat
+  while bare is Typing(x, _) {
+    bare = x
+  }
+  if bare is Varp(n, _) &&
+    (n.has_prefix(generated_mark) || n.iter().all(c => c is ('0'..='9'))) {
+    reject("a lambda or quantifier over a constant alone binds no variable")
+  }
+}
+
+///|
+/// The mark of a pattern-match arm, `clause_mark` applied to its pattern,
+/// its guard (`no_guard_mark` for none) and its body, which the name
+/// resolution (@term_syntax.parse_preterm) turns into HOL's clause (GEQ,
+/// _UNGUARDED_PATTERN or _GUARDED_PATTERN, the pattern's variables bound)
+/// once the names in it are resolved, as HOL's parser does.
+pub let clause_mark : String = generated_mark + "=>"
+
+///|
+pub let no_guard_mark : String = generated_mark + "no guard"
+
+///|
+fn clause(
+  pat : @preterm.Preterm,
+  when_ : @preterm.Preterm?,
+  body : @preterm.Preterm,
+) -> @preterm.Preterm {
+  let g = match when_ {
+    Some(g) => g
+    None => @preterm.Varp(no_guard_mark, @preterm.dpty)
+  }
+  applies(@preterm.Varp(clause_mark, @preterm.dpty), @list.List([pat, g, body]))
+}
+
+///|
+/// HOL's _SEQPATTERN of the arms, nested to the right.
+fn seq_patterns(arms : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
+  let arms = arms.to_array()
+  let mut t = arms[arms.length() - 1]
+  for i = arms.length() - 2; i >= 0; i = i - 1 {
+    t = binary("_SEQPATTERN", arms[i], t)
+  }
+  t
+}
+
+///|
+/// `fn { p => e }`, one arm with no guard, is the lambda over the pattern
+/// `p` (HOL's \(a,b). e); any other `fn { ... }` is a function by cases
+/// (HOL's function p -> e | ...).
+fn function(arms : @list.List[@preterm.Preterm]) -> @preterm.Preterm {
+  match arms {
+    More(Combp(Combp(Combp(Varp(m, _), pat), Varp(g, _)), body), tail=Empty) if m ==
+      clause_mark &&
+      g == no_guard_mark => {
+      check_binds(pat)
+      @preterm.Absp(pat, body)
+    }
+    _ => apply(pconst("_FUNCTION"), seq_patterns(arms))
+  }
+}
+
+///|
+/// `match e { ... }`: HOL's match e with ...
+fn match_cases(
+  e : @preterm.Preterm,
+  arms : @list.List[@preterm.Preterm],
+) -> @preterm.Preterm {
+  apply(apply(pconst("_MATCH"), e), seq_patterns(arms))
+}

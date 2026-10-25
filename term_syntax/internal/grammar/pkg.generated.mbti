@@ -7,9 +7,13 @@ import {
 }
 
 // Values
+pub let clause_mark : String
+
 pub fn escape(String) -> String?
 
 pub let generated_mark : String
+
+pub let no_guard_mark : String
 
 pub fn pretype(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Pretype raise ParseError
 
@@ -41,6 +45,8 @@ pub(all) enum Token {
   FALSE
   IF
   ELSE
+  FN
+  MATCH
   FORALL
   EXISTS
   IMPLIES
@@ -59,6 +65,7 @@ pub(all) enum Token {
   RBRACE
   COMMA
   COLON
+  SEMI
   FAT_ARROW
   THIN_ARROW
   UNDERSCORE
@@ -77,6 +84,8 @@ pub(all) enum TokenKind {
   TK_FALSE
   TK_IF
   TK_ELSE
+  TK_FN
+  TK_MATCH
   TK_FORALL
   TK_EXISTS
   TK_IMPLIES
@@ -95,6 +104,7 @@ pub(all) enum TokenKind {
   TK_RBRACE
   TK_COMMA
   TK_COLON
+  TK_SEMI
   TK_FAT_ARROW
   TK_THIN_ARROW
   TK_UNDERSCORE
