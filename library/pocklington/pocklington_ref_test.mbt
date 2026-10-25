@@ -15783,7 +15783,7 @@ test "Library/pocklington matches Library/pocklington.ml" {
       #|  MOD((x : Num), (b : Num))
       #|  MOD((x : Num), (a : Num))
       #|  (x : Num)
-      #|  \\(m,n). (f:num->num->num) m n
+      #|  fn { (m, n) => (f : (Num, Num) -> Num)(m, n) }
       #|  forall f. (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y) /\\\n        IMAGE f s = t\n        ==> s HAS_SIZE p ==> t HAS_SIZE p
       #|  (f : (Num, Num) -> Num)
       #|  (b : Num)
