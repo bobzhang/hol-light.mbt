@@ -7632,7 +7632,7 @@ fn step_166() -> Unit raise {
   let t4298 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4285), @tactics.strip_tac), t4289), t4290), @class.cond_cases_tac), t4291), @calc_rat.real_arith_tac), t4297])
   let t4284 = @tactics.match_mp_tac(@integration.nonnegative_absolutely_integrable())
   let t4299 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4284), @tactics.conj_tac), t4298)
-  psi_slice_abs_c.set(@tactics.prove(@parser.parse_term("forall f:real->real x:real^1. (forall x. &0 <= f x)\n   ==> (\\u. if &0 < drop u then lift(max (&0) (f(drop x) - drop u / &2)) else\n     vec 0)\n       absolutely_integrable_on (:real^1)"), t4299))
+  psi_slice_abs_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, ∀ x : Cart[Real, Unit], (∀ x : Real, real_of_num(0) <= f(x)) → absolutely_integrable_on((u : Cart[Real, Unit]) => if real_of_num(0) < drop(u) { lift(max(real_of_num(0), f(drop(x)) - drop(u) / real_of_num(2))) } else { vec(0) }, UNIV)"), t4299))
 }
 
 ///|
@@ -8018,7 +8018,7 @@ fn step_177() -> Unit raise {
   let t4487 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4473), @tactics.strip_tac), t4477), t4478), @class.cond_cases_tac), t4479), t4480), t4486])
   let t4472 = @tactics.match_mp_tac(@integration.nonnegative_absolutely_integrable())
   let t4488 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4472), @tactics.conj_tac), t4487)
-  wlc_slice_abs_c.set(@tactics.prove(@parser.parse_term("forall(f:real->real) (gg:real->real) x:real^1. (forall x. &0 <= f x) /\\ (forall x. &0 <= gg\n   x)\n   ==> (\\u:real^1. if &0 < drop u /\\ drop u <= gg(drop x) then lift(f(drop x))\n     else vec 0)\n       absolutely_integrable_on (:real^1)"), t4488))
+  wlc_slice_abs_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, ∀ gg : (Real) -> Real, ∀ x : Cart[Real, Unit], (∀ x : Real, real_of_num(0) <= f(x)) && (∀ x : Real, real_of_num(0) <= gg(x)) → absolutely_integrable_on((u : Cart[Real, Unit]) => if real_of_num(0) < drop(u) && drop(u) <= gg(drop(x)) { lift(f(drop(x))) } else { vec(0) }, UNIV)"), t4488))
 }
 
 ///|
@@ -8265,7 +8265,7 @@ fn step_182() -> Unit raise {
   let t4617 = @simp.rewrite_tac(@list.List([@vectors.in_image_lift_drop(), @sets.in_elim_thm(), @trivia.o_thm()]))
   let t4616 = @tactics.x_gen_tac(@term_syntax.parse_term("(x : Cart[Real, Unit])"))
   let t4618 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm()])), t4616), t4617), @tactics.all_tac])
-  let t4615 = @tactics.subgoal_then(@parser.parse_term("(\\x:real^1. if drop u <= gg (drop x) then lift (f (drop x)) else vec 0) =\n    (\\x:real^1. if x IN IMAGE lift {x | drop u <= gg x} then (lift o f o drop)\n      x else vec 0)"), fn(x4612 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t4615 = @tactics.subgoal_then(@term_syntax.parse_term("((x : Cart[Real, Unit]) => if drop((u : Cart[Real, Unit])) <= (gg : (Real) -> Real)(drop(x)) { lift((f : (Real) -> Real)(drop(x))) } else { vec(0) }) == ((x : Cart[Real, Unit]) => if IN(x, IMAGE(lift, {(x : Real) | drop(u) <= gg(x)})) { o(lift, o(f, drop), x) } else { vec(0) })"), fn(x4612 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s4613 = @tactics.subst1_tac(x4612)
     fn(x4614 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s4613(x4614)
@@ -66307,7 +66307,7 @@ fn step_1559() -> Unit raise {
   let t36349 = @meson.meson_tac(@list.List([]))
   let t36348 = @simp.rewrite_tac(@list.List([@pair.pair_eq()]))
   let t36350 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @pair.forall_pair_thm(), @sets.in_elim_thm(), @sets.in_elim_pair_thm()])), t36348), t36349), @tactics.all_tac])
-  let t36347 = @tactics.subgoal_then(@parser.parse_term("{(i:num,j:int#int) | i IN {j:num | j <= n} /\\ j IN {(k:int,nI:int) | abs k\n     <= &K /\\ abs nI <= &N}}\n    = {(j:num,k:int,nI:int) | j <= n /\\ abs k <= &K /\\ abs nI <= &N}"), fn(x36345 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t36347 = @tactics.subgoal_then(@term_syntax.parse_term("{((i : Num), (j : (Int, Int))) | IN(i, {(j : Num) | j <= (n : Num)}) && IN(j, {((k : Int), (nI : Int)) | abs(k) <= int_of_num((K : Num)) && abs(nI) <= int_of_num((N : Num))})} == {((j : Num), (k : Int), (nI : Int)) | j <= n && abs(k) <= int_of_num(K) && abs(nI) <= int_of_num(N)}"), fn(x36345 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x36345
     @simp.rewrite_tac(@list.List([th_1]))
   })
@@ -72387,7 +72387,7 @@ fn step_1690() -> Unit raise {
     }
   })
   let t39866 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t39837), t39839), t39843), t39846), t39849), @tactics.ants_tac), t39852), t39856), t39857), t39858), t39859), t39864), t39865)
-  carleson_perk_piece_limit_c.set(@tactics.prove(@parser.parse_term("forall(h:real->complex) k nI0 nJ z P.\n     schwartz h /\\ measurable P /\\ z IN tile_Jr(k,nI0,nJ)\n     ==> ((\\N. vsum {nI:int | abs nI <= &N}\n                (\\nI. carleson_ip h (k,nI,nJ) *\n                      integral P (\\z. phi_sigma (k,nI,nJ) carleson_phi (drop\n                        z))))\n          --> Cx(&2 * pi) * integral P (\\x. fourier (\\y. fourier h y *\n            Cx(carleson_psi z k y)) (--drop x)))\n         sequentially"), t39866))
+  carleson_perk_piece_limit_c.set(@tactics.prove(@term_syntax.parse_term("∀ h : (Real) -> Cart[Real, Tybit0[Unit]], ∀ k : Int, ∀ nI0 : Int, ∀ nJ : Int, ∀ z : Real, ∀ P : (Cart[Real, Unit]) -> Bool, schwartz(h) && measurable(P) && IN(z, tile_Jr((k, nI0, nJ))) → op_minus_minus_gt((N : Num) => vsum({(nI : Int) | abs(nI) <= int_of_num(N)}, (nI : Int) => carleson_ip(h, (k, nI, nJ)) * integral(P, (z : Cart[Real, Unit]) => phi_sigma((k, nI, nJ), carleson_phi, drop(z)))), Cx(real_of_num(2) * pi) * integral(P, (x : Cart[Real, Unit]) => fourier((y : Real) => fourier(h, y) * Cx(carleson_psi(z, k, y)), -drop(x))), sequentially)"), t39866))
 }
 
 ///|
