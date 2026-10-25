@@ -448,6 +448,24 @@ fn Printer::comb(
       }
       wrap(sym + " " + b + ", " + body_s, EXPR, ctx)
     }
+    // a quantifier over a pattern, forall (a,b). e
+    (Const(q, _), [Comb(Const("GABS", _), gabs)]) if q is ("forall" | "?") &&
+      dest_pattern_abs(gabs) is Some((pat, vs, rhs)) => {
+      let sym = if q == "forall" { "∀" } else { "∃" }
+      let inner = self.bind_pattern(vs, rhs, bound)
+      let p = self.term(pat, SIMPLE, inner)
+      let ty = print_type_in_term(@kernel.type_of(pat))
+      wrap(sym + " " + p + " : " + ty + ", " + self.term(rhs, IMPL, inner), EXPR, ctx)
+    }
+    // a lambda over a pattern (\(a,b). e), a match or a function by
+    // cases, applied to any further arguments
+    _ if self.pattern_form(head, args, bound) is Some((s, used)) =>
+      if used == args.length() {
+        s
+      } else {
+        let rest = args[used:].to_array().map(a => self.term(a, EXPR, bound))
+        wrap(s + "(" + rest.join(", ") + ")", SIMPLE, ctx)
+      }
     (Const(_, _), [x]) if spelled is ("~" | "--") => {
       let op = if spelled == "~" { "!" } else { "-" }
       wrap(op + self.term(x, PREFIX, bound), PREFIX, ctx)
@@ -506,6 +524,175 @@ fn Printer::comb(
       wrap(s, SIMPLE, ctx)
     }
   }
+}
+
+///|
+/// The pattern, the variables it binds and the body of a lambda over a
+/// pattern, GABS applied to `gabs`: GABS (\f. ∀ vs. GEQ (f pat) body), as
+/// elaboration builds it.
+fn dest_pattern_abs(
+  gabs : @kernel.Term,
+) -> (@kernel.Term, Array[@kernel.Term], @kernel.Term)? {
+  guard gabs is Abs(f, b) else { return None }
+  let vs = []
+  let mut b = b
+  while b is Comb(Const("forall", _), Abs(v, inner)) {
+    vs.push(v)
+    b = inner
+  }
+  guard b is Comb(Comb(Const("GEQ", _), Comb(g, pat)), body) && g == f else {
+    return None
+  }
+  if @kernel.vfree_in(f, pat) || @kernel.vfree_in(f, body) {
+    return None
+  }
+  Some((pat, vs, body))
+}
+
+///|
+/// A pattern-match clause, as HOL's parser builds it (pmk_pattern):
+/// \x y. ∃ vs. _UNGUARDED_PATTERN (GEQ pat x) (GEQ body y), or with
+/// _GUARDED_PATTERN and a guard: its pattern, variables, guard and body.
+fn clause(
+  c : @kernel.Term,
+) -> (@kernel.Term, Array[@kernel.Term], @kernel.Term?, @kernel.Term)? {
+  guard c is Abs(x, Abs(y, b)) else { return None }
+  let vs = []
+  let mut b = b
+  while b is Comb(Const("?", _), Abs(v, inner)) {
+    vs.push(v)
+    b = inner
+  }
+  match b {
+    Comb(
+      Comb(Const("_UNGUARDED_PATTERN", _), Comb(Comb(Const("GEQ", _), pat), x1)),
+      Comb(Comb(Const("GEQ", _), body), y1)
+    ) if x1 == x && y1 == y => Some((pat, vs, None, body))
+    Comb(
+      Comb(
+        Comb(Const("_GUARDED_PATTERN", _), Comb(Comb(Const("GEQ", _), pat), x1)),
+        g
+      ),
+      Comb(Comb(Const("GEQ", _), body), y1)
+    ) if x1 == x && y1 == y => Some((pat, vs, Some(g), body))
+    _ => None
+  }
+}
+
+///|
+/// The clauses of a _SEQPATTERN chain, nested to the right.
+fn clauses(
+  t : @kernel.Term,
+) -> Array[(@kernel.Term, Array[@kernel.Term], @kernel.Term?, @kernel.Term)]? {
+  let arms = []
+  let mut t = t
+  while t is Comb(Comb(Const("_SEQPATTERN", _), a), rest) {
+    guard clause(a) is Some(arm) else { return None }
+    arms.push(arm)
+    t = rest
+  }
+  guard clause(t) is Some(arm) else { return None }
+  arms.push(arm)
+  Some(arms)
+}
+
+///|
+/// `head` applied to the first of `args` it takes, written as a lambda over
+/// a pattern (`fn { (a, b) => e }`), a match (`match e { p => a; ... }`) or
+/// a function by cases (`fn { p => a; q => b }`), and how many it takes.
+fn Printer::pattern_form(
+  self : Printer,
+  head : @kernel.Term,
+  args : Array[@kernel.Term],
+  bound : Bound,
+) -> (String, Int)? raise Unprintable {
+  match (head, args) {
+    (Const("GABS", _), [a, ..]) =>
+      match dest_pattern_abs(a) {
+        Some((pat, vs, rhs)) =>
+          Some(("fn { " + self.arm(pat, vs, None, rhs, bound) + " }", 1))
+        None => None
+      }
+    (Const("_MATCH", _), [e, cs, ..]) =>
+      match clauses(cs) {
+        Some(arms) =>
+          Some(
+            (
+              "match " +
+              self.term(e, IMPL, bound) +
+              " { " +
+              self.arms(arms, bound) +
+              " }",
+              2,
+            ),
+          )
+        None => None
+      }
+    // with one arm and no guard, fn { ... } is the lambda over the pattern
+    (Const("_FUNCTION", _), [cs, ..]) =>
+      match clauses(cs) {
+        Some(arms) if !(arms is [(_, _, None, _)]) =>
+          Some(("fn { " + self.arms(arms, bound) + " }", 1))
+        _ => None
+      }
+    _ => None
+  }
+}
+
+///|
+/// `bound` with a pattern's variables `vs` bound over `body`. Annotating
+/// every constant, the variables are written with their type where they
+/// first occur in the pattern.
+fn Printer::bind_pattern(
+  self : Printer,
+  vs : Array[@kernel.Term],
+  body : @kernel.Term,
+  bound : Bound,
+) -> Bound raise Unprintable {
+  let mut inner = bound
+  for v in vs {
+    inner = self.bind(v, body, inner).1
+  }
+  if self.all_constants {
+    self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
+  }
+  inner
+}
+
+///|
+/// An arm `pat => body` (`pat if guard => body`), its pattern binding `vs`.
+fn Printer::arm(
+  self : Printer,
+  pat : @kernel.Term,
+  vs : Array[@kernel.Term],
+  guard_ : @kernel.Term?,
+  body : @kernel.Term,
+  bound : Bound,
+) -> String raise Unprintable {
+  let inner = self.bind_pattern(vs, body, bound)
+  let p = self.term(pat, IMPL, inner)
+  // a variable the pattern binds occurs in it, so these marks are used
+  for i in 0..<vs.length() {
+    match self.untyped.search((vs[i], bound.length() + i + 1)) {
+      Some(j) => self.untyped.remove(j) |> ignore
+      None => ()
+    }
+  }
+  let g = match guard_ {
+    Some(g) => " if " + self.term(g, IMPL, inner)
+    None => ""
+  }
+  p + g + " => " + self.term(body, EXPR, inner)
+}
+
+///|
+/// Arms separated by `; `.
+fn Printer::arms(
+  self : Printer,
+  arms : Array[(@kernel.Term, Array[@kernel.Term], @kernel.Term?, @kernel.Term)],
+  bound : Bound,
+) -> String raise Unprintable {
+  arms.map(a => self.arm(a.0, a.1, a.2, a.3, bound)).join("; ")
 }
 
 ///|

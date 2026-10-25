@@ -14,6 +14,12 @@
 // `{a, b}`, `{}`, `{e | p}` (binding the variables free in both e and p,
 // HOL's rule) and `{e | x : A, y : B | p}` (binding those listed). Unlike
 // HOL, which drops the types in that list, the listed types are checked.
+//
+// Patterns are written as MoonBit's: `match e { 0 => a; SUC(n) if n > 1 =>
+// b }` (HOL's match e with 0 -> a | SUC n when n > 1 -> b), `fn { 0 => a;
+// SUC(n) => b }` (function 0 -> a | SUC n -> b), and over one pattern
+// `fn { (a, b) => e }` (\(a,b). e) and `∀ (a, b) : (A, B), e`. Arms are
+// separated by `;`; a newline is only whitespace.
 
 ///|
 fn describe(e : @grammar.ParseError) -> String {
@@ -96,6 +102,9 @@ fn binder_rename(
 /// that the two syntaxes number GEN%PVAR alike.
 fn pgen_cost(t : @preterm.Preterm) -> Int {
   match t {
+    // a pattern-match arm takes two (pmk_pattern), after its parts
+    Combp(Combp(Combp(Varp(m, _), pat), when_), body) if m ==
+      @grammar.clause_mark => 2 + pgen_cost(pat) + pgen_cost(when_) + pgen_cost(body)
     Combp(Combp(Varp(m, _), e), p) if m == @grammar.set_abs_mark =>
       2 * pgen_cost(e) + pgen_cost(p) + 1
     Combp(Varp(m, _), binders) if m == @grammar.set_compr_mark => {
@@ -113,6 +122,50 @@ fn pgen_cost(t : @preterm.Preterm) -> Int {
     Typing(x, _) => pgen_cost(x)
     Varp(_, _) | Constp(_, _) => 0
   }
+}
+
+///|
+/// The variables a resolved pattern binds: its identifiers that name no
+/// constant, numeral or interface name (the free variables HOL's parser
+/// gives a pattern, pfrees).
+fn pattern_variables(p : @preterm.Preterm) -> Array[String] {
+  let vs = []
+  fn go(t : @preterm.Preterm) {
+    match t {
+      Varp(n, _) =>
+        if n != "" &&
+          !names_constant(n) &&
+          !n.iter().all(c => c is ('0'..='9')) &&
+          !vs.contains(n) {
+          vs.push(n)
+        }
+      Constp(_, _) => ()
+      Combp(f, x) => {
+        go(f)
+        go(x)
+      }
+      Absp(v, b) => {
+        go(v)
+        go(b)
+      }
+      Typing(x, _) => go(x)
+    }
+  }
+
+  go(p)
+  vs
+}
+
+///|
+/// A pattern resolved, and `bound` with the variables it binds: a pattern
+/// mentions no variable from outside it (HOL binds every free name in it),
+/// so it is resolved with nothing in scope.
+fn resolve_pattern(
+  pat : @preterm.Preterm,
+  bound : @list.List[(String, String)],
+) -> (@preterm.Preterm, @list.List[(String, String)]) raise {
+  let p = resolve_names(pat, @list.List([]))
+  (p, pattern_variables(p).fold(init=bound, (b, v) => b.prepend((v, v))))
 }
 
 ///|
@@ -154,6 +207,18 @@ fn resolve_names(
         resolve_names(p, bound),
       )
     }
+    // a pattern-match arm is HOL's clause (pmk_pattern), which needs the
+    // names resolved: the pattern, its guard and its body, in the order
+    // HOL's parser reads them, then the clause's GEN%PVAR names
+    Combp(Combp(Combp(Varp(m, _), pat), when_), body) if m ==
+      @grammar.clause_mark => {
+      let (p, inner) = resolve_pattern(pat, bound)
+      let tests = match when_ {
+        Varp(g, _) if g == @grammar.no_guard_mark => @list.List([])
+        _ => @list.singleton(resolve_names(when_, inner))
+      }
+      @parser.pmk_pattern(((p, tests), resolve_names(body, inner)))
+    }
     Varp(n, ty) if n.has_prefix(@grammar.generated_mark) =>
       Varp(n[@grammar.generated_mark.length():].to_owned(), ty)
     Varp(n, ty) =>
@@ -173,6 +238,12 @@ fn resolve_names(
       }
     Constp(_, _) => t
     Combp(f, x) => Combp(resolve_names(f, bound), resolve_names(x, bound))
+    // a lambda or quantifier over a pattern: elaboration makes it HOL's
+    // generalized abstraction (GABS)
+    Absp(v, b) if !(v is (Varp(_, _) | Typing(Varp(_, _), _))) => {
+      let (p, inner) = resolve_pattern(v, bound)
+      Absp(p, resolve_names(b, inner))
+    }
     Absp(v, b) => {
       let n = binder_name(v)
       let renamed = binder_rename(n, b, bound)

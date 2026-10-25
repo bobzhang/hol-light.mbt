@@ -412,7 +412,7 @@ fn pmk_geq(s : Preterm, t : Preterm) -> Preterm {
 }
 
 ///|
-fn pmk_pattern(pgr : ((Preterm, List[Preterm]), Preterm)) -> Preterm raise {
+pub fn pmk_pattern(pgr : ((Preterm, List[Preterm]), Preterm)) -> Preterm raise {
   let ((pat, guards), res) = pgr
   let x = pgenvar()
   let y = pgenvar()
