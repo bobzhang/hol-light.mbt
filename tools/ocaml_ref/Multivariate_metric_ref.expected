@@ -22938,7 +22938,7 @@ Multivariate/metric quotations (14748):
   (netfilter : (Net[A], (A) -> Bool) -> Bool)((n : Net[A])) == FST(dest_net(n))
   (netlimits : (Net[A], A) -> Bool)((n : Net[A])) == SND(dest_net(n))
   (netlimit : (Net[A]) -> A)((n : Net[A])) == select((x : A) => IN(x, netlimits(n)))
-  forall n s t. forall s t. s IN netfilter n /\\ t IN netfilter n\n                 ==> (s INTER t) IN netfilter n
+  \226\136\128 n : Net[_], \226\136\128 s : _, \226\136\128 t : _, \226\136\128 s : (_) -> Bool, \226\136\128 t : (_) -> Bool, IN(s, netfilter(n)) && IN(t, netfilter(n)) \226\134\146 IN(INTER(s, t), netfilter(n))
   (within : (Net[_], (_) -> Bool) -> Net[_])((net : Net[_]), (s : (_) -> Bool)) == mk_net((relative_to(netfilter(net), s), netlimits(net)))
   INTER((t : (A) -> Bool), (u : (A) -> Bool))
   (u : (A) -> Bool)
@@ -22981,7 +22981,7 @@ Multivariate/metric quotations (14748):
   MAX((m : Num), (n : Num))
   (n : Num)
   (m : Num)
-  (forall n. netfilter sequentially = {from n | n IN (:num)}) /\\\n   (netlimits sequentially = {})
+  (\226\136\128 n : _, netfilter(sequentially) == {from((n : Num)) | IN(n, UNIV)}) && netlimits(sequentially) == {}
   !(SUC((n : Num)) <= n)
   \226\136\128 p : (Num) -> Bool, eventually(p, sequentially) == (\226\136\131 N : Num, \226\136\128 n : Num, N <= n \226\134\146 p(n))
   !trivial_limit(sequentially)
@@ -25578,7 +25578,7 @@ Multivariate/metric quotations (14748):
   (N : Num)
   (e : Real)
   (e : Real)
-  forall m (x:num->A) r.\n        (forall m n. m < n ==> r m < r n) /\\ cauchy_in m x\n        ==> cauchy_in m (x o r)
+  \226\136\128 m : Metric[A], \226\136\128 x : (Num) -> A, \226\136\128 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && cauchy_in(m, x) \226\134\146 cauchy_in(m, o(x, r))
   (n : Num) - (a : Num)
   (m : Num) - (a : Num)
   (n : Num)
@@ -25600,7 +25600,7 @@ Multivariate/metric quotations (14748):
   (e : Real) / real_of_num(2)
   (e : Real) / real_of_num(2)
   (e : Real)
-  forall m r a x:num->A.\n        cauchy_in m x /\\\n        (forall m n. m < n ==> r m < r n) /\\\n        limit (mtopology m) (x o r) a sequentially\n        ==> limit (mtopology m) x a sequentially
+  \226\136\128 m : Metric[A], \226\136\128 r : (Num) -> Num, \226\136\128 a : A, \226\136\128 x : (Num) -> A, cauchy_in(m, x) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && limit(mtopology(m), o(x, r), a, sequentially) \226\134\146 limit(mtopology(m), x, a, sequentially)
   (a : (Num) -> A)
   mtopology((m : Metric[A]))
   sequentially
@@ -25681,7 +25681,7 @@ Multivariate/metric quotations (14748):
   (x : (Num) -> A)
   \226\136\128 n : Num, \226\136\131 x : A, IN(x, (c : (Num, A) -> Bool)(n))
   (c : (Num, A) -> Bool)
-  forall m:A metric.\n      mcomplete m <=>\n      forall c. (forall n. closed_in (mtopology m) (c n)) /\\\n          (forall n. ~(c n = {})) /\\\n          (forall m n. m <= n ==> c n SUBSET c m) /\\\n          (forall e. &0 < e ==> ?n a. c n SUBSET mcball m (a,e))\n          ==> ~(INTERS {c n | n IN (:num)} = {})
+  \226\136\128 m : Metric[A], mcomplete(m) == (\226\136\128 c : (Num, A) -> Bool, (\226\136\128 n : Num, closed_in(mtopology(m), c(n))) && (\226\136\128 n : Num, !(c(n) == {})) && (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(c(n), c(m))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\131 a : A, SUBSET(c(n), mcball(m, (a, e))))) \226\134\146 !(INTERS({c((n : Num)) | IN(n, UNIV)}) == {}))
   (x : (Num) -> A)((n : Num))
   (x : (Num) -> A)((n : Num))
   (x : (Num) -> A)((n : Num))
@@ -25697,7 +25697,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 a : A, IN(a, INTERS({(c : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})) \226\134\146 IN(a, mspace((m : Metric[A])))
   (l : A)
   (c : (Num, A) -> Bool)
-  forall m:A metric.\n      mcomplete m <=>\n      forall c. (forall n. closed_in (mtopology m) (c n)) /\\\n          (forall n. ~(c n = {})) /\\\n          (forall m n. m <= n ==> c n SUBSET c m) /\\\n          (forall e. &0 < e ==> ?n a. c n SUBSET mcball m (a,e))\n          ==> ?l. l IN mspace m /\\ INTERS {c n | n IN (:num)} = {l}
+  \226\136\128 m : Metric[A], mcomplete(m) == (\226\136\128 c : (Num, A) -> Bool, (\226\136\128 n : Num, closed_in(mtopology(m), c(n))) && (\226\136\128 n : Num, !(c(n) == {})) && (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(c(n), c(m))) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 n : Num, \226\136\131 a : A, SUBSET(c(n), mcball(m, (a, e))))) \226\134\146 (\226\136\131 l : A, IN(l, mspace(m)) && INTERS({c((n : Num)) | IN(n, UNIV)}) == {l}))
   (l : A)
   (l' : A)
   (\226\136\128 n : Num, \226\136\128 m : Num, m <= n \226\134\146 (P : (Num) -> Bool)(m)) == (\226\136\128 n : Num, P(n))
@@ -25822,7 +25822,7 @@ Multivariate/metric quotations (14748):
   \226\136\131 x : (Num) -> A, (\226\136\128 n : Num, IN(x(n), (s : (A) -> Bool))) && (\226\136\128 n : Num, \226\136\128 p : Num, p < n \226\134\146 (e : Real) <= mdist((m : Metric[A]), (x(p), x(n))))
   (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) && Q(x) \226\134\146 !R(x))
   SUBSET((s : (A) -> Bool), mspace((m : Metric[A])))
-  forall m s:A->bool.\n        totally_bounded_in m s <=>\n        s SUBSET mspace m /\\\n        forall x:num->A. (forall n. x n IN s)\n                   ==> ?r. (forall m n. m < n ==> r m < r n) /\\\n                           cauchy_in m (x o r)
+  \226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, totally_bounded_in(m, s) == (SUBSET(s, mspace(m)) && (\226\136\128 x : (Num) -> A, (\226\136\128 n : Num, IN(x(n), s)) \226\134\146 (\226\136\131 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && cauchy_in(m, o(x, r)))))
   \\/
   \\/
   \\/
@@ -25933,7 +25933,7 @@ Multivariate/metric quotations (14748):
   (f : (Num) -> A)
   (f : (Num) -> A)
   (t : (A) -> Bool)
-  forall m u s:A->bool.\n      s SUBSET u /\\ s SUBSET mspace m\n      ==> ((forall x. (forall n:num. x n IN s)\n                ==> ?l r. l IN u /\\ (forall m n. m < n ==> r m < r n) /\\\n                          limit (mtopology m) (x o r) l sequentially) <=>\n           (forall t. t SUBSET s /\\ INFINITE t\n                ==> ~(u INTER (mtopology m) derived_set_of t = {})))
+  \226\136\128 m : Metric[A], \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, SUBSET(s, u) && SUBSET(s, mspace(m)) \226\134\146 (\226\136\128 x : (Num) -> A, (\226\136\128 n : Num, IN(x(n), s)) \226\134\146 (\226\136\131 l : A, \226\136\131 r : (Num) -> Num, IN(l, u) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && limit(mtopology(m), o(x, r), l, sequentially))) == (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && INFINITE(t) \226\134\146 !(INTER(u, derived_set_of(mtopology(m), t)) == {}))
   (N : Num)
   (N : Num) + 1
   IMAGE((f : (A, A) -> Bool), (k : (A) -> Bool))
@@ -25972,8 +25972,8 @@ Multivariate/metric quotations (14748):
   SUBSET((s : (A) -> Bool), mspace((m : Metric[A])))
   (s : (A) -> Bool)
   (m : Metric[A])
-  (forall m s:A->bool.\n        compact_in (mtopology m) s <=>\n        s SUBSET mspace m /\\\n        forall t. t SUBSET s /\\ INFINITE t\n            ==> ~(s INTER (mtopology m) derived_set_of t = {})) /\\\n   (forall m s:A->bool.\n        compact_in (mtopology m) s <=>\n        s SUBSET mspace m /\\\n        forall x. (forall n:num. x n IN s)\n            ==> ?l r. l IN s /\\ (forall m n. m < n ==> r m < r n) /\\\n                      limit (mtopology m) (x o r) l sequentially) /\\\n   (forall m (s:A->bool) e.\n        compact_in (mtopology m) s /\\ &0 < e\n        ==> ?k. FINITE k /\\ k SUBSET s /\\\n                s SUBSET UNIONS { mball m (x,e) | x IN k}) /\\\n   (forall m (s:A->bool) U.\n        compact_in (mtopology m) s /\\\n        (forall u. u IN U ==> open_in (mtopology m) u) /\\ s SUBSET UNIONS U\n        ==> ?e. &0 < e /\\\n                forall x. x IN s ==> ?u. u IN U /\\ mball m (x,e) SUBSET u)
-  forall m:A metric.\n        compact_space(mtopology m) <=>\n        forall x. (forall n:num. x n IN mspace m)\n            ==> ?l r. l IN mspace m /\\\n                      (forall m n. m < n ==> r m < r n) /\\\n                      limit (mtopology m) (x o r) l sequentially
+  (\226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, compact_in(mtopology(m), s) == (SUBSET(s, mspace(m)) && (\226\136\128 t : (A) -> Bool, SUBSET(t, s) && INFINITE(t) \226\134\146 !(INTER(s, derived_set_of(mtopology(m), t)) == {})))) && (\226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, compact_in(mtopology(m), s) == (SUBSET(s, mspace(m)) && (\226\136\128 x : (Num) -> A, (\226\136\128 n : Num, IN(x(n), s)) \226\134\146 (\226\136\131 l : A, \226\136\131 r : (Num) -> Num, IN(l, s) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && limit(mtopology(m), o(x, r), l, sequentially))))) && (\226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, \226\136\128 e : Real, compact_in(mtopology(m), s) && real_of_num(0) < e \226\134\146 (\226\136\131 k : (A) -> Bool, FINITE(k) && SUBSET(k, s) && SUBSET(s, UNIONS({mball(m, ((x : A), e)) | IN(x, k)})))) && (\226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, \226\136\128 U : ((A) -> Bool) -> Bool, compact_in(mtopology(m), s) && (\226\136\128 u : (A) -> Bool, IN(u, U) \226\134\146 open_in(mtopology(m), u)) && SUBSET(s, UNIONS(U)) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && (\226\136\128 x : A, IN(x, s) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(mball(m, (x, e)), u)))))
+  \226\136\128 m : Metric[A], compact_space(mtopology(m)) == (\226\136\128 x : (Num) -> A, (\226\136\128 n : Num, IN(x(n), mspace(m))) \226\134\146 (\226\136\131 l : A, \226\136\131 r : (Num) -> Num, IN(l, mspace(m)) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && limit(mtopology(m), o(x, r), l, sequentially)))
   \226\136\128 m : Metric[A], compact_space(mtopology(m)) == (\226\136\128 s : (A) -> Bool, SUBSET(s, mspace(m)) && INFINITE(s) \226\134\146 !(derived_set_of(mtopology(m), s) == {}))
   (e : Real)
   (r : (Num) -> Num)
@@ -25997,7 +25997,7 @@ Multivariate/metric quotations (14748):
   (k : (Num) -> Bool)
   IMAGE((c : (Num, A) -> Bool), UNIV)
   (c : (Num, A) -> Bool)
-  forall m:A metric.\n        compact_space(mtopology m) <=>\n        forall c. (forall n. closed_in (mtopology m) (c n)) /\\\n            (forall n. ~(c n = {})) /\\\n            (forall m n. m <= n ==> c n SUBSET c m)\n            ==> ~(INTERS {c n | n IN (:num)} = {})
+  \226\136\128 m : Metric[A], compact_space(mtopology(m)) == (\226\136\128 c : (Num, A) -> Bool, (\226\136\128 n : Num, closed_in(mtopology(m), c(n))) && (\226\136\128 n : Num, !(c(n) == {})) && (\226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 SUBSET(c(n), c(m))) \226\134\146 !(INTERS({c((n : Num)) | IN(n, UNIV)}) == {}))
   \226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, compact_in(mtopology(m), s) \226\134\146 totally_bounded_in(m, s)
   (x : (Num) -> A)((N : Num))
   (if (p : Bool) { true } else { false }) == p
@@ -27216,8 +27216,8 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, completely_regular_space(top) \226\134\146 completely_regular_space(subtopology(top, s))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 r : (A) -> B, retraction_map((top, top'), r) && completely_regular_space(top) \226\134\146 completely_regular_space(top')
   euclideanreal
-  {x:A | x IN topspace top /\\ f x IN {x | x > &1 / &2}}
-  {x:A | x IN topspace top /\\ f x IN {x | x < &1 / &2}}
+  {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> Real)(x), {(x : Real) | x > real_of_num(1) / real_of_num(2)})}
+  {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> Real)(x), {(x : Real) | x < real_of_num(1) / real_of_num(2)})}
   (f : (A) -> Real)
   (x : A)
   (c : (A) -> Bool)
@@ -28308,7 +28308,7 @@ Multivariate/metric quotations (14748):
   GABS((f : ((Real, A, C)) -> (B, D)) => \226\136\128 t : Real, \226\136\128 x : A, \226\136\128 y : C, GEQ(f((t, x, y)), ((h : ((Real, A)) -> B)((t, x)), (k : ((Real, C)) -> D)((t, y)))))
   (k : ((Real, C)) -> D)
   (h : ((Real, A)) -> B)
-  forall p q r top1 top1' top2 top2' (f:A->B) (g:C->D) f' g'.\n      homotopic_with p (top1,top1') f f' /\\\n      homotopic_with q (top2,top2') g g' /\\\n      (forall i j. p i /\\ q j ==> r(\\(x,y). i x,j y))\n      ==> homotopic_with r (prod_topology top1 top2,prod_topology top1' top2')\n                           (\\z. f(FST z),g(SND z)) (\\z. f'(FST z),g'(SND z))
+  \226\136\128 p : ((A) -> B) -> Bool, \226\136\128 q : ((C) -> D) -> Bool, \226\136\128 r : (((A, C)) -> (B, D)) -> Bool, \226\136\128 top1 : Topology[A], \226\136\128 top1' : Topology[B], \226\136\128 top2 : Topology[C], \226\136\128 top2' : Topology[D], \226\136\128 f : (A) -> B, \226\136\128 g : (C) -> D, \226\136\128 f' : (A) -> B, \226\136\128 g' : (C) -> D, homotopic_with(p, (top1, top1'), f, f') && homotopic_with(q, (top2, top2'), g, g') && (\226\136\128 i : (A) -> B, \226\136\128 j : (C) -> D, p(i) && q(j) \226\134\146 r(GABS((f : ((A, C)) -> (B, D)) => \226\136\128 x : A, \226\136\128 y : C, GEQ(f((x, y)), (i(x), j(y)))))) \226\134\146 homotopic_with(r, (prod_topology(top1, top2), prod_topology(top1', top2')), (z : (A, C)) => (f(FST(z)), g(SND(z))), (z : (A, C)) => (f'(FST(z)), g'(SND(z))))
   prod_topology(subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))])), (tops : (K) -> Topology[A])((i : K)))
   (i : K)
   GABS((f : ((Real, (K) -> A), K) -> B) => \226\136\128 t : Real, \226\136\128 z : (K) -> A, GEQ(f((t, z)), RESTRICTION((k : (K) -> Bool), (i : K) => (h : (K, (Real, A)) -> B)(i, (t, z(i))))))
@@ -31328,7 +31328,7 @@ Multivariate/metric quotations (14748):
   (n : Num)
   (m : Num)
   (n : Num)
-  \\(n:num,m:num). @f. continuous_map ((top:A topology), subtopology\n        euclideanreal (real_interval[&0,&1])) f /\\\n         (open_in top ((b:num->A->bool) m) /\\ top closure_of (b n) SUBSET (b m)\n          ==> (forall x. x IN topspace top /\\ x IN (b n) ==> f x = &1) /\\\n              (forall x. x IN topspace top DIFF (b m) ==> f x = &0))
+  GABS((f : ((Num, Num), A) -> Real) => \226\136\128 n : Num, \226\136\128 m : Num, GEQ(f((n, m)), select((f : (A) -> Real) => continuous_map(((top : Topology[A]), subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))]))), f) && (open_in(top, (b : (Num, A) -> Bool)(m)) && SUBSET(closure_of(top, b(n)), b(m)) \226\134\146 (\226\136\128 x : A, IN(x, topspace(top)) && IN(x, b(n)) \226\134\146 f(x) == real_of_num(1)) && (\226\136\128 x : A, IN(x, DIFF(topspace(top), b(m))) \226\134\146 f(x) == real_of_num(0))))))
   (x : A) => real_of_num(1) / real_of_num(2)
   (x : A)
   (f : (A) -> Real)

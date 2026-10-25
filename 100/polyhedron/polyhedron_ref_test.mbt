@@ -61998,17 +61998,17 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  ((p : Bool) \226\134\146 (r : Bool)) \226\134\146 (p && (q : Bool)) == (p && r && q)
       #|  (t : ((Cart[Real, N]) -> Bool) -> Bool) == {}
       #|  (t : ((Cart[Real, N]) -> Bool) -> Bool)
-      #|  CARD {t | t SUBSET {(:real^N) DIFF t | t IN H} /\\\n                          t HAS_SIZE n}
-      #|  {t |  t SUBSET {(:real^N) DIFF t | t IN H}}
+      #|  CARD({(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) && HAS_SIZE(t, (n : Num))})
+      #|  {(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))})}
       #|  (n : Num)
       #|  sum(op_dot_dot(1, CARD((H : ((Cart[Real, N]) -> Bool) -> Bool))), (n : Num) => pow(-real_of_num(1), n + 1) * real_of_num(binom((CARD(H), n))))
       #|  CARD((J : ((Cart[Real, N]) -> Bool) -> Bool))
       #|  (1 <= (n : Num)) == !(n == 0)
       #|  FINITE((J : ((Cart[Real, N]) -> Bool) -> Bool))
       #|  (J : ((Cart[Real, N]) -> Bool) -> Bool)
-      #|  {t |  t SUBSET {(:real^N) DIFF t | t IN H}}
+      #|  {(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))})}
       #|  op_dot_dot(1, CARD((H : ((Cart[Real, N]) -> Bool) -> Bool)))
-      #|  {t |  t SUBSET\n                     {(:real^N) DIFF t | t IN H} /\\ ~(t = {})}
+      #|  {(t : ((Cart[Real, N]) -> Bool) -> Bool) | SUBSET(t, {DIFF(UNIV, (t : (Cart[Real, N]) -> Bool)) | IN(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) && !(t == {})}
       #|  (t : ((Cart[Real, N]) -> Bool) -> Bool) => pow(-real_of_num(1), CARD(t) + 1)
       #|  (t : ((Cart[Real, N]) -> Bool) -> Bool) => CARD(t)
       #|  (s : Real) == real_of_num(1) \226\134\146 s * (t : Real) == t
@@ -62040,7 +62040,7 @@ test "100/polyhedron matches 100/polyhedron.ml" {
       #|  SUBSET((B : ((Cart[Real, N], Real)) -> Bool), (A : ((Cart[Real, N], Real)) -> Bool))
       #|  (B : ((Cart[Real, N], Real)) -> Bool) == IMAGE((h : (Cart[Real, N]) -> Bool) => ((fa : ((Cart[Real, N]) -> Bool) -> Cart[Real, N])(h), real_of_num(0)), (J : ((Cart[Real, N]) -> Bool) -> Bool))
       #|  (J : ((Cart[Real, N]) -> Bool) -> Bool)
-      #|  sum {t | t SUBSET {(:real^N) DIFF t | t IN H} /\\ ~(t = {})}\n             (\\t. -- &1 pow (CARD t + 1) * (--(&1)) pow (dimindex(:N)))
+      #|  (sum : ((((Cart[Real, N]) -> Bool) -> Bool) -> Bool, (((Cart[Real, N]) -> Bool) -> Bool) -> Real) -> Real)({(t : ((Cart[Real, N]) -> Bool) -> Bool) | (SUBSET : (((Cart[Real, N]) -> Bool) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(t, {(DIFF : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)((UNIV : (Cart[Real, N]) -> Bool), (t : (Cart[Real, N]) -> Bool)) | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(t, (H : ((Cart[Real, N]) -> Bool) -> Bool))}) && !(t == ({} : ((Cart[Real, N]) -> Bool) -> Bool))}, (t : ((Cart[Real, N]) -> Bool) -> Bool) => pow(-real_of_num(1), (CARD : (((Cart[Real, N]) -> Bool) -> Bool) -> Num)(t) + 1) * pow(-real_of_num(1), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
       #|  ({} : ((Cart[Real, N], Real)) -> Bool)
       #|  (euler_characteristic : (((Cart[Real, N], Real)) -> Bool, (Cart[Real, N]) -> Bool) -> Real)(({} : ((Cart[Real, N], Real)) -> Bool), (UNIV : (Cart[Real, N]) -> Bool))
       #|  (x : Real) == pow(-real_of_num(1), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) && (y : Real) == pow(-real_of_num(1), (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) \226\134\146 x == (s : Real) + y \226\134\146 s == real_of_num(0)
