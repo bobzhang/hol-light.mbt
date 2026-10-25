@@ -83390,7 +83390,7 @@ Autoformalization/carleson quotations (19012):
   drop((x : Cart[Real, Unit]))
   (f : (Real) -> Real)
   (i : Num) == 1
-  forall f:real->real x:real^1. (forall x. &0 <= f x)\n   ==> (\\u. if &0 < drop u then lift(max (&0) (f(drop x) - drop u / &2)) else\n     vec 0)\n       absolutely_integrable_on (:real^1)
+  \226\136\128 f : (Real) -> Real, \226\136\128 x : Cart[Real, Unit], (\226\136\128 x : Real, real_of_num(0) <= f(x)) \226\134\146 absolutely_integrable_on((u : Cart[Real, Unit]) => if real_of_num(0) < drop(u) { lift(max(real_of_num(0), f(drop(x)) - drop(u) / real_of_num(2))) } else { vec(0) }, UNIV)
   \226\136\128 z : Cart[Real, Finite_sum[Unit, Unit]], real_of_num(0) <= drop((ff : (Cart[Real, Finite_sum[Unit, Unit]]) -> Cart[Real, Unit])(z))
   pastecart((x : Cart[Real, Unit]), (u : Cart[Real, Unit]))
   \226\136\128 x : Cart[Real, Unit], \226\136\128 u : Cart[Real, Unit], lift(norm((ff : (Cart[Real, Finite_sum[Unit, Unit]]) -> Cart[Real, Unit])(pastecart(x, u)))) == ff(pastecart(x, u))
@@ -83441,7 +83441,7 @@ Autoformalization/carleson quotations (19012):
   (f : (Real) -> Real)
   lift((f : (Real) -> Real)(drop((x : Cart[Real, Unit]))) * (gg : (Real) -> Real)(drop(x)))
   (i : Num) == 1
-  forall(f:real->real) (gg:real->real) x:real^1. (forall x. &0 <= f x) /\\ (forall x. &0 <= gg\n   x)\n   ==> (\\u:real^1. if &0 < drop u /\\ drop u <= gg(drop x) then lift(f(drop x))\n     else vec 0)\n       absolutely_integrable_on (:real^1)
+  \226\136\128 f : (Real) -> Real, \226\136\128 gg : (Real) -> Real, \226\136\128 x : Cart[Real, Unit], (\226\136\128 x : Real, real_of_num(0) <= f(x)) && (\226\136\128 x : Real, real_of_num(0) <= gg(x)) \226\134\146 absolutely_integrable_on((u : Cart[Real, Unit]) => if real_of_num(0) < drop(u) && drop(u) <= gg(drop(x)) { lift(f(drop(x))) } else { vec(0) }, UNIV)
   continuous_on(o(lift, o((gg : (Real) -> Real), drop)), UNIV)
   ((w : Cart[Real, Finite_sum[Unit, Unit]]) => lift((gg : (Real) -> Real)(drop(fstcart(w))))) == o(o(lift, o(gg, drop)), fstcart)
   (w : Cart[Real, Finite_sum[Unit, Unit]])
@@ -83469,7 +83469,7 @@ Autoformalization/carleson quotations (19012):
   (gg : (Real) -> Real)
   (f : (Real) -> Real)
   (x : Cart[Real, Unit])
-  (\\x:real^1. if drop u <= gg (drop x) then lift (f (drop x)) else vec 0) =\n    (\\x:real^1. if x IN IMAGE lift {x | drop u <= gg x} then (lift o f o drop)\n      x else vec 0)
+  ((x : Cart[Real, Unit]) => if drop((u : Cart[Real, Unit])) <= (gg : (Real) -> Real)(drop(x)) { lift((f : (Real) -> Real)(drop(x))) } else { vec(0) }) == ((x : Cart[Real, Unit]) => if IN(x, IMAGE(lift, {(x : Real) | drop(u) <= gg(x)})) { o(lift, o(f, drop), x) } else { vec(0) })
   \226\136\128 f : (Real) -> Real, \226\136\128 gg : (Real) -> Real, \226\136\128 u : Cart[Real, Unit], absolutely_real_integrable_on(f, UNIV) && real_continuous_on(gg, UNIV) && real_of_num(0) < drop(u) \226\134\146 integral(UNIV, (x : Cart[Real, Unit]) => ((z : Cart[Real, Finite_sum[Unit, Unit]]) => if real_of_num(0) < drop(sndcart(z)) && drop(sndcart(z)) <= gg(drop(fstcart(z))) { lift(f(drop(fstcart(z)))) } else { vec(0) })(pastecart(x, u))) == lift(real_integral({(x : Real) | drop(u) <= gg(x)}, f))
   drop((x : Cart[Real, Unit]))
   (gg : (Real) -> Real)
@@ -96973,7 +96973,7 @@ Autoformalization/carleson quotations (19012):
   \226\136\128 N : Num, FINITE({(nI : Int) | abs(nI) <= int_of_num(N)})
   {((k : Int), (nI : Int)) | abs(k) <= int_of_num((K : Num)) && abs(nI) <= int_of_num((N : Num))} == CROSS({(k : Int) | abs(k) <= int_of_num(K)}, {(nI : Int) | abs(nI) <= int_of_num(N)})
   \226\136\128 K : Num, \226\136\128 N : Num, FINITE({((k : Int), (nI : Int)) | abs(k) <= int_of_num(K) && abs(nI) <= int_of_num(N)})
-  {(i:num,j:int#int) | i IN {j:num | j <= n} /\\ j IN {(k:int,nI:int) | abs k\n     <= &K /\\ abs nI <= &N}}\n    = {(j:num,k:int,nI:int) | j <= n /\\ abs k <= &K /\\ abs nI <= &N}
+  {((i : Num), (j : (Int, Int))) | IN(i, {(j : Num) | j <= (n : Num)}) && IN(j, {((k : Int), (nI : Int)) | abs(k) <= int_of_num((K : Num)) && abs(nI) <= int_of_num((N : Num))})} == {((j : Num), (k : Int), (nI : Int)) | j <= n && abs(k) <= int_of_num(K) && abs(nI) <= int_of_num(N)}
   (j : Num) => GABS((f : ((Int, Int)) -> Cart[Real, Tybit0[Unit]]) => \226\136\128 k : Int, \226\136\128 nI : Int, GEQ(f((k, nI)), if (Q : (Num, Int) -> Bool)(j, k) { (gg : (Num, Int, Int) -> Cart[Real, Tybit0[Unit]])(j, k, nI) } else { vec(0) }))
   (j : Num) => {((k : Int), (nI : Int)) | abs(k) <= int_of_num((K : Num)) && abs(nI) <= int_of_num((N : Num))}
   {(j : Num) | j <= (n : Num)}
@@ -98730,7 +98730,7 @@ Autoformalization/carleson quotations (19012):
   (y : Real) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), y) * Cx(pow(Re(fourier(carleson_phi, zpow(real_of_num(2), -(k : Int)) * (y - tile_ymid((k, int_of_num(0), (nJ : Int)))))), 2))
   ((y : Real) => fourier((h : (Real) -> Cart[Real, Tybit0[Unit]]), y) * Cx(carleson_psi((z : Real), (k : Int), y))) == ((y : Real) => fourier(h, y) * Cx(pow(Re(fourier(carleson_phi, zpow(real_of_num(2), -k) * (y - tile_ymid((k, int_of_num(0), (nJ : Int)))))), 2)))
   IN((z : Real), tile_Jr(((k : Int), int_of_num(0), (nJ : Int))))
-  forall(h:real->complex) k nI0 nJ z P.\n     schwartz h /\\ measurable P /\\ z IN tile_Jr(k,nI0,nJ)\n     ==> ((\\N. vsum {nI:int | abs nI <= &N}\n                (\\nI. carleson_ip h (k,nI,nJ) *\n                      integral P (\\z. phi_sigma (k,nI,nJ) carleson_phi (drop\n                        z))))\n          --> Cx(&2 * pi) * integral P (\\x. fourier (\\y. fourier h y *\n            Cx(carleson_psi z k y)) (--drop x)))\n         sequentially
+  \226\136\128 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 k : Int, \226\136\128 nI0 : Int, \226\136\128 nJ : Int, \226\136\128 z : Real, \226\136\128 P : (Cart[Real, Unit]) -> Bool, schwartz(h) && measurable(P) && IN(z, tile_Jr((k, nI0, nJ))) \226\134\146 op_minus_minus_gt((N : Num) => vsum({(nI : Int) | abs(nI) <= int_of_num(N)}, (nI : Int) => carleson_ip(h, (k, nI, nJ)) * integral(P, (z : Cart[Real, Unit]) => phi_sigma((k, nI, nJ), carleson_phi, drop(z)))), Cx(real_of_num(2) * pi) * integral(P, (x : Cart[Real, Unit]) => fourier((y : Real) => fourier(h, y) * Cx(carleson_psi(z, k, y)), -drop(x))), sequentially)
   (F' : (Cart[Real, Unit]) -> Bool)
   (j : Num)
   ((K : Num) => Cx(real_of_num(2) * pi) * vsum({(j : Num) | j <= (n : Num)}, (j : Num) => vsum({(k : Int) | abs(k) <= int_of_num(K)}, (k : Int) => integral(INTER((F' : (Cart[Real, Unit]) -> Bool), {(x : Cart[Real, Unit]) | cargmax((i : Num) => carleson_v((h : (Real) -> Cart[Real, Tybit0[Unit]]), (u : (Num) -> Real)(i)), n, drop(x)) == j}), (x : Cart[Real, Unit]) => fourier((y : Real) => fourier(h, y) * Cx(carleson_psi(u(j), k, y)), -drop(x)))))) == ((K : Num) => vsum({(j : Num) | j <= n}, (j : Num) => Cx(real_of_num(2) * pi) * vsum({(k : Int) | abs(k) <= int_of_num(K)}, (k : Int) => integral(INTER(F', {(x : Cart[Real, Unit]) | cargmax((i : Num) => carleson_v(h, u(i)), n, drop(x)) == j}), (x : Cart[Real, Unit]) => fourier((y : Real) => fourier(h, y) * Cx(carleson_psi(u(j), k, y)), -drop(x))))))
