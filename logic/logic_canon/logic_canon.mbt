@@ -252,8 +252,8 @@ fn step_6() -> Unit raise {
   let t126 = @simp.rewrite_tac(@list.List([@lists.length(), @nums.not_suc()]))
   let t129 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()])), @lists.list_induct_tac), t126), t127), t128)
   let t125 = @simp.asm_rewrite_tac(@list.List([@lists.all(), @lists.tl(), @lists.hd(), @lists.length()]))
-  let t124 = @tactics.exists_tac(@parser.parse_term("CONS (a:A) as_"))
-  let t123 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("as_:A list"))(@tactics.strip_assume_tac))
+  let t124 = @tactics.exists_tac(@term_syntax.parse_term("CONS((a : A), (as_ : List[A]))"))
+  let t123 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(as_ : List[A])"))(@tactics.strip_assume_tac))
   let t122 = @tactics.conjuncts_then2(fn(x116 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s117 = @tactics.assume_tac(x116)
     fn(x118 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -270,7 +270,7 @@ fn step_6() -> Unit raise {
   let t115 = @list.List([@meson.meson_tac(@list.List([@lists.all(), @lists.length()])), t114])
   let t113 = @simp.asm_rewrite_tac(@list.List([@fol.holds_v1(), @lists.length(), @lists.itlist(), @lists.map2_def(), @lists.hd(), @lists.tl(), @lists.reverse(), @lists.append()]))
   let t131 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t113), t115), @tactics.gen_tac), @tactics.eq_tac), t130)
-  holds_itlist_exists_c.set(@tactics.prove(@parser.parse_term("forall M xs v. holds M v (ITLIST ?? xs p) <=>\n            ?as_. (LENGTH as_ = LENGTH xs) /\\\n                 ALL (Dom M) as_ /\\\n                 holds M\n                   (ITLIST valmod (REVERSE (MAP2 (\\x a:A. (x,a)) xs as_)) v)\n                   p"), t131))
+  holds_itlist_exists_c.set(@tactics.prove(@term_syntax.parse_term("∀ M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), ∀ xs : List[Num], ∀ v : (Num) -> A, holds(M, v, ITLIST(op_q_q, xs, (p : Form))) == (∃ as_ : List[A], LENGTH(as_) == LENGTH(xs) && ALL(Dom(M), as_) && holds(M, ITLIST(valmod, REVERSE(MAP2((x : Num) => (a : A) => (x, a), xs, as_)), v), p))"), t131))
 }
 
 ///|
@@ -1355,10 +1355,10 @@ fn step_34() -> Unit raise {
   let t774 = @simp.rewrite_tac(@list.List([@lists.length(), @nums.not_suc(), @lists.map2(), @lists.reverse(), @lists.itlist(), @lists.all()]))
   let t772 = @term_syntax.parse_term("(xs : List[Num])")
   let t773 = @tactics.spec_tac(@term_syntax.parse_term("(xs : List[Num])"), t772)
-  let t770 = @parser.parse_term("as_:term list")
-  let t771 = @tactics.spec_tac(@parser.parse_term("as_:term list"), t770)
-  let t769 = @tactics.undisch_tac(@parser.parse_term("LENGTH (as_:term list) = LENGTH (xs:num list)"))
-  let t768 = @tactics.undisch_tac(@parser.parse_term("ALL (Dom (canon_of_prop (language {p}) d)) as_"))
+  let t770 = @term_syntax.parse_term("(as_ : List[Term])")
+  let t771 = @tactics.spec_tac(@term_syntax.parse_term("(as_ : List[Term])"), t770)
+  let t769 = @tactics.undisch_tac(@term_syntax.parse_term("LENGTH((as_ : List[Term])) == LENGTH((xs : List[Num]))"))
+  let t768 = @tactics.undisch_tac(@term_syntax.parse_term("ALL(Dom(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool))), (as_ : List[Term]))"))
   let t766 = @term_syntax.parse_term("(v : (Num) -> Term)")
   let t767 = @tactics.spec_tac(@term_syntax.parse_term("(v : (Num) -> Term)"), t766)
   let t765 = @tactics.undisch_tac(@term_syntax.parse_term("valuation(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool)), (v : (Num) -> Term))"))
@@ -1565,7 +1565,7 @@ fn step_34() -> Unit raise {
       })(x630))
     })(x631)(x631)
   }), t733), t734), t738), t799), t803), t806), t813), t814), t815), t816), t817), t818), t819), t820)
-  uniformity_c.set(@tactics.prove(@parser.parse_term("qfree p /\\ (forall C v. ~(Dom C = EMPTY) /\\\n                     valuation(C) v ==> holds C (v:num->term) (ITLIST ?? xs p))\n   ==> ?is_. (forall i x. MEM i is_ ==> terms(FST(language {p})) (i x)) /\\\n            forall d. pholds(d) (ITLIST (||) (MAP (\\i. formsubst i p) is_) False)"), t821))
+  uniformity_c.set(@tactics.prove(@term_syntax.parse_term("qfree((p : Form)) && (∀ C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), ∀ v : (Num) -> Term, !(Dom(C) == {}) && valuation(C, v) → holds(C, v, ITLIST(op_q_q, (xs : List[Num]), p))) → (∃ is_ : List[(Num) -> Term], (∀ i : (Num) -> Term, ∀ x : Num, MEM(i, is_) → terms(FST(language({p})), i(x))) && (∀ d : (Form) -> Bool, pholds(d, ITLIST(op_bar_bar, MAP((i : (Num) -> Term) => formsubst(i, p), is_), False))))"), t821))
 }
 
 ///|
