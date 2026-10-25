@@ -54,7 +54,7 @@ fn step_4() -> Unit raise {
 ///|
 /// perpdir
 fn step_5() -> Unit raise {
-  perpdir_c.set(@pair.new_definition(@parser.parse_term("x _|_ y <=> orthogonal (dest_dir x) (dest_dir y)")))
+  perpdir_c.set(@pair.new_definition(@term_syntax.parse_term("(op_us_bar_us : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == orthogonal(dest_dir(x), dest_dir(y))")))
 }
 
 ///|
@@ -69,7 +69,7 @@ pub fn perpdir() -> @kernel.Thm {
 ///|
 /// pardir
 fn step_6() -> Unit raise {
-  pardir_c.set(@pair.new_definition(@parser.parse_term("x || y <=> (dest_dir x) cross (dest_dir y) = vec 0")))
+  pardir_c.set(@pair.new_definition(@term_syntax.parse_term("(op_bar_bar : (Direction, Direction) -> Bool)((x : Direction), (y : Direction)) == (cross(dest_dir(x), dest_dir(y)) == vec(0))")))
 }
 
 ///|
