@@ -142,11 +142,25 @@ test "pattern variables are scoped as HOL scopes them" {
       "\\($$):bool. match T with ($$) -> ($$)",
     ),
   )
+  // a match inside a pattern binds its own variables
+  assert_true(
+    reads_like(
+      "(op_dollar_dollar : Num) => match 0 { (match 0 { op_dollar_dollar => 0 }) => op_dollar_dollar + 1 }",
+      "\\op_dollar_dollar:num. match 0 with (match 0 with ($$) -> 0) -> op_dollar_dollar + 1",
+    ),
+  )
+  // a name in a pattern that names a constant is not the pattern's: an
+  // enclosing binder of that name binds it
+  assert_true(
+    reads_like("(T : Bool) => match false { T => T }", "\\T:bool. match F with T -> T"),
+  )
   // a lambda binds a name or a pattern, not a constant alone
-  let r = try @term_syntax.parse_term("fn { true => true }") catch {
-    _ => "error"
-  } noraise {
-    _ => "read"
+  for s in ["fn { true => true }", "fn { (true : Bool) => true }", "fn { 0 => 1 }"] {
+    let r = try @term_syntax.parse_term(s) catch {
+      _ => "error"
+    } noraise {
+      _ => "read"
+    }
+    inspect(r, content="error")
   }
-  inspect(r, content="error")
 }

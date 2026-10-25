@@ -125,62 +125,56 @@ fn pgen_cost(t : @preterm.Preterm) -> Int {
 }
 
 ///|
-/// The variables a pattern binds, each as written and as HOL's name: the
-/// identifiers free in it that name no constant, numeral or interface name
-/// (the free variables HOL's parser gives a pattern, pfrees: those a
-/// lambda inside the pattern binds are not).
-fn pattern_bindings(pat : @preterm.Preterm) -> Array[(String, String)] {
-  fn go(t : @preterm.Preterm) -> Array[(String, String)] {
+/// A pattern resolved, the variables it binds (as HOL's pfrees lists them)
+/// and `bound` with them. Those are
+/// the ones HOL's parser gives it: the free variables (pfrees) of the
+/// pattern read with nothing in scope, which name no constant (a lambda
+/// inside the pattern binds its own). Each is bound under every spelling
+/// the pattern writes it with (op_dollar_dollar for $$). Any other name in
+/// the pattern, such as a constant's that an enclosing binder renamed, is
+/// read in `bound`, as HOL's elaboration reads it.
+fn resolve_pattern(
+  pat : @preterm.Preterm,
+  bound : @list.List[(String, String)],
+) -> (
+  @preterm.Preterm,
+  @list.List[@preterm.Preterm],
+  @list.List[(String, String)],
+) raise {
+  // read once without taking GEN%PVAR names, to find what it binds
+  let frees = @parser.with_pgen_counter_restored(() => {
+    @parser.pfrees(resolve_names(pat, @list.List([])))
+  })
+  let names = frees.map(v => if v is Varp(n, _) { n } else { "" })
+  let inner = Ref::new(bound)
+  fn go(t : @preterm.Preterm) {
     match t {
-      Varp(n, _) => {
-        // as the pattern resolves, with nothing in scope
-        if n.has_prefix(@grammar.generated_mark) {
-          return []
-        }
-        let r = if @printer.the_interface.val.iter().any(e => e.0 == n) {
-          n
-        } else {
-          @grammar.unescape(n)
-        }
-        if r == "" || names_constant(r) || r.iter().all(c => c is ('0'..='9')) {
-          []
-        } else {
-          [(n, r)]
-        }
-      }
-      Constp(_, _) => []
-      Combp(f, x) => {
-        let vs = go(f)
-        for v in go(x) {
-          if !vs.contains(v) {
-            vs.push(v)
+      Varp(n, _) =>
+        if !n.has_prefix(@grammar.generated_mark) {
+          let r = if @printer.the_interface.val.iter().any(e => e.0 == n) {
+            n
+          } else {
+            @grammar.unescape(n)
+          }
+          if names.contains(r) && !inner.val.iter().any(b => b == (n, r)) {
+            inner.val = inner.val.prepend((n, r))
           }
         }
-        vs
+      Constp(_, _) => ()
+      Combp(f, x) => {
+        go(f)
+        go(x)
       }
       Absp(v, b) => {
-        let bound = go(v)
-        go(b).filter(x => !bound.contains(x))
+        go(v)
+        go(b)
       }
       Typing(x, _) => go(x)
     }
   }
 
   go(pat)
-}
-
-///|
-/// A pattern resolved, and `bound` with the variables it binds: a pattern
-/// mentions no variable from outside it (HOL binds every free name in it),
-/// so it is resolved with nothing in scope.
-fn resolve_pattern(
-  pat : @preterm.Preterm,
-  bound : @list.List[(String, String)],
-) -> (@preterm.Preterm, @list.List[(String, String)]) raise {
-  (
-    resolve_names(pat, @list.List([])),
-    pattern_bindings(pat).fold(init=bound, (b, v) => b.prepend(v)),
-  )
+  (resolve_names(pat, inner.val), frees, inner.val)
 }
 
 ///|
@@ -227,12 +221,15 @@ fn resolve_names(
     // HOL's parser reads them, then the clause's GEN%PVAR names
     Combp(Combp(Combp(Varp(m, _), pat), when_), body) if m ==
       @grammar.clause_mark => {
-      let (p, inner) = resolve_pattern(pat, bound)
+      let (p, vs, inner) = resolve_pattern(pat, bound)
       let tests = match when_ {
         Varp(g, _) if g == @grammar.no_guard_mark => @list.List([])
         _ => @list.singleton(resolve_names(when_, inner))
       }
-      @parser.pmk_pattern(((p, tests), resolve_names(body, inner)))
+      // the clause binds the variables HOL's parser finds in the pattern,
+      // whatever names the resolution gave the rest (a binder renamed
+      // because it is named like a constant)
+      @parser.pmk_pattern_binding(((p, tests), resolve_names(body, inner)), () => vs)
     }
     Varp(n, ty) if n.has_prefix(@grammar.generated_mark) =>
       Varp(n[@grammar.generated_mark.length():].to_owned(), ty)
@@ -256,7 +253,7 @@ fn resolve_names(
     // a lambda or quantifier over a pattern: elaboration makes it HOL's
     // generalized abstraction (GABS)
     Absp(v, b) if !(v is (Varp(_, _) | Typing(Varp(_, _), _))) => {
-      let (p, inner) = resolve_pattern(v, bound)
+      let (p, _, inner) = resolve_pattern(v, bound)
       Absp(p, resolve_names(b, inner))
     }
     Absp(v, b) => {
