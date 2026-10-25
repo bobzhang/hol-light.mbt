@@ -1928,7 +1928,7 @@ fn step_98() -> Unit raise {
   let t425 = @simp.rewrite_tac(@list.List([@theorems.unwind_thm1(), @theorems.exists_refl()]))
   let t424 = @simp.simp_tac(@list.List([@theorems.left_forall_imp_thm(), @equal.gsym(@theorems.conj_assoc()), @theorems.right_exists_and_thm()]))
   let t427 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([funspace(), abstract_(), suchthat(), in_powerset(), in_cartproduct(), subset_def(), pair_inj()])), t424), t425), t426)
-  abstract_in_funspace_c.set(@tactics.prove(@parser.parse_term("forall f x s t. (forall x. x <: s ==> f(x) <: t)\n             ==> abstract s t f <: funspace s t"), t427))
+  abstract_in_funspace_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (V) -> V, ∀ x : _, ∀ s : V, ∀ t : V, (∀ x : V, op_lt_colon(x, s) → op_lt_colon(f(x), t)) → op_lt_colon(op_abstract(s, t, f), funspace(s, t))"), t427))
 }
 
 ///|

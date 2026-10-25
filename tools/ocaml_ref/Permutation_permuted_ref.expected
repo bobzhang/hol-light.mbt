@@ -5672,7 +5672,7 @@ Permutation/permuted quotations (32):
   \226\136\128 h : A, \226\136\128 t : List[A], \226\136\128 l : List[A], PERMUTED(l, CONS(h, t)) == (MEM(h, l) && PERMUTED(DELETE1(h, l), t))
   \226\136\128 xs : List[_], \226\136\128 ys : List[_], PERMUTED(xs, ys) \226\134\146 LIST_UNIQ(xs) == LIST_UNIQ(ys)
   \226\136\128 P : (A, A) -> Bool, \226\136\128 l : List[A], \226\136\128 l' : List[A], (\226\136\128 x : A, \226\136\128 y : A, P(x, y) \226\134\146 P(y, x)) && PERMUTED(l, l') && PAIRWISE(P, l) \226\134\146 PAIRWISE(P, l')
-  forall(P:A->A->bool) l l.\n        (forall x y. P x y ==> P y x) /\\ l PERMUTED l'\n        ==> (PAIRWISE P l <=> PAIRWISE P l')
+  \226\136\128 P : (A, A) -> Bool, \226\136\128 l : _, \226\136\128 l : List[A], (\226\136\128 x : A, \226\136\128 y : A, P(x, y) \226\134\146 P(y, x)) && PERMUTED(l, (l' : List[A])) \226\134\146 PAIRWISE(P, l) == PAIRWISE(P, l')
   \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], PERMUTED(APPEND(l1, l2), APPEND(l2, l1))
   \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], \226\136\128 l3 : List[A], PERMUTED(APPEND(l1, l2), APPEND(l1, l3)) == PERMUTED(l2, l3)
   \226\136\128 l1 : List[A], \226\136\128 l2 : List[A], \226\136\128 l3 : List[A], PERMUTED(APPEND(l1, l3), APPEND(l2, l3)) == PERMUTED(l1, l2)

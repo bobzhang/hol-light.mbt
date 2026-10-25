@@ -916,7 +916,7 @@ fn step_45() -> Unit raise {
   let t236 = @equal.gsym(@vectors.lift_sum())
   let t237 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@trivia.o_def()]))(t236)]))
   let t238 = @tactics.then_tac(@simp.simp_tac(@list.List([@topology.sums(), lim_cx_lift(), @complexes.vsum_cx(), @sets.finite_inter(), @iterate.finite_numseg()])), t237)
-  series_cx_lift_c.set(@tactics.prove(@parser.parse_term("forall f s x.\n     ((\\x. Cx(f x)) sums (Cx x)) s <=> ((\\x. lift(f x)) sums (lift x)) s"), t238))
+  series_cx_lift_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ s : (Num) -> Bool, ∀ x : Real, sums((x : Num) => Cx(f(x)), Cx(x), s) == sums((x : Num) => lift(f(x)), lift(x), s)"), t238))
 }
 
 ///|
