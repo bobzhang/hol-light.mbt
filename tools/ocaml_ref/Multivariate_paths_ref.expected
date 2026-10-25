@@ -58205,7 +58205,7 @@ Multivariate/paths quotations (8298):
   !((y : Real) == real_of_num(0)) && !((y' : Real) == real_of_num(0)) \226\134\146 ((x : Real) / y == (x' : Real) / y') == (y' / y * x == x')
   (\226\136\128 a : _, \226\136\128 b : _, \226\136\128 c : _, \226\136\128 d : _, (P : (_, _, _, _) -> Bool)(a, b, c, d)) == (\226\136\128 b : _, \226\136\128 d : _, \226\136\128 a : _, \226\136\128 c : _, P(a, b, c, d))
   GABS((f : ((Num, Num)) -> Real) => \226\136\128 m : Num, \226\136\128 n : Num, GEQ(f((m, n)), real_of_num(m) / pow(real_of_num(2), n)))
-  \\(m,n). (f:num->num->A) m n
+  fn { (m, n) => (f : (Num, Num) -> A)(m, n) }
   \226\136\128 f : (Num, Num) -> A, (\226\136\128 m : Num, \226\136\128 n : Num, f(2 * m, n + 1) == f(m, n)) \226\134\146 (\226\136\131 g : (Real) -> A, \226\136\128 m : Num, \226\136\128 n : Num, g(real_of_num(m) / pow(real_of_num(2), n)) == f(m, n))
   (x : Real) / pow(real_of_num(2), 0) == x
   (f : (Num, Num) -> A)
@@ -64859,7 +64859,7 @@ Multivariate/paths quotations (8298):
   (g : (Cart[Real, Unit]) -> Cart[Real, M])
   IN(pathfinish((g : (Cart[Real, Unit]) -> Cart[Real, M])), (c : (Cart[Real, M]) -> Bool))
   (g : (Cart[Real, Unit]) -> Cart[Real, M])
-  \\(g,b:real^M). homotopic_paths (c:real^M->bool) ((@) g ++ f b)
+  fn { (g, b) => homotopic_paths((c : (Cart[Real, M]) -> Bool), op_plus_plus(select(g), (f : (Cart[Real, M], Cart[Real, Unit]) -> Cart[Real, M])(b))) }
   (g : ((Cart[Real, Unit]) -> Cart[Real, M]) -> Bool) => (homotopic_paths((c : (Cart[Real, M]) -> Bool), op_plus_plus(select(g), reversepath((f : (Cart[Real, M], Cart[Real, Unit]) -> Cart[Real, M])(pathfinish(select(g)))))), pathfinish(select(g)))
   (a : Cart[Real, M])
   (f : (Cart[Real, M], Cart[Real, Unit]) -> Cart[Real, M])

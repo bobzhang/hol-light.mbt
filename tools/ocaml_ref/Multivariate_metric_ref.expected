@@ -21361,7 +21361,7 @@ Multivariate/metric quotations (14748):
   topspace((top1 : Topology[A])) == {}
   \226\136\128 top : Topology[C], \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[B], \226\136\128 f : (B) -> C, continuous_map((prod_topology(top1, top2), top), (x : (A, B)) => f(SND(x))) == (topspace(top1) == {} || continuous_map((top2, top), f))
   topspace(prod_topology((top1 : Topology[A]), (top2 : Topology[C]))) == {}
-  forall top1 top2 top3 top4 (f:A->B) (g:C->D).\n        continuous_map (prod_topology top1 top2,prod_topology top3 top4)\n                       (\\(x,y). f x,g y) <=>\n        topspace(prod_topology top1 top2) = {} \\/\n        continuous_map (top1,top3) f /\\ continuous_map (top2,top4) g
+  \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[C], \226\136\128 top3 : Topology[B], \226\136\128 top4 : Topology[D], \226\136\128 f : (A) -> B, \226\136\128 g : (C) -> D, continuous_map((prod_topology(top1, top2), prod_topology(top3, top4)), fn { (x, y) => (f(x), g(y)) }) == (topspace(prod_topology(top1, top2)) == {} || continuous_map((top1, top3), f) && continuous_map((top2, top4), g))
   CROSS(IMAGE((f : (A) -> C), (u : (A) -> Bool)), IMAGE((g : (B) -> D), (v : (B) -> Bool)))
   (v : (B) -> Bool)
   (u : (A) -> Bool)
@@ -21371,13 +21371,13 @@ Multivariate/metric quotations (14748):
   (x : A)
   (w : ((A, B)) -> Bool)
   (top1' : Topology[C])
-  IMAGE g v =\n      IMAGE SND (IMAGE (\\(x,y). (f:A->C) x,(g:B->D) y)\n                       (topspace top1 CROSS v))
+  IMAGE((g : (B) -> D), (v : (B) -> Bool)) == IMAGE(SND, IMAGE(fn { (x, y) => ((f : (A) -> C)(x), g(y)) }, CROSS(topspace((top1 : Topology[A])), v)))
   (v : (B) -> Bool)
   (top2' : Topology[D])
-  IMAGE f u =\n      IMAGE FST (IMAGE (\\(x,y). (f:A->C) x,(g:B->D) y)\n                       (u CROSS topspace top2))
+  IMAGE((f : (A) -> C), (u : (A) -> Bool)) == IMAGE(FST, IMAGE(fn { (x, y) => (f(x), (g : (B) -> D)(y)) }, CROSS(u, topspace((top2 : Topology[B])))))
   (u : (A) -> Bool)
   topspace(prod_topology((top1 : Topology[A]), (top2 : Topology[B]))) == {}
-  forall top1 top1' top2 top2' (f:A->C) (g:B->D).\n        open_map (prod_topology top1 top2,prod_topology top1' top2')\n                 (\\(x,y). f x,g y) <=>\n        topspace(prod_topology top1 top2) = {} \\/\n        open_map (top1,top1') f /\\ open_map (top2,top2') g
+  \226\136\128 top1 : Topology[A], \226\136\128 top1' : Topology[C], \226\136\128 top2 : Topology[B], \226\136\128 top2' : Topology[D], \226\136\128 f : (A) -> C, \226\136\128 g : (B) -> D, open_map((prod_topology(top1, top2), prod_topology(top1', top2')), fn { (x, y) => (f(x), g(y)) }) == (topspace(prod_topology(top1, top2)) == {} || open_map((top1, top1'), f) && open_map((top2, top2'), g))
   \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[B], \226\136\128 s : ((A, B)) -> Bool, \226\136\128 z : (A, B), IN(z, closure_of(prod_topology(top1, top2), s)) \226\134\146 IN(FST(z), closure_of(top1, IMAGE(FST, s))) && IN(SND(z), closure_of(top2, IMAGE(SND, s)))
   CROSS(topspace((top1 : Topology[A])), (c : (B) -> Bool))
   (c : (B) -> Bool) == {}
@@ -21386,7 +21386,7 @@ Multivariate/metric quotations (14748):
   (c : (A) -> Bool) == {}
   (c : (A) -> Bool)
   ((p : Bool) || (q : Bool)) == (!p \226\134\146 q)
-  forall top1 top1' top2 top2' (f:A->C) (g:B->D).\n        closed_map (prod_topology top1 top2,prod_topology top1' top2')\n                   (\\(x,y). f x,g y)\n        ==> topspace(prod_topology top1 top2) = {} \\/\n            closed_map (top1,top1') f /\\ closed_map (top2,top2') g
+  \226\136\128 top1 : Topology[A], \226\136\128 top1' : Topology[C], \226\136\128 top2 : Topology[B], \226\136\128 top2' : Topology[D], \226\136\128 f : (A) -> C, \226\136\128 g : (B) -> D, closed_map((prod_topology(top1, top2), prod_topology(top1', top2')), fn { (x, y) => (f(x), g(y)) }) \226\134\146 topspace(prod_topology(top1, top2)) == {} || closed_map((top1, top1'), f) && closed_map((top2, top2'), g)
   topspace(prod_topology((top1 : Topology[A]), (top2 : Topology[B]))) == {}
   topspace(prod_topology((top1' : Topology[A]), (top2' : Topology[B]))) == topspace(prod_topology((top1 : Topology[A]), (top2 : Topology[B])))
   \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[B], \226\136\128 top1' : Topology[A], \226\136\128 top2' : Topology[B], (prod_topology(top1, top2) == prod_topology(top1', top2')) == (topspace(prod_topology(top1, top2)) == {} && topspace(prod_topology(top1', top2')) == {} || top1 == top1' && top2 == top2')
@@ -21723,7 +21723,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, homeomorphic_maps((top, top'), (f, g)) && SUBSET(IMAGE(f, INTER(topspace(top), s)), t) && SUBSET(IMAGE(g, INTER(topspace(top'), t)), s) \226\134\146 homeomorphic_maps((subtopology(top, s), subtopology(top', t)), (f, g))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, homeomorphic_map((top, top'), f) && IMAGE(f, INTER(topspace(top), s)) == INTER(topspace(top'), t) \226\134\146 homeomorphic_map((subtopology(top, s), subtopology(top', t)), f)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, homeomorphic_map((top, top'), f) && (\226\136\128 x : A, IN(x, topspace(top)) && IN(f(x), topspace(top')) \226\134\146 IN(f(x), t) == IN(x, s)) \226\134\146 homeomorphic_map((subtopology(top, s), subtopology(top', t)), f)
-  forall top1 top2 top3 top4 (f:A->B) (g:C->D) f' g'.\n        homeomorphic_maps (prod_topology top1 top2,prod_topology top3 top4)\n                          ((\\(x,y). f x,g y),(\\(x,y). f' x,g' y)) <=>\n        topspace(prod_topology top1 top2) = {} /\\\n        topspace(prod_topology top3 top4) = {} \\/\n        homeomorphic_maps (top1,top3) (f,f') /\\\n        homeomorphic_maps (top2,top4) (g,g')
+  \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[C], \226\136\128 top3 : Topology[B], \226\136\128 top4 : Topology[D], \226\136\128 f : (A) -> B, \226\136\128 g : (C) -> D, \226\136\128 f' : (B) -> A, \226\136\128 g' : (D) -> C, homeomorphic_maps((prod_topology(top1, top2), prod_topology(top3, top4)), (fn { (x, y) => (f(x), g(y)) }, fn { (x, y) => (f'(x), g'(y)) })) == (topspace(prod_topology(top1, top2)) == {} && topspace(prod_topology(top3, top4)) == {} || homeomorphic_maps((top1, top3), (f, f')) && homeomorphic_maps((top2, top4), (g, g')))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], homeomorphic_maps((prod_topology(top, top'), prod_topology(top', top)), (GABS((f : ((A, B)) -> (B, A)) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), (y, x))), GABS((f : ((B, A)) -> (A, B)) => \226\136\128 y : B, \226\136\128 x : A, GEQ(f((y, x)), (x, y)))))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], homeomorphic_map((prod_topology(top, top'), prod_topology(top', top)), GABS((f : ((A, B)) -> (B, A)) => \226\136\128 x : A, \226\136\128 y : B, GEQ(f((x, y)), (y, x))))
   (homeomorphic_space : (Topology[A], Topology[B]) -> Bool)((top : Topology[A]), (top' : Topology[B])) == (\226\136\131 f : (A) -> B, \226\136\131 g : (B) -> A, homeomorphic_maps((top, top'), (f, g)))
@@ -22703,29 +22703,29 @@ Multivariate/metric quotations (14748):
   (w : ((A, B)) -> Bool)
   (top2 : Topology[B])
   (top1 : Topology[A])
-  {x | x IN topspace top1 CROSS topspace top2 /\\\n           (\\(x,y). (f:A->C) x,(g:B->D) y) x = y1,y2} =\n      {x | x IN topspace top1 /\\ f x = y1} CROSS\n      {y | y IN topspace top2 /\\ g y = y2}
+  {(x : (A, B)) | IN(x, CROSS(topspace((top1 : Topology[A])), topspace((top2 : Topology[B])))) && fn { (x, y) => ((f : (A) -> C)(x), (g : (B) -> D)(y)) }(x) == ((y1 : C), (y2 : D))} == CROSS({(x : A) | IN(x, topspace(top1)) && f(x) == y1}, {(y : B) | IN(y, topspace(top2)) && g(y) == y2})
   (y2 : D)
   (y1 : C)
   (w : ((A, B)) -> Bool)
-  {x | x IN topspace top1 CROSS topspace top2 /\\\n             (\\(x,y). (f:A->C) x,(g:B->D) y) x = w,z} =\n        {x | x IN topspace top1 /\\ f x = w} CROSS\n        {y | y IN topspace top2 /\\ g y = z}
+  {(x : (A, B)) | IN(x, CROSS(topspace((top1 : Topology[A])), topspace((top2 : Topology[B])))) && fn { (x, y) => ((f : (A) -> C)(x), (g : (B) -> D)(y)) }(x) == ((w : C), (z : D))} == CROSS({(x : A) | IN(x, topspace(top1)) && f(x) == w}, {(y : B) | IN(y, topspace(top2)) && g(y) == z})
   (z : D)
   (w : C)
   prod_topology((top1 : Topology[A]), (top2 : Topology[B]))
-  {x | x IN topspace top2 /\\ g x = y} =\n        IMAGE SND {x | x IN topspace top1 CROSS topspace top2 /\\\n                  (\\(x,y). (f:A->C) x,(g:B->D) y) x = f z,y}
+  {(x : B) | IN(x, topspace((top2 : Topology[B]))) && (g : (B) -> D)(x) == (y : D)} == IMAGE(SND, {(x : (A, B)) | IN(x, CROSS(topspace((top1 : Topology[A])), topspace(top2))) && fn { (x, y) => ((f : (A) -> C)(x), g(y)) }(x) == (f((z : A)), y)})
   (z : A)
   (y : D)
   prod_topology((top1 : Topology[A]), (top2 : Topology[B]))
-  {x | x IN topspace top1 /\\ f x = y} =\n        IMAGE FST {x | x IN topspace top1 CROSS topspace top2 /\\\n                  (\\(x,y). (f:A->C) x,(g:B->D) y) x = y,g z}
+  {(x : A) | IN(x, topspace((top1 : Topology[A]))) && (f : (A) -> C)(x) == (y : C)} == IMAGE(FST, {(x : (A, B)) | IN(x, CROSS(topspace(top1), topspace((top2 : Topology[B])))) && fn { (x, y) => (f(x), (g : (B) -> D)(y)) }(x) == (y, g((z : B)))})
   (z : B)
   (y : C)
   topspace(prod_topology((top1 : Topology[A]), (top2 : Topology[B]))) == {}
-  forall top1 top1' top2 top2' (f:A->C) (g:B->D).\n        proper_map (prod_topology top1 top2,prod_topology top1' top2')\n                   (\\(x,y). f x,g y) <=>\n        topspace(prod_topology top1 top2) = {} \\/\n        proper_map (top1,top1') f /\\ proper_map (top2,top2') g
+  \226\136\128 top1 : Topology[A], \226\136\128 top1' : Topology[C], \226\136\128 top2 : Topology[B], \226\136\128 top2' : Topology[D], \226\136\128 f : (A) -> C, \226\136\128 g : (B) -> D, proper_map((prod_topology(top1, top2), prod_topology(top1', top2')), fn { (x, y) => (f(x), g(y)) }) == (topspace(prod_topology(top1, top2)) == {} || proper_map((top1, top1'), f) && proper_map((top2, top2'), g))
   prod_topology((top : Topology[A]), (top2 : Topology[C]))
-  (\\x. f x,g x):A->B#C = (\\(x,y). f x,y) o (\\x. x,g x)
+  ((x : A) => ((f : (A) -> B)(x), (g : (A) -> C)(x))) == o(fn { (x, y) => (f(x), y) }, (x : A) => (x, g(x)))
   prod_topology((top1 : Topology[B]), (top : Topology[A]))
   ((x : A) => ((f : (A) -> B)(x), (g : (A) -> C)(x))) == o(GABS((f : ((B, A)) -> (B, C)) => \226\136\128 x : B, \226\136\128 y : A, GEQ(f((x, y)), (x, g(y)))), (x : A) => (f(x), x))
   prod_topology((top : Topology[A]), top)
-  (\\x. f x,g x):A->B#C = (\\(x,y). f x,g y) o (\\x. x,x)
+  ((x : A) => ((f : (A) -> B)(x), (g : (A) -> C)(x))) == o(fn { (x, y) => (f(x), g(y)) }, (x : A) => (x, x))
   \226\136\128 top : Topology[A], \226\136\128 top1 : Topology[B], \226\136\128 top2 : Topology[C], \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> C, hausdorff_space(top) && proper_map((top, top1), f) && proper_map((top, top2), g) || hausdorff_space(top1) && continuous_map((top, top1), f) && proper_map((top, top2), g) || hausdorff_space(top2) && proper_map((top, top1), f) && continuous_map((top, top2), g) \226\134\146 proper_map((top, prod_topology(top1, top2)), (x : A) => (f(x), g(x)))
   \226\136\128 top : Topology[A], \226\136\128 top1 : Topology[B], \226\136\128 top2 : Topology[C], \226\136\128 f : (A) -> (B, C), hausdorff_space(top) && proper_map((top, top1), o(FST, f)) && proper_map((top, top2), o(SND, f)) || hausdorff_space(top1) && continuous_map((top, top1), o(FST, f)) && proper_map((top, top2), o(SND, f)) || hausdorff_space(top2) && proper_map((top, top1), o(FST, f)) && continuous_map((top, top2), o(SND, f)) \226\134\146 proper_map((top, prod_topology(top1, top2)), f)
   continuous_map(((top' : Topology[B]), (top'' : Topology[C])), (g : (B) -> C))
@@ -23274,7 +23274,7 @@ Multivariate/metric quotations (14748):
   mball((m : Metric[A]), ((x : A), (r : Real)))
   UNIONS({mball((m : Metric[A]), (c, r)) | c : A, r : Real | SUBSET(INTER(mball(m, (c, r)), (s : (A) -> Bool)), (u : (A) -> Bool))})
   \226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, mtopology(submetric(m, s)) == subtopology(mtopology(m), s)
-  forall(f:A->B) m s.\n        IMAGE f s SUBSET mspace m /\\\n        (forall x y. x IN s /\\ y IN s /\\ f x = f y ==> x = y)\n        ==> (mspace(metric(s,\\(x,y). mdist m (f x,f y))) = s) /\\\n            (mdist(metric(s,\\(x,y). mdist m (f x,f y))) =\n             \\(x,y). mdist m (f x,f y))
+  \226\136\128 f : (A) -> B, \226\136\128 m : Metric[B], \226\136\128 s : (A) -> Bool, SUBSET(IMAGE(f, s), mspace(m)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 x == y) \226\134\146 mspace(metric((s, fn { (x, y) => mdist(m, (f(x), f(y))) }))) == s && mdist(metric((s, fn { (x, y) => mdist(m, (f(x), f(y))) }))) == fn { (x, y) => mdist(m, (f(x), f(y))) }
   (x : A)
   (x : A)
   (x : A)
@@ -24828,34 +24828,34 @@ Multivariate/metric quotations (14748):
   \226\136\128 k : (K) -> Bool, \226\136\128 top : (K) -> Topology[A], locally_compact_space(sum_topology(k, top)) == (\226\136\128 i : K, IN(i, k) \226\134\146 locally_compact_space(top(i)))
   subtopology((top : Topology[A]), (u' : (A) -> Bool))
   (y : B)
-  {x | x IN topspace top1 /\\ (f:B->C) x IN v} =\n    topspace top1 DIFF\n    (IMAGE SND ((u' CROSS topspace top1) DIFF\n                {x | x IN topspace top CROSS topspace top1 /\\\n                     (\\(x:A,y). x,f y) x IN w}))
+  {(x : B) | IN(x, topspace((top1 : Topology[B]))) && IN((f : (B) -> C)(x), (v : (C) -> Bool))} == DIFF(topspace(top1), IMAGE(SND, DIFF(CROSS((u' : (A) -> Bool), topspace(top1)), {(x : (A, B)) | IN(x, CROSS(topspace((top : Topology[A])), topspace(top1))) && IN(fn { (x, y) => (x, f(y)) }(x), (w : ((A, C)) -> Bool))})))
   (v : (C) -> Bool)
   CROSS((u : (A) -> Bool), (v : (C) -> Bool))
-  v = {z | z IN topspace top2 /\\\n             u' CROSS {y | y IN topspace top1 /\\ (f:B->C) y = z} SUBSET\n             {x | x IN topspace top CROSS topspace top1 /\\\n                  (\\(x:A,y). x,f y) x IN w}}
-  {x | x IN topspace top CROSS topspace top1 /\\\n              (\\(x:A,y). x,(f:B->C) y) x IN w}
+  (v : (C) -> Bool) == {(z : C) | IN(z, topspace((top2 : Topology[C]))) && SUBSET(CROSS((u' : (A) -> Bool), {(y : B) | IN(y, topspace((top1 : Topology[B]))) && (f : (B) -> C)(y) == z}), {(x : (A, B)) | IN(x, CROSS(topspace((top : Topology[A])), topspace(top1))) && IN(fn { (x, y) => (x, f(y)) }(x), (w : ((A, C)) -> Bool))})}
+  {(x : (A, B)) | IN(x, CROSS(topspace((top : Topology[A])), topspace((top1 : Topology[B])))) && IN(fn { (x, y) => (x, (f : (B) -> C)(y)) }(x), (w : ((A, C)) -> Bool))}
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 (\226\136\128 a : B, SUBSET(CROSS(s, {a}), CROSS(t, {a})))
   (y0 : B)
   (u' : (A) -> Bool)
   (u : (A) -> Bool)
   prod_topology((top : Topology[A]), (top1 : Topology[B]))
   (x0 : A)
-  {x | x IN topspace top /\\\n           (x,y0) IN {x | x IN topspace top CROSS topspace top1 /\\\n                         (\\(x:A,y). x,(f:B->C) y) x IN w}}
+  {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((x, (y0 : B)), {(x : (A, B)) | IN(x, CROSS(topspace(top), topspace((top1 : Topology[B])))) && IN(fn { (x, y) => (x, (f : (B) -> C)(y)) }(x), (w : ((A, C)) -> Bool))})}
   (top : Topology[A])
   \226\136\131 y0 : B, IN(y0, topspace((top1 : Topology[B]))) && (f : (B) -> C)(y0) == (z0 : C)
   ((x0 : A), (z0 : C))
   (z0 : C)
   (x0 : A)
   (w : ((A, C)) -> Bool)
-  forall(top:A topology) top1 top2 (f:B->C).\n     locally_compact_space top /\\ (hausdorff_space top \\/ regular_space top) /\\\n     quotient_map(top1,top2) f\n     ==> quotient_map (prod_topology top top1,prod_topology top top2)\n                      (\\(x,y). x,f y)
+  \226\136\128 top : Topology[A], \226\136\128 top1 : Topology[B], \226\136\128 top2 : Topology[C], \226\136\128 f : (B) -> C, locally_compact_space(top) && (hausdorff_space(top) || regular_space(top)) && quotient_map((top1, top2), f) \226\134\146 quotient_map((prod_topology(top, top1), prod_topology(top, top2)), fn { (x, y) => (x, f(y)) })
   prod_topology((top : Topology[C]), (top1 : Topology[A]))
   prod_topology((top : Topology[C]), (top2 : Topology[B]))
-  (\\(x,y). (f:A->B) x,(y:C)) =\n    (\\(x,y). (y,x)) o (\\(x,y). x,f y) o (\\(x,y). (y,x))
-  forall top1 top2 (top:C topology) (f:A->B).\n     locally_compact_space top /\\ (hausdorff_space top \\/ regular_space top) /\\\n     quotient_map(top1,top2) f\n     ==> quotient_map (prod_topology top1 top,prod_topology top2 top)\n                      (\\(x,y). f x,y)
+  fn { ((x : A), (y : C)) => ((f : (A) -> B)(x), y) } == (o : (((C, B)) -> (B, C), ((A, C)) -> (C, B), (A, C)) -> (B, C))(fn { ((x : C), (y : B)) => (y, x) }, (o : (((C, A)) -> (C, B), ((A, C)) -> (C, A), (A, C)) -> (C, B))(fn { ((x : C), (y : A)) => (x, f(y)) }, fn { ((x : A), (y : C)) => (y, x) }))
+  \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[B], \226\136\128 top : Topology[C], \226\136\128 f : (A) -> B, locally_compact_space(top) && (hausdorff_space(top) || regular_space(top)) && quotient_map((top1, top2), f) \226\134\146 quotient_map((prod_topology(top1, top), prod_topology(top2, top)), fn { (x, y) => (f(x), y) })
   prod_topology((top1' : Topology[B]), (top2 : Topology[C]))
-  (\\(x,y). (f:A->B) x,(g:C->D) y) =\n      (\\(x,y). x,g y) o (\\(x,y). f x,y)
+  fn { (x, y) => ((f : (A) -> B)(x), (g : (C) -> D)(y)) } == o(fn { (x, y) => (x, g(y)) }, fn { (x, y) => (f(x), y) })
   prod_topology((top1 : Topology[A]), (top2' : Topology[D]))
-  (\\(x,y). (f:A->B) x,(g:C->D) y) =\n      (\\(x,y). f x,y) o (\\(x,y). x,g y)
-  forall top1 top2 top1' top2' (f:A->B) (g:C->D).\n        (locally_compact_space top1 /\\\n         (hausdorff_space top1 \\/ regular_space top1) /\\\n         locally_compact_space top2' /\\\n         (hausdorff_space top2' \\/ regular_space top2') \\/\n         locally_compact_space top1' /\\\n         (hausdorff_space top1' \\/ regular_space top1') /\\\n         locally_compact_space top2 /\\\n         (hausdorff_space top2 \\/ regular_space top2)) /\\\n        quotient_map(top1,top1') f /\\ quotient_map(top2,top2') g\n        ==> quotient_map (prod_topology top1 top2,prod_topology top1' top2')\n                         (\\(x,y). f x,g y)
+  fn { (x, y) => ((f : (A) -> B)(x), (g : (C) -> D)(y)) } == o(fn { (x, y) => (f(x), y) }, fn { (x, y) => (x, g(y)) })
+  \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[C], \226\136\128 top1' : Topology[B], \226\136\128 top2' : Topology[D], \226\136\128 f : (A) -> B, \226\136\128 g : (C) -> D, (locally_compact_space(top1) && (hausdorff_space(top1) || regular_space(top1)) && locally_compact_space(top2') && (hausdorff_space(top2') || regular_space(top2')) || locally_compact_space(top1') && (hausdorff_space(top1') || regular_space(top1')) && locally_compact_space(top2) && (hausdorff_space(top2) || regular_space(top2))) && quotient_map((top1, top1'), f) && quotient_map((top2, top2'), g) \226\134\146 quotient_map((prod_topology(top1, top2), prod_topology(top1', top2')), fn { (x, y) => (f(x), g(y)) })
   {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (k : (B) -> Bool))}
   {(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), (u : (B) -> Bool))}
   (k : (B) -> Bool)
@@ -27251,7 +27251,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], locally_compact_space(top) && (hausdorff_space(top) || regular_space(top)) \226\134\146 completely_regular_space(top)
   \226\136\128 top : Topology[A], locally_compact_space(top) \226\134\146 completely_regular_space(top) == regular_space(top)
   (real_of_num(1) - (real_of_num(1) - (x : Real)) * (real_of_num(1) - (y : Real)) == real_of_num(1)) == (x == real_of_num(1) || y == real_of_num(1))
-  \\(x,y). &1 - (&1 - (f:A->real) x) * (&1 - (g:B->real) y)
+  fn { (x, y) => real_of_num(1) - (real_of_num(1) - (f : (A) -> Real)(x)) * (real_of_num(1) - (g : (B) -> Real)(y)) }
   (g : (B) -> Real)
   (f : (A) -> Real)
   (x : A)
@@ -28263,7 +28263,7 @@ Multivariate/metric quotations (14748):
   (t : Real)
   (top : Topology[A])
   (o : ((A) -> B, ((Real, A)) -> A, (Real, A)) -> B)((f : (A) -> B), (SND : ((Real, A)) -> A))
-  (\\(t,x). if t = &1 then g x else f x):real#A->B
+  fn { (t, x) => if t == real_of_num(1) { (g : (A) -> B)(x) } else { (f : (A) -> B)(x) } }
   \226\136\128 P : ((A) -> B) -> Bool, \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, P(f) && P(g) && continuous_map((top, top'), f) && (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 f(x) == g(x)) \226\134\146 homotopic_with(P, (top, top'), f, g)
   \226\136\128 P : ((A) -> B) -> Bool, \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, homotopic_with(P, (top, top'), f, f) == (continuous_map((top, top'), f) && P(f))
   prod_topology(subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))])), (X : Topology[A]))
@@ -28289,7 +28289,7 @@ Multivariate/metric quotations (14748):
   \226\136\128 P : ((A) -> B) -> Bool, \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 s : (A) -> Bool, \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, homotopic_with(P, (top, top'), f, g) \226\134\146 homotopic_with(P, (subtopology(top, s), top'), f, g)
   (t : Real) == real_of_num(0)
   (t : Real)
-  (\\(t,x). if t = &0 then f x else g x):real#A->B
+  fn { (t, x) => if t == real_of_num(0) { (f : (A) -> B)(x) } else { (g : (A) -> B)(x) } }
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, topspace(top) == {} \226\134\146 homotopic_with((P : ((A) -> B) -> Bool), (top, top'), f, g) == (P(f) && P(g))
   (o : ((Real) -> B, ((Real, A)) -> Real, (Real, A)) -> B)((g : (Real) -> B), (FST : ((Real, A)) -> Real))
   (g : (Real) -> B)
@@ -31605,7 +31605,7 @@ Multivariate/metric quotations (14748):
   pow(-(x : Real), 2) == pow(x, 2)
   IN((a : (Num) -> Real), topspace(nsphere((p : Num))))
   (real_of_num(1) - real_of_num(1)) * (x : Real) - real_of_num(1) * (a : Real) == -a && (real_of_num(1) - real_of_num(0)) * x - real_of_num(0) * a == x
-  (\\x i. x i / sqrt(sum(1..p+1) (\\j. x j pow 2))) o\n    (\\(t,x) i. (&1 - t) * f(x:num->real) i - t * a i)
+  o((x : (Num) -> Real) => (i : Num) => x(i) / sqrt(sum(op_dot_dot(1, (p : Num) + 1), (j : Num) => pow(x(j), 2))), fn { (t, x) => (i : Num) => (real_of_num(1) - t) * (f : ((Num) -> Real, Num) -> Real)(x, i) - t * (a : (Num) -> Real)(i) })
   (i : Num) => -(a : (Num) -> Real)(i)
   (a : (Num) -> Real)
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 !(s == t) == (\226\136\131 a : _, IN(a, t) && !IN(a, s))
@@ -31657,7 +31657,7 @@ Multivariate/metric quotations (14748):
   real_of_num(0) < (k : Real)
   \226\136\128 x : A, IN(x, mspace((m : Metric[A]))) \226\134\146 (f : (A) -> A)(x) == f((a : A))
   \226\136\128 m : Metric[A], \226\136\128 f : (A) -> A, \226\136\128 k : Real, !(mspace(m) == {}) && mcomplete(m) && (\226\136\128 x : A, IN(x, mspace(m)) \226\134\146 IN(f(x), mspace(m))) && k < real_of_num(1) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, mspace(m)) && IN(y, mspace(m)) \226\134\146 mdist(m, (f(x), f(y))) <= k * mdist(m, (x, y))) \226\134\146 existsunique((x : A) => IN(x, mspace(m)) && f(x) == x)
-  funspace s m =\n   metric ({f:A->B | (forall x. x IN s ==> f x IN mspace m) /\\\n                     f IN EXTENSIONAL s /\\\n                     mbounded m (IMAGE f s)},\n           (\\(f,g). if s = {} then &0 else\n                    sup {mdist m (f x,g x) | x | x IN s}))
+  (funspace : ((A) -> Bool, Metric[B]) -> Metric[(A) -> B])((s : (A) -> Bool), (m : Metric[B])) == metric(({(f : (A) -> B) | (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), mspace(m))) && IN(f, EXTENSIONAL(s)) && mbounded(m, IMAGE(f, s))}, fn { (f, g) => if s == {} { real_of_num(0) } else { sup({mdist(m, (f((x : A)), g(x))) | IN(x, s)}) } }))
   mdist((m : Metric[B]), ((g : (A) -> B)((x : A)), (h : (A) -> B)(x)))
   (B : Real)
   \226\136\131 b : Real, \226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 mdist((m : Metric[B]), ((g : (A) -> B)(x), (h : (A) -> B)(x))) <= b
@@ -31680,7 +31680,7 @@ Multivariate/metric quotations (14748):
   (\226\136\128 f : (A) -> B, \226\136\128 x : A, IN(f, (fspace : ((A) -> B) -> Bool)) && IN(x, (s : (A) -> Bool)) \226\134\146 IN(f(x), mspace((m : Metric[B])))) && (\226\136\128 f : (A) -> B, IN(f, fspace) \226\134\146 IN(f, EXTENSIONAL(s))) && (\226\136\128 f : (A) -> B, IN(f, fspace) \226\134\146 (\226\136\131 c : B, \226\136\131 b : Real, IN(c, mspace(m)) && (\226\136\128 x : A, IN(x, s) \226\134\146 mdist(m, (c, f(x))) <= b)))
   (s : (A) -> Bool) == {}
   mspace(funspace((s : (A) -> Bool), (m : Metric[B]))) == (fspace : ((A) -> B) -> Bool) && mdist(funspace(s, m)) == (fdist : (((A) -> B, (A) -> B)) -> Real)
-  fdist =\n        \\(f,g). if s = {} then &0 else\n                sup {mdist m (f x:B,g x) | x | x:A IN s}
+  (fdist : (((A) -> B, (A) -> B)) -> Real) == fn { (f, g) => if (s : (A) -> Bool) == {} { real_of_num(0) } else { sup({mdist((m : Metric[B]), (f((x : A)), g(x))) | IN(x, s)}) } }
   (fspace : ((A) -> B) -> Bool) == {(f : (A) -> B) | (\226\136\128 x : A, IN(x, (s : (A) -> Bool)) \226\134\146 IN(f(x), mspace((m : Metric[B])))) && IN(f, EXTENSIONAL(s)) && mbounded(m, IMAGE(f, s))}
   \226\136\128 s : (A) -> Bool, \226\136\128 m : Metric[B], mspace(funspace(s, m)) == {(f : (A) -> B) | (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), mspace(m))) && IN(f, EXTENSIONAL(s)) && mbounded(m, IMAGE(f, s))} && (\226\136\128 f : (A) -> B, \226\136\128 g : (A) -> B, mdist(funspace(s, m), (f, g)) == (if s == {} { real_of_num(0) } else { sup({mdist(m, (f((x : A)), g(x))) | IN(x, s)}) }))
   \226\136\128 s : (A) -> Bool, \226\136\128 m : Metric[B], \226\136\128 f : (A) -> B, \226\136\128 x : A, IN(f, mspace(funspace(s, m))) && IN(x, s) \226\134\146 IN(f(x), mspace(m))

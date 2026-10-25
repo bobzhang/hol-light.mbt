@@ -1780,7 +1780,7 @@ pub fn paired_eta_thm() -> @kernel.Thm {
 /// FORALL_UNCURRY
 fn step_44() -> Unit raise {
   let t161 = @simp.simp_tac(@list.List([@class.eta_ax()]))
-  let t157 = @parser.parse_term("\\(a,b). (f:A->B->C) a b")
+  let t157 = @term_syntax.parse_term("fn { (a, b) => (f : (A, B) -> C)(a, b) }")
   let t160 = @tactics.first_assum(fn(
     x159 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
