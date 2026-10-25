@@ -85217,7 +85217,7 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
       #|  IMAGE(lift, (s : (Real) -> Bool))
       #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
-      #|  forall f s. (forall k. (f k) real_integrable_on s) /\\\n         (forall k x. x IN s ==> f k x <= f (SUC k) x) /\\\n         real_bounded {real_integral s (f k) | k IN (:num)}\n         ==> ?g k. real_negligible k /\\\n                   forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(k, x) <= f(SUC(k), x)) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\131 k : (Real) -> Bool, real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)))
       #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
       #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
       #|  (k : (Cart[Real, Unit]) -> Bool)
@@ -85227,7 +85227,7 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
       #|  IMAGE(lift, (s : (Real) -> Bool))
       #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
-      #|  forall f s. (forall k. (f k) real_integrable_on s) /\\\n         (forall k x. x IN s ==> f (SUC k) x <= f k x) /\\\n         real_bounded {real_integral s (f k) | k IN (:num)}\n         ==> ?g k. real_negligible k /\\\n                   forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(SUC(k), x) <= f(k, x)) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\131 k : (Real) -> Bool, real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)))
       #|  real_integral((s : (Real) -> Bool), o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))) == drop(integral(IMAGE(lift, s), o(lift, o(o(drop, o(g, lift)), drop))))
       #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
       #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
@@ -85238,7 +85238,7 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
       #|  IMAGE(lift, (s : (Real) -> Bool))
       #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
-      #|  forall f s.\n     (forall k. (f k) real_integrable_on s) /\\\n     (forall k x. x IN s ==> f k x <= f (SUC k) x) /\\\n     real_bounded {real_integral s (f k) | k IN (:num)}\n     ==> ?g k. real_negligible k /\\\n               (forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially) /\\\n               g real_integrable_on s /\\\n               ((\\k. real_integral s (f k)) ---> real_integral s g)\n               sequentially
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(k, x) <= f(SUC(k), x)) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\131 k : (Real) -> Bool, real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)) && real_integrable_on(g, s) && op_minus_minus_minus_gt((k : Num) => real_integral(s, f(k)), real_integral(s, g), sequentially))
       #|  real_integral((s : (Real) -> Bool), o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))) == drop(integral(IMAGE(lift, s), o(lift, o(o(drop, o(g, lift)), drop))))
       #|  IMAGE(drop, (k : (Cart[Real, Unit]) -> Bool))
       #|  o(drop, o((g : (Cart[Real, Unit]) -> Cart[Real, Unit]), lift))
@@ -85249,7 +85249,7 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  \226\136\128 k : Num, real_integral((s : (Real) -> Bool), (f : (Num, Real) -> Real)(k)) == drop(integral(IMAGE(lift, s), o(lift, o(f(k), drop))))
       #|  IMAGE(lift, (s : (Real) -> Bool))
       #|  (n : Num) => (x : Cart[Real, Unit]) => lift((f : (Num, Real) -> Real)(n, drop(x)))
-      #|  forall f s.\n     (forall k. (f k) real_integrable_on s) /\\\n     (forall k x. x IN s ==> f (SUC k) x <= f k x) /\\\n     real_bounded {real_integral s (f k) | k IN (:num)}\n     ==> ?g k. real_negligible k /\\\n               (forall x. x IN (s DIFF k) ==> ((\\k. f k x) ---> g x) sequentially) /\\\n               g real_integrable_on s /\\\n               ((\\k. real_integral s (f k)) ---> real_integral s g)\n               sequentially
+      #|  \226\136\128 f : (Num, Real) -> Real, \226\136\128 s : (Real) -> Bool, (\226\136\128 k : Num, real_integrable_on(f(k), s)) && (\226\136\128 k : Num, \226\136\128 x : Real, IN(x, s) \226\134\146 f(SUC(k), x) <= f(k, x)) && real_bounded({real_integral(s, f((k : Num))) | IN(k, UNIV)}) \226\134\146 (\226\136\131 g : (Real) -> Real, \226\136\131 k : (Real) -> Bool, real_negligible(k) && (\226\136\128 x : Real, IN(x, DIFF(s, k)) \226\134\146 op_minus_minus_minus_gt((k : Num) => f(k, x), g(x), sequentially)) && real_integrable_on(g, s) && op_minus_minus_minus_gt((k : Num) => real_integral(s, f(k)), real_integral(s, g), sequentially))
       #|  \226\136\128 f : (Real) -> Real, \226\136\128 g : (Real) -> Real, \226\136\128 s : (Real) -> Bool, real_integrable_on(f, s) && real_integrable_on(g, s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 abs(f(x)) <= g(x)) \226\134\146 abs(real_integral(s, f)) <= real_integral(s, g)
       #|  \226\136\128 f : (Real) -> Real, \226\136\128 s : (Real) -> Bool, absolutely_real_integrable_on(f, s) \226\134\146 abs(real_integral(s, f)) <= real_integral(s, (x : Real) => abs(f(x)))
       #|  \226\136\128 f : (Real) -> Real, absolutely_real_integrable_on(f, {})

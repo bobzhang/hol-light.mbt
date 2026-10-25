@@ -1322,7 +1322,7 @@ pub fn gbackchain_minimal() -> @kernel.Thm {
 ///|
 /// iminmodel
 fn step_26() -> Unit raise {
-  iminmodel_c.set(@pair.new_definition(@parser.parse_term("iminmodel s =\n     terms(functions s),\n     Fn,\n     (\\p zs. forall C. (Dom(C) = terms(functions s)) /\\\n                 (Fun(C) = Fn) /\\\n                 (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n                 ==> Pred(C) p zs)")))
+  iminmodel_c.set(@pair.new_definition(@term_syntax.parse_term("(iminmodel : ((Form) -> Bool) -> ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))((s : (Form) -> Bool)) == (terms(functions(s)), Fn, (p : Num) => (zs : List[Term]) => ∀ C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(C) == terms(functions(s)) && Fun(C) == Fn && (∀ v : (Num) -> Term, ∀ p : Form, IN(p, s) && valuation(C, v) → holds(C, v, p)) → Pred(C, p, zs))")))
 }
 
 ///|
@@ -1349,7 +1349,7 @@ fn step_27() -> Unit raise {
   let t774 = @simp.gen_rewrite_tac(fn(x773 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x773
   }, @list.List([@class.fun_eq_thm()]))
-  let t772 = @tactics.subgoal_then(@parser.parse_term("termval\n    (terms (functions s),\n     Fn,\n     (\\p zs.\n          forall C. (Dom C = terms (functions s)) /\\ (Fun C = Fn) /\\\n              (forall v p. p IN s /\\ valuation C v ==> holds C v p)\n              ==> Pred C p zs)) =\n    termval C"), fn(x770 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t772 = @tactics.subgoal_then(@term_syntax.parse_term("termval((terms(functions((s : (Form) -> Bool))), Fn, (p : Num) => (zs : List[Term]) => ∀ C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), Dom(C) == terms(functions(s)) && Fun(C) == Fn && (∀ v : (Num) -> Term, ∀ p : Form, IN(p, s) && valuation(C, v) → holds(C, v, p)) → Pred(C, p, zs))) == termval((C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)))"), fn(x770 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x770
     @simp.rewrite_tac(@list.List([th]))
   })

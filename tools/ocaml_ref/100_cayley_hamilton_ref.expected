@@ -73833,7 +73833,7 @@ Warning: inventing type variables
   (k : Num)
   op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == INSERT((i : Num), DELETE(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), i))
   (p : (Num) -> Num)
-  forall A:real^N^N x i j.\n        1 <= i /\\ i <= dimindex(:N) /\\\n        1 <= j /\\ j <= dimindex(:N)\n        ==> ?c. forall x. cofactor(A - x %% mat 1)$i$j =\n                    sum(0..dimindex(:N)-1) (\\i. c(i) * x pow i)
+  \226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 x : _, \226\136\128 i : Num, \226\136\128 j : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) && 1 <= j && j <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 (\226\136\131 c : (Num) -> Real, \226\136\128 x : Real, (op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], N], Num) -> Cart[Real, N])((cofactor : (Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(A - (op_pct_pct : (Real, Cart[Cart[Real, N], N]) -> Cart[Cart[Real, N], N])(x, (mat : (Num) -> Cart[Cart[Real, N], N])(1))), i), j) == (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(0, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) - 1), (i : Num) => c(i) * pow(x, i)))
   (a : Real) - (x : Real) * (d : Real) == a + -d * x
   IN((p : (Num) -> Num)((k : Num)), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
   (k : Num)
