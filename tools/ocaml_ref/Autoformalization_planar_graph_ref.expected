@@ -97287,7 +97287,7 @@ Autoformalization/planar_graph quotations (37458):
   o(GABS((f : ((A, A, A)) -> A) => \226\136\128 a : A, \226\136\128 b : A, \226\136\128 c : A, GEQ(f((a, b, c)), a)), (ABC : (Num) -> (A, A, A)))
   (ABC : (Num) -> (A, A, A))
   ((a : A), (b : A), (c : A))
-  \\(a,b,c) (a',b',c'). (Q:A->A->A->A->A->A->bool) a b c a' b' c'
+  GABS((f : ((A, A, A), (A, A, A)) -> Bool) => \226\136\128 a : A, \226\136\128 b : A, \226\136\128 c : A, GEQ(f((a, b, c)), GABS((f : ((A, A, A)) -> Bool) => \226\136\128 a' : A, \226\136\128 b' : A, \226\136\128 c' : A, GEQ(f((a', b', c')), (Q : (A, A, A, A, A, A) -> Bool)(a, b, c, a', b', c')))))
   GABS((f : ((A, A, A), Num) -> Bool) => \226\136\128 a : A, \226\136\128 b : A, \226\136\128 c : A, GEQ(f((a, b, c)), (P : (A, A, A, Num) -> Bool)(a, b, c)))
   \226\136\128 P : (A, A, A, Num) -> Bool, \226\136\128 Q : (A, A, A, A, A, A) -> Bool, \226\136\128 a : A, \226\136\128 b : A, \226\136\128 c : A, P(a, b, c, 0) && (\226\136\128 a : A, \226\136\128 b : A, \226\136\128 c : A, \226\136\128 n : Num, P(a, b, c, n) \226\134\146 (\226\136\131 a' : A, \226\136\131 b' : A, \226\136\131 c' : A, P(a', b', c', SUC(n)) && Q(a', b', c', a, b, c))) \226\134\146 (\226\136\131 A : (Num) -> A, \226\136\131 B : (Num) -> A, \226\136\131 C : (Num) -> A, A(0) == a && B(0) == b && C(0) == c && (\226\136\128 n : Num, P(A(n), B(n), C(n), n) && Q(A(SUC(n)), B(SUC(n)), C(SUC(n)), A(n), B(n), C(n))))
   (x : Real) <= (a : Real) && (y : Real) <= a && (z : Real) <= a \226\134\146 x + (y + z) <= real_of_num(3) * a
@@ -97735,7 +97735,7 @@ Autoformalization/planar_graph quotations (37458):
   (e : Real)
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   DELETE(UNIV, (z : Cart[Real, Tybit0[Unit]]))
-  forall g z e n.\n        path g /\\ ~(z IN path_image g) /\\ pathfinish g = pathstart g /\\\n        (forall e. &0 < e\n             ==> ?p. valid_path p /\\ ~(z IN path_image p) /\\\n                     pathfinish p = pathstart p /\\\n                     (forall t. t IN interval[vec 0,vec 1]\n                          ==> norm(g t - p t) < e) /\\\n                     path_integral p (\\w. Cx(&1) / (w - z)) =\n                     Cx(&2) * Cx(pi) * ii * n)\n        ==> winding_number(g,z) = n
+  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 e : _, \226\136\128 n : Cart[Real, Tybit0[Unit]], path(g) && !IN(z, path_image(g)) && pathfinish(g) == pathstart(g) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 p : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], valid_path(p) && !IN(z, path_image(p)) && pathfinish(p) == pathstart(p) && (\226\136\128 t : Cart[Real, Unit], IN(t, interval([(vec(0), vec(1))])) \226\134\146 norm(g(t) - p(t)) < e) && path_integral(p, (w : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / (w - z)) == Cx(real_of_num(2)) * (Cx(pi) * (ii * n)))) \226\134\146 winding_number((g, z)) == n
   (g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (e : Real)
   \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], valid_path(g) && !IN(z, path_image(g)) \226\134\146 winding_number((g, z)) == Cx(real_of_num(1)) / (Cx(real_of_num(2)) * (Cx(pi) * ii)) * path_integral(g, (w : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) / (w - z))
@@ -100625,7 +100625,7 @@ Autoformalization/planar_graph quotations (37458):
   (d : Real)
   (a : Cart[Real, Tybit0[Unit]])
   (a : Cart[Real, Tybit0[Unit]])
-  (forall x. P x) \\/ (forall x. Q x) <=> forall x. ~P x ==> forall x. Q x
+  ((\226\136\128 x : _, (P : (_) -> Bool)(x)) || (\226\136\128 x : _, (Q : (_) -> Bool)(x))) == (\226\136\128 x : _, !P(x) \226\134\146 (\226\136\128 x : _, Q(x)))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, open(s) && connected(s) && continuous_on(f, s) && holomorphic_on(g, s) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 f(z) * g(z) == Cx(real_of_num(0))) \226\134\146 (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 f(z) == Cx(real_of_num(0))) || (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 g(z) == Cx(real_of_num(0)))
   :real
   :real
@@ -102548,7 +102548,7 @@ Autoformalization/planar_graph quotations (37458):
   (n : Num)
   real_of_num(1)
   {(h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]) | holomorphic_on(h, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && (\226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, s) \226\134\146 !(h(z) == Cx(real_of_num(0))) && !(h(z) == Cx(real_of_num(1))))}
-  ?B n. &0 < B /\\\n              open n /\\\n              v IN n /\\\n              n SUBSET s /\\\n              forall h z. h IN {(g:num->complex->complex) n | n IN (:num)} /\\ z IN n\n                     ==> norm(h z) <= B
+  \226\136\131 B : Real, \226\136\131 n : (Cart[Real, Tybit0[Unit]]) -> Bool, real_of_num(0) < B && open(n) && IN((v : Cart[Real, Tybit0[Unit]]), n) && SUBSET(n, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) && (\226\136\128 h : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(h, {(g : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((n : Num)) | IN(n, UNIV)}) && IN(z, n) \226\134\146 norm(h(z)) <= B)
   (n : Num)
   \226\136\128 n : Num, \226\136\128 z : Cart[Real, Tybit0[Unit]], IN(z, (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) \226\134\146 !((g : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(n, z) == Cx(real_of_num(0))) && !(g(n, z) == Cx(real_of_num(1)))
   \226\136\128 n : Num, holomorphic_on((g : (Num, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(n), (s : (Cart[Real, Tybit0[Unit]]) -> Bool))
