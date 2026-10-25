@@ -338,7 +338,7 @@ pub fn twopow_eps() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let t119 = @simp.asm_rewrite_tac(@list.List([]))
   let t120 = @tactics.then_tac(@tactics.conv_tac(@equal.depth_conv(@pair.gen_beta_conv)), t119)
-  let t121 = @tactics.exists_tac(@parser.parse_term("\\(n,m) f. (sm:num->num->(num->real)->real) n m f"))
+  let t121 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Num, Num), (Num) -> Real) -> Real) => ∀ n : Num, ∀ m : Num, GEQ(f((n, m)), (f : (Num) -> Real) => (sm : (Num, Num, (Num) -> Real) -> Real)(n, m, f)))"))
   let t117 = @term_syntax.parse_term("(∀ f : (Num) -> Real, ∀ n : Num, (sm : (Num, Num, (Num) -> Real) -> Real)(n, 0, f) == real_of_num(1)) && (∀ f : (Num) -> Real, ∀ m : Num, ∀ n : Num, sm(n, SUC(m), f) == sm(n, m, f) * f(n + m))")
   let t118 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t122 = @list.List([@tactics.choose_tac(t118(t117)), t121, t120])
@@ -2934,7 +2934,7 @@ pub fn d_euclid() -> @kernel.Thm {
 fn step_131() -> Unit raise {
   let t1068 = @simp.asm_rewrite_tac(@list.List([]))
   let t1069 = @tactics.conv_tac(@equal.depth_conv(@pair.gen_beta_conv))
-  let t1070 = @tactics.exists_tac(@parser.parse_term("\\(n,m) f. (sm:num->num->(num->(num->real))->(num->real)) n m f"))
+  let t1070 = @tactics.exists_tac(@term_syntax.parse_term("GABS((f : ((Num, Num), (Num, Num) -> Real, Num) -> Real) => ∀ n : Num, ∀ m : Num, GEQ(f((n, m)), (f : (Num, Num) -> Real) => (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, m, f)))"))
   let t1066 = @term_syntax.parse_term("(∀ f : (Num, Num) -> Real, ∀ n : Num, (sm : (Num, Num, (Num, Num) -> Real, Num) -> Real)(n, 0, f) == ((n : Num) => real_of_num(0))) && (∀ f : (Num, Num) -> Real, ∀ m : Num, ∀ n : Num, sm(n, SUC(m), f) == sm(n, m, f) + f(n + m))")
   let t1067 = @recursion.prove_recursive_functions_exist(@nums.num_recursion())
   let t1071 = @list.List([@tactics.choose_tac(t1067(t1066)), t1070, t1069, t1068])
