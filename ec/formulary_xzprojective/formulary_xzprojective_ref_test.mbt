@@ -80901,7 +80901,7 @@ test "EC/formulary_xzprojective matches EC/formulary_xzprojective.ml" {
       #|  (b : A)
       #|  (a : A)
       #|  (f : Ring[A])
-      #|  forall f (a:A) b x y p X1 Z1 X2 Z2.\n        field f /\\ ~(ring_char f = 2) /\\\n        a IN ring_carrier f /\\ b IN ring_carrier f /\\ ~(b = ring_0 f) /\\\n        montgomery_curve (f,a,b) (SOME(x,y)) /\\ ~(y = ring_0 f) /\\\n        montgomery_curve (f,a,b) p /\\\n        montgomery_xz f p (X1,Z1) /\\\n        montgomery_xz f (montgomery_add(f,a,b) (SOME(x,y)) p) (X2,Z2)\n        ==> let x',y',z' = okeya_sakurai_1 (f,a,b) (x,y) (X1,Z1) (X2,Z2) in\n            p = if z' = ring_0 f then\n                 (if Z1 = ring_0 f then NONE else SOME(x,ring_neg f y))\n                else SOME(ring_div f x' z',ring_div f y' z')
+      #|  \226\136\128 f : Ring[A], \226\136\128 a : A, \226\136\128 b : A, \226\136\128 x : A, \226\136\128 y : A, \226\136\128 p : Option[(A, A)], \226\136\128 X1 : A, \226\136\128 Z1 : A, \226\136\128 X2 : A, \226\136\128 Z2 : A, field(f) && !(ring_char(f) == 2) && IN(a, ring_carrier(f)) && IN(b, ring_carrier(f)) && !(b == ring_0(f)) && montgomery_curve((f, a, b), SOME((x, y))) && !(y == ring_0(f)) && montgomery_curve((f, a, b), p) && montgomery_xz(f, p, (X1, Z1)) && montgomery_xz(f, montgomery_add((f, a, b), SOME((x, y)), p), (X2, Z2)) \226\134\146 LET(fn { (x', y', z') => LET_END(p == (if z' == ring_0(f) { if Z1 == ring_0(f) { NONE } else { SOME((x, ring_neg(f, y))) } } else { SOME((ring_div(f, x', z'), ring_div(f, y', z'))) })) }, okeya_sakurai_1((f, a, b), (x, y), (X1, Z1), (X2, Z2)))
       #|  :A
       #|  IN((x : A), ring_carrier((f : Ring[A])))
       #|  (x : A)
