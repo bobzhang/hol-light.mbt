@@ -9159,7 +9159,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  (main : List[(Form) -> Bool])
       #|  (A : (Form) -> Bool)
       #|  CONS((D : (Form) -> Bool), (middle : List[(Form) -> Bool])) == CONS((A : (Form) -> Bool), (main : List[(Form) -> Bool]))
-      #|  CONS (A:form->bool) main = CONS E final_
+      #|  CONS((A : (Form) -> Bool), (main : List[(Form) -> Bool])) == CONS((E : (Form) -> Bool), (final_ : List[(Form) -> Bool]))
       #|  IN(op_tilde_tilde((p : Form)), (B : (Form) -> Bool))
       #|  IN(op_tilde_tilde((p : Form)), resolve((q : Form), (B : (Form) -> Bool), (C : (Form) -> Bool)))
       #|  IN((p : Form), (A : (Form) -> Bool))
@@ -9171,10 +9171,10 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  IN(op_tilde_tilde((p : Form)), (E : (Form) -> Bool))
       #|  op_tilde_tilde(op_tilde_tilde((p : Form))) == p && op_tilde_tilde(op_tilde_tilde((q : Form))) == q
       #|  op_tilde_tilde(op_tilde_tilde((p : Form))) == p
-      #|  suffix (CONS (A:form->bool) main) (CONS E final_)
-      #|  CONS (E:form->bool) final_
+      #|  suffix(CONS((A : (Form) -> Bool), (main : List[(Form) -> Bool])), CONS((E : (Form) -> Bool), (final_ : List[(Form) -> Bool])))
+      #|  CONS((E : (Form) -> Bool), (final_ : List[(Form) -> Bool]))
       #|  resolve(op_tilde_tilde((p : Form)), (E : (Form) -> Bool), (A : (Form) -> Bool))
-      #|  CONS (A:form->bool) main = CONS E final_
+      #|  CONS((A : (Form) -> Bool), (main : List[(Form) -> Bool])) == CONS((E : (Form) -> Bool), (final_ : List[(Form) -> Bool]))
       #|  IN(op_tilde_tilde((p : Form)), (B : (Form) -> Bool))
       #|  IN(op_tilde_tilde((p : Form)), resolve((q : Form), (B : (Form) -> Bool), (C : (Form) -> Bool)))
       #|  IN(op_tilde_tilde((q : Form)), (C : (Form) -> Bool))
@@ -9183,16 +9183,16 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  !((p : Form) == op_tilde_tilde((q : Form)))
       #|  !IN(op_tilde_tilde((p : Form)), (E : (Form) -> Bool))
       #|  SUBSET((E : (Form) -> Bool), resolve((q : Form), resolve((p : Form), (A : (Form) -> Bool), (B : (Form) -> Bool)), (C : (Form) -> Bool)))
-      #|  final_:(form->bool)list
+      #|  (final_ : List[(Form) -> Bool])
       #|  (E : (Form) -> Bool)
       #|  IN(op_tilde_tilde((p : Form)), (E : (Form) -> Bool))
-      #|  final_:(form->bool)list
+      #|  (final_ : List[(Form) -> Bool])
       #|  (E : (Form) -> Bool)
       #|  !IN((q : Form), (D : (Form) -> Bool))
       #|  SUBSET((D : (Form) -> Bool), resolve((p : Form), (A : (Form) -> Bool), (B : (Form) -> Bool)))
       #|  (middle : List[(Form) -> Bool])
       #|  (D : (Form) -> Bool)
-      #|  final_:(form->bool)list
+      #|  (final_ : List[(Form) -> Bool])
       #|  (E : (Form) -> Bool)
       #|  UNION((basm : ((Form) -> Bool) -> Bool), (aasm : ((Form) -> Bool) -> Bool))
       #|  (q : Form)
@@ -9212,7 +9212,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  IN((q : Form), (C : (Form) -> Bool))
       #|  SUBSET((B : (Form) -> Bool), resolve((q : Form), B, (C : (Form) -> Bool)))
       #|  UNION((basm : ((Form) -> Bool) -> Bool), (aasm : ((Form) -> Bool) -> Bool))
-      #|  final_:(form->bool)list
+      #|  (final_ : List[(Form) -> Bool])
       #|  (D : (Form) -> Bool)
       #|  literal((q : Form))
       #|  (aasm : ((Form) -> Bool) -> Bool)
@@ -9225,7 +9225,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  IN(op_tilde_tilde((q : Form)), (B : (Form) -> Bool))
       #|  SUBSET((C : (Form) -> Bool), resolve((q : Form), (B : (Form) -> Bool), C))
       #|  UNION((casm : ((Form) -> Bool) -> Bool), (aasm : ((Form) -> Bool) -> Bool))
-      #|  final_:(form->bool)list
+      #|  (final_ : List[(Form) -> Bool])
       #|  (D : (Form) -> Bool)
       #|  (aasm : ((Form) -> Bool) -> Bool)
       #|  (q : Form)
@@ -9262,7 +9262,7 @@ test "Logic/linear matches Logic/linear.ml" {
       #|  SUBSET((B1 : (Form) -> Bool), (B : (Form) -> Bool))
       #|  (main : List[(Form) -> Bool])
       #|  (B1 : (Form) -> Bool)
-      #|  final_:(form->bool)list
+      #|  (final_ : List[(Form) -> Bool])
       #|  (D : (Form) -> Bool)
       #|  (basm : ((Form) -> Bool) -> Bool)
       #|  (q : Form)
