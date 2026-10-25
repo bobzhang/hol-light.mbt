@@ -8900,7 +8900,7 @@ fn step_123() -> Unit raise {
   })
   let t5958 = @simp.rewrite_tac(@list.List([@lists.replicate(), @lists.length(), @lists.all2()]))
   let t5959 = @list.List([@simp.rewrite_tac(@list.List([@realax.real_gt()])), @tactics.strip_tac, @lists.list_induct_tac, t5958, t5957, t5956, t5955])
-  interp_const_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c l. c > &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Pos)"), t5959))
+  interp_const_pos_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ c : Real, ∀ l : List[(Real) -> Bool], c > real_of_num(0) → ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, (x : Real) => c, y), l, REPLICATE(LENGTH(l), Pos))"), t5959))
 }
 
 ///|
@@ -8923,7 +8923,7 @@ fn step_124() -> Unit raise {
     @tactics.then_tac(@rqe_tactics_ext.rewrite_assums(@list.List([x])), t5962)
   })
   let t5966 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.replicate(), @lists.length(), @lists.all2()])), t5965, t5964, t5963])
-  interp_const_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c l. c < &0 ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Neg)"), t5966))
+  interp_const_neg_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ c : Real, ∀ l : List[(Real) -> Bool], c < real_of_num(0) → ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, (x : Real) => c, y), l, REPLICATE(LENGTH(l), Neg))"), t5966))
 }
 
 ///|
@@ -8946,7 +8946,7 @@ fn step_125() -> Unit raise {
     @tactics.then_tac(@rqe_tactics_ext.rewrite_assums(@list.List([x])), t5969)
   })
   let t5973 = @list.List([@tactics.strip_tac, @lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.replicate(), @lists.length(), @lists.all2()])), t5972, t5971, t5970])
-  interp_const_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("forall c l. (c = &0) ==>\n    ALL2 (\\x y. interpsign x (\\x. c) y) l (REPLICATE (LENGTH l) Zero)"), t5973))
+  interp_const_zero_c.set(@rqe_tactics_ext.prove_by_refinement(@term_syntax.parse_term("∀ c : Real, ∀ l : List[(Real) -> Bool], c == real_of_num(0) → ALL2((x : (Real) -> Bool) => (y : Sign) => interpsign(x, (x : Real) => c, y), l, REPLICATE(LENGTH(l), Zero))"), t5973))
 }
 
 ///|
