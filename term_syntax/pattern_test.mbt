@@ -154,6 +154,23 @@ test "pattern variables are scoped as HOL scopes them" {
   assert_true(
     reads_like("(T : Bool) => match false { T => T }", "\\T:bool. match F with T -> T"),
   )
+  // a lambda over a pattern reads it with nothing in scope: its T is the
+  // constant
+  assert_true(
+    reads_like("(T : Bool) => fn { (T, x) => T == false }", "\\T:bool. \\(T,x). T = F"),
+  )
+  // a pattern shadows the binding in effect, whatever an older one binds
+  assert_true(
+    reads_like(
+      "match 0 { op_dollar_dollar => (op_dollar_dollar : Num) => match 0 { op_dollar_dollar => op_dollar_dollar } }",
+      "match 0 with ($$) -> (\\op_dollar_dollar:num. match 0 with ($$) -> ($$))",
+    ),
+  )
+  // a binder with several annotations is a variable, renamed when it is
+  // named like a constant
+  assert_true(
+    reads_like("fn { ((T : Bool) : Bool) => (true : Bool) }", "\\x:bool. T"),
+  )
   // a lambda binds a name or a pattern, not a constant alone
   for s in ["fn { true => true }", "fn { (true : Bool) => true }", "fn { 0 => 1 }"] {
     let r = try @term_syntax.parse_term(s) catch {
