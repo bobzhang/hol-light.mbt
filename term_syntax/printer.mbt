@@ -933,7 +933,8 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
   // quotation may spell out. A comprehension whose element has one may be
   // written either way, numbering the GEN%PVAR names in it differently:
   // the forms the quotation's numbering shows are tried too.
-  let mut error = Unprintable("term")
+  // the first form's failure says most (later forms are fallbacks)
+  let mut error : Unprintable? = None
   let forms = [(true, [])]
   let taken = try @parser.reread_term(old).1 catch { _ => -1 }
   if listed_comprehensions(t, taken) is Some(listed) && !listed.is_empty() {
@@ -945,7 +946,7 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
     let (sets, listed) = form
     let s = print_term_with(t, sets~, listed~, exact=true) catch {
       e => {
-        error = e
+        if error is None { error = Some(e) }
         continue
       }
     }
@@ -955,13 +956,13 @@ pub fn spell_quotation(old : String, t : @kernel.Term) -> String raise Unprintab
     tried.push(s)
     check_spelling(old, s) catch {
       e => {
-        error = e
+        if error is None { error = Some(e) }
         continue
       }
     }
     return s
   }
-  raise error
+  raise error.unwrap_or(Unprintable("term"))
 }
 
 ///|
