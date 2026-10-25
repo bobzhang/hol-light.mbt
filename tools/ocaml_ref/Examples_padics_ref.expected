@@ -28168,7 +28168,7 @@ Examples/padics quotations (533):
   \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, pdist(p, (x, y)) == pdist(p, (y, x))
   \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, (pdist(p, (x, y)) == real_of_num(0)) == (x == y)
   \226\136\128 p : Num, \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, pdist(p, (x, z)) <= pdist(p, (x, y)) + pdist(p, (y, z))
-  forall p. (\\(x,y,z). &0 <= f x y z) p <=>\n         f (FST p) (FST(SND p)) (SND(SND p)) IN {t | &0 <= t}
+  \226\136\128 p : (_, _, _), fn { (x, y, z) => real_of_num(0) <= (f : (_, _, _) -> Real)(x, y, z) }(p) == IN(f(FST(p), FST(SND(p)), SND(SND(p))), {(t : Real) | real_of_num(0) <= t})
   euclideanreal
   CROSS(prational, CROSS(prational, prational))
   GABS((f : ((Padic, Padic, Padic)) -> Bool) => \226\136\128 x : Padic, \226\136\128 y : Padic, \226\136\128 z : Padic, GEQ(f((x, y, z)), pdist((p : Num), (x, z)) <= max(pdist(p, (x, y)), pdist(p, (y, z)))))
