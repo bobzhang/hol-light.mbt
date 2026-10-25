@@ -142,7 +142,7 @@ fn step_8() -> Unit raise {
   let t22 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(0)"))
   let t25 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@sets.set_tac(@list.List([@arith.le_refl()])), @tactics.all_tac])), t22), t23), t24])
   let t20 = @equal.gsym(schnirelmann())
-  let t21 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)")), t20]))
+  let t21 = @simp.simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("(∀ x : _, IN(x, {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)}) → (Q : (_) -> Bool)(x)) == (∀ x : _, P(x) → Q(f(x)))")), t20]))
   let t26 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("{real_of_num(count((s : (Num) -> Bool), (n : Num))) / real_of_num(n) | 1 <= n}"), @sets.inf_v1())), t21), @tactics.ants_tac), t25)
   let t27 = (@term_syntax.parse_term("(∀ n : Num, 1 <= n → schnirelmann((s : (Num) -> Bool)) <= real_of_num(count(s, n)) / real_of_num(n)) && (∀ b : Real, (∀ n : Num, 1 <= n → b <= real_of_num(count(s, n)) / real_of_num(n)) → b <= schnirelmann(s))"), t26)
   let (schnirelmann_ubound, schnirelmann_lbound) = @bool.conj_pair((fn(x19 : (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise {
@@ -175,7 +175,7 @@ pub fn schnirelmann_ubound_mul() -> @kernel.Thm {
 /// SCHNIRELMANN_BOUNDS
 fn step_10() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([@realax.real_mul_lid(), @realax.real_of_num_le(), count_bound()]))
-  let t34 = @simp.simp_tac(@list.List([@sets.set_rule(@parser.parse_term("(forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)")), @real.real_le_div(), @realarith.real_pos(), @real.real_le_ldiv_eq(), @real.real_of_num_lt(), @arith.le_1()]))
+  let t34 = @simp.simp_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("(∀ x : _, IN(x, {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)}) → (Q : (_) -> Bool)(x)) == (∀ x : _, P(x) → Q(f(x)))")), @real.real_le_div(), @realarith.real_pos(), @real.real_le_ldiv_eq(), @real.real_of_num_lt(), @arith.le_1()]))
   let t33 = @list.List([@sets.set_tac(@list.List([@arith.le_refl()])), @tactics.all_tac])
   let t32 = @tactics.match_mp_tac(@sets.real_inf_bounds())
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([schnirelmann()]))), t32), @tactics.conj_tac), t33), t34), t35)
