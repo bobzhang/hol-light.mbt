@@ -3437,7 +3437,7 @@ fn step_96() -> Unit raise {
   let t1636 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)"))
   let t1635 = @simp.rewrite_tac(@list.List([@realanalysis.reallim_sequentially()]))
   let t1712 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1635), @tactics.eq_tac), @tactics.disch_tac), t1636), @tactics.disch_tac), t1711)
-  fourier_sum_limit_pair_c.set(@tactics.prove(@parser.parse_term("forall f n t l.\n        f absolutely_real_integrable_on real_interval [--pi,pi]\n        ==> (((\\n. sum(0..2*n) (\\k. fourier_coefficient f k *\n                                    trigonometric_set k t)) ---> l)\n             sequentially <=>\n             ((\\n. sum(0..n) (\\k. fourier_coefficient f k *\n                                  trigonometric_set k t)) ---> l)\n             sequentially)"), t1712))
+  fourier_sum_limit_pair_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, ∀ n : _, ∀ t : Real, ∀ l : Real, absolutely_real_integrable_on(f, real_interval([(-pi, pi)])) → op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, 2 * n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially) == op_minus_minus_minus_gt((n : Num) => sum(op_dot_dot(0, n), (k : Num) => fourier_coefficient(f, k) * trigonometric_set(k, t)), l, sequentially)"), t1712))
 }
 
 ///|
