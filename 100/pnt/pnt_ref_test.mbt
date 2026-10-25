@@ -91090,11 +91090,11 @@ test "100/pnt matches 100/pnt.ml" {
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], pathfinish(o(op_minus_minus, g)) == -pathfinish(g)
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], path_image(o(op_minus_minus, g)) == IMAGE(op_minus_minus, path_image(g))
       #|  (t : Cart[Real, Unit])
-      #|  forall g z. valid_path g /\\ ((\\z. f(--z)) has_path_integral (--i)) g\n         ==> (f has_path_integral i) ((--) o g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : _, valid_path(g) && has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(-z), -(i : Cart[Real, Tybit0[Unit]]), g) \226\134\146 has_path_integral(f, i, o(op_minus_minus, g))
       #|  -(z : Cart[Real, Tybit0[Unit]]) - Cx(real_of_num(0)) == -(z - Cx(real_of_num(0)))
       #|  (Cx(real_of_num(0)) == -(x : Cart[Real, Tybit0[Unit]])) == (x == Cx(real_of_num(0)))
       #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : _, valid_path(g) && !IN(Cx(real_of_num(0)), path_image(g)) \226\134\146 winding_number((o(op_minus_minus, g), Cx(real_of_num(0)))) == winding_number((g, Cx(real_of_num(0))))
-      #|  forall g z. valid_path g /\\ (\\z. f(--z)) path_integrable_on g\n         ==> f path_integrable_on ((--) o g)
+      #|  \226\136\128 g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], \226\136\128 z : _, valid_path(g) && path_integrable_on((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(-z), g) \226\134\146 path_integrable_on(f, o(op_minus_minus, g))
       #|  \226\136\128 z : Cart[Real, Tybit0[Unit]], \226\136\128 R : Real, norm(z) == R \226\134\146 Cx(real_of_num(1)) / z + z / pow(Cx(R), 2) == Cx(real_of_num(2) * (Re(z) / pow(R, 2)))
       #|  norm((z : Cart[Real, _])) == (R : Real) \226\134\146 abs(R) == R
       #|  :real

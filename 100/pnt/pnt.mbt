@@ -2484,7 +2484,7 @@ fn step_51() -> Unit raise {
     }
   }))
   let t1459 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1415), t1416), t1422), t1423), t1424), t1425), t1429), t1430), t1437), t1438), t1439), @tactics.gen_tac), t1446), t1447), t1448), t1449), t1452), t1453), @tactics.disch_tac), t1454), @tactics.ap_term_tac), t1455), t1456), t1457), t1458)
-  has_path_integral_negatepath_c.set(@tactics.prove(@parser.parse_term("forall g z. valid_path g /\\ ((\\z. f(--z)) has_path_integral (--i)) g\n         ==> (f has_path_integral i) ((--) o g)"), t1459))
+  has_path_integral_negatepath_c.set(@tactics.prove(@term_syntax.parse_term("∀ g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], ∀ z : _, valid_path(g) && has_path_integral((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(-z), -(i : Cart[Real, Tybit0[Unit]]), g) → has_path_integral(f, i, o(op_minus_minus, g))"), t1459))
 }
 
 ///|
@@ -2525,7 +2525,7 @@ pub fn winding_number_negatepath() -> @kernel.Thm {
 fn step_53() -> Unit raise {
   let t1469 = @meson.meson_tac(@list.List([has_path_integral_negatepath(), @complexes.complex_neg_neg()]))
   let t1470 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cauchy.path_integrable_on()])), t1469)
-  path_integrable_negatepath_c.set(@tactics.prove(@parser.parse_term("forall g z. valid_path g /\\ (\\z. f(--z)) path_integrable_on g\n         ==> f path_integrable_on ((--) o g)"), t1470))
+  path_integrable_negatepath_c.set(@tactics.prove(@term_syntax.parse_term("∀ g : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], ∀ z : _, valid_path(g) && path_integrable_on((z : Cart[Real, Tybit0[Unit]]) => (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(-z), g) → path_integrable_on(f, o(op_minus_minus, g))"), t1470))
 }
 
 ///|
