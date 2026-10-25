@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""Tests for term_renames.py: python3 tools/ocaml_ref/test_term_renames.py"""
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from term_renames import rename_ocaml, rename_moonbit, renamed_output
+
+R = {'fn': 'fn_'}
+
+
+def refused(f, *args):
+    try:
+        f(*args)
+    except AssertionError:
+        return True
+    return False
+
+
+# quotation variables and their primed family; longer tokens stay
+assert rename_ocaml("let x = `!fn fn'. fn = fn' /\\ fn0 = fnx /\\ fn_x`;;", R) == \
+    "let x = `!fn_ fn_'. fn_ = fn_' /\\ fn0 = fnx /\\ fn_x`;;"
+# HOL strings, comments and OCaml host names stay
+assert rename_ocaml('let fn = `"fn" = s`;; (* fn *)', R) == 'let fn = `"fn" = s`;; (* fn *)'
+# a variable-name string is renamed, an assumption label is not
+assert rename_ocaml('EXPAND_TAC "fn" THEN LABEL_TAC "fn" th THEN USE_THEN "fn" MP_TAC', R) == \
+    'EXPAND_TAC "fn_" THEN LABEL_TAC "fn" th THEN USE_THEN "fn" MP_TAC'
+# any other string naming an old variable needs a patch
+assert refused(rename_ocaml, 'let v = mk_var("fn", bool_ty);;', R)
+assert rename_ocaml('let v = mk_var("fn", bool_ty);;', R,
+                    [('mk_var("fn"', 'mk_var("fn_"')]) == 'let v = mk_var("fn_", bool_ty);;'
+# a new name already in use would merge or capture: \fn. fn_
+assert refused(rename_ocaml, "let x = `\\fn. fn_`;;", R)
+assert refused(rename_ocaml, "let x = `\\fn. fn_'`;;", R)
+assert refused(rename_ocaml, 'let x = `fn = x`;; EXPAND_TAC "fn_"', R)
+# an old name in a type annotation is a type, not a variable
+assert refused(rename_ocaml, "let x = `x:fn`;;", R)
+# the renaming must be injective and map stems to fresh stems
+assert refused(rename_ocaml, "`fn = as`", {'fn': 'x_', 'as': 'x_'})
+assert refused(rename_ocaml, "`fn = x`", {'fn': "fn_'"})
+
+# MoonBit: old-syntax quotations (escapes decoded), name strings, labels
+src = ('let a = @parser.parse_term("!fn. fn = \\"fn\\" /\\\\ fn\\n= x")\n'
+       '@simp.expand_tac("fn") @tactics.label_tac("fn", th)\n')
+assert rename_moonbit(src, R) == ('let a = @parser.parse_term("!fn_. fn_ = \\"fn\\" /\\\\ fn_\\n= x")\n'
+                                  '@simp.expand_tac("fn_") @tactics.label_tac("fn", th)\n')
+assert refused(rename_moonbit, '@term_syntax.parse_term("fn_ + 1")', R)
+assert refused(rename_moonbit, 'foo("fn")', R)
+
+# output: the target's trace and structural variables, not constants or
+# type variables, nor lines before the target's trace
+out = ("A quotations (1):\n  fn = 1\nTH =  |- (fn:num)\n"
+       "B quotations (2):\n  !fn. fn = 0\n  fn\\n= x\n"
+       "TH =  |- (#forall:fun(fun(num,bool),bool) (\\fn:num. ((#=:fun(num,fun(num,bool)) fn:num) fn':'fn)))\n"
+       "C = #fn:num\n")
+assert renamed_output(out, 'B', R) == (
+    "A quotations (1):\n  fn = 1\nTH =  |- (fn:num)\n"
+    "B quotations (2):\n  !fn_. fn_ = 0\n  fn_\\n= x\n"
+    "TH =  |- (#forall:fun(fun(num,bool),bool) (\\fn_:num. ((#=:fun(num,fun(num,bool)) fn_:num) fn_':'fn)))\n"
+    "C = #fn:num\n")
+# found by review: a typed new name, a newline in a type annotation, an
+# escaped name string, a changed failure message
+assert refused(rename_ocaml, "let x = `\\fn:bool. fn_:bool`;;", R)
+assert refused(rename_ocaml, "let x = `x:\nfn`;;", R)
+assert refused(rename_ocaml, 'EXPAND_TAC "\\102n" THEN REWRITE_TAC[]', R)
+assert refused(rename_ocaml, 'let v = mk_var("\\102n_", bool_ty);;', R)
+assert renamed_output("B quotations (0):\nTH ! bad constant fn:num\n", 'B', R) == \
+    "B quotations (0):\nTH ! bad constant fn:num\n"
+print('ok')
