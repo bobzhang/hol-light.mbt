@@ -721,7 +721,7 @@ fn step_35() -> Unit raise {
   })
   let t127 = @simp.rewrite_tac(@list.List([aconv()]))
   let t135 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t127), t133), t134)
-  vfree_in_aconv_c.set(@tactics.prove(@parser.parse_term("forall s t x t. ACONV s t ==> (VFREE_IN (Var x ty) s <=> VFREE_IN (Var x ty) t)"), t135))
+  vfree_in_aconv_c.set(@tactics.prove(@term_syntax.parse_term("∀ s : Term, ∀ t : _, ∀ x : List[Char], ∀ t : Term, ACONV(s, t) → VFREE_IN(Var(x, (ty : Type)), s) == VFREE_IN(Var(x, ty), t)"), t135))
 }
 
 ///|
@@ -1044,7 +1044,7 @@ pub fn vsubst_has_type() -> @kernel.Thm {
 /// VSUBST_WELLTYPED
 fn step_44() -> Unit raise {
   let t282 = @meson.meson_tac(@list.List([vsubst_has_type(), welltyped()]))
-  vsubst_welltyped_c.set(@tactics.prove(@parser.parse_term("forall tm ty ilist.\n        welltyped tm /\\\n        (forall s s'. MEM (s',s) ilist ==> ?x ty. (s = Var x ty) /\\ s' has_type ty)\n        ==> welltyped (VSUBST ilist tm)"), t282))
+  vsubst_welltyped_c.set(@tactics.prove(@term_syntax.parse_term("∀ tm : Term, ∀ ty : _, ∀ ilist : List[(Term, Term)], welltyped(tm) && (∀ s : Term, ∀ s' : Term, MEM((s', s), ilist) → (∃ x : List[Char], ∃ ty : Type, s == Var(x, ty) && has_type(s', ty))) → welltyped(VSUBST(ilist, tm))"), t282))
 }
 
 ///|

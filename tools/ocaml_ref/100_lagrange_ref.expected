@@ -12630,23 +12630,23 @@ Warning: inventing type variables
 0..0..1..2..5..9..17..solved at 57
 0..0..1..2..3..7..16..29..solved at 48
 100/lagrange quotations (72):
-  group(g,( ** ),i,(e:A)) <=>\n    (e IN g) /\\ (forall x. x IN g ==> i(x) IN g) /\\\n    (forall x y. x IN g /\\ y IN g ==> (x ** y) IN g) /\\\n    (forall x y z. x IN g /\\ y IN g /\\ z IN g ==> (x ** (y ** z) = (x ** y) ** z)) /\\\n    (forall x. x IN g ==> (x ** e = x) /\\ (e ** x = x)) /\\\n    (forall x. x IN g ==> (x ** i(x) = e) /\\ (i(x) ** x = e))
-  subgroup h (g,( ** ),i,(e:A)) <=> h SUBSET g /\\ group(h,( ** ),i,e)
+  (group : (((A) -> Bool, (A, A) -> A, (A) -> A, A)) -> Bool)(((g : (A) -> Bool), (op_star_star : (A, A) -> A), (i : (A) -> A), (e : A))) == (IN(e, g) && (\226\136\128 x : A, IN(x, g) \226\134\146 IN(i(x), g)) && (\226\136\128 x : A, \226\136\128 y : A, IN(x, g) && IN(y, g) \226\134\146 IN(op_star_star(x, y), g)) && (\226\136\128 x : A, \226\136\128 y : A, \226\136\128 z : A, IN(x, g) && IN(y, g) && IN(z, g) \226\134\146 op_star_star(x, op_star_star(y, z)) == op_star_star(op_star_star(x, y), z)) && (\226\136\128 x : A, IN(x, g) \226\134\146 op_star_star(x, e) == x && op_star_star(e, x) == x) && (\226\136\128 x : A, IN(x, g) \226\134\146 op_star_star(x, i(x)) == e && op_star_star(i(x), x) == e))
+  (subgroup : ((A) -> Bool, ((A) -> Bool, (A, A) -> A, (A) -> A, A)) -> Bool)((h : (A) -> Bool), ((g : (A) -> Bool), (op_star_star : (A, A) -> A), (i : (A) -> A), (e : A))) == (SUBSET(h, g) && group((h, op_star_star, i, e)))
   (g : (A) -> Bool)
   (g : (A) -> Bool)
   CARD({((a : A), (x : A)) | IN(a, (q : (A) -> Bool)) && IN(x, (h : (A) -> Bool))})
-  g = IMAGE (\\(a:A,x:A). (a ** x):A) {(a,x) | a IN q /\\ x IN h}
-  (**):A->A->A
+  (g : (A) -> Bool) == IMAGE(GABS((f : ((A, A)) -> A) => \226\136\128 a : A, \226\136\128 x : A, GEQ(f((a, x)), (op_star_star : (A, A) -> A)(a, x))), {((a : A), (x : A)) | IN(a, (q : (A) -> Bool)) && IN(x, (h : (A) -> Bool))})
+  (op_star_star : (A, A) -> A)
   (i : (A) -> A)((x' : A))
-  (a':A ** x':A):A = a ** x
-  (x:A ** (i:A->A)(x')):A
+  (op_star_star : (A, A) -> A)((a' : A), (x' : A)) == op_star_star((a : A), (x : A))
+  (op_star_star : (A, A) -> A)((x : A), (i : (A) -> A)((x' : A)))
   (coset : (A, A) -> Bool)((a1 : A)) == coset((a : A)) && coset((a2 : A)) == coset((a' : A))
   ((a : Bool) \226\134\146 (b : Bool)) && a \226\134\146 a && b
   IN((a : A), (g : (A) -> Bool)) && IN((a' : A), g)
   (a2 : A)
   (a1 : A)
   ((c : Bool) \226\134\146 (a : Bool) && (b : Bool) \226\134\146 (d : Bool)) \226\134\146 a && b && c \226\134\146 d
-  forall a:A x:A a' x'. a IN q /\\ a' IN q /\\ x IN h /\\ x' IN h /\\\n                    ((a' ** x') :A = a ** x) ==> (a' = a) /\\ (x' = x)
+  \226\136\128 a : A, \226\136\128 x : A, \226\136\128 a' : A, \226\136\128 x' : A, IN(a, (q : (A) -> Bool)) && IN(a', q) && IN(x, (h : (A) -> Bool)) && IN(x', h) && (op_star_star : (A, A) -> A)(a', x') == op_star_star(a, x) \226\134\146 a' == a && x' == x
   \226\136\128 a : A, IN(a, (q : (A) -> Bool)) \226\134\146 IN(a, (g : (A) -> Bool))
   (a : A)
   \226\136\128 a : A, IN(a, (g : (A) -> Bool)) \226\134\146 IN(a, (coset : (A, A) -> Bool)(a))
@@ -12670,36 +12670,36 @@ Warning: inventing type variables
   (b : A)
   (a : Bool) && (a \226\134\146 (b : Bool)) \226\134\146 b && a
   {(c : A) | \226\136\131 a : A, IN(a, (g : (A) -> Bool)) && c == select((coset : (A, A) -> Bool)(a))}
-  (i(b:A) ** a:A):A = z ** i(y)
-  (i(b:A) ** a:A) ** e = z ** i(y)
-  (i(b:A) ** a:A) ** (y ** i(y)) = z ** i(y)
-  ((i(b:A) ** a:A) ** y) ** i(y) = z ** i(y)
-  ((i(b:A) ** a:A) ** y):A = z
-  (i(b:A) ** a:A ** y):A = z
-  (i(b:A) ** a:A ** y):A = e ** z
-  (i(b:A) ** a ** y):A = i(b) ** b ** z
+  (op_star_star : (A, A) -> A)((i : (A) -> A)((b : A)), (a : A)) == op_star_star((z : A), i((y : A)))
+  (op_star_star : (A, A) -> A)(op_star_star((i : (A) -> A)((b : A)), (a : A)), (e : A)) == op_star_star((z : A), i((y : A)))
+  (op_star_star : (A, A) -> A)(op_star_star((i : (A) -> A)((b : A)), (a : A)), op_star_star((y : A), i(y))) == op_star_star((z : A), i(y))
+  (op_star_star : (A, A) -> A)(op_star_star(op_star_star((i : (A) -> A)((b : A)), (a : A)), (y : A)), i(y)) == op_star_star((z : A), i(y))
+  (op_star_star : (A, A) -> A)(op_star_star((i : (A) -> A)((b : A)), (a : A)), (y : A)) == (z : A)
+  (op_star_star : (A, A) -> A)((i : (A) -> A)((b : A)), op_star_star((a : A), (y : A))) == (z : A)
+  (op_star_star : (A, A) -> A)((i : (A) -> A)((b : A)), op_star_star((a : A), (y : A))) == op_star_star((e : A), (z : A))
+  (op_star_star : (A, A) -> A)((i : (A) -> A)((b : A)), op_star_star((a : A), (y : A))) == op_star_star(i(b), op_star_star(b, (z : A)))
   (z : A)
   (y : A)
   (((a : Bool) && (b : Bool)) && a && (c : Bool)) == (a && b && c)
   (x : A)
-  forall x:A. x IN h ==> (b ** (i(b) ** a:A) ** x = a ** x) /\\\n                         (a ** i(i(b) ** a) ** x = b ** x)
-  ((i:A->A)(b) ** a:A) IN (h:A->bool)
+  \226\136\128 x : A, IN(x, (h : (A) -> Bool)) \226\134\146 (op_star_star : (A, A) -> A)((b : A), op_star_star(op_star_star((i : (A) -> A)(b), (a : A)), x)) == op_star_star(a, x) && op_star_star(a, op_star_star(i(op_star_star(i(b), a)), x)) == op_star_star(b, x)
+  IN((op_star_star : (A, A) -> A)((i : (A) -> A)((b : A)), (a : A)), (h : (A) -> Bool))
   \226\136\128 a : A, \226\136\128 b : A, IN(a, (g : (A) -> Bool)) && IN(b, g) \226\134\146 (coset : (A, A) -> Bool)(a) == coset(b) || INTER(coset(a), coset(b)) == EMPTY
   (i : (A) -> A)((x : A))
   \226\136\128 x : A, IN(x, (g : (A) -> Bool)) \226\134\146 (i : (A) -> A)(i(x)) == x
-  (x:A ** (y ** i(y))) ** i(x)
-  (x:A ** y:A) :A
-  forall x:A y. x IN g /\\ y IN g ==> (i(x ** y) = i(y) ** i(x))
-  (coset:A->A->bool) (a:A) = IMAGE (\\x. a ** x) (h:A->bool)
+  (op_star_star : (A, A) -> A)(op_star_star((x : A), op_star_star((y : A), (i : (A) -> A)(y))), i(x))
+  (op_star_star : (A, A) -> A)((x : A), (y : A))
+  \226\136\128 x : A, \226\136\128 y : A, IN(x, (g : (A) -> Bool)) && IN(y, g) \226\134\146 (i : (A) -> A)((op_star_star : (A, A) -> A)(x, y)) == op_star_star(i(y), i(x))
+  (coset : (A, A) -> Bool)((a : A)) == IMAGE((x : A) => (op_star_star : (A, A) -> A)(a, x), (h : (A) -> Bool))
   \226\136\128 a : A, IN(a, (g : (A) -> Bool)) \226\134\146 CARD((coset : (A, A) -> Bool)(a)) == CARD((h : (A) -> Bool))
-  ((i(a):A ** a:A) ** x) = (i(a) ** a) ** y
-  (e:A ** x:A):A = e ** y
-  forall a:A x:A y. a IN g /\\ x IN g /\\ y IN g /\\ ((a ** x) :A = a ** y)\n                ==> (x = y)
+  (op_star_star : (A, A) -> A)(op_star_star((i : (A) -> A)((a : A)), a), (x : A)) == op_star_star(op_star_star(i(a), a), (y : A))
+  (op_star_star : (A, A) -> A)((e : A), (x : A)) == op_star_star(e, (y : A))
+  \226\136\128 a : A, \226\136\128 x : A, \226\136\128 y : A, IN(a, (g : (A) -> Bool)) && IN(x, g) && IN(y, g) && (op_star_star : (A, A) -> A)(a, x) == op_star_star(a, y) \226\134\146 x == y
   (g : (A) -> Bool)
   \226\136\128 a : A, FINITE((coset : (A, A) -> Bool)(a))
   FINITE((h : (A) -> Bool))
   \226\136\128 a : A, IN(a, (g : (A) -> Bool)) \226\134\146 IN(a, (coset : (A, A) -> Bool)(a))
-  coset = \\a:A. {b:A | b IN g /\\ (?x:A. x IN h /\\ (b = a ** x))}
+  (coset : (A, A) -> Bool) == ((a : A) => {(b : A) | IN(b, (g : (A) -> Bool)) && (\226\136\131 x : A, IN(x, (h : (A) -> Bool)) && b == (op_star_star : (A, A) -> A)(a, x))})
   forall g h ( ** ) i e.\n        group (g,( ** ),i,e:A) /\\ subgroup h (g,( ** ),i,e) /\\ FINITE g\n        ==> ?q. (CARD(g) = CARD(q) * CARD(h)) /\\\n                (forall b. b IN g ==> ?a x. a IN q /\\ x IN h /\\ (b = a ** x))
   forall g h ( ** ) i e.\n        group (g,( ** ),i,e:A) /\\ subgroup h (g,( ** ),i,e) /\\ FINITE g\n        ==> (CARD h) divides (CARD g)
 group =  |- (#forall:fun(fun(fun('A,bool),bool),bool) (\g:fun('A,bool). (#forall:fun(fun(fun('A,fun('A,'A)),bool),bool) (\**:fun('A,fun('A,'A)). (#forall:fun(fun(fun('A,'A),bool),bool) (\i:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\e:'A. ((#=:fun(bool,fun(bool,bool)) (#group:fun(prod(fun('A,bool),prod(fun('A,fun('A,'A)),prod(fun('A,'A),'A))),bool) ((#,:fun(fun('A,bool),fun(prod(fun('A,fun('A,'A)),prod(fun('A,'A),'A)),prod(fun('A,bool),prod(fun('A,fun('A,'A)),prod(fun('A,'A),'A))))) g:fun('A,bool)) ((#,:fun(fun('A,fun('A,'A)),fun(prod(fun('A,'A),'A),prod(fun('A,fun('A,'A)),prod(fun('A,'A),'A)))) **:fun('A,fun('A,'A))) ((#,:fun(fun('A,'A),fun('A,prod(fun('A,'A),'A))) i:fun('A,'A)) e:'A))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) e:'A) g:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) g:fun('A,bool))) ((#IN:fun('A,fun(fun('A,bool),bool)) (i:fun('A,'A) x:'A)) g:fun('A,bool)))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) g:fun('A,bool))) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) g:fun('A,bool)))) ((#IN:fun('A,fun(fun('A,bool),bool)) ((**:fun('A,fun('A,'A)) x:'A) y:'A)) g:fun('A,bool)))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. (#forall:fun(fun('A,bool),bool) (\y:'A. (#forall:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) g:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) y:'A) g:fun('A,bool))) ((#IN:fun('A,fun(fun('A,bool),bool)) z:'A) g:fun('A,bool))))) ((#=:fun('A,fun('A,bool)) ((**:fun('A,fun('A,'A)) x:'A) ((**:fun('A,fun('A,'A)) y:'A) z:'A))) ((**:fun('A,fun('A,'A)) ((**:fun('A,fun('A,'A)) x:'A) y:'A)) z:'A)))))))))) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) g:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) ((**:fun('A,fun('A,'A)) x:'A) e:'A)) x:'A)) ((#=:fun('A,fun('A,bool)) ((**:fun('A,fun('A,'A)) e:'A) x:'A)) x:'A)))))) (#forall:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun('A,fun(fun('A,bool),bool)) x:'A) g:fun('A,bool))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) ((**:fun('A,fun('A,'A)) x:'A) (i:fun('A,'A) x:'A))) e:'A)) ((#=:fun('A,fun('A,bool)) ((**:fun('A,fun('A,'A)) (i:fun('A,'A) x:'A)) x:'A)) e:'A)))))))))))))))))))

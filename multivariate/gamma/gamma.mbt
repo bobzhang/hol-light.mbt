@@ -3136,7 +3136,7 @@ fn step_38() -> Unit raise {
   let t2116 = @term_syntax.parse_term("(N : Num)")
   let t2157 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum((x2117 : @kernel.Thm) => @tactics.x_choose_tac(t2116, x2117)), t2118), t2119), t2120), t2121), t2122), @tactics.disch_tac), t2126), t2128), t2129), t2130), t2131), t2132), t2133), t2134), t2135), @tactics.disj1_tac), t2136), t2137), t2156])
   let t2158 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @class.asm_cases_tac(@term_syntax.parse_term("∃ n : Num, (z : Cart[Real, Tybit0[Unit]]) + Cx(real_of_num(n)) == Cx(real_of_num(0))"))), t2157)
-  recip_cgamma_weierstrass_c.set(@tactics.prove(@parser.parse_term("forall n. ((\\n. (z * cexp(Cx euler_mascheroni * z) *\n             cproduct(1..n) (\\k. (Cx(&1) + z / Cx(&k)) / cexp(z / Cx(&k)))))\n        --> inv(cgamma z)) sequentially"), t2158))
+  recip_cgamma_weierstrass_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : _, op_minus_minus_gt((n : Num) => (z : Cart[Real, Tybit0[Unit]]) * (cexp(Cx(euler_mascheroni) * z) * cproduct(op_dot_dot(1, n), (k : Num) => (Cx(real_of_num(1)) + z / Cx(real_of_num(k))) / cexp(z / Cx(real_of_num(k))))), inv(cgamma(z)), sequentially)"), t2158))
 }
 
 ///|
