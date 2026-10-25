@@ -280,7 +280,7 @@ pair quotations (78):
   \226\136\128 f : ((A, B, C)) -> D, ((t : (A, B, C)) => f(t)) == GABS((f' : ((A, B, C)) -> D) => \226\136\128 x : A, \226\136\128 y : B, \226\136\128 z : C, GEQ(f'((x, y, z)), f((x, y, z))))
   forall f:A->B->C->D.\n   (\\(x,y,z). f x y z) = (\\t. f (FST t) (FST(SND t)) (SND(SND t)))
   (forall f:A#B->C. (\\(x,y). f (x,y)) = f) /\\\n   (forall f:A#B#C->D. (\\(x,y,z). f (x,y,z)) = f) /\\\n   (forall f:A#B#C#D->E. (\\(w,x,y,z). f (w,x,y,z)) = f)
-  \\(a,b). (f:A->B->C) a b
+  fn { (a, b) => (f : (A, B) -> C)(a, b) }
   (f : (A, B) -> C)
   \226\136\128 P : ((A, B) -> C) -> Bool, (\226\136\128 f : (A, B) -> C, P(f)) == (\226\136\128 f : ((A, B)) -> C, P((a : A) => (b : B) => f((a, b))))
   (\226\136\131 x : _, (P : (_) -> Bool)(x)) == !(\226\136\128 x : _, !P(x))

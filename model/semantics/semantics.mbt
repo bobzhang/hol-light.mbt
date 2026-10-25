@@ -925,7 +925,7 @@ fn step_29() -> Unit raise {
   let t410 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t409 = @simp.simp_tac(@list.List([@lists.mem(), @lists.itlist(), @pair.forall_pair_thm()]))
   let t413 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@ind_types.list_induct()), t409), t410), t411), t412)
-  itlist_valmod_eq_c.set(@tactics.prove(@parser.parse_term("forall l. (forall t x. MEM (t,x) l /\\ (f x = a) ==> (g x t = h x t)) /\\ (i a = j a)\n       ==> (ITLIST (\\(t,x). f(x) |-> g x t) l i a =\n            ITLIST (\\(t,x). f(x) |-> h x t) l j a)"), t413))
+  itlist_valmod_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ l : List[(_, _)], (∀ t : _, ∀ x : _, MEM((t, x), l) && (f : (_) -> _)(x) == (a : _) → (g : (_, _) -> _)(x, t) == (h : (_, _) -> _)(x, t)) && (i : (_) -> _)(a) == (j : (_) -> _)(a) → ITLIST(fn { (t, x) => op_bar_minus_gt(f(x), g(x, t)) }, l, i, a) == ITLIST(fn { (t, x) => op_bar_minus_gt(f(x), h(x, t)) }, l, j, a)"), t413))
 }
 
 ///|

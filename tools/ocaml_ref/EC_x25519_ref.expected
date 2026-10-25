@@ -78504,7 +78504,7 @@ EC/x25519 quotations (206):
   (DIV((n : Num), 2) < n) == !(n == 0)
   DIV((n : Num), 2)
   (n : Num)
-  forall(f:A ring) x y n.\n        field f /\\ ring_char f = p_25519 /\\\n        SOME(ring_of_num f x,y) IN group_carrier (curve25519x_group f) /\\\n        ~(ring_of_num f x = ring_0 f)\n        ==> let (X,Z),(X',Z') = x25519_ladder n (&x,&1) in\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) n)\n                            (ring_of_int f X,ring_of_int f Z) /\\\n            montgomery_xz f (group_pow (curve25519x_group f)\n                                       (SOME(ring_of_num f x,y)) (n+1))\n                            (ring_of_int f X',ring_of_int f Z')
+  \226\136\128 f : Ring[A], \226\136\128 x : Num, \226\136\128 y : A, \226\136\128 n : Num, field(f) && ring_char(f) == p_25519 && IN(SOME((ring_of_num(f, x), y)), group_carrier(curve25519x_group(f))) && !(ring_of_num(f, x) == ring_0(f)) \226\134\146 LET(fn { ((X, Z), X', Z') => LET_END(montgomery_xz(f, group_pow(curve25519x_group(f), SOME((ring_of_num(f, x), y)), n), (ring_of_int(f, X), ring_of_int(f, Z))) && montgomery_xz(f, group_pow(curve25519x_group(f), SOME((ring_of_num(f, x), y)), n + 1), (ring_of_int(f, X'), ring_of_int(f, Z')))) }, x25519_ladder(n, (int_of_num(x), int_of_num(1))))
   \226\136\128 n : Num, \226\136\128 q : Num, purex25519((n, q)) < p_25519
   int_of_num(inverse_mod(p_25519, num_of_int(rem((Zn : Int), int_of_num(p_25519))))) * int_of_num(num_of_int(rem(Zn, int_of_num(p_25519))))
   (f : Ring[A])

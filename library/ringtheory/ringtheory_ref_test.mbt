@@ -30404,7 +30404,7 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  IMAGE((m : (K) -> Num), (k : (K) -> Bool))
       #|  (m : (K) -> Num)
       #|  forall k (r:K->A ring) x.\n        FINITE k\n        ==> (ring_nilpotent (product_ring k r) x <=>\n             EXTENSIONAL k x /\\\n             forall i. i IN k ==> ring_nilpotent (r i) (x i))
-      #|  \\((f:K->A),g) x. if x IN k then f x else g x
+      #|  fn { ((f : (K) -> A), (g : (K) -> A)) => (x : K) => if (IN : (K, (K) -> Bool) -> Bool)(x, (k : (K) -> Bool)) { f(x) } else { g(x) } }
       #|  (f : (K) -> A) => (RESTRICTION((k : (K) -> Bool), f), RESTRICTION((l : (K) -> Bool), f))
       #|  forall(f:K->A ring) k l.\n        DISJOINT k l\n        ==> product_ring (k UNION l) f isomorphic_ring\n            prod_ring (product_ring k f) (product_ring l f)
       #|  forall(r:K->A ring) k. product_ring {k} r isomorphic_ring r k

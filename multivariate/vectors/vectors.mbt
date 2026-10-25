@@ -7280,7 +7280,7 @@ fn step_345() -> Unit raise {
   let t1442 = @simp.once_rewrite_tac(@list.List([@class.taut(@term_syntax.parse_term("(((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) == ((a && d) && b && c)"))]))
   let t1441 = @simp.simp_tac(@list.List([bilinear(), @class.eta_ax()]))
   let t1459 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1441), t1442), t1446), t1447), @tactics.disch_tac), t1455), t1456), t1457), t1458)
-  bilinear_vsum_c.set(@tactics.prove(@parser.parse_term("forall h:real^M->real^N->real^P.\n       bilinear h /\\ FINITE s /\\ FINITE t\n       ==> h (vsum s f) (vsum t g) = vsum (s CROSS t) (\\(i,j). h (f i) (g j))"), t1459))
+  bilinear_vsum_c.set(@tactics.prove(@term_syntax.parse_term("∀ h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], bilinear(h) && FINITE((s : (_) -> Bool)) && FINITE((t : (_) -> Bool)) → h(vsum(s, (f : (_) -> Cart[Real, M])), vsum(t, (g : (_) -> Cart[Real, N]))) == vsum(CROSS(s, t), fn { (i, j) => h(f(i), g(j)) })"), t1459))
 }
 
 ///|
