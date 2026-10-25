@@ -5632,7 +5632,7 @@ test "100/birthday matches 100/birthday.ml" {
       #|0..0..1..2..5..solved at 13
       #|Warning: inventing type variables
       #|100/birthday quotations (49):
-      #|  (s --> t) = {f:A->B | (forall x. x IN s ==> f(x) IN t) /\\\n                        (forall x. ~(x IN s) ==> f(x) = @y. T)}
+      #|  (op_minus_minus_gt : ((A) -> Bool, (B) -> Bool, (A) -> B) -> Bool)((s : (A) -> Bool), (t : (B) -> Bool)) == {(f : (A) -> B) | (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), t)) && (\226\136\128 x : A, !IN(x, s) \226\134\146 f(x) == select((y : B) => true))}
       #|  op_minus_minus_gt(EMPTY, (t : (_) -> Bool)) == INSERT((x : _) => select((y : _) => true), EMPTY)
       #|  (u : A) == (x : A)
       #|  (u : A)

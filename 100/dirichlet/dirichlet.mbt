@@ -2707,7 +2707,7 @@ pub fn product_pow_nsum() -> @kernel.Thm {
 /// PRODUCT_SPECIAL
 fn step_58() -> Unit raise {
   let t1585 = @simp.simp_tac(@list.List([product_pow_nsum(), @iterate.finite_numseg(), sum_of_numbers()]))
-  product_special_c.set(@tactics.prove(@parser.parse_term("forall z i. product (0..n) (\\i. z pow i) = z pow ((n * (n + 1)) DIV 2)"), t1585))
+  product_special_c.set(@tactics.prove(@term_syntax.parse_term("∀ z : Real, ∀ i : _, product(op_dot_dot(0, (n : Num)), (i : Num) => pow(z, i)) == pow(z, DIV(n * (n + 1), 2))"), t1585))
 }
 
 ///|

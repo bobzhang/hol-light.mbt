@@ -53529,11 +53529,11 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
       #|  (g : (Cart[Real, N]) -> Cart[Real, P])
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 h : (Cart[Real, M]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, P]) -> Bool, IMAGE(f, s) == t && (\226\136\128 v : (Cart[Real, N]) -> Bool, SUBSET(v, t) \226\134\146 open_in(subtopology(euclidean, s), {(x : Cart[Real, M]) | IN(x, s) && IN(f(x), v)}) == open_in(subtopology(euclidean, t), v)) && continuous_on(h, s) && IMAGE(h, s) == u && (\226\136\128 x : Cart[Real, M], \226\136\128 y : Cart[Real, M], IN(x, s) && IN(y, s) && f(x) == f(y) \226\134\146 h(x) == h(y)) \226\134\146 (\226\136\131 g : (Cart[Real, N]) -> Cart[Real, P], continuous_on(g, t) && IMAGE(g, t) == u && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 h(x) == g(f(x))))
-      #|  {x | x IN s /\\ (g:real^N->real^P) ((f:real^M->real^N) x) IN v} =\n    {x | x IN s /\\ f x IN {x | x IN t /\\ g x IN v}}
+      #|  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((g : (Cart[Real, N]) -> Cart[Real, P])((f : (Cart[Real, M]) -> Cart[Real, N])(x)), (v : (Cart[Real, P]) -> Bool))} == {(x : Cart[Real, M]) | IN(x, s) && IN(f(x), {(x : Cart[Real, N]) | IN(x, (t : (Cart[Real, N]) -> Bool)) && IN(g(x), v)})}
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, P]) -> Bool, SUBSET(IMAGE(f, s), t) && (\226\136\128 v : (Cart[Real, N]) -> Bool, SUBSET(v, t) \226\134\146 open_in(subtopology(euclidean, s), {(x : Cart[Real, M]) | IN(x, s) && IN(f(x), v)}) == open_in(subtopology(euclidean, t), v)) && (\226\136\128 v : (Cart[Real, P]) -> Bool, SUBSET(v, u) \226\134\146 open_in(subtopology(euclidean, t), {(x : Cart[Real, N]) | IN(x, t) && IN(g(x), v)}) == open_in(subtopology(euclidean, u), v)) \226\134\146 (\226\136\128 v : (Cart[Real, P]) -> Bool, SUBSET(v, u) \226\134\146 open_in(subtopology(euclidean, s), {(x : Cart[Real, M]) | IN(x, s) && IN(o(g, f, x), v)}) == open_in(subtopology(euclidean, u), v))
       #|  (u : (Cart[Real, P]) -> Bool)
       #|  (t : (Cart[Real, N]) -> Bool)
-      #|  {x | x IN s /\\ (g:real^N->real^P) ((f:real^M->real^N) x) IN v} =\n      {x | x IN s /\\ f x IN {x | x IN t /\\ g x IN v}}
+      #|  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((g : (Cart[Real, N]) -> Cart[Real, P])((f : (Cart[Real, M]) -> Cart[Real, N])(x)), (v : (Cart[Real, P]) -> Bool))} == {(x : Cart[Real, M]) | IN(x, s) && IN(f(x), {(x : Cart[Real, N]) | IN(x, (t : (Cart[Real, N]) -> Bool)) && IN(g(x), v)})}
       #|  (v : (Cart[Real, P]) -> Bool)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Cart[Real, N]) -> Cart[Real, P], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, P]) -> Bool, continuous_on(f, s) && SUBSET(IMAGE(f, s), t) && continuous_on(g, t) && SUBSET(IMAGE(g, t), u) && (\226\136\128 v : (Cart[Real, P]) -> Bool, SUBSET(v, u) \226\134\146 open_in(subtopology(euclidean, s), {(x : Cart[Real, M]) | IN(x, s) && IN(o(g, f, x), v)}) == open_in(subtopology(euclidean, u), v)) \226\134\146 (\226\136\128 v : (Cart[Real, P]) -> Bool, SUBSET(v, u) \226\134\146 open_in(subtopology(euclidean, t), {(x : Cart[Real, N]) | IN(x, t) && IN(g(x), v)}) == open_in(subtopology(euclidean, u), v))
       #|  (s : (Cart[Real, M]) -> Bool)
@@ -53648,7 +53648,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 t' : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, Finite_sum[M, N]]) -> Bool, compact(s) && !(s == {}) && SUBSET(t, t') && SUBSET(PCROSS(s, t), u) && open_in(subtopology(euclidean, PCROSS(s, t')), u) \226\134\146 (\226\136\131 v : (Cart[Real, N]) -> Bool, open_in(subtopology(euclidean, t'), v) && SUBSET(t, v) && SUBSET(PCROSS(s, v), u))
       #|  (x : (Num) -> Cart[Real, M])
       #|  INSERT((y : Cart[Real, N]), IMAGE(o((f : (Cart[Real, M]) -> Cart[Real, N]), (x : (Num) -> Cart[Real, M])), UNIV))
-      #|  forall f:real^M->real^N s t x y.\n        IMAGE f s SUBSET t /\\\n        (forall k. k SUBSET t /\\ compact k ==> compact {x | x IN s /\\ f x IN k}) /\\\n        (forall n. x(n) IN s) /\\ y IN t /\\ ((f o x) --> y) sequentially\n        ==> ?z r. z IN s /\\ (forall m n. m < n ==> r m < r n) /\\\n                  ((x o r) --> z) sequentially
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : (Num) -> Cart[Real, M], \226\136\128 y : Cart[Real, N], SUBSET(IMAGE(f, s), t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, SUBSET(k, t) && compact(k) \226\134\146 compact({(x : Cart[Real, M]) | IN(x, s) && IN(f(x), k)})) && (\226\136\128 n : Num, IN(x(n), s)) && IN(y, t) && op_minus_minus_gt(o(f, x), y, sequentially) \226\134\146 (\226\136\131 z : Cart[Real, M], \226\136\131 r : (Num) -> Num, IN(z, s) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && op_minus_minus_gt(o(x, r), z, sequentially))
       #|  o((f : (Cart[Real, M]) -> Cart[Real, N]), o((x : (Num) -> Cart[Real, M]), o((r : (Num) -> Num), (q : (Num) -> Num))))
       #|  o((r : (Num) -> Num), (q : (Num) -> Num))
       #|  (q : (Num) -> Num)
@@ -53672,7 +53672,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (r : (Num) -> Num)
       #|  (y : Cart[Real, N])
       #|  \226\136\128 x : (Num) -> Cart[Real, M], (\226\136\128 n : Num, IN(x(n), (s : (Cart[Real, M]) -> Bool))) \226\134\146 (\226\136\128 n : Num, IN((f : (Cart[Real, M]) -> Cart[Real, N])(x(n)), (t : (Cart[Real, N]) -> Bool)))
-      #|  forall f:real^M->real^N s t x.\n        IMAGE f s SUBSET t /\\\n        (forall k. k SUBSET t /\\ compact k ==> compact {x | x IN s /\\ f x IN k}) /\\\n        (forall n:num. x n IN s) /\\\n        (forall c. c SUBSET s /\\ compact c ==> FINITE {n | x n IN c})\n        ==> (forall k. k SUBSET t /\\ compact k ==> FINITE {n | f(x n) IN k})
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : (Num) -> Cart[Real, M], SUBSET(IMAGE(f, s), t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, SUBSET(k, t) && compact(k) \226\134\146 compact({(x : Cart[Real, M]) | IN(x, s) && IN(f(x), k)})) && (\226\136\128 n : Num, IN(x(n), s)) && (\226\136\128 c : (Cart[Real, M]) -> Bool, SUBSET(c, s) && compact(c) \226\134\146 FINITE({(n : Num) | IN(x(n), c)})) \226\134\146 (\226\136\128 k : (Cart[Real, N]) -> Bool, SUBSET(k, t) && compact(k) \226\134\146 FINITE({(n : Num) | IN(f(x(n)), k)}))
       #|  (n : Num) => n
       #|  (y : Cart[Real, N])
       #|  o((r : (Num) -> Num), (q : (Num) -> Num))
@@ -55406,7 +55406,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (t : (Cart[Real, N]) -> Bool)
       #|  (s : (Cart[Real, M]) -> Bool)
       #|  (f : (Cart[Real, M]) -> Cart[Real, N])
-      #|  forall f:real^M->real^N s t x r a b.\n        IMAGE f s SUBSET t /\\\n        (forall k. k SUBSET t /\\ compact k\n             ==> compact {x | x IN s /\\ f x IN k}) /\\\n        (forall n. x n IN s) /\\ ~(a IN s) /\\ (x --> a) sequentially /\\\n        (forall m n. m < n ==> r m < r n) /\\ ((f o x o r) --> b) sequentially\n        ==> ~(b IN IMAGE f s)
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 x : (Num) -> Cart[Real, M], \226\136\128 r : (Num) -> Num, \226\136\128 a : Cart[Real, M], \226\136\128 b : Cart[Real, N], SUBSET(IMAGE(f, s), t) && (\226\136\128 k : (Cart[Real, N]) -> Bool, SUBSET(k, t) && compact(k) \226\134\146 compact({(x : Cart[Real, M]) | IN(x, s) && IN(f(x), k)})) && (\226\136\128 n : Num, IN(x(n), s)) && !IN(a, s) && op_minus_minus_gt(x, a, sequentially) && (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && op_minus_minus_gt(o(f, o(x, r)), b, sequentially) \226\134\146 !IN(b, IMAGE(f, s))
       #|  (a : Cart[Real, M])
       #|  (I : (Num) -> Num)
       #|  (x : (Num) -> Cart[Real, M])
@@ -55526,7 +55526,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (v : Cart[Real, M])
       #|  (u : Cart[Real, M])
       #|  !(\226\136\131 a : _, SUBSET((s : (_) -> Bool), {a})) \226\134\146 (\226\136\131 a : _, \226\136\131 b : _, IN(a, s) && IN(b, s) && !(a == b))
-      #|  forall s:real^M->bool a b:real^N.\n        connected s /\\ ~(?a. s SUBSET {a})\n        ==> ?f. f continuous_on s /\\ IMAGE f s = segment[a,b]
+      #|  \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], connected(s) && !(\226\136\131 a : Cart[Real, M], SUBSET(s, {a})) \226\134\146 (\226\136\131 f : (Cart[Real, M]) -> Cart[Real, N], continuous_on(f, s) && IMAGE(f, s) == segment([(a, b)]))
       #|  :real
       #|  :real
       #|  \226\136\128 s : (Num) -> Cart[Real, Unit], bounded({s((n : Num)) | IN(n, UNIV)}) && (\226\136\128 n : Num, drop(s(n)) <= drop(s(SUC(n)))) \226\134\146 (\226\136\131 l : Cart[Real, Unit], op_minus_minus_gt(s, l, sequentially))
@@ -56011,7 +56011,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  {(x : Cart[Real, N]) | (dot : (Cart[Real, N], Cart[Real, N]) -> Real)((basis : (Num) -> Cart[Real, N])((dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), x) == real_of_num(0)}
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Real, !(a == (vec : (Num) -> Cart[Real, N])(0)) && (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)) + 1 \226\134\146 (homeomorphic : ((Cart[Real, N]) -> Bool, (Cart[Real, M]) -> Bool) -> Bool)({(x : Cart[Real, N]) | (dot : (Cart[Real, N], Cart[Real, N]) -> Real)(a, x) == b}, (UNIV : (Cart[Real, M]) -> Bool))
       #|  (d : Real) * (e : Real)
-      #|  forall f s e x.\n        &0 < e /\\ subspace s /\\\n        linear f /\\ (forall x. x IN s ==> norm(f x) >= e * norm(x)) /\\\n        (forall n. x(n) IN s) /\\ cauchy(f o x)\n        ==> cauchy x
+      #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 s : (Cart[Real, _]) -> Bool, \226\136\128 e : Real, \226\136\128 x : (Num) -> Cart[Real, _], real_of_num(0) < e && subspace(s) && linear(f) && (\226\136\128 x : Cart[Real, _], IN(x, s) \226\134\146 norm(f(x)) >= e * norm(x)) && (\226\136\128 n : Num, IN(x(n), s)) && cauchy(o(f, x)) \226\134\146 cauchy(x)
       #|  (d : Real)
       #|  (x : (Num) -> Cart[Real, M])
       #|  (x : (Num) -> Cart[Real, M])
@@ -57539,7 +57539,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (n : Num) => (x : (Num) -> Cart[Real, N])(n) - (l : Cart[Real, N])
       #|  (a : (Num, Num) -> Cart[Real, M])
       #|  (bop : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P])
-      #|  forall(bop:real^M->real^N->real^P) a x m r l i b.\n        bilinear bop /\\\n        (x --> l) sequentially /\\\n        (forall p. ((\\n. a n p) --> vec 0) sequentially) /\\\n        (((\\n. vsum(r..n) (\\i. a n i))) --> i) sequentially /\\\n        (forall n. sum (0..n) (\\i. norm(a n i)) <= b)\n        ==> ((\\n. vsum(m..n) (\\i. bop (a n i) (x i))) --> bop i l)\n             sequentially
+      #|  \226\136\128 bop : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 a : (Num, Num) -> Cart[Real, M], \226\136\128 x : (Num) -> Cart[Real, N], \226\136\128 m : Num, \226\136\128 r : Num, \226\136\128 l : Cart[Real, N], \226\136\128 i : Cart[Real, M], \226\136\128 b : Real, bilinear(bop) && op_minus_minus_gt(x, l, sequentially) && (\226\136\128 p : Num, op_minus_minus_gt((n : Num) => a(n, p), vec(0), sequentially)) && op_minus_minus_gt((n : Num) => vsum(op_dot_dot(r, n), (i : Num) => a(n, i)), i, sequentially) && (\226\136\128 n : Num, sum(op_dot_dot(0, n), (i : Num) => norm(a(n, i))) <= b) \226\134\146 op_minus_minus_gt((n : Num) => vsum(op_dot_dot(m, n), (i : Num) => bop(a(n, i), x(i))), bop(i, l), sequentially)
       #|  (e : Real)
       #|  (e : Real) / real_of_num(8)
       #|  real_of_num(0) < (e : Real) / real_of_num(8)
@@ -58252,7 +58252,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  {(f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))} == IMAGE(f, {x})
       #|  {(f : (_) -> _)((x : _)) | IN(x, IMAGE((g : (_) -> _), (s : (_) -> Bool)))} == {f(g((x : _))) | IN(x, s)}
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, M]) -> Bool, linear(f) && (\226\136\128 x : Cart[Real, M], norm(f(x)) == norm(x)) \226\134\146 hausdist((IMAGE(f, s), IMAGE(f, t))) == hausdist((s, t))
-      #|  {x | drop(lift(f x)) <= b} =\n     {x | x IN UNIV /\\ lift(f x) IN {x | drop x <= b}}
+      #|  {(x : _) | drop(lift((f : (_) -> Real)(x))) <= (b : Real)} == {(x : _) | IN(x, UNIV) && IN(lift(f(x)), {(x : Cart[Real, Unit]) | drop(x) <= b})}
       #|  ((x : Real) <= (b : Real)) == (drop(lift(x)) <= b)
       #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (Q : (_) -> Bool)(x)) == (\226\136\128 x : _, P(x) \226\134\146 IN(x, {(x : _) | Q(x)}))
       #|  (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hausdist((closure(s), t)) == hausdist((s, t))) && (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, hausdist((s, closure(t))) == hausdist((s, t)))
@@ -58937,8 +58937,8 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (e : Real)
       #|  (x : Cart[Real, N])
       #|  (x : Cart[Real, N])
-      #|  {i | i IN IMAGE (\\(a:real^N,b). interval[a,b])\n            ({x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)} CROSS\n             {x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) /\\\n           i SUBSET s}
-      #|  {i | i IN IMAGE (\\(a:real^N,b). interval(a,b))\n            ({x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)} CROSS\n             {x | forall i. 1 <= i /\\ i <= dimindex(:N) ==> rational(x$i)}) /\\\n           i SUBSET s}
+      #|  {(i : (Cart[Real, N]) -> Bool) | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(i, (IMAGE : (((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool, ((Cart[Real, N], Cart[Real, N])) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((GABS : ((((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool)((f : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool) => \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], (GEQ : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f((a, b)), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]))), (CROSS : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, (Cart[Real, N], Cart[Real, N])) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}, {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}))) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(i, (s : (Cart[Real, N]) -> Bool))}
+      #|  {(i : (Cart[Real, N]) -> Bool) | (IN : ((Cart[Real, N]) -> Bool, ((Cart[Real, N]) -> Bool) -> Bool) -> Bool)(i, (IMAGE : (((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool, ((Cart[Real, N], Cart[Real, N])) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((GABS : ((((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool) -> Bool, (Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool)((f : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool) => \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], (GEQ : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(f((a, b)), (interval : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N]) -> Bool)((a, b)))), (CROSS : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool, (Cart[Real, N], Cart[Real, N])) -> Bool)({(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}, {(x : Cart[Real, N]) | \226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 rational((op_dollar : (Cart[Real, N], Num) -> Real)(x, i))}))) && (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)(i, (s : (Cart[Real, N]) -> Bool))}
       #|  (\226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 (\226\136\131 D : ((Cart[Real, N]) -> Bool) -> Bool, COUNTABLE(D) && (\226\136\128 i : (Cart[Real, N]) -> Bool, IN(i, D) \226\134\146 SUBSET(i, s) && (\226\136\131 a : Cart[Real, N], \226\136\131 b : Cart[Real, N], i == interval((a, b)))) && UNIONS(D) == s)) && (\226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 (\226\136\131 D : ((Cart[Real, N]) -> Bool) -> Bool, COUNTABLE(D) && (\226\136\128 i : (Cart[Real, N]) -> Bool, IN(i, D) \226\134\146 SUBSET(i, s) && (\226\136\131 a : Cart[Real, N], \226\136\131 b : Cart[Real, N], i == interval([(a, b)]))) && UNIONS(D) == s))
       #|  IMAGE((g : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool), (d : ((Cart[Real, N]) -> Bool) -> Bool))
       #|  (g : ((Cart[Real, N]) -> Bool, Cart[Real, N]) -> Bool)
@@ -60219,7 +60219,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  woset((w : (A, A) -> Bool))
       #|  (v : (Cart[Real, N]) -> Bool)
       #|  IMAGE((f : (A, Cart[Real, N]) -> Bool), fld((w : (A, A) -> Bool)))
-      #|  forall f:A->real^N->bool v w.\n        woset w /\\ ~COUNTABLE {(x,y) | w x y} /\\\n        (forall v. v inseg w /\\ ~(v = w) ==> COUNTABLE {(x,y) | v x y}) /\\\n        (forall i. i IN fld w ==> closed_in (subtopology euclidean v) (f i) \\/\n                            open_in (subtopology euclidean v) (f i)) /\\\n        (forall i j. w i j ==> f j SUBSET f i)\n        ==> ?k. k IN fld w /\\ forall i. w k i ==> f i = f k
+      #|  \226\136\128 f : (A, Cart[Real, N]) -> Bool, \226\136\128 v : (Cart[Real, N]) -> Bool, \226\136\128 w : (A, A) -> Bool, woset(w) && !COUNTABLE({((x : A), (y : A)) | w(x, y)}) && (\226\136\128 v : (A, A) -> Bool, inseg(v, w) && !(v == w) \226\134\146 COUNTABLE({((x : A), (y : A)) | v(x, y)})) && (\226\136\128 i : A, IN(i, fld(w)) \226\134\146 closed_in(subtopology(euclidean, v), f(i)) || open_in(subtopology(euclidean, v), f(i))) && (\226\136\128 i : A, \226\136\128 j : A, w(i, j) \226\134\146 SUBSET(f(j), f(i))) \226\134\146 (\226\136\131 k : A, IN(k, fld(w)) && (\226\136\128 i : A, w(k, i) \226\134\146 f(i) == f(k)))
       #|  (\226\136\128 s : (Cart[Real, N]) -> Bool, open(s) \226\134\146 (borel : ((Cart[Real, N]) -> Bool) -> Bool)(s)) && (\226\136\128 s : (Cart[Real, N]) -> Bool, borel(s) \226\134\146 borel(DIFF(UNIV, s))) && (\226\136\128 u : ((Cart[Real, N]) -> Bool) -> Bool, COUNTABLE(u) && (\226\136\128 s : (Cart[Real, N]) -> Bool, IN(s, u) \226\134\146 borel(s)) \226\134\146 borel(UNIONS(u)))
       #|  DIFF(UNIV, (s : (Cart[Real, N]) -> Bool)) == DIFF(topspace(euclidean), s)
       #|  (s : (Cart[Real, N]) -> Bool)
@@ -60479,12 +60479,12 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (N : Num) <= N \226\134\146 !({(f : (Num) -> _)((n : Num)) | N <= n} == {})
       #|  (e : Real)
       #|  (N : Num)
-      #|  {INTERS\n       {{x | x IN s /\\\n             lift(setdist({(g:num->real^M->real^N) n x},(:real^N) DIFF v)) IN\n             {x | drop x >= e}} |n|\n        N <= n} |N,e| N IN (:num) /\\ e IN {r | rational r /\\ &0 < r}}
+      #|  {INTERS({{(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN(lift(setdist(({(g : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)}, DIFF(UNIV, (v : (Cart[Real, N]) -> Bool))))), {(x : Cart[Real, Unit]) | drop(x) >= e})} | n : Num | N <= n}) | N : Num, e : Real | IN(N, UNIV) && IN(e, {(r : Real) | rational(r) && real_of_num(0) < r})}
       #|  {(s : (Cart[Real, M]) -> Bool)}
       #|  (v : (Cart[Real, N]) -> Bool) == UNIV
       #|  SUBSET(IMAGE((f : (_) -> _), (s : (_) -> Bool)), (t : (_) -> Bool)) \226\134\146 (IN((x : _), s) && IN(f(x), INTER(t, (v : (_) -> Bool)))) == (IN(x, s) && IN(f(x), v))
       #|  (v : (Cart[Real, N]) -> Bool)
-      #|  forall f:real^M->real^N g s t u.\n        IMAGE f s SUBSET t /\\\n        open_in (subtopology euclidean t) u /\\\n        (forall n. (g n) continuous_on s) /\\\n        (forall x. x IN s ==> ((\\n. g n x) --> f x) sequentially)\n        ==> ?c. COUNTABLE c /\\\n                (forall t. t IN c ==> closed_in (subtopology euclidean s) t) /\\\n                UNIONS c = {x | x IN s /\\ f(x) IN u}
+      #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 g : (Num, Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 t : (Cart[Real, N]) -> Bool, \226\136\128 u : (Cart[Real, N]) -> Bool, SUBSET(IMAGE(f, s), t) && open_in(subtopology(euclidean, t), u) && (\226\136\128 n : Num, continuous_on(g(n), s)) && (\226\136\128 x : Cart[Real, M], IN(x, s) \226\134\146 op_minus_minus_gt((n : Num) => g(n, x), f(x), sequentially)) \226\134\146 (\226\136\131 c : ((Cart[Real, M]) -> Bool) -> Bool, COUNTABLE(c) && (\226\136\128 t : (Cart[Real, M]) -> Bool, IN(t, c) \226\134\146 closed_in(subtopology(euclidean, s), t)) && UNIONS(c) == {(x : Cart[Real, M]) | IN(x, s) && IN(f(x), u)})
       #|  (c : ((Cart[Real, M]) -> Bool) -> Bool)
       #|  (u : (Cart[Real, N]) -> Bool)
       #|  (UNIV : (Cart[Real, N]) -> Bool)
@@ -60621,7 +60621,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  (n : Num)
       #|  (e : Real)
       #|  (N : Num)
-      #|  {INTERS\n           {{x | x IN (:real^N) /\\\n                 lift(setdist({(g:num->real^N->real^1) n x},\n                              (:real^1) DIFF v)) IN\n                 {x | drop x >= e}} |n|\n            N <= n} |N,e| N IN (:num) /\\ e IN {r | rational r /\\ &0 < r}}
+      #|  {INTERS({{(x : Cart[Real, N]) | IN(x, UNIV) && IN(lift(setdist(({(g : (Num, Cart[Real, N]) -> Cart[Real, Unit])(n, x)}, DIFF(UNIV, (v : (Cart[Real, Unit]) -> Bool))))), {(x : Cart[Real, Unit]) | drop(x) >= e})} | n : Num | N <= n}) | N : Num, e : Real | IN(N, UNIV) && IN(e, {(r : Real) | rational(r) && real_of_num(0) < r})}
       #|  (v : (Cart[Real, Unit]) -> Bool) == UNIV
       #|  (g : (Num, Cart[Real, N]) -> Cart[Real, Unit])
       #|  (v : (Cart[Real, Unit]) -> Bool)
@@ -60702,7 +60702,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  real_of_num(0) < setdist(({(f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))}, DIFF(UNIV, (u : (Cart[Real, N]) -> Bool))))
       #|  IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  {x | x IN s /\\ (f:real^M->real^N) x IN u} =\n    UNIONS {INTERS\n           {{x | x IN s /\\\n                 lift(setdist({(g:num->real^M->real^N) n x},\n                              (:real^N) DIFF u)) IN\n                 {x | drop x >= e}} |n|\n            N <= n} |N,e| N IN (:num) /\\ e IN {r | rational r /\\ &0 < r}}
+      #|  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (u : (Cart[Real, N]) -> Bool))} == UNIONS({INTERS({{(x : Cart[Real, M]) | IN(x, s) && IN(lift(setdist(({(g : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)}, DIFF(UNIV, u)))), {(x : Cart[Real, Unit]) | drop(x) >= e})} | n : Num | N <= n}) | N : Num, e : Real | IN(N, UNIV) && IN(e, {(r : Real) | rational(r) && real_of_num(0) < r})})
       #|  (UNIV : (Cart[Real, M]) -> Bool)
       #|  (u : (Cart[Real, N]) -> Bool) == UNIV
       #|  (g : (Num, Cart[Real, M]) -> Cart[Real, N])
@@ -61266,7 +61266,7 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  real_of_num(0) < setdist(({(f : (Cart[Real, M]) -> Cart[Real, N])((x : Cart[Real, M]))}, DIFF(UNIV, (v : (Cart[Real, N]) -> Bool))))
       #|  IN((x : Cart[Real, M]), (s : (Cart[Real, M]) -> Bool))
       #|  (x : Cart[Real, M])
-      #|  {x | x IN s /\\ (f:real^M->real^N) x IN v} =\n    UNIONS\n      {INTERS\n       {{x | x IN s /\\\n             lift(setdist({(g:num->real^M->real^N) n x},(:real^N) DIFF v)) IN\n             {x | drop x > e}} |n|\n        N <= n} |N,e| N IN (:num) /\\ e IN {r | rational r /\\ &0 < r}}
+      #|  {(x : Cart[Real, M]) | IN(x, (s : (Cart[Real, M]) -> Bool)) && IN((f : (Cart[Real, M]) -> Cart[Real, N])(x), (v : (Cart[Real, N]) -> Bool))} == UNIONS({INTERS({{(x : Cart[Real, M]) | IN(x, s) && IN(lift(setdist(({(g : (Num, Cart[Real, M]) -> Cart[Real, N])(n, x)}, DIFF(UNIV, v)))), {(x : Cart[Real, Unit]) | drop(x) > e})} | n : Num | N <= n}) | N : Num, e : Real | IN(N, UNIV) && IN(e, {(r : Real) | rational(r) && real_of_num(0) < r})})
       #|  {(x : _) | IN(x, (s : (_) -> Bool)) && IN((f : (_) -> _)(x), UNIV)} == s
       #|  (v : (Cart[Real, N]) -> Bool) == UNIV
       #|  (v : (Cart[Real, N]) -> Bool)
