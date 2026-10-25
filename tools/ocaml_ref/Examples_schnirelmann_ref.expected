@@ -9116,12 +9116,12 @@ Examples/schnirelmann quotations (215):
   \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 n : Num, SUBSET(s, t) \226\134\146 count(s, n) <= count(t, n)
   \226\136\128 s : (Num) -> Bool, \226\136\128 t : (Num) -> Bool, \226\136\128 n : Num, (\226\136\128 m : Num, 1 <= m \226\134\146 IN(m, s) == IN(m, t)) \226\134\146 count(s, n) == count(t, n)
   real_of_num(0)
-  (forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)
+  (\226\136\128 x : _, IN(x, {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)}) \226\134\146 (Q : (_) -> Bool)(x)) == (\226\136\128 x : _, P(x) \226\134\146 Q(f(x)))
   {real_of_num(count((s : (Num) -> Bool), (n : Num))) / real_of_num(n) | 1 <= n}
   (\226\136\128 n : Num, 1 <= n \226\134\146 schnirelmann((s : (Num) -> Bool)) <= real_of_num(count(s, n)) / real_of_num(n)) && (\226\136\128 b : Real, (\226\136\128 n : Num, 1 <= n \226\134\146 b <= real_of_num(count(s, n)) / real_of_num(n)) \226\134\146 b <= schnirelmann(s))
   (n : Num) == 0 || 1 <= n
   \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, schnirelmann(s) * real_of_num(n) <= real_of_num(count(s, n))
-  (forall x. x IN {f x | P x} ==> Q x) <=> forall x. P x ==> Q(f x)
+  (\226\136\128 x : _, IN(x, {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)}) \226\134\146 (Q : (_) -> Bool)(x)) == (\226\136\128 x : _, P(x) \226\134\146 Q(f(x)))
   \226\136\128 s : (Num) -> Bool, real_of_num(0) <= schnirelmann(s) && schnirelmann(s) <= real_of_num(1)
   real_of_num(count((s : (Num) -> Bool), (n : Num))) / real_of_num(n)
   (n : Num)
