@@ -81800,7 +81800,7 @@ test "100/morley matches 100/morley.ml" {
       #|  I == ((z : Cart[Real, Tybit0[Unit]]) => Cx(real_of_num(1)) * z + Cx(real_of_num(0)))
       #|  Cx(real_of_num(1))
       #|  Cx(real_of_num(0))
-      #|  forall a b a' b. (\\z. a * z + b) = (\\z. a' * z + b') <=> a = a' /\\ b = b'
+      #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : _, \226\136\128 a' : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], (((z : Cart[Real, Tybit0[Unit]]) => a * z + b) == ((z : Cart[Real, Tybit0[Unit]]) => a' * z + (b' : Cart[Real, Tybit0[Unit]]))) == (a == a' && b == b')
       #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 t : Real, rotate_about(a, t) == ((z : Cart[Real, Tybit0[Unit]]) => cexp(ii * Cx(t)) * z + (Cx(real_of_num(1)) - cexp(ii * Cx(t))) * a)
       #|  (s : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)) \226\134\146 s + (t : Cart[Real, Tybit0[Unit]]) == Cx(real_of_num(0)) \226\134\146 t == Cx(real_of_num(0))
       #|  (a3 : Cart[Real, Tybit0[Unit]]) * ((a1 : Cart[Real, Tybit0[Unit]]) * (B : Cart[Real, Tybit0[Unit]]) + (b1 : Cart[Real, Tybit0[Unit]])) + (b3 : Cart[Real, Tybit0[Unit]]) == B \226\134\146 !(a1 * a3 == Cx(real_of_num(1))) \226\134\146 B == (a3 * b1 + b3) / (Cx(real_of_num(1)) - a1 * a3)
