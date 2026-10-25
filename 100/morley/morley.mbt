@@ -444,7 +444,7 @@ fn step_18() -> Unit raise {
   })
   let t146 = @simp.simp_tac(@list.List([@class.fun_eq_thm()]))
   let t162 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t146), @tactics.disch_tac), t153), t160), t161)
-  affine_group_eq_c.set(@tactics.prove(@parser.parse_term("forall a b a' b. (\\z. a * z + b) = (\\z. a' * z + b') <=> a = a' /\\ b = b'"), t162))
+  affine_group_eq_c.set(@tactics.prove(@term_syntax.parse_term("∀ a : Cart[Real, Tybit0[Unit]], ∀ b : _, ∀ a' : Cart[Real, Tybit0[Unit]], ∀ b : Cart[Real, Tybit0[Unit]], (((z : Cart[Real, Tybit0[Unit]]) => a * z + b) == ((z : Cart[Real, Tybit0[Unit]]) => a' * z + (b' : Cart[Real, Tybit0[Unit]]))) == (a == a' && b == b')"), t162))
 }
 
 ///|

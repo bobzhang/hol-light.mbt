@@ -74336,7 +74336,7 @@ Multivariate/canal quotations (990):
   \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, (net : Net[_])) \226\134\146 op_minus_minus_gt((x : _) => c * f(x), c * l, net)
   \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 c : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, (net : Net[_])) \226\134\146 op_minus_minus_gt((x : _) => f(x) * c, l * c, net)
   \226\136\128 net : Net[_], \226\136\128 f : (_) -> Real, \226\136\128 l : Real, op_minus_minus_gt((x : _) => Cx(f(x)), Cx(l), net) == op_minus_minus_gt((x : _) => lift(f(x)), lift(l), net)
-  forall f s x.\n     ((\\x. Cx(f x)) sums (Cx x)) s <=> ((\\x. lift(f x)) sums (lift x)) s
+  \226\136\128 f : (Num) -> Real, \226\136\128 s : (Num) -> Bool, \226\136\128 x : Real, sums((x : Num) => Cx(f(x)), Cx(x), s) == sums((x : Num) => lift(f(x)), lift(x), s)
   (x : Real) >= (b : Real) \226\134\146 abs(x) >= b
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, N], \226\136\128 l : Cart[Real, N], op_minus_minus_gt(f, l, at_infinity) \226\134\146 op_minus_minus_gt(o(f, Cx), l, at_posinfinity)
   \226\136\128 net : Net[_], \226\136\128 f : (_) -> Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, (l : Cart[Real, Tybit0[Unit]]), net) == op_minus_minus_gt((x : _) => f(x) - l, Cx(real_of_num(0)), net)
