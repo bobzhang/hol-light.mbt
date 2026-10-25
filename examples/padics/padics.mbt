@@ -1305,7 +1305,7 @@ pub fn pdist_triangle() -> @kernel.Thm {
 /// PDIST_ULTRA
 fn step_37() -> Unit raise {
   let t620 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), @sets.in_elim_thm()]))
-  let lemma = @tactics.prove(@parser.parse_term("forall p. (\\(x,y,z). &0 <= f x y z) p <=>\n         f (FST p) (FST(SND p)) (SND(SND p)) IN {t | &0 <= t}"), t620)
+  let lemma = @tactics.prove(@term_syntax.parse_term("∀ p : (_, _, _), fn { (x, y, z) => real_of_num(0) <= (f : (_, _, _) -> Real)(x, y, z) }(p) == IN(f(FST(p), FST(SND(p)), SND(SND(p))), {(t : Real) | real_of_num(0) <= t})"), t620)
   let t657 = @meson.meson_tac(@list.List([@metric.continuous_map_fst(), @metric.continuous_map_snd()]))
   let t655 = @tactics.match_mp_tac(@metric.continuous_map_snd_of())
   let t656 = @tactics.repeat_tac(@tactics.orelse_tac(@tactics.match_mp_tac(@metric.continuous_map_fst_of()), t655))
