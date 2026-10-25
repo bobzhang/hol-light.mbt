@@ -984,10 +984,10 @@ pub fn check_spelling(old : String, s : String) -> Unit raise Unprintable {
 }
 
 ///|
-/// A type, briefly, for a diagnostic.
+/// A type, briefly, for a diagnostic (a type variable after a quote).
 fn brief_type(ty : @kernel.HolType) -> String {
   match ty {
-    Tyvar(n) => n
+    Tyvar(n) => "'" + n
     Tyapp(c, @list.Empty) => c
     Tyapp(c, args) => c + "(" + args.iter().map(brief_type).join(",") + ")"
   }
