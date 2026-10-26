@@ -1800,7 +1800,7 @@ fn step_22() -> Unit raise {
   }), t1236), t1237), t1238), t1239), @tactics.conj_tac), t1244), t1253])
   let t1225 = @tactics.match_mp_tac(@canal.lim_complex_mul())
   let t1224 = @simp.rewrite_tac(@list.List([@complexes.complex_mul_assoc()]))
-  let t1223 = @simp.rewrite_tac(@list.List([@complexes.simple_complex_arith(@parser.parse_term("(--Cx(&1) * p) * is_ * i = (p * i) * --is_"))]))
+  let t1223 = @simp.rewrite_tac(@list.List([@complexes.simple_complex_arith(@term_syntax.parse_term("-Cx(real_of_num(1)) * (p : Cart[Real, Tybit0[Unit]]) * ((is_ : Cart[Real, Tybit0[Unit]]) * (i : Cart[Real, Tybit0[Unit]])) == p * i * -is_"))]))
   let t1222 = @simp.rewrite_tac(@list.List([@complexes.complex_div(), @complexes.complex_pow(), @complexes.complex_inv_mul()]))
   let t1221 = @simp.once_rewrite_tac(@list.List([cgamma_recurrence_alt()]))
   let t1255 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.fact(), @complexes.cx_mul(), @equal.gsym(@realax.real_of_num_mul())])), t1221), t1222), t1223), t1224), t1225), @tactics.conj_tac), t1254)
