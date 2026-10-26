@@ -378,6 +378,7 @@ fn Printer::bind(
   v : @kernel.Term,
   body : @kernel.Term,
   bound : Bound,
+  truth~ : Bool = true,
 ) -> (String, Bound) raise Unprintable {
   guard v is Var(name, ty) else { raise Unprintable("binder is not a variable") }
   // the names the other variables free in body are printed under
@@ -392,8 +393,9 @@ fn Printer::bind(
   // a binder named like a constant would be read as that constant
   // (its occurrences are read as it, by name, whatever they spell)
   // except T and F: the syntax writes truth and falsity as true and false,
-  // and a binder named T or F binds a variable
-  let truth = name == "T" || name == "F"
+  // and a binder named T or F binds a variable (a pattern's T is truth, as
+  // in HOL, so a pattern variable named T is renamed: `truth=false`)
+  let truth = truth && (name == "T" || name == "F")
   let plain = is_ident(name) && (truth || !is_constant_name(name))
   let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
   if clash || !plain {
@@ -660,7 +662,7 @@ fn Printer::bind_pattern(
 ) -> Bound raise Unprintable {
   let mut inner = bound
   for v in vs {
-    inner = self.bind(v, body, inner).1
+    inner = self.bind(v, body, inner, truth=false).1
   }
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
@@ -783,7 +785,11 @@ fn implicit_binders(
     .to_array()
     .filter(v => {
       let n = printed(v)
-      !is_constant_name(n) && !n.to_array().iter().all(c => c is ('0'..='9'))
+      // a variable named T or F that a binder in scope binds is read as
+      // that variable (elaboration aliases it); unbound, as the constant
+      let truth = (n == "T" || n == "F") && bound.iter().any(b => b.0 == v)
+      (truth || !is_constant_name(n)) &&
+      !n.to_array().iter().all(c => c is ('0'..='9'))
     })
   }
   let fvs = vars(e)

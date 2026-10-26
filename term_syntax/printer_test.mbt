@@ -329,17 +329,12 @@ test "set notation: spelled-out GSPEC and renamed binders" {
     #|GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x))
   ))
   // HOL reads T as the constant's name in {T | T}, which binds nothing
-  // there; in the term syntax the lambda's T is a variable, which
-  // {T | T} would bind, so no spelling reads back exactly
+  // there: the lambda's T is spelled out, not bound by a comprehension
   inspect(
-    try {
-      ignore(@term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")))
-      "printed"
-    } catch {
-      @term_syntax.Unprintable(_) => "unprintable"
-      e => raise e
-    },
-    content="unprintable",
+    @term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")),
+    content=(
+      #|(T : Bool) => GSPEC((v : Bool) => SETSPEC(v, T, T))
+    ),
   )
 }
 
@@ -439,4 +434,17 @@ test "binders named T and F bind variables, as in HOL" {
     @term_syntax.same_term(t, @parser.parse_term("\\T'. T' + (if T then 1 else 0)")),
     content="true",
   )
+}
+
+///|
+test "binders named T and F: comprehensions and patterns" {
+  // the comprehension under a binder named T keeps its listed binders
+  let t = @term_syntax.parse_term(
+    "(T : Bool) => {(x, y) | x : Num, y : Num | T}",
+  )
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(t)), t))
+  // a pattern variable named T is renamed: a pattern's T is truth
+  let m = @parser.parse_term("match (x:bool) with T' -> T'")
+  let s = @term_syntax.print_term(m)
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(s), m))
 }
