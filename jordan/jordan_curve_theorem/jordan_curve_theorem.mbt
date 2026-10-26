@@ -611,7 +611,7 @@ pub fn norm_scale2() -> @kernel.Thm {
 ///|
 /// closed_half_space
 fn step_29() -> Unit raise {
-  closed_half_space_c.set(jordan_def(@parser.parse_term("closed_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <=. b) }")))
+  closed_half_space_c.set(jordan_def(@term_syntax.parse_term("(closed_half_space : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) <= b}")))
 }
 
 ///|
@@ -626,7 +626,7 @@ pub fn closed_half_space() -> @kernel.Thm {
 ///|
 /// open_half_space
 fn step_30() -> Unit raise {
-  open_half_space_c.set(jordan_def(@parser.parse_term("open_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <. b) }")))
+  open_half_space_c.set(jordan_def(@term_syntax.parse_term("(open_half_space : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) < b}")))
 }
 
 ///|
@@ -641,7 +641,7 @@ pub fn open_half_space() -> @kernel.Thm {
 ///|
 /// hyperplane
 fn step_31() -> Unit raise {
-  hyperplane_c.set(jordan_def(@parser.parse_term("hyperplane n v b =\n  {z | (euclid n z) /\\ (dot v z = b) }")))
+  hyperplane_c.set(jordan_def(@term_syntax.parse_term("(hyperplane : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) == b}")))
 }
 
 ///|
@@ -862,7 +862,7 @@ fn step_41() -> Unit raise {
     @simp.rewrite_tac(@list.List([t]))
   })
   let t271 = @meson.asm_meson_tac(@list.List([@metric_spaces.euclid_add_closure(), @metric_spaces.euclid_scale_closure(), @metric_spaces.dot_linear2(), @metric_spaces.dot_scale2()]))
-  let t251 = @parser.parse_term("dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)")
+  let t251 = @term_syntax.parse_term("euclid_dot((v : (Num) -> Real), euclid_euclid_scale((a : Real), (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - a, (y : (Num) -> Real))) == a * euclid_dot(v, x) + (real_of_num(1) - a) * euclid_dot(v, y)")
   let t272 = @simp.asm_simp_tac(@list.List([@metric_spaces.euclid_add_closure(), @metric_spaces.euclid_scale_closure()]))
   let t273 = @tactics_ext2.kill(7L)
   let t274 = @simp.asm_rewrite_tac(@list.List([]))
@@ -899,7 +899,7 @@ fn step_42() -> Unit raise {
     @simp.rewrite_tac(@list.List([t]))
   })
   let t292 = @meson.asm_meson_tac(@list.List([@metric_spaces.euclid_add_closure(), @metric_spaces.euclid_scale_closure(), @metric_spaces.dot_linear2(), @metric_spaces.dot_scale2()]))
-  let t278 = @parser.parse_term("dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)")
+  let t278 = @term_syntax.parse_term("euclid_dot((v : (Num) -> Real), euclid_euclid_scale((a : Real), (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - a, (y : (Num) -> Real))) == a * euclid_dot(v, x) + (real_of_num(1) - a) * euclid_dot(v, y)")
   let t293 = @simp.asm_simp_tac(@list.List([@metric_spaces.euclid_add_closure(), @metric_spaces.euclid_scale_closure()]))
   let t294 = @tactics_ext2.kill(7L)
   let t295 = @simp.asm_rewrite_tac(@list.List([]))
@@ -959,7 +959,7 @@ fn step_44() -> Unit raise {
   let t348 = @simp.asm_simp_tac(@list.List([@metric_spaces.euclid_sub_closure()]))
   let t319 = @term_syntax.parse_term("(n : _)")
   let t349 = @tactics_ext2.imatch_mp_tac(@metric_spaces.dot_linear2())
-  let t314 = @parser.parse_term("dot v (a + (x - a)) = (dot v a) + (dot v (x-a))")
+  let t314 = @term_syntax.parse_term("euclid_dot((v : (Num) -> Real), (a : (Num) -> Real) + ((x : (Num) -> Real) - a)) == euclid_dot(v, a) + euclid_dot(v, x - a)")
   let t350 = @tactics.disch_then(fn(x312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x312
     @simp.once_rewrite_tac(@list.List([t]))
@@ -973,7 +973,7 @@ fn step_44() -> Unit raise {
   let t356 = @meson.asm_meson_tac(@list.List([@misc_defs_and_lemmas.norm(), @metric_spaces.norm_nonneg(), @metric_spaces.dot_nonneg(), @real.sqrt_eq_0(), @metric_spaces.dot_zero()]))
   let t357 = @tactics_ext2.imatch_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) → real_of_num(0) < x")))
   let t307 = @term_syntax.parse_term("real_of_num(0) < euclid_norm((v : (Num) -> Real))")
-  let t305 = @parser.parse_term("(b - (dot v a))/(norm v)")
+  let t305 = @term_syntax.parse_term("((b : Real) - euclid_dot((v : (Num) -> Real), (a : (Num) -> Real))) / euclid_norm(v)")
   let t358 = @meson.meson_tac(@list.List([]))
   let t359 = @simp.asm_rewrite_tac(@list.List([@metric_spaces.dot_lzero()]))
   let t360 = @class.asm_cases_tac(@term_syntax.parse_term("(v : (Num) -> Real) == euclid_euclid0"))
@@ -1090,7 +1090,7 @@ fn step_47() -> Unit raise {
   })
   let t420 = @meson.asm_meson_tac(@list.List([@metric_spaces.dot_minus_linear2(), @metric_spaces.dot_scale2(), @metric_spaces.euclid_sub_closure(), @metric_spaces.euclid_scale_closure()]))
   let t421 = @analysis.expand_tac("u")
-  let t384 = @parser.parse_term("dot v u = (dot v x - t* (dot v v))")
+  let t384 = @term_syntax.parse_term("euclid_dot((v : (Num) -> Real), (u : (Num) -> Real)) == euclid_dot(v, (x : (Num) -> Real)) - (t : Real) * euclid_dot(v, v)")
   let t422 = @meson.asm_meson_tac(@list.List([@metric_spaces.euclid_sub_closure(), @metric_spaces.euclid_scale_closure()]))
   let t423 = @simp.asm_rewrite_tac(@list.List([]))
   let t424 = @tactics_ext2.imatch_mp_tac(@real.sqrt_pos_lt())
@@ -1102,7 +1102,7 @@ fn step_47() -> Unit raise {
   let t429 = @meson.asm_meson_tac(@list.List([@misc_defs_and_lemmas.euclidean(), @metric_spaces.dot_zero_euclidean()]))
   let t430 = @simp.rewrite_tac(@list.List([@metric_spaces.dot_nonneg()]))
   let t431 = @tactics_ext2.imatch_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("!((x : Real) == real_of_num(0)) && real_of_num(0) <= x → real_of_num(0) < x")))
-  let t380 = @parser.parse_term("&.0 < (dot v v)")
+  let t380 = @term_syntax.parse_term("real_of_num(0) < euclid_dot((v : (Num) -> Real), v)")
   let t378 = @term_syntax.parse_term("(u : _)")
   let t373 = @term_syntax.parse_term("(u : (Num) -> Real) == (x : (Num) -> Real) - euclid_euclid_scale((t : Real), (v : (Num) -> Real))")
   let t371 = @term_syntax.parse_term("(t : Real) == (r : Real) / real_of_num(2) / euclid_norm((v : (Num) -> Real))")
@@ -3142,8 +3142,8 @@ fn step_127() -> Unit raise {
   let t1290 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("2 == SUC(1)"))]))
   let t1291 = @simp.asm_simp_tac(@list.List([euclid_point()]))
   let t1292 = @tactics_ext2.imatch_mp_tac(@metric_spaces.dot_euclid())
-  let t1284 = @parser.parse_term("dot (point p) (point q) = sum (0,2) (\\i. (point p i)*(point q i))")
-  dot_point_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall p q . (dot (point p) (point q)) = (FST p)*(FST q) + (SND p)*(SND q)"), @list.List([@tactics_ext.disch_all_tac, (x1285 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1284, @tactics_ext.subgoal_tac, x1285), t1292, t1291, disch_then_rewrite, t1290, t1289, t1288, t1287, @tactics_ext2.reduce_tac, t1286])))
+  let t1284 = @term_syntax.parse_term("euclid_dot(jordan_point((p : (Real, Real))), jordan_point((q : (Real, Real)))) == sum((0, 2), (i : Num) => jordan_point(p, i) * jordan_point(q, i))")
+  dot_point_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ p : (Real, Real), ∀ q : (Real, Real), euclid_dot(jordan_point(p), jordan_point(q)) == FST(p) * FST(q) + SND(p) * SND(q)"), @list.List([@tactics_ext.disch_all_tac, (x1285 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1284, @tactics_ext.subgoal_tac, x1285), t1292, t1291, disch_then_rewrite, t1290, t1289, t1288, t1287, @tactics_ext2.reduce_tac, t1286])))
 }
 
 ///|

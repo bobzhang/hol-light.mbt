@@ -23844,9 +23844,9 @@ Jordan/jordan_curve_theorem quotations (59532):
   real_of_num(0)
   (t : _)
   \226\136\128 t : Real, \226\136\128 x : (Num) -> Real, euclid_euclidean(x) \226\134\146 euclid_norm(euclid_euclid_scale(t, x)) == abs(t) * euclid_norm(x)
-  closed_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <=. b) }
-  open_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <. b) }
-  hyperplane n v b =\n  {z | (euclid n z) /\\ (dot v z = b) }
+  (closed_half_space : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) <= b}
+  (open_half_space : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) < b}
+  (hyperplane : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) == b}
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, SUBSET(jordan_closed_half_space(n, v, b), euclid_euclid(n))
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, SUBSET(jordan_open_half_space(n, v, b), euclid_euclid(n))
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, SUBSET(jordan_hyperplane(n, v, b), euclid_euclid(n))
@@ -23865,11 +23865,11 @@ Jordan/jordan_curve_theorem quotations (59532):
   !(real_of_num(0) == (a : Real)) && real_of_num(0) <= a \226\134\146 real_of_num(0) < a
   (b : Real) == (a : Real) * b + (real_of_num(1) * b - a * b)
   real_of_num(0) == (a : Real)
-  dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)
+  euclid_dot((v : (Num) -> Real), euclid_euclid_scale((a : Real), (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - a, (y : (Num) -> Real))) == a * euclid_dot(v, x) + (real_of_num(1) - a) * euclid_dot(v, y)
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_convex(jordan_open_half_space(n, v, b))
   (a : Real) <= real_of_num(1) \226\134\146 real_of_num(0) <= real_of_num(1) - a
   (b : Real) == (a : Real) * b + (real_of_num(1) * b - a * b)
-  dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)
+  euclid_dot((v : (Num) -> Real), euclid_euclid_scale((a : Real), (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - a, (y : (Num) -> Real))) == a * euclid_dot(v, x) + (real_of_num(1) - a) * euclid_dot(v, y)
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_convex(jordan_closed_half_space(n, v, b))
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_convex(jordan_hyperplane(n, v, b))
   abs((u : Real)) <= (C : Real) \226\134\146 u <= C
@@ -23877,11 +23877,11 @@ Jordan/jordan_curve_theorem quotations (59532):
   euclid_norm((v : (Num) -> Real)) * euclid_d_euclid((a : (Num) -> Real), (x : (Num) -> Real))
   (\226\136\131 d : Real, (b : Real) <= d && d < (C : Real) - (a : Real)) \226\134\146 a + b < C
   (n : _)
-  dot v (a + (x - a)) = (dot v a) + (dot v (x-a))
+  euclid_dot((v : (Num) -> Real), (a : (Num) -> Real) + ((x : (Num) -> Real) - a)) == euclid_dot(v, a) + euclid_dot(v, x - a)
   (x : (Num) -> Real) == (a : (Num) -> Real) + (x - a)
   real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) \226\134\146 real_of_num(0) < x
   real_of_num(0) < euclid_norm((v : (Num) -> Real))
-  (b - (dot v a))/(norm v)
+  ((b : Real) - euclid_dot((v : (Num) -> Real), (a : (Num) -> Real))) / euclid_norm(v)
   (v : (Num) -> Real) == euclid_euclid0
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid), jordan_open_half_space(n, v, b))
   \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_closed_(euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), jordan_closed_half_space(n, v, b))
@@ -23892,10 +23892,10 @@ Jordan/jordan_curve_theorem quotations (59532):
   euclid_norm(euclid_euclid_scale((t : Real), (v : (Num) -> Real))) == t * euclid_norm(v)
   (x : (Num) -> Real) - (x - euclid_euclid_scale((t : Real), (v : (Num) -> Real))) == euclid_euclid_scale(t, v)
   (a : Real) <= (b : Real) && real_of_num(0) < (C : Real) \226\134\146 a - C < b
-  dot v u = (dot v x - t* (dot v v))
+  euclid_dot((v : (Num) -> Real), (u : (Num) -> Real)) == euclid_dot(v, (x : (Num) -> Real)) - (t : Real) * euclid_dot(v, v)
   real_of_num(0) < (t : Real)
   !((x : Real) == real_of_num(0)) && real_of_num(0) <= x \226\134\146 real_of_num(0) < x
-  &.0 < (dot v v)
+  real_of_num(0) < euclid_dot((v : (Num) -> Real), v)
   (u : _)
   (u : (Num) -> Real) == (x : (Num) -> Real) - euclid_euclid_scale((t : Real), (v : (Num) -> Real))
   (t : Real) == (r : Real) / real_of_num(2) / euclid_norm((v : (Num) -> Real))
@@ -25177,8 +25177,8 @@ Jordan/jordan_curve_theorem quotations (59532):
   SUC(0) == 1
   1 == SUC(0)
   2 == SUC(1)
-  dot (point p) (point q) = sum (0,2) (\\i. (point p i)*(point q i))
-  forall p q . (dot (point p) (point q)) = (FST p)*(FST q) + (SND p)*(SND q)
+  euclid_dot(jordan_point((p : (Real, Real))), jordan_point((q : (Real, Real)))) == sum((0, 2), (i : Num) => jordan_point(p, i) * jordan_point(q, i))
+  \226\136\128 p : (Real, Real), \226\136\128 q : (Real, Real), euclid_dot(jordan_point(p), jordan_point(q)) == FST(p) * FST(q) + SND(p) * SND(q)
   \226\136\128 r : Real, {(z : (Num) -> Real) | \226\136\131 p : (Real, Real), z == jordan_point(p) && FST(p) < r} == jordan_open_half_space(2, jordan_point((real_of_num(1), real_of_num(0))), r)
   \226\136\128 r : Real, {(z : (Num) -> Real) | \226\136\131 p : (Real, Real), z == jordan_point(p) && r < FST(p)} == jordan_open_half_space(2, jordan_point((-real_of_num(1), real_of_num(0))), -r)
   \226\136\128 r : Real, {(z : (Num) -> Real) | \226\136\131 p : (Real, Real), z == jordan_point(p) && SND(p) < r} == jordan_open_half_space(2, jordan_point((real_of_num(0), real_of_num(1))), r)
