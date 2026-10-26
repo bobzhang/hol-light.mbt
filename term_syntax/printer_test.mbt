@@ -297,10 +297,10 @@ test "set notation: binders, counters, degenerate comprehensions" {
 
 ///|
 test "set notation: review cases" {
-  // two explicit binders named like constants get distinct names
+  // binders named T and F keep their names
   let t = @term_syntax.parse_term("{T | T : Bool, F : Bool | T != F}")
   inspect(@term_syntax.print_term(t), content=(
-    #|{T' | T' : Bool, F' : Bool | !(T' == F')}
+    #|{T | T : Bool, F : Bool | !(T == F)}
   ))
   // an inner binding of the same variable does not take the outer
   // binder's type annotation
@@ -328,12 +328,12 @@ test "set notation: spelled-out GSPEC and renamed binders" {
   inspect(spell("GSPEC (\\g:num. ?x:num. SETSPEC g T x)"), content=(
     #|GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x))
   ))
-  // T is a constant, so {T | T} binds nothing: the lambda's T, renamed,
-  // is not bound by the comprehension (renaming it is not exact)
+  // {T | T} binds nothing, in HOL and in the term syntax alike: a name like
+  // T is no variable a comprehension binds implicitly, even under a binder
   inspect(
     @term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")),
     content=(
-      #|(T' : Bool) => GSPEC((v : Bool) => SETSPEC(v, T', T'))
+      #|(T : Bool) => {T | T}
     ),
   )
 }
@@ -411,4 +411,65 @@ test "replacing an overload does not change a context-free reading" {
     @preterm.override_interface("&", @kernel.mk_const("real_of_num", @list.List([])))
     assert_eq(@kernel.type_of(@term_syntax.parse_term("op_amp(0)")), before)
   })
+}
+
+///|
+test "binders named T and F bind variables, as in HOL" {
+  fn spell(q : String) -> String raise {
+    @term_syntax.spell_quotation(q, @parser.parse_term(q))
+  }
+  // the binder keeps its name and its annotation
+  inspect(spell("\\T. T + 1"), content="(T : Num) => T + 1")
+  inspect(spell("forall F. F + 0 = F"), content="∀ F : Num, F + 0 == F")
+  // truth and falsity under such a binder stay the constants
+  inspect(
+    spell("\\T. T + (if F then 1 else 0)"),
+    content="(T : Num) => T + (if false { 1 } else { 0 })",
+  )
+  inspect(spell("forall T:bool. T \\/ ~T"), content="∀ T : Bool, T || !T")
+  // true under a binder named T is truth, not the bound variable (HOL's
+  // own \T. ... T ... would mean the variable, hence the primed name here)
+  let t = @term_syntax.parse_term("(T : Num) => T + (if true { 1 } else { 0 })")
+  inspect(
+    @term_syntax.same_term(t, @parser.parse_term("\\T'. T' + (if T then 1 else 0)")),
+    content="true",
+  )
+}
+
+///|
+test "binders named T and F: comprehensions and patterns" {
+  // the comprehension under a binder named T keeps its listed binders
+  let t = @term_syntax.parse_term(
+    "(T : Bool) => {(x, y) | x : Num, y : Num | T}",
+  )
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(t)), t))
+  // a comprehension's own binder named T is listed
+  for q in ["{T | T : Bool | true}", "{F | F : Bool | F}"] {
+    let c = @term_syntax.parse_term(q)
+    assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
+  }
+  // under a pattern variable named T (printed T'), a comprehension's T is
+  // listed
+  let g = @term_syntax.parse_term(
+    "GABS((f : ((Bool, Num)) -> (Bool) -> Bool) => ∀ T : Bool, ∀ x : Num, GEQ(f((T, x)), {T | T : Bool | true}))",
+  )
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(g)), g))
+  // in a lambda's pattern, read with nothing in scope, an outer T does
+  // not make a comprehension's T a variable
+  for q in ["(T : Bool) => fn { {T | T : Bool | true} => T }", "(F : Bool) => fn { {F | F : Bool | true} => F }"] {
+    let c = @term_syntax.parse_term(q)
+    assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
+  }
+  // comprehensions inside patterns (Codex)
+  for q in [
+    "(T : Bool) => ∀ ({T | T : Bool | true}, x) : ((Bool) -> Bool, Num), T",
+    "fn { ((T : Bool) => {(x, y) | x : Num, y : Num | T}) => true }",
+  ] {
+    let c = @term_syntax.parse_term(q)
+    assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
+  }
+  // a pattern variable named T is renamed: a pattern's T is truth
+  let m = @parser.parse_term("match (x:bool) with T' -> T'")
+  let s = @term_syntax.print_term(m)
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(s), m))
 }
