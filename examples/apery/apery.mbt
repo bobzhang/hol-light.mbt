@@ -5251,10 +5251,10 @@ fn step_188() -> Unit raise {
       let t = x1645
       let t1649 = @nums.mk_small_numeral(t)
       let t1648 = @term_syntax.parse_term("(p : Num)")
-      let t1650 = @kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(+):num->num->num"), t1648), t1649)
+      let t1650 = @kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"), t1648), t1649)
       let t1647 = @nums.mk_small_numeral(i)
       let t1646 = @term_syntax.parse_term("(p : Num)")
-      let th = @bool.specl(@list.List([@kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(+):num->num->num"), t1646), t1647), t1650]), vv_support())
+      let th = @bool.specl(@list.List([@kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"), t1646), t1647), t1650]), vv_support())
       @bool.mp(th, @tactics.prove(@basics.dest_imp(@kernel.concl(th)).0, @int.arith_tac))
     }
   }
@@ -5297,10 +5297,10 @@ pub fn bdry_cl_inst(x1653 : @kernel.Thm, x1654 : Int64, x1655 : Int64) -> @kerne
   let ko = x1655
   let t1659 = @nums.mk_small_numeral(ko)
   let t1658 = @term_syntax.parse_term("(p : Num)")
-  let t1660 = @kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(+):num->num->num"), t1658), t1659)
+  let t1660 = @kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"), t1658), t1659)
   let t1657 = @nums.mk_small_numeral(no)
   let t1656 = @term_syntax.parse_term("(p : Num)")
-  let inst = @bool.specl(@list.List([@kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(+):num->num->num"), t1656), t1657), t1660]), clg)
+  let inst = @bool.specl(@list.List([@kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"), t1656), t1657), t1660]), clg)
   let pre = @basics.dest_imp(@kernel.concl(inst)).0
   let t1661 = @tactics.then_tac(@tactics.disch_tac, @int.asm_arith_tac)
   let preth = @bool.mp(@tactics.prove(@bool.mk_imp(@term_syntax.parse_term("1 <= (p : Num)"), pre), t1661), hyp1p())

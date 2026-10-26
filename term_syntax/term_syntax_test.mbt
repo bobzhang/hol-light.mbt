@@ -101,3 +101,9 @@ test "a hole inside a type is a fresh type variable" {
   assert_true(elem is Tyapp("list", More(Tyvar(_), tail=Empty)))
   assert_true(@kernel.is_vartype(@basics.dest_fun_ty(@term_syntax.parse_type("(_) -> Bool")).0))
 }
+
+///|
+test "names with a semicolon are escaped" {
+  inspect(@grammar.escape(";;"), content="Some(op_semi_semi)")
+  inspect(@grammar.unescape("op_semi_semi"), content=";;")
+}
