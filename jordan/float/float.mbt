@@ -1208,7 +1208,7 @@ pub fn int_add_negv2() -> @kernel.Thm {
 /// `INT_SUB_CONV`
 pub fn int_sub_conv(x260 : @kernel.Term) -> @kernel.Thm raise {
   let t = x260
-  let (a, b) = @basics.dest_binop(@parser.parse_term("(+:)"), t)
+  let (a, b) = @basics.dest_binop(@term_syntax.parse_term("(op_plus : (Int, Int) -> Int)"), t)
   let (_, a_1) = @kernel.dest_comb(a)
   let (_, b_1) = @kernel.dest_comb(b)
   let (_, b_2) = @kernel.dest_comb(b_1)
@@ -3365,7 +3365,7 @@ fn step_141() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x983 : @kernel.Term) -> Bool raise {
     let x = x983
     let (h, t) = @kernel.dest_comb(x)
-    ((h == @parser.parse_term(" &: ")) && is_numeral_format(t))
+    ((h == @term_syntax.parse_term("int_of_num")) && is_numeral_format(t))
   }
   is_pos_int_format_c.set((x984 : @kernel.Term) => falsify_ex(fn_, x984))
 }
@@ -3385,7 +3385,7 @@ fn step_142() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x985 : @kernel.Term) -> Bool raise {
     let x = x985
     let (h, t) = @kernel.dest_comb(x)
-    ((h == @parser.parse_term(" --: ")) && is_pos_int_format(t))
+    ((h == @term_syntax.parse_term("(op_minus_minus : (Int) -> Int)")) && is_pos_int_format(t))
   }
   is_neg_int_format_c.set((x986 : @kernel.Term) => falsify_ex(fn_, x986))
 }
@@ -3411,7 +3411,7 @@ pub fn is_int_format(x987 : @kernel.Term) -> Bool raise {
 fn step_143() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x988 : @kernel.Term) -> Bool raise {
     let x = x988
-    let (t1_1, t2) = @basics.dest_binop(@parser.parse_term("float"), x)
+    let (t1_1, t2) = @basics.dest_binop(@term_syntax.parse_term("float"), x)
     (is_int_format(t1_1) && is_int_format(t2))
   }
   is_float_format_c.set((x989 : @kernel.Term) => falsify_ex(fn_, x989))
@@ -3585,7 +3585,7 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
             let (_, t) = @kernel.dest_comb(tm)
             let int1 = interval_of_term(bprec, t)
             let (_, b, _) = dest_interval(@kernel.concl(int1))
-            let thm1_1 = float_conv(@kernel.mk_comb(@parser.parse_term("--."), b))
+            let thm1_1 = float_conv(@kernel.mk_comb(@term_syntax.parse_term("(op_minus_minus : (Real) -> Real)"), b))
             let t1010 = @simp.once_rewrite_rule(@list.List([interval_neg()]))(int1)
             @simp.rewrite_rule(@list.List([thm1_1]))(t1010)
           } catch {
@@ -3701,10 +3701,10 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
                         _ => raise Failure("INTERVAL_OF_TERM :DIV")
                       }
                     } else {
-                      let t1027 = @parser.parse_term("ssqrt")
+                      let t1027 = @term_syntax.parse_term("ssqrt")
                       if @lib.can((x1028 : @kernel.Term) => dest_unary(t1027, x1028), tm) {
                         try {
-                          let x_1 = dest_unary(@parser.parse_term("ssqrt"), tm)
+                          let x_1 = dest_unary(@term_syntax.parse_term("ssqrt"), tm)
                           let x_int = interval_of_term(bprec, x_1)
                           let (_, f_6, ex_5) = dest_interval(@kernel.concl(x_int))
                           let f_num_1 = dest_float(f_6)
@@ -3774,7 +3774,7 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
 pub fn real_ineq(x1037 : Int64, x1038 : @kernel.Term) -> @kernel.Thm raise {
   let bprec = x1037
   let tm = x1038
-  let (t1_1, t2) = @basics.dest_binop(@parser.parse_term("(<.)"), tm)
+  let (t1_1, t2) = @basics.dest_binop(@term_syntax.parse_term("(op_lt : (Real, Real) -> Bool)"), tm)
   let int1 = interval_of_term(bprec, t1_1)
   let int2 = interval_of_term(bprec, t2)
   interval_to_less_conv(int1, int2)
