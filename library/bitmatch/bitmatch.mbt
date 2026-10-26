@@ -9,31 +9,31 @@ fn step_1() -> Unit raise {
 ///|
 /// TRIV_CHOOSE
 fn step_2() -> Unit raise {
-  let p = @parser.parse_term("P:A->bool")
-  let q = @parser.parse_term("Q:bool")
-  let an = @parser.parse_term("(/\\)")
-  let t1 = @parser.parse_term("x:A")
+  let p = @term_syntax.parse_term("(P : (A) -> Bool)")
+  let q = @term_syntax.parse_term("(Q : Bool)")
+  let an = @term_syntax.parse_term("op_slash_bslash")
+  let t1 = @term_syntax.parse_term("(x : A)")
   let th1 = @equal.ap_thm(
-    @kernel.assume_rule(@parser.parse_term("(\\x:A. Q /\\ P x) = P")),
+    @kernel.assume_rule(@term_syntax.parse_term("((x : A) => (Q : Bool) && (P : (A) -> Bool)(x)) == P")),
     t1,
   )
-  let t2 = @kernel.beta(@parser.parse_term("(\\x:A. Q /\\ P x) x"))
+  let t2 = @kernel.beta(@term_syntax.parse_term("((x : A) => (Q : Bool) && (P : (A) -> Bool)(x))((x : A))"))
   let th1_1 = @kernel.trans(@equal.sym(th1), t2)
   let th1_2 = @bool.conjunct1(
     @kernel.eq_mp(
       th1_1,
-      @kernel.assume_rule(@parser.parse_term("(P:A->bool) x")),
+      @kernel.assume_rule(@term_syntax.parse_term("(P : (A) -> Bool)((x : A))")),
     ),
   )
-  let t3 = @bool.disch(@parser.parse_term("(P:A->bool) x"), th1_2)
-  let th1_3 = @bool.gen(@parser.parse_term("x:A"), t3)
+  let t3 = @bool.disch(@term_syntax.parse_term("(P : (A) -> Bool)((x : A))"), th1_2)
+  let th1_3 = @bool.gen(@term_syntax.parse_term("(x : A)"), t3)
   let t4 = @equal.ap_thm(@bool.exists_def(), p)
   let th2 = @equal.conv_rule(@equal.rand_conv(@equal.beta_conv), t4)
   let t5 = @kernel.eq_mp(
     th2,
-    @kernel.assume_rule(@parser.parse_term("(?) (P:A->bool)")),
+    @kernel.assume_rule(@term_syntax.parse_term("op_q((P : (A) -> Bool))")),
   )
-  let pth = @bool.mp(@bool.spec(@parser.parse_term("Q:bool"), t5), th1_3)
+  let pth = @bool.mp(@bool.spec(@term_syntax.parse_term("(Q : Bool)"), t5), th1_3)
   triv_choose_c.set(fn(
     x6 : @kernel.Thm,
   ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -115,7 +115,7 @@ pub fn with_goal(
 fn step_3() -> Unit raise {
   _bitmatch_c.set(
     @pair.new_definition(
-      @parser.parse_term("_BITMATCH (s:N word) c = _MATCH (val s) c"),
+      @term_syntax.parse_term("(_BITMATCH : (Word[N], (Num, _) -> Bool) -> _)((s : Word[N]), (c : (Num, _) -> Bool)) == _MATCH(val(s), c)"),
     ),
   )
 }
@@ -134,7 +134,7 @@ pub fn _bitmatch() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   _elsepattern_c.set(
     @pair.new_definition(
-      @parser.parse_term("_ELSEPATTERN (e:B) (a:A) = \\x. e = x"),
+      @term_syntax.parse_term("(_ELSEPATTERN : (B, A, B) -> Bool)((e : B), (a : A)) == ((x : B) => e == x)"),
     ),
   )
 }
@@ -153,11 +153,11 @@ pub fn _elsepattern() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t11 = @simp.rewrite_tac(@list.List([@pair.snd()]))
   let t12 = @tactics.then_tac(
-    @tactics.exists_tac(@parser.parse_term("0, \\i:num. F")),
+    @tactics.exists_tac(@term_syntax.parse_term("(0, (i : Num) => false)")),
     t11,
   )
   let th = @tactics.prove(
-    @parser.parse_term("?x:num#(num->bool). forall a. SND x a ==> a < 2 EXP FST x"),
+    @term_syntax.parse_term("∃ x : (Num, (Num) -> Bool), ∀ a : Num, SND(x, a) → a < EXP(2, FST(x))"),
     t12,
   )
   bitpat_c.set(
@@ -178,7 +178,7 @@ pub fn bitpat() -> @kernel.Thm {
 /// pat_size
 fn step_6() -> Unit raise {
   pat_size_c.set(
-    @pair.new_definition(@parser.parse_term("pat_size p = FST (dest_bitpat p)")),
+    @pair.new_definition(@term_syntax.parse_term("(pat_size : (Bitpat) -> Num)((p : Bitpat)) == FST(dest_bitpat(p))")),
   )
 }
 
@@ -195,7 +195,7 @@ pub fn pat_size() -> @kernel.Thm {
 /// pat_set
 fn step_7() -> Unit raise {
   pat_set_c.set(
-    @pair.new_definition(@parser.parse_term("pat_set p = SND (dest_bitpat p)")),
+    @pair.new_definition(@term_syntax.parse_term("(pat_set : (Bitpat, Num) -> Bool)((p : Bitpat)) == SND(dest_bitpat(p))")),
   )
 }
 
@@ -214,7 +214,7 @@ fn step_8() -> Unit raise {
   let t13 = @simp.rewrite_tac(@list.List([pat_set(), pat_size(), bitpat()]))
   pat_set_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall p s. pat_set p s ==> s < 2 EXP pat_size p"),
+      @term_syntax.parse_term("∀ p : Bitpat, ∀ s : Num, pat_set(p, s) → s < EXP(2, pat_size(p))"),
       t13,
     ),
   )
@@ -305,7 +305,7 @@ fn step_9() -> Unit raise {
     @list.List([@equal.gsym(@bool.conjunct2(bitpat()))]),
   )
   let t16 = @tactics.subgoal_then(
-    @parser.parse_term("dest_bitpat (mk_bitpat (n,f)) = (n,f)"),
+    @term_syntax.parse_term("dest_bitpat(mk_bitpat(((n : Num), (f : (Num) -> Bool)))) == (n, f)"),
     fn(
       x14 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -362,7 +362,7 @@ pub fn pat_thm() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   nilpat_c.set(
     @pair.new_definition(
-      @parser.parse_term("NILPAT = mk_bitpat(0,\\s:num. s = 0)"),
+      @term_syntax.parse_term("(NILPAT : Bitpat) == mk_bitpat((0, (s : Num) => s == 0))"),
     ),
   )
 }
@@ -457,7 +457,7 @@ fn step_11() -> Unit raise {
     @int.arith_tac,
   )
   let t32 = (
-    @parser.parse_term("pat_size NILPAT = 0 /\\ forall s. pat_set NILPAT s <=> s = 0"),
+    @term_syntax.parse_term("pat_size(NILPAT) == 0 && (∀ s : Num, pat_set(NILPAT, s) == (s == 0))"),
     t31,
   )
   let (nilpat_pat_size, nilpat_pat_set) = @bool.conj_pair(
@@ -573,7 +573,7 @@ fn step_13() -> Unit raise {
     )
   })
   let t41 = @tactics.exists_tac(
-    @parser.parse_term("2 EXP dimindex (:N) * SUC t"),
+    @term_syntax.parse_term("EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) * SUC((t : Num))"),
   )
   let t40 = @tactics.match_mp_tac(@arith.lte_trans())
   let t39 = @tactics.pop_assum(fn(
@@ -690,7 +690,7 @@ fn step_13() -> Unit raise {
 fn step_15() -> Unit raise {
   word1_c.set(
     @pair.new_definition(
-      @parser.parse_term("word1 p = (word (bitval p)):1 word"),
+      @term_syntax.parse_term("(word1 : (Bool) -> Word[Unit])((p : Bool)) == word(bitval(p))"),
     ),
   )
 }
@@ -708,7 +708,7 @@ pub fn word1() -> @kernel.Thm {
 /// BIT0_WORD1
 fn step_16() -> Unit raise {
   let t49 = @simp.rewrite_tac(@list.List([]))
-  let t48 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
+  let t48 = @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)"))
   let t50 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -730,7 +730,7 @@ fn step_16() -> Unit raise {
     @int.arith_tac,
   )
   bit0_word1_c.set(
-    @tactics.prove(@parser.parse_term("bit 0 (word1 b) = b"), t50),
+    @tactics.prove(@term_syntax.parse_term("bit(0, word1((b : Bool))) == b"), t50),
   )
 }
 
@@ -748,7 +748,7 @@ pub fn bit0_word1() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let t51 = @simp.rewrite_tac(@list.List([word1(), @words.val_word_bitval()]))
   val_word1_c.set(
-    @tactics.prove(@parser.parse_term("val (word1 b) = bitval b"), t51),
+    @tactics.prove(@term_syntax.parse_term("val(word1((b : Bool))) == bitval(b)"), t51),
   )
 }
 
@@ -778,7 +778,7 @@ fn step_18() -> Unit raise {
       @int.cong_v1(),
     ]),
   )
-  let t53 = @class.asm_cases_tac(@parser.parse_term("ODD n"))
+  let t53 = @class.asm_cases_tac(@term_syntax.parse_term("ODD((n : Num))"))
   let t52 = @simp.rewrite_tac(
     @list.List([word1(), @words.word_eq(), @cart.dimindex_clauses()]),
   )
@@ -796,7 +796,7 @@ fn step_18() -> Unit raise {
     t58,
   )
   word1_odd_c.set(
-    @tactics.prove(@parser.parse_term("word1 (ODD n) = word n"), t59),
+    @tactics.prove(@term_syntax.parse_term("word1(ODD((n : Num))) == word(n)"), t59),
   )
 }
 
@@ -1224,7 +1224,7 @@ fn step_31() -> Unit raise {
         @kernel.Term::Var(_, a) as a_1,
         tail=More(p, tail=More(t1, tail=More(t2, tail=Empty)))
       ) => {
-        let tnot = @parser.parse_term("~")
+        let tnot = @term_syntax.parse_term("op_tilde")
         fn(
           x142 : @kernel.Term,
         ) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
@@ -1362,7 +1362,7 @@ fn step_35() -> Unit raise {
   )
   match_elsepattern_c.set(
     @tactics.prove(
-      @parser.parse_term("_MATCH (e:B) (_ELSEPATTERN (a:A)) = a"),
+      @term_syntax.parse_term("_MATCH((e : B), _ELSEPATTERN((a : A))) == a"),
       t155,
     ),
   )
@@ -1385,7 +1385,7 @@ fn step_36() -> Unit raise {
   let t156 = @simp.rewrite_tac(@list.List([_bitmatch(), match_elsepattern()]))
   bitmatch_elsepattern_c.set(
     @tactics.prove(
-      @parser.parse_term("_BITMATCH (e:N word) (_ELSEPATTERN (a:A)) = a"),
+      @term_syntax.parse_term("_BITMATCH((e : Word[N]), _ELSEPATTERN((a : A))) == a"),
       t156,
     ),
   )
@@ -1426,11 +1426,11 @@ pub fn pat_extract() -> @kernel.Thm {
 ///|
 /// PAT_EXTRACT_THM
 fn step_38() -> Unit raise {
-  let t157 = @parser.parse_term("b:bool")
-  let t158 = @parser.parse_term("p:bitpat")
-  let t159 = @parser.parse_term("i:num")
-  let t160 = @parser.parse_term("m:num")
-  let t161 = @parser.parse_term("n:num")
+  let t157 = @term_syntax.parse_term("(b : Bool)")
+  let t158 = @term_syntax.parse_term("(p : Bitpat)")
+  let t159 = @term_syntax.parse_term("(i : Num)")
+  let t160 = @term_syntax.parse_term("(m : Num)")
+  let t161 = @term_syntax.parse_term("(n : Num)")
   let (n, n_1, m, i, p, b) = (
     @parser.parse_type("N"),
     t161,
@@ -1439,19 +1439,19 @@ fn step_38() -> Unit raise {
     t158,
     t157,
   )
-  let t162 = @parser.parse_term("dimindex(:N)")
-  let t163 = @parser.parse_term("numbit")
-  let t164 = @parser.parse_term("(+)")
-  let t165 = @parser.parse_term("(<)")
+  let t162 = @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))")
+  let t163 = @term_syntax.parse_term("numbit")
+  let t164 = @term_syntax.parse_term("op_plus")
+  let t165 = @term_syntax.parse_term("op_lt")
   let (a, lt, pl, nb, di) = (
-    @parser.parse_term("a:N word"),
+    @term_syntax.parse_term("(a : Word[N])"),
     t165,
     t164,
     t163,
     t162,
   )
   let t173 = @simp.rewrite_tac(@list.List([@words.bitval()]))
-  let t172 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
+  let t172 = @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)"))
   let t171 = @simp.rewrite_tac(
     @list.List([
       @arith.div_1(),
@@ -1541,7 +1541,7 @@ fn step_38() -> Unit raise {
     @int.arith_tac,
   )
   let word1_eq = @tactics.prove(
-    @parser.parse_term("pat_extract (CONSPAT p (word1 b)) 0 b"),
+    @term_syntax.parse_term("pat_extract(CONSPAT((p : Bitpat), word1((b : Bool))), 0, b)"),
     t174,
   )
   let t202 = @simp.rewrite_tac(
@@ -1551,7 +1551,7 @@ fn step_38() -> Unit raise {
   let t200 = @simp.rewrite_tac(@list.List([@arith.exp_add(), @arith.mod_mod()]))
   let t197 = @simp.rewrite_rule(@list.List([@equal.gsym(@arith.le_suc_lt())]))
   let t195 = @drule.match_mp(
-    @int.arith_rule(@parser.parse_term("m <= n ==> (m + (n - m) = n:num)")),
+    @int.arith_rule(@term_syntax.parse_term("(m : Num) <= (n : Num) → m + (n - m) == n")),
   )
   let t199 = @tactics.first_x_assum(fn(
     x198 : @kernel.Thm,
@@ -1893,7 +1893,7 @@ fn step_38() -> Unit raise {
   let t221 = @simp.rewrite_tac(
     @list.List([
       @bool.specl(
-        @list.List([m, @parser.parse_term("dimindex(:N)")]),
+        @list.List([m, @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))")]),
         @arith.add_sym(),
       ),
     ]),
@@ -2252,18 +2252,18 @@ pub fn pat_extract_thm(x : (@kernel.Term, @kernel.Term)) -> @kernel.Thm raise {
 ///|
 /// pat_to_bit
 fn step_39() -> Unit raise {
-  let t237 = @kernel.assume_rule(@parser.parse_term("pat_extract p i b"))
+  let t237 = @kernel.assume_rule(@term_syntax.parse_term("pat_extract((p : Bitpat), (i : Num), (b : Bool))"))
   let a = @simp.pure_rewrite_rule(@list.List([pat_extract()]))(t237)
-  let a_1 = @bool.undisch(@bool.spec(@parser.parse_term("val (e:N word)"), a))
+  let a_1 = @bool.undisch(@bool.spec(@term_syntax.parse_term("val((e : Word[N]))"), a))
   let th = @kernel.trans(@equal.sym(@words.numbit_val()), a_1)
-  let t239 = @parser.parse_term("b:bool")
+  let t239 = @term_syntax.parse_term("(b : Bool)")
   let t240 = @bool.eqf_elim(
-    @kernel.inst_rule(@list.List([(@parser.parse_term("F"), t239)]), th),
+    @kernel.inst_rule(@list.List([(@term_syntax.parse_term("false"), t239)]), th),
   )
-  let t238 = @parser.parse_term("b:bool")
+  let t238 = @term_syntax.parse_term("(b : Bool)")
   let (tht_pos, thf_pos) = (
     @bool.eqt_elim(
-      @kernel.inst_rule(@list.List([(@parser.parse_term("T"), t238)]), th),
+      @kernel.inst_rule(@list.List([(@term_syntax.parse_term("true"), t238)]), th),
     ),
     t240,
   )
@@ -2275,19 +2275,19 @@ fn step_39() -> Unit raise {
       let y = x242
       let t243 = @bool.mp(@bool.not_elim(x), y)
       @bool.not_intro(
-        @bool.disch(@parser.parse_term("pat_set p (val (e:N word))"), t243),
+        @bool.disch(@term_syntax.parse_term("pat_set((p : Bitpat), val((e : Word[N])))"), t243),
       )
     }
   }
-  let t244 = @kernel.assume_rule(@parser.parse_term("bit i (e:N word)"))
+  let t244 = @kernel.assume_rule(@term_syntax.parse_term("bit((i : Num), (e : Word[N]))"))
   let t245 = f(thf_pos)(t244)
   let (tht_neg, thf_neg) = (
-    f(@kernel.assume_rule(@parser.parse_term("~bit i (e:N word)")))(tht_pos),
+    f(@kernel.assume_rule(@term_syntax.parse_term("!bit((i : Num), (e : Word[N]))")))(tht_pos),
     t245,
   )
-  let t246 = @parser.parse_term("p:bitpat")
-  let t247 = @parser.parse_term("e:N word")
-  let t248 = @parser.parse_term("i:num")
+  let t246 = @term_syntax.parse_term("(p : Bitpat)")
+  let t247 = @term_syntax.parse_term("(e : Word[N])")
+  let t248 = @term_syntax.parse_term("(i : Num)")
   let (n, i, e, p) = (@parser.parse_type("N"), t248, t247, t246)
   pat_to_bit_c.set(fn(
     x249 : Bool,
@@ -2552,16 +2552,16 @@ fn step_40() -> Unit raise {
       @tactics.prove(x269.0, x269.1)
     })(t274),
   )
-  let t275 = @parser.parse_term("rs:num->B->bool")
-  let t276 = @parser.parse_term("r:num->B->bool")
-  let t277 = @parser.parse_term("e:N word")
+  let t275 = @term_syntax.parse_term("(rs : (Num, B) -> Bool)")
+  let t276 = @term_syntax.parse_term("(r : (Num, B) -> Bool)")
+  let t277 = @term_syntax.parse_term("(e : Word[N])")
   let t278 = @parser.parse_type("B")
   let (n, b, e, r, rs) = (@parser.parse_type("N"), t278, t277, t276, t275)
   let t280 = @tactics.then_tac(
     @tactics.disch_tac,
     @simp.asm_rewrite_tac(@list.List([])),
   )
-  let t281 = (@parser.parse_term("(P = \\x:A. F) ==> (?) P = F"), t280)
+  let t281 = (@term_syntax.parse_term("(P : (A) -> Bool) == ((x : A) => false) → op_q(P) == false"), t280)
   let th1 = @bool.undisch(
     (fn(
       x279 : (
@@ -2591,7 +2591,7 @@ fn step_40() -> Unit raise {
     })(t281),
   )
   let a = @parser.parse_type("A")
-  let p = @parser.parse_term("P:A->bool")
+  let p = @term_syntax.parse_term("(P : (A) -> Bool)")
   let strip_ex : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x282 : @kernel.Term,
   ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -2610,7 +2610,7 @@ fn step_40() -> Unit raise {
     @tactics.disch_tac,
     @simp.asm_rewrite_tac(@list.List([@pair._unguarded_pattern()])),
   )
-  let t287 = (@parser.parse_term("~A ==> _UNGUARDED_PATTERN A B = F"), t286)
+  let t287 = (@term_syntax.parse_term("!(A : Bool) → _UNGUARDED_PATTERN(A, (B : Bool)) == false"), t286)
   let th_2 = @bool.undisch(
     (fn(
       x285 : (
@@ -2639,8 +2639,8 @@ fn step_40() -> Unit raise {
       @tactics.prove(x285.0, x285.1)
     })(t287),
   )
-  let a_1 = @parser.parse_term("A:bool")
-  let b_1 = @parser.parse_term("B:bool")
+  let a_1 = @term_syntax.parse_term("(A : Bool)")
+  let b_1 = @term_syntax.parse_term("(B : Bool)")
   let skip_guard : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
     x288 : @kernel.Term,
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -3227,7 +3227,7 @@ fn step_43() -> Unit raise {
   )
   match_eq_c.set(
     @tactics.prove(
-      @parser.parse_term("(r:A->B->bool) e = (\\y. x = y) ==> _MATCH e r = x"),
+      @term_syntax.parse_term("(r : (A, B) -> Bool)((e : A)) == ((y : B) => (x : B) == y) → _MATCH(e, r) == x"),
       t341,
     ),
   )
@@ -3454,7 +3454,7 @@ fn step_47() -> Unit raise {
   )
   conspat_word_inverts_c.set(
     @tactics.prove(
-      @parser.parse_term("bitpat_inverts (CONSPAT p (a:N word)) word a"),
+      @term_syntax.parse_term("bitpat_inverts(CONSPAT((p : Bitpat), (a : Word[N])), word, a)"),
       t358,
     ),
   )
@@ -3522,11 +3522,11 @@ pub fn conspat_word1_inverts() -> @kernel.Thm {
 ///|
 /// build_inverts
 fn step_50() -> Unit raise {
-  let t361 = @parser.parse_term("b:bool")
-  let t362 = @parser.parse_term("x:A")
-  let t363 = @parser.parse_term("f:num->A")
-  let t364 = @parser.parse_term("a:N word")
-  let t365 = @parser.parse_term("p:bitpat")
+  let t361 = @term_syntax.parse_term("(b : Bool)")
+  let t362 = @term_syntax.parse_term("(x : A)")
+  let t363 = @term_syntax.parse_term("(f : (Num) -> A)")
+  let t364 = @term_syntax.parse_term("(a : Word[N])")
+  let t365 = @term_syntax.parse_term("(p : Bitpat)")
   let t366 = @parser.parse_type("A")
   let (n, a, p, a_1, f, x, b) = (
     @parser.parse_type("N"),
@@ -3537,7 +3537,7 @@ fn step_50() -> Unit raise {
     t362,
     t361,
   )
-  let th0 = @kernel.assume_rule(@parser.parse_term("bitpat_inverts p f (x:A)"))
+  let th0 = @kernel.assume_rule(@term_syntax.parse_term("bitpat_inverts((p : Bitpat), (f : (Num) -> A), (x : A))"))
   let th1 = @bool.undisch(conspat_down_inverts())
   fn go(
     x367 : (@kernel.Term, (Unit) -> @kernel.Thm raise),
@@ -3743,7 +3743,7 @@ fn step_51() -> Unit raise {
         @list.List([
           bitmatch_seqpattern(),
           _bitmatch(),
-          @meson.meson(@list.List([]), @parser.parse_term("?y:A. x=y")),
+          @meson.meson(@list.List([]), @term_syntax.parse_term("∃ y : A, (x : A) == y")),
         ]),
       ),
     ),
@@ -3783,13 +3783,13 @@ fn step_51() -> Unit raise {
       @tactics.prove(x377.0, x377.1)
     })(t385),
   )
-  let t387 = @parser.parse_term("A ==> (_UNGUARDED_PATTERN A B <=> B)")
+  let t387 = @term_syntax.parse_term("(A : Bool) → _UNGUARDED_PATTERN(A, (B : Bool)) == B")
   let th2 = @bool.undisch(
     ((x386 : @kernel.Term) => {
       @metis.metis(@list.List([@pair._unguarded_pattern()]), x386)
     })(t387),
   )
-  let t388 = @kernel.assume_rule(@parser.parse_term("B:bool"))
+  let t388 = @kernel.assume_rule(@term_syntax.parse_term("(B : Bool)"))
   let th3 = @kernel.eq_mp(@equal.sym(th2), t388)
   let t393 = @simp.rewrite_rule(@list.List([bitpat_inverts()]))
   let t395 = @tactics.disch_then(fn(
@@ -3861,7 +3861,7 @@ fn step_51() -> Unit raise {
     })(t393(x394))
   })
   let t396 = (
-    @parser.parse_term("bitpat_inverts p f (x:A) ==> pat_set p e ==> f e = x"),
+    @term_syntax.parse_term("bitpat_inverts((p : Bitpat), (f : (Num) -> A), (x : A)) → pat_set(p, (e : Num)) → f(e) == x"),
     t395,
   )
   let th4 = @bool.undisch_all(
@@ -3892,7 +3892,7 @@ fn step_51() -> Unit raise {
       @tactics.prove(x389.0, x389.1)
     })(t396),
   )
-  let t399 = @parser.parse_term("_UNGUARDED_PATTERN A B ==> A /\\ B")
+  let t399 = @term_syntax.parse_term("_UNGUARDED_PATTERN((A : Bool), (B : Bool)) → A && B")
   let (thg1, thg2) = (fn(
     x397 : @kernel.Thm,
   ) -> (@kernel.Thm, @kernel.Thm) raise {
@@ -3902,11 +3902,11 @@ fn step_51() -> Unit raise {
       @metis.metis(@list.List([@pair._unguarded_pattern()]), x398)
     })(t399),
   )
-  let t400 = @parser.parse_term("x:A")
-  let t401 = @parser.parse_term("f:num->A")
-  let t402 = @parser.parse_term("p:bitpat")
-  let t403 = @parser.parse_term("B:bool")
-  let t404 = @parser.parse_term("A:bool")
+  let t400 = @term_syntax.parse_term("(x : A)")
+  let t401 = @term_syntax.parse_term("(f : (Num) -> A)")
+  let t402 = @term_syntax.parse_term("(p : Bitpat)")
+  let t403 = @term_syntax.parse_term("(B : Bool)")
+  let t404 = @term_syntax.parse_term("(A : Bool)")
   let (nty, ea, eb, ep, ef, ex) = (
     @parser.parse_type("N"),
     t404,
@@ -3915,10 +3915,10 @@ fn step_51() -> Unit raise {
     t401,
     t400,
   )
-  let t405 = @parser.parse_term("s:num->A->bool")
-  let t406 = @parser.parse_term("r:num->A->bool")
-  let t407 = @parser.parse_term("a:A")
-  let (ee, ea_1, er, es) = (@parser.parse_term("e:N word"), t407, t406, t405)
+  let t405 = @term_syntax.parse_term("(s : (Num, A) -> Bool)")
+  let t406 = @term_syntax.parse_term("(r : (Num, A) -> Bool)")
+  let t407 = @term_syntax.parse_term("(a : A)")
+  let (ee, ea_1, er, es) = (@term_syntax.parse_term("(e : Word[N])"), t407, t406, t405)
   bm_first_case_conv_c.set(fn(x408 : @kernel.Term) -> @kernel.Thm raise {
     match x408 {
       @kernel.Term::Comb(
@@ -4306,21 +4306,21 @@ pub fn bitpat_matches(x442 : @kernel.Term, x443 : @num.Num) -> Int64? raise {
 ///|
 /// inst_bitpat_numeral
 fn step_52() -> Unit raise {
-  let t449 = @parser.parse_term("a:num")
-  let t450 = @parser.parse_term("i:num")
-  let t451 = @parser.parse_term("x:num")
-  let t452 = @parser.parse_term("p:bitpat")
+  let t449 = @term_syntax.parse_term("(a : Num)")
+  let t450 = @term_syntax.parse_term("(i : Num)")
+  let t451 = @term_syntax.parse_term("(x : Num)")
+  let t452 = @term_syntax.parse_term("(p : Bitpat)")
   let (en, ep, ex, ei, ea) = (
-    @parser.parse_term("n:num"),
+    @term_syntax.parse_term("(n : Num)"),
     t452,
     t451,
     t450,
     t449,
   )
-  let t453 = @parser.parse_term("F")
-  let t454 = @parser.parse_term("T")
+  let t453 = @term_syntax.parse_term("false")
+  let t454 = @term_syntax.parse_term("true")
   let (en_1, t, f) = (@parser.parse_type("N"), t454, t453)
-  let dn = @parser.parse_term("dimindex(:N)")
+  let dn = @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))")
   let dim : (@kernel.HolType) -> @kernel.Thm raise = fn(
     x455 : @kernel.HolType,
   ) -> @kernel.Thm raise {
@@ -4328,7 +4328,7 @@ fn step_52() -> Unit raise {
     @cart.dimindex_conv(@kernel.inst(@list.List([(n, en_1)]), dn))
   }
   let t456 = @simp.rewrite_tac(@list.List([nilpat_pat_set(), @nums.numeral()]))
-  let w0 = @tactics.prove(@parser.parse_term("pat_set NILPAT _0"), t456)
+  let w0 = @tactics.prove(@term_syntax.parse_term("pat_set(NILPAT, _0)"), t456)
   let t460 = @tactics.disch_then(fn(
     x457 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4399,7 +4399,7 @@ fn step_52() -> Unit raise {
       )
     },
   )
-  let t491 = @list.List([(@parser.parse_term("0"), ea)])
+  let t491 = @list.List([(@term_syntax.parse_term("0"), ea)])
   let t492 = @bool.pinst(
     @list.List([(@parser.parse_type("1"), en_1)]),
     t491,
@@ -4515,7 +4515,7 @@ fn step_52() -> Unit raise {
       )
     },
   )
-  let t479 = @list.List([(@parser.parse_term("1"), ea)])
+  let t479 = @list.List([(@term_syntax.parse_term("1"), ea)])
   let t480 = @bool.pinst(
     @list.List([(@parser.parse_type("1"), en_1)]),
     t479,
@@ -4781,7 +4781,7 @@ fn step_52() -> Unit raise {
     t504,
   )
   let t505 = @kernel.inst_rule(
-    @list.List([(@parser.parse_term("_0"), ex)]),
+    @list.List([(@term_syntax.parse_term("_0"), ex)]),
     w1f,
   )
   let w1f0 = @simp.rewrite_rule(@list.List([@calc_num.arith_zero()]))(t505)
@@ -5073,7 +5073,7 @@ fn step_52() -> Unit raise {
       @tactics.prove(x510.0, x510.1)
     })(t525),
   )
-  let ps = @parser.parse_term("pat_size")
+  let ps = @term_syntax.parse_term("pat_size")
   let t527 = @equal.redepth_conv(@calc_num.num_add_conv)
   let t526 = @equal.once_depth_conv(@cart.dimindex_conv)
   let t529 = @equal.thenc(
@@ -5487,11 +5487,11 @@ pub fn bitpat_irrefutable(x569 : @kernel.Term) -> Bool raise {
 ///|
 /// bitpat_irrefutable_thm
 fn step_53() -> Unit raise {
-  let t570 = @parser.parse_term("k:num")
-  let t571 = @parser.parse_term("m:num")
-  let t572 = @parser.parse_term("n:num")
-  let t573 = @parser.parse_term("e:N word")
-  let t574 = @parser.parse_term("e:num")
+  let t570 = @term_syntax.parse_term("(k : Num)")
+  let t571 = @term_syntax.parse_term("(m : Num)")
+  let t572 = @term_syntax.parse_term("(n : Num)")
+  let t573 = @term_syntax.parse_term("(e : Word[N])")
+  let t574 = @term_syntax.parse_term("(e : Num)")
   let (en, ee, ee_p, en_1, em, ek) = (
     @parser.parse_type("N"),
     t574,
@@ -5500,11 +5500,11 @@ fn step_53() -> Unit raise {
     t571,
     t570,
   )
-  let t575 = @parser.parse_term("1")
-  let t576 = @parser.parse_term("(+)")
-  let t577 = @parser.parse_term("dimindex(:N)")
-  let (ep, dn, pl, _1) = (@parser.parse_term("p:bitpat"), t577, t576, t575)
-  let e2n = @parser.parse_term("e DIV 2 EXP n")
+  let t575 = @term_syntax.parse_term("1")
+  let t576 = @term_syntax.parse_term("op_plus")
+  let t577 = @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))")
+  let (ep, dn, pl, _1) = (@term_syntax.parse_term("(p : Bitpat)"), t577, t576, t575)
+  let e2n = @term_syntax.parse_term("DIV((e : Num), EXP(2, (n : Num)))")
   let t587 = @tactics.disch_then(fn(
     x583 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5527,7 +5527,7 @@ fn step_53() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let th = x583
-    let t585 = @bool.spec(@parser.parse_term("n:num"), @calc_num.exp_2_ne_0())
+    let t585 = @bool.spec(@term_syntax.parse_term("(n : Num)"), @calc_num.exp_2_ne_0())
     let t586 = @simp.rewrite_tac(
       @list.List([
         th,
@@ -5538,7 +5538,7 @@ fn step_53() -> Unit raise {
       ]),
     )
     @tactics.then_tac(
-      @tactics.exists_tac(@parser.parse_term("e DIV 2 EXP dimindex(:N)")),
+      @tactics.exists_tac(@term_syntax.parse_term("DIV((e : Num), EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))")),
       t586,
     )
   })
@@ -5620,7 +5620,7 @@ fn step_53() -> Unit raise {
     ),
     t588,
   )
-  let t590 = @cart.dimindex_conv(@parser.parse_term("dimindex(:1)"))
+  let t590 = @cart.dimindex_conv(@term_syntax.parse_term("(dimindex : ((Unit) -> Bool) -> Num)((UNIV : (Unit) -> Bool))"))
   let t591 = @tactics.accept_tac(@drule.match_mp(pth)(t590))
   let t592 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([word1_odd()])),
@@ -5664,11 +5664,11 @@ fn step_53() -> Unit raise {
   let t596 = @simp.rewrite_tac(
     @list.List([
       @arith.exp(),
-      @int.arith_rule(@parser.parse_term("n < 1 <=> n = 0")),
+      @int.arith_rule(@term_syntax.parse_term("((n : Num) < 1) == (n == 0)")),
       nilpat_pat_set(),
     ]),
   )
-  let t597 = (@parser.parse_term("e < 2 EXP 0 ==> pat_set NILPAT e"), t596)
+  let t597 = (@term_syntax.parse_term("(e : Num) < EXP(2, 0) → pat_set(NILPAT, e)"), t596)
   let pth0 = @bool.undisch(
     (fn(
       x595 : (
@@ -5878,7 +5878,7 @@ fn step_53() -> Unit raise {
     t611,
   )
   let t613 = (
-    @parser.parse_term("dimindex(:N) = n ==> val (e:N word) < 2 EXP n"),
+    @term_syntax.parse_term("(dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == (n : Num) → (val : (Word[N]) -> Num)((e : Word[N])) < EXP(2, n)"),
     t612,
   )
   let pthw = @bool.undisch_all(
