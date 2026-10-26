@@ -78183,7 +78183,7 @@ test "Multivariate/transcendentals matches Multivariate/transcendentals.ml" {
       #|  (x : Real) <= (y : Real) \226\134\146 y < (e : Real) \226\134\146 x < e
       #|  (N : Num)
       #|  (e : Real)
-      #|  (z * zn) * (is_ * ik) <= (&1 * inv(&2)) * zn * ik <=>\n      &0 <= (&1 - (&2 * z) * is_) * zn * ik
+      #|  ((z : Real) * (zn : Real) * ((is_ : Real) * (ik : Real)) <= real_of_num(1) * inv(real_of_num(2)) * (zn * ik)) == (real_of_num(0) <= (real_of_num(1) - real_of_num(2) * z * is_) * (zn * ik))
       #|  (n : Num)
       #|  (N : Num)
       #|  ((a : Bool) \226\134\146 (b : Bool)) && ((c : Bool) \226\134\146 (d : Bool)) \226\134\146 a \226\134\146 (b \226\134\146 c) \226\134\146 d

@@ -69,4 +69,10 @@ assert refused(rename_ocaml, 'EXPAND_TAC "\\102n" THEN REWRITE_TAC[]', R)
 assert refused(rename_ocaml, 'let v = mk_var("\\102n_", bool_ty);;', R)
 assert renamed_output("B quotations (0):\nTH ! bad constant fn:num\n", 'B', R) == \
     "B quotations (0):\nTH ! bad constant fn:num\n"
+# found by the second review
+assert refused(rename_ocaml, 'mk_abs (`fn :bool`, mk_var ("\\u{66}n_", bool_ty))', R)
+assert refused(rename_ocaml, "let x = `x : A list -> fn`;;", R)
+assert rename_ocaml("let x = `!p:A prob_space fn f. fn = f`;;", R) == "let x = `!p:A prob_space fn_ f. fn_ = f`;;"
+assert renamed_output("B quotations (0):\nTH ! bad\nDETAIL = fn:num\nTH2 = |- fn:num\n", 'B', R, {'TH', 'TH2'}) == \
+    "B quotations (0):\nTH ! bad\nDETAIL = fn:num\nTH2 = |- fn_:num\n"
 print('ok')

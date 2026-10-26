@@ -11168,9 +11168,9 @@ test "Logic/lpo matches Logic/lpo.ml" {
       #|  \226\136\128 n : Num, SUBSET(functions_term((t : (Num) -> Term)(n)), (A : ((Num, Num)) -> Bool))
       #|  (n : Num)
       #|  (A : ((Num, Num)) -> Bool)
-      #|  ?far:num#num s. subseq s /\\\n                    (forall n:num. fn_(s n),LENGTH(args(s n):term list) = far)
+      #|  \226\136\131 far : (Num, Num), \226\136\131 s : (Num) -> Num, subseq(s) && (\226\136\128 n : Num, ((fn_ : (Num) -> Num)(s(n)), LENGTH((args : (Num) -> List[Term])(s(n)))) == far)
       #|  (args : (Num) -> List[Term])
-      #|  fn_:num->num
+      #|  (fn_ : (Num) -> Num)
       #|  (u : Term)
       #|  (args : List[Term])
       #|  (f : Num)
