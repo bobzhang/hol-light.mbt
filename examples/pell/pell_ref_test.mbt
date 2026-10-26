@@ -13505,7 +13505,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  (j : Num)
       #|  (n : Num)
       #|  (a : Num)
-      #|  (+):num->num->num
+      #|  (op_plus : (Num, Num) -> Num)
       #|  X((a : Num), (j : Num))
       #|  (q1 : Num)
       #|  2 * (n : Num) + (2 * n + (j : Num)) == 4 * n + j
@@ -13886,7 +13886,7 @@ test "Examples/pell matches Examples/pell.ml" {
       #|  Y((a : Num), (i : Num)) == (y : Num)
       #|  (k : Num) + ((q1 : Num) + (i : Num)) == (q2 : Num) \226\134\146 i + k == q2 - q1
       #|  (d4 : Num)
-      #|  (+):num->num->num
+      #|  (op_plus : (Num, Num) -> Num)
       #|  (i : Num)
       #|  Y((a : Num), (i : Num)) == (y : Num)
       #|  (d4 : Num)
