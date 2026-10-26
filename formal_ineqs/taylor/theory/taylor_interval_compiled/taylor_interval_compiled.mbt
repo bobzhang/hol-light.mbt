@@ -84,7 +84,7 @@ pub fn nth_differentiable_on_int() -> @kernel.Thm {
 ///|
 /// nth_diff_weak
 fn step_7() -> Unit raise {
-  nth_diff_weak_c.set(@pair.new_definition(@parser.parse_term("nth_diff_weak n f x <=> f real_continuous atreal x /\\ \n\t?F. F 0 = f /\\ forall i. i < n ==> (F i has_real_derivative F (SUC i) x) (atreal x)")))
+  nth_diff_weak_c.set(@pair.new_definition(@term_syntax.parse_term("(nth_diff_weak : (Num, (Real) -> Real, Real) -> Bool)((n : Num), (f : (Real) -> Real), (x : Real)) == (real_continuous(f, atreal(x)) && (∃ F : (Num, Real) -> Real, F(0) == f && (∀ i : Num, i < n → has_real_derivative(F(i), F(SUC(i), x), atreal(x)))))")))
 }
 
 ///|
