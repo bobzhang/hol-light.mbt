@@ -8383,32 +8383,32 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  min_num((P : (Num) -> Bool)) <= (p : Num)
       #|  (P : (Num) -> Bool)((p : Num))
       #|  (P : (Num) -> Bool) == ((m : Num) => euclid_euclid(m, (f : (Num) -> Real)) && euclid_euclid(m, (g : (Num) -> Real)))
-      #|  forall p f g. (euclid p f) /\\ (euclid p g) ==>\n   (dot f g = sum (0,p) (\\i. (f i)* (g i)))
+      #|  \226\136\128 p : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, euclid_euclid(p, f) && euclid_euclid(p, g) \226\134\146 euclid_dot(f, g) == sum((0, p), (i : Num) => f(i) * g(i))
       #|  real_of_num(0) * (a : Real) == real_of_num(0)
       #|  euclid_euclid((n : Num), (f : (Num) -> Real)) && euclid_euclid(n, (g : (Num) -> Real))
-      #|  forall f g m n. (m <=|n) /\\ (euclid m f) /\\ (euclid m g) ==>\n   (dot f g = sum (0,n) (\\i. (f i)* (g i)))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 m : Num, \226\136\128 n : Num, m <= n && euclid_euclid(m, f) && euclid_euclid(m, g) \226\134\146 euclid_dot(f, g) == sum((0, n), (i : Num) => f(i) * g(i))
       #|  (i : Num) => (f : (Num) -> Real)(i) * f(i)
       #|  \226\136\128 n : Num, real_of_num(0) <= ((i : Num) => (f : (Num) -> Real)(i) * f(i))(n)
-      #|  forall f. (&.0 <= (dot f f))
+      #|  \226\136\128 f : (Num) -> Real, real_of_num(0) <= euclid_dot(f, f)
       #|  ((a : Bool) && (b : Bool)) == (b && a)
       #|  (a : Real) * (b : Real) == b * a
-      #|  forall f g. (dot f g = dot g f)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, euclid_dot(f, g) == euclid_dot(g, f)
       #|  -(x : Real) * (y : Real) == -(x * y)
-      #|  forall f g. (dot (--f) g) = --. (dot f g)
-      #|  forall f g. (dot f (--g)) = --. (dot f g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, euclid_dot(-f, g) == -euclid_dot(f, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, euclid_dot(f, -g) == -euclid_dot(f, g)
       #|  (a : Real) * ((b : Real) * (c : Real)) == a * b * c
       #|  (f : (Num) -> Real)
       #|  (s : Real)
       #|  (n : Num)
       #|  euclid_euclid((n : Num), (i : Num) => (s : Real) * (f : (Num) -> Real)(i)) && euclid_euclid(n, (g : (Num) -> Real))
-      #|  forall n f g s. (euclid n f) /\\ (euclid n g) ==>\n  (dot (s *# f) g = s *. (dot f g))
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : Real, euclid_euclid(n, f) && euclid_euclid(n, g) \226\134\146 euclid_dot(euclid_euclid_scale(s, f), g) == s * euclid_dot(f, g)
       #|  euclid_euclid((n : Num) + (n' : Num), (f : (Num) -> Real)) && euclid_euclid(n + n', (g : (Num) -> Real))
       #|  (n : Num) <= n + (n' : Num)
       #|  (n' : Num) <= (n : Num) + n'
       #|  euclid_euclid
-      #|  forall f g s. (euclidean f) /\\ (euclidean g) ==>\n  (dot (s *# f) g = s *. (dot f g))
-      #|  forall n f g s. (euclid n f) /\\ (euclid n g) ==>\n  (dot f (s *# g) = s *. (dot f g))
-      #|  forall f g s. (euclidean f) /\\ (euclidean g) ==>\n  (dot f (s *# g) = s *. (dot f g))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : Real, euclid_euclidean(f) && euclid_euclidean(g) \226\134\146 euclid_dot(euclid_euclid_scale(s, f), g) == s * euclid_dot(f, g)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : Real, euclid_euclid(n, f) && euclid_euclid(n, g) \226\134\146 euclid_dot(f, euclid_euclid_scale(s, g)) == s * euclid_dot(f, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 s : Real, euclid_euclidean(f) && euclid_euclidean(g) \226\134\146 euclid_dot(f, euclid_euclid_scale(s, g)) == s * euclid_dot(f, g)
       #|  ((a : Real) + (b : Real)) * (c : Real) == a * c + b * c
       #|  (h : (Num) -> Real)
       #|  (f : (Num) -> Real) + (g : (Num) -> Real)
@@ -8420,7 +8420,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (f : (Num) -> Real)
       #|  (n : Num)
       #|  euclid_euclid((n : Num), (f : (Num) -> Real) + (g : (Num) -> Real))
-      #|  forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot (f + g) h ) = (dot f h) +. (dot g h))
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) \226\134\146 euclid_dot(f + g, h) == euclid_dot(f, h) + euclid_dot(g, h)
       #|  ((a : Real) - (b : Real)) * (c : Real) == a * c - b * c
       #|  (h : (Num) -> Real)
       #|  (f : (Num) -> Real) - (g : (Num) -> Real)
@@ -8432,7 +8432,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (f : (Num) -> Real)
       #|  (n : Num)
       #|  euclid_euclid((n : Num), (f : (Num) -> Real) - (g : (Num) -> Real))
-      #|  forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot (f - g) h ) = (dot f h) -. (dot g h))
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) \226\134\146 euclid_dot(f - g, h) == euclid_dot(f, h) - euclid_dot(g, h)
       #|  (n'' : Num) <= (n : Num) + ((n' : Num) + n'')
       #|  euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (h : (Num) -> Real))
       #|  (n' : Num) <= (n : Num) + (n' + (n'' : Num))
@@ -8440,7 +8440,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (n : Num) <= n + ((n' : Num) + (n'' : Num))
       #|  euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (f : (Num) -> Real))
       #|  euclid_euclid
-      #|  forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot (f + g) h ) = (dot f h) +. (dot g h))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) \226\134\146 euclid_dot(f + g, h) == euclid_dot(f, h) + euclid_dot(g, h)
       #|  (n'' : Num) <= (n : Num) + ((n' : Num) + n'')
       #|  euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (h : (Num) -> Real))
       #|  (n' : Num) <= (n : Num) + (n' + (n'' : Num))
@@ -8448,15 +8448,15 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (n : Num) <= n + ((n' : Num) + (n'' : Num))
       #|  euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (f : (Num) -> Real))
       #|  euclid_euclid
-      #|  forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot (f - g) h ) = (dot f h) -. (dot g h))
-      #|  forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot h (f + g)) = (dot h f) +. (dot h g))
-      #|  forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot h (f + g)) = (dot h f) +. (dot h g))
-      #|  forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot h (f - g)) = (dot h f) -. (dot h g))
-      #|  forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot h (f - g)) = (dot h f) -. (dot h g))
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) \226\134\146 euclid_dot(f - g, h) == euclid_dot(f, h) - euclid_dot(g, h)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) \226\134\146 euclid_dot(h, f + g) == euclid_dot(h, f) + euclid_dot(h, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) \226\134\146 euclid_dot(h, f + g) == euclid_dot(h, f) + euclid_dot(h, g)
+      #|  \226\136\128 n : Num, \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) \226\134\146 euclid_dot(h, f - g) == euclid_dot(h, f) - euclid_dot(h, g)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, \226\136\128 h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) \226\134\146 euclid_dot(h, f - g) == euclid_dot(h, f) - euclid_dot(h, g)
       #|  (a : Real) * real_of_num(0) == real_of_num(0)
       #|  ((i : Num) => (f : (Num) -> Real)(i) * real_of_num(0)) == ((r : Num) => real_of_num(0))
-      #|  forall f. (dot f euclid0) = &.0
-      #|  forall f. (dot euclid0 f ) = &.0
+      #|  \226\136\128 f : (Num) -> Real, euclid_dot(f, euclid_euclid0) == real_of_num(0)
+      #|  \226\136\128 f : (Num) -> Real, euclid_dot(euclid_euclid0, f) == real_of_num(0)
       #|  euclid_euclid((n : Num), (f : (Num) -> Real))
       #|  (a : Real) <= real_of_num(0) && real_of_num(0) <= a \226\134\146 a == real_of_num(0)
       #|  (a : Real) == (f : (Num) -> Real)((x : Num))
@@ -8473,10 +8473,10 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (f : (Num) -> Real)
       #|  (f : (Num) -> Real)
       #|  (n : Num)
-      #|  dot f f = (&.0)
-      #|  forall f n. (euclid n f) /\\ (dot f f = (&.0)) ==> (f = euclid0)
+      #|  euclid_dot((f : (Num) -> Real), f) == real_of_num(0)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 n : Num, euclid_euclid(n, f) && euclid_dot(f, f) == real_of_num(0) \226\134\146 f == euclid_euclid0
       #|  euclid_euclid
-      #|  forall f. (euclidean f) /\\ (dot f f = (&.0)) ==> (f = euclid0)
+      #|  \226\136\128 f : (Num) -> Real, euclid_euclidean(f) && euclid_dot(f, f) == real_of_num(0) \226\134\146 f == euclid_euclid0
       #|  \226\136\128 f : (Num) -> Real, real_of_num(0) <= euclid_norm(f)
       #|  --(x : Real) == x
       #|  \226\136\128 f : (Num) -> Real, euclid_norm(-f) == euclid_norm(f)
@@ -8486,25 +8486,25 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  -(b : Real) * ((a : Real) * b) + b * (b * a) == real_of_num(0)
       #|  (a : Real) * (-(b : Real) * (c : Real)) == -(a * (b * c)) && -(-a * b) == a * b
       #|  real_of_num(2) * (x : Real) == x + x
-      #|  c = dot g g
-      #|  b = dot f g
-      #|  a = dot f f
+      #|  (c : Real) == euclid_dot((g : (Num) -> Real), g)
+      #|  (b : Real) == euclid_dot((f : (Num) -> Real), (g : (Num) -> Real))
+      #|  (a : Real) == euclid_dot((f : (Num) -> Real), f)
       #|  real_le
       #|  !((x : Real) == real_of_num(0)) && real_of_num(0) <= x \226\134\146 real_of_num(0) < x
-      #|  &.0 <. dot f f
+      #|  real_of_num(0) < euclid_dot((f : (Num) -> Real), f)
       #|  (g : (Num) -> Real)
       #|  (f : (Num) -> Real)
-      #|  (--.(dot f g)) *# f + (dot f f)*# g
+      #|  euclid_euclid_scale(-euclid_dot((f : (Num) -> Real), (g : (Num) -> Real)), f) + euclid_euclid_scale(euclid_dot(f, f), g)
       #|  (a : Real) == (b : Real) \226\134\146 a + b == a * real_of_num(2)
       #|  (b : Real) + (c : Real) == (e : Real) \226\134\146 (a : Real) + (b + (c + (d : Real))) == a + (e + d)
-      #|  forall a b. (dot (a *# f + b *# g) (a *# f + b *# g)) = a*a*(dot f f) + (&.2)*a*b*(dot f g) + b*b*(dot g g)
+      #|  \226\136\128 a : Real, \226\136\128 b : Real, euclid_dot(euclid_euclid_scale(a, (f : (Num) -> Real)) + euclid_euclid_scale(b, (g : (Num) -> Real)), euclid_euclid_scale(a, f) + euclid_euclid_scale(b, g)) == a * (a * euclid_dot(f, f)) + (real_of_num(2) * (a * (b * euclid_dot(f, g))) + b * (b * euclid_dot(g, g)))
       #|  (x : Real) <= x
       #|  real_of_num(0) * (x : Real) == real_of_num(0)
       #|  (f : (Num) -> Real) == euclid_euclid0 || !(f == euclid_euclid0)
-      #|  forall f g. (euclidean f) /\\ (euclidean g) ==>\n   ((abs(dot f g)) <=. (norm f)*. (norm g))
-      #|  dot f f
-      #|   --. (dot f g)
-      #|  forall h. norm(h) * norm(h) = (dot h h)
+      #|  \226\136\128 f : (Num) -> Real, \226\136\128 g : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) \226\134\146 abs(euclid_dot(f, g)) <= euclid_norm(f) * euclid_norm(g)
+      #|  euclid_dot((f : (Num) -> Real), f)
+      #|  -euclid_dot((f : (Num) -> Real), (g : (Num) -> Real))
+      #|  \226\136\128 h : (Num) -> Real, euclid_norm(h) * euclid_norm(h) == euclid_dot(h, h)
       #|  (x : Real) <= abs(x)
       #|  (a : Real) == (b : Real) && a <= (e : Real) \226\134\146 a + (b + (c : Real)) <= c + (e + e)
       #|  (b : Real) <= (c : Real) \226\134\146 (a : Real) + b <= a + c
@@ -8616,7 +8616,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (open_ball : (((A) -> Bool, (A, A) -> Real), A, Real, A) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real)) == {(y : A) | X(x) && X(y) && d(x, y) < r}
       #|  (closed_ball : (((A) -> Bool, (A, A) -> Real), A, Real, A) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real)) == {(y : A) | X(x) && X(y) && d(x, y) <= r}
       #|  (open_balls : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(B : (A) -> Bool) | \226\136\131 x : A, \226\136\131 r : Real, B == euclid_open_ball((X, d), x, r)}
-      #|  top_of_metric ((X:A->bool),d) =\n      { A | ?F. (F SUBSET (open_balls (X,d)))/\\\n     (A = UNIONS F) }
+      #|  (top_of_metric : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(A : (A) -> Bool) | \226\136\131 F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) && A == UNIONS(F)}
       #|  \226\136\128 U : ((A) -> Bool) -> Bool, euclid_topology_(U) \226\134\146 euclid_open_(U, {})
       #|  SUBSET((A : (A) -> Bool), UNIONS((U : ((A) -> Bool) -> Bool)))
       #|  \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, euclid_topology_(U) && euclid_open_(U, A) \226\134\146 euclid_closed_(U, DIFF(UNIONS(U), A))
@@ -8742,7 +8742,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (x : A)
       #|  ({} : ((A) -> Bool) -> Bool)
       #|  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, euclid_top_of_metric((X, d), {})
-      #|  forall(X:A->bool) d F.\n    (F SUBSET (open_balls (X,d))) ==>\n    ((UNIONS F) IN (top_of_metric(X,d)))
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, \226\136\128 F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) \226\134\146 IN(UNIONS(F), euclid_top_of_metric((X, d)))
       #|  {(x : (A) -> Bool)}
       #|  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, SUBSET(euclid_open_balls((X, d)), euclid_top_of_metric((X, d)))
       #|  (d : _)
