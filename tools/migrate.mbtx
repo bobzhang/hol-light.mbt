@@ -326,7 +326,12 @@ async fn mbt_files(dir : String) -> Array[String] {
 /// The theory the package's load begins (its init.mbt).
 async fn theory_of(pkg : String) -> String {
   for f in mbt_files(pkg) {
-    match between(read(f), "@parser.begin_theory(\"", "\"") {
+    // the call may be split after its parenthesis (moon fmt)
+    let mut src = read(f).replace_all(old="begin_theory(\n", new="begin_theory(")
+    while src.contains("begin_theory( ") {
+      src = src.replace_all(old="begin_theory( ", new="begin_theory(")
+    }
+    match between(src, "@parser.begin_theory(\"", "\"") {
       Some(t) => return t
       None => ()
     }
