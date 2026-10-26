@@ -531,7 +531,7 @@ async fn record(
   }
   @fs.write_file(
     hook_dir + "/moon.pkg",
-    "import {\n  \"bobzhang/hol_light/parser\",\n  \"bobzhang/hol_light/term_syntax\",\n}\n",
+    "import {\n  \"bobzhang/hol_light/lib\",\n  \"bobzhang/hol_light/parser\",\n  \"bobzhang/hol_light/term_syntax\",\n}\n",
   )
   @fs.write_file(
     hook_dir + "/hook.mbt",
@@ -545,10 +545,14 @@ async fn record(
       $|  @parser.quotation_hook.val = Some(fn(site, old, tm) {
       $|    if site >= 0 {
       $|      let at = if @parser.is_loading(\{t}) { @parser.theory_trace(\{t}).length() - 1 } else { -1 }
+      $|      // spelling rereads terms: its warnings are not the quotation's
+      $|      let sink = @lib.report_sink.val
+      $|      @lib.report_sink.val = _ => ()
       $|      let new = try \{spell} catch {
       $|        @term_syntax.Unprintable(m) => Some(\{u} + ": " + m)
       $|        _ => Some(\{u})
       $|      }
+      $|      @lib.report_sink.val = sink
       $|      if new is Some(new) {
       $|        records.push((site, at, new))
       $|      }
@@ -615,6 +619,11 @@ async fn record(
     }
     if ranges.is_empty() {
       fail("no test files to run in " + tpkg)
+    }
+    for o in files {
+      if !ranges.iter().any(r => o == r.0 || o.has_suffix("/" + r.0)) {
+        fail("\{o} is no test file of \{tpkg} with tests")
+      }
     }
     // a chain's test files (NN_<name>_test.mbt) run in order, each loading
     // its member after the ones before it (as tools/test.py runs them)
