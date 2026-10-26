@@ -6631,43 +6631,43 @@ Warning: inventing type variables
 0..0..1..4..7..19..36..64..109..177..254..441..668..1205..1916..3823..solved at 5598
 0..0..solved at 2
 Library/bitmatch quotations (192):
-  P:A->bool
-  Q:bool
-  (/\\)
-  x:A
-  (\\x:A. Q /\\ P x) = P
-  (\\x:A. Q /\\ P x) x
-  (P:A->bool) x
-  (P:A->bool) x
-  x:A
-  (?) (P:A->bool)
-  Q:bool
-  _BITMATCH (s:N word) c = _MATCH (val s) c
-  _ELSEPATTERN (e:B) (a:A) = \\x. e = x
-  0, \\i:num. F
-  ?x:num#(num->bool). forall a. SND x a ==> a < 2 EXP FST x
-  pat_size p = FST (dest_bitpat p)
-  pat_set p = SND (dest_bitpat p)
-  forall p s. pat_set p s ==> s < 2 EXP pat_size p
-  dest_bitpat (mk_bitpat (n,f)) = (n,f)
+  (P : (A) -> Bool)
+  (Q : Bool)
+  op_slash_bslash
+  (x : A)
+  ((x : A) => (Q : Bool) && (P : (A) -> Bool)(x)) == P
+  ((x : A) => (Q : Bool) && (P : (A) -> Bool)(x))((x : A))
+  (P : (A) -> Bool)((x : A))
+  (P : (A) -> Bool)((x : A))
+  (x : A)
+  op_q((P : (A) -> Bool))
+  (Q : Bool)
+  (_BITMATCH : (Word[N], (Num, _) -> Bool) -> _)((s : Word[N]), (c : (Num, _) -> Bool)) == _MATCH(val(s), c)
+  (_ELSEPATTERN : (B, A, B) -> Bool)((e : B), (a : A)) == ((x : B) => e == x)
+  (0, (i : Num) => false)
+  \226\136\131 x : (Num, (Num) -> Bool), \226\136\128 a : Num, SND(x, a) \226\134\146 a < EXP(2, FST(x))
+  (pat_size : (Bitpat) -> Num)((p : Bitpat)) == FST(dest_bitpat(p))
+  (pat_set : (Bitpat, Num) -> Bool)((p : Bitpat)) == SND(dest_bitpat(p))
+  \226\136\128 p : Bitpat, \226\136\128 s : Num, pat_set(p, s) \226\134\146 s < EXP(2, pat_size(p))
+  dest_bitpat(mk_bitpat(((n : Num), (f : (Num) -> Bool)))) == (n, f)
   p = mk_bitpat (n, f) /\\ (forall a. f a ==> a < 2 EXP n) ==>\n  pat_size p = n /\\ forall s. pat_set p s = f s
-  NILPAT = mk_bitpat(0,\\s:num. s = 0)
-  pat_size NILPAT = 0 /\\ forall s. pat_set NILPAT s <=> s = 0
+  (NILPAT : Bitpat) == mk_bitpat((0, (s : Num) => s == 0))
+  pat_size(NILPAT) == 0 && (\226\136\128 s : Num, pat_set(NILPAT, s) == (s == 0))
   CONSPAT p (a:N word) =\n  let n = dimindex(:N) in\n  mk_bitpat(n + pat_size p,\n    \\s:num. (?t. pat_set p t /\\ s = val a + 2 EXP n * t))
-  2 EXP dimindex (:N) * SUC t
+  EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) * SUC((t : Num))
   pat_size (CONSPAT p (a:N word)) = dimindex(:N) + pat_size p /\\\n   forall s. pat_set (CONSPAT p (a:N word)) s <=>\n     ?t. pat_set p t /\\ s = val a + 2 EXP dimindex(:N) * t
-  word1 p = (word (bitval p)):1 word
-  b:bool
-  bit 0 (word1 b) = b
-  val (word1 b) = bitval b
-  ODD n
-  word1 (ODD n) = word n
+  (word1 : (Bool) -> Word[Unit])((p : Bool)) == word(bitval(p))
+  (b : Bool)
+  bit(0, word1((b : Bool))) == b
+  val(word1((b : Bool))) == bitval(b)
+  ODD((n : Num))
+  word1(ODD((n : Num))) == word(n)
   (p ==> a:A = t1) ==> (~p ==> a = t2) ==> a = if p then t1 else t2
-  ~
+  op_tilde
   _MATCH (e:A) (_SEQPATTERN c cs) =\n   if ?y:B. c e y then _MATCH e c else _MATCH e cs
   _BITMATCH (e:N word) (_SEQPATTERN c cs) =\n   if ?y:B. c (val e) y then _BITMATCH e c else _BITMATCH e cs
   _BITMATCH (e:N word) (_SEQPATTERN c cs) =\n   if ?y:B. c (val e) y then\n     _BITMATCH e (_SEQPATTERN c (_ELSEPATTERN ARB))\n   else _BITMATCH e cs
-  _MATCH (e:B) (_ELSEPATTERN (a:A)) = a
+  _MATCH((e : B), _ELSEPATTERN((a : A))) == a
   \\/
   \\/
   \\/
@@ -6681,56 +6681,56 @@ Library/bitmatch quotations (192):
   \\/
   ~
   F
-  _BITMATCH (e:N word) (_ELSEPATTERN (a:A)) = a
+  _BITMATCH((e : Word[N]), _ELSEPATTERN((a : A))) == a
   pat_extract p i b <=>\n  (forall n. pat_set p n ==> numbit i n = b)
-  b:bool
-  p:bitpat
-  i:num
-  m:num
-  n:num
+  (b : Bool)
+  (p : Bitpat)
+  (i : Num)
+  (m : Num)
+  (n : Num)
   :N
-  dimindex(:N)
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
   numbit
-  (+)
-  (<)
-  a:N word
-  b:bool
-  pat_extract (CONSPAT p (word1 b)) 0 b
-  m <= n ==> (m + (n - m) = n:num)
+  op_plus
+  op_lt
+  (a : Word[N])
+  (b : Bool)
+  pat_extract(CONSPAT((p : Bitpat), word1((b : Bool))), 0, b)
+  (m : Num) <= (n : Num) \226\134\146 m + (n - m) == n
   dimindex(:N) = n ==> numbit i m = b ==> (i < n <=> T) ==>\n     pat_extract (CONSPAT p (word m:N word)) i b
-  dimindex(:N)
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
   dimindex(:N) = n ==> m + n = i ==> pat_extract p m b ==>\n     pat_extract (CONSPAT p (a:N word)) i b
-  pat_extract p i b
-  val (e:N word)
-  b:bool
-  F
-  b:bool
-  T
-  bit i (e:N word)
-  pat_set p (val (e:N word))
-  ~bit i (e:N word)
-  pat_set p (val (e:N word))
-  p:bitpat
-  e:N word
-  i:num
+  pat_extract((p : Bitpat), (i : Num), (b : Bool))
+  val((e : Word[N]))
+  (b : Bool)
+  false
+  (b : Bool)
+  true
+  bit((i : Num), (e : Word[N]))
+  pat_set((p : Bitpat), val((e : Word[N])))
+  !bit((i : Num), (e : Word[N]))
+  pat_set((p : Bitpat), val((e : Word[N])))
+  (p : Bitpat)
+  (e : Word[N])
+  (i : Num)
   :N
   (?) (r (val e)) = F ==>\n      (_BITMATCH e (_SEQPATTERN r rs):B) = _BITMATCH (e:N word) rs
-  rs:num->B->bool
-  r:num->B->bool
-  e:N word
+  (rs : (Num, B) -> Bool)
+  (r : (Num, B) -> Bool)
+  (e : Word[N])
   :B
   :N
-  (P = \\x:A. F) ==> (?) P = F
+  (P : (A) -> Bool) == ((x : A) => false) \226\134\146 op_q(P) == false
   :A
-  P:A->bool
-  ~A ==> _UNGUARDED_PATTERN A B = F
-  A:bool
-  B:bool
+  (P : (A) -> Bool)
+  !(A : Bool) \226\134\146 _UNGUARDED_PATTERN(A, (B : Bool)) == false
+  (A : Bool)
+  (B : Bool)
   :N
   _BITMATCH (e:N word) (rs1:num->B->bool) = _BITMATCH e rs2 ==>\n        _BITMATCH e (_SEQPATTERN r rs1) = _BITMATCH e (_SEQPATTERN r rs2)
   :B
   :N
-  (r:A->B->bool) e = (\\y. x = y) ==> _MATCH e r = x
+  (r : (A, B) -> Bool)((e : A)) == ((y : B) => (x : B) == y) \226\134\146 _MATCH(e, r) == x
   \\/
   \\/
   \\/
@@ -6747,50 +6747,50 @@ Library/bitmatch quotations (192):
   bitpat_inverts p f (x:A) <=> (forall y. pat_set p y ==> f y = x)
   bitpat_down(:N) (f:num->A) (n:num) = f (n DIV 2 EXP dimindex(:N))
   bitpat_inverts p f (x:A) ==>\n   bitpat_inverts (CONSPAT p (a:N word)) (bitpat_down(:N) f) x
-  bitpat_inverts (CONSPAT p (a:N word)) word a
+  bitpat_inverts(CONSPAT((p : Bitpat), (a : Word[N])), word, a)
   bitpat_inverts p f (x:A) ==> bitpat_inverts p (g o f) (g x:B)
-  b:bool
-  x:A
-  f:num->A
-  a:N word
-  p:bitpat
+  (b : Bool)
+  (x : A)
+  (f : (Num) -> A)
+  (a : Word[N])
+  (p : Bitpat)
   :A
   :N
-  bitpat_inverts p f (x:A)
-  ?y:A. x=y
+  bitpat_inverts((p : Bitpat), (f : (Num) -> A), (x : A))
+  \226\136\131 y : A, (x : A) == y
   r (val (e:N word)) = (\\y:A. x = y) ==> _BITMATCH e (_SEQPATTERN r s) = x
-  A ==> (_UNGUARDED_PATTERN A B <=> B)
+  (A : Bool) \226\134\146 _UNGUARDED_PATTERN(A, (B : Bool)) == B
   \\/
   ~
   \\/
   F
-  B:bool
-  bitpat_inverts p f (x:A) ==> pat_set p e ==> f e = x
-  _UNGUARDED_PATTERN A B ==> A /\\ B
+  (B : Bool)
+  bitpat_inverts((p : Bitpat), (f : (Num) -> A), (x : A)) \226\134\146 pat_set(p, (e : Num)) \226\134\146 f(e) == x
+  _UNGUARDED_PATTERN((A : Bool), (B : Bool)) \226\134\146 A && B
   \\/
   \\/
   \\/
   F
-  x:A
-  f:num->A
-  p:bitpat
-  B:bool
-  A:bool
+  (x : A)
+  (f : (Num) -> A)
+  (p : Bitpat)
+  (B : Bool)
+  (A : Bool)
   :N
-  s:num->A->bool
-  r:num->A->bool
-  a:A
-  e:N word
-  a:num
-  i:num
-  x:num
-  p:bitpat
-  n:num
-  F
-  T
+  (s : (Num, A) -> Bool)
+  (r : (Num, A) -> Bool)
+  (a : A)
+  (e : Word[N])
+  (a : Num)
+  (i : Num)
+  (x : Num)
+  (p : Bitpat)
+  (n : Num)
+  false
+  true
   :N
-  dimindex(:N)
-  pat_set NILPAT _0
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+  pat_set(NILPAT, _0)
   pat_set p x ==>\n       pat_set (CONSPAT p (word a:N word)) (num_shift_add a x (dimindex(:N)))
   num_shift_add 0 x (dimindex(:1)) = num_shift_add (BIT0 0) x (SUC 0)
   0
@@ -6803,26 +6803,26 @@ Library/bitmatch quotations (192):
   _0
   pat_size p = NUMERAL n ==> dimindex(:N) = NUMERAL n ==>\n     pat_set p x ==> pat_set p (val (word (NUMERAL x):N word))
   pat_size
-  k:num
-  m:num
-  n:num
-  e:N word
-  e:num
+  (k : Num)
+  (m : Num)
+  (n : Num)
+  (e : Word[N])
+  (e : Num)
   :N
   1
-  (+)
-  dimindex(:N)
-  p:bitpat
-  e DIV 2 EXP n
+  op_plus
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+  (p : Bitpat)
+  DIV((e : Num), EXP(2, (n : Num)))
   dimindex(:N) = n ==> pat_set p (e DIV 2 EXP n) ==>\n       pat_set (CONSPAT p (word e:N word)) e
-  n:num
-  e DIV 2 EXP dimindex(:N)
-  dimindex(:1)
+  (n : Num)
+  DIV((e : Num), EXP(2, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  (dimindex : ((Unit) -> Bool) -> Num)((UNIV : (Unit) -> Bool))
   pat_set p (e DIV 2 EXP 1) ==> pat_set (CONSPAT p (word1 (ODD e))) e
-  n < 1 <=> n = 0
-  e < 2 EXP 0 ==> pat_set NILPAT e
+  ((n : Num) < 1) == (n == 0)
+  (e : Num) < EXP(2, 0) \226\134\146 pat_set(NILPAT, e)
   n + m = k ==>\n    e < 2 EXP k ==> e DIV 2 EXP n < 2 EXP m
-  dimindex(:N) = n ==> val (e:N word) < 2 EXP n
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) == (n : Num) \226\134\146 (val : (Word[N]) -> Num)((e : Word[N])) < EXP(2, n)
 _BITMATCH =  |- (#forall:fun(fun(word('N),bool),bool) (\s:word('N). (#forall:fun(fun(fun(num,fun('?1,bool)),bool),bool) (\c:fun(num,fun('?1,bool)). ((#=:fun('?1,fun('?1,bool)) ((#_BITMATCH:fun(word('N),fun(fun(num,fun('?1,bool)),'?1)) s:word('N)) c:fun(num,fun('?1,bool)))) ((#_MATCH:fun(num,fun(fun(num,fun('?1,bool)),'?1)) (#val:fun(word('N),num) s:word('N))) c:fun(num,fun('?1,bool))))))))
 _ELSEPATTERN =  |- (#forall:fun(fun('A,bool),bool) (\a:'A. (#forall:fun(fun('B,bool),bool) (\e:'B. ((#=:fun(fun('B,bool),fun(fun('B,bool),bool)) ((#_ELSEPATTERN:fun('B,fun('A,fun('B,bool))) e:'B) a:'A)) (\x:'B. ((#=:fun('B,fun('B,bool)) e:'B) x:'B)))))))
 bitpat =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(bitpat,bool),bool) (\a:bitpat. ((#=:fun(bitpat,fun(bitpat,bool)) (#mk_bitpat:fun(prod(num,fun(num,bool)),bitpat) (#dest_bitpat:fun(bitpat,prod(num,fun(num,bool))) a:bitpat))) a:bitpat)))) (#forall:fun(fun(prod(num,fun(num,bool)),bool),bool) (\r:prod(num,fun(num,bool)). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\a:num. ((#==>:fun(bool,fun(bool,bool)) ((#SND:fun(prod(num,fun(num,bool)),fun(num,bool)) r:prod(num,fun(num,bool))) a:num)) ((#<:fun(num,fun(num,bool)) a:num) ((#EXP:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#FST:fun(prod(num,fun(num,bool)),num) r:prod(num,fun(num,bool))))))))) ((#=:fun(prod(num,fun(num,bool)),fun(prod(num,fun(num,bool)),bool)) (#dest_bitpat:fun(bitpat,prod(num,fun(num,bool))) (#mk_bitpat:fun(prod(num,fun(num,bool)),bitpat) r:prod(num,fun(num,bool))))) r:prod(num,fun(num,bool)))))))
