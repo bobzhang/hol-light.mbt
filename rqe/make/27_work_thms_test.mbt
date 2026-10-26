@@ -10173,78 +10173,78 @@ test "Rqe/work_thms matches Rqe/work_thms.ml" {
       #|  \226\136\128 l : List[Real], LENGTH(TL(partition_line(l))) == 2 * LENGTH(l)
       #|  LENGTH((sgns : List[_])) == LENGTH(APPEND([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x && x < HD((t : List[Real]))], TL(partition_line(t))))
       #|  LENGTH([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x]) == LENGTH((sgns : List[_]))
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  (t : List[List[Sign]])
       #|  (sgns : List[List[Sign]])
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  (pts : List[Real])
       #|  \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], ALL2(interpsigns(eqs), partition_line(pts), sgns) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1
       #|  LENGTH((sgns : List[_])) == LENGTH(APPEND([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x && x < HD((t : List[Real]))], TL(partition_line(t))))
       #|  LENGTH([(x : Real) => x < (h : Real), (x : Real) => x == h, (x : Real) => h < x]) == LENGTH((sgns : List[_]))
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  (t : List[List[Sign]])
       #|  (sgns : List[List[Sign]])
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  (pts : List[Real])
       #|  \226\136\128 eqs : List[(Real) -> Real], \226\136\128 pts : List[Real], \226\136\128 sgns : List[List[Sign]], interpmat(pts, eqs, sgns) \226\134\146 LENGTH(sgns) == 2 * LENGTH(pts) + 1
       #|  ((x : _) == (y : _)) == (y == x)
@@ -10345,40 +10345,40 @@ test "Rqe/work_thms matches Rqe/work_thms.ml" {
       #|  !(LENGTH(partition_line((t : List[Real]))) == 0)
       #|  (t : List[Real])
       #|  !(partition_line((t : List[Real])) == NIL)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
       #|  LENGTH((sgns : List[_])) == 2
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  !(partition_line([(x : Real), (y : Real)]) == NIL)
       #|  LENGTH(APPEND(BUTLAST(partition_line(CONS((h : Real), (t : List[Real])))), CONS((x' : Real) => LAST(CONS(h, t)) < x' && x' < (x : Real), TL(partition_line([x, (y : Real)]))))) == LENGTH(APPEND((sgns : List[List[Sign]]), [(a : List[Sign]), (b : List[Sign]), (s : List[Sign]), s, s]))
       #|  (z : Real) => (x : Real) < z && z < (y : Real) || z == y || y < z
@@ -11148,38 +11148,38 @@ test "Rqe/work_thms matches Rqe/work_thms.ml" {
       #|  \226\136\128 n : Num, \226\136\128 l : List[A], n < LENGTH(l) \226\134\146 (\226\136\131 l1 : List[A], \226\136\131 l2 : List[A], l == APPEND(l1, l2) && LENGTH(l1) == n)
       #|  (x : Num) * (y : Num) == y * x
       #|  (x : Num) + 0 == x
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  2
       #|  (x : _)
       #|  \226\136\128 x : Num, EVEN(x) \226\134\146 2 * DIV(x, 2) == x
