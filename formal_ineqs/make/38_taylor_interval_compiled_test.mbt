@@ -928,7 +928,7 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  \\n. n + 1
       #|  (nth_differentiable_on : (Num, (Real) -> Bool, (Real) -> Real) -> Bool)((n : Num), (s : (Real) -> Bool), (f : (Real) -> Real)) == (\226\136\128 x : Real, IN(x, s) \226\134\146 nth_differentiable(n, f, x))
       #|  (nth_differentiable_on_int : (Num, (Real, Real), (Real) -> Real) -> Bool)((n : Num), (int : (Real, Real)), (f : (Real) -> Real)) == (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 nth_differentiable(n, f, x))
-      #|  nth_diff_weak n f x <=> f real_continuous atreal x /\\ \n\t?F. F 0 = f /\\ forall i. i < n ==> (F i has_real_derivative F (SUC i) x) (atreal x)
+      #|  (nth_diff_weak : (Num, (Real) -> Real, Real) -> Bool)((n : Num), (f : (Real) -> Real), (x : Real)) == (real_continuous(f, atreal(x)) && (\226\136\131 F : (Num, Real) -> Real, F(0) == f && (\226\136\128 i : Num, i < n \226\134\146 has_real_derivative(F(i), F(SUC(i), x), atreal(x)))))
       #|  (nth_diff_strong : (Num, (Real) -> Real, Real) -> Bool)((n : Num), (f : (Real) -> Real), (x : Real)) == (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && nth_differentiable_on(n, s, f))
       #|  (nth_diff_strong_int : (Num, (Real, Real), (Real) -> Real) -> Bool)((n : Num), (int : (Real, Real)), (f : (Real) -> Real)) == (\226\136\128 x : Real, interval_arith(x, int) \226\134\146 nth_diff_strong(n, f, x))
       #|  derivative == real_derivative
