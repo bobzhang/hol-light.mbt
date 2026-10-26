@@ -7053,16 +7053,16 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  (outer_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(op_euclid_prime_outer_us_cube(n, k, A))) * twopow(-int_of_num(n * k))
       #|  (euclid_bounded : (((Num) -> Real) -> Bool) -> Bool)((A : ((Num) -> Real) -> Bool)) == (\226\136\131 R : Real, \226\136\128 x : (Num) -> Real, \226\136\128 i : Num, A(x) \226\134\146 x(i) < R)
       #|  (vol : (Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (A : ((Num) -> Real) -> Bool)) == lim((k : Num) => op_euclid_prime_outer_us_vol(n, k, A))
-      #|  (+):num->(num->num)
-      #|  (-):num->(num->num)
-      #|  ( * ):num->(num->num)
+      #|  (op_plus : (Num, Num) -> Num)
+      #|  (op_minus : (Num, Num) -> Num)
+      #|  (op_star : (Num, Num) -> Num)
       #|  EXP
       #|  DIV
       #|  MOD
-      #|  (<):num->(num->bool)
-      #|  (<=):num->(num->bool)
-      #|  (>):num->(num->bool)
-      #|  (>=):num->(num->bool)
+      #|  (op_lt : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_gt : (Num, Num) -> Bool)
+      #|  (op_gt_eq : (Num, Num) -> Bool)
       #|  int_add
       #|  int_sub
       #|  int_mul
