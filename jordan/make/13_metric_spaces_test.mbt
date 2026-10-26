@@ -8616,7 +8616,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (open_ball : (((A) -> Bool, (A, A) -> Real), A, Real, A) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real)) == {(y : A) | X(x) && X(y) && d(x, y) < r}
       #|  (closed_ball : (((A) -> Bool, (A, A) -> Real), A, Real, A) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real)) == {(y : A) | X(x) && X(y) && d(x, y) <= r}
       #|  (open_balls : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(B : (A) -> Bool) | \226\136\131 x : A, \226\136\131 r : Real, B == euclid_open_ball((X, d), x, r)}
-      #|  top_of_metric ((X:A->bool),d) =\n      { A | ?F. (F SUBSET (open_balls (X,d)))/\\\n     (A = UNIONS F) }
+      #|  (top_of_metric : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(A : (A) -> Bool) | \226\136\131 F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) && A == UNIONS(F)}
       #|  \226\136\128 U : ((A) -> Bool) -> Bool, euclid_topology_(U) \226\134\146 euclid_open_(U, {})
       #|  SUBSET((A : (A) -> Bool), UNIONS((U : ((A) -> Bool) -> Bool)))
       #|  \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, euclid_topology_(U) && euclid_open_(U, A) \226\134\146 euclid_closed_(U, DIFF(UNIONS(U), A))
@@ -8742,7 +8742,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (x : A)
       #|  ({} : ((A) -> Bool) -> Bool)
       #|  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, euclid_top_of_metric((X, d), {})
-      #|  forall(X:A->bool) d F.\n    (F SUBSET (open_balls (X,d))) ==>\n    ((UNIONS F) IN (top_of_metric(X,d)))
+      #|  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, \226\136\128 F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) \226\134\146 IN(UNIONS(F), euclid_top_of_metric((X, d)))
       #|  {(x : (A) -> Bool)}
       #|  \226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, SUBSET(euclid_open_balls((X, d)), euclid_top_of_metric((X, d)))
       #|  (d : _)

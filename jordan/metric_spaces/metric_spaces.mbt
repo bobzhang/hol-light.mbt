@@ -2887,7 +2887,7 @@ pub fn open_balls() -> @kernel.Thm {
 ///|
 /// top_of_metric
 fn step_121() -> Unit raise {
-  top_of_metric_c.set(@misc_defs_and_lemmas.euclid_def(@parser.parse_term("top_of_metric ((X:A->bool),d) =\n      { A | ?F. (F SUBSET (open_balls (X,d)))/\\\n     (A = UNIONS F) }")))
+  top_of_metric_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(top_of_metric : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(A : (A) -> Bool) | ∃ F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) && A == UNIONS(F)}")))
 }
 
 ///|
@@ -3675,7 +3675,7 @@ pub fn top_of_metric_empty() -> @kernel.Thm {
 fn step_150() -> Unit raise {
   let t1441 = @meson.meson_tac(@list.List([]))
   let t1442 = @list.List([@simp.rewrite_tac(@list.List([top_of_metric(), @sets.in_elim_thm()])), t1441])
-  top_of_metric_open_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall(X:A->bool) d F.\n    (F SUBSET (open_balls (X,d))) ==>\n    ((UNIONS F) IN (top_of_metric(X,d)))"), t1442))
+  top_of_metric_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) → IN(UNIONS(F), euclid_top_of_metric((X, d)))"), t1442))
 }
 
 ///|
