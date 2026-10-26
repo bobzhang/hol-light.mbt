@@ -27014,7 +27014,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (x : _)
       #|  (y : _)
       #|  (x : _)
-      #|  forall S T. (convex S) /\\ (convex T) ==> (convex (S INTER T))
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, \226\136\128 T : ((Num) -> Real) -> Bool, euclid_convex(S) && euclid_convex(T) \226\134\146 euclid_convex(INTER(S, T))
       #|  \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, euclid_topology_(U) && euclid_closed_(U, A) && euclid_closed_(U, B) \226\134\146 euclid_closed_(U, INTER(A, B))
       #|  {(B : (_) -> Bool) | (SUBSET(B, UNIONS((U : ((_) -> Bool) -> Bool))) && euclid_open_(U, DIFF(UNIONS(U), B))) && SUBSET((X : (_) -> Bool), B)} == {}
       #|  \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Bool, !SUBSET(X, UNIONS(U)) \226\134\146 euclid_closure(U, X) == UNIV
@@ -27041,9 +27041,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  real_of_num(0)
       #|  (t : _)
       #|  \226\136\128 t : Real, \226\136\128 x : (Num) -> Real, euclid_euclidean(x) \226\134\146 euclid_norm(euclid_euclid_scale(t, x)) == abs(t) * euclid_norm(x)
-      #|  closed_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <=. b) }
-      #|  open_half_space n v b =\n  {z | (euclid n z) /\\ (dot v z <. b) }
-      #|  hyperplane n v b =\n  {z | (euclid n z) /\\ (dot v z = b) }
+      #|  (closed_half_space : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) <= b}
+      #|  (open_half_space : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) < b}
+      #|  (hyperplane : (Num, (Num) -> Real, Real, (Num) -> Real) -> Bool)((n : Num), (v : (Num) -> Real), (b : Real)) == {(z : (Num) -> Real) | euclid_euclid(n, z) && euclid_dot(v, z) == b}
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, SUBSET(jordan_closed_half_space(n, v, b), euclid_euclid(n))
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, SUBSET(jordan_open_half_space(n, v, b), euclid_euclid(n))
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, SUBSET(jordan_hyperplane(n, v, b), euclid_euclid(n))
@@ -27062,11 +27062,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  !(real_of_num(0) == (a : Real)) && real_of_num(0) <= a \226\134\146 real_of_num(0) < a
       #|  (b : Real) == (a : Real) * b + (real_of_num(1) * b - a * b)
       #|  real_of_num(0) == (a : Real)
-      #|  dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)
+      #|  euclid_dot((v : (Num) -> Real), euclid_euclid_scale((a : Real), (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - a, (y : (Num) -> Real))) == a * euclid_dot(v, x) + (real_of_num(1) - a) * euclid_dot(v, y)
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_convex(jordan_open_half_space(n, v, b))
       #|  (a : Real) <= real_of_num(1) \226\134\146 real_of_num(0) <= real_of_num(1) - a
       #|  (b : Real) == (a : Real) * b + (real_of_num(1) * b - a * b)
-      #|  dot v (euclid_plus (a *# x) ((&1 - a) *# y)) = a * (dot v x) + (&1 - a)* (dot v y)
+      #|  euclid_dot((v : (Num) -> Real), euclid_euclid_scale((a : Real), (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - a, (y : (Num) -> Real))) == a * euclid_dot(v, x) + (real_of_num(1) - a) * euclid_dot(v, y)
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_convex(jordan_closed_half_space(n, v, b))
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_convex(jordan_hyperplane(n, v, b))
       #|  abs((u : Real)) <= (C : Real) \226\134\146 u <= C
@@ -27074,11 +27074,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid_norm((v : (Num) -> Real)) * euclid_d_euclid((a : (Num) -> Real), (x : (Num) -> Real))
       #|  (\226\136\131 d : Real, (b : Real) <= d && d < (C : Real) - (a : Real)) \226\134\146 a + b < C
       #|  (n : _)
-      #|  dot v (a + (x - a)) = (dot v a) + (dot v (x-a))
+      #|  euclid_dot((v : (Num) -> Real), (a : (Num) -> Real) + ((x : (Num) -> Real) - a)) == euclid_dot(v, a) + euclid_dot(v, x - a)
       #|  (x : (Num) -> Real) == (a : (Num) -> Real) + (x - a)
       #|  real_of_num(0) <= (x : Real) && !(x == real_of_num(0)) \226\134\146 real_of_num(0) < x
       #|  real_of_num(0) < euclid_norm((v : (Num) -> Real))
-      #|  (b - (dot v a))/(norm v)
+      #|  ((b : Real) - euclid_dot((v : (Num) -> Real), (a : (Num) -> Real))) / euclid_norm(v)
       #|  (v : (Num) -> Real) == euclid_euclid0
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid), jordan_open_half_space(n, v, b))
       #|  \226\136\128 n : Num, \226\136\128 v : (Num) -> Real, \226\136\128 b : Real, euclid_euclid(n, v) \226\134\146 euclid_closed_(euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), jordan_closed_half_space(n, v, b))
@@ -27089,10 +27089,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  euclid_norm(euclid_euclid_scale((t : Real), (v : (Num) -> Real))) == t * euclid_norm(v)
       #|  (x : (Num) -> Real) - (x - euclid_euclid_scale((t : Real), (v : (Num) -> Real))) == euclid_euclid_scale(t, v)
       #|  (a : Real) <= (b : Real) && real_of_num(0) < (C : Real) \226\134\146 a - C < b
-      #|  dot v u = (dot v x - t* (dot v v))
+      #|  euclid_dot((v : (Num) -> Real), (u : (Num) -> Real)) == euclid_dot(v, (x : (Num) -> Real)) - (t : Real) * euclid_dot(v, v)
       #|  real_of_num(0) < (t : Real)
       #|  !((x : Real) == real_of_num(0)) && real_of_num(0) <= x \226\134\146 real_of_num(0) < x
-      #|  &.0 < (dot v v)
+      #|  real_of_num(0) < euclid_dot((v : (Num) -> Real), v)
       #|  (u : _)
       #|  (u : (Num) -> Real) == (x : (Num) -> Real) - euclid_euclid_scale((t : Real), (v : (Num) -> Real))
       #|  (t : Real) == (r : Real) / real_of_num(2) / euclid_norm((v : (Num) -> Real))
@@ -28374,8 +28374,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SUC(0) == 1
       #|  1 == SUC(0)
       #|  2 == SUC(1)
-      #|  dot (point p) (point q) = sum (0,2) (\\i. (point p i)*(point q i))
-      #|  forall p q . (dot (point p) (point q)) = (FST p)*(FST q) + (SND p)*(SND q)
+      #|  euclid_dot(jordan_point((p : (Real, Real))), jordan_point((q : (Real, Real)))) == sum((0, 2), (i : Num) => jordan_point(p, i) * jordan_point(q, i))
+      #|  \226\136\128 p : (Real, Real), \226\136\128 q : (Real, Real), euclid_dot(jordan_point(p), jordan_point(q)) == FST(p) * FST(q) + SND(p) * SND(q)
       #|  \226\136\128 r : Real, {(z : (Num) -> Real) | \226\136\131 p : (Real, Real), z == jordan_point(p) && FST(p) < r} == jordan_open_half_space(2, jordan_point((real_of_num(1), real_of_num(0))), r)
       #|  \226\136\128 r : Real, {(z : (Num) -> Real) | \226\136\131 p : (Real, Real), z == jordan_point(p) && r < FST(p)} == jordan_open_half_space(2, jordan_point((-real_of_num(1), real_of_num(0))), -r)
       #|  \226\136\128 r : Real, {(z : (Num) -> Real) | \226\136\131 p : (Real, Real), z == jordan_point(p) && SND(p) < r} == jordan_open_half_space(2, jordan_point((real_of_num(0), real_of_num(1))), r)
@@ -29538,7 +29538,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (u : _)
       #|  (u : _)
       #|  (G : _)
-      #|  forall T G. (T SUBSET G) /\\ (~(T = EMPTY )) ==>\n        (inductive_set G\n            (INTERS {S | (T SUBSET S) /\\ (inductive_set G S)}))
+      #|  \226\136\128 T : (((Num) -> Real) -> Bool) -> Bool, \226\136\128 G : (((Num) -> Real) -> Bool) -> Bool, SUBSET(T, G) && !(T == {}) \226\134\146 jordan_inductive_set(G, INTERS({(S : (((Num) -> Real) -> Bool) -> Bool) | SUBSET(T, S) && jordan_inductive_set(G, S)}))
       #|  (segment_of : ((((Num) -> Real) -> Bool) -> Bool, ((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool) -> Bool)((G : (((Num) -> Real) -> Bool) -> Bool), (e : ((Num) -> Real) -> Bool)) == INTERS({(S : (((Num) -> Real) -> Bool) -> Bool) | S(e) && jordan_inductive_set(G, S)})
       #|  (G : _)
       #|  {(e : _)}
@@ -86514,7 +86514,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  TAGB
       #|  TAGB
       #|  TAGB
-      #|  (forall x. euclid 2 x = (forall n. 2 <=| n ==> (x n = &0))) /\\\n   (top2 = top_of_metric (euclid 2,d_euclid)) /\\\n   (forall(X:A->bool) d. top_of_metric (X,d) =\n         {A | ?F. F SUBSET open_balls (X,d) /\\ (A = UNIONS F) }) /\\\n   (forall(X:A->bool) d. open_balls(X,d) =\n         {B | ?x r. (B = open_ball (X,d) x r) }) /\\\n   (forall X d (x:A) r. open_ball (X,d) x r =\n         {y | X x /\\ X y /\\ d x y < r}) /\\\n   (forall U (Z:A->bool). connected U Z <=>\n         Z SUBSET UNIONS U /\\\n         (forall A B.\n              U A /\\ U B /\\ (A INTER B = {}) /\\ Z SUBSET A UNION B\n              ==> Z SUBSET A \\/ Z SUBSET B)) /\\\n   (forall(C:A->bool) U. simple_closed_curve U C =\n             (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n              continuous f (top_of_metric (UNIV,d_real)) U /\\\n              INJ f {x | &0 <= x /\\ x < &1} (UNIONS U) /\\\n              (f (&0) = f (&1)))) /\\\n   (forall(f:A->B) U V. continuous f U V =\n         (forall v. V v ==> U  { x | (UNIONS U) x /\\ v (f x) })) /\\\n   (forall x y. d_real x y = abs  (x - y)) /\\\n   (forall x y. euclid 2 x /\\ euclid 2 y\n         ==> (d_euclid x y =\n              sqrt (sum (0,2) (\\i. (x i - y i) * (x i - y i)))))
+      #|  (\226\136\128 x : (Num) -> Real, euclid_euclid(2, x) == (\226\136\128 n : Num, 2 <= n \226\134\146 x(n) == real_of_num(0))) && jordan_top2 == euclid_top_of_metric((euclid_euclid(2), euclid_d_euclid)) && (\226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, euclid_top_of_metric((X, d)) == {(A : (A) -> Bool) | \226\136\131 F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) && A == UNIONS(F)}) && (\226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, euclid_open_balls((X, d)) == {(B : (A) -> Bool) | \226\136\131 x : A, \226\136\131 r : Real, B == euclid_open_ball((X, d), x, r)}) && (\226\136\128 X : (A) -> Bool, \226\136\128 d : (A, A) -> Real, \226\136\128 x : A, \226\136\128 r : Real, euclid_open_ball((X, d), x, r) == {(y : A) | X(x) && X(y) && d(x, y) < r}) && (\226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 Z : (A) -> Bool, euclid_connected(U, Z) == (SUBSET(Z, UNIONS(U)) && (\226\136\128 A : (A) -> Bool, \226\136\128 B : (A) -> Bool, U(A) && U(B) && INTER(A, B) == {} && SUBSET(Z, UNION(A, B)) \226\134\146 SUBSET(Z, A) || SUBSET(Z, B)))) && (\226\136\128 C : (A) -> Bool, \226\136\128 U : ((A) -> Bool) -> Bool, jordan_simple_closed_curve(U, C) == (\226\136\131 f : (Real) -> A, C == IMAGE(f, {(x : Real) | real_of_num(0) <= x && x <= real_of_num(1)}) && euclid_continuous(f, euclid_top_of_metric((UNIV, euclid_d_real)), U) && INJ(f, {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)}, UNIONS(U)) && f(real_of_num(0)) == f(real_of_num(1)))) && (\226\136\128 f : (A) -> B, \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 V : ((B) -> Bool) -> Bool, euclid_continuous(f, U, V) == (\226\136\128 v : (B) -> Bool, V(v) \226\134\146 U({(x : A) | UNIONS(U, x) && v(f(x))}))) && (\226\136\128 x : Real, \226\136\128 y : Real, euclid_d_real(x, y) == abs(x - y)) && (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, euclid_euclid(2, x) && euclid_euclid(2, y) \226\134\146 euclid_d_euclid(x, y) == sqrt(sum((0, 2), (i : Num) => (x(i) - y(i)) * (x(i) - y(i)))))
       #|SQRT_MONO_LE' =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) x:real) y:real))) ((#real_le:fun(real,fun(real,bool)) (#sqrt:fun(real,real) x:real)) (#sqrt:fun(real,real) y:real)))))))
       #|SQRT_MONO_LT' =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real))) ((#real_lt:fun(real,fun(real,bool)) (#sqrt:fun(real,real) x:real)) (#sqrt:fun(real,real) y:real)))))))
       #|REAL_PROP_LT_SQRT' =  |- (#forall:fun(fun(real,bool),bool) (\x:real. (#forall:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) x:real)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) y:real))) ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (#sqrt:fun(real,real) x:real)) (#sqrt:fun(real,real) y:real))) ((#real_lt:fun(real,fun(real,bool)) x:real) y:real)))))))
