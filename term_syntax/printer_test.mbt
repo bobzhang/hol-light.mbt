@@ -328,12 +328,12 @@ test "set notation: spelled-out GSPEC and renamed binders" {
   inspect(spell("GSPEC (\\g:num. ?x:num. SETSPEC g T x)"), content=(
     #|GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x))
   ))
-  // HOL reads T as the constant's name in {T | T}, which binds nothing
-  // there: the lambda's T is spelled out, not bound by a comprehension
+  // {T | T} binds nothing, in HOL and in the term syntax alike: a name like
+  // T is no variable a comprehension binds implicitly, even under a binder
   inspect(
     @term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")),
     content=(
-      #|(T : Bool) => GSPEC((v : Bool) => SETSPEC(v, T, T))
+      #|(T : Bool) => {T | T}
     ),
   )
 }
@@ -457,6 +457,14 @@ test "binders named T and F: comprehensions and patterns" {
   // in a lambda's pattern, read with nothing in scope, an outer T does
   // not make a comprehension's T a variable
   for q in ["(T : Bool) => fn { {T | T : Bool | true} => T }", "(F : Bool) => fn { {F | F : Bool | true} => F }"] {
+    let c = @term_syntax.parse_term(q)
+    assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
+  }
+  // comprehensions inside patterns (Codex)
+  for q in [
+    "(T : Bool) => ∀ ({T | T : Bool | true}, x) : ((Bool) -> Bool, Num), T",
+    "fn { ((T : Bool) => {(x, y) | x : Num, y : Num | T}) => true }",
+  ] {
     let c = @term_syntax.parse_term(q)
     assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
   }

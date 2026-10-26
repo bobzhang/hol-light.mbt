@@ -218,7 +218,7 @@ fn resolve_names(
     // binder, the variables it binds), which needs the names resolved
     Combp(Combp(Varp(m, _), e), p) if m == @grammar.set_abs_mark => {
       @parser.skip_pgenvars(pgen_cost(e))
-      @parser.pmk_setabs(resolve_names(e, bound), resolve_names(p, bound))
+      setabs(resolve_names(e, bound), resolve_names(p, bound))
     }
     Combp(Varp(m, _), binders) if m == @grammar.set_compr_mark => {
       let vs = []
@@ -316,6 +316,39 @@ pub fn parse_preterm(s : String) -> @preterm.Preterm raise {
   }
   check_semantics()
   resolve_names(ptm, @list.List([]))
+}
+
+///|
+/// HOL's `{e | p}` (@parser.pmk_setabs) over resolved preterms: it binds
+/// the variables free in both, or all those of `e` when it has at most one
+/// or `p` has none, and a name like T or F is no variable there (HOL reads
+/// it as the constant's, even under a binder), so the aliased ones are
+/// counted under their own names.
+fn setabs(
+  e : @preterm.Preterm,
+  p : @preterm.Preterm,
+) -> @preterm.Preterm raise {
+  let fvs = @parser.pfrees(unalias_preterm(e))
+  let bvs = @parser.pfrees(unalias_preterm(p))
+  let evs = if fvs.length() <= 1 || bvs.is_empty() {
+    fvs
+  } else {
+    fvs.filter(v => bvs.contains(v))
+  }
+  @parser.pmk_setcompr(e, evs, p)
+}
+
+///|
+/// `t` with the binders elaborated under `truth_alias` named back.
+fn unalias_preterm(t : @preterm.Preterm) -> @preterm.Preterm {
+  match t {
+    Varp(n, ty) if n.has_prefix(truth_alias) =>
+      Varp(n[truth_alias.length():].to_owned(), ty)
+    Varp(_, _) | Constp(_, _) => t
+    Combp(f, x) => Combp(unalias_preterm(f), unalias_preterm(x))
+    Absp(v, b) => Absp(unalias_preterm(v), unalias_preterm(b))
+    Typing(x, ty) => Typing(unalias_preterm(x), ty)
+  }
 }
 
 ///|
