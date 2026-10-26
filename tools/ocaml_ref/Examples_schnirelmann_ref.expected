@@ -9188,7 +9188,7 @@ Examples/schnirelmann quotations (215):
   (f : (Num) -> Num)
   (s : (Num) -> Bool)
   (n : Num)
-  (<=):num->num->bool
+  (op_lt_eq : (Num, Num) -> Bool)
   \226\136\128 n : Num, \226\136\128 s : (Num) -> Bool, \226\136\128 p : Num, HAS_SIZE(s, n) && (\226\136\128 k : Num, IN(k, s) \226\134\146 1 <= k && k <= p) \226\134\146 (\226\136\131 a : (Num) -> Num, a(0) == 0 && a(n + 1) == p + 1 && s == IMAGE(a, op_dot_dot(1, n)) && (\226\136\128 j : Num, \226\136\128 k : Num, j <= n && k <= n + 1 && j < k \226\134\146 a(j) < a(k)) && (\226\136\128 j : Num, \226\136\128 k : Num, j <= n && k <= n + 1 && j <= k \226\134\146 a(j) <= a(k)))
   (j : Num)
   (j : Num)
