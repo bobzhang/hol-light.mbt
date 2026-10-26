@@ -9948,8 +9948,8 @@ test "Rqe/inferisign matches Rqe/inferisign.ml" {
       #|  Pos
       #|  Zero
       #|  Neg
-      #|  ( * ):num -> num -> num
-      #|  ( + ):num -> num -> num
+      #|  (op_star : (Num, Num) -> Num)
+      #|  (op_plus : (Num, Num) -> Num)
       #|  :real
       #|  1
       #|  2
