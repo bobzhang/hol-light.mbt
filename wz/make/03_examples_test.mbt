@@ -114472,11 +114472,11 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -114700,28 +114700,28 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) / real_of_num(binom((2 * n, n))))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -115143,19 +115143,19 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -115502,11 +115502,11 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(binom((n + 1, k + 1))) * ((real_of_num(k) + real_of_num(1)) * ((real_of_num(k) + real_of_num(1)) * (real_of_num(FACT(k)) / spow(real_of_num(n) + real_of_num(1), real_of_num(k) + real_of_num(1))))))
       #|  :real
-      #|  (/):real->real->real
-      #|  (-):real->real->real
+      #|  real_div
+      #|  real_sub
       #|  :real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -115836,18 +115836,18 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (real_of_num(binom((2 * k, k))) * (spow(real_of_num(4), real_of_num(n)) / spow(real_of_num(4), real_of_num(k))))) / real_of_num(binom((2 * n, n))))
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -116446,10 +116446,10 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * real_of_num(binom((n + 1, k))))
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -116641,58 +116641,58 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n + k, k))), 2) * pow(real_of_num(binom((n, k))), 2))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_div
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_pow
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  :real
+      #|  real_add
+      #|  real_pow
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -117444,128 +117444,128 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, 2 * (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * pow(real_of_num(binom((2 * n, k))), 3) / (spow(-real_of_num(1), real_of_num(n)) * (real_of_num(FACT(3 * n)) / pow(real_of_num(FACT(n)), 3))))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_pow
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -119148,78 +119148,78 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 3))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  :real
+      #|  real_add
+      #|  real_pow
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -119958,15 +119958,15 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(1) - real_of_num(2) * real_of_num(n)) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * spow(real_of_num(4), real_of_num(k))) / real_of_num(binom((2 * k, k)))))
       #|  :real
-      #|  (/):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_div
+      #|  real_sub
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -120357,30 +120357,30 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) / real_of_num(FACT(k))))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
+      #|  :real
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  :real
+      #|  real_add
       #|  :num
       #|  :real
       #|  :num
@@ -120777,24 +120777,24 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom(((a : Num) + (n : Num), a + k))) * (real_of_num(binom((a + (c : Num), c + k))) * real_of_num(binom((n + c, n + k)))) / (real_of_num(FACT(a + (n + c))) / (real_of_num(FACT(a)) * (real_of_num(FACT(n)) * real_of_num(FACT(c)))))))
       #|  :real
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
+      #|  real_add
+      #|  real_add
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -121389,43 +121389,43 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k)) * pow(real_of_num(binom((2 * (n : Num), k))), 2) / (spow(-real_of_num(1), real_of_num(n)) * real_of_num(binom((2 * n, n)))))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -122144,14 +122144,14 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(k) * (real_of_num(binom((n + 1, k))) / ((real_of_num(n) + real_of_num(1)) * spow(real_of_num(2), real_of_num(n)))))
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -122560,17 +122560,17 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num) + 1), (k : Num) => real_of_num(binom((n + (1 + k), 2 * k))) * (real_of_num(binom((2 * k, k))) * (spow(-real_of_num(1), real_of_num(k)) / (real_of_num(k) + real_of_num(1)))))
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -123082,20 +123082,20 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(UNIV, (k : Num) => (real_of_num((n : Num)) + real_of_num(2)) / (real_of_num(2) * real_of_num(k) + real_of_num(1)) * (real_of_num(binom((n, 2 * k))) * (spow(real_of_num(2), real_of_num(n) - real_of_num(2) * real_of_num(k) - real_of_num(1)) * (real_of_num(binom((2 * k + 1, k))) / real_of_num(binom((2 * n + 1, n)))))))
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -124270,57 +124270,57 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(UNIV, (k : Num) => real_of_num(binom((2 * (n : Num) + 1, 2 * k))) * (spow(real_of_num(3), real_of_num(k)) / spow(real_of_num(2), real_of_num(n))))
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_pow
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -125705,58 +125705,58 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * real_of_num(binom((2 * k, n))))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_add
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_div
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  real_div
+      #|  :real
+      #|  real_add
+      #|  real_pow
       #|  :num
       #|  :real
       #|  :num
@@ -126513,18 +126513,18 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_div
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -126852,31 +126852,31 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, k))) * (real_of_num(FACT(k)) * real_of_num(FACT(k))))
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  :real
+      #|  real_add
+      #|  real_mul
+      #|  :real
+      #|  real_add
+      #|  real_pow
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -127242,13 +127242,13 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -127493,18 +127493,18 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  !((n : Num) == 0)
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_div
       #|  :real
       #|  :real
-      #|  (/):real->real->real
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -127857,38 +127857,38 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k + 1))) / spow(real_of_num(2), real_of_num(2) * real_of_num(n) + real_of_num(1)))
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :num
       #|  :real
       #|  :num
@@ -128744,19 +128744,19 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((n, 2 * k))) * (real_of_num(binom((2 * k, k))) * spow(real_of_num(2), real_of_num(n))) / (spow(real_of_num(4), real_of_num(k)) * real_of_num(binom((2 * n, n)))))
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -129422,61 +129422,61 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * (real_of_num(binom(((p : Num) + k, 2 * n))) / pow(real_of_num(binom((p, n))), 2)))
       #|  (n : Num) < (p : Num)
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (+):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  :real
+      #|  real_sub
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -130194,190 +130194,190 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 4))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  :real
+      #|  real_add
+      #|  real_pow
       #|  :num
       #|  :real
       #|  :num
@@ -132190,31 +132190,31 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => (real_of_num(2) * real_of_num(n) + real_of_num(1)) / spow(real_of_num(4), real_of_num(n)) * (real_of_num(binom((2 * n, n))) * (spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((n, k))) * (spow(real_of_num(2), real_of_num(k)) / (real_of_num(2) * real_of_num(k) + real_of_num(1)))))))
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_add
+      #|  real_mul
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -133265,19 +133265,19 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_div
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -133678,47 +133678,47 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k))) * (real_of_num(binom((2 * k, k))) / spow(real_of_num(4), real_of_num(k))) / (real_of_num(binom((4 * n + 1, 2 * n))) / spow(real_of_num(4), real_of_num(n))))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -135288,14 +135288,14 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (j : Num) <= (n : Num)
       #|  :real
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -135694,18 +135694,18 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(n) - real_of_num(k)) * (spow(real_of_num(4), real_of_num(k)) * real_of_num(binom((n + (k + 1), 2 * k + 1)))) / (real_of_num(n) + real_of_num(1)))
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -136341,19 +136341,19 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_sub
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -136765,12 +136765,12 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (q : Num) <= (n : Num)
       #|  (p : Num) <= (n : Num)
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_pow
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -137202,75 +137202,75 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num) < (m : Num)
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_sub
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -138682,17 +138682,17 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(UNIV, (k : Num) => spow(-real_of_num(1), real_of_num(k) + real_of_num(1)) * (real_of_num(binom(((n : Num), k + 1))) / (real_of_num(k) + real_of_num(1))))
       #|  !(real_of_num((n : Num)) == real_of_num(0))
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_add
+      #|  real_pow
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_div
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
-      #|  (+):real->real->real
-      #|  (/):real->real->real
+      #|  real_add
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -139023,56 +139023,56 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * real_of_num(binom((2 * n + 1, 2 * k))))
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (pow):real->num->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_pow
       #|  :num
       #|  :real
       #|  :num
@@ -140380,48 +140380,48 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => real_of_num(binom((2 * n + 1, 2 * k + 1))) * (real_of_num(k) / ((real_of_num(2) * real_of_num(n) - real_of_num(1)) * spow(real_of_num(4), real_of_num(n) - real_of_num(1)))))
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_add
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
       #|  :real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  :real
+      #|  real_div
       #|  :real
       #|  :num
       #|  :real
@@ -141363,32 +141363,32 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num) < (x : Num)
       #|  :real
       #|  :real
-      #|  (+):real->real->real
+      #|  real_add
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -142045,17 +142045,17 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  0 < (n : Num)
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_mul
       #|  :real
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -142687,167 +142687,167 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  sum(op_dot_dot(0, 2 * (n : Num)), (k : Num) => spow(-real_of_num(1), real_of_num(k)) * (real_of_num(binom((2 * n, k))) * (real_of_num(binom((2 * n + 2 * k, n + k))) * spow(real_of_num(2), real_of_num(2) * real_of_num(n) - real_of_num(k)))) / real_of_num(binom((2 * n, n))))
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_add
+      #|  real_pow
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
       #|  :real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_add
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  real_div
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
       #|  :num
       #|  :real
       #|  :num
@@ -145730,20 +145730,20 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  :real
       #|  :real
       #|  :real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_add
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
+      #|  real_sub
+      #|  real_add
       #|  :real
       #|  :real
-      #|  (-):real->real->real
+      #|  real_sub
       #|  :real
-      #|  (-):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_sub
+      #|  real_mul
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
@@ -146191,80 +146191,80 @@ test "WZ/examples matches WZ/examples.ml" {
       #|  (n : Num)
       #|  sum(op_dot_dot(0, (n : Num)), (k : Num) => pow(real_of_num(binom((n, k))), 2) * real_of_num(binom((3 * n + k, 2 * n))) / pow(real_of_num(binom((3 * n, n))), 2))
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  (pow):real->num->real
+      #|  real_pow
       #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  :real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  :real
-      #|  ( * ):real->real->real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  (+):real->real->real
-      #|  ( * ):real->real->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
       #|  :real
       #|  :real
-      #|  (-):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
+      #|  real_pow
+      #|  real_mul
       #|  :real
-      #|  ( * ):real->real->real
-      #|  (+):real->real->real
-      #|  (pow):real->num->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  ( * ):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
-      #|  (/):real->real->real
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  :real
+      #|  real_mul
+      #|  real_mul
+      #|  :real
+      #|  real_mul
+      #|  :real
+      #|  real_pow
+      #|  real_mul
+      #|  real_sub
+      #|  :real
+      #|  real_mul
+      #|  real_sub
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_add
+      #|  real_mul
+      #|  :real
+      #|  :real
+      #|  real_sub
+      #|  real_add
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_pow
+      #|  :real
+      #|  real_mul
+      #|  real_add
+      #|  real_pow
+      #|  real_mul
+      #|  real_mul
+      #|  real_mul
+      #|  real_div
+      #|  real_div
+      #|  real_div
+      #|  real_div
       #|  :num
       #|  :real
       #|  :num
