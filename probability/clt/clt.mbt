@@ -16455,7 +16455,7 @@ fn step_149() -> Unit raise {
   let t11794 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)"))
   let t11793 = @simp.rewrite_tac(@list.List([@realanalysis.reallim_at_posinfinity()]))
   let t11902 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(c : Real)")), @tactics.disch_tac), t11793), t11794), @tactics.disch_tac), t11795), t11802), t11803), t11809), t11810), t11811), t11812), @tactics.disch_tac), t11816), t11822), t11826), t11828), t11832), t11889), t11890), t11891), t11892), t11893), @tactics.conj_tac), @list.List([@calc_rat.real_arith_tac, @tactics.all_tac])), t11894), t11895), @tactics.conj_tac), t11901)
-  dirichlet_integral_scaled_c.set(@tactics.prove(@parser.parse_term("forall c. &0 < c ==>\n   ((\\T. real_integral (real_interval[&0,T]) (\\t. sin(c * t) * inv t))\n    ---> pi / &2) at_posinfinity"), t11902))
+  dirichlet_integral_scaled_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, real_of_num(0) < c → op_minus_minus_minus_gt((T : Real) => real_integral(real_interval([(real_of_num(0), T)]), (t : Real) => sin(c * t) * inv(t)), pi / real_of_num(2), at_posinfinity)"), t11902))
 }
 
 ///|
@@ -16507,7 +16507,7 @@ fn step_150() -> Unit raise {
     }
   })
   let t11932 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(c : Real)")), @tactics.disch_tac), t11906), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t11907), t11908), @tactics.disch_tac), t11911), t11931)
-  dirichlet_integral_scaled_neg_c.set(@tactics.prove(@parser.parse_term("forall c. c < &0 ==>\n   ((\\T. real_integral (real_interval[&0,T]) (\\t. sin(c * t) * inv t))\n    ---> --(pi / &2)) at_posinfinity"), t11932))
+  dirichlet_integral_scaled_neg_c.set(@tactics.prove(@term_syntax.parse_term("∀ c : Real, c < real_of_num(0) → op_minus_minus_minus_gt((T : Real) => real_integral(real_interval([(real_of_num(0), T)]), (t : Real) => sin(c * t) * inv(t)), -(pi / real_of_num(2)), at_posinfinity)"), t11932))
 }
 
 ///|

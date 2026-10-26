@@ -6324,7 +6324,7 @@ test "Library/calc_real matches Library/calc_real.ml" {
       #|  real_of_num(1)
       #|  real_lt
       #|  SUC
-      #|  (+):num->num->num
+      #|  (op_plus : (Num, Num) -> Num)
       #|  (t : (Num) -> Real)
       #|  (n : Num)
       #|  (m : Num)

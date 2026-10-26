@@ -1746,7 +1746,7 @@ fn step_51() -> Unit raise {
   let t796 = @simp.rewrite_tac(@list.List([plane_graph_carrier()]))
   let t795 = @theorems.intro_tac("graph embedding subset")
   let t830 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t795), t796), t797), @tactics.conj_tac), t829)
-  plane_graph_carrier_compact_c.set(@tactics.prove(@parser.parse_term("forall V E p c F.\n        finite_simple_graph (V:A->bool) E /\\\n        plane_graph_embedding V E p c /\\\n        F SUBSET E\n        ==> compact(plane_graph_carrier V F p c)"), t830))
+  plane_graph_carrier_compact_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ p : (A) -> Cart[Real, Tybit0[Unit]], ∀ c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, ∀ F : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) && plane_graph_embedding(V, E, p, c) && SUBSET(F, E) → compact(plane_graph_carrier(V, F, p, c))"), t830))
 }
 
 ///|
@@ -35045,7 +35045,7 @@ fn step_434() -> Unit raise {
   let t23153 = @sets.set_tac(@list.List([]))
   let t23152 = @simp.rewrite_tac(@list.List([plane_graph_carrier()]))
   let t23154 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t23152), t23153)
-  edge_image_unions_subset_plane_graph_carrier_c.set(@tactics.prove(@parser.parse_term("forall V E p c F.\n        F SUBSET (E:(A->bool)->bool)\n        ==> UNIONS(IMAGE (c:(A->bool)->real^2->bool) F) SUBSET\n            plane_graph_carrier (V:A->bool) E p c"), t23154))
+  edge_image_unions_subset_plane_graph_carrier_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ p : (A) -> Cart[Real, Tybit0[Unit]], ∀ c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, ∀ F : ((A) -> Bool) -> Bool, SUBSET(F, E) → SUBSET(UNIONS(IMAGE(c, F)), plane_graph_carrier(V, E, p, c))"), t23154))
 }
 
 ///|
@@ -53470,7 +53470,7 @@ fn step_543() -> Unit raise {
   let t36383 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t36382 = @theorems.intro_tac("embedding left_edges right_edges disjoint")
   let t36535 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t36382), t36383), @tactics.conj_tac), t36534)
-  plane_graph_embedding_edge_unions_inter_c.set(@tactics.prove(@parser.parse_term("forall V E p c F G.\n        plane_graph_embedding (V:A->bool) E p c /\\\n        F SUBSET E /\\ G SUBSET E /\\ F INTER G = {}\n        ==> UNIONS(IMAGE c F) INTER UNIONS(IMAGE c G) =\n            IMAGE p (UNIONS F INTER UNIONS G)"), t36535))
+  plane_graph_embedding_edge_unions_inter_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ p : (A) -> Cart[Real, Tybit0[Unit]], ∀ c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ G : ((A) -> Bool) -> Bool, plane_graph_embedding(V, E, p, c) && SUBSET(F, E) && SUBSET(G, E) && INTER(F, G) == {} → INTER(UNIONS(IMAGE(c, F)), UNIONS(IMAGE(c, G))) == IMAGE(p, INTER(UNIONS(F), UNIONS(G)))"), t36535))
 }
 
 ///|
@@ -71976,7 +71976,7 @@ fn step_791() -> Unit raise {
     }
   })
   let t48783 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t48763), t48764), t48765), t48766), t48771), t48772), t48776), t48780), t48781), t48782)
-  graph_reverse_dart_subset_permutes_c.set(@tactics.prove(@parser.parse_term("forall T E:(A->bool)->bool.\n        T SUBSET E\n        ==> graph_reverse_dart T permutes graph_darts E"), t48783))
+  graph_reverse_dart_subset_permutes_c.set(@tactics.prove(@term_syntax.parse_term("∀ T : ((A) -> Bool) -> Bool, ∀ E : ((A) -> Bool) -> Bool, SUBSET(T, E) → permutes(graph_reverse_dart(T), graph_darts(E))"), t48783))
 }
 
 ///|
@@ -95282,7 +95282,7 @@ fn step_1082() -> Unit raise {
   })
   let t64403 = @theorems.intro_tac("not_member decomposition")
   let t64412 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t64403), t64407), t64408), t64409), t64410), t64411)
-  delete_singleton_union_c.set(@tactics.prove(@parser.parse_term("forall E F a:A. ~(a IN F) /\\ E = {a} UNION F ==> E DELETE a = F"), t64412))
+  delete_singleton_union_c.set(@tactics.prove(@term_syntax.parse_term("∀ E : (A) -> Bool, ∀ F : (A) -> Bool, ∀ a : A, !IN(a, F) && E == UNION({a}, F) → DELETE(E, a) == F"), t64412))
 }
 
 ///|
@@ -99018,7 +99018,7 @@ pub fn planar_graph_induced_subgraph() -> @kernel.Thm {
 /// PLANAR_GRAPH_SUBGRAPH
 fn step_1136() -> Unit raise {
   let t66805 = @meson.meson_tac(@list.List([planar_graph_induced_subgraph(), planar_graph_subset_edges()]))
-  planar_graph_subgraph_c.set(@tactics.prove(@parser.parse_term("forall V E W F.\n        planar_graph (V:A->bool) E /\\\n        W SUBSET V /\\\n        F SUBSET induced_subgraph_edges E W\n        ==> planar_graph W F"), t66805))
+  planar_graph_subgraph_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, planar_graph(V, E) && SUBSET(W, V) && SUBSET(F, induced_subgraph_edges(E, W)) → planar_graph(W, F)"), t66805))
 }
 
 ///|
@@ -124554,7 +124554,7 @@ pub fn indexed_path_avoids_other_branch_edge() -> @kernel.Thm {
 /// SET_SUBSET_DELETE_UNION
 fn step_1345() -> Unit raise {
   let t85033 = @sets.set_tac(@list.List([]))
-  set_subset_delete_union_c.set(@tactics.prove(@parser.parse_term("forall S T U:A->bool. forall x.\n        ~(x IN S) /\\ S SUBSET T\n        ==> S SUBSET (T DELETE x) UNION U"), t85033))
+  set_subset_delete_union_c.set(@tactics.prove(@term_syntax.parse_term("∀ S : (A) -> Bool, ∀ T : (A) -> Bool, ∀ U : (A) -> Bool, ∀ x : A, !IN(x, S) && SUBSET(S, T) → SUBSET(S, UNION(DELETE(T, x), U))"), t85033))
 }
 
 ///|
@@ -174067,7 +174067,7 @@ pub fn graph_minor_cases() -> @kernel.Thm {
 ///|
 /// graph_minor_RULES, graph_minor_INDUCT, graph_minor_CASES
 fn step_1837() -> Unit raise {
-  let (graph_minor_rules, graph_minor_induct, graph_minor_cases) = @ind_defs.new_inductive_definition(@parser.parse_term("(forall V E.\n        finite_simple_graph (V:A->bool) E\n        ==> graph_minor V E V E) /\\\n  (forall V E W F W' F'.\n        graph_minor (V:A->bool) E W F /\\\n        W' SUBSET W /\\\n        F' SUBSET induced_subgraph_edges F W'\n        ==> graph_minor V E W' F') /\\\n  (forall V E W F u v.\n        graph_minor (V:A->bool) E W F /\\\n        {u,v} IN F\n        ==> graph_minor\n             V E (W DELETE u) (graph_contract_edges W F u v))"))
+  let (graph_minor_rules, graph_minor_induct, graph_minor_cases) = @ind_defs.new_inductive_definition(@term_syntax.parse_term("(∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) → (graph_minor : ((A) -> Bool, ((A) -> Bool) -> Bool, (A) -> Bool, ((A) -> Bool) -> Bool) -> Bool)(V, E, V, E)) && (∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ W' : (A) -> Bool, ∀ F' : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && SUBSET(W', W) && SUBSET(F', induced_subgraph_edges(F, W')) → graph_minor(V, E, W', F')) && (∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ u : A, ∀ v : A, graph_minor(V, E, W, F) && IN({u, v}, F) → graph_minor(V, E, DELETE(W, u), graph_contract_edges(W, F, u, v)))"))
   graph_minor_rules_c.set(graph_minor_rules)
   graph_minor_induct_c.set(graph_minor_induct)
   graph_minor_cases_c.set(graph_minor_cases)
@@ -174093,7 +174093,7 @@ pub fn graph_minor_refl() -> @kernel.Thm {
 /// GRAPH_MINOR_SUBGRAPH
 fn step_1839() -> Unit raise {
   let t119562 = @meson.meson_tac(@list.List([graph_minor_rules()]))
-  graph_minor_subgraph_c.set(@tactics.prove(@parser.parse_term("forall V E W F W' F'.\n        graph_minor (V:A->bool) E W F /\\\n        W' SUBSET W /\\\n        F' SUBSET induced_subgraph_edges F W'\n        ==> graph_minor V E W' F'"), t119562))
+  graph_minor_subgraph_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ W' : (A) -> Bool, ∀ F' : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && SUBSET(W', W) && SUBSET(F', induced_subgraph_edges(F, W')) → graph_minor(V, E, W', F')"), t119562))
 }
 
 ///|
@@ -174109,7 +174109,7 @@ pub fn graph_minor_subgraph() -> @kernel.Thm {
 /// GRAPH_MINOR_CONTRACT
 fn step_1840() -> Unit raise {
   let t119563 = @meson.meson_tac(@list.List([graph_minor_rules()]))
-  graph_minor_contract_c.set(@tactics.prove(@parser.parse_term("forall V E W F u v.\n        graph_minor (V:A->bool) E W F /\\\n        {u,v} IN F\n        ==> graph_minor\n             V E (W DELETE u) (graph_contract_edges W F u v)"), t119563))
+  graph_minor_contract_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ u : A, ∀ v : A, graph_minor(V, E, W, F) && IN({u, v}, F) → graph_minor(V, E, DELETE(W, u), graph_contract_edges(W, F, u, v))"), t119563))
 }
 
 ///|
@@ -174280,7 +174280,7 @@ pub fn graph_minor_data() -> @kernel.Thm {
 /// GRAPH_MINOR_FINITE_SIMPLE
 fn step_1842() -> Unit raise {
   let t119683 = @meson.meson_tac(@list.List([graph_minor_data()]))
-  graph_minor_finite_simple_c.set(@tactics.prove(@parser.parse_term("forall V E W F.\n        graph_minor (V:A->bool) E W F\n        ==> finite_simple_graph V E /\\ finite_simple_graph W F"), t119683))
+  graph_minor_finite_simple_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) → finite_simple_graph(V, E) && finite_simple_graph(W, F)"), t119683))
 }
 
 ///|
@@ -174296,7 +174296,7 @@ pub fn graph_minor_finite_simple() -> @kernel.Thm {
 /// GRAPH_MINOR_KURATOWSKI_OBSTRUCTION
 fn step_1843() -> Unit raise {
   let t119684 = @meson.meson_tac(@list.List([graph_minor_data()]))
-  graph_minor_kuratowski_obstruction_c.set(@tactics.prove(@parser.parse_term("forall V E W F.\n        graph_minor (V:A->bool) E W F /\\\n        graph_kuratowski_obstruction W F\n        ==> graph_kuratowski_obstruction V E"), t119684))
+  graph_minor_kuratowski_obstruction_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && graph_kuratowski_obstruction(W, F) → graph_kuratowski_obstruction(V, E)"), t119684))
 }
 
 ///|
@@ -174382,13 +174382,13 @@ fn step_1844() -> Unit raise {
   let t119748 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(@tactics.x_gen_tac, @list.List([@term_syntax.parse_term("(S : (A) -> Bool)"), t119689])), @tactics.disch_tac), t119691), t119695), t119747, t119746])
   let t119688 = @tactics.repeat_tac(@tactics.conj_tac)
   let t119750 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(graph_minor_induct()), t119688), t119748), t119749])
-  let t119751 = @tactics.thenl(@tactics.subgoal_then(@parser.parse_term("forall W F X H.\n        graph_minor (W:A->bool) F X H\n        ==> forall V E. graph_minor V E W F ==> graph_minor V E X H"), fn(x119685 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t119751 = @tactics.thenl(@tactics.subgoal_then(@term_syntax.parse_term("∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ X : (A) -> Bool, ∀ H : ((A) -> Bool) -> Bool, graph_minor(W, F, X, H) → (∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) → graph_minor(V, E, X, H))"), fn(x119685 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s119686 = @tactics.mp_tac(x119685)
     fn(x119687 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s119686(x119687)
     }
   }), t119750)
-  graph_minor_trans_c.set(@tactics.prove(@parser.parse_term("forall V E W F X H.\n        graph_minor (V:A->bool) E W F /\\\n        graph_minor W F X H\n        ==> graph_minor V E X H"), t119751))
+  graph_minor_trans_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, ∀ X : (A) -> Bool, ∀ H : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && graph_minor(W, F, X, H) → graph_minor(V, E, X, H)"), t119751))
 }
 
 ///|
@@ -179419,7 +179419,7 @@ pub fn straight_line_planar_graph_induced_subgraph() -> @kernel.Thm {
 /// STRAIGHT_LINE_PLANAR_GRAPH_SUBGRAPH
 fn step_1925() -> Unit raise {
   let t122834 = @meson.meson_tac(@list.List([planar_graph_subgraph(), euler_planar_graph_eq_planar_graph(), euler_planar_graph_eq_straight_line_planar()]))
-  straight_line_planar_graph_subgraph_c.set(@tactics.prove(@parser.parse_term("forall V E W F.\n        straight_line_planar_graph (V:A->bool) E /\\\n        W SUBSET V /\\\n        F SUBSET induced_subgraph_edges E W\n        ==> straight_line_planar_graph W F"), t122834))
+  straight_line_planar_graph_subgraph_c.set(@tactics.prove(@term_syntax.parse_term("∀ V : (A) -> Bool, ∀ E : ((A) -> Bool) -> Bool, ∀ W : (A) -> Bool, ∀ F : ((A) -> Bool) -> Bool, straight_line_planar_graph(V, E) && SUBSET(W, V) && SUBSET(F, induced_subgraph_edges(E, W)) → straight_line_planar_graph(W, F)"), t122834))
 }
 
 ///|
