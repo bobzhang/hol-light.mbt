@@ -164,7 +164,7 @@ pub fn normalize_counters(s : String) -> String {
 /// Whether `line` heads a quotation trace: `<file> quotations (<n>):`.
 fn is_trace_header(line : String) -> Bool {
   guard line.has_suffix("):") else { return false }
-  match line.find(" quotations (") {
+  match line.rev_find(" quotations (") {
     Some(k) => {
       let digits = line[k + " quotations (".length():line.length() - 2]
       digits.length() > 0 && digits.iter().all(c => c is ('0'..='9'))
