@@ -5701,7 +5701,7 @@ fn step_149() -> Unit raise {
     })(x3164))
   }, @list.List([@equal.gsym(@real.real_inv_div())]))
   let t3153 = @simp.rewrite_tac(@list.List([@equal.gsym(@realax.real_div())]))
-  let t3152 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("abs(is_ - &2 * ix) <= &1 ==> abs(inv(&2) * is_ - ix) <= max B (&2)")))
+  let t3152 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("abs((is_ : Real) - real_of_num(2) * (ix : Real)) <= real_of_num(1) → abs(inv(real_of_num(2)) * is_ - ix) <= max((B : Real), real_of_num(2))")))
   let t3151 = @simp.rewrite_tac(@list.List([@real.real_inv_mul()]))
   let t3150 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@realax.real_div(), @calc_int.real_mul_lzero(), @realax.real_inv_0(), @transcendentals.sin_0()])), @calc_rat.asm_real_arith_tac), @tactics.all_tac])
   let t3149 = @class.asm_cases_tac(@term_syntax.parse_term("(x : Real) == real_of_num(0)"))
