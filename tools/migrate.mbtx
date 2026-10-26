@@ -618,9 +618,14 @@ async fn record(
     }
     // a chain's test files (NN_<name>_test.mbt) run in order, each loading
     // its member after the ones before it (as tools/test.py runs them)
-    if ranges.iter().all(r => r.0.length() > 3 && r.0[2] == '_' && r.0[0:2].iter().all(c => c is ('0'..='9'))) {
+    let numbered = (f : String) => {
+      let cs = f.to_array()
+      cs.length() > 3 && cs[0] is ('0'..='9') && cs[1] is ('0'..='9') && cs[2] == '_'
+    }
+    if ranges.iter().all(r => numbered(r.0)) {
       ranges.sort_by((a, b) => a.0.compare(b.0))
     }
+    println("recording via \{tpkg}: " + ranges.map(r => r.0).join(" "))
   }
   ranges.push((gen_test, 1))
   let (code, out, results) = run_wasm(tpkg, dir, exe, ranges)
