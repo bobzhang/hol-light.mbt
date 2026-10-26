@@ -125,33 +125,43 @@ def rename_names(text, patches):
 
 
 # The names of constants and type constants in output check_name_renames.py
-# makes (HOL_REF_QUOTED_NAMES, prelude.ml): structural output writes them
-# #"name" (escaped), a variable "name" and a type variable '"name"; and the
-# constants and types lines list them (name, name/arity). A variable or type
-# variable is no such name: renaming one is a difference.
+# makes (HOL_REF_QUOTED_NAMES, prelude.ml): the results of the script's
+# probes (NAME = ...) write them #"name" (escaped), a variable "name" and a
+# type variable '"name"; and its constants and types lines list them (name,
+# name/arity). A variable or type variable is no such name, nor is text in
+# any other line (a failure's message, NAME ! ...): renaming one is a
+# difference. Quotation traces are text, renamed as the sources are.
 MARKED_NAME = re.compile(r'#"((?:[^"\\]|\\.)*)"')
 LISTING = re.compile(r'(constants|types) = ')
+RESULT = re.compile(r'\S+ = ')
 
 
-def listed(item):
-    name, sep, arity = item.rpartition('/') if '/' in item else (item, '', '')
-    return name, sep + arity
+def listed(kind, item):
+    """A listing's item: a constant's name, or a type's name/arity."""
+    if kind == 'types':
+        name, sep, arity = item.rpartition('/')
+        return name, sep + arity
+    return item, ''
 
 
 def constant_names(line):
     """The constants' and type constants' names in a line of output."""
     if m := LISTING.match(line):
-        return [listed(item)[0] for item in line[m.end():].split()]
-    return [decode_escaped(n) for n in MARKED_NAME.findall(line)]
+        return [listed(m[1], item)[0] for item in line[m.end():].split()]
+    if RESULT.match(line):
+        return [decode_escaped(n) for n in MARKED_NAME.findall(line)]
+    return []
 
 
 def rename_structural(line):
     if m := LISTING.match(line):
         def item(it):
-            name, rest = listed(it)
+            name, rest = listed(m[1], it)
             return (renamed_name(name) or name) + rest
         return line[:m.end()] + ' '.join(item(it) for it in line[m.end():].rstrip('\n').split(' ')) + \
             ('\n' if line.endswith('\n') else '')
+    if not RESULT.match(line):
+        return line
     def one(m):
         new = renamed_name(decode_escaped(m[1]))
         return '#"' + encode_escaped(new) + '"' if new else m[0]
@@ -162,7 +172,10 @@ def renamed_output(output):
     """Reference output (made with HOL_REF_QUOTED_NAMES) with the names
     renamed: trace lines (OCaml-escaped quotation text) decoded first and
     renamed as the sources are; every other line in its constants' and type
-    constants' names only."""
+    constants' names only. A quotation's text does not say which of its names
+    are constants: a free variable spelt like a renamed constant would be
+    renamed in the copies and here alike, and differ only in a theorem the
+    script prints (in the files renamed, every such name is the constant)."""
     out, trace = [], False
     for line in output.splitlines(keepends=True):
         if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
