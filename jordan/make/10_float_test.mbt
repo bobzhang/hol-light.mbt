@@ -6142,22 +6142,22 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  \226\136\128 x : Num, \226\136\128 y : Num, x < y \226\134\146 int_of_num(x) + -int_of_num(y) == -int_of_num(y - x)
       #|  int_of_num((x : Num) - (y : Num)) == int_of_num(x) - int_of_num(y)
       #|  \226\136\128 x : Num, \226\136\128 y : Num, y <= x \226\134\146 int_of_num(x) + -int_of_num(y) == int_of_num(x - y)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  float(int_of_num(3), int_of_num(0)) == float(int_of_num(3), int_of_num(0))
       #|  float(int_of_num(3), int_of_num(3)) == float(int_of_num(3), int_of_num(3))
       #|  float(int_of_num(3), int_of_num(0)) + float(int_of_num(4), int_of_num(0)) == float(int_of_num(7), int_of_num(0))
@@ -6500,22 +6500,22 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, (real_of_num(p) / real_of_num(m) <= real_of_num(n)) == (real_of_num(p) / real_of_num(m) <= real_of_num(n) / real_of_num(1))
       #|  \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, (real_of_num(p) <= real_of_num(n) / real_of_num(m)) == (real_of_num(p) / real_of_num(1) <= real_of_num(n) / real_of_num(m))
       #|  \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, \226\136\128 d : Num, 0 < b && 0 < d && a * d <= c * b \226\134\146 real_of_num(a) / real_of_num(b) <= real_of_num(c) / real_of_num(d)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  DECIMAL(100, 10) <= float(int_of_num(3), int_of_num(2))
       #|  DECIMAL(10, 1) <= float(int_of_num(3), int_of_num(2))
       #|  DECIMAL(1, 10) <= float(int_of_num(1), -int_of_num(2))
