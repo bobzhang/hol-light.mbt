@@ -21,7 +21,7 @@ fn step_2() -> Unit raise {
   let t1 = @term_syntax.parse_term("(e : Num)")
   let t2 = @basics.mk_binop(@term_syntax.parse_term("EXP"), base_const(), t1)
   let t3 = @term_syntax.parse_term("(n : Num)")
-  let t4 = @basics.mk_binop(@parser.parse_term("( * ):num->num->num"), t3, t2)
+  let t4 = @basics.mk_binop(@term_syntax.parse_term("(op_star : (Num, Num) -> Num)"), t3, t2)
   num_exp_tm_c.set(@basics.mk_eq(@term_syntax.parse_term("(num_exp : (Num, Num) -> Num)((n : Num), (e : Num))"), t4))
 }
 
@@ -590,7 +590,7 @@ pub fn num_exp_lt2_eq() -> @kernel.Thm {
 ///|
 /// mul_op_num
 fn step_23() -> Unit raise {
-  mul_op_num_c.set(@parser.parse_term("( * ):num->num->num"))
+  mul_op_num_c.set(@term_syntax.parse_term("(op_star : (Num, Num) -> Num)"))
 }
 
 ///|

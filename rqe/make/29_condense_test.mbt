@@ -9940,7 +9940,7 @@ test "Rqe/condense matches Rqe/condense.ml" {
       #|  (APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])
       #|  (LENGTH : (List[Real]) -> Num)
       #|  (LENGTH : (List[List[Sign]]) -> Num)
-      #|  ( * ):num -> num -> num
+      #|  (op_star : (Num, Num) -> Num)
       #|  :real
       #|  2
       #|  :sign list

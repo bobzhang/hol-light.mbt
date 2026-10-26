@@ -125,12 +125,12 @@ test "Formal_ineqs/misc/misc_vars matches Formal_ineqs/misc/misc_vars.ml" {
       #|  false
       #|  _0
       #|  0
-      #|  (+) : num->num->num
-      #|  (-) : num->num->num
-      #|  ( * ) : num->num->num
+      #|  (op_plus : (Num, Num) -> Num)
+      #|  (op_minus : (Num, Num) -> Num)
+      #|  (op_star : (Num, Num) -> Num)
       #|  (op_eq : (Num, Num) -> Bool)
-      #|  (<=) : num->num->bool
-      #|  (<) : num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  DIV
       #|  PRE
       #|  SUC

@@ -15402,7 +15402,7 @@ fn step_58() -> Unit raise {
     }
   }
   let suc_tm = @term_syntax.parse_term("SUC")
-  let t2099 = @parser.parse_term("(+):num->num->num")
+  let t2099 = @term_syntax.parse_term("(op_plus : (Num, Num) -> Num)")
   let mk_add : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise = fn(
     x2102 : @kernel.Term,
   ) -> ((@kernel.Term) -> @kernel.Term raise) raise {
