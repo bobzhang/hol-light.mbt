@@ -60914,8 +60914,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FACT(NUMERAL n)
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
-      #|  sum(0,i) f
-      #|  i:num
+      #|  sum((0, (i : Num)), (f : (Num) -> Real))
+      #|  (i : Num)
       #|  0
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
@@ -60970,8 +60970,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FACT(NUMERAL n)
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
-      #|  0 <| i
-      #|  i:num
+      #|  0 < (i : Num)
+      #|  (i : Num)
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
       #|  (NUMERAL m) EXP (NUMERAL n)
