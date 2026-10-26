@@ -13105,72 +13105,72 @@ Warning: inventing type variables
 0..0..0..solved at 3
 0..0..0..solved at 3
 Arithmetic/tarski quotations (66):
-  number(x) = 2 * (x DIV 2) + (1 - x MOD 2)
-  denumber = number
-  x < 2 ==> 1 - (1 - x) = x
-  1 - m < 2
-  x < 2 ==> (2 * y + x) DIV 2 = y
-  (forall s. denumber(number s) = s) /\\\n   (forall n. number(denumber n) = n)
-  forall x y. number(x) = number(y) <=> x = y
-  forall y. ?x. number(x) = y
-  (gterm (V x) = NPAIR 0 (number x)) /\\\n   (gterm Z = NPAIR 1 0) /\\\n   (gterm (Suc t) = NPAIR 2 (gterm t)) /\\\n   (gterm (s ++ t) = NPAIR 3 (NPAIR (gterm s) (gterm t))) /\\\n   (gterm (s ** t) = NPAIR 4 (NPAIR (gterm s) (gterm t)))
-  (gform False = NPAIR 0 0) /\\\n   (gform True = NPAIR 0 1) /\\\n   (gform (s === t) = NPAIR 1 (NPAIR (gterm s) (gterm t))) /\\\n   (gform (s << t) = NPAIR 2 (NPAIR (gterm s) (gterm t))) /\\\n   (gform (s <<= t) = NPAIR 3 (NPAIR (gterm s) (gterm t))) /\\\n   (gform (Not p) = NPAIR 4 (gform p)) /\\\n   (gform (p && q) = NPAIR 5 (NPAIR (gform p) (gform q))) /\\\n   (gform (p || q) = NPAIR 6 (NPAIR (gform p) (gform q))) /\\\n   (gform (p --> q) = NPAIR 7 (NPAIR (gform p) (gform q))) /\\\n   (gform (p <-> q) = NPAIR 8 (NPAIR (gform p) (gform q))) /\\\n   (gform (!! x p) = NPAIR 9 (NPAIR (number x) (gform p))) /\\\n   (gform (?? x p) = NPAIR 10 (NPAIR (number x) (gform p)))
-  forall s t. (gterm s = gterm t) <=> (s = t)
-  forall p q. (gform p = gform q) <=> (p = q)
-  u:term
-  ((gterm u = NPAIR 0 (number x)) <=> (u = V x)) /\\\n   ((gterm u = NPAIR 1 0) <=> (u = Z)) /\\\n   ((gterm u = NPAIR 2 n) <=> (?t. (u = Suc t) /\\ (gterm t = n))) /\\\n   ((gterm u = NPAIR 3 (NPAIR m n)) <=>\n          (?s t. (u = s ++ t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gterm u = NPAIR 4 (NPAIR m n)) <=>\n          (?s t. (u = s ** t) /\\ (gterm s = m) /\\ (gterm t = n)))
-  r:form
-  ((gform r = NPAIR 0 0) <=> (r = False)) /\\\n   ((gform r = NPAIR 0 1) <=> (r = True)) /\\\n   ((gform r = NPAIR 1 (NPAIR m n)) <=>\n        (?s t. (r = s === t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 2 (NPAIR m n)) <=>\n        (?s t. (r = s << t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 3 (NPAIR m n)) <=>\n        (?s t. (r = s <<= t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 4 n) = (?p. (r = Not p) /\\ (gform p = n))) /\\\n   ((gform r = NPAIR 5 (NPAIR m n)) <=>\n        (?p q. (r = p && q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 6 (NPAIR m n)) <=>\n        (?p q. (r = p || q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 7 (NPAIR m n)) <=>\n        (?p q. (r = p --> q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 8 (NPAIR m n)) <=>\n        (?p q. (r = p <-> q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 9 (NPAIR (number x) n)) <=>\n        (?p. (r = !!x p) /\\ (gform p = n))) /\\\n   ((gform r = NPAIR 10 (NPAIR (number x) n)) <=>\n        (?p. (r = ??x p) /\\ (gform p = n)))
-  gnumeral m n = (gterm(numeral m) = n)
-  arith_gnumeral1 a b = formsubst ((3 |-> a) ((4 |-> b) V))\n       (??1 (??2\n       (V 3 === arith_pair (V 0) (V 1) &&\n        V 4 === arith_pair (Suc(V 0)) (arith_pair (numeral 2) (V 1)))))
-  forall v a b. holds v (arith_gnumeral1 a b) <=>\n                ?x y. termval v a = NPAIR x y /\\\n                      termval v b = NPAIR (SUC x) (NPAIR 2 y)
+  (number : (Num) -> Num)((x : Num)) == 2 * DIV(x, 2) + (1 - MOD(x, 2))
+  (denumber : (Num) -> Num) == number
+  (x : Num) < 2 \226\134\146 1 - (1 - x) == x
+  1 - (m : Num) < 2
+  (x : Num) < 2 \226\134\146 DIV(2 * (y : Num) + x, 2) == y
+  (\226\136\128 s : Num, denumber(number(s)) == s) && (\226\136\128 n : Num, number(denumber(n)) == n)
+  \226\136\128 x : Num, \226\136\128 y : Num, (number(x) == number(y)) == (x == y)
+  \226\136\128 y : Num, \226\136\131 x : Num, number(x) == y
+  (gterm : (Term) -> Num)(V((x : Num))) == NPAIR(0, number(x)) && gterm(Z) == NPAIR(1, 0) && gterm(Suc((t : Term))) == NPAIR(2, gterm(t)) && gterm(op_plus_plus((s : Term), t)) == NPAIR(3, NPAIR(gterm(s), gterm(t))) && gterm(op_star_star(s, t)) == NPAIR(4, NPAIR(gterm(s), gterm(t)))
+  (gform : (Form) -> Num)(False) == NPAIR(0, 0) && gform(True) == NPAIR(0, 1) && gform(op_eq_eq_eq((s : Term), (t : Term))) == NPAIR(1, NPAIR(gterm(s), gterm(t))) && gform(op_lt_lt(s, t)) == NPAIR(2, NPAIR(gterm(s), gterm(t))) && gform(op_lt_lt_eq(s, t)) == NPAIR(3, NPAIR(gterm(s), gterm(t))) && gform(Not((p : Form))) == NPAIR(4, gform(p)) && gform(op_amp_amp(p, (q : Form))) == NPAIR(5, NPAIR(gform(p), gform(q))) && gform(op_bar_bar(p, q)) == NPAIR(6, NPAIR(gform(p), gform(q))) && gform(op_minus_minus_gt(p, q)) == NPAIR(7, NPAIR(gform(p), gform(q))) && gform(op_lt_minus_gt(p, q)) == NPAIR(8, NPAIR(gform(p), gform(q))) && gform(op_bang_bang((x : Num), p)) == NPAIR(9, NPAIR(number(x), gform(p))) && gform(op_q_q(x, p)) == NPAIR(10, NPAIR(number(x), gform(p)))
+  \226\136\128 s : Term, \226\136\128 t : Term, (gterm(s) == gterm(t)) == (s == t)
+  \226\136\128 p : Form, \226\136\128 q : Form, (gform(p) == gform(q)) == (p == q)
+  (u : Term)
+  (gterm((u : Term)) == NPAIR(0, number((x : Num)))) == (u == V(x)) && (gterm(u) == NPAIR(1, 0)) == (u == Z) && (gterm(u) == NPAIR(2, (n : Num))) == (\226\136\131 t : Term, u == Suc(t) && gterm(t) == n) && (gterm(u) == NPAIR(3, NPAIR((m : Num), n))) == (\226\136\131 s : Term, \226\136\131 t : Term, u == op_plus_plus(s, t) && gterm(s) == m && gterm(t) == n) && (gterm(u) == NPAIR(4, NPAIR(m, n))) == (\226\136\131 s : Term, \226\136\131 t : Term, u == op_star_star(s, t) && gterm(s) == m && gterm(t) == n)
+  (r : Form)
+  (gform((r : Form)) == NPAIR(0, 0)) == (r == False) && (gform(r) == NPAIR(0, 1)) == (r == True) && (gform(r) == NPAIR(1, NPAIR((m : Num), (n : Num)))) == (\226\136\131 s : Term, \226\136\131 t : Term, r == op_eq_eq_eq(s, t) && gterm(s) == m && gterm(t) == n) && (gform(r) == NPAIR(2, NPAIR(m, n))) == (\226\136\131 s : Term, \226\136\131 t : Term, r == op_lt_lt(s, t) && gterm(s) == m && gterm(t) == n) && (gform(r) == NPAIR(3, NPAIR(m, n))) == (\226\136\131 s : Term, \226\136\131 t : Term, r == op_lt_lt_eq(s, t) && gterm(s) == m && gterm(t) == n) && (gform(r) == NPAIR(4, n)) == (\226\136\131 p : Form, r == Not(p) && gform(p) == n) && (gform(r) == NPAIR(5, NPAIR(m, n))) == (\226\136\131 p : Form, \226\136\131 q : Form, r == op_amp_amp(p, q) && gform(p) == m && gform(q) == n) && (gform(r) == NPAIR(6, NPAIR(m, n))) == (\226\136\131 p : Form, \226\136\131 q : Form, r == op_bar_bar(p, q) && gform(p) == m && gform(q) == n) && (gform(r) == NPAIR(7, NPAIR(m, n))) == (\226\136\131 p : Form, \226\136\131 q : Form, r == op_minus_minus_gt(p, q) && gform(p) == m && gform(q) == n) && (gform(r) == NPAIR(8, NPAIR(m, n))) == (\226\136\131 p : Form, \226\136\131 q : Form, r == op_lt_minus_gt(p, q) && gform(p) == m && gform(q) == n) && (gform(r) == NPAIR(9, NPAIR(number((x : Num)), n))) == (\226\136\131 p : Form, r == op_bang_bang(x, p) && gform(p) == n) && (gform(r) == NPAIR(10, NPAIR(number(x), n))) == (\226\136\131 p : Form, r == op_q_q(x, p) && gform(p) == n)
+  (gnumeral : (Num, Num) -> Bool)((m : Num), (n : Num)) == (gterm(numeral(m)) == n)
+  (arith_gnumeral1 : (Term, Term) -> Form)((a : Term), (b : Term)) == formsubst(op_bar_minus_gt(3, a, op_bar_minus_gt(4, b, V)), op_q_q(0, op_q_q(1, op_amp_amp(op_eq_eq_eq(V(3), arith_pair(V(0), V(1))), op_eq_eq_eq(V(4), arith_pair(Suc(V(0)), arith_pair(numeral(2), V(1))))))))
+  \226\136\128 v : (Num) -> Num, \226\136\128 a : Term, \226\136\128 b : Term, holds(v, arith_gnumeral1(a, b)) == (\226\136\131 x : Num, \226\136\131 y : Num, termval(v, a) == NPAIR(x, y) && termval(v, b) == NPAIR(SUC(x), NPAIR(2, y)))
   (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
-  forall s t. FV(arith_gnumeral1 s t) = FVT s UNION FVT t
-  arith_gnumeral1' x y = arith_rtc arith_gnumeral1 x y
-  forall v s t. holds v (arith_gnumeral1' s t) <=>\n              RTC (\\a b. ?x y. a = NPAIR x y /\\\n                               b = NPAIR (SUC x) (NPAIR 2 y))\n                  (termval v s) (termval v t)
-  forall s t. FV(arith_gnumeral1' s t) = FVT s UNION FVT t
-  arith_gnumeral n p =\n        formsubst ((0 |-> n) ((1 |-> p) V))\n            (arith_gnumeral1' (arith_pair Z (numeral 3))\n                              (arith_pair (V 0) (V 1)))
-  f:num->num->num
-  \\a:num b:num. NPAIR 2 a
-  e:num
+  \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_gnumeral1(s, t)) == UNION(FVT(s), FVT(t))
+  (arith_gnumeral1' : (Term, Term) -> Form)((x : Term), (y : Term)) == arith_rtc(arith_gnumeral1, x, y)
+  \226\136\128 v : (Num) -> Num, \226\136\128 s : Term, \226\136\128 t : Term, holds(v, arith_gnumeral1'(s, t)) == RTC((a : Num) => (b : Num) => \226\136\131 x : Num, \226\136\131 y : Num, a == NPAIR(x, y) && b == NPAIR(SUC(x), NPAIR(2, y)), termval(v, s), termval(v, t))
+  \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_gnumeral1'(s, t)) == UNION(FVT(s), FVT(t))
+  (arith_gnumeral : (Term, Term) -> Form)((n : Term), (p : Term)) == formsubst(op_bar_minus_gt(0, n, op_bar_minus_gt(1, p, V)), arith_gnumeral1'(arith_pair(Z, numeral(3)), arith_pair(V(0), V(1))))
+  (f : (Num, Num) -> Num)
+  (a : Num) => (b : Num) => NPAIR(2, a)
+  (e : Num)
   3
   fn:num->num
-  (gterm o numeral)
-  forall v s t. holds v (arith_gnumeral s t) <=>\n            gnumeral (termval v s) (termval v t)
+  o(gterm, numeral)
+  \226\136\128 v : (Num) -> Num, \226\136\128 s : Term, \226\136\128 t : Term, holds(v, arith_gnumeral(s, t)) == gnumeral(termval(v, s), termval(v, t))
   (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
-  forall s t. FV(arith_gnumeral s t) =  FVT(s) UNION FVT(t)
-  qdiag x q = qsubst (x,numeral(gform q)) q
-  arith_qdiag x s t =\n        formsubst ((1 |-> s) ((2 |-> t) V))\n        (?? 3\n           (arith_gnumeral (V 1) (V 3) &&\n            arith_pair (numeral 10)  (arith_pair (numeral(number x))\n                                                 (arith_pair (numeral 5)\n              (arith_pair (arith_pair (numeral 1)\n       (arith_pair (arith_pair (numeral 0) (numeral(number x))) (V 3)))\n                   (V 1)))) ===\n        V 2))
-  FV(qdiag x q) = FV(q) DELETE x
-  forall v x q. holds v (qdiag x q) = holds ((x |-> gform q) v) q
-  (termval v s = gform p)\n   ==> (holds v (arith_qdiag x s t) <=> (termval v t = gform(qdiag x p)))
-  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
-  forall x s t. FV(arith_qdiag x s t) = FVT(s) UNION FVT(t)
-  diagonalize x q =\n        let y = VARIANT(x INSERT FV(q)) in\n        ??y (arith_qdiag x (V x) (V y) && formsubst ((x |-> V y) V) q)
-  u:num = y
-  u:num = x
-  ~(y = x) /\\ forall z. z IN FV(q) ==> ~(y = z)
-  u:num
-  forall x q. FV(diagonalize x q) = x INSERT (FV q)
-  u:num
-  ~(x:num = y)
-  forall a. holds ((y |-> a) v) (arith_qdiag x (V x) (V y)) <=>\n                    (termval ((y |-> a) v) (V y) = gform(qdiag x p))
-  (v x = gform p)\n   ==> forall q. holds v (diagonalize x q) <=> holds ((x |-> gform(qdiag x p)) v) q
-  fixpoint x q = qdiag x (diagonalize x q)
-  forall x p. FV(fixpoint x p) = FV(p) DELETE x
-  ((x |-> gform(diagonalize x p)) v) x = gform (diagonalize x p)
-  forall x p v. holds v (fixpoint x p) <=>\n           holds ((x |-> gform(fixpoint x p)) v) p
-  forall x p v. holds v\n        (fixpoint x p <-> qsubst (x,numeral(gform(fixpoint x p))) p)
-  fixpoint x q
-  forall x q. ?p. (FV(p) = FV(q) DELETE x) /\\\n             arithtrue (p <-> qsubst (x,numeral(gform p)) q)
-  definable_by P s <=> ?p x. P p /\\ (forall v. holds v p <=> (v(x)) IN s)
-  definable s <=> ?p x. forall v. holds v p <=> (v(x)) IN s
-  q:form
-  Not p
-  x:num
-  x:num
-  p:form
-  ~(definable {gform p | arithtrue p})
+  \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_gnumeral(s, t)) == UNION(FVT(s), FVT(t))
+  (qdiag : (Num, Form) -> Form)((x : Num), (q : Form)) == qsubst((x, numeral(gform(q))), q)
+  (arith_qdiag : (Num, Term, Term) -> Form)((x : Num), (s : Term), (t : Term)) == formsubst(op_bar_minus_gt(1, s, op_bar_minus_gt(2, t, V)), op_q_q(3, op_amp_amp(arith_gnumeral(V(1), V(3)), op_eq_eq_eq(arith_pair(numeral(10), arith_pair(numeral(number(x)), arith_pair(numeral(5), arith_pair(arith_pair(numeral(1), arith_pair(arith_pair(numeral(0), numeral(number(x))), V(3))), V(1))))), V(2)))))
+  FV(qdiag((x : Num), (q : Form))) == DELETE(FV(q), x)
+  \226\136\128 v : (Num) -> Num, \226\136\128 x : Num, \226\136\128 q : Form, holds(v, qdiag(x, q)) == holds(op_bar_minus_gt(x, gform(q), v), q)
+  termval((v : (Num) -> Num), (s : Term)) == gform((p : Form)) \226\134\146 holds(v, arith_qdiag((x : Num), s, (t : Term))) == (termval(v, t) == gform(qdiag(x, p)))
+  (((a : Bool) || (b : Bool)) && (c : Bool)) == (a && c || b && c)
+  \226\136\128 x : Num, \226\136\128 s : Term, \226\136\128 t : Term, FV(arith_qdiag(x, s, t)) == UNION(FVT(s), FVT(t))
+  (diagonalize : (Num, Form) -> Form)((x : Num), (q : Form)) == LET((y : Num) => LET_END(op_q_q(y, op_amp_amp(arith_qdiag(x, V(x), V(y)), formsubst(op_bar_minus_gt(x, V(y), V), q)))), VARIANT(INSERT(x, FV(q))))
+  (u : Num) == (y : Num)
+  (u : Num) == (x : Num)
+  !((y : Num) == (x : Num)) && (\226\136\128 z : Num, IN(z, FV((q : Form))) \226\134\146 !(y == z))
+  (u : Num)
+  \226\136\128 x : Num, \226\136\128 q : Form, FV(diagonalize(x, q)) == INSERT(x, FV(q))
+  (u : Num)
+  !((x : Num) == (y : Num))
+  \226\136\128 a : Num, holds(op_bar_minus_gt((y : Num), a, (v : (Num) -> Num)), arith_qdiag((x : Num), V(x), V(y))) == (termval(op_bar_minus_gt(y, a, v), V(y)) == gform(qdiag(x, (p : Form))))
+  (v : (Num) -> Num)((x : Num)) == gform((p : Form)) \226\134\146 (\226\136\128 q : Form, holds(v, diagonalize(x, q)) == holds(op_bar_minus_gt(x, gform(qdiag(x, p)), v), q))
+  (fixpoint : (Num, Form) -> Form)((x : Num), (q : Form)) == qdiag(x, diagonalize(x, q))
+  \226\136\128 x : Num, \226\136\128 p : Form, FV(fixpoint(x, p)) == DELETE(FV(p), x)
+  op_bar_minus_gt((x : Num), gform(diagonalize(x, (p : Form))), (v : (Num) -> Num), x) == gform(diagonalize(x, p))
+  \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 v : (Num) -> Num, holds(v, fixpoint(x, p)) == holds(op_bar_minus_gt(x, gform(fixpoint(x, p)), v), p)
+  \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 v : (Num) -> Num, holds(v, op_lt_minus_gt(fixpoint(x, p), qsubst((x, numeral(gform(fixpoint(x, p)))), p)))
+  fixpoint((x : Num), (q : Form))
+  \226\136\128 x : Num, \226\136\128 q : Form, \226\136\131 p : Form, FV(p) == DELETE(FV(q), x) && arithtrue(op_lt_minus_gt(p, qsubst((x, numeral(gform(p))), q)))
+  (definable_by : ((Form) -> Bool, (Num) -> Bool) -> Bool)((P : (Form) -> Bool), (s : (Num) -> Bool)) == (\226\136\131 p : Form, \226\136\131 x : Num, P(p) && (\226\136\128 v : (Num) -> Num, holds(v, p) == IN(v(x), s)))
+  (definable : ((Num) -> Bool) -> Bool)((s : (Num) -> Bool)) == (\226\136\131 p : Form, \226\136\131 x : Num, \226\136\128 v : (Num) -> Num, holds(v, p) == IN(v(x), s))
+  (q : Form)
+  Not((p : Form))
+  (x : Num)
+  (x : Num)
+  (p : Form)
+  !definable({gform((p : Form)) | arithtrue(p)})
 number =  |- (#forall:fun(fun(num,bool),bool) (\x:num. ((#=:fun(num,fun(num,bool)) (#number:fun(num,num) x:num)) ((#+:fun(num,fun(num,num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#DIV:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#-:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#MOD:fun(num,fun(num,num)) x:num) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))
 denumber =  |- ((#=:fun(fun(num,num),fun(fun(num,num),bool)) #denumber:fun(num,num)) #number:fun(num,num))
 NUMBER_DENUMBER =  |- ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\s:num. ((#=:fun(num,fun(num,bool)) (#denumber:fun(num,num) (#number:fun(num,num) s:num))) s:num)))) (#forall:fun(fun(num,bool),bool) (\n:num. ((#=:fun(num,fun(num,bool)) (#number:fun(num,num) (#denumber:fun(num,num) n:num))) n:num))))
@@ -13213,5 +13213,5 @@ types = form/0 term/0 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2
 constants = definable definable_by fixpoint diagonalize arith_qdiag qdiag arith_gnumeral arith_gnumeral1' arith_gnumeral1 gnumeral gform gterm denumber number arith_primrec arith_primrecstep arith_rtcp RTCP arith_rtc arith_primepow arith_prime arith_divides arith_pair PSEQ primepow NPAIR closed numeral qsubst safe_for formsubst termsubst VARIANT SETMAX |-- axiom FV FVT |=> arithtrue holds termval |-> ?? !! <-> --> || && Not <<= << === True False _132768 _132767 _132766 _132765 _132764 _132763 _132762 _132761 _132760 _132759 _132758 _132757 _dest_form _mk_form ** ++ Suc V Z _132631 _132630 _132629 _132628 _132627 _dest_term _mk_term index RELPOW INV RSTC STC RTC RSC TC SC RC superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
 definitions = 350
 Warning: inventing type variables
-counter_tyvar = zz_counter:'?3
+counter_tyvar = zz_counter:'?1
 counter_genvar = _147531:bool
