@@ -97997,7 +97997,7 @@ test "Autoformalization/carleson matches Autoformalization/carleson.ml" {
       #|  (B : Real)
       #|  (e : Real)
       #|  (e : Real)
-      #|  forall F L. (F ---> L) at_posinfinity ==> ((\\b. F(b / &2)) ---> L)\n   at_posinfinity
+      #|  \226\136\128 F : (Real) -> Real, \226\136\128 L : Real, op_minus_minus_minus_gt(F, L, at_posinfinity) \226\134\146 op_minus_minus_minus_gt((b : Real) => F(b / real_of_num(2)), L, at_posinfinity)
       #|  !((b : Real) == real_of_num(0))
       #|  (I2 : Real) == real_integral(real_interval([(real_of_num(0), (b : Real) * inv(real_of_num(2)))]), (gm : Real) => carleson_theta'((z : Real), (alpha : Real), gm, (y : Real)))
       #|  ((x : Real) => carleson_theta'((z : Real), real_of_num(2) * (alpha : Real), real_of_num(2) * x, (y : Real))) == ((gm : Real) => carleson_theta'(z, alpha, gm, y))

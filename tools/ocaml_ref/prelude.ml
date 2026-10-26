@@ -84,14 +84,21 @@ end;;
 #use "parser.ml";;
 #use "equal.ml";;
 
+(* check_name_renames.py (HOL_REF_QUOTED_NAMES) has every name written
+   quoted and escaped, "name", and type constants marked as constants are,
+   #"num": a name then reads one way whatever it contains *)
+let quoted_names =
+  try Sys.getenv "HOL_REF_QUOTED_NAMES" <> "" with Not_found -> false;;
+let qn s = if quoted_names then "\"" ^ String.escaped s ^ "\"" else s;;
 let rec sty ty = match ty with
-    Tyvar s -> "'" ^ s
-  | Tyapp(s,[]) -> s
-  | Tyapp(s,args) -> s ^ "(" ^ String.concat "," (map sty args) ^ ")";;
+    Tyvar s -> "'" ^ qn s
+  | Tyapp(s,[]) -> (if quoted_names then "#" else "") ^ qn s
+  | Tyapp(s,args) -> (if quoted_names then "#" else "") ^ qn s ^
+      "(" ^ String.concat "," (map sty args) ^ ")";;
 let rec stm tm = match tm with
-    Var(s,ty) -> s ^ ":" ^ sty ty
+    Var(s,ty) -> qn s ^ ":" ^ sty ty
   (* The port renamed this constant; compare terms modulo that rename only. *)
-  | Const(s,ty) -> "#" ^ (if s = "!" then "forall" else s) ^ ":" ^ sty ty
+  | Const(s,ty) -> "#" ^ qn (if s = "!" then "forall" else s) ^ ":" ^ sty ty
   | Comb(f,x) -> "(" ^ stm f ^ " " ^ stm x ^ ")"
   | Abs(v,b) -> "(\\" ^ stm v ^ ". " ^ stm b ^ ")";;
 let sthm th = let asl,c = dest_thm th in

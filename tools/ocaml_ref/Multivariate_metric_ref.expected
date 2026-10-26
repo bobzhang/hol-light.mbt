@@ -33146,7 +33146,7 @@ Multivariate/metric quotations (14748):
   (U : ((A) -> Bool) -> Bool)
   compact_in((top : Topology[A]), {(x : A) | IN(x, topspace(top)) && (f : (A) -> B)(x) == (y : B)})
   (y : B)
-  forall y:B. y IN topspace top'\n           ==> ?V F. open_in top' V /\\ y IN V /\\\n                     FINITE F /\\ F SUBSET (U:(A->bool)->bool) /\\\n                     {x:A | x IN topspace top /\\ (f:A->B) x IN V}\n                     SUBSET UNIONS F
+  \226\136\128 y : B, IN(y, topspace((top' : Topology[B]))) \226\134\146 (\226\136\131 V : (B) -> Bool, \226\136\131 F : ((A) -> Bool) -> Bool, open_in(top', V) && IN(y, V) && FINITE(F) && SUBSET(F, (U : ((A) -> Bool) -> Bool)) && SUBSET({(x : A) | IN(x, topspace((top : Topology[A]))) && IN((f : (A) -> B)(x), V)}, UNIONS(F)))
   (U : ((A) -> Bool) -> Bool)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, perfect_map((top, top'), f) && paracompact_space(top') \226\134\146 paracompact_space(top)
   \226\136\128 x : A, IN(x, topspace((top : Topology[A]))) \226\134\146 (g : (B) -> A)((f : (A) -> B)(x)) == x
@@ -35028,7 +35028,7 @@ Multivariate/metric quotations (14748):
   !((C : (Real) -> Bool) == {})
   \226\136\128 x : A, \226\136\128 y : A, IN(x, topspace((top : Topology[A]))) && IN(y, topspace(top)) \226\134\146 (\226\136\131 g : (Real) -> A, path_in(top, g) && g(real_of_num(0)) == x && g(real_of_num(1)) == y)
   path_connected_space((top : Topology[A]))
-  forall top:A topology (f:real->A) C.\n    compact_space top /\\ metrizable_space top /\\\n    connected_space top /\\ locally_connected_space top /\\\n    ~(topspace top = {}) /\\\n    C SUBSET real_interval[&0,&1] /\\\n    closed_in (subtopology euclideanreal (real_interval[&0,&1])) C /\\\n    continuous_map (subtopology euclideanreal C, top) f /\\\n    IMAGE f C = topspace top\n    ==> ?F. continuous_map\n              (subtopology euclideanreal (real_interval[&0,&1]), top) F /\\\n            IMAGE F (real_interval[&0,&1]) = topspace\n              top
+  \226\136\128 top : Topology[A], \226\136\128 f : (Real) -> A, \226\136\128 C : (Real) -> Bool, compact_space(top) && metrizable_space(top) && connected_space(top) && locally_connected_space(top) && !(topspace(top) == {}) && SUBSET(C, real_interval([(real_of_num(0), real_of_num(1))])) && closed_in(subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))])), C) && continuous_map((subtopology(euclideanreal, C), top), f) && IMAGE(f, C) == topspace(top) \226\134\146 (\226\136\131 F : (Real) -> A, continuous_map((subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))])), top), F) && IMAGE(F, real_interval([(real_of_num(0), real_of_num(1))])) == topspace(top))
   IN((f : (Real) -> A)((b' : Real)), topspace((top : Topology[A])))
   IN((f : (Real) -> A)((a' : Real)), topspace((top : Topology[A])))
   IMAGE((cinv : (Real, Num) -> Bool), IMAGE(cantor_map, UNIV)) == topspace(cantor_space)
