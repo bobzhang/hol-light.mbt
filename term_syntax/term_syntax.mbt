@@ -90,6 +90,12 @@ fn binder_rename(
   scope : @preterm.Preterm,
   bound : @list.List[(String, String)],
 ) -> String {
+  // a binder named T or F binds a variable under an alias, named back
+  // after elaboration (truth_alias): the syntax writes truth and falsity as
+  // true and false, which elaborate to the constants themselves
+  if n == "T" || n == "F" {
+    return truth_alias + n
+  }
   if !names_constant(n) {
     return n
   }
@@ -212,7 +218,7 @@ fn resolve_names(
     // binder, the variables it binds), which needs the names resolved
     Combp(Combp(Varp(m, _), e), p) if m == @grammar.set_abs_mark => {
       @parser.skip_pgenvars(pgen_cost(e))
-      @parser.pmk_setabs(resolve_names(e, bound), resolve_names(p, bound))
+      setabs(resolve_names(e, bound), resolve_names(p, bound))
     }
     Combp(Varp(m, _), binders) if m == @grammar.set_compr_mark => {
       let vs = []
@@ -250,6 +256,11 @@ fn resolve_names(
       // because it is named like a constant)
       @parser.pmk_pattern_binding(((p, tests), resolve_names(body, inner)), () => vs)
     }
+    // truth and falsity are the constants themselves, so that a binder
+    // named T or F (which HOL allows) cannot capture them
+    Varp(n, _) if n == @grammar.generated_mark + "T" ||
+      n == @grammar.generated_mark + "F" =>
+      Constp(n[@grammar.generated_mark.length():].to_owned(), @preterm.Ptycon("bool", @list.List([])))
     Varp(n, ty) if n.has_prefix(@grammar.generated_mark) =>
       Varp(n[@grammar.generated_mark.length():].to_owned(), ty)
     Varp(n, ty) =>
@@ -308,6 +319,58 @@ pub fn parse_preterm(s : String) -> @preterm.Preterm raise {
 }
 
 ///|
+/// HOL's `{e | p}` (@parser.pmk_setabs) over resolved preterms: it binds
+/// the variables free in both, or all those of `e` when it has at most one
+/// or `p` has none, and a name like T or F is no variable there (HOL reads
+/// it as the constant's, even under a binder), so the aliased ones are
+/// counted under their own names.
+fn setabs(
+  e : @preterm.Preterm,
+  p : @preterm.Preterm,
+) -> @preterm.Preterm raise {
+  let fvs = @parser.pfrees(unalias_preterm(e))
+  let bvs = @parser.pfrees(unalias_preterm(p))
+  let evs = if fvs.length() <= 1 || bvs.is_empty() {
+    fvs
+  } else {
+    fvs.filter(v => bvs.contains(v))
+  }
+  @parser.pmk_setcompr(e, evs, p)
+}
+
+///|
+/// `t` with the binders elaborated under `truth_alias` named back.
+fn unalias_preterm(t : @preterm.Preterm) -> @preterm.Preterm {
+  match t {
+    Varp(n, ty) if n.has_prefix(truth_alias) =>
+      Varp(n[truth_alias.length():].to_owned(), ty)
+    Varp(_, _) | Constp(_, _) => t
+    Combp(f, x) => Combp(unalias_preterm(f), unalias_preterm(x))
+    Absp(v, b) => Absp(unalias_preterm(v), unalias_preterm(b))
+    Typing(x, ty) => Typing(unalias_preterm(x), ty)
+  }
+}
+
+///|
+/// The prefix a binder named T or F is elaborated under, so that typing
+/// reads it as the variable it is (HOL's typing would read the name as the
+/// constant and drop the binder's annotation); `elaborate` names it back.
+let truth_alias = "\u{1}"
+
+///|
+/// `t` with the variables elaborated under `truth_alias` named back. Nothing
+/// else in `t` is named T or F as a variable, so this captures nothing.
+fn unalias_truth(t : @kernel.Term) -> @kernel.Term raise {
+  match t {
+    Var(n, ty) if n.has_prefix(truth_alias) =>
+      @kernel.mk_var(n[truth_alias.length():].to_owned(), ty)
+    Var(_, _) | Const(_, _) => t
+    Comb(f, x) => @kernel.mk_comb(unalias_truth(f), unalias_truth(x))
+    Abs(v, b) => @kernel.mk_abs(unalias_truth(v), unalias_truth(b))
+  }
+}
+
+///|
 /// The HOL term `s` denotes.
 pub fn parse_term(s : String) -> @kernel.Term raise {
   @parser.record_quotation(s)
@@ -320,8 +383,10 @@ fn elaborate(s : String) -> @kernel.Term raise {
   // names are read through the fixed view of the interface when it is on
   // (resolution.mbt)
   fn go() -> @kernel.Term raise {
-    @preterm.term_of_preterm(
-      @preterm.retypecheck(@list.List([]), parse_preterm(s)),
+    unalias_truth(
+      @preterm.term_of_preterm(
+        @preterm.retypecheck(@list.List([]), parse_preterm(s)),
+      ),
     )
   }
   if fixed_resolution.val {
