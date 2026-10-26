@@ -80886,7 +80886,7 @@ test "100/fourier matches 100/fourier.ml" {
       #|  abs(sin((x : Real)))
       #|  \226\136\128 x : Real, !(x == real_of_num(0)) && abs(x) <= real_of_num(1) / real_of_num(2) \226\134\146 abs(inv(sin(x)) - inv(x)) <= real_of_num(2) * abs(x)
       #|  real_of_num(2) * abs((x : Real) / real_of_num(2))
-      #|  abs(is_ - &2 * ix) <= &1 ==> abs(inv(&2) * is_ - ix) <= max B (&2)
+      #|  abs((is_ : Real) - real_of_num(2) * (ix : Real)) <= real_of_num(1) \226\134\146 abs(inv(real_of_num(2)) * is_ - ix) <= max((B : Real), real_of_num(2))
       #|  (x : Real) == real_of_num(0)
       #|  (x : Real) <= (B : Real) \226\134\146 x <= max(B, (C : Real))
       #|  abs((x : Real)) <= real_of_num(1)
