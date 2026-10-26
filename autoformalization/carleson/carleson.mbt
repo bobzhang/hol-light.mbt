@@ -6793,7 +6793,7 @@ fn step_149() -> Unit raise {
   let t3888 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3892 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()])), t3888), t3889), t3890), t3891)
   let t3887 = @simp.simp_tac(@list.List([@sets.finite_image(), @sets.finite_numseg_le()]))
-  let t3893 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{(fn_:num->real->bool) k | k <= n} = IMAGE fn_ {k | k\n       <= n}"))])), t3887), t3892])
+  let t3893 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{(fn_ : (Num, Real) -> Bool)((k : Num)) | k <= (n : Num)} == IMAGE(fn_, {(k : Num) | k <= n})"))])), t3887), t3892])
   let t3886 = @tactics.disch_then(@tactics.match_mp_tac)
   let t3885 = @simp.asm_rewrite_tac(@list.List([]))
   let t3882 = @term_syntax.parse_term("{IMAGE(drop, (g : (Num, Cart[Real, Unit]) -> Bool)((k : Num))) | k <= (n : Num)}")
@@ -37874,10 +37874,10 @@ fn step_875() -> Unit raise {
   let t20858 = @list.List([@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(phisig_absint_lebesgue()), t20845), t20846), t20852])), t20857])
   let t20844 = @simp.asm_rewrite_tac(@list.List([@sets.inter_univ()]))
   let t20843 = @simp.rewrite_tac(@list.List([lift_region_cover_unions()]))
-  let t20841 = @parser.parse_term("\\m. IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n             dyho (FST((enum_:num->int#int) m)) (SND(enum_ m)))")
+  let t20841 = @term_syntax.parse_term("(m : Num) => IMAGE(lift, INTER({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_Jr((s : (Int, Int, Int))))}, dyho(FST((enum_ : (Num) -> (Int, Int))(m)), SND(enum_(m)))))")
   let t20842 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(z : Cart[Real, Unit]) => phi_sigma((s : (Int, Int, Int)), carleson_phi, drop(z))"), t20841]), @measure.integral_countable_unions_alt()))
   let t20859 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t20842), t20843), t20844), @tactics.ants_tac), t20858)
-  region_integral_limit_c.set(@tactics.prove(@parser.parse_term("forall(f:real->complex) E (h:real->real) s enum_.\n      real_lebesgue_measurable E /\\ h real_measurable_on (:real) /\\\n      UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN (:num)} = (:real)\n      ==> ((\\n. integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n                    UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n                    (\\z. phi_sigma s carleson_phi (drop z)))\n           --> integral (IMAGE lift {x | x IN E /\\ h x IN tile_Jr s})\n                    (\\z. phi_sigma s carleson_phi (drop z))) sequentially"), t20859))
+  region_integral_limit_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Cart[Real, Tybit0[Unit]], ∀ E : (Real) -> Bool, ∀ h : (Real) -> Real, ∀ s : (Int, Int, Int), ∀ enum_ : (Num) -> (Int, Int), real_lebesgue_measurable(E) && real_measurable_on(h, UNIV) && UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, UNIV)}) == UNIV → op_minus_minus_gt((n : Num) => integral(IMAGE(lift, INTER({(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}, UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, n))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))), integral(IMAGE(lift, {(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))), sequentially)"), t20859))
 }
 
 ///|
@@ -38095,7 +38095,7 @@ pub fn seq_le_limit() -> @kernel.Thm {
 fn step_880() -> Unit raise {
   let t20975 = @simp.rewrite_tac(@list.List([@sets.simple_image(), @equal.gsym(@sets.image_o()), @trivia.o_def()]))
   let t20976 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t20975)
-  cover_enum_reindex_c.set(@tactics.prove(@parser.parse_term("forall(enum_:num->int#int) (J:num->bool).\n     {dyho (FST ap) (SND ap) | ap IN IMAGE enum_ J} =\n     {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN J}"), t20976))
+  cover_enum_reindex_c.set(@tactics.prove(@term_syntax.parse_term("∀ enum_ : (Num) -> (Int, Int), ∀ J : (Num) -> Bool, {dyho(FST((ap : (Int, Int))), SND(ap)) | IN(ap, IMAGE(enum_, J))} == {dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, J)}"), t20976))
 }
 
 ///|
@@ -38111,7 +38111,7 @@ pub fn cover_enum_reindex() -> @kernel.Thm {
 /// SUM_NORM_REGION_LIMIT
 fn step_881() -> Unit raise {
   let t20988 = @simp.asm_rewrite_tac(@list.List([]))
-  let t20983 = @parser.parse_term("enum_:num->int#int")
+  let t20983 = @term_syntax.parse_term("(enum_ : (Num) -> (Int, Int))")
   let t20984 = @term_syntax.parse_term("(s : (Int, Int, Int))")
   let t20985 = @term_syntax.parse_term("(h : (Real) -> Real)")
   let t20986 = @term_syntax.parse_term("(E : (Real) -> Bool)")
@@ -38123,7 +38123,7 @@ fn step_881() -> Unit raise {
   let t20978 = @simp.asm_rewrite_tac(@list.List([]))
   let t20977 = @tactics.match_mp_tac(@realanalysis.reallim_sum())
   let t20989 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t20977), t20978), t20979), @tactics.disch_tac), t20980), t20981), t20982), t20987), t20988)
-  sum_norm_region_limit_c.set(@tactics.prove(@parser.parse_term("forall(cf:(int#int#int)->complex) E (h:real->real) (P:(int#int#int)->bool) enum_.\n      FINITE P /\\\n      real_lebesgue_measurable E /\\ h real_measurable_on (:real) /\\\n      UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN (:num)} = (:real)\n      ==> ((\\n. sum P (\\s. norm(cf s *\n                integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n                     UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n                     (\\z. phi_sigma s carleson_phi (drop z)))))\n           ---> sum P (\\s. norm(cf s *\n                integral (IMAGE lift {x | x IN E /\\ h x IN tile_Jr s})\n                     (\\z. phi_sigma s carleson_phi (drop z))))) sequentially"), t20989))
+  sum_norm_region_limit_c.set(@tactics.prove(@term_syntax.parse_term("∀ cf : ((Int, Int, Int)) -> Cart[Real, Tybit0[Unit]], ∀ E : (Real) -> Bool, ∀ h : (Real) -> Real, ∀ P : ((Int, Int, Int)) -> Bool, ∀ enum_ : (Num) -> (Int, Int), FINITE(P) && real_lebesgue_measurable(E) && real_measurable_on(h, UNIV) && UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, UNIV)}) == UNIV → op_minus_minus_minus_gt((n : Num) => sum(P, (s : (Int, Int, Int)) => norm(cf(s) * integral(IMAGE(lift, INTER({(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}, UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, n))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))))), sum(P, (s : (Int, Int, Int)) => norm(cf(s) * integral(IMAGE(lift, {(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))))), sequentially)"), t20989))
 }
 
 ///|
@@ -38150,7 +38150,7 @@ fn step_882() -> Unit raise {
   let t21072 = @term_syntax.parse_term("(tau : (Int, Int, Int))")
   let t21073 = @term_syntax.parse_term("(nt : Int)")
   let t21074 = @term_syntax.parse_term("(kt : Int)")
-  let t21075 = @parser.parse_term("IMAGE (enum_:num->int#int) (0..n)")
+  let t21075 = @term_syntax.parse_term("IMAGE((enum_ : (Num) -> (Int, Int)), op_dot_dot(0, (n : Num)))")
   let t21076 = @term_syntax.parse_term("(P : ((Int, Int, Int)) -> Bool)")
   let t21077 = @term_syntax.parse_term("(h : (Real) -> Real)")
   let t21078 = @term_syntax.parse_term("(E : (Real) -> Bool)")
@@ -38175,12 +38175,12 @@ fn step_882() -> Unit raise {
   let t21060 = @simp.rewrite_tac(@list.List([@sets.forall_in_image()]))
   let t21067 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_simp_tac(@list.List([@sets.finite_image(), @iterate.finite_numseg()])), t21060), t21061), t21066])
   let t21059 = @simp.rewrite_tac(@list.List([cover_enum_reindex()]))
-  let t21055 = @parser.parse_term("IMAGE (enum_:num->int#int) (0..n)")
+  let t21055 = @term_syntax.parse_term("IMAGE((enum_ : (Num) -> (Int, Int)), op_dot_dot(0, (n : Num)))")
   let t21056 = @term_syntax.parse_term("(P : ((Int, Int, Int)) -> Bool)")
   let t21057 = @term_syntax.parse_term("(s : (Int, Int, Int))")
   let t21058 = @term_syntax.parse_term("(h : (Real) -> Real)")
   let t21068 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(E : (Real) -> Bool)"), t21058, t21057, t21056, t21055]), region_finite_decomp()))), t21059), @tactics.ants_tac), t21067), @tactics.all_tac])
-  let t21054 = @tactics.subgoal_then(@parser.parse_term("forall s:int#int#int.\n        integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n             UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n             (\\z. phi_sigma s carleson_phi (drop z)) =\n        vsum (IMAGE enum_ (0..n))\n          (\\ap. integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n                dyho (FST ap) (SND ap)))\n                (\\z. phi_sigma s carleson_phi (drop z)))"), fn(x21052 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t21054 = @tactics.subgoal_then(@term_syntax.parse_term("∀ s : (Int, Int, Int), integral(IMAGE(lift, INTER({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_Jr(s))}, UNIONS({dyho(FST((enum_ : (Num) -> (Int, Int))((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, (n : Num)))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))) == vsum(IMAGE(enum_, op_dot_dot(0, n)), (ap : (Int, Int)) => integral(IMAGE(lift, INTER({(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}, dyho(FST(ap), SND(ap)))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))))"), fn(x21052 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x21052
     @simp.rewrite_tac(@list.List([th_1]))
   })
@@ -38188,7 +38188,7 @@ fn step_882() -> Unit raise {
   let t21090 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)")), t21051), t21054), t21068), t21082), @tactics.ants_tac), t21089)
   let t21050 = @simp.asm_rewrite_tac(@list.List([]))
   let t21091 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(sum_norm_region_limit()), t21050), t21090])
-  let t21049 = @tactics.exists_tac(@parser.parse_term("\\n. sum P (\\s. norm(carleson_ip (f:real->complex) s *\n          integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n               UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n               (\\z. phi_sigma s carleson_phi (drop z))))"))
+  let t21049 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) => sum((P : ((Int, Int, Int)) -> Bool), (s : (Int, Int, Int)) => norm(carleson_ip((f : (Real) -> Cart[Real, Tybit0[Unit]]), s) * integral(IMAGE(lift, INTER({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_Jr(s))}, UNIONS({dyho(FST((enum_ : (Num) -> (Int, Int))((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, n))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z)))))"))
   let t21048 = @tactics.match_mp_tac(seq_le_limit())
   let t21046 = @tactics.exists_tac(@term_syntax.parse_term("(m : Num)"))
   let t21045 = @tactics.disch_then(fn(x21043 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -38196,7 +38196,7 @@ fn step_882() -> Unit raise {
     @simp.rewrite_tac(@list.List([th]))
   })
   let t21042 = @simp.rewrite_tac(@list.List([]))
-  let t21038 = @parser.parse_term("(enum_:num->int#int) m")
+  let t21038 = @term_syntax.parse_term("(enum_ : (Num) -> (Int, Int))((m : Num))")
   let t21041 = @tactics.disch_then(fn(x21040 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x21035 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s21036 = @tactics.mp_tac(x21035)
@@ -38206,8 +38206,8 @@ fn step_882() -> Unit raise {
     })(((x21039 : @kernel.Thm) => @bool.spec(t21038, x21039))(x21040))
   })
   let t21034 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm(), @sets.in_image(), @sets.in_univ()]))
-  let t21047 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.undisch_tac(@parser.parse_term("{ap:int#int | in_kcover P (FST ap) (SND ap)} = IMAGE enum_\n      (:num)"))), t21034), t21041), t21042), t21045), t21046), @tactics.refl_tac), @tactics.all_tac])
-  let t21033 = @tactics.subgoal_then(@parser.parse_term("forall m:num. in_kcover P (FST(enum_ m)) (SND(enum_ m))"), fn(x21030 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t21047 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.undisch_tac(@term_syntax.parse_term("{(ap : (Int, Int)) | in_kcover((P : ((Int, Int, Int)) -> Bool), FST(ap), SND(ap))} == IMAGE((enum_ : (Num) -> (Int, Int)), UNIV)"))), t21034), t21041), t21042), t21045), t21046), @tactics.refl_tac), @tactics.all_tac])
+  let t21033 = @tactics.subgoal_then(@term_syntax.parse_term("∀ m : Num, in_kcover((P : ((Int, Int, Int)) -> Bool), FST((enum_ : (Num) -> (Int, Int))(m)), SND(enum_(m)))"), fn(x21030 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s21031 = @tactics.assume_tac(x21030)
     fn(x21032 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s21031(x21032)
@@ -38215,7 +38215,7 @@ fn step_882() -> Unit raise {
   })
   let t21028 = @simp.asm_rewrite_tac(@list.List([cover_enum_reindex()]))
   let t21029 = @list.List([@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(P : ((Int, Int, Int)) -> Bool)"), kcover_unions_univ())), t21028), @tactics.all_tac])
-  let t21027 = @tactics.subgoal_then(@parser.parse_term("UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN (:num)} = (:real)"), fn(x21024 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t21027 = @tactics.subgoal_then(@term_syntax.parse_term("UNIONS({dyho(FST((enum_ : (Num) -> (Int, Int))((m : Num))), SND(enum_(m))) | IN(m, UNIV)}) == UNIV"), fn(x21024 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s21025 = @tactics.assume_tac(x21024)
     fn(x21026 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s21025(x21026)
@@ -38223,8 +38223,8 @@ fn step_882() -> Unit raise {
   })
   let t21022 = @simp.asm_rewrite_tac(@list.List([kcover_index_countable()]))
   let t21023 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@card.countable_as_image()), t21022), @tactics.all_tac])
-  let t21019 = @parser.parse_term("enum_:num->int#int")
-  let t21021 = @tactics.subgoal_then(@parser.parse_term("?enum_. {ap:int#int | in_kcover P (FST ap) (SND ap)} = IMAGE enum_ (:num)"), (x21020 : @kernel.Thm) => @tactics.x_choose_tac(t21019, x21020))
+  let t21019 = @term_syntax.parse_term("(enum_ : (Num) -> (Int, Int))")
+  let t21021 = @tactics.subgoal_then(@term_syntax.parse_term("∃ enum_ : (Num) -> (Int, Int), {(ap : (Int, Int)) | in_kcover((P : ((Int, Int, Int)) -> Bool), FST(ap), SND(ap))} == IMAGE(enum_, UNIV)"), (x21020 : @kernel.Thm) => @tactics.x_choose_tac(t21019, x21020))
   let t21017 = @simp.asm_rewrite_tac(@list.List([]))
   let t21016 = @tactics.exists_tac(@term_syntax.parse_term("((a : Int), (q : Int))"))
   let t21014 = @tactics.x_choose_then(@term_syntax.parse_term("(q : Int)"))(@tactics.strip_assume_tac)
@@ -75554,10 +75554,10 @@ fn step_1752() -> Unit raise {
     fn(x41815 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s41814(x41815)
     }
-  }, @list.List([@parser.parse_term("fn_:num->real->complex"), t41816]))
+  }, @list.List([@term_syntax.parse_term("(fn_ : (Num, Real) -> Cart[Real, Tybit0[Unit]])"), t41816]))
   let t41812 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(cn : (Num) -> Real)"))(@tactics.strip_assume_tac))
   let t41811 = @simp.rewrite_tac(@list.List([@class.skolem_thm()]))
-  let t41810 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("fn_:num->real->complex"))(fn(x41807 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t41810 = @tactics.disch_then(@tactics.x_choose_then(@term_syntax.parse_term("(fn_ : (Num, Real) -> Cart[Real, Tybit0[Unit]])"))(fn(x41807 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s41808 = @tactics.mp_tac(x41807)
     fn(x41809 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s41808(x41809)
@@ -75588,7 +75588,7 @@ fn step_1752() -> Unit raise {
     })(t41791(x41792))
   })
   let t41819 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t41793), t41803), t41804), t41805), t41806), t41810), t41811), t41812), t41817), t41818)
-  schwartz_seq_csupp_c.set(@tactics.prove(@parser.parse_term("forall f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> ?fn_:num->real->complex. ?cn:num->real.\n           (forall n. schwartz (fn_ n)) /\\\n           (forall n x. abs x > cn n ==> fn_ n x = Cx(&0)) /\\\n           (forall n. lnorm (:real^1) (&2) (\\z. f z - fn_ n (drop z)) < inv(&n +\n             &1))"), t41819))
+  schwartz_seq_csupp_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(UNIV, real_of_num(2))) → (∃ fn_ : (Num, Real) -> Cart[Real, Tybit0[Unit]], ∃ cn : (Num) -> Real, (∀ n : Num, schwartz(fn_(n))) && (∀ n : Num, ∀ x : Real, abs(x) > cn(n) → fn_(n, x) == Cx(real_of_num(0))) && (∀ n : Num, lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => f(z) - fn_(n, drop(z))) < inv(real_of_num(n) + real_of_num(1))))"), t41819))
 }
 
 ///|

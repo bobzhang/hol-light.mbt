@@ -83261,7 +83261,7 @@ Autoformalization/carleson quotations (19012):
   (s : (Real) -> Bool) == {(y : Real) | \226\136\131 a : Real, y < a && (a - y) * (t : Real) < real_integral(real_interval([(y, a)]), (f : (Real) -> Real))}
   \226\136\128 f : (Real) -> Real, \226\136\128 t : Real, \226\136\128 D' : ((Real) -> Bool) -> Bool, real_integrable_on(f, UNIV) && (\226\136\128 x : Real, real_of_num(0) <= f(x)) && real_of_num(0) < t && FINITE(D') && SUBSET(D', IMAGE(IMAGE(drop), components(IMAGE(lift, {(y : Real) | \226\136\131 a : Real, y < a && (a - y) * t < real_integral(real_interval([(y, a)]), f)})))) \226\134\146 real_measure(UNIONS(D')) <= real_integral(UNIV, f) / t
   (g : (Num, Cart[Real, Unit]) -> Bool)((k : Num))
-  {(fn_:num->real->bool) k | k <= n} = IMAGE fn_ {k | k\n       <= n}
+  {(fn_ : (Num, Real) -> Bool)((k : Num)) | k <= (n : Num)} == IMAGE(fn_, {(k : Num) | k <= n})
   {IMAGE(drop, (g : (Num, Cart[Real, Unit]) -> Bool)((k : Num))) | k <= (n : Num)}
   (t : Real)
   (f : (Real) -> Real)
@@ -88956,9 +88956,9 @@ Autoformalization/carleson quotations (19012):
   (norm : (Cart[Real, Tybit0[Unit]]) -> Real)
   (z : Cart[Real, Unit])
   \226\136\128 region : (Real) -> Bool, \226\136\128 g : (A, Real) -> Bool, \226\136\128 Iset : (A) -> Bool, UNIONS({IMAGE(lift, INTER(region, g((m : A)))) | IN(m, Iset)}) == IMAGE(lift, INTER(region, UNIONS({g((m : A)) | IN(m, Iset)})))
-  \\m. IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n             dyho (FST((enum_:num->int#int) m)) (SND(enum_ m)))
+  (m : Num) => IMAGE(lift, INTER({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_Jr((s : (Int, Int, Int))))}, dyho(FST((enum_ : (Num) -> (Int, Int))(m)), SND(enum_(m)))))
   (z : Cart[Real, Unit]) => phi_sigma((s : (Int, Int, Int)), carleson_phi, drop(z))
-  forall(f:real->complex) E (h:real->real) s enum_.\n      real_lebesgue_measurable E /\\ h real_measurable_on (:real) /\\\n      UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN (:num)} = (:real)\n      ==> ((\\n. integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n                    UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n                    (\\z. phi_sigma s carleson_phi (drop z)))\n           --> integral (IMAGE lift {x | x IN E /\\ h x IN tile_Jr s})\n                    (\\z. phi_sigma s carleson_phi (drop z))) sequentially
+  \226\136\128 f : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\128 E : (Real) -> Bool, \226\136\128 h : (Real) -> Real, \226\136\128 s : (Int, Int, Int), \226\136\128 enum_ : (Num) -> (Int, Int), real_lebesgue_measurable(E) && real_measurable_on(h, UNIV) && UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, UNIV)}) == UNIV \226\134\146 op_minus_minus_gt((n : Num) => integral(IMAGE(lift, INTER({(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}, UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, n))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))), integral(IMAGE(lift, {(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))), sequentially)
   SND((aq : (Int, Int)))
   SND((ap : (Int, Int)))
   FST((aq : (Int, Int)))
@@ -88997,38 +88997,38 @@ Autoformalization/carleson quotations (19012):
   (gg : (Num) -> Real)
   sequentially
   \226\136\128 gg : (Num) -> Real, \226\136\128 l : Real, \226\136\128 b : Real, op_minus_minus_minus_gt(gg, l, sequentially) && (\226\136\128 n : Num, gg(n) <= b) \226\134\146 l <= b
-  forall(enum_:num->int#int) (J:num->bool).\n     {dyho (FST ap) (SND ap) | ap IN IMAGE enum_ J} =\n     {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN J}
-  enum_:num->int#int
+  \226\136\128 enum_ : (Num) -> (Int, Int), \226\136\128 J : (Num) -> Bool, {dyho(FST((ap : (Int, Int))), SND(ap)) | IN(ap, IMAGE(enum_, J))} == {dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, J)}
+  (enum_ : (Num) -> (Int, Int))
   (s : (Int, Int, Int))
   (h : (Real) -> Real)
   (E : (Real) -> Bool)
   (x : Real) => Cx(real_of_num(0))
   (s : (Int, Int, Int))
-  forall(cf:(int#int#int)->complex) E (h:real->real) (P:(int#int#int)->bool) enum_.\n      FINITE P /\\\n      real_lebesgue_measurable E /\\ h real_measurable_on (:real) /\\\n      UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN (:num)} = (:real)\n      ==> ((\\n. sum P (\\s. norm(cf s *\n                integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n                     UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n                     (\\z. phi_sigma s carleson_phi (drop z)))))\n           ---> sum P (\\s. norm(cf s *\n                integral (IMAGE lift {x | x IN E /\\ h x IN tile_Jr s})\n                     (\\z. phi_sigma s carleson_phi (drop z))))) sequentially
+  \226\136\128 cf : ((Int, Int, Int)) -> Cart[Real, Tybit0[Unit]], \226\136\128 E : (Real) -> Bool, \226\136\128 h : (Real) -> Real, \226\136\128 P : ((Int, Int, Int)) -> Bool, \226\136\128 enum_ : (Num) -> (Int, Int), FINITE(P) && real_lebesgue_measurable(E) && real_measurable_on(h, UNIV) && UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, UNIV)}) == UNIV \226\134\146 op_minus_minus_minus_gt((n : Num) => sum(P, (s : (Int, Int, Int)) => norm(cf(s) * integral(IMAGE(lift, INTER({(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}, UNIONS({dyho(FST(enum_((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, n))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))))), sum(P, (s : (Int, Int, Int)) => norm(cf(s) * integral(IMAGE(lift, {(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))))), sequentially)
   (tau : (Int, Int, Int))
   (nt : Int)
   (kt : Int)
-  IMAGE (enum_:num->int#int) (0..n)
+  IMAGE((enum_ : (Num) -> (Int, Int)), op_dot_dot(0, (n : Num)))
   (P : ((Int, Int, Int)) -> Bool)
   (h : (Real) -> Real)
   (E : (Real) -> Bool)
   (f : (Real) -> Cart[Real, Tybit0[Unit]])
-  IMAGE (enum_:num->int#int) (0..n)
+  IMAGE((enum_ : (Num) -> (Int, Int)), op_dot_dot(0, (n : Num)))
   (P : ((Int, Int, Int)) -> Bool)
   (s : (Int, Int, Int))
   (h : (Real) -> Real)
   (E : (Real) -> Bool)
-  forall s:int#int#int.\n        integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n             UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n             (\\z. phi_sigma s carleson_phi (drop z)) =\n        vsum (IMAGE enum_ (0..n))\n          (\\ap. integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n                dyho (FST ap) (SND ap)))\n                (\\z. phi_sigma s carleson_phi (drop z)))
+  \226\136\128 s : (Int, Int, Int), integral(IMAGE(lift, INTER({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_Jr(s))}, UNIONS({dyho(FST((enum_ : (Num) -> (Int, Int))((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, (n : Num)))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))) == vsum(IMAGE(enum_, op_dot_dot(0, n)), (ap : (Int, Int)) => integral(IMAGE(lift, INTER({(x : Real) | IN(x, E) && IN(h(x), tile_Jr(s))}, dyho(FST(ap), SND(ap)))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z))))
   (n : Num)
-  \\n. sum P (\\s. norm(carleson_ip (f:real->complex) s *\n          integral (IMAGE lift ({x | x IN E /\\ h x IN tile_Jr s} INTER\n               UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN 0..n}))\n               (\\z. phi_sigma s carleson_phi (drop z))))
+  (n : Num) => sum((P : ((Int, Int, Int)) -> Bool), (s : (Int, Int, Int)) => norm(carleson_ip((f : (Real) -> Cart[Real, Tybit0[Unit]]), s) * integral(IMAGE(lift, INTER({(x : Real) | IN(x, (E : (Real) -> Bool)) && IN((h : (Real) -> Real)(x), tile_Jr(s))}, UNIONS({dyho(FST((enum_ : (Num) -> (Int, Int))((m : Num))), SND(enum_(m))) | IN(m, op_dot_dot(0, n))}))), (z : Cart[Real, Unit]) => phi_sigma(s, carleson_phi, drop(z)))))
   (m : Num)
-  (enum_:num->int#int) m
-  {ap:int#int | in_kcover P (FST ap) (SND ap)} = IMAGE enum_\n      (:num)
-  forall m:num. in_kcover P (FST(enum_ m)) (SND(enum_ m))
+  (enum_ : (Num) -> (Int, Int))((m : Num))
+  {(ap : (Int, Int)) | in_kcover((P : ((Int, Int, Int)) -> Bool), FST(ap), SND(ap))} == IMAGE((enum_ : (Num) -> (Int, Int)), UNIV)
+  \226\136\128 m : Num, in_kcover((P : ((Int, Int, Int)) -> Bool), FST((enum_ : (Num) -> (Int, Int))(m)), SND(enum_(m)))
   (P : ((Int, Int, Int)) -> Bool)
-  UNIONS {dyho (FST(enum_ m)) (SND(enum_ m)) | m IN (:num)} = (:real)
-  enum_:num->int#int
-  ?enum_. {ap:int#int | in_kcover P (FST ap) (SND ap)} = IMAGE enum_ (:num)
+  UNIONS({dyho(FST((enum_ : (Num) -> (Int, Int))((m : Num))), SND(enum_(m))) | IN(m, UNIV)}) == UNIV
+  (enum_ : (Num) -> (Int, Int))
+  \226\136\131 enum_ : (Num) -> (Int, Int), {(ap : (Int, Int)) | in_kcover((P : ((Int, Int, Int)) -> Bool), FST(ap), SND(ap))} == IMAGE(enum_, UNIV)
   ((a : Int), (q : Int))
   (q : Int)
   (a : Int)
@@ -100035,13 +100035,13 @@ Autoformalization/carleson quotations (19012):
   (f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(UNIV, real_of_num(2))) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 (\226\136\131 h : (Real) -> Cart[Real, Tybit0[Unit]], \226\136\131 c : Real, schwartz(h) && (\226\136\128 x : Real, abs(x) > c \226\134\146 h(x) == Cx(real_of_num(0))) && lnorm(UNIV, real_of_num(2), (x : Cart[Real, Unit]) => f(x) - ((z : Cart[Real, Unit]) => h(drop(z)))(x)) < e))
   (cn : (Num) -> Real)
-  fn_:num->real->complex
+  (fn_ : (Num, Real) -> Cart[Real, Tybit0[Unit]])
   (cn : (Num) -> Real)
-  fn_:num->real->complex
+  (fn_ : (Num, Real) -> Cart[Real, Tybit0[Unit]])
   real_of_num(0) <= real_of_num((n : Num)) \226\134\146 real_of_num(0) < real_of_num(n) + real_of_num(1)
   inv(real_of_num((n : Num)) + real_of_num(1))
   (n : Num)
-  forall f:real^1->real^2. f IN lspace (:real^1) (&2)\n     ==> ?fn_:num->real->complex. ?cn:num->real.\n           (forall n. schwartz (fn_ n)) /\\\n           (forall n x. abs x > cn n ==> fn_ n x = Cx(&0)) /\\\n           (forall n. lnorm (:real^1) (&2) (\\z. f z - fn_ n (drop z)) < inv(&n +\n             &1))
+  \226\136\128 f : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], IN(f, lspace(UNIV, real_of_num(2))) \226\134\146 (\226\136\131 fn_ : (Num, Real) -> Cart[Real, Tybit0[Unit]], \226\136\131 cn : (Num) -> Real, (\226\136\128 n : Num, schwartz(fn_(n))) && (\226\136\128 n : Num, \226\136\128 x : Real, abs(x) > cn(n) \226\134\146 fn_(n, x) == Cx(real_of_num(0))) && (\226\136\128 n : Num, lnorm(UNIV, real_of_num(2), (z : Cart[Real, Unit]) => f(z) - fn_(n, drop(z))) < inv(real_of_num(n) + real_of_num(1))))
   eta((R : Real), (x : Real)) == real_of_num(0)
   (x : Real)
   (R : Real) + real_of_num(2)
