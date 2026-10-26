@@ -6486,19 +6486,19 @@ Library/wo quotations (595):
   (s : (A) -> Bool)
   (a : A)
   (forall l s:A->bool.\n        qoset l /\\ FINITE s /\\ ~(s = {}) /\\ s SUBSET fld l\n        ==> ?a. a IN s /\\ forall x. x IN s ==> ~(strictly l x a)) /\\\n   (forall l s:A->bool.\n        qoset l /\\ FINITE s /\\ ~(s = {}) /\\ s SUBSET fld l\n        ==> ?a. a IN s /\\ forall x. x IN s ==> ~(strictly l a x))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   (forall l s:A->bool.\n        poset l /\\ FINITE s /\\ ~(s = {}) /\\ s SUBSET fld l\n        ==> ?a. a IN s /\\ forall x. x IN s ==> ~(properly l x a)) /\\\n   (forall l s:A->bool.\n        poset l /\\ FINITE s /\\ ~(s = {}) /\\ s SUBSET fld l\n        ==> ?a. a IN s /\\ forall x. x IN s ==> ~(properly l a x))
   (forall l s:A->bool.\n        toset l /\\ FINITE s /\\ ~(s = {}) /\\ s SUBSET fld l\n        ==> ?a. a IN s /\\ forall x. x IN s ==> l a x) /\\\n   (forall l s:A->bool.\n        toset l /\\ FINITE s /\\ ~(s = {}) /\\ s SUBSET fld l\n        ==> ?a. a IN s /\\ forall x. x IN s ==> l x a)
   fld((x : A) => (y : A) => false) == {}
