@@ -160,7 +160,12 @@ pub fn local_definition(x16 : String, x17 : @kernel.Term) -> @kernel.Thm raise {
   }
   let (lv, largs) = @basics.strip_comb(l)
   let (cname, ty) = @kernel.dest_var(lv)
-  let cname_p = (package_name + ("_" + cname))
+  // a package name has no _, so package_name splits one way only
+  let cname_p = if package_name.contains("_") {
+    raise Failure("local_definition: a package name with _")
+  } else {
+    package_name + "_" + cname
+  }
   let lv_p = @kernel.mk_var(cname_p, ty)
   let l_p = @basics.list_mk_comb(lv_p, largs)
   let bod_p = @basics.mk_eq(l_p, r)
