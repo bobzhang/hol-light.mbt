@@ -43,6 +43,8 @@ TERM_RENAMES = {
     'Probability/ergodic.ml': {'fn': 'fn_', 'is': 'is_'},
     'Probability/expectation.ml': {'fn': 'fn_'},
     'Probability/martingale_convergence.ml': {'enum': 'enum_'},
+    # a prime inside a name: the term syntax allows primes only at the end
+    '100/transcendence.ml': {"qp'd": 'qp_d', "p'd": 'p_d'},
 }
 # upstream file -> [(text, replacement)], each text occurring once, applied
 # before the rename (for a name built in code)
