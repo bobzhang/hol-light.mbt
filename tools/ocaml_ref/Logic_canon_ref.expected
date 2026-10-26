@@ -7645,10 +7645,10 @@ Logic/canon quotations (149):
   (x : Num) => (a : A)
   (a : A)
   \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), !(Dom(M) == {}) \226\134\146 (\226\136\131 v : (Num) -> A, valuation(M, v))
-  CONS (a:A) as_
-  as_:A list
+  CONS((a : A), (as_ : List[A]))
+  (as_ : List[A])
   (a : A)
-  forall M xs v. holds M v (ITLIST ?? xs p) <=>\n            ?as_. (LENGTH as_ = LENGTH xs) /\\\n                 ALL (Dom M) as_ /\\\n                 holds M\n                   (ITLIST valmod (REVERSE (MAP2 (\\x a:A. (x,a)) xs as_)) v)\n                   p
+  \226\136\128 M : ((A) -> Bool, (Num, List[A]) -> A, (Num, List[A]) -> Bool), \226\136\128 xs : List[Num], \226\136\128 v : (Num) -> A, holds(M, v, ITLIST(op_q_q, xs, (p : Form))) == (\226\136\131 as_ : List[A], LENGTH(as_) == LENGTH(xs) && ALL(Dom(M), as_) && holds(M, ITLIST(valmod, REVERSE(MAP2((x : Num) => (a : A) => (x, a), xs, as_)), v), p))
   (canonical : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool)) -> Bool)((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (M : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))) == (Dom(M) == terms(FST(L)) && (\226\136\128 f : Num, Fun(M, f) == Fn(f)))
   (prop_of_model : (((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool), (Num) -> _, Form) -> Bool)((M : ((_) -> Bool, (Num, List[_]) -> _, (Num, List[_]) -> Bool)), (v : (Num) -> _), Atom((p : Num), (l : List[Term]))) == holds(M, v, Atom(p, l))
   (canon_of_prop : ((((Num, Num)) -> Bool, ((Num, Num)) -> Bool), (Form) -> Bool) -> ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool))((L : (((Num, Num)) -> Bool, ((Num, Num)) -> Bool)), (d : (Form) -> Bool)) == (terms(FST(L)), Fn, (p : Num) => (l : List[Term]) => d(Atom(p, l)))
@@ -7743,10 +7743,10 @@ Logic/canon quotations (149):
   \226\136\128 q : Form, IN(q, {Not((p : Form))}) \226\134\146 qfree(q)
   (xs : List[Num])
   (xs : List[Num])
-  as_:term list
-  as_:term list
-  LENGTH (as_:term list) = LENGTH (xs:num list)
-  ALL (Dom (canon_of_prop (language {p}) d)) as_
+  (as_ : List[Term])
+  (as_ : List[Term])
+  LENGTH((as_ : List[Term])) == LENGTH((xs : List[Num]))
+  ALL(Dom(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool))), (as_ : List[Term]))
   (v : (Num) -> Term)
   (v : (Num) -> Term)
   valuation(canon_of_prop(language({(p : Form)}), (d : (Form) -> Bool)), (v : (Num) -> Term))
@@ -7769,7 +7769,7 @@ Logic/canon quotations (149):
   MAP((q : Form) => select((i : (Num) -> Term) => (\226\136\128 x : Num, IN(i(x), terms(FST(language({(p : Form)}))))) && q == formsubst(i, p)), (ps : List[Form]))
   (ps : List[Form])
   {formsubst((i : (Num) -> Term), (q : Form)) | IN(q, {(p : Form)}) && (\226\136\128 x : Num, IN(i(x), terms(FST(language({p})))))}
-  qfree p /\\ (forall C v. ~(Dom C = EMPTY) /\\\n                     valuation(C) v ==> holds C (v:num->term) (ITLIST ?? xs p))\n   ==> ?is_. (forall i x. MEM i is_ ==> terms(FST(language {p})) (i x)) /\\\n            forall d. pholds(d) (ITLIST (||) (MAP (\\i. formsubst i p) is_) False)
+  qfree((p : Form)) && (\226\136\128 C : ((Term) -> Bool, (Num, List[Term]) -> Term, (Num, List[Term]) -> Bool), \226\136\128 v : (Num) -> Term, !(Dom(C) == {}) && valuation(C, v) \226\134\146 holds(C, v, ITLIST(op_q_q, (xs : List[Num]), p))) \226\134\146 (\226\136\131 is_ : List[(Num) -> Term], (\226\136\128 i : (Num) -> Term, \226\136\128 x : Num, MEM(i, is_) \226\134\146 terms(FST(language({p})), i(x))) && (\226\136\128 d : (Form) -> Bool, pholds(d, ITLIST(op_bar_bar, MAP((i : (Num) -> Term) => formsubst(i, p), is_), False))))
 terms_RULES =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) (#V:fun(num,term) x:num))))) (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term)))) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))))
 terms_INDUCT =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#forall:fun(fun(fun(term,bool),bool),bool) (\terms':fun(term,bool). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\x:num. (terms':fun(term,bool) (#V:fun(num,term) x:num))))) (#forall:fun(fun(num,bool),bool) (\f:num. (#forall:fun(fun(list(term),bool),bool) (\l:list(term). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) terms':fun(term,bool)) l:list(term)))) (terms':fun(term,bool) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))))))))) (#forall:fun(fun(term,bool),bool) (\a:term. ((#==>:fun(bool,fun(bool,bool)) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) (terms':fun(term,bool) a:term)))))))))
 terms_CASES =  |- (#forall:fun(fun(fun(prod(num,num),bool),bool),bool) (\fns:fun(prod(num,num),bool). (#forall:fun(fun(term,bool),bool) (\a:term. ((#=:fun(bool,fun(bool,bool)) ((#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool)) a:term)) ((#\/:fun(bool,fun(bool,bool)) (#?:fun(fun(num,bool),bool) (\x:num. ((#=:fun(term,fun(term,bool)) a:term) (#V:fun(num,term) x:num))))) (#?:fun(fun(num,bool),bool) (\f:num. (#?:fun(fun(list(term),bool),bool) (\l:list(term). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(term,fun(term,bool)) a:term) ((#Fn:fun(num,fun(list(term),term)) f:num) l:list(term)))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(prod(num,num),fun(fun(prod(num,num),bool),bool)) ((#,:fun(num,fun(num,prod(num,num))) f:num) (#LENGTH:fun(list(term),num) l:list(term)))) fns:fun(prod(num,num),bool))) ((#ALL:fun(fun(term,bool),fun(list(term),bool)) (#terms:fun(fun(prod(num,num),bool),fun(term,bool)) fns:fun(prod(num,num),bool))) l:list(term))))))))))))))
