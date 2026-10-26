@@ -771,7 +771,10 @@ fn implicit_binders(
   e : @kernel.Term,
   p : @kernel.Term,
   bound : Bound,
+  outer? : Bound,
 ) -> Array[@kernel.Term] {
+  // the binders outside the comprehension (`bound` may also hold its own)
+  let outer = outer.unwrap_or(bound)
   // a variable reads as a constant or numeral by the name it is printed
   // under (a binder in scope may be renamed)
   fn printed(v : @kernel.Term) -> String {
@@ -785,9 +788,9 @@ fn implicit_binders(
     .to_array()
     .filter(v => {
       let n = printed(v)
-      // a variable named T or F that a binder in scope binds is read as
-      // that variable (elaboration aliases it); unbound, as the constant
-      let truth = (n == "T" || n == "F") && bound.iter().any(b => b.0 == v)
+      // a variable named T or F that a binder outside binds is read as
+      // that variable (elaboration aliases it); otherwise, as the constant
+      let truth = (n == "T" || n == "F") && outer.iter().any(b => b.0 == v)
       (truth || !is_constant_name(n)) &&
       !n.to_array().iter().all(c => c is ('0'..='9'))
     })
@@ -973,7 +976,7 @@ fn Printer::comprehension(
     inner = next
   }
   if !renamed &&
-    implicit_binders(e, p, inner) == xs &&
+    implicit_binders(e, p, inner, outer=bound) == xs &&
     !(g is Var(n, _) && self.listed.contains(n)) {
     // each binder is written with its type where it first occurs in e
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))

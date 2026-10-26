@@ -443,6 +443,11 @@ test "binders named T and F: comprehensions and patterns" {
     "(T : Bool) => {(x, y) | x : Num, y : Num | T}",
   )
   assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(t)), t))
+  // a comprehension's own binder named T is listed
+  for q in ["{T | T : Bool | true}", "{F | F : Bool | F}"] {
+    let c = @term_syntax.parse_term(q)
+    assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
+  }
   // a pattern variable named T is renamed: a pattern's T is truth
   let m = @parser.parse_term("match (x:bool) with T' -> T'")
   let s = @term_syntax.print_term(m)
