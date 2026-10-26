@@ -26986,19 +26986,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x <= y \226\134\146 sqrt(x) <= sqrt(y)
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x < y \226\134\146 sqrt(x) < sqrt(y)
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 (sqrt(x) < sqrt(y)) == (x < y)
-      #|  real_add:real->real->real
-      #|  real_sub:real->real->real
-      #|  real_mul:real->real->real
-      #|  real_div:real->real->real
-      #|  real_lt:real->real->bool
-      #|  real_le:real->real->bool
-      #|  real_gt:real->real->bool
-      #|  real_ge:real->real->bool
-      #|  real_neg:real->real
-      #|  real_pow:real->num->real
-      #|  real_inv:real->real
-      #|  real_abs:real->real
-      #|  real_of_num:num->real
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  real_lt
+      #|  real_le
+      #|  real_gt
+      #|  real_ge
+      #|  real_neg
+      #|  real_pow
+      #|  inv
+      #|  real_abs
+      #|  real_of_num
       #|  \226\136\128 x : (A, B), \226\136\128 i : A, \226\136\128 j : B, (x == (i, j)) == (FST(x) == i && SND(x) == j)
       #|  \226\136\128 x : (A, B), \226\136\128 y : (A, B), (x == y) == (FST(x) == FST(y) && SND(x) == SND(y))
       #|  \226\136\128 a : A, \226\136\128 U : (A) -> Bool, !(INTER({a}, U) == {}) == U(a)
@@ -60914,8 +60914,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FACT(NUMERAL n)
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
-      #|  sum(0,i) f
-      #|  i:num
+      #|  sum((0, (i : Num)), (f : (Num) -> Real))
+      #|  (i : Num)
       #|  0
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
@@ -60970,8 +60970,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  FACT(NUMERAL n)
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
-      #|  0 <| i
-      #|  i:num
+      #|  0 < (i : Num)
+      #|  (i : Num)
       #|  (NUMERAL m) MOD (NUMERAL n)
       #|  (NUMERAL m) DIV (NUMERAL n)
       #|  (NUMERAL m) EXP (NUMERAL n)
@@ -60989,72 +60989,72 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  pi
-      #|  (<=.)
-      #|  (-.)
+      #|  real_le
+      #|  real_sub
       #|  pi
-      #|  (<=.)
-      #|  (-.)
-      #|  &.
+      #|  real_le
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  &.
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (+.)
-      #|  &.
+      #|  real_add
+      #|  real_add
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( *. )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  real_mul
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  &.
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -61082,7 +61082,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -61116,19 +61116,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_of_num
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
-      #|  &.
+      #|  real_abs
+      #|  real_lt
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -61153,290 +61153,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  interval
-      #|  interval
-      #|  float
-      #|  float
-      #|  float
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  int_of_num
-      #|  int_of_num
-      #|  float
-      #|  ||.
-      #|  (<.)
-      #|  interval
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
       #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
-      #|  real_of_num
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
-      #|  real_of_num
-      #|  interval
-      #|  interval
-      #|  float
-      #|  float
-      #|  float
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  ||.
-      #|  (<.)
-      #|  interval
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
-      #|  real_of_num
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
-      #|  real_of_num
-      #|  interval
-      #|  interval
-      #|  float
-      #|  float
-      #|  float
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  ||.
-      #|  (<.)
-      #|  interval
-      #|  interval
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (+.)
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( *. )
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
-      #|  real_of_num
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
       #|  _0
       #|  BIT1
       #|  BIT0
@@ -61474,23 +61192,47 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_of_num
       #|  float
       #|  int_of_num
-      #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
-      #|  &.
+      #|  real_abs
+      #|  real_lt
+      #|  interval
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
       #|  _0
       #|  BIT1
       #|  BIT0
@@ -61514,11 +61256,57 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  interval
+      #|  interval
+      #|  float
+      #|  float
+      #|  float
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  real_abs
+      #|  real_lt
+      #|  interval
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
-      #|  BIT0
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  real_of_num
+      #|  NUMERAL
       #|  _0
       #|  BIT1
       #|  BIT0
@@ -61558,215 +61346,66 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
+      #|  real_abs
+      #|  real_lt
       #|  interval
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  interval
       #|  real_of_num
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_add
       #|  real_of_num
-      #|  interval
-      #|  interval
-      #|  float
-      #|  float
-      #|  float
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  ||.
-      #|  (<.)
-      #|  interval
-      #|  &.
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  real_mul
       #|  real_of_num
-      #|  &.
-      #|  NUMERAL
-      #|  _0
-      #|  BIT1
-      #|  BIT0
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  _0
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
       #|  real_of_num
-      #|  interval
-      #|  interval
-      #|  float
-      #|  float
-      #|  float
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  int_of_num
-      #|  int_neg
-      #|  int_of_num
-      #|  float
-      #|  ||.
-      #|  (<.)
-      #|  interval
-      #|  interval
-      #|  &.
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( *. )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  (-.)
-      #|  &.
-      #|  DECIMAL
-      #|  --.
-      #|  ||.
-      #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -61794,13 +61433,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
-      #|  _0
-      #|  BIT1
-      #|  BIT0
       #|  _0
       #|  BIT1
       #|  BIT0
@@ -61841,19 +61477,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
-      #|  &.
+      #|  real_abs
+      #|  real_lt
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -61878,7 +61514,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -61888,6 +61524,286 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  BIT0
       #|  _0
       #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  interval
+      #|  interval
+      #|  float
+      #|  float
+      #|  float
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  real_abs
+      #|  real_lt
+      #|  interval
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  interval
+      #|  interval
+      #|  float
+      #|  float
+      #|  float
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  real_abs
+      #|  real_lt
+      #|  interval
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  interval
+      #|  interval
+      #|  float
+      #|  float
+      #|  float
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  real_abs
+      #|  real_lt
+      #|  interval
+      #|  interval
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  real_mul
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_sub
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  BIT0
       #|  _0
       #|  BIT1
       #|  BIT0
@@ -61925,21 +61841,23 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
-      #|  interval
-      #|  &.
+      #|  real_abs
+      #|  real_lt
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  BIT0
       #|  _0
       #|  BIT1
       #|  _0
@@ -61960,10 +61878,11 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
+      #|  BIT0
       #|  _0
       #|  BIT1
       #|  BIT0
@@ -62006,20 +61925,20 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
+      #|  real_abs
+      #|  real_lt
       #|  interval
-      #|  &.
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -62041,7 +61960,88 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  BIT1
+      #|  BIT0
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  interval
+      #|  interval
+      #|  float
+      #|  float
+      #|  float
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  int_of_num
+      #|  int_neg
+      #|  int_of_num
+      #|  float
+      #|  real_abs
+      #|  real_lt
+      #|  interval
+      #|  real_of_num
+      #|  DECIMAL
+      #|  real_neg
+      #|  real_abs
+      #|  twopow
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
+      #|  NUMERAL
+      #|  _0
+      #|  BIT1
+      #|  _0
+      #|  (NUMERAL m) MOD (NUMERAL n)
+      #|  (NUMERAL m) DIV (NUMERAL n)
+      #|  (NUMERAL m) EXP (NUMERAL n)
+      #|  NUMERAL m * NUMERAL n
+      #|  NUMERAL m - NUMERAL n
+      #|  NUMERAL m + NUMERAL n
+      #|  ODD(NUMERAL n)
+      #|  EVEN(NUMERAL n)
+      #|  NUMERAL m = NUMERAL n
+      #|  NUMERAL m >= NUMERAL n
+      #|  NUMERAL m > NUMERAL n
+      #|  NUMERAL m <= NUMERAL n
+      #|  NUMERAL m < NUMERAL n
+      #|  FACT(NUMERAL n)
+      #|  PRE(NUMERAL n)
+      #|  SUC(NUMERAL n)
+      #|  real_of_num
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -62087,17 +62087,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
+      #|  real_abs
+      #|  real_lt
       #|  interval
       #|  interval
       #|  interval
       #|  interval
       #|  interval
-      #|  (<=.)
+      #|  real_le
       #|  interval
       #|  real_of_num(3)
-      #|  &.
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -62122,17 +62122,17 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  SUC(NUMERAL n)
       #|  real_of_num
       #|  real_of_num(22) / real_of_num(7)
-      #|  &.
+      #|  real_of_num
       #|  DECIMAL
-      #|  --.
-      #|  ||.
+      #|  real_neg
+      #|  real_abs
       #|  twopow
-      #|  (+.)
-      #|  (-.)
-      #|  ( *. )
-      #|  ( / )
-      #|  ( / )
-      #|  &.
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  op_slash
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -62164,7 +62164,7 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  PRE(NUMERAL n)
       #|  SUC(NUMERAL n)
       #|  real_of_num
-      #|  &.
+      #|  real_of_num
       #|  NUMERAL
       #|  _0
       #|  BIT1
@@ -62204,8 +62204,8 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  int_neg
       #|  int_of_num
       #|  float
-      #|  ||.
-      #|  (<.)
+      #|  real_abs
+      #|  real_lt
       #|  interval
       #|  interval
       #|  \226\136\128 f : Real, \226\136\128 g : Real, \226\136\128 ex : Real, \226\136\128 ey : Real, real_of_num(0) < g - (ey + (ex + f))
