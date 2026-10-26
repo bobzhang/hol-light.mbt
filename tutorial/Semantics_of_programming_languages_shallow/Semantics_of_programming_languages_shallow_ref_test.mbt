@@ -12791,7 +12791,7 @@ test "Tutorial/Semantics_of_programming_languages_shallow matches Tutorial/Seman
       #|0..0..1..solved at 4
       #|Tutorial/Semantics_of_programming_languages_shallow quotations (45):
       #|  (Assign : ((S) -> S, (S) -> Bool, S) -> Bool)((f : (S) -> S), (q : (S) -> Bool)) == o(q, f)
-      #|  (c1:(S->bool)->(S->bool)) ;; (c2:(S->bool)->(S->bool)) = c1 o c2
+      #|  (op_semi_semi : (((S) -> Bool, S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((c1 : ((S) -> Bool, S) -> Bool), (c2 : ((S) -> Bool, S) -> Bool)) == o(c1, c2)
       #|  (If : ((S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | if e(s) { c(q, s) } else { q(s) }}
       #|  (Ite : ((S) -> Bool, ((S) -> Bool, S) -> Bool, ((S) -> Bool, S) -> Bool, (S) -> Bool, S) -> Bool)((e : (S) -> Bool), (c1 : ((S) -> Bool, S) -> Bool), (c2 : ((S) -> Bool, S) -> Bool), (q : (S) -> Bool)) == {(s : S) | if e(s) { c1(q, s) } else { c2(q, s) }}
       #|  forall q s. If e (c ;; while e c) q s ==> while e c q s
@@ -12800,16 +12800,16 @@ test "Tutorial/Semantics_of_programming_languages_shallow matches Tutorial/Seman
       #|  monotonic(Assign((f : (_) -> _)))
       #|  monotonic((c : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(If((e : (_) -> Bool), c))
       #|  monotonic((c1 : ((_) -> Bool, _) -> Bool)) && monotonic((c2 : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(Ite((e : (_) -> Bool), c1, c2))
-      #|  monotonic c1 /\\ monotonic c2 ==> monotonic (c1 ;; c2)
+      #|  monotonic((c1 : ((_) -> Bool, _) -> Bool)) && monotonic((c2 : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(op_semi_semi(c1, c2))
       #|  monotonic((c : ((_) -> Bool, _) -> Bool)) \226\134\146 monotonic(While((e : (_) -> Bool), c))
       #|  \226\136\128 s : S, (if (e : (S) -> Bool)(s) { (c : ((S) -> Bool, S) -> Bool)((w : (S) -> Bool), s) } else { (q : (S) -> Bool)(s) }) \226\134\146 w(s)
-      #|  forall e c q:S->bool.\n    monotonic c\n    ==> (forall s. If e (c ;; While e c) q s ==> While e c q s) /\\\n        (forall w'. (forall s. If e (c ;; (\\q. w')) q s ==> w' s)\n              ==> (forall a. While e c q a ==> w' a)) /\\\n        (forall s. While e c q s <=> If e (c ;; While e c) q s)
-      #|  forall e c. monotonic c ==> (While e c = If e (c ;; While e c))
+      #|  \226\136\128 e : (S) -> Bool, \226\136\128 c : ((S) -> Bool, S) -> Bool, \226\136\128 q : (S) -> Bool, monotonic(c) \226\134\146 (\226\136\128 s : S, If(e, op_semi_semi(c, While(e, c)), q, s) \226\134\146 While(e, c, q, s)) && (\226\136\128 w' : (S) -> Bool, (\226\136\128 s : S, If(e, op_semi_semi(c, (q : (S) -> Bool) => w'), q, s) \226\134\146 w'(s)) \226\134\146 (\226\136\128 a : S, While(e, c, q, a) \226\134\146 w'(a))) && (\226\136\128 s : S, While(e, c, q, s) == If(e, op_semi_semi(c, While(e, c)), q, s))
+      #|  \226\136\128 e : (_) -> Bool, \226\136\128 c : ((_) -> Bool, _) -> Bool, monotonic(c) \226\134\146 While(e, c) == If(e, op_semi_semi(c, While(e, c)))
       #|  (correct : ((_) -> Bool, (_, _) -> Bool, _) -> Bool)((p : (_) -> Bool), (c : (_, _) -> Bool), (q : _)) == SUBSET(p, c(q))
       #|  \226\136\128 p : (_) -> Bool, \226\136\128 p' : (_) -> Bool, \226\136\128 c : (_, _) -> Bool, \226\136\128 q : _, SUBSET(p, p') && correct(p', c, q) \226\134\146 correct(p, c, q)
       #|  \226\136\128 p : (_) -> Bool, \226\136\128 c : ((_) -> Bool, _) -> Bool, \226\136\128 q : (_) -> Bool, \226\136\128 q' : (_) -> Bool, monotonic(c) && correct(p, c, q') && SUBSET(q', q) \226\134\146 correct(p, c, q)
       #|  \226\136\128 p : (_) -> Bool, \226\136\128 f : (_) -> _, \226\136\128 q : (_) -> Bool, SUBSET(p, o(q, f)) \226\134\146 correct(p, Assign(f), q)
-      #|  forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; c2) q
+      #|  \226\136\128 p : (_) -> Bool, \226\136\128 q : (_) -> Bool, \226\136\128 r : (_) -> Bool, \226\136\128 c1 : ((_) -> Bool, _) -> Bool, \226\136\128 c2 : ((_) -> Bool, _) -> Bool, monotonic(c1) && correct(p, c1, r) && correct(r, c2, q) \226\134\146 correct(p, op_semi_semi(c1, c2), q)
       #|  \226\136\128 p : (_) -> Bool, \226\136\128 e : (_) -> Bool, \226\136\128 c1 : ((_) -> Bool, _) -> Bool, \226\136\128 c2 : ((_) -> Bool, _) -> Bool, \226\136\128 q : (_) -> Bool, correct(INTER(p, e), c1, q) && correct(INTER(p, DIFF(UNIV, e)), c2, q) \226\134\146 correct(p, Ite(e, c1, c2), q)
       #|  \226\136\128 p : (_) -> Bool, \226\136\128 e : (_) -> Bool, \226\136\128 c : ((_) -> Bool, _) -> Bool, \226\136\128 q : (_) -> Bool, correct(INTER(p, e), c, q) && SUBSET(INTER(p, DIFF(UNIV, e)), q) \226\134\146 correct(p, If(e, c), q)
       #|  (s : S)
@@ -12819,11 +12819,11 @@ test "Tutorial/Semantics_of_programming_languages_shallow matches Tutorial/Seman
       #|  forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q
       #|  assert (p:S->bool) (q:S->bool) = q
       #|  (variant : ((S, S) -> Bool, (S) -> Bool, S) -> Bool)((op_lt_lt : (S, S) -> Bool), (q : (S) -> Bool)) == q
-      #|  forall p q r c1 c2.\n        monotonic c1 /\\ correct p c1 r /\\ correct r c2 q\n        ==> correct p (c1 ;; assert r ;; c2) q
+      #|  \226\136\128 p : (_) -> Bool, \226\136\128 q : (_) -> Bool, \226\136\128 r : (_) -> Bool, \226\136\128 c1 : ((_) -> Bool, _) -> Bool, \226\136\128 c2 : ((_) -> Bool, _) -> Bool, monotonic(c1) && correct(p, c1, r) && correct(r, c2, q) \226\134\146 correct(p, op_semi_semi(c1, op_semi_semi(op_assert(r), c2)), q)
       #|  forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q
       #|  monotonic(op_assert((p : (_) -> Bool)))
       #|  monotonic(variant((p : (_, _) -> Bool)))
-      #|  correct\n    (\\(m,n,x,y). T)\n    (Assign (\\(m,n,x,y). m,n,m,n) ;;         // x,y := m,n\n     assert (\\(m,n,x,y). x = m /\\ y = n) ;;\n     While (\\(m,n,x,y). ~(x = 0 \\/ y = 0))\n      (assert (\\(m,n,x,y). gcd(x,y) = gcd(m,n)) ;;\n       variant(MEASURE(\\(m,n,x,y). x + y)) ;;\n       Ite (\\(m,n,x,y). x < y)\n           (Assign (\\(m,n,x,y). m,n,x,y - x))\n           (Assign (\\(m,n,x,y). m,n,x - y,y))) ;;\n     assert (\\(m,n,x,y). (x = 0 \\/ y = 0) /\\ gcd(x,y) = gcd(m,n)) ;;\n     If (\\(m,n,x,y). x = 0) (Assign (\\(m,n,x,y). (m,n,y,y))))\n  (\\(m,n,x,y). gcd(m,n) = x)
+      #|  correct(fn { (m, n, x, y) => true }, op_semi_semi(Assign(fn { (m, n, x, y) => (m, n, m, n) }), op_semi_semi(op_assert(fn { (m, n, x, y) => x == m && y == n }), op_semi_semi(While(fn { (m, n, x, y) => !(x == 0 || y == 0) }, op_semi_semi(op_assert(fn { (m, n, x, y) => gcd((x, y)) == gcd((m, n)) }), op_semi_semi(variant(MEASURE(fn { (m, n, x, y) => x + y })), Ite(fn { (m, n, x, y) => x < y }, Assign(fn { (m, n, x, y) => (m, n, x, y - x) }), Assign(fn { (m, n, x, y) => (m, n, x - y, y) }))))), op_semi_semi(op_assert(fn { (m, n, x, y) => (x == 0 || y == 0) && gcd((x, y)) == gcd((m, n)) }), If(fn { (m, n, x, y) => x == 0 }, Assign(fn { (m, n, x, y) => (m, n, y, y) })))))), fn { (m, n, x, y) => gcd((m, n)) == x })
       #|  (y : Num)
       #|  (x : Num)
       #|  (n : Num)

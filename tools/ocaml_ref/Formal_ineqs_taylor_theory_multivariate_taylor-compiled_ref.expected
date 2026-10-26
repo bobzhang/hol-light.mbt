@@ -397,9 +397,9 @@ Warning: inventing type variables
 Warning: inventing type variables
 Formal_ineqs/taylor/theory/multivariate_taylor-compiled quotations (789):
   :real^N
-  forall f s a. (forall x. f(x) = f(a) ==> x = a)\n            ==> (IMAGE f (s DELETE a) = (IMAGE f s) DELETE (f a))
-  partial i f x = derivative (f o (\\t. (x:real^N) + t % basis i)) (&0)
-  (all_n n [] s <=> T) /\\ (all_n n (CONS h t) s <=> s n h /\\ all_n (SUC n) t s)
+  \226\136\128 f : (_) -> _, \226\136\128 s : (_) -> Bool, \226\136\128 a : _, (\226\136\128 x : _, f(x) == f(a) \226\134\146 x == a) \226\134\146 IMAGE(f, DELETE(s, a)) == DELETE(IMAGE(f, s), f(a))
+  (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)((i : Num), (f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) == derivative(o(f, (t : Real) => x + op_pct(t, basis(i))), real_of_num(0))
+  (all_n : (Num, List[_], (Num, _) -> Bool) -> Bool)((n : Num), NIL, (s : (Num, _) -> Bool)) == true && all_n(n, CONS((h : _), (t : List[_])), s) == (s(n, h) && all_n(SUC(n), t, s))
   :P
   :P
   \\n. n + 1
@@ -445,185 +445,185 @@ Formal_ineqs/taylor/theory/multivariate_taylor-compiled quotations (789):
   (+):num->num->num
   \\n. n + 1
   \\n. n + 1
-  m_lin_approx (f:real^N->real) x f_bounds df_bounds_list <=> \n\t(lift o f) differentiable at x /\\\n\tinterval_arith (f x) f_bounds /\\\n\tall_n 1 df_bounds_list (\\i int. interval_arith (partial i f x) int)
-  lift o (\\x. --f x) = (\\x. --(lift o f) x)
-  lift o (\\x. c * f x) = (\\x. c % (lift o f) x)
-  lift o (\\x. f x + g x) = (\\x. (lift o f) x + (lift o g) x)
-  lift o (\\x. f x - g x) = (\\x. (lift o f) x - (lift o g) x)
-  (\\t. op (f t) (g t)) o drop = (\\x. op (f (drop x)) (g (drop x)))
-  (\\t. op (f t)) o drop = (\\x. op (f (drop x)))
+  (m_lin_approx : ((Cart[Real, N]) -> Real, Cart[Real, N], (Real, Real), List[(Real, Real)]) -> Bool)((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]), (f_bounds : (Real, Real)), (df_bounds_list : List[(Real, Real)])) == (differentiable(o(lift, f), at(x)) && interval_arith(f(x), f_bounds) && all_n(1, df_bounds_list, (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x), int)))
+  o(lift, (x : _) => -(f : (_) -> Real)(x)) == ((x : _) => -o(lift, f, x))
+  o(lift, (x : _) => (c : Real) * (f : (_) -> Real)(x)) == ((x : _) => op_pct(c, o(lift, f, x)))
+  o(lift, (x : _) => (f : (_) -> Real)(x) + (g : (_) -> Real)(x)) == ((x : _) => o(lift, f, x) + o(lift, g, x))
+  o(lift, (x : _) => (f : (_) -> Real)(x) - (g : (_) -> Real)(x)) == ((x : _) => o(lift, f, x) - o(lift, g, x))
+  o((t : Real) => (op : (_, _) -> _)((f : (Real) -> _)(t), (g : (Real) -> _)(t)), drop) == ((x : Cart[Real, Unit]) => op(f(drop(x)), g(drop(x))))
+  o((t : Real) => (op : (_) -> _)((f : (Real) -> _)(t)), drop) == ((x : Cart[Real, Unit]) => op(f(drop(x))))
   :real^N -> real^M
   :real^N -> real^M
   :real^N
   :real^N
-  f differentiable at (g x) ==>\n\tg differentiable at x ==>\n\tfrechet_derivative (f o g) (at x) = frechet_derivative f (at (g x)) o frechet_derivative g (at x)
-  frechet_derivative (\\x. y) (at z) = (\\x. vec 0)
-  frechet_derivative (\\x. x) (at y) = (\\x. x)
-  frechet_derivative (\\x. drop x % y) (at z) = (\\x. drop x % y)
-  f differentiable at x
-  frechet_derivative (\\x. --f x) (at x) = (\\y. --frechet_derivative f (at x) y)
-  frechet_derivative (\\x. c % f x) (at x) = (\\y. c % frechet_derivative f (at x) y)
-  g differentiable at x
-  frechet_derivative (\\x. f x + g x) (at x) = \n\t(\\y. frechet_derivative f (at x) y + frechet_derivative g (at x) y)
-  frechet_derivative (\\x. f x - g x) (at x) = \n\t(\\y. frechet_derivative f (at x) y - frechet_derivative g (at x) y)
-  f differentiable at (g x) ==>\n\tg differentiable at x ==>\n\t(f o g) differentiable at x
-  f differentiable at (g x) ==>\n\tg differentiable at x ==>\n\tjacobian (f o g) (at x) = jacobian f (at (g x)) ** jacobian g (at x)
-  f differentiable at x ==>\n\tfrechet_derivative f (at x) = (\\h. jacobian f (at x) ** h)
-  &0 < w /\\ w <= x /\\ &0 <= y /\\ y < z ==> w * y < x * z
-  w = x
-  infnorm p = abs (p$1) \\/ infnorm p = abs (p$2)
-  &0 < infnorm p
-  inv (infnorm p) * infnorm p * e
-  x - y:real^2
-  (x:real^2)$1 * x$2 - ((y:real^2)$1 * y$2 + y$2 * (x$1 - y$1) + y$1 * (x$2 - y$2)) =\n\t\t(x$2 - y$2) * (x$1 - y$1)
-  (lift o (\\x:real^2. x$1 * x$2) has_derivative lift o (\\x. y$2 * x$1 + y$1 * x$2)) (at y)
-  forall a b. a = b + a * &1 <=> b = &0
-  DISJOINT B {i} /\\ A = B UNION {i}
-  A DIFF {i}
+  differentiable((f : (Cart[Real, _]) -> Cart[Real, _]), at((g : (Cart[Real, _]) -> Cart[Real, _])((x : Cart[Real, _])))) \226\134\146 differentiable(g, at(x)) \226\134\146 frechet_derivative(o(f, g), at(x)) == o(frechet_derivative(f, at(g(x))), frechet_derivative(g, at(x)))
+  frechet_derivative((x : Cart[Real, _]) => (y : Cart[Real, _]), at((z : Cart[Real, _]))) == ((x : Cart[Real, _]) => vec(0))
+  frechet_derivative((x : Cart[Real, _]) => x, at((y : Cart[Real, _]))) == ((x : Cart[Real, _]) => x)
+  frechet_derivative((x : Cart[Real, Unit]) => op_pct(drop(x), (y : Cart[Real, _])), at((z : Cart[Real, Unit]))) == ((x : Cart[Real, Unit]) => op_pct(drop(x), y))
+  differentiable((f : (Cart[Real, _]) -> Cart[Real, _]), at((x : Cart[Real, _])))
+  frechet_derivative((x : Cart[Real, _]) => vector_neg((f : (Cart[Real, _]) -> Cart[Real, _])(x)), at((x : Cart[Real, _]))) == ((y : Cart[Real, _]) => vector_neg(frechet_derivative(f, at(x), y)))
+  frechet_derivative((x : Cart[Real, _]) => op_pct((c : Real), (f : (Cart[Real, _]) -> Cart[Real, _])(x)), at((x : Cart[Real, _]))) == ((y : Cart[Real, _]) => op_pct(c, frechet_derivative(f, at(x), y)))
+  differentiable((g : (Cart[Real, _]) -> Cart[Real, _]), at((x : Cart[Real, _])))
+  frechet_derivative((x : Cart[Real, _]) => vector_add((f : (Cart[Real, _]) -> Cart[Real, _])(x), (g : (Cart[Real, _]) -> Cart[Real, _])(x)), at((x : Cart[Real, _]))) == ((y : Cart[Real, _]) => vector_add(frechet_derivative(f, at(x), y), frechet_derivative(g, at(x), y)))
+  frechet_derivative((x : Cart[Real, _]) => vector_sub((f : (Cart[Real, _]) -> Cart[Real, _])(x), (g : (Cart[Real, _]) -> Cart[Real, _])(x)), at((x : Cart[Real, _]))) == ((y : Cart[Real, _]) => vector_sub(frechet_derivative(f, at(x), y), frechet_derivative(g, at(x), y)))
+  differentiable((f : (Cart[Real, _]) -> Cart[Real, _]), at((g : (Cart[Real, _]) -> Cart[Real, _])((x : Cart[Real, _])))) \226\134\146 differentiable(g, at(x)) \226\134\146 differentiable(o(f, g), at(x))
+  differentiable((f : (Cart[Real, _]) -> Cart[Real, _]), at((g : (Cart[Real, _]) -> Cart[Real, _])((x : Cart[Real, _])))) \226\134\146 differentiable(g, at(x)) \226\134\146 jacobian(o(f, g), at(x)) == matrix_mul(jacobian(f, at(g(x))), jacobian(g, at(x)))
+  differentiable((f : (Cart[Real, _]) -> Cart[Real, _]), at((x : Cart[Real, _]))) \226\134\146 frechet_derivative(f, at(x)) == ((h : Cart[Real, _]) => matrix_vector_mul(jacobian(f, at(x)), h))
+  real_of_num(0) < (w : Real) && w <= (x : Real) && real_of_num(0) <= (y : Real) && y < (z : Real) \226\134\146 w * y < x * z
+  (w : _) == (x : _)
+  infnorm((p : Cart[Real, _])) == abs(op_dollar(p, 1)) || infnorm(p) == abs(op_dollar(p, 2))
+  real_of_num(0) < infnorm((p : Cart[Real, _]))
+  inv(infnorm((p : Cart[Real, _]))) * (infnorm(p) * (e : Real))
+  (x : Cart[Real, Tybit0[Unit]]) - (y : Cart[Real, Tybit0[Unit]])
+  op_dollar((x : Cart[Real, Tybit0[Unit]]), 1) * op_dollar(x, 2) - (op_dollar((y : Cart[Real, Tybit0[Unit]]), 1) * op_dollar(y, 2) + (op_dollar(y, 2) * (op_dollar(x, 1) - op_dollar(y, 1)) + op_dollar(y, 1) * (op_dollar(x, 2) - op_dollar(y, 2)))) == (op_dollar(x, 2) - op_dollar(y, 2)) * (op_dollar(x, 1) - op_dollar(y, 1))
+  has_derivative(o(lift, (x : Cart[Real, Tybit0[Unit]]) => op_dollar(x, 1) * op_dollar(x, 2)), o(lift, (x : Cart[Real, Tybit0[Unit]]) => op_dollar((y : Cart[Real, Tybit0[Unit]]), 2) * op_dollar(x, 1) + op_dollar(y, 1) * op_dollar(x, 2)), at(y))
+  \226\136\128 a : Real, \226\136\128 b : Real, (a == b + a * real_of_num(1)) == (b == real_of_num(0))
+  DISJOINT((B : (_) -> Bool), {(i : _)}) && (A : (_) -> Bool) == UNION(B, {i})
+  DIFF((A : (_) -> Bool), {(i : _)})
   1.. _
-  (\\x:A. lambda i. f i x) =  \n\t(\\x. vsum (1..dimindex (:N)) (\\i. f i x % (basis i:real^N)))
+  ((x : A) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (f : (Num, A) -> Real)(i, x))) == ((x : A) => (vsum : ((Num) -> Bool, (Num) -> Cart[Real, N]) -> Cart[Real, N])(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(f(i, x), (basis : (Num) -> Cart[Real, N])(i))))
   ~P <=> (P <=> F)
-  x = i
+  (x : _) == (i : _)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  forall f. (\\x:real^N. f i x % (basis i:real^M)) = (\\x. drop ((lift o f i) x) % basis i)
-  (forall i. i IN 1..dimindex (:M) ==> (lift o (f i) has_derivative lift o (f' i)) (at (y:real^N))) ==>\n\t(((\\x. lambda i. f i x):real^N->real^M) has_derivative (\\x. lambda i. f' i x) ) (at y)
-  1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2
-  (vector [x; y]:real^2) = (lambda i. if i = 1 then x else y)
-  ~(2 = 1)
-  1 <= i /\\ i <= 2 <=> i = 1 \\/ i = 2
-  (lift o f has_derivative lift o f') (at y) ==>\n\t(lift o g has_derivative lift o g') (at y) ==>\n\t((\\x. vector [f x; g x]:real^2) has_derivative (\\x. vector [f' x; g' x]:real^2)) (at y)
+  \226\136\128 f : (Num, Cart[Real, N]) -> Real, ((x : Cart[Real, N]) => (op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(f((i : Num), x), (basis : (Num) -> Cart[Real, M])(i))) == ((x : Cart[Real, N]) => (op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(drop(o(lift, f(i), x)), (basis : (Num) -> Cart[Real, M])(i)))
+  (\226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) \226\134\146 has_derivative(o(lift, (f : (Num, Cart[Real, N]) -> Real)(i)), o(lift, (f' : (Num, Cart[Real, N]) -> Real)(i)), at((y : Cart[Real, N])))) \226\134\146 (has_derivative : ((Cart[Real, N]) -> Cart[Real, M], (Cart[Real, N]) -> Cart[Real, M], Net[Cart[Real, N]]) -> Bool)((x : Cart[Real, N]) => (lambda : ((Num) -> Real) -> Cart[Real, M])((i : Num) => f(i, x)), (x : Cart[Real, N]) => (lambda : ((Num) -> Real) -> Cart[Real, M])((i : Num) => f'(i, x)), at(y))
+  (1 <= (i : Num) && i <= 2) == (i == 1 || i == 2)
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(x : Real), (y : Real)]) == (lambda : ((Num) -> Real) -> Cart[Real, Tybit0[Unit]])((i : Num) => if i == 1 { x } else { y })
+  !(2 == 1)
+  (1 <= (i : Num) && i <= 2) == (i == 1 || i == 2)
+  (has_derivative : ((Cart[Real, _]) -> Cart[Real, Unit], (Cart[Real, _]) -> Cart[Real, Unit], Net[Cart[Real, _]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (f : (Cart[Real, _]) -> Real)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (f' : (Cart[Real, _]) -> Real)), (at : (Cart[Real, _]) -> Net[Cart[Real, _]])((y : Cart[Real, _]))) \226\134\146 (has_derivative : ((Cart[Real, _]) -> Cart[Real, Unit], (Cart[Real, _]) -> Cart[Real, Unit], Net[Cart[Real, _]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (g : (Cart[Real, _]) -> Real)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (g' : (Cart[Real, _]) -> Real)), (at : (Cart[Real, _]) -> Net[Cart[Real, _]])(y)) \226\134\146 (has_derivative : ((Cart[Real, _]) -> Cart[Real, Tybit0[Unit]], (Cart[Real, _]) -> Cart[Real, Tybit0[Unit]], Net[Cart[Real, _]]) -> Bool)((x : Cart[Real, _]) => (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([f(x), g(x)]), (x : Cart[Real, _]) => (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([f'(x), g'(x)]), (at : (Cart[Real, _]) -> Net[Cart[Real, _]])(y))
   ~P <=> (P <=> F)
-  lift o (\\x. f' x * g y + f y * g' x) = \n\t(lift o (\\x:real^2. q$2 * x$1 + q$1 * x$2)) o (\\x. vector [f' x; g' x])
-  vector [f y; g y]:real^2
-  lift o (\\x. f x * g x) = (lift o (\\p. p$1 * p$2)) o (\\x. vector [f x; g x]:real^2)
-  (lift o f has_derivative lift o f') (at y) ==>\n\t(lift o g has_derivative lift o g') (at y) ==>\n\t(lift o (\\x. f x * g x) has_derivative lift o (\\x. f' x * g y + f y * g' x)) (at y)
-  f = lift o (drop o f)
-  lift o f differentiable (at y) ==>\n\tlift o g differentiable (at y) ==>\n\tlift o (\\x. f x * g x) differentiable (at y)
-  frechet_derivative _1 _2
-  frechet_derivative _1 _2
-  lift o f differentiable at y ==>\n\tlift o g differentiable at y ==>\n\tfrechet_derivative (lift o (\\x. f x * g x)) (at y) =\n\t\t(\\x. g y % frechet_derivative (lift o f) (at y) x + \n\t\t     f y % frechet_derivative (lift o g) (at y) x)
-  x = drop x % lift (&1)
-  linear f' /\\ linear h'
-  (\\x. (drop o (f' o h') o lift) (&1) % x) = f' o h'
-  lift o (f o h) o drop = (lift o f) o (h o drop)
-  frechet_derivative _1 _2
-  frechet_derivative _1 _2
-  (lift o f) differentiable at (h t) ==>\n\t(h o drop) differentiable at (lift t) ==>\n\t((f o h) has_real_derivative (drop o (frechet_derivative (lift o f) (at (h t)) o \n\t\t\tfrechet_derivative (h o drop) (at (lift t))) o lift) (&1)) (atreal t)
-  (lift o f) differentiable at (h t) ==>\n\t(h o drop) differentiable at (lift t) ==>\n\t((f o h) has_real_derivative (jacobian (lift o f) (at (h t)) ** \n\t\t\t\tjacobian (h o drop) (at (lift t)))$1$1) (atreal t)
+  o(lift, (x : _) => (f' : (_) -> Real)(x) * (g : (_) -> Real)((y : _)) + (f : (_) -> Real)(y) * (g' : (_) -> Real)(x)) == o(o(lift, (x : Cart[Real, Tybit0[Unit]]) => op_dollar((q : Cart[Real, _]), 2) * op_dollar(x, 1) + op_dollar(q, 1) * op_dollar(x, 2)), (x : _) => vector([f'(x), g'(x)]))
+  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(f : (_) -> Real)((y : _)), (g : (_) -> Real)(y)])
+  o(lift, (x : _) => (f : (_) -> Real)(x) * (g : (_) -> Real)(x)) == o(o(lift, (p : Cart[Real, Tybit0[Unit]]) => op_dollar(p, 1) * op_dollar(p, 2)), (x : _) => vector([f(x), g(x)]))
+  has_derivative(o(lift, (f : (Cart[Real, _]) -> Real)), o(lift, (f' : (Cart[Real, _]) -> Real)), at((y : Cart[Real, _]))) \226\134\146 has_derivative(o(lift, (g : (Cart[Real, _]) -> Real)), o(lift, (g' : (Cart[Real, _]) -> Real)), at(y)) \226\134\146 has_derivative(o(lift, (x : Cart[Real, _]) => f(x) * g(x)), o(lift, (x : Cart[Real, _]) => f'(x) * g(y) + f(y) * g'(x)), at(y))
+  (f : (_) -> Cart[Real, Unit]) == o(lift, o(drop, f))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((y : Cart[Real, _]))) \226\134\146 differentiable(o(lift, (g : (Cart[Real, _]) -> Real)), at(y)) \226\134\146 differentiable(o(lift, (x : Cart[Real, _]) => f(x) * g(x)), at(y))
+  frechet_derivative((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]]))
+  frechet_derivative((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]]))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((y : Cart[Real, _]))) \226\134\146 differentiable(o(lift, (g : (Cart[Real, _]) -> Real)), at(y)) \226\134\146 frechet_derivative(o(lift, (x : Cart[Real, _]) => f(x) * g(x)), at(y)) == ((x : Cart[Real, _]) => op_pct(g(y), frechet_derivative(o(lift, f), at(y), x)) + op_pct(f(y), frechet_derivative(o(lift, g), at(y), x)))
+  (x : Cart[Real, Unit]) == op_pct(drop(x), lift(real_of_num(1)))
+  linear((f' : (Cart[Real, _]) -> Cart[Real, _])) && linear((h' : (Cart[Real, _]) -> Cart[Real, _]))
+  ((x : Cart[Real, Unit]) => op_pct(o(drop, o(o((f' : (_) -> Cart[Real, Unit]), (h' : (Cart[Real, Unit]) -> _)), lift), real_of_num(1)), x)) == o(f', h')
+  o(lift, o(o((f : (_) -> Real), (h : (Real) -> _)), drop)) == o(o(lift, f), o(h, drop))
+  frechet_derivative((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]]))
+  frechet_derivative((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]]))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((h : (Real) -> Cart[Real, _])((t : Real)))) \226\134\146 differentiable(o(h, drop), at(lift(t))) \226\134\146 has_real_derivative(o(f, h), o(drop, o(o(frechet_derivative(o(lift, f), at(h(t))), frechet_derivative(o(h, drop), at(lift(t)))), lift), real_of_num(1)), atreal(t))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((h : (Real) -> Cart[Real, _])((t : Real)))) \226\134\146 differentiable(o(h, drop), at(lift(t))) \226\134\146 has_real_derivative(o(f, h), op_dollar(op_dollar(matrix_mul(jacobian(o(lift, f), at(h(t))), jacobian(o(h, drop), at(lift(t)))), 1), 1), atreal(t))
   (drop o _ o lift) (&1)
-  (lift o f) differentiable at (h t) ==> \n\t(h o drop) differentiable at (lift t) ==>\n\t(f o h) real_differentiable atreal t
-  \\x. drop x % e
-  (\\t. y + t % e) o drop = (\\x. y + drop x % e)
-  ((\\t. y + t % e) o drop) differentiable net
-  \\x. drop x % e
-  frechet_derivative ((\\t. y + t % e) o drop) (at (lift t)) = (\\x. drop x % e)
-  (lift o f) differentiable at (y + t % e) ==>\n\t((f o (\\t. y + t % e)) has_real_derivative \n\t\t(drop (frechet_derivative (lift o f) (at (y + t % e)) e))) (atreal t)
-  \\t. y + t % e
-  (lift o f) differentiable at (y + t % e) ==>\n\t((f o (\\t. y + t % e)) has_real_derivative \n\t\tdrop (jacobian (lift o f) (at (y + t % e)) ** e)) (atreal t)
-  (lift o f) differentiable at (y:real^N) ==>\n\tpartial i f y = drop (frechet_derivative (lift o f) (at y) (basis i))
-  basis i:real^N
-  &0
-  (lift o f) differentiable at y ==>\n\tpartial i f y = drop (jacobian (lift o f) (at y) ** basis i)
-  (lift o (f:real^N->real)) differentiable at y ==>\n\ti IN 1..dimindex (:N) ==>\n\tpartial i f y = drop (column i (jacobian (lift o f) (at y)))
-  (lift o (f:real^N->real)) differentiable at y ==>\n\ti IN 1..dimindex (:N) ==>\n\tpartial i f y = (jacobian (lift o f) (at y))$1$i
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((h : (Real) -> Cart[Real, _])((t : Real)))) \226\134\146 differentiable(o(h, drop), at(lift(t))) \226\134\146 real_differentiable(o(f, h), atreal(t))
+  (x : Cart[Real, Unit]) => op_pct(drop(x), (e : Cart[Real, _]))
+  o((t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, (e : Cart[Real, _]))), drop) == ((x : Cart[Real, Unit]) => vector_add(y, op_pct(drop(x), e)))
+  differentiable(o((t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, (e : Cart[Real, _]))), drop), (net : Net[Cart[Real, Unit]]))
+  (x : Cart[Real, Unit]) => op_pct(drop(x), (e : Cart[Real, _]))
+  frechet_derivative(o((t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, (e : Cart[Real, _]))), drop), at(lift((t : Real)))) == ((x : Cart[Real, Unit]) => op_pct(drop(x), e))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(vector_add((y : Cart[Real, _]), op_pct((t : Real), (e : Cart[Real, _]))))) \226\134\146 has_real_derivative(o(f, (t : Real) => vector_add(y, op_pct(t, e))), drop(frechet_derivative(o(lift, f), at(vector_add(y, op_pct(t, e))), e)), atreal(t))
+  (t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, (e : Cart[Real, _])))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(vector_add((y : Cart[Real, _]), op_pct((t : Real), (e : Cart[Real, _]))))) \226\134\146 has_real_derivative(o(f, (t : Real) => vector_add(y, op_pct(t, e))), drop(matrix_vector_mul(jacobian(o(lift, f), at(vector_add(y, op_pct(t, e)))), e)), atreal(t))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((y : Cart[Real, N]))) \226\134\146 partial((i : Num), f, y) == drop(frechet_derivative(o(lift, f), at(y), basis(i)))
+  (basis : (Num) -> Cart[Real, N])((i : Num))
+  real_of_num(0)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((y : Cart[Real, _]))) \226\134\146 partial((i : Num), f, y) == drop(matrix_vector_mul(jacobian(o(lift, f), at(y)), basis(i)))
+  (differentiable : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (f : (Cart[Real, N]) -> Real)), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])((y : Cart[Real, N]))) \226\134\146 (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, y) == drop((column : (Num, Cart[Cart[Real, N], Unit]) -> Cart[Real, Unit])(i, (jacobian : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Cart[Cart[Real, N], Unit])((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, f), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])(y))))
+  (differentiable : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (f : (Cart[Real, N]) -> Real)), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])((y : Cart[Real, N]))) \226\134\146 (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, y) == (op_dollar : (Cart[Real, N], Num) -> Real)((op_dollar : (Cart[Cart[Real, N], Unit], Num) -> Cart[Real, N])((jacobian : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Cart[Cart[Real, N], Unit])((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, f), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])(y)), 1), i)
   :real^N
   :num
-  derivative (f o (\\t. y)) = derivative (\\t. f y)
-  basis i = (vec 0):real^N
-  ~(i IN 1..dimindex (:N)) ==>\n\tpartial i f y = &0
-  f o g = \\x. f (g x)
-  f real_differentiable atreal (g x) ==>\n\tg real_differentiable atreal x ==>\n\tderivative (f o g) x = derivative f (g x) * derivative g x
-  lift o (\\x:real^N. x$i) = (\\x. x$i % vec 1)
-  i IN 1..dimindex (:N) ==>\n\t(lift o (\\x:real^N. x$i) has_derivative lift o (\\x. x$i)) net
-  lift o \\x:real^N. x$i
-  i IN 1..dimindex (:N) ==>\n\t(lift o (\\x:real^N. x$i)) differentiable net
-  i IN 1..dimindex (:N) ==>\n\tfrechet_derivative (lift o (\\x:real^N. x$i)) (at x)  = lift o (\\x:real^N. x$i)
-  lhs = rhs
-  (frechet_derivative _1 _2 _3)$i
+  derivative(o((f : (_) -> Real), (t : Real) => (y : _))) == derivative((t : Real) => f(y))
+  (basis : (Num) -> Cart[Real, N])((i : Num)) == (vec : (Num) -> Cart[Real, N])(0)
+  !IN((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 partial(i, (f : (Cart[Real, _]) -> Real), (y : Cart[Real, _])) == real_of_num(0)
+  o((f : (_) -> _), (g : (_) -> _)) == ((x : _) => f(g(x)))
+  real_differentiable((f : (Real) -> Real), atreal((g : (Real) -> Real)((x : Real)))) \226\134\146 real_differentiable(g, atreal(x)) \226\134\146 derivative(o(f, g), x) == derivative(f, g(x)) * derivative(g, x)
+  o(lift, (x : Cart[Real, N]) => op_dollar(x, (i : Num))) == ((x : Cart[Real, N]) => op_pct(op_dollar(x, i), vec(1)))
+  (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (has_derivative : ((Cart[Real, N]) -> Cart[Real, Unit], (Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)), (net : Net[Cart[Real, N]]))
+  o(lift, (x : Cart[Real, N]) => op_dollar(x, (i : Num)))
+  (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (differentiable : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)), (net : Net[Cart[Real, N]]))
+  (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (frechet_derivative : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]], Cart[Real, N]) -> Cart[Real, Unit])((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i)), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])((x : Cart[Real, N]))) == (o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, i))
+  (lhs : _) == (rhs : _)
+  op_dollar(frechet_derivative((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]]), (_3 : Cart[Real, _])), (i : Num))
   (drop o _ o lift) (&1)
-  (\\s. h s$i) = (\\x. x$i) o h
-  i IN 1..dimindex (:N) ==>\n\t(h o drop) differentiable at (lift t) ==>\n\t((\\s. (h:real->real^N) s$i) has_real_derivative\n\t\t(frechet_derivative (h o drop) (at (lift t)) (lift (&1)))$i) (atreal t)
-  \\x:real^N. x$i
-  lift (&1) = basis 1
-  lhs = rhs
-  jacobian _1 _2$i$1
-  (frechet_derivative _1 _2 _3)$i
-  i IN 1..dimindex (:N) ==>\n\t(h o drop) differentiable at (lift t) ==>\n\t((\\s. (h:real->real^N) s$i) has_real_derivative (jacobian (h o drop) (at (lift t)))$i$1) (atreal t)
-  i IN 1..dimindex (:N) ==>\n\t((h:real->real^N) o drop) differentiable at (lift t) ==>\n\tderivative (\\s. h s$i) t = jacobian (h o drop) (at (lift t))$i$1
-  lhs = rhs
+  ((s : _) => op_dollar((h : (_) -> Cart[_, _])(s), (i : Num))) == o((x : Cart[_, _]) => op_dollar(x, i), h)
+  (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (differentiable : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])((h : (Real) -> Cart[Real, N]), drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift((t : Real)))) \226\134\146 has_real_derivative((s : Real) => (op_dollar : (Cart[Real, N], Num) -> Real)(h(s), i), (op_dollar : (Cart[Real, N], Num) -> Real)((frechet_derivative : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]], Cart[Real, Unit]) -> Cart[Real, N])((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])(h, drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift(t)), lift(real_of_num(1))), i), atreal(t))
+  (x : Cart[Real, N]) => op_dollar(x, (i : Num))
+  lift(real_of_num(1)) == basis(1)
+  (lhs : _) == (rhs : _)
+  op_dollar(op_dollar(jacobian((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]])), (i : Num)), 1)
+  op_dollar(frechet_derivative((_1 : (Cart[Real, _]) -> Cart[Real, _]), (_2 : Net[Cart[Real, _]]), (_3 : Cart[Real, _])), (i : Num))
+  (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (differentiable : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])((h : (Real) -> Cart[Real, N]), drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift((t : Real)))) \226\134\146 has_real_derivative((s : Real) => (op_dollar : (Cart[Real, N], Num) -> Real)(h(s), i), (op_dollar : (Cart[Real, Unit], Num) -> Real)((op_dollar : (Cart[Cart[Real, Unit], N], Num) -> Cart[Real, Unit])((jacobian : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Cart[Cart[Real, Unit], N])((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])(h, drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift(t))), i), 1), atreal(t))
+  (IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (differentiable : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])((h : (Real) -> Cart[Real, N]), drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift((t : Real)))) \226\134\146 derivative((s : Real) => (op_dollar : (Cart[Real, N], Num) -> Real)(h(s), i), t) == (op_dollar : (Cart[Real, Unit], Num) -> Real)((op_dollar : (Cart[Cart[Real, Unit], N], Num) -> Cart[Real, Unit])((jacobian : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Cart[Cart[Real, Unit], N])((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])(h, drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift(t))), i), 1)
+  (lhs : _) == (rhs : _)
   sum _ _2
-  _$1$1
-  (lift o (f:real^N -> real)) differentiable at (h t) ==>\n\t(h o drop) differentiable at (lift t) ==>\n\t((f o h) has_real_derivative\n\t\tsum (1..dimindex (:N)) (\\i. partial i f (h t) * derivative (\\s. h s$i) t)) (atreal t)
-  lhs = rhs
-  sum _1 _2
-  sum _1 _2
-  (lift o f) differentiable at (y + t % e) ==>\n\t((f o (\\t. y + t % e)) has_real_derivative\n\t\tsum (1..dimindex (:N)) (\\i. e$i * (partial i f o (\\t. y + t % e)) t)) (atreal t)
+  op_dollar((op_us_dollar : (Num) -> Cart[_, _])(1), 1)
+  (differentiable : ((Cart[Real, N]) -> Cart[Real, Unit], Net[Cart[Real, N]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, N]) -> Real, Cart[Real, N]) -> Cart[Real, Unit])(lift, (f : (Cart[Real, N]) -> Real)), (at : (Cart[Real, N]) -> Net[Cart[Real, N]])((h : (Real) -> Cart[Real, N])((t : Real)))) \226\134\146 (differentiable : ((Cart[Real, Unit]) -> Cart[Real, N], Net[Cart[Real, Unit]]) -> Bool)((o : ((Real) -> Cart[Real, N], (Cart[Real, Unit]) -> Real, Cart[Real, Unit]) -> Cart[Real, N])(h, drop), (at : (Cart[Real, Unit]) -> Net[Cart[Real, Unit]])(lift(t))) \226\134\146 has_real_derivative((o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)(f, h), (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, h(t)) * derivative((s : Real) => (op_dollar : (Cart[Real, N], Num) -> Real)(h(s), i), t)), atreal(t))
+  (lhs : _) == (rhs : _)
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(vector_add((y : Cart[Real, _]), op_pct((t : Real), (e : Cart[Real, _]))))) \226\134\146 has_real_derivative(o(f, (t : Real) => vector_add(y, op_pct(t, e))), sum(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => real_mul(op_dollar(e, i), o(partial(i, f), (t : Real) => vector_add(y, op_pct(t, e)), t))), atreal(t))
   :real^N -> real
   :real^N -> real
-  (lift o f) differentiable at y
-  u real_differentiable atreal (f y) ==>\n\tpartial i (u o f) y = derivative u (f y) * partial i f y
-  partial i (\\x. --f x) y = --partial i f y
-  partial i (\\x. c * f x) y = c * partial i f y
-  (lift o g) differentiable at y
-  partial i (\\x. f x + g x) y = partial i f y + partial i g y
-  partial i (\\x. f x - g x) y = partial i f y - partial i g y
-  (h o drop) differentiable at (lift (&0))
-  h (&0) = y
-  (\\x. f x * g x) o h = (\\t. (f o h) t * (g o h) t)
-  \\t. y + t % basis i
-  partial i (\\x. f x * g x) y = partial i f y * g y + f y * partial i g y
-  f real_differentiable atreal x ==>\n\tderivative f x = derivative (f o (\\t. x + t)) (&0)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((y : Cart[Real, _])))
+  real_differentiable((u : (Real) -> Real), atreal((f : (Cart[Real, _]) -> Real)((y : Cart[Real, _])))) \226\134\146 partial((i : Num), o(u, f), y) == derivative(u, f(y)) * partial(i, f, y)
+  partial((i : Num), (x : Cart[Real, _]) => -(f : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _])) == -partial(i, f, y)
+  partial((i : Num), (x : Cart[Real, _]) => (c : Real) * (f : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _])) == c * partial(i, f, y)
+  differentiable(o(lift, (g : (Cart[Real, _]) -> Real)), at((y : Cart[Real, _])))
+  partial((i : Num), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) + (g : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _])) == partial(i, f, y) + partial(i, g, y)
+  partial((i : Num), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) - (g : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _])) == partial(i, f, y) - partial(i, g, y)
+  differentiable(o((h : (Real) -> Cart[Real, _]), drop), at(lift(real_of_num(0))))
+  (h : (Real) -> _)(real_of_num(0)) == (y : _)
+  o((x : _) => (f : (_) -> Real)(x) * (g : (_) -> Real)(x), (h : (_) -> _)) == ((t : _) => o(f, h, t) * o(g, h, t))
+  (t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, basis((i : Num))))
+  partial((i : Num), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) * (g : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _])) == partial(i, f, y) * g(y) + f(y) * partial(i, g, y)
+  real_differentiable((f : (Real) -> Real), atreal((x : Real))) \226\134\146 derivative(f, x) == derivative(o(f, (t : Real) => x + t), real_of_num(0))
   :real^N->real
-  &0 <= y$j - x$j
-  h = g o (\\t'. t + t')
+  real_of_num(0) <= op_dollar((y : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j)
+  (h : (Real) -> _) == o((g : (Real) -> _), (t' : Real) => (t : Real) + t')
   f o _
-  forall t. t IN s ==> (g has_real_derivative (partial j f (y' + t % basis j))) (atreal t within s)
-  forall t. t IN s ==> y' + t % basis j IN interval [x,z]
-  real_interval [&0, y$j - x$j]
-  f y = g (y$j - x$j)
-  f y' = g (&0)
-  f o (\\t. y' + t % basis j)
-  ~(i = j)
-  y' = y
-  f y' <= f y
-  (lambda i. if i = j then x$j else y$i):real^N
-  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\tu$j = x$j ==>\n\t(forall y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(forall y. y IN interval [x,z] ==> &0 <= partial j f y) ==>\n\t(forall y. y IN interval [x,u] ==> lo <= f y) ==>\n\t(forall y. y IN interval [x,z] ==> lo <= f y)
-  i = j
-  j IN 1..dimindex (:N)
-  i = j
+  \226\136\128 t : Real, IN(t, (s : (Real) -> Bool)) \226\134\146 has_real_derivative((g : (Real) -> Real), partial((j : Num), (f : (Cart[Real, _]) -> Real), vector_add((y' : Cart[Real, _]), op_pct(t, basis(j)))), within(atreal(t), s))
+  \226\136\128 t : Real, IN(t, (s : (Real) -> Bool)) \226\134\146 IN(vector_add((y' : Cart[Real, _]), op_pct(t, basis((j : Num)))), closed_interval([((x : Cart[Real, _]), (z : Cart[Real, _]))]))
+  real_interval([(real_of_num(0), op_dollar((y : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j))])
+  (f : (Cart[Real, _]) -> _)((y : Cart[Real, _])) == (g : (Real) -> _)(op_dollar(y, (j : Num)) - op_dollar((x : Cart[Real, _]), j))
+  (f : (_) -> _)((y' : _)) == (g : (Real) -> _)(real_of_num(0))
+  o((f : (Cart[Real, _]) -> _), (t : Real) => vector_add((y' : Cart[Real, _]), op_pct(t, basis((j : Num)))))
+  !((i : _) == (j : _))
+  (y' : _) == (y : _)
+  (f : (_) -> Real)((y' : _)) <= f((y : _))
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == (j : Num) { op_dollar((x : Cart[Real, _]), j) } else { op_dollar((y : Cart[Real, _]), i) })
+  (\226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 !(i == (j : Num)) \226\134\146 op_dollar((u : Cart[Real, _]), i) == op_dollar((z : Cart[Real, _]), i)) \226\134\146 op_dollar(u, j) == op_dollar((x : Cart[Real, _]), j) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(y))) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 real_of_num(0) <= partial(j, f, y)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, u)])) \226\134\146 (lo : Real) <= f(y)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 lo <= f(y))
+  (i : _) == (j : _)
+  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  (i : _) == (j : _)
   ~P <=> (P <=> F)
-  i = j
-  \\t. partial j f (y' + t % basis j)
-  &0
-  y$j - x$j
-  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\tu$j = x$j ==>\n\t(forall y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(forall y. y IN interval [x,z] ==> partial j f y <= &0) ==>\n\t(forall y. y IN interval [x,u] ==> f y <= hi) ==>\n\t(forall y. y IN interval [x,z] ==> f y <= hi)
-  (\\p. -- f p)
-  --hi
-  forall net. (\\x. p + x) differentiable net
-  lift o f differentiable at (p + y) ==>\n\tpartial i (f o (\\x. p + x)) y = partial i f (p + y)
-  forall net. (\\x. p - x) differentiable net
-  lift o f differentiable at (p - y) ==>\n\tpartial i (f o (\\x. p - x)) y = --partial i f (p - y)
-  forall x z y:real^N. x + z - (x + z - y) = y
-  forall x z p. x + z - p = (x + z) - p:real^N
-  dP
+  (i : _) == (j : _)
+  (t : Real) => partial((j : Num), (f : (Cart[Real, _]) -> Real), vector_add((y' : Cart[Real, _]), op_pct(t, basis(j))))
+  real_of_num(0)
+  op_dollar((y : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j)
+  (\226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 !(i == (j : Num)) \226\134\146 op_dollar((u : Cart[Real, _]), i) == op_dollar((z : Cart[Real, _]), i)) \226\134\146 op_dollar(u, j) == op_dollar((x : Cart[Real, _]), j) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(y))) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 partial(j, f, y) <= real_of_num(0)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, u)])) \226\134\146 f(y) <= (hi : Real)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 f(y) <= hi)
+  (p : _) => -(f : (_) -> Real)(p)
+  -(hi : Real)
+  \226\136\128 net : Net[Cart[Real, _]], differentiable((x : Cart[Real, _]) => vector_add((p : Cart[Real, _]), x), net)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(vector_add((p : Cart[Real, _]), (y : Cart[Real, _])))) \226\134\146 partial((i : Num), o(f, (x : Cart[Real, _]) => vector_add(p, x)), y) == partial(i, f, vector_add(p, y))
+  \226\136\128 net : Net[Cart[Real, _]], differentiable((x : Cart[Real, _]) => vector_sub((p : Cart[Real, _]), x), net)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(vector_sub((p : Cart[Real, _]), (y : Cart[Real, _])))) \226\134\146 partial((i : Num), o(f, (x : Cart[Real, _]) => vector_sub(p, x)), y) == real_neg(partial(i, f, vector_sub(p, y)))
+  \226\136\128 x : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 y : Cart[Real, N], x + (z - (x + (z - y))) == y
+  \226\136\128 x : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 p : Cart[Real, N], x + (z - p) == x + z - p
+  (dP : _)
   forall y. _ y
-  forall p. p IN interval [x,z] ==> x + (z - p) IN interval [x,z]
-  ~(i = j)
-  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\tu$j = z$j ==>\n\t(forall y. y IN interval [x,z] ==> (lift o f) differentiable at y) ==>\n\t(forall y. y IN interval [x,z] ==> &0 <= partial j f y) ==>\n\t(forall y. y IN interval [u,z] ==> f y <= hi) ==>\n\t(forall y. y IN interval [x,z] ==> f y <= hi)
-  j IN 1..dimindex (:N)
-  f o (\\p:real^N. x + (z - p))
-  x + (z - u):real^N
-  x + z - y:real^N
-  FACT 0 = 1 /\\ FACT 1 = 1
+  \226\136\128 p : Cart[Real, _], IN(p, closed_interval([((x : Cart[Real, _]), (z : Cart[Real, _]))])) \226\134\146 IN(vector_add(x, vector_sub(z, p)), closed_interval([(x, z)]))
+  !((i : _) == (j : _))
+  (\226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 !(i == (j : Num)) \226\134\146 op_dollar((u : Cart[Real, _]), i) == op_dollar((x : Cart[Real, _]), i)) \226\134\146 op_dollar(u, j) == op_dollar((z : Cart[Real, _]), j) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at(y))) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 real_of_num(0) <= partial(j, f, y)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(u, z)])) \226\134\146 f(y) <= (hi : Real)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 f(y) <= hi)
+  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  o((f : (Cart[Real, N]) -> _), (p : Cart[Real, N]) => (x : Cart[Real, N]) + ((z : Cart[Real, N]) - p))
+  (x : Cart[Real, N]) + ((z : Cart[Real, N]) - (u : Cart[Real, N]))
+  (x : Cart[Real, N]) + ((z : Cart[Real, N]) - (y : Cart[Real, N]))
+  FACT(0) == 1 && FACT(1) == 1
   0 <= 1
-  FACT (1 + 1) = 2
-  i <= 1 <=> i = 0 \\/ i = 1
-  0 + 1 = 1 /\\ ~(1 = 0) /\\ 1 + 1 = 2 /\\ ~(2 = 1) /\\ ~(2 = 0)
-  \\i. if i = 0 then f else if i = 1 then derivative f else nth_derivative 2 f
-  nth_diff_strong_int 2 (&0, &1) f ==>\n\t(forall t. interval_arith t (&0, &1) ==> abs (nth_derivative 2 f t) <= dd_bound) ==>\n\tabs (f (&1) - (f (&0) + derivative f (&0))) <= dd_bound / &2
+  FACT(1 + 1) == 2
+  ((i : Num) <= 1) == (i == 0 || i == 1)
+  0 + 1 == 1 && !(1 == 0) && 1 + 1 == 2 && !(2 == 1) && !(2 == 0)
+  (i : Num) => if i == 0 { (f : (Real) -> Real) } else { if i == 1 { derivative(f) } else { nth_derivative(2, f) } }
+  nth_diff_strong_int(2, (real_of_num(0), real_of_num(1)), (f : (Real) -> Real)) \226\134\146 (\226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 abs(nth_derivative(2, f, t)) <= (dd_bound : Real)) \226\134\146 abs(f(real_of_num(1)) - (f(real_of_num(0)) + derivative(f, real_of_num(0)))) <= dd_bound / real_of_num(2)
   1
-  real_interval [&0, &1]
+  real_interval([(real_of_num(0), real_of_num(1))])
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
@@ -660,428 +660,428 @@ Formal_ineqs/taylor/theory/multivariate_taylor-compiled quotations (789):
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  &0
-  &1
+  real_of_num(0)
+  real_of_num(1)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  FACT 1 = 1 /\\ FACT 0 = 1
-  0 + 1 = 1 /\\ ~(1 = 0)
-  \\i. if i = 0 then f else derivative f
-  (forall t. interval_arith t (&0, &1) ==> f real_differentiable atreal t /\\ \n\t\t\tabs (derivative f t) <= d_bound) ==>\n\tabs (f (&1) - f (&0)) <= d_bound
+  FACT(1) == 1 && FACT(0) == 1
+  0 + 1 == 1 && !(1 == 0)
+  (i : Num) => if i == 0 { (f : (Real) -> Real) } else { derivative(f) }
+  (\226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 real_differentiable((f : (Real) -> Real), atreal(t)) && abs(derivative(f, t)) <= (d_bound : Real)) \226\134\146 abs(f(real_of_num(1)) - f(real_of_num(0))) <= d_bound
   0
-  real_interval [&0, &1]
+  real_interval([(real_of_num(0), real_of_num(1))])
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  &0
-  &1
+  real_of_num(0)
+  real_of_num(1)
   ~P <=> (P <=> F)
-  m_taylor_error f domain (w:real^N) error <=>\n\tforall x:real^N. x IN interval [domain] ==> sum (1..dimindex (:N)) (\\i. w$i * sum (1..dimindex (:N))\n\t\t(\\j. w$j * abs (partial j (partial i f) x))) <= error
-  m_taylor_partial_error f i domain (w:real^N) error <=>\n\t(forall x:real^N. x IN interval[domain] ==>\n\t\tsum (1..dimindex (:N)) (\\j. w$j * abs (partial j (partial i f) x)) <= error)
-  (forall i. i IN 1..dimindex (:N) ==> m_taylor_partial_error f i domain w (p_error i) /\\ &0 <= w$i) ==>\n\tsum (1..dimindex (:N)) (\\i. w$i * p_error i) <= error ==>\n\tm_taylor_error f domain (w:real^N) error
-  partial2 j i f = partial j (partial i f)
-  diff2 f x <=>\n\t?s. open s /\\ x IN s /\\ (forall y. y IN s ==> (lift o f) differentiable at y /\\\n\t\t(forall i. (lift o partial i f) differentiable at y))
-  diff2c f x <=> diff2 f x /\\\n\t(forall i j. (lift o partial2 j i f) continuous at x)
-  diff2c f x ==> diff2 f x
-  diff2 f x <=>\n\t?s. open s /\\ x IN s /\\ (forall y. y IN s ==> diff2 f y)
-  diff2 f (x + t % e) ==>\n\tf o (\\t. x + t % e) real_differentiable atreal t
-  diff2 f (x + t % e:real^N) ==>\n\tderivative (f o (\\t. x + t % e)) t =\n\tsum (1..dimindex (:N)) (\\i. e$i * (partial i f o (\\t. x + t % e)) t)
-  diff2 f (x + t % e:real^N) ==>\n\tpartial i f o (\\t. x + t % e) real_differentiable atreal t
-  t SUBSET s ==> x IN t ==> x IN s
-  d / &2
-  ball (x, d)
-  d / &2 * inv (norm e)
-  -- (d / &2 * inv (norm e))
-  norm y = d / &2
-  ((d / &2) * inv(norm e)) % e
-  --d
-  open s ==> x IN s ==>\n\t?a b. &0 IN real_interval (a, b) /\\ IMAGE (\\t. x + t % e) (real_interval (a, b)) SUBSET s
-  norm e = &0
-  d / &2
-  y - t
-  real_interval (p - d, p + d)
-  &0 < d
-  min (p - (a + t)) (b + t - p)
-  \\t. sum (1..dimindex(:N)) (\\i. e$i * (partial i f o (\\t. x + t % e)) t)
-  p - t
-  x + p % e IN s
-  real_interval (a + t, b + t)
-  diff2 f (x + t % e:real^N) ==> \n\tnth_diff_strong 2 (f o (\\t. x + t % e)) t
-  p - t
-  real_interval (a + t, b + t)
-  \\t. sum (1..dimindex(:N)) (\\i. e$i * (partial i f o (\\t. x + t % e)) t)
-  diff2 f (x + t % e:real^N) ==>\n\tnth_derivative 2 (f o (\\t. x + t % e)) t =\n\tsum (1..dimindex (:N)) (\\i. sum (1..dimindex (:N)) \n\t\t(\\j. e$i * e$j * (partial j (partial i f) o (\\t. x + t % e)) t))
-  diff2 f (x + t % e:real^N) ==>\n\t(partial i f o (\\t. x + t % e) has_real_derivative \n\tsum (1..dimindex (:N)) (\\j. e$j * (partial j (partial i f) o (\\t. x + t % e)) t)) (atreal t)
-  diff2 f (x + t % e:real^N) ==>\n\tderivative (partial i f o (\\t. x + t % e)) t = \n\t\tsum (1..dimindex (:N)) (\\j. e$j * (partial j (partial i f) o (\\t. x + t % e)) t)
-  sum _1 _2
-  diff2 f (x + t % e:real^N) ==>\n\tpartial i f o (\\t. x + t % e) real_differentiable atreal t
-  (\\x. c) o (\\t. x + t % basis i) = (\\x. c)
-  partial i (\\x:real^N. c) = (\\x. &0)
-  ~(i IN 1..dimindex (:N)) ==> partial i f = (\\x:real^N. &0)
-  forall f f' a. (forall x. abs x <= abs a ==> (f has_real_derivative f' x) (atreal x)) ==>\n\t(?t. abs t <= abs a /\\ f a - f (&0) = f' t * a)
-  &0 <= a
-  &0
-  &0
-  \\y:real^2. lift (G (y$1) (y$2) / (y$1 * y$2))
-  norm (t1 % basis j:real^N) + norm (t2 % basis i:real^N)
-  norm y
-  infnorm y < min r (d / &2)
-  abs (y$1) <= r /\\ abs (y$2) <= r /\\ abs (y$1) < d / &2 /\\ abs (y$2) < d / &2
-  &0 < abs (y$1) /\\ &0 < abs (y$2)
-  min r (d / &2)
-  ((\\y:real^2. lift (G (y$1) (y$2) / (y$1 * y$2))) --> lift (partial i (partial j f) x)) \n\t\t(at (vec 0) within {y | &0 < y$1 /\\ &0 < y$2})
-  norm (t2 % basis j:real^N) + norm (t1 % basis i:real^N)
-  norm y
-  infnorm y < min r (d / &2)
-  abs (y$1) <= r /\\ abs (y$2) <= r /\\ abs (y$1) < d / &2 /\\ abs (y$2) < d / &2
-  &0 < abs (y$1) /\\ &0 < abs (y$2)
-  min r (d / &2)
-  ((\\y:real^2. lift (G (y$1) (y$2) / (y$1 * y$2))) --> lift (partial j (partial i f) x)) \n\t\t(at (vec 0) within {y | &0 < y$1 /\\ &0 < y$2})
-  &2 = sqrt (&2 * &2)
-  infnorm y * sqrt (&2)
-  e * inv(&2) * sqrt(&2)
-  infnorm y = e / &2
-  &0 < e / (&2)
-  forall i. y$i = e / (&2)
-  e / &2 % (vec 1:real^2)
-  (vec 0:real^2) limit_point_of {y | &0 < y$1 /\\ &0 < y$2}
-  forall a. h * a * k = h * k * a
-  p = g k - g (&0)
-  _1 - _2
-  partial i f o (\\k. (x + t3 % basis i) + k % basis j)
-  forall h k. abs h <= r /\\ abs k <= r ==>\n\t(?t3 t4. G h k = h * k * partial j (partial i f) (x + t4 % basis j + t3 % basis i) \n\t\t/\\ abs t3 <= abs h /\\ abs t4 <= abs k)
-  forall h k. abs h <= r /\\ abs k <= r ==> \n\t\t(?t3. G h k = h * derivative (F2 k) t3 /\\ abs t3 <= abs h)
-  forall y e. (f o (\\h. y + h % e)) o (\\t. h + t) = f o (\\t. (y + h % e) + t % e)
-  derivative (f o (\\h. x + h % basis i)) h
-  forall h k. abs h <= r /\\ abs k <= r ==>\n\tderivative (F2 k) h = partial i f ((x + k % basis j) + h % basis i) - partial i f (x + h % basis i)
-  forall k. abs k <= r ==> forall h. abs h <= r ==> (F2 k) real_differentiable atreal h
-  forall k. F2 k = (\\h. (f o (\\h. (x + k % basis j) + h % basis i)) h - (f o (\\h. x + h % basis i)) h)
-  forall a. k * a * h = h * k * a
-  p = g h - g (&0)
-  _1 - _2
-  partial j f o (\\h. (x + t1 % basis j) + h % basis i)
-  forall h k. abs h <= r /\\ abs k <= r ==>\n\t(?t1 t2. G h k = h * k * partial i (partial j f) (x + t1 % basis j + t2 % basis i) \n\t\t/\\ abs t1 <= abs k /\\ abs t2 <= abs h)
-  forall h k. abs h <= r /\\ abs k <= r ==> \n\t\t(?t1. G h k = k * derivative (F1 h) t1 /\\ abs t1 <= abs k)
-  forall y e. (f o (\\k. y + k % e)) o (\\t. k + t) = f o (\\t. (y + k % e) + t % e)
-  derivative (f o (\\k. x + k % basis j)) k
-  forall h k. abs h <= r /\\ abs k <= r ==>\n\tderivative (F1 h) k = partial j f ((x + h % basis i) + k % basis j) - partial j f (x + k % basis j)
-  forall h. abs h <= r ==> forall k. abs k <= r ==> (F1 h) real_differentiable atreal k
-  forall h. F1 h = (\\k. (f o (\\k. (x + h % basis i) + k % basis j)) k - (f o (\\k. x + k % basis j)) k)
-  (forall h. abs h <= r ==> x + h % basis i IN s) /\\ (forall k. abs k <= r ==> x + k % basis j IN s)
-  abs h + abs k
-  e / &3 + e / &3
-  e / &3
-  ?r. &0 < r /\\ (forall h k. abs h <= r /\\ abs k <= r ==> (x + h % basis i) + k % basis j IN s)
-  G = \\h k. F2 k h - F2 k (&0)
-  forall h k. (x + k % basis j) + h % basis i = (x + h % basis i) + k % basis j
-  \\h k. F1 h k - F1 h (&0)
-  \\k h. f ((x + h % basis i) + k % basis j) - f (x + h % basis i)
-  \\h k. f ((x + k % basis j) + h % basis i) - f (x + k % basis j)
-  diff2c f x ==> partial2 i j f x = partial2 j i f (x:real^N)
-  i IN 1..dimindex (:N)
-  j IN 1..dimindex (:N)
-  h % basis i:real^N
-  k % basis j:real^N
-  &0
-  &0
-  F1 h
-  derivative (F1 h)
-  derivative g
-  F2 k
-  derivative (F2 k)
-  derivative g
-  &2
-  y$1
-  y$2
-  y$1
-  y$2
-  at (vec 0:real^2) within {y:real^2 | &0 < y$1 /\\ &0 < y$2}
-  m_cell_domain (x:real^N, z:real^N) (y:real^N) (w:real^N) <=>\n\tforall i. i IN 1..dimindex (:N) ==> x$i <= y$i /\\ y$i <= z$i /\\ max (y$i - x$i) (z$i - y$i) <= w$i
-  m_bounded_on_int (f:real^N->real) domain f_bounds <=>\n\tforall x. x IN interval [domain] ==> interval_arith (f x) f_bounds
-  diff2_domain domain f <=>\n\tforall x. x IN interval [domain] ==> diff2 f x
-  diff2c_domain domain f <=>\n\tforall x. x IN interval [domain] ==> diff2c f x
-  diff2c_domain domain f <=> diff2_domain domain f /\\\n\t(forall x. x IN interval [domain] ==> forall i j. (lift o partial2 j i f) continuous at x)
-  m_cell_domain domain y w ==> y IN interval [domain]
-  m_cell_domain domain y (w:real^N) ==> \n\tp IN interval [domain] ==>\n\tforall i. i IN 1..dimindex (:N) ==> abs (p$i - y$i) <= w$i
-  (\\(i,j). g j i) = (\\(i,j). g i j) o f
-  j, i
-  s1 = IMAGE f s2
-  \\(i,j):num#num. j, i
-  {i, j | (1 <= i /\\ i <= n) /\\ 1 <= j /\\ j <= i - 1}
-  {i, j | (1 <= i /\\ i <= n) /\\ i + 1 <= j /\\ j <= n}
-  sum (1..n) (\\i. sum (i + 1..n) (\\j. g i j)) = \n\t\t\tsum (1..n) (\\i. sum (1..i - 1) (\\j. g j i))
-  forall a b c. a * b * c = b * a * c
-  forall a b c. (a + b) + c = (a + c) + b
-  s3 = sum (1..n) (\\i. sum (i + 1..n) (\\j. g i j))
-  s3 = sum (1..n) (\\i. sum (1..i - 1) (\\j. g i j))
-  sum _1 _2
-  s2 = sum (1..n) (\\i. g i i + sum (1..i - 1) (\\j. g i j))
-  sum _1 _2
-  s1 = sum (1..n) (\\i. sum (1..n) (\\j. g i j))
-  sum _1 _2
-  dimindex (:N)
-  \\i j. w$i * w$j * abs (partial2 j i f x)
-  forall g1 g2. (forall x. x IN interval [domain] ==> g1 x = g2 x) ==> \n\t((forall x. x IN interval [domain] ==> g1 x <= error) <=> (forall x. x IN interval [domain] ==> g2 x <= error))
-  diff2c_domain domain f ==> \n\t(m_taylor_error f domain (w:real^N) error <=>\n\t(forall x. x IN interval [domain] ==> \n\tsum (1..dimindex (:N)) (\\i. w$i * (w$i * abs (partial2 i i f x)\n\t\t+ &2 * sum (1..i - 1) (\\j. w$j * abs (partial2 j i f x)))) <= error))
-  g i
-  sum _1 _2
-  sum _1 _2
-  y + t % (p - y) = (&1 - t) % y + t % p:real^N
-  y + t % (p - y) IN interval [domain]
-  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\t(forall t. interval_arith t (&0, &1) ==> \n\t\tabs (nth_derivative 2 (f o (\\t. y + t % (p - y))) t) <= dd_bound)
-  y + t % (p - y) = (&1 - t) % y + t % p:real^N
-  forall t. interval_arith t (&0, &1) ==> y + t % (p - y) IN interval [domain]
-  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tabs (f p - (f y + sum (1..dimindex (:N)) (\\i. (p - y)$i * partial i f y))) <= dd_bound / &2
-  f o (\\t. y + t % (p - y))
-  abs s
-  (f y + s) + dd_bound / &2
-  sum _1 _2
-  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tf y <= hi ==>\n\thi + sum(1..dimindex (:N)) (\\i. w$i * abs (partial i f y)) + dd_bound / &2 <= hi_bound ==>\n\tforall p. p IN interval [domain] ==> f p <= hi_bound
-  forall x y e. abs (x - y) <= e ==> x <= y + e
-  --abs s
-  (f y + s) - dd_bound / &2
-  sum _1 _2
-  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tlo <= f y ==>\n\tlo_bound <= lo - (sum(1..dimindex (:N)) (\\i. w$i * abs (partial i f y)) + dd_bound / &2) ==>\n\tforall p. p IN interval [domain] ==> lo_bound <= f p
-  forall x y e. abs (x - y) <= e ==> y - e <= x
-  hi + err_bound
-  lo - err_bound
-  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_error f domain w dd_bound ==>\n\tinterval_arith (f y) (lo, hi) ==>\n\tsum(1..dimindex (:N)) (\\i. w$i * abs(partial i f y)) + dd_bound / &2 <= err_bound ==>\n\tlo_bound <= lo - err_bound ==>\n\thi + err_bound <= hi_bound ==>\n\tm_bounded_on_int f domain (lo_bound, hi_bound)
-  y + t % (p - y) = (&1 - t) % y + t % p:real^N
-  y + t % (p - y) IN interval [domain]
-  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w d_bound ==>\n\t(forall t. interval_arith t (&0, &1) ==> \n\t\tabs (derivative (partial i f o (\\t. y + t % (p - y))) t) <= d_bound)
-  y + t % (p - y) = (&1 - t) % y + t % p:real^N
-  forall t. interval_arith t (&0, &1) ==> y + t % (p - y) IN interval [domain]
-  m_cell_domain domain y (w:real^N) ==>\n\tp IN interval [domain] ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tabs (partial i f p - partial i f y) <= dd_bound
-  partial i f o (\\t. y + t % (p - y))
-  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tpartial i f y <= hi ==>\n\thi + dd_bound <= hi_bound ==>\n\tforall p. p IN interval [domain] ==> partial i f p <= hi_bound
-  forall x y e. abs (x - y) <= e ==> x <= y + e
-  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tlo <= partial i f y ==>\n\tlo_bound <= lo - dd_bound ==>\n\tforall p. p IN interval [domain] ==> lo_bound <= partial i f p
-  forall x y e. abs (x - y) <= e ==> y - e <= x
-  m_cell_domain domain y (w:real^N) ==>\n\tdiff2_domain domain f ==>\n\tm_taylor_partial_error f i domain w dd_bound ==>\n\tinterval_arith (partial i f y) (lo, hi) ==>\n\tlo_bound <= lo - dd_bound ==>\n\thi + dd_bound <= hi_bound ==>\n\tm_bounded_on_int (partial i f) domain (lo_bound, hi_bound)
+  (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (w : Cart[Real, N]), (error : Real)) == (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, j) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f), x)))) <= error)
+  (m_taylor_partial_error : ((Cart[Real, N]) -> Real, Num, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)((f : (Cart[Real, N]) -> Real), (i : Num), (domain : (Cart[Real, N], Cart[Real, N])), (w : Cart[Real, N]), (error : Real)) == (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, j) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f), x))) <= error)
+  (\226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (m_taylor_partial_error : ((Cart[Real, N]) -> Real, Num, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)((f : (Cart[Real, N]) -> Real), i, (domain : (Cart[Real, N], Cart[Real, N])), (w : Cart[Real, N]), (p_error : (Num) -> Real)(i)) && real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(w, i)) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * p_error(i)) <= (error : Real) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, w, error)
+  (partial2 : (Num, Num, (Cart[Real, _]) -> Real, Cart[Real, _]) -> Real)((j : Num), (i : Num), (f : (Cart[Real, _]) -> Real)) == partial(j, partial(i, f))
+  (diff2 : ((Cart[Real, _]) -> Real, Cart[Real, _]) -> Bool)((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) == (\226\136\131 s : (Cart[Real, _]) -> Bool, open(s) && IN(x, s) && (\226\136\128 y : Cart[Real, _], IN(y, s) \226\134\146 differentiable(o(lift, f), at(y)) && (\226\136\128 i : Num, differentiable(o(lift, partial(i, f)), at(y)))))
+  (diff2c : ((Cart[Real, _]) -> Real, Cart[Real, _]) -> Bool)((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) == (diff2(f, x) && (\226\136\128 i : Num, \226\136\128 j : Num, continuous(o(lift, partial2(j, i, f)), at(x))))
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2(f, x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) == (\226\136\131 s : (Cart[Real, _]) -> Bool, open(s) && IN(x, s) && (\226\136\128 y : Cart[Real, _], IN(y, s) \226\134\146 diff2(f, y)))
+  diff2((f : (Cart[Real, _]) -> Real), vector_add((x : Cart[Real, _]), op_pct((t : Real), (e : Cart[Real, _])))) \226\134\146 real_differentiable(o(f, (t : Real) => vector_add(x, op_pct(t, e))), atreal(t))
+  (diff2 : ((Cart[Real, N]) -> Real, Cart[Real, N]) -> Bool)((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t : Real), (e : Cart[Real, N]))) \226\134\146 derivative((o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)(f, (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e)), t) == (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(e, i) * (o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f), (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e), t))
+  diff2((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + op_pct((t : Real), (e : Cart[Real, N]))) \226\134\146 real_differentiable(o(partial((i : Num), f), (t : Real) => x + op_pct(t, e)), atreal(t))
+  SUBSET((t : (_) -> Bool), (s : (_) -> Bool)) \226\134\146 IN((x : _), t) \226\134\146 IN(x, s)
+  (d : Real) / real_of_num(2)
+  ball(((x : Cart[Real, _]), (d : Real)))
+  (d : Real) / real_of_num(2) * inv(norm((e : Cart[Real, _])))
+  -((d : Real) / real_of_num(2) * inv(norm((e : Cart[Real, _]))))
+  norm((y : Cart[Real, _])) == (d : Real) / real_of_num(2)
+  op_pct((d : Real) / real_of_num(2) * inv(norm((e : Cart[Real, _]))), e)
+  -(d : Real)
+  open((s : (Cart[Real, _]) -> Bool)) \226\134\146 IN((x : Cart[Real, _]), s) \226\134\146 (\226\136\131 a : Real, \226\136\131 b : Real, IN(real_of_num(0), open_real_interval((a, b))) && SUBSET(IMAGE((t : Real) => vector_add(x, op_pct(t, (e : Cart[Real, _]))), open_real_interval((a, b))), s))
+  norm((e : Cart[Real, _])) == real_of_num(0)
+  (d : Real) / real_of_num(2)
+  (y : Real) - (t : Real)
+  real_interval(((p : Real) - (d : Real), p + d))
+  real_of_num(0) < (d : Real)
+  min((p : Real) - ((a : Real) + (t : Real)), (b : Real) + (t - p))
+  (t : Real) => sum(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => real_mul(op_dollar((e : Cart[Real, _]), i), o(partial(i, (f : (Cart[Real, _]) -> Real)), (t : Real) => vector_add((x : Cart[Real, _]), op_pct(t, e)), t)))
+  (p : Real) - (t : Real)
+  IN(vector_add((x : Cart[Real, _]), op_pct((p : Real), (e : Cart[Real, _]))), (s : (Cart[Real, _]) -> Bool))
+  real_interval(((a : Real) + (t : Real), (b : Real) + t))
+  diff2((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + op_pct((t : Real), (e : Cart[Real, N]))) \226\134\146 nth_diff_strong(2, o(f, (t : Real) => x + op_pct(t, e)), t)
+  (p : Real) - (t : Real)
+  real_interval(((a : Real) + (t : Real), (b : Real) + t))
+  (t : Real) => sum(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => real_mul(op_dollar((e : Cart[Real, _]), i), o(partial(i, (f : (Cart[Real, _]) -> Real)), (t : Real) => vector_add((x : Cart[Real, _]), op_pct(t, e)), t)))
+  (diff2 : ((Cart[Real, N]) -> Real, Cart[Real, N]) -> Bool)((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t : Real), (e : Cart[Real, N]))) \226\134\146 nth_derivative(2, (o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)(f, (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e)), t) == (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(e, i) * ((op_dollar : (Cart[Real, N], Num) -> Real)(e, j) * (o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f)), (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e), t))))
+  (diff2 : ((Cart[Real, N]) -> Real, Cart[Real, N]) -> Bool)((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t : Real), (e : Cart[Real, N]))) \226\134\146 has_real_derivative((o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)((i : Num), f), (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e)), (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(e, j) * (o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f)), (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e), t)), atreal(t))
+  (diff2 : ((Cart[Real, N]) -> Real, Cart[Real, N]) -> Bool)((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t : Real), (e : Cart[Real, N]))) \226\134\146 derivative((o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)((i : Num), f), (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e)), t) == (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(e, j) * (o : ((Cart[Real, N]) -> Real, (Real) -> Cart[Real, N], Real) -> Real)((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f)), (t : Real) => x + (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(t, e), t))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  diff2((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]) + op_pct((t : Real), (e : Cart[Real, N]))) \226\134\146 real_differentiable(o(partial((i : Num), f), (t : Real) => x + op_pct(t, e)), atreal(t))
+  o((x : Cart[Real, _]) => (c : _), (t : Real) => vector_add((x : Cart[Real, _]), op_pct(t, basis((i : Num))))) == ((x : Real) => c)
+  partial((i : Num), (x : Cart[Real, N]) => (c : Real)) == ((x : Cart[Real, N]) => real_of_num(0))
+  !(IN : (Num, (Num) -> Bool) -> Bool)((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, (f : (Cart[Real, N]) -> Real)) == ((x : Cart[Real, N]) => real_of_num(0))
+  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 a : Real, (\226\136\128 x : Real, abs(x) <= abs(a) \226\134\146 has_real_derivative(f, f'(x), atreal(x))) \226\134\146 (\226\136\131 t : Real, abs(t) <= abs(a) && f(a) - f(real_of_num(0)) == f'(t) * a)
+  real_of_num(0) <= (a : Real)
+  real_of_num(0)
+  real_of_num(0)
+  (y : Cart[Real, Tybit0[Unit]]) => lift((G : (Real, Real) -> Real)(op_dollar(y, 1), op_dollar(y, 2)) / (op_dollar(y, 1) * op_dollar(y, 2)))
+  (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t1 : Real), (basis : (Num) -> Cart[Real, N])((j : Num)))) + (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t2 : Real), (basis : (Num) -> Cart[Real, N])((i : Num))))
+  norm((y : Cart[Real, _]))
+  infnorm((y : Cart[Real, _])) < min((r : Real), (d : Real) / real_of_num(2))
+  abs(op_dollar((y : Cart[Real, _]), 1)) <= (r : Real) && abs(op_dollar(y, 2)) <= r && abs(op_dollar(y, 1)) < (d : Real) / real_of_num(2) && abs(op_dollar(y, 2)) < d / real_of_num(2)
+  real_of_num(0) < abs(op_dollar((y : Cart[Real, _]), 1)) && real_of_num(0) < abs(op_dollar(y, 2))
+  min((r : Real), (d : Real) / real_of_num(2))
+  op_minus_minus_gt((y : Cart[Real, Tybit0[Unit]]) => lift((G : (Real, Real) -> Real)(op_dollar(y, 1), op_dollar(y, 2)) / (op_dollar(y, 1) * op_dollar(y, 2))), lift(partial((i : Num), partial((j : Num), (f : (Cart[Real, _]) -> Real)), (x : Cart[Real, _]))), within(at(vec(0)), {(y : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < op_dollar(y, 1) && real_of_num(0) < op_dollar(y, 2)}))
+  (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t2 : Real), (basis : (Num) -> Cart[Real, N])((j : Num)))) + (norm : (Cart[Real, N]) -> Real)((op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((t1 : Real), (basis : (Num) -> Cart[Real, N])((i : Num))))
+  norm((y : Cart[Real, _]))
+  infnorm((y : Cart[Real, _])) < min((r : Real), (d : Real) / real_of_num(2))
+  abs(op_dollar((y : Cart[Real, _]), 1)) <= (r : Real) && abs(op_dollar(y, 2)) <= r && abs(op_dollar(y, 1)) < (d : Real) / real_of_num(2) && abs(op_dollar(y, 2)) < d / real_of_num(2)
+  real_of_num(0) < abs(op_dollar((y : Cart[Real, _]), 1)) && real_of_num(0) < abs(op_dollar(y, 2))
+  min((r : Real), (d : Real) / real_of_num(2))
+  op_minus_minus_gt((y : Cart[Real, Tybit0[Unit]]) => lift((G : (Real, Real) -> Real)(op_dollar(y, 1), op_dollar(y, 2)) / (op_dollar(y, 1) * op_dollar(y, 2))), lift(partial((j : Num), partial((i : Num), (f : (Cart[Real, _]) -> Real)), (x : Cart[Real, _]))), within(at(vec(0)), {(y : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < op_dollar(y, 1) && real_of_num(0) < op_dollar(y, 2)}))
+  real_of_num(2) == sqrt(real_of_num(2) * real_of_num(2))
+  infnorm((y : Cart[Real, _])) * sqrt(real_of_num(2))
+  (e : Real) * (inv(real_of_num(2)) * sqrt(real_of_num(2)))
+  infnorm((y : Cart[Real, _])) == (e : Real) / real_of_num(2)
+  real_of_num(0) < (e : Real) / real_of_num(2)
+  \226\136\128 i : Num, op_dollar((y : Cart[Real, _]), i) == (e : Real) / real_of_num(2)
+  (op_pct : (Real, Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])((e : Real) / real_of_num(2), (vec : (Num) -> Cart[Real, Tybit0[Unit]])(1))
+  limit_point_of(vec(0), {(y : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < op_dollar(y, 1) && real_of_num(0) < op_dollar(y, 2)})
+  \226\136\128 a : Real, (h : Real) * (a * (k : Real)) == h * (k * a)
+  (p : Real) == (g : (Real) -> Real)((k : Real)) - g(real_of_num(0))
+  (_1 : Real) - (_2 : Real)
+  o(partial((i : Num), (f : (Cart[Real, _]) -> Real)), (k : Real) => vector_add(vector_add((x : Cart[Real, _]), op_pct((t3 : Real), basis(i))), op_pct(k, basis((j : Num)))))
+  \226\136\128 h : Real, \226\136\128 k : Real, real_le(real_abs(h), (r : Real)) && real_le(real_abs(k), r) \226\134\146 (\226\136\131 t3 : Real, \226\136\131 t4 : Real, (G : (Real, Real) -> Real)(h, k) == real_mul(h, real_mul(k, partial((j : Num), partial((i : Num), (f : (Cart[Real, _]) -> Real)), vector_add((x : Cart[Real, _]), vector_add(op_pct(t4, basis(j)), op_pct(t3, basis(i))))))) && real_le(real_abs(t3), real_abs(h)) && real_le(real_abs(t4), real_abs(k)))
+  \226\136\128 h : Real, \226\136\128 k : Real, abs(h) <= (r : Real) && abs(k) <= r \226\134\146 (\226\136\131 t3 : Real, (G : (Real, Real) -> Real)(h, k) == h * derivative((F2 : (Real, Real) -> Real)(k), t3) && abs(t3) <= abs(h))
+  \226\136\128 y : Cart[Real, _], \226\136\128 e : Cart[Real, _], o(o((f : (Cart[Real, _]) -> _), (h : Real) => vector_add(y, op_pct(h, e))), (t : Real) => real_add((h : Real), t)) == o(f, (t : Real) => vector_add(vector_add(y, op_pct(h, e)), op_pct(t, e)))
+  derivative(o((f : (Cart[Real, _]) -> Real), (h : Real) => vector_add((x : Cart[Real, _]), op_pct(h, basis((i : Num))))), (h : Real))
+  \226\136\128 h : Real, \226\136\128 k : Real, real_le(real_abs(h), (r : Real)) && real_le(real_abs(k), r) \226\134\146 derivative((F2 : (Real, Real) -> Real)(k), h) == real_sub(partial((i : Num), (f : (Cart[Real, _]) -> Real), vector_add(vector_add((x : Cart[Real, _]), op_pct(k, basis((j : Num)))), op_pct(h, basis(i)))), partial(i, f, vector_add(x, op_pct(h, basis(i)))))
+  \226\136\128 k : Real, abs(k) <= (r : Real) \226\134\146 (\226\136\128 h : Real, abs(h) <= r \226\134\146 real_differentiable((F2 : (Real, Real) -> Real)(k), atreal(h)))
+  \226\136\128 k : Real, (F2 : (Real, Real) -> Real)(k) == ((h : Real) => real_sub(o((f : (Cart[Real, _]) -> Real), (h : Real) => vector_add(vector_add((x : Cart[Real, _]), op_pct(k, basis((j : Num)))), op_pct(h, basis((i : Num)))), h), o(f, (h : Real) => vector_add(x, op_pct(h, basis(i))), h)))
+  \226\136\128 a : Real, (k : Real) * (a * (h : Real)) == h * (k * a)
+  (p : Real) == (g : (Real) -> Real)((h : Real)) - g(real_of_num(0))
+  (_1 : Real) - (_2 : Real)
+  o(partial((j : Num), (f : (Cart[Real, _]) -> Real)), (h : Real) => vector_add(vector_add((x : Cart[Real, _]), op_pct((t1 : Real), basis(j))), op_pct(h, basis((i : Num)))))
+  \226\136\128 h : Real, \226\136\128 k : Real, real_le(real_abs(h), (r : Real)) && real_le(real_abs(k), r) \226\134\146 (\226\136\131 t1 : Real, \226\136\131 t2 : Real, (G : (Real, Real) -> Real)(h, k) == real_mul(h, real_mul(k, partial((i : Num), partial((j : Num), (f : (Cart[Real, _]) -> Real)), vector_add((x : Cart[Real, _]), vector_add(op_pct(t1, basis(j)), op_pct(t2, basis(i))))))) && real_le(real_abs(t1), real_abs(k)) && real_le(real_abs(t2), real_abs(h)))
+  \226\136\128 h : Real, \226\136\128 k : Real, abs(h) <= (r : Real) && abs(k) <= r \226\134\146 (\226\136\131 t1 : Real, (G : (Real, Real) -> Real)(h, k) == k * derivative((F1 : (Real, Real) -> Real)(h), t1) && abs(t1) <= abs(k))
+  \226\136\128 y : Cart[Real, _], \226\136\128 e : Cart[Real, _], o(o((f : (Cart[Real, _]) -> _), (k : Real) => vector_add(y, op_pct(k, e))), (t : Real) => real_add((k : Real), t)) == o(f, (t : Real) => vector_add(vector_add(y, op_pct(k, e)), op_pct(t, e)))
+  derivative(o((f : (Cart[Real, _]) -> Real), (k : Real) => vector_add((x : Cart[Real, _]), op_pct(k, basis((j : Num))))), (k : Real))
+  \226\136\128 h : Real, \226\136\128 k : Real, real_le(real_abs(h), (r : Real)) && real_le(real_abs(k), r) \226\134\146 derivative((F1 : (Real, Real) -> Real)(h), k) == real_sub(partial((j : Num), (f : (Cart[Real, _]) -> Real), vector_add(vector_add((x : Cart[Real, _]), op_pct(h, basis((i : Num)))), op_pct(k, basis(j)))), partial(j, f, vector_add(x, op_pct(k, basis(j)))))
+  \226\136\128 h : Real, abs(h) <= (r : Real) \226\134\146 (\226\136\128 k : Real, abs(k) <= r \226\134\146 real_differentiable((F1 : (Real, Real) -> Real)(h), atreal(k)))
+  \226\136\128 h : Real, (F1 : (Real, Real) -> Real)(h) == ((k : Real) => real_sub(o((f : (Cart[Real, _]) -> Real), (k : Real) => vector_add(vector_add((x : Cart[Real, _]), op_pct(h, basis((i : Num)))), op_pct(k, basis((j : Num)))), k), o(f, (k : Real) => vector_add(x, op_pct(k, basis(j))), k)))
+  (\226\136\128 h : Real, real_le(real_abs(h), (r : Real)) \226\134\146 IN(vector_add((x : Cart[Real, _]), op_pct(h, basis((i : Num)))), (s : (Cart[Real, _]) -> Bool))) && (\226\136\128 k : Real, real_le(real_abs(k), r) \226\134\146 IN(vector_add(x, op_pct(k, basis((j : Num)))), s))
+  abs((h : Real)) + abs((k : Real))
+  (e : Real) / real_of_num(3) + e / real_of_num(3)
+  (e : Real) / real_of_num(3)
+  \226\136\131 r : Real, real_lt(real_of_num(0), r) && (\226\136\128 h : Real, \226\136\128 k : Real, real_le(real_abs(h), r) && real_le(real_abs(k), r) \226\134\146 IN(vector_add(vector_add((x : Cart[Real, _]), op_pct(h, basis((i : Num)))), op_pct(k, basis((j : Num)))), (s : (Cart[Real, _]) -> Bool)))
+  (G : (Real, _) -> Real) == ((h : Real) => (k : _) => (F2 : (_, Real) -> Real)(k, h) - F2(k, real_of_num(0)))
+  \226\136\128 h : Real, \226\136\128 k : Real, vector_add(vector_add((x : Cart[Real, _]), op_pct(k, basis((j : Num)))), op_pct(h, basis((i : Num)))) == vector_add(vector_add(x, op_pct(h, basis(i))), op_pct(k, basis(j)))
+  (h : _) => (k : Real) => (F1 : (_, Real) -> Real)(h, k) - F1(h, real_of_num(0))
+  (k : Real) => (h : Real) => real_sub((f : (Cart[Real, _]) -> Real)(vector_add(vector_add((x : Cart[Real, _]), op_pct(h, basis((i : Num)))), op_pct(k, basis((j : Num))))), f(vector_add(x, op_pct(h, basis(i)))))
+  (h : Real) => (k : Real) => real_sub((f : (Cart[Real, _]) -> Real)(vector_add(vector_add((x : Cart[Real, _]), op_pct(k, basis((j : Num)))), op_pct(h, basis((i : Num))))), f(vector_add(x, op_pct(k, basis(j)))))
+  diff2c((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N])) \226\134\146 partial2((i : Num), (j : Num), f, x) == partial2(j, i, f, x)
+  IN((i : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((h : Real), (basis : (Num) -> Cart[Real, N])((i : Num)))
+  (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])((k : Real), (basis : (Num) -> Cart[Real, N])((j : Num)))
+  real_of_num(0)
+  real_of_num(0)
+  (F1 : (_) -> _)((h : _))
+  derivative((F1 : (_, Real) -> Real)((h : _)))
+  derivative((g : (Real) -> Real))
+  (F2 : (_) -> _)((k : _))
+  derivative((F2 : (_, Real) -> Real)((k : _)))
+  derivative((g : (Real) -> Real))
+  real_of_num(2)
+  op_dollar((y : Cart[_, _]), 1)
+  op_dollar((y : Cart[_, _]), 2)
+  op_dollar((y : Cart[_, _]), 1)
+  op_dollar((y : Cart[_, _]), 2)
+  within(at(vec(0)), {(y : Cart[Real, Tybit0[Unit]]) | real_of_num(0) < op_dollar(y, 1) && real_of_num(0) < op_dollar(y, 2)})
+  (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)(((x : Cart[Real, N]), (z : Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) == (\226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(y, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(y, i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(z, i) && max((op_dollar : (Cart[Real, N], Num) -> Real)(y, i) - (op_dollar : (Cart[Real, N], Num) -> Real)(x, i), (op_dollar : (Cart[Real, N], Num) -> Real)(z, i) - (op_dollar : (Cart[Real, N], Num) -> Real)(y, i)) <= (op_dollar : (Cart[Real, N], Num) -> Real)(w, i))
+  (m_bounded_on_int : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), (Real, Real)) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (f_bounds : (Real, Real))) == (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 interval_arith(f(x), f_bounds))
+  (diff2_domain : ((Cart[Real, _], Cart[Real, _]), (Cart[Real, _]) -> Real) -> Bool)((domain : (Cart[Real, _], Cart[Real, _])), (f : (Cart[Real, _]) -> Real)) == (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 diff2(f, x))
+  (diff2c_domain : ((Cart[Real, _], Cart[Real, _]), (Cart[Real, _]) -> Real) -> Bool)((domain : (Cart[Real, _], Cart[Real, _])), (f : (Cart[Real, _]) -> Real)) == (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 diff2c(f, x))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (f : (Cart[Real, _]) -> Real)) == (diff2_domain(domain, f) && (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 (\226\136\128 i : Num, \226\136\128 j : Num, continuous(o(lift, partial2(j, i, f)), at(x)))))
+  m_cell_domain((domain : (Cart[Real, _], Cart[Real, _])), (y : Cart[Real, _]), (w : Cart[Real, _])) \226\134\146 IN(y, interval([domain]))
+  (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)((p : Cart[Real, N]), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (\226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 abs((op_dollar : (Cart[Real, N], Num) -> Real)(p, i) - (op_dollar : (Cart[Real, N], Num) -> Real)(y, i)) <= (op_dollar : (Cart[Real, N], Num) -> Real)(w, i))
+  fn { (i, j) => (g : (_, _) -> _)(j, i) } == o(fn { (i, j) => g(i, j) }, (f : ((_, _)) -> (_, _)))
+  ((j : _), (i : _))
+  (s1 : (_) -> Bool) == IMAGE((f : (_) -> _), (s2 : (_) -> Bool))
+  fn { ((i : Num), (j : Num)) => (j, i) }
+  {((i : Num), (j : Num)) | (1 <= i && i <= (n : Num)) && 1 <= j && j <= i - 1}
+  {((i : Num), (j : Num)) | (1 <= i && i <= (n : Num)) && i + 1 <= j && j <= n}
+  sum(op_dot_dot(1, (n : Num)), (i : Num) => sum(op_dot_dot(i + 1, n), (j : Num) => (g : (Num, Num) -> Real)(i, j))) == sum(op_dot_dot(1, n), (i : Num) => sum(op_dot_dot(1, i - 1), (j : Num) => g(j, i)))
+  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a * (b * c) == b * (a * c)
+  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, a + b + c == a + c + b
+  (s3 : Real) == sum(op_dot_dot(1, (n : Num)), (i : Num) => sum(op_dot_dot(i + 1, n), (j : Num) => (g : (Num, Num) -> Real)(i, j)))
+  (s3 : Real) == sum(op_dot_dot(1, (n : Num)), (i : Num) => sum(op_dot_dot(1, i - 1), (j : Num) => (g : (Num, Num) -> Real)(i, j)))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  (s2 : Real) == sum(op_dot_dot(1, (n : Num)), (i : Num) => (g : (Num, Num) -> Real)(i, i) + sum(op_dot_dot(1, i - 1), (j : Num) => g(i, j)))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  (s1 : Real) == sum(op_dot_dot(1, (n : Num)), (i : Num) => sum(op_dot_dot(1, n), (j : Num) => (g : (Num, Num) -> Real)(i, j)))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
+  (i : Num) => (j : Num) => op_dollar((w : Cart[Real, _]), i) * (op_dollar(w, j) * abs(partial2(j, i, (f : (Cart[Real, _]) -> Real), (x : Cart[Real, _]))))
+  \226\136\128 g1 : (Cart[Real, _]) -> Real, \226\136\128 g2 : (Cart[Real, _]) -> Real, (\226\136\128 x : Cart[Real, _], IN(x, interval([(domain : (Cart[Real, _], Cart[Real, _]))])) \226\134\146 g1(x) == g2(x)) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 g1(x) <= (error : Real)) == (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 g2(x) <= error)
+  (diff2c_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (f : (Cart[Real, N]) -> Real)) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, (w : Cart[Real, N]), (error : Real)) == (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * ((op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * abs((partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, i, f, x)) + real_of_num(2) * (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, i - 1), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, j) * abs((partial2 : (Num, Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, i, f, x))))) <= error)
+  (g : (_) -> _)((i : _))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  (y : Cart[Real, N]) + op_pct((t : Real), (p : Cart[Real, N]) - y) == op_pct(real_of_num(1) - t, y) + op_pct(t, p)
+  IN(vector_add((y : Cart[Real, _]), op_pct((t : Real), vector_sub((p : Cart[Real, _]), y))), closed_interval([(domain : (Cart[Real, _], Cart[Real, _]))]))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 IN((p : Cart[Real, N]), interval([domain])) \226\134\146 diff2_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 m_taylor_error(f, domain, w, (dd_bound : Real)) \226\134\146 (\226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 abs(nth_derivative(2, o(f, (t : Real) => y + op_pct(t, p - y)), t)) <= dd_bound)
+  (y : Cart[Real, N]) + op_pct((t : Real), (p : Cart[Real, N]) - y) == op_pct(real_of_num(1) - t, y) + op_pct(t, p)
+  \226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 IN(vector_add((y : Cart[Real, _]), op_pct(t, vector_sub((p : Cart[Real, _]), y))), closed_interval([(domain : (Cart[Real, _], Cart[Real, _]))]))
+  (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)((p : Cart[Real, N]), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (diff2_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, w, (dd_bound : Real)) \226\134\146 abs(f(p) - (f(y) + (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(p - y, i) * (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, y)))) <= dd_bound / real_of_num(2)
+  o((f : (Cart[Real, _]) -> _), (t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, vector_sub((p : Cart[Real, _]), y))))
+  abs((s : Real))
+  (f : (_) -> Real)((y : _)) + (s : Real) + (dd_bound : Real) / real_of_num(2)
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (diff2_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, w, (dd_bound : Real)) \226\134\146 f(y) <= (hi : Real) \226\134\146 hi + ((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, y))) + dd_bound / real_of_num(2)) <= (hi_bound : Real) \226\134\146 (\226\136\128 p : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 f(p) <= hi_bound)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 e : Real, abs(x - y) <= e \226\134\146 x <= y + e
+  -abs((s : Real))
+  (f : (_) -> Real)((y : _)) + (s : Real) - (dd_bound : Real) / real_of_num(2)
+  sum((_1 : (_) -> Bool), (_2 : (_) -> Real))
+  (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (diff2_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, w, (dd_bound : Real)) \226\134\146 (lo : Real) <= f(y) \226\134\146 (lo_bound : Real) <= lo - ((sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, y))) + dd_bound / real_of_num(2)) \226\134\146 (\226\136\128 p : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(p, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 lo_bound <= f(p))
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 e : Real, abs(x - y) <= e \226\134\146 y - e <= x
+  (hi : Real) + (err_bound : Real)
+  (lo : Real) - (err_bound : Real)
+  (m_cell_domain : ((Cart[Real, N], Cart[Real, N]), Cart[Real, N], Cart[Real, N]) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 (diff2_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, w, (dd_bound : Real)) \226\134\146 interval_arith(f(y), ((lo : Real), (hi : Real))) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f, y))) + dd_bound / real_of_num(2) <= (err_bound : Real) \226\134\146 (lo_bound : Real) <= lo - err_bound \226\134\146 hi + err_bound <= (hi_bound : Real) \226\134\146 (m_bounded_on_int : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), (Real, Real)) -> Bool)(f, domain, (lo_bound, hi_bound))
+  (y : Cart[Real, N]) + op_pct((t : Real), (p : Cart[Real, N]) - y) == op_pct(real_of_num(1) - t, y) + op_pct(t, p)
+  IN(vector_add((y : Cart[Real, _]), op_pct((t : Real), vector_sub((p : Cart[Real, _]), y))), closed_interval([(domain : (Cart[Real, _], Cart[Real, _]))]))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 IN((p : Cart[Real, N]), interval([domain])) \226\134\146 diff2_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 m_taylor_partial_error(f, (i : Num), domain, w, (d_bound : Real)) \226\134\146 (\226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 abs(derivative(o(partial(i, f), (t : Real) => y + op_pct(t, p - y)), t)) <= d_bound)
+  (y : Cart[Real, N]) + op_pct((t : Real), (p : Cart[Real, N]) - y) == op_pct(real_of_num(1) - t, y) + op_pct(t, p)
+  \226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 IN(vector_add((y : Cart[Real, _]), op_pct(t, vector_sub((p : Cart[Real, _]), y))), closed_interval([(domain : (Cart[Real, _], Cart[Real, _]))]))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 IN((p : Cart[Real, N]), interval([domain])) \226\134\146 diff2_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 m_taylor_partial_error(f, (i : Num), domain, w, (dd_bound : Real)) \226\134\146 abs(partial(i, f, p) - partial(i, f, y)) <= dd_bound
+  o(partial((i : Num), (f : (Cart[Real, _]) -> Real)), (t : Real) => vector_add((y : Cart[Real, _]), op_pct(t, vector_sub((p : Cart[Real, _]), y))))
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 m_taylor_partial_error(f, (i : Num), domain, w, (dd_bound : Real)) \226\134\146 partial(i, f, y) <= (hi : Real) \226\134\146 hi + dd_bound <= (hi_bound : Real) \226\134\146 (\226\136\128 p : Cart[Real, N], IN(p, interval([domain])) \226\134\146 partial(i, f, p) <= hi_bound)
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 e : Real, abs(x - y) <= e \226\134\146 x <= y + e
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 m_taylor_partial_error(f, (i : Num), domain, w, (dd_bound : Real)) \226\134\146 (lo : Real) <= partial(i, f, y) \226\134\146 (lo_bound : Real) <= lo - dd_bound \226\134\146 (\226\136\128 p : Cart[Real, N], IN(p, interval([domain])) \226\134\146 lo_bound <= partial(i, f, p))
+  \226\136\128 x : Real, \226\136\128 y : Real, \226\136\128 e : Real, abs(x - y) <= e \226\134\146 y - e <= x
+  m_cell_domain((domain : (Cart[Real, N], Cart[Real, N])), (y : Cart[Real, N]), (w : Cart[Real, N])) \226\134\146 diff2_domain(domain, (f : (Cart[Real, N]) -> Real)) \226\134\146 m_taylor_partial_error(f, (i : Num), domain, w, (dd_bound : Real)) \226\134\146 interval_arith(partial(i, f, y), ((lo : Real), (hi : Real))) \226\134\146 (lo_bound : Real) <= lo - dd_bound \226\134\146 hi + dd_bound <= (hi_bound : Real) \226\134\146 m_bounded_on_int(partial(i, f), domain, (lo_bound, hi_bound))
   :real^N -> real
   :real^N -> real
   :real^N
   :real^N#real^N
-  f differentiable at x ==>\topen s ==> x IN s ==> (forall y. y IN s ==> g y = f y) ==>\n\t\tg differentiable at x
-  diff2 f x ==> diff2 (\\x. c * f x) x
-  lift o (\\x. c * partial i f x)
-  diff2 f x ==> diff2 (\\x. --f x) x
-  --(&1)
-  (\\x. u' % f' x) = (\\x. u' % x) o f'
-  lift o u o f = (lift o u o drop) o (lift o f)
-  (lift o f has_derivative f') (at x) ==>\n\t(u has_real_derivative u') (atreal (f x)) ==>\n\t(lift o u o f has_derivative (\\x. u' % f' x)) (at x)
-  \\x. u' % f' x
-  lift o f differentiable at x ==> \n\tu real_differentiable atreal (f x) ==>\n\tlift o u o f differentiable at x
-  lift o (\\y. derivative u (f y) * partial i f y)
-  open r
-  {z | z IN s /\\ (lift o f) z IN (IMAGE lift t)}
-  diff2 f x ==> nth_diff_strong 2 u (f x) ==> diff2 (u o f) x
-  derivative u
-  &0 < f x ==> diff2 f x ==> diff2 (abs o f) x
-  f x < &0 ==> diff2 f x ==> diff2 (abs o f) x
-  diff2 f x ==> diff2 ((\\x. x pow n) o f) x
-  ~(f x = &0) ==> diff2 f x ==> diff2 (inv o f) x
-  &0 < f x ==> diff2 f x ==> diff2 (sqrt o f) x
-  diff2 f x ==> diff2 (atn o f) x
-  diff2 f x ==> diff2 (cos o f) x
-  diff2 f x ==> diff2 (sin o f) x
-  diff2 f x ==> diff2 (exp o f) x
-  &0 < f x ==> diff2 f x ==> diff2 (log o f) x
-  abs (f x) < &1 ==> diff2 f x ==> diff2 (acs o f) x
-  abs (f x) < &1 ==> diff2 f x ==> diff2 (asn o f) x
-  -- &1 < f x ==> diff2 f x ==> diff2 (matan o f) x
-  s INTER t
-  diff2 f x ==> diff2 g x ==> diff2 (\\x. f x + g x) x
-  s INTER t
-  lift o (\\x. partial i f x + partial i g x)
-  diff2 f x ==> diff2 g x ==> diff2 (\\x. f x - g x) x
-  s INTER t
-  diff2 f x ==> diff2 g x ==> diff2 (\\x. f x * g x) x
-  s INTER t
-  lift o (\\x. partial i f x * g x + f x * partial i g x)
-  diff2_domain domain f
-  diff2_domain domain (\\x. c * f x)
-  diff2_domain domain (\\x. --f x)
+  differentiable((f : (Cart[Real, _]) -> Cart[Real, _]), at((x : Cart[Real, _]))) \226\134\146 open((s : (Cart[Real, _]) -> Bool)) \226\134\146 IN(x, s) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, s) \226\134\146 (g : (Cart[Real, _]) -> Cart[Real, _])(y) == f(y)) \226\134\146 differentiable(g, at(x))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((x : Cart[Real, _]) => (c : Real) * f(x), x)
+  o(lift, (x : Cart[Real, _]) => (c : Real) * partial((i : Num), (f : (Cart[Real, _]) -> Real), x))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((x : Cart[Real, _]) => -f(x), x)
+  -real_of_num(1)
+  ((x : _) => op_pct((u' : Real), (f' : (_) -> Cart[Real, _])(x))) == o((x : Cart[Real, _]) => op_pct(u', x), f')
+  o(lift, o((u : (Real) -> Real), (f : (_) -> Real))) == o(o(lift, o(u, drop)), o(lift, f))
+  has_derivative(o(lift, (f : (Cart[Real, _]) -> Real)), (f' : (Cart[Real, _]) -> Cart[Real, Unit]), at((x : Cart[Real, _]))) \226\134\146 has_real_derivative((u : (Real) -> Real), (u' : Real), atreal(f(x))) \226\134\146 has_derivative(o(lift, o(u, f)), (x : Cart[Real, _]) => op_pct(u', f'(x)), at(x))
+  (x : _) => op_pct((u' : Real), (f' : (_) -> Cart[Real, _])(x))
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((x : Cart[Real, _]))) \226\134\146 real_differentiable((u : (Real) -> Real), atreal(f(x))) \226\134\146 differentiable(o(lift, o(u, f)), at(x))
+  o(lift, (y : Cart[Real, _]) => derivative((u : (Real) -> Real), (f : (Cart[Real, _]) -> Real)(y)) * partial((i : Num), f, y))
+  open((r : (Cart[Real, _]) -> Bool))
+  {(z : _) | IN(z, (s : (_) -> Bool)) && IN(o(lift, (f : (_) -> Real), z), IMAGE(lift, (t : (Real) -> Bool)))}
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 nth_diff_strong(2, (u : (Real) -> Real), f(x)) \226\134\146 diff2(o(u, f), x)
+  derivative((u : (Real) -> Real))
+  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2(f, x) \226\134\146 diff2(o(abs, f), x)
+  (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) < real_of_num(0) \226\134\146 diff2(f, x) \226\134\146 diff2(o(abs, f), x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2(o((x : Real) => pow(x, (n : Num)), f), x)
+  !((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) == real_of_num(0)) \226\134\146 diff2(f, x) \226\134\146 diff2(o(inv, f), x)
+  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2(f, x) \226\134\146 diff2(o(sqrt, f), x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2(o(atn, f), x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2(o(cos, f), x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2(o(sin, f), x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2(o(exp, f), x)
+  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2(f, x) \226\134\146 diff2(o(log, f), x)
+  abs((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _]))) < real_of_num(1) \226\134\146 diff2(f, x) \226\134\146 diff2(o(acs, f), x)
+  abs((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _]))) < real_of_num(1) \226\134\146 diff2(f, x) \226\134\146 diff2(o(asn, f), x)
+  -real_of_num(1) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2(f, x) \226\134\146 diff2(o(matan, f), x)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((g : (Cart[Real, _]) -> Real), x) \226\134\146 diff2((x : Cart[Real, _]) => f(x) + g(x), x)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  o(lift, (x : Cart[Real, _]) => partial((i : Num), (f : (Cart[Real, _]) -> Real), x) + partial(i, (g : (Cart[Real, _]) -> Real), x))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((g : (Cart[Real, _]) -> Real), x) \226\134\146 diff2((x : Cart[Real, _]) => f(x) - g(x), x)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((g : (Cart[Real, _]) -> Real), x) \226\134\146 diff2((x : Cart[Real, _]) => f(x) * g(x), x)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  o(lift, (x : Cart[Real, _]) => partial((i : Num), (f : (Cart[Real, _]) -> Real), x) * (g : (Cart[Real, _]) -> Real)(x) + f(x) * partial(i, g, x))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (f : (Cart[Real, _]) -> Real))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (c : Real) * (f : (Cart[Real, _]) -> Real)(x))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => -(f : (Cart[Real, _]) -> Real)(x))
   :real#real
-  m_bounded_on_int f domain bounds ==>\n\tinterval_not_zero bounds ==> diff2_domain domain (inv o f)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_not_zero(bounds) \226\134\146 diff2_domain(domain, o(inv, f))
   ~P <=> (P <=> F)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_pos bounds ==> diff2_domain domain (sqrt o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_pos bounds ==> diff2_domain domain (abs o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_neg bounds ==> diff2_domain domain (abs o f)
-  diff2_domain domain ((\\x. x pow n) o f)
-  diff2_domain domain (atn o f)
-  diff2_domain domain (cos o f)
-  diff2_domain domain (sin o f)
-  diff2_domain domain (exp o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_pos bounds ==> diff2_domain domain (log o f)
-  m_bounded_on_int f domain bounds ==>\n\tiabs bounds < &1 ==> diff2_domain domain (acs o f)
-  m_bounded_on_int f domain bounds ==>\n\tiabs bounds < &1 ==> diff2_domain domain (asn o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_gt (-- &1) bounds ==> diff2_domain domain (matan o f)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2_domain(domain, o(sqrt, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2_domain(domain, o(abs, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_neg(bounds) \226\134\146 diff2_domain(domain, o(abs, f))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), o((x : Real) => pow(x, (n : Num)), (f : (Cart[Real, _]) -> Real)))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), o(atn, (f : (Cart[Real, _]) -> Real)))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), o(cos, (f : (Cart[Real, _]) -> Real)))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), o(sin, (f : (Cart[Real, _]) -> Real)))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), o(exp, (f : (Cart[Real, _]) -> Real)))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2_domain(domain, o(log, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 iabs(bounds) < real_of_num(1) \226\134\146 diff2_domain(domain, o(acs, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 iabs(bounds) < real_of_num(1) \226\134\146 diff2_domain(domain, o(asn, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_gt(-real_of_num(1), bounds) \226\134\146 diff2_domain(domain, o(matan, f))
   T
-  diff2_domain domain g
-  diff2_domain domain (\\x. f x + g x)
-  diff2_domain domain (\\x. f x - g x)
-  diff2_domain domain (\\x. f x * g x)
-  diff2 f x ==> (lift o f) differentiable at x
-  diff2 f x ==> (lift o partial i f) differentiable at x
-  real_interval (a, b)
-  g o (\\t. x + t % basis i)
-  (lift o f) differentiable at x ==>\n\topen s ==> x IN s ==> (forall y:real^N. y IN s ==> f y = g y) ==>\n\tpartial i f x = partial i g x
-  lift o f
-  basis i:real^N
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (g : (Cart[Real, _]) -> Real))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) + (g : (Cart[Real, _]) -> Real)(x))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) - (g : (Cart[Real, _]) -> Real)(x))
+  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) * (g : (Cart[Real, _]) -> Real)(x))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 differentiable(o(lift, f), at(x))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 differentiable(o(lift, partial((i : Num), f)), at(x))
+  real_interval(((a : Real), (b : Real)))
+  o((g : (Cart[Real, _]) -> _), (t : Real) => vector_add((x : Cart[Real, _]), op_pct(t, basis((i : Num)))))
+  differentiable(o(lift, (f : (Cart[Real, N]) -> Real)), at((x : Cart[Real, N]))) \226\134\146 open((s : (Cart[Real, N]) -> Bool)) \226\134\146 IN(x, s) \226\134\146 (\226\136\128 y : Cart[Real, N], IN(y, s) \226\134\146 f(y) == (g : (Cart[Real, N]) -> Real)(y)) \226\134\146 partial((i : Num), f, x) == partial(i, g, x)
+  o(lift, (f : (_) -> Real))
+  (basis : (Num) -> Cart[Real, N])((i : Num))
   :num
   :num
-  diff2 f x ==> partial2 i j (\\x. c * f x) x = c * partial2 i j f x
-  diff2 f x ==> partial2 i j (\\x. --f x) x = --partial2 i j f x
-  --(&1)
-  s INTER t
-  diff2 f x ==> diff2 g x ==> \n\tpartial2 i j (\\x. f x + g x) x = partial2 i j f x + partial2 i j g x
-  diff2 f x ==> diff2 g x ==> \n\tpartial2 i j (\\x. f x - g x) x = partial2 i j f x - partial2 i j g x
-  s INTER t
-  diff2 f x ==> diff2 g x ==> \n\tpartial2 i j (\\x. f x * g x) x = (partial2 i j f x * g x + partial j f x * partial i g x) +\n\t\t(partial i f x * partial j g x + f x * partial2 i j g x)
-  lift o (\\y. derivative u (f y) * partial j f y)
-  open r
-  {z | z IN s /\\ (lift o f) z IN (IMAGE lift t)}
-  diff2 f x ==> nth_diff_strong 2 u (f x) ==>\n\tpartial2 i j (u o f) x = (nth_derivative 2 u (f x) * partial i f x) * partial j f x +\n\t\t\t\tderivative u (f x) * partial2 i j f x
-  derivative u
-  derivative u
-  min d0 d1
-  g real_continuous at x ==> open s ==> x IN s ==>\n\t(forall y. y IN s ==> f y = g y) ==> f real_continuous at x
-  IMAGE lift t
-  v o drop
-  v real_continuous atreal x ==> real_open t ==> x IN t ==>\n\t(forall y. y IN t ==> u y = v y) ==> u real_continuous atreal x
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 partial2((i : Num), (j : Num), (x : Cart[Real, _]) => (c : Real) * f(x), x) == c * partial2(i, j, f, x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 partial2((i : Num), (j : Num), (x : Cart[Real, _]) => -f(x), x) == -partial2(i, j, f, x)
+  -real_of_num(1)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((g : (Cart[Real, _]) -> Real), x) \226\134\146 partial2((i : Num), (j : Num), (x : Cart[Real, _]) => f(x) + g(x), x) == partial2(i, j, f, x) + partial2(i, j, g, x)
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((g : (Cart[Real, _]) -> Real), x) \226\134\146 partial2((i : Num), (j : Num), (x : Cart[Real, _]) => f(x) - g(x), x) == partial2(i, j, f, x) - partial2(i, j, g, x)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2((g : (Cart[Real, _]) -> Real), x) \226\134\146 partial2((i : Num), (j : Num), (x : Cart[Real, _]) => f(x) * g(x), x) == partial2(i, j, f, x) * g(x) + partial(j, f, x) * partial(i, g, x) + (partial(i, f, x) * partial(j, g, x) + f(x) * partial2(i, j, g, x))
+  o(lift, (y : Cart[Real, _]) => derivative((u : (Real) -> Real), (f : (Cart[Real, _]) -> Real)(y)) * partial((j : Num), f, y))
+  open((r : (Cart[Real, _]) -> Bool))
+  {(z : _) | IN(z, (s : (_) -> Bool)) && IN(o(lift, (f : (_) -> Real), z), IMAGE(lift, (t : (Real) -> Bool)))}
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 nth_diff_strong(2, (u : (Real) -> Real), f(x)) \226\134\146 partial2((i : Num), (j : Num), o(u, f), x) == nth_derivative(2, u, f(x)) * partial(i, f, x) * partial(j, f, x) + derivative(u, f(x)) * partial2(i, j, f, x)
+  derivative((u : (Real) -> Real))
+  derivative((u : (Real) -> Real))
+  min((d0 : Real), (d1 : Real))
+  real_continuous((g : (Cart[Real, _]) -> Real), at((x : Cart[Real, _]))) \226\134\146 open((s : (Cart[Real, _]) -> Bool)) \226\134\146 IN(x, s) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, s) \226\134\146 (f : (Cart[Real, _]) -> Real)(y) == g(y)) \226\134\146 real_continuous(f, at(x))
+  IMAGE(lift, (t : (Real) -> Bool))
+  o((v : (Real) -> _), drop)
+  real_continuous((v : (Real) -> Real), atreal((x : Real))) \226\134\146 real_open((t : (Real) -> Bool)) \226\134\146 IN(x, t) \226\134\146 (\226\136\128 y : Real, IN(y, t) \226\134\146 (u : (Real) -> Real)(y) == v(y)) \226\134\146 real_continuous(u, atreal(x))
   :real^N -> real
   :real^N -> real
   :real^N
   :real^N#real^N
-  (\\x. c * partial2 j i f x)
-  diff2c f x ==> diff2c (\\x. c * f x) x
-  diff2c f x ==> diff2c (\\x. --f x) x
-  --(&1)
-  nth_diff_strong n u x ==>\n\t?s. real_open s /\\ x IN s /\\ (forall y. y IN s ==> nth_diff_strong n u y)
-  diff2 f x ==> f real_continuous at x
-  diff2 f x ==> (partial i f) real_continuous at x
+  (x : Cart[Real, _]) => (c : Real) * partial2((j : Num), (i : Num), (f : (Cart[Real, _]) -> Real), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c((x : Cart[Real, _]) => (c : Real) * f(x), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c((x : Cart[Real, _]) => -f(x), x)
+  -real_of_num(1)
+  nth_diff_strong((n : Num), (u : (Real) -> Real), (x : Real)) \226\134\146 (\226\136\131 s : (Real) -> Bool, real_open(s) && IN(x, s) && (\226\136\128 y : Real, IN(y, s) \226\134\146 nth_diff_strong(n, u, y)))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 real_continuous(f, at(x))
+  diff2((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 real_continuous(partial((i : Num), f), at(x))
   2
   derivative u _
-  nth_derivative 2 u _1
-  (\\x. (nth_derivative 2 u (f x) * partial j f x) * partial i f x + derivative u (f x) * partial2 j i f x)
-  open r
-  {z | z IN s /\\ (lift o f) z IN (IMAGE lift t)}
-  diff2c f x ==> nth_diff_strong 2 u (f x) ==>\n\t(nth_derivative 2 u) real_continuous atreal (f x) ==> diff2c (u o f) x
-  real_open s ==> real_open (s DELETE x)
-  lift x
-  UNIV DELETE (&0)
-  \\x. &2 * inv (x pow 3)
-  ~(f x = &0) ==> diff2c f x ==> diff2c (inv o f) x
+  nth_derivative(2, (u : (Real) -> Real), (_1 : Real))
+  (x : Cart[Real, _]) => nth_derivative(2, (u : (Real) -> Real), (f : (Cart[Real, _]) -> Real)(x)) * partial((j : Num), f, x) * partial((i : Num), f, x) + derivative(u, f(x)) * partial2(j, i, f, x)
+  open((r : (Cart[Real, _]) -> Bool))
+  {(z : _) | IN(z, (s : (_) -> Bool)) && IN(o(lift, (f : (_) -> Real), z), IMAGE(lift, (t : (Real) -> Bool)))}
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 nth_diff_strong(2, (u : (Real) -> Real), f(x)) \226\134\146 real_continuous(nth_derivative(2, u), atreal(f(x))) \226\134\146 diff2c(o(u, f), x)
+  real_open((s : (Real) -> Bool)) \226\134\146 real_open(DELETE(s, (x : Real)))
+  lift((x : Real))
+  DELETE(UNIV, real_of_num(0))
+  (x : Real) => real_of_num(2) * inv(pow(x, 3))
+  !((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) == real_of_num(0)) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(inv, f), x)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  (\\x. sqrt (x pow 3)) = (sqrt o (\\x. x pow 3))
-  f x
-  {x | x > &0}
-  \\x. -- inv (&4 * sqrt (x pow 3))
-  &0 < f x ==> diff2c f x ==> diff2c (sqrt o f) x
-  ~P <=> (P <=> F)
-  ~P <=> (P <=> F)
-  ~P <=> (P <=> F)
+  ((x : Real) => sqrt(pow(x, 3))) == o(sqrt, (x : Real) => pow(x, 3))
+  (f : (_) -> _)((x : _))
+  {(x : Real) | x > real_of_num(0)}
+  (x : Real) => -inv(real_of_num(4) * sqrt(pow(x, 3)))
+  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(sqrt, f), x)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  f x
-  {x | x > &0}
-  \\x. &0
-  &0 < f x ==> diff2c f x ==> diff2c (abs o f) x
-  f x
-  {x | x < &0}
-  \\x. &0
-  f x < &0 ==> diff2c f x ==> diff2c (abs o f) x
-  diff2c f x ==> diff2c ((\\x. x pow n) o f) x
-  diff2c f x ==> diff2c (atn o f) x
-  f x
-  diff2c f x ==> diff2c (cos o f) x
-  diff2c f x ==> diff2c (sin o f) x
-  diff2c f x ==> diff2c (exp o f) x
-  f x
-  {x | x > &0}
-  \\x. -- inv (x pow 2)
-  &0 < f x ==> diff2c f x ==> diff2c (log o f) x
-  (\\x. sqrt ((&1 - x * x) pow 3)) = sqrt o (\\x. (&1 - x * x) pow 3)
-  forall a. &1 - a * a = (&1 - a) * (&1 + a)
-  &0 < (&1 - f x * f x) pow 3
-  f x
-  {x | x < &1} INTER {x | x > -- &1}
-  \\x. --(x / sqrt ((&1 - x * x) pow 3))
-  abs (f x) < &1 ==> diff2c f x ==> diff2c (acs o f) x
   ~P <=> (P <=> F)
-  (\\x. sqrt ((&1 - x * x) pow 3)) = sqrt o (\\x. (&1 - x * x) pow 3)
-  forall a. &1 - a * a = (&1 - a) * (&1 + a)
-  &0 < (&1 - f x * f x) pow 3
-  f x
-  {x | x < &1} INTER {x | x > -- &1}
-  \\x. x / sqrt ((&1 - x * x) pow 3)
-  abs (f x) < &1 ==> diff2c f x ==> diff2c (asn o f) x
   ~P <=> (P <=> F)
-  h (f x)
-  \\i. -- &1 pow (i + 2) * &((i + 1) * (i + 2)) / &(2 * i + 5)
-  real_interval (&0, f x + &1)
-  \\x. (&3 / &4 * atn (sqrt x) / (x pow 2 * sqrt x) - &3 / &4 * inv (x pow 2 * (x + &1))) - &1 / &2 * inv (x * (x + &1) pow 2)
-  -- &1 < f x ==> diff2c f x ==> diff2c (matan o f) x
-  f x < &1
+  ~P <=> (P <=> F)
+  (f : (_) -> _)((x : _))
+  {(x : Real) | x > real_of_num(0)}
+  (x : _) => real_of_num(0)
+  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(abs, f), x)
+  (f : (_) -> _)((x : _))
+  {(x : Real) | x < real_of_num(0)}
+  (x : _) => real_of_num(0)
+  (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) < real_of_num(0) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(abs, f), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c(o((x : Real) => pow(x, (n : Num)), f), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c(o(atn, f), x)
+  (f : (_) -> _)((x : _))
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c(o(cos, f), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c(o(sin, f), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c(o(exp, f), x)
+  (f : (_) -> _)((x : _))
+  {(x : Real) | x > real_of_num(0)}
+  (x : Real) => -inv(pow(x, 2))
+  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(log, f), x)
+  ((x : Real) => sqrt(pow(real_of_num(1) - x * x, 3))) == o(sqrt, (x : Real) => pow(real_of_num(1) - x * x, 3))
+  \226\136\128 a : Real, real_of_num(1) - a * a == (real_of_num(1) - a) * (real_of_num(1) + a)
+  real_of_num(0) < pow(real_of_num(1) - (f : (_) -> Real)((x : _)) * f(x), 3)
+  (f : (_) -> _)((x : _))
+  INTER({(x : Real) | x < real_of_num(1)}, {(x : Real) | x > -real_of_num(1)})
+  (x : Real) => -(x / sqrt(pow(real_of_num(1) - x * x, 3)))
+  abs((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _]))) < real_of_num(1) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(acs, f), x)
+  ~P <=> (P <=> F)
+  ((x : Real) => sqrt(pow(real_of_num(1) - x * x, 3))) == o(sqrt, (x : Real) => pow(real_of_num(1) - x * x, 3))
+  \226\136\128 a : Real, real_of_num(1) - a * a == (real_of_num(1) - a) * (real_of_num(1) + a)
+  real_of_num(0) < pow(real_of_num(1) - (f : (_) -> Real)((x : _)) * f(x), 3)
+  (f : (_) -> _)((x : _))
+  INTER({(x : Real) | x < real_of_num(1)}, {(x : Real) | x > -real_of_num(1)})
+  (x : Real) => x / sqrt(pow(real_of_num(1) - x * x, 3))
+  abs((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _]))) < real_of_num(1) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(asn, f), x)
+  ~P <=> (P <=> F)
+  (h : (_) -> _)((f : (_) -> _)((x : _)))
+  (i : Num) => pow(-real_of_num(1), i + 2) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5))
+  real_interval((real_of_num(0), (f : (_) -> Real)((x : _)) + real_of_num(1)))
+  (x : Real) => real_of_num(3) / real_of_num(4) * (atn(sqrt(x)) / (pow(x, 2) * sqrt(x))) - real_of_num(3) / real_of_num(4) * inv(pow(x, 2) * (x + real_of_num(1))) - real_of_num(1) / real_of_num(2) * inv(x * pow(x + real_of_num(1), 2))
+  -real_of_num(1) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(matan, f), x)
+  (f : (_) -> Real)((x : _)) < real_of_num(1)
   atn
   ddmatan
-  from 0
-  &1
-  s INTER t
-  (\\x. partial2 j i f x + partial2 j i g x)
-  diff2c f x ==> diff2c g x ==> diff2c (\\x. f x + g x) x
-  diff2c f x ==> diff2c g x ==> diff2c (\\x. f x - g x) x
-  s INTER t
-  (\\x. (partial2 j i f x * g x + partial i f x * partial j g x) + \n\tpartial j f x  * partial i g x + f x * partial2 j i g x)
-  diff2c f x ==> diff2c g x ==> diff2c (\\x. f x * g x) x
+  from(0)
+  real_of_num(1)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  (x : Cart[Real, _]) => partial2((j : Num), (i : Num), (f : (Cart[Real, _]) -> Real), x) + partial2(j, i, (g : (Cart[Real, _]) -> Real), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c((g : (Cart[Real, _]) -> Real), x) \226\134\146 diff2c((x : Cart[Real, _]) => f(x) + g(x), x)
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c((g : (Cart[Real, _]) -> Real), x) \226\134\146 diff2c((x : Cart[Real, _]) => f(x) - g(x), x)
+  INTER((s : (_) -> Bool), (t : (_) -> Bool))
+  (x : Cart[Real, _]) => partial2((j : Num), (i : Num), (f : (Cart[Real, _]) -> Real), x) * (g : (Cart[Real, _]) -> Real)(x) + partial(i, f, x) * partial(j, g, x) + (partial(j, f, x) * partial(i, g, x) + f(x) * partial2(j, i, g, x))
+  diff2c((f : (Cart[Real, _]) -> Real), (x : Cart[Real, _])) \226\134\146 diff2c((g : (Cart[Real, _]) -> Real), x) \226\134\146 diff2c((x : Cart[Real, _]) => f(x) * g(x), x)
   :real^N -> real
   :real^N -> real
-  diff2c_domain domain f
-  diff2c_domain domain (\\x. c * f x)
-  diff2c_domain domain (\\x. --f x)
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (f : (Cart[Real, _]) -> Real))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (c : Real) * (f : (Cart[Real, _]) -> Real)(x))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => -(f : (Cart[Real, _]) -> Real)(x))
   :real#real
-  m_bounded_on_int f domain bounds ==>\n\tinterval_not_zero bounds ==> diff2c_domain domain (inv o f)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_not_zero(bounds) \226\134\146 diff2c_domain(domain, o(inv, f))
   ~P <=> (P <=> F)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_pos bounds ==> diff2c_domain domain (sqrt o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_pos bounds ==> diff2c_domain domain (abs o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_neg bounds ==> diff2c_domain domain (abs o f)
-  diff2c_domain domain ((\\x. x pow n) o f)
-  diff2c_domain domain (atn o f)
-  diff2c_domain domain (cos o f)
-  diff2c_domain domain (sin o f)
-  diff2c_domain domain (exp o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_pos bounds ==> diff2c_domain domain (log o f)
-  m_bounded_on_int f domain bounds ==>\n\tiabs bounds < &1 ==> diff2c_domain domain (acs o f)
-  m_bounded_on_int f domain bounds ==>\n\tiabs bounds < &1 ==> diff2c_domain domain (asn o f)
-  m_bounded_on_int f domain bounds ==>\n\tinterval_gt (-- &1) bounds ==> diff2c_domain domain (matan o f)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2c_domain(domain, o(sqrt, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2c_domain(domain, o(abs, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_neg(bounds) \226\134\146 diff2c_domain(domain, o(abs, f))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), o((x : Real) => pow(x, (n : Num)), (f : (Cart[Real, _]) -> Real)))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), o(atn, (f : (Cart[Real, _]) -> Real)))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), o(cos, (f : (Cart[Real, _]) -> Real)))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), o(sin, (f : (Cart[Real, _]) -> Real)))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), o(exp, (f : (Cart[Real, _]) -> Real)))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2c_domain(domain, o(log, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 iabs(bounds) < real_of_num(1) \226\134\146 diff2c_domain(domain, o(acs, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 iabs(bounds) < real_of_num(1) \226\134\146 diff2c_domain(domain, o(asn, f))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_gt(-real_of_num(1), bounds) \226\134\146 diff2c_domain(domain, o(matan, f))
   T
-  diff2c_domain domain g
-  diff2c_domain domain (\\x. f x + g x)
-  diff2c_domain domain (\\x. f x - g x)
-  diff2c_domain domain (\\x. f x * g x)
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (g : (Cart[Real, _]) -> Real))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) + (g : (Cart[Real, _]) -> Real)(x))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) - (g : (Cart[Real, _]) -> Real)(x))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) * (g : (Cart[Real, _]) -> Real)(x))
   :real^N -> real
   :real^N -> real
   :real#real
   :(real#real)list
   :real^N
-  (lift o f) differentiable at x ==>\n\tinterval_arith (--f x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (--partial i f x) int) ==>\n\tm_lin_approx (\\x. --f x) x bounds d_bounds_list
-  (lift o f) differentiable at x ==>\n\tinterval_arith (c * f x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (c * partial i f x) int) ==>\n\tm_lin_approx (\\x. c * f x) x bounds d_bounds_list
-  (lift o f) differentiable at x ==>\n\t(lift o g) differentiable at x ==>\n\tinterval_arith (f x + g x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (partial i f x + partial i g x) int) ==>\n\tm_lin_approx (\\x. f x + g x) x bounds d_bounds_list
-  (lift o f) differentiable at x ==>\n\t(lift o g) differentiable at x ==>\n\tinterval_arith (f x - g x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (partial i f x - partial i g x) int) ==>\n\tm_lin_approx (\\x. f x - g x) x bounds d_bounds_list
-  (lift o f) differentiable at x ==>\n\t(lift o g) differentiable at x ==>\n\tinterval_arith (f x * g x) bounds ==>\n\tall_n 1 d_bounds_list (\\i int. interval_arith (partial i f x * g x + f x * partial i g x) int) ==>\n\tm_lin_approx (\\x. f x * g x) x bounds d_bounds_list
-  second_bounded f domain dd_bounds_list <=>\n\tforall x. x IN interval [domain] ==> all_n 1 dd_bounds_list\n\t\t(\\i list_i. all_n 1 list_i (\\j int. interval_arith (partial2 j i f x) int))
-  m_taylor_interval f domain y w f_bounds d_bounds_list dd_bounds_list <=>\n\t\tm_cell_domain domain y w /\\\n\t\tdiff2c_domain domain f /\\\n\t\tm_lin_approx f y f_bounds d_bounds_list /\\\n\t\tsecond_bounded f domain dd_bounds_list
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((x : Cart[Real, _]))) \226\134\146 interval_arith(-f(x), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(-partial(i, f, x), int)) \226\134\146 m_lin_approx((x : Cart[Real, _]) => -f(x), x, bounds, d_bounds_list)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((x : Cart[Real, _]))) \226\134\146 interval_arith((c : Real) * f(x), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(c * partial(i, f, x), int)) \226\134\146 m_lin_approx((x : Cart[Real, _]) => c * f(x), x, bounds, d_bounds_list)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((x : Cart[Real, _]))) \226\134\146 differentiable(o(lift, (g : (Cart[Real, _]) -> Real)), at(x)) \226\134\146 interval_arith(f(x) + g(x), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x) + partial(i, g, x), int)) \226\134\146 m_lin_approx((x : Cart[Real, _]) => f(x) + g(x), x, bounds, d_bounds_list)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((x : Cart[Real, _]))) \226\134\146 differentiable(o(lift, (g : (Cart[Real, _]) -> Real)), at(x)) \226\134\146 interval_arith(f(x) - g(x), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x) - partial(i, g, x), int)) \226\134\146 m_lin_approx((x : Cart[Real, _]) => f(x) - g(x), x, bounds, d_bounds_list)
+  differentiable(o(lift, (f : (Cart[Real, _]) -> Real)), at((x : Cart[Real, _]))) \226\134\146 differentiable(o(lift, (g : (Cart[Real, _]) -> Real)), at(x)) \226\134\146 interval_arith(f(x) * g(x), (bounds : (Real, Real))) \226\134\146 all_n(1, (d_bounds_list : List[(Real, Real)]), (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x) * g(x) + f(x) * partial(i, g, x), int)) \226\134\146 m_lin_approx((x : Cart[Real, _]) => f(x) * g(x), x, bounds, d_bounds_list)
+  (second_bounded : ((Cart[Real, _]) -> Real, (Cart[Real, _], Cart[Real, _]), List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) == (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 all_n(1, dd_bounds_list, (i : Num) => (list_i : List[(Real, Real)]) => all_n(1, list_i, (j : Num) => (int : (Real, Real)) => interval_arith(partial2(j, i, f, x), int))))
+  (m_taylor_interval : ((Cart[Real, _]) -> Real, (Cart[Real, _], Cart[Real, _]), Cart[Real, _], Cart[Real, _], (Real, Real), List[(Real, Real)], List[List[(Real, Real)]]) -> Bool)((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (y : Cart[Real, _]), (w : Cart[Real, _]), (f_bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)]), (dd_bounds_list : List[List[(Real, Real)]])) == (m_cell_domain(domain, y, w) && diff2c_domain(domain, f) && m_lin_approx(f, y, f_bounds, d_bounds_list) && second_bounded(f, domain, dd_bounds_list))
   :real^N -> real
   :real^N -> real
   :real^N
@@ -1098,93 +1098,93 @@ Formal_ineqs/taylor/theory/multivariate_taylor-compiled quotations (789):
   :((real#real)list)list
   :((real#real)list)list
   :((real#real)list)list
-  m_cell_domain domain y w
-  diff2c_domain domain f
-  m_bounded_on_int f domain f_bounds ==> interval_not_zero f_bounds ==>\n\tm_lin_approx (inv o f) y bounds d_bounds_list ==>\n\tsecond_bounded (inv o f) domain dd_bounds_list ==>\n\tm_taylor_interval (inv o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> interval_pos f_bounds ==>\n\tm_lin_approx (sqrt o f) y bounds d_bounds_list ==>\n\tsecond_bounded (sqrt o f) domain dd_bounds_list ==>\n\tm_taylor_interval (sqrt o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> interval_pos f_bounds ==>\n\tm_lin_approx (abs o f) y bounds d_bounds_list ==>\n\tsecond_bounded (abs o f) domain dd_bounds_list ==>\n\tm_taylor_interval (abs o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> interval_neg f_bounds ==>\n\tm_lin_approx (abs o f) y bounds d_bounds_list ==>\n\tsecond_bounded (abs o f) domain dd_bounds_list ==>\n\tm_taylor_interval (abs o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx ((\\x. x pow n) o f) y bounds d_bounds_list ==>\n\tsecond_bounded ((\\x. x pow n) o f) domain dd_bounds_list ==>\n\tm_taylor_interval ((\\x. x pow n) o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (atn o f) y bounds d_bounds_list ==>\n\tsecond_bounded (atn o f) domain dd_bounds_list ==>\n\tm_taylor_interval (atn o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (cos o f) y bounds d_bounds_list ==>\n\tsecond_bounded (cos o f) domain dd_bounds_list ==>\n\tm_taylor_interval (cos o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (sin o f) y bounds d_bounds_list ==>\n\tsecond_bounded (sin o f) domain dd_bounds_list ==>\n\tm_taylor_interval (sin o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (exp o f) y bounds d_bounds_list ==>\n\tsecond_bounded (exp o f) domain dd_bounds_list ==>\n\tm_taylor_interval (exp o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> interval_pos f_bounds ==>\n\tm_lin_approx (log o f) y bounds d_bounds_list ==>\n\tsecond_bounded (log o f) domain dd_bounds_list ==>\n\tm_taylor_interval (log o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> iabs f_bounds < &1 ==>\n\tm_lin_approx (acs o f) y bounds d_bounds_list ==>\n\tsecond_bounded (acs o f) domain dd_bounds_list ==>\n\tm_taylor_interval (acs o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> iabs f_bounds < &1 ==>\n\tm_lin_approx (asn o f) y bounds d_bounds_list ==>\n\tsecond_bounded (asn o f) domain dd_bounds_list ==>\n\tm_taylor_interval (asn o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_bounded_on_int f domain f_bounds ==> interval_gt (-- &1) f_bounds ==>\n\tm_lin_approx (matan o f) y bounds d_bounds_list ==>\n\tsecond_bounded (matan o f) domain dd_bounds_list ==>\n\tm_taylor_interval (matan o f) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (\\x. --f x) y bounds d_bounds_list ==>\n\tsecond_bounded (\\x. --f x) domain dd_bounds_list ==>\n\tm_taylor_interval (\\x. --f x) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (\\x. c * f x) y bounds d_bounds_list ==>\n\tsecond_bounded (\\x. c * f x) domain dd_bounds_list ==>\n\tm_taylor_interval (\\x. c * f x) domain y w bounds d_bounds_list dd_bounds_list
-  diff2c_domain domain g
-  m_lin_approx (\\x. f x + g x) y bounds d_bounds_list ==>\n\tsecond_bounded (\\x. f x + g x) domain dd_bounds_list ==>\n\tm_taylor_interval (\\x. f x + g x) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (\\x. f x - g x) y bounds d_bounds_list ==>\n\tsecond_bounded (\\x. f x - g x) domain dd_bounds_list ==>\n\tm_taylor_interval (\\x. f x - g x) domain y w bounds d_bounds_list dd_bounds_list
-  m_lin_approx (\\x. f x * g x) y bounds d_bounds_list ==>\n\tsecond_bounded (\\x. f x * g x) domain dd_bounds_list ==>\n\tm_taylor_interval (\\x. f x * g x) domain y w bounds d_bounds_list dd_bounds_list
+  m_cell_domain((domain : (Cart[Real, _], Cart[Real, _])), (y : Cart[Real, _]), (w : Cart[Real, _]))
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (f : (Cart[Real, _]) -> Real))
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 interval_not_zero(f_bounds) \226\134\146 m_lin_approx(o(inv, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(inv, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(inv, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 interval_pos(f_bounds) \226\134\146 m_lin_approx(o(sqrt, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(sqrt, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(sqrt, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 interval_pos(f_bounds) \226\134\146 m_lin_approx(o(abs, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(abs, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(abs, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 interval_neg(f_bounds) \226\134\146 m_lin_approx(o(abs, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(abs, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(abs, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx(o((x : Real) => pow(x, (n : Num)), (f : (Cart[Real, _]) -> Real)), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o((x : Real) => pow(x, n), f), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o((x : Real) => pow(x, n), f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx(o(atn, (f : (Cart[Real, _]) -> Real)), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(atn, f), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(atn, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx(o(cos, (f : (Cart[Real, _]) -> Real)), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(cos, f), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(cos, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx(o(sin, (f : (Cart[Real, _]) -> Real)), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(sin, f), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(sin, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx(o(exp, (f : (Cart[Real, _]) -> Real)), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(exp, f), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(exp, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 interval_pos(f_bounds) \226\134\146 m_lin_approx(o(log, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(log, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(log, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 iabs(f_bounds) < real_of_num(1) \226\134\146 m_lin_approx(o(acs, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(acs, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(acs, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 iabs(f_bounds) < real_of_num(1) \226\134\146 m_lin_approx(o(asn, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(asn, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(asn, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (f_bounds : (Real, Real))) \226\134\146 interval_gt(-real_of_num(1), f_bounds) \226\134\146 m_lin_approx(o(matan, f), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded(o(matan, f), domain, (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval(o(matan, f), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx((x : Cart[Real, _]) => -(f : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded((x : Cart[Real, _]) => -f(x), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval((x : Cart[Real, _]) => -f(x), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx((x : Cart[Real, _]) => (c : Real) * (f : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded((x : Cart[Real, _]) => c * f(x), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval((x : Cart[Real, _]) => c * f(x), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (g : (Cart[Real, _]) -> Real))
+  m_lin_approx((x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) + (g : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded((x : Cart[Real, _]) => f(x) + g(x), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval((x : Cart[Real, _]) => f(x) + g(x), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx((x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) - (g : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded((x : Cart[Real, _]) => f(x) - g(x), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval((x : Cart[Real, _]) => f(x) - g(x), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
+  m_lin_approx((x : Cart[Real, _]) => (f : (Cart[Real, _]) -> Real)(x) * (g : (Cart[Real, _]) -> Real)(x), (y : Cart[Real, _]), (bounds : (Real, Real)), (d_bounds_list : List[(Real, Real)])) \226\134\146 second_bounded((x : Cart[Real, _]) => f(x) * g(x), (domain : (Cart[Real, _], Cart[Real, _])), (dd_bounds_list : List[List[(Real, Real)]])) \226\134\146 m_taylor_interval((x : Cart[Real, _]) => f(x) * g(x), domain, y, (w : Cart[Real, _]), bounds, d_bounds_list, dd_bounds_list)
   :real^N->real
-  &0 < b ==> (a / b <= &1 <=> a <= b)
-  DISJOINT ((1..dimindex (:N)) DELETE j) {j}
-  1..dimindex (:N) = ((1..dimindex (:N)) DELETE j) UNION {j}
-  forall t. t IN s ==> nth_derivative 2 g t = partial2 j j f (y1 + t % basis j)
-  h = g o (\\t'. t + t')
+  real_of_num(0) < (b : Real) \226\134\146 ((a : Real) / b <= real_of_num(1)) == (a <= b)
+  DISJOINT(DELETE(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num)), {j})
+  op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))) == UNION(DELETE(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num)), {j})
+  \226\136\128 t : Real, IN(t, (s : (Real) -> Bool)) \226\134\146 nth_derivative(2, (g : (Real) -> Real), t) == partial2((j : Num), j, (f : (Cart[Real, _]) -> Real), vector_add((y1 : Cart[Real, _]), op_pct(t, basis(j))))
+  (h : (Real) -> _) == o((g : (Real) -> _), (t' : Real) => (t : Real) + t')
   f o _
-  forall t. t IN s ==> derivative g t = partial j f (y1 + t % basis j)
-  forall t. t IN s ==> nth_diff_strong 2 g t
-  forall t. t IN s ==> y1 + t % basis j IN interval [x,z]
+  \226\136\128 t : Real, IN(t, (s : (Real) -> Bool)) \226\134\146 derivative((g : (Real) -> Real), t) == partial((j : Num), (f : (Cart[Real, _]) -> Real), vector_add((y1 : Cart[Real, _]), op_pct(t, basis(j))))
+  \226\136\128 t : Real, IN(t, (s : (Real) -> Bool)) \226\134\146 nth_diff_strong(2, (g : (Real) -> Real), t)
+  \226\136\128 t : Real, IN(t, (s : (Real) -> Bool)) \226\134\146 IN(vector_add((y1 : Cart[Real, _]), op_pct(t, basis((j : Num)))), closed_interval([((x : Cart[Real, _]), (z : Cart[Real, _]))]))
   real_interval _
-  forall a. &0 < a ==> &0 <= a
-  real_interval [&0, z$j - x$j]
-  forall a. &0 < a ==> &0 <= a
-  &0 <= t /\\ t <= &1 /\\ y$j - x$j = (&1 - t) * &0 + t * (z$j - x$j)
-  y$j
-  forall a b. &0 < a - b <=> ~(a = b) /\\ b <= a
-  &0 < z$j - x$j
-  (y$j - x$j) / (z$j - x$j)
-  y$j = x$j
-  f y2 = g (z$j - x$j)
-  f y = g (y$j - x$j)
-  y = y1 + (y$j - x$j) % basis j /\\ y2 = y1 + (z$j - x$j) % basis j
-  f y1 = g (&0)
-  f o (\\t. y1 + t % basis j)
-  f y <= max (f y1) (f y2)
-  ~(i = j)
-  y1 = y
-  y1 IN interval [x,u] /\\ y2 IN interval [v,z]
-  (lambda i. if i = j then z$j else y$i):real^N
-  (lambda i. if i = j then x$j else y$i):real^N
-  (forall i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i /\\ v$i = x$i) ==>\n\tu$j = x$j ==> v$j = z$j ==>\n\tdiff2_domain (x,z) f ==>\n\t(forall y. y IN interval [x,z] ==> &0 <= partial2 j j f y) ==>\n\t(forall y. y IN interval [x,u] ==> f y <= hi) ==>\n\t(forall y. y IN interval [v,z] ==> f y <= hi) ==>\n\t(forall y. y IN interval [x,z] ==> f y <= hi)
-  i = j
-  i = j
-  j IN 1..dimindex (:N)
-  i = j
-  i = j
+  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 real_of_num(0) <= a
+  real_interval([(real_of_num(0), op_dollar((z : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j))])
+  \226\136\128 a : Real, real_of_num(0) < a \226\134\146 real_of_num(0) <= a
+  real_of_num(0) <= (t : Real) && t <= real_of_num(1) && op_dollar((y : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j) == (real_of_num(1) - t) * real_of_num(0) + t * (op_dollar((z : Cart[Real, _]), j) - op_dollar(x, j))
+  op_dollar((y : Cart[_, _]), (j : Num))
+  \226\136\128 a : Real, \226\136\128 b : Real, (real_of_num(0) < a - b) == (!(a == b) && b <= a)
+  real_of_num(0) < op_dollar((z : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j)
+  (op_dollar((y : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j)) / (op_dollar((z : Cart[Real, _]), j) - op_dollar(x, j))
+  op_dollar((y : Cart[_, _]), (j : Num)) == op_dollar((x : Cart[_, _]), j)
+  (f : (_) -> _)((y2 : _)) == (g : (Real) -> _)(op_dollar((z : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j))
+  (f : (Cart[Real, _]) -> _)((y : Cart[Real, _])) == (g : (Real) -> _)(op_dollar(y, (j : Num)) - op_dollar((x : Cart[Real, _]), j))
+  (y : Cart[Real, _]) == vector_add((y1 : Cart[Real, _]), op_pct(real_sub(op_dollar(y, (j : Num)), op_dollar((x : Cart[Real, _]), j)), basis(j))) && (y2 : Cart[Real, _]) == vector_add(y1, op_pct(real_sub(op_dollar((z : Cart[Real, _]), j), op_dollar(x, j)), basis(j)))
+  (f : (_) -> _)((y1 : _)) == (g : (Real) -> _)(real_of_num(0))
+  o((f : (Cart[Real, _]) -> _), (t : Real) => vector_add((y1 : Cart[Real, _]), op_pct(t, basis((j : Num)))))
+  (f : (_) -> Real)((y : _)) <= max(f((y1 : _)), f((y2 : _)))
+  !((i : _) == (j : _))
+  (y1 : _) == (y : _)
+  IN((y1 : Cart[Real, _]), interval([((x : Cart[Real, _]), (u : Cart[Real, _]))])) && IN((y2 : Cart[Real, _]), interval([((v : Cart[Real, _]), (z : Cart[Real, _]))]))
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == (j : Num) { op_dollar((z : Cart[Real, _]), j) } else { op_dollar((y : Cart[Real, _]), i) })
+  (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => if i == (j : Num) { op_dollar((x : Cart[Real, _]), j) } else { op_dollar((y : Cart[Real, _]), i) })
+  (\226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 !(i == (j : Num)) \226\134\146 op_dollar((u : Cart[Real, _]), i) == op_dollar((z : Cart[Real, _]), i) && op_dollar((v : Cart[Real, _]), i) == op_dollar((x : Cart[Real, _]), i)) \226\134\146 op_dollar(u, j) == op_dollar(x, j) \226\134\146 op_dollar(v, j) == op_dollar(z, j) \226\134\146 diff2_domain((x, z), (f : (Cart[Real, _]) -> Real)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 real_of_num(0) <= partial2(j, j, f, y)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, u)])) \226\134\146 f(y) <= (hi : Real)) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(v, z)])) \226\134\146 f(y) <= hi) \226\134\146 (\226\136\128 y : Cart[Real, _], IN(y, interval([(x, z)])) \226\134\146 f(y) <= hi)
+  (i : _) == (j : _)
+  (i : _) == (j : _)
+  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
+  (i : _) == (j : _)
+  (i : _) == (j : _)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  z$j = x$j
+  op_dollar((z : Cart[_, _]), (j : Num)) == op_dollar((x : Cart[_, _]), j)
   ~P <=> (P <=> F)
-  i = j
+  (i : _) == (j : _)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
   ~P <=> (P <=> F)
-  derivative g
-  nth_derivative 2 g
-  z$j - x$j
-  &0
-  lift o (\\x. c) = (\\x. lift c)
-  lift o (\\x. f x) = (\\x. lift (f x))
-  (:real^N)
-  diff2 (\\x:real^N. c) x
-  diff2_domain domain (\\x:real^N. c)
-  partial2 i j (\\x:real^N. c) = (\\x. &0)
-  diff2c (\\x:real^N. c) x
-  diff2c_domain domain (\\x:real^N. c)
-  (\\x. x$k) o (\\t. x + t % basis i) = (\\t. x$k + t * (basis i:real^N)$k)
-  partial i (\\x:real^N. x$k) = (\\x. (basis i:real^N)$k)
-  k IN 1..dimindex (:N) ==> \n\tpartial i (\\x:real^N. x$k) = (\\x. if i = k then &1 else &0)
-  partial2 i j (\\x:real^N. x$k) = (\\x. &0)
-  (:real^N)
-  k IN 1..dimindex (:N) ==> diff2 (\\x:real^N. x$k) x
-  k IN 1..dimindex (:N) ==> diff2_domain domain (\\x:real^N. x$k)
-  k IN 1..dimindex (:N) ==> diff2c (\\x:real^N. x$k) x
-  k IN 1..dimindex (:N) ==> diff2c_domain domain (\\x:real^N. x$k)
+  derivative((g : (Real) -> Real))
+  nth_derivative(2, (g : (Real) -> Real))
+  op_dollar((z : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j)
+  real_of_num(0)
+  o(lift, (x : _) => (c : Real)) == ((x : _) => lift(c))
+  o(lift, (x : _) => (f : (_) -> Real)(x)) == ((x : _) => lift(f(x)))
+  (UNIV : (Cart[Real, N]) -> Bool)
+  diff2((x : Cart[Real, N]) => (c : Real), (x : Cart[Real, N]))
+  diff2_domain((domain : (Cart[Real, N], Cart[Real, N])), (x : Cart[Real, N]) => (c : Real))
+  partial2((i : Num), (j : Num), (x : Cart[Real, N]) => (c : Real)) == ((x : Cart[Real, N]) => real_of_num(0))
+  diff2c((x : Cart[Real, N]) => (c : Real), (x : Cart[Real, N]))
+  diff2c_domain((domain : (Cart[Real, N], Cart[Real, N])), (x : Cart[Real, N]) => (c : Real))
+  o((x : Cart[Real, _]) => op_dollar(x, (k : Num)), (t : Real) => vector_add((x : Cart[Real, _]), op_pct(t, basis((i : Num))))) == ((t : Real) => real_add(op_dollar(x, k), real_mul(t, (op_dollar : (Cart[Real, N], Num) -> Real)((basis : (Num) -> Cart[Real, N])(i), k))))
+  (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)((i : Num), (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, (k : Num))) == ((x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)((basis : (Num) -> Cart[Real, N])(i), k))
+  (IN : (Num, (Num) -> Bool) -> Bool)((k : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)((i : Num), (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, k)) == ((x : Cart[Real, N]) => if i == k { real_of_num(1) } else { real_of_num(0) })
+  partial2((i : Num), (j : Num), (x : Cart[Real, N]) => op_dollar(x, (k : Num))) == ((x : Cart[Real, N]) => real_of_num(0))
+  (UNIV : (Cart[Real, N]) -> Bool)
+  (IN : (Num, (Num) -> Bool) -> Bool)((k : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (diff2 : ((Cart[Real, N]) -> Real, Cart[Real, N]) -> Bool)((x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, k), (x : Cart[Real, N]))
+  (IN : (Num, (Num) -> Bool) -> Bool)((k : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (diff2_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, k))
+  (IN : (Num, (Num) -> Bool) -> Bool)((k : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (diff2c : ((Cart[Real, N]) -> Real, Cart[Real, N]) -> Bool)((x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, k), (x : Cart[Real, N]))
+  (IN : (Num, (Num) -> Bool) -> Bool)((k : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (diff2c_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)((domain : (Cart[Real, N], Cart[Real, N])), (x : Cart[Real, N]) => (op_dollar : (Cart[Real, N], Num) -> Real)(x, k))
 Multivariate_taylor.IMAGE_DELETE_INJ_COMPAT =  |- (#forall:fun(fun(fun('?1,'?2),bool),bool) (\f:fun('?1,'?2). (#forall:fun(fun(fun('?1,bool),bool),bool) (\s:fun('?1,bool). (#forall:fun(fun('?1,bool),bool) (\a:'?1. ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun('?1,bool),bool) (\x:'?1. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('?2,fun('?2,bool)) (f:fun('?1,'?2) x:'?1)) (f:fun('?1,'?2) a:'?1))) ((#=:fun('?1,fun('?1,bool)) x:'?1) a:'?1))))) ((#=:fun(fun('?2,bool),fun(fun('?2,bool),bool)) ((#IMAGE:fun(fun('?1,'?2),fun(fun('?1,bool),fun('?2,bool))) f:fun('?1,'?2)) ((#DELETE:fun(fun('?1,bool),fun('?1,fun('?1,bool))) s:fun('?1,bool)) a:'?1))) ((#DELETE:fun(fun('?2,bool),fun('?2,fun('?2,bool))) ((#IMAGE:fun(fun('?1,'?2),fun(fun('?1,bool),fun('?2,bool))) f:fun('?1,'?2)) s:fun('?1,bool))) (f:fun('?1,'?2) a:'?1))))))))))
 Multivariate_taylor.partial =  |- (#forall:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#forall:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#forall:fun(fun(num,bool),bool) (\i:num. ((#=:fun(real,fun(real,bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) ((#derivative:fun(fun(real,real),fun(real,real)) ((#o:fun(fun(cart(real,'N),real),fun(fun(real,cart(real,'N)),fun(real,real))) f:fun(cart(real,'N),real)) (\t:real. ((#vector_add:fun(cart(real,'N),fun(cart(real,'N),cart(real,'N))) x:cart(real,'N)) ((#%:fun(real,fun(cart(real,'N),cart(real,'N))) t:real) (#basis:fun(num,cart(real,'N)) i:num)))))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))
 Multivariate_taylor.all_n =  |- ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) (((#all_n:fun(num,fun(list('?3),fun(fun(num,fun('?3,bool)),bool))) n:num) #NIL:list('?3)) s:fun(num,fun('?3,bool)))) #T:bool)) ((#=:fun(bool,fun(bool,bool)) (((#all_n:fun(num,fun(list('?3),fun(fun(num,fun('?3,bool)),bool))) n:num) ((#CONS:fun('?3,fun(list('?3),list('?3))) h:'?3) t:list('?3))) s:fun(num,fun('?3,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((s:fun(num,fun('?3,bool)) n:num) h:'?3)) (((#all_n:fun(num,fun(list('?3),fun(fun(num,fun('?3,bool)),bool))) (#SUC:fun(num,num) n:num)) t:list('?3)) s:fun(num,fun('?3,bool))))))
