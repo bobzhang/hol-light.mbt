@@ -28,7 +28,10 @@ PSEUDO_CONSTANT = re.compile(r"(mk|dest)_auto_define_finite_type_('[0-4])")
 
 NAME_PATCHES = {
     'Jordan/lib_ext.ml': [
-        ('let cname\' = package_name^"\'"^cname in', 'let cname\' = package_name^"_"^cname in'),
+        # a package name has no _, so package_name splits one way only
+        ('let cname\' = package_name^"\'"^cname in',
+         'let cname\' = if String.contains package_name \'_\' then failwith "local_definition: a package name with _" '
+         'else package_name^"_"^cname in'),
         # each constant's upstream name, for tactics_fix's hash_of_term
         ('let local_definition package_name tm =',
          'let local_upstream_names = Hashtbl.create 300;;\n\nlet local_definition package_name tm ='),
@@ -97,9 +100,24 @@ def rename_names(text, patches):
     return text
 
 
+# a HOL name in structural output, unless it is a variable's (name:type;
+# a constant is #name:type)
+STRUCTURAL_NAME = re.compile(r"(?<![A-Za-z0-9_'])(?<!#)([A-Za-z0-9_']+)(?=:)|([A-Za-z0-9_']+)")
+
+
+def rename_structural(line):
+    def one(m):
+        if m[1] is not None:
+            return m[1]  # a variable keeps its name
+        return renamed_name(m[2]) or m[2]
+    return STRUCTURAL_NAME.sub(one, line)
+
+
 def renamed_output(output):
     """Reference output with the names renamed: trace lines (OCaml-escaped
-    quotation text) decoded first, every other line on its HOL names."""
+    quotation text) decoded first and renamed as the sources are; every
+    other line on its HOL names, except variables' (a variable named like
+    a renamed constant would be a difference the check must report)."""
     out, trace = [], False
     for line in output.splitlines(keepends=True):
         if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
@@ -109,7 +127,7 @@ def renamed_output(output):
             continue
         else:
             trace = False
-        out.append(rename_tokens(line))
+        out.append(rename_structural(line))
     return ''.join(out)
 
 
