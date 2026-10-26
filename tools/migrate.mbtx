@@ -622,8 +622,13 @@ async fn record(
       let cs = f.to_array()
       cs.length() > 3 && cs[0] is ('0'..='9') && cs[1] is ('0'..='9') && cs[2] == '_'
     }
+    // by number (String::compare puts shorter names first)
+    let number = (f : String) => {
+      let cs = f.to_array()
+      (cs[0].to_int() - '0'.to_int()) * 10 + (cs[1].to_int() - '0'.to_int())
+    }
     if ranges.iter().all(r => numbered(r.0)) {
-      ranges.sort_by((a, b) => a.0.compare(b.0))
+      ranges.sort_by((a, b) => number(a.0).compare(number(b.0)))
     }
     println("recording via \{tpkg}: " + ranges.map(r => r.0).join(" "))
   }
