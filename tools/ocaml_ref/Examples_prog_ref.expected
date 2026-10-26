@@ -5825,7 +5825,7 @@ Examples/prog quotations (108):
   correct p (ASSERT b) q
   correct p SKIP q
   x < n
-  correct\n   T\n     var x,y,n;\n       x := 0;\n       y := 1;\n       while x < n do [invariant x <= n /\\ (y = FACT x); measure n - x]\n        (x := x + 1;\n         y := y * x)\n     end\n   y = FACT n
+  correct\n  (\\(x,y,n). T)\n  (Assign (\\(x,y,n). (0,y,n)) Seq\n   Assign (\\(x,y,n). (x,1,n)) Seq\n   AWHILE (\\(x,y,n). x <= n /\\ (y = FACT x))\n          (MEASURE (\\(x,y,n). n - x))\n          (\\(x,y,n). x < n)\n          (Assign (\\(x,y,n). (x + 1,y,n)) Seq\n           Assign (\\(x,y,n). (x,y * x,n))))\n  (\\(x,y,n). y = FACT n)
 FALSE =  |- ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) #FALSE:fun('S,bool)) (\x:'S. #F:bool))
 TRUE =  |- ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) #TRUE:fun('S,bool)) (\x:'S. #T:bool))
 NOT =  |- (#forall:fun(fun(fun('S,bool),bool),bool) (\p:fun('S,bool). ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) (#NOT:fun(fun('S,bool),fun('S,bool)) p:fun('S,bool))) (\x:'S. (#~:fun(bool,bool) (p:fun('S,bool) x:'S))))))
