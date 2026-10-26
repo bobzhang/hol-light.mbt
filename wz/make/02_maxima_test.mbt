@@ -88350,9 +88350,9 @@ test "WZ/maxima matches WZ/maxima.ml" {
       #|  real_mul
       #|  real_sub
       #|  real_add
-      #|  ( * ):num->num->num
-      #|  (-):num->num->num
-      #|  (+):num->num->num
+      #|  (op_star : (Num, Num) -> Num)
+      #|  (op_minus : (Num, Num) -> Num)
+      #|  (op_plus : (Num, Num) -> Num)
       #|  real_of_num
       #|  real_neg
       #|  binom
