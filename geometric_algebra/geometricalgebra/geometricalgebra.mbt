@@ -453,7 +453,7 @@ fn step_14() -> Unit raise {
   define_pseudo_finite_type_c.set(fn(x184 : Int64) -> @kernel.Thm raise {
     let n = x184
     // upstream defines 0 .. 4; a larger n keeps upstream's name
-    let ns = if n <= 4L {
+    let ns = if 0L <= n && n <= 4L {
       ["Zero", "One", "Two", "Three", "Four"][n.to_int()]
     } else {
       "'" + Int64::to_string(n)
