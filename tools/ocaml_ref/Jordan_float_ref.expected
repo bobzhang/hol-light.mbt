@@ -5842,19 +5842,19 @@ Warning: inventing type variables
 0..0..1..2..3..solved at 9
 priority is now real
 Jordan/float quotations (585):
-  real_add:real->real->real
-  real_sub:real->real->real
-  real_mul:real->real->real
-  real_div:real->real->real
-  real_lt:real->real->bool
-  real_le:real->real->bool
-  real_gt:real->real->bool
-  real_ge:real->real->bool
-  real_neg:real->real
-  real_pow:real->num->real
-  real_inv:real->real
-  real_abs:real->real
-  real_of_num:num->real
+  real_add
+  real_sub
+  real_mul
+  op_slash
+  real_lt
+  real_le
+  real_gt
+  real_ge
+  real_neg
+  real_pow
+  inv
+  real_abs
+  real_of_num
   (twopow : (Int) -> Real)((x : Int)) == (if (\226\136\131 n : Num, x == int_of_num(n)) { pow(real_of_num(2), nabs(x)) } else { inv(pow(real_of_num(2), nabs(x))) })
   (float : (Int, Int) -> Real)((x : Int), (n : Int)) == real_of_int(x) * twopow(n)
   (interval : (Real, Real, Real) -> Bool)((x : Real), (f : Real), (eps : Real)) == (abs(x - f) <= eps)
