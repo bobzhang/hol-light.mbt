@@ -84,24 +84,32 @@ def rename_names(text, patches):
     return text
 
 
-# a HOL name in structural output, unless it is a variable's (name:type;
-# a constant is #name:type)
-STRUCTURAL_NAME = re.compile(r"(?<![A-Za-z0-9_'])(?<!#)([A-Za-z0-9_']+)(?=:)|([A-Za-z0-9_']+)")
+# The names of constants and type constants in output check_name_renames.py
+# makes (HOL_REF_MARK_TYPE_CONSTANTS, prelude.ml): those marked #, and those
+# its constants and types lines list. A variable (name:type) or a type
+# variable ('name) is no such name: renaming one is a difference.
+MARKED_NAME = re.compile(r"(?<=#)[A-Za-z0-9_']+")
+LISTING = re.compile(r'(constants|types) = ')
+
+
+def constant_names(line):
+    """The constants' and type constants' names in a line of output."""
+    if LISTING.match(line):
+        return HOL_TOKEN.findall(line[line.index('=') + 1:])
+    return MARKED_NAME.findall(line)
 
 
 def rename_structural(line):
-    def one(m):
-        if m[1] is not None:
-            return m[1]  # a variable keeps its name
-        return renamed_name(m[2]) or m[2]
-    return STRUCTURAL_NAME.sub(one, line)
+    if m := LISTING.match(line):
+        return line[:m.end()] + rename_tokens(line[m.end():])
+    return MARKED_NAME.sub(lambda m: renamed_name(m[0]) or m[0], line)
 
 
 def renamed_output(output):
-    """Reference output with the names renamed: trace lines (OCaml-escaped
-    quotation text) decoded first and renamed as the sources are; every
-    other line on its HOL names, except variables' (a variable named like
-    a renamed constant would be a difference the check must report)."""
+    """Reference output (made with HOL_REF_MARK_TYPE_CONSTANTS) with the
+    names renamed: trace lines (OCaml-escaped quotation text) decoded first
+    and renamed as the sources are; every other line in its constants' and
+    type constants' names only."""
     out, trace = [], False
     for line in output.splitlines(keepends=True):
         if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
