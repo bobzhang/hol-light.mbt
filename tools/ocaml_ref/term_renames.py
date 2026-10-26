@@ -60,14 +60,17 @@ TERM_RENAMES = {
 # discards (GEN_TAC, or drops the assumption). Elsewhere a string "_" names
 # one, as any other.
 WILDCARD = '_'
-DISCARD = re.compile(r'(?:(?:\bmove|@ssreflect\.move_)\s*\(?\s*(?:@list\.List\(\s*)?\[[^\]\n]*'
+# move [ (or move_(@list.List([ ), then only whole string items before
+# this one, on any lines; or INTRO_TAC (
+DISCARD = re.compile(r'(?:(?:\bmove|@ssreflect\.move_)\s*\(?\s*(?:@list\.List\(\s*)?\[\s*'
+                     r'(?:"(?:[^"\\\n]|\\.)*"\s*[;,]\s*)*'
                      r'|(?:\bINTRO_TAC|@theorems\.intro_tac)\s*\(?\s*)$')
 
 
 def discards(text, i):
     """Whether the string at text[i] is the "_" of a move [...] list or of
     INTRO_TAC."""
-    return bool(DISCARD.search(text[max(0, i - 120):i]))
+    return bool(DISCARD.search(text[max(0, i - 2000):i]))
 # upstream file -> [(text, replacement)], each text occurring once, applied
 # before the rename (for a name built in code)
 TERM_PATCHES = {

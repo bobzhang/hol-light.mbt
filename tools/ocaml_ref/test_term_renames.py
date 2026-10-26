@@ -85,4 +85,9 @@ assert rename_moonbit('@simp.expand_tac("_")', U) == '@simp.expand_tac("_any")'
 assert rename_moonbit('@term_syntax.parse_term("(x : _)")', U) == '@term_syntax.parse_term("(x : _)")'
 assert rename_ocaml('e (INTRO_TAC "_" THEN EXPAND_TAC "_");;', U) == 'e (INTRO_TAC "_" THEN EXPAND_TAC "_any");;'
 assert rename_moonbit('@theorems.intro_tac("_")', U) == '@theorems.intro_tac("_")'
+# the second review of #964
+assert rename_ocaml('e ((* move [ *) EXPAND_TAC "_");;', U) == 'e ((* move [ *) EXPAND_TAC "_any");;'
+assert rename_moonbit('let s = "move ["; @simp.expand_tac("_")', U) == 'let s = "move ["; @simp.expand_tac("_any")'
+assert rename_ocaml('e (move [\n  "x";\n  "_"\n]);;', U) == 'e (move [\n  "x";\n  "_"\n]);;'
+assert rename_moonbit('@ssreflect.move_(@list.List([\n  "_",\n]))', U) == '@ssreflect.move_(@list.List([\n  "_",\n]))'
 print('ok')
