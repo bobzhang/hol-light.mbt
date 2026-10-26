@@ -93567,7 +93567,7 @@ Autoformalization/planar_graph quotations (37458):
   (V : (A) -> Bool)
   (e : (A) -> Bool)
   (E : ((A) -> Bool) -> Bool)
-  forall V E p c F.\n        finite_simple_graph (V:A->bool) E /\\\n        plane_graph_embedding V E p c /\\\n        F SUBSET E\n        ==> compact(plane_graph_carrier V F p c)
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 p : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) && plane_graph_embedding(V, E, p, c) && SUBSET(F, E) \226\134\146 compact(plane_graph_carrier(V, F, p, c))
   FINITE((E : ((A) -> Bool) -> Bool))
   (G : ((A) -> Bool) -> Bool)
   (c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool)
@@ -106423,7 +106423,7 @@ Autoformalization/planar_graph quotations (37458):
   (V : (A) -> Bool)
   3 <= (n : Num)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 p : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 q : (Num) -> A, \226\136\128 n : Num, finite_simple_graph(V, E) && plane_graph_embedding(V, E, p, c) && simple_graph_cycle(E, q, n) \226\134\146 (\226\136\131 j : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]], simple_path(j) && pathfinish(j) == pathstart(j) && path_image(j) == UNIONS(IMAGE(c, cyclic_edges(q, n))))
-  forall V E p c F.\n        F SUBSET (E:(A->bool)->bool)\n        ==> UNIONS(IMAGE (c:(A->bool)->real^2->bool) F) SUBSET\n            plane_graph_carrier (V:A->bool) E p c
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 p : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, SUBSET(F, E) \226\134\146 SUBSET(UNIONS(IMAGE(c, F)), plane_graph_carrier(V, E, p, c))
   (j : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])
   (outer : (Cart[Real, Tybit0[Unit]]) -> Bool)
   DIFF(UNIV, path_image((j : (Cart[Real, Unit]) -> Cart[Real, Tybit0[Unit]])))
@@ -109488,7 +109488,7 @@ Autoformalization/planar_graph quotations (37458):
   !((e : (A) -> Bool) == (d : (A) -> Bool))
   IN((e : (A) -> Bool), (E : ((A) -> Bool) -> Bool)) && IN((d : (A) -> Bool), E)
   (x : Cart[Real, Tybit0[Unit]])
-  forall V E p c F G.\n        plane_graph_embedding (V:A->bool) E p c /\\\n        F SUBSET E /\\ G SUBSET E /\\ F INTER G = {}\n        ==> UNIONS(IMAGE c F) INTER UNIONS(IMAGE c G) =\n            IMAGE p (UNIONS F INTER UNIONS G)
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 p : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 c : ((A) -> Bool, Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 G : ((A) -> Bool) -> Bool, plane_graph_embedding(V, E, p, c) && SUBSET(F, E) && SUBSET(G, E) && INTER(F, G) == {} \226\134\146 INTER(UNIONS(IMAGE(c, F)), UNIONS(IMAGE(c, G))) == IMAGE(p, INTER(UNIONS(F), UNIONS(G)))
   (j : Num)
   0
   (n : Num) - 1 + 1 == n
@@ -112524,7 +112524,7 @@ Autoformalization/planar_graph quotations (37458):
   CARD(DIFF((V : (A) -> Bool), rooted_edge_vertices((u : A), CONS(((x : A), (y : A)), (es : List[(A, A)])))))
   CONS(((x : A), (y : A)), (es : List[(A, A)]))
   (d : (A, A))
-  forall T E:(A->bool)->bool.\n        T SUBSET E\n        ==> graph_reverse_dart T permutes graph_darts E
+  \226\136\128 T : ((A) -> Bool) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, SUBSET(T, E) \226\134\146 permutes(graph_reverse_dart(T), graph_darts(E))
   {(v : A), (u : A)} == {u, v}
   {(v : A), (u : A)}
   dart_edge(graph_reverse_dart((t : ((A) -> Bool) -> Bool), (d : (A, A)))) == dart_edge(d)
@@ -116641,7 +116641,7 @@ Autoformalization/planar_graph quotations (37458):
   DIFF((E' : ((A) -> Bool) -> Bool), (E : ((A) -> Bool) -> Bool))
   (x : A) == (a : A)
   (x : A)
-  forall E F a:A. ~(a IN F) /\\ E = {a} UNION F ==> E DELETE a = F
+  \226\136\128 E : (A) -> Bool, \226\136\128 F : (A) -> Bool, \226\136\128 a : A, !IN(a, F) && E == UNION({a}, F) \226\134\146 DELETE(E, a) == F
   (b : A)
   (a : A)
   (e : (A) -> Bool)
@@ -117213,7 +117213,7 @@ Autoformalization/planar_graph quotations (37458):
   (E : ((A) -> Bool) -> Bool)
   (V : (A) -> Bool)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, planar_graph(V, E) && SUBSET(W, V) \226\134\146 planar_graph(W, induced_subgraph_edges(E, W))
-  forall V E W F.\n        planar_graph (V:A->bool) E /\\\n        W SUBSET V /\\\n        F SUBSET induced_subgraph_edges E W\n        ==> planar_graph W F
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, planar_graph(V, E) && SUBSET(W, V) && SUBSET(F, induced_subgraph_edges(E, W)) \226\134\146 planar_graph(W, F)
   (r : ((A, A)) -> (A, A))
   (E' : ((A) -> Bool) -> Bool)
   graph_component_edges((E : ((A) -> Bool) -> Bool), (u : A))
@@ -121520,7 +121520,7 @@ Autoformalization/planar_graph quotations (37458):
   (W : (A) -> Bool)
   (e : (A) -> Bool) == {(a : A), (b : A)}
   \226\136\128 W : (A) -> Bool, \226\136\128 p : (Num) -> A, \226\136\128 l : Num, \226\136\128 a : A, \226\136\128 b : A, \226\136\128 e : (A) -> Bool, 0 < l && p(0) == a && p(l) == b && (\226\136\128 i : Num, 0 < i && i < l \226\134\146 !IN(p(i), W)) && SUBSET(e, W) && !(e == {a, b}) \226\134\146 !IN(e, indexed_path_edges(p, l))
-  forall S T U:A->bool. forall x.\n        ~(x IN S) /\\ S SUBSET T\n        ==> S SUBSET (T DELETE x) UNION U
+  \226\136\128 S : (A) -> Bool, \226\136\128 T : (A) -> Bool, \226\136\128 U : (A) -> Bool, \226\136\128 x : A, !IN(x, S) && SUBSET(S, T) \226\134\146 SUBSET(S, UNION(DELETE(T, x), U))
   {(d : A), (a : A)}
   (d : A)
   (c : A)
@@ -130025,10 +130025,10 @@ Autoformalization/planar_graph quotations (37458):
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) \226\134\146 euler_planar_graph(V, E) == !graph_kuratowski_obstruction(V, E)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) \226\134\146 planar_graph(V, E) == !graph_kuratowski_obstruction(V, E)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) \226\134\146 straight_line_planar_graph(V, E) == !graph_kuratowski_obstruction(V, E)
-  (forall V E.\n        finite_simple_graph (V:A->bool) E\n        ==> graph_minor V E V E) /\\\n  (forall V E W F W' F'.\n        graph_minor (V:A->bool) E W F /\\\n        W' SUBSET W /\\\n        F' SUBSET induced_subgraph_edges F W'\n        ==> graph_minor V E W' F') /\\\n  (forall V E W F u v.\n        graph_minor (V:A->bool) E W F /\\\n        {u,v} IN F\n        ==> graph_minor\n             V E (W DELETE u) (graph_contract_edges W F u v))
+  (\226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) \226\134\146 (graph_minor : ((A) -> Bool, ((A) -> Bool) -> Bool, (A) -> Bool, ((A) -> Bool) -> Bool) -> Bool)(V, E, V, E)) && (\226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 W' : (A) -> Bool, \226\136\128 F' : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && SUBSET(W', W) && SUBSET(F', induced_subgraph_edges(F, W')) \226\134\146 graph_minor(V, E, W', F')) && (\226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 u : A, \226\136\128 v : A, graph_minor(V, E, W, F) && IN({u, v}, F) \226\134\146 graph_minor(V, E, DELETE(W, u), graph_contract_edges(W, F, u, v)))
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, finite_simple_graph(V, E) \226\134\146 graph_minor(V, E, V, E)
-  forall V E W F W' F'.\n        graph_minor (V:A->bool) E W F /\\\n        W' SUBSET W /\\\n        F' SUBSET induced_subgraph_edges F W'\n        ==> graph_minor V E W' F'
-  forall V E W F u v.\n        graph_minor (V:A->bool) E W F /\\\n        {u,v} IN F\n        ==> graph_minor\n             V E (W DELETE u) (graph_contract_edges W F u v)
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 W' : (A) -> Bool, \226\136\128 F' : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && SUBSET(W', W) && SUBSET(F', induced_subgraph_edges(F, W')) \226\134\146 graph_minor(V, E, W', F')
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 u : A, \226\136\128 v : A, graph_minor(V, E, W, F) && IN({u, v}, F) \226\134\146 graph_minor(V, E, DELETE(W, u), graph_contract_edges(W, F, u, v))
   (v : A)
   (u : A)
   (D : ((A) -> Bool) -> Bool)
@@ -130067,8 +130067,8 @@ Autoformalization/planar_graph quotations (37458):
   (E : ((A) -> Bool) -> Bool)
   (V : (A) -> Bool)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 D : ((A) -> Bool) -> Bool, graph_minor(V, E, W, D) \226\134\146 finite_simple_graph(V, E) && finite_simple_graph(W, D) && (graph_kuratowski_obstruction(W, D) \226\134\146 graph_kuratowski_obstruction(V, E))
-  forall V E W F.\n        graph_minor (V:A->bool) E W F\n        ==> finite_simple_graph V E /\\ finite_simple_graph W F
-  forall V E W F.\n        graph_minor (V:A->bool) E W F /\\\n        graph_kuratowski_obstruction W F\n        ==> graph_kuratowski_obstruction V E
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) \226\134\146 finite_simple_graph(V, E) && finite_simple_graph(W, F)
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && graph_kuratowski_obstruction(W, F) \226\134\146 graph_kuratowski_obstruction(V, E)
   (v : A)
   (u : A)
   (D : ((A) -> Bool) -> Bool)
@@ -130101,8 +130101,8 @@ Autoformalization/planar_graph quotations (37458):
   (V : (A) -> Bool)
   (G : ((A) -> Bool) -> Bool)
   (S : (A) -> Bool)
-  forall W F X H.\n        graph_minor (W:A->bool) F X H\n        ==> forall V E. graph_minor V E W F ==> graph_minor V E X H
-  forall V E W F X H.\n        graph_minor (V:A->bool) E W F /\\\n        graph_minor W F X H\n        ==> graph_minor V E X H
+  \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Bool, \226\136\128 H : ((A) -> Bool) -> Bool, graph_minor(W, F, X, H) \226\134\146 (\226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) \226\134\146 graph_minor(V, E, X, H))
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, \226\136\128 X : (A) -> Bool, \226\136\128 H : ((A) -> Bool) -> Bool, graph_minor(V, E, W, F) && graph_minor(W, F, X, H) \226\134\146 graph_minor(V, E, X, H)
   DELETE({(u : A), (v : A)}, u) == {v}
   (v : A)
   (u : A)
@@ -130801,7 +130801,7 @@ Autoformalization/planar_graph quotations (37458):
   \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> A, \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, (\226\136\128 x : A, g(f(x)) == x) && (\226\136\128 y : B, f(g(y)) == y) \226\134\146 straight_line_planar_graph(IMAGE(f, V), IMAGE(IMAGE(f), E)) == straight_line_planar_graph(V, E)
   \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> A, \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, (\226\136\128 x : A, g(f(x)) == x) && (\226\136\128 y : B, f(g(y)) == y) \226\134\146 euler_planar_graph(IMAGE(f, V), IMAGE(IMAGE(f), E)) == euler_planar_graph(V, E)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, straight_line_planar_graph(V, E) && SUBSET(W, V) \226\134\146 straight_line_planar_graph(W, induced_subgraph_edges(E, W))
-  forall V E W F.\n        straight_line_planar_graph (V:A->bool) E /\\\n        W SUBSET V /\\\n        F SUBSET induced_subgraph_edges E W\n        ==> straight_line_planar_graph W F
+  \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 F : ((A) -> Bool) -> Bool, straight_line_planar_graph(V, E) && SUBSET(W, V) && SUBSET(F, induced_subgraph_edges(E, W)) \226\134\146 straight_line_planar_graph(W, F)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 D : ((A) -> Bool) -> Bool, euler_planar_graph(V, E) && graph_minor(V, E, W, D) \226\134\146 euler_planar_graph(W, D)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 W : (A) -> Bool, \226\136\128 D : ((A) -> Bool) -> Bool, straight_line_planar_graph(V, E) && graph_minor(V, E, W, D) \226\134\146 straight_line_planar_graph(W, D)
   \226\136\128 V : (A) -> Bool, \226\136\128 E : ((A) -> Bool) -> Bool, \226\136\128 e : (A) -> Bool, planar_graph(V, E) \226\134\146 planar_graph(V, DELETE(E, e))

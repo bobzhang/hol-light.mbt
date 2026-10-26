@@ -4,7 +4,7 @@
 /// DIMINDEX_GA010
 fn step_1() -> Unit raise {
   let t1 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.dimindex_2(), @geometricalgebra.dimindex_geomalg(), @geometricalgebra.pdimindex_0(), @geometricalgebra.pdimindex_1()])), @int.arith_tac)
-  dimindex_ga010_c.set(@tactics.prove(@parser.parse_term("dimindex(:('0,'1,'0)geomalg) = dimindex(:2)"), t1))
+  dimindex_ga010_c.set(@tactics.prove(@term_syntax.parse_term("(dimindex : ((Geomalg[Zero, One, Zero]) -> Bool) -> Num)((UNIV : (Geomalg[Zero, One, Zero]) -> Bool)) == (dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool))"), t1))
 }
 
 ///|
@@ -66,7 +66,7 @@ fn step_2() -> Unit raise {
     })(x12))
   }, @list.List([@equal.gsym(@geometricalgebra.mvbasis_expansion())]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t25), t26), t29), t30), t31)
-  complex_product_ga010_c.set(@tactics.prove(@parser.parse_term("forall x y:real^('0,'1,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}"), t32))
+  complex_product_ga010_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[Zero, One, Zero]], ∀ y : Cart[Real, Geomalg[Zero, One, Zero]], x * y == op_pct(setindex(x, {}) * setindex(y, {}) - setindex(x, {1}) * setindex(y, {1}), mbasis({})) + op_pct(setindex(x, {}) * setindex(y, {1}) + setindex(x, {1}) * setindex(y, {}), mbasis({1}))"), t32))
 }
 
 ///|
@@ -81,20 +81,20 @@ pub fn complex_product_ga010() -> @kernel.Thm {
 ///|
 /// Geometric_Algebra/quaternions.ml:31
 fn step_3() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("mbasis{1}:real^('0,'1,'0)geomalg * mbasis{1} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, One, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, One, Zero]])({1}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, One, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:32
 fn step_4() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("mbasis{1,2}:real^('2,'0,'0)geomalg * mbasis{1,2} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Two, Zero, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Two, Zero, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Two, Zero, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// DIMINDEX_GA020
 fn step_5() -> Unit raise {
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@cart.dimindex_4(), @geometricalgebra.dimindex_geomalg(), @geometricalgebra.pdimindex_0(), @geometricalgebra.pdimindex_2()])), @int.arith_tac)
-  dimindex_ga020_c.set(@tactics.prove(@parser.parse_term("dimindex(:('0,'2,'0)geomalg) = dimindex(:4)"), t33))
+  dimindex_ga020_c.set(@tactics.prove(@term_syntax.parse_term("(dimindex : ((Geomalg[Zero, Two, Zero]) -> Bool) -> Num)((UNIV : (Geomalg[Zero, Two, Zero]) -> Bool)) == (dimindex : ((Tybit0[Tybit0[Unit]]) -> Bool) -> Num)((UNIV : (Tybit0[Tybit0[Unit]]) -> Bool))"), t33))
 }
 
 ///|
@@ -190,7 +190,7 @@ fn step_6() -> Unit raise {
     })(x44))
   }, @list.List([@equal.gsym(@geometricalgebra.mvbasis_expansion())]))
   let t93 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t45), t57), t58), t66), t67), t68), t85), t86), t87), t91), t92)
-  quat_product_ga020_c.set(@tactics.prove(@parser.parse_term("forall x y:real^('0,'2,'0)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}"), t93))
+  quat_product_ga020_c.set(@tactics.prove(@term_syntax.parse_term("∀ x : Cart[Real, Geomalg[Zero, Two, Zero]], ∀ y : Cart[Real, Geomalg[Zero, Two, Zero]], x * y == op_pct(setindex(x, {}) * setindex(y, {}) - setindex(x, {1}) * setindex(y, {1}) - setindex(x, {2}) * setindex(y, {2}) - setindex(x, {1, 2}) * setindex(y, {1, 2}), mbasis({})) + (op_pct(setindex(x, {}) * setindex(y, {1}) + (setindex(x, {1}) * setindex(y, {}) + (setindex(x, {2}) * setindex(y, {1, 2}) - setindex(x, {1, 2}) * setindex(y, {2}))), mbasis({1})) + (op_pct(setindex(x, {}) * setindex(y, {2}) - setindex(x, {1}) * setindex(y, {1, 2}) + (setindex(x, {2}) * setindex(y, {}) + setindex(x, {1, 2}) * setindex(y, {1})), mbasis({2})) + op_pct(setindex(x, {}) * setindex(y, {1, 2}) + (setindex(x, {1}) * setindex(y, {2}) - setindex(x, {2}) * setindex(y, {1}) + setindex(x, {1, 2}) * setindex(y, {})), mbasis({1, 2}))))"), t93))
 }
 
 ///|
@@ -205,67 +205,67 @@ pub fn quat_product_ga020() -> @kernel.Thm {
 ///|
 /// Geometric_Algebra/quaternions.ml:68
 fn step_7() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{1} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:69
 fn step_8() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2}:real^('0,'2,'0)geomalg)* mbasis{2} = --mbasis {}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:70
 fn step_9() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('0,'2,'0)geomalg)* mbasis{1,2} = --mbasis {}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:71
 fn step_10() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{2} = mbasis {1,2}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:72
 fn step_11() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2}:real^('0,'2,'0)geomalg)* mbasis{1,2} = mbasis {1}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:73
 fn step_12() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('0,'2,'0)geomalg)* mbasis{1} = mbasis {2}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:74
 fn step_13() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{2} = --(mbasis{2} * mbasis{1})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:75
 fn step_14() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2}:real^('0,'2,'0)geomalg)* mbasis{1,2} = --(mbasis{1,2} * mbasis {2})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:76
 fn step_15() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('0,'2,'0)geomalg)* mbasis{1} = --(mbasis{1} * mbasis{1,2})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:77
 fn step_16() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1}:real^('0,'2,'0)geomalg)* mbasis{2} * mbasis{1,2} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2})) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// geomalg_300_quat
 fn step_17() -> Unit raise {
-  geomalg_300_quat_c.set(@pair.new_definition(@parser.parse_term("geomalg_300_quat (q:quat) =\n  (Re q) % mbasis{} +\n  (Im1 q) % mbasis{2,3} +\n  (Im2 q) % mbasis{1,2} +\n  (Im3 q) % (--(mbasis{1,3}:real^('3,'0,'0)geomalg))")))
+  geomalg_300_quat_c.set(@pair.new_definition(@term_syntax.parse_term("(geomalg_300_quat : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Geomalg[Three, Zero, Zero]])((q : Cart[Real, Tybit0[Tybit0[Unit]]])) == op_pct(Re(q), mbasis({})) + (op_pct(Im1(q), mbasis({2, 3})) + (op_pct(Im2(q), mbasis({1, 2})) + op_pct(Im3(q), -mbasis({1, 3}))))")))
 }
 
 ///|
@@ -313,145 +313,145 @@ pub fn cnj_quat() -> @kernel.Thm {
 ///|
 /// Geometric_Algebra/quaternions.ml:110
 fn step_19() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'0)geomalg)* mbasis{2,3} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:111
 fn step_20() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('3,'0,'0)geomalg)* mbasis{1,2} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:112
 fn step_21() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(--mbasis{1,3}:real^('3,'0,'0)geomalg)*(--mbasis{1,3}) = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:113
 fn step_22() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'0)geomalg)* mbasis {1,2} = --mbasis{1,3}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:114
 fn step_23() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('3,'0,'0)geomalg)*(--mbasis{1,3}) = mbasis{2,3}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:115
 fn step_24() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(--mbasis{1,3}:real^('3,'0,'0)geomalg)* mbasis{2,3} = mbasis{1,2}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:116
 fn step_25() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'0)geomalg)* mbasis{1,2} = --(mbasis{1,2} * mbasis{2,3})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:117
 fn step_26() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('3,'0,'0)geomalg)*(--mbasis{1,3})= --(--mbasis{1,3} * mbasis{1,2})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) == -(-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:118
 fn step_27() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(--mbasis{1,3}:real^('3,'0,'0)geomalg)* mbasis{2,3} = --(mbasis{2,3} * --mbasis{1,3})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:119
 fn step_28() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'0)geomalg)* mbasis{1,2} * --mbasis{1,3} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3})) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:125
 fn step_29() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'1)geomalg)* mbasis{2,3} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:126
 fn step_30() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('3,'0,'1)geomalg)* mbasis{1,2} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:127
 fn step_31() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(--mbasis{1,3}:real^('3,'0,'1)geomalg)*(--mbasis{1,3}) = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:128
 fn step_32() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'1)geomalg)* mbasis {1,2} = --mbasis{1,3}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:129
 fn step_33() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('3,'0,'1)geomalg)*(--mbasis{1,3}) = mbasis{2,3}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:130
 fn step_34() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(--mbasis{1,3}:real^('3,'0,'1)geomalg)* mbasis{2,3} = mbasis{1,2}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:131
 fn step_35() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'1)geomalg)* mbasis{1,2} = --(mbasis{1,2} * mbasis{2,3})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:132
 fn step_36() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{1,2}:real^('3,'0,'1)geomalg)*(--mbasis{1,3})= --(--mbasis{1,3} * mbasis{1,2})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) == -(-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:133
 fn step_37() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(--mbasis{1,3}:real^('3,'0,'1)geomalg)* mbasis{2,3} = --(mbasis{2,3} * --mbasis{1,3})")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:134
 fn step_38() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'1)geomalg)* mbasis{1,2} * --mbasis{1,3} = --mbasis{}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3})) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:135
 fn step_39() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("mbasis{2,3}:real^('3,'0,'1)geomalg * mbasis{1,2,3,4} = mbasis{1,2,3,4} * mbasis{2,3}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:136
 fn step_40() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("mbasis{1,2}:real^('3,'0,'1)geomalg * mbasis{1,2,3,4} = mbasis{1,2,3,4} * mbasis{1,2}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:137
 fn step_41() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("--mbasis{1,3}:real^('3,'0,'1)geomalg * mbasis{1,2,3,4}= mbasis{1,2,3,4}* --mbasis{1,3}")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3})")))
 }
 
 ///|
 /// Geometric_Algebra/quaternions.ml:138
 fn step_42() -> Unit raise {
-  ignore(@geometricalgebra.geom_arith(@parser.parse_term("mbasis{1,2,3,4}:real^('3,'0,'1)geomalg * mbasis{1,2,3,4} = vec 0")))
+  ignore(@geometricalgebra.geom_arith(@term_syntax.parse_term("(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (vec : (Num) -> Cart[Real, Geomalg[Three, Zero, One]])(0)")))
 }
 
 ///|
