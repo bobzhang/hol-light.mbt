@@ -76,7 +76,10 @@ def check(script):
             problems.append(f'new names already in the original output: {sorted(names_in(in_scope(original, target), renames, True))}')
         if names_in(in_scope(renamed, target), renames, new=False):
             problems.append(f'old names left in the renamed output: {sorted(names_in(in_scope(renamed, target), renames, False))}')
-        expected = renamed_output(original, target, renames)
+        # the theorems the script prints (attempt "NAME" ...); a constant
+        # renamed by mistake shows in its constants line, which stays
+        theorems = set(re.findall(r'(?m)^attempt "([^"]+)"', text))
+        expected = renamed_output(original, target, renames, theorems)
     else:
         expected = original
     if expected != renamed:
