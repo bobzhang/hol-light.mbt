@@ -14204,8 +14204,8 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|  IN(robinson, {robinson})
       #|  (t : Term)
       #|  (s : Term)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_eq_eq_eq(Suc(s), Suc(t)), op_eq_eq_eq(s, t)))
       #|  (p : Form) == (q : Form) \226\134\146 op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q))
@@ -14218,31 +14218,31 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|  (t : Term)
       #|  \226\136\128 t : Term, \226\136\128 z : Num, !IN(z, FVT(t)) \226\134\146 op_bar_minus_minus({robinson}, op_lt_minus_gt(Not(op_eq_eq_eq(t, Z)), op_q_q(z, op_eq_eq_eq(t, Suc(V(z))))))
       #|  (t : Term)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(Z, t), t))
       #|  (t : Term)
       #|  (s : Term)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(Suc(s), t), Suc(op_plus_plus(s, t))))
       #|  (t : Term)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_star_star(Z, t), Z))
       #|  (t : Term)
       #|  (s : Term)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_star_star(Suc(s), t), op_plus_plus(t, op_star_star(s, t))))
       #|  (t : Term)
       #|  (s : Term)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt(s, t), op_lt_lt_eq(Suc(s), t)))
       #|  \226\136\128 m : Num, \226\136\128 n : Num, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(numeral(m), numeral(n)), numeral(m + n)))
@@ -14258,56 +14258,56 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|  op_eq_eq_eq(Suc(op_plus_plus(V(0), V(2))), Suc(V(1)))
       #|  V(0)
       #|  V(1)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  op_q_q(2, op_eq_eq_eq(op_plus_plus(V(0), V(2)), V(1)))
       #|  Suc(V(0))
       #|  Suc(V(1))
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  op_q_q(2, op_eq_eq_eq(op_plus_plus(Suc(V(0)), V(2)), Suc(V(1))))
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt_eq(Suc(s), Suc(t)), op_lt_lt_eq(s, t)))
       #|  V
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  op_lt_lt_eq(Suc((s : Term)), Suc((t : Term)))
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt_eq(s, t), op_lt_lt(s, Suc(t))))
       #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt(Suc(s), Suc(t)), op_lt_lt(s, t)))
       #|  Suc(V(1))
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  V(1)
       #|  op_bar_minus_minus({robinson}, op_q_q(0, op_eq_eq_eq(Suc(V(1)), Suc(V(0)))))
       #|  op_bar_minus_minus({robinson}, Not(op_eq_eq_eq(Suc(V(1)), Z)))
       #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_eq_eq_eq(Suc(t), Z), False))
       #|  V
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  op_eq_eq_eq(Suc(op_plus_plus(V(0), V(2))), Z)
       #|  Suc(V(0))
       #|  Z
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  op_bar_minus_minus({robinson}, op_minus_minus_gt(op_q_q(2, op_eq_eq_eq(op_plus_plus(Suc(V(0)), V(2)), Z)), False))
       #|  (s : Term)
       #|  op_bar_minus_minus({robinson}, op_bang_bang(0, op_minus_minus_gt(op_lt_lt_eq(Suc(V(0)), Z), False)))
       #|  (s : Term)
       #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_lt_lt_eq(Suc(t), Z), False))
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_lt_lt(t, Z), False))
       #|  0
@@ -14320,11 +14320,11 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|  numeral((n : Num))
       #|  numeral((m : Num))
       #|  numeral((m : Num) + (n : Num))
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
       #|  op_q_q(2, op_eq_eq_eq(op_plus_plus(numeral((m : Num)), V(2)), numeral(m + (n : Num))))
       #|  \226\136\128 m : Num, \226\136\128 n : Num, op_bar_minus_minus({robinson}, op_lt_lt_eq(numeral(m), numeral(m + n)))
