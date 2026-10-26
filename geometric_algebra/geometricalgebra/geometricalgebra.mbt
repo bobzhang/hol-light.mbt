@@ -452,7 +452,12 @@ fn step_14() -> Unit raise {
   let n_tm = @term_syntax.parse_term("(n : Num)")
   define_pseudo_finite_type_c.set(fn(x184 : Int64) -> @kernel.Thm raise {
     let n = x184
-    let ns = ("'" + Int64::to_string(n))
+    // upstream defines 0 .. 4; a larger n keeps upstream's name
+    let ns = if 0L <= n && n <= 4L {
+      ["Zero", "One", "Two", "Three", "Four"][n.to_int()]
+    } else {
+      "'" + Int64::to_string(n)
+    }
     let ns_p = ("auto_define_finite_type_" + ns)
     let th = @kernel.inst_rule(@list.List([(@nums.mk_small_numeral(n), n_tm)]), lemma_pre)
     let t185 = ("dest_" + ns_p)
@@ -4880,7 +4885,7 @@ pub fn geom_aci() -> @kernel.Thm {
 ///|
 /// Geometric_Algebra/geometricalgebra.ml:1646
 fn step_219() -> Unit raise {
-  ignore(@clifford.mbasis_group_conv(@parser.parse_term("&2 % mbasis{1,2} + &3 % mbasis{2} + &2 % mbasis{1,3} + --(&3) % mbasis{1}:real^('4,'1,'1)geomalg")))
+  ignore(@clifford.mbasis_group_conv(@parser.parse_term("&2 % mbasis{1,2} + &3 % mbasis{2} + &2 % mbasis{1,3} + --(&3) % mbasis{1}:real^(Four,One,One)geomalg")))
 }
 
 ///|
@@ -4958,7 +4963,7 @@ pub fn geom_canon_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Geometric_Algebra/geometricalgebra.ml:1697
 fn step_222() -> Unit raise {
-  ignore(geom_canon_conv(@parser.parse_term("(mbasis{2,3}:real^('3,'0,'1)geomalg) * mbasis{1,2,3,4}")))
+  ignore(geom_canon_conv(@parser.parse_term("(mbasis{2,3}:real^(Three,Zero,One)geomalg) * mbasis{1,2,3,4}")))
 }
 
 ///|
@@ -4981,13 +4986,13 @@ pub fn ga_geom_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// Geometric_Algebra/geometricalgebra.ml:1706
 fn step_224() -> Unit raise {
-  ignore(ga_geom_conv(@parser.parse_term("mbasis{1} *(mbasis{1} inner mbasis{1,3} +\n                      mbasis{1} outer mbasis{2}:real^('4,'1,'1)geomalg)")))
+  ignore(ga_geom_conv(@parser.parse_term("mbasis{1} *(mbasis{1} inner mbasis{1,3} +\n                      mbasis{1} outer mbasis{2}:real^(Four,One,One)geomalg)")))
 }
 
 ///|
 /// Geometric_Algebra/geometricalgebra.ml:1709
 fn step_225() -> Unit raise {
-  let t1374 = @parser.parse_term("mbasis{1} *(mbasis{1} inner mbasis{1,3} +\n       mbasis{1} outer mbasis{2}:real^('4,'1,'1)geomalg)")
+  let t1374 = @parser.parse_term("mbasis{1} *(mbasis{1} inner mbasis{1,3} +\n       mbasis{1} outer mbasis{2}:real^(Four,One,One)geomalg)")
   ignore(@equal.thenc(ga_geom_conv, geom_canon_conv)(t1374))
 }
 
@@ -7299,7 +7304,7 @@ pub fn mvinvertible_versor() -> @kernel.Thm {
 ///|
 /// dual
 fn step_290() -> Unit raise {
-  dual_c.set(@pair.new_definition(@parser.parse_term("(dual:real^(P,Q,'0)geomalg->real^(P,Q,'0)geomalg) x =\n     vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q)}\n      (\\s.x$$s % mbasis s inner (mvinverse pseudoscalar))")))
+  dual_c.set(@pair.new_definition(@parser.parse_term("(dual:real^(P,Q,Zero)geomalg->real^(P,Q,Zero)geomalg) x =\n     vsum {s | s SUBSET 1..pdimindex(:P) + pdimindex(:Q)}\n      (\\s.x$$s % mbasis s inner (mvinverse pseudoscalar))")))
 }
 
 ///|
@@ -7401,7 +7406,7 @@ fn step_296() -> Unit raise {
 ///|
 /// cross_product
 fn step_297() -> Unit raise {
-  cross_product_c.set(@pair.new_definition(@parser.parse_term("(u:real^('3,'0,'0)trip_fin_sum) cross_product v = dual ((multivec u) outer (multivec v))")))
+  cross_product_c.set(@pair.new_definition(@parser.parse_term("(u:real^(Three,Zero,Zero)trip_fin_sum) cross_product v = dual ((multivec u) outer (multivec v))")))
 }
 
 ///|

@@ -5,6 +5,11 @@ The port names them differently from upstream (issue #140):
 - Jordan's local definitions (Jordan/lib_ext.ml's local_definition) are
   constants named package'name (euclid'dot, jordan'top2). They become
   package_name (euclid_dot, jordan_top2): local_definition joins with `_`.
+- Geometric algebra's pseudo-finite types (define_pseudo_finite_type n) are
+  named '0 .. '4, with constants mk_/dest_auto_define_finite_type_'n. They
+  become Zero .. Four, and a larger n keeps its name (the term syntax
+  writes a type constant capitalised; zero, one, ... would collide with
+  type variables such as Multivariate's `one`).
 
 Each listed upstream file is loaded from a copy (forall_reference.py,
 unless HOL_REF_ORIGINAL_NAMES is set) built by its checked patches (each
@@ -17,7 +22,9 @@ import re
 
 from term_renames import decode_escaped, encode_escaped, hol_spans
 
+PSEUDO_TYPES = {"'0": 'Zero', "'1": 'One', "'2": 'Two', "'3": 'Three', "'4": 'Four'}
 LOCAL_DEFINITION = re.compile(r"(euclid|trig|jordan)'([A-Za-z0-9_]+'*)")
+PSEUDO_CONSTANT = re.compile(r"(mk|dest)_auto_define_finite_type_('[0-4])")
 
 NAME_PATCHES = {
     'Jordan/lib_ext.ml': [
@@ -41,6 +48,13 @@ NAME_PATCHES = {
          ' + hash_of_type t) mod prime1220'),
     ],
     'Jordan/misc_defs_and_lemmas.ml': [],
+    'Geometric_Algebra/geometricalgebra.ml': [
+        # upstream defines 0 .. 4; a larger n keeps upstream's name
+        ('let ns = "\'"^string_of_int n in',
+         'let ns = if 0 <= n && n <= 4 then List.nth ["Zero";"One";"Two";"Three";"Four"] n '
+         'else "\'"^string_of_int n in'),
+    ],
+    'Geometric_Algebra/quaternions.ml': [],
 }
 
 HOL_TOKEN = re.compile(r"[A-Za-z0-9_']+")
@@ -48,8 +62,12 @@ HOL_TOKEN = re.compile(r"[A-Za-z0-9_']+")
 
 def renamed_name(name):
     """The new name of the constant or type constant `name`, or None."""
+    if name in PSEUDO_TYPES:
+        return PSEUDO_TYPES[name]
     if m := LOCAL_DEFINITION.fullmatch(name):
         return m[1] + '_' + m[2]
+    if m := PSEUDO_CONSTANT.fullmatch(name):
+        return f'{m[1]}_auto_define_finite_type_{PSEUDO_TYPES[m[2]]}'
     return None
 
 
