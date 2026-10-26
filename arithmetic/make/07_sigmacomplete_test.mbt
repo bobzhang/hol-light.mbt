@@ -14200,307 +14200,307 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..4..10..17..solved at 23
       #|Arithmetic/sigmacomplete quotations (301):
-      #|  robinson =\n        (!!0 (!!1 (Suc(V 0) === Suc(V 1) --> V 0 === V 1))) &&\n        (!!1 (Not(V 1 === Z) <-> ??1 (V 1 === Suc(V 0)))) &&\n        (!!1 (Z ++ V 1 === V 1)) &&\n        (!!0 (!!1 (Suc(V 0) ++ V 1 === Suc(V 0 ++ V 1)))) &&\n        (!!1 (Z ** V 1 === Z)) &&\n        (!!0 (!!1 (Suc(V 0) ** V 1 === V 1 ++ V 0 ** V 1))) &&\n        (!!0 (!!1 (V 0 <<= V 1 <-> ??2 (V 0 ++ V 2 === V 1)))) &&\n        (!!0 (!!1 (V 0 << V 1 <-> Suc(V 0) <<= V 1)))
-      #|  robinson IN {robinson}
-      #|  t:term
-      #|  s:term
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  (robinson : Form) == op_amp_amp(op_bang_bang(0, op_bang_bang(1, op_minus_minus_gt(op_eq_eq_eq(Suc(V(0)), Suc(V(1))), op_eq_eq_eq(V(0), V(1))))), op_amp_amp(op_bang_bang(1, op_lt_minus_gt(Not(op_eq_eq_eq(V(1), Z)), op_q_q(0, op_eq_eq_eq(V(1), Suc(V(0)))))), op_amp_amp(op_bang_bang(1, op_eq_eq_eq(op_plus_plus(Z, V(1)), V(1))), op_amp_amp(op_bang_bang(0, op_bang_bang(1, op_eq_eq_eq(op_plus_plus(Suc(V(0)), V(1)), Suc(op_plus_plus(V(0), V(1)))))), op_amp_amp(op_bang_bang(1, op_eq_eq_eq(op_star_star(Z, V(1)), Z)), op_amp_amp(op_bang_bang(0, op_bang_bang(1, op_eq_eq_eq(op_star_star(Suc(V(0)), V(1)), op_plus_plus(V(1), op_star_star(V(0), V(1)))))), op_amp_amp(op_bang_bang(0, op_bang_bang(1, op_lt_minus_gt(op_lt_lt_eq(V(0), V(1)), op_q_q(2, op_eq_eq_eq(op_plus_plus(V(0), V(2)), V(1)))))), op_bang_bang(0, op_bang_bang(1, op_lt_minus_gt(op_lt_lt(V(0), V(1)), op_lt_lt_eq(Suc(V(0)), V(1))))))))))))
+      #|  IN(robinson, {robinson})
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall s t. {robinson} |-- Suc(s) === Suc(t) --> s === t
-      #|  p = q ==> A |-- p --> q
-      #|  formsubst (z' |=> V z) (t === Suc(V z'))
-      #|  formsubst (z |=> V z') (t === Suc(V z))
-      #|  z':num = z
-      #|  a IN s ==> s UNION {a} = s
-      #|  ~(z' IN FVT t)
-      #|  ({1} UNION {0}) DELETE 0 = {1} DIFF {0}
-      #|  t:term
-      #|  forall t z. ~(z IN FVT t)\n           ==> {robinson} |--  (Not(t === Z) <-> ??z (t === Suc(V z)))
-      #|  t:term
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_eq_eq_eq(Suc(s), Suc(t)), op_eq_eq_eq(s, t)))
+      #|  (p : Form) == (q : Form) \226\134\146 op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt(p, q))
+      #|  formsubst(op_bar_eq_gt((z' : Num), V((z : Num))), op_eq_eq_eq((t : Term), Suc(V(z'))))
+      #|  formsubst(op_bar_eq_gt((z : Num), V((z' : Num))), op_eq_eq_eq((t : Term), Suc(V(z))))
+      #|  (z' : Num) == (z : Num)
+      #|  IN((a : _), (s : (_) -> Bool)) \226\134\146 UNION(s, {a}) == s
+      #|  !IN((z' : Num), FVT((t : Term)))
+      #|  DELETE(UNION({1}, {0}), 0) == DIFF({1}, {0})
+      #|  (t : Term)
+      #|  \226\136\128 t : Term, \226\136\128 z : Num, !IN(z, FVT(t)) \226\134\146 op_bar_minus_minus({robinson}, op_lt_minus_gt(Not(op_eq_eq_eq(t, Z)), op_q_q(z, op_eq_eq_eq(t, Suc(V(z))))))
+      #|  (t : Term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall t. {robinson} |--  Z ++ t === t
-      #|  t:term
-      #|  s:term
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(Z, t), t))
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall s t. {robinson} |--  Suc(s) ++ t === Suc(s ++ t)
-      #|  t:term
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(Suc(s), t), Suc(op_plus_plus(s, t))))
+      #|  (t : Term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall t. {robinson} |--  Z ** t === Z
-      #|  t:term
-      #|  s:term
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_star_star(Z, t), Z))
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall s t. {robinson} |--  Suc(s) ** t === t ++ s ** t
-      #|  t:term
-      #|  s:term
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_star_star(Suc(s), t), op_plus_plus(t, op_star_star(s, t))))
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall s t. {robinson} |--  (s << t <-> Suc(s) <<= t)
-      #|  forall m n. {robinson} |-- numeral m ++ numeral n === numeral(m + n)
-      #|  numeral(n) ++ numeral(m * n)
-      #|  forall m n. {robinson} |-- (numeral m ** numeral n === numeral(m * n))
-      #|  (forall n. p /\\ (x = n) ==> P n) <=> p ==> P x
-      #|  forall v t n. FVT t = {} /\\ termval v t = n\n           ==> {robinson} |-- (t === numeral n)
-      #|  forall A p. A |-- (p --> False) --> False <=> A |-- p
-      #|  A |-- p <-> q\n    ==> (A |-- p <=> A |-- q) /\\ (A |-- p --> False <=> A |-- q --> False)
-      #|  A |-- p /\\ A |-- q --> False ==> A |-- (p --> q) --> False
-      #|  A |-- p --> False \\/ A |-- q ==> A |-- p --> q
-      #|  forall s t. {robinson} |-- Suc s === Suc t <-> s === t
-      #|  Suc(V 0 ++ V 2) === Suc(V 1)
-      #|  V 0
-      #|  V 1
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt(s, t), op_lt_lt_eq(Suc(s), t)))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(numeral(m), numeral(n)), numeral(m + n)))
+      #|  op_plus_plus(numeral((n : Num)), numeral((m : Num) * n))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_star_star(numeral(m), numeral(n)), numeral(m * n)))
+      #|  (\226\136\128 n : _, (p : Bool) && (x : _) == n \226\134\146 (P : (_) -> Bool)(n)) == (p \226\134\146 P(x))
+      #|  \226\136\128 v : (Num) -> Num, \226\136\128 t : Term, \226\136\128 n : Num, FVT(t) == {} && termval(v, t) == n \226\134\146 op_bar_minus_minus({robinson}, op_eq_eq_eq(t, numeral(n)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, False), False)) == op_bar_minus_minus(A, p)
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_lt_minus_gt((p : Form), (q : Form))) \226\134\146 op_bar_minus_minus(A, p) == op_bar_minus_minus(A, q) && op_bar_minus_minus(A, op_minus_minus_gt(p, False)) == op_bar_minus_minus(A, op_minus_minus_gt(q, False))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), (p : Form)) && op_bar_minus_minus(A, op_minus_minus_gt((q : Form), False)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_minus_minus_gt(p, q), False))
+      #|  op_bar_minus_minus((A : (Form) -> Bool), op_minus_minus_gt((p : Form), False)) || op_bar_minus_minus(A, (q : Form)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(p, q))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_eq_eq_eq(Suc(s), Suc(t)), op_eq_eq_eq(s, t)))
+      #|  op_eq_eq_eq(Suc(op_plus_plus(V(0), V(2))), Suc(V(1)))
+      #|  V(0)
+      #|  V(1)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  ??2 (V 0 ++ V 2 === V 1)
-      #|  Suc(V 0)
-      #|  Suc(V 1)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_q_q(2, op_eq_eq_eq(op_plus_plus(V(0), V(2)), V(1)))
+      #|  Suc(V(0))
+      #|  Suc(V(1))
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  ??2 (Suc(V 0) ++ V 2 === Suc(V 1))
-      #|  forall s t. {robinson} |-- Suc s <<= Suc t <-> s <<= t
+      #|  op_q_q(2, op_eq_eq_eq(op_plus_plus(Suc(V(0)), V(2)), Suc(V(1))))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt_eq(Suc(s), Suc(t)), op_lt_lt_eq(s, t)))
       #|  V
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  Suc s <<= Suc t
-      #|  forall s t. {robinson} |-- s <<= t <-> s << Suc t
-      #|  forall s t. {robinson} |-- Suc s << Suc t <-> s << t
-      #|  Suc(V 1)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_lt_lt_eq(Suc((s : Term)), Suc((t : Term)))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt_eq(s, t), op_lt_lt(s, Suc(t))))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_lt_minus_gt(op_lt_lt(Suc(s), Suc(t)), op_lt_lt(s, t)))
+      #|  Suc(V(1))
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  V 1
-      #|  {robinson} |-- ?? 0 (Suc(V 1) === Suc(V 0))
-      #|  {robinson} |-- Not(Suc(V 1) === Z)
-      #|  forall t. {robinson} |-- Suc t === Z --> False
+      #|  V(1)
+      #|  op_bar_minus_minus({robinson}, op_q_q(0, op_eq_eq_eq(Suc(V(1)), Suc(V(0)))))
+      #|  op_bar_minus_minus({robinson}, Not(op_eq_eq_eq(Suc(V(1)), Z)))
+      #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_eq_eq_eq(Suc(t), Z), False))
       #|  V
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  Suc(V 0 ++ V 2) === Z
-      #|  Suc(V 0)
+      #|  op_eq_eq_eq(Suc(op_plus_plus(V(0), V(2))), Z)
+      #|  Suc(V(0))
       #|  Z
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  {robinson} |-- ?? 2 (Suc (V 0) ++ V 2 === Z) --> False
-      #|  s:term
-      #|  {robinson} |-- !!0 (Suc(V 0) <<= Z --> False)
-      #|  s:term
-      #|  forall t. {robinson} |-- Suc t <<= Z --> False
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bar_minus_minus({robinson}, op_minus_minus_gt(op_q_q(2, op_eq_eq_eq(op_plus_plus(Suc(V(0)), V(2)), Z)), False))
+      #|  (s : Term)
+      #|  op_bar_minus_minus({robinson}, op_bang_bang(0, op_minus_minus_gt(op_lt_lt_eq(Suc(V(0)), Z), False)))
+      #|  (s : Term)
+      #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_lt_lt_eq(Suc(t), Z), False))
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  forall t. {robinson} |-- t << Z --> False
+      #|  \226\136\128 t : Term, op_bar_minus_minus({robinson}, op_minus_minus_gt(op_lt_lt(t, Z), False))
       #|  0
-      #|  n:num
-      #|  forall n. {robinson} |-- numeral n ++ Z === numeral n
-      #|  forall m n. ~(m = n) ==> {robinson} |-- numeral m === numeral n --> False
-      #|  forall m n. n < m ==> {robinson} |-- numeral m <<= numeral n --> False
-      #|  forall m n. n <= m ==> {robinson} |-- numeral m << numeral n --> False
-      #|  forall m n. m = n ==> {robinson} |-- numeral m === numeral n
-      #|  numeral n
-      #|  numeral m
-      #|  numeral(m + n)
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  (n : Num)
+      #|  \226\136\128 n : Num, op_bar_minus_minus({robinson}, op_eq_eq_eq(op_plus_plus(numeral(n), Z), numeral(n)))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, !(m == n) \226\134\146 op_bar_minus_minus({robinson}, op_minus_minus_gt(op_eq_eq_eq(numeral(m), numeral(n)), False))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, n < m \226\134\146 op_bar_minus_minus({robinson}, op_minus_minus_gt(op_lt_lt_eq(numeral(m), numeral(n)), False))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, n <= m \226\134\146 op_bar_minus_minus({robinson}, op_minus_minus_gt(op_lt_lt(numeral(m), numeral(n)), False))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m == n \226\134\146 op_bar_minus_minus({robinson}, op_eq_eq_eq(numeral(m), numeral(n)))
+      #|  numeral((n : Num))
+      #|  numeral((m : Num))
+      #|  numeral((m : Num) + (n : Num))
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  !!
-      #|  (|->):num->term->(num->term)->(num->term)
+      #|  op_bang_bang
+      #|  (op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)
       #|  V
-      #|  ?? 2 (numeral m ++ V 2 === numeral(m + n))
-      #|  forall m n. {robinson} |-- numeral m <<= numeral(m + n)
-      #|  forall m n. m <= n ==> {robinson} |-- numeral m <<= numeral n
-      #|  forall m n. m < n ==> {robinson} |-- numeral m << numeral n
-      #|  forall u. (y |-> V y) (x |=> u) = (x |=> u)
-      #|  y:num = x
-      #|  p:form
-      #|  y:num
-      #|  y:num
-      #|  (p /\\ q /\\ r) /\\ s ==> p /\\ q /\\ r /\\ s
-      #|  forall y. safe_for y (x |=> termsubst (x |=> s) t)
-      #|  forall s t x p.\n        FVT t = {x} /\\ FVT s = {}\n        ==> formsubst (x |=> s) (formsubst (x |=> t) p) =\n            formsubst (x |=> termsubst (x |=> s) t) p
-      #|  t === V x
-      #|  x:num
-      #|  forall A p x t. A |-- formsubst (x |=> t) p ==> A |-- V x === t --> p
-      #|  x:num
-      #|  V z
-      #|  x:num
-      #|  p:form
-      #|  formsubst (x |=> V z) p
-      #|  ~(x IN FV(formsubst (x |=> V z) p))
-      #|  VARIANT(x INSERT VARS p)
-      #|  ?z. ~(z = x) /\\ ~(z IN VARS p)
-      #|  x:num
-      #|  forall p x. {robinson} |-- formsubst (x |=> Z) p /\\\n         {robinson} |-- formsubst (x |=> Suc(V x)) p\n         ==> {robinson} |-- p
-      #|  SUC m
-      #|  m:num
-      #|  x:num
-      #|  V x << numeral n
-      #|  x:num
-      #|  p:form
-      #|  forall x n p. (forall m. m < n ==> {robinson} |-- formsubst (x |=> numeral m) p)\n             ==> {robinson} |-- !!x (V x << numeral n --> p)
-      #|  p:form
-      #|  SUC n
-      #|  x:num
-      #|  forall x n p. (forall m. m <= n ==> {robinson} |-- formsubst (x |=> numeral m) p)\n             ==> {robinson} |-- !!x (V x <<= numeral n --> p)
-      #|  forall v x t p.\n          FVT t = {} /\\\n          (forall m. m < termval v t\n               ==> {robinson} |-- formsubst (x |=> numeral m) p)\n          ==> {robinson} |-- !!x (V x << t --> p)
-      #|  forall v x t p.\n          FVT t = {} /\\\n          (forall m. m <= termval v t\n               ==> {robinson} |-- formsubst (x |=> numeral m) p)\n          ==> {robinson} |-- !!x (V x <<= t --> p)
-      #|  forall A x p q. A |-- !!x (p --> Not q) ==> A |-- !!x (Not(p && q))
-      #|  y:num = x
-      #|  y:num
-      #|  m:num
-      #|  T
-      #|  formsubst (x |=> numeral m) (Not q)
-      #|  m:num
-      #|  v:num->num
-      #|  ~(p /\\ q) <=> p ==> ~q
-      #|  n = termval v t
-      #|  FV(q) SUBSET {x}
-      #|  FVT t = {}
-      #|  t:term
-      #|  q:form
-      #|  y:num = x
-      #|  y:num
-      #|  holds ((x |-> n) v) p
-      #|  F
-      #|  formsubst (x |=> numeral n) (Not p)
-      #|  n:num
-      #|  b:bool
-      #|  y:num = x
-      #|  y:num
-      #|  ~holds((x |-> n) v) p
-      #|  s DELETE a = {} <=> s = {} \\/ s = {a}
-      #|  FV (!! x p) = {}
-      #|  F
-      #|  n < n + 1
-      #|  formsubst (x |=> numeral n) p
-      #|  formsubst (x |=> numeral n) p
-      #|  n:num
-      #|  y:num = x
-      #|  y:num
-      #|  m:num
-      #|  T
-      #|  formsubst (x |=> numeral m) q
-      #|  m:num
-      #|  v:num->num
-      #|  n = termval v t
-      #|  FV(q) SUBSET {x}
-      #|  FVT t = {}
-      #|  t:term
-      #|  q:form
-      #|  b:bool
-      #|  b:bool
-      #|  p:form
-      #|  x:num
-      #|  ~(p <=> q) ==> (p /\\ ~q ==> r) /\\ (~p /\\ q ==> s) ==> r \\/ s
-      #|  b:bool
-      #|  b:bool
-      #|  ~b
-      #|  b:bool
-      #|  b:bool
-      #|  p ==> q ==> r <=> q ==> p ==> r
-      #|  b:bool
-      #|  q:form
-      #|  p:form
-      #|  b:bool
-      #|  ~b
-      #|  b:bool
-      #|  p:form
-      #|  p:form
-      #|  termval v s
-      #|  s:term
-      #|  v:num->num
-      #|  termval v t
-      #|  t:term
-      #|  v:num->num
-      #|  b:bool
-      #|  t:term
-      #|  s:term
-      #|  a /\\ b /\\ c /\\ d /\\ e /\\ f /\\ g /\\ h /\\ i /\\ j /\\ k /\\ l <=>\n       (a /\\ b) /\\ (c /\\ d /\\ e) /\\ f /\\ (g /\\ h /\\ i /\\ j) /\\ (k /\\ l)
-      #|  (if p then q else F) <=> p /\\ q
-      #|  p:form
-      #|  p:form
-      #|  complexity p
-      #|  forall v p b. sigmapi b 1 p /\\ closed p\n           ==> (b /\\ holds v p ==> {robinson} |-- p) /\\\n               (~b /\\ ~holds v p ==> {robinson} |-- p --> False)
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  p:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  p:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  p:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  q:form
-      #|  p:form
-      #|  b:bool
-      #|  ~b
-      #|  b:bool
-      #|  ~b
-      #|  T
-      #|  p:form
-      #|  I:num->num
-      #|  {}:form->bool
+      #|  op_q_q(2, op_eq_eq_eq(op_plus_plus(numeral((m : Num)), V(2)), numeral(m + (n : Num))))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, op_bar_minus_minus({robinson}, op_lt_lt_eq(numeral(m), numeral(m + n)))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m <= n \226\134\146 op_bar_minus_minus({robinson}, op_lt_lt_eq(numeral(m), numeral(n)))
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 op_bar_minus_minus({robinson}, op_lt_lt(numeral(m), numeral(n)))
+      #|  \226\136\128 u : Term, op_bar_minus_gt((y : Num), V(y), op_bar_eq_gt((x : Num), u)) == op_bar_eq_gt(x, u)
+      #|  (y : Num) == (x : Num)
+      #|  (p : Form)
+      #|  (y : Num)
+      #|  (y : Num)
+      #|  ((p : Bool) && (q : Bool) && (r : Bool)) && (s : Bool) \226\134\146 p && q && r && s
+      #|  \226\136\128 y : Num, safe_for(y, op_bar_eq_gt((x : Num), termsubst(op_bar_eq_gt(x, (s : Term)), (t : Term))))
+      #|  \226\136\128 s : Term, \226\136\128 t : Term, \226\136\128 x : Num, \226\136\128 p : Form, FVT(t) == {x} && FVT(s) == {} \226\134\146 formsubst(op_bar_eq_gt(x, s), formsubst(op_bar_eq_gt(x, t), p)) == formsubst(op_bar_eq_gt(x, termsubst(op_bar_eq_gt(x, s), t)), p)
+      #|  op_eq_eq_eq((t : Term), V((x : Num)))
+      #|  (x : Num)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 x : Num, \226\136\128 t : Term, op_bar_minus_minus(A, formsubst(op_bar_eq_gt(x, t), p)) \226\134\146 op_bar_minus_minus(A, op_minus_minus_gt(op_eq_eq_eq(V(x), t), p))
+      #|  (x : Num)
+      #|  V((z : Num))
+      #|  (x : Num)
+      #|  (p : Form)
+      #|  formsubst(op_bar_eq_gt((x : Num), V((z : Num))), (p : Form))
+      #|  !IN((x : Num), FV(formsubst(op_bar_eq_gt(x, V((z : Num))), (p : Form))))
+      #|  VARIANT(INSERT((x : Num), VARS((p : Form))))
+      #|  \226\136\131 z : Num, !(z == (x : Num)) && !IN(z, VARS((p : Form)))
+      #|  (x : Num)
+      #|  \226\136\128 p : Form, \226\136\128 x : Num, op_bar_minus_minus({robinson}, formsubst(op_bar_eq_gt(x, Z), p)) && op_bar_minus_minus({robinson}, formsubst(op_bar_eq_gt(x, Suc(V(x))), p)) \226\134\146 op_bar_minus_minus({robinson}, p)
+      #|  SUC((m : Num))
+      #|  (m : Num)
+      #|  (x : Num)
+      #|  op_lt_lt(V((x : Num)), numeral((n : Num)))
+      #|  (x : Num)
+      #|  (p : Form)
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, \226\136\128 p : Form, (\226\136\128 m : Num, m < n \226\134\146 op_bar_minus_minus({robinson}, formsubst(op_bar_eq_gt(x, numeral(m)), p))) \226\134\146 op_bar_minus_minus({robinson}, op_bang_bang(x, op_minus_minus_gt(op_lt_lt(V(x), numeral(n)), p)))
+      #|  (p : Form)
+      #|  SUC((n : Num))
+      #|  (x : Num)
+      #|  \226\136\128 x : Num, \226\136\128 n : Num, \226\136\128 p : Form, (\226\136\128 m : Num, m <= n \226\134\146 op_bar_minus_minus({robinson}, formsubst(op_bar_eq_gt(x, numeral(m)), p))) \226\134\146 op_bar_minus_minus({robinson}, op_bang_bang(x, op_minus_minus_gt(op_lt_lt_eq(V(x), numeral(n)), p)))
+      #|  \226\136\128 v : (Num) -> Num, \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, FVT(t) == {} && (\226\136\128 m : Num, m < termval(v, t) \226\134\146 op_bar_minus_minus({robinson}, formsubst(op_bar_eq_gt(x, numeral(m)), p))) \226\134\146 op_bar_minus_minus({robinson}, op_bang_bang(x, op_minus_minus_gt(op_lt_lt(V(x), t), p)))
+      #|  \226\136\128 v : (Num) -> Num, \226\136\128 x : Num, \226\136\128 t : Term, \226\136\128 p : Form, FVT(t) == {} && (\226\136\128 m : Num, m <= termval(v, t) \226\134\146 op_bar_minus_minus({robinson}, formsubst(op_bar_eq_gt(x, numeral(m)), p))) \226\134\146 op_bar_minus_minus({robinson}, op_bang_bang(x, op_minus_minus_gt(op_lt_lt_eq(V(x), t), p)))
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 x : Num, \226\136\128 p : Form, \226\136\128 q : Form, op_bar_minus_minus(A, op_bang_bang(x, op_minus_minus_gt(p, Not(q)))) \226\134\146 op_bar_minus_minus(A, op_bang_bang(x, Not(op_amp_amp(p, q))))
+      #|  (y : Num) == (x : Num)
+      #|  (y : Num)
+      #|  (m : Num)
+      #|  true
+      #|  formsubst(op_bar_eq_gt((x : Num), numeral((m : Num))), Not((q : Form)))
+      #|  (m : Num)
+      #|  (v : (Num) -> Num)
+      #|  !((p : Bool) && (q : Bool)) == (p \226\134\146 !q)
+      #|  (n : Num) == termval((v : (Num) -> Num), (t : Term))
+      #|  SUBSET(FV((q : Form)), {(x : Num)})
+      #|  FVT((t : Term)) == {}
+      #|  (t : Term)
+      #|  (q : Form)
+      #|  (y : Num) == (x : Num)
+      #|  (y : Num)
+      #|  holds(op_bar_minus_gt((x : Num), (n : Num), (v : (Num) -> Num)), (p : Form))
+      #|  false
+      #|  formsubst(op_bar_eq_gt((x : Num), numeral((n : Num))), Not((p : Form)))
+      #|  (n : Num)
+      #|  (b : Bool)
+      #|  (y : Num) == (x : Num)
+      #|  (y : Num)
+      #|  !holds(op_bar_minus_gt((x : Num), (n : Num), (v : (Num) -> Num)), (p : Form))
+      #|  (DELETE((s : (_) -> Bool), (a : _)) == {}) == (s == {} || s == {a})
+      #|  FV(op_bang_bang((x : Num), (p : Form))) == {}
+      #|  false
+      #|  (n : Num) < n + 1
+      #|  formsubst(op_bar_eq_gt((x : Num), numeral((n : Num))), (p : Form))
+      #|  formsubst(op_bar_eq_gt((x : Num), numeral((n : Num))), (p : Form))
+      #|  (n : Num)
+      #|  (y : Num) == (x : Num)
+      #|  (y : Num)
+      #|  (m : Num)
+      #|  true
+      #|  formsubst(op_bar_eq_gt((x : Num), numeral((m : Num))), (q : Form))
+      #|  (m : Num)
+      #|  (v : (Num) -> Num)
+      #|  (n : Num) == termval((v : (Num) -> Num), (t : Term))
+      #|  SUBSET(FV((q : Form)), {(x : Num)})
+      #|  FVT((t : Term)) == {}
+      #|  (t : Term)
+      #|  (q : Form)
+      #|  (b : Bool)
+      #|  (b : Bool)
+      #|  (p : Form)
+      #|  (x : Num)
+      #|  !((p : Bool) == (q : Bool)) \226\134\146 (p && !q \226\134\146 (r : Bool)) && (!p && q \226\134\146 (s : Bool)) \226\134\146 r || s
+      #|  (b : Bool)
+      #|  (b : Bool)
+      #|  !(b : Bool)
+      #|  (b : Bool)
+      #|  (b : Bool)
+      #|  ((p : Bool) \226\134\146 (q : Bool) \226\134\146 (r : Bool)) == (q \226\134\146 p \226\134\146 r)
+      #|  (b : Bool)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (b : Bool)
+      #|  !(b : Bool)
+      #|  (b : Bool)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  termval((v : (Num) -> Num), (s : Term))
+      #|  (s : Term)
+      #|  (v : (Num) -> Num)
+      #|  termval((v : (Num) -> Num), (t : Term))
+      #|  (t : Term)
+      #|  (v : (Num) -> Num)
+      #|  (b : Bool)
+      #|  (t : Term)
+      #|  (s : Term)
+      #|  ((a : Bool) && (b : Bool) && (c : Bool) && (d : Bool) && (e : Bool) && (f : Bool) && (g : Bool) && (h : Bool) && (i : Bool) && (j : Bool) && (k : Bool) && (l : Bool)) == ((a && b) && (c && d && e) && f && (g && h && i && j) && k && l)
+      #|  (if (p : Bool) { (q : Bool) } else { false }) == (p && q)
+      #|  (p : Form)
+      #|  (p : Form)
+      #|  complexity((p : Form))
+      #|  \226\136\128 v : (Num) -> Num, \226\136\128 p : Form, \226\136\128 b : Bool, sigmapi(b, 1, p) && closed(p) \226\134\146 (b && holds(v, p) \226\134\146 op_bar_minus_minus({robinson}, p)) && (!b && !holds(v, p) \226\134\146 op_bar_minus_minus({robinson}, op_minus_minus_gt(p, False)))
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (q : Form)
+      #|  (p : Form)
+      #|  (b : Bool)
+      #|  !(b : Bool)
+      #|  (b : Bool)
+      #|  !(b : Bool)
+      #|  true
+      #|  (p : Form)
+      #|  (I : (Num) -> Num)
+      #|  ({} : (Form) -> Bool)
       #|  robinson
-      #|  p:form
-      #|  forall A. definable_by (SIGMA 1) (IMAGE gform A) /\\\n       consistent A /\\ A |-- robinson\n       ==> ?G. PI 1 G /\\\n               closed G /\\\n               arithtrue G /\\\n               ~(A |-- G) /\\\n               (sound_for (SIGMA 1 INTER closed) A ==> ~(A |-- Not G))
-      #|  complete A <=> forall p. closed p ==> A |-- p \\/ A |-- Not p
-      #|  sound A <=> forall p. A |-- p ==> arithtrue p
-      #|  semcomplete A <=> forall p. arithtrue p ==> A |-- p
-      #|  generalize vs p = ITLIST (!!) vs p
-      #|  closure p = generalize (list_of_set(FV p)) p
-      #|  forall vs p. arithtrue(generalize vs p) <=> arithtrue p
-      #|  forall A p vs. A |-- generalize vs p <=> A |-- p
-      #|  forall p vs. FV(generalize vs p) = FV(p) DIFF (set_of_list vs)
-      #|  forall p. closed(closure p)
-      #|  forall p. arithtrue(closure p) <=> arithtrue p
-      #|  forall A p. A |-- closure p <=> A |-- p
-      #|  definable = definable_by (\\x. T)
-      #|  x:num
-      #|  (V x === V x) && formsubst (\\y. if y = x then V x else Z) p
-      #|  x:num
-      #|  p:form
-      #|  definable s <=> ?p x. (FV p = {x}) /\\ forall v. holds v p <=> (v x) IN s
-      #|  forall p. closed p ==> arithtrue p \\/ arithtrue(Not p)
-      #|  forall A. semcomplete A ==> complete A
-      #|  sound A <=> forall p. closed p /\\ A |-- p ==> arithtrue p
-      #|  ~(arithtrue False)
-      #|  forall A. sound A ==> consistent A
-      #|  forall A. semcomplete A ==> (sound A <=> consistent A)
+      #|  (p : Form)
+      #|  \226\136\128 A : (Form) -> Bool, definable_by(SIGMA(1), IMAGE(gform, A)) && consistent(A) && op_bar_minus_minus(A, robinson) \226\134\146 (\226\136\131 G : Form, PI(1, G) && closed(G) && arithtrue(G) && !op_bar_minus_minus(A, G) && (sound_for(INTER(SIGMA(1), closed), A) \226\134\146 !op_bar_minus_minus(A, Not(G))))
+      #|  (complete : ((Form) -> Bool) -> Bool)((A : (Form) -> Bool)) == (\226\136\128 p : Form, closed(p) \226\134\146 op_bar_minus_minus(A, p) || op_bar_minus_minus(A, Not(p)))
+      #|  (sound : ((Form) -> Bool) -> Bool)((A : (Form) -> Bool)) == (\226\136\128 p : Form, op_bar_minus_minus(A, p) \226\134\146 arithtrue(p))
+      #|  (semcomplete : ((Form) -> Bool) -> Bool)((A : (Form) -> Bool)) == (\226\136\128 p : Form, arithtrue(p) \226\134\146 op_bar_minus_minus(A, p))
+      #|  (generalize : (List[Num], Form) -> Form)((vs : List[Num]), (p : Form)) == ITLIST(op_bang_bang, vs, p)
+      #|  (closure : (Form) -> Form)((p : Form)) == generalize(list_of_set(FV(p)), p)
+      #|  \226\136\128 vs : List[Num], \226\136\128 p : Form, arithtrue(generalize(vs, p)) == arithtrue(p)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, \226\136\128 vs : List[Num], op_bar_minus_minus(A, generalize(vs, p)) == op_bar_minus_minus(A, p)
+      #|  \226\136\128 p : Form, \226\136\128 vs : List[Num], FV(generalize(vs, p)) == DIFF(FV(p), set_of_list(vs))
+      #|  \226\136\128 p : Form, closed(closure(p))
+      #|  \226\136\128 p : Form, arithtrue(closure(p)) == arithtrue(p)
+      #|  \226\136\128 A : (Form) -> Bool, \226\136\128 p : Form, op_bar_minus_minus(A, closure(p)) == op_bar_minus_minus(A, p)
+      #|  definable == definable_by((x : Form) => true)
+      #|  (x : Num)
+      #|  op_amp_amp(op_eq_eq_eq(V((x : Num)), V(x)), formsubst((y : Num) => if y == x { V(x) } else { Z }, (p : Form)))
+      #|  (x : Num)
+      #|  (p : Form)
+      #|  definable((s : (Num) -> Bool)) == (\226\136\131 p : Form, \226\136\131 x : Num, FV(p) == {x} && (\226\136\128 v : (Num) -> Num, holds(v, p) == IN(v(x), s)))
+      #|  \226\136\128 p : Form, closed(p) \226\134\146 arithtrue(p) || arithtrue(Not(p))
+      #|  \226\136\128 A : (Form) -> Bool, semcomplete(A) \226\134\146 complete(A)
+      #|  sound((A : (Form) -> Bool)) == (\226\136\128 p : Form, closed(p) && op_bar_minus_minus(A, p) \226\134\146 arithtrue(p))
+      #|  !arithtrue(False)
+      #|  \226\136\128 A : (Form) -> Bool, sound(A) \226\134\146 consistent(A)
+      #|  \226\136\128 A : (Form) -> Bool, semcomplete(A) \226\134\146 sound(A) == consistent(A)
       #|robinson =  |- ((#=:fun(form,fun(form,bool)) #robinson:form) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#-->:fun(form,fun(form,form)) ((#===:fun(term,fun(term,form)) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#===:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#<->:fun(form,fun(form,form)) (#Not:fun(form,form) ((#===:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) #Z:term))) ((#??:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#===:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))))))) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#===:fun(term,fun(term,form)) ((#++:fun(term,fun(term,term)) #Z:term) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#===:fun(term,fun(term,form)) ((#++:fun(term,fun(term,term)) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (#Suc:fun(term,term) ((#++:fun(term,fun(term,term)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#===:fun(term,fun(term,form)) ((#**:fun(term,fun(term,term)) #Z:term) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) #Z:term))) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#===:fun(term,fun(term,form)) ((#**:fun(term,fun(term,term)) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#++:fun(term,fun(term,term)) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#**:fun(term,fun(term,term)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) ((#&&:fun(form,fun(form,form)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#<->:fun(form,fun(form,form)) ((#<<=:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#??:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#===:fun(term,fun(term,form)) ((#++:fun(term,fun(term,term)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#<->:fun(form,fun(form,form)) ((#<<:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((#<<=:fun(term,fun(term,form)) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))))))))))))
       #|suc_inj =  |- ((#|--:fun(fun(form,bool),fun(form,bool)) ((#INSERT:fun(form,fun(fun(form,bool),fun(form,bool))) #robinson:form) #EMPTY:fun(form,bool))) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#-->:fun(form,fun(form,form)) ((#===:fun(term,fun(term,form)) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num)))) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) ((#===:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))))))
       #|num_cases =  |- ((#|--:fun(fun(form,bool),fun(form,bool)) ((#INSERT:fun(form,fun(fun(form,bool),fun(form,bool))) #robinson:form) #EMPTY:fun(form,bool))) ((#!!:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) ((#<->:fun(form,fun(form,form)) (#Not:fun(form,form) ((#===:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) #Z:term))) ((#??:fun(num,fun(form,form)) (#NUMERAL:fun(num,num) #_0:num)) ((#===:fun(term,fun(term,form)) (#V:fun(num,term) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (#Suc:fun(term,term) (#V:fun(num,term) (#NUMERAL:fun(num,num) #_0:num))))))))
@@ -14563,7 +14563,7 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|constants = closure generalize semcomplete sound complete robinson VARS complexity negatef negativef consistent sound_for complete_for ground gsentence hsentence DELTA PI SIGMA sigmapi arith_prov arith_prov1 arith_axiom arith_freeform arith_freeform1 arith_freeterm arith_freeterm1 arith_form arith_form1 arith_term arith_term1 isaprove PROV PROV1 AXIOM isafform FREEFORM FREEFORM1 isafterm FREETERM FREETERM1 isagform FORM FORM1 isagterm TERM TERM1 ALLN definable definable_by fixpoint diagonalize arith_qdiag qdiag arith_gnumeral arith_gnumeral1' arith_gnumeral1 gnumeral gform gterm denumber number arith_primrec arith_primrecstep arith_rtcp RTCP arith_rtc arith_primepow arith_prime arith_divides arith_pair PSEQ primepow NPAIR closed numeral qsubst safe_for formsubst termsubst VARIANT SETMAX |-- axiom FV FVT |=> arithtrue holds termval |-> ?? !! <-> --> || && Not <<= << === True False _132768 _132767 _132766 _132765 _132764 _132763 _132762 _132761 _132760 _132759 _132758 _132757 _dest_form _mk_form ** ++ Suc V Z _132631 _132630 _132629 _132628 _132627 _dest_term _mk_term index RELPOW INV RSTC STC RTC RSC TC SC RC superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 398
       #|Warning: inventing type variables
-      #|counter_tyvar = zz_counter:'?3
+      #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _205840:bool
       #|
     ),
