@@ -84587,11 +84587,11 @@ test "Probability/ergodic matches Probability/ergodic.ml" {
       #|  \226\136\128 p : Prob_space[A], \226\136\128 tt : (A) -> A, \226\136\128 h : (A) -> Real, measure_preserving(p, tt) && simple_rv(p, h) \226\134\146 simple_rv(p, (x : A) => h(tt(x)))
       #|  nn_expectation((p : Prob_space[A]), (f : (A) -> Real))
       #|  nn_expectation((p : Prob_space[A]), (x : A) => (f : (A) -> Real)((tt : (A) -> A)(x)))
-      #|  \\n:num. simple_expectation (p:A prob_space) ((fn:num->A->real) n)
+      #|  \\n:num. simple_expectation (p:A prob_space) ((fn_:num->A->real) n)
       #|  sequentially
-      #|  (\\n:num. simple_expectation p ((fn:num->A->real) n)) = (\\n. simple_expectation p (\\x:A. fn n (tt x)))
-      #|  ((\\n:num. simple_expectation p ((fn:num->A->real) n)) ---> nn_expectation p (\\x:A. (f:A->real)(tt x))) sequentially
-      #|  forall n:num. simple_expectation p (\\x:A. (fn:num->A->real) n (tt x)) = simple_expectation p (fn n)
+      #|  (\\n:num. simple_expectation p ((fn_:num->A->real) n)) = (\\n. simple_expectation p (\\x:A. fn_ n (tt x)))
+      #|  ((\\n:num. simple_expectation p ((fn_:num->A->real) n)) ---> nn_expectation p (\\x:A. (f:A->real)(tt x))) sequentially
+      #|  forall n:num. simple_expectation p (\\x:A. (fn_:num->A->real) n (tt x)) = simple_expectation p (fn_ n)
       #|  (x : A)
       #|  (B : Real)
       #|  (tt : (A) -> A)
@@ -84609,7 +84609,7 @@ test "Probability/ergodic matches Probability/ergodic.ml" {
       #|  (p : Prob_space[A])
       #|  (x : A)
       #|  (x : A)
-      #|  ((\\n. simple_expectation p (\\x:A. (fn:num->A->real) n (tt x))) ---> nn_expectation p (\\x. (f:A->real)(tt x))) sequentially
+      #|  ((\\n. simple_expectation p (\\x:A. (fn_:num->A->real) n (tt x))) ---> nn_expectation p (\\x. (f:A->real)(tt x))) sequentially
       #|  (B : Real)
       #|  (x : A)
       #|  (n : Num) <= SUC(n)
@@ -84620,10 +84620,10 @@ test "Probability/ergodic matches Probability/ergodic.ml" {
       #|  (p : Prob_space[A])
       #|  (x : A)
       #|  (x : A)
-      #|  ((\\n. simple_expectation p ((fn:num->A->real) n)) ---> nn_expectation p f) sequentially
-      #|  forall n:num. simple_rv p (\\x:A. (fn:num->A->real) n (tt x))
-      #|  forall n:num. simple_rv p ((fn:num->A->real) n)
-      #|  fn = \\n:num. nonneg_simple_fn_approx (p:A prob_space) (f:A->real) n
+      #|  ((\\n. simple_expectation p ((fn_:num->A->real) n)) ---> nn_expectation p f) sequentially
+      #|  forall n:num. simple_rv p (\\x:A. (fn_:num->A->real) n (tt x))
+      #|  forall n:num. simple_rv p ((fn_:num->A->real) n)
+      #|  fn_ = \\n:num. nonneg_simple_fn_approx (p:A prob_space) (f:A->real) n
       #|  \226\136\128 p : Prob_space[A], \226\136\128 tt : (A) -> A, \226\136\128 f : (A) -> Real, \226\136\128 B : Real, measure_preserving(p, tt) && random_variable(p, f) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 real_of_num(0) <= f(x)) && (\226\136\128 x : A, IN(x, prob_carrier(p)) \226\134\146 f(x) <= B) \226\134\146 nn_expectation(p, (x : A) => f(tt(x))) == nn_expectation(p, f)
       #|  nn_expectation((p : Prob_space[A]), (f : (A) -> Real))
       #|  nn_expectation((p : Prob_space[A]), (x : A) => (f : (A) -> Real)((tt : (A) -> A)(x)))
@@ -86159,7 +86159,7 @@ test "Probability/ergodic matches Probability/ergodic.ml" {
       #|  abs((L : Real) - expectation((p : Prob_space[A]), (f : (A) -> Real))) <= abs(L - expectation(p, (y : A) => max(-real_of_num((M : Num)), min(real_of_num(M), f(y))))) + abs(expectation(p, (y : A) => max(-real_of_num(M), min(real_of_num(M), f(y)))) - expectation(p, f))
       #|  !((K : Num) == 0)
       #|  !(2 == 0)
-      #|  i2 * is + i2 * is = (&2 * i2) * is
+      #|  i2 * is_ + i2 * is_ = (&2 * i2) * is_
       #|  inv(real_of_num(2 * SUC((K : Num)))) + inv(real_of_num(2 * SUC(K))) == inv(real_of_num(SUC(K)))
       #|  inv(real_of_num(2 * SUC((K : Num)))) + inv(real_of_num(2 * SUC(K))) <= inv(real_of_num(K))
       #|  inv(real_of_num(2 * SUC((K : Num)))) < abs((L : Real) - expectation((p : Prob_space[A]), (y : A) => max(-real_of_num((M : Num)), min(real_of_num(M), (f : (A) -> Real)(y)))))

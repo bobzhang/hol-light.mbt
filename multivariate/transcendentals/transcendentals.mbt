@@ -96,7 +96,7 @@ fn step_4() -> Unit raise {
   let t25 = @simp.asm_simp_tac(@list.List([@equal.gsym(@realax.real_div()), @real.real_le_ldiv_eq(), @real.real_of_num_lt(), @arith.lt_0()]))
   let t24 = @simp.simp_tac(@list.List([@realax.real_le_mul(), @realarith.real_pos(), @real.real_pow_le(), @realarith.real_sub_le(), @real.real_le_inv_eq(), @real.real_abs_pos()]))
   let t23 = @tactics.match_mp_tac(@realax.real_le_mul())
-  let t22 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(z * zn) * (is * ik) <= (&1 * inv(&2)) * zn * ik <=>\n      &0 <= (&1 - (&2 * z) * is) * zn * ik"))]))
+  let t22 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(z * zn) * (is_ * ik) <= (&1 * inv(&2)) * zn * ik <=>\n      &0 <= (&1 - (&2 * z) * is_) * zn * ik"))]))
   let t21 = @simp.simp_tac(@list.List([@arith.fact(), @realax.real_pow(), @equal.gsym(@realax.real_of_num_mul()), @realax.real_div(), @real.real_inv_mul()]))
   let t20 = @simp.rewrite_tac(@list.List([@arith.ge()]))
   let t19 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))

@@ -86549,16 +86549,16 @@ Probability/martingale_convergence quotations (5725):
   (n : Num)
   IN((q : Real), rational)
   (n : Num)
-  ?n. q = (enum:num->real) n
+  ?n. q = (enum_:num->real) n
   (q : Real)
   (x : A)
-  {x:A | &0 <= gen_cond_exp p G (\\w. Y w pow 2) x} INTER\n     INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
-  INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
+  {x:A | &0 <= gen_cond_exp p G (\\w. Y w pow 2) x} INTER\n     INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum_:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum_:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
+  INTERS {{x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum_:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum_:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x} |\n             n IN (:num)}
   {(x : A) | real_of_num(0) <= gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => pow((Y : (A) -> Real)(w), 2), x)}
   (p : Prob_space[A])
-  \\n. {x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x}
+  \\n. {x:A | &0 <= gen_cond_exp p G (\\w. X w pow 2) x -\n                      &2 * ((enum_:num->real) n) * gen_cond_exp p G (\\w. X w * Y w) x +\n                      ((enum_:num->real) n) pow 2 * gen_cond_exp p G (\\w. Y w pow 2) x}
   (p : Prob_space[A])
-  enum:num->real
+  enum_:num->real
   real_of_num(0)
   rational
   (w : A) => pow((Y : (A) -> Real)(w), 2)
@@ -86697,16 +86697,16 @@ Probability/martingale_convergence quotations (5725):
   (n : Num)
   IN((q : Real), rational)
   (n : Num)
-  ?n. q = (enum:num->real) n
+  ?n. q = (enum_:num->real) n
   (q : Real)
   gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (f : (Real) -> Real)((X : (A) -> Real)(w)), (x : A))
   gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real), (x : A))
   (sl : (Real) -> Real)
   (f : (Real) -> Real)
   (x : A)
-  \\n. {x:A | (sl:real->real)((enum:num->real) n) * gen_cond_exp p G X x +\n                (f(enum n) - sl(enum n) * (enum n)) <=\n                gen_cond_exp p G (\\w. f(X w)) x}
+  \\n. {x:A | (sl:real->real)((enum_:num->real) n) * gen_cond_exp p G X x +\n                (f(enum_ n) - sl(enum_ n) * (enum_ n)) <=\n                gen_cond_exp p G (\\w. f(X w)) x}
   (p : Prob_space[A])
-  enum:num->real
+  enum_:num->real
   real_of_num(0)
   rational
   {(x : A) | gen_cond_exp((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (w : A) => (sl : (Real) -> Real)((q : Real)) * (X : (A) -> Real)(w) + ((f : (Real) -> Real)(q) - sl(q) * q), x) <= gen_cond_exp(p, G, (w : A) => f(X(w)), x)}

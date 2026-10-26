@@ -62379,7 +62379,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  int_of_num(1) <= (a : Int) \226\134\146 a <= int_of_num(2) \226\134\146 a == int_of_num(1) || a == int_of_num(2)
       #|  {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x) && (\226\136\131 a : _, x == (s : (_) -> _)(a))} == {f(s(a)) | a : _ | P(s(a))}
       #|  !(int_of_num(1) == int_of_num(0))
-      #|  f1 SUBSET f /\\ DISJOINT f f0 /\\ fn = {} /\\ f0 = e\n      ==>  e = (fn UNION f0 UNION f1) DIFF f
+      #|  f1 SUBSET f /\\ DISJOINT f f0 /\\ fn_ = {} /\\ f0 = e\n      ==>  e = (fn_ UNION f0 UNION f1) DIFF f
       #|  {(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)} == UNION({f((x : _)) | P(x)}, {f((x : _)) | Q(x)})
       #|  -int_of_num(1) <= (f : Int) && int_of_num(1) <= (s : Int) && s <= int_of_num(2) \226\134\146 (f < s) == (f == -int_of_num(1) && int_of_num(0) <= s || f == int_of_num(0) || f == int_of_num(1) && s == int_of_num(2))
       #|  {(x : Cart[Real, N]) | extreme_point_of(x, (s : (Cart[Real, N]) -> Bool))} == DIFF(relative_frontier(s), UNIONS({relative_interior((f : (Cart[Real, N]) -> Bool)) | face_of(f, s) && aff_dim(f) == int_of_num(1)}))
@@ -63110,7 +63110,7 @@ test "Multivariate/polytope matches Multivariate/polytope.ml" {
       #|  SUBSET((s : (_) -> Bool), INTERS((f : ((_) -> Bool) -> Bool))) == (\226\136\128 t : (_) -> Bool, IN(t, f) \226\134\146 SUBSET(s, t))
       #|  (j : (Cart[Real, N]) -> Bool)
       #|  SUBSET((s : (_) -> Bool), INTERS((f : ((_) -> Bool) -> Bool))) == (\226\136\128 t : (_) -> Bool, IN(t, f) \226\134\146 SUBSET(s, t))
-      #|  ae SUBSET as /\\ ae SUBSET hs /\\\n    b INTER hs SUBSET fs\n    ==> (b INTER ae) SUBSET (as INTER fs) INTER hs
+      #|  ae SUBSET as_ /\\ ae SUBSET hs /\\\n    b INTER hs SUBSET fs\n    ==> (b INTER ae) SUBSET (as_ INTER fs) INTER hs
       #|  (i : (Cart[Real, N]) -> Bool)
       #|  (e : Real)
       #|  open((s : (Cart[Real, _]) -> Bool)) && IN((x : Cart[Real, _]), s) \226\134\146 (\226\136\131 e : Real, real_of_num(0) < e && SUBSET(ball((x, e)), s))

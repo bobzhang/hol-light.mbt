@@ -93,13 +93,21 @@ def renamed_copy(path):
     return '_build/renamed/' + path
 
 
+def renamed_files():
+    """The upstream files loaded from renamed copies: those TYPE_RENAMES
+    lists, unless HOL_REF_ORIGINAL_TYPE_NAMES is set, and those
+    TERM_RENAMES (term_renames.py) lists, unless HOL_REF_ORIGINAL_TERM_NAMES
+    is (check_type_renames.py and check_term_renames.py compare the runs)."""
+    from term_renames import TERM_RENAMES
+    types = {} if os.environ.get('HOL_REF_ORIGINAL_TYPE_NAMES') else TYPE_RENAMES
+    terms = {} if os.environ.get('HOL_REF_ORIGINAL_TERM_NAMES') else TERM_RENAMES
+    return {path: (types.get(path), terms.get(path)) for path in {*types, *terms}}
+
+
 def reference_source(source):
-    """Route core loads to the temporary copies without editing upstream.
-    With HOL_REF_ORIGINAL_TYPE_NAMES set, the files TYPE_RENAMES lists load
-    as they are (check_type_renames.py compares the two runs)."""
-    if not os.environ.get('HOL_REF_ORIGINAL_TYPE_NAMES'):
-        for path in TYPE_RENAMES:
-            source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
+    """Route core loads to the temporary copies without editing upstream."""
+    for path in renamed_files():
+        source = source.replace(f'#use "{path}"', f'#use "{renamed_copy(path)}"')
     return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
         '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
         '#use "parser.ml"', '#use "_build/parser_forall.ml"')
@@ -338,11 +346,16 @@ def prepare():
     alias = '  override_interface("forall",`(!):(A->bool)->bool`);\n'
     assert boolean.count(alias) == 1, 'upstream forall alias changed'
     (ref / '_build/bool_forall.ml').write_text(boolean.replace(alias, ''))
-    for path, renames in TYPE_RENAMES.items():
+    from term_renames import TERM_PATCHES, rename_ocaml
+    for path, (types, terms) in renamed_files().items():
         copy = ref / renamed_copy(path)
         copy.parent.mkdir(parents=True, exist_ok=True)
-        copy.write_text(rename_type_variables(
-            (root / '.repos/hol-light' / path).read_text(), renames, TYPE_PATCHES.get(path, ())))
+        text = (root / '.repos/hol-light' / path).read_text()
+        if types:
+            text = rename_type_variables(text, types, TYPE_PATCHES.get(path, ()))
+        if terms:
+            text = rename_ocaml(text, terms, TERM_PATCHES.get(path, ()))
+        copy.write_text(text)
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))

@@ -1775,14 +1775,14 @@ fn step_51() -> Unit raise {
   let t789 = @simp.asm_rewrite_tac(@list.List([]))
   let t788 = @tactics.exists_tac(@term_syntax.parse_term("(A : ((Num, Num)) -> Bool)"))
   let t803 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(sequence_partition_lemma()), t788), t789), t790), t791), t800), t801), t802), @tactics.all_tac])
-  let t787 = @tactics.subgoal_then(@parser.parse_term("?far:num#num s. subseq s /\\\n                    (forall n:num. fn(s n),LENGTH(args(s n):term list) = far)"), fn(x784 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t787 = @tactics.subgoal_then(@parser.parse_term("?far:num#num s. subseq s /\\\n                    (forall n:num. fn_(s n),LENGTH(args(s n):term list) = far)"), fn(x784 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s785 = @tactics.mp_tac(x784)
     fn(x786 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s785(x786)
     }
   })
   let t782 = @tactics.x_choose_then(@term_syntax.parse_term("(args : (Num) -> List[Term])"))(@tactics.strip_assume_tac)
-  let t783 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("fn:num->num"))(t782))
+  let t783 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("fn_:num->num"))(t782))
   let t781 = @simp.rewrite_tac(@list.List([@class.skolem_thm(), @theorems.forall_and_thm(), @equal.gsym(@lists.all_mem())]))
   let t776 = @simp.asm_rewrite_tac(@list.List([]))
   let t777 = @tactics.then_tac(@tactics.match_mp_tac(descendant_smaller()), t776)

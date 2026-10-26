@@ -10180,19 +10180,19 @@ Logic/positive quotations (370):
   !(FV(formsubst((j : (Num) -> Term), (p : Form))) == FV(formsubst((i : (Num) -> Term), (q : Form))))
   (y : Num)
   \226\136\131 y : Num, IN(y, FVT((j : (Num) -> Term)((x : Num)))) && (\226\136\128 z : Num, !IN(y, FVT((i : (Num) -> Term)(z))))
-  fn:num#num
+  fn_:num#num
   !SUBSET(functions_term((j : (Num) -> Term)((x : Num))), (fns : ((Num, Num)) -> Bool))
   SUBSET(functions_form(formsubst((i : (Num) -> Term), (q : Form))), (fns : ((Num, Num)) -> Bool)) && !SUBSET(functions_form(formsubst((j : (Num) -> Term), (p : Form))), fns)
   SUBSET(functions_form((q : Form)), (fns : ((Num, Num)) -> Bool)) && (\226\136\128 v : Num, IN((i : (Num) -> Term)(v), herbase(fns))) && !IN((j : (Num) -> Term)((x : Num)), herbase(fns)) && IN(x, FV((p : Form))) \226\134\146 !(formsubst(j, p) == formsubst(i, q))
   (c : (Form) -> Bool)
   UNIONS({functions_form((f : Form)) | IN(f, (c : (Form) -> Bool))})
-  fn IN functions_form (formsubst vv s)
+  fn_ IN functions_form (formsubst vv s)
   (s : Form)
-  fn IN functions (IMAGE (formsubst vv) c)
+  fn_ IN functions (IMAGE (formsubst vv) c)
   (c : (Form) -> Bool)
   (vv : (Num) -> Term)
   (cl : (Form) -> Bool)
-  fn:num#num
+  fn_:num#num
   functions(IMAGE(interp, (ghyps : ((Form) -> Bool) -> Bool))) == UNIONS({functions((p : (Form) -> Bool)) | IN(p, ghyps)})
   functions(IMAGE(interp, (ghyps : ((Form) -> Bool) -> Bool)))
   functions_form(formsubst((i : (Num) -> Term), (q : Form)))
@@ -10217,7 +10217,7 @@ Logic/positive quotations (370):
   (D : (Form) -> Bool) == IMAGE(formsubst(mgu(UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))), UNION(DIFF((A : (Form) -> Bool), A1), DIFF((C : (Form) -> Bool), B1)))
   (i : (Num) -> Term)
   instance_of(resolve((p : Form), (A' : (Form) -> Bool), (B' : (Form) -> Bool)), IMAGE(formsubst(mgu(UNION((A1 : (Form) -> Bool), {op_tilde_tilde((l : Form)) | IN(l, (B1 : (Form) -> Bool))}))), UNION(DIFF((A : (Form) -> Bool), A1), DIFF((C : (Form) -> Bool), B1))))
-  fn:num#num
+  fn_:num#num
   ((f : Num), LENGTH((l : List[A])))
   IN(((f : Num), LENGTH((l : List[A]))), functions_term((k1 : (Num) -> Term)((x : Num))))
   IN(((f : Num), LENGTH((l : List[A]))), functions_term((k2 : (Num) -> Term)((x : Num))))
