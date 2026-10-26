@@ -89,6 +89,36 @@ TYPE_PATCHES = {
 }
 
 
+# Quotations the port writes or builds differently from upstream, because it
+# removed the parser extensions they use (issue #140: Library/bitmatch.ml's
+# bitmatch syntax, Examples/prog.ml's program syntax). Each file listed is
+# loaded from a copy patched the same way, so that the reference reproduces
+# the port's goldens; each upstream text must occur once.
+PORT_PATCHES = {
+    'Library/bitmatch.ml': [
+        # binders named as library/bitmatch/terms.mbt's mk_bitmatch names them
+        ('    let x = pgenvar() and y = pgenvar() in\n',
+         '    let x = Varp("bm_input",dpty) and y = Varp("bm_result",dpty) in\n'),
+        # bm_check_disjointness's unit tests, which the port builds rather than parses
+        ('`bitmatch (x:(2)word) with | [0b00:2] -> T | [0b10:2] -> T`',
+         '(untraced_parse_term "bitmatch (x:(2)word) with | [0b00:2] -> T | [0b10:2] -> T")'),
+        ('`bitmatch (x:(2)word) with | [T; x] -> T | [F; y] -> T`',
+         '(untraced_parse_term "bitmatch (x:(2)word) with | [T; x] -> T | [F; y] -> T")'),
+        ('`bitmatch (x:(2)word) with | [0b00:2] -> T | [0b00:2] -> T`',
+         '(untraced_parse_term "bitmatch (x:(2)word) with | [0b00:2] -> T | [0b00:2] -> T")'),
+        ('`bitmatch (x:(2)word) with | [T; x] -> T | [y; T] -> T`',
+         '(untraced_parse_term "bitmatch (x:(2)word) with | [T; x] -> T | [y; T] -> T")'),
+        ('`bitmatch (x:(2)word) with | [0b11:2] -> T | [0b00:2] -> T | [0b00:2] -> T`',
+         '(untraced_parse_term "bitmatch (x:(2)word) with | [0b11:2] -> T | [0b00:2] -> T | [0b00:2] -> T")'),
+    ],
+    'Examples/prog.ml': [
+        # EXAMPLE_FACTORIAL's goal in plain HOL, as examples/prog/prog.mbt writes it
+        ('(`correct\n   T\n     var x,y,n;\n       x := 0;\n       y := 1;\n       while x < n do [invariant x <= n /\\ (y = FACT x); measure n - x]\n        (x := x + 1;\n         y := y * x)\n     end\n   y = FACT n`',
+         '(`correct\n  (\\(x,y,n). T)\n  (Assign (\\(x,y,n). (0,y,n)) Seq\n   Assign (\\(x,y,n). (x,1,n)) Seq\n   AWHILE (\\(x,y,n). x <= n /\\ (y = FACT x))\n          (MEASURE (\\(x,y,n). n - x))\n          (\\(x,y,n). x < n)\n          (Assign (\\(x,y,n). (x + 1,y,n)) Seq\n           Assign (\\(x,y,n). (x,y * x,n))))\n  (\\(x,y,n). y = FACT n)`'),
+    ],
+}
+
+
 def renamed_copy(path):
     return '_build/renamed/' + path
 
@@ -101,7 +131,7 @@ def renamed_files():
     from term_renames import TERM_RENAMES
     types = {} if os.environ.get('HOL_REF_ORIGINAL_TYPE_NAMES') else TYPE_RENAMES
     terms = {} if os.environ.get('HOL_REF_ORIGINAL_TERM_NAMES') else TERM_RENAMES
-    return {path: (types.get(path), terms.get(path)) for path in {*types, *terms}}
+    return {path: (types.get(path), terms.get(path)) for path in {*types, *terms, *PORT_PATCHES}}
 
 
 def reference_source(source):
@@ -351,6 +381,9 @@ def prepare():
         copy = ref / renamed_copy(path)
         copy.parent.mkdir(parents=True, exist_ok=True)
         text = (root / '.repos/hol-light' / path).read_text()
+        for old, new in PORT_PATCHES.get(path, ()):
+            assert text.count(old) == 1, f'upstream {path} changed: {old[:60]}'
+            text = text.replace(old, new)
         if types:
             text = rename_type_variables(text, types, TYPE_PATCHES.get(path, ()))
         if terms:

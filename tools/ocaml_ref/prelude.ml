@@ -106,6 +106,9 @@ let attempt name f = try out (name ^ " = " ^ f ()) with
    parse_type are bound when a file loads, so these wrappers record the
    order in which a theory parses its quotations. *)
 let quotation_trace = ref ([] : string list);;
+(* For quotations the port builds without parsing (PORT_PATCHES in
+   forall_reference.py). *)
+let untraced_parse_term = parse_term;;
 let parse_type s = quotation_trace := (":" ^ s) :: !quotation_trace; parse_type s;;
 let parse_term s = quotation_trace := s :: !quotation_trace; parse_term s;;
 let start_trace () = quotation_trace := [];;
