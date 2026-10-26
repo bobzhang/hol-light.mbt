@@ -2731,7 +2731,7 @@ fn step_113() -> Unit raise {
 ///|
 /// Jordan/misc_defs_and_lemmas.ml:1735
 fn step_114() -> Unit raise {
-  @preterm.overload_interface("+", @parser.parse_term("euclid_euclid_plus:(num->real)->(num->real)->(num->real)"))
+  @preterm.overload_interface("+", @term_syntax.parse_term("(euclid_euclid_plus : ((Num) -> Real, (Num) -> Real, Num) -> Real)"))
 }
 
 ///|
@@ -2791,7 +2791,7 @@ fn step_120() -> Unit raise {
 ///|
 /// Jordan/misc_defs_and_lemmas.ml:1753
 fn step_121() -> Unit raise {
-  @preterm.overload_interface("-", @parser.parse_term("euclid_euclid_minus:(num->real)->(num->real)->(num->real)"))
+  @preterm.overload_interface("-", @term_syntax.parse_term("(euclid_euclid_minus : ((Num) -> Real, (Num) -> Real, Num) -> Real)"))
 }
 
 ///|
@@ -2902,7 +2902,7 @@ pub fn dot() -> @kernel.Thm {
 ///|
 /// norm
 fn step_129() -> Unit raise {
-  norm_c.set(euclid_def(@parser.parse_term("norm f = sqrt(dot f f)")))
+  norm_c.set(euclid_def(@term_syntax.parse_term("(norm : ((Num) -> Real) -> Real)((f : (Num) -> Real)) == sqrt(euclid_dot(f, f))")))
 }
 
 ///|
@@ -3283,7 +3283,7 @@ pub fn cross_product3() -> @kernel.Thm {
 ///|
 /// triple_product
 fn step_154() -> Unit raise {
-  triple_product_c.set(euclid_def(@parser.parse_term("triple_product v1 v2 v3 =\n        dot v1 (cross_product3 v2 v3)")))
+  triple_product_c.set(euclid_def(@term_syntax.parse_term("(triple_product : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Real)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == euclid_dot(v1, euclid_cross_product3(v2, v3))")))
 }
 
 ///|
