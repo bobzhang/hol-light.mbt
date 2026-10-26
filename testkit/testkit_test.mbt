@@ -42,3 +42,30 @@ test "probe_counters prints what the probes that advance the counters print" {
     ),
   )
 }
+
+///|
+test "normalize_counters leaves quotation traces as they are" {
+  let log = "x:?57 y:?12\nArithmetic/t quotations (2):\n  ??1 (V 1 === Z)\n  y:?12\nz:?12 w:?99"
+  inspect(
+    @testkit.normalize_counters(log),
+    content=(
+      #|x:?1 y:?2
+      #|Arithmetic/t quotations (2):
+      #|  ??1 (V 1 === Z)
+      #|  y:?12
+      #|z:?2 w:?3
+    ),
+  )
+}
+
+///|
+test "normalize_counters reads a trace header by its last ` quotations (`" {
+  inspect(
+    @testkit.normalize_counters("x quotations (1) quotations (1):\n  ?50\n?51"),
+    content=(
+      #|x quotations (1) quotations (1):
+      #|  ?50
+      #|?1
+    ),
+  )
+}
