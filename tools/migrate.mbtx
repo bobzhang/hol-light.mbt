@@ -616,6 +616,11 @@ async fn record(
     if ranges.is_empty() {
       fail("no test files to run in " + tpkg)
     }
+    // a chain's test files (NN_<name>_test.mbt) run in order, each loading
+    // its member after the ones before it (as tools/test.py runs them)
+    if ranges.iter().all(r => r.0.length() > 3 && r.0[2] == '_' && r.0[0:2].iter().all(c => c is ('0'..='9'))) {
+      ranges.sort_by((a, b) => a.0.compare(b.0))
+    }
   }
   ranges.push((gen_test, 1))
   let (code, out, results) = run_wasm(tpkg, dir, exe, ranges)
