@@ -107448,7 +107448,7 @@ Generating HOL version of proof
 0..0..1..2..5..12..30..solved at 39
 100/transcendence quotations (8541):
   \226\136\128 S : (X) -> Bool, \226\136\128 U : (X) -> Bool, SUBSET(S, U) == (\226\136\128 y : X, IN(y, S) \226\134\146 IN(y, U))
-  \n  forall S:X->bool T.\n  S = T <=>\n  (forall z. z IN S <=> z IN T)\n
+  \226\136\128 S : (X) -> Bool, \226\136\128 T : (X) -> Bool, (S == T) == (\226\136\128 z : X, IN(z, S) == IN(z, T))
   \226\136\128 x : X, \226\136\128 S : (X) -> Bool, !IN(x, S) \226\134\146 DELETE(INSERT(x, S), x) == S
   SUBSET({(t : T) | (p : (T) -> Bool)(t)}, {(t : T) | \226\136\131 s : S, IN(s, {(x : S) | p((f : (S) -> T)(x))}) && t == f(s)})
   {(s : S) | (p : (T) -> Bool)((f : (S) -> T)(s))}
@@ -110744,25 +110744,25 @@ Generating HOL version of proof
   (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
   !((p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]) == poly_0(complex_ring))
   \226\136\128 p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]], ring_polynomial(complex_ring, p) \226\134\146 monic(complex_ring, p) \226\134\146 (\226\136\131 c : (Num) -> Cart[Real, Tybit0[Unit]], p == monic_vanishing_at(complex_ring, {(i : Num) | i < poly_deg(complex_ring, p)}, c))
-  \n        p = ring_mul(r:R ring) C qpd ==>\n        ring_mul r C qp_d = ring_add r qpd (ring_mul r C D) ==>\n        p = ring_mul r (ring_mul r C C) (ring_sub r qp_d D)\n      
+  (p : R) == ring_mul((r : Ring[R]), (C : R), (qpd : R)) \226\134\146 ring_mul(r, C, (qp_d : R)) == ring_add(r, qpd, ring_mul(r, C, (D : R))) \226\134\146 p == ring_mul(r, ring_mul(r, C, C), ring_sub(r, qp_d, D))
   (qpd : R)
-  qp_d:R
+  (qp_d : R)
   (p : R)
   (D : R)
   (C : R)
   (r : Ring[R])
   (qpd : ((Unit) -> Num) -> R)
-  qp_d:(1->num)->R
+  (qp_d : ((Unit) -> Num) -> R)
   (p : ((Unit) -> Num) -> R)
   (D : ((Unit) -> Num) -> R)
   (C : ((Unit) -> Num) -> R)
   x_poly((r : Ring[R]))
-  \n  forall(r:R ring) C p qpd qp_d D:(1->num)->R.\n  ring_polynomial r C ==>\n  ring_polynomial r p ==>\n  ring_polynomial r qpd ==>\n  ring_polynomial r qp_d ==>\n  ring_polynomial r D ==>\n  p = poly_mul r C qpd ==>\n  poly_mul r C qp_d = poly_add r qpd (poly_mul r C D) ==>\n  p = poly_mul r (poly_mul r C C) (poly_sub r qp_d D)\n
-  ring_sub (x_poly complex_ring) qp_d (x_derivative complex_ring qpd)
+  \226\136\128 r : Ring[R], \226\136\128 C : ((Unit) -> Num) -> R, \226\136\128 p : ((Unit) -> Num) -> R, \226\136\128 qpd : ((Unit) -> Num) -> R, \226\136\128 qp_d : ((Unit) -> Num) -> R, \226\136\128 D : ((Unit) -> Num) -> R, ring_polynomial(r, C) \226\134\146 ring_polynomial(r, p) \226\134\146 ring_polynomial(r, qpd) \226\134\146 ring_polynomial(r, qp_d) \226\134\146 ring_polynomial(r, D) \226\134\146 p == poly_mul(r, C, qpd) \226\134\146 poly_mul(r, C, qp_d) == poly_add(r, qpd, poly_mul(r, C, D)) \226\134\146 p == poly_mul(r, poly_mul(r, C, C), poly_sub(r, qp_d, D))
+  ring_sub(x_poly(complex_ring), (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), x_derivative(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])))
   ring_divides(x_poly(complex_ring), ring_mul(x_poly(complex_ring), x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), x_minus_const(complex_ring, z)), (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
-  p = ring_mul(x_poly complex_ring) (ring_mul(x_poly complex_ring) (x_minus_const complex_ring z) (x_minus_const complex_ring z)) (ring_sub(x_poly complex_ring) qp_d (x_derivative complex_ring qpd))
-  p = ring_mul(x_poly complex_ring) (ring_mul(x_poly complex_ring) (x_minus_const complex_ring z) (x_minus_const complex_ring z)) (poly_sub complex_ring qp_d (x_derivative complex_ring qpd))
-  p = ring_mul(x_poly complex_ring) (poly_mul complex_ring (x_minus_const complex_ring z) (x_minus_const complex_ring z)) (poly_sub complex_ring qp_d (x_derivative complex_ring qpd))
+  (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]) == ring_mul(x_poly(complex_ring), ring_mul(x_poly(complex_ring), x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), x_minus_const(complex_ring, z)), ring_sub(x_poly(complex_ring), (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), x_derivative(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))))
+  (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]) == ring_mul(x_poly(complex_ring), ring_mul(x_poly(complex_ring), x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), x_minus_const(complex_ring, z)), poly_sub(complex_ring, (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), x_derivative(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))))
+  (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]) == ring_mul(x_poly(complex_ring), poly_mul(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), x_minus_const(complex_ring, z)), poly_sub(complex_ring, (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), x_derivative(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))))
   x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]]))
   (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
   x_poly(complex_ring)
@@ -110773,36 +110773,36 @@ Generating HOL version of proof
   integral_domain(x_poly(complex_ring))
   ring_divides(x_poly(complex_ring), x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), x_derivative(QinC_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])))
   ring_divides(x_poly(complex_ring), (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), x_derivative(QinC_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])))
-  x_derivative QinC_ring p = ring_mul(x_poly complex_ring) d p_d
+  x_derivative(QinC_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == ring_mul(x_poly(complex_ring), (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
   IN(x_derivative(QinC_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])), ring_carrier(x_poly(complex_ring)))
   ring_divides(x_poly(complex_ring), x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
   ring_divides(x_poly(complex_ring), (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
   (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]) == ring_mul(x_poly(complex_ring), (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (pd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
   IN((pd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), ring_carrier(x_poly(complex_ring)))
   x_derivative(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
-  qp_d:(1->num)->complex
+  (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
   (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
   (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
   x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]]))
   complex_ring
-  poly_mul complex_ring (x_minus_const complex_ring z) qp_d = poly_add complex_ring qpd (poly_mul complex_ring (x_minus_const complex_ring z) (x_derivative complex_ring qpd))
-  poly_mul complex_ring (x_minus_const complex_ring z) qp_d = poly_add complex_ring (poly_mul complex_ring (poly_1 complex_ring) qpd) (poly_mul complex_ring (x_minus_const complex_ring z) (x_derivative complex_ring qpd))
-  poly_mul complex_ring (x_minus_const complex_ring z) qp_d = poly_add complex_ring (poly_mul complex_ring (x_derivative complex_ring (x_minus_const complex_ring z)) qpd) (poly_mul complex_ring (x_minus_const complex_ring z) (x_derivative complex_ring qpd))
-  x_derivative complex_ring p = poly_mul complex_ring (x_minus_const complex_ring z) qp_d
-  ring_powerseries complex_ring (qp_d:(1->num)->complex)
-  ring_polynomial complex_ring (qp_d:(1->num)->complex)
-  poly_mul complex_ring q p_d:(1->num)->complex
-  qp_d:(1->num)->complex
-  x_derivative complex_ring p = poly_mul complex_ring d p_d
-  ring_powerseries QinC_ring (p_d:(1->num)->complex)
-  ring_powerseries complex_ring (p_d:(1->num)->complex)
-  ring_polynomial complex_ring (p_d:(1->num)->complex)
-  x_derivative complex_ring p = poly_mul QinC_ring d p_d
-  x_derivative complex_ring p = ring_mul(x_poly QinC_ring) d p_d
+  poly_mul(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_add(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), poly_mul(complex_ring, x_minus_const(complex_ring, z), x_derivative(complex_ring, qpd)))
+  poly_mul(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_add(complex_ring, poly_mul(complex_ring, poly_1(complex_ring), (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])), poly_mul(complex_ring, x_minus_const(complex_ring, z), x_derivative(complex_ring, qpd)))
+  poly_mul(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_add(complex_ring, poly_mul(complex_ring, x_derivative(complex_ring, x_minus_const(complex_ring, z)), (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])), poly_mul(complex_ring, x_minus_const(complex_ring, z), x_derivative(complex_ring, qpd)))
+  x_derivative(complex_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_mul(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  ring_powerseries(complex_ring, (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  ring_polynomial(complex_ring, (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  poly_mul(complex_ring, (q : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  (qp_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
+  x_derivative(complex_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_mul(complex_ring, (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  ring_powerseries(QinC_ring, (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  ring_powerseries(complex_ring, (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  ring_polynomial(complex_ring, (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  x_derivative(complex_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_mul(QinC_ring, (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
+  x_derivative(complex_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == ring_mul(x_poly(QinC_ring), (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
   x_derivative(complex_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == x_derivative(QinC_ring, p)
-  p_d IN ring_carrier(x_poly complex_ring)
-  p_d IN ring_carrier(x_poly QinC_ring) /\\ x_derivative QinC_ring p = ring_mul(x_poly QinC_ring) d p_d
-  p_d:(1->num)->complex
+  IN((p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), ring_carrier(x_poly(complex_ring)))
+  IN((p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), ring_carrier(x_poly(QinC_ring))) && x_derivative(QinC_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == ring_mul(x_poly(QinC_ring), (d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]), p_d)
+  (p_d : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])
   x_derivative(complex_ring, (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])) == poly_add(complex_ring, poly_mul(complex_ring, x_derivative(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]]))), (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])), poly_mul(complex_ring, x_minus_const(complex_ring, z), x_derivative(complex_ring, qpd)))
   (p : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]) == poly_mul(complex_ring, x_minus_const(complex_ring, (z : Cart[Real, Tybit0[Unit]])), (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]]))
   ring_polynomial(complex_ring, x_derivative(complex_ring, (qpd : ((Unit) -> Num) -> Cart[Real, Tybit0[Unit]])))
