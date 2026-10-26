@@ -21333,19 +21333,19 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (N : Num)
       #|  abs((g : (A) -> Real)((x : A)))
       #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
-      #|  forall m. sum(0..m)\n               (\\k. (fn_:num->A->real) k x * inv(&2) pow (k+1)) = &0
-      #|  forall n:num. (fn_:num->A->real) n x = &0
+      #|  \226\136\128 m : Num, sum(op_dot_dot(0, m), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1)) == real_of_num(0)
+      #|  \226\136\128 n : Num, (fn_ : (Num, A) -> Real)(n, (x : A)) == real_of_num(0)
       #|  IN((x : A), (A : (A) -> Bool))
-      #|  &0 <= sum(0..N + n)\n           (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1))
-      #|  \\k:num. (fn_:num->A->real) k (x:A) * inv(&2) pow (k + 1)
+      #|  real_of_num(0) <= sum(op_dot_dot(0, (N : Num) + (n : Num)), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1))
+      #|  (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1)
       #|  op_dot_dot(0, (N : Num) + (n : Num))
       #|  op_dot_dot((n : Num), n)
-      #|  inv(&2) pow (n + 1) <=\n           sum(0..N + n)\n             (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1))
+      #|  pow(inv(real_of_num(2)), (n : Num) + 1) <= sum(op_dot_dot(0, (N : Num) + n), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1))
       #|  (x : A)
       #|  (N : Num) + (n : Num)
       #|  (N : Num)
       #|  pow(inv(real_of_num(2)), (n : Num) + 1)
-      #|  (fn_:num->A->real) n x = &1
+      #|  (fn_ : (Num, A) -> Real)((n : Num), (x : A)) == real_of_num(1)
       #|  (!(p : Bool) \226\134\146 false) \226\134\146 p
       #|  (n : Num)
       #|  (x : A)
@@ -21367,7 +21367,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  0
       #|  inv(real_of_num(2))
       #|  sum(op_dot_dot(0, (m : Num)), (k : Num) => pow(inv(real_of_num(2)), k + 1))
-      #|  forall m. &0 <= sum(0..m)\n              (\\k. (fn_:num->A->real) k x * inv(&2) pow (k+1)) /\\\n            sum(0..m)\n              (\\k. fn_ k x * inv(&2) pow (k+1)) <= &1
+      #|  \226\136\128 m : Num, real_of_num(0) <= sum(op_dot_dot(0, m), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1)) && sum(op_dot_dot(0, m), (k : Num) => fn_(k, x) * pow(inv(real_of_num(2)), k + 1)) <= real_of_num(1)
       #|  (x : A)
       #|  (g : (A) -> Real)
       #|  (m : Num)
@@ -21379,13 +21379,13 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  pow(inv(real_of_num(2)), (m : Num))
       #|  sum(op_dot_dot((m : Num) + 1, (nn : Num)), (k : Num) => pow(inv(real_of_num(2)), k + 1))
       #|  (a : Real) - (b : Real) == (c : Real) && real_of_num(0) <= c \226\134\146 abs(a - b) <= c
-      #|  sum(m+1..nn) (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1))
-      #|  &0 <= sum(m+1..nn)\n        (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1))
+      #|  sum(op_dot_dot((m : Num) + 1, (nn : Num)), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1))
+      #|  real_of_num(0) <= sum(op_dot_dot((m : Num) + 1, (nn : Num)), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1))
       #|  (nn : Num)
       #|  (m : Num)
       #|  0
-      #|  \\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1)
-      #|  sum(0..nn) (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1)) -\n       sum(0..m) (\\k. fn_ k x * inv(&2) pow (k + 1)) =\n       sum(m+1..nn) (\\k. fn_ k x * inv(&2) pow (k + 1))
+      #|  (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1)
+      #|  sum(op_dot_dot(0, (nn : Num)), (k : Num) => (fn_ : (Num, A) -> Real)(k, (x : A)) * pow(inv(real_of_num(2)), k + 1)) - sum(op_dot_dot(0, (m : Num)), (k : Num) => fn_(k, x) * pow(inv(real_of_num(2)), k + 1)) == sum(op_dot_dot(m + 1, nn), (k : Num) => fn_(k, x) * pow(inv(real_of_num(2)), k + 1))
       #|  (nn : Num)
       #|  (m : Num)
       #|  (N : Num)
@@ -21393,21 +21393,21 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  inv(real_of_num(2))
       #|  (e : Real)
       #|  (g : (A) -> Real)
-      #|  ?g:A->real. continuous_map(top,euclideanreal) g /\\\n       (forall e. &0 < e\n            ==> eventually\n                  (\\n. forall(x:A). x IN topspace top\n                       ==> abs(g x - sum (0..n)\n                              (\\k. (fn_:num->A->real) k x *\n                                   inv(&2) pow (k + 1))) < e)\n                  sequentially)
-      #|  (\\n x:A. sum(0..n)\n       (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1))):num->A->real
+      #|  \226\136\131 g : (A) -> Real, continuous_map(((top : Topology[A]), euclideanreal), g) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((n : Num) => \226\136\128 x : A, IN(x, topspace(top)) \226\134\146 abs(g(x) - sum(op_dot_dot(0, n), (k : Num) => (fn_ : (Num, A) -> Real)(k, x) * pow(inv(real_of_num(2)), k + 1))) < e, sequentially))
+      #|  (n : Num) => (x : A) => sum(op_dot_dot(0, n), (k : Num) => (fn_ : (Num, A) -> Real)(k, x) * pow(inv(real_of_num(2)), k + 1))
       #|  real_euclidean_metric
       #|  (top : Topology[A])
-      #|  forall n. continuous_map(top:A topology, euclideanreal)\n          (\\x. sum(0..n) (\\k. (fn_:num->A->real) k x * inv(&2) pow (k + 1)))
-      #|  continuous_map\n         (top:A topology,\n          subtopology euclideanreal (real_interval [&0,&1]))\n         ((fn_:num->A->real) n)
-      #|  continuous_map\n         (top:A topology,\n          subtopology euclideanreal (real_interval [&0,&1]))\n         ((fn_:num->A->real) n)
-      #|  (forall n:num. continuous_map(top,euclideanreal) ((fn_:num->A->real) n)) /\\\n     (forall n x:A. x IN topspace top ==> &0 <= fn_ n x /\\ fn_ n x <= &1)
-      #|  fn_:num->A->real
+      #|  \226\136\128 n : Num, continuous_map(((top : Topology[A]), euclideanreal), (x : A) => sum(op_dot_dot(0, n), (k : Num) => (fn_ : (Num, A) -> Real)(k, x) * pow(inv(real_of_num(2)), k + 1)))
+      #|  continuous_map(((top : Topology[A]), subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))]))), (fn_ : (Num, A) -> Real)((n : Num)))
+      #|  continuous_map(((top : Topology[A]), subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))]))), (fn_ : (Num, A) -> Real)((n : Num)))
+      #|  (\226\136\128 n : Num, continuous_map(((top : Topology[A]), euclideanreal), (fn_ : (Num, A) -> Real)(n))) && (\226\136\128 n : Num, \226\136\128 x : A, IN(x, topspace(top)) \226\134\146 real_of_num(0) <= fn_(n, x) && fn_(n, x) <= real_of_num(1))
+      #|  (fn_ : (Num, A) -> Real)
       #|  real_of_num(1)
       #|  real_of_num(0)
       #|  DIFF(topspace((top : Topology[A])), (U : (Num, A) -> Bool)((n : Num)))
       #|  (A : (A) -> Bool)
       #|  (top : Topology[A])
-      #|  forall n. ?fn_:A->real.\n       continuous_map\n         (top, subtopology euclideanreal (real_interval[&0,&1])) fn_ /\\\n       (forall x. x IN A ==> fn_ x = &0) /\\\n       (forall x. x IN topspace top DIFF (U:num->A->bool) n ==> fn_ x = &1)
+      #|  \226\136\128 n : Num, \226\136\131 fn_ : (A) -> Real, continuous_map(((top : Topology[A]), subtopology(euclideanreal, real_interval([(real_of_num(0), real_of_num(1))]))), fn_) && (\226\136\128 x : A, IN(x, (A : (A) -> Bool)) \226\134\146 fn_(x) == real_of_num(0)) && (\226\136\128 x : A, IN(x, DIFF(topspace(top), (U : (Num, A) -> Bool)(n))) \226\134\146 fn_(x) == real_of_num(1))
       #|  \226\136\128 n : Num, SUBSET((A : (A) -> Bool), (U : (Num, A) -> Bool)(n))
       #|  {(U : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)} == INSERT(topspace((top : Topology[A])), (u : ((A) -> Bool) -> Bool))
       #|  (A : (A) -> Bool) == INTERS({(U : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)})
@@ -22360,7 +22360,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (n0 : Num)
       #|  IN((r : (A) -> Bool), (R : ((A) -> Bool) -> Bool))
       #|  IN((d : (A) -> Bool), (Dn0 : ((A) -> Bool) -> Bool))
-      #|  ?r:A->bool. r IN (fn_:num->(A->bool)->bool) n0 /\\\n                               d = r INTER (S:num->A->bool) n0
+      #|  \226\136\131 r : (A) -> Bool, IN(r, (fn_ : (Num, (A) -> Bool) -> Bool)((n0 : Num))) && (d : (A) -> Bool) == INTER(r, (S : (Num, A) -> Bool)(n0))
       #|  (n0 : Num)
       #|  (Dn0 : ((A) -> Bool) -> Bool)
       #|  (d : (A) -> Bool)
@@ -22376,7 +22376,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num)))
       #|  closure_of((top : Topology[A]), INTER((r : (A) -> Bool), (S : (Num, A) -> Bool)((n0 : Num))))
       #|  IN((x : A), (P : (Num, A) -> Bool)((n0 : Num)))
-      #|  ?r:A->bool. r IN (fn_:num->(A->bool)->bool) n0 /\\ x IN r
+      #|  \226\136\131 r : (A) -> Bool, IN(r, (fn_ : (Num, (A) -> Bool) -> Bool)((n0 : Num))) && IN((x : A), r)
       #|  IN((x : A), (s : (A) -> Bool))
       #|  IN((x : A), (P : (Num, A) -> Bool)((n0 : Num)))
       #|  (n0 : Num)
@@ -22392,7 +22392,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (r : (A) -> Bool)
       #|  (r : (A) -> Bool)
       #|  (s : (A) -> Bool)
-      #|  IMAGE (\\r:A->bool. r INTER (S:num->A->bool) n)\n                      {r | r IN (fn_:num->(A->bool)->bool) n /\\\n                           ~(r INTER O = {})}
+      #|  IMAGE((r : (A) -> Bool) => INTER(r, (S : (Num, A) -> Bool)((n : Num))), {(r : (A) -> Bool) | IN(r, (fn_ : (Num, (A) -> Bool) -> Bool)(n)) && !(INTER(r, (O : (A) -> Bool)) == {})})
       #|  (O : (A) -> Bool)
       #|  (O : (A) -> Bool)
       #|  (x : A)
@@ -22402,7 +22402,7 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (r : (A) -> Bool)
       #|  (r : (A) -> Bool)
       #|  \226\136\128 n : Num, locally_finite_in((top : Topology[A]), (Dn : (Num, (A) -> Bool) -> Bool)(n))
-      #|  Dn = \\n:num. {r INTER (S:num->A->bool) n |\n                    r | r IN (fn_:num->(A->bool)->bool) n}
+      #|  (Dn : (Num, (A) -> Bool) -> Bool) == ((n : Num) => {INTER(r, (S : (Num, A) -> Bool)(n)) | r : (A) -> Bool | IN(r, (fn_ : (Num, (A) -> Bool) -> Bool)(n))})
       #|  INTER((s : (A) -> Bool), (t : (A) -> Bool)) == {} \226\134\146 INTER(t, DIFF(s, (a : (A) -> Bool))) == {}
       #|  (m : Num)
       #|  (n : Num)
@@ -22422,15 +22422,15 @@ test "Multivariate/paracompact matches Multivariate/paracompact.ml" {
       #|  (n0 : Num)
       #|  (P : (Num, A) -> Bool)((n0 : Num))
       #|  IN((r : (A) -> Bool), (R : ((A) -> Bool) -> Bool))
-      #|  ?n0:num. (r:A->bool) IN (fn_:num->(A->bool)->bool) n0
+      #|  \226\136\131 n0 : Num, IN((r : (A) -> Bool), (fn_ : (Num, (A) -> Bool) -> Bool)(n0))
       #|  (r : (A) -> Bool)
       #|  IN((x : A), UNIONS((R : ((A) -> Bool) -> Bool)))
       #|  (x : A)
       #|  UNIONS({(P : (Num, A) -> Bool)((n : Num)) | IN(n, UNIV)}) == topspace((top : Topology[A]))
       #|  \226\136\128 n : Num, open_in((top : Topology[A]), (P : (Num, A) -> Bool)(n))
-      #|  P = \\n:num. UNIONS ((fn_:num->(A->bool)->bool) n)
-      #|  forall n:num. (fn_:num->(A->bool)->bool) n SUBSET R
-      #|  fn_:num->(A->bool)->bool
+      #|  (P : (Num, A) -> Bool) == ((n : Num) => UNIONS((fn_ : (Num, (A) -> Bool) -> Bool)(n)))
+      #|  \226\136\128 n : Num, SUBSET((fn_ : (Num, (A) -> Bool) -> Bool)(n), (R : ((A) -> Bool) -> Bool))
+      #|  (fn_ : (Num, (A) -> Bool) -> Bool)
       #|  \226\136\128 top : Topology[A], \226\136\128 U : ((A) -> Bool) -> Bool, \226\136\128 R : ((A) -> Bool) -> Bool, (\226\136\128 r : (A) -> Bool, IN(r, R) \226\134\146 open_in(top, r)) && UNIONS(R) == topspace(top) && (\226\136\128 r : (A) -> Bool, IN(r, R) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(closure_of(top, r), u))) && sigma_locally_finite_in(top, R) \226\134\146 (\226\136\131 V : ((A) -> Bool) -> Bool, (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 closed_in(top, v)) && UNIONS(V) == topspace(top) && (\226\136\128 v : (A) -> Bool, IN(v, V) \226\134\146 (\226\136\131 u : (A) -> Bool, IN(u, U) && SUBSET(v, u))) && locally_finite_in(top, V))
       #|  (w : (A) -> Bool)
       #|  (f : ((A) -> Bool, A) -> Bool)((w : (A) -> Bool))

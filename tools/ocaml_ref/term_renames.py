@@ -121,7 +121,14 @@ def rename_in_hol(q, renames):
             # the scan does not read HOL comments, whose brackets mislead it
             assert '//' not in q, f'a HOL comment in a quotation naming a renamed variable: {q[:60]!r}'
             ranges = annotation_ranges(q, renames)
+            from forall_reference import annotation_colons, annotation_extent
+            flat = re.sub(r'[\n\t\r]', ' ', q)
+            wide = [(k + 1, annotation_extent(flat, k + 1)) for k in annotation_colons(flat)]
         assert not any(a <= start < b for a, b in ranges), \
+            f'{q[start:end]} in a type annotation: {q[:60]!r}'
+        # past the strict scan (A list -> fn), a name after a type operator
+        # is still a type
+        assert not any(a <= start < b and re.search(r'(->|[#+^(,:])\s*$', q[a:start]) for a, b in wide), \
             f'{q[start:end]} in a type annotation: {q[:60]!r}'
         out.append(q[last:start])
         out.append(new)
@@ -155,7 +162,9 @@ def string_value(piece):
     from forall_reference import ocaml_unescaped
     if piece.startswith('{'):
         return piece[piece.index('|') + 1:piece.rindex('|')]
-    v = ocaml_unescaped(piece[1:-1])
+    v = re.sub(r'\\\n[ \t]*', '', piece[1:-1])  # a line continuation
+    v = re.sub(r'\\u\{([0-9a-fA-F]+)\}', lambda m: chr(int(m[1], 16)), v)
+    v = ocaml_unescaped(v)
     return re.sub(r'\\(.)', lambda m: {'n': '\n', 't': '\t', 'r': '\r', 'b': '\b'}.get(m[1], m[1]), v)
 
 
@@ -270,11 +279,13 @@ def structural_variable(renames):
     return re.compile(r"(?<=[(\\ ])(" + stems + r")('*)(?=:)")
 
 
-def renamed_output(output, target, renames):
+def renamed_output(output, target, renames, theorems=None):
     """Reference output with the term variables of `target`'s quotations
     and theorems renamed: from the line that opens its quotation trace on,
     trace lines as the sources are renamed, and variables in structural
-    output. Lines before it come from other files and stay."""
+    output. Lines before it come from other files and stay. With `theorems`,
+    only the lines of those theorems (NAME = ...) are theorem lines; a
+    failure's message, however many lines it takes, is not."""
     header = target + ' quotations ('
     var = structural_variable(renames)
     out, scope, trace = [], False, False
@@ -293,5 +304,7 @@ def renamed_output(output, target, renames):
         trace = False
         # a theorem the script prints (NAME = ...); failures and other
         # lines must not change
-        out.append(var.sub(lambda m: renames[m[1]] + m[2], line) if re.match(r'\S+ = ', line) else line)
+        m = re.match(r'(\S+) = ', line)
+        theorem = m and (theorems is None or m[1] in theorems)
+        out.append(var.sub(lambda m: renames[m[1]] + m[2], line) if theorem else line)
     return ''.join(out)
