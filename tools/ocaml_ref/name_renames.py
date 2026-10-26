@@ -7,9 +7,9 @@ The port names them differently from upstream (issue #140):
   package_name (euclid_dot, jordan_top2): local_definition joins with `_`.
 - Geometric algebra's pseudo-finite types (define_pseudo_finite_type n) are
   named '0 .. '4, with constants mk_/dest_auto_define_finite_type_'n. They
-  become Zero .. Four (the term syntax writes a type constant capitalised;
-  zero, one, ... would collide with type variables such as Multivariate's
-  `one`).
+  become Zero .. Four, and a larger n keeps its name (the term syntax
+  writes a type constant capitalised; zero, one, ... would collide with
+  type variables such as Multivariate's `one`).
 
 Each listed upstream file is loaded from a copy (forall_reference.py,
 unless HOL_REF_ORIGINAL_NAMES is set) built by its checked patches (each
@@ -28,7 +28,10 @@ PSEUDO_CONSTANT = re.compile(r"(mk|dest)_auto_define_finite_type_('[0-4])")
 
 NAME_PATCHES = {
     'Jordan/lib_ext.ml': [
-        ('let cname\' = package_name^"\'"^cname in', 'let cname\' = package_name^"_"^cname in'),
+        # a package name has no _, so package_name splits one way only
+        ('let cname\' = package_name^"\'"^cname in',
+         'let cname\' = if String.contains package_name \'_\' then failwith "local_definition: a package name with _" '
+         'else package_name^"_"^cname in'),
         # each constant's upstream name, for tactics_fix's hash_of_term
         ('let local_definition package_name tm =',
          'let local_upstream_names = Hashtbl.create 300;;\n\nlet local_definition package_name tm ='),
@@ -46,8 +49,10 @@ NAME_PATCHES = {
     ],
     'Jordan/misc_defs_and_lemmas.ml': [],
     'Geometric_Algebra/geometricalgebra.ml': [
+        # upstream defines 0 .. 4; a larger n keeps upstream's name
         ('let ns = "\'"^string_of_int n in',
-         'let ns = List.nth ["Zero";"One";"Two";"Three";"Four"] n in'),
+         'let ns = if n <= 4 then List.nth ["Zero";"One";"Two";"Three";"Four"] n '
+         'else "\'"^string_of_int n in'),
     ],
     'Geometric_Algebra/quaternions.ml': [],
 }
@@ -97,9 +102,24 @@ def rename_names(text, patches):
     return text
 
 
+# a HOL name in structural output, unless it is a variable's (name:type;
+# a constant is #name:type)
+STRUCTURAL_NAME = re.compile(r"(?<![A-Za-z0-9_'])(?<!#)([A-Za-z0-9_']+)(?=:)|([A-Za-z0-9_']+)")
+
+
+def rename_structural(line):
+    def one(m):
+        if m[1] is not None:
+            return m[1]  # a variable keeps its name
+        return renamed_name(m[2]) or m[2]
+    return STRUCTURAL_NAME.sub(one, line)
+
+
 def renamed_output(output):
     """Reference output with the names renamed: trace lines (OCaml-escaped
-    quotation text) decoded first, every other line on its HOL names."""
+    quotation text) decoded first and renamed as the sources are; every
+    other line on its HOL names, except variables' (a variable named like
+    a renamed constant would be a difference the check must report)."""
     out, trace = [], False
     for line in output.splitlines(keepends=True):
         if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
@@ -109,7 +129,7 @@ def renamed_output(output):
             continue
         else:
             trace = False
-        out.append(rename_tokens(line))
+        out.append(rename_structural(line))
     return ''.join(out)
 
 

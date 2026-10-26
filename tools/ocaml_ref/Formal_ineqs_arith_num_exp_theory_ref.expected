@@ -2,7 +2,7 @@ Formal_ineqs/arith/num_exp_theory quotations (66):
   (e : Num)
   EXP
   (n : Num)
-  ( * ):num->num->num
+  (op_star : (Num, Num) -> Num)
   (num_exp : (Num, Num) -> Num)((n : Num), (e : Num))
   \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, num_exp(num_exp(n, e1), e2) == num_exp(n, e1 + e2)
   \226\136\128 n : Num, \226\136\128 e1 : Num, \226\136\128 e2 : Num, num_exp(n, e1 + e2) == num_exp(n, e1) * num_exp(1, e2)
@@ -35,7 +35,7 @@ Formal_ineqs/arith/num_exp_theory quotations (66):
   \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, \226\136\128 x : Num, e2 <= e1 && e1 - e2 == r && num_exp(n1, r) == x \226\134\146 (num_exp(n1, e1) < num_exp(n2, e2)) == (x < n2)
   (e1 : Num) <= (e2 : Num) \226\134\146 e2 == e2 - e1 + e1
   \226\136\128 n1 : Num, \226\136\128 e1 : Num, \226\136\128 n2 : Num, \226\136\128 e2 : Num, \226\136\128 r : Num, \226\136\128 x : Num, e1 <= e2 && e2 - e1 == r && num_exp(n2, r) == x \226\134\146 (num_exp(n1, e1) < num_exp(n2, e2)) == (n1 < x)
-  ( * ):num->num->num
+  (op_star : (Num, Num) -> Num)
   (n2 : Num)
   (e2 : Num)
   EXP

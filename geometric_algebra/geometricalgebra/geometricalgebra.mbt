@@ -452,7 +452,12 @@ fn step_14() -> Unit raise {
   let n_tm = @term_syntax.parse_term("(n : Num)")
   define_pseudo_finite_type_c.set(fn(x184 : Int64) -> @kernel.Thm raise {
     let n = x184
-    let ns = ["Zero", "One", "Two", "Three", "Four"][n.to_int()]
+    // upstream defines 0 .. 4; a larger n keeps upstream's name
+    let ns = if n <= 4L {
+      ["Zero", "One", "Two", "Three", "Four"][n.to_int()]
+    } else {
+      "'" + Int64::to_string(n)
+    }
     let ns_p = ("auto_define_finite_type_" + ns)
     let th = @kernel.inst_rule(@list.List([(@nums.mk_small_numeral(n), n_tm)]), lemma_pre)
     let t185 = ("dest_" + ns_p)

@@ -287,14 +287,24 @@ fn Printer::spelling(self : Printer, c : @kernel.Term) -> String {
 ///|
 fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintable {
   guard c is Const(_, ty) else { raise Unprintable("not a constant") }
-  self.annotated(constant_name(self.spelling(c)), c)
+  let spelling = self.spelling(c)
+  // a name the interface overloads reads as whichever constant the
+  // priority in force picks (+ as real_add after prioritize_real)
+  let overloaded = @printer.the_interface.val.iter().any(e => e.0 == spelling)
+  self.annotated(constant_name(spelling), c, overloaded~)
 }
 
 ///|
 /// `s` for the constant `c`, with `c`'s type where the reading may not pin
 /// it down: a type variable no variable fixes, or (annotating every
-/// constant) any instance of a polymorphic constant.
-fn Printer::annotated(self : Printer, s : String, c : @kernel.Term) -> String raise Unprintable {
+/// constant) any instance of a polymorphic constant, or a constant written
+/// under an overloaded name.
+fn Printer::annotated(
+  self : Printer,
+  s : String,
+  c : @kernel.Term,
+  overloaded? : Bool = false,
+) -> String raise Unprintable {
   guard c is Const(name, ty) else { raise Unprintable("not a constant") }
   let tvs = @kernel.tyvars(ty)
   let polymorphic = (try @kernel.get_const_type(name) catch { _ => ty })
@@ -303,7 +313,7 @@ fn Printer::annotated(self : Printer, s : String, c : @kernel.Term) -> String ra
   if tvs.iter().any(v => !self.fixed.contains(v)) ||
     (self.all_constants && !tvs.is_empty()) {
     "(" + s + " : " + print_type_in_term(ty) + ")"
-  } else if self.all_constants && polymorphic {
+  } else if self.all_constants && (polymorphic || overloaded) {
     // a concrete instance: annotated where its type can be written
     "(" + s + " : " + print_type_in_term(ty) + ")" catch {
       _ => s
@@ -378,6 +388,7 @@ fn Printer::bind(
   v : @kernel.Term,
   body : @kernel.Term,
   bound : Bound,
+  truth~ : Bool = true,
 ) -> (String, Bound) raise Unprintable {
   guard v is Var(name, ty) else { raise Unprintable("binder is not a variable") }
   // the names the other variables free in body are printed under
@@ -391,7 +402,11 @@ fn Printer::bind(
   })
   // a binder named like a constant would be read as that constant
   // (its occurrences are read as it, by name, whatever they spell)
-  let plain = is_ident(name) && !is_constant_name(name)
+  // except T and F: the syntax writes truth and falsity as true and false,
+  // and a binder named T or F binds a variable (a pattern's T is truth, as
+  // in HOL, so a pattern variable named T is renamed: `truth=false`)
+  let truth = truth && (name == "T" || name == "F")
+  let plain = is_ident(name) && (truth || !is_constant_name(name))
   let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
   if clash || !plain {
     while self.names.contains(printed) || is_constant_name(printed) {
@@ -616,7 +631,14 @@ fn Printer::pattern_form(
     (Const("GABS", _), [a, ..]) =>
       match dest_pattern_abs(a) {
         Some((pat, vs, rhs)) =>
-          Some(("fn { " + self.arm(pat, vs, None, rhs, bound) + " }", 1))
+          Some(
+            (
+              "fn { " +
+              self.arm(pat, vs, None, rhs, bound) +
+              " }",
+              1,
+            ),
+          )
         None => None
       }
     (Const("_MATCH", _), [e, cs, ..]) =>
@@ -657,7 +679,7 @@ fn Printer::bind_pattern(
 ) -> Bound raise Unprintable {
   let mut inner = bound
   for v in vs {
-    inner = self.bind(v, body, inner).1
+    inner = self.bind(v, body, inner, truth=false).1
   }
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
