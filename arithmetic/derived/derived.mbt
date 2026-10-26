@@ -2612,12 +2612,12 @@ pub fn spec_all_rule(x : @kernel.Thm) -> @kernel.Thm raise {
 pub fn instantiate_rule(x679 : @list.List[(@kernel.Term, Int64)], x680 : @kernel.Thm) -> @kernel.Thm raise {
   let ilist = x679
   let th = x680
-  let v_tm = @parser.parse_term("(|->):num->term->(num->term)->(num->term)")
+  let v_tm = @term_syntax.parse_term("(op_bar_minus_gt : (Num, Term, (Num) -> Term, Num) -> Term)")
   let v_1 = @lib.itlist(fn(x681 : (@kernel.Term, Int64), x682 : @kernel.Term) -> @kernel.Term raise {
     let (t, x) = x681
     let v = x682
     @kernel.mk_comb(@kernel.mk_comb(@kernel.mk_comb(v_tm, @nums.mk_small_numeral(x)), t), v)
-  }, ilist, @parser.parse_term("V"))
+  }, ilist, @term_syntax.parse_term("V"))
   let t683 = @bool.spec(v_1, @drule.match_mp(instantiation())(th))
   @equal.conv_rule(@equal.rand_conv(formsubst_conv), t683)
 }
@@ -2628,7 +2628,7 @@ pub fn specl_rule(x684 : @list.List[@kernel.Term], x685 : @kernel.Thm) -> @kerne
   let tms = x684
   let th = x685
   let t688 = @kernel.rand(@kernel.concl(th))
-  let t686 = @parser.parse_term("!!")
+  let t686 = @term_syntax.parse_term("op_bang_bang")
   let avs = @lib.striplist((x687 : @kernel.Term) => @basics.dest_binop(t686, x687), t688)
   let vs = @lib.chop_list(@lib.length(tms), avs).0
   let ilist = @lib.map2(fn(x689 : @kernel.Term, x690 : @kernel.Term) -> (@kernel.Term, Int64) raise {
@@ -2662,7 +2662,7 @@ pub fn gens_tac(x696 : @list.List[Int64], x697 : (@list.List[(String, @kernel.Th
   let ns = x696
   let (asl, w) = x697
   let (avs, bod) = @lib.nsplit(@basics.dest_forall, ns, w)
-  let t699 = @parser.parse_term("V")
+  let t699 = @term_syntax.parse_term("V")
   let nvs = @lib.map(fn(x701 : Int64) -> @kernel.Term raise {
     ((x700 : @kernel.Term) => @lib.curry(fn(x698 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
       @kernel.mk_comb(x698.0, x698.1)

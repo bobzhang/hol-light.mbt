@@ -582,7 +582,7 @@ pub fn make_lo_thm(x81 : Int64) -> @kernel.Thm raise {
   let i = x81
   let t82 = @kernel.mk_comb(@lib.array_get(@arith_num.const_array(), @lib.int63_to_int(i)), @misc_vars.n_var_num())
   let t83 = @kernel.mk_comb(@lib.array_get(@arith_num.const_array(), 0), @misc_vars.n_var_num())
-  let th_concl = @basics.mk_binop(@parser.parse_term("(<=):num->num->bool"), t83, t82)
+  let th_concl = @basics.mk_binop(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)"), t83, t82)
   let t85 = @simp.rewrite_tac(@list.List([@calc_num.arith_le(), @arith.le_refl()]))
   let t84 = @lib.array_get(@arith_num.def_array(), 0)
   @tactics.prove(th_concl, @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@lib.array_get(@arith_num.def_array(), @lib.int63_to_int(i)), t84])), t85), @int.arith_tac))
@@ -644,7 +644,7 @@ pub fn make_lo_thm2(x89 : Int64) -> @kernel.Thm raise {
   let i = x89
   let t90 = @kernel.mk_comb(@lib.array_get(@arith_num.const_array(), @lib.int63_to_int(i)), @misc_vars.m_var_num())
   let t91 = @kernel.mk_comb(@lib.array_get(@arith_num.const_array(), 0), @misc_vars.n_var_num())
-  let t92 = @basics.mk_binop(@parser.parse_term("(<=):num->num->bool"), t91, t90)
+  let t92 = @basics.mk_binop(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)"), t91, t90)
   let th_concl = @bool.mk_imp(@term_syntax.parse_term("(n : Num) <= (m : Num)"), t92)
   let t94 = @lib.array_get(@arith_num.def_array(), 0)
   let t95 = (th_concl, @tactics.then_tac(@simp.rewrite_tac(@list.List([@lib.array_get(@arith_num.def_array(), @lib.int63_to_int(i)), t94, @calc_num.arith_le()])), @int.arith_tac))
@@ -709,7 +709,7 @@ pub fn make_hi_thm(x99 : Int64) -> @kernel.Thm raise {
   let i = x99
   let t100 = @kernel.mk_comb(@lib.array_get(@arith_num.const_array(), 0), @misc_vars.m_var_num())
   let t101 = @kernel.mk_comb(@lib.array_get(@arith_num.const_array(), @lib.int63_to_int(i)), @misc_vars.n_var_num())
-  let t102 = @basics.mk_binop(@parser.parse_term("(<):num->num->bool"), t101, t100)
+  let t102 = @basics.mk_binop(@term_syntax.parse_term("(op_lt : (Num, Num) -> Bool)"), t101, t100)
   let th_concl = @bool.mk_imp(@term_syntax.parse_term("(n : Num) < (m : Num)"), t102)
   let t104 = @lib.array_get(@arith_num.def_array(), 0)
   let t105 = (th_concl, @tactics.then_tac(@simp.rewrite_tac(@list.List([@lib.array_get(@arith_num.def_array(), @lib.int63_to_int(i)), t104, @calc_num.arith_lt()])), @int.arith_tac))

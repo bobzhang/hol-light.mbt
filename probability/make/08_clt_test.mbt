@@ -87684,7 +87684,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  (e : Real)
       #|  (e : Real)
       #|  (c : Real)
-      #|  forall c. &0 < c ==>\n   ((\\T. real_integral (real_interval[&0,T]) (\\t. sin(c * t) * inv t))\n    ---> pi / &2) at_posinfinity
+      #|  \226\136\128 c : Real, real_of_num(0) < c \226\134\146 op_minus_minus_minus_gt((T : Real) => real_integral(real_interval([(real_of_num(0), T)]), (t : Real) => sin(c * t) * inv(t)), pi / real_of_num(2), at_posinfinity)
       #|  real_interval([(real_of_num(0), (M : Real))]) == {}
       #|  real_of_num(0) <= (M : Real)
       #|  (t : Real)
@@ -87694,7 +87694,7 @@ test "Probability/clt matches Probability/clt.ml" {
       #|  -(c : Real)
       #|  real_of_num(0) < -(c : Real)
       #|  (c : Real)
-      #|  forall c. c < &0 ==>\n   ((\\T. real_integral (real_interval[&0,T]) (\\t. sin(c * t) * inv t))\n    ---> --(pi / &2)) at_posinfinity
+      #|  \226\136\128 c : Real, c < real_of_num(0) \226\134\146 op_minus_minus_minus_gt((T : Real) => real_integral(real_interval([(real_of_num(0), T)]), (t : Real) => sin(c * t) * inv(t)), -(pi / real_of_num(2)), at_posinfinity)
       #|  real_integral(real_interval([(real_of_num(0), (c : Real) * (TT : Real))]), (t : Real) => real_of_num(1)) == real_of_num(1) * (c * TT - real_of_num(0))
       #|  real_of_num(0)
       #|  (t : Real)
