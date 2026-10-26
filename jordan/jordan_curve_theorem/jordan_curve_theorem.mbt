@@ -344,7 +344,7 @@ fn step_20() -> Unit raise {
       }
     })(x61))
   }, x63), t64])
-  convex_inter_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall S T. (convex S) /\\ (convex T) ==> (convex (S INTER T))"), t66))
+  convex_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, ∀ T : ((Num) -> Real) -> Bool, euclid_convex(S) && euclid_convex(T) → euclid_convex(INTER(S, T))"), t66))
 }
 
 ///|
@@ -6765,7 +6765,7 @@ fn step_270() -> Unit raise {
       s2894(x2895)
     }
   }, x2897), t2904, @tactics_ext.disch_all_tac, t2903, @tactics_ext.disch_all_tac, t2902, t2901, @tactics_ext.disch_all_tac, t2900, t2899, t2898])
-  inductive_inter_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall T G. (T SUBSET G) /\\ (~(T = EMPTY )) ==>\n        (inductive_set G\n            (INTERS {S | (T SUBSET S) /\\ (inductive_set G S)}))"), t2913))
+  inductive_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ T : (((Num) -> Real) -> Bool) -> Bool, ∀ G : (((Num) -> Real) -> Bool) -> Bool, SUBSET(T, G) && !(T == {}) → jordan_inductive_set(G, INTERS({(S : (((Num) -> Real) -> Bool) -> Bool) | SUBSET(T, S) && jordan_inductive_set(G, S)}))"), t2913))
 }
 
 ///|
@@ -73134,7 +73134,7 @@ fn step_1541() -> Unit raise {
   let t56505 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), top2(), @metric_spaces.top_of_metric(), @metric_spaces.open_balls(), @metric_spaces.open_ball(), @metric_spaces.connected()]))
   let t56506 = @simp.rewrite_tac(@list.List([@metric_spaces.d_euclid_n()]))
   let t56507 = @list.List([@simp.rewrite_tac(@list.List([simple_closed_curve(), @metric_spaces.continuous(), @misc_defs_and_lemmas.preimage(), @metric_spaces.d_real()])), t56506, t56505])
-  jordan_curve_defs_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("(forall x. euclid 2 x = (forall n. 2 <=| n ==> (x n = &0))) /\\\n   (top2 = top_of_metric (euclid 2,d_euclid)) /\\\n   (forall(X:A->bool) d. top_of_metric (X,d) =\n         {A | ?F. F SUBSET open_balls (X,d) /\\ (A = UNIONS F) }) /\\\n   (forall(X:A->bool) d. open_balls(X,d) =\n         {B | ?x r. (B = open_ball (X,d) x r) }) /\\\n   (forall X d (x:A) r. open_ball (X,d) x r =\n         {y | X x /\\ X y /\\ d x y < r}) /\\\n   (forall U (Z:A->bool). connected U Z <=>\n         Z SUBSET UNIONS U /\\\n         (forall A B.\n              U A /\\ U B /\\ (A INTER B = {}) /\\ Z SUBSET A UNION B\n              ==> Z SUBSET A \\/ Z SUBSET B)) /\\\n   (forall(C:A->bool) U. simple_closed_curve U C =\n             (?f. (C = IMAGE f {x | &0 <= x /\\ x <= &1}) /\\\n              continuous f (top_of_metric (UNIV,d_real)) U /\\\n              INJ f {x | &0 <= x /\\ x < &1} (UNIONS U) /\\\n              (f (&0) = f (&1)))) /\\\n   (forall(f:A->B) U V. continuous f U V =\n         (forall v. V v ==> U  { x | (UNIONS U) x /\\ v (f x) })) /\\\n   (forall x y. d_real x y = abs  (x - y)) /\\\n   (forall x y. euclid 2 x /\\ euclid 2 y\n         ==> (d_euclid x y =\n              sqrt (sum (0,2) (\\i. (x i - y i) * (x i - y i)))))"), t56507))
+  jordan_curve_defs_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("(∀ x : (Num) -> Real, euclid_euclid(2, x) == (∀ n : Num, 2 <= n → x(n) == real_of_num(0))) && jordan_top2 == euclid_top_of_metric((euclid_euclid(2), euclid_d_euclid)) && (∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_top_of_metric((X, d)) == {(A : (A) -> Bool) | ∃ F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) && A == UNIONS(F)}) && (∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_open_balls((X, d)) == {(B : (A) -> Bool) | ∃ x : A, ∃ r : Real, B == euclid_open_ball((X, d), x, r)}) && (∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, euclid_open_ball((X, d), x, r) == {(y : A) | X(x) && X(y) && d(x, y) < r}) && (∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, euclid_connected(U, Z) == (SUBSET(Z, UNIONS(U)) && (∀ A : (A) -> Bool, ∀ B : (A) -> Bool, U(A) && U(B) && INTER(A, B) == {} && SUBSET(Z, UNION(A, B)) → SUBSET(Z, A) || SUBSET(Z, B)))) && (∀ C : (A) -> Bool, ∀ U : ((A) -> Bool) -> Bool, jordan_simple_closed_curve(U, C) == (∃ f : (Real) -> A, C == IMAGE(f, {(x : Real) | real_of_num(0) <= x && x <= real_of_num(1)}) && euclid_continuous(f, euclid_top_of_metric((UNIV, euclid_d_real)), U) && INJ(f, {(x : Real) | real_of_num(0) <= x && x < real_of_num(1)}, UNIONS(U)) && f(real_of_num(0)) == f(real_of_num(1)))) && (∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, euclid_continuous(f, U, V) == (∀ v : (B) -> Bool, V(v) → U({(x : A) | UNIONS(U, x) && v(f(x))}))) && (∀ x : Real, ∀ y : Real, euclid_d_real(x, y) == abs(x - y)) && (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, euclid_euclid(2, x) && euclid_euclid(2, y) → euclid_d_euclid(x, y) == sqrt(sum((0, 2), (i : Num) => (x(i) - y(i)) * (x(i) - y(i)))))"), t56507))
 }
 
 ///|
