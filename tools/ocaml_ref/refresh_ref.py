@@ -29,7 +29,8 @@ MARKER = "@@refresh_ref: own output follows@@"
 
 def normalize_counters(s):
     """testkit's normalize_counters: invented type variables and pattern
-    variables renumbered by order of first appearance."""
+    variables renumbered by order of first appearance, outside quotation
+    traces (their lines are the quotations' text)."""
     seen, counts = {}, {}
 
     def sub(m):
@@ -38,7 +39,17 @@ def normalize_counters(s):
             counts[prefix] = counts.get(prefix, 0) + 1
             seen[name] = counts[prefix]
         return prefix + str(seen[name])
-    return re.sub(r"(\?|GEN%PVAR%)[0-9]+", sub, s)
+    out, trace = [], False
+    for line in s.split("\n"):
+        if re.fullmatch(r".* quotations \([0-9]+\):", line):
+            trace = True
+        elif trace and line.startswith("  "):
+            out.append(line)
+            continue
+        else:
+            trace = False
+        out.append(re.sub(r"(\?|GEN%PVAR%)[0-9]+", sub, line))
+    return "\n".join(out)
 
 
 def find_test(ref, text):

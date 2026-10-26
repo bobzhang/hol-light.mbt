@@ -388,6 +388,7 @@ fn Printer::bind(
   v : @kernel.Term,
   body : @kernel.Term,
   bound : Bound,
+  truth~ : Bool = true,
 ) -> (String, Bound) raise Unprintable {
   guard v is Var(name, ty) else { raise Unprintable("binder is not a variable") }
   // the names the other variables free in body are printed under
@@ -401,7 +402,11 @@ fn Printer::bind(
   })
   // a binder named like a constant would be read as that constant
   // (its occurrences are read as it, by name, whatever they spell)
-  let plain = is_ident(name) && !is_constant_name(name)
+  // except T and F: the syntax writes truth and falsity as true and false,
+  // and a binder named T or F binds a variable (a pattern's T is truth, as
+  // in HOL, so a pattern variable named T is renamed: `truth=false`)
+  let truth = truth && (name == "T" || name == "F")
+  let plain = is_ident(name) && (truth || !is_constant_name(name))
   let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
   if clash || !plain {
     while self.names.contains(printed) || is_constant_name(printed) {
@@ -626,7 +631,14 @@ fn Printer::pattern_form(
     (Const("GABS", _), [a, ..]) =>
       match dest_pattern_abs(a) {
         Some((pat, vs, rhs)) =>
-          Some(("fn { " + self.arm(pat, vs, None, rhs, bound) + " }", 1))
+          Some(
+            (
+              "fn { " +
+              self.arm(pat, vs, None, rhs, bound) +
+              " }",
+              1,
+            ),
+          )
         None => None
       }
     (Const("_MATCH", _), [e, cs, ..]) =>
@@ -667,7 +679,7 @@ fn Printer::bind_pattern(
 ) -> Bound raise Unprintable {
   let mut inner = bound
   for v in vs {
-    inner = self.bind(v, body, inner).1
+    inner = self.bind(v, body, inner, truth=false).1
   }
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
