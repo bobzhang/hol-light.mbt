@@ -84,10 +84,15 @@ end;;
 #use "parser.ml";;
 #use "equal.ml";;
 
+(* check_name_renames.py marks type constants as constants are (#num), so
+   that a type constant's name never reads as a type variable's ('0) *)
+let mark_type_constants =
+  try Sys.getenv "HOL_REF_MARK_TYPE_CONSTANTS" <> "" with Not_found -> false;;
 let rec sty ty = match ty with
     Tyvar s -> "'" ^ s
-  | Tyapp(s,[]) -> s
-  | Tyapp(s,args) -> s ^ "(" ^ String.concat "," (map sty args) ^ ")";;
+  | Tyapp(s,[]) -> (if mark_type_constants then "#" else "") ^ s
+  | Tyapp(s,args) -> (if mark_type_constants then "#" else "") ^ s ^
+      "(" ^ String.concat "," (map sty args) ^ ")";;
 let rec stm tm = match tm with
     Var(s,ty) -> s ^ ":" ^ sty ty
   (* The port renamed this constant; compare terms modulo that rename only. *)
