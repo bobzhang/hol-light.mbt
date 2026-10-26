@@ -730,7 +730,7 @@ fn step_30() -> Unit raise {
     })(((x227 : @kernel.Thm) => @bool.specl(t226, x227))(x228))
   })
   let t221 = @simp.rewrite_tac(@list.List([@arith.le_trans(), @arith.le_antisym()]))
-  let t220 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("(<=):num->num->bool"), @iterate.topological_sort()))
+  let t220 = @tactics.mp_tac(@bool.ispec(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)"), @iterate.topological_sort()))
   let t262 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t220), t221), t229), t230), t231), t232), t233), @tactics.conj_tac), t235), t236), @tactics.conj_tac), t237), t241), t245), t247), @tactics.strip_tac), t255), t256), t257), t261), @int.asm_arith_tac)
   enumeration_lemma_c.set(@tactics.prove(@term_syntax.parse_term("∀ n : Num, ∀ s : (Num) -> Bool, ∀ p : Num, HAS_SIZE(s, n) && (∀ k : Num, IN(k, s) → 1 <= k && k <= p) → (∃ a : (Num) -> Num, a(0) == 0 && a(n + 1) == p + 1 && s == IMAGE(a, op_dot_dot(1, n)) && (∀ j : Num, ∀ k : Num, j <= n && k <= n + 1 && j < k → a(j) < a(k)) && (∀ j : Num, ∀ k : Num, j <= n && k <= n + 1 && j <= k → a(j) <= a(k)))"), t262))
 }

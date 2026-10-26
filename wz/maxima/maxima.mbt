@@ -10,9 +10,9 @@ fn step_1() -> Unit raise {
   let t5 = (@term_syntax.parse_term("real_mul"), "*")
   let t6 = (@term_syntax.parse_term("real_sub"), "-")
   let t7 = (@term_syntax.parse_term("real_add"), "+")
-  let t8 = (@parser.parse_term("( * ):num->num->num"), "*")
-  let t9 = (@parser.parse_term("(-):num->num->num"), "-")
-  wz_maxima_binops_c.set(@list.List([(@parser.parse_term("(+):num->num->num"), "+"), t9, t8, t7, t6, t5, t4, t3, t2, t1]))
+  let t8 = (@term_syntax.parse_term("(op_star : (Num, Num) -> Num)"), "*")
+  let t9 = (@term_syntax.parse_term("(op_minus : (Num, Num) -> Num)"), "-")
+  wz_maxima_binops_c.set(@list.List([(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"), "+"), t9, t8, t7, t6, t5, t4, t3, t2, t1]))
 }
 
 ///|
@@ -237,7 +237,7 @@ pub fn wz_maxima_mk_pow(x19 : @kernel.Term, x20 : @kernel.Term) -> @kernel.Term 
   try {
     let (op, n) = @kernel.dest_comb(y)
     if ((op == wz_maxima_real_of_num()) && @nums.is_numeral(n)) {
-      @basics.mk_binop(@parser.parse_term("(pow):real->num->real"), x, n)
+      @basics.mk_binop(@term_syntax.parse_term("real_pow"), x, n)
     } else {
       @lib.failure()
     }
@@ -252,9 +252,9 @@ pub fn wz_maxima_mk_pow(x19 : @kernel.Term, x20 : @kernel.Term) -> @kernel.Term 
 pub fn wz_maxima_mk_neg(x21 : @kernel.Term) -> @kernel.Term raise {
   let x = x21
   try {
-    let (l, r) = @basics.dest_binop(@parser.parse_term("(/):real->real->real"), x)
+    let (l, r) = @basics.dest_binop(@term_syntax.parse_term("real_div"), x)
     let t22 = @kernel.mk_comb(wz_maxima_neg(), l)
-    @basics.mk_binop(@parser.parse_term("(/):real->real->real"), t22, r)
+    @basics.mk_binop(@term_syntax.parse_term("real_div"), t22, r)
   } catch {
     Failure(_) => @kernel.mk_comb(wz_maxima_neg(), x)
     e => raise e
@@ -276,7 +276,7 @@ pub fn wz_maxima_parse_sum(x24 : @list.List[String]) -> ((@kernel.Term, @list.Li
   match rst {
     More("+", tail=rst_p) => {
       let (y, rst_p_p) = wz_maxima_parse_sum(rst_p)
-      (@basics.mk_binop(@parser.parse_term("(+):real->real->real"), x, y), rst_p_p)
+      (@basics.mk_binop(@term_syntax.parse_term("real_add"), x, y), rst_p_p)
     }
     _ => (x, rst)
   }
@@ -298,7 +298,7 @@ pub fn wz_maxima_parse_difference_tail(x26 : @kernel.Term, x27 : @list.List[Stri
   match inp_3 {
     More("-", tail=rst_2) => {
       let (y_1, rst_p_1) = wz_maxima_parse_product(rst_2)
-      wz_maxima_parse_difference_tail(@basics.mk_binop(@parser.parse_term("(-):real->real->real"), x_2, y_1), rst_p_1)
+      wz_maxima_parse_difference_tail(@basics.mk_binop(@term_syntax.parse_term("real_sub"), x_2, y_1), rst_p_1)
     }
     _ => (x_2, inp_3)
   }
@@ -312,7 +312,7 @@ pub fn wz_maxima_parse_product(x28 : @list.List[String]) -> ((@kernel.Term, @lis
   match rst_3 {
     More("*", tail=rst_p_2) => {
       let (y_2, rst_p_p_1) = wz_maxima_parse_product(rst_p_2)
-      (@basics.mk_binop(@parser.parse_term("( * ):real->real->real"), x_3, y_2), rst_p_p_1)
+      (@basics.mk_binop(@term_syntax.parse_term("real_mul"), x_3, y_2), rst_p_p_1)
     }
     _ => (x_3, rst_3)
   }
@@ -334,7 +334,7 @@ pub fn wz_maxima_parse_quotient_tail(x30 : @kernel.Term, x31 : @list.List[String
   match inp_6 {
     More("/", tail=rst_5) => {
       let (y_3, rst_p_3) = wz_maxima_parse_unary(rst_5)
-      wz_maxima_parse_quotient_tail(@basics.mk_binop(@parser.parse_term("(/):real->real->real"), x_5, y_3), rst_p_3)
+      wz_maxima_parse_quotient_tail(@basics.mk_binop(@term_syntax.parse_term("real_div"), x_5, y_3), rst_p_3)
     }
     _ => (x_5, inp_6)
   }

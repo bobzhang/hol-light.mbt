@@ -48,1005 +48,1005 @@ test "Formal_ineqs/arith/arith_float matches Formal_ineqs/arith/arith_float.ml" 
       #|  num_exp((n : Num), PRE((e : Num)))
       #|  num_exp((n : Num), (e : Num))
       #|  ((e : Num) == _0) == false
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (n : Num) <= (m : Num)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<=):num->num->bool
+      #|  (op_lt_eq : (Num, Num) -> Bool)
       #|  (n : Num) <= (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  (n : Num) < (m : Num)
       #|  (n : Num) < SUC(n)
       #|  (n : Num) < SUC(n)
