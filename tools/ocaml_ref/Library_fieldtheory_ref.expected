@@ -26065,29 +26065,29 @@ Library/fieldtheory quotations (2166):
   forall(r:A ring) s. s subfield_of r ==> ~(ring_1 r = ring_0 r)
   \226\136\128 r : Ring[A], \226\136\128 s : (A) -> Bool, subfield_of(s, r) \226\134\146 !trivial_ring(r)
   forall r s x:A. s subfield_of r /\\ x IN s /\\ ~(x = ring_0 r)\n             ==> ring_inv r x IN s /\\ ring_mul r x (ring_inv r x) = ring_1 r
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  false
   forall r s x:A. s subfield_of r /\\ x IN s /\\ ~(x = ring_0 r)\n             ==> ring_inv r x IN s /\\ ring_mul r (ring_inv r x) x = ring_1 r
   forall r s x:A. s subfield_of r /\\ x IN s ==> ring_inv r x IN s
   forall r s x:A.\n        s subfield_of r /\\ x IN s /\\ ~(x = ring_0 r)\n        ==> ring_inv (subring_generated r s) x = ring_inv r x
@@ -26498,15 +26498,15 @@ Library/fieldtheory quotations (2166):
   !IN((b : _), (l : (_) -> Bool)) \226\134\146 INTER(l, INSERT(b, (s : (_) -> Bool))) == INTER(l, s)
   IN((b : B), ring_carrier((l : Ring[B])))
   forall(h:A->B) k l s a b.\n        field k /\\ ring_homomorphism(k,l) h /\\\n        a IN ring_span (k,l) h (b INSERT s) /\\ ~(a IN ring_span (k,l) h s)\n        ==> b IN ring_span (k,l) h (a INSERT s)
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   (c : (B) -> A)
   (c : (B) -> A)((x : B))
   (c : (B) -> A)
