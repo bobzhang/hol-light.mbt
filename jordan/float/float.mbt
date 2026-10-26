@@ -2952,9 +2952,9 @@ pub fn add_real_constant(x931 : @kernel.Thm) -> Unit raise {
   let ineq = x931
   try {
     let t932 = @kernel.concl(ineq)
-    let (abst, k) = @basics.dest_binop(@parser.parse_term("(<=.)"), t932)
+    let (abst, k) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t932)
     let (absh, cmu) = @kernel.dest_comb(abst)
-    let (c, u) = @basics.dest_binop(@parser.parse_term("(-.)"), cmu)
+    let (c, u) = @basics.dest_binop(@term_syntax.parse_term("real_sub"), cmu)
     {
       calculated_constants().val = (calculated_constants().val).prepend((c, ineq))
       ()
@@ -3300,11 +3300,11 @@ pub fn[TA] falsify_ex(x975 : (TA) -> Bool raise, x976 : TA) -> Bool raise {
 fn step_138() -> Unit raise {
   fn format(x977 : @kernel.Term) -> Bool raise {
     let x = x977
-    if (x == @parser.parse_term("_0")) {
+    if (x == @term_syntax.parse_term("_0")) {
       true
     } else {
       let (h, t) = @kernel.dest_comb(x)
-      (((h == @parser.parse_term("BIT1")) || (h == @parser.parse_term("BIT0"))) && format(t))
+      (((h == @term_syntax.parse_term("BIT1")) || (h == @term_syntax.parse_term("BIT0"))) && format(t))
     }
   }
   is_bits_format_c.set((x978 : @kernel.Term) => falsify_ex(format, x978))
@@ -3325,7 +3325,7 @@ fn step_139() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x979 : @kernel.Term) -> Bool raise {
     let x = x979
     let (h, t) = @kernel.dest_comb(x)
-    ((h == @parser.parse_term("NUMERAL")) && is_bits_format(t))
+    ((h == @term_syntax.parse_term("NUMERAL")) && is_bits_format(t))
   }
   is_numeral_format_c.set((x980 : @kernel.Term) => falsify_ex(fn_, x980))
 }
@@ -3344,7 +3344,7 @@ pub fn is_numeral_format(x : @kernel.Term) -> Bool raise {
 fn step_140() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x981 : @kernel.Term) -> Bool raise {
     let x = x981
-    let (t1_1, t2) = @basics.dest_binop(@parser.parse_term("DECIMAL"), x)
+    let (t1_1, t2) = @basics.dest_binop(@term_syntax.parse_term("DECIMAL"), x)
     (is_numeral_format(t1_1) && is_numeral_format(t2))
   }
   is_decimal_format_c.set((x982 : @kernel.Term) => falsify_ex(fn_, x982))
@@ -3452,7 +3452,7 @@ fn step_145() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x992 : @kernel.Term) -> Bool raise {
     let x = x992
     let (h, t) = @kernel.dest_comb(x)
-    (h == @parser.parse_term("--."))
+    (h == @term_syntax.parse_term("real_neg"))
   }
   is_neg_real_c.set((x993 : @kernel.Term) => falsify_ex(fn_, x993))
 }
@@ -3472,7 +3472,7 @@ fn step_146() -> Unit raise {
   let fn_ : (@kernel.Term) -> Bool raise = fn(x994 : @kernel.Term) -> Bool raise {
     let x = x994
     let (h, t) = @kernel.dest_comb(x)
-    ((h == @parser.parse_term("&.")) && is_numeral_format(t))
+    ((h == @term_syntax.parse_term("real_of_num")) && is_numeral_format(t))
   }
   is_real_num_format_c.set((x995 : @kernel.Term) => falsify_ex(fn_, x995))
 }
@@ -3555,9 +3555,9 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
       } else {
         let absthm = get_real_constant(tm)
         let t1008 = @kernel.concl(absthm)
-        let (abst, k) = @basics.dest_binop(@parser.parse_term("(<=.)"), t1008)
+        let (abst, k) = @basics.dest_binop(@term_syntax.parse_term("real_le"), t1008)
         let (absh, cmu) = @kernel.dest_comb(abst)
-        let (c, u) = @basics.dest_binop(@parser.parse_term("(-.)"), cmu)
+        let (c, u) = @basics.dest_binop(@term_syntax.parse_term("real_sub"), cmu)
         let intk = interval_of_term(bprec, k)
         let intu = interval_of_term(bprec, u)
         let thm1 = @drule.match_mp(abs_to_interval())(absthm)
@@ -3592,7 +3592,7 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
             _ => raise Failure("INTERVAL_OF_TERM : NEG")
           }
         } else {
-          if is_comb_of(@parser.parse_term("||."), tm) {
+          if is_comb_of(@term_syntax.parse_term("real_abs"), tm) {
             try {
               let (_, b_1) = @kernel.dest_comb(tm)
               let t1011 = interval_of_term(bprec, b_1)
@@ -3604,7 +3604,7 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
               _ => raise Failure("INTERVAL_OF_TERM : ABS")
             }
           } else {
-            if is_comb_of(@parser.parse_term("twopow"), tm) {
+            if is_comb_of(@term_syntax.parse_term("twopow"), tm) {
               try {
                 let (_, b_2) = @kernel.dest_comb(tm)
                 @bool.spec(b_2, interval_of_twopow())
@@ -3612,10 +3612,10 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
                 _ => raise Failure("INTERVAL_OF_TERM : TWOPOW")
               }
             } else {
-              let t1012 = @parser.parse_term("(+.)")
+              let t1012 = @term_syntax.parse_term("real_add")
               if @lib.can((x1013 : @kernel.Term) => @basics.dest_binop(t1012, x1013), tm) {
                 try {
-                  let (a, b_3) = @basics.dest_binop(@parser.parse_term("(+.)"), tm)
+                  let (a, b_3) = @basics.dest_binop(@term_syntax.parse_term("real_add"), tm)
                   let a_int = interval_of_term(bprec, a)
                   let b_int_1 = interval_of_term(bprec, b_3)
                   let t1014 = @bool.conj(a_int, b_int_1)
@@ -3628,10 +3628,10 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
                   _ => raise Failure("INTERVAL_OF_TERM : ADD")
                 }
               } else {
-                let t1015 = @parser.parse_term("(-.)")
+                let t1015 = @term_syntax.parse_term("real_sub")
                 if @lib.can((x1016 : @kernel.Term) => @basics.dest_binop(t1015, x1016), tm) {
                   try {
-                    let (a_1, b_4) = @basics.dest_binop(@parser.parse_term("(-.)"), tm)
+                    let (a_1, b_4) = @basics.dest_binop(@term_syntax.parse_term("real_sub"), tm)
                     let a_int_1 = interval_of_term(bprec, a_1)
                     let b_int_2 = interval_of_term(bprec, b_4)
                     let t1017 = @bool.conj(a_int_1, b_int_2)
@@ -3644,10 +3644,10 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
                     _ => raise Failure("INTERVAL_OF_TERM : SUB")
                   }
                 } else {
-                  let t1018 = @parser.parse_term("( *. )")
+                  let t1018 = @term_syntax.parse_term("real_mul")
                   if @lib.can((x1019 : @kernel.Term) => @basics.dest_binop(t1018, x1019), tm) {
                     try {
-                      let (a_2, b_5) = @basics.dest_binop(@parser.parse_term("( *. )"), tm)
+                      let (a_2, b_5) = @basics.dest_binop(@term_syntax.parse_term("real_mul"), tm)
                       let a_int_2 = interval_of_term(bprec, a_2)
                       let b_int_3 = interval_of_term(bprec, b_5)
                       let t1020 = @bool.conj(a_int_2, b_int_3)
@@ -3660,10 +3660,10 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
                       _ => raise Failure("INTERVAL_OF_TERM : MUL")
                     }
                   } else {
-                    let t1021 = @parser.parse_term("( / )")
+                    let t1021 = @term_syntax.parse_term("op_slash")
                     if @lib.can((x1022 : @kernel.Term) => @basics.dest_binop(t1021, x1022), tm) {
                       try {
-                        let (a_3, b_6) = @basics.dest_binop(@parser.parse_term("( / )"), tm)
+                        let (a_3, b_6) = @basics.dest_binop(@term_syntax.parse_term("op_slash"), tm)
                         let a_int_3 = interval_of_term(bprec, a_3)
                         let b_int_4 = interval_of_term(bprec, b_6)
                         let (_, f_5, ex_4) = dest_interval(@kernel.concl(a_int_3))
@@ -3686,8 +3686,8 @@ pub fn interval_of_term(x1006 : Int64, x1007 : @kernel.Term) -> @kernel.Thm rais
                         let ez = mk_float(ez_num)
                         let hyp1 = a_int_3
                         let hyp2 = b_int_4
-                        let t1025 = @kernel.mk_comb(@parser.parse_term("||."), g)
-                        let hyp3 = float_ineq_conv(@basics.mk_binop(@parser.parse_term("(<.)"), ey, t1025))
+                        let t1025 = @kernel.mk_comb(@term_syntax.parse_term("real_abs"), g)
+                        let hyp3 = float_ineq_conv(@basics.mk_binop(@term_syntax.parse_term("real_lt"), ey, t1025))
                         let thm = @bool.specl(@list.List([a_3, f_5, ex_4, b_6, g, ey, h, ez]), interval_div())
                         let conj2 : (@kernel.Term) -> @kernel.Term raise = fn(x1026 : @kernel.Term) -> @kernel.Term raise {
                           let x = x1026
