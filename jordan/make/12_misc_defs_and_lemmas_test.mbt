@@ -6921,7 +6921,7 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  (f : (A) -> B)
       #|  (A : Bool) && (A \226\134\146 (B : Bool)) && (A \226\134\146 (C : Bool)) \226\134\146 (A && B) && A && C
       #|  (f : (A) -> B) => ((x : A) => if x == (s : A) { CHOICE(UNIV) } else { f(x) }, f(s))
-      #|  forall a b s. (~((s:A) IN a) ==>\n      (?F.   (BIJ F (FUN (s INSERT a) b)\n           { (u,v) | (u IN (FUN a b)) /\\ ((v:B) IN b) }\n           )))
+      #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 s : A, !IN(s, a) \226\134\146 (\226\136\131 F : ((A) -> B) -> ((A) -> B, B), BIJ(F, FUN(INSERT(s, a), b), {((u : (A) -> B), (v : B)) | IN(u, FUN(a, b)) && IN(v, b)}))
       #|  (FST : (((A) -> B, B), A) -> B)
       #|  (FST : (((A) -> B, B), A) -> B)
       #|  (x : A)
@@ -7002,7 +7002,7 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  (affine_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | \226\136\131 f : (Num, Num) -> Real, \226\136\131 alpha : (Num) -> Real, \226\136\131 m : Num, (\226\136\128 n : Num, n < m \226\134\146 S(f(n))) && sum((0, m), alpha) == real_of_num(1) && u == sum_vector((0, m), (n : Num) => euclid_euclid_scale(alpha(n), f(n)))}
       #|  (mk_line : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(z : (Num) -> Real) | \226\136\131 t : Real, z == euclid_euclid_scale(t, x) + euclid_euclid_scale(real_of_num(1) - t, y)}
       #|  (affine : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, S(x) && S(y) \226\134\146 SUBSET(euclid_mk_line(x, y), S))
-      #|  affine_dim n S <=>\n    (?T. (T HAS_SIZE (SUC n)) /\\ (affine_hull T = affine_hull S)) /\\\n    (forall T m. (T HAS_SIZE (SUC m)) /\\ (m < n) ==> ~(affine_hull T = affine_hull S))
+      #|  (affine_dim : (Num, ((Num) -> Real) -> Bool) -> Bool)((n : Num), (S : ((Num) -> Real) -> Bool)) == ((\226\136\131 T : ((Num) -> Real) -> Bool, HAS_SIZE(T, SUC(n)) && euclid_affine_hull(T) == euclid_affine_hull(S)) && (\226\136\128 T : ((Num) -> Real) -> Bool, \226\136\128 m : Num, HAS_SIZE(T, SUC(m)) && m < n \226\134\146 !(euclid_affine_hull(T) == euclid_affine_hull(S))))
       #|  (collinear : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, euclid_affine_dim(n, S) && n < 2)
       #|  (coplanar : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (\226\136\131 n : Num, euclid_affine_dim(n, S) && n < 3)
       #|  (line : (((Num) -> Real) -> Bool) -> Bool)((L : ((Num) -> Real) -> Bool)) == (euclid_affine(L) && euclid_affine_dim(1, L))
@@ -7024,14 +7024,14 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  \226\136\128 L : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, euclid_convex(euclid_mk_open_half_set(L, S))
       #|  \226\136\128 S : ((Num) -> Real) -> Bool, euclid_affine_dim(0, S) == SING(S)
       #|  \226\136\128 S : ((Num) -> Real) -> Bool, euclid_convex(euclid_convex_hull(S))
-      #|  forall S T. (convex T) /\\ (S SUBSET T) ==>\n     (convex_hull S) SUBSET T
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, \226\136\128 T : ((Num) -> Real) -> Bool, euclid_convex(T) && SUBSET(S, T) \226\134\146 SUBSET(euclid_convex_hull(S), T)
       #|  \226\136\128 S : ((Num) -> Real) -> Bool, euclid_affine(euclid_affine_hull(S))
-      #|  forall S T. (affine T) /\\ (S SUBSET T) ==>\n     (affine_hull S) SUBSET T
+      #|  \226\136\128 S : ((Num) -> Real) -> Bool, \226\136\128 T : ((Num) -> Real) -> Bool, euclid_affine(T) && SUBSET(S, T) \226\134\146 SUBSET(euclid_affine_hull(S), T)
       #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 euclid_affine_dim(1, euclid_mk_line(x, y))
       #|  \226\136\128 S : ((Num) -> Real) -> Bool, euclid_affine_hull(S) == euclid_affine_hull(euclid_convex_hull(S))
       #|  \226\136\128 S : ((Num) -> Real) -> Bool, euclid_convex_hull(S) == euclid_convex_hull(euclid_convex_hull(S))
       #|  \226\136\128 n : Num, euclid_affine_dim(n, euclid_euclid(n))
-      #|  forall m n T S.\n  (affine_dim m T) /\\ (affine_dim n S) /\\ (T SUBSET S) ==> (m <= n)
+      #|  \226\136\128 m : Num, \226\136\128 n : Num, \226\136\128 T : ((Num) -> Real) -> Bool, \226\136\128 S : ((Num) -> Real) -> Bool, euclid_affine_dim(m, T) && euclid_affine_dim(n, S) && SUBSET(T, S) \226\134\146 m <= n
       #|  \226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, !(x == y) \226\134\146 existsunique((L : ((Num) -> Real) -> Bool) => L(x) && L(y) && euclid_line(L))
       #|  \226\136\128 L : ((Num) -> Real) -> Bool, euclid_line(L) \226\134\146 (\226\136\131 f : ((Num) -> Real) -> Real, BIJ(f, L, UNIV) && (\226\136\128 x : (Num) -> Real, \226\136\128 y : (Num) -> Real, L(x) && L(y) \226\134\146 euclid_d_euclid(x, y) == abs(f(x) - f(y))))
       #|  \226\136\128 n : Num, euclid_affine_dim(n, (P : ((Num) -> Real) -> Bool)) \226\134\146 (\226\136\131 S : ((Num) -> Real) -> Bool, SUBSET(S, P) && HAS_SIZE(S, n) && euclid_affine_dim(n, S))

@@ -2348,7 +2348,7 @@ fn step_95() -> Unit raise {
   let t959 = @simp.rewrite_tac(@list.List([@sets.bij(), @sets.inj(), @sets.surj()]))
   let t960 = @tactics.exists_tac(@term_syntax.parse_term("(f : (A) -> B) => ((x : A) => if x == (s : A) { CHOICE(UNIV) } else { f(x) }, f(s))"))
   let t961 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac, t960, t959, t958, t957, t956, t955, t954, t953, @tactics.strip_tac, t952, t951, t950, t949, t948, t947, @tactics.gen_tac, t946, t945, @tactics.all_tac, t944, @tactics.gen_tac, t943, t942, t941, t940, @tactics.all_tac, t939, @tactics.all_tac, t938, @tactics.disch_tac, t937, t936, t935, @tactics_ext.disch_all_tac, t934, @tactics.gen_tac, t933, t932, t931, t930, t929, t928, t927, @tactics_refine.label_all_tac, (x885 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.h_undisch_tac((x884 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp("0", x884), x885), @class.cond_cases_tac, t926, t925, @tactics.all_tac, t924, t923, @tactics_ext.disch_all_tac, t922, t921, t920, t919, t918, @tactics_ext.disch_all_tac, t917, t916, t915, t914, @tactics.beta_tac, t913, t912, t911, t910, @tactics.beta_tac, t909, t908, t907, t906, t905, t904, t903, @tactics.beta_tac, t902, t901, @tactics.ap_thm_tac, @tactics.ap_term_tac, t900, t899, @tactics.beta_tac, t898, t897, t896, t895])
-  domain_insert_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall a b s. (~((s:A) IN a) ==>\n      (?F.   (BIJ F (FUN (s INSERT a) b)\n           { (u,v) | (u IN (FUN a b)) /\\ ((v:B) IN b) }\n           )))"), t961))
+  domain_insert_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : (A) -> Bool, ∀ b : (B) -> Bool, ∀ s : A, !IN(s, a) → (∃ F : ((A) -> B) -> ((A) -> B, B), BIJ(F, FUN(INSERT(s, a), b), {((u : (A) -> B), (v : B)) | IN(u, FUN(a, b)) && IN(v, b)}))"), t961))
 }
 
 ///|
@@ -3073,7 +3073,7 @@ pub fn affine() -> @kernel.Thm {
 ///|
 /// affine_dim
 fn step_140() -> Unit raise {
-  affine_dim_c.set(euclid_def(@parser.parse_term("affine_dim n S <=>\n    (?T. (T HAS_SIZE (SUC n)) /\\ (affine_hull T = affine_hull S)) /\\\n    (forall T m. (T HAS_SIZE (SUC m)) /\\ (m < n) ==> ~(affine_hull T = affine_hull S))")))
+  affine_dim_c.set(euclid_def(@term_syntax.parse_term("(affine_dim : (Num, ((Num) -> Real) -> Bool) -> Bool)((n : Num), (S : ((Num) -> Real) -> Bool)) == ((∃ T : ((Num) -> Real) -> Bool, HAS_SIZE(T, SUC(n)) && euclid_affine_hull(T) == euclid_affine_hull(S)) && (∀ T : ((Num) -> Real) -> Bool, ∀ m : Num, HAS_SIZE(T, SUC(m)) && m < n → !(euclid_affine_hull(T) == euclid_affine_hull(S))))")))
 }
 
 ///|
@@ -3403,7 +3403,7 @@ pub fn hull_convex() -> @kernel.Term {
 ///|
 /// hull_minimal
 fn step_162() -> Unit raise {
-  hull_minimal_c.set(@parser.parse_term("forall S T. (convex T) /\\ (S SUBSET T) ==>\n     (convex_hull S) SUBSET T"))
+  hull_minimal_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, ∀ T : ((Num) -> Real) -> Bool, euclid_convex(T) && SUBSET(S, T) → SUBSET(euclid_convex_hull(S), T)"))
 }
 
 ///|
@@ -3433,7 +3433,7 @@ pub fn affine_hull_affine() -> @kernel.Term {
 ///|
 /// affine_hull_minimal
 fn step_164() -> Unit raise {
-  affine_hull_minimal_c.set(@parser.parse_term("forall S T. (affine T) /\\ (S SUBSET T) ==>\n     (affine_hull S) SUBSET T"))
+  affine_hull_minimal_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, ∀ T : ((Num) -> Real) -> Bool, euclid_affine(T) && SUBSET(S, T) → SUBSET(euclid_affine_hull(S), T)"))
 }
 
 ///|
@@ -3508,7 +3508,7 @@ pub fn euclid_affine_dim() -> @kernel.Term {
 ///|
 /// affine_dim_subset
 fn step_169() -> Unit raise {
-  affine_dim_subset_c.set(@parser.parse_term("forall m n T S.\n  (affine_dim m T) /\\ (affine_dim n S) /\\ (T SUBSET S) ==> (m <= n)"))
+  affine_dim_subset_c.set(@term_syntax.parse_term("∀ m : Num, ∀ n : Num, ∀ T : ((Num) -> Real) -> Bool, ∀ S : ((Num) -> Real) -> Bool, euclid_affine_dim(m, T) && euclid_affine_dim(n, S) && SUBSET(T, S) → m <= n"))
 }
 
 ///|
