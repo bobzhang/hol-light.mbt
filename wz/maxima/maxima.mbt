@@ -10,9 +10,9 @@ fn step_1() -> Unit raise {
   let t5 = (@term_syntax.parse_term("real_mul"), "*")
   let t6 = (@term_syntax.parse_term("real_sub"), "-")
   let t7 = (@term_syntax.parse_term("real_add"), "+")
-  let t8 = (@parser.parse_term("( * ):num->num->num"), "*")
-  let t9 = (@parser.parse_term("(-):num->num->num"), "-")
-  wz_maxima_binops_c.set(@list.List([(@parser.parse_term("(+):num->num->num"), "+"), t9, t8, t7, t6, t5, t4, t3, t2, t1]))
+  let t8 = (@term_syntax.parse_term("(op_star : (Num, Num) -> Num)"), "*")
+  let t9 = (@term_syntax.parse_term("(op_minus : (Num, Num) -> Num)"), "-")
+  wz_maxima_binops_c.set(@list.List([(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"), "+"), t9, t8, t7, t6, t5, t4, t3, t2, t1]))
 }
 
 ///|

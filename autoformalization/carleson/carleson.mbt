@@ -53562,7 +53562,7 @@ fn step_1239() -> Unit raise {
   let t29444 = @tactics.x_gen_tac(@term_syntax.parse_term("(e : Real)"))
   let t29443 = @simp.rewrite_tac(@list.List([@realanalysis.reallim_at_posinfinity()]))
   let t29461 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t29443), @tactics.disch_tac), t29444), @tactics.disch_tac), t29451), t29452), t29455), t29456), t29457), t29458), @tactics.disch_tac), @tactics.beta_tac), t29459), t29460), @calc_rat.asm_real_arith_tac)
-  reallim_half_arg_c.set(@tactics.prove(@parser.parse_term("forall F L. (F ---> L) at_posinfinity ==> ((\\b. F(b / &2)) ---> L)\n   at_posinfinity"), t29461))
+  reallim_half_arg_c.set(@tactics.prove(@term_syntax.parse_term("∀ F : (Real) -> Real, ∀ L : Real, op_minus_minus_minus_gt(F, L, at_posinfinity) → op_minus_minus_minus_gt((b : Real) => F(b / real_of_num(2)), L, at_posinfinity)"), t29461))
 }
 
 ///|

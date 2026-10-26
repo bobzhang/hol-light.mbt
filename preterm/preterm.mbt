@@ -548,7 +548,9 @@ fn typify(
       let (bod1, venv2, uenv2) = typify(ty2, bod, venv1.concat(venv), uenv1)
       (Absp(v1, bod1), venv2, uenv2)
     }
-    _ => raise Failure("typify: unexpected constant at this stage")
+    // a constant the term syntax resolved itself (true, false), which no
+    // binder can capture; HOL's parser leaves every name to this function
+    Constp(_, pty) => (ptm, @list.List([]), unify(Some(ptm), uenv, pty, ty))
   }
 }
 
