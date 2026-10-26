@@ -34,6 +34,7 @@ let char_names : Array[(Char, String)] = [
   ('\'', "prime"),
   (':', "colon"),
   (',', "comma"),
+  (';', "semi"),
 ]
 
 ///|
