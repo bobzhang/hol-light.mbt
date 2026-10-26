@@ -2617,7 +2617,7 @@ pub fn wz_initial_reductions(x1195 : @kernel.Term, x1196 : @kernel.Term, x1197 :
     let t_1 = x1202
     let t1203 = @parser.parse_type("num")
     if (@kernel.type_of(t_1) == t1203) {
-      @kernel.mk_comb(@parser.parse_term("real_of_num"), t_1)
+      @kernel.mk_comb(@term_syntax.parse_term("real_of_num"), t_1)
     } else {
       t_1
     }
@@ -2666,7 +2666,7 @@ pub fn wz_initial_reductions(x1195 : @kernel.Term, x1196 : @kernel.Term, x1197 :
   let t1221 = @equal.gsym(@realax.real_of_num_le())
   let t1222 = @equal.gsym(@real.real_of_num_lt())
   let t1223 = @simp.rewrite_conv(@list.List([@equal.gsym(@realax.real_of_num_eq()), t1222, t1221, t1220, t1219, t1218, t1217, t1216, t1215]))
-  let t1213 = @int.arith_rule(@parser.parse_term("~(m = n) <=> m + 1 <= n \\/ n + 1 <= m"))
+  let t1213 = @int.arith_rule(@term_syntax.parse_term("!((m : Num) == (n : Num)) == (m + 1 <= n || n + 1 <= m)"))
   let t1214 = @simp.rewrite_conv(@list.List([@equal.gsym(@arith.le_suc_lt()), t1213]))
   let pth = @equal.thenc(@equal.thenc(@simp.rewrite_conv(@list.List([@realax.real_of_num_eq(), @real.real_of_num_lt(), @realax.real_of_num_le(), @real.real_of_num_gt(), @real.real_of_num_ge(), @real.real_of_num_suc(), @realax.real_of_num_add(), @realax.real_of_num_mul(), @calc_int.real_of_num_pow()])), t1214), t1223)(ptm)
   let t1231 = @kernel.rand(rtm_p)
@@ -2674,13 +2674,13 @@ pub fn wz_initial_reductions(x1195 : @kernel.Term, x1196 : @kernel.Term, x1197 :
   let t1230 = @equal.lhand(rtm_p)
   let t1233 = @basics.mk_gabs(@pair.mk_pair((nntm, kktm)), t1230)
   let t1228 = limit_variant(ktm, ntm, hbod)
-  let t1227 = (@parser.parse_term("Im z"), kktm)
-  let t1229 = @basics.subst(@list.List([(@parser.parse_term("Re z"), nntm), t1227]), t1228)
-  let t1234 = @kernel.mk_abs(@parser.parse_term("z:complex"), t1229)
+  let t1227 = (@term_syntax.parse_term("Im((z : Cart[Real, Tybit0[Unit]]))"), kktm)
+  let t1229 = @basics.subst(@list.List([(@term_syntax.parse_term("Re((z : Cart[Real, Tybit0[Unit]]))"), nntm), t1227]), t1228)
+  let t1234 = @kernel.mk_abs(@term_syntax.parse_term("(z : Cart[Real, Tybit0[Unit]])"), t1229)
   let t1225 = limit_variant(ktm, ntm, bod)
-  let t1224 = (@parser.parse_term("Im z"), kktm)
-  let t1226 = @basics.subst(@list.List([(@parser.parse_term("Re z"), nntm), t1224]), t1225)
-  let t1235 = @kernel.mk_abs(@parser.parse_term("z:complex"), t1226)
+  let t1224 = (@term_syntax.parse_term("Im((z : Cart[Real, Tybit0[Unit]]))"), kktm)
+  let t1226 = @basics.subst(@list.List([(@term_syntax.parse_term("Re((z : Cart[Real, Tybit0[Unit]]))"), nntm), t1224]), t1225)
+  let t1235 = @kernel.mk_abs(@term_syntax.parse_term("(z : Cart[Real, Tybit0[Unit]])"), t1226)
   let t1236 = @basics.list_mk_abs(@list.List([ntm, ktm]), hbod)
   let t1237 = @basics.list_mk_abs(@list.List([ntm, ktm]), bod)
   let t1238 = @sets.mk_setenum((parms, @parser.parse_type("real")))
@@ -2914,8 +2914,8 @@ pub fn rfact_step_conv(x1308 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm ra
           @equal.lhs(@kernel.rand(x1311))
         }, pth_up_p)(tm)
         let t1320 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
-        let t1315 = @parser.parse_term("&7 / &44")
-        let t1316 = @list.List([@parser.parse_term("&1 / &12345"), t1315])
+        let t1315 = @term_syntax.parse_term("real_of_num(7) / real_of_num(44)")
+        let t1316 = @list.List([@term_syntax.parse_term("real_of_num(1) / real_of_num(12345)"), t1315])
         let t1319 = @tactics.disch_then(fn(x1318 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           (fn(x1312 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
             let s1313 = @tactics.mp_tac(x1312)
@@ -3121,12 +3121,12 @@ pub fn rbinom_step_conv(x1365 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm r
             let t1383 = @tactics.conv_tac(@calc_rat.real_ring)
             let t1382 = @tactics.disch_then(fn(x1375 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
               let th_1 = x1375
-              let t1380 = @parser.parse_term("&55")
-              let t1381 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("&0"), t1380]), th_1))
-              let t1378 = @parser.parse_term("&3 / &4")
-              let t1379 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("-- &99 / &12"), t1378]), th_1))
-              let t1377 = @parser.parse_term("&7 / &44")
-              @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("&1 / &12345"), t1377]), th_1)), t1379), t1381)
+              let t1380 = @term_syntax.parse_term("real_of_num(55)")
+              let t1381 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("real_of_num(0)"), t1380]), th_1))
+              let t1378 = @term_syntax.parse_term("real_of_num(3) / real_of_num(4)")
+              let t1379 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("-real_of_num(99) / real_of_num(12)"), t1378]), th_1))
+              let t1377 = @term_syntax.parse_term("real_of_num(7) / real_of_num(44)")
+              @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("real_of_num(1) / real_of_num(12345)"), t1377]), th_1)), t1379), t1381)
             })
             let t1374 = @tactics.try_tac(@calc_rat.real_arith_tac)
             let t1373 = @tactics.repeat_tac(@tactics.conj_tac)
@@ -3258,12 +3258,12 @@ fn step_88() -> Unit raise {
   let t1443 = @tactics.conv_tac(@calc_rat.real_ring)
   let t1442 = @tactics.disch_then(@tactics.choose_then(fn(x1435 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1435
-    let t1440 = @parser.parse_term("&55")
-    let t1441 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("&0"), t1440]), th))
-    let t1438 = @parser.parse_term("&3 / &4")
-    let t1439 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("-- &99 / &12"), t1438]), th))
-    let t1437 = @parser.parse_term("&7 / &44")
-    @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("&1 / &12345"), t1437]), th)), t1439), t1441)
+    let t1440 = @term_syntax.parse_term("real_of_num(55)")
+    let t1441 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("real_of_num(0)"), t1440]), th))
+    let t1438 = @term_syntax.parse_term("real_of_num(3) / real_of_num(4)")
+    let t1439 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("-real_of_num(99) / real_of_num(12)"), t1438]), th))
+    let t1437 = @term_syntax.parse_term("real_of_num(7) / real_of_num(44)")
+    @tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("real_of_num(1) / real_of_num(12345)"), t1437]), th)), t1439), t1441)
   }))
   let t1434 = @tactics.thenl(@tactics.conj_tac, @list.List([ratpolyfun_tac, @tactics.all_tac]))
   let t1431 = @drule.match_mp(pth_main())
@@ -3325,7 +3325,7 @@ pub fn nonzero_ratty_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 /// `TACTIC_4`
 pub fn tactic_4(x1444 : @list.List[(String, @kernel.Thm)], x1445 : @kernel.Term) -> @tactics.Goalstate raise {
   let (asl, w) = (x1444, x1445)
-  let t1446 = @parser.parse_term("~ratty e (n,k)")
+  let t1446 = @term_syntax.parse_term("!ratty((e : (Real) -> Bool), ((n : Real), (k : Real)))")
   let nrth = @lib.find((x1452 : (String, @kernel.Thm)) => @lib.can(fn(x1451 : (String, @kernel.Thm)) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
     (fn(x1449 : @kernel.Thm) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
       ((x1447 : @kernel.Term) => @drule.term_match(@list.List([]), t1446, x1447))((fn(x1448 : @kernel.Thm) -> @kernel.Term raise {
@@ -3346,7 +3346,7 @@ pub fn tactic_4(x1444 : @list.List[(String, @kernel.Thm)], x1445 : @kernel.Term)
       let itms = @basics.find_terms(fn(x1462 : @kernel.Term) -> Bool raise {
         let t = x1462
         if @kernel.is_comb(t) {
-          let t1463 = @parser.parse_term("real_inv")
+          let t1463 = @term_syntax.parse_term("real_inv")
           (@kernel.rator(t) == t1463)
         } else {
           false
@@ -3354,7 +3354,7 @@ pub fn tactic_4(x1444 : @list.List[(String, @kernel.Thm)], x1445 : @kernel.Term)
       }, w_1)
       @tactics.subgoal_then(@bool.list_mk_conj(@lib.map(fn(x1464 : @kernel.Term) -> @kernel.Term raise {
         let t_1 = x1464
-        let t1465 = @parser.parse_term("&0")
+        let t1465 = @term_syntax.parse_term("real_of_num(0)")
         @bool.mk_neg(@basics.mk_eq(@kernel.rand(t_1), t1465))
       }, itms)), fn(x1466 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
         let s1467 = @tactics.mp_tac(x1466)

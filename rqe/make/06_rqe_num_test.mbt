@@ -5703,12 +5703,12 @@ test "Rqe/rqe_num matches Rqe/rqe_num.ml" {
       #|Warning: inventing type variables
       #|Rqe/rqe_num quotations (14):
       #|  (op_eq : (Num, Num) -> Bool)
-      #|  (<):num->num->bool
-      #|  (>):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (>=):num->num->bool
-      #|  ( * ):num->num->num
-      #|  (+):num->num->num
+      #|  (op_lt : (Num, Num) -> Bool)
+      #|  (op_gt : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_gt_eq : (Num, Num) -> Bool)
+      #|  (op_star : (Num, Num) -> Num)
+      #|  (op_plus : (Num, Num) -> Num)
       #|  0
       #|  EVEN
       #|  ODD
