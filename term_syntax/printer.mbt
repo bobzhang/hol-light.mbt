@@ -391,7 +391,10 @@ fn Printer::bind(
   })
   // a binder named like a constant would be read as that constant
   // (its occurrences are read as it, by name, whatever they spell)
-  let plain = is_ident(name) && !is_constant_name(name)
+  // except T and F: the syntax writes truth and falsity as true and false,
+  // and a binder named T or F binds a variable
+  let truth = name == "T" || name == "F"
+  let plain = is_ident(name) && (truth || !is_constant_name(name))
   let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
   if clash || !plain {
     while self.names.contains(printed) || is_constant_name(printed) {

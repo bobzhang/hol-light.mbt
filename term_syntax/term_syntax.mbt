@@ -90,6 +90,12 @@ fn binder_rename(
   scope : @preterm.Preterm,
   bound : @list.List[(String, String)],
 ) -> String {
+  // a binder named T or F binds a variable under an alias, named back
+  // after elaboration (truth_alias): the syntax writes truth and falsity as
+  // true and false, which elaborate to the constants themselves
+  if n == "T" || n == "F" {
+    return truth_alias + n
+  }
   if !names_constant(n) {
     return n
   }
@@ -250,6 +256,11 @@ fn resolve_names(
       // because it is named like a constant)
       @parser.pmk_pattern_binding(((p, tests), resolve_names(body, inner)), () => vs)
     }
+    // truth and falsity are the constants themselves, so that a binder
+    // named T or F (which HOL allows) cannot capture them
+    Varp(n, _) if n == @grammar.generated_mark + "T" ||
+      n == @grammar.generated_mark + "F" =>
+      Constp(n[@grammar.generated_mark.length():].to_owned(), @preterm.Ptycon("bool", @list.List([])))
     Varp(n, ty) if n.has_prefix(@grammar.generated_mark) =>
       Varp(n[@grammar.generated_mark.length():].to_owned(), ty)
     Varp(n, ty) =>
@@ -308,6 +319,25 @@ pub fn parse_preterm(s : String) -> @preterm.Preterm raise {
 }
 
 ///|
+/// The prefix a binder named T or F is elaborated under, so that typing
+/// reads it as the variable it is (HOL's typing would read the name as the
+/// constant and drop the binder's annotation); `elaborate` names it back.
+let truth_alias = "\u{1}"
+
+///|
+/// `t` with the variables elaborated under `truth_alias` named back. Nothing
+/// else in `t` is named T or F as a variable, so this captures nothing.
+fn unalias_truth(t : @kernel.Term) -> @kernel.Term raise {
+  match t {
+    Var(n, ty) if n.has_prefix(truth_alias) =>
+      @kernel.mk_var(n[truth_alias.length():].to_owned(), ty)
+    Var(_, _) | Const(_, _) => t
+    Comb(f, x) => @kernel.mk_comb(unalias_truth(f), unalias_truth(x))
+    Abs(v, b) => @kernel.mk_abs(unalias_truth(v), unalias_truth(b))
+  }
+}
+
+///|
 /// The HOL term `s` denotes.
 pub fn parse_term(s : String) -> @kernel.Term raise {
   @parser.record_quotation(s)
@@ -320,8 +350,10 @@ fn elaborate(s : String) -> @kernel.Term raise {
   // names are read through the fixed view of the interface when it is on
   // (resolution.mbt)
   fn go() -> @kernel.Term raise {
-    @preterm.term_of_preterm(
-      @preterm.retypecheck(@list.List([]), parse_preterm(s)),
+    unalias_truth(
+      @preterm.term_of_preterm(
+        @preterm.retypecheck(@list.List([]), parse_preterm(s)),
+      ),
     )
   }
   if fixed_resolution.val {

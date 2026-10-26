@@ -297,10 +297,10 @@ test "set notation: binders, counters, degenerate comprehensions" {
 
 ///|
 test "set notation: review cases" {
-  // two explicit binders named like constants get distinct names
+  // binders named T and F keep their names
   let t = @term_syntax.parse_term("{T | T : Bool, F : Bool | T != F}")
   inspect(@term_syntax.print_term(t), content=(
-    #|{T' | T' : Bool, F' : Bool | !(T' == F')}
+    #|{T | T : Bool, F : Bool | !(T == F)}
   ))
   // an inner binding of the same variable does not take the outer
   // binder's type annotation
@@ -328,13 +328,18 @@ test "set notation: spelled-out GSPEC and renamed binders" {
   inspect(spell("GSPEC (\\g:num. ?x:num. SETSPEC g T x)"), content=(
     #|GSPEC((g : Num) => ∃ x : Num, SETSPEC(g, true, x))
   ))
-  // T is a constant, so {T | T} binds nothing: the lambda's T, renamed,
-  // is not bound by the comprehension (renaming it is not exact)
+  // HOL reads T as the constant's name in {T | T}, which binds nothing
+  // there; in the term syntax the lambda's T is a variable, which
+  // {T | T} would bind, so no spelling reads back exactly
   inspect(
-    @term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")),
-    content=(
-      #|(T' : Bool) => GSPEC((v : Bool) => SETSPEC(v, T', T'))
-    ),
+    try {
+      ignore(@term_syntax.print_term(@parser.parse_term("\\T:bool. {T | T}")))
+      "printed"
+    } catch {
+      @term_syntax.Unprintable(_) => "unprintable"
+      e => raise e
+    },
+    content="unprintable",
   )
 }
 
@@ -411,4 +416,27 @@ test "replacing an overload does not change a context-free reading" {
     @preterm.override_interface("&", @kernel.mk_const("real_of_num", @list.List([])))
     assert_eq(@kernel.type_of(@term_syntax.parse_term("op_amp(0)")), before)
   })
+}
+
+///|
+test "binders named T and F bind variables, as in HOL" {
+  fn spell(q : String) -> String raise {
+    @term_syntax.spell_quotation(q, @parser.parse_term(q))
+  }
+  // the binder keeps its name and its annotation
+  inspect(spell("\\T. T + 1"), content="(T : Num) => T + 1")
+  inspect(spell("forall F. F + 0 = F"), content="∀ F : Num, F + 0 == F")
+  // truth and falsity under such a binder stay the constants
+  inspect(
+    spell("\\T. T + (if F then 1 else 0)"),
+    content="(T : Num) => T + (if false { 1 } else { 0 })",
+  )
+  inspect(spell("forall T:bool. T \\/ ~T"), content="∀ T : Bool, T || !T")
+  // true under a binder named T is truth, not the bound variable (HOL's
+  // own \T. ... T ... would mean the variable, hence the primed name here)
+  let t = @term_syntax.parse_term("(T : Num) => T + (if true { 1 } else { 0 })")
+  inspect(
+    @term_syntax.same_term(t, @parser.parse_term("\\T'. T' + (if T then 1 else 0)")),
+    content="true",
+  )
 }
