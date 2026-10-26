@@ -56,9 +56,18 @@ TERM_RENAMES = {
     'Formal_ineqs/taylor/theory/taylor_interval-compiled.hl': {'_': '_any'},
     'GL/completeness.ml': {'_': '_any'},
 }
-# a string that is just _ names no variable: ssreflect's move ["_"] discards
-# (GEN_TAC, or drops the assumption)
+# _ in ssreflect's move ["_"] and in INTRO_TAC "_" names no variable: it
+# discards (GEN_TAC, or drops the assumption). Elsewhere a string "_" names
+# one, as any other.
 WILDCARD = '_'
+DISCARD = re.compile(r'(?:(?:\bmove|@ssreflect\.move_)\s*\(?\s*(?:@list\.List\(\s*)?\[[^\]\n]*'
+                     r'|(?:\bINTRO_TAC|@theorems\.intro_tac)\s*\(?\s*)$')
+
+
+def discards(text, i):
+    """Whether the string at text[i] is the "_" of a move [...] list or of
+    INTRO_TAC."""
+    return bool(DISCARD.search(text[max(0, i - 120):i]))
 # upstream file -> [(text, replacement)], each text occurring once, applied
 # before the rename (for a name built in code)
 TERM_PATCHES = {
@@ -215,7 +224,8 @@ def rename_ocaml(text, renames, patches=()):
         start, at = at, at + len(piece)
         if kind == 'quotation' and not piece.endswith(':`'):
             piece = '`' + rename_in_hol(piece[1:-1], renames) + '`'
-        elif kind == 'string' and string_value(piece) != WILDCARD and renamed(string_value(piece), renames) is not None:
+        elif kind == 'string' and renamed(string_value(piece), renames) is not None and \
+                not (string_value(piece) == WILDCARD and discards(text, start)):
             assert string_value(piece) == piece[1:-1], f'an escaped string names a renamed variable: {piece}'
             callee = callee_before(text, start)
             if callee in NAME_CALLEES:
@@ -262,7 +272,7 @@ def rename_moonbit(text, renames):
             assert not uses(names, renames) and not uses(names, renames, new=True), \
                 f'a term-syntax quotation names a renamed variable: {body[:60]!r}'
             continue
-        elif body != WILDCARD and renamed(body, renames) is not None:
+        elif renamed(body, renames) is not None and not (body == WILDCARD and discards(text, m.start())):
             if callee in NAME_CALLEES:
                 new = renamed(body, renames)
             else:
