@@ -98,47 +98,79 @@ pub fn Log::contents(self : Log) -> String {
 /// them, so their numbers change whenever a quotation is written
 /// differently (issue #140), in every file loaded after it; the reference
 /// outputs are normalized alike (tools/ocaml_ref/refresh_ref.py).
+///
+/// A quotation trace (the lines after `... quotations (N):` that start with
+/// two spaces) is left as it is: it is the quotations' text, in which `?`
+/// and a numeral are no fresh name (`??1 (V 1 === Z)` in sigmacomplete).
 pub fn normalize_counters(s : String) -> String {
   let out = StringBuilder()
-  let cs = s.to_array()
   let pvar = "GEN%PVAR%".to_array()
   let seen : Map[String, Int] = {}
   let counts : Map[String, Int] = {}
-  let mut i = 0
-  while i < cs.length() {
-    let prefix_len = if cs[i] == '?' {
-      1
-    } else if i + pvar.length() <= cs.length() &&
-      cs[i:i + pvar.length()] == pvar[:] {
-      pvar.length()
-    } else {
-      0
+  let mut trace = false
+  let lines = s.split("\n").map(l => l.to_owned()).to_array()
+  for li, line in lines {
+    if li > 0 {
+      out.write_char('\n')
     }
-    let j = i + prefix_len
-    if prefix_len > 0 && j < cs.length() && cs[j] is ('0'..='9') {
-      let prefix = String::from_array(cs[i:j])
-      let mut k = j
-      while k < cs.length() && cs[k] is ('0'..='9') {
-        k += 1
-      }
-      let name = String::from_array(cs[i:k])
-      let n = match seen.get(name) {
-        Some(n) => n
-        None => {
-          let n = counts.get(prefix).unwrap_or(0) + 1
-          counts[prefix] = n
-          seen[name] = n
-          n
-        }
-      }
-      out.write_string(prefix + n.to_string())
-      i = k
+    if is_trace_header(line) {
+      trace = true
+    } else if trace && line.has_prefix("  ") {
+      out.write_string(line)
+      continue
     } else {
-      out.write_char(cs[i])
-      i += 1
+      trace = false
+    }
+    let cs = line.to_array()
+    let mut i = 0
+    while i < cs.length() {
+      let prefix_len = if cs[i] == '?' {
+        1
+      } else if i + pvar.length() <= cs.length() &&
+        cs[i:i + pvar.length()] == pvar[:] {
+        pvar.length()
+      } else {
+        0
+      }
+      let j = i + prefix_len
+      if prefix_len > 0 && j < cs.length() && cs[j] is ('0'..='9') {
+        let prefix = String::from_array(cs[i:j])
+        let mut k = j
+        while k < cs.length() && cs[k] is ('0'..='9') {
+          k += 1
+        }
+        let name = String::from_array(cs[i:k])
+        let n = match seen.get(name) {
+          Some(n) => n
+          None => {
+            let n = counts.get(prefix).unwrap_or(0) + 1
+            counts[prefix] = n
+            seen[name] = n
+            n
+          }
+        }
+        out.write_string(prefix + n.to_string())
+        i = k
+      } else {
+        out.write_char(cs[i])
+        i += 1
+      }
     }
   }
   out.to_string()
+}
+
+///|
+/// Whether `line` heads a quotation trace: `<file> quotations (<n>):`.
+fn is_trace_header(line : String) -> Bool {
+  guard line.has_suffix("):") else { return false }
+  match line.find(" quotations (") {
+    Some(k) => {
+      let digits = line[k + " quotations (".length():line.length() - 2]
+      digits.length() > 0 && digits.iter().all(c => c is ('0'..='9'))
+    }
+    None => false
+  }
 }
 
 ///|
