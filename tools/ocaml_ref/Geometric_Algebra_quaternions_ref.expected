@@ -76422,12 +76422,12 @@ Generating HOL version of proof
 0..0..solved at 2
 0..0..solved at 3
 Geometric_Algebra/quaternions quotations (56):
-  dimindex(:(Zero,One,Zero)geomalg) = dimindex(:2)
+  (dimindex : ((Geomalg[Zero, One, Zero]) -> Bool) -> Num)((UNIV : (Geomalg[Zero, One, Zero]) -> Bool)) == (dimindex : ((Tybit0[Unit]) -> Bool) -> Num)((UNIV : (Tybit0[Unit]) -> Bool))
   {(s : (Num) -> Bool) | SUBSET(s, {1})} == {{}, {1}}
-  forall x y:real^(Zero,One,Zero)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {}) % mbasis {1}
-  mbasis{1}:real^(Zero,One,Zero)geomalg * mbasis{1} = --mbasis{}
-  mbasis{1,2}:real^(Two,Zero,Zero)geomalg * mbasis{1,2} = --mbasis{}
-  dimindex(:(Zero,Two,Zero)geomalg) = dimindex(:4)
+  \226\136\128 x : Cart[Real, Geomalg[Zero, One, Zero]], \226\136\128 y : Cart[Real, Geomalg[Zero, One, Zero]], x * y == op_pct(setindex(x, {}) * setindex(y, {}) - setindex(x, {1}) * setindex(y, {1}), mbasis({})) + op_pct(setindex(x, {}) * setindex(y, {1}) + setindex(x, {1}) * setindex(y, {}), mbasis({1}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, One, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, One, Zero]])({1}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, One, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Two, Zero, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Two, Zero, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Two, Zero, Zero]])(({} : (Num) -> Bool))
+  (dimindex : ((Geomalg[Zero, Two, Zero]) -> Bool) -> Num)((UNIV : (Geomalg[Zero, Two, Zero]) -> Bool)) == (dimindex : ((Tybit0[Tybit0[Unit]]) -> Bool) -> Num)((UNIV : (Tybit0[Tybit0[Unit]]) -> Bool))
   \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 x : Num, (x == a) == (x == a || x == b)) == (a == b)
   \226\136\128 a : Num, \226\136\128 b : Num, (\226\136\128 x : Num, (x == a) == (x == b)) == (a == b)
   ({} : (Num) -> Bool)
@@ -76437,47 +76437,47 @@ Geometric_Algebra/quaternions quotations (56):
   (p1 : Bool) == (q1 : Bool) && (p2 : Bool) == (q2 : Bool) \226\134\146 (p1 || p2) == (q1 || q2)
   (p1 : Bool) == (q1 : Bool) && (p2 : Bool) == (q2 : Bool) \226\134\146 (p1 || p2) == (q1 || q2)
   {(s : (Num) -> Bool) | SUBSET(s, {2, 1})} == {{}, {1}, {2}, {1, 2}}
-  forall x y:real^(Zero,Two,Zero)geomalg.\n     x * y =\n       (x $$ {} * y $$ {} - x $$ {1} * y $$ {1} - x $$ {2} * y $$ {2} - x $$ {1,2} * y $$ {1,2}) % mbasis {} +\n       (x $$ {} * y $$ {1} + x $$ {1} * y $$ {} + x $$ {2} * y $$ {1,2} - x $$ {1,2} * y $$ {2}) % mbasis {1} +\n       (x $$ {} * y $$ {2} - x $$ {1} * y $$ {1,2} + x $$ {2} * y $$ {} + x $$ {1,2} * y $$ {1}) % mbasis {2} +\n       (x $$ {} * y $$ {1,2} + x $$ {1} * y $$ {2} - x $$ {2} * y $$ {1} + x $$ {1,2} * y $$ {}) % mbasis {1,2}
-  (mbasis{1}:real^(Zero,Two,Zero)geomalg)* mbasis{1} = --mbasis{}
-  (mbasis{2}:real^(Zero,Two,Zero)geomalg)* mbasis{2} = --mbasis {}
-  (mbasis{1,2}:real^(Zero,Two,Zero)geomalg)* mbasis{1,2} = --mbasis {}
-  (mbasis{1}:real^(Zero,Two,Zero)geomalg)* mbasis{2} = mbasis {1,2}
-  (mbasis{2}:real^(Zero,Two,Zero)geomalg)* mbasis{1,2} = mbasis {1}
-  (mbasis{1,2}:real^(Zero,Two,Zero)geomalg)* mbasis{1} = mbasis {2}
-  (mbasis{1}:real^(Zero,Two,Zero)geomalg)* mbasis{2} = --(mbasis{2} * mbasis{1})
-  (mbasis{2}:real^(Zero,Two,Zero)geomalg)* mbasis{1,2} = --(mbasis{1,2} * mbasis {2})
-  (mbasis{1,2}:real^(Zero,Two,Zero)geomalg)* mbasis{1} = --(mbasis{1} * mbasis{1,2})
-  (mbasis{1}:real^(Zero,Two,Zero)geomalg)* mbasis{2} * mbasis{1,2} = --mbasis{}
-  geomalg_300_quat (q:quat) =\n  (Re q) % mbasis{} +\n  (Im1 q) % mbasis{2,3} +\n  (Im2 q) % mbasis{1,2} +\n  (Im3 q) % (--(mbasis{1,3}:real^(Three,Zero,Zero)geomalg))
+  \226\136\128 x : Cart[Real, Geomalg[Zero, Two, Zero]], \226\136\128 y : Cart[Real, Geomalg[Zero, Two, Zero]], x * y == op_pct(setindex(x, {}) * setindex(y, {}) - setindex(x, {1}) * setindex(y, {1}) - setindex(x, {2}) * setindex(y, {2}) - setindex(x, {1, 2}) * setindex(y, {1, 2}), mbasis({})) + (op_pct(setindex(x, {}) * setindex(y, {1}) + (setindex(x, {1}) * setindex(y, {}) + (setindex(x, {2}) * setindex(y, {1, 2}) - setindex(x, {1, 2}) * setindex(y, {2}))), mbasis({1})) + (op_pct(setindex(x, {}) * setindex(y, {2}) - setindex(x, {1}) * setindex(y, {1, 2}) + (setindex(x, {2}) * setindex(y, {}) + setindex(x, {1, 2}) * setindex(y, {1})), mbasis({2})) + op_pct(setindex(x, {}) * setindex(y, {1, 2}) + (setindex(x, {1}) * setindex(y, {2}) - setindex(x, {2}) * setindex(y, {1}) + setindex(x, {1, 2}) * setindex(y, {})), mbasis({1, 2}))))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1}) * ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])({1, 2})) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Zero, Two, Zero]])(({} : (Num) -> Bool))
+  (geomalg_300_quat : (Cart[Real, Tybit0[Tybit0[Unit]]]) -> Cart[Real, Geomalg[Three, Zero, Zero]])((q : Cart[Real, Tybit0[Tybit0[Unit]]])) == op_pct(Re(q), mbasis({})) + (op_pct(Im1(q), mbasis({2, 3})) + (op_pct(Im2(q), mbasis({1, 2})) + op_pct(Im3(q), -mbasis({1, 3}))))
   op_dot_dot(4, 3)
   op_dot_dot(4, 3)
   op_dot_dot(4, 3)
   op_dot_dot(4, 3)
   \226\136\128 q : Cart[Real, Tybit0[Tybit0[Unit]]], conjugation(geomalg_300_quat(q)) == geomalg_300_quat(cnj(q))
-  (mbasis{2,3}:real^(Three,Zero,Zero)geomalg)* mbasis{2,3} = --mbasis{}
-  (mbasis{1,2}:real^(Three,Zero,Zero)geomalg)* mbasis{1,2} = --mbasis{}
-  (--mbasis{1,3}:real^(Three,Zero,Zero)geomalg)*(--mbasis{1,3}) = --mbasis{}
-  (mbasis{2,3}:real^(Three,Zero,Zero)geomalg)* mbasis {1,2} = --mbasis{1,3}
-  (mbasis{1,2}:real^(Three,Zero,Zero)geomalg)*(--mbasis{1,3}) = mbasis{2,3}
-  (--mbasis{1,3}:real^(Three,Zero,Zero)geomalg)* mbasis{2,3} = mbasis{1,2}
-  (mbasis{2,3}:real^(Three,Zero,Zero)geomalg)* mbasis{1,2} = --(mbasis{1,2} * mbasis{2,3})
-  (mbasis{1,2}:real^(Three,Zero,Zero)geomalg)*(--mbasis{1,3})= --(--mbasis{1,3} * mbasis{1,2})
-  (--mbasis{1,3}:real^(Three,Zero,Zero)geomalg)* mbasis{2,3} = --(mbasis{2,3} * --mbasis{1,3})
-  (mbasis{2,3}:real^(Three,Zero,Zero)geomalg)* mbasis{1,2} * --mbasis{1,3} = --mbasis{}
-  (mbasis{2,3}:real^(Three,Zero,One)geomalg)* mbasis{2,3} = --mbasis{}
-  (mbasis{1,2}:real^(Three,Zero,One)geomalg)* mbasis{1,2} = --mbasis{}
-  (--mbasis{1,3}:real^(Three,Zero,One)geomalg)*(--mbasis{1,3}) = --mbasis{}
-  (mbasis{2,3}:real^(Three,Zero,One)geomalg)* mbasis {1,2} = --mbasis{1,3}
-  (mbasis{1,2}:real^(Three,Zero,One)geomalg)*(--mbasis{1,3}) = mbasis{2,3}
-  (--mbasis{1,3}:real^(Three,Zero,One)geomalg)* mbasis{2,3} = mbasis{1,2}
-  (mbasis{2,3}:real^(Three,Zero,One)geomalg)* mbasis{1,2} = --(mbasis{1,2} * mbasis{2,3})
-  (mbasis{1,2}:real^(Three,Zero,One)geomalg)*(--mbasis{1,3})= --(--mbasis{1,3} * mbasis{1,2})
-  (--mbasis{1,3}:real^(Three,Zero,One)geomalg)* mbasis{2,3} = --(mbasis{2,3} * --mbasis{1,3})
-  (mbasis{2,3}:real^(Three,Zero,One)geomalg)* mbasis{1,2} * --mbasis{1,3} = --mbasis{}
-  mbasis{2,3}:real^(Three,Zero,One)geomalg * mbasis{1,2,3,4} = mbasis{1,2,3,4} * mbasis{2,3}
-  mbasis{1,2}:real^(Three,Zero,One)geomalg * mbasis{1,2,3,4} = mbasis{1,2,3,4} * mbasis{1,2}
-  --mbasis{1,3}:real^(Three,Zero,One)geomalg * mbasis{1,2,3,4}= mbasis{1,2,3,4}* --mbasis{1,3}
-  mbasis{1,2,3,4}:real^(Three,Zero,One)geomalg * mbasis{1,2,3,4} = vec 0
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3})
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) == -(-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}))
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({2, 3}) * ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])({1, 3})) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, Zero]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3})
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) == -(-(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}))
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) == -((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * ((mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3})) == -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])(({} : (Num) -> Bool))
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({2, 3})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2})
+  -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * -(mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 3})
+  (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) * (mbasis : ((Num) -> Bool) -> Cart[Real, Geomalg[Three, Zero, One]])({1, 2, 3, 4}) == (vec : (Num) -> Cart[Real, Geomalg[Three, Zero, One]])(0)
 DIMINDEX_GA010 =  |- ((#=:fun(num,fun(num,bool)) (#dimindex:fun(fun(geomalg(Zero,One,Zero),bool),num) #UNIV:fun(geomalg(Zero,One,Zero),bool))) (#dimindex:fun(fun(tybit0(1),bool),num) #UNIV:fun(tybit0(1),bool)))
 COMPLEX_PRODUCT_GA010 =  |- (#forall:fun(fun(cart(real,geomalg(Zero,One,Zero)),bool),bool) (\x:cart(real,geomalg(Zero,One,Zero)). (#forall:fun(fun(cart(real,geomalg(Zero,One,Zero)),bool),bool) (\y:cart(real,geomalg(Zero,One,Zero)). ((#=:fun(cart(real,geomalg(Zero,One,Zero)),fun(cart(real,geomalg(Zero,One,Zero)),bool)) ((#geomga_mul:fun(cart(real,geomalg(Zero,One,Zero)),fun(cart(real,geomalg(Zero,One,Zero)),cart(real,geomalg(Zero,One,Zero)))) x:cart(real,geomalg(Zero,One,Zero))) y:cart(real,geomalg(Zero,One,Zero)))) ((#vector_add:fun(cart(real,geomalg(Zero,One,Zero)),fun(cart(real,geomalg(Zero,One,Zero)),cart(real,geomalg(Zero,One,Zero)))) ((#%:fun(real,fun(cart(real,geomalg(Zero,One,Zero)),cart(real,geomalg(Zero,One,Zero)))) ((#real_sub:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) x:cart(real,geomalg(Zero,One,Zero))) #EMPTY:fun(num,bool))) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) y:cart(real,geomalg(Zero,One,Zero))) #EMPTY:fun(num,bool)))) ((#real_mul:fun(real,fun(real,real)) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) x:cart(real,geomalg(Zero,One,Zero))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #EMPTY:fun(num,bool)))) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) y:cart(real,geomalg(Zero,One,Zero))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #EMPTY:fun(num,bool)))))) (#mvbasis:fun(fun(num,bool),cart(real,geomalg(Zero,One,Zero))) #EMPTY:fun(num,bool)))) ((#%:fun(real,fun(cart(real,geomalg(Zero,One,Zero)),cart(real,geomalg(Zero,One,Zero)))) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) x:cart(real,geomalg(Zero,One,Zero))) #EMPTY:fun(num,bool))) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) y:cart(real,geomalg(Zero,One,Zero))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #EMPTY:fun(num,bool))))) ((#real_mul:fun(real,fun(real,real)) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) x:cart(real,geomalg(Zero,One,Zero))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #EMPTY:fun(num,bool)))) ((#setindex:fun(cart(real,geomalg(Zero,One,Zero)),fun(fun(num,bool),real)) y:cart(real,geomalg(Zero,One,Zero))) #EMPTY:fun(num,bool))))) (#mvbasis:fun(fun(num,bool),cart(real,geomalg(Zero,One,Zero))) ((#INSERT:fun(num,fun(fun(num,bool),fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) #EMPTY:fun(num,bool))))))))))
 DIMINDEX_GA020 =  |- ((#=:fun(num,fun(num,bool)) (#dimindex:fun(fun(geomalg(Zero,Two,Zero),bool),num) #UNIV:fun(geomalg(Zero,Two,Zero),bool))) (#dimindex:fun(fun(tybit0(tybit0(1)),bool),num) #UNIV:fun(tybit0(tybit0(1)),bool)))
