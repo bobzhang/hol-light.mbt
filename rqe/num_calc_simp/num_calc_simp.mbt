@@ -5,26 +5,26 @@
 pub fn arith_ss(x1 : @list.List[@kernel.Thm]) -> @simp.Simpset raise {
   let thml = x1
   let t19 = @simp.basic_ss(thml)
-  let t4 = (@parser.parse_term("(NUMERAL m) MOD (NUMERAL n)"), @calc_num.num_mod_conv)
-  let t5 = (@parser.parse_term("(NUMERAL m) DIV (NUMERAL n)"), @calc_num.num_div_conv)
-  let t6 = (@parser.parse_term("(NUMERAL m) EXP (NUMERAL n)"), @calc_num.num_exp_conv)
-  let t7 = (@parser.parse_term("NUMERAL m * NUMERAL n"), @calc_num.num_mult_conv)
-  let t8 = (@parser.parse_term("NUMERAL m - NUMERAL n"), @calc_num.num_sub_conv)
-  let t9 = (@parser.parse_term("NUMERAL m + NUMERAL n"), @calc_num.num_add_conv)
-  let t10 = (@parser.parse_term("ODD(NUMERAL n)"), @calc_num.num_odd_conv)
-  let t11 = (@parser.parse_term("EVEN(NUMERAL n)"), @calc_num.num_even_conv)
-  let t12 = (@parser.parse_term("NUMERAL m = NUMERAL n"), @calc_num.num_rel_conv)
-  let t13 = (@parser.parse_term("NUMERAL m >= NUMERAL n"), @calc_num.num_rel_conv)
-  let t14 = (@parser.parse_term("NUMERAL m > NUMERAL n"), @calc_num.num_rel_conv)
-  let t15 = (@parser.parse_term("NUMERAL m <= NUMERAL n"), @calc_num.num_rel_conv)
-  let t16 = (@parser.parse_term("NUMERAL m < NUMERAL n"), @calc_num.num_rel_conv)
-  let t17 = (@parser.parse_term("FACT(NUMERAL n)"), @calc_num.num_fact_conv)
-  let t18 = (@parser.parse_term("PRE(NUMERAL n)"), @calc_num.num_pre_conv)
+  let t4 = (@term_syntax.parse_term("MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))"), @calc_num.num_mod_conv)
+  let t5 = (@term_syntax.parse_term("DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))"), @calc_num.num_div_conv)
+  let t6 = (@term_syntax.parse_term("EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))"), @calc_num.num_exp_conv)
+  let t7 = (@term_syntax.parse_term("NUMERAL((m : Num)) * NUMERAL((n : Num))"), @calc_num.num_mult_conv)
+  let t8 = (@term_syntax.parse_term("NUMERAL((m : Num)) - NUMERAL((n : Num))"), @calc_num.num_sub_conv)
+  let t9 = (@term_syntax.parse_term("NUMERAL((m : Num)) + NUMERAL((n : Num))"), @calc_num.num_add_conv)
+  let t10 = (@term_syntax.parse_term("ODD(NUMERAL((n : Num)))"), @calc_num.num_odd_conv)
+  let t11 = (@term_syntax.parse_term("EVEN(NUMERAL((n : Num)))"), @calc_num.num_even_conv)
+  let t12 = (@term_syntax.parse_term("NUMERAL((m : Num)) == NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t13 = (@term_syntax.parse_term("NUMERAL((m : Num)) >= NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t14 = (@term_syntax.parse_term("NUMERAL((m : Num)) > NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t15 = (@term_syntax.parse_term("NUMERAL((m : Num)) <= NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t16 = (@term_syntax.parse_term("NUMERAL((m : Num)) < NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t17 = (@term_syntax.parse_term("FACT(NUMERAL((n : Num)))"), @calc_num.num_fact_conv)
+  let t18 = (@term_syntax.parse_term("PRE(NUMERAL((n : Num)))"), @calc_num.num_pre_conv)
   @lib.itlist(fn(x2 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise), x3 : @simp.Simpset) -> @simp.Simpset raise {
     let (x, y) = x2
     let ss = x3
     @simp.ss_of_conv(x, y, ss)
-  }, @list.List([(@parser.parse_term("SUC(NUMERAL n)"), @calc_num.num_suc_conv), t18, t17, t16, t15, t14, t13, t12, t11, t10, t9, t8, t7, t6, t5, t4]), t19)
+  }, @list.List([(@term_syntax.parse_term("SUC(NUMERAL((n : Num)))"), @calc_num.num_suc_conv), t18, t17, t16, t15, t14, t13, t12, t11, t10, t9, t8, t7, t6, t5, t4]), t19)
 }
 
 ///|

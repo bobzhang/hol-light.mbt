@@ -1535,7 +1535,7 @@ pub fn zero_num() -> @kernel.Term {
 ///|
 /// add_op_num
 fn step_96() -> Unit raise {
-  add_op_num_c.set(standardize_tm(@parser.parse_term("(+) : num->num->num")))
+  add_op_num_c.set(standardize_tm(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)")))
 }
 
 ///|
@@ -1550,7 +1550,7 @@ pub fn add_op_num() -> @kernel.Term {
 ///|
 /// sub_op_num
 fn step_97() -> Unit raise {
-  sub_op_num_c.set(standardize_tm(@parser.parse_term("(-) : num->num->num")))
+  sub_op_num_c.set(standardize_tm(@term_syntax.parse_term("(op_minus : (Num, Num) -> Num)")))
 }
 
 ///|
@@ -1565,7 +1565,7 @@ pub fn sub_op_num() -> @kernel.Term {
 ///|
 /// mul_op_num
 fn step_98() -> Unit raise {
-  mul_op_num_c.set(standardize_tm(@parser.parse_term("( * ) : num->num->num")))
+  mul_op_num_c.set(standardize_tm(@term_syntax.parse_term("(op_star : (Num, Num) -> Num)")))
 }
 
 ///|
@@ -1595,7 +1595,7 @@ pub fn eq_op_num() -> @kernel.Term {
 ///|
 /// le_op_num
 fn step_100() -> Unit raise {
-  le_op_num_c.set(standardize_tm(@parser.parse_term("(<=) : num->num->bool")))
+  le_op_num_c.set(standardize_tm(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)")))
 }
 
 ///|
@@ -1610,7 +1610,7 @@ pub fn le_op_num() -> @kernel.Term {
 ///|
 /// lt_op_num
 fn step_101() -> Unit raise {
-  lt_op_num_c.set(standardize_tm(@parser.parse_term("(<) : num->num->bool")))
+  lt_op_num_c.set(standardize_tm(@term_syntax.parse_term("(op_lt : (Num, Num) -> Bool)")))
 }
 
 ///|
