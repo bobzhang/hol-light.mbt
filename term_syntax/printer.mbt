@@ -287,14 +287,24 @@ fn Printer::spelling(self : Printer, c : @kernel.Term) -> String {
 ///|
 fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintable {
   guard c is Const(_, ty) else { raise Unprintable("not a constant") }
-  self.annotated(constant_name(self.spelling(c)), c)
+  let spelling = self.spelling(c)
+  // a name the interface overloads reads as whichever constant the
+  // priority in force picks (+ as real_add after prioritize_real)
+  let overloaded = @printer.the_interface.val.iter().any(e => e.0 == spelling)
+  self.annotated(constant_name(spelling), c, overloaded~)
 }
 
 ///|
 /// `s` for the constant `c`, with `c`'s type where the reading may not pin
 /// it down: a type variable no variable fixes, or (annotating every
-/// constant) any instance of a polymorphic constant.
-fn Printer::annotated(self : Printer, s : String, c : @kernel.Term) -> String raise Unprintable {
+/// constant) any instance of a polymorphic constant, or a constant written
+/// under an overloaded name.
+fn Printer::annotated(
+  self : Printer,
+  s : String,
+  c : @kernel.Term,
+  overloaded? : Bool = false,
+) -> String raise Unprintable {
   guard c is Const(name, ty) else { raise Unprintable("not a constant") }
   let tvs = @kernel.tyvars(ty)
   let polymorphic = (try @kernel.get_const_type(name) catch { _ => ty })
@@ -303,7 +313,7 @@ fn Printer::annotated(self : Printer, s : String, c : @kernel.Term) -> String ra
   if tvs.iter().any(v => !self.fixed.contains(v)) ||
     (self.all_constants && !tvs.is_empty()) {
     "(" + s + " : " + print_type_in_term(ty) + ")"
-  } else if self.all_constants && polymorphic {
+  } else if self.all_constants && (polymorphic || overloaded) {
     // a concrete instance: annotated where its type can be written
     "(" + s + " : " + print_type_in_term(ty) + ")" catch {
       _ => s
