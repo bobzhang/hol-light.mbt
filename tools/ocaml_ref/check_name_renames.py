@@ -18,7 +18,7 @@ import re
 import subprocess
 import sys
 
-from name_renames import NAME_PATCHES, HOL_TOKEN, constant_names, old_names, renamed_name, renamed_output
+from name_renames import NAME_PATCHES, constant_names, hol_names, old_names, renamed_name, renamed_output
 from term_renames import decode_escaped
 
 REF = os.path.dirname(os.path.abspath(__file__))
@@ -28,7 +28,7 @@ def run(script, original):
     env = {k: v for k, v in os.environ.items() if not k.startswith('HOL_REF_ORIGINAL_')}
     if original:
         env['HOL_REF_ORIGINAL_NAMES'] = '1'
-    env['HOL_REF_MARK_TYPE_CONSTANTS'] = '1'
+    env['HOL_REF_QUOTED_NAMES'] = '1'
     res = subprocess.run(['./run.sh', script], cwd=REF, env=env, capture_output=True, text=True)
     if res.returncode != 0:
         sys.exit(f'run.sh {script} failed (exit {res.returncode})')
@@ -43,7 +43,7 @@ def names(output):
         if re.match(r'.* quotations \(\d+\):$', line):
             trace = True
         elif trace and line.startswith('  '):
-            found |= set(HOL_TOKEN.findall(decode_escaped(line[2:])))
+            found |= set(hol_names(decode_escaped(line[2:])))
             continue
         else:
             trace = False

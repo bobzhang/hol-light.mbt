@@ -15,7 +15,7 @@ changes by exactly these names, which are global: every whole HOL name.
 """
 import re
 
-from term_renames import decode_escaped, encode_escaped
+from term_renames import decode_escaped, encode_escaped, hol_spans
 
 LOCAL_DEFINITION = re.compile(r"(euclid|trig|jordan)'([A-Za-z0-9_]+'*)")
 
@@ -58,6 +58,28 @@ def rename_tokens(text):
     return HOL_TOKEN.sub(lambda m: renamed_name(m[0]) or m[0], text)
 
 
+def rename_hol(q, op=False):
+    """The HOL (or, with `op`, term-syntax) quotation text q with its renamed
+    names replaced: names only, not string literals or comments (a string
+    "euclid'dot" is data). With `op`, an op_ spelling of a renamed name too."""
+    out, last = [], 0
+    for start, end, kind in hol_spans(q):
+        if kind != 'name':
+            continue
+        name = q[start:end]
+        new = renamed_name(op_unescaped(name)) if op and OP_NAME.fullmatch(name) else None
+        out.append(q[last:start])
+        out.append(new or renamed_name(name) or name)
+        last = end
+    out.append(q[last:])
+    return ''.join(out)
+
+
+def hol_names(q):
+    """The names in HOL quotation text (not its strings or comments)."""
+    return [q[s:e] for s, e, kind in hol_spans(q) if kind == 'name']
+
+
 def old_names(text):
     return {t for t in HOL_TOKEN.findall(text) if renamed_name(t)}
 
@@ -77,7 +99,7 @@ def rename_names(text, patches):
     out = []
     for kind, piece in checked_segments(text):
         piece = piece.split('\0')[0] if kind == 'string' else piece
-        out.append(rename_tokens(piece) if kind == 'quotation' else piece)
+        out.append(rename_hol(piece) if kind == 'quotation' else piece)
     text = ''.join(out)
     left = old_names(' '.join(p for k, p in checked_segments(text) if k != 'comment'))
     assert not left, f'old names left outside quotations: {sorted(left)[:5]}'
@@ -85,37 +107,50 @@ def rename_names(text, patches):
 
 
 # The names of constants and type constants in output check_name_renames.py
-# makes (HOL_REF_MARK_TYPE_CONSTANTS, prelude.ml): those marked #, and those
-# its constants and types lines list. A variable (name:type) or a type
-# variable ('name) is no such name: renaming one is a difference.
-MARKED_NAME = re.compile(r"(?<=#)[A-Za-z0-9_']+")
+# makes (HOL_REF_QUOTED_NAMES, prelude.ml): structural output writes them
+# #"name" (escaped), a variable "name" and a type variable '"name"; and the
+# constants and types lines list them (name, name/arity). A variable or type
+# variable is no such name: renaming one is a difference.
+MARKED_NAME = re.compile(r'#"((?:[^"\\]|\\.)*)"')
 LISTING = re.compile(r'(constants|types) = ')
+
+
+def listed(item):
+    name, sep, arity = item.rpartition('/') if '/' in item else (item, '', '')
+    return name, sep + arity
 
 
 def constant_names(line):
     """The constants' and type constants' names in a line of output."""
-    if LISTING.match(line):
-        return HOL_TOKEN.findall(line[line.index('=') + 1:])
-    return MARKED_NAME.findall(line)
+    if m := LISTING.match(line):
+        return [listed(item)[0] for item in line[m.end():].split()]
+    return [decode_escaped(n) for n in MARKED_NAME.findall(line)]
 
 
 def rename_structural(line):
     if m := LISTING.match(line):
-        return line[:m.end()] + rename_tokens(line[m.end():])
-    return MARKED_NAME.sub(lambda m: renamed_name(m[0]) or m[0], line)
+        def item(it):
+            name, rest = listed(it)
+            return (renamed_name(name) or name) + rest
+        return line[:m.end()] + ' '.join(item(it) for it in line[m.end():].rstrip('\n').split(' ')) + \
+            ('\n' if line.endswith('\n') else '')
+    def one(m):
+        new = renamed_name(decode_escaped(m[1]))
+        return '#"' + encode_escaped(new) + '"' if new else m[0]
+    return MARKED_NAME.sub(one, line)
 
 
 def renamed_output(output):
-    """Reference output (made with HOL_REF_MARK_TYPE_CONSTANTS) with the
-    names renamed: trace lines (OCaml-escaped quotation text) decoded first
-    and renamed as the sources are; every other line in its constants' and
-    type constants' names only."""
+    """Reference output (made with HOL_REF_QUOTED_NAMES) with the names
+    renamed: trace lines (OCaml-escaped quotation text) decoded first and
+    renamed as the sources are; every other line in its constants' and type
+    constants' names only."""
     out, trace = [], False
     for line in output.splitlines(keepends=True):
         if re.match(r'.* quotations \(\d+\):$', line.rstrip('\n')):
             trace = True
         elif trace and line.startswith('  '):
-            out.append('  ' + encode_escaped(rename_tokens(decode_escaped(line[2:].rstrip('\n')))) + '\n')
+            out.append('  ' + encode_escaped(rename_hol(decode_escaped(line[2:].rstrip('\n')))) + '\n')
             continue
         else:
             trace = False
@@ -138,11 +173,8 @@ def op_unescaped(ident):
 
 def rename_term_syntax(q):
     """A term-syntax quotation with renamed constants' op_ spellings, and
-    any old name, replaced by the new name."""
-    def op(m):
-        new = renamed_name(op_unescaped(m[0]))
-        return new if new else m[0]
-    return rename_tokens(OP_NAME.sub(op, q))
+    any old name, replaced by the new name (not in its strings)."""
+    return rename_hol(q, op=True)
 
 
 MBT_CALL = re.compile(r'(@(parser|term_syntax)\.parse_(term|type)\(")((?:[^"\\\n]|\\.)*)("\))')
@@ -158,7 +190,7 @@ def rename_moonbit(text, patches=()):
         text = text.replace(old, new)
     def call(m):
         body = mbt_unescape(m[4])
-        body = rename_term_syntax(body) if m[2] == 'term_syntax' else rename_tokens(body)
+        body = rename_term_syntax(body) if m[2] == 'term_syntax' else rename_hol(body)
         return m[1] + mbt_escape(body) + m[5]
     text = MBT_CALL.sub(call, text)
     for s in re.findall(r'"((?:[^"\\\n]|\\.)*)"', text):
