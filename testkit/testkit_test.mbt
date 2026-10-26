@@ -57,3 +57,15 @@ test "normalize_counters leaves quotation traces as they are" {
     ),
   )
 }
+
+///|
+test "normalize_counters reads a trace header by its last ` quotations (`" {
+  inspect(
+    @testkit.normalize_counters("x quotations (1) quotations (1):\n  ?50\n?51"),
+    content=(
+      #|x quotations (1) quotations (1):
+      #|  ?50
+      #|?1
+    ),
+  )
+}
