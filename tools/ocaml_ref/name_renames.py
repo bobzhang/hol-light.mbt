@@ -7,9 +7,9 @@ The port names them differently from upstream (issue #140):
   package_name (euclid_dot, jordan_top2): local_definition joins with `_`.
 - Geometric algebra's pseudo-finite types (define_pseudo_finite_type n) are
   named '0 .. '4, with constants mk_/dest_auto_define_finite_type_'n. They
-  become Zero .. Four (the term syntax writes a type constant capitalised;
-  zero, one, ... would collide with type variables such as Multivariate's
-  `one`).
+  become Zero .. Four, and a larger n keeps its name (the term syntax
+  writes a type constant capitalised; zero, one, ... would collide with
+  type variables such as Multivariate's `one`).
 
 Each listed upstream file is loaded from a copy (forall_reference.py,
 unless HOL_REF_ORIGINAL_NAMES is set) built by its checked patches (each
@@ -49,8 +49,10 @@ NAME_PATCHES = {
     ],
     'Jordan/misc_defs_and_lemmas.ml': [],
     'Geometric_Algebra/geometricalgebra.ml': [
+        # upstream defines 0 .. 4; a larger n keeps upstream's name
         ('let ns = "\'"^string_of_int n in',
-         'let ns = List.nth ["Zero";"One";"Two";"Three";"Four"] n in'),
+         'let ns = if n <= 4 then List.nth ["Zero";"One";"Two";"Three";"Four"] n '
+         'else "\'"^string_of_int n in'),
     ],
     'Geometric_Algebra/quaternions.ml': [],
 }
