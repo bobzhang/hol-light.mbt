@@ -51,7 +51,7 @@ NAME_PATCHES = {
     'Geometric_Algebra/geometricalgebra.ml': [
         # upstream defines 0 .. 4; a larger n keeps upstream's name
         ('let ns = "\'"^string_of_int n in',
-         'let ns = if n <= 4 then List.nth ["Zero";"One";"Two";"Three";"Four"] n '
+         'let ns = if 0 <= n && n <= 4 then List.nth ["Zero";"One";"Two";"Three";"Four"] n '
          'else "\'"^string_of_int n in'),
     ],
     'Geometric_Algebra/quaternions.ml': [],
