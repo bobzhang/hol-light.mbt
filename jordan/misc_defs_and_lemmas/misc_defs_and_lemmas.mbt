@@ -4211,11 +4211,11 @@ pub fn suc_expand_conv(x1239 : @kernel.Term) -> @kernel.Thm raise {
     if @num.le_num(i, @num.num_of_int64(0L)) {
       r
     } else {
-      let t1242 = @kernel.mk_comb(@parser.parse_term("SUC"), r)
+      let t1242 = @kernel.mk_comb(@term_syntax.parse_term("SUC"), r)
       add_suc(@num.sub_num(i, @num.num_of_int64(1L)), t1242)
     }
   }
-  let tm_p = add_suc(count, @parser.parse_term("0"))
+  let tm_p = add_suc(count, @term_syntax.parse_term("0"))
   let t1243 = @basics.mk_eq(tm, tm_p)
   let t1244 = @num_calc_simp.arith_rewrite_conv(@list.List([]))(t1243)
   @simp.rewrite_rule(@list.List([]))(t1244)
@@ -4245,10 +4245,10 @@ pub fn pi_sern(x1246 : @kernel.Term) -> @kernel.Thm raise {
   let t1248 = @simp.rewrite_conv(@list.List([@analysis.sum()]))
   let t1247 = @equal.top_depth_conv(suc_expand_conv)
   let sum_expand_conv : (@kernel.Term) -> @kernel.Thm raise = @equal.thenc(@equal.thenc(@equal.thenc(@num_calc_simp.arith_rewrite_conv(@list.List([])), t1247), t1248), t1249)
-  let t1250 = @parser.parse_term("sum(0,i) f")
-  let sum_thm = sum_expand_conv(@kernel.vsubst(@list.List([(n, @parser.parse_term("i:num"))]), t1250))
-  let t1251 = @parser.parse_term("0 <| i")
-  let gt_thm = @int.arith_rule(@kernel.vsubst(@list.List([(n, @parser.parse_term("i:num"))]), t1251))
+  let t1250 = @term_syntax.parse_term("sum((0, (i : Num)), (f : (Num) -> Real))")
+  let sum_thm = sum_expand_conv(@kernel.vsubst(@list.List([(n, @term_syntax.parse_term("(i : Num)"))]), t1250))
+  let t1251 = @term_syntax.parse_term("0 < (i : Num)")
+  let gt_thm = @int.arith_rule(@kernel.vsubst(@list.List([(n, @term_syntax.parse_term("(i : Num)"))]), t1251))
   let t1252 = @drule.match_mp(pi_ser())(gt_thm)
   let t1253 = @equal.beta_rule(@simp.rewrite_rule(@list.List([sum_thm, pi_fun(), inv_twopow()]))(t1252))
   @equal.conv_rule(@num_calc_simp.arith_rewrite_conv(@list.List([])), t1253)
@@ -4260,9 +4260,9 @@ pub fn recompute_pi(x1254 : Int64) -> @kernel.Thm raise {
   let bprec = x1254
   let n = @lib.div63(bprec, 4L)
   let pi_ser_1 = pi_sern(@nums.mk_numeral(@num.num_of_int64(n)))
-  let _ = @float.remove_real_constant(@parser.parse_term("pi"))
+  let _ = @float.remove_real_constant(@term_syntax.parse_term("pi"))
   @float.add_real_constant(pi_ser_1)
-  @float.interval_of_term(bprec, @parser.parse_term("pi"))
+  @float.interval_of_term(bprec, @term_syntax.parse_term("pi"))
 }
 
 ///|
