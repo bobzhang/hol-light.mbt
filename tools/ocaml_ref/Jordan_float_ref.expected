@@ -5842,19 +5842,19 @@ Warning: inventing type variables
 0..0..1..2..3..solved at 9
 priority is now real
 Jordan/float quotations (585):
-  real_add:real->real->real
-  real_sub:real->real->real
-  real_mul:real->real->real
-  real_div:real->real->real
-  real_lt:real->real->bool
-  real_le:real->real->bool
-  real_gt:real->real->bool
-  real_ge:real->real->bool
-  real_neg:real->real
-  real_pow:real->num->real
-  real_inv:real->real
-  real_abs:real->real
-  real_of_num:num->real
+  real_add
+  real_sub
+  real_mul
+  op_slash
+  real_lt
+  real_le
+  real_gt
+  real_ge
+  real_neg
+  real_pow
+  inv
+  real_abs
+  real_of_num
   (twopow : (Int) -> Real)((x : Int)) == (if (\226\136\131 n : Num, x == int_of_num(n)) { pow(real_of_num(2), nabs(x)) } else { inv(pow(real_of_num(2), nabs(x))) })
   (float : (Int, Int) -> Real)((x : Int), (n : Int)) == real_of_int(x) * twopow(n)
   (interval : (Real, Real, Real) -> Bool)((x : Real), (f : Real), (eps : Real)) == (abs(x - f) <= eps)
@@ -5995,22 +5995,22 @@ Jordan/float quotations (585):
   \226\136\128 x : Num, \226\136\128 y : Num, x < y \226\134\146 int_of_num(x) + -int_of_num(y) == -int_of_num(y - x)
   int_of_num((x : Num) - (y : Num)) == int_of_num(x) - int_of_num(y)
   \226\136\128 x : Num, \226\136\128 y : Num, y <= x \226\134\146 int_of_num(x) + -int_of_num(y) == int_of_num(x - y)
-  (NUMERAL m) MOD (NUMERAL n)
-  (NUMERAL m) DIV (NUMERAL n)
-  (NUMERAL m) EXP (NUMERAL n)
-  NUMERAL m * NUMERAL n
-  NUMERAL m - NUMERAL n
-  NUMERAL m + NUMERAL n
-  ODD(NUMERAL n)
-  EVEN(NUMERAL n)
-  NUMERAL m = NUMERAL n
-  NUMERAL m >= NUMERAL n
-  NUMERAL m > NUMERAL n
-  NUMERAL m <= NUMERAL n
-  NUMERAL m < NUMERAL n
-  FACT(NUMERAL n)
-  PRE(NUMERAL n)
-  SUC(NUMERAL n)
+  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+  NUMERAL((m : Num)) * NUMERAL((n : Num))
+  NUMERAL((m : Num)) - NUMERAL((n : Num))
+  NUMERAL((m : Num)) + NUMERAL((n : Num))
+  ODD(NUMERAL((n : Num)))
+  EVEN(NUMERAL((n : Num)))
+  NUMERAL((m : Num)) == NUMERAL((n : Num))
+  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+  NUMERAL((m : Num)) > NUMERAL((n : Num))
+  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+  NUMERAL((m : Num)) < NUMERAL((n : Num))
+  FACT(NUMERAL((n : Num)))
+  PRE(NUMERAL((n : Num)))
+  SUC(NUMERAL((n : Num)))
   float(int_of_num(3), int_of_num(0)) == float(int_of_num(3), int_of_num(0))
   float(int_of_num(3), int_of_num(3)) == float(int_of_num(3), int_of_num(3))
   float(int_of_num(3), int_of_num(0)) + float(int_of_num(4), int_of_num(0)) == float(int_of_num(7), int_of_num(0))
@@ -6353,22 +6353,22 @@ Jordan/float quotations (585):
   \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, (real_of_num(p) / real_of_num(m) <= real_of_num(n)) == (real_of_num(p) / real_of_num(m) <= real_of_num(n) / real_of_num(1))
   \226\136\128 n : Num, \226\136\128 m : Num, \226\136\128 p : Num, (real_of_num(p) <= real_of_num(n) / real_of_num(m)) == (real_of_num(p) / real_of_num(1) <= real_of_num(n) / real_of_num(m))
   \226\136\128 a : Num, \226\136\128 b : Num, \226\136\128 c : Num, \226\136\128 d : Num, 0 < b && 0 < d && a * d <= c * b \226\134\146 real_of_num(a) / real_of_num(b) <= real_of_num(c) / real_of_num(d)
-  (NUMERAL m) MOD (NUMERAL n)
-  (NUMERAL m) DIV (NUMERAL n)
-  (NUMERAL m) EXP (NUMERAL n)
-  NUMERAL m * NUMERAL n
-  NUMERAL m - NUMERAL n
-  NUMERAL m + NUMERAL n
-  ODD(NUMERAL n)
-  EVEN(NUMERAL n)
-  NUMERAL m = NUMERAL n
-  NUMERAL m >= NUMERAL n
-  NUMERAL m > NUMERAL n
-  NUMERAL m <= NUMERAL n
-  NUMERAL m < NUMERAL n
-  FACT(NUMERAL n)
-  PRE(NUMERAL n)
-  SUC(NUMERAL n)
+  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+  NUMERAL((m : Num)) * NUMERAL((n : Num))
+  NUMERAL((m : Num)) - NUMERAL((n : Num))
+  NUMERAL((m : Num)) + NUMERAL((n : Num))
+  ODD(NUMERAL((n : Num)))
+  EVEN(NUMERAL((n : Num)))
+  NUMERAL((m : Num)) == NUMERAL((n : Num))
+  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+  NUMERAL((m : Num)) > NUMERAL((n : Num))
+  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+  NUMERAL((m : Num)) < NUMERAL((n : Num))
+  FACT(NUMERAL((n : Num)))
+  PRE(NUMERAL((n : Num)))
+  SUC(NUMERAL((n : Num)))
   DECIMAL(100, 10) <= float(int_of_num(3), int_of_num(2))
   DECIMAL(10, 1) <= float(int_of_num(3), int_of_num(2))
   DECIMAL(1, 10) <= float(int_of_num(1), -int_of_num(2))
