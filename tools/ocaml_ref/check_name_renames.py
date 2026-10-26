@@ -18,7 +18,7 @@ import re
 import subprocess
 import sys
 
-from name_renames import NAME_PATCHES, HOL_TOKEN, old_names, renamed_name, renamed_output
+from name_renames import NAME_PATCHES, HOL_TOKEN, constant_names, old_names, renamed_name, renamed_output
 from term_renames import decode_escaped
 
 REF = os.path.dirname(os.path.abspath(__file__))
@@ -28,6 +28,7 @@ def run(script, original):
     env = {k: v for k, v in os.environ.items() if not k.startswith('HOL_REF_ORIGINAL_')}
     if original:
         env['HOL_REF_ORIGINAL_NAMES'] = '1'
+    env['HOL_REF_MARK_TYPE_CONSTANTS'] = '1'
     res = subprocess.run(['./run.sh', script], cwd=REF, env=env, capture_output=True, text=True)
     if res.returncode != 0:
         sys.exit(f'run.sh {script} failed (exit {res.returncode})')
@@ -35,10 +36,19 @@ def run(script, original):
 
 
 def names(output):
-    """Every HOL name in the output, trace lines decoded. A theorem's label
-    (NAME = |- ...: the script's OCaml name for it, such as euclid_euclid0
-    for a theorem about euclid'euclid0) is no HOL name."""
-    return set(HOL_TOKEN.findall(decode_escaped(re.sub(r'(?m)^\S+ = ', '', output))))
+    """The names of constants and type constants in the output (name_renames.
+    constant_names), and every name in its quotation traces."""
+    found, trace = set(), False
+    for line in output.splitlines():
+        if re.match(r'.* quotations \(\d+\):$', line):
+            trace = True
+        elif trace and line.startswith('  '):
+            found |= set(HOL_TOKEN.findall(decode_escaped(line[2:])))
+            continue
+        else:
+            trace = False
+        found |= set(constant_names(line))
+    return found
 
 
 def check(script):
