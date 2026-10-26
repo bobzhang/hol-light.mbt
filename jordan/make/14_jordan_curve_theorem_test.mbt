@@ -26986,19 +26986,19 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x <= y \226\134\146 sqrt(x) <= sqrt(y)
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && x < y \226\134\146 sqrt(x) < sqrt(y)
       #|  \226\136\128 x : Real, \226\136\128 y : Real, real_of_num(0) <= x && real_of_num(0) <= y \226\134\146 (sqrt(x) < sqrt(y)) == (x < y)
-      #|  real_add:real->real->real
-      #|  real_sub:real->real->real
-      #|  real_mul:real->real->real
-      #|  real_div:real->real->real
-      #|  real_lt:real->real->bool
-      #|  real_le:real->real->bool
-      #|  real_gt:real->real->bool
-      #|  real_ge:real->real->bool
-      #|  real_neg:real->real
-      #|  real_pow:real->num->real
-      #|  real_inv:real->real
-      #|  real_abs:real->real
-      #|  real_of_num:num->real
+      #|  real_add
+      #|  real_sub
+      #|  real_mul
+      #|  op_slash
+      #|  real_lt
+      #|  real_le
+      #|  real_gt
+      #|  real_ge
+      #|  real_neg
+      #|  real_pow
+      #|  inv
+      #|  real_abs
+      #|  real_of_num
       #|  \226\136\128 x : (A, B), \226\136\128 i : A, \226\136\128 j : B, (x == (i, j)) == (FST(x) == i && SND(x) == j)
       #|  \226\136\128 x : (A, B), \226\136\128 y : (A, B), (x == y) == (FST(x) == FST(y) && SND(x) == SND(y))
       #|  \226\136\128 a : A, \226\136\128 U : (A) -> Bool, !(INTER({a}, U) == {}) == U(a)
