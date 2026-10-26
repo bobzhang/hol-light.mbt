@@ -203,6 +203,9 @@ priv struct Printer {
   // variable and the depth of its binding in the scope: printed with their
   // type where they first occur
   untyped : Array[(@kernel.Term, Int)]
+  // inside a lambda's pattern (fn { p => e }), which HOL reads with nothing
+  // in scope: no binder outside makes a T or F there a variable
+  in_lambda_pattern : Ref[Bool]
 }
 
 ///|
@@ -507,7 +510,8 @@ fn Printer::comb(
     (Const("GSPEC", _), [Abs(g, body)]) if self.sets &&
       !(self.exact && !(g is Var(n, _) && pvar_number(n) is Some(_))) &&
       comprehension(g, body) is Some((scoped, p, e)) &&
-      (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) =>
+      (!scoped.is_empty() ||
+      implicit_binders(e, p, bound, outer=self.outer(bound)).is_empty()) =>
       self.comprehension(g, scoped, p, e, bound)
     (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
           l => Some(l)
@@ -621,7 +625,14 @@ fn Printer::pattern_form(
     (Const("GABS", _), [a, ..]) =>
       match dest_pattern_abs(a) {
         Some((pat, vs, rhs)) =>
-          Some(("fn { " + self.arm(pat, vs, None, rhs, bound) + " }", 1))
+          Some(
+            (
+              "fn { " +
+              self.arm(pat, vs, None, rhs, bound, lambda=true) +
+              " }",
+              1,
+            ),
+          )
         None => None
       }
     (Const("_MATCH", _), [e, cs, ..]) =>
@@ -679,9 +690,18 @@ fn Printer::arm(
   guard_ : @kernel.Term?,
   body : @kernel.Term,
   bound : Bound,
+  lambda~ : Bool = false,
 ) -> String raise Unprintable {
   let inner = self.bind_pattern(vs, body, bound)
-  let p = self.term(pat, IMPL, inner)
+  let was = self.in_lambda_pattern.val
+  self.in_lambda_pattern.val = lambda || was
+  let p = self.term(pat, IMPL, inner) catch {
+    e => {
+      self.in_lambda_pattern.val = was
+      raise e
+    }
+  }
+  self.in_lambda_pattern.val = was
   // a variable the pattern binds occurs in it, so these marks are used
   for i in 0..<vs.length() {
     match self.untyped.search((vs[i], bound.length() + i + 1)) {
@@ -761,6 +781,17 @@ fn comprehension(
     return None
   }
   Some((xs, p, e))
+}
+
+///|
+/// The binders outside a comprehension that can make a T or F in it a
+/// variable: none inside a lambda's pattern.
+fn Printer::outer(self : Printer, bound : Bound) -> Bound {
+  if self.in_lambda_pattern.val {
+    @list.List([])
+  } else {
+    bound
+  }
 }
 
 ///|
@@ -979,7 +1010,7 @@ fn Printer::comprehension(
     inner = next
   }
   if !renamed &&
-    implicit_binders(e, p, inner, outer=bound) == xs &&
+    implicit_binders(e, p, inner, outer=self.outer(bound)) == xs &&
     !(g is Var(n, _) && self.listed.contains(n)) {
     // each binder is written with its type where it first occurs in e
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
@@ -1047,6 +1078,7 @@ fn print_term_with(
     with_fixed_interface(() => {
       {
         typed_free: [],
+        in_lambda_pattern: Ref::new(false),
         fixed,
         all_constants,
         overloads,

@@ -454,6 +454,12 @@ test "binders named T and F: comprehensions and patterns" {
     "GABS((f : ((Bool, Num)) -> (Bool) -> Bool) => ∀ T : Bool, ∀ x : Num, GEQ(f((T, x)), {T | T : Bool | true}))",
   )
   assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(g)), g))
+  // in a lambda's pattern, read with nothing in scope, an outer T does
+  // not make a comprehension's T a variable
+  for q in ["(T : Bool) => fn { {T | T : Bool | true} => T }", "(F : Bool) => fn { {F | F : Bool | true} => F }"] {
+    let c = @term_syntax.parse_term(q)
+    assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
+  }
   // a pattern variable named T is renamed: a pattern's T is truth
   let m = @parser.parse_term("match (x:bool) with T' -> T'")
   let s = @term_syntax.print_term(m)
