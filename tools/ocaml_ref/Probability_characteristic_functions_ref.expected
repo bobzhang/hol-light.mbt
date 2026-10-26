@@ -86132,16 +86132,16 @@ Probability/characteristic_functions quotations (5000):
   (m0 : Num) == 0
   (y : Real) - real_of_num(2) * (real_of_num((m0 : Num)) * pi)
   (m0 : Num)
-  forall x:real. (fn_:real->real)(x + &2 * pi) = fn_ x
+  \226\136\128 x : Real, (fn_ : (Real) -> Real)(x + real_of_num(2) * pi) == fn_(x)
   real_of_num(2) * (((k : Real) + real_of_num(1)) * (p : Real)) == real_of_num(2) * (k * p) + real_of_num(2) * p
-  forall n:num. forall z:real. (fn_:real->real)(z) = fn_(z + &2 * &n * pi)
-  (fn_:real->real) y = fn_(y - &2 * &m0 * pi)
+  \226\136\128 n : Num, \226\136\128 z : Real, (fn_ : (Real) -> Real)(z) == fn_(z + real_of_num(2) * (real_of_num(n) * pi))
+  (fn_ : (Real) -> Real)((y : Real)) == fn_(y - real_of_num(2) * (real_of_num((m0 : Num)) * pi))
   (x : Real)
   (N : Num)
-  forall x:real. (fn_:real->real)(x + &2 * pi) = fn_ x
+  \226\136\128 x : Real, (fn_ : (Real) -> Real)(x + real_of_num(2) * pi) == fn_(x)
   real_of_num(2) * (((k : Real) + real_of_num(1)) * (p : Real)) == real_of_num(2) * (k * p) + real_of_num(2) * p
-  forall n:num. forall z:real. (fn_:real->real)(z) = fn_(z + &2 * &n * pi)
-  (fn_:real->real) x = fn_ y
+  \226\136\128 n : Num, \226\136\128 z : Real, (fn_ : (Real) -> Real)(z) == fn_(z + real_of_num(2) * (real_of_num(n) * pi))
+  (fn_ : (Real) -> Real)((x : Real)) == fn_((y : Real))
   (m0 : Num)
   (y : Real) - pi < real_of_num((K : Num)) * (real_of_num(2) * pi)
   (K : Num)
@@ -86158,7 +86158,7 @@ Probability/characteristic_functions quotations (5000):
   real_of_num(2) * pi
   -(x : Real)
   real_of_num(0) < real_of_num(2) * pi
-  forall(fn_:real->real) (B:real). (forall x. fn_(x + &2 * pi) = fn_ x) /\\\n         (forall x. x IN real_interval[--pi,pi] ==> abs(fn_ x) <= B)\n         ==> forall x. abs(fn_ x) <= B
+  \226\136\128 fn_ : (Real) -> Real, \226\136\128 B : Real, (\226\136\128 x : Real, fn_(x + real_of_num(2) * pi) == fn_(x)) && (\226\136\128 x : Real, IN(x, real_interval([(-pi, pi)])) \226\134\146 abs(fn_(x)) <= B) \226\134\146 (\226\136\128 x : Real, abs(fn_(x)) <= B)
   abs(real_of_num(1) - (c : Real)) == real_of_num(1) - c
   abs((h : Real) - (s : Real)) + abs((real_of_num(1) - (c : Real)) * s)
   (h : Real) - (c : Real) * (s : Real) == h - s + (real_of_num(1) - c) * s
