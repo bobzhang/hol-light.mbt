@@ -5718,114 +5718,114 @@ Warning: inventing type variables
 Warning: inventing type variables
 0..0..solved at 2
 Examples/prog quotations (108):
-  FALSE = \\x:S. F
-  TRUE = \\x:S. T
-  NOT p = \\x:S. ~(p x)
-  p AND q = \\x:S. p x /\\ q x
-  p OR q = \\x:S. p x \\/ q x
-  ANDS P = \\x:S. forall p. P p ==> p x
-  ORS P = \\x:S. ?p. P p /\\ p x
-  p IMP q = \\x:S. p x ==> q x
-  p IMPLIES q <=> forall x:S. p x ==> q x
-  forall p q r. p IMPLIES q /\\ q IMPLIES r ==> p IMPLIES r
-  SKIP = Assign I
-  ABORT = While TRUE SKIP
-  IF e c = Ite e c SKIP
-  DO c e = c Seq (While e c)
-  ASSERT g = Ite g SKIP ABORT
-  AWHILE (i:S->bool) (v:S->S->bool) (e:S->bool) c = While e c
-  ADO (i:S->bool) (v:S->S->bool) c (e:S->bool) = DO c e
-  (forall f s. sem(Assign f) s (f s)) /\\\n   (forall c1 c2 s s' s''. sem(c1) s s' /\\ sem(c2) s' s''\n                     ==> sem(c1 Seq c2) s s'') /\\\n   (forall e c1 c2 s s'. e s /\\ sem(c1) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (forall e c1 c2 s s'. ~(e s) /\\ sem(c2) s s' ==> sem(Ite e c1 c2) s s') /\\\n   (forall e c s. ~(e s) ==> sem(While e c) s s) /\\\n   (forall e c s s' s''. e s /\\ sem(c) s s' /\\ sem(While e c) s' s''\n               ==> sem(While e c) s s'')
-  sem(Assign f) s s' <=> (s' = f s)
-  sem(c1 Seq c2) s s' <=> ?s''. sem c1 s s'' /\\ sem c2 s'' s'
-  sem(Ite e c1 c2) s s' <=> e s /\\ sem c1 s s' \\/\n                             ~(e s) /\\ sem c2 s s'
-  sem(SKIP) s s' <=> (s' = s)
-  sem(IF e c) s s' <=> e s /\\ sem c s s' \\/ ~(e s) /\\ (s = s')
-  sem(While e c) s s' <=> sem(IF e (c Seq While e c)) s s'
-  forall c s s'. sem c s s' ==> ~(c = ABORT)
-  sem(ABORT) s s' <=> F
-  sem(DO c e) s s' <=> sem(c Seq IF e (DO c e)) s s'
-  sem(ASSERT g) s s' <=> g s /\\ (s' = s)
-  deterministic r <=> forall s s1 s2. r s s1 /\\ r s s2 ==> (s1 = s2)
-  forall c s s1. sem c s s1 ==> forall s2:S. sem c s s2 ==> (s1 = s2)
-  forall c:(S)command. deterministic(sem c)
-  terminates c s <=> ?s'. sem c s s'
-  wlp c q s <=> forall s'. sem c s s' ==> q s'
-  wp c q s <=> terminates c s /\\ wlp c q s
-  forall c. (wp c FALSE = FALSE)
-  q IMPLIES r ==> wp c q IMPLIES wp c r
-  (wp c q) AND (wp c r) = wp c (q AND r)
-  (wp c p) OR (wp c q) = wp c (p OR q)
-  forall f q. wp (Assign f) q = q o f
-  forall c1 c2 q. wp (c1 Seq c2) q = wp c1 (wp c2 q)
-  forall e c1 c2 q. wp (Ite e c1 c2) q = (e AND wp c1 q) OR (NOT e AND wp c2 q)
-  forall e c. wp (IF e (c Seq While e c)) q = wp (While e c) q
-  forall q. wp SKIP q = q
-  forall q. wp ABORT q = FALSE
-  forall e c q. wp (IF e c) q = (e AND wp c q) OR (NOT e AND q)
-  forall e c. wp (c Seq IF e (DO c e)) q = wp (DO c e) q
-  forall g q. wp (ASSERT g) q = g AND q
-  correct p c q <=> p IMPLIES (wp c q)
-  forall p p' c q. p IMPLIES p' /\\ correct p' c q ==> correct p c q
-  forall p c q q'. correct p c q' /\\ q' IMPLIES q ==> correct p c q
-  forall p f q. (p IMPLIES (\\s. q(f s))) ==> correct p (Assign f) q
-  forall p q r c1 c2.\n        correct p c1 r /\\ correct r c2 q ==> correct p (c1 Seq c2) q
-  forall p e c1 c2 q.\n       correct (p AND e) c1 q /\\ correct (p AND (NOT e)) c2 q\n       ==> correct p (Ite e c1 c2) q
-  (\\x:S. invariant x /\\ x << (s:S)) IMPLIES wp (While e c) q
-  wp c (\\x:S. invariant x /\\ x << s) (s:S) :bool
-  (e:S->bool) s
-  s:S
-  forall s:S. invariant s ==> wp (While e c) q s
+  (FALSE : (S) -> Bool) == ((x : S) => false)
+  (TRUE : (S) -> Bool) == ((x : S) => true)
+  (NOT : ((S) -> Bool, S) -> Bool)((p : (S) -> Bool)) == ((x : S) => !p(x))
+  (AND : ((S) -> Bool, (S) -> Bool, S) -> Bool)((p : (S) -> Bool), (q : (S) -> Bool)) == ((x : S) => p(x) && q(x))
+  (OR : ((S) -> Bool, (S) -> Bool, S) -> Bool)((p : (S) -> Bool), (q : (S) -> Bool)) == ((x : S) => p(x) || q(x))
+  (ANDS : (((S) -> Bool) -> Bool, S) -> Bool)((P : ((S) -> Bool) -> Bool)) == ((x : S) => \226\136\128 p : (S) -> Bool, P(p) \226\134\146 p(x))
+  (ORS : (((S) -> Bool) -> Bool, S) -> Bool)((P : ((S) -> Bool) -> Bool)) == ((x : S) => \226\136\131 p : (S) -> Bool, P(p) && p(x))
+  (IMP : ((S) -> Bool, (S) -> Bool, S) -> Bool)((p : (S) -> Bool), (q : (S) -> Bool)) == ((x : S) => p(x) \226\134\146 q(x))
+  (IMPLIES : ((S) -> Bool, (S) -> Bool) -> Bool)((p : (S) -> Bool), (q : (S) -> Bool)) == (\226\136\128 x : S, p(x) \226\134\146 q(x))
+  \226\136\128 p : (_) -> Bool, \226\136\128 q : (_) -> Bool, \226\136\128 r : (_) -> Bool, IMPLIES(p, q) && IMPLIES(q, r) \226\134\146 IMPLIES(p, r)
+  (SKIP : Command[_]) == Assign(I)
+  (ABORT : Command[_]) == While(TRUE, SKIP)
+  (IF : ((_) -> Bool, Command[_]) -> Command[_])((e : (_) -> Bool), (c : Command[_])) == Ite(e, c, SKIP)
+  (DO : (Command[_], (_) -> Bool) -> Command[_])((c : Command[_]), (e : (_) -> Bool)) == Seq(c, While(e, c))
+  (ASSERT : ((_) -> Bool) -> Command[_])((g : (_) -> Bool)) == Ite(g, SKIP, ABORT)
+  (AWHILE : ((S) -> Bool, (S, S) -> Bool, (S) -> Bool, Command[S]) -> Command[S])((i : (S) -> Bool), (v : (S, S) -> Bool), (e : (S) -> Bool), (c : Command[S])) == While(e, c)
+  (ADO : ((S) -> Bool, (S, S) -> Bool, Command[S], (S) -> Bool) -> Command[S])((i : (S) -> Bool), (v : (S, S) -> Bool), (c : Command[S]), (e : (S) -> Bool)) == DO(c, e)
+  (\226\136\128 f : (_) -> _, \226\136\128 s : _, (sem : (Command[_], _, _) -> Bool)(Assign(f), s, f(s))) && (\226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], \226\136\128 s : _, \226\136\128 s' : _, \226\136\128 s'' : _, sem(c1, s, s') && sem(c2, s', s'') \226\134\146 sem(Seq(c1, c2), s, s'')) && (\226\136\128 e : (_) -> Bool, \226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], \226\136\128 s : _, \226\136\128 s' : _, e(s) && sem(c1, s, s') \226\134\146 sem(Ite(e, c1, c2), s, s')) && (\226\136\128 e : (_) -> Bool, \226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], \226\136\128 s : _, \226\136\128 s' : _, !e(s) && sem(c2, s, s') \226\134\146 sem(Ite(e, c1, c2), s, s')) && (\226\136\128 e : (_) -> Bool, \226\136\128 c : Command[_], \226\136\128 s : _, !e(s) \226\134\146 sem(While(e, c), s, s)) && (\226\136\128 e : (_) -> Bool, \226\136\128 c : Command[_], \226\136\128 s : _, \226\136\128 s' : _, \226\136\128 s'' : _, e(s) && sem(c, s, s') && sem(While(e, c), s', s'') \226\134\146 sem(While(e, c), s, s''))
+  sem(Assign((f : (_) -> _)), (s : _), (s' : _)) == (s' == f(s))
+  sem(Seq((c1 : Command[_]), (c2 : Command[_])), (s : _), (s' : _)) == (\226\136\131 s'' : _, sem(c1, s, s'') && sem(c2, s'', s'))
+  sem(Ite((e : (_) -> Bool), (c1 : Command[_]), (c2 : Command[_])), (s : _), (s' : _)) == (e(s) && sem(c1, s, s') || !e(s) && sem(c2, s, s'))
+  sem(SKIP, (s : _), (s' : _)) == (s' == s)
+  sem(IF((e : (_) -> Bool), (c : Command[_])), (s : _), (s' : _)) == (e(s) && sem(c, s, s') || !e(s) && s == s')
+  sem(While((e : (_) -> Bool), (c : Command[_])), (s : _), (s' : _)) == sem(IF(e, Seq(c, While(e, c))), s, s')
+  \226\136\128 c : Command[_], \226\136\128 s : _, \226\136\128 s' : _, sem(c, s, s') \226\134\146 !(c == ABORT)
+  sem(ABORT, (s : _), (s' : _)) == false
+  sem(DO((c : Command[_]), (e : (_) -> Bool)), (s : _), (s' : _)) == sem(Seq(c, IF(e, DO(c, e))), s, s')
+  sem(ASSERT((g : (_) -> Bool)), (s : _), (s' : _)) == (g(s) && s' == s)
+  (deterministic : ((_, _) -> Bool) -> Bool)((r : (_, _) -> Bool)) == (\226\136\128 s : _, \226\136\128 s1 : _, \226\136\128 s2 : _, r(s, s1) && r(s, s2) \226\134\146 s1 == s2)
+  \226\136\128 c : Command[S], \226\136\128 s : S, \226\136\128 s1 : S, sem(c, s, s1) \226\134\146 (\226\136\128 s2 : S, sem(c, s, s2) \226\134\146 s1 == s2)
+  \226\136\128 c : Command[S], deterministic(sem(c))
+  (terminates : (Command[_], _) -> Bool)((c : Command[_]), (s : _)) == (\226\136\131 s' : _, sem(c, s, s'))
+  (wlp : (Command[_], (_) -> Bool, _) -> Bool)((c : Command[_]), (q : (_) -> Bool), (s : _)) == (\226\136\128 s' : _, sem(c, s, s') \226\134\146 q(s'))
+  (wp : (Command[_], (_) -> Bool, _) -> Bool)((c : Command[_]), (q : (_) -> Bool), (s : _)) == (terminates(c, s) && wlp(c, q, s))
+  \226\136\128 c : Command[_], wp(c, FALSE) == FALSE
+  IMPLIES((q : (_) -> Bool), (r : (_) -> Bool)) \226\134\146 IMPLIES(wp((c : Command[_]), q), wp(c, r))
+  AND(wp((c : Command[_]), (q : (_) -> Bool)), wp(c, (r : (_) -> Bool))) == wp(c, AND(q, r))
+  OR(wp((c : Command[_]), (p : (_) -> Bool)), wp(c, (q : (_) -> Bool))) == wp(c, OR(p, q))
+  \226\136\128 f : (_) -> _, \226\136\128 q : (_) -> Bool, wp(Assign(f), q) == o(q, f)
+  \226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], \226\136\128 q : (_) -> Bool, wp(Seq(c1, c2), q) == wp(c1, wp(c2, q))
+  \226\136\128 e : (_) -> Bool, \226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], \226\136\128 q : (_) -> Bool, wp(Ite(e, c1, c2), q) == OR(AND(e, wp(c1, q)), AND(NOT(e), wp(c2, q)))
+  \226\136\128 e : (_) -> Bool, \226\136\128 c : Command[_], wp(IF(e, Seq(c, While(e, c))), (q : (_) -> Bool)) == wp(While(e, c), q)
+  \226\136\128 q : (_) -> Bool, wp(SKIP, q) == q
+  \226\136\128 q : (_) -> Bool, wp(ABORT, q) == FALSE
+  \226\136\128 e : (_) -> Bool, \226\136\128 c : Command[_], \226\136\128 q : (_) -> Bool, wp(IF(e, c), q) == OR(AND(e, wp(c, q)), AND(NOT(e), q))
+  \226\136\128 e : (_) -> Bool, \226\136\128 c : Command[_], wp(Seq(c, IF(e, DO(c, e))), (q : (_) -> Bool)) == wp(DO(c, e), q)
+  \226\136\128 g : (_) -> Bool, \226\136\128 q : (_) -> Bool, wp(ASSERT(g), q) == AND(g, q)
+  (correct : ((_) -> Bool, Command[_], (_) -> Bool) -> Bool)((p : (_) -> Bool), (c : Command[_]), (q : (_) -> Bool)) == IMPLIES(p, wp(c, q))
+  \226\136\128 p : (_) -> Bool, \226\136\128 p' : (_) -> Bool, \226\136\128 c : Command[_], \226\136\128 q : (_) -> Bool, IMPLIES(p, p') && correct(p', c, q) \226\134\146 correct(p, c, q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 c : Command[_], \226\136\128 q : (_) -> Bool, \226\136\128 q' : (_) -> Bool, correct(p, c, q') && IMPLIES(q', q) \226\134\146 correct(p, c, q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 f : (_) -> _, \226\136\128 q : (_) -> Bool, IMPLIES(p, (s : _) => q(f(s))) \226\134\146 correct(p, Assign(f), q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 q : (_) -> Bool, \226\136\128 r : (_) -> Bool, \226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], correct(p, c1, r) && correct(r, c2, q) \226\134\146 correct(p, Seq(c1, c2), q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 e : (_) -> Bool, \226\136\128 c1 : Command[_], \226\136\128 c2 : Command[_], \226\136\128 q : (_) -> Bool, correct(AND(p, e), c1, q) && correct(AND(p, NOT(e)), c2, q) \226\134\146 correct(p, Ite(e, c1, c2), q)
+  IMPLIES((x : S) => (invariant : (S) -> Bool)(x) && (op_lt_lt : (S, S) -> Bool)(x, (s : S)), wp(While((e : (S) -> Bool), (c : Command[S])), (q : (S) -> Bool)))
+  wp((c : Command[S]), (x : S) => (invariant : (S) -> Bool)(x) && (op_lt_lt : (S, S) -> Bool)(x, (s : S)), s)
+  (e : (S) -> Bool)((s : S))
+  (s : S)
+  \226\136\128 s : S, (invariant : (S) -> Bool)(s) \226\134\146 wp(While((e : (S) -> Bool), (c : Command[S])), (q : (S) -> Bool), s)
   forall (<<) p c q e invariant.\n       WF(<<) /\\\n       p IMPLIES invariant /\\\n       (NOT e) AND invariant IMPLIES q /\\\n       (forall X:S. correct\n              (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n       ==> correct p (While e c) q
-  forall p q. (p IMPLIES q) ==> correct p SKIP q
-  forall p q. F ==> correct p ABORT q
-  forall p e c q.\n        correct (p AND e) c q /\\ (p AND (NOT e)) IMPLIES q\n        ==> correct p (IF e c) q
-  (e:S->bool) AND invariant IMPLIES p
-  p AND (\\s:S. X = s)
-  X:S
-  invariant:S->bool
-  (<<) :S->S->bool
-  invariant:S->bool
+  \226\136\128 p : (_) -> Bool, \226\136\128 q : (_) -> Bool, IMPLIES(p, q) \226\134\146 correct(p, SKIP, q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 q : (_) -> Bool, false \226\134\146 correct(p, ABORT, q)
+  \226\136\128 p : (_) -> Bool, \226\136\128 e : (_) -> Bool, \226\136\128 c : Command[_], \226\136\128 q : (_) -> Bool, correct(AND(p, e), c, q) && IMPLIES(AND(p, NOT(e)), q) \226\134\146 correct(p, IF(e, c), q)
+  IMPLIES(AND((e : (S) -> Bool), (invariant : (S) -> Bool)), (p : (S) -> Bool))
+  AND((p : (S) -> Bool), (s : S) => (X : S) == s)
+  (X : S)
+  (invariant : (S) -> Bool)
+  (op_lt_lt : (S, S) -> Bool)
+  (invariant : (S) -> Bool)
   forall (<<) p q c invariant.\n        WF(<<) /\\\n        (e AND invariant) IMPLIES p /\\\n        ((NOT e) AND invariant) IMPLIES q /\\\n        (forall X:S. correct\n               (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n        ==> correct p (DO c e) q
-  forall p g q. p IMPLIES (g AND q) ==> correct p (ASSERT g) q
-  p IMPLIES (q o f) ==> correct p (Assign f) q
-  p IMPLIES q ==> correct p SKIP q
-  F ==> correct p ABORT q
-  p IMPLIES (b AND q) ==> correct p (ASSERT b) q
-  correct (p AND e) c1 q /\\ correct (p AND NOT e) c2 q\n   ==> correct p (Ite e c1 c2) q
-  correct (p AND e) c q /\\ p AND NOT e IMPLIES q\n   ==> correct p (IF e c) q
-  WF(<<) /\\\n   p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (forall X. correct\n        (invariant AND e AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (AWHILE invariant (<<) e c) q
-  (m:S->num) X
-  X:S
-  p IMPLIES invariant /\\\n   (NOT e) AND invariant IMPLIES q /\\\n   (forall X. correct\n          (invariant AND e AND (\\s:S. X = m(s)))\n          c\n          (invariant AND (\\s. m(s) < X)))\n   ==> correct p (AWHILE invariant (MEASURE m) e c) q
-  WF(<<) /\\\n   (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (forall X. correct\n          (p AND (\\s. X = s)) c (invariant AND (\\s. s << X)))\n   ==> correct p (ADO invariant (<<) c e) q
-  (m:S->num) X
-  X:S
-  (e AND invariant) IMPLIES p /\\\n   ((NOT e) AND invariant) IMPLIES q /\\\n   (forall X. correct\n          (p AND (\\s:S. X = m(s))) c (invariant AND (\\s. m(s) < X)))\n   ==> correct p (ADO invariant (MEASURE m) c e) q
-  (p IMPLIES b) ==> (p IMPLIES b AND p)
-  p IMPLIES b /\\ correct b c q ==> correct p (ASSERT b Seq c) q
-  (p IMPLIES b) ==> (p IMPLIES p AND b)
-  correct p c b /\\ b IMPLIES q ==> correct p (c Seq (ASSERT b)) q
-  b IMPLIES b AND b
-  correct p c b /\\ correct b c' q\n   ==> correct p (c Seq (ASSERT b) Seq c') q
-  p AND (\\s:S. s = f s)
-  (p o f = p) /\\ (f o f = f) /\\\n   correct (p AND (\\s:S. s = f s)) c q\n   ==> correct p ((Assign f) Seq c) q
-  (p:S->bool) IMPLIES p
-  correct p c (q o f) ==> correct p (c Seq (Assign f)) q
-  wp (ADO i v c e) q = i
-  wp (AWHILE i v e c) q = i
-  correct p (c1 Seq c2) q
-  correct p (ADO i v c e) q
-  correct p (ADO i (MEASURE m) c e) q
-  correct p (AWHILE i v e c) q
-  correct p (AWHILE i (MEASURE m) e c) q
-  correct p (IF e c) q
-  correct p (Ite e c1 c2) q
-  correct p (Assign f) q
-  correct p (ASSERT b) q
-  correct p SKIP q
-  x < n
-  correct\n  (\\(x,y,n). T)\n  (Assign (\\(x,y,n). (0,y,n)) Seq\n   Assign (\\(x,y,n). (x,1,n)) Seq\n   AWHILE (\\(x,y,n). x <= n /\\ (y = FACT x))\n          (MEASURE (\\(x,y,n). n - x))\n          (\\(x,y,n). x < n)\n          (Assign (\\(x,y,n). (x + 1,y,n)) Seq\n           Assign (\\(x,y,n). (x,y * x,n))))\n  (\\(x,y,n). y = FACT n)
+  \226\136\128 p : (_) -> Bool, \226\136\128 g : (_) -> Bool, \226\136\128 q : (_) -> Bool, IMPLIES(p, AND(g, q)) \226\134\146 correct(p, ASSERT(g), q)
+  IMPLIES((p : (_) -> Bool), o((q : (_) -> Bool), (f : (_) -> _))) \226\134\146 correct(p, Assign(f), q)
+  IMPLIES((p : (_) -> Bool), (q : (_) -> Bool)) \226\134\146 correct(p, SKIP, q)
+  false \226\134\146 correct((p : (_) -> Bool), ABORT, (q : (_) -> Bool))
+  IMPLIES((p : (_) -> Bool), AND((b : (_) -> Bool), (q : (_) -> Bool))) \226\134\146 correct(p, ASSERT(b), q)
+  correct(AND((p : (_) -> Bool), (e : (_) -> Bool)), (c1 : Command[_]), (q : (_) -> Bool)) && correct(AND(p, NOT(e)), (c2 : Command[_]), q) \226\134\146 correct(p, Ite(e, c1, c2), q)
+  correct(AND((p : (_) -> Bool), (e : (_) -> Bool)), (c : Command[_]), (q : (_) -> Bool)) && IMPLIES(AND(p, NOT(e)), q) \226\134\146 correct(p, IF(e, c), q)
+  WF((op_lt_lt : (_, _) -> Bool)) && IMPLIES((p : (_) -> Bool), (invariant : (_) -> Bool)) && IMPLIES(AND(NOT((e : (_) -> Bool)), invariant), (q : (_) -> Bool)) && (\226\136\128 X : _, correct(AND(invariant, AND(e, (s : _) => X == s)), (c : Command[_]), AND(invariant, (s : _) => op_lt_lt(s, X)))) \226\134\146 correct(p, AWHILE(invariant, op_lt_lt, e, c), q)
+  (m : (S) -> Num)((X : S))
+  (X : S)
+  IMPLIES((p : (S) -> Bool), (invariant : (S) -> Bool)) && IMPLIES(AND(NOT((e : (S) -> Bool)), invariant), (q : (S) -> Bool)) && (\226\136\128 X : Num, correct(AND(invariant, AND(e, (s : S) => X == (m : (S) -> Num)(s))), (c : Command[S]), AND(invariant, (s : S) => m(s) < X))) \226\134\146 correct(p, AWHILE(invariant, MEASURE(m), e, c), q)
+  WF((op_lt_lt : (_, _) -> Bool)) && IMPLIES(AND((e : (_) -> Bool), (invariant : (_) -> Bool)), (p : (_) -> Bool)) && IMPLIES(AND(NOT(e), invariant), (q : (_) -> Bool)) && (\226\136\128 X : _, correct(AND(p, (s : _) => X == s), (c : Command[_]), AND(invariant, (s : _) => op_lt_lt(s, X)))) \226\134\146 correct(p, ADO(invariant, op_lt_lt, c, e), q)
+  (m : (S) -> Num)((X : S))
+  (X : S)
+  IMPLIES(AND((e : (S) -> Bool), (invariant : (S) -> Bool)), (p : (S) -> Bool)) && IMPLIES(AND(NOT(e), invariant), (q : (S) -> Bool)) && (\226\136\128 X : Num, correct(AND(p, (s : S) => X == (m : (S) -> Num)(s)), (c : Command[S]), AND(invariant, (s : S) => m(s) < X))) \226\134\146 correct(p, ADO(invariant, MEASURE(m), c, e), q)
+  IMPLIES((p : (_) -> Bool), (b : (_) -> Bool)) \226\134\146 IMPLIES(p, AND(b, p))
+  IMPLIES((p : (_) -> Bool), (b : (_) -> Bool)) && correct(b, (c : Command[_]), (q : (_) -> Bool)) \226\134\146 correct(p, Seq(ASSERT(b), c), q)
+  IMPLIES((p : (_) -> Bool), (b : (_) -> Bool)) \226\134\146 IMPLIES(p, AND(p, b))
+  correct((p : (_) -> Bool), (c : Command[_]), (b : (_) -> Bool)) && IMPLIES(b, (q : (_) -> Bool)) \226\134\146 correct(p, Seq(c, ASSERT(b)), q)
+  IMPLIES((b : (_) -> Bool), AND(b, b))
+  correct((p : (_) -> Bool), (c : Command[_]), (b : (_) -> Bool)) && correct(b, (c' : Command[_]), (q : (_) -> Bool)) \226\134\146 correct(p, Seq(c, Seq(ASSERT(b), c')), q)
+  AND((p : (S) -> Bool), (s : S) => s == (f : (S) -> S)(s))
+  o((p : (S) -> Bool), (f : (S) -> S)) == p && o(f, f) == f && correct(AND(p, (s : S) => s == f(s)), (c : Command[S]), (q : (S) -> Bool)) \226\134\146 correct(p, Seq(Assign(f), c), q)
+  IMPLIES((p : (S) -> Bool), p)
+  correct((p : (_) -> Bool), (c : Command[_]), o((q : (_) -> Bool), (f : (_) -> _))) \226\134\146 correct(p, Seq(c, Assign(f)), q)
+  wp(ADO((i : (_) -> Bool), (v : (_, _) -> Bool), (c : Command[_]), (e : (_) -> Bool)), (q : (_) -> Bool)) == i
+  wp(AWHILE((i : (_) -> Bool), (v : (_, _) -> Bool), (e : (_) -> Bool), (c : Command[_])), (q : (_) -> Bool)) == i
+  correct((p : (_) -> Bool), Seq((c1 : Command[_]), (c2 : Command[_])), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), ADO((i : (_) -> Bool), (v : (_, _) -> Bool), (c : Command[_]), (e : (_) -> Bool)), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), ADO((i : (_) -> Bool), MEASURE((m : (_) -> Num)), (c : Command[_]), (e : (_) -> Bool)), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), AWHILE((i : (_) -> Bool), (v : (_, _) -> Bool), (e : (_) -> Bool), (c : Command[_])), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), AWHILE((i : (_) -> Bool), MEASURE((m : (_) -> Num)), (e : (_) -> Bool), (c : Command[_])), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), IF((e : (_) -> Bool), (c : Command[_])), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), Ite((e : (_) -> Bool), (c1 : Command[_]), (c2 : Command[_])), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), Assign((f : (_) -> _)), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), ASSERT((b : (_) -> Bool)), (q : (_) -> Bool))
+  correct((p : (_) -> Bool), SKIP, (q : (_) -> Bool))
+  (x : Num) < (n : Num)
+  correct(fn { (x, y, n) => true }, Seq(Assign(fn { (x, y, n) => (0, y, n) }), Seq(Assign(fn { (x, y, n) => (x, 1, n) }), AWHILE(fn { (x, y, n) => x <= n && y == FACT(x) }, MEASURE(fn { (x, y, n) => n - x }), fn { (x, y, n) => x < n }, Seq(Assign(fn { (x, y, n) => (x + 1, y, n) }), Assign(fn { (x, y, n) => (x, y * x, n) }))))), fn { (x, y, n) => y == FACT(n) })
 FALSE =  |- ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) #FALSE:fun('S,bool)) (\x:'S. #F:bool))
 TRUE =  |- ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) #TRUE:fun('S,bool)) (\x:'S. #T:bool))
 NOT =  |- (#forall:fun(fun(fun('S,bool),bool),bool) (\p:fun('S,bool). ((#=:fun(fun('S,bool),fun(fun('S,bool),bool)) (#NOT:fun(fun('S,bool),fun('S,bool)) p:fun('S,bool))) (\x:'S. (#~:fun(bool,bool) (p:fun('S,bool) x:'S))))))
