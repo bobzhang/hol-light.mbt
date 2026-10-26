@@ -465,11 +465,22 @@ async fn record(
   sources : Array[(String, String)],
   given? : Map[Int, String] = Map::new(),
   respell? : Bool = false,
+  via? : (String, Array[String])? = None,
 ) -> Recording {
   let pkg_alias = pkg.split("/").last().unwrap().to_owned()
   let pkg_file = pkg + "/moon.pkg"
   let pkg_src = read(pkg_file)
-  let test_file = pkg + "/" + gen_test
+  // the package whose tests run: the package itself, loading it; or, for
+  // quotations in helpers others call, the given test package, running its
+  // test files (all of them, for none given), with the records printed by a
+  // test run after them
+  let tpkg = match via {
+    Some((t, _)) => t
+    None => pkg
+  }
+  let tpkg_file = tpkg + "/moon.pkg"
+  let tpkg_src = if tpkg == pkg { pkg_src } else { read(tpkg_file) }
+  let test_file = tpkg + "/" + gen_test
   let t = theory.to_json().stringify()
   let u = unprintable.to_json().stringify()
   // with spellings given (written by hand), each is checked where its site
@@ -499,6 +510,9 @@ async fn record(
       _ => ()
     }
     @fs.write_file(pkg_file, pkg_src) catch {
+      _ => ()
+    }
+    @fs.write_file(tpkg_file, tpkg_src) catch {
       _ => ()
     }
     for p in sources {
@@ -552,7 +566,11 @@ async fn record(
       has_load = true
     }
   }
-  let load_call = if has_load { "  @" + pkg_alias + ".load()\n" } else { "" }
+  let load_call = if has_load && via is None {
+    "  @" + pkg_alias + ".load()\n"
+  } else {
+    ""
+  }
   @fs.write_file(
     test_file,
     (
@@ -568,6 +586,9 @@ async fn record(
     ),
   )
   @fs.write_file(pkg_file, with_hook_imports(pkg_src, hook_path))
+  if tpkg != pkg {
+    @fs.write_file(tpkg_file, with_hook_imports(tpkg_src, hook_path))
+  }
   let mut site = 0
   for p in sources {
     let (text, n) = rewrite_calls(p.1.to_array(), (k, body) => Some(
@@ -578,8 +599,26 @@ async fn record(
     }
     site += n
   }
-  let (dir, exe) = build_tests(pkg)
-  let (code, out, results) = run_wasm(pkg, dir, exe, [(gen_test, 1)])
+  let (dir, exe) = build_tests(tpkg)
+  let ranges = []
+  if via is Some((_, files)) {
+    let info = @json.parse(read(dir + "/__blackbox_test_info.json"))
+    if info is { "tests": Object(tests), .. } {
+      for f, ts in tests {
+        let n = if ts is Array(a) { a.length() } else { 0 }
+        if n > 0 &&
+          f != gen_test &&
+          (files.is_empty() || files.any(o => o == f || o.has_suffix("/" + f))) {
+          ranges.push((f, n))
+        }
+      }
+    }
+    if ranges.is_empty() {
+      fail("no test files to run in " + tpkg)
+    }
+  }
+  ranges.push((gen_test, 1))
+  let (code, out, results) = run_wasm(tpkg, dir, exe, ranges)
   let runs : Map[Int, Array[(Int, String)]] = Map::new()
   let mut trace = None
   for line in out.split("\n") {
@@ -595,12 +634,16 @@ async fn record(
       trace = Some(a.map(j => if j is String(s) { s } else { "" }))
     }
   }
-  let passed = results is [{ "message": String(""), .. }]
+  let expected = ranges.fold(init=0, (acc, r) => acc + r.1)
+  let passed = results.length() == expected &&
+    results.iter().all(r => r is { "message": String(""), .. })
   guard code == 0 && passed && trace is Some(trace) else {
     fail("loading the package did not finish (exit \{code}):\n" + tail_of(out))
   }
   // a package with quotations that recorded no trace did not load
-  if trace.is_empty() && sources.iter().any(p => !calls(p.1.to_array()).is_empty()) {
+  if via is None &&
+    trace.is_empty() &&
+    sources.iter().any(p => !calls(p.1.to_array()).is_empty()) {
     fail("the theory \{theory} recorded no quotation: the package did not load (no load() found?)")
   }
   { trace, runs }
@@ -1591,6 +1634,19 @@ async fn main {
     return retrace(args[2].trim_end(chars="/").to_owned())
   }
   let pkg = args[1].trim_end(chars="/").to_owned()
+  // --via <test package>[:<file>,...]: record the quotations while that
+  // package's tests run (for helpers that other packages call)
+  let via = if args.length() >= 4 && args[2] == "--via" {
+    let spec = args[3].split(":").map(s => s.to_owned()).to_array()
+    let files = if spec.length() > 1 {
+      spec[1].split(",").map(s => s.to_owned()).to_array()
+    } else {
+      []
+    }
+    Some((spec[0].trim_end(chars="/").to_owned(), files))
+  } else {
+    None
+  }
   let (_, status) = sh("git", ["status", "--porcelain", "--untracked-files=all"])
   if status.trim() != "" {
     fail("the working tree is not clean; commit or stash first:\n" + status)
@@ -1600,7 +1656,7 @@ async fn main {
   for f in mbt_files(pkg).filter(f => !f.has_suffix("_test.mbt")) {
     sources.push((f, read(f)))
   }
-  let rec = record(pkg, theory, sources)
+  let rec = record(pkg, theory, sources, via~)
   // a site is migrated when it ran, and read the same printable way each time
   let new_spelling : Map[Int, String] = Map::new()
   let left = []
