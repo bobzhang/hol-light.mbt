@@ -788,9 +788,12 @@ fn implicit_binders(
     .to_array()
     .filter(v => {
       let n = printed(v)
-      // a variable named T or F that a binder outside binds is read as
-      // that variable (elaboration aliases it); otherwise, as the constant
-      let truth = (n == "T" || n == "F") && outer.iter().any(b => b.0 == v)
+      // a variable named T or F that a binder outside binds, under that
+      // name, is read as that variable (elaboration aliases it); otherwise
+      // (a renamed pattern variable, T'), as the constant
+      let truth = (n == "T" || n == "F") &&
+        outer.iter().find_first(b => b.0 == v) is Some((_, o)) &&
+        o == n
       (truth || !is_constant_name(n)) &&
       !n.to_array().iter().all(c => c is ('0'..='9'))
     })

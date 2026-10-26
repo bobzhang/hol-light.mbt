@@ -448,6 +448,12 @@ test "binders named T and F: comprehensions and patterns" {
     let c = @term_syntax.parse_term(q)
     assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(c)), c))
   }
+  // under a pattern variable named T (printed T'), a comprehension's T is
+  // listed
+  let g = @term_syntax.parse_term(
+    "GABS((f : ((Bool, Num)) -> (Bool) -> Bool) => ∀ T : Bool, ∀ x : Num, GEQ(f((T, x)), {T | T : Bool | true}))",
+  )
+  assert_true(@term_syntax.same_term(@term_syntax.parse_term(@term_syntax.print_term(g)), g))
   // a pattern variable named T is renamed: a pattern's T is truth
   let m = @parser.parse_term("match (x:bool) with T' -> T'")
   let s = @term_syntax.print_term(m)
