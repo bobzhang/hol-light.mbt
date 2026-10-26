@@ -2731,7 +2731,7 @@ fn step_113() -> Unit raise {
 ///|
 /// Jordan/misc_defs_and_lemmas.ml:1735
 fn step_114() -> Unit raise {
-  @preterm.overload_interface("+", @parser.parse_term("euclid'euclid_plus:(num->real)->(num->real)->(num->real)"))
+  @preterm.overload_interface("+", @parser.parse_term("euclid_euclid_plus:(num->real)->(num->real)->(num->real)"))
 }
 
 ///|
@@ -2758,7 +2758,7 @@ pub fn euclid_scale() -> @kernel.Thm {
 ///|
 /// Jordan/misc_defs_and_lemmas.ml:1743
 fn step_117() -> Unit raise {
-  @preterm.overload_interface("*#", @term_syntax.parse_term("op_euclid_prime_euclid_us_scale"))
+  @preterm.overload_interface("*#", @term_syntax.parse_term("euclid_euclid_scale"))
 }
 
 ///|
@@ -2785,13 +2785,13 @@ pub fn euclid_neg() -> @kernel.Thm {
 ///|
 /// Jordan/misc_defs_and_lemmas.ml:1751
 fn step_120() -> Unit raise {
-  @preterm.overload_interface("--", @term_syntax.parse_term("op_euclid_prime_euclid_us_neg"))
+  @preterm.overload_interface("--", @term_syntax.parse_term("euclid_euclid_neg"))
 }
 
 ///|
 /// Jordan/misc_defs_and_lemmas.ml:1753
 fn step_121() -> Unit raise {
-  @preterm.overload_interface("-", @parser.parse_term("euclid'euclid_minus:(num->real)->(num->real)->(num->real)"))
+  @preterm.overload_interface("-", @parser.parse_term("euclid_euclid_minus:(num->real)->(num->real)->(num->real)"))
 }
 
 ///|
@@ -2827,7 +2827,7 @@ pub fn euclid() -> @kernel.Thm {
 ///|
 /// euclidean
 fn step_124() -> Unit raise {
-  euclidean_c.set(euclid_def(@term_syntax.parse_term("(euclidean : ((Num) -> Real) -> Bool)((v : (Num) -> Real)) == (∃ n : Num, op_euclid_prime_euclid(n, v))")))
+  euclidean_c.set(euclid_def(@term_syntax.parse_term("(euclidean : ((Num) -> Real) -> Bool)((v : (Num) -> Real)) == (∃ n : Num, euclid_euclid(n, v))")))
 }
 
 ///|
@@ -2887,7 +2887,7 @@ pub fn coord() -> @kernel.Thm {
 ///|
 /// dot
 fn step_128() -> Unit raise {
-  dot_c.set(euclid_def(@term_syntax.parse_term("(dot : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == LET((n : Num) => LET_END(sum((0, n), (i : Num) => f(i) * g(i))), min_num((m : Num) => op_euclid_prime_euclid(m, f) && op_euclid_prime_euclid(m, g)))")))
+  dot_c.set(euclid_def(@term_syntax.parse_term("(dot : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == LET((n : Num) => LET_END(sum((0, n), (i : Num) => f(i) * g(i))), min_num((m : Num) => euclid_euclid(m, f) && euclid_euclid(m, g)))")))
 }
 
 ///|
@@ -2917,7 +2917,7 @@ pub fn norm() -> @kernel.Thm {
 ///|
 /// d_euclid
 fn step_130() -> Unit raise {
-  d_euclid_c.set(euclid_def(@term_syntax.parse_term("(d_euclid : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == op_euclid_prime_norm(f - g)")))
+  d_euclid_c.set(euclid_def(@term_syntax.parse_term("(d_euclid : ((Num) -> Real, (Num) -> Real) -> Real)((f : (Num) -> Real), (g : (Num) -> Real)) == euclid_norm(f - g)")))
 }
 
 ///|
@@ -2968,7 +2968,7 @@ pub fn sum_vector() -> @kernel.Thm {
 ///|
 /// mk_segment
 fn step_133() -> Unit raise {
-  mk_segment_c.set(euclid_def(@term_syntax.parse_term("(mk_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | ∃ a : Real, real_of_num(0) <= a && a <= real_of_num(1) && u == op_euclid_prime_euclid_us_scale(a, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - a, y)}")))
+  mk_segment_c.set(euclid_def(@term_syntax.parse_term("(mk_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | ∃ a : Real, real_of_num(0) <= a && a <= real_of_num(1) && u == euclid_euclid_scale(a, x) + euclid_euclid_scale(real_of_num(1) - a, y)}")))
 }
 
 ///|
@@ -2983,7 +2983,7 @@ pub fn mk_segment() -> @kernel.Thm {
 ///|
 /// mk_open_segment
 fn step_134() -> Unit raise {
-  mk_open_segment_c.set(euclid_def(@term_syntax.parse_term("(mk_open_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | ∃ a : Real, real_of_num(0) < a && a < real_of_num(1) && u == op_euclid_prime_euclid_us_scale(a, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - a, y)}")))
+  mk_open_segment_c.set(euclid_def(@term_syntax.parse_term("(mk_open_segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(u : (Num) -> Real) | ∃ a : Real, real_of_num(0) < a && a < real_of_num(1) && u == euclid_euclid_scale(a, x) + euclid_euclid_scale(real_of_num(1) - a, y)}")))
 }
 
 ///|
@@ -2998,7 +2998,7 @@ pub fn mk_open_segment() -> @kernel.Thm {
 ///|
 /// convex
 fn step_135() -> Unit raise {
-  convex_c.set(euclid_def(@term_syntax.parse_term("(convex : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, S(x) && S(y) → SUBSET(op_euclid_prime_mk_us_segment(x, y), S))")))
+  convex_c.set(euclid_def(@term_syntax.parse_term("(convex : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, S(x) && S(y) → SUBSET(euclid_mk_segment(x, y), S))")))
 }
 
 ///|
@@ -3013,7 +3013,7 @@ pub fn convex() -> @kernel.Thm {
 ///|
 /// convex_hull
 fn step_136() -> Unit raise {
-  convex_hull_c.set(euclid_def(@term_syntax.parse_term("(convex_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ f : (Num, Num) -> Real, ∃ alpha : (Num) -> Real, ∃ m : Num, (∀ n : Num, n < m → S(f(n))) && sum((0, m), alpha) == real_of_num(1) && (∀ n : Num, n < m → real_of_num(0) <= alpha(n)) && u == sum_vector((0, m), (n : Num) => op_euclid_prime_euclid_us_scale(alpha(n), f(n)))}")))
+  convex_hull_c.set(euclid_def(@term_syntax.parse_term("(convex_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ f : (Num, Num) -> Real, ∃ alpha : (Num) -> Real, ∃ m : Num, (∀ n : Num, n < m → S(f(n))) && sum((0, m), alpha) == real_of_num(1) && (∀ n : Num, n < m → real_of_num(0) <= alpha(n)) && u == sum_vector((0, m), (n : Num) => euclid_euclid_scale(alpha(n), f(n)))}")))
 }
 
 ///|
@@ -3028,7 +3028,7 @@ pub fn convex_hull() -> @kernel.Thm {
 ///|
 /// affine_hull
 fn step_137() -> Unit raise {
-  affine_hull_c.set(euclid_def(@term_syntax.parse_term("(affine_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ f : (Num, Num) -> Real, ∃ alpha : (Num) -> Real, ∃ m : Num, (∀ n : Num, n < m → S(f(n))) && sum((0, m), alpha) == real_of_num(1) && u == sum_vector((0, m), (n : Num) => op_euclid_prime_euclid_us_scale(alpha(n), f(n)))}")))
+  affine_hull_c.set(euclid_def(@term_syntax.parse_term("(affine_hull : (((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ f : (Num, Num) -> Real, ∃ alpha : (Num) -> Real, ∃ m : Num, (∀ n : Num, n < m → S(f(n))) && sum((0, m), alpha) == real_of_num(1) && u == sum_vector((0, m), (n : Num) => euclid_euclid_scale(alpha(n), f(n)))}")))
 }
 
 ///|
@@ -3043,7 +3043,7 @@ pub fn affine_hull() -> @kernel.Thm {
 ///|
 /// mk_line
 fn step_138() -> Unit raise {
-  mk_line_c.set(euclid_def(@term_syntax.parse_term("(mk_line : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(z : (Num) -> Real) | ∃ t : Real, z == op_euclid_prime_euclid_us_scale(t, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, y)}")))
+  mk_line_c.set(euclid_def(@term_syntax.parse_term("(mk_line : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real)) == {(z : (Num) -> Real) | ∃ t : Real, z == euclid_euclid_scale(t, x) + euclid_euclid_scale(real_of_num(1) - t, y)}")))
 }
 
 ///|
@@ -3058,7 +3058,7 @@ pub fn mk_line() -> @kernel.Thm {
 ///|
 /// affine
 fn step_139() -> Unit raise {
-  affine_c.set(euclid_def(@term_syntax.parse_term("(affine : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, S(x) && S(y) → SUBSET(op_euclid_prime_mk_us_line(x, y), S))")))
+  affine_c.set(euclid_def(@term_syntax.parse_term("(affine : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, S(x) && S(y) → SUBSET(euclid_mk_line(x, y), S))")))
 }
 
 ///|
@@ -3088,7 +3088,7 @@ pub fn affine_dim() -> @kernel.Thm {
 ///|
 /// collinear
 fn step_141() -> Unit raise {
-  collinear_c.set(euclid_def(@term_syntax.parse_term("(collinear : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∃ n : Num, op_euclid_prime_affine_us_dim(n, S) && n < 2)")))
+  collinear_c.set(euclid_def(@term_syntax.parse_term("(collinear : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∃ n : Num, euclid_affine_dim(n, S) && n < 2)")))
 }
 
 ///|
@@ -3103,7 +3103,7 @@ pub fn collinear() -> @kernel.Thm {
 ///|
 /// coplanar
 fn step_142() -> Unit raise {
-  coplanar_c.set(euclid_def(@term_syntax.parse_term("(coplanar : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∃ n : Num, op_euclid_prime_affine_us_dim(n, S) && n < 3)")))
+  coplanar_c.set(euclid_def(@term_syntax.parse_term("(coplanar : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∃ n : Num, euclid_affine_dim(n, S) && n < 3)")))
 }
 
 ///|
@@ -3118,7 +3118,7 @@ pub fn coplanar() -> @kernel.Thm {
 ///|
 /// line
 fn step_143() -> Unit raise {
-  line_c.set(euclid_def(@term_syntax.parse_term("(line : (((Num) -> Real) -> Bool) -> Bool)((L : ((Num) -> Real) -> Bool)) == (op_euclid_prime_affine(L) && op_euclid_prime_affine_us_dim(1, L))")))
+  line_c.set(euclid_def(@term_syntax.parse_term("(line : (((Num) -> Real) -> Bool) -> Bool)((L : ((Num) -> Real) -> Bool)) == (euclid_affine(L) && euclid_affine_dim(1, L))")))
 }
 
 ///|
@@ -3133,7 +3133,7 @@ pub fn line() -> @kernel.Thm {
 ///|
 /// plane
 fn step_144() -> Unit raise {
-  plane_c.set(euclid_def(@term_syntax.parse_term("(plane : (((Num) -> Real) -> Bool) -> Bool)((P : ((Num) -> Real) -> Bool)) == (op_euclid_prime_affine(P) && op_euclid_prime_affine_us_dim(2, P))")))
+  plane_c.set(euclid_def(@term_syntax.parse_term("(plane : (((Num) -> Real) -> Bool) -> Bool)((P : ((Num) -> Real) -> Bool)) == (euclid_affine(P) && euclid_affine_dim(2, P))")))
 }
 
 ///|
@@ -3148,7 +3148,7 @@ pub fn plane() -> @kernel.Thm {
 ///|
 /// space
 fn step_145() -> Unit raise {
-  space_c.set(euclid_def(@term_syntax.parse_term("(space : (((Num) -> Real) -> Bool) -> Bool)((R : ((Num) -> Real) -> Bool)) == (op_euclid_prime_affine(R) && op_euclid_prime_affine_us_dim(3, R))")))
+  space_c.set(euclid_def(@term_syntax.parse_term("(space : (((Num) -> Real) -> Bool) -> Bool)((R : ((Num) -> Real) -> Bool)) == (euclid_affine(R) && euclid_affine_dim(3, R))")))
 }
 
 ///|
@@ -3163,7 +3163,7 @@ pub fn space() -> @kernel.Thm {
 ///|
 /// mk_open_half_set
 fn step_146() -> Unit raise {
-  mk_open_half_set_c.set(euclid_def(@term_syntax.parse_term("(mk_open_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ t : Real, ∃ v : (Num) -> Real, ∃ c : (Num) -> Real, L(v) && S(c) && real_of_num(0) < t && u == op_euclid_prime_euclid_us_scale(t, c - v) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, v)}")))
+  mk_open_half_set_c.set(euclid_def(@term_syntax.parse_term("(mk_open_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ t : Real, ∃ v : (Num) -> Real, ∃ c : (Num) -> Real, L(v) && S(c) && real_of_num(0) < t && u == euclid_euclid_scale(t, c - v) + euclid_euclid_scale(real_of_num(1) - t, v)}")))
 }
 
 ///|
@@ -3178,7 +3178,7 @@ pub fn mk_open_half_set() -> @kernel.Thm {
 ///|
 /// mk_half_set
 fn step_147() -> Unit raise {
-  mk_half_set_c.set(euclid_def(@term_syntax.parse_term("(mk_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ t : Real, ∃ v : (Num) -> Real, ∃ c : (Num) -> Real, L(v) && S(c) && real_of_num(0) <= t && u == op_euclid_prime_euclid_us_scale(t, c - v) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, v)}")))
+  mk_half_set_c.set(euclid_def(@term_syntax.parse_term("(mk_half_set : (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((L : ((Num) -> Real) -> Bool), (S : ((Num) -> Real) -> Bool)) == {(u : (Num) -> Real) | ∃ t : Real, ∃ v : (Num) -> Real, ∃ c : (Num) -> Real, L(v) && S(c) && real_of_num(0) <= t && u == euclid_euclid_scale(t, c - v) + euclid_euclid_scale(real_of_num(1) - t, v)}")))
 }
 
 ///|
@@ -3193,7 +3193,7 @@ pub fn mk_half_set() -> @kernel.Thm {
 ///|
 /// mk_angle
 fn step_148() -> Unit raise {
-  mk_angle_c.set(euclid_def(@term_syntax.parse_term("(mk_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == UNION(op_euclid_prime_mk_us_half_us_set({x}, {y}), op_euclid_prime_mk_us_half_us_set({x}, {z}))")))
+  mk_angle_c.set(euclid_def(@term_syntax.parse_term("(mk_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == UNION(euclid_mk_half_set({x}, {y}), euclid_mk_half_set({x}, {z}))")))
 }
 
 ///|
@@ -3208,7 +3208,7 @@ pub fn mk_angle() -> @kernel.Thm {
 ///|
 /// mk_signed_angle
 fn step_149() -> Unit raise {
-  mk_signed_angle_c.set(euclid_def(@term_syntax.parse_term("(mk_signed_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool))((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == (op_euclid_prime_mk_us_half_us_set({x}, {y}), op_euclid_prime_mk_us_half_us_set({x}, {z}))")))
+  mk_signed_angle_c.set(euclid_def(@term_syntax.parse_term("(mk_signed_angle : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> (((Num) -> Real) -> Bool, ((Num) -> Real) -> Bool))((x : (Num) -> Real), (y : (Num) -> Real), (z : (Num) -> Real)) == (euclid_mk_half_set({x}, {y}), euclid_mk_half_set({x}, {z}))")))
 }
 
 ///|
@@ -3223,7 +3223,7 @@ pub fn mk_signed_angle() -> @kernel.Thm {
 ///|
 /// mk_convex_cone
 fn step_150() -> Unit raise {
-  mk_convex_cone_c.set(euclid_def(@term_syntax.parse_term("(mk_convex_cone : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) == op_euclid_prime_mk_us_half_us_set({v}, op_euclid_prime_convex_us_hull(S))")))
+  mk_convex_cone_c.set(euclid_def(@term_syntax.parse_term("(mk_convex_cone : ((Num) -> Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((v : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) == euclid_mk_half_set({v}, euclid_convex_hull(S))")))
 }
 
 ///|
@@ -3238,7 +3238,7 @@ pub fn mk_convex_cone() -> @kernel.Thm {
 ///|
 /// packing
 fn step_151() -> Unit raise {
-  packing_c.set(euclid_def(@term_syntax.parse_term("(packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, S(x) && S(y) && op_euclid_prime_d_us_euclid(x, y) < real_of_num(2) → x == y)")))
+  packing_c.set(euclid_def(@term_syntax.parse_term("(packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, S(x) && S(y) && euclid_d_euclid(x, y) < real_of_num(2) → x == y)")))
 }
 
 ///|
@@ -3253,7 +3253,7 @@ pub fn packing() -> @kernel.Thm {
 ///|
 /// saturated_packing
 fn step_152() -> Unit raise {
-  saturated_packing_c.set(euclid_def(@term_syntax.parse_term("(saturated_packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (op_euclid_prime_packing(S) && (∀ z : (Num) -> Real, op_euclid_prime_affine_us_hull(S, z) → (∃ x : (Num) -> Real, S(x) && op_euclid_prime_d_us_euclid(x, z) < real_of_num(2))))")))
+  saturated_packing_c.set(euclid_def(@term_syntax.parse_term("(saturated_packing : (((Num) -> Real) -> Bool) -> Bool)((S : ((Num) -> Real) -> Bool)) == (euclid_packing(S) && (∀ z : (Num) -> Real, euclid_affine_hull(S, z) → (∃ x : (Num) -> Real, S(x) && euclid_d_euclid(x, z) < real_of_num(2))))")))
 }
 
 ///|
@@ -3298,7 +3298,7 @@ pub fn triple_product() -> @kernel.Thm {
 ///|
 /// mk_triangle
 fn step_155() -> Unit raise {
-  mk_triangle_c.set(euclid_def(@term_syntax.parse_term("(mk_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(op_euclid_prime_mk_us_segment(v1, v2), UNION(op_euclid_prime_mk_us_segment(v2, v3), op_euclid_prime_mk_us_segment(v3, v1)))")))
+  mk_triangle_c.set(euclid_def(@term_syntax.parse_term("(mk_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(euclid_mk_segment(v1, v2), UNION(euclid_mk_segment(v2, v3), euclid_mk_segment(v3, v1)))")))
 }
 
 ///|
@@ -3313,7 +3313,7 @@ pub fn mk_triangle() -> @kernel.Thm {
 ///|
 /// mk_interior_triangle
 fn step_156() -> Unit raise {
-  mk_interior_triangle_c.set(euclid_def(@term_syntax.parse_term("(mk_interior_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == INTER(op_euclid_prime_mk_us_open_us_half_us_set(op_euclid_prime_mk_us_line(v1, v2), {v3}), INTER(op_euclid_prime_mk_us_open_us_half_us_set(op_euclid_prime_mk_us_line(v2, v3), {v1}), op_euclid_prime_mk_us_open_us_half_us_set(op_euclid_prime_mk_us_line(v3, v1), {v2})))")))
+  mk_interior_triangle_c.set(euclid_def(@term_syntax.parse_term("(mk_interior_triangle : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == INTER(euclid_mk_open_half_set(euclid_mk_line(v1, v2), {v3}), INTER(euclid_mk_open_half_set(euclid_mk_line(v2, v3), {v1}), euclid_mk_open_half_set(euclid_mk_line(v3, v1), {v2})))")))
 }
 
 ///|
@@ -3328,7 +3328,7 @@ pub fn mk_interior_triangle() -> @kernel.Thm {
 ///|
 /// mk_triangular_region
 fn step_157() -> Unit raise {
-  mk_triangular_region_c.set(euclid_def(@term_syntax.parse_term("(mk_triangular_region : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(op_euclid_prime_mk_us_triangle(v1, v2, v3), op_euclid_prime_mk_us_interior_us_triangle(v1, v2, v3))")))
+  mk_triangular_region_c.set(euclid_def(@term_syntax.parse_term("(mk_triangular_region : ((Num) -> Real, (Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)((v1 : (Num) -> Real), (v2 : (Num) -> Real), (v3 : (Num) -> Real)) == UNION(euclid_mk_triangle(v1, v2, v3), euclid_mk_interior_triangle(v1, v2, v3))")))
 }
 
 ///|
@@ -3343,7 +3343,7 @@ pub fn mk_triangular_region() -> @kernel.Thm {
 ///|
 /// half_set_convex
 fn step_158() -> Unit raise {
-  half_set_convex_c.set(@term_syntax.parse_term("∀ L : ((Num) -> Real) -> Bool, ∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_convex(op_euclid_prime_mk_us_half_us_set(L, S))"))
+  half_set_convex_c.set(@term_syntax.parse_term("∀ L : ((Num) -> Real) -> Bool, ∀ S : ((Num) -> Real) -> Bool, euclid_convex(euclid_mk_half_set(L, S))"))
 }
 
 ///|
@@ -3358,7 +3358,7 @@ pub fn half_set_convex() -> @kernel.Term {
 ///|
 /// open_half_set_convex
 fn step_159() -> Unit raise {
-  open_half_set_convex_c.set(@term_syntax.parse_term("∀ L : ((Num) -> Real) -> Bool, ∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_convex(op_euclid_prime_mk_us_open_us_half_us_set(L, S))"))
+  open_half_set_convex_c.set(@term_syntax.parse_term("∀ L : ((Num) -> Real) -> Bool, ∀ S : ((Num) -> Real) -> Bool, euclid_convex(euclid_mk_open_half_set(L, S))"))
 }
 
 ///|
@@ -3373,7 +3373,7 @@ pub fn open_half_set_convex() -> @kernel.Term {
 ///|
 /// affine_dim0
 fn step_160() -> Unit raise {
-  affine_dim0_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_affine_us_dim(0, S) == SING(S)"))
+  affine_dim0_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, euclid_affine_dim(0, S) == SING(S)"))
 }
 
 ///|
@@ -3388,7 +3388,7 @@ pub fn affine_dim0() -> @kernel.Term {
 ///|
 /// hull_convex
 fn step_161() -> Unit raise {
-  hull_convex_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_convex(op_euclid_prime_convex_us_hull(S))"))
+  hull_convex_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, euclid_convex(euclid_convex_hull(S))"))
 }
 
 ///|
@@ -3418,7 +3418,7 @@ pub fn hull_minimal() -> @kernel.Term {
 ///|
 /// affine_hull_affine
 fn step_163() -> Unit raise {
-  affine_hull_affine_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_affine(op_euclid_prime_affine_us_hull(S))"))
+  affine_hull_affine_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, euclid_affine(euclid_affine_hull(S))"))
 }
 
 ///|
@@ -3448,7 +3448,7 @@ pub fn affine_hull_minimal() -> @kernel.Term {
 ///|
 /// mk_line_dim
 fn step_165() -> Unit raise {
-  mk_line_dim_c.set(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, !(x == y) → op_euclid_prime_affine_us_dim(1, op_euclid_prime_mk_us_line(x, y))"))
+  mk_line_dim_c.set(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, !(x == y) → euclid_affine_dim(1, euclid_mk_line(x, y))"))
 }
 
 ///|
@@ -3463,7 +3463,7 @@ pub fn mk_line_dim() -> @kernel.Term {
 ///|
 /// affine_convex_hull
 fn step_166() -> Unit raise {
-  affine_convex_hull_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_affine_us_hull(S) == op_euclid_prime_affine_us_hull(op_euclid_prime_convex_us_hull(S))"))
+  affine_convex_hull_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, euclid_affine_hull(S) == euclid_affine_hull(euclid_convex_hull(S))"))
 }
 
 ///|
@@ -3478,7 +3478,7 @@ pub fn affine_convex_hull() -> @kernel.Term {
 ///|
 /// convex_hull_hull
 fn step_167() -> Unit raise {
-  convex_hull_hull_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_convex_us_hull(S) == op_euclid_prime_convex_us_hull(op_euclid_prime_convex_us_hull(S))"))
+  convex_hull_hull_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, euclid_convex_hull(S) == euclid_convex_hull(euclid_convex_hull(S))"))
 }
 
 ///|
@@ -3493,7 +3493,7 @@ pub fn convex_hull_hull() -> @kernel.Term {
 ///|
 /// euclid_affine_dim
 fn step_168() -> Unit raise {
-  euclid_affine_dim_c.set(@term_syntax.parse_term("∀ n : Num, op_euclid_prime_affine_us_dim(n, op_euclid_prime_euclid(n))"))
+  euclid_affine_dim_c.set(@term_syntax.parse_term("∀ n : Num, euclid_affine_dim(n, euclid_euclid(n))"))
 }
 
 ///|
@@ -3523,7 +3523,7 @@ pub fn affine_dim_subset() -> @kernel.Term {
 ///|
 /// line_postulate
 fn step_170() -> Unit raise {
-  line_postulate_c.set(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, !(x == y) → existsunique((L : ((Num) -> Real) -> Bool) => L(x) && L(y) && op_euclid_prime_line(L))"))
+  line_postulate_c.set(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, !(x == y) → existsunique((L : ((Num) -> Real) -> Bool) => L(x) && L(y) && euclid_line(L))"))
 }
 
 ///|
@@ -3538,7 +3538,7 @@ pub fn line_postulate() -> @kernel.Term {
 ///|
 /// ruler_postulate
 fn step_171() -> Unit raise {
-  ruler_postulate_c.set(@term_syntax.parse_term("∀ L : ((Num) -> Real) -> Bool, op_euclid_prime_line(L) → (∃ f : ((Num) -> Real) -> Real, BIJ(f, L, UNIV) && (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, L(x) && L(y) → op_euclid_prime_d_us_euclid(x, y) == abs(f(x) - f(y))))"))
+  ruler_postulate_c.set(@term_syntax.parse_term("∀ L : ((Num) -> Real) -> Bool, euclid_line(L) → (∃ f : ((Num) -> Real) -> Real, BIJ(f, L, UNIV) && (∀ x : (Num) -> Real, ∀ y : (Num) -> Real, L(x) && L(y) → euclid_d_euclid(x, y) == abs(f(x) - f(y))))"))
 }
 
 ///|
@@ -3553,7 +3553,7 @@ pub fn ruler_postulate() -> @kernel.Term {
 ///|
 /// affine_postulate
 fn step_172() -> Unit raise {
-  affine_postulate_c.set(@term_syntax.parse_term("∀ n : Num, op_euclid_prime_affine_us_dim(n, (P : ((Num) -> Real) -> Bool)) → (∃ S : ((Num) -> Real) -> Bool, SUBSET(S, P) && HAS_SIZE(S, n) && op_euclid_prime_affine_us_dim(n, S))"))
+  affine_postulate_c.set(@term_syntax.parse_term("∀ n : Num, euclid_affine_dim(n, (P : ((Num) -> Real) -> Bool)) → (∃ S : ((Num) -> Real) -> Bool, SUBSET(S, P) && HAS_SIZE(S, n) && euclid_affine_dim(n, S))"))
 }
 
 ///|
@@ -3568,7 +3568,7 @@ pub fn affine_postulate() -> @kernel.Term {
 ///|
 /// line_plane
 fn step_173() -> Unit raise {
-  line_plane_c.set(@term_syntax.parse_term("∀ P : ((Num) -> Real) -> Bool, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, op_euclid_prime_plane(P) && P(x) && P(y) → SUBSET(op_euclid_prime_mk_us_line(x, y), P)"))
+  line_plane_c.set(@term_syntax.parse_term("∀ P : ((Num) -> Real) -> Bool, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, euclid_plane(P) && P(x) && P(y) → SUBSET(euclid_mk_line(x, y), P)"))
 }
 
 ///|
@@ -3583,7 +3583,7 @@ pub fn line_plane() -> @kernel.Term {
 ///|
 /// plane_of_pt
 fn step_174() -> Unit raise {
-  plane_of_pt_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) → (∃ P : ((Num) -> Real) -> Bool, op_euclid_prime_plane(P) && SUBSET(S, P))"))
+  plane_of_pt_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) → (∃ P : ((Num) -> Real) -> Bool, euclid_plane(P) && SUBSET(S, P))"))
 }
 
 ///|
@@ -3598,7 +3598,7 @@ pub fn plane_of_pt() -> @kernel.Term {
 ///|
 /// plane_of_pt_unique
 fn step_175() -> Unit raise {
-  plane_of_pt_unique_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) → op_euclid_prime_collinear(S) || existsunique((P : ((Num) -> Real) -> Bool) => op_euclid_prime_plane(P) && SUBSET(S, P))"))
+  plane_of_pt_unique_c.set(@term_syntax.parse_term("∀ S : ((Num) -> Real) -> Bool, HAS_SIZE(S, 3) → euclid_collinear(S) || existsunique((P : ((Num) -> Real) -> Bool) => euclid_plane(P) && SUBSET(S, P))"))
 }
 
 ///|
@@ -3613,7 +3613,7 @@ pub fn plane_of_pt_unique() -> @kernel.Term {
 ///|
 /// plane_inter
 fn step_176() -> Unit raise {
-  plane_inter_c.set(@term_syntax.parse_term("∀ P : ((Num) -> Real) -> Bool, ∀ Q : ((Num) -> Real) -> Bool, op_euclid_prime_plane(P) && op_euclid_prime_plane(Q) → INTER(P, Q) == {} || op_euclid_prime_line(INTER(P, Q)) || P == Q"))
+  plane_inter_c.set(@term_syntax.parse_term("∀ P : ((Num) -> Real) -> Bool, ∀ Q : ((Num) -> Real) -> Bool, euclid_plane(P) && euclid_plane(Q) → INTER(P, Q) == {} || euclid_line(INTER(P, Q)) || P == Q"))
 }
 
 ///|
@@ -3628,7 +3628,7 @@ pub fn plane_inter() -> @kernel.Term {
 ///|
 /// plane_separation
 fn step_177() -> Unit raise {
-  plane_separation_c.set(@term_syntax.parse_term("∀ P : ((Num) -> Real) -> Bool, ∀ L : ((Num) -> Real) -> Bool, op_euclid_prime_plane(P) && op_euclid_prime_line(L) && SUBSET(L, P) → (∃ A : ((Num) -> Real) -> Bool, ∃ B : ((Num) -> Real) -> Bool, INTER(A, B) == {} && INTER(A, L) == {} && INTER(B, L) == {} && UNION(L, UNION(A, B)) == P && (∀ c : (Num) -> Real, ∀ u : ((Num) -> Real) -> Bool, P(c) && u == op_euclid_prime_mk_us_open_us_half_us_set(L, {c}) → u == A || u == B || u == L) && (∀ a : (Num) -> Real, ∀ b : (Num) -> Real, A(a) && B(b) → !(INTER((segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)(a, b), L) == {})))"))
+  plane_separation_c.set(@term_syntax.parse_term("∀ P : ((Num) -> Real) -> Bool, ∀ L : ((Num) -> Real) -> Bool, euclid_plane(P) && euclid_line(L) && SUBSET(L, P) → (∃ A : ((Num) -> Real) -> Bool, ∃ B : ((Num) -> Real) -> Bool, INTER(A, B) == {} && INTER(A, L) == {} && INTER(B, L) == {} && UNION(L, UNION(A, B)) == P && (∀ c : (Num) -> Real, ∀ u : ((Num) -> Real) -> Bool, P(c) && u == euclid_mk_open_half_set(L, {c}) → u == A || u == B || u == L) && (∀ a : (Num) -> Real, ∀ b : (Num) -> Real, A(a) && B(b) → !(INTER((segment : ((Num) -> Real, (Num) -> Real, (Num) -> Real) -> Bool)(a, b), L) == {})))"))
 }
 
 ///|
@@ -3643,7 +3643,7 @@ pub fn plane_separation() -> @kernel.Term {
 ///|
 /// space_separation
 fn step_178() -> Unit raise {
-  space_separation_c.set(@term_syntax.parse_term("∀ R : ((Num) -> Real) -> Bool, ∀ P : ((Num) -> Real) -> Bool, op_euclid_prime_space(R) && op_euclid_prime_plane(P) && SUBSET(P, R) → (∃ A : ((Num) -> Real) -> Bool, ∃ B : ((Num) -> Real) -> Bool, INTER(A, B) == (EMRTY : ((Num) -> Real) -> Bool) && INTER(A, P) == EMRTY && INTER(B, P) == EMRTY && UNION(P, UNION(A, B)) == R && (∀ c : (Num) -> Real, ∀ u : ((Num) -> Real) -> Bool, R(c) && u == op_euclid_prime_mk_us_open_us_half_us_set(P, {c}) → u == A || u == B || u == P) && (∀ a : (Num) -> Real, ∀ b : (Num) -> Real, A(a) && B(b) → !(INTER((segment : ((Num) -> Real, (Num) -> Real, _) -> Bool)(a, b), (L : (_) -> Bool)) == {})))"))
+  space_separation_c.set(@term_syntax.parse_term("∀ R : ((Num) -> Real) -> Bool, ∀ P : ((Num) -> Real) -> Bool, euclid_space(R) && euclid_plane(P) && SUBSET(P, R) → (∃ A : ((Num) -> Real) -> Bool, ∃ B : ((Num) -> Real) -> Bool, INTER(A, B) == (EMRTY : ((Num) -> Real) -> Bool) && INTER(A, P) == EMRTY && INTER(B, P) == EMRTY && UNION(P, UNION(A, B)) == R && (∀ c : (Num) -> Real, ∀ u : ((Num) -> Real) -> Bool, R(c) && u == euclid_mk_open_half_set(P, {c}) → u == A || u == B || u == P) && (∀ a : (Num) -> Real, ∀ b : (Num) -> Real, A(a) && B(b) → !(INTER((segment : ((Num) -> Real, (Num) -> Real, _) -> Bool)(a, b), (L : (_) -> Bool)) == {})))"))
 }
 
 ///|
@@ -3688,7 +3688,7 @@ pub fn set_translate() -> @kernel.Thm {
 ///|
 /// set_scale
 fn step_181() -> Unit raise {
-  set_scale_c.set(euclid_def(@term_syntax.parse_term("(set_scale : (Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((r : Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | ∃ x : (Num) -> Real, X(x) && z == op_euclid_prime_euclid_us_scale(r, x)}")))
+  set_scale_c.set(euclid_def(@term_syntax.parse_term("(set_scale : (Real, ((Num) -> Real) -> Bool, (Num) -> Real) -> Bool)((r : Real), (X : ((Num) -> Real) -> Bool)) == {(z : (Num) -> Real) | ∃ x : (Num) -> Real, X(x) && z == euclid_euclid_scale(r, x)}")))
 }
 
 ///|
@@ -3733,7 +3733,7 @@ pub fn one_vec() -> @kernel.Thm {
 ///|
 /// mk_cube
 fn step_184() -> Unit raise {
-  mk_cube_c.set(euclid_def(@term_syntax.parse_term("(mk_cube : (Num, Num, (Num) -> Int, (Num) -> Real) -> Bool)((n : Num), (k : Num), (v : (Num) -> Int)) == LET((r : Real) => LET_END(LET((vv : (Num) -> Real) => LET_END(op_euclid_prime_mk_us_rectangle(op_euclid_prime_euclid_us_scale(r, vv), op_euclid_prime_euclid_us_scale(r, vv + op_euclid_prime_one_us_vec(n)))), (i : Num) => real_of_int(v(i)))), twopow(-int_of_num(k)))")))
+  mk_cube_c.set(euclid_def(@term_syntax.parse_term("(mk_cube : (Num, Num, (Num) -> Int, (Num) -> Real) -> Bool)((n : Num), (k : Num), (v : (Num) -> Int)) == LET((r : Real) => LET_END(LET((vv : (Num) -> Real) => LET_END(euclid_mk_rectangle(euclid_euclid_scale(r, vv), euclid_euclid_scale(r, vv + euclid_one_vec(n)))), (i : Num) => real_of_int(v(i)))), twopow(-int_of_num(k)))")))
 }
 
 ///|
@@ -3748,7 +3748,7 @@ pub fn mk_cube() -> @kernel.Thm {
 ///|
 /// inner_cube
 fn step_185() -> Unit raise {
-  inner_cube_c.set(euclid_def(@term_syntax.parse_term("(inner_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | SUBSET(op_euclid_prime_mk_us_cube(n, k, v), A) && (∀ i : Num, n < i → int_of_num(0) == v(i))}")))
+  inner_cube_c.set(euclid_def(@term_syntax.parse_term("(inner_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | SUBSET(euclid_mk_cube(n, k, v), A) && (∀ i : Num, n < i → int_of_num(0) == v(i))}")))
 }
 
 ///|
@@ -3763,7 +3763,7 @@ pub fn inner_cube() -> @kernel.Thm {
 ///|
 /// outer_cube
 fn step_186() -> Unit raise {
-  outer_cube_c.set(euclid_def(@term_syntax.parse_term("(outer_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | !(INTER(op_euclid_prime_mk_us_cube(n, k, v), A) == {}) && (∀ i : Num, n < i → int_of_num(0) == v(i))}")))
+  outer_cube_c.set(euclid_def(@term_syntax.parse_term("(outer_cube : (Num, Num, ((Num) -> Real) -> Bool, (Num) -> Int) -> Bool)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == {(v : (Num) -> Int) | !(INTER(euclid_mk_cube(n, k, v), A) == {}) && (∀ i : Num, n < i → int_of_num(0) == v(i))}")))
 }
 
 ///|
@@ -3778,7 +3778,7 @@ pub fn outer_cube() -> @kernel.Thm {
 ///|
 /// inner_vol
 fn step_187() -> Unit raise {
-  inner_vol_c.set(euclid_def(@term_syntax.parse_term("(inner_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(op_euclid_prime_inner_us_cube(n, k, A))) * twopow(-int_of_num(n * k))")))
+  inner_vol_c.set(euclid_def(@term_syntax.parse_term("(inner_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(euclid_inner_cube(n, k, A))) * twopow(-int_of_num(n * k))")))
 }
 
 ///|
@@ -3793,7 +3793,7 @@ pub fn inner_vol() -> @kernel.Thm {
 ///|
 /// outer_vol
 fn step_188() -> Unit raise {
-  outer_vol_c.set(euclid_def(@term_syntax.parse_term("(outer_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(op_euclid_prime_outer_us_cube(n, k, A))) * twopow(-int_of_num(n * k))")))
+  outer_vol_c.set(euclid_def(@term_syntax.parse_term("(outer_vol : (Num, Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (k : Num), (A : ((Num) -> Real) -> Bool)) == real_of_num(CARD(euclid_outer_cube(n, k, A))) * twopow(-int_of_num(n * k))")))
 }
 
 ///|
@@ -3823,7 +3823,7 @@ pub fn euclid_bounded() -> @kernel.Thm {
 ///|
 /// vol
 fn step_190() -> Unit raise {
-  vol_c.set(euclid_def(@term_syntax.parse_term("(vol : (Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (A : ((Num) -> Real) -> Bool)) == lim((k : Num) => op_euclid_prime_outer_us_vol(n, k, A))")))
+  vol_c.set(euclid_def(@term_syntax.parse_term("(vol : (Num, ((Num) -> Real) -> Bool) -> Real)((n : Num), (A : ((Num) -> Real) -> Bool)) == lim((k : Num) => euclid_outer_vol(n, k, A))")))
 }
 
 ///|
@@ -4064,7 +4064,7 @@ fn step_199() -> Unit raise {
   let t1173 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t1174 = @simp.asm_rewrite_tac(@list.List([]))
   let t1175 = @list.List([@tactics.gen_tac, @simp.rewrite_tac(@list.List([pi_fun(), pi_bound_fun()])), @class.cond_cases_tac, t1174, t1173, t1172, t1171, t1170, t1169, t1168, t1167, t1166, @tactics.conj_tac, t1165, t1164])
-  pi_est2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ k : Num, abs(op_trig_prime_pi_us_fun(k)) <= op_trig_prime_pi_us_bound_us_fun(k)"), t1175))
+  pi_est2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ k : Num, abs(trig_pi_fun(k)) <= trig_pi_bound_fun(k)"), t1175))
 }
 
 ///|
@@ -4128,11 +4128,11 @@ fn step_201() -> Unit raise {
   let t1204 = @simp.rewrite_tac(@list.List([pi_bound_fun()]))
   let t1205 = @tactics.then_tac(@tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)")), @tactics.beta_tac)
   let t1206 = @tactics.match_mp_tac(@class.eq_ext())
-  let t1207 = @list.List([@tactics.gen_tac, @tactics.disch_tac, @tactics.subgoal_then(@term_syntax.parse_term("((n : Num) => op_trig_prime_pi_us_bound_us_fun(n + (k : Num))) == ((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), k) * inv(pow(real_of_num(16), n))))"), fn(x1183 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1207 = @list.List([@tactics.gen_tac, @tactics.disch_tac, @tactics.subgoal_then(@term_syntax.parse_term("((n : Num) => trig_pi_bound_fun(n + (k : Num))) == ((n : Num) => real_of_num(15) / real_of_num(16) * (pow(inv(real_of_num(16)), k) * inv(pow(real_of_num(16), n))))"), fn(x1183 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x1183
     @simp.rewrite_tac(@list.List([th]))
   }), t1206, t1205, t1204, @class.cond_cases_tac, t1203, t1202, @tactics.ap_term_tac, t1201, t1200, t1199, t1198, t1197, t1196, t1195, t1194, t1193, @tactics.ap_term_tac, t1192])
-  gp16a_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ k : Num, 0 < k → sums((n : Num) => op_trig_prime_pi_us_bound_us_fun(n + k), inv(pow(real_of_num(16), k)))"), t1207))
+  gp16a_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ k : Num, 0 < k → sums((n : Num) => trig_pi_bound_fun(n + k), inv(pow(real_of_num(16), k)))"), t1207))
 }
 
 ///|
@@ -4148,7 +4148,7 @@ pub fn gp16a() -> @kernel.Thm {
 /// PI_SER
 fn step_202() -> Unit raise {
   let t1227 = @meson.asm_meson_tac(@list.List([@analysis.sum_uniq()]))
-  let t1228 = @tactics.subgoal_then(@term_syntax.parse_term("suminf((n : Num) => op_trig_prime_pi_us_bound_us_fun(n + (k : Num))) == inv(pow(real_of_num(16), k))"), fn(x1225 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1228 = @tactics.subgoal_then(@term_syntax.parse_term("suminf((n : Num) => trig_pi_bound_fun(n + (k : Num))) == inv(pow(real_of_num(16), k))"), fn(x1225 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x1225
     @meson.meson_tac(@list.List([th_1]))
   })
@@ -4157,8 +4157,8 @@ fn step_202() -> Unit raise {
     @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(k : Num)"), th))
   })
   let t1230 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1221 = @term_syntax.parse_term("op_trig_prime_pi_us_bound_us_fun")
-  let t1222 = @term_syntax.parse_term("op_trig_prime_pi_us_fun")
+  let t1221 = @term_syntax.parse_term("trig_pi_bound_fun")
+  let t1222 = @term_syntax.parse_term("trig_pi_fun")
   let t1231 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("pi"), t1222, t1221]), ser_approx()))
   let t1232 = @tactics.imp_res_then(fn(x1218 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1219 = @tactics.assume_tac(x1218)
@@ -4188,7 +4188,7 @@ fn step_202() -> Unit raise {
   let t1208 = @simp.rewrite_rule(@list.List([@equal.gsym(pi_fun())]))(@polylog.polylog_thm())
   let t1237 = @tactics.assume_tac(@simp.once_rewrite_rule(@list.List([@class.eta_ax()]))(t1208))
   let t1238 = @list.List([@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t1237, t1236, t1235, t1234, t1233, t1232, t1231, t1230, t1229, t1228, t1227])
-  pi_ser_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ k : Num, 0 < k → abs(pi - sum((0, k), op_trig_prime_pi_us_fun)) <= inv(pow(real_of_num(16), k))"), t1238))
+  pi_ser_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ k : Num, 0 < k → abs(pi - sum((0, k), trig_pi_fun)) <= inv(pow(real_of_num(16), k))"), t1238))
 }
 
 ///|
