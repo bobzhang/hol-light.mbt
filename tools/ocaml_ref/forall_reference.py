@@ -77,6 +77,11 @@ TYPE_RENAMES = {
     'Unity/mk_comp_unity.ml': {"'a": 'A'},
     'Unity/mk_unity_prog.ml': {"'a": 'A', "'b": 'B', "'i": 'I', "'loc": 'Loc', "'sta": 'Sta',
                                "'state": 'State', "'t": 'T', "'val": 'Val'},
+    # lowercase type variables: one (a singleton domain) and 'a
+    'Multivariate/topology.ml': {'one': 'X'},
+    'Multivariate/canal.ml': {'one': 'X'},
+    'Quaternions/qanal.hl': {'one': 'X'},
+    'Boyer_Moore/terms_and_clauses.ml': {"'a": 'X'},
 }
 # Type variables a file builds in code, adapted by hand before the rename.
 TYPE_PATCHES = {
