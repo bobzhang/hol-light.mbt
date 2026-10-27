@@ -168,9 +168,9 @@ fn step_2() -> Unit raise {
             (d, @kernel.eq_mp(th_p_1, th_5))
           }
         }
-        let pth_lor = @bool.undisch(@bool.specl(@list.List([ptm, qtm]), @class.taut(@parser.parse_term("forall p q. ~(p \\/ q) ==> (p <=> F)"))))
-        let pth_ror = @bool.undisch(@bool.specl(@list.List([ptm, qtm]), @class.taut(@parser.parse_term("forall p q. ~(p \\/ q) ==> ~q"))))
-        let pth_ide = @bool.spec(ptm, @class.taut(@parser.parse_term("forall p. ~p <=> (p <=> F)")))
+        let pth_lor = @bool.undisch(@bool.specl(@list.List([ptm, qtm]), @class.taut(@term_syntax.parse_term("∀ p : Bool, ∀ q : Bool, !(p || q) → p == false"))))
+        let pth_ror = @bool.undisch(@bool.specl(@list.List([ptm, qtm]), @class.taut(@term_syntax.parse_term("∀ p : Bool, ∀ q : Bool, !(p || q) → !q"))))
+        let pth_ide = @bool.spec(ptm, @class.taut(@term_syntax.parse_term("∀ p : Bool, !p == (p == false)")))
         let nrule : ((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise = fn(x48 : (Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise {
           let (c_7, th_7) = x48
           match @kernel.concl(th_7) {

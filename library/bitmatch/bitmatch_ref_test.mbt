@@ -6775,19 +6775,19 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
       #|  _BITMATCH (e:N word) (_SEQPATTERN c cs) =\n   if ?y:B. c (val e) y then _BITMATCH e c else _BITMATCH e cs
       #|  _BITMATCH (e:N word) (_SEQPATTERN c cs) =\n   if ?y:B. c (val e) y then\n     _BITMATCH e (_SEQPATTERN c (_ELSEPATTERN ARB))\n   else _BITMATCH e cs
       #|  _MATCH((e : B), _ELSEPATTERN((a : A))) == a
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  false
       #|  _BITMATCH((e : Word[N]), _ELSEPATTERN((a : A))) == a
       #|  pat_extract p i b <=>\n  (forall n. pat_set p n ==> numbit i n = b)
       #|  (b : Bool)
@@ -6838,19 +6838,19 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
       #|  :B
       #|  :N
       #|  (r : (A, B) -> Bool)((e : A)) == ((y : B) => (x : B) == y) \226\134\146 _MATCH(e, r) == x
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  false
       #|  bitpat_inverts p f (x:A) <=> (forall y. pat_set p y ==> f y = x)
       #|  bitpat_down(:N) (f:num->A) (n:num) = f (n DIV 2 EXP dimindex(:N))
       #|  bitpat_inverts p f (x:A) ==>\n   bitpat_inverts (CONSPAT p (a:N word)) (bitpat_down(:N) f) x
@@ -6867,17 +6867,17 @@ test "Library/bitmatch matches Library/bitmatch.ml" {
       #|  \226\136\131 y : A, (x : A) == y
       #|  r (val (e:N word)) = (\\y:A. x = y) ==> _BITMATCH e (_SEQPATTERN r s) = x
       #|  (A : Bool) \226\134\146 _UNGUARDED_PATTERN(A, (B : Bool)) == B
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  F
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  false
       #|  (B : Bool)
       #|  bitpat_inverts((p : Bitpat), (f : (Num) -> A), (x : A)) \226\134\146 pat_set(p, (e : Num)) \226\134\146 f(e) == x
       #|  _UNGUARDED_PATTERN((A : Bool), (B : Bool)) \226\134\146 A && B
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  false
       #|  (x : A)
       #|  (f : (Num) -> A)
       #|  (p : Bitpat)
