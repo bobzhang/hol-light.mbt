@@ -633,7 +633,7 @@ pub fn dump_ge_info(x183 : @kernel.Thm, x184 : String) -> @tactics.Tactic raise 
 pub fn dump_fl_ge_info(x196 : @kernel.Thm, x197 : String) -> @tactics.Tactic raise {
   let isfloat = x196
   let lbl = x197
-  dump_ge_info(@drule.match_mp(@bool.spec(@parser.parse_term("fmt:flformat"), float_not_zero()))(isfloat), lbl)
+  dump_ge_info(@drule.match_mp(@bool.spec(@term_syntax.parse_term("(fmt : Flformat)"), float_not_zero()))(isfloat), lbl)
 }
 
 ///|
@@ -915,7 +915,7 @@ pub fn dump_gm_info(x360 : @kernel.Thm, x361 : String) -> @tactics.Tactic raise 
 pub fn dump_fl_gm_info(x375 : @kernel.Thm, x376 : String) -> @tactics.Tactic raise {
   let isfloat = x375
   let lbl = x376
-  dump_gm_info(@drule.match_mp(@bool.spec(@parser.parse_term("fmt:flformat"), float_not_zero()))(isfloat), lbl)
+  dump_gm_info(@drule.match_mp(@bool.spec(@term_syntax.parse_term("(fmt : Flformat)"), float_not_zero()))(isfloat), lbl)
 }
 
 ///|
@@ -1169,7 +1169,7 @@ pub fn dump_gr_info(x515 : @kernel.Thm, x516 : String) -> @tactics.Tactic raise 
 pub fn dump_fl_gr_info(x524 : @kernel.Thm, x525 : String) -> @tactics.Tactic raise {
   let isfloat = x524
   let lbl = x525
-  dump_gr_info(@drule.match_mp(@bool.spec(@parser.parse_term("fmt:flformat"), float_not_zero()))(isfloat), lbl)
+  dump_gr_info(@drule.match_mp(@bool.spec(@term_syntax.parse_term("(fmt : Flformat)"), float_not_zero()))(isfloat), lbl)
 }
 
 ///|

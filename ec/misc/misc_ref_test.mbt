@@ -35067,14 +35067,14 @@ test "EC/misc matches EC/misc.ml" {
       #|  (x : A)
       #|  UNIONS({{(x, y) | y : A | IN(y, ring_carrier((r : Ring[A]))) && ring_pow(r, y, 2) == (h : (A) -> A)(x)} | x : A | IN(x, ring_carrier(r))})
       #|  \226\136\128 r : Ring[A], \226\136\128 h : (A) -> A, integral_domain(r) && FINITE(ring_carrier(r)) \226\134\146 FINITE({((x : A), (y : A)) | IN(x, ring_carrier(r)) && IN(y, ring_carrier(r)) && ring_pow(r, y, 2) == h(x)}) && CARD({((x : A), (y : A)) | IN(x, ring_carrier(r)) && IN(y, ring_carrier(r)) && ring_pow(r, y, 2) == h(x)}) <= 2 * CARD(ring_carrier(r))
-      #|  ~
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  F
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  false
       #|  ( * ):num->num->num
       #|  !divides(ring_char((r : Ring[_])), NUMERAL((n : Num)))
       #|  \226\136\128 f : Ring[A], \226\136\128 P : Bool, (field(f) && !(ring_char(f) == 2) && P) == (field(f) && !divides(ring_char(f), 2) && P)

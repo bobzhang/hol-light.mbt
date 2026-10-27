@@ -35124,7 +35124,7 @@ fn step_224() -> Unit raise {
 /// `mk_negp`
 pub fn mk_negp(x4936 : @preterm.Preterm) -> @preterm.Preterm raise {
   let pt = x4936
-  @preterm.Preterm::Combp(@preterm.preterm_of_term(@parser.parse_term("~")), pt)
+  @preterm.Preterm::Combp(@preterm.preterm_of_term(@term_syntax.parse_term("op_tilde")), pt)
 }
 
 ///|
@@ -35149,7 +35149,7 @@ pub fn mk_conjp(
   let (ps, pt) = (x4939, x4940)
   @preterm.Preterm::Combp(
     @preterm.Preterm::Combp(
-      @preterm.preterm_of_term(@parser.parse_term("/\\")),
+      @preterm.preterm_of_term(@term_syntax.parse_term("op_slash_bslash")),
       ps,
     ),
     pt,
@@ -35165,7 +35165,7 @@ pub fn mk_disjp(
   let (ps, pt) = (x4941, x4942)
   @preterm.Preterm::Combp(
     @preterm.Preterm::Combp(
-      @preterm.preterm_of_term(@parser.parse_term("\\/")),
+      @preterm.preterm_of_term(@term_syntax.parse_term("op_bslash_slash")),
       ps,
     ),
     pt,
@@ -35226,7 +35226,7 @@ pub fn list_mk_disjp(
   x4952 : @list.List[@preterm.Preterm],
 ) -> @preterm.Preterm raise {
   match x4952 {
-    Empty => @preterm.preterm_of_term(@parser.parse_term("F"))
+    Empty => @preterm.preterm_of_term(@term_syntax.parse_term("false"))
     More(h, tail=t) =>
       @lib.itlist(
         (x4954 : @preterm.Preterm, x4955 : @preterm.Preterm) => {
@@ -37668,7 +37668,7 @@ pub fn simple_metis_refute(
   } else {
     raise @lib.AssertFailure("tscript.ml:10071:2")
   }
-  let t5249 = @parser.parse_term("F")
+  let t5249 = @term_syntax.parse_term("false")
   if @kernel.concl(proof_1) == t5249 {
     ()
   } else {

@@ -5804,16 +5804,16 @@ test "Jordan/tactics_ext matches Jordan/tactics_ext.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..solved at 4
       #|Jordan/tactics_ext quotations (46):
-      #|  (+):num->(num->num)
-      #|  (-):num->(num->num)
-      #|  ( * ):num->(num->num)
+      #|  (op_plus : (Num, Num) -> Num)
+      #|  (op_minus : (Num, Num) -> Num)
+      #|  (op_star : (Num, Num) -> Num)
       #|  EXP
       #|  DIV
       #|  MOD
-      #|  (<):num->(num->bool)
-      #|  (<=):num->(num->bool)
-      #|  (>):num->(num->bool)
-      #|  (>=):num->(num->bool)
+      #|  (op_lt : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_gt : (Num, Num) -> Bool)
+      #|  (op_gt_eq : (Num, Num) -> Bool)
       #|  int_add
       #|  int_sub
       #|  int_mul
