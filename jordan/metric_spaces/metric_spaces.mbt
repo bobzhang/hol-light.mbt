@@ -1086,7 +1086,7 @@ pub fn interval_finite() -> @kernel.Thm {
 fn step_42() -> Unit raise {
   let t476 = @meson.asm_meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) + real_of_num(0) == real_of_num(0)"))]))
   let t477 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_plus()])), t476])
-  euclid_add_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, f) && op_euclid_prime_euclid(n, g) → op_euclid_prime_euclid(n, f + g)"), t477))
+  euclid_add_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ n : Num, euclid_euclid(n, f) && euclid_euclid(n, g) → euclid_euclid(n, f + g)"), t477))
 }
 
 ///|
@@ -1103,7 +1103,7 @@ pub fn euclid_add_closure() -> @kernel.Thm {
 fn step_43() -> Unit raise {
   let t478 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(t : Real) * real_of_num(0) == real_of_num(0)"))]))
   let t479 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_scale()])), t478])
-  euclid_scale_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ t : Real, ∀ f : (Num) -> Real, op_euclid_prime_euclid(n, f) → op_euclid_prime_euclid(n, op_euclid_prime_euclid_us_scale(t, f))"), t479))
+  euclid_scale_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ t : Real, ∀ f : (Num) -> Real, euclid_euclid(n, f) → euclid_euclid(n, euclid_euclid_scale(t, f))"), t479))
 }
 
 ///|
@@ -1120,7 +1120,7 @@ pub fn euclid_scale_closure() -> @kernel.Thm {
 fn step_44() -> Unit raise {
   let t480 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(-(x : Real) == real_of_num(0)) == (x == real_of_num(0))"))]))
   let t481 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_neg()])), @tactics_ext.disch_all_tac, t480])
-  euclid_neg_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, f) → op_euclid_prime_euclid(n, -f)"), t481))
+  euclid_neg_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ n : Num, euclid_euclid(n, f) → euclid_euclid(n, -f)"), t481))
 }
 
 ///|
@@ -1137,7 +1137,7 @@ pub fn euclid_neg_closure() -> @kernel.Thm {
 fn step_45() -> Unit raise {
   let t482 = @meson.asm_meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) - real_of_num(0) == real_of_num(0)"))]))
   let t483 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_minus()])), t482])
-  euclid_sub_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, f) && op_euclid_prime_euclid(n, g) → op_euclid_prime_euclid(n, f - g)"), t483))
+  euclid_sub_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ n : Num, euclid_euclid(n, f) && euclid_euclid(n, g) → euclid_euclid(n, f - g)"), t483))
 }
 
 ///|
@@ -1157,7 +1157,7 @@ fn step_46() -> Unit raise {
   let t486 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_neg()]))
   let t487 = @simp.rewrite_tac(@list.List([euclid_neg_closure()]))
   let t488 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac, t487, t486, @tactics_ext.disch_all_tac, t485, t484])
-  neg_dim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, f) == op_euclid_prime_euclid(n, -f)"), t488))
+  neg_dim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ n : Num, euclid_euclid(n, f) == euclid_euclid(n, -f)"), t488))
 }
 
 ///|
@@ -1174,7 +1174,7 @@ pub fn neg_dim() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t489 = @meson.meson_tac(@list.List([@arith.le_trans()]))
   let t490 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid()])), t489])
-  euclid_updim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ m : Num, ∀ n : Num, m <= n && op_euclid_prime_euclid(m, f) → op_euclid_prime_euclid(n, f)"), t490))
+  euclid_updim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ m : Num, ∀ n : Num, m <= n && euclid_euclid(m, f) → euclid_euclid(n, f)"), t490))
 }
 
 ///|
@@ -1194,9 +1194,9 @@ fn step_48() -> Unit raise {
   let t497 = @tactics.assume_tac(@int.arith_rule(@term_syntax.parse_term("(n : Num) <= n + (n' : Num)")))
   let t498 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) + (n' : Num)"))
   let t493 = @term_syntax.parse_term("(op_q : ((_) -> Bool) -> Bool)")
-  let t491 = @term_syntax.parse_term("op_euclid_prime_euclid")
+  let t491 = @term_syntax.parse_term("euclid_euclid")
   let t499 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics_ext.disch_all_tac, (x492 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t491, @tactics.choose_tac, x492), (x494 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t493, @tactics.choose_tac, x494), t498, t497, t496, t495])
-  euclidean_add_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, op_euclid_prime_euclidean(f) && op_euclid_prime_euclidean(g) → op_euclid_prime_euclidean(f + g)"), t499))
+  euclidean_add_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) → euclid_euclidean(f + g)"), t499))
 }
 
 ///|
@@ -1216,9 +1216,9 @@ fn step_49() -> Unit raise {
   let t506 = @tactics.assume_tac(@int.arith_rule(@term_syntax.parse_term("(n : Num) <= n + (n' : Num)")))
   let t507 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) + (n' : Num)"))
   let t502 = @term_syntax.parse_term("(op_q : ((_) -> Bool) -> Bool)")
-  let t500 = @term_syntax.parse_term("op_euclid_prime_euclid")
+  let t500 = @term_syntax.parse_term("euclid_euclid")
   let t508 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics_ext.disch_all_tac, (x501 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t500, @tactics.choose_tac, x501), (x503 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t502, @tactics.choose_tac, x503), t507, t506, t505, t504])
-  euclidean_sub_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, op_euclid_prime_euclidean(f) && op_euclid_prime_euclidean(g) → op_euclid_prime_euclidean(f - g)"), t508))
+  euclidean_sub_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) → euclid_euclidean(f - g)"), t508))
 }
 
 ///|
@@ -1238,7 +1238,7 @@ fn step_50() -> Unit raise {
   let t511 = @tactics.disch_then(@tactics.choose_tac)
   let t512 = @tactics.repeat_tac(@tactics.gen_tac)
   let t513 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), t512, t511, t510, t509])
-  euclidean_scale_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ s : Real, ∀ f : (Num) -> Real, op_euclid_prime_euclidean(f) → op_euclid_prime_euclidean(op_euclid_prime_euclid_us_scale(s, f))"), t513))
+  euclidean_scale_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ s : Real, ∀ f : (Num) -> Real, euclid_euclidean(f) → euclid_euclidean(euclid_euclid_scale(s, f))"), t513))
 }
 
 ///|
@@ -1257,7 +1257,7 @@ fn step_51() -> Unit raise {
   let t515 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num)"))
   let t516 = @tactics.disch_then(@tactics.choose_tac)
   let t517 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics.gen_tac, t516, t515, t514])
-  euclidean_neg_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, op_euclid_prime_euclidean(f) → op_euclid_prime_euclidean(-f)"), t517))
+  euclidean_neg_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_euclidean(f) → euclid_euclidean(-f)"), t517))
 }
 
 ///|
@@ -1309,7 +1309,7 @@ fn step_54() -> Unit raise {
   let t520 = @parser.parse_type("A")
   let t523 = @tactics.accept_tac(@kernel.inst_type(@list.List([(@parser.parse_type("num"), t520), t522]), @class.eta_ax()))
   let t524 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_plus(), @misc_defs_and_lemmas.euclid0(), @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) + (a : Real) == a"))])), t523])
-  euclid_lzero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, op_euclid_prime_euclid0 + f == f"), t524))
+  euclid_lzero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_euclid0 + f == f"), t524))
 }
 
 ///|
@@ -1329,7 +1329,7 @@ fn step_55() -> Unit raise {
   let t525 = @parser.parse_type("A")
   let t528 = @tactics.accept_tac(@kernel.inst_type(@list.List([(@parser.parse_type("num"), t525), t527]), @class.eta_ax()))
   let t529 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_plus(), @misc_defs_and_lemmas.euclid0(), @calc_rat.real_arith(@term_syntax.parse_term("(a : Real) + real_of_num(0) == a"))])), t528])
-  euclid_rzero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, f + op_euclid_prime_euclid0 == f"), t529))
+  euclid_rzero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, f + euclid_euclid0 == f"), t529))
 }
 
 ///|
@@ -1345,7 +1345,7 @@ pub fn euclid_rzero() -> @kernel.Thm {
 /// euclid_ldistrib
 fn step_56() -> Unit raise {
   let t530 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_plus(), @misc_defs_and_lemmas.euclid_scale(), @calc_rat.real_arith(@term_syntax.parse_term("(a : Real) * ((b : Real) + (c : Real)) == a * b + a * c"))]))])
-  euclid_ldistrib_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ r : Real, op_euclid_prime_euclid_us_scale(r, f + g) == op_euclid_prime_euclid_us_scale(r, f) + op_euclid_prime_euclid_us_scale(r, g)"), t530))
+  euclid_ldistrib_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ r : Real, euclid_euclid_scale(r, f + g) == euclid_euclid_scale(r, f) + euclid_euclid_scale(r, g)"), t530))
 }
 
 ///|
@@ -1361,7 +1361,7 @@ pub fn euclid_ldistrib() -> @kernel.Thm {
 /// euclid_rdistrib
 fn step_57() -> Unit raise {
   let t531 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_plus(), @misc_defs_and_lemmas.euclid_scale(), @calc_rat.real_arith(@term_syntax.parse_term("((a : Real) + (b : Real)) * (c : Real) == a * c + b * c"))]))])
-  euclid_rdistrib_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ r : Real, ∀ s : Real, op_euclid_prime_euclid_us_scale(r + s, f) == op_euclid_prime_euclid_us_scale(r, f) + op_euclid_prime_euclid_us_scale(s, f)"), t531))
+  euclid_rdistrib_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ r : Real, ∀ s : Real, euclid_euclid_scale(r + s, f) == euclid_euclid_scale(r, f) + euclid_euclid_scale(s, f)"), t531))
 }
 
 ///|
@@ -1377,7 +1377,7 @@ pub fn euclid_rdistrib() -> @kernel.Thm {
 /// euclid_scale_act
 fn step_58() -> Unit raise {
   let t532 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_scale(), @calc_rat.real_arith(@term_syntax.parse_term("(a : Real) * (b : Real) * (c : Real) == a * (b * c)"))]))])
-  euclid_scale_act_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ r : Real, ∀ s : Real, ∀ f : (Num) -> Real, op_euclid_prime_euclid_us_scale(r, op_euclid_prime_euclid_us_scale(s, f)) == op_euclid_prime_euclid_us_scale(r * s, f)"), t532))
+  euclid_scale_act_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ r : Real, ∀ s : Real, ∀ f : (Num) -> Real, euclid_euclid_scale(r, euclid_euclid_scale(s, f)) == euclid_euclid_scale(r * s, f)"), t532))
 }
 
 ///|
@@ -1394,7 +1394,7 @@ pub fn euclid_scale_act() -> @kernel.Thm {
 fn step_59() -> Unit raise {
   let t533 = @meson.meson_tac(@list.List([@class.eta_ax()]))
   let t534 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_scale()])), @tactics_ext2.reduce_tac, t533])
-  euclid_scale_one_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, op_euclid_prime_euclid_us_scale(real_of_num(1), f) == f"), t534))
+  euclid_scale_one_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_euclid_scale(real_of_num(1), f) == f"), t534))
 }
 
 ///|
@@ -1428,7 +1428,7 @@ pub fn euclid_neg_sum() -> @kernel.Thm {
 fn step_61() -> Unit raise {
   let t537 = @tactics.then_tac(@tactics_ext2.imatch_mp_tac(@class.eq_ext()), @tactics.beta_tac)
   let t538 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_plus(), @misc_defs_and_lemmas.euclid_scale()])), t537, @calc_rat.real_arith_tac])
-  trivial_lin_combo_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ t : Real, op_euclid_prime_euclid_us_scale(t, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, x) == x"), t538))
+  trivial_lin_combo_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ t : Real, euclid_euclid_scale(t, x) + euclid_euclid_scale(real_of_num(1) - t, x) == x"), t538))
 }
 
 ///|
@@ -1446,7 +1446,7 @@ fn step_62() -> Unit raise {
   let t544 = @tactics.accept_tac(@int.arith_rule(@term_syntax.parse_term("(q : Num) >= q")))
   let t545 = @meson.meson_tac(@list.List([@misc_defs_and_lemmas.euclid(), @int.arith_rule(@term_syntax.parse_term("((a : Num) <= (b : Num)) == (b >= a)"))]))
   let t546 = @tactics.undisch_tac(@term_syntax.parse_term("(n : Num) >= (q : Num)"))
-  let t547 = @tactics.undisch_tac(@term_syntax.parse_term("op_euclid_prime_euclid((q : Num), (f : (Num) -> Real))"))
+  let t547 = @tactics.undisch_tac(@term_syntax.parse_term("euclid_euclid((q : Num), (f : (Num) -> Real))"))
   let t548 = @tactics.subgoal_then(@term_syntax.parse_term("(f : (Num) -> Real)((n : Num)) == real_of_num(0)"), fn(x542 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_1 = x542
     @simp.rewrite_tac(@list.List([th_1, @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) * (a : Real) == real_of_num(0)"))]))
@@ -1464,16 +1464,16 @@ fn step_62() -> Unit raise {
   let t555 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(q : Num)"), t539]), @arith.le_exists()))
   let t556 = @simp.abbrev_tac(@term_syntax.parse_term("(q : Num) == min_num((P : (Num) -> Bool))"))
   let t557 = @meson.asm_meson_tac(@list.List([@misc_defs_and_lemmas.min_least()]))
-  let t558 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid(min_num((P : (Num) -> Bool)), (f : (Num) -> Real)) && op_euclid_prime_euclid(min_num(P), (g : (Num) -> Real))"))
+  let t558 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid(min_num((P : (Num) -> Bool)), (f : (Num) -> Real)) && euclid_euclid(min_num(P), (g : (Num) -> Real))"))
   let t559 = @meson.asm_meson_tac(@list.List([@misc_defs_and_lemmas.min_least()]))
   let t560 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("min_num((P : (Num) -> Bool)) <= (p : Num)"))
   let t561 = @simp.asm_rewrite_tac(@list.List([]))
   let t562 = @analysis.expand_tac("P")
   let t563 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(P : (Num) -> Bool)((p : Num))"))
-  let t564 = @simp.abbrev_tac(@term_syntax.parse_term("(P : (Num) -> Bool) == ((m : Num) => op_euclid_prime_euclid(m, (f : (Num) -> Real)) && op_euclid_prime_euclid(m, (g : (Num) -> Real)))"))
+  let t564 = @simp.abbrev_tac(@term_syntax.parse_term("(P : (Num) -> Bool) == ((m : Num) => euclid_euclid(m, (f : (Num) -> Real)) && euclid_euclid(m, (g : (Num) -> Real)))"))
   let t565 = @tactics.repeat_tac(@tactics.gen_tac)
   let t566 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.dot()])), @float.let_tac, t565, t564, @tactics_ext.disch_all_tac, t563, t562, t561, @tactics.disch_tac, t560, t559, @tactics.disch_tac, t558, t557, @tactics_ext.disch_all_tac, t556, t555, t554, t553, t552, t551, t550, t549, @tactics.disch_tac, t548, t547, t546, t545, t544])
-  dot_euclid_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall p f g. (euclid p f) /\\ (euclid p g) ==>\n   (dot f g = sum (0,p) (\\i. (f i)* (g i)))"), t566))
+  dot_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ p : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_euclid(p, f) && euclid_euclid(p, g) → euclid_dot(f, g) == sum((0, p), (i : Num) => f(i) * g(i))"), t566))
 }
 
 ///|
@@ -1490,9 +1490,9 @@ pub fn dot_euclid() -> @kernel.Thm {
 fn step_63() -> Unit raise {
   let t567 = @tactics.match_accept_tac(dot_euclid())
   let t568 = @meson.asm_meson_tac(@list.List([euclid_updim()]))
-  let t569 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (f : (Num) -> Real)) && op_euclid_prime_euclid(n, (g : (Num) -> Real))"))
+  let t569 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (f : (Num) -> Real)) && euclid_euclid(n, (g : (Num) -> Real))"))
   let t570 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics_ext.disch_all_tac, t569, t568, t567])
-  dot_updim_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g m n. (m <=|n) /\\ (euclid m f) /\\ (euclid m g) ==>\n   (dot f g = sum (0,n) (\\i. (f i)* (g i)))"), t570))
+  dot_updim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ m : Num, ∀ n : Num, m <= n && euclid_euclid(m, f) && euclid_euclid(m, g) → euclid_dot(f, g) == sum((0, n), (i : Num) => f(i) * g(i))"), t570))
 }
 
 ///|
@@ -1512,7 +1512,7 @@ fn step_64() -> Unit raise {
   let t573 = @simp.rewrite_tac(@list.List([@analysis.real_le_square()]))
   let t574 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ n : Num, real_of_num(0) <= ((i : Num) => (f : (Num) -> Real)(i) * f(i))(n)"))
   let t575 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.dot()])), @float.let_tac, @tactics.gen_tac, t574, @tactics.beta_tac, t573, t572, t571])
-  dot_nonneg_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f. (&.0 <= (dot f f))"), t575))
+  dot_nonneg_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, real_of_num(0) <= euclid_dot(f, f)"), t575))
 }
 
 ///|
@@ -1530,7 +1530,7 @@ fn step_65() -> Unit raise {
   let t576 = @class.taut(@term_syntax.parse_term("((a : Bool) && (b : Bool)) == (b && a)"))
   let t577 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(a : Real) * (b : Real) == b * a")), t576]))
   let t578 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.dot()])), t577])
-  dot_comm_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g. (dot f g = dot g f)"), t578))
+  dot_comm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_dot(f, g) == euclid_dot(g, f)"), t578))
 }
 
 ///|
@@ -1552,7 +1552,7 @@ fn step_66() -> Unit raise {
   let t583 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@analysis.sum_neg())]))
   let t584 = @simp.rewrite_tac(@list.List([@equal.gsym(neg_dim())]))
   let t585 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.dot()])), @float.let_tac, t584, t583, t582, t581, @tactics.ap_term_tac, t580, @tactics.beta_tac, @tactics.gen_tac, t579])
-  dot_neg_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g. (dot (--f) g) = --. (dot f g)"), t585))
+  dot_neg_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_dot(-f, g) == -euclid_dot(f, g)"), t585))
 }
 
 ///|
@@ -1569,7 +1569,7 @@ pub fn dot_neg() -> @kernel.Thm {
 fn step_67() -> Unit raise {
   let t586 = @simp.rewrite_tac(@list.List([dot_neg()]))
   let t587 = @list.List([@simp.once_rewrite_tac(@list.List([dot_comm()])), t586])
-  dot_neg2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g. (dot f (--g)) = --. (dot f g)"), t587))
+  dot_neg2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_dot(f, -g) == -euclid_dot(f, g)"), t587))
 }
 
 ///|
@@ -1600,7 +1600,7 @@ fn step_68() -> Unit raise {
   let t596 = @bool.specl(@list.List([@term_syntax.parse_term("(n : Num)"), t595, t594]), euclid_scale_closure())
   let t606 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([@misc_defs_and_lemmas.euclid_scale()]))(t596))
   let t607 = @simp.asm_rewrite_tac(@list.List([]))
-  let t608 = @tactics.subgoal_then(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (i : Num) => (s : Real) * (f : (Num) -> Real)(i)) && op_euclid_prime_euclid(n, (g : (Num) -> Real))"), fn(x591 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t608 = @tactics.subgoal_then(@term_syntax.parse_term("euclid_euclid((n : Num), (i : Num) => (s : Real) * (f : (Num) -> Real)(i)) && euclid_euclid(n, (g : (Num) -> Real))"), fn(x591 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s592 = @tactics.assume_tac(x591)
     fn(x593 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s592(x593)
@@ -1613,7 +1613,7 @@ fn step_68() -> Unit raise {
   })
   let t610 = @tactics.repeat_tac(@tactics.gen_tac)
   let t611 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_scale()])), t610, t609, t608, t607, t606, t605, t604, t603, t602, @tactics.ap_term_tac, t601, @tactics.gen_tac, @tactics.beta_tac, t600])
-  dot_scale_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall n f g s. (euclid n f) /\\ (euclid n g) ==>\n  (dot (s *# f) g = s *. (dot f g))"), t611))
+  dot_scale_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ s : Real, euclid_euclid(n, f) && euclid_euclid(n, g) → euclid_dot(euclid_euclid_scale(s, f), g) == s * euclid_dot(f, g)"), t611))
 }
 
 ///|
@@ -1630,7 +1630,7 @@ pub fn dot_scale() -> @kernel.Thm {
 fn step_69() -> Unit raise {
   let t618 = @meson.meson_tac(@list.List([dot_scale()]))
   let t619 = @meson.asm_meson_tac(@list.List([euclid_updim()]))
-  let t620 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + (n' : Num), (f : (Num) -> Real)) && op_euclid_prime_euclid(n + n', (g : (Num) -> Real))"))
+  let t620 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + (n' : Num), (f : (Num) -> Real)) && euclid_euclid(n + n', (g : (Num) -> Real))"))
   let t621 = @tactics.assume_tac(@int.arith_rule(@term_syntax.parse_term("(n : Num) <= n + (n' : Num)")))
   let t622 = @tactics.assume_tac(@int.arith_rule(@term_syntax.parse_term("(n' : Num) <= (n : Num) + n'")))
   let t615 = @tactics.choose_then(fn(x612 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1639,10 +1639,10 @@ fn step_69() -> Unit raise {
       s613(x614)
     }
   })
-  let t616 = @term_syntax.parse_term("op_euclid_prime_euclid")
+  let t616 = @term_syntax.parse_term("euclid_euclid")
   let t623 = @tactics.repeat_tac((x617 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t616, t615, x617))
   let t624 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics_ext.disch_all_tac, t623, @tactics_ext.disch_all_tac, t622, t621, t620, t619, t618])
-  dot_scale_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g s. (euclidean f) /\\ (euclidean g) ==>\n  (dot (s *# f) g = s *. (dot f g))"), t624))
+  dot_scale_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ s : Real, euclid_euclidean(f) && euclid_euclidean(g) → euclid_dot(euclid_euclid_scale(s, f), g) == s * euclid_dot(f, g)"), t624))
 }
 
 ///|
@@ -1659,7 +1659,7 @@ pub fn dot_scale_euclidean() -> @kernel.Thm {
 fn step_70() -> Unit raise {
   let t625 = @meson.meson_tac(@list.List([dot_scale()]))
   let t626 = @list.List([@simp.once_rewrite_tac(@list.List([dot_comm()])), t625])
-  dot_scale2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall n f g s. (euclid n f) /\\ (euclid n g) ==>\n  (dot f (s *# g) = s *. (dot f g))"), t626))
+  dot_scale2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ s : Real, euclid_euclid(n, f) && euclid_euclid(n, g) → euclid_dot(f, euclid_euclid_scale(s, g)) == s * euclid_dot(f, g)"), t626))
 }
 
 ///|
@@ -1676,7 +1676,7 @@ pub fn dot_scale2() -> @kernel.Thm {
 fn step_71() -> Unit raise {
   let t627 = @meson.meson_tac(@list.List([dot_scale_euclidean()]))
   let t628 = @list.List([@simp.once_rewrite_tac(@list.List([dot_comm()])), t627])
-  dot_scale2_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g s. (euclidean f) /\\ (euclidean g) ==>\n  (dot f (s *# g) = s *. (dot f g))"), t628))
+  dot_scale2_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ s : Real, euclid_euclidean(f) && euclid_euclidean(g) → euclid_dot(f, euclid_euclid_scale(s, g)) == s * euclid_dot(f, g)"), t628))
 }
 
 ///|
@@ -1707,8 +1707,8 @@ fn step_72() -> Unit raise {
   let t630 = @term_syntax.parse_term("(f : (Num) -> Real)")
   let t643 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n : Num)"), t630, t629]), dot_euclid()))
   let t644 = @meson.asm_meson_tac(@list.List([euclid_add_closure()]))
-  let t645 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (f : (Num) -> Real) + (g : (Num) -> Real))")), t644, @tactics.disch_tac, t643, t642, t641, t640, @tactics_ext.disch_all_tac, t639, t638, @tactics.ap_term_tac, t637, t636, t635])
-  dot_linear_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot (f + g) h ) = (dot f h) +. (dot g h))"), t645))
+  let t645 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (f : (Num) -> Real) + (g : (Num) -> Real))")), t644, @tactics.disch_tac, t643, t642, t641, t640, @tactics_ext.disch_all_tac, t639, t638, @tactics.ap_term_tac, t637, t636, t635])
+  dot_linear_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) → euclid_dot(f + g, h) == euclid_dot(f, h) + euclid_dot(g, h)"), t645))
 }
 
 ///|
@@ -1739,8 +1739,8 @@ fn step_73() -> Unit raise {
   let t647 = @term_syntax.parse_term("(f : (Num) -> Real)")
   let t660 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n : Num)"), t647, t646]), dot_euclid()))
   let t661 = @meson.asm_meson_tac(@list.List([euclid_sub_closure()]))
-  let t662 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (f : (Num) -> Real) - (g : (Num) -> Real))")), t661, @tactics.disch_tac, t660, t659, t658, t657, @tactics_ext.disch_all_tac, t656, t655, @tactics.ap_term_tac, t654, t653, t652])
-  dot_minus_linear_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot (f - g) h ) = (dot f h) -. (dot g h))"), t662))
+  let t662 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (f : (Num) -> Real) - (g : (Num) -> Real))")), t661, @tactics.disch_tac, t660, t659, t658, t657, @tactics_ext.disch_all_tac, t656, t655, @tactics.ap_term_tac, t654, t653, t652])
+  dot_minus_linear_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) → euclid_dot(f - g, h) == euclid_dot(f, h) - euclid_dot(g, h)"), t662))
 }
 
 ///|
@@ -1757,21 +1757,21 @@ pub fn dot_minus_linear() -> @kernel.Thm {
 fn step_74() -> Unit raise {
   let t669 = @meson.meson_tac(@list.List([dot_linear()]))
   let t670 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n'' : Num) <= (n : Num) + ((n' : Num) + n'')")), euclid_updim()]))
-  let t671 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (h : (Num) -> Real))"))
+  let t671 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (h : (Num) -> Real))"))
   let t672 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n' : Num) <= (n : Num) + (n' + (n'' : Num))")), euclid_updim()]))
-  let t673 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (g : (Num) -> Real))"))
+  let t673 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (g : (Num) -> Real))"))
   let t674 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) <= n + ((n' : Num) + (n'' : Num))")), euclid_updim()]))
-  let t675 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (f : (Num) -> Real))"))
+  let t675 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (f : (Num) -> Real))"))
   let t666 = @tactics.choose_then(fn(x663 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s664 = @tactics.mp_tac(x663)
     fn(x665 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s664(x665)
     }
   })
-  let t667 = @term_syntax.parse_term("op_euclid_prime_euclid")
+  let t667 = @term_syntax.parse_term("euclid_euclid")
   let t676 = @tactics.repeat_tac((x668 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t667, t666, x668))
   let t677 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics_ext.disch_all_tac, t676, @tactics_ext.disch_all_tac, t675, t674, t673, t672, t671, t670, t669])
-  dot_linear_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot (f + g) h ) = (dot f h) +. (dot g h))"), t677))
+  dot_linear_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) → euclid_dot(f + g, h) == euclid_dot(f, h) + euclid_dot(g, h)"), t677))
 }
 
 ///|
@@ -1788,21 +1788,21 @@ pub fn dot_linear_euclidean() -> @kernel.Thm {
 fn step_75() -> Unit raise {
   let t684 = @meson.meson_tac(@list.List([dot_minus_linear()]))
   let t685 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n'' : Num) <= (n : Num) + ((n' : Num) + n'')")), euclid_updim()]))
-  let t686 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (h : (Num) -> Real))"))
+  let t686 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (h : (Num) -> Real))"))
   let t687 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n' : Num) <= (n : Num) + (n' + (n'' : Num))")), euclid_updim()]))
-  let t688 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (g : (Num) -> Real))"))
+  let t688 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (g : (Num) -> Real))"))
   let t689 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n : Num) <= n + ((n' : Num) + (n'' : Num))")), euclid_updim()]))
-  let t690 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (f : (Num) -> Real))"))
+  let t690 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num) + ((n' : Num) + (n'' : Num)), (f : (Num) -> Real))"))
   let t681 = @tactics.choose_then(fn(x678 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s679 = @tactics.mp_tac(x678)
     fn(x680 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s679(x680)
     }
   })
-  let t682 = @term_syntax.parse_term("op_euclid_prime_euclid")
+  let t682 = @term_syntax.parse_term("euclid_euclid")
   let t691 = @tactics.repeat_tac((x683 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t682, t681, x683))
   let t692 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics_ext.disch_all_tac, t691, @tactics_ext.disch_all_tac, t690, t689, t688, t687, t686, t685, t684])
-  dot_minus_linear_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot (f - g) h ) = (dot f h) -. (dot g h))"), t692))
+  dot_minus_linear_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) → euclid_dot(f - g, h) == euclid_dot(f, h) - euclid_dot(g, h)"), t692))
 }
 
 ///|
@@ -1820,7 +1820,7 @@ fn step_76() -> Unit raise {
   let t693 = @meson.meson_tac(@list.List([dot_linear()]))
   let t694 = @simp.once_rewrite_tac(@list.List([dot_comm()]))
   let t695 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t694, t693])
-  dot_linear2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot h (f + g)) = (dot h f) +. (dot h g))"), t695))
+  dot_linear2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) → euclid_dot(h, f + g) == euclid_dot(h, f) + euclid_dot(h, g)"), t695))
 }
 
 ///|
@@ -1838,7 +1838,7 @@ fn step_77() -> Unit raise {
   let t696 = @meson.meson_tac(@list.List([dot_linear_euclidean()]))
   let t697 = @simp.once_rewrite_tac(@list.List([dot_comm()]))
   let t698 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t697, t696])
-  dot_linear2_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot h (f + g)) = (dot h f) +. (dot h g))"), t698))
+  dot_linear2_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) → euclid_dot(h, f + g) == euclid_dot(h, f) + euclid_dot(h, g)"), t698))
 }
 
 ///|
@@ -1856,7 +1856,7 @@ fn step_78() -> Unit raise {
   let t699 = @meson.meson_tac(@list.List([dot_minus_linear()]))
   let t700 = @simp.once_rewrite_tac(@list.List([dot_comm()]))
   let t701 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t700, t699])
-  dot_minus_linear2_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall n f g h. (euclid n f) /\\ (euclid n g) /\\ (euclid n h) ==>\n    ((dot h (f - g)) = (dot h f) -. (dot h g))"), t701))
+  dot_minus_linear2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclid(n, f) && euclid_euclid(n, g) && euclid_euclid(n, h) → euclid_dot(h, f - g) == euclid_dot(h, f) - euclid_dot(h, g)"), t701))
 }
 
 ///|
@@ -1874,7 +1874,7 @@ fn step_79() -> Unit raise {
   let t702 = @meson.meson_tac(@list.List([dot_minus_linear_euclidean()]))
   let t703 = @simp.once_rewrite_tac(@list.List([dot_comm()]))
   let t704 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t703, t702])
-  dot_minus_linear2_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g h. (euclidean f) /\\ (euclidean g) /\\ (euclidean h) ==>\n    ((dot h (f - g)) = (dot h f) -. (dot h g))"), t704))
+  dot_minus_linear2_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, ∀ h : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) && euclid_euclidean(h) → euclid_dot(h, f - g) == euclid_dot(h, f) - euclid_dot(h, g)"), t704))
 }
 
 ///|
@@ -1896,7 +1896,7 @@ fn step_80() -> Unit raise {
     @simp.rewrite_tac(@list.List([t]))
   })
   let t710 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.dot(), @misc_defs_and_lemmas.euclid0()])), @float.let_tac, @tactics.gen_tac, t709, t708, t707])
-  dot_rzero_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f. (dot f euclid0) = &.0"), t710))
+  dot_rzero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_dot(f, euclid_euclid0) == real_of_num(0)"), t710))
 }
 
 ///|
@@ -1913,7 +1913,7 @@ pub fn dot_rzero() -> @kernel.Thm {
 fn step_81() -> Unit raise {
   let t711 = @simp.rewrite_tac(@list.List([dot_rzero()]))
   let t712 = @list.List([@simp.once_rewrite_tac(@list.List([dot_comm()])), t711])
-  dot_lzero_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f. (dot euclid0 f ) = &.0"), t712))
+  dot_lzero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_dot(euclid_euclid0, f) == real_of_num(0)"), t712))
 }
 
 ///|
@@ -1930,7 +1930,7 @@ pub fn dot_lzero() -> @kernel.Thm {
 fn step_82() -> Unit raise {
   let t727 = @meson.asm_meson_tac(@list.List([]))
   let t728 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid()]))
-  let t729 = @tactics.undisch_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (f : (Num) -> Real))"))
+  let t729 = @tactics.undisch_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (f : (Num) -> Real))"))
   let t730 = @meson.meson_tac(@list.List([@analysis.real_le_square(), @calc_rat.real_arith(@term_syntax.parse_term("(a : Real) <= real_of_num(0) && real_of_num(0) <= a → a == real_of_num(0)")), @realarith.real_entire()]))
   let t731 = @simp.abbrev_tac(@term_syntax.parse_term("(a : Real) == (f : (Num) -> Real)((x : Num))"))
   let t732 = @simp.asm_rewrite_tac(@list.List([]))
@@ -1973,8 +1973,8 @@ fn step_82() -> Unit raise {
   let t713 = @term_syntax.parse_term("(f : (Num) -> Real)")
   let t714 = @term_syntax.parse_term("(f : (Num) -> Real)")
   let t752 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(n : Num)"), t714, t713]), dot_euclid()))
-  let t753 = @list.List([@tactics_ext.disch_all_tac, @tactics.undisch_tac(@parser.parse_term("dot f f = (&.0)")), t752, t751, t750, t749, @tactics.disch_tac, t748, t747, t746, t745, t744, t743, t742, t741, t740, t739, t738, @tactics.beta_tac, t737, t736, @tactics_ext.disch_all_tac, t735, t734, @tactics.disch_tac, t733, t732, t731, t730, t729, t728, t727])
-  dot_zero_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f n. (euclid n f) /\\ (dot f f = (&.0)) ==> (f = euclid0)"), t753))
+  let t753 = @list.List([@tactics_ext.disch_all_tac, @tactics.undisch_tac(@term_syntax.parse_term("euclid_dot((f : (Num) -> Real), f) == real_of_num(0)")), t752, t751, t750, t749, @tactics.disch_tac, t748, t747, t746, t745, t744, t743, t742, t741, t740, t739, t738, @tactics.beta_tac, t737, t736, @tactics_ext.disch_all_tac, t735, t734, @tactics.disch_tac, t733, t732, t731, t730, t729, t728, t727])
+  dot_zero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ n : Num, euclid_euclid(n, f) && euclid_dot(f, f) == real_of_num(0) → f == euclid_euclid0"), t753))
 }
 
 ///|
@@ -1990,9 +1990,9 @@ pub fn dot_zero() -> @kernel.Thm {
 /// dot_zero_euclidean
 fn step_83() -> Unit raise {
   let t756 = @meson.asm_meson_tac(@list.List([dot_zero()]))
-  let t754 = @term_syntax.parse_term("op_euclid_prime_euclid")
+  let t754 = @term_syntax.parse_term("euclid_euclid")
   let t757 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), @tactics_ext.disch_all_tac, (x755 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t754, @tactics.choose_tac, x755), t756])
-  dot_zero_euclidean_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f. (euclidean f) /\\ (dot f f = (&.0)) ==> (f = euclid0)"), t757))
+  dot_zero_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_euclidean(f) && euclid_dot(f, f) == real_of_num(0) → f == euclid_euclid0"), t757))
 }
 
 ///|
@@ -2011,7 +2011,7 @@ fn step_84() -> Unit raise {
   let t759 = @tactics.match_mp_tac(@real.sqrt_mono_le())
   let t760 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@real.sqrt_0())]))
   let t761 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.norm()])), t760, @tactics.gen_tac, t759, t758])
-  norm_nonneg_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, real_of_num(0) <= op_euclid_prime_norm(f)"), t761))
+  norm_nonneg_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, real_of_num(0) <= euclid_norm(f)"), t761))
 }
 
 ///|
@@ -2028,7 +2028,7 @@ pub fn norm_nonneg() -> @kernel.Thm {
 fn step_85() -> Unit raise {
   let t762 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("--(x : Real) == x"))]))
   let t763 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.norm(), dot_neg(), dot_neg2()])), t762])
-  norm_neg_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, op_euclid_prime_norm(-f) == op_euclid_prime_norm(f)"), t763))
+  norm_neg_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, euclid_norm(-f) == euclid_norm(f)"), t763))
 }
 
 ///|
@@ -2054,15 +2054,15 @@ fn step_86() -> Unit raise {
     let t = x775
     @tactics.all_tac
   })
-  let t785 = @simp.abbrev_tac(@parser.parse_term("c = dot g g"))
-  let t786 = @simp.abbrev_tac(@parser.parse_term("b = dot f g"))
-  let t787 = @simp.abbrev_tac(@parser.parse_term("a = dot f f"))
+  let t785 = @simp.abbrev_tac(@term_syntax.parse_term("(c : Real) == euclid_dot((g : (Num) -> Real), g)"))
+  let t786 = @simp.abbrev_tac(@term_syntax.parse_term("(b : Real) == euclid_dot((f : (Num) -> Real), (g : (Num) -> Real))"))
+  let t787 = @simp.abbrev_tac(@term_syntax.parse_term("(a : Real) == euclid_dot((f : (Num) -> Real), f)"))
   let t773 = @term_syntax.parse_term("real_le")
   let t788 = @tactics.repeat_tac((x774 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t773, x774))
   let t789 = @meson.asm_meson_tac(@list.List([dot_zero_euclidean()]))
   let t790 = @simp.asm_rewrite_tac(@list.List([]))
   let t791 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("!((x : Real) == real_of_num(0)) && real_of_num(0) <= x → real_of_num(0) < x")))
-  let t792 = @tactics_ext.subgoal_tac(@parser.parse_term("&.0 <. dot f f"))
+  let t792 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("real_of_num(0) < euclid_dot((f : (Num) -> Real), f)"))
   let t793 = @simp.rewrite_tac(@list.List([@analysis.real_le_square()]))
   let t794 = @tactics.match_mp_tac(@real.sqrt_mono_le())
   let t795 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.pow_2_sqrt_abs()), @analysis.pow_2()]))
@@ -2070,7 +2070,7 @@ fn step_86() -> Unit raise {
   let t797 = @tactics.assume_tac(@bool.spec(@term_syntax.parse_term("(g : (Num) -> Real)"), dot_nonneg()))
   let t798 = @tactics.assume_tac(@bool.spec(@term_syntax.parse_term("(f : (Num) -> Real)"), dot_nonneg()))
   let t799 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.norm()]))
-  let t800 = @tactics_ext2.clean_then(@bool.spec(@parser.parse_term("(--.(dot f g)) *# f + (dot f f)*# g"), dot_nonneg()), fn(x770 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t800 = @tactics_ext2.clean_then(@bool.spec(@term_syntax.parse_term("euclid_euclid_scale(-euclid_dot((f : (Num) -> Real), (g : (Num) -> Real)), f) + euclid_euclid_scale(euclid_dot(f, f), g)"), dot_nonneg()), fn(x770 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s771 = @tactics.assume_tac(x770)
     fn(x772 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s771(x772)
@@ -2078,8 +2078,8 @@ fn step_86() -> Unit raise {
   })
   let t801 = @tactics.first_assum(fn(x767 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x767
-    let t769 = @parser.parse_term("dot f f")
-    @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term(" --. (dot f g)"), t769]), th))
+    let t769 = @term_syntax.parse_term("euclid_dot((f : (Num) -> Real), f)")
+    @tactics.assume_tac(@bool.specl(@list.List([@term_syntax.parse_term("-euclid_dot((f : (Num) -> Real), (g : (Num) -> Real))"), t769]), th))
   })
   let t802 = @simp.rewrite_tac(@list.List([dot_comm()]))
   let t803 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("(a : Real) == (b : Real) → a + b == a * real_of_num(2)")))
@@ -2089,7 +2089,7 @@ fn step_86() -> Unit raise {
   let t807 = @simp.rewrite_tac(@list.List([@real.real_mul_ac(), @calc_int.real_add_ac(), @realax.real_add_ldistrib()]))
   let t808 = @simp.asm_simp_tac(@list.List([euclidean_scale_closure(), euclidean_add_closure(), dot_linear_euclidean(), dot_linear2_euclidean(), dot_scale_euclidean(), dot_scale2_euclidean()]))
   let t809 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t810 = @tactics.subgoal_then(@parser.parse_term("forall a b. (dot (a *# f + b *# g) (a *# f + b *# g)) = a*a*(dot f f) + (&.2)*a*b*(dot f g) + b*b*(dot g g)"), fn(x764 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t810 = @tactics.subgoal_then(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, euclid_dot(euclid_euclid_scale(a, (f : (Num) -> Real)) + euclid_euclid_scale(b, (g : (Num) -> Real)), euclid_euclid_scale(a, f) + euclid_euclid_scale(b, g)) == a * (a * euclid_dot(f, f)) + (real_of_num(2) * (a * (b * euclid_dot(f, g))) + b * (b * euclid_dot(g, g)))"), fn(x764 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s765 = @tactics.assume_tac(x764)
     fn(x766 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s765(x766)
@@ -2097,8 +2097,8 @@ fn step_86() -> Unit raise {
   })
   let t811 = @simp.rewrite_tac(@list.List([@analysis.abs_0(), @calc_rat.real_arith(@term_syntax.parse_term("(x : Real) <= x"))]))
   let t812 = @simp.asm_rewrite_tac(@list.List([dot_lzero(), @misc_defs_and_lemmas.norm(), @real.sqrt_0(), @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) * (x : Real) == real_of_num(0)"))]))
-  let t813 = @list.List([@tactics_ext.disch_all_tac, @tactics.disj_cases_tac(@class.taut(@term_syntax.parse_term("(f : (Num) -> Real) == op_euclid_prime_euclid0 || !(f == op_euclid_prime_euclid0)"))), t812, t811, t810, t809, t808, t807, t806, t805, t804, t803, t802, t801, t800, t799, t798, t797, t796, t795, t794, t793, t792, t791, t790, t789, t788, t787, t786, t785, t784, t783, t782, t781, t780, t779, @tactics_ext.disch_all_tac, t778, t777])
-  cauchy_schwartz_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall f g. (euclidean f) /\\ (euclidean g) ==>\n   ((abs(dot f g)) <=. (norm f)*. (norm g))"), t813))
+  let t813 = @list.List([@tactics_ext.disch_all_tac, @tactics.disj_cases_tac(@class.taut(@term_syntax.parse_term("(f : (Num) -> Real) == euclid_euclid0 || !(f == euclid_euclid0)"))), t812, t811, t810, t809, t808, t807, t806, t805, t804, t803, t802, t801, t800, t799, t798, t797, t796, t795, t794, t793, t792, t791, t790, t789, t788, t787, t786, t785, t784, t783, t782, t781, t780, t779, @tactics_ext.disch_all_tac, t778, t777])
+  cauchy_schwartz_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) → abs(euclid_dot(f, g)) <= euclid_norm(f) * euclid_norm(g)"), t813))
 }
 
 ///|
@@ -2116,7 +2116,7 @@ fn step_87() -> Unit raise {
   let t814 = @simp.rewrite_tac(@list.List([@real.sqrt_pow2(), dot_nonneg()]))
   let t815 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@analysis.pow_2())]))
   let t816 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.norm()])), t815, t814])
-  norm_dot_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall h. norm(h) * norm(h) = (dot h h)"), t816))
+  norm_dot_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ h : (Num) -> Real, euclid_norm(h) * euclid_norm(h) == euclid_dot(h, h)"), t816))
 }
 
 ///|
@@ -2144,7 +2144,7 @@ fn step_88() -> Unit raise {
   let t827 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) <= (x : Real) && real_of_num(0) <= (y : Real) → real_of_num(0) <= x + y")))
   let t828 = @simp.rewrite_tac(@list.List([norm_nonneg()]))
   let t829 = @list.List([@tactics_ext.disch_all_tac, @tactics.match_mp_tac(@misc_defs_and_lemmas.square_le()), t828, @tactics.conj_tac, t827, t826, t825, t824, t823, t822, t821, t820, t819, @tactics.conj_tac, t818, t817])
-  norm_triangle_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, op_euclid_prime_euclidean(f) && op_euclid_prime_euclidean(g) → op_euclid_prime_norm(f + g) <= op_euclid_prime_norm(f) + op_euclid_prime_norm(g)"), t829))
+  norm_triangle_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num) -> Real, ∀ g : (Num) -> Real, euclid_euclidean(f) && euclid_euclidean(g) → euclid_norm(f + g) <= euclid_norm(f) + euclid_norm(g)"), t829))
 }
 
 ///|
@@ -2160,7 +2160,7 @@ pub fn norm_triangle() -> @kernel.Thm {
 /// metric_space_zero
 fn step_89() -> Unit raise {
   let t830 = @list.List([@meson.meson_tac(@list.List([@misc_defs_and_lemmas.metric_space()]))])
-  metric_space_zero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, op_euclid_prime_metric_us_space((X, d)) && X(a) → d(a, a) == real_of_num(0)"), t830))
+  metric_space_zero_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, euclid_metric_space((X, d)) && X(a) → d(a, a) == real_of_num(0)"), t830))
 }
 
 ///|
@@ -2176,7 +2176,7 @@ pub fn metric_space_zero() -> @kernel.Thm {
 /// metric_space_symm
 fn step_90() -> Unit raise {
   let t831 = @list.List([@meson.meson_tac(@list.List([@misc_defs_and_lemmas.metric_space()]))])
-  metric_space_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, op_euclid_prime_metric_us_space((X, d)) && X(a) && X(b) → d(a, b) == d(b, a)"), t831))
+  metric_space_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, euclid_metric_space((X, d)) && X(a) && X(b) → d(a, b) == d(b, a)"), t831))
 }
 
 ///|
@@ -2192,7 +2192,7 @@ pub fn metric_space_symm() -> @kernel.Thm {
 /// metric_space_triangle
 fn step_91() -> Unit raise {
   let t832 = @list.List([@meson.meson_tac(@list.List([@misc_defs_and_lemmas.metric_space()]))])
-  metric_space_triangle_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, ∀ c : A, op_euclid_prime_metric_us_space((X, d)) && X(a) && X(b) && X(c) → d(a, c) <= d(a, b) + d(b, c)"), t832))
+  metric_space_triangle_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, ∀ c : A, euclid_metric_space((X, d)) && X(a) && X(b) && X(c) → d(a, c) <= d(a, b) + d(b, c)"), t832))
 }
 
 ///|
@@ -2215,7 +2215,7 @@ fn step_92() -> Unit raise {
     let t836 = @term_syntax.parse_term("(y : A)")
     @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(x : A)"), t836, t835]), t))
   }, x838), t839])
-  metric_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_metric_us_space((Y, d))"), t840))
+  metric_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && euclid_metric_space((X, d)) → euclid_metric_space((Y, d))"), t840))
 }
 
 ///|
@@ -2250,7 +2250,7 @@ fn step_93() -> Unit raise {
   let t861 = @tactics.then_tac(@tactics.gen_tac, @tactics.beta_tac)
   let t862 = @tactics.match_mp_tac(@class.eq_ext())
   let t863 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid0(), @misc_defs_and_lemmas.euclid_minus()]))
-  let t864 = @tactics.subgoal_then(@term_syntax.parse_term("(y : (Num) -> Real) - y == op_euclid_prime_euclid0"), fn(x845 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t864 = @tactics.subgoal_then(@term_syntax.parse_term("(y : (Num) -> Real) - y == euclid_euclid0"), fn(x845 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_2 = x845
     @simp.rewrite_tac(@list.List([t_2]))
   })
@@ -2267,13 +2267,13 @@ fn step_93() -> Unit raise {
   let t869 = @tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(@class.eq_ext()))
   let t870 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid_minus(), @misc_defs_and_lemmas.euclid0()]))
   let t871 = @meson.asm_meson_tac(@list.List([dot_zero_euclidean(), euclidean_sub_closure()]))
-  let t872 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(x : (Num) -> Real) - (y : (Num) -> Real) == op_euclid_prime_euclid0"))
+  let t872 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(x : (Num) -> Real) - (y : (Num) -> Real) == euclid_euclid0"))
   let t873 = @simp.asm_simp_tac(@list.List([dot_nonneg(), @real.sqrt_eq_0()]))
   let t874 = @simp.once_rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(real_of_num(0) == (x : Real)) == (x == real_of_num(0))"))]))
   let t875 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.norm()]))
   let t876 = @simp.rewrite_tac(@list.List([norm_nonneg()]))
   let t877 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space(), @misc_defs_and_lemmas.d_euclid()])), @tactics_ext.disch_all_tac, @tactics.conj_tac, t876, @tactics.conj_tac, @tactics.eq_tac, t875, t874, t873, @tactics.disch_tac, t872, t871, t870, t869, t868, t867, t866, t865, t864, t863, t862, t861, @calc_rat.real_arith_tac, t860, @tactics.conj_tac, t859, t858, t857, @calc_rat.real_arith_tac, t856, t855, t854, t853, t852])
-  metric_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("op_euclid_prime_metric_us_space((op_euclid_prime_euclidean, op_euclid_prime_d_us_euclid))"), t877))
+  metric_euclidean_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("euclid_metric_space((euclid_euclidean, euclid_d_euclid))"), t877))
 }
 
 ///|
@@ -2290,8 +2290,8 @@ pub fn metric_euclidean() -> @kernel.Thm {
 fn step_94() -> Unit raise {
   let t878 = @meson.meson_tac(@list.List([@misc_defs_and_lemmas.euclidean()]))
   let t879 = @simp.rewrite_tac(@list.List([metric_euclidean(), @sets.subset(), @sets.in_()]))
-  let t880 = @list.List([@tactics.gen_tac, @tactics.match_mp_tac(@bool.ispec(@term_syntax.parse_term("op_euclid_prime_euclidean"), metric_subspace())), t879, t878])
-  metric_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, op_euclid_prime_metric_us_space((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid))"), t880))
+  let t880 = @list.List([@tactics.gen_tac, @tactics.match_mp_tac(@bool.ispec(@term_syntax.parse_term("euclid_euclidean"), metric_subspace())), t879, t878])
+  metric_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, euclid_metric_space((euclid_euclid(n), euclid_d_euclid))"), t880))
 }
 
 ///|
@@ -2323,9 +2323,9 @@ fn step_95() -> Unit raise {
   let t894 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(x : (Num) -> Real) - (y : (Num) -> Real)"), t883, t882, t881]), dot_updim()))
   let t895 = @tactics.assume_tac(@tactics_refine.prove(@term_syntax.parse_term("1 <= 1"), @int.arith_tac))
   let t896 = @meson.asm_meson_tac(@list.List([euclid_sub_closure()]))
-  let t897 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid(1, (x : (Num) -> Real) - (y : (Num) -> Real))"))
+  let t897 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid(1, (x : (Num) -> Real) - (y : (Num) -> Real))"))
   let t898 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.d_euclid(), @misc_defs_and_lemmas.norm()])), @tactics_ext.disch_all_tac, t897, t896, @tactics.disch_tac, t895, t894, t893, t892, t891, t890, t889, t888, t887, t886])
-  euclid1_abs_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, op_euclid_prime_euclid(1, x) && op_euclid_prime_euclid(1, y) → op_euclid_prime_d_us_euclid(x, y) == abs(x(0) - y(0))"), t898))
+  euclid1_abs_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, euclid_euclid(1, x) && euclid_euclid(1, y) → euclid_d_euclid(x, y) == abs(x(0) - y(0))"), t898))
 }
 
 ///|
@@ -2341,7 +2341,7 @@ pub fn euclid1_abs() -> @kernel.Thm {
 /// coord_dirac
 fn step_96() -> Unit raise {
   let t899 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.coord(), @misc_defs_and_lemmas.dirac_delta(), @misc_defs_and_lemmas.euclid_scale()])), @int.arith_tac])
-  coord_dirac_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ t : Real, op_euclid_prime_coord(i, op_euclid_prime_euclid_us_scale(t, dirac_delta(i))) == t"), t899))
+  coord_dirac_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ t : Real, euclid_coord(i, euclid_euclid_scale(t, dirac_delta(i))) == t"), t899))
 }
 
 ///|
@@ -2357,7 +2357,7 @@ pub fn coord_dirac() -> @kernel.Thm {
 /// dirac_0
 fn step_97() -> Unit raise {
   let t900 = @list.List([@tactics.gen_tac, @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.dirac_delta(), @misc_defs_and_lemmas.euclid_scale()])), @tactics_ext2.reduce_tac])
-  dirac_0_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : Real, op_euclid_prime_euclid_us_scale(x, dirac_delta(0), 0) == x"), t900))
+  dirac_0_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : Real, euclid_euclid_scale(x, dirac_delta(0), 0) == x"), t900))
 }
 
 ///|
@@ -2380,7 +2380,7 @@ fn step_98() -> Unit raise {
   let t906 = @tactics.x_gen_tac(@term_syntax.parse_term("(n : Num)"))
   let t907 = @tactics_ext2.imatch_mp_tac(@class.eq_ext())
   let t908 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_scale(), @misc_defs_and_lemmas.dirac_delta()])), @tactics.eq_tac, @tactics_ext.disch_all_tac, t907, t906, @tactics.beta_tac, @class.cond_cases_tac, @tactics_ext2.reduce_tac, t905, @tactics_ext2.reduce_tac, t904, @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, t903, t902, t901, @tactics_ext2.reduce_tac])
-  euclid1_dirac_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, op_euclid_prime_euclid(1, x) == (x == op_euclid_prime_euclid_us_scale(x(0), dirac_delta(0)))"), t908))
+  euclid1_dirac_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, euclid_euclid(1, x) == (x == euclid_euclid_scale(x(0), dirac_delta(0)))"), t908))
 }
 
 ///|
@@ -2413,7 +2413,7 @@ fn step_100() -> Unit raise {
   let t909 = @simp.asm_rewrite_tac(@list.List([]))
   let t910 = @tactics.repeat_tac(@tactics.gen_tac)
   let t911 = @list.List([@simp.rewrite_tac(@list.List([proj(), @misc_defs_and_lemmas.euclid()])), t910, @class.cond_cases_tac, t909, @int.arith_tac, @int.arith_tac])
-  proj_euclid1_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ x : (Num) -> Real, op_euclid_prime_euclid(1, op_euclid_prime_proj(i, x))"), t911))
+  proj_euclid1_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ x : (Num) -> Real, euclid_euclid(1, euclid_proj(i, x))"), t911))
 }
 
 ///|
@@ -2434,11 +2434,11 @@ fn step_101() -> Unit raise {
   let t914 = @term_syntax.parse_term("(x : (Num) -> Real) - (y : (Num) -> Real)")
   let t916 = @tactics_ext2.clean_assume_tac(@bool.specl(@list.List([@term_syntax.parse_term("(x : (Num) -> Real) - (y : (Num) -> Real)"), t914, t913, t912]), dot_updim()))
   let t917 = @simp.asm_simp_tac(@list.List([euclid_sub_closure()]))
-  let t918 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))"))
+  let t918 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))"))
   let t919 = @tactics.assume_tac(@int.arith_rule(@term_syntax.parse_term("(n : Num) <= n")))
   let t920 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.d_euclid(), @misc_defs_and_lemmas.norm()]))
   let t921 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t920, @tactics_ext.disch_all_tac, t919, t918, t917, @tactics.disch_tac, t916, t915])
-  d_euclid_n_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) → op_euclid_prime_d_us_euclid(x, y) == sqrt(sum((0, n), (i : Num) => (x(i) - y(i)) * (x(i) - y(i))))"), t921))
+  d_euclid_n_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, euclid_euclid(n, x) && euclid_euclid(n, y) → euclid_d_euclid(x, y) == sqrt(sum((0, n), (i : Num) => (x(i) - y(i)) * (x(i) - y(i))))"), t921))
 }
 
 ///|
@@ -2462,7 +2462,7 @@ fn step_102() -> Unit raise {
     let t927 = @int.arith_rule(@term_syntax.parse_term("(n : Num) <= n"))
     @simp.simp_tac(@list.List([@misc_defs_and_lemmas.norm(), @bool.ispecl(t, dot_updim()), t927]))
   }, x929)])
-  norm_n_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, op_euclid_prime_euclid(n, x) → op_euclid_prime_norm(x) == sqrt(sum((0, n), (i : Num) => x(i) * x(i)))"), t930))
+  norm_n_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, euclid_euclid(n, x) → euclid_norm(x) == sqrt(sum((0, n), (i : Num) => x(i) * x(i)))"), t930))
 }
 
 ///|
@@ -2483,7 +2483,7 @@ fn step_103() -> Unit raise {
   let t934 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("1 == SUC(0)")), @analysis.sum()]))
   let t935 = @simp.simp_tac(@list.List([@bool.spec(@term_syntax.parse_term("1"), d_euclid_n()), proj_euclid1()]))
   let t936 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t935, t934, @calc_num.num_reduce_tac, t933, t932, t931])
-  proj_d_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, op_euclid_prime_d_us_euclid(op_euclid_prime_proj(i, x), op_euclid_prime_proj(i, y)) == abs(x(i) - y(i))"), t936))
+  proj_d_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, euclid_d_euclid(euclid_proj(i, x), euclid_proj(i, y)) == abs(x(i) - y(i))"), t936))
 }
 
 ///|
@@ -2501,7 +2501,7 @@ fn step_104() -> Unit raise {
   let t937 = @meson.asm_meson_tac(@list.List([]))
   let t938 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space(), @misc_defs_and_lemmas.euclidean()]))
   let t939 = @list.List([@tactics_ext.disch_all_tac, @tactics.mp_tac(metric_euclid()), t938, t937])
-  d_euclid_pos_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) → real_of_num(0) <= op_euclid_prime_d_us_euclid(x, y)"), t939))
+  d_euclid_pos_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ n : Num, euclid_euclid(n, x) && euclid_euclid(n, y) → real_of_num(0) <= euclid_d_euclid(x, y)"), t939))
 }
 
 ///|
@@ -2545,13 +2545,13 @@ fn step_105() -> Unit raise {
   let t966 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("real_of_num(0) <= sum((0, (n : Num)), (i : Num) => ((x : (Num) -> Real)(i) - (y : (Num) -> Real)(i)) * (x(i) - y(i)))"))
   let t967 = @meson.asm_meson_tac(@list.List([]))
   let t968 = @tactics.match_mp_tac(euclid_sub_closure())
-  let t969 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))"))
+  let t969 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))"))
   let t970 = @simp.rewrite_tac(@list.List([@real.real_pow2_abs()]))
   let t971 = @simp.asm_simp_tac(@list.List([@bool.spec(@term_syntax.parse_term("(n : Num)"), d_euclid_n())]))
   let t972 = @meson.asm_meson_tac(@list.List([d_euclid_pos()]))
   let t973 = @simp.rewrite_tac(@list.List([@real.real_abs_pos()]))
   let t974 = @list.List([@tactics_ext.disch_all_tac, @tactics.match_mp_tac(@tactics_ext2.real_pow_2_le()), t973, @tactics.conj_tac, t972, t971, t970, t969, t968, t967, @tactics.disch_tac, t966, t965, t964, t963, t962, @tactics.disch_tac, t961, t960, t959, t958, @calc_num.num_reduce_tac, t957, t956, t955, t954, t953, t952, @tactics.conj_tac, t951, t950, t949, t948, t947, @tactics.beta_tac, t946, t945, @tactics.beta_tac, t944])
-  proj_contraction_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ i : Num, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) → abs(x(i) - y(i)) <= op_euclid_prime_d_us_euclid(x, y)"), t974))
+  proj_contraction_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ i : Num, euclid_euclid(n, x) && euclid_euclid(n, y) → abs(x(i) - y(i)) <= euclid_d_euclid(x, y)"), t974))
 }
 
 ///|
@@ -2569,7 +2569,7 @@ fn step_106() -> Unit raise {
   let t975 = @simp.asm_rewrite_tac(@list.List([]))
   let t976 = @tactics_ext2.use_(0L, @drule.match_mp(@int.arith_rule(@term_syntax.parse_term("1 <= (m : Num) → !(0 == m)"))))
   let t977 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.dirac_delta(), @misc_defs_and_lemmas.euclid_scale()])), @tactics_ext.disch_all_tac, t976, t975, @tactics_ext2.reduce_tac])
-  euclid_dirac_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : Real, op_euclid_prime_euclid(1, op_euclid_prime_euclid_us_scale(x, dirac_delta(0)))"), t977))
+  euclid_dirac_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : Real, euclid_euclid(1, euclid_euclid_scale(x, dirac_delta(0)))"), t977))
 }
 
 ///|
@@ -2587,7 +2587,7 @@ fn step_107() -> Unit raise {
   let t978 = @tactics.match_mp_tac(@analysis.sum_pos_gen())
   let t979 = @simp.rewrite_tac(@list.List([@real.sqrt_pow2()]))
   let t980 = @list.List([@tactics_ext.disch_all_tac, @simp.asm_simp_tac(@list.List([d_euclid_n()])), t979, t978, @tactics.beta_tac, @tactics_ext2.reduce_tac])
-  d_euclid_pow2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) → pow(op_euclid_prime_d_us_euclid(x, y), 2) == sum((0, n), (i : Num) => (x(i) - y(i)) * (x(i) - y(i)))"), t980))
+  d_euclid_pow2_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, euclid_euclid(n, x) && euclid_euclid(n, y) → pow(euclid_d_euclid(x, y), 2) == sum((0, n), (i : Num) => (x(i) - y(i)) * (x(i) - y(i)))"), t980))
 }
 
 ///|
@@ -2625,7 +2625,7 @@ fn step_108() -> Unit raise {
   let t1004 = @simp.asm_rewrite_tac(@list.List([]))
   let t1005 = @tactics_ext2.use_(0L, @drule.match_mp(d_euclid_pos()))
   let t1006 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.square_tac, @tactics_ext2.subconj_tac, @tactics_ext2.join(0L, 1L), t1005, t1004, @tactics.disch_tac, t1003, t1002, @tactics_ext2.subconj_tac, @tactics.all_tac, t1001, @tactics.disj1_tac, @tactics.conj_tac, t1000, @tactics_ext2.reduce_tac, t999, @tactics.disch_tac, t998, t997, @tactics.gen_tac, @tactics.all_tac, t996, t995, (x985 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x985), t994, t993, t992, t991, t990, @tactics.disch_tac, @tactics.all_tac, t989, @tactics.gen_tac, @tactics.disch_tac, @tactics.beta_tac, t988, t987])
-  d_euclid_bound_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ eps : Real, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) && (∀ i : Num, abs(x(i) - y(i)) <= eps) → op_euclid_prime_d_us_euclid(x, y) <= sqrt(real_of_num(n)) * eps"), t1006))
+  d_euclid_bound_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ eps : Real, euclid_euclid(n, x) && euclid_euclid(n, y) && (∀ i : Num, abs(x(i) - y(i)) <= eps) → euclid_d_euclid(x, y) <= sqrt(real_of_num(n)) * eps"), t1006))
 }
 
 ///|
@@ -2650,11 +2650,11 @@ fn step_109() -> Unit raise {
   let t1011 = @term_syntax.parse_term("(x : (Num) -> Real) + (z : (Num) -> Real) - ((y : (Num) -> Real) + z) == x - y")
   let t1019 = @simp.asm_simp_tac(@list.List([@bool.spec(@term_syntax.parse_term("(n : Num)"), dot_euclid())]))
   let t1020 = @simp.asm_simp_tac(@list.List([euclid_sub_closure(), euclid_add_closure()]))
-  let t1009 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real) + (z : (Num) -> Real) - ((y : (Num) -> Real) + z))")
+  let t1009 = @term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real) + (z : (Num) -> Real) - ((y : (Num) -> Real) + z))")
   let t1021 = @simp.asm_simp_tac(@list.List([euclid_sub_closure()]))
-  let t1007 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))")
+  let t1007 = @term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))")
   let t1022 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.d_euclid(), @misc_defs_and_lemmas.norm()])), @tactics_ext.disch_all_tac, (x1008 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1007, @tactics_ext.subgoal_tac, x1008), t1021, @tactics.disch_tac, (x1010 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1009, @tactics_ext.subgoal_tac, x1010), t1020, @tactics_ext.disch_all_tac, t1019, (x1012 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1011, @tactics_ext.subgoal_tac, x1012), t1018, t1017, t1016, @calc_rat.real_arith_tac, t1015])
-  metric_translate_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ z : (Num) -> Real, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) && op_euclid_prime_euclid(n, z) → op_euclid_prime_d_us_euclid(x + z, y + z) == op_euclid_prime_d_us_euclid(x, y)"), t1022))
+  metric_translate_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ z : (Num) -> Real, euclid_euclid(n, x) && euclid_euclid(n, y) && euclid_euclid(n, z) → euclid_d_euclid(x + z, y + z) == euclid_d_euclid(x, y)"), t1022))
 }
 
 ///|
@@ -2679,11 +2679,11 @@ fn step_110() -> Unit raise {
   let t1027 = @term_syntax.parse_term("(z : (Num) -> Real) + (x : (Num) -> Real) - (z + (y : (Num) -> Real)) == x - y")
   let t1035 = @simp.asm_simp_tac(@list.List([@bool.spec(@term_syntax.parse_term("(n : Num)"), dot_euclid())]))
   let t1036 = @simp.asm_simp_tac(@list.List([euclid_sub_closure(), euclid_add_closure()]))
-  let t1025 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (z : (Num) -> Real) + (x : (Num) -> Real) - (z + (y : (Num) -> Real)))")
+  let t1025 = @term_syntax.parse_term("euclid_euclid((n : Num), (z : (Num) -> Real) + (x : (Num) -> Real) - (z + (y : (Num) -> Real)))")
   let t1037 = @simp.asm_simp_tac(@list.List([euclid_sub_closure()]))
-  let t1023 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))")
+  let t1023 = @term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real) - (y : (Num) -> Real))")
   let t1038 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.d_euclid(), @misc_defs_and_lemmas.norm()])), @tactics_ext.disch_all_tac, (x1024 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1023, @tactics_ext.subgoal_tac, x1024), t1037, @tactics.disch_tac, (x1026 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1025, @tactics_ext.subgoal_tac, x1026), t1036, @tactics_ext.disch_all_tac, t1035, (x1028 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1027, @tactics_ext.subgoal_tac, x1028), t1034, t1033, t1032, @calc_rat.real_arith_tac, t1031])
-  metric_translate_left_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ z : (Num) -> Real, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) && op_euclid_prime_euclid(n, z) → op_euclid_prime_d_us_euclid(z + x, z + y) == op_euclid_prime_d_us_euclid(x, y)"), t1038))
+  metric_translate_left_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ z : (Num) -> Real, euclid_euclid(n, x) && euclid_euclid(n, y) && euclid_euclid(n, z) → euclid_d_euclid(z + x, z + y) == euclid_d_euclid(x, y)"), t1038))
 }
 
 ///|
@@ -2705,7 +2705,7 @@ fn step_111() -> Unit raise {
   let t1043 = @simp.asm_simp_tac(@list.List([d_euclid_n(), norm_n(), euclid_scale_closure(), @misc_defs_and_lemmas.euclid_scale(), @equal.gsym(@analysis.real_sub_rdistrib()), @real.real_mul_ac()]))
   let t1044 = @tactics_ext2.left_tac("n")
   let t1045 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclidean()])), t1044, @tactics_ext.disch_all_tac, t1043, t1042, t1041, t1040, t1039])
-  norm_scale_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ t : Real, ∀ t' : Real, ∀ x : (Num) -> Real, op_euclid_prime_euclidean(x) → op_euclid_prime_d_us_euclid(op_euclid_prime_euclid_us_scale(t, x), op_euclid_prime_euclid_us_scale(t', x)) == abs(t - t') * op_euclid_prime_norm(x)"), t1045))
+  norm_scale_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ t : Real, ∀ t' : Real, ∀ x : (Num) -> Real, euclid_euclidean(x) → euclid_d_euclid(euclid_euclid_scale(t, x), euclid_euclid_scale(t', x)) == abs(t - t') * euclid_norm(x)"), t1045))
 }
 
 ///|
@@ -2752,7 +2752,7 @@ fn step_112() -> Unit raise {
   let t1064 = @simp.rewrite_tac(@list.List([@equal.gsym(@realarith.real_pow_2()), @analysis.sum_cmul()]))
   let t1065 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(t : Real) * (t * (b : Real)) == t * t * b"))]))
   let t1066 = @list.List([@tactics_ext.disch_all_tac, @simp.asm_simp_tac(@list.List([d_euclid_n(), norm_n(), euclid_scale_closure(), @misc_defs_and_lemmas.euclid_scale(), @equal.gsym(@analysis.real_sub_ldistrib()), @real.real_mul_ac()])), t1065, t1064, t1063, t1062, t1061])
-  norm_scale_vec_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ t : Real, ∀ x : (Num) -> Real, ∀ x' : (Num) -> Real, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, x') → op_euclid_prime_d_us_euclid(op_euclid_prime_euclid_us_scale(t, x), op_euclid_prime_euclid_us_scale(t, x')) == abs(t) * op_euclid_prime_d_us_euclid(x, x')"), t1066))
+  norm_scale_vec_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ t : Real, ∀ x : (Num) -> Real, ∀ x' : (Num) -> Real, euclid_euclid(n, x) && euclid_euclid(n, x') → euclid_d_euclid(euclid_euclid_scale(t, x), euclid_euclid_scale(t, x')) == abs(t) * euclid_d_euclid(x, x')"), t1066))
 }
 
 ///|
@@ -2797,7 +2797,7 @@ pub fn open_def() -> @kernel.Thm {
 ///|
 /// closed
 fn step_115() -> Unit raise {
-  closed_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(closed_ : (((A) -> Bool) -> Bool, (A) -> Bool) -> Bool)((U : ((A) -> Bool) -> Bool), (B : (A) -> Bool)) == (SUBSET(B, UNIONS(U)) && op_euclid_prime_open_us(U, DIFF(UNIONS(U), B)))")))
+  closed_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(closed_ : (((A) -> Bool) -> Bool, (A) -> Bool) -> Bool)((U : ((A) -> Bool) -> Bool), (B : (A) -> Bool)) == (SUBSET(B, UNIONS(U)) && euclid_open_(U, DIFF(UNIONS(U), B)))")))
 }
 
 ///|
@@ -2812,7 +2812,7 @@ pub fn closed() -> @kernel.Thm {
 ///|
 /// closure
 fn step_116() -> Unit raise {
-  closure_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(closure : (((A) -> Bool) -> Bool, (A) -> Bool, A) -> Bool)((U : ((A) -> Bool) -> Bool), (A : (A) -> Bool)) == INTERS({(B : (A) -> Bool) | op_euclid_prime_closed_us(U, B) && SUBSET(A, B)})")))
+  closure_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(closure : (((A) -> Bool) -> Bool, (A) -> Bool, A) -> Bool)((U : ((A) -> Bool) -> Bool), (A : (A) -> Bool)) == INTERS({(B : (A) -> Bool) | euclid_closed_(U, B) && SUBSET(A, B)})")))
 }
 
 ///|
@@ -2872,7 +2872,7 @@ pub fn closed_ball() -> @kernel.Thm {
 ///|
 /// open_balls
 fn step_120() -> Unit raise {
-  open_balls_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(open_balls : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(B : (A) -> Bool) | ∃ x : A, ∃ r : Real, B == op_euclid_prime_open_us_ball((X, d), x, r)}")))
+  open_balls_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(open_balls : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(B : (A) -> Bool) | ∃ x : A, ∃ r : Real, B == euclid_open_ball((X, d), x, r)}")))
 }
 
 ///|
@@ -2887,7 +2887,7 @@ pub fn open_balls() -> @kernel.Thm {
 ///|
 /// top_of_metric
 fn step_121() -> Unit raise {
-  top_of_metric_c.set(@misc_defs_and_lemmas.euclid_def(@parser.parse_term("top_of_metric ((X:A->bool),d) =\n      { A | ?F. (F SUBSET (open_balls (X,d)))/\\\n     (A = UNIONS F) }")))
+  top_of_metric_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(top_of_metric : (((A) -> Bool, (A, A) -> Real), (A) -> Bool) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == {(A : (A) -> Bool) | ∃ F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) && A == UNIONS(F)}")))
 }
 
 ///|
@@ -2904,7 +2904,7 @@ pub fn top_of_metric() -> @kernel.Thm {
 fn step_122() -> Unit raise {
   let t1067 = @meson.meson_tac(@list.List([]))
   let t1068 = @list.List([@simp.rewrite_tac(@list.List([topology(), open_def()])), t1067])
-  open_empty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) → op_euclid_prime_open_us(U, {})"), t1068))
+  open_empty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, euclid_topology_(U) → euclid_open_(U, {})"), t1068))
 }
 
 ///|
@@ -2929,7 +2929,7 @@ fn step_123() -> Unit raise {
     }
   })
   let t1076 = @list.List([@simp.rewrite_tac(@list.List([closed(), open_def()])), @tactics_ext.disch_all_tac, t1075, t1074, t1073, t1072])
-  open_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_open_us(U, A) → op_euclid_prime_closed_us(U, DIFF(UNIONS(U), A))"), t1076))
+  open_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) && euclid_open_(U, A) → euclid_closed_(U, DIFF(UNIONS(U), A))"), t1076))
 }
 
 ///|
@@ -2957,7 +2957,7 @@ fn step_124() -> Unit raise {
   let t1077 = @term_syntax.parse_term("(a : (_) -> Bool) == UNIONS((U : ((_) -> Bool) -> Bool))")
   let t1093 = @simp.rewrite_tac(@list.List([closed(), open_def()]))
   let t1094 = @list.List([@tactics_ext.disch_all_tac, @simp.asm_simp_tac(@list.List([open_closed()])), t1093, (x1078 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1077, @simp.abbrev_tac, x1078), t1092, @tactics.conj_tac, t1091, t1090, t1089, t1088, t1087, (x1085 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x1085), t1086])
-  closed_univ_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) → op_euclid_prime_closed_us(U, UNIONS(U))"), t1094))
+  closed_univ_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, euclid_topology_(U) → euclid_closed_(U, UNIONS(U))"), t1094))
 }
 
 ///|
@@ -2974,7 +2974,7 @@ pub fn closed_univ() -> @kernel.Thm {
 fn step_125() -> Unit raise {
   let t1095 = @meson.asm_meson_tac(@list.List([@sets.subset_refl()]))
   let t1096 = @list.List([@simp.rewrite_tac(@list.List([topology()])), @tactics_ext.disch_all_tac, t1095])
-  top_univ_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) → U(UNIONS(U))"), t1096))
+  top_univ_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, euclid_topology_(U) → U(UNIONS(U))"), t1096))
 }
 
 ///|
@@ -2991,7 +2991,7 @@ pub fn top_univ() -> @kernel.Thm {
 fn step_126() -> Unit raise {
   let t1097 = @meson.asm_meson_tac(@list.List([top_univ()]))
   let t1098 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([closed(), @sets.empty_subset(), @sets.diff_empty(), open_def()])), t1097])
-  empty_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) → op_euclid_prime_closed_us(U, {})"), t1098))
+  empty_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, euclid_topology_(U) → euclid_closed_(U, {})"), t1098))
 }
 
 ///|
@@ -3007,7 +3007,7 @@ pub fn empty_closed() -> @kernel.Thm {
 /// closed_open
 fn step_127() -> Unit raise {
   let t1099 = @list.List([@meson.meson_tac(@list.List([closed()]))])
-  closed_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_closed_us(U, A) → op_euclid_prime_open_us(U, DIFF(UNIONS(U), A))"), t1099))
+  closed_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, euclid_closed_(U, A) → euclid_open_(U, DIFF(UNIONS(U), A))"), t1099))
 }
 
 ///|
@@ -3023,14 +3023,14 @@ pub fn closed_open() -> @kernel.Thm {
 /// closed_inter
 fn step_128() -> Unit raise {
   let t1114 = @simp.rewrite_tac(@list.List([]))
-  let t1112 = @term_syntax.parse_term("(op_euclid_prime_open_us : (((_) -> Bool) -> Bool, (_) -> Bool) -> Bool)")
+  let t1112 = @term_syntax.parse_term("(euclid_open_ : (((_) -> Bool) -> Bool, (_) -> Bool) -> Bool)")
   let t1115 = @simp.asm_rewrite_tac(@list.List([@misc_defs_and_lemmas.unions_inters()]))
   let t1116 = @tactics.subgoal_then(@term_syntax.parse_term("DIFF(UNIONS((U : ((A) -> Bool) -> Bool)), INTERS((V : ((A) -> Bool) -> Bool))) == UNIONS((VCOMP : ((A) -> Bool) -> Bool))"), fn(x1110 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_1 = x1110
     @simp.rewrite_tac(@list.List([t_1]))
   })
   let t1117 = @meson.asm_meson_tac(@list.List([topology(), open_def()]))
-  let t1118 = @tactics.subgoal_then(@term_syntax.parse_term("op_euclid_prime_open_us((U : ((A) -> Bool) -> Bool), UNIONS((VCOMP : ((A) -> Bool) -> Bool)))"), fn(x1107 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t1118 = @tactics.subgoal_then(@term_syntax.parse_term("euclid_open_((U : ((A) -> Bool) -> Bool), UNIONS((VCOMP : ((A) -> Bool) -> Bool)))"), fn(x1107 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1108 = @tactics.assume_tac(x1107)
     fn(x1109 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1108(x1109)
@@ -3057,7 +3057,7 @@ fn step_128() -> Unit raise {
     let t = x1100
     @tactics.assume_tac(@equal.gsym(t))
   }, x1103), t1122, t1121, t1120, @tactics.gen_tac, t1119, t1118, t1117, t1116, t1115, (x1113 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1112, x1113), t1114])
-  closed_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) && (∀ a : (A) -> Bool, V(a) → op_euclid_prime_closed_us(U, a)) && !(V == {}) → op_euclid_prime_closed_us(U, INTERS(V))"), t1130))
+  closed_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, euclid_topology_(U) && (∀ a : (A) -> Bool, V(a) → euclid_closed_(U, a)) && !(V == {}) → euclid_closed_(U, INTERS(V))"), t1130))
 }
 
 ///|
@@ -3103,7 +3103,7 @@ fn step_129() -> Unit raise {
       s1135(x1136)
     }
   }, x1138), t1151, t1150, (x1140 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1139, @tactics_ext.subgoal_tac, x1140), t1149, t1148, @tactics_ext2.name_conflict_tac, @tactics.gen_tac, t1147, t1146, t1145, (x1142 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1141, @simp.abbrev_tac, x1142), t1144, t1143])
-  open_nbd_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) → U(A) == (∀ x : A, ∃ B : (A) -> Bool, A(x) → SUBSET(B, A) && B(x) && U(B))"), t1164))
+  open_nbd_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) → U(A) == (∀ x : A, ∃ B : (A) -> Bool, A(x) → SUBSET(B, A) && B(x) && U(B))"), t1164))
 }
 
 ///|
@@ -3160,7 +3160,7 @@ fn step_130() -> Unit raise {
   let t1240 = @meson.asm_meson_tac(@list.List([]))
   let t1241 = @simp.rewrite_tac(@list.List([@sets.has_size()]))
   let t1165 = @term_syntax.parse_term("∃ n : Num, HAS_SIZE((V : (_) -> Bool), n)")
-  open_inters_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) && SUBSET(V, U) && FINITE(V) && !(V == {}) → U(INTERS(V))"), @list.List([@tactics_ext.rep_gen_tac, @tactics_ext.disch_all_tac, (x1166 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1165, @tactics_ext.subgoal_tac, x1166), t1241, t1240, @tactics_ext.disch_all_tac, (x1167 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x1167), (x1168 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x1168), (x1169 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x1169), (x1170 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1170), (x1171 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x1171), t1239, (x1173 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1172, @tactics_ext2.spec2_tac, x1173), (x1175 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1174, @tactics_ext2.spec2_tac, x1175), t1238, t1237, @nums.induct_tac, @tactics_ext.disch_all_tac, t1236, @tactics_ext.disch_all_tac, (x1181 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1180, fn(x1179 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  open_inters_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, euclid_topology_(U) && SUBSET(V, U) && FINITE(V) && !(V == {}) → U(INTERS(V))"), @list.List([@tactics_ext.rep_gen_tac, @tactics_ext.disch_all_tac, (x1166 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1165, @tactics_ext.subgoal_tac, x1166), t1241, t1240, @tactics_ext.disch_all_tac, (x1167 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x1167), (x1168 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x1168), (x1169 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x1169), (x1170 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1170), (x1171 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x1171), t1239, (x1173 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1172, @tactics_ext2.spec2_tac, x1173), (x1175 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1174, @tactics_ext2.spec2_tac, x1175), t1238, t1237, @nums.induct_tac, @tactics_ext.disch_all_tac, t1236, @tactics_ext.disch_all_tac, (x1181 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1180, fn(x1179 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x1176 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(0L, x1176))((fn(x1177 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x1178 : @kernel.Thm) -> @kernel.Thm raise {
         @bool.spec(x1177, x1178)
@@ -3200,7 +3200,7 @@ pub fn open_inters() -> @kernel.Thm {
 /// top_unions
 fn step_131() -> Unit raise {
   let t1242 = @list.List([@meson.meson_tac(@list.List([topology()]))])
-  top_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) && SUBSET(V, U) → U(UNIONS(V))"), t1242))
+  top_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, euclid_topology_(U) && SUBSET(V, U) → U(UNIONS(V))"), t1242))
 }
 
 ///|
@@ -3216,7 +3216,7 @@ pub fn top_unions() -> @kernel.Thm {
 /// top_inter
 fn step_132() -> Unit raise {
   let t1243 = @list.List([@meson.meson_tac(@list.List([topology()]))])
-  top_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, ∀ B : (A) -> Bool, op_euclid_prime_topology_us(U) && U(A) && U(B) → U(INTER(A, B))"), t1243))
+  top_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, ∀ B : (A) -> Bool, euclid_topology_(U) && U(A) && U(B) → U(INTER(A, B))"), t1243))
 }
 
 ///|
@@ -3244,7 +3244,7 @@ fn step_133() -> Unit raise {
       }
     })(((x1250 : @kernel.Thm) => @bool.specl(t1249, x1250))(x1251))
   }, x1253), t1254])
-  open_ball_nonempty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && real_of_num(0) < r && X(a) → IN(a, op_euclid_prime_open_us_ball((X, d), a, r))"), t1255))
+  open_ball_nonempty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, euclid_metric_space((X, d)) && real_of_num(0) < r && X(a) → IN(a, euclid_open_ball((X, d), a, r))"), t1255))
 }
 
 ///|
@@ -3261,7 +3261,7 @@ pub fn open_ball_nonempty() -> @kernel.Thm {
 fn step_134() -> Unit raise {
   let t1256 = @meson.meson_tac(@list.List([@sets.in_()]))
   let t1257 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset(), open_ball(), @sets.in_elim_thm()])), t1256])
-  open_ball_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, SUBSET(op_euclid_prime_open_us_ball((X, d), a, r), X)"), t1257))
+  open_ball_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, SUBSET(euclid_open_ball((X, d), a, r), X)"), t1257))
 }
 
 ///|
@@ -3278,7 +3278,7 @@ pub fn open_ball_subset() -> @kernel.Thm {
 fn step_135() -> Unit raise {
   let t1258 = @meson.meson_tac(@list.List([@sets.in_()]))
   let t1259 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset(), open_ball(), @sets.in_elim_thm()])), t1258])
-  open_ball_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, SUBSET(Y, X) → SUBSET(op_euclid_prime_open_us_ball((Y, d), a, r), op_euclid_prime_open_us_ball((X, d), a, r))"), t1259))
+  open_ball_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, SUBSET(Y, X) → SUBSET(euclid_open_ball((Y, d), a, r), euclid_open_ball((X, d), a, r))"), t1259))
 }
 
 ///|
@@ -3297,7 +3297,7 @@ fn step_136() -> Unit raise {
   let t1261 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @sets.empty()]))
   let t1262 = @tactics.match_mp_tac(@class.eq_ext())
   let t1263 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([open_ball()])), t1262, t1261, t1260])
-  open_ball_empty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, !IN(a, X) → {} == op_euclid_prime_open_us_ball((X, d), a, r)"), t1263))
+  open_ball_empty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, !IN(a, X) → {} == euclid_open_ball((X, d), a, r)"), t1263))
 }
 
 ///|
@@ -3315,7 +3315,7 @@ fn step_137() -> Unit raise {
   let t1264 = @meson.meson_tac(@list.List([]))
   let t1265 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_elim_thm()]))
   let t1266 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @sets.inter(), open_ball()])), t1265, t1264])
-  open_ball_intersect_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, SUBSET(Y, X) && IN(a, Y) → op_euclid_prime_open_us_ball((Y, d), a, r) == INTER(op_euclid_prime_open_us_ball((X, d), a, r), Y)"), t1266))
+  open_ball_intersect_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, SUBSET(Y, X) && IN(a, Y) → euclid_open_ball((Y, d), a, r) == INTER(euclid_open_ball((X, d), a, r), Y)"), t1266))
 }
 
 ///|
@@ -3349,7 +3349,7 @@ fn step_138() -> Unit raise {
   let t1284 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm()]))
   let t1285 = @tactics.exists_tac(@term_syntax.parse_term("(r : Real) - (d : (A, A) -> Real)((a : A), (b : A))"))
   let t1286 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space(), open_ball()])), @tactics_ext.disch_all_tac, t1285, t1284, (x1268 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1267, x1268), t1283, @tactics_ext.disch_all_tac, @tactics.conj_tac, t1282, t1281, @tactics.gen_tac, t1280, t1279, @tactics_ext.disch_all_tac, t1278, (x1270 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1269, x1270), t1277, t1276, t1275])
-  open_ball_center_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && IN(a, op_euclid_prime_open_us_ball((X, d), b, r)) → (∃ r' : Real, real_of_num(0) < r' && SUBSET(op_euclid_prime_open_us_ball((X, d), a, r'), op_euclid_prime_open_us_ball((X, d), b, r)))"), t1286))
+  open_ball_center_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, ∀ r : Real, euclid_metric_space((X, d)) && IN(a, euclid_open_ball((X, d), b, r)) → (∃ r' : Real, real_of_num(0) < r' && SUBSET(euclid_open_ball((X, d), a, r'), euclid_open_ball((X, d), b, r)))"), t1286))
 }
 
 ///|
@@ -3386,7 +3386,7 @@ fn step_139() -> Unit raise {
     let t1295 = @term_syntax.parse_term("(a : A)")
     @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(a : A)"), t1295, t1294]), t_1))
   }, x1297), t1298])
-  open_ball_nonempty_center_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) → IN(a, op_euclid_prime_open_us_ball((X, d), a, r)) == !(op_euclid_prime_open_us_ball((X, d), a, r) == {})"), t1307))
+  open_ball_nonempty_center_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, euclid_metric_space((X, d)) → IN(a, euclid_open_ball((X, d), a, r)) == !(euclid_open_ball((X, d), a, r) == {})"), t1307))
 }
 
 ///|
@@ -3412,7 +3412,7 @@ fn step_140() -> Unit raise {
   let t1315 = @simp.rewrite_tac(@list.List([@sets.empty(), @sets.in_elim_thm()]))
   let t1316 = @tactics.match_mp_tac(@class.eq_ext())
   let t1317 = @list.List([@simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.metric_space()])), @tactics_ext.disch_all_tac, t1316, @tactics.gen_tac, t1315, t1314, t1313, t1312])
-  open_ball_neg_radius_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && r < real_of_num(0) → {} == op_euclid_prime_open_us_ball((X, d), a, r)"), t1317))
+  open_ball_neg_radius_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, euclid_metric_space((X, d)) && r < real_of_num(0) → {} == euclid_open_ball((X, d), a, r)"), t1317))
 }
 
 ///|
@@ -3429,7 +3429,7 @@ pub fn open_ball_neg_radius() -> @kernel.Thm {
 fn step_141() -> Unit raise {
   let t1318 = @meson.meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("(r : Real) < (r' : Real) && (a : Real) < r → a < r'"))]))
   let t1319 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset(), open_ball(), @sets.in_elim_thm()])), t1318])
-  open_ball_nest_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, ∀ r' : Real, r < r' → SUBSET(op_euclid_prime_open_us_ball((X, d), a, r), op_euclid_prime_open_us_ball((X, d), a, r'))"), t1319))
+  open_ball_nest_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ r : Real, ∀ r' : Real, r < r' → SUBSET(euclid_open_ball((X, d), a, r), euclid_open_ball((X, d), a, r'))"), t1319))
 }
 
 ///|
@@ -3468,7 +3468,7 @@ fn step_142() -> Unit raise {
   let t1345 = @meson.asm_meson_tac(@list.List([@sets.subset(), open_ball_subset(), @sets.in_()]))
   let t1346 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(X : (A) -> Bool)((c : A))"))
   let t1322 = @term_syntax.parse_term("(INTER : ((_) -> Bool, (_) -> Bool, _) -> Bool)")
-  open_ball_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, ∀ c : A, ∀ r : Real, ∀ r' : Real, op_euclid_prime_metric_us_space((X, d)) && X(a) && X(b) && IN(c, INTER(op_euclid_prime_open_us_ball((X, d), a, r), op_euclid_prime_open_us_ball((X, d), b, r'))) → (∃ r'' : Real, real_of_num(0) < r'' && SUBSET(op_euclid_prime_open_us_ball((X, d), c, r''), INTER(op_euclid_prime_open_us_ball((X, d), a, r), op_euclid_prime_open_us_ball((X, d), b, r'))))"), @list.List([@tactics_ext.disch_all_tac, (x1323 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t1322, fn(x1320 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  open_ball_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ a : A, ∀ b : A, ∀ c : A, ∀ r : Real, ∀ r' : Real, euclid_metric_space((X, d)) && X(a) && X(b) && IN(c, INTER(euclid_open_ball((X, d), a, r), euclid_open_ball((X, d), b, r'))) → (∃ r'' : Real, real_of_num(0) < r'' && SUBSET(euclid_open_ball((X, d), c, r''), INTER(euclid_open_ball((X, d), a, r), euclid_open_ball((X, d), b, r'))))"), @list.List([@tactics_ext.disch_all_tac, (x1323 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t1322, fn(x1320 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x1320
     @tactics.then_tac(@tactics.mp_tac(@simp.rewrite_rule(@list.List([@sets.in_inter()]))(t)), @tactics_ext.disch_all_tac)
   }, x1323), t1346, t1345, @tactics.disch_tac, t1344, t1343, t1342, t1341, @class.cond_cases_tac, t1340, t1339, t1338, t1337])))
@@ -3494,7 +3494,7 @@ fn step_143() -> Unit raise {
   let t1349 = @list.List([@term_syntax.parse_term("(x : A)"), t1348, t1347])
   let t1358 = @tactics_ext2.use_(0L, (x1350 : @kernel.Thm) => @bool.specl(t1349, x1350))
   let t1359 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space(), open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])), @tactics_ext.disch_all_tac, t1358, t1357, t1356, (x1352 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x1352), (x1353 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x1353), t1355, (x1354 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1354), @calc_rat.real_arith_tac])
-  ball_dist_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ z : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_open_us_ball((X, d), z, r, x) && op_euclid_prime_open_us_ball((X, d), z, r, y) → d(x, y) < real_of_num(2) * r"), t1359))
+  ball_dist_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ z : A, ∀ r : Real, euclid_metric_space((X, d)) && euclid_open_ball((X, d), z, r, x) && euclid_open_ball((X, d), z, r, y) → d(x, y) < real_of_num(2) * r"), t1359))
 }
 
 ///|
@@ -3517,7 +3517,7 @@ fn step_144() -> Unit raise {
   let t1362 = @list.List([@term_syntax.parse_term("(x : A)"), t1361, t1360])
   let t1371 = @tactics_ext2.use_(0L, (x1363 : @kernel.Thm) => @bool.specl(t1362, x1363))
   let t1372 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space(), closed_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])), @tactics_ext.disch_all_tac, t1371, t1370, t1369, (x1365 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x1365), (x1366 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x1366), t1368, (x1367 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1367), @calc_rat.real_arith_tac])
-  ball_dist_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ z : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_closed_us_ball((X, d), z, r, x) && op_euclid_prime_closed_us_ball((X, d), z, r, y) → d(x, y) <= real_of_num(2) * r"), t1372))
+  ball_dist_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ z : A, ∀ r : Real, euclid_metric_space((X, d)) && euclid_closed_ball((X, d), z, r, x) && euclid_closed_ball((X, d), z, r, y) → d(x, y) <= real_of_num(2) * r"), t1372))
 }
 
 ///|
@@ -3534,7 +3534,7 @@ pub fn ball_dist_closed() -> @kernel.Thm {
 fn step_145() -> Unit raise {
   let t1374 = @simp.asm_rewrite_tac(@list.List([]))
   let t1375 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), open_ball(), closed_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])), @tactics_ext.disch_all_tac, t1374, (x1373 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x1373), @calc_rat.real_arith_tac])
-  open_ball_sub_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, SUBSET(op_euclid_prime_open_us_ball((X, d), x, r), op_euclid_prime_closed_us_ball((X, d), x, r))"), t1375))
+  open_ball_sub_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, SUBSET(euclid_open_ball((X, d), x, r), euclid_closed_ball((X, d), x, r))"), t1375))
 }
 
 ///|
@@ -3552,7 +3552,7 @@ fn step_146() -> Unit raise {
   let t1376 = @meson.asm_meson_tac(@list.List([metric_space_symm()]))
   let t1377 = @simp.asm_rewrite_tac(@list.List([]))
   let t1378 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])), t1377, t1376])
-  ball_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && X(x) && X(y) → op_euclid_prime_open_us_ball((X, d), x, r, y) == op_euclid_prime_open_us_ball((X, d), y, r, x)"), t1378))
+  ball_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ r : Real, euclid_metric_space((X, d)) && X(x) && X(y) → euclid_open_ball((X, d), x, r, y) == euclid_open_ball((X, d), y, r, x)"), t1378))
 }
 
 ///|
@@ -3569,13 +3569,13 @@ pub fn ball_symm() -> @kernel.Thm {
 fn step_147() -> Unit raise {
   let t1385 = @meson.asm_meson_tac(@list.List([ball_dist()]))
   let t1386 = @meson.asm_meson_tac(@list.List([ball_symm()]))
-  let t1383 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (z : _), (r : Real), (x : _))")
+  let t1383 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (z : _), (r : Real), (x : _))")
   let t1387 = @meson.meson_tac(@list.List([]))
   let t1388 = @simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t1379 = @term_syntax.parse_term("(X : (_) -> Bool)((z : _)) && X((x' : _)) && X((x : _))")
   let t1389 = @simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t1390 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()])), @tactics_ext.disch_all_tac, t1389, (x1380 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1379, @tactics_ext.subgoal_tac, x1380), (x1381 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x1381), (x1382 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x1382), t1388, t1387, @tactics_ext.disch_all_tac, (x1384 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1383, @tactics_ext.subgoal_tac, x1384), t1386, t1385])
-  ball_subset_ball_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ z : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_open_us_ball((X, d), x, r, z) → SUBSET(op_euclid_prime_open_us_ball((X, d), z, r), op_euclid_prime_open_us_ball((X, d), x, real_of_num(2) * r))"), t1390))
+  ball_subset_ball_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ z : A, ∀ r : Real, euclid_metric_space((X, d)) && euclid_open_ball((X, d), x, r, z) → SUBSET(euclid_open_ball((X, d), z, r), euclid_open_ball((X, d), x, real_of_num(2) * r))"), t1390))
 }
 
 ///|
@@ -3607,7 +3607,7 @@ fn step_148() -> Unit raise {
   }))
   let t1411 = @simp.rewrite_tac(@list.List([open_balls(), @sets.in_elim_thm()]))
   let t1412 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t1413 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((B : (A) -> Bool), op_euclid_prime_open_us_balls(((X : (A) -> Bool), (d : (A, A) -> Real))))"))
+  let t1413 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((B : (A) -> Bool), euclid_open_balls(((X : (A) -> Bool), (d : (A, A) -> Real))))"))
   let t1414 = @tactics.x_gen_tac(@term_syntax.parse_term("(B : (A) -> Bool)"))
   let t1415 = @tactics.match_mp_tac(@misc_defs_and_lemmas.unions_subset())
   let t1416 = @simp.asm_rewrite_tac(@list.List([]))
@@ -3622,7 +3622,7 @@ fn step_148() -> Unit raise {
     @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(x : A)"), t1399, t1398]), t))
   })
   let t1422 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space()]))
-  let t1394 = @term_syntax.parse_term("(op_euclid_prime_metric_us_space : (((_) -> Bool, (_, _) -> Real)) -> Bool)")
+  let t1394 = @term_syntax.parse_term("(euclid_metric_space : (((_) -> Bool, (_, _) -> Real)) -> Bool)")
   let t1423 = @simp.asm_rewrite_tac(@list.List([]))
   let t1424 = @simp.asm_rewrite_tac(@list.List([@sets.in_()]))
   let t1392 = @term_syntax.parse_term("(IN : (_, (_) -> Bool) -> Bool)")
@@ -3630,15 +3630,15 @@ fn step_148() -> Unit raise {
   let t1426 = @meson.meson_tac(@list.List([]))
   let t1427 = @simp.rewrite_tac(@list.List([open_balls(), @sets.in_elim_thm()]))
   let t1428 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.unions_1()), @sets.insert_subset(), @sets.empty_subset()]))
-  let t1429 = @tactics.exists_tac(@term_syntax.parse_term("{op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), real_of_num(1))}"))
+  let t1429 = @tactics.exists_tac(@term_syntax.parse_term("{euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), real_of_num(1))}"))
   let t1391 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1430 = @tactics.then_tac(@tactics.undisch_tac(@term_syntax.parse_term("IN((x : A), (X : (A) -> Bool))")), t1391)
-  let t1431 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), real_of_num(1))"))
+  let t1431 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), real_of_num(1))"))
   let t1432 = @simp.rewrite_tac(@list.List([@sets.in_unions(), top_of_metric()]))
   let t1433 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t1434 = @tactics.then_tac(@tactics.match_mp_tac(@sets.subset_antisym()), @tactics.conj_tac)
   let t1435 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac, t1434, t1433, t1432, @tactics_ext.disch_all_tac, t1431, t1430, @tactics_ext.disch_all_tac, @tactics.conj_tac, t1429, t1428, t1427, t1426, t1425, (x1393 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1392, x1393), t1424, @tactics.disch_tac, t1423, (x1395 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1394, x1395), t1422, t1421, t1420, t1419, @tactics.gen_tac, t1418, t1417, t1416, t1415, t1414, @tactics.disch_tac, t1413, t1412, t1411, t1410, t1409, t1408, t1407, t1406])
-  top_of_metric_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) → X == UNIONS(op_euclid_prime_top_us_of_us_metric((X, d)))"), t1435))
+  top_of_metric_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) → X == UNIONS(euclid_top_of_metric((X, d)))"), t1435))
 }
 
 ///|
@@ -3658,7 +3658,7 @@ fn step_149() -> Unit raise {
   let t1438 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1439 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1440 = @list.List([@simp.rewrite_tac(@list.List([top_of_metric()])), t1439, t1438, t1437, t1436])
-  top_of_metric_empty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_top_us_of_us_metric((X, d), {})"), t1440))
+  top_of_metric_empty_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_top_of_metric((X, d), {})"), t1440))
 }
 
 ///|
@@ -3675,7 +3675,7 @@ pub fn top_of_metric_empty() -> @kernel.Thm {
 fn step_150() -> Unit raise {
   let t1441 = @meson.meson_tac(@list.List([]))
   let t1442 = @list.List([@simp.rewrite_tac(@list.List([top_of_metric(), @sets.in_elim_thm()])), t1441])
-  top_of_metric_open_c.set(@tactics_refine.prove_by_refinement(@parser.parse_term("forall(X:A->bool) d F.\n    (F SUBSET (open_balls (X,d))) ==>\n    ((UNIONS F) IN (top_of_metric(X,d)))"), t1442))
+  top_of_metric_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ F : ((A) -> Bool) -> Bool, SUBSET(F, euclid_open_balls((X, d))) → IN(UNIONS(F), euclid_top_of_metric((X, d)))"), t1442))
 }
 
 ///|
@@ -3694,7 +3694,7 @@ fn step_151() -> Unit raise {
   let t1444 = @tactics.exists_tac(@term_syntax.parse_term("{(x : (A) -> Bool)}"))
   let t1445 = @simp.rewrite_tac(@list.List([top_of_metric(), @sets.in_elim_thm()]))
   let t1446 = @list.List([@simp.rewrite_tac(@list.List([@sets.subset()])), t1445, @tactics_ext.disch_all_tac, t1444, t1443])
-  top_of_metric_open_balls_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(op_euclid_prime_open_us_balls((X, d)), op_euclid_prime_top_us_of_us_metric((X, d)))"), t1446))
+  top_of_metric_open_balls_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(euclid_open_balls((X, d)), euclid_top_of_metric((X, d)))"), t1446))
 }
 
 ///|
@@ -3713,7 +3713,7 @@ fn step_152() -> Unit raise {
   let t1453 = @tactics_ext2.use_(1L, @simp.rewrite_rule(@list.List([open_balls(), @sets.subset(), @misc_defs_and_lemmas.in_elim_thm_p()])))
   let t1447 = @term_syntax.parse_term("(d : _)")
   let t1450 = @list.List([@term_syntax.parse_term("(X : _)"), t1447])
-  open_ball_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_top_us_of_us_metric((X, d), op_euclid_prime_open_us_ball((X, d), x, r))"), @list.List([@tactics_ext.disch_all_tac, (x1451 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t1450, fn(x1448 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  open_ball_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, euclid_metric_space((X, d)) → euclid_top_of_metric((X, d), euclid_open_ball((X, d), x, r))"), @list.List([@tactics_ext.disch_all_tac, (x1451 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t1450, fn(x1448 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x1448
     @tactics.assume_tac(@bool.ispecl(t, top_of_metric_open_balls()))
   }, x1451), t1453, t1452])))
@@ -3756,7 +3756,7 @@ fn step_153() -> Unit raise {
   let t1500 = @simp.rewrite_tac(@list.List([@sets.in_(), open_ball()]))
   let t1501 = @simp.asm_rewrite_tac(@list.List([]))
   let t1502 = @tactics.exists_tac(@term_syntax.parse_term("(a : A)"))
-  let t1503 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (r : (A) -> Real)(a))"))
+  let t1503 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (r : (A) -> Real)(a))"))
   let t1504 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1505 = @simp.rewrite_tac(@list.List([@sets.in_unions()]))
   let t1506 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
@@ -3767,7 +3767,7 @@ fn step_153() -> Unit raise {
   let t1509 = @meson.meson_tac(@list.List([@sets.in_()]))
   let t1510 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), open_balls()]))
   let t1511 = @simp.rewrite_tac(@list.List([@sets.image(), @sets.subset()]))
-  let t1512 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((b : A) => op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), b, (r : (A) -> Real)(b)), (A : (A) -> Bool))"))
+  let t1512 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((b : A) => euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), b, (r : (A) -> Real)(b)), (A : (A) -> Bool))"))
   let t1513 = @simp.rewrite_tac(@list.List([top_of_metric(), @sets.in_elim_thm()]))
   let t1514 = @tactics.disch_then(@tactics.choose_tac)
   let t1515 = @simp.rewrite_tac(@list.List([@class.skolem_thm()]))
@@ -3788,7 +3788,7 @@ fn step_153() -> Unit raise {
   let t1523 = @tactics.disch_then(@tactics.choose_tac)
   let t1524 = @tactics.then_tac(@tactics.disch_tac, @simp.asm_rewrite_tac(@list.List([])))
   let t1525 = @meson.asm_meson_tac(@list.List([]))
-  let t1526 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((a : A), op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real)))"))
+  let t1526 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((a : A), euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real)))"))
   let t1527 = @simp.asm_rewrite_tac(@list.List([]))
   let t1471 = @term_syntax.parse_term("(r : Real)")
   let t1472 = @term_syntax.parse_term("(x : A)")
@@ -3803,7 +3803,7 @@ fn step_153() -> Unit raise {
   })))
   let t1530 = @simp.rewrite_tac(@list.List([open_balls(), @sets.in_elim_thm()]))
   let t1531 = @meson.asm_meson_tac(@list.List([@sets.subset()]))
-  let t1532 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((t : (A) -> Bool), op_euclid_prime_open_us_balls(((X : (A) -> Bool), (d : (A, A) -> Real))))"))
+  let t1532 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((t : (A) -> Bool), euclid_open_balls(((X : (A) -> Bool), (d : (A, A) -> Real))))"))
   let t1533 = @tactics.disch_then(@tactics.choose_then(fn(x1465 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1466 = @tactics.assume_tac(x1465)
     fn(x1467 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3838,7 +3838,7 @@ fn step_153() -> Unit raise {
     }
   }))
   let t1545 = @list.List([@tactics_ext.disch_all_tac, @tactics.eq_tac, @simp.rewrite_tac(@list.List([top_of_metric(), @sets.in_elim_thm()])), t1544, @tactics_ext.disch_all_tac, @tactics.conj_tac, t1543, t1542, t1541, t1540, t1539, t1538, t1537, t1536, (x1464 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1463, x1464), t1535, t1534, t1533, t1532, t1531, t1530, t1529, @tactics.disch_tac, t1528, t1527, t1526, t1525, t1524, t1523, t1522, t1521, t1520, t1519, t1518, t1517, t1516, t1515, t1514, t1513, t1512, @tactics.conj_tac, t1511, t1510, t1509, t1508, t1507, t1506, t1505, t1504, @tactics.eq_tac, @tactics.disch_tac, t1503, @tactics.conj_tac, t1502, t1501, t1500, t1499, t1498, t1497, @tactics_ext.disch_all_tac, (x1485 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1484, x1485), t1496, @tactics_ext.disch_all_tac, (x1490 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1489, x1490), t1495, t1494, @tactics_ext.disch_all_tac, t1493])
-  top_of_metric_nbd_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ A : (A) -> Bool, op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_top_us_of_us_metric((X, d), A) == (SUBSET(A, X) && (∀ a : A, IN(a, A) → (∃ r : Real, real_of_num(0) < r && SUBSET(op_euclid_prime_open_us_ball((X, d), a, r), A))))"), t1545))
+  top_of_metric_nbd_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ A : (A) -> Bool, euclid_metric_space((X, d)) → euclid_top_of_metric((X, d), A) == (SUBSET(A, X) && (∀ a : A, IN(a, A) → (∃ r : Real, real_of_num(0) < r && SUBSET(euclid_open_ball((X, d), a, r), A))))"), t1545))
 }
 
 ///|
@@ -3869,8 +3869,8 @@ fn step_154() -> Unit raise {
   let t1553 = @term_syntax.parse_term("(INTER : ((_) -> Bool, (_) -> Bool, _) -> Bool)")
   let t1580 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1581 = @simp.asm_rewrite_tac(@list.List([]))
-  let t1582 = @tactics.undisch_tac(@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : (A) -> Bool), (d : (A, A) -> Real)), (A : (A) -> Bool))"))
-  let t1583 = @tactics.undisch_tac(@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : (A) -> Bool), (d : (A, A) -> Real)), (B : (A) -> Bool))"))
+  let t1582 = @tactics.undisch_tac(@term_syntax.parse_term("euclid_top_of_metric(((X : (A) -> Bool), (d : (A, A) -> Real)), (A : (A) -> Bool))"))
+  let t1583 = @tactics.undisch_tac(@term_syntax.parse_term("euclid_top_of_metric(((X : (A) -> Bool), (d : (A, A) -> Real)), (B : (A) -> Bool))"))
   let t1549 = @term_syntax.parse_term("(d : (A, A) -> Real)")
   let t1550 = @bool.specl(@list.List([@term_syntax.parse_term("(X : (A) -> Bool)"), t1549]), top_of_metric_nbd())
   let t1584 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, @tactics.imp_res_then(fn(x1546 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3898,7 +3898,7 @@ fn step_154() -> Unit raise {
       }
     })(t_2)
   }, x1568), t1579, t1578, t1577, @class.cond_cases_tac, t1576, t1575, t1574, t1573, t1572, t1571, t1570])
-  top_of_metric_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) → (∀ A : (A) -> Bool, ∀ B : (A) -> Bool, op_euclid_prime_top_us_of_us_metric((X, d), A) && op_euclid_prime_top_us_of_us_metric((X, d), B) → op_euclid_prime_top_us_of_us_metric((X, d), INTER(A, B)))"), t1584))
+  top_of_metric_inter_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) → (∀ A : (A) -> Bool, ∀ B : (A) -> Bool, euclid_top_of_metric((X, d), A) && euclid_top_of_metric((X, d), B) → euclid_top_of_metric((X, d), INTER(A, B)))"), t1584))
 }
 
 ///|
@@ -3924,7 +3924,7 @@ fn step_155() -> Unit raise {
   let t1591 = @term_syntax.parse_term("(d : (A, A) -> Real)")
   let t1603 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(X : (A) -> Bool)"), t1591]), top_of_metric_nbd()))
   let t1604 = @meson.asm_meson_tac(@list.List([@sets.in_(), @sets.subset()]))
-  let t1605 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : (A) -> Bool), (d : (A, A) -> Real)), (t : (A) -> Bool))"))
+  let t1605 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_top_of_metric(((X : (A) -> Bool), (d : (A, A) -> Real)), (t : (A) -> Bool))"))
   let t1606 = @tactics.disch_then(@tactics.choose_then(fn(x1588 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1589 = @tactics.mp_tac(x1588)
     fn(x1590 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -3943,7 +3943,7 @@ fn step_155() -> Unit raise {
     let t_1 = x1592
     @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(a : A)"), t_1))
   }, x1595), t1600, t1599, t1598, t1597, t1596])
-  top_of_metric_union_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) → (∀ V : ((A) -> Bool) -> Bool, SUBSET(V, op_euclid_prime_top_us_of_us_metric((X, d))) → op_euclid_prime_top_us_of_us_metric((X, d), UNIONS(V)))"), t1611))
+  top_of_metric_union_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) → (∀ V : ((A) -> Bool) -> Bool, SUBSET(V, euclid_top_of_metric((X, d))) → euclid_top_of_metric((X, d), UNIONS(V)))"), t1611))
 }
 
 ///|
@@ -3961,7 +3961,7 @@ fn step_156() -> Unit raise {
   let t1612 = @simp.asm_simp_tac(@list.List([top_of_metric_empty(), top_of_metric_inter(), top_of_metric_union()]))
   let t1613 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1614 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([topology()])), t1613, t1612])
-  top_of_metric_top_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_topology_us(op_euclid_prime_top_us_of_us_metric((X, d)))"), t1614))
+  top_of_metric_top_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) → euclid_topology_(euclid_top_of_metric((X, d)))"), t1614))
 }
 
 ///|
@@ -3979,7 +3979,7 @@ fn step_157() -> Unit raise {
   let t1646 = @meson.asm_meson_tac(@list.List([empty_closed(), top_of_metric_top()]))
   let t1647 = @tactics.disch_then(@tactics_ext2.rewrt_tac)
   let t1648 = @simp.asm_rewrite_tac(@list.List([closed_ball(), @sets.in_elim_thm(), @sets.extension(), @sets.not_in_empty()]))
-  let t1644 = @term_syntax.parse_term("op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), (r : Real)) == {}")
+  let t1644 = @term_syntax.parse_term("euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), (r : Real)) == {}")
   let t1649 = @meson.asm_meson_tac(@list.List([]))
   let t1650 = @tactics_ext2.use_(5L, @simp.rewrite_rule(@list.List([@tactics_ext2.inr(@sets.in_diff()), closed_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])))
   let t1651 = @tactics_ext2.use_(8L, @drule.match_mp(@calc_rat.real_arith(@term_syntax.parse_term("!(real_of_num(0) < (d : (_, _) -> Real)((x : _), (x' : _)) - (r : Real)) → d(x, x') <= r"))))
@@ -4013,7 +4013,7 @@ fn step_157() -> Unit raise {
   let t1673 = @tactics_ext2.use_(5L, @simp.rewrite_rule(@list.List([@tactics_ext2.inr(@sets.in_diff())])))
   let t1624 = @term_syntax.parse_term("(X : (_) -> _)((x' : _))")
   let t1622 = @term_syntax.parse_term("(R : Real) == (d : (_, _) -> Real)((x : _), (x' : _)) - (r : Real)")
-  let t1620 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x' : _), d((x : _), x') - (r : Real))")
+  let t1620 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x' : _), d((x : _), x') - (r : Real))")
   let t1674 = @simp.once_asm_simp_tac(@list.List([open_nbd()]))
   let t1675 = @tactics_ext2.use_(0L, @drule.match_mp(top_of_metric_top()))
   let t1676 = @tactics_ext2.copy(0L)
@@ -4023,7 +4023,7 @@ fn step_157() -> Unit raise {
   let t1680 = @simp.asm_simp_tac(@list.List([@equal.gsym(top_of_metric_unions())]))
   let t1681 = @simp.rewrite_tac(@list.List([closed()]))
   let t1615 = @term_syntax.parse_term("(X : (_) -> _)((x : _))")
-  closed_ball_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_closed_us(op_euclid_prime_top_us_of_us_metric((X, d)), op_euclid_prime_closed_us_ball((X, d), x, r))"), @list.List([@tactics_ext.disch_all_tac, (x1616 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1615, @class.asm_cases_tac, x1616), t1681, t1680, @tactics_ext2.subconj_tac, t1679, t1678, @tactics_ext.disch_all_tac, t1677, t1676, t1675, t1674, @tactics.gen_tac, (x1621 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1620, fn(x1617 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  closed_ball_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ r : Real, euclid_metric_space((X, d)) → euclid_closed_(euclid_top_of_metric((X, d)), euclid_closed_ball((X, d), x, r))"), @list.List([@tactics_ext.disch_all_tac, (x1616 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1615, @class.asm_cases_tac, x1616), t1681, t1680, @tactics_ext2.subconj_tac, t1679, t1678, @tactics_ext.disch_all_tac, t1677, t1676, t1675, t1674, @tactics.gen_tac, (x1621 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1620, fn(x1617 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1618 = @tactics.exists_tac(x1617)
     fn(x1619 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1618(x1619)
@@ -4093,7 +4093,7 @@ fn step_158() -> Unit raise {
       s1697(x1698)
     }
   }, x1700), t1705, t1704, @tactics_ext.disch_all_tac, t1703, t1702, t1701])
-  open_ball_nbd_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ C : (A) -> Bool, ∀ x : A, ∃ e : Real, op_euclid_prime_metric_us_space((X, d)) && C(x) && op_euclid_prime_top_us_of_us_metric((X, d), C) → real_of_num(0) < e && SUBSET(op_euclid_prime_open_us_ball((X, d), x, e), C)"), t1720))
+  open_ball_nbd_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ C : (A) -> Bool, ∀ x : A, ∃ e : Real, euclid_metric_space((X, d)) && C(x) && euclid_top_of_metric((X, d), C) → real_of_num(0) < e && SUBSET(euclid_open_ball((X, d), x, e), C)"), t1720))
 }
 
 ///|
@@ -4122,7 +4122,7 @@ fn step_159() -> Unit raise {
       s1722(x1723)
     }
   }, x1725), t1727, t1726])
-  closure_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) && SUBSET(A, UNIONS(U)) → op_euclid_prime_closed_us(U, op_euclid_prime_closure(U, A))"), t1733))
+  closure_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) && SUBSET(A, UNIONS(U)) → euclid_closed_(U, euclid_closure(U, A))"), t1733))
 }
 
 ///|
@@ -4140,7 +4140,7 @@ fn step_160() -> Unit raise {
   let t1734 = @meson.meson_tac(@list.List([@sets.in_()]))
   let t1735 = @tactics.x_gen_tac(@term_syntax.parse_term("(a : A)"))
   let t1736 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([closure(), @sets.subset(), @sets.in_inters(), @sets.in_elim_thm()])), t1735, t1734])
-  subset_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) → SUBSET(A, op_euclid_prime_closure(U, A))"), t1736))
+  subset_closure_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) → SUBSET(A, euclid_closure(U, A))"), t1736))
 }
 
 ///|
@@ -4158,7 +4158,7 @@ fn step_161() -> Unit raise {
   let t1737 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1738 = @tactics.match_mp_tac(@misc_defs_and_lemmas.inters_subset())
   let t1739 = @list.List([@simp.rewrite_tac(@list.List([closure()])), @tactics_ext.disch_all_tac, t1738, t1737])
-  closure_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, ∀ B : (A) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_closed_us(U, B) && SUBSET(A, B) → SUBSET(op_euclid_prime_closure(U, A), B)"), t1739))
+  closure_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, ∀ B : (A) -> Bool, euclid_topology_(U) && euclid_closed_(U, B) && SUBSET(A, B) → SUBSET(euclid_closure(U, A), B)"), t1739))
 }
 
 ///|
@@ -4176,7 +4176,7 @@ fn step_162() -> Unit raise {
   let t1740 = @simp.asm_simp_tac(@list.List([closure_subset(), @sets.subset_refl()]))
   let t1741 = @simp.asm_simp_tac(@list.List([subset_closure()]))
   let t1742 = @list.List([@tactics_ext.disch_all_tac, @tactics.match_mp_tac(@sets.subset_antisym()), t1741, t1740])
-  closure_self_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_closed_us(U, A) → op_euclid_prime_closure(U, A) == A"), t1742))
+  closure_self_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) && euclid_closed_(U, A) → euclid_closure(U, A) == A"), t1742))
 }
 
 ///|
@@ -4201,7 +4201,7 @@ fn step_163() -> Unit raise {
   let t1750 = @simp.rewrite_tac(@list.List([closure()]))
   let t1751 = @simp.asm_simp_tac(@list.List([subset_closure(), closure_closed(), closure_subset()]))
   let t1752 = @list.List([@tactics_ext.disch_all_tac, @tactics.eq_tac, @tactics.disch_then(@tactics_ext2.rewrt_tac), t1751, @tactics_ext.disch_all_tac, t1750, t1749, @tactics.conj_tac, t1748, t1747, t1746, t1745, t1744, t1743])
-  closure_close_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) && SUBSET(Z, UNIONS(U)) → (A == op_euclid_prime_closure(U, Z)) == (SUBSET(Z, A) && op_euclid_prime_closed_us(U, A) && (∀ B : (A) -> Bool, op_euclid_prime_closed_us(U, B) && SUBSET(Z, B) → SUBSET(A, B)))"), t1752))
+  closure_close_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) && SUBSET(Z, UNIONS(U)) → (A == euclid_closure(U, Z)) == (SUBSET(Z, A) && euclid_closed_(U, A) && (∀ B : (A) -> Bool, euclid_closed_(U, B) && SUBSET(Z, B) → SUBSET(A, B)))"), t1752))
 }
 
 ///|
@@ -4236,7 +4236,7 @@ fn step_164() -> Unit raise {
   let t1778 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("((A : Bool) → (B : Bool) == (C : Bool)) → (A && B) == (A && C)")))
   let t1779 = @tactics.match_mp_tac(@class.taut(@term_syntax.parse_term("((A : Bool) → (B : Bool) == (C : Bool)) → (A && B) == (A && C)")))
   let t1780 = @list.List([@tactics_ext.rep_gen_tac, @tactics.disch_tac, @simp.asm_simp_tac(@list.List([closure_close()])), t1779, @tactics.disch_tac, t1778, @tactics.disch_tac, @tactics.eq_tac, @tactics.disch_tac, t1777, t1776, @tactics.gen_tac, t1775, @tactics_ext.disch_all_tac, (x1755 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1755), t1774, t1773, @tactics.disch_tac, (x1756 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x1756), (x1757 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1757), t1772, @tactics.all_tac, @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, t1771, (x1760 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1760), t1770, t1769, t1768, (x1762 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1761, @tactics_ext.subgoal_tac, x1762), t1767, t1766, (x1763 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x1763), @tactics.all_tac, t1765, t1764])
-  closure_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) && SUBSET(Z, UNIONS(U)) → (A == op_euclid_prime_closure(U, Z)) == (SUBSET(Z, A) && op_euclid_prime_closed_us(U, A) && (∀ B : (A) -> Bool, op_euclid_prime_open_us(U, B) && INTER(B, Z) == {} → INTER(B, A) == {}))"), t1780))
+  closure_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) && SUBSET(Z, UNIONS(U)) → (A == euclid_closure(U, Z)) == (SUBSET(Z, A) && euclid_closed_(U, A) && (∀ B : (A) -> Bool, euclid_open_(U, B) && INTER(B, Z) == {} → INTER(B, A) == {}))"), t1780))
 }
 
 ///|
@@ -4272,7 +4272,7 @@ fn step_165() -> Unit raise {
   let t1799 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1800 = @simp.rewrite_tac(@list.List([@sets.image(), @sets.in_()]))
   let t1801 = @list.List([@simp.rewrite_tac(@list.List([topology()])), @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, @tactics.conj_tac, t1800, t1799, t1798, @tactics.conj_tac, t1797, t1796, @tactics_ext.disch_all_tac, t1795, t1794, t1793, t1792, t1791, t1790, t1789, t1788, t1787, t1786, t1785])
-  image_top_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ f : ((A) -> Bool, B) -> Bool, op_euclid_prime_topology_us(U) && {} == f({}) && (∀ a : (A) -> Bool, ∀ b : (A) -> Bool, IN(a, U) && IN(b, U) → INTER(f(a), f(b)) == f(INTER(a, b))) && (∀ V : ((A) -> Bool) -> Bool, SUBSET(V, U) → UNIONS(IMAGE(f, V)) == f(UNIONS(V))) → op_euclid_prime_topology_us(IMAGE(f, U))"), t1801))
+  image_top_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ f : ((A) -> Bool, B) -> Bool, euclid_topology_(U) && {} == f({}) && (∀ a : (A) -> Bool, ∀ b : (A) -> Bool, IN(a, U) && IN(b, U) → INTER(f(a), f(b)) == f(INTER(a, b))) && (∀ V : ((A) -> Bool) -> Bool, SUBSET(V, U) → UNIONS(IMAGE(f, V)) == f(UNIONS(V))) → euclid_topology_(IMAGE(f, U))"), t1801))
 }
 
 ///|
@@ -4291,7 +4291,7 @@ fn step_166() -> Unit raise {
   let t1803 = @tactics.then_tac(@tactics.match_mp_tac(@class.eq_ext()), @tactics.beta_tac)
   let t1804 = @simp.rewrite_tac(@list.List([induced_top()]))
   let t1805 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.unions_inter()])), @tactics_ext.disch_all_tac, @tactics.ap_term_tac, t1804, @tactics.ap_thm_tac, @tactics.ap_term_tac, t1803, t1802])
-  induced_top_support_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ C : (A) -> Bool, UNIONS(op_euclid_prime_induced_us_top(U, C)) == INTER(UNIONS(U), C)"), t1805))
+  induced_top_support_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ C : (A) -> Bool, UNIONS(euclid_induced_top(U, C)) == INTER(UNIONS(U), C)"), t1805))
 }
 
 ///|
@@ -4315,7 +4315,7 @@ fn step_167() -> Unit raise {
   let t1812 = @tactics.match_mp_tac(image_top())
   let t1813 = @simp.rewrite_tac(@list.List([induced_top()]))
   let t1814 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), @tactics.disch_tac, t1813, t1812, t1811, @tactics.conj_tac, t1810, @tactics.conj_tac, t1809, t1808, @tactics_ext.disch_all_tac, @tactics.ap_term_tac, @tactics.ap_thm_tac, @tactics.ap_term_tac, t1807, t1806])
-  induced_top_top_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ C : (A) -> Bool, op_euclid_prime_topology_us(U) → op_euclid_prime_topology_us(op_euclid_prime_induced_us_top(U, C))"), t1814))
+  induced_top_top_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ C : (A) -> Bool, euclid_topology_(U) → euclid_topology_(euclid_induced_top(U, C))"), t1814))
 }
 
 ///|
@@ -4333,7 +4333,7 @@ fn step_168() -> Unit raise {
   let t1815 = @meson.meson_tac(@list.List([@sets.in_()]))
   let t1816 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t1817 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([induced_top(), @sets.image()])), t1816, t1815])
-  induced_top_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ C : (A) -> Bool, ∀ A : (A) -> Bool, op_euclid_prime_topology_us(U) → op_euclid_prime_induced_us_top(U, C, A) == (∃ B : (A) -> Bool, U(B) && INTER(B, C) == A)"), t1817))
+  induced_top_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ C : (A) -> Bool, ∀ A : (A) -> Bool, euclid_topology_(U) → euclid_induced_top(U, C, A) == (∃ B : (A) -> Bool, U(B) && INTER(B, C) == A)"), t1817))
 }
 
 ///|
@@ -4351,7 +4351,7 @@ fn step_169() -> Unit raise {
   let t1818 = @meson.asm_meson_tac(@list.List([top_inter()]))
   let t1819 = @tactics_ext2.cho(2L)
   let t1820 = @list.List([@simp.rewrite_tac(@list.List([induced_top(), @sets.image(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()])), @tactics_ext.disch_all_tac, t1819, t1818])
-  induced_trans_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, ∀ B : (A) -> Bool, op_euclid_prime_topology_us(U) && U(A) && op_euclid_prime_induced_us_top(U, A, B) → U(B)"), t1820))
+  induced_trans_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ A : (A) -> Bool, ∀ B : (A) -> Bool, euclid_topology_(U) && U(A) && euclid_induced_top(U, A, B) → U(B)"), t1820))
 }
 
 ///|
@@ -4384,7 +4384,7 @@ fn step_170() -> Unit raise {
       s1824(x1825)
     }
   }, x1827), t1832, (x1829 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t1828, @tactics_ext.subgoal_tac, x1829), t1831, t1830])
-  induced_top_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) → op_euclid_prime_induced_us_top(U, UNIONS(U)) == U"), t1839))
+  induced_top_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, euclid_topology_(U) → euclid_induced_top(U, UNIONS(U)) == U"), t1839))
 }
 
 ///|
@@ -4415,7 +4415,7 @@ pub fn gen() -> @kernel.Thm {
 /// top_of_metric_gen
 fn step_172() -> Unit raise {
   let t1840 = @list.List([@simp.rewrite_tac(@list.List([gen(), top_of_metric()]))])
-  top_of_metric_gen_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_gen(op_euclid_prime_open_us_balls((X, d))) == op_euclid_prime_top_us_of_us_metric((X, d))"), t1840))
+  top_of_metric_gen_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_gen(euclid_open_balls((X, d))) == euclid_top_of_metric((X, d))"), t1840))
 }
 
 ///|
@@ -4454,7 +4454,7 @@ fn step_173() -> Unit raise {
     let t = x1841
     @tactics.mp_tac(@simp.rewrite_rule(@list.List([@class.right_imp_exists_thm(), @class.skolem_thm()]))(t))
   }, x1844), t1857, t1856, @tactics.conj_tac, t1855, t1854, @tactics.gen_tac, t1853, t1852, t1851, t1850, @tactics.ap_term_tac, t1849, t1848, t1847, t1846, t1845])
-  gen_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, SUBSET(U, V) && (∀ A : (A) -> Bool, IN(A, V) → (∃ Y : ((A) -> Bool) -> Bool, SUBSET(Y, U) && A == UNIONS(Y))) → op_euclid_prime_gen(U) == op_euclid_prime_gen(V)"), t1864))
+  gen_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, SUBSET(U, V) && (∀ A : (A) -> Bool, IN(A, V) → (∃ Y : ((A) -> Bool) -> Bool, SUBSET(Y, U) && A == UNIONS(Y))) → euclid_gen(U) == euclid_gen(V)"), t1864))
 }
 
 ///|
@@ -4517,7 +4517,7 @@ fn step_174() -> Unit raise {
     let t = x1880
     @simp.rewrite_tac(@list.List([t]))
   }, x1883), @tactics.ap_term_tac, (x1885 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t1884, x1885), t1889, t1888, t1887, t1886])
-  gen_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_induced_us_top(op_euclid_prime_top_us_of_us_metric((X, d)), Y) == op_euclid_prime_gen(op_euclid_prime_induced_us_top(op_euclid_prime_open_us_balls((X, d)), Y))"), t1910))
+  gen_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && euclid_metric_space((X, d)) → euclid_induced_top(euclid_top_of_metric((X, d)), Y) == euclid_gen(euclid_induced_top(euclid_open_balls((X, d)), Y))"), t1910))
 }
 
 ///|
@@ -4542,7 +4542,7 @@ fn step_175() -> Unit raise {
   let t1945 = @simp.asm_rewrite_tac(@list.List([]))
   let t1946 = @tactics.exists_tac(@term_syntax.parse_term("(x'' : A)"))
   let t1947 = @simp.rewrite_tac(@list.List([@sets.in_image()]))
-  let t1948 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((Y : (A) -> Bool), (d : (A, A) -> Real)), (x'' : A), (s : (A) -> Real)(x''))"))
+  let t1948 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((Y : (A) -> Bool), (d : (A, A) -> Real)), (x'' : A), (s : (A) -> Real)(x''))"))
   let t1949 = @simp.rewrite_tac(@list.List([@sets.in_unions()]))
   let t1950 = @simp.rewrite_tac(@list.List([@sets.subset()]))
   let t1951 = @tactics.match_mp_tac(@sets.subset_antisym())
@@ -4550,7 +4550,7 @@ fn step_175() -> Unit raise {
   let t1953 = @simp.rewrite_tac(@list.List([@sets.in_image()]))
   let t1954 = @simp.rewrite_tac(@list.List([@sets.subset(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t1955 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.subset_inter()]))
-  let t1956 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((t : A) => op_euclid_prime_open_us_ball(((Y : (A) -> Bool), (d : (A, A) -> Real)), t, (s : (A) -> Real)(t)), INTER((x : (A) -> Bool), Y))"))
+  let t1956 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((t : A) => euclid_open_ball(((Y : (A) -> Bool), (d : (A, A) -> Real)), t, (s : (A) -> Real)(t)), INTER((x : (A) -> Bool), Y))"))
   let t1957 = @tactics.disch_then(@tactics.choose_tac)
   let t1958 = @tactics.disch_then(fn(x1936 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_2 = x1936
@@ -4570,13 +4570,13 @@ fn step_175() -> Unit raise {
     })(t_1)
   })
   let t1964 = @meson.asm_meson_tac(@list.List([@sets.in_inter()]))
-  let t1965 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((a : A), op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x' : A), (r : Real)))"))
+  let t1965 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((a : A), euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x' : A), (r : Real)))"))
   let t1923 = @term_syntax.parse_term("(r : _)")
   let t1924 = @term_syntax.parse_term("(x' : _)")
   let t1925 = @term_syntax.parse_term("(a : _)")
   let t1926 = @term_syntax.parse_term("(d : _)")
   let t1929 = @list.List([@term_syntax.parse_term("(X : _)"), t1926, t1925, t1924, t1923])
-  let t1966 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ a : A, IN(a, INTER((x : (A) -> Bool), (Y : (A) -> Bool))) → (∃ s : Real, real_of_num(0) < s && SUBSET(op_euclid_prime_open_us_ball((Y, (d : (A, A) -> Real)), a, s), INTER(x, Y)))"))
+  let t1966 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ a : A, IN(a, INTER((x : (A) -> Bool), (Y : (A) -> Bool))) → (∃ s : Real, real_of_num(0) < s && SUBSET(euclid_open_ball((Y, (d : (A, A) -> Real)), a, s), INTER(x, Y)))"))
   let t1967 = @tactics.first_assum(@tactics.choose_then(fn(x1920 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1921 = @tactics.assume_tac(x1920)
     fn(x1922 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -4601,11 +4601,11 @@ fn step_175() -> Unit raise {
   let t1973 = @simp.rewrite_tac(@list.List([induced_top(), @sets.in_image()]))
   let t1974 = @meson.meson_tac(@list.List([]))
   let t1975 = @meson.asm_meson_tac(@list.List([@sets.in_(), @sets.inter_empty(), open_ball_empty(), open_ball_neg_radius(), @calc_rat.real_arith(@term_syntax.parse_term("-real_of_num(1) < real_of_num(0)"))]))
-  let t1976 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), -real_of_num(1))"))
+  let t1976 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), -real_of_num(1))"))
   let t1977 = @meson.meson_tac(@list.List([]))
   let t1978 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
   let t1979 = @tactics.match_mp_tac(open_ball_intersect())
-  let t1980 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real))"))
+  let t1980 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (x : A), (r : Real))"))
   let t1981 = @tactics.conv_tac(@tactics_ext2.relabel_bound_conv)
   let t1982 = @class.asm_cases_tac(@term_syntax.parse_term("(Y : (A) -> Bool)((x : A))"))
   let t1983 = @simp.asm_rewrite_tac(@list.List([]))
@@ -4623,7 +4623,7 @@ fn step_175() -> Unit raise {
     let t = x1927
     @tactics_ext2.clean_assume_tac(@bool.ispecl(t, open_ball_center()))
   }, x1930), t1965, t1964, t1963, t1962, t1961, t1960, t1959, t1958, t1957, t1956, t1955, @tactics.conj_tac, t1954, t1953, @tactics.gen_tac, t1952, t1951, @tactics.conj_tac, t1950, @tactics.gen_tac, t1949, @tactics.disch_tac, t1948, t1947, @tactics.conj_tac, @tactics_ext2.name_conflict_tac, t1946, t1945, t1944, t1943, t1942, t1941, @tactics.gen_tac, t1940, t1939, t1938])
-  gen_induced_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_gen(op_euclid_prime_open_us_balls((Y, d))) == op_euclid_prime_gen(op_euclid_prime_induced_us_top(op_euclid_prime_open_us_balls((X, d)), Y))"), t1989))
+  gen_induced_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && euclid_metric_space((X, d)) → euclid_gen(euclid_open_balls((Y, d))) == euclid_gen(euclid_induced_top(euclid_open_balls((X, d)), Y))"), t1989))
 }
 
 ///|
@@ -4642,7 +4642,7 @@ fn step_176() -> Unit raise {
   let t1991 = @simp.rewrite_tac(@list.List([@equal.gsym(top_of_metric_gen())]))
   let t1992 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1993 = @list.List([@simp.simp_tac(@list.List([gen_subspace()])), t1992, t1991, t1990])
-  top_of_metric_induced_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_induced_us_top(op_euclid_prime_top_us_of_us_metric((X, d)), Y) == op_euclid_prime_top_us_of_us_metric((Y, d))"), t1993))
+  top_of_metric_induced_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, SUBSET(Y, X) && euclid_metric_space((X, d)) → euclid_induced_top(euclid_top_of_metric((X, d)), Y) == euclid_top_of_metric((Y, d))"), t1993))
 }
 
 ///|
@@ -4687,7 +4687,7 @@ pub fn metric_continuous_pt() -> @kernel.Thm {
 ///|
 /// metric_continuous
 fn step_179() -> Unit raise {
-  metric_continuous_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(metric_continuous : ((A) -> B, ((A) -> Bool, (A, A) -> Real), ((B) -> Bool, (B, B) -> Real)) -> Bool)((f : (A) -> B), ((X : (A) -> Bool), (dX : (A, A) -> Real)), ((Y : (B) -> Bool), (dY : (B, B) -> Real))) == (∀ x : A, op_euclid_prime_metric_us_continuous_us_pt(f, (X, dX), (Y, dY), x))")))
+  metric_continuous_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(metric_continuous : ((A) -> B, ((A) -> Bool, (A, A) -> Real), ((B) -> Bool, (B, B) -> Real)) -> Bool)((f : (A) -> B), ((X : (A) -> Bool), (dX : (A, A) -> Real)), ((Y : (B) -> Bool), (dY : (B, B) -> Real))) == (∀ x : A, euclid_metric_continuous_pt(f, (X, dX), (Y, dY), x))")))
 }
 
 ///|
@@ -4704,7 +4704,7 @@ pub fn metric_continuous() -> @kernel.Thm {
 fn step_180() -> Unit raise {
   let t1994 = @meson.meson_tac(@list.List([]))
   let t1995 = @list.List([@simp.rewrite_tac(@list.List([metric_continuous_pt()])), t1994])
-  metric_continuous_pt_domain_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ X : (A) -> Bool, ∀ dX : (A, A) -> Real, ∀ Y : (B) -> Bool, ∀ dY : (B, B) -> Real, ∀ x : A, !IN(x, X) → op_euclid_prime_metric_us_continuous_us_pt(f, (X, dX), (Y, dY), x)"), t1995))
+  metric_continuous_pt_domain_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ X : (A) -> Bool, ∀ dX : (A, A) -> Real, ∀ Y : (B) -> Bool, ∀ dY : (B, B) -> Real, ∀ x : A, !IN(x, X) → euclid_metric_continuous_pt(f, (X, dX), (Y, dY), x)"), t1995))
 }
 
 ///|
@@ -4735,7 +4735,7 @@ fn step_181() -> Unit raise {
     @tactics.mp_tac(@bool.conjunct2(t_5))
   })
   let t2038 = @simp.rewrite_tac(@list.List([open_ball()]))
-  let t2022 = @term_syntax.parse_term("(op_euclid_prime_open_us_ball : (((_) -> Bool, (_, _) -> Real), _, Real, _) -> Bool)")
+  let t2022 = @term_syntax.parse_term("(euclid_open_ball : (((_) -> Bool, (_, _) -> Real), _, Real, _) -> Bool)")
   let t2039 = @simp.asm_rewrite_tac(@list.List([@sets.in_()]))
   let t2040 = @tactics.first_assum(fn(x2020 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_4 = x2020
@@ -4766,8 +4766,8 @@ fn step_181() -> Unit raise {
   let t2052 = @tactics.disch_then(@tactics.choose_tac)
   let t2053 = @simp.asm_simp_tac(@list.List([top_of_metric_nbd()]))
   let t2054 = @simp.rewrite_tac(@list.List([@sets.in_()]))
-  let t2011 = @term_syntax.parse_term("IN((v : (_) -> Bool), op_euclid_prime_top_us_of_us_metric(((Y : (_) -> Bool), (dY : (_, _) -> Real))))")
-  let t2055 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∃ eps : Real, real_of_num(0) < eps && SUBSET(op_euclid_prime_open_us_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), (f : (A) -> B)((a : A)), eps), (v : (B) -> Bool))"))
+  let t2011 = @term_syntax.parse_term("IN((v : (_) -> Bool), euclid_top_of_metric(((Y : (_) -> Bool), (dY : (_, _) -> Real))))")
+  let t2055 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∃ eps : Real, real_of_num(0) < eps && SUBSET(euclid_open_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), (f : (A) -> B)((a : A)), eps), (v : (B) -> Bool))"))
   let t2056 = @tactics.disch_then(fn(x2008 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_1 = x2008
     let t2010 = @tactics.mp_tac(@simp.rewrite_rule(@list.List([@misc_defs_and_lemmas.in_preimage()]))(t_1))
@@ -4791,7 +4791,7 @@ fn step_181() -> Unit raise {
   let t2068 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
   let t2069 = @simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2070 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2071 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (A) -> Bool), (dX : (A, A) -> Real)), (x : A), (r : Real))"))
+  let t2071 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((X : (A) -> Bool), (dX : (A, A) -> Real)), (x : A), (r : Real))"))
   let t2003 = @list.List([@sets.set_tac(@list.List([]))])
   let t2072 = @tactics.match_mp_tac(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : A, ∀ B : (A) -> Bool, (∃ A : (A) -> Bool, IN(x, A) && SUBSET(A, B)) → IN(x, B)"), t2003))
   let t2073 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((y : A), (B : (A) -> Bool))"))
@@ -4800,8 +4800,8 @@ fn step_181() -> Unit raise {
   let t2076 = @tactics.disch_then(@tactics.choose_tac)
   let t2077 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
   let t2078 = @tactics.assume_tac(top_of_metric_nbd())
-  let t2079 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∃ r : Real, real_of_num(0) < r && SUBSET(op_euclid_prime_open_us_ball(((X : (A) -> Bool), (dX : (A, A) -> Real)), (x : A), r), (B : (A) -> Bool))"))
-  let t2080 = @simp.abbrev_tac(@term_syntax.parse_term("(B : (A) -> Bool) == preimage(UNIONS(op_euclid_prime_top_us_of_us_metric(((X : (A) -> Bool), (dX : (A, A) -> Real)))), (f : (A) -> B), op_euclid_prime_open_us_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), f((x : A)), (epsilon : Real)))"))
+  let t2079 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∃ r : Real, real_of_num(0) < r && SUBSET(euclid_open_ball(((X : (A) -> Bool), (dX : (A, A) -> Real)), (x : A), r), (B : (A) -> Bool))"))
+  let t2080 = @simp.abbrev_tac(@term_syntax.parse_term("(B : (A) -> Bool) == preimage(UNIONS(euclid_top_of_metric(((X : (A) -> Bool), (dX : (A, A) -> Real)))), (f : (A) -> B), euclid_open_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), f((x : A)), (epsilon : Real)))"))
   let t2081 = @meson.asm_meson_tac(@list.List([top_of_metric_unions(), open_ball_nonempty()]))
   let t2082 = @meson.meson_tac(@list.List([]))
   let t2083 = @simp.rewrite_tac(@list.List([@sets.in_()]))
@@ -4811,7 +4811,7 @@ fn step_181() -> Unit raise {
   let t2001 = @term_syntax.parse_term("(IMAGE : ((_) -> _, (_) -> Bool, _) -> Bool)")
   let t2087 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(Y : (B) -> Bool)((f : (A) -> B)((x : A)))"))
   let t2088 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_preimage()]))
-  let t2089 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((x : A), preimage(UNIONS(op_euclid_prime_top_us_of_us_metric(((X : (A) -> Bool), (dX : (A, A) -> Real)))), (f : (A) -> B), op_euclid_prime_open_us_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), f(x), (epsilon : Real))))"))
+  let t2089 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((x : A), preimage(UNIONS(euclid_top_of_metric(((X : (A) -> Bool), (dX : (A, A) -> Real)))), (f : (A) -> B), euclid_open_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), f(x), (epsilon : Real))))"))
   let t2090 = @simp.rewrite_tac(@list.List([@equal.gsym(@class.right_imp_exists_thm())]))
   let t2091 = @tactics.disch_then(@tactics.ante_res_then(fn(x1998 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1999 = @tactics.assume_tac(x1998)
@@ -4822,15 +4822,15 @@ fn step_181() -> Unit raise {
   let t2092 = @meson.meson_tac(@list.List([]))
   let t2093 = @simp.rewrite_tac(@list.List([open_balls(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2094 = @simp.rewrite_tac(@list.List([top_of_metric_open_balls()]))
-  let t2095 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_balls(((Y : (B) -> Bool), (dY : (B, B) -> Real)))"))
+  let t2095 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_balls(((Y : (B) -> Bool), (dY : (B, B) -> Real)))"))
   let t1997 = @list.List([@sets.set_tac(@list.List([]))])
   let t2096 = @tactics.match_mp_tac(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : A, ∀ B : (A) -> Bool, (∃ A : (A) -> Bool, IN(x, A) && SUBSET(A, B)) → IN(x, B)"), t1997))
-  let t2097 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN(op_euclid_prime_open_us_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), (f : (A) -> B)((x : A)), (epsilon : Real)), op_euclid_prime_top_us_of_us_metric((Y, dY)))"))
+  let t2097 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN(euclid_open_ball(((Y : (B) -> Bool), (dY : (B, B) -> Real)), (f : (A) -> B)((x : A)), (epsilon : Real)), euclid_top_of_metric((Y, dY)))"))
   let t2098 = @simp.rewrite_tac(@list.List([metric_continuous_pt()]))
   let t1996 = @list.List([@tactics.all_tac, @simp.asm_simp_tac(@list.List([metric_continuous_pt_domain()]))])
   let t2099 = @tactics.thenl(@class.asm_cases_tac(@term_syntax.parse_term("IN((x : A), (X : (A) -> Bool))")), t1996)
   let t2100 = @list.List([@tactics_ext.disch_all_tac, @tactics.eq_tac, @simp.rewrite_tac(@list.List([continuous(), metric_continuous()])), @tactics.disch_tac, @tactics.gen_tac, t2099, t2098, @tactics.gen_tac, t2097, t2096, t2095, t2094, t2093, t2092, t2091, t2090, @tactics.disch_tac, t2089, t2088, t2087, (x2002 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2001, x2002), t2086, t2085, t2084, @tactics_ext2.name_conflict_tac, t2083, t2082, t2081, t2080, @tactics.disch_tac, t2079, t2078, t2077, t2076, t2075, t2074, @tactics.gen_tac, @tactics_ext.disch_all_tac, t2073, t2072, t2071, t2070, t2069, t2068, (x2005 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2004, x2005), t2067, t2066, t2065, t2064, t2063, @tactics.disch_tac, t2062, @tactics.gen_tac, @tactics.disch_tac, t2061, t2060, t2059, @tactics.conj_tac, t2058, t2057, @tactics.gen_tac, t2056, @tactics_ext.disch_all_tac, t2055, (x2012 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2011, x2012), t2054, t2053, t2052, t2051, t2050, t2049, t2048, t2047, @tactics_ext.disch_all_tac, t2046, t2045, t2044, t2043, t2042, @tactics_ext.disch_all_tac, t2041, t2040, t2039, (x2023 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2022, x2023), t2038, t2037, t2036, t2035, t2034, t2033, (x2029 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2028, x2029), t2032, @tactics_ext2.name_conflict_tac, t2031, t2030])
-  metric_continuous_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ X : (A) -> Bool, ∀ Y : (B) -> Bool, ∀ dX : (A, A) -> Real, ∀ dY : (B, B) -> Real, SUBSET(IMAGE(f, X), Y) && op_euclid_prime_metric_us_space((X, dX)) && op_euclid_prime_metric_us_space((Y, dY)) → op_euclid_prime_continuous(f, op_euclid_prime_top_us_of_us_metric((X, dX)), op_euclid_prime_top_us_of_us_metric((Y, dY))) == op_euclid_prime_metric_us_continuous(f, (X, dX), (Y, dY))"), t2100))
+  metric_continuous_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ X : (A) -> Bool, ∀ Y : (B) -> Bool, ∀ dX : (A, A) -> Real, ∀ dY : (B, B) -> Real, SUBSET(IMAGE(f, X), Y) && euclid_metric_space((X, dX)) && euclid_metric_space((Y, dY)) → euclid_continuous(f, euclid_top_of_metric((X, dX)), euclid_top_of_metric((Y, dY))) == euclid_metric_continuous(f, (X, dX), (Y, dY))"), t2100))
 }
 
 ///|
@@ -4847,7 +4847,7 @@ pub fn metric_continuous_continuous() -> @kernel.Thm {
 fn step_182() -> Unit raise {
   let t2101 = @meson.asm_meson_tac(@list.List([top_inter(), @sets.in_()]))
   let t2102 = @list.List([@simp.rewrite_tac(@list.List([continuous(), induced_top(), @sets.in_image(), q_elim_thm_p_p()])), t2101])
-  continuous_induced_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ A : (B) -> Bool, op_euclid_prime_topology_us(V) && op_euclid_prime_continuous(f, U, V) && V(A) → op_euclid_prime_continuous(f, U, op_euclid_prime_induced_us_top(V, A))"), t2102))
+  continuous_induced_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ A : (B) -> Bool, euclid_topology_(V) && euclid_continuous(f, U, V) && V(A) → euclid_continuous(f, U, euclid_induced_top(V, A))"), t2102))
 }
 
 ///|
@@ -4887,7 +4887,7 @@ fn step_183() -> Unit raise {
       }
     })(x2107))
   }, x2109), t2114, t2113, t2112, t2111, t2110])
-  metric_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ X : (B) -> Bool, ∀ d : (B, B) -> Real, ∀ f : (A) -> B, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_topology_us(U) → op_euclid_prime_continuous(f, U, op_euclid_prime_top_us_of_us_metric((X, d))) == (∀ x : B, ∀ r : Real, U(preimage(UNIONS(U), f, op_euclid_prime_open_us_ball((X, d), x, r))))"), t2127))
+  metric_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ X : (B) -> Bool, ∀ d : (B, B) -> Real, ∀ f : (A) -> B, euclid_metric_space((X, d)) && euclid_topology_(U) → euclid_continuous(f, U, euclid_top_of_metric((X, d))) == (∀ x : B, ∀ r : Real, U(preimage(UNIONS(U), f, euclid_open_ball((X, d), x, r))))"), t2127))
 }
 
 ///|
@@ -4919,9 +4919,9 @@ fn step_184() -> Unit raise {
   let t2188 = @simp.asm_simp_tac(@list.List([euclid_add_closure()]))
   let t2189 = @tactics.then_tac((x2171 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(17L, x2171), @tactics.disch_then(@tactics_ext2.imatch_mp_tac))
   let t2190 = @tactics_ext2.rewr(17L)
-  let t2166 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid")
-  let t2169 = @list.List([@term_syntax.parse_term("op_euclid_prime_euclid((n : Num))"), t2166])
-  let t2164 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid((f : (_, Num) -> Real)((t : _)) + (g : (_, Num) -> Real)(t), f((x' : _)) + g(x')) <= op_euclid_prime_d_us_euclid(f(t) + g(t), f(x') + g(t)) + op_euclid_prime_d_us_euclid(f(x') + g(t), f(x') + g(x'))")
+  let t2166 = @term_syntax.parse_term("euclid_d_euclid")
+  let t2169 = @list.List([@term_syntax.parse_term("euclid_euclid((n : Num))"), t2166])
+  let t2164 = @term_syntax.parse_term("euclid_d_euclid((f : (_, Num) -> Real)((t : _)) + (g : (_, Num) -> Real)(t), f((x' : _)) + g(x')) <= euclid_d_euclid(f(t) + g(t), f(x') + g(t)) + euclid_d_euclid(f(x') + g(t), f(x') + g(x'))")
   let t2191 = @simp.asm_simp_tac(@list.List([euclid_add_closure()]))
   let t2192 = @simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2193 = @simp.rewrite_tac(@list.List([@sets.inter(), @misc_defs_and_lemmas.in_preimage(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
@@ -4939,11 +4939,11 @@ fn step_184() -> Unit raise {
   let t2160 = @list.List([@term_syntax.parse_term("(t : _) => (f : (_, Num) -> Real)(t) + (g : (_, Num) -> Real)(t)"), t2155])
   let t2203 = @tactics_ext2.use_(6L, @drule.match_mp(preimage_subset()))
   let t2153 = @term_syntax.parse_term("(B : _)")
-  let t2148 = @term_syntax.parse_term("(B : (_) -> Bool) == INTER(preimage(UNIONS((U : ((_) -> Bool) -> Bool)), (f : (_, Num) -> Real), op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), f((t : _)), (r' : Real) / real_of_num(2))), preimage(UNIONS(U), (g : (_, Num) -> Real), op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), g(t), r' / real_of_num(2))))")
+  let t2148 = @term_syntax.parse_term("(B : (_) -> Bool) == INTER(preimage(UNIONS((U : ((_) -> Bool) -> Bool)), (f : (_, Num) -> Real), euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), f((t : _)), (r' : Real) / real_of_num(2))), preimage(UNIONS(U), (g : (_, Num) -> Real), euclid_open_ball((euclid_euclid(n), euclid_d_euclid), g(t), r' / real_of_num(2))))")
   let t2204 = @simp.asm_simp_tac(@list.List([open_ball_open()]))
   let t2205 = @simp.rewrite_tac(@list.List([@sets.in_()]))
-  let t2144 = @term_syntax.parse_term("op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (g : (_, Num) -> Real)((t : _)), (r' : Real) / real_of_num(2))")
-  let t2138 = @term_syntax.parse_term("op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (f : (_, Num) -> Real)((t : _)), (r' : Real) / real_of_num(2))")
+  let t2144 = @term_syntax.parse_term("euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), (g : (_, Num) -> Real)((t : _)), (r' : Real) / real_of_num(2))")
+  let t2138 = @term_syntax.parse_term("euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), (f : (_, Num) -> Real)((t : _)), (r' : Real) / real_of_num(2))")
   let t2206 = @tactics_ext2.and_(6L)
   let t2207 = @tactics_ext2.cho(6L)
   let t2208 = @tactics_ext2.use_(6L, @drule.match_mp(@simp.rewrite_rule(@list.List([@sets.in_()]))(open_ball_center())))
@@ -4991,7 +4991,7 @@ fn step_184() -> Unit raise {
     let t = x2167
     @tactics.assume_tac(@bool.ispecl(t, metric_space_triangle()))
   }, x2170), t2190, t2189, t2188, t2187, t2186, @tactics.conj_tac, t2185, t2184, @tactics.conj_tac, t2183, t2182, t2181, (x2172 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x2172), (x2173 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x2173), t2180, @tactics_ext2.name_conflict_tac, t2179, t2178, t2177, t2176, t2175, t2174])
-  continuous_sum_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ f : (A, Num) -> Real, ∀ g : (A, Num) -> Real, ∀ n : Num, op_euclid_prime_topology_us(U) && op_euclid_prime_continuous(f, U, op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid))) && op_euclid_prime_continuous(g, U, op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid))) && SUBSET(IMAGE(f, UNIONS(U)), op_euclid_prime_euclid(n)) && SUBSET(IMAGE(g, UNIONS(U)), op_euclid_prime_euclid(n)) → op_euclid_prime_continuous((t : A) => f(t) + g(t), U, op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)))"), t2219))
+  continuous_sum_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ f : (A, Num) -> Real, ∀ g : (A, Num) -> Real, ∀ n : Num, euclid_topology_(U) && euclid_continuous(f, U, euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid))) && euclid_continuous(g, U, euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid))) && SUBSET(IMAGE(f, UNIONS(U)), euclid_euclid(n)) && SUBSET(IMAGE(g, UNIONS(U)), euclid_euclid(n)) → euclid_continuous((t : A) => f(t) + g(t), U, euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)))"), t2219))
 }
 
 ///|
@@ -5036,7 +5036,7 @@ pub fn converge() -> @kernel.Thm {
 ///|
 /// cauchy_seq
 fn step_187() -> Unit raise {
-  cauchy_seq_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(cauchy_seq : (((A) -> Bool, (A, A) -> Real), (Num) -> A) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real)), (f : (Num) -> A)) == (op_euclid_prime_sequence(X, f) && (∀ eps : Real, ∃ n : Num, ∀ i : Num, ∀ j : Num, real_of_num(0) < eps && n <= i && n <= j → d(f(i), f(j)) < eps))")))
+  cauchy_seq_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(cauchy_seq : (((A) -> Bool, (A, A) -> Real), (Num) -> A) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real)), (f : (Num) -> A)) == (euclid_sequence(X, f) && (∀ eps : Real, ∃ n : Num, ∀ i : Num, ∀ j : Num, real_of_num(0) < eps && n <= i && n <= j → d(f(i), f(j)) < eps))")))
 }
 
 ///|
@@ -5051,7 +5051,7 @@ pub fn cauchy_seq() -> @kernel.Thm {
 ///|
 /// complete
 fn step_188() -> Unit raise {
-  complete_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(complete : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (∀ f : (Num) -> A, op_euclid_prime_cauchy_us_seq((X, d), f) → op_euclid_prime_converge((X, d), f))")))
+  complete_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(complete : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (∀ f : (Num) -> A, euclid_cauchy_seq((X, d), f) → euclid_converge((X, d), f))")))
 }
 
 ///|
@@ -5075,7 +5075,7 @@ fn step_189() -> Unit raise {
   let t2244 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(X : (A) -> Bool)((f : (Num) -> A)((i : Num))) && X((x : A)) && X(f((j : Num)))"))
   let t2245 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t2246 = @simp.rewrite_tac(@list.List([sequence(), @sets.subset(), @sets.in_image(), @sets.in_univ()]))
-  let t2237 = @term_syntax.parse_term("(op_euclid_prime_sequence : ((_) -> Bool, (Num) -> _) -> Bool)")
+  let t2237 = @term_syntax.parse_term("(euclid_sequence : ((_) -> Bool, (Num) -> _) -> Bool)")
   let t2247 = @tactics.first_assum(fn(x2233 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_1 = x2233
     let t2235 = @term_syntax.parse_term("(f : (Num) -> A)((j : Num))")
@@ -5117,7 +5117,7 @@ fn step_189() -> Unit raise {
   let t2261 = @simp.asm_rewrite_tac(@list.List([]))
   let t2262 = @simp.rewrite_tac(@list.List([cauchy_seq()]))
   let t2263 = @list.List([@simp.rewrite_tac(@list.List([converge(), @misc_defs_and_lemmas.metric_space()])), @tactics_ext.disch_all_tac, t2262, t2261, t2260, @tactics.gen_tac, (x2221 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2220, x2221), @tactics_ext.disch_all_tac, t2259, t2258, t2257, t2256, @tactics_ext.disch_all_tac, t2255, t2254, t2253, @calc_rat.real_arith_tac, t2252, t2251, t2250, t2249, t2248, t2247, (x2238 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2237, x2238), t2246, @tactics_ext2.name_conflict_tac, t2245, @tactics.disch_tac, t2244, t2243, t2242, @tactics_ext.disch_all_tac, t2241])
-  converge_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_sequence(X, f) && op_euclid_prime_converge((X, d), f) → op_euclid_prime_cauchy_us_seq((X, d), f)"), t2263))
+  converge_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, euclid_metric_space((X, d)) && euclid_sequence(X, f) && euclid_converge((X, d), f) → euclid_cauchy_seq((X, d), f)"), t2263))
 }
 
 ///|
@@ -5134,7 +5134,7 @@ pub fn converge_cauchy() -> @kernel.Thm {
 fn step_190() -> Unit raise {
   let t2266 = @meson.asm_meson_tac(@list.List([euclid1_abs()]))
   let t2267 = @meson.asm_meson_tac(@list.List([]))
-  let t2268 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid(1, (f : (Num, Num) -> Real)((m : Num))) && op_euclid_prime_euclid(1, f((n' : Num)))"))
+  let t2268 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid(1, (f : (Num, Num) -> Real)((m : Num))) && euclid_euclid(1, f((n' : Num)))"))
   let t2269 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("((a : Num) >= (b : Num)) == (b <= a)"))]))
   let t2270 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2271 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num)"))
@@ -5145,7 +5145,7 @@ fn step_190() -> Unit raise {
   })
   let t2274 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t2275 = @list.List([@tactics.gen_tac, @simp.rewrite_tac(@list.List([cauchy_seq(), @analysis.cauchy(), sequence(), @sets.subset(), @sets.in_image(), @sets.in_univ()])), t2274, @tactics_ext2.name_conflict_tac, @tactics_ext.disch_all_tac, @tactics.gen_tac, @tactics.disch_tac, t2273, t2272, t2271, t2270, t2269, t2268, t2267, t2266])
-  cauchy_seq_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num, Num) -> Real, op_euclid_prime_cauchy_us_seq((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid), f) → cauchy((x : Num) => f(x, 0))"), t2275))
+  cauchy_seq_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (Num, Num) -> Real, euclid_cauchy_seq((euclid_euclid(1), euclid_d_euclid), f) → cauchy((x : Num) => f(x, 0))"), t2275))
 }
 
 ///|
@@ -5173,8 +5173,8 @@ fn step_191() -> Unit raise {
     @tactics.mp_tac(@bool.conjunct1(t_4))
   })
   let t2299 = @simp.rewrite_tac(@list.List([cauchy_seq(), sequence(), @sets.subset(), @sets.in_image(), @sets.in_univ()]))
-  let t2285 = @term_syntax.parse_term("(op_euclid_prime_cauchy_us_seq : (((_) -> Bool, (_, _) -> Real), (Num) -> _) -> Bool)")
-  let t2300 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid(1, (f : (Num, Num) -> Real)((i : Num)))"))
+  let t2285 = @term_syntax.parse_term("(euclid_cauchy_seq : (((_) -> Bool, (_, _) -> Real), (Num) -> _) -> Bool)")
+  let t2300 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid(1, (f : (Num, Num) -> Real)((i : Num)))"))
   let t2301 = @tactics.exists_tac(@term_syntax.parse_term("(N : Num)"))
   let t2302 = @tactics.disch_then(@tactics.choose_tac)
   let t2303 = @tactics.first_assum(fn(x2283 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -5190,7 +5190,7 @@ fn step_191() -> Unit raise {
   let t2307 = @simp.asm_rewrite_tac(@list.List([]))
   let t2308 = @analysis.expand_tac("c")
   let t2309 = @simp.rewrite_tac(@list.List([@sets.in_(), @misc_defs_and_lemmas.euclid()]))
-  let t2310 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((c : (Num) -> Real), op_euclid_prime_euclid(1))"))
+  let t2310 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((c : (Num) -> Real), euclid_euclid(1))"))
   let t2311 = @tactics.exists_tac(@term_syntax.parse_term("(c : (Num) -> Real)"))
   let t2312 = @simp.abbrev_tac(@term_syntax.parse_term("(c : (Num) -> Real) == ((j : Num) => if j == 0 { (z : Real) } else { real_of_num(0) })"))
   let t2313 = @simp.rewrite_tac(@list.List([@analysis.mr1_def()]))
@@ -5206,7 +5206,7 @@ fn step_191() -> Unit raise {
     @tactics.then_tac(@tactics.assume_tac(t), t2278)
   })
   let t2318 = @list.List([@simp.rewrite_tac(@list.List([complete(), converge()])), @tactics.gen_tac, t2317, t2316, t2315, t2314, t2313, @tactics.disch_tac, t2312, t2311, t2310, t2309, t2308, @tactics.gen_tac, @class.cond_cases_tac, t2307, @int.arith_tac, @int.arith_tac, @tactics.disch_tac, t2306, @tactics.gen_tac, t2305, @tactics.disch_tac, t2304, t2303, t2302, t2301, @tactics.gen_tac, t2300, (x2286 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2285, x2286), t2299, t2298, t2297, t2296, (x2290 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2289, x2290), t2295, t2294, @tactics_ext.disch_all_tac, t2293, @class.cond_cases_tac, t2292, t2291])
-  complete_real_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("op_euclid_prime_complete((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid))"), t2318))
+  complete_real_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("euclid_complete((euclid_euclid(1), euclid_d_euclid))"), t2318))
 }
 
 ///|
@@ -5225,7 +5225,7 @@ fn step_192() -> Unit raise {
   let t2320 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t2321 = @simp.rewrite_tac(@list.List([sequence(), @sets.subset(), @sets.in_image(), @sets.in_univ()]))
   let t2322 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t2321, t2320, t2319])
-  sequence_in_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ f : (Num) -> A, ∀ i : Num, op_euclid_prime_sequence(X, f) → X(f(i))"), t2322))
+  sequence_in_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ f : (Num) -> A, ∀ i : Num, euclid_sequence(X, f) → X(f(i))"), t2322))
 }
 
 ///|
@@ -5246,7 +5246,7 @@ fn step_193() -> Unit raise {
   let t2335 = @simp.rewrite_tac(@list.List([@trivia.o_def(), proj_d_euclid()]))
   let t2336 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("(a : Real) <= (b : Real) → b < (eps : Real) → a < eps")))
   let t2337 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2330 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid")
+  let t2330 = @term_syntax.parse_term("euclid_d_euclid")
   let t2338 = @tactics.first_assum(fn(x2325 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_1 = x2325
     let t2327 = @term_syntax.parse_term("(j : Num)")
@@ -5260,12 +5260,12 @@ fn step_193() -> Unit raise {
   let t2341 = @simp.asm_rewrite_tac(@list.List([]))
   let t2342 = @meson.meson_tac(@list.List([@sets.in_(), proj_euclid1()]))
   let t2343 = @simp.rewrite_tac(@list.List([sequence(), @sets.subset(), @sets.in_image(), @trivia.o_def(), @sets.in_univ()]))
-  let t2344 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_sequence(op_euclid_prime_euclid(1), o(op_euclid_prime_proj((i : Num)), (f : (Num, Num) -> Real)))"))
+  let t2344 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_sequence(euclid_euclid(1), o(euclid_proj((i : Num)), (f : (Num, Num) -> Real)))"))
   let t2345 = @list.List([@simp.rewrite_tac(@list.List([cauchy_seq()])), @tactics_ext.disch_all_tac, t2344, t2343, @tactics_ext2.name_conflict_tac, t2342, @tactics.disch_tac, t2341, @tactics.gen_tac, t2340, t2339, @tactics_ext.disch_all_tac, t2338, (x2331 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_then(t2330, fn(x2328 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_2 = x2328
     @tactics.all_tac
   }, x2331), t2337, t2336, t2335, t2334, t2333, t2332])
-  proj_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ f : (Num, Num) -> Real, ∀ n : Num, op_euclid_prime_cauchy_us_seq((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), f) → op_euclid_prime_cauchy_us_seq((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid), o(op_euclid_prime_proj(i), f))"), t2345))
+  proj_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ f : (Num, Num) -> Real, ∀ n : Num, euclid_cauchy_seq((euclid_euclid(n), euclid_d_euclid), f) → euclid_cauchy_seq((euclid_euclid(1), euclid_d_euclid), o(euclid_proj(i), f))"), t2345))
 }
 
 ///|
@@ -5348,9 +5348,9 @@ fn step_194() -> Unit raise {
   let t2446 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ j : Num, ∃ c : Num, ∀ i : Num, c <= i → abs((L : (Num, Num) -> Real)(j, 0) - (f : (Num, Num) -> Real)(i, j)) < (eps : Real) / (real_of_num(1) + real_of_num((n : Num)))"))
   let t2447 = @simp.asm_simp_tac(@list.List([d_euclid_n()]))
   let t2448 = @meson.asm_meson_tac(@list.List([cauchy_seq(), sequence_in()]))
-  let t2449 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ i : Num, op_euclid_prime_euclid((n : Num), (f : (Num, Num) -> Real)(i))"))
+  let t2449 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ i : Num, euclid_euclid((n : Num), (f : (Num, Num) -> Real)(i))"))
   let t2450 = @meson.asm_meson_tac(@list.List([cauchy_seq(), sequence_in()]))
-  let t2451 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, op_euclid_prime_euclid(1, o(op_euclid_prime_proj(i), (f : (Num, Num) -> Real), j))"))
+  let t2451 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ i : Num, ∀ j : Num, euclid_euclid(1, o(euclid_proj(i), (f : (Num, Num) -> Real), j))"))
   let t2452 = @tactics.disch_then(fn(x2371 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_4 = x2371
     @tactics_ext2.use_(2L, @simp.rewrite_rule(@list.List([t_4])))
@@ -5376,19 +5376,19 @@ fn step_194() -> Unit raise {
   })
   let t2464 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid()]))
   let t2465 = @meson.asm_meson_tac(@list.List([cauchy_seq(), sequence_in()]))
-  let t2466 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (f : (Num, Num) -> Real)(n + (n' : Num)))"))
+  let t2466 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (f : (Num, Num) -> Real)(n + (n' : Num)))"))
   let t2467 = @simp.rewrite_tac(@list.List([proj()]))
   let t2468 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) == (x : Real) → abs((u : Real) - x) == abs(u)")))
   let t2469 = @simp.asm_simp_tac(@list.List([euclid1_abs()]))
   let t2470 = @simp.rewrite_tac(@list.List([proj_euclid1()]))
-  let t2471 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid(1, op_euclid_prime_proj((m : Num), (f : (Num, Num) -> Real)((n : Num) + (n' : Num))))"))
+  let t2471 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid(1, euclid_proj((m : Num), (f : (Num, Num) -> Real)((n : Num) + (n' : Num))))"))
   let t2472 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("(x : Real) == (y : Real) → !(x < y)")))
   let t2473 = @simp.rewrite_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(n' : Num) <= (n : Num) + n'"))]))
   let t2474 = @simp.rewrite_tac(@list.List([@trivia.o_def()]))
   let t2475 = @tactics.exists_tac(@term_syntax.parse_term("(n : Num) + (n' : Num)"))
   let t2476 = @simp.rewrite_tac(@list.List([@equal.gsym(@class.exists_not_thm())]))
   let t2477 = @simp.asm_simp_tac(@list.List([]))
-  let t2357 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid")
+  let t2357 = @term_syntax.parse_term("euclid_d_euclid")
   let t2478 = @tactics.assume_tac(@calc_rat.real_arith(@term_syntax.parse_term("∀ x : Real, !(x == real_of_num(0)) → real_of_num(0) < abs(x)")))
   let t2479 = @tactics.disch_then(@tactics.choose_tac)
   let t2480 = @tactics.first_assum(fn(x2355 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -5409,7 +5409,7 @@ fn step_194() -> Unit raise {
   })
   let t2486 = @simp.rewrite_tac(@list.List([converge(), @sets.in_()]))
   let t2487 = @meson.asm_meson_tac(@list.List([complete(), complete_real()]))
-  let t2488 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ i : Num, op_euclid_prime_converge((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid), o(op_euclid_prime_proj(i), (f : (Num, Num) -> Real)))"))
+  let t2488 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("∀ i : Num, euclid_converge((euclid_euclid(1), euclid_d_euclid), o(euclid_proj(i), (f : (Num, Num) -> Real)))"))
   let t2489 = @tactics.imp_res_then(fn(x2346 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2347 = @tactics.mp_tac(x2346)
     fn(x2348 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -5418,7 +5418,7 @@ fn step_194() -> Unit raise {
   })(proj_cauchy())
   let t2490 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2491 = @list.List([@simp.rewrite_tac(@list.List([complete(), @sets.in_()])), t2490, @tactics_ext.disch_all_tac, t2489, @tactics.disch_tac, t2488, @tactics.gen_tac, t2487, t2486, t2485, t2484, t2483, @tactics_ext2.subconj_tac, t2482, @tactics.gen_tac, t2481, @tactics_ext.disch_all_tac, t2480, t2479, @tactics_ext2.proof_by_contr_tac, t2478, (x2358 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.undisch_find_tac(t2357, x2358), t2477, t2476, t2475, t2474, t2473, t2472, @tactics.all_tac, t2471, t2470, t2469, @tactics.disch_tac, t2468, t2467, t2466, t2465, t2464, t2463, @tactics.all_tac, @tactics.disch_tac, @tactics.gen_tac, t2462, @tactics.disch_tac, t2461, t2460, t2459, t2458, t2457, t2456, t2455, t2454, t2453, @int.arith_tac, t2452, t2451, t2450, @tactics.disch_tac, t2449, @tactics.gen_tac, t2448, @tactics.disch_tac, t2447, t2446, t2445, t2444, t2443, t2442, (x2375 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x2375), @tactics_ext.disch_all_tac, t2441, (x2378 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(8L, x2378), t2440, t2439, t2438, t2437, t2436, t2435, t2434, t2433, t2432, @tactics.gen_tac, t2431, @class.cond_cases_tac, t2430, t2429, t2428, t2427, @tactics.gen_tac, @tactics.all_tac, @tactics.disch_tac, t2426, @tactics.conj_tac, t2425, t2424, @tactics.conj_tac, (x2379 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x2379), @calc_rat.real_arith_tac, t2423, t2422, t2421, @tactics.beta_tac, @tactics.gen_tac, @tactics_ext.disch_all_tac, t2420, t2419, @class.cond_cases_tac, @tactics.refl_tac, t2418, @tactics.disch_tac, t2417, t2416, (x2383 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x2383), t2415, t2414, t2413, t2412, (x2386 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x2386), t2411, @tactics.all_tac, t2410, t2409, t2408, t2407, @calc_rat.real_arith_tac, t2406, t2405, t2404, t2403, t2402, @calc_rat.real_arith_tac, t2401, t2400, t2399, t2398, t2397, t2396, t2395, @int.arith_tac, @tactics.all_tac, t2394, @tactics.disch_tac, t2393, t2392, t2391, @tactics.conj_tac, @int.arith_tac, @tactics.conj_tac, t2390, t2389, @int.arith_tac, @int.arith_tac])
-  complete_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, op_euclid_prime_complete((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid))"), t2491))
+  complete_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, euclid_complete((euclid_euclid(n), euclid_d_euclid))"), t2491))
 }
 
 ///|
@@ -5435,7 +5435,7 @@ pub fn complete_euclid() -> @kernel.Thm {
 fn step_195() -> Unit raise {
   let t2492 = @sets.set_tac(@list.List([]))
   let t2493 = @list.List([@simp.rewrite_tac(@list.List([sequence()])), t2492])
-  subset_sequence_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ S : (A) -> Bool, ∀ f : (Num) -> A, SUBSET(S, X) && op_euclid_prime_sequence(S, f) → op_euclid_prime_sequence(X, f)"), t2493))
+  subset_sequence_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ S : (A) -> Bool, ∀ f : (Num) -> A, SUBSET(S, X) && euclid_sequence(S, f) → euclid_sequence(X, f)"), t2493))
 }
 
 ///|
@@ -5453,7 +5453,7 @@ fn step_196() -> Unit raise {
   let t2494 = @meson.asm_meson_tac(@list.List([subset_sequence()]))
   let t2495 = @simp.rewrite_tac(@list.List([cauchy_seq()]))
   let t2496 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t2495, @tactics_ext.disch_all_tac, t2494])
-  subset_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ S : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, SUBSET(S, X) && op_euclid_prime_cauchy_us_seq((S, d), f) → op_euclid_prime_cauchy_us_seq((X, d), f)"), t2496))
+  subset_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ S : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, SUBSET(S, X) && euclid_cauchy_seq((S, d), f) → euclid_cauchy_seq((X, d), f)"), t2496))
 }
 
 ///|
@@ -5472,7 +5472,7 @@ fn step_197() -> Unit raise {
   let t2517 = @simp.rewrite_tac(@list.List([@sets.in_(), @sets.subset()]))
   let t2518 = @simp.rewrite_tac(@list.List([@sets.in_diff()]))
   let t2519 = @simp.abbrev_tac(@term_syntax.parse_term("(a : (Num) -> Real) == (f : (Num, Num) -> Real)((n' : Num))"))
-  let t2520 = @simp.abbrev_tac(@term_syntax.parse_term("(X : ((Num) -> Real) -> Bool) == op_euclid_prime_euclid((n : Num))"))
+  let t2520 = @simp.abbrev_tac(@term_syntax.parse_term("(X : ((Num) -> Real) -> Bool) == euclid_euclid((n : Num))"))
   let t2521 = @meson.asm_meson_tac(@list.List([cauchy_seq(), sequence_in()]))
   let t2522 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("(S : ((Num) -> Real) -> Bool)((f : (Num, Num) -> Real)((n' : Num)))"))
   let t2523 = @simp.asm_rewrite_tac(@list.List([]))
@@ -5501,20 +5501,20 @@ fn step_197() -> Unit raise {
   let t2540 = @tactics_ext2.use_(0L, @simp.rewrite_rule(@list.List([open_def()])))
   let t2541 = @tactics_ext.h_match_mp((x2498 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp("6", x2498))((x2499 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext.hyp("5", x2499))
   let t2542 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
-  let t2543 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("!IN((x : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) → IN(x, DIFF(op_euclid_prime_euclid((n : Num)), S))"))
+  let t2543 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("!IN((x : (Num) -> Real), (S : ((Num) -> Real) -> Bool)) → IN(x, DIFF(euclid_euclid((n : Num)), S))"))
   let t2544 = @simp.asm_rewrite_tac(@list.List([]))
   let t2545 = @tactics.exists_tac(@term_syntax.parse_term("(x : (Num) -> Real)"))
   let t2546 = @tactics.disch_then(@tactics.choose_tac)
   let t2547 = @simp.rewrite_tac(@list.List([converge()]))
   let t2548 = @meson.asm_meson_tac(@list.List([complete_euclid(), complete()]))
-  let t2549 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_converge((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (f : (Num, Num) -> Real))"))
+  let t2549 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_converge((euclid_euclid((n : Num)), euclid_d_euclid), (f : (Num, Num) -> Real))"))
   let t2550 = @meson.asm_meson_tac(@list.List([subset_cauchy()]))
-  let t2551 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_cauchy_us_seq((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (f : (Num, Num) -> Real))"))
+  let t2551 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_cauchy_seq((euclid_euclid((n : Num)), euclid_d_euclid), (f : (Num, Num) -> Real))"))
   let t2552 = @simp.simp_tac(@list.List([@equal.gsym(top_of_metric_unions()), metric_euclid()]))
   let t2553 = @tactics_ext2.use_(0L, @drule.match_mp(closed_open()))
   let t2554 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2555 = @list.List([@simp.rewrite_tac(@list.List([complete()])), t2554, @tactics_ext.disch_all_tac, @tactics.gen_tac, @tactics.disch_tac, t2553, (x2497 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2497), t2552, @tactics.disch_tac, t2551, t2550, @tactics.disch_tac, t2549, t2548, t2547, t2546, t2545, t2544, @tactics_ext2.proof_by_contr_tac, t2543, t2542, @tactics.disch_tac, t2541, t2540, t2539, t2538, t2537, (x2505 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2505), t2536, @tactics.all_tac, @tactics_ext2.proof_by_contr_tac, t2535, t2534, t2533, t2532, t2531, t2530, t2529, t2528, t2527, t2526, t2525, (x2514 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2514), t2524, t2523, t2522, t2521, (x2515 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x2515), t2520, t2519, t2518, t2517, t2516])
-  complete_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ S : ((Num) -> Real) -> Bool, op_euclid_prime_closed_us(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)), S) && SUBSET(S, op_euclid_prime_euclid(n)) → op_euclid_prime_complete((S, op_euclid_prime_d_us_euclid))"), t2555))
+  complete_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ S : ((Num) -> Real) -> Bool, euclid_closed_(euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), S) && SUBSET(S, euclid_euclid(n)) → euclid_complete((S, euclid_d_euclid))"), t2555))
 }
 
 ///|
@@ -5529,7 +5529,7 @@ pub fn complete_closed() -> @kernel.Thm {
 ///|
 /// totally_bounded
 fn step_198() -> Unit raise {
-  totally_bounded_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(totally_bounded : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (∀ eps : Real, ∃ B : ((A) -> Bool) -> Bool, real_of_num(0) < eps → FINITE(B) && (∀ b : (A) -> Bool, B(b) → (∃ x : A, b == op_euclid_prime_open_us_ball((X, d), x, eps))) && X == UNIONS(B))")))
+  totally_bounded_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(totally_bounded : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (∀ eps : Real, ∃ B : ((A) -> Bool) -> Bool, real_of_num(0) < eps → FINITE(B) && (∀ b : (A) -> Bool, B(b) → (∃ x : A, b == euclid_open_ball((X, d), x, eps))) && X == UNIONS(B))")))
 }
 
 ///|
@@ -5606,7 +5606,7 @@ fn step_199() -> Unit raise {
   let t2643 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2644 = @simp.rewrite_tac(@list.List([open_ball()]))
   let t2645 = @simp.asm_rewrite_tac(@list.List([@sets.in_()]))
-  let t2646 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((S : (A) -> Bool), (d : (A, A) -> Real)), (s : ((A) -> Bool) -> A)((b : (A) -> Bool)), (eps : Real))"))
+  let t2646 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((S : (A) -> Bool), (d : (A, A) -> Real)), (s : ((A) -> Bool) -> A)((b : (A) -> Bool)), (eps : Real))"))
   let t2647 = @tactics.exists_tac(@term_syntax.parse_term("(b : (A) -> Bool)"))
   let t2648 = @tactics.conv_tac(@tactics_ext2.quant_left_conv("x"))
   let t2649 = @tactics.conv_tac(@tactics_ext2.quant_left_conv("x"))
@@ -5628,7 +5628,7 @@ fn step_199() -> Unit raise {
   let t2662 = @simp.rewrite_tac(@list.List([@sets.image(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2663 = @simp.asm_rewrite_tac(@list.List([]))
   let t2664 = @tactics.match_mp_tac(@sets.finite_image())
-  let t2665 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((c : (A) -> Bool) => op_euclid_prime_open_us_ball(((S : (A) -> Bool), (d : (A, A) -> Real)), (s : ((A) -> Bool) -> A)(c), (eps : Real)), (B : ((A) -> Bool) -> Bool))"))
+  let t2665 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((c : (A) -> Bool) => euclid_open_ball(((S : (A) -> Bool), (d : (A, A) -> Real)), (s : ((A) -> Bool) -> A)(c), (eps : Real)), (B : ((A) -> Bool) -> Bool))"))
   let t2666 = @tactics.disch_then(@tactics.choose_tac)
   let t2667 = @tactics.conv_tac(@tactics_ext2.quant_left_conv("s"))
   let t2668 = @meson.meson_tac(@list.List([@sets.in_()]))
@@ -5648,7 +5648,7 @@ fn step_199() -> Unit raise {
   let t2678 = @tactics_ext2.use_(1L, (x2557 : @kernel.Thm) => @bool.spec(t2556, x2557))
   let t2679 = @simp.rewrite_tac(@list.List([totally_bounded()]))
   let t2680 = @list.List([@tactics.repeat_tac(@tactics.gen_tac), t2679, @tactics_ext.disch_all_tac, @tactics.gen_tac, t2678, t2677, t2676, @tactics.disch_tac, t2675, t2674, t2673, @calc_rat.real_arith_tac, t2672, @tactics.disch_tac, t2671, t2670, @tactics.gen_tac, t2669, t2668, t2667, t2666, @tactics.all_tac, t2665, @tactics.conj_tac, t2664, t2663, @tactics.conj_tac, @tactics.gen_tac, t2662, @tactics_ext2.name_conflict_tac, t2661, t2660, t2659, t2658, @tactics.eq_tac, @tactics.disch_tac, t2657, t2656, t2655, t2654, t2653, t2652, t2651, t2650, t2649, t2648, t2647, t2646, t2645, t2644, t2643, @tactics.all_tac, t2642, t2641, t2640, (x2567 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x2567), t2639, t2638, t2637, @tactics.disch_tac, @tactics.disch_tac, t2636, (x2568 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x2568), t2635, t2634, t2633, @tactics.disch_tac, t2632, t2631, (x2569 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x2569), (x2570 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x2570), t2630, t2629, @tactics.all_tac, @tactics.disch_tac, t2628, t2627, t2626, t2625, t2624, t2623, (x2575 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x2575), (x2576 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x2576), t2622, t2621, @tactics_ext.disch_all_tac, t2620, t2619, t2618, @tactics_ext.disch_all_tac, t2617, t2616, t2615, t2614, t2613, (x2577 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(21L, x2577), t2612, (x2578 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(14L, x2578), t2611, t2610, @tactics_ext.disch_all_tac, t2609, (x2586 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2586), t2608, @tactics_ext.disch_all_tac, t2607, t2606, t2605, t2604, (x2590 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x2590), (x2591 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(17L, x2591), t2603, @calc_rat.real_arith_tac, t2602, t2601, t2600, t2599, @tactics_ext2.name_conflict_tac, t2598, t2597, t2596, @tactics.gen_tac, @tactics_ext.disch_all_tac, (x2592 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2592), t2595, t2594, t2593])
-  totally_bounded_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ S : (A) -> Bool, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && SUBSET(S, X) → op_euclid_prime_totally_us_bounded((S, d))"), t2680))
+  totally_bounded_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ S : (A) -> Bool, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && SUBSET(S, X) → euclid_totally_bounded((S, d))"), t2680))
 }
 
 ///|
@@ -5697,7 +5697,7 @@ fn step_200() -> Unit raise {
   let t2717 = @analysis.expand_tac("G")
   let t2718 = @tactics_ext2.and_(4L)
   let t2719 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid()]))
-  let t2720 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real))"))
+  let t2720 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real))"))
   let t2721 = @tactics.disch_then(@tactics.choose_tac)
   let t2722 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.fun(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2723 = @analysis.expand_tac("fs")
@@ -5723,9 +5723,9 @@ fn step_200() -> Unit raise {
   let t2736 = @tactics.mp_tac(@tactics_refine.prove(@term_syntax.parse_term("∀ a : (Num) -> Bool, ∀ b : (Real) -> Bool, FINITE(a) && FINITE(b) → FINITE(FUN(a, b))"), t2681))
   let t2737 = @analysis.expand_tac("fs")
   let t2738 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("FINITE((fs : ((Num) -> Real) -> Bool))"))
-  let t2739 = @simp.abbrev_tac(@term_syntax.parse_term("(gs : ((Num) -> Real) -> Bool) == {(f : (Num) -> Real) | op_euclid_prime_euclid((n : Num), f) && (∀ i : Num, ∃ j : Num, abs(f(i)) == real_of_num(j) && j <= (N : Num))}"))
+  let t2739 = @simp.abbrev_tac(@term_syntax.parse_term("(gs : ((Num) -> Real) -> Bool) == {(f : (Num) -> Real) | euclid_euclid((n : Num), f) && (∀ i : Num, ∃ j : Num, abs(f(i)) == real_of_num(j) && j <= (N : Num))}"))
   let t2740 = @list.List([@tactics_ext.rep_gen_tac, @simp.abbrev_tac(@term_syntax.parse_term("(fs : ((Num) -> Real) -> Bool) == FUN({(m : Num) | m < (n : Num)}, {(x : Real) | ∃ j : Num, abs(x) == real_of_num(j) && j <= (N : Num)})")), t2739, t2738, t2737, t2736, t2735, t2734, @tactics.disch_tac, t2733, t2732, t2731, t2730, t2729, @tactics_ext.rep_gen_tac, t2728, t2727, t2726, @tactics.gen_tac, t2725, t2724, t2723, t2722, @tactics_ext2.name_conflict_tac, @tactics.eq_tac, t2721, t2720, t2719, @tactics.gen_tac, t2718, (x2686 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x2686), t2717, t2716, t2715, t2714, @tactics.gen_tac, t2713, t2712, @class.cond_cases_tac, @tactics_ext2.reduce_tac, t2711, @tactics_ext2.reduce_tac, t2710, t2709, t2708, @tactics_ext.disch_all_tac, t2707, @tactics.conj_tac, t2706, @tactics_ext2.name_conflict_tac, @tactics.conj_tac, @tactics.gen_tac, t2705, (x2695 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x2695), t2704, @tactics.gen_tac, @class.cond_cases_tac, t2703, t2702, t2701, t2700, t2699, @class.cond_cases_tac, t2698, t2697, t2696])
-  integer_cube_finite_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ N : Num, FINITE({(f : (Num) -> Real) | op_euclid_prime_euclid(n, f) && (∀ i : Num, ∃ j : Num, abs(f(i)) == real_of_num(j) && j <= N)})"), t2740))
+  integer_cube_finite_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ N : Num, FINITE({(f : (Num) -> Real) | euclid_euclid(n, f) && (∀ i : Num, ∃ j : Num, abs(f(i)) == real_of_num(j) && j <= N)})"), t2740))
 }
 
 ///|
@@ -5771,7 +5771,7 @@ fn step_201() -> Unit raise {
   let t2782 = @tactics_ext2.with_(0L, @drule.match_mp(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < (s : Real) → !(s == real_of_num(0))"))))
   let t2783 = @simp.asm_simp_tac(@list.List([euclid_scale_closure()]))
   let t2784 = @simp.rewrite_tac(@list.List([euclid_scale_act()]))
-  let t2785 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_euclid_us_scale(inv((s : Real)), (c : (Num) -> Real))"))
+  let t2785 = @tactics.exists_tac(@term_syntax.parse_term("euclid_euclid_scale(inv((s : Real)), (c : (Num) -> Real))"))
   let t2786 = @analysis.expand_tac("map")
   let t2787 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2788 = @tactics.x_gen_tac(@term_syntax.parse_term("(c : (Num) -> Real)"))
@@ -5788,8 +5788,8 @@ fn step_201() -> Unit raise {
   let t2741 = @term_syntax.parse_term("inv((s : Real)) * real_of_num((N : Num))")
   let t2795 = @tactics_ext2.use_(2L, (x2742 : @kernel.Thm) => @bool.spec(t2741, x2742))
   let t2796 = @tactics.assume_tac(@analysis.real_arch_simple())
-  let t2797 = @list.List([@tactics_ext.disch_all_tac, @simp.abbrev_tac(@term_syntax.parse_term("(map : ((Num) -> Real, Num) -> Real) == op_euclid_prime_euclid_us_scale((s : Real))")), t2796, t2795, t2794, t2793, t2792, t2791, (x2749 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x2749), t2790, t2789, t2788, t2787, t2786, @tactics_ext.disch_all_tac, t2785, t2784, t2783, t2782, t2781, @tactics.conj_tac, @tactics.gen_tac, t2780, t2779, t2778, t2777, t2776, (x2753 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2753), @calc_rat.real_arith_tac, t2775, t2774, @tactics.all_tac, @tactics_ext2.subconj_tac, t2773, (x2756 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x2756), t2772, t2771, @calc_rat.real_arith_tac, @tactics.disch_tac, t2770, t2769, t2768, t2767, t2766, t2765, t2764, t2763, t2762, (x2760 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2760), @calc_rat.real_arith_tac, t2761])
-  finite_scaled_lattice_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ N : Num, ∀ s : Real, real_of_num(0) < s → FINITE({(x : (Num) -> Real) | op_euclid_prime_euclid(n, x) && (∀ i : Num, (∃ j : Num, abs(x(i)) == s * real_of_num(j)) && abs(x(i)) <= real_of_num(N))})"), t2797))
+  let t2797 = @list.List([@tactics_ext.disch_all_tac, @simp.abbrev_tac(@term_syntax.parse_term("(map : ((Num) -> Real, Num) -> Real) == euclid_euclid_scale((s : Real))")), t2796, t2795, t2794, t2793, t2792, t2791, (x2749 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x2749), t2790, t2789, t2788, t2787, t2786, @tactics_ext.disch_all_tac, t2785, t2784, t2783, t2782, t2781, @tactics.conj_tac, @tactics.gen_tac, t2780, t2779, t2778, t2777, t2776, (x2753 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2753), @calc_rat.real_arith_tac, t2775, t2774, @tactics.all_tac, @tactics_ext2.subconj_tac, t2773, (x2756 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x2756), t2772, t2771, @calc_rat.real_arith_tac, @tactics.disch_tac, t2770, t2769, t2768, t2767, t2766, t2765, t2764, t2763, t2762, (x2760 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x2760), @calc_rat.real_arith_tac, t2761])
+  finite_scaled_lattice_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ N : Num, ∀ s : Real, real_of_num(0) < s → FINITE({(x : (Num) -> Real) | euclid_euclid(n, x) && (∀ i : Num, (∃ j : Num, abs(x(i)) == s * real_of_num(j)) && abs(x(i)) <= real_of_num(N))})"), t2797))
 }
 
 ///|
@@ -5851,7 +5851,7 @@ fn step_202() -> Unit raise {
   let t2900 = @simp.asm_rewrite_tac(@list.List([]))
   let t2901 = @tactics_ext2.use_(14L, @simp.rewrite_rule(@list.List([@sets.in_()])))
   let t2902 = @tactics.match_mp_tac(d_euclid_bound())
-  let t2903 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_d_us_euclid((cx : (Num) -> Real), (x : (Num) -> Real)) <= sqrt(real_of_num((n : Num))) * (s : Real)"))
+  let t2903 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_d_euclid((cx : (Num) -> Real), (x : (Num) -> Real)) <= sqrt(real_of_num((n : Num))) * (s : Real)"))
   let t2904 = @meson.meson_tac(@list.List([]))
   let t2905 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()]))
   let t2906 = @simp.asm_rewrite_tac(@list.List([]))
@@ -5935,13 +5935,13 @@ fn step_202() -> Unit raise {
   let t2958 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid()]))
   let t2959 = @analysis.expand_tac("cx")
   let t2960 = @simp.rewrite_tac(@list.List([@sets.in_(), @misc_defs_and_lemmas.euclid()]))
-  let t2961 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((cx : (Num) -> Real), op_euclid_prime_euclid((n : Num)))"))
+  let t2961 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("IN((cx : (Num) -> Real), euclid_euclid((n : Num)))"))
   let t2962 = @meson.meson_tac(@list.List([]))
   let t2963 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2964 = @analysis.expand_tac("cube")
-  let t2965 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real))"))
+  let t2965 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real))"))
   let t2966 = @simp.asm_rewrite_tac(@list.List([]))
-  let t2967 = @tactics.exists_tac(@term_syntax.parse_term("op_euclid_prime_open_us_ball(((cube : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid), (cx : (Num) -> Real), (eps : Real))"))
+  let t2967 = @tactics.exists_tac(@term_syntax.parse_term("euclid_open_ball(((cube : ((Num) -> Real) -> Bool), euclid_d_euclid), (cx : (Num) -> Real), (eps : Real))"))
   let t2968 = @tactics.exists_tac(@term_syntax.parse_term("(cx : (Num) -> Real)"))
   let t2969 = @simp.abbrev_tac(@term_syntax.parse_term("(cx : (Num) -> Real) == ((i : Num) => if real_of_num(0) <= (x : (Num) -> Real)(i) { real_of_num((cs : (Real) -> Num)(x(i))) * (s : Real) } else { -(real_of_num(cs(-x(i))) * s) })"))
   let t2970 = @tactics.conv_tac(@tactics_ext2.quant_left_conv("x'"))
@@ -5967,8 +5967,8 @@ fn step_202() -> Unit raise {
   let t2986 = @meson.asm_meson_tac(@list.List([]))
   let t2987 = @simp.rewrite_tac(@list.List([@sets.image(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t2988 = @meson.asm_meson_tac(@list.List([@sets.finite_image()]))
-  let t2989 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((c : (Num) -> Real) => op_euclid_prime_open_us_ball(((cube : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid), c, (eps : Real)), (cent : ((Num) -> Real) -> Bool))"))
-  let t2990 = @simp.abbrev_tac(@term_syntax.parse_term("(cube : ((Num) -> Real) -> Bool) == {(x : (Num) -> Real) | op_euclid_prime_euclid((n : Num), x) && (∀ i : Num, abs(x(i)) <= real_of_num((N : Num)))}"))
+  let t2989 = @tactics.exists_tac(@term_syntax.parse_term("IMAGE((c : (Num) -> Real) => euclid_open_ball(((cube : ((Num) -> Real) -> Bool), euclid_d_euclid), c, (eps : Real)), (cent : ((Num) -> Real) -> Bool))"))
+  let t2990 = @simp.abbrev_tac(@term_syntax.parse_term("(cube : ((Num) -> Real) -> Bool) == {(x : (Num) -> Real) | euclid_euclid((n : Num), x) && (∀ i : Num, abs(x(i)) <= real_of_num((N : Num)))}"))
   let t2991 = @simp.asm_simp_tac(@list.List([finite_scaled_lattice()]))
   let t2992 = @analysis.expand_tac("cent")
   let t2993 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("FINITE((cent : ((Num) -> Real) -> Bool))"))
@@ -5977,10 +5977,10 @@ fn step_202() -> Unit raise {
   let t2996 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("real_of_num(0) < (s : Real)"))
   let t2997 = @simp.abbrev_tac(@term_syntax.parse_term("(s : Real) == (eps : Real) / (real_of_num((n : Num)) + real_of_num(1))"))
   let t2998 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("real_of_num(0) < real_of_num((n : Num)) + real_of_num(1)"))
-  let t2999 = @simp.abbrev_tac(@term_syntax.parse_term("(cent : ((Num) -> Real) -> Bool) == {(x : (Num) -> Real) | op_euclid_prime_euclid((n : Num), x) && (∀ i : Num, (∃ j : Num, abs(x(i)) == (eps : Real) / (real_of_num(n) + real_of_num(1)) * real_of_num(j)) && abs(x(i)) <= real_of_num((N : Num)))}"))
+  let t2999 = @simp.abbrev_tac(@term_syntax.parse_term("(cent : ((Num) -> Real) -> Bool) == {(x : (Num) -> Real) | euclid_euclid((n : Num), x) && (∀ i : Num, (∃ j : Num, abs(x(i)) == (eps : Real) / (real_of_num(n) + real_of_num(1)) * real_of_num(j)) && abs(x(i)) <= real_of_num((N : Num)))}"))
   let t3000 = @tactics.conv_tac(@tactics_ext2.quant_right_conv("B"))
   let t3001 = @list.List([@tactics_ext.rep_gen_tac, @simp.rewrite_tac(@list.List([totally_bounded()])), @tactics.gen_tac, t3000, @tactics.disch_tac, t2999, t2998, @tactics_ext2.reduce_tac, @int.arith_tac, @tactics.disch_tac, t2997, t2996, t2995, t2994, @tactics.disch_tac, t2993, t2992, t2991, @tactics.disch_tac, t2990, t2989, @tactics_ext2.subconj_tac, t2988, @tactics.disch_tac, @tactics_ext2.subconj_tac, @tactics.gen_tac, t2987, t2986, @tactics.disch_tac, @tactics.all_tac, t2985, t2984, t2983, t2982, t2981, t2980, @tactics.disch_tac, t2979, @tactics.gen_tac, @tactics.eq_tac, @tactics.disch_tac, t2978, t2977, t2976, t2975, t2974, t2973, t2972, @tactics_ext2.name_conflict_tac, t2971, t2970, t2969, t2968, t2967, t2966, @tactics.all_tac, t2965, (x2808 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2808), t2964, t2963, t2962, @tactics.disch_tac, t2961, t2960, @tactics_ext.disch_all_tac, t2959, (x2809 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(13L, x2809), t2958, t2957, t2956, t2955, @tactics_ext2.reduce_tac, t2954, (x2816 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x2816), @tactics_ext2.reduce_tac, t2953, t2952, t2951, @tactics.disj1_tac, @tactics_ext2.reduce_tac, (x2817 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x2817), @calc_rat.real_arith_tac, t2950, @calc_rat.real_arith_tac, @tactics.disch_tac, @tactics.all_tac, @tactics_ext2.subconj_tac, t2949, t2948, t2947, t2946, @tactics.gen_tac, t2945, @tactics.beta_tac, @class.cond_cases_tac, @tactics_ext2.subconj_tac, t2944, t2943, @tactics_ext2.reduce_tac, t2942, @tactics.ap_thm_tac, @tactics.ap_term_tac, (x2818 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x2818), @calc_rat.real_arith_tac, @tactics.disch_tac, @tactics.all_tac, t2941, t2940, @tactics.disj1_tac, @tactics_ext2.reduce_tac, t2939, t2938, t2937, t2936, (x2826 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x2826), t2935, (x2827 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2827), t2934, t2933, t2932, t2931, (x2832 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2832), t2930, t2929, t2928, @tactics.all_tac, t2927, @tactics_ext2.subconj_tac, t2926, t2925, @tactics_ext2.reduce_tac, t2924, t2923, t2922, t2921, @tactics.disch_tac, t2920, (x2837 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x2837), t2919, t2918, (x2838 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2838), t2917, t2916, t2915, t2914, (x2843 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2843), t2913, t2912, @tactics_ext2.reduce_tac, t2911, t2910, t2909, t2908, @tactics.all_tac, @tactics.disch_tac, t2907, t2906, @tactics.conj_tac, (x2845 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(15L, x2845), (x2846 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x2846), t2905, t2904, t2903, t2902, t2901, t2900, @tactics.gen_tac, t2899, @tactics.beta_tac, t2898, t2897, @tactics_ext.disch_all_tac, t2896, t2895, t2894, t2893, @tactics.all_tac, t2892, t2891, @tactics.disch_tac, @class.cond_cases_tac, t2890, t2889, t2888, t2887, @tactics.all_tac, t2886, t2885, t2884, t2883, t2882, t2881, t2880, t2879, (x2856 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(16L, x2856), t2878, @tactics_ext2.reduce_tac, t2877, @tactics_ext2.reduce_tac, @int.arith_tac, t2876, @tactics.all_tac, t2875, @tactics_ext2.reduce_tac, @tactics.disch_tac, @tactics.conj_tac, @int.arith_tac, @tactics_ext2.square_tac, @tactics_ext2.subconj_tac, t2874, @tactics_ext2.reduce_tac, @tactics.disch_tac, @tactics_ext2.subconj_tac, @tactics_ext2.reduce_tac, @tactics.disch_tac, t2873, @tactics_ext2.reduce_tac, t2872, @tactics.disch_tac, t2871, @tactics_ext2.reduce_tac, t2870, @tactics_ext2.reduce_tac, t2869, @int.arith_tac, @tactics.all_tac, t2868, t2867, t2866, t2865, t2864, (x2858 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x2858), t2863, t2862, t2861, t2860, t2859])
-  totally_bounded_cube_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ N : Num, op_euclid_prime_totally_us_bounded(({(x : (Num) -> Real) | op_euclid_prime_euclid(n, x) && (∀ i : Num, abs(x(i)) <= real_of_num(N))}, op_euclid_prime_d_us_euclid))"), t3001))
+  totally_bounded_cube_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ N : Num, euclid_totally_bounded(({(x : (Num) -> Real) | euclid_euclid(n, x) && (∀ i : Num, abs(x(i)) <= real_of_num(N))}, euclid_d_euclid))"), t3001))
 }
 
 ///|
@@ -5996,7 +5996,7 @@ pub fn totally_bounded_cube() -> @kernel.Thm {
 /// center_FINITE
 fn step_203() -> Unit raise {
   let t3025 = @meson.meson_tac(@list.List([@sets.in_(), @sets.empty()]))
-  let t3026 = @simp.abbrev_tac(@term_syntax.parse_term("(E : (A) -> Bool) == op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (eps : Real))"))
+  let t3026 = @simp.abbrev_tac(@term_syntax.parse_term("(E : (A) -> Bool) == euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (eps : Real))"))
   let t3027 = @tactics_ext2.use_(0L, @drule.match_mp(open_ball_nonempty()))
   let t3028 = @tactics_ext2.join(0L, 2L)
   let t3029 = @tactics_ext2.join(2L, 7L)
@@ -6070,7 +6070,7 @@ fn step_203() -> Unit raise {
   let t3002 = @term_syntax.parse_term("(eps : Real)")
   let t3083 = @tactics_ext2.use_(1L, (x3003 : @kernel.Thm) => @bool.spec(t3002, x3003))
   let t3084 = @list.List([@simp.rewrite_tac(@list.List([totally_bounded()])), @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, t3083, t3082, t3081, t3080, t3079, t3078, t3077, t3076, t3075, t3074, @tactics_ext2.subconj_tac, t3073, t3072, t3071, t3070, @tactics.disch_tac, @tactics.conj_tac, t3069, t3068, t3067, @tactics_ext2.name_conflict_tac, t3066, @tactics.disch_tac, t3065, t3064, t3063, @tactics.all_tac, t3062, t3061, @tactics.ap_term_tac, t3060, @tactics.gen_tac, t3059, t3058, t3057, @tactics_ext2.name_conflict_tac, @tactics.eq_tac, @tactics_ext.disch_all_tac, t3056, t3055, t3054, t3053, t3052, t3051, t3050, t3049, t3048, @tactics.all_tac, t3047, t3046, t3045, (x3019 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(8L, x3019), t3044, t3043, @tactics.all_tac, t3042, (x3020 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x3020), @tactics_ext.disch_all_tac, t3041, t3040, @tactics.conj_tac, t3039, t3038, t3037, t3036, t3035, t3034, t3033, t3032, (x3023 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x3023), t3031, t3030, @tactics.disch_tac, t3029, t3028, t3027, (x3024 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x3024), t3026, t3025])
-  center_finite_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) → (∀ eps : Real, real_of_num(0) < eps → (∃ C : (A) -> Bool, SUBSET(C, X) && FINITE(C) && X == UNIONS(IMAGE((x : A) => op_euclid_prime_open_us_ball((X, d), x, eps), C))))"), t3084))
+  center_finite_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) → (∀ eps : Real, real_of_num(0) < eps → (∃ C : (A) -> Bool, SUBSET(C, X) && FINITE(C) && X == UNIONS(IMAGE((x : A) => euclid_open_ball((X, d), x, eps), C))))"), t3084))
 }
 
 ///|
@@ -6087,7 +6087,7 @@ pub fn center_finite() -> @kernel.Thm {
 fn step_204() -> Unit raise {
   let t3085 = @simp.asm_rewrite_tac(@list.List([]))
   let t3086 = @list.List([@simp.rewrite_tac(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])), @tactics_ext.disch_all_tac, t3085])
-  open_ball_dist_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ r : Real, op_euclid_prime_open_us_ball((X, d), x, r, y) → d(x, y) < r"), t3086))
+  open_ball_dist_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ x : A, ∀ y : A, ∀ r : Real, euclid_open_ball((X, d), x, r, y) → d(x, y) < r"), t3086))
 }
 
 ///|
@@ -6162,7 +6162,7 @@ fn step_205() -> Unit raise {
   let t3157 = @tactics_ext2.use_(0L, @drule.match_mp(center_finite()))
   let t3158 = @tactics_ext2.join(0L, 1L)
   let t3159 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.copy(0L), t3158, t3157, t3156, t3155, t3154, t3153, t3152, t3151, t3150, t3149, t3148, t3147, t3146, t3145, t3144, @tactics.disch_tac, t3143, t3142, t3141, t3140, @tactics.gen_tac, t3139, (x3091 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x3091), t3138, @tactics_ext.disch_all_tac, (x3092 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x3092), t3137, @tactics.disch_tac, t3136, t3135, (x3094 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x3094), t3134, @tactics.disch_tac, t3133, t3132, t3131, t3130, t3129, @tactics.all_tac, t3128, t3127, t3126, t3125, t3124, t3123, t3122, t3121, @tactics.disch_tac, t3120, t3119, t3118, t3117, t3116, t3115, (x3106 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x3106), (x3107 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x3107), t3114, @tactics.disch_tac, t3113, t3112, (x3109 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(8L, x3109), (x3110 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x3110), (x3111 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(15L, x3111), @int.arith_tac])
-  totally_bounded_bounded_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) → (∃ a : A, ∃ r : Real, SUBSET(X, op_euclid_prime_open_us_ball((X, d), a, r)))"), t3159))
+  totally_bounded_bounded_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) → (∃ a : A, ∃ r : Real, SUBSET(X, euclid_open_ball((X, d), a, r)))"), t3159))
 }
 
 ///|
@@ -6246,7 +6246,7 @@ fn step_206() -> Unit raise {
   let t3160 = @term_syntax.parse_term("(r : Real) * twopow(-int_of_num((n : Num) + 2))")
   let t3246 = @tactics_ext2.use_(1L, (x3161 : @kernel.Thm) => @bool.spec(t3160, x3161))
   let t3247 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.use_(1L, @simp.rewrite_rule(@list.List([totally_bounded()]))), t3246, t3245, t3244, t3243, @tactics.all_tac, t3242, t3241, t3240, t3239, t3238, @tactics.all_tac, t3237, (x3168 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x3168), t3236, t3235, t3234, t3233, t3232, t3231, @tactics_ext2.subconj_tac, t3230, @tactics.disch_tac, t3229, t3228, t3227, @tactics_ext2.proof_by_contr_tac, t3226, t3225, (x3171 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x3171), t3224, @tactics.disch_tac, t3223, t3222, t3221, t3220, @tactics_ext2.proof_by_contr_tac, t3219, t3218, (x3174 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(18L, x3174), t3217, @tactics.all_tac, t3216, t3215, t3214, @tactics_ext.disch_all_tac, t3213, @tactics_ext.disch_all_tac, t3212, t3211, t3210, t3209, t3208, t3207, t3206, @tactics.all_tac, t3205, t3204, t3203, t3202, t3201, @tactics_ext.disch_all_tac, (x3188 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x3188), t3200, @tactics.all_tac, t3199, t3198, t3197, t3196, t3195, t3194, t3193, t3192, t3191, t3190, t3189, @tactics_ext2.reduce_tac])
-  subsequence_rec_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, ∀ C : (A) -> Bool, ∀ s : Num, ∀ n : Num, ∀ r : Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_sequence(X, f) && SUBSET(C, X) && real_of_num(0) < r && !FINITE({(j : Num) | C(f(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → d(x, y) < r * twopow(-int_of_num(n))) → (∃ C' : (A) -> Bool, ∃ s' : Num, SUBSET(C', C) && s < s' && !FINITE({(j : Num) | C'(f(j))}) && C'(f(s')) && (∀ x : A, ∀ y : A, C'(x) && C'(y) → d(x, y) < r * twopow(-int_of_num(SUC(n)))))"), t3247))
+  subsequence_rec_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, ∀ C : (A) -> Bool, ∀ s : Num, ∀ n : Num, ∀ r : Real, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && euclid_sequence(X, f) && SUBSET(C, X) && real_of_num(0) < r && !FINITE({(j : Num) | C(f(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → d(x, y) < r * twopow(-int_of_num(n))) → (∃ C' : (A) -> Bool, ∃ s' : Num, SUBSET(C', C) && s < s' && !FINITE({(j : Num) | C'(f(j))}) && C'(f(s')) && (∀ x : A, ∀ y : A, C'(x) && C'(y) → d(x, y) < r * twopow(-int_of_num(SUC(n)))))"), t3247))
 }
 
 ///|
@@ -6264,7 +6264,7 @@ fn step_207() -> Unit raise {
   let t3248 = @meson.meson_tac(@list.List([]))
   let t3249 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t3250 = @list.List([@simp.rewrite_tac(@list.List([sequence(), @sets.image(), @sets.in_univ(), @sets.subset(), @misc_defs_and_lemmas.in_elim_thm_p(), @trivia.o_def()])), t3249, t3248])
-  sequence_subseq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ f : (Num) -> A, ∀ ss : (Num) -> Num, op_euclid_prime_sequence(X, f) → op_euclid_prime_sequence(X, o(f, ss))"), t3250))
+  sequence_subseq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ f : (Num) -> A, ∀ ss : (Num) -> Num, euclid_sequence(X, f) → euclid_sequence(X, o(f, ss))"), t3250))
 }
 
 ///|
@@ -6455,7 +6455,7 @@ fn step_208() -> Unit raise {
   let t3466 = @tactics_ext2.use_(3L, @drule.match_mp(@sets.subset_trans()))
   let t3467 = @tactics_ext2.join(3L, 7L)
   let t3468 = @simp.asm_simp_tac(@list.List([open_ball_nest()]))
-  let t3469 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("SUBSET(op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (r : Real)), op_euclid_prime_open_us_ball((X, d), a, (r' : Real)))"))
+  let t3469 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("SUBSET(euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (r : Real)), euclid_open_ball((X, d), a, (r' : Real)))"))
   let t3470 = @simp.abbrev_tac(@term_syntax.parse_term("(r' : Real) == real_of_num(1) + abs((r : Real))"))
   let t3471 = @tactics.assume_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < real_of_num(1) + abs((r : Real))")))
   let t3472 = @tactics.assume_tac(@calc_rat.real_arith(@term_syntax.parse_term("(r : Real) < real_of_num(1) + abs(r)")))
@@ -6468,7 +6468,7 @@ fn step_208() -> Unit raise {
     let t = x3303
     @tactics_ext2.use_(19L, (x3305 : @kernel.Thm) => @bool.specl(t, x3305))
   }, x3307), t3334, t3333, t3332, t3331, t3330, t3329, t3328, t3327, t3326, t3325, t3324, (x3314 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x3314), t3323, (x3315 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(19L, x3315), t3322, (x3316 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x3316), (x3317 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(8L, x3317), t3321, (x3318 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(22L, x3318), (x3319 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(26L, x3319), t3320])
-  cauchy_subseq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_sequence(X, f) → (∃ ss : (Num) -> Num, subseq(ss) && op_euclid_prime_cauchy_us_seq((X, d), o(f, ss)))"), t3477))
+  cauchy_subseq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && euclid_sequence(X, f) → (∃ ss : (Num) -> Num, subseq(ss) && euclid_cauchy_seq((X, d), o(f, ss)))"), t3477))
 }
 
 ///|
@@ -6489,8 +6489,8 @@ fn step_209() -> Unit raise {
   let t3483 = @tactics.exists_tac(@term_syntax.parse_term("(ss : (Num) -> Num)"))
   let t3484 = @tactics_ext2.cho(4L)
   let t3485 = @meson.asm_meson_tac(@list.List([cauchy_subseq()]))
-  let t3478 = @term_syntax.parse_term("∃ ss : (Num) -> Num, subseq(ss) && op_euclid_prime_cauchy_us_seq(((X : (_) -> Bool), (d : (_, _) -> Real)), o((f : (Num) -> _), ss))")
-  convergent_subseq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_complete((X, d)) && op_euclid_prime_sequence(X, f) → (∃ ss : (Num) -> Num, subseq(ss) && op_euclid_prime_converge((X, d), o(f, ss)))"), @list.List([@tactics_ext.disch_all_tac, (x3479 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3478, @tactics_ext.subgoal_tac, x3479), t3485, @tactics_ext.disch_all_tac, t3484, t3483, t3482, t3481, t3480])))
+  let t3478 = @term_syntax.parse_term("∃ ss : (Num) -> Num, subseq(ss) && euclid_cauchy_seq(((X : (_) -> Bool), (d : (_, _) -> Real)), o((f : (Num) -> _), ss))")
+  convergent_subseq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && euclid_complete((X, d)) && euclid_sequence(X, f) → (∃ ss : (Num) -> Num, subseq(ss) && euclid_converge((X, d), o(f, ss)))"), @list.List([@tactics_ext.disch_all_tac, (x3479 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3478, @tactics_ext.subgoal_tac, x3479), t3485, @tactics_ext.disch_all_tac, t3484, t3483, t3482, t3481, t3480])))
 }
 
 ///|
@@ -6505,7 +6505,7 @@ pub fn convergent_subseq() -> @kernel.Thm {
 ///|
 /// dense
 fn step_210() -> Unit raise {
-  dense_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, (dense : (((A) -> Bool) -> Bool, (A) -> Bool) -> Bool)(U, Z) == (op_euclid_prime_closure(U, Z) == UNIONS(U))")))
+  dense_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, (dense : (((A) -> Bool) -> Bool, (A) -> Bool) -> Bool)(U, Z) == (euclid_closure(U, Z) == UNIONS(U))")))
 }
 
 ///|
@@ -6537,7 +6537,7 @@ pub fn hausdorff() -> @kernel.Thm {
 fn step_212() -> Unit raise {
   let t3486 = @meson.meson_tac(@list.List([subset_closure()]))
   let t3487 = @list.List([@simp.rewrite_tac(@list.List([dense()])), t3486])
-  dense_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_dense(U, Z) → SUBSET(Z, UNIONS(U))"), t3487))
+  dense_subset_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, euclid_topology_(U) && euclid_dense(U, Z) → SUBSET(Z, UNIONS(U))"), t3487))
 }
 
 ///|
@@ -6581,7 +6581,7 @@ fn step_213() -> Unit raise {
   let t3520 = @tactics_ext2.join(0L, 3L)
   let t3521 = @tactics_ext2.copy(0L)
   let t3522 = @list.List([@tactics_ext.disch_all_tac, @tactics.eq_tac, @tactics.disch_tac, @tactics_ext.disch_all_tac, @tactics_ext2.copy(3L), t3521, t3520, t3519, (x3489 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3488, @tactics_ext.subgoal_tac, x3489), @tactics.all_tac, t3518, t3517, t3516, @tactics.disch_tac, t3515, t3514, t3513, t3512, t3511, t3510, t3509, t3508, t3507, t3506, t3505, t3504, t3503, @tactics.disch_tac, t3502, (x3492 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x3492), (x3493 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x3493), t3501, @tactics.disch_tac, t3500, @tactics.disch_tac, @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, t3499, t3498, t3497, t3496])
-  dense_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, op_euclid_prime_topology_us(U) && SUBSET(Z, UNIONS(U)) → op_euclid_prime_dense(U, Z) == (∀ A : (A) -> Bool, op_euclid_prime_open_us(U, A) && INTER(A, Z) == {} → A == {})"), t3522))
+  dense_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z : (A) -> Bool, euclid_topology_(U) && SUBSET(Z, UNIONS(U)) → euclid_dense(U, Z) == (∀ A : (A) -> Bool, euclid_open_(U, A) && INTER(A, Z) == {} → A == {})"), t3522))
 }
 
 ///|
@@ -6652,9 +6652,9 @@ fn step_214() -> Unit raise {
   let t3616 = @simp.asm_simp_tac(@list.List([top_of_metric_top(), @equal.gsym(top_of_metric_unions())]))
   let t3617 = @tactics_ext2.kill(3L)
   let t3618 = @analysis.expand_tac("U")
-  let t3544 = @term_syntax.parse_term("op_euclid_prime_topology_us((U : ((_) -> Bool) -> Bool)) && SUBSET((Z : (_) -> Bool), UNIONS(U))")
+  let t3544 = @term_syntax.parse_term("euclid_topology_((U : ((_) -> Bool) -> Bool)) && SUBSET((Z : (_) -> Bool), UNIONS(U))")
   let t3542 = @term_syntax.parse_term("(Z : (_) -> Bool) == UNIONS(IMAGE((z : (_, _) -> Bool), UNIV))")
-  let t3540 = @term_syntax.parse_term("(U : ((_) -> Bool) -> Bool) == op_euclid_prime_top_us_of_us_metric(((X : (_) -> Bool), (d : (_, _) -> Real)))")
+  let t3540 = @term_syntax.parse_term("(U : ((_) -> Bool) -> Bool) == euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real)))")
   let t3619 = @meson.asm_meson_tac(@list.List([]))
   let t3620 = @simp.rewrite_tac(@list.List([@sets.in_image(), @sets.in_univ()]))
   let t3621 = @sets.set_tac(@list.List([]))
@@ -6678,8 +6678,8 @@ fn step_214() -> Unit raise {
   let t3635 = @tactics_ext2.join(2L, 3L)
   let t3636 = @tactics_ext2.copy(1L)
   let t3637 = @tactics_ext2.copy(0L)
-  let t3523 = @term_syntax.parse_term("∀ r : Num, ∃ z : (_) -> Bool, COUNTABLE(z) && SUBSET(z, (X : (_) -> Bool)) && X == UNIONS(IMAGE((x : _) => op_euclid_prime_open_us_ball((X, (d : (_, _) -> Real)), x, twopow(-int_of_num(r))), z))")
-  countable_dense_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) → (∃ Z : (A) -> Bool, COUNTABLE(Z) && op_euclid_prime_dense(op_euclid_prime_top_us_of_us_metric((X, d)), Z))"), @list.List([@tactics_ext.disch_all_tac, (x3524 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3523, @tactics_ext.subgoal_tac, x3524), @tactics.gen_tac, t3637, t3636, t3635, t3634, t3633, t3632, t3631, t3630, t3629, t3628, t3627, t3626, t3625, (x3534 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3533, fn(x3530 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t3523 = @term_syntax.parse_term("∀ r : Num, ∃ z : (_) -> Bool, COUNTABLE(z) && SUBSET(z, (X : (_) -> Bool)) && X == UNIONS(IMAGE((x : _) => euclid_open_ball((X, (d : (_, _) -> Real)), x, twopow(-int_of_num(r))), z))")
+  countable_dense_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) → (∃ Z : (A) -> Bool, COUNTABLE(Z) && euclid_dense(euclid_top_of_metric((X, d)), Z))"), @list.List([@tactics_ext.disch_all_tac, (x3524 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3523, @tactics_ext.subgoal_tac, x3524), @tactics.gen_tac, t3637, t3636, t3635, t3634, t3633, t3632, t3631, t3630, t3629, t3628, t3627, t3626, t3625, (x3534 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3533, fn(x3530 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s3531 = @tactics.exists_tac(x3530)
     fn(x3532 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s3531(x3532)
@@ -6744,8 +6744,8 @@ fn step_215() -> Unit raise {
   let t3703 = @tactics_ext2.copy(6L)
   let t3704 = @simp.asm_simp_tac(@list.List([open_ball_open()]))
   let t3705 = @tactics_ext2.kill(4L)
-  let t3657 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (y : _), (r : Real) / real_of_num(2))")
-  let t3652 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), (r : Real) / real_of_num(2))")
+  let t3657 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (y : _), (r : Real) / real_of_num(2))")
+  let t3652 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), (r : Real) / real_of_num(2))")
   let t3706 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("real_of_num(0) < (r : Real)"))
   let t3646 = @term_syntax.parse_term("(r : _) == (d : (_, _) -> _)((x : _), (y : _))")
   let t3707 = @tactics_ext2.rewr(4L)
@@ -6778,7 +6778,7 @@ fn step_215() -> Unit raise {
     let t_1 = x3668
     @tactics_ext2.use_(11L, (x3670 : @kernel.Thm) => @bool.ispecl(t_1, x3670))
   }, x3672), (x3673 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x3673), (x3674 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x3674), t3689, (x3676 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3675, @tactics_ext.subgoal_tac, x3676), t3688, t3687, @tactics_ext.disch_all_tac, (x3677 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(14L, x3677), (x3678 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x3678), t3686, t3685, t3684, t3683, t3682])
-  metric_hausdorff_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) → op_euclid_prime_hausdorff(op_euclid_prime_top_us_of_us_metric((X, d)))"), t3711))
+  metric_hausdorff_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) → euclid_hausdorff(euclid_top_of_metric((X, d)))"), t3711))
 }
 
 ///|
@@ -6837,7 +6837,7 @@ fn step_217() -> Unit raise {
   let t3722 = @term_syntax.parse_term("(V' : _)")
   let t3716 = @term_syntax.parse_term("(V' : (_) -> Bool) == INSERT((A : _), (V : (_) -> Bool))")
   let t3765 = @meson.asm_meson_tac(@list.List([closed_open()]))
-  let t3714 = @term_syntax.parse_term("op_euclid_prime_open_us((U : ((_) -> Bool) -> Bool), (A : (_) -> Bool))")
+  let t3714 = @term_syntax.parse_term("euclid_open_((U : ((_) -> Bool) -> Bool), (A : (_) -> Bool))")
   let t3712 = @term_syntax.parse_term("(A : (_) -> Bool) == DIFF(UNIONS((U : ((_) -> Bool) -> Bool)), (S : (_) -> Bool))")
   let t3766 = @meson.asm_meson_tac(@list.List([@sets.subset_trans()]))
   let t3767 = @list.List([@simp.rewrite_tac(@list.List([compact()])), @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, @tactics_ext2.subconj_tac, t3766, @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, (x3713 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3712, @simp.abbrev_tac, x3713), (x3715 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3714, @tactics_ext.subgoal_tac, x3715), t3765, (x3717 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3716, @simp.abbrev_tac, x3717), @tactics_ext.disch_all_tac, (x3723 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3722, fn(x3721 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -6852,7 +6852,7 @@ fn step_217() -> Unit raise {
       s3734(x3735)
     }
   }, x3737), @tactics.conj_tac, t3753, (x3738 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(13L, x3738), t3752, t3751, t3750, t3749, t3748, (x3739 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x3739), (x3740 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x3740), (x3741 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x3741), t3747, (x3743 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3742, @simp.abbrev_tac, x3743), @tactics.all_tac, @tactics_ext.disch_all_tac, t3746, @tactics.conj_tac, t3745, t3744])
-  closed_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, ∀ S : (A) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_compact(U, K) && op_euclid_prime_closed_us(U, S) && SUBSET(S, K) → op_euclid_prime_compact(U, S)"), t3767))
+  closed_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, ∀ S : (A) -> Bool, euclid_topology_(U) && euclid_compact(U, K) && euclid_closed_(U, S) && SUBSET(S, K) → euclid_compact(U, S)"), t3767))
 }
 
 ///|
@@ -7058,7 +7058,7 @@ fn step_218() -> Unit raise {
       s3866(x3867)
     }
   }, x3869), t3871, t3870])
-  compact_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_hausdorff(U) && op_euclid_prime_compact(U, K) → op_euclid_prime_closed_us(U, K)"), t3974))
+  compact_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, euclid_topology_(U) && euclid_hausdorff(U) && euclid_compact(U, K) → euclid_closed_(U, K)"), t3974))
 }
 
 ///|
@@ -7076,7 +7076,7 @@ fn step_219() -> Unit raise {
   let t4004 = @meson.asm_meson_tac(@list.List([top_of_metric_unions()]))
   let t4005 = @tactics_ext2.use_(6L, @drule.match_mp(@misc_defs_and_lemmas.unions_unions()))
   let t4006 = @meson.asm_meson_tac(@list.List([@sets.subset_trans()]))
-  let t4002 = @term_syntax.parse_term("SUBSET((W : ((_) -> Bool) -> Bool), op_euclid_prime_top_us_of_us_metric(((X : (_) -> Bool), (d : (_, _) -> Real))))")
+  let t4002 = @term_syntax.parse_term("SUBSET((W : ((_) -> Bool) -> Bool), euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real))))")
   let t4007 = @simp.asm_rewrite_tac(@list.List([]))
   let t4008 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t4009 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
@@ -7089,19 +7089,19 @@ fn step_219() -> Unit raise {
   let t4015 = @meson.meson_tac(@list.List([@sets.subset_trans(), top_of_metric_open_balls()]))
   let t4016 = @meson.meson_tac(@list.List([@sets.in_()]))
   let t4017 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), open_balls(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t3995 = @term_syntax.parse_term("SUBSET(IMAGE((x : _) => op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), x, (eps : Real)), X), op_euclid_prime_open_us_balls((X, d)))")
-  let t3993 = @term_syntax.parse_term("SUBSET(IMAGE((x : _) => op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), x, (eps : Real)), X), op_euclid_prime_top_us_of_us_metric((X, d)))")
+  let t3995 = @term_syntax.parse_term("SUBSET(IMAGE((x : _) => euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), x, (eps : Real)), X), euclid_open_balls((X, d)))")
+  let t3993 = @term_syntax.parse_term("SUBSET(IMAGE((x : _) => euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), x, (eps : Real)), X), euclid_top_of_metric((X, d)))")
   let t4018 = @tactics_ext2.rewr(2L)
   let t4019 = @meson.asm_meson_tac(@list.List([open_ball_nonempty(), @sets.in_()]))
   let t4020 = @simp.asm_rewrite_tac(@list.List([]))
-  let t3991 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), (eps : Real))")
+  let t3991 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), (eps : Real))")
   let t3986 = @term_syntax.parse_term("(x : _)")
   let t4021 = @tactics.conv_tac(@tactics_ext2.quant_left_conv("x'"))
   let t4022 = @tactics.conv_tac(@tactics_ext2.quant_left_conv("x"))
   let t4023 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t4024 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_unions(), @sets.in_image()]))
-  let t3981 = @term_syntax.parse_term("SUBSET((X : (_) -> Bool), UNIONS(IMAGE((x : _) => op_euclid_prime_open_us_ball((X, (d : (_, _) -> Real)), x, (eps : Real)), X)))")
-  let t3979 = @term_syntax.parse_term("IMAGE((x : _) => op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), x, (eps : Real)), X)")
+  let t3981 = @term_syntax.parse_term("SUBSET((X : (_) -> Bool), UNIONS(IMAGE((x : _) => euclid_open_ball((X, (d : (_, _) -> Real)), x, (eps : Real)), X)))")
+  let t3979 = @term_syntax.parse_term("IMAGE((x : _) => euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), x, (eps : Real)), X)")
   let t4025 = @tactics.conv_tac(@tactics_ext2.quant_right_conv("B"))
   let t4026 = @list.List([@simp.rewrite_tac(@list.List([totally_bounded(), compact()])), @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, t4025, @tactics.disch_tac, (x3980 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t3979, fn(x3978 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x3975 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(2L, x3975))((fn(x3976 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -7125,7 +7125,7 @@ fn step_219() -> Unit raise {
       s3998(x3999)
     }
   }, x4001), t4012, @tactics.conj_tac, @tactics_ext.disch_all_tac, t4011, t4010, t4009, t4008, t4007, (x4003 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4002, @tactics_ext.subgoal_tac, x4003), t4006, @tactics_ext.disch_all_tac, t4005, t4004])
-  compact_totally_bounded_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((X, d)), X) → op_euclid_prime_totally_us_bounded((X, d))"), t4026))
+  compact_totally_bounded_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) && euclid_compact(euclid_top_of_metric((X, d)), X) → euclid_totally_bounded((X, d))"), t4026))
 }
 
 ///|
@@ -7316,7 +7316,7 @@ fn step_220() -> Unit raise {
       s4117(x4118)
     }
   }, x4120), t4135, t4134, @tactics_ext2.proof_by_contr_tac, t4133, (x4122 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4121, @tactics_ext.subgoal_tac, x4122), t4132, t4131, t4130, t4129, @tactics.disch_tac, t4128, t4127, t4126, t4125])
-  finite_inters_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_compact(U, UNIONS(U)) && INTERS(V) == {} && (∀ u : (A) -> Bool, V(u) → op_euclid_prime_closed_us(U, u)) → (∃ W : ((A) -> Bool) -> Bool, SUBSET(W, V) && FINITE(W) && INTERS(W) == {})"), t4209))
+  finite_inters_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((A) -> Bool) -> Bool, euclid_topology_(U) && euclid_compact(U, UNIONS(U)) && INTERS(V) == {} && (∀ u : (A) -> Bool, V(u) → euclid_closed_(U, u)) → (∃ W : ((A) -> Bool) -> Bool, SUBSET(W, V) && FINITE(W) && INTERS(W) == {})"), t4209))
 }
 
 ///|
@@ -7446,7 +7446,7 @@ fn step_221() -> Unit raise {
   let t4359 = @tactics_ext2.use_(3L, @drule.match_mp(@sets.subset_trans()))
   let t4360 = @tactics_ext2.join(3L, 7L)
   let t4361 = @simp.asm_simp_tac(@list.List([open_ball_nest()]))
-  let t4362 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("SUBSET(op_euclid_prime_open_us_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (r : Real)), op_euclid_prime_open_us_ball((X, d), a, (r' : Real)))"))
+  let t4362 = @tactics_ext.subgoal_tac(@term_syntax.parse_term("SUBSET(euclid_open_ball(((X : (A) -> Bool), (d : (A, A) -> Real)), (a : A), (r : Real)), euclid_open_ball((X, d), a, (r' : Real)))"))
   let t4363 = @simp.abbrev_tac(@term_syntax.parse_term("(r' : Real) == real_of_num(1) + abs((r : Real))"))
   let t4364 = @tactics.assume_tac(@calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) < real_of_num(1) + abs((r : Real))")))
   let t4365 = @tactics.assume_tac(@calc_rat.real_arith(@term_syntax.parse_term("(r : Real) < real_of_num(1) + abs(r)")))
@@ -7476,7 +7476,7 @@ fn step_221() -> Unit raise {
       s4261(x4262)
     }
   }, x4264), t4265])
-  cauchy_subseq_sublemma_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_sequence(X, f) → (∃ R : Real, ∃ Cn : (Num, A) -> Bool, ∃ sn : (Num) -> Num, ∃ cond : (((A) -> Bool, Num), Num) -> Bool, real_of_num(0) < R && (∀ x : A, ∀ y : A, X(x) && X(y) → d(x, y) < R) && cond((X, 0), 0) && sn(0) == 0 && Cn(0) == X && (∀ n : Num, SUBSET(Cn(n), X) && cond((Cn(n), sn(n)), n)) && (∀ n : Num, SUBSET(Cn(SUC(n)), Cn(n)) && sn(n) < sn(SUC(n))) && fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C(f(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → d(x, y) < R * twopow(-int_of_num(n))) } == cond)"), t4370))
+  cauchy_subseq_sublemma_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && euclid_sequence(X, f) → (∃ R : Real, ∃ Cn : (Num, A) -> Bool, ∃ sn : (Num) -> Num, ∃ cond : (((A) -> Bool, Num), Num) -> Bool, real_of_num(0) < R && (∀ x : A, ∀ y : A, X(x) && X(y) → d(x, y) < R) && cond((X, 0), 0) && sn(0) == 0 && Cn(0) == X && (∀ n : Num, SUBSET(Cn(n), X) && cond((Cn(n), sn(n)), n)) && (∀ n : Num, SUBSET(Cn(SUC(n)), Cn(n)) && sn(n) < sn(SUC(n))) && fn { (C, s) => (n : Num) => !FINITE({(j : Num) | C(f(j))}) && C(f(s)) && (∀ x : A, ∀ y : A, C(x) && C(y) → d(x, y) < R * twopow(-int_of_num(n))) } == cond)"), t4370))
 }
 
 ///|
@@ -7578,7 +7578,7 @@ fn step_222() -> Unit raise {
     let t = x4423
     @tactics.assume_tac(@bool.ispecl(t, metric_space_triangle()))
   }, x4426), t4440, t4439, t4438, t4437, (x4427 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x4427), (x4428 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x4428), (x4429 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x4429), t4436, (x4431 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4430, @simp.abbrev_tac, x4431), (x4433 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4432, @simp.abbrev_tac, x4433), (x4435 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4434, @simp.abbrev_tac, x4435), @calc_rat.real_arith_tac])
-  subseq_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, ∀ s : (Num) -> Num, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_cauchy_us_seq((X, d), f) && subseq(s) && op_euclid_prime_converge((X, d), o(f, s)) → op_euclid_prime_converge((X, d), f)"), t4456))
+  subseq_cauchy_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ f : (Num) -> A, ∀ s : (Num) -> Num, euclid_metric_space((X, d)) && euclid_cauchy_seq((X, d), f) && subseq(s) && euclid_converge((X, d), o(f, s)) → euclid_converge((X, d), f)"), t4456))
 }
 
 ///|
@@ -7606,7 +7606,7 @@ fn step_223() -> Unit raise {
   let t4562 = @tactics_ext2.kill(2L)
   let t4563 = @tactics_ext2.kill(0L)
   let t4564 = @tactics_ext2.kill(1L)
-  let t4547 = @term_syntax.parse_term("IN(o((f : (_) -> _), (sn : (Num) -> _), (i : Num)), op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), f(sn((n : Num))), (R : Real) * twopow(-int_of_num(n))))")
+  let t4547 = @term_syntax.parse_term("IN(o((f : (_) -> _), (sn : (Num) -> _), (i : Num)), euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), f(sn((n : Num))), (R : Real) * twopow(-int_of_num(n))))")
   let t4565 = @tactics.conv_tac(@equal.top_depth_conv(@pair.gen_beta_conv))
   let t4566 = @analysis.expand_tac("cond")
   let t4567 = @tactics_ext2.and_(12L)
@@ -7621,13 +7621,13 @@ fn step_223() -> Unit raise {
   let t4537 = @term_syntax.parse_term("(n : Num)")
   let t4574 = @tactics_ext2.use_(12L, (x4538 : @kernel.Thm) => @bool.spec(t4537, x4538))
   let t4575 = @simp.rewrite_tac(@list.List([@sets.subset(), closed_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t4535 = @term_syntax.parse_term("SUBSET((Cn : (Num, _) -> Bool)((n : Num)), op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n))))")
+  let t4535 = @term_syntax.parse_term("SUBSET((Cn : (Num, _) -> Bool)((n : Num)), euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n))))")
   let t4576 = @tactics_ext2.rewr(15L)
   let t4533 = @term_syntax.parse_term("(n : Num)")
   let t4577 = @tactics_ext2.use_(15L, (x4534 : @kernel.Thm) => @bool.spec(t4533, x4534))
   let t4578 = @tactics_ext2.left(15L, "n'")
   let t4579 = @tactics_ext2.use_(15L, @simp.rewrite_rule(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()])))
-  let t4531 = @term_syntax.parse_term("op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)((n : Num))), (R : Real) * twopow(-int_of_num(n)))")
+  let t4531 = @term_syntax.parse_term("euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)((n : Num))), (R : Real) * twopow(-int_of_num(n)))")
   let t4580 = @tactics_ext2.use_(15L, @simp.rewrite_rule(@list.List([@sets.in_inters()])))
   let t4581 = @tactics.match_mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("(x : Real) <= (a : Real) → a < (b : Real) → x < b")))
   let t4582 = @tactics_ext2.rewr(18L)
@@ -7646,7 +7646,7 @@ fn step_223() -> Unit raise {
   let t4512 = @term_syntax.parse_term("0")
   let t4591 = @tactics_ext2.left(15L, "n")
   let t4592 = @tactics_ext2.use_(15L, @simp.rewrite_rule(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()])))
-  let t4506 = @term_syntax.parse_term("op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(0)), (R : Real) * twopow(-int_of_num(0)))")
+  let t4506 = @term_syntax.parse_term("euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(0)), (R : Real) * twopow(-int_of_num(0)))")
   let t4593 = @tactics_ext2.use_(15L, @simp.rewrite_rule(@list.List([@sets.in_inters()])))
   let t4594 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t4500 = @term_syntax.parse_term("(u : _)")
@@ -7672,7 +7672,7 @@ fn step_223() -> Unit raise {
   let t4487 = @term_syntax.parse_term("(m : Num)")
   let t4612 = @tactics_ext2.use_(12L, (x4488 : @kernel.Thm) => @bool.spec(t4487, x4488))
   let t4613 = @simp.rewrite_tac(@list.List([@sets.subset(), closed_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t4485 = @term_syntax.parse_term("SUBSET((Cn : (Num, _) -> Bool)((m : Num)), op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(m)), (R : Real) * twopow(-int_of_num(m))))")
+  let t4485 = @term_syntax.parse_term("SUBSET((Cn : (Num, _) -> Bool)((m : Num)), euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(m)), (R : Real) * twopow(-int_of_num(m))))")
   let t4614 = @tactics_ext2.rewr(20L)
   let t4615 = @tactics_ext2.use_(20L, @simp.rewrite_rule(@list.List([@sets.in_()])))
   let t4483 = @term_syntax.parse_term("(m : Num)")
@@ -7698,7 +7698,7 @@ fn step_223() -> Unit raise {
   let t4632 = @tactics_ext2.rewr(16L)
   let t4633 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p(), @tactics_ext2.inr(@sets.in_image()), @sets.univ()]))
   let t4634 = @tactics.match_mp_tac(@class.eq_ext())
-  let t4471 = @term_syntax.parse_term("{(z : (_) -> Bool) | ∃ n : Num, z == op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))} == IMAGE((n : Num) => op_euclid_prime_closed_us_ball((X, d), f(sn(n)), R * twopow(-int_of_num(n))), UNIV)")
+  let t4471 = @term_syntax.parse_term("{(z : (_) -> Bool) | ∃ n : Num, z == euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))} == IMAGE((n : Num) => euclid_closed_ball((X, d), f(sn(n)), R * twopow(-int_of_num(n))), UNIV)")
   let t4635 = @tactics_ext2.cho(16L)
   let t4636 = @tactics_ext2.rewr(16L)
   let t4637 = @meson.asm_meson_tac(@list.List([closed_ball_closed()]))
@@ -7707,10 +7707,10 @@ fn step_223() -> Unit raise {
   let t4640 = @simp.asm_simp_tac(@list.List([@equal.gsym(top_of_metric_unions())]))
   let t4469 = @parser.parse_term("topology_ (top_of_metric (X,d)) /\\ compact (top_of_metric (X,d)) (UNIONS (top_of_metric (X,d))) /\\ (forall u. {z | ?n. z = closed_ball (X,d) (f(sn n)) (R * twopow (--: (&:n)))} u ==> closed_ (top_of_metric (X,d)) u)")
   let t4641 = @tactics_ext2.rewr(16L)
-  let t4464 = @term_syntax.parse_term("{(z : (_) -> Bool) | ∃ n : Num, z == op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}")
-  let t4467 = @list.List([@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : (_) -> Bool), (d : (_, _) -> Real)))"), t4464])
+  let t4464 = @term_syntax.parse_term("{(z : (_) -> Bool) | ∃ n : Num, z == euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}")
+  let t4467 = @list.List([@term_syntax.parse_term("euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real)))"), t4464])
   let t4642 = @tactics_ext2.rewr(15L)
-  let t4462 = @term_syntax.parse_term("!(INTERS({(z : (_) -> Bool) | ∃ n : Num, z == op_euclid_prime_closed_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}) == {})")
+  let t4462 = @term_syntax.parse_term("!(INTERS({(z : (_) -> Bool) | ∃ n : Num, z == euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}) == {})")
   let t4643 = @meson.asm_meson_tac(@list.List([]))
   let t4644 = @simp.rewrite_tac(@list.List([@analysis.subseq_suc()]))
   let t4645 = @simp.asm_rewrite_tac(@list.List([converge()]))
@@ -7786,7 +7786,7 @@ fn step_223() -> Unit raise {
       }
     })(x4530))
   }, x4532), t4579, t4578, t4577, t4576, (x4536 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4535, @tactics_ext.subgoal_tac, x4536), t4575, t4574, (x4539 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x4539), t4573, t4572, t4571, t4570, @tactics.disch_tac, (x4541 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4540, @tactics_ext.subgoal_tac, x4541), (x4542 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(13L, x4542), (x4543 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(19L, x4543), t4569, @tactics.all_tac, @tactics_ext.disch_all_tac, t4568, t4567, (x4546 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x4546), t4566, t4565, @tactics_ext.disch_all_tac, (x4548 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4547, @tactics_ext.subgoal_tac, x4548), t4564, t4563, t4562, t4561, t4560, t4559, t4558, t4557, @tactics.all_tac, t4556, t4555, (x4549 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(15L, x4549), (x4551 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4550, @simp.abbrev_tac, x4551), (x4552 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x4552), t4554, t4553])
-  compact_complete_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((X, d)), X) → op_euclid_prime_complete((X, d))"), t4671))
+  compact_complete_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) && euclid_compact(euclid_top_of_metric((X, d)), X) → euclid_complete((X, d))"), t4671))
 }
 
 ///|
@@ -7824,7 +7824,7 @@ fn step_224() -> Unit raise {
   let t4842 = @simp.asm_rewrite_tac(@list.List([]))
   let t4843 = @tactics_ext2.imatch_mp_tac(ball_subset_ball())
   let t4844 = @tactics.conv_tac(@equal.rand_conv(@simp.once_rewrite_conv(@list.List([@equal.gsym(twopow_double())]))))
-  let t4788 = @term_syntax.parse_term("SUBSET(op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (z : _), twopow(-int_of_num((n : Num) + 1))), op_euclid_prime_open_us_ball((X, d), (x : _), twopow(-int_of_num(n))))")
+  let t4788 = @term_syntax.parse_term("SUBSET(euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (z : _), twopow(-int_of_num((n : Num) + 1))), euclid_open_ball((X, d), (x : _), twopow(-int_of_num(n))))")
   let t4845 = @simp.asm_rewrite_tac(@list.List([]))
   let t4786 = @term_syntax.parse_term("(t : _)")
   let t4846 = @tactics_ext2.left_tac("A")
@@ -7842,7 +7842,7 @@ fn step_224() -> Unit raise {
   let t4854 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t4855 = @simp.rewrite_tac(@list.List([@sets.unions(), @sets.in_image(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t4856 = @meson.asm_meson_tac(@list.List([ball_symm()]))
-  let t4761 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (z : _), twopow(-int_of_num((n : Num) + 1)), (x : _))")
+  let t4761 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (z : _), twopow(-int_of_num((n : Num) + 1)), (x : _))")
   let t4857 = @meson.meson_tac(@list.List([@sets.subset(), @sets.in_()]))
   let t4757 = @term_syntax.parse_term("(X : (_) -> _)((z : _))")
   let t4858 = @tactics_ext2.rewr(7L)
@@ -7858,14 +7858,14 @@ fn step_224() -> Unit raise {
     @tactics.all_tac
   })
   let t4867 = @simp.rewrite_tac(@list.List([@sets.inter(), @sets.in_()]))
-  let t4753 = @term_syntax.parse_term("(B : (_) -> Bool) == op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)))")
+  let t4753 = @term_syntax.parse_term("(B : (_) -> Bool) == euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)))")
   let t4868 = @simp.asm_simp_tac(@list.List([open_ball_open()]))
   let t4869 = @simp.rewrite_tac(@list.List([open_def()]))
-  let t4749 = @term_syntax.parse_term("∃ z : _, (Z : (_) -> Bool)(z) && op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)), z)")
+  let t4749 = @term_syntax.parse_term("∃ z : _, (Z : (_) -> Bool)(z) && euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)), z)")
   let t4870 = @simp.asm_rewrite_tac(@list.List([]))
   let t4871 = @tactics_ext2.imatch_mp_tac(open_ball_nonempty())
-  let t4747 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)), x)")
-  let t4745 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)))")
+  let t4747 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)), x)")
+  let t4745 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (x : _), twopow(-int_of_num((n : Num) + 1)))")
   let t4872 = @simp.asm_simp_tac(@list.List([dense_open()]))
   let t4873 = @tactics_ext2.use_(7L, @drule.match_mp(dense_subset()))
   let t4874 = @tactics_ext2.join(14L, 7L)
@@ -7892,7 +7892,7 @@ fn step_224() -> Unit raise {
   let t4890 = @meson.meson_tac(@list.List([]))
   let t4891 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()]))
   let t4892 = @tactics_ext2.and_(6L)
-  let t4721 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : (_) -> Bool), (d : (_, _) -> Real)), (t : (_) -> Bool))")
+  let t4721 = @term_syntax.parse_term("euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real)), (t : (_) -> Bool))")
   let t4893 = @tactics_ext2.cho(6L)
   let t4894 = @tactics_ext2.rewr(6L)
   let t4719 = @term_syntax.parse_term("(x : _)")
@@ -7922,7 +7922,7 @@ fn step_224() -> Unit raise {
   let t4910 = @tactics_ext2.cho(7L)
   let t4911 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t4912 = @analysis.expand_tac("S")
-  let t4690 = @term_syntax.parse_term("∀ z : _, ∀ n : Num, (S : ((_, Num)) -> Bool)((z, n)) → (∃ A : (_) -> Bool, (Z : (_) -> Bool)(z) && SUBSET(op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), z, twopow(-int_of_num(n))), A) && (U : ((_) -> Bool) -> Bool)(A))")
+  let t4690 = @term_syntax.parse_term("∀ z : _, ∀ n : Num, (S : ((_, Num)) -> Bool)((z, n)) → (∃ A : (_) -> Bool, (Z : (_) -> Bool)(z) && SUBSET(euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), z, twopow(-int_of_num(n))), A) && (U : ((_) -> Bool) -> Bool)(A))")
   let t4913 = @meson.asm_meson_tac(@list.List([@sets.gspec()]))
   let t4914 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t4915 = @analysis.expand_tac("S")
@@ -7934,11 +7934,11 @@ fn step_224() -> Unit raise {
   let t4678 = @parser.parse_type("A")
   let t4919 = @tactics_ext2.imatch_mp_tac(@kernel.inst_type(@list.List([(@parser.parse_type("A#num"), t4678)]), @misc_defs_and_lemmas.countable_image()))
   let t4676 = @term_syntax.parse_term("COUNTABLE((S : (_) -> Bool))")
-  let t4674 = @term_syntax.parse_term("(S : ((_, Num)) -> Bool) == {((z : _), (n : Num)) | ∃ A : (_) -> Bool, (Z : (_) -> Bool)(z) && SUBSET(op_euclid_prime_open_us_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), z, twopow(-int_of_num(n))), A) && (U : ((_) -> Bool) -> Bool)(A)}")
+  let t4674 = @term_syntax.parse_term("(S : ((_, Num)) -> Bool) == {((z : _), (n : Num)) | ∃ A : (_) -> Bool, (Z : (_) -> Bool)(z) && SUBSET(euclid_open_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), z, twopow(-int_of_num(n))), A) && (U : ((_) -> Bool) -> Bool)(A)}")
   let t4920 = @tactics_ext2.cho(4L)
   let t4921 = @meson.asm_meson_tac(@list.List([countable_dense()]))
-  let t4672 = @term_syntax.parse_term("∃ Z : (_) -> Bool, COUNTABLE(Z) && op_euclid_prime_dense(op_euclid_prime_top_us_of_us_metric(((X : (_) -> Bool), (d : (_, _) -> Real))), Z)")
-  countable_cover_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && SUBSET(X, UNIONS(U)) && SUBSET(U, op_euclid_prime_top_us_of_us_metric((X, d))) → (∃ V : ((A) -> Bool) -> Bool, SUBSET(V, U) && SUBSET(X, UNIONS(V)) && COUNTABLE(V))"), @list.List([@tactics_ext.disch_all_tac, (x4673 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4672, @tactics_ext.subgoal_tac, x4673), t4921, @tactics_ext.disch_all_tac, t4920, (x4675 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4674, @simp.abbrev_tac, x4675), (x4677 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4676, @tactics_ext.subgoal_tac, x4677), t4919, (x4683 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4682, fn(x4679 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t4672 = @term_syntax.parse_term("∃ Z : (_) -> Bool, COUNTABLE(Z) && euclid_dense(euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real))), Z)")
+  countable_cover_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ U : ((A) -> Bool) -> Bool, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && SUBSET(X, UNIONS(U)) && SUBSET(U, euclid_top_of_metric((X, d))) → (∃ V : ((A) -> Bool) -> Bool, SUBSET(V, U) && SUBSET(X, UNIONS(V)) && COUNTABLE(V))"), @list.List([@tactics_ext.disch_all_tac, (x4673 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4672, @tactics_ext.subgoal_tac, x4673), t4921, @tactics_ext.disch_all_tac, t4920, (x4675 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4674, @simp.abbrev_tac, x4675), (x4677 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4676, @tactics_ext.subgoal_tac, x4677), t4919, (x4683 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t4682, fn(x4679 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s4680 = @tactics.exists_tac(x4679)
     fn(x4681 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s4680(x4681)
@@ -8099,7 +8099,7 @@ fn step_225() -> Unit raise {
   let t5071 = @simp.asm_simp_tac(@list.List([top_of_metric_nbd()]))
   let t5072 = @meson.asm_meson_tac(@list.List([]))
   let t5073 = @tactics_ext2.use_(2L, @simp.rewrite_rule(@list.List([@sets.subset(), @sets.in_()])))
-  let t4991 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : (_) -> Bool), (d : (_, _) -> Real)), (u : (_) -> Bool))")
+  let t4991 = @term_syntax.parse_term("euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real)), (u : (_) -> Bool))")
   let t5074 = @tactics_ext2.use_(2L, @drule.match_mp(@sets.subset_trans()))
   let t5075 = @tactics_ext2.join(2L, 3L)
   let t5076 = @meson.asm_meson_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("(j : Num) <= j"))]))
@@ -8134,7 +8134,7 @@ fn step_225() -> Unit raise {
   let t5098 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.univ(), @sets.in_image()]))
   let t5099 = @simp.asm_rewrite_tac(@list.List([sequence()]))
   let t5100 = @tactics_ext2.imatch_mp_tac(convergent_subseq())
-  let t4958 = @term_syntax.parse_term("∃ ss : (Num) -> Num, subseq(ss) && op_euclid_prime_converge(((X : (_) -> Bool), (d : (_, _) -> Real)), o((a : (Num) -> _), ss))")
+  let t4958 = @term_syntax.parse_term("∃ ss : (Num) -> Num, subseq(ss) && euclid_converge(((X : (_) -> Bool), (d : (_, _) -> Real)), o((a : (Num) -> _), ss))")
   let t5101 = @tactics_ext2.cho(12L)
   let t5102 = @tactics_ext2.left(12L, "a")
   let t5103 = @tactics_ext2.left(12L, "a")
@@ -8279,7 +8279,7 @@ fn step_225() -> Unit raise {
       }
     })(x5043))
   }, x5045), (x5046 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x5046), t5047])
-  complete_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, op_euclid_prime_metric_us_space((X, d)) && op_euclid_prime_totally_us_bounded((X, d)) && op_euclid_prime_complete((X, d)) → op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((X, d)), X)"), t5138))
+  complete_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ d : (A, A) -> Real, euclid_metric_space((X, d)) && euclid_totally_bounded((X, d)) && euclid_complete((X, d)) → euclid_compact(euclid_top_of_metric((X, d)), X)"), t5138))
 }
 
 ///|
@@ -8415,9 +8415,9 @@ fn step_227() -> Unit raise {
   let t5337 = @meson.asm_meson_tac(@list.List([]))
   let t5338 = @simp.rewrite_tac(@list.List([@sets.image(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t5339 = @analysis.expand_tac("cov")
-  let t5161 = @term_syntax.parse_term("op_euclid_prime_open_us_ball(((X : (_) -> Bool), (dX : (_, _) -> Real)), (x : _), (delta : (_) -> Real)(x) / real_of_num(2))")
+  let t5161 = @term_syntax.parse_term("euclid_open_ball(((X : (_) -> Bool), (dX : (_, _) -> Real)), (x : _), (delta : (_) -> Real)(x) / real_of_num(2))")
   let t5340 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.unions(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t5156 = @term_syntax.parse_term("SUBSET((X : (_) -> Bool), UNIONS((cov : ((_) -> Bool) -> Bool))) && SUBSET(cov, op_euclid_prime_top_us_of_us_metric((X, (dX : (_, _) -> Real))))")
+  let t5156 = @term_syntax.parse_term("SUBSET((X : (_) -> Bool), UNIONS((cov : ((_) -> Bool) -> Bool))) && SUBSET(cov, euclid_top_of_metric((X, (dX : (_, _) -> Real))))")
   let t5341 = @meson.asm_meson_tac(@list.List([@analysis.real_lt_half1()]))
   let t5154 = @term_syntax.parse_term("∀ x : _, real_of_num(0) < (delta : (_) -> Real)(x) / real_of_num(2)")
   let t5342 = @tactics_ext2.rewr(0L)
@@ -8426,7 +8426,7 @@ fn step_227() -> Unit raise {
   let t5152 = @term_syntax.parse_term("(cov : _)")
   let t5345 = @simp.asm_simp_tac(@list.List([@equal.gsym(top_of_metric_unions()), @sets.subset_refl()]))
   let t5346 = @tactics_ext2.use_(3L, @simp.rewrite_rule(@list.List([compact()])))
-  let t5145 = @term_syntax.parse_term("(cov : ((_) -> Bool) -> Bool) == IMAGE((x : _) => op_euclid_prime_open_us_ball(((X : (_) -> Bool), (dX : (_, _) -> Real)), x, (delta : (_) -> Real)(x) / real_of_num(2)), X)")
+  let t5145 = @term_syntax.parse_term("(cov : ((_) -> Bool) -> Bool) == IMAGE((x : _) => euclid_open_ball(((X : (_) -> Bool), (dX : (_, _) -> Real)), x, (delta : (_) -> Real)(x) / real_of_num(2)), X)")
   let t5347 = @tactics_ext2.cho(0L)
   let t5348 = @tactics_ext2.left(0L, "delta")
   let t5143 = @term_syntax.parse_term("(epsilon : Real) / real_of_num(2)")
@@ -8504,7 +8504,7 @@ fn step_227() -> Unit raise {
     let t_3 = x5257
     @tactics.mp_tac(@bool.ispecl(t_3, metric_space_triangle()))
   }, x5260), t5262, t5261])
-  compact_uniformly_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ X : (A) -> Bool, ∀ dX : (A, A) -> Real, ∀ Y : (B) -> Bool, ∀ dY : (B, B) -> Real, op_euclid_prime_metric_us_continuous(f, (X, dX), (Y, dY)) && op_euclid_prime_metric_us_space((X, dX)) && op_euclid_prime_metric_us_space((Y, dY)) && op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((X, dX)), X) && SUBSET(IMAGE(f, X), Y) → op_euclid_prime_uniformly_us_continuous(f, (X, dX), (Y, dY))"), t5350))
+  compact_uniformly_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ X : (A) -> Bool, ∀ dX : (A, A) -> Real, ∀ Y : (B) -> Bool, ∀ dY : (B, B) -> Real, euclid_metric_continuous(f, (X, dX), (Y, dY)) && euclid_metric_space((X, dX)) && euclid_metric_space((Y, dY)) && euclid_compact(euclid_top_of_metric((X, dX)), X) && SUBSET(IMAGE(f, X), Y) → euclid_uniformly_continuous(f, (X, dX), (Y, dY))"), t5350))
 }
 
 ///|
@@ -8634,7 +8634,7 @@ fn step_228() -> Unit raise {
       s5414(x5415)
     }
   }, x5417), t5421, (x5418 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x5418), t5420, t5419])
-  image_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ f : (A) -> B, ∀ K : (A) -> Bool, op_euclid_prime_continuous(f, U, V) && op_euclid_prime_compact(U, K) && SUBSET(IMAGE(f, K), UNIONS(V)) → op_euclid_prime_compact(V, IMAGE(f, K))"), t5468))
+  image_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ f : (A) -> B, ∀ K : (A) -> Bool, euclid_continuous(f, U, V) && euclid_compact(U, K) && SUBSET(IMAGE(f, K), UNIONS(V)) → euclid_compact(V, IMAGE(f, K))"), t5468))
 }
 
 ///|
@@ -8649,7 +8649,7 @@ pub fn image_compact() -> @kernel.Thm {
 ///|
 /// metric_bounded
 fn step_229() -> Unit raise {
-  metric_bounded_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(metric_bounded : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (∃ x : A, ∃ r : Real, SUBSET(X, op_euclid_prime_open_us_ball((X, d), x, r)))")))
+  metric_bounded_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(metric_bounded : (((A) -> Bool, (A, A) -> Real)) -> Bool)(((X : (A) -> Bool), (d : (A, A) -> Real))) == (∃ x : A, ∃ r : Real, SUBSET(X, euclid_open_ball((X, d), x, r)))")))
 }
 
 ///|
@@ -8665,18 +8665,18 @@ pub fn metric_bounded() -> @kernel.Thm {
 /// euclid_ball_cube
 fn step_230() -> Unit raise {
   let t5515 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5510 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num))")
+  let t5510 = @term_syntax.parse_term("euclid_euclid((n : Num))")
   let t5516 = @tactics_ext2.imatch_mp_tac(metric_space_symm())
-  let t5505 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid((x' : (Num) -> Real), (x : (Num) -> Real)) == op_euclid_prime_d_us_euclid(x, x')")
+  let t5505 = @term_syntax.parse_term("euclid_d_euclid((x' : (Num) -> Real), (x : (Num) -> Real)) == euclid_d_euclid(x, x')")
   let t5517 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5503 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num))")
+  let t5503 = @term_syntax.parse_term("euclid_euclid((n : Num))")
   let t5518 = @tactics_ext2.imatch_mp_tac(metric_space_triangle())
-  let t5498 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid((x' : (Num) -> Real), (i : Num) => real_of_num(0)) <= op_euclid_prime_d_us_euclid(x', (x : (Num) -> Real)) + op_euclid_prime_d_us_euclid(x, (i : Num) => real_of_num(0))")
+  let t5498 = @term_syntax.parse_term("euclid_d_euclid((x' : (Num) -> Real), (i : Num) => real_of_num(0)) <= euclid_d_euclid(x', (x : (Num) -> Real)) + euclid_d_euclid(x, (i : Num) => real_of_num(0))")
   let t5496 = @term_syntax.parse_term("(n : _)")
   let t5519 = @tactics.assume_tac(metric_euclid())
   let t5520 = @tactics_ext2.rewr(4L)
   let t5521 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid()]))
-  let t5490 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (i : Num) => real_of_num(0))")
+  let t5490 = @term_syntax.parse_term("euclid_euclid((n : Num), (i : Num) => real_of_num(0))")
   let t5522 = @tactics_ext2.use_(4L, (x5489 : @kernel.Thm) => @equal.conv_rule(@tactics_ext2.reduce_conv, x5489))
   let t5523 = @tactics_ext2.use_(4L, @equal.beta_rule)
   let t5480 = @term_syntax.parse_term("(i : _)")
@@ -8687,7 +8687,7 @@ fn step_230() -> Unit raise {
   let t5525 = @simp.asm_rewrite_tac(@list.List([]))
   let t5478 = @term_syntax.parse_term("(N : _)")
   let t5526 = @tactics_ext2.x_cho(0L, @term_syntax.parse_term("(N : Num)"))
-  let t5473 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid((x : (Num) -> Real), (i : Num) => real_of_num(0)) + (r : Real)")
+  let t5473 = @term_syntax.parse_term("euclid_d_euclid((x : (Num) -> Real), (i : Num) => real_of_num(0)) + (r : Real)")
   let t5527 = @tactics.assume_tac(@analysis.real_arch_simple())
   let t5528 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p(), open_ball()])), t5527, (x5474 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5473, fn(x5472 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x5469 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(0L, x5469))((fn(x5470 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -8723,7 +8723,7 @@ fn step_230() -> Unit raise {
       s5508(x5509)
     }
   }, x5511), t5515, (x5512 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x5512), (x5513 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x5513), (x5514 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x5514), @calc_rat.real_arith_tac])
-  euclid_ball_cube_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ r : Real, ∃ N : Num, SUBSET(op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r), {(x : (Num) -> Real) | op_euclid_prime_euclid(n, x) && (∀ i : Num, abs(x(i)) <= real_of_num(N))})"), t5528))
+  euclid_ball_cube_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ x : (Num) -> Real, ∀ r : Real, ∃ N : Num, SUBSET(euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r), {(x : (Num) -> Real) | euclid_euclid(n, x) && (∀ i : Num, abs(x(i)) <= real_of_num(N))})"), t5528))
 }
 
 ///|
@@ -8741,10 +8741,10 @@ fn step_231() -> Unit raise {
   let t5557 = @meson.meson_tac(@list.List([]))
   let t5558 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t5559 = @simp.rewrite_tac(@list.List([metric_euclid()]))
-  let t5555 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num))")
+  let t5555 = @term_syntax.parse_term("euclid_euclid((n : Num))")
   let t5560 = @tactics_ext2.imatch_mp_tac(metric_subspace())
   let t5561 = @simp.asm_rewrite_tac(@list.List([totally_bounded_cube()]))
-  let t5550 = @term_syntax.parse_term("{(x : (Num) -> Real) | op_euclid_prime_euclid((n : Num), x) && (∀ i : Num, abs(x(i)) <= real_of_num((N : Num)))}")
+  let t5550 = @term_syntax.parse_term("{(x : (Num) -> Real) | euclid_euclid((n : Num), x) && (∀ i : Num, abs(x(i)) <= real_of_num((N : Num)))}")
   let t5562 = @tactics_ext2.use_(0L, @drule.match_mp(@sets.subset_trans()))
   let t5563 = @tactics_ext2.join(0L, 2L)
   let t5564 = @tactics_ext2.use_(0L, @drule.match_mp(@sets.subset_trans()))
@@ -8752,9 +8752,9 @@ fn step_231() -> Unit raise {
   let t5566 = @tactics_ext2.rewr(3L)
   let t5537 = @term_syntax.parse_term("(r : _)")
   let t5538 = @term_syntax.parse_term("(x : _)")
-  let t5539 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid")
+  let t5539 = @term_syntax.parse_term("euclid_d_euclid")
   let t5540 = @term_syntax.parse_term("(X : _)")
-  let t5545 = @list.List([@term_syntax.parse_term("op_euclid_prime_euclid((n : Num))"), t5540, t5539, t5538, t5537])
+  let t5545 = @list.List([@term_syntax.parse_term("euclid_euclid((n : Num))"), t5540, t5539, t5538, t5537])
   let t5567 = @tactics.assume_tac(open_ball_subspace())
   let t5568 = @tactics_ext2.cho(2L)
   let t5529 = @term_syntax.parse_term("(r : _)")
@@ -8787,7 +8787,7 @@ fn step_231() -> Unit raise {
       s5553(x5554)
     }
   }, x5556), t5559, t5558, t5557])
-  totally_bounded_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : ((Num) -> Real) -> Bool, ∀ n : Num, op_euclid_prime_metric_us_bounded((X, op_euclid_prime_d_us_euclid)) && SUBSET(X, op_euclid_prime_euclid(n)) → op_euclid_prime_totally_us_bounded((X, op_euclid_prime_d_us_euclid))"), t5573))
+  totally_bounded_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : ((Num) -> Real) -> Bool, ∀ n : Num, euclid_metric_bounded((X, euclid_d_euclid)) && SUBSET(X, euclid_euclid(n)) → euclid_totally_bounded((X, euclid_d_euclid))"), t5573))
 }
 
 ///|
@@ -8828,7 +8828,7 @@ fn step_232() -> Unit raise {
   let t5684 = @simp.asm_rewrite_tac(@list.List([@misc_defs_and_lemmas.subset_inter(), @sets.subset_refl()]))
   let t5685 = @simp.rewrite_tac(@list.List([inter_thm(), @equal.gsym(@misc_defs_and_lemmas.unions_inter())]))
   let t5686 = @analysis.expand_tac("VK")
-  let t5649 = @term_syntax.parse_term("SUBSET((K : (_) -> Bool), UNIONS((VK : ((_) -> Bool) -> Bool))) && SUBSET(VK, op_euclid_prime_induced_us_top((U : ((_) -> Bool) -> Bool), K))")
+  let t5649 = @term_syntax.parse_term("SUBSET((K : (_) -> Bool), UNIONS((VK : ((_) -> Bool) -> Bool))) && SUBSET(VK, euclid_induced_top((U : ((_) -> Bool) -> Bool), K))")
   let t5647 = @term_syntax.parse_term("(VK : _)")
   let t5641 = @term_syntax.parse_term("(VK : ((_) -> Bool) -> Bool) == IMAGE((b : (_) -> Bool) => INTER(b, (K : (_) -> Bool)), (V : ((_) -> Bool) -> Bool))")
   let t5687 = @meson.asm_meson_tac(@list.List([]))
@@ -8968,7 +8968,7 @@ fn step_232() -> Unit raise {
       s5659(x5660)
     }
   }, x5662), t5670, t5669, t5668, t5667, (x5663 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x5663), (x5665 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5664, @simp.abbrev_tac, x5665), t5666])
-  induced_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, SUBSET(K, UNIONS(U)) → op_euclid_prime_compact(U, K) == op_euclid_prime_compact(op_euclid_prime_induced_us_top(U, K), K)"), t5733))
+  induced_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, SUBSET(K, UNIONS(U)) → euclid_compact(U, K) == euclid_compact(euclid_induced_top(U, K), K)"), t5733))
 }
 
 ///|
@@ -8992,11 +8992,11 @@ fn step_233() -> Unit raise {
   let t5752 = @tactics.disch_then(@tactics_ext2.rewrt_tac)
   let t5753 = @simp.asm_rewrite_tac(@list.List([]))
   let t5754 = @tactics_ext2.imatch_mp_tac(top_of_metric_induced())
-  let t5740 = @term_syntax.parse_term("op_euclid_prime_induced_us_top(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid)), (X : ((Num) -> Real) -> Bool)) == op_euclid_prime_top_us_of_us_metric((X, op_euclid_prime_d_us_euclid))")
+  let t5740 = @term_syntax.parse_term("euclid_induced_top(euclid_top_of_metric((euclid_euclid((n : Num)), euclid_d_euclid)), (X : ((Num) -> Real) -> Bool)) == euclid_top_of_metric((X, euclid_d_euclid))")
   let t5755 = @tactics.assume_tac(metric_euclid())
   let t5756 = @simp.asm_simp_tac(@list.List([induced_compact()]))
   let t5757 = @meson.asm_meson_tac(@list.List([top_of_metric_unions(), metric_euclid()]))
-  let t5738 = @term_syntax.parse_term("SUBSET((X : ((Num) -> Real) -> Bool), UNIONS(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid))))")
+  let t5738 = @term_syntax.parse_term("SUBSET((X : ((Num) -> Real) -> Bool), UNIONS(euclid_top_of_metric((euclid_euclid((n : Num)), euclid_d_euclid))))")
   let t5758 = @meson.asm_meson_tac(@list.List([induced_compact(), top_of_metric_unions(), metric_euclid()]))
   let t5759 = @simp.asm_rewrite_tac(@list.List([]))
   let t5760 = @tactics_ext2.imatch_mp_tac(compact_totally_bounded())
@@ -9007,11 +9007,11 @@ fn step_233() -> Unit raise {
   let t5765 = @simp.simp_tac(@list.List([metric_euclid(), metric_hausdorff(), top_of_metric_top()]))
   let t5766 = @tactics_ext2.imatch_mp_tac(compact_closed())
   let t5767 = @meson.asm_meson_tac(@list.List([metric_euclid(), metric_subspace()]))
-  let t5736 = @term_syntax.parse_term("op_euclid_prime_metric_us_space(((X : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid))")
+  let t5736 = @term_syntax.parse_term("euclid_metric_space(((X : ((Num) -> Real) -> Bool), euclid_d_euclid))")
   let t5768 = @simp.asm_rewrite_tac(@list.List([metric_euclid()]))
   let t5769 = @tactics_ext2.imatch_mp_tac(@equal.gsym(top_of_metric_induced()))
-  let t5734 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric(((X : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid)) == op_euclid_prime_induced_us_top(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid)), X)")
-  compact_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : ((Num) -> Real) -> Bool, ∀ n : Num, SUBSET(X, op_euclid_prime_euclid(n)) → op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)), X) == (op_euclid_prime_closed_us(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)), X) && op_euclid_prime_metric_us_bounded((X, op_euclid_prime_d_us_euclid)))"), @list.List([@tactics_ext.disch_all_tac, (x5735 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5734, @tactics_ext.subgoal_tac, x5735), t5769, t5768, @tactics.disch_tac, (x5737 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5736, @tactics_ext.subgoal_tac, x5737), t5767, @tactics.disch_tac, @tactics.eq_tac, @tactics_ext.disch_all_tac, @tactics.conj_tac, t5766, t5765, t5764, t5763, t5762, t5761, t5760, t5759, t5758, @tactics_ext.disch_all_tac, (x5739 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5738, @tactics_ext.subgoal_tac, x5739), t5757, t5756, t5755, @tactics.disch_tac, (x5741 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5740, @tactics_ext.subgoal_tac, x5741), t5754, t5753, t5752, t5751, t5750, @tactics.conj_tac, t5749, t5748, (x5746 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5745, fn(x5742 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t5734 = @term_syntax.parse_term("euclid_top_of_metric(((X : ((Num) -> Real) -> Bool), euclid_d_euclid)) == euclid_induced_top(euclid_top_of_metric((euclid_euclid((n : Num)), euclid_d_euclid)), X)")
+  compact_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : ((Num) -> Real) -> Bool, ∀ n : Num, SUBSET(X, euclid_euclid(n)) → euclid_compact(euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), X) == (euclid_closed_(euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), X) && euclid_metric_bounded((X, euclid_d_euclid)))"), @list.List([@tactics_ext.disch_all_tac, (x5735 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5734, @tactics_ext.subgoal_tac, x5735), t5769, t5768, @tactics.disch_tac, (x5737 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5736, @tactics_ext.subgoal_tac, x5737), t5767, @tactics.disch_tac, @tactics.eq_tac, @tactics_ext.disch_all_tac, @tactics.conj_tac, t5766, t5765, t5764, t5763, t5762, t5761, t5760, t5759, t5758, @tactics_ext.disch_all_tac, (x5739 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5738, @tactics_ext.subgoal_tac, x5739), t5757, t5756, t5755, @tactics.disch_tac, (x5741 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5740, @tactics_ext.subgoal_tac, x5741), t5754, t5753, t5752, t5751, t5750, @tactics.conj_tac, t5749, t5748, (x5746 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5745, fn(x5742 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5743 = @tactics.exists_tac(x5742)
     fn(x5744 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s5743(x5744)
@@ -9045,7 +9045,7 @@ fn step_234() -> Unit raise {
       s5771(x5772)
     }
   }, x5774), t5780, @tactics_ext.disch_all_tac, t5779, t5778, t5777, t5776, t5775])
-  neg_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, op_euclid_prime_metric_us_continuous(op_minus_minus, (op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), (op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid))"), t5782))
+  neg_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, euclid_metric_continuous(op_minus_minus, (euclid_euclid(n), euclid_d_euclid), (euclid_euclid(n), euclid_d_euclid))"), t5782))
 }
 
 ///|
@@ -9093,7 +9093,7 @@ fn step_235() -> Unit raise {
       }
     })(x5792))
   }, x5794), t5812, t5811, t5810, (x5796 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5795, @tactics_ext.subgoal_tac, x5796), @tactics.ap_term_tac, t5809, @tactics_ext.disch_all_tac, t5808, t5807, (x5798 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5797, @simp.abbrev_tac, x5798), (x5800 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5799, @simp.abbrev_tac, x5800), t5806, t5805, t5804, t5803])
-  continuous_comp_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ g : (B) -> C, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ W : ((C) -> Bool) -> Bool, op_euclid_prime_continuous(f, U, V) && op_euclid_prime_continuous(g, V, W) && SUBSET(IMAGE(f, UNIONS(U)), UNIONS(V)) → op_euclid_prime_continuous(o(g, f), U, W)"), t5815))
+  continuous_comp_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ g : (B) -> C, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ W : ((C) -> Bool) -> Bool, euclid_continuous(f, U, V) && euclid_continuous(g, V, W) && SUBSET(IMAGE(f, UNIONS(U)), UNIONS(V)) → euclid_continuous(o(g, f), U, W)"), t5815))
 }
 
 ///|
@@ -9163,7 +9163,7 @@ fn step_236() -> Unit raise {
   let t6013 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.euclid_scale(), @misc_defs_and_lemmas.dirac_delta()]))
   let t6014 = @analysis.expand_tac("z")
   let t6015 = @tactics.disch_then(@tactics_ext2.imatch_mp_tac)
-  let t5935 = @term_syntax.parse_term("DIFF(op_euclid_prime_euclid(1), IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool)), op_euclid_prime_euclid_us_scale((u : Real), dirac_delta(0)))")
+  let t5935 = @term_syntax.parse_term("DIFF(euclid_euclid(1), IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool)), euclid_euclid_scale((u : Real), dirac_delta(0)))")
   let t6016 = @tactics_ext2.rewr(7L)
   let t5933 = @term_syntax.parse_term("(u : _)")
   let t6017 = @tactics_ext2.x_cho(10L, @term_syntax.parse_term("(u : Real)"))
@@ -9193,8 +9193,8 @@ fn step_236() -> Unit raise {
   let t6036 = @simp.simp_tac(@list.List([@int.arith_rule(@term_syntax.parse_term("1 <= (m : Num) → !(0 == m)"))]))
   let t6037 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.euclid(), @misc_defs_and_lemmas.dirac_delta(), @misc_defs_and_lemmas.euclid_scale()]))
   let t6038 = @analysis.expand_tac("z")
-  let t5916 = @term_syntax.parse_term("op_euclid_prime_euclid(1, (z : (Num) -> Real)) && op_euclid_prime_euclid(1, op_euclid_prime_euclid_us_scale((t : Real) - (r : Real) / real_of_num(2), dirac_delta(0))) && op_euclid_prime_d_us_euclid(z, op_euclid_prime_euclid_us_scale(t - r / real_of_num(2), dirac_delta(0))) < r")
-  let t5914 = @term_syntax.parse_term("op_euclid_prime_euclid_us_scale((t : Real) - (r : Real) / real_of_num(2), dirac_delta(0))")
+  let t5916 = @term_syntax.parse_term("euclid_euclid(1, (z : (Num) -> Real)) && euclid_euclid(1, euclid_euclid_scale((t : Real) - (r : Real) / real_of_num(2), dirac_delta(0))) && euclid_d_euclid(z, euclid_euclid_scale(t - r / real_of_num(2), dirac_delta(0))) < r")
+  let t5914 = @term_syntax.parse_term("euclid_euclid_scale((t : Real) - (r : Real) / real_of_num(2), dirac_delta(0))")
   let t6039 = @tactics_ext2.copy(0L)
   let t6040 = @tactics_ext2.use_(0L, @simp.rewrite_rule(@list.List([@sets.subset(), @sets.in_(), open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])))
   let t6041 = @tactics_ext2.and_(0L)
@@ -9223,8 +9223,8 @@ fn step_236() -> Unit raise {
   let t6057 = @analysis.expand_tac("z")
   let t6058 = @simp.asm_rewrite_tac(@list.List([]))
   let t6059 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(@sets.in_diff())]))
-  let t5893 = @term_syntax.parse_term("DIFF(op_euclid_prime_euclid(1), IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool)), (z : (Num) -> Real))")
-  let t5891 = @term_syntax.parse_term("(z : (Num) -> Real) == op_euclid_prime_euclid_us_scale((t : Real), dirac_delta(0))")
+  let t5893 = @term_syntax.parse_term("DIFF(euclid_euclid(1), IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool)), (z : (Num) -> Real))")
+  let t5891 = @term_syntax.parse_term("(z : (Num) -> Real) == euclid_euclid_scale((t : Real), dirac_delta(0))")
   let t6060 = @tactics_ext2.rewr(4L)
   let t6061 = @tactics_ext2.with_(15L, @equal.gsym)
   let t6062 = @tactics_ext2.with_(14L, @drule.match_mp(top_of_metric_unions()))
@@ -9232,14 +9232,14 @@ fn step_236() -> Unit raise {
   let t6064 = @tactics_ext2.use_(4L, @drule.match_mp(closed_open()))
   let t6065 = @simp.rewrite_tac(@list.List([coord_dirac()]))
   let t6066 = @simp.asm_rewrite_tac(@list.List([]))
-  let t5889 = @term_syntax.parse_term("op_euclid_prime_euclid_us_scale((t : Real), dirac_delta(0))")
+  let t5889 = @term_syntax.parse_term("euclid_euclid_scale((t : Real), dirac_delta(0))")
   let t6067 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p(), @sets.in_()]))
   let t6068 = @simp.once_rewrite_tac(@list.List([@sets.image()]))
   let t6069 = @simp.once_rewrite_tac(@list.List([@sets.image()]))
   let t6070 = @simp.once_rewrite_tac(@list.List([@sets.image()]))
   let t6071 = @analysis.expand_tac("P")
   let t6072 = @tactics_ext2.rewr(13L)
-  let t5883 = @term_syntax.parse_term("!IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool), op_euclid_prime_euclid_us_scale((t : Real), dirac_delta(0)))")
+  let t5883 = @term_syntax.parse_term("!IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool), euclid_euclid_scale((t : Real), dirac_delta(0)))")
   let t6073 = @simp.asm_rewrite_tac(@list.List([]))
   let t5881 = @term_syntax.parse_term("(u : _)")
   let t6074 = @tactics_ext2.left_tac("x")
@@ -9262,7 +9262,7 @@ fn step_236() -> Unit raise {
   let t6086 = @meson.asm_meson_tac(@list.List([]))
   let t6087 = @tactics_ext2.use_(1L, @simp.rewrite_rule(@list.List([@sets.subset(), @sets.in_()])))
   let t6088 = @tactics_ext2.imatch_mp_tac(euclid1_abs())
-  let t5852 = @term_syntax.parse_term("op_euclid_prime_d_us_euclid((x0 : (Num) -> Real), (f : (_, Num) -> Real)((x : _))) == abs(x0(0) - f(x, 0))")
+  let t5852 = @term_syntax.parse_term("euclid_d_euclid((x0 : (Num) -> Real), (f : (_, Num) -> Real)((x : _))) == abs(x0(0) - f(x, 0))")
   let t6089 = @tactics_ext2.rewr(6L)
   let t5850 = @term_syntax.parse_term("(fx : _)")
   let t5844 = @term_syntax.parse_term("(x : _)")
@@ -9291,7 +9291,7 @@ fn step_236() -> Unit raise {
   let t6109 = @tactics_ext2.use_(3L, @simp.rewrite_rule(@list.List([@misc_defs_and_lemmas.empty_exists(), @sets.in_()])))
   let t6110 = @tactics_ext2.imatch_mp_tac(@analysis.real_sup_exists())
   let t5823 = @term_syntax.parse_term("∃ s : Real, ∀ y : Real, (∃ x : Real, (P : (Real) -> Bool)(x) && y < x) == (y < s)")
-  let t5821 = @term_syntax.parse_term("(P : (Real) -> Bool) == IMAGE(op_euclid_prime_coord(0), IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool)))")
+  let t5821 = @term_syntax.parse_term("(P : (Real) -> Bool) == IMAGE(euclid_coord(0), IMAGE((f : (_, Num) -> Real), (K : (_) -> Bool)))")
   let t6111 = @simp.asm_simp_tac(@list.List([compact_euclid()]))
   let t6112 = @tactics_ext2.with_(0L, @drule.match_mp(image_compact()))
   let t6113 = @tactics_ext2.join(0L, 4L)
@@ -9302,7 +9302,7 @@ fn step_236() -> Unit raise {
     @tactics_ext2.use_(5L, @simp.once_rewrite_rule(@list.List([t])))
   })
   let t6117 = @meson.meson_tac(@list.List([top_of_metric_unions(), metric_euclid()]))
-  let t5816 = @term_syntax.parse_term("op_euclid_prime_euclid(1) == UNIONS(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid)))")
+  let t5816 = @term_syntax.parse_term("euclid_euclid(1) == UNIONS(euclid_top_of_metric((euclid_euclid(1), euclid_d_euclid)))")
   let t6118 = @tactics_ext2.copy(1L)
   let t6119 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.copy(2L), t6118, (x5817 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5816, @tactics_ext.subgoal_tac, x5817), t6117, t6116, t6115, t6114, t6113, t6112, (x5820 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x5820), t6111, @tactics_ext.disch_all_tac, (x5822 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5821, @simp.abbrev_tac, x5822), (x5824 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5823, @tactics_ext.subgoal_tac, x5824), t6110, @tactics.conj_tac, t6109, t6108, (x5829 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t5828, fn(x5825 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s5826 = @tactics.exists_tac(x5825)
@@ -9403,7 +9403,7 @@ fn step_236() -> Unit raise {
       }
     })(x5962))
   }, x5964), (x5965 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x5965), t5969, t5968, t5967, t5966])
-  compact_max_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A, Num) -> Real, ∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, op_euclid_prime_continuous(f, U, op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid))) && SUBSET(IMAGE(f, K), op_euclid_prime_euclid(1)) && op_euclid_prime_compact(U, K) && !(K == {}) → (∃ x : A, K(x) && (∀ y : A, K(y) → f(y, 0) <= f(x, 0)))"), t6119))
+  compact_max_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A, Num) -> Real, ∀ U : ((A) -> Bool) -> Bool, ∀ K : (A) -> Bool, euclid_continuous(f, U, euclid_top_of_metric((euclid_euclid(1), euclid_d_euclid))) && SUBSET(IMAGE(f, K), euclid_euclid(1)) && euclid_compact(U, K) && !(K == {}) → (∃ x : A, K(x) && (∀ y : A, K(y) → f(y, 0) <= f(x, 0)))"), t6119))
 }
 
 ///|
@@ -9418,7 +9418,7 @@ pub fn compact_max() -> @kernel.Thm {
 ///|
 /// homeomorphism
 fn step_237() -> Unit raise {
-  homeomorphism_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(homeomorphism : ((A) -> B, ((A) -> Bool) -> Bool, ((B) -> Bool) -> Bool) -> Bool)((f : (A) -> B), (U : ((A) -> Bool) -> Bool), (V : ((B) -> Bool) -> Bool)) == (BIJ(f, UNIONS(U), UNIONS(V)) && op_euclid_prime_continuous(f, U, V) && (∀ A : (A) -> Bool, U(A) → V(IMAGE(f, A))))")))
+  homeomorphism_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(homeomorphism : ((A) -> B, ((A) -> Bool) -> Bool, ((B) -> Bool) -> Bool) -> Bool)((f : (A) -> B), (U : ((A) -> Bool) -> Bool), (V : ((B) -> Bool) -> Bool)) == (BIJ(f, UNIONS(U), UNIONS(V)) && euclid_continuous(f, U, V) && (∀ A : (A) -> Bool, U(A) → V(IMAGE(f, A))))")))
 }
 
 ///|
@@ -9481,7 +9481,7 @@ fn step_238() -> Unit raise {
       }
     })(x6131))
   }, x6133), (x6134 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x6134), t6154, t6153, t6152, @tactics.disch_tac, (x6136 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6135, @tactics_ext.subgoal_tac, x6136), (x6138 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6137, @tactics_ext.subgoal_tac, x6138), t6151, t6150, t6149, t6148, t6147, t6146, (x6143 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x6143), t6145, t6144])
-  inv_homeomorphism_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, op_euclid_prime_homeomorphism(f, U, V) → op_euclid_prime_continuous(INV(f, UNIONS(U), UNIONS(V)), V, U)"), t6167))
+  inv_homeomorphism_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, euclid_homeomorphism(f, U, V) → euclid_continuous(INV(f, UNIONS(U), UNIONS(V)), V, U)"), t6167))
 }
 
 ///|
@@ -9551,7 +9551,7 @@ fn step_239() -> Unit raise {
       }
     })(x6186))
   }, x6188), (x6189 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x6189), t6207, t6206, t6205, @tactics.disch_tac, (x6191 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6190, @tactics_ext.subgoal_tac, x6191), (x6193 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6192, @tactics_ext.subgoal_tac, x6193), t6204, t6203, t6202, t6201, t6200, t6199, t6198])
-  bicont_homeomorphism_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, BIJ(f, UNIONS(U), UNIONS(V)) && op_euclid_prime_continuous(f, U, V) && op_euclid_prime_continuous(INV(f, UNIONS(U), UNIONS(V)), V, U) → op_euclid_prime_homeomorphism(f, U, V)"), t6221))
+  bicont_homeomorphism_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, BIJ(f, UNIONS(U), UNIONS(V)) && euclid_continuous(f, U, V) && euclid_continuous(INV(f, UNIONS(U), UNIONS(V)), V, U) → euclid_homeomorphism(f, U, V)"), t6221))
 }
 
 ///|
@@ -9598,7 +9598,7 @@ fn step_240() -> Unit raise {
       }
     })(x6237))
   }, x6239), (x6241 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6240, @tactics_ext.subgoal_tac, x6241), t6248, t6247, @tactics.disch_tac, t6246, (x6243 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6242, @tactics_ext.subgoal_tac, x6243), t6245, t6244])
-  open_and_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, op_euclid_prime_topology_us(U) && op_euclid_prime_topology_us(V) && BIJ(f, UNIONS(U), UNIONS(V)) → (∀ A : (A) -> Bool, U(A) → V(IMAGE(f, A))) == (∀ B : (A) -> Bool, op_euclid_prime_closed_us(U, B) → op_euclid_prime_closed_us(V, IMAGE(f, B)))"), t6257))
+  open_and_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, euclid_topology_(U) && euclid_topology_(V) && BIJ(f, UNIONS(U), UNIONS(V)) → (∀ A : (A) -> Bool, U(A) → V(IMAGE(f, A))) == (∀ B : (A) -> Bool, euclid_closed_(U, B) → euclid_closed_(V, IMAGE(f, B)))"), t6257))
 }
 
 ///|
@@ -9642,7 +9642,7 @@ fn step_241() -> Unit raise {
       s6265(x6266)
     }
   }, x6268), t6277, t6276, t6275, t6274, t6273, t6272, t6271, t6270, t6269])
-  hausdorff_homeomorphsim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, BIJ(f, UNIONS(U), UNIONS(V)) && op_euclid_prime_continuous(f, U, V) && op_euclid_prime_compact(U, UNIONS(U)) && op_euclid_prime_hausdorff(V) && op_euclid_prime_topology_us(U) && op_euclid_prime_topology_us(V) → op_euclid_prime_homeomorphism(f, U, V)"), t6285))
+  hausdorff_homeomorphsim_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, BIJ(f, UNIONS(U), UNIONS(V)) && euclid_continuous(f, U, V) && euclid_compact(U, UNIONS(U)) && euclid_hausdorff(V) && euclid_topology_(U) && euclid_topology_(V) → euclid_homeomorphism(f, U, V)"), t6285))
 }
 
 ///|
@@ -9673,7 +9673,7 @@ pub fn d_real() -> @kernel.Thm {
 /// metric_real
 fn step_243() -> Unit raise {
   let t6286 = @list.List([@simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.metric_space(), @sets.univ(), d_real()])), @calc_rat.real_arith_tac])
-  metric_real_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("op_euclid_prime_metric_us_space((UNIV, op_euclid_prime_d_us_real))"), t6286))
+  metric_real_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("euclid_metric_space((UNIV, euclid_d_real))"), t6286))
 }
 
 ///|
@@ -9701,8 +9701,8 @@ fn step_244() -> Unit raise {
   let t6294 = @list.List([@term_syntax.parse_term("(i : _)"), t6289])
   let t6311 = @simp.rewrite_tac(@list.List([metric_euclid(), metric_real(), @equal.gsym(@sets.univ())]))
   let t6312 = @simp.rewrite_tac(@list.List([@sets.univ(), @sets.subset(), @sets.in_()]))
-  let t6287 = @term_syntax.parse_term("∀ i : Num, ∀ n : Num, SUBSET(IMAGE(op_euclid_prime_coord(i), op_euclid_prime_euclid(n)), UNIV) && op_euclid_prime_metric_us_space((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)) && op_euclid_prime_metric_us_space((UNIV, op_euclid_prime_d_us_real))")
-  continuous_euclid1_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ n : Num, op_euclid_prime_continuous(op_euclid_prime_coord(i), op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)))"), @list.List([(x6288 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6287, @tactics_ext.subgoal_tac, x6288), @tactics_ext.rep_gen_tac, t6312, t6311, @tactics.disch_tac, @tactics_ext.disch_all_tac, (x6295 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t6294, fn(x6293 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6287 = @term_syntax.parse_term("∀ i : Num, ∀ n : Num, SUBSET(IMAGE(euclid_coord(i), euclid_euclid(n)), UNIV) && euclid_metric_space((euclid_euclid(n), euclid_d_euclid)) && euclid_metric_space((UNIV, euclid_d_real))")
+  continuous_euclid1_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ i : Num, ∀ n : Num, euclid_continuous(euclid_coord(i), euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), euclid_top_of_metric((UNIV, euclid_d_real)))"), @list.List([(x6288 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6287, @tactics_ext.subgoal_tac, x6288), @tactics_ext.rep_gen_tac, t6312, t6311, @tactics.disch_tac, @tactics_ext.disch_all_tac, (x6295 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t6294, fn(x6293 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x6290 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(0L, x6290))((fn(x6291 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x6292 : @kernel.Thm) -> @kernel.Thm raise {
         @bool.specl(x6291, x6292)
@@ -9752,14 +9752,14 @@ fn step_245() -> Unit raise {
   let t6349 = @simp.asm_rewrite_tac(@list.List([]))
   let t6350 = @meson.meson_tac(@list.List([euclid_dirac()]))
   let t6351 = @analysis.expand_tac("z")
-  let t6325 = @term_syntax.parse_term("op_euclid_prime_euclid(1, (z : (Num) -> Real))")
-  let t6323 = @term_syntax.parse_term("(z : (Num) -> Real) == op_euclid_prime_euclid_us_scale(((a : Real) + (b : Real)) / real_of_num(2), dirac_delta(0))")
+  let t6325 = @term_syntax.parse_term("euclid_euclid(1, (z : (Num) -> Real))")
+  let t6323 = @term_syntax.parse_term("(z : (Num) -> Real) == euclid_euclid_scale(((a : Real) + (b : Real)) / real_of_num(2), dirac_delta(0))")
   let t6352 = @tactics_ext2.imatch_mp_tac(@class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool) == ((d : Bool) && (c : Bool))) → (a && b) == (d && a && c)")))
   let t6353 = @simp.rewrite_tac(@list.List([closed_ball(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t6354 = @tactics_ext2.imatch_mp_tac(@class.eq_ext())
   let t6321 = @term_syntax.parse_term("((b : Real) - (a : Real)) / real_of_num(2)")
-  let t6316 = @term_syntax.parse_term("op_euclid_prime_euclid_us_scale(((a : Real) + (b : Real)) / real_of_num(2), dirac_delta(0))")
-  interval_closed_ball_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∃ x : (Num) -> Real, ∃ r : Real, a <= b → {(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && a <= x(0) && x(0) <= b} == op_euclid_prime_closed_us_ball((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid), x, r)"), @list.List([@tactics_ext.disch_all_tac, (x6317 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6316, fn(x6313 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t6316 = @term_syntax.parse_term("euclid_euclid_scale(((a : Real) + (b : Real)) / real_of_num(2), dirac_delta(0))")
+  interval_closed_ball_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, ∃ x : (Num) -> Real, ∃ r : Real, a <= b → {(x : (Num) -> Real) | euclid_euclid(1, x) && a <= x(0) && x(0) <= b} == euclid_closed_ball((euclid_euclid(1), euclid_d_euclid), x, r)"), @list.List([@tactics_ext.disch_all_tac, (x6317 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6316, fn(x6313 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6314 = @tactics.exists_tac(x6313)
     fn(x6315 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6314(x6315)
@@ -9795,7 +9795,7 @@ fn step_246() -> Unit raise {
   let t6374 = @tactics_ext2.kill(1L)
   let t6364 = @term_syntax.parse_term("(t : _) == (x : (Num) -> _)(0)")
   let t6375 = @simp.rewrite_tac(@list.List([eq_empty(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t6362 = @term_syntax.parse_term("{(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && (a : Real) <= x(0) && x(0) <= (b : Real)} == {}")
+  let t6362 = @term_syntax.parse_term("{(x : (Num) -> Real) | euclid_euclid(1, x) && (a : Real) <= x(0) && x(0) <= (b : Real)} == {}")
   let t6376 = @simp.rewrite_tac(@list.List([metric_euclid()]))
   let t6377 = @tactics_ext2.imatch_mp_tac(closed_ball_closed())
   let t6378 = @simp.asm_rewrite_tac(@list.List([]))
@@ -9812,7 +9812,7 @@ fn step_246() -> Unit raise {
       }
     })(x6359))
   }, x6361), t6381, t6380, t6379, t6378, t6377, t6376, (x6363 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6362, @tactics_ext.subgoal_tac, x6363), t6375, @tactics.gen_tac, (x6365 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6364, @simp.abbrev_tac, x6365), t6374, t6373, (x6366 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x6366), @calc_rat.real_arith_tac, t6372, t6371, t6370, t6369])
-  interval_euclid1_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, op_euclid_prime_closed_us(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid)), {(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && a <= x(0) && x(0) <= b})"), t6383))
+  interval_euclid1_closed_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, euclid_closed_(euclid_top_of_metric((euclid_euclid(1), euclid_d_euclid)), {(x : (Num) -> Real) | euclid_euclid(1, x) && a <= x(0) && x(0) <= b})"), t6383))
 }
 
 ///|
@@ -9836,7 +9836,7 @@ fn step_247() -> Unit raise {
   let t6422 = @tactics_ext2.kill(2L)
   let t6414 = @term_syntax.parse_term("(t : _) == (x : (Num) -> _)(0)")
   let t6423 = @simp.rewrite_tac(@list.List([eq_empty(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t6412 = @term_syntax.parse_term("{(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && (a : Real) <= x(0) && x(0) <= (b : Real)} == {}")
+  let t6412 = @term_syntax.parse_term("{(x : (Num) -> Real) | euclid_euclid(1, x) && (a : Real) <= x(0) && x(0) <= (b : Real)} == {}")
   let t6424 = @simp.asm_rewrite_tac(@list.List([]))
   let t6407 = @term_syntax.parse_term("real_of_num(0) <= (r : Real)")
   let t6405 = @term_syntax.parse_term("(s : _) == (x' : (Num) -> _)(0)")
@@ -9873,7 +9873,7 @@ fn step_247() -> Unit raise {
       s6397(x6398)
     }
   }, x6400), t6429, @tactics_ext.disch_all_tac, t6428, (x6401 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x6401), t6427, @tactics_ext.disch_all_tac, t6426, (x6402 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x6402), t6425, (x6404 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6403, @simp.abbrev_tac, x6404), (x6406 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6405, @simp.abbrev_tac, x6406), @tactics_ext.disch_all_tac, (x6408 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6407, @tactics_ext.subgoal_tac, x6408), (x6409 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x6409), @calc_rat.real_arith_tac, @tactics_ext.disch_all_tac, @tactics_ext2.reduce_tac, t6424, (x6410 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(6L, x6410), (x6411 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x6411), @calc_rat.real_arith_tac, (x6413 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6412, @tactics_ext.subgoal_tac, x6413), t6423, @tactics.gen_tac, (x6415 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6414, @simp.abbrev_tac, x6415), t6422, t6421, (x6416 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x6416), @calc_rat.real_arith_tac, t6420, t6419])
-  interval_euclid1_bounded_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, op_euclid_prime_metric_us_bounded(({(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && a <= x(0) && x(0) <= b}, op_euclid_prime_d_us_euclid))"), t6436))
+  interval_euclid1_bounded_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, euclid_metric_bounded(({(x : (Num) -> Real) | euclid_euclid(1, x) && a <= x(0) && x(0) <= b}, euclid_d_euclid))"), t6436))
 }
 
 ///|
@@ -9893,8 +9893,8 @@ fn step_248() -> Unit raise {
   let t6441 = @simp.asm_simp_tac(@list.List([compact_euclid()]))
   let t6442 = @meson.meson_tac(@list.List([]))
   let t6443 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t6437 = @term_syntax.parse_term("SUBSET({(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && (a : Real) <= x(0) && x(0) <= (b : Real)}, op_euclid_prime_euclid(1))")
-  interval_euclid1_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid)), {(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && a <= x(0) && x(0) <= b})"), @list.List([@tactics_ext.disch_all_tac, (x6438 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6437, @tactics_ext.subgoal_tac, x6438), t6443, t6442, @tactics.disch_tac, t6441, @tactics.conj_tac, t6440, t6439])))
+  let t6437 = @term_syntax.parse_term("SUBSET({(x : (Num) -> Real) | euclid_euclid(1, x) && (a : Real) <= x(0) && x(0) <= (b : Real)}, euclid_euclid(1))")
+  interval_euclid1_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, euclid_compact(euclid_top_of_metric((euclid_euclid(1), euclid_d_euclid)), {(x : (Num) -> Real) | euclid_euclid(1, x) && a <= x(0) && x(0) <= b})"), @list.List([@tactics_ext.disch_all_tac, (x6438 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6437, @tactics_ext.subgoal_tac, x6438), t6443, t6442, @tactics.disch_tac, t6441, @tactics.conj_tac, t6440, t6439])))
 }
 
 ///|
@@ -9914,7 +9914,7 @@ fn step_249() -> Unit raise {
   let t6451 = @tactics_ext2.cho(0L)
   let t6452 = @simp.asm_rewrite_tac(@list.List([]))
   let t6453 = @simp.rewrite_tac(@list.List([coord_dirac(), euclid_dirac(), dirac_0()]))
-  let t6447 = @term_syntax.parse_term("op_euclid_prime_euclid_us_scale((x : Real), dirac_delta(0))")
+  let t6447 = @term_syntax.parse_term("euclid_euclid_scale((x : Real), dirac_delta(0))")
   let t6454 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p(), @sets.image()]))
   let t6455 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.imatch_mp_tac(@class.eq_ext()), t6454, @tactics.gen_tac, @tactics.eq_tac, @tactics_ext.disch_all_tac, (x6448 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6447, fn(x6444 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6445 = @tactics.exists_tac(x6444)
@@ -9922,7 +9922,7 @@ fn step_249() -> Unit raise {
       s6445(x6446)
     }
   }, x6448), t6453, t6452, @tactics_ext.disch_all_tac, t6451, t6450, t6449])
-  interval_image_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, {(x : Real) | a <= x && x <= b} == IMAGE(op_euclid_prime_coord(0), {(x : (Num) -> Real) | op_euclid_prime_euclid(1, x) && a <= x(0) && x(0) <= b})"), t6455))
+  interval_image_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, {(x : Real) | a <= x && x <= b} == IMAGE(euclid_coord(0), {(x : (Num) -> Real) | euclid_euclid(1, x) && a <= x(0) && x(0) <= b})"), t6455))
 }
 
 ///|
@@ -9940,7 +9940,7 @@ fn step_250() -> Unit raise {
   let t6461 = @simp.rewrite_tac(@list.List([@sets.univ(), @sets.subset(), @sets.in_()]))
   let t6462 = @simp.simp_tac(@list.List([@equal.gsym(top_of_metric_unions()), metric_real()]))
   let t6463 = @simp.rewrite_tac(@list.List([continuous_euclid1(), interval_euclid1_compact()]))
-  let t6459 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(1), op_euclid_prime_d_us_euclid))")
+  let t6459 = @term_syntax.parse_term("euclid_top_of_metric((euclid_euclid(1), euclid_d_euclid))")
   let t6464 = @tactics_ext2.imatch_mp_tac(image_compact())
   let t6465 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([interval_image()])), t6464, (x6460 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6459, fn(x6456 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6457 = @tactics.exists_tac(x6456)
@@ -9948,7 +9948,7 @@ fn step_250() -> Unit raise {
       s6457(x6458)
     }
   }, x6460), t6463, t6462, t6461])
-  interval_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, op_euclid_prime_compact(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), {(x : Real) | a <= x && x <= b})"), t6465))
+  interval_compact_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, euclid_compact(euclid_top_of_metric((UNIV, euclid_d_real)), {(x : Real) | a <= x && x <= b})"), t6465))
 }
 
 ///|
@@ -9969,11 +9969,11 @@ fn step_251() -> Unit raise {
   let t6483 = @tactics_ext2.imatch_mp_tac(@simp.rewrite_rule(@list.List([@sets.in_()]))(open_ball_nonempty()))
   let t6484 = @simp.rewrite_tac(@list.List([open_ball(), d_real(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p(), @sets.univ(), @sets.subset()]))
   let t6485 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t6476 = @term_syntax.parse_term("op_euclid_prime_open_us_ball((UNIV, op_euclid_prime_d_us_real), (x : Real), (a : Real) - x)")
+  let t6476 = @term_syntax.parse_term("euclid_open_ball((UNIV, euclid_d_real), (x : Real), (a : Real) - x)")
   let t6486 = @simp.asm_rewrite_tac(@list.List([]))
   let t6487 = @tactics_ext2.use_(0L, @simp.simp_rule(@list.List([top_of_metric_top(), metric_real()])))
   let t6466 = @term_syntax.parse_term("{(x : Real) | x < (a : Real)}")
-  let t6471 = @list.List([@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))"), t6466])
+  let t6471 = @list.List([@term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))"), t6466])
   let t6488 = @list.List([@tactics.gen_tac, @tactics.assume_tac(open_nbd()), (x6472 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t6471, fn(x6470 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x6467 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(0L, x6467))((fn(x6468 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x6469 : @kernel.Thm) -> @kernel.Thm raise {
@@ -9986,7 +9986,7 @@ fn step_251() -> Unit raise {
       s6474(x6475)
     }
   }, x6477), t6485, @tactics_ext.disch_all_tac, @tactics.conj_tac, t6484, @tactics.gen_tac, (x6478 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x6478), @calc_rat.real_arith_tac, @tactics.conj_tac, t6483, t6482, (x6479 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x6479), @calc_rat.real_arith_tac, t6481, t6480])
-  half_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real), {(x : Real) | x < a})"), t6488))
+  half_open_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, euclid_top_of_metric((UNIV, euclid_d_real), {(x : Real) | x < a})"), t6488))
 }
 
 ///|
@@ -10007,11 +10007,11 @@ fn step_252() -> Unit raise {
   let t6506 = @tactics_ext2.imatch_mp_tac(@simp.rewrite_rule(@list.List([@sets.in_()]))(open_ball_nonempty()))
   let t6507 = @simp.rewrite_tac(@list.List([open_ball(), d_real(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p(), @sets.univ(), @sets.subset()]))
   let t6508 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t6499 = @term_syntax.parse_term("op_euclid_prime_open_us_ball((UNIV, op_euclid_prime_d_us_real), (x : Real), x - (a : Real))")
+  let t6499 = @term_syntax.parse_term("euclid_open_ball((UNIV, euclid_d_real), (x : Real), x - (a : Real))")
   let t6509 = @simp.asm_rewrite_tac(@list.List([]))
   let t6510 = @tactics_ext2.use_(0L, @simp.simp_rule(@list.List([top_of_metric_top(), metric_real()])))
   let t6489 = @term_syntax.parse_term("{(x : Real) | (a : Real) < x}")
-  let t6494 = @list.List([@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))"), t6489])
+  let t6494 = @list.List([@term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))"), t6489])
   let t6511 = @list.List([@tactics.gen_tac, @tactics.assume_tac(open_nbd()), (x6495 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t6494, fn(x6493 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x6490 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(0L, x6490))((fn(x6491 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       fn(x6492 : @kernel.Thm) -> @kernel.Thm raise {
@@ -10024,7 +10024,7 @@ fn step_252() -> Unit raise {
       s6497(x6498)
     }
   }, x6500), t6508, @tactics_ext.disch_all_tac, @tactics.conj_tac, t6507, @tactics.gen_tac, (x6501 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x6501), @calc_rat.real_arith_tac, @tactics.conj_tac, t6506, t6505, (x6502 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(1L, x6502), @calc_rat.real_arith_tac, t6504, t6503])
-  half_open_above_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real), {(x : Real) | a < x})"), t6511))
+  half_open_above_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, euclid_top_of_metric((UNIV, euclid_d_real), {(x : Real) | a < x})"), t6511))
 }
 
 ///|
@@ -10063,7 +10063,7 @@ fn step_254() -> Unit raise {
   let t6625 = @tactics_ext2.and_(0L)
   let t6626 = @tactics_ext2.right(0L, "V")
   let t6627 = @tactics_ext2.right(0L, "V")
-  let t6612 = @term_syntax.parse_term("preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), (g : (Real) -> _), (v : (_) -> Bool))")
+  let t6612 = @term_syntax.parse_term("preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), (g : (Real) -> _), (v : (_) -> Bool))")
   let t6617 = @list.List([@term_syntax.parse_term("{(x : Real) | (a : Real) < x}"), t6612])
   let t6628 = @tactics_ext2.kill(6L)
   let t6629 = @tactics_ext2.kill(0L)
@@ -10075,7 +10075,7 @@ fn step_254() -> Unit raise {
   let t6604 = @term_syntax.parse_term("(v : _)")
   let t6634 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([topology()])))
   let t6635 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([metric_real()])))
-  let t6593 = @term_syntax.parse_term("op_euclid_prime_d_us_real")
+  let t6593 = @term_syntax.parse_term("euclid_d_real")
   let t6598 = @list.List([@term_syntax.parse_term("(UNIV : (Real) -> Bool)"), t6593])
   let t6636 = @tactics.assume_tac(top_of_metric_top())
   let t6637 = @simp.asm_rewrite_tac(@list.List([]))
@@ -10097,7 +10097,7 @@ fn step_254() -> Unit raise {
   let t6653 = @tactics_ext2.left_tac("x")
   let t6654 = @simp.asm_rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), @sets.in_(), joinf()]))
   let t6588 = @term_syntax.parse_term("(B : _)")
-  let t6583 = @term_syntax.parse_term("(B : (Real) -> Bool) == INTER({(x : Real) | (a : Real) < x}, preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), (g : (Real) -> _), (v : (_) -> Bool)))")
+  let t6583 = @term_syntax.parse_term("(B : (Real) -> Bool) == INTER({(x : Real) | (a : Real) < x}, preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), (g : (Real) -> _), (v : (_) -> Bool)))")
   let t6655 = @simp.asm_rewrite_tac(@list.List([]))
   let t6656 = @tactics_ext2.use_(5L, @simp.rewrite_rule(@list.List([half_open()])))
   let t6657 = @tactics_ext2.rewr(5L)
@@ -10107,7 +10107,7 @@ fn step_254() -> Unit raise {
   let t6661 = @tactics_ext2.and_(1L)
   let t6662 = @tactics_ext2.right(1L, "V")
   let t6663 = @tactics_ext2.right(1L, "V")
-  let t6576 = @term_syntax.parse_term("preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), (f : (Real) -> _), (v : (_) -> Bool))")
+  let t6576 = @term_syntax.parse_term("preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), (f : (Real) -> _), (v : (_) -> Bool))")
   let t6581 = @list.List([@term_syntax.parse_term("{(x : Real) | x < (a : Real)}"), t6576])
   let t6664 = @tactics_ext2.kill(6L)
   let t6665 = @tactics_ext2.kill(1L)
@@ -10119,7 +10119,7 @@ fn step_254() -> Unit raise {
   let t6568 = @term_syntax.parse_term("(v : _)")
   let t6670 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([topology()])))
   let t6671 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([metric_real()])))
-  let t6557 = @term_syntax.parse_term("op_euclid_prime_d_us_real")
+  let t6557 = @term_syntax.parse_term("euclid_d_real")
   let t6562 = @list.List([@term_syntax.parse_term("(UNIV : (Real) -> Bool)"), t6557])
   let t6672 = @tactics.assume_tac(top_of_metric_top())
   let t6673 = @simp.asm_rewrite_tac(@list.List([]))
@@ -10138,7 +10138,7 @@ fn step_254() -> Unit raise {
   let t6686 = @tactics_ext2.left_tac("x")
   let t6687 = @simp.asm_rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), @sets.in_(), joinf()]))
   let t6552 = @term_syntax.parse_term("(B : _)")
-  let t6547 = @term_syntax.parse_term("(B : (Real) -> Bool) == INTER({(x : Real) | x < (a : Real)}, preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), (f : (Real) -> _), (v : (_) -> Bool)))")
+  let t6547 = @term_syntax.parse_term("(B : (Real) -> Bool) == INTER({(x : Real) | x < (a : Real)}, preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), (f : (Real) -> _), (v : (_) -> Bool)))")
   let t6688 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
   let t6545 = @term_syntax.parse_term("(v : _)")
   let t6539 = @term_syntax.parse_term("(v : _)")
@@ -10146,7 +10146,7 @@ fn step_254() -> Unit raise {
   let t6690 = @analysis.expand_tac("B")
   let t6691 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([topology()])))
   let t6692 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([metric_real()])))
-  let t6528 = @term_syntax.parse_term("op_euclid_prime_d_us_real")
+  let t6528 = @term_syntax.parse_term("euclid_d_real")
   let t6533 = @list.List([@term_syntax.parse_term("(UNIV : (Real) -> Bool)"), t6528])
   let t6693 = @tactics.assume_tac(top_of_metric_top())
   let t6694 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("!((a : Real) < a)"))]))
@@ -10165,7 +10165,7 @@ fn step_254() -> Unit raise {
   let t6707 = @tactics_ext2.left_tac("x")
   let t6708 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), @sets.in_()]))
   let t6524 = @term_syntax.parse_term("(B : _)")
-  let t6519 = @term_syntax.parse_term("(B : (Real) -> Bool) == INTER(preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), (f : (Real) -> _), (v : (_) -> Bool)), preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), (g : (Real) -> _), v))")
+  let t6519 = @term_syntax.parse_term("(B : (Real) -> Bool) == INTER(preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), (f : (Real) -> _), (v : (_) -> Bool)), preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), (g : (Real) -> _), v))")
   let t6709 = @tactics.mp_tac(@calc_rat.real_arith(@term_syntax.parse_term("(x : Real) == (a : Real) || x < a || a < x")))
   let t6710 = @simp.rewrite_tac(@list.List([@sets.subset_univ()]))
   let t6711 = @simp.simp_tac(@list.List([@equal.gsym(top_of_metric_unions()), metric_real()]))
@@ -10173,8 +10173,8 @@ fn step_254() -> Unit raise {
   let t6713 = @simp.rewrite_tac(@list.List([subset_preimage()]))
   let t6714 = @simp.asm_rewrite_tac(@list.List([]))
   let t6715 = @tactics_ext2.use_(4L, @simp.simp_rule(@list.List([top_of_metric_top(), metric_real()])))
-  let t6512 = @term_syntax.parse_term("preimage(UNIONS(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))), op_euclid_prime_joinf((f : (Real) -> _), (g : (Real) -> _), (a : Real)), (v : (_) -> Bool))")
-  let t6517 = @list.List([@term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))"), t6512])
+  let t6512 = @term_syntax.parse_term("preimage(UNIONS(euclid_top_of_metric((UNIV, euclid_d_real))), euclid_joinf((f : (Real) -> _), (g : (Real) -> _), (a : Real)), (v : (_) -> Bool))")
+  let t6517 = @list.List([@term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))"), t6512])
   let t6716 = @tactics.assume_tac(open_nbd())
   let t6717 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t6718 = @list.List([@simp.rewrite_tac(@list.List([continuous()])), @tactics_ext.disch_all_tac, @tactics_ext.disch_all_tac, t6717, t6716, (x6518 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t6517, fn(x6516 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -10265,7 +10265,7 @@ fn step_254() -> Unit raise {
       }
     })(x6616))
   }, x6618), t6627, t6626, t6625, t6624, t6623, t6622, t6621, t6620, t6619])
-  joinf_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ a : Real, ∀ f : (Real) -> A, ∀ g : (Real) -> A, op_euclid_prime_continuous(f, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), U) && op_euclid_prime_continuous(g, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), U) && f(a) == g(a) → op_euclid_prime_continuous(op_euclid_prime_joinf(f, g, a), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), U)"), t6718))
+  joinf_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ a : Real, ∀ f : (Real) -> A, ∀ g : (Real) -> A, euclid_continuous(f, euclid_top_of_metric((UNIV, euclid_d_real)), U) && euclid_continuous(g, euclid_top_of_metric((UNIV, euclid_d_real)), U) && f(a) == g(a) → euclid_continuous(euclid_joinf(f, g, a), euclid_top_of_metric((UNIV, euclid_d_real)), U)"), t6718))
 }
 
 ///|
@@ -10286,7 +10286,7 @@ fn step_255() -> Unit raise {
   let t6728 = @simp.asm_simp_tac(@list.List([metric_continuous_continuous(), metric_real()]))
   let t6729 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @sets.union(), @sets.univ()]))
   let t6719 = @term_syntax.parse_term("(SUBSET : ((Real) -> Bool, (Real) -> Bool) -> Bool)((IMAGE : ((Real) -> Real, (Real) -> Bool, Real) -> Bool)(op_minus_minus, (UNIV : (Real) -> Bool)), (UNIV : (Real) -> Bool))")
-  neg_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("op_euclid_prime_continuous(op_minus_minus, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)))"), @list.List([(x6720 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6719, @tactics_ext.subgoal_tac, x6720), t6729, @tactics.disch_tac, t6728, t6727, @tactics_ext.disch_all_tac, (x6725 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6724, fn(x6721 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  neg_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("euclid_continuous(op_minus_minus, euclid_top_of_metric((UNIV, euclid_d_real)), euclid_top_of_metric((UNIV, euclid_d_real)))"), @list.List([(x6720 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6719, @tactics_ext.subgoal_tac, x6720), t6729, @tactics.disch_tac, t6728, t6727, @tactics_ext.disch_all_tac, (x6725 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6724, fn(x6721 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6722 = @tactics.exists_tac(x6721)
     fn(x6723 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6722(x6723)
@@ -10312,7 +10312,7 @@ fn step_256() -> Unit raise {
   let t6739 = @simp.asm_simp_tac(@list.List([metric_continuous_continuous(), metric_real()]))
   let t6740 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), @sets.union(), @sets.univ()]))
   let t6730 = @term_syntax.parse_term("SUBSET(IMAGE(op_plus((u : Real)), UNIV), UNIV)")
-  add_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ u : Real, op_euclid_prime_continuous(op_plus(u), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)))"), @list.List([@tactics.gen_tac, (x6731 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6730, @tactics_ext.subgoal_tac, x6731), t6740, @tactics.disch_tac, t6739, t6738, @tactics_ext.disch_all_tac, (x6736 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6735, fn(x6732 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  add_cont_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ u : Real, euclid_continuous(op_plus(u), euclid_top_of_metric((UNIV, euclid_d_real)), euclid_top_of_metric((UNIV, euclid_d_real)))"), @list.List([@tactics.gen_tac, (x6731 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6730, @tactics_ext.subgoal_tac, x6731), t6740, @tactics.disch_tac, t6739, t6738, @tactics_ext.disch_all_tac, (x6736 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6735, fn(x6732 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6733 = @tactics.exists_tac(x6732)
     fn(x6734 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s6733(x6734)
@@ -10335,23 +10335,23 @@ fn step_257() -> Unit raise {
   let t6761 = @meson.asm_meson_tac(@list.List([@calc_rat.real_arith(@term_syntax.parse_term("!((x : Real) <= real_of_num(1)) → real_of_num(0) < x")), @real.real_lt_rdiv_eq()]))
   let t6762 = @simp.asm_rewrite_tac(@list.List([]))
   let t6763 = @tactics_ext2.imatch_mp_tac(@real.real_lt_div())
-  let t6758 = @term_syntax.parse_term("(epsilon : Real) / op_euclid_prime_norm((x : (Num) -> Real))")
+  let t6758 = @term_syntax.parse_term("(epsilon : Real) / euclid_norm((x : (Num) -> Real))")
   let t6764 = @tactics_ext2.use_(5L, (x6752 : @kernel.Thm) => @equal.conv_rule(@tactics_ext2.reduce_conv, x6752))
   let t6765 = @tactics_ext2.use_(5L, @drule.match_mp(@bool.spec(@term_syntax.parse_term("(x' : Real) - (y : Real)"), @float.real_prop_le_labs())))
   let t6766 = @tactics.mp_tac(@bool.spec(@term_syntax.parse_term("(x' : Real) - (y : Real)"), @real.real_abs_pos()))
   let t6767 = @simp.asm_rewrite_tac(@list.List([]))
   let t6750 = @term_syntax.parse_term("(epsilon : _)")
-  let t6745 = @term_syntax.parse_term("op_euclid_prime_norm((x : (Num) -> Real)) <= real_of_num(1)")
+  let t6745 = @term_syntax.parse_term("euclid_norm((x : (Num) -> Real)) <= real_of_num(1)")
   let t6768 = @simp.asm_simp_tac(@list.List([norm_scale(), d_real()]))
   let t6769 = @meson.asm_meson_tac(@list.List([@misc_defs_and_lemmas.euclidean()]))
-  let t6743 = @term_syntax.parse_term("op_euclid_prime_euclidean((x : (Num) -> Real))")
+  let t6743 = @term_syntax.parse_term("euclid_euclidean((x : (Num) -> Real))")
   let t6770 = @simp.rewrite_tac(@list.List([@sets.in_(), @sets.univ()]))
   let t6771 = @simp.rewrite_tac(@list.List([metric_continuous(), metric_continuous_pt()]))
   let t6772 = @simp.asm_simp_tac(@list.List([metric_continuous_continuous()]))
   let t6773 = @meson.asm_meson_tac(@list.List([euclid_scale_closure()]))
   let t6774 = @simp.rewrite_tac(@list.List([q_elim_thm_p_p(), @sets.in_(), @sets.univ()]))
   let t6775 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t6741 = @term_syntax.parse_term("SUBSET(IMAGE((t : Real) => op_euclid_prime_euclid_us_scale(t, (x : (Num) -> Real)), UNIV), op_euclid_prime_euclid((n : Num)))")
+  let t6741 = @term_syntax.parse_term("SUBSET(IMAGE((t : Real) => euclid_euclid_scale(t, (x : (Num) -> Real)), UNIV), euclid_euclid((n : Num)))")
   let t6776 = @tactics.assume_tac(metric_real())
   let t6777 = @list.List([@tactics_ext.disch_all_tac, @tactics.assume_tac(metric_euclid()), t6776, (x6742 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6741, @tactics_ext.subgoal_tac, x6742), t6775, t6774, t6773, t6772, @tactics.disch_tac, t6771, @tactics_ext.disch_all_tac, t6770, (x6744 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6743, @tactics_ext.subgoal_tac, x6744), t6769, t6768, @tactics.disch_tac, (x6746 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6745, @class.asm_cases_tac, x6746), (x6751 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6750, fn(x6747 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6748 = @tactics.exists_tac(x6747)
@@ -10364,7 +10364,7 @@ fn step_257() -> Unit raise {
       s6756(x6757)
     }
   }, x6759), @tactics_ext.disch_all_tac, @tactics.conj_tac, t6763, t6762, (x6760 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x6760), @calc_rat.real_arith_tac, @tactics_ext.disch_all_tac, t6761])
-  continuous_scale_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, x) → op_euclid_prime_continuous((t : Real) => op_euclid_prime_euclid_us_scale(t, x), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)))"), t6777))
+  continuous_scale_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ n : Num, euclid_euclid(n, x) → euclid_continuous((t : Real) => euclid_euclid_scale(t, x), euclid_top_of_metric((UNIV, euclid_d_real)), euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)))"), t6777))
 }
 
 ///|
@@ -10382,7 +10382,7 @@ fn step_258() -> Unit raise {
   let t6785 = @simp.simp_tac(@list.List([@equal.gsym(top_of_metric_unions()), metric_real(), @sets.in_univ()]))
   let t6784 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), q_elim_thm_p_p()]))
   let t6783 = @simp.asm_simp_tac(@list.List([add_cont(), neg_cont(), continuous_scale()]))
-  let t6781 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))")
+  let t6781 = @term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))")
   let comp_elim_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics_ext2.imatch_mp_tac(continuous_comp()), (x6782 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6781, fn(x6778 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s6779 = @tactics.exists_tac(x6778)
     fn(x6780 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -10396,11 +10396,11 @@ fn step_258() -> Unit raise {
   })
   let t6792 = @simp.rewrite_tac(@list.List([@trivia.o_def(), @calc_rat.real_arith(@term_syntax.parse_term("-(-(u : Real) + (v : Real)) == u - v"))]))
   let t6793 = @tactics_ext2.imatch_mp_tac(@class.eq_ext())
-  let t6786 = @term_syntax.parse_term("((t : Real) => op_euclid_prime_euclid_us_scale(real_of_num(1) - t, (y : (Num) -> Real))) == o((t : Real) => op_euclid_prime_euclid_us_scale(t, y), o(op_minus_minus, op_plus(-real_of_num(1))))")
+  let t6786 = @term_syntax.parse_term("((t : Real) => euclid_euclid_scale(real_of_num(1) - t, (y : (Num) -> Real))) == o((t : Real) => euclid_euclid_scale(t, y), o(op_minus_minus, op_plus(-real_of_num(1))))")
   let t6794 = @simp.asm_simp_tac(@list.List([@sets.in_(), euclid_scale_closure(), continuous_scale()]))
   let t6795 = @simp.asm_simp_tac(@list.List([metric_real(), metric_euclid(), top_of_metric_top(), continuous_scale(), @sets.subset(), @sets.in_image(), q_elim_thm_p_p()]))
   let t6796 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.imatch_mp_tac(continuous_sum()), t6795, t6794, (x6787 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6786, @tactics_ext.subgoal_tac, x6787), t6793, t6792, t6791, t6790])
-  continuous_lin_combo_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ n : Num, op_euclid_prime_euclid(n, x) && op_euclid_prime_euclid(n, y) → op_euclid_prime_continuous((t : Real) => op_euclid_prime_euclid_us_scale(t, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, y), op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)))"), t6796))
+  continuous_lin_combo_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ y : (Num) -> Real, ∀ n : Num, euclid_euclid(n, x) && euclid_euclid(n, y) → euclid_continuous((t : Real) => euclid_euclid_scale(t, x) + euclid_euclid_scale(real_of_num(1) - t, y), euclid_top_of_metric((UNIV, euclid_d_real)), euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)))"), t6796))
 }
 
 ///|
@@ -10469,7 +10469,7 @@ fn step_260() -> Unit raise {
       }
     })(x6808))
   }, x6810), t6831, t6830, t6829, t6828, t6827, @tactics_ext.disch_all_tac, t6826, t6825, t6824, t6823, t6822, (x6812 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6811, @tactics_ext.subgoal_tac, x6812), @tactics_ext.disch_all_tac, t6821, t6820, t6819, (x6814 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6813, @tactics_ext.subgoal_tac, x6814), @tactics_ext.disch_all_tac, t6818, t6817, t6816, t6815])
-  connected_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z1 : (A) -> Bool, ∀ Z2 : (A) -> Bool, op_euclid_prime_connected(U, Z1) && op_euclid_prime_connected(U, Z2) && !(INTER(Z1, Z2) == {}) → op_euclid_prime_connected(U, UNION(Z1, Z2))"), t6835))
+  connected_unions_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ Z1 : (A) -> Bool, ∀ Z2 : (A) -> Bool, euclid_connected(U, Z1) && euclid_connected(U, Z2) && !(INTER(Z1, Z2) == {}) → euclid_connected(U, UNION(Z1, Z2))"), t6835))
 }
 
 ///|
@@ -10484,7 +10484,7 @@ pub fn connected_unions() -> @kernel.Thm {
 ///|
 /// component_DEF
 fn step_261() -> Unit raise {
-  component_def_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(component : (((A) -> Bool) -> Bool, A, A) -> Bool)((U : ((A) -> Bool) -> Bool), (x : A), (y : A)) == (∃ Z : (A) -> Bool, op_euclid_prime_connected(U, Z) && Z(x) && Z(y))")))
+  component_def_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(component : (((A) -> Bool) -> Bool, A, A) -> Bool)((U : ((A) -> Bool) -> Bool), (x : A), (y : A)) == (∃ Z : (A) -> Bool, euclid_connected(U, Z) && Z(x) && Z(y))")))
 }
 
 ///|
@@ -10503,7 +10503,7 @@ fn step_262() -> Unit raise {
   let t6838 = @meson.asm_meson_tac(@list.List([@sets.in_()]))
   let t6839 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_sing()]))
   let t6840 = @list.List([@simp.rewrite_tac(@list.List([connected()])), @tactics_ext.disch_all_tac, @tactics.conj_tac, t6839, t6838, @tactics_ext.disch_all_tac, (x6836 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(4L, x6836), t6837])
-  connected_sing_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, UNIONS(U, x) → op_euclid_prime_connected(U, {x})"), t6840))
+  connected_sing_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, UNIONS(U, x) → euclid_connected(U, {x})"), t6840))
 }
 
 ///|
@@ -10520,7 +10520,7 @@ pub fn connected_sing() -> @kernel.Thm {
 fn step_263() -> Unit raise {
   let t6841 = @meson.asm_meson_tac(@list.List([@sets.in_sing(), @sets.in_(), connected_sing()]))
   let t6842 = @list.List([@simp.rewrite_tac(@list.List([component_def()])), t6841])
-  component_refl_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, UNIONS(U, x) → op_euclid_prime_component(U, x, x)"), t6842))
+  component_refl_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, UNIONS(U, x) → euclid_component(U, x, x)"), t6842))
 }
 
 ///|
@@ -10536,7 +10536,7 @@ pub fn component_refl() -> @kernel.Thm {
 /// component_symm
 fn step_264() -> Unit raise {
   let t6843 = @list.List([@meson.meson_tac(@list.List([component_def()]))])
-  component_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, op_euclid_prime_component(U, x, y) → op_euclid_prime_component(U, y, x)"), t6843))
+  component_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, euclid_component(U, x, y) → euclid_component(U, y, x)"), t6843))
 }
 
 ///|
@@ -10561,7 +10561,7 @@ fn step_265() -> Unit raise {
   let t6861 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.empty_exists()]))
   let t6862 = @simp.asm_rewrite_tac(@list.List([]))
   let t6863 = @tactics_ext2.imatch_mp_tac(connected_unions())
-  let t6844 = @term_syntax.parse_term("op_euclid_prime_connected((U : ((_) -> Bool) -> Bool), UNION((Z : (_) -> Bool), (Z' : (_) -> Bool)))")
+  let t6844 = @term_syntax.parse_term("euclid_connected((U : ((_) -> Bool) -> Bool), UNION((Z : (_) -> Bool), (Z' : (_) -> Bool)))")
   let t6864 = @tactics_ext2.cho(1L)
   let t6865 = @tactics_ext2.cho(0L)
   let t6866 = @list.List([@simp.rewrite_tac(@list.List([component_def()])), @tactics_ext.disch_all_tac, t6865, t6864, (x6845 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6844, @tactics_ext.subgoal_tac, x6845), t6863, t6862, t6861, t6860, (x6850 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6849, fn(x6846 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -10575,7 +10575,7 @@ fn step_265() -> Unit raise {
       s6852(x6853)
     }
   }, x6855), t6858, t6857, t6856])
-  component_trans_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, ∀ z : A, op_euclid_prime_component(U, x, y) && op_euclid_prime_component(U, y, z) → op_euclid_prime_component(U, x, z)"), t6866))
+  component_trans_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, ∀ z : A, euclid_component(U, x, y) && euclid_component(U, y, z) → euclid_component(U, x, z)"), t6866))
 }
 
 ///|
@@ -10619,7 +10619,7 @@ fn step_266() -> Unit raise {
   let t6959 = @term_syntax.parse_term("(A : _)")
   let t6953 = @term_syntax.parse_term("(A : (_) -> _)((x : _))")
   let t7020 = @tactics_ext2.use_(8L, @simp.rewrite_rule(@list.List([@simp.rewrite_rule(@list.List([@sets.in_()]))(@sets.in_union())])))
-  let t6948 = @term_syntax.parse_term("op_euclid_prime_d_us_real")
+  let t6948 = @term_syntax.parse_term("euclid_d_real")
   let t6951 = @list.List([@term_syntax.parse_term("(UNIV : (Real) -> Bool)"), t6948])
   let t7021 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t7022 = @tactics.disch_then(@tactics_ext2.imatch_mp_tac)
@@ -10748,7 +10748,7 @@ fn step_266() -> Unit raise {
       s6991(x6992)
     }
   }, x6994), t7006, @tactics_ext.disch_all_tac, t7005, t7004, (x6995 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(9L, x6995), (x6997 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t6996, @tactics_ext.subgoal_tac, x6997), t7003, @tactics.gen_tac, (x6998 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(11L, x6998), (x6999 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x6999), (x7000 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(13L, x7000), @calc_rat.real_arith_tac, t7002, t7001])
-  connect_real_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, op_euclid_prime_connected(op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), {(x : Real) | a <= x && x <= b})"), t7054))
+  connect_real_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ a : Real, ∀ b : Real, euclid_connected(euclid_top_of_metric((UNIV, euclid_d_real)), {(x : Real) | a <= x && x <= b})"), t7054))
 }
 
 ///|
@@ -10800,7 +10800,7 @@ fn step_267() -> Unit raise {
       }
     })(x7076))
   }, x7078), t7085, (x7080 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7079, @tactics_ext.subgoal_tac, x7080), t7084, t7083, t7082, t7081])
-  connect_image_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ Z : (A) -> Bool, op_euclid_prime_continuous(f, U, V) && SUBSET(IMAGE(f, Z), UNIONS(V)) && op_euclid_prime_connected(U, Z) → op_euclid_prime_connected(V, IMAGE(f, Z))"), t7088))
+  connect_image_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ f : (A) -> B, ∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ Z : (A) -> Bool, euclid_continuous(f, U, V) && SUBSET(IMAGE(f, Z), UNIONS(V)) && euclid_connected(U, Z) → euclid_connected(V, IMAGE(f, Z))"), t7088))
 }
 
 ///|
@@ -10815,7 +10815,7 @@ pub fn connect_image() -> @kernel.Thm {
 ///|
 /// path
 fn step_268() -> Unit raise {
-  path_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(path : (((A) -> Bool) -> Bool, A, A) -> Bool)((U : ((A) -> Bool) -> Bool), (x : A), (y : A)) == (∃ f : (Real) -> A, ∃ a : Real, ∃ b : Real, op_euclid_prime_continuous(f, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), U) && f(a) == x && f(b) == y)")))
+  path_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(path : (((A) -> Bool) -> Bool, A, A) -> Bool)((U : ((A) -> Bool) -> Bool), (x : A), (y : A)) == (∃ f : (Real) -> A, ∃ a : Real, ∃ b : Real, euclid_continuous(f, euclid_top_of_metric((UNIV, euclid_d_real)), U) && f(a) == x && f(b) == y)")))
 }
 
 ///|
@@ -10850,7 +10850,7 @@ fn step_269() -> Unit raise {
   let t7107 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.preimage(), @sets.in_()]))
   let t7108 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t7109 = @list.List([@simp.rewrite_tac(@list.List([continuous()])), @tactics_ext.disch_all_tac, t7108, @tactics_ext.disch_all_tac, t7107, (x7090 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7089, @class.asm_cases_tac, x7090), t7106, t7105, (x7092 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7091, @simp.abbrev_tac, x7092), (x7093 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x7093), t7104, @tactics.ap_term_tac, t7103, t7102, t7101, t7100, t7099, t7098, t7097])
-  const_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ y : B, op_euclid_prime_topology_us(U) → op_euclid_prime_continuous((x : A) => y, U, V)"), t7109))
+  const_continuous_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ V : ((B) -> Bool) -> Bool, ∀ y : B, euclid_topology_(U) → euclid_continuous((x : A) => y, U, V)"), t7109))
 }
 
 ///|
@@ -10865,7 +10865,7 @@ pub fn const_continuous() -> @kernel.Thm {
 ///|
 /// path_component
 fn step_270() -> Unit raise {
-  path_component_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(path_component : (((A) -> Bool) -> Bool, A, A) -> Bool)((U : ((A) -> Bool) -> Bool), (x : A), (y : A)) == (∃ f : (Real) -> A, ∃ a : Real, ∃ b : Real, op_euclid_prime_continuous(f, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), U) && a < b && f(a) == x && f(b) == y && SUBSET(IMAGE(f, {(t : Real) | a <= t && t <= b}), UNIONS(U)))")))
+  path_component_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(path_component : (((A) -> Bool) -> Bool, A, A) -> Bool)((U : ((A) -> Bool) -> Bool), (x : A), (y : A)) == (∃ f : (Real) -> A, ∃ a : Real, ∃ b : Real, euclid_continuous(f, euclid_top_of_metric((UNIV, euclid_d_real)), U) && a < b && f(a) == x && f(b) == y && SUBSET(IMAGE(f, {(t : Real) | a <= t && t <= b}), UNIONS(U)))")))
 }
 
 ///|
@@ -10889,7 +10889,7 @@ fn step_271() -> Unit raise {
   let t7135 = @simp.rewrite_tac(@list.List([path_component()]))
   let t7136 = @tactics_ext2.use_(1L, @drule.match_mp(const_continuous()))
   let t7137 = @tactics_ext2.use_(1L, @simp.rewrite_rule(@list.List([metric_real()])))
-  let t7110 = @term_syntax.parse_term("op_euclid_prime_d_us_real")
+  let t7110 = @term_syntax.parse_term("euclid_d_real")
   let t7115 = @list.List([@term_syntax.parse_term("(UNIV : (Real) -> Bool)"), t7110])
   let t7138 = @list.List([@tactics_ext.disch_all_tac, @tactics.assume_tac(top_of_metric_top()), (x7116 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.typel_then(t7115, fn(x7114 : @list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     ((x7111 : (@kernel.Thm) -> @kernel.Thm raise) => @tactics_ext2.use_(1L, x7111))((fn(x7112 : @list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -10913,7 +10913,7 @@ fn step_271() -> Unit raise {
       s7128(x7129)
     }
   }, x7131), @tactics.conj_tac, @calc_rat.real_arith_tac, t7133, t7132])
-  path_refl_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, UNIONS(U, x) → op_euclid_prime_path_us_component(U, x, x)"), t7138))
+  path_refl_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, UNIONS(U, x) → euclid_path_component(U, x, x)"), t7138))
 }
 
 ///|
@@ -10943,7 +10943,7 @@ fn step_272() -> Unit raise {
   let t7185 = @simp.asm_rewrite_tac(@list.List([]))
   let t7186 = @simp.simp_tac(@list.List([top_of_metric_top(), metric_real(), metric_euclidean(), metric_euclid(), metric_hausdorff(), @equal.gsym(top_of_metric_unions()), open_ball_open()]))
   let t7187 = @simp.rewrite_tac(@list.List([neg_cont()]))
-  let t7157 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))")
+  let t7157 = @term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))")
   let t7188 = @tactics_ext2.imatch_mp_tac(continuous_comp())
   let t7152 = @term_syntax.parse_term("-(a : Real)")
   let t7147 = @term_syntax.parse_term("-(b : Real)")
@@ -10983,7 +10983,7 @@ fn step_272() -> Unit raise {
       s7170(x7171)
     }
   }, x7173), t7175, (x7174 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x7174), @calc_rat.real_arith_tac])
-  path_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, op_euclid_prime_path_us_component(U, x, y) → op_euclid_prime_path_us_component(U, y, x)"), t7192))
+  path_symm_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, euclid_path_component(U, x, y) → euclid_path_component(U, y, x)"), t7192))
 }
 
 ///|
@@ -10999,7 +10999,7 @@ pub fn path_symm() -> @kernel.Thm {
 /// path_symm_eq
 fn step_273() -> Unit raise {
   let t7193 = @list.List([@meson.meson_tac(@list.List([path_symm()]))])
-  path_symm_eq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, op_euclid_prime_path_us_component(U, x, y) == op_euclid_prime_path_us_component(U, y, x)"), t7193))
+  path_symm_eq_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, euclid_path_component(U, x, y) == euclid_path_component(U, y, x)"), t7193))
 }
 
 ///|
@@ -11040,7 +11040,7 @@ fn step_274() -> Unit raise {
   let t7290 = @simp.rewrite_tac(@list.List([@misc_defs_and_lemmas.in_elim_thm_p()]))
   let t7291 = @tactics_ext2.imatch_mp_tac(@class.eq_ext())
   let t7292 = @simp.rewrite_tac(@list.List([joinf(), @sets.image(), @sets.in_image()]))
-  let t7250 = @term_syntax.parse_term("IMAGE(op_euclid_prime_joinf((f : (Real) -> _), o((f' : (Real) -> _), op_plus((a' : Real) - (b : Real))), b), {(t : Real) | b <= t && t <= (b' : Real) + (b - a')}) == IMAGE(f', {(t : Real) | a' <= t && t <= b'})")
+  let t7250 = @term_syntax.parse_term("IMAGE(euclid_joinf((f : (Real) -> _), o((f' : (Real) -> _), op_plus((a' : Real) - (b : Real))), b), {(t : Real) | b <= t && t <= (b' : Real) + (b - a')}) == IMAGE(f', {(t : Real) | a' <= t && t <= b'})")
   let t7293 = @simp.asm_rewrite_tac(@list.List([]))
   let t7294 = @tactics_ext2.use_(0L, @drule.match_mp(@sets.subset_trans()))
   let t7295 = @tactics_ext2.join(0L, 5L)
@@ -11068,7 +11068,7 @@ fn step_274() -> Unit raise {
   let t7307 = @tactics.x_gen_tac(@term_syntax.parse_term("(t : A)"))
   let t7308 = @tactics_ext2.imatch_mp_tac(@class.eq_ext())
   let t7309 = @simp.rewrite_tac(@list.List([joinf(), @sets.image(), @sets.in_image()]))
-  let t7233 = @term_syntax.parse_term("IMAGE(op_euclid_prime_joinf((f : (Real) -> _), o((f' : (Real) -> _), op_plus((a' : Real) - (b : Real))), b), {(t : Real) | (a : Real) <= t && t < b}) == IMAGE(f, {(t : Real) | a <= t && t < b})")
+  let t7233 = @term_syntax.parse_term("IMAGE(euclid_joinf((f : (Real) -> _), o((f' : (Real) -> _), op_plus((a' : Real) - (b : Real))), b), {(t : Real) | (a : Real) <= t && t < b}) == IMAGE(f, {(t : Real) | a <= t && t < b})")
   let t7310 = @simp.rewrite_tac(@list.List([@sets.image_union(), union_subset()]))
   let t7311 = @tactics.disch_then(fn(x7231 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_2 = x7231
@@ -11104,13 +11104,13 @@ fn step_274() -> Unit raise {
   let t7328 = @simp.asm_simp_tac(@list.List([top_of_metric_top(), metric_real(), metric_euclidean(), metric_euclid(), metric_hausdorff(), @equal.gsym(top_of_metric_unions()), open_ball_open()]))
   let t7329 = @simp.rewrite_tac(@list.List([add_cont()]))
   let t7330 = @simp.asm_rewrite_tac(@list.List([top_of_metric_top(), metric_real(), metric_euclidean(), metric_euclid(), metric_hausdorff(), @equal.gsym(top_of_metric_unions()), open_ball_open()]))
-  let t7212 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))")
+  let t7212 = @term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))")
   let t7331 = @tactics_ext2.imatch_mp_tac(continuous_comp())
   let t7332 = @simp.asm_rewrite_tac(@list.List([]))
   let t7333 = @tactics_ext2.imatch_mp_tac(joinf_cont())
   let t7207 = @term_syntax.parse_term("(b' : Real) + ((b : Real) - (a' : Real))")
   let t7202 = @term_syntax.parse_term("(a : _)")
-  let t7197 = @term_syntax.parse_term("op_euclid_prime_joinf((f : (Real) -> _), o((f' : (Real) -> _), op_plus((a' : Real) - (b : Real))), b)")
+  let t7197 = @term_syntax.parse_term("euclid_joinf((f : (Real) -> _), o((f' : (Real) -> _), op_plus((a' : Real) - (b : Real))), b)")
   let t7334 = @tactics_ext2.cho(1L)
   let t7335 = @tactics_ext2.cho(1L)
   let t7336 = @tactics_ext2.cho(1L)
@@ -11153,7 +11153,7 @@ fn step_274() -> Unit raise {
       s7265(x7266)
     }
   }, x7268), t7282, @tactics_ext2.subconj_tac, (x7269 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x7269), (x7270 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x7270), @calc_rat.real_arith_tac, @tactics_ext.disch_all_tac, (x7272 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7271, @tactics_ext.subgoal_tac, x7272), (x7273 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x7273), @calc_rat.real_arith_tac, t7281, t7280, @tactics.ap_term_tac, @calc_rat.real_arith_tac, t7279, t7278])
-  path_trans_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, ∀ z : A, op_euclid_prime_path_us_component(U, x, y) && op_euclid_prime_path_us_component(U, y, z) → op_euclid_prime_path_us_component(U, x, z)"), t7340))
+  path_trans_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, ∀ z : A, euclid_path_component(U, x, y) && euclid_path_component(U, y, z) → euclid_path_component(U, x, z)"), t7340))
 }
 
 ///|
@@ -11168,7 +11168,7 @@ pub fn path_trans() -> @kernel.Thm {
 ///|
 /// loc_path_conn
 fn step_275() -> Unit raise {
-  loc_path_conn_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(loc_path_conn : (((A) -> Bool) -> Bool) -> Bool)((U : ((A) -> Bool) -> Bool)) == (∀ A : (A) -> Bool, ∀ x : A, U(A) && A(x) → U(op_euclid_prime_path_us_component(op_euclid_prime_induced_us_top(U, A), x)))")))
+  loc_path_conn_c.set(@misc_defs_and_lemmas.euclid_def(@term_syntax.parse_term("(loc_path_conn : (((A) -> Bool) -> Bool) -> Bool)((U : ((A) -> Bool) -> Bool)) == (∀ A : (A) -> Bool, ∀ x : A, U(A) && A(x) → U(euclid_path_component(euclid_induced_top(U, A), x)))")))
 }
 
 ///|
@@ -11202,7 +11202,7 @@ fn step_276() -> Unit raise {
   let t7463 = @tactics_ext2.use_(2L, @simp.rewrite_rule(@list.List([@sets.subset(), @sets.in_()])))
   let t7464 = @tactics_ext2.imatch_mp_tac(path_refl())
   let t7465 = @simp.asm_rewrite_tac(@list.List([@sets.diff(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
-  let t7437 = @term_syntax.parse_term("op_euclid_prime_path_us_component((U : ((_) -> Bool) -> Bool), (x' : _))")
+  let t7437 = @term_syntax.parse_term("euclid_path_component((U : ((_) -> Bool) -> Bool), (x' : _))")
   let t7432 = @term_syntax.parse_term("(x' : _)")
   let t7466 = @tactics_ext2.left_tac("x")
   let t7467 = @tactics_ext2.left_tac("x")
@@ -11247,7 +11247,7 @@ fn step_276() -> Unit raise {
   let t7503 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image()]))
   let t7504 = @tactics.then_tac((x7408 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(12L, x7408), @tactics.disch_then(@tactics_ext2.imatch_mp_tac))
   let t7505 = @tactics.then_tac((x7407 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(10L, x7407), @tactics_ext.disch_all_tac)
-  let t7399 = @term_syntax.parse_term("IMAGE((z : _) => op_euclid_prime_path_us_component((U : ((_) -> Bool) -> Bool), z), DIFF((Z : (_) -> Bool), (A : (_) -> Bool)))")
+  let t7399 = @term_syntax.parse_term("IMAGE((z : _) => euclid_path_component((U : ((_) -> Bool) -> Bool), z), DIFF((Z : (_) -> Bool), (A : (_) -> Bool)))")
   let t7400 = @term_syntax.parse_term("({} : (A) -> Bool)")
   let t7405 = @list.List([@term_syntax.parse_term("({} : (A) -> Bool)"), t7400, t7399])
   let t7506 = @tactics_ext2.with_(1L, @simp.rewrite_rule(@list.List([topology()])))
@@ -11264,9 +11264,9 @@ fn step_276() -> Unit raise {
   let t7514 = @tactics_ext2.with_(0L, @simp.rewrite_rule(@list.List([loc_path_conn()])))
   let t7382 = @term_syntax.parse_term("(U : ((_) -> Bool) -> Bool)((A : (_) -> Bool)) && U((B : (_) -> Bool)) && INTER(A, B) == {} && SUBSET((Z : (_) -> Bool), UNION(A, B))")
   let t7380 = @term_syntax.parse_term("(B : _)")
-  let t7374 = @term_syntax.parse_term("(B : (_) -> Bool) == UNIONS(IMAGE((z : _) => op_euclid_prime_path_us_component((U : ((_) -> Bool) -> Bool), z), DIFF((Z : (_) -> Bool), (A : (_) -> Bool))))")
-  let t7372 = @term_syntax.parse_term("(A : (_) -> Bool) == op_euclid_prime_path_us_component((U : ((_) -> Bool) -> Bool), (x : _))")
-  let t7370 = @term_syntax.parse_term("op_euclid_prime_path_us_component((U : ((_) -> Bool) -> Bool), (x : _))")
+  let t7374 = @term_syntax.parse_term("(B : (_) -> Bool) == UNIONS(IMAGE((z : _) => euclid_path_component((U : ((_) -> Bool) -> Bool), z), DIFF((Z : (_) -> Bool), (A : (_) -> Bool))))")
+  let t7372 = @term_syntax.parse_term("(A : (_) -> Bool) == euclid_path_component((U : ((_) -> Bool) -> Bool), (x : _))")
+  let t7370 = @term_syntax.parse_term("euclid_path_component((U : ((_) -> Bool) -> Bool), (x : _))")
   let t7515 = @tactics.then_tac((x7365 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x7365), @tactics_ext.disch_all_tac)
   let t7516 = @tactics_ext2.use_(2L, @simp.rewrite_rule(@list.List([connected()])))
   let t7517 = @tactics.then_tac((x7364 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(2L, x7364), @tactics_ext.disch_all_tac)
@@ -11278,7 +11278,7 @@ fn step_276() -> Unit raise {
   let t7355 = @term_syntax.parse_term("(a : _)")
   let t7522 = @simp.rewrite_tac(@list.List([@sets.image(), @sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t7523 = @simp.asm_rewrite_tac(@list.List([connect_real()]))
-  let t7350 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real))")
+  let t7350 = @term_syntax.parse_term("euclid_top_of_metric((UNIV, euclid_d_real))")
   let t7524 = @tactics_ext2.imatch_mp_tac(connect_image())
   let t7345 = @term_syntax.parse_term("IMAGE((f : (Real) -> _), {(t : Real) | (a : Real) <= t && t <= (b : Real)})")
   let t7525 = @simp.rewrite_tac(@list.List([component_def()]))
@@ -11367,7 +11367,7 @@ fn step_276() -> Unit raise {
       }
     })(x7444))
   }, x7446), t7455, t7454, (x7448 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7447, @tactics_ext.subgoal_tac, x7448), t7453, t7452, t7451, t7450, t7449])
-  path_eq_conn_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, op_euclid_prime_loc_us_path_us_conn(U) && op_euclid_prime_topology_us(U) → op_euclid_prime_path_us_component(U, x) == op_euclid_prime_component(U, x)"), t7532))
+  path_eq_conn_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, euclid_loc_path_conn(U) && euclid_topology_(U) → euclid_path_component(U, x) == euclid_component(U, x)"), t7532))
 }
 
 ///|
@@ -11386,9 +11386,9 @@ fn step_277() -> Unit raise {
   let t7550 = @calc_rat.real_arith(@term_syntax.parse_term("(b : Real) <= (a : Real) → a < (C : Real) → b < C"))
   let t7551 = @meson.asm_meson_tac(@list.List([norm_scale_vec(), @calc_rat.real_arith(@term_syntax.parse_term("real_of_num(0) <= (t : Real) && t <= real_of_num(1) → abs(real_of_num(1) - t) <= real_of_num(1)")), t7550, t7549, @real.real_le_rmul(), d_euclid_pos()]))
   let t7552 = @simp.asm_simp_tac(@list.List([euclid_scale_closure()]))
-  let t7540 = @term_syntax.parse_term("op_euclid_prime_euclid_us_scale((t : Real), (x : (Num) -> Real))")
-  let t7541 = @term_syntax.parse_term("op_euclid_prime_euclid_us_scale(real_of_num(1) - (t : Real), (y : (Num) -> Real))")
-  let t7546 = @list.List([@term_syntax.parse_term("op_euclid_prime_euclid_us_scale(real_of_num(1) - (t : Real), (x : (Num) -> Real))"), t7541, t7540])
+  let t7540 = @term_syntax.parse_term("euclid_euclid_scale((t : Real), (x : (Num) -> Real))")
+  let t7541 = @term_syntax.parse_term("euclid_euclid_scale(real_of_num(1) - (t : Real), (y : (Num) -> Real))")
+  let t7546 = @list.List([@term_syntax.parse_term("euclid_euclid_scale(real_of_num(1) - (t : Real), (x : (Num) -> Real))"), t7541, t7540])
   let t7553 = @tactics.assume_tac(@bool.spec(@term_syntax.parse_term("(n : Num)"), metric_translate_left()))
   let t7554 = @simp.gen_rewrite_tac(fn(x7539 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x7533 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -11411,7 +11411,7 @@ fn step_277() -> Unit raise {
       }
     })(x7545))
   }, x7547), (x7548 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(5L, x7548), t7552, t7551])
-  open_ball_star_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ r : Real, ∀ y : (Num) -> Real, ∀ t : Real, ∀ n : Num, op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r, y) && real_of_num(0) <= t && t <= real_of_num(1) → op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r, op_euclid_prime_euclid_us_scale(t, x) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, y))"), t7556))
+  open_ball_star_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ r : Real, ∀ y : (Num) -> Real, ∀ t : Real, ∀ n : Num, euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r, y) && real_of_num(0) <= t && t <= real_of_num(1) → euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r, euclid_euclid_scale(t, x) + euclid_euclid_scale(real_of_num(1) - t, y))"), t7556))
 }
 
 ///|
@@ -11434,7 +11434,7 @@ fn step_278() -> Unit raise {
   let t7572 = @meson.asm_meson_tac(@list.List([metric_euclid(), open_ball_subset()]))
   let t7573 = @tactics_ext2.imatch_mp_tac(metric_subspace())
   let t7574 = @tactics_ext2.imatch_mp_tac(@equal.gsym(top_of_metric_unions()))
-  let t7566 = @term_syntax.parse_term("UNIONS(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (x : (Num) -> Real), (r : Real)), op_euclid_prime_d_us_euclid))) == op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r)")
+  let t7566 = @term_syntax.parse_term("UNIONS(euclid_top_of_metric((euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), (x : (Num) -> Real), (r : Real)), euclid_d_euclid))) == euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r)")
   let t7575 = @simp.rewrite_tac(@list.List([@sets.in_(), @misc_defs_and_lemmas.in_elim_thm_p()]))
   let t7576 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_image(), q_elim_thm_p_p()]))
   let t7577 = @tactics.then_tac(@tactics_ext2.imatch_mp_tac(@class.eq_ext()), @tactics.beta_tac)
@@ -11448,19 +11448,19 @@ fn step_278() -> Unit raise {
   let t7585 = @simp.asm_rewrite_tac(@list.List([]))
   let t7586 = @simp.asm_rewrite_tac(@list.List([]))
   let t7587 = @tactics_ext2.use_(0L, @simp.rewrite_rule(@list.List([open_ball(), @misc_defs_and_lemmas.in_elim_thm_p()])))
-  let t7564 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num), (x : (Num) -> Real)) && op_euclid_prime_euclid(n, (y : (Num) -> Real))")
+  let t7564 = @term_syntax.parse_term("euclid_euclid((n : Num), (x : (Num) -> Real)) && euclid_euclid(n, (y : (Num) -> Real))")
   let t7588 = @meson.asm_meson_tac(@list.List([open_ball_subset(), metric_euclid(), top_of_metric_induced()]))
-  let t7562 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (x : (Num) -> Real), (r : Real)), op_euclid_prime_d_us_euclid)) == op_euclid_prime_induced_us_top(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid)), op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r))")
+  let t7562 = @term_syntax.parse_term("euclid_top_of_metric((euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), (x : (Num) -> Real), (r : Real)), euclid_d_euclid)) == euclid_induced_top(euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid)), euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r))")
   let t7589 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(1)"))
   let t7590 = @tactics.exists_tac(@term_syntax.parse_term("real_of_num(0)"))
-  let t7560 = @term_syntax.parse_term("(t : Real) => op_euclid_prime_euclid_us_scale(t, (x : (Num) -> Real)) + op_euclid_prime_euclid_us_scale(real_of_num(1) - t, (y : (Num) -> Real))")
+  let t7560 = @term_syntax.parse_term("(t : Real) => euclid_euclid_scale(t, (x : (Num) -> Real)) + euclid_euclid_scale(real_of_num(1) - t, (y : (Num) -> Real))")
   let t7591 = @list.List([@simp.rewrite_tac(@list.List([path_component()])), @tactics_ext.disch_all_tac, (x7561 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7560, fn(x7557 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7558 = @tactics.exists_tac(x7557)
     fn(x7559 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s7558(x7559)
     }
   }, x7561), t7590, t7589, @tactics_ext2.reduce_tac, (x7563 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7562, @tactics_ext.subgoal_tac, x7563), t7588, @tactics.disch_tac, (x7565 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7564, @tactics_ext.subgoal_tac, x7565), t7587, t7586, @tactics_ext.disch_all_tac, @tactics.conj_tac, t7585, t7584, t7583, t7582, t7581, @tactics.conj_tac, t7580, t7579, @tactics_ext2.reduce_tac, @tactics.conj_tac, t7578, t7577, @tactics_ext2.reduce_tac, t7576, t7575, (x7567 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7566, @tactics_ext.subgoal_tac, x7567), t7574, t7573, t7572, t7571, t7570])
-  open_ball_path_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ r : Real, ∀ y : (Num) -> Real, ∀ n : Num, op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r, y) → op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), x, r), op_euclid_prime_d_us_euclid)), y, x)"), t7591))
+  open_ball_path_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : (Num) -> Real, ∀ r : Real, ∀ y : (Num) -> Real, ∀ n : Num, euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r, y) → euclid_path_component(euclid_top_of_metric((euclid_open_ball((euclid_euclid(n), euclid_d_euclid), x, r), euclid_d_euclid)), y, x)"), t7591))
 }
 
 ///|
@@ -11519,7 +11519,7 @@ fn step_279() -> Unit raise {
   let t7678 = @simp.asm_rewrite_tac(@list.List([]))
   let t7605 = @term_syntax.parse_term("(b : _)")
   let t7600 = @term_syntax.parse_term("(a : _)")
-  let t7595 = @term_syntax.parse_term("op_euclid_prime_joinf((t : Real) => (f : (Real) -> _)((a : Real)), op_euclid_prime_joinf(f, (t : Real) => f((b : Real)), b), a)")
+  let t7595 = @term_syntax.parse_term("euclid_joinf((t : Real) => (f : (Real) -> _)((a : Real)), euclid_joinf(f, (t : Real) => f((b : Real)), b), a)")
   let t7679 = @tactics_ext2.cho(0L)
   let t7680 = @tactics_ext2.cho(0L)
   let t7681 = @tactics_ext2.cho(0L)
@@ -11572,7 +11572,7 @@ fn step_279() -> Unit raise {
       s7638(x7639)
     }
   }, x7641), t7647, (x7642 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x7642), t7646, t7645, t7644, t7643])
-  path_domain_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, op_euclid_prime_path_us_component(U, x, y) == (∃ f : (Real) -> A, ∃ a : Real, ∃ b : Real, op_euclid_prime_continuous(f, op_euclid_prime_top_us_of_us_metric((UNIV, op_euclid_prime_d_us_real)), U) && a < b && f(a) == x && f(b) == y && SUBSET(IMAGE(f, UNIV), UNIONS(U)))"), t7682))
+  path_domain_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ U : ((A) -> Bool) -> Bool, ∀ x : A, ∀ y : A, euclid_path_component(U, x, y) == (∃ f : (Real) -> A, ∃ a : Real, ∃ b : Real, euclid_continuous(f, euclid_top_of_metric((UNIV, euclid_d_real)), U) && a < b && f(a) == x && f(b) == y && SUBSET(IMAGE(f, UNIV), UNIONS(U)))"), t7682))
 }
 
 ///|
@@ -11594,7 +11594,7 @@ fn step_280() -> Unit raise {
   let t7702 = @term_syntax.parse_term("SUBSET(IMAGE((f : (_) -> _), UNIV), (X : (_) -> Bool)) && SUBSET(IMAGE(f, UNIV), (Y : (_) -> Bool))")
   let t7708 = @simp.asm_simp_tac(@list.List([@equal.gsym(top_of_metric_unions())]))
   let t7709 = @meson.asm_meson_tac(@list.List([metric_subspace()]))
-  let t7698 = @term_syntax.parse_term("op_euclid_prime_metric_us_space(((Y : (_) -> Bool), (d : (_, _) -> Real)))")
+  let t7698 = @term_syntax.parse_term("euclid_metric_space(((Y : (_) -> Bool), (d : (_, _) -> Real)))")
   let t7710 = @simp.asm_rewrite_tac(@list.List([]))
   let t7696 = @term_syntax.parse_term("(b : _)")
   let t7691 = @term_syntax.parse_term("(a : _)")
@@ -11618,7 +11618,7 @@ fn step_280() -> Unit raise {
       s7694(x7695)
     }
   }, x7697), t7710, (x7699 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7698, @tactics_ext.subgoal_tac, x7699), t7709, @tactics.disch_tac, (x7700 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x7700), t7708, @tactics_ext.disch_all_tac, @tactics.conj_tac, (x7701 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(3L, x7701), (x7703 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7702, @tactics_ext.subgoal_tac, x7703), t7707, @tactics.disch_tac, t7706, t7705, t7704])
-  path_component_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ y : A, SUBSET(Y, X) && op_euclid_prime_metric_us_space((X, d)) && Y(y) → SUBSET(op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric((Y, d)), y), op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric((X, d)), y))"), t7714))
+  path_component_subspace_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ X : (A) -> Bool, ∀ Y : (A) -> Bool, ∀ d : (A, A) -> Real, ∀ y : A, SUBSET(Y, X) && euclid_metric_space((X, d)) && Y(y) → SUBSET(euclid_path_component(euclid_top_of_metric((Y, d)), y), euclid_path_component(euclid_top_of_metric((X, d)), y))"), t7714))
 }
 
 ///|
@@ -11647,7 +11647,7 @@ fn step_281() -> Unit raise {
       }
     })(x7719))
   }, x7721), t7722])
-  path_component_in_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : A, ∀ y : A, ∀ U : ((A) -> Bool) -> Bool, op_euclid_prime_path_us_component(U, x, y) → UNIONS(U, y)"), t7728))
+  path_component_in_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ x : A, ∀ y : A, ∀ U : ((A) -> Bool) -> Bool, euclid_path_component(U, x, y) → UNIONS(U, y)"), t7728))
 }
 
 ///|
@@ -11678,9 +11678,9 @@ fn step_282() -> Unit raise {
   let t7800 = @tactics_ext2.imatch_mp_tac(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ A : (A) -> Bool, ∀ B : (A) -> Bool, ∀ C : (A) -> Bool, SUBSET(B, C) → SUBSET(A, B) → SUBSET(A, C)"), t7786))
   let t7801 = @meson.meson_tac(@list.List([open_ball_path(), @sets.subset(), @sets.in_(), path_symm()]))
   let t7802 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()]))
-  let t7784 = @term_syntax.parse_term("SUBSET(op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (a : (Num) -> Real), (r : Real)), op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric((op_euclid_prime_open_us_ball((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), a, r), op_euclid_prime_d_us_euclid)), a))")
-  let t7782 = @term_syntax.parse_term("SUBSET(op_euclid_prime_open_us_ball((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (a : (Num) -> Real), (r : Real)), op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric(((A' : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid)), a))")
-  let t7780 = @term_syntax.parse_term("SUBSET(op_euclid_prime_open_us_ball(((A : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid), (a : (Num) -> Real), (r : Real)), op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric(((A' : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid)), a))")
+  let t7784 = @term_syntax.parse_term("SUBSET(euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), (a : (Num) -> Real), (r : Real)), euclid_path_component(euclid_top_of_metric((euclid_open_ball((euclid_euclid(n), euclid_d_euclid), a, r), euclid_d_euclid)), a))")
+  let t7782 = @term_syntax.parse_term("SUBSET(euclid_open_ball((euclid_euclid((n : Num)), euclid_d_euclid), (a : (Num) -> Real), (r : Real)), euclid_path_component(euclid_top_of_metric(((A' : ((Num) -> Real) -> Bool), euclid_d_euclid)), a))")
+  let t7780 = @term_syntax.parse_term("SUBSET(euclid_open_ball(((A : ((Num) -> Real) -> Bool), euclid_d_euclid), (a : (Num) -> Real), (r : Real)), euclid_path_component(euclid_top_of_metric(((A' : ((Num) -> Real) -> Bool), euclid_d_euclid)), a))")
   let t7803 = @simp.asm_rewrite_tac(@list.List([]))
   let t7778 = @term_syntax.parse_term("(r : _)")
   let t7804 = @tactics_ext2.cho(13L)
@@ -11693,10 +11693,10 @@ fn step_282() -> Unit raise {
   let t7810 = @simp.asm_rewrite_tac(@list.List([]))
   let t7766 = @term_syntax.parse_term("(A : _)")
   let t7811 = @tactics_ext2.imatch_mp_tac(induced_trans())
-  let t7761 = @term_syntax.parse_term("op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid((n : Num)), op_euclid_prime_d_us_euclid), (A' : ((Num) -> Real) -> Bool))")
+  let t7761 = @term_syntax.parse_term("euclid_top_of_metric((euclid_euclid((n : Num)), euclid_d_euclid), (A' : ((Num) -> Real) -> Bool))")
   let t7812 = @simp.asm_simp_tac(@list.List([@equal.gsym(top_of_metric_unions()), metric_euclid()]))
   let t7813 = @tactics_ext2.use_(0L, @drule.match_mp(@misc_defs_and_lemmas.sub_union()))
-  let t7758 = @term_syntax.parse_term("SUBSET((A : ((Num) -> Real) -> Bool), op_euclid_prime_euclid((n : Num)))")
+  let t7758 = @term_syntax.parse_term("SUBSET((A : ((Num) -> Real) -> Bool), euclid_euclid((n : Num)))")
   let t7814 = @simp.asm_simp_tac(@list.List([@equal.gsym(top_of_metric_unions())]))
   let t7755 = @term_syntax.parse_term("(A' : (_) -> _)((a : _))")
   let t7815 = @tactics_ext2.with_(7L, @drule.match_mp(path_component_in()))
@@ -11718,7 +11718,7 @@ fn step_282() -> Unit raise {
   let t7827 = @simp.rewrite_tac(@list.List([path_component()]))
   let t7828 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_()]))
   let t7829 = @meson.asm_meson_tac(@list.List([metric_subspace()]))
-  let t7741 = @term_syntax.parse_term("op_euclid_prime_metric_us_space(((A' : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid))")
+  let t7741 = @term_syntax.parse_term("euclid_metric_space(((A' : ((Num) -> Real) -> Bool), euclid_d_euclid))")
   let t7830 = @simp.asm_simp_tac(@list.List([top_of_metric_induced()]))
   let t7831 = @meson.asm_meson_tac(@list.List([top_of_metric_unions()]))
   let t7832 = @tactics_ext2.use_(1L, @drule.match_mp(@misc_defs_and_lemmas.sub_union()))
@@ -11731,9 +11731,9 @@ fn step_282() -> Unit raise {
   let t7835 = @meson.asm_meson_tac(@list.List([top_of_metric_unions(), metric_euclid()]))
   let t7836 = @tactics_ext2.use_(0L, @drule.match_mp(@misc_defs_and_lemmas.sub_union()))
   let t7837 = @simp.rewrite_tac(@list.List([metric_euclid()]))
-  let t7734 = @term_syntax.parse_term("op_euclid_prime_euclid((n : Num))")
+  let t7734 = @term_syntax.parse_term("euclid_euclid((n : Num))")
   let t7838 = @tactics_ext2.imatch_mp_tac(metric_subspace())
-  let t7729 = @term_syntax.parse_term("op_euclid_prime_metric_us_space(((A : ((Num) -> Real) -> Bool), op_euclid_prime_d_us_euclid))")
+  let t7729 = @term_syntax.parse_term("euclid_metric_space(((A : ((Num) -> Real) -> Bool), euclid_d_euclid))")
   let t7839 = @list.List([@tactics_ext.disch_all_tac, @simp.rewrite_tac(@list.List([loc_path_conn()])), @tactics_ext.disch_all_tac, (x7730 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7729, @tactics_ext.subgoal_tac, x7730), t7838, (x7735 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7734, fn(x7731 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s7732 = @tactics.exists_tac(x7731)
     fn(x7733 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -11762,7 +11762,7 @@ fn step_282() -> Unit raise {
       s7776(x7777)
     }
   }, x7779), t7803, (x7781 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7780, @tactics_ext.subgoal_tac, x7781), (x7783 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7782, @tactics_ext.subgoal_tac, x7783), (x7785 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.type_then(t7784, @tactics_ext.subgoal_tac, x7785), t7802, t7801, t7800, t7799, t7798, t7797, t7796, t7795, t7794, t7793, t7792, t7791, @tactics.gen_tac, (x7789 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(7L, x7789), t7790])
-  loc_path_conn_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ A : ((Num) -> Real) -> Bool, op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), A) → op_euclid_prime_loc_us_path_us_conn(op_euclid_prime_top_us_of_us_metric((A, op_euclid_prime_d_us_euclid)))"), t7839))
+  loc_path_conn_euclid_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ A : ((Num) -> Real) -> Bool, euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid), A) → euclid_loc_path_conn(euclid_top_of_metric((A, euclid_d_euclid)))"), t7839))
 }
 
 ///|
@@ -11785,7 +11785,7 @@ fn step_283() -> Unit raise {
   let t7846 = @tactics_ext2.imatch_mp_tac(path_eq_conn())
   let t7847 = @tactics_ext2.imatch_mp_tac(@class.eq_ext())
   let t7848 = @list.List([@tactics_ext.disch_all_tac, @tactics_ext2.with_(0L, @drule.match_mp(loc_path_conn_euclid())), t7847, @tactics.gen_tac, t7846, t7845, t7844, t7843, (x7840 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @tactics_ext2.und(0L, x7840), t7842, t7841])
-  loc_path_euclid_cor_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ A : ((Num) -> Real) -> Bool, op_euclid_prime_top_us_of_us_metric((op_euclid_prime_euclid(n), op_euclid_prime_d_us_euclid), A) → op_euclid_prime_path_us_component(op_euclid_prime_top_us_of_us_metric((A, op_euclid_prime_d_us_euclid))) == op_euclid_prime_component(op_euclid_prime_top_us_of_us_metric((A, op_euclid_prime_d_us_euclid)))"), t7848))
+  loc_path_euclid_cor_c.set(@tactics_refine.prove_by_refinement(@term_syntax.parse_term("∀ n : Num, ∀ A : ((Num) -> Real) -> Bool, euclid_top_of_metric((euclid_euclid(n), euclid_d_euclid), A) → euclid_path_component(euclid_top_of_metric((A, euclid_d_euclid))) == euclid_component(euclid_top_of_metric((A, euclid_d_euclid)))"), t7848))
 }
 
 ///|
