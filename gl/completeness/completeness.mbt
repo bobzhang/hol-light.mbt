@@ -1287,7 +1287,7 @@ fn step_39() -> Unit raise {
       s621(x622)
     }
   }), t624), t626), t627), @tactics.all_tac])
-  let t619 = @tactics.subgoal_then(@parser.parse_term("~ MEM p (match h with Box c -> [Box c] | _any -> [])"), fn(x617 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+  let t619 = @tactics.subgoal_then(@term_syntax.parse_term("!MEM((p : Form), match (h : Form) { Box(c) => [Box(c)]; _any => NIL })"), fn(x617 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x617
     @simp.asm_rewrite_tac(@list.List([th]))
   })
@@ -1298,7 +1298,7 @@ fn step_39() -> Unit raise {
   let t612 = @simp.rewrite_tac(@list.List([@lists.mem_append()]))
   let t611 = @simp.rewrite_tac(@list.List([@lists.mem(), @misc.flatmap()]))
   let t632 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t611), t612), t613), t616), t619), t628), t631)
-  let mem_flatmap_lemma = @tactics.prove(@parser.parse_term("forall p l. MEM p (FLATMAP (\\x. match x with Box c -> [Box c] | _any -> []) l) <=>\n           (?q. p = Box q /\\ MEM p l)"), t632)
+  let mem_flatmap_lemma = @tactics.prove(@term_syntax.parse_term("∀ p : Form, ∀ l : List[Form], MEM(p, FLATMAP((x : Form) => match x { Box(c) => [Box(c)]; _any => NIL }, l)) == (∃ q : Form, p == Box(q) && MEM(p, l))"), t632)
   let t653 = @tactics.match_accept_tac(@gl.gl_dot_box())
   let t652 = @simp.rewrite_tac(@list.List([conjlist(), @lists.not_cons_nil()]))
   let t651 = @simp.rewrite_tac(@list.List([@ind_types.distinctness("form"), @lists.map(), @gl.gl_imp_refl_th()]))
@@ -1308,21 +1308,21 @@ fn step_39() -> Unit raise {
     @tactics.all_tac
   })
   let t646 = @list.List([@tactics.match_accept_tac(@gl.gl_and_left_th()), @tactics.all_tac])
-  let t645 = @tactics.exists_tac(@parser.parse_term("CONJLIST (match h with Box c -> [Box c] | _any -> [])"))
+  let t645 = @tactics.exists_tac(@term_syntax.parse_term("CONJLIST(match (h : Form) { Box(c) => [Box(c)]; _any => NIL })"))
   let t644 = @tactics.match_mp_tac(@gl.gl_imp_trans())
   let t643 = @list.List([@tactics.all_tac, @meson.asm_meson_tac(@list.List([@gl.gl_imp_trans(), @gl.gl_and_right_th()]))])
   let t642 = @tactics.match_mp_tac(@gl.gl_and_intro())
   let t640 = @tactics.match_accept_tac(conjlist_append())
   let t641 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.match_mp_tac(@gl.gl_iff_imp2()), t640)])
-  let t639 = @tactics.exists_tac(@parser.parse_term("CONJLIST (MAP (Box) (match h with Box c -> [c; Box c] | _any -> [])) &&\n       CONJLIST (MAP (Box)\n         (FLATMAP (\\x. match x with Box c -> [c; Box c] | _any -> []) t))"))
+  let t639 = @tactics.exists_tac(@term_syntax.parse_term("op_amp_amp(CONJLIST(MAP(Box, match (h : Form) { Box(c) => [c, Box(c)]; _any => NIL })), CONJLIST(MAP(Box, FLATMAP((x : Form) => match x { Box(c) => [c, Box(c)]; _any => NIL }, (t : List[Form])))))"))
   let t638 = @tactics.match_mp_tac(@gl.gl_imp_trans())
   let t636 = @tactics.match_accept_tac(conjlist_append())
   let t637 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@gl.gl_iff_imp1()), t636), @tactics.all_tac])
-  let t635 = @tactics.exists_tac(@parser.parse_term("CONJLIST (match h with Box c -> [Box c] | _any -> []) &&\n       CONJLIST (FLATMAP (\\x. match x with Box c -> [Box c] | _any -> []) t)"))
+  let t635 = @tactics.exists_tac(@term_syntax.parse_term("op_amp_amp(CONJLIST(match (h : Form) { Box(c) => [Box(c)]; _any => NIL }), CONJLIST(FLATMAP((x : Form) => match x { Box(c) => [Box(c)]; _any => NIL }, (t : List[Form]))))"))
   let t634 = @tactics.match_mp_tac(@gl.gl_imp_trans())
   let t633 = @simp.rewrite_tac(@list.List([@misc.flatmap(), @lists.map_append()]))
   let t654 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@lists.list_induct_tac, @list.List([@simp.rewrite_tac(@list.List([@misc.flatmap(), @lists.map(), @gl.gl_imp_refl_th()])), @tactics.all_tac])), t633), t634), t635), @tactics.conj_tac), t637), t638), t639), @tactics.conj_tac), t641), t642), @tactics.conj_tac), t643), t644), t645), @tactics.conj_tac), t646), t648), t650), t651), t652), t653)
-  let conjlist_flatmap_dot_box_lemma = @tactics.prove(@parser.parse_term("forall w. |-- (CONJLIST (FLATMAP (\\x. match x with Box c -> [Box c] | _any -> []) w)\n              -->\n              CONJLIST (MAP (Box)\n                (FLATMAP (\\x. match x with Box c -> [c; Box c] | _any -> []) w)))"), t654)
+  let conjlist_flatmap_dot_box_lemma = @tactics.prove(@term_syntax.parse_term("∀ w : List[Form], op_bar_minus_minus(op_minus_minus_gt(CONJLIST(FLATMAP((x : Form) => match x { Box(c) => [Box(c)]; _any => NIL }, w)), CONJLIST(MAP(Box, FLATMAP((x : Form) => match x { Box(c) => [c, Box(c)]; _any => NIL }, w)))))"), t654)
   let t777 = @meson.asm_meson_tac(@list.List([@modal.subformula_trans(), @modal.subformula_inversion(), @modal.subformula_refl()]))
   let t776 = @simp.asm_rewrite_tac(@list.List([]))
   let t775 = @tactics.exists_tac(@term_syntax.parse_term("Box((q : Form))"))
@@ -1393,7 +1393,7 @@ fn step_39() -> Unit raise {
   let t718 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(subformula_imp_neg_subsentence()), t714), t715), t717, @tactics.all_tac])
   let t713 = @tactics.repeat_tac(@tactics.first_x_assum(@tactics.subst_var_tac))
   let t744 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@lists.mem()])), @tactics.gen_tac), @tactics.strip_tac), t713), t718), t722), t724), t725), @tactics.strip_tac), t726), t743), @tactics.all_tac])
-  let t711 = @parser.parse_term("CONS (Not q) (CONS (Box q)\n        (FLATMAP (\\x. match x with Box c -> [c; Box c] | _any -> []) w))")
+  let t711 = @term_syntax.parse_term("CONS(Not((q : Form)), CONS(Box(q), FLATMAP((x : Form) => match x { Box(c) => [c, Box(c)]; _any => NIL }, (w : List[Form]))))")
   let t712 = @tactics.mp_tac(@bool.specl(@list.List([@term_syntax.parse_term("(p : Form)"), t711]), extend_maximal_consistent()))
   let t709 = @tactics.pop_assum(fn(x706 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s707 = @tactics.match_accept_tac(x706)
@@ -1421,7 +1421,7 @@ fn step_39() -> Unit raise {
   let t701 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t688), t689), @tactics.conj_tac), t690), t691), t692), t693), t694), t695), @tactics.conj_tac), t700), @tactics.all_tac])
   let t687 = @theorems.claim_tac("XIMP", @term_syntax.parse_term("∀ x : Form, ∀ y : Form, ∀ l : List[Form], op_bar_minus_minus(Not(op_amp_amp(Not(y), CONJLIST(CONS(x, l))))) → op_bar_minus_minus(op_minus_minus_gt(CONJLIST(MAP(Box, l)), Box(op_minus_minus_gt(x, y))))"))
   let t686 = @list.List([@simp.rewrite_tac(@list.List([conjlist_flatmap_dot_box_lemma])), @tactics.all_tac])
-  let t685 = @tactics.exists_tac(@parser.parse_term("CONJLIST (MAP (Box)\n        (FLATMAP (\\x. match x with Box c -> [c; Box c] | _any -> []) w))"))
+  let t685 = @tactics.exists_tac(@term_syntax.parse_term("CONJLIST(MAP(Box, FLATMAP((x : Form) => match x { Box(c) => [c, Box(c)]; _any => NIL }, (w : List[Form]))))"))
   let t684 = @tactics.match_mp_tac(@gl.gl_imp_trans())
   let t683 = @simp.rewrite_tac(@list.List([@gl.gl_axiom_lob()]))
   let t682 = @tactics.exists_tac(@term_syntax.parse_term("Box(op_minus_minus_gt(Box((q : Form)), q))"))
@@ -1429,7 +1429,7 @@ fn step_39() -> Unit raise {
   let t679 = @meson.meson_tac(@list.List([]))
   let t680 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([mem_flatmap_lemma]))), t679), @tactics.all_tac])
   let t678 = @simp.asm_rewrite_tac(@list.List([]))
-  let t676 = @parser.parse_term("FLATMAP (\\x. match x with Box c -> [Box c] | _any -> []) w")
+  let t676 = @term_syntax.parse_term("FLATMAP((x : Form) => match x { Box(c) => [Box(c)]; _any => NIL }, (w : List[Form]))")
   let t677 = @tactics.map_every(fn(x673 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s674 = @tactics.exists_tac(x673)
     fn(x675 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1445,7 +1445,7 @@ fn step_39() -> Unit raise {
       s668(x669)
     }
   }), t670), t671), t672), t677), t678), @tactics.conj_tac), t680), t681), t682), t683), t684), t685), @tactics.conj_tac), t686), t687), t701), t702), t703), t704), t705), t709), @tactics.all_tac])
-  let t666 = @theorems.claim_tac("consistent_X", @parser.parse_term("CONSISTENT (CONS (Not q) (CONS (Box q)\n       (FLATMAP (\\x. match x with Box c -> [c; Box c] | _any -> []) w)))"))
+  let t666 = @theorems.claim_tac("consistent_X", @term_syntax.parse_term("CONSISTENT(CONS(Not((q : Form)), CONS(Box(q), FLATMAP((x : Form) => match x { Box(c) => [c, Box(c)]; _any => NIL }, (w : List[Form])))))"))
   let t665 = @simp.rewrite_tac(@list.List([@class.not_forall_thm()]))
   let t664 = @tactics.remove_then("rrr", fn(x661 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s662 = @tactics.mp_tac(x661)
