@@ -18,7 +18,7 @@ pub fn neq() -> @kernel.Term {
 ///|
 /// nlt
 fn step_2() -> Unit raise {
-  nlt_c.set(@parser.parse_term("(<):num->num->bool"))
+  nlt_c.set(@term_syntax.parse_term("(op_lt : (Num, Num) -> Bool)"))
 }
 
 ///|
@@ -33,7 +33,7 @@ pub fn nlt() -> @kernel.Term {
 ///|
 /// ngt
 fn step_3() -> Unit raise {
-  ngt_c.set(@parser.parse_term("(>):num->num->bool"))
+  ngt_c.set(@term_syntax.parse_term("(op_gt : (Num, Num) -> Bool)"))
 }
 
 ///|
@@ -48,7 +48,7 @@ pub fn ngt() -> @kernel.Term {
 ///|
 /// nle
 fn step_4() -> Unit raise {
-  nle_c.set(@parser.parse_term("(<=):num->num->bool"))
+  nle_c.set(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)"))
 }
 
 ///|
@@ -63,7 +63,7 @@ pub fn nle() -> @kernel.Term {
 ///|
 /// nge
 fn step_5() -> Unit raise {
-  nge_c.set(@parser.parse_term("(>=):num->num->bool"))
+  nge_c.set(@term_syntax.parse_term("(op_gt_eq : (Num, Num) -> Bool)"))
 }
 
 ///|
@@ -78,7 +78,7 @@ pub fn nge() -> @kernel.Term {
 ///|
 /// nm
 fn step_6() -> Unit raise {
-  nm_c.set(@parser.parse_term("( * ):num->num->num"))
+  nm_c.set(@term_syntax.parse_term("(op_star : (Num, Num) -> Num)"))
 }
 
 ///|
@@ -93,7 +93,7 @@ pub fn nm() -> @kernel.Term {
 ///|
 /// np
 fn step_7() -> Unit raise {
-  np_c.set(@parser.parse_term("(+):num->num->num"))
+  np_c.set(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"))
 }
 
 ///|

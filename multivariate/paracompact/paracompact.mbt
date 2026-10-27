@@ -5980,7 +5980,7 @@ pub fn paracompact_locally_metrizable_sigma_lf_base() -> @kernel.Thm {
 ///|
 /// collectionwise_normal_space
 fn step_17() -> Unit raise {
-  collectionwise_normal_space_c.set(@pair.new_definition(@parser.parse_term("collectionwise_normal_space (top:A topology) <=>\n        forall F. (forall c. c IN F ==> closed_in top c) /\\\n            pairwise DISJOINT F /\\\n            locally_finite_in top F\n            ==> ?G. (forall c. c IN F ==> open_in top (G c) /\\ c SUBSET G c) /\\\n                    pairwise (\\c d. DISJOINT (G c) (G d)) F")))
+  collectionwise_normal_space_c.set(@pair.new_definition(@term_syntax.parse_term("(collectionwise_normal_space : (Topology[A]) -> Bool)((top : Topology[A])) == (∀ F : ((A) -> Bool) -> Bool, (∀ c : (A) -> Bool, IN(c, F) → closed_in(top, c)) && pairwise(DISJOINT, F) && locally_finite_in(top, F) → (∃ G : ((A) -> Bool, A) -> Bool, (∀ c : (A) -> Bool, IN(c, F) → open_in(top, G(c)) && SUBSET(c, G(c))) && pairwise((c : (A) -> Bool) => (d : (A) -> Bool) => DISJOINT(G(c), G(d)), F)))")))
 }
 
 ///|

@@ -49,7 +49,7 @@ fn step_2() -> Unit raise {
   let sign_app = @term_syntax.parse_term("(APPEND : (List[List[Sign]], List[List[Sign]]) -> List[List[Sign]])")
   let real_len = @term_syntax.parse_term("(LENGTH : (List[Real]) -> Num)")
   let sign_len = @term_syntax.parse_term("(LENGTH : (List[List[Sign]]) -> Num)")
-  let num_mul = @parser.parse_term("( * ):num -> num -> num")
+  let num_mul = @term_syntax.parse_term("(op_star : (Num, Num) -> Num)")
   let real_ty = @parser.parse_type("real")
   let two = @term_syntax.parse_term("2")
   let sl_ty = @parser.parse_type("sign list")
