@@ -127,11 +127,16 @@ def renamed_files():
     """The upstream files loaded from renamed copies: those TYPE_RENAMES
     lists, unless HOL_REF_ORIGINAL_TYPE_NAMES is set, and those
     TERM_RENAMES (term_renames.py) lists, unless HOL_REF_ORIGINAL_TERM_NAMES
-    is (check_type_renames.py and check_term_renames.py compare the runs)."""
+    is, and those NAME_PATCHES (name_renames.py) lists, unless
+    HOL_REF_ORIGINAL_NAMES is (check_type_renames.py, check_term_renames.py
+    and check_name_renames.py compare the runs)."""
     from term_renames import TERM_RENAMES
+    from name_renames import NAME_PATCHES
     types = {} if os.environ.get('HOL_REF_ORIGINAL_TYPE_NAMES') else TYPE_RENAMES
     terms = {} if os.environ.get('HOL_REF_ORIGINAL_TERM_NAMES') else TERM_RENAMES
-    return {path: (types.get(path), terms.get(path)) for path in {*types, *terms, *PORT_PATCHES}}
+    names = {} if os.environ.get('HOL_REF_ORIGINAL_NAMES') else NAME_PATCHES
+    return {path: (types.get(path), terms.get(path), path in names)
+            for path in {*types, *terms, *names, *PORT_PATCHES}}
 
 
 def reference_source(source):
@@ -377,7 +382,8 @@ def prepare():
     assert boolean.count(alias) == 1, 'upstream forall alias changed'
     (ref / '_build/bool_forall.ml').write_text(boolean.replace(alias, ''))
     from term_renames import TERM_PATCHES, rename_ocaml
-    for path, (types, terms) in renamed_files().items():
+    from name_renames import NAME_PATCHES, rename_names
+    for path, (types, terms, names) in renamed_files().items():
         copy = ref / renamed_copy(path)
         copy.parent.mkdir(parents=True, exist_ok=True)
         text = (root / '.repos/hol-light' / path).read_text()
@@ -388,6 +394,8 @@ def prepare():
             text = rename_type_variables(text, types, TYPE_PATCHES.get(path, ()))
         if terms:
             text = rename_ocaml(text, terms, TERM_PATCHES.get(path, ()))
+        if names:
+            text = rename_names(text, NAME_PATCHES[path])
         copy.write_text(text)
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
