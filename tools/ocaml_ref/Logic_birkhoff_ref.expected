@@ -10460,7 +10460,7 @@ Logic/birkhoff quotations (226):
   (\226\136\128 p : Num, \226\136\128 n : Num, functions_form(Atom(p, MAP(FST, Varpairs(n)))) == {}) && (\226\136\128 p : Num, \226\136\128 n : Num, functions_form(Atom(p, MAP(SND, Varpairs(n)))) == {})
   (n : Num)
   (f : Num)
-  forall fn_. functions_form(interp(Eqclause_Func fn_)) = {fn_}
+  \226\136\128 fn_ : (Num, Num), functions_form(interp(Eqclause_Func(fn_))) == {fn_}
   (n : Num)
   (p : Num)
   \226\136\128 pn : (Num, Num), functions_form(interp(Eqclause_Pred(pn))) == {}
