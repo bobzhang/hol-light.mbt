@@ -692,7 +692,7 @@ test "Formal_ineqs/lib/ssrnat matches Formal_ineqs/lib/ssrnat.ml" {
       #|  odd((n : Num))
       #|  (if odd((n : Num)) { 1 } else { 0 }) + double(half(n)) == n
       #|  half((if (b : Bool) { 1 } else { 0 }) + double((n : Num))) == n
-      #|  odd _any
+      #|  odd((_any : Num))
       #|  (m : _)
       #|  (n : _)
       #|  half((m : Num) + (n : Num)) == (if odd(m) && odd(n) { 1 } else { 0 }) + (half(m) + half(n))
@@ -750,10 +750,10 @@ test "Formal_ineqs/lib/ssrnat matches Formal_ineqs/lib/ssrnat.ml" {
       #|  0
       #|  1
       #|  distn(SUC((m : Num)), m) == 1
-      #|  _any = 1
+      #|  (_any : Num) == 1
       #|  (distn((m : Num), (n : Num)) == 1) == (if m < n { SUC(m) == n } else { m == SUC(n) })
-      #|  distn p _any
-      #|  distn n _any
+      #|  distn((p : Num), (_any : Num))
+      #|  distn((n : Num), (_any : Num))
       #|  \226\136\128 m : Num, \226\136\128 p : Num, m <= p \226\134\146 leqif(distn(m, p), distn(m, (n : Num)) + distn(n, p), m <= n && n <= p || p <= n && n <= m)
       #|  leqif(distn((m : Num), (p : Num)), distn(m, (n : Num)) + distn(n, p), m <= n && n <= p || p <= n && n <= m)
       #|  (m : Num) <= (n : Num) && n <= (p : Num)
