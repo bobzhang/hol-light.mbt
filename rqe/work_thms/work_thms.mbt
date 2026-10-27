@@ -1445,9 +1445,9 @@ pub fn hd_lem() -> @kernel.Thm {
 pub fn length_n(x561 : Int64, x562 : @kernel.HolType) -> @kernel.Thm raise {
   let n = x561
   let ty = x562
-  let zero = @parser.parse_term("0")
-  let neg = @parser.parse_term("(~)")
-  let imp_thm = @class.taut(@parser.parse_term("(a ==> b) ==> (b ==> a) ==> (a <=> b)"))
+  let zero = @term_syntax.parse_term("0")
+  let neg = @term_syntax.parse_term("op_tilde")
+  let imp_thm = @class.taut(@term_syntax.parse_term("((a : Bool) → (b : Bool)) → (b → a) → a == b"))
   match n {
     0L => @bool.conjunct1(@lists.length())
     1L => @rqe_list.length_sing()
@@ -1463,7 +1463,7 @@ pub fn length_n(x561 : Int64, x562 : @kernel.HolType) -> @kernel.Thm raise {
       let n_nz = @tactics.prove(@bool.mk_neg(@basics.mk_eq(n_tm, zero)), @int.arith_tac)
       let t563 = @equal.ap_term(neg, @bool.ispec(t, @rqe_list.length_0()))
       let not_nil_thm = @kernel.eq_mp(@simp.rewrite_rule(@list.List([len_thm]))(t563), n_nz)
-      let n_suc = @tactics.prove(@basics.mk_eq(n_tm, @kernel.mk_comb(@parser.parse_term("SUC"), pren_tm)), @int.arith_tac)
+      let n_suc = @tactics.prove(@basics.mk_eq(n_tm, @kernel.mk_comb(@term_syntax.parse_term("SUC"), pren_tm)), @int.arith_tac)
       let t564 = @drule.match_mp(length_tl())(not_nil_thm)
       let len_tl = @simp.rewrite_rule(@list.List([n_suc, @arith.pre(), @bool.ispec(@kernel.mk_comb(tl_tm, t), pre_thm), len_thm]))(t564)
       let cons_thm = @drule.match_mp(@bool.ispec(t, hd_tl()))(not_nil_thm)
