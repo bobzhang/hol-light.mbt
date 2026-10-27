@@ -6411,43 +6411,43 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  \226\136\128 c : Real, \226\136\128 u : Real, \226\136\128 k : Real, abs(c - u) <= k \226\134\146 (\226\136\128 f : Real, \226\136\128 g : Real, \226\136\128 ex : Real, \226\136\128 ey : Real, interval(u, f, ex) && interval(k, g, ey) \226\134\146 interval(c, f, g + (ey + ex)))
       #|  interval(real_of_num(3), float(int_of_num(3), int_of_num(0)), float(int_of_num(0), int_of_num(0)))
       #|  real_of_num(3)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  real_of_num
       #|  interval(-real_of_num(3 + 4), float(-int_of_num(7), int_of_num(0)), float(int_of_num(0), int_of_num(0)))
       #|  -real_of_num(3 + 4)
       #|  real_neg
       #|  real_of_num
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  real_of_num
       #|  interval(DECIMAL(1, 10), float(int_of_num(1), -int_of_num(1)), float(int_of_num(1), -int_of_num(2)))
       #|  interval(DECIMAL(7, 1), float(int_of_num(4), int_of_num(1)), float(int_of_num(1), int_of_num(0)))
@@ -6457,40 +6457,40 @@ test "Jordan/float matches Jordan/float.ml" {
       #|  real_lt
       #|  DECIMAL(1, 10) < DECIMAL(7, 1)
       #|  real_of_num(8)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  real_of_num
       #|  real_of_num(3)
-      #|  (NUMERAL m) MOD (NUMERAL n)
-      #|  (NUMERAL m) DIV (NUMERAL n)
-      #|  (NUMERAL m) EXP (NUMERAL n)
-      #|  NUMERAL m * NUMERAL n
-      #|  NUMERAL m - NUMERAL n
-      #|  NUMERAL m + NUMERAL n
-      #|  ODD(NUMERAL n)
-      #|  EVEN(NUMERAL n)
-      #|  NUMERAL m = NUMERAL n
-      #|  NUMERAL m >= NUMERAL n
-      #|  NUMERAL m > NUMERAL n
-      #|  NUMERAL m <= NUMERAL n
-      #|  NUMERAL m < NUMERAL n
-      #|  FACT(NUMERAL n)
-      #|  PRE(NUMERAL n)
-      #|  SUC(NUMERAL n)
+      #|  MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) * NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) - NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) + NUMERAL((n : Num))
+      #|  ODD(NUMERAL((n : Num)))
+      #|  EVEN(NUMERAL((n : Num)))
+      #|  NUMERAL((m : Num)) == NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) >= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) > NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) <= NUMERAL((n : Num))
+      #|  NUMERAL((m : Num)) < NUMERAL((n : Num))
+      #|  FACT(NUMERAL((n : Num)))
+      #|  PRE(NUMERAL((n : Num)))
+      #|  SUC(NUMERAL((n : Num)))
       #|  real_of_num
       #|  interval
       #|  interval

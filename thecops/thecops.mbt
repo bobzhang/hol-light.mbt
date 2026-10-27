@@ -239,7 +239,7 @@ pub fn mark_concl(x4 : String) -> @tactics.Tactic raise {
     )
   })
   let t10 = @simp.rewrite_tac(
-    @list.List([@class.taut(@parser.parse_term("forall t. (~t ==> F <=> t)"))]),
+    @list.List([@class.taut(@term_syntax.parse_term("∀ t : Bool, (!t → false) == t"))]),
   )
   @tactics.then_tac(
     @tactics.then_tac(
@@ -304,7 +304,7 @@ pub fn mark_concl(x4 : String) -> @tactics.Tactic raise {
                     } else {
                       raise @lib.AssertFailure("tscript.ml:27:5")
                     }
-                    let t9 = @parser.parse_term("F")
+                    let t9 = @term_syntax.parse_term("false")
                     if @basics.dest_imp(g.1).1 == t9 {
                       ()
                     } else {
@@ -9998,7 +9998,7 @@ pub fn nanocop_deepen(
   } else {
     raise @lib.AssertFailure("tscript.ml:1456:2")
   }
-  let t1098 = @parser.parse_term("F")
+  let t1098 = @term_syntax.parse_term("false")
   if @kernel.concl(bot) == t1098 {
     ()
   } else {

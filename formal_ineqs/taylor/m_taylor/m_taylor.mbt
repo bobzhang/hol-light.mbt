@@ -1366,8 +1366,8 @@ fn step_42() -> Unit raise {
                     @kernel.concl(x383)
                   })(dim_th))
                   let i_eq_k = @calc_num.num_eq_conv(@basics.mk_eq(i_tm, r_tm))
-                  let t384 = @parser.parse_term("1")
-                  let int_tm = @basics.mk_binop(@parser.parse_term(".."), t384, dim_tm)
+                  let t384 = @term_syntax.parse_term("1")
+                  let int_tm = @basics.mk_binop(@term_syntax.parse_term("op_dot_dot"), t384, dim_tm)
                   let t385 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.in_numseg(), dim_th])), @int.arith_tac)
                   let k_in_dim = @tactics.prove(@kernel.mk_comb(@basics.mk_icomb(in_tm(), r_tm), int_tm), t385)
                   let t386 = @drule.match_mp(@bool.specl(@list.List([r_tm, i_tm]), @multivariate_taylor_compiled.partial_x_v1()))
@@ -1654,10 +1654,10 @@ fn step_45() -> Unit raise {
   gen_in_interval_c.set(fn(x456 : Int64) -> @kernel.Thm raise {
     let n = x456
     let n_tm = @nums.mk_small_numeral(n)
-    let i_tm = @parser.parse_term("i:num")
+    let i_tm = @term_syntax.parse_term("(i : Num)")
     let t457 = @basics.mk_binop(@misc_vars.le_op_num(), i_tm, n_tm)
-    let lhs1 = @bool.mk_conj(@parser.parse_term("1 <= i"), t457)
-    let lhs = @bool.mk_forall(i_tm, @bool.mk_imp(lhs1, @parser.parse_term("(P:num->bool) i")))
+    let lhs1 = @bool.mk_conj(@term_syntax.parse_term("1 <= (i : Num)"), t457)
+    let lhs = @bool.mk_forall(i_tm, @bool.mk_imp(lhs1, @term_syntax.parse_term("(P : (Num) -> Bool)((i : Num))")))
     @simp.rewrite_conv(@list.List([@lib.array_get(i_int_array(), @lib.int63_to_int(n)), th0, th1]))(lhs)
   })
 }
@@ -1986,7 +1986,7 @@ pub fn mk_eval_function_eq(x563 : Int64, x564 : @kernel.Thm) -> ((Int64) -> ((@k
   let expr_tm = @kernel.rand((fn(x566 : @kernel.Thm) -> @kernel.Term raise {
     @kernel.concl(x566)
   })(eq_th))
-  let tm0 = @parser.parse_term("forall x:real^N. x IN interval [domain] ==> interval_arith (f x) f_bounds")
+  let tm0 = @term_syntax.parse_term("∀ x : Cart[Real, N], IN(x, interval([(domain : (Cart[Real, N], Cart[Real, N]))])) → interval_arith((f : (Cart[Real, N]) -> Real)(x), (f_bounds : (Real, Real)))")
   let n = (fn(x568 : (@kernel.Term, @kernel.Term)) -> Int64 raise {
     get_dim((fn(x567 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
       x567.0
