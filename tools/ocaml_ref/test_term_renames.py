@@ -75,4 +75,19 @@ assert refused(rename_ocaml, "let x = `x : A list -> fn`;;", R)
 assert rename_ocaml("let x = `!p:A prob_space fn f. fn = f`;;", R) == "let x = `!p:A prob_space fn_ f. fn_ = f`;;"
 assert renamed_output("B quotations (0):\nTH ! bad\nDETAIL = fn:num\nTH2 = |- fn:num\n", 'B', R, {'TH', 'TH2'}) == \
     "B quotations (0):\nTH ! bad\nDETAIL = fn:num\nTH2 = |- fn_:num\n"
+# _ (the review of #964): move ["_"] discards, EXPAND_TAC "_" names a variable
+U = {'_': '_any'}
+assert rename_ocaml('e (move ["x"; "_"] THEN DISCH_TAC);;', U) == 'e (move ["x"; "_"] THEN DISCH_TAC);;'
+assert rename_ocaml('e (ASSUME_TAC `0 = _` THEN EXPAND_TAC "_");;', U) == 'e (ASSUME_TAC `0 = _any` THEN EXPAND_TAC "_any");;'
+assert refused(rename_ocaml, 'let s = mk_var ("_", bool_ty);;', U)
+assert rename_moonbit('@ssreflect.move_(@list.List(["_"]))', U) == '@ssreflect.move_(@list.List(["_"]))'
+assert rename_moonbit('@simp.expand_tac("_")', U) == '@simp.expand_tac("_any")'
+assert rename_moonbit('@term_syntax.parse_term("(x : _)")', U) == '@term_syntax.parse_term("(x : _)")'
+assert rename_ocaml('e (INTRO_TAC "_" THEN EXPAND_TAC "_");;', U) == 'e (INTRO_TAC "_" THEN EXPAND_TAC "_any");;'
+assert rename_moonbit('@theorems.intro_tac("_")', U) == '@theorems.intro_tac("_")'
+# the second review of #964
+assert rename_ocaml('e ((* move [ *) EXPAND_TAC "_");;', U) == 'e ((* move [ *) EXPAND_TAC "_any");;'
+assert rename_moonbit('let s = "move ["; @simp.expand_tac("_")', U) == 'let s = "move ["; @simp.expand_tac("_any")'
+assert rename_ocaml('e (move [\n  "x";\n  "_"\n]);;', U) == 'e (move [\n  "x";\n  "_"\n]);;'
+assert rename_moonbit('@ssreflect.move_(@list.List([\n  "_",\n]))', U) == '@ssreflect.move_(@list.List([\n  "_",\n]))'
 print('ok')

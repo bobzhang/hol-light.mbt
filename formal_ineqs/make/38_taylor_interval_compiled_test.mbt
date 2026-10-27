@@ -1116,7 +1116,7 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  (lhs : Real) == (sum1 : Real) + (sum2 : Real)
       #|  sum(op_dot_dot(0, (i : Num) + 1), (k : Num) => real_of_num(binom((i, k))) * (nth_derivative(k, (f : (Real) -> Real), (y : Real)) * nth_derivative(SUC(i) - k, (g : (Real) -> Real), y)))
       #|  sum(op_dot_dot(0 + 1, (i : Num) + 1), (k : Num) => real_of_num(binom((i, k - 1))) * (nth_derivative(k, (f : (Real) -> Real), (y : Real)) * nth_derivative(SUC(i) - k, (g : (Real) -> Real), y)))
-      #|  sum (0..i) _
+      #|  sum(op_dot_dot(0, (i : Num)), (_any : (Num) -> Real))
       #|  \226\136\128 k : Num, IN(k, op_dot_dot(0, (i : Num))) \226\134\146 real_differentiable((y : Real) => real_of_num(binom((i, k))) * (nth_derivative(k, (f : (Real) -> Real), y) * nth_derivative(i - k, (g : (Real) -> Real), y)), atreal((y : Real)))
       #|  nth_derivative(SUC((i : Num) - (k : Num)), (g : (Real) -> Real), (y : Real))
       #|  nth_derivative(SUC((k : Num)), (f : (Real) -> Real), (y : Real))
@@ -1179,8 +1179,8 @@ test "Formal_ineqs/taylor/theory/taylor_interval-compiled matches Formal_ineqs/t
       #|  (ff : _) == (f' : (_) -> _)((y : _))
       #|  \226\136\128 a : Real, \226\136\128 b : Real, a - b == a - (b + (b1 : Real)) + b1
       #|  abs((f : (_) -> Real)((t : _)) - (f((y : _)) + (b1 : Real))) + abs(b1)
-      #|  dd_bound * _
-      #|  f' y * _
+      #|  (dd_bound : Real) * (_any : Real)
+      #|  (f' : (_) -> Real)((y : _)) * (_any : Real)
       #|  abs((f : (Real) -> Real)((t : Real)) - (f((y : Real)) + (f' : (Real) -> Real)(y) * pow(t - y, 1))) <= (dd_bound : Real) * (pow(abs(t - y), 1 + 1) / real_of_num(2))
       #|  real_of_num(0) <= (dd_bound : Real) && (\226\136\128 p : Real, IN(p, real_interval([((x : Real), (z : Real))])) \226\134\146 abs((f'' : (Real) -> Real)(p)) <= dd_bound)
       #|  interval_arith((y : Real), ((x : Real), (z : Real)))
