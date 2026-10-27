@@ -17632,7 +17632,7 @@ pub fn num_interval_cases_then(x10058 : @kernel.Term, x10059 : Int64, x10060 : I
       } else {
         let mid = @lib.div63(@lib.add63(lo_1, hi_1), 2L)
         let t10069 = @nums.mk_small_numeral(mid)
-        let cond = @kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(<=):num->num->bool"), tm), t10069)
+        let cond = @kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)"), tm), t10069)
         let t10070 = cases(@lib.add63(mid, 1L), hi_1)
         let t10071 = @list.List([cases(lo_1, mid), t10070])
         @tactics.thenl(@class.asm_cases_tac(cond), t10071)
@@ -49151,7 +49151,7 @@ pub fn cross124_quotient_base_tac(x28181 : Int64, x28182 : Int64, x28183 : Int64
   let qhi = @lib.div63(hi, 100L)
   let t28187 = @nums.mk_small_numeral(qhi)
   let t28186 = @term_syntax.parse_term("(q : Num)")
-  let qbound = @kernel.mk_comb(@kernel.mk_comb(@parser.parse_term("(<=):num->num->bool"), t28186), t28187)
+  let qbound = @kernel.mk_comb(@kernel.mk_comb(@term_syntax.parse_term("(op_lt_eq : (Num, Num) -> Bool)"), t28186), t28187)
   let t28225 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t28224 = @simp.rewrite_tac(@list.List([cross124_child_rep()]))
   let t28223 = @tactics.try_tac(fn(x28222 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
