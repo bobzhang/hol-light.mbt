@@ -58135,14 +58135,14 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  real_of_num(0) < (e : Real)
       #|  (e : Real)
       #|  \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, uniformly_continuous_on(f, s) == (\226\136\128 t : (Cart[Real, M]) -> Bool, \226\136\128 t' : (Cart[Real, M]) -> Bool, SUBSET(t, s) && SUBSET(t', s) && setdist((t, t')) == real_of_num(0) \226\134\146 setdist((IMAGE(f, t), IMAGE(f, t'))) == real_of_num(0))
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  false
       #|  !((p : Real) <= distance(((x : Cart[Real, N]), x + (y : Cart[Real, N])))) == (norm(y) < p)
       #|  :real
       #|  :real
@@ -60653,11 +60653,11 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  1 <= SUC((n : Num))
       #|  (\226\136\128 f : _, \226\136\128 u : _, \226\136\128 n : _, (P : (_, _, _) -> Bool)(f, u, n)) == (\226\136\128 f : _, \226\136\128 n : _, \226\136\128 u : _, P(f, u, n))
       #|  (\226\136\128 n : Num, (P : (Num) -> Bool)(n)) == (P(0) && (\226\136\128 n : Num, P(SUC(n))))
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  false
       #|  (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, 1 <= n \226\134\146 (UNION_OF(COUNTABLE, INTERSECTION_OF(COUNTABLE, o(baire(n, UNIV), indicator)), s) && INTERSECTION_OF(COUNTABLE, UNION_OF(COUNTABLE, o(baire(n, UNIV), indicator)), s)) == baire(n + 1, UNIV, indicator(s))) && (\226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 n : Num, (UNION_OF(COUNTABLE, o(baire(n, UNIV), indicator), s) && INTERSECTION_OF(COUNTABLE, o(baire(n, UNIV), indicator), s)) == baire(n, UNIV, indicator(s))) && (\226\136\128 f : (Cart[Real, N]) -> Cart[Real, Unit], \226\136\128 u : (Cart[Real, Unit]) -> Bool, \226\136\128 n : Num, 1 <= n && baire(n + 1, UNIV, f) && open(u) \226\134\146 UNION_OF(COUNTABLE, INTERSECTION_OF(COUNTABLE, o(baire(n, UNIV), indicator)), {(x : Cart[Real, N]) | IN(f(x), u)}))
       #|  IMAGE((v : (Num, Cart[Real, N]) -> Bool), UNIV)
       #|  DIFF(UNIV, (v : (Num, Cart[Real, N]) -> Bool)((n : Num))) == UNIONS(DIFF(IMAGE(v, UNIV), {v(n)}))
