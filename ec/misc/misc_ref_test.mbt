@@ -35075,7 +35075,7 @@ test "EC/misc matches EC/misc.ml" {
       #|  op_bslash_slash
       #|  op_bslash_slash
       #|  false
-      #|  ( * ):num->num->num
+      #|  (op_star : (Num, Num) -> Num)
       #|  !divides(ring_char((r : Ring[_])), NUMERAL((n : Num)))
       #|  \226\136\128 f : Ring[A], \226\136\128 P : Bool, (field(f) && !(ring_char(f) == 2) && P) == (field(f) && !divides(ring_char(f), 2) && P)
       #|  prime(3)
