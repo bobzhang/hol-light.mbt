@@ -172,30 +172,30 @@ test "Formal_ineqs/verifier/m_verifier matches Formal_ineqs/verifier/m_verifier.
       #|  (\226\136\128 x : Cart[Real, _], IN(x, interval([(domain : (Cart[Real, _], Cart[Real, _]))])) \226\134\146 interval_arith((f : (Cart[Real, _]) -> Real)(x), ((lo : Real), (hi : Real)))) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 f(x) <= hi)
       #|  (\226\136\128 x : Cart[Real, _], IN(x, interval([(domain : (Cart[Real, _], Cart[Real, _]))])) \226\134\146 interval_arith((f : (Cart[Real, _]) -> Real)(x), ((lo : Real), (hi : Real)))) \226\134\146 (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 lo <= f(x))
       #|  \226\136\128 a : Cart[Real, N], \226\136\128 b : Cart[Real, N], \226\136\128 c : Cart[Real, N], \226\136\128 d : Cart[Real, N], (\226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(a, i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(c, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(d, i) <= (op_dollar : (Cart[Real, N], Num) -> Real)(b, i)) \226\134\146 (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(c, d)]), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(a, b)]))
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
       #|  (j : Num)
       #|  (i : Num) == (j : Num)
       #|  (i : Num) == (j : Num)
@@ -227,293 +227,293 @@ test "Formal_ineqs/verifier/m_verifier matches Formal_ineqs/verifier/m_verifier.
       #|  ~P <=> (P <=> F)
       #|  ~P <=> (P <=> F)
       #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  real_of_num(0)
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  real_of_num(0)
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
       #|  (m_cell_pass : ((Cart[Real, _]) -> Real, (Cart[Real, _], Cart[Real, _])) -> Bool)((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _]))) == (\226\136\128 x : Cart[Real, _], IN(x, interval([domain])) \226\134\146 f(x) < real_of_num(0))
       #|  (m_cell_list_pass : (List[(Cart[Real, N]) -> Real], (Cart[Real, N], Cart[Real, N])) -> Bool)((fs : List[(Cart[Real, N]) -> Real]), (domain : (Cart[Real, N], Cart[Real, N]))) == (\226\136\128 x : Cart[Real, N], IN(x, interval([domain])) \226\134\146 ITLIST((f : (Cart[Real, N]) -> Real) => (r : Bool) => f(x) < real_of_num(0) || r, fs, false))
       #|  m_cell_pass((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _]))) == m_cell_list_pass([f], domain)
@@ -535,222 +535,222 @@ test "Formal_ineqs/verifier/m_verifier matches Formal_ineqs/verifier/m_verifier.
       #|  \226\136\128 j : Num, \226\136\128 x : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 f : (Cart[Real, N]) -> Real, (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 !(i == j) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(u, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(v, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(z, i)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(v, j) == (op_dollar : (Cart[Real, N], Num) -> Real)(u, j) \226\134\146 (m_cell_pass : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N])) -> Bool)(f, (x, v)) \226\134\146 (m_cell_pass : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N])) -> Bool)(f, (u, z)) \226\134\146 (m_cell_pass : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N])) -> Bool)(f, (x, z))
       #|  \226\136\128 P : (_) -> Bool, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], ITLIST((a : _) => (r : Bool) => P(a) || r, APPEND(l1, l2), false) == (ITLIST((a : _) => (r : Bool) => P(a) || r, l1, false) || ITLIST((a : _) => (r : Bool) => P(a) || r, l2, false))
       #|  \226\136\128 j : Num, \226\136\128 x : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 v : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 fs1 : List[(Cart[Real, N]) -> Real], \226\136\128 fs2 : List[(Cart[Real, N]) -> Real], (\226\136\128 i : Num, 1 <= i && i <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)) \226\134\146 !(i == j) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(u, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, i) && (op_dollar : (Cart[Real, N], Num) -> Real)(v, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(z, i)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(v, j) == (op_dollar : (Cart[Real, N], Num) -> Real)(u, j) \226\134\146 (m_cell_list_pass : (List[(Cart[Real, N]) -> Real], (Cart[Real, N], Cart[Real, N])) -> Bool)(fs1, (x, v)) \226\134\146 (m_cell_list_pass : (List[(Cart[Real, N]) -> Real], (Cart[Real, N], Cart[Real, N])) -> Bool)(fs2, (u, z)) \226\134\146 (m_cell_list_pass : (List[(Cart[Real, N]) -> Real], (Cart[Real, N], Cart[Real, N])) -> Bool)((APPEND : (List[(Cart[Real, N]) -> Real], List[(Cart[Real, N]) -> Real]) -> List[(Cart[Real, N]) -> Real])(fs1, fs2), (x, z))
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
       #|  m_cell_list_pass((fs1 : List[(Cart[Real, _]) -> Real]), (domain : (Cart[Real, _], Cart[Real, _]))) == m_cell_list_pass(APPEND(fs1, NIL), domain)
       #|  m_cell_list_pass(APPEND((acc : List[(Cart[Real, _]) -> Real]), CONS((h : (Cart[Real, _]) -> Real), (fs2 : List[(Cart[Real, _]) -> Real]))), (domain : (Cart[Real, _], Cart[Real, _]))) == m_cell_list_pass(APPEND(CONS(h, acc), fs2), domain)
       #|  m_cell_list_pass(APPEND(APPEND(NIL, (fs2 : List[(Cart[Real, _]) -> Real])), (acc : List[(Cart[Real, _]) -> Real])), (domain : (Cart[Real, _], Cart[Real, _]))) == m_cell_list_pass(APPEND(fs2, acc), domain)
@@ -905,330 +905,330 @@ test "Formal_ineqs/verifier/m_verifier matches Formal_ineqs/verifier/m_verifier.
       #|  (xx : Cart[Real, N]) == lambda((i : Num) => if i == (j : Num) { op_dollar((x : Cart[Real, N]), i) } else { op_dollar((y : Cart[Real, N]), i) })
       #|  \226\136\128 j : Num, \226\136\128 x : Cart[Real, N], \226\136\128 z : Cart[Real, N], \226\136\128 u : Cart[Real, N], \226\136\128 domain : (Cart[Real, N], Cart[Real, N]), \226\136\128 fs : List[(Cart[Real, N]) -> Real], (SUBSET : ((Cart[Real, N]) -> Bool, (Cart[Real, N]) -> Bool) -> Bool)((interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([(x, z)]), (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (\226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 !(i == j) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(u, i) == (op_dollar : (Cart[Real, N], Num) -> Real)(z, i)) \226\134\146 (op_dollar : (Cart[Real, N], Num) -> Real)(u, j) == (op_dollar : (Cart[Real, N], Num) -> Real)(x, j) \226\134\146 (ALL : (((Cart[Real, N]) -> Real) -> Bool, List[(Cart[Real, N]) -> Real]) -> Bool)((f : (Cart[Real, N]) -> Real) => (diff2c_domain : ((Cart[Real, N], Cart[Real, N]), (Cart[Real, N]) -> Real) -> Bool)(domain, f) && (\226\136\128 y : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(y, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, f, y) <= real_of_num(0)), fs) \226\134\146 (m_cell_list_pass : (List[(Cart[Real, N]) -> Real], (Cart[Real, N], Cart[Real, N])) -> Bool)(fs, (x, u)) \226\134\146 (m_cell_list_pass : (List[(Cart[Real, N]) -> Real], (Cart[Real, N], Cart[Real, N])) -> Bool)(fs, (x, z))
       #|  0 == _0
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
-      #|  i:num
-      #|  1 <= i
-      #|  (P:num->bool) i
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
+      #|  (i : Num)
+      #|  1 <= (i : Num)
+      #|  (P : (Num) -> Bool)((i : Num))
       #|M_verifier.BOUNDED_INTERVAL_ARITH_IMP_HI' = (#forall:fun(fun(cart(real,'?1),bool),bool) (\x:cart(real,'?1). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) x:cart(real,'?1)) (#closed_interval:fun(list(prod(cart(real,'?1),cart(real,'?1))),fun(cart(real,'?1),bool)) ((#CONS:fun(prod(cart(real,'?1),cart(real,'?1)),fun(list(prod(cart(real,'?1),cart(real,'?1))),list(prod(cart(real,'?1),cart(real,'?1))))) domain:prod(cart(real,'?1),cart(real,'?1))) #NIL:list(prod(cart(real,'?1),cart(real,'?1))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'?1),real) x:cart(real,'?1))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))) |- (#forall:fun(fun(cart(real,'?1),bool),bool) (\x:cart(real,'?1). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?1),fun(fun(cart(real,'?1),bool),bool)) x:cart(real,'?1)) (#closed_interval:fun(list(prod(cart(real,'?1),cart(real,'?1))),fun(cart(real,'?1),bool)) ((#CONS:fun(prod(cart(real,'?1),cart(real,'?1)),fun(list(prod(cart(real,'?1),cart(real,'?1))),list(prod(cart(real,'?1),cart(real,'?1))))) domain:prod(cart(real,'?1),cart(real,'?1))) #NIL:list(prod(cart(real,'?1),cart(real,'?1))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'?1),real) x:cart(real,'?1))) hi:real))))
       #|M_verifier.BOUNDED_INTERVAL_ARITH_IMP_LO' = (#forall:fun(fun(cart(real,'?2),bool),bool) (\x:cart(real,'?2). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2),fun(fun(cart(real,'?2),bool),bool)) x:cart(real,'?2)) (#closed_interval:fun(list(prod(cart(real,'?2),cart(real,'?2))),fun(cart(real,'?2),bool)) ((#CONS:fun(prod(cart(real,'?2),cart(real,'?2)),fun(list(prod(cart(real,'?2),cart(real,'?2))),list(prod(cart(real,'?2),cart(real,'?2))))) domain:prod(cart(real,'?2),cart(real,'?2))) #NIL:list(prod(cart(real,'?2),cart(real,'?2))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'?2),real) x:cart(real,'?2))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))) |- (#forall:fun(fun(cart(real,'?2),bool),bool) (\x:cart(real,'?2). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2),fun(fun(cart(real,'?2),bool),bool)) x:cart(real,'?2)) (#closed_interval:fun(list(prod(cart(real,'?2),cart(real,'?2))),fun(cart(real,'?2),bool)) ((#CONS:fun(prod(cart(real,'?2),cart(real,'?2)),fun(list(prod(cart(real,'?2),cart(real,'?2))),list(prod(cart(real,'?2),cart(real,'?2))))) domain:prod(cart(real,'?2),cart(real,'?2))) #NIL:list(prod(cart(real,'?2),cart(real,'?2))))))) ((#real_le:fun(real,fun(real,bool)) lo:real) (f:fun(cart(real,'?2),real) x:cart(real,'?2))))))
       #|M_verifier.SUBSET_INTERVAL_IMP =  |- (#forall:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). (#forall:fun(fun(cart(real,'N),bool),bool) (\d:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) (#forall:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) a:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) c:cart(real,'N)) i:num))) ((#real_le:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) d:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) b:cart(real,'N)) i:num))))))) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))))))))))

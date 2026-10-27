@@ -22813,25 +22813,25 @@ Examples/pseudoprime quotations (409):
   (a : Num) * (b : Num) * (m : Num) == b * (a * m)
   (r : Num) < (e : Num) \226\134\146 e - 1 == r + (e - r - 1)
   EVEN((m : Num)) == EVEN((n : Num)) \226\134\146 pow(-int_of_num(1), m) == pow(-int_of_num(1), n)
-  ~
-  \\/
-  ~
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  ~
-  \\/
-  ~
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  F
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  false
   (r : Num) + 2 <= (r + 1) * 2
   {(p : Num) | prime(p) && divides(p, (n : Num))}
   EXP(2, (r : Num) + 2)

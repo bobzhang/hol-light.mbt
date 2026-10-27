@@ -5794,16 +5794,16 @@ priority is now real
 0..0..1..2..4..12..23..41..70..solved at 88
 priority is now real
 Jordan/real_ext quotations (47):
-  (+):num->(num->num)
-  (-):num->(num->num)
-  ( * ):num->(num->num)
+  (op_plus : (Num, Num) -> Num)
+  (op_minus : (Num, Num) -> Num)
+  (op_star : (Num, Num) -> Num)
   EXP
   DIV
   MOD
-  (<):num->(num->bool)
-  (<=):num->(num->bool)
-  (>):num->(num->bool)
-  (>=):num->(num->bool)
+  (op_lt : (Num, Num) -> Bool)
+  (op_lt_eq : (Num, Num) -> Bool)
+  (op_gt : (Num, Num) -> Bool)
+  (op_gt_eq : (Num, Num) -> Bool)
   int_add
   int_sub
   int_mul
@@ -5826,13 +5826,13 @@ Jordan/real_ext quotations (47):
   real_neg
   real_of_num
   real_abs
-  (+):num->num->num
-  (-):num->num->num
-  (*):num->num->num
-  (<):num->num->bool
-  (<=):num->num->bool
-  (>):num->num->bool
-  (>=):num->num->bool
+  (op_plus : (Num, Num) -> Num)
+  (op_minus : (Num, Num) -> Num)
+  (op_star : (Num, Num) -> Num)
+  (op_lt : (Num, Num) -> Bool)
+  (op_lt_eq : (Num, Num) -> Bool)
+  (op_gt : (Num, Num) -> Bool)
+  (op_gt_eq : (Num, Num) -> Bool)
   \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, x * a == x * b \226\134\146 !(x == real_of_num(0)) \226\134\146 a == b
   \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, a * x == b * x \226\134\146 !(x == real_of_num(0)) \226\134\146 a == b
   \226\136\128 x : Real, \226\136\128 a : Real, \226\136\128 b : Real, x * a <= x * b \226\134\146 real_of_num(0) < x \226\134\146 a <= b

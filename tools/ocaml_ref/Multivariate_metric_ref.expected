@@ -22231,10 +22231,10 @@ Multivariate/metric quotations (14748):
   \226\136\128 f : (A) -> B, \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, homeomorphic_map((top, top'), f) && SUBSET(s, topspace(top)) && SUBSET(t, topspace(top)) \226\134\146 separated_in(top', IMAGE(f, s), IMAGE(f, t)) == separated_in(top, s, t)
   (t1_space : (Topology[_]) -> Bool)((top : Topology[_])) == (\226\136\128 x : _, \226\136\128 y : _, IN(x, topspace(top)) && IN(y, topspace(top)) && !(x == y) \226\134\146 (\226\136\131 u : (_) -> Bool, open_in(top, u) && IN(x, u) && !IN(y, u)))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[A], topspace(top') == topspace(top) && (\226\136\128 u : (A) -> Bool, open_in(top, u) \226\134\146 open_in(top', u)) \226\134\146 t1_space(top) \226\134\146 t1_space(top')
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   \226\136\128 top : Topology[A], t1_space(top) == (\226\136\128 x : A, \226\136\128 y : A, IN(x, topspace(top)) && IN(y, topspace(top)) && !(x == y) \226\134\146 (\226\136\131 u : (A) -> Bool, closed_in(top, u) && IN(x, u) && !IN(y, u)))
   \226\136\128 top : Topology[A], t1_space(top) == (\226\136\128 x : A, \226\136\128 y : A, IN(x, topspace(top)) && IN(y, topspace(top)) && !(x == y) \226\134\146 separated_in(top, {x}, {y}))
   (\226\136\131 y : _, (P : (_) -> Bool)(y) && IN(y, {(a : _)}) && (Q : (_) -> Bool)(y)) == (P(a) && Q(a))
@@ -22302,13 +22302,13 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, t1_space(top) && SUBSET(s, derived_set_of(top, s)) && !(s == {}) \226\134\146 INFINITE(s)
   (hausdorff_space : (Topology[A]) -> Bool)((top : Topology[A])) == (\226\136\128 x : A, \226\136\128 y : A, IN(x, topspace(top)) && IN(y, topspace(top)) && !(x == y) \226\134\146 (\226\136\131 u : (A) -> Bool, \226\136\131 v : (A) -> Bool, open_in(top, u) && open_in(top, v) && IN(x, u) && IN(y, v) && DISJOINT(u, v)))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[A], topspace(top') == topspace(top) && (\226\136\128 u : (A) -> Bool, open_in(top, u) \226\134\146 open_in(top', u)) \226\134\146 hausdorff_space(top) \226\134\146 hausdorff_space(top')
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   \226\136\128 top : Topology[A], topspace(top) == {} \226\134\146 hausdorff_space(top)
   \226\136\128 top : Topology[A], hausdorff_space(top) \226\134\146 t1_space(top)
   \226\136\128 top : Topology[A], \226\136\128 s : (A) -> Bool, hausdorff_space(top) \226\134\146 closed_in(top, derived_set_of(top, s))
@@ -22668,25 +22668,25 @@ Multivariate/metric quotations (14748):
   {(x : A) | IN(x, topspace((top : Topology[A]))) && (f : (A) -> B)(x) == (y : B)} == {(x : A) | IN(x, topspace(top)) && o((g : (B) -> C), f, x) == g(y)}
   (y : B)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 top'' : Topology[C], \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> C, proper_map((top, top''), o(g, f)) && SUBSET(IMAGE(f, topspace(top)), topspace(top')) && continuous_map((top', top''), g) && (\226\136\128 x : B, \226\136\128 y : B, IN(x, topspace(top')) && IN(y, topspace(top')) && g(x) == g(y) \226\134\146 x == y) \226\134\146 proper_map((top, top'), f)
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   CROSS((u' : (C) -> Bool), (v' : (D) -> Bool))
   (v' : (D) -> Bool)
   (u' : (C) -> Bool)
@@ -22759,31 +22759,31 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 top'' : Topology[C], \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> C, perfect_map((top, top''), o(g, f)) && continuous_map((top, top'), f) && continuous_map((top', top''), g) && IMAGE(f, topspace(top)) == topspace(top') \226\134\146 perfect_map((top', top''), g)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 top'' : Topology[C], \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> C, hausdorff_space(top') && perfect_map((top, top''), o(g, f)) && continuous_map((top, top'), f) && continuous_map((top', top''), g) && IMAGE(f, topspace(top)) == topspace(top') \226\134\146 perfect_map((top, top'), f)
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 top'' : Topology[C], \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> C, perfect_map((top, top''), o(g, f)) && IMAGE(f, topspace(top)) == topspace(top') && continuous_map((top, top'), f) && continuous_map((top', top''), g) && (\226\136\128 x : B, \226\136\128 y : B, IN(x, topspace(top')) && IN(y, topspace(top')) && g(x) == g(y) \226\134\146 x == y) \226\134\146 perfect_map((top, top'), f)
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, discrete_space(top) && perfect_map((top, top'), f) \226\134\146 discrete_space(top')
   IMAGE((f : (A) -> B), (s : (A) -> Bool)) == IMAGE(f, {(x : A) | IN(x, topspace((top : Topology[A]))) && IN(f(x), IMAGE(f, s))})
   (s : (A) -> Bool)
@@ -24270,43 +24270,43 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], first_countable(top) == (\226\136\128 x : A, IN(x, topspace(top)) \226\134\146 (\226\136\131 b : ((A) -> Bool) -> Bool, COUNTABLE(b) && neighbourhood_base_at(x, b, top)))
   (t0_space : (Topology[A]) -> Bool)((top : Topology[A])) == (\226\136\128 x : A, \226\136\128 y : A, IN(x, topspace(top)) && IN(y, topspace(top)) && !(x == y) \226\134\146 (\226\136\131 u : (A) -> Bool, open_in(top, u) && !(IN(x, u) == IN(y, u))))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[A], topspace(top') == topspace(top) && (\226\136\128 u : (A) -> Bool, open_in(top, u) \226\134\146 open_in(top', u)) \226\134\146 t0_space(top) \226\134\146 t0_space(top')
-  \\/
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  ~
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  false
   \226\136\128 top : Topology[A], t1_space(top) \226\134\146 t0_space(top)
   (y : A)
   (x : A)
@@ -25823,14 +25823,14 @@ Multivariate/metric quotations (14748):
   (\226\136\131 x : _, (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x) && (R : (_) -> Bool)(x)) == !(\226\136\128 x : _, P(x) && Q(x) \226\134\146 !R(x))
   SUBSET((s : (A) -> Bool), mspace((m : Metric[A])))
   \226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, totally_bounded_in(m, s) == (SUBSET(s, mspace(m)) && (\226\136\128 x : (Num) -> A, (\226\136\128 n : Num, IN(x(n), s)) \226\134\146 (\226\136\131 r : (Num) -> Num, (\226\136\128 m : Num, \226\136\128 n : Num, m < n \226\134\146 r(m) < r(n)) && cauchy_in(m, o(x, r)))))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   (p : Num)
   (q : Num)
   \226\136\128 m : Metric[A], \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, totally_bounded_in(m, s) && SUBSET(t, s) \226\134\146 totally_bounded_in(m, t)
@@ -26662,43 +26662,43 @@ Multivariate/metric quotations (14748):
   (t : (A) -> Bool)
   (s : (A) -> Bool)
   \226\136\128 top : Topology[A], normal_space(top) == (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, SUBSET(s, topspace(top)) && SUBSET(t, topspace(top)) && DISJOINT(closure_of(top, s), closure_of(top, t)) \226\134\146 (\226\136\131 u : (A) -> Bool, \226\136\131 v : (A) -> Bool, open_in(top, u) && open_in(top, v) && SUBSET(s, u) && SUBSET(t, v) && DISJOINT(u, v)))
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  false
   DIFF(topspace((top : Topology[A])), (u : (A) -> Bool))
   (v' : (A) -> Bool)
   \226\136\128 t' : (_) -> Bool, INTER(t', (s : (_) -> Bool)) == {} && SUBSET((t : (_) -> Bool), t') \226\134\146 DISJOINT(s, t)
@@ -26796,33 +26796,33 @@ Multivariate/metric quotations (14748):
   (t : (A) -> Bool)
   (s : (A) -> Bool)
   \226\136\128 top : Topology[A], normal_space(top) == (\226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, fsigma_in(top, s) && fsigma_in(top, t) && separated_in(top, s, t) \226\134\146 (\226\136\131 u : (A) -> Bool, \226\136\131 v : (A) -> Bool, open_in(top, u) && open_in(top, v) && SUBSET(s, u) && SUBSET(t, v) && DISJOINT(u, v)))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   (u : (A) -> Bool)
   (t : (A) -> Bool)
   (u : (A) -> Bool)
@@ -27310,13 +27310,13 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], locally_path_connected_space(top) == (\226\136\128 v : (A) -> Bool, \226\136\128 x : A, open_in(top, v) && IN(x, v) \226\134\146 (\226\136\131 u : (A) -> Bool, open_in(top, u) && path_connected_in(top, u) && IN(x, u) && SUBSET(u, v)))
   \226\136\128 top : Topology[A], locally_path_connected_space(top) == (\226\136\128 u : (A) -> Bool, \226\136\128 c : (A) -> Bool, open_in(top, u) && IN(c, path_components_of(subtopology(top, u))) \226\134\146 open_in(top, c))
   \226\136\128 top : Topology[A], \226\136\128 x : A, locally_path_connected_space(top) \226\134\146 open_in(top, path_component_of(top, x))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  false
   topspace((top : Topology[A]))
   \226\136\128 top : Topology[A], \226\136\128 c : (A) -> Bool, locally_path_connected_space(top) && IN(c, path_components_of(top)) \226\134\146 open_in(top, c)
   \226\136\128 top : Topology[A], \226\136\128 c : (A) -> Bool, locally_path_connected_space(top) && IN(c, path_components_of(top)) \226\134\146 closed_in(top, c)
@@ -27470,13 +27470,13 @@ Multivariate/metric quotations (14748):
   \226\136\128 top : Topology[A], locally_path_connected_space(top) \226\134\146 locally_connected_space(top)
   \226\136\128 top : Topology[A], locally_connected_space(top) == (\226\136\128 u : (A) -> Bool, \226\136\128 c : (A) -> Bool, open_in(top, u) && IN(c, connected_components_of(subtopology(top, u))) \226\134\146 open_in(top, c))
   \226\136\128 top : Topology[A], \226\136\128 x : A, locally_connected_space(top) \226\134\146 open_in(top, connected_component_of(top, x))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  false
   topspace((top : Topology[A]))
   \226\136\128 top : Topology[A], \226\136\128 c : (A) -> Bool, locally_connected_space(top) && IN(c, connected_components_of(top)) \226\134\146 open_in(top, c)
   SUBSET((s : (_) -> Bool), (t : (_) -> Bool)) \226\134\146 IN((x : _), s) \226\134\146 IN(x, t)
@@ -28133,19 +28133,19 @@ Multivariate/metric quotations (14748):
   (\226\136\128 x : _, \226\136\128 y : _, (R : (_, _) -> Bool)(x, y) \226\134\146 R(y, x)) && (\226\136\131 a : _, (\226\136\128 x : _, \226\136\128 y : _, ((P : (_) -> Bool)(x) && !(x == a)) && (P(y) && !(y == a)) && !(x == y) \226\134\146 R(x, y)) && (\226\136\128 x : _, P(x) && !(x == a) \226\134\146 R(a, x))) \226\134\146 (\226\136\128 x : _, \226\136\128 y : _, P(x) && P(y) && !(x == y) \226\134\146 R(x, y))
   INTER((s : (_) -> Bool), DELETE(s, (a : _))) == DELETE(s, a)
   \226\136\128 top : Topology[A], \226\136\128 a : A, compact_space(top) && open_in(top, DELETE(topspace(top), a)) \226\134\146 t0_space(top) == t0_space(subtopology(top, DELETE(topspace(top), a)))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   (INR : (Unit) -> Sum[A, Unit])(one)
   alexandroff_compactification((top : Topology[A]))
   \226\136\128 top : Topology[A], t0_space(alexandroff_compactification(top)) == t0_space(top)
@@ -28184,13 +28184,13 @@ Multivariate/metric quotations (14748):
   alexandroff_compactification((top : Topology[A]))
   \226\136\128 top : Topology[A], regular_space(alexandroff_compactification(top)) == (regular_space(top) && locally_compact_space(top))
   \226\136\128 top : Topology[A], \226\136\128 a : A, compact_space(top) && open_in(top, DELETE(topspace(top), a)) && (\226\136\128 k : (A) -> Bool, compact_in(subtopology(top, DELETE(topspace(top), a)), k) && closed_in(subtopology(top, DELETE(topspace(top), a)), k) \226\134\146 closed_in(top, k)) \226\134\146 hausdorff_space(top) == (hausdorff_space(subtopology(top, DELETE(topspace(top), a))) && locally_compact_space(subtopology(top, DELETE(topspace(top), a))))
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  false
   (k : (A) -> Bool)
   (compact_in(subtopology((top : Topology[_]), (u : (_) -> Bool)), (k : (_) -> Bool)) && (P : ((_) -> Bool) -> Bool)(k) \226\134\146 (Q : ((_) -> Bool) -> Bool)(k)) == (SUBSET(k, u) \226\134\146 compact_in(subtopology(top, u), k) && P(k) \226\134\146 Q(k))
   (INR : (Unit) -> Sum[A, Unit])(one)
@@ -28587,12 +28587,12 @@ Multivariate/metric quotations (14748):
   (a : A)
   topspace(prod_topology((top1 : Topology[A]), (top2 : Topology[B]))) == {}
   \226\136\128 top1 : Topology[A], \226\136\128 top2 : Topology[B], completely_metrizable_space(prod_topology(top1, top2)) == (topspace(prod_topology(top1, top2)) == {} || completely_metrizable_space(top1) && completely_metrizable_space(top2))
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  false
   (r1 : Real) + (r2 : Real)
   (r2 : Real)
   (r1 : Real)
@@ -29224,17 +29224,17 @@ Multivariate/metric quotations (14748):
   ((p : Bool) && (q : Bool)) == !(p \226\134\146 !q)
   SUBSET(IMAGE((f : (A) -> B), INTER(topspace((top : Topology[A])), (s : (A) -> Bool))), mspace((m : Metric[B])))
   \226\136\128 top : Topology[A], \226\136\128 top' : Topology[B], \226\136\128 f : (A) -> B, \226\136\128 s : (A) -> Bool, completely_metrizable_space(top') && (continuous_map((subtopology(top, s), top'), f) || t1_space(top) && SUBSET(IMAGE(f, s), topspace(top'))) \226\134\146 gdelta_in(top, {(x : A) | IN(x, topspace(top)) && (\226\136\131 l : B, limit(top', f, l, within(atpointof(top, x), s)))})
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  false
   (x : A)
   (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
   {(x : A) | IN(x, topspace((top : Topology[A]))) && (\226\136\131 l : B, limit((top' : Topology[B]), (f : (A) -> B), l, within(atpointof(top, x), (s : (A) -> Bool))))}
