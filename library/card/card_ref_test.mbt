@@ -8208,11 +8208,11 @@ test "Library/card matches Library/card.ml" {
       #|  ((a : Bool) == (b : Bool)) == (!a == !b)
       #|  \226\136\128 s : (A) -> Bool, (FINITE : ((A) -> Bool) -> Bool)(s) == (op_lt_us_c : ((A) -> Bool, (Num) -> Bool) -> Bool)(s, (UNIV : (Num) -> Bool))
       #|  \226\136\128 s : (A) -> Bool, \226\136\128 t : (A) -> Bool, SUBSET(s, t) \226\134\146 op_lt_eq_us_c(s, t)
-      #|  ~
-      #|  ~
-      #|  ~
-      #|  ~
-      #|  F
+      #|  op_tilde
+      #|  op_tilde
+      #|  op_tilde
+      #|  op_tilde
+      #|  false
       #|  \226\136\128 s : (A) -> Bool, (op_lt_eq_us_c : ((A) -> Bool, (A) -> Bool) -> Bool)(s, (UNIV : (A) -> Bool))
       #|  (f : (A) -> B)
       #|  IMAGE((f : (A) -> B), (s : (A) -> Bool))
@@ -8640,44 +8640,44 @@ test "Library/card matches Library/card.ml" {
       #|  IMAGE((f : (A) -> B), (s : (A) -> Bool))
       #|  (f : (A) -> B)
       #|  forall(f:A->B) s. COUNTABLE(IMAGE f s) <=>\n                ?t. COUNTABLE t /\\ t SUBSET s /\\ IMAGE f s = IMAGE f t /\\\n                    (forall x y. x IN t /\\ y IN t ==> (f x = f y <=> x = y))
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  ~
-      #|  \\/
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_tilde
+      #|  op_bslash_slash
+      #|  false
       #|  forall l:A->A->bool. COUNTABLE(fld l) <=> COUNTABLE {(x,y) | l x y}
       #|  (SND : ((A, A)) -> A)
       #|  (FST : ((A, A)) -> A)
