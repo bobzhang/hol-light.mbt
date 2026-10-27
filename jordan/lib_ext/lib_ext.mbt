@@ -110,6 +110,20 @@ fn step_2() -> Unit raise {
 let local_defs_c : @lib.Cell[Ref[@list.List[(String, (String, @kernel.Term))]]] = @lib.Cell::new("local_defs")
 
 ///|
+/// The names local_definition's constants have upstream (package'name).
+/// The port joins package and name with `_`, which the term syntax can
+/// write; tactics_fix's hash_of_term hashes a constant under its upstream
+/// name, since Jordan's proofs pick hypotheses by those hashes (UNDH 3313).
+let upstream_names : Map[String, String] = {}
+
+///|
+/// The upstream name of the constant `name`: its own unless
+/// local_definition made it.
+pub fn upstream_name(name : String) -> String {
+  upstream_names.get(name).unwrap_or(name)
+}
+
+///|
 /// `local_defs`
 pub fn local_defs() -> Ref[@list.List[(String, (String, @kernel.Term))]] {
   local_defs_c.get()
@@ -146,7 +160,12 @@ pub fn local_definition(x16 : String, x17 : @kernel.Term) -> @kernel.Thm raise {
   }
   let (lv, largs) = @basics.strip_comb(l)
   let (cname, ty) = @kernel.dest_var(lv)
-  let cname_p = (package_name + ("'" + cname))
+  // a package name has no _, so package_name splits one way only
+  let cname_p = if package_name.contains("_") {
+    raise Failure("local_definition: a package name with _")
+  } else {
+    package_name + "_" + cname
+  }
   let lv_p = @kernel.mk_var(cname_p, ty)
   let l_p = @basics.list_mk_comb(lv_p, largs)
   let bod_p = @basics.mk_eq(l_p, r)
@@ -154,6 +173,7 @@ pub fn local_definition(x16 : String, x17 : @kernel.Term) -> @kernel.Thm raise {
   let thm = @pair.new_definition(tm_p)
   let _ = {
     local_defs().val = (local_defs().val).prepend((package_name, (cname, lv_p)))
+    upstream_names[cname_p] = package_name + "'" + cname
     ()
   }
   let _ = add_interface(cname, lv_p)

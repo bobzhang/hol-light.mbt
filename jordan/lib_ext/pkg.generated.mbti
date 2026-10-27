@@ -34,6 +34,8 @@ pub fn[TA] take(Int64, Int64, @list.List[TA]) -> @list.List[TA] raise
 
 pub fn test_(Unit) -> Unit raise
 
+pub fn upstream_name(String) -> String
+
 // Errors
 
 // Types and methods
