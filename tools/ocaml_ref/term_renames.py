@@ -38,7 +38,7 @@ TERM_RENAMES = {
     'Multivariate/metric.ml': {'fn': 'fn_'},
     'Multivariate/paracompact.ml': {'fn': 'fn_'},
     'Multivariate/polytope.ml': {'as': 'as_', 'fn': 'fn_'},
-    'Multivariate/realanalysis.ml': {'fn': 'fn_'},
+    'Multivariate/realanalysis.ml': {'fn': 'fn_', "f'x": 'f_x', "f'y": 'f_y'},
     'Multivariate/transcendentals.ml': {'is': 'is_'},
     'Probability/characteristic_functions.ml': {'fn': 'fn_'},
     'Probability/ergodic.ml': {'fn': 'fn_', 'is': 'is_'},
@@ -46,6 +46,10 @@ TERM_RENAMES = {
     'Probability/martingale_convergence.ml': {'enum': 'enum_'},
     # a prime inside a name: the term syntax allows primes only at the end
     '100/transcendence.ml': {"qp'd": 'qp_d', "p'd": 'p_d'},
+    'Multivariate/derivatives.ml': {"f'x": 'f_x', "f'y": 'f_y'},
+    'Unity/mk_unless.ml': {"p's": 'p_s', "q's": 'q_s'},
+    # Cu'v' is the prime family of the stem Cu'v
+    'Jordan/jordan_curve_theorem.ml': {"Cu'v": 'Cu_v'},
     'Logic/birkhoff.ml': {'fn': 'fn_'},
     # _ is a wildcard to formal_ineqs' ssreflect patterns, as is any name
     # that starts with _ (wild_frees), so it becomes _any, not u_; each of

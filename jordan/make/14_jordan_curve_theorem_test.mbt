@@ -69829,10 +69829,10 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (v' : _)
       #|  (e : _)
       #|  (Cv' : _)
-      #|  Cu'v'
-      #|  Cu'v' = Cv'
+      #|  Cu_v'
+      #|  Cu_v' = Cv'
       #|  (u : _)
-      #|  Cvu' u \\/ Cu'v' u
+      #|  Cvu' u \\/ Cu_v' u
       #|  (u : _)
       #|  (v : _)
       #|  (v' : _)
@@ -69841,9 +69841,9 @@ test "Jordan/jordan_curve_theorem matches Jordan/jordan_curve_theorem.ml" {
       #|  (v' : _)
       #|  (INTER : ((_) -> Bool, (_) -> Bool, _) -> Bool)
       #|  !(Cvu' : (_) -> Bool)((v' : _))
-      #|  simple_arc_end Cu'v' u' v'
-      #|  Cu'v' v'
-      #|  Cu'v' = C'''
+      #|  simple_arc_end Cu_v' u' v'
+      #|  Cu_v' v'
+      #|  Cu_v' = C'''
       #|  (Cvu' : _) == (C'' : _)
       #|  jordan_simple_arc_end((Cv' : ((Num) -> Real) -> Bool), (v' : (Num) -> Real), (u' : (Num) -> Real))
       #|  (Cv' : (_) -> _)((u' : _))
