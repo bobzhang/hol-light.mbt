@@ -5783,16 +5783,16 @@ num_ext_gcd loaded
 0..0..1..2..5..9..15..22..29..36..49..62..81..solved at 104
 0..0..1..3..7..solved at 12
 Jordan/num_ext_nabs quotations (55):
-  (+):num->(num->num)
-  (-):num->(num->num)
-  ( * ):num->(num->num)
+  (op_plus : (Num, Num) -> Num)
+  (op_minus : (Num, Num) -> Num)
+  (op_star : (Num, Num) -> Num)
   EXP
   DIV
   MOD
-  (<):num->(num->bool)
-  (<=):num->(num->bool)
-  (>):num->(num->bool)
-  (>=):num->(num->bool)
+  (op_lt : (Num, Num) -> Bool)
+  (op_lt_eq : (Num, Num) -> Bool)
+  (op_gt : (Num, Num) -> Bool)
+  (op_gt_eq : (Num, Num) -> Bool)
   int_add
   int_sub
   int_mul

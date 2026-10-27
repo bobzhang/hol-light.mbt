@@ -3000,29 +3000,29 @@ int quotations (625):
   div((m : Int), (n : Int))
   (n : Int) == int_of_num(0)
   P (m div n) (m rem n) <=>\n       ?q r. (n = &0 /\\ q = &0 /\\ r = m \\/\n              m = q * n + r /\\\n              &0 <= r /\\ r + &1 <= abs n) /\\\n             P q r
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  false
   P (m div n) (m rem n) <=>\n       ?q r. (n = &0 /\\ q = &0 /\\ r = m \\/\n              m = q * n + r /\\\n              (&0 <= m /\\ &0 <= n ==> &0 <= q) /\\\n              &0 <= r /\\ r + &1 <= abs n) /\\\n             P q r
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  \\/
-  \\/
-  \\/
-  \\/
-  ~
-  F
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_bslash_slash
+  op_tilde
+  false
   &0 <= m /\\ &0 <= n\n       ==> (P (m div n) (m rem n) <=>\n            ?q r. (n = &0 /\\ q = &0 /\\ r = m \\/\n                   m = q * n + r /\\\n                   &0 <= q /\\\n                   &0 <= r /\\ r + &1 <= n) /\\\n                  P q r)
   div
   rem

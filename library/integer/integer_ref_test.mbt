@@ -10015,11 +10015,11 @@ test "Library/integer matches Library/integer.ml" {
       #|  (q : Int)
       #|  forall x y n:int. abs(x - y) < n /\\ (x == y) (mod n) ==> x = y
       #|  forall m n a b.\n        ~(m = &0) /\\ (a == m * b) (mod (m * n)) ==> (a div m == b) (mod n)
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  false
       #|  (m : Int) == int_of_num(0)
       #|  forall m n a b:int.\n        coprime(m,n) /\\ m divides a /\\ (a == m * b) (mod n)\n        ==> (a div m == b) (mod n)
       #|  forall a1 a2 n1 n2:int.\n        (a1 == a2) (mod (gcd(n1,n2)))\n        ==> ?x. (x == a1) (mod n1) /\\ (x == a2) (mod n2)

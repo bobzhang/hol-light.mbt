@@ -15,7 +15,7 @@ pub fn fproves(x3 : @kernel.Thm, x4 : @kernel.Term) -> Bool raise {
   let th = x3
   let tm = x4
   let (hyp, concl) = @kernel.dest_thm(th)
-  (@list.List::is_empty(@lib.subtract(hyp, @list.List([@parser.parse_term("_FALSITY_")]))) && (concl == tm))
+  (@list.List::is_empty(@lib.subtract(hyp, @list.List([@term_syntax.parse_term("_FALSITY_")]))) && (concl == tm))
 }
 
 ///|
@@ -922,7 +922,7 @@ pub fn clausal_form_heuristic(x136 : @kernel.Term, x137 : Bool) -> ((@list.List[
       let tm_3 = x140
       @lib.forall(is_literal, @support.disj_list(tm_3))
     }
-    if (@lib.forall(is_clause, @support.conj_list(tm)) && (!@basics.free_in(@parser.parse_term("T"), tm) && !@basics.free_in(@parser.parse_term("F"), tm))) {
+    if (@lib.forall(is_clause, @support.conj_list(tm)) && (!@basics.free_in(@term_syntax.parse_term("true"), tm) && !@basics.free_in(@term_syntax.parse_term("false"), tm))) {
       if @basics.is_conj(tm) {
         let tms_1 = @support.conj_list(tm)
         proof_print_string_l(result_string_l(tms_1), ())

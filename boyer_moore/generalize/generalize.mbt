@@ -214,7 +214,7 @@ pub fn generalize_heuristic(x43 : @kernel.Term, x44 : Bool) -> ((@list.List[(@ke
       fn(x47 : @kernel.Thm) -> @kernel.Thm raise {
         let th_1 = x47
         let rest = @basics.dest_disj(@kernel.concl(th_1)).1
-        let t48 = @equal.ap_thm(@equal.ap_term(@parser.parse_term("(\\/)"), lemma), rest)
+        let t48 = @equal.ap_thm(@equal.ap_term(@term_syntax.parse_term("op_bslash_slash"), lemma), rest)
         @kernel.eq_mp(@equal.conv_rule(@equal.rand_conv(@simp.rewr_conv(@rewrite_rules.f_or())), t48), th_1)
       }
     }
@@ -973,13 +973,13 @@ pub fn separate(x196 : @kernel.Term, x197 : @kernel.Term, x198 : @kernel.Term, x
   if @kernel.is_comb(tm) {
     let (op, args) = @basics.strip_comb(tm)
     let recpos = get_rec_pos_of_fun(op)
-    if (allrpos && !((op == @parser.parse_term("(=)")))) {
+    if (allrpos && !((op == @term_syntax.parse_term("(op_eq : (_, _) -> Bool)")))) {
       @basics.list_mk_comb(op, @lib.map(fn(x205 : (@kernel.Term, Int64)) -> @kernel.Term raise {
         let (t, i) = x205
         replace(t)(v)(v_p)(((i == recpos) || (recpos == 0L)))
       }, @support.number_list(args)))
     } else {
-      if (op == @parser.parse_term("(=)")) {
+      if (op == @term_syntax.parse_term("(op_eq : (_, _) -> Bool)")) {
         let t206 = replace(@lib.hd(@lib.tl(args)))(v)(v_p)(true)
         @basics.list_mk_comb(op, @list.List([replace(@lib.hd(args))(v)(v_p)(true), t206]))
       } else {
