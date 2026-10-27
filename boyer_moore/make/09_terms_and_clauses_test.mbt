@@ -5580,18 +5580,18 @@ test "Boyer_Moore/terms_and_clauses matches Boyer_Moore/terms_and_clauses.ml" {
       #|  true
       #|  false
       #|  (b : Bool)
-      #|  forall b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))
+      #|  forall b x x' (y:X). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))
       #|  (b : Bool)
-      #|  forall b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))
+      #|  forall b y y' (x:X). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))
       #|  (b : Bool)
       #|  (if (b : Bool) { b } else { false }) == b
       #|  (b : Bool)
       #|  (if (b : Bool) { true } else { false }) == b
       #|  (x : Bool)
       #|  ((x : Bool) == true) == x
-      #|  (y:'a) = z
+      #|  (y:X) = z
       #|  (x : Bool)
-      #|  (x = ((y:'a) = z)) = (if (y = z) then (x = T) else (x = F))
+      #|  (x = ((y:X) = z)) = (if (y = z) then (x = T) else (x = F))
       #|  (x : Bool)
       #|  ((x : Bool) == false) == (if x { false } else { true })
       #|  (b : Bool)
@@ -5599,12 +5599,12 @@ test "Boyer_Moore/terms_and_clauses matches Boyer_Moore/terms_and_clauses.ml" {
       #|  op_tilde
       #|COND_T =  |- ((#=:fun('A,fun('A,bool)) (((#COND:fun(bool,fun('A,fun('A,'A))) #T:bool) t1:'A) t2:'A)) t1:'A)
       #|COND_F =  |- ((#=:fun('A,fun('A,bool)) (((#COND:fun(bool,fun('A,fun('A,'A))) #F:bool) t1:'A) t2:'A)) t2:'A)
-      #|COND_LEFT =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun(''a,bool),bool) (\x:''a. (#forall:fun(fun(''a,bool),bool) (\x':''a. (#forall:fun(fun(''a,bool),bool) (\y:''a. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) ((#=:fun(''a,fun(''a,bool)) x:''a) x':''a))) ((#=:fun(''a,fun(''a,bool)) (((#COND:fun(bool,fun(''a,fun(''a,''a))) b:bool) x:''a) y:''a)) (((#COND:fun(bool,fun(''a,fun(''a,''a))) b:bool) x':''a) y:''a)))))))))))
-      #|COND_RIGHT =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun(''a,bool),bool) (\y:''a. (#forall:fun(fun(''a,bool),bool) (\y':''a. (#forall:fun(fun(''a,bool),bool) (\x:''a. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) b:bool)) ((#=:fun(''a,fun(''a,bool)) y:''a) y':''a))) ((#=:fun(''a,fun(''a,bool)) (((#COND:fun(bool,fun(''a,fun(''a,''a))) b:bool) x:''a) y:''a)) (((#COND:fun(bool,fun(''a,fun(''a,''a))) b:bool) x:''a) y':''a)))))))))))
+      #|COND_LEFT =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun('X,bool),bool) (\x:'X. (#forall:fun(fun('X,bool),bool) (\x':'X. (#forall:fun(fun('X,bool),bool) (\y:'X. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) ((#=:fun('X,fun('X,bool)) x:'X) x':'X))) ((#=:fun('X,fun('X,bool)) (((#COND:fun(bool,fun('X,fun('X,'X))) b:bool) x:'X) y:'X)) (((#COND:fun(bool,fun('X,fun('X,'X))) b:bool) x':'X) y:'X)))))))))))
+      #|COND_RIGHT =  |- (#forall:fun(fun(bool,bool),bool) (\b:bool. (#forall:fun(fun('X,bool),bool) (\y:'X. (#forall:fun(fun('X,bool),bool) (\y':'X. (#forall:fun(fun('X,bool),bool) (\x:'X. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) b:bool)) ((#=:fun('X,fun('X,bool)) y:'X) y':'X))) ((#=:fun('X,fun('X,bool)) (((#COND:fun(bool,fun('X,fun('X,'X))) b:bool) x:'X) y:'X)) (((#COND:fun(bool,fun('X,fun('X,'X))) b:bool) x:'X) y':'X)))))))))))
       #|COND_RIGHT_F =  |- ((#=:fun(bool,fun(bool,bool)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) b:bool) b:bool) #F:bool)) b:bool)
       #|COND_T_F =  |- ((#=:fun(bool,fun(bool,bool)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) b:bool) #T:bool) #F:bool)) b:bool)
       #|EQ_T =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) x:bool) #T:bool)) x:bool)
-      #|EQ_EQ =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) x:bool) ((#=:fun(''a,fun(''a,bool)) y:''a) z:''a))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(''a,fun(''a,bool)) y:''a) z:''a)) ((#=:fun(bool,fun(bool,bool)) x:bool) #T:bool)) ((#=:fun(bool,fun(bool,bool)) x:bool) #F:bool)))
+      #|EQ_EQ =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) x:bool) ((#=:fun('X,fun('X,bool)) y:'X) z:'X))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun('X,fun('X,bool)) y:'X) z:'X)) ((#=:fun(bool,fun(bool,bool)) x:bool) #T:bool)) ((#=:fun(bool,fun(bool,bool)) x:bool) #F:bool)))
       #|EQ_F =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) x:bool) #F:bool)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) x:bool) #F:bool) #T:bool))
       #|COND_OR =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (((#COND:fun(bool,fun(bool,fun(bool,bool))) b:bool) x:bool) y:bool)) z:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) b:bool)) ((#\/:fun(bool,fun(bool,bool)) x:bool) z:bool))) ((#\/:fun(bool,fun(bool,bool)) b:bool) ((#\/:fun(bool,fun(bool,bool)) y:bool) z:bool))))
       #|NOT_EQ_F =  |- (#forall:fun(fun('A,bool),bool) (\x:'A. ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun('A,fun('A,bool)) x:'A) x:'A))) #F:bool)))
