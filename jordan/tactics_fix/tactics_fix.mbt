@@ -200,8 +200,13 @@ fn step_5() -> Unit raise {
       }
       @kernel.Term::Const(s_1, t_1) => {
         let t24 = hash_of_type(t_1)
-        // Stable symbol code used by existing Jordan proof labels.
-        let symbol_hash = if s_1 == "forall" { 33L } else { memhash_of_string(s_1) }
+        // Stable symbol code used by existing Jordan proof labels: upstream's
+        // names (! and local definitions' package'name).
+        let symbol_hash = if s_1 == "forall" {
+          33L
+        } else {
+          memhash_of_string(@lib_ext.upstream_name(s_1))
+        }
         @lib.mod63(@lib.add63(@lib.mul63(prime220, symbol_hash), t24), prime1220)
       }
       @kernel.Term::Comb(s_2, t_2) => {

@@ -39,21 +39,21 @@ pub fn arith_simp_conv(x20 : @list.List[@kernel.Thm]) -> @equal.Conv raise {
 pub fn arith_net(x22 : Unit) -> @nets.Net[@simp.GconvOf[@equal.Conv]] raise {
   let _ = x22
   let t45 = @simp.basic_net()
-  let t30 = (@parser.parse_term("(NUMERAL m) MOD (NUMERAL n)"), @calc_num.num_mod_conv)
-  let t31 = (@parser.parse_term("(NUMERAL m) DIV (NUMERAL n)"), @calc_num.num_div_conv)
-  let t32 = (@parser.parse_term("(NUMERAL m) EXP (NUMERAL n)"), @calc_num.num_exp_conv)
-  let t33 = (@parser.parse_term("NUMERAL m * NUMERAL n"), @calc_num.num_mult_conv)
-  let t34 = (@parser.parse_term("NUMERAL m - NUMERAL n"), @calc_num.num_sub_conv)
-  let t35 = (@parser.parse_term("NUMERAL m + NUMERAL n"), @calc_num.num_add_conv)
-  let t36 = (@parser.parse_term("ODD(NUMERAL n)"), @calc_num.num_odd_conv)
-  let t37 = (@parser.parse_term("EVEN(NUMERAL n)"), @calc_num.num_even_conv)
-  let t38 = (@parser.parse_term("NUMERAL m = NUMERAL n"), @calc_num.num_rel_conv)
-  let t39 = (@parser.parse_term("NUMERAL m >= NUMERAL n"), @calc_num.num_rel_conv)
-  let t40 = (@parser.parse_term("NUMERAL m > NUMERAL n"), @calc_num.num_rel_conv)
-  let t41 = (@parser.parse_term("NUMERAL m <= NUMERAL n"), @calc_num.num_rel_conv)
-  let t42 = (@parser.parse_term("NUMERAL m < NUMERAL n"), @calc_num.num_rel_conv)
-  let t43 = (@parser.parse_term("FACT(NUMERAL n)"), @calc_num.num_fact_conv)
-  let t44 = (@parser.parse_term("PRE(NUMERAL n)"), @calc_num.num_pre_conv)
+  let t30 = (@term_syntax.parse_term("MOD(NUMERAL((m : Num)), NUMERAL((n : Num)))"), @calc_num.num_mod_conv)
+  let t31 = (@term_syntax.parse_term("DIV(NUMERAL((m : Num)), NUMERAL((n : Num)))"), @calc_num.num_div_conv)
+  let t32 = (@term_syntax.parse_term("EXP(NUMERAL((m : Num)), NUMERAL((n : Num)))"), @calc_num.num_exp_conv)
+  let t33 = (@term_syntax.parse_term("NUMERAL((m : Num)) * NUMERAL((n : Num))"), @calc_num.num_mult_conv)
+  let t34 = (@term_syntax.parse_term("NUMERAL((m : Num)) - NUMERAL((n : Num))"), @calc_num.num_sub_conv)
+  let t35 = (@term_syntax.parse_term("NUMERAL((m : Num)) + NUMERAL((n : Num))"), @calc_num.num_add_conv)
+  let t36 = (@term_syntax.parse_term("ODD(NUMERAL((n : Num)))"), @calc_num.num_odd_conv)
+  let t37 = (@term_syntax.parse_term("EVEN(NUMERAL((n : Num)))"), @calc_num.num_even_conv)
+  let t38 = (@term_syntax.parse_term("NUMERAL((m : Num)) == NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t39 = (@term_syntax.parse_term("NUMERAL((m : Num)) >= NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t40 = (@term_syntax.parse_term("NUMERAL((m : Num)) > NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t41 = (@term_syntax.parse_term("NUMERAL((m : Num)) <= NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t42 = (@term_syntax.parse_term("NUMERAL((m : Num)) < NUMERAL((n : Num))"), @calc_num.num_rel_conv)
+  let t43 = (@term_syntax.parse_term("FACT(NUMERAL((n : Num)))"), @calc_num.num_fact_conv)
+  let t44 = (@term_syntax.parse_term("PRE(NUMERAL((n : Num)))"), @calc_num.num_pre_conv)
   @lib.itlist(fn(x27 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise), x28 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
     let s29 = ((x26 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) => @lib.uncurry(fn(x23 : @kernel.Term, x24 : (@kernel.Term) -> @kernel.Thm raise) -> ((@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise) raise {
       fn(x25 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
@@ -61,7 +61,7 @@ pub fn arith_net(x22 : Unit) -> @nets.Net[@simp.GconvOf[@equal.Conv]] raise {
       }
     }, x26))(x27)
     s29(x28)
-  }, @list.List([(@parser.parse_term("SUC(NUMERAL n)"), @calc_num.num_suc_conv), t44, t43, t42, t41, t40, t39, t38, t37, t36, t35, t34, t33, t32, t31, t30]), t45)
+  }, @list.List([(@term_syntax.parse_term("SUC(NUMERAL((n : Num)))"), @calc_num.num_suc_conv), t44, t43, t42, t41, t40, t39, t38, t37, t36, t35, t34, t33, t32, t31, t30]), t45)
 }
 
 ///|
