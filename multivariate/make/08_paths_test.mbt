@@ -64349,30 +64349,30 @@ test "Multivariate/paths matches Multivariate/paths.ml" {
       #|  (s : (Cart[Real, N]) -> Bool)
       #|  (s : (Cart[Real, N]) -> Bool) => pairwise((x : Cart[Real, N]) => (y : Cart[Real, N]) => \226\136\128 i : Num, 1 <= i && i <= (n : Num) \226\134\146 !(op_dollar(x, i) == op_dollar(y, i)), s)
       #|  \226\136\128 Q : (_) -> Bool, (\226\136\128 s : _, \226\136\128 t : _, (P : (_) -> Bool)(s) && P(t) && (R : (_, _) -> Bool)(s, t) \226\134\146 R(t, s)) && (\226\136\128 t : _, P(t) && (\226\136\128 s : _, P(s) && Q(s) \226\134\146 R(s, t)) \226\134\146 (\226\136\128 s : _, P(s) \226\134\146 R(s, t))) && (\226\136\128 s : _, \226\136\128 t : _, P(s) && Q(s) && P(t) && Q(t) \226\134\146 R(s, t)) \226\134\146 (\226\136\128 s : _, \226\136\128 t : _, P(s) && P(t) \226\134\146 R(s, t))
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  \\/
-      #|  F
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  op_bslash_slash
+      #|  false
       #|  ((p : Bool) && (q : Bool) && (r : Bool) && (s : Bool)) == ((p && q && r) && s)
       #|  (n : Num) <= (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))
       #|  1 <= (n : Num)

@@ -5827,13 +5827,13 @@ test "Jordan/num_ext_gcd matches Jordan/num_ext_gcd.ml" {
       #|priority is now real
       #|num_ext_gcd loaded
       #|Jordan/num_ext_gcd quotations (53):
-      #|  (+):num->num->num
-      #|  (-):num->num->num
-      #|  (*):num->num->num
-      #|  (<):num->num->bool
-      #|  (<=):num->num->bool
-      #|  (>):num->num->bool
-      #|  (>=):num->num->bool
+      #|  (op_plus : (Num, Num) -> Num)
+      #|  (op_minus : (Num, Num) -> Num)
+      #|  (op_star : (Num, Num) -> Num)
+      #|  (op_lt : (Num, Num) -> Bool)
+      #|  (op_lt_eq : (Num, Num) -> Bool)
+      #|  (op_gt : (Num, Num) -> Bool)
+      #|  (op_gt_eq : (Num, Num) -> Bool)
       #|  (DIVIDE : (Num, Num) -> Bool)((a : Num), (b : Num)) == (\226\136\131 m : Num, b == m * a)
       #|  DIVIDE
       #|  (m' : Num) * (m : Num)
