@@ -75168,9 +75168,9 @@ test "Multivariate/canal matches Multivariate/canal.ml" {
       #|  \226\136\128 net : Net[A], \226\136\128 P : (B) -> Bool, \226\136\128 f : (B, A) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (B, A) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : (B) -> Cart[Real, Tybit0[Unit]], \226\136\128 m : (B) -> Cart[Real, Tybit0[Unit]], \226\136\128 b1 : Real, \226\136\128 b2 : Real, eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(l(n)) <= b1, net) && real_of_num(0) < b2 && eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 b2 <= norm(m(n)), net) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(f(n, x) - l(n)) < e, net)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(g(n, x) - m(n)) < e, net)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(f(n, x) / g(n, x) - l(n) / m(n)) < e, net))
       #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 m : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, net) && op_minus_minus_gt(g, m, net) \226\134\146 op_minus_minus_gt((x : A) => f(x) * g(x), l * m, net)
       #|  norm((l : Cart[Real, Tybit0[Unit]]))
-      #|  \\n:X. (l:complex)
-      #|  \\n:X. (f:A->complex)
-      #|  \\x:X. T
+      #|  (n : X) => (l : Cart[Real, Tybit0[Unit]])
+      #|  (n : X) => (f : (A) -> Cart[Real, Tybit0[Unit]])
+      #|  (x : X) => true
       #|  (net : Net[A])
       #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : _, \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 m : _, op_minus_minus_gt(f, l, net) && !(l == Cx(real_of_num(0))) \226\134\146 op_minus_minus_gt((x : A) => inv(f(x)), inv(l), net)
       #|  \226\136\128 net : Net[A], \226\136\128 f : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 g : (A) -> Cart[Real, Tybit0[Unit]], \226\136\128 l : Cart[Real, Tybit0[Unit]], \226\136\128 m : Cart[Real, Tybit0[Unit]], op_minus_minus_gt(f, l, net) && op_minus_minus_gt(g, m, net) && !(m == Cx(real_of_num(0))) \226\134\146 op_minus_minus_gt((x : A) => f(x) / g(x), l / m, net)
