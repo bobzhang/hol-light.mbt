@@ -1,7 +1,8 @@
 """Rename term variables the term syntax cannot write (issue #140).
 
 Some upstream theories name variables like MoonBit keywords (fn, enum, as,
-...). The port renames them, keyword to keyword_ (fn -> fn_), in its sources
+...), or _, which the term syntax reads as a type hole. The port renames
+them, keyword to keyword_ (fn -> fn_) and _ to _any, in its sources
 and in a copy of the upstream file the OCaml reference loads (as
 TYPE_RENAMES does for type variables, forall_reference.py), and
 check_term_renames.py checks that the reference output changes only by
@@ -33,7 +34,7 @@ TERM_RENAMES = {
     'Logic/lpo.ml': {'fn': 'fn_'},
     'Logic/positive.ml': {'fn': 'fn_'},
     'Multivariate/gamma.ml': {'is': 'is_'},
-    'Multivariate/integration.ml': {'extend': 'extend_'},
+    'Multivariate/integration.ml': {'extend': 'extend_', '_': '_any'},
     'Multivariate/metric.ml': {'fn': 'fn_'},
     'Multivariate/paracompact.ml': {'fn': 'fn_'},
     'Multivariate/polytope.ml': {'as': 'as_', 'fn': 'fn_'},
@@ -45,7 +46,31 @@ TERM_RENAMES = {
     'Probability/martingale_convergence.ml': {'enum': 'enum_'},
     # a prime inside a name: the term syntax allows primes only at the end
     '100/transcendence.ml': {"qp'd": 'qp_d', "p'd": 'p_d'},
+    'Logic/birkhoff.ml': {'fn': 'fn_'},
+    # _ is a wildcard to formal_ineqs' ssreflect patterns, as is any name
+    # that starts with _ (wild_frees), so it becomes _any, not u_; each of
+    # these patterns has one _, so none loses a distinct wildcard
+    'Formal_ineqs/lib/ssrnat.hl': {'_': '_any'},
+    'Formal_ineqs/taylor/m_taylor_arith.hl': {'_': '_any'},
+    'Formal_ineqs/taylor/theory/multivariate_taylor-compiled.hl': {'_': '_any'},
+    'Formal_ineqs/taylor/theory/taylor_interval-compiled.hl': {'_': '_any'},
+    'GL/completeness.ml': {'_': '_any'},
 }
+# _ in ssreflect's move ["_"] and in INTRO_TAC "_" names no variable: it
+# discards (GEN_TAC, or drops the assumption). Elsewhere a string "_" names
+# one, as any other.
+WILDCARD = '_'
+# move [ (or move_(@list.List([ ), then only whole string items before
+# this one, on any lines; or INTRO_TAC (
+DISCARD = re.compile(r'(?:(?:\bmove|@ssreflect\.move_)\s*\(?\s*(?:@list\.List\(\s*)?\[\s*'
+                     r'(?:"(?:[^"\\\n]|\\.)*"\s*[;,]\s*)*'
+                     r'|(?:\bINTRO_TAC|@theorems\.intro_tac)\s*\(?\s*)$')
+
+
+def discards(text, i):
+    """Whether the string at text[i] is the "_" of a move [...] list or of
+    INTRO_TAC."""
+    return bool(DISCARD.search(text[max(0, i - 2000):i]))
 # upstream file -> [(text, replacement)], each text occurring once, applied
 # before the rename (for a name built in code)
 TERM_PATCHES = {
@@ -147,7 +172,10 @@ def hol_names(q):
     for s, e, kind in hol_spans(q):
         if kind == 'name':
             names.append(q[s:e])
-            names += re.findall(r"[A-Za-z0-9_']+", q[s:e])
+            # a symbolic name with an underscore head (_$) is one name, and
+            # no alphanumeric one hides in it
+            if re.search(r'[A-Za-z0-9]', q[s:e]):
+                names += re.findall(r"[A-Za-z0-9_']+", q[s:e])
     return names
 
 
@@ -199,7 +227,8 @@ def rename_ocaml(text, renames, patches=()):
         start, at = at, at + len(piece)
         if kind == 'quotation' and not piece.endswith(':`'):
             piece = '`' + rename_in_hol(piece[1:-1], renames) + '`'
-        elif kind == 'string' and renamed(string_value(piece), renames) is not None:
+        elif kind == 'string' and renamed(string_value(piece), renames) is not None and \
+                not (string_value(piece) == WILDCARD and discards(text, start)):
             assert string_value(piece) == piece[1:-1], f'an escaped string names a renamed variable: {piece}'
             callee = callee_before(text, start)
             if callee in NAME_CALLEES:
@@ -241,10 +270,12 @@ def rename_moonbit(text, renames):
         elif callee == '@term_syntax.parse_term':
             # fn { pattern => ... } is the term syntax's own keyword
             names = re.findall(r"[A-Za-z_][A-Za-z0-9_]*'*", re.sub(r'\bfn(?=\s*\{)', ' ', body))
+            # a bare _ is a hole there, never a variable
+            names = [n for n in names if n.rstrip("'") != WILDCARD]
             assert not uses(names, renames) and not uses(names, renames, new=True), \
                 f'a term-syntax quotation names a renamed variable: {body[:60]!r}'
             continue
-        elif renamed(body, renames) is not None:
+        elif renamed(body, renames) is not None and not (body == WILDCARD and discards(text, m.start())):
             if callee in NAME_CALLEES:
                 new = renamed(body, renames)
             else:
