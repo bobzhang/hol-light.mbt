@@ -1400,7 +1400,7 @@ fn step_52() -> Unit raise {
   let t532 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.gen_rewrite_tac(fn(x523 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x523
   }, @list.List([@pair.forall_pair_thm()])), t525), t526), t527), t528), t529), t530), t531)
-  functions_form_eqclause_func_c.set(@tactics.prove(@parser.parse_term("forall fn. functions_form(interp(Eqclause_Func fn)) = {fn}"), t532))
+  functions_form_eqclause_func_c.set(@tactics.prove(@parser.parse_term("forall fn_. functions_form(interp(Eqclause_Func fn_)) = {fn_}"), t532))
 }
 
 ///|
