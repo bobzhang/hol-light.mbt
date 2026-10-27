@@ -513,12 +513,20 @@ fn Printer::comb(
     }
     (Const("INSERT", _), [_, _]) if self.sets && set_elements(t) is Some(items) =>
       "{" + items.map(x => self.term(x, EXPR, bound)).join(", ") + "}"
-    // with no binders to list, only the implicit form can write it
-    (Const("GSPEC", _), [Abs(g, body)]) if self.sets &&
+    // with no binders to list, only the implicit form can write it; a
+    // comprehension applied to arguments ({x | P x} y) is written so too
+    (Const("GSPEC", _), [Abs(g, body), ..]) if self.sets &&
       !(self.exact && !(g is Var(n, _) && pvar_number(n) is Some(_))) &&
       comprehension(g, body) is Some((scoped, p, e)) &&
-      (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) =>
-      self.comprehension(g, scoped, p, e, bound)
+      (!scoped.is_empty() || implicit_binders(e, p, bound).is_empty()) => {
+      let s = self.comprehension(g, scoped, p, e, bound)
+      if args.length() == 1 {
+        s
+      } else {
+        let rest = args[1:].to_array().map(a => self.term(a, EXPR, bound))
+        wrap(s + "(" + rest.join(", ") + ")", SIMPLE, ctx)
+      }
+    }
     (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
           l => Some(l)
         })

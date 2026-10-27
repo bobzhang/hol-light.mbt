@@ -473,3 +473,30 @@ test "binders named T and F: comprehensions and patterns" {
   let s = @term_syntax.print_term(m)
   assert_true(@term_syntax.same_term(@term_syntax.parse_term(s), m))
 }
+
+///|
+test "a comprehension applied to an argument is written in set notation" {
+  let exact = fn(q : String) -> String raise {
+    try @term_syntax.spell_quotation(q, @parser.parse_term(q)) catch {
+      @term_syntax.Unprintable(m) => "unprintable: " + m
+      e => raise e
+    }
+  }
+  // GSPEC (\g. ...) y: spelled out, its binder would be a GEN%PVAR name
+  inspect(exact("{x | x < c} b"), content=(
+    #|{(x : Num) | x < (c : Num)}((b : Num))
+  ))
+  inspect(exact("s SUBSET u <=> {t:num->bool | t SUBSET u} s"), content=(
+    #|SUBSET((s : (Num) -> Bool), (u : (Num) -> Bool)) == {(t : (Num) -> Bool) | SUBSET(t, u)}(s)
+  ))
+  // in the predicate and in the element of another comprehension
+  inspect(exact("{f x | {g y | P y} (x:num)} = {f(g y) | P (y:num)}"), content=(
+    #|{(f : (Num) -> _)((x : Num)) | {(g : (Num) -> Num)((y : Num)) | (P : (Num) -> Bool)(y)}(x)} == {f(g((y : Num))) | P(y)}
+  ))
+  inspect(exact("{ {x | x < n} m | n < 3 /\\ m < n}"), content=(
+    #|{{(x : Num) | x < (n : Num)}((m : Num)) | n < 3 && m < n}
+  ))
+  inspect(exact("{x | x < 2} = {y | y < 2} /\\ {x | x < 3} 1"), content=(
+    #|{(x : Num) | x < 2} == {(y : Num) | y < 2} && {(x : Num) | x < 3}(1)
+  ))
+}
