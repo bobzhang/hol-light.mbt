@@ -27033,7 +27033,7 @@ test "Multivariate/metric matches Multivariate/metric.ml" {
       #|  \226\136\128 top : Topology[A], op_eq_us_c({(s : (A) -> Bool) | open_in(top, s)}, {(s : (A) -> Bool) | closed_in(top, s)})
       #|  (discrete_topology : ((A) -> Bool) -> Topology[A])((u : (A) -> Bool)) == topology({(s : (A) -> Bool) | SUBSET(s, u)})
       #|  (discrete_space : (Topology[A]) -> Bool)((top : Topology[A])) == (discrete_topology(topspace(top)) == top)
-      #|  s SUBSET u <=> {t | t SUBSET u} s
+      #|  SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) == {(t : (_) -> Bool) | SUBSET(t, u)}(s)
       #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, open_in(discrete_topology(u), s) == SUBSET(s, u)
       #|  \226\136\128 u : (A) -> Bool, topspace(discrete_topology(u)) == u
       #|  \226\136\128 u : (A) -> Bool, \226\136\128 s : (A) -> Bool, closed_in(discrete_topology(u), s) == SUBSET(s, u)
@@ -31699,7 +31699,7 @@ test "Multivariate/metric matches Multivariate/metric.ml" {
       #|  ({(f : (_) -> _)((x : _)) | (P : (_) -> Bool)(x)} == {}) == !(\226\136\131 x : _, P(x))
       #|  \226\136\128 P : (A) -> Bool, \226\136\128 top : Topology[A], \226\136\128 a : A, eventually(P, atpointof(top, a)) == (!IN(a, topspace(top)) || (\226\136\131 u : (A) -> Bool, open_in(top, u) && IN(a, u) && (\226\136\128 x : A, IN(x, DELETE(u, a)) \226\134\146 P(x))))
       #|  (\226\136\128 x : _, (P : (_) -> Bool)(x) \226\134\146 (f : (_) -> _)(x) == (g : (_) -> _)(x)) \226\134\146 {f((x : _)) | P(x)} == {g((x : _)) | P(x)}
-      #|  {f x | {g y | P y} x} = {f(g y) | P y}
+      #|  {(f : (_) -> _)((x : _)) | {(g : (_) -> _)((y : _)) | (P : (_) -> Bool)(y)}(x)} == {f(g((y : _))) | P(y)}
       #|  dest_net((x : Net[_])) == dest_net((y : Net[_])) \226\134\146 x == y
       #|  \226\136\128 top : Topology[A], \226\136\128 u : (A) -> Bool, \226\136\128 a : A, SUBSET(topspace(top), u) \226\134\146 within(atpointof(top, a), u) == atpointof(top, a)
       #|  \226\136\128 top : Topology[A], \226\136\128 a : A, within(atpointof(top, a), topspace(top)) == atpointof(top, a)
