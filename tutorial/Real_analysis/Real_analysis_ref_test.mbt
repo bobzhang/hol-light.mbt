@@ -5891,7 +5891,7 @@ test "Tutorial/Real_analysis matches Tutorial/Real_analysis.ml" {
       #|  (x : Real)
       #|  \226\136\128 n : Num, \226\136\128 x : Real, cheb(n, cos(x)) == cos(real_of_num(n) * x)
       #|  \226\136\128 x : Real, abs(x) <= real_of_num(1) \226\134\146 abs(cheb((n : Num), x)) <= real_of_num(1)
-      #|  (+):num->num->num
+      #|  (op_plus : (Num, Num) -> Num)
       #|  2
       #|  cheb(8, (x : Real))
       #|  (n : Num) + 3 == n + 1 + 2
