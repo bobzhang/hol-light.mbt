@@ -2514,7 +2514,7 @@ pub fn limit_variant(x1167 : @kernel.Term, x1168 : @kernel.Term, x1169 : @kernel
 ///|
 /// add_tm
 fn step_69() -> Unit raise {
-  add_tm_c.set(@parser.parse_term("(+):num->num->num"))
+  add_tm_c.set(@term_syntax.parse_term("(op_plus : (Num, Num) -> Num)"))
 }
 
 ///|
