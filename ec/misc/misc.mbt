@@ -49,7 +49,7 @@ pub fn finite_quadratic_curve() -> @kernel.Thm {
 ///|
 /// NOT_RING_CHAR_DIVIDES_TAC
 fn step_2() -> Unit raise {
-  let t28 = @parser.parse_term("( * ):num->num->num")
+  let t28 = @term_syntax.parse_term("(op_star : (Num, Num) -> Num)")
   let bops : (@list.List[@kernel.Term]) -> @kernel.Term raise = (x29 : @list.List[@kernel.Term]) => @basics.list_mk_binop(t28, x29)
   let t30 = @term_syntax.parse_term("!divides(ring_char((r : Ring[_])), NUMERAL((n : Num)))")
   let patcheck : (@kernel.Term) -> Bool raise = (x32 : @kernel.Term) => @lib.can((x31 : @kernel.Term) => @drule.term_match(@list.List([]), t30, x31), x32)
