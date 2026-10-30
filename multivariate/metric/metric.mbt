@@ -875,7 +875,7 @@ fn step_42() -> Unit raise {
     fn(x188 : @kernel.Term) -> @kernel.Thm raise {
       s187(x188)
     }
-  }, @list.List([@sets.set_rule(@parser.parse_term("s SUBSET u <=> {t | t SUBSET u} s"))]))
+  }, @list.List([@sets.set_rule(@term_syntax.parse_term("SUBSET((s : (_) -> Bool), (u : (_) -> Bool)) == {(t : (_) -> Bool) | SUBSET(t, u)}(s)"))]))
   let t185 = @simp.rewrite_tac(@list.List([discrete_topology()]))
   let t193 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t185), t189), @tactics.ap_thm_tac), t190), t191), t192)
   open_in_discrete_topology_c.set(@tactics.prove(@term_syntax.parse_term("∀ u : (A) -> Bool, ∀ s : (A) -> Bool, open_in(discrete_topology(u), s) == SUBSET(s, u)"), t193))
@@ -43875,7 +43875,7 @@ fn step_1485() -> Unit raise {
   })
   let t17692 = @tactics.repeat_tac(@tactics.strip_tac)
   let t17691 = @tactics.match_mp_tac(@sets.set_rule(@term_syntax.parse_term("(∀ x : _, (P : (_) -> Bool)(x) → (f : (_) -> _)(x) == (g : (_) -> _)(x)) → {f((x : _)) | P(x)} == {g((x : _)) | P(x)}")))
-  let t17690 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f x | {g y | P y} x} = {f(g y) | P y}"))]))
+  let t17690 = @simp.rewrite_tac(@list.List([@sets.set_rule(@term_syntax.parse_term("{(f : (_) -> _)((x : _)) | {(g : (_) -> _)((y : _)) | (P : (_) -> Bool)(y)}(x)} == {f(g((y : _))) | P(y)}"))]))
   let t17689 = @simp.rewrite_tac(@list.List([@pair.pair_eq(), @misc.relative_to_v1()]))
   let t17688 = @simp.rewrite_tac(@list.List([atpointof_v1(), within_v1(), netlimits_atpointof(), netlimits_within()]))
   let t17686 = @equal.gsym(netlimits())
