@@ -17343,7 +17343,7 @@ fn step_742() -> Unit raise {
   let t5621 = @tactics.repeat_tac(@tactics.gen_tac)
   let t5620 = @simp.rewrite_tac(@list.List([@sets.subset(), @vectors.in_image_lift_drop()]))
   let t5636 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([has_real_frechet_derivative_within(), real_convex_on_v1(), real_segment_segment()])), t5620), t5621), t5622), t5623), t5625), t5627), t5628), t5634), t5635)
-  real_convex_on_derivatives_imp_c.set(@tactics.prove(@parser.parse_term("forall f f_x f_y s x y.\n        f real_convex_on s /\\ real_segment[x,y] SUBSET s /\\\n        (f has_real_derivative f_x) (atreal x within s) /\\\n        (f has_real_derivative f_y) (atreal y within s)\n        ==> f_x * (y - x) <= f_y * (y - x)"), t5636))
+  real_convex_on_derivatives_imp_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, ∀ f_x : Real, ∀ f_y : Real, ∀ s : (Real) -> Bool, ∀ x : Real, ∀ y : Real, real_convex_on(f, s) && SUBSET(real_segment([(x, y)]), s) && has_real_derivative(f, f_x, within(atreal(x), s)) && has_real_derivative(f, f_y, within(atreal(y), s)) → f_x * (y - x) <= f_y * (y - x)"), t5636))
 }
 
 ///|
@@ -17363,11 +17363,11 @@ fn step_743() -> Unit raise {
   let t5637 = @term_syntax.parse_term("(y : Real)")
   let t5638 = @term_syntax.parse_term("(x : Real)")
   let t5639 = @term_syntax.parse_term("(s : (Real) -> Bool)")
-  let t5640 = @parser.parse_term("f_y:real")
-  let t5641 = @parser.parse_term("f_x:real")
+  let t5640 = @term_syntax.parse_term("(f_y : Real)")
+  let t5641 = @term_syntax.parse_term("(f_x : Real)")
   let t5642 = @tactics.mp_tac(@bool.ispecl(@list.List([@term_syntax.parse_term("(f : (Real) -> Real)"), t5641, t5640, t5639, t5638, t5637]), real_convex_on_derivatives_imp()))
   let t5645 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t5642), t5643), t5644)
-  real_convex_on_derivative_increasing_imp_c.set(@tactics.prove(@parser.parse_term("forall f f_x f_y s x y.\n        f real_convex_on s /\\ real_interval[x,y] SUBSET s /\\\n        (f has_real_derivative f_x) (atreal x within s) /\\\n        (f has_real_derivative f_y) (atreal y within s) /\\\n        x < y\n        ==> f_x <= f_y"), t5645))
+  real_convex_on_derivative_increasing_imp_c.set(@tactics.prove(@term_syntax.parse_term("∀ f : (Real) -> Real, ∀ f_x : Real, ∀ f_y : Real, ∀ s : (Real) -> Bool, ∀ x : Real, ∀ y : Real, real_convex_on(f, s) && SUBSET(real_interval([(x, y)]), s) && has_real_derivative(f, f_x, within(atreal(x), s)) && has_real_derivative(f, f_y, within(atreal(y), s)) && x < y → f_x <= f_y"), t5645))
 }
 
 ///|
