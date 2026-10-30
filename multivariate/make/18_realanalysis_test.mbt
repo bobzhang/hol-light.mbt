@@ -84569,14 +84569,14 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  (x : Cart[Real, Unit]) => lift(drop(op_pct((f : Real), x)))
       #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, real_convex_on(f, s) && SUBSET(real_segment([(x, y)]), s) && has_real_derivative(f, f', within(atreal(y), s)) \226\134\146 f(y) - f(x) <= f' * (y - x)
       #|  (x : Cart[Real, Unit]) => lift(drop(op_pct((f : Real), x)))
-      #|  forall f f_x f_y s x y.\n        f real_convex_on s /\\ real_segment[x,y] SUBSET s /\\\n        (f has_real_derivative f_x) (atreal x within s) /\\\n        (f has_real_derivative f_y) (atreal y within s)\n        ==> f_x * (y - x) <= f_y * (y - x)
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f_x : Real, \226\136\128 f_y : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, real_convex_on(f, s) && SUBSET(real_segment([(x, y)]), s) && has_real_derivative(f, f_x, within(atreal(x), s)) && has_real_derivative(f, f_y, within(atreal(y), s)) \226\134\146 f_x * (y - x) <= f_y * (y - x)
       #|  (y : Real)
       #|  (x : Real)
       #|  (s : (Real) -> Bool)
-      #|  f_y:real
-      #|  f_x:real
+      #|  (f_y : Real)
+      #|  (f_x : Real)
       #|  (f : (Real) -> Real)
-      #|  forall f f_x f_y s x y.\n        f real_convex_on s /\\ real_interval[x,y] SUBSET s /\\\n        (f has_real_derivative f_x) (atreal x within s) /\\\n        (f has_real_derivative f_y) (atreal y within s) /\\\n        x < y\n        ==> f_x <= f_y
+      #|  \226\136\128 f : (Real) -> Real, \226\136\128 f_x : Real, \226\136\128 f_y : Real, \226\136\128 s : (Real) -> Bool, \226\136\128 x : Real, \226\136\128 y : Real, real_convex_on(f, s) && SUBSET(real_interval([(x, y)]), s) && has_real_derivative(f, f_x, within(atreal(x), s)) && has_real_derivative(f, f_y, within(atreal(y), s)) && x < y \226\134\146 f_x <= f_y
       #|  o(lift, (x : Cart[Real, Unit]) => drop(op_pct((f : Real), x)))
       #|  \226\136\128 f : (Real) -> Real, \226\136\128 f' : (Real) -> Real, \226\136\128 s : (Real) -> Bool, is_realinterval(s) && (\226\136\128 x : Real, IN(x, s) \226\134\146 has_real_derivative(f, f'(x), within(atreal(x), s))) \226\134\146 real_convex_on(f, s) == (\226\136\128 x : Real, \226\136\128 y : Real, IN(x, s) && IN(y, s) \226\134\146 f'(x) * (y - x) <= f(y) - f(x))
       #|  o(lift, (x : Cart[Real, Unit]) => drop(op_pct((f : Real), x)))
