@@ -79,7 +79,7 @@ pub fn cheb_ripple() -> @kernel.Thm {
 ///|
 /// NUM_ADD2_CONV
 fn step_5() -> Unit raise {
-  let add_tm = @parser.parse_term("(+):num->num->num")
+  let add_tm = @term_syntax.parse_term("(op_plus : (Num, Num) -> Num)")
   let two_tm = @term_syntax.parse_term("2")
   num_add2_conv_c.set(fn(x16 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x16

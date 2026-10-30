@@ -26477,7 +26477,7 @@ Jordan/jordan_curve_theorem quotations (59532):
   (B : (_) -> _)((f : (_) -> _)((y : _)))
   (f : (_) -> _)((x : _))
   (f : (_) -> _)((x : _))
-  BIJ (\\x. (f x, g (f x) x)) A {(x,y) | B x /\\ {j|j <|m} y}
+  BIJ((x : _) => ((f : (_) -> _)(x), (g : (_, _) -> Num)(f(x), x)), (A : (_) -> Bool), {((x : _), (y : Num)) | (B : (_) -> Bool)(x) && {(j : Num) | j < (m : Num)}(y)})
   (f : (_) -> _)((u : _))
   (u : _)
   (m : Num) == 0 || 0 < m
@@ -26537,7 +26537,7 @@ Jordan/jordan_curve_theorem quotations (59532):
   {(m : (Int, Int)) | jordan_endpoint((P : (((Num) -> Real) -> Bool) -> Bool), m) && jordan_segment_of(P, jordan_terminal_edge(P, m)) == jordan_segment_of(P, (e : ((Num) -> Real) -> Bool))} == jordan_endpoint(jordan_segment_of(P, e))
   jordan_segment_of((P : (((Num) -> Real) -> Bool) -> Bool), (e : ((Num) -> Real) -> Bool)) == (G : (((Num) -> Real) -> Bool) -> Bool)
   jordan_psegment(jordan_segment_of((P : (((Num) -> Real) -> Bool) -> Bool), (e : ((Num) -> Real) -> Bool)))
-  forall P G. (segment G) /\\ (P SUBSET G) /\\ (~(rectagon P)) ==>\n    (forall S. ({ S | (?e. (P e) /\\ (S = segment_of P e)) }  S) ==>\n      ({m | (endpoint P m) /\\ (segment_of P (terminal_edge P m) = S)}\n              HAS_SIZE 2))
+  \226\136\128 P : (((Num) -> Real) -> Bool) -> Bool, \226\136\128 G : (((Num) -> Real) -> Bool) -> Bool, jordan_segment(G) && SUBSET(P, G) && !jordan_rectagon(P) \226\134\146 (\226\136\128 S : (((Num) -> Real) -> Bool) -> Bool, {(S : (((Num) -> Real) -> Bool) -> Bool) | \226\136\131 e : ((Num) -> Real) -> Bool, P(e) && S == jordan_segment_of(P, e)}(S) \226\134\146 HAS_SIZE({(m : (Int, Int)) | jordan_endpoint(P, m) && jordan_segment_of(P, jordan_terminal_edge(P, m)) == S}, 2))
   FINITE((P : (_) -> Bool))
   jordan_terminal_edge((P : (((Num) -> Real) -> Bool) -> Bool), (x' : (Int, Int)))
   {(S : (((Num) -> Real) -> Bool) -> Bool) | \226\136\131 e : ((Num) -> Real) -> Bool, (P : (((Num) -> Real) -> Bool) -> Bool)(e) && S == jordan_segment_of(P, e)} == IMAGE((x : ((Num) -> Real) -> Bool) => jordan_segment_of(P, x), P)
@@ -56063,7 +56063,7 @@ Jordan/jordan_curve_theorem quotations (59532):
   (v : (_) -> Real)((n : _)) == jordan_supm((X : (Real) -> Bool))
   INJ((v : (Num) -> _), {(x : Num) | x < (n : Num)}, (X : (_) -> Bool)) == INJ((u : (Num) -> _), {(x : Num) | x < n}, X)
   !((n : Num) < n)
-  forall x. ({x | x <| n} x ==> (v x = u x))
+  \226\136\128 x : Num, {(x : Num) | x < (n : Num)}(x) \226\134\146 (v : (Num) -> _)(x) == (u : (Num) -> _)(x)
   CARD(DELETE((X : (Real) -> Bool), jordan_supm(X))) == (n : Num)
   (v : _)
   (v : (_) -> Real) == ((j : _) => if j == (n : _) { jordan_supm((X : (Real) -> Bool)) } else { (u : (_) -> Real)(j) })
@@ -66632,10 +66632,10 @@ Jordan/jordan_curve_theorem quotations (59532):
   (v' : _)
   (e : _)
   (Cv' : _)
-  Cu_v'
-  Cu_v' = Cv'
+  (Cu_v' : _)
+  (Cu_v' : _) == (Cv' : _)
   (u : _)
-  Cvu' u \\/ Cu_v' u
+  (Cvu' : (_) -> Bool)((u : _)) || (Cu_v' : (_) -> Bool)(u)
   (u : _)
   (v : _)
   (v' : _)
@@ -66644,9 +66644,9 @@ Jordan/jordan_curve_theorem quotations (59532):
   (v' : _)
   (INTER : ((_) -> Bool, (_) -> Bool, _) -> Bool)
   !(Cvu' : (_) -> Bool)((v' : _))
-  simple_arc_end Cu_v' u' v'
-  Cu_v' v'
-  Cu_v' = C'''
+  jordan_simple_arc_end((Cu_v' : ((Num) -> Real) -> Bool), (u' : (Num) -> Real), (v' : (Num) -> Real))
+  (Cu_v' : (_) -> _)((v' : _))
+  (Cu_v' : _) == (C''' : _)
   (Cvu' : _) == (C'' : _)
   jordan_simple_arc_end((Cv' : ((Num) -> Real) -> Bool), (v' : (Num) -> Real), (u' : (Num) -> Real))
   (Cv' : (_) -> _)((u' : _))
