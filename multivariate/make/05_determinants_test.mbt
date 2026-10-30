@@ -40341,7 +40341,7 @@ test "Multivariate/determinants matches Multivariate/determinants.ml" {
       #|  abs(det((B : Cart[Cart[Real, N], N])))
       #|  (B : Cart[Cart[Real, N], N]) == lambda((i : Num) => (b : (Num) -> Cart[Real, N])(i))
       #|  1 <= (x : Num) && x <= (y : Num) - 1 \226\134\146 x < y
-      #|  (<):num->num->bool
+      #|  (op_lt : (Num, Num) -> Bool)
       #|  \226\136\131 b : (Num) -> Cart[Real, N], \226\136\128 j : Num, b(j) == (a : (Num) -> Cart[Real, N])(j) - vsum(op_dot_dot(1, j - 1), (i : Num) => op_pct(dot(a(j), b(i)) / dot(b(i), b(i)), b(i)))
       #|  (a : (Num) -> Cart[Real, N]) == ((i : Num) => op_dollar((A : Cart[Cart[Real, N], N]), i))
       #|  \226\136\128 A : Cart[Cart[Real, N], N], abs((det : (Cart[Cart[Real, N], N]) -> Real)(A)) <= (product : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (norm : (Cart[Real, N]) -> Real)((row : (Num, Cart[Cart[Real, N], N]) -> Cart[Real, N])(i, A)))
