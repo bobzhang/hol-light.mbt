@@ -191,7 +191,7 @@ pub fn p_v1() -> @kernel.Term {
 fn step_14() -> Unit raise {
   let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t2 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t1)
-  imp_imp_conjimp_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("forall p q ps qs p' q' p_s q_s.\n        (p /\\ ~q ==> ps \\/ qs) ==> (p' /\\ ~q' ==> p_s \\/ q_s) ==>\n          (p /\\ p' /\\ (~p \\/ ~q') /\\ (~p' \\/ ~q) /\\ (~q \\/ ~q') ==>\n                ps /\\ p_s \\/ ps /\\ q_s \\/ p_s /\\ qs \\/ qs /\\ q_s)")), t2))
+  imp_imp_conjimp_lemma_c.set(@tactics.tac_proof((@list.List([]), @term_syntax.parse_term("∀ p : Bool, ∀ q : Bool, ∀ ps : Bool, ∀ qs : Bool, ∀ p' : Bool, ∀ q' : Bool, ∀ p_s : Bool, ∀ q_s : Bool, (p && !q → ps || qs) → (p' && !q' → p_s || q_s) → p && p' && (!p || !q') && (!p' || !q) && (!q || !q') → ps && p_s || ps && q_s || p_s && qs || qs && q_s")), t2))
 }
 
 ///|

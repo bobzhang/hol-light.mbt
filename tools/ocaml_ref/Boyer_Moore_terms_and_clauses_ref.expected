@@ -5528,18 +5528,18 @@ Boyer_Moore/terms_and_clauses quotations (23):
   true
   false
   (b : Bool)
-  forall b x x' (y:X). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))
+  \226\136\128 b : Bool, \226\136\128 x : X, \226\136\128 x' : X, \226\136\128 y : X, (b \226\134\146 x == x') \226\134\146 (if b { x } else { y }) == (if b { x' } else { y })
   (b : Bool)
-  forall b y y' (x:X). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))
+  \226\136\128 b : Bool, \226\136\128 y : X, \226\136\128 y' : X, \226\136\128 x : X, (!b \226\134\146 y == y') \226\134\146 (if b { x } else { y }) == (if b { x } else { y' })
   (b : Bool)
   (if (b : Bool) { b } else { false }) == b
   (b : Bool)
   (if (b : Bool) { true } else { false }) == b
   (x : Bool)
   ((x : Bool) == true) == x
-  (y:X) = z
+  (y : X) == (z : X)
   (x : Bool)
-  (x = ((y:X) = z)) = (if (y = z) then (x = T) else (x = F))
+  ((x : Bool) == ((y : X) == (z : X))) == (if y == z { x == true } else { x == false })
   (x : Bool)
   ((x : Bool) == false) == (if x { false } else { true })
   (b : Bool)
