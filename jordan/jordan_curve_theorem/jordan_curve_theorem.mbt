@@ -36539,8 +36539,8 @@ fn step_965() -> Unit raise {
   let t24311 = @term_syntax.parse_term("(v' : _)")
   let t24312 = @term_syntax.parse_term("(e : _)")
   let t24313 = @term_syntax.parse_term("(Cv' : _)")
-  let t24539 = @tactics_ext2.th_intro_tac(@list.List([@parser.parse_term("Cu'v'"), t24313, t24312, t24311, t24310]), simple_arc_end_inj())
-  let t24308 = @parser.parse_term("Cu'v' = Cv'")
+  let t24539 = @tactics_ext2.th_intro_tac(@list.List([@parser.parse_term("Cu_v'"), t24313, t24312, t24311, t24310]), simple_arc_end_inj())
+  let t24308 = @parser.parse_term("Cu_v' = Cv'")
   let t24540 = @tactics_ext2.use_(35L, @drule.match_mp(union_imp_subset()))
   let t24541 = @meson.meson_tac(@list.List([simple_arc_end_end2()]))
   let t24542 = @tactics.first_assum(@tactics_ext2.imatch_mp_tac)
@@ -36549,7 +36549,7 @@ fn step_965() -> Unit raise {
   let t24545 = @tactics_ext2.use_(35L, @simp.rewrite_rule(@list.List([@sets.union()])))
   let t24546 = @tactics_ext2.tspec(@term_syntax.parse_term("(u : _)"), 35L)
   let t24547 = @tactics_ext2.use_(35L, @simp.rewrite_rule(@list.List([@class.fun_eq_thm()])))
-  let t24305 = @parser.parse_term("Cvu' u \\/ Cu'v' u")
+  let t24305 = @parser.parse_term("Cvu' u \\/ Cu_v' u")
   let t24548 = @simp.asm_rewrite_tac(@list.List([]))
   let t24549 = @tactics.first_assum(@tactics_ext2.imatch_mp_tac)
   let t24550 = @simp.asm_rewrite_tac(@list.List([@metric_spaces.closed_ball()]))
@@ -36570,13 +36570,13 @@ fn step_965() -> Unit raise {
   let t24560 = @tactics_ext2.usef(@term_syntax.parse_term("(INTER : ((_) -> Bool, (_) -> Bool, _) -> Bool)"), t24293)
   let t24291 = @term_syntax.parse_term("!(Cvu' : (_) -> Bool)((v' : _))")
   let t24561 = @meson.meson_tac(@list.List([simple_arc_end_end2()]))
-  let t24289 = @parser.parse_term("simple_arc_end Cu'v' u' v'")
-  let t24280 = @parser.parse_term("Cu'v' v'")
+  let t24289 = @parser.parse_term("simple_arc_end Cu_v' u' v'")
+  let t24280 = @parser.parse_term("Cu_v' v'")
   let t24562 = @tactics.pop_assum(fn(x24278 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t_1 = x24278
     @tactics.all_tac
   })
-  let t24276 = @parser.parse_term("Cu'v' = C'''")
+  let t24276 = @parser.parse_term("Cu_v' = C'''")
   let t24563 = @tactics.pop_assum(fn(x24274 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let t = x24274
     @tactics.all_tac
