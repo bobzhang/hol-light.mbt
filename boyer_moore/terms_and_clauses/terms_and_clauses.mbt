@@ -172,7 +172,7 @@ fn step_3() -> Unit raise {
   let t32 = @simp.rewrite_tac(@list.List([]))
   let t31 = @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)"))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t31), t32)
-  cond_left_c.set(@tactics.prove(@parser.parse_term("forall b x x' (y:X). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))"), t33))
+  cond_left_c.set(@tactics.prove(@term_syntax.parse_term("∀ b : Bool, ∀ x : X, ∀ x' : X, ∀ y : X, (b → x == x') → (if b { x } else { y }) == (if b { x' } else { y })"), t33))
 }
 
 ///|
@@ -190,7 +190,7 @@ fn step_4() -> Unit raise {
   let t35 = @simp.rewrite_tac(@list.List([]))
   let t34 = @class.bool_cases_tac(@term_syntax.parse_term("(b : Bool)"))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t34), t35)
-  cond_right_c.set(@tactics.prove(@parser.parse_term("forall b y y' (x:X). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))"), t36))
+  cond_right_c.set(@tactics.prove(@term_syntax.parse_term("∀ b : Bool, ∀ y : X, ∀ y' : X, ∀ x : X, (!b → y == y') → (if b { x } else { y }) == (if b { x } else { y' })"), t36))
 }
 
 ///|
@@ -296,9 +296,9 @@ pub fn eq_t() -> @kernel.Thm {
 /// EQ_EQ
 fn step_8() -> Unit raise {
   let t52 = @simp.rewrite_tac(@list.List([]))
-  let t51 = @class.bool_cases_tac(@parser.parse_term("(y:X) = z"))
+  let t51 = @class.bool_cases_tac(@term_syntax.parse_term("(y : X) == (z : X)"))
   let t53 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@term_syntax.parse_term("(x : Bool)")), t51), t52)
-  eq_eq_c.set(@tactics.prove(@parser.parse_term("(x = ((y:X) = z)) = (if (y = z) then (x = T) else (x = F))"), t53))
+  eq_eq_c.set(@tactics.prove(@term_syntax.parse_term("((x : Bool) == ((y : X) == (z : X))) == (if y == z { x == true } else { x == false })"), t53))
 }
 
 ///|

@@ -9636,7 +9636,7 @@ Multivariate/misc quotations (1146):
   \226\136\128 P : ((_) -> Bool) -> Bool, \226\136\128 u : (_) -> Bool, \226\136\128 s : (_) -> Bool, P(s) \226\134\146 relative_to(P, u, INTER(u, s))
   relative_to((P : ((_) -> Bool) -> Bool), (u : (_) -> Bool)) == {INTER(u, (s : (_) -> Bool)) | P(s)}
   INTER(INTER((s : (_) -> Bool), (t : (_) -> Bool)), (s' : (_) -> Bool)) == INTER(t, INTER(s, s'))
-  {f x | {g y | P y} x} = {f(g y) | P y}
+  {(f : (_) -> _)((x : _)) | {(g : (_) -> _)((y : _)) | (P : (_) -> Bool)(y)}(x)} == {f(g((y : _))) | P(y)}
   forall P:(A->bool)->bool s t.\n        P relative_to s relative_to t = P relative_to (s INTER t)
   forall P u s:A->bool.\n        s SUBSET u\n        ==> ((P relative_to u) (u DIFF s) <=>\n             ((\\c. P(UNIV DIFF c)) relative_to u) s)
   (s : (A) -> Bool)

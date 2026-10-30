@@ -52339,12 +52339,12 @@ test "Multivariate/topology matches Multivariate/topology.ml" {
       #|  \226\136\128 net : Net[A], \226\136\128 P : (B) -> Bool, \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (B, A) -> Cart[Real, M], \226\136\128 g : (B, A) -> Cart[Real, N], \226\136\128 l : (B) -> Cart[Real, M], \226\136\128 m : (B) -> Cart[Real, N], \226\136\128 b1 : Real, \226\136\128 b2 : Real, bilinear(h) && eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(l(n)) <= b1, net) && eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(m(n)) <= b2, net) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(f(n, x) - l(n)) < e, net)) && (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(g(n, x) - m(n)) < e, net)) \226\134\146 (\226\136\128 e : Real, real_of_num(0) < e \226\134\146 eventually((x : A) => \226\136\128 n : B, P(n) \226\134\146 norm(h(f(n, x), g(n, x)) - h(l(n), m(n))) < e, net))
       #|  norm((m : Cart[Real, N]))
       #|  norm((l : Cart[Real, M]))
-      #|  \\n:X. (m:real^N)
-      #|  \\n:X. (l:real^M)
-      #|  \\n:X. (g:A->real^N)
-      #|  \\n:X. (f:A->real^M)
+      #|  (n : X) => (m : Cart[Real, N])
+      #|  (n : X) => (l : Cart[Real, M])
+      #|  (n : X) => (g : (A) -> Cart[Real, N])
+      #|  (n : X) => (f : (A) -> Cart[Real, M])
       #|  (h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P])
-      #|  \\x:X. T
+      #|  (x : X) => true
       #|  (net : Net[A])
       #|  \226\136\128 net : Net[A], \226\136\128 h : (Cart[Real, M], Cart[Real, N]) -> Cart[Real, P], \226\136\128 f : (A) -> Cart[Real, M], \226\136\128 g : (A) -> Cart[Real, N], \226\136\128 l : Cart[Real, M], \226\136\128 m : Cart[Real, N], op_minus_minus_gt(f, l, net) && op_minus_minus_gt(g, m, net) && bilinear(h) \226\134\146 op_minus_minus_gt((x : A) => h(f(x), g(x)), h(l, m), net)
       #|  (d : Real) / real_of_num(2)
