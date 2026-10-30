@@ -11393,7 +11393,7 @@ pub fn convex_on_secant_derivative_imp() -> @kernel.Thm {
 /// CONVEX_ON_DERIVATIVES_IMP
 fn step_210() -> Unit raise {
   let t6811 = @meson.asm_meson_tac(@list.List([convex_on_derivative_secant_imp(), convex_on_secant_derivative_imp(), @topology.segment_sym(), @realax.real_le_trans()]))
-  convex_on_derivatives_imp_c.set(@tactics.prove(@parser.parse_term("forall f f'x f'y s x y:real^N.\n        f convex_on s /\\ segment[x,y] SUBSET s /\\\n        ((lift o f) has_derivative (lift o f'x)) (at x within s) /\\\n        ((lift o f) has_derivative (lift o f'y)) (at y within s)\n        ==> f'x(y - x) <= f'y(y - x)"), t6811))
+  convex_on_derivatives_imp_c.set(@tactics.prove(@parser.parse_term("forall f f_x f_y s x y:real^N.\n        f convex_on s /\\ segment[x,y] SUBSET s /\\\n        ((lift o f) has_derivative (lift o f_x)) (at x within s) /\\\n        ((lift o f) has_derivative (lift o f_y)) (at y within s)\n        ==> f_x(y - x) <= f_y(y - x)"), t6811))
 }
 
 ///|
