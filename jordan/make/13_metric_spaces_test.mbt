@@ -9523,7 +9523,7 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (t : _)
       #|  IN((f : (_) -> _)((sn : (_) -> _)((a : _))), INTERS((W : ((_) -> Bool) -> Bool)))
       #|  {(z : (_) -> Bool) | \226\136\131 n : Num, z == euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))} == IMAGE((n : Num) => euclid_closed_ball((X, d), f(sn(n)), R * twopow(-int_of_num(n))), UNIV)
-      #|  topology_ (top_of_metric (X,d)) /\\ compact (top_of_metric (X,d)) (UNIONS (top_of_metric (X,d))) /\\ (forall u. {z | ?n. z = closed_ball (X,d) (f(sn n)) (R * twopow (--: (&:n)))} u ==> closed_ (top_of_metric (X,d)) u)
+      #|  euclid_topology_(euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real)))) && euclid_compact(euclid_top_of_metric((X, d)), UNIONS(euclid_top_of_metric((X, d)))) && (\226\136\128 u : (_) -> Bool, {(z : (_) -> Bool) | \226\136\131 n : Num, z == euclid_closed_ball((X, d), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}(u) \226\134\146 euclid_closed_(euclid_top_of_metric((X, d)), u))
       #|  {(z : (_) -> Bool) | \226\136\131 n : Num, z == euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}
       #|  euclid_top_of_metric(((X : (_) -> Bool), (d : (_, _) -> Real)))
       #|  !(INTERS({(z : (_) -> Bool) | \226\136\131 n : Num, z == euclid_closed_ball(((X : (_) -> Bool), (d : (_, _) -> Real)), (f : (_) -> _)((sn : (Num) -> _)(n)), (R : Real) * twopow(-int_of_num(n)))}) == {})
@@ -10006,8 +10006,8 @@ test "Jordan/metric_spaces matches Jordan/metric_spaces.ml" {
       #|  (c : Bool) \226\134\146 (a : Bool) || (b : Bool) || c || (d : Bool)
       #|  ((b : Real) < (b' : Real) && b' <= (c : Real) \226\134\146 b < c) && ((a' : Real) <= b' && b' < (a : Real) \226\134\146 a' < a)
       #|  UNION({(x : Real) | (a' : Real) <= x && x <= (b' : Real)}, {(x : Real) | b' <= x && x <= (c : Real)}) == {(x : Real) | a' <= x && x <= c}
-      #|  {x | b' <=. x /\\ x <=. c  } b'
-      #|  {x | a' <=. x /\\ x <=. b' } b'
+      #|  {(x : Real) | (b' : Real) <= x && x <= (c : Real)}(b')
+      #|  {(x : Real) | (a' : Real) <= x && x <= (b' : Real)}(b')
       #|  (b' : _)
       #|  {(x : Real) | (a : Real) <= x && x <= (b : Real)} == {}
       #|  (a : Real) <= (b : Real)
