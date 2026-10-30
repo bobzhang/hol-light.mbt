@@ -10736,7 +10736,7 @@ fn step_161() -> Unit raise {
   let t978 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(
-        @parser.parse_term("{f x | {g y | P y} x} = {f(g y) | P y}"),
+        @term_syntax.parse_term("{(f : (_) -> _)((x : _)) | {(g : (_) -> _)((y : _)) | (P : (_) -> Bool)(y)}(x)} == {f(g((y : _))) | P(y)}"),
       ),
     ]),
   )

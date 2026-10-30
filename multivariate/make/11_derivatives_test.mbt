@@ -65748,7 +65748,7 @@ test "Multivariate/derivatives matches Multivariate/derivatives.ml" {
       #|  (f' : (Cart[Real, N]) -> Real)
       #|  (f : (Cart[Real, N]) -> Real)
       #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f' : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex_on(f, s) && SUBSET(segment([(x, y)]), s) && has_derivative(o(lift, f), o(lift, f'), within(at(y), s)) \226\134\146 f(y) - f(x) <= f'(y - x)
-      #|  forall f f_x f_y s x y:real^N.\n        f convex_on s /\\ segment[x,y] SUBSET s /\\\n        ((lift o f) has_derivative (lift o f_x)) (at x within s) /\\\n        ((lift o f) has_derivative (lift o f_y)) (at y within s)\n        ==> f_x(y - x) <= f_y(y - x)
+      #|  \226\136\128 f : (Cart[Real, N]) -> Real, \226\136\128 f_x : (Cart[Real, N]) -> Real, \226\136\128 f_y : (Cart[Real, N]) -> Real, \226\136\128 s : (Cart[Real, N]) -> Bool, \226\136\128 x : Cart[Real, N], \226\136\128 y : Cart[Real, N], convex_on(f, s) && SUBSET(segment([(x, y)]), s) && has_derivative(o(lift, f), o(lift, f_x), within(at(x), s)) && has_derivative(o(lift, f), o(lift, f_y), within(at(y), s)) \226\134\146 f_x(y - x) <= f_y(y - x)
       #|  real_of_num(0) < (w : Real) - (v : Real)
       #|  (v : Real) == (w : Real)
       #|  op_pct(real_of_num(1) - (v : Real), (a : Cart[Real, N])) + op_pct(v, (b : Cart[Real, N])) - (op_pct(real_of_num(1) - (w : Real), a) + op_pct(w, b)) == op_pct(v - w, b - a)
