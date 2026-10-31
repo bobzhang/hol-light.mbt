@@ -81791,11 +81791,11 @@ test "Probability/martingales matches Probability/martingales.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 c : Real, (max(a, b) >= c) == (a >= c || b >= c)
       #|  (c : Real) - inv(real_of_num((n : Num)) + real_of_num(1))
       #|  measurable_wrt((p : Prob_space[A]), (G : ((A) -> Bool) -> Bool), (X : (A) -> Real))
