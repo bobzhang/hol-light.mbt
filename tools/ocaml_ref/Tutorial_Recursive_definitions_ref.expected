@@ -5522,14 +5522,14 @@ Warning: inventing type variables
 Translating certificate to HOL inferences
 Tutorial/Recursive_definitions quotations (30):
   (fib : (Num) -> Num)((n : Num)) == (if n == 0 || n == 1 { 1 } else { fib(n - 1) + fib(n - 2) })
-  \\n. n + 1
+  (n : Num) => n + 1
   (fib2 : (Num) -> Num)(0) == 1 && fib2(1) == 1 && fib2((n : Num) + 2) == fib2(n) + fib2(n + 1)
-  \\n. n + 1
+  (n : Num) => n + 1
   (halve : (Num) -> Num)(2 * (n : Num)) == n
   (unknown : (Num) -> _)((n : Num)) == unknown(n + 1)
   \226\136\128 n : Num, (collatz : (Num) -> Num)(n) == (if n <= 1 { n } else { if EVEN(n) { collatz(DIV(n, 2)) } else { collatz(3 * n + 1) } })
   (fusc : (Num) -> Num)(2 * (n : Num)) == (if n == 0 { 0 } else { fusc(n) }) && fusc(2 * n + 1) == (if n == 0 { 1 } else { fusc(n) + fusc(n + 1) })
-  \\n. n + 1
+  (n : Num) => n + 1
   (n : Num)
   0
   fusc(0) == 0 && fusc(1) == 1 && fusc(2 * (n : Num)) == fusc(n) && fusc(2 * n + 1) == fusc(n) + fusc(n + 1)
@@ -5538,9 +5538,9 @@ Tutorial/Recursive_definitions quotations (30):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (n : Num) < (k : Num) \226\134\146 n < SUC(k)
   \226\136\128 n : Num, \226\136\128 k : Num, n < k \226\134\146 binom((n, k)) == 0
   \226\136\128 n : Num, binom((n, n)) == 1
