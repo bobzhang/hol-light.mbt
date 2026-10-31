@@ -5591,11 +5591,11 @@ Permutation/morelist quotations (65):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
   \226\136\128 x : _, \226\136\128 l : List[_], !MEM(x, l) \226\134\146 DELETE1(x, l) == l
   \226\136\128 x : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], DELETE1(x, APPEND(l1, l2)) == (if MEM(x, l1) { APPEND(DELETE1(x, l1), l2) } else { APPEND(l1, DELETE1(x, l2)) })
   \226\136\128 P : (_) -> Bool, \226\136\128 x : _, \226\136\128 l : List[_], FILTER(P, DELETE1(x, l)) == (if P(x) { DELETE1(x, FILTER(P, l)) } else { FILTER(P, l) })
@@ -5610,15 +5610,15 @@ Permutation/morelist quotations (65):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
   \226\136\128 x : _, \226\136\128 l : List[_], COUNT(x, l) == LENGTH(FILTER(op_eq(x), l))
   \226\136\128 P : (_) -> Bool, \226\136\128 x : _, \226\136\128 l : List[_], COUNT(x, FILTER(P, l)) == (if P(x) { COUNT(x, l) } else { 0 })
   \226\136\128 x : _, \226\136\128 l1 : List[_], \226\136\128 l2 : List[_], COUNT(x, APPEND(l1, l2)) == COUNT(x, l1) + COUNT(x, l2)
