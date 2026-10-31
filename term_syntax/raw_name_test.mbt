@@ -116,3 +116,13 @@ test "the op_ spelling is not used where its name is taken" {
     #|(op_lt_lt : Bool) => {(`<<` : Bool) | true}
   ))
 }
+
+///|
+test "the op_ spelling is not used where a binder inside has its name" {
+  inspect(spell("match T with (<<) -> (\\op_lt_lt:bool. (<<))"), content=(
+    #|match true { `<<` => (op_lt_lt : Bool) => `<<` }
+  ))
+  inspect(spell("{(<<):bool | (\\op_lt_lt:bool. (<<)) T}"), content=(
+    #|{(`<<` : Bool) | ((op_lt_lt : Bool) => `<<`)(true)}
+  ))
+}

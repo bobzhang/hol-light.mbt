@@ -700,12 +700,24 @@ fn Printer::pattern_form(
 }
 
 ///|
+/// Whether a variable named `name` occurs in `t`, free or bound.
+fn names_variable(t : @kernel.Term, name : String) -> Bool {
+  match t {
+    Var(n, _) => n == name
+    Const(_, _) => false
+    Comb(f, x) => names_variable(f, name) || names_variable(x, name)
+    Abs(v, b) => names_variable(v, name) || names_variable(b, name)
+  }
+}
+
+///|
 /// `bound` with its first `n` bindings' symbolic names spelt op_, as a
 /// pattern or an implicit set binder reads them (the backticks are for the
 /// binders that have no other spelling, which read an op_ name literally),
 /// unless that name is taken: printed for another binding in scope, or the
-/// name of a variable free in `scope` (it would be captured, or read as
-/// the other variable); then the backticks stay.
+/// name of any variable in `scope`, free or bound (it would be captured,
+/// read as the other variable, or force a binder there to be renamed);
+/// then the backticks stay.
 fn op_spelled(bound : Bound, n : Int, scope : Array[@kernel.Term]) -> Bound {
   let bs = bound.to_array()
   let n = if n < bs.length() { n } else { bs.length() }
@@ -715,9 +727,7 @@ fn op_spelled(bound : Bound, n : Int, scope : Array[@kernel.Term]) -> Bound {
       match @grammar.escape(printed) {
         Some(e) => {
           let taken = bs.iter().any(b => b.1 == e) ||
-            scope.iter().any(t => {
-              @kernel.frees(t).iter().any(u => u is Var(m, _) && m == e)
-            })
+            scope.iter().any(t => names_variable(t, e))
           if !taken {
             bs[i] = (v, e)
           }
