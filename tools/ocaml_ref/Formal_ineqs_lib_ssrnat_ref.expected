@@ -205,19 +205,19 @@ Formal_ineqs/lib/ssrnat quotations (413):
   (iter : (Num, (A) -> A, A) -> A)(SUC((n : Num)), (f : (A) -> A), (x : A)) == f(iter(n, f, x)) && iter(0, f, x) == x
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (iteri : (Num, (Num, A) -> A, A) -> A)(SUC((n : Num)), (f : (Num, A) -> A), (x : A)) == f(n, iteri(n, f, x)) && iteri(0, f, x) == x
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   iter(SUC((n : Num)), (f : (A) -> A), (x : A)) == iter(n, f, f(x))
   iter(SUC((n : Num)), (f : (A) -> A), (x : A)) == f(iter(n, f, x))
   iter((n : Num) + (m : Num), (f : (A) -> A), (x : A)) == iter(n, f, iter(m, f, x))
@@ -286,7 +286,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   EXP((m : Num), SUC((n : Num))) == m * EXP(m, n)
   EXP((m : Num), SUC((n : Num))) == EXP(m, n) * m
   0 < (n : Num) \226\134\146 EXP(0, n) == 0
-  ~P <=> (P <=> F)
+  !(P : Bool) == (P == false)
   EXP(1, (n : Num)) == 1
   EXP((m : Num), (n1 : Num) + (n2 : Num)) == EXP(m, n1) * EXP(m, n2)
   (m2 : Num) * (_1 : Num)
@@ -321,7 +321,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   (SUC((n : Num)) == 0) == false
   odd(EXP((m : Num), (n : Num))) == (n == 0 || odd(m))
   (double : (Num) -> Num)(0) == 0 && (\226\136\128 n : Num, double(SUC(n)) == SUC(SUC(double(n))))
-  \\n. n + 1
+  (n : Num) => n + 1
   double(0) == 0
   double(SUC((n : Num))) == SUC(SUC(double(n)))
   (n : Num) + n == double(n)
@@ -342,7 +342,7 @@ Formal_ineqs/lib/ssrnat quotations (413):
   double((m : Num) * (n : Num)) == double(m) * n
   double((m : Num) * (n : Num)) == m * double(n)
   (HALF : (Num) -> (Num, Num))(0) == (0, 0) && (\226\136\128 n : Num, HALF(SUC(n)) == (SND(HALF(n)), SUC(FST(HALF(n)))))
-  \\n. n + 1
+  (n : Num) => n + 1
   (half : (Num) -> Num) == o(FST, HALF)
   (uphalf : (Num) -> Num) == o(SND, HALF)
   half(0) == 0
