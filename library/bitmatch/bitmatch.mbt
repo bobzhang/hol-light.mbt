@@ -3976,7 +3976,7 @@ fn step_51() -> Unit raise {
                       (p, ep),
                       (f, ef),
                       (z, ex),
-                      (x, @parser.parse_term("e:num")),
+                      (x, @term_syntax.parse_term("(e : Num)")),
                     ])
                     let inv_1 = @bool.prove_hyp(
                       inv,
