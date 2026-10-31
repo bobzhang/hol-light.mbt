@@ -678,7 +678,7 @@ pub fn break_conjuncts(x176 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
         @list.List([th1])
       } else {
         if @basics.is_neg(th_tm) {
-          @list.List([@simp.pure_once_rewrite_rule(@list.List([@class.taut(@parser.parse_term("~P <=> (P <=> F)"))]))(th1)])
+          @list.List([@simp.pure_once_rewrite_rule(@list.List([@class.taut(@term_syntax.parse_term("!(P : Bool) == (P == false)"))]))(th1)])
         } else {
           @list.List([@bool.eqt_intro(th1)])
         }
