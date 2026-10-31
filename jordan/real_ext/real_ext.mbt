@@ -1180,7 +1180,7 @@ pub fn real_sv_tan_pi() -> @kernel.Thm {
 pub fn real_lmul_tac(x9 : @kernel.Term) -> @tactics.Tactic raise {
   let t = x9
   let t11 = @meson.meson_tac(@list.List([@real.real_eq_mul_lcancel()]))
-  let real_mul_ltimes_1 = @tactics_refine.prove(@parser.parse_term("forall x a b.\n        (((~(x=(&0)) ==> (x*a = x*b)) /\\ ~(x=(&0))) ==>  (a = b))"), t11)
+  let real_mul_ltimes_1 = @tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, (!(x == real_of_num(0)) → x * a == x * b) && !(x == real_of_num(0)) → a == b"), t11)
   @tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@bool.spec(t, real_mul_ltimes_1)), @tactics.conj_tac), @list.List([@tactics.disch_tac, @tactics.all_tac]))
 }
 
@@ -1189,7 +1189,7 @@ pub fn real_lmul_tac(x9 : @kernel.Term) -> @tactics.Tactic raise {
 pub fn real_rmul_tac(x12 : @kernel.Term) -> @tactics.Tactic raise {
   let t = x12
   let t14 = @meson.meson_tac(@list.List([@real.real_eq_mul_rcancel()]))
-  let real_mul_rtimes_1 = @tactics_refine.prove(@parser.parse_term("forall x a b.\n                ((~(x=(&0))==>(a*x = b*x)) /\\ ~(x=(&0))) ==>  (a = b)"), t14)
+  let real_mul_rtimes_1 = @tactics_refine.prove(@term_syntax.parse_term("∀ x : Real, ∀ a : Real, ∀ b : Real, (!(x == real_of_num(0)) → a * x == b * x) && !(x == real_of_num(0)) → a == b"), t14)
   @tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@bool.spec(t, real_mul_rtimes_1)), @tactics.conj_tac), @list.List([@tactics.disch_tac, @tactics.all_tac]))
 }
 
