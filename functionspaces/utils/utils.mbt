@@ -115,7 +115,7 @@ pub fn hint_exists_tac(x3 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -
         }
       })(x18)(hs_1)
     })(hyp_match(x19))
-  }, @basics.binops(@parser.parse_term("/\\"), c_p_1))
+  }, @basics.binops(@term_syntax.parse_term("op_slash_bslash"), c_p_1))
   let witness = match subs {
     Empty => v
     More((t, u), tail=Empty) if (u == v) => t
