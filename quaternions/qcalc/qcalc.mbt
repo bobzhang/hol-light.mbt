@@ -4,7 +4,7 @@
 /// `dest_quat`
 pub fn dest_quat(x1 : @kernel.Term) -> ((@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term)) raise {
   let tm = x1
-  let quat_tm = @parser.parse_term("quat")
+  let quat_tm = @term_syntax.parse_term("quat")
   let (f, p) = @kernel.dest_comb(tm)
   if (f != quat_tm) {
     raise Failure("dest_quat")
