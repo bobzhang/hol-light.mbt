@@ -78570,11 +78570,11 @@ test "EC/x25519 matches EC/x25519.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (purex25519 : ((Num, Num)) -> Num)(((n : Num), (q : Num))) == (if MOD(q, p_25519) == 0 { 0 } else { LET(GABS((f : ((Int, Int)) -> Num) => \226\136\128 X : Int, \226\136\128 Z : Int, GEQ(f((X, Z)), LET_END(LET((x : Num) => (z : Num) => LET_END(if z == 0 { 0 } else { MOD(x * inverse_mod(p_25519, z), p_25519) }), num_of_int(rem(X, int_of_num(p_25519))), num_of_int(rem(Z, int_of_num(p_25519))))))), FST(x25519_ladder(n, (int_of_num(q), int_of_num(1))))) })
       #|  (ring_of_int((f : Ring[A]), (Xn : Int)), ring_of_int(f, (Zn : Int)))
       #|  (ring_of_int((f : Ring[A]), (Xm : Int)), ring_of_int(f, (Zm : Int)))

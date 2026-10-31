@@ -5560,13 +5560,13 @@ Tutorial/Semantics_of_programming_languages_deep quotations (33):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
   (\226\136\128 x : List[Char], \226\136\128 e : Expression, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, s'(x) == value(e, s) && (\226\136\128 y : List[Char], !(y == x) \226\134\146 s'(y) == s(y)) \226\134\146 (sem : (Command, (List[Char]) -> Num, (List[Char]) -> Num) -> Bool)(Assign(x, e), s, s')) && (\226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, \226\136\128 s'' : (List[Char]) -> Num, sem(c1, s, s') && sem(c2, s', s'') \226\134\146 sem(Sequence(c1, c2), s, s'')) && (\226\136\128 e : Expression, \226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, !(value(e, s) == 0) && sem(c1, s, s') \226\134\146 sem(If(e, c1, c2), s, s')) && (\226\136\128 e : Expression, \226\136\128 c1 : Command, \226\136\128 c2 : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, value(e, s) == 0 && sem(c2, s, s') \226\134\146 sem(If(e, c1, c2), s, s')) && (\226\136\128 e : Expression, \226\136\128 c : Command, \226\136\128 s : (List[Char]) -> Num, value(e, s) == 0 \226\134\146 sem(While(e, c), s, s)) && (\226\136\128 e : Expression, \226\136\128 c : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, \226\136\128 s'' : (List[Char]) -> Num, !(value(e, s) == 0) && sem(c, s, s') && sem(While(e, c), s', s'') \226\134\146 sem(While(e, c), s, s''))
   \226\136\128 c : Command, \226\136\128 s : (List[Char]) -> Num, \226\136\128 s' : (List[Char]) -> Num, \226\136\128 s'' : (List[Char]) -> Num, sem(c, s, s') && sem(c, s, s'') \226\134\146 s' == s''
   (wlp : (Command, ((List[Char]) -> Num) -> Bool, (List[Char]) -> Num) -> Bool)((c : Command), (q : ((List[Char]) -> Num) -> Bool), (s : (List[Char]) -> Num)) == (\226\136\128 s' : (List[Char]) -> Num, sem(c, s, s') \226\134\146 q(s'))

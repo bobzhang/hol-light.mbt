@@ -5883,9 +5883,9 @@ test "Tutorial/Real_analysis matches Tutorial/Real_analysis.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  \226\136\128 n : Num, (P : (Num) -> Bool)(n) && P(n + 1)
       #|  \226\136\128 P : (Num) -> Bool, P(0) && P(1) && (\226\136\128 n : Num, P(n) && P(n + 1) \226\134\146 P(n + 2)) \226\134\146 (\226\136\128 n : Num, P(n))
       #|  (x : Real)

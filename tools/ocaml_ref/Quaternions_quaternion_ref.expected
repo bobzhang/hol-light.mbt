@@ -74606,9 +74606,9 @@ Quaternions/quaternion quotations (279):
   (quat_pow : (Cart[Real, Tybit0[Tybit0[Unit]]], Num) -> Cart[Real, Tybit0[Tybit0[Unit]]])((q : Cart[Real, Tybit0[Tybit0[Unit]]]), 0) == Hx(real_of_num(1)) && (\226\136\128 n : Num, quat_pow(q, SUC(n)) == quat_mul(q, quat_pow(q, n)))
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   quat_Re(quat(((x : Real), (y : Real), (z : Real), (w : Real)))) == x && Im1(quat((x, y, z, w))) == y && Im2(quat((x, y, z, w))) == z && Im3(quat((x, y, z, w))) == w
   (\226\136\128 a : Real, quat_Re(Hx(a)) == a) && (\226\136\128 a : Real, Im1(Hx(a)) == real_of_num(0)) && (\226\136\128 a : Real, Im2(Hx(a)) == real_of_num(0)) && (\226\136\128 a : Real, Im3(Hx(a)) == real_of_num(0))
   quat_Re(quat_ii) == real_of_num(0) && Im1(quat_ii) == real_of_num(1) && Im2(quat_ii) == real_of_num(0) && Im3(quat_ii) == real_of_num(0) && quat_Re(jj) == real_of_num(0) && Im1(jj) == real_of_num(0) && Im2(jj) == real_of_num(1) && Im3(jj) == real_of_num(0) && quat_Re(kk) == real_of_num(0) && Im1(kk) == real_of_num(0) && Im2(kk) == real_of_num(0) && Im3(kk) == real_of_num(1)

@@ -6113,31 +6113,31 @@ Jordan/float quotations (585):
   \226\136\128 x : Real, !(x == real_of_num(0)) \226\134\146 real_of_num(0) < abs(x)
   (z : Real)
   real_of_num(0) < (u : Real) && abs((z : Real)) <= (e : Real) * u \226\134\146 real_of_num(0) <= e
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   (u : Real) == abs((g : Real)) - (ey : Real)
   (z : Real) == (x : Real) - (h : Real) * (y : Real)
   (x : Real) - (f : Real) + (f - (h : Real) * (g : Real)) + h * (g - (y : Real)) == x - h * y
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   (x : Real) - (f : Real) + (f - (h : Real) * (g : Real))
   (h : Real) * ((g : Real) - (y : Real))
   (h : Real)
   (x : Real) - (f : Real)
   (f : Real) - (h : Real) * (g : Real)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   !((y : Real) == real_of_num(0))
   \226\136\128 x : Real, \226\136\128 f : Real, \226\136\128 ex : Real, \226\136\128 y : Real, \226\136\128 g : Real, \226\136\128 ey : Real, \226\136\128 h : Real, \226\136\128 ez : Real, interval(x, f, ex) && interval(y, g, ey) && ey < abs(g) && ex + (abs(f - h * g) + abs(h) * ey) <= ez * (abs(g) - ey) \226\134\146 interval(x / y, h, ez)
   :real
@@ -6180,41 +6180,41 @@ Jordan/float quotations (585):
   \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 ssqrt(x) * ssqrt(x) == x
   (x : Real)
   \226\136\128 x : Real, real_of_num(0) <= x \226\134\146 ssqrt(x * x) == x
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   (u : Real)
   ssqrt((x : Real))
   (v : Real)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   real_abs
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   abs((x : Real) - (u : Real) * u) <= abs(x - (f : Real)) + abs(f - u * u)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
-  B ==> (A==>B)
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
   ssqrt((x : Real)) - (u : Real) == (ssqrt(x) - u) * real_of_num(1)
   (x : Real)
   (v : Real)

@@ -38357,7 +38357,7 @@ test "Multivariate/metric matches Multivariate/metric.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
       #|  mball((m : Metric[A]), ((x0 : A), (r : Real)))
       #|  min((r : Real), real_of_num(1)) / real_of_num(2)
       #|  (x0 : A)

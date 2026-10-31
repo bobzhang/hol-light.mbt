@@ -51686,8 +51686,8 @@ EC/ccsm2 quotations (31):
   prime(n_sm2)
   (sm2_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_sm2), ring_neg(integer_mod_ring(p_sm2), int_of_num(3)), int_of_num(b_sm2)))
   group_carrier(sm2_group) == weierstrass_curve((integer_mod_ring(p_sm2), ring_neg(integer_mod_ring(p_sm2), int_of_num(3)), int_of_num(b_sm2))) && group_id(sm2_group) == NONE && group_inv(sm2_group) == weierstrass_neg((integer_mod_ring(p_sm2), ring_neg(integer_mod_ring(p_sm2), int_of_num(3)), int_of_num(b_sm2))) && group_mul(sm2_group) == weierstrass_add((integer_mod_ring(p_sm2), ring_neg(integer_mod_ring(p_sm2), int_of_num(3)), int_of_num(b_sm2)))
-  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
-  x:int
+  pow((x : Int), 3) - int_of_num(3) * x + (b : Int) == pow(x, 3) + (-int_of_num(3) * x + b) && pow(x, 3) + int_of_num((c : Num)) == pow(x, 3) + (int_of_num(0) * x + int_of_num(c))
+  (x : Int)
   \226\136\128 x : Int, !op_eq_eq(pow(x, 3) - int_of_num(3) * x + int_of_num(b_sm2), int_of_num(0), mod(int_of_num(p_sm2)))
   IN(g_sm2, group_carrier(sm2_group))
   group_element_order(sm2_group, g_sm2) == n_sm2

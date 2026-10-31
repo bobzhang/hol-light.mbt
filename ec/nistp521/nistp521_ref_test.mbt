@@ -51767,8 +51767,8 @@ test "EC/nistp521 matches EC/nistp521.ml" {
       #|  op_eq_eq(pow(int_of_num(b_521), 2) * int_of_num(c_521), -int_of_num(27), mod(int_of_num(p_521)))
       #|  (p521_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521)))
       #|  group_carrier(p521_group) == weierstrass_curve((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521))) && group_id(p521_group) == NONE && group_inv(p521_group) == weierstrass_neg((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521))) && group_mul(p521_group) == weierstrass_add((integer_mod_ring(p_521), ring_neg(integer_mod_ring(p_521), int_of_num(3)), int_of_num(b_521)))
-      #|  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
-      #|  x:int
+      #|  pow((x : Int), 3) - int_of_num(3) * x + (b : Int) == pow(x, 3) + (-int_of_num(3) * x + b) && pow(x, 3) + int_of_num((c : Num)) == pow(x, 3) + (int_of_num(0) * x + int_of_num(c))
+      #|  (x : Int)
       #|  \226\136\128 x : Int, !op_eq_eq(pow(x, 3) - int_of_num(3) * x + int_of_num(b_521), int_of_num(0), mod(int_of_num(p_521)))
       #|  IN(G_521, group_carrier(p521_group))
       #|  group_element_order(p521_group, G_521) == n_521
