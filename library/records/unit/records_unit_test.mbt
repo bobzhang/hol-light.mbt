@@ -1,6 +1,8 @@
 // The record tests of upstream's UnitTests/records.ml: no theory defines an
 // automatic record type while it loads, so define_auto_record_type and
-// record_read_write_thms run only here.
+// record_read_write_thms run only here. They live in a package of their own
+// because defining test_point would change what records' reference test
+// sees of the kernel's types and constants.
 
 ///|
 test "define_auto_record_type adds a record's read/write theorems" {
