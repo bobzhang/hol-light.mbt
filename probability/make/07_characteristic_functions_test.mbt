@@ -85546,15 +85546,15 @@ test "Probability/characteristic_functions matches Probability/characteristic_fu
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  indicator_fn((a : (A) -> Bool))
       #|  (X : (Num, A) -> Real)(SUC((n : Num)))
       #|  (p : Prob_space[A])

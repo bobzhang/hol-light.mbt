@@ -5562,9 +5562,9 @@ RichterHilbertAxiomGeometry/readable quotations (8):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
 SKOLEM_THM_GEN =  |- (#forall:fun(fun(fun('?1,bool),bool),bool) (\P:fun('?1,bool). (#forall:fun(fun(fun('?1,fun('?2,bool)),bool),bool) (\R:fun('?1,fun('?2,bool)). ((#=:fun(bool,fun(bool,bool)) (#forall:fun(fun('?1,bool),bool) (\x:'?1. ((#==>:fun(bool,fun(bool,bool)) (P:fun('?1,bool) x:'?1)) (#?:fun(fun('?2,bool),bool) (\y:'?2. ((R:fun('?1,fun('?2,bool)) x:'?1) y:'?2))))))) (#?:fun(fun(fun('?1,'?2),bool),bool) (\f:fun('?1,'?2). (#forall:fun(fun('?1,bool),bool) (\x:'?1. ((#==>:fun(bool,fun(bool,bool)) (P:fun('?1,bool) x:'?1)) ((R:fun('?1,fun('?2,bool)) x:'?1) (f:fun('?1,'?2) x:'?1))))))))))))
 MOD_MOD_REFL' =  |- (#forall:fun(fun(num,bool),bool) (\m:num. (#forall:fun(fun(num,bool),bool) (\n:num. ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) n:num) (#NUMERAL:fun(num,num) #_0:num)))) ((#=:fun(num,fun(num,bool)) ((#MOD:fun(num,fun(num,num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)) n:num)) ((#MOD:fun(num,fun(num,num)) m:num) n:num)))))))
 NSQRT_2 =  |- (#forall:fun(fun(num,bool),bool) (\p:num. (#forall:fun(fun(num,bool),bool) (\q:num. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) ((#*:fun(num,fun(num,num)) p:num) p:num)) ((#*:fun(num,fun(num,num)) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) ((#*:fun(num,fun(num,num)) q:num) q:num)))) ((#=:fun(num,fun(num,bool)) q:num) (#NUMERAL:fun(num,num) #_0:num)))))))

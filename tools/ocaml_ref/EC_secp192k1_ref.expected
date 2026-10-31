@@ -51685,8 +51685,8 @@ EC/secp192k1 quotations (29):
   prime(n_192k1)
   (p192k1_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_192k1), int_of_num(0), int_of_num(3)))
   group_carrier(p192k1_group) == weierstrass_curve((integer_mod_ring(p_192k1), int_of_num(0), int_of_num(3))) && group_id(p192k1_group) == NONE && group_inv(p192k1_group) == weierstrass_neg((integer_mod_ring(p_192k1), int_of_num(0), int_of_num(3))) && group_mul(p192k1_group) == weierstrass_add((integer_mod_ring(p_192k1), int_of_num(0), int_of_num(3)))
-  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
-  x:int
+  pow((x : Int), 3) - int_of_num(3) * x + (b : Int) == pow(x, 3) + (-int_of_num(3) * x + b) && pow(x, 3) + int_of_num((c : Num)) == pow(x, 3) + (int_of_num(0) * x + int_of_num(c))
+  (x : Int)
   \226\136\128 x : Int, !op_eq_eq(pow(x, 3) + int_of_num(3), int_of_num(0), mod(int_of_num(p_192k1)))
   IN(G_192K1, group_carrier(p192k1_group))
   group_element_order(p192k1_group, G_192K1) == n_192k1

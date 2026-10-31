@@ -10165,13 +10165,13 @@ test "Divstep/idivstep matches Divstep/idivstep.ml" {
       #|  (divstep_mat : (Num, (Int, Int, Int)) -> Cart[Cart[Int, Tybit0[Unit]], Tybit0[Unit]])(0, (t : (Int, Int, Int))) == imat_I && divstep_mat(SUC((n : Num)), t) == imat_mul(if divstep_d(n, t) >= int_of_num(0) && rem(divstep_g(n, t), int_of_num(2)) == int_of_num(1) { vector([vector([int_of_num(0), int_of_num(2)]), vector([-int_of_num(1), int_of_num(1)])]) } else { vector([vector([int_of_num(2), int_of_num(0)]), vector([rem(divstep_g(n, t), int_of_num(2)), int_of_num(1)])]) }, divstep_mat(n, t))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (x : Int) + int_of_num(1) * (y : Int) == y + x
       #|  -int_of_num(1) * (x : Int) + int_of_num(1) * (y : Int) == y - x
       #|  (a : Int) * (pow((x : Int), (n : Num)) * (b : Int)) == pow(x, n) * (a * b)

@@ -8811,7 +8811,7 @@ test "GL/completeness matches GL/completeness.ml" {
       #|  \226\136\128 p : Form, \226\136\128 X : List[Form], \226\136\128 Y : List[Form], set_of_list(X) == set_of_list(Y) && NOREPETITION(Y) && MAXIMAL_CONSISTENT(p, X) \226\134\146 MAXIMAL_CONSISTENT(p, Y)
       #|  \226\136\128 p : Form, \226\136\128 u1 : List[Form], \226\136\128 u2 : List[Form], \226\136\128 w1 : List[Form], \226\136\128 w2 : List[Form], set_of_list(u1) == set_of_list(w1) && NOREPETITION(w1) && set_of_list(u2) == set_of_list(w2) && NOREPETITION(w2) && GL_STANDARD_REL(p, u1, u2) \226\134\146 GL_STANDARD_REL(p, w1, w2)
       #|  \226\136\128 M : List[Form], MAXIMAL_CONSISTENT((p : Form), M) && (\226\136\128 q : Form, MEM(q, M) \226\134\146 SUBSENTENCE(q, p)) \226\134\146 IN(set_of_list(M), (GL_STDWORLDS : (Form, (Form) -> Bool) -> Bool)(p))
-      #|  (==>)
+      #|  op_eq_eq_gt
       #|  \226\136\128 w1 : List[Form], \226\136\128 w2 : List[Form], GL_STANDARD_REL((p : Form), w1, w2) \226\134\146 (GL_STDREL : (Form, (Form) -> Bool, (Form) -> Bool) -> Bool)(p, set_of_list(w1), set_of_list(w2))
       #|  \226\136\128 p : Form, \226\136\128 w1 : (Form) -> Bool, \226\136\128 w2 : (Form) -> Bool, GL_STDREL(p, w1, w2) \226\134\146 IN(w1, GL_STDWORLDS(p)) && IN(w2, GL_STDWORLDS(p))
       #|  (y2 : List[Form])

@@ -5673,7 +5673,7 @@ test "Examples/doomsday matches Examples/doomsday.ml" {
       #|  \226\136\128 y : Num, \226\136\128 m : Num, 1 <= m && m <= 12 \226\134\146 cumdays_before(y, m + 1) == cumdays_before(y, m) + days_in_month(y, m)
       #|  \226\136\128 y : Num, days_in_year(y) == cumdays_before(y, 13)
       #|  (cumulative_days : (Num) -> Num)(0) == 0 && cumulative_days(SUC((y : Num))) == cumulative_days(y) + days_in_year(y)
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
       #|  (day_number : (Num, Num, Num) -> Num)((y : Num), (m : Num), (d : Num)) == cumulative_days(y) + day_of_year(y, m, d)
       #|  (day_of_week : (Num, Num, Num) -> Num)((y : Num), (m : Num), (d : Num)) == MOD(day_number(y, m, d) + 5, 7)
       #|  (doomsday_date : (Num, Num) -> Num)((y : Num), (m : Num)) == (if m == 1 { if leap_year(y) { 4 } else { 3 } } else { if m == 2 { if leap_year(y) { 29 } else { 28 } } else { if m == 3 { 7 } else { if m == 4 { 4 } else { if m == 5 { 9 } else { if m == 6 { 6 } else { if m == 7 { 11 } else { if m == 8 { 8 } else { if m == 9 { 5 } else { if m == 10 { 10 } else { if m == 11 { 7 } else { 12 } } } } } } } } } } })

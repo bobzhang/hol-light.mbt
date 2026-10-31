@@ -8241,9 +8241,9 @@ Library/words quotations (1923):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   ?f. ((forall n. f _0 n = _0) /\\ (forall m. f m _0 = _0)) /\\\n         ((forall m n. f (BIT0 m) (BIT0 n) = BIT0(f m n)) /\\\n          (forall m n. f (BIT0 m) (BIT1 n) = BIT0(f m n)) /\\\n          (forall m n. f (BIT1 m) (BIT0 n) = BIT0(f m n)) /\\\n          (forall m n. f (BIT1 m) (BIT1 n) = BIT1(f m n))) /\\\n         (forall m n. word_and (word(NUMERAL m):N word) (word(NUMERAL n)) =\n                word(NUMERAL(f m n)))
   BIT0(_0) == _0
   :N
@@ -8261,9 +8261,9 @@ Library/words quotations (1923):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   ?f. ((forall n. f _0 n = n) /\\ (forall m. f m _0 = m)) /\\\n         ((forall m n. f (BIT0 m) (BIT0 n) = BIT0(f m n)) /\\\n          (forall m n. f (BIT0 m) (BIT1 n) = BIT1(f m n)) /\\\n          (forall m n. f (BIT1 m) (BIT0 n) = BIT1(f m n)) /\\\n          (forall m n. f (BIT1 m) (BIT1 n) = BIT1(f m n))) /\\\n         (forall m n. word_or (word(NUMERAL m):N word) (word(NUMERAL n)) =\n                word(NUMERAL(f m n)))
   BIT0(_0) == _0
   :N
@@ -8281,9 +8281,9 @@ Library/words quotations (1923):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   ?f. ((forall n. f _0 n = n) /\\ (forall m. f m _0 = m)) /\\\n         ((forall m n. f (BIT0 m) (BIT0 n) = BIT0(f m n)) /\\\n          (forall m n. f (BIT0 m) (BIT1 n) = BIT1(f m n)) /\\\n          (forall m n. f (BIT1 m) (BIT0 n) = BIT1(f m n)) /\\\n          (forall m n. f (BIT1 m) (BIT1 n) = BIT0(f m n))) /\\\n         (forall m n. word_xor (word(NUMERAL m):N word) (word(NUMERAL n)) =\n                word(NUMERAL(f m n)))
   BIT0(_0) == _0
   :N
@@ -8324,21 +8324,21 @@ Library/words quotations (1923):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   ?f. (forall i. f i _0 = {} /\\\n              (forall n. f i (BIT0 n) = f (i + 1) n) /\\\n              (forall n. f i (BIT1 n) = i INSERT f (i + 1) n)) /\\\n         (forall w:N word. bits_of_word w = f 0 (val w))
   :N
   DIV(2 * (n : Num) + 1, 2) == n && DIV(2 * n, 2) == n
@@ -8350,7 +8350,7 @@ Library/words quotations (1923):
   (p : Bool) && (p \226\134\146 (q : Bool)) \226\134\146 p && q
   (f : (Num) -> Num)
   ?f. forall n. f n =\n                  if n = 0 then 0\n             else if n MOD 2 = 1 then SUC(f (n DIV 2))\n             else f (n DIV 2)
-  \\n. n + 1
+  (n : Num) => n + 1
   ?f. (f _0 = 0 /\\\n          (forall n. f (BIT0 n) = f n) /\\\n          (forall n. f (BIT1 n) = SUC(f n))) /\\\n         (forall w:N word. word_popcount w = f (val w))
   :N
   \226\136\128 a : Word[N], (val : (Word[N]) -> Num)(a) == 0 \226\134\146 (word_ctz : (Word[N]) -> Num)(a) == (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))

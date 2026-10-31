@@ -80362,10 +80362,10 @@ Functionspaces/cfunspace quotations (570):
   real
   real
   real
-  /\\
-  /\\
-  /\\
-  /\\
+  op_slash_bslash
+  op_slash_bslash
+  op_slash_bslash
+  op_slash_bslash
   forall s inprod. is_inner_space (s,inprod) ==> forall x y. x IN s /\\ y IN s\n      ==> norm (inprod x y)\n        <= sqrt (real_of_complex (inprod x x)) *\n                        sqrt(real_of_complex (inprod y y))
   (x : Cart[Real, Tybit0[Unit]]) * ((y : Cart[Real, Tybit0[Unit]]) * inv(ii)) == inv(ii) * (x * y)
   (x : Real) == (y : Real) \226\134\146 pow(x, 2) == pow(y, 2)
@@ -80384,9 +80384,9 @@ Functionspaces/cfunspace quotations (570):
   (cop_pow : (((A) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], Num, (A) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]])((op : ((A) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]]), 0) == I && cop_pow(op, SUC((n : Num))) == cop_mul(op, cop_pow(op, n))
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (cop_cnj : (((B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], (B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]]) == o(cfun_cnj)
   (cop_add : (((B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], ((B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], (B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]])
   (cop_sub : (((B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], ((B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], (B) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]])
@@ -80567,7 +80567,7 @@ Functionspaces/cfunspace quotations (570):
   real
   forall s inprod. is_inner_space (s,inprod) ==> forall op state.  state IN s /\\ is_self_adjoint1 (s,inprod) op\n    ==> real (variance inprod state op)
   real
-  /\\
+  op_slash_bslash
   :inner_space->cop->bool
   (is_eigen_pair : (((A) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]], ((A) -> Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]])) -> Bool)((op : ((A) -> Cart[Real, Tybit0[Unit]], A) -> Cart[Real, Tybit0[Unit]]), ((x : (A) -> Cart[Real, Tybit0[Unit]]), (a : Cart[Real, Tybit0[Unit]]))) == (is_linear_cop(op) \226\134\146 op(x) == cfun_smul(a, x) && !(x == cfun_zero))
   \226\136\128 op : ((_) -> Cart[Real, Tybit0[Unit]], _) -> Cart[Real, Tybit0[Unit]], \226\136\128 v : Cart[Real, Tybit0[Unit]], \226\136\128 x : (_) -> Cart[Real, Tybit0[Unit]], is_eigen_pair(op, (x, v)) \226\134\146 (\226\136\128 a : Cart[Real, Tybit0[Unit]], !(a == Cx(real_of_num(0))) \226\134\146 is_eigen_pair(op, (cfun_smul(a, x), v)))

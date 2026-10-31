@@ -84830,13 +84830,13 @@ test "Probability/ergodic matches Probability/ergodic.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (x : A)
       #|  \226\136\128 f : (A) -> Real, \226\136\128 tt : (A) -> A, \226\136\128 n : Num, \226\136\128 x : A, real_of_num(0) <= ergodic_maxsum(f, tt, n, x)
       #|  (k : Num) + 1 == SUC(k)

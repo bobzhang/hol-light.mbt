@@ -82113,47 +82113,47 @@ Probability/martingale_convergence quotations (5725):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (upcrossing_count : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == 0 && upcrossing_count(f, a, b, SUC((k : Num))) == upcrossing_count(f, a, b, k) + (if upcrossing_phase(f, a, b, k) == 1 && f(SUC(k)) >= b { 1 } else { 0 })
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (downcrossing_phase : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == (if f(0) >= b { 1 } else { 0 }) && downcrossing_phase(f, a, b, SUC((k : Num))) == (if downcrossing_phase(f, a, b, k) == 0 { if f(SUC(k)) >= b { 1 } else { 0 } } else { if f(SUC(k)) <= a { 0 } else { 1 } })
   :P
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (downcrossing_count : ((Num) -> Real, Real, Real, Num) -> Num)((f : (Num) -> Real), (a : Real), (b : Real), 0) == 0 && downcrossing_count(f, a, b, SUC((k : Num))) == downcrossing_count(f, a, b, k) + (if downcrossing_phase(f, a, b, k) == 1 && f(SUC(k)) <= a { 1 } else { 0 })
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (num_upcrossings : ((Num, A) -> Real, Real, Real, Num, A) -> Num)((X : (Num, A) -> Real), (a : Real), (b : Real), (n : Num), (x : A)) == upcrossing_count((k : Num) => X(k, x), a, b, n)
   \226\136\128 f : (Num) -> Real, \226\136\128 a : Real, \226\136\128 b : Real, \226\136\128 n : Num, upcrossing_count(f, a, b, n) <= upcrossing_count(f, a, b, SUC(n))
   (m : Num)
@@ -82177,13 +82177,13 @@ Probability/martingale_convergence quotations (5725):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   upcrossing_phase((f : (Num) -> Real), real_of_num(0), (b : Real), SUC((n : Num))) == 1
   upcrossing_phase((f : (Num) -> Real), real_of_num(0), (b : Real), SUC((n : Num))) == 0
   (f : (Num) -> Real)(SUC((n : Num))) >= (b : Real)
@@ -82217,13 +82217,13 @@ Probability/martingale_convergence quotations (5725):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (n : Num)
   (b : Real)
   (a : Real)
@@ -85835,15 +85835,15 @@ Probability/martingale_convergence quotations (5725):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   inv(real_of_num((j : Num))) < (X : (Num, A) -> Real)((n : Num), (w : A)) - gen_cond_exp((p : Prob_space[A]), (FF : (Num, (A) -> Bool) -> Bool)(n), X(SUC(n)), w)
   !((j : Num) == 0)
   SUC((j : Num) - 1) == j

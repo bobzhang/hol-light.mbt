@@ -8038,16 +8038,16 @@ GL/modal quotations (99):
   \226\136\128 W : (W) -> Bool, \226\136\128 R : (W, W) -> Bool, (\226\136\128 w : W, \226\136\128 w' : W, \226\136\128 w'' : W, IN(w, W) && IN(w', W) && IN(w'', W) && R(w, w') && R(w', w'') \226\134\146 R(w, w'')) == (\226\136\128 p : Form, holds_in((W, R), op_minus_minus_gt(Box(p), Box(Box(p)))))
   (TRANSNT : (((W) -> Bool, (W, W) -> Bool)) -> Bool)(((W : (W) -> Bool), (R : (W, W) -> Bool))) == (!(W == {}) && (\226\136\128 x : W, \226\136\128 y : W, R(x, y) \226\134\146 IN(x, W) && IN(y, W)) && (\226\136\128 x : W, \226\136\128 y : W, \226\136\128 z : W, IN(x, W) && IN(y, W) && IN(z, W) && R(x, y) && R(y, z) \226\134\146 R(x, z)) && WF((x : W) => (y : W) => R(y, x)))
   (\226\136\128 p : Form, IN(p, (MINOR : (Form, Form) -> Bool)(Not(p)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(p, MINOR(op_amp_amp(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(q, MINOR(op_amp_amp(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(p, MINOR(op_bar_bar(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(q, MINOR(op_bar_bar(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(p, MINOR(op_minus_minus_gt(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(q, MINOR(op_minus_minus_gt(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(p, MINOR(op_lt_minus_gt(p, q)))) && (\226\136\128 p : Form, \226\136\128 q : Form, IN(q, MINOR(op_lt_minus_gt(p, q)))) && (\226\136\128 p : Form, IN(p, MINOR(Box(p))))
-  (==>)
-  (==>)
-  (==>)
-  (==>)
-  (==>)
-  (==>)
-  (==>)
-  (==>)
-  (==>)
-  (==>)
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
+  op_eq_eq_gt
   MINOR(False) == {} && MINOR(True) == {} && MINOR(Atom((s : List[Char]))) == {} && (\226\136\128 p : Form, MINOR(Not(p)) == {p}) && (\226\136\128 p : Form, \226\136\128 q : Form, MINOR(op_amp_amp(p, q)) == {p, q}) && (\226\136\128 p : Form, \226\136\128 q : Form, MINOR(op_bar_bar(p, q)) == {p, q}) && (\226\136\128 p : Form, \226\136\128 q : Form, MINOR(op_minus_minus_gt(p, q)) == {p, q}) && (\226\136\128 p : Form, \226\136\128 q : Form, MINOR(op_lt_minus_gt(p, q)) == {p, q}) && (\226\136\128 p : Form, MINOR(Box(p)) == {p})
   (SUBFORMULA : (Form, Form) -> Bool) == RTC((p : Form) => (q : Form) => IN(p, MINOR(q)))
   \226\136\128 p : Form, SUBFORMULA(p, p)
@@ -8107,16 +8107,16 @@ GL/modal quotations (99):
   :P
   :P
   :P
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  op_plus
   (COUNTABLE : ((Form) -> Bool) -> Bool)((UNIV : (Form) -> Bool))
   (BISIMIMULATION : (((A) -> Bool, (A, A) -> Bool, (List[Char], A) -> Bool), ((B) -> Bool, (B, B) -> Bool, (List[Char], B) -> Bool), (A, B) -> Bool) -> Bool)(((W1 : (A) -> Bool), (R1 : (A, A) -> Bool), (V1 : (List[Char], A) -> Bool)), ((W2 : (B) -> Bool), (R2 : (B, B) -> Bool), (V2 : (List[Char], B) -> Bool)), (Z : (A, B) -> Bool)) == (\226\136\128 w1 : A, \226\136\128 w2 : B, Z(w1, w2) \226\134\146 IN(w1, W1) && IN(w2, W2) && (\226\136\128 a : List[Char], V1(a, w1) == V2(a, w2)) && (\226\136\128 w1' : A, R1(w1, w1') \226\134\146 (\226\136\131 w2' : B, IN(w2', W2) && Z(w1', w2') && R2(w2, w2'))) && (\226\136\128 w2' : B, R2(w2, w2') \226\134\146 (\226\136\131 w1' : A, IN(w1', W1) && Z(w1', w2') && R1(w1, w1'))))
   \226\136\128 W1 : (A) -> Bool, \226\136\128 R1 : (A, A) -> Bool, \226\136\128 V1 : (List[Char], A) -> Bool, \226\136\128 W2 : (B) -> Bool, \226\136\128 R2 : (B, B) -> Bool, \226\136\128 V2 : (List[Char], B) -> Bool, \226\136\128 Z : (A, B) -> Bool, BISIMIMULATION((W1, R1, V1), (W2, R2, V2), Z) \226\134\146 (\226\136\128 p : Form, \226\136\128 w1 : A, \226\136\128 w2 : B, Z(w1, w2) \226\134\146 holds((W1, R1), V1, p, w1) == holds((W2, R2), V2, p, w2))

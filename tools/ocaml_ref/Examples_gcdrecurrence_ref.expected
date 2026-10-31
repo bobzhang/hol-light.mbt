@@ -16852,7 +16852,7 @@ Examples/gcdrecurrence quotations (96):
   !((x : Num) == 0) && !((y : Num) == 0) \226\134\146 (x - 1 == y - 1) == (x == y)
   \226\136\128 m : Num, \226\136\128 n : Num, divides(EXP(2, m) - 1, EXP(2, n) - 1) == divides(m, n)
   (fib : (Num) -> Num)(0) == 0 && fib(1) == 1 && (\226\136\128 n : Num, fib(n + 2) == fib(n + 1) + fib(n))
-  \\n. n + 1
+  (n : Num) => n + 1
   1
   \226\136\128 m : Num, \226\136\128 n : Num, gcd((fib(m), fib(n))) == fib(gcd((m, n)))
   SUC(SUC((n : Num))) == n + 2
@@ -16885,9 +16885,9 @@ Examples/gcdrecurrence quotations (96):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (\226\136\128 a : Num, (pelly : (Num, Num) -> Num)(a, 0) == 0) && (\226\136\128 a : Num, pelly(a, 1) == 1) && (\226\136\128 a : Num, \226\136\128 n : Num, pelly(a, n + 2) == 2 * (a * pelly(a, n + 1)) - pelly(a, n))
   :P
   :P
@@ -16895,9 +16895,9 @@ Examples/gcdrecurrence quotations (96):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (a : Num) <= (b : Num) \226\134\146 a - (c : Num) <= b - c
   2 * pelly((a : Num), (n : Num) + 1) - pelly(a, n)
   (n : Num) + 1 + 1 == n + 2

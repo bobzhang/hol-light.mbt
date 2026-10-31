@@ -84318,15 +84318,15 @@ Probability/characteristic_functions quotations (5000):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   indicator_fn((a : (A) -> Bool))
   (X : (Num, A) -> Real)(SUC((n : Num)))
   (p : Prob_space[A])

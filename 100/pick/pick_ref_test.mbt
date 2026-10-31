@@ -83536,9 +83536,9 @@ test "100/pick matches 100/pick.ml" {
       #|  (polygonal_path : (List[Cart[Real, _]], Cart[Real, Unit]) -> Cart[Real, _])(NIL) == linepath((vec(0), vec(0))) && polygonal_path([(a : Cart[Real, _])]) == linepath((a, a)) && polygonal_path([a, (b : Cart[Real, _])]) == linepath((a, b)) && polygonal_path(CONS(a, CONS(b, CONS((c : Cart[Real, _]), (l : List[Cart[Real, _]]))))) == op_plus_plus(linepath((a, b)), polygonal_path(CONS(b, CONS(c, l))))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
       #|  \226\136\128 a : Cart[Real, _], \226\136\128 b : Cart[Real, _], \226\136\128 p : List[Cart[Real, _]], !(p == NIL) \226\134\146 polygonal_path(CONS(a, CONS(b, p))) == op_plus_plus(linepath((a, b)), polygonal_path(CONS(b, p)))
       #|  \226\136\128 a : Cart[Real, Tybit0[Unit]], \226\136\128 b : Cart[Real, Tybit0[Unit]], \226\136\128 p : List[Cart[Real, Tybit0[Unit]]], polygonal_path(MAP((x : Cart[Real, Tybit0[Unit]]) => a + x, CONS(b, p))) == o((x : Cart[Real, Tybit0[Unit]]) => a + x, polygonal_path(CONS(b, p)))
       #|  \226\136\128 f : (Cart[Real, _]) -> Cart[Real, _], \226\136\128 p : List[Cart[Real, _]], linear(f) \226\134\146 polygonal_path(MAP(f, p)) == o(f, polygonal_path(p))

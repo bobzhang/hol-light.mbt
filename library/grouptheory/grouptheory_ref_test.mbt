@@ -23660,9 +23660,9 @@ test "Library/grouptheory matches Library/grouptheory.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
       #|  (gencmap : (A) -> K)
       #|  (gdecmap : (K) -> A)
       #|  forall(G:A group) s (k:K->bool).\n      INFINITE k /\\ s <=_c k ==> group_carrier(subgroup_generated G s) <=_c k

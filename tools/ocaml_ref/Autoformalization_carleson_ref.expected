@@ -82120,11 +82120,11 @@ Autoformalization/carleson quotations (19012):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   \226\136\128 u : (Num, Real) -> Real, \226\136\128 n : Num, \226\136\128 x : Real, cmaxseq(u, n, x) <= cmaxseq(u, SUC(n), x)
   \226\136\128 u : (Num, Real) -> Real, \226\136\128 n : Num, \226\136\128 x : Real, real_of_num(0) <= cmaxseq(u, n, x)
   (a : Real) <= (b : Real) \226\134\146 a <= max(b, (c : Real))

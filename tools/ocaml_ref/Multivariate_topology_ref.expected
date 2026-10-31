@@ -52435,9 +52435,9 @@ Multivariate/topology quotations (10460):
   \226\136\131 f : (Num, Cart[Real, N]) -> Cart[Real, N], (\226\136\128 z : Cart[Real, N], f(0, z) == z) && (\226\136\128 z : Cart[Real, N], \226\136\128 n : Num, f(SUC(n), z) == (g : (Cart[Real, N]) -> Cart[Real, N])(f(n, z)))
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   IN((y : Cart[Real, N]), (s : (Cart[Real, N]) -> Bool))
   (y : Cart[Real, N]) == (g : (Cart[Real, N]) -> Cart[Real, N])((x : Cart[Real, N]))
   (x : Cart[Real, N])
@@ -54981,11 +54981,11 @@ Multivariate/topology quotations (10460):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (k : Num) => (f : (Cart[Real, M]) -> Cart[Real, N])
   (n : Num)
   \226\136\128 f : (Cart[Real, M]) -> Cart[Real, N], \226\136\128 s : (Cart[Real, M]) -> Bool, \226\136\128 m : Num, \226\136\128 n : Num, baire(m, s, f) && m <= n \226\134\146 baire(n, s, f)

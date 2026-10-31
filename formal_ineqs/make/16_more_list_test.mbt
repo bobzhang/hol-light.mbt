@@ -58,9 +58,9 @@ test "Formal_ineqs/list/more_list matches Formal_ineqs/list/more_list.ml" {
       #|  (REVERSE_TABLE : ((Num) -> A, Num) -> List[A])((f : (Num) -> A), 0) == NIL && REVERSE_TABLE(f, SUC((i : Num))) == CONS(f(i), REVERSE_TABLE(f, i))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  \226\136\128 f : (Num) -> A, \226\136\128 k : Num, (TABLE : ((Num) -> A, Num) -> List[A])(f, k) == REVERSE(REVERSE_TABLE(f, k))
       #|  (l_seq : (Num, Num) -> List[Num])((n : Num), (m : Num)) == TABLE((i : Num) => n + i, m + 1 - n)
       #|  \226\136\128 f : (Num) -> A, \226\136\128 n : Num, LENGTH(REVERSE_TABLE(f, n)) == n

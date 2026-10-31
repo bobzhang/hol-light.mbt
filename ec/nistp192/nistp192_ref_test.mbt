@@ -51765,8 +51765,8 @@ test "EC/nistp192 matches EC/nistp192.ml" {
       #|  op_eq_eq(pow(int_of_num(b_192), 2) * int_of_num(c_192), -int_of_num(27), mod(int_of_num(p_192)))
       #|  (p192_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_192), ring_neg(integer_mod_ring(p_192), int_of_num(3)), int_of_num(b_192)))
       #|  group_carrier(p192_group) == weierstrass_curve((integer_mod_ring(p_192), ring_neg(integer_mod_ring(p_192), int_of_num(3)), int_of_num(b_192))) && group_id(p192_group) == NONE && group_inv(p192_group) == weierstrass_neg((integer_mod_ring(p_192), ring_neg(integer_mod_ring(p_192), int_of_num(3)), int_of_num(b_192))) && group_mul(p192_group) == weierstrass_add((integer_mod_ring(p_192), ring_neg(integer_mod_ring(p_192), int_of_num(3)), int_of_num(b_192)))
-      #|  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
-      #|  x:int
+      #|  pow((x : Int), 3) - int_of_num(3) * x + (b : Int) == pow(x, 3) + (-int_of_num(3) * x + b) && pow(x, 3) + int_of_num((c : Num)) == pow(x, 3) + (int_of_num(0) * x + int_of_num(c))
+      #|  (x : Int)
       #|  \226\136\128 x : Int, !op_eq_eq(pow(x, 3) - int_of_num(3) * x + int_of_num(b_192), int_of_num(0), mod(int_of_num(p_192)))
       #|  IN(G_192, group_carrier(p192_group))
       #|  group_element_order(p192_group, G_192) == n_192

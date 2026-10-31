@@ -6922,255 +6922,255 @@ test "Examples/bitblast matches Examples/bitblast.ml" {
       #|CPU time (user): <t>
       #|Examples/bitblast quotations (250):
       #|  word_xor((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), (y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) == word_sub(word_or(x, y), word_and(x, y))
-      #|  T
+      #|  true
       #|  word_add((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), (y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) == word_sub(word_shl(word_or(x, y), 1), word_xor(x, y))
-      #|  T
+      #|  true
       #|  word_and(word_not((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), word_sub(x, word(1))) == word_not(word_or(x, word_neg(x)))
-      #|  T
+      #|  true
       #|  word_not(word_or((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), word_neg(x))) == word_sub(word_and(x, word_neg(x)), word(1))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (val(word_add(x, y)) < val(x)) == !(val(word_add(x, y)) == val(x) + val(y))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (val(word_add(x, y)) >= val(y)) == (val(word_add(x, y)) == val(x) + val(y))
-      #|  T
+      #|  true
       #|  (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(2147483648)), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(2147483648)) == (word_sx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x)
-      #|  T
+      #|  true
       #|  LET((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_sub(word_xor((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), m), m) == word_xor(word_add(x, m), m)), word_neg(word(bitval((b : Bool)))))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr(word_or(word_neg(x), x), 63) == word(1)) == !(x == word(0)) && (word_ushr(word_or(word_neg(x), x), 63) == word(0)) == (x == word(0))
-      #|  T
-      #|  T
+      #|  true
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ishr(word_or(word_neg(x), x), 63) == word(18446744073709551615)) == !(x == word(0)) && (word_ishr(word_or(word_neg(x), x), 63) == word(0)) == (x == word(0))
-      #|  T
-      #|  T
+      #|  true
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x64 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(y == word(word_popcount(x))), word_ushr(x64, 56))), word_mul(x8, word(72340172838076673)))), word_and(word_add(x4, word_ushr(x4, 4)), word(1085102592571150095)))), word_add(word_and(x2, word(3689348814741910323)), word_ushr(word_and(x2, word(14757395258967641292)), 2)))), word_sub(x, word_ushr(word_and(x, word(12297829382473034410)), 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit1[Tybit1[Tybit1[Unit]]]], LET((u : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((v : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(y == word(word_popcount(x))), word_ushr(w, 60))), word_mul(v, word(1229782938247303441)))), word_and(u, word(1229782938247303441)))), word_mul(word_zx(x), word(562967133814800)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Unit]]], \226\136\128 y : Word[Tybit0[Tybit0[Unit]]], val(x) * val(y) == 13 \226\134\146 val(x) == 1 || val(y) == 1
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Unit]]]], val(x) * val(y) == 241 \226\134\146 val(x) == 1 || val(y) == 1
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(y == word(bitval(word_oddparity(x)))), word_and(x32, word(1)))), word_xor(x16, word_ushr(x16, 32)))), word_xor(x8, word_ushr(x8, 16)))), word_xor(x4, word_ushr(x4, 8)))), word_xor(x2, word_ushr(x2, 4)))), word_xor(x1, word_ushr(x1, 2)))), word_xor(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(y == word(bitval(word_oddparity(x)))), word_and(word_ushr(x4, 28), word(1)))), word_mul(x2, word(286331153)))), word_and(word_xor(x1, word_ushr(x1, 2)), word(286331153)))), word_xor(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(y == word(bitval(word_oddparity(x)))), word_ushr(x4, 31))), word_mul(x2, word(2290649224)))), word_and(word_xor(x1, word_ushr(x1, 2)), word(286331153)))), word_xor(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y)), 1) == (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])(x), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])(y)), 1) == (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_ushr : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y)), 1) == (word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit1[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, 1), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y, 1)), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1))))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x' : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_and(x', word_neg(x')) == word_and(word_xor(x, word_add(x, word(1))), word_not(x))), word_not(x))
-      #|  T
+      #|  true
       #|  LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) == gray((y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) \226\134\146 x == y), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  (LET : (((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(bitval((word_oddparity : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]))))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(bitval((bit : (Num, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)(0, x)))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, 1)))
-      #|  T
+      #|  true
       #|  ((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(0)) == ((word_and : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)(x)), (word_not : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(1))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0))
-      #|  T
+      #|  true
       #|  (word_and((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), word_sub(x, word(1))) == word(0)) == (word_popcount(x) == 0 || word_popcount(x) == 1)
-      #|  T
+      #|  true
       #|  LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (pow2orzero : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool) => LET_END(pow2orzero(word_xor(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), gray(word_add(x, word(1)))))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_and(x, word_sub(x, word(1))) == word(0))
-      #|  T
+      #|  true
       #|  LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (pow2 : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool) => LET_END(pow2(word_xor(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), gray(word_add(x, word(1)))))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_and(x, word_sub(x, word(1))) == word(0) && !(x == word(0)))
-      #|  T
+      #|  true
       #|  (LET : (((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])), gray((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1)))))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(1)), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, 1)))
-      #|  T
+      #|  true
       #|  LET((gray : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(gray(gray((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]))) == word_xor(x, word_ushr(x, 2))), (x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => word_xor(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  LET((gray : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]]) => LET_END(gray(gray(gray(gray(gray(gray(gray(gray((x : Word[Tybit0[Tybit0[Tybit0[Unit]]]]))))))))) == x), (x : Word[Tybit0[Tybit0[Tybit0[Unit]]]]) => word_xor(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], word_clz(word_or(x, y)) <= word_clz(x)
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], word_popcount(word_add(x, word(1))) == 1 \226\134\146 word_ctz(x) == 0 || word_ctz(x) == 32
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], !(x == word(0)) \226\134\146 word_popcount(word_sub(x, word(1))) + 1 == word_popcount(x) + word_ctz(x)
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word_clz(x) + (word_popcount(x) + word_ctz(x)) == 32) == (!(x == word(0)) && word_and(word_add(word_or(x, word_sub(x, word(1))), word(1)), x) == word(0))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word_popcount(x) == 0 || word_popcount(x) == 1) == (word_and(x, word_sub(x, word(1))) == word(0))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word_popcount(x) == 1) == (word_or(word_not(word_ishr(word_or(x, word_neg(x)), 31)), word_and(x, word_sub(x, word(1)))) == word(0))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_ctz : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Num)(x)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Num)((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(x, (word_neg : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(x)), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(1))))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_ctz : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)(x)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_popcount : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Num)((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_neg : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x)), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1))))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_clz(x) == word_clz(y)) == (val(word_xor(x, y)) <= val(word_and(x, y)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_clz(x) < word_clz(y)) == (val(word_and(x, word_not(y))) > val(y))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (word_clz(x) <= word_clz(y)) == (val(word_and(word_not(x), y)) <= val(x))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (l : Word[_]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (t : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(\226\136\128 i : Num, i < 8 \226\134\146 (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word_add : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)), (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(s, t))), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h)), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), h))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144), (word : (Num) -> Word[_])(72340172838076673))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[_]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (l : Word[_]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (t : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(\226\136\128 i : Num, i < 8 \226\134\146 (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word_sub : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)), (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(s, t))), (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, h), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(y)), h))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144), (word : (Num) -> Word[_])(72340172838076673))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(\226\136\128 i : Num, i < 8 \226\134\146 (word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8))) == (word_ushr : (Word[Tybit1[Tybit0[Tybit0[Unit]]]], Num) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_add : (Word[Tybit1[Tybit0[Tybit0[Unit]]]], Word[Tybit1[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8))), (word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit0[Tybit0[Unit]]]])((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), 1)), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(l)), 1)))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(72340172838076673))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((d : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(\226\136\128 i : Num, i < 8 \226\134\146 ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)) == !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8))) && ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(128)) == ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, m), w)))), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, m), m))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9187201950435737471))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((d : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(\226\136\128 i : Num, i < 8 \226\134\146 ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)) == !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8))) && ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(255)) == ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_shl : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(w, 1), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(w, 7)))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, 1), h), d), h))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 y : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((d : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(\226\136\128 i : Num, i < 8 \226\134\146 ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)) == ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8))) && ((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(z, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(128)) == !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(y, (8 * i, 8)))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_or : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(w, d), h))), (word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(d, m), m))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x, y))), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144))
-      #|  T
+      #|  true
       #|  (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((h : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)(((word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(h, (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_sub : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]), l), (word_not : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x))) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(0)) == (\226\136\128 i : Num, i < 8 \226\134\146 !((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (8 * i, 8)) == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(0)))), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(9259542123273814144), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(72340172838076673))
-      #|  T
+      #|  true
       #|  \226\136\128 a : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((\226\136\128 i : Num, i < 7 \226\134\146 (val : (Word[Tybit0[Tybit0[Unit]]]) -> Num)((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Unit]]])(a, (4 * i, 4))) < 10) == (z == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(0))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(w, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(286331152)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(a, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(107374182)), a))
-      #|  T
+      #|  true
       #|  \226\136\128 a : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((a' : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((w : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Bool)((z : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => (LET_END : (Bool) -> Bool)((\226\136\128 i : Num, i < 8 \226\134\146 (val : (Word[Tybit0[Tybit0[Unit]]]) -> Num)((word_subword : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], (Num, Num)) -> Word[Tybit0[Tybit0[Unit]]])(a, (4 * i, 4))) < 10) == (z == (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(0))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(w, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(2290649224)))), (word_xor : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])((word_add : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(a', (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(858993459)), a'))), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]])(a, 1))
-      #|  T
+      #|  true
       #|  \226\136\128 a : Word[Tybit1[Tybit0[Unit]]], LET((x : Word[Tybit1[Tybit0[Unit]]]) => LET_END(bit(0, a) \226\134\146 word_mul(a, x) == word_neg(word(1))), word_xor(word_sub(a, word_shl(a, 2)), word(2)))
-      #|  T
+      #|  true
       #|  \226\136\128 a : Word[Tybit0[Tybit0[Unit]]], LET((x : Word[Tybit0[Tybit0[Unit]]]) => LET_END(bit(0, a) \226\134\146 word_mul(a, x) == word_neg(word(1))), word_sub(word_shl(word_and(word_sub(word(1), a), word(4)), 1), a))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_popcount(word_not(x32)) == word_clz(x)), word_or(x16, word_ushr(x16, 32)))), word_or(x8, word_ushr(x8, 16)))), word_or(x4, word_ushr(x4, 8)))), word_or(x2, word_ushr(x2, 4)))), word_or(x1, word_ushr(x1, 2)))), word_or(x, word_ushr(x, 1)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((x32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_popcount(word_not(x32)) == word_clz(x)), word_or(x16, word_ushr(x16, 1)))), word_or(x8, word_ushr(x8, 2)))), word_or(x4, word_ushr(x4, 4)))), word_or(x2, word_ushr(x2, 8)))), word_or(x1, word_ushr(x1, 16)))), word_or(x, word_ushr(x, 32)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], (if x == word(0) { word(64) } else { LET((n : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => \226\136\128 x0 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 n0 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x0, n0)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => \226\136\128 x1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 n1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x1, n1)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => \226\136\128 x2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 n2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x2, n2)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => \226\136\128 x3 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 n3 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x3, n3)), LET_END(LET(GABS((f : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => \226\136\128 x4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], \226\136\128 n4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], GEQ(f((x4, n4)), LET_END(if val(x4) <= 9223372036854775807 { word_add(n4, word(1)) } else { n4 }))), if val(x3) <= 4611686018427387903 { (word_shl(x3, 2), word_add(n3, word(2))) } else { (x3, n3) })))), if val(x2) <= 1152921504606846975 { (word_shl(x2, 4), word_add(n2, word(4))) } else { (x2, n2) })))), if val(x1) <= 72057594037927935 { (word_shl(x1, 8), word_add(n1, word(8))) } else { (x1, n1) })))), if val(x0) <= 281474976710655 { (word_shl(x0, 16), word_add(n0, word(16))) } else { (x0, n0) })))), if val(x) <= 4294967295 { (word_shl(x, 32), word_add(n, word(32))) } else { (x, n) })), word(0)) }) == word(word_clz(x))
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], LET((MASK32 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK16 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK8 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK4 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK2 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (MASK1 : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END((if x == word(0) { 64 } else { (if val(word_and(x, MASK32)) < val(word_and(x, word_not(MASK32))) { 32 } else { 0 }) + ((if val(word_and(x, MASK16)) < val(word_and(x, word_not(MASK16))) { 16 } else { 0 }) + ((if val(word_and(x, MASK8)) < val(word_and(x, word_not(MASK8))) { 8 } else { 0 }) + ((if val(word_and(x, MASK4)) < val(word_and(x, word_not(MASK4))) { 4 } else { 0 }) + ((if val(word_and(x, MASK2)) < val(word_and(x, word_not(MASK2))) { 2 } else { 0 }) + (if val(word_and(x, MASK1)) < val(word_and(x, word_not(MASK1))) { 1 } else { 0 }))))) }) == word_clz(x)), word(18446744069414584320), word(18446462603027742720), word(18374966859414961920), word(17361641481138401520), word(14757395258967641292), word(12297829382473034410))
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
-      #|  T
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], LET((f : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(word_zx(l) == word_reversefields(1, x)), word_ushr(m, 32))), word_mul(s, word(4311810305)))), word_and(f, word(36578664720)))), word_mul(word_zx(x), word(2149582850)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], LET((f : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(LET((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => LET_END(l == word_zx(word_reversefields(1, x))), word_and(word_ushr(m, 32), word(255)))), word_mul(s, word(4311810305)))), word_and(f, word(36578664720)))), word_mul(word_zx(x), word(2149582850)))
-      #|  T
+      #|  true
       #|  \226\136\128 x : Word[Tybit0[Tybit0[Tybit0[Unit]]]], (LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((f : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((s : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((m : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((LET : ((Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool, Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Bool)((l : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) => (LET_END : (Bool) -> Bool)((word_zx : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(l) == (word_or : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_and : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(1)), (word_shl : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_zx : (Word[Tybit1[Tybit1[Unit]]]) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])((word_reversefields : (Num, Word[Tybit1[Tybit1[Unit]]]) -> Word[Tybit1[Tybit1[Unit]]])(1, (word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit1[Tybit1[Unit]]])((word_ushr : (Word[Tybit0[Tybit0[Tybit0[Unit]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Unit]]]])(x, 1)))), 1))), (word_ushr : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(m, 32))), (word_mul : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(s, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(4311810305)))), (word_and : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(f, (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(36578664465)))), (word_mul : (Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]], Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])((word_zx : (Word[Tybit0[Tybit0[Tybit0[Unit]]]]) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(x), (word : (Num) -> Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]])(1074791425)))
-      #|  T
+      #|  true
       #|  \226\136\128 a : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]], LET((ML_DSA_Q : Int) => LET_END(LET((t : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(LET((r : Word[Tybit0[Tybit0[Tybit0[Tybit0[Tybit0[Unit]]]]]]) => LET_END(ival(a) < int_of_num(2143289344) \226\134\146 ival(a) - ML_DSA_Q * ival(t) == ival(r) && -int_of_num(6283009) <= ival(r) && ival(r) <= int_of_num(6283008)), word_sub(a, word_mul(t, iword(ML_DSA_Q))))), word_ishr(word_add(a, word_shl(word(1), 22)), 23))), int_of_num(8380417))
-      #|  T
+      #|  true
       #|types = word/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
       #|constants = simd16 usimd16 simd8 usimd8 simd4 usimd4 simd2 usimd2 word_jrol word_jror word_jrem word_jdiv word_jushr word_jshr word_jshl aligned word_pmul word_bytereverse word_reversefields word_clz word_ctz word_duplicate word_insert word_subword word_join word_cor word_cand word_sxfrom word_sx word_zx word_igt word_ilt word_ige word_ile word_ugt word_ult word_uge word_ule word_rol word_ror word_ishr word_ushr word_shl word_imin word_umin word_imax word_umax word_umod word_udiv word_mul word_neg word_sub word_add word_xor word_or word_and word_not bitwise2 bitwise1 irelational2 relational2 imodular modular word_oddparity word_evenparity word_popcount iword_saturate word_saturate word_INT_MAX word_INT_MIN word_UINT_MAX num_shift_add bits_of_num numbit word_sgn iword ival word val word_of_bits bits_of_word bit bitvector mk_word bitval superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? forall ==> /\ T =
       #|definitions = 346

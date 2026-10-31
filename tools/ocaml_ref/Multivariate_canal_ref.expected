@@ -74480,9 +74480,9 @@ Multivariate/canal quotations (990):
   (higher_complex_derivative : (Num, (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])(0, (f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])) == f && (\226\136\128 n : Num, higher_complex_derivative(SUC(n), f) == complex_derivative(higher_complex_derivative(n, f)))
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   (holomorphic_on : ((Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], (Cart[Real, Tybit0[Unit]]) -> Bool) -> Bool)((f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]]), (s : (Cart[Real, Tybit0[Unit]]) -> Bool)) == (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 (\226\136\131 f' : Cart[Real, Tybit0[Unit]], has_complex_derivative(f, f', within(at(x), s))))
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], holomorphic_on(f, {})
   \226\136\128 f : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], \226\136\128 s : (Cart[Real, Tybit0[Unit]]) -> Bool, holomorphic_on(f, s) == (\226\136\128 x : Cart[Real, Tybit0[Unit]], IN(x, s) \226\134\146 complex_differentiable(f, within(at(x), s)))
