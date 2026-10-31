@@ -84972,11 +84972,11 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  (iter_min : ((Num) -> Real, Num, Num) -> Real)((X : (Num) -> Real), (N : Num), 0) == X(N) && iter_min(X, N, SUC((j : Num))) == min(X(N + SUC(j)), iter_min(X, N, j))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  \226\136\128 X : (Num) -> Real, \226\136\128 N : Num, \226\136\128 j : Num, iter_min(X, N, SUC(j)) <= iter_min(X, N, j)
       #|  (b : Real) <= (c : Real) \226\134\146 min((a : Real), b) <= c
       #|  (k : Num) == (N : Num) + SUC((j : Num))
@@ -87717,9 +87717,9 @@ test "Probability/expectation matches Probability/expectation.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  \226\136\128 b : Num, \226\136\128 k : Num, gseq(b, k) < gseq(b, SUC(k))
       #|  \226\136\128 b : Num, \226\136\128 k : Num, 1 <= gseq(b, k)
       #|  \226\136\128 b : Num, \226\136\128 k : Num, k + 1 <= gseq(b, k)
