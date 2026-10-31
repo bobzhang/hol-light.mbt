@@ -38820,7 +38820,7 @@ fn step_684() -> Unit raise {
   ) -> @kernel.Term raise {
     let tm_3 = x3657
     let tm_4 = @basics.strip_forall(tm_3).1
-    let t3658 = @parser.parse_term("(==>)")
+    let t3658 = @term_syntax.parse_term("op_eq_eq_gt")
     let tm_5 = @lib.splitlist(
         (x3659 : @kernel.Term) => @basics.dest_binop(t3658, x3659),
         tm_4,
