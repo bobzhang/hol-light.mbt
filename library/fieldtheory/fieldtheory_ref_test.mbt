@@ -27440,10 +27440,10 @@ test "Library/fieldtheory matches Library/fieldtheory.ml" {
       #|  (k : Ring[A])
       #|  forall(k:A ring) (E:A ring) p q.\n        field_extension(k,E) I /\\\n        ring_coprime(poly_ring k (:1)) (p, q)\n        ==> ~(?x. x IN ring_carrier E /\\\n                  poly_eval E p x = ring_0 E /\\\n                  poly_eval E q x = ring_0 E)
       #|  (ring_0 (SND kl) IN ring_span kl (h:A->B) s) /\\\n    (forall x. x IN s /\\ x IN ring_carrier(SND kl) ==> x IN ring_span kl h s) /\\\n    (forall x y. x IN ring_span kl h s /\\ y IN ring_span kl h s\n           ==> ring_add (SND kl) x y IN ring_span kl h s) /\\\n    (forall a x. a IN ring_carrier(FST kl) /\\\n           h a IN ring_carrier(SND kl) /\\\n           x IN ring_span kl h s\n           ==> ring_mul (SND kl) (h a) x IN ring_span kl h s)
-      #|  (==>)
-      #|  (==>)
-      #|  (==>)
-      #|  (==>)
+      #|  op_eq_eq_gt
+      #|  op_eq_eq_gt
+      #|  op_eq_eq_gt
+      #|  op_eq_eq_gt
       #|  (h : (A) -> B)
       #|  ((k : Ring[A]), (l : Ring[B]))
       #|  (l : Ring[B])
