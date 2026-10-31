@@ -14188,7 +14188,7 @@ fn step_259() -> Unit raise {
         })(x1492)
         s1494(x1493)
       },
-      @basics.binops(@parser.parse_term("(+)"), l),
+      @basics.binops(@term_syntax.parse_term("op_plus"), l),
     )
     let rats = @lib.sort(
       fn(x1497 : @kernel.Term, x1498 : @kernel.Term) -> Bool raise {
@@ -14201,7 +14201,7 @@ fn step_259() -> Unit raise {
         })(x1497)
         s1499(x1498)
       },
-      @basics.binops(@parser.parse_term("(+)"), r),
+      @basics.binops(@term_syntax.parse_term("op_plus"), r),
     )
     let (i_1, lats_p, rats_p) = minter_l(
       @list.List([]),
