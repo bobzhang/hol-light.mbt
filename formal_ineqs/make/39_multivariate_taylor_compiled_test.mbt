@@ -1156,49 +1156,49 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  (all_n : (Num, List[_], (Num, _) -> Bool) -> Bool)((n : Num), NIL, (s : (Num, _) -> Bool)) == true && all_n(n, CONS((h : _), (t : List[_])), s) == (s(n, h) && all_n(SUC(n), t, s))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (m_lin_approx : ((Cart[Real, N]) -> Real, Cart[Real, N], (Real, Real), List[(Real, Real)]) -> Bool)((f : (Cart[Real, N]) -> Real), (x : Cart[Real, N]), (f_bounds : (Real, Real)), (df_bounds_list : List[(Real, Real)])) == (differentiable(o(lift, f), at(x)) && interval_arith(f(x), f_bounds) && all_n(1, df_bounds_list, (i : Num) => (int : (Real, Real)) => interval_arith(partial(i, f, x), int)))
       #|  o(lift, (x : _) => -(f : (_) -> Real)(x)) == ((x : _) => -o(lift, f, x))
       #|  o(lift, (x : _) => (c : Real) * (f : (_) -> Real)(x)) == ((x : _) => op_pct(c, o(lift, f, x)))
@@ -1236,10 +1236,10 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  DIFF((A : (_) -> Bool), {(i : _)})
       #|  op_dot_dot(1, (_any : Num))
       #|  ((x : A) => (lambda : ((Num) -> Real) -> Cart[Real, N])((i : Num) => (f : (Num, A) -> Real)(i, x))) == ((x : A) => (vsum : ((Num) -> Bool, (Num) -> Cart[Real, N]) -> Cart[Real, N])(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_pct : (Real, Cart[Real, N]) -> Cart[Real, N])(f(i, x), (basis : (Num) -> Cart[Real, N])(i))))
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  (x : _) == (i : _)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  \226\136\128 f : (Num, Cart[Real, N]) -> Real, ((x : Cart[Real, N]) => (op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(f((i : Num), x), (basis : (Num) -> Cart[Real, M])(i))) == ((x : Cart[Real, N]) => (op_pct : (Real, Cart[Real, M]) -> Cart[Real, M])(drop(o(lift, f(i), x)), (basis : (Num) -> Cart[Real, M])(i)))
       #|  (\226\136\128 i : Num, IN(i, op_dot_dot(1, (dimindex : ((M) -> Bool) -> Num)((UNIV : (M) -> Bool)))) \226\134\146 has_derivative(o(lift, (f : (Num, Cart[Real, N]) -> Real)(i)), o(lift, (f' : (Num, Cart[Real, N]) -> Real)(i)), at((y : Cart[Real, N])))) \226\134\146 (has_derivative : ((Cart[Real, N]) -> Cart[Real, M], (Cart[Real, N]) -> Cart[Real, M], Net[Cart[Real, N]]) -> Bool)((x : Cart[Real, N]) => (lambda : ((Num) -> Real) -> Cart[Real, M])((i : Num) => f(i, x)), (x : Cart[Real, N]) => (lambda : ((Num) -> Real) -> Cart[Real, M])((i : Num) => f'(i, x)), at(y))
       #|  (1 <= (i : Num) && i <= 2) == (i == 1 || i == 2)
@@ -1247,7 +1247,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  !(2 == 1)
       #|  (1 <= (i : Num) && i <= 2) == (i == 1 || i == 2)
       #|  (has_derivative : ((Cart[Real, _]) -> Cart[Real, Unit], (Cart[Real, _]) -> Cart[Real, Unit], Net[Cart[Real, _]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (f : (Cart[Real, _]) -> Real)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (f' : (Cart[Real, _]) -> Real)), (at : (Cart[Real, _]) -> Net[Cart[Real, _]])((y : Cart[Real, _]))) \226\134\146 (has_derivative : ((Cart[Real, _]) -> Cart[Real, Unit], (Cart[Real, _]) -> Cart[Real, Unit], Net[Cart[Real, _]]) -> Bool)((o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (g : (Cart[Real, _]) -> Real)), (o : ((Real) -> Cart[Real, Unit], (Cart[Real, _]) -> Real, Cart[Real, _]) -> Cart[Real, Unit])(lift, (g' : (Cart[Real, _]) -> Real)), (at : (Cart[Real, _]) -> Net[Cart[Real, _]])(y)) \226\134\146 (has_derivative : ((Cart[Real, _]) -> Cart[Real, Tybit0[Unit]], (Cart[Real, _]) -> Cart[Real, Tybit0[Unit]], Net[Cart[Real, _]]) -> Bool)((x : Cart[Real, _]) => (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([f(x), g(x)]), (x : Cart[Real, _]) => (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([f'(x), g'(x)]), (at : (Cart[Real, _]) -> Net[Cart[Real, _]])(y))
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  o(lift, (x : _) => (f' : (_) -> Real)(x) * (g : (_) -> Real)((y : _)) + (f : (_) -> Real)(y) * (g' : (_) -> Real)(x)) == o(o(lift, (x : Cart[Real, Tybit0[Unit]]) => op_dollar((q : Cart[Real, _]), 2) * op_dollar(x, 1) + op_dollar(q, 1) * op_dollar(x, 2)), (x : _) => vector([f'(x), g'(x)]))
       #|  (vector : (List[Real]) -> Cart[Real, Tybit0[Unit]])([(f : (_) -> Real)((y : _)), (g : (_) -> Real)(y)])
       #|  o(lift, (x : _) => (f : (_) -> Real)(x) * (g : (_) -> Real)(x)) == o(o(lift, (p : Cart[Real, Tybit0[Unit]]) => op_dollar(p, 1) * op_dollar(p, 2)), (x : _) => vector([f(x), g(x)]))
@@ -1346,7 +1346,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  (i : _) == (j : _)
       #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
       #|  (i : _) == (j : _)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  (i : _) == (j : _)
       #|  (t : Real) => partial((j : Num), (f : (Cart[Real, _]) -> Real), vector_add((y' : Cart[Real, _]), op_pct(t, basis(j))))
       #|  real_of_num(0)
@@ -1378,65 +1378,65 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  nth_diff_strong_int(2, (real_of_num(0), real_of_num(1)), (f : (Real) -> Real)) \226\134\146 (\226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 abs(nth_derivative(2, f, t)) <= (dd_bound : Real)) \226\134\146 abs(f(real_of_num(1)) - (f(real_of_num(0)) + derivative(f, real_of_num(0)))) <= dd_bound / real_of_num(2)
       #|  1
       #|  real_interval([(real_of_num(0), real_of_num(1))])
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  real_of_num(0)
       #|  real_of_num(1)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  FACT(1) == 1 && FACT(0) == 1
       #|  0 + 1 == 1 && !(1 == 0)
       #|  (i : Num) => if i == 0 { (f : (Real) -> Real) } else { derivative(f) }
       #|  (\226\136\128 t : Real, interval_arith(t, (real_of_num(0), real_of_num(1))) \226\134\146 real_differentiable((f : (Real) -> Real), atreal(t)) && abs(derivative(f, t)) <= (d_bound : Real)) \226\134\146 abs(f(real_of_num(1)) - f(real_of_num(0))) <= d_bound
       #|  0
       #|  real_interval([(real_of_num(0), real_of_num(1))])
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  real_of_num(0)
       #|  real_of_num(1)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)((f : (Cart[Real, N]) -> Real), (domain : (Cart[Real, N], Cart[Real, N])), (w : Cart[Real, N]), (error : Real)) == (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, j) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f), x)))) <= error)
       #|  (m_taylor_partial_error : ((Cart[Real, N]) -> Real, Num, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)((f : (Cart[Real, N]) -> Real), (i : Num), (domain : (Cart[Real, N], Cart[Real, N])), (w : Cart[Real, N]), (error : Real)) == (\226\136\128 x : Cart[Real, N], (IN : (Cart[Real, N], (Cart[Real, N]) -> Bool) -> Bool)(x, (interval : (List[(Cart[Real, N], Cart[Real, N])], Cart[Real, N]) -> Bool)([domain])) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (j : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, j) * abs((partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(j, (partial : (Num, (Cart[Real, N]) -> Real, Cart[Real, N]) -> Real)(i, f), x))) <= error)
       #|  (\226\136\128 i : Num, (IN : (Num, (Num) -> Bool) -> Bool)(i, op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool)))) \226\134\146 (m_taylor_partial_error : ((Cart[Real, N]) -> Real, Num, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)((f : (Cart[Real, N]) -> Real), i, (domain : (Cart[Real, N], Cart[Real, N])), (w : Cart[Real, N]), (p_error : (Num) -> Real)(i)) && real_of_num(0) <= (op_dollar : (Cart[Real, N], Num) -> Real)(w, i)) \226\134\146 (sum : ((Num) -> Bool, (Num) -> Real) -> Real)(op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))), (i : Num) => (op_dollar : (Cart[Real, N], Num) -> Real)(w, i) * p_error(i)) <= (error : Real) \226\134\146 (m_taylor_error : ((Cart[Real, N]) -> Real, (Cart[Real, N], Cart[Real, N]), Cart[Real, N], Real) -> Bool)(f, domain, w, error)
@@ -1665,7 +1665,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  diff2_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => -(f : (Cart[Real, _]) -> Real)(x))
       #|  :real#real
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_not_zero(bounds) \226\134\146 diff2_domain(domain, o(inv, f))
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2_domain(domain, o(sqrt, f))
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2_domain(domain, o(abs, f))
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_neg(bounds) \226\134\146 diff2_domain(domain, o(abs, f))
@@ -1734,20 +1734,20 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  DELETE(UNIV, real_of_num(0))
       #|  (x : Real) => real_of_num(2) * inv(pow(x, 3))
       #|  !((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) == real_of_num(0)) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(inv, f), x)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  ((x : Real) => sqrt(pow(x, 3))) == o(sqrt, (x : Real) => pow(x, 3))
       #|  (f : (_) -> _)((x : _))
       #|  {(x : Real) | x > real_of_num(0)}
       #|  (x : Real) => -inv(real_of_num(4) * sqrt(pow(x, 3)))
       #|  real_of_num(0) < (f : (Cart[Real, _]) -> Real)((x : Cart[Real, _])) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(sqrt, f), x)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  (f : (_) -> _)((x : _))
       #|  {(x : Real) | x > real_of_num(0)}
       #|  (x : _) => real_of_num(0)
@@ -1773,7 +1773,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  INTER({(x : Real) | x < real_of_num(1)}, {(x : Real) | x > -real_of_num(1)})
       #|  (x : Real) => -(x / sqrt(pow(real_of_num(1) - x * x, 3)))
       #|  abs((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _]))) < real_of_num(1) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(acs, f), x)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  ((x : Real) => sqrt(pow(real_of_num(1) - x * x, 3))) == o(sqrt, (x : Real) => pow(real_of_num(1) - x * x, 3))
       #|  \226\136\128 a : Real, real_of_num(1) - a * a == (real_of_num(1) - a) * (real_of_num(1) + a)
       #|  real_of_num(0) < pow(real_of_num(1) - (f : (_) -> Real)((x : _)) * f(x), 3)
@@ -1781,7 +1781,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  INTER({(x : Real) | x < real_of_num(1)}, {(x : Real) | x > -real_of_num(1)})
       #|  (x : Real) => x / sqrt(pow(real_of_num(1) - x * x, 3))
       #|  abs((f : (Cart[Real, _]) -> Real)((x : Cart[Real, _]))) < real_of_num(1) \226\134\146 diff2c(f, x) \226\134\146 diff2c(o(asn, f), x)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  (h : (_) -> _)((f : (_) -> _)((x : _)))
       #|  (i : Num) => pow(-real_of_num(1), i + 2) * (real_of_num((i + 1) * (i + 2)) / real_of_num(2 * i + 5))
       #|  real_interval((real_of_num(0), (f : (_) -> Real)((x : _)) + real_of_num(1)))
@@ -1806,7 +1806,7 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  diff2c_domain((domain : (Cart[Real, _], Cart[Real, _])), (x : Cart[Real, _]) => -(f : (Cart[Real, _]) -> Real)(x))
       #|  :real#real
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_not_zero(bounds) \226\134\146 diff2c_domain(domain, o(inv, f))
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2c_domain(domain, o(sqrt, f))
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_pos(bounds) \226\134\146 diff2c_domain(domain, o(abs, f))
       #|  m_bounded_on_int((f : (Cart[Real, _]) -> Real), (domain : (Cart[Real, _], Cart[Real, _])), (bounds : (Real, Real))) \226\134\146 interval_neg(bounds) \226\134\146 diff2c_domain(domain, o(abs, f))
@@ -1910,14 +1910,14 @@ test "Formal_ineqs/taylor/theory/multivariate_taylor-compiled matches Formal_ine
       #|  IN((j : Num), op_dot_dot(1, (dimindex : ((N) -> Bool) -> Num)((UNIV : (N) -> Bool))))
       #|  (i : _) == (j : _)
       #|  (i : _) == (j : _)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  op_dollar((z : Cart[_, _]), (j : Num)) == op_dollar((x : Cart[_, _]), j)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
       #|  (i : _) == (j : _)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
-      #|  ~P <=> (P <=> F)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
+      #|  !(P : Bool) == (P == false)
       #|  derivative((g : (Real) -> Real))
       #|  nth_derivative(2, (g : (Real) -> Real))
       #|  op_dollar((z : Cart[Real, _]), (j : Num)) - op_dollar((x : Cart[Real, _]), j)
