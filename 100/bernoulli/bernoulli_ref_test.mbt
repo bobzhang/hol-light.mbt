@@ -6080,7 +6080,7 @@ test "100/bernoulli matches 100/bernoulli.ml" {
       #|  (bernoulli : (Num) -> Real)(0) == real_of_num(1) && (\226\136\128 n : Num, bernoulli(SUC(n)) == -sum(op_dot_dot(0, n), (j : Num) => real_of_num(binom((n + 2, j))) * bernoulli(j)) / (real_of_num(n) + real_of_num(2)))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
       #|  !((n : Num) == n + 1)
       #|  (x : Real) == real_of_num((n : Num)) + real_of_num(2) \226\134\146 (s : Real) + x * (-s / (real_of_num(n) + real_of_num(2))) == real_of_num(0)
       #|  SUC(SUC((n : Num))) == n + 2
