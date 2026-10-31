@@ -104,3 +104,15 @@ test "a pattern or an implicit set binder keeps its op_ spelling" {
     ),
   )
 }
+
+///|
+test "the op_ spelling is not used where its name is taken" {
+  // an enclosing binder already printed op_lt_lt: the pattern variable and
+  // the comprehension's binder keep their backticks
+  inspect(spell("\\op_lt_lt:bool. match T with (<<) -> ((<<),op_lt_lt)"), content=(
+    #|(op_lt_lt : Bool) => match true { `<<` => (`<<`, op_lt_lt) }
+  ))
+  inspect(spell("\\op_lt_lt:bool. {(<<):bool | T}"), content=(
+    #|(op_lt_lt : Bool) => {(`<<` : Bool) | true}
+  ))
+}

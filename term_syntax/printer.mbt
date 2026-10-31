@@ -702,14 +702,26 @@ fn Printer::pattern_form(
 ///|
 /// `bound` with its first `n` bindings' symbolic names spelt op_, as a
 /// pattern or an implicit set binder reads them (the backticks are for the
-/// binders that have no other spelling, which read an op_ name literally).
-fn op_spelled(bound : Bound, n : Int) -> Bound {
+/// binders that have no other spelling, which read an op_ name literally),
+/// unless that name is taken: printed for another binding in scope, or the
+/// name of a variable free in `scope` (it would be captured, or read as
+/// the other variable); then the backticks stay.
+fn op_spelled(bound : Bound, n : Int, scope : Array[@kernel.Term]) -> Bound {
   let bs = bound.to_array()
-  for i in 0..<(if n < bs.length() { n } else { bs.length() }) {
+  let n = if n < bs.length() { n } else { bs.length() }
+  for i in 0..<n {
     let (v, printed) = bs[i]
     if !is_ident(printed) && is_raw_name(printed) {
       match @grammar.escape(printed) {
-        Some(e) => bs[i] = (v, e)
+        Some(e) => {
+          let taken = bs.iter().any(b => b.1 == e) ||
+            scope.iter().any(t => {
+              @kernel.frees(t).iter().any(u => u is Var(m, _) && m == e)
+            })
+          if !taken {
+            bs[i] = (v, e)
+          }
+        }
         None => ()
       }
     }
@@ -731,7 +743,7 @@ fn Printer::bind_pattern(
   for v in vs {
     inner = self.bind(v, body, inner, truth=false).1
   }
-  inner = op_spelled(inner, vs.length())
+  inner = op_spelled(inner, vs.length(), [body])
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
   }
@@ -1041,7 +1053,7 @@ fn Printer::comprehension(
     !(g is Var(n, _) && self.listed.contains(n)) {
     // each binder is written with its type where it first occurs in e,
     // as {e | p} reads it (a symbolic one spelt op_)
-    let inner = op_spelled(inner, xs.length())
+    let inner = op_spelled(inner, xs.length(), [e, p])
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
     let typed_before = self.typed_free.length()
     self.untyped.append(marks)
