@@ -83435,9 +83435,9 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  (higher_real_derivative : (Num, (Real) -> Real, Real) -> Real)(0, (f : (Real) -> Real)) == f && (\226\136\128 n : Num, higher_real_derivative(SUC(n), f) == real_derivative(higher_real_derivative(n, f)))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (real_differentiable_on : ((Real) -> Real, (Real) -> Bool) -> Bool)((f : (Real) -> Real), (s : (Real) -> Bool)) == (\226\136\128 x : Real, IN(x, s) \226\134\146 (\226\136\131 f' : Real, has_real_derivative(f, f', within(atreal(x), s))))
       #|  real_of_num(0) < abs((x : Real) - (a : Real)) \226\134\146 ((fy : Real) - (fa : Real)) / (x - a) - (f' : Real) == inv(x - a) * (fy - (fa + f' * (x - a)))
       #|  trivial_limit(within(atreal((a : Real)), (s : (Real) -> Bool)))
@@ -86468,9 +86468,9 @@ test "Multivariate/realanalysis matches Multivariate/realanalysis.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  bernoulli
       #|  (\226\136\128 n : Num, (P : (Num) -> Bool)(n)) == (P(0) && (\226\136\128 n : Num, P(SUC(n))))
       #|  (n : Num) + 1 + 1 == n + 2
