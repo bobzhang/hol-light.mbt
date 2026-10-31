@@ -197,19 +197,16 @@ fn calls_of(cs : Array[Char], prefix : String) -> Array[(Int, Int, String)] {
       i = skip_line(i)
       continue
     }
-    if i + pre.length() <= n && cs[i:i + pre.length()] == pre[:] {
-      let mut j = i + pre.length()
-      while j < n && cs[j] != '"' && cs[j] != '\n' {
-        j += if cs[j] == '\\' { 2 } else { 1 }
+    // the call `prefix"...")`, or as `moon fmt` wraps a long one: the
+    // string on a line of its own, with a trailing comma
+    // (`@parser.parse_term(\n  "...",\n)`)
+    if wrapped_call(cs, i, pre) is Some((open, close, end)) {
+      let body = String::from_array(cs[open:close])
+      if !interpolates(body) {
+        out.push((i, end, body))
       }
-      if j + 1 < n && cs[j] == '"' && cs[j + 1] == ')' {
-        let body = String::from_array(cs[i + pre.length():j])
-        if !interpolates(body) {
-          out.push((i, j + 2, body))
-        }
-        i = j + 2
-        continue
-      }
+      i = end
+      continue
     }
     if c == '\'' && i + 2 < n && cs[i + 1] != '\\' && cs[i + 2] == '\'' {
       i += 3
@@ -230,6 +227,39 @@ fn calls_of(cs : Array[Char], prefix : String) -> Array[(Int, Int, String)] {
     i += 1
   }
   out
+}
+
+///|
+/// The call `prefix"...")` at `cs[i]` (`prefix` ends in `("`), allowing
+/// whitespace after its parenthesis and an optional comma and whitespace
+/// before the closing one, as `moon fmt` writes a long call: the start and
+/// end of the string's body and the end of the call.
+fn wrapped_call(cs : Array[Char], i : Int, pre : Array[Char]) -> (Int, Int, Int)? {
+  let n = cs.length()
+  let head = pre.length() - 1 // the prefix up to its parenthesis
+  guard i + head <= n && cs[i:i + head] == pre[:head] else { return None }
+  fn blanks(j : Int) -> Int {
+    let mut j = j
+    while j < n && cs[j] is (' ' | '\t' | '\n') {
+      j += 1
+    }
+    j
+  }
+  let mut j = blanks(i + head)
+  guard j < n && cs[j] == '"' else { return None }
+  let open = j + 1
+  j = open
+  while j < n && cs[j] != '"' && cs[j] != '\n' {
+    j += if cs[j] == '\\' { 2 } else { 1 }
+  }
+  guard j < n && cs[j] == '"' else { return None }
+  let close = j
+  j = blanks(close + 1)
+  if j < n && cs[j] == ',' {
+    j = blanks(j + 1)
+  }
+  guard j < n && cs[j] == ')' else { return None }
+  Some((open, close, j + 1))
 }
 
 ///|
