@@ -126,3 +126,20 @@ test "the op_ spelling is not used where a binder inside has its name" {
     #|{(`<<` : Bool) | ((op_lt_lt : Bool) => `<<`)(true)}
   ))
 }
+
+///|
+test "a guard is in the scope the op_ name must be free in" {
+  inspect(spell("match T with (<<) when (\\op_lt_lt:bool. (<<)) T -> (<<)"), content=(
+    #|match true { `<<` if ((op_lt_lt : Bool) => `<<`)(true) => `<<` }
+  ))
+}
+
+///|
+test "symbolic variables in quantified and lambda patterns" {
+  inspect(spell("forall (a,(<<)). (<<) a a"), content=(
+    #|∀ (a, op_lt_lt) : (_, (_, _) -> Bool), op_lt_lt(a, a)
+  ))
+  inspect(spell("\\(a,(<<)). (<<) a a"), content=(
+    #|fn { (a, op_lt_lt) => op_lt_lt(a, a) }
+  ))
+}

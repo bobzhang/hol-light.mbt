@@ -497,7 +497,7 @@ fn Printer::comb(
     (Const(q, _), [Comb(Const("GABS", _), gabs)]) if q is ("forall" | "?") &&
       dest_pattern_abs(gabs) is Some((pat, vs, rhs)) => {
       let sym = if q == "forall" { "∀" } else { "∃" }
-      let inner = self.bind_pattern(vs, rhs, bound)
+      let inner = self.bind_pattern(vs, rhs, bound, [pat, rhs])
       let p = self.term(pat, SIMPLE, inner)
       let ty = print_type_in_term(@kernel.type_of(pat))
       wrap(sym + " " + p + " : " + ty + ", " + self.term(rhs, IMPL, inner), EXPR, ctx)
@@ -740,20 +740,22 @@ fn op_spelled(bound : Bound, n : Int, scope : Array[@kernel.Term]) -> Bound {
 }
 
 ///|
-/// `bound` with a pattern's variables `vs` bound over `body`. Annotating
-/// every constant, the variables are written with their type where they
-/// first occur in the pattern.
+/// `bound` with a pattern's variables `vs` bound over `body` (all that the
+/// pattern scopes over, its guard included, is `scope`). Annotating every
+/// constant, the variables are written with their type where they first
+/// occur in the pattern.
 fn Printer::bind_pattern(
   self : Printer,
   vs : Array[@kernel.Term],
   body : @kernel.Term,
   bound : Bound,
+  scope : Array[@kernel.Term],
 ) -> Bound raise Unprintable {
   let mut inner = bound
   for v in vs {
     inner = self.bind(v, body, inner, truth=false).1
   }
-  inner = op_spelled(inner, vs.length(), [body])
+  inner = op_spelled(inner, vs.length(), scope)
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
   }
@@ -770,7 +772,11 @@ fn Printer::arm(
   body : @kernel.Term,
   bound : Bound,
 ) -> String raise Unprintable {
-  let inner = self.bind_pattern(vs, body, bound)
+  let scope = match guard_ {
+    Some(g) => [pat, g, body]
+    None => [pat, body]
+  }
+  let inner = self.bind_pattern(vs, body, bound, scope)
   let p = self.term(pat, IMPL, inner)
   // a variable the pattern binds occurs in it, so these marks are used
   for i in 0..<vs.length() {
