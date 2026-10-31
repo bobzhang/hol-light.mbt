@@ -6880,7 +6880,7 @@ Warning: inventing type variables
   \226\136\128 n : Num, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, HAS_SIZE(s, n) && HAS_SIZE(t, n) \226\134\146 HAS_SIZE({(p : ((A, B)) -> Bool) | pairsup(p, (s, t))}, FACT(n))
   \226\136\128 s : (_) -> Bool, \226\136\128 n : Num, HAS_SIZE(s, n) \226\134\146 HAS_SIZE({(p : ((_, _)) -> Bool) | permutes(p, s)}, FACT(n))
   (derangements : (Num) -> Num)(0) == 1 && derangements(1) == 0 && derangements((n : Num) + 2) == (n + 1) * (derangements(n) + derangements(n + 1))
-  \\n. n + 1
+  (n : Num) => n + 1
   \226\136\128 n : Num, (P : (Num) -> Bool)(n) && P(n + 1)
   \226\136\128 P : (Num) -> Bool, P(0) && P(1) && (\226\136\128 n : Num, P(n) && P(n + 1) \226\134\146 P(n + 2)) \226\134\146 (\226\136\128 n : Num, P(n))
   \226\136\128 p : ((_, _)) -> Bool, \226\136\128 s : (_) -> Bool, \226\136\128 x : _, \226\136\128 y : _, deranges(p, s) && !IN(x, s) && !IN(y, s) && !(x == y) \226\134\146 deranges(INSERT((x, y), INSERT((y, x), p)), INSERT(x, INSERT(y, s)))
