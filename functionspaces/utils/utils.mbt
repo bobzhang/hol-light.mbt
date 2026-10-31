@@ -444,7 +444,7 @@ fn step_10() -> Unit raise {
   let term_of_horn : ((@list.List[@kernel.Term], @list.List[@kernel.Term])) -> @kernel.Term raise = fn(x94 : (@list.List[@kernel.Term], @list.List[@kernel.Term])) -> @kernel.Term raise {
     match x94 {
       (Empty, cs) => @bool.list_mk_conj(cs)
-      (_, Empty) => @parser.parse_term("T")
+      (_, Empty) => @term_syntax.parse_term("true")
       (hs, cs_1) => {
         let t95 = @bool.list_mk_conj(cs_1)
         @bool.mk_imp(@bool.list_mk_conj(hs), t95)
