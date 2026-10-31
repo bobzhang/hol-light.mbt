@@ -37,6 +37,7 @@ pub suberror ParseError {
 pub(all) enum Token {
   LIDENT(String)
   UIDENT(String)
+  RAWIDENT(String)
   INT(String)
   INFIX1(String)
   INFIX3(String)
@@ -76,6 +77,7 @@ pub fn Token::kind(Self) -> TokenKind
 pub(all) enum TokenKind {
   TK_LIDENT
   TK_UIDENT
+  TK_RAWIDENT
   TK_INT
   TK_INFIX1
   TK_INFIX3

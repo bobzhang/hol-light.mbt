@@ -35,7 +35,7 @@ pub fn dest_poly(x1 : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
 /// `is_poly`
 pub fn is_poly(x2 : @kernel.Term) -> Bool raise {
   let tm = x2
-  let t3 = @parser.parse_term("poly")
+  let t3 = @term_syntax.parse_term("poly")
   (@basics.strip_comb(tm).0 == t3)
 }
 
