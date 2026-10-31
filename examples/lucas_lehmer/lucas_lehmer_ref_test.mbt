@@ -39541,9 +39541,9 @@ test "Examples/lucas_lehmer matches Examples/lucas_lehmer.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (real_of_num(2) + (s : Real)) * (real_of_num(2) - s) == real_of_num(4) - pow(s, 2)
       #|  pow((x : Real) + (y : Real), 2) == pow(x, 2) + (pow(y, 2) + real_of_num(2) * (x * y))
       #|  2 <= (x : Num) && !((p : Num) == 0) && !(p == 1) \226\134\146 x + (p - 2) == x - 2 + p
