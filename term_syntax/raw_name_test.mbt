@@ -104,3 +104,42 @@ test "a pattern or an implicit set binder keeps its op_ spelling" {
     ),
   )
 }
+
+///|
+test "the op_ spelling is not used where its name is taken" {
+  // an enclosing binder already printed op_lt_lt: the pattern variable and
+  // the comprehension's binder keep their backticks
+  inspect(spell("\\op_lt_lt:bool. match T with (<<) -> ((<<),op_lt_lt)"), content=(
+    #|(op_lt_lt : Bool) => match true { `<<` => (`<<`, op_lt_lt) }
+  ))
+  inspect(spell("\\op_lt_lt:bool. {(<<):bool | T}"), content=(
+    #|(op_lt_lt : Bool) => {(`<<` : Bool) | true}
+  ))
+}
+
+///|
+test "the op_ spelling is not used where a binder inside has its name" {
+  inspect(spell("match T with (<<) -> (\\op_lt_lt:bool. (<<))"), content=(
+    #|match true { `<<` => (op_lt_lt : Bool) => `<<` }
+  ))
+  inspect(spell("{(<<):bool | (\\op_lt_lt:bool. (<<)) T}"), content=(
+    #|{(`<<` : Bool) | ((op_lt_lt : Bool) => `<<`)(true)}
+  ))
+}
+
+///|
+test "a guard is in the scope the op_ name must be free in" {
+  inspect(spell("match T with (<<) when (\\op_lt_lt:bool. (<<)) T -> (<<)"), content=(
+    #|match true { `<<` if ((op_lt_lt : Bool) => `<<`)(true) => `<<` }
+  ))
+}
+
+///|
+test "symbolic variables in quantified and lambda patterns" {
+  inspect(spell("forall (a,(<<)). (<<) a a"), content=(
+    #|∀ (a, op_lt_lt) : (_, (_, _) -> Bool), op_lt_lt(a, a)
+  ))
+  inspect(spell("\\(a,(<<)). (<<) a a"), content=(
+    #|fn { (a, op_lt_lt) => op_lt_lt(a, a) }
+  ))
+}
