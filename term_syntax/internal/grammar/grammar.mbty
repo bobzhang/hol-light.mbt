@@ -2,7 +2,8 @@
 // and precedences follow moonbitlang/parser's yacc_parser/parser.mbty, so a
 // term is also a MoonBit expression and parses the same way. Two documented
 // deviations: identifiers may end in primes (x'), and binders may be
-// capitalised (P), as HOL's variables are. HOL's patterns are written as
+// capitalised (P), as HOL's variables are; a variable with a symbolic name
+// no identifier spells is written between backticks (`<<`, a RAWIDENT). HOL's patterns are written as
 // MoonBit's: `match e { p => a; q if c => b }`, `fn { p => a; q => b }` (a
 // function by cases) and, for a lambda or quantifier over a pattern,
 // `fn { (a, b) => e }` and `∀ (a, b) : (A, B), e`. Regenerate grammar.mbt with
@@ -16,6 +17,7 @@
 
 %token<String> LIDENT
 %token<String> UIDENT
+%token<String> RAWIDENT
 %token<String> INT
 %token<String> INFIX1
 %token<String> INFIX3
@@ -155,6 +157,7 @@ simple_expr -> @preterm.Preterm
   : atomic_expr { $1 }
   | UIDENT %prec prec_apply_non_ident_fn { pvar($1) }
   | LIDENT %prec prec_apply_non_ident_fn { pvar($1) }
+  | RAWIDENT %prec prec_apply_non_ident_fn { pvar($1) }
   | tuple_expr { $1 }
   | "[" list_commas(expr) "]" { list($2) }
   | "{" "}" { pconst("EMPTY") }
@@ -193,6 +196,7 @@ set_binder -> (String, @preterm.Pretype)
 %inline binder -> String
   : LIDENT { $1 }
   | UIDENT { $1 }
+  | RAWIDENT { $1 }
   ;
 
 non_empty_list_commas_rev[T](X : T) -> @list.List[T]
