@@ -74236,9 +74236,9 @@ test "Multivariate/complexes matches Multivariate/complexes.ml" {
       #|  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])((x : Cart[Real, Tybit0[Unit]]), 0) == Cx(real_of_num(1)) && (\226\136\128 n : Num, complex_pow(x, SUC(n)) == complex_mul(x, complex_pow(x, n)))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  Re(complex(((x : Real), (y : Real)))) == x
       #|  Im(complex(((x : Real), (y : Real)))) == y
       #|  \226\136\128 w : Cart[Real, Tybit0[Unit]], \226\136\128 z : Cart[Real, Tybit0[Unit]], (w == z) == (Re(w) == Re(z) && Im(w) == Im(z))
