@@ -65,7 +65,13 @@ fn tokens(s : String) -> Array[(@grammar.Token, Int, Int)] raise {
         continue rest
       }
       (re"^`[\-!@#\$%\^&\*\+\|<=>/\?~\.:]+`" as raw, after=rest) => {
-        toks.push((RAWIDENT(raw[1:raw.length() - 1].to_owned()), at(input), at(rest)))
+        let name = raw[1:raw.length() - 1].to_owned()
+        // only a variable is written this way: a name that is a constant's
+        // or an interface name would read as the constant
+        if names_constant(name) {
+          raise Failure("term syntax: `\{name}` names a constant")
+        }
+        toks.push((RAWIDENT(name), at(input), at(rest)))
         continue rest
       }
       (re"^[0-9]+" as digits, after=rest) => {

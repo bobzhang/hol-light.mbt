@@ -58,3 +58,30 @@ test "a binder named like a constant gets no backticks" {
   }
   assert_false(printable)
 }
+
+///|
+test "a backticked name that is a constant's is refused" {
+  for s in ["(`=` : (Bool, Bool) -> Bool)", "(`=` : Bool) => `=`", "`+`"] {
+    let read = try {
+      @term_syntax.parse_term(s) |> ignore
+      true
+    } catch {
+      _ => false
+    }
+    assert_false(read)
+  }
+}
+
+///|
+test "a symbolic binder that would capture takes an identifier" {
+  // the binder << : bool and a free << : A: the binder is renamed, as
+  // before, since a symbolic name takes no primes
+  let a = @kernel.mk_vartype("A")
+  let t = @kernel.mk_abs(
+    @kernel.mk_var("<<", @kernel.bool_ty),
+    @kernel.mk_var("<<", a),
+  )
+  inspect(@term_syntax.print_term(t), content=(
+    #|(v : Bool) => (op_lt_lt : A)
+  ))
+}

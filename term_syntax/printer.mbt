@@ -429,6 +429,10 @@ fn Printer::bind(
   let plain = writable && (truth || !is_constant_name(name))
   let mut printed = if plain { name } else if is_ident(name) { name + "'" } else { "v" }
   if clash || !plain {
+    // a symbolic name takes no primes: a fresh identifier instead
+    if !is_ident(printed) {
+      printed = "v"
+    }
     while self.names.contains(printed) || is_constant_name(printed) {
       printed = printed + "'"
     }
