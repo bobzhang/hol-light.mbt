@@ -6855,8 +6855,8 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  \226\136\128 f : (A) -> B, \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 x : A, \226\136\128 y : B, BIJ(f, a, b) && IN(x, a) && IN(y, b) \226\134\146 (INV(f, a, b, y) == x) == (f(x) == y)
       #|  \226\136\128 a : (A) -> Bool, \226\136\128 b : (B) -> Bool, \226\136\128 f : (A) -> B, FINITE(a) && BIJ(f, a, b) \226\134\146 FINITE(b)
       #|  {(x : A) | IN(x, (a : (A) -> Bool)) && IN((f : (A) -> B)(x), (b : (B) -> Bool))}
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
       #|  SUBSET((a : (A) -> Bool), {(x : A) | IN(x, a) && IN((f : (A) -> B)(x), (b : (B) -> Bool))})
       #|  (a : (A) -> Bool)
       #|  (b : (B) -> Bool)
@@ -6875,42 +6875,42 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  \226\136\128 b : (B) -> Bool, FUN({}, b) == {(u : A) => CHOICE(UNIV)}
       #|  ((t : A) == (s : A)) == true || (t == s) == false
       #|  (t : A)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
       #|  !((t : A) == (s : A)) \226\134\146 (t == s) == false
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
       #|  (t : A) == (s : A)
       #|  (t : A)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
       #|  (t : A)
       #|  (x : A) => if x == (s : A) { (v : B) } else { (u : (A) -> B)(x) }
       #|  (p : ((A) -> B, B))
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
       #|  (x : A) == (s : A)
       #|  (f2 : (A) -> B)
       #|  (f1 : (A) -> B)
@@ -6929,13 +6929,13 @@ test "Jordan/misc_defs_and_lemmas matches Jordan/misc_defs_and_lemmas.ml" {
       #|  (t : A)
       #|  !((x : Num) == 0) \226\134\146 SUC(x - 1) == x
       #|  \226\136\128 a : (A) -> Bool, FINITE(a) && !(a == {}) \226\134\146 SUC(CARD(DELETE(a, CHOICE(a)))) == CARD(a)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
-      #|  B ==> (A==>B)
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
+      #|  (B : Bool) \226\134\146 (A : Bool) \226\134\146 B
       #|  HAS_SIZE(FUN(DELETE((a : (A) -> Bool), CHOICE(a)), (b : (B) -> Bool)), EXP(CARD(b), CARD(DELETE(a, CHOICE(a)))))
       #|  FINITE(DELETE((a : (A) -> Bool), CHOICE(a)))
       #|  (F' : ((A) -> B) -> ((A) -> B, B))
