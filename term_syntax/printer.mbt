@@ -700,6 +700,24 @@ fn Printer::pattern_form(
 }
 
 ///|
+/// `bound` with its first `n` bindings' symbolic names spelt op_, as a
+/// pattern or an implicit set binder reads them (the backticks are for the
+/// binders that have no other spelling, which read an op_ name literally).
+fn op_spelled(bound : Bound, n : Int) -> Bound {
+  let bs = bound.to_array()
+  for i in 0..<(if n < bs.length() { n } else { bs.length() }) {
+    let (v, printed) = bs[i]
+    if !is_ident(printed) && is_raw_name(printed) {
+      match @grammar.escape(printed) {
+        Some(e) => bs[i] = (v, e)
+        None => ()
+      }
+    }
+  }
+  @list.from_array(bs)
+}
+
+///|
 /// `bound` with a pattern's variables `vs` bound over `body`. Annotating
 /// every constant, the variables are written with their type where they
 /// first occur in the pattern.
@@ -713,6 +731,7 @@ fn Printer::bind_pattern(
   for v in vs {
     inner = self.bind(v, body, inner, truth=false).1
   }
+  inner = op_spelled(inner, vs.length())
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
   }
@@ -1020,7 +1039,9 @@ fn Printer::comprehension(
   if !renamed &&
     implicit_binders(e, p, inner) == xs &&
     !(g is Var(n, _) && self.listed.contains(n)) {
-    // each binder is written with its type where it first occurs in e
+    // each binder is written with its type where it first occurs in e,
+    // as {e | p} reads it (a symbolic one spelt op_)
+    let inner = op_spelled(inner, xs.length())
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
     let typed_before = self.typed_free.length()
     self.untyped.append(marks)

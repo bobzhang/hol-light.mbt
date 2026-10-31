@@ -85,3 +85,22 @@ test "a symbolic binder that would capture takes an identifier" {
     #|(v : Bool) => (op_lt_lt : A)
   ))
 }
+
+///|
+test "a pattern or an implicit set binder keeps its op_ spelling" {
+  // there an op_ name reads as the symbolic variable, so no backticks
+  inspect(
+    @term_syntax.print_term(
+      @term_syntax.parse_term("match true { op_dollar_dollar => op_dollar_dollar }"),
+    ),
+    content=(
+      #|match true { op_dollar_dollar => op_dollar_dollar }
+    ),
+  )
+  inspect(
+    @term_syntax.print_term(@term_syntax.parse_term("{(op_lt_lt : Bool) | true}")),
+    content=(
+      #|{(op_lt_lt : Bool) | true}
+    ),
+  )
+}
