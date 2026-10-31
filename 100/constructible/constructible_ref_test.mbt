@@ -78020,13 +78020,13 @@ test "100/constructible matches 100/constructible.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  (wellformed : (Expression) -> Bool)(Constant((x : Real))) == rational(x) && wellformed(Negation((e : Expression))) == wellformed(e) && wellformed(Inverse(e)) == (!(value(e) == real_of_num(0)) && wellformed(e)) && wellformed(Addition((e1 : Expression), (e2 : Expression))) == (wellformed(e1) && wellformed(e2)) && wellformed(Multiplication(e1, e2)) == (wellformed(e1) && wellformed(e2)) && wellformed(Sqrt(e)) == (real_of_num(0) <= value(e) && wellformed(e))
       #|  :P
       #|  :P
@@ -78041,13 +78041,13 @@ test "100/constructible matches 100/constructible.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  (radicals : (Expression, Expression) -> Bool)(Constant((x : Real))) == {} && radicals(Negation((e : Expression))) == radicals(e) && radicals(Inverse(e)) == radicals(e) && radicals(Addition((e1 : Expression), (e2 : Expression))) == UNION(radicals(e1), radicals(e2)) && radicals(Multiplication(e1, e2)) == UNION(radicals(e1), radicals(e2)) && radicals(Sqrt(e)) == INSERT(e, radicals(e))
       #|  :P
       #|  :P
@@ -78061,13 +78061,13 @@ test "100/constructible matches 100/constructible.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  \226\136\128 e : Expression, FINITE(radicals(e))
       #|  \226\136\128 e : Expression, wellformed(e) \226\134\146 (\226\136\128 r : Expression, IN(r, radicals(e)) \226\134\146 real_of_num(0) <= value(r))
       #|  \226\136\128 e : Expression, wellformed(e) \226\134\146 (\226\136\128 r : Expression, IN(r, radicals(e)) \226\134\146 wellformed(r))
@@ -78089,13 +78089,13 @@ test "100/constructible matches 100/constructible.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  (s : Num) == (a : Num) || s < a \226\134\146 s < 1 + a
       #|  \226\136\128 r : Expression, \226\136\128 s : Expression, IN(s, radicals(r)) \226\134\146 depth(s) < depth(r)
       #|  \226\136\128 r : Expression, !IN(r, radicals(r))
