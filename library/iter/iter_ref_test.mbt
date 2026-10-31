@@ -5631,11 +5631,11 @@ test "Library/iter matches Library/iter.ml" {
       #|  (forall f. ITER 0 f x = x) /\\\n   (forall f n. ITER (SUC n) f x = f (ITER n f x))
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (forall f. ITER 0 f = I) /\\\n    (forall f n. ITER (SUC n) f = f o ITER n f)
       #|  (forall f x. ITER 0 f x = x) /\\\n    (forall f n x. ITER (SUC n) f x = ITER n f (f x))
       #|  (forall f. ITER 0 f = I) /\\\n    (forall f n. ITER (SUC n) f = ITER n f o f)
