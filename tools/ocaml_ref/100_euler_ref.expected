@@ -5613,7 +5613,7 @@ Warning: inventing type variables
   (g : (B) -> A)
   \226\136\128 f : (A) -> B, \226\136\128 g : (B) -> A, \226\136\128 s : (A) -> Bool, \226\136\128 t : (B) -> Bool, FINITE(s) && FINITE(t) && (\226\136\128 x : A, IN(x, s) \226\134\146 IN(f(x), t)) && (\226\136\128 y : B, IN(y, t) \226\134\146 IN(g(y), s)) && (\226\136\128 x : A, IN(x, s) \226\134\146 g(f(x)) == x) && (\226\136\128 y : B, IN(y, t) \226\134\146 f(g(y)) == y) \226\134\146 FINITE(s) && FINITE(t) && CARD(s) == CARD(t)
   (index : (Num) -> Num)((n : Num)) == (if n == 0 { 0 } else { if ODD(n) { 0 } else { SUC(index(DIV(n, 2))) } })
-  \\n. n + 1
+  (n : Num) => n + 1
   (oddpart : (Num) -> Num)((n : Num)) == (if n == 0 { 0 } else { if ODD(n) { n } else { oddpart(DIV(n, 2)) } })
   !((n : Num) == 0) && n == 2 * (m : Num) \226\134\146 m < n && !(m == 0)
   DIV(2 * (x : Num), 2) == x
