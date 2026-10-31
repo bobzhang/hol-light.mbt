@@ -190481,7 +190481,7 @@ fn step_1778() -> Unit raise {
   )
   monomial_le_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(<<=) m. monomial_le (<<=) m m <=> monomial (:V) m"),
+      @term_syntax.parse_term("∀ `<<=` : (V, V) -> Bool, ∀ m : (V) -> Num, monomial_le(`<<=`, m, m) == monomial(UNIV, m)"),
       t18551,
     ),
   )
@@ -190504,7 +190504,7 @@ fn step_1779() -> Unit raise {
   let t18552 = @simp.rewrite_tac(@list.List([monomial_lt()]))
   monomial_lt_refl_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(<<) m:V->num. ~(monomial_lt (<<) m m)"),
+      @term_syntax.parse_term("∀ `<<` : (V, V) -> Bool, ∀ m : (V) -> Num, !monomial_lt(`<<`, m, m)"),
       t18552,
     ),
   )
@@ -190757,7 +190757,7 @@ fn step_1783() -> Unit raise {
   )
   qoset_monomial_le_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(<<=):V->V->bool. qoset(monomial_le (<<=))"),
+      @term_syntax.parse_term("∀ `<<=` : (V, V) -> Bool, qoset(monomial_le(`<<=`))"),
       t18575,
     ),
   )
@@ -197336,7 +197336,7 @@ fn step_1811() -> Unit raise {
   )
   wf_monomial_lt_c.set(
     @tactics.prove(
-      @parser.parse_term("forall(<<):V->V->bool. WF(<<) ==> WF(monomial_lt(<<))"),
+      @term_syntax.parse_term("∀ `<<` : (V, V) -> Bool, WF(`<<`) → WF(monomial_lt(`<<`))"),
       t19252,
     ),
   )
