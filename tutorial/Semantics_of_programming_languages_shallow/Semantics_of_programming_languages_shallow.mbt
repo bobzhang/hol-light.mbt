@@ -435,7 +435,7 @@ fn step_23() -> Unit raise {
   })
   let t39 = @tactics.repeat_tac(@tactics.gen_tac)
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([correct(), @sets.subset(), @sets.in_inter(), @sets.in_univ(), @sets.in_diff(), @sets.in_()])), t39), @tactics.strip_tac), t43), t44), t47), t48), t49), t52), t53), @class.cond_cases_tac), t54), t62), t63), t70), t71), t72), t73)
-  correct_while_c.set(@tactics.prove(@parser.parse_term("forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e c) q"), t74))
+  correct_while_c.set(@tactics.prove(@term_syntax.parse_term("∀ `<<` : (S, S) -> Bool, ∀ p : (S) -> Bool, ∀ c : ((S) -> Bool, S) -> Bool, ∀ q : (S) -> Bool, ∀ e : (S) -> Bool, ∀ invariant : (S) -> Bool, monotonic(c) && WF(`<<`) && SUBSET(p, invariant) && SUBSET(INTER(DIFF(UNIV, e), invariant), q) && (∀ X : S, correct(INTER(invariant, INTER(e, (s : S) => X == s)), c, INTER(invariant, (s : S) => `<<`(s, X)))) → correct(p, While(e, c), q)"), t74))
 }
 
 ///|
@@ -500,7 +500,7 @@ fn step_27() -> Unit raise {
   let t78 = @meson.asm_meson_tac(@list.List([correct_while()]))
   let t77 = @simp.rewrite_tac(@list.List([sequence(), variant_def(), assert_def(), @trivia.o_def(), @class.eta_ax()]))
   let t79 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t77), t78)
-  correct_while_vc_c.set(@tactics.prove(@parser.parse_term("forall(<<) p c q e invariant.\n      monotonic c /\\\n      WF(<<) /\\\n      p SUBSET invariant /\\\n      (UNIV DIFF e) INTER invariant SUBSET q /\\\n      (forall X:S. correct (invariant INTER e INTER (\\s. X = s)) c\n                     (invariant INTER (\\s. s << X)))\n      ==> correct p (While e (assert invariant ;; variant(<<) ;; c)) q"), t79))
+  correct_while_vc_c.set(@tactics.prove(@term_syntax.parse_term("∀ `<<` : (S, S) -> Bool, ∀ p : (S) -> Bool, ∀ c : ((S) -> Bool, S) -> Bool, ∀ q : (S) -> Bool, ∀ e : (S) -> Bool, ∀ invariant : (S) -> Bool, monotonic(c) && WF(`<<`) && SUBSET(p, invariant) && SUBSET(INTER(DIFF(UNIV, e), invariant), q) && (∀ X : S, correct(INTER(invariant, INTER(e, (s : S) => X == s)), c, INTER(invariant, (s : S) => `<<`(s, X)))) → correct(p, While(e, op_semi_semi(op_assert(invariant), op_semi_semi(variant(`<<`), c))), q)"), t79))
 }
 
 ///|
