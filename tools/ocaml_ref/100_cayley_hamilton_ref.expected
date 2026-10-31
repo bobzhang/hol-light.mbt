@@ -73779,9 +73779,9 @@ Warning: inventing type variables
   (\226\136\128 A : Cart[Cart[Real, N], N], (mpow : (Cart[Cart[Real, N], N], Num) -> Cart[Cart[Real, N], N])(A, 0) == mat(1)) && (\226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 n : Num, mpow(A, SUC(n)) == matrix_mul(A, mpow(A, n)))
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   \226\136\128 A : Cart[Cart[Real, N], N], \226\136\128 m : Num, \226\136\128 n : Num, mpow(A, m + n) == matrix_mul(mpow(A, m), mpow(A, n))
   1
   1
