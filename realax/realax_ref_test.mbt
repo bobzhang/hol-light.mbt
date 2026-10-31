@@ -1193,54 +1193,54 @@ test "realax matches realax.ml" {
       #|  forall m n p. dist(m,n) <= p <=> (m <= n + p) /\\ (n <= m + p)
       #|  \226\136\128 m : Num, \226\136\128 n : Num, dist((m, n)) <= m + n
       #|  (forall m n p. dist(m,p) <= dist(m,n) + dist(n,p)) /\\\n     (forall m n p q. dist(m + n,p + q) <= dist(m,p) + dist(n,q)) /\\\n     (forall m n p q. dist(m,p) <= dist(m + n,p + q) + dist(n,q))
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  dist(((m : Num), (n : Num))) + dist((n, (p : Num)))
       #|  forall m n p q. dist(m,n) + dist(n,p) <= q ==> dist(m,p) <= q
       #|  (q : Num)
@@ -1303,10 +1303,10 @@ test "realax matches realax.ml" {
       #|  (x : Nadd)
       #|  (B : Num)
       #|  forall x. ?B. forall m n. dist(fn x (m * n),m * fn x n) <= B * m + B
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  1 + (1 + 1)
       #|  ((m : Num) + (n : Num)) * (3 * (B : Num)) == B * (m + (m + n)) + B * (n + (m + n))
       #|  (!(a : Bool) \226\134\146 (b : Bool)) == (a || b)
@@ -1317,8 +1317,8 @@ test "realax matches realax.ml" {
       #|  (x : Nadd)
       #|  (B : Num)
       #|  forall x. ?B. forall m n. dist(fn x (m + n),fn x m + fn x n) <= B
-      #|  (+)
-      #|  (+)
+      #|  op_plus
+      #|  op_plus
       #|  dest_nadd((x : Nadd), (n : Num)) + dest_nadd(x, 1)
       #|  (B : Num) + dest_nadd((x : Nadd), 1)
       #|  (x : Nadd)
