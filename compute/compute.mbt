@@ -2358,8 +2358,8 @@ pub fn basic_compset(x193 : Unit) -> Compset raise {
     },
     @simp.basic_convs(),
   )
-  add_conv((@parser.parse_term("LET:(A->B)->A->B"), 2L, @pair.let_conv), cs)
-  set_skip(cs, @parser.parse_term("COND: bool -> A -> A -> A"), None)
+  add_conv((@term_syntax.parse_term("(LET : ((A) -> B, A) -> B)"), 2L, @pair.let_conv), cs)
+  set_skip(cs, @term_syntax.parse_term("(COND : (Bool, A, A) -> A)"), None)
   cs
 }
 
