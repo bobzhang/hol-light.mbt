@@ -235,12 +235,29 @@ fn is_constant_name(name : String) -> Bool {
 }
 
 ///|
-fn Printer::name(_self : Printer, name : String) -> String raise Unprintable {
+/// Whether `name` is a symbolic name the syntax writes between backticks:
+/// HOL symbol characters only (no letters, digits, `_`, primes or
+/// backticks), as the lexer's RAWIDENT accepts.
+fn is_raw_name(name : String) -> Bool {
+  name != "" && name.iter().all(c => "-!@#$%^&*+|<=>/?~.:".contains_char(c))
+}
+
+///|
+/// A variable's printed name as the syntax spells it: an identifier as it
+/// is, a symbolic name between backticks.
+fn spell_name(name : String) -> String raise Unprintable {
   if is_ident(name) {
     name
+  } else if is_raw_name(name) {
+    "`" + name + "`"
   } else {
     raise Unprintable("name " + name)
   }
+}
+
+///|
+fn Printer::name(_self : Printer, name : String) -> String raise Unprintable {
+  spell_name(name)
 }
 
 ///|
@@ -343,9 +360,9 @@ fn Printer::variable(
       match self.untyped.search((v, bound.length() - i)) {
         Some(i) => {
           self.untyped.remove(i) |> ignore
-          return "(" + printed + " : " + print_type_in_term(ty) + ")"
+          return "(" + spell_name(printed) + " : " + print_type_in_term(ty) + ")"
         }
-        None => return printed
+        None => return spell_name(printed)
       }
     }
     None => ()
@@ -406,8 +423,11 @@ fn Printer::bind(
   // and a binder named T or F binds a variable (a pattern's T is truth, as
   // in HOL, so a pattern variable named T is renamed: `truth=false`)
   let truth = truth && (name == "T" || name == "F")
-  let plain = is_ident(name) && (truth || !is_constant_name(name))
-  let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
+  // a binder with a symbolic name no identifier spells is written between
+  // backticks (bound occurrences too); a free one has its op_ spelling
+  let writable = is_ident(name) || is_raw_name(name)
+  let plain = writable && (truth || !is_constant_name(name))
+  let mut printed = if plain { name } else if is_ident(name) { name + "'" } else { "v" }
   if clash || !plain {
     while self.names.contains(printed) || is_constant_name(printed) {
       printed = printed + "'"

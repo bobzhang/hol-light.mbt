@@ -1,6 +1,8 @@
 // Tokens of the term syntax: MoonBit's tokens for the expressions the
-// grammar accepts (moonbitlang/lexer), with one deviation: an identifier may
-// end in primes (x', s''), as HOL's variables do.
+// grammar accepts (moonbitlang/lexer), with two deviations: an identifier
+// may end in primes (x', s''), as HOL's variables do, and a variable with a
+// symbolic name no identifier spells (HOL's (<<) in `forall(<<)`) is written
+// between backticks, `<<`.
 
 ///|
 /// MoonBit's keywords and reserved words (moonbitlang/lexer), which are not
@@ -60,6 +62,10 @@ fn tokens(s : String) -> Array[(@grammar.Token, Int, Int)] raise {
       }
       (re"^[A-Z][A-Za-z0-9_]*'*" as name, after=rest) => {
         toks.push((UIDENT(name.to_owned()), at(input), at(rest)))
+        continue rest
+      }
+      (re"^`[\-!@#\$%\^&\*\+\|<=>/\?~\.:]+`" as raw, after=rest) => {
+        toks.push((RAWIDENT(raw[1:raw.length() - 1].to_owned()), at(input), at(rest)))
         continue rest
       }
       (re"^[0-9]+" as digits, after=rest) => {
