@@ -5616,11 +5616,11 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   :P
   :P
   :P
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
   (sizeof : (Ite) -> Num)(False) == 1 && sizeof(True) == 1 && sizeof(Atomic((i : Num))) == 1 && sizeof(Ite((x : Ite), (y : Ite), (z : Ite))) == sizeof(x) * (1 + (sizeof(y) + sizeof(z)))
   :P
   :P
@@ -5630,11 +5630,11 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   :P
   :P
   :P
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
   MEASURE(sizeof)
   sizeof
   \226\136\128 e : Ite, !(sizeof(e) == 0)
@@ -5645,11 +5645,11 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   :P
   :P
   :P
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
   \226\136\128 e : Ite, normalized(norm(e))
   (P : (Ite) -> Bool)(False) && P(True) && (\226\136\128 i : Num, P(Atomic(i))) && (\226\136\128 i : Num, \226\136\128 x : Ite, \226\136\128 y : Ite, P(x) && P(y) \226\134\146 P(Ite(Atomic(i), x, y))) \226\134\146 (\226\136\128 e : Ite, normalized(e) \226\134\146 P(e))
   (holds : ((Num) -> Bool, Ite) -> Bool)((v : (Num) -> Bool), False) == false && holds(v, True) == true && holds(v, Atomic((i : Num))) == v(i) && holds(v, Ite((b : Ite), (x : Ite), (y : Ite))) == (if holds(v, b) { holds(v, x) } else { holds(v, y) })
@@ -5657,19 +5657,19 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
   \226\136\128 e : Ite, \226\136\128 v : (Num) -> Bool, holds(v, norm(e)) == holds(v, e)
   (taut : ((List[Num], List[Num]), Ite) -> Bool)(((t : List[Num]), (f : List[Num])), False) == false && taut((t, f), True) == true && taut((t, f), Atomic((i : Num))) == MEM(i, t) && taut((t, f), Ite(Atomic(i), (x : Ite), (y : Ite))) == (if MEM(i, t) { taut((t, f), x) } else { if MEM(i, f) { taut((t, f), y) } else { taut((CONS(i, t), f), x) && taut((t, CONS(i, f)), y) } })
   :P
@@ -5680,92 +5680,92 @@ Tutorial/HOL_as_a_functional_programming_language quotations (170):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
+  (n : Num) => n + 1
+  op_plus
+  op_plus
   (tautology : (Ite) -> Bool)((e : Ite)) == taut((NIL, NIL), norm(e))
   (\226\136\128 a : _, !(a == (i : _) && MEM(a, (f : List[_])))) == !MEM(i, f)
   (\226\136\128 a : _, !(MEM(a, (t : List[_])) && a == (i : _))) == !MEM(i, t)
