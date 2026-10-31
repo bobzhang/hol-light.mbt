@@ -5603,9 +5603,9 @@ Permutation/nummax quotations (24):
   (MAXL : (List[Num]) -> Num)(NIL) == 0 && (\226\136\128 h : Num, \226\136\128 t : List[Num], MAXL(CONS(h, t)) == MAX(h, MAXL(t)))
   :P
   :P
-  \\n. n + 1
-  (+):num->num->num
-  (+):num->num->num
+  (n : Num) => n + 1
+  op_plus
+  op_plus
   \226\136\128 l : List[Num], \226\136\128 n : Num, (MAXL(l) <= n) == ALL((m : Num) => m <= n, l)
   \226\136\128 l : List[Num], \226\136\128 n : Num, (n < MAXL(l)) == EX((m : Num) => n < m, l)
   \226\136\128 n : Num, \226\136\128 l : List[Num], MEM(n, l) \226\134\146 n <= MAXL(l)
