@@ -460,7 +460,7 @@ fn step_3() -> Unit raise {
   let t2 = @simp.abbrev_tac(@term_syntax.parse_term("(coset : (A, A) -> Bool) == ((a : A) => {(b : A) | IN(b, (g : (A) -> Bool)) && (∃ x : A, IN(x, (h : (A) -> Bool)) && b == (op_star_star : (A, A) -> A)(a, x))})"))
   let t1 = @simp.rewrite_tac(@list.List([group(), subgroup(), @sets.subset()]))
   let t334 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), @tactics.strip_tac), t2), t6), t10), t14), t15), t19), t23), t27), t35), t39), t50), t54), t61), t65), t69), t73), t138), t139), t140), @tactics.conj_tac), t177), t178), @tactics.disch_tac), t182), t198), t202), t207), t211), t214), t218), t226), t230), t241), t245), t249), t253), t302), t306), t312), t313), t314), @tactics.conj_tac), t329), t330), @tactics.conj_tac), t331), t332), t333)
-  group_lagrange_cosets_c.set(@tactics.prove(@parser.parse_term("forall g h ( ** ) i e.\n        group (g,( ** ),i,e:A) /\\ subgroup h (g,( ** ),i,e) /\\ FINITE g\n        ==> ?q. (CARD(g) = CARD(q) * CARD(h)) /\\\n                (forall b. b IN g ==> ?a x. a IN q /\\ x IN h /\\ (b = a ** x))"), t334))
+  group_lagrange_cosets_c.set(@tactics.prove(@term_syntax.parse_term("∀ g : (A) -> Bool, ∀ h : (A) -> Bool, ∀ `**` : (A, A) -> A, ∀ i : (A) -> A, ∀ e : A, group((g, `**`, i, e)) && subgroup(h, (g, `**`, i, e)) && FINITE(g) → (∃ q : (A) -> Bool, CARD(g) == CARD(q) * CARD(h) && (∀ b : A, IN(b, g) → (∃ a : A, ∃ x : A, IN(a, q) && IN(x, h) && b == `**`(a, x))))"), t334))
 }
 
 ///|
@@ -486,7 +486,7 @@ fn step_4() -> Unit raise {
     })(t338(x339))
   })
   let t342 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t340), t341)
-  group_lagrange_c.set(@tactics.prove(@parser.parse_term("forall g h ( ** ) i e.\n        group (g,( ** ),i,e:A) /\\ subgroup h (g,( ** ),i,e) /\\ FINITE g\n        ==> (CARD h) divides (CARD g)"), t342))
+  group_lagrange_c.set(@tactics.prove(@term_syntax.parse_term("∀ g : (A) -> Bool, ∀ h : (A) -> Bool, ∀ `**` : (A, A) -> A, ∀ i : (A) -> A, ∀ e : A, group((g, `**`, i, e)) && subgroup(h, (g, `**`, i, e)) && FINITE(g) → divides(CARD(h), CARD(g))"), t342))
 }
 
 ///|

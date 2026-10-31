@@ -4767,7 +4767,7 @@ fn step_38() -> Unit raise {
         )
         let t539 = t538.prepend(@nums.mk_small_numeral(k))
         let r_p = @basics.list_mk_binop(
-          @parser.parse_term("(+):num->num->num"),
+          @term_syntax.parse_term("op_plus"),
           t539,
         )
         @bool.list_mk_forall(avs_3, @basics.mk_eq(l_1, r_p))
@@ -5123,7 +5123,7 @@ fn step_38() -> Unit raise {
     @tactics.orelse_tac(
       @tactics.orelse_tac(
         @tactics.then_tac(
-          @tactics.exists_tac(@parser.parse_term("\\n. n + 1")),
+          @tactics.exists_tac(@term_syntax.parse_term("(n : Num) => n + 1")),
           tac_2,
         ),
         t555,
