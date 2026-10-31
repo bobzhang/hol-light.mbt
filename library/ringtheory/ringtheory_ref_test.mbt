@@ -33497,8 +33497,8 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  forall(<<):V->V->bool.\n        monomial_le (\\x y. x << y \\/ x = y) = monomial_le (<<)
       #|  forall(<<):V->V->bool. monomial_lt (\\x y. x << y \\/ x = y) = monomial_lt (<<)
       #|  (monomial_1 : (V) -> Num)
-      #|  forall(<<=) m. monomial_le (<<=) m m <=> monomial (:V) m
-      #|  forall(<<) m:V->num. ~(monomial_lt (<<) m m)
+      #|  \226\136\128 `<<=` : (V, V) -> Bool, \226\136\128 m : (V) -> Num, monomial_le(`<<=`, m, m) == monomial(UNIV, m)
+      #|  \226\136\128 `<<` : (V, V) -> Bool, \226\136\128 m : (V) -> Num, !monomial_lt(`<<`, m, m)
       #|  forall(<<) m1 m2:V->num. monomial_lt (<<) m1 m2 ==> monomial_le (<<) m1 m2
       #|  forall(<<) m1 m2:V->num.\n        monomial_le (<<) m1 m2 <=>\n        monomial_lt (<<) m1 m2 \\/\n        monomial (:V) m1 /\\ monomial (:V) m2 /\\ m1 = m2
       #|  monomial_mul((mb : (V) -> Num), (md : (V) -> Num))
@@ -33508,7 +33508,7 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  (mb : (V) -> Num)
       #|  (ma : (V) -> Num)
       #|  forall(<<=) m1 m2 m3:V->num.\n        monomial_le (<<=) m1 m2 /\\ monomial_le (<<=) m2 m3\n        ==> monomial_le (<<=) m1 m3
-      #|  forall(<<=):V->V->bool. qoset(monomial_le (<<=))
+      #|  \226\136\128 `<<=` : (V, V) -> Bool, qoset(monomial_le(`<<=`))
       #|  forall(<<=). fld(monomial_le(<<=)) = {m | monomial (:V) m}
       #|  forall(<<=) m m1 m2:V->num.\n        monomial_le (<<=) (monomial_mul m m1) (monomial_mul m m2) <=>\n        monomial (:V) m /\\ monomial_le (<<=) m1 m2
       #|  forall(<<=) m m1 m2:V->num.\n        monomial_le (<<=) (monomial_mul m1 m) (monomial_mul m2 m) <=>\n        monomial (:V) m /\\ monomial_le (<<=) m1 m2
@@ -33851,7 +33851,7 @@ test "Library/ringtheory matches Library/ringtheory.ml" {
       #|  (op_lt_lt_lt : (V, V) -> Bool)
       #|  (op_lt_lt : (V, V) -> Bool)
       #|  forall(<<):V->V->bool.\n        WF(<<) /\\\n        (\\m1 m2. monomial (:V) m1 /\\ monomial (:V) m2 /\\\n                 forall i. m2 i < m1 i ==> ?j. i << j /\\ m1 j < m2 j) =\n        monomial_le (<<)\n        ==> WF(monomial_lt(<<))
-      #|  forall(<<):V->V->bool. WF(<<) ==> WF(monomial_lt(<<))
+      #|  \226\136\128 `<<` : (V, V) -> Bool, WF(`<<`) \226\134\146 WF(monomial_lt(`<<`))
       #|  (op_lt_lt_eq : (V, V) -> Bool)
       #|  forall(<<=). woset(<<=) /\\ fld(<<=) = (:V) ==> woset(monomial_le(<<=))
       #|  (v : Unit) => (z : A)
