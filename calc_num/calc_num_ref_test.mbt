@@ -727,10 +727,10 @@ test "calc_num matches calc_num.ml" {
       #|  two = 2
       #|  n + BIT1 _0 = m /\\\n       m EXP 2 = p /\\\n       m + a = BIT0(BIT0 p)\n       ==> (BIT1(BIT1(BIT1 n))) EXP 2 = BIT1(BIT0(BIT0(BIT0 a)))
       #|  n = l + p * h /\\\n       h + l = m /\\\n       h EXP 2 = a /\\\n       l EXP 2 = c /\\\n       m EXP 2 = d /\\\n       a + c = e /\\\n       e + b = d\n       ==> n EXP 2 = c + p * (b + p * a)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  b = b' /\\ c = c' /\\ d = d'\n        ==> b + d':num = b' + d /\\ 4 * b + d' = 4 * b' + d
       #|  b = b' /\\ c = c' /\\ d = d'\n        ==> 5 * b + c' + d' = 5 * b' + c + d
       #|  (e' : Num) == (e : Num)
@@ -747,12 +747,12 @@ test "calc_num matches calc_num.ml" {
       #|  _0 == 0
       #|  two = 2
       #|  h EXP 2 = e /\\\n       l EXP 2 = a /\\\n       (l + BIT1 _0 * (m + BIT1 _0 * h)) EXP 2 =\n       a +  BIT1 _0 * (b +  BIT1 _0 * (c +  BIT1 _0 * (d +  BIT1 _0 * e))) /\\\n       (l + BIT0(BIT1 _0) * (m + BIT0(BIT1 _0) * h)) EXP 2 =\n       a + BIT0(BIT1 _0) * (b + BIT0(BIT1 _0) *\n       (c + BIT0(BIT1 _0) * (d + BIT0(BIT1 _0) * e))) /\\\n       (h + BIT0(BIT1 _0) * (m + BIT0(BIT1 _0) * l)) EXP 2 =\n       e + BIT0(BIT1 _0) * (d + BIT0(BIT1 _0) *\n       (c + BIT0(BIT1 _0) * (b + BIT0(BIT1 _0) * a)))\n       ==> (l + p * (m + p * h)) EXP 2 =\n           a + p * (b + p * (c + p * (d + p * e)))
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
-      #|  (+)
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  (2 * 2 * 2 * m) * 2 * 2 * 2 * m = 2 * 2 * 2 * 2 * 2 * 2 * m * m
       #|  (two : Num) == 2
       #|  m EXP 2 = n <=>\n       (BIT0(BIT0(BIT0 m))) EXP 2 = BIT0(BIT0(BIT0(BIT0(BIT0(BIT0 n)))))
