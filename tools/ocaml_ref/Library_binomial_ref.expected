@@ -5748,9 +5748,9 @@ Library/binomial quotations (120):
   :P
   :P
   :P
-  \\n. n + 1
-  \\n. n + 1
-  \\n. n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
+  (n : Num) => n + 1
   \226\136\128 n : Num, binom((0, n)) == (if n == 0 { 1 } else { 0 })
   (n : Num) < (k : Num) \226\134\146 n < SUC(k)
   \226\136\128 n : Num, \226\136\128 k : Num, n < k \226\134\146 binom((n, k)) == 0
