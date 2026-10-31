@@ -235,12 +235,29 @@ fn is_constant_name(name : String) -> Bool {
 }
 
 ///|
-fn Printer::name(_self : Printer, name : String) -> String raise Unprintable {
+/// Whether `name` is a symbolic name the syntax writes between backticks:
+/// HOL symbol characters only (no letters, digits, `_`, primes or
+/// backticks), as the lexer's RAWIDENT accepts.
+fn is_raw_name(name : String) -> Bool {
+  name != "" && name.iter().all(c => "-!@#$%^&*+|<=>/?~.:".contains_char(c))
+}
+
+///|
+/// A variable's printed name as the syntax spells it: an identifier as it
+/// is, a symbolic name between backticks.
+fn spell_name(name : String) -> String raise Unprintable {
   if is_ident(name) {
     name
+  } else if is_raw_name(name) {
+    "`" + name + "`"
   } else {
     raise Unprintable("name " + name)
   }
+}
+
+///|
+fn Printer::name(_self : Printer, name : String) -> String raise Unprintable {
+  spell_name(name)
 }
 
 ///|
@@ -343,9 +360,9 @@ fn Printer::variable(
       match self.untyped.search((v, bound.length() - i)) {
         Some(i) => {
           self.untyped.remove(i) |> ignore
-          return "(" + printed + " : " + print_type_in_term(ty) + ")"
+          return "(" + spell_name(printed) + " : " + print_type_in_term(ty) + ")"
         }
-        None => return printed
+        None => return spell_name(printed)
       }
     }
     None => ()
@@ -406,9 +423,16 @@ fn Printer::bind(
   // and a binder named T or F binds a variable (a pattern's T is truth, as
   // in HOL, so a pattern variable named T is renamed: `truth=false`)
   let truth = truth && (name == "T" || name == "F")
-  let plain = is_ident(name) && (truth || !is_constant_name(name))
-  let mut printed = if plain || !is_ident(name) { if plain { name } else { "v" } } else { name + "'" }
+  // a binder with a symbolic name no identifier spells is written between
+  // backticks (bound occurrences too); a free one has its op_ spelling
+  let writable = is_ident(name) || is_raw_name(name)
+  let plain = writable && (truth || !is_constant_name(name))
+  let mut printed = if plain { name } else if is_ident(name) { name + "'" } else { "v" }
   if clash || !plain {
+    // a symbolic name takes no primes: a fresh identifier instead
+    if !is_ident(printed) {
+      printed = "v"
+    }
     while self.names.contains(printed) || is_constant_name(printed) {
       printed = printed + "'"
     }
@@ -473,7 +497,7 @@ fn Printer::comb(
     (Const(q, _), [Comb(Const("GABS", _), gabs)]) if q is ("forall" | "?") &&
       dest_pattern_abs(gabs) is Some((pat, vs, rhs)) => {
       let sym = if q == "forall" { "∀" } else { "∃" }
-      let inner = self.bind_pattern(vs, rhs, bound)
+      let inner = self.bind_pattern(vs, rhs, bound, [pat, rhs])
       let p = self.term(pat, SIMPLE, inner)
       let ty = print_type_in_term(@kernel.type_of(pat))
       wrap(sym + " " + p + " : " + ty + ", " + self.term(rhs, IMPL, inner), EXPR, ctx)
@@ -676,19 +700,62 @@ fn Printer::pattern_form(
 }
 
 ///|
-/// `bound` with a pattern's variables `vs` bound over `body`. Annotating
-/// every constant, the variables are written with their type where they
-/// first occur in the pattern.
+/// Whether a variable named `name` occurs in `t`, free or bound.
+fn names_variable(t : @kernel.Term, name : String) -> Bool {
+  match t {
+    Var(n, _) => n == name
+    Const(_, _) => false
+    Comb(f, x) => names_variable(f, name) || names_variable(x, name)
+    Abs(v, b) => names_variable(v, name) || names_variable(b, name)
+  }
+}
+
+///|
+/// `bound` with its first `n` bindings' symbolic names spelt op_, as a
+/// pattern or an implicit set binder reads them (the backticks are for the
+/// binders that have no other spelling, which read an op_ name literally),
+/// unless that name is taken: printed for another binding in scope, or the
+/// name of any variable in `scope`, free or bound (it would be captured,
+/// read as the other variable, or force a binder there to be renamed);
+/// then the backticks stay.
+fn op_spelled(bound : Bound, n : Int, scope : Array[@kernel.Term]) -> Bound {
+  let bs = bound.to_array()
+  let n = if n < bs.length() { n } else { bs.length() }
+  for i in 0..<n {
+    let (v, printed) = bs[i]
+    if !is_ident(printed) && is_raw_name(printed) {
+      match @grammar.escape(printed) {
+        Some(e) => {
+          let taken = bs.iter().any(b => b.1 == e) ||
+            scope.iter().any(t => names_variable(t, e))
+          if !taken {
+            bs[i] = (v, e)
+          }
+        }
+        None => ()
+      }
+    }
+  }
+  @list.from_array(bs)
+}
+
+///|
+/// `bound` with a pattern's variables `vs` bound over `body` (all that the
+/// pattern scopes over, its guard included, is `scope`). Annotating every
+/// constant, the variables are written with their type where they first
+/// occur in the pattern.
 fn Printer::bind_pattern(
   self : Printer,
   vs : Array[@kernel.Term],
   body : @kernel.Term,
   bound : Bound,
+  scope : Array[@kernel.Term],
 ) -> Bound raise Unprintable {
   let mut inner = bound
   for v in vs {
     inner = self.bind(v, body, inner, truth=false).1
   }
+  inner = op_spelled(inner, vs.length(), scope)
   if self.all_constants {
     self.untyped.append(vs.mapi((i, v) => (v, bound.length() + i + 1)))
   }
@@ -705,7 +772,11 @@ fn Printer::arm(
   body : @kernel.Term,
   bound : Bound,
 ) -> String raise Unprintable {
-  let inner = self.bind_pattern(vs, body, bound)
+  let scope = match guard_ {
+    Some(g) => [pat, g, body]
+    None => [pat, body]
+  }
+  let inner = self.bind_pattern(vs, body, bound, scope)
   let p = self.term(pat, IMPL, inner)
   // a variable the pattern binds occurs in it, so these marks are used
   for i in 0..<vs.length() {
@@ -996,7 +1067,9 @@ fn Printer::comprehension(
   if !renamed &&
     implicit_binders(e, p, inner) == xs &&
     !(g is Var(n, _) && self.listed.contains(n)) {
-    // each binder is written with its type where it first occurs in e
+    // each binder is written with its type where it first occurs in e,
+    // as {e | p} reads it (a symbolic one spelt op_)
+    let inner = op_spelled(inner, xs.length(), [e, p])
     let marks = xs.mapi((i, x) => (x, bound.length() + i + 1))
     let typed_before = self.typed_free.length()
     self.untyped.append(marks)

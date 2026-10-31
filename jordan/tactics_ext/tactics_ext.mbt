@@ -184,7 +184,7 @@ pub fn popl_tac(x : @list.List[Int64]) -> @tactics.Tactic raise {
 fn step_5() -> Unit raise {
   let pop_tac : (Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise = fn(x26 : Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let i = x26
-    @tactics.then_tac((x28 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => undisch_el_tac(i, x28), taut_tac(@parser.parse_term("B ==> (A==>B)")))
+    @tactics.then_tac((x28 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => undisch_el_tac(i, x28), taut_tac(@term_syntax.parse_term("(B : Bool) → (A : Bool) → B")))
   }
   let renumber : (Int64) -> ((@list.List[Int64]) -> @list.List[Int64] raise) raise = fn(x29 : Int64) -> ((@list.List[Int64]) -> @list.List[Int64] raise) raise {
     let i_1 = x29
