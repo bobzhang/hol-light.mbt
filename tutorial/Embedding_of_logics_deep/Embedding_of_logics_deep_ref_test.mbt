@@ -5659,25 +5659,25 @@ test "Tutorial/Embedding_of_logics_deep matches Tutorial/Embedding_of_logics_dee
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
       #|  (holds_in : (((_) -> Bool, (_, _) -> Bool), Form) -> Bool)(((W : (_) -> Bool), (R : (_, _) -> Bool)), (p : Form)) == (\226\136\128 V : (List[Char], _) -> Bool, \226\136\128 w : _, IN(w, W) \226\134\146 holds((W, R), V, p, w))
       #|  (op_bar_eq : ((((_) -> Bool, (_, _) -> Bool)) -> Bool, Form) -> Bool)((L : (((_) -> Bool, (_, _) -> Bool)) -> Bool), (p : Form)) == (\226\136\128 f : ((_) -> Bool, (_, _) -> Bool), L(f) \226\134\146 holds_in(f, p))
       #|  (S4 : (((_) -> Bool, (_, _) -> Bool)) -> Bool)(((W : (_) -> Bool), (R : (_, _) -> Bool))) == (!(W == {}) && (\226\136\128 x : _, \226\136\128 y : _, R(x, y) \226\134\146 IN(x, W) && IN(y, W)) && (\226\136\128 x : _, IN(x, W) \226\134\146 R(x, x)) && (\226\136\128 x : _, \226\136\128 y : _, \226\136\128 z : _, R(x, y) && R(y, z) \226\134\146 R(x, z)))
