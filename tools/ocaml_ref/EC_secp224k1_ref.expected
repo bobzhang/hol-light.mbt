@@ -51685,8 +51685,8 @@ EC/secp224k1 quotations (29):
   prime(n_224k1)
   (p224k1_group : Group[Option[(Int, Int)]]) == weierstrass_group((integer_mod_ring(p_224k1), int_of_num(0), int_of_num(5)))
   group_carrier(p224k1_group) == weierstrass_curve((integer_mod_ring(p_224k1), int_of_num(0), int_of_num(5))) && group_id(p224k1_group) == NONE && group_inv(p224k1_group) == weierstrass_neg((integer_mod_ring(p_224k1), int_of_num(0), int_of_num(5))) && group_mul(p224k1_group) == weierstrass_add((integer_mod_ring(p_224k1), int_of_num(0), int_of_num(5)))
-  x pow 3 - &3 * x + b:int = x pow 3 + (-- &3) * x + b /\\\n               x pow 3 + &c = x pow 3 + &0 * x + &c
-  x:int
+  pow((x : Int), 3) - int_of_num(3) * x + (b : Int) == pow(x, 3) + (-int_of_num(3) * x + b) && pow(x, 3) + int_of_num((c : Num)) == pow(x, 3) + (int_of_num(0) * x + int_of_num(c))
+  (x : Int)
   \226\136\128 x : Int, !op_eq_eq(pow(x, 3) + int_of_num(5), int_of_num(0), mod(int_of_num(p_224k1)))
   IN(G_224K1, group_carrier(p224k1_group))
   group_element_order(p224k1_group, G_224K1) == n_224k1
