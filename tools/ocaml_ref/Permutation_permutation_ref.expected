@@ -5663,7 +5663,7 @@ Warning: inventing type variables
 0..0..1..2..7..14..21..solved at 28
 Permutation/permutation quotations (19):
   (REVPERM : (Num) -> List[Num])(0) == NIL && REVPERM(SUC((n : Num))) == CONS(n, REVPERM(n))
-  \\n. n + 1
+  (n : Num) => n + 1
   \226\136\128 n : Num, \226\136\128 m : Num, MEM(m, REVPERM(n)) == (m < n)
   \226\136\128 n : Num, LIST_UNIQ(REVPERM(n))
   \226\136\128 n : Num, DELETE1(n, REVPERM(SUC(n))) == REVPERM(n)
