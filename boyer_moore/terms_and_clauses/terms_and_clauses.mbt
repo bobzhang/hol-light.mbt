@@ -695,7 +695,7 @@ pub fn simplify_one_literal(x122 : Int64, x123 : @kernel.Term) -> ((@kernel.Thm,
     let negate_1 : (@kernel.Thm) -> @kernel.Thm raise = fn(x125 : @kernel.Thm) -> @kernel.Thm raise {
       let th = x125
       let tm_2 = @equal.rhs(@kernel.concl(th))
-      let th_p = @equal.ap_term(@parser.parse_term("(~)"), th)
+      let th_p = @equal.ap_term(@term_syntax.parse_term("op_tilde"), th)
       if @support.is_t(tm_2) {
         @kernel.trans(th_p, @lib.el(1, @bool.conjuncts_rule(@class.not_clauses())))
       } else {
