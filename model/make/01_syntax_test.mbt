@@ -7938,12 +7938,12 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  \226\136\128 tm : Term, \226\136\128 ty : Type, has_type(tm, ty) \226\134\146 op_typeof(tm) == ty
       #|  \226\136\128 tm : Term, welltyped(tm) == has_type(tm, op_typeof(tm))
       #|  (\226\136\128 n : List[Char], \226\136\128 ty : Type, welltyped(Var(n, ty))) && (\226\136\128 ty : Type, welltyped(Equal(ty))) && (\226\136\128 ty : Type, welltyped(Select(ty))) && (\226\136\128 s : Term, \226\136\128 t : Term, welltyped(Comb(s, t)) == (welltyped(s) && welltyped(t) && (\226\136\131 rty : Type, op_typeof(s) == Fun(op_typeof(t), rty)))) && (\226\136\128 n : List[Char], \226\136\128 ty : Type, \226\136\128 t : Term, welltyped(Abs(n, ty, t)) == welltyped(t))
@@ -7954,13 +7954,13 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  \\n. n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
       #|  (\226\136\128 env : List[(Term, Term)], \226\136\128 x1 : List[Char], \226\136\128 ty1 : Type, \226\136\128 x2 : List[Char], \226\136\128 ty2 : Type, ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) \226\134\146 (RACONV : (List[(Term, Term)], (Term, Term)) -> Bool)(env, (Var(x1, ty1), Var(x2, ty2)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 ty : Type, RACONV(env, (Equal(ty), Equal(ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 ty : Type, RACONV(env, (Select(ty), Select(ty)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 s1 : Term, \226\136\128 t1 : Term, \226\136\128 s2 : Term, \226\136\128 t2 : Term, RACONV(env, (s1, s2)) && RACONV(env, (t1, t2)) \226\134\146 RACONV(env, (Comb(s1, t1), Comb(s2, t2)))) && (\226\136\128 env : List[(Term, Term)], \226\136\128 x1 : List[Char], \226\136\128 ty1 : Type, \226\136\128 t1 : Term, \226\136\128 x2 : List[Char], \226\136\128 ty2 : Type, \226\136\128 t2 : Term, ty1 == ty2 && RACONV(CONS((Var(x1, ty1), Var(x2, ty2)), env), (t1, t2)) \226\134\146 RACONV(env, (Abs(x1, ty1, t1), Abs(x2, ty2, t2))))
       #|  RACONV((env : List[(Term, Term)]), (Var((x1 : List[Char]), (ty1 : Type)), Var((x2 : List[Char]), (ty2 : Type)))) == ALPHAVARS(env, (Var(x1, ty1), Var(x2, ty2))) && RACONV(env, (Var(x1, ty1), Equal(ty2))) == false && RACONV(env, (Var(x1, ty1), Select(ty2))) == false && RACONV(env, (Var(x1, ty1), Comb((l2 : Term), (r2 : Term)))) == false && RACONV(env, (Var(x1, ty1), Abs(x2, ty2, (t2 : Term)))) == false && RACONV(env, (Equal(ty1), Var(x2, ty2))) == false && RACONV(env, (Equal(ty1), Equal(ty2))) == (ty1 == ty2) && RACONV(env, (Equal(ty1), Select(ty2))) == false && RACONV(env, (Equal(ty1), Comb(l2, r2))) == false && RACONV(env, (Equal(ty1), Abs(x2, ty2, t2))) == false && RACONV(env, (Select(ty1), Var(x2, ty2))) == false && RACONV(env, (Select(ty1), Equal(ty2))) == false && RACONV(env, (Select(ty1), Select(ty2))) == (ty1 == ty2) && RACONV(env, (Select(ty1), Comb(l2, r2))) == false && RACONV(env, (Select(ty1), Abs(x2, ty2, t2))) == false && RACONV(env, (Comb((l1 : Term), (r1 : Term)), Var(x2, ty2))) == false && RACONV(env, (Comb(l1, r1), Equal(ty2))) == false && RACONV(env, (Comb(l1, r1), Select(ty2))) == false && RACONV(env, (Comb(l1, r1), Comb(l2, r2))) == (RACONV(env, (l1, l2)) && RACONV(env, (r1, r2))) && RACONV(env, (Comb(l1, r1), Abs(x2, ty2, t2))) == false && RACONV(env, (Abs(x1, ty1, (t1 : Term)), Var(x2, ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Equal(ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Select(ty2))) == false && RACONV(env, (Abs(x1, ty1, t1), Comb(l2, r2))) == false && RACONV(env, (Abs(x1, ty1, t1), Abs(x2, ty2, t2))) == (ty1 == ty2 && RACONV(CONS((Var(x1, ty1), Var(x2, ty2)), env), (t1, t2)))
       #|  (ACONV : (Term, Term) -> Bool)((t1 : Term), (t2 : Term)) == RACONV(NIL, (t1, t2))
@@ -7979,13 +7979,13 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
       #|  \226\136\128 l1 : List[Term], \226\136\128 l2 : List[Term], \226\136\128 x : Term, MEM(x, TERM_UNION(l1, l2)) \226\134\146 MEM(x, l1) || MEM(x, l2)
       #|  \226\136\128 l1 : List[Term], \226\136\128 l2 : List[Term], \226\136\128 x : Term, MEM(x, l1) || MEM(x, l2) \226\134\146 (\226\136\131 y : Term, MEM(y, TERM_UNION(l1, l2)) && ACONV(x, y))
       #|  ALL((a : Term) => has_type(a, Bool), (l1 : List[Term])) && ALL((a : Term) => has_type(a, Bool), (l2 : List[Term])) \226\134\146 ALL((a : Term) => has_type(a, Bool), TERM_UNION(l1, l2))
@@ -7996,19 +7996,19 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  \226\136\128 env : List[(Term, Term)], \226\136\128 p : (Term, Term), RACONV(env, p) \226\134\146 (\226\136\128 x : List[Char], \226\136\128 ty : Type, (VFREE_IN(Var(x, ty), FST(p)) && !(\226\136\131 y : Term, MEM((Var(x, ty), y), env))) == (VFREE_IN(Var(x, ty), SND(p)) && !(\226\136\131 y : Term, MEM((y, Var(x, ty)), env))))
       #|  \226\136\128 s : Term, \226\136\128 t : _, \226\136\128 x : List[Char], \226\136\128 t : Term, ACONV(s, t) \226\134\146 VFREE_IN(Var(x, (ty : Type)), s) == VFREE_IN(Var(x, ty), t)
       #|  (REV_ASSOCD : (_, List[(_, _)], _) -> _)((a : _), NIL, (d : _)) == d && REV_ASSOCD(a, CONS(((x : _), (y : _)), (t : List[(_, _)])), d) == (if y == a { x } else { REV_ASSOCD(a, t, d) })
@@ -8019,15 +8019,15 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  {(x : _) | (P : (_) -> Bool)(x) && (Q : (_) -> Bool)(x)} == INTER({(x : _) | P(x)}, {(x : _) | Q(x)})
       #|  {(x : _) | (P : (_) -> Bool)(x) || (Q : (_) -> Bool)(x)} == UNION({(x : _) | P(x)}, {(x : _) | Q(x)})
       #|  {(x : _) | (a : _) == x} == {a}
@@ -8067,31 +8067,31 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
       #|  (rty : Type)
       #|  (ilist : List[(Term, Term)])
       #|  (fty : Type)
@@ -8144,12 +8144,12 @@ test "Model/syntax matches Model/syntax.ml" {
       #|  :P
       #|  :P
       #|  :P
-      #|  \\n. n + 1
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
-      #|  (+):num->num->num
+      #|  (n : Num) => n + 1
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
+      #|  op_plus
       #|  (ilist : List[(Term, Term)])
       #|  (t : Term)
       #|  (ty : Type)
