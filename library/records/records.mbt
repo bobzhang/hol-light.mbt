@@ -330,8 +330,8 @@ pub fn record_read_write_thms(
   x28 : @kernel.Thm,
 ) -> @list.List[@kernel.Thm] raise {
   let (ith, cth) = (x27, x28)
-  let pat = @parser.parse_term("forall(y:B) (s:A). read c (write c y s) = y")
-  let ctm = @parser.parse_term("c:(A,B)component")
+  let pat = @term_syntax.parse_term("∀ y : B, ∀ s : A, read((c : Component[A, B]), write(c, y, s)) == y")
+  let ctm = @term_syntax.parse_term("(c : Component[A, B])")
   let rule : (@kernel.Term) -> @kernel.Thm raise = fn(
     x29 : @kernel.Term,
   ) -> @kernel.Thm raise {
