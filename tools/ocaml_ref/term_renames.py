@@ -63,6 +63,14 @@ TERM_RENAMES = {
     # instantiates definability's PRIMREC_SIGMA by its variable fn
     'Arithmetic/tarski.ml': {'fn': 'fn_'},
     'Functionspaces/cfunspace.ml': {'is': 'is_'},
+    # an identifier starting with a digit is no MoonBit name
+    'Examples/pell.ml': {'2kn': 'two_kn'},
+}
+# Output lines a rename removes, with how many: HOL warns when it reads a
+# name that begins with a digit (2kn), so the rename drops the warning, and
+# nothing else (check_term_renames.py).
+TERM_RENAME_DROPS = {
+    'Examples/pell.ml': {'Warning: Non-numeral begins with a digit': 1},
 }
 # _ in ssreflect's move ["_"] and in INTRO_TAC "_" names no variable: it
 # discards (GEN_TAC, or drops the assumption). Elsewhere a string "_" names
