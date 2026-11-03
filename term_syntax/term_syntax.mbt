@@ -236,7 +236,7 @@ fn resolve_names(
       // whatever names the resolution gave the rest (a binder renamed
       // because it is named like a constant)
       @preterm.pmk_pattern_binding(((p, tests), resolve_names(body, inner)), () => {
-        vs,
+        return vs
       })
     }
     // truth and falsity are the constants themselves, so that a binder

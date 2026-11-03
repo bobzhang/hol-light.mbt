@@ -160,7 +160,7 @@ test "a hole inside a type is a fresh type variable" {
 
 ///|
 test "names with a semicolon are escaped" {
-  inspect(@grammar.escape(";;"), content="Some(op_semi_semi)")
+  assert_eq(@grammar.escape(";;"), Some("op_semi_semi"))
   inspect(@grammar.unescape("op_semi_semi"), content=";;")
 }
 

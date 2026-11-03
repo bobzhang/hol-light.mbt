@@ -385,7 +385,7 @@ fn Printer::constant(
   self : Printer,
   c : @kernel.Term,
 ) -> String raise Unprintable {
-  guard c is Const(_, ty) else { raise Unprintable("not a constant") }
+  guard c is Const(_, _) else { raise Unprintable("not a constant") }
   let spelling = self.spelling(c)
   // a name the interface overloads reads as whichever constant the
   // priority in force picks (+ as real_add after prioritize_real)
@@ -627,7 +627,7 @@ fn Printer::comb(
       if used == args.length() {
         s
       } else {
-        let rest = args[used:].to_array().map(a => self.term(a, EXPR, bound))
+        let rest = args[used:].to_owned().map(a => self.term(a, EXPR, bound))
         wrap(s + "(" + rest.join(", ") + ")", SIMPLE, ctx)
       }
     (Const(_, _), [x]) if spelled is ("~" | "--") => {
@@ -666,7 +666,7 @@ fn Printer::comb(
       if args.length() == 1 {
         s
       } else {
-        let rest = args[1:].to_array().map(a => self.term(a, EXPR, bound))
+        let rest = args[1:].to_owned().map(a => self.term(a, EXPR, bound))
         wrap(s + "(" + rest.join(", ") + ")", SIMPLE, ctx)
       }
     }
@@ -857,7 +857,7 @@ fn op_spelled(bound : Bound, n : Int32, scope : Array[@kernel.Term]) -> Bound {
       }
     }
   }
-  @list.from_array(bs)
+  @list.List(bs)
 }
 
 ///|

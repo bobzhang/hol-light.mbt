@@ -19,9 +19,9 @@ pub let generated_mark : String
 
 pub let no_guard_mark : String
 
-pub fn pretype(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Pretype raise ParseError
+pub fn pretype(Array[(Token, Int32, Int32)], initial_pos? : Int32) -> @preterm.Pretype raise ParseError
 
-pub fn record_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> (String, String, @list.List[(String, @preterm.Pretype)]) raise ParseError
+pub fn record_definition(Array[(Token, Int32, Int32)], initial_pos? : Int32) -> (String, String, @list.List[(String, @preterm.Pretype)]) raise ParseError
 
 pub let set_abs_mark : String
 
@@ -29,23 +29,25 @@ pub let set_compr_mark : String
 
 pub fn take_error() -> String?
 
-pub fn term(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Preterm raise ParseError
+pub fn term(Array[(Token, Int32, Int32)], initial_pos? : Int32) -> @preterm.Preterm raise ParseError
 
 pub fn type_abbreviation(String) -> @kernel.HolType?
 
-pub fn type_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> @list.List[(String, String, @list.List[(String, @list.List[@preterm.Pretype])])] raise ParseError
+pub fn type_definition(Array[(Token, Int32, Int32)], initial_pos? : Int32) -> @list.List[(String, String, @list.List[(String, @list.List[@preterm.Pretype])])] raise ParseError
 
 pub fn unescape(String) -> String
 
 pub fn[T] with_defined_types(Array[String], () -> T raise) -> T raise
 
 // Errors
+#derive(@debug.Debug)
 pub suberror ParseError {
-  UnexpectedToken(Token, (Int, Int), Array[TokenKind])
-  UnexpectedEndOfInput(Int, Array[TokenKind])
-} derive(@debug.Debug)
+  UnexpectedToken(Token, (Int32, Int32), Array[TokenKind])
+  UnexpectedEndOfInput(Int32, Array[TokenKind])
+}
 
 // Types and methods
+#derive(@debug.Debug)
 pub(all) enum Token {
   LIDENT(String)
   UIDENT(String)
@@ -86,7 +88,7 @@ pub(all) enum Token {
   THIN_ARROW
   UNDERSCORE
   EOF
-} derive(@debug.Debug)
+}
 pub fn Token::kind(Self) -> TokenKind
 
 pub(all) enum TokenKind {

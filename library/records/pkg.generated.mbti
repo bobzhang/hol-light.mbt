@@ -16,7 +16,6 @@ pub fn get_record_components(@kernel.Thm) -> @list.List[@kernel.Term] raise
 
 pub fn load() -> Unit
 
-
 pub fn record_extensionally_valid_component_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
 
 pub fn record_orthogonality_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise

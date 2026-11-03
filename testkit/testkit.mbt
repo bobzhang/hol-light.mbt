@@ -105,8 +105,8 @@ pub fn Log::contents(self : Log) -> String {
 pub fn normalize_counters(s : String) -> String {
   let out = StringBuilder()
   let pvar = "GEN%PVAR%".to_array()
-  let seen : Map[String, Int32] = {}
-  let counts : Map[String, Int32] = {}
+  let seen : Map[String, Int32] = Map([])
+  let counts : Map[String, Int32] = Map([])
   let mut trace = false
   let lines = s.split("\n").map(l => l.to_owned()).to_array()
   for li, line in lines {

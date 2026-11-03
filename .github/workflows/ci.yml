@@ -22,6 +22,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
+    strategy:
+      fail-fast: false
+      matrix:
+        moonbit: [pre-release]
     steps:
       - name: Checkout this repo
         uses: actions/checkout@v7
@@ -38,7 +42,7 @@ jobs:
       - name: Toolchain
         run: moon version --all
 
-      # type-checks every package and test of the repository with the pinned
+      # type-checks every package and test of the repository with the selected
       # toolchain (no linking, so it is cheap): the tiers below only build
       # the core, and the rest is otherwise compiled only by full.yml
       - name: Check every package

@@ -26,7 +26,7 @@ pub fn override_interface(String, @kernel.Term) -> Unit raise
 
 pub fn pfrees(Preterm) -> @list.List[Preterm] raise
 
-pub fn pgen_count() -> Int
+pub fn pgen_count() -> Int32
 
 pub fn pmk_pattern_binding(((Preterm, @list.List[Preterm]), Preterm), () -> @list.List[Preterm] raise) -> Preterm raise
 
@@ -48,7 +48,7 @@ pub fn remove_type_abbrev(String) -> Unit
 
 pub fn retypecheck(@list.List[(String, Pretype)], Preterm) -> Preterm raise
 
-pub fn skip_pgenvars(Int) -> Unit
+pub fn skip_pgenvars(Int32) -> Unit
 
 pub fn term_of_preterm(Preterm) -> @kernel.Term raise
 
@@ -69,27 +69,29 @@ pub fn[T] with_pgen_counter_restored(() -> T raise) -> T raise
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) enum Preterm {
   Varp(String, Pretype)
   Constp(String, Pretype)
   Combp(Preterm, Preterm)
   Absp(Preterm, Preterm)
   Typing(Preterm, Pretype)
-} derive(Eq, @debug.Debug)
+}
 pub fn Preterm::equal(Self, Self) -> Bool
 pub fn Preterm::not_equal(Self, Self) -> Bool
-pub fn Preterm::ocompare(Self, Self) -> Int
+pub fn Preterm::ocompare(Self, Self) -> Int32
 pub fn Preterm::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for Preterm
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Pretype {
   Utv(String)
   Ptycon(String, @list.List[Pretype])
   Stv(Int64)
-} derive(Eq, @debug.Debug)
+}
 pub fn Pretype::equal(Self, Self) -> Bool
 pub fn Pretype::not_equal(Self, Self) -> Bool
-pub fn Pretype::ocompare(Self, Self) -> Int
+pub fn Pretype::ocompare(Self, Self) -> Int32
 pub fn Pretype::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for Pretype
 

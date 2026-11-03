@@ -113,8 +113,8 @@ pub fn unescape(ident : String) -> String {
     return ident
   }
   let out = StringBuilder()
-  for part in ident.to_string()[3:].to_string().split("_") {
-    let part = part.to_string()
+  for part in ident.to_string()[3:].to_owned().split("_") {
+    let part = part.to_owned()
     if part == "us" {
       out.write_char('_')
     } else {
