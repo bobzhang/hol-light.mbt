@@ -392,8 +392,9 @@ fn elaborate(s : String) -> @kernel.Term raise {
 }
 
 ///|
-/// The HOL type `s` denotes.
+/// The HOL type `s` denotes, recorded as a type quotation (`:s`).
 pub fn parse_type(s : String) -> @kernel.HolType raise {
+  @parser.record_quotation(":" + s)
   let toks = tokens(s)
   ignore(@grammar.take_error())
   let pty = @grammar.pretype(toks) catch {
@@ -420,12 +421,23 @@ pub fn parse_type_definition(
   (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
 ] raise {
   let toks = tokens(s)
-  ignore(@grammar.take_error())
-  let enums = @grammar.type_definition(toks) catch {
-    e => raise Failure("term syntax: " + describe(e))
+  // the enums' names, which their constructors refer to the types by
+  let spellings = []
+  for i in 0..<(toks.length() - 1) {
+    match (toks[i].0, toks[i + 1].0) {
+      (ENUM, UIDENT(name)) => spellings.push(name)
+      (ENUM, VERBATIM(name)) => spellings.push("`" + name + "`")
+      _ => ()
+    }
   }
+  ignore(@grammar.take_error())
+  let enums = @grammar.with_defined_types(spellings, () => {
+    @grammar.type_definition(toks) catch {
+      e => raise Failure("term syntax: " + describe(e))
+    }
+  })
   check_semantics()
-  // a type being defined reads as the type variable named as written
+  // a type being defined reads as a type variable of its own
   let defined = enums.map(e => (
     @kernel.mk_vartype(e.0),
     @kernel.mk_vartype(e.1),
