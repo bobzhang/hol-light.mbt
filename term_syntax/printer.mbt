@@ -47,6 +47,21 @@ fn is_ident_char(c : Char) -> Bool {
 }
 
 ///|
+/// Whether `name` between backticks lexes as a verbatim name (`'a`, `num`).
+fn lexes_verbatim(name : String) -> Bool {
+  let cs = name.to_array()
+  let mut i = if cs is ['\'', ..] { 1 } else { 0 }
+  guard i < cs.length() && cs[i] is ('a'..='z' | 'A'..='Z') else { return false }
+  while i < cs.length() && is_ident_char(cs[i]) {
+    i += 1
+  }
+  while i < cs.length() && cs[i] == '\'' {
+    i += 1
+  }
+  i == cs.length()
+}
+
+///|
 /// Whether `name` lexes as one identifier (with optional trailing primes)
 /// that is not a keyword.
 fn is_ident(name : String) -> Bool {
@@ -151,6 +166,11 @@ fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintabl
         is_ident(name) &&
         reads_as_type(name) is None {
         name
+      } else if lexes_verbatim(name) &&
+        (try @kernel.get_type_arity(name) catch { _ => -1L }) < 0L {
+        // between backticks, a name no type constant has reads as the
+        // type variable: `num` before num is defined, `'a`
+        "`" + name + "`"
       } else {
         raise Unprintable("type variable " + name)
       }
