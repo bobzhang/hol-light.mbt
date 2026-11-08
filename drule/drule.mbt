@@ -1240,8 +1240,8 @@ pub fn new_definition(tm : Term) -> Thm raise {
 
 ///|
 fn load_steps() -> Unit raise {
-  mk_conj_andtm.set(@parser.parse_term("(/\\)"))
-  mk_disj_ortm.set(@parser.parse_term("(\\/)"))
+  mk_conj_andtm.set(@term_syntax.parse_term("op_slash_bslash"))
+  mk_disj_ortm.set(@term_syntax.parse_term("op_bslash_slash"))
   mk_forall_atm.set(@kernel.mk_const("forall", @list.List([])))
   mk_exists_atm.set(@kernel.mk_const("?", @list.List([])))
   // `term_match`'s dummy variable name.
