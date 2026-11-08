@@ -195,6 +195,14 @@ test "an enum's own types read before other names" {
     @term_syntax.parse_type_definition("enum A { Mk(Zz_ab, A) }"),
     @list.List([(a, @list.List([("Mk", @list.List([@parser.parse_type("A#num"), a]))]))]),
   )
+  // even one named as the syntax names a type being defined
+  let enum_a = @kernel.mk_vartype("enum A")
+  @preterm.new_type_abbrev("zz_ae", enum_a)
+  defer @preterm.remove_type_abbrev("zz_ae")
+  assert_eq(
+    @term_syntax.parse_type_definition("enum A { Mk(Zz_ae, A) }"),
+    @list.List([(a, @list.List([("Mk", @list.List([enum_a, a]))]))]),
+  )
 }
 
 ///|

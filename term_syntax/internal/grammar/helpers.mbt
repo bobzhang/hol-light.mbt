@@ -201,24 +201,38 @@ fn named_type(
 let defining : Ref[Array[String]] = Ref::{ val: [] }
 
 ///|
+/// The number of the innermost `with_defined_types` call, so its type
+/// variables are fresh.
+let generation : Ref[Int] = Ref::{ val: 0 }
+
+///|
+/// How many `with_defined_types` calls have begun.
+let generations : Ref[Int] = Ref::{ val: 0 }
+
+///|
 /// `f()`, reading the types the enum headers `spellings` name as the types
 /// being defined, before any constant or type variable.
 pub fn[T] with_defined_types(
   spellings : Array[String],
   f : () -> T raise,
 ) -> T raise {
+  let (saved, saved_generation) = (defining.val, generation.val)
+  generations.val += 1
   defining.val = spellings
+  generation.val = generations.val
   defer {
-    defining.val = []
+    defining.val = saved
+    generation.val = saved_generation
   }
   f()
 }
 
 ///|
 /// The type variable a type being defined reads as, which no type written
-/// in the syntax is: `enum Tree` for the one `enum Tree` defines.
+/// in the syntax is and, numbered by its call, no abbreviation holds:
+/// `enum Tree 3` for the one `enum Tree` defines.
 fn defined_type_var(spelling : String) -> String {
-  "enum " + spelling
+  "enum " + spelling + " " + generation.val.to_string()
 }
 
 ///|
