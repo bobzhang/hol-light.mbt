@@ -15,6 +15,7 @@
 %start term
 %start pretype
 %start type_definition
+%start record_definition
 
 %token<String> LIDENT
 %token<String> UIDENT
@@ -30,6 +31,7 @@
 %token FN "fn"
 %token MATCH "match"
 %token ENUM "enum"
+%token STRUCT "struct"
 %token FORALL "∀"
 %token EXISTS "∃"
 %token IMPLIES "→"
@@ -100,6 +102,22 @@ enum_constructors -> @list.List[(String, @list.List[@preterm.Pretype])]
 enum_constructor -> (String, @list.List[@preterm.Pretype])
   : binder { ($1, @list.List([])) }
   | binder "(" non_empty_list_commas(type_) ")" { ($1, $3) }
+  ;
+
+// a record type (Library/records' define_record_type) as a MoonBit struct:
+// `struct Point { x : Num; y : Num }`
+record_definition -> (String, @list.List[(String, @preterm.Pretype)])
+  : "struct" UIDENT "{" struct_fields "}" EOF { ($2, $4) }
+  ;
+
+// fields are separated by `;`, as enum constructors are
+struct_fields -> @list.List[(String, @preterm.Pretype)]
+  : struct_field option(";") { @list.singleton($1) }
+  | struct_field ";" struct_fields { $3.prepend($1) }
+  ;
+
+struct_field -> (String, @preterm.Pretype)
+  : binder ":" type_ { ($1, $3) }
   ;
 
 expr -> @preterm.Preterm

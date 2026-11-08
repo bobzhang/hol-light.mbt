@@ -175,3 +175,12 @@ test "type definitions" {
     ]),
   )
 }
+
+///|
+test "record definitions" {
+  let num = @kernel.mk_type("num", @list.List([]))
+  assert_eq(
+    @term_syntax.parse_record_definition("struct Point { x : Num; y : List[Num]; }"),
+    ("point", @list.List([("x", num), ("y", @kernel.mk_type("list", @list.List([num])))])),
+  )
+}

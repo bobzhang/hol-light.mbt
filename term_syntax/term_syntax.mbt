@@ -438,6 +438,22 @@ pub fn parse_type_definition(
 }
 
 ///|
+/// The record type the struct `s` defines, as Library/records'
+/// define_record_type takes it: `struct Point { x : Num; y : Num }` is the
+/// type point with fields x and y of type num.
+pub fn parse_record_definition(
+  s : String,
+) -> (String, @list.List[(String, @kernel.HolType)]) raise {
+  let toks = tokens(s)
+  ignore(@grammar.take_error())
+  let (name, fields) = @grammar.record_definition(toks) catch {
+    e => raise Failure("term syntax: " + describe(e))
+  }
+  check_semantics()
+  (lowered(name), fields.map(f => (f.0, @preterm.type_of_pretype(f.1))))
+}
+
+///|
 /// The term `s` denotes where the variables `env` names have the types it
 /// gives them, and of type `ty` when given: Library/q.ml reads its
 /// quotations so, in a goal's context. The context's variables are named
