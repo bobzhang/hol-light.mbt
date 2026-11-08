@@ -92,8 +92,8 @@ enum_decls -> @list.List[(String, String, @list.List[(String, @list.List[@preter
 // constructors): `enum Tree` defines tree; a name between backticks is the
 // HOL name verbatim, for one that starts with a capital (enum `Term`)
 enum_decl -> (String, String, @list.List[(String, @list.List[@preterm.Pretype])])
-  : "enum" UIDENT "{" enum_constructors "}" { (lowered($2), $2, $4) }
-  | "enum" VERBATIM "{" enum_constructors "}" { ($2, $2, $4) }
+  : "enum" UIDENT "{" enum_constructors "}" { (lowered($2), defined_type_var($2), $4) }
+  | "enum" VERBATIM "{" enum_constructors "}" { ($2, defined_type_var("`" + $2 + "`"), $4) }
   ;
 
 // constructors are separated by `;`, as match arms are

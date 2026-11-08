@@ -1817,28 +1817,28 @@ fn yy_action_114(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj
 
 ///|
 // file:///./grammar.mbty
-// 95|    "enum" UIDENT "{" enum_constructors "}" { (lowered($2), $2, $4) }
+// 95|    "enum" UIDENT "{" enum_constructors "}" { (lowered($2), defined_type_var($2), $4) }
 fn yy_action_115(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   guard! _args[3].0 is YYObj__list_List__String___list_List__preterm_Pretype___(
     _dollar4
   )
   YYObj__String__String___list_List__String___list_List__preterm_Pretype____(
-    ({();  (lowered(_dollar2), _dollar2, _dollar4) 
+    ({();  (lowered(_dollar2), defined_type_var(_dollar2), _dollar4) 
     })
   )
 }
 
 ///|
 // file:///./grammar.mbty
-// 96|    "enum" VERBATIM "{" enum_constructors "}" { ($2, $2, $4) }
+// 96|    "enum" VERBATIM "{" enum_constructors "}" { ($2, defined_type_var("`" + $2 + "`"), $4) }
 fn yy_action_116(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   guard! _args[3].0 is YYObj__list_List__String___list_List__preterm_Pretype___(
     _dollar4
   )
   YYObj__String__String___list_List__String___list_List__preterm_Pretype____(
-    ({();  (_dollar2, _dollar2, _dollar4) 
+    ({();  (_dollar2, defined_type_var("`" + _dollar2 + "`"), _dollar4) 
     })
   )
 }

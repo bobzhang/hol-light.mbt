@@ -33,6 +33,8 @@ pub fn type_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> @list.Li
 
 pub fn unescape(String) -> String
 
+pub fn[T] with_defined_types(Array[String], () -> T raise) -> T raise
+
 // Errors
 pub suberror ParseError {
   UnexpectedToken(Token, (Int, Int), Array[TokenKind])

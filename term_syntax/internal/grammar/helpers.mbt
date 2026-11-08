@@ -167,6 +167,11 @@ fn named_type(
     }
     return @preterm.pretype_of_type(ty)
   }
+  // a type being defined, after abbreviations as in HOL's parser (a
+  // definition of string refers to the abbreviation's char list)
+  if defined_type(name, args) is Some(ty) {
+    return ty
+  }
   let lower = lowered(name)
   // `Num` is num; a type constant whose name is capitalised already is
   // written as it is
@@ -191,6 +196,44 @@ fn named_type(
 }
 
 ///|
+/// The enum headers of the definition being read, as spelt (a verbatim name
+/// between backticks): its constructors' arguments name these types.
+let defining : Ref[Array[String]] = Ref::{ val: [] }
+
+///|
+/// `f()`, reading the types the enum headers `spellings` name as the types
+/// being defined, before any constant or type variable.
+pub fn[T] with_defined_types(
+  spellings : Array[String],
+  f : () -> T raise,
+) -> T raise {
+  defining.val = spellings
+  defer {
+    defining.val = []
+  }
+  f()
+}
+
+///|
+/// The type variable a type being defined reads as, which no type written
+/// in the syntax is: `enum Tree` for the one `enum Tree` defines.
+fn defined_type_var(spelling : String) -> String {
+  "enum " + spelling
+}
+
+///|
+fn defined_type(
+  spelling : String,
+  args : @list.List[@preterm.Pretype],
+) -> @preterm.Pretype? {
+  guard defining.val.contains(spelling) else { return None }
+  if !args.is_empty() {
+    reject("type " + spelling + " takes no arguments")
+  }
+  Some(@preterm.Utv(defined_type_var(spelling)))
+}
+
+///|
 /// The HOL name a capitalised type name stands for: num for `Num`.
 fn lowered(name : String) -> String {
   let chars = name.to_array()
@@ -205,6 +248,9 @@ fn verbatim_type(
   name : String,
   args : @list.List[@preterm.Pretype],
 ) -> @preterm.Pretype {
+  if defined_type("`" + name + "`", args) is Some(ty) {
+    return ty
+  }
   let arity = @kernel.get_type_arity(name) catch { _ => -1L }
   if arity >= 0L {
     if arity != args.length().to_int64() {

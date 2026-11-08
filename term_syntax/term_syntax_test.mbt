@@ -177,6 +177,27 @@ test "type definitions" {
 }
 
 ///|
+test "an enum's own types read before other names" {
+  // `Zz_t` between backticks is a type variable, not the type being defined
+  let defs = @term_syntax.parse_type_definition("enum Zz_t { Zl; Zb(`Zz_t`, Zz_t) }")
+  let zz_t = @kernel.mk_vartype("zz_t")
+  assert_eq(
+    defs,
+    @list.List([
+      (zz_t, @list.List([("Zl", @list.List([])), ("Zb", @list.List([@kernel.mk_vartype("Zz_t"), zz_t]))])),
+    ]),
+  )
+  // nor is a type variable an abbreviation stands for
+  @preterm.new_type_abbrev("zz_ab", @parser.parse_type("A#num"))
+  defer @preterm.remove_type_abbrev("zz_ab")
+  let a = @kernel.mk_vartype("a")
+  assert_eq(
+    @term_syntax.parse_type_definition("enum A { Mk(Zz_ab, A) }"),
+    @list.List([(a, @list.List([("Mk", @list.List([@parser.parse_type("A#num"), a]))]))]),
+  )
+}
+
+///|
 test "verbatim type names" {
   // a HOL type whose name starts with a capital, beside one that doesn't
   @kernel.new_type("zz_v", 0L)
