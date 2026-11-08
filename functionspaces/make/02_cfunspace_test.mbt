@@ -81063,7 +81063,7 @@ test "Functionspaces/cfunspace matches Functionspaces/cfunspace.ml" {
       #|  (complex_div : (Cart[Real, Tybit0[Unit]], Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
       #|  (complex_pow : (Cart[Real, Tybit0[Unit]], Num) -> Cart[Real, Tybit0[Unit]])
       #|  (complex_inv : (Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]])
-      #|  ((x*y)*(z*t)*u)*v = (x*z)*(u*t)*(v*y)
+      #|  (x : Cart[Real, Tybit0[Unit]]) * (y : Cart[Real, Tybit0[Unit]]) * ((z : Cart[Real, Tybit0[Unit]]) * (t : Cart[Real, Tybit0[Unit]]) * (u : Cart[Real, Tybit0[Unit]])) * (v : Cart[Real, Tybit0[Unit]]) == x * z * (u * t * (v * y))
       #|  ((A : Bool) \226\134\146 (B : Bool)) \226\134\146 (A \226\134\146 (C : Bool)) == (A && B \226\134\146 C)
       #|  \226\136\128 s : ((_) -> Cart[Real, Tybit0[Unit]]) -> Bool, \226\136\128 inprod : ((_) -> Cart[Real, Tybit0[Unit]], (_) -> Cart[Real, Tybit0[Unit]]) -> Cart[Real, Tybit0[Unit]], is_inner_space((s, inprod)) \226\134\146 (\226\136\128 x : (_) -> Cart[Real, Tybit0[Unit]], \226\136\128 y : (_) -> Cart[Real, Tybit0[Unit]], IN(x, s) && IN(y, s) \226\134\146 pow(norm(inprod(x, y)), 2) <= real_of_complex(inprod(x, x)) * real_of_complex(inprod(y, y)))
       #|  real
