@@ -19,10 +19,6 @@ using @list {type List}
 ///|
 using @lib {type Cell}
 
-///|
-fn q(s : String) -> Term raise {
-  @parser.parse_term(s)
-}
 
 ///|
 fn th_cell(name : String) -> Cell[Thm] {
@@ -1087,10 +1083,10 @@ fn set_verbose_symbols() -> Unit raise {
   for b in ["exists", "existsunique"] {
     @printer.parse_as_binder(b)
   }
-  @preterm.override_interface("true", q("T"))
-  @preterm.override_interface("false", q("F"))
-  @preterm.override_interface("exists", q("(?):(A->bool)->bool"))
-  @preterm.override_interface("existsunique", q("(?!):(A->bool)->bool"))
+  @preterm.override_interface("true", @parser.parse_term("T"))
+  @preterm.override_interface("false", @parser.parse_term("F"))
+  @preterm.override_interface("exists", @parser.parse_term("(?):(A->bool)->bool"))
+  @preterm.override_interface("existsunique", @parser.parse_term("(?!):(A->bool)->bool"))
 }
 
 // ---------------------------------------------------------------------------
@@ -1098,8 +1094,8 @@ fn set_verbose_symbols() -> Unit raise {
 // ---------------------------------------------------------------------------
 
 ///|
-fn nbd(s : String) -> Thm raise {
-  @kernel.new_basic_definition(q(s))
+fn nbd(t : Term) -> Thm raise {
+  @kernel.new_basic_definition(t)
 }
 
 ///|
@@ -1119,15 +1115,15 @@ fn load_steps() -> Unit raise {
   @printer.parse_as_infix("\\/", (6, "right"))
   @printer.parse_as_infix("/\\", (8, "right"))
   @printer.parse_as_infix("<=>", (2, "right"))
-  @preterm.override_interface("<=>", q("(=):bool->bool->bool"))
+  @preterm.override_interface("<=>", @parser.parse_term("(=):bool->bool->bool"))
   @printer.parse_as_infix("=", (12, "right"))
-  mk_iff_eq_tm.set(q("(<=>)"))
+  mk_iff_eq_tm.set(@parser.parse_term("(<=>)"))
   // T
-  t_def_c.set(nbd("T = ((\\p:bool. p) = (\\p:bool. p))"))
+  t_def_c.set(nbd(@parser.parse_term("T = ((\\p:bool. p) = (\\p:bool. p))")))
   // `EQ_MP (SYM T_DEF) (REFL `\p:bool. p`)`: arguments right to left.
-  let refl_id = @kernel.refl(q("\\p:bool. p"))
+  let refl_id = @kernel.refl(@parser.parse_term("\\p:bool. p"))
   truth_c.set(@kernel.eq_mp(@equal.sym(t_def()), refl_id))
-  let t = q("t:bool")
+  let t = @parser.parse_term("t:bool")
   eqt_intro_t.set(t)
   {
     let th1 = @kernel.deduct_antisym_rule(@kernel.assume_rule(t), truth())
@@ -1136,18 +1132,18 @@ fn load_steps() -> Unit raise {
   }
   // /\
   and_def_c.set(
-    nbd("(/\\) = \\p q. (\\f:bool->bool->bool. f p q) = (\\f. f T T)"),
+    nbd(@parser.parse_term("(/\\) = \\p q. (\\f:bool->bool->bool. f p q) = (\\f. f T T)")),
   )
   {
-    let f = q("f:bool->bool->bool")
-    let p = q("p:bool")
-    let qv = q("q:bool")
+    let f = @parser.parse_term("f:bool->bool->bool")
+    let p = @parser.parse_term("p:bool")
+    let qv = @parser.parse_term("q:bool")
     let pth1 = {
       let th1 = rand_beta(@equal.ap_thm(and_def(), p))
       let th2 = rand_beta(@equal.ap_thm(th1, qv))
       let th3 = @kernel.eq_mp(th2, @kernel.assume_rule(mk_conj(p, qv)))
       eqt_elim(
-        @equal.beta_rule(@equal.ap_thm(th3, q("\\(p:bool) (q:bool). q"))),
+        @equal.beta_rule(@equal.ap_thm(th3, @parser.parse_term("\\(p:bool) (q:bool). q"))),
       )
     }
     let pth2 = {
@@ -1163,27 +1159,27 @@ fn load_steps() -> Unit raise {
     conj_q.set(qv)
     conj_pth.set(@kernel.deduct_antisym_rule(pth1, pth2))
   }
-  let conjunct_pth = (cp : Cell[Term], cq : Cell[Term], sel : String) => {
-    let p = q("P:bool")
-    let qv = q("Q:bool")
+  let conjunct_pth = (cp : Cell[Term], cq : Cell[Term], sel : () -> Term raise) => {
+    let p = @parser.parse_term("P:bool")
+    let qv = @parser.parse_term("Q:bool")
     cp.set(p)
     cq.set(qv)
     let th1 = rand_beta(@equal.ap_thm(and_def(), p))
     let th2 = rand_beta(@equal.ap_thm(th1, qv))
     let th3 = @kernel.eq_mp(th2, @kernel.assume_rule(mk_conj(p, qv)))
-    eqt_elim(@equal.beta_rule(@equal.ap_thm(th3, q(sel))))
+    eqt_elim(@equal.beta_rule(@equal.ap_thm(th3, sel())))
   }
   conjunct1_pth.set(
-    conjunct_pth(conjunct1_p, conjunct1_q, "\\(p:bool) (q:bool). p"),
+    conjunct_pth(conjunct1_p, conjunct1_q, () => @parser.parse_term("\\(p:bool) (q:bool). p")),
   )
   conjunct2_pth.set(
-    conjunct_pth(conjunct2_p, conjunct2_q, "\\(p:bool) (q:bool). q"),
+    conjunct_pth(conjunct2_p, conjunct2_q, () => @parser.parse_term("\\(p:bool) (q:bool). q")),
   )
   // ==>
-  imp_def_c.set(nbd("(==>) = \\p q. p /\\ q <=> p"))
+  imp_def_c.set(nbd(@parser.parse_term("(==>) = \\p q. p /\\ q <=> p")))
   {
-    let p = q("p:bool")
-    let qv = q("q:bool")
+    let p = @parser.parse_term("p:bool")
+    let qv = @parser.parse_term("q:bool")
     let pth = {
       let th1 = @equal.beta_rule(@equal.ap_thm(@equal.ap_thm(imp_def(), p), qv))
       let th2 = conj(@kernel.assume_rule(p), @kernel.assume_rule(qv))
@@ -1200,8 +1196,8 @@ fn load_steps() -> Unit raise {
     mp_rth.set(@kernel.deduct_antisym_rule(pth, qth))
   }
   {
-    let p = q("p:bool")
-    let qv = q("q:bool")
+    let p = @parser.parse_term("p:bool")
+    let qv = @parser.parse_term("q:bool")
     disch_p.set(p)
     disch_q.set(qv)
     disch_pth.set(
@@ -1211,9 +1207,9 @@ fn load_steps() -> Unit raise {
     )
   }
   {
-    let p = q("p:bool")
-    let qv = q("q:bool")
-    let imp_tm = q("(==>)")
+    let p = @parser.parse_term("p:bool")
+    let qv = @parser.parse_term("q:bool")
+    let imp_tm = @parser.parse_term("(==>)")
     let pq = mk_imp(p, qv)
     let qp = mk_imp(qv, p)
     let (pth1, pth2) = conj_pair(@kernel.assume_rule(mk_conj(pq, qp)))
@@ -1235,7 +1231,7 @@ fn load_steps() -> Unit raise {
     imp_antisym_pth.set(@kernel.deduct_antisym_rule(pth6, pth3))
   }
   {
-    let peq = q("p <=> q")
+    let peq = @parser.parse_term("p <=> q")
     let (p, qv) = dest_iff(peq)
     let pth1 = disch(
       peq,
@@ -1257,8 +1253,8 @@ fn load_steps() -> Unit raise {
     eq_imp_pth2.set(pth2)
   }
   {
-    let pq = q("p ==> q")
-    let qr = q("q ==> r")
+    let pq = @parser.parse_term("p ==> q")
+    let qr = @parser.parse_term("q ==> r")
     let (p, qv) = @basics.dest_imp(pq)
     let r = @kernel.rand(qr)
     let pth = @lib.itlist(
@@ -1275,14 +1271,14 @@ fn load_steps() -> Unit raise {
     imp_trans_pth.set(pth)
   }
   // forall
-  forall_def_c.set(nbd("(forall) = \\P:A->bool. P = \\x. T"))
+  forall_def_c.set(nbd(@parser.parse_term("(forall) = \\P:A->bool. P = \\x. T")))
   {
-    let p = q("P:A->bool")
-    let x = q("x:A")
+    let p = @parser.parse_term("P:A->bool")
+    let x = @parser.parse_term("x:A")
     // `EQ_MP (AP_THM FORALL_DEF `P`) (ASSUME `(!)P`)`: right to left.
-    let a = @kernel.assume_rule(q("(forall)(P:A->bool)"))
-    let th1 = @kernel.eq_mp(@equal.ap_thm(forall_def(), q("P:A->bool")), a)
-    let xv = q("x:A")
+    let a = @kernel.assume_rule(@parser.parse_term("(forall)(P:A->bool)"))
+    let th1 = @kernel.eq_mp(@equal.ap_thm(forall_def(), @parser.parse_term("P:A->bool")), a)
+    let xv = @parser.parse_term("x:A")
     let th2 = @equal.ap_thm(@equal.conv_rule(@equal.beta_conv, th1), xv)
     let th3 = rand_beta(th2)
     spec_p.set(p)
@@ -1290,56 +1286,61 @@ fn load_steps() -> Unit raise {
     spec_pth.set(disch_all(eqt_elim(th3)))
   }
   gen_pth.set(
-    @equal.sym(rand_beta(@equal.ap_thm(forall_def(), q("P:A->bool")))),
+    @equal.sym(rand_beta(@equal.ap_thm(forall_def(), @parser.parse_term("P:A->bool")))),
   )
   // ?
-  exists_def_c.set(nbd("(?) = \\P:A->bool. forall q. (forall x. P x ==> q) ==> q"))
+  exists_def_c.set(nbd(@parser.parse_term("(?) = \\P:A->bool. forall q. (forall x. P x ==> q) ==> q")))
   {
-    let p = q("P:A->bool")
-    let x = q("x:A")
+    let p = @parser.parse_term("P:A->bool")
+    let x = @parser.parse_term("x:A")
     let th1 = rand_beta(@equal.ap_thm(exists_def(), p))
     // `SPEC `x:A` (ASSUME `!x:A. P x ==> Q`)`: right to left.
-    let a = @kernel.assume_rule(q("forall x:A. P x ==> Q"))
-    let th2 = spec(q("x:A"), a)
+    let a = @kernel.assume_rule(@parser.parse_term("forall x:A. P x ==> Q"))
+    let th2 = spec(@parser.parse_term("x:A"), a)
     // `DISCH `!x. ...` (MP th2 (ASSUME `(P:A->bool) x`))`: right to left.
-    let m = mp(th2, @kernel.assume_rule(q("(P:A->bool) x")))
-    let th3 = disch(q("forall x:A. P x ==> Q"), m)
+    let m = mp(th2, @kernel.assume_rule(@parser.parse_term("(P:A->bool) x")))
+    let th3 = disch(@parser.parse_term("forall x:A. P x ==> Q"), m)
     // `EQ_MP (SYM th1) (GEN `Q:bool` th3)`: right to left.
-    let g = gen(q("Q:bool"), th3)
+    let g = gen(@parser.parse_term("Q:bool"), th3)
     exists_p.set(p)
     exists_x.set(x)
     exists_pth.set(@kernel.eq_mp(@equal.sym(th1), g))
   }
   {
-    let p = q("P:A->bool")
-    let qv = q("Q:bool")
+    let p = @parser.parse_term("P:A->bool")
+    let qv = @parser.parse_term("Q:bool")
     let th1 = rand_beta(@equal.ap_thm(exists_def(), p))
     let u = undisch(eq_imp_rule(th1).0)
-    let th2 = spec(q("Q:bool"), u)
+    let th2 = spec(@parser.parse_term("Q:bool"), u)
     let u2 = undisch(th2)
     choose_p.set(p)
     choose_q.set(qv)
-    choose_pth.set(disch_all(disch(q("(?) (P:A->bool)"), u2)))
+    choose_pth.set(disch_all(disch(@parser.parse_term("(?) (P:A->bool)"), u2)))
   }
   // \/
-  or_def_c.set(nbd("(\\/) = \\p q. forall r. (p ==> r) ==> (q ==> r) ==> r"))
+  or_def_c.set(nbd(@parser.parse_term("(\\/) = \\p q. forall r. (p ==> r) ==> (q ==> r) ==> r")))
   let disj_pth = (left : Bool) => {
-    let p = q("P:bool")
-    let qv = q("Q:bool")
-    let th1 = rand_beta(@equal.ap_thm(or_def(), q("P:bool")))
-    let th2 = rand_beta(@equal.ap_thm(th1, q("Q:bool")))
+    let p = @parser.parse_term("P:bool")
+    let qv = @parser.parse_term("Q:bool")
+    let th1 = rand_beta(@equal.ap_thm(or_def(), @parser.parse_term("P:bool")))
+    let th2 = rand_beta(@equal.ap_thm(th1, @parser.parse_term("Q:bool")))
     // `MP (ASSUME `X ==> t`) (ASSUME `X:bool`)`: right to left.
-    let (imp_s, x_s) = if left {
-      ("P ==> t", "P:bool")
+    let x_t = if left {
+      @parser.parse_term("P:bool")
     } else {
-      ("Q ==> t", "Q:bool")
+      @parser.parse_term("Q:bool")
     }
-    let ax = @kernel.assume_rule(q(x_s))
-    let th3 = mp(@kernel.assume_rule(q(imp_s)), ax)
+    let ax = @kernel.assume_rule(x_t)
+    let imp_t = if left {
+      @parser.parse_term("P ==> t")
+    } else {
+      @parser.parse_term("Q ==> t")
+    }
+    let th3 = mp(@kernel.assume_rule(imp_t), ax)
     // `GEN `t` (DISCH `P ==> t` (DISCH `Q ==> t` th3))`: innermost first.
-    let d1 = disch(q("Q ==> t"), th3)
-    let d2 = disch(q("P ==> t"), d1)
-    let th4 = gen(q("t:bool"), d2)
+    let d1 = disch(@parser.parse_term("Q ==> t"), th3)
+    let d2 = disch(@parser.parse_term("P ==> t"), d1)
+    let th4 = gen(@parser.parse_term("t:bool"), d2)
     (p, qv, @kernel.eq_mp(@equal.sym(th2), th4))
   }
   {
@@ -1355,64 +1356,64 @@ fn load_steps() -> Unit raise {
     disj2_pth.set(pth)
   }
   {
-    let p = q("P:bool")
-    let qv = q("Q:bool")
-    let r = q("R:bool")
-    let th1 = rand_beta(@equal.ap_thm(or_def(), q("P:bool")))
-    let th2 = rand_beta(@equal.ap_thm(th1, q("Q:bool")))
-    let e = @kernel.eq_mp(th2, @kernel.assume_rule(q("P \\/ Q")))
-    let th3 = spec(q("R:bool"), e)
+    let p = @parser.parse_term("P:bool")
+    let qv = @parser.parse_term("Q:bool")
+    let r = @parser.parse_term("R:bool")
+    let th1 = rand_beta(@equal.ap_thm(or_def(), @parser.parse_term("P:bool")))
+    let th2 = rand_beta(@equal.ap_thm(th1, @parser.parse_term("Q:bool")))
+    let e = @kernel.eq_mp(th2, @kernel.assume_rule(@parser.parse_term("P \\/ Q")))
+    let th3 = spec(@parser.parse_term("R:bool"), e)
     disj_cases_p.set(p)
     disj_cases_q.set(qv)
     disj_cases_r.set(r)
     disj_cases_pth.set(undisch(undisch(th3)))
   }
   // F and ~
-  f_def_c.set(nbd("F = forall p:bool. p"))
-  not_def_c.set(nbd("(~) = \\p. p ==> F"))
-  mk_neg_tm.set(q("(~)"))
+  f_def_c.set(nbd(@parser.parse_term("F = forall p:bool. p")))
+  not_def_c.set(nbd(@parser.parse_term("(~) = \\p. p ==> F")))
+  mk_neg_tm.set(@parser.parse_term("(~)"))
   {
-    let p = q("P:bool")
+    let p = @parser.parse_term("P:bool")
     not_elim_p.set(p)
     not_elim_pth.set(rand_beta(@equal.ap_thm(not_def(), p)))
   }
   {
-    let p = q("P:bool")
+    let p = @parser.parse_term("P:bool")
     not_intro_p.set(p)
     not_intro_pth.set(@equal.sym(rand_beta(@equal.ap_thm(not_def(), p))))
   }
   {
-    let p = q("P:bool")
-    let th1 = not_elim(@kernel.assume_rule(q("~ P")))
+    let p = @parser.parse_term("P:bool")
+    let th1 = not_elim(@kernel.assume_rule(@parser.parse_term("~ P")))
     // `DISCH `F` (SPEC P (EQ_MP F_DEF (ASSUME `F`)))`: right to left.
-    let s = spec(p, @kernel.eq_mp(f_def(), @kernel.assume_rule(q("F"))))
-    let th2 = disch(q("F"), s)
+    let s = spec(p, @kernel.eq_mp(f_def(), @kernel.assume_rule(@parser.parse_term("F"))))
+    let th2 = disch(@parser.parse_term("F"), s)
     eqf_intro_p.set(p)
     eqf_intro_pth.set(disch_all(imp_antisym_rule(th1, th2)))
   }
   {
-    let p = q("P:bool")
+    let p = @parser.parse_term("P:bool")
     // `EQ_MP (ASSUME `P = F`) (ASSUME `P:bool`)`: right to left.
-    let ap = @kernel.assume_rule(q("P:bool"))
-    let th1 = @kernel.eq_mp(@kernel.assume_rule(q("P = F")), ap)
+    let ap = @kernel.assume_rule(@parser.parse_term("P:bool"))
+    let th1 = @kernel.eq_mp(@kernel.assume_rule(@parser.parse_term("P = F")), ap)
     let e = @kernel.eq_mp(f_def(), th1)
-    let th2 = disch(p, spec(q("F"), e))
+    let th2 = disch(p, spec(@parser.parse_term("F"), e))
     eqf_elim_p.set(p)
     eqf_elim_pth.set(disch_all(not_intro(th2)))
   }
   {
-    let p = q("P:bool")
-    let f_tm = q("F")
+    let p = @parser.parse_term("P:bool")
+    let f_tm = @parser.parse_term("F")
     contr_p.set(p)
     contr_f_tm.set(f_tm)
-    contr_pth.set(spec(p, @kernel.eq_mp(f_def(), @kernel.assume_rule(q("F")))))
+    contr_pth.set(spec(p, @kernel.eq_mp(f_def(), @kernel.assume_rule(@parser.parse_term("F")))))
   }
   // ?!
   exists_unique_def_c.set(
-    nbd("(?!) = \\P:A->bool. ((?) P) /\\ (forall x y. P x /\\ P y ==> x = y)"),
+    nbd(@parser.parse_term("(?!) = \\P:A->bool. ((?) P) /\\ (forall x y. P x /\\ P y ==> x = y)")),
   )
   {
-    let p = q("P:A->bool")
+    let p = @parser.parse_term("P:A->bool")
     let th1 = rand_beta(@equal.ap_thm(exists_unique_def(), p))
     let th2 = undisch(eq_imp_rule(th1).0)
     existence_p.set(p)
