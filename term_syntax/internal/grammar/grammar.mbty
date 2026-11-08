@@ -117,8 +117,8 @@ constructor_name -> String
 
 // a record type (Library/records' define_record_type) as a MoonBit struct:
 // `struct Point { x : Num; y : Num }`
-record_definition -> (String, @list.List[(String, @preterm.Pretype)])
-  : "struct" UIDENT "{" struct_fields "}" EOF { ($2, $4) }
+record_definition -> (String, String, @list.List[(String, @preterm.Pretype)])
+  : "struct" UIDENT "{" struct_fields "}" EOF { (lowered($2), defined_type_var($2), $4) }
   ;
 
 // fields are separated by `;`, as enum constructors are

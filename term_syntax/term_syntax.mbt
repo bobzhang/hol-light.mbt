@@ -459,12 +459,27 @@ pub fn parse_record_definition(
   s : String,
 ) -> (String, @list.List[(String, @kernel.HolType)]) raise {
   let toks = tokens(s)
-  ignore(@grammar.take_error())
-  let (name, fields) = @grammar.record_definition(toks) catch {
-    e => raise Failure("term syntax: " + describe(e))
+  let spellings = if toks is [(STRUCT, _, _), (UIDENT(name), _, _), ..] {
+    [name]
+  } else {
+    []
   }
+  ignore(@grammar.take_error())
+  let (name, marker, fields) = @grammar.with_defined_types(spellings, () => {
+    @grammar.record_definition(toks) catch {
+      e => raise Failure("term syntax: " + describe(e))
+    }
+  })
   check_semantics()
-  (lowered(name), fields.map(f => (f.0, @preterm.type_of_pretype(f.1))))
+  // the record's own type reads as a type variable, as enums' do
+  let defined = @list.List([(@kernel.mk_vartype(name), @kernel.mk_vartype(marker))])
+  (
+    name,
+    fields.map(f => (
+      f.0,
+      @kernel.type_subst(defined, @preterm.type_of_pretype(f.1)),
+    )),
+  )
 }
 
 ///|

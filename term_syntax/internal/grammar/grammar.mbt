@@ -327,13 +327,6 @@ priv suberror YYObj__String___list_List__preterm_Pretype__ {
 }
 
 ///|
-priv suberror YYObj__String___list_List__String___preterm_Pretype___ {
-  YYObj__String___list_List__String___preterm_Pretype___(
-    (String, @list.List[(String, @preterm.Pretype)])
-  )
-}
-
-///|
 priv suberror YYObj__String___preterm_Pretype_ {
   YYObj__String___preterm_Pretype_((String, @preterm.Pretype))
 }
@@ -342,6 +335,13 @@ priv suberror YYObj__String___preterm_Pretype_ {
 priv suberror YYObj__String__String___list_List__String___list_List__preterm_Pretype____ {
   YYObj__String__String___list_List__String___list_List__preterm_Pretype____(
     (String, String, @list.List[(String, @list.List[@preterm.Pretype])])
+  )
+}
+
+///|
+priv suberror YYObj__String__String___list_List__String___preterm_Pretype___ {
+  YYObj__String__String___list_List__String___preterm_Pretype___(
+    (String, String, @list.List[(String, @preterm.Pretype)])
   )
 }
 
@@ -1956,12 +1956,12 @@ fn yy_action_124(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj
 
 ///|
 // file:///./grammar.mbty
-// 121|    "struct" UIDENT "{" struct_fields "}" EOF { ($2, $4) }
+// 121|    "struct" UIDENT "{" struct_fields "}" EOF { (lowered($2), defined_type_var($2), $4) }
 fn yy_action_125(_last_pos : Int, _args : ArrayView[(YYObj, Int, Int)]) -> YYObj {
   guard! _args[1].0 is YYObj_String(_dollar2)
   guard! _args[3].0 is YYObj__list_List__String___preterm_Pretype__(_dollar4)
-  YYObj__String___list_List__String___preterm_Pretype___(
-    ({();  (_dollar2, _dollar4) 
+  YYObj__String__String___list_List__String___preterm_Pretype___(
+    ({();  (lowered(_dollar2), defined_type_var(_dollar2), _dollar4) 
     })
   )
 }
@@ -6475,14 +6475,14 @@ pub fn type_definition(tokens : Array[(Token, Int, Int)], initial_pos? : Int) ->
 
 ///|
 pub fn record_definition(tokens : Array[(Token, Int, Int)], initial_pos? : Int) -> (
-  String, @list.List[(String, @preterm.Pretype)]
+  String, String, @list.List[(String, @preterm.Pretype)]
 ) raise ParseError {
   yy_parse(
     tokens, yy_state_0,
     (it) =>
       ({
         ()
-        guard! it is YYObj__String___list_List__String___preterm_Pretype___(
+        guard! it is YYObj__String__String___list_List__String___preterm_Pretype___(
           result
         )
         result

@@ -183,6 +183,12 @@ test "record definitions" {
     @term_syntax.parse_record_definition("struct Point { x : Num; y : List[Num]; }"),
     ("point", @list.List([("x", num), ("y", @kernel.mk_type("list", @list.List([num])))])),
   )
+  // a field referring to the record reads as the type being defined
+  let zz_r = @kernel.mk_vartype("zz_r")
+  assert_eq(
+    @term_syntax.parse_record_definition("struct Zz_r { kids : List[Zz_r] }"),
+    ("zz_r", @list.List([("kids", @kernel.mk_type("list", @list.List([zz_r])))])),
+  )
 }
 
 ///|

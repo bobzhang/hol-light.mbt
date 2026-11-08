@@ -19,7 +19,7 @@ pub let no_guard_mark : String
 
 pub fn pretype(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Pretype raise ParseError
 
-pub fn record_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> (String, @list.List[(String, @preterm.Pretype)]) raise ParseError
+pub fn record_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> (String, String, @list.List[(String, @preterm.Pretype)]) raise ParseError
 
 pub let set_abs_mark : String
 
