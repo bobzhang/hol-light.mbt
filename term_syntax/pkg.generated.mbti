@@ -5,6 +5,7 @@ import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/debug",
+  "moonbitlang/core/list",
   "moonbitlang/core/ref",
 }
 
@@ -18,6 +19,8 @@ pub fn parse_preterm(String) -> @preterm.Preterm raise
 pub fn parse_term(String) -> @kernel.Term raise
 
 pub fn parse_type(String) -> @kernel.HolType raise
+
+pub fn parse_type_definition(String) -> @list.List[(@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])])] raise
 
 pub fn print_term(@kernel.Term) -> String raise Unprintable
 

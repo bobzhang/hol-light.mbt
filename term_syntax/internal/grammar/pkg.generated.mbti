@@ -4,6 +4,7 @@ package "bobzhang/hol_light/term_syntax/internal/grammar"
 import {
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/debug",
+  "moonbitlang/core/list",
 }
 
 // Values
@@ -24,6 +25,8 @@ pub let set_compr_mark : String
 pub fn take_error() -> String?
 
 pub fn term(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Preterm raise ParseError
+
+pub fn type_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> @list.List[(String, @list.List[(String, @list.List[@preterm.Pretype])])] raise ParseError
 
 pub fn unescape(String) -> String
 
@@ -48,6 +51,7 @@ pub(all) enum Token {
   ELSE
   FN
   MATCH
+  ENUM
   FORALL
   EXISTS
   IMPLIES
@@ -88,6 +92,7 @@ pub(all) enum TokenKind {
   TK_ELSE
   TK_FN
   TK_MATCH
+  TK_ENUM
   TK_FORALL
   TK_EXISTS
   TK_IMPLIES
