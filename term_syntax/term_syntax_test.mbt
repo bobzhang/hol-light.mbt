@@ -146,3 +146,29 @@ test "a context variable named like a constant means the variable" {
   )
   inspect(t == @kernel.mk_var("select", @kernel.bool_ty), content="true")
 }
+
+///|
+test "type definitions" {
+  let tree = @kernel.mk_vartype("tree")
+  let num = @kernel.mk_type("num", @list.List([]))
+  assert_eq(
+    @term_syntax.parse_type_definition("enum Tree { Leaf(Num); Node(Tree, Tree) }"),
+    @list.List([
+      (tree, @list.List([("Leaf", @list.List([num])), ("Node", @list.List([tree, tree]))])),
+    ]),
+  )
+  // mutually recursive types, symbolic and nullary constructors
+  let defs = @term_syntax.parse_type_definition(
+    "enum Form { False; `&&`(Form, Form); All(Num, List[Term]) } enum Term { V(Num); Fn(Num, List[Term]); }",
+  )
+  let term = @kernel.mk_vartype("term")
+  let form = @kernel.mk_vartype("form")
+  let terms = @kernel.mk_type("list", @list.List([term]))
+  assert_eq(
+    defs,
+    @list.List([
+      (form, @list.List([("False", @list.List([])), ("&&", @list.List([form, form])), ("All", @list.List([num, terms]))])),
+      (term, @list.List([("V", @list.List([num])), ("Fn", @list.List([num, terms]))])),
+    ]),
+  )
+}
