@@ -18,6 +18,8 @@ pub fn parse_preterm(String) -> @preterm.Preterm raise
 
 pub fn parse_term(String) -> @kernel.Term raise
 
+pub fn parse_term_in_context(@list.List[(String, @preterm.Pretype)], String, ty? : @preterm.Pretype) -> @kernel.Term raise
+
 pub fn parse_type(String) -> @kernel.HolType raise
 
 pub fn parse_type_definition(String) -> @list.List[(@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])])] raise
