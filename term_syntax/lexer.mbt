@@ -76,6 +76,14 @@ fn tokens(s : String) -> Array[(@grammar.Token, Int, Int)] raise {
         toks.push((RAWIDENT(name), at(input), at(rest)))
         continue rest
       }
+      // a HOL name verbatim, as types (`Term`) and constructors (`module`)
+      // are written when the syntax would otherwise read another
+      (re"^`[A-Za-z][A-Za-z0-9_]*'*`" as raw, after=rest) => {
+        toks.push(
+          (VERBATIM(raw[1:raw.length() - 1].to_owned()), at(input), at(rest)),
+        )
+        continue rest
+      }
       (re"^[0-9]+" as digits, after=rest) => {
         toks.push((INT(digits.to_owned()), at(input), at(rest)))
         continue rest

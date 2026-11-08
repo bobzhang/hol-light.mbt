@@ -20,6 +20,7 @@
 %token<String> LIDENT
 %token<String> UIDENT
 %token<String> RAWIDENT
+%token<String> VERBATIM
 %token<String> INT
 %token<String> INFIX1
 %token<String> INFIX3
@@ -80,17 +81,21 @@ pretype -> @preterm.Pretype
 // an inductive type definition (ind_types' define_type) as MoonBit enums:
 // `enum Tree { Leaf(Num); Node(Tree, Tree) }`, mutually recursive types one
 // enum after another
-type_definition -> @list.List[(String, @list.List[(String, @list.List[@preterm.Pretype])])]
+type_definition -> @list.List[(String, String, @list.List[(String, @list.List[@preterm.Pretype])])]
   : enum_decls EOF { $1 }
   ;
 
-enum_decls -> @list.List[(String, @list.List[(String, @list.List[@preterm.Pretype])])]
+enum_decls -> @list.List[(String, String, @list.List[(String, @list.List[@preterm.Pretype])])]
   : enum_decl { @list.singleton($1) }
   | enum_decl enum_decls { $2.prepend($1) }
   ;
 
-enum_decl -> (String, @list.List[(String, @list.List[@preterm.Pretype])])
-  : "enum" UIDENT "{" enum_constructors "}" { ($2, $4) }
+// (the HOL type's name, the type variable its constructors refer to it by,
+// constructors): `enum Tree` defines tree; a name between backticks is the
+// HOL name verbatim, for one that starts with a capital (enum `Term`)
+enum_decl -> (String, String, @list.List[(String, @list.List[@preterm.Pretype])])
+  : "enum" UIDENT "{" enum_constructors "}" { (lowered($2), $2, $4) }
+  | "enum" VERBATIM "{" enum_constructors "}" { ($2, $2, $4) }
   ;
 
 // constructors are separated by `;`, as match arms are
@@ -99,9 +104,15 @@ enum_constructors -> @list.List[(String, @list.List[@preterm.Pretype])]
   | enum_constructor ";" enum_constructors { $3.prepend($1) }
   ;
 
+// a constructor named like a keyword is written between backticks (`module`)
 enum_constructor -> (String, @list.List[@preterm.Pretype])
-  : binder { ($1, @list.List([])) }
-  | binder "(" non_empty_list_commas(type_) ")" { ($1, $3) }
+  : constructor_name { ($1, @list.List([])) }
+  | constructor_name "(" non_empty_list_commas(type_) ")" { ($1, $3) }
+  ;
+
+constructor_name -> String
+  : binder { $1 }
+  | VERBATIM { $1 }
   ;
 
 // a record type (Library/records' define_record_type) as a MoonBit struct:
@@ -264,6 +275,7 @@ simple_type -> @preterm.Pretype
   : "(" type_ "," non_empty_list_commas(type_) ")" { tuple_type($4.prepend($2)) }
   | "(" type_ ")" { $2 }
   | UIDENT optional_type_arguments { named_type($1, $2) }
+  | VERBATIM optional_type_arguments { verbatim_type($1, $2) }
   | INT { finite_type($1) }
   | "_" { @preterm.dpty }
   ;

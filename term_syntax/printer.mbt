@@ -87,6 +87,9 @@ fn lowered(name : String) -> String {
 fn reads_as_type(s : String) -> String? {
   if s == "Unit" && !is_type_constant("unit") {
     Some("1")
+  } else if @grammar.type_abbreviation(s) is Some(_) {
+    // an abbreviation, which names neither a constant nor a variable
+    Some("")
   } else if is_type_constant(lowered(s)) {
     Some(lowered(s))
   } else if is_type_constant(s) {
@@ -103,6 +106,11 @@ fn type_name(name : String) -> String raise Unprintable {
     if is_ident(s) && s.to_array()[0] is ('A'..='Z') && reads_as_type(s) == Some(name) {
       return s
     }
+  }
+  // the name verbatim between backticks, as `List` for a type HOL calls List
+  // beside list
+  if is_ident(name) && name.to_array()[0] is ('A'..='Z' | 'a'..='z') {
+    return "`" + name + "`"
   }
   raise Unprintable("type constant " + name)
 }
