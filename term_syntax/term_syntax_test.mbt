@@ -135,3 +135,14 @@ test "parse_term_in_context types free variables from the context" {
   )
   inspect(@term_syntax.print_term(e), content="(x : Bool) && (z : Bool)")
 }
+
+///|
+test "a context variable named like a constant means the variable" {
+  let bool_pty = @preterm.pretype_of_type(@kernel.bool_ty)
+  let t = @term_syntax.parse_term_in_context(
+    @list.List([("select", bool_pty)]),
+    "select",
+    ty=bool_pty,
+  )
+  inspect(t == @kernel.mk_var("select", @kernel.bool_ty), content="true")
+}
