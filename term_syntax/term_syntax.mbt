@@ -395,3 +395,26 @@ pub fn parse_type(s : String) -> @kernel.HolType raise {
   }
   @preterm.type_of_pretype(pty)
 }
+
+///|
+/// The term `s` denotes where the variables `env` names have the types it
+/// gives them, and of type `ty` when given: Library/q.ml reads its
+/// quotations so, in a goal's context. Not recorded as a quotation.
+pub fn parse_term_in_context(
+  env : @list.List[(String, @preterm.Pretype)],
+  s : String,
+  ty? : @preterm.Pretype,
+) -> @kernel.Term raise {
+  fn go() -> @kernel.Term raise {
+    let ptm = match ty {
+      Some(ty) => @preterm.Preterm::Typing(parse_preterm(s), ty)
+      None => parse_preterm(s)
+    }
+    unalias_binders(@preterm.term_of_preterm(@preterm.retypecheck(env, ptm)))
+  }
+  if fixed_resolution.val {
+    with_fixed_interface(go)
+  } else {
+    go()
+  }
+}
