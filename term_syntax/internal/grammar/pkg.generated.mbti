@@ -44,7 +44,7 @@ pub(all) enum Token {
   LIDENT(String)
   UIDENT(String)
   RAWIDENT(String)
-  RAWTYPE(String)
+  VERBATIM(String)
   INT(String)
   INFIX1(String)
   INFIX3(String)
@@ -86,7 +86,7 @@ pub(all) enum TokenKind {
   TK_LIDENT
   TK_UIDENT
   TK_RAWIDENT
-  TK_RAWTYPE
+  TK_VERBATIM
   TK_INT
   TK_INFIX1
   TK_INFIX3

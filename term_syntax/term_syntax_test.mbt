@@ -188,12 +188,13 @@ test "verbatim type names" {
   assert_eq(ty("`Zz_v`[Bool]"), upper)
   inspect(@term_syntax.print_type(upper), content="`Zz_v`[Bool]")
   assert_true((try Some(ty("`Zz_v`")) catch { _ => None }) is None)
-  // and an enum defining one, whose constructors refer to it so
+  // and an enum defining one, whose constructors refer to it so; a
+  // constructor named like a keyword is written so too
   let zz_w = @kernel.mk_vartype("Zz_w")
   assert_eq(
-    @term_syntax.parse_type_definition("enum `Zz_w` { Zw0; Zw(`Zz_w`, A) }"),
+    @term_syntax.parse_type_definition("enum `Zz_w` { Zw0; Zw(`Zz_w`, A); `module` }"),
     @list.List([
-      (zz_w, @list.List([("Zw0", @list.List([])), ("Zw", @list.List([zz_w, @kernel.mk_vartype("A")]))])),
+      (zz_w, @list.List([("Zw0", @list.List([])), ("Zw", @list.List([zz_w, @kernel.mk_vartype("A")])), ("module", @list.List([]))])),
     ]),
   )
 }
