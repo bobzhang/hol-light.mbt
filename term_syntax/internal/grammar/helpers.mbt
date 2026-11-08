@@ -167,9 +167,7 @@ fn named_type(
     }
     return @preterm.pretype_of_type(ty)
   }
-  let chars = name.to_array()
-  let lower = chars[0].to_string().to_lower() +
-    String::from_array(chars[1:])
+  let lower = lowered(name)
   // `Num` is num; a type constant whose name is capitalised already is
   // written as it is
   let lower = if (try @kernel.get_type_arity(lower) catch { _ => -1L }) < 0L &&
@@ -193,13 +191,40 @@ fn named_type(
 }
 
 ///|
+/// The HOL name a capitalised type name stands for: num for `Num`.
+fn lowered(name : String) -> String {
+  let chars = name.to_array()
+  chars[0].to_string().to_lower() + String::from_array(chars[1:])
+}
+
+///|
+/// A type name between backticks: the HOL type constant of that name
+/// verbatim (`Term` in backticks for a type HOL calls Term), or else the
+/// type variable so named, as a type being defined is.
+fn verbatim_type(
+  name : String,
+  args : @list.List[@preterm.Pretype],
+) -> @preterm.Pretype {
+  let arity = @kernel.get_type_arity(name) catch { _ => -1L }
+  if arity >= 0L {
+    if arity != args.length().to_int64() {
+      reject("type " + name + " takes \{arity} arguments")
+    }
+    @preterm.Ptycon(name, args.map(fill_hole))
+  } else if args.is_empty() {
+    @preterm.Utv(name)
+  } else {
+    reject("unknown type " + name)
+    @preterm.Utv(name)
+  }
+}
+
+///|
 /// The type `name` abbreviates (new_type_abbrev), written capitalised as a
 /// type: `Complex` for complex.
 pub fn type_abbreviation(name : String) -> @kernel.HolType? {
-  let chars = name.to_array()
-  let lower = chars[0].to_string().to_lower() + String::from_array(chars[1:])
   let abbrevs = @preterm.type_abbrevs()
-  match abbrevs.lookup(lower) {
+  match abbrevs.lookup(lowered(name)) {
     Some(ty) => Some(ty)
     None => abbrevs.lookup(name)
   }

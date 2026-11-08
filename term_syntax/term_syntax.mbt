@@ -411,7 +411,9 @@ pub fn parse_type(s : String) -> @kernel.HolType raise {
 /// takes them: `enum Tree { Leaf(Num); Node(Tree, Tree) }` defines tree,
 /// with a constructor `Leaf` from num and `Node` from two trees. Each type
 /// is given as the type variable named as the HOL type (`Tree` is tree), by
-/// which its constructors' arguments refer to it.
+/// which its constructors' arguments refer to it. A name between backticks
+/// is the HOL name verbatim, for one that starts with a capital: enum `Term`
+/// defines Term, which its constructors call `Term`.
 pub fn parse_type_definition(
   s : String,
 ) -> @list.List[
@@ -425,12 +427,12 @@ pub fn parse_type_definition(
   check_semantics()
   // a type being defined reads as the type variable named as written
   let defined = enums.map(e => (
-    @kernel.mk_vartype(lowered(e.0)),
     @kernel.mk_vartype(e.0),
+    @kernel.mk_vartype(e.1),
   ))
   enums.map(e => (
-    @kernel.mk_vartype(lowered(e.0)),
-    e.1.map(c => (
+    @kernel.mk_vartype(e.0),
+    e.2.map(c => (
       c.0,
       c.1.map(pty => @kernel.type_subst(defined, @preterm.type_of_pretype(pty))),
     )),

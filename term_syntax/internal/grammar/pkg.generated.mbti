@@ -29,7 +29,7 @@ pub fn term(Array[(Token, Int, Int)], initial_pos? : Int) -> @preterm.Preterm ra
 
 pub fn type_abbreviation(String) -> @kernel.HolType?
 
-pub fn type_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> @list.List[(String, @list.List[(String, @list.List[@preterm.Pretype])])] raise ParseError
+pub fn type_definition(Array[(Token, Int, Int)], initial_pos? : Int) -> @list.List[(String, String, @list.List[(String, @list.List[@preterm.Pretype])])] raise ParseError
 
 pub fn unescape(String) -> String
 
@@ -44,6 +44,7 @@ pub(all) enum Token {
   LIDENT(String)
   UIDENT(String)
   RAWIDENT(String)
+  RAWTYPE(String)
   INT(String)
   INFIX1(String)
   INFIX3(String)
@@ -85,6 +86,7 @@ pub(all) enum TokenKind {
   TK_LIDENT
   TK_UIDENT
   TK_RAWIDENT
+  TK_RAWTYPE
   TK_INT
   TK_INFIX1
   TK_INFIX3

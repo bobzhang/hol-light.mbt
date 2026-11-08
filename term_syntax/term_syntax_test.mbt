@@ -177,6 +177,28 @@ test "type definitions" {
 }
 
 ///|
+test "verbatim type names" {
+  // a HOL type whose name starts with a capital, beside one that doesn't
+  @kernel.new_type("zz_v", 0L)
+  @kernel.new_type("Zz_v", 1L)
+  let ty = @term_syntax.parse_type
+  let lower = @kernel.mk_type("zz_v", @list.List([]))
+  let upper = @kernel.mk_type("Zz_v", @list.List([@kernel.bool_ty]))
+  assert_eq(ty("Zz_v"), lower)
+  assert_eq(ty("`Zz_v`[Bool]"), upper)
+  inspect(@term_syntax.print_type(upper), content="`Zz_v`[Bool]")
+  assert_true((try Some(ty("`Zz_v`")) catch { _ => None }) is None)
+  // and an enum defining one, whose constructors refer to it so
+  let zz_w = @kernel.mk_vartype("Zz_w")
+  assert_eq(
+    @term_syntax.parse_type_definition("enum `Zz_w` { Zw0; Zw(`Zz_w`, A) }"),
+    @list.List([
+      (zz_w, @list.List([("Zw0", @list.List([])), ("Zw", @list.List([zz_w, @kernel.mk_vartype("A")]))])),
+    ]),
+  )
+}
+
+///|
 test "type abbreviations" {
   @preterm.new_type_abbrev("zz_pair", @parser.parse_type("A#num"))
   defer @preterm.remove_type_abbrev("zz_pair")
