@@ -70,8 +70,8 @@ reserve words or change comment syntax.
 The `parserutil` package owns the parser combinators over lexer tokens. `lex`
 returns an owned `Array[Lexcode]`; token parsers take `ArrayView[Lexcode]` and
 return the unconsumed suffix as a view into the same array. Keep the token
-array unchanged while parsing. Both packages use the character classes and
-operator tables in `printer`.
+array unchanged while parsing. `lex` uses the character classes in
+`printer`.
 
 Term and type quotations are read by `term_syntax`, a fixed MoonBit-like
 syntax (`@term_syntax.parse_term("∀ n : Num, n + 0 == n")`); HOL Light's
