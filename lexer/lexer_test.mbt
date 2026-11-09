@@ -54,7 +54,14 @@ fn lexed(s : String) -> String {
     for c in x {
       let n = c.to_int()
       if n < 32 || n > 126 {
-        b.write_string("\\" + (n + 1000).to_string().substring(start=1))
+        let pad = if n < 10 {
+          "00"
+        } else if n < 100 {
+          "0"
+        } else {
+          ""
+        }
+        b.write_string("\\" + pad + n.to_string())
       } else {
         b.write_char(c)
       }
