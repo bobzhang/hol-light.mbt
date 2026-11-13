@@ -566,10 +566,22 @@ test "int matches int.ml" {
     sthm(@int.int_arith(tm("(x : Int) < (y : Int) → x + int_of_num(1) <= y")))
   })
   log.attempt("int_reduce", () => {
-    sthm(@int.int_reduce_conv(tm("div(-int_of_num(7), int_of_num(2)) + rem(int_of_num(17), int_of_num(5))")))
+    sthm(
+      @int.int_reduce_conv(
+        tm(
+          "div(-int_of_num(7), int_of_num(2)) + rem(int_of_num(17), int_of_num(5))",
+        ),
+      ),
+    )
   })
   log.attempt("int_ring", () => {
-    sthm(@int.int_ring(tm("pow((x : Int) + (y : Int), 2) == pow(x, 2) + (int_of_num(2) * (x * y) + pow(y, 2))")))
+    sthm(
+      @int.int_ring(
+        tm(
+          "pow((x : Int) + (y : Int), 2) == pow(x, 2) + (int_of_num(2) * (x * y) + pow(y, 2))",
+        ),
+      ),
+    )
   })
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("(zz_counter : _)")))

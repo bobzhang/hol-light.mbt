@@ -6,9 +6,10 @@
 ///|
 /// A term or type that has no spelling in the syntax (a name that is not a
 /// MoonBit identifier, a type variable the elaborator invented, ...).
+#derive(Debug)
 pub(all) suberror Unprintable {
   Unprintable(String)
-} derive(Debug)
+}
 
 ///|
 pub extend Unprintable with Debug::{to_repr}
@@ -43,7 +44,7 @@ const SIMPLE = 8
 
 ///|
 fn is_ident_char(c : Char) -> Bool {
-  c is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_')
+  c is ('a'..<='z' | 'A'..<='Z' | '0'..<='9' | '_')
 }
 
 ///|
@@ -51,7 +52,9 @@ fn is_ident_char(c : Char) -> Bool {
 fn lexes_verbatim(name : String) -> Bool {
   let cs = name.to_array()
   let mut i = if cs is ['\'', ..] { 1 } else { 0 }
-  guard i < cs.length() && cs[i] is ('a'..='z' | 'A'..='Z') else { return false }
+  guard i < cs.length() && cs[i] is ('a'..<='z' | 'A'..<='Z') else {
+    return false
+  }
   while i < cs.length() && is_ident_char(cs[i]) {
     i += 1
   }
@@ -74,14 +77,13 @@ fn is_ident(name : String) -> Bool {
     return false
   }
   let c0 = cs[0]
-  let start_ok = c0 is ('a'..='z' | 'A'..='Z') ||
-    (c0 == '_' && n > 1)
+  let start_ok = c0 is ('a'..<='z' | 'A'..<='Z') || (c0 == '_' && n > 1)
   start_ok && cs[1:n].iter().all(is_ident_char)
 }
 
 ///|
 fn is_type_constant(name : String) -> Bool {
-  (try @kernel.get_type_arity(name) catch { _ => -1L }) >= 0L
+  (@kernel.get_type_arity(name) catch { _ => -1L }) >= 0L
 }
 
 ///|
@@ -119,16 +121,22 @@ fn reads_as_type(s : String) -> String? {
 
 ///|
 fn type_name(name : String) -> String raise Unprintable {
-  let candidates = if name == "1" { ["Unit"] } else { [capitalised(name), name] }
+  let candidates = if name == "1" {
+    ["Unit"]
+  } else {
+    [capitalised(name), name]
+  }
   for s in candidates {
-    if is_ident(s) && s.to_array()[0] is ('A'..='Z') && reads_as_type(s) == Some(name) {
+    if is_ident(s) &&
+      s.to_array()[0] is ('A'..<='Z') &&
+      reads_as_type(s) == Some(name) {
       return s
     }
   }
   // the name verbatim between backticks, as `List` for a type HOL calls List
   // beside list
   if is_ident(name) &&
-    name.to_array()[0] is ('A'..='Z' | 'a'..='z') &&
+    name.to_array()[0] is ('A'..<='Z' | 'a'..<='z') &&
     !@grammar.defines_type("`" + name + "`") {
     return "`" + name + "`"
   }
@@ -160,19 +168,22 @@ fn finite_size(ty : @kernel.HolType) -> BigInt? {
 }
 
 ///|
-fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintable {
+fn print_type_at(
+  ty : @kernel.HolType,
+  simple : Bool,
+) -> String raise Unprintable {
   match ty {
     // a type variable the elaborator invented is written as a hole, which
     // elaboration fills with a fresh one
     Tyvar(name) if name.has_prefix("?") => "_"
     Tyvar(name) =>
       if name.to_array() is [c, ..] &&
-        c is ('A'..='Z') &&
+        c is ('A'..<='Z') &&
         is_ident(name) &&
         reads_as_type(name) is None {
         name
       } else if lexes_verbatim(name) &&
-        (try @kernel.get_type_arity(name) catch { _ => -1L }) < 0L &&
+        (@kernel.get_type_arity(name) catch { _ => -1L }) < 0L &&
         !@grammar.defines_type("`" + name + "`") {
         // between backticks, a name no type constant has reads as the
         // type variable: `num` before num is defined, `'a`
@@ -194,7 +205,9 @@ fn print_type_at(ty : @kernel.HolType, simple : Bool) -> String raise Unprintabl
     Tyapp("tybit0" | "tybit1", More(_, tail=Empty)) if finite_size(ty)
       is Some(n) => n.to_string()
     Tyapp("prod", More(_, tail=More(_, tail=Empty))) =>
-      "(" + flatten(ty, "prod").map(a => print_type_at(a, false)).join(", ") + ")"
+      "(" +
+      flatten(ty, "prod").map(a => print_type_at(a, false)).join(", ") +
+      ")"
     Tyapp(name, Empty) => type_name(name)
     Tyapp(name, args) =>
       type_name(name) +
@@ -243,11 +256,11 @@ priv struct Printer {
   // bindings of a set comprehension's implicit binders ({e | p}), each the
   // variable and the depth of its binding in the scope: printed with their
   // type where they first occur
-  untyped : Array[(@kernel.Term, Int)]
+  untyped : Array[(@kernel.Term, Int32)]
 }
 
 ///|
-fn wrap(s : String, level : Int, ctx : Int) -> String {
+fn wrap(s : String, level : Int32, ctx : Int32) -> String {
   if level < ctx {
     "(" + s + ")"
   } else {
@@ -257,7 +270,7 @@ fn wrap(s : String, level : Int, ctx : Int) -> String {
 
 ///|
 // operators of the grammar: HOL name -> (MoonBit operator, level, right-assoc)
-fn binary_op(name : String) -> (String, Int, Bool)? {
+fn binary_op(name : String) -> (String, Int32, Bool)? {
   match name {
     "==>" => Some(("→", IMPL, true))
     "\\/" => Some(("||", OR, true))
@@ -288,7 +301,7 @@ fn is_raw_name(name : String) -> Bool {
 /// keywords (move), which is written between backticks.
 fn is_keyword_name(name : String) -> Bool {
   is_keyword(name) &&
-  name.iter().all(c => c is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_'))
+  name.iter().all(c => c is ('a'..<='z' | 'A'..<='Z' | '0'..<='9' | '_'))
 }
 
 ///|
@@ -338,10 +351,8 @@ fn Printer::spelling(self : Printer, c : @kernel.Term) -> String {
     let (iname, (cname, gty)) = e
     if cname == name &&
       iname != name &&
-      (binary_op(iname) is Some(_) ||
-      iname is ("~" | "--") ||
-      is_ident(iname)) &&
-      (try @basics.type_match(gty, ty, @list.List([])) is _ catch {
+      (binary_op(iname) is Some(_) || iname is ("~" | "--") || is_ident(iname)) &&
+      (try (@basics.type_match(gty, ty, @list.List([])) is _) catch {
         _ => false
       } noraise {
         _ => true
@@ -370,7 +381,10 @@ fn Printer::writes_constant_as(
 }
 
 ///|
-fn Printer::constant(self : Printer, c : @kernel.Term) -> String raise Unprintable {
+fn Printer::constant(
+  self : Printer,
+  c : @kernel.Term,
+) -> String raise Unprintable {
   guard c is Const(_, ty) else { raise Unprintable("not a constant") }
   let spelling = self.spelling(c)
   // a name the interface overloads reads as whichever constant the
@@ -388,19 +402,19 @@ fn Printer::annotated(
   self : Printer,
   s : String,
   c : @kernel.Term,
-  overloaded? : Bool = false,
+  overloaded~ : Bool = false,
 ) -> String raise Unprintable {
   guard c is Const(name, ty) else { raise Unprintable("not a constant") }
   let tvs = @kernel.tyvars(ty)
-  let polymorphic = (try @kernel.get_const_type(name) catch { _ => ty })
+  let polymorphic = (@kernel.get_const_type(name) catch { _ => ty })
     |> @kernel.tyvars
-    |> fn(l) { !l.is_empty() }
+    |> l => { !l.is_empty() }
   if tvs.iter().any(v => !self.fixed.contains(v)) ||
     (self.all_constants && !tvs.is_empty()) {
     "(" + s + " : " + print_type_in_term(ty) + ")"
   } else if self.all_constants && (polymorphic || overloaded) {
     // a concrete instance: annotated where its type can be written
-    "(" + s + " : " + print_type_in_term(ty) + ")" catch {
+    ("(" + s + " : " + print_type_in_term(ty) + ")") catch {
       _ => s
     }
   } else {
@@ -428,7 +442,11 @@ fn Printer::variable(
       match self.untyped.search((v, bound.length() - i)) {
         Some(i) => {
           self.untyped.remove(i) |> ignore
-          return "(" + spell_name(printed) + " : " + print_type_in_term(ty) + ")"
+          return "(" +
+            spell_name(printed) +
+            " : " +
+            print_type_in_term(ty) +
+            ")"
         }
         None => return spell_name(printed)
       }
@@ -477,16 +495,20 @@ fn Printer::bind(
   bound : Bound,
   truth~ : Bool = true,
 ) -> (String, Bound) raise Unprintable {
-  guard v is Var(name, ty) else { raise Unprintable("binder is not a variable") }
+  guard v is Var(name, ty) else {
+    raise Unprintable("binder is not a variable")
+  }
   // the names the other variables free in body are printed under
-  let clash = @kernel.frees(body).iter().any(u => {
-    u != v &&
-    (match bound.iter().find_first(b => b.0 == u) {
-      Some((_, printed)) => printed
-      None => if u is Var(n, _) { n } else { "" }
-    }) ==
-    name
-  })
+  let clash = @kernel.frees(body)
+    .iter()
+    .any(u => {
+      u != v &&
+      (match bound.iter().find_first(b => b.0 == u) {
+        Some((_, printed)) => printed
+        None => if u is Var(n, _) { n } else { "" }
+      }) ==
+      name
+    })
   // a binder named like a constant or an interface name binds a variable
   // that shadows it (term_syntax's binder_alias): T and F always, since the
   // syntax writes truth and falsity as true and false; any other
@@ -496,11 +518,15 @@ fn Printer::bind(
   // names are constants, as in HOL, so a pattern variable named so is
   // renamed (`truth=false`)
   let truth = truth &&
-    (name == "T" ||
-    name == "F" ||
-    (is_ident(name) &&
-    is_constant_name(name) &&
-    !self.writes_constant_as(body, name)))
+    (
+      name == "T" ||
+      name == "F" ||
+      (
+        is_ident(name) &&
+        is_constant_name(name) &&
+        !self.writes_constant_as(body, name)
+      )
+    )
   // a binder with a symbolic name no identifier spells is written between
   // backticks (bound occurrences too); a free one has its op_ spelling
   let keyword = is_keyword_name(name)
@@ -531,7 +557,7 @@ fn Printer::bind(
 fn Printer::term(
   self : Printer,
   t : @kernel.Term,
-  ctx : Int,
+  ctx : Int32,
   bound : Bound,
 ) -> String raise Unprintable {
   match t {
@@ -554,11 +580,15 @@ fn Printer::term(
 fn Printer::comb(
   self : Printer,
   t : @kernel.Term,
-  ctx : Int,
+  ctx : Int32,
   bound : Bound,
 ) -> String raise Unprintable {
   // only a numeral in canonical form is written in decimal
-  if (try @basics.dest_numeral(t) catch { _ => None } noraise { n => Some(n) })
+  if (try @basics.dest_numeral(t) catch {
+      _ => None
+    } noraise {
+      n => Some(n)
+    })
     is Some(n) &&
     canonical_numeral(t) {
     return @num.string_of_num(n)
@@ -585,7 +615,11 @@ fn Printer::comb(
       let inner = self.bind_pattern(vs, rhs, bound, [pat, rhs])
       let p = self.term(pat, SIMPLE, inner)
       let ty = print_type_in_term(@kernel.type_of(pat))
-      wrap(sym + " " + p + " : " + ty + ", " + self.term(rhs, IMPL, inner), EXPR, ctx)
+      wrap(
+        sym + " " + p + " : " + ty + ", " + self.term(rhs, IMPL, inner),
+        EXPR,
+        ctx,
+      )
     }
     // a lambda over a pattern (\(a,b). e), a match or a function by
     // cases, applied to any further arguments
@@ -636,9 +670,11 @@ fn Printer::comb(
         wrap(s + "(" + rest.join(", ") + ")", SIMPLE, ctx)
       }
     }
-    (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch { _ => None } noraise {
-          l => Some(l)
-        })
+    (Const("CONS", _), [_, _]) if (try @basics.dest_list(t) catch {
+        _ => None
+      } noraise {
+        l => Some(l)
+      })
       is Some(items) =>
       "[" +
       items.to_array().map(x => self.term(x, EXPR, bound)).join(", ") +
@@ -653,12 +689,19 @@ fn Printer::comb(
       } else {
         (level, level + 1)
       }
-      let s = self.term(a, lctx, bound) + " " + op + " " + self.term(b, rctx, bound)
+      let s = self.term(a, lctx, bound) +
+        " " +
+        op +
+        " " +
+        self.term(b, rctx, bound)
       wrap(s, level, ctx)
     }
     _ => {
       let h = self.term(head, SIMPLE, bound)
-      let s = h + "(" + args.map(a => self.term(a, EXPR, bound)).join(", ") + ")"
+      let s = h +
+        "(" +
+        args.map(a => self.term(a, EXPR, bound)).join(", ") +
+        ")"
       wrap(s, SIMPLE, ctx)
     }
   }
@@ -704,14 +747,14 @@ fn clause(
   match b {
     Comb(
       Comb(Const("_UNGUARDED_PATTERN", _), Comb(Comb(Const("GEQ", _), pat), x1)),
-      Comb(Comb(Const("GEQ", _), body), y1)
+      Comb(Comb(Const("GEQ", _), body), y1),
     ) if x1 == x && y1 == y => Some((pat, vs, None, body))
     Comb(
       Comb(
         Comb(Const("_GUARDED_PATTERN", _), Comb(Comb(Const("GEQ", _), pat), x1)),
-        g
+        g,
       ),
-      Comb(Comb(Const("GEQ", _), body), y1)
+      Comb(Comb(Const("GEQ", _), body), y1),
     ) if x1 == x && y1 == y => Some((pat, vs, Some(g), body))
     _ => None
   }
@@ -743,19 +786,12 @@ fn Printer::pattern_form(
   head : @kernel.Term,
   args : Array[@kernel.Term],
   bound : Bound,
-) -> (String, Int)? raise Unprintable {
+) -> (String, Int32)? raise Unprintable {
   match (head, args) {
     (Const("GABS", _), [a, ..]) =>
       match dest_pattern_abs(a) {
         Some((pat, vs, rhs)) =>
-          Some(
-            (
-              "fn { " +
-              self.arm(pat, vs, None, rhs, bound) +
-              " }",
-              1,
-            ),
-          )
+          Some(("fn { " + self.arm(pat, vs, None, rhs, bound) + " }", 1))
         None => None
       }
     (Const("_MATCH", _), [e, cs, ..]) =>
@@ -803,7 +839,7 @@ fn names_variable(t : @kernel.Term, name : String) -> Bool {
 /// name of any variable in `scope`, free or bound (it would be captured,
 /// read as the other variable, or force a binder there to be renamed);
 /// then the backticks stay.
-fn op_spelled(bound : Bound, n : Int, scope : Array[@kernel.Term]) -> Bound {
+fn op_spelled(bound : Bound, n : Int32, scope : Array[@kernel.Term]) -> Bound {
   let bs = bound.to_array()
   let n = if n < bs.length() { n } else { bs.length() }
   for i in 0..<n {
@@ -897,7 +933,7 @@ fn canonical_numeral(t : @kernel.Term) -> Bool {
   guard t is Comb(Const("NUMERAL", _), bits) else { return false }
   let mut b = bits
   let mut innermost = ""
-  while b is Comb(Const(("BIT0" | "BIT1") as bit, _), rest) {
+  while b is Comb(Const("BIT0" | "BIT1" as bit, _), rest) {
     innermost = bit
     b = rest
   }
@@ -966,7 +1002,7 @@ fn implicit_binders(
     .to_array()
     .filter(v => {
       let n = printed(v)
-      !is_constant_name(n) && !n.to_array().iter().all(c => c is ('0'..='9'))
+      !is_constant_name(n) && !n.to_array().iter().all(c => c is ('0'..<='9'))
     })
   }
   let fvs = vars(e)
@@ -980,10 +1016,10 @@ fn implicit_binders(
 
 ///|
 /// n for a GEN%PVAR name `GEN%PVAR%n`.
-fn pvar_number(name : String) -> Int? {
+fn pvar_number(name : String) -> Int32? {
   guard name.strip_prefix("GEN%PVAR%") is Some(digits) &&
     !digits.is_empty() &&
-    digits.iter().all(c => c is ('0'..='9')) else {
+    digits.iter().all(c => c is ('0'..<='9')) else {
     return None
   }
   let mut number = 0
@@ -1075,7 +1111,7 @@ pub fn print_term(t : @kernel.Term) -> String raise Unprintable {
 pub fn print_term_in_context(
   env : @list.List[(String, @preterm.Pretype)],
   t : @kernel.Term,
-  exact? : Bool = false,
+  exact~ : Bool = false,
 ) -> String raise Unprintable {
   let s = print_term_with(t, exact~, context=env)
   // the printed reading is t up to bound variable names: exactly t, but
@@ -1096,20 +1132,22 @@ pub fn print_term_in_context(
 ///|
 fn print_term_with(
   t : @kernel.Term,
-  exact? : Bool = false,
-  context? : @list.List[(String, @preterm.Pretype)] = @list.List([]),
+  exact~ : Bool = false,
+  context~ : @list.List[(String, @preterm.Pretype)] = @list.List([]),
 ) -> String raise Unprintable {
   // the free variables the context types, read as bound around the term
-  let outer : Bound = @kernel.frees(t).filter(v => {
-    guard v is Var(name, ty) else { return false }
-    match context.iter().find_first(p => p.0 == name) {
-      Some((_, pty)) =>
-        try @preterm.type_of_pretype(pty) == ty catch {
-          _ => false
-        }
-      None => false
-    }
-  }).map(v => (v, if v is Var(name, _) { name } else { "" }))
+  let outer : Bound = @kernel.frees(t)
+    .filter(v => {
+      guard v is Var(name, ty) else { return false }
+      match context.iter().find_first(p => p.0 == name) {
+        Some((_, pty)) =>
+          try @preterm.type_of_pretype(pty) == ty catch {
+            _ => false
+          }
+        None => false
+      }
+    })
+    .map(v => (v, if v is Var(name, _) { name } else { "" }))
   let vars = @basics.variables(t).to_array()
   let fixed = vars
     .map(v => @kernel.tyvars(@kernel.type_of(v)))
@@ -1127,11 +1165,7 @@ fn print_term_with(
         names,
         exact,
         untyped: [],
-      }.term(
-        t,
-        EXPR,
-        outer,
-      )
+      }.term(t, EXPR, outer)
     }) catch {
       Unprintable(_) as e => raise e
       e => raise Unprintable("term: " + e.to_string())
@@ -1170,7 +1204,7 @@ fn print_term_with(
 fn invented_number(name : String) -> Int64 {
   let mut n = 0L
   for c in name[1:] {
-    guard c is ('0'..='9') else { return -1L }
+    guard c is ('0'..<='9') else { return -1L }
     n = n * 10L + (c.to_int() - '0'.to_int()).to_int64()
   }
   n
@@ -1180,7 +1214,7 @@ fn invented_number(name : String) -> Int64 {
 /// `t` with its invented type variables (`?n`) renamed in the order
 /// `type_vars_in_term` lists them (those numbered `from` or more): holes in
 /// the text read back as fresh ones.
-fn canonical_invented(t : @kernel.Term, from? : Int64 = 0L) -> @kernel.Term {
+fn canonical_invented(t : @kernel.Term, from~ : Int64 = 0L) -> @kernel.Term {
   let theta = []
   for ty in @kernel.type_vars_in_term(t) {
     if ty is Tyvar(name) &&
@@ -1203,7 +1237,7 @@ pub fn same_term(a : @kernel.Term, b : @kernel.Term) -> Bool {
 ///|
 /// `s` read now, without advancing the GEN%PVAR counter, and how many
 /// GEN%PVAR names it took.
-fn reread(s : String) -> (@kernel.Term, Int) raise {
+fn reread(s : String) -> (@kernel.Term, Int32) raise {
   @preterm.with_pgen_counter_restored(() => {
     let start = @preterm.pgen_count()
     let t = elaborate(s)
@@ -1221,12 +1255,16 @@ fn reads_as(
     if context.is_empty() {
       reread(s).0
     } else {
-      @preterm.with_pgen_counter_restored(() => parse_term_in_context(context, s))
+      @preterm.with_pgen_counter_restored(() => {
+        parse_term_in_context(context, s)
+      })
     }
   }
   // under the live interface and the fixed view alike (resolution.mbt)
-  try same_term(with_resolution(false, read), t) &&
-    same_term(with_resolution(true, read), t) catch {
+  try
+    same_term(with_resolution(false, read), t) &&
+    same_term(with_resolution(true, read), t)
+  catch {
     _ => false
   }
 }

@@ -17,7 +17,7 @@ let theory_traces : Map[String, Array[String]] = Map([])
 /// starts: a file may load another part-way through
 /// (Autoformalization/planar_graph.ml loads Multivariate/cauchy.ml after
 /// 12K lines).
-let loading_theories : Array[(String, Int)] = []
+let loading_theories : Array[(String, Int32)] = []
 
 ///|
 /// Called by a theory's `load` before its steps: the quotations it parses

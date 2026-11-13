@@ -27,12 +27,18 @@ test "compute matches compute.ml" {
   ev("eval_pair", "FST((true, false)) && SND((false, true))")
   log.attempt("eval_weak", () => {
     sthm(
-      @compute.weak_cbv_conv(@compute.bool_compset(()))(tm("((x : Bool) => x && true)(false)")),
+      @compute.weak_cbv_conv(@compute.bool_compset(()))(
+        tm("((x : Bool) => x && true)(false)"),
+      ),
     )
   })
   ev("eval_fail", "(p : Bool)")
   try {
-    let d = @pair.new_definition(tm("(myneg : (Bool) -> Bool)((b : Bool)) == (if b { false } else { true })"))
+    let d = @pair.new_definition(
+      tm(
+        "(myneg : (Bool) -> Bool)((b : Bool)) == (if b { false } else { true })",
+      ),
+    )
     log.attempt("add_funs", () => {
       @compute.add_funs(@list.singleton(d))
       sthm(@compute.eval_conv(tm("myneg(myneg(true))")))

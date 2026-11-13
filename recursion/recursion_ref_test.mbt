@@ -31,7 +31,9 @@ test "recursion matches recursion.ml" {
   log.attempt("recdef", () => {
     sthm(
       @recursion.new_recursive_definition(@nums.num_recursion())(
-        tm("(dbl : (Num) -> Num)(0) == 0 && (∀ n : Num, dbl(SUC(n)) == SUC(SUC(dbl(n))))"),
+        tm(
+          "(dbl : (Num) -> Num)(0) == 0 && (∀ n : Num, dbl(SUC(n)) == SUC(SUC(dbl(n))))",
+        ),
       ),
     )
   })

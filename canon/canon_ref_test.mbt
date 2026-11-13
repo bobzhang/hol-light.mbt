@@ -22,20 +22,44 @@ test "canon matches canon.ml" {
     })
   }
   let fol = "(∀ x : A, (P : (A) -> Bool)(x) → (∃ y : A, (Q : (A, A) -> Bool)(x, y))) && !(∃ z : A, (R : (A) -> Bool)(z) && P(z) == Q(z, z))"
-  cv("PRESIMP_CONV", @canon.presimp_conv, "!((a : Bool) && !(b : Bool)) → true && (c : Bool) || false")
+  cv(
+    "PRESIMP_CONV", @canon.presimp_conv, "!((a : Bool) && !(b : Bool)) → true && (c : Bool) || false",
+  )
   cv("NNF_CONV", @canon.nnf_conv, fol)
-  cv("NNFC_CONV", @canon.nnfc_conv, "!((p : Bool) == (q : Bool)) || (r : Bool) == !(s : Bool)")
-  cv("NNF_CONV_eq", @canon.nnf_conv, "!((p : Bool) == (q : Bool)) || (r : Bool) == !(s : Bool)")
-  cv("SKOLEM_CONV", @canon.skolem_conv, "∀ x : A, ∃ y : B, (P : (A, B) -> Bool)(x, y) && (∃ z : C, (Q : (A, C) -> Bool)(x, z))")
-  cv("PRENEX_CONV", @canon.prenex_conv, "(∀ x : A, (P : (A) -> Bool)(x)) && (∃ y : A, (Q : (A) -> Bool)(y)) → (R : Bool)")
-  cv("WEAK_DNF_CONV", @canon.weak_dnf_conv, "((a : Bool) || (b : Bool)) && ((c : Bool) || (d : Bool))")
-  cv("DNF_CONV", @canon.dnf_conv, "((a : Bool) || (b : Bool)) && ((c : Bool) || a)")
-  cv("WEAK_CNF_CONV", @canon.weak_cnf_conv, "(a : Bool) && (b : Bool) || (c : Bool) && (d : Bool)")
+  cv(
+    "NNFC_CONV", @canon.nnfc_conv, "!((p : Bool) == (q : Bool)) || (r : Bool) == !(s : Bool)",
+  )
+  cv(
+    "NNF_CONV_eq", @canon.nnf_conv, "!((p : Bool) == (q : Bool)) || (r : Bool) == !(s : Bool)",
+  )
+  cv(
+    "SKOLEM_CONV", @canon.skolem_conv, "∀ x : A, ∃ y : B, (P : (A, B) -> Bool)(x, y) && (∃ z : C, (Q : (A, C) -> Bool)(x, z))",
+  )
+  cv(
+    "PRENEX_CONV", @canon.prenex_conv, "(∀ x : A, (P : (A) -> Bool)(x)) && (∃ y : A, (Q : (A) -> Bool)(y)) → (R : Bool)",
+  )
+  cv(
+    "WEAK_DNF_CONV", @canon.weak_dnf_conv, "((a : Bool) || (b : Bool)) && ((c : Bool) || (d : Bool))",
+  )
+  cv(
+    "DNF_CONV", @canon.dnf_conv, "((a : Bool) || (b : Bool)) && ((c : Bool) || a)",
+  )
+  cv(
+    "WEAK_CNF_CONV", @canon.weak_cnf_conv, "(a : Bool) && (b : Bool) || (c : Bool) && (d : Bool)",
+  )
   cv("CNF_CONV", @canon.cnf_conv, "(a : Bool) && (b : Bool) || (c : Bool) && a")
-  cv("CONJ_CANON_CONV", @canon.conj_canon_conv, "((b : Bool) && (a : Bool)) && a && (c : Bool)")
-  cv("DISJ_CANON_CONV", @canon.disj_canon_conv, "((b : Bool) || (a : Bool)) || a || (c : Bool)")
-  cv("CONJ_ACI_RULE", @canon.conj_aci_rule, "(((a : Bool) && (b : Bool)) && (c : Bool)) == (c && b && a)")
-  cv("DISJ_ACI_RULE", @canon.disj_aci_rule, "(((a : Bool) || (b : Bool)) || (c : Bool)) == (c || b || a)")
+  cv(
+    "CONJ_CANON_CONV", @canon.conj_canon_conv, "((b : Bool) && (a : Bool)) && a && (c : Bool)",
+  )
+  cv(
+    "DISJ_CANON_CONV", @canon.disj_canon_conv, "((b : Bool) || (a : Bool)) || a || (c : Bool)",
+  )
+  cv(
+    "CONJ_ACI_RULE", @canon.conj_aci_rule, "(((a : Bool) && (b : Bool)) && (c : Bool)) == (c && b && a)",
+  )
+  cv(
+    "DISJ_ACI_RULE", @canon.disj_aci_rule, "(((a : Bool) || (b : Bool)) || (c : Bool)) == (c || b || a)",
+  )
   cv(
     "LAMBDA_ELIM_CONV", @canon.lambda_elim_conv, "(P : ((A) -> B) -> Bool)((x : A) => (f : (A, _) -> B)(x, (y : _)))",
   )

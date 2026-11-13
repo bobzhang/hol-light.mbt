@@ -34,6 +34,9 @@ fn check_program_terms() -> Unit raise {
     sequence,
     @term_syntax.parse_term("Seq(Assign((x : Num) => x + 1), SKIP)"),
   )
-  assert_eq(@term_syntax.parse_term(@term_syntax.print_term(sequence)), sequence)
+  assert_eq(
+    @term_syntax.parse_term(@term_syntax.print_term(sequence)),
+    sequence,
+  )
   assert_true(@kernel.hyp(@prog.example_factorial()).is_empty())
 }

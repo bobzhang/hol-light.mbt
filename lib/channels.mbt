@@ -5,7 +5,8 @@
 
 ///|
 /// OCaml's `End_of_file`.
-pub(all) suberror EndOfFile derive(Debug)
+#derive(Debug)
+pub(all) suberror EndOfFile
 
 ///|
 pub extend EndOfFile with @debug.Debug::{to_repr}
@@ -13,7 +14,8 @@ pub extend EndOfFile with @debug.Debug::{to_repr}
 ///|
 /// OCaml's `Sys.Break` (an interrupt from the keyboard): matched by code
 /// that cleans up after one (Minisat/sat_tools.ml), never raised here.
-pub(all) suberror Break derive(Debug)
+#derive(Debug)
+pub(all) suberror Break
 
 ///|
 pub extend Break with @debug.Debug::{to_repr}
@@ -60,7 +62,7 @@ pub fn close_out(oc : OutChannel) -> Unit {
 /// `in_channel`: the file as it was when opened.
 pub struct InChannel {
   text : String
-  mut pos : Int
+  mut pos : Int32
 }
 
 ///|

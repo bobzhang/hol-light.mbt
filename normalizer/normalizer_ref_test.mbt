@@ -36,13 +36,21 @@ test "normalizer matches normalizer.ml" {
     sthm(@normalizer.num_normalize_conv(tm("EXP((a : Num) + (b : Num), 3)")))
   })
   log.attempt("norm_cancel", () => {
-    sthm(@normalizer.num_normalize_conv(tm("(x : Num) * (y : Num) + (y * x + 0 * (z : Num))")))
+    sthm(
+      @normalizer.num_normalize_conv(
+        tm("(x : Num) * (y : Num) + (y * x + 0 * (z : Num))"),
+      ),
+    )
   })
   log.attempt("norm_const", () => {
     sthm(@normalizer.num_normalize_conv(tm("2 * 3 + 4")))
   })
   log.attempt("norm_poly", () => {
-    sthm(@normalizer.num_normalize_conv(tm("((x : Num) + (y : Num)) * (x + y) - x * x")))
+    sthm(
+      @normalizer.num_normalize_conv(
+        tm("((x : Num) + (y : Num)) * (x + y) - x * x"),
+      ),
+    )
   })
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("(zz_counter : _)")))

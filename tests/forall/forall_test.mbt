@@ -11,7 +11,9 @@ test "forall is the universal quantifier and round trips through the printer" {
   assert_eq(@kernel.dest_const(quantifier).0, "forall")
   assert_true(@kernel.constants().any(entry => entry.0 == "forall"))
   assert_true(!@kernel.constants().any(entry => entry.0 == "!"))
-  assert_true(@basics.is_uexists(@term_syntax.parse_term("existsunique((x : Bool) => x)")))
+  assert_true(
+    @basics.is_uexists(@term_syntax.parse_term("existsunique((x : Bool) => x)")),
+  )
   assert_true(!@printer.parses_as_binder("!"))
 }
 

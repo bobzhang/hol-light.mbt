@@ -70,9 +70,9 @@ jobs:
       - name: Install MoonBit
         env:
           # as .github/workflows/ci.yml
-          MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
+          MOONBIT_INSTALL_VERSION: pre-release
         run: |
-          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- pre-release
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
 
       - name: More swap

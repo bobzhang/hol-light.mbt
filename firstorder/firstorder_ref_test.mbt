@@ -5,7 +5,7 @@
 using @testkit {stm}
 
 ///|
-fn sl(l : @list.List[Int]) -> String {
+fn sl(l : @list.List[Int32]) -> String {
   "[" + l.map(x => x.to_string()).to_array().join("; ") + "]"
 }
 
@@ -74,7 +74,9 @@ test "firstorder matches firstorder.ml" {
   log.attempt("roundtrip", () => {
     @firstorder.reset_vars(())
     @firstorder.reset_consts(())
-    let t = tm("∀ x : A, (P : (A, _) -> Bool)(x, (f : (A, _) -> _)(x, (y : _))) → !(Q : (A) -> Bool)((c : A))")
+    let t = tm(
+      "∀ x : A, (P : (A, _) -> Bool)(x, (f : (A, _) -> _)(x, (y : _))) → !(Q : (A) -> Bool)((c : A))",
+    )
     let fm = @firstorder.fol_of_form(@list.List([]), @list.List([]), t)
     let a = @firstorder.fol_of_atom(
       @list.List([]),

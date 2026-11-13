@@ -94,16 +94,28 @@ test "define matches define.ml" {
   // BEGIN EXTRA
   log.attempt("define_fib", () => {
     sthm(
-      @define.define_(tm("(fib : (Num) -> Num)((n : Num)) == (if n < 2 { 1 } else { fib(n - 1) + fib(n - 2) })")),
+      @define.define_(
+        tm(
+          "(fib : (Num) -> Num)((n : Num)) == (if n < 2 { 1 } else { fib(n - 1) + fib(n - 2) })",
+        ),
+      ),
     )
   })
   log.attempt("define_gcd", () => {
-    sthm(@define.define_(tm("(gcdx : (Num, Num) -> Num)((m : Num), (n : Num)) == (if n == 0 { m } else { gcdx(n, MOD(m, n)) })")))
+    sthm(
+      @define.define_(
+        tm(
+          "(gcdx : (Num, Num) -> Num)((m : Num), (n : Num)) == (if n == 0 { m } else { gcdx(n, MOD(m, n)) })",
+        ),
+      ),
+    )
   })
   log.attempt("define_pat", () => {
     sthm(
       @define.define_(
-        tm("(sumlist : (List[Num]) -> Num)(NIL) == 0 && sumlist(CONS((h : Num), (t : List[Num]))) == h + sumlist(t)"),
+        tm(
+          "(sumlist : (List[Num]) -> Num)(NIL) == 0 && sumlist(CONS((h : Num), (t : List[Num]))) == h + sumlist(t)",
+        ),
       ),
     )
   })

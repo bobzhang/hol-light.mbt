@@ -15,7 +15,7 @@ let virtual_files : Map[String, String] = Map([])
 /// `Sys.command`: the gp factorization above; else what the command did
 /// upstream, if that was recorded (`replay_command`); else "command not
 /// found" (exit status 127, as on a host without the command).
-pub fn sys_command(cmd : String) -> Int {
+pub fn sys_command(cmd : String) -> Int32 {
   match gp_factorint_command(cmd) {
     Some((n, file)) => {
       virtual_files[file] = gp_factorint(n) + "\n"
@@ -66,8 +66,8 @@ fn unname_paths(text : String, paths : Array[String]) -> String {
 /// What a command did when upstream ran it.
 priv struct Replay {
   inputs : Array[String?]
-  status : Int
-  outputs : Array[(Int, String)]
+  status : Int32
+  outputs : Array[(Int32, String)]
 }
 
 ///|
@@ -86,8 +86,8 @@ let command_replays : Map[String, Array[Replay]] = Map([])
 pub fn replay_command(
   shape : String,
   inputs : Array[String?],
-  status : Int,
-  outputs : Array[(Int, String)],
+  status : Int32,
+  outputs : Array[(Int32, String)],
 ) -> Unit {
   let r = Replay::{ inputs, status, outputs, }
   match command_replays.get(shape) {
@@ -254,7 +254,7 @@ fn big_isqrt(n : @bigint.BigInt) -> @bigint.BigInt {
 
 ///|
 /// The Jacobi symbol (a/n) for odd n > 0.
-fn big_jacobi(a : @bigint.BigInt, n : @bigint.BigInt) -> Int {
+fn big_jacobi(a : @bigint.BigInt, n : @bigint.BigInt) -> Int32 {
   let big3 = @bigint.BigInt::from_int(3)
   let big4 = @bigint.BigInt::from_int(4)
   let big5 = @bigint.BigInt::from_int(5)
@@ -399,7 +399,7 @@ fn big_gcd_(a : @bigint.BigInt, b : @bigint.BigInt) -> @bigint.BigInt {
 
 ///|
 /// floor(n^(1/k)) for n >= 0, k >= 1 (Newton's method).
-fn big_iroot(n : @bigint.BigInt, k : Int) -> @bigint.BigInt {
+fn big_iroot(n : @bigint.BigInt, k : Int32) -> @bigint.BigInt {
   if n < big2 || k == 1 {
     return n
   }
@@ -418,7 +418,7 @@ fn big_iroot(n : @bigint.BigInt, k : Int) -> @bigint.BigInt {
 
 ///|
 /// `Some((r, k))` with n = r^k, k >= 2 maximal-first, for n >= 2.
-fn perfect_power(n : @bigint.BigInt) -> (@bigint.BigInt, Int)? {
+fn perfect_power(n : @bigint.BigInt) -> (@bigint.BigInt, Int32)? {
   for k = n.bit_length(); k >= 2; k = k - 1 {
     let r = big_iroot(n, k)
     if r >= big2 && r.pow(@bigint.BigInt::from_int(k)) == n {
@@ -521,7 +521,7 @@ pub fn gp_factorint(n : @bigint.BigInt) -> String {
   let fs = []
   prime_factors(n, fs)
   fs.sort_by((a, b) => a.compare(b))
-  let rows : Array[(@bigint.BigInt, Int)] = []
+  let rows : Array[(@bigint.BigInt, Int32)] = []
   for p in fs {
     if rows.length() > 0 && rows[rows.length() - 1].0 == p {
       rows[rows.length() - 1] = (p, rows[rows.length() - 1].1 + 1)

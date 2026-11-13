@@ -48,21 +48,39 @@ test "calc_rat matches calc_rat.ml" {
   log.attempt("definitions", () => @kernel.definitions().length().to_string())
   // BEGIN EXTRA
   log.attempt("rat_reduce", () => {
-    sthm(@calc_rat.real_rat_reduce_conv(tm("real_of_num(1) / real_of_num(3) + real_of_num(1) / real_of_num(6)")))
+    sthm(
+      @calc_rat.real_rat_reduce_conv(
+        tm("real_of_num(1) / real_of_num(3) + real_of_num(1) / real_of_num(6)"),
+      ),
+    )
   })
   log.attempt("rat_cmp", () => {
-    sthm(@calc_rat.real_rat_reduce_conv(tm("real_of_num(2) / real_of_num(3) < real_of_num(3) / real_of_num(4)")))
+    sthm(
+      @calc_rat.real_rat_reduce_conv(
+        tm("real_of_num(2) / real_of_num(3) < real_of_num(3) / real_of_num(4)"),
+      ),
+    )
   })
   log.attempt("rat_pow", () => {
-    sthm(@calc_rat.real_rat_reduce_conv(tm("pow(real_of_num(2) / real_of_num(3), 3)")))
+    sthm(
+      @calc_rat.real_rat_reduce_conv(
+        tm("pow(real_of_num(2) / real_of_num(3), 3)"),
+      ),
+    )
   })
   log.attempt("field", () => {
-    sthm(@calc_rat.real_field(tm("!((x : Real) == real_of_num(0)) → x * inv(x) == real_of_num(1)")))
+    sthm(
+      @calc_rat.real_field(
+        tm("!((x : Real) == real_of_num(0)) → x * inv(x) == real_of_num(1)"),
+      ),
+    )
   })
   log.attempt("field2", () => {
     sthm(
       @calc_rat.real_field(
-        tm("!((a : Real) == real_of_num(0)) && !((b : Real) == real_of_num(0)) → inv(a * b) == inv(a) * inv(b)"),
+        tm(
+          "!((a : Real) == real_of_num(0)) && !((b : Real) == real_of_num(0)) → inv(a * b) == inv(a) * inv(b)",
+        ),
       ),
     )
   })

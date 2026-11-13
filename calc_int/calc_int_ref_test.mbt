@@ -50,19 +50,29 @@ test "calc_int matches calc_int.ml" {
   log.attempt("definitions", () => @kernel.definitions().length().to_string())
   // BEGIN EXTRA
   log.attempt("reduce_add", () => {
-    sthm(@calc_int.real_int_reduce_conv(tm("real_of_num(2) + real_of_num(3) * -real_of_num(4)")))
+    sthm(
+      @calc_int.real_int_reduce_conv(
+        tm("real_of_num(2) + real_of_num(3) * -real_of_num(4)"),
+      ),
+    )
   })
   log.attempt("reduce_pow", () => {
     sthm(@calc_int.real_int_reduce_conv(tm("pow(-real_of_num(3), 5)")))
   })
   log.attempt("reduce_abs", () => {
-    sthm(@calc_int.real_int_reduce_conv(tm("abs(-real_of_num(17)) - real_of_num(20)")))
+    sthm(
+      @calc_int.real_int_reduce_conv(
+        tm("abs(-real_of_num(17)) - real_of_num(20)"),
+      ),
+    )
   })
   log.attempt("reduce_cmp", () => {
     sthm(@calc_int.real_int_reduce_conv(tm("-real_of_num(5) < real_of_num(3)")))
   })
   log.attempt("reduce_max", () => {
-    sthm(@calc_int.real_int_reduce_conv(tm("max(real_of_num(2), -real_of_num(7))")))
+    sthm(
+      @calc_int.real_int_reduce_conv(tm("max(real_of_num(2), -real_of_num(7))")),
+    )
   })
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("(zz_counter : _)")))

@@ -79,7 +79,9 @@ test "ind_types matches ind_types.ml" {
   log.attempt("definitions", () => @kernel.definitions().length().to_string())
   // BEGIN EXTRA
   log.attempt("deftype_tree", () => {
-    let (a, b) = @ind_types.define_type("enum Tree { Leaf(Num); Node(Tree, Tree) }")
+    let (a, b) = @ind_types.define_type(
+      "enum Tree { Leaf(Num); Node(Tree, Tree) }",
+    )
     sthm(a) + " ;; " + sthm(b)
   })
   log.attempt("deftype_nested", () => {

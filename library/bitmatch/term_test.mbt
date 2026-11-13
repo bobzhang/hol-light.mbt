@@ -2,7 +2,10 @@
 fn check_bitmatch_terms() -> Unit raise {
   let tm = @term_syntax.parse_term
   for word in ["BITPAT", "bitmatch"] {
-    assert_eq(tm("(" + word + " : Bool)"), @kernel.mk_var(word, @kernel.bool_ty))
+    assert_eq(
+      tm("(" + word + " : Bool)"),
+      @kernel.mk_var(word, @kernel.bool_ty),
+    )
   }
   assert_eq(@bitmatch.mk_bitpat([]), tm("NILPAT"))
   let fields = [tm("true"), tm("false"), tm("true")]
@@ -26,8 +29,15 @@ fn check_bitmatch_terms() -> Unit raise {
   assert_true(@kernel.hyp(proof).is_empty())
   // Overlapping clauses preserve first-match precedence; slices select clauses.
   let zero = @bitmatch.mk_bitpat([tm("false")])
-  let alternatives = [(zero, tm("false")), (zero, tm("true")), (zero, tm("false"))]
-  let ordered = @bitmatch.mk_bitmatch(tm("(word(0) : Word[1])"), alternatives[1:])
+  let alternatives = [
+    (zero, tm("false")),
+    (zero, tm("true")),
+    (zero, tm("false")),
+  ]
+  let ordered = @bitmatch.mk_bitmatch(
+    tm("(word(0) : Word[1])"),
+    alternatives[1:],
+  )
   let ordered_proof = @bitmatch.bitmatch_seq_conv(ordered)
   assert_eq(@equal.rhs(@kernel.concl(ordered_proof)), tm("true"))
   let unmatched = @bitmatch.mk_bitmatch(
@@ -38,7 +48,11 @@ fn check_bitmatch_terms() -> Unit raise {
   let default_proof = @bitmatch.bitmatch_seq_conv(unmatched)
   assert_eq(@equal.rhs(@kernel.concl(default_proof)), tm("false"))
   // An explicit default also permits an empty match.
-  let empty = @bitmatch.mk_bitmatch(tm("(word(0) : Word[2])"), [], default=tm("false"))
+  let empty = @bitmatch.mk_bitmatch(
+    tm("(word(0) : Word[2])"),
+    [],
+    default=tm("false"),
+  )
   assert_eq(empty, tm("_BITMATCH((word(0) : Word[2]), _ELSEPATTERN(false))"))
   // Names resembling the builder's internal binders remain free in results.
   let result = tm("(bm_input : Num) == 0 && (bm_result : Bool)")

@@ -54,13 +54,7 @@ fn lexed(s : String) -> String {
     for c in x {
       let n = c.to_int()
       if n < 32 || n > 126 {
-        let pad = if n < 10 {
-          "00"
-        } else if n < 100 {
-          "0"
-        } else {
-          ""
-        }
+        let pad = if n < 10 { "00" } else if n < 100 { "0" } else { "" }
         b.write_string("\\" + pad + n.to_string())
       } else {
         b.write_char(c)
@@ -68,13 +62,14 @@ fn lexed(s : String) -> String {
     }
     b.to_string()
   }
-  try
-    @lexer.lex(s)
-    .map(t => match t {
+  @lexer.lex(s)
+  .map(t => {
+    match t {
       Ident(x) => "Ident " + show(x)
       Resword(x) => "Resword " + show(x)
-    })
-    .join(" | ") catch {
+    }
+  })
+  .join(" | ") catch {
     Failure(message) => "! " + message
     error => "!! " + error.to_string()
   }
@@ -82,40 +77,76 @@ fn lexed(s : String) -> String {
 
 ///|
 test "string literals keep their escapes; malformed ones fail as upstream" {
-  inspect(lexed("\"a\\nb\\t\\\"c\\\"\\\\\""), content=(
-    #|Ident "a\010b\009"c"\"
-  ))
-  inspect(lexed("\"\\065\\x42\""), content=(
-    #|Ident "AB"
-  ))
-  inspect(lexed("\"\""), content=(
-    #|Ident ""
-  ))
-  inspect(lexed("\"é\""), content=(
-    #|Ident "\195\169"
-  ))
-  inspect(lexed("\"\\195\\169\""), content=(
-    #|Ident "\195\169"
-  ))
-  inspect(lexed("\"\\xe9!\""), content=(
-    #|Ident "\233!"
-  ))
-  inspect(lexed("\"a\\xFF\\128\""), content=(
-    #|Ident "a\255\128"
-  ))
-  inspect(lexed("\"abc"), content=(
-    #|! Unparsed input
-  ))
-  inspect(lexed("\"\\q\""), content=(
-    #|! lex:unrecognized OCaml-style escape in string
-  ))
-  inspect(lexed("\"\\xé\""), content=(
-    #|! int_of_string
-  ))
-  inspect(lexed("é"), content=(
-    #|! Unparsed input
-  ))
-  inspect(lexed("xé"), content=(
-    #|! Unparsed input
-  ))
+  inspect(
+    lexed("\"a\\nb\\t\\\"c\\\"\\\\\""),
+    content=(
+      #|Ident "a\010b\009"c"\"
+    ),
+  )
+  inspect(
+    lexed("\"\\065\\x42\""),
+    content=(
+      #|Ident "AB"
+    ),
+  )
+  inspect(
+    lexed("\"\""),
+    content=(
+      #|Ident ""
+    ),
+  )
+  inspect(
+    lexed("\"é\""),
+    content=(
+      #|Ident "\195\169"
+    ),
+  )
+  inspect(
+    lexed("\"\\195\\169\""),
+    content=(
+      #|Ident "\195\169"
+    ),
+  )
+  inspect(
+    lexed("\"\\xe9!\""),
+    content=(
+      #|Ident "\233!"
+    ),
+  )
+  inspect(
+    lexed("\"a\\xFF\\128\""),
+    content=(
+      #|Ident "a\255\128"
+    ),
+  )
+  inspect(
+    lexed("\"abc"),
+    content=(
+      #|! Unparsed input
+    ),
+  )
+  inspect(
+    lexed("\"\\q\""),
+    content=(
+      #|! lex:unrecognized OCaml-style escape in string
+    ),
+  )
+  inspect(
+    lexed("\"\\xé\""),
+    content=(
+      #|! int_of_string
+    ),
+  )
+  inspect(
+    lexed("é"),
+    content=(
+      #|! Unparsed input
+    ),
+  )
+  inspect(
+    lexed("xé"),
+    content=(
+      #|! Unparsed input
+    ),
+  )
 }

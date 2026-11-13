@@ -70,7 +70,9 @@ test "bool matches bool.ml" {
   th("CONJUNCT2", () => @bool.conjunct2(@bool.conj(ha, hb)))
   th("CONJUNCT1_bad", () => @bool.conjunct1(ha))
   log.attempt("CONJUNCTS", () => {
-    @bool.conjuncts_rule(hyp_of("(a : Bool) && ((b : Bool) && (c : Bool)) && (d : Bool)"))
+    @bool.conjuncts_rule(
+      hyp_of("(a : Bool) && ((b : Bool) && (c : Bool)) && (d : Bool)"),
+    )
     .map(sthm)
     .to_array()
     .join(" ;; ")
@@ -79,19 +81,34 @@ test "bool matches bool.ml" {
   th("MP_bad", () => @bool.mp(hyp_of("(a : Bool) → (b : Bool)"), hb))
   th("DISCH", () => @bool.disch(a, @bool.conj(ha, hb)))
   th("DISCH_ALL", () => @bool.disch_all(@bool.conj(ha, hb)))
-  th("UNDISCH", () => @bool.undisch(hyp_of("(a : Bool) → (b : Bool) → (c : Bool)")))
-  th("UNDISCH_ALL", () => @bool.undisch_all(hyp_of("(a : Bool) → (b : Bool) → (c : Bool)")))
+  th("UNDISCH", () => {
+    @bool.undisch(hyp_of("(a : Bool) → (b : Bool) → (c : Bool)"))
+  })
+  th("UNDISCH_ALL", () => {
+    @bool.undisch_all(hyp_of("(a : Bool) → (b : Bool) → (c : Bool)"))
+  })
   th("IMP_ANTISYM_RULE", () => {
-    @bool.imp_antisym_rule(hyp_of("(a : Bool) → (b : Bool)"), hyp_of("(b : Bool) → (a : Bool)"))
+    @bool.imp_antisym_rule(
+      hyp_of("(a : Bool) → (b : Bool)"),
+      hyp_of("(b : Bool) → (a : Bool)"),
+    )
   })
   th("ADD_ASSUM", () => @bool.add_assum(c, ha))
   log.attempt("EQ_IMP_RULE", () => {
     let (x, y) = @bool.eq_imp_rule(hyp_of("(a : Bool) == (b : Bool)"))
     sthm(x) + " ;; " + sthm(y)
   })
-  th("IMP_TRANS", () => @bool.imp_trans(hyp_of("(a : Bool) → (b : Bool)"), hyp_of("(b : Bool) → (c : Bool)")))
+  th("IMP_TRANS", () => {
+    @bool.imp_trans(
+      hyp_of("(a : Bool) → (b : Bool)"),
+      hyp_of("(b : Bool) → (c : Bool)"),
+    )
+  })
   th("IMP_TRANS_bad", () => {
-    @bool.imp_trans(hyp_of("(a : Bool) → (b : Bool)"), hyp_of("(c : Bool) → c"))
+    @bool.imp_trans(
+      hyp_of("(a : Bool) → (b : Bool)"),
+      hyp_of("(c : Bool) → c"),
+    )
   })
   let fa = hyp_of("∀ x : A, (P : (A) -> Bool)(x)")
   th("SPEC", () => @bool.spec(tm("(y : A)"), fa))
@@ -103,7 +120,11 @@ test "bool matches bool.ml" {
     )
   })
   th("SPEC_ALL", () => {
-    @bool.spec_all(hyp_of("∀ x : `num`, ∀ y : `num`, (R : (`num`, `num`) -> Bool)(x, y) && R(y, x)"))
+    @bool.spec_all(
+      hyp_of(
+        "∀ x : `num`, ∀ y : `num`, (R : (`num`, `num`) -> Bool)(x, y) && R(y, x)",
+      ),
+    )
   })
   th("ISPEC", () => @bool.ispec(tm("(n : `num`)"), hyp_of("∀ x : A, x == x")))
   th("ISPECL", () => {
@@ -113,9 +134,14 @@ test "bool matches bool.ml" {
     )
   })
   th("GEN", () => {
-    @bool.gen(tm("(x : A)"), @bool.disch_all(hyp_of("(P : (A) -> Bool)((x : A)) → P(x)")))
+    @bool.gen(
+      tm("(x : A)"),
+      @bool.disch_all(hyp_of("(P : (A) -> Bool)((x : A)) → P(x)")),
+    )
   })
-  th("GEN_bad", () => @bool.gen(tm("(x : A)"), hyp_of("(P : (A) -> Bool)((x : A))")))
+  th("GEN_bad", () => {
+    @bool.gen(tm("(x : A)"), hyp_of("(P : (A) -> Bool)((x : A))"))
+  })
   th("GENL", () => {
     @bool.genl(
       @list.List([tm("(x : A)"), tm("(y : A)")]),
@@ -123,7 +149,9 @@ test "bool matches bool.ml" {
     )
   })
   th("GEN_ALL", () => {
-    @bool.gen_all(@bool.disch_all(hyp_of("(P : (A, B) -> Bool)((x : A), (y : B))")))
+    @bool.gen_all(
+      @bool.disch_all(hyp_of("(P : (A, B) -> Bool)((x : A), (y : B))")),
+    )
   })
   th("EXISTS", () => {
     @bool.exists_rule(
@@ -139,21 +167,33 @@ test "bool matches bool.ml" {
     @bool.choose_rule(
       tm("(x : A)"),
       hyp_of("∃ x : A, (P : (A) -> Bool)(x)"),
-      @bool.add_assum(tm("(P : (A) -> Bool)((x : A))"), @kernel.refl(tm("true"))),
+      @bool.add_assum(
+        tm("(P : (A) -> Bool)((x : A))"),
+        @kernel.refl(tm("true")),
+      ),
     )
   })
   th("SIMPLE_CHOOSE", () => {
     @bool.simple_choose(
       tm("(x : A)"),
-      @bool.add_assum(tm("(P : (A) -> Bool)((x : A))"), @kernel.refl(tm("true"))),
+      @bool.add_assum(
+        tm("(P : (A) -> Bool)((x : A))"),
+        @kernel.refl(tm("true")),
+      ),
     )
   })
   th("DISJ1", () => @bool.disj1(ha, b))
   th("DISJ2", () => @bool.disj2(a, hb))
   th("DISJ_CASES", () => {
-    @bool.disj_cases(hyp_of("(a : Bool) || (b : Bool)"), @bool.disj2(b, ha), @bool.disj1(hb, a))
+    @bool.disj_cases(
+      hyp_of("(a : Bool) || (b : Bool)"),
+      @bool.disj2(b, ha),
+      @bool.disj1(hb, a),
+    )
   })
-  th("DISJ_CASES_bad", () => @bool.disj_cases(hyp_of("(a : Bool) || (b : Bool)"), ha, hb))
+  th("DISJ_CASES_bad", () => {
+    @bool.disj_cases(hyp_of("(a : Bool) || (b : Bool)"), ha, hb)
+  })
   th("SIMPLE_DISJ_CASES", () => {
     @bool.simple_disj_cases(
       @bool.add_assum(a, @kernel.refl(tm("true"))),
@@ -166,7 +206,9 @@ test "bool matches bool.ml" {
   th("EQF_ELIM", () => @bool.eqf_elim(hyp_of("(a : Bool) == false")))
   th("CONTR", () => @bool.contr(a, hyp_of("false")))
   th("CONTR_bad", () => @bool.contr(a, ha))
-  th("EXISTENCE", () => @bool.existence(hyp_of("existsunique((x : `num`) => x == (n : `num`))")))
+  th("EXISTENCE", () => {
+    @bool.existence(hyp_of("existsunique((x : `num`) => x == (n : `num`))"))
+  })
   th("PINST", () => {
     @bool.pinst(
       @list.singleton((@kernel.bool_ty, @kernel.aty)),
@@ -176,12 +218,18 @@ test "bool matches bool.ml" {
   })
   th("PROVE_HYP", () => @bool.prove_hyp(ha, @bool.conj(ha, hb)))
   log.attempt("mk_iff", () => stm(@bool.mk_iff(a, b)))
-  log.attempt("dest_iff_bad", () => stm(@bool.dest_iff(tm("(x : `num`) == (y : `num`)")).0))
+  log.attempt("dest_iff_bad", () => {
+    stm(@bool.dest_iff(tm("(x : `num`) == (y : `num`)")).0)
+  })
   log.attempt("mk_neg", () => stm(@bool.mk_neg(a)))
   log.attempt("mk_neg_bad", () => stm(@bool.mk_neg(tm("(x : `num`)"))))
   log.attempt("verbose", () => stm(tm("∀ x : _, ∃ y : _, x == y && true")))
   log.attempt("print", () => {
-    @printer.string_of_term(tm("∀ x : _, ∃ y : _, x == y && (p : Bool) == (q : Bool) → !(r : Bool) || false"))
+    @printer.string_of_term(
+      tm(
+        "∀ x : _, ∃ y : _, x == y && (p : Bool) == (q : Bool) → !(r : Bool) || false",
+      ),
+    )
   })
   log.attempt("counter_tyvar", () => stm(tm("(zz_counter : _)")))
   log.attempt("counter_pgenvar", () => stm(tm("{(x : _) | true}")))
@@ -364,9 +412,6 @@ test "bool matches bool.ml" {
       #|counter_pgenvar = (GSPEC:fun(fun('?4,bool),'?5) (\GEN%PVAR%1:'?4. (#?:fun(fun('?6,bool),bool) (\x:'?6. (((SETSPEC:fun('?4,fun(bool,fun('?6,bool))) GEN%PVAR%1:'?4) #T:bool) x:'?6)))))
       #|counter_genvar = _0:bool
       #|
-
-
-
     ),
   )
 }

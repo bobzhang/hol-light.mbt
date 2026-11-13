@@ -9,7 +9,17 @@ test "EC/jacobian matches EC/jacobian.ml" {
   @jacobian.load()
   let log = @testkit.Log::new()
   log.capture_reports()
-  for th in ["simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder", "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion", "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax", "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart", "define", "Library/iter", "Library/prime", "Library/pocklington", "Library/integer", "Library/isum", "Library/binomial", "Library/products", "Library/multiplicative", "Library/primitive", "Library/frag", "Library/wo", "Library/card", "Library/grouptheory", "Library/ringtheory", "EC/misc", "EC/weierstrass", "EC/jacobian"] {
+  for
+    th in [
+      "simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder",
+      "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion",
+      "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax",
+      "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart",
+      "define", "Library/iter", "Library/prime", "Library/pocklington", "Library/integer",
+      "Library/isum", "Library/binomial", "Library/products", "Library/multiplicative",
+      "Library/primitive", "Library/frag", "Library/wo", "Library/card", "Library/grouptheory",
+      "Library/ringtheory", "EC/misc", "EC/weierstrass", "EC/jacobian",
+    ] {
     log.show_theory_output(th)
   }
   log.show_theory_trace("EC/jacobian")
@@ -17,39 +27,85 @@ test "EC/jacobian matches EC/jacobian.ml" {
   // BEGIN generated theorem list
   log.attempt("jacobian_point", () => sthm(@jacobian.jacobian_point()))
   log.attempt("jacobian_curve", () => sthm(@jacobian.jacobian_curve()))
-  log.attempt("weierstrass_of_jacobian", () => sthm(@jacobian.weierstrass_of_jacobian()))
-  log.attempt("jacobian_of_weierstrass", () => sthm(@jacobian.jacobian_of_weierstrass()))
+  log.attempt("weierstrass_of_jacobian", () => {
+    sthm(@jacobian.weierstrass_of_jacobian())
+  })
+  log.attempt("jacobian_of_weierstrass", () => {
+    sthm(@jacobian.jacobian_of_weierstrass())
+  })
   log.attempt("jacobian_eq", () => sthm(@jacobian.jacobian_eq()))
   log.attempt("jacobian_0", () => sthm(@jacobian.jacobian_0()))
   log.attempt("jacobian_neg", () => sthm(@jacobian.jacobian_neg()))
   log.attempt("jacobian_add", () => sthm(@jacobian.jacobian_add()))
-  log.attempt("JACOBIAN_CURVE_IMP_POINT", () => sthm(@jacobian.jacobian_curve_imp_point()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_POINT_EQ", () => sthm(@jacobian.jacobian_of_weierstrass_point_eq()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_POINT", () => sthm(@jacobian.jacobian_of_weierstrass_point()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_POINT", () => sthm(@jacobian.weierstrass_of_jacobian_point()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_EQ", () => sthm(@jacobian.jacobian_of_weierstrass_eq()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_EQ", () => sthm(@jacobian.weierstrass_of_jacobian_eq()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_OF_WEIERSTRASS", () => sthm(@jacobian.weierstrass_of_jacobian_of_weierstrass()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_OF_JACOBIAN", () => sthm(@jacobian.jacobian_of_weierstrass_of_jacobian()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_CURVE_EQ", () => sthm(@jacobian.jacobian_of_weierstrass_curve_eq()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_CURVE", () => sthm(@jacobian.jacobian_of_weierstrass_curve()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_CURVE", () => sthm(@jacobian.weierstrass_of_jacobian_curve()))
+  log.attempt("JACOBIAN_CURVE_IMP_POINT", () => {
+    sthm(@jacobian.jacobian_curve_imp_point())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_POINT_EQ", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_point_eq())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_POINT", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_point())
+  })
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_POINT", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_point())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_EQ", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_eq())
+  })
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_EQ", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_eq())
+  })
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_OF_WEIERSTRASS", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_of_weierstrass())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_OF_JACOBIAN", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_of_jacobian())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_CURVE_EQ", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_curve_eq())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_CURVE", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_curve())
+  })
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_CURVE", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_curve())
+  })
   log.attempt("JACOBIAN_POINT_NEG", () => sthm(@jacobian.jacobian_point_neg()))
   log.attempt("JACOBIAN_CURVE_NEG", () => sthm(@jacobian.jacobian_curve_neg()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_NEG", () => sthm(@jacobian.weierstrass_of_jacobian_neg()))
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_NEG", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_neg())
+  })
   log.attempt("JACOBIAN_EQ_NEG", () => sthm(@jacobian.jacobian_eq_neg()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_NEG_OF_WEIERSTRASS", () => sthm(@jacobian.weierstrass_of_jacobian_neg_of_weierstrass()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_NEG", () => sthm(@jacobian.jacobian_of_weierstrass_neg()))
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_NEG_OF_WEIERSTRASS", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_neg_of_weierstrass())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_NEG", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_neg())
+  })
   log.attempt("JACOBIAN_POINT_ADD", () => sthm(@jacobian.jacobian_point_add()))
   log.attempt("JACOBIAN_CURVE_ADD", () => sthm(@jacobian.jacobian_curve_add()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_ADD", () => sthm(@jacobian.weierstrass_of_jacobian_add()))
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_ADD", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_add())
+  })
   log.attempt("JACOBIAN_EQ_ADD", () => sthm(@jacobian.jacobian_eq_add()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_ADD_OF_WEIERSTRASS", () => sthm(@jacobian.weierstrass_of_jacobian_add_of_weierstrass()))
-  log.attempt("JACOBIAN_OF_WEIERSTRASS_ADD", () => sthm(@jacobian.jacobian_of_weierstrass_add()))
-  log.attempt("jacobian_add_unexceptional", () => sthm(@jacobian.jacobian_add_unexceptional()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_ADD_UNEXCEPTIONAL", () => sthm(@jacobian.weierstrass_of_jacobian_add_unexceptional()))
-  log.attempt("jacobian_double_unexceptional", () => sthm(@jacobian.jacobian_double_unexceptional()))
-  log.attempt("WEIERSTRASS_OF_JACOBIAN_DOUBLE_UNEXCEPTIONAL", () => sthm(@jacobian.weierstrass_of_jacobian_double_unexceptional()))
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_ADD_OF_WEIERSTRASS", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_add_of_weierstrass())
+  })
+  log.attempt("JACOBIAN_OF_WEIERSTRASS_ADD", () => {
+    sthm(@jacobian.jacobian_of_weierstrass_add())
+  })
+  log.attempt("jacobian_add_unexceptional", () => {
+    sthm(@jacobian.jacobian_add_unexceptional())
+  })
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_ADD_UNEXCEPTIONAL", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_add_unexceptional())
+  })
+  log.attempt("jacobian_double_unexceptional", () => {
+    sthm(@jacobian.jacobian_double_unexceptional())
+  })
+  log.attempt("WEIERSTRASS_OF_JACOBIAN_DOUBLE_UNEXCEPTIONAL", () => {
+    sthm(@jacobian.weierstrass_of_jacobian_double_unexceptional())
+  })
   // END generated theorem list
   let tm = @term_syntax.parse_term
   log.attempt("types", () => {

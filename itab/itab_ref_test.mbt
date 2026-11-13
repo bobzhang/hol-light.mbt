@@ -27,11 +27,17 @@ test "itab matches itab.ml" {
   }
   it("imp_refl", "(p : Bool) → p")
   it("conj_comm", "(p : Bool) && (q : Bool) → q && p")
-  it("imp_trans", "((p : Bool) → (q : Bool)) → (q → (r : Bool)) → p → r")
+  it(
+    "imp_trans", "((p : Bool) → (q : Bool)) → (q → (r : Bool)) → p → r",
+  )
   it("triple_neg", "!!!(p : Bool) → !p")
-  it("disj_elim", "((p : Bool) || (q : Bool)) && (p → (r : Bool)) && (q → r) → r")
+  it(
+    "disj_elim", "((p : Bool) || (q : Bool)) && (p → (r : Bool)) && (q → r) → r",
+  )
   it("forall_inst", "(∀ x : A, (P : (A) -> Bool)(x)) → P((a : A))")
-  it("exists_weaken", "(∃ x : A, (P : (A) -> Bool)(x) && (Q : (A) -> Bool)(x)) → (∃ x : A, P(x))")
+  it(
+    "exists_weaken", "(∃ x : A, (P : (A) -> Bool)(x) && (Q : (A) -> Bool)(x)) → (∃ x : A, P(x))",
+  )
   it("iff", "(p : Bool) == (q : Bool) → q → p")
   it("contrapos", "((p : Bool) → (q : Bool)) → !q → !p")
   it("dist", "(p : Bool) && ((q : Bool) || (r : Bool)) → p && q || p && r")
@@ -147,7 +153,6 @@ test "itab matches itab.ml" {
       #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _8:bool
       #|
-
     ),
   )
 }

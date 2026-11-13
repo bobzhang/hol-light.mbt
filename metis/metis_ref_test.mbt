@@ -23,7 +23,11 @@ test "metis matches metis.ml" {
   }
   let none : @list.List[@kernel.Thm] = @list.List([])
   pv("refl", "∀ x : A, (P : (A) -> Bool)(x) → P(x)", @metis.metis_tac(none))
-  pv("drinker", "∃ x : A, (P : (A) -> Bool)(x) → (∀ y : A, P(y))", @metis.metis_tac(none))
+  pv(
+    "drinker",
+    "∃ x : A, (P : (A) -> Bool)(x) → (∀ y : A, P(y))",
+    @metis.metis_tac(none),
+  )
   pv(
     "trans",
     "(∀ x : A, ∀ y : A, (R : (A, A) -> Bool)(x, y) → R(y, x)) && (∀ x : A, ∀ y : A, ∀ z : A, R(x, y) && R(y, z) → R(x, z)) && (∀ x : A, ∃ y : A, R(x, y)) → (∀ x : A, R(x, x))",
