@@ -45,7 +45,13 @@ class RunnerTests(unittest.TestCase):
         launched = []
 
         def launch(cmd, **kwargs):
-            args = json.loads(cmd[cmd.index("--test-args") + 1])
+            encoded = cmd[cmd.index("--test-args") + 1]
+            ranges = []
+            for entry in encoded.split("/"):
+                filename, bounds = entry.rsplit(":", 1)
+                start, end = map(int, bounds.split("-"))
+                ranges.append([filename, [{"start": start, "end": end}]])
+            args = {"package": Path(cmd[-2]).parent.name, "file_and_index": ranges}
             launched.append(args)
             output = "\n".join(json.dumps({"type": "result", "file": f, "index": i,
                                            "message": ""}, separators=(",", ":"))
