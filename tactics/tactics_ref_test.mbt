@@ -106,7 +106,9 @@ test "tactics matches tactics.ml" {
     (w, then_tac(@tactics.exists_tac(t), accept_tac(truth)))
   })
   pv("X_CHOOSE_TAC", () => {
-    let w = tm("(∃ x : Bool, (P : (Bool) -> Bool)(x)) → (∃ y : Bool, P(y))")
+    let w = tm(
+      "(∃ x : Bool, (P : (Bool) -> Bool)(x)) → (∃ y : Bool, P(y))",
+    )
     let z = tm("(z : Bool)")
     (
       w,
@@ -147,7 +149,9 @@ test "tactics matches tactics.ml" {
     (w, @tactics.match_accept_tac(@bool.gen(x, @kernel.refl(x))))
   })
   pv("MATCH_MP_TAC", () => {
-    let w = tm("(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → P((c : A)) → Q(c)")
+    let w = tm(
+      "(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → P((c : A)) → Q(c)",
+    )
     (
       w,
       then_tac(
@@ -412,7 +416,9 @@ test "tactics matches tactics.ml" {
     )
   })
   st("RULE_ASSUM_TAC", () => {
-    let w = tm("((x : Bool) => x)((a : Bool)) → ((x : Bool) => x)((b : Bool)) → (c : Bool)")
+    let w = tm(
+      "((x : Bool) => x)((a : Bool)) → ((x : Bool) => x)((b : Bool)) → (c : Bool)",
+    )
     (
       w,
       then_tac(
@@ -772,7 +778,9 @@ test "tactics matches tactics.ml" {
   log.attempt("top_realgoal", () => sgoal(@tactics.top_realgoal()))
   @tactics.print_goal_hyp_max_boxes.val = Some(3)
   log.attempt("max_boxes", () => {
-    let a = tm("(((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) && ((e : Bool) && (f : Bool)) && (g : Bool) && (h : Bool)")
+    let a = tm(
+      "(((a : Bool) && (b : Bool)) && (c : Bool) && (d : Bool)) && ((e : Bool) && (f : Bool)) && (g : Bool) && (h : Bool)",
+    )
     let w = tm("(p : Bool)")
     sgoal((@list.singleton(("", @kernel.assume_rule(a))), w))
   })
@@ -934,7 +942,6 @@ test "tactics matches tactics.ml" {
       #|counter_tyvar = zz_counter:'?1
       #|counter_genvar = _22:bool
       #|
-
     ),
   )
 }

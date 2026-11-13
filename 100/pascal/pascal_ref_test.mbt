@@ -9,7 +9,18 @@ test "100/pascal matches 100/pascal.ml" {
   @pascal.load()
   let log = @testkit.Log::new()
   log.capture_reports()
-  for th in ["simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder", "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion", "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax", "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart", "define", "Library/wo", "Library/card", "Library/floor", "Multivariate/misc", "Library/products", "Library/iter", "Multivariate/metric", "Library/frag", "Library/prime", "Library/grouptheory", "Multivariate/homology", "Library/matroids", "Multivariate/vectors", "Library/permutations", "Multivariate/determinants", "Multivariate/topology", "Multivariate/cross", "100/pascal"] {
+  for
+    th in [
+      "simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder",
+      "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion",
+      "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax",
+      "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart",
+      "define", "Library/wo", "Library/card", "Library/floor", "Multivariate/misc",
+      "Library/products", "Library/iter", "Multivariate/metric", "Library/frag",
+      "Library/prime", "Library/grouptheory", "Multivariate/homology", "Library/matroids",
+      "Multivariate/vectors", "Library/permutations", "Multivariate/determinants",
+      "Multivariate/topology", "Multivariate/cross", "100/pascal",
+    ] {
     log.show_theory_output(th)
   }
   log.show_theory_trace("100/pascal")
@@ -27,7 +38,9 @@ test "100/pascal matches 100/pascal.ml" {
   log.attempt("DIRECTION_AXIOM_1", () => sthm(@pascal.direction_axiom_1()))
   log.attempt("DIRECTION_AXIOM_2", () => sthm(@pascal.direction_axiom_2()))
   log.attempt("DIRECTION_AXIOM_3", () => sthm(@pascal.direction_axiom_3()))
-  log.attempt("DIRECTION_AXIOM_4_WEAK", () => sthm(@pascal.direction_axiom_4_weak()))
+  log.attempt("DIRECTION_AXIOM_4_WEAK", () => {
+    sthm(@pascal.direction_axiom_4_weak())
+  })
   log.attempt("ORTHOGONAL_COMBINE", () => sthm(@pascal.orthogonal_combine()))
   log.attempt("DIRECTION_AXIOM_4", () => sthm(@pascal.direction_axiom_4()))
   log.attempt("PERPDIR_WELLDEF", () => sthm(@pascal.perpdir_welldef()))
@@ -57,7 +70,9 @@ test "100/pascal matches 100/pascal.ml" {
   log.attempt("EQ_HOMOP", () => sthm(@pascal.eq_homop()))
   log.attempt("PARALLEL_PROJL_HOMOL", () => sthm(@pascal.parallel_projl_homol()))
   log.attempt("PARALLEL_PROJP_HOMOP", () => sthm(@pascal.parallel_projp_homop()))
-  log.attempt("PARALLEL_PROJP_HOMOP_EXPLICIT", () => sthm(@pascal.parallel_projp_homop_explicit()))
+  log.attempt("PARALLEL_PROJP_HOMOP_EXPLICIT", () => {
+    sthm(@pascal.parallel_projp_homop_explicit())
+  })
   log.attempt("bracket", () => sthm(@pascal.bracket()))
   log.attempt("COLLINEAR", () => sthm(@pascal.collinear()))
   log.attempt("COLLINEAR_SINGLETON", () => sthm(@pascal.collinear_singleton()))
@@ -66,18 +81,28 @@ test "100/pascal matches 100/pascal.ml" {
   log.attempt("COLLINEAR_BRACKET", () => sthm(@pascal.collinear_bracket()))
   log.attempt("homogeneous_conic", () => sthm(@pascal.homogeneous_conic()))
   log.attempt("projective_conic", () => sthm(@pascal.projective_conic()))
-  log.attempt("HOMOGENEOUS_CONIC_BRACKET", () => sthm(@pascal.homogeneous_conic_bracket()))
-  log.attempt("PROJECTIVE_CONIC_BRACKET", () => sthm(@pascal.projective_conic_bracket()))
+  log.attempt("HOMOGENEOUS_CONIC_BRACKET", () => {
+    sthm(@pascal.homogeneous_conic_bracket())
+  })
+  log.attempt("PROJECTIVE_CONIC_BRACKET", () => {
+    sthm(@pascal.projective_conic_bracket())
+  })
   log.attempt("PASCAL_DIRECT", () => sthm(@pascal.pascal_direct()))
   log.attempt("PASCAL", () => sthm(@pascal.pascal()))
   log.attempt("homogenize", () => sthm(@pascal.homogenize()))
   log.attempt("projectivize", () => sthm(@pascal.projectivize()))
   log.attempt("HOMOGENIZE_NONZERO", () => sthm(@pascal.homogenize_nonzero()))
   log.attempt("affine_conic", () => sthm(@pascal.affine_conic()))
-  log.attempt("COLLINEAR_PROJECTIVIZE", () => sthm(@pascal.collinear_projectivize()))
-  log.attempt("AFFINE_PROJECTIVE_CONIC", () => sthm(@pascal.affine_projective_conic()))
+  log.attempt("COLLINEAR_PROJECTIVIZE", () => {
+    sthm(@pascal.collinear_projectivize())
+  })
+  log.attempt("AFFINE_PROJECTIVE_CONIC", () => {
+    sthm(@pascal.affine_projective_conic())
+  })
   log.attempt("PASCAL_AFFINE", () => sthm(@pascal.pascal_affine()))
-  log.attempt("COLLINEAR_NOT_COCIRCULAR", () => sthm(@pascal.collinear_not_cocircular()))
+  log.attempt("COLLINEAR_NOT_COCIRCULAR", () => {
+    sthm(@pascal.collinear_not_cocircular())
+  })
   log.attempt("PASCAL_AFFINE_CIRCLE", () => sthm(@pascal.pascal_affine_circle()))
   // END generated theorem list
   let tm = @term_syntax.parse_term

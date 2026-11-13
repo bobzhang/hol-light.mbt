@@ -126,10 +126,29 @@ test "theorems matches theorems.ml" {
     let t = tm("((p : Bool) && (q : Bool)) == (p || q)")
     sthm(@theorems.ac(@theorems.conj_aci())(t))
   })
-  st("DESTRUCT_obtain", () => (tm("(∃ x : A, (P : (A) -> Bool)(x) && (Q : (A) -> Bool)(x)) → (R : Bool)"), dt("@x. hp hq")))
-  st("DESTRUCT_disj", () => (tm("(p : Bool) || (q : Bool) && (r : Bool) → (s : Bool)"), dt("hp | hq hr")))
-  st("DESTRUCT_paren", () => (tm("((p : Bool) || (q : Bool)) && (r : Bool) → (s : Bool)"), dt("(hp | hq) _")))
-  st("DESTRUCT_plus", () => (tm("(p : Bool) && (q : Bool) → (s : Bool)"), dt("+ hq")))
+  st("DESTRUCT_obtain", () => {
+    (
+      tm(
+        "(∃ x : A, (P : (A) -> Bool)(x) && (Q : (A) -> Bool)(x)) → (R : Bool)",
+      ),
+      dt("@x. hp hq"),
+    )
+  })
+  st("DESTRUCT_disj", () => {
+    (
+      tm("(p : Bool) || (q : Bool) && (r : Bool) → (s : Bool)"),
+      dt("hp | hq hr"),
+    )
+  })
+  st("DESTRUCT_paren", () => {
+    (
+      tm("((p : Bool) || (q : Bool)) && (r : Bool) → (s : Bool)"),
+      dt("(hp | hq) _"),
+    )
+  })
+  st("DESTRUCT_plus", () => {
+    (tm("(p : Bool) && (q : Bool) → (s : Bool)"), dt("+ hq"))
+  })
   st("DESTRUCT_garbage", () => (tm("(p : Bool) → (s : Bool)"), dt("hp )")))
   st("DESTRUCT_bad", () => (tm("(p : Bool) → (s : Bool)"), dt("(")))
   st("INTRO_fix_dest", () => {
@@ -144,13 +163,36 @@ test "theorems matches theorems.ml" {
     let w = tm("(p : Bool) || ((q : Bool) → (r : Bool)) || (s : Bool)")
     (w, @theorems.intro_tac("#2 hq"))
   })
-  st("INTRO_zero", () => (tm("(p : Bool) || (q : Bool)"), @theorems.intro_tac("#0")))
-  st("INTRO_garbage", () => (tm("(p : Bool) → (q : Bool)"), @theorems.intro_tac("hp }")))
-  st("FIX_vars", () => (tm("∀ x : _, ∀ y : _, ∀ z : A, (P : (_, _, A) -> Bool)(x, y, z)"), @theorems.fix_tac("x y")))
-  st("FIX_rename", () => (tm("∀ x : _, ∀ y : A, (P : (_, A) -> Bool)(x, y)"), @theorems.fix_tac("[a/y] *")))
-  st("FIX_star", () => (tm("∀ x : _, ∀ y : A, (P : (_, A) -> Bool)(x, y)"), @theorems.fix_tac("*")))
-  st("FIX_missing", () => (tm("∀ x : A, (P : (A) -> Bool)(x)"), @theorems.fix_tac("y")))
-  st("FIX_bad", () => (tm("∀ x : A, (P : (A) -> Bool)(x)"), @theorems.fix_tac("x ]")))
+  st("INTRO_zero", () => {
+    (tm("(p : Bool) || (q : Bool)"), @theorems.intro_tac("#0"))
+  })
+  st("INTRO_garbage", () => {
+    (tm("(p : Bool) → (q : Bool)"), @theorems.intro_tac("hp }"))
+  })
+  st("FIX_vars", () => {
+    (
+      tm("∀ x : _, ∀ y : _, ∀ z : A, (P : (_, _, A) -> Bool)(x, y, z)"),
+      @theorems.fix_tac("x y"),
+    )
+  })
+  st("FIX_rename", () => {
+    (
+      tm("∀ x : _, ∀ y : A, (P : (_, A) -> Bool)(x, y)"),
+      @theorems.fix_tac("[a/y] *"),
+    )
+  })
+  st("FIX_star", () => {
+    (
+      tm("∀ x : _, ∀ y : A, (P : (_, A) -> Bool)(x, y)"),
+      @theorems.fix_tac("*"),
+    )
+  })
+  st("FIX_missing", () => {
+    (tm("∀ x : A, (P : (A) -> Bool)(x)"), @theorems.fix_tac("y"))
+  })
+  st("FIX_bad", () => {
+    (tm("∀ x : A, (P : (A) -> Bool)(x)"), @theorems.fix_tac("x ]"))
+  })
   st("HYP_destruct", () => {
     let w = tm("(a : Bool) && (b : Bool) → (c : Bool)")
     let h = @theorems.hyp_tac("h: ha hb", th => th)

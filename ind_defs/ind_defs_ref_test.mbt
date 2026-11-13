@@ -37,7 +37,9 @@ test "ind_defs matches ind_defs.ml" {
   log.attempt("RIGHT_BETAS", () => {
     let x = tm("(x : A)")
     let y = tm("(y : A)")
-    let f = tm("((a : A) => (b : A) => (P : (A, A) -> Bool)(b, a)) == (Q : (A, A) -> Bool)")
+    let f = tm(
+      "((a : A) => (b : A) => (P : (A, A) -> Bool)(b, a)) == (Q : (A, A) -> Bool)",
+    )
     sthm(@ind_defs.right_betas(@list.List([x, y]))(@kernel.assume_rule(f)))
   })
   log.attempt("EXISTS_EQUATION", () => {
@@ -51,36 +53,54 @@ test "ind_defs matches ind_defs.ml" {
   ndef(
     "EVOD", "(EV : (A) -> Bool)((a : A)) && (∀ x : A, (OD : (A) -> Bool)(x) → EV((f : (A) -> A)(x))) && (∀ x : A, EV(x) → OD(f(x)))",
   )
-  ndef("EVB", "(EVB : (Bool) -> Bool)(true) && (∀ x : Bool, (ODB : (Bool) -> Bool)(x) → EVB(!x)) && (∀ x : Bool, EVB(x) → ODB(!x))")
+  ndef(
+    "EVB", "(EVB : (Bool) -> Bool)(true) && (∀ x : Bool, (ODB : (Bool) -> Bool)(x) → EVB(!x)) && (∀ x : Bool, EVB(x) → ODB(!x))",
+  )
   log.attempt("strong_ok", () => {
-    let t = tm("(NB : (Bool) -> Bool)(false) && (∀ x : Bool, NB(x) → NB(!x))")
+    let t = tm(
+      "(NB : (Bool) -> Bool)(false) && (∀ x : Bool, NB(x) → NB(!x))",
+    )
     let (rules, ind, _) = @ind_defs.new_inductive_definition(t)
     sthm(@ind_defs.derive_strong_induction((rules, ind)))
   })
-  ndef("ACC", "∀ x : A, (∀ y : A, (R : (A, A) -> Bool)(y, x) → (ACC : ((A, A) -> Bool, A) -> Bool)(R, y)) → ACC(R, x)")
+  ndef(
+    "ACC", "∀ x : A, (∀ y : A, (R : (A, A) -> Bool)(y, x) → (ACC : ((A, A) -> Bool, A) -> Bool)(R, y)) → ACC(R, x)",
+  )
   ndef(
     "RTC_again", "(∀ x : A, RTC((R : (A, A) -> Bool), x, x)) && (∀ x : A, ∀ y : A, ∀ z : A, R(x, y) && RTC(R, y, z) → RTC(R, x, z))",
   )
   log.attempt("exist", () => {
-    let t = tm("(∀ x : A, (TC : ((A, A) -> Bool, A, A) -> Bool)((R : (A, A) -> Bool), x, x) → TC(R, x, x)) && (∀ x : A, ∀ y : A, R(x, y) → TC(R, x, y))")
+    let t = tm(
+      "(∀ x : A, (TC : ((A, A) -> Bool, A, A) -> Bool)((R : (A, A) -> Bool), x, x) → TC(R, x, x)) && (∀ x : A, ∀ y : A, R(x, y) → TC(R, x, y))",
+    )
     sthm(@ind_defs.prove_inductive_relations_exist(t))
   })
   log.attempt("derive_nonschematic", () => {
-    let t = tm("(∀ x : A, (Q : (A) -> Bool)(x)) && (∀ x : A, Q(x) → Q((g : (A) -> A)(x)))")
+    let t = tm(
+      "(∀ x : A, (Q : (A) -> Bool)(x)) && (∀ x : A, Q(x) → Q((g : (A) -> A)(x)))",
+    )
     sthm(@ind_defs.derive_nonschematic_inductive_relations(t))
   })
   ndef("bad_clause", "∀ x : A, !(BAD : (A) -> Bool)(x) → BAD(x)")
   log.attempt("strong", () => {
-    let t = tm("(EV2 : (A) -> Bool)((a : A)) && (∀ x : A, EV2(x) → EV2((f : (A) -> A)(x)))")
+    let t = tm(
+      "(EV2 : (A) -> Bool)((a : A)) && (∀ x : A, EV2(x) → EV2((f : (A) -> A)(x)))",
+    )
     let (rules, ind, _) = @ind_defs.new_inductive_definition(t)
     sthm(@ind_defs.derive_strong_induction((rules, ind)))
   })
   log.attempt("prove_monotonicity_hyps", () => {
-    let th = @kernel.assume_rule(tm("(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → (R : Bool)"))
+    let th = @kernel.assume_rule(
+      tm(
+        "(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → (R : Bool)",
+      ),
+    )
     sthm(@ind_defs.prove_monotonicity_hyps(th))
   })
   log.attempt("MONO_TAC", () => {
-    let w = tm("(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → (∀ x : A, P(x) && (c : Bool)) → (∀ x : A, Q(x) && c)")
+    let w = tm(
+      "(∀ x : A, (P : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)) → (∀ x : A, P(x) && (c : Bool)) → (∀ x : A, Q(x) && c)",
+    )
     let tac = @tactics.then_tac(@tactics.disch_tac, g => @ind_defs.mono_tac(g))
     let (_, gls, _) = tac((@list.List([]), w))
     gls.length().to_string()

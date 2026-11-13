@@ -20,14 +20,18 @@ test "quot matches quot.ml" {
   let rw = (ths : Array[@kernel.Thm]) => @simp.rewrite_tac(@list.List(ths))
   let meson = @meson.meson_tac(@list.List([])) catch { e => fail("\{e}") }
   try {
-    let beq = @drule.new_definition(tm("(BEQ : (Bool, Bool) -> Bool)((x : Bool), (y : Bool)) == (x == y)"))
+    let beq = @drule.new_definition(
+      tm("(BEQ : (Bool, Bool) -> Bool)((x : Bool), (y : Bool)) == (x == y)"),
+    )
     let refl_th = @tactics.prove(tm("∀ x : Bool, BEQ(x, x)"), rw([beq]))
     let sym_th = @tactics.prove(
       tm("∀ x : Bool, ∀ y : Bool, BEQ(x, y) == BEQ(y, x)"),
       @tactics.then_tac(rw([beq]), meson),
     )
     let trans_th = @tactics.prove(
-      tm("∀ x : Bool, ∀ y : Bool, ∀ z : Bool, BEQ(x, y) && BEQ(y, z) → BEQ(x, z)"),
+      tm(
+        "∀ x : Bool, ∀ y : Bool, ∀ z : Bool, BEQ(x, y) && BEQ(y, z) → BEQ(x, z)",
+      ),
       @tactics.then_tac(rw([beq]), meson),
     )
     let q = @quot.define_quotient_type(

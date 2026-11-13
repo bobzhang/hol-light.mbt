@@ -12,15 +12,33 @@ fn same(new : String, spelt : String) -> Unit raise {
 ///|
 test "quantifiers, connectives and their precedence" {
   same("∀ n : Num, n + 0 == n", "∀ n : Num, op_eq(op_plus(n, 0), n)")
-  same("∀ p : Bool, ∃ q : Bool, p → q", "∀ p : Bool, ∃ q : Bool, op_eq_eq_gt(p, q)")
-  same("∀ x : _, ∀ y : _, x + y == y + x", "∀ x : Num, ∀ y : Num, op_eq(op_plus(x, y), op_plus(y, x))")
-  same("∀ x : Num, x == x && true", "∀ x : Num, op_slash_bslash(op_eq(x, x), true)")
-  same("∀ a : Bool, ∀ b : Bool, ∀ c : Bool, a && b || c", "∀ a : Bool, ∀ b : Bool, ∀ c : Bool, op_bslash_slash(op_slash_bslash(a, b), c)")
-  same("∀ p : _, ∀ q : _, ∀ r : _, p → q → r", "∀ p : Bool, ∀ q : Bool, ∀ r : Bool, op_eq_eq_gt(p, op_eq_eq_gt(q, r))")
-  same("∀ a : _, ∀ b : _, ∀ c : _, ∀ d : Num, a + b * c == d", "∀ a : Num, ∀ b : Num, ∀ c : Num, ∀ d : Num, op_eq(op_plus(a, op_star(b, c)), d)")
-  same("∀ p : _, ∀ q : _, !p || q", "∀ p : Bool, ∀ q : Bool, op_bslash_slash(op_tilde(p), q)")
-  same("∀ x : Num, ∀ y : _, x != y → y != x", "∀ x : Num, ∀ y : Num, op_eq_eq_gt(op_tilde(op_eq(x, y)), op_tilde(op_eq(y, x)))")
-  same("∀ a : Num, ∀ b : _, a - b <= a", "∀ a : Num, ∀ b : Num, op_lt_eq(op_minus(a, b), a)")
+  same(
+    "∀ p : Bool, ∃ q : Bool, p → q", "∀ p : Bool, ∃ q : Bool, op_eq_eq_gt(p, q)",
+  )
+  same(
+    "∀ x : _, ∀ y : _, x + y == y + x", "∀ x : Num, ∀ y : Num, op_eq(op_plus(x, y), op_plus(y, x))",
+  )
+  same(
+    "∀ x : Num, x == x && true", "∀ x : Num, op_slash_bslash(op_eq(x, x), true)",
+  )
+  same(
+    "∀ a : Bool, ∀ b : Bool, ∀ c : Bool, a && b || c", "∀ a : Bool, ∀ b : Bool, ∀ c : Bool, op_bslash_slash(op_slash_bslash(a, b), c)",
+  )
+  same(
+    "∀ p : _, ∀ q : _, ∀ r : _, p → q → r", "∀ p : Bool, ∀ q : Bool, ∀ r : Bool, op_eq_eq_gt(p, op_eq_eq_gt(q, r))",
+  )
+  same(
+    "∀ a : _, ∀ b : _, ∀ c : _, ∀ d : Num, a + b * c == d", "∀ a : Num, ∀ b : Num, ∀ c : Num, ∀ d : Num, op_eq(op_plus(a, op_star(b, c)), d)",
+  )
+  same(
+    "∀ p : _, ∀ q : _, !p || q", "∀ p : Bool, ∀ q : Bool, op_bslash_slash(op_tilde(p), q)",
+  )
+  same(
+    "∀ x : Num, ∀ y : _, x != y → y != x", "∀ x : Num, ∀ y : Num, op_eq_eq_gt(op_tilde(op_eq(x, y)), op_tilde(op_eq(y, x)))",
+  )
+  same(
+    "∀ a : Num, ∀ b : _, a - b <= a", "∀ a : Num, ∀ b : Num, op_lt_eq(op_minus(a, b), a)",
+  )
 }
 
 ///|
@@ -28,8 +46,12 @@ test "application, lambdas, conditionals, tuples and lists" {
   same("∀ n : _, SUC(n) > n", "∀ n : Num, op_gt(SUC(n), n)")
   same("(x : Num) => x * 2", "(x : Num) => op_star(x, 2)")
   same("(x : Num, y : Num) => x + y", "(x : Num) => (y : Num) => op_plus(x, y)")
-  same("∀ f : (Num, Num) -> Num, ∀ x : _, ∀ y : _, x.f(y) == f(x, y)", "∀ f : (Num) -> (Num) -> Num, ∀ x : Num, ∀ y : Num, op_eq(f(x)(y), f(x)(y))")
-  same("∀ c : Bool, ∀ a : Num, ∀ b : _, (if c { a } else { b }) <= a + b", "∀ c : Bool, ∀ a : Num, ∀ b : Num, op_lt_eq(COND(c, a, b), op_plus(a, b))")
+  same(
+    "∀ f : (Num, Num) -> Num, ∀ x : _, ∀ y : _, x.f(y) == f(x, y)", "∀ f : (Num) -> (Num) -> Num, ∀ x : Num, ∀ y : Num, op_eq(f(x)(y), f(x)(y))",
+  )
+  same(
+    "∀ c : Bool, ∀ a : Num, ∀ b : _, (if c { a } else { b }) <= a + b", "∀ c : Bool, ∀ a : Num, ∀ b : Num, op_lt_eq(COND(c, a, b), op_plus(a, b))",
+  )
   same("(1, 2)", "op_comma(1, 2)")
   same("(1, true, 3)", "op_comma(1, op_comma(true, 3))")
   same("[1, 2, 3]", "CONS(1, CONS(2, CONS(3, NIL)))")
@@ -39,7 +61,9 @@ test "application, lambdas, conditionals, tuples and lists" {
 test "HOL names: primes and capitalised binders" {
   same("∀ x' : Num, x' == x'", "∀ x' : Num, op_eq(x', x')")
   // as in MoonBit, a quantifier is not an operand of → without parentheses
-  same("∀ P : (Num) -> Bool, P(0) → (∃ n : _, P(n))", "∀ P : (Num) -> Bool, op_eq_eq_gt(P(0), ∃ n : Num, P(n))")
+  same(
+    "∀ P : (Num) -> Bool, P(0) → (∃ n : _, P(n))", "∀ P : (Num) -> Bool, op_eq_eq_gt(P(0), ∃ n : Num, P(n))",
+  )
 }
 
 ///|
@@ -50,13 +74,19 @@ test "types" {
   let b = @kernel.mk_vartype("B")
   let arrow = @basics.mk_fun_ty
   let list = (x : @kernel.HolType) => @kernel.mk_type("list", @list.List([x]))
-  assert_eq(ty("(Num, Bool) -> Bool"), arrow(num, arrow(@kernel.bool_ty, @kernel.bool_ty)))
-  assert_eq(ty("(Num, Bool)"), @kernel.mk_type("prod", @list.List([num, @kernel.bool_ty])))
+  assert_eq(
+    ty("(Num, Bool) -> Bool"),
+    arrow(num, arrow(@kernel.bool_ty, @kernel.bool_ty)),
+  )
+  assert_eq(
+    ty("(Num, Bool)"),
+    @kernel.mk_type("prod", @list.List([num, @kernel.bool_ty])),
+  )
   assert_eq(ty("List[A]"), list(a))
   assert_eq(ty("((A) -> B, A) -> B"), arrow(arrow(a, b), arrow(a, b)))
   assert_eq(ty("List[6]"), list(ty("6")))
   assert_eq(ty("1"), @kernel.mk_type("1", @list.List([])))
-  assert_true((try Some(ty("0")) catch { _ => None }) is None)
+  assert_true((Some(ty("0")) catch { _ => None }) is None)
 }
 
 ///|
@@ -82,7 +112,7 @@ test "binders cannot capture what the syntax stands for" {
 }
 
 ///|
-fn rejects(s : String, is_type? : Bool = false) -> String raise {
+fn rejects(s : String, is_type~ : Bool = false) -> String raise {
   try {
     if is_type {
       ignore(@term_syntax.parse_type(s))
@@ -98,10 +128,22 @@ fn rejects(s : String, is_type? : Bool = false) -> String raise {
 
 ///|
 test "input without a meaning is an error, not an abort" {
-  inspect(rejects("1 % 2"), content="term syntax: operator % has no HOL meaning")
-  inspect(rejects("Bool[Num]", is_type=true), content="term syntax: type Bool takes 0 arguments")
-  inspect(rejects("_", is_type=true), content="term syntax: _ alone is not a type")
-  inspect(rejects("(let : Bool) => let"), content="term syntax: let is a MoonBit keyword")
+  inspect(
+    rejects("1 % 2"),
+    content="term syntax: operator % has no HOL meaning",
+  )
+  inspect(
+    rejects("Bool[Num]", is_type=true),
+    content="term syntax: type Bool takes 0 arguments",
+  )
+  inspect(
+    rejects("_", is_type=true),
+    content="term syntax: _ alone is not a type",
+  )
+  inspect(
+    rejects("(let : Bool) => let"),
+    content="term syntax: let is a MoonBit keyword",
+  )
 }
 
 ///|
@@ -109,7 +151,11 @@ test "a hole inside a type is a fresh type variable" {
   let t = @term_syntax.parse_term("(xs : List[_]) => xs == xs")
   let elem = @kernel.type_of(@kernel.dest_abs(t).0)
   assert_true(elem is Tyapp("list", More(Tyvar(_), tail=Empty)))
-  assert_true(@kernel.is_vartype(@basics.dest_fun_ty(@term_syntax.parse_type("(_) -> Bool")).0))
+  assert_true(
+    @kernel.is_vartype(
+      @basics.dest_fun_ty(@term_syntax.parse_type("(_) -> Bool")).0,
+    ),
+  )
 }
 
 ///|
@@ -170,13 +216,16 @@ test "print_term_in_context leaves the context's variables untyped" {
   // the context would give a variable of the same name its type
   let n = @kernel.mk_var("n", @kernel.bool_ty)
   inspect(
-    try @term_syntax.print_term_in_context(env, n) catch {
+    @term_syntax.print_term_in_context(env, n) catch {
       Unprintable(m) => m
     },
     content="term whose types the syntax cannot pin down",
   )
   let f = @term_syntax.parse_term_in_context(env, "∀ m : Num, m == n")
-  inspect(@term_syntax.print_term_in_context(env, f), content="∀ m : Num, m == n")
+  inspect(
+    @term_syntax.print_term_in_context(env, f),
+    content="∀ m : Num, m == n",
+  )
   // a binder that would capture the context's variable is renamed, which
   // an exact spelling does not allow
   let x_num = @kernel.mk_var("x", @kernel.mk_type("num", @list.List([])))
@@ -186,7 +235,7 @@ test "print_term_in_context leaves the context's variables untyped" {
     content="(x' : Num) => x",
   )
   inspect(
-    try @term_syntax.print_term_in_context(env, shadow, exact=true) catch {
+    @term_syntax.print_term_in_context(env, shadow, exact=true) catch {
       Unprintable(m) => m
     },
     content="term whose bound variables would be renamed",
@@ -198,9 +247,17 @@ test "type definitions" {
   let tree = @kernel.mk_vartype("tree")
   let num = @kernel.mk_type("num", @list.List([]))
   assert_eq(
-    @term_syntax.parse_type_definition("enum Tree { Leaf(Num); Node(Tree, Tree) }"),
+    @term_syntax.parse_type_definition(
+      "enum Tree { Leaf(Num); Node(Tree, Tree) }",
+    ),
     @list.List([
-      (tree, @list.List([("Leaf", @list.List([num])), ("Node", @list.List([tree, tree]))])),
+      (
+        tree,
+        @list.List([
+          ("Leaf", @list.List([num])),
+          ("Node", @list.List([tree, tree])),
+        ]),
+      ),
     ]),
   )
   // mutually recursive types, symbolic and nullary constructors
@@ -213,8 +270,18 @@ test "type definitions" {
   assert_eq(
     defs,
     @list.List([
-      (form, @list.List([("False", @list.List([])), ("&&", @list.List([form, form])), ("All", @list.List([num, terms]))])),
-      (term, @list.List([("V", @list.List([num])), ("Fn", @list.List([num, terms]))])),
+      (
+        form,
+        @list.List([
+          ("False", @list.List([])),
+          ("&&", @list.List([form, form])),
+          ("All", @list.List([num, terms])),
+        ]),
+      ),
+      (
+        term,
+        @list.List([("V", @list.List([num])), ("Fn", @list.List([num, terms]))]),
+      ),
     ]),
   )
 }
@@ -223,26 +290,42 @@ test "type definitions" {
 test "record definitions" {
   let num = @kernel.mk_type("num", @list.List([]))
   assert_eq(
-    @term_syntax.parse_record_definition("struct Point { x : Num; y : List[Num]; }"),
-    ("point", @list.List([("x", num), ("y", @kernel.mk_type("list", @list.List([num])))])),
+    @term_syntax.parse_record_definition(
+      "struct Point { x : Num; y : List[Num]; }",
+    ),
+    (
+      "point",
+      @list.List([("x", num), ("y", @kernel.mk_type("list", @list.List([num])))]),
+    ),
   )
   // a field referring to the record reads as the type being defined
   let zz_r = @kernel.mk_vartype("zz_r")
   assert_eq(
     @term_syntax.parse_record_definition("struct Zz_r { kids : List[Zz_r] }"),
-    ("zz_r", @list.List([("kids", @kernel.mk_type("list", @list.List([zz_r])))])),
+    (
+      "zz_r",
+      @list.List([("kids", @kernel.mk_type("list", @list.List([zz_r])))]),
+    ),
   )
 }
 
 ///|
 test "an enum's own types read before other names" {
   // `Zz_t` between backticks is a type variable, not the type being defined
-  let defs = @term_syntax.parse_type_definition("enum Zz_t { Zl; Zb(`Zz_t`, Zz_t) }")
+  let defs = @term_syntax.parse_type_definition(
+    "enum Zz_t { Zl; Zb(`Zz_t`, Zz_t) }",
+  )
   let zz_t = @kernel.mk_vartype("zz_t")
   assert_eq(
     defs,
     @list.List([
-      (zz_t, @list.List([("Zl", @list.List([])), ("Zb", @list.List([@kernel.mk_vartype("Zz_t"), zz_t]))])),
+      (
+        zz_t,
+        @list.List([
+          ("Zl", @list.List([])),
+          ("Zb", @list.List([@kernel.mk_vartype("Zz_t"), zz_t])),
+        ]),
+      ),
     ]),
   )
   // nor is a type variable an abbreviation stands for
@@ -278,7 +361,7 @@ test "verbatim type names" {
   assert_eq(ty("Zz_v"), lower)
   assert_eq(ty("`Zz_v`[Bool]"), upper)
   inspect(@term_syntax.print_type(upper), content="`Zz_v`[Bool]")
-  assert_true((try Some(ty("`Zz_v`")) catch { _ => None }) is None)
+  assert_true((Some(ty("`Zz_v`")) catch { _ => None }) is None)
   // a primed type variable, as HOL writes its type variables
   let a = @kernel.mk_vartype("'a")
   assert_eq(ty("`'a`"), a)
@@ -290,14 +373,23 @@ test "verbatim type names" {
   inspect(@term_syntax.print_type(zz_u), content="`zz_u`")
   assert_eq(ty("`zz_u`"), zz_u)
   let zz_v = @kernel.mk_vartype("zz_v")
-  assert_true((try Some(@term_syntax.print_type(zz_v)) catch { _ => None }) is None)
+  assert_true((Some(@term_syntax.print_type(zz_v)) catch { _ => None }) is None)
   // and an enum defining one, whose constructors refer to it so; a
   // constructor named like a keyword is written so too
   let zz_w = @kernel.mk_vartype("Zz_w")
   assert_eq(
-    @term_syntax.parse_type_definition("enum `Zz_w` { Zw0; Zw(`Zz_w`, A); `module` }"),
+    @term_syntax.parse_type_definition(
+      "enum `Zz_w` { Zw0; Zw(`Zz_w`, A); `module` }",
+    ),
     @list.List([
-      (zz_w, @list.List([("Zw0", @list.List([])), ("Zw", @list.List([zz_w, @kernel.mk_vartype("A")])), ("module", @list.List([]))])),
+      (
+        zz_w,
+        @list.List([
+          ("Zw0", @list.List([])),
+          ("Zw", @list.List([zz_w, @kernel.mk_vartype("A")])),
+          ("module", @list.List([])),
+        ]),
+      ),
     ]),
   )
 }
@@ -312,7 +404,7 @@ test "type abbreviations" {
   defer @preterm.remove_type_abbrev("zz_pair")
   let ty = @term_syntax.parse_type
   assert_eq(ty("(Zz_pair) -> Bool"), @basics.mk_fun_ty(a_num, @kernel.bool_ty))
-  assert_true((try Some(ty("Zz_pair[Num]")) catch { _ => None }) is None)
+  assert_true((Some(ty("Zz_pair[Num]")) catch { _ => None }) is None)
   // a type variable named like the abbreviation would read as it, so is
   // written verbatim
   let v = @kernel.mk_vartype("Zz_pair")

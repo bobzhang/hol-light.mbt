@@ -78,7 +78,9 @@ test "class matches class.ml" {
     log.attempt(name, () => sthm(f()))
   }
   th("ETA_CONV", () => @class.eta_conv(tm("(x : A) => (f : (A) -> B)(x)")))
-  th("ETA_CONV_bad", () => @class.eta_conv(tm("(x : A) => (f : (A, A) -> B)(x, x)")))
+  th("ETA_CONV_bad", () => {
+    @class.eta_conv(tm("(x : A) => (f : (A, A) -> B)(x, x)"))
+  })
   log.attempt("select", () => {
     let t = tm("select((x : A) => (P : (A) -> Bool)(x))")
     let (v, b) = @class.dest_select(t)
@@ -91,22 +93,34 @@ test "class matches class.ml" {
     stm(@class.mk_select((v, b)))
   })
   th("SELECT_RULE", () => {
-    @class.select_rule(@kernel.assume_rule(tm("∃ x : A, (P : (A) -> Bool)(x)")))
+    @class.select_rule(
+      @kernel.assume_rule(tm("∃ x : A, (P : (A) -> Bool)(x)")),
+    )
   })
-  th("SELECT_CONV", () => @class.select_conv(tm("(P : (A) -> Bool)(select((x : A) => P(x)))")))
+  th("SELECT_CONV", () => {
+    @class.select_conv(tm("(P : (A) -> Bool)(select((x : A) => P(x)))"))
+  })
   th("TAUT1", () => @class.taut(tm("(p : Bool) || !p")))
   th("TAUT2", () => @class.taut(tm("((p : Bool) → (q : Bool)) || (q → p)")))
-  th("TAUT3", () => @class.taut(tm("((a : Bool) == (b : Bool)) == (a && b || !a && !b)")))
+  th("TAUT3", () => {
+    @class.taut(tm("((a : Bool) == (b : Bool)) == (a && b || !a && !b)"))
+  })
   th("TAUT_bad", () => @class.taut(tm("(p : Bool) → (q : Bool)")))
   th("TAUT_cond", () => {
-    @class.taut(tm("(if (b : Bool) { (x : A) } else { (y : A) }) == (if !b { y } else { x })"))
+    @class.taut(
+      tm(
+        "(if (b : Bool) { (x : A) } else { (y : A) }) == (if !b { y } else { x })",
+      ),
+    )
   })
   th("CCONTR", () => {
     let p = tm("(p : Bool)")
     let th0 = @kernel.assume_rule(tm("!(p : Bool) → false"))
     @class.ccontr(p)(@bool.undisch(th0))
   })
-  th("CONTRAPOS_CONV", () => @class.contrapos_conv(tm("(p : Bool) → (q : Bool)")))
+  th("CONTRAPOS_CONV", () => {
+    @class.contrapos_conv(tm("(p : Bool) → (q : Bool)"))
+  })
   log.attempt("cond", () => {
     let b = tm("(b : Bool)")
     let x = tm("(x : A)")
@@ -124,10 +138,15 @@ test "class matches class.ml" {
     stm(y1)
   })
   th("COND_ELIM_CONV", () => {
-    @class.cond_elim_conv(tm("(P : (A) -> Bool)(if (b : Bool) { (x : A) } else { (y : A) })"))
+    @class.cond_elim_conv(
+      tm("(P : (A) -> Bool)(if (b : Bool) { (x : A) } else { (y : A) })"),
+    )
   })
   st("COND_CASES_TAC", () => {
-    (tm("(P : (A) -> Bool)(if (b : Bool) { (x : A) } else { (y : A) })"), g => @class.cond_cases_tac(g))
+    (
+      tm("(P : (A) -> Bool)(if (b : Bool) { (x : A) } else { (y : A) })"),
+      g => @class.cond_cases_tac(g),
+    )
   })
   st("BOOL_CASES_TAC", () => {
     let w = tm("(P : (Bool) -> Bool)((b : Bool))")

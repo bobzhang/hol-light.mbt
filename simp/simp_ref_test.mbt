@@ -67,7 +67,9 @@ test "simp matches simp.ml" {
     slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   log.attempt("mk_rewrites_exists", () => {
-    let th = hyp("∀ x : A, ∀ y : A, (P : (A, A) -> Bool)(x, y) → (Q : (A, A) -> Bool)(x, y) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th = hyp(
+      "∀ x : A, ∀ y : A, (P : (A, A) -> Bool)(x, y) → (Q : (A, A) -> Bool)(x, y) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   cv("REWRITE_CONV", () => {
@@ -172,7 +174,9 @@ test "simp matches simp.ml" {
     @simp.rewrites_conv(@nets.empty_net())(t)
   })
   cv("SIMP_CONV_cond", () => {
-    let th1 = hyp("∀ x : A, (P : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th1 = hyp(
+      "∀ x : A, (P : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     let th2 = hyp("(P : (A) -> Bool)((a : A))")
     let t = tm("(h : (A) -> A)((f : (A) -> A)((a : A))) == f((b : A))")
     @simp.simp_conv(ths([th1, th2]))(t)
@@ -198,7 +202,9 @@ test "simp matches simp.ml" {
     @simp.simp_rule(ths([th]))(th2)
   })
   let imp_cong = @itab.itaut(
-    tm("(p : Bool) == (p' : Bool) → (p' → (q : Bool) == (q' : Bool)) → (p → q) == (p' → q')"),
+    tm(
+      "(p : Bool) == (p' : Bool) → (p' → (q : Bool) == (q' : Bool)) → (p → q) == (p' → q')",
+    ),
   ) catch {
     e => fail("imp_cong: \{e}")
   }
@@ -214,7 +220,9 @@ test "simp matches simp.ml" {
   })
   cv("SIMP_cong_deep", () => {
     let ss = @simp.ss_of_congs(ths([imp_cong]), @simp.empty_ss)
-    let th = hyp("∀ x : A, (P : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th = hyp(
+      "∀ x : A, (P : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     let t = tm("(P : (A) -> Bool)((a : A)) → (f : (A) -> A)(a) == (b : A)")
     @simp.simplify_conv(ss, ths([th]))(t)
   })
@@ -244,24 +252,32 @@ test "simp matches simp.ml" {
       ths([]).map(_ => pr).concat(@list.singleton(@simp.augment(pr, ths([qa])))),
       @simp.empty_ss,
     )
-    let th = hyp("∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th = hyp(
+      "∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     let t = tm("(f : (A) -> A)((a : A))")
     @simp.simplify_conv(ss, ths([th]))(t)
   })
   cv("prover_none", () => {
-    let th = hyp("∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th = hyp(
+      "∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     let t = tm("(f : (A) -> A)((a : A))")
     @simp.simplify_conv(@simp.empty_ss, ths([th]))(t)
   })
   cv("too_deep", () => {
-    let th1 = hyp("∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th1 = hyp(
+      "∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     let th2 = hyp("∀ x : A, (R : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)")
     let th3 = hyp("(R : (A) -> Bool)((a : A))")
     let t = tm("(f : (A) -> A)((a : A))")
     @simp.once_simplify_conv(@simp.empty_ss, ths([th1, th2, th3]))(t)
   })
   cv("deep_ok", () => {
-    let th1 = hyp("∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)")
+    let th1 = hyp(
+      "∀ x : A, (Q : (A) -> Bool)(x) → (f : (A) -> A)(x) == (g : (A) -> A)(x)",
+    )
     let th2 = hyp("∀ x : A, (R : (A) -> Bool)(x) → (Q : (A) -> Bool)(x)")
     let th3 = hyp("(R : (A) -> Bool)((a : A))")
     let t = tm("(f : (A) -> A)((a : A))")
@@ -275,7 +291,9 @@ test "simp matches simp.ml" {
   })
   cv("REDEPTH_SQCONV", () => {
     let th1 = hyp("∀ x : A, (f : (A) -> A)(x) == (g : (A) -> A)(x)")
-    let th2 = hyp("∀ x : A, (h : (A) -> A)((g : (A) -> A)(x)) == (f : (A) -> A)(x)")
+    let th2 = hyp(
+      "∀ x : A, (h : (A) -> A)((g : (A) -> A)(x)) == (f : (A) -> A)(x)",
+    )
     let ss = @simp.ss_of_thms(ths([th1, th2]), @simp.empty_ss)
     let t = tm("(h : (A) -> A)((f : (_) -> A)((a : _)))")
     @simp.redepth_sqconv(ss, 3, t)
@@ -292,7 +310,9 @@ test "simp matches simp.ml" {
       @equal.beta_conv,
       @simp.empty_ss,
     )
-    let t = tm("((x : A) => (f : (A) -> B)(x))((c : A)) == ((y : A) => f(y))((d : A))")
+    let t = tm(
+      "((x : A) => (f : (A) -> B)(x))((c : A)) == ((y : A) => f(y))((d : A))",
+    )
     @simp.simplify_conv(ss, @list.List([]))(t)
   })
   log.attempt("basic_rewrites", () => {
@@ -464,7 +484,6 @@ test "simp matches simp.ml" {
       #|counter_tyvar = zz_counter:'?5
       #|counter_genvar = _15:bool
       #|
-
     ),
   )
 }

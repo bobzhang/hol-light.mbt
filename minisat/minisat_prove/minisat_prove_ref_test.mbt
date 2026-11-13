@@ -37,15 +37,23 @@ test "Minisat/minisat_prove matches Minisat/minisat_prove.ml" {
   // SAT_PROVE runs MiniSat (the directory's own test.ml also needs zChaff):
   // three small problems, the runs recorded and replayed
   log.attempt("SAT_PROVE 1", () => {
-    sthm(@minisat_prove.sat_prove(tm("((p : Bool) → (q : Bool)) == (p == (p && q))")))
+    sthm(
+      @minisat_prove.sat_prove(
+        tm("((p : Bool) → (q : Bool)) == (p == (p && q))"),
+      ),
+    )
   })
   log.attempt("SAT_PROVE 2", () => {
-    sthm(@minisat_prove.sat_prove(tm("(((p : Bool) → (q : Bool)) → p) → p")))
+    sthm(
+      @minisat_prove.sat_prove(tm("(((p : Bool) → (q : Bool)) → p) → p")),
+    )
   })
   log.attempt("SAT_PROVE 3", () => {
     sthm(
       @minisat_prove.sat_prove(
-        tm("((a : Bool) || (b : Bool)) && (!a || (c : Bool)) && (!b || c) → c"),
+        tm(
+          "((a : Bool) || (b : Bool)) && (!a || (c : Bool)) && (!b || c) → c",
+        ),
       ),
     )
   })

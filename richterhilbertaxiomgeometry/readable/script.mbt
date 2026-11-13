@@ -30,13 +30,13 @@ pub(all) enum Arg {
   ThmsTermRule(
     (@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise,
     Array[Arg],
-    String
+    String,
   )
   /// A rule from terms and a theorem (`term list -> thm -> thm`).
   TermsRule(
     (@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
     Array[String],
-    Arg
+    Arg,
   )
 }
 

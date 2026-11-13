@@ -43,8 +43,16 @@ test "impconv matches impconv.ml" {
     tac : (@tactics.Goal) -> @tactics.Goalstate raise,
   ) => log.attempt(name, () => sthm(@tactics.prove(w, tac)))
   let (ax, ax2, px) = try {
-    let ax = @kernel.assume_rule(tm("∀ x : Bool, (P : (Bool) -> Bool)(x) → (f : (Bool) -> Bool)(x) == (g : (Bool) -> Bool)(x)"))
-    let ax2 = @kernel.assume_rule(tm("∀ x : Bool, (Q : (Bool) -> Bool)(x) → (g : (Bool) -> Bool)(x) == (h : (Bool) -> Bool)(x)"))
+    let ax = @kernel.assume_rule(
+      tm(
+        "∀ x : Bool, (P : (Bool) -> Bool)(x) → (f : (Bool) -> Bool)(x) == (g : (Bool) -> Bool)(x)",
+      ),
+    )
+    let ax2 = @kernel.assume_rule(
+      tm(
+        "∀ x : Bool, (Q : (Bool) -> Bool)(x) → (g : (Bool) -> Bool)(x) == (h : (Bool) -> Bool)(x)",
+      ),
+    )
     let px = @kernel.assume_rule(tm("(P : (Bool) -> Bool)((a : Bool))"))
     (ax, ax2, px)
   } catch {
@@ -56,7 +64,9 @@ test "impconv matches impconv.ml" {
   try {
     st(
       "imp_rewrite",
-      goal("(P : (Bool) -> Bool)((a : Bool)) → (g : (Bool) -> Bool)(a) → (f : (Bool) -> Bool)(a)"),
+      goal(
+        "(P : (Bool) -> Bool)((a : Bool)) → (g : (Bool) -> Bool)(a) → (f : (Bool) -> Bool)(a)",
+      ),
       @impconv.imp_rewrite_tac(ths([ax])),
     )
     st(
@@ -84,7 +94,11 @@ test "impconv matches impconv.ml" {
       (@list.singleton(("h", px)), tm("(f : (Bool) -> _)((a : Bool))")),
       @impconv.imp_rewrite_tac(ths([ax])),
     )
-    st("case_rewrite", goal("(f : (Bool) -> _)((a : Bool))"), @impconv.case_rewrite_tac(ax))
+    st(
+      "case_rewrite",
+      goal("(f : (Bool) -> _)((a : Bool))"),
+      @impconv.case_rewrite_tac(ax),
+    )
     st(
       "target_rewrite",
       goal("(f : (Bool) -> _)((a : Bool))"),
@@ -95,7 +109,11 @@ test "impconv matches impconv.ml" {
       (@list.singleton(("h", px)), tm("∃ x : Bool, (P : (Bool) -> Bool)(x)")),
       @impconv.hint_exists_tac,
     )
-    st("hint_exists_none", goal("∃ x : Bool, (P : (Bool) -> Bool)(x)"), @impconv.hint_exists_tac)
+    st(
+      "hint_exists_none",
+      goal("∃ x : Bool, (P : (Bool) -> Bool)(x)"),
+      @impconv.hint_exists_tac,
+    )
     st(
       "imp_rewrite_forall",
       goal("∀ y : Bool, (P : (Bool) -> Bool)(y) → (f : (Bool) -> Bool)(y)"),
@@ -108,7 +126,9 @@ test "impconv matches impconv.ml" {
     )
     pv(
       "prove_imp_rewrite",
-      tm("(∀ x : Bool, (P : (Bool) -> Bool)(x) → (f : (Bool) -> Bool)(x) == (g : (Bool) -> Bool)(x)) → P((a : Bool)) → g(a) → f(a)"),
+      tm(
+        "(∀ x : Bool, (P : (Bool) -> Bool)(x) → (f : (Bool) -> Bool)(x) == (g : (Bool) -> Bool)(x)) → P((a : Bool)) → g(a) → f(a)",
+      ),
       @tactics.then_tac(
         @tactics.disch_then(th => @impconv.imp_rewrite_tac(ths([th]))),
         @itab.itaut_tac,

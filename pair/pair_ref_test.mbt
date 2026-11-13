@@ -80,16 +80,26 @@ test "pair matches pair.ml" {
     @printer.string_of_term(tm("fn { ((x : A), (y : B)) => (y, x) }"))
   })
   log.attempt("print_let", () => {
-    @printer.string_of_term(tm("LET(fn { (x, y) => LET_END((y, x)) }, (p : (A, B)))"))
+    @printer.string_of_term(
+      tm("LET(fn { (x, y) => LET_END((y, x)) }, (p : (A, B)))"),
+    )
   })
   log.attempt("gen_beta", () => {
     sthm(@pair.gen_beta_conv(tm("fn { (x, y) => (y, x) }(((a : A), (b : B)))")))
   })
   log.attempt("let_conv", () => {
-    sthm(@pair.let_conv(tm("LET(fn { (x, y) => LET_END((y, x)) }, ((a : A), (b : B)))")))
+    sthm(
+      @pair.let_conv(
+        tm("LET(fn { (x, y) => LET_END((y, x)) }, ((a : A), (b : B)))"),
+      ),
+    )
   })
   log.attempt("pair_def", () => {
-    sthm(@pair.new_definition(tm("(swapit : ((A, B)) -> (B, A))(((x : A), (y : B))) == (y, x)")))
+    sthm(
+      @pair.new_definition(
+        tm("(swapit : ((A, B)) -> (B, A))(((x : A), (y : B))) == (y, x)"),
+      ),
+    )
   })
   log.attempt("pair_tac", () => {
     sthm(

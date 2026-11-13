@@ -75,7 +75,7 @@ fn escape_chars(name : String) -> String? {
   let tokens = []
   let run = StringBuilder()
   for c in name {
-    if c is ('a'..='z' | 'A'..='Z' | '0'..='9') {
+    if c is ('a'..<='z' | 'A'..<='Z' | '0'..<='9') {
       run.write_char(c)
       continue
     }
@@ -133,7 +133,7 @@ pub fn unescape(ident : String) -> String {
   // elaboration generates
   let symbolic = !decoded
     .iter()
-    .all(c => c is ('a'..='z' | 'A'..='Z' | '0'..='9' | '_' | '\''))
+    .all(c => c is ('a'..<='z' | 'A'..<='Z' | '0'..<='9' | '_' | '\''))
   if symbolic &&
     !decoded.has_prefix("GEN%PVAR%") &&
     escape_chars(decoded) == Some(ident) {

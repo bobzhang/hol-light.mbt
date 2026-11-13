@@ -9,25 +9,53 @@ test "EC/formulary_jacobian matches EC/formulary_jacobian.ml" {
   @formulary_jacobian.load()
   let log = @testkit.Log::new()
   log.capture_reports()
-  for th in ["simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder", "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion", "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax", "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart", "define", "Library/iter", "Library/prime", "Library/pocklington", "Library/integer", "Library/isum", "Library/binomial", "Library/products", "Library/multiplicative", "Library/primitive", "Library/frag", "Library/wo", "Library/card", "Library/grouptheory", "Library/ringtheory", "EC/misc", "EC/weierstrass", "EC/jacobian", "EC/formulary_jacobian"] {
+  for
+    th in [
+      "simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder",
+      "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion",
+      "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax",
+      "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart",
+      "define", "Library/iter", "Library/prime", "Library/pocklington", "Library/integer",
+      "Library/isum", "Library/binomial", "Library/products", "Library/multiplicative",
+      "Library/primitive", "Library/frag", "Library/wo", "Library/card", "Library/grouptheory",
+      "Library/ringtheory", "EC/misc", "EC/weierstrass", "EC/jacobian", "EC/formulary_jacobian",
+    ] {
     log.show_theory_output(th)
   }
   log.show_theory_trace("EC/formulary_jacobian")
   log.capture_stdout()
   // BEGIN generated theorem list
   log.attempt("ja_dbl_2007_bl", () => sthm(@formulary_jacobian.ja_dbl_2007_bl()))
-  log.attempt("JA_DBL_2007_BL", () => sthm(@formulary_jacobian.ja_dbl_2007_bl_v1()))
-  log.attempt("JA_DBL_2007_BL'", () => sthm(@formulary_jacobian.ja_dbl_2007_bl_p()))
+  log.attempt("JA_DBL_2007_BL", () => {
+    sthm(@formulary_jacobian.ja_dbl_2007_bl_v1())
+  })
+  log.attempt("JA_DBL_2007_BL'", () => {
+    sthm(@formulary_jacobian.ja_dbl_2007_bl_p())
+  })
   log.attempt("j3_dbl_2001_b", () => sthm(@formulary_jacobian.j3_dbl_2001_b()))
-  log.attempt("J3_DBL_2001_B", () => sthm(@formulary_jacobian.j3_dbl_2001_b_v1()))
-  log.attempt("J3_DBL_2001_B'", () => sthm(@formulary_jacobian.j3_dbl_2001_b_p()))
+  log.attempt("J3_DBL_2001_B", () => {
+    sthm(@formulary_jacobian.j3_dbl_2001_b_v1())
+  })
+  log.attempt("J3_DBL_2001_B'", () => {
+    sthm(@formulary_jacobian.j3_dbl_2001_b_p())
+  })
   log.attempt("j0_dbl_2009_l", () => sthm(@formulary_jacobian.j0_dbl_2009_l()))
-  log.attempt("J0_DBL_2009_L", () => sthm(@formulary_jacobian.j0_dbl_2009_l_v1()))
-  log.attempt("J0_DBL_2009_L'", () => sthm(@formulary_jacobian.j0_dbl_2009_l_p()))
+  log.attempt("J0_DBL_2009_L", () => {
+    sthm(@formulary_jacobian.j0_dbl_2009_l_v1())
+  })
+  log.attempt("J0_DBL_2009_L'", () => {
+    sthm(@formulary_jacobian.j0_dbl_2009_l_p())
+  })
   log.attempt("ja_add_2007_bl", () => sthm(@formulary_jacobian.ja_add_2007_bl()))
-  log.attempt("JA_ADD_2007_BL", () => sthm(@formulary_jacobian.ja_add_2007_bl_v1()))
-  log.attempt("ja_madd_2007_bl", () => sthm(@formulary_jacobian.ja_madd_2007_bl()))
-  log.attempt("JA_MADD_2007_BL", () => sthm(@formulary_jacobian.ja_madd_2007_bl_v1()))
+  log.attempt("JA_ADD_2007_BL", () => {
+    sthm(@formulary_jacobian.ja_add_2007_bl_v1())
+  })
+  log.attempt("ja_madd_2007_bl", () => {
+    sthm(@formulary_jacobian.ja_madd_2007_bl())
+  })
+  log.attempt("JA_MADD_2007_BL", () => {
+    sthm(@formulary_jacobian.ja_madd_2007_bl_v1())
+  })
   // END generated theorem list
   let tm = @term_syntax.parse_term
   log.attempt("types", () => {

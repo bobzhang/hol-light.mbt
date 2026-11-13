@@ -39,7 +39,7 @@ pub fn pfrees(ptm : Preterm) -> List[Preterm] raise {
 }
 
 ///|
-let pgen_counter : Ref[Int] = Ref::{ val: 0, }
+let pgen_counter : Ref[Int32] = Ref::{ val: 0, }
 
 ///|
 fn pgenvar() -> Preterm {
@@ -103,16 +103,10 @@ pub fn pmk_pattern_binding(
   let y = pgenvar()
   let vs = vs()
   let bod = if guards.is_empty() {
-    Combp(
-      Combp(pv("_UNGUARDED_PATTERN"), pmk_geq(pat, x)),
-      pmk_geq(res, y),
-    )
+    Combp(Combp(pv("_UNGUARDED_PATTERN"), pmk_geq(pat, x)), pmk_geq(res, y))
   } else {
     Combp(
-      Combp(
-        Combp(pv("_GUARDED_PATTERN"), pmk_geq(pat, x)),
-        @lib.hd(guards),
-      ),
+      Combp(Combp(pv("_GUARDED_PATTERN"), pmk_geq(pat, x)), @lib.hd(guards)),
       pmk_geq(res, y),
     )
   }
@@ -125,7 +119,9 @@ pub fn pmk_pattern_binding(
 /// generated names as they were.
 pub fn[T] with_pgen_counter_restored(f : () -> T raise) -> T raise {
   let start = pgen_counter.val
-  defer { pgen_counter.val = start }
+  defer {
+    pgen_counter.val = start
+  }
   f()
 }
 
@@ -133,12 +129,12 @@ pub fn[T] with_pgen_counter_restored(f : () -> T raise) -> T raise {
 /// Take `n` GEN%PVAR names unused: the names HOL's parser takes reading a
 /// set comprehension's element in the alternatives it tries first (the
 /// term syntax reads it once).
-pub fn skip_pgenvars(n : Int) -> Unit {
+pub fn skip_pgenvars(n : Int32) -> Unit {
   pgen_counter.val = pgen_counter.val + n
 }
 
 ///|
 /// The GEN%PVAR counter.
-pub fn pgen_count() -> Int {
+pub fn pgen_count() -> Int32 {
   pgen_counter.val
 }
