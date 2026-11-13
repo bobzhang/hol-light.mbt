@@ -124,7 +124,7 @@ pub fn string_sub(s : String, start : Int32, len : Int32) -> String raise {
     if start < 0 || len < 0 || start > s.length() - len {
       raise @num.InvalidArgument("String.sub / Bytes.sub")
     }
-    return s.view(start_offset=start, end_offset=start + len).to_owned()
+    return s[start:start + len].to_owned()
   }
   // the bytes of its UTF-8 encoding, which must be whole characters (the
   // proofs of RichterHilbertAxiomGeometry/ are strings with mathematical

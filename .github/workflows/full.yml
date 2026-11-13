@@ -43,7 +43,7 @@ jobs:
           echo "count=$count" >> "$GITHUB_OUTPUT"
           echo "tiers=${TIERS:-all}" >> "$GITHUB_OUTPUT"
           echo "shards=$(python3 -c "import json,sys; print(json.dumps(list(range(1, int(sys.argv[1]) + 1))))" "$count")" >> "$GITHUB_OUTPUT"
-          # a nightly run only when main changed in the last 25 hours
+          # a scheduled run only when main changed in the last 25 hours
           age=$(( $(date +%s) - $(git log -1 --format=%ct) ))
           if [ "$EVENT" = schedule ] && [ "$age" -gt 90000 ]; then
             echo "run=false" >> "$GITHUB_OUTPUT"
@@ -61,6 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        moonbit: [pre-release]
         shard: ${{ fromJSON(needs.plan.outputs.shards) }}
 
     steps:
@@ -100,7 +101,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: shard-${{ matrix.shard }}
+          name: shard-${{ matrix.shard }}-${{ matrix.moonbit }}
           path: |
             tools/test_times.tsv
             _build/test_wasm-gc.log

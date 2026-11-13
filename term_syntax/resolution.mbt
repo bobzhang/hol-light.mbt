@@ -112,7 +112,7 @@ fn fixed_interface() -> @list.List[(String, (String, @kernel.HolType))] {
     }
     _ => ()
   }
-  let seen : Map[String, Bool] = Map::new()
+  let seen : Map[String, Bool] = Map([])
   let entries = []
   let pending = []
   for e in registry.iter().concat(live.iter()) {

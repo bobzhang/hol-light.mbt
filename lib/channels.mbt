@@ -88,7 +88,9 @@ pub fn input_line(ic : InChannel) -> String raise {
     i += 1
   }
   ic.pos = if i < n { i + 1 } else { i }
-  ic.text.view(start_offset=start, end_offset=i).to_owned()
+  // input_char advances raw UTF-16 units; keep a split pair unchanged.
+  // The scan above guarantees 0 <= start <= i <= text.length().
+  ic.text.unsafe_view(start~, end=i).to_owned()
 }
 
 ///|
@@ -141,11 +143,11 @@ pub fn string_split_on_char(c : Char, s : String) -> @list.List[String] {
   let mut start = 0
   for i in 0..<s.length() {
     if s[i].to_int() == c.to_int() {
-      parts.push(s.view(start_offset=start, end_offset=i).to_owned())
+      parts.push(s[start:i].to_owned())
       start = i + 1
     }
   }
-  parts.push(s.view(start_offset=start).to_owned())
+  parts.push(s[start:].to_owned())
   @list.List(parts)
 }
 
@@ -193,6 +195,6 @@ pub fn filename_basename(name : String) -> String {
   if n == 0 {
     "."
   } else {
-    name.view(start_offset=i, end_offset=n).to_owned()
+    name[i:n].to_owned()
   }
 }

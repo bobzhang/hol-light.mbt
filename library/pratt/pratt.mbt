@@ -10508,6 +10508,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] multilist_l(
 
 ///|
 /// `certificate`
+#derive(Eq, Debug)
 pub(all) enum Certificate {
   Prime_2
   Primroot_and_factors(
@@ -10517,7 +10518,7 @@ pub(all) enum Certificate {
       @list.List[(@num.Num, Certificate)],
     )
   )
-} derive(Eq, Debug)
+}
 
 ///|
 pub extend Certificate with Eq::{not_equal, equal}

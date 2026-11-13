@@ -711,11 +711,7 @@ pub fn nums_num_of_string(s : String) -> Num raise {
   }
 
   match s.find("/") {
-    Some(i) =>
-      div_num(
-        integer(s.view(end_offset=i).to_owned()),
-        integer(s.view(start_offset=i + 1).to_owned()),
-      )
+    Some(i) => div_num(integer(s[:i].to_owned()), integer(s[i + 1:].to_owned()))
     None => integer(s)
   }
 }

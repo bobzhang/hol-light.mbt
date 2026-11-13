@@ -118,7 +118,6 @@ pub fn outl() -> @kernel.Thm
 
 pub fn outr() -> @kernel.Thm
 
-
 pub fn prove_cases_thm(@kernel.Thm) -> @kernel.Thm raise
 
 pub fn prove_constructors_distinct(@kernel.Thm) -> @kernel.Thm raise

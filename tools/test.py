@@ -241,7 +241,8 @@ def run_wasm(target, ps, a):
             if len(exe) != 1:
                 print(f"   {p}: no {kind} test executable")
                 return False
-            args = json.dumps({"package": "bobzhang/hol_light/" + p, "file_and_index": ranges})
+            args = "/".join(f"{f}:{r['start']}-{r['end']}"
+                            for f, rs in ranges for r in rs)
             jobs.append((p, kind, exe[0], args, sum(r[1][0]["end"] for r in ranges)))
 
     # Executables are separate processes. Leave each one's file/test order

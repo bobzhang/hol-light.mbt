@@ -4,7 +4,7 @@
 test "core definitions and axioms round-trip" {
   ignore(@define.define_)
   let terms = (@kernel.definitions() + @kernel.axioms()).map(@kernel.concl)
-  let reasons : Map[String, Int32] = {}
+  let reasons : Map[String, Int32] = Map([])
   let mut ok = 0
   let bad = []
   for t in terms {
