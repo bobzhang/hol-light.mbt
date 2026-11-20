@@ -1165,18 +1165,35 @@ pub fn[A, B] time(f : (A) -> B raise, x : A) -> B raise {
 /// element and returns `l` itself if nothing changed. `f` is applied from
 /// the head of the list.
 pub fn[A] qmap(f : (A) -> A raise?, l : @list.List[A]) -> @list.List[A] raise? {
-  let suf = suffixes(l)
-  let elems = l.to_array()
-  let images = []
-  let mut last_changed = -1
-  for i, x in elems {
+  let mut prefix : Array[A]? = None
+  // The original cells after the last change are still shareable. Copy them
+  // into the buffer only if a later change makes them part of the prefix.
+  let mut pending = l
+  let mut rest = l
+  while rest is More(x, tail=t) {
     let y = f(x)
     if !physical_equal(x, y) {
-      last_changed = i
+      let buf = match prefix {
+        Some(buf) => buf
+        None => {
+          let buf = []
+          prefix = Some(buf)
+          buf
+        }
+      }
+      while pending is More(h, tail=next) && !physical_equal(pending, rest) {
+        buf.push(h)
+        pending = next
+      }
+      buf.push(y)
+      pending = t
     }
-    images.push(y)
+    rest = t
   }
-  prepend_array(images[:last_changed + 1], suf[last_changed + 1])
+  match prefix {
+    None => l
+    Some(buf) => prepend_array(buf, pending)
+  }
 }
 
 // ---------------------------------------------------------------------------
