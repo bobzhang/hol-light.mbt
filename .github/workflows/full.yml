@@ -23,6 +23,9 @@ jobs:
   plan:
     name: plan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      actions: read
     outputs:
       run: ${{ steps.plan.outputs.run }}
       shards: ${{ steps.plan.outputs.shards }}
@@ -35,6 +38,7 @@ jobs:
       - name: Plan
         id: plan
         env:
+          GH_TOKEN: ${{ github.token }}
           EVENT: ${{ github.event_name }}
           TIERS: ${{ inputs.tiers }}
           SHARDS: ${{ inputs.shards }}
@@ -48,7 +52,34 @@ jobs:
           if [ "$EVENT" = schedule ] && [ "$age" -gt 90000 ]; then
             echo "run=false" >> "$GITHUB_OUTPUT"
             echo "main has not changed for $(( age / 3600 )) hours: nothing to run"
+            exit 0
+          fi
+
+          # A scheduled run can succeed with every shard skipped. Only use a
+          # baseline whose full matrix actually passed; manual runs may be partial.
+          last_tested_sha() {
+            local runs id sha passed
+            runs=$(gh api -X GET "repos/$GITHUB_REPOSITORY/actions/workflows/full.yml/runs" \
+              -f event=schedule -f status=success -f branch="$GITHUB_REF_NAME" -f per_page=30 \
+              --jq '.workflow_runs[] | [.id, .head_sha] | @tsv') || return 1
+            while read -r id sha; do
+              [ -n "$id" ] || continue
+              passed=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$id/jobs?per_page=100" \
+                --jq 'any(.jobs[]; .name == "shard 1" and .conclusion == "success")') || return 1
+              if [ "$passed" = true ]; then
+                echo "$sha"
+                return 0
+              fi
+            done <<< "$runs"
+            return 1
+          }
+          if [ "$EVENT" = schedule ] && base=$(last_tested_sha) &&
+             git fetch --quiet --depth=1 origin "$base" &&
+             git diff --quiet "$base" HEAD -- . ':!README.md' ':!PLAN.md' ':!TODO.md' ':!tools/*.md'; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "No non-documentation changes since full suite passed at $base"
           else
+            # Manual dispatch, non-doc changes, or no trustworthy comparison.
             echo "run=true" >> "$GITHUB_OUTPUT"
           fi
 
